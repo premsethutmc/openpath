@@ -153,6 +153,12 @@ export interface Bug {
   predict: Value | null;
   /** A question of another family that tests this explanation directly (e.g. the multiplication fact itself). */
   probe?: string;
+  /** Diagnostic evidence, not grading: scope and required correct contrasts within this family.
+   * Each parameter group is conjunctive; each contrast group needs a distinct correct response. */
+  evidence?: {
+    scope: { index: number; values: number[] }[];
+    correctContrasts: { index: number; values: number[] }[][];
+  };
 }
 export interface Problem {
   family: string;

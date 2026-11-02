@@ -86,7 +86,7 @@ export const CHAPTER = "chapter";
 export const chapterExplanation = (m: Module): Strategy => ({ id: CHAPTER, title: m.title, kind: "conceptual", needs: [], screens: m.chapter, guided: "", check: "" });
 const questionText = (id: string) => { if (!id) return null; try { const q = question(id); return { prompt: q.prompt, answer: q.answer, options: q.options ?? null }; } catch { return null; } };
 /** The content a review covers: everything the learner is shown, and the guided and independent recheck questions with their text. */
-export const explanationContent = (competency: string, s: Strategy) => ({ competency, id: s.id, title: s.title, kind: s.kind, needs: s.needs, screens: s.screens, guided: s.guided, check: s.check, recheck: { guided: questionText(s.guided), check: questionText(s.check) } });
+export const explanationContent = (competency: string, s: Strategy) => ({ competency, id: s.id, title: s.title, kind: s.kind, needs: s.needs, screens: s.screens, ...(s.scope !== undefined ? { scope: s.scope } : {}), ...(s.addresses !== undefined ? { addresses: s.addresses } : {}), guided: s.guided, check: s.check, recheck: { guided: questionText(s.guided), check: questionText(s.check) } });
 const hashCache = new Map<string, string>();
 export function contentHash(competency: string, s: Strategy): string {
   const text = canonicalJson(explanationContent(competency, s));
@@ -95,9 +95,17 @@ export function contentHash(competency: string, s: Strategy): string {
   return h;
 }
 /** Misconception-specific: a section that presents a particular wrong answer and why it is wrong (teaching-contract@1 role). */
-export const isMisconceptionSpecific = (s: Strategy) => s.screens.some((sc) => sc.role === "misconception" || (!sc.role && s.id === "spot_the_mistake"));
+export const isMisconceptionSpecific = (s: Strategy) => s.addresses !== undefined || s.screens.some((sc) => sc.role === "misconception" || (!sc.role && s.id === "spot_the_mistake"));
 /** Which misconception it is about: the diagnosis of its question whose explanation the section quotes (null when it cannot be read). */
 export function addressedMisconception(s: Strategy): string | null {
+  if (s.addresses !== undefined) {
+    if (typeof s.addresses !== "string" || !s.addresses.trim()) return null;
+    const guided = problemOf(s.guided.replace(/:(mc|w)$/, ""));
+    const check = problemOf(s.check.replace(/:(mc|w)$/, ""));
+    const family = s.scope?.family ?? guided?.family;
+    const instances = s.screens.filter(sc => sc.role === "misconception").map(sc => sc.instance ? problemOf(sc.instance.replace(/:(mc|w)$/, "")) : null);
+    return instances.length > 0 && [guided, check, ...instances].every(p => p !== null && p.family === family && p.bugs.some(b => b.id === s.addresses && b.predict !== null)) ? s.addresses : null;
+  }
   for (const sc of s.screens) {
     if (!(sc.role === "misconception" || (!sc.role && s.id === "spot_the_mistake")) || !sc.instance) continue;
     const b = problemOf(sc.instance)?.bugs.find((x) => !!x.says && sc.text.includes(x.says));
@@ -180,7 +188,7 @@ export interface EligibilityRequest {
   mode?: TeachingMode;
   /** The misconceptions established for this learner in this skill (misconception-evidence.ts: ids), or true when one is
    *  established but its id is not known (a finding passed in by recovery). A misconception-specific explanation needs the one it
-   *  addresses (or, when that cannot be read from its content, any established misconception). */
+   *  addresses. Boolean-only or unresolved evidence never licenses a specific intervention. */
   misconceptionEvidence?: boolean | readonly string[];
   /** An intervention chosen for this learner, or a general lesson page (no diagnosis implied). */
   usage?: "intervention" | "lesson";
@@ -220,6 +228,7 @@ export function contentEligibility(module: Module | null | undefined, strategy: 
     rec!.misconceptionSpecific !== isMisconceptionSpecific(strategy!) && "record misconception flag differs from the content",
     (rec!.addresses ?? null) !== addressedMisconception(strategy!) && "record addressed misconception differs from the content",
   ].filter((x): x is string => !!x);
+  if (strategy!.addresses !== undefined && addressedMisconception(strategy!) === null) meta.push("explicit misconception target is not supported by its task instances");
   const integrity = [...meta, ...approvalIntegrity(rec!, rev!, reg)];
   add("integrity", !integrity.length, integrity.length ? integrity.join("; ") : "review metadata consistent");
   const allowed = MODE_POLICY[m].statuses.includes(rev!.status) && (m === "demonstration" || rev!.scope.includes(m));
@@ -229,7 +238,7 @@ export function contentEligibility(module: Module | null | undefined, strategy: 
   add("intervention", MODE_POLICY[m].interventions.includes(strategy!.kind), `${strategy!.kind} ${MODE_POLICY[m].interventions.includes(strategy!.kind) ? "is" : "is not"} permitted in ${m}`);
   const needsEvidence = usage === "intervention" && isMisconceptionSpecific(strategy!);
   const about = needsEvidence ? addressedMisconception(strategy!) : null, ev = req.misconceptionEvidence;
-  const evidenced = !needsEvidence || (Array.isArray(ev) ? (about ? ev.includes(about) : ev.length > 0) : ev === true);
+  const evidenced = !needsEvidence || (!!about && Array.isArray(ev) && ev.includes(about));
   add("misconception-evidence", evidenced, !needsEvidence ? "no misconception claimed"
     : evidenced ? `established for this learner: ${about ?? "a misconception (the one addressed is not recorded)"}`
     : `about ${about ?? "a misconception"}, which is not established for this learner${Array.isArray(ev) && ev.length ? ` (established: ${ev.join(", ")})` : ""}`);

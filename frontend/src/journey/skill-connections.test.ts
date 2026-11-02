@@ -30,7 +30,12 @@ test('invalid and ambiguous metadata fails closed',()=>{
 test('general binomial teaching and answer credit do not certify square teaching or working',()=>{
   const m=moduleFor(IDENTITIES_CONFIG.competency)!;
   assert.ok(m.strategies.some(s=>strategyConnects(IDENTITIES_CONFIG,'identities.binomial-cross-term@1',s)));
-  assert.ok(m.strategies.every(s=>!strategyConnects(IDENTITIES_CONFIG,'identities.square-cross-term@1',s)));
+  const legacy=m.strategies.filter(s=>s.guided.startsWith('gen:expand:'));
+  assert.ok(legacy.length>0);
+  assert.ok(legacy.every(s=>!strategyConnects(IDENTITIES_CONFIG,'identities.square-cross-term@1',s)));
+  const declared=m.strategies.filter(s=>s.scope?.family==='ahid'&&s.scope.subSkill==='identities.square-cross-term@1');
+  assert.deepEqual(declared.map(s=>s.id).sort(),['ahid_concept','fix_middle_not_doubled','fix_middle_sign']);
+  assert.ok(declared.every(s=>strategyConnects(IDENTITIES_CONFIG,'identities.square-cross-term@1',s)));
   const decision=gradeRequest({id:'gen:ahid:0,1,3,1',response:'6',working:['x² + 6x + 9']}).decision!;
   assert.notEqual(decision.working?.methodEvidence,'method-verified');
 });
@@ -116,18 +121,22 @@ test('teaching-instance semantics must agree with guided and check tasks',()=>{
 import { discriminatingProbe } from '../../../packages/learning/src/hypotheses';
 test('displayed solved examples cannot become fresh diagnostic resolution evidence',()=>{
   const competency=ANGLE_PAIRS_PRECISE_CONFIG.competency,s=new SliceSession('shown-probe',competency,at),m=moduleFor(competency)!;
-  const original='gen:afpair:0,60', follow='gen:afpair:0,50';
-  s.submit(original,probeReading(original,'wrong-total').predicted[0],'check');
-  s.submit(follow,probeReading(follow,'wrong-total').predicted[0],'diagnostic',{context:investigateContext(original)});
-  const strategy={...m.strategies[0],id:'test-shown-example',guided:'gen:afpair:0,40',check:'gen:afpair:0,70',screens:[{title:'Complement',text:['90 minus the angle'],instance:'gen:afpair:0,40'}]};
-  m.strategies.push(strategy);
-  try {
-    s.events.push(make.pathway({learnerId:s.learnerId,sessionId:s.session,at:new Date(++s.now).toISOString()},competency));
-    s.events.push(make.teach({learnerId:s.learnerId,sessionId:s.session,at:new Date(++s.now).toISOString()},competency,strategy.id,'conceptual'));
-    let records=s.state().selectionRecords,h=hypotheses(records)[0];
-    assert.equal(discriminatingProbe(h,records,id=>id===strategy.guided),null);
-    s.submit(strategy.guided,question(strategy.guided).answer,'check');
-    records=s.state().selectionRecords;h=hypotheses(records)[0];
-    assert.ok(h.probes.every(p=>p.question!==strategy.guided));assert.notEqual(h.status,'resolved');
-  } finally {m.strategies.splice(m.strategies.indexOf(strategy),1);}
+  const original='gen:afpair:1,60', follow='gen:afpair:1,50', target='full-turn';
+  s.submit(original,probeReading(original,target).predicted[0],'check');
+  s.submit(follow,probeReading(follow,target).predicted[0],'diagnostic',{context:investigateContext(original)});
+  // Use served content: older Node/tsx can load separate ESM and CJS copies of the
+  // content module, so mutating one imported module is not a persisted fixture.
+  const strategy=m.strategies.find(st=>st.id==='worked_steps')!;
+  const displayed=strategy.screens[0].instance!;
+  assert.ok(displayed);
+  assert.equal(connectedSkill(ANGLE_PAIRS_PRECISE_CONFIG,displayed),connectedSkill(ANGLE_PAIRS_PRECISE_CONFIG,original));
+  s.events.push(make.pathway({learnerId:s.learnerId,sessionId:s.session,at:new Date(++s.now).toISOString()},competency));
+  s.events.push(make.teach({learnerId:s.learnerId,sessionId:s.session,at:new Date(++s.now).toISOString()},competency,strategy.id,'conceptual'));
+  let records=s.state().selectionRecords,h=hypotheses(records)[0];
+  assert.equal(h.status,'established');assert.equal(h.claim?.explanation,target);
+  assert.equal(discriminatingProbe(h,{...records,teaching:[]},id=>id===displayed),displayed,'the example is otherwise a usable resolution candidate');
+  assert.equal(discriminatingProbe(h,records,id=>id===displayed),null);
+  s.submit(displayed,question(displayed).answer,'check');
+  records=s.state().selectionRecords;h=hypotheses(records)[0];
+  assert.ok(h.probes.every(p=>p.question!==displayed));assert.notEqual(h.status,'resolved');
 });

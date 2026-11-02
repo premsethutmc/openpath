@@ -28,6 +28,11 @@ export interface BlueprintScreen extends Screen {
   worked?: boolean;
 }
 export interface BlueprintStrategy {
+  /** Explicit scoped strategies preserve candidate instances instead of redrawing them. */
+  scope?: Strategy["scope"];
+  addresses?: string;
+  guided?: string;
+  check?: string;
   id: string;
   title: string;
   kind: Strategy["kind"];
@@ -150,6 +155,17 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
   const chapter = bp.chapter.map((s) => screen(s, seed, "concept"));
   const sub = subSkills(bp.competency, bp.family, used);
   const strategies: Strategy[] = bp.strategies.map((st, k) => {
+    if (st.scope !== undefined) {
+      if (!st.scope || typeof st.scope !== "object" || typeof st.scope.family !== "string") throw new Error(`${LIBRARY_POLICY}: ${st.id}: invalid declared scope`);
+      const family = st.scope.family;
+      if (!sub.pools.some(p => p.family === family) || FAMILIES.get(family)?.competency !== bp.competency) throw new Error(`${LIBRARY_POLICY}: ${st.id}: scoped family is outside the module`);
+      for (const [id, phase] of [[st.guided, "practice"], [st.check, "check"]] as const) {
+        if (!id || !selectable(id) || !phasePool(family, phase).some(p => exposureKey(p) === exposureKey(id)) || used.has(exposureKey(id))) throw new Error(`${LIBRARY_POLICY}: ${st.id}: ${phase} item is unavailable, reused or in the wrong partition`);
+        used.add(exposureKey(id));
+      }
+      if (st.screens.some(sc => sc.worked || !sc.instance)) throw new Error(`${LIBRARY_POLICY}: ${st.id}: explicit scoped screens require their own instances`);
+      return { id: st.id, title: st.title, kind: st.kind, scope: st.scope, ...(st.addresses !== undefined ? { addresses: st.addresses } : {}), needs: st.buildsOnPrerequisites ? probes : [], screens: st.screens, guided: st.guided!, check: st.check! };
+    }
     const ex = st.screens.some((s) => s.worked) ? example() : seed;
     return { id: st.id, title: st.title, kind: st.kind, needs: st.buildsOnPrerequisites ? probes : [], screens: st.screens.map((s) => screen(s, ex, st.kind === "prerequisite" ? "prerequisite" : "strategy")), guided: take("practice", "typed"), check: take("check", k % 2 ? "mc" : "typed") };
   });

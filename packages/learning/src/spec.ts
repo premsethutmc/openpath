@@ -62,7 +62,7 @@ const itemSignature = (p: Problem) => {
   const v = def.solve(typed.params).answer;
   const probes = typeof v === "number" ? [v, v + 1, v - 1, 2 * v + 1, v + 0.5].map((x) => (def.validate(typed.params, x) ? "1" : "0")).join("") : def.validate(typed.params, v) ? "1" : "0";
 
-  return [p.id, p.prompt, p.answer, (p.options ?? []).join("|"), p.bugs.map((b) => `${b.id}:${b.kind}:${b.competency}:${b.says}:${JSON.stringify(b.predict)}:${b.probe ?? ""}`).join(";"), p.steps.map((st) => `${st.competency}=${explainStep(p, st)}`).join("|"), difficultyOf(p), probes, ...(p.figure ? [JSON.stringify(p.figure)] : []), ...(NEW_TYPES.has(p.type) ? [p.type] : []), ...(def.grade ? [`grade=${def.grade(typed.params)}`] : [])].join("¦");
+  return [p.id, p.prompt, p.answer, (p.options ?? []).join("|"), p.bugs.map((b) => `${b.id}:${b.kind}:${b.competency}:${b.says}:${JSON.stringify(b.predict)}:${b.probe ?? ""}${b.evidence ? `:evidence=${JSON.stringify(b.evidence)}` : ""}`).join(";"), p.steps.map((st) => `${st.competency}=${explainStep(p, st)}`).join("|"), difficultyOf(p), probes, ...(p.figure ? [JSON.stringify(p.figure)] : []), ...(NEW_TYPES.has(p.type) ? [p.type] : []), ...(def.grade ? [`grade=${def.grade(typed.params)}`] : [])].join("¦");
 };
 
 export function familySpec(fam: string): FamilySpec | null {

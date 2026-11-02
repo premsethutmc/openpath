@@ -9,7 +9,7 @@
       "missingModule": 2,
       "missingSkillMetadata": 54,
       "partialSkillConnections": 2,
-      "connectedAnswerChains": 4,
+      "connectedAnswerChains": 5,
       "noEligibleGeneralTeaching": 0,
       "withBoundedWorkingExamples": 4,
       "withoutBoundedWorkingExamples": 52

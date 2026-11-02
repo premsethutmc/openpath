@@ -570,7 +570,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | adhmin: Hours and minutes into minutes | `MATH.measurement.time-unit-conversion` | 96 | 0 | 8/40/48 | `8212fa78` |
 | adm2h: Minutes into hours and minutes | `MATH.measurement.time-unit-conversion` | 96 | 0 | 12/29/55 | `8b8e1401` |
 | adsec: Minutes and seconds into seconds | `MATH.measurement.time-unit-conversion` | 108 | 0 | 4/44/60 | `d61b2378` |
-| adfcmp: Comparing two fractions with the same bottom or top number | `MATH.number.fraction-comparison` | 500 | 0 | 148/230/122 | `9b4357e8` |
+| adfcmp: Comparing two fractions with the same bottom or top number | `MATH.number.fraction-comparison` | 500 | 0 | 148/230/122 | `0b4d9738` |
 | adford: Ordering three fractions with the same bottom or top number | `MATH.number.fraction-comparison` | 400 | 0 | 23/243/134 | `84335cf3` |
 | adfname: Naming the shaded fraction of a shape | `MATH.number.fraction-models` | 145 | 0 | 5/30/110 | `768e3f28` |
 | adfbuild: Building a fraction from unit fractions | `MATH.number.fraction-models` | 89 | 0 | 11/43/35 | `56f26ddc` |
@@ -615,13 +615,13 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aet12: Reading a 24-hour time on a 12-hour clock | `MATH.measurement.24-hour-clock` | 156 | 0 | 84/48/24 | `6eb44d78` |
 | aeel24: Time between two 24-hour times | `MATH.measurement.24-hour-clock` | 400 | 0 | 103/119/178 | `dbe283c6` |
 | aearea: Area of a rectangle by counting unit squares | `MATH.measurement.area-squares` | 99 | 0 | 27/6/66 | `a5785132` |
-| aeperar: Choosing area or perimeter in a problem | `MATH.measurement.area-squares` | 400 | 0 | 91/234/75 | `45529e43` |
+| aeperar: Choosing area or perimeter in a problem | `MATH.measurement.area-squares` | 400 | 0 | 91/234/75 | `a90a733b` |
 | aemix: Adding and subtracting measures in two units | `MATH.measurement.compute-with-measures` | 450 | 0 | 50/245/155 | `41c5fe67` |
 | aemulm: Multiplying a measure in two units | `MATH.measurement.compute-with-measures` | 400 | 0 | 47/152/201 | `f888c444` |
 | aeconv: Changing a measure into the smaller unit | `MATH.measurement.unit-conversions` | 450 | 0 | 65/356/29 | `150fc080` |
 | aeparts: How many parts make a kilogram or a litre | `MATH.measurement.unit-conversions` | 90 | 0 | 26/48/16 | `9cccd73f` |
 | aedec: Writing ones, tenths and hundredths as a decimal | `MATH.number.decimal-tenths` | 400 | 0 | 59/257/84 | `df4e5366` |
-| aedecc: Comparing a tenths decimal with a hundredths decimal | `MATH.number.decimal-tenths` | 300 | 0 | 146/14/140 | `4d750dcd` |
+| aedecc: Comparing a tenths decimal with a hundredths decimal | `MATH.number.decimal-tenths` | 300 | 0 | 146/14/140 | `cc507e15` |
 | aeeven: Picking out the even numbers | `MATH.number.even-odd` | 417 | 0 | 6/242/169 | `28b079f5` |
 | aeind: Writing a number in lakhs and thousands in figures | `MATH.number.large-numbers` | 400 | 0 | 0/316/84 | `fcd7510e` |
 | aecmp: Putting large numbers in ascending order | `MATH.number.large-numbers` | 300 | 0 | 0/300/0 | `72533e26` |
@@ -770,7 +770,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ahname: Naming corresponding, alternate, co-interior and vertically opposite angles | `MATH.geometry.parallel-angles` | 108 | 0 | 48/24/36 | `0ce2d5e6` |
 | ahrhy: Counting rhythms, climbs and tilings: Virahanka numbers | `MATH.sequences.explicit-recursive-rules` | 192 | 0 | 16/48/128 | `7429a068` |
 | ahcfig: Which figure is congruent to the given one? | `MATH.geometry.congruence` | 113 | 0 | 52/24/37 | `57f66acc` |
-| ahid: Expanding with (a + b)², (a − b)² and (a + b)(a − b) | `MATH.algebra.identities` | 333 | 0 | 45/144/144 | `09bb7499` |
+| ahid: Expanding with (a + b)², (a − b)² and (a + b)(a − b) | `MATH.algebra.identities` | 333 | 0 | 45/144/144 | `e54c66e1` |
 | ahidn: Quick calculation with identities | `MATH.algebra.identities` | 120 | 0 | 40/40/40 | `4ea57a39` |
 | ahcube: Expanding (x ± a)³, (x + a)(x + b)(x + c) and (x + ay + b)² | `MATH.algebra.identities` | 400 | 0 | 18/229/153 | `709b2978` |
 | ahconv: Is the triangle right-angled? The converse of Pythagoras | `MATH.geometry.pythagoras` | 360 | 0 | 61/237/62 | `22128e19` |

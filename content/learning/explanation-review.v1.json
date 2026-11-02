@@ -2180,6 +2180,32 @@
    ]
   },
   {
+   "id": "MATH.algebra.identities#ahid_concept",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.identities",
+   "strategy": "ahid_concept",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:f28535bdda7552f976b3409e8111e9d8a264f6a578436621da5bc3ab82002500",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T03:00:32.565Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.algebra.identities#chapter",
    "subject": "mathematics",
    "competency": "MATH.algebra.identities",
@@ -2195,6 +2221,58 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.160Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.identities#fix_middle_not_doubled",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.identities",
+   "strategy": "fix_middle_not_doubled",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "middle-not-doubled",
+   "revisions": [
+    {
+     "contentHash": "sha256:40772b8013b134949244fa02f8604830ca7cb7c33fad341237b0de765527c990",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T03:00:32.567Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.identities#fix_middle_sign",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.identities",
+   "strategy": "fix_middle_sign",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "middle-sign",
+   "revisions": [
+    {
+     "contentHash": "sha256:8e95e37fec1793c523c27e08ab68e36cd144f715576c7d01cfc5b591d3165306",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T03:00:32.567Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",

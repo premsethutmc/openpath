@@ -60,6 +60,10 @@ export interface Screen {
   textFrom?: "instance";
 }
 export interface Strategy {
+  /** Explicit intervention scope; absent keeps the existing module/instance-family behavior. */
+  scope?: { family: string; subSkill?: string; parameters?: import("./subskill-projection").SubSkillDef["parameters"] };
+  /** Stable misconception ID; reviewed and bound to the scoped family, never inferred from rewritten prose. */
+  addresses?: string;
   id: string;
   title: string;
   kind: "conceptual" | "procedural" | "recall" | "prerequisite";

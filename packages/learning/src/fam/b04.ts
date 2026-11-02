@@ -462,7 +462,7 @@ export const B04: Def[] = [
       const right = A[0] / A[1] > B[0] / B[1] === !ask ? A : B;
       const other = right === A ? B : A;
       return mode === 1
-        ? [{ id: "bigger-bottom-bigger", kind: "conceptual", competency: UNIT, says: `The fraction with the ${ask ? "smaller" : "bigger"} bottom number was chosen as ${ask ? "smaller" : "greater"}. A bigger bottom number means the whole is cut into more parts, so each part is smaller.`, predict: other[0] / other[1] }]
+        ? [{ id: "bigger-bottom-bigger", kind: "conceptual", competency: UNIT, evidence: { scope: [{ index: 0, values: [mode] }, { index: 4, values: [ask] }], correctContrasts: [[{ index: 0, values: [0] }, { index: 4, values: [ask] }]] }, says: `The fraction with the ${ask ? "smaller" : "bigger"} bottom number was chosen as ${ask ? "smaller" : "greater"}. A bigger bottom number means the whole is cut into more parts, so each part is smaller.`, predict: other[0] / other[1] }]
         : [{ id: "more-parts-wrong-way", kind: "procedural", competency: FCMP, says: `Both fractions count parts of the same size (a whole cut into ${k} equal parts), so the one with more parts is greater. The ${ask ? "smaller" : "greater"} one was mixed up.`, predict: other[0] / other[1] }];
     },
     variants: () => [],

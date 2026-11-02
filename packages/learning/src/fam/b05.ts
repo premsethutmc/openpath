@@ -884,11 +884,11 @@ export const B05: Def[] = [
       } else for (let i = 0; i < a; i++) for (let j = 0; j < b; j++) n++;
       return v === n;
     },
-    bugs: ([need, a, b]) => [
+    bugs: ([need, a, b, ctx]) => [
       need
-        ? { id: "area-for-perimeter", kind: "conceptual", competency: AREA, says: "The area was found, but going round the edge needs the perimeter (the length all the way round).", predict: a * b }
-        : { id: "perimeter-for-area", kind: "conceptual", competency: AREA, says: "The perimeter was found, but covering the inside needs the area (how many squares fit inside).", predict: 2 * (a + b) },
-      { id: "two-sides", kind: "procedural", competency: need ? PERIM : AREA, says: `Only one length and one width were added (${a} + ${b}).${need ? " Going round passes all four sides." : " Covering needs rows × squares in each row."}`, predict: a + b },
+        ? { id: "area-for-perimeter", evidence: { scope: [{ index: 0, values: [need] }, { index: 3, values: [ctx] }], correctContrasts: [[{ index: 0, values: [1 - need] }, { index: 3, values: [ctx] }]] }, kind: "conceptual", competency: AREA, says: "The area was found, but going round the edge needs the perimeter (the length all the way round).", predict: a * b }
+        : { id: "perimeter-for-area", evidence: { scope: [{ index: 0, values: [need] }, { index: 3, values: [ctx] }], correctContrasts: [[{ index: 0, values: [1 - need] }, { index: 3, values: [ctx] }]] }, kind: "conceptual", competency: AREA, says: "The perimeter was found, but covering the inside needs the area (how many squares fit inside).", predict: 2 * (a + b) },
+      { id: "two-sides", evidence: { scope: [{ index: 0, values: [need] }, { index: 3, values: [ctx] }], correctContrasts: [[{ index: 0, values: [1 - need] }, { index: 3, values: [ctx] }]] }, kind: "procedural", competency: need ? PERIM : AREA, says: `Only one length and one width were added (${a} + ${b}).${need ? " Going round passes all four sides." : " Covering needs rows × squares in each row."}`, predict: a + b },
     ],
     distractors: ([, a, b]) => [2 * a + b, a + 2 * b, a * b + 2 * (a + b)],
     variants: () => [],

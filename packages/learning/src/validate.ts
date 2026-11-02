@@ -7,6 +7,7 @@ import { canonical, isQuestion, question, type Module } from "./content";
 import { RETENTION_CHECK } from "./evidence";
 import { problemOf } from "./families";
 import { graph } from "./graph";
+import { strategyScopeProblems } from "./teaching-presentation";
 import { moduleQuestions } from "./library";
 
 export const VALIDATION_POLICY = "validate@1";
@@ -36,6 +37,7 @@ export function validateModule(m: Module): string[] {
   if (!m.diagnostics.length || m.diagnostics.length > 3) out.push("Explore needs one to three diagnostic questions");
   if (!m.strategies.length) out.push("no teaching strategy");
   for (const s of m.strategies) {
+    out.push(...strategyScopeProblems(m, s).map(problem => `strategy ${s.id}: ${problem}`));
     if (!s.screens.length) out.push(`strategy ${s.id} has no screens`);
     for (const n of s.needs) if (!phases.probe.includes(n)) out.push(`strategy ${s.id} needs ${n}, which is not one of the module's probes`);
   }

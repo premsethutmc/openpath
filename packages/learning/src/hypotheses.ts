@@ -19,12 +19,13 @@ import { connectionConfig, connectedSkill, strategyConnects } from "./skill-conn
  */
 import { moduleFor, question, type Strategy } from "./content";
 import { addressedMisconception, isMisconceptionSpecific } from "./explanation-review";
+import { teachingScopeFor } from "./teaching-presentation";
 import { independentAttempt, rightAnswer } from "./evidence";
 import { exposureKey, gradeOfQuestion, parseProblem, problemOf, type Phase } from "./families";
 import { formCertified } from "./grading/certify";
 import { modulePhasePool } from "./library";
 import { selectable } from "./question-status";
-import { probeReading, reason, REASONING_POLICY, type Reasoning } from "./reasoning";
+import { diagnosticScopeAccepts, probeReading, reason, REASONING_POLICY, type Reasoning } from "./reasoning";
 import type { Attempt, AttemptAssessment, LearnerRecords } from "./records";
 
 export const LEARNER_HYPOTHESIS_CONTRACT = "learner-hypothesis@1" as const;
@@ -123,6 +124,9 @@ const obs = (a: Attempt, matches: string[]): HypothesisObservation => ({
 
 /** Reuse content's declared misconception target or its worked-question family, never its title. */
 export function teachingMatchesMisconception(s: Strategy, original: string, explanation: string, competency: string, about: string | null): boolean {
+  const m = moduleFor(competency), originalProblem = problemOf(familyOf(original) ?? original.replace(/:(mc|w)$/, ""));
+  if (s.scope && (!m || !originalProblem || !teachingScopeFor(m, s).accepts(originalProblem))) return false;
+  if (!diagnosticScopeAccepts(familyOf(original) ?? original, familyOf(s.guided) ?? s.guided, explanation) || !diagnosticScopeAccepts(familyOf(original) ?? original, familyOf(s.check) ?? s.check, explanation)) return false;
   if (isMisconceptionSpecific(s)) return addressedMisconception(s) === explanation;
   if (about === competency && question(original).competency !== competency) return true;
   const family = problemOf(familyOf(original) ?? "")?.family;
@@ -166,6 +170,7 @@ export function hypotheses(records: LearnerRecords): LearnerHypothesis[] {
     const probes: ResolutionProbe[] = id && established ? records.attempts.filter((x) => x.at > established && x.n === 1 && !all.includes(x)).flatMap((x) => {
       if (strict && taughtExposureKeys(records, x.at).has(exposureKey(x.questionId))) return [];
       if (connection && (!skill || connectedSkill(connection, x.questionId) !== skill)) return [];
+      if (!diagnosticScopeAccepts(familyOf(a.questionId) ?? a.questionId, familyOf(x.questionId) ?? x.questionId, id)) return [];
       const pr = probeReading(x.questionId, id, x.response);
       if (!pr.discriminates) return [];
       const ind = independentAttempt(x) && !x.hints && !x.solution;
@@ -269,7 +274,7 @@ export function discriminatingProbe(h: LearnerHypothesis, records: LearnerRecord
     if (q.startsWith("gen:") && !formCertified(q)) continue;
     const qg = gradeOfQuestion(q);
     if (g !== null && qg !== null && qg > g && !(records.pathway?.active && records.readinessRoute?.includes(question(q).competency))) continue;
-    if (probeReading(q, h.claim.explanation).discriminates) return q;
+    if (diagnosticScopeAccepts(familyOf(h.scope.question) ?? h.scope.question, familyOf(q) ?? q, h.claim.explanation) && probeReading(q, h.claim.explanation).discriminates) return q;
   }
   return null;
 }

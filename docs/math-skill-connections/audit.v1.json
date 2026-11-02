@@ -611,11 +611,12 @@
       ],
       "content": {
         "chapterScreens": 4,
-        "strategies": 3,
+        "strategies": 6,
         "eligibleStrategies": [
           "grid",
           "four_products",
-          "signed_sum"
+          "signed_sum",
+          "ahid_concept"
         ]
       },
       "working": {
@@ -630,7 +631,13 @@
           "gen:expand:2,9",
           "gen:expand:-7,-4:mc",
           "gen:expand:2,8",
-          "gen:expand:-5,3"
+          "gen:expand:-5,3",
+          "gen:ahid:1,2,8,1:mc",
+          "gen:ahid:0,3,9,1:mc",
+          "gen:ahid:0,2,5,1:mc",
+          "gen:ahid:1,4,5,1",
+          "gen:ahid:1,3,4,1:mc",
+          "gen:ahid:0,4,6,1"
         ]
       },
       "status": "partial",
@@ -716,11 +723,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "ahid_concept"
           ],
-          "strategies": [],
           "freshChecks": 24,
           "retention": 14,
           "diagnosticPredictions": [

@@ -1,7 +1,9 @@
-import type { Module, Question, Screen } from "./content";
+import type { Module, Question, Screen, Strategy } from "./content";
 import type { Bug, Def, Problem, Step, Visual } from "./family-kit";
-import { explainStep, FAMILIES } from "./families";
+import { explainStep, exposureKey, FAMILIES, problemOf } from "./families";
 import { graph } from "./graph";
+import { selectable } from "./question-status";
+import { connectionConfig, connectedSkill } from "./skill-connections";
 import { adaptProblem, kernelWorkedSteps, type AdaptedProblem, type KernelWorkedStep } from "./kernel-adapter";
 
 export const TEACHING_PRESENTATION_VERSION = "openpath-teaching-presentation@1" as const;
@@ -62,7 +64,39 @@ export interface TeachingScope {
 }
 
 /** Scope comes from the module's declared pool and family metadata, never learner-facing text. */
-export function teachingScopeFor(module: Module): TeachingScope {
+export function strategyScopeProblems(module: Module, strategy: Strategy): string[] {
+  const declared = strategy.scope;
+  if (declared === undefined) return [];
+  if (!declared || typeof declared !== "object" || typeof declared.family !== "string") return ["invalid declared strategy scope"];
+  const problems: string[] = [];
+  const families = new Set([...(module.pool ? [module.pool.family] : []), ...(module.pools ?? []).map(p => p.family)]);
+  const family = FAMILIES.get(declared.family);
+  if (!families.has(declared.family) || family?.competency !== module.competency) problems.push("declared family is outside this module's pools/competency");
+  const config = connectionConfig(module.competency);
+  if (declared.subSkill !== undefined && (typeof declared.subSkill !== "string" || !declared.subSkill.trim())) problems.push("invalid declared subskill");
+  if (declared.subSkill && !config?.subSkills.some(s => s.id === declared.subSkill && s.families.includes(declared.family))) problems.push("declared subskill has no matching family contract");
+  if (declared.parameters !== undefined && (!Array.isArray(declared.parameters) || declared.parameters.some(p => !p || !Number.isInteger(p.index) || p.index < 0 || !Array.isArray(p.values) || !p.values.length || p.values.some((v: unknown) => typeof v !== "number" || !Number.isFinite(v))))) return [...problems, "invalid parameter scope"];
+  const accepts = (p: Problem) => p.family === declared.family && p.competency === module.competency
+    && (!declared.subSkill || (!!config && connectedSkill(config, p.id) === declared.subSkill))
+    && (!declared.parameters || declared.parameters.every(c => c.index < p.params.length && c.values.includes(p.params[c.index])));
+  for (const [label, id] of [["guided", strategy.guided], ["check", strategy.check], ...strategy.screens.filter(s => s.role !== "prerequisite").map((s,i) => [`screen ${i}`, s.instance ?? ""])] as [string,string][]) {
+    const p = problemOf(id.replace(/:(mc|w)$/, ""));
+    if (!p || !selectable(id) || !accepts(p)) problems.push(`${label} is outside the declared task scope or has no instance`);
+  }
+  const shown = [strategy.guided, ...strategy.screens.flatMap(s => s.instance ? [s.instance] : [])];
+  if (shown.some(id => exposureKey(id) === exposureKey(strategy.check))) problems.push("declared check repeats a taught exposure");
+  return problems;
+}
+export function teachingScopeFor(module: Module, strategy?: Strategy): TeachingScope {
+  if (strategy && strategy.scope !== undefined) {
+    if (!strategy.scope || typeof strategy.scope !== "object" || typeof strategy.scope.family !== "string") return { family: null, title: module.title, introduction: null, accepts: () => false };
+    const declared = strategy.scope, def = FAMILIES.get(declared.family), config = connectionConfig(module.competency);
+    const valid = strategyScopeProblems(module, strategy).length === 0;
+    return { family: declared.family, title: def?.title ?? module.title, introduction: def?.teach?.instance ? null : def?.teach?.idea ?? null,
+      accepts: p => valid && p.family === declared.family && p.competency === module.competency
+        && (!declared.subSkill || (!!config && connectedSkill(config,p.id) === declared.subSkill))
+        && (!declared.parameters || declared.parameters.every(c => c.index < p.params.length && c.values.includes(p.params[c.index]))) };
+  }
   const family = module.pool?.family ?? module.pools?.[0]?.family ?? null;
   const def = family ? FAMILIES.get(family) : undefined;
   if (!family || !def) return { family, title: module.title, introduction: null, accepts: () => false };

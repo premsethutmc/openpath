@@ -6,6 +6,7 @@ import { isQuestion, moduleFor } from "./content";
 import { moduleState, teachable, teachingStatus, contentReviewOf, questionForRequirement, establishedIds } from "./intervention";
 import { readRecords, type LearnerRecords, type HandoverAcknowledgement, type LearningRecord } from "./records";
 import type { WrittenMark } from "./written";
+import { addressedMisconception } from "./explanation-review";
 import { hypothesesFor, discriminatingProbe, teachingMatchesMisconception } from "./hypotheses";
 import { independentAttempt, rightAnswer, type SkillEvidence } from "./evidence";
 
@@ -44,7 +45,7 @@ export function pathwayModule(competency: string, learner: string, events: reado
     const m = moduleFor(competency);
     const gapSkill = config ? connectedSkill(config, gap.scope.question) : null;
     if (gap.teachingDue) {
-      const strategy = m?.strategies.find((s) => teachingMatchesMisconception(s, gap.scope.question, gap.claim!.explanation, competency, gap.scope.about)
+      const strategy = m?.strategies.slice().sort((a, b) => Number(addressedMisconception(b) === gap.claim!.explanation) - Number(addressedMisconception(a) === gap.claim!.explanation)).find((s) => teachingMatchesMisconception(s, gap.scope.question, gap.claim!.explanation, competency, gap.scope.about)
         && (!config || (!!gapSkill && strategyConnects(config, gapSkill, s)))
         && teachable(m, s, [gap.claim!.explanation])
         && !records.teaching.some((t) => t.competency === competency && t.strategy === s.id && t.at > (gap.provenance.established ?? "")));

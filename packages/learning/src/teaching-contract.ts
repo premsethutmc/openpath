@@ -21,7 +21,7 @@ import scopeData from "../../../content/learning/showcase-grade10.v1.json";
 import exemptionData from "../../../content/learning/teaching-contract-exemptions.v1.json";
 import type { Representation, TeachRole } from "./family-kit";
 import { chapterExplanation, contentEligibility } from "./explanation-review";
-import { familyStepExplanation, teachingPresentationFrom, teachingScopeFor, type TeachingVisual } from "./teaching-presentation";
+import { familyStepExplanation, teachingPresentationFrom, teachingScopeFor, strategyScopeProblems, type TeachingVisual } from "./teaching-presentation";
 
 /** The Grade 10 showcase scope (CBSE and Tamil Nadu lessons) and its curated lessons (stage 2). */
 export const SHOWCASE = scopeData as { competencies: string[]; curated: string[] };
@@ -119,10 +119,9 @@ const decorative = (w: Screen["widget"] | undefined) => !!w && w.type === "dots"
 
 /** The sections a learner's lesson shows: the idea, then the ways of explaining that are about this lesson's questions. */
 export function lessonScreens(module: Module): { screen: Screen; strategy: Strategy | null }[] {
-  const scope = teachingScopeFor(module);
   const scoped = module.strategies.filter((s) => {
     const p = problemOf(s.guided);
-    return !!p && scope.accepts(p);
+    return !!p && teachingScopeFor(module, s).accepts(p);
   });
   const seen = new Set<string>();
   return [{ screen: module.chapter[0], strategy: null as Strategy | null }, ...scoped.flatMap((s) => s.screens.map((screen) => ({ screen, strategy: s })))].filter(({ screen }) => {
@@ -183,7 +182,8 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
   const exampleId = scope.strategyId ? module.strategies.find((s) => s.id === scope.strategyId)?.guided : undefined;
   const exampleProblem = exampleId ? problemOf(exampleId) : null;
   const primaryId = exampleId && exampleProblem && scope.accepts(exampleProblem) ? exampleId : practiceIds[0] ?? module.practice[0];
-  const blocks = lessonScreens(module).map(({ screen, strategy }, index): LessonBlock => {
+  const blocks = lessonScreens(module).map(({ screen, strategy }): LessonBlock => {
+    const isChapter = strategy === null;
     const role = roleOf(screen, strategy);
     const violations: Violation[] = [];
     const verified: string[] = [];
@@ -191,7 +191,7 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
     // the first section of a lesson not yet taught instance by instance keeps the teaching-first page's example (the scope's
     // own strategy example), as before; a teaching-contract@1 lesson uses each section's own question
     const contractLesson = !!(scope.family && FAMILIES.get(scope.family)?.teach?.instance);
-    const instanceId = index === 0 && !contractLesson && primaryId ? primaryId.replace(/:mc$/, "") : screen.instance ?? (index === 0 && primaryId ? primaryId.replace(/:mc$/, "") : null);
+    const instanceId = isChapter && !contractLesson && primaryId ? primaryId.replace(/:mc$/, "") : screen.instance ?? (isChapter && primaryId ? primaryId.replace(/:mc$/, "") : null);
     const p = instanceId ? problemOf(instanceId) : null;
     const family = p ? FAMILIES.get(p.family) : undefined;
     const own = p && family?.teach?.instance ? family.teach.instance(p.params) : null;
@@ -225,7 +225,7 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
       // kernel or adapter family (unchanged from the teaching-first page): the first section's example, or the question a
       // section's own working shows, carries the presentation's checked worked example and typed picture
       const parsed = screen.math?.[0] ? parseProblem(screen.math[0]) : null;
-      const shown = index === 0 ? p : parsed?.supported ? parsed.problem : null;
+      const shown = isChapter ? p : parsed?.supported ? parsed.problem : null;
       const pres = shown ? teachingPresentationFrom({ module, screen, problem: shown, question: question(shown.id), practiceIds }) : null;
       if (pres) {
       visual = pres.visual ?? null;
@@ -442,13 +442,15 @@ const eligibilityCache = new Map<string, Map<string, TeachingEligibility>>();
 export function teachingEligibility(module: Module, strategy: Strategy): TeachingEligibility {
   let byStrategy = eligibilityCache.get(module.competency);
   if (!byStrategy) eligibilityCache.set(module.competency, (byStrategy = new Map()));
-  const hit = byStrategy.get(strategy.id);
+  const key = JSON.stringify([module.pool, module.pools, module.chapter, module.practice, strategy]);
+  const hit = byStrategy.get(key);
   if (hit) return hit;
   // the strategy's own sections, assembled exactly as a lesson assembles them (the module's idea first, then this strategy)
-  const blocks = lessonBlocks({ ...module, strategies: [strategy] }).slice(1).filter((b) => strategy.screens.some((s) => s.title === b.title));
-  const checked = blocks.length > 0;
-  const violations = [...new Set(blocks.flatMap((b) => b.violations.map((v) => `${b.title}: ${v}`)))];
+  const scopeProblems = strategyScopeProblems(module, strategy);
+  const blocks = lessonBlocks({ ...module, chapter: [], strategies: [strategy] });
+  const checked = blocks.length > 0 || scopeProblems.length > 0;
+  const violations = [...scopeProblems, ...new Set(blocks.flatMap((b) => b.violations.map((v) => `${b.title}: ${v}`)))];
   const out: TeachingEligibility = { eligible: checked && !violations.length, checked, violations, review: checked ? "machine-checked" : "not-checked" };
-  byStrategy.set(strategy.id, out);
+  byStrategy.set(key, out);
   return out;
 }

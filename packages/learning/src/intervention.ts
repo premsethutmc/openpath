@@ -90,7 +90,7 @@ export function orderStrategies(m: Module, d: Diagnosis, records: LearnerRecords
 }
 /** teaching gate (adaptive-loop repair): an explanation whose sections fail the teaching contract is never chosen as an
  *  intervention. One that was not machine-checked (hand-written modules) may be used, and says so; none is "verified". */
-export const failsChecks = (m: Module, s: Strategy) => { const e = teachingEligibility(m, s); return e.checked && !e.eligible; };
+export const failsChecks = (m: Module, s: Strategy) => { const e = teachingEligibility(m, s); return s.scope !== undefined ? !e.eligible : e.checked && !e.eligible; };
 export const teachingStatus = (m: Module, s: Strategy): TeachingEligibility["review"] => teachingEligibility(m, s).review;
 /** content-safety gate (explanation-review@1, misconception-evidence@1): an explanation is used as an intervention only
  *  when it also passes the content review for the current teaching mode, is for this skill, and, when it is about a
@@ -667,10 +667,14 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
           if (r.ms.phase === "pause") return { ...base, reasoning, plan, established: est, phase: "escalate", active: plan.competency, ...(r.ms.handover ? { handover: r.ms.handover } : {}), reason: `${graph.get(plan.competency).name}: different explanations have not clicked yet. Ask a teacher or parent.` };
           return { ...base, reasoning, plan, established: est, phase: plan.kind === "teach" ? "teach" : "support", active: plan.competency, reason: plan.why };
         }
-        return { ...base, reasoning, plan, phase: "return", active: null, reason: "Back to the original problem." };
+        // Once prerequisite support is resolved, a failed return still owes the original skill's
+        // teaching cycle below. A newly readable answer format must not bypass that recovery.
+        if (tries.length < 2 || graph.evidenceTarget(plan.competency) === ownTarget)
+          return { ...base, reasoning, plan, phase: "return", active: null, reason: "Back to the original problem." };
+      } else {
+        // no module for it: the worked steps are the teaching, then back to the problem
+        return { ...base, reasoning, plan, phase: "return", active: null, reason: `${plan.why} Look at the worked steps, then try again.` };
       }
-      // no module for it: the worked steps are the teaching, then back to the problem
-      return { ...base, reasoning, plan, phase: "return", active: null, reason: `${plan.why} Look at the worked steps, then try again.` };
     }
   }
   // 2. not a supported problem, or the diagnosis is unsure: check supporting skills along the relations
