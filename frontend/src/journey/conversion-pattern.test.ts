@@ -22,7 +22,14 @@ const PREPARED = "length.compare-m-cm@1";
 
 test("parameter partitions: every served task has exactly one skill; the generator's own validator accepts each numeric task", () => {
   for (const config of CONVERSION_PATTERN_CONFIGS) {
-    assert.equal(connectionConfig(config.competency), config, "registered with the existing connection configurations");
+    const registered = connectionConfig(config.competency)!;
+    assert.ok(registered, "registered with the existing connection configurations");
+    // Node 22 may instantiate ESM and CJS configuration modules separately. Check
+    // the complete contract and its claim, not incidental object identity.
+    const { broadClaim: actualClaim, ...actualContract } = registered;
+    const { broadClaim: expectedClaim, ...expectedContract } = config;
+    assert.deepEqual(actualContract, expectedContract);
+    assert.equal(actualClaim("test evidence"), expectedClaim("test evidence"));
     for (const fam of [...new Set([...config.subSkills.flatMap((s) => s.families), ...Object.keys(config.unmapped).filter((f) => f === "acmcmp")])]) for (const p of pool(fam).items) for (const form of ["", ":mc"]) {
       if (form && !FAMILIES.get(fam)!.mc) continue; // a choice family has no separate multiple-choice form
       const id = `${p.id}${form}`, skill = connectedSkill(config, id);

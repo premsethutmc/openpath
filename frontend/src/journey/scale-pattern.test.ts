@@ -27,7 +27,14 @@ const DAY = 86400000;
 test("parameter partitions: every served task of a mapped family has exactly one skill, or is deliberately unmapped", () => {
   const KEY_ONE = new Set(["acpict", "acpictmore"]);
   for (const config of SCALE_PATTERN_CONFIGS) {
-    assert.equal(connectionConfig(config.competency), config, "registered with the existing connection configurations");
+    const registered = connectionConfig(config.competency)!;
+    assert.ok(registered, "registered with the existing connection configurations");
+    // Node 22 may instantiate ESM and CJS configuration modules separately. Check
+    // the complete contract and its claim, not incidental object identity.
+    const { broadClaim: actualClaim, ...actualContract } = registered;
+    const { broadClaim: expectedClaim, ...expectedContract } = config;
+    assert.deepEqual(actualContract, expectedContract);
+    assert.equal(actualClaim("test evidence"), expectedClaim("test evidence"));
     for (const fam of [...new Set(config.subSkills.flatMap((s) => s.families))]) {
       for (const p of pool(fam).items) for (const form of ["", ":mc"]) {
         const id = `${p.id}${form}`;

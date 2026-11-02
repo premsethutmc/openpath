@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "13335b3804d4c27a4c6a849ccf7f949e2a9fcf4fdb0e8694107f19a360696bf1",
+ "sha256": "bb03433deca031baa6d1abe557701d1aeec28918f871f5782ff0e8c1a55254f6",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "093892bcfa2f777f11a38aecd11c90e2ed3a4c1b9c850e191feaed3a5ef97abc",
@@ -213,7 +213,7 @@
   "packages/learning/src/subskill-config-geometry.ts": "bac8b09b1ae1df6cd03781767d5704d4123b1c68b26b7f17012f05dfc6e96730",
   "packages/learning/src/subskill-config-linear.ts": "d180959aca453e7a6cd0069d7ee432db31fd042d5d69bcccc6577fe68e155793",
   "packages/learning/src/subskill-config-scale.ts": "4d64e7bd0ed6eacbfe818fea956c4cb9c5fbdbe28a9dd937f440ac8cd634d555",
-  "packages/learning/src/subskill-projection.ts": "bc9208d4a7a369eb427569349d0fbf137b08b9ee85a1b6c50662380184a9525d",
+  "packages/learning/src/subskill-projection.ts": "bcfc18e8c17c43824a3cb9f12309f513a3045a83f7484fb0b8ddc2835b250966",
   "packages/learning/src/symbolic-domain.ts": "6f6284a39e637a907160ad5a17219a91970c0ec9dc637e9405ffe9bfac5880c6",
   "packages/learning/src/symbolic-equivalence.ts": "909857c3d33d52535b0b91057c74896a20a9304bfd9f0f38a804b8d51248fb12",
   "packages/learning/src/teaching-contract.ts": "c83f90815bd0d36a744e6b8c2b98d26c69c70cffd9c1a646852a9ee498324eed",

@@ -31,7 +31,13 @@ export function canonicalOrder<T>(events: readonly T[]): T[] {
   return Array.isArray(events) ? events.map((e) => ({ e, t: at(e), i: idOf(e), c: canon(e) })).sort((x, y) => x.t - y.t || cmp(x.i, y.i) || cmp(x.c, y.c)).map((x) => x.e) : [];
 }
 
-export interface SubSkillDef<Id extends string = string> { id: Id; name: string; example: string; families: string[]; competency: string; note?: string; /** All conditions must hold on validated generator parameters. */ parameters?: readonly { index: number; values: readonly number[] }[] }
+export interface SubSkillDef<Id extends string = string> {
+  id: Id; name: string; example: string; families: string[]; competency: string; note?: string;
+  /** All conditions must hold on validated generator parameters. */
+  parameters?: readonly { index: number; values: readonly number[] }[];
+  /** At least one nonempty conjunction must hold, in addition to parameters. */
+  parameterCases?: readonly (readonly { index: number; values: readonly number[] }[])[];
+}
 /** A subject's evidence dimensions, as configuration. */
 export interface SubSkillConfig<Id extends string = string> {
   /** projection contract and mapping versions (a new mapping is a new version, never an edit) */
@@ -62,7 +68,22 @@ export function classifyQuestionWith<Id extends string>(config: SubSkillConfig<I
   if (!m) return { kind: "unknown", reason: "malformed-question-id", family: null };
   if (!FAMILIES.has(m[1])) return { kind: "unknown", reason: "unknown-family", family: m[1] };
   const params = m[2].split(",").map(Number);
-  const matches = config.subSkills.filter((s) => s.families.includes(m[1]) && (!s.parameters || s.parameters.every((p) => Number.isInteger(p.index) && p.index >= 0 && p.index < params.length && p.values.includes(params[p.index]))));
+  const validConditions = (value: unknown): value is NonNullable<SubSkillDef["parameters"]> => Array.isArray(value) && Array.from(value).every((p: unknown) => {
+    if (!p || typeof p !== "object" || Array.isArray(p)) return false;
+    const c = p as { index?: unknown; values?: unknown };
+    return typeof c.index === "number" && Number.isInteger(c.index) && c.index >= 0 && c.index < params.length
+      && Array.isArray(c.values) && c.values.length > 0 && Array.from(c.values).every((v: unknown) => typeof v === "number" && Number.isFinite(v));
+  });
+  const candidates = config.subSkills.filter((s) => s.families.includes(m[1]));
+  // Validate every branch first: a matching case must not hide malformed alternatives.
+  if (candidates.some((s) => (s.parameters !== undefined && !validConditions(s.parameters))
+      || (s.parameterCases !== undefined && (!Array.isArray(s.parameterCases) || !s.parameterCases.length
+        || !Array.from(s.parameterCases).every((c) => validConditions(c) && c.length > 0))))) {
+    return { kind: "unknown", reason: "unmapped-family", family: m[1] };
+  }
+  const accepts = (conditions: NonNullable<SubSkillDef["parameters"]>) => conditions.every((p) => p.values.includes(params[p.index]));
+  const matches = candidates.filter((s) => (s.parameters === undefined || accepts(s.parameters))
+    && (s.parameterCases === undefined || s.parameterCases.some(accepts)));
   // Ambiguous metadata must never silently credit one of two skills.
   if (matches.length !== 1) return { kind: "unknown", reason: "unmapped-family", family: m[1] };
   const s = matches[0];

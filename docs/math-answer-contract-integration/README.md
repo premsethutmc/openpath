@@ -29,8 +29,28 @@ Reconciliation validation: 96 of 97 focused checks initially passed; the obsolet
 
 ## Pending dependency before publication
 
-Claude owns domain mapping/content files. PR100's `pictographs.half-symbol@1` currently maps every `acpicthalf` row-read task, although the generator guarantees a half symbol only somewhere in the chart. For example, check item `gen:acpicthalf:0,8,1,0` asks about a row containing two halves (one whole picture), with answer 2. A selected whole-symbol row therefore does not establish the declared half-symbol skill. This mapping needs a mathematically valid scope correction from Claude before the combined candidate is publishable. Do not silently rename or count it as a verified chain.
+Claude owns domain mapping/content files. PR100's `pictographs.half-symbol@1` currently maps every `acpicthalf` row-read task, although the generator guarantees a half symbol only somewhere in the chart. For example, check item `gen:acpicthalf:0,8,1,0` asks about a row containing two halves (one whole picture), with answer 2. A selected whole-symbol row therefore does not establish the declared half-symbol skill. This mapping needs a mathematically valid scope correction from Claude before the combined candidate can be considered integration-ready. A draft may expose the implementation and this known blocker for review; it is not approval or activation. Do not silently rename or count it as a verified chain.
 
 Claude also owns filling the 16 teaching gaps in its 17-skill batch. Those are not 17 completed teaching chains. The `aaname` unmapped explanation and numeric-only blocker text in the imported breadth documentation describe its old baseline; the shared numeric-only restriction is fixed here, but numeral-to-name still requires an explicit domain skill mapping. The connection audit snapshots have been regenerated for the combined source; they remain structural evidence, not semantic certification of the disputed mapping, and must be refreshed after its correction.
 
-After that handoff: reconcile only changed domain inputs, regenerate the connection audit and dependent review/manifest artifacts, run one coherent final aggregate, publish a separate stacked draft and own its exact-head CI. Keep PR98/99 stable. No merge, production deployment or content approval is implied.
+The shared implementation may be published as a separate stacked draft with the known mapping blocker explicit. After the domain handoff: reconcile only changed inputs, regenerate dependent review/manifest artifacts, validate the corrected candidate and own its exact-head CI. Keep PR98/99 stable. No merge, production deployment or content approval is implied.
+
+## Shared mapping contract for Claude
+
+`SubSkillDef.parameters` is one conjunction of independent allowed values. It cannot express all selected-row half-picture cases: `gen:acpicthalf:0,3,1,0` has seven halves and `gen:acpicthalf:0,8,3,0` has five, but combining their seed/row values also admits `gen:acpicthalf:0,8,1,0`, which has two halves (one whole picture).
+
+The shared extension is optional `parameterCases`: an array of nonempty conjunctions, with OR between cases and AND with the existing `parameters`. For example, a **test-only subset**, not the full domain mapping:
+
+```ts
+parameters: [{ index: 3, values: [0] }],
+parameterCases: [
+  [{ index: 0, values: [0] }, { index: 1, values: [3] }, { index: 2, values: [1] }],
+  [{ index: 0, values: [0] }, { index: 1, values: [8] }, { index: 2, values: [3] }],
+]
+```
+
+All cases are validated, including branches that do not match. Empty or malformed cases fail closed. Overlapping cases inside one skill do not duplicate evidence; overlapping different skills still abstain. The classifier remains based on validated generator parameters, not displayed text or arbitrary runtime predicates. Existing teaching scopes that name the subskill, task validity, projection, selection and the connection audit reuse this same classifier. No domain configuration is automatically changed or registered.
+
+Claude owns deriving and mathematically validating the complete bounded parameter cases, updating mapping/projection versions, and checking worked/guided/fresh/delayed pools against them. If the corrected scope lacks a required role, report that gap rather than broadening evidence. Native choice support uses the actual served variant through the trusted grader; prepared choice skill registration remains an explicit domain decision. Neither answer support nor a correct final answer establishes method evidence or a specific misconception.
+
+The case-list extension passes three focused Node 24 tests and the Node 22 integration group (86 unique checks, with two configuration-identity assertions corrected to compare complete semantic contracts). All three TypeScript configurations pass. No runtime domain mapping uses `parameterCases` yet, so the known half-row gap remains real, not merely historical.
