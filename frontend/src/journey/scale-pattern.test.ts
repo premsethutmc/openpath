@@ -33,6 +33,7 @@ test("parameter partitions: every served task of a mapped family has exactly one
         const id = `${p.id}${form}`;
         const skill = connectedSkill(config, id);
         if (KEY_ONE.has(fam) && p.params[0] === 0) { assert.equal(skill, null, `${id}: a key of 1 uses no unit value`); continue; }
+        if (fam === "acpicthalf" && p.params[3] === 0) { assert.equal(skill, null, `${id}: half-picture rows are withdrawn from skill evidence (@2)`); continue; }
         assert.ok(skill, `${id} is mapped`);
         assert.ok(validSkillTask(config, skill!, id), `${id}: the generator's own validator accepts the answer`);
       }
@@ -130,7 +131,7 @@ test("evidence for one skill never covers another skill of the same pattern", ()
 });
 
 const TAUGHT: Record<string, string[]> = {
-  "pictographs.read-with-key@1": ["read_with_key:procedural", "table:procedural"], "pictographs.half-symbol@1": ["half_pictures:conceptual"],
+  "pictographs.read-with-key@1": ["read_with_key:procedural", "table:procedural"],
   "pictographs.half-symbol-total@1": ["half_pictures_total:procedural"], "pictographs.compare-rows@1": ["compare_rows:procedural"],
   "pictographs.draw-from-table@1": ["draw_from_table:conceptual"], "pictographs.total@1": ["pictograph_total:procedural"], "pictographs.largest-group@1": ["largest_group:procedural"],
   "scaled-bars.read@1": ["skip_count:procedural"], "scaled-bars.difference@1": ["bars_difference:procedural"], "scaled-bars.total@1": ["bars_total:procedural"],
@@ -150,9 +151,8 @@ test("teaching availability: every configured skill has its own eligible, skill-
       assert.ok(st.screens.every((b) => b.instance), `${st.id}: every screen shows its own worked instance`);
     }
   }
-  // half pictures: every taught, guided and checked row really holds a half picture (an odd number of halves)
-  const half = moduleFor(PICTOGRAPHS_CONFIG.competency)!.strategies.find((st) => st.id === "half_pictures")!;
-  for (const id of [half.screens[0].instance!, half.guided, half.check]) assert.ok(problemOf(id.replace(/:mc$/, ""))!.steps.some((x) => /: (\d*[13579]) halves/.test(explainStepText(id))), id);
+  // the half-picture row explanation is withheld while its skill is unmapped (it would teach a skill with no evidence)
+  assert.ok(!moduleFor(PICTOGRAPHS_CONFIG.competency)!.strategies.some((st) => st.id === "half_pictures"));
   // bundles: the worked lines tie ten loose cubes into another ten
   assert.ok(pv0().strategies.find((st) => st.id === "bundles")!.screens[0].math!.some((l) => /ones = 1 ten and \d+ ones/.test(l)));
   // every one of these explanations is a review candidate: its current revision is pending review, never approved
@@ -204,40 +204,75 @@ for (const config of SCALE_PATTERN_CONFIGS) for (const s of config.subSkills) fo
   assert.deepEqual(learnerState(L.learnerId, saved, L.now, { currentSession: L.session }).module(competency), next, "reload keeps the same check");
 });
 
-// half-symbol runtime mapping (integration finding): the skill must be credited only when the ASKED row holds a half picture.
-// The mapping contract cannot express that joint (key, seed, row) condition yet, so the defect tests are `todo`: they run and
-// report, and must become plain tests when Codex extends the contract and the mapping is versioned (@2, HALF_SYMBOL_ROWS).
-const HALF = "pictographs.half-symbol@1", GENUINE = new Set(HALF_SYMBOL_ROWS);
-const halfRowIds = () => { const out: string[] = []; for (let ki = 0; ki < 4; ki++) for (let s = 0; s < 30; s++) for (let j = 0; j < 4; j++) { const id = `gen:acpicthalf:${ki},${s},${j},0`; if (problemOf(id)) out.push(id); } return out; };
-const wholeOnly = (id: string) => !GENUINE.has(id.replace(/^gen:acpicthalf:/, "").replace(/,0(:mc)?$/, ""));
+// half-symbol runtime mapping (integration finding). Mapping @1 credited every half-picture-chart ROW question, including rows
+// of whole pictures only (gen:acpicthalf:0,8,1,0). The precise condition (the ASKED row holds a half picture) is joint over key,
+// seed and row, which the mapping contract cannot express yet, so @2 withdraws those questions from skill evidence: they are
+// still served and graded. The plain tests below protect that; the `todo` tests are the PENDING restoration of precise
+// coverage (HALF_SYMBOL_ROWS in a later mapping version, after Codex's contract change) and are not protection.
+const HALF = "pictographs.half-symbol@1", TOTAL = "pictographs.half-symbol-total@1", GENUINE = new Set(HALF_SYMBOL_ROWS);
+const rowIds = () => { const out: string[] = []; for (let ki = 0; ki < 4; ki++) for (let s = 0; s < 30; s++) for (let j = 0; j < 4; j++) { const id = `gen:acpicthalf:${ki},${s},${j},0`; if (problemOf(id)) out.push(id); } return out; };
+const genuine = (id: string) => GENUINE.has(id.replace(/^gen:acpicthalf:/, "").replace(/,0(:mc)?$/, ""));
+const isRow = (id: string) => /^gen:acpicthalf:\d+,\d+,\d+,0(:mc)?$/.test(id);
 
-test("half-symbol runtime: the enumerated rows are exactly those whose asked row holds a half picture (generator's own count)", () => {
-  for (const id of halfRowIds()) assert.equal(GENUINE.has(id.slice("gen:acpicthalf:".length, -2)), Number((problemOf(id)!.steps[0] as { value: number }).value) % 2 === 1, id);
+test("half-symbol data: the enumerated rows are exactly those whose asked row holds a half picture (generator's own count)", () => {
+  for (const id of rowIds()) assert.equal(genuine(id), Number((problemOf(id)!.steps[0] as { value: number }).value) % 2 === 1, id);
+  assert.equal(rowIds().filter(genuine).length, 275); assert.equal(rowIds().filter((x) => !genuine(x)).length, 197);
   assert.equal(problemOf("gen:acpicthalf:0,8,1,0")!.steps[0].value, 2, "the reproducer asks about one whole picture");
-  // genuine half rows keep earning the skill today
-  for (const id of halfRowIds().filter((x) => !wholeOnly(x))) assert.equal(connectedSkill(PICTOGRAPHS_CONFIG, id), HALF, id);
 });
 
-test("half-symbol runtime: a whole-picture row is never classified as half-symbol evidence", { todo: "mapping contract cannot express the selected-row condition (Codex)" }, () => {
-  assert.notEqual(connectedSkill(PICTOGRAPHS_CONFIG, "gen:acpicthalf:0,8,1,0"), HALF);
-  for (const id of halfRowIds().filter(wholeOnly)) for (const f of ["", ":mc"]) assert.notEqual(classifyQuestionWith(PICTOGRAPHS_CONFIG, id + f).kind === "mapped" && connectedSkill(PICTOGRAPHS_CONFIG, id + f), HALF, id + f);
+test("half-symbol regression: no half-picture ROW question earns skill evidence; the questions are still served and graded", () => {
+  assert.equal(PICTOGRAPHS_CONFIG.mapping, "pictographs-subskills@2");
+  assert.ok(!PICTOGRAPHS_CONFIG.subSkills.some((s) => s.id === HALF) && !PICTOGRAPHS_CONFIG.core.includes(HALF));
+  for (const id of rowIds()) for (const f of ["", ":mc"]) {
+    assert.equal(classifyQuestionWith(PICTOGRAPHS_CONFIG, id + f).kind, "unknown", id + f);
+    assert.equal(connectedSkill(PICTOGRAPHS_CONFIG, id + f), null, id + f);
+  }
+  assert.ok(pool("acpicthalf").items.some((p) => p.params[3] === 0), "still in the served pool");
+  // the separate totals skill is unchanged
+  for (const p of pool("acpicthalf").items.filter((x) => x.params[3] === 1)) assert.equal(connectedSkill(PICTOGRAPHS_CONFIG, p.id), TOTAL, p.id);
 });
 
-test("half-symbol runtime: correct answers to whole-picture rows earn no half-symbol credit in the projection", { todo: "mapping contract cannot express the selected-row condition (Codex)" }, () => {
+test("half-symbol regression: correct answers to whole-picture rows get ordinary answer credit and no skill credit", () => {
   const L = new SliceSession("half-whole-only", PICTOGRAPHS_CONFIG.competency, at);
-  for (const id of halfRowIds().filter(wholeOnly).slice(0, 6)) L.submit(id, question(id).answer, "check");
-  const proj = projectFromEventsWith(PICTOGRAPHS_CONFIG, L.learnerId, withDecisions(L.events, L.decisions), L.now).subSkills.find((x) => x.id === HALF)!;
-  assert.equal(proj.historical.everDemonstrated, false, JSON.stringify(proj));
+  const ids = ["gen:acpicthalf:0,8,1,0", ...rowIds().filter((x) => !genuine(x)).slice(0, 5)];
+  for (const id of ids) assert.equal(L.submit(id, question(id).answer, "check").credit, true, `${id}: the answer is graded and credited`);
+  const proj = projectFromEventsWith(PICTOGRAPHS_CONFIG, L.learnerId, withDecisions(L.events, L.decisions), L.now);
+  assert.equal(proj.subSkills.find((x) => x.id === HALF), undefined, "no half-symbol skill to credit");
+  for (const sk of proj.subSkills) assert.equal(sk.historical.everDemonstrated, false, `${sk.id} credited from a row question`);
 });
 
-test("half-symbol runtime: assessment, retention and recovery select only rows holding a half picture", { todo: "mapping contract cannot express the selected-row condition (Codex)" }, () => {
-  const L = new SliceSession("half-select", PICTOGRAPHS_CONFIG.competency, at);
+test("half-symbol regression: assessment, retention and recovery never select a half-picture ROW question for any pictograph skill", () => {
+  for (const s of PICTOGRAPHS_CONFIG.subSkills) {
+    const L = new SliceSession(`half-select-${s.id}`, PICTOGRAPHS_CONFIG.competency, at);
+    const policy: FoundationPolicy = { version: FOUNDATION_POLICY, config: PICTOGRAPHS_CONFIG, requirements: [{ skill: s.id, method: false }] };
+    const saved = () => withDecisions(L.events, L.decisions);
+    const asked: string[] = [];
+    let p = foundationPlan(policy, L.learnerId, saved(), L.now);
+    for (let i = 0; i < 12 && p.question; i++) { asked.push(p.question); L.submit(p.question, question(p.question).answer, "check"); p = foundationPlan(policy, L.learnerId, saved(), L.now); }
+    L.now += 8 * DAY; p = foundationPlan(policy, L.learnerId, saved(), L.now);
+    if (p.question) { asked.push(p.question); L.submit(p.question, "-1", "retention"); p = foundationPlan(policy, L.learnerId, saved(), L.now); if (p.question) asked.push(p.question); }
+    assert.ok(asked.length > 0, s.id);
+    assert.deepEqual(asked.filter(isRow), [], `${s.id}: half-picture row questions selected as evidence`);
+  }
+});
+
+const PENDING = "pending: precise half-symbol mapping needs Codex's contract extension (joint key/seed/row condition); restore with HALF_SYMBOL_ROWS";
+test("PENDING restore: genuine half-picture rows map to half-symbol; whole-picture rows do not", { todo: PENDING }, () => {
+  for (const id of rowIds()) assert.equal(connectedSkill(PICTOGRAPHS_CONFIG, id) === HALF, genuine(id), id);
+});
+test("PENDING restore: correct answers to genuine half-picture rows earn half-symbol credit in the projection", { todo: PENDING }, () => {
+  const L = new SliceSession("half-genuine", PICTOGRAPHS_CONFIG.competency, at);
+  for (const id of rowIds().filter(genuine).slice(0, 6)) L.submit(id, question(id).answer, "check");
+  assert.equal(projectFromEventsWith(PICTOGRAPHS_CONFIG, L.learnerId, withDecisions(L.events, L.decisions), L.now).subSkills.find((x) => x.id === HALF)?.historical.everDemonstrated, true);
+});
+test("PENDING restore: half-symbol assessment, retention and recovery select only genuine half-picture rows", { todo: PENDING }, () => {
+  const L = new SliceSession("half-genuine-select", PICTOGRAPHS_CONFIG.competency, at);
   const policy: FoundationPolicy = { version: FOUNDATION_POLICY, config: PICTOGRAPHS_CONFIG, requirements: [{ skill: HALF, method: false }] };
   const saved = () => withDecisions(L.events, L.decisions);
   const asked: string[] = [];
   let p = foundationPlan(policy, L.learnerId, saved(), L.now);
-  for (let i = 0; i < 12 && p.question; i++) { asked.push(p.question); L.submit(p.question, question(p.question).answer, p.status === "retention" ? "retention" : "check"); if (p.status === "shown") break; p = foundationPlan(policy, L.learnerId, saved(), L.now); }
+  for (let i = 0; i < 12 && p.question; i++) { asked.push(p.question); L.submit(p.question, question(p.question).answer, "check"); p = foundationPlan(policy, L.learnerId, saved(), L.now); }
   L.now += 8 * DAY; p = foundationPlan(policy, L.learnerId, saved(), L.now);
   if (p.question) { asked.push(p.question); L.submit(p.question, "-1", "retention"); p = foundationPlan(policy, L.learnerId, saved(), L.now); if (p.question) asked.push(p.question); }
-  assert.deepEqual(asked.filter(wholeOnly), [], "whole-picture rows asked as half-symbol evidence");
+  assert.ok(asked.length >= 3 && asked.every(genuine), JSON.stringify(asked));
 });

@@ -5,20 +5,22 @@
 import type { SubSkillConfig } from "./subskill-projection";
 
 const PICT = "MATH.statistics.pictographs";
-/** pictographs: key [1, 2, 5, 10][ki] for acpict/acpictmore; a key of 1 has no scale, so those tasks are left unmapped */
+/** pictographs: key [1, 2, 5, 10][ki] for acpict/acpictmore; a key of 1 has no scale, so those tasks are left unmapped.
+ * @2 (this version): half-picture ROW questions (acpicthalf q = 0) withdrawn from skill evidence; see `unmapped`. */
 export const PICTOGRAPHS_CONFIG: SubSkillConfig = {
-  version: "pictographs-subskill-projection@1", mapping: "pictographs-subskills@1", competency: PICT,
+  version: "pictographs-subskill-projection@2", mapping: "pictographs-subskills@2", competency: PICT,
   subSkills: [
     { id: "pictographs.read-with-key@1", name: "Read one row using the key", example: "gen:acpict:2,2,1", families: ["acpict"], competency: PICT, parameters: [{ index: 0, values: [1, 2, 3] }] },
-    { id: "pictographs.half-symbol@1", name: "Read a row with a half symbol", example: "gen:acpicthalf:2,0,3,0", families: ["acpicthalf"], competency: PICT, parameters: [{ index: 3, values: [0] }] },
     { id: "pictographs.half-symbol-total@1", name: "Total of a pictograph with half symbols", example: "gen:acpicthalf:3,27,0,1", families: ["acpicthalf"], competency: PICT, parameters: [{ index: 3, values: [1] }] },
     { id: "pictographs.compare-rows@1", name: "How many more, using the key", example: "gen:acpictmore:2,4,0", families: ["acpictmore"], competency: PICT, parameters: [{ index: 0, values: [1, 2, 3] }] },
     { id: "pictographs.draw-from-table@1", name: "How many symbols to draw for a value", example: "gen:acpicttab:0,0,0,0", families: ["acpicttab"], competency: PICT, parameters: [{ index: 3, values: [0] }] },
     { id: "pictographs.total@1", name: "Total of a pictograph, using the key", example: "gen:acpicttab:0,0,0,1", families: ["acpicttab"], competency: PICT, parameters: [{ index: 3, values: [1] }] },
     { id: "pictographs.largest-group@1", name: "Value of the largest group, using the key", example: "gen:acpicttab:0,0,0,2", families: ["acpicttab"], competency: PICT, parameters: [{ index: 3, values: [2] }] },
   ],
-  unmapped: { "acpict:key-1": "A key of 1 (ki = 0) reads plain counts: no unit value is used, so it is not evidence for reading with a key.", "acpictmore:key-1": "A key of 1 (ki = 0) compares plain counts." },
-  core: ["pictographs.read-with-key@1", "pictographs.half-symbol@1", "pictographs.half-symbol-total@1", "pictographs.compare-rows@1", "pictographs.draw-from-table@1", "pictographs.total@1", "pictographs.largest-group@1"],
+  unmapped: {
+    "acpicthalf:row (q = 0)": "Reading one row of a half-picture pictograph. Half-symbol evidence needs the ASKED row to hold a half picture (halves(ki, s)[j] odd), a joint key/seed/row condition the mapping contract cannot express; mapping every row (@1) credited whole-picture rows. Unmapped in @2: the questions are still served and graded, but earn no skill evidence. Restore with HALF_SYMBOL_ROWS once Codex extends the contract.",
+    "acpict:key-1": "A key of 1 (ki = 0) reads plain counts: no unit value is used, so it is not evidence for reading with a key.", "acpictmore:key-1": "A key of 1 (ki = 0) compares plain counts." },
+  core: ["pictographs.read-with-key@1", "pictographs.half-symbol-total@1", "pictographs.compare-rows@1", "pictographs.draw-from-table@1", "pictographs.total@1", "pictographs.largest-group@1"],
   broadClaim: (label) => `Pictographs read ${label} across configured key tasks only`,
 };
 
@@ -60,10 +62,10 @@ export const PLACE_VALUE_TENS_CONFIG: SubSkillConfig = {
 
 export const SCALE_PATTERN_CONFIGS = [PICTOGRAPHS_CONFIG, SCALED_BARS_CONFIG, PLACE_VALUE_TENS_CONFIG];
 
-/** DATA ONLY, not yet used by the mapping. pictographs.half-symbol@1 should mean "the ASKED row holds a half picture"
+/** DATA ONLY, not used by the mapping. pictographs.half-symbol@1 (mapping @1, withdrawn in @2) should mean "the ASKED row holds a half picture"
  * (acpicthalf [ki, s, j, 0] with halves(ki, s)[j] odd). That is a joint condition on key, seed and row, which per-index
- * `parameters` cannot express, so @1 also credits whole-picture rows (e.g. gen:acpicthalf:0,8,1,0, two halves = one whole).
+ * `parameters` cannot express, so @1 also credited whole-picture rows (e.g. gen:acpicthalf:0,8,1,0, two halves = one whole).
  * These are every valid (ki, s, j) whose asked row holds a half picture, enumerated over the generator's whole parameter
- * space (275 of 472 valid q = 0 tasks), for a versioned pictographs-subskills@2 once Codex extends the mapping contract
+ * space (275 of 472 valid q = 0 tasks), for a later mapping version once Codex extends the mapping contract
  * (a tuple list or a problem predicate). Regression tests: frontend/src/journey/scale-pattern.test.ts ("half-symbol runtime"). */
 export const HALF_SYMBOL_ROWS: readonly string[] = ["0,0,3", "0,1,1", "0,1,2", "0,1,3", "0,2,1", "0,2,3", "0,3,1", "0,3,2", "0,4,0", "0,4,1", "0,4,3", "0,5,1", "0,5,2", "0,6,0", "0,6,1", "0,6,2", "0,6,3", "0,7,2", "0,7,3", "0,8,3", "0,9,0", "0,9,2", "0,10,0", "0,10,1", "0,10,2", "0,10,3", "0,11,1", "0,11,3", "0,12,3", "0,13,0", "0,13,1", "0,13,2", "0,13,3", "0,14,2", "0,14,3", "0,15,1", "0,15,3", "0,16,1", "0,16,2", "0,16,3", "0,17,0", "0,17,1", "0,17,2", "0,18,0", "0,18,1", "0,18,2", "0,18,3", "0,19,2", "0,19,3", "0,20,0", "0,20,1", "0,20,2", "0,21,0", "0,21,1", "0,21,2", "0,21,3", "0,22,0", "0,22,1", "0,22,3", "0,23,0", "0,23,1", "0,23,2", "0,24,0", "0,24,2", "0,25,1", "0,25,3", "0,26,0", "0,26,1", "0,27,2", "0,28,0", "0,28,1", "0,28,3", "0,29,1", "0,29,2", "0,29,3", "1,0,1", "1,0,2", "1,0,3", "1,1,2", "1,2,0", "1,2,2", "1,3,0", "1,3,1", "1,3,2", "1,3,3", "1,4,0", "1,4,1", "1,4,3", "1,5,0", "1,5,3", "1,6,0", "1,7,1", "1,7,2", "1,7,3", "1,8,0", "1,8,1", "1,8,2", "1,9,1", "1,10,1", "1,11,1", "1,12,0", "1,12,2", "1,13,0", "1,13,1", "1,13,2", "1,14,0", "1,14,1", "1,14,2", "1,14,3", "1,15,1", "1,15,3", "1,16,2", "1,17,3", "1,18,1", "1,18,2", "1,19,0", "1,19,1", "1,19,3", "1,20,0", "1,20,1", "1,20,2", "1,20,3", "1,21,2", "1,21,3", "1,22,1", "1,22,2", "1,23,0", "1,23,1", "1,23,2", "1,23,3", "1,24,0", "1,24,1", "1,24,3", "1,25,0", "1,25,1", "1,25,2", "1,25,3", "1,26,2", "1,27,1", "1,27,2", "1,27,3", "1,28,1", "1,29,1", "2,0,2", "2,0,3", "2,1,0", "2,1,1", "2,3,0", "2,3,1", "2,3,2", "2,3,3", "2,4,0", "2,4,1", "2,4,3", "2,5,0", "2,5,2", "2,6,1", "2,6,2", "2,6,3", "2,7,0", "2,7,1", "2,7,3", "2,8,0", "2,8,2", "2,8,3", "2,9,0", "2,9,3", "2,10,0", "2,11,0", "2,11,2", "2,12,1", "2,12,2", "2,13,0", "2,13,1", "2,13,3", "2,14,0", "2,14,1", "2,14,2", "2,15,0", "2,15,3", "2,16,0", "2,16,2", "2,16,3", "2,17,1", "2,17,2", "2,17,3", "2,18,0", "2,18,1", "2,18,2", "2,18,3", "2,19,1", "2,20,0", "2,20,1", "2,20,2", "2,21,2", "2,22,0", "2,22,2", "2,22,3", "2,23,0", "2,23,1", "2,24,0", "2,24,2", "2,24,3", "2,25,0", "2,25,1", "2,25,3", "2,26,3", "2,27,0", "2,27,2", "2,27,3", "2,28,3", "2,29,1", "2,29,2", "2,29,3", "3,0,2", "3,1,1", "3,2,0", "3,2,1", "3,2,2", "3,3,0", "3,3,2", "3,3,3", "3,4,1", "3,4,3", "3,5,1", "3,5,2", "3,6,3", "3,8,0", "3,8,1", "3,9,1", "3,10,2", "3,10,3", "3,11,0", "3,11,2", "3,12,1", "3,12,2", "3,13,0", "3,13,2", "3,14,0", "3,14,2", "3,14,3", "3,15,0", "3,15,2", "3,15,3", "3,16,1", "3,16,3", "3,17,1", "3,17,2", "3,17,3", "3,18,0", "3,18,2", "3,19,0", "3,19,1", "3,19,2", "3,20,0", "3,20,1", "3,21,2", "3,21,3", "3,22,1", "3,23,1", "3,23,2", "3,24,3", "3,25,0", "3,25,1", "3,25,2", "3,26,1", "3,26,3", "3,27,1", "3,27,2", "3,27,3", "3,28,1", "3,28,2", "3,29,0", "3,29,2", "3,29,3"];

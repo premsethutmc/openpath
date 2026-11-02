@@ -22,7 +22,7 @@ const P = (id: string) => problemOf(id.replace(/:(mc|w)$/, ""))!;
 const fig = (p: Problem) => (p.figure ? { widget: p.figure as Record<string, unknown> } : {});
 const configOf = (c: string) => SCALE_PATTERN_CONFIGS.find((x) => x.competency === c)!;
 
-interface Spec { id: string; title: string; kind: "conceptual" | "procedural"; family: string; subSkill: string; text: string[]; extra?: (p: Problem) => boolean; example?: (p: Problem) => boolean; addresses?: string; misconception?: (p: Problem) => string[]; regroup?: boolean }
+interface Spec { id: string; title: string; kind: "conceptual" | "procedural"; family: string; subSkill: string; text: string[]; extra?: (p: Problem) => boolean; example?: (p: Problem) => boolean; addresses?: string; misconception?: (p: Problem) => string[]; regroup?: boolean; withheld?: string }
 interface ModuleSpec { competency: string; family: string; title: string; chapter: string[]; seed: (p: Problem) => boolean; strategies: Spec[] }
 
 /** a worked example with several pictures in the row, so the multiplication by the key is visible */
@@ -41,7 +41,7 @@ const MODULES: ModuleSpec[] = [
       { id: "read_with_key", title: "Read a row with the key", kind: "procedural", family: "acpict", subSkill: "pictographs.read-with-key@1", example: several, text: ["Every picture in the row stands for the key's number, not for one.", "Count the pictures in the row, then multiply by the key."] },
       { id: "table", title: "Turn it into a table", kind: "procedural", family: "acpict", subSkill: "pictographs.read-with-key@1", example: several, text: ["Write each label with its number of pictures.", "Multiply each by the key and write the real number beside it."] },
       // only rows that really contain a half picture (an odd number of halves): the generator may ask about a whole-picture row
-      { id: "half_pictures", title: "Half pictures", kind: "conceptual", family: "acpicthalf", subSkill: "pictographs.half-symbol@1", extra: (p) => oddHalves(p), text: ["A whole picture stands for the key; a half picture stands for half the key.", "Count the row in halves: a whole picture is two halves and a half picture is one. Then multiply the number of halves by half the key."] },
+      { id: "half_pictures", title: "Half pictures", kind: "conceptual", family: "acpicthalf", subSkill: "pictographs.half-symbol@1", withheld: "the half-symbol row skill is unmapped in pictographs-subskills@2 until the mapping contract can express the asked-row condition", extra: (p) => oddHalves(p), text: ["A whole picture stands for the key; a half picture stands for half the key.", "Count the row in halves: a whole picture is two halves and a half picture is one. Then multiply the number of halves by half the key."] },
       { id: "half_pictures_total", title: "The total with half pictures", kind: "procedural", family: "acpicthalf", subSkill: "pictographs.half-symbol-total@1", text: ["Count every row in halves: a whole picture is two halves and a half picture is one.", "Add the halves of all the rows, then multiply by half the key."] },
       { id: "compare_rows", title: "How many more, with the key", kind: "procedural", family: "acpictmore", subSkill: "pictographs.compare-rows@1", text: ["\"How many more\" compares two amounts: it is the bigger amount minus the smaller one.", "Read both rows using the key, then take the smaller number from the bigger one."] },
       { id: "draw_from_table", title: "Draw a row from a table", kind: "conceptual", family: "acpicttab", subSkill: "pictographs.draw-from-table@1", text: ["The key says how many each picture stands for.", "To draw a row, share the number into groups of the key: one picture for each group, not one for each thing."] },
@@ -96,7 +96,8 @@ for (const M of MODULES) {
   };
   const seed = phasePool(M.family, "practice").map((x) => x.replace(/:mc$/, "")).find((x) => M.seed(P(x)) && connectedSkill(config, x))!;
   used.add(exposureKey(seed));
-  const strategies = M.strategies.map((s) => {
+  // a strategy whose skill is withdrawn from the mapping is kept here, ready, but not published
+  const strategies = M.strategies.filter((s) => !s.withheld).map((s) => {
     const inst = P(pick(s.family, "practice", (x) => inSkill(s, x) && (!s.example || s.example(P(x))), "typed"));
     const guided = pick(s.family, "practice", (x) => inSkill(s, x), "any");
     const check = pick(s.family, "check", (x) => inSkill(s, x), "any");

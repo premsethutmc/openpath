@@ -11981,11 +11981,10 @@
       ],
       "content": {
         "chapterScreens": 4,
-        "strategies": 8,
+        "strategies": 7,
         "eligibleStrategies": [
           "read_with_key",
           "table",
-          "half_pictures",
           "half_pictures_total",
           "compare_rows",
           "draw_from_table",
@@ -12004,8 +12003,6 @@
           "gen:acpict:1,11,0",
           "gen:acpict:1,11,2:mc",
           "gen:acpict:1,26,1:mc",
-          "gen:acpicthalf:2,5,2,0:mc",
-          "gen:acpicthalf:1,23,3,0:mc",
           "gen:acpicthalf:3,0,0,1:mc",
           "gen:acpicthalf:1,27,0,1",
           "gen:acpictmore:3,8,4:mc",
@@ -12019,9 +12016,9 @@
         ]
       },
       "status": "partial",
-      "mapping": "pictographs-subskills@1",
+      "mapping": "pictographs-subskills@2",
       "unmappedFamilies": [],
-      "unclassifiedQuestions": 30,
+      "unclassifiedQuestions": 75,
       "skills": [
         {
           "skill": "pictographs.read-with-key@1",
@@ -12051,34 +12048,6 @@
           "examples": {
             "check": "gen:acpict:1,21,3",
             "retention": "gen:acpict:3,6,1"
-          }
-        },
-        {
-          "skill": "pictographs.half-symbol@1",
-          "parameters": [
-            {
-              "index": 3,
-              "values": [
-                0
-              ]
-            }
-          ],
-          "status": "connected-answer-chain",
-          "gaps": [],
-          "strategies": [
-            "half_pictures"
-          ],
-          "freshChecks": 45,
-          "retention": 55,
-          "diagnosticPredictions": [
-            "half-as-whole",
-            "half-left-out",
-            "no-key"
-          ],
-          "working": "unsupported",
-          "examples": {
-            "check": "gen:acpicthalf:0,8,1,0",
-            "retention": "gen:acpicthalf:2,14,3,0"
           }
         },
         {

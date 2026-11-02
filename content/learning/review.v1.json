@@ -45258,7 +45258,7 @@
    "competency": "MATH.statistics.pictographs",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "61ca7e96",
+   "contentHash": "47586579",
    "state": "draft",
    "history": [
     {
@@ -45315,6 +45315,14 @@
      "role": "engineer",
      "at": "2026-11-02T08:11:32.247Z",
      "contentHash": "61ca7e96",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-02T09:19:57.132Z",
+     "contentHash": "47586579",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

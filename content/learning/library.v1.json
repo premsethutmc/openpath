@@ -1861,50 +1861,6 @@
      "check": "gen:acpict:1,26,1:mc"
     },
     {
-     "id": "half_pictures",
-     "title": "Half pictures",
-     "kind": "conceptual",
-     "scope": {
-      "family": "acpicthalf",
-      "subSkill": "pictographs.half-symbol@1"
-     },
-     "needs": [],
-     "screens": [
-      {
-       "title": "Half pictures",
-       "text": [
-        "A whole picture stands for the key; a half picture stands for half the key.",
-        "Count the row in halves: a whole picture is two halves and a half picture is one. Then multiply the number of halves by half the key."
-       ],
-       "math": [
-        "The pictograph shows the favourite games of the children of a school. Each ● stands for 20 children, and a half ● stands for 10. How many children chose Kho-kho?",
-        "Count in half pictures for Kho-kho: 13 halves",
-        "13 halves × 10 = 130 children"
-       ],
-       "role": "strategy",
-       "instance": "gen:acpicthalf:3,2,2,0",
-       "widget": {
-        "type": "pictograph",
-        "labels": [
-         "Kabaddi",
-         "Cricket",
-         "Kho-kho",
-         "Football"
-        ],
-        "counts": [
-         70,
-         130,
-         130,
-         120
-        ],
-        "key": 20
-       }
-      }
-     ],
-     "guided": "gen:acpicthalf:2,5,2,0:mc",
-     "check": "gen:acpicthalf:1,23,3,0:mc"
-    },
-    {
      "id": "half_pictures_total",
      "title": "The total with half pictures",
      "kind": "procedural",

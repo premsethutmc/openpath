@@ -215,7 +215,12 @@ Grading semantics did not change: every changed family's specification fingerpri
 
 **Half pictures.** The generator's half-symbol questions may ask about a row with no half picture, so `half_pictures` uses only rows with an odd number of halves for its worked example, guided question and check. Both half-picture texts count in halves (the generator's own method), so they hold when halves do not pair up.
 
-**Open runtime defect (integration finding): the half-symbol mapping.** The authored examples filter above does not fix the runtime mapping. `pictographs.half-symbol@1` maps every `acpicthalf` q = 0 task. The skill should mean "the asked row holds a half picture", that is `halves(ki, s)[j]` odd. That is a joint condition on key, seed and row, which per-index `parameters` cannot express. So 197 of the 472 valid tasks (100 of the 242 served) still earn half-symbol credit for a whole-picture row. Reproducer: `gen:acpicthalf:0,8,1,0`, two halves, one whole picture. `HALF_SYMBOL_ROWS` (`subskill-config-scale.ts`) enumerates the 275 genuine `(ki, s, j)`, ready for a versioned `pictographs-subskills@2` once Codex extends the contract (a tuple list or a problem predicate). The regression tests ("half-symbol runtime" in `scale-pattern.test.ts`) cover classification, projection credit, and assessment/retention/recovery selection. They are `todo` and currently fail for exactly this reason; they become plain tests with the fix.
+**Half-symbol rows withdrawn from evidence (mapping `pictographs-subskills@2`).** Mapping @1 credited every `acpicthalf` row question (q = 0) as `pictographs.half-symbol@1`, including rows of whole pictures only. Reproducer: `gen:acpicthalf:0,8,1,0`, two halves, one whole picture; 197 of 472 valid tasks are like this.
+- **The limitation:** the precise condition (the asked row holds a half picture, `halves(ki, s)[j]` odd) is joint over key, seed and row. Per-index `parameters` cannot express it, and duplicate skill ids are not used.
+- **What @2 changes:** the row questions are unmapped. They are still served and graded and earn ordinary answer credit, but they earn no skill evidence. The totals skill (q = 1) is unchanged. The `half_pictures` explanation is withheld (kept in `scale-blueprints.mts`, not published).
+- **Protection** (plain tests in `scale-pattern.test.ts`): no row question classifies to any skill (typed or multiple-choice); a correct answer is credited but no pictograph skill is demonstrated; no pictograph skill's assessment, retention or recovery selects a row question.
+- **Pending restoration** (`todo`, **not counted as protection**): genuine-row inclusion, projection credit and selection. They are enabled once Codex extends the contract.
+- **Data for that version:** `HALF_SYMBOL_ROWS` (275 genuine `(ki, s, j)`). The version number is to be coordinated with Codex's replay handling.
 
 **Misconception teaching.** Only `fix_assume_tens` (scaled-bars.read) is added: its evidence is a numeric wrong answer and it needs no contrast item. It is never general teaching (`addresses: "assume-tens"`): with `assume-tens` evidence it is eligible for scaled-bars.read only (tested). The contrast-dependent fixes (`one-each`, `face-value`, `value-not-count`) are **not** added: they need contrast declarations, which belong with Codex's diagnosis integration.
 
@@ -224,7 +229,7 @@ Grading semantics did not change: every changed family's specification fingerpri
 | Sub-skill | Teaching (same skill, pending review) | Guided | Fresh check | Delayed check | Recovery |
 |---|---|---|---|---|---|
 | pictographs.read-with-key | read_with_key, table | yes | yes | yes | yes |
-| pictographs.half-symbol | half_pictures | yes | yes | yes | yes |
+| pictographs.half-symbol | **withdrawn in @2** (no skill evidence until the contract extension) | – | – | – | – |
 | pictographs.half-symbol-total | half_pictures_total | yes | yes | yes | yes |
 | pictographs.compare-rows | compare_rows | yes | yes | yes | yes |
 | pictographs.draw-from-table | draw_from_table | yes | yes | yes | yes |
@@ -241,9 +246,9 @@ Grading semantics did not change: every changed family's specification fingerpri
 | place-value.left-over-ones | left_over_ones | yes | yes | yes | yes |
 | place-value.grouped-total | grouped_total | yes | yes | yes | yes |
 
-**Coverage, kept separate (17 skills):** teaching 17 (pending review, demonstration only); assessment 17; recovery 17; retention 17.
+**Coverage, kept separate (16 mapped skills after @2; half-symbol withdrawn):** teaching 16 (pending review, demonstration only); assessment 16; recovery 16; retention 16.
 
-**Journeys** (`scale-pattern.test.ts`, 44/44; the test also checks every current revision is `pending_review`): for each of the 21 general strategies, teach → guided (the strategy's own question, same skill) → independent fresh check (same skill, not a taught or guided example) → reload keeps the check. The delayed check and recovery paths are the per-skill foundation journeys of section 2. **Blocked paths:** none for these skills in demonstration mode; under supervised evaluation, none teach until an educator approves (by design).
+**Journeys** (`scale-pattern.test.ts`, 46 pass, 3 pending `todo`; the test also checks every current revision is `pending_review`): for each of the 20 general strategies, teach → guided (the strategy's own question, same skill) → independent fresh check (same skill, not a taught or guided example) → reload keeps the check. The delayed check and recovery paths are the per-skill foundation journeys of section 2. **Blocked paths:** none for these skills in demonstration mode; under supervised evaluation, none teach until an educator approves (by design).
 
 ### 5. Next mapping group: "change between units by a fixed factor"
 
@@ -265,7 +270,7 @@ Unmapped with reasons: `acbill`, `acmoneyadd`, `acmoneymul` (money arithmetic, n
 
 ### 6. Decisions for Codex
 
-0. **Mapping contract: joint parameter conditions** (half-symbol runtime defect, section 4). Extend `SubSkillDef` with an enumerated tuple list or a problem predicate. Until then, choose: keep @1 (false credit on whole-picture rows) or unmap `acpicthalf` q = 0 (no false credit, but no genuine half-row evidence either).
+0. **Mapping contract: joint parameter conditions** (section 4). Extend `SubSkillDef` with an enumerated tuple list or a problem predicate. Decided meanwhile: row questions are unmapped (@2). With the contract change, Claude adds a new mapping version using `HALF_SYMBOL_ROWS` and enables the three pending tests; the version number is coordinated with replay handling.
 
 1. **Unscoped prerequisite strategies** (`check_what_it_uses` in template modules): should `strategyConnects` exclude `kind: "prerequisite"` or strategies with no scope? Today they count as same-skill teaching by chance (two skills above, and previously `scaled-bars.total`).
 2. **Contrast declarations** for `one-each` (pictographs), `face-value` and `value-not-count` (place value): the candidates on `feat/math-teaching-content` are ready to scope once contrast items are declared.
