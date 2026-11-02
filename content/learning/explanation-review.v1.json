@@ -28522,6 +28522,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:a823196c273d574096e1331b3fc57d90b8c9fdded85ae039911b72a1bf1663a3",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.845Z",
+      "note": "content changed: the decision on sha256:463e75d7d7a7 (revision_required) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:463e75d7d7a7b65afeee8ca8d4b354a709e1590f94a392f85fcc6b981f62df7f"
     }
    ]
   },
@@ -28548,6 +28564,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:5ad2b454ef6accbb40cdc5dcd3c2824b09c6f98d68290aa570c00476f146c434",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.857Z",
+      "note": "content changed: the decision on sha256:28ec8878af6f (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:28ec8878af6f24dcd9f7d57f55f4e00a0c12236bf3bd30175892753618baa902"
     }
    ]
   },
@@ -28606,6 +28638,152 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:a3966770d3ea2ca884a3e25791d6559e337b4e442e661eb48691a8d9043e27da",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.845Z",
+      "note": "content changed: the decision on sha256:7ed3051265c3 (revision_required) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:7ed3051265c31cc56644890fd3dfceae6518fa125b037559f027bc3fd1869d24"
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.place-value-tens#count_tens",
+   "subject": "mathematics",
+   "competency": "MATH.number.place-value-tens",
+   "strategy": "count_tens",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:d14847aac02b06ea588401e8c308d4f5387728284af6574516e8aa4f75e35b51",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.847Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.place-value-tens#full_tens",
+   "subject": "mathematics",
+   "competency": "MATH.number.place-value-tens",
+   "strategy": "full_tens",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:632630c4f1975f5b3161d28e396d2abc9e439d7790c739dd1a53dc3edba474b8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.849Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.place-value-tens#grouped_total",
+   "subject": "mathematics",
+   "competency": "MATH.number.place-value-tens",
+   "strategy": "grouped_total",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:5adccfb95f9d386d286c2257721f0c1b17b9d88100681fcdcbd810a4efcc1d25",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.856Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.place-value-tens#left_over_ones",
+   "subject": "mathematics",
+   "competency": "MATH.number.place-value-tens",
+   "strategy": "left_over_ones",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:fd1758ee66411d61d76ef1cc0c3aa8c8e7d6415d620f98c4c25282f8604e5289",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.849Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.place-value-tens#ones_digit_value",
+   "subject": "mathematics",
+   "competency": "MATH.number.place-value-tens",
+   "strategy": "ones_digit_value",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:6851c1b03a459d56879f953fb03cf3e799c836e27773863ad464838cd75b7ef8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.848Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
     }
    ]
   },
@@ -28632,6 +28810,32 @@
      "knownIssues": [
       "State or show '3 long blocks and 4 cubes' and walk 10, 20, 30, 31...34; 'Not 7, but 34' is opaque without the picture."
      ],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.place-value-tens#tens_digit_value",
+   "subject": "mathematics",
+   "competency": "MATH.number.place-value-tens",
+   "strategy": "tens_digit_value",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:dddb8fd78cf9f7aa50cdc1edb6c0dd66ddfe2beca52e0d0970e53008a10ac43b",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.846Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
      "scope": [
       "demonstration"
      ]
@@ -37757,6 +37961,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:3e108acd2717653f0849695ff3eac74d93c7fa5f2eb3120f2865d7a813ee924a",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.838Z",
+      "note": "content changed: the decision on sha256:40aceee4e31c (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:40aceee4e31c31494aee9aab06bc25ef44a72fe28b3dedc359e08d8a8b98e080"
     }
    ]
   },
@@ -37776,6 +37996,188 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.279Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.pictographs#compare_rows",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.pictographs",
+   "strategy": "compare_rows",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:65d84fa2cb5f5087bc6f1eb5e9cc9bb25330c367b8916e560e877d544f3ec624",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.834Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.pictographs#draw_from_table",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.pictographs",
+   "strategy": "draw_from_table",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:dc440e6054da835eb77be4b7886b5786d20f3da1ee7cf7585723d60a7ac21053",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.835Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.pictographs#half_pictures",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.pictographs",
+   "strategy": "half_pictures",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:d5addc0116a25385ee8784aaca1f1616de6e8e853d8768d329a32ed393a3fd25",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.831Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.pictographs#half_pictures_total",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.pictographs",
+   "strategy": "half_pictures_total",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:517fe8e05e7370225b49d65fcc013aba30ad3edb8dde2777161a549316f9c188",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.832Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.pictographs#largest_group",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.pictographs",
+   "strategy": "largest_group",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:b7fd739dfb5b0d582f73e650943f33b67de5e168572d9f91a8dc178af033d421",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.837Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.pictographs#pictograph_total",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.pictographs",
+   "strategy": "pictograph_total",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:843ec226cecad327be495d91aa68348068a6b8f0718f8243bbdb60d12591ffb3",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.836Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.pictographs#read_with_key",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.pictographs",
+   "strategy": "read_with_key",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:88de001554700a4b2f77b5fb0b7227d0fa96b86ea1442a454e19955cea97ff9e",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.826Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -37835,6 +38237,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:7c425ee5e0b19e866511f6c0178a047eaae870978e30274484932310a85646e0",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.829Z",
+      "note": "content changed: the decision on sha256:994526f43aaa (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:994526f43aaa378808c5376130b46d6d768cfac262b084209c62f02666b68079"
     }
    ]
   },
@@ -38099,6 +38517,58 @@
    ]
   },
   {
+   "id": "MATH.statistics.scaled-bars#bars_difference",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.scaled-bars",
+   "strategy": "bars_difference",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:cf3a432af4d6cc73b1a6ed7346df54d7aec5901510ebe94cd074f5a096a9c6e8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.841Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.scaled-bars#bars_total",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.scaled-bars",
+   "strategy": "bars_total",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:16a43ae80db1009b702a15b52dfdc4357b6fbbd9135a5bc1d19082b39499cee1",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.841Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.statistics.scaled-bars#chapter",
    "subject": "mathematics",
    "competency": "MATH.statistics.scaled-bars",
@@ -38121,6 +38591,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:7d7ee20d30558492e5e51938185a7ccc448bc5ea6b5e9c66d82b41d597917cf2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.843Z",
+      "note": "content changed: the decision on sha256:e85262823ddf (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:e85262823ddf963e20382aa3bb7fe789348509bec7f8dfea4222487653c1164d"
     }
    ]
   },
@@ -38140,6 +38626,32 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.336Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.scaled-bars#fix_assume_tens",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.scaled-bars",
+   "strategy": "fix_assume_tens",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "assume-tens",
+   "revisions": [
+    {
+     "contentHash": "sha256:c41736682cfa85716dbcaf9b5dead4a447380ed85370037301a4a0e4156ddaa5",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.843Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -38173,6 +38685,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:1fc3acc9ae90e6872c605af6494f0c8da984636689d539e9900347bc84cbec65",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T08:11:20.840Z",
+      "note": "content changed: the decision on sha256:c22b9a05a471 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:c22b9a05a4717f96d5036746543786b99ba9a97bc3902f6efb2881d124b5ee9a"
     }
    ]
   },

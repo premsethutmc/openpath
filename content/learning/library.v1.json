@@ -1648,6 +1648,1365 @@
    }
   },
   {
+   "competency": "MATH.statistics.pictographs",
+   "title": "Reading a pictograph with a key",
+   "chapter": [
+    {
+     "title": "Reading a pictograph with a key",
+     "text": [
+      "In a pictograph every picture stands for the same number of things: the number in the key.",
+      "One picture does not always stand for one thing. Count the pictures, then use the key."
+     ],
+     "widget": {
+      "type": "pictograph",
+      "labels": [
+       "Kabaddi",
+       "Cricket",
+       "Kho-kho",
+       "Football"
+      ],
+      "counts": [
+       80,
+       10,
+       40,
+       10
+      ],
+      "key": 10
+     },
+     "math": [
+      "The pictograph shows the favourite games of the children of a school. Each ● stands for 10 children. How many children chose Cricket?",
+      "The row for Cricket has 1 picture",
+      "1 pictures × 10 = 10"
+     ],
+     "role": "concept",
+     "instance": "gen:acpict:3,11,1"
+    },
+    {
+     "title": "Comparing two rows of a pictograph",
+     "text": [
+      "\"How many more\" compares two amounts: it is the bigger amount minus the smaller one.",
+      "Read both rows using the key, then take the smaller number from the bigger one."
+     ],
+     "math": [
+      "The pictograph shows the favourite games of the children of a school. Each ● stands for 1 child. How many more children chose Cricket than Kabaddi?",
+      "8 pictures × 1 = 8",
+      "3 pictures × 1 = 3",
+      "8 − 3 = 5"
+     ],
+     "widget": {
+      "type": "pictograph",
+      "labels": [
+       "Kabaddi",
+       "Cricket",
+       "Kho-kho",
+       "Football"
+      ],
+      "counts": [
+       3,
+       8,
+       7,
+       8
+      ],
+      "key": 1
+     }
+    },
+    {
+     "title": "Pictographs and tables: completing, totals and the largest group",
+     "text": [
+      "Every picture stands for the key's number of children, so the number of pictures is the number of children shared into groups of the key, and the children are the pictures times the key.",
+      "To draw a row, divide the number by the key. To read the pictograph, count the pictures and multiply by the key; for the total, add all the pictures first."
+     ],
+     "math": [
+      "The table shows the favourite fruits of the children of a school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Guava?",
+      "16 children ÷ 2 = 8 pictures"
+     ],
+     "widget": {
+      "type": "pictograph",
+      "labels": [
+       "Mango",
+       "Banana",
+       "Guava",
+       "Apple"
+      ],
+      "counts": [
+       12,
+       12,
+       16,
+       8
+      ],
+      "key": 2
+     }
+    },
+    {
+     "title": "Reading a pictograph with half pictures",
+     "text": [
+      "A whole picture stands for the key; a half picture stands for half the key.",
+      "Count the whole pictures and multiply by the key, then add half the key for a half picture."
+     ],
+     "math": [
+      "The pictograph shows how the children of a school come to school. Each ● stands for 4 children, and a half ● stands for 2. How many children chose Cycle?",
+      "Count in half pictures for Cycle: 15 halves",
+      "15 halves × 2 = 30 children"
+     ],
+     "widget": {
+      "type": "pictograph",
+      "labels": [
+       "Walk",
+       "Bus",
+       "Cycle",
+       "Auto"
+      ],
+      "counts": [
+       28,
+       6,
+       30,
+       4
+      ],
+      "key": 4
+     }
+    }
+   ],
+   "diagnostics": [
+    "gen:acpict:2,2,1",
+    "gen:acpict:2,15,3",
+    "gen:acpict:2,27,2"
+   ],
+   "strategies": [
+    {
+     "id": "read_with_key",
+     "title": "Read a row with the key",
+     "kind": "procedural",
+     "scope": {
+      "family": "acpict",
+      "subSkill": "pictographs.read-with-key@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Read a row with the key",
+       "text": [
+        "Every picture in the row stands for the key's number, not for one.",
+        "Count the pictures in the row, then multiply by the key."
+       ],
+       "math": [
+        "The pictograph shows the favourite fruits of the children of a school. Each ● stands for 5 children. How many children chose Guava?",
+        "The row for Guava has 4 pictures",
+        "4 pictures × 5 = 20"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpict:2,3,2",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Mango",
+         "Banana",
+         "Guava",
+         "Apple"
+        ],
+        "counts": [
+         40,
+         25,
+         20,
+         25
+        ],
+        "key": 5
+       }
+      }
+     ],
+     "guided": "gen:acpict:1,11,3",
+     "check": "gen:acpict:1,11,0"
+    },
+    {
+     "id": "table",
+     "title": "Turn it into a table",
+     "kind": "procedural",
+     "scope": {
+      "family": "acpict",
+      "subSkill": "pictographs.read-with-key@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Turn it into a table",
+       "text": [
+        "Write each label with its number of pictures.",
+        "Multiply each by the key and write the real number beside it."
+       ],
+       "math": [
+        "The pictograph shows the favourite games of the children of a school. Each ● stands for 10 children. How many children chose Kho-kho?",
+        "The row for Kho-kho has 7 pictures",
+        "7 pictures × 10 = 70"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpict:3,14,2",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Kabaddi",
+         "Cricket",
+         "Kho-kho",
+         "Football"
+        ],
+        "counts": [
+         70,
+         20,
+         70,
+         60
+        ],
+        "key": 10
+       }
+      }
+     ],
+     "guided": "gen:acpict:1,11,2:mc",
+     "check": "gen:acpict:1,26,1:mc"
+    },
+    {
+     "id": "half_pictures",
+     "title": "Half pictures",
+     "kind": "conceptual",
+     "scope": {
+      "family": "acpicthalf",
+      "subSkill": "pictographs.half-symbol@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Half pictures",
+       "text": [
+        "A whole picture stands for the key; a half picture stands for half the key.",
+        "Count the row in halves: a whole picture is two halves and a half picture is one. Then multiply the number of halves by half the key."
+       ],
+       "math": [
+        "The pictograph shows the favourite games of the children of a school. Each ● stands for 20 children, and a half ● stands for 10. How many children chose Kho-kho?",
+        "Count in half pictures for Kho-kho: 13 halves",
+        "13 halves × 10 = 130 children"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicthalf:3,2,2,0",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Kabaddi",
+         "Cricket",
+         "Kho-kho",
+         "Football"
+        ],
+        "counts": [
+         70,
+         130,
+         130,
+         120
+        ],
+        "key": 20
+       }
+      }
+     ],
+     "guided": "gen:acpicthalf:2,5,2,0:mc",
+     "check": "gen:acpicthalf:1,23,3,0:mc"
+    },
+    {
+     "id": "half_pictures_total",
+     "title": "The total with half pictures",
+     "kind": "procedural",
+     "scope": {
+      "family": "acpicthalf",
+      "subSkill": "pictographs.half-symbol-total@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "The total with half pictures",
+       "text": [
+        "Count every row in halves: a whole picture is two halves and a half picture is one.",
+        "Add the halves of all the rows, then multiply by half the key."
+       ],
+       "math": [
+        "The pictograph shows the favourite games of the children of a school. Each ● stands for 4 children, and a half ● stands for 2. How many children are there in all?",
+        "Count in half pictures for all rows: 35 halves",
+        "35 halves × 2 = 70 children"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicthalf:1,29,0,1",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Kabaddi",
+         "Cricket",
+         "Kho-kho",
+         "Football"
+        ],
+        "counts": [
+         12,
+         18,
+         24,
+         16
+        ],
+        "key": 4
+       }
+      }
+     ],
+     "guided": "gen:acpicthalf:3,0,0,1:mc",
+     "check": "gen:acpicthalf:1,27,0,1"
+    },
+    {
+     "id": "compare_rows",
+     "title": "How many more, with the key",
+     "kind": "procedural",
+     "scope": {
+      "family": "acpictmore",
+      "subSkill": "pictographs.compare-rows@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "How many more, with the key",
+       "text": [
+        "\"How many more\" compares two amounts: it is the bigger amount minus the smaller one.",
+        "Read both rows using the key, then take the smaller number from the bigger one."
+       ],
+       "math": [
+        "The pictograph shows the favourite fruits of the children of a school. Each ● stands for 10 children. How many more children chose Apple than Guava?",
+        "8 pictures × 10 = 80",
+        "7 pictures × 10 = 70",
+        "80 − 70 = 10"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpictmore:3,18,5",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Mango",
+         "Banana",
+         "Guava",
+         "Apple"
+        ],
+        "counts": [
+         30,
+         80,
+         70,
+         80
+        ],
+        "key": 10
+       }
+      }
+     ],
+     "guided": "gen:acpictmore:3,8,4:mc",
+     "check": "gen:acpictmore:3,26,5"
+    },
+    {
+     "id": "draw_from_table",
+     "title": "Draw a row from a table",
+     "kind": "conceptual",
+     "scope": {
+      "family": "acpicttab",
+      "subSkill": "pictographs.draw-from-table@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Draw a row from a table",
+       "text": [
+        "The key says how many each picture stands for.",
+        "To draw a row, share the number into groups of the key: one picture for each group, not one for each thing."
+       ],
+       "math": [
+        "The table shows the favourite games of the children of a school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Cricket?",
+        "4 children ÷ 2 = 2 pictures"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicttab:0,17,1,0",
+       "widget": {
+        "type": "table",
+        "head": [
+         "Choice",
+         "Children"
+        ],
+        "rows": [
+         [
+          "Kabaddi",
+          12
+         ],
+         [
+          "Cricket",
+          4
+         ],
+         [
+          "Kho-kho",
+          16
+         ],
+         [
+          "Football",
+          16
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:acpicttab:0,19,1,0:mc",
+     "check": "gen:acpicttab:0,22,1,0:mc"
+    },
+    {
+     "id": "pictograph_total",
+     "title": "The total of a pictograph",
+     "kind": "procedural",
+     "scope": {
+      "family": "acpicttab",
+      "subSkill": "pictographs.total@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "The total of a pictograph",
+       "text": [
+        "Add the pictures in all the rows first.",
+        "Then multiply the number of pictures by the key."
+       ],
+       "math": [
+        "The pictograph shows how the children of a school come to school. Each ● stands for 2 children. How many children are there in all?",
+        "There are 2 + 4 + 8 + 6 = 20 pictures in all",
+        "20 pictures × 2 = 40 children"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicttab:0,13,0,1",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Walk",
+         "Bus",
+         "Cycle",
+         "Auto"
+        ],
+        "counts": [
+         4,
+         8,
+         16,
+         12
+        ],
+        "key": 2
+       }
+      }
+     ],
+     "guided": "gen:acpicttab:2,16,0,1:mc",
+     "check": "gen:acpicttab:1,0,0,1:mc"
+    },
+    {
+     "id": "largest_group",
+     "title": "The largest group",
+     "kind": "procedural",
+     "scope": {
+      "family": "acpicttab",
+      "subSkill": "pictographs.largest-group@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "The largest group",
+       "text": [
+        "The row with the most pictures is the largest group.",
+        "Count its pictures and multiply by the key: the answer is the number of things, not the number of pictures."
+       ],
+       "math": [
+        "The pictograph shows the favourite games of the children of a school. Each ● stands for 2 children. How many children are in the largest group?",
+        "The longest row has 8 pictures",
+        "8 pictures × 2 = 16 children"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicttab:0,17,0,2",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Kabaddi",
+         "Cricket",
+         "Kho-kho",
+         "Football"
+        ],
+        "counts": [
+         12,
+         4,
+         16,
+         16
+        ],
+        "key": 2
+       }
+      }
+     ],
+     "guided": "gen:acpicttab:2,5,0,2",
+     "check": "gen:acpicttab:2,16,0,2"
+    }
+   ],
+   "practice": [
+    "gen:acpict:0,3,2",
+    "gen:acpict:3,6,3:mc",
+    "gen:acpict:3,11,2",
+    "gen:acpictmore:0,3,2",
+    "gen:acpicttab:2,7,0,1",
+    "gen:acpicthalf:3,1,3,0"
+   ],
+   "transfer": [
+    "gen:acpict:0,3,3:mc",
+    "gen:acpictmore:0,2,1:w",
+    "gen:acpicttab:0,6,0,2:w"
+   ],
+   "retention": [
+    "gen:acpict:3,6,1",
+    "gen:acpictmore:0,3,3:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "acpict",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "acpict",
+     "version": "1.0.0"
+    },
+    {
+     "family": "acpictmore",
+     "version": "1.0.0"
+    },
+    {
+     "family": "acpicttab",
+     "version": "1.0.0"
+    },
+    {
+     "family": "acpicthalf",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "acpict",
+    "seed": [
+     3,
+     11,
+     1
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:acpict:3,11,1"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.statistics.scaled-bars",
+   "title": "Reading a bar chart with a scale",
+   "chapter": [
+    {
+     "title": "Reading a bar chart with a scale",
+     "text": [
+      "On a scaled bar chart each line on the side stands for more than one. The height of a bar is read off the scale, not by counting the lines as ones."
+     ],
+     "widget": {
+      "type": "bars",
+      "title": "Saplings planted by each class",
+      "labels": [
+       "Class 1",
+       "Class 2",
+       "Class 3",
+       "Class 4",
+       "Class 5"
+      ],
+      "values": [
+       100,
+       450,
+       350,
+       400,
+       100
+      ],
+      "scale": 50
+     },
+     "math": [
+      "The bar chart shows saplings planted by each class. Read the scale carefully. How many saplings were planted by Class 2?",
+      "The bar reaches 9 lines; each line is 50, so it shows 450"
+     ],
+     "role": "concept",
+     "instance": "gen:afbar:4,0,3"
+    }
+   ],
+   "diagnostics": [
+    "gen:afbar:3,2,6",
+    "gen:afbar:1,1,9",
+    "gen:afbar:0,2,1"
+   ],
+   "strategies": [
+    {
+     "id": "skip_count",
+     "title": "Skip-count up the scale",
+     "kind": "procedural",
+     "scope": {
+      "family": "afbar",
+      "subSkill": "scaled-bars.read@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Skip-count up the scale",
+       "text": [
+        "Find how much one line stands for from two numbers next to each other on the scale.",
+        "Put a finger at the bottom of the bar and count up the lines in steps of the scale; stop at the top of the bar."
+       ],
+       "math": [
+        "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Tuesday?",
+        "The bar reaches 3 lines; each line is 2, so it shows 6"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:0,0,5",
+       "widget": {
+        "type": "bars",
+        "title": "Mangoes sold at a shop",
+        "labels": [
+         "Mon",
+         "Tue",
+         "Wed",
+         "Thu",
+         "Fri"
+        ],
+        "values": [
+         14,
+         6,
+         8,
+         18,
+         20
+        ],
+        "scale": 2
+       }
+      }
+     ],
+     "guided": "gen:afbar:4,0,8:mc",
+     "check": "gen:afbar:0,0,2:mc"
+    },
+    {
+     "id": "bars_difference",
+     "title": "How many more, read against the scale",
+     "kind": "procedural",
+     "scope": {
+      "family": "afbar",
+      "subSkill": "scaled-bars.difference@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "How many more, read against the scale",
+       "text": [
+        "Read both bars against the scale.",
+        "\"How many more\" is the bigger value minus the smaller one."
+       ],
+       "math": [
+        "The bar chart shows saplings planted by each class. Read the scale carefully. How many more saplings were planted by Class 1 than by Class 2?",
+        "The bar reaches 9 lines; each line is 10, so it shows 90",
+        "The bar reaches 3 lines; each line is 10, so it shows 30",
+        "How many more: 90 − 30 = 60"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:2,1,3",
+       "widget": {
+        "type": "bars",
+        "title": "Saplings planted by each class",
+        "labels": [
+         "Class 1",
+         "Class 2",
+         "Class 3",
+         "Class 4",
+         "Class 5"
+        ],
+        "values": [
+         90,
+         30,
+         10,
+         90,
+         90
+        ],
+        "scale": 10
+       }
+      }
+     ],
+     "guided": "gen:afbar:2,1,2:mc",
+     "check": "gen:afbar:2,1,5:mc"
+    },
+    {
+     "id": "bars_total",
+     "title": "Two bars together",
+     "kind": "procedural",
+     "scope": {
+      "family": "afbar",
+      "subSkill": "scaled-bars.total@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Two bars together",
+       "text": [
+        "Read both bars against the scale.",
+        "\"Together\" means add the two values."
+       ],
+       "math": [
+        "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Tuesday and on Monday together?",
+        "The bar reaches 7 lines; each line is 5, so it shows 35",
+        "The bar reaches 8 lines; each line is 5, so it shows 40",
+        "Together: 35 + 40 = 75"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:1,2,17",
+       "widget": {
+        "type": "bars",
+        "title": "Mangoes sold at a shop",
+        "labels": [
+         "Mon",
+         "Tue",
+         "Wed",
+         "Thu",
+         "Fri"
+        ],
+        "values": [
+         40,
+         35,
+         10,
+         5,
+         10
+        ],
+        "scale": 5
+       }
+      }
+     ],
+     "guided": "gen:afbar:1,2,16:mc",
+     "check": "gen:afbar:1,2,14:mc"
+    },
+    {
+     "id": "fix_assume_tens",
+     "title": "Read the scale; do not assume ten",
+     "kind": "procedural",
+     "scope": {
+      "family": "afbar",
+      "subSkill": "scaled-bars.read@1"
+     },
+     "addresses": "assume-tens",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Read the scale; do not assume ten: what went wrong",
+       "text": [
+        "Each line was taken as ten. Read the numbers on the scale: they tell how much each line stands for.",
+        "Do not assume ten: two numbers next to each other on the scale differ by the size of one line."
+       ],
+       "math": [
+        "Not 40, but 8"
+       ],
+       "role": "misconception",
+       "instance": "gen:afbar:0,0,7",
+       "widget": {
+        "type": "bars",
+        "title": "Saplings planted by each class",
+        "labels": [
+         "Class 1",
+         "Class 2",
+         "Class 3",
+         "Class 4",
+         "Class 5"
+        ],
+        "values": [
+         10,
+         20,
+         8,
+         20,
+         6
+        ],
+        "scale": 2
+       }
+      },
+      {
+       "title": "Read the scale; do not assume ten: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "The bar chart shows saplings planted by each class. Read the scale carefully. How many saplings were planted by Class 3?",
+        "The bar reaches 4 lines; each line is 2, so it shows 8"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:0,0,7"
+      }
+     ],
+     "guided": "gen:afbar:0,0,4:mc",
+     "check": "gen:afbar:0,0,3"
+    }
+   ],
+   "practice": [
+    "gen:afbar:1,2,13",
+    "gen:afbar:1,2,12:mc",
+    "gen:afbar:4,0,2"
+   ],
+   "transfer": [
+    "gen:afbar:4,0,1:mc"
+   ],
+   "retention": [
+    "gen:afbar:3,2,7",
+    "gen:afbar:3,2,4:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "afbar",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "afbar",
+    "seed": [
+     4,
+     0,
+     3
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:afbar:4,0,3"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.number.place-value-tens",
+   "title": "Tens and ones: what number do the blocks show",
+   "chapter": [
+    {
+     "title": "Tens and ones: what number do the blocks show",
+     "text": [
+      "A long block is a ten and a small cube is a one. The number is the tens and the ones together."
+     ],
+     "widget": {
+      "type": "blocks",
+      "hundreds": 0,
+      "tens": 3,
+      "ones": 3
+     },
+     "math": [
+      "What number do the blocks in the picture show?",
+      "3 tens are 30.",
+      "3 ones.",
+      "30 and 3 make 33."
+     ],
+     "role": "concept",
+     "instance": "gen:aatens:3,3"
+    },
+    {
+     "title": "The value of a digit in a two-digit number",
+     "text": [
+      "Where a digit stands tells what it is worth: in 47 the 4 is in the tens place, so it means 4 tens, which is 40.",
+      "Find the digit. If it is the first of two digits, it counts tens: its value is that digit times 10."
+     ],
+     "math": [
+      "In 56, what is the value of the digit 6?",
+      "In 56, the last digit is in the ones place.",
+      "So the answer is 6."
+     ],
+     "widget": {
+      "type": "blocks",
+      "hundreds": 0,
+      "tens": 5,
+      "ones": 6
+     }
+    },
+    {
+     "title": "The greatest and smallest two-digit number from digit cards",
+     "text": [
+      "In a two-digit number the tens digit matters most: 71 is more than 17 because 7 tens is more than 1 ten.",
+      "For the greatest, put the biggest digit in the tens place and the next biggest in the ones. For the smallest, put the smallest digit that is not 0 in the tens place."
+     ],
+     "math": [
+      "Use two of the digit cards in the picture (9, 7, 3) to make the smallest two-digit number you can. Use each card only once. Which number is it?",
+      "Tens place: 3.",
+      "Ones place: 7."
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Card",
+       "Card",
+       "Card"
+      ],
+      "rows": [
+       [
+        9,
+        7,
+        3
+       ]
+      ]
+     }
+    },
+    {
+     "title": "Writing a number name as a number",
+     "text": [
+      "A number name tells the tens and the ones: sixty-three is 6 tens and 3 ones, written 63. The '-ty' words are tens; the '-teen' words are 1 ten and some ones.",
+      "Find the tens word (twenty, thirty …) and write its digit first; then write the ones digit. A '-teen' number starts with 1."
+     ],
+     "math": [
+      "Write \"ninety\" as a number.",
+      "9 tens",
+      "and 0 ones."
+     ],
+     "widget": {
+      "type": "blocks",
+      "hundreds": 0,
+      "tens": 9,
+      "ones": 0
+     }
+    },
+    {
+     "title": "Counting a collection by making groups of ten",
+     "text": [
+      "Counting a big collection is easier in groups of ten: 4 groups of ten and 7 more is 47.",
+      "Circle ten at a time, crossing them out as you go, until fewer than ten are left. The groups are the tens digit and the ones left are the ones digit."
+     ],
+     "math": [
+      "The shells in the picture lie in rows of different lengths. Meena puts them into groups of ten. How many full groups of ten can be made?",
+      "Grouping gives 3 tens and 3 ones.",
+      "So the answer is 3."
+     ],
+     "widget": {
+      "type": "blocks",
+      "hundreds": 0,
+      "tens": 3,
+      "ones": 3
+     }
+    },
+    {
+     "title": "The number name of a two-digit number",
+     "text": [
+      "A two-digit number's name says the tens first (twenty, thirty …) and then the ones; 11 to 19 have their own names (eleven to nineteen).",
+      "Name the tens digit as a tens word, add a hyphen and the ones word: 47 is forty-seven. For 11 to 19 use the teen word."
+     ],
+     "math": [
+      "Which is the number name of 20?",
+      "The tens digit is 2.",
+      "20 is written twenty."
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Tens",
+       "Name"
+      ],
+      "rows": [
+       [
+        20,
+        "twenty"
+       ],
+       [
+        30,
+        "thirty"
+       ],
+       [
+        40,
+        "forty"
+       ],
+       [
+        50,
+        "fifty"
+       ],
+       [
+        60,
+        "sixty"
+       ],
+       [
+        70,
+        "seventy"
+       ],
+       [
+        80,
+        "eighty"
+       ],
+       [
+        90,
+        "ninety"
+       ]
+      ]
+     }
+    }
+   ],
+   "diagnostics": [
+    "gen:aatens:4,5",
+    "gen:aatens:6,14",
+    "gen:aatens:6,1"
+   ],
+   "strategies": [
+    {
+     "id": "bundles",
+     "title": "Bundle the loose ones",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aatens",
+      "subSkill": "place-value.blocks-to-number@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Bundle the loose ones",
+       "text": [
+        "Each long block is a bundle of ten; each small cube is a one.",
+        "When there are ten or more loose cubes, tie ten of them into another ten first. Then count the tens in tens and count on the ones."
+       ],
+       "math": [
+        "What number do the blocks in the picture show?",
+        "8 tens and 14 ones",
+        "14 ones = 1 ten and 4 ones",
+        "8 tens and 1 ten = 9 tens",
+        "9 tens and 4 ones = 94"
+       ],
+       "role": "strategy",
+       "instance": "gen:aatens:8,14",
+       "widget": {
+        "type": "blocks",
+        "hundreds": 0,
+        "tens": 8,
+        "ones": 14
+       }
+      }
+     ],
+     "guided": "gen:aatens:4,11:mc",
+     "check": "gen:aatens:8,13"
+    },
+    {
+     "id": "count_on",
+     "title": "Count the tens, then the ones",
+     "kind": "procedural",
+     "scope": {
+      "family": "aatens",
+      "subSkill": "place-value.blocks-to-number@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Count the tens, then the ones",
+       "text": [
+        "Touch each long block in the picture and count in tens.",
+        "Then count on the small cubes one by one."
+       ],
+       "math": [
+        "What number do the blocks in the picture show?",
+        "2 tens are 20.",
+        "7 ones.",
+        "20 and 7 make 27."
+       ],
+       "role": "strategy",
+       "instance": "gen:aatens:2,7",
+       "widget": {
+        "type": "blocks",
+        "hundreds": 0,
+        "tens": 2,
+        "ones": 7
+       }
+      }
+     ],
+     "guided": "gen:aatens:3,1:mc",
+     "check": "gen:aatens:3,2"
+    },
+    {
+     "id": "tens_digit_value",
+     "title": "The value of the tens digit",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aadigit",
+      "subSkill": "place-value.tens-digit-value@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "The value of the tens digit",
+       "text": [
+        "In a two-digit number the first digit counts tens and the second counts ones.",
+        "The value of the tens digit is that many tens."
+       ],
+       "math": [
+        "In 46, what is the value of the digit 4?",
+        "In 46, the first digit is in the tens place.",
+        "So the answer is 40."
+       ],
+       "role": "strategy",
+       "instance": "gen:aadigit:46,0",
+       "widget": {
+        "type": "blocks",
+        "hundreds": 0,
+        "tens": 4,
+        "ones": 6
+       }
+      }
+     ],
+     "guided": "gen:aadigit:52,0:mc",
+     "check": "gen:aadigit:40,0:mc"
+    },
+    {
+     "id": "count_tens",
+     "title": "How many tens",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aadigit",
+      "subSkill": "place-value.count-tens@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "How many tens",
+       "text": [
+        "\"How many tens\" asks for a count of bundles of ten, not for their value.",
+        "In a two-digit number it is the first digit."
+       ],
+       "math": [
+        "How many tens are there in 52?",
+        "In 52, the first digit is in the tens place.",
+        "So the answer is 5."
+       ],
+       "role": "strategy",
+       "instance": "gen:aadigit:52,1"
+      }
+     ],
+     "guided": "gen:aadigit:93,1",
+     "check": "gen:aadigit:40,1"
+    },
+    {
+     "id": "ones_digit_value",
+     "title": "The value of the ones digit",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aadigit",
+      "subSkill": "place-value.ones-digit-value@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "The value of the ones digit",
+       "text": [
+        "The second digit of a two-digit number counts ones.",
+        "So the ones digit is worth just that many ones."
+       ],
+       "math": [
+        "In 23, what is the value of the digit 3?",
+        "In 23, the last digit is in the ones place.",
+        "So the answer is 3."
+       ],
+       "role": "strategy",
+       "instance": "gen:aadigit:23,2",
+       "widget": {
+        "type": "blocks",
+        "hundreds": 0,
+        "tens": 2,
+        "ones": 3
+       }
+      }
+     ],
+     "guided": "gen:aadigit:52,2:mc",
+     "check": "gen:aadigit:19,2"
+    },
+    {
+     "id": "full_tens",
+     "title": "Make full tens",
+     "kind": "procedural",
+     "scope": {
+      "family": "aabund",
+      "subSkill": "place-value.full-tens@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Make full tens",
+       "text": [
+        "Rows of different lengths are not tens: count the objects, not the rows.",
+        "Put them into groups of ten; each full group is one ten. Count the full groups."
+       ],
+       "math": [
+        "The shells in the picture lie in rows of different lengths. Imran puts them into groups of ten. How many full groups of ten can be made?",
+        "Grouping gives 2 tens and 3 ones.",
+        "So the answer is 2."
+       ],
+       "role": "strategy",
+       "instance": "gen:aabund:3,2,0",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Row 1",
+         "Row 2",
+         "Row 3"
+        ],
+        "counts": [
+         10,
+         5,
+         8
+        ],
+        "key": 1
+       }
+      }
+     ],
+     "guided": "gen:aabund:3,19,0:mc",
+     "check": "gen:aabund:3,3,0"
+    },
+    {
+     "id": "left_over_ones",
+     "title": "The ones left over",
+     "kind": "procedural",
+     "scope": {
+      "family": "aabund",
+      "subSkill": "place-value.left-over-ones@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "The ones left over",
+       "text": [
+        "Make as many full tens as you can.",
+        "The objects that are not in a full ten are the ones left over."
+       ],
+       "math": [
+        "The shells in the picture lie in rows of different lengths. Meena puts them into groups of ten. How many shells are left over, not in a full group of ten?",
+        "Grouping gives 5 tens and 6 ones.",
+        "So the answer is 6."
+       ],
+       "role": "strategy",
+       "instance": "gen:aabund:8,6,1",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Row 1",
+         "Row 2",
+         "Row 3",
+         "Row 4",
+         "Row 5",
+         "Row 6",
+         "Row 7",
+         "Row 8"
+        ],
+        "counts": [
+         9,
+         7,
+         7,
+         6,
+         6,
+         6,
+         8,
+         7
+        ],
+        "key": 1
+       }
+      }
+     ],
+     "guided": "gen:aabund:3,2,1",
+     "check": "gen:aabund:3,3,1:mc"
+    },
+    {
+     "id": "grouped_total",
+     "title": "Tens and ones together",
+     "kind": "procedural",
+     "scope": {
+      "family": "aabund",
+      "subSkill": "place-value.grouped-total@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Tens and ones together",
+       "text": [
+        "Make full tens and count them in tens.",
+        "Then count on the ones left over: that is how many there are in all."
+       ],
+       "math": [
+        "The shells in the picture lie in rows of different lengths. Divya puts them into groups of ten. How many shells are there in all?",
+        "Grouping gives 2 tens and 8 ones.",
+        "So the answer is 28."
+       ],
+       "role": "strategy",
+       "instance": "gen:aabund:3,3,2",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Row 1",
+         "Row 2",
+         "Row 3"
+        ],
+        "counts": [
+         7,
+         10,
+         11
+        ],
+        "key": 1
+       }
+      }
+     ],
+     "guided": "gen:aabund:8,6,2:mc",
+     "check": "gen:aabund:5,1,2:mc"
+    }
+   ],
+   "practice": [
+    "gen:aatens:3,4",
+    "gen:aatens:3,5:mc",
+    "gen:aatens:4,2",
+    "gen:aadigit:69,0",
+    "gen:aagreat:98,0",
+    "gen:aaword:74",
+    "gen:aabund:7,16,2",
+    "gen:aaname:21"
+   ],
+   "transfer": [
+    "gen:aatens:4,1:mc",
+    "gen:aadigit:56,1:w",
+    "gen:aagreat:61,1:w"
+   ],
+   "retention": [
+    "gen:aatens:4,4",
+    "gen:aadigit:83,2:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aatens",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "aatens",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aadigit",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aagreat",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aaword",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aabund",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aaname",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "aatens",
+    "seed": [
+     3,
+     3
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aatens:3,3"
+    ]
+   }
+  },
+  {
    "competency": "MATH.algebra.variables",
    "title": "A value on a straight line",
    "chapter": [
@@ -10470,390 +11829,6 @@
    }
   },
   {
-   "competency": "MATH.number.place-value-tens",
-   "title": "Tens and ones: what number do the blocks show",
-   "chapter": [
-    {
-     "title": "Tens and ones: what number do the blocks show",
-     "text": [
-      "Ten ones make one ten. A two-digit number tells how many tens and how many ones: 47 is 4 tens and 7 ones."
-     ],
-     "math": [
-      "What number do the blocks in the picture show?",
-      "3 tens are 30.",
-      "3 ones.",
-      "30 and 3 make 33."
-     ],
-     "widget": {
-      "type": "blocks",
-      "hundreds": 0,
-      "tens": 3,
-      "ones": 3
-     },
-     "tip": "Each block was counted as one. A long block is a ten: it is worth 10 small cubes.",
-     "role": "concept",
-     "instance": "gen:aatens:3,3"
-    },
-    {
-     "title": "The value of a digit in a two-digit number",
-     "text": [
-      "Where a digit stands tells what it is worth: in 47 the 4 is in the tens place, so it means 4 tens, which is 40.",
-      "Find the digit. If it is the first of two digits, it counts tens: its value is that digit times 10."
-     ],
-     "math": [
-      "In 56, what is the value of the digit 6?",
-      "In 56, the last digit is in the ones place.",
-      "So the answer is 6."
-     ],
-     "widget": {
-      "type": "blocks",
-      "hundreds": 0,
-      "tens": 5,
-      "ones": 6
-     }
-    },
-    {
-     "title": "The greatest and smallest two-digit number from digit cards",
-     "text": [
-      "In a two-digit number the tens digit matters most: 71 is more than 17 because 7 tens is more than 1 ten.",
-      "For the greatest, put the biggest digit in the tens place and the next biggest in the ones. For the smallest, put the smallest digit that is not 0 in the tens place."
-     ],
-     "math": [
-      "Use two of the digit cards in the picture (9, 7, 3) to make the smallest two-digit number you can. Use each card only once. Which number is it?",
-      "Tens place: 3.",
-      "Ones place: 7."
-     ],
-     "widget": {
-      "type": "table",
-      "head": [
-       "Card",
-       "Card",
-       "Card"
-      ],
-      "rows": [
-       [
-        9,
-        7,
-        3
-       ]
-      ]
-     }
-    },
-    {
-     "title": "Writing a number name as a number",
-     "text": [
-      "A number name tells the tens and the ones: sixty-three is 6 tens and 3 ones, written 63. The '-ty' words are tens; the '-teen' words are 1 ten and some ones.",
-      "Find the tens word (twenty, thirty …) and write its digit first; then write the ones digit. A '-teen' number starts with 1."
-     ],
-     "math": [
-      "Write \"ninety\" as a number.",
-      "9 tens",
-      "and 0 ones."
-     ],
-     "widget": {
-      "type": "blocks",
-      "hundreds": 0,
-      "tens": 9,
-      "ones": 0
-     }
-    },
-    {
-     "title": "Counting a collection by making groups of ten",
-     "text": [
-      "Counting a big collection is easier in groups of ten: 4 groups of ten and 7 more is 47.",
-      "Circle ten at a time, crossing them out as you go, until fewer than ten are left. The groups are the tens digit and the ones left are the ones digit."
-     ],
-     "math": [
-      "The shells in the picture lie in rows of different lengths. Meena puts them into groups of ten. How many full groups of ten can be made?",
-      "Grouping gives 3 tens and 3 ones.",
-      "So the answer is 3."
-     ],
-     "widget": {
-      "type": "blocks",
-      "hundreds": 0,
-      "tens": 3,
-      "ones": 3
-     }
-    },
-    {
-     "title": "The number name of a two-digit number",
-     "text": [
-      "A two-digit number's name says the tens first (twenty, thirty …) and then the ones; 11 to 19 have their own names (eleven to nineteen).",
-      "Name the tens digit as a tens word, add a hyphen and the ones word: 47 is forty-seven. For 11 to 19 use the teen word."
-     ],
-     "math": [
-      "Which is the number name of 20?",
-      "The tens digit is 2.",
-      "20 is written twenty."
-     ],
-     "widget": {
-      "type": "table",
-      "head": [
-       "Tens",
-       "Name"
-      ],
-      "rows": [
-       [
-        20,
-        "twenty"
-       ],
-       [
-        30,
-        "thirty"
-       ],
-       [
-        40,
-        "forty"
-       ],
-       [
-        50,
-        "fifty"
-       ],
-       [
-        60,
-        "sixty"
-       ],
-       [
-        70,
-        "seventy"
-       ],
-       [
-        80,
-        "eighty"
-       ],
-       [
-        90,
-        "ninety"
-       ]
-      ]
-     }
-    }
-   ],
-   "diagnostics": [
-    "gen:aatens:4,5",
-    "gen:aatens:6,14",
-    "gen:aatens:6,1"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Count the tens in tens (10, 20, 30 …), then count on the ones. If there are 10 or more loose ones, make another ten first."
-       ],
-       "math": [
-        "What number do the blocks in the picture show?",
-        "3 tens are 30.",
-        "5 ones.",
-        "30 and 5 make 35."
-       ],
-       "widget": {
-        "type": "blocks",
-        "hundreds": 0,
-        "tens": 3,
-        "ones": 5
-       },
-       "role": "worked-example",
-       "instance": "gen:aatens:3,5"
-      }
-     ],
-     "guided": "gen:aatens:4,2",
-     "check": "gen:aatens:3,6"
-    },
-    {
-     "id": "count_on",
-     "title": "Count in tens, then in ones",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Count in tens, then in ones",
-       "text": [
-        "Touch each long block and say 10, 20, 30 …",
-        "Then touch each cube and keep counting by ones."
-       ],
-       "math": [
-        "What number do the blocks in the picture show?",
-        "4 tens are 40.",
-        "1 one.",
-        "40 and 1 make 41."
-       ],
-       "widget": {
-        "type": "numberline",
-        "from": 0,
-        "to": 41,
-        "step": 10,
-        "jumps": [
-         [
-          0,
-          10
-         ],
-         [
-          10,
-          20
-         ],
-         [
-          20,
-          30
-         ],
-         [
-          30,
-          40
-         ],
-         [
-          40,
-          41
-         ]
-        ]
-       },
-       "role": "strategy",
-       "instance": "gen:aatens:4,1"
-      }
-     ],
-     "guided": "gen:aatens:6,10",
-     "check": "gen:aatens:3,7:mc"
-    },
-    {
-     "id": "bundles",
-     "title": "Bundles of sticks",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Bundles of sticks",
-       "text": [
-        "Tie ten loose sticks into a bundle: one bundle is one ten.",
-        "Write the bundles as the tens digit and the loose sticks as the ones digit."
-       ],
-       "math": [
-        "What number do the blocks in the picture show?",
-        "4 tens are 40.",
-        "0 ones.",
-        "40 and 0 make 40."
-       ],
-       "role": "strategy",
-       "instance": "gen:aatens:4,0"
-      }
-     ],
-     "guided": "gen:aatens:6,11",
-     "check": "gen:aatens:4,7"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:aatens:3,4",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “What number do the blocks in the picture show?” A common wrong answer is 7.",
-        "Each block was counted as one. A long block is a ten: it is worth 10 small cubes."
-       ],
-       "math": [
-        "Not 7, but 34"
-       ]
-      }
-     ],
-     "guided": "gen:aatens:6,12",
-     "check": "gen:aatens:4,6:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Count objects to 20; Combine quantities within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Count the tens in tens (10, 20, 30 …), then count on the ones. If there are 10 or more loose ones, make another ten first."
-       ]
-      }
-     ],
-     "guided": "gen:aatens:6,13",
-     "check": "gen:aatens:5,14"
-    }
-   ],
-   "practice": [
-    "gen:aatens:4,8",
-    "gen:aatens:5,10:mc",
-    "gen:aatens:5,13",
-    "gen:aadigit:69,0",
-    "gen:aagreat:98,0",
-    "gen:aaword:74",
-    "gen:aabund:7,16,2",
-    "gen:aaname:21"
-   ],
-   "transfer": [
-    "gen:aatens:5,12:w",
-    "gen:aadigit:56,1:w",
-    "gen:aagreat:61,1:w"
-   ],
-   "retention": [
-    "gen:aatens:4,4",
-    "gen:aadigit:83,2:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "aatens",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "aatens",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aadigit",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aagreat",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aaword",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aabund",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aaname",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "aatens",
-    "seed": [
-     3,
-     3
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:aatens:3,3",
-     "gen:aatens:3,4",
-     "gen:aatens:3,5"
-    ]
-   }
-  },
-  {
    "competency": "MATH.number.subtraction",
    "title": "Taking away within 20",
    "chapter": [
@@ -16240,325 +17215,6 @@
      "gen:acstory:0,4,9,1",
      "gen:acstory:3,4,2,0",
      "gen:acstory:3,2,7,1"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.statistics.pictographs",
-   "title": "Reading a pictograph with a key",
-   "chapter": [
-    {
-     "title": "Reading a pictograph with a key",
-     "text": [
-      "In a pictograph every picture stands for the same number of things: the number in the key."
-     ],
-     "math": [
-      "The pictograph shows the favourite fruits of the children of a school. Each ● stands for 1 child. How many children chose Guava?",
-      "The row for Guava has 4 pictures",
-      "4 pictures × 1 = 4"
-     ],
-     "widget": {
-      "type": "pictograph",
-      "labels": [
-       "Mango",
-       "Banana",
-       "Guava",
-       "Apple"
-      ],
-      "counts": [
-       8,
-       5,
-       4,
-       5
-      ],
-      "key": 1
-     },
-     "tip": "The row for Apple was read instead. Put a finger on the right label and follow its row.",
-     "role": "concept",
-     "instance": "gen:acpict:0,3,2"
-    },
-    {
-     "title": "Comparing two rows of a pictograph",
-     "text": [
-      "\"How many more\" compares two amounts: it is the bigger amount minus the smaller one.",
-      "Read both rows using the key, then take the smaller number from the bigger one."
-     ],
-     "math": [
-      "The pictograph shows the favourite games of the children of a school. Each ● stands for 1 child. How many more children chose Cricket than Kabaddi?",
-      "8 pictures × 1 = 8",
-      "3 pictures × 1 = 3",
-      "8 − 3 = 5"
-     ],
-     "widget": {
-      "type": "pictograph",
-      "labels": [
-       "Kabaddi",
-       "Cricket",
-       "Kho-kho",
-       "Football"
-      ],
-      "counts": [
-       3,
-       8,
-       7,
-       8
-      ],
-      "key": 1
-     }
-    },
-    {
-     "title": "Pictographs and tables: completing, totals and the largest group",
-     "text": [
-      "Every picture stands for the key's number of children, so the number of pictures is the number of children shared into groups of the key, and the children are the pictures times the key.",
-      "To draw a row, divide the number by the key. To read the pictograph, count the pictures and multiply by the key; for the total, add all the pictures first."
-     ],
-     "math": [
-      "The table shows the favourite fruits of the children of a school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Guava?",
-      "16 children ÷ 2 = 8 pictures"
-     ],
-     "widget": {
-      "type": "pictograph",
-      "labels": [
-       "Mango",
-       "Banana",
-       "Guava",
-       "Apple"
-      ],
-      "counts": [
-       12,
-       12,
-       16,
-       8
-      ],
-      "key": 2
-     }
-    },
-    {
-     "title": "Reading a pictograph with half pictures",
-     "text": [
-      "A whole picture stands for the key; a half picture stands for half the key.",
-      "Count the whole pictures and multiply by the key, then add half the key for a half picture."
-     ],
-     "math": [
-      "The pictograph shows how the children of a school come to school. Each ● stands for 4 children, and a half ● stands for 2. How many children chose Cycle?",
-      "Count in half pictures for Cycle: 15 halves",
-      "15 halves × 2 = 30 children"
-     ],
-     "widget": {
-      "type": "pictograph",
-      "labels": [
-       "Walk",
-       "Bus",
-       "Cycle",
-       "Auto"
-      ],
-      "counts": [
-       28,
-       6,
-       30,
-       4
-      ],
-      "key": 4
-     }
-    }
-   ],
-   "diagnostics": [
-    "gen:acpict:2,2,1",
-    "gen:acpict:2,15,3",
-    "gen:acpict:2,27,2"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Count the pictures in the row, then count in the key's number once for each picture (or multiply)."
-       ],
-       "math": [
-        "The pictograph shows the favourite fruits of the children of a school. Each ● stands for 10 children. How many children chose Apple?",
-        "The row for Apple has 2 pictures",
-        "2 pictures × 10 = 20"
-       ],
-       "widget": {
-        "type": "pictograph",
-        "labels": [
-         "Mango",
-         "Banana",
-         "Guava",
-         "Apple"
-        ],
-        "counts": [
-         70,
-         60,
-         70,
-         20
-        ],
-        "key": 10
-       },
-       "role": "worked-example",
-       "instance": "gen:acpict:3,6,3"
-      }
-     ],
-     "guided": "gen:acpict:3,11,2",
-     "check": "gen:acpict:1,21,3"
-    },
-    {
-     "id": "table",
-     "title": "Turn it into a table",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Turn it into a table",
-       "text": [
-        "Write each label with its number of pictures.",
-        "Multiply each by the key and write the real number beside it."
-       ],
-       "math": [
-        "The pictograph shows the favourite fruits of the children of a school. Each ● stands for 1 child. How many children chose Apple?",
-        "The row for Apple has 5 pictures",
-        "5 pictures × 1 = 5"
-       ],
-       "widget": {
-        "type": "table",
-        "head": [
-         "Choice",
-         "Pictures",
-         "Children"
-        ],
-        "rows": [
-         [
-          "Mango",
-          8,
-          8
-         ],
-         [
-          "Banana",
-          5,
-          5
-         ],
-         [
-          "Guava",
-          4,
-          4
-         ],
-         [
-          "Apple",
-          5,
-          5
-         ]
-        ]
-       },
-       "role": "strategy",
-       "instance": "gen:acpict:0,3,3"
-      }
-     ],
-     "guided": "gen:acpict:3,11,3",
-     "check": "gen:acpict:1,21,2:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:acpict:3,11,1",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “The pictograph shows the favourite games of the children of a school. Each ● stands for 10 children. How many children chose Cricket?” A common wrong answer is 1.",
-        "The pictures were counted, but each picture stands for 10 children, not 1."
-       ],
-       "math": [
-        "Not 1, but 10"
-       ]
-      }
-     ],
-     "guided": "gen:acpict:0,3,0",
-     "check": "gen:acpict:1,1,3:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Count objects to 20. If a step is slow, practise that skill first.",
-        "Then the method is: Count the pictures in the row, then count in the key's number once for each picture (or multiply)."
-       ]
-      }
-     ],
-     "guided": "gen:acpict:0,3,1",
-     "check": "gen:acpict:1,1,2"
-    }
-   ],
-   "practice": [
-    "gen:acpict:1,2,3",
-    "gen:acpict:1,2,0:mc",
-    "gen:acpict:1,2,1",
-    "gen:acpictmore:0,3,2",
-    "gen:acpicttab:2,7,0,1",
-    "gen:acpicthalf:3,1,3,0"
-   ],
-   "transfer": [
-    "gen:acpict:3,28,0:w",
-    "gen:acpictmore:0,2,1:w",
-    "gen:acpicttab:0,6,0,2:w"
-   ],
-   "retention": [
-    "gen:acpict:3,6,1",
-    "gen:acpictmore:0,3,3:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "acpict",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "acpict",
-     "version": "1.0.0"
-    },
-    {
-     "family": "acpictmore",
-     "version": "1.0.0"
-    },
-    {
-     "family": "acpicttab",
-     "version": "1.0.0"
-    },
-    {
-     "family": "acpicthalf",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "acpict",
-    "seed": [
-     0,
-     3,
-     2
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:acpict:0,3,2",
-     "gen:acpict:3,11,1",
-     "gen:acpict:3,6,3"
     ]
    }
   },
@@ -25302,167 +25958,6 @@
      "gen:afpie:9,1,0,0",
      "gen:afpie:9,1,0,1",
      "gen:afpie:0,2,2,1"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.statistics.scaled-bars",
-   "title": "Reading a bar chart with a scale",
-   "chapter": [
-    {
-     "title": "Reading a bar chart with a scale",
-     "text": [
-      "On a scaled bar chart each line on the side stands for more than 1 (for example 5 or 50). The height of a bar is read off the scale, not by counting squares as ones."
-     ],
-     "math": [
-      "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Thursday and on Friday together?",
-      "The bar reaches 2 lines; each line is 5, so it shows 10",
-      "The bar reaches 4 lines; each line is 5, so it shows 20",
-      "Together: 10 + 20 = 30"
-     ],
-     "tip": "The lines were counted as 1 each. On this chart each line on the scale stands for 5.",
-     "role": "concept",
-     "instance": "gen:afbar:1,2,13"
-    }
-   ],
-   "diagnostics": [
-    "gen:afbar:3,2,6",
-    "gen:afbar:1,1,9",
-    "gen:afbar:0,2,1"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Find how much one line stands for (the difference between two numbers on the scale). Read each bar against the scale, then add or subtract as the question asks."
-       ],
-       "math": [
-        "The bar chart shows books borrowed from the library. Read the scale carefully. How many books were borrowed on Wednesday and on Tuesday together?",
-        "The bar reaches 9 lines; each line is 5, so it shows 45",
-        "The bar reaches 6 lines; each line is 5, so it shows 30",
-        "Together: 45 + 30 = 75"
-       ],
-       "role": "worked-example",
-       "instance": "gen:afbar:1,2,12"
-      }
-     ],
-     "guided": "gen:afbar:4,0,2",
-     "check": "gen:afbar:1,2,11"
-    },
-    {
-     "id": "skip_count",
-     "title": "Skip-count up the scale",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Skip-count up the scale",
-       "text": [
-        "Put a finger at the bottom of the bar and count up the lines in steps of the scale: 5, 10, 15 …",
-        "Stop at the top of the bar: that number is its value."
-       ],
-       "math": [
-        "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Friday?",
-        "The bar reaches 8 lines; each line is 50, so it shows 400"
-       ],
-       "widget": {
-        "type": "bars",
-        "labels": [
-         "Fri"
-        ],
-        "values": [
-         400
-        ],
-        "scale": 50
-       },
-       "role": "strategy",
-       "instance": "gen:afbar:4,0,1"
-      }
-     ],
-     "guided": "gen:afbar:4,0,0",
-     "check": "gen:afbar:1,2,10:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:afbar:4,0,3",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “The bar chart shows saplings planted by each class. Read the scale carefully. How many saplings were planted by Class 2?” A common wrong answer is 9.",
-        "The lines were counted as 1 each. On this chart each line on the scale stands for 50."
-       ],
-       "math": [
-        "Not 9, but 450"
-       ]
-      }
-     ],
-     "guided": "gen:afbar:3,2,5",
-     "check": "gen:afbar:4,0,7:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Read simple bar charts. If a step is slow, practise that skill first.",
-        "Then the method is: Find how much one line stands for (the difference between two numbers on the scale). Read each bar against the scale, then add or subtract as the question asks."
-       ]
-      }
-     ],
-     "guided": "gen:afbar:3,2,2",
-     "check": "gen:afbar:4,0,6"
-    }
-   ],
-   "practice": [
-    "gen:afbar:3,2,3",
-    "gen:afbar:3,2,0:mc",
-    "gen:afbar:3,2,1"
-   ],
-   "transfer": [
-    "gen:afbar:0,2,8:w"
-   ],
-   "retention": [
-    "gen:afbar:3,2,7",
-    "gen:afbar:3,2,4:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "afbar",
-    "version": "1.0.0"
-   },
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "afbar",
-    "seed": [
-     1,
-     2,
-     13
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:afbar:1,2,13",
-     "gen:afbar:4,0,3",
-     "gen:afbar:1,2,12"
     ]
    }
   },

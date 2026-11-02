@@ -6,6 +6,7 @@ import { LINEAR_EQUATIONS_CONFIG } from './subskill-evidence';
 import { TRIANGLE_PROPERTIES_CONFIG } from './subskill-config-geometry';
 import { ADDITION_CONFIG } from './subskill-config-addition';
 import { SCALE_PATTERN_CONFIGS } from './subskill-config-scale';
+import { CONVERSION_PATTERN_CONFIGS } from './subskill-config-conversion';
 
 const identity = 'MATH.algebra.identities';
 export const IDENTITIES_CONFIG: SubSkillConfig = {
@@ -32,7 +33,7 @@ export const ANGLE_PAIRS_PRECISE_CONFIG: SubSkillConfig = {
   ], unmapped: {}, core: ['complement', 'supplement', 'opposite', 'adjacent', 'other-three'].map((name) => `angle-pairs.${name}@2`),
   broadClaim: (label) => `Angle pairs read ${label} across five distinct angle relationships`,
 };
-export const CONNECTION_CONFIGS = [LINEAR_EQUATIONS_CONFIG, TRIANGLE_PROPERTIES_CONFIG, ADDITION_CONFIG, IDENTITIES_CONFIG, ANGLE_PAIRS_PRECISE_CONFIG, ...SCALE_PATTERN_CONFIGS];
+export const CONNECTION_CONFIGS = [LINEAR_EQUATIONS_CONFIG, TRIANGLE_PROPERTIES_CONFIG, ADDITION_CONFIG, IDENTITIES_CONFIG, ANGLE_PAIRS_PRECISE_CONFIG, ...SCALE_PATTERN_CONFIGS, ...CONVERSION_PATTERN_CONFIGS];
 export const connectionConfig = (competency: string) => CONNECTION_CONFIGS.find((c) => c.competency === competency);
 export function connectedSkill(config: SubSkillConfig, id: string): string | null {
   const c = classifyQuestionWith(config, id);
