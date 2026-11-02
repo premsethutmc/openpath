@@ -31,6 +31,26 @@ import type { Attempt, AttemptAssessment, LearnerRecords } from "./records";
 export const LEARNER_HYPOTHESIS_CONTRACT = "learner-hypothesis@1" as const;
 export const investigateContext = (original: string) => `investigate:${original}`;
 
+/** A declared lesson narrows its reassessment; legacy lessons retain their existing interpretation. */
+function deliveredScopeAccepts(competency: string, strategyId: string, qid: string): boolean {
+  const m = moduleFor(competency), s = m?.strategies.find(s => s.id === strategyId);
+  if (!s?.scope) return true;
+  const p = problemOf(familyOf(qid) ?? qid);
+  return !!m && !!p && teachingScopeFor(m, s).accepts(p);
+}
+
+function relevantTeaching(t: LearnerRecords['teaching'][number], original: string, explanation: string,
+  observedIn: string, about: string | null, records: LearnerRecords): boolean {
+  if (![observedIn, about].includes(t.competency)) return false;
+  const strict = records.pathway?.active && (records.readinessRoute?.includes(observedIn) || (!!about && records.readinessRoute?.includes(about)));
+  const strategy = moduleFor(t.competency)?.strategies.find(s => s.id === t.strategy);
+  if (!strict && !strategy?.scope) return true; // preserve historical unscoped teaching
+  const connection = strict ? connectionConfig(observedIn) : undefined;
+  const skill = connection ? connectedSkill(connection, original) : null;
+  return !!strategy && (!connection || (!!skill && strategyConnects(connection, skill, strategy)))
+    && teachingMatchesMisconception(strategy, original, explanation, t.competency, about);
+}
+
 /** The supported-family form of a question: itself if generated, or its prompt read as a problem. */
 export function familyOf(qid: string): string | null {
   if (problemOf(qid)) return qid;
@@ -159,15 +179,15 @@ export function hypotheses(records: LearnerRecords): LearnerHypothesis[] {
     const skill = connection ? connectedSkill(connection, a.questionId) : null;
     const teachings = established ? records.teaching.filter((t) => {
       if (!scopeSkills.includes(t.competency) || t.at <= established) return false;
-      if (!strict) return true; // default historical hypothesis interpretation is unchanged
-      const strategy = moduleFor(t.competency)?.strategies.find((s) => s.id === t.strategy);
-      return !!strategy && (!connection || (!!skill && strategyConnects(connection, skill, strategy))) && teachingMatchesMisconception(strategy, a.questionId, misconception!.id, t.competency, about);
+      return relevantTeaching(t, a.questionId, misconception!.id, observedIn, about, records);
     }) : [];
     const taught = teachings[0] ?? null;
     const id = misconception?.id ?? null;
     const hid = `${id ?? "?"}@${a.questionId}`;
     // resolution-probe@1: later first answers to questions that tell this explanation apart from the target
     const probes: ResolutionProbe[] = id && established ? records.attempts.filter((x) => x.at > established && x.n === 1 && !all.includes(x)).flatMap((x) => {
+      const delivered = teachings.filter(t => t.at < x.at).at(-1);
+      if (delivered && !deliveredScopeAccepts(delivered.competency, delivered.strategy, x.questionId)) return [];
       if (strict && taughtExposureKeys(records, x.at).has(exposureKey(x.questionId))) return [];
       if (connection && (!skill || connectedSkill(connection, x.questionId) !== skill)) return [];
       if (!diagnosticScopeAccepts(familyOf(a.questionId) ?? a.questionId, familyOf(x.questionId) ?? x.questionId, id)) return [];
@@ -269,7 +289,10 @@ export function discriminatingProbe(h: LearnerHypothesis, records: LearnerRecord
   const g = records.enrolments.at(-1)?.grade ?? null;
   const listed = [...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check), ...m.retention];
   const pooled = m.pool ? PROBE_PHASES.flatMap((ph) => modulePhasePool(m, ph)) : [];
+  const delivered = records.teaching.filter(t => t.at === h.teaching.lastAt
+    && relevantTeaching(t, h.scope.question, h.claim!.explanation, h.scope.observedIn, h.scope.about, records)).at(-1);
   for (const q of [...listed, ...pooled]) {
+    if (delivered && !deliveredScopeAccepts(delivered.competency, delivered.strategy, q)) continue;
     if (!accepts(q) || seen.has(exposureKey(q)) || !selectable(q) || !problemOf(q)) continue;
     if (q.startsWith("gen:") && !formCertified(q)) continue;
     const qg = gradeOfQuestion(q);

@@ -635,6 +635,234 @@
      ]
     }
    ]
+  },
+  {
+   "extendsTemplate": true,
+   "competency": "MATH.statistics.median-mode",
+   "title": "The median: order first, then find the middle",
+   "family": "akmed",
+   "seed": [
+    71,
+    9
+   ],
+   "author": "Claude candidate 4e655e73; Codex integration",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [],
+   "strategies": [
+    {
+     "id": "fix_mean_for_median",
+     "title": "The median is not the mean",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The median is not the mean: what went wrong",
+       "text": [
+        "The mean was worked out. The median is the middle value once the numbers are in order.",
+        "The mean shares the total equally; the median is the middle value in order. They are different averages."
+       ],
+       "math": [
+        "Not 55, but 62",
+        "Check: the total 495 shared equally among 9 values is 55 (the mean); in order, 21, 25, 41, 47, 62, 64, 74, 80, 81, the middle value is different."
+       ],
+       "role": "misconception",
+       "instance": "gen:akmed:71,9"
+      },
+      {
+       "title": "The median is not the mean: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "In order: 21, 25, 41, 47, 62, 64, 74, 80, 81 (9 values)",
+        "The middle one is the 5th value: 62"
+       ],
+       "role": "strategy",
+       "instance": "gen:akmed:71,9"
+      }
+     ],
+     "guided": "gen:akmed:77,5:mc",
+     "check": "gen:akmed:29,5",
+     "scope": {
+      "family": "akmed",
+      "parameters": [
+       {
+        "index": 1,
+        "values": [
+         5,
+         7,
+         9
+        ]
+       }
+      ]
+     },
+     "addresses": "mean-for-median"
+    },
+    {
+     "id": "fix_one_middle",
+     "title": "Two middle values: take halfway",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Two middle values: take halfway: what went wrong",
+       "text": [
+        "With 6 numbers there are two middle numbers (66 and 75); the median is halfway between them.",
+        "With an even number of values there are two middle values: take halfway between them."
+       ],
+       "math": [
+        "Not 66, but 70.5",
+        "Check: 6 values have no single middle; the 3rd and 4th values, 66 and 75, share the middle, so the median is halfway: 70.5."
+       ],
+       "role": "misconception",
+       "instance": "gen:akmed:32,6"
+      },
+      {
+       "title": "Two middle values: take halfway: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "In order: 14, 58, 66, 75, 81, 95 (6 values)",
+        "The two middle values are the 3rd and 4th: 66 and 75; halfway: (66 + 75) ÷ 2 = 70.5"
+       ],
+       "role": "strategy",
+       "instance": "gen:akmed:32,6"
+      }
+     ],
+     "guided": "gen:akmed:79,6:mc",
+     "check": "gen:akmed:33,6",
+     "scope": {
+      "family": "akmed",
+      "parameters": [
+       {
+        "index": 1,
+        "values": [
+         6,
+         8,
+         10
+        ]
+       }
+      ]
+     },
+     "addresses": "one-middle"
+    }
+   ]
+  },
+  {
+   "extendsTemplate": true,
+   "competency": "MATH.probability.classical",
+   "title": "Balls of different counts: each ball is equally likely",
+   "family": "anbag",
+   "seed": [
+    2,
+    6,
+    2,
+    2
+   ],
+   "author": "Claude candidate 4e655e73; Codex integration",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [],
+   "strategies": [
+    {
+     "id": "fix_colours_equally_likely",
+     "title": "Count balls, not colours",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Count balls, not colours: what went wrong",
+       "text": [
+        "Each colour was taken as equally likely; the colours have different numbers of balls, and it is the balls that are equally likely.",
+        "It is the balls that are equally likely, not the colours."
+       ],
+       "math": [
+        "Not 1/3, but 1/5",
+        "Check: 6 blue balls and only 2 green balls: a green ball is less likely to come out than a blue one, so the colours cannot all have the same chance."
+       ],
+       "role": "misconception",
+       "instance": "gen:anbag:2,6,2,2"
+      },
+      {
+       "title": "Count balls, not colours: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All the balls: 2 red + 6 blue + 2 green = 10, each equally likely",
+        "Balls that fit \"green\": 2",
+        "P = 2/10 = 1/5"
+       ],
+       "role": "strategy",
+       "instance": "gen:anbag:2,6,2,2"
+      }
+     ],
+     "guided": "gen:anbag:9,2,4,2",
+     "check": "gen:anbag:6,8,0,1:mc",
+     "scope": {
+      "family": "anbag"
+     },
+     "addresses": "colours-equally-likely"
+    }
+   ]
+  },
+  {
+   "extendsTemplate": true,
+   "competency": "MATH.statistics.scaled-bars",
+   "title": "Scaled bar charts: read the scale, do not count lines",
+   "family": "afbar",
+   "seed": [
+    0,
+    2,
+    5
+   ],
+   "author": "Claude candidate 4e655e73; Codex integration",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [],
+   "strategies": [
+    {
+     "id": "fix_assume_tens",
+     "title": "Read the scale; do not assume 10",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Read the scale; do not assume 10: what went wrong",
+       "text": [
+        "Each line was taken as 10. Read the numbers on the scale: they tell how much each line stands for.",
+        "Do not assume 10: read the numbers on the scale to see what one line stands for."
+       ],
+       "math": [
+        "Not 80, but 16",
+        "Check: two numbers next to each other on the scale differ by the size of one line."
+       ],
+       "role": "misconception",
+       "instance": "gen:afbar:0,2,5"
+      },
+      {
+       "title": "Read the scale; do not assume 10: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Thu: 2; Fri: 14 (scale 2 per line)",
+        "2 + 14 = 16"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:0,2,5"
+      }
+     ],
+     "guided": "gen:afbar:0,2,2",
+     "check": "gen:afbar:1,1,1",
+     "scope": {
+      "family": "afbar"
+     },
+     "addresses": "assume-tens"
+    }
+   ]
   }
  ]
 }

@@ -1648,6 +1648,796 @@
    }
   },
   {
+   "competency": "MATH.statistics.median-mode",
+   "title": "Finding the median",
+   "chapter": [
+    {
+     "title": "Finding the median",
+     "text": [
+      "The median is the middle value when the data are in order: half the values are below it and half above, so a few very large or very small values do not pull it."
+     ],
+     "math": [
+      "Find the median of these numbers: 28, 22, 17, 39, 26, 16, 29, 45, 12.",
+      "In order: 12, 16, 17, 22, 26, 28, 29, 39, 45",
+      "The middle value is 26"
+     ],
+     "role": "concept",
+     "instance": "gen:akmed:33,9"
+    },
+    {
+     "title": "Finding the mode",
+     "text": [
+      "The mode is the value that occurs most often. It is useful for things like shoe sizes, where a shop wants to know the most common size.",
+      "Make a frequency table (or sort the values) and choose the value with the highest frequency."
+     ],
+     "math": [
+      "Here are the marks (out of 10) in a spelling test: 5, 9, 9, 6, 5, 5, 7, 5, 4, 4, 7. What is the mode?",
+      "5 appears 4 times, more than any other value",
+      "So the mode is 5"
+     ],
+     "widget": {
+      "type": "bars",
+      "title": "how often each value occurs",
+      "labels": [
+       "4",
+       "5",
+       "6",
+       "7",
+       "9"
+      ],
+      "values": [
+       2,
+       4,
+       1,
+       2,
+       2
+      ],
+      "scale": 1
+     }
+    },
+    {
+     "title": "The mean of data in a frequency table",
+     "text": [
+      "A frequency table is a short way of writing a long list: a value with frequency 4 stands for that value written 4 times. The mean shares the total of ALL the values equally.",
+      "Multiply each value by its frequency and add these to get the total. Add the frequencies to get how many values there are. Divide the total by that number."
+     ],
+     "math": [
+      "The frequency table shows the number of goals per match for a group. Find the mean number of goals per match.",
+      "Multiply each value by its frequency: 0 × 6, 1 × 1, 2 × 9, 3 × 6, 4 × 8 = 0, 1, 18, 18, 32",
+      "Total of all values: 69",
+      "Number of values: 6 + 1 + 9 + 6 + 8 = 30",
+      "Mean = 69 ÷ 30 = 2.3"
+     ]
+    },
+    {
+     "title": "The median of data in a frequency table",
+     "text": [
+      "In a frequency table each value appears as many times as its frequency; the median is the middle value of that full ordered list.",
+      "Add the frequencies to get n. Find the middle position ((n + 1)/2 for odd n). Keep a running total of the frequencies until it reaches that position: that row's value is the median."
+     ],
+     "math": [
+      "The table in the picture shows the number of books each student in a class read during the summer holidays. What is the median?",
+      "There are 2 + 6 + 7 + 2 + 1 = 18 values in all",
+      "Running totals: 2, 8, 15, 17, 18",
+      "The middle (value number 9) falls in the row of 9"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:akmed:66,10",
+    "gen:akmed:7,6",
+    "gen:akmed:69,6"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Write the values in order. With an odd number of values, the median is the middle one; with an even number, it is halfway between the two middle ones."
+       ],
+       "math": [
+        "Find the median of these numbers: 35, 40, 25, 27, 28.",
+        "In order: 25, 27, 28, 35, 40",
+        "The middle value is 28"
+       ],
+       "role": "worked-example",
+       "instance": "gen:akmed:54,5"
+      }
+     ],
+     "guided": "gen:akmed:3,10",
+     "check": "gen:akmed:54,6"
+    },
+    {
+     "id": "cross_off",
+     "title": "Cross off from both ends",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Cross off from both ends",
+       "text": [
+        "Write the values in order, then cross off the smallest and the largest, again and again.",
+        "The one value left (or halfway between the last two) is the median."
+       ],
+       "math": [
+        "Find the median of these numbers: 49, 43, 38, 57, 60, 30, 39, 55.",
+        "In order: 30, 38, 39, 43, 49, 55, 57, 60",
+        "The two middle values are 43 and 49: (43 + 49) ÷ 2 = 46"
+       ],
+       "role": "strategy",
+       "instance": "gen:akmed:33,8"
+      }
+     ],
+     "guided": "gen:akmed:77,8",
+     "check": "gen:akmed:54,7:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:akmed:77,9",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Find the median of these numbers: 42, 25, 56, 41, 17, 31, 29, 30, 38.” A common wrong answer is 17.",
+        "The middle number of the list as given was taken. Put the numbers in order first."
+       ],
+       "math": [
+        "Not 17, but 31"
+       ]
+      }
+     ],
+     "guided": "gen:akmed:2,9",
+     "check": "gen:akmed:2,5:mc"
+    },
+    {
+     "id": "fix_mean_for_median",
+     "title": "The median is not the mean",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "akmed",
+      "parameters": [
+       {
+        "index": 1,
+        "values": [
+         5,
+         7,
+         9
+        ]
+       }
+      ]
+     },
+     "addresses": "mean-for-median",
+     "screens": [
+      {
+       "title": "The median is not the mean: what went wrong",
+       "text": [
+        "The mean was worked out. The median is the middle value once the numbers are in order.",
+        "The mean shares the total equally; the median is the middle value in order. They are different averages."
+       ],
+       "math": [
+        "Not 55, but 62",
+        "Check: the total 495 shared equally among 9 values is 55 (the mean); in order, 21, 25, 41, 47, 62, 64, 74, 80, 81, the middle value is different."
+       ],
+       "role": "misconception",
+       "instance": "gen:akmed:71,9"
+      },
+      {
+       "title": "The median is not the mean: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "In order: 21, 25, 41, 47, 62, 64, 74, 80, 81 (9 values)",
+        "The middle one is the 5th value: 62"
+       ],
+       "role": "strategy",
+       "instance": "gen:akmed:71,9"
+      }
+     ],
+     "guided": "gen:akmed:77,5:mc",
+     "check": "gen:akmed:29,5"
+    },
+    {
+     "id": "fix_one_middle",
+     "title": "Two middle values: take halfway",
+     "kind": "procedural",
+     "needs": [],
+     "scope": {
+      "family": "akmed",
+      "parameters": [
+       {
+        "index": 1,
+        "values": [
+         6,
+         8,
+         10
+        ]
+       }
+      ]
+     },
+     "addresses": "one-middle",
+     "screens": [
+      {
+       "title": "Two middle values: take halfway: what went wrong",
+       "text": [
+        "With 6 numbers there are two middle numbers (66 and 75); the median is halfway between them.",
+        "With an even number of values there are two middle values: take halfway between them."
+       ],
+       "math": [
+        "Not 66, but 70.5",
+        "Check: 6 values have no single middle; the 3rd and 4th values, 66 and 75, share the middle, so the median is halfway: 70.5."
+       ],
+       "role": "misconception",
+       "instance": "gen:akmed:32,6"
+      },
+      {
+       "title": "Two middle values: take halfway: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "In order: 14, 58, 66, 75, 81, 95 (6 values)",
+        "The two middle values are the 3rd and 4th: 66 and 75; halfway: (66 + 75) ÷ 2 = 70.5"
+       ],
+       "role": "strategy",
+       "instance": "gen:akmed:32,6"
+      }
+     ],
+     "guided": "gen:akmed:79,6:mc",
+     "check": "gen:akmed:33,6"
+    }
+   ],
+   "practice": [
+    "gen:akmed:27,10",
+    "gen:akmed:2,8:mc",
+    "gen:akmed:8,6",
+    "gen:akmode:4",
+    "gen:akfmean:1562",
+    "gen:avfmed:10,5,4,9,2,3"
+   ],
+   "transfer": [
+    "gen:akmed:2,7:w",
+    "gen:akmode:5:w",
+    "gen:akfmean:1577:w"
+   ],
+   "retention": [
+    "gen:akmed:43,7",
+    "gen:akmode:1:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "akmed",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "akmed",
+     "version": "1.0.0"
+    },
+    {
+     "family": "akmode",
+     "version": "1.0.0"
+    },
+    {
+     "family": "akfmean",
+     "version": "1.0.0"
+    },
+    {
+     "family": "avfmed",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "akmed",
+    "seed": [
+     33,
+     9
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:akmed:33,9",
+     "gen:akmed:77,9",
+     "gen:akmed:54,5"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.probability.classical",
+   "title": "Probability of a colour drawn from a bag",
+   "chapter": [
+    {
+     "title": "Equally likely outcomes",
+     "text": [
+      "The bag has 9 + 7 + 3 = 19 balls of the same size, so each of the 19 balls is equally likely to be taken.",
+      "The event \"blue\" happens for 7 of them, so its probability is 7 out of 19."
+     ],
+     "math": [
+      "A bag has 9 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.",
+      "All the balls: 9 + 7 + 3 = 19",
+      "7 of them are blue",
+      "P = 7/19"
+     ],
+     "tip": "The blue balls were compared with the other balls; a probability compares them with all 19 balls.",
+     "role": "concept",
+     "instance": "gen:anbag:9,7,3,1",
+     "textFrom": "instance"
+    },
+    {
+     "title": "Probability with numbered cards",
+     "text": [
+      "Each card is equally likely, so the probability is the number of cards with the property divided by the number of cards.",
+      "List or count the numbers from 1 to N that have the property (multiples: divide N by k and drop the remainder), then divide by N."
+     ],
+     "math": [
+      "Cards numbered 1 to 10 are shuffled, and one card is drawn at random. What is the probability that the number on it is a multiple of 4?",
+      "2 of the cards 1 to 10 have that property",
+      "P = 2/10"
+     ]
+    },
+    {
+     "title": "Probability with two dice",
+     "text": [
+      "Two dice give 6 × 6 = 36 equally likely ordered pairs (first die, second die); (2, 5) and (5, 2) are different outcomes.",
+      "Draw the 6 × 6 grid of pairs, mark the pairs in the event, count them and divide by 36."
+     ],
+     "math": [
+      "Two fair dice are thrown at the same time. What is the probability that the product of the two numbers is greater than 10? Give a fraction.",
+      "Each of the 6 numbers on the first die goes with each of the 6 on the second: 6 × 6 = 36 equally likely outcomes",
+      "17 of the 36 pairs fit",
+      "P = 17/36"
+     ],
+     "widget": {
+      "type": "grid",
+      "rows": 6,
+      "cols": 6
+     }
+    },
+    {
+     "title": "Which assignment of probabilities is valid",
+     "text": [
+      "An assignment of probabilities to the outcomes of a finite sample space is valid when every value is at least 0 and at most 1 and the values add up to exactly 1 (the axioms).",
+      "For each assignment, write the values with a common denominator, check that none is negative or above 1, and add the numerators: they must give the denominator."
+     ],
+     "math": [
+      "A random experiment has the sample space S = {ω₁, ω₂, ω₃, ω₄}. Which of these assignments of probabilities to the outcomes is valid?",
+      "P(ω₁) = 1/6, P(ω₂) = 1/6, P(ω₃) = 1/6, P(ω₄) = 1/2: every value is between 0 and 1 and the four add up to 1",
+      "So the valid one is A"
+     ]
+    },
+    {
+     "title": "Probability by counting selections",
+     "text": [
+      "When r things are chosen together at random, every selection is equally likely, so P = (number of favourable selections)/(number of all selections), each counted with ⁿCᵣ.",
+      "All selections: ⁿCᵣ. Favourable: choose the k of one kind and the r − k of the other kind, and multiply the two counts. For 'at least one', use 1 − P(none)."
+     ],
+     "math": [
+      "A box has 2 good bulbs and 6 faulty bulbs. 2 bulbs are taken out together at random. What is the probability that exactly 1 of them is faulty?",
+      "All selections: 8C2 = 28",
+      "Favourable: 6 × 2 = 12",
+      "P = 3/7"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:anbag:6,9,7,2",
+    "gen:anbag:9,2,4,1",
+    "gen:anbag:1,4,3,2"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Equally likely outcomes, step by step",
+       "text": [
+        "The event \"green\" happens for 6 of them, so its probability is 6 out of 18."
+       ],
+       "math": [
+        "A bag has 3 red, 9 blue and 6 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+        "All the balls: 3 + 9 + 6 = 18",
+        "6 of them are green",
+        "P = 6/18"
+       ],
+       "role": "worked-example",
+       "instance": "gen:anbag:3,9,6,2",
+       "textFrom": "instance"
+      }
+     ],
+     "guided": "gen:anbag:2,8,5,0",
+     "check": "gen:anbag:5,4,5,0"
+    },
+    {
+     "id": "out-of",
+     "title": "Out of how many?",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Out of how many?",
+       "text": [
+        "Imagine numbering the balls 1 to 18. Each number is as likely as any other.",
+        "8 of the 18 numbers are on red balls, so the probability is 8 out of 18."
+       ],
+       "math": [
+        "A bag has 8 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+        "All the balls: 8 + 7 + 3 = 18",
+        "8 of them are red",
+        "P = 8/18"
+       ],
+       "role": "strategy",
+       "instance": "gen:anbag:8,7,3,0",
+       "textFrom": "instance"
+      }
+     ],
+     "guided": "gen:anbag:9,7,3,0",
+     "check": "gen:anbag:5,6,8,1:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:anbag:6,3,0,1",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “A bag has 6 red, 3 blue balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.” A common wrong answer is 1/2.",
+        "The blue balls were compared with the other balls; a probability compares them with all 9 balls."
+       ],
+       "math": [
+        "Not 1/2, but 1/3"
+       ]
+      }
+     ],
+     "guided": "gen:anbag:6,3,0,0",
+     "check": "gen:anbag:5,4,5,1:mc"
+    },
+    {
+     "id": "check_what_it_uses",
+     "title": "Check what it builds on",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "role": "prerequisite",
+       "title": "What it uses",
+       "text": [
+        "Each step builds on another skill: Combine quantities within 20; Enumerate simple sample spaces. If a step is slow, practise that skill first.",
+        "Then the method is: Count all the balls, count the balls of the asked colour, and write the second over the first."
+       ]
+      }
+     ],
+     "guided": "gen:anbag:3,5,6,2",
+     "check": "gen:anbag:5,6,8,0"
+    },
+    {
+     "id": "fix_colours_equally_likely",
+     "title": "Count balls, not colours",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "anbag"
+     },
+     "addresses": "colours-equally-likely",
+     "screens": [
+      {
+       "title": "Count balls, not colours: what went wrong",
+       "text": [
+        "Each colour was taken as equally likely; the colours have different numbers of balls, and it is the balls that are equally likely.",
+        "It is the balls that are equally likely, not the colours."
+       ],
+       "math": [
+        "Not 1/3, but 1/5",
+        "Check: 6 blue balls and only 2 green balls: a green ball is less likely to come out than a blue one, so the colours cannot all have the same chance."
+       ],
+       "role": "misconception",
+       "instance": "gen:anbag:2,6,2,2"
+      },
+      {
+       "title": "Count balls, not colours: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All the balls: 2 red + 6 blue + 2 green = 10, each equally likely",
+        "Balls that fit \"green\": 2",
+        "P = 2/10 = 1/5"
+       ],
+       "role": "strategy",
+       "instance": "gen:anbag:2,6,2,2"
+      }
+     ],
+     "guided": "gen:anbag:9,2,4,2",
+     "check": "gen:anbag:6,8,0,1:mc"
+    }
+   ],
+   "practice": [
+    "gen:anbag:2,2,3,0",
+    "gen:anbag:3,2,3,0:mc",
+    "gen:anbag:8,7,3,1",
+    "gen:ancardn:43,3,4",
+    "gen:andice:8,11",
+    "gen:anaxiom:88",
+    "gen:anncr:1,2,2,3,2"
+   ],
+   "transfer": [
+    "gen:anbag:3,9,6,0:w",
+    "gen:ancardn:10,0,3:w",
+    "gen:andice:1,7:w"
+   ],
+   "retention": [
+    "gen:anbag:3,4,7,1",
+    "gen:ancardn:37,1,0:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "anbag",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "anbag",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ancardn",
+     "version": "1.0.0"
+    },
+    {
+     "family": "andice",
+     "version": "1.0.0"
+    },
+    {
+     "family": "anaxiom",
+     "version": "1.0.0"
+    },
+    {
+     "family": "anncr",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2+teaching-contract@1",
+    "family": "anbag",
+    "seed": [
+     9,
+     7,
+     3,
+     1
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:anbag:9,7,3,1",
+     "gen:anbag:6,3,0,1",
+     "gen:anbag:3,9,6,2"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.statistics.scaled-bars",
+   "title": "Reading a bar chart with a scale",
+   "chapter": [
+    {
+     "title": "Reading a bar chart with a scale",
+     "text": [
+      "On a scaled bar chart each line on the side stands for more than 1 (for example 5 or 50). The height of a bar is read off the scale, not by counting squares as ones."
+     ],
+     "math": [
+      "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Thursday and on Friday together?",
+      "The bar reaches 2 lines; each line is 5, so it shows 10",
+      "The bar reaches 4 lines; each line is 5, so it shows 20",
+      "Together: 10 + 20 = 30"
+     ],
+     "tip": "The lines were counted as 1 each. On this chart each line on the scale stands for 5.",
+     "role": "concept",
+     "instance": "gen:afbar:1,2,13"
+    }
+   ],
+   "diagnostics": [
+    "gen:afbar:3,2,6",
+    "gen:afbar:1,1,9",
+    "gen:afbar:0,2,1"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Find how much one line stands for (the difference between two numbers on the scale). Read each bar against the scale, then add or subtract as the question asks."
+       ],
+       "math": [
+        "The bar chart shows books borrowed from the library. Read the scale carefully. How many books were borrowed on Wednesday and on Tuesday together?",
+        "The bar reaches 9 lines; each line is 5, so it shows 45",
+        "The bar reaches 6 lines; each line is 5, so it shows 30",
+        "Together: 45 + 30 = 75"
+       ],
+       "role": "worked-example",
+       "instance": "gen:afbar:1,2,12"
+      }
+     ],
+     "guided": "gen:afbar:4,0,2",
+     "check": "gen:afbar:1,2,11"
+    },
+    {
+     "id": "skip_count",
+     "title": "Skip-count up the scale",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Skip-count up the scale",
+       "text": [
+        "Put a finger at the bottom of the bar and count up the lines in steps of the scale: 5, 10, 15 …",
+        "Stop at the top of the bar: that number is its value."
+       ],
+       "math": [
+        "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Friday?",
+        "The bar reaches 8 lines; each line is 50, so it shows 400"
+       ],
+       "widget": {
+        "type": "bars",
+        "labels": [
+         "Fri"
+        ],
+        "values": [
+         400
+        ],
+        "scale": 50
+       },
+       "role": "strategy",
+       "instance": "gen:afbar:4,0,1"
+      }
+     ],
+     "guided": "gen:afbar:4,0,0",
+     "check": "gen:afbar:1,2,10:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:afbar:4,0,3",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “The bar chart shows saplings planted by each class. Read the scale carefully. How many saplings were planted by Class 2?” A common wrong answer is 9.",
+        "The lines were counted as 1 each. On this chart each line on the scale stands for 50."
+       ],
+       "math": [
+        "Not 9, but 450"
+       ]
+      }
+     ],
+     "guided": "gen:afbar:3,2,5",
+     "check": "gen:afbar:4,0,7:mc"
+    },
+    {
+     "id": "check_what_it_uses",
+     "title": "Check what it builds on",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "role": "prerequisite",
+       "title": "What it uses",
+       "text": [
+        "Each step builds on another skill: Read simple bar charts. If a step is slow, practise that skill first.",
+        "Then the method is: Find how much one line stands for (the difference between two numbers on the scale). Read each bar against the scale, then add or subtract as the question asks."
+       ]
+      }
+     ],
+     "guided": "gen:afbar:3,2,2",
+     "check": "gen:afbar:4,0,6"
+    },
+    {
+     "id": "fix_assume_tens",
+     "title": "Read the scale; do not assume 10",
+     "kind": "procedural",
+     "needs": [],
+     "scope": {
+      "family": "afbar"
+     },
+     "addresses": "assume-tens",
+     "screens": [
+      {
+       "title": "Read the scale; do not assume 10: what went wrong",
+       "text": [
+        "Each line was taken as 10. Read the numbers on the scale: they tell how much each line stands for.",
+        "Do not assume 10: read the numbers on the scale to see what one line stands for."
+       ],
+       "math": [
+        "Not 80, but 16",
+        "Check: two numbers next to each other on the scale differ by the size of one line."
+       ],
+       "role": "misconception",
+       "instance": "gen:afbar:0,2,5"
+      },
+      {
+       "title": "Read the scale; do not assume 10: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Thu: 2; Fri: 14 (scale 2 per line)",
+        "2 + 14 = 16"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:0,2,5"
+      }
+     ],
+     "guided": "gen:afbar:0,2,2",
+     "check": "gen:afbar:1,1,1"
+    }
+   ],
+   "practice": [
+    "gen:afbar:3,2,3",
+    "gen:afbar:3,2,0:mc",
+    "gen:afbar:3,2,1"
+   ],
+   "transfer": [
+    "gen:afbar:0,2,8:w"
+   ],
+   "retention": [
+    "gen:afbar:3,2,7",
+    "gen:afbar:3,2,4:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "afbar",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "afbar",
+    "seed": [
+     1,
+     2,
+     13
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:afbar:1,2,13",
+     "gen:afbar:4,0,3",
+     "gen:afbar:1,2,12"
+    ]
+   }
+  },
+  {
    "competency": "MATH.algebra.variables",
    "title": "A value on a straight line",
    "chapter": [
@@ -25306,167 +26096,6 @@
    }
   },
   {
-   "competency": "MATH.statistics.scaled-bars",
-   "title": "Reading a bar chart with a scale",
-   "chapter": [
-    {
-     "title": "Reading a bar chart with a scale",
-     "text": [
-      "On a scaled bar chart each line on the side stands for more than 1 (for example 5 or 50). The height of a bar is read off the scale, not by counting squares as ones."
-     ],
-     "math": [
-      "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Thursday and on Friday together?",
-      "The bar reaches 2 lines; each line is 5, so it shows 10",
-      "The bar reaches 4 lines; each line is 5, so it shows 20",
-      "Together: 10 + 20 = 30"
-     ],
-     "tip": "The lines were counted as 1 each. On this chart each line on the scale stands for 5.",
-     "role": "concept",
-     "instance": "gen:afbar:1,2,13"
-    }
-   ],
-   "diagnostics": [
-    "gen:afbar:3,2,6",
-    "gen:afbar:1,1,9",
-    "gen:afbar:0,2,1"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Find how much one line stands for (the difference between two numbers on the scale). Read each bar against the scale, then add or subtract as the question asks."
-       ],
-       "math": [
-        "The bar chart shows books borrowed from the library. Read the scale carefully. How many books were borrowed on Wednesday and on Tuesday together?",
-        "The bar reaches 9 lines; each line is 5, so it shows 45",
-        "The bar reaches 6 lines; each line is 5, so it shows 30",
-        "Together: 45 + 30 = 75"
-       ],
-       "role": "worked-example",
-       "instance": "gen:afbar:1,2,12"
-      }
-     ],
-     "guided": "gen:afbar:4,0,2",
-     "check": "gen:afbar:1,2,11"
-    },
-    {
-     "id": "skip_count",
-     "title": "Skip-count up the scale",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Skip-count up the scale",
-       "text": [
-        "Put a finger at the bottom of the bar and count up the lines in steps of the scale: 5, 10, 15 …",
-        "Stop at the top of the bar: that number is its value."
-       ],
-       "math": [
-        "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Friday?",
-        "The bar reaches 8 lines; each line is 50, so it shows 400"
-       ],
-       "widget": {
-        "type": "bars",
-        "labels": [
-         "Fri"
-        ],
-        "values": [
-         400
-        ],
-        "scale": 50
-       },
-       "role": "strategy",
-       "instance": "gen:afbar:4,0,1"
-      }
-     ],
-     "guided": "gen:afbar:4,0,0",
-     "check": "gen:afbar:1,2,10:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:afbar:4,0,3",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “The bar chart shows saplings planted by each class. Read the scale carefully. How many saplings were planted by Class 2?” A common wrong answer is 9.",
-        "The lines were counted as 1 each. On this chart each line on the scale stands for 50."
-       ],
-       "math": [
-        "Not 9, but 450"
-       ]
-      }
-     ],
-     "guided": "gen:afbar:3,2,5",
-     "check": "gen:afbar:4,0,7:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Read simple bar charts. If a step is slow, practise that skill first.",
-        "Then the method is: Find how much one line stands for (the difference between two numbers on the scale). Read each bar against the scale, then add or subtract as the question asks."
-       ]
-      }
-     ],
-     "guided": "gen:afbar:3,2,2",
-     "check": "gen:afbar:4,0,6"
-    }
-   ],
-   "practice": [
-    "gen:afbar:3,2,3",
-    "gen:afbar:3,2,0:mc",
-    "gen:afbar:3,2,1"
-   ],
-   "transfer": [
-    "gen:afbar:0,2,8:w"
-   ],
-   "retention": [
-    "gen:afbar:3,2,7",
-    "gen:afbar:3,2,4:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "afbar",
-    "version": "1.0.0"
-   },
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "afbar",
-    "seed": [
-     1,
-     2,
-     13
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:afbar:1,2,13",
-     "gen:afbar:4,0,3",
-     "gen:afbar:1,2,12"
-    ]
-   }
-  },
-  {
    "competency": "MATH.algebra.expressions-intro",
    "title": "Writing a number rule with a letter",
    "chapter": [
@@ -40486,217 +41115,6 @@
    }
   },
   {
-   "competency": "MATH.statistics.median-mode",
-   "title": "Finding the median",
-   "chapter": [
-    {
-     "title": "Finding the median",
-     "text": [
-      "The median is the middle value when the data are in order: half the values are below it and half above, so a few very large or very small values do not pull it."
-     ],
-     "math": [
-      "Find the median of these numbers: 28, 22, 17, 39, 26, 16, 29, 45, 12.",
-      "In order: 12, 16, 17, 22, 26, 28, 29, 39, 45",
-      "The middle value is 26"
-     ],
-     "role": "concept",
-     "instance": "gen:akmed:33,9"
-    },
-    {
-     "title": "Finding the mode",
-     "text": [
-      "The mode is the value that occurs most often. It is useful for things like shoe sizes, where a shop wants to know the most common size.",
-      "Make a frequency table (or sort the values) and choose the value with the highest frequency."
-     ],
-     "math": [
-      "Here are the marks (out of 10) in a spelling test: 5, 9, 9, 6, 5, 5, 7, 5, 4, 4, 7. What is the mode?",
-      "5 appears 4 times, more than any other value",
-      "So the mode is 5"
-     ],
-     "widget": {
-      "type": "bars",
-      "title": "how often each value occurs",
-      "labels": [
-       "4",
-       "5",
-       "6",
-       "7",
-       "9"
-      ],
-      "values": [
-       2,
-       4,
-       1,
-       2,
-       2
-      ],
-      "scale": 1
-     }
-    },
-    {
-     "title": "The mean of data in a frequency table",
-     "text": [
-      "A frequency table is a short way of writing a long list: a value with frequency 4 stands for that value written 4 times. The mean shares the total of ALL the values equally.",
-      "Multiply each value by its frequency and add these to get the total. Add the frequencies to get how many values there are. Divide the total by that number."
-     ],
-     "math": [
-      "The frequency table shows the number of goals per match for a group. Find the mean number of goals per match.",
-      "Multiply each value by its frequency: 0 × 6, 1 × 1, 2 × 9, 3 × 6, 4 × 8 = 0, 1, 18, 18, 32",
-      "Total of all values: 69",
-      "Number of values: 6 + 1 + 9 + 6 + 8 = 30",
-      "Mean = 69 ÷ 30 = 2.3"
-     ]
-    },
-    {
-     "title": "The median of data in a frequency table",
-     "text": [
-      "In a frequency table each value appears as many times as its frequency; the median is the middle value of that full ordered list.",
-      "Add the frequencies to get n. Find the middle position ((n + 1)/2 for odd n). Keep a running total of the frequencies until it reaches that position: that row's value is the median."
-     ],
-     "math": [
-      "The table in the picture shows the number of books each student in a class read during the summer holidays. What is the median?",
-      "There are 2 + 6 + 7 + 2 + 1 = 18 values in all",
-      "Running totals: 2, 8, 15, 17, 18",
-      "The middle (value number 9) falls in the row of 9"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:akmed:66,10",
-    "gen:akmed:7,6",
-    "gen:akmed:69,6"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Write the values in order. With an odd number of values, the median is the middle one; with an even number, it is halfway between the two middle ones."
-       ],
-       "math": [
-        "Find the median of these numbers: 35, 40, 25, 27, 28.",
-        "In order: 25, 27, 28, 35, 40",
-        "The middle value is 28"
-       ],
-       "role": "worked-example",
-       "instance": "gen:akmed:54,5"
-      }
-     ],
-     "guided": "gen:akmed:3,10",
-     "check": "gen:akmed:54,6"
-    },
-    {
-     "id": "cross_off",
-     "title": "Cross off from both ends",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Cross off from both ends",
-       "text": [
-        "Write the values in order, then cross off the smallest and the largest, again and again.",
-        "The one value left (or halfway between the last two) is the median."
-       ],
-       "math": [
-        "Find the median of these numbers: 49, 43, 38, 57, 60, 30, 39, 55.",
-        "In order: 30, 38, 39, 43, 49, 55, 57, 60",
-        "The two middle values are 43 and 49: (43 + 49) ÷ 2 = 46"
-       ],
-       "role": "strategy",
-       "instance": "gen:akmed:33,8"
-      }
-     ],
-     "guided": "gen:akmed:77,8",
-     "check": "gen:akmed:54,7:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:akmed:77,9",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Find the median of these numbers: 42, 25, 56, 41, 17, 31, 29, 30, 38.” A common wrong answer is 17.",
-        "The middle number of the list as given was taken. Put the numbers in order first."
-       ],
-       "math": [
-        "Not 17, but 31"
-       ]
-      }
-     ],
-     "guided": "gen:akmed:2,9",
-     "check": "gen:akmed:2,5:mc"
-    }
-   ],
-   "practice": [
-    "gen:akmed:27,10",
-    "gen:akmed:2,8:mc",
-    "gen:akmed:8,6",
-    "gen:akmode:4",
-    "gen:akfmean:1562",
-    "gen:avfmed:10,5,4,9,2,3"
-   ],
-   "transfer": [
-    "gen:akmed:2,7:w",
-    "gen:akmode:5:w",
-    "gen:akfmean:1577:w"
-   ],
-   "retention": [
-    "gen:akmed:43,7",
-    "gen:akmode:1:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "akmed",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "akmed",
-     "version": "1.0.0"
-    },
-    {
-     "family": "akmode",
-     "version": "1.0.0"
-    },
-    {
-     "family": "akfmean",
-     "version": "1.0.0"
-    },
-    {
-     "family": "avfmed",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "akmed",
-    "seed": [
-     33,
-     9
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:akmed:33,9",
-     "gen:akmed:77,9",
-     "gen:akmed:54,5"
-    ]
-   }
-  },
-  {
    "competency": "MATH.statistics.histograms",
    "title": "Reading a histogram of grouped data",
    "chapter": [
@@ -46692,247 +47110,6 @@
      "gen:anmod:174,7",
      "gen:anmod:73,8",
      "gen:anmod:213,4"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.probability.classical",
-   "title": "Probability of a colour drawn from a bag",
-   "chapter": [
-    {
-     "title": "Equally likely outcomes",
-     "text": [
-      "The bag has 9 + 7 + 3 = 19 balls of the same size, so each of the 19 balls is equally likely to be taken.",
-      "The event \"blue\" happens for 7 of them, so its probability is 7 out of 19."
-     ],
-     "math": [
-      "A bag has 9 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.",
-      "All the balls: 9 + 7 + 3 = 19",
-      "7 of them are blue",
-      "P = 7/19"
-     ],
-     "tip": "The blue balls were compared with the other balls; a probability compares them with all 19 balls.",
-     "role": "concept",
-     "instance": "gen:anbag:9,7,3,1",
-     "textFrom": "instance"
-    },
-    {
-     "title": "Probability with numbered cards",
-     "text": [
-      "Each card is equally likely, so the probability is the number of cards with the property divided by the number of cards.",
-      "List or count the numbers from 1 to N that have the property (multiples: divide N by k and drop the remainder), then divide by N."
-     ],
-     "math": [
-      "Cards numbered 1 to 10 are shuffled, and one card is drawn at random. What is the probability that the number on it is a multiple of 4?",
-      "2 of the cards 1 to 10 have that property",
-      "P = 2/10"
-     ]
-    },
-    {
-     "title": "Probability with two dice",
-     "text": [
-      "Two dice give 6 × 6 = 36 equally likely ordered pairs (first die, second die); (2, 5) and (5, 2) are different outcomes.",
-      "Draw the 6 × 6 grid of pairs, mark the pairs in the event, count them and divide by 36."
-     ],
-     "math": [
-      "Two fair dice are thrown at the same time. What is the probability that the product of the two numbers is greater than 10? Give a fraction.",
-      "Each of the 6 numbers on the first die goes with each of the 6 on the second: 6 × 6 = 36 equally likely outcomes",
-      "17 of the 36 pairs fit",
-      "P = 17/36"
-     ],
-     "widget": {
-      "type": "grid",
-      "rows": 6,
-      "cols": 6
-     }
-    },
-    {
-     "title": "Which assignment of probabilities is valid",
-     "text": [
-      "An assignment of probabilities to the outcomes of a finite sample space is valid when every value is at least 0 and at most 1 and the values add up to exactly 1 (the axioms).",
-      "For each assignment, write the values with a common denominator, check that none is negative or above 1, and add the numerators: they must give the denominator."
-     ],
-     "math": [
-      "A random experiment has the sample space S = {ω₁, ω₂, ω₃, ω₄}. Which of these assignments of probabilities to the outcomes is valid?",
-      "P(ω₁) = 1/6, P(ω₂) = 1/6, P(ω₃) = 1/6, P(ω₄) = 1/2: every value is between 0 and 1 and the four add up to 1",
-      "So the valid one is A"
-     ]
-    },
-    {
-     "title": "Probability by counting selections",
-     "text": [
-      "When r things are chosen together at random, every selection is equally likely, so P = (number of favourable selections)/(number of all selections), each counted with ⁿCᵣ.",
-      "All selections: ⁿCᵣ. Favourable: choose the k of one kind and the r − k of the other kind, and multiply the two counts. For 'at least one', use 1 − P(none)."
-     ],
-     "math": [
-      "A box has 2 good bulbs and 6 faulty bulbs. 2 bulbs are taken out together at random. What is the probability that exactly 1 of them is faulty?",
-      "All selections: 8C2 = 28",
-      "Favourable: 6 × 2 = 12",
-      "P = 3/7"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:anbag:6,9,7,2",
-    "gen:anbag:9,2,4,1",
-    "gen:anbag:1,4,3,2"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Equally likely outcomes, step by step",
-       "text": [
-        "The event \"green\" happens for 6 of them, so its probability is 6 out of 18."
-       ],
-       "math": [
-        "A bag has 3 red, 9 blue and 6 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
-        "All the balls: 3 + 9 + 6 = 18",
-        "6 of them are green",
-        "P = 6/18"
-       ],
-       "role": "worked-example",
-       "instance": "gen:anbag:3,9,6,2",
-       "textFrom": "instance"
-      }
-     ],
-     "guided": "gen:anbag:2,8,5,0",
-     "check": "gen:anbag:5,4,5,0"
-    },
-    {
-     "id": "out-of",
-     "title": "Out of how many?",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Out of how many?",
-       "text": [
-        "Imagine numbering the balls 1 to 18. Each number is as likely as any other.",
-        "8 of the 18 numbers are on red balls, so the probability is 8 out of 18."
-       ],
-       "math": [
-        "A bag has 8 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
-        "All the balls: 8 + 7 + 3 = 18",
-        "8 of them are red",
-        "P = 8/18"
-       ],
-       "role": "strategy",
-       "instance": "gen:anbag:8,7,3,0",
-       "textFrom": "instance"
-      }
-     ],
-     "guided": "gen:anbag:9,7,3,0",
-     "check": "gen:anbag:5,6,8,1:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:anbag:6,3,0,1",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “A bag has 6 red, 3 blue balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.” A common wrong answer is 1/2.",
-        "The blue balls were compared with the other balls; a probability compares them with all 9 balls."
-       ],
-       "math": [
-        "Not 1/2, but 1/3"
-       ]
-      }
-     ],
-     "guided": "gen:anbag:6,3,0,0",
-     "check": "gen:anbag:5,4,5,1:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Combine quantities within 20; Enumerate simple sample spaces. If a step is slow, practise that skill first.",
-        "Then the method is: Count all the balls, count the balls of the asked colour, and write the second over the first."
-       ]
-      }
-     ],
-     "guided": "gen:anbag:3,5,6,2",
-     "check": "gen:anbag:5,6,8,0"
-    }
-   ],
-   "practice": [
-    "gen:anbag:2,2,3,0",
-    "gen:anbag:3,2,3,0:mc",
-    "gen:anbag:8,7,3,1",
-    "gen:ancardn:43,3,4",
-    "gen:andice:8,11",
-    "gen:anaxiom:88",
-    "gen:anncr:1,2,2,3,2"
-   ],
-   "transfer": [
-    "gen:anbag:3,9,6,0:w",
-    "gen:ancardn:10,0,3:w",
-    "gen:andice:1,7:w"
-   ],
-   "retention": [
-    "gen:anbag:3,4,7,1",
-    "gen:ancardn:37,1,0:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "anbag",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "anbag",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ancardn",
-     "version": "1.0.0"
-    },
-    {
-     "family": "andice",
-     "version": "1.0.0"
-    },
-    {
-     "family": "anaxiom",
-     "version": "1.0.0"
-    },
-    {
-     "family": "anncr",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2+teaching-contract@1",
-    "family": "anbag",
-    "seed": [
-     9,
-     7,
-     3,
-     1
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:anbag:9,7,3,1",
-     "gen:anbag:6,3,0,1",
-     "gen:anbag:3,9,6,2"
     ]
    }
   },

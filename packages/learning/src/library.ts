@@ -20,6 +20,7 @@ import { difficultyOf, explainStep, exposureKey, FAMILIES, phasePool, pool, prob
 import { graph } from "./graph";
 import { selectable } from "./question-status";
 import { FAMILY_VERSION } from "./spec";
+import { strategyScopeProblems } from "./teaching-presentation";
 
 export const LIBRARY_POLICY = "library@2";
 
@@ -41,6 +42,8 @@ export interface BlueprintStrategy {
   screens: BlueprintScreen[];
 }
 export interface Blueprint {
+  /** Preserve the generated template and append explicit candidate strategies only. */
+  extendsTemplate?: true;
   competency: string;
   title: string;
   family: string;
@@ -132,6 +135,39 @@ function subSkills(competency: string, family: string, used: Set<string>) {
 const worked = (ex: Problem) => [ex.prompt.replace(/ \(.*\)$/, "").replace(/ Choose one\.$/, ""), ...ex.steps.map((st) => explainStep(ex, st))];
 
 export function synthesise(bp: Blueprint, blueprintVersion: string): SynthesisedModule {
+  if (bp.extendsTemplate) {
+    const base = fromTemplate(bp.family, bp.competency, blueprintVersion);
+    if (bp.chapter.length) throw new Error(`${LIBRARY_POLICY}: template extensions cannot replace the chapter`);
+    const ids = new Set(base.strategies.map(s => s.id));
+    const shown = new Set([...base.chapter, ...base.strategies.flatMap(s => s.screens)]
+      .flatMap(sc => sc.instance ? [exposureKey(sc.instance)] : []));
+    const reserved = new Set([...shown, ...[...base.diagnostics, ...base.practice, ...base.transfer, ...base.retention,
+      ...base.strategies.flatMap(s => [s.guided, s.check])].map(exposureKey)]);
+    const additions: Strategy[] = bp.strategies.map(st => {
+      if (ids.has(st.id)) throw new Error(`${LIBRARY_POLICY}: duplicate strategy ${st.id}`);
+      ids.add(st.id);
+      if (!st.scope || st.scope.family !== bp.family || st.buildsOnPrerequisites || st.screens.some(sc => sc.worked || !sc.instance))
+        throw new Error(`${LIBRARY_POLICY}: ${st.id}: template additions require explicit scoped instances`);
+      for (const key of new Set(st.screens.map(sc => exposureKey(sc.instance!)))) {
+        if (reserved.has(key)) throw new Error(`${LIBRARY_POLICY}: ${st.id}: shown example repeats a reserved exposure`);
+        reserved.add(key);
+      }
+      for (const [id, phase] of [[st.guided, 'practice'], [st.check, 'check']] as const) {
+        if (!id || !selectable(id) || reserved.has(exposureKey(id)) || !phasePool(bp.family, phase).some(q => exposureKey(q) === exposureKey(id)))
+          throw new Error(`${LIBRARY_POLICY}: ${st.id}: ${phase} item unavailable, reused or outside partition`);
+        reserved.add(exposureKey(id));
+      }
+      for (const sc of st.screens) {
+        if (exposureKey(sc.instance!) === exposureKey(st.check!)) throw new Error(`${LIBRARY_POLICY}: ${st.id}: check repeats shown example`);
+      }
+      const candidate: Strategy = { id: st.id, title: st.title, kind: st.kind, needs: [], scope: st.scope,
+        ...(st.addresses !== undefined ? { addresses: st.addresses } : {}), screens: st.screens, guided: st.guided!, check: st.check! };
+      const problems = strategyScopeProblems(base, candidate);
+      if (problems.length) throw new Error(`${LIBRARY_POLICY}: ${st.id}: ${problems.join('; ')}`);
+      return candidate;
+    });
+    return { ...base, strategies: [...base.strategies, ...additions] };
+  }
   const seed = problemOf(`gen:${bp.family}:${bp.seed.join(",")}`);
   if (!seed) throw new Error(`${LIBRARY_POLICY}: ${bp.competency}: the seed is not a supported ${bp.family} problem`);
   if (seed.competency !== bp.competency) throw new Error(`${LIBRARY_POLICY}: ${bp.competency}: family ${bp.family} is about ${seed.competency}`);

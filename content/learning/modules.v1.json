@@ -154,6 +154,138 @@
      ],
      "guided": "fm-g1",
      "check": "fm-c1"
+    },
+    {
+     "id": "adfname_concept",
+     "title": "Naming a shaded fraction: out of ALL the equal parts",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "A fraction names equal parts of ONE whole. The bottom number is how many equal parts the whole is cut into, all of them, shaded or not.",
+        "The top number is how many of those parts we mean. So the fraction of a shape that is shaded is (shaded parts) over (all the equal parts)."
+       ],
+       "math": [
+        "All the equal squares: 1 × 7 = 7",
+        "Shaded: 1",
+        "1/7"
+       ],
+       "widget": {
+        "type": "grid",
+        "rows": 1,
+        "cols": 7,
+        "shaded": 1
+       },
+       "role": "concept",
+       "instance": "gen:adfname:1,7,1"
+      },
+      {
+       "title": "Same fraction on a cake",
+       "text": [
+        "Cut a round cake into the same number of equal pieces and colour the same number. The fraction is the same."
+       ],
+       "role": "strategy",
+       "instance": "gen:adfname:1,7,1"
+      },
+      {
+       "title": "Another way: Unshaded first",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "unshaded 6, so shaded = 7 − 6 = 1 of 7"
+       ],
+       "role": "strategy",
+       "instance": "gen:adfname:1,7,1"
+      }
+     ],
+     "guided": "gen:adfname:3,2,1:mc",
+     "check": "gen:adfname:4,4,9",
+     "scope": {
+      "family": "adfname"
+     }
+    },
+    {
+     "id": "fix_shaded_to_unshaded",
+     "title": "Shaded out of ALL the parts",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Shaded out of ALL the parts: what went wrong",
+       "text": [
+        "The shaded squares were put over the unshaded ones. The bottom number is ALL the equal parts of the whole.",
+        "The bottom number counts ALL the equal parts of the whole, the shaded ones too."
+       ],
+       "math": [
+        "Not 1/7, but 1/8",
+        "Check: the whole shape is cut into 8 equal squares, so each square is 1/8 of it, and 1 shaded square is 1/8."
+       ],
+       "role": "misconception",
+       "instance": "gen:adfname:4,2,1"
+      },
+      {
+       "title": "Shaded out of ALL the parts: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All the equal squares: 4 × 2 = 8",
+        "Shaded: 1",
+        "1/8"
+       ],
+       "role": "strategy",
+       "instance": "gen:adfname:4,2,1"
+      }
+     ],
+     "guided": "gen:adfname:5,2,7",
+     "check": "gen:adfname:2,7,1:mc",
+     "scope": {
+      "family": "adfname"
+     },
+     "addresses": "shaded-to-unshaded"
+    },
+    {
+     "id": "fix_count_only",
+     "title": "A fraction is parts out of the whole",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A fraction is parts out of the whole: what went wrong",
+       "text": [
+        "Only the shaded squares were counted. A fraction also says how many equal parts make the whole.",
+        "A fraction says how many parts out of how many: write the shaded parts over all the parts."
+       ],
+       "math": [
+        "Not 1, but 1/12",
+        "Check: 1 shaded square out of 12 is a part of the shape; the number 1 alone does not say out of how many."
+       ],
+       "role": "misconception",
+       "instance": "gen:adfname:4,3,1"
+      },
+      {
+       "title": "A fraction is parts out of the whole: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All the equal squares: 4 × 3 = 12",
+        "Shaded: 1",
+        "1/12"
+       ],
+       "role": "strategy",
+       "instance": "gen:adfname:4,3,1"
+      }
+     ],
+     "guided": "gen:adfname:3,5,8",
+     "check": "gen:adfname:2,9,11:mc",
+     "scope": {
+      "family": "adfname"
+     },
+     "addresses": "count-only"
     }
    ],
    "practice": [

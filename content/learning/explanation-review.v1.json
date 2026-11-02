@@ -25263,6 +25263,32 @@
    ]
   },
   {
+   "id": "MATH.number.fraction-models#adfname_concept",
+   "subject": "mathematics",
+   "competency": "MATH.number.fraction-models",
+   "strategy": "adfname_concept",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:a8df661c58f6ac70ab57216d2eb7e7eb2498c339f48917b49c4042d5cada423e",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T05:14:07.598Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.number.fraction-models#chapter",
    "subject": "mathematics",
    "competency": "MATH.number.fraction-models",
@@ -25304,6 +25330,58 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.136Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.fraction-models#fix_count_only",
+   "subject": "mathematics",
+   "competency": "MATH.number.fraction-models",
+   "strategy": "fix_count_only",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "count-only",
+   "revisions": [
+    {
+     "contentHash": "sha256:dbdcceb11f35100898b27709430561bc7df1451608ca7ed35f9e8ddf10bd1a8d",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T05:14:07.601Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.fraction-models#fix_shaded_to_unshaded",
+   "subject": "mathematics",
+   "competency": "MATH.number.fraction-models",
+   "strategy": "fix_shaded_to_unshaded",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "shaded-to-unshaded",
+   "revisions": [
+    {
+     "contentHash": "sha256:43839d37c4d96f9418ddb8c3f45cba5b5fcb9c57a3fe7d428128e69871e54d6f",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T05:14:07.600Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -31290,6 +31368,32 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.746Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.probability.classical#fix_colours_equally_likely",
+   "subject": "mathematics",
+   "competency": "MATH.probability.classical",
+   "strategy": "fix_colours_equally_likely",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "colours-equally-likely",
+   "revisions": [
+    {
+     "contentHash": "sha256:3f90cd6d0e67871baa87c416b9832aa81e335bebe6e44674c433732d92a3f027",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T05:17:59.198Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -37587,6 +37691,58 @@
    ]
   },
   {
+   "id": "MATH.statistics.median-mode#fix_mean_for_median",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.median-mode",
+   "strategy": "fix_mean_for_median",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "mean-for-median",
+   "revisions": [
+    {
+     "contentHash": "sha256:082d4c5c47db7ea13d4570a5a6d9f982bd68d48c559311bcd2d4c123022ae016",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T05:17:59.192Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.median-mode#fix_one_middle",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.median-mode",
+   "strategy": "fix_one_middle",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "one-middle",
+   "revisions": [
+    {
+     "contentHash": "sha256:bbaa3da9f0831a3ac5718d940cce060e86ce75d8de0f945a7132dc2c6184e6aa",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T05:17:59.194Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.statistics.median-mode#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.statistics.median-mode",
@@ -38044,6 +38200,32 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.336Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.scaled-bars#fix_assume_tens",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.scaled-bars",
+   "strategy": "fix_assume_tens",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "assume-tens",
+   "revisions": [
+    {
+     "contentHash": "sha256:129a23f4d18c53a768c8beaf1c35a0110a8023fe297f4b98ad8bac874f9422e9",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T05:17:59.203Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
