@@ -147,7 +147,7 @@ test("misconception teaching: offered only with evidence of its mistake, only fo
       const p = problemOf(q.replace(/:mc$/, ""))!, b = p.bugs.find((x) => x.id === bug)!;
       assert.equal(typeof b.predict, "number", q);
       assert.notEqual(b.predict, Number(p.answer), q);
-      for (const o of p.bugs.filter((x) => x.id !== bug)) assert.ok(![o.predict].flat().includes(b.predict), `${q}: ${o.id} predicts the same answer`);
+      for (const o of p.bugs.filter((x) => x.id !== bug)) assert.ok(!([o.predict].flat() as unknown[]).includes(b.predict), `${q}: ${o.id} predicts the same answer`);
       assert.equal(probeReading(q.replace(/:mc$/, ""), bug, String(b.predict)).reading, "predicted", q);
     }
     assert.equal(fix.screens[0].math![0], `Not ${problemOf(fix.screens[0].instance!)!.bugs.find((x) => x.id === bug)!.predict}, but ${problemOf(fix.screens[0].instance!)!.answer}`);
