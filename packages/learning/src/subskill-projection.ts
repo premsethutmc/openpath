@@ -31,7 +31,7 @@ export function canonicalOrder<T>(events: readonly T[]): T[] {
   return Array.isArray(events) ? events.map((e) => ({ e, t: at(e), i: idOf(e), c: canon(e) })).sort((x, y) => x.t - y.t || cmp(x.i, y.i) || cmp(x.c, y.c)).map((x) => x.e) : [];
 }
 
-export interface SubSkillDef<Id extends string = string> { id: Id; name: string; example: string; families: string[]; competency: string; note?: string }
+export interface SubSkillDef<Id extends string = string> { id: Id; name: string; example: string; families: string[]; competency: string; note?: string; /** All conditions must hold on validated generator parameters. */ parameters?: readonly { index: number; values: readonly number[] }[] }
 /** A subject's evidence dimensions, as configuration. */
 export interface SubSkillConfig<Id extends string = string> {
   /** projection contract and mapping versions (a new mapping is a new version, never an edit) */
@@ -54,12 +54,6 @@ export const MAX_ATTEMPTS = 20_000;
 
 export type Unknown = { kind: "unknown"; reason: "not-a-generated-question" | "malformed-question-id" | "unmapped-family" | "unknown-family" | "excluded-by-existing-reader"; family: string | null };
 export type Classified<Id extends string = string> = { kind: "mapped"; family: string; subSkill: SubSkillDef<Id>; format: "typed" | "mc" | "w" } | Unknown;
-const byFamily = new WeakMap<SubSkillConfig, Map<string, SubSkillDef>>();
-const familyIndex = <Id extends string>(config: SubSkillConfig<Id>) => {
-  let m = byFamily.get(config as SubSkillConfig);
-  if (!m) byFamily.set(config as SubSkillConfig, (m = new Map(config.subSkills.flatMap((s) => s.families.map((f) => [f, s as SubSkillDef] as const)))));
-  return m as Map<string, SubSkillDef<Id>>;
-};
 /** The sub-skill of a question under a configuration, from the trusted generator id only. */
 export function classifyQuestionWith<Id extends string>(config: SubSkillConfig<Id>, questionId: unknown): Classified<Id> {
   if (typeof questionId !== "string") return { kind: "unknown", reason: "malformed-question-id", family: null };
@@ -67,10 +61,14 @@ export function classifyQuestionWith<Id extends string>(config: SubSkillConfig<I
   const m = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/.exec(questionId);
   if (!m) return { kind: "unknown", reason: "malformed-question-id", family: null };
   if (!FAMILIES.has(m[1])) return { kind: "unknown", reason: "unknown-family", family: m[1] };
-  const s = familyIndex(config).get(m[1]);
-  if (!s) return { kind: "unknown", reason: "unmapped-family", family: m[1] };
+  const params = m[2].split(",").map(Number);
+  const matches = config.subSkills.filter((s) => s.families.includes(m[1]) && (!s.parameters || s.parameters.every((p) => Number.isInteger(p.index) && p.index >= 0 && p.index < params.length && p.values.includes(params[p.index]))));
+  // Ambiguous metadata must never silently credit one of two skills.
+  if (matches.length !== 1) return { kind: "unknown", reason: "unmapped-family", family: m[1] };
+  const s = matches[0];
   // the generator itself must accept the parameters and the answer format (an id a family would never produce is not its evidence)
   const def = FAMILIES.get(m[1])!;
+  if (def.competency !== s.competency) return { kind: "unknown", reason: "unmapped-family", family: m[1] };
   if (!problemOf(`gen:${m[1]}:${m[2]}`) || (m[3] === "mc" && !def.mc) || (m[3] === "w" && !def.word)) return { kind: "unknown", reason: "malformed-question-id", family: m[1] };
   return { kind: "mapped", family: m[1], subSkill: s, format: (m[3] as "mc" | "w" | undefined) ?? "typed" };
 }

@@ -1,3 +1,5 @@
+import { taughtExposureKeys } from "./teaching-exposure";
+import { connectionConfig, connectedSkill, strategyConnects } from "./skill-connections";
 /**
  * learner-hypothesis@1: what the engine has come to believe about WHY a learner answered as they did, kept as a
  * hypothesis that later observations may revise, never as a mathematical fact and never as evidence of mastery.
@@ -149,17 +151,21 @@ export function hypotheses(records: LearnerRecords): LearnerHypothesis[] {
     const scopeSkills = [observedIn, ...(about && about !== observedIn ? [about] : [])];
     // teaching that came after it was established, in scope (the skill it was seen in, or the skill it is about)
     const strict = records.pathway?.active && (records.readinessRoute?.includes(observedIn) || (!!about && records.readinessRoute?.includes(about)));
+    const connection = strict ? connectionConfig(observedIn) : undefined;
+    const skill = connection ? connectedSkill(connection, a.questionId) : null;
     const teachings = established ? records.teaching.filter((t) => {
       if (!scopeSkills.includes(t.competency) || t.at <= established) return false;
       if (!strict) return true; // default historical hypothesis interpretation is unchanged
       const strategy = moduleFor(t.competency)?.strategies.find((s) => s.id === t.strategy);
-      return !!strategy && teachingMatchesMisconception(strategy, a.questionId, misconception!.id, t.competency, about);
+      return !!strategy && (!connection || (!!skill && strategyConnects(connection, skill, strategy))) && teachingMatchesMisconception(strategy, a.questionId, misconception!.id, t.competency, about);
     }) : [];
     const taught = teachings[0] ?? null;
     const id = misconception?.id ?? null;
     const hid = `${id ?? "?"}@${a.questionId}`;
     // resolution-probe@1: later first answers to questions that tell this explanation apart from the target
     const probes: ResolutionProbe[] = id && established ? records.attempts.filter((x) => x.at > established && x.n === 1 && !all.includes(x)).flatMap((x) => {
+      if (strict && taughtExposureKeys(records, x.at).has(exposureKey(x.questionId))) return [];
+      if (connection && (!skill || connectedSkill(connection, x.questionId) !== skill)) return [];
       const pr = probeReading(x.questionId, id, x.response);
       if (!pr.discriminates) return [];
       const ind = independentAttempt(x) && !x.hints && !x.solution;
@@ -249,16 +255,17 @@ const PROBE_PHASES: Phase[] = ["check", "practice", "diagnostic", "retention"];
  * selectable (not quarantined), with a certified answer form, within the learner's grade. null: none is available, and
  * the hypothesis stays unresolved (it is never resolved without one).
  */
-export function discriminatingProbe(h: LearnerHypothesis, records: LearnerRecords): string | null {
+export function discriminatingProbe(h: LearnerHypothesis, records: LearnerRecords, accepts: (id: string) => boolean = () => true): string | null {
   if (!h.claim) return null;
   const m = moduleFor(h.scope.observedIn);
   if (!m) return null;
   const seen = new Set([...records.attempts, ...(records.pathway?.active && records.readinessRoute?.includes(h.scope.observedIn) ? [...records.unresolved, ...records.pending] : [])].map((x) => exposureKey(x.questionId)));
+  if (records.pathway?.active) for (const key of taughtExposureKeys(records)) seen.add(key);
   const g = records.enrolments.at(-1)?.grade ?? null;
   const listed = [...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check), ...m.retention];
   const pooled = m.pool ? PROBE_PHASES.flatMap((ph) => modulePhasePool(m, ph)) : [];
   for (const q of [...listed, ...pooled]) {
-    if (seen.has(exposureKey(q)) || !selectable(q) || !problemOf(q)) continue;
+    if (!accepts(q) || seen.has(exposureKey(q)) || !selectable(q) || !problemOf(q)) continue;
     if (q.startsWith("gen:") && !formCertified(q)) continue;
     const qg = gradeOfQuestion(q);
     if (g !== null && qg !== null && qg > g && !(records.pathway?.active && records.readinessRoute?.includes(question(q).competency))) continue;

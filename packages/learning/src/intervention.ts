@@ -1,3 +1,4 @@
+import { taughtExposureKeys } from "./teaching-exposure";
 /**
  * The unified learning module (Explore → Strategy → Chapter → Practise → Verify) and prerequisite recovery.
  *
@@ -60,6 +61,7 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
  * all safety, grade and exposure checks; callers only narrow the required skill. */
 export function questionForRequirement(m: Module, phase: "check" | "retention", records: LearnerRecords, accepts: (id: string) => boolean, placement: "enrolment" | "readiness" = "enrolment"): string | null {
   const seen = new Set([...records.attempts, ...records.unresolved, ...records.pending].map((a) => exposureKey(a.questionId)));
+  for (const key of taughtExposureKeys(records)) seen.add(key);
   const candidates = [...modulePhasePool(m, phase), ...(phase === "retention" ? m.retention : [...m.diagnostics, ...m.practice, ...m.strategies.map((s) => s.check)])];
   return candidates.find((id) => !quarantined(id) && !seen.has(exposureKey(id)) && (placement === "readiness" || withinGrade(records, id))
     && question(id).competency === m.competency && accepts(id)) ?? null;
