@@ -3,10 +3,10 @@
   "scope": "Every competency in the shared mathematics graph; unconfigured skills remain gaps.",
   "meaning": "Mechanical task/teaching/check/retention connections only. Diagnostic predictions are hypotheses, not learner diagnoses. Review eligibility is not educator approval. No curriculum completion claim.",
   "counts": {
-    "connected-configured-skills": 1,
+    "connected-configured-skills": 2,
     "missing-module": 17,
     "missing-skill-metadata": 325,
-    "partial": 10
+    "partial": 9
   },
   "rows": [
     {
@@ -4842,9 +4842,12 @@
       ],
       "content": {
         "chapterScreens": 2,
-        "strategies": 3,
+        "strategies": 4,
         "eligibleStrategies": [
-          "ratio_table"
+          "map_to_real",
+          "real_to_map",
+          "ratio_plan_to_metres",
+          "ratio_map_to_km"
         ]
       },
       "working": {
@@ -4854,15 +4857,17 @@
           "gen:aiscale:0,8,1",
           "gen:aiscale:1,6,0",
           "gen:aiscale:0,15,1",
-          "gen:aiscale:2,9,1",
-          "gen:aiscale:0,4,1",
-          "gen:aiscale:4,2,1",
-          "gen:aiscale:0,4,0:mc",
-          "gen:aiscale:4,2,0",
-          "gen:aiscale:2,8,1:mc"
+          "gen:aiscale:0,13,0",
+          "gen:aiscale:4,6,0:mc",
+          "gen:aiscale:2,14,1:mc",
+          "gen:aiscale:4,6,1",
+          "gen:airatio:2,18:mc",
+          "gen:airatio:2,10:mc",
+          "gen:airatio:5,6:mc",
+          "gen:airatio:5,20"
         ]
       },
-      "status": "partial",
+      "status": "connected-configured-skills",
       "mapping": "scale-drawings-subskills@1",
       "unmappedFamilies": [],
       "unclassifiedQuestions": 0,
@@ -4877,12 +4882,12 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "map_to_real"
           ],
-          "strategies": [],
-          "freshChecks": 15,
+          "freshChecks": 14,
           "retention": 15,
           "diagnosticPredictions": [
             "added",
@@ -4904,11 +4909,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "real_to_map"
           ],
-          "strategies": [],
           "freshChecks": 16,
           "retention": 21,
           "diagnosticPredictions": [
@@ -4934,11 +4939,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "ratio_plan_to_metres"
           ],
-          "strategies": [],
           "freshChecks": 9,
           "retention": 16,
           "diagnosticPredictions": [
@@ -4963,11 +4968,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "ratio_map_to_km"
           ],
-          "strategies": [],
           "freshChecks": 15,
           "retention": 13,
           "diagnosticPredictions": [
@@ -6274,9 +6279,19 @@
       ],
       "content": {
         "chapterScreens": 4,
-        "strategies": 4,
+        "strategies": 11,
         "eligibleStrategies": [
-          "check_what_it_uses"
+          "cm_to_decimal_m",
+          "mm_to_decimal_cm",
+          "m_to_decimal_km",
+          "decimal_m_to_cm",
+          "m_cm_to_cm",
+          "cm_to_m_cm",
+          "cm_mm_to_mm",
+          "mm_to_cm_mm",
+          "m_to_km_m",
+          "m_to_whole_km",
+          "mm_to_whole_cm"
         ]
       },
       "working": {
@@ -6286,14 +6301,28 @@
           "gen:acmcm:5,9,0",
           "gen:acmcm:4,92,1",
           "gen:acmcm:3,76,0",
-          "gen:acmcm:2,8,0",
-          "gen:acmcm:7,34,0",
-          "gen:acmcm:3,33,1",
-          "gen:acmcm:8,59,0:mc",
-          "gen:acmcm:2,15,1",
-          "gen:acmcm:7,34,1:mc",
-          "gen:acmcm:8,40,1",
-          "gen:acmcm:8,59,1"
+          "gen:acdecu:0,866:mc",
+          "gen:acdecu:0,826",
+          "gen:acdecu:1,568:mc",
+          "gen:acdecu:1,572",
+          "gen:acdecu:2,8960:mc",
+          "gen:acdecu:2,600:mc",
+          "gen:acdecu:3,492:mc",
+          "gen:acdecu:3,372",
+          "gen:acmcm:9,3,0:mc",
+          "gen:acmcm:6,65,0:mc",
+          "gen:acmcm:6,49,1:mc",
+          "gen:acmcm:9,36,1",
+          "gen:acmmkm:0,8,2:mc",
+          "gen:acmmkm:0,4,1:mc",
+          "gen:acmmkm:1,10,2:mc",
+          "gen:acmmkm:1,7,1:mc",
+          "gen:acmmkm:2,1,98",
+          "gen:acmmkm:2,1,38:mc",
+          "gen:acmmkm:3,18,0:mc",
+          "gen:acmmkm:3,6,0",
+          "gen:acmmkm:4,21,0:mc",
+          "gen:acmmkm:4,9,0"
         ]
       },
       "status": "partial",
@@ -6313,11 +6342,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "cm_to_decimal_m"
           ],
-          "strategies": [],
           "freshChecks": 25,
           "retention": 16,
           "diagnosticPredictions": [
@@ -6340,11 +6369,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "mm_to_decimal_cm"
           ],
-          "strategies": [],
           "freshChecks": 22,
           "retention": 17,
           "diagnosticPredictions": [
@@ -6366,11 +6395,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "m_to_decimal_km"
           ],
-          "strategies": [],
           "freshChecks": 20,
           "retention": 13,
           "diagnosticPredictions": [
@@ -6393,11 +6422,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "decimal_m_to_cm"
           ],
-          "strategies": [],
           "freshChecks": 19,
           "retention": 23,
           "diagnosticPredictions": [
@@ -6420,12 +6449,12 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "m_cm_to_cm"
           ],
-          "strategies": [],
-          "freshChecks": 38,
+          "freshChecks": 40,
           "retention": 29,
           "diagnosticPredictions": [
             "added-numbers",
@@ -6451,9 +6480,9 @@
           "status": "connected-answer-chain",
           "gaps": [],
           "strategies": [
-            "check_what_it_uses"
+            "cm_to_m_cm"
           ],
-          "freshChecks": 41,
+          "freshChecks": 37,
           "retention": 31,
           "diagnosticPredictions": [
             "ten-cm",
@@ -6475,11 +6504,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "cm_mm_to_mm"
           ],
-          "strategies": [],
           "freshChecks": 21,
           "retention": 25,
           "diagnosticPredictions": [
@@ -6502,11 +6531,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "mm_to_cm_mm"
           ],
-          "strategies": [],
           "freshChecks": 17,
           "retention": 26,
           "diagnosticPredictions": [
@@ -6529,11 +6558,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "m_to_km_m"
           ],
-          "strategies": [],
           "freshChecks": 25,
           "retention": 23,
           "diagnosticPredictions": [
@@ -6556,11 +6585,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "m_to_whole_km"
           ],
-          "strategies": [],
           "freshChecks": 8,
           "retention": 8,
           "diagnosticPredictions": [
@@ -6583,11 +6612,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "mm_to_whole_cm"
           ],
-          "strategies": [],
           "freshChecks": 7,
           "retention": 2,
           "diagnosticPredictions": [
@@ -6709,9 +6738,11 @@
       ],
       "content": {
         "chapterScreens": 5,
-        "strategies": 4,
+        "strategies": 3,
         "eligibleStrategies": [
-          "check_what_it_uses"
+          "paise_to_rupees",
+          "rupees_and_paise_to_paise",
+          "decimal_rupees_to_paise"
         ]
       },
       "working": {
@@ -6721,14 +6752,12 @@
           "gen:acpaise:3,10,1",
           "gen:acpaise:9,1,1",
           "gen:acpaise:16,9,1",
-          "gen:acpaise:1,15,1",
-          "gen:acpaise:4,17,1",
-          "gen:acpaise:19,3,1",
-          "gen:acpaise:4,17,0:mc",
-          "gen:acpaise:18,18,1",
-          "gen:acpaise:14,15,0:mc",
-          "gen:acpaise:10,11,1",
-          "gen:acpaise:14,15,1"
+          "gen:acp2r:29,14:mc",
+          "gen:acp2r:29,17:mc",
+          "gen:acpaise:3,4,0:mc",
+          "gen:acpaise:5,11,0:mc",
+          "gen:acpaise:13,18,1:mc",
+          "gen:acpaise:5,11,1"
         ]
       },
       "status": "partial",
@@ -6743,11 +6772,11 @@
         {
           "skill": "money.paise-to-rupees@1",
           "parameters": [],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "paise_to_rupees"
           ],
-          "strategies": [],
           "freshChecks": 65,
           "retention": 64,
           "diagnosticPredictions": [
@@ -6770,16 +6799,17 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "rupees_and_paise_to_paise"
           ],
-          "strategies": [],
-          "freshChecks": 25,
+          "freshChecks": 24,
           "retention": 33,
           "diagnosticPredictions": [
             "added-numbers",
-            "ten-paise"
+            "ten-paise",
+            "wrote-together"
           ],
           "working": "unsupported",
           "examples": {
@@ -6800,9 +6830,9 @@
           "status": "connected-answer-chain",
           "gaps": [],
           "strategies": [
-            "check_what_it_uses"
+            "decimal_rupees_to_paise"
           ],
-          "freshChecks": 28,
+          "freshChecks": 27,
           "retention": 31,
           "diagnosticPredictions": [
             "added-numbers",

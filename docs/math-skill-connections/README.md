@@ -256,17 +256,51 @@ Grading semantics did not change: every changed family's specification fingerpri
 
 | Competency | Sub-skills (family, parameters) | Assessment + retention + recovery | Teaching |
 |---|---|---|---|
-| `MATH.measurement.money-decimals` | paise-to-rupees (`acp2r`); rupees-and-paise-to-paise (`acpaise` form 0); decimal-rupees-to-paise (`acpaise` form 1) | 3/3 | gap (see note) |
-| `MATH.measurement.length-conversion` | cm→decimal m, mm→decimal cm, m→decimal km, decimal m→cm (`acdecu` kinds 0–3); m cm→cm, cm→m cm (`acmcm`); cm mm→mm, mm→cm mm, m→km m, m→whole km, mm→whole cm (`acmmkm` kinds 0–4); compare-m-cm (`acmcmp`) **prepared, not registered** | 11/11 | gap |
-| `MATH.geometry.scale-drawings` | map→real, real→map (`aiscale`); plan 1 : n→metres, map 1 : n→km (`airatio`) | 4/4 | gap |
+| `MATH.measurement.money-decimals` | paise-to-rupees (`acp2r`); rupees-and-paise-to-paise (`acpaise` form 0); decimal-rupees-to-paise (`acpaise` form 1) | 3/3 | 3/3 (section 7) |
+| `MATH.measurement.length-conversion` | cm→decimal m, mm→decimal cm, m→decimal km, decimal m→cm (`acdecu` kinds 0–3); m cm→cm, cm→m cm (`acmcm`); cm mm→mm, mm→cm mm, m→km m, m→whole km, mm→whole cm (`acmmkm` kinds 0–4); compare-m-cm (`acmcmp`) **prepared, not registered** | 11/11 | 11/11 (section 7) |
+| `MATH.geometry.scale-drawings` | map→real, real→map (`aiscale`); plan 1 : n→metres, map 1 : n→km (`airatio`) | 4/4 | 4/4 (section 7) |
 
 Unmapped with reasons: `acbill`, `acmoneyadd`, `acmoneymul` (money arithmetic, not unit change).
 
 **Blocked (prepared, not registered):** `PREPARED_CHOICE_SKILLS` holds `length.compare-m-cm@1` (`acmcmp`, choice answer A/B/C); `acmcmp` is listed as unmapped. Registering it today would split the system: the foundation runtime **would** ask and credit it (it reads the stored verdict; verified), while `validSkillTask` refuses every one of its tasks, so teaching, the connection audit and diagnosis would report it unconnected. Reproducer (in `conversion-pattern.test.ts`): add the prepared skill to `LENGTH_CONVERSION_CONFIG`; `validSkillTask(cfg, "length.compare-m-cm@1", "gen:acmcmp:1,4,1,0") === false` (answer `"B"`), yet `foundationPlan` asks that skill and a correct answer is credited. Same shared blocker as section 3; no validator change was made here.
 
-**Teaching note:** these modules are still templates with no skill-scoped teaching. The audit shows `money.decimal-rupees-to-paise` and `length.cm-to-m-cm` as connected only through the unscoped `check_what_it_uses` pointer, whose drawn questions happen to share a skill. That is not teaching of the skill; it is pinned in `conversion-pattern.test.ts` and reported here, not counted.
+**Teaching note (superseded by section 7):** at this commit these modules were still templates with no skill-scoped teaching. The audit shows `money.decimal-rupees-to-paise` and `length.cm-to-m-cm` as connected only through the unscoped `check_what_it_uses` pointer, whose drawn questions happen to share a skill. That is not teaching of the skill; it is pinned in `conversion-pattern.test.ts` and reported here, not counted.
 
 **Journeys** (`conversion-pattern.test.ts`, 22/22): partitions over every served task, partition meanings read from the generated prompts, numeric diagnostic predictions, and for each of 18 skills same-skill fresh checks, a fresh delayed check after 8 days and recovery; plus the blocker reproducer.
+
+### 7. Skill-scoped teaching for the 18 conversion skills
+
+The three conversion modules are now blueprints, from the same authoring source as section 4 (`scale-blueprints.mts`, the "change between units by a fixed factor" block). There is one scoped strategy per skill: worked instance, guided question and module check are all that skill. Text contains no instance numbers, and the worked lines are the generator's own steps.
+- **Reused text:** the template modules' family ideas and methods (`worked_steps`, `drop_dot`, `place_value`, `ratio_table`) and TP2-REG-MONEY's unit idea ("a bigger unit is made of a fixed number of smaller units").
+- **New text:** only per-direction method lines.
+- **Removed from these modules:**
+  - the unscoped `check_what_it_uses` pointer (decision 1);
+  - the template `spot_the_mistake` screens. They taught one misconception (added the numbers; multiplied instead of divided) as general teaching, with no contrast declaration. They return as `addresses`-scoped fixes once contrast items exist (decision 2).
+- **Review:** 18 explanations registered as `pending_review`; the modules are draft. Nothing is approved.
+
+**Coverage, kept separate (18 registered skills):** teaching 18 (pending review, demonstration only); assessment 18; recovery 18; retention 18. The prepared choice skill (`length.compare-m-cm`) stays unregistered.
+
+**Journeys** (`conversion-pattern.test.ts`, 40/40):
+- partitions and partition meanings;
+- per-skill foundation checks, a delayed check after 8 days and recovery;
+- the blocker reproducer;
+- teaching alignment, with no digits in explanation text, a non-trivial worked example and `pending_review` status;
+- for each of the 18 strategies, the path teach → guided → independent fresh check → reload.
+
+**Ratio scales:** the taught items avoid 1 : 100 (to metres) and 1 : 100000 (to km). At those scales the multiplication and the unit change cancel, which hides the method; they are still assessed.
+
+**Independent review:** fixed:
+- ratio items that cancel;
+- "the hundreds are the rupees" (now "the number of whole hundreds");
+- the length chapter now covers decimals;
+- tests now compare math lines with the generator's own lines, check every revision is pending, use exposure keys for freshness and apply the full non-trivial test.
+
+Open, outside this branch's ownership:
+- The engine-drawn sub-chapters (from `subSkills()` in `library.ts`) can draw a cancelling example (ratio 1 : 100, 12 cm → 12 m).
+- The length chapter includes `acmcmp` (unregistered) and an "equal lengths" example.
+- These sub-chapters are not skill teaching.
+
+**Integration note:** Codex's local integration now accepts choice answers. The blocker reproducer test asserts today's numeric-only `validSkillTask` on this branch. On the combined branch, it should be replaced by registering `PREPARED_CHOICE_SKILLS` as a new mapping version, with the usual journeys; registration stays explicit.
 
 ### 6. Decisions for Codex
 

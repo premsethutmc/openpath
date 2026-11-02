@@ -41,8 +41,8 @@
       "competencies": 44,
       "missingModule": 0,
       "missingSkillMetadata": 41,
-      "partialSkillConnections": 3,
-      "connectedAnswerChains": 1,
+      "partialSkillConnections": 2,
+      "connectedAnswerChains": 5,
       "noEligibleGeneralTeaching": 2,
       "withBoundedWorkingExamples": 2,
       "withoutBoundedWorkingExamples": 42
@@ -64,7 +64,7 @@
       "missingModule": 0,
       "missingSkillMetadata": 38,
       "partialSkillConnections": 2,
-      "connectedAnswerChains": 2,
+      "connectedAnswerChains": 14,
       "noEligibleGeneralTeaching": 3,
       "withBoundedWorkingExamples": 0,
       "withoutBoundedWorkingExamples": 40
