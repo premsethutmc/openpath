@@ -11,7 +11,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { pool } from "../../../packages/learning/src/families";
 // the test runner may compile .tsx with the classic JSX transform (React.createElement); give it the same React
 (globalThis as { React?: unknown }).React = React;
-const { Figure, describe: describeFigure } = await import("./Figure");
+const { Figure, describe: describeFigure, stripsFor } = await import("./Figure");
 
 type V = { type: string; [k: string]: unknown };
 const html = (v: V) => renderToStaticMarkup(createElement(Figure, { v }));
@@ -238,7 +238,16 @@ test("legacy pictures are unchanged", () => {
   assert.ok(rects(grid).every((r) => num(r.width) === 30));
   const shape = html({ type: "shape", kind: "rectangle", lengths: ["4 cm", "3 cm"] });
   assert.equal(attrs(shape.match(/<polygon [^>]*>/)![0]).fill, "var(--soft, #dbe6f7)");
-  // legacy strips (no bottomShaded / labels) keep their existing path: Figure does not draw them
-  assert.equal(describeFigure({ type: "strips", top: 4, bottom: 3, shaded: 3 }), "A picture");
+  // legacy strips state only the first fraction: outside an equivalence lesson (no `equivalent` mark) they are described in
+  // text, never drawn with a guessed second shading; marked as an exact equivalence they are drawn
+  assert.match(describeFigure({ type: "strips", top: 4, bottom: 3, shaded: 3 }), /^A strip in 4 equal parts with 3 shaded\. A second strip, in 3 equal parts, is not drawn/);
   assert.ok(!html({ type: "strips", top: 4, bottom: 3, shaded: 3 }).includes("<svg"));
+  const EQ = "MATH.number.equivalent-fractions";
+  assert.ok(html(stripsFor({ type: "strips", top: 2, bottom: 4, shaded: 1 }, EQ)).includes("<svg"));
+  assert.match(describeFigure(stripsFor({ type: "strips", top: 2, bottom: 4, shaded: 1 }, EQ)), /second in 4 equal parts with 2 shaded, the same amount$/);
+  assert.match(describeFigure(stripsFor({ type: "strips", top: 4, bottom: 3, shaded: 3 }, EQ)), /is not drawn/);
+  // content data cannot claim the equivalence itself (the mark is set only from the lesson's competency)
+  assert.match(describeFigure({ type: "strips", top: 2, bottom: 4, shaded: 1, equivalent: true }), /is not drawn/);
+  // one whole = k/k is the same amount in any lesson (unit-fractions "equal parts" data)
+  assert.match(describeFigure({ type: "strips", top: 1, bottom: 4, shaded: 1 }), /second in 4 equal parts with 4 shaded, the same amount$/);
 });

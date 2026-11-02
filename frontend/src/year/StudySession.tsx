@@ -33,7 +33,7 @@ function StudyBlock({competency,ctx,resumeKey,onNext}:{competency:string;ctx:Ctx
  if(!m)return <><p>This module is unavailable.</p><button onClick={onNext}>Next planned competency</button></>;
  if(!intro&&!alreadyTaught&&!verified&&strategy){
   const screens=[...(chapterOk?m.chapter:[]),...strategy.screens];
-  return <section aria-label="Concept teaching"><h2>{graph.get(competency).name}</h2><p className="small muted" role="note" data-content-review={review?.status}>{review?.label}</p><Lesson key={strategy.id} s={{title:strategy.title,screens}} resumeKey={`${resumeKey}:introduction-screen`} saving={ctx.saving} onDone={async()=>{if(await ctx.teach(competency,strategy.id,'session-concept'))setIntro(true);}}/></section>;
+  return <section aria-label="Concept teaching"><h2>{graph.get(competency).name}</h2><p className="small muted" role="note" data-content-review={review?.status}>{review?.label}</p><Lesson competency={competency} key={strategy.id} s={{title:strategy.title,screens}} resumeKey={`${resumeKey}:introduction-screen`} saving={ctx.saving} onDone={async()=>{if(await ctx.teach(competency,strategy.id,'session-concept'))setIntro(true);}}/></section>;
  }
  return <Module competency={competency} ctx={ctx} resumeKey={resumeKey} sessionMode onExit={onNext}/>;
 }

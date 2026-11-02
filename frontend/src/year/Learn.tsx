@@ -7,7 +7,7 @@ import { geometryTask } from '../../../packages/learning/src/geometry-task';
 import { scheduleNote } from "../../../packages/learning/src/due-display";
 import { useState, useRef } from "react";
 import {useResume} from "./resume";
-import { Figure } from "./Figure";
+import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Figure";
 import { SketchPad } from "./SketchPad";
 import { HANDWRITING_ENABLED } from "../writing/features";
 import { writtenTask } from "../../../packages/learning/src/written";
@@ -246,11 +246,14 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   );
 }
 
-function Picture({ w }: { w: NonNullable<Screen["widget"]> }) {
-  // visuals@2: strips with their own second-row shading (or row labels) are drawn by Figure (equal wholes, independent shading);
-  // the legacy strips below are unchanged
-  if ((w.type !== "strips" && w.type !== "array") || (w.type === "strips" && (w.bottomShaded !== undefined || w.labels !== undefined))) return <Figure v={w} />;
+function Picture({ w, competency }: { w: NonNullable<Screen["widget"]>; competency?: string }) {
+  // visuals@2: strips that state both fractions (bottomShaded / labels) are drawn by Figure (equal wholes, independent shading).
+  // Legacy strips (top, bottom, shaded) state only the first fraction: the existing two-row picture with the derived equivalent
+  // shading is kept only in an equivalence lesson, when that shading is exact; otherwise Figure says so in text (no guessed picture).
+  if (w.type !== "strips" && w.type !== "array") return <Figure v={w} />;
   if (w.type === "strips") {
+    const v = stripsFor(w, competency);
+    if (!legacyStrips(v) || legacyStripKind(v) !== "equivalent") return <Figure v={v} />;
     const row = (n: number, shaded: number) => (
       <div className="strip" style={{ gridTemplateColumns: `repeat(${n}, 1fr)` }}>
         {Array.from({ length: n }, (_, i) => <span key={i} className={i < shaded ? "on" : ""} />)}
@@ -260,9 +263,9 @@ function Picture({ w }: { w: NonNullable<Screen["widget"]> }) {
     const bottom = w.bottom ?? 4;
     const shaded = w.shaded ?? 1;
     return (
-      <figure className="strips" aria-label={`A strip in ${top} parts with ${shaded} shaded, and the same strip in ${bottom} parts`}>
+      <figure className="strips" role="img" aria-label={describe(v)}>
         {row(top, shaded)}
-        {row(bottom, Math.round((shaded * bottom) / top))}
+        {row(bottom, (shaded * bottom) / top)}
       </figure>
     );
   }
@@ -280,7 +283,7 @@ function Picture({ w }: { w: NonNullable<Screen["widget"]> }) {
   );
 }
 
-export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it" }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; resumeKey?: string; doneLabel?: string }) {
+export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", competency }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; resumeKey?: string; doneLabel?: string; competency?: string }) {
   const [stored, setI] = useResume(resumeKey, 0);
   const i = Number.isInteger(stored) && stored >= 0 && stored < s.screens.length ? stored : 0;
   const sc = s.screens[i];
@@ -291,7 +294,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it" }: {
         <p className="eyebrow">{s.title}{s.screens.length > 1 ? ` · ${i + 1} of ${s.screens.length}` : ""}</p>
         <h3>{sc.title}</h3>
         {sc.text.map((t, k) => <p key={k}>{t}</p>)}
-        {sc.widget && <Picture w={sc.widget} />}
+        {sc.widget && <Picture w={sc.widget} competency={competency} />}
         {sc.math && <div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>}
         {sc.tip && <p className="hint">{sc.tip}</p>}
       </div>
@@ -332,7 +335,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   const lessonModule = moduleFor(competency);
   const reviewStrategy = lessonModule?.strategies.find((s) => teachingEligibility(lessonModule, s).eligible && contentEligibility(lessonModule, s, { competency, usage: "lesson" }).eligible);
   const reviewOffer = reviewStrategy ? <button className="secondary wide" disabled={ctx.saving} onClick={async () => { if (reviewStrategy && await ctx.teach(competency, reviewStrategy.id, "foundation-lesson-review@1")) setReviewLesson(true); }}>Review a supported lesson</button> : null;
-  if (reviewLesson && reviewStrategy) return <div className="stack">{head}<p role="note">Lesson review only. Your earlier answers are saved. This review does not award mastery; further answers in this visit are recorded with help.</p><Lesson s={reviewStrategy} doneLabel="Return to my progress" saving={false} onDone={() => setReviewLesson(false)} /><button className="secondary" onClick={() => setReviewLesson(false)}>Return to my progress</button></div>;
+  if (reviewLesson && reviewStrategy) return <div className="stack">{head}<p role="note">Lesson review only. Your earlier answers are saved. This review does not award mastery; further answers in this visit are recorded with help.</p><Lesson competency={competency} s={reviewStrategy} doneLabel="Return to my progress" saving={false} onDone={() => setReviewLesson(false)} /><button className="secondary" onClick={() => setReviewLesson(false)}>Return to my progress</button></div>;
   if (reviewOnly) return <div className="stack">{head}<p>This is lesson review, not a mastery check. Your progress is preserved.</p>{reviewOffer ?? <p>No eligible explanation is available for this topic yet.</p>}<button className="secondary" onClick={onExit}>Choose another goal</button></div>;
   if (fb) return <div className="stack">{head}{retry ? <Ask key={`${fb.qid}:retry`} qid={fb.qid} activity={fb.activity ?? "guided"} ctx={ctx} previous={fb} resumeKey={resumeKey && `${resumeKey}:${fb.qid}`} showHint={retry === "hint"} hintAllowed onAnswered={f=>{setRetry(false);setFb(f);}}/> : <Feedback fb={fb} onNext={() => setFb(null)} onRetry={sessionMode && retriesLeft(ctx.records, fb.qid) > 0 ? hint=>setRetry(hint ? "hint" : true) : undefined}/>}{!retry && reviewOffer}</div>;
   if (sessionMode && ms.phase === "retention") return <div className="stack">{head}<p>A delayed check is reserved for a later session. Your completed work is preserved.</p><button className="primary" onClick={onExit}>Next planned competency</button></div>;
@@ -347,7 +350,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
         {head}
         <p className="why">{ms.reason}</p>
         <p className="small muted" role="note" data-content-review={ms.contentReview?.status ?? "unknown"}>{ms.contentReview?.educatorApproved ? ms.contentReview.label : `${ms.contentReview?.label ?? "Demonstration: this explanation has not been approved by an educator."} ${ms.teachingReview === "machine-checked" ? "It has been checked automatically against its question." : "It has not been checked automatically."}`}</p>
-        <Lesson key={ms.strategy.id} resumeKey={resumeKey && `${resumeKey}:lesson:${ms.strategy.id}`} s={ms.strategy} saving={ctx.saving} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
+        <Lesson competency={competency} key={ms.strategy.id} resumeKey={resumeKey && `${resumeKey}:lesson:${ms.strategy.id}`} s={ms.strategy} saving={ctx.saving} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
       </div>
     );
   if (ms.question)
