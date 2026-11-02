@@ -1,5 +1,7 @@
 # 6. Teaching batch 2: five instructional patterns (review candidates)
 
+> **Readiness and integration manifest: see [08-INTEGRATION-MANIFEST.md](08-INTEGRATION-MANIFEST.md).** Review status after passes 4–6: no outstanding mathematical or instructional finding (04). Item lists were re-selected in this revision so that nothing already shown by a module's existing explanations is reused.
+
 Batch 2 is organised by **pattern**, not by wrong answer (07 gives the ranking). Each pattern file (`batch-2/PAT-*.md|json`) holds:
 - the **one shared strategy** (concept and alternative explanation);
 - the **existing explanations it reuses** (not rewritten);

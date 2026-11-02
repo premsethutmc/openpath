@@ -40,19 +40,19 @@
    ],
    "rows": [
     [
-     "25"
+     "14"
     ],
     [
-     "27"
+     "65"
     ],
     [
-     "28"
+     "66"
     ],
     [
-     "35"
+     "75"
     ],
     [
-     "40"
+     "80"
     ]
    ]
   },
@@ -60,35 +60,35 @@
  },
  "workedExamples": [
   {
-   "id": "gen:akmed:54,5",
-   "prompt": "Find the median of these numbers: 35, 40, 25, 27, 28.",
+   "id": "gen:akmed:76,5",
+   "prompt": "Find the median of these numbers: 75, 14, 80, 65, 66.",
    "lines": [
-    "In order: 25, 27, 28, 35, 40 (5 values)",
-    "The middle one is the 3rd value: 28"
+    "In order: 14, 65, 66, 75, 80 (5 values)",
+    "The middle one is the 3rd value: 66"
    ],
    "familyExplainSteps": [
-    "In order: 25, 27, 28, 35, 40",
-    "The middle value is 28"
+    "In order: 14, 65, 66, 75, 80",
+    "The middle value is 66"
    ],
-   "answer": "28"
+   "answer": "66"
   },
   {
-   "id": "gen:akmed:33,8",
-   "prompt": "Find the median of these numbers: 49, 43, 38, 57, 60, 30, 39, 55.",
+   "id": "gen:akmed:71,10",
+   "prompt": "Find the median of these numbers: 27, 83, 21, 62, 73, 63, 34, 52, 80, 90.",
    "lines": [
-    "In order: 30, 38, 39, 43, 49, 55, 57, 60 (8 values)",
-    "The two middle values are the 4th and 5th: 43 and 49; halfway: (43 + 49) ÷ 2 = 46"
+    "In order: 21, 27, 34, 52, 62, 63, 73, 80, 83, 90 (10 values)",
+    "The two middle values are the 5th and 6th: 62 and 63; halfway: (62 + 63) ÷ 2 = 62.5"
    ],
    "familyExplainSteps": [
-    "In order: 30, 38, 39, 43, 49, 55, 57, 60",
-    "The two middle values are 43 and 49: (43 + 49) ÷ 2 = 46"
+    "In order: 21, 27, 34, 52, 62, 63, 73, 80, 83, 90",
+    "The two middle values are 62 and 63: (62 + 63) ÷ 2 = 62.5"
    ],
-   "answer": "46"
+   "answer": "62.5"
   }
  ],
  "hints": [
   {
-   "for": "gen:akmed:54,5",
+   "for": "gen:akmed:76,5",
    "hints": [
     "Are the numbers in order?",
     "Write them from smallest to largest.",
@@ -96,7 +96,7 @@
    ]
   },
   {
-   "for": "gen:akmed:33,8",
+   "for": "gen:akmed:71,10",
    "hints": [
     "Are the numbers in order?",
     "Write them from smallest to largest.",
@@ -117,8 +117,8 @@
    "name": "Cross off from both ends",
    "valid": true,
    "example": [
-    "cross off smallest and largest repeatedly; left: 28",
-    "median 28"
+    "cross off smallest and largest repeatedly; left: 66",
+    "median 66"
    ]
   }
  ],
@@ -186,21 +186,21 @@
    "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "PROCEDURAL slip or missing step: treat a single occurrence as a suspected error, not a misconception",
-   "example": "gen:akmed:76,5",
+   "example": "gen:akmed:32,5",
    "screens": {
     "whatWentWrong": [
-     "In \"Find the median of these numbers: 75, 14, 80, 65, 66.\", one wrong answer is 80.",
+     "In \"Find the median of these numbers: 59, 50, 87, 86, 81.\", one wrong answer is 87.",
      "The middle number of the list as given was taken. Put the numbers in order first.",
      "The middle of the list only means something once the list is in order.",
-     "Not 80, but 66."
+     "Not 87, but 81."
     ],
-    "counterCheck": "Counter-check: in the order given the middle is 80; in order it is 66. Reorder the same data and the 'middle' would change, so it cannot be a fact about the data.",
+    "counterCheck": "Counter-check: in the order given the middle is 87; in order it is 81. Reorder the same data and the 'middle' would change, so it cannot be a fact about the data.",
     "solvedCorrectly": [
-     "In order: 14, 65, 66, 75, 80 (5 values)",
-     "The middle one is the 3rd value: 66"
+     "In order: 50, 59, 81, 86, 87 (5 values)",
+     "The middle one is the 3rd value: 81"
     ]
    },
-   "guided": "gen:akmed:77,9:mc",
+   "guided": "gen:akmed:8,6:mc",
    "check": "gen:akmed:77,7:mc"
   },
   {
@@ -210,22 +210,22 @@
    "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "conceptual: averages not distinguished",
-   "example": "gen:akmed:32,5",
+   "example": "gen:akmed:71,9",
    "screens": {
     "whatWentWrong": [
-     "In \"Find the median of these numbers: 59, 50, 87, 86, 81.\", one wrong answer is 72.6.",
+     "In \"Find the median of these numbers: 21, 74, 25, 41, 80, 81, 64, 47, 62.\", one wrong answer is 55.",
      "The mean was worked out. The median is the middle value once the numbers are in order.",
      "The mean shares the total equally; the median is the middle value in order. They are different averages.",
-     "Not 72.6, but 81."
+     "Not 55, but 62."
     ],
-    "counterCheck": "Check: the total 363 shared equally among 5 values is 72.6 (the mean); in order, 50, 59, 81, 86, 87, the middle value is different.",
+    "counterCheck": "Check: the total 495 shared equally among 9 values is 55 (the mean); in order, 21, 25, 41, 47, 62, 64, 74, 80, 81, the middle value is different.",
     "solvedCorrectly": [
-     "In order: 50, 59, 81, 86, 87 (5 values)",
-     "The middle one is the 3rd value: 81"
+     "In order: 21, 25, 41, 47, 62, 64, 74, 80, 81 (9 values)",
+     "The middle one is the 5th value: 62"
     ]
    },
-   "guided": "gen:akmed:3,10:mc",
-   "check": "gen:akmed:27,5"
+   "guided": "gen:akmed:77,5:mc",
+   "check": "gen:akmed:29,5"
   },
   {
    "bug": "one-middle",
@@ -234,38 +234,38 @@
    "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "procedural: even count",
-   "example": "gen:akmed:71,10",
+   "example": "gen:akmed:32,6",
    "screens": {
     "whatWentWrong": [
-     "In \"Find the median of these numbers: 27, 83, 21, 62, 73, 63, 34, 52, 80, 90.\", one wrong answer is 62 or 63.",
-     "With 10 numbers there are two middle numbers (62 and 63); the median is halfway between them.",
+     "In \"Find the median of these numbers: 66, 58, 75, 81, 14, 95.\", one wrong answer is 66 or 75.",
+     "With 6 numbers there are two middle numbers (66 and 75); the median is halfway between them.",
      "With an even number of values there are two middle values: take halfway between them.",
-     "Not 62 or 63, but 62.5."
+     "Not 66 or 75, but 70.5."
     ],
-    "counterCheck": "Check: 10 values have no single middle; the 5th and 6th values, 62 and 63, share the middle, so the median is halfway: 62.5.",
+    "counterCheck": "Check: 6 values have no single middle; the 3rd and 4th values, 66 and 75, share the middle, so the median is halfway: 70.5.",
     "solvedCorrectly": [
-     "In order: 21, 27, 34, 52, 62, 63, 73, 80, 83, 90 (10 values)",
-     "The two middle values are the 5th and 6th: 62 and 63; halfway: (62 + 63) ÷ 2 = 62.5"
+     "In order: 14, 58, 66, 75, 81, 95 (6 values)",
+     "The two middle values are the 3rd and 4th: 66 and 75; halfway: (66 + 75) ÷ 2 = 70.5"
     ]
    },
-   "guided": "gen:akmed:8,6:mc",
+   "guided": "gen:akmed:79,6:mc",
    "check": "gen:akmed:33,6"
   }
  ],
  "authoredTransfer": [],
  "practice": {
   "guided": [
-   "gen:akmed:77,5:mc",
    "gen:akmed:76,7:mc",
-   "gen:akmed:13,9"
+   "gen:akmed:13,9",
+   "gen:akmed:51,9"
   ],
   "rechecks": [
    "gen:akmed:0,9",
    "gen:akmed:0,8:mc"
   ],
   "transfer": [
-   "gen:akmed:32,6:w",
-   "gen:akmed:76,9:w"
+   "gen:akmed:27,6:w",
+   "gen:akmed:35,8:w"
   ],
   "delayedChecks": [
    "gen:akmed:8,7",
@@ -361,11 +361,11 @@
         "The mean shares the total equally; the median is the middle value in order. They are different averages."
        ],
        "math": [
-        "Not 72.6, but 81",
-        "Check: the total 363 shared equally among 5 values is 72.6 (the mean); in order, 50, 59, 81, 86, 87, the middle value is different."
+        "Not 55, but 62",
+        "Check: the total 495 shared equally among 9 values is 55 (the mean); in order, 21, 25, 41, 47, 62, 64, 74, 80, 81, the middle value is different."
        ],
        "role": "misconception",
-       "instance": "gen:akmed:32,5"
+       "instance": "gen:akmed:71,9"
       },
       {
        "title": "The median is not the mean: solved correctly",
@@ -373,15 +373,15 @@
         "Each step, then the answer."
        ],
        "math": [
-        "In order: 50, 59, 81, 86, 87 (5 values)",
-        "The middle one is the 3rd value: 81"
+        "In order: 21, 25, 41, 47, 62, 64, 74, 80, 81 (9 values)",
+        "The middle one is the 5th value: 62"
        ],
        "role": "strategy",
-       "instance": "gen:akmed:32,5"
+       "instance": "gen:akmed:71,9"
       }
      ],
-     "guided": "gen:akmed:3,10:mc",
-     "check": "gen:akmed:27,5"
+     "guided": "gen:akmed:77,5:mc",
+     "check": "gen:akmed:29,5"
     }
    },
    {
@@ -395,15 +395,15 @@
       {
        "title": "Two middle values: take halfway: what went wrong",
        "text": [
-        "With 10 numbers there are two middle numbers (62 and 63); the median is halfway between them.",
+        "With 6 numbers there are two middle numbers (66 and 75); the median is halfway between them.",
         "With an even number of values there are two middle values: take halfway between them."
        ],
        "math": [
-        "Not 62, but 62.5",
-        "Check: 10 values have no single middle; the 5th and 6th values, 62 and 63, share the middle, so the median is halfway: 62.5."
+        "Not 66, but 70.5",
+        "Check: 6 values have no single middle; the 3rd and 4th values, 66 and 75, share the middle, so the median is halfway: 70.5."
        ],
        "role": "misconception",
-       "instance": "gen:akmed:71,10"
+       "instance": "gen:akmed:32,6"
       },
       {
        "title": "Two middle values: take halfway: solved correctly",
@@ -411,14 +411,14 @@
         "Each step, then the answer."
        ],
        "math": [
-        "In order: 21, 27, 34, 52, 62, 63, 73, 80, 83, 90 (10 values)",
-        "The two middle values are the 5th and 6th: 62 and 63; halfway: (62 + 63) ÷ 2 = 62.5"
+        "In order: 14, 58, 66, 75, 81, 95 (6 values)",
+        "The two middle values are the 3rd and 4th: 66 and 75; halfway: (66 + 75) ÷ 2 = 70.5"
        ],
        "role": "strategy",
-       "instance": "gen:akmed:71,10"
+       "instance": "gen:akmed:32,6"
       }
      ],
-     "guided": "gen:akmed:8,6:mc",
+     "guided": "gen:akmed:79,6:mc",
      "check": "gen:akmed:33,6"
     }
    }
@@ -434,7 +434,7 @@
     "addresses": "mean-for-median",
     "revisions": [
      {
-      "contentHash": "sha256:d1b181a28d918aeb8e94554a3b7d6b071eecbb9f5742da1f2c2caac93f7c5884",
+      "contentHash": "sha256:38f512ded2616181e7a6f3a69081aa29548ec31229410e05b979220a384255c5",
       "status": "pending_review",
       "provenance": {
        "source": "engineering",
@@ -460,7 +460,7 @@
     "addresses": "one-middle",
     "revisions": [
      {
-      "contentHash": "sha256:608e4ea162f788d44be564c5e2407cd586b09749c66c9c39881647607dc35283",
+      "contentHash": "sha256:af2fa7cec54936c03001f9d46e24ac7ceff54e02eb590073100d81f91710be47",
       "status": "pending_review",
       "provenance": {
        "source": "engineering",
@@ -661,112 +661,8 @@
     "ok": true
    },
    {
-    "id": "gen:akmed:54,5",
-    "role": "worked-example",
-    "prompt": "Find the median of these numbers: 35, 40, 25, 27, 28.",
-    "answer": "28",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "kernel"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "In order: 25, 27, 28, 35, 40 (5 values)",
-      "The middle one is the 3rd value: 28"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Cross off from both ends",
-      "ok": true,
-      "lines": [
-       "cross off smallest and largest repeatedly; left: 28",
-       "median 28"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "not-ordered",
-      "kind": "procedural",
-      "predicts": [
-       "25"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "mean-for-median",
-      "kind": "conceptual",
-      "predicts": [
-       "31"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:akmed:33,8",
-    "role": "worked-example",
-    "prompt": "Find the median of these numbers: 49, 43, 38, 57, 60, 30, 39, 55.",
-    "answer": "46",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "kernel"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "In order: 30, 38, 39, 43, 49, 55, 57, 60 (8 values)",
-      "The two middle values are the 4th and 5th: 43 and 49; halfway: (43 + 49) ÷ 2 = 46"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Cross off from both ends",
-      "ok": true,
-      "lines": [
-       "cross off smallest and largest repeatedly; left: 43 and 49",
-       "median 46"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "not-ordered",
-      "kind": "procedural",
-      "predicts": [
-       "58.5"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "one-middle",
-      "kind": "procedural",
-      "predicts": [
-       "43",
-       "49"
-      ],
-      "graded": [
-       "incorrect",
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
     "id": "gen:akmed:76,5",
-    "role": "misconception-example",
+    "role": "worked-example",
     "prompt": "Find the median of these numbers: 75, 14, 80, 65, 66.",
     "answer": "66",
     "grader": {
@@ -816,276 +712,8 @@
     "ok": true
    },
    {
-    "id": "gen:akmed:77,9:mc",
-    "role": "misconception-guided",
-    "prompt": "Find the median of these numbers: 42, 25, 56, 41, 17, 31, 29, 30, 38. Choose one.",
-    "answer": "31",
-    "options": [
-     "17",
-     "31",
-     "30",
-     "32"
-    ],
-    "correctOption": "B",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "kernel"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "In order: 17, 25, 29, 30, 31, 38, 41, 42, 56 (9 values)",
-      "The middle one is the 5th value: 31"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Cross off from both ends",
-      "ok": true,
-      "lines": [
-       "cross off smallest and largest repeatedly; left: 31",
-       "median 31"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "not-ordered",
-      "kind": "procedural",
-      "predicts": [
-       "17"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:akmed:77,7:mc",
-    "role": "misconception-check",
-    "prompt": "Find the median of these numbers: 51, 16, 34, 44, 27, 28, 60. Choose one.",
-    "answer": "34",
-    "options": [
-     "44",
-     "33",
-     "35",
-     "34"
-    ],
-    "correctOption": "D",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "kernel"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "In order: 16, 27, 28, 34, 44, 51, 60 (7 values)",
-      "The middle one is the 4th value: 34"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Cross off from both ends",
-      "ok": true,
-      "lines": [
-       "cross off smallest and largest repeatedly; left: 34",
-       "median 34"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "not-ordered",
-      "kind": "procedural",
-      "predicts": [
-       "44"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:akmed:32,5",
-    "role": "misconception-example",
-    "prompt": "Find the median of these numbers: 59, 50, 87, 86, 81.",
-    "answer": "81",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "kernel"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "In order: 50, 59, 81, 86, 87 (5 values)",
-      "The middle one is the 3rd value: 81"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Cross off from both ends",
-      "ok": true,
-      "lines": [
-       "cross off smallest and largest repeatedly; left: 81",
-       "median 81"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "not-ordered",
-      "kind": "procedural",
-      "predicts": [
-       "87"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "mean-for-median",
-      "kind": "conceptual",
-      "predicts": [
-       "72.6"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:akmed:3,10:mc",
-    "role": "misconception-guided",
-    "prompt": "Find the median of these numbers: 58, 69, 34, 51, 59, 43, 71, 72, 74, 78. Choose one.",
-    "answer": "64",
-    "options": [
-     "64",
-     "51",
-     "59",
-     "60.9"
-    ],
-    "correctOption": "A",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "kernel"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "In order: 34, 43, 51, 58, 59, 69, 71, 72, 74, 78 (10 values)",
-      "The two middle values are the 5th and 6th: 59 and 69; halfway: (59 + 69) ÷ 2 = 64"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Cross off from both ends",
-      "ok": true,
-      "lines": [
-       "cross off smallest and largest repeatedly; left: 59 and 69",
-       "median 64"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "not-ordered",
-      "kind": "procedural",
-      "predicts": [
-       "51"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "mean-for-median",
-      "kind": "conceptual",
-      "predicts": [
-       "60.9"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "one-middle",
-      "kind": "procedural",
-      "predicts": [
-       "59",
-       "69"
-      ],
-      "graded": [
-       "incorrect",
-       "not-an-option"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:akmed:27,5",
-    "role": "misconception-check",
-    "prompt": "Find the median of these numbers: 28, 72, 78, 27, 32.",
-    "answer": "32",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "kernel"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "In order: 27, 28, 32, 72, 78 (5 values)",
-      "The middle one is the 3rd value: 32"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Cross off from both ends",
-      "ok": true,
-      "lines": [
-       "cross off smallest and largest repeatedly; left: 32",
-       "median 32"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "not-ordered",
-      "kind": "procedural",
-      "predicts": [
-       "78"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "mean-for-median",
-      "kind": "conceptual",
-      "predicts": [
-       "47.4"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
     "id": "gen:akmed:71,10",
-    "role": "misconception-example",
+    "role": "worked-example",
     "prompt": "Find the median of these numbers: 27, 83, 21, 62, 73, 63, 34, 52, 80, 90.",
     "answer": "62.5",
     "grader": {
@@ -1140,6 +768,57 @@
       ],
       "graded": [
        "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akmed:32,5",
+    "role": "misconception-example",
+    "prompt": "Find the median of these numbers: 59, 50, 87, 86, 81.",
+    "answer": "81",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "In order: 50, 59, 81, 86, 87 (5 values)",
+      "The middle one is the 3rd value: 81"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Cross off from both ends",
+      "ok": true,
+      "lines": [
+       "cross off smallest and largest repeatedly; left: 81",
+       "median 81"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "not-ordered",
+      "kind": "procedural",
+      "predicts": [
+       "87"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "mean-for-median",
+      "kind": "conceptual",
+      "predicts": [
+       "72.6"
+      ],
+      "graded": [
        "incorrect"
       ]
      }
@@ -1217,10 +896,17 @@
     "ok": true
    },
    {
-    "id": "gen:akmed:33,6",
+    "id": "gen:akmed:77,7:mc",
     "role": "misconception-check",
-    "prompt": "Find the median of these numbers: 16, 53, 29, 14, 58, 18.",
-    "answer": "23.5",
+    "prompt": "Find the median of these numbers: 51, 16, 34, 44, 27, 28, 60. Choose one.",
+    "answer": "34",
+    "options": [
+     "44",
+     "33",
+     "35",
+     "34"
+    ],
+    "correctOption": "D",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -1229,8 +915,8 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "In order: 14, 16, 18, 29, 53, 58 (6 values)",
-      "The two middle values are the 3rd and 4th: 18 and 29; halfway: (18 + 29) ÷ 2 = 23.5"
+      "In order: 16, 27, 28, 34, 44, 51, 60 (7 values)",
+      "The middle one is the 4th value: 34"
      ]
     },
     "alternatives": [
@@ -1238,8 +924,8 @@
       "name": "Cross off from both ends",
       "ok": true,
       "lines": [
-       "cross off smallest and largest repeatedly; left: 18 and 29",
-       "median 23.5"
+       "cross off smallest and largest repeatedly; left: 34",
+       "median 34"
       ]
      }
     ],
@@ -1248,21 +934,60 @@
       "id": "not-ordered",
       "kind": "procedural",
       "predicts": [
-       "21.5"
+       "44"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akmed:71,9",
+    "role": "misconception-example",
+    "prompt": "Find the median of these numbers: 21, 74, 25, 41, 80, 81, 64, 47, 62.",
+    "answer": "62",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "In order: 21, 25, 41, 47, 62, 64, 74, 80, 81 (9 values)",
+      "The middle one is the 5th value: 62"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Cross off from both ends",
+      "ok": true,
+      "lines": [
+       "cross off smallest and largest repeatedly; left: 62",
+       "median 62"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "not-ordered",
+      "kind": "procedural",
+      "predicts": [
+       "80"
       ],
       "graded": [
        "incorrect"
       ]
      },
      {
-      "id": "one-middle",
-      "kind": "procedural",
+      "id": "mean-for-median",
+      "kind": "conceptual",
       "predicts": [
-       "18",
-       "29"
+       "55"
       ],
       "graded": [
-       "incorrect",
        "incorrect"
       ]
      }
@@ -1271,7 +996,7 @@
    },
    {
     "id": "gen:akmed:77,5:mc",
-    "role": "guided-practice",
+    "role": "misconception-guided",
     "prompt": "Find the median of these numbers: 24, 52, 53, 39, 50. Choose one.",
     "answer": "50",
     "options": [
@@ -1321,6 +1046,223 @@
        "43.6"
       ],
       "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akmed:29,5",
+    "role": "misconception-check",
+    "prompt": "Find the median of these numbers: 49, 18, 20, 54, 44.",
+    "answer": "44",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "In order: 18, 20, 44, 49, 54 (5 values)",
+      "The middle one is the 3rd value: 44"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Cross off from both ends",
+      "ok": true,
+      "lines": [
+       "cross off smallest and largest repeatedly; left: 44",
+       "median 44"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "not-ordered",
+      "kind": "procedural",
+      "predicts": [
+       "20"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "mean-for-median",
+      "kind": "conceptual",
+      "predicts": [
+       "37"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akmed:32,6",
+    "role": "misconception-example",
+    "prompt": "Find the median of these numbers: 66, 58, 75, 81, 14, 95.",
+    "answer": "70.5",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "In order: 14, 58, 66, 75, 81, 95 (6 values)",
+      "The two middle values are the 3rd and 4th: 66 and 75; halfway: (66 + 75) ÷ 2 = 70.5"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Cross off from both ends",
+      "ok": true,
+      "lines": [
+       "cross off smallest and largest repeatedly; left: 66 and 75",
+       "median 70.5"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "not-ordered",
+      "kind": "procedural",
+      "predicts": [
+       "78"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-middle",
+      "kind": "procedural",
+      "predicts": [
+       "66",
+       "75"
+      ],
+      "graded": [
+       "incorrect",
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akmed:79,6:mc",
+    "role": "misconception-guided",
+    "prompt": "Find the median of these numbers: 56, 87, 65, 23, 30, 29. Choose one.",
+    "answer": "43",
+    "options": [
+     "30",
+     "44",
+     "43",
+     "42"
+    ],
+    "correctOption": "C",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "In order: 23, 29, 30, 56, 65, 87 (6 values)",
+      "The two middle values are the 3rd and 4th: 30 and 56; halfway: (30 + 56) ÷ 2 = 43"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Cross off from both ends",
+      "ok": true,
+      "lines": [
+       "cross off smallest and largest repeatedly; left: 30 and 56",
+       "median 43"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "not-ordered",
+      "kind": "procedural",
+      "predicts": [
+       "44"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-middle",
+      "kind": "procedural",
+      "predicts": [
+       "30",
+       "56"
+      ],
+      "graded": [
+       "incorrect",
+       "not-an-option"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akmed:33,6",
+    "role": "misconception-check",
+    "prompt": "Find the median of these numbers: 16, 53, 29, 14, 58, 18.",
+    "answer": "23.5",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "In order: 14, 16, 18, 29, 53, 58 (6 values)",
+      "The two middle values are the 3rd and 4th: 18 and 29; halfway: (18 + 29) ÷ 2 = 23.5"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Cross off from both ends",
+      "ok": true,
+      "lines": [
+       "cross off smallest and largest repeatedly; left: 18 and 29",
+       "median 23.5"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "not-ordered",
+      "kind": "procedural",
+      "predicts": [
+       "21.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-middle",
+      "kind": "procedural",
+      "predicts": [
+       "18",
+       "29"
+      ],
+      "graded": [
+       "incorrect",
        "incorrect"
       ]
      }
@@ -1408,6 +1350,47 @@
       "kind": "procedural",
       "predicts": [
        "30"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:akmed:51,9",
+    "role": "guided-practice",
+    "prompt": "Find the median of these numbers: 60, 68, 23, 78, 58, 79, 76, 69, 25.",
+    "answer": "68",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "kernel"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "In order: 23, 25, 58, 60, 68, 69, 76, 78, 79 (9 values)",
+      "The middle one is the 5th value: 68"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Cross off from both ends",
+      "ok": true,
+      "lines": [
+       "cross off smallest and largest repeatedly; left: 68",
+       "median 68"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "not-ordered",
+      "kind": "procedural",
+      "predicts": [
+       "58"
       ],
       "graded": [
        "incorrect"
@@ -1518,10 +1501,10 @@
     "ok": true
    },
    {
-    "id": "gen:akmed:32,6:w",
+    "id": "gen:akmed:27,6:w",
     "role": "transfer",
-    "prompt": "Find the median of these numbers: 66, 58, 75, 81, 14, 95.",
-    "answer": "70.5",
+    "prompt": "Find the median of these numbers: 47, 22, 20, 53, 45, 35.",
+    "answer": "40",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -1530,8 +1513,8 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "In order: 14, 58, 66, 75, 81, 95 (6 values)",
-      "The two middle values are the 3rd and 4th: 66 and 75; halfway: (66 + 75) ÷ 2 = 70.5"
+      "In order: 20, 22, 35, 45, 47, 53 (6 values)",
+      "The two middle values are the 3rd and 4th: 35 and 45; halfway: (35 + 45) ÷ 2 = 40"
      ]
     },
     "alternatives": [
@@ -1539,8 +1522,8 @@
       "name": "Cross off from both ends",
       "ok": true,
       "lines": [
-       "cross off smallest and largest repeatedly; left: 66 and 75",
-       "median 70.5"
+       "cross off smallest and largest repeatedly; left: 35 and 45",
+       "median 40"
       ]
      }
     ],
@@ -1549,7 +1532,17 @@
       "id": "not-ordered",
       "kind": "procedural",
       "predicts": [
-       "78"
+       "36.5"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "mean-for-median",
+      "kind": "conceptual",
+      "predicts": [
+       "37"
       ],
       "graded": [
        "incorrect"
@@ -1559,8 +1552,8 @@
       "id": "one-middle",
       "kind": "procedural",
       "predicts": [
-       "66",
-       "75"
+       "35",
+       "45"
       ],
       "graded": [
        "incorrect",
@@ -1571,10 +1564,10 @@
     "ok": true
    },
    {
-    "id": "gen:akmed:76,9:w",
+    "id": "gen:akmed:35,8:w",
     "role": "transfer",
-    "prompt": "Find the median of these numbers: 74, 17, 43, 56, 62, 75, 68, 28, 40.",
-    "answer": "56",
+    "prompt": "Find the median of these numbers: 85, 88, 83, 44, 56, 82, 20, 33.",
+    "answer": "69",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -1583,8 +1576,8 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "In order: 17, 28, 40, 43, 56, 62, 68, 74, 75 (9 values)",
-      "The middle one is the 5th value: 56"
+      "In order: 20, 33, 44, 56, 82, 83, 85, 88 (8 values)",
+      "The two middle values are the 4th and 5th: 56 and 82; halfway: (56 + 82) ÷ 2 = 69"
      ]
     },
     "alternatives": [
@@ -1592,8 +1585,8 @@
       "name": "Cross off from both ends",
       "ok": true,
       "lines": [
-       "cross off smallest and largest repeatedly; left: 56",
-       "median 56"
+       "cross off smallest and largest repeatedly; left: 56 and 82",
+       "median 69"
       ]
      }
     ],
@@ -1602,9 +1595,21 @@
       "id": "not-ordered",
       "kind": "procedural",
       "predicts": [
-       "62"
+       "50"
       ],
       "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-middle",
+      "kind": "procedural",
+      "predicts": [
+       "56",
+       "82"
+      ],
+      "graded": [
+       "incorrect",
        "incorrect"
       ]
      }

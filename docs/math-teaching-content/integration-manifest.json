@@ -1,0 +1,4516 @@
+{
+ "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+ "generatedFrom": "batch-*/TP*.json + runtime partitions/quarantine/readers at the source commit",
+ "packages": [
+  {
+   "id": "TP-ALG-01",
+   "batch": "batch-1",
+   "pattern": null,
+   "title": "(a + b)²: why the middle term is 2ab",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.algebra.identities",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "expand",
+     "familyInPools": true
+    },
+    "family": "ahid",
+    "familyTitle": "Expanding with (a + b)², (a − b)² and (a + b)(a − b)",
+    "parameters": "ahid with params[0] ∈ {0, 1} ((px + q)², (px − q)²) and params[3] = 1 (the box is the x coefficient); examples need p ≥ 2, p ≠ q, q ≠ 2p, p ≠ 2q."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "middle-not-doubled",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_middle_not_doubled"
+     },
+     {
+      "id": "middle-sign",
+      "kind": "procedural",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_middle_sign"
+     }
+    ],
+    "reusedExisting": [],
+    "modelledButNotTargeted": []
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "(px + q)², middle",
+      "id": "gen:ahid:0,4,9,1",
+      "partition": "check"
+     },
+     {
+      "case": "(px − q)², middle",
+      "id": "gen:ahid:1,4,3,1",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic ((px + q)², middle)",
+     "id": "gen:ahid:0,4,9,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": [
+      "taken from the check partition for a diagnostic role"
+     ]
+    },
+    {
+     "role": "diagnostic ((px − q)², middle)",
+     "id": "gen:ahid:1,4,3,1",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:ahid:0,5,2,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:ahid:1,3,8,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (middle-not-doubled, shown solved)",
+     "id": "gen:ahid:0,5,7,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (middle-not-doubled)",
+     "id": "gen:ahid:0,2,5,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (middle-not-doubled)",
+     "id": "gen:ahid:1,4,5,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (middle-sign, shown solved)",
+     "id": "gen:ahid:0,5,4,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (middle-sign)",
+     "id": "gen:ahid:1,3,4,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (middle-sign)",
+     "id": "gen:ahid:0,4,6,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:ahid:1,2,8,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:ahid:1,5,9,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:ahid:0,3,5,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:ahid:0,3,9,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:ahid:1,5,1,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:ahid:0,3,2,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:ahid:0,5,6,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:ahid:1,2,3,1",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:ahid:1,2,6,1",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "grid"
+    ],
+    "missing": [
+     "labelled 2 × 2 area model (the grid visual has no cell labels)"
+    ]
+   },
+   "answerFormats": {
+    "familyType": "integer",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "ahid has no working contract; an expansion written as working is not examined (answer-level only)"
+   },
+   "newStrategies": [
+    "ahid_concept",
+    "fix_middle_not_doubled",
+    "fix_middle_sign"
+   ],
+   "contract": [
+    "B1 teaching scope: ahid_concept, fix_middle_not_doubled, fix_middle_sign are outside teachingScopeFor (main family expand); ineligible until the selector accepts 'ahid'",
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
+    "visual: labelled 2 × 2 area model (the grid visual has no cell labels)"
+   ],
+   "missingQuestions": [
+    "diagnostic case \"(px + q)², middle\": the family's diagnostic partition has no usable item (only ambiguous ones); candidate gen:ahid:0,4,9,1 is taken from the CHECK partition and must be re-partitioned or replaced at integration",
+    "delayed checks: no usable retention item for case \"(px + q)², middle\" (another case's item stands in)",
+    "binomial delayed checks: 14 of 54 retention items ask the cross term; 3 of them are (px + q)² and 0 of those avoid a copied-number reading. The positive-square delayed check is MISSING: the retention partition has no unambiguous (px + q)² cross-term item, so the delayed check of the title skill is not covered (generator partition change: Codex)."
+   ],
+   "itemIssues": [
+    {
+     "id": "gen:ahid:0,4,9,1",
+     "role": "diagnostic ((px + q)², middle)",
+     "issues": [
+      "taken from the check partition for a diagnostic role"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "TP-GEO-01",
+   "batch": "batch-1",
+   "pattern": null,
+   "title": "The exterior angle of a triangle",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.geometry.triangle-properties",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "ahtri",
+     "familyInPools": true
+    },
+    "family": "ahext",
+    "familyTitle": "The exterior angle of a triangle",
+    "parameters": "ahext, both forms: params[2] = 0 (find the exterior angle) and 1 (find an interior opposite angle); examples avoid coincident angles."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "third-interior",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_third_interior"
+     },
+     {
+      "id": "adjacent-interior",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_adjacent_interior"
+     },
+     {
+      "id": "exterior-as-interior",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_exterior_as_interior"
+     }
+    ],
+    "reusedExisting": [],
+    "modelledButNotTargeted": [
+     "one-angle",
+     "added"
+    ]
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "find the exterior angle",
+      "id": "gen:ahext:51,21,0",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "find an interior opposite angle",
+      "id": "gen:ahext:32,96,1",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (find the exterior angle)",
+     "id": "gen:ahext:51,21,0",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (find an interior opposite angle)",
+     "id": "gen:ahext:32,96,1",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:ahext:39,112,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:ahext:93,36,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (third-interior, shown solved)",
+     "id": "gen:ahext:34,27,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (third-interior)",
+     "id": "gen:ahext:34,53,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (third-interior)",
+     "id": "gen:ahext:111,26,0",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (adjacent-interior, shown solved)",
+     "id": "gen:ahext:108,27,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (adjacent-interior)",
+     "id": "gen:ahext:23,76,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (adjacent-interior)",
+     "id": "gen:ahext:47,45,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (exterior-as-interior, shown solved)",
+     "id": "gen:ahext:45,83,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (exterior-as-interior)",
+     "id": "gen:ahext:25,60,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (exterior-as-interior)",
+     "id": "gen:ahext:69,32,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:ahext:62,79,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:ahext:34,63,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:ahext:80,39,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:ahext:86,70,0:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:ahext:44,76,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:ahext:44,105,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:ahext:21,85,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:ahext:56,89,0:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:ahext:77,74,1",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "triangle"
+    ],
+    "missing": [
+     "triangle with an extended side and its exterior angle (the triangle visual draws interior angles only; the proposed 'exterior' field is not in the Visual contract)"
+    ]
+   },
+   "answerFormats": {
+    "familyType": "integer",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "ahext has a geometry task (geometry-task.ts) for the foundation's geometry working adapter; the Python reasoner has NO exterior-angle rule (G5 R07), so a citation of the exterior-angle theorem is not verifiable; the 'via the third angle' route uses supported rules (triangle-sum, straight-line)"
+   },
+   "newStrategies": [
+    "ahext_concept",
+    "fix_third_interior",
+    "fix_adjacent_interior",
+    "fix_exterior_as_interior"
+   ],
+   "contract": [
+    "B1 teaching scope: ahext_concept, fix_third_interior, fix_adjacent_interior, fix_exterior_as_interior are outside teachingScopeFor (main family ahtri); ineligible until the selector accepts 'ahext'",
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
+    "visual: triangle with an extended side and its exterior angle (the triangle visual draws interior angles only; the proposed 'exterior' field is not in the Visual contract)"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  },
+  {
+   "id": "TP-GEO-02",
+   "batch": "batch-1",
+   "pattern": null,
+   "title": "Vertically opposite angles are equal",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.geometry.angle-pairs",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "afpair",
+     "familyInPools": true
+    },
+    "family": "afcross",
+    "familyTitle": "Angles where two straight lines cross",
+    "parameters": "afcross, all three forms: params[1] = 0 vertically opposite, 1 adjacent, 2 the other three (contrast); angles within 5° of 90 excluded from examples."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "opposite-as-linear",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_opposite_as_linear"
+     },
+     {
+      "id": "neighbour-equal",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_neighbour_equal"
+     }
+    ],
+    "reusedExisting": [],
+    "modelledButNotTargeted": [
+     "full-turn",
+     "straight-only",
+     "all-equal"
+    ]
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "vertically opposite",
+      "id": "gen:afcross:105,0",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "adjacent",
+      "id": "gen:afcross:126,1",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "other three",
+      "id": "gen:afcross:84,2",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (vertically opposite)",
+     "id": "gen:afcross:105,0",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (adjacent)",
+     "id": "gen:afcross:126,1",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (other three)",
+     "id": "gen:afcross:84,2",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:afcross:128,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:afcross:149,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (opposite-as-linear, shown solved)",
+     "id": "gen:afcross:104,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (opposite-as-linear)",
+     "id": "gen:afcross:109,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (opposite-as-linear)",
+     "id": "gen:afcross:70,0",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (neighbour-equal, shown solved)",
+     "id": "gen:afcross:147,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (neighbour-equal)",
+     "id": "gen:afcross:27,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (neighbour-equal)",
+     "id": "gen:afcross:146,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:afcross:29,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:afcross:107,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:afcross:152,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:afcross:158,0:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:afcross:40,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:afcross:35,0:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:afcross:81,0:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:afcross:42,0",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:afcross:37,1",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "angle"
+    ],
+    "missing": [
+     "two crossing lines with four angles (the angle visual draws one angle)"
+    ]
+   },
+   "answerFormats": {
+    "familyType": "integer",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "afcross modes 0/1 have a geometry task (foundation adapter); mode 2 (other three) has none (geometry-task.ts excludes b === 2). G5 R06: a vertically-opposite citation for a MEASURE was rejected by the reasoner; route through straight-line steps is supported"
+   },
+   "newStrategies": [
+    "afcross_concept",
+    "fix_opposite_as_linear",
+    "fix_neighbour_equal"
+   ],
+   "contract": [
+    "B1 teaching scope: afcross_concept, fix_opposite_as_linear, fix_neighbour_equal are outside teachingScopeFor (main family afpair); ineligible until the selector accepts 'afcross'",
+    "B3 addresses: fix_opposite_as_linear — the platform reads addresses = null (family 'says' overridden); the gate would accept any established misconception",
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
+    "visual: two crossing lines with four angles (the angle visual draws one angle)"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  },
+  {
+   "id": "TP-MEA-01",
+   "batch": "batch-1",
+   "pattern": null,
+   "title": "Area or perimeter? Covering versus going round",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.measurement.area-squares",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "aearea",
+     "familyInPools": true
+    },
+    "family": "aeperar",
+    "familyTitle": "Choosing area or perimeter in a problem",
+    "parameters": "aeperar, both forms: params[0] = 0 (covering: area) and 1 (going round: perimeter); items where 2(l + w) = l × w are excluded (they cannot separate the two)."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "perimeter-for-area",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_perimeter_for_area"
+     },
+     {
+      "id": "area-for-perimeter",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_area_for_perimeter"
+     },
+     {
+      "id": "two-sides",
+      "kind": "procedural",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_two_sides"
+     }
+    ],
+    "reusedExisting": [],
+    "modelledButNotTargeted": []
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "covering (area), first context",
+      "id": "gen:aeperar:0,3,15,2",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "going round (perimeter), first context",
+      "id": "gen:aeperar:1,4,11,2",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "covering (area), another context",
+      "id": "gen:aeperar:0,4,16,0",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "going round (perimeter), another context",
+      "id": "gen:aeperar:1,5,7,2",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A 'two-sides' answer (length + width) on the covering item and on the going-round item counts as two different errors (adding instead of multiplying; adding only half the sides), so the pair must not establish one misconception. A learner who multiplies on both items is right on the covering item and is suspected of area-for-perimeter only; one who adds all four sides on both is suspected of perimeter-for-area only.",
+    "patterns": [
+     {
+      "answers": [
+       "36 (bug:perimeter-for-area)",
+       "30 (correct)",
+       "40 (bug:perimeter-for-area)",
+       "24 (correct)"
+      ],
+      "establishes": true
+     },
+     {
+      "answers": [
+       "45 (correct)",
+       "44 (bug:area-for-perimeter)",
+       "64 (correct)",
+       "35 (bug:area-for-perimeter)"
+      ],
+      "establishes": true
+     },
+     {
+      "answers": [
+       "36 (bug:perimeter-for-area)",
+       "44 (bug:area-for-perimeter)",
+       "40 (bug:perimeter-for-area)",
+       "35 (bug:area-for-perimeter)"
+      ],
+      "establishes": false
+     },
+     {
+      "answers": [
+       "45 (correct)",
+       "15 (bug:two-sides)",
+       "64 (correct)",
+       "12 (bug:two-sides)"
+      ],
+      "establishes": true
+     },
+     {
+      "answers": [
+       "18 (bug:two-sides)",
+       "15 (bug:two-sides)",
+       "20 (bug:two-sides)",
+       "12 (bug:two-sides)"
+      ],
+      "establishes": false
+     },
+     {
+      "answers": [
+       "36 (bug:perimeter-for-area)",
+       "30 (correct)",
+       "64 (correct)",
+       "24 (correct)"
+      ],
+      "establishes": false
+     }
+    ],
+    "triggerConditions": [
+     {
+      "strategy": "fix_perimeter_for_area",
+      "condition": "a response pattern below with establishes = true; patterns with competing explanations must not establish it"
+     },
+     {
+      "strategy": "fix_area_for_perimeter",
+      "condition": "a response pattern below with establishes = true; patterns with competing explanations must not establish it"
+     },
+     {
+      "strategy": "fix_two_sides",
+      "condition": "a response pattern below with establishes = true; patterns with competing explanations must not establish it"
+     }
+    ]
+   },
+   "items": [
+    {
+     "role": "diagnostic (covering (area), first context)",
+     "id": "gen:aeperar:0,3,15,2",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (going round (perimeter), first context)",
+     "id": "gen:aeperar:1,4,11,2",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (covering (area), another context)",
+     "id": "gen:aeperar:0,4,16,0",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (going round (perimeter), another context)",
+     "id": "gen:aeperar:1,5,7,2",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:aeperar:0,9,11,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:aeperar:1,9,10,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (perimeter-for-area, shown solved)",
+     "id": "gen:aeperar:0,6,9,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (perimeter-for-area)",
+     "id": "gen:aeperar:0,12,16,2:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (perimeter-for-area)",
+     "id": "gen:aeperar:0,2,11,2",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (area-for-perimeter, shown solved)",
+     "id": "gen:aeperar:1,8,15,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (area-for-perimeter)",
+     "id": "gen:aeperar:1,14,15,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (area-for-perimeter)",
+     "id": "gen:aeperar:1,13,14,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (two-sides, shown solved)",
+     "id": "gen:aeperar:1,2,12,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (two-sides)",
+     "id": "gen:aeperar:1,10,16,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (two-sides)",
+     "id": "gen:aeperar:1,4,6,2:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:aeperar:0,6,14,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:aeperar:0,5,6,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:aeperar:0,7,12,2:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:aeperar:0,11,15,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:aeperar:1,10,13,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:aeperar:0,6,7,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:aeperar:0,8,14,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:aeperar:0,4,5,1:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:aeperar:1,7,16,0",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "grid"
+    ],
+    "missing": [
+     "perimeter outline (the grid visual shades the inside only)"
+    ]
+   },
+   "answerFormats": {
+    "familyType": "integer",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "aeperar_concept",
+    "fix_perimeter_for_area",
+    "fix_area_for_perimeter",
+    "fix_two_sides"
+   ],
+   "contract": [
+    "B1 teaching scope: aeperar_concept, fix_perimeter_for_area, fix_area_for_perimeter, fix_two_sides are outside teachingScopeFor (main family aearea); ineligible until the selector accepts 'aeperar'",
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
+    "policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)",
+    "visual: perimeter outline (the grid visual shades the inside only)"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  },
+  {
+   "id": "TP-NUM-01",
+   "batch": "batch-1",
+   "pattern": null,
+   "title": "Comparing fractions with the same top number",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.number.fraction-comparison",
+    "module": {
+     "origin": "authored",
+     "mainFamily": "adfcmp",
+     "familyInPools": true
+    },
+    "family": "adfcmp",
+    "familyTitle": "Comparing two fractions with the same bottom or top number",
+    "parameters": "adfcmp with params[0] = 1 (same numerator); both asks (params[4] = 0 greater, 1 smaller). Contrast items: params[0] = 0 (same denominator)."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "bigger-bottom-bigger",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_bigger_bottom_bigger"
+     }
+    ],
+    "reusedExisting": [],
+    "modelledButNotTargeted": [
+     "more-parts-wrong-way"
+    ]
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "same top, asks greater",
+      "id": "gen:adfcmp:1,1,8,2,0",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "same top, asks smaller",
+      "id": "gen:adfcmp:1,7,12,11,1",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "same bottom, asks greater (contrast)",
+      "id": "gen:adfcmp:0,11,1,10,0",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "same bottom, asks smaller (contrast)",
+      "id": "gen:adfcmp:0,11,6,3,1",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "Read the four items together (response patterns below). Two same-top matches establish bigger-bottom-bigger ONLY when both same-bottom contrast items are right; if the contrast items are wrong too, a reversal explains all the answers and nothing is established. misconception-evidence@1 today would establish it from the two same-top matches alone; the contrast condition is a policy request for Codex (05).",
+    "patterns": [
+     {
+      "answers": [
+       "1/8 (bug:bigger-bottom-bigger)",
+       "7/11 (bug:bigger-bottom-bigger)",
+       "10/11 (correct)",
+       "3/11 (correct)"
+      ],
+      "establishes": true
+     },
+     {
+      "answers": [
+       "1/8 (bug:bigger-bottom-bigger)",
+       "7/11 (bug:bigger-bottom-bigger)",
+       "1/11 (bug:more-parts-wrong-way)",
+       "6/11 (bug:more-parts-wrong-way)"
+      ],
+      "establishes": false
+     },
+     {
+      "answers": [
+       "1/8 (bug:bigger-bottom-bigger)",
+       "7/11 (bug:bigger-bottom-bigger)",
+       "1/11 (bug:more-parts-wrong-way)",
+       "3/11 (correct)"
+      ],
+      "establishes": false
+     },
+     {
+      "answers": [
+       "1/8 (bug:bigger-bottom-bigger)",
+       "7/12 (correct)",
+       "10/11 (correct)",
+       "3/11 (correct)"
+      ],
+      "establishes": false
+     },
+     {
+      "answers": [
+       "1/2 (correct)",
+       "7/12 (correct)",
+       "10/11 (correct)",
+       "3/11 (correct)"
+      ],
+      "establishes": false
+     }
+    ],
+    "triggerConditions": [
+     {
+      "strategy": "fix_bigger_bottom_bigger",
+      "condition": "a response pattern below with establishes = true; patterns with competing explanations must not establish it"
+     }
+    ]
+   },
+   "items": [
+    {
+     "role": "diagnostic (same top, asks greater)",
+     "id": "gen:adfcmp:1,1,8,2,0",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (same top, asks smaller)",
+     "id": "gen:adfcmp:1,7,12,11,1",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (same bottom, asks greater (contrast))",
+     "id": "gen:adfcmp:0,11,1,10,0",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (same bottom, asks smaller (contrast))",
+     "id": "gen:adfcmp:0,11,6,3,1",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:adfcmp:1,1,9,11,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:adfcmp:1,1,3,9,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (bigger-bottom-bigger, shown solved)",
+     "id": "gen:adfcmp:1,1,9,10,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (bigger-bottom-bigger)",
+     "id": "gen:adfcmp:1,1,4,8,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (bigger-bottom-bigger)",
+     "id": "gen:adfcmp:1,1,6,7,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:adfcmp:1,1,9,8,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:adfcmp:1,1,4,11,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:adfcmp:1,1,8,3,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:adfcmp:1,1,10,5,0",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:adfcmp:1,2,11,7,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:adfcmp:1,2,9,7,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:adfcmp:1,3,8,5,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:adfcmp:1,1,2,12,0",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:adfcmp:1,7,10,8,1",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "grid"
+    ],
+    "missing": [
+     "two equal-length fraction strips side by side (two grid strips of the same width is a renderer decision)"
+    ]
+   },
+   "answerFormats": {
+    "familyType": "fraction",
+    "forms": [
+     "typed",
+     "word"
+    ],
+    "mcAvailable": false,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "adfcmp_concept",
+    "fix_bigger_bottom_bigger"
+   ],
+   "contract": [
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
+    "policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)",
+    "visual: two equal-length fraction strips side by side (two grid strips of the same width is a renderer decision)"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  },
+  {
+   "id": "TP-NUM-02",
+   "batch": "batch-1",
+   "pattern": null,
+   "title": "Adding like fractions: the bottom number names the piece size",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.number.fraction-add-like",
+    "module": {
+     "origin": "authored",
+     "mainFamily": "fadd",
+     "familyInPools": true
+    },
+    "family": "fadd",
+    "familyTitle": "Adding or subtracting like fractions",
+    "parameters": "fadd with params[3] = 1 (addition); examples: gcd(a + b, n) = 1, a ≠ b, a > 1, b > 1"
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "add-denominators",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_add_denominators"
+     },
+     {
+      "id": "multiply-tops",
+      "kind": "procedural",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_multiply_tops"
+     }
+    ],
+    "reusedExisting": [],
+    "modelledButNotTargeted": []
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "sum below one",
+      "id": "gen:fadd:3,5,9,1",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "The value (a + b)/(2n) is also what 'averaging the two fractions' gives, for EVERY like-fraction sum, so no item can separate add-denominators from averaging by value. Only the written form separates them: '(a+b)/(2n)' written unsimplified (e.g. 8/18) supports add-denominators; a simplified equal value (4/9) leaves both open. The grader compares values, so the raw response text must be read for this (integration note, 05). One diagnostic case only (no improper-sum item in the diagnostic partition).",
+    "patterns": [],
+    "triggerConditions": [
+     {
+      "strategy": "fix_add_denominators",
+      "condition": "both matching responses are WRITTEN unsimplified as (a + b)/(2n) (e.g. 8/18), read from the raw response text; a simplified equal value (4/9) also fits 'averaging the two fractions' and must not count. Even the unsimplified form can come from halving 8/9 as 8/18, so the fix teaches piece size and the recheck must use a new item"
+     }
+    ]
+   },
+   "items": [
+    {
+     "role": "diagnostic (sum below one)",
+     "id": "gen:fadd:3,5,9,1",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:fadd:2,3,6,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (add-denominators, shown solved)",
+     "id": "gen:fadd:2,3,7,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (add-denominators)",
+     "id": "gen:fadd:3,4,12,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (add-denominators)",
+     "id": "gen:fadd:7,2,10,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception example (multiply-tops, shown solved)",
+     "id": "gen:fadd:2,5,9,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (multiply-tops)",
+     "id": "gen:fadd:5,4,11,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (multiply-tops)",
+     "id": "gen:fadd:3,2,11,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:fadd:3,2,8,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:fadd:4,2,7,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:fadd:2,9,12,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:fadd:8,2,11,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:fadd:4,3,11,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:fadd:4,3,8,1:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:fadd:5,3,11,1",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "grid"
+    ],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "fraction",
+    "forms": [
+     "typed",
+     "mc"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": false,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "fadd has a family contract statement (a/n ± b/n), so the existing derivation authority (working-assessment@1) can examine typed arithmetic working; the answer alone earns answer credit only"
+   },
+   "newStrategies": [
+    "fadd_concept",
+    "fix_add_denominators",
+    "fix_multiply_tops"
+   ],
+   "contract": [
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
+    "policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)"
+   ],
+   "missingQuestions": [
+    "fadd has no word (transfer) form: transfer candidates cannot be drawn from the generator; transfer is MISSING CONTENT (authored candidates below are text only, unverified by the grader).",
+    "transfer: the family has no word (everyday) form; authored transfer text is NOT gradable"
+   ],
+   "itemIssues": []
+  },
+  {
+   "id": "TP-NUM-03",
+   "batch": "batch-1",
+   "pattern": null,
+   "title": "Comparing decimals: place value, not length",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.number.decimal-tenths",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "aedec",
+     "familyInPools": true
+    },
+    "family": "aedecc",
+    "familyTitle": "Comparing a tenths decimal with a hundredths decimal",
+    "parameters": "aedecc, all items (one tenths and one hundredths decimal with the same whole part)."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "longer-is-larger",
+      "kind": "conceptual",
+      "diagnosable": false,
+      "reading": "other",
+      "specificStrategy": "fix_longer_is_larger"
+     },
+     {
+      "id": "shorter-is-larger",
+      "kind": "conceptual",
+      "diagnosable": false,
+      "reading": "other",
+      "specificStrategy": "fix_shorter_is_larger"
+     }
+    ],
+    "reusedExisting": [],
+    "modelledButNotTargeted": []
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "tenths decimal is greater",
+      "id": "gen:aedecc:2,8,1,3",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "hundredths decimal is greater",
+      "id": "gen:aedecc:1,4,8,7",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (tenths decimal is greater)",
+     "id": "gen:aedecc:2,8,1,3",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (hundredths decimal is greater)",
+     "id": "gen:aedecc:1,4,8,7",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:aedecc:0,5,0,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:aedecc:3,1,4,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (longer-is-larger, shown solved)",
+     "id": "gen:aedecc:2,2,0,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (longer-is-larger)",
+     "id": "gen:aedecc:3,6,1,5",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (longer-is-larger)",
+     "id": "gen:aedecc:1,7,6,4",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (shorter-is-larger, shown solved)",
+     "id": "gen:aedecc:1,2,7,7",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (shorter-is-larger)",
+     "id": "gen:aedecc:3,3,8,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (shorter-is-larger)",
+     "id": "gen:aedecc:1,1,2,9",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:aedecc:0,6,8,7",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:aedecc:1,3,4,8",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:aedecc:2,1,7,9",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:aedecc:3,4,3,8",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:aedecc:2,6,7,7",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:aedecc:0,7,4,9:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:aedecc:0,9,7,9:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:aedecc:0,8,7,4",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:aedecc:2,7,8,8",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "grid"
+    ],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "exact",
+    "forms": [
+     "typed",
+     "word"
+    ],
+    "mcAvailable": false,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": false
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "aedecc_concept",
+    "fix_longer_is_larger",
+    "fix_shorter_is_larger"
+   ],
+   "contract": [
+    "B1 teaching scope: aedecc_concept, fix_longer_is_larger, fix_shorter_is_larger are outside teachingScopeFor (main family aedec); ineligible until the selector accepts 'aedecc'",
+    "B2 diagnosis reader: 'longer-is-larger' reads as other (answer type exact); fix_longer_is_larger cannot be triggered",
+    "B2 diagnosis reader: 'shorter-is-larger' reads as other (answer type exact); fix_shorter_is_larger cannot be triggered",
+    "B3 addresses: fix_longer_is_larger — the platform reads addresses = null (family 'says' overridden); the gate would accept any established misconception",
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  },
+  {
+   "id": "TP-PRO-01",
+   "batch": "batch-1",
+   "pattern": null,
+   "title": "Two spinners or dice: totals are not equally likely",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.probability.sample-space",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "akss",
+     "familyInPools": true
+    },
+    "family": "akdice",
+    "familyTitle": "Probability from the sample space of two dice or spinners",
+    "parameters": "akdice with params[2] = 0 (\"the total is exactly k\"); totals made by at least two pairs for diagnostics, rechecks and delayed checks."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "totals-equally-likely",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_totals_equally_likely"
+     },
+     {
+      "id": "order-ignored",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_order_ignored"
+     },
+     {
+      "id": "added-sides",
+      "kind": "procedural",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_added_sides"
+     }
+    ],
+    "reusedExisting": [],
+    "modelledButNotTargeted": []
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "same-size spinners, a total made by several pairs",
+      "id": "gen:akdice:5,5,0,4",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "different-size spinners, a total made by several pairs",
+      "id": "gen:akdice:4,5,0,7",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (same-size spinners, a total made by several pairs)",
+     "id": "gen:akdice:5,5,0,4",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (different-size spinners, a total made by several pairs)",
+     "id": "gen:akdice:4,5,0,7",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:akdice:3,3,0,4",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:akdice:4,5,0,3",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (totals-equally-likely, shown solved)",
+     "id": "gen:akdice:3,5,0,6",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (totals-equally-likely)",
+     "id": "gen:akdice:5,5,0,7:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (totals-equally-likely)",
+     "id": "gen:akdice:3,5,0,3:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception example (order-ignored, shown solved)",
+     "id": "gen:akdice:6,6,0,7",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (order-ignored)",
+     "id": "gen:akdice:5,5,0,9:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (order-ignored)",
+     "id": "gen:akdice:6,6,0,3",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (added-sides, shown solved)",
+     "id": "gen:akdice:4,5,0,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (added-sides)",
+     "id": "gen:akdice:5,5,0,10",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (added-sides)",
+     "id": "gen:akdice:3,5,0,2",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:akdice:3,3,0,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:akdice:3,3,0,3:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:akdice:5,6,0,11:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:akdice:4,4,0,6",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:akdice:4,6,0,10:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:akdice:4,6,0,8:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:akdice:3,4,0,4:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:akdice:6,6,0,6",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:akdice:4,6,0,3:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "table"
+    ],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "fraction",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "akdice_concept",
+    "fix_totals_equally_likely",
+    "fix_order_ignored",
+    "fix_added_sides"
+   ],
+   "contract": [
+    "B1 teaching scope: akdice_concept, fix_totals_equally_likely, fix_order_ignored, fix_added_sides are outside teachingScopeFor (main family akss); ineligible until the selector accepts 'akdice'",
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
+   ],
+   "missingQuestions": [
+    "rechecks: no usable check item for case \"different-size spinners, a total made by several pairs\" (another case's item stands in)"
+   ],
+   "itemIssues": []
+  },
+  {
+   "id": "TP-STA-01",
+   "batch": "batch-1",
+   "pattern": null,
+   "title": "The median: order first, then find the middle",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.statistics.median-mode",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "akmed",
+     "familyInPools": true
+    },
+    "family": "akmed",
+    "familyTitle": "Finding the median",
+    "parameters": "akmed, all items (5–10 different whole numbers); examples, diagnostics and rechecks need |mean − median| ≥ 3."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "not-ordered",
+      "kind": "procedural",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": null
+     },
+     {
+      "id": "mean-for-median",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_mean_for_median"
+     },
+     {
+      "id": "one-middle",
+      "kind": "procedural",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_one_middle"
+     }
+    ],
+    "reusedExisting": [
+     {
+      "strategy": "spot_the_mistake",
+      "covers": "not-ordered"
+     }
+    ],
+    "modelledButNotTargeted": []
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "odd count",
+      "id": "gen:akmed:13,5",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "even count",
+      "id": "gen:akmed:23,8",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (odd count)",
+     "id": "gen:akmed:13,5",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (even count)",
+     "id": "gen:akmed:23,8",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:akmed:76,5",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:akmed:71,10",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (not-ordered, shown solved)",
+     "id": "gen:akmed:32,5",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (not-ordered)",
+     "id": "gen:akmed:8,6:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (not-ordered)",
+     "id": "gen:akmed:77,7:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception example (mean-for-median, shown solved)",
+     "id": "gen:akmed:71,9",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (mean-for-median)",
+     "id": "gen:akmed:77,5:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (mean-for-median)",
+     "id": "gen:akmed:29,5",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (one-middle, shown solved)",
+     "id": "gen:akmed:32,6",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (one-middle)",
+     "id": "gen:akmed:79,6:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (one-middle)",
+     "id": "gen:akmed:33,6",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:akmed:76,7:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:akmed:13,9",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:akmed:51,9",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:akmed:0,9",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:akmed:0,8:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:akmed:27,6:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:akmed:35,8:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:akmed:8,7",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:akmed:24,10",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "fraction",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "fix_mean_for_median",
+    "fix_one_middle"
+   ],
+   "contract": [
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  },
+  {
+   "id": "TP2-CH-BAG",
+   "batch": "batch-2",
+   "pattern": "PAT-CHANCE",
+   "title": "Count marbles, not colours",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.probability.chance-language",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "akchance",
+     "familyInPools": true
+    },
+    "family": "akchance",
+    "familyTitle": "Probability from 0 (impossible) to 1 (certain)",
+    "parameters": "akchance with params[3] ∈ {0, 1} (is X / is not X); diagnostics need unequal colour counts (colours-equal differs from the answer)."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "colours-equal",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_colours_equal"
+     }
+    ],
+    "reusedExisting": [
+     {
+      "strategy": "worked_steps",
+      "covers": "favourable over all (general)"
+     },
+     {
+      "strategy": "scale_words",
+      "covers": "the 0–1 scale"
+     },
+     {
+      "strategy": "spot_the_mistake",
+      "covers": "odds"
+     }
+    ],
+    "modelledButNotTargeted": [
+     "count-only",
+     "event-itself"
+    ]
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "unequal colours",
+      "id": "gen:akchance:2,3,2,0",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (unequal colours)",
+     "id": "gen:akchance:2,3,2,0",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:akchance:4,2,4,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (colours-equal, shown solved)",
+     "id": "gen:akchance:8,2,1,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (colours-equal)",
+     "id": "gen:akchance:6,6,2,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (colours-equal)",
+     "id": "gen:akchance:2,7,5,0:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:akchance:5,8,3,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:akchance:2,6,3,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:akchance:8,8,2,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:akchance:9,9,4,0:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:akchance:6,4,0,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:akchance:1,1,6,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:akchance:7,1,6,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:akchance:7,9,1,0:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:akchance:5,7,5,1",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "fraction",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "fix_colours_equal"
+   ],
+   "contract": [
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
+   ],
+   "missingQuestions": [
+    "CONTRAST GAP: an equal-count bag (where 1/(number of colours) is RIGHT, so a correct answer there cannot be read as understanding) exists in the generator (gen:akchance:6,6,0,0, gen:akchance:8,8,0,0) but in NO served partition (diagnostic/practice/check/retention), and gen:akchance:1,1,0,0 (check) is ambiguous (odds and count-only both give 1). Generator partition change for Codex."
+   ],
+   "itemIssues": []
+  },
+  {
+   "id": "TP2-CH-BALL",
+   "batch": "batch-2",
+   "pattern": "PAT-CHANCE",
+   "title": "Balls of different counts: each ball is equally likely",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.probability.classical",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "anbag",
+     "familyInPools": true
+    },
+    "family": "anbag",
+    "familyTitle": "Probability of a colour drawn from a bag",
+    "parameters": "anbag, all three asked colours; diagnostics need unequal counts."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "colours-equally-likely",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_colours_equally_likely"
+     }
+    ],
+    "reusedExisting": [
+     {
+      "strategy": "worked_steps",
+      "covers": "favourable over all (general)"
+     },
+     {
+      "strategy": "out-of",
+      "covers": "numbering the balls"
+     },
+     {
+      "strategy": "spot_the_mistake",
+      "covers": "odds"
+     }
+    ],
+    "modelledButNotTargeted": [
+     "count-not-probability"
+    ]
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "unequal colours",
+      "id": "gen:anbag:6,9,7,2",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (unequal colours)",
+     "id": "gen:anbag:6,9,7,2",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:anbag:1,8,4,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (colours-equally-likely, shown solved)",
+     "id": "gen:anbag:2,6,2,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (colours-equally-likely)",
+     "id": "gen:anbag:3,2,3,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (colours-equally-likely)",
+     "id": "gen:anbag:6,8,0,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:anbag:9,2,4,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:anbag:7,6,1,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:anbag:5,6,2,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:anbag:1,4,3,0",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:anbag:6,8,6,2:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:anbag:1,6,1,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:anbag:3,5,0,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:anbag:1,9,3,2:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:anbag:8,8,5,2",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "fraction",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "fix_colours_equally_likely"
+   ],
+   "contract": [
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  },
+  {
+   "id": "TP2-PRT-NAME",
+   "batch": "batch-2",
+   "pattern": "PAT-PARTS",
+   "title": "Naming a shaded fraction: out of ALL the equal parts",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.number.fraction-models",
+    "module": {
+     "origin": "authored",
+     "mainFamily": "adfname",
+     "familyInPools": true
+    },
+    "family": "adfname",
+    "familyTitle": "Naming the shaded fraction of a shape",
+    "parameters": "adfname, all items (grids of equal squares); diagnostics need shaded ≠ unshaded so the two errors differ."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "shaded-to-unshaded",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_shaded_to_unshaded"
+     },
+     {
+      "id": "count-only",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_count_only"
+     }
+    ],
+    "reusedExisting": [
+     {
+      "strategy": "equal_parts",
+      "covers": "equal parts (authored, general)"
+     }
+    ],
+    "modelledButNotTargeted": [
+     "unshaded"
+    ]
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "shaded fraction",
+      "id": "gen:adfname:2,6,7",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (shaded fraction)",
+     "id": "gen:adfname:2,6,7",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:adfname:1,7,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (shaded-to-unshaded, shown solved)",
+     "id": "gen:adfname:4,2,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (shaded-to-unshaded)",
+     "id": "gen:adfname:5,2,7",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (shaded-to-unshaded)",
+     "id": "gen:adfname:2,7,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception example (count-only, shown solved)",
+     "id": "gen:adfname:4,3,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (count-only)",
+     "id": "gen:adfname:3,5,8",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (count-only)",
+     "id": "gen:adfname:2,9,11:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:adfname:3,2,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:adfname:1,5,2:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:adfname:1,8,3:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:adfname:4,4,9",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:adfname:1,9,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:adfname:2,10,11:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:adfname:1,10,3:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:adfname:2,3,1",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:adfname:2,2,1:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "grid"
+    ],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "fraction",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "adfname_concept",
+    "fix_shaded_to_unshaded",
+    "fix_count_only"
+   ],
+   "contract": [
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  },
+  {
+   "id": "TP2-PRT-SHADE",
+   "batch": "batch-2",
+   "pattern": "PAT-PARTS",
+   "title": "Shading a fraction of a grid: parts of the whole, not the top number",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.number.fraction-models",
+    "module": {
+     "origin": "authored",
+     "mainFamily": "adfname",
+     "familyInPools": true
+    },
+    "family": "adshade",
+    "familyTitle": "How many squares to shade to show a fraction",
+    "parameters": "adshade, all items; diagnostics need n > b so 'top-number' differs from the answer."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_top_number"
+     }
+    ],
+    "reusedExisting": [
+     {
+      "strategy": "equal_parts",
+      "covers": "equal parts (authored, general)"
+     }
+    ],
+    "modelledButNotTargeted": [
+     "one-part",
+     "unshaded"
+    ]
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "grid larger than the bottom number",
+      "id": "gen:adshade:2,8,3,8",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (grid larger than the bottom number)",
+     "id": "gen:adshade:2,8,3,8",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:adshade:5,3,2,5",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (top-number, shown solved)",
+     "id": "gen:adshade:3,6,7,9",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (top-number)",
+     "id": "gen:adshade:4,4,5,8:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (top-number)",
+     "id": "gen:adshade:6,5,7,10",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:adshade:2,5,3,5:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:adshade:6,2,1,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:adshade:3,5,1,5:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:adshade:4,8,3,8:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:adshade:2,9,1,3:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:adshade:4,9,5,9:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:adshade:4,5,1,10:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:adshade:6,3,5,9",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:adshade:5,4,3,10",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "grid"
+    ],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "integer",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "adshade_concept",
+    "fix_top_number"
+   ],
+   "contract": [
+    "B1 teaching scope: adshade_concept, fix_top_number are outside teachingScopeFor (main family adfname); ineligible until the selector accepts 'adshade'",
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  },
+  {
+   "id": "TP2-PV-DIGIT",
+   "batch": "batch-2",
+   "pattern": "PAT-PLACE",
+   "title": "The value of a digit, and how many tens",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.number.place-value-tens",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "aatens",
+     "familyInPools": true
+    },
+    "family": "aadigit",
+    "familyTitle": "The value of a digit in a two-digit number",
+    "parameters": "aadigit, all three forms (params[1] = 0 value of the tens digit, 1 how many tens, 2 value of the ones digit); numbers with two equal digits excluded (the question would be ambiguous)."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "face-value",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_face_value"
+     },
+     {
+      "id": "value-not-count",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_value_not_count"
+     }
+    ],
+    "reusedExisting": [
+     {
+      "strategy": "bundles",
+      "covers": "tens as bundles (general)"
+     },
+     {
+      "strategy": "spot_the_mistake",
+      "covers": "count-blocks"
+     }
+    ],
+    "modelledButNotTargeted": [
+     "wrong-digit",
+     "times-ten"
+    ]
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "value of the tens digit",
+      "id": "gen:aadigit:42,0",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "how many tens",
+      "id": "gen:aadigit:34,1",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "value of the ones digit",
+      "id": "gen:aadigit:91,2",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "value of the tens digit, another number",
+      "id": "gen:aadigit:95,0",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [
+     {
+      "answers": [
+       "4 (bug:face-value)",
+       "3 (correct)",
+       "1 (correct)",
+       "9 (bug:face-value)"
+      ],
+      "establishes": true
+     },
+     {
+      "answers": [
+       "4 (bug:face-value)",
+       "3 (correct)",
+       "1 (correct)",
+       "90 (correct)"
+      ],
+      "establishes": false
+     },
+     {
+      "answers": [
+       "40 (correct)",
+       "30 (bug:value-not-count)",
+       "1 (correct)",
+       "90 (correct)"
+      ],
+      "establishes": false
+     },
+     {
+      "answers": [
+       "4 (bug:face-value)",
+       "30 (bug:value-not-count)",
+       "1 (correct)",
+       "9 (bug:face-value)"
+      ],
+      "establishes": false
+     },
+     {
+      "answers": [
+       "40 (correct)",
+       "3 (correct)",
+       "10 (bug:times-ten)",
+       "90 (correct)"
+      ],
+      "establishes": false
+     }
+    ],
+    "triggerConditions": [
+     {
+      "strategy": "fix_face_value",
+      "condition": "a response pattern below with establishes = true; patterns with competing explanations must not establish it"
+     },
+     {
+      "strategy": "fix_value_not_count",
+      "condition": "a response pattern below with establishes = true; patterns with competing explanations must not establish it"
+     }
+    ]
+   },
+   "items": [
+    {
+     "role": "diagnostic (value of the tens digit)",
+     "id": "gen:aadigit:42,0",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (how many tens)",
+     "id": "gen:aadigit:34,1",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (value of the ones digit)",
+     "id": "gen:aadigit:91,2",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (value of the tens digit, another number)",
+     "id": "gen:aadigit:95,0",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:aadigit:18,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:aadigit:56,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (face-value, shown solved)",
+     "id": "gen:aadigit:49,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (face-value)",
+     "id": "gen:aadigit:69,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (face-value)",
+     "id": "gen:aadigit:83,0:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception example (value-not-count, shown solved)",
+     "id": "gen:aadigit:75,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (value-not-count)",
+     "id": "gen:aadigit:82,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (value-not-count)",
+     "id": "gen:aadigit:68,1:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:aadigit:13,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:aadigit:26,1:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:aadigit:43,1",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:aadigit:50,0",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:aadigit:20,0",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:aadigit:31,0:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:aadigit:37,0:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:aadigit:74,0",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:aadigit:92,1:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "blocks"
+    ],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "integer",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "aadigit_concept",
+    "fix_face_value",
+    "fix_value_not_count"
+   ],
+   "contract": [
+    "B1 teaching scope: aadigit_concept, fix_face_value, fix_value_not_count are outside teachingScopeFor (main family aatens); ineligible until the selector accepts 'aadigit'",
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
+    "policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)"
+   ],
+   "missingQuestions": [
+    "rechecks: no usable check item for case \"how many tens\" (another case's item stands in)"
+   ],
+   "itemIssues": []
+  },
+  {
+   "id": "TP2-REG-MONEY",
+   "batch": "batch-2",
+   "pattern": "PAT-REGROUP",
+   "title": "Adding rupees and paise: 100 paise make ₹1",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.measurement.money-decimals",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "acpaise",
+     "familyInPools": true
+    },
+    "family": "acmoneyadd",
+    "familyTitle": "Adding and taking away rupees and paise",
+    "parameters": "acmoneyadd with params[4] = 0 (addition); diagnostics, rechecks and delayed checks need paise that add to 100 or more."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "paise-over-100",
+      "kind": "conceptual",
+      "diagnosable": false,
+      "reading": "other",
+      "specificStrategy": "fix_paise_over_100"
+     },
+     {
+      "id": "no-carry",
+      "kind": "procedural",
+      "diagnosable": false,
+      "reading": "other",
+      "specificStrategy": "fix_no_carry"
+     }
+    ],
+    "reusedExisting": [
+     {
+      "strategy": "drop_dot",
+      "covers": "money as paise (general)"
+     }
+    ],
+    "modelledButNotTargeted": []
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "paise add to 100 or more",
+      "id": "gen:acmoneyadd:3,7,11,13,0",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (paise add to 100 or more)",
+     "id": "gen:acmoneyadd:3,7,11,13,0",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:acmoneyadd:25,18,14,15,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (paise-over-100, shown solved)",
+     "id": "gen:acmoneyadd:17,19,11,5,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (paise-over-100)",
+     "id": "gen:acmoneyadd:19,13,11,11,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (paise-over-100)",
+     "id": "gen:acmoneyadd:29,15,15,6,0",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (no-carry, shown solved)",
+     "id": "gen:acmoneyadd:14,15,18,12,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (no-carry)",
+     "id": "gen:acmoneyadd:26,17,15,9,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (no-carry)",
+     "id": "gen:acmoneyadd:16,7,20,19,0:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:acmoneyadd:17,17,19,18,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:acmoneyadd:15,14,11,7,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:acmoneyadd:6,7,10,18,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:acmoneyadd:28,9,19,11,0:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:acmoneyadd:2,15,7,15,0:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:acmoneyadd:26,17,12,15,0:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:acmoneyadd:4,18,6,15,0:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:acmoneyadd:1,16,6,15,0:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:acmoneyadd:25,17,11,15,0:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "table"
+    ],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "fraction",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": false
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "acmoneyadd_concept",
+    "fix_paise_over_100",
+    "fix_no_carry"
+   ],
+   "contract": [
+    "B1 teaching scope: acmoneyadd_concept, fix_paise_over_100, fix_no_carry are outside teachingScopeFor (main family acpaise); ineligible until the selector accepts 'acmoneyadd'",
+    "B2 diagnosis reader: 'paise-over-100' reads as other (answer type fraction); fix_paise_over_100 cannot be triggered",
+    "B2 diagnosis reader: 'no-carry' reads as other (answer type fraction); fix_no_carry cannot be triggered",
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  },
+  {
+   "id": "TP2-REG-TIME",
+   "batch": "batch-2",
+   "pattern": "PAT-REGROUP",
+   "title": "Adding durations: 60 minutes make an hour",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.measurement.time-unit-conversion",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "adhmin",
+     "familyInPools": true
+    },
+    "family": "addur",
+    "familyTitle": "Adding durations and changing seconds into minutes and seconds",
+    "parameters": "addur with params[0] = 0 (adding two durations in h and min); diagnostics, rechecks and delayed checks need minutes that add to 60 or more (the no-carry error is possible)."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "no-carry",
+      "kind": "conceptual",
+      "diagnosable": false,
+      "reading": "unreadable",
+      "specificStrategy": "fix_no_carry"
+     }
+    ],
+    "reusedExisting": [
+     {
+      "strategy": "spot_the_mistake",
+      "covers": "hour-as-100 (an hour taken as 100 minutes)"
+     },
+     {
+      "strategy": "clock_round",
+      "covers": "the 60-minute hour (general)"
+     }
+    ],
+    "modelledButNotTargeted": [
+     "carry-kept"
+    ]
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "minutes add to 100 or more",
+      "id": "gen:addur:0,27",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (minutes add to 100 or more)",
+     "id": "gen:addur:0,27",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:addur:0,57",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (no-carry, shown solved)",
+     "id": "gen:addur:0,84",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (no-carry)",
+     "id": "gen:addur:0,35:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (no-carry)",
+     "id": "gen:addur:0,92",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:addur:0,36:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:addur:0,97",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:addur:0,37:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:addur:0,44:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:addur:0,87",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:addur:0,95:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:addur:0,23:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:addur:0,91:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:addur:0,26",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "numberline"
+    ],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "tuple",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": false
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "addur_concept",
+    "fix_no_carry"
+   ],
+   "contract": [
+    "B1 teaching scope: addur_concept, fix_no_carry are outside teachingScopeFor (main family adhmin); ineligible until the selector accepts 'addur'",
+    "B2 diagnosis reader: 'no-carry' reads as unreadable (answer type tuple); fix_no_carry cannot be triggered",
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
+   ],
+   "missingQuestions": [
+    "rechecks: no usable check item for case \"minutes add to 100 or more\" (another case's item stands in)",
+    "delayed checks: no usable retention item for case \"minutes add to 100 or more\" (another case's item stands in)"
+   ],
+   "itemIssues": []
+  },
+  {
+   "id": "TP2-SCL-BAR",
+   "batch": "batch-2",
+   "pattern": "PAT-SCALE",
+   "title": "Scaled bar charts: read the scale, do not count lines",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.statistics.scaled-bars",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "afbar",
+     "familyInPools": true
+    },
+    "family": "afbar",
+    "familyTitle": "Reading a bar chart with a scale",
+    "parameters": "afbar, all forms (params[1] = 0 read, 1 how many more, 2 together); scale > 1."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "assume-tens",
+      "kind": "procedural",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_assume_tens"
+     }
+    ],
+    "reusedExisting": [
+     {
+      "strategy": "worked_steps",
+      "covers": "reading a scaled bar (general)"
+     },
+     {
+      "strategy": "skip_count",
+      "covers": "counting up the scale"
+     },
+     {
+      "strategy": "spot_the_mistake",
+      "covers": "count-lines"
+     }
+    ],
+    "modelledButNotTargeted": [
+     "add-for-more",
+     "difference-for-total"
+    ]
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "read one bar",
+      "id": "gen:afbar:0,0,10",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "how many more",
+      "id": "gen:afbar:0,1,6",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": []
+   },
+   "items": [
+    {
+     "role": "diagnostic (read one bar)",
+     "id": "gen:afbar:0,0,10",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (how many more)",
+     "id": "gen:afbar:0,1,6",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:afbar:3,0,8",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:afbar:1,1,5",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (assume-tens, shown solved)",
+     "id": "gen:afbar:0,2,5",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (assume-tens)",
+     "id": "gen:afbar:3,2,3",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (assume-tens)",
+     "id": "gen:afbar:1,1,1",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:afbar:0,2,8:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:afbar:0,2,4:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:afbar:0,2,2",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:afbar:5,0,10:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:afbar:1,1,0:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:afbar:3,2,1:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:afbar:4,2,5:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:afbar:1,0,15",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:afbar:3,1,11:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "integer",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "fix_assume_tens"
+   ],
+   "contract": [
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  },
+  {
+   "id": "TP2-SCL-PICT",
+   "batch": "batch-2",
+   "pattern": "PAT-SCALE",
+   "title": "Pictographs: each picture stands for the key",
+   "sourceCommit": "637938c7da0416b03595fae60a80607e60aa84c0",
+   "scope": {
+    "competency": "MATH.statistics.pictographs",
+    "module": {
+     "origin": "synthesised",
+     "mainFamily": "acpict",
+     "familyInPools": true
+    },
+    "family": "acpicttab",
+    "familyTitle": "Pictographs and tables: completing, totals and the largest group",
+    "parameters": "acpicttab, all three forms: params[3] = 0 draw a row (÷ key), 1 total (× key), 2 largest group; key > 1 in diagnostics."
+   },
+   "misconceptions": {
+    "targets": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "diagnosable": true,
+      "reading": "predicted",
+      "specificStrategy": "fix_one_each"
+     }
+    ],
+    "reusedExisting": [
+     {
+      "strategy": "spot_the_mistake",
+      "covers": "no-key (reading a pictograph)"
+     },
+     {
+      "strategy": "table",
+      "covers": "pictures × key (general, seed acpict)"
+     }
+    ],
+    "modelledButNotTargeted": [
+     "no-key",
+     "missed-row"
+    ]
+   },
+   "contrast": {
+    "cases": [
+     {
+      "case": "draw a row",
+      "id": "gen:acpicttab:2,22,2,0",
+      "partition": "diagnostic"
+     },
+     {
+      "case": "read a total",
+      "id": "gen:acpicttab:2,1,0,1",
+      "partition": "diagnostic"
+     }
+    ],
+    "rule": "A single matching answer is a SUSPECTED error. misconception-evidence@1 establishes a misconception from two matching answers.",
+    "patterns": [],
+    "triggerConditions": [
+     {
+      "strategy": "fix_one_each",
+      "condition": "a competing explanation ('copied the table value', or 'answered children instead of pictures') gives the SAME number on every draw item, so answers alone cannot establish one-each: establish it only from a drawn pictograph (the learner draws one symbol per child) or after asking the learner what one symbol stands for"
+     }
+    ]
+   },
+   "items": [
+    {
+     "role": "diagnostic (draw a row)",
+     "id": "gen:acpicttab:2,22,2,0",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "diagnostic (read a total)",
+     "id": "gen:acpicttab:2,1,0,1",
+     "fresh": true,
+     "partition": "diagnostic",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "worked (shown solved)",
+     "id": "gen:acpicttab:0,9,2,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception example (one-each, shown solved)",
+     "id": "gen:acpicttab:2,7,0,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "misconception guided (one-each)",
+     "id": "gen:acpicttab:2,4,3,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "misconception fresh check (one-each)",
+     "id": "gen:acpicttab:1,5,2,0:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:acpicttab:1,29,3,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:acpicttab:0,16,3,0",
+     "fresh": false,
+     "partition": "practice",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "guided practice",
+     "id": "gen:acpicttab:1,19,1,0:mc",
+     "fresh": false,
+     "partition": "practice",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:acpicttab:0,13,3,0:mc",
+     "fresh": true,
+     "partition": "check",
+     "form": "mc",
+     "issues": []
+    },
+    {
+     "role": "fresh recheck",
+     "id": "gen:acpicttab:1,0,2,0",
+     "fresh": true,
+     "partition": "check",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:acpicttab:0,23,2,0:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "transfer",
+     "id": "gen:acpicttab:1,6,2,0:w",
+     "fresh": true,
+     "partition": "practice",
+     "form": "word",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:acpicttab:0,4,3,0",
+     "fresh": true,
+     "partition": "retention",
+     "form": "typed",
+     "issues": []
+    },
+    {
+     "role": "retention (delayed)",
+     "id": "gen:acpicttab:2,2,1,0:mc",
+     "fresh": true,
+     "partition": "retention",
+     "form": "mc",
+     "issues": []
+    }
+   ],
+   "visuals": {
+    "used": [
+     "table"
+    ],
+    "missing": []
+   },
+   "answerFormats": {
+    "familyType": "integer",
+    "forms": [
+     "typed",
+     "mc",
+     "word"
+    ],
+    "mcAvailable": true,
+    "wordAvailable": true,
+    "graderSupported": true,
+    "diagnosisReaderSupported": true
+   },
+   "evidence": {
+    "answer": "grading-decision@1 correctness from the trusted server grader (every item here is gradable)",
+    "method": "none: no method evidence can be recorded; a correct answer never implies the method"
+   },
+   "newStrategies": [
+    "acpicttab_concept",
+    "fix_one_each"
+   ],
+   "contract": [
+    "B1 teaching scope: acpicttab_concept, fix_one_each are outside teachingScopeFor (main family acpict); ineligible until the selector accepts 'acpicttab'",
+    "worked-example verification: solved lines use role 'strategy' (checked by this branch's oracle), because no platform worked-example verifier exists for this family",
+    "policy: 'established' requires the contrast/trigger condition (misconception-evidence@1 counts any two matches)"
+   ],
+   "missingQuestions": [],
+   "itemIssues": []
+  }
+ ]
+}

@@ -69,7 +69,11 @@ const built = new Map<string, any>();
 for (const pk of ALL) {
   const out = `${root}/${pk.batch}`;
   const def = FAMILIES.get(pk.family)!;
+  // questions already SHOWN (solved, or as guided/check) by the module's existing explanations are exposed: never used again here
   const used = new Set<string>();
+  { const m0 = moduleFor(pk.competency)!; const shownIds: string[] = []; for (const st of m0.strategies) { for (const sc of st.screens) if (sc.instance) shownIds.push(sc.instance); if (st.guided) shownIds.push(st.guided); if (st.check) shownIds.push(st.check); } for (const sc of (Array.isArray(m0.chapter) ? m0.chapter : []) as { instance?: string }[]) if (sc.instance) shownIds.push(sc.instance);
+    // excluded by exposure key AND by this package's own number signatures (same bag, table or numbers under other labels) and answers
+    for (const id of shownIds) { used.add(exposureKey(id)); const pr = problemOf(id.replace(/:(mc|w)$/, "")); if (pr && pr.family === pk.family) { try { for (const k of [...(pk.answerDistinct ? [`answer:${pr.answer}`] : []), ...(pk.signature?.(pr) ?? [])]) used.add(k); } catch { /* not a signature-bearing item */ } } } }
   const gaps: string[] = [];
   const sig = (id: string) => [exposureKey(id), ...(pk.answerDistinct ? [`answer:${P(id).answer}`] : []), ...(pk.signature?.(P(id)) ?? [])];
   const take = (id: string) => { for (const k of sig(id)) used.add(k); return id; };
@@ -95,7 +99,9 @@ for (const pk of ALL) {
     take(ex);
     const p = P(ex), b = p.bugs.find((y) => y.id === t.bug)!;
     const guided = list("practice").find((x) => free(x) && has(x) && discriminating(P(x))); if (guided) take(guided);
-    const check = list("check").find((x) => free(x) && has(x) && discriminating(P(x))); if (check) take(check);
+    // the fresh check must not predict the same target wrong value as the guided item (a repeated error would repeat the same number)
+    const tval = (x: string) => JSON.stringify(P(x).bugs.find((y) => y.id === t.bug)?.predict ?? null);
+    const check = list("check").find((x) => free(x) && has(x) && discriminating(P(x)) && (!guided || tval(x) !== tval(guided))); if (check) take(check);
     if (!guided || !check) fail(pk.id, `bug ${t.bug}: guided ${guided ?? "none"}, check ${check ?? "none"}`);
     const wrong = pk.display?.[t.bug] ? [pk.display[t.bug](p)] : shown(b.predict, p.answer);
     const probe = probeReading(ex, t.bug, wrong[0]);
@@ -112,6 +118,11 @@ for (const pk of ALL) {
 
   const roles: [string, string][] = [...diagnostics.map((d) => ["diagnostic", d.id] as [string, string]), ...worked.map((x) => ["worked-example", x] as [string, string]), ...misconceptions.flatMap((m) => [["misconception-example", m.example], ...(m.guided ? [["misconception-guided", m.guided]] : []), ...(m.check ? [["misconception-check", m.check]] : [])] as [string, string][]), ...guided.map((x) => ["guided-practice", x] as [string, string]), ...rechecks.map((x) => ["recheck", x] as [string, string]), ...transfer.map((x) => ["transfer", x] as [string, string]), ...delayed.map((x) => ["delayed-check", x] as [string, string])];
   const checks = roles.map(([r, id]) => checkItem(pk, id, r));
+  // reuse audit: every pair of chosen items, and each chosen item against the module's already-shown items, must share no key
+  const keyOwners = new Map<string, string[]>();
+  for (const [r, id] of roles) for (const k of sig(id)) keyOwners.set(k, [...(keyOwners.get(k) ?? []), `${r} ${id}`]);
+  const reuseCollisions = [...keyOwners.entries()].filter(([, v]) => v.length > 1).map(([k, v]) => `${k}: ${v.join(" / ")}`);
+  if (reuseCollisions.length) fail(pk.id, `reuse collisions: ${reuseCollisions.join("; ")}`);
 
   // whole-pool agreement: the oracle and every alternative method against every applicable generated item
   let agree = 0, total = 0; const disagreements: string[] = [];
@@ -238,7 +249,7 @@ for (const pk of ALL) {
   writeFileSync(`${out}/${pk.id}.json`, JSON.stringify(pkg, null, 1) + "\n");
   writeFileSync(`${out}/${pk.id}.md`, md(pkg));
   built.set(pk.id, pkg);
-  report.push({ id: pk.id, batch: pk.batch, scopedViolations: gates.flatMap((g) => g.familyScopedContract.violations), scopedUnchecked: gates.filter((g) => g.familyScopedContract.sections < g.familyScopedContract.of).map((g) => `${g.strategy} ${g.familyScopedContract.sections}/${g.familyScopedContract.of}`), undiagnosable: (misconceptions as any[]).filter((m) => !m.platformCanDiagnose).map((m) => m.bug), notChecked: gates.filter((g) => !g.teachingContract.checked).map((g) => g.strategy), pattern: pk.pattern ?? null, newStrategies: proposals.length, reused: reused.length, contractViolations: gates.flatMap((g) => g.teachingContract.violations), gatesNoEvidenceEligible: gates.filter((g) => g.withoutEvidence.eligible).map((g) => g.strategy), gatesWithEvidenceEligible: gates.filter((g) => g.withEvidence.eligible).map((g) => g.strategy), registryProblems: regProblems.length, family: pk.family, competency: pk.competency, items: checks.length, itemsOk: checks.filter((c) => c.ok).length, poolAgreement: `${agree}/${total}`, transfer: transfer.length, diagnostics: diagnostics.length, misconceptionScreens: misconceptions.length });
+  report.push({ id: pk.id, batch: pk.batch, reuseCollisions, scopedViolations: gates.flatMap((g) => g.familyScopedContract.violations), scopedUnchecked: gates.filter((g) => g.familyScopedContract.sections < g.familyScopedContract.of).map((g) => `${g.strategy} ${g.familyScopedContract.sections}/${g.familyScopedContract.of}`), undiagnosable: (misconceptions as any[]).filter((m) => !m.platformCanDiagnose).map((m) => m.bug), notChecked: gates.filter((g) => !g.teachingContract.checked).map((g) => g.strategy), pattern: pk.pattern ?? null, newStrategies: proposals.length, reused: reused.length, contractViolations: gates.flatMap((g) => g.teachingContract.violations), gatesNoEvidenceEligible: gates.filter((g) => g.withoutEvidence.eligible).map((g) => g.strategy), gatesWithEvidenceEligible: gates.filter((g) => g.withEvidence.eligible).map((g) => g.strategy), registryProblems: regProblems.length, family: pk.family, competency: pk.competency, items: checks.length, itemsOk: checks.filter((c) => c.ok).length, poolAgreement: `${agree}/${total}`, transfer: transfer.length, diagnostics: diagnostics.length, misconceptionScreens: misconceptions.length });
 }
 // ---- pattern packages (batch 2): the shared strategy, its reuse map and the cross-family contrast diagnostic
 const patOut: any[] = [];

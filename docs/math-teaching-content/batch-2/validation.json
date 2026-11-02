@@ -4,6 +4,7 @@
   {
    "id": "TP2-REG-TIME",
    "batch": "batch-2",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [
@@ -37,6 +38,7 @@
   {
    "id": "TP2-REG-MONEY",
    "batch": "batch-2",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [
@@ -73,6 +75,7 @@
   {
    "id": "TP2-SCL-PICT",
    "batch": "batch-2",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -104,6 +107,7 @@
   {
    "id": "TP2-SCL-BAR",
    "batch": "batch-2",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -129,6 +133,7 @@
   {
    "id": "TP2-PRT-NAME",
    "batch": "batch-2",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -158,6 +163,7 @@
   {
    "id": "TP2-PRT-SHADE",
    "batch": "batch-2",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -189,6 +195,7 @@
   {
    "id": "TP2-PV-DIGIT",
    "batch": "batch-2",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -222,6 +229,7 @@
   {
    "id": "TP2-CH-BAG",
    "batch": "batch-2",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -247,6 +255,7 @@
   {
    "id": "TP2-CH-BALL",
    "batch": "batch-2",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],

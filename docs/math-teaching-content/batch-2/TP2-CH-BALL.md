@@ -14,21 +14,21 @@
 Each marble (or ball) is equally likely to be picked, not each colour. So count marbles, not colours.
 Probability = (marbles that fit) ÷ (ALL the marbles). It is a number from 0 to 1, never more than 1.
 
-Visual: `{"type":"table","head":["Colour","Balls"],"rows":[["red",6],["blue",3]]}`. anbag has no figure; a colour table (existing table visual) is proposed.
+Visual: `{"type":"table","head":["Colour","Balls"],"rows":[["red",1],["blue",8],["green",4]]}`. anbag has no figure; a colour table (existing table visual) is proposed.
 
 ## Worked examples (instances from the generator; lines from the independent oracle; checked)
 
-**`gen:anbag:6,3,0,1`** — A bag has 6 red, 3 blue balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.
+**`gen:anbag:1,8,4,2`** — A bag has 1 red, 8 blue and 4 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.
 
-1. All the balls: 6 red + 3 blue = 9, each equally likely
-1. Balls that fit "blue": 3
-1. P = 3/9 = 1/3
+1. All the balls: 1 red + 8 blue + 4 green = 13, each equally likely
+1. Balls that fit "green": 4
+1. P = 4/13
 
-Answer **1/3**. (The family's own step text: All the balls: 6 + 3 = 9; 3 of them are blue; P = 3/9.)
+Answer **4/13**. (The family's own step text: All the balls: 1 + 8 + 4 = 13; 4 of them are green; P = 4/13.)
 
 ## Hints (graded, per worked example)
 
-For `gen:anbag:6,3,0,1`:
+For `gen:anbag:1,8,4,2`:
 
 1. Count all the balls.
 2. Count the balls of the colour asked.
@@ -40,7 +40,7 @@ The probability is how many balls belong to the colour, out of how many balls th
 
 ## Valid alternative methods (each checked to reach the same answer on every applicable generated item)
 
-- **Number every ball**: number the balls; each number is equally likely → P = 3/9 = 1/3
+- **Number every ball**: number the balls; each number is equally likely → P = 4/13
 
 **Method credit.** A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.
 
@@ -58,26 +58,26 @@ Interpretation rule: A single matching answer is a SUSPECTED error. misconceptio
 
 Status: modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers).
 
-> In "A bag has 8 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.", one wrong answer is 1/3.
+> In "A bag has 2 red, 6 blue and 2 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.", one wrong answer is 1/3.
 > Each colour was taken as equally likely; the colours have different numbers of balls, and it is the balls that are equally likely.
 > It is the balls that are equally likely, not the colours.
-> Not 1/3, but 4/9.
+> Not 1/3, but 1/5.
 
-Check: 8 red balls and only 3 green balls: a green ball is less likely to come out than a red one, so the colours cannot all have the same chance.
+Check: 6 blue balls and only 2 green balls: a green ball is less likely to come out than a blue one, so the colours cannot all have the same chance.
 
 Solved correctly:
 
-1. All the balls: 8 red + 7 blue + 3 green = 18, each equally likely
-1. Balls that fit "red": 8
-1. P = 8/18 = 4/9
+1. All the balls: 2 red + 6 blue + 2 green = 10, each equally likely
+1. Balls that fit "green": 2
+1. P = 2/10 = 1/5
 
-Example `gen:anbag:8,7,3,0`; guided `gen:anbag:9,7,3,1:mc`; fresh check `gen:anbag:5,4,5,0`.
+Example `gen:anbag:2,6,2,2`; guided `gen:anbag:3,2,3,0:mc`; fresh check `gen:anbag:6,8,0,1:mc`.
 
 ## Practice, transfer and delayed checks (fresh; same skill)
 
-- Guided practice: `gen:anbag:2,2,3,0`, `gen:anbag:3,2,3,0:mc`, `gen:anbag:2,6,2,0:mc`
-- Rechecks after teaching: `gen:anbag:5,6,8,1:mc`, `gen:anbag:1,4,3,0`
-- Transfer (everyday form): `gen:anbag:3,9,6,1:w`, `gen:anbag:1,8,4,2:w`
+- Guided practice: `gen:anbag:9,2,4,2`, `gen:anbag:7,6,1,0`, `gen:anbag:5,6,2,2`
+- Rechecks after teaching: `gen:anbag:1,4,3,0`, `gen:anbag:6,8,6,2:mc`
+- Transfer (everyday form): `gen:anbag:1,6,1,1:w`, `gen:anbag:3,5,0,1:w`
 - Delayed checks: `gen:anbag:1,9,3,2:mc`, `gen:anbag:8,8,5,2`
 
 ## Integration specification (for the shared teaching selector; nothing written)
@@ -89,7 +89,7 @@ Example `gen:anbag:8,7,3,0`; guided `gen:anbag:9,7,3,1:mc`; fresh check `gen:anb
 - **Trigger** `out-of`: existing explanation reused: numbering the balls
 - **Trigger** `spot_the_mistake`: existing explanation reused: odds
 - **Allowed methods:** the oracle's method (worked lines); Number every ball
-- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:anbag:5,6,8,1:mc`, `gen:anbag:1,4,3,0`
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:anbag:1,4,3,0`, `gen:anbag:6,8,6,2:mc`
 - **Retention target:** MATH.probability.classical / `anbag`, cases: unequal colours. Candidates: `gen:anbag:1,9,3,2:mc`, `gen:anbag:8,8,5,2`
 - **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
 - **Method evidence:** none: no method evidence can be recorded; a correct answer never implies the method

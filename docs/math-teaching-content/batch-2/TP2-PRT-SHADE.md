@@ -58,23 +58,23 @@ Interpretation rule: A single matching answer is a SUSPECTED error. misconceptio
 
 Status: modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers).
 
-> In "The grid in the picture has 12 equal squares. How many squares must be shaded to show 1/2 (one-half) of the grid?", one wrong answer is 1.
-> 1 squares were shaded, the top number. The top number counts parts of size 1/2 of the WHOLE grid, and each such part here is 6 squares.
+> In "The grid in the picture has 18 equal squares. How many squares must be shaded to show 7/9 of the grid?", one wrong answer is 7.
+> 7 squares were shaded, the top number. The top number counts parts of size 1/9 of the WHOLE grid, and each such part here is 2 squares.
 > The top number counts PARTS of the whole, and each part may be several squares.
-> Not 1, but 6.
+> Not 7, but 14.
 
-Check: 1 square out of 12 is 1/12, not 1/2.
+Check: 7 squares out of 18 is 7/18, not 7/9.
 
 Solved correctly:
 
-1. Share 12 squares into 2 equal parts: 12 ÷ 2 = 6 squares in each part
-1. 1 part: 1 × 6 = 6 squares
+1. Share 18 squares into 9 equal parts: 18 ÷ 9 = 2 squares in each part
+1. 7 parts: 7 × 2 = 14 squares
 
-Example `gen:adshade:6,2,1,2`; guided `gen:adshade:4,4,5,8:mc`; fresh check `gen:adshade:6,5,7,10`.
+Example `gen:adshade:3,6,7,9`; guided `gen:adshade:4,4,5,8:mc`; fresh check `gen:adshade:6,5,7,10`.
 
 ## Practice, transfer and delayed checks (fresh; same skill)
 
-- Guided practice: `gen:adshade:2,5,3,5:mc`, `gen:adshade:3,5,1,5:mc`, `gen:adshade:3,6,1,9:mc`
+- Guided practice: `gen:adshade:2,5,3,5:mc`, `gen:adshade:6,2,1,2`, `gen:adshade:3,5,1,5:mc`
 - Rechecks after teaching: `gen:adshade:4,8,3,8:mc`, `gen:adshade:2,9,1,3:mc`
 - Transfer (everyday form): `gen:adshade:4,9,5,9:w`, `gen:adshade:4,5,1,10:w`
 - Delayed checks: `gen:adshade:6,3,5,9`, `gen:adshade:5,4,3,10`

@@ -293,6 +293,7 @@ export const PACKAGES: Package[] = [
   },
   {
     id: "TP-STA-01", title: "The median: order first, then find the middle", family: "akmed", competency: "MATH.statistics.median-mode", strand: "statistics",
+    answerDistinct: true,
     restriction: "akmed, all items (5–10 different whole numbers); examples, diagnostics and rechecks need |mean − median| ≥ 3.",
     inherentInPrompt: ["not-ordered", "one-middle"],
     exampleOk: (p) => { const v = listOf(p.prompt); const mean = v.reduce((a, b) => a + b, 0) / v.length; return Math.abs(mean - Number(p.answer)) >= 3; },
@@ -373,7 +374,7 @@ export const PACKAGES: Package[] = [
     hints: () => ["Is each TOTAL equally likely, or each PAIR?", "Draw the table of all pairs.", "Count the cells with the total you want; divide by all the cells."],
     fixes: {
       "totals-equally-likely": { title: "Pairs are equally likely, totals are not", fix: "The pairs are equally likely, not the totals: count the pairs that give each total.", counter: (t) => { const { m, n, k } = dice(t); const c = pairs(m, n, k); return `Check: total 2 can only be made as 1 + 1, but total ${k} can be made in ${c.length} ways: ${c.map(([i, j]) => `${i} + ${j}`).join(", ")}. The totals do not all have the same chance.`; } },
-      "order-ignored": { title: "The order of the two spinners matters", fix: "First 1 then 2 and first 2 then 1 are different pairs: the first and the second spinner are different objects.", counter: (t) => { const { m, n, k } = dice(t); const c = pairs(m, n, k).filter(([i, j]) => i !== j); const [i, j] = c[0] ?? [1, 1]; return c.length ? `Check: colour the first spinner red: red ${i} with blue ${j}, and red ${j} with blue ${i}, are two different outcomes.` : "Check: here every pair has two equal numbers, so order does not change the count."; } },
+      "order-ignored": { title: "Which one came first matters", fix: "First 1 then 2 and first 2 then 1 are different pairs: the first and the second spinner (or die) are different objects.", counter: (t) => { const { m, n, k } = dice(t); const c = pairs(m, n, k).filter(([i, j]) => i !== j); const [i, j] = c[0] ?? [1, 1]; return c.length ? `Check: colour the first one red and the second one blue: red ${i} with blue ${j}, and red ${j} with blue ${i}, are two different outcomes.` : "Check: here every pair has two equal numbers, so order does not change the count."; } },
       "added-sides": { title: "m × n pairs, not m + n", fix: "Each first number goes with EACH second number: m × n pairs, not m + n.", counter: () => "Counter-check: two spinners numbered 1 to 3 give the pairs 11, 12, 13, 21, 22, 23, 31, 32, 33: 9 = 3 × 3 pairs, not 3 + 3 = 6." },
     },
     workingChecker: "none: no working contract for probability",

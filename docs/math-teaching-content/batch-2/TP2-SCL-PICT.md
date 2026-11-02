@@ -77,9 +77,9 @@ Example `gen:acpicttab:2,7,0,0`; guided `gen:acpicttab:2,4,3,0:mc`; fresh check 
 ## Practice, transfer and delayed checks (fresh; same skill)
 
 - Guided practice: `gen:acpicttab:1,29,3,0`, `gen:acpicttab:0,16,3,0`, `gen:acpicttab:1,19,1,0:mc`
-- Rechecks after teaching: `gen:acpicttab:2,0,1,0`, `gen:acpicttab:2,14,0,0:mc`
-- Transfer (everyday form): `gen:acpicttab:0,23,2,0:w`, `gen:acpicttab:2,16,1,0:w`
-- Delayed checks: `gen:acpicttab:2,10,1,0`, `gen:acpicttab:0,25,3,0:mc`
+- Rechecks after teaching: `gen:acpicttab:0,13,3,0:mc`, `gen:acpicttab:1,0,2,0`
+- Transfer (everyday form): `gen:acpicttab:0,23,2,0:w`, `gen:acpicttab:1,6,2,0:w`
+- Delayed checks: `gen:acpicttab:0,4,3,0`, `gen:acpicttab:2,2,1,0:mc`
 
 ## Integration specification (for the shared teaching selector; nothing written)
 
@@ -90,8 +90,8 @@ Example `gen:acpicttab:2,7,0,0`; guided `gen:acpicttab:2,4,3,0:mc`; fresh check 
 - **Trigger** `spot_the_mistake`: existing explanation reused: no-key (reading a pictograph)
 - **Trigger** `table`: existing explanation reused: pictures × key (general, seed acpict)
 - **Allowed methods:** the oracle's method (worked lines); Make a table
-- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:acpicttab:2,0,1,0`, `gen:acpicttab:2,14,0,0:mc`
-- **Retention target:** MATH.statistics.pictographs / `acpicttab`, cases: draw a row. Candidates: `gen:acpicttab:2,10,1,0`, `gen:acpicttab:0,25,3,0:mc`
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:acpicttab:0,13,3,0:mc`, `gen:acpicttab:1,0,2,0`
+- **Retention target:** MATH.statistics.pictographs / `acpicttab`, cases: draw a row. Candidates: `gen:acpicttab:0,4,3,0`, `gen:acpicttab:2,2,1,0:mc`
 - **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
 - **Method evidence:** none: no method evidence can be recorded; a correct answer never implies the method
 - **Ungradable / text-only:** none

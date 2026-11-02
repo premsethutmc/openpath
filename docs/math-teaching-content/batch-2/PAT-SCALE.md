@@ -27,10 +27,10 @@ Alternative: **Read the key first** — Before counting anything on a chart, fin
 ## Cross-family contrast diagnostic
 
 1. `gen:acpicttab:2,1,0,1` (TP2-SCL-PICT, read a total): The pictograph shows how the children of a school come to school. Each ● stands for 10 children. How many children are there in all?
-2. `gen:afbar:3,0,4` (TP2-SCL-BAR, read one bar): The bar chart shows books borrowed from the library. Read the scale carefully. How many books were borrowed on Tuesday?
+2. `gen:afbar:0,0,10` (TP2-SCL-BAR, read one bar): The bar chart shows visitors to a park. Read the scale carefully. How many visitors came in May?
 
 | Answers | Supports | Leaves uncertain | Establishes? |
 |---|---|---|---|
-| 24 (bug:no-key); 10 (bug:count-lines) | every symbol and line read as 1 on both displays: the key/scale idea is missing | none competing; teach the shared concept | yes |
-| 240 (correct); 100 (bug:assume-tens) | uses keys but assumes scales go in 10s | a habit from charts seen before; fix_assume_tens | **no** |
-| 24 (bug:no-key); 200 (correct) | pictograph key ignored, bar scale read | a pictograph-specific reading slip; existing spot_the_mistake | **no** |
+| 24 (bug:no-key); 4 (bug:count-lines) | every symbol and line read as 1 on both displays: the key/scale idea is missing | none competing; teach the shared concept | yes |
+| 240 (correct); 40 (bug:assume-tens) | uses keys but assumes scales go in 10s | a habit from charts seen before; fix_assume_tens | **no** |
+| 24 (bug:no-key); 8 (correct) | pictograph key ignored, bar scale read | a pictograph-specific reading slip; existing spot_the_mistake | **no** |

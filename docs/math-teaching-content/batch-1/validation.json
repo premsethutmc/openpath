@@ -4,6 +4,7 @@
   {
    "id": "TP-NUM-01",
    "batch": "batch-1",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -32,6 +33,7 @@
   {
    "id": "TP-NUM-02",
    "batch": "batch-1",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -61,6 +63,7 @@
   {
    "id": "TP-NUM-03",
    "batch": "batch-1",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [
@@ -97,6 +100,7 @@
   {
    "id": "TP-MEA-01",
    "batch": "batch-1",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -132,6 +136,7 @@
   {
    "id": "TP-GEO-01",
    "batch": "batch-1",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -167,6 +172,7 @@
   {
    "id": "TP-GEO-02",
    "batch": "batch-1",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -200,6 +206,7 @@
   {
    "id": "TP-STA-01",
    "batch": "batch-1",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -226,6 +233,7 @@
   {
    "id": "TP-ALG-01",
    "batch": "batch-1",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],
@@ -259,6 +267,7 @@
   {
    "id": "TP-PRO-01",
    "batch": "batch-1",
+   "reuseCollisions": [],
    "scopedViolations": [],
    "scopedUnchecked": [],
    "undiagnosable": [],

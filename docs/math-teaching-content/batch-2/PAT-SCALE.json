@@ -54,7 +54,7 @@
   {
    "pkg": "TP2-SCL-BAR",
    "case": "read one bar",
-   "id": "gen:afbar:3,0,4"
+   "id": "gen:afbar:0,0,10"
   }
  ],
  "responsePatterns": [
@@ -74,9 +74,9 @@
      "verdict": "incorrect"
     },
     {
-     "item": "gen:afbar:3,0,4",
+     "item": "gen:afbar:0,0,10",
      "key": "bug:count-lines",
-     "response": "10",
+     "response": "4",
      "verdict": "incorrect"
     }
    ]
@@ -97,9 +97,9 @@
      "verdict": "correct"
     },
     {
-     "item": "gen:afbar:3,0,4",
+     "item": "gen:afbar:0,0,10",
      "key": "bug:assume-tens",
-     "response": "100",
+     "response": "40",
      "verdict": "incorrect"
     }
    ]
@@ -120,9 +120,9 @@
      "verdict": "incorrect"
     },
     {
-     "item": "gen:afbar:3,0,4",
+     "item": "gen:afbar:0,0,10",
      "key": "correct",
-     "response": "200",
+     "response": "8",
      "verdict": "correct"
     }
    ]

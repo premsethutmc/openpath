@@ -1,6 +1,43 @@
 # 5. Handover for Codex integration
 
-Codex owns shared skill contracts, diagnosis and selection, grading, evidence, persistence, application integration, generator fixes and prerequisite changes. This branch changes **nothing** outside `docs/math-teaching-content/`. Nothing is registered, served, activated or approved: every package is a **review candidate**.
+**Source commit:** every id, partition, hash and check here is computed against the foundation commit `637938c7da0416b03595fae60a80607e60aa84c0` (draft PR #96, unchanged on the remote when this was written). The branch is `feat/math-teaching-content`. Codex owns the canonical dashboard and the runtime; this file is not a tracker.
+
+## Decisions (this revision)
+
+Readiness per package is given in [08-INTEGRATION-MANIFEST.md](08-INTEGRATION-MANIFEST.md) (machine form: `integration-manifest.json`). The categories are integration readiness, **not educator approval**.
+
+| Category (primary) | Packages |
+|---|---|
+| Ready for integration review | TP-STA-01, TP2-CH-BALL, TP2-PRT-NAME, TP2-SCL-BAR |
+| Blocked by shared runtime support | TP-NUM-03 (B1, B2, B3), TP2-PRT-SHADE (B1), TP2-REG-MONEY (B1, B2), TP2-SCL-PICT (B1, P1) |
+| Blocked by missing questions or visuals | TP-NUM-01 (visual), TP-NUM-02 (transfer, improper-sum diagnostic; P1), TP-MEA-01 (visual; B1, P1), TP-GEO-01 (visual; B1), TP-GEO-02 (visual; B1, B3), TP-ALG-01 (cross-term retention and diagnostic, visual; B1), TP-PRO-01 (different-size recheck; B1), TP2-CH-BAG (equal-count contrast), TP2-PV-DIGIT ("how many tens" recheck; B1, P1), TP2-REG-TIME (100+ minute recheck and retention; B1, B2) |
+| Unresolved mathematical or instructional review | **none**: passes 4–6 leave no outstanding finding (low-severity notes in 04) |
+
+### Priority for Codex
+
+1. **B1 teaching scope** unblocks the most: 11 packages and 33 strategies.
+
+The four "ready" packages need no shared runtime change. Their family is the module's main family (STA-01, SCL-BAR, CH-BALL) or is accepted by its scope (PRT-NAME), their errors are diagnosable, and they have no P1 condition. Integration review should still re-run `tools/build.mts` at the integration commit.
+2. **P1 diagnosis policy** (contrast or written-form condition): NUM-01, NUM-02, MEA-01, PV-DIGIT, SCL-PICT. **This is not among the three blockers Codex is handling.** Without it, a greater/smaller reversal (NUM-01), a word swap (MEA-01) or a copied table value (SCL-PICT) could establish the wrong misconception and trigger the wrong fix. Until it exists, the affected fix strategies should stay unregistered.
+3. **B2 diagnosis reader**: NUM-03, REG-MONEY, REG-TIME.
+4. **B3 addressed misconception**: GEO-02 and NUM-03 (`fix_opposite_as_linear`, `fix_longer_is_larger`). The alternative is to fix family text D1/D3 so it can be quoted verbatim.
+5. **Missing questions**, as generator or partition changes:
+
+   | Package | Missing question |
+   |---|---|
+   | TP-ALG-01 | Unambiguous (px + q)² cross-term items in the **retention** and **diagnostic** partitions (p ≥ 2, p ≠ q, q ≠ 2p, p ≠ 2q). Today 3 retention items ask the (px + q)² cross term and all 3 are copy-ambiguous; the diagnostic uses `gen:ahid:0,4,9,1` from the check partition. |
+   | TP2-CH-BAG | An equal-count bag contrast in a served partition. `gen:akchance:6,6,0,0` and `gen:akchance:8,8,0,0` exist in the pool but in no partition. |
+   | TP2-REG-TIME | `addur` items with minutes adding to **100 or more** in the check and retention partitions. Without them, rechecks cannot separate no-carry from regrouping at 100. |
+   | TP-NUM-02 | A `fadd` word (transfer) form, and an improper-sum item in the diagnostic partition. |
+   | TP-PRO-01 | A different-size-spinner multi-pair `akdice` item in the check partition. |
+   | TP2-PV-DIGIT | An unexposed "how many tens" `aadigit` item in the check partition. |
+
+   **No substitute was used:** each package records the missing case instead of testing a different skill or reusing an exposed question.
+6. **Visual types:** two equal-length fraction strips (NUM-01), a perimeter outline (MEA-01), a triangle with an extended side and its exterior angle (GEO-01), crossing lines (GEO-02), and a labelled 2 × 2 area model (ALG-01).
+
+### Item freshness rule (applies to every package)
+
+Fresh checks, rechecks, transfer and delayed items exclude every question already **shown** by the module's existing explanations, by exposure key **and** by the package's number signature (same bag, table or numbers under other labels). Several package items are also ordinary **practice or diagnostic** items of the module (CH-BAG, CH-BALL, STA-01, SCL-BAR, PRO-01; listed in pass 5). At integration, the selector must treat a package item as fresh only if **this learner** has not been served it: per-learner exposure, which is Codex's.
 
 ## What to integrate: `batch-*/<id>.json` → `integration`
 
@@ -61,6 +98,8 @@ Before integrating, rerun `tools/build.mts` against the target commit. Ids, part
 | D4 | `packages/learning/src/fam/b11.ts:634`, `akchance` prompt | 90 items, e.g. `gen:akchance:1,1,0,0` | — | "A bag has 1 red and 1 blue marbles": plural with 1 (grammar). |
 | D5 | `families.ts:116`, `fadd` | all | — | No `teach.alternatives` and no `word` (transfer) form for a grade-4 core skill. TP-NUM-02 has text-only transfer candidates, which the grader cannot verify. |
 | D6 | `packages/learning/src/fam/b04.ts:1945`, `adshade` bug `top-number`, `says` | e.g. `gen:adshade:1,4,1,2` | — | "1 squares were shaded" (plural with 1). TP2-PRT-SHADE quotes it verbatim, because the platform reads `addresses` from the verbatim text (blocker B3 below). |
+| D7 | `packages/learning/src/fam/b06.ts:870`, `afbar` `explain` (read step) | e.g. `gen:afbar:0,0,0` | — | "The bar reaches 1 lines" (plural with 1). This step text appears in TP2-SCL-BAR's worked-example notes. |
+| D8 | generator prompts `anbag` / `akchance` transfer forms | e.g. TP2-CH-BALL transfer items, TP2-CH-BAG | — | "a orange toffee", "1 lemon toffees", "1 green marbles" (article and plural agreement). |
 
 ## Prerequisite concerns (to examine, not assumed wrong)
 

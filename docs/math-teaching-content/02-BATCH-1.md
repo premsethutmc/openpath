@@ -1,5 +1,7 @@
 # 2. Teaching batch 1: nine packages (review candidates)
 
+> **Readiness and integration manifest: see [08-INTEGRATION-MANIFEST.md](08-INTEGRATION-MANIFEST.md).** Review status after passes 4–6: no outstanding mathematical or instructional finding (04). Item lists were re-selected in this revision so that nothing already shown by a module's existing explanations is reused.
+
 Each package (`batch-1/<id>.md` readable, `.json` machine-readable, schema `teaching-package@0`) contains:
 - the precise skill, prerequisite knowledge and graph prerequisites;
 - an explanation with a visual (an existing `Visual` type, or a recorded visual gap);

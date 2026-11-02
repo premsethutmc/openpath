@@ -14,14 +14,17 @@ Every package is a **review candidate**; no educator approval is claimed.
 | 4 | [04-REVIEW.md](04-REVIEW.md) | All review history: passes 1–2 (batch 1), final pass 3 (batch 1), batch-2 review, confirmation pass, and author fixes NOT independently re-cleared. |
 | 5 | [05-HANDOVER-CODEX.md](05-HANDOVER-CODEX.md) | Integration objects and specification, platform blockers (B1–B3), policy questions, runtime defects with reproducible ids (D1–D6), prerequisite concerns, exact reused sources. |
 | 6 | [06-BATCH-2.md](06-BATCH-2.md) | Batch 2: five instructional patterns (regroup, scale/key, equal parts, place value, chance) across measurement, statistics, number and probability; nine family packages. |
-| 7 | [07-PATTERN-MAP.md](07-PATTERN-MAP.md) | Missing teaching grouped by reusable instructional pattern, ranked by impact, breadth and ease; the next batch. |
+| 7 | [07-PATTERN-MAP.md](07-PATTERN-MAP.md) | Missing teaching grouped by reusable instructional pattern, ranked by impact, breadth and ease; the next batch (on hold: finish the 18 first). |
+| 8 | [08-INTEGRATION-MANIFEST.md](08-INTEGRATION-MANIFEST.md) | **Start here for integration.** For each of the 18 packages: family/parameter scope, misconception ids, contrast requirements, item roles reconciled with the served pools, visuals, answer formats, unresolved contract requirements, and readiness category. |
 
-Data: `inventory.json`, `inventory-summary.json`, `batch-1/*`, `batch-2/*` (packages, `PAT-*` pattern files, `validation.json`).
+Data: `integration-manifest.json`, `review-status.json`, `inventory.json`, `inventory-summary.json`, `batch-1/*`, `batch-2/*` (packages, `PAT-*` pattern files, `validation.json`).
 
 Reproduce (from `frontend/`, with its `node_modules`):
 
 ```
 node --import tsx ../docs/math-teaching-content/tools/inventory.mts ../docs/math-teaching-content   # gap map data (~10 min)
 node --import tsx ../docs/math-teaching-content/tools/build.mts ../docs/math-teaching-content       # both batches + checks (~3 min)
+node --import tsx ../docs/math-teaching-content/tools/manifest.mts ../docs/math-teaching-content    # pool reconciliation -> integration-manifest.json
+python3 ../docs/math-teaching-content/tools/manifest-md.py ../docs/math-teaching-content            # 08-INTEGRATION-MANIFEST.md (uses review-status.json)
 python3 ../docs/math-teaching-content/tools/patterns.py ../docs/math-teaching-content               # pattern ranking rows
 ```

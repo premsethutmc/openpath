@@ -188,16 +188,16 @@
    "gen:acpicttab:1,19,1,0:mc"
   ],
   "rechecks": [
-   "gen:acpicttab:2,0,1,0",
-   "gen:acpicttab:2,14,0,0:mc"
+   "gen:acpicttab:0,13,3,0:mc",
+   "gen:acpicttab:1,0,2,0"
   ],
   "transfer": [
    "gen:acpicttab:0,23,2,0:w",
-   "gen:acpicttab:2,16,1,0:w"
+   "gen:acpicttab:1,6,2,0:w"
   ],
   "delayedChecks": [
-   "gen:acpicttab:2,10,1,0",
-   "gen:acpicttab:0,25,3,0:mc"
+   "gen:acpicttab:0,4,3,0",
+   "gen:acpicttab:2,2,1,0:mc"
   ],
   "note": "all drawn from the family's own phase pools (quarantine-filtered), distinct exposure keys, never the worked or diagnostic items; rechecks and delayed checks are items on which a target error is still possible"
  },
@@ -253,8 +253,8 @@
     "require": "a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question",
     "exclude": "the exposure keys and number signatures of every item already shown in this teaching",
     "candidates": [
-     "gen:acpicttab:2,0,1,0",
-     "gen:acpicttab:2,14,0,0:mc"
+     "gen:acpicttab:0,13,3,0:mc",
+     "gen:acpicttab:1,0,2,0"
     ]
    },
    "retentionTarget": {
@@ -265,8 +265,8 @@
      "draw a row"
     ],
     "candidates": [
-     "gen:acpicttab:2,10,1,0",
-     "gen:acpicttab:0,25,3,0:mc"
+     "gen:acpicttab:0,4,3,0",
+     "gen:acpicttab:2,2,1,0:mc"
     ]
    },
    "evidence": {
@@ -345,7 +345,7 @@
       }
      ],
      "guided": "gen:acpicttab:1,29,3,0",
-     "check": "gen:acpicttab:2,0,1,0"
+     "check": "gen:acpicttab:0,13,3,0:mc"
     }
    },
    {
@@ -398,7 +398,7 @@
     "addresses": null,
     "revisions": [
      {
-      "contentHash": "sha256:9d49a9ddd6a209392c96f83ed34bc031acb9fd57c83e2492c4079ab19638b1dd",
+      "contentHash": "sha256:14654c9d62b82cdffe14874f3fc3d635c59dc4b04b366bd74c3bb244ad7cb8f4",
       "status": "pending_review",
       "provenance": {
        "source": "engineering",
@@ -927,10 +927,17 @@
     "ok": true
    },
    {
-    "id": "gen:acpicttab:2,0,1,0",
+    "id": "gen:acpicttab:0,13,3,0:mc",
     "role": "recheck",
-    "prompt": "The table shows the favourite fruits of the children of a school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Banana?",
-    "answer": "5",
+    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Auto? Choose one.",
+    "answer": "6",
+    "options": [
+     "12",
+     "7",
+     "6",
+     "8"
+    ],
+    "correctOption": "C",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -939,8 +946,8 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "Banana: 50 children, each ● for 10",
-      "50 ÷ 10 = 5 pictures"
+      "Auto: 12 children, each ● for 2",
+      "12 ÷ 2 = 6 pictures"
      ]
     },
     "alternatives": [
@@ -949,7 +956,7 @@
       "ok": true,
       "lines": [
        "pictures × key = children, or children ÷ key = pictures, row by row",
-       "50 ÷ 10 = 5 pictures"
+       "12 ÷ 2 = 6 pictures"
       ]
      }
     ],
@@ -958,7 +965,7 @@
       "id": "one-each",
       "kind": "conceptual",
       "predicts": [
-       "50"
+       "12"
       ],
       "graded": [
        "incorrect"
@@ -968,17 +975,10 @@
     "ok": true
    },
    {
-    "id": "gen:acpicttab:2,14,0,0:mc",
+    "id": "gen:acpicttab:1,0,2,0",
     "role": "recheck",
-    "prompt": "The table shows the favourite games of the children of a school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Kabaddi? Choose one.",
-    "answer": "7",
-    "options": [
-     "7",
-     "9",
-     "8",
-     "70"
-    ],
-    "correctOption": "A",
+    "prompt": "The table shows the favourite fruits of the children of a school. A pictograph of it is drawn with each ● standing for 5 children. How many ● should be drawn for Guava?",
+    "answer": "3",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -987,8 +987,8 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "Kabaddi: 70 children, each ● for 10",
-      "70 ÷ 10 = 7 pictures"
+      "Guava: 15 children, each ● for 5",
+      "15 ÷ 5 = 3 pictures"
      ]
     },
     "alternatives": [
@@ -997,7 +997,7 @@
       "ok": true,
       "lines": [
        "pictures × key = children, or children ÷ key = pictures, row by row",
-       "70 ÷ 10 = 7 pictures"
+       "15 ÷ 5 = 3 pictures"
       ]
      }
     ],
@@ -1006,7 +1006,7 @@
       "id": "one-each",
       "kind": "conceptual",
       "predicts": [
-       "70"
+       "15"
       ],
       "graded": [
        "incorrect"
@@ -1057,9 +1057,50 @@
     "ok": true
    },
    {
-    "id": "gen:acpicttab:2,16,1,0:w",
+    "id": "gen:acpicttab:1,6,2,0:w",
     "role": "transfer",
-    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Bus?",
+    "prompt": "The table shows the favourite fruits of the children of a school. A pictograph of it is drawn with each ● standing for 5 children. How many ● should be drawn for Guava?",
+    "answer": "7",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Guava: 35 children, each ● for 5",
+      "35 ÷ 5 = 7 pictures"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Make a table",
+      "ok": true,
+      "lines": [
+       "pictures × key = children, or children ÷ key = pictures, row by row",
+       "35 ÷ 5 = 7 pictures"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "one-each",
+      "kind": "conceptual",
+      "predicts": [
+       "35"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
+    "id": "gen:acpicttab:0,4,3,0",
+    "role": "delayed-check",
+    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Auto?",
     "answer": "5",
     "grader": {
      "verdict": "correct",
@@ -1069,8 +1110,8 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "Bus: 50 children, each ● for 10",
-      "50 ÷ 10 = 5 pictures"
+      "Auto: 10 children, each ● for 2",
+      "10 ÷ 2 = 5 pictures"
      ]
     },
     "alternatives": [
@@ -1079,7 +1120,7 @@
       "ok": true,
       "lines": [
        "pictures × key = children, or children ÷ key = pictures, row by row",
-       "50 ÷ 10 = 5 pictures"
+       "10 ÷ 2 = 5 pictures"
       ]
      }
     ],
@@ -1088,7 +1129,7 @@
       "id": "one-each",
       "kind": "conceptual",
       "predicts": [
-       "50"
+       "10"
       ],
       "graded": [
        "incorrect"
@@ -1098,56 +1139,15 @@
     "ok": true
    },
    {
-    "id": "gen:acpicttab:2,10,1,0",
+    "id": "gen:acpicttab:2,2,1,0:mc",
     "role": "delayed-check",
-    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Bus?",
-    "answer": "4",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "verifier"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "Bus: 40 children, each ● for 10",
-      "40 ÷ 10 = 4 pictures"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Make a table",
-      "ok": true,
-      "lines": [
-       "pictures × key = children, or children ÷ key = pictures, row by row",
-       "40 ÷ 10 = 4 pictures"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "one-each",
-      "kind": "conceptual",
-      "predicts": [
-       "40"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:acpicttab:0,25,3,0:mc",
-    "role": "delayed-check",
-    "prompt": "The table shows how the children of a school come to school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Auto? Choose one.",
-    "answer": "4",
+    "prompt": "The table shows the favourite games of the children of a school. A pictograph of it is drawn with each ● standing for 10 children. How many ● should be drawn for Cricket? Choose one.",
+    "answer": "8",
     "options": [
-     "6",
-     "4",
-     "5",
-     "8"
+     "9",
+     "8",
+     "80",
+     "10"
     ],
     "correctOption": "B",
     "grader": {
@@ -1158,8 +1158,8 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "Auto: 8 children, each ● for 2",
-      "8 ÷ 2 = 4 pictures"
+      "Cricket: 80 children, each ● for 10",
+      "80 ÷ 10 = 8 pictures"
      ]
     },
     "alternatives": [
@@ -1168,7 +1168,7 @@
       "ok": true,
       "lines": [
        "pictures × key = children, or children ÷ key = pictures, row by row",
-       "8 ÷ 2 = 4 pictures"
+       "80 ÷ 10 = 8 pictures"
       ]
      }
     ],
@@ -1177,7 +1177,7 @@
       "id": "one-each",
       "kind": "conceptual",
       "predicts": [
-       "8"
+       "80"
       ],
       "graded": [
        "incorrect"

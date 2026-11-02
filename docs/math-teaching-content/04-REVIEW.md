@@ -122,3 +122,67 @@ These were made after the last independent pass. They are checked by the build (
 | SCL-BAR and SCL-PICT oracles read the figure's data values, not what the learner sees drawn | Rendering is not verified; this is a renderer contract question. |
 
 **Status: every package remains a review candidate.** Packages cleared by an independent pass: TP-NUM-03 and TP-PRO-01 (pass 3). PRO-01 has had wording-only author changes since. All other packages carry author fixes that the confirmation pass checked in part and that the last round of changes did not have re-checked.
+
+---
+
+# Review continuation (third request): finishing the 18 packages
+
+## Pass 4 — targeted independent review of changed material and unresolved issues
+
+**Scope:** what changed after commit `4bdd6fb` (the exclusion of items already shown by existing module explanations, and re-selected items), plus every item left unresolved by the confirmation pass.
+
+**Results:**
+- The internal-tag blocker is **FIXED**: no internal tag appears in any learner title, text or maths line.
+- NUM-02 "Units that do not change" is **FIXED**.
+- REG-TIME's misconception note is **FIXED**, and its counter-check holds (555 = 9 × 60 + 15).
+- SCL-PICT's diagnostic reading is **FIXED** (it now points to the trigger condition).
+- PV-DIGIT's "1 ten" is **FIXED**.
+- **Not fixed:**
+  - PRO-01: dice taught with spinner-only wording;
+  - PRT-SHADE: "1 squares" (quoted family text);
+  - REG-TIME: rechecks cannot separate no-carry from regrouping at 100 (a recorded missing question).
+- **New, major:** the build excluded module-shown items only by exposure key, not by the package's number signature. Bags and tables reappeared in CH-BAG, CH-BALL and SCL-PICT, including an SCL-PICT transfer that was the check table relabelled.
+- **New, minor:**
+  - SCL-BAR: the fix's guided and check items shared an answer and a target wrong value, and one delayed item was trivial;
+  - STA-01 and CH-BAG: shared answers.
+
+## Author fixes after pass 4
+
+- Module-shown items are now excluded by exposure key **and** by signature and answer.
+- Signatures are label-independent: sorted bag counts; table values plus key; the asked calculation.
+- `answerDistinct` is on for STA-01, CH-BAG and SCL-BAR.
+- PRO-01 wording covers spinners and dice.
+- The PRT-SHADE example must have a top number of 2 or more.
+- The SCL-BAR one-line delayed item is excluded.
+- The fix check must predict a target wrong value different from its guided item.
+- The build now **audits reuse** (each package's items share no key) and reports it in `validation.json`.
+
+## Pass 5 — independent confirmation of those fixes (six packages)
+
+- **FIXED:** PRO-01 wording, the SCL-PICT relabelled table, PRT-SHADE "1 squares", CH-BAG and CH-BALL bag reuse and answer collisions, and the STA-01 shared answer.
+- **Partly fixed:** SCL-BAR (the same target wrong value remained).
+- **New minor:**
+  - A: an SCL-PICT transfer pair shared a calculation, and a delayed item repeated the worked example's 16 ÷ 2;
+  - B: the SCL-BAR guided item and the check both predicted 120.
+- **Notes:**
+  - some package items are also ordinary module practice or diagnostic items (they need a per-learner freshness rule, 05);
+  - generator wording ("a orange toffee", "1 green marbles"; D4, D8).
+
+## Author fixes after pass 5
+
+- The SCL-PICT signature includes the asked calculation (row count and key).
+- The fix check must predict a target value different from the guided item's.
+
+## Pass 6 — independent confirmation of A and B
+
+- **A FIXED** (all 15 SCL-PICT items distinct in calculation and table, and all use the key).
+- **B FIXED** (the guided item predicts 120, the check predicts 10; the check still tests scale reading).
+- All items in both packages were recomputed by hand and are correct.
+- Low-severity notes, left as notes:
+  - SCL-BAR has two guided items with the same question template;
+  - "The bar reaches 1 lines" is family text (D7);
+  - the SCL-PICT "Make a table" screen repeats the main working.
+
+## Outcome
+
+**No outstanding mathematical or instructional finding remains on any of the 18 packages** after passes 4–6 (`review-status.json`). Remaining blockers are runtime support, missing questions and missing visuals (08, 05). Every package is still a review candidate, and none is educator-approved.

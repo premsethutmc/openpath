@@ -15,33 +15,33 @@
 The median is the middle value once the data are IN ORDER: half the values are below it, half above.
 With an even number of values there are two middle values; the median is halfway between them.
 
-Visual: `{"type":"table","head":["in order"],"rows":[["25"],["27"],["28"],["35"],["40"]]}`. Reuses the table visual to show the ordered list; crossing off from both ends is the family's own cross_off alternative.
+Visual: `{"type":"table","head":["in order"],"rows":[["14"],["65"],["66"],["75"],["80"]]}`. Reuses the table visual to show the ordered list; crossing off from both ends is the family's own cross_off alternative.
 
 ## Worked examples (instances from the generator; lines from the independent oracle; checked)
 
-**`gen:akmed:54,5`** — Find the median of these numbers: 35, 40, 25, 27, 28.
+**`gen:akmed:76,5`** — Find the median of these numbers: 75, 14, 80, 65, 66.
 
-1. In order: 25, 27, 28, 35, 40 (5 values)
-1. The middle one is the 3rd value: 28
+1. In order: 14, 65, 66, 75, 80 (5 values)
+1. The middle one is the 3rd value: 66
 
-Answer **28**. (The family's own step text: In order: 25, 27, 28, 35, 40; The middle value is 28.)
+Answer **66**. (The family's own step text: In order: 14, 65, 66, 75, 80; The middle value is 66.)
 
-**`gen:akmed:33,8`** — Find the median of these numbers: 49, 43, 38, 57, 60, 30, 39, 55.
+**`gen:akmed:71,10`** — Find the median of these numbers: 27, 83, 21, 62, 73, 63, 34, 52, 80, 90.
 
-1. In order: 30, 38, 39, 43, 49, 55, 57, 60 (8 values)
-1. The two middle values are the 4th and 5th: 43 and 49; halfway: (43 + 49) ÷ 2 = 46
+1. In order: 21, 27, 34, 52, 62, 63, 73, 80, 83, 90 (10 values)
+1. The two middle values are the 5th and 6th: 62 and 63; halfway: (62 + 63) ÷ 2 = 62.5
 
-Answer **46**. (The family's own step text: In order: 30, 38, 39, 43, 49, 55, 57, 60; The two middle values are 43 and 49: (43 + 49) ÷ 2 = 46.)
+Answer **62.5**. (The family's own step text: In order: 21, 27, 34, 52, 62, 63, 73, 80, 83, 90; The two middle values are 62 and 63: (62 + 63) ÷ 2 = 62.5.)
 
 ## Hints (graded, per worked example)
 
-For `gen:akmed:54,5`:
+For `gen:akmed:76,5`:
 
 1. Are the numbers in order?
 2. Write them from smallest to largest.
 3. Find the middle one (or halfway between the two middle ones).
 
-For `gen:akmed:33,8`:
+For `gen:akmed:71,10`:
 
 1. Are the numbers in order?
 2. Write them from smallest to largest.
@@ -54,7 +54,7 @@ The child in the middle of the line is the median; with two in the middle, take 
 
 ## Valid alternative methods (each checked to reach the same answer on every applicable generated item)
 
-- **Cross off from both ends**: cross off smallest and largest repeatedly; left: 28 → median 28
+- **Cross off from both ends**: cross off smallest and largest repeatedly; left: 66 → median 66
 
 **Method credit.** A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract for statistics.
 
@@ -73,61 +73,61 @@ Interpretation rule: A single matching answer is a SUSPECTED error. misconceptio
 
 Status: modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers).
 
-> In "Find the median of these numbers: 75, 14, 80, 65, 66.", one wrong answer is 80.
+> In "Find the median of these numbers: 59, 50, 87, 86, 81.", one wrong answer is 87.
 > The middle number of the list as given was taken. Put the numbers in order first.
 > The middle of the list only means something once the list is in order.
-> Not 80, but 66.
+> Not 87, but 81.
 
-Counter-check: in the order given the middle is 80; in order it is 66. Reorder the same data and the 'middle' would change, so it cannot be a fact about the data.
-
-Solved correctly:
-
-1. In order: 14, 65, 66, 75, 80 (5 values)
-1. The middle one is the 3rd value: 66
-
-Example `gen:akmed:76,5`; guided `gen:akmed:77,9:mc`; fresh check `gen:akmed:77,7:mc`.
-
-### `mean-for-median` (conceptual) — conceptual: averages not distinguished
-
-Status: modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers).
-
-> In "Find the median of these numbers: 59, 50, 87, 86, 81.", one wrong answer is 72.6.
-> The mean was worked out. The median is the middle value once the numbers are in order.
-> The mean shares the total equally; the median is the middle value in order. They are different averages.
-> Not 72.6, but 81.
-
-Check: the total 363 shared equally among 5 values is 72.6 (the mean); in order, 50, 59, 81, 86, 87, the middle value is different.
+Counter-check: in the order given the middle is 87; in order it is 81. Reorder the same data and the 'middle' would change, so it cannot be a fact about the data.
 
 Solved correctly:
 
 1. In order: 50, 59, 81, 86, 87 (5 values)
 1. The middle one is the 3rd value: 81
 
-Example `gen:akmed:32,5`; guided `gen:akmed:3,10:mc`; fresh check `gen:akmed:27,5`.
+Example `gen:akmed:32,5`; guided `gen:akmed:8,6:mc`; fresh check `gen:akmed:77,7:mc`.
+
+### `mean-for-median` (conceptual) — conceptual: averages not distinguished
+
+Status: modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers).
+
+> In "Find the median of these numbers: 21, 74, 25, 41, 80, 81, 64, 47, 62.", one wrong answer is 55.
+> The mean was worked out. The median is the middle value once the numbers are in order.
+> The mean shares the total equally; the median is the middle value in order. They are different averages.
+> Not 55, but 62.
+
+Check: the total 495 shared equally among 9 values is 55 (the mean); in order, 21, 25, 41, 47, 62, 64, 74, 80, 81, the middle value is different.
+
+Solved correctly:
+
+1. In order: 21, 25, 41, 47, 62, 64, 74, 80, 81 (9 values)
+1. The middle one is the 5th value: 62
+
+Example `gen:akmed:71,9`; guided `gen:akmed:77,5:mc`; fresh check `gen:akmed:29,5`.
 
 ### `one-middle` (procedural) — procedural: even count
 
 Status: modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers).
 
-> In "Find the median of these numbers: 27, 83, 21, 62, 73, 63, 34, 52, 80, 90.", one wrong answer is 62 or 63.
-> With 10 numbers there are two middle numbers (62 and 63); the median is halfway between them.
+> In "Find the median of these numbers: 66, 58, 75, 81, 14, 95.", one wrong answer is 66 or 75.
+> With 6 numbers there are two middle numbers (66 and 75); the median is halfway between them.
 > With an even number of values there are two middle values: take halfway between them.
-> Not 62 or 63, but 62.5.
+> Not 66 or 75, but 70.5.
 
-Check: 10 values have no single middle; the 5th and 6th values, 62 and 63, share the middle, so the median is halfway: 62.5.
+Check: 6 values have no single middle; the 3rd and 4th values, 66 and 75, share the middle, so the median is halfway: 70.5.
 
 Solved correctly:
 
-1. In order: 21, 27, 34, 52, 62, 63, 73, 80, 83, 90 (10 values)
-1. The two middle values are the 5th and 6th: 62 and 63; halfway: (62 + 63) ÷ 2 = 62.5
+1. In order: 14, 58, 66, 75, 81, 95 (6 values)
+1. The two middle values are the 3rd and 4th: 66 and 75; halfway: (66 + 75) ÷ 2 = 70.5
 
-Example `gen:akmed:71,10`; guided `gen:akmed:8,6:mc`; fresh check `gen:akmed:33,6`.
+Example `gen:akmed:32,6`; guided `gen:akmed:79,6:mc`; fresh check `gen:akmed:33,6`.
 
 ## Practice, transfer and delayed checks (fresh; same skill)
 
-- Guided practice: `gen:akmed:77,5:mc`, `gen:akmed:76,7:mc`, `gen:akmed:13,9`
+- Guided practice: `gen:akmed:76,7:mc`, `gen:akmed:13,9`, `gen:akmed:51,9`
 - Rechecks after teaching: `gen:akmed:0,9`, `gen:akmed:0,8:mc`
-- Transfer (everyday form): `gen:akmed:32,6:w`, `gen:akmed:76,9:w`
+- Transfer (everyday form): `gen:akmed:27,6:w`, `gen:akmed:35,8:w`
 - Delayed checks: `gen:akmed:8,7`, `gen:akmed:24,10`
 
 ## Integration specification (for the shared teaching selector; nothing written)

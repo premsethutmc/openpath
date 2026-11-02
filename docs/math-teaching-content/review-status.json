@@ -1,0 +1,77 @@
+{
+ "note": "Outcome of the independent review passes on the final text (04-REVIEW.md, passes 4, 5 and 6). 'outstanding' lists mathematical or instructional findings not yet independently cleared. Missing questions, visuals and runtime blockers are tracked in integration-manifest.json, not here. This is not educator approval.",
+ "packages": {
+  "TP-NUM-01": {
+   "outstanding": [],
+   "summary": "Pass 4: no outstanding mathematical/instructional finding."
+  },
+  "TP-NUM-02": {
+   "outstanding": [],
+   "summary": "Pass 4: no outstanding finding. Transfer is missing content (manifest)."
+  },
+  "TP-NUM-03": {
+   "outstanding": [],
+   "summary": "Pass 4: no content finding. The fixes are unreachable until B2 (and B3 for fix_longer_is_larger). Note: the diagnostic and fix example share tenths digits with items of the module's main family aedec."
+  },
+  "TP-MEA-01": {
+   "outstanding": [],
+   "summary": "Pass 4: no outstanding finding."
+  },
+  "TP-GEO-01": {
+   "outstanding": [],
+   "summary": "Pass 4: no outstanding finding."
+  },
+  "TP-GEO-02": {
+   "outstanding": [],
+   "summary": "Pass 4: no outstanding finding."
+  },
+  "TP-STA-01": {
+   "outstanding": [],
+   "summary": "Pass 5: the shared-answer note is fixed; no outstanding finding."
+  },
+  "TP-ALG-01": {
+   "outstanding": [],
+   "summary": "Pass 4: no outstanding finding. The (px + q)\u00b2 cross-term delayed check is a recorded missing question."
+  },
+  "TP-PRO-01": {
+   "outstanding": [],
+   "summary": "Pass 5: the dice/spinner wording is fixed; no outstanding finding."
+  },
+  "TP2-REG-TIME": {
+   "outstanding": [],
+   "summary": "Pass 4: no content finding beyond the recorded missing questions (no 100+ minute item in the check or retention partitions, so rechecks cannot separate no-carry from regrouping at 100). The fix is unreachable until B2."
+  },
+  "TP2-REG-MONEY": {
+   "outstanding": [],
+   "summary": "Pass 4: no content finding. The fixes are unreachable until B2."
+  },
+  "TP2-SCL-PICT": {
+   "outstanding": [],
+   "summary": "Pass 6 (confirmation): minor A is FIXED; all 15 items use distinct calculations and tables, and all use the key. Note (low): the 'Another way: Make a table' screen repeats the same working rather than a different computation."
+  },
+  "TP2-SCL-BAR": {
+   "outstanding": [],
+   "summary": "Pass 6 (confirmation): minor B is FIXED (the guided item predicts 120, the check predicts 10). Notes (low): two guided items share a question template with different values; the family step text 'The bar reaches 1 lines' is D7."
+  },
+  "TP2-PRT-NAME": {
+   "outstanding": [],
+   "summary": "Pass 4: no outstanding finding."
+  },
+  "TP2-PRT-SHADE": {
+   "outstanding": [],
+   "summary": "Pass 5: '1 squares' is avoided (the example now has a top number of 2 or more); no outstanding finding."
+  },
+  "TP2-PV-DIGIT": {
+   "outstanding": [],
+   "summary": "Pass 4: no outstanding finding."
+  },
+  "TP2-CH-BAG": {
+   "outstanding": [],
+   "summary": "Pass 5: bag reuse is fixed; no outstanding finding. Notes: some items are also module practice or diagnostic items (selection must exclude anything this learner has seen); generator wording '1 green marbles' (D4)."
+  },
+  "TP2-CH-BALL": {
+   "outstanding": [],
+   "summary": "Pass 5: bag reuse and answer collisions are fixed; no outstanding finding. Notes: the fix check's bag also appears in a module diagnostic with a different target colour; generator wording 'a orange toffee' (D8)."
+  }
+ }
+}

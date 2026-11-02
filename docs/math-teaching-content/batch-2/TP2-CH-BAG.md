@@ -15,21 +15,21 @@
 Each marble (or ball) is equally likely to be picked, not each colour. So count marbles, not colours.
 Probability = (marbles that fit) ÷ (ALL the marbles). It is a number from 0 to 1, never more than 1.
 
-Visual: `{"type":"table","head":["Colour","Number of marbles"],"rows":[["Red",6],["Blue",8]]}`. Reuses the family's own colour table figure.
+Visual: `{"type":"table","head":["Colour","Number of marbles"],"rows":[["Red",4],["Blue",2],["Green",4]]}`. Reuses the family's own colour table figure.
 
 ## Worked examples (instances from the generator; lines from the independent oracle; checked)
 
-**`gen:akchance:6,8,0,0`** — A bag has 6 red and 8 blue marbles, as in the table. Meena picks one marble without looking. What is the probability that it is red? (A fraction is fine.)
+**`gen:akchance:4,2,4,0`** — A bag has 4 red, 2 blue and 4 green marbles, as in the table. Farhan picks one marble without looking. What is the probability that it is red? (A fraction is fine.)
 
-1. All the marbles: 6 red + 8 blue = 14, each equally likely
-1. Marbles that fit "red": 6
-1. P = 6/14 = 3/7
+1. All the marbles: 4 red + 2 blue + 4 green = 10, each equally likely
+1. Marbles that fit "red": 4
+1. P = 4/10 = 2/5
 
-Answer **3/7**. (The family's own step text: There are 6 + 8 = 14 marbles in all; 6 of them fit: red; Probability = 6 ÷ 14 = 3/7.)
+Answer **2/5**. (The family's own step text: There are 4 + 2 + 4 = 10 marbles in all; 4 of them fit: red; Probability = 4 ÷ 10 = 2/5.)
 
 ## Hints (graded, per worked example)
 
-For `gen:akchance:6,8,0,0`:
+For `gen:akchance:4,2,4,0`:
 
 1. Count ALL the marbles.
 2. Count the ones that fit.
@@ -41,7 +41,7 @@ No matching marbles: 0. All of them: 1. Some: in between; more matching marbles 
 
 ## Valid alternative methods (each checked to reach the same answer on every applicable generated item)
 
-- **Number every marble**: number the marbles 1, 2, 3, …; each number is equally likely → P = 6/14 = 3/7
+- **Number every marble**: number the marbles 1, 2, 3, …; each number is equally likely → P = 4/10 = 2/5
 
 **Method credit.** A correct final answer earns ANSWER credit only. Method credit needs a server-recorded verified working assessment. Checker status: none: no working contract.
 
@@ -59,27 +59,27 @@ Interpretation rule: A single matching answer is a SUSPECTED error. misconceptio
 
 Status: modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers).
 
-> In "A bag has 4 red, 2 blue and 4 green marbles, as in the table. Farhan picks one marble without looking. What is the probability that it is red? (A fraction is fine.)", one wrong answer is 1/3.
+> In "A bag has 8 red, 2 blue and 1 green marbles, as in the table. Lakshmi picks one marble without looking. What is the probability that it is red? (A fraction is fine.)", one wrong answer is 1/3.
 > Each colour was taken as equally likely (1 out of 3 colours). The colours have different numbers of marbles, so count marbles, not colours.
 > Colours with more marbles are more likely: count marbles, not colours.
-> Not 1/3, but 2/5.
+> Not 1/3, but 8/11.
 
-Check: there are 4 red but only 2 blue, so blue is LESS likely than red. So the colours do not all have the same chance.
+Check: there are 8 red but only 1 green, so green is LESS likely than red. So the colours do not all have the same chance.
 
 Solved correctly:
 
-1. All the marbles: 4 red + 2 blue + 4 green = 10, each equally likely
-1. Marbles that fit "red": 4
-1. P = 4/10 = 2/5
+1. All the marbles: 8 red + 2 blue + 1 green = 11, each equally likely
+1. Marbles that fit "red": 8
+1. P = 8/11
 
-Example `gen:akchance:4,2,4,0`; guided `gen:akchance:2,8,5,0:mc`; fresh check `gen:akchance:7,5,0,1`.
+Example `gen:akchance:8,2,1,0`; guided `gen:akchance:6,6,2,1:mc`; fresh check `gen:akchance:2,7,5,0:mc`.
 
 ## Practice, transfer and delayed checks (fresh; same skill)
 
-- Guided practice: `gen:akchance:3,1,6,0:mc`, `gen:akchance:6,6,2,0:mc`, `gen:akchance:6,1,3,0`
-- Rechecks after teaching: `gen:akchance:9,8,1,0:mc`, `gen:akchance:9,1,0,1`
-- Transfer (everyday form): `gen:akchance:3,8,4,1:w`, `gen:akchance:1,4,6,1:w`
-- Delayed checks: `gen:akchance:7,9,1,0:mc`, `gen:akchance:8,6,0,0`
+- Guided practice: `gen:akchance:5,8,3,0:mc`, `gen:akchance:2,6,3,0`, `gen:akchance:8,8,2,0:mc`
+- Rechecks after teaching: `gen:akchance:9,9,4,0:mc`, `gen:akchance:6,4,0,1`
+- Transfer (everyday form): `gen:akchance:1,1,6,1:w`, `gen:akchance:7,1,6,1:w`
+- Delayed checks: `gen:akchance:7,9,1,0:mc`, `gen:akchance:5,7,5,1`
 
 ## Integration specification (for the shared teaching selector; nothing written)
 
@@ -90,8 +90,8 @@ Example `gen:akchance:4,2,4,0`; guided `gen:akchance:2,8,5,0:mc`; fresh check `g
 - **Trigger** `scale_words`: existing explanation reused: the 0–1 scale
 - **Trigger** `spot_the_mistake`: existing explanation reused: odds
 - **Allowed methods:** the oracle's method (worked lines); Number every marble
-- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:akchance:9,8,1,0:mc`, `gen:akchance:9,1,0,1`
-- **Retention target:** MATH.probability.chance-language / `akchance`, cases: unequal colours. Candidates: `gen:akchance:7,9,1,0:mc`, `gen:akchance:8,6,0,0`
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:akchance:9,9,4,0:mc`, `gen:akchance:6,4,0,1`
+- **Retention target:** MATH.probability.chance-language / `akchance`, cases: unequal colours. Candidates: `gen:akchance:7,9,1,0:mc`, `gen:akchance:5,7,5,1`
 - **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
 - **Method evidence:** none: no method evidence can be recorded; a correct answer never implies the method
 - **Ungradable / text-only:** none

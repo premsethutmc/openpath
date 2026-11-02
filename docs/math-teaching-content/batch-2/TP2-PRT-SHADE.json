@@ -119,18 +119,18 @@
    "platformReading": "predicted",
    "status": "modelled (a single matching answer is a SUSPECTED error; established only under misconception-evidence@1: two matching answers)",
    "note": "the top number read as a count of squares",
-   "example": "gen:adshade:6,2,1,2",
+   "example": "gen:adshade:3,6,7,9",
    "screens": {
     "whatWentWrong": [
-     "In \"The grid in the picture has 12 equal squares. How many squares must be shaded to show 1/2 (one-half) of the grid?\", one wrong answer is 1.",
-     "1 squares were shaded, the top number. The top number counts parts of size 1/2 of the WHOLE grid, and each such part here is 6 squares.",
+     "In \"The grid in the picture has 18 equal squares. How many squares must be shaded to show 7/9 of the grid?\", one wrong answer is 7.",
+     "7 squares were shaded, the top number. The top number counts parts of size 1/9 of the WHOLE grid, and each such part here is 2 squares.",
      "The top number counts PARTS of the whole, and each part may be several squares.",
-     "Not 1, but 6."
+     "Not 7, but 14."
     ],
-    "counterCheck": "Check: 1 square out of 12 is 1/12, not 1/2.",
+    "counterCheck": "Check: 7 squares out of 18 is 7/18, not 7/9.",
     "solvedCorrectly": [
-     "Share 12 squares into 2 equal parts: 12 ÷ 2 = 6 squares in each part",
-     "1 part: 1 × 6 = 6 squares"
+     "Share 18 squares into 9 equal parts: 18 ÷ 9 = 2 squares in each part",
+     "7 parts: 7 × 2 = 14 squares"
     ]
    },
    "guided": "gen:adshade:4,4,5,8:mc",
@@ -141,8 +141,8 @@
  "practice": {
   "guided": [
    "gen:adshade:2,5,3,5:mc",
-   "gen:adshade:3,5,1,5:mc",
-   "gen:adshade:3,6,1,9:mc"
+   "gen:adshade:6,2,1,2",
+   "gen:adshade:3,5,1,5:mc"
   ],
   "rechecks": [
    "gen:adshade:4,8,3,8:mc",
@@ -286,15 +286,15 @@
       {
        "title": "The top number counts parts, not squares: what went wrong",
        "text": [
-        "1 squares were shaded, the top number. The top number counts parts of size 1/2 of the WHOLE grid, and each such part here is 6 squares.",
+        "7 squares were shaded, the top number. The top number counts parts of size 1/9 of the WHOLE grid, and each such part here is 2 squares.",
         "The top number counts PARTS of the whole, and each part may be several squares."
        ],
        "math": [
-        "Not 1, but 6",
-        "Check: 1 square out of 12 is 1/12, not 1/2."
+        "Not 7, but 14",
+        "Check: 7 squares out of 18 is 7/18, not 7/9."
        ],
        "role": "misconception",
-       "instance": "gen:adshade:6,2,1,2"
+       "instance": "gen:adshade:3,6,7,9"
       },
       {
        "title": "The top number counts parts, not squares: solved correctly",
@@ -302,11 +302,11 @@
         "Each step, then the answer."
        ],
        "math": [
-        "Share 12 squares into 2 equal parts: 12 ÷ 2 = 6 squares in each part",
-        "1 part: 1 × 6 = 6 squares"
+        "Share 18 squares into 9 equal parts: 18 ÷ 9 = 2 squares in each part",
+        "7 parts: 7 × 2 = 14 squares"
        ],
        "role": "strategy",
-       "instance": "gen:adshade:6,2,1,2"
+       "instance": "gen:adshade:3,6,7,9"
       }
      ],
      "guided": "gen:adshade:4,4,5,8:mc",
@@ -351,7 +351,7 @@
     "addresses": "top-number",
     "revisions": [
      {
-      "contentHash": "sha256:4d44640c68e6b5c8fbf60228c46b31ab90b25dbafe2658ed9b6aff32f3909c8a",
+      "contentHash": "sha256:b270540da6fcfa3090eb7994b064cd6aa9fd9bdac46db747de9aa15a67439b89",
       "status": "pending_review",
       "provenance": {
        "source": "engineering",
@@ -563,10 +563,10 @@
     "ok": true
    },
    {
-    "id": "gen:adshade:6,2,1,2",
+    "id": "gen:adshade:3,6,7,9",
     "role": "misconception-example",
-    "prompt": "The grid in the picture has 12 equal squares. How many squares must be shaded to show 1/2 (one-half) of the grid?",
-    "answer": "6",
+    "prompt": "The grid in the picture has 18 equal squares. How many squares must be shaded to show 7/9 of the grid?",
+    "answer": "14",
     "grader": {
      "verdict": "correct",
      "reason": "correct.equal",
@@ -575,8 +575,8 @@
     "oracle": {
      "ok": true,
      "lines": [
-      "Share 12 squares into 2 equal parts: 12 ÷ 2 = 6 squares in each part",
-      "1 part: 1 × 6 = 6 squares"
+      "Share 18 squares into 9 equal parts: 18 ÷ 9 = 2 squares in each part",
+      "7 parts: 7 × 2 = 14 squares"
      ]
     },
     "alternatives": [
@@ -584,7 +584,7 @@
       "name": "Multiply first",
       "ok": true,
       "lines": [
-       "1 × 12 = 12; ÷ 2 = 6"
+       "7 × 18 = 126; ÷ 9 = 14"
       ]
      }
     ],
@@ -593,7 +593,27 @@
       "id": "top-number",
       "kind": "conceptual",
       "predicts": [
-       "1"
+       "7"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "one-part",
+      "kind": "procedural",
+      "predicts": [
+       "2"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     },
+     {
+      "id": "unshaded",
+      "kind": "procedural",
+      "predicts": [
+       "4"
       ],
       "graded": [
        "incorrect"
@@ -797,6 +817,46 @@
     "ok": true
    },
    {
+    "id": "gen:adshade:6,2,1,2",
+    "role": "guided-practice",
+    "prompt": "The grid in the picture has 12 equal squares. How many squares must be shaded to show 1/2 (one-half) of the grid?",
+    "answer": "6",
+    "grader": {
+     "verdict": "correct",
+     "reason": "correct.equal",
+     "source": "verifier"
+    },
+    "oracle": {
+     "ok": true,
+     "lines": [
+      "Share 12 squares into 2 equal parts: 12 ÷ 2 = 6 squares in each part",
+      "1 part: 1 × 6 = 6 squares"
+     ]
+    },
+    "alternatives": [
+     {
+      "name": "Multiply first",
+      "ok": true,
+      "lines": [
+       "1 × 12 = 12; ÷ 2 = 6"
+      ]
+     }
+    ],
+    "bugs": [
+     {
+      "id": "top-number",
+      "kind": "conceptual",
+      "predicts": [
+       "1"
+      ],
+      "graded": [
+       "incorrect"
+      ]
+     }
+    ],
+    "ok": true
+   },
+   {
     "id": "gen:adshade:3,5,1,5:mc",
     "role": "guided-practice",
     "prompt": "The grid in the picture has 15 equal squares. How many squares must be shaded to show 1/5 of the grid? Choose one.",
@@ -845,63 +905,6 @@
       "kind": "procedural",
       "predicts": [
        "12"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     }
-    ],
-    "ok": true
-   },
-   {
-    "id": "gen:adshade:3,6,1,9:mc",
-    "role": "guided-practice",
-    "prompt": "The grid in the picture has 18 equal squares. How many squares must be shaded to show 1/9 of the grid? Choose one.",
-    "answer": "2",
-    "options": [
-     "1",
-     "2",
-     "3",
-     "16"
-    ],
-    "correctOption": "B",
-    "grader": {
-     "verdict": "correct",
-     "reason": "correct.equal",
-     "source": "verifier"
-    },
-    "oracle": {
-     "ok": true,
-     "lines": [
-      "Share 18 squares into 9 equal parts: 18 ÷ 9 = 2 squares in each part",
-      "1 part: 1 × 2 = 2 squares"
-     ]
-    },
-    "alternatives": [
-     {
-      "name": "Multiply first",
-      "ok": true,
-      "lines": [
-       "1 × 18 = 18; ÷ 9 = 2"
-      ]
-     }
-    ],
-    "bugs": [
-     {
-      "id": "top-number",
-      "kind": "conceptual",
-      "predicts": [
-       "1"
-      ],
-      "graded": [
-       "incorrect"
-      ]
-     },
-     {
-      "id": "unshaded",
-      "kind": "procedural",
-      "predicts": [
-       "16"
       ],
       "graded": [
        "incorrect"

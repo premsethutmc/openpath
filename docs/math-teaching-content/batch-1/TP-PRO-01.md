@@ -88,7 +88,7 @@ Solved correctly:
 1. Pairs with total 6: 3
 1. P = 3/15 = 1/5
 
-Example `gen:akdice:3,5,0,6`; guided `gen:akdice:5,5,0,7:mc`; fresh check `gen:akdice:5,5,0,3`.
+Example `gen:akdice:3,5,0,6`; guided `gen:akdice:5,5,0,7:mc`; fresh check `gen:akdice:3,5,0,3:mc`.
 
 ### `order-ignored` (conceptual) — conceptual: (1,2) and (2,1) counted once
 
@@ -96,10 +96,10 @@ Status: modelled (a single matching answer is a SUSPECTED error; established onl
 
 > In "Karthik uses two ordinary dice. Each gives a number from 1 to 6, every number equally likely. What is the probability that the total of the two numbers is 7? (A fraction is fine.)", one wrong answer is 1/12.
 > Pairs such as (1, 3) and (3, 1) were counted once. They are different outcomes: the first and second number are different.
-> First 1 then 2 and first 2 then 1 are different pairs: the first and the second spinner are different objects.
+> First 1 then 2 and first 2 then 1 are different pairs: the first and the second spinner (or die) are different objects.
 > Not 1/12, but 1/6.
 
-Check: colour the first spinner red: red 1 with blue 6, and red 6 with blue 1, are two different outcomes.
+Check: colour the first one red and the second one blue: red 1 with blue 6, and red 6 with blue 1, are two different outcomes.
 
 Solved correctly:
 
@@ -107,7 +107,7 @@ Solved correctly:
 1. Pairs with total 7: 6
 1. P = 6/36 = 1/6
 
-Example `gen:akdice:6,6,0,7`; guided `gen:akdice:3,3,0,3:mc`; fresh check `gen:akdice:6,6,0,3`.
+Example `gen:akdice:6,6,0,7`; guided `gen:akdice:5,5,0,9:mc`; fresh check `gen:akdice:6,6,0,3`.
 
 ### `added-sides` (procedural) — procedural: sample space m + n instead of m × n
 
@@ -126,12 +126,12 @@ Solved correctly:
 1. Pairs with total 2: 1
 1. P = 1/20
 
-Example `gen:akdice:4,5,0,2`; guided `gen:akdice:5,5,0,10`; fresh check `gen:akdice:4,6,0,10:mc`.
+Example `gen:akdice:4,5,0,2`; guided `gen:akdice:5,5,0,10`; fresh check `gen:akdice:3,5,0,2`.
 
 ## Practice, transfer and delayed checks (fresh; same skill)
 
-- Guided practice: `gen:akdice:3,5,0,7:mc`, `gen:akdice:3,3,0,2`, `gen:akdice:5,6,0,10`
-- Rechecks after teaching: `gen:akdice:4,4,0,6`, `gen:akdice:6,6,0,2:mc`
+- Guided practice: `gen:akdice:3,3,0,2`, `gen:akdice:3,3,0,3:mc`, `gen:akdice:5,6,0,11:mc`
+- Rechecks after teaching: `gen:akdice:4,4,0,6`, `gen:akdice:4,6,0,10:mc`
 - Transfer (everyday form): `gen:akdice:4,6,0,8:w`, `gen:akdice:3,4,0,4:w`
 - Delayed checks: `gen:akdice:6,6,0,6`, `gen:akdice:4,6,0,3:mc`
 
@@ -144,7 +144,7 @@ Example `gen:akdice:4,5,0,2`; guided `gen:akdice:5,5,0,10`; fresh check `gen:akd
 - **Trigger** `fix_order_ignored`: verified-misconception 'order-ignored' (two matching answers, misconception-evidence@1)
 - **Trigger** `fix_added_sides`: verified-misconception 'added-sides' (two matching answers, misconception-evidence@1)
 - **Allowed methods:** the oracle's method (worked lines); Tree diagram
-- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:akdice:4,4,0,6`, `gen:akdice:6,6,0,2:mc`
+- **Fresh check:** partition `check`; a target error still possible on the item and its wrong value distinct from the answer and from numbers printed in the question; exclude the exposure keys and number signatures of every item already shown in this teaching. Candidates: `gen:akdice:4,4,0,6`, `gen:akdice:4,6,0,10:mc`
 - **Retention target:** MATH.probability.sample-space / `akdice`, cases: same-size spinners, a total made by several pairs; different-size spinners, a total made by several pairs. Candidates: `gen:akdice:6,6,0,6`, `gen:akdice:4,6,0,3:mc`
 - **Answer evidence:** grading-decision@1 correctness from the trusted server grader (every item here is gradable)
 - **Method evidence:** none: no method evidence can be recorded; a correct answer never implies the method
