@@ -97,7 +97,8 @@ test("3 a blocked explanation is refused in every mode, as intervention and on t
   // every one of the four known-invalid revisions is blocked, and none is the current content
   const blocked = explanationRegistry().entries.flatMap((e) => e.revisions.filter((r) => r.status === "blocked").map((r) => ({ e, r })));
   assert.equal(blocked.length, 4);
-  for (const { e, r } of blocked) { const mm = moduleFor(e.competency)!; assert.notEqual(contentHash(mm.competency, strat(mm, e.strategy)), r.contentHash, `${e.id} current content is not the blocked revision`); }
+  // a blocked revision is never the current content; a strategy retired from its module (replaced by skill-scoped teaching) is not served at all
+  for (const { e, r } of blocked) { const mm = moduleFor(e.competency)!; for (const x of mm.strategies) assert.notEqual(contentHash(mm.competency, x), r.contentHash, `${e.id}: no served strategy is the blocked revision`); }
   // relabelling the blocked revision in the registry does not unblock it: the blocklist still refuses it
   const reg = clone();
   Object.assign(reg.entries.find((x) => x.id === explanationId(m.competency, "doubling"))!.revisions.find((r) => r.status === "blocked")!, { status: "pending_review", knownIssues: [] });
