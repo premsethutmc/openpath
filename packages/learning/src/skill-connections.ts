@@ -2,7 +2,7 @@
 import { FAMILIES, problemOf } from './families';
 import type { Module, Strategy } from './content';
 import { classifyQuestionWith, type SubSkillConfig } from './subskill-projection';
-import { LINEAR_EQUATIONS_CONFIG } from './subskill-evidence';
+import { LINEAR_EQUATIONS_CONFIG } from './subskill-config-linear';
 import { TRIANGLE_PROPERTIES_CONFIG } from './subskill-config-geometry';
 import { ADDITION_CONFIG } from './subskill-config-addition';
 

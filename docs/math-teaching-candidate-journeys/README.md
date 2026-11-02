@@ -37,6 +37,7 @@ Candidate-specific selection restrictions (for example the median package's mean
 - Full library/review pipeline consistency: **1 passed**; it rebuilds the library and checks current module review hashes. Mathematics integration TypeScript passes.
 - Backend teaching/pathway: **6 passed**. Final rebuilt-bundle integrity/pathway: **5 passed** (overlaps the pathway batch). Trusted grader bundle prefix `bacbae87ad3f`, 212 recorded inputs.
 - Browser: four teaching/resolution/reload cases, three observed scoped delayed answers; shaded-fraction delayed connection remains incomplete. Later relevance hardening preserves these strict-pathway cases and is covered by the final focused batch.
+- The first Node 24 CI aggregate exposed an import-order cycle (`LINEAR_EQUATIONS_CONFIG` before initialization): 795 passed and one test file failed. The unchanged static linear configuration now lives in `subskill-config-linear.ts`; existing exports remain compatible. The failing four projection tests pass on Node 22 and Node 24; the Node 24 candidate/scope batch passes 30 tests. This is an initialization repair, with no mapping or review-state change.
 - Exact-head configured CI is reported on the follow-on draft PR. No duplicate unchanged local full aggregate was run. PR97 remains unchanged.
 
 Competitive teaching/adaptation quality and separate real-student learning, retention and transfer evidence remain unmet release gates. This engineering milestone establishes neither competitor parity nor learner-outcome guarantees.
