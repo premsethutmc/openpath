@@ -69,3 +69,40 @@ test('ignored markers and conflicting duplicate records cannot lend server prove
  const once=foundationPlan(policy,s.learnerId,trusted,s.now,{trustedOnly:true});
  assert.deepEqual(foundationPlan(policy,s.learnerId,[...trusted,...trusted],s.now,{trustedOnly:true}),once);
 });
+
+import { withFoundation, type FoundationPlan } from '../../../packages/learning/src/foundation';
+import { PICTOGRAPHS_CONFIG, HALF_SYMBOL_ROWS } from '../../../packages/learning/src/subskill-config-scale';
+import { make, learnerState } from '../../../packages/learning/src/session';
+import { moduleState, type ModuleState } from '../../../packages/learning/src/intervention';
+
+test('persisted half-row pathway resumes scoped recovery instead of unrelated initial exploration',()=>{
+ const c=PICTOGRAPHS_CONFIG,halfSkill='pictographs.half-symbol@1';
+ const isHalf=(id:string)=>{const p=problemOf(id);return !!p&&p.family==='acpicthalf'&&p.params[3]===0&&HALF_SYMBOL_ROWS.includes(p.params.slice(0,3).join(','));};
+ const s=new SliceSession('half-recovery-routing',c.competency,Date.parse('2026-01-01T00:00:00Z'));
+ s.events.push(make.pathway({learnerId:s.learnerId,sessionId:s.session,at:new Date(s.now).toISOString()},c.competency));
+ for(const id of phasePool('acpicthalf','check').filter(id=>!id.endsWith(':mc')&&isHalf(id)).slice(0,12)) assert.equal(s.submit(id,question(id).answer,'check').credit,true);
+ s.wait(9);
+ const delayed=s.state().module(c.competency);assert.equal(delayed.phase,'retention');assert.ok(delayed.question);assert.ok(isHalf(delayed.question));
+ const q=question(delayed.question),wrong=q.options?'ABCD'[('ABCD'.indexOf(q.answer)+1)%q.options.length]:'-999';
+ assert.equal(s.submit(delayed.question,wrong,'retention').credit,false);
+ const events=saved(s),st=learnerState(s.learnerId,events,s.now);
+ const ordinary=moduleState(c.competency,st.selectionRecords,st.evidence(c.competency),s.now,'',null,st.evidence);
+ assert.equal(ordinary.phase,'explore','the broad module still requests initial diagnostics');
+ const next=st.module(c.competency);assert.equal(next.phase,'check');assert.ok(next.question);assert.ok(isHalf(next.question));
+ assert.equal(next.context,`foundation:${halfSkill}`);assert.notEqual(exposureKey(next.question),exposureKey(delayed.question));
+ assert.ok(!st.records.attempts.some(a=>exposureKey(a.questionId)===exposureKey(next.question!)));
+ assert.deepEqual(learnerState(s.learnerId,JSON.parse(JSON.stringify(events)).reverse(),s.now).module(c.competency),next);
+ assert.equal(projectFromEventsWith(c,s.learnerId,events,s.now).subSkills.find(x=>x.id===halfSkill)!.status,'recovery-required');
+});
+
+test('scoped recovery does not interrupt investigation, teaching, review holds or initial readiness',()=>{
+ const plan:FoundationPlan={policy:FOUNDATION_POLICY,status:'recovery',skill:'test',question:'gen:afbar:3,2,7',reason:'scoped recovery'};
+ const base:ModuleState={competency:policy.config.competency,phase:'explore',question:'gen:afbar:0,0,0',strategy:null,diagnosis:null,decision:null,reason:'initial diagnostic'};
+ for(const phase of ['chapter','guided','strategy','recover','pause','reentry','unavailable'] as const){
+  const state={...base,phase};assert.equal(withFoundation(state,plan),state,phase);
+ }
+ for(const phase of ['explore','check'] as const){const state={...base,phase,context:'investigate:original'};assert.equal(withFoundation(state,plan),state);}
+ assert.equal(withFoundation(base,{...plan,status:'unobserved'}),base);
+ assert.equal(withFoundation(base,{...plan,question:null}),base);
+ const next=withFoundation(base,plan);assert.equal(next.phase,'check');assert.equal(next.question,plan.question);
+});

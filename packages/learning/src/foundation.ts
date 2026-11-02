@@ -86,7 +86,9 @@ export function foundationPlan(policy: FoundationPolicy, learner: string, events
 }
 /** Explicit preview callers only. Preserve the existing teaching and recovery flow. */
 export function withFoundation(ms: ModuleState, plan: FoundationPlan): ModuleState {
-  if (["chapter", "guided", "strategy", "recover", "pause", "reentry", "unavailable", "explore"].includes(ms.phase)) return ms;
+  const resumeScopedRecovery = ms.phase === "explore" && plan.status === "recovery" && !!plan.question && !ms.context?.startsWith("investigate");
+  if (ms.context?.startsWith("investigate") || ["chapter", "guided", "strategy", "recover", "pause", "reentry", "unavailable"].includes(ms.phase)
+      || (ms.phase === "explore" && !resumeScopedRecovery)) return ms;
   if (plan.status === "shown") return ms;
   if (!plan.question) return { ...ms, phase: "unavailable", question: null, reason: plan.reason, why: FOUNDATION_POLICY };
   return { ...ms, phase: plan.status === "retention" ? "retention" : "check", question: plan.question,

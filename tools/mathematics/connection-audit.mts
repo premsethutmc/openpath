@@ -24,7 +24,7 @@ const rows = graph.competencies.slice().sort((a,b)=>a.id.localeCompare(b.id,'en'
     const fresh=checks.filter(id=>!taught.has(exposureKey(id)));
     const diagnoses=[...new Set(checks.flatMap(id=>problemOf(id.replace(/:(mc|w)$/,''))?.bugs.filter(b=>b.predict!==null).map(b=>b.id)??[]))].sort();
     const gaps=[...(!strategies.length?['missing-eligible-teaching']:[]),...(!fresh.length?['missing-fresh-check']:[]),...(!delayed.length?['missing-retention']:[]),...(!diagnoses.length?['missing-diagnostic-predictions']:[])];
-    return {skill:s.id,parameters:s.parameters??[],...(s.parameterCases!==undefined?{parameterCases:s.parameterCases}:{}),status:gaps.length?'gap':'connected-answer-chain',gaps,strategies:strategies.map(st=>st.id),freshChecks:fresh.length,retention:delayed.length,diagnosticPredictions:diagnoses,working:checks.some(id=>!!expectedWorkingAuthority(id))?'bounded-checker-available':'unsupported',examples:{check:fresh[0]??null,retention:delayed[0]??null}};
+    return {skill:s.id,parameters:s.parameters??[],...(s.parameterTuples!==undefined?{parameterTuples:s.parameterTuples}:{}),status:gaps.length?'gap':'connected-answer-chain',gaps,strategies:strategies.map(st=>st.id),freshChecks:fresh.length,retention:delayed.length,diagnosticPredictions:diagnoses,working:checks.some(id=>!!expectedWorkingAuthority(id))?'bounded-checker-available':'unsupported',examples:{check:fresh[0]??null,retention:delayed[0]??null}};
   });
   const unmappedFamilies=families.filter(f=>!config.subSkills.some(s=>s.families.includes(f)));
   const unclassifiedQuestions=check.filter(id=>!connectedSkill(config,id)).length;

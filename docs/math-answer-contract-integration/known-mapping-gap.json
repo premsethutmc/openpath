@@ -1,9 +1,26 @@
 {
-  "source": "PR101 cffd0c4 plus local shared integration",
   "question": "gen:acpicthalf:0,8,1,0",
   "selectedRowHalves": 2,
   "answer": "2",
-  "actualSkill": "pictographs.half-symbol@1",
-  "expectedSkill": null,
-  "status": "blocked: whole-picture row must not establish half-symbol evidence"
+  "before": {
+    "source": "6a9ce36 and Claude81923a1",
+    "mapping": "pictographs-subskills@1",
+    "actualSkill": "pictographs.half-symbol@1"
+  },
+  "after": {
+    "mapping": "pictographs-subskills@2",
+    "projection": "pictographs-subskill-projection@2",
+    "contract": "parameterTuples",
+    "actualSkill": null,
+    "expectedSkill": null
+  },
+  "status": "resolved in versioned integration; classification, projection, selection and immutable replay regressions active",
+  "tupleSource": "81923a149727d2ae1825c6bc444c2c5c18f156fe",
+  "verifiedSpace": {
+    "valid": 472,
+    "genuine": 275,
+    "whole": 197,
+    "served": 242,
+    "genuineServed": 142
+  }
 }

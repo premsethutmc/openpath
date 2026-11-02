@@ -35,8 +35,8 @@ export interface SubSkillDef<Id extends string = string> {
   id: Id; name: string; example: string; families: string[]; competency: string; note?: string;
   /** All conditions must hold on validated generator parameters. */
   parameters?: readonly { index: number; values: readonly number[] }[];
-  /** At least one nonempty conjunction must hold, in addition to parameters. */
-  parameterCases?: readonly (readonly { index: number; values: readonly number[] }[])[];
+  /** Exact joint parameter choices, in addition to parameters; full family arity, no duplicates. */
+  parameterTuples?: readonly (readonly number[])[];
 }
 /** A subject's evidence dimensions, as configuration. */
 export interface SubSkillConfig<Id extends string = string> {
@@ -68,27 +68,40 @@ export function classifyQuestionWith<Id extends string>(config: SubSkillConfig<I
   if (!m) return { kind: "unknown", reason: "malformed-question-id", family: null };
   if (!FAMILIES.has(m[1])) return { kind: "unknown", reason: "unknown-family", family: m[1] };
   const params = m[2].split(",").map(Number);
+  const def = FAMILIES.get(m[1])!;
   const validConditions = (value: unknown): value is NonNullable<SubSkillDef["parameters"]> => Array.isArray(value) && Array.from(value).every((p: unknown) => {
     if (!p || typeof p !== "object" || Array.isArray(p)) return false;
     const c = p as { index?: unknown; values?: unknown };
     return typeof c.index === "number" && Number.isInteger(c.index) && c.index >= 0 && c.index < params.length
       && Array.isArray(c.values) && c.values.length > 0 && Array.from(c.values).every((v: unknown) => typeof v === "number" && Number.isFinite(v));
   });
+  const validTuples = (value: unknown): value is NonNullable<SubSkillDef["parameterTuples"]> => {
+    if (!Array.isArray(value) || !value.length) return false;
+    const seen = new Set<string>();
+    for (const tuple of value) {
+      if (!Array.isArray(tuple) || tuple.length !== def.arity || !Array.from(tuple).every((v: unknown) => typeof v === "number" && Number.isSafeInteger(v))) return false;
+      const key = tuple.join(",");
+      if (seen.has(key)) return false;
+      seen.add(key);
+      // Same structured admissibility contract as problemOf, without building every
+      // listed problem each time. The selected problem still passes build validation below.
+      try { if (def.reject([...tuple]) !== null) return false; } catch { return false; }
+    }
+    return true;
+  };
   const candidates = config.subSkills.filter((s) => s.families.includes(m[1]));
-  // Validate every branch first: a matching case must not hide malformed alternatives.
+  // Validate the complete allowlist: a matching tuple cannot hide malformed alternatives.
   if (candidates.some((s) => (s.parameters !== undefined && !validConditions(s.parameters))
-      || (s.parameterCases !== undefined && (!Array.isArray(s.parameterCases) || !s.parameterCases.length
-        || !Array.from(s.parameterCases).every((c) => validConditions(c) && c.length > 0))))) {
+      || (s.parameterTuples !== undefined && !validTuples(s.parameterTuples)))) {
     return { kind: "unknown", reason: "unmapped-family", family: m[1] };
   }
   const accepts = (conditions: NonNullable<SubSkillDef["parameters"]>) => conditions.every((p) => p.values.includes(params[p.index]));
   const matches = candidates.filter((s) => (s.parameters === undefined || accepts(s.parameters))
-    && (s.parameterCases === undefined || s.parameterCases.some(accepts)));
+    && (s.parameterTuples === undefined || s.parameterTuples.some((tuple) => tuple.every((v, i) => v === params[i]))));
   // Ambiguous metadata must never silently credit one of two skills.
   if (matches.length !== 1) return { kind: "unknown", reason: "unmapped-family", family: m[1] };
   const s = matches[0];
   // the generator itself must accept the parameters and the answer format (an id a family would never produce is not its evidence)
-  const def = FAMILIES.get(m[1])!;
   if (def.competency !== s.competency) return { kind: "unknown", reason: "unmapped-family", family: m[1] };
   if (!problemOf(`gen:${m[1]}:${m[2]}`) || (m[3] === "mc" && !def.mc) || (m[3] === "w" && !def.word)) return { kind: "unknown", reason: "malformed-question-id", family: m[1] };
   return { kind: "mapped", family: m[1], subSkill: s, format: (m[3] as "mc" | "w" | undefined) ?? "typed" };

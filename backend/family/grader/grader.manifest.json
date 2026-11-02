@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "bb03433deca031baa6d1abe557701d1aeec28918f871f5782ff0e8c1a55254f6",
+ "sha256": "256fe752b2b36715c66d0df9962fa18d74c9bde87661993adec3487121c067ac",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "093892bcfa2f777f11a38aecd11c90e2ed3a4c1b9c850e191feaed3a5ef97abc",
@@ -163,7 +163,7 @@
   "packages/learning/src/families.ts": "79bf29a8c205664e64d09fd890b56374842e3da042bff7de2ff9ac132131c46e",
   "packages/learning/src/family-kit.ts": "1684bb9e8664f333d7e69e5d4a558d0402f858c60b1882a2f5801591b7671890",
   "packages/learning/src/foundation-runtime.ts": "812b2f41dec1e7edd6341a060f679cc2728bab42c43dba7920fa7d6bda37fd0a",
-  "packages/learning/src/foundation.ts": "4a18e7bf1d0431d7dad1673f2b6dd3318326895d7663f8c7b1b1b6cada9ade75",
+  "packages/learning/src/foundation.ts": "226a5ae7f8b63d96991273ca80d6b0ed38d18a051b1e7fce493fedfd96fc7284",
   "packages/learning/src/geometry-task.ts": "0e4da8483045f14339578ba1a235565d4e3c981ac456c75c10934fc665c3706d",
   "packages/learning/src/geometry-worker.ts": "9788f4141e99cf2c2f5399756af4fd83919ceaa52980f32112401b4059b56dc0",
   "packages/learning/src/goals.ts": "6577e1691c95734848cf00f712ab70fb46b494b9d0680dc9e965e43cb9c5e124",
@@ -212,8 +212,8 @@
   "packages/learning/src/subskill-config-conversion.ts": "2df9e02fd941e99a7a521200a5754d69c22efb17f33ddae1b708890e8c7adf27",
   "packages/learning/src/subskill-config-geometry.ts": "bac8b09b1ae1df6cd03781767d5704d4123b1c68b26b7f17012f05dfc6e96730",
   "packages/learning/src/subskill-config-linear.ts": "d180959aca453e7a6cd0069d7ee432db31fd042d5d69bcccc6577fe68e155793",
-  "packages/learning/src/subskill-config-scale.ts": "4d64e7bd0ed6eacbfe818fea956c4cb9c5fbdbe28a9dd937f440ac8cd634d555",
-  "packages/learning/src/subskill-projection.ts": "bcfc18e8c17c43824a3cb9f12309f513a3045a83f7484fb0b8ddc2835b250966",
+  "packages/learning/src/subskill-config-scale.ts": "b3ffec2d182492cfe08b6461cd0184874ad4cb5d0e94ff28ef663053eb40b6c2",
+  "packages/learning/src/subskill-projection.ts": "d16b30fee334d7650b65353bf711982d5eec7be46efba4fa20757783c9d4dd5c",
   "packages/learning/src/symbolic-domain.ts": "6f6284a39e637a907160ad5a17219a91970c0ec9dc637e9405ffe9bfac5880c6",
   "packages/learning/src/symbolic-equivalence.ts": "909857c3d33d52535b0b91057c74896a20a9304bfd9f0f38a804b8d51248fb12",
   "packages/learning/src/teaching-contract.ts": "c83f90815bd0d36a744e6b8c2b98d26c69c70cffd9c1a646852a9ee498324eed",
