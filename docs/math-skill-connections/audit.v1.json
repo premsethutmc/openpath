@@ -4,8 +4,8 @@
   "meaning": "Mechanical task/teaching/check/retention connections only. Diagnostic predictions are hypotheses, not learner diagnoses. Review eligibility is not educator approval. No curriculum completion claim.",
   "counts": {
     "missing-module": 17,
-    "missing-skill-metadata": 331,
-    "partial": 5
+    "missing-skill-metadata": 328,
+    "partial": 8
   },
   "rows": [
     {
@@ -8619,7 +8619,6 @@
         "aatens",
         "aaword"
       ],
-      "status": "missing-skill-metadata",
       "content": {
         "chapterScreens": 6,
         "strategies": 5,
@@ -8648,7 +8647,199 @@
           "gen:aatens:5,14"
         ]
       },
-      "skills": []
+      "status": "partial",
+      "mapping": "place-value-tens-subskills@1",
+      "unmappedFamilies": [
+        "aagreat",
+        "aaname",
+        "aaword"
+      ],
+      "unclassifiedQuestions": 81,
+      "skills": [
+        {
+          "skill": "place-value.blocks-to-number@1",
+          "parameters": [],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "count_on",
+            "bundles",
+            "check_what_it_uses"
+          ],
+          "freshChecks": 35,
+          "retention": 22,
+          "diagnosticPredictions": [
+            "count-blocks",
+            "join-digits",
+            "swap-digits"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:aatens:3,6",
+            "retention": "gen:aatens:4,4"
+          }
+        },
+        {
+          "skill": "place-value.tens-digit-value@1",
+          "parameters": [
+            {
+              "index": 1,
+              "values": [
+                0
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 17,
+          "retention": 16,
+          "diagnosticPredictions": [
+            "face-value",
+            "wrong-digit"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:aadigit:83,0:mc",
+            "retention": "gen:aadigit:34,0:mc"
+          }
+        },
+        {
+          "skill": "place-value.count-tens@1",
+          "parameters": [
+            {
+              "index": 1,
+              "values": [
+                1
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 16,
+          "retention": 15,
+          "diagnosticPredictions": [
+            "value-not-count",
+            "wrong-digit"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:aadigit:83,1",
+            "retention": "gen:aadigit:69,1:mc"
+          }
+        },
+        {
+          "skill": "place-value.ones-digit-value@1",
+          "parameters": [
+            {
+              "index": 1,
+              "values": [
+                2
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 13,
+          "retention": 16,
+          "diagnosticPredictions": [
+            "times-ten",
+            "wrong-digit"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:aadigit:34,2",
+            "retention": "gen:aadigit:83,2"
+          }
+        },
+        {
+          "skill": "place-value.full-tens@1",
+          "parameters": [
+            {
+              "index": 2,
+              "values": [
+                0
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 23,
+          "retention": 19,
+          "diagnosticPredictions": [
+            "rows-as-tens"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:aabund:6,9,0:mc",
+            "retention": "gen:aabund:6,13,0"
+          }
+        },
+        {
+          "skill": "place-value.left-over-ones@1",
+          "parameters": [
+            {
+              "index": 2,
+              "values": [
+                1
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 22,
+          "retention": 14,
+          "diagnosticPredictions": [
+            "last-row"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:aabund:6,9,1",
+            "retention": "gen:aabund:9,0,1:mc"
+          }
+        },
+        {
+          "skill": "place-value.grouped-total@1",
+          "parameters": [
+            {
+              "index": 2,
+              "values": [
+                2
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 18,
+          "retention": 24,
+          "diagnosticPredictions": [
+            "rows-as-tens",
+            "tens-only"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:aabund:6,5,2:mc",
+            "retention": "gen:aabund:9,0,2:mc"
+          }
+        }
+      ]
     },
     {
       "competency": "MATH.number.prime-factorisation",
@@ -11272,7 +11463,6 @@
         "acpictmore",
         "acpicttab"
       ],
-      "status": "missing-skill-metadata",
       "content": {
         "chapterScreens": 4,
         "strategies": 4,
@@ -11298,7 +11488,207 @@
           "gen:acpict:1,1,2"
         ]
       },
-      "skills": []
+      "status": "partial",
+      "mapping": "pictographs-subskills@1",
+      "unmappedFamilies": [],
+      "unclassifiedQuestions": 29,
+      "skills": [
+        {
+          "skill": "pictographs.read-with-key@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 55,
+          "retention": 39,
+          "diagnosticPredictions": [
+            "no-key",
+            "wrong-row"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acpict:1,21,3",
+            "retention": "gen:acpict:3,6,1"
+          }
+        },
+        {
+          "skill": "pictographs.half-symbol@1",
+          "parameters": [
+            {
+              "index": 3,
+              "values": [
+                0
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 45,
+          "retention": 55,
+          "diagnosticPredictions": [
+            "half-as-whole",
+            "half-left-out",
+            "no-key"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acpicthalf:0,8,1,0",
+            "retention": "gen:acpicthalf:2,14,3,0"
+          }
+        },
+        {
+          "skill": "pictographs.half-symbol-total@1",
+          "parameters": [
+            {
+              "index": 3,
+              "values": [
+                1
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 5,
+          "retention": 7,
+          "diagnosticPredictions": [
+            "half-as-whole",
+            "half-left-out",
+            "no-key"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acpicthalf:3,14,0,1:mc",
+            "retention": "gen:acpicthalf:1,17,0,1:mc"
+          }
+        },
+        {
+          "skill": "pictographs.compare-rows@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                1,
+                2,
+                3
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 45,
+          "retention": 40,
+          "diagnosticPredictions": [
+            "added",
+            "bigger-only",
+            "no-key"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acpictmore:1,18,2:mc",
+            "retention": "gen:acpictmore:1,18,1"
+          }
+        },
+        {
+          "skill": "pictographs.draw-from-table@1",
+          "parameters": [
+            {
+              "index": 3,
+              "values": [
+                0
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 42,
+          "retention": 44,
+          "diagnosticPredictions": [
+            "one-each"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acpicttab:1,24,1,0",
+            "retention": "gen:acpicttab:2,10,1,0"
+          }
+        },
+        {
+          "skill": "pictographs.total@1",
+          "parameters": [
+            {
+              "index": 3,
+              "values": [
+                1
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 12,
+          "retention": 9,
+          "diagnosticPredictions": [
+            "missed-row",
+            "no-key"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acpicttab:2,14,0,1:mc",
+            "retention": "gen:acpicttab:1,27,0,1:mc"
+          }
+        },
+        {
+          "skill": "pictographs.largest-group@1",
+          "parameters": [
+            {
+              "index": 3,
+              "values": [
+                2
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 9,
+          "retention": 11,
+          "diagnosticPredictions": [
+            "no-key",
+            "smallest"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acpicttab:1,28,0,2",
+            "retention": "gen:acpicttab:0,18,0,2:mc"
+          }
+        }
+      ]
     },
     {
       "competency": "MATH.statistics.picture-data",
@@ -11370,7 +11760,6 @@
       "families": [
         "afbar"
       ],
-      "status": "missing-skill-metadata",
       "content": {
         "chapterScreens": 1,
         "strategies": 4,
@@ -11395,7 +11784,95 @@
           "gen:afbar:4,0,6"
         ]
       },
-      "skills": []
+      "status": "partial",
+      "mapping": "scaled-bars-subskills@1",
+      "unmappedFamilies": [],
+      "unclassifiedQuestions": 0,
+      "skills": [
+        {
+          "skill": "scaled-bars.read@1",
+          "parameters": [
+            {
+              "index": 1,
+              "values": [
+                0
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 24,
+          "retention": 23,
+          "diagnosticPredictions": [
+            "assume-tens",
+            "count-lines"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:afbar:4,0,7",
+            "retention": "gen:afbar:4,0,4"
+          }
+        },
+        {
+          "skill": "scaled-bars.difference@1",
+          "parameters": [
+            {
+              "index": 1,
+              "values": [
+                1
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 27,
+          "retention": 27,
+          "diagnosticPredictions": [
+            "add-for-more",
+            "assume-tens",
+            "count-lines"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:afbar:1,1,1",
+            "retention": "gen:afbar:1,1,8:mc"
+          }
+        },
+        {
+          "skill": "scaled-bars.total@1",
+          "parameters": [
+            {
+              "index": 1,
+              "values": [
+                2
+              ]
+            }
+          ],
+          "status": "gap",
+          "gaps": [
+            "missing-eligible-teaching"
+          ],
+          "strategies": [],
+          "freshChecks": 31,
+          "retention": 20,
+          "diagnosticPredictions": [
+            "assume-tens",
+            "count-lines",
+            "difference-for-total"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:afbar:1,2,11",
+            "retention": "gen:afbar:3,2,7"
+          }
+        }
+      ]
     },
     {
       "competency": "MATH.statistics.stacked-bar-charts",

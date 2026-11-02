@@ -2366,7 +2366,16 @@
      "kind": "procedural",
      "needs": [],
      "scope": {
-      "family": "afbar"
+      "family": "afbar",
+      "subSkill": "scaled-bars.total@1",
+      "parameters": [
+       {
+        "index": 1,
+        "values": [
+         2
+        ]
+       }
+      ]
      },
      "addresses": "assume-tens",
      "screens": [
@@ -2397,7 +2406,7 @@
       }
      ],
      "guided": "gen:afbar:0,2,2",
-     "check": "gen:afbar:1,1,1"
+     "check": "gen:afbar:0,2,7"
     }
    ],
    "practice": [
@@ -16686,9 +16695,9 @@
         "21 out of 42 is 1/2"
        ],
        "widget": {
-        "type": "strips",
-        "top": 1,
-        "bottom": 4,
+        "type": "grid",
+        "rows": 1,
+        "cols": 4,
         "shaded": 2
        },
        "role": "strategy",
@@ -31275,7 +31284,26 @@
      "math": [
       "One side of a triangle is extended. The two interior angles opposite the exterior angle are 31° and 118°. What is the exterior angle, in degrees?",
       "Exterior angle = sum of the interior opposite angles: 31° + 118° = 149°"
-     ]
+     ],
+     "widget": {
+      "type": "triangle",
+      "angles": [
+       "31°",
+       "",
+       "118°"
+      ],
+      "exterior": {
+       "at": 1,
+       "label": "?"
+      },
+      "notToScale": true,
+      "vertices": [
+       "A",
+       "C",
+       "B"
+      ],
+      "extendedTo": "D"
+     }
     },
     {
      "title": "Angles of an isosceles triangle",
@@ -37373,9 +37401,9 @@
       "7 parts: 7 × ₹145 = ₹1015"
      ],
      "widget": {
-      "type": "strips",
-      "top": 9,
-      "bottom": 1,
+      "type": "grid",
+      "rows": 1,
+      "cols": 9,
       "shaded": 7
      },
      "tip": "The value of one part (₹1,305 ÷ 9) was given; Anu gets 7 parts.",
@@ -37407,10 +37435,10 @@
         "1 parts: 1 × ₹180 = ₹180"
        ],
        "widget": {
-        "type": "strips",
-        "top": 10,
-        "bottom": 1,
-        "shaded": 2
+        "type": "grid",
+        "rows": 1,
+        "cols": 10,
+        "shaded": 1
        },
        "role": "worked-example",
        "instance": "gen:ajrdiv:2,1,7,36,1"

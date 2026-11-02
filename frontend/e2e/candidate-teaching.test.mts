@@ -24,13 +24,17 @@ const results:unknown[]=[];
 async function call(path:string,body?:unknown){return page.evaluate(async({path,body})=>{const token=document.cookie.match(/(?:^|; )csrftoken=([^;]*)/)?.[1]??'';const r=await fetch('/api'+path,{method:body?'POST':'GET',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRFToken':decodeURIComponent(token)},...(body?{body:JSON.stringify(body)}:{})});return {status:r.status,data:await r.json().catch(()=>null)};},{path,body});}
 try {
  await page.goto(`http://127.0.0.1:${port}/year/`);
+ // Wait for the CSRF cookie explicitly; the app's initial account request is asynchronous.
+ assert.equal((await call('/account/')).status,200);
  assert.equal((await call('/account/register/',{email:`candidate-${Date.now()}@example.org`,password:'synthetic-candidate-browser-passphrase',consent:true})).status,201);
- for(const [competency,strategyId] of [
+ const cases = [
   ['MATH.statistics.median-mode','fix_mean_for_median'],
   ['MATH.probability.classical','fix_colours_equally_likely'],
   ['MATH.number.fraction-models','fix_shaded_to_unshaded'],
   ['MATH.statistics.scaled-bars','fix_assume_tens'],
- ]) {
+ ].filter(([competency]) => !process.env.CANDIDATE_COMPETENCY || competency === process.env.CANDIDATE_COMPETENCY);
+ assert.ok(cases.length, 'the requested candidate must exist');
+ for(const [competency,strategyId] of cases) {
   await page.clock.setSystemTime(new Date());
   const pupil=await call('/pupils/',{display_name:'Synthetic candidate teaching',consent:true});assert.equal(pupil.status,201);
   const id=pupil.data.id,m=moduleFor(competency)!,strategy=m.strategies.find(s=>s.id===strategyId)!,scope=teachingScopeFor(m,strategy),target=strategy.addresses!;
@@ -84,6 +88,6 @@ try {
   }
   results.push({competency,strategy:strategyId,diagnostics,renderedScreens:text.length,fresh,savedEvents:data.count,reloaded:true,educatorApproved:false,retention});
  }
- writeFileSync('../docs/math-teaching-candidate-journeys/browser-results.json',JSON.stringify({passed:true,results},null,2)+'\n');
+ writeFileSync(process.env.CANDIDATE_RESULTS ?? '../docs/math-teaching-candidate-journeys/browser-results.json',JSON.stringify({passed:true,results},null,2)+'\n');
  console.log(JSON.stringify({passed:true,results}));
 } catch(e){console.error(await page.locator('body').innerText());throw e;}finally{await browser.close();server.close();}

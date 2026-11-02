@@ -127,9 +127,9 @@
       "The shaded part is 1/4 of the strip"
      ],
      "widget": {
-      "type": "strips",
-      "top": 4,
-      "bottom": 4,
+      "type": "grid",
+      "rows": 1,
+      "cols": 4,
       "shaded": 1
      }
     }
@@ -337,8 +337,13 @@
        "widget": {
         "type": "strips",
         "top": 8,
+        "shaded": 3,
         "bottom": 8,
-        "shaded": 3
+        "bottomShaded": 5,
+        "labels": [
+         "3/8",
+         "5/8"
+        ]
        }
       }
      ],

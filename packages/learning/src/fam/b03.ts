@@ -639,7 +639,7 @@ export const B03: Def[] = [
       method: "Count all the squares and the shaded squares. If the shaded squares are half of all, it is 1/2; a quarter of all, 1/4; three quarters, 3/4.",
       visual: ([r, c, q]) => ({ type: "grid", rows: r, cols: c, shaded: (q * r * c) / 4 }),
       alternatives: [
-        { id: "fold", title: "Fold into equal parts", kind: "conceptual", text: ["Fold the shape in half, then in half again: you get 4 equal parts.", "Count how many of the 4 parts are shaded."], visual: ([, , q]) => ({ type: "strips", top: 1, bottom: 4, shaded: q }) },
+        { id: "fold", title: "Fold into equal parts", kind: "conceptual", text: ["Fold the shape in half, then in half again: you get 4 equal parts.", "Count how many of the 4 parts are shaded."], visual: ([, , q]) => ({ type: "grid", rows: 1, cols: 4, shaded: q }) }, // visuals@2: one strip folded into 4 equal parts, q of them shaded (the question's q quarters); the old strips data shaded q parts of a 1-part strip
       ],
     },
     limits: "Grids up to 48 squares shaded row by row as a half, a quarter or three quarters; other fractions and unequal parts are other families.",

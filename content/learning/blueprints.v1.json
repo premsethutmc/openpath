@@ -856,9 +856,18 @@
       }
      ],
      "guided": "gen:afbar:0,2,2",
-     "check": "gen:afbar:1,1,1",
+     "check": "gen:afbar:0,2,7",
      "scope": {
-      "family": "afbar"
+      "family": "afbar",
+      "subSkill": "scaled-bars.total@1",
+      "parameters": [
+       {
+        "index": 1,
+        "values": [
+         2
+        ]
+       }
+      ]
      },
      "addresses": "assume-tens"
     }

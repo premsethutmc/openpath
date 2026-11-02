@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "competency": "MATH.statistics.scaled-bars",
+      "strategy": "fix_assume_tens",
+      "diagnostics": [
+        "gen:afbar:3,2,6",
+        "gen:afbar:0,2,1"
+      ],
+      "renderedScreens": 2,
+      "fresh": "gen:afbar:3,2,3",
+      "savedEvents": 6,
+      "reloaded": true,
+      "educatorApproved": false,
+      "retention": {
+        "demonstrated": true,
+        "question": "gen:afbar:3,2,7",
+        "family": "afbar",
+        "parameterScopeMatched": true,
+        "reloaded": true,
+        "claim": "One delayed answer in this declared scope; not mastery of every family form"
+      }
+    }
+  ]
+}

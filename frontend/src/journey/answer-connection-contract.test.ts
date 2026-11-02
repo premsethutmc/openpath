@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { problemOf, exposureKey } from '../../../packages/learning/src/families';
+import { problemOf, exposureKey, pool } from '../../../packages/learning/src/families';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { validSkillTask, connectedSkill } from '../../../packages/learning/src/skill-connections';
 import type { SubSkillConfig } from '../../../packages/learning/src/subskill-projection';
 import { gradeRequest } from '../../../packages/learning/src/server-grader';
@@ -39,6 +41,29 @@ test('answer connection grants no unsupported method credit',()=>{
  const id='gen:addur:0,7';assert.equal(validSkillTask(configFor(id),'test.skill',id),true);
  const d=gradeRequest({id,response:problemOf(id)!.answer,working:['6 hours and 50 minutes']}).decision!;
  assert.equal(d.verdict,'correct');assert.notEqual(d.working?.methodEvidence,'method-verified');assert.equal(d.method?.verified,false);
+});
+test('required forms and a newly held contract remain authoritative after connection',()=>{
+ const id=pool('aifdiv').items.find(p=>p.answer==='4')!.id;
+ assert.equal(validSkillTask(configFor(id),'test.skill',id),true);
+ for(const response of ['8/2','4.0']) assert.equal(gradeRequest({id,response}).reason,'incorrect.required-form');
+ // Isolate the controlled corruption fixture in one module system. Node 22 can
+ // load separate ESM/CJS contract caches; mutating a different cache tests nothing.
+ const root=fileURLToPath(new URL('../../../packages/learning/src/',import.meta.url));
+ execFileSync(process.execPath,['--import','tsx','-e',`
+  const assert=require('node:assert/strict');
+  const {contractV2}=require(${JSON.stringify(root+'grading/contract.ts')});
+  const {grade}=require(${JSON.stringify(root+'grading/decision.ts')});
+  const {validSkillTask}=require(${JSON.stringify(root+'skill-connections.ts')});
+  const id=${JSON.stringify(id)}, config=${JSON.stringify(configFor(id))};
+  assert.equal(validSkillTask(config,'test.skill',id),true);
+  const c=contractV2(id), before=c.inconsistencies.slice();
+  try {
+   c.inconsistencies.push('test fixture: independently detected contract inconsistency');
+   assert.equal(grade(id,'4').decision.reason,'unresolved.contract-inconsistency');
+   assert.equal(validSkillTask(config,'test.skill',id),false);
+  } finally { c.inconsistencies.splice(0,c.inconsistencies.length,...before); }
+  assert.equal(validSkillTask(config,'test.skill',id),true);
+ `],{cwd:fileURLToPath(new URL('../../',import.meta.url)),stdio:'pipe'});
 });
 test('duration skill has fresh checks, saved replay, delayed check and recovery',()=>{
  const base=configFor('gen:addur:0,7');
