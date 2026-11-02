@@ -16,6 +16,10 @@ import { teachable } from "../../../packages/learning/src/intervention";
 import { make, learnerState } from "../../../packages/learning/src/session";
 import { probeReading } from "../../../packages/learning/src/reasoning";
 import { SliceSession } from "./session";
+import { readFileSync } from "node:fs";
+import { explainStep } from "../../../packages/learning/src/families";
+const explainStepText = (id: string) => { const p = problemOf(id.replace(/:mc$/, ""))!; return p.steps.map((x) => explainStep(p, x)).join(" | "); };
+const pv0 = () => moduleFor(PLACE_VALUE_TENS_CONFIG.competency)!;
 
 const at = Date.parse("2026-01-01T00:00:00Z");
 const DAY = 86400000;
@@ -125,39 +129,82 @@ test("evidence for one skill never covers another skill of the same pattern", ()
   assert.equal(q.status, "unobserved");
 });
 
-test("teaching availability: only connected, eligible strategies count; the rest are reported gaps, not substituted", () => {
-  const avail = (config: typeof PICTOGRAPHS_CONFIG) => { const m = moduleFor(config.competency)!; return Object.fromEntries(config.subSkills.map((s) => [s.id, m.strategies.filter((st) => teachable(m, st, []) && strategyConnects(config, s.id, st)).map((st) => `${st.id}:${st.kind}`)])); };
-  assert.deepEqual(avail(PLACE_VALUE_TENS_CONFIG)["place-value.blocks-to-number@1"], ["count_on:procedural", "bundles:conceptual", "check_what_it_uses:prerequisite"]);
-  for (const config of SCALE_PATTERN_CONFIGS) for (const [skill, list] of Object.entries(avail(config))) if (skill !== "place-value.blocks-to-number@1") assert.deepEqual(list, [], skill);
-  // why pictographs "table" does not count: its worked instance uses a key of 1 (no unit value), so it does not teach this skill
-  const table = moduleFor(PICTOGRAPHS_CONFIG.competency)!.strategies.find((st) => st.id === "table")!;
-  assert.equal(connectedSkill(PICTOGRAPHS_CONFIG, table.screens[0].instance!), null);
-  // Legacy general bar strategies still cross question kinds. PR98's specific fix is
-  // aligned during integration, but requires established evidence, so is absent above.
-  const bars = moduleFor(SCALED_BARS_CONFIG.competency)!;
-  for (const st of bars.strategies) {
-    if (st.id === "fix_assume_tens") {
-      assert.equal(strategyConnects(SCALED_BARS_CONFIG, "scaled-bars.total@1", st), true);
-      assert.equal(teachable(bars, st, []), false);
-    } else assert.notEqual(connectedSkill(SCALED_BARS_CONFIG, st.guided), connectedSkill(SCALED_BARS_CONFIG, st.check), st.id);
+const TAUGHT: Record<string, string[]> = {
+  "pictographs.read-with-key@1": ["read_with_key:procedural", "table:procedural"], "pictographs.half-symbol@1": ["half_pictures:conceptual"],
+  "pictographs.half-symbol-total@1": ["half_pictures_total:procedural"], "pictographs.compare-rows@1": ["compare_rows:procedural"],
+  "pictographs.draw-from-table@1": ["draw_from_table:conceptual"], "pictographs.total@1": ["pictograph_total:procedural"], "pictographs.largest-group@1": ["largest_group:procedural"],
+  "scaled-bars.read@1": ["skip_count:procedural"], "scaled-bars.difference@1": ["bars_difference:procedural"], "scaled-bars.total@1": ["bars_total:procedural"],
+  "place-value.blocks-to-number@1": ["bundles:conceptual", "count_on:procedural"], "place-value.tens-digit-value@1": ["tens_digit_value:conceptual"],
+  "place-value.count-tens@1": ["count_tens:conceptual"], "place-value.ones-digit-value@1": ["ones_digit_value:conceptual"],
+  "place-value.full-tens@1": ["full_tens:procedural"], "place-value.left-over-ones@1": ["left_over_ones:procedural"], "place-value.grouped-total@1": ["grouped_total:procedural"],
+};
+const strategiesFor = (config: typeof PICTOGRAPHS_CONFIG, skill: string, evidence: readonly string[] = []) => { const m = moduleFor(config.competency)!; return m.strategies.filter((st) => teachable(m, st, evidence) && strategyConnects(config, skill, st)); };
+
+test("teaching availability: every configured skill has its own eligible, skill-scoped explanation (pending review, not approved)", () => {
+  for (const config of SCALE_PATTERN_CONFIGS) for (const s of config.subSkills) {
+    const list = strategiesFor(config, s.id);
+    assert.deepEqual(list.map((st) => `${st.id}:${st.kind}`), TAUGHT[s.id], s.id);
+    for (const st of list) {
+      // the worked example, the guided question and the check are all this skill (a key or scale other than 1; one bar kind)
+      for (const id of [...st.screens.flatMap((b) => (b.instance ? [b.instance] : [])), st.guided, st.check]) assert.equal(connectedSkill(config, id), s.id, `${st.id}: ${id}`);
+      assert.ok(st.screens.every((b) => b.instance), `${st.id}: every screen shows its own worked instance`);
+    }
   }
+  // half pictures: every taught, guided and checked row really holds a half picture (an odd number of halves)
+  const half = moduleFor(PICTOGRAPHS_CONFIG.competency)!.strategies.find((st) => st.id === "half_pictures")!;
+  for (const id of [half.screens[0].instance!, half.guided, half.check]) assert.ok(problemOf(id.replace(/:mc$/, ""))!.steps.some((x) => /: (\d*[13579]) halves/.test(explainStepText(id))), id);
+  // bundles: the worked lines tie ten loose cubes into another ten
+  assert.ok(pv0().strategies.find((st) => st.id === "bundles")!.screens[0].math!.some((l) => /ones = 1 ten and \d+ ones/.test(l)));
+  // every one of these explanations is a review candidate: its current revision is pending review, never approved
+  const reg = JSON.parse(readFileSync(new URL("../../../content/learning/explanation-review.v1.json", import.meta.url), "utf8"));
+  const recs = (reg.entries as { competency: string; strategy: string; revisions: { status: string }[] }[]).map((e) => ({ ...e, status: e.revisions.at(-1)!.status }));
+  for (const config of SCALE_PATTERN_CONFIGS) for (const st of moduleFor(config.competency)!.strategies) {
+    const mine = recs.filter((r) => r.competency === config.competency && r.strategy === st.id);
+    assert.ok(mine.length > 0 && mine.every((r) => r.status === "pending_review"), `${st.id}: ${mine.map((r) => r.status).join(",")}`);
+  }
+  // the unscoped prerequisite pointer is not carried over: it could not be aligned to one skill
+  for (const config of SCALE_PATTERN_CONFIGS) assert.ok(!moduleFor(config.competency)!.strategies.some((st) => st.id === "check_what_it_uses"), config.competency);
+  // blocks-to-number: one example ties ten or more loose ones into another ten; the other counts on fewer than ten
+  const pv = moduleFor(PLACE_VALUE_TENS_CONFIG.competency)!;
+  assert.ok(problemOf(pv.strategies.find((st) => st.id === "bundles")!.screens[0].instance!)!.params[1] >= 10);
+  assert.ok(problemOf(pv.strategies.find((st) => st.id === "count_on")!.screens[0].instance!)!.params[1] < 10);
 });
 
-test("actual pathway: place-value teaching keeps guided work and the fresh check on the taught skill", () => {
-  const competency = PLACE_VALUE_TENS_CONFIG.competency, config = PLACE_VALUE_TENS_CONFIG;
-  const s = new SliceSession("scale-pathway", competency, at), m = moduleFor(competency)!;
-  s.events.push(make.pathway({ learnerId: s.learnerId, sessionId: s.session, at: new Date(at - 1000).toISOString() }, competency));
-  const strategy = m.strategies.find((st) => st.id === "bundles")!;
-  s.events.push(make.teach({ learnerId: s.learnerId, sessionId: s.session, at: new Date(++s.now).toISOString() }, competency, strategy.id, "foundation-lesson-review@1"));
-  let next = s.state().module(competency);
+test("misconception teaching waits for its evidence: the assume-tens fix is never offered as general teaching", () => {
+  const fix = moduleFor(SCALED_BARS_CONFIG.competency)!.strategies.find((st) => st.id === "fix_assume_tens_read")!;
+  assert.equal(fix.addresses, "assume-tens");
+  assert.ok(!strategiesFor(SCALED_BARS_CONFIG, "scaled-bars.read@1").includes(fix), "no evidence: not offered");
+  assert.ok(strategiesFor(SCALED_BARS_CONFIG, "scaled-bars.read@1", ["assume-tens"]).includes(fix), "with assume-tens evidence: offered, and only for this skill");
+  assert.ok(!strategiesFor(SCALED_BARS_CONFIG, "scaled-bars.total@1", ["assume-tens"]).includes(fix));
+  for (const id of [fix.screens[0].instance!, fix.guided, fix.check]) {
+    assert.equal(connectedSkill(SCALED_BARS_CONFIG, id), "scaled-bars.read@1");
+    const p = problemOf(id.replace(/:mc$/, ""))!;
+    assert.ok(p.bugs.some((b) => b.id === "assume-tens" && b.predict !== null && String(b.predict) !== String(p.answer)), `${id}: the wrong answer differs from the right one`);
+  }
+  const total = moduleFor(SCALED_BARS_CONFIG.competency)!.strategies.find((st) => st.id === "fix_assume_tens")!;
+  assert.ok(strategiesFor(SCALED_BARS_CONFIG, "scaled-bars.total@1", ["assume-tens"]).includes(total));
+  assert.ok(!strategiesFor(SCALED_BARS_CONFIG, "scaled-bars.read@1", ["assume-tens"]).includes(total));
+  assert.equal(total.guided, "gen:afbar:0,2,2");
+  assert.equal(total.check, "gen:afbar:0,2,7");
+  // no contrast-dependent fixes (one-each, face-value, value-not-count) are added here: they need contrast declarations
+  for (const config of SCALE_PATTERN_CONFIGS) for (const st of moduleFor(config.competency)!.strategies) if (st.addresses) assert.ok(["fix_assume_tens", "fix_assume_tens_read"].includes(st.id));
+});
+
+for (const config of SCALE_PATTERN_CONFIGS) for (const s of config.subSkills) for (const sid of TAUGHT[s.id].map((x) => x.split(":")[0])) test(`learner journey: teach ${sid} -> guided -> fresh check, all ${s.id}`, () => {
+  const competency = config.competency, m = moduleFor(competency)!;
+  const L = new SliceSession(`scale-teach-${sid}`, competency, at);
+  L.events.push(make.pathway({ learnerId: L.learnerId, sessionId: L.session, at: new Date(at - 1000).toISOString() }, competency));
+  const strategy = m.strategies.find((st) => st.id === sid)!;
+  L.events.push(make.teach({ learnerId: L.learnerId, sessionId: L.session, at: new Date(++L.now).toISOString() }, competency, strategy.id, "foundation-lesson-review@1"));
+  let next = L.state().module(competency);
   assert.equal(next.phase, "guided", JSON.stringify(next)); assert.equal(next.question, strategy.guided);
-  s.submit(next.question!, question(next.question!).answer, "guided");
-  next = s.state().module(competency);
+  assert.equal(connectedSkill(config, next.question!), s.id);
+  assert.equal(L.submit(next.question!, question(next.question!).answer, "guided").credit, true);
+  next = L.state().module(competency);
   assert.equal(next.phase, "check", JSON.stringify(next)); assert.ok(next.question);
-  assert.notEqual(next.question, strategy.guided);
-  assert.equal(connectedSkill(config, next.question), "place-value.blocks-to-number@1");
-  const shown = new Set([strategy.guided, ...strategy.screens.flatMap((b) => (b.instance ? [b.instance] : []))]);
-  assert.ok(!shown.has(next.question.replace(/:mc$/, "")), "the fresh check is not a taught example");
-  const saved = JSON.parse(JSON.stringify(withDecisions(s.events, s.decisions)));
-  assert.deepEqual(learnerState(s.learnerId, saved, s.now, { currentSession: s.session }).module(competency), next, "reload keeps the same check");
+  assert.equal(connectedSkill(config, next.question), s.id, "the independent check is the taught skill");
+  const shown = new Set([strategy.guided, ...strategy.screens.flatMap((b) => (b.instance ? [b.instance] : []))].map((x) => x.replace(/:mc$/, "")));
+  assert.ok(!shown.has(next.question.replace(/:mc$/, "")), "the check is fresh: not a taught or guided example");
+  const saved = JSON.parse(JSON.stringify(withDecisions(L.events, L.decisions)));
+  assert.deepEqual(learnerState(L.learnerId, saved, L.now, { currentSession: L.session }).module(competency), next, "reload keeps the same check");
 });

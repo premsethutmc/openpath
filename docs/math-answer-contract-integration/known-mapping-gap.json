@@ -1,0 +1,9 @@
+{
+  "source": "PR101 cffd0c4 plus local shared integration",
+  "question": "gen:acpicthalf:0,8,1,0",
+  "selectedRowHalves": 2,
+  "answer": "2",
+  "actualSkill": "pictographs.half-symbol@1",
+  "expectedSkill": null,
+  "status": "blocked: whole-picture row must not establish half-symbol evidence"
+}

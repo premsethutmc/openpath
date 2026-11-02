@@ -36,12 +36,20 @@ for(const [competency,family,ids] of cases){
    if(target)assert.equal(contentEligibility(m,s,{...req,mode:'demonstration',misconceptionEvidence:[]}).eligible,false);
   }
  });
- if(family!=='adfname')test(`${family}: additive composition preserves the existing template byte for byte`,()=>{
+ if(family!=='adfname' && family!=='afbar')test(`${family}: additive composition preserves the existing template byte for byte`,()=>{
   const bp=source.blueprints.find((b:Blueprint)=>b.competency===competency),base=fromTemplate(family,competency,source.version),m=synthesise(bp,source.version);
   assert.deepEqual({...m,strategies:m.strategies.slice(0,base.strategies.length)},base);
   for(const s of base.strategies)assert.equal(contentHash(competency,m.strategies.find(x=>x.id===s.id)!),contentHash(competency,s));
   const bad=structuredClone(bp);bad.strategies[0].id=base.strategies[0].id;assert.throws(()=>synthesise(bad,source.version),/duplicate strategy/);
   const exposed=structuredClone(bp);exposed.strategies[0].screens[0].instance=base.retention[0];assert.throws(()=>synthesise(exposed,source.version),/reserved exposure/);
+ });
+ if(family==='afbar')test('afbar: full teaching blueprint preserves the previously integrated total intervention',()=>{
+  const m=moduleFor(competency)!,total=m.strategies.find(s=>s.id==='fix_assume_tens')!;
+  assert.equal(source.blueprints.find((b:Blueprint)=>b.competency===competency).extendsTemplate,undefined);
+  assert.equal(contentHash(competency,total),'sha256:b196094b658057a96ba8addfba5044fe039077e9032d9f0ed610a9dd78065d92');
+  assert.equal(total.scope?.subSkill,'scaled-bars.total@1');
+  assert.equal(m.strategies.find(s=>s.id==='fix_assume_tens_read')?.scope?.subSkill,'scaled-bars.read@1');
+  assert.ok(!m.strategies.some(s=>s.kind==='prerequisite'),'the new module has target teaching, not a generic prerequisite pointer');
  });
  for(const id of ids.filter(x=>x!=='adfname_concept'))test(`${family}/${id}: real diagnosis selects candidate and fresh resolution survives saved replay`,()=>{
   const m=moduleFor(competency)!,s=m.strategies.find(s=>s.id===id)!,target=s.addresses!;
