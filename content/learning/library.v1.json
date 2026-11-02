@@ -4673,6 +4673,1119 @@
    }
   },
   {
+   "competency": "MATH.algebra.missing-number",
+   "title": "Missing numbers and related facts",
+   "chapter": [
+    {
+     "title": "Missing numbers and related facts",
+     "text": [
+      "Adding and taking away undo each other, and so do multiplying and dividing. To find a missing number, ask what was done to it, then work backwards; put your answer back in to check."
+     ],
+     "widget": {
+      "type": "balance",
+      "left": "□ + 9",
+      "right": "25"
+     },
+     "math": [
+      "What number goes in the box? □ + 9 = 25",
+      "Undo the adding: take away",
+      "25 − 9 = 16"
+     ],
+     "role": "concept",
+     "instance": "gen:acmissing:0,16,9"
+    },
+    {
+     "title": "Placing digit cards to make the largest or smallest sum or difference",
+     "text": [
+      "A digit in the tens place is worth ten times as much as in the ones place, so the digits that matter most go in the tens places.",
+      "For the largest sum, put the two biggest digits in the tens places; for the smallest sum, the two smallest. For the largest difference, make the biggest number you can and take away the smallest number the other two cards make."
+     ],
+     "math": [
+      "Use each of the digit cards in the picture (4, 5, 2, 8) once to make two two-digit numbers. What is the largest sum you can get?",
+      "Put the digits so the numbers are 84 and 52",
+      "84 + 52 = 136"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Tens",
+       "Ones",
+       "",
+       "Tens",
+       "Ones"
+      ],
+      "rows": [
+       [
+        "□",
+        "□",
+        "+",
+        "□",
+        "□"
+       ]
+      ],
+      "note": "4, 5, 2, 8"
+     }
+    },
+    {
+     "title": "Related facts: addition and subtraction, multiplication and division",
+     "text": [
+      "Adding and taking away undo each other, and so do multiplying and dividing: a + b = c gives c − a = b and c − b = a; a × b = c gives c ÷ a = b and c ÷ b = a.",
+      "Start the subtraction (or division) with the biggest number of the family, the total (or product). To check a subtraction, add the answer to the number taken away; to check a division, multiply the divisor by the quotient."
+     ],
+     "math": [
+      "Divya worked out 7,399 − 5,118 = 2,281. Which addition can Divya use to check this answer?",
+      "Adding and taking away (or multiplying and dividing) undo each other, so the related fact is 5,118 + 2,281 = 7,399"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "Whole",
+       "Part",
+       "Part"
+      ],
+      "rows": [
+       [
+        7399,
+        2281,
+        5118
+       ]
+      ]
+     }
+    }
+   ],
+   "diagnostics": [
+    "gen:acmissing:3,3,10",
+    "gen:acmissing:3,3,9",
+    "gen:acmissing:3,2,8"
+   ],
+   "strategies": [
+    {
+     "id": "box_plus_k",
+     "title": "A number was added to the box",
+     "kind": "procedural",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.box-plus-k@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "A number was added to the box",
+       "text": [
+        "Ask what was done to the box: a number was added to it, and the total is on the other side.",
+        "Undo the adding: take that number away from the total. Then put your answer in the box and check that the sentence is true."
+       ],
+       "math": [
+        "□ + 10 = 21",
+        "10 was added to the box: undo it by taking 10 away",
+        "21 − 10 = 11",
+        "Check: 11 + 10 = 21"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:0,11,10",
+       "widget": {
+        "type": "balance",
+        "left": "□ + 10",
+        "right": "21"
+       }
+      }
+     ],
+     "guided": "gen:acmissing:0,11,13",
+     "check": "gen:acmissing:0,11,17"
+    },
+    {
+     "id": "n_minus_box",
+     "title": "The box is the number taken away",
+     "kind": "procedural",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.n-minus-box@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "The box is the number taken away",
+       "text": [
+        "Here the box is taken away from the first number, and the number on the right is what is left.",
+        "So the box is the first number take away what is left. Check by taking your answer away from the first number."
+       ],
+       "math": [
+        "20 − □ = 6",
+        "The box was taken away from 20 and 6 is left, so the box is 20 − 6",
+        "20 − 6 = 14",
+        "Check: 20 − 14 = 6"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:1,14,6",
+       "widget": {
+        "type": "balance",
+        "left": "20 − □",
+        "right": "6"
+       }
+      }
+     ],
+     "guided": "gen:acmissing:1,15,5:mc",
+     "check": "gen:acmissing:1,15,13:mc"
+    },
+    {
+     "id": "box_minus_k",
+     "title": "A number was taken away from the box",
+     "kind": "procedural",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.box-minus-k@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "A number was taken away from the box",
+       "text": [
+        "A number was taken away from the box, and the number on the right is what is left.",
+        "Undo the taking away: add that number back to what is left. Check by taking it away again."
+       ],
+       "math": [
+        "□ − 3 = 15",
+        "3 was taken away from the box: undo it by adding 3 back",
+        "15 + 3 = 18",
+        "Check: 18 − 3 = 15"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:2,18,3",
+       "widget": {
+        "type": "balance",
+        "left": "□ − 3",
+        "right": "15"
+       }
+      }
+     ],
+     "guided": "gen:acmissing:2,18,2:mc",
+     "check": "gen:acmissing:2,10,5"
+    },
+    {
+     "id": "k_times_box",
+     "title": "The box was multiplied",
+     "kind": "procedural",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.k-times-box@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "The box was multiplied",
+       "text": [
+        "The box was multiplied by a number, and the product is on the other side.",
+        "Undo the multiplying: divide the product by that number, using the times table. Check by multiplying."
+       ],
+       "math": [
+        "7 × □ = 28",
+        "The box was multiplied by 7: undo it by dividing by 7",
+        "28 ÷ 7 = 4",
+        "Check: 7 × 4 = 28"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:3,4,7",
+       "widget": {
+        "type": "balance",
+        "left": "7 × □",
+        "right": "28"
+       }
+      }
+     ],
+     "guided": "gen:acmissing:3,4,8:mc",
+     "check": "gen:acmissing:3,5,6"
+    },
+    {
+     "id": "subtraction_fact",
+     "title": "The subtraction fact of an addition",
+     "kind": "conceptual",
+     "scope": {
+      "family": "acfacts",
+      "subSkill": "facts.subtraction-from-addition@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "The subtraction fact of an addition",
+       "text": [
+        "An addition fact and its subtraction facts are one family: a total and its two parts.",
+        "A subtraction fact starts with the total and takes away one part; what is left is the other part."
+       ],
+       "math": [
+        "6,712 + 4,470 = 11,182. Which subtraction fact belongs to the same fact family?",
+        "Check: 11,182 − 6,712 = 4,470 is true",
+        "So: 11,182 − 6,712 = 4,470"
+       ],
+       "role": "strategy",
+       "instance": "gen:acfacts:0,27,0"
+      }
+     ],
+     "guided": "gen:acfacts:0,27,1",
+     "check": "gen:acfacts:0,29,0"
+    },
+    {
+     "id": "check_by_addition",
+     "title": "Check a subtraction by adding",
+     "kind": "conceptual",
+     "scope": {
+      "family": "acfacts",
+      "subSkill": "facts.check-subtraction-by-addition@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Check a subtraction by adding",
+       "text": [
+        "Adding undoes taking away.",
+        "To check a subtraction, add the answer to the number taken away: you should get the number you started with."
+       ],
+       "math": [
+        "Priya worked out 5,449 − 425 = 5,024. Which addition can Priya use to check this answer?",
+        "Check: 5,024 + 425 = 5,449 is true",
+        "So: 5,024 + 425 = 5,449"
+       ],
+       "role": "strategy",
+       "instance": "gen:acfacts:1,19,0"
+      }
+     ],
+     "guided": "gen:acfacts:1,19,1",
+     "check": "gen:acfacts:1,17,0"
+    },
+    {
+     "id": "division_fact",
+     "title": "The division fact of a multiplication",
+     "kind": "conceptual",
+     "scope": {
+      "family": "acfacts",
+      "subSkill": "facts.division-from-multiplication@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "The division fact of a multiplication",
+       "text": [
+        "Multiplying and dividing undo each other: a product and its two factors are one family.",
+        "A division fact starts with the product and divides it by one factor; the answer is the other factor."
+       ],
+       "math": [
+        "11 × 12 = 132. Which division fact comes from this multiplication fact?",
+        "Check: 132 ÷ 11 = 12 is true",
+        "So: 132 ÷ 11 = 12"
+       ],
+       "role": "strategy",
+       "instance": "gen:acfacts:2,9,0"
+      }
+     ],
+     "guided": "gen:acfacts:2,9,1",
+     "check": "gen:acfacts:2,37,1"
+    },
+    {
+     "id": "dividend_divisor_quotient",
+     "title": "Dividend = divisor × quotient",
+     "kind": "conceptual",
+     "scope": {
+      "family": "acfacts",
+      "subSkill": "facts.dividend-is-divisor-times-quotient@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "Dividend = divisor × quotient",
+       "text": [
+        "In a division the dividend is the number being divided, the divisor divides it and the quotient is the answer.",
+        "Multiplying undoes dividing, so the dividend equals the divisor times the quotient."
+       ],
+       "math": [
+        "In 110 ÷ 10 = 11, 110 is the dividend, 10 the divisor and 11 the quotient. Which sentence shows dividend = divisor × quotient for it?",
+        "Check: 10 × 11 = 110, so the sentence is true",
+        "So: 110 = 10 × 11"
+       ],
+       "role": "strategy",
+       "instance": "gen:acfacts:3,8,0"
+      }
+     ],
+     "guided": "gen:acfacts:3,4,0",
+     "check": "gen:acfacts:3,14,0"
+    },
+    {
+     "id": "fix_added_both",
+     "title": "Not both numbers added",
+     "kind": "procedural",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.box-plus-k@1"
+     },
+     "addresses": "added-both",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Not both numbers added: what went wrong",
+       "text": [
+        "Both numbers you can see were added. Adding them never undoes what was done to the box.",
+        "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."
+       ],
+       "math": [
+        "Not 12, but 8"
+       ],
+       "role": "misconception",
+       "instance": "gen:acmissing:0,8,2",
+       "widget": {
+        "type": "balance",
+        "left": "□ + 2",
+        "right": "10"
+       }
+      },
+      {
+       "title": "Not both numbers added: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "□ + 2 = 10",
+        "2 was added to the box: undo it by taking 2 away",
+        "10 − 2 = 8",
+        "Check: 8 + 2 = 10"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:0,8,2"
+      }
+     ],
+     "guided": "gen:acmissing:0,8,3:mc",
+     "check": "gen:acmissing:0,11,16:mc"
+    },
+    {
+     "id": "fix_added_both_taken",
+     "title": "Not both numbers added",
+     "kind": "procedural",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.n-minus-box@1"
+     },
+     "addresses": "added-both",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Not both numbers added: what went wrong",
+       "text": [
+        "Both numbers you can see were added. Adding them never undoes what was done to the box.",
+        "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."
+       ],
+       "math": [
+        "Not 21, but 15"
+       ],
+       "role": "misconception",
+       "instance": "gen:acmissing:1,15,3",
+       "widget": {
+        "type": "balance",
+        "left": "18 − □",
+        "right": "3"
+       }
+      },
+      {
+       "title": "Not both numbers added: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "18 − □ = 3",
+        "The box was taken away from 18 and 3 is left, so the box is 18 − 3",
+        "18 − 3 = 15",
+        "Check: 18 − 15 = 3"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:1,15,3"
+      }
+     ],
+     "guided": "gen:acmissing:1,15,4:mc",
+     "check": "gen:acmissing:1,15,7"
+    },
+    {
+     "id": "fix_took_away_again",
+     "title": "Add it back, do not take it away again",
+     "kind": "procedural",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.box-minus-k@1"
+     },
+     "addresses": "took-away-again",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Add it back, do not take it away again: what went wrong",
+       "text": [
+        "The number was taken away a second time.",
+        "The box is the number before anything was taken away, so add the number back to what is left."
+       ],
+       "math": [
+        "Not 4, but 18"
+       ],
+       "role": "misconception",
+       "instance": "gen:acmissing:2,18,7",
+       "widget": {
+        "type": "balance",
+        "left": "□ − 7",
+        "right": "11"
+       }
+      },
+      {
+       "title": "Add it back, do not take it away again: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "□ − 7 = 11",
+        "7 was taken away from the box: undo it by adding 7 back",
+        "11 + 7 = 18",
+        "Check: 18 − 7 = 11"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:2,18,7"
+      }
+     ],
+     "guided": "gen:acmissing:2,10,3:mc",
+     "check": "gen:acmissing:2,10,4:mc"
+    }
+   ],
+   "practice": [
+    "gen:acmissing:1,3,20",
+    "gen:acmissing:0,10,3:mc",
+    "gen:acmissing:2,11,7",
+    "gen:acplace:87,2",
+    "gen:acfacts:3,33,0"
+   ],
+   "transfer": [
+    "gen:acmissing:3,4,9:mc",
+    "gen:acplace:73,1:w",
+    "gen:acfacts:3,15,0:w"
+   ],
+   "retention": [
+    "gen:acmissing:0,20,12",
+    "gen:acplace:111,1:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "acmissing",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "acmissing",
+     "version": "1.0.0"
+    },
+    {
+     "family": "acplace",
+     "version": "1.0.0"
+    },
+    {
+     "family": "acfacts",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "acmissing",
+    "seed": [
+     0,
+     16,
+     9
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:acmissing:0,16,9"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.algebra.linear-intro",
+   "title": "Solving a one-step equation",
+   "chapter": [
+    {
+     "title": "Solving a one-step equation",
+     "text": [
+      "An equation is a balance: both sides have the same value. Doing the opposite operation to both sides keeps it balanced and leaves x alone; put your answer back in to check."
+     ],
+     "math": [
+      "Find x: 3x = 33.",
+      "Divide both sides by 3: x = 33 ÷ 3 = 11"
+     ],
+     "role": "concept",
+     "instance": "gen:ahone:2,3,11"
+    }
+   ],
+   "diagnostics": [
+    "gen:ahone:3,2,12",
+    "gen:ahone:2,5,1",
+    "gen:ahone:3,2,18"
+   ],
+   "strategies": [
+    {
+     "id": "x_plus_a",
+     "title": "A number is added to x",
+     "kind": "procedural",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-plus-a@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "A number is added to x",
+       "text": [
+        "A number is added to x.",
+        "Take that number away from both sides, so x is alone. Then put your answer back into the equation to check it."
+       ],
+       "math": [
+        "Find x: x + 4 = 9.",
+        "Take 4 from both sides: x = 9 − 4 = 5",
+        "Check: 5 + 4 = 9"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:0,4,5"
+      }
+     ],
+     "guided": "gen:ahone:0,17,18:mc",
+     "check": "gen:ahone:0,17,14"
+    },
+    {
+     "id": "x_minus_a",
+     "title": "A number is taken away from x",
+     "kind": "procedural",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-minus-a@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "A number is taken away from x",
+       "text": [
+        "A number is taken away from x.",
+        "Add that number to both sides, so x is alone. Then put your answer back into the equation to check it."
+       ],
+       "math": [
+        "Find x: x − 5 = 4.",
+        "Add 5 to both sides: x = 4 + 5 = 9",
+        "Check: 9 − 5 = 4"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:1,5,9"
+      }
+     ],
+     "guided": "gen:ahone:1,2,18:mc",
+     "check": "gen:ahone:1,6,11"
+    },
+    {
+     "id": "a_times_x",
+     "title": "x is multiplied by a number",
+     "kind": "procedural",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.a-times-x@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "x is multiplied by a number",
+       "text": [
+        "The number written next to x multiplies it.",
+        "Divide both sides by that number, so x is alone. Check by multiplying."
+       ],
+       "math": [
+        "Find x: 2x = 24.",
+        "Divide both sides by 2: x = 24 ÷ 2 = 12",
+        "Check: 2 × 12 = 24"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:2,2,12"
+      }
+     ],
+     "guided": "gen:ahone:2,2,13:mc",
+     "check": "gen:ahone:2,2,14"
+    },
+    {
+     "id": "x_divided_by_a",
+     "title": "x is divided by a number",
+     "kind": "procedural",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-divided-by-a@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "x is divided by a number",
+       "text": [
+        "x is divided by a number.",
+        "Multiply both sides by that number, so x is alone. Check by dividing."
+       ],
+       "math": [
+        "Find x: x ÷ 6 = 20.",
+        "Multiply both sides by 6: x = 20 × 6 = 120",
+        "Check: 120 ÷ 6 = 20"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:3,6,20"
+      }
+     ],
+     "guided": "gen:ahone:3,7,16:mc",
+     "check": "gen:ahone:3,7,10"
+    },
+    {
+     "id": "fix_same_operation_add",
+     "title": "Do the opposite, not the same again",
+     "kind": "procedural",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-plus-a@1"
+     },
+     "addresses": "same-operation",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Do the opposite, not the same again: what went wrong",
+       "text": [
+        "The same operation was done again instead of its opposite.",
+        "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."
+       ],
+       "math": [
+        "Not 36, but 14"
+       ],
+       "role": "misconception",
+       "instance": "gen:ahone:0,11,14"
+      },
+      {
+       "title": "Do the opposite, not the same again: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Find x: x + 11 = 25.",
+        "Take 11 from both sides: x = 25 − 11 = 14",
+        "Check: 14 + 11 = 25"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:0,11,14"
+      }
+     ],
+     "guided": "gen:ahone:0,4,9:mc",
+     "check": "gen:ahone:0,17,15:mc"
+    },
+    {
+     "id": "fix_same_operation_take",
+     "title": "Do the opposite, not the same again",
+     "kind": "procedural",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-minus-a@1"
+     },
+     "addresses": "same-operation",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Do the opposite, not the same again: what went wrong",
+       "text": [
+        "The same operation was done again instead of its opposite.",
+        "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."
+       ],
+       "math": [
+        "Not 3, but 9"
+       ],
+       "role": "misconception",
+       "instance": "gen:ahone:1,3,9"
+      },
+      {
+       "title": "Do the opposite, not the same again: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Find x: x − 3 = 6.",
+        "Add 3 to both sides: x = 6 + 3 = 9",
+        "Check: 9 − 3 = 6"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:1,3,9"
+      }
+     ],
+     "guided": "gen:ahone:1,6,16:mc",
+     "check": "gen:ahone:1,8,17"
+    },
+    {
+     "id": "fix_subtract_coefficient",
+     "title": "Divide by the number next to x",
+     "kind": "procedural",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.a-times-x@1"
+     },
+     "addresses": "subtract-coefficient",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Divide by the number next to x: what went wrong",
+       "text": [
+        "The number next to x was taken away.",
+        "That number multiplies x, so undo it by dividing both sides by it."
+       ],
+       "math": [
+        "Not 34, but 18"
+       ],
+       "role": "misconception",
+       "instance": "gen:ahone:2,2,18"
+      },
+      {
+       "title": "Divide by the number next to x: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Find x: 2x = 36.",
+        "Divide both sides by 2: x = 36 ÷ 2 = 18",
+        "Check: 2 × 18 = 36"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:2,2,18"
+      }
+     ],
+     "guided": "gen:ahone:2,2,10:mc",
+     "check": "gen:ahone:2,2,15:mc"
+    },
+    {
+     "id": "fix_add_for_multiply",
+     "title": "Multiply, do not add",
+     "kind": "procedural",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-divided-by-a@1"
+     },
+     "addresses": "add-for-multiply",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Multiply, do not add: what went wrong",
+       "text": [
+        "The number was added instead of multiplied.",
+        "x was divided by the number, so undo it by multiplying both sides by it."
+       ],
+       "math": [
+        "Not 24, but 119"
+       ],
+       "role": "misconception",
+       "instance": "gen:ahone:3,7,17"
+      },
+      {
+       "title": "Multiply, do not add: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Find x: x ÷ 7 = 17.",
+        "Multiply both sides by 7: x = 17 × 7 = 119",
+        "Check: 119 ÷ 7 = 17"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:3,7,17"
+      }
+     ],
+     "guided": "gen:ahone:3,7,14:mc",
+     "check": "gen:ahone:3,7,11:mc"
+    }
+   ],
+   "practice": [
+    "gen:ahone:1,4,15",
+    "gen:ahone:1,4,12:mc",
+    "gen:ahone:2,3,16"
+   ],
+   "transfer": [
+    "gen:ahone:1,4,13:mc",
+    "gen:ahone:2,3,17:w"
+   ],
+   "retention": [
+    "gen:ahone:2,3,10",
+    "gen:ahone:3,2,13:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "ahone",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "ahone",
+    "seed": [
+     2,
+     3,
+     11
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:ahone:2,3,11"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.reasoning.puzzle-strategy",
+   "title": "Finding a missing digit by undoing",
+   "chapter": [
+    {
+     "title": "Finding a missing digit by undoing",
+     "text": [
+      "A sum or difference is a true sentence. When the hidden digit is in the first number, undo the operation to find the whole first number, then read the digit."
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "",
+       "H",
+       "T",
+       "O"
+      ],
+      "rows": [
+       [
+        "",
+        "5",
+        "7",
+        "□"
+       ],
+       [
+        "+",
+        "2",
+        "3",
+        "9"
+       ],
+       [
+        "=",
+        "8",
+        "1",
+        "1"
+       ]
+      ]
+     },
+     "math": [
+      "Find the missing digit: 57□ + 239 = 811. Which digit goes in the box □?",
+      "The column to the right needs no regrouping (nothing is carried or exchanged)",
+      "Work the hidden column, using the carry: the missing digit is 2"
+     ],
+     "role": "concept",
+     "instance": "gen:afmissd:25,2,0,0"
+    },
+    {
+     "title": "Winning move in a take-away game",
+     "text": [
+      "Work backwards from the end. Some numbers of counters are \"safe\" to leave for the other player: from them, whatever they take, you can get back to the next safe number.",
+      "If each turn takes 1 to k, the safe numbers go up in steps of k + 1 (0, k + 1, 2(k + 1) … when the last counter wins; 1 more than these when it loses). Take enough to leave a safe number."
+     ],
+     "math": [
+      "There are 26 counters in the picture. Two players take turns. On each turn a player removes 1, 2 or 3 counters. The player who takes the last counter wins. It is your turn. How many counters should you take now so that you can always win?",
+      "Whatever the other player takes, you can make the pair of turns add up to 4. So leave a number that is a multiple of 4",
+      "26 ÷ 4 leaves remainder 2: take 2"
+     ],
+     "widget": {
+      "type": "dots",
+      "count": 26,
+      "rows": 3
+     }
+    },
+    {
+     "title": "River-crossing puzzles: the fewest crossings",
+     "text": [
+      "Act the puzzle out one trip at a time and look for the pattern that repeats. A round trip (across and back) is what moves people, and the boat's rower has to come back each time.",
+      "Work out what one full round achieves (how many more people end up across), count how many rounds are needed before the last trip, then add the last trip."
+     ],
+     "math": [
+      "16 scouts must cross a river in one small boat. The boat holds at most 2 people, and someone must be in it to row it, so after each trip across someone rows it back. What is the smallest number of crossings needed to get all 16 scouts across?",
+      "Each round trip (across and back) leaves 1 more person on the far bank, because one rows the boat back",
+      "Before the last trip, 14 people must be moved by round trips: 14 ÷ 1 rounded up = 14 round trips",
+      "28 crossings for the round trips + 1 last trip with a full boat = 29"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:afmissd:52,0,0,1",
+    "gen:afmissd:22,0,0,0",
+    "gen:afmissd:44,0,1,1"
+   ],
+   "strategies": [
+    {
+     "id": "addend_digit",
+     "title": "A digit hidden in a number being added",
+     "kind": "procedural",
+     "scope": {
+      "family": "afmissd",
+      "subSkill": "digit.missing-in-addend@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "A digit hidden in a number being added",
+       "text": [
+        "The two numbers being added make the total, so the number with the hidden digit is a part.",
+        "A missing part is the total take away the other part. Work that out, read the digit in the box's place, and check by doing the whole addition."
+       ],
+       "math": [
+        "4□8 + 255 = 713.",
+        "The first number is the total take away the other part: 713 − 255 = 458",
+        "4□8 = 458, so the missing digit is 5",
+        "Check: 458 + 255 = 713"
+       ],
+       "role": "strategy",
+       "instance": "gen:afmissd:8,1,0,0",
+       "widget": {
+        "type": "table",
+        "head": [
+         "",
+         "H",
+         "T",
+         "O"
+        ],
+        "rows": [
+         [
+          "",
+          "4",
+          "□",
+          "8"
+         ],
+         [
+          "+",
+          "2",
+          "5",
+          "5"
+         ],
+         [
+          "=",
+          "7",
+          "1",
+          "3"
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afmissd:3,1,0,0:mc",
+     "check": "gen:afmissd:27,1,0,0"
+    },
+    {
+     "id": "first_number_digit",
+     "title": "A digit hidden in the first number of a subtraction",
+     "kind": "procedural",
+     "scope": {
+      "family": "afmissd",
+      "subSkill": "digit.missing-in-first-number@1"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "title": "A digit hidden in the first number of a subtraction",
+       "text": [
+        "The first number of a subtraction is what you started with.",
+        "Undo the taking away: add the answer to the number taken away, read the digit in the box's place, and check by doing the subtraction."
+       ],
+       "math": [
+        "38□ − 168 = 218.",
+        "The first number is the answer add the number taken away: 218 + 168 = 386",
+        "38□ = 386, so the missing digit is 6",
+        "Check: 386 − 168 = 218"
+       ],
+       "role": "strategy",
+       "instance": "gen:afmissd:32,2,0,1",
+       "widget": {
+        "type": "table",
+        "head": [
+         "",
+         "H",
+         "T",
+         "O"
+        ],
+        "rows": [
+         [
+          "",
+          "3",
+          "8",
+          "□"
+         ],
+         [
+          "−",
+          "1",
+          "6",
+          "8"
+         ],
+         [
+          "=",
+          "2",
+          "1",
+          "8"
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afmissd:14,0,0,1:mc",
+     "check": "gen:afmissd:27,1,0,1:mc"
+    }
+   ],
+   "practice": [
+    "gen:afmissd:23,1,1,1",
+    "gen:afmissd:23,1,1,0:mc",
+    "gen:afmissd:21,0,1,1",
+    "gen:afnim:26,3,1",
+    "gen:afriver:0,16,6"
+   ],
+   "transfer": [
+    "gen:afmissd:54,1,0,0:mc",
+    "gen:afnim:19,2,0:w",
+    "gen:afriver:0,9,6:w"
+   ],
+   "retention": [
+    "gen:afmissd:21,0,1,0",
+    "gen:afnim:11,4,0:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "afmissd",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "afmissd",
+     "version": "1.0.0"
+    },
+    {
+     "family": "afnim",
+     "version": "1.0.0"
+    },
+    {
+     "family": "afriver",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "afmissd",
+    "seed": [
+     25,
+     2,
+     0,
+     0
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:afmissd:25,2,0,0"
+    ]
+   }
+  },
+  {
    "competency": "MATH.algebra.variables",
    "title": "A value on a straight line",
    "chapter": [
@@ -19075,242 +20188,6 @@
    }
   },
   {
-   "competency": "MATH.algebra.missing-number",
-   "title": "Finding the missing number in a number sentence",
-   "chapter": [
-    {
-     "title": "Finding the missing number in a number sentence",
-     "text": [
-      "Adding and taking away undo each other, and so do multiplying and dividing, so you can work backwards to the missing number."
-     ],
-     "math": [
-      "What number goes in the box? □ + 9 = 25",
-      "Undo the adding: take away",
-      "25 − 9 = 16"
-     ],
-     "widget": {
-      "type": "balance",
-      "left": "□ + 9",
-      "right": "25"
-     },
-     "tip": "The two numbers you can see were added. The box plus 9 makes 25, so the box is 25 − 9.",
-     "role": "concept",
-     "instance": "gen:acmissing:0,16,9"
-    },
-    {
-     "title": "Placing digit cards to make the largest or smallest sum or difference",
-     "text": [
-      "A digit in the tens place is worth ten times as much as in the ones place, so the digits that matter most go in the tens places.",
-      "For the largest sum, put the two biggest digits in the tens places; for the smallest sum, the two smallest. For the largest difference, make the biggest number you can and take away the smallest number the other two cards make."
-     ],
-     "math": [
-      "Use each of the digit cards in the picture (4, 5, 2, 8) once to make two two-digit numbers. What is the largest sum you can get?",
-      "Put the digits so the numbers are 84 and 52",
-      "84 + 52 = 136"
-     ],
-     "widget": {
-      "type": "table",
-      "head": [
-       "Tens",
-       "Ones",
-       "",
-       "Tens",
-       "Ones"
-      ],
-      "rows": [
-       [
-        "□",
-        "□",
-        "+",
-        "□",
-        "□"
-       ]
-      ],
-      "note": "4, 5, 2, 8"
-     }
-    },
-    {
-     "title": "Related facts: addition and subtraction, multiplication and division",
-     "text": [
-      "Adding and taking away undo each other, and so do multiplying and dividing: a + b = c gives c − a = b and c − b = a; a × b = c gives c ÷ a = b and c ÷ b = a.",
-      "Start the subtraction (or division) with the biggest number of the family, the total (or product). To check a subtraction, add the answer to the number taken away; to check a division, multiply the divisor by the quotient."
-     ],
-     "math": [
-      "Divya worked out 7,399 − 5,118 = 2,281. Which addition can Divya use to check this answer?",
-      "Adding and taking away (or multiplying and dividing) undo each other, so the related fact is 5,118 + 2,281 = 7,399"
-     ],
-     "widget": {
-      "type": "table",
-      "head": [
-       "Whole",
-       "Part",
-       "Part"
-      ],
-      "rows": [
-       [
-        7399,
-        2281,
-        5118
-       ]
-      ]
-     }
-    }
-   ],
-   "diagnostics": [
-    "gen:acmissing:3,3,10",
-    "gen:acmissing:3,3,9",
-    "gen:acmissing:3,2,8"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Read the sentence and ask what was done to the box, then work backwards. If a number was added to the box, take it away. If a number was taken away from the box, add it back. If the box was multiplied by a number, divide by that number. If the box was taken away from a number, the box is the gap: the first number take away the answer. Check by putting your answer in the box."
-       ],
-       "math": [
-        "What number goes in the box? □ + 3 = 13",
-        "Undo the adding: take away",
-        "13 − 3 = 10"
-       ],
-       "widget": {
-        "type": "balance",
-        "left": "□ + 3",
-        "right": "13"
-       },
-       "role": "worked-example",
-       "instance": "gen:acmissing:0,10,3"
-      }
-     ],
-     "guided": "gen:acmissing:2,11,7",
-     "check": "gen:acmissing:1,18,9"
-    },
-    {
-     "id": "count_on",
-     "title": "Count on to find the gap",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Count on to find the gap",
-       "text": [
-        "For □ + 7 = 15, start at 7 and count on to 15: 8, 9, … 15 is 8 counts.",
-        "The number of counts is the missing number."
-       ],
-       "math": [
-        "What number goes in the box? 9 × □ = 36",
-        "Undo the multiplying: divide",
-        "36 ÷ 9 = 4"
-       ],
-       "role": "strategy",
-       "instance": "gen:acmissing:3,4,9"
-      }
-     ],
-     "guided": "gen:acmissing:2,11,6",
-     "check": "gen:acmissing:1,18,8:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:acmissing:1,3,20",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “What number goes in the box? 23 − □ = 20” A common wrong answer is 43.",
-        "The two numbers you can see were added. Taking the box away from 23 leaves 20, so the box is 23 − 20."
-       ],
-       "math": [
-        "Not 43, but 3"
-       ]
-      }
-     ],
-     "guided": "gen:acmissing:1,5,7",
-     "check": "gen:acmissing:0,10,6:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Find differences within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Read the sentence and ask what was done to the box, then work backwards. If a number was added to the box, take it away. If a number was taken away from the box, add it back. If the box was multiplied by a number, divide by that number. If the box was taken away from a number, the box is the gap: the first number take away the answer. Check by putting your answer in the box."
-       ]
-      }
-     ],
-     "guided": "gen:acmissing:2,15,10",
-     "check": "gen:acmissing:0,10,7"
-    }
-   ],
-   "practice": [
-    "gen:acmissing:1,5,6",
-    "gen:acmissing:2,15,11:mc",
-    "gen:acmissing:0,20,13",
-    "gen:acplace:87,2",
-    "gen:acfacts:3,33,0"
-   ],
-   "transfer": [
-    "gen:acmissing:0,20,10:w",
-    "gen:acplace:73,1:w",
-    "gen:acfacts:3,15,0:w"
-   ],
-   "retention": [
-    "gen:acmissing:0,20,12",
-    "gen:acplace:111,1:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "acmissing",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "acmissing",
-     "version": "1.0.0"
-    },
-    {
-     "family": "acplace",
-     "version": "1.0.0"
-    },
-    {
-     "family": "acfacts",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "acmissing",
-    "seed": [
-     0,
-     16,
-     9
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:acmissing:0,16,9",
-     "gen:acmissing:1,3,20",
-     "gen:acmissing:0,10,3"
-    ]
-   }
-  },
-  {
    "competency": "MATH.algebra.growing-patterns",
    "title": "Continuing a growing pattern",
    "chapter": [
@@ -26450,229 +27327,6 @@
    }
   },
   {
-   "competency": "MATH.reasoning.puzzle-strategy",
-   "title": "Finding a missing digit in a sum or difference",
-   "chapter": [
-    {
-     "title": "Finding a missing digit in a sum or difference",
-     "text": [
-      "A sum or difference is a true sentence, so each column must work out, including any regrouping with the column on its right (a ten carried in, or 1 exchanged for 10 ones)."
-     ],
-     "math": [
-      "Find the missing digit: 390 − 232 = 1□8. Which digit goes in the box □?",
-      "The column to the right is regrouped: 1 from this column is exchanged for 10 there, so this column has 1 less",
-      "Work the hidden column, using the exchange: the missing digit is 5"
-     ],
-     "tip": "In that column the smaller digit was taken from the larger one. When the top digit is smaller, regroup first: exchange 1 from the next column on the left for 10 in this column.",
-     "role": "concept",
-     "instance": "gen:afmissd:23,1,1,1"
-    },
-    {
-     "title": "Winning move in a take-away game",
-     "text": [
-      "Work backwards from the end. Some numbers of counters are \"safe\" to leave for the other player: from them, whatever they take, you can get back to the next safe number.",
-      "If each turn takes 1 to k, the safe numbers go up in steps of k + 1 (0, k + 1, 2(k + 1) … when the last counter wins; 1 more than these when it loses). Take enough to leave a safe number."
-     ],
-     "math": [
-      "There are 26 counters in the picture. Two players take turns. On each turn a player removes 1, 2 or 3 counters. The player who takes the last counter wins. It is your turn. How many counters should you take now so that you can always win?",
-      "Whatever the other player takes, you can make the pair of turns add up to 4. So leave a number that is a multiple of 4",
-      "26 ÷ 4 leaves remainder 2: take 2"
-     ],
-     "widget": {
-      "type": "dots",
-      "count": 26,
-      "rows": 3
-     }
-    },
-    {
-     "title": "River-crossing puzzles: the fewest crossings",
-     "text": [
-      "Act the puzzle out one trip at a time and look for the pattern that repeats. A round trip (across and back) is what moves people, and the boat's rower has to come back each time.",
-      "Work out what one full round achieves (how many more people end up across), count how many rounds are needed before the last trip, then add the last trip."
-     ],
-     "math": [
-      "16 scouts must cross a river in one small boat. The boat holds at most 2 people, and someone must be in it to row it, so after each trip across someone rows it back. What is the smallest number of crossings needed to get all 16 scouts across?",
-      "Each round trip (across and back) leaves 1 more person on the far bank, because one rows the boat back",
-      "Before the last trip, 14 people must be moved by round trips: 14 ÷ 1 rounded up = 14 round trips",
-      "28 crossings for the round trips + 1 last trip with a full boat = 29"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:afmissd:52,0,0,1",
-    "gen:afmissd:22,0,0,0",
-    "gen:afmissd:44,0,1,1"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Start from the ones column and move left. In each column, note whether the column regroups: a ten carried (addition) or 1 exchanged for 10 in the column on the right (subtraction), then find the digit that makes the hidden column right. Check by doing the whole calculation."
-       ],
-       "math": [
-        "Find the missing digit: 387 − 169 = □18. Which digit goes in the box □?",
-        "The column to the right needs no regrouping (nothing is carried or exchanged)",
-        "Work the hidden column, using the exchange: the missing digit is 2"
-       ],
-       "role": "worked-example",
-       "instance": "gen:afmissd:21,0,1,1"
-      }
-     ],
-     "guided": "gen:afmissd:25,2,0,0",
-     "check": "gen:afmissd:34,1,0,0"
-    },
-    {
-     "id": "try_digits",
-     "title": "Try the digits and check",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Try the digits and check",
-       "text": [
-        "Put a digit in the box and work out the whole sum.",
-        "If it is not right, see whether the answer came out too big or too small and try a better digit. Only one digit works."
-       ],
-       "math": [
-        "Find the missing digit: 5□4 + 281 = 835. Which digit goes in the box □?",
-        "The column to the right needs no regrouping (nothing is carried or exchanged)",
-        "Work the hidden column, using the carry: the missing digit is 5"
-       ],
-       "role": "strategy",
-       "instance": "gen:afmissd:54,1,0,0"
-      }
-     ],
-     "guided": "gen:afmissd:9,2,1,0",
-     "check": "gen:afmissd:34,1,0,1:mc"
-    },
-    {
-     "id": "undo",
-     "title": "Undo the operation",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Undo the operation",
-       "text": [
-        "A missing part of an addition is total − other part.",
-        "A missing first number of a subtraction is answer + number taken away. Work out that calculation and read off the digit."
-       ],
-       "math": [
-        "Find the missing digit: 8□1 − 363 = 508. Which digit goes in the box □?",
-        "The column to the right is regrouped: 1 from this column is exchanged for 10 there, so this column has 1 less",
-        "Work the hidden column, using the exchange: the missing digit is 7"
-       ],
-       "role": "strategy",
-       "instance": "gen:afmissd:54,1,0,1"
-      }
-     ],
-     "guided": "gen:afmissd:25,0,1,1",
-     "check": "gen:afmissd:11,0,1,1"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:afmissd:23,1,1,0",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Find the missing digit: 427 + 405 = 8□2. Which digit goes in the box □?” A common wrong answer is 2.",
-        "The ten carried from the column on the right was forgotten. When a column adds up to 10 or more, 1 goes to the next column."
-       ],
-       "math": [
-        "Not 2, but 3"
-       ]
-      }
-     ],
-     "guided": "gen:afmissd:18,1,0,0",
-     "check": "gen:afmissd:21,2,1,0:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Subtract with regrouping. If a step is slow, practise that skill first.",
-        "Then the method is: Start from the ones column and move left. In each column, note whether the column regroups: a ten carried (addition) or 1 exchanged for 10 in the column on the right (subtraction), then find the digit that makes the hidden column right. Check by doing the whole calculation."
-       ]
-      }
-     ],
-     "guided": "gen:afmissd:9,2,1,1",
-     "check": "gen:afmissd:11,0,1,0"
-    }
-   ],
-   "practice": [
-    "gen:afmissd:18,1,0,1",
-    "gen:afmissd:29,2,1,0:mc",
-    "gen:afmissd:29,2,1,1",
-    "gen:afnim:26,3,1",
-    "gen:afriver:0,16,6"
-   ],
-   "transfer": [
-    "gen:afmissd:55,2,1,0:w",
-    "gen:afnim:19,2,0:w",
-    "gen:afriver:0,9,6:w"
-   ],
-   "retention": [
-    "gen:afmissd:21,0,1,0",
-    "gen:afnim:11,4,0:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "afmissd",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "afmissd",
-     "version": "1.0.0"
-    },
-    {
-     "family": "afnim",
-     "version": "1.0.0"
-    },
-    {
-     "family": "afriver",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "afmissd",
-    "seed": [
-     23,
-     1,
-     1,
-     1
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:afmissd:23,1,1,1",
-     "gen:afmissd:23,1,1,0",
-     "gen:afmissd:21,0,1,1"
-    ]
-   }
-  },
-  {
    "competency": "MATH.reasoning.systematic-enumeration",
    "title": "Counting every combination (one from each group)",
    "chapter": [
@@ -31098,173 +31752,6 @@
      "gen:agtree:1,62",
      "gen:agtree:2,9",
      "gen:agtree:2,8"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.algebra.linear-intro",
-   "title": "Solving a one-step equation",
-   "chapter": [
-    {
-     "title": "Solving a one-step equation",
-     "text": [
-      "An equation is a balance: both sides have the same value. Doing the opposite operation to both sides keeps it balanced and leaves x alone."
-     ],
-     "math": [
-      "Find x: x − 4 = 11.",
-      "Add 4 to both sides: x = 11 + 4 = 15"
-     ],
-     "widget": {
-      "type": "balance",
-      "left": "x − 4",
-      "right": "11"
-     },
-     "tip": "4 was taken away from 11; x − 4 = 11 is undone by adding 4 back.",
-     "role": "concept",
-     "instance": "gen:ahone:1,4,15"
-    }
-   ],
-   "diagnostics": [
-    "gen:ahone:3,2,12",
-    "gen:ahone:2,5,1",
-    "gen:ahone:3,2,18"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Look at what is done to x (+, −, ×, ÷). Do the opposite to both sides. Then put your answer back into the equation to check it."
-       ],
-       "math": [
-        "Find x: x − 4 = 8.",
-        "Add 4 to both sides: x = 8 + 4 = 12"
-       ],
-       "widget": {
-        "type": "balance",
-        "left": "x − 4",
-        "right": "8"
-       },
-       "role": "worked-example",
-       "instance": "gen:ahone:1,4,12"
-      }
-     ],
-     "guided": "gen:ahone:2,3,16",
-     "check": "gen:ahone:1,4,10"
-    },
-    {
-     "id": "think_back",
-     "title": "Guess, check and improve",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Guess, check and improve",
-       "text": [
-        "Ask: which number makes the equation true? Try one, work out the left side, and compare.",
-        "If the left side is too big, try a smaller number; too small, try a bigger one."
-       ],
-       "math": [
-        "Find x: x − 4 = 9.",
-        "Add 4 to both sides: x = 9 + 4 = 13"
-       ],
-       "role": "strategy",
-       "instance": "gen:ahone:1,4,13"
-      }
-     ],
-     "guided": "gen:ahone:2,3,17",
-     "check": "gen:ahone:1,4,11:mc"
-    },
-    {
-     "id": "balance",
-     "title": "Keep the balance level",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Keep the balance level",
-       "text": [
-        "Picture the two sides on a balance.",
-        "Whatever you take off or add on one side, do the same on the other, until x is alone."
-       ],
-       "math": [
-        "Find x: 3x = 42.",
-        "Divide both sides by 3: x = 42 ÷ 3 = 14"
-       ],
-       "widget": {
-        "type": "balance",
-        "left": "3x",
-        "right": "42"
-       },
-       "role": "strategy",
-       "instance": "gen:ahone:2,3,14"
-      }
-     ],
-     "guided": "gen:ahone:2,3,15",
-     "check": "gen:ahone:0,14,20"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:ahone:2,3,11",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Find x: 3x = 33.” A common wrong answer is 30.",
-        "3 was taken away from 33; 3x means 3 × x, so divide by 3."
-       ],
-       "math": [
-        "Not 30, but 11"
-       ]
-      }
-     ],
-     "guided": "gen:ahone:3,2,11",
-     "check": "gen:ahone:0,9,9:mc"
-    }
-   ],
-   "practice": [
-    "gen:ahone:1,19,20",
-    "gen:ahone:3,2,16:mc",
-    "gen:ahone:3,2,17"
-   ],
-   "transfer": [
-    "gen:ahone:3,2,14:w"
-   ],
-   "retention": [
-    "gen:ahone:2,3,10",
-    "gen:ahone:3,2,13:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "ahone",
-    "version": "1.0.0"
-   },
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "ahone",
-    "seed": [
-     1,
-     4,
-     15
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:ahone:1,4,15",
-     "gen:ahone:2,3,11",
-     "gen:ahone:1,4,12"
     ]
    }
   },

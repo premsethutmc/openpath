@@ -3336,6 +3336,32 @@
    ]
   },
   {
+   "id": "MATH.algebra.linear-intro#a_times_x",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-intro",
+   "strategy": "a_times_x",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:5e6e87dbccdefed4a4864957cc4cecf7ca1386d5ecfa619dc11456076476043f",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.286Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.algebra.linear-intro#balance",
    "subject": "mathematics",
    "competency": "MATH.algebra.linear-intro",
@@ -3378,6 +3404,126 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.386Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    },
+    {
+     "contentHash": "sha256:61708bf71f5498449f1584c38ed6c80d1b9b7d0e8e9776ccf57c5d522c00665f",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.290Z",
+      "note": "content changed: the decision on sha256:d4b13b4955c8 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:d4b13b4955c808f96476eccefc498dcb1017e2e68c8c1881d9cbd4c18eba10af"
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-intro#fix_add_for_multiply",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-intro",
+   "strategy": "fix_add_for_multiply",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "add-for-multiply",
+   "revisions": [
+    {
+     "contentHash": "sha256:ab1e5219629f0610bba53b1288694e060f5a1d532c3a58902ee750c810887599",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.289Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-intro#fix_same_operation_add",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-intro",
+   "strategy": "fix_same_operation_add",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "same-operation",
+   "revisions": [
+    {
+     "contentHash": "sha256:5b99205e0238dfe648c784868b168efb6c59c51f195c89a0dc6ccf7286acfbbd",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.287Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-intro#fix_same_operation_take",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-intro",
+   "strategy": "fix_same_operation_take",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "same-operation",
+   "revisions": [
+    {
+     "contentHash": "sha256:46e50368e23d15c65413fb012db6f40223f29f418c35a6f4d2b749991106127f",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.288Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-intro#fix_subtract_coefficient",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-intro",
+   "strategy": "fix_subtract_coefficient",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "subtract-coefficient",
+   "revisions": [
+    {
+     "contentHash": "sha256:d121f4452cc9fe8afdc7effc06b6c3b111299517b034ecf72ae4a091b950c62d",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.289Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -3469,6 +3615,84 @@
      "knownIssues": [
       "Show the substitution check (12 − 4 = 8). Vary the check operation (×, ÷), not only x − 4. Resolve the machine flag worked-unverified."
      ],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-intro#x_divided_by_a",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-intro",
+   "strategy": "x_divided_by_a",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:e97aef4df0906e65e84bf5109208eda22401bb36f8b4ab347292dbea22945ec8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.286Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-intro#x_minus_a",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-intro",
+   "strategy": "x_minus_a",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:f78de9aaa6f113a4536423b2cecf87e75d17a432996bce6a25a2dfc1c2d823c1",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.285Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-intro#x_plus_a",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-intro",
+   "strategy": "x_plus_a",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:01d7db193fafa264d98c33b15e71a06d70ff7f3921cefd898cd407255beaf75d",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.285Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
      "scope": [
       "demonstration"
      ]
@@ -4474,6 +4698,58 @@
    ]
   },
   {
+   "id": "MATH.algebra.missing-number#box_minus_k",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.missing-number",
+   "strategy": "box_minus_k",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:a91fcb9d7ec6b47c42356d11f62445fa172ef033675007c3ed1c72e95ec7cac1",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.275Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.missing-number#box_plus_k",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.missing-number",
+   "strategy": "box_plus_k",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:8ef96a8af0f87e35ea3fd9ab6b3dbb50ef4c267046ff43e03e90f8418f92cbb6",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.272Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.algebra.missing-number#chapter",
    "subject": "mathematics",
    "competency": "MATH.algebra.missing-number",
@@ -4489,6 +4765,48 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.282Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    },
+    {
+     "contentHash": "sha256:dd6b0341e4cc35423c9385a415f97d7958ff2c5b093029dd9d261d65cf77a3a5",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.284Z",
+      "note": "content changed: the decision on sha256:a1531ee60a16 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:a1531ee60a163912205b4af5c588162682bbc499911ca96f27a2bed79c3e3d53"
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.missing-number#check_by_addition",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.missing-number",
+   "strategy": "check_by_addition",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:892469ba7ae05fa95696cb5b63df41ab92cb885ef3524dabf4e4ea4ac9f44996",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.279Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -4578,6 +4896,188 @@
    ]
   },
   {
+   "id": "MATH.algebra.missing-number#dividend_divisor_quotient",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.missing-number",
+   "strategy": "dividend_divisor_quotient",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:02dd295dfc47778973d606d6bb6a4685b3bd7bf1984895e81e4fb0ee8d744cf0",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.280Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.missing-number#division_fact",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.missing-number",
+   "strategy": "division_fact",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:74a929d6042111fb1d63be8b5639b93f167488d544910efc6a1592d3d9ad3ebd",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.279Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.missing-number#fix_added_both",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.missing-number",
+   "strategy": "fix_added_both",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "added-both",
+   "revisions": [
+    {
+     "contentHash": "sha256:28d5c0887e03957b2ae19b80450c0c1fa40890694a072eac72fa26b528952fca",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.281Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.missing-number#fix_added_both_taken",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.missing-number",
+   "strategy": "fix_added_both_taken",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "added-both",
+   "revisions": [
+    {
+     "contentHash": "sha256:b3dc0f14c4e2caecd36c6a5aa25ecdc2b006b5c32ba6d654bc330d5853a09506",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.282Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.missing-number#fix_took_away_again",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.missing-number",
+   "strategy": "fix_took_away_again",
+   "intervention": "procedural",
+   "misconceptionSpecific": true,
+   "addresses": "took-away-again",
+   "revisions": [
+    {
+     "contentHash": "sha256:18294fc96ba0392273343567c0217b36149296d6e054605dabc1cf766ace818f",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.283Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.missing-number#k_times_box",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.missing-number",
+   "strategy": "k_times_box",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:762cf1f5e77fc9d31b68362649bbd003860df1beb9eb5d9046846c3b2e399ba4",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.276Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.missing-number#n_minus_box",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.missing-number",
+   "strategy": "n_minus_box",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:4ef46d453443c527e15c1d91dc493383329561c6b301445b9d06e6fad6f66a1f",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.274Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.algebra.missing-number#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.algebra.missing-number",
@@ -4600,6 +5100,32 @@
      "knownIssues": [
       "Keep the content; change the check to a - box = b form (e.g. 30 - box = 12)."
      ],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.missing-number#subtraction_fact",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.missing-number",
+   "strategy": "subtraction_fact",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:25cfc84bcd264b7e0d2909749271731115f663ee8e2e3dd16adaf17e907b2cc2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.278Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
      "scope": [
       "demonstration"
      ]
@@ -35595,6 +36121,32 @@
    ]
   },
   {
+   "id": "MATH.reasoning.puzzle-strategy#addend_digit",
+   "subject": "mathematics",
+   "competency": "MATH.reasoning.puzzle-strategy",
+   "strategy": "addend_digit",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:a25685ce731cf09e853e7f4718bc3dc76fd96fdabed5c2795692f583ac7f2939",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.291Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.reasoning.puzzle-strategy#chapter",
    "subject": "mathematics",
    "competency": "MATH.reasoning.puzzle-strategy",
@@ -35617,6 +36169,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:f59ebcb0a47a3ef9338df1486f071547d14be4e63fd602b88e2afd521a8a4db8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.293Z",
+      "note": "content changed: the decision on sha256:6958632c0f1f (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:6958632c0f1fdac42060ea8677433ad8d0f555fddc1d76cea76a44f1cd0aae45"
     }
    ]
   },
@@ -35636,6 +36204,32 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.331Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.reasoning.puzzle-strategy#first_number_digit",
+   "subject": "mathematics",
+   "competency": "MATH.reasoning.puzzle-strategy",
+   "strategy": "first_number_digit",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:4693b855681902df22780680aebb5f146716ae480b5b2d59dee2979579e63f8a",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-02T16:48:05.292Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",

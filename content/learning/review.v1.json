@@ -30528,7 +30528,7 @@
    "competency": "MATH.algebra.linear-intro",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "a33e070e",
+   "contentHash": "6de64b97",
    "state": "draft",
    "history": [
     {
@@ -30553,6 +30553,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "a33e070e",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-02T17:33:22.485Z",
+     "contentHash": "6de64b97",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -30995,7 +31003,7 @@
    "competency": "MATH.algebra.missing-number",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "6a00bcce",
+   "contentHash": "c12f2284",
    "state": "draft",
    "history": [
     {
@@ -31044,6 +31052,14 @@
      "role": "engineer",
      "at": "2026-10-31T05:42:41.846Z",
      "contentHash": "6a00bcce",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-02T17:33:22.485Z",
+     "contentHash": "c12f2284",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -44028,7 +44044,7 @@
    "competency": "MATH.reasoning.puzzle-strategy",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "0eda8953",
+   "contentHash": "059412ea",
    "state": "draft",
    "history": [
     {
@@ -44069,6 +44085,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "0eda8953",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-02T17:33:22.485Z",
+     "contentHash": "059412ea",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

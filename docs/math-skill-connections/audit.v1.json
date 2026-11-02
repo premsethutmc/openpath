@@ -3,9 +3,9 @@
   "scope": "Every competency in the shared mathematics graph; unconfigured skills remain gaps.",
   "meaning": "Mechanical task/teaching/check/retention connections only. Diagnostic predictions are hypotheses, not learner diagnoses. Review eligibility is not educator approval. No curriculum completion claim.",
   "counts": {
-    "connected-configured-skills": 1,
+    "connected-configured-skills": 4,
     "missing-module": 17,
-    "missing-skill-metadata": 325,
+    "missing-skill-metadata": 322,
     "partial": 10
   },
   "rows": [
@@ -1161,13 +1161,14 @@
       "families": [
         "ahone"
       ],
-      "status": "missing-skill-metadata",
       "content": {
         "chapterScreens": 1,
-        "strategies": 4,
+        "strategies": 8,
         "eligibleStrategies": [
-          "think_back",
-          "balance"
+          "x_plus_a",
+          "x_minus_a",
+          "a_times_x",
+          "x_divided_by_a"
         ]
       },
       "working": {
@@ -1176,18 +1177,137 @@
           "gen:ahone:3,2,12",
           "gen:ahone:2,5,1",
           "gen:ahone:3,2,18",
-          "gen:ahone:2,3,16",
-          "gen:ahone:1,4,10",
-          "gen:ahone:2,3,17",
-          "gen:ahone:1,4,11:mc",
-          "gen:ahone:2,3,15",
-          "gen:ahone:0,14,20",
-          "gen:ahone:3,2,11",
-          "gen:ahone:0,9,9:mc"
+          "gen:ahone:0,17,18:mc",
+          "gen:ahone:0,17,14",
+          "gen:ahone:1,2,18:mc",
+          "gen:ahone:1,6,11",
+          "gen:ahone:2,2,13:mc",
+          "gen:ahone:2,2,14",
+          "gen:ahone:3,7,16:mc",
+          "gen:ahone:3,7,10",
+          "gen:ahone:0,4,9:mc",
+          "gen:ahone:0,17,15:mc",
+          "gen:ahone:1,6,16:mc",
+          "gen:ahone:1,8,17",
+          "gen:ahone:2,2,10:mc",
+          "gen:ahone:2,2,15:mc",
+          "gen:ahone:3,7,14:mc",
+          "gen:ahone:3,7,11:mc"
         ],
         "unsupported": []
       },
-      "skills": []
+      "status": "connected-configured-skills",
+      "mapping": "linear-intro-subskills@1",
+      "unmappedFamilies": [],
+      "unclassifiedQuestions": 0,
+      "skills": [
+        {
+          "skill": "one-step.x-plus-a@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                0
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "x_plus_a"
+          ],
+          "freshChecks": 16,
+          "retention": 20,
+          "diagnosticPredictions": [
+            "same-operation"
+          ],
+          "working": "bounded-checker-available",
+          "examples": {
+            "check": "gen:ahone:0,14,20",
+            "retention": "gen:ahone:0,19,8:mc"
+          }
+        },
+        {
+          "skill": "one-step.x-minus-a@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                1
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "x_minus_a"
+          ],
+          "freshChecks": 18,
+          "retention": 21,
+          "diagnosticPredictions": [
+            "same-operation"
+          ],
+          "working": "bounded-checker-available",
+          "examples": {
+            "check": "gen:ahone:1,4,10",
+            "retention": "gen:ahone:1,10,19"
+          }
+        },
+        {
+          "skill": "one-step.a-times-x@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                2
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "a_times_x"
+          ],
+          "freshChecks": 18,
+          "retention": 25,
+          "diagnosticPredictions": [
+            "same-operation",
+            "subtract-coefficient"
+          ],
+          "working": "bounded-checker-available",
+          "examples": {
+            "check": "gen:ahone:2,4,2:mc",
+            "retention": "gen:ahone:2,3,10"
+          }
+        },
+        {
+          "skill": "one-step.x-divided-by-a@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                3
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "x_divided_by_a"
+          ],
+          "freshChecks": 17,
+          "retention": 21,
+          "diagnosticPredictions": [
+            "add-for-multiply",
+            "same-operation"
+          ],
+          "working": "bounded-checker-available",
+          "examples": {
+            "check": "gen:ahone:3,7,20:mc",
+            "retention": "gen:ahone:3,2,13:mc"
+          }
+        }
+      ]
     },
     {
       "competency": "MATH.algebra.linear-programming",
@@ -1485,12 +1605,18 @@
         "acmissing",
         "acplace"
       ],
-      "status": "missing-skill-metadata",
       "content": {
         "chapterScreens": 3,
-        "strategies": 4,
+        "strategies": 11,
         "eligibleStrategies": [
-          "check_what_it_uses"
+          "box_plus_k",
+          "n_minus_box",
+          "box_minus_k",
+          "k_times_box",
+          "subtraction_fact",
+          "check_by_addition",
+          "division_fact",
+          "dividend_divisor_quotient"
         ]
       },
       "working": {
@@ -1500,17 +1626,262 @@
           "gen:acmissing:3,3,10",
           "gen:acmissing:3,3,9",
           "gen:acmissing:3,2,8",
-          "gen:acmissing:2,11,7",
-          "gen:acmissing:1,18,9",
-          "gen:acmissing:2,11,6",
-          "gen:acmissing:1,18,8:mc",
-          "gen:acmissing:1,5,7",
-          "gen:acmissing:0,10,6:mc",
-          "gen:acmissing:2,15,10",
-          "gen:acmissing:0,10,7"
+          "gen:acmissing:0,11,13",
+          "gen:acmissing:0,11,17",
+          "gen:acmissing:1,15,5:mc",
+          "gen:acmissing:1,15,13:mc",
+          "gen:acmissing:2,18,2:mc",
+          "gen:acmissing:2,10,5",
+          "gen:acmissing:3,4,8:mc",
+          "gen:acmissing:3,5,6",
+          "gen:acfacts:0,27,1",
+          "gen:acfacts:0,29,0",
+          "gen:acfacts:1,19,1",
+          "gen:acfacts:1,17,0",
+          "gen:acfacts:2,9,1",
+          "gen:acfacts:2,37,1",
+          "gen:acfacts:3,4,0",
+          "gen:acfacts:3,14,0",
+          "gen:acmissing:0,8,3:mc",
+          "gen:acmissing:0,11,16:mc",
+          "gen:acmissing:1,15,4:mc",
+          "gen:acmissing:1,15,7",
+          "gen:acmissing:2,10,3:mc",
+          "gen:acmissing:2,10,4:mc"
         ]
       },
-      "skills": []
+      "status": "partial",
+      "mapping": "missing-number-subskills@1",
+      "unmappedFamilies": [
+        "acplace"
+      ],
+      "unclassifiedQuestions": 60,
+      "skills": [
+        {
+          "skill": "missing.box-plus-k@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                0
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "box_plus_k"
+          ],
+          "freshChecks": 22,
+          "retention": 24,
+          "diagnosticPredictions": [
+            "added-both"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acmissing:0,10,6",
+            "retention": "gen:acmissing:0,20,12"
+          }
+        },
+        {
+          "skill": "missing.n-minus-box@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                1
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "n_minus_box"
+          ],
+          "freshChecks": 26,
+          "retention": 22,
+          "diagnosticPredictions": [
+            "added-both"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acmissing:1,18,9",
+            "retention": "gen:acmissing:1,5,8:mc"
+          }
+        },
+        {
+          "skill": "missing.box-minus-k@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                2
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "box_minus_k"
+          ],
+          "freshChecks": 22,
+          "retention": 23,
+          "diagnosticPredictions": [
+            "took-away-again"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acmissing:2,15,12",
+            "retention": "gen:acmissing:2,11,2:mc"
+          }
+        },
+        {
+          "skill": "missing.k-times-box@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                3
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "k_times_box"
+          ],
+          "freshChecks": 17,
+          "retention": 16,
+          "diagnosticPredictions": [
+            "fact-slip:2x7",
+            "fact-slip:2x8",
+            "fact-slip:3x10",
+            "fact-slip:3x7",
+            "fact-slip:3x9",
+            "fact-slip:4x10",
+            "fact-slip:4x6",
+            "fact-slip:5x10",
+            "fact-slip:5x6",
+            "fact-slip:5x7",
+            "fact-slip:6x9",
+            "fact-slip:7x9",
+            "fact-slip:8x10",
+            "fact-slip:8x9",
+            "fact-slip:9x10",
+            "fact-slip:9x9",
+            "took-away"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acmissing:3,9,7",
+            "retention": "gen:acmissing:3,3,8:mc"
+          }
+        },
+        {
+          "skill": "facts.subtraction-from-addition@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                0
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "subtraction_fact"
+          ],
+          "freshChecks": 12,
+          "retention": 16,
+          "diagnosticPredictions": [
+            "kept-order"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acfacts:0,32,1",
+            "retention": "gen:acfacts:0,19,1"
+          }
+        },
+        {
+          "skill": "facts.check-subtraction-by-addition@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                1
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "check_by_addition"
+          ],
+          "freshChecks": 18,
+          "retention": 16,
+          "diagnosticPredictions": [
+            "added-given"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acfacts:1,27,0",
+            "retention": "gen:acfacts:1,25,1"
+          }
+        },
+        {
+          "skill": "facts.division-from-multiplication@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                2
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "division_fact"
+          ],
+          "freshChecks": 20,
+          "retention": 14,
+          "diagnosticPredictions": [
+            "kept-order"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acfacts:2,26,0",
+            "retention": "gen:acfacts:2,16,0"
+          }
+        },
+        {
+          "skill": "facts.dividend-is-divisor-times-quotient@1",
+          "parameters": [
+            {
+              "index": 0,
+              "values": [
+                3
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "dividend_divisor_quotient"
+          ],
+          "freshChecks": 7,
+          "retention": 6,
+          "diagnosticPredictions": [
+            "divisor-as-dividend"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acfacts:3,2,0",
+            "retention": "gen:acfacts:3,13,0"
+          }
+        }
+      ]
     },
     {
       "competency": "MATH.algebra.nonlinear-inequalities",
@@ -4844,9 +5215,12 @@
       ],
       "content": {
         "chapterScreens": 2,
-        "strategies": 3,
+        "strategies": 4,
         "eligibleStrategies": [
-          "ratio_table"
+          "map_to_real",
+          "real_to_map",
+          "ratio_plan_to_metres",
+          "ratio_map_to_km"
         ]
       },
       "working": {
@@ -4856,15 +5230,17 @@
           "gen:aiscale:0,8,1",
           "gen:aiscale:1,6,0",
           "gen:aiscale:0,15,1",
-          "gen:aiscale:2,9,1",
-          "gen:aiscale:0,4,1",
-          "gen:aiscale:4,2,1",
-          "gen:aiscale:0,4,0:mc",
-          "gen:aiscale:4,2,0",
-          "gen:aiscale:2,8,1:mc"
+          "gen:aiscale:0,13,0",
+          "gen:aiscale:4,6,0:mc",
+          "gen:aiscale:2,14,1:mc",
+          "gen:aiscale:4,6,1",
+          "gen:airatio:2,18:mc",
+          "gen:airatio:2,10:mc",
+          "gen:airatio:5,6:mc",
+          "gen:airatio:5,20"
         ]
       },
-      "status": "partial",
+      "status": "connected-configured-skills",
       "mapping": "scale-drawings-subskills@1",
       "unmappedFamilies": [],
       "unclassifiedQuestions": 0,
@@ -4879,12 +5255,12 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "map_to_real"
           ],
-          "strategies": [],
-          "freshChecks": 15,
+          "freshChecks": 14,
           "retention": 15,
           "diagnosticPredictions": [
             "added",
@@ -4906,11 +5282,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "real_to_map"
           ],
-          "strategies": [],
           "freshChecks": 16,
           "retention": 21,
           "diagnosticPredictions": [
@@ -4936,11 +5312,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "ratio_plan_to_metres"
           ],
-          "strategies": [],
           "freshChecks": 9,
           "retention": 16,
           "diagnosticPredictions": [
@@ -4965,11 +5341,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "ratio_map_to_km"
           ],
-          "strategies": [],
           "freshChecks": 15,
           "retention": 13,
           "diagnosticPredictions": [
@@ -6275,9 +6651,20 @@
       ],
       "content": {
         "chapterScreens": 4,
-        "strategies": 4,
+        "strategies": 12,
         "eligibleStrategies": [
-          "check_what_it_uses"
+          "cm_to_decimal_m",
+          "mm_to_decimal_cm",
+          "m_to_decimal_km",
+          "decimal_m_to_cm",
+          "m_cm_to_cm",
+          "cm_to_m_cm",
+          "cm_mm_to_mm",
+          "mm_to_cm_mm",
+          "m_to_km_m",
+          "m_to_whole_km",
+          "compare_m_cm",
+          "mm_to_whole_cm"
         ]
       },
       "working": {
@@ -6287,22 +6674,36 @@
           "gen:acmcm:5,9,0",
           "gen:acmcm:4,92,1",
           "gen:acmcm:3,76,0",
-          "gen:acmcm:2,8,0",
-          "gen:acmcm:7,34,0",
-          "gen:acmcm:3,33,1",
-          "gen:acmcm:8,59,0:mc",
-          "gen:acmcm:2,15,1",
-          "gen:acmcm:7,34,1:mc",
-          "gen:acmcm:8,40,1",
-          "gen:acmcm:8,59,1"
+          "gen:acdecu:0,866:mc",
+          "gen:acdecu:0,826",
+          "gen:acdecu:1,568:mc",
+          "gen:acdecu:1,572",
+          "gen:acdecu:2,8960:mc",
+          "gen:acdecu:2,600:mc",
+          "gen:acdecu:3,492:mc",
+          "gen:acdecu:3,372",
+          "gen:acmcm:9,3,0:mc",
+          "gen:acmcm:6,65,0:mc",
+          "gen:acmcm:6,49,1:mc",
+          "gen:acmcm:9,36,1",
+          "gen:acmmkm:0,8,2:mc",
+          "gen:acmmkm:0,4,1:mc",
+          "gen:acmmkm:1,10,2:mc",
+          "gen:acmmkm:1,7,1:mc",
+          "gen:acmmkm:2,1,98",
+          "gen:acmmkm:2,1,38:mc",
+          "gen:acmmkm:3,18,0:mc",
+          "gen:acmmkm:3,6,0",
+          "gen:acmcmp:7,59,0,0",
+          "gen:acmcmp:7,67,2,4",
+          "gen:acmmkm:4,21,0:mc",
+          "gen:acmmkm:4,9,0"
         ]
       },
-      "status": "partial",
-      "mapping": "length-conversion-subskills@1",
-      "unmappedFamilies": [
-        "acmcmp"
-      ],
-      "unclassifiedQuestions": 81,
+      "status": "connected-configured-skills",
+      "mapping": "length-conversion-subskills@2",
+      "unmappedFamilies": [],
+      "unclassifiedQuestions": 0,
       "skills": [
         {
           "skill": "length.cm-to-decimal-m@1",
@@ -6314,11 +6715,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "cm_to_decimal_m"
           ],
-          "strategies": [],
           "freshChecks": 25,
           "retention": 16,
           "diagnosticPredictions": [
@@ -6341,11 +6742,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "mm_to_decimal_cm"
           ],
-          "strategies": [],
           "freshChecks": 22,
           "retention": 17,
           "diagnosticPredictions": [
@@ -6367,11 +6768,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "m_to_decimal_km"
           ],
-          "strategies": [],
           "freshChecks": 20,
           "retention": 13,
           "diagnosticPredictions": [
@@ -6394,11 +6795,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "decimal_m_to_cm"
           ],
-          "strategies": [],
           "freshChecks": 19,
           "retention": 23,
           "diagnosticPredictions": [
@@ -6421,12 +6822,12 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "m_cm_to_cm"
           ],
-          "strategies": [],
-          "freshChecks": 38,
+          "freshChecks": 40,
           "retention": 29,
           "diagnosticPredictions": [
             "added-numbers",
@@ -6449,12 +6850,12 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "cm_to_m_cm"
           ],
-          "strategies": [],
-          "freshChecks": 41,
+          "freshChecks": 37,
           "retention": 31,
           "diagnosticPredictions": [
             "ten-cm",
@@ -6476,11 +6877,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "cm_mm_to_mm"
           ],
-          "strategies": [],
           "freshChecks": 21,
           "retention": 25,
           "diagnosticPredictions": [
@@ -6503,11 +6904,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "mm_to_cm_mm"
           ],
-          "strategies": [],
           "freshChecks": 17,
           "retention": 26,
           "diagnosticPredictions": [
@@ -6530,11 +6931,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "m_to_km_m"
           ],
-          "strategies": [],
           "freshChecks": 25,
           "retention": 23,
           "diagnosticPredictions": [
@@ -6557,11 +6958,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "m_to_whole_km"
           ],
-          "strategies": [],
           "freshChecks": 8,
           "retention": 8,
           "diagnosticPredictions": [
@@ -6584,11 +6985,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "mm_to_whole_cm"
           ],
-          "strategies": [],
           "freshChecks": 7,
           "retention": 2,
           "diagnosticPredictions": [
@@ -6599,6 +7000,26 @@
           "examples": {
             "check": "gen:acmmkm:4,23,0",
             "retention": "gen:acmmkm:4,28,0"
+          }
+        },
+        {
+          "skill": "length.compare-m-cm@1",
+          "parameters": [],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "compare_m_cm"
+          ],
+          "freshChecks": 81,
+          "retention": 80,
+          "diagnosticPredictions": [
+            "joined",
+            "tens"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:acmcmp:9,73,1,0",
+            "retention": "gen:acmcmp:6,78,2,6"
           }
         }
       ]
@@ -6710,9 +7131,11 @@
       ],
       "content": {
         "chapterScreens": 5,
-        "strategies": 4,
+        "strategies": 3,
         "eligibleStrategies": [
-          "check_what_it_uses"
+          "paise_to_rupees",
+          "rupees_and_paise_to_paise",
+          "decimal_rupees_to_paise"
         ]
       },
       "working": {
@@ -6722,14 +7145,12 @@
           "gen:acpaise:3,10,1",
           "gen:acpaise:9,1,1",
           "gen:acpaise:16,9,1",
-          "gen:acpaise:1,15,1",
-          "gen:acpaise:4,17,1",
-          "gen:acpaise:19,3,1",
-          "gen:acpaise:4,17,0:mc",
-          "gen:acpaise:18,18,1",
-          "gen:acpaise:14,15,0:mc",
-          "gen:acpaise:10,11,1",
-          "gen:acpaise:14,15,1"
+          "gen:acp2r:29,14:mc",
+          "gen:acp2r:29,17:mc",
+          "gen:acpaise:3,4,0:mc",
+          "gen:acpaise:5,11,0:mc",
+          "gen:acpaise:13,18,1:mc",
+          "gen:acpaise:5,11,1"
         ]
       },
       "status": "partial",
@@ -6744,11 +7165,11 @@
         {
           "skill": "money.paise-to-rupees@1",
           "parameters": [],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "paise_to_rupees"
           ],
-          "strategies": [],
           "freshChecks": 65,
           "retention": 64,
           "diagnosticPredictions": [
@@ -6771,16 +7192,17 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "rupees_and_paise_to_paise"
           ],
-          "strategies": [],
-          "freshChecks": 25,
+          "freshChecks": 24,
           "retention": 33,
           "diagnosticPredictions": [
             "added-numbers",
-            "ten-paise"
+            "ten-paise",
+            "wrote-together"
           ],
           "working": "unsupported",
           "examples": {
@@ -6798,12 +7220,12 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "decimal_rupees_to_paise"
           ],
-          "strategies": [],
-          "freshChecks": 28,
+          "freshChecks": 27,
           "retention": 31,
           "diagnosticPredictions": [
             "added-numbers",
@@ -11118,14 +11540,12 @@
         "afnim",
         "afriver"
       ],
-      "status": "missing-skill-metadata",
       "content": {
         "chapterScreens": 3,
-        "strategies": 5,
+        "strategies": 2,
         "eligibleStrategies": [
-          "try_digits",
-          "undo",
-          "check_what_it_uses"
+          "addend_digit",
+          "first_number_digit"
         ]
       },
       "working": {
@@ -11135,19 +11555,87 @@
           "gen:afmissd:52,0,0,1",
           "gen:afmissd:22,0,0,0",
           "gen:afmissd:44,0,1,1",
-          "gen:afmissd:25,2,0,0",
-          "gen:afmissd:34,1,0,0",
-          "gen:afmissd:9,2,1,0",
-          "gen:afmissd:34,1,0,1:mc",
-          "gen:afmissd:25,0,1,1",
-          "gen:afmissd:11,0,1,1",
-          "gen:afmissd:18,1,0,0",
-          "gen:afmissd:21,2,1,0:mc",
-          "gen:afmissd:9,2,1,1",
-          "gen:afmissd:11,0,1,0"
+          "gen:afmissd:3,1,0,0:mc",
+          "gen:afmissd:27,1,0,0",
+          "gen:afmissd:14,0,0,1:mc",
+          "gen:afmissd:27,1,0,1:mc"
         ]
       },
-      "skills": []
+      "status": "partial",
+      "mapping": "missing-digit-subskills@1",
+      "unmappedFamilies": [
+        "afnim",
+        "afriver"
+      ],
+      "unclassifiedQuestions": 109,
+      "skills": [
+        {
+          "skill": "digit.missing-in-addend@1",
+          "parameters": [
+            {
+              "index": 2,
+              "values": [
+                0
+              ]
+            },
+            {
+              "index": 3,
+              "values": [
+                0
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "addend_digit"
+          ],
+          "freshChecks": 13,
+          "retention": 20,
+          "diagnosticPredictions": [
+            "add-not-undo",
+            "carry-forgotten"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:afmissd:34,1,0,0",
+            "retention": "gen:afmissd:52,0,0,0"
+          }
+        },
+        {
+          "skill": "digit.missing-in-first-number@1",
+          "parameters": [
+            {
+              "index": 2,
+              "values": [
+                0
+              ]
+            },
+            {
+              "index": 3,
+              "values": [
+                1
+              ]
+            }
+          ],
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "first_number_digit"
+          ],
+          "freshChecks": 13,
+          "retention": 25,
+          "diagnosticPredictions": [
+            "borrow-forgotten",
+            "subtract-not-undo"
+          ],
+          "working": "unsupported",
+          "examples": {
+            "check": "gen:afmissd:34,1,0,1:mc",
+            "retention": "gen:afmissd:25,2,0,1:mc"
+          }
+        }
+      ]
     },
     {
       "competency": "MATH.reasoning.sort-by-attribute",
@@ -12035,7 +12523,7 @@
         ]
       },
       "status": "partial",
-      "mapping": "pictographs-subskills@2",
+      "mapping": "pictographs-subskills@3",
       "unmappedFamilies": [],
       "unclassifiedQuestions": 48,
       "skills": [

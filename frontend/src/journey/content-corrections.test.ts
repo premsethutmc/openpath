@@ -39,11 +39,12 @@ function byStatedRule(sentence: string): number {
 }
 
 test("B missing number: the stated inverse-operation rule gives the right box for every kind of sentence (27 − □ = 9 → 18)", () => {
-  for (const id of ["worked_steps", "check_what_it_uses"]) {
-    const t = text(MISS, id);
-    assert.ok(!/Do the opposite to the other number/.test(t), `${id}: the wrong rule is gone`);
-    for (const phrase of ["If a number was added to the box, take it away", "If a number was taken away from the box, add it back", "If the box was multiplied by a number, divide by that number", "If the box was taken away from a number, the box is the gap: the first number take away the answer"]) assert.ok(t.includes(phrase), `${id}: ${phrase}`);
-  }
+  // the corrected template explanations are retired from the module: inverse-operations@1 (subskill-config-inverse.ts) teaches each
+  // kind of sentence in its own skill-scoped explanation, and each states its own rule (the corrected rule, split by kind)
+  for (const id of ["worked_steps", "check_what_it_uses"]) assert.equal(moduleFor(MISS)!.strategies.find((s) => s.id === id), undefined, `${id}: retired, not served`);
+  for (const s of moduleFor(MISS)!.strategies) assert.ok(!/Do the opposite to the other number/.test(text(MISS, s.id)), `${s.id}: the wrong rule is gone`);
+  for (const [id, phrase] of [["box_plus_k", "Undo the adding: take that number away from the total"], ["n_minus_box", "the box is the first number take away what is left"], ["box_minus_k", "Undo the taking away: add that number back"], ["k_times_box", "Undo the multiplying: divide the product by that number"]] as const)
+    assert.ok(text(MISS, id).includes(phrase), `${id}: states ${phrase}`);
   const p = problemOf("gen:acmissing:1,18,9")!;
   assert.match(p.prompt, /27 − □ = 9/);
   assert.equal(byStatedRule(p.prompt), 18);
@@ -99,14 +100,18 @@ test("C' no quoted question in any 'spot the mistake' explanation is cut off (th
 test("the four corrections: earlier revision blocked, new revision pending review or flagged for revision, nothing approved", () => {
   for (const [c, id] of [[TAB, "doubling"], [MISS, "worked_steps"], [MISS, "check_what_it_uses"], [RAT, "spot_the_mistake"]]) {
     const e = explanationRegistry().entries.find((x) => x.id === explanationId(c, id))!;
-    const cur = e.revisions.find((r) => r.contentHash === contentHash(c, strat(c, id)))!;
+    // a corrected explanation may later be retired from its module (replaced by skill-scoped teaching): its registered history
+    // stays, the latest revision is still not approved, and the blocked revision can never be shown because nothing serves it
+    const live = moduleFor(c)!.strategies.find((s) => s.id === id);
+    const cur = live ? e.revisions.find((r) => r.contentHash === contentHash(c, live))! : e.revisions.at(-1)!;
     assert.ok(cur, `${c}#${id}: current revision registered`);
     assert.ok(["pending_review", "revision_required"].includes(cur.status), `${c}#${id}: ${cur.status} (not approved)`);
     const prev = e.revisions.find((r) => r.contentHash === cur.supersedes)!;
     assert.equal(prev.status, "blocked", `${c}#${id}: earlier revision blocked`);
     assert.ok(explanationBlocklist().entries.some((b) => b.id === e.id && b.contentHash === prev.contentHash), `${c}#${id}: earlier revision on the blocklist`);
     assert.ok(prev.knownIssues.length);
-    const el = contentEligibility(moduleFor(c), strat(c, id), { competency: c, mode: "supervised-evaluation", misconceptionEvidence: true });
+    if (!live) continue;
+    const el = contentEligibility(moduleFor(c), live, { competency: c, mode: "supervised-evaluation", misconceptionEvidence: true });
     assert.equal(el.eligible, false, "not usable in supervised evaluation until an educator approves it");
     assert.equal(el.educatorApproved, false);
   }

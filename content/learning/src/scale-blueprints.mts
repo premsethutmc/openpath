@@ -16,15 +16,16 @@ import { selectable } from "../../../packages/learning/src/question-status";
 import { connectedSkill } from "../../../packages/learning/src/skill-connections";
 import { SCALE_PATTERN_CONFIGS } from "../../../packages/learning/src/subskill-config-scale";
 import { CONVERSION_PATTERN_CONFIGS } from "../../../packages/learning/src/subskill-config-conversion";
+import { INVERSE_PATTERN_CONFIGS } from "../../../packages/learning/src/subskill-config-inverse";
 
 const file = new URL("../blueprints.v1.json", import.meta.url);
 const AUTHOR = "OpenPath (written with AI assistance; not educator-reviewed)";
 const worked = (p: Problem) => [p.prompt.replace(/ \(.*\)$/, "").replace(/ Choose one\.$/, ""), ...p.steps.map((s) => explainStep(p, s))];
 const P = (id: string) => problemOf(id.replace(/:(mc|w)$/, ""))!;
 const fig = (p: Problem) => (p.figure ? { widget: p.figure as Record<string, unknown> } : {});
-const configOf = (c: string) => [...SCALE_PATTERN_CONFIGS, ...CONVERSION_PATTERN_CONFIGS].find((x) => x.competency === c)!;
+const configOf = (c: string) => [...SCALE_PATTERN_CONFIGS, ...CONVERSION_PATTERN_CONFIGS, ...INVERSE_PATTERN_CONFIGS].find((x) => x.competency === c)!;
 
-interface Spec { id: string; title: string; kind: "conceptual" | "procedural"; family: string; subSkill: string; text: string[]; extra?: (p: Problem) => boolean; example?: (p: Problem) => boolean; addresses?: string; misconception?: (p: Problem) => string[]; regroup?: boolean; conclude?: boolean }
+interface Spec { id: string; title: string; kind: "conceptual" | "procedural"; family: string; subSkill: string; text: string[]; extra?: (p: Problem) => boolean; example?: (p: Problem) => boolean; addresses?: string; misconception?: (p: Problem) => string[]; regroup?: boolean; conclude?: boolean; math?: (p: Problem) => string[]; distinct?: boolean }
 interface ModuleSpec { competency: string; family: string; title: string; chapter: string[]; seed: (p: Problem) => boolean; strategies: Spec[] }
 
 /** a worked example with several pictures in the row, so the multiplication by the key is visible */
@@ -185,6 +186,98 @@ MODULES.push(
   },
 );
 
+// Misconception evidence is keyed by the mistake's id within a competency, and the same id (added-both, same-operation) is
+// modelled for several kinds of sentence, so a fix's words are written to be true whichever kind produced the evidence.
+// ---- "inverse operations undo each other" (subskill-config-inverse.ts). Text reuses the template modules' rule ("ask what
+// was done to the box, then work backwards"; "do the opposite to both sides, then check"; "a missing part is total − other
+// part") split so that each explanation shows its own form, and answers their review notes: every worked example states the
+// numbers it undoes and ends with the substitution check.
+const MISSN = "MATH.algebra.missing-number", LINI = "MATH.algebra.linear-intro", PZ = "MATH.reasoning.puzzle-strategy";
+/** acmissing [f, u, k] (the box is u): undo, then put the answer in the box and check */
+const missingMath = (p: Problem) => {
+  const [f, u, k] = p.params;
+  const q = p.prompt.replace(/^What number goes in the box\? /, "");
+  if (f === 0) return [q, `${k} was added to the box: undo it by taking ${k} away`, `${u + k} − ${k} = ${u}`, `Check: ${u} + ${k} = ${u + k}`];
+  if (f === 1) return [q, `The box was taken away from ${u + k} and ${k} is left, so the box is ${u + k} − ${k}`, `${u + k} − ${k} = ${u}`, `Check: ${u + k} − ${u} = ${k}`];
+  if (f === 2) return [q, `${k} was taken away from the box: undo it by adding ${k} back`, `${u - k} + ${k} = ${u}`, `Check: ${u} − ${k} = ${u - k}`];
+  return [q, `The box was multiplied by ${k}: undo it by dividing by ${k}`, `${k * u} ÷ ${k} = ${u}`, `Check: ${k} × ${u} = ${k * u}`];
+};
+/** ahone [f, a, t]: the generator's own step, then the check of the answer in the equation */
+const oneStepMath = (p: Problem) => {
+  const [f, a] = p.params, x = Number(p.answer);
+  const check = f === 0 ? `Check: ${x} + ${a} = ${x + a}` : f === 1 ? `Check: ${x} − ${a} = ${x - a}` : f === 2 ? `Check: ${a} × ${x} = ${a * x}` : `Check: ${x} ÷ ${a} = ${x / a}`;
+  return [...worked(p), check];
+};
+/** afmissd, hidden in the first number: undo the operation to find that number, then read the digit */
+const digitMath = (p: Problem) => {
+  const m = /: (\S+) ([+−]) (\S+) = (\S+)\./.exec(p.prompt);
+  if (!m) throw new Error(`afmissd prompt not read: ${p.prompt}`);
+  const [, first, op, other, result] = m, r = Number(result), o = Number(other);
+  const whole = op === "+" ? r - o : r + o;
+  const at = first.indexOf("□"), digit = String(whole).padStart(first.length, "0")[at];
+  if (digit !== String(p.answer) || String(whole).length !== first.length || [...first].some((c, i) => c !== "□" && c !== String(whole)[i])) throw new Error(`afmissd undo disagrees: ${p.id}`);
+  return [p.prompt.replace(/^Find the missing digit: /, "").replace(/ Which digit goes in the box □\?$/, ""),
+    op === "+" ? `The first number is the total take away the other part: ${r} − ${o} = ${whole}` : `The first number is the answer add the number taken away: ${r} + ${o} = ${whole}`,
+    `${first} = ${whole}, so the missing digit is ${digit}`, op === "+" ? `Check: ${whole} + ${o} = ${r}` : `Check: ${whole} − ${o} = ${r}`];
+};
+/** acfacts (native choice): the asked fact, then a check that the chosen fact is true, read from the option itself */
+const factsMath = (p: Problem) => {
+  const opt = (p as Problem & { options: string[] }).options["ABCD".indexOf(String(p.answer))];
+  const m = /^(\S+) = (\S+) × (\S+)$/.exec(opt);
+  return [p.prompt, m ? `Check: ${m[2]} × ${m[3]} = ${m[1]}, so the sentence is true` : `Check: ${opt} is true`, `So: ${opt}`];
+};
+MODULES.push(
+  {
+    competency: MISSN, family: "acmissing", title: "Missing numbers and related facts",
+    chapter: ["Adding and taking away undo each other, and so do multiplying and dividing. To find a missing number, ask what was done to it, then work backwards; put your answer back in to check."],
+    seed: (p) => p.params[0] === 0,
+    strategies: [
+      { id: "box_plus_k", title: "A number was added to the box", kind: "procedural", family: "acmissing", subSkill: "missing.box-plus-k@1", math: missingMath, text: ["Ask what was done to the box: a number was added to it, and the total is on the other side.", "Undo the adding: take that number away from the total. Then put your answer in the box and check that the sentence is true."] },
+      { id: "n_minus_box", title: "The box is the number taken away", kind: "procedural", family: "acmissing", subSkill: "missing.n-minus-box@1", math: missingMath, text: ["Here the box is taken away from the first number, and the number on the right is what is left.", "So the box is the first number take away what is left. Check by taking your answer away from the first number."] },
+      { id: "box_minus_k", title: "A number was taken away from the box", kind: "procedural", family: "acmissing", subSkill: "missing.box-minus-k@1", math: missingMath, text: ["A number was taken away from the box, and the number on the right is what is left.", "Undo the taking away: add that number back to what is left. Check by taking it away again."] },
+      { id: "k_times_box", title: "The box was multiplied", kind: "procedural", family: "acmissing", subSkill: "missing.k-times-box@1", math: missingMath, text: ["The box was multiplied by a number, and the product is on the other side.", "Undo the multiplying: divide the product by that number, using the times table. Check by multiplying."] },
+      { id: "subtraction_fact", title: "The subtraction fact of an addition", kind: "conceptual", family: "acfacts", subSkill: "facts.subtraction-from-addition@1", math: factsMath, text: ["An addition fact and its subtraction facts are one family: a total and its two parts.", "A subtraction fact starts with the total and takes away one part; what is left is the other part."] },
+      { id: "check_by_addition", title: "Check a subtraction by adding", kind: "conceptual", family: "acfacts", subSkill: "facts.check-subtraction-by-addition@1", math: factsMath, text: ["Adding undoes taking away.", "To check a subtraction, add the answer to the number taken away: you should get the number you started with."] },
+      { id: "division_fact", title: "The division fact of a multiplication", kind: "conceptual", family: "acfacts", subSkill: "facts.division-from-multiplication@1", math: factsMath, text: ["Multiplying and dividing undo each other: a product and its two factors are one family.", "A division fact starts with the product and divides it by one factor; the answer is the other factor."] },
+      { id: "dividend_divisor_quotient", title: "Dividend = divisor × quotient", kind: "conceptual", family: "acfacts", subSkill: "facts.dividend-is-divisor-times-quotient@1", math: factsMath, text: ["In a division the dividend is the number being divided, the divisor divides it and the quotient is the answer.", "Multiplying undoes dividing, so the dividend equals the divisor times the quotient."] },
+      { id: "fix_added_both", title: "Not both numbers added", kind: "procedural", family: "acmissing", subSkill: "missing.box-plus-k@1", addresses: "added-both", distinct: true, math: missingMath, text: [],
+        misconception: () => ["Both numbers you can see were added. Adding them never undoes what was done to the box.", "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."] },
+      { id: "fix_added_both_taken", title: "Not both numbers added", kind: "procedural", family: "acmissing", subSkill: "missing.n-minus-box@1", addresses: "added-both", distinct: true, math: missingMath, text: [],
+        misconception: () => ["Both numbers you can see were added. Adding them never undoes what was done to the box.", "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."] },
+      { id: "fix_took_away_again", title: "Add it back, do not take it away again", kind: "procedural", family: "acmissing", subSkill: "missing.box-minus-k@1", addresses: "took-away-again", distinct: true, math: missingMath, text: [],
+        misconception: () => ["The number was taken away a second time.", "The box is the number before anything was taken away, so add the number back to what is left."] },
+    ],
+  },
+  {
+    competency: LINI, family: "ahone", title: "Solving a one-step equation",
+    chapter: ["An equation is a balance: both sides have the same value. Doing the opposite operation to both sides keeps it balanced and leaves x alone; put your answer back in to check."],
+    seed: (p) => p.params[0] === 2,
+    strategies: [
+      { id: "x_plus_a", title: "A number is added to x", kind: "procedural", family: "ahone", subSkill: "one-step.x-plus-a@1", math: oneStepMath, text: ["A number is added to x.", "Take that number away from both sides, so x is alone. Then put your answer back into the equation to check it."] },
+      { id: "x_minus_a", title: "A number is taken away from x", kind: "procedural", family: "ahone", subSkill: "one-step.x-minus-a@1", math: oneStepMath, text: ["A number is taken away from x.", "Add that number to both sides, so x is alone. Then put your answer back into the equation to check it."] },
+      { id: "a_times_x", title: "x is multiplied by a number", kind: "procedural", family: "ahone", subSkill: "one-step.a-times-x@1", math: oneStepMath, text: ["The number written next to x multiplies it.", "Divide both sides by that number, so x is alone. Check by multiplying."] },
+      { id: "x_divided_by_a", title: "x is divided by a number", kind: "procedural", family: "ahone", subSkill: "one-step.x-divided-by-a@1", math: oneStepMath, text: ["x is divided by a number.", "Multiply both sides by that number, so x is alone. Check by dividing."] },
+      { id: "fix_same_operation_add", title: "Do the opposite, not the same again", kind: "procedural", family: "ahone", subSkill: "one-step.x-plus-a@1", addresses: "same-operation", distinct: true, math: oneStepMath, text: [],
+        misconception: () => ["The same operation was done again instead of its opposite.", "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."] },
+      { id: "fix_same_operation_take", title: "Do the opposite, not the same again", kind: "procedural", family: "ahone", subSkill: "one-step.x-minus-a@1", addresses: "same-operation", distinct: true, math: oneStepMath, text: [],
+        misconception: () => ["The same operation was done again instead of its opposite.", "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."] },
+      { id: "fix_subtract_coefficient", title: "Divide by the number next to x", kind: "procedural", family: "ahone", subSkill: "one-step.a-times-x@1", addresses: "subtract-coefficient", distinct: true, math: oneStepMath, text: [],
+        misconception: () => ["The number next to x was taken away.", "That number multiplies x, so undo it by dividing both sides by it."] },
+      { id: "fix_add_for_multiply", title: "Multiply, do not add", kind: "procedural", family: "ahone", subSkill: "one-step.x-divided-by-a@1", addresses: "add-for-multiply", distinct: true, math: oneStepMath, text: [],
+        misconception: () => ["The number was added instead of multiplied.", "x was divided by the number, so undo it by multiplying both sides by it."] },
+    ],
+  },
+  {
+    competency: PZ, family: "afmissd", title: "Finding a missing digit by undoing",
+    chapter: ["A sum or difference is a true sentence. When the hidden digit is in the first number, undo the operation to find the whole first number, then read the digit."],
+    seed: (p) => p.params[2] === 0 && p.params[3] === 0,
+    strategies: [
+      { id: "addend_digit", title: "A digit hidden in a number being added", kind: "procedural", family: "afmissd", subSkill: "digit.missing-in-addend@1", math: digitMath, text: ["The two numbers being added make the total, so the number with the hidden digit is a part.", "A missing part is the total take away the other part. Work that out, read the digit in the box's place, and check by doing the whole addition."] },
+      { id: "first_number_digit", title: "A digit hidden in the first number of a subtraction", kind: "procedural", family: "afmissd", subSkill: "digit.missing-in-first-number@1", math: digitMath, text: ["The first number of a subtraction is what you started with.", "Undo the taking away: add the answer to the number taken away, read the digit in the box's place, and check by doing the subtraction."] },
+    ],
+  },
+);
+
 const bps = JSON.parse(readFileSync(file, "utf8"));
 const out: unknown[] = [];
 for (const M of MODULES) {
@@ -193,7 +286,10 @@ for (const M of MODULES) {
   // START of each partition; candidates are taken from the END, and no exposure is used twice
   const used = new Set<string>();
   if (M.competency === BARS) for (const id of [retainedTotal.guided, retainedTotal.check, ...retainedTotal.screens.map(s => s.instance)]) used.add(exposureKey(id));
-  const inSkill = (s: Spec, id: string) => connectedSkill(config, id) === s.subSkill && (!s.extra || s.extra(P(id))) && (!s.addresses || P(id).bugs.some((b) => b.id === s.addresses && b.predict !== null));
+  // `distinct`: the addressed mistake's predicted answer is one number, different from the right answer and from every other
+  // modelled mistake's prediction, so an answer matching it is evidence of that mistake and of no other (the contrast)
+  const distinctBug = (p: Problem, bug: string) => { const b = p.bugs.find((x) => x.id === bug); if (!b || typeof b.predict !== "number" || b.predict === Number(p.answer)) return false; return p.bugs.every((x) => x.id === bug || ![x.predict].flat().includes(b.predict)); };
+  const inSkill = (s: Spec, id: string) => connectedSkill(config, id) === s.subSkill && (!s.extra || s.extra(P(id))) && (!s.addresses || P(id).bugs.some((b) => b.id === s.addresses && b.predict !== null)) && (!s.distinct || !s.addresses || distinctBug(P(id), s.addresses));
   const pick = (family: string, phase: "practice" | "check", ok: (id: string) => boolean, form: "typed" | "any") => {
     const id = [...phasePool(family, phase)].reverse().filter(selectable).find((x) => (form === "any" || !x.endsWith(":mc")) && ok(x) && !used.has(exposureKey(x)));
     if (!id) throw new Error(`no ${phase} item for ${family}`);
@@ -209,9 +305,9 @@ for (const M of MODULES) {
     const screens = s.misconception
       ? (() => { const b = inst.bugs.find((x) => x.id === s.addresses)!; return [
           { title: `${s.title}: what went wrong`, text: s.misconception(inst), math: [`Not ${b.predict}, but ${inst.answer}`], role: "misconception", instance: inst.id, ...fig(inst) },
-          { title: `${s.title}: solved correctly`, text: ["Each step, then the answer."], math: worked(inst), role: "strategy", instance: inst.id },
+          { title: `${s.title}: solved correctly`, text: ["Each step, then the answer."], math: s.math ? s.math(inst) : worked(inst), role: "strategy", instance: inst.id },
         ]; })()
-              : [{ title: s.title, text: s.text, math: s.regroup ? regrouped(inst) : s.conclude ? concluded(inst) : worked(inst), role: "strategy", instance: inst.id, ...fig(inst) }];
+              : [{ title: s.title, text: s.text, math: s.math ? s.math(inst) : s.regroup ? regrouped(inst) : s.conclude ? concluded(inst) : worked(inst), role: "strategy", instance: inst.id, ...fig(inst) }];
     return { id: s.id, title: s.title, kind: s.kind, screens, guided, check, scope: { family: s.family, subSkill: s.subSkill }, ...(s.addresses ? { addresses: s.addresses } : {}) };
   });
   if (M.competency === BARS) strategies.push(retainedTotal);

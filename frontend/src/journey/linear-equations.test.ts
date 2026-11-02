@@ -271,7 +271,8 @@ test("J12 blocked content: a blocked explanation is never shown; the four known-
   const r = within("demonstration", reg, () => runScenario(S({ learner: () => persistent("forgot-divide") })));
   assert.ok(!teaches(r).some((t) => t.strategy === "fix_finish"), "not shown");
   assert.ok(teaches(r).every((t) => !specificOf(t.strategy) || addressedMisconception(strat(t.strategy)) === "forgot-divide"));
-  for (const b of explanationBlocklist().entries) { const m = moduleFor(b.id.split("#")[0])!; const s = m.strategies.find((x) => x.id === b.id.split("#")[1])!; assert.notEqual(contentHash(m.competency, s), b.contentHash, `${b.id}: the current content is not the blocked revision`); }
+  // a blocked revision is never the current content; a strategy retired from its module (replaced by skill-scoped teaching) is not served at all
+  for (const b of explanationBlocklist().entries) { const m = moduleFor(b.id.split("#")[0])!; const s = m.strategies.find((x) => x.id === b.id.split("#")[1]); if (s) assert.notEqual(contentHash(m.competency, s), b.contentHash, `${b.id}: the current content is not the blocked revision`); for (const x of m.strategies) assert.notEqual(contentHash(m.competency, x), b.contentHash, `${b.id}: no served strategy has the blocked content`); }
 });
 
 test("J13 unapproved content in supervised mode is refused; demonstration labels it; an educator-approved fixture is shown", () => {

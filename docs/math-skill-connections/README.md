@@ -398,3 +398,71 @@ The audit and `strategyConnects` count only strategies. Examples worth an educat
 - Money, "Adding and taking away": an example with no regrouping.
 
 These come from `subSkills()` drawing the first practice item. They are left unchanged, and recorded here.
+
+## 9. Inverse operations (Claude, `feat/math-inverse-operations`, from #103 `c2296013`)
+
+**Pattern:** adding and taking away, multiplying and dividing undo each other. An unknown (a box, x, a hidden digit) is found by working backwards; the same relation gives related facts and the check of an answer. The batch covers arithmetic and algebra across grades, from the existing inventory and generators.
+- **Mappings:** `packages/learning/src/subskill-config-inverse.ts`, registered in `CONNECTION_CONFIGS`. There are 3 new mappings, each `@1`; no earlier mapping changed.
+- **Teaching:** the `"inverse operations undo each other"` block of `content/learning/src/scale-blueprints.mts`.
+
+| Competency (mapping) | Sub-skill | Family, parameters | Answer |
+|---|---|---|---|
+| `MATH.algebra.missing-number` (`missing-number-subskills@1`) | box-plus-k (□ + k = n) | `acmissing` f 0 | number |
+| | n-minus-box (n − □ = k) | `acmissing` f 1 | number |
+| | box-minus-k (□ − k = n) | `acmissing` f 2 | number |
+| | k-times-box (k × □ = n) | `acmissing` f 3 | number |
+| | subtraction-from-addition | `acfacts` mode 0 | choice |
+| | check-subtraction-by-addition | `acfacts` mode 1 | choice |
+| | division-from-multiplication | `acfacts` mode 2 | choice |
+| | dividend-is-divisor-times-quotient | `acfacts` mode 3 | choice |
+| `MATH.algebra.linear-intro` (`linear-intro-subskills@1`) | x + a = b, x − a = b, ax = b, x ÷ a = b | `ahone` f 0–3 | number |
+| `MATH.reasoning.puzzle-strategy` (`missing-digit-subskills@1`) | missing-in-addend | `afmissd` where 0, op 0 | digit |
+| | missing-in-first-number | `afmissd` where 0, op 1 | digit |
+
+That is 14 skills in all. **Unmapped, with reasons in the config:**
+- `acplace`: digit cards, which is place value;
+- `afmissd` where 1: the digit is hidden in the result, so it is found by working forwards;
+- `afnim` and `afriver`.
+
+**Teaching.** Each skill has one skill-scoped explanation, pending review. The module's worked example, guided question and check are all that skill.
+- **Worked lines** state the numbers being undone and end with the substitution check. For example: "□ + 10 = 21 / 10 was added to the box: undo it by taking 10 away / 21 − 10 = 11 / Check: 11 + 10 = 21".
+- **Related facts** show the asked fact, a check that it is true, and the chosen option.
+- **Review notes answered:** this split answers the `revision_required` notes on the retired template explanations (one form per explanation, a worked example of the checked form, the number named in the undo line, the substitution check shown).
+- **Retired template explanations:** they are no longer served; their registry history (including the blocked revisions) is kept. Two existing tests now state this explicitly: `content-corrections` B and the four corrections, and `linear-equations` J12.
+
+**Misconception teaching, 7 fixes.** Each is offered only with misconception evidence, and only for its skill:
+
+| Fix | Skill | Mistake (bug) |
+|---|---|---|
+| `fix_added_both` | □ + k | `added-both` |
+| `fix_added_both_taken` | n − □ | `added-both` |
+| `fix_took_away_again` | □ − k | `took-away-again` |
+| `fix_same_operation_add` | x + a | `same-operation` |
+| `fix_same_operation_take` | x − a | `same-operation` |
+| `fix_subtract_coefficient` | ax | `subtract-coefficient` |
+| `fix_add_for_multiply` | x ÷ a | `add-for-multiply` |
+
+- **Contrast:** on every taught, guided and checked item the mistake predicts one answer, different from the right one and from every other modelled mistake.
+- **No fix for k × □:** its times-table slip predictions overlap, so there is no contrast.
+
+**Coverage, kept separate (14 skills):**
+
+| | Count |
+|---|---|
+| Teaching | 14 general explanations plus 7 evidence-gated fixes. All are demonstration-ready (`pending_review`), and none is educator-approved |
+| Assessment | 14 |
+| Recovery | 14 |
+| Retention | 14 |
+
+**Learner-path evidence** (`frontend/src/journey/inverse-pattern.test.ts`, 34 tests):
+- partitions, with exactly one matching partition per task, and partition meanings read from the prompts;
+- numeric diagnostic readings;
+- for each skill: same-skill fresh checks, replay, a fresh delayed check after 8 days, and recovery on a wrong delayed answer;
+- teaching alignment: worked sentences true, the undo step producing the answer, the check line, no digits in the text, `pending_review` status;
+- the misconception gate, contrast and fix screens;
+- for each skill: teach → guided → fresh check → reload → saved answer as that skill's evidence only, with no method credit;
+- mapping-stamped, order-independent replay with an untouched ledger.
+
+**Limitations:**
+- **Shared limitation (not a blocker):** misconception evidence is keyed by the mistake's id within a competency, not by skill. `same-operation` is modelled for `ahone` f 0–3, and `added-both` for `acmissing` f 0–1. Reproducer: `teachable(moduleFor("MATH.algebra.linear-intro"), fix_same_operation_add, ["same-operation"])` is true whichever kind of equation produced the evidence. Mitigated in the domain: those fixes' words are true for every kind that models the mistake, and the worked example is the fix's own form. Skill-keyed evidence would be an engine change.
+- **Prerequisite not declared:** the missing-digit skills assume three-digit addition and subtraction with regrouping, and no graph relation records this.
