@@ -85,7 +85,7 @@ async function walk(w) {
     await page.getByRole("heading", { name: "Sign in to OpenPath" }).waitFor();
     const email = `walk-${w.key}-${Date.now()}@example.org`;
     if ((await call(page, "/account/register/", { email, password: PASSWORD, consent: true })).status !== 201) throw new Error("could not register a synthetic account");
-    const pupil = await call(page, "/pupils/", { display_name: `Synthetic ${w.area.split(" (")[0]} learner`, consent: true });
+    const pupil = await call(page, "/pupils/", { display_name: `Synthetic ${w.key}`.slice(0, 40), consent: true });
     const learner = pupil.data.id;
     if (pupil.status !== 201) throw new Error(`could not add a synthetic pupil: ${pupil.status}`);
     const setupHeading = page.getByRole("heading", { name: /Set up My Learning Year/ });
