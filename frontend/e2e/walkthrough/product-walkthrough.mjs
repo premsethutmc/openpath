@@ -61,7 +61,7 @@ async function walk(w) {
   const log = { key: w.key, area: w.area, path: `Grade ${w.grade} · ${w.bookLabel} → ${w.chapter} → ${w.skill}`, steps: [], blockers: [] };
   const step = (s) => { log.steps.push(s); console.log(`[${w.key}]`, JSON.stringify(s)); };
   let n = 0;
-  const shot = async (page, name) => { await page.waitForTimeout(450); const f = `${w.key}-${String(++n).padStart(2, "0")}-${name}.png`; await page.screenshot({ path: shots + f, fullPage: true }); return f; };
+  const shot = async (page, name) => { await page.waitForTimeout(450); const f = `${w.key}-${String(++n).padStart(2, "0")}-${name}.jpg`; await page.screenshot({ path: shots + f, fullPage: true, type: "jpeg", quality: 80 }); return f; };
   const context = await phone();
   const page = await context.newPage();
   page.on("pageerror", (e) => log.blockers.push(`page error: ${e.message}`));
@@ -72,8 +72,16 @@ async function walk(w) {
     if ((await call(page, "/account/register/", { email, password: PASSWORD, consent: true })).status !== 201) throw new Error("could not register a synthetic account");
     const pupil = await call(page, "/pupils/", { display_name: `Synthetic ${w.area} learner`, consent: true });
     const learner = pupil.data.id;
-    await page.reload();
-    await page.getByRole("heading", { name: /Set up My Learning Year/ }).waitFor();
+    if (pupil.status !== 201) throw new Error(`could not add a synthetic pupil: ${pupil.status}`);
+    const setupHeading = page.getByRole("heading", { name: /Set up My Learning Year/ });
+    for (let attempt = 1; ; attempt++) {
+      await page.reload();
+      try { await setupHeading.waitFor({ timeout: 30_000 }); break; } catch (e) {
+        log.blockers.push(`set-up screen not shown after sign-up (attempt ${attempt}); on screen: ${await text(page, "body", 200)}`);
+        await shot(page, `setup-retry-${attempt}`);
+        if (attempt === 2) throw e;
+      }
+    }
     await page.getByRole("button", { name: new RegExp(`^Grade ${w.grade}\\b`) }).click();
     await page.getByRole("button", { name: "No goal for now" }).click();
     await page.getByRole("button", { name: w.book }).first().click();

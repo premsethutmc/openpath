@@ -37,7 +37,8 @@ jobs:
           # TEST ONLY: the existing per-pupil clock for synthetic pupils, used once for the delayed check
           export OPENPATH_TEST_CLOCK_FILE=/tmp/walk-clock.json
           echo '{}' > "$OPENPATH_TEST_CLOCK_FILE"
-          python backend/manage.py runserver 127.0.0.1:8014 --noreload --nothreading > /tmp/walk-api.log 2>&1 &
+          # several synthetic accounts in one run: the existing test-only registration rate (as My Learning Year CI)
+          OPENPATH_ACCOUNT_RATE=1000/hour python backend/manage.py runserver 127.0.0.1:8014 --noreload --nothreading > /tmp/walk-api.log 2>&1 &
           api_pid=$!
           PORT=4190 API_TARGET=http://127.0.0.1:8014 node frontend/scripts/preview-english.mjs > /tmp/walk-preview.log 2>&1 &
           preview_pid=$!
@@ -46,9 +47,14 @@ jobs:
             if curl --fail --silent http://127.0.0.1:4190/api/account/ > /dev/null; then break; fi
             sleep 1
           done
+          mkdir -p /tmp/walk
           cd frontend
           WALK_URL=http://127.0.0.1:4190 WALK_API=django OPENPATH_TEST_CLOCK_FILE=$OPENPATH_TEST_CLOCK_FILE SHOTS=/tmp/walk/ node --import tsx e2e/walkthrough/product-walkthrough.mjs 2>&1 | tee /tmp/walk/run.log
           echo "${GITHUB_SHA}" > /tmp/walk/commit.txt
+          # the screenshots, also in the log (artifact downloads are not reachable from every reviewer's workspace)
+          echo "::group::screens archive (base64 tar.gz)"
+          echo "BEGIN-WALK-ARCHIVE"; tar czf - -C /tmp/walk . | base64 -w 8000; echo "END-WALK-ARCHIVE"
+          echo "::endgroup::"
       - uses: actions/upload-artifact@v7
         if: always()
         with:
