@@ -383,7 +383,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
 function confirmedSupports(start: string, supports: { id: string; via: string | null; type: string; assessable: boolean; depth: number }[]) {
   const reached = new Set([start]);
   return supports.filter((s) => {
-    if (s.type !== "mandatory" || !reached.has(s.via ?? "")) return false;
+    if ((s.type !== "mandatory" && s.type !== "uses") || !reached.has(s.via ?? "")) return false;
     reached.add(s.id);
     return s.assessable;
   });
