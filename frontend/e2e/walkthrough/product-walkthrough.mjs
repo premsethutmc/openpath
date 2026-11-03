@@ -305,6 +305,8 @@ async function walk(w) {
     console.error(`[${w.key}]`, e);
   }
   const hard = log.blockers.filter((b) => /^stopped|taught nothing|no fresh check|reload changed|page error|needs the Django/.test(b));
+  const endScreen = log.steps.find((x) => x.what === "end of session")?.on_screen ?? "";
+  if (/Let's pause this one/.test(endScreen)) { log.blockers.push(`the app paused the skill: ${endScreen.slice(endScreen.indexOf("Let's pause"), endScreen.indexOf("Let's pause") + 160)}`); hard.push("paused"); }
   log.outcome = hard.length ? "blocked" : log.written?.state === "awaiting educator" || log.written?.state === "not submitted" ? "awaiting educator" : log.ended === "max-steps" ? "blocked" : "completed";
   if (log.ended === "max-steps" && !hard.length) log.blockers.push("the session was still asking questions after the step limit");
   console.log(`[${w.key}] OUTCOME ${log.outcome}`);
