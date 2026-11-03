@@ -524,12 +524,12 @@ The gate and ordering take the mistake id alone. The foundation runtime already 
 | Competency (mapping) | Skill | Family, parameters | Answer | Explanation |
 |---|---|---|---|---|
 | `MATH.number.fraction-comparison` (`fraction-comparison-subskills@1`) | compare, same bottom | `adfcmp` mode 0 | fraction | `compare_same_bottom` |
-| | compare, same top | `adfcmp` mode 1 | fraction | `compare_same_top` (TP-NUM-01 text) |
+| | compare, same top | `adfcmp` mode 1 | fraction | **held back** (TP-NUM-01 text kept in the source) |
 | | order, same bottom | `adford` mode 0 | tuple | `order_same_bottom` |
 | | order, same top | `adford` mode 1 | tuple | `order_same_top` |
 | | compare, unlike | `adfcmpu` | fraction | `compare_unlike` |
 | | order, unlike | `adfordu` | tuple | `order_unlike` |
-| `MATH.number.equivalent-fractions` (`equivalent-fractions-subskills@1`) | missing part | `eqfrac` | number | `equivalent_missing_part` (ends with the multiplier check) |
+| `MATH.number.equivalent-fractions` (`equivalent-fractions-subskills@1`) | missing part | `eqfrac` | number | hand-written `strip_model` and `multiply_both` (no scoped explanation, see below) |
 | | lowest terms | `avlow` | mixed | `lowest_terms` |
 | | equal by folding | `avfold` | choice | `equal_by_folding` (with the family picture) |
 
@@ -541,17 +541,23 @@ The gate and ordering take the mistake id alone. The foundation runtime already 
 
 | | Count |
 |---|---|
-| Teaching | 9 scoped explanations, demonstration-ready (`pending_review`), 0 educator-approved. The hand-written explanations (`same_size_pieces`, `strip_model`, `multiply_both`, `times_table_link`) are kept as lessons and are not counted as skill teaching |
+| Teaching | **6** skill-connected scoped explanations, demonstration-ready (`pending_review`), 0 educator-approved. 2 more skills (compare same bottom, missing part) are taught by the existing hand-written lessons, which use authored questions and so are not skill-connected. 1 skill (compare same top) has no teaching yet (held back) |
 | Assessment | 9 |
 | Recovery | 9 |
 | Retention | 9 |
 
-**Learner-path evidence** (`frontend/src/journey/fraction-pattern.test.ts`, 21 tests):
+**Learner-path evidence** (`frontend/src/journey/fraction-pattern.test.ts`, 20 tests; the teaching paths cover the 6 scoped explanations):
 - **Partitions:** exactly one partition per task, the trusted typed answer accepted, and meanings read from the prompts.
 - **Each skill, assessment path:** fresh same-skill checks, replay, a fresh same-skill delayed check after 8 days, and recovery after a wrong delayed answer in the question's own form (another option, the triple reversed, another fraction).
 - **Each skill, teaching path:** teach → guided → fresh check → reload → evidence for that skill only, with no method credit.
 - **Teaching alignment:** no digits in the explanation text, true worked sentences, `pending_review` status.
 - **Replay:** stamped with the mapping and order-independent.
+
+**Why three scoped explanations are held back (found by the browser journey A in CI).** The engine orders general explanations by the family of the learner's last mistake (before the diagnosis kind), not by skill.
+- **Missing part and compare same bottom:** a scoped explanation for either would be chosen before the hand-written lesson that already teaches that skill, after a mistake on it. That displaces the designed lesson; journey A expects the strip model after an additive, conceptual mistake.
+- **Compare same top:** it shares the `adfcmp` family, so after a same-bottom mistake it would be chosen over the hand-written lesson.
+
+All three stay authored in `fraction-strategies.mts` (`held`), waiting for skill-keyed ordering. A test pins the designed choices: `strip_model` (conceptual) and `multiply_both` (procedural) after a missing-part mistake, and `same_size_pieces` (conceptual) after a same-bottom mistake. It also pins the remaining limitation: with a procedural diagnosis after a same-bottom mistake, the procedural same-bottom *ordering* explanation (another skill) comes first.
 
 **Still blocked or not done:**
 - **Misconception-specific fraction fixes:** none added. The modelled mistakes are shared by several skills:

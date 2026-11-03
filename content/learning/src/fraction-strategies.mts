@@ -31,19 +31,27 @@ const fig = (p: Problem) => {
   return v ? { widget: v } : {};
 };
 
-interface Spec { id: string; title: string; kind: "conceptual" | "procedural"; family: string; subSkill: string; text: string[]; math: (p: Problem) => string[]; example?: (p: Problem) => boolean }
+interface Spec { held?: string; id: string; title: string; kind: "conceptual" | "procedural"; family: string; subSkill: string; text: string[]; math: (p: Problem) => string[]; example?: (p: Problem) => boolean }
 const FCMP = "MATH.number.fraction-comparison", EQF = "MATH.number.equivalent-fractions";
+/** Held back: the hand-written lesson already teaches exactly this skill (same_size_pieces: same bottom number; strip_model and
+ * multiply_both: the missing part). A scoped explanation here would be ordered before it by the engine (it prefers an
+ * explanation whose check is the family the learner got wrong, before the diagnosis kind), displacing the designed lesson. */
+/** Held back: same-top comparison shares its family (adfcmp) with the hand-written same-bottom lesson, and the engine orders
+ * explanations by the family of the learner's last mistake, not the skill: after a same-bottom mistake it would choose this
+ * same-top explanation over the designed lesson. The text (TP-NUM-01) is kept here for skill-keyed ordering. */
+const SHARES_HANDWRITTEN_FAMILY = "it shares its family with the hand-written lesson, and the engine orders by family, not skill";
+const HANDWRITTEN_FIRST = "the hand-written lesson teaches this skill and the engine would order a scoped explanation before it";
 const SPECS: Record<string, Spec[]> = {
   [FCMP]: [
-    { id: "compare_same_bottom", title: "Same bottom number: count the pieces", kind: "conceptual", family: "adfcmp", subSkill: "fraction.compare-same-bottom@1", math: answerLine, text: ["When the bottom numbers are the same, the pieces are the same size.", "Then compare the top numbers: the fraction with more pieces is greater, and the one with fewer pieces is smaller."] },
-    { id: "compare_same_top", title: "Same top number: more parts are smaller parts", kind: "conceptual", family: "adfcmp", subSkill: "fraction.compare-same-top@1", math: answerLine, text: ["The bottom number says how many equal parts the whole is cut into. Cutting the same whole into more parts makes each part smaller.", "So with the same top number, the fraction with the smaller bottom number is greater."] },
+    { held: HANDWRITTEN_FIRST, id: "compare_same_bottom", title: "Same bottom number: count the pieces", kind: "conceptual", family: "adfcmp", subSkill: "fraction.compare-same-bottom@1", math: answerLine, text: ["When the bottom numbers are the same, the pieces are the same size.", "Then compare the top numbers: the fraction with more pieces is greater, and the one with fewer pieces is smaller."] },
+    { held: SHARES_HANDWRITTEN_FAMILY, id: "compare_same_top", title: "Same top number: more parts are smaller parts", kind: "conceptual", family: "adfcmp", subSkill: "fraction.compare-same-top@1", math: answerLine, text: ["The bottom number says how many equal parts the whole is cut into. Cutting the same whole into more parts makes each part smaller.", "So with the same top number, the fraction with the smaller bottom number is greater."] },
     { id: "order_same_bottom", title: "Order fractions with the same bottom number", kind: "procedural", family: "adford", subSkill: "fraction.order-same-bottom@1", math: answerLine, text: ["With the same bottom number the pieces are the same size.", "Order the fractions by their top numbers, from the fewest pieces to the most."] },
     { id: "order_same_top", title: "Order fractions with the same top number", kind: "procedural", family: "adford", subSkill: "fraction.order-same-top@1", math: answerLine, text: ["With the same top number, more equal parts in the whole means smaller parts.", "So the fraction with the biggest bottom number is the smallest: order from the biggest bottom number to the smallest."] },
     { id: "compare_unlike", title: "Different tops and bottoms: use a common bottom number", kind: "procedural", family: "adfcmpu", subSkill: "fraction.compare-unlike@1", math: answerLine, text: ["When the bottom numbers are different, the pieces are different sizes, so the top numbers cannot be compared yet.", "Rewrite both fractions with a common bottom number, then compare the top numbers."] },
     { id: "order_unlike", title: "Order unlike fractions with a common bottom number", kind: "procedural", family: "adfordu", subSkill: "fraction.order-unlike@1", math: answerLine, text: ["Rewrite all three fractions with a common bottom number, so the pieces are the same size.", "Then order them by their top numbers, from the smallest to the largest."] },
   ],
   [EQF]: [
-    { id: "equivalent_missing_part", title: "The missing part: the same multiplier top and bottom", kind: "procedural", family: "eqfrac", subSkill: "fraction.equivalent-missing-part@1", math: eqMath, example: (p) => p.params[2] / p.params[1] > 1, text: ["Equal fractions cover the same amount: cutting every piece into the same number of smaller pieces multiplies the top and the bottom by the same number.", "Find what the bottom was multiplied by, and multiply the top by the same number. Check that both were multiplied by the same number."] },
+    { held: HANDWRITTEN_FIRST, id: "equivalent_missing_part", title: "The missing part: the same multiplier top and bottom", kind: "procedural", family: "eqfrac", subSkill: "fraction.equivalent-missing-part@1", math: eqMath, example: (p) => p.params[2] / p.params[1] > 1, text: ["Equal fractions cover the same amount: cutting every piece into the same number of smaller pieces multiplies the top and the bottom by the same number.", "Find what the bottom was multiplied by, and multiply the top by the same number. Check that both were multiplied by the same number."] },
     { id: "lowest_terms", title: "Lowest terms: divide by the highest common factor", kind: "procedural", family: "avlow", subSkill: "fraction.lowest-terms@1", math: answerLine, example: (p) => p.params[2] > 2, text: ["A fraction is in its lowest terms when its top and bottom have no common factor other than one.", "Find the highest common factor of the top and the bottom, and divide both by it, so the fraction stays equal."] },
     { id: "equal_by_folding", title: "Folding makes an equal fraction", kind: "conceptual", family: "avfold", subSkill: "fraction.equal-by-folding@1", math: optionLine, text: ["Folding every strip into the same number of parts cuts each strip into smaller equal parts.", "The coloured parts and all the parts are both multiplied by the same number, so the same amount is coloured: an equal fraction."] },
   ],
@@ -63,7 +71,7 @@ for (const [competency, specs] of Object.entries(SPECS)) {
     used.add(exposureKey(id));
     return id;
   };
-  const added = specs.map((s) => {
+  const added = specs.filter((s) => !s.held).map((s) => {
     const inSkill = (id: string) => connectedSkill(config, id) === s.subSkill;
     const inst = P(pick(s.family, "practice", (x) => inSkill(x) && (!s.example || s.example(P(x))), "typed"));
     const guided = pick(s.family, "practice", inSkill, "any");
@@ -73,5 +81,5 @@ for (const [competency, specs] of Object.entries(SPECS)) {
   m.strategies = [...kept, ...added];
 }
 writeFileSync(file, JSON.stringify(doc, null, 1) + "\n");
-console.log("added", Object.values(SPECS).flat().length, "scoped fraction explanations");
+console.log("added", Object.values(SPECS).flat().filter((s) => !s.held).length, "scoped fraction explanations");
 process.exit(0);

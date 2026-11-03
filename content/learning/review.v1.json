@@ -39442,7 +39442,7 @@
    "competency": "MATH.number.equivalent-fractions",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "7624879b",
+   "contentHash": "26edced8",
    "state": "draft",
    "history": [
     {
@@ -39491,6 +39491,14 @@
      "role": "engineer",
      "at": "2026-11-03T04:14:59.656Z",
      "contentHash": "7624879b",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-03T06:16:51.960Z",
+     "contentHash": "26edced8",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -39926,7 +39934,7 @@
    "competency": "MATH.number.fraction-comparison",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "a4a80ae5",
+   "contentHash": "a8a967ab",
    "state": "draft",
    "history": [
     {
@@ -39991,6 +39999,14 @@
      "role": "engineer",
      "at": "2026-11-03T04:14:59.656Z",
      "contentHash": "a4a80ae5",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-03T06:16:51.960Z",
+     "contentHash": "a8a967ab",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

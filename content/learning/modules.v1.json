@@ -97,35 +97,6 @@
      "check": "eq-s3c"
     },
     {
-     "id": "equivalent_missing_part",
-     "title": "The missing part: the same multiplier top and bottom",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The missing part: the same multiplier top and bottom",
-       "text": [
-        "Equal fractions cover the same amount: cutting every piece into the same number of smaller pieces multiplies the top and the bottom by the same number.",
-        "Find what the bottom was multiplied by, and multiply the top by the same number. Check that both were multiplied by the same number."
-       ],
-       "math": [
-        "2/8 = □/72",
-        "8 × 9 = 72, so multiply by 9",
-        "2 × 9 = 18",
-        "Check by cross-multiplying: 2 × 72 = 144 and 8 × 18 = 144, so 2/8 = 18/72"
-       ],
-       "role": "strategy",
-       "instance": "gen:eqfrac:2,8,72"
-      }
-     ],
-     "guided": "gen:eqfrac:2,6,12:mc",
-     "check": "gen:eqfrac:6,10,70",
-     "scope": {
-      "family": "eqfrac",
-      "subSkill": "fraction.equivalent-missing-part@1"
-     }
-    },
-    {
      "id": "lowest_terms",
      "title": "Lowest terms: divide by the highest common factor",
      "kind": "procedural",
@@ -443,62 +414,6 @@
      ],
      "guided": "fc-g1",
      "check": "fc-c1"
-    },
-    {
-     "id": "compare_same_bottom",
-     "title": "Same bottom number: count the pieces",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Same bottom number: count the pieces",
-       "text": [
-        "When the bottom numbers are the same, the pieces are the same size.",
-        "Then compare the top numbers: the fraction with more pieces is greater, and the one with fewer pieces is smaller."
-       ],
-       "math": [
-        "Which fraction is smaller: 5/8 or 1/8?",
-        "Both are counted in the same size of part, so compare the top numbers: more parts is more.",
-        "So the answer is 1/8"
-       ],
-       "role": "strategy",
-       "instance": "gen:adfcmp:0,8,5,1,1"
-      }
-     ],
-     "guided": "gen:adfcmp:0,11,4,5,1",
-     "check": "gen:adfcmp:0,11,1,8,0",
-     "scope": {
-      "family": "adfcmp",
-      "subSkill": "fraction.compare-same-bottom@1"
-     }
-    },
-    {
-     "id": "compare_same_top",
-     "title": "Same top number: more parts are smaller parts",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Same top number: more parts are smaller parts",
-       "text": [
-        "The bottom number says how many equal parts the whole is cut into. Cutting the same whole into more parts makes each part smaller.",
-        "So with the same top number, the fraction with the smaller bottom number is greater."
-       ],
-       "math": [
-        "Which fraction is greater: 2/5 or 2/7?",
-        "Both have the same number of parts on top. The bottom number tells how many equal parts the whole is cut into: more parts are smaller parts. So 2/5 and 2/7 compare the other way to their bottom numbers.",
-        "So the answer is 2/5"
-       ],
-       "role": "strategy",
-       "instance": "gen:adfcmp:1,2,5,7,0"
-      }
-     ],
-     "guided": "gen:adfcmp:1,3,10,4,0",
-     "check": "gen:adfcmp:1,3,10,11,0",
-     "scope": {
-      "family": "adfcmp",
-      "subSkill": "fraction.compare-same-top@1"
-     }
     },
     {
      "id": "order_same_bottom",

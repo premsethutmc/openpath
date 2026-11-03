@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "e1261dc5fa791264317e43716da8406c6b11cc3b4b1e56272c648183fea5d0a1",
+ "sha256": "c341793bd2d1d481ff2e95fc79fd5f24aa30701093dad1ff23c3402d2fc00ffc",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "093892bcfa2f777f11a38aecd11c90e2ed3a4c1b9c850e191feaed3a5ef97abc",
@@ -85,10 +85,10 @@
   "content/learning/graph-audit.v1.json": "6eccc095bc2e8174c21c284bfeb51bb72f64dc936b0a895df52ed7bb89798754",
   "content/learning/library.v1.json": "40645900fdb345f8d60e4a20718162f2c4b0a365ba8b3ff5a9b210fc268a4824",
   "content/learning/mapping-exemplars.v1.json": "9efa60d89c951ba5668b54ce6827c0e310e3f2aa3996091192260936d917cc89",
-  "content/learning/modules.v1.json": "34f1e9694f85c1205660e6fcb13726f90b498f78c1b6ca8d52e665247016d29f",
+  "content/learning/modules.v1.json": "e5952dcf198ac8c89b55fb2ab8348b4d2f655b9fa6a9a35984e7e56efaf32195",
   "content/learning/problems.v1.json": "2d0cca6da92e398d4077e07be65162787e59652cda5319b8928ab0ab52c4e727",
   "content/learning/question-status.v1.json": "4a368546d264f94ed741ac32a4aebe75d610bbdd55e8f39aae17809a82144a61",
-  "content/learning/review.v1.json": "eceb239fcc32589eab1dc94b87833da8f89453151f7461f57a0adf03dad9dcfc",
+  "content/learning/review.v1.json": "6f7670136569234988e9447fed4e61a526af752a837220a7986b9e7b346164ee",
   "content/learning/showcase-grade10.v1.json": "68f993d4546bd2be88eb63d4c3a6edc8ab46c59fc2bfefd0deff3e8a0a32dbd5",
   "content/learning/teaching-contract-exemptions.v1.json": "06fdf5a0d8d49a7633d0caefe5d698b6325116d4928a5f764d7db41de29d0531",
   "content/learning/written-modules.v1.json": "d9a0a9c5af5a65353d1ecc984a55166e8a7c572d1d6ef76e25f52962f96ad08a",

@@ -13,7 +13,7 @@ import { foundationPlan, FOUNDATION_POLICY, type FoundationPolicy } from "../../
 import { moduleFor, question } from "../../../packages/learning/src/content";
 import { exposureKey, FAMILIES, pool, problemOf } from "../../../packages/learning/src/families";
 import { withDecisions } from "../../../packages/learning/src/records";
-import { teachable } from "../../../packages/learning/src/intervention";
+import { orderStrategies, teachable } from "../../../packages/learning/src/intervention";
 import { modules } from "../../../packages/learning/src/content";
 import { contentHash } from "../../../packages/learning/src/explanation-review";
 import { make, learnerState } from "../../../packages/learning/src/session";
@@ -39,11 +39,18 @@ const HANDWRITTEN: Record<string, string[]> = {
   "MATH.number.fraction-comparison": ["same_size_pieces"],
   "MATH.number.equivalent-fractions": ["strip_model", "multiply_both", "times_table_link"],
 };
+/** skills with a scoped explanation */
 const TAUGHT: Record<string, string> = {
-  "fraction.compare-same-bottom@1": "compare_same_bottom", "fraction.compare-same-top@1": "compare_same_top", "fraction.order-same-bottom@1": "order_same_bottom",
+  "fraction.order-same-bottom@1": "order_same_bottom",
   "fraction.order-same-top@1": "order_same_top", "fraction.compare-unlike@1": "compare_unlike", "fraction.order-unlike@1": "order_unlike",
-  "fraction.equivalent-missing-part@1": "equivalent_missing_part", "fraction.lowest-terms@1": "lowest_terms", "fraction.equal-by-folding@1": "equal_by_folding",
+  "fraction.lowest-terms@1": "lowest_terms", "fraction.equal-by-folding@1": "equal_by_folding",
 };
+/** skills taught by the existing hand-written lesson: no scoped explanation is added (it would displace the lesson) */
+const HANDWRITTEN_TEACHES: Record<string, string[]> = {
+  "fraction.compare-same-bottom@1": ["same_size_pieces"], "fraction.equivalent-missing-part@1": ["strip_model", "multiply_both"],
+};
+/** held back with no lesson of its own: it shares its family with the hand-written lesson (the engine orders by family) */
+const HELD_NO_TEACHING = ["fraction.compare-same-top@1"];
 /** the fractions written in a prompt or line, as [top, bottom] */
 const fracs = (t: string) => [...t.matchAll(/(?<![\d/])(\d+)\/(\d+)(?![\d/])/g)].map((m) => [Number(m[1]), Number(m[2])] as const);
 const value = ([t, b]: readonly [number, number]) => t / b;
@@ -124,10 +131,17 @@ test("teaching: the hand-written lessons are kept; each skill has its own scoped
       const rec = reg.find((r) => r.competency === config.competency && r.strategy === id)!;
       assert.equal(contentHash(config.competency, st), (rec.revisions.at(-1) as unknown as { contentHash: string }).contentHash, `${id}: unchanged`);
     }
-    assert.deepEqual(m.strategies.filter((st) => st.scope).map((st) => st.id).sort(), config.subSkills.map((s) => TAUGHT[s.id]).sort());
+    assert.deepEqual(m.strategies.filter((st) => st.scope).map((st) => st.id).sort(), config.subSkills.filter((s) => TAUGHT[s.id]).map((s) => TAUGHT[s.id]).sort());
     assert.ok(!m.strategies.some((st) => st.addresses), "no misconception-specific fix: the modelled fraction mistakes are shared by several skills");
     for (const s of config.subSkills) {
       const list = m.strategies.filter((st) => teachable(m, st, []) && strategyConnects(config, s.id, st));
+      if (HELD_NO_TEACHING.includes(s.id)) { assert.deepEqual(list, [], `${s.id}: teaching held back (reported gap)`); continue; }
+      if (HANDWRITTEN_TEACHES[s.id]) {
+        // reported, not hidden: the hand-written lesson teaches it with authored questions, which do not connect to the mapping
+        assert.deepEqual(list, [], `${s.id}: no skill-connected explanation`);
+        for (const id of HANDWRITTEN_TEACHES[s.id]) assert.ok(m.strategies.some((st) => st.id === id), `${id} teaches ${s.id}`);
+        continue;
+      }
       assert.deepEqual(list.map((st) => st.id), [TAUGHT[s.id]], `${s.id}: exactly its own explanation`);
       const st = list[0], b = st.screens[0], ex = problemOf(b.instance!)!;
       for (const id of [b.instance!, st.guided, st.check]) assert.equal(connectedSkill(config, id), s.id, `${st.id}: ${id}`);
@@ -185,4 +199,20 @@ test("saved evidence replays under its mapping: order-independent, ledger untouc
     assert.equal(JSON.stringify(withDecisions(L.events, L.decisions)), frozen);
   }
   assert.deepEqual([FRACTION_COMPARISON_CONFIG.mapping, EQUIVALENT_FRACTIONS_CONFIG.mapping], ["fraction-comparison-subskills@1", "equivalent-fractions-subskills@1"]);
+});
+
+test("after a mistake on a hand-taught skill: the designed lesson is still chosen for a conceptual difficulty; the known family-ordering limitation is pinned", () => {
+  const first = (competency: string, qid: string, wrong: string, kind: string) => {
+    const L = new SliceSession(`fr-order-${competency}-${kind}`, competency, at);
+    assert.equal(L.submit(qid, wrong, "check").credit, false);
+    return orderStrategies(moduleFor(competency)!, { asked: [], posterior: {}, next: null, result: kind, confidence: 1, policy: "test" } as never, L.state().records, [])[0]?.id;
+  };
+  // the designed lessons (the browser journey A relies on the strip model after an additive, conceptual mistake)
+  assert.equal(first("MATH.number.equivalent-fractions", "gen:eqfrac:2,4,8", "6", "conceptual"), "strip_model");
+  assert.equal(first("MATH.number.equivalent-fractions", "gen:eqfrac:2,4,8", "6", "procedural"), "multiply_both");
+  assert.equal(first("MATH.number.fraction-comparison", "gen:adfcmp:0,3,1,2,0", "1/3", "conceptual"), "same_size_pieces");
+  // limitation (engine, reported in the handover): explanations are ordered by the family of the last mistake and the diagnosis
+  // kind, not by skill; with a procedural diagnosis after a same-bottom comparison mistake, the procedural same-bottom ORDERING
+  // explanation (another skill of the competency) comes before the conceptual hand-written lesson
+  assert.equal(first("MATH.number.fraction-comparison", "gen:adfcmp:0,3,1,2,0", "1/3", "procedural"), "order_same_bottom");
 });
