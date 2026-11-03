@@ -73,9 +73,9 @@
       "domain": "number",
       "competencies": 79,
       "missingModule": 8,
-      "missingSkillMetadata": 69,
-      "partialSkillConnections": 2,
-      "connectedAnswerChains": 8,
+      "missingSkillMetadata": 67,
+      "partialSkillConnections": 4,
+      "connectedAnswerChains": 17,
       "noEligibleGeneralTeaching": 14,
       "withBoundedWorkingExamples": 21,
       "withoutBoundedWorkingExamples": 50

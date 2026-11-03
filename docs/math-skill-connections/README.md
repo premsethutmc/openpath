@@ -514,3 +514,52 @@ The gate and ordering take the mistake id alone. The foundation runtime already 
 - The relations are `support`, not `plausible`: the competency's game and river puzzles do not need regrouping, and support never gates, so chapter access stays open.
 - The expansion generator's cycle check accepts both edges; none is disputed. `test_expansion.py` pins them.
 - The regroup competencies are written for two digits (Grade 2). Three-digit column regrouping has no separate competency, so none was invented.
+
+## 10. Fractions: equivalence, comparison and ordering (Claude, `feat/math-fractions`, from `ffa2c1d7`)
+
+**What newly works: 9 skills across 2 competencies.** The batch reuses the existing generators, the shared typed answer contracts (fraction, tuple, mixed, native choice) and the two hand-written fraction modules.
+- **Mappings:** `packages/learning/src/subskill-config-fractions.ts`, each `@1`.
+- **Teaching:** `content/learning/src/fraction-strategies.mts`. It adds skill-scoped explanations to `modules.v1.json` and keeps the hand-written chapters and explanations unchanged, as the fraction-models module already does.
+
+| Competency (mapping) | Skill | Family, parameters | Answer | Explanation |
+|---|---|---|---|---|
+| `MATH.number.fraction-comparison` (`fraction-comparison-subskills@1`) | compare, same bottom | `adfcmp` mode 0 | fraction | `compare_same_bottom` |
+| | compare, same top | `adfcmp` mode 1 | fraction | `compare_same_top` (TP-NUM-01 text) |
+| | order, same bottom | `adford` mode 0 | tuple | `order_same_bottom` |
+| | order, same top | `adford` mode 1 | tuple | `order_same_top` |
+| | compare, unlike | `adfcmpu` | fraction | `compare_unlike` |
+| | order, unlike | `adfordu` | tuple | `order_unlike` |
+| `MATH.number.equivalent-fractions` (`equivalent-fractions-subskills@1`) | missing part | `eqfrac` | number | `equivalent_missing_part` (ends with the multiplier check) |
+| | lowest terms | `avlow` | mixed | `lowest_terms` |
+| | equal by folding | `avfold` | choice | `equal_by_folding` (with the family picture) |
+
+**Unmapped, with reasons in the config:**
+- `adfnl`: locating unit fractions on a number line, which is a different skill;
+- `avlike`: classifying like and unlike fractions.
+
+**Coverage, kept separate (9 skills):**
+
+| | Count |
+|---|---|
+| Teaching | 9 scoped explanations, demonstration-ready (`pending_review`), 0 educator-approved. The hand-written explanations (`same_size_pieces`, `strip_model`, `multiply_both`, `times_table_link`) are kept as lessons and are not counted as skill teaching |
+| Assessment | 9 |
+| Recovery | 9 |
+| Retention | 9 |
+
+**Learner-path evidence** (`frontend/src/journey/fraction-pattern.test.ts`, 21 tests):
+- **Partitions:** exactly one partition per task, the trusted typed answer accepted, and meanings read from the prompts.
+- **Each skill, assessment path:** fresh same-skill checks, replay, a fresh same-skill delayed check after 8 days, and recovery after a wrong delayed answer in the question's own form (another option, the triple reversed, another fraction).
+- **Each skill, teaching path:** teach → guided → fresh check → reload → evidence for that skill only, with no method credit.
+- **Teaching alignment:** no digits in the explanation text, true worked sentences, `pending_review` status.
+- **Replay:** stamped with the mapping and order-independent.
+
+**Still blocked or not done:**
+- **Misconception-specific fraction fixes:** none added. The modelled mistakes are shared by several skills:
+  - `bigger-bottom-bigger`: compare and order same top, compare unlike, and the number line;
+  - `as-given`: ordering, both modes.
+
+  Misconception evidence is not keyed by skill (section 9a), so a fix chosen by mistake id alone could present one skill's mistake as another's. The TP-NUM-01 `fix_bigger_bottom_bigger` candidate waits for skill-keyed evidence.
+- **Pictures:**
+  - `compare_unlike` shows the family's two-strip picture (both fractions, each strip shaded for its own fraction).
+  - `equal_by_folding` shows its question picture.
+  - The same-bottom and same-top teaching pictures show only the first fraction, so they are not used, and those explanations are text and worked lines only.

@@ -25645,6 +25645,84 @@
    ]
   },
   {
+   "id": "MATH.number.equivalent-fractions#equal_by_folding",
+   "subject": "mathematics",
+   "competency": "MATH.number.equivalent-fractions",
+   "strategy": "equal_by_folding",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:7e296048f899e299cf0cb1b3558d287dd1c20c98ad6d2afcaf95b7ad0fe304f8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-03T03:47:48.549Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.equivalent-fractions#equivalent_missing_part",
+   "subject": "mathematics",
+   "competency": "MATH.number.equivalent-fractions",
+   "strategy": "equivalent_missing_part",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:c74e936941678ea31eb4673e5cc32ca56ebea1050159ca47a3412f8aef0c64ea",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-03T03:47:48.545Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.equivalent-fractions#lowest_terms",
+   "subject": "mathematics",
+   "competency": "MATH.number.equivalent-fractions",
+   "strategy": "lowest_terms",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:49449530aa3738b6738d54f3d174810df302effdf1ca773f86b5ccdd56183452",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-03T03:47:48.548Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.number.equivalent-fractions#multiply_both",
    "subject": "mathematics",
    "competency": "MATH.number.equivalent-fractions",
@@ -26310,6 +26388,162 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.137Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.fraction-comparison#compare_same_bottom",
+   "subject": "mathematics",
+   "competency": "MATH.number.fraction-comparison",
+   "strategy": "compare_same_bottom",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:dcabb71a555d9513412706f34a815af95c79a41e8150bd2aeca6cac613310664",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-03T03:47:48.551Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.fraction-comparison#compare_same_top",
+   "subject": "mathematics",
+   "competency": "MATH.number.fraction-comparison",
+   "strategy": "compare_same_top",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:954e1d5169246dbccb3863a1a20b7bfe99d7e86c66111ce64ae5a767f937a48e",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-03T03:47:48.551Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.fraction-comparison#compare_unlike",
+   "subject": "mathematics",
+   "competency": "MATH.number.fraction-comparison",
+   "strategy": "compare_unlike",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:41da606b76ea483ef68a8d24b06274adbb35d2d26effa6b2ae7df4d4ae4342a2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-03T03:47:48.571Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.fraction-comparison#order_same_bottom",
+   "subject": "mathematics",
+   "competency": "MATH.number.fraction-comparison",
+   "strategy": "order_same_bottom",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:b80cccfaa1ae14ddacaadf1c2301cdade19233a8be3bfba4c7eb08b1b80fec0b",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-03T03:47:48.560Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.fraction-comparison#order_same_top",
+   "subject": "mathematics",
+   "competency": "MATH.number.fraction-comparison",
+   "strategy": "order_same_top",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:5356013e14ce971ef353d6f3dd9eb77f8c4230c65c6b91a9120442eb2ae0385a",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-03T03:47:48.570Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.fraction-comparison#order_unlike",
+   "subject": "mathematics",
+   "competency": "MATH.number.fraction-comparison",
+   "strategy": "order_unlike",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:031ca8a75121c8b33bb56f7862a944c5146f7bbe7c8e946077db1545bfc16df8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-03T03:47:48.579Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
