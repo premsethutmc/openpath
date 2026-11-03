@@ -419,7 +419,11 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     if (!s) return { ...base, phase: "pause", diagnosis: d, reason: "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." };
     return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, [own!.claim!.explanation]), basis: evidenceBasis(competency, records, { evidence: ev, diagnosis: d }), diagnosis: d, reason: `${own!.claim!.says} It showed again after the last explanation, so here is a different one.` };
   }
-  if (d.next && !shown) return { ...base, phase: "explore", question: d.next, diagnosis: d, reason: "A short check to find the right starting point." };
+  // explore-once@1: an exploratory question already answered (in either format) is never served again. The diagnosis counts
+  // only independent answers, so one answered with help (e.g. after reviewing this lesson in the same session) stays
+  // "unasked" there; asking it again would repeat it for ever. The next unanswered one is asked instead, or none.
+  const exploreNext = d.next && !answered(records, d.next) ? d.next : d.next ? m.diagnostics.find((id) => !answered(records, id) && withinGrade(records, id)) ?? null : null;
+  if (exploreNext && !shown) return { ...base, phase: "explore", question: exploreNext, diagnosis: d, reason: "A short check to find the right starting point." };
   // adaptive-loop repair: a gap the exploratory questions show is investigated exactly as from Practice (diagnostic@2 on the
   // wrong answer, then the supporting skill it points to), before this module's own explanations. Only with the learner's
   // whole evidence (not inside a recovery that is already running), and only for a wrong answer OpenPath can reason about.
@@ -647,10 +651,50 @@ export interface RecoveryState {
 
 export { familyOf, investigateContext, investigation } from "./hypotheses";
 
+/**
+ * question-supports@1: the supporting skills recovery may check for ONE problem. A competency-level relation says what a skill
+ * usually builds on; the problem's own solution steps say what THIS problem uses (10 × □ = 30 uses multiplication facts, not
+ * number patterns). A used skill counts when it is eligible here (a module to assess it; within the learner's grade or
+ * readiness route) and is not the problem's own skill.
+ *   - Used skills close to the problem's level (BACKGROUND_GRADES) are checked first (type "uses", depth 1), closest to the
+ *     problem's topic first, then what they build on; competency-level relations the problem does not use are not followed.
+ *   - A used skill learned BACKGROUND_GRADES or more grades earlier is background arithmetic (addition for a probability): when
+ *     there is no closer one, the competency-level relations come first and such skills after them.
+ *   - No eligible used skill: the competency-level walk, unchanged.
+ * Whether a skill is already shown is decided where it is checked (recovery).
+ */
+export const BACKGROUND_GRADES = 3;
+export function questionSupports(originalQid: string, records: LearnerRecords): RecoveryState["supports"] {
+  const q = question(originalQid);
+  const own = graph.evidenceTarget(q.competency);
+  const walk: RecoveryState["supports"] = walkSupports(q.competency, RECOVERY_DEPTH).map((s) => ({ ...s, assessable: !!moduleFor(s.id) }));
+  const grade = gradeOf(records);
+  const eligible = (id: string) => !!moduleFor(id) && (grade === null || !!records.readinessRoute?.includes(id) || graph.get(id).gradeRange[0] <= grade);
+  const steps = problemOf(originalQid)?.steps ?? [];
+  const used = [...new Set(steps.map((s) => String(s.competency ?? "")).filter((id) => graph.byId.has(id)).map((id) => graph.evidenceTarget(id)))].filter((id) => id !== own && eligible(id));
+  if (!used.length) return walk;
+  // closest to the problem's own topic first: a used skill the competency-level relations also name, then one of the same
+  // strand, then the rest in solution order (a stable sort keeps step order within each rank)
+  const rank = (id: string) => (walk.some((s) => s.id === id) ? 0 : graph.get(id).strand === graph.get(own).strand ? 1 : 2);
+  const background = (id: string) => graph.get(own).gradeRange[0] - graph.get(id).gradeRange[1] >= BACKGROUND_GRADES;
+  const near = used.filter((id) => !background(id)).sort((a, b) => rank(a) - rank(b));
+  const far = used.filter(background).sort((a, b) => rank(a) - rank(b));
+  const out: RecoveryState["supports"] = [];
+  const seen = new Set([own, q.competency]);
+  const put = (s: RecoveryState["supports"][number]) => { if (!seen.has(s.id)) { seen.add(s.id); out.push(s); } };
+  const withSupports = (ids: string[]) => {
+    for (const id of ids) put({ id, depth: 1, via: q.competency, type: "uses", assessable: true });
+    for (const u of ids) for (const s of walkSupports(u, RECOVERY_DEPTH - 1)) put({ ...s, depth: s.depth + 1, assessable: !!moduleFor(s.id) });
+  };
+  if (near.length) withSupports([...near, ...far]);
+  else { for (const s of walk) put(s); withSupports(far); }
+  return out;
+}
+
 export function recovery(originalQid: string, records: LearnerRecords, evidence: (id: string) => SkillEvidence, now: number, session: string): RecoveryState {
   const q = question(originalQid);
   const tries = records.attempts.filter((a) => a.questionId === originalQid);
-  const supports = walkSupports(q.competency, RECOVERY_DEPTH).map((s) => ({ ...s, assessable: !!moduleFor(s.id) }));
+  const supports = questionSupports(originalQid, records);
   const base = { original: originalQid, competency: q.competency, supports, question: null, reasoning: null, plan: null, established: null };
   if (!tries.length) return { ...base, phase: "attempt", active: null, reason: "Try the problem." };
   if (rightAnswer(tries[0])) return { ...base, phase: "solved", active: null, reason: "Solved on your own." };
@@ -716,7 +760,7 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
     const r = resolved(s.id);
     if (r.done) continue;
     if (r.ms.phase === "pause") return { ...base, reasoning, plan, phase: "escalate", active: s.id, ...(r.ms.handover ? { handover: r.ms.handover } : {}), reason: `${graph.get(s.id).name}: different explanations have not clicked yet. Ask a teacher or parent; you can still try the problem again.` };
-    return { ...base, reasoning, plan, phase: "support", active: s.id, reason: `${plan?.kind === "unsure" ? `${plan.why} ` : ""}${s.type === "mandatory" ? `This problem rests on a skill that is not shown yet: ${graph.get(s.id).name}.` : `A related skill that is not shown yet may help: ${graph.get(s.id).name}.`} We check it first, then come back to the problem.` };
+    return { ...base, reasoning, plan, phase: "support", active: s.id, reason: `${plan?.kind === "unsure" ? `${plan.why} ` : ""}${s.type === "uses" ? `This problem uses a skill that is not shown yet: ${graph.get(s.id).name}.` : s.type === "mandatory" ? `This problem rests on a skill that is not shown yet: ${graph.get(s.id).name}.` : `A related skill that is not shown yet may help: ${graph.get(s.id).name}.`} We check it first, then come back to the problem.` };
   }
   // no gap found in the skills this builds on
   if (tries.length >= 2) {
