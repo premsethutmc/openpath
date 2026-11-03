@@ -1,7 +1,7 @@
 {
- "version": "1.1.0",
+ "version": "1.1.1",
  "status": "provisional",
- "note": "Additions for My Learning Year on top of content/mathematics/curriculum.v1.json, which is unchanged. Micro-skills refine an existing competency (partOf); their evidence also counts for that parent competency in the shared ledger. 'supports' edges are teaching-navigation links used for prerequisite recovery; they are not the v1 inference prerequisites and do not change any estimate. Original, AI-assisted, not educator-reviewed. 1.1.0 adds micro-skills, supports, and two relation kinds that are never followed by recovery: 'alternatives' (another way to do the same work) and 'enrichment' (going further). Nothing in 1.0.0 is changed or removed.",
+ "note": "Additions for My Learning Year on top of content/mathematics/curriculum.v1.json, which is unchanged. Micro-skills refine an existing competency (partOf); their evidence also counts for that parent competency in the shared ledger. 'supports' edges are teaching-navigation links used for prerequisite recovery; they are not the v1 inference prerequisites and do not change any estimate. Original, AI-assisted, not educator-reviewed. 1.1.0 adds micro-skills, supports, and two relation kinds that are never followed by recovery: 'alternatives' (another way to do the same work) and 'enrichment' (going further). Nothing in 1.0.0 is changed or removed. 1.1.1 adds supports for Find missing operands (addition and subtraction within 20, multiplication facts), replacing the disputed number-patterns edge in recovery.",
  "competencies": [
   {
    "id": "MLY.mult.facts-2-5-10",
@@ -382,6 +382,15 @@
     "MATH.measurement.volume-cubes"
    ],
    "note": "Length × width × height counts the unit cubes, one layer of the base for each unit of height."
+  },
+  {
+   "competency": "MATH.algebra.missing-number",
+   "supports": [
+    "MATH.number.addition",
+    "MATH.number.subtraction",
+    "MATH.number.multiplication-tables"
+   ],
+   "note": "A missing operand is found by undoing the operation: □ + k and n − □ use addition and subtraction facts, k × □ uses multiplication facts."
   }
  ],
  "alternatives": [

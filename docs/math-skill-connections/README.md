@@ -609,3 +609,25 @@ The readiness pathway (`foundation-runtime.ts`) already checked scope; the ordin
 - **Inverse operations (14 skills):** 14 general explanations plus 7 fixes, all published. 4 of the fixes are scope-guarded.
 - **Fractions (9 skills):** 7 skill-connected explanations. 2 skills are taught by the hand-written lessons, which use authored questions and so are not skill-connected. 0 gaps.
 - All explanations remain pending educator review.
+
+## 12. Product walkthrough findings (Claude, on `feat/math-fractions`, #105)
+
+A phone-sized walkthrough of the shipped build (provisional content, "Demonstration" labels) against the real Django API,
+through the ordinary learner screens; the script and its workflow live on `walkthrough/*` branches only, never in #105.
+Outcomes are reported as **completed**, **awaiting educator** (written work not yet marked) or **blocked**; a finished
+recording is not a completed journey.
+
+- **Missing operand → calendar-pattern detour (fixed).** "Find missing operands" (`MATH.algebra.missing-number`) had one
+  mandatory edge in graph 1.1.0, from "Extend additive number patterns": a sequence-order artefact that the relation audit
+  had not reviewed. Recovery followed it, so a learner whose mistake the app did not recognise was sent to a calendar
+  pattern question. The frozen inventory and the mandatory graph are unchanged; `graph-audit.v1.json` 1.1.1 classifies the
+  edge `disputed` (not traced in recovery) and `competency-additions.v1.json` 1.1.1 adds supports (never gates) from
+  addition and subtraction within 20 and multiplication facts, the operations the skill's questions undo. Lessons stay open
+  whatever their prerequisites. Regression: `frontend/src/journey/missing-number-support.test.ts` (graph view, the
+  unrecognised-mistake learner, the recognised-mistake learner).
+- **One-step equations** are reached through Grade 6 → Mathematics – Standard Six (Tamil Nadu) → Introduction to Algebra →
+  2.4 Solving unknowns. The Grade 7 sample's "Simple equations" maps only multi-step `linear-equations`.
+- **Same-top comparison** is taught by `compare_same_top` when a learner is right on same-bottom pairs and wrong on same-top.
+- **Written work** uses the existing screens: learner submits; parent shares from the dashboard's "Written work" panel;
+  educator marks at `/review/` → Marking; learner sees the mark. Granting the educator role is an administrator command
+  (`manage.py content_reviewer grant … --role educator`); there is no screen for it.
