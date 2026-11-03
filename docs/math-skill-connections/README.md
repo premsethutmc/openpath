@@ -698,3 +698,18 @@ The phone layout itself is fine.
 | Construction skills can show "Shown on your own" from auto-marked questions alone | Existing evidence rule | Educator review |
 | Hand-over acknowledgement | API only, no educator screen | A button in the Marking view |
 | `educator-marking.test.mjs` | Not in CI | Add it next to `learning-year.test.mjs` |
+| Fractions written task `wr:` (same-denominator comparison, chocolate bars) shows a proof-style marker rubric ("the parts are matched in order…") | The educator gets guidance that does not fit the task | Author a task-specific rubric |
+
+### 12.5 Combined validation (integrated `c978dda4` + docs)
+
+| Check | Result |
+|---|---|
+| Learning package (`bun test packages/learning`) | 1804 pass, 41 skip, 0 fail |
+| Frontend unit, every `src/**/*.test.ts` (run per file; the two longest alone) | 1008 pass, 0 fail (92 files) |
+| Typecheck `tsconfig.json`, `tsconfig.english.json` | 0 errors |
+| Typecheck `tsconfig.mathematics-integration.json` | 1 error, `@types/bun` missing in this environment; the same on baseline `4919cc15` |
+| Django, whole suite | 327 OK (3 skipped) |
+| Browser: `e2e/educator-marking.test.mjs` (real Django, `preview-english.mjs`) | 4/4 pass (fractions, algebra, geometry, constructions) |
+| Phone walkthrough A and B on the integrated build (390×844) | Both completed. A reload during a lesson review reopens the review after Continue; then fresh questions; "shown on your own" |
+| Grader bundle and manifest | Rebuilt (`BUNDLER=bun`, 216 inputs); the manifest test passes |
+| CI generated artifacts (specs, library, parity, coverage, expansion, board releases, compile-coverage) | Regenerated; no file changed |
