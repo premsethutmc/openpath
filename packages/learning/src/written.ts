@@ -50,3 +50,19 @@ export const outOf = (t: WrittenTask) => t.rubric.reduce((n, r) => n + r.points,
 /** The response a marked written attempt carries into the shared engine (the learner's own text never decides). */
 export const MARKED_RIGHT = "written:marked-correct";
 export const MARKED_NOT = "written:marked-not-yet";
+
+/**
+ * keyboard-offer@1: drawn answers (answer "drawing": constructions, sketches, diagrams) cannot be handed in while
+ * handwriting is off (product policy, frontend/src/writing/features.ts HANDWRITING_ENABLED; written-offer.test.ts keeps
+ * the two equal). Such a task is then never OFFERED. Nothing else changes: the content, its review hashes and the
+ * module lists are as loaded, and a drawing already handed in (with its mark) is read and counts as before.
+ */
+export const DRAWN_ANSWERS_ACCEPTED: boolean = false;
+/** Whether a question may be offered with keyboard input (every question that is not a drawn written task). */
+export const keyboardOffered = (id: string) => DRAWN_ANSWERS_ACCEPTED || byId.get(id)?.answer !== "drawing";
+/** The one place that lists the written tasks withheld from keyboard learners, by competency. */
+export const withheldDrawings: ReadonlyMap<string, readonly string[]> = DRAWN_ANSWERS_ACCEPTED
+  ? new Map()
+  : writtenTasks.filter((t) => t.answer === "drawing").reduce((m, t) => m.set(t.competency, [...(m.get(t.competency) ?? []), t.id]), new Map<string, string[]>());
+/** What the learner is told when a topic's remaining educator-marked work is drawn (never a trap: other topics stay open). */
+export const KEYBOARD_UNAVAILABLE = "The rest of this topic is drawing or construction work, which is not available with keyboard input. Your answers so far are saved; other topics are open.";

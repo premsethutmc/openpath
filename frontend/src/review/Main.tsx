@@ -66,7 +66,8 @@ function App() {
   const [signedIn, setSignedIn] = useState(false);
   const [error, setError] = useState("");
   const [data, setData] = useState<{ roles: string[]; registry: Registry } | null>(null);
-  const [view, setView] = useState<View>(() => (location.hash.startsWith("#family=") ? { name: "family", id: location.hash.slice(8) } : { name: "overview" }));
+  // #marking (the link the parent's Written work section gives) opens the educator's marking queue directly
+  const [view, setView] = useState<View>(() => (location.hash.startsWith("#family=") ? { name: "family", id: location.hash.slice(8) } : location.hash === "#marking" ? { name: "marking" } : { name: "overview" }));
   const load = async () => {
     const r = await api.request<{ roles: string[]; registry: Registry }>("GET", "/content-review/");
     setActiveRegistry(r.registry);
@@ -422,7 +423,7 @@ function SignIn({ onDone, onError }: { onDone: () => void; onError: (e: string) 
   const [password, setPassword] = useState("");
   return (
     <form className="stack" onSubmit={(x) => { x.preventDefault(); api.login(email, password).then(onDone).catch((er) => onError(String(er.message ?? er))); }}>
-      <h1>Sign in to review content</h1>
+      <h1>{location.hash === "#marking" ? "Sign in to mark written answers" : "Sign in to review content"}</h1>
       <label className="field">Email<input type="email" autoComplete="username" value={email} onChange={(x) => setEmail(x.target.value)} required /></label>
       <label className="field">Password<input type="password" autoComplete="current-password" value={password} onChange={(x) => setPassword(x.target.value)} required /></label>
       <button className="primary">Sign in</button>

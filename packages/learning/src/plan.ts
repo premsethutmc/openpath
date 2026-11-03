@@ -13,6 +13,7 @@ import { overlay } from "./goals";
 import { moduleState, type ModuleState } from "./intervention";
 import { graph } from "./graph";
 import { currentEnrolment, type LearnerRecords } from "./records";
+import { KEYBOARD_UNAVAILABLE, withheldDrawings } from "./written";
 import { flatten, tilesFor, type Tile } from "./tiles";
 
 export const PLAN_POLICY = "plan@1";
@@ -46,6 +47,11 @@ export function yearSummary(release: CurriculumRelease, ev: (id: string) => Skil
 }
 
 type PlanContext = { now: number; session: string; module?: (id: string) => ModuleState };
+/** written@1: an educator-marked module (no pool) is waiting for an educator's mark on a written answer (intervention.ts
+ *  "waiting"), from the records alone. Waiting is neither shown nor done: the skill is only set aside until the mark. */
+const waitingForMark = (id: string, records: LearnerRecords) => !moduleFor(id)?.pool && records.pending.some((p) => graph.evidenceTarget(p.competency) === id);
+/** keyboard-offer@1: a module that has stopped only because what is left is drawn work (not offered with keyboard input) */
+const keyboardEnded = (id: string, ms: ModuleState | null, shown: boolean) => !shown && ms?.phase === "done" && withheldDrawings.has(id);
 export function nextActivity(release: CurriculumRelease, ev: (id: string) => SkillEvidence, records: LearnerRecords, at?: PlanContext): NextActivity {
   if (records.pathway?.active) return pathwayNextActivity(records, ev, at);
   const n = nextActivityOf(release, ev, records, at);
@@ -60,21 +66,23 @@ function pausedSkills(release: CurriculumRelease, ev: (id: string) => SkillEvide
 }
 function nextActivityOf(release: CurriculumRelease, ev: (id: string) => SkillEvidence, records: LearnerRecords, at?: PlanContext): NextActivity {
   const paused = new Set(at ? pausedSkills(release, ev, records, at) : []);
+  // a skill waiting for an educator's mark, or one whose remaining work is drawn, is set aside: other skills carry on
+  const held = (id: string) => waitingForMark(id, records) || (!!at && withheldDrawings.has(id) && keyboardEnded(id, at.module?.(id) ?? moduleState(id, records, ev(id), at.now, at.session, null, ev), false));
   const rows = assigned(release).filter((r) => moduleFor(r.competency));
   const ids = [...new Set(rows.map((r) => r.competency))];
   // a delayed check comes back whatever year the skill was shown in (records persist across grades)
   const touched = [...new Set(records.attempts.map((a) => graph.evidenceTarget(a.competency)))].filter((id) => moduleFor(id));
   const due = [...ids, ...touched.filter((id) => !ids.includes(id))].find((id) => ev(id).retention === "due");
   if (due) return { kind: "retention", competency: due, reason: "A delayed check is due: a few questions to see the skill has stayed with you." };
-  const review = ids.find((id) => ev(id).status === "review" && !paused.has(id));
+  const review = ids.find((id) => ev(id).status === "review" && !paused.has(id) && !held(id));
   if (review) return { kind: "review", competency: review, reason: "The delayed check was missed, so this skill comes back for review." };
   // learner-hypothesis@1: an established misunderstanding not yet taught survives into the plan, whatever the skill's
   // broader status says (a skill can read as shown while a narrower misunderstanding in it is still supported)
   const untaught = hypotheses(records).find((h) => h.status === "established" && !h.teaching.deliveredAt && ids.includes(h.scope.observedIn) && !paused.has(h.scope.observedIn));
   if (untaught) return { kind: "continue", competency: untaught.scope.observedIn, chapter: rows.find((r) => r.competency === untaught.scope.observedIn)?.chapter.title, reason: `${untaught.claim!.says} A short explanation is waiting.` };
-  const inProgress = ids.find((id) => ["exposure", "guided"].includes(ev(id).status) && !paused.has(id));
+  const inProgress = ids.find((id) => ["exposure", "guided"].includes(ev(id).status) && !paused.has(id) && !held(id));
   if (inProgress) return { kind: "continue", competency: inProgress, chapter: rows.find((r) => r.competency === inProgress)?.chapter.title, reason: "Carry on where you left off." };
-  const fresh = rows.find((r) => ev(r.competency).status === "not_started");
+  const fresh = rows.find((r) => ev(r.competency).status === "not_started" && !held(r.competency));
   if (fresh) return { kind: "start", competency: fresh.competency, chapter: fresh.chapter.title, reason: `Next in ${fresh.chapter.title}.` };
   const enrol = currentEnrolment(records);
   for (const goalId of records.goals.keys()) {
@@ -83,6 +91,8 @@ function nextActivityOf(release: CurriculumRelease, ev: (id: string) => SkillEvi
     const c = o?.challenges.find((x) => x.ready && !records.attempts.some((a) => a.questionId === x.question));
     if (c) return { kind: "challenge", competency: c.competency, question: c.question, reason: `An enrichment challenge for your ${o!.goal.name} goal.` };
   }
+  const aside = ids.find((id) => !["independent", "transfer", "verified"].includes(ev(id).status) && held(id));
+  if (aside) return { kind: "none", competency: null, reason: `Nothing else is open this year right now. ${graph.get(aside).name}: ${waitingForMark(aside, records) ? "a written answer is with an educator; you will see the mark under “Written work”." : KEYBOARD_UNAVAILABLE}` };
   return { kind: "none", competency: null, reason: "Every skill with questions this year has been shown. Delayed checks will come back when due." };
 }
 
@@ -122,16 +132,23 @@ function pathwayNextActivity(records: LearnerRecords, ev: (id: string) => SkillE
   if (route.error) return stop("This prerequisite route needs review before it can guide learning.", target);
   const unresolved = new Set(hypotheses(records).filter((h) => h.status === "established").flatMap((h) => [h.scope.observedIn, ...(h.scope.about ? [h.scope.about] : [])]));
   // The shared route is already in prerequisite order and cycle-checked. No second graph walk.
+  let setAside: { id: string; reason: string } | null = null;
   for (const id of route.ids) {
     const e = ev(id), m = moduleFor(id);
     const ms = m ? at?.module?.(id) ?? moduleState(id, records, e, at?.now ?? 0, at?.session ?? "", null, ev) : null;
     const shown = ["independent", "transfer", "verified"].includes(e.status) && !e.recoveryRequired && e.retention !== "due" && !unresolved.has(id);
     if (shown && ms?.requirementsMet !== false) continue;
     if (!m) return stop(`A prerequisite, ${graph.get(id).name}, has no supported module yet.`, target);
+    // written@1 / keyboard-offer@1: waiting for an educator's mark, or only drawn work left: set aside (never counted as shown); the route carries on
+    if (ms && (ms.phase === "waiting" || keyboardEnded(id, ms, shown))) {
+      setAside ??= { id, reason: ms.phase === "waiting" ? ms.reason : KEYBOARD_UNAVAILABLE };
+      continue;
+    }
     if (!ms || ["pause", "unavailable", "waiting", "done"].includes(ms.phase)) return stop(ms?.reason ?? "No safe learning opportunity is available.", id);
     const kind = e.retention === "due" ? "retention" : e.recoveryRequired || e.status === "review" ? "review" : e.status === "not_started" ? "start" : "continue";
     return { kind, competency: id, reason: `${id === target ? "Toward your chosen goal" : `A prerequisite for ${graph.get(target).name}`}: ${e.status === "not_started" ? "a short probe will find your starting point" : ms.reason}. Unobserved work is not treated as a weakness.` };
   }
+  if (setAside) return stop(`${graph.get(setAside.id).name}: ${setAside.reason}`, setAside.id);
   return { kind: "none", competency: null, reason: "The current evidence requirements on this route are shown. Delayed checks remain scheduled. Choose a further supported goal when you are ready." };
 }
 

@@ -5,7 +5,8 @@ import json
 from django.core.management import call_command
 
 from .learning import content, independent_at
-from .models import WrittenMark
+from .content_review import registry
+from .models import ContentDecision, WrittenMark
 from .test_learning import LearningBase
 
 TASK = 'wr:irr:sqrt2'
@@ -108,3 +109,18 @@ class WrittenMarkingTests(LearningBase):
         call_command('content_reviewer', 'grant', 'asha.parent@example.org', role='educator', stdout=open('/dev/null', 'w'))
         self.assertEqual(self.share('asha.parent@example.org').status_code, 400)
         self.assertEqual(self.client.get('/api/written/queue/').json()['queue'], [])
+
+    def test_marking_an_answer_is_not_content_approval(self):
+        """educator-handoff: a mark is on one learner answer. It records no content decision, and the review state of the task's
+        module (and of everything else) is exactly what it was: provisional content stays pending."""
+        attempt = self.written()
+        self.share()
+        comp = content()['questions'][TASK]['competency']
+        before = registry(show_reviewers=False)
+        self.assertEqual(self.mark(attempt).status_code, 201)
+        self.assertEqual(ContentDecision.objects.count(), 0, 'marking writes no content decision')
+        self.assertEqual(registry(show_reviewers=False), before, 'every review state and hash is unchanged')
+        self.assertNotIn(comp, {e.get('competency') for e in before['entries'] if e.get('state') in ('approved', 'released')}, 'the task module is not approved by marking')
+        q = self.teacher.get('/api/written/queue/').json()['queue']
+        self.assertEqual(q[0]['mark']['verdict'], 'correct', 'the queue shows the mark it was given')
+        self.assertEqual(content()['questions'][TASK]['review'], 'provisional', 'the written task itself stays provisional')
