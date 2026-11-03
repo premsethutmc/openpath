@@ -31,6 +31,7 @@ import { contentEligibility, isMisconceptionSpecific, teachingMode, type Content
 import { evidenceBasis, type EvidenceBasis } from "./misconception-evidence";
 import type { Attempt, LearnerRecords } from "./records";
 import { connectedSkill, connectionConfig } from "./skill-connections";
+import { classifyQuestionWith } from "./subskill-projection";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
 export const MODULE_POLICY: PlannerPolicy = { ...PLANNER_POLICY_DRAFT, guidedItems: 1, reassessItems: 1, reassessPassMin: 1, reassessContrastItems: 0, version: `${PLANNER_POLICY_DRAFT.version}+learning-module@1` };
@@ -95,6 +96,27 @@ export function scopeAllows(m: Module, s: Strategy, records: LearnerRecords, ski
   if (skill !== target) return false;
   return hypothesesFor(m.competency, records).some((h) => (h.status === "established" || h.status === "resolved" || h.status === "contested")
     && h.claim?.explanation === s.addresses && connectedSkill(config, h.scope.question) === target);
+}
+
+/**
+ * review-scope@1: the lesson behind "Review a supported lesson". It follows skill-scope@1: the skill is that of the question the
+ * learner is looking at (the one just answered, or the one on screen) when the competency's mapping classifies it, else the
+ * current skill. Only eligible explanations that skill allows; one written for that very skill first, then general ones, then
+ * the rest in module order; a misconception fix only after the general explanations. A question the mapping places outside
+ * every skill gets general explanations only (none: no review is offered). Without a mapping: module order, as before.
+ */
+export function reviewStrategy(m: Module, records: LearnerRecords, qid?: string | null): Strategy | null {
+  const config = connectionConfig(m.competency);
+  const eligible = (s: Strategy) => teachingEligibility(m, s).eligible && contentEligibility(m, s, { competency: m.competency, usage: "lesson" }).eligible;
+  if (!config) return m.strategies.find(eligible) ?? null;
+  const skill = (qid ? connectedSkill(config, qid) : null) ?? currentSkill(m, records);
+  // a question of this competency that the mapping places outside every skill (a family it leaves unmapped, e.g. digit-card
+  // place value in missing numbers) gets no lesson written for another skill: general explanations only
+  const outside = !!qid && qid.startsWith("gen:") && question(qid).competency === m.competency && classifyQuestionWith(config, qid).kind !== "mapped";
+  const own = (s: Strategy) => (skill && s.scope?.subSkill === skill ? 0 : s.scope?.subSkill ? 2 : 1);
+  return m.strategies
+    .filter((s) => eligible(s) && scopeAllows(m, s, records, skill) && !(outside && s.scope?.subSkill))
+    .sort((a, b) => own(a) - own(b) || Number(isMisconceptionSpecific(a)) - Number(isMisconceptionSpecific(b)) || m.strategies.indexOf(a) - m.strategies.indexOf(b))[0] ?? null;
 }
 
 /** Strategies in the order to try: the diagnosis's kind first, then by what the probes show the learner can build on. */

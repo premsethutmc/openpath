@@ -11,15 +11,13 @@ import { Figure, describe, legacyStripKind, legacyStrips, stripsFor } from "./Fi
 import { SketchPad } from "./SketchPad";
 import { HANDWRITING_ENABLED } from "../writing/features";
 import { writtenTask } from "../../../packages/learning/src/written";
-import { teachingEligibility } from "../../../packages/learning/src/teaching-contract";
-import { contentEligibility } from "../../../packages/learning/src/explanation-review";
 import { moduleFor, needsMarking } from "../../../packages/learning/src/content";
 import { creditOf } from "../../../packages/learning/src/grade";
 import { misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
 import { rightAnswer, type SkillEvidence } from "../../../packages/learning/src/evidence";
 import { graph } from "../../../packages/learning/src/graph";
 import { problemOf } from "../../../packages/learning/src/families";
-import { retriesLeft, familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
+import { retriesLeft, reviewStrategy as reviewStrategyFor, familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
 import { decide } from "../../../packages/learning/src/session";
 import type { Assessment } from "../../../packages/learning/src/assessment";
 import { workingFeedback } from "../journey/renderer-adapter";
@@ -300,17 +298,22 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
       </div>
       <div className="actions sticky">
         {i > 0 && <button className="secondary" onClick={() => setI(i - 1)}>Back</button>}
-        <button className="primary" disabled={saving} onClick={() => (last ? onDone() : setI(i + 1))}>{last ? (saving ? "Saving…" : doneLabel) : "Next"}</button>
+        <button className="primary" disabled={saving} onClick={() => (last ? (setI(0), onDone()) : setI(i + 1))}>{last ? (saving ? "Saving…" : doneLabel) : "Next"}</button>
       </div>
     </div>
   );
 }
 
+/** lesson-resume@1: a learner-scoped key for lesson positions in a module opened without its own resume key (session ids are
+ *  "learn:<learner>:<visit>"; anything else gets no persistence). */
+const lessonResumeKey = (session: string, competency: string) => { const m = /^learn:([^:]+):/.exec(session); return m ? `openpath.module-lesson@1:${m[1]}:${competency}` : undefined; };
 /** One skill, end to end, as the engine directs. */
 export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established, resumeKey, sessionMode = false, reviewOnly = false, withinRecovery = false }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null; resumeKey?: string; sessionMode?: boolean; reviewOnly?: boolean; withinRecovery?: boolean }) {
   const [own, setOwn] = useResume<Fb | null>(resumeKey && `${resumeKey}:feedback`, null);
   const [retry, setRetry] = useResume<boolean | "hint">(resumeKey && `${resumeKey}:retry`, false);
-  const [reviewLesson, setReviewLesson] = useState(false);
+  // lesson-resume@1: the screen reached in a lesson (and an open lesson review) survives a reload, per learner and skill
+  const lessonKey = resumeKey ?? lessonResumeKey(ctx.session, competency);
+  const [reviewOpen, setReviewOpen] = useResume<string | null>(lessonKey && `${lessonKey}:review`, null);
   const fb = onFeedback ? null : own;
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
@@ -333,9 +336,11 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
     </>
   );
   const lessonModule = moduleFor(competency);
-  const reviewStrategy = lessonModule?.strategies.find((s) => teachingEligibility(lessonModule, s).eligible && contentEligibility(lessonModule, s, { competency, usage: "lesson" }).eligible);
-  const reviewOffer = reviewStrategy ? <button className="secondary wide" disabled={ctx.saving} onClick={async () => { if (reviewStrategy && await ctx.teach(competency, reviewStrategy.id, "foundation-lesson-review@1")) setReviewLesson(true); }}>Review a supported lesson</button> : null;
-  if (reviewLesson && reviewStrategy) return <div className="stack">{head}<p role="note">Lesson review only. Your earlier answers are saved. This review does not award mastery; further answers in this visit are recorded with help.</p><Lesson competency={competency} s={reviewStrategy} doneLabel="Return to my progress" saving={false} onDone={() => setReviewLesson(false)} /><button className="secondary" onClick={() => setReviewLesson(false)}>Return to my progress</button></div>;
+  const reviewStrategy = lessonModule ? reviewStrategyFor(lessonModule, ctx.records, fb?.qid ?? ms.question) : null;
+  const reviewOffer = reviewStrategy ? <button className="secondary wide" disabled={ctx.saving} onClick={async () => { if (reviewStrategy && await ctx.teach(competency, reviewStrategy.id, "foundation-lesson-review@1")) setReviewOpen(reviewStrategy.id); }}>Review a supported lesson</button> : null;
+  // the lesson being reviewed is the one that was opened (recorded), even if the question on screen changed since
+  const reviewing = reviewOpen ? lessonModule?.strategies.find((x) => x.id === reviewOpen && ctx.records.teaching.some((t) => t.competency === competency && t.strategy === x.id && t.rule === "foundation-lesson-review@1")) : undefined;
+  if (reviewing) return <div className="stack">{head}<p role="note">Lesson review only. Your earlier answers are saved. This review does not award mastery; further answers in this visit are recorded with help.</p><Lesson competency={competency} s={reviewing} resumeKey={lessonKey && `${lessonKey}:review:${reviewing.id}`} doneLabel="Return to my progress" saving={false} onDone={() => setReviewOpen(null)} /><button className="secondary" onClick={() => setReviewOpen(null)}>Return to my progress</button></div>;
   if (reviewOnly) return <div className="stack">{head}<p>This is lesson review, not a mastery check. Your progress is preserved.</p>{reviewOffer ?? <p>No eligible explanation is available for this topic yet.</p>}<button className="secondary" onClick={onExit}>Choose another goal</button></div>;
   if (fb) return <div className="stack">{head}{retry ? <Ask key={`${fb.qid}:retry`} qid={fb.qid} activity={fb.activity ?? "guided"} ctx={ctx} previous={fb} resumeKey={resumeKey && `${resumeKey}:${fb.qid}`} showHint={retry === "hint"} hintAllowed onAnswered={f=>{setRetry(false);setFb(f);}}/> : <Feedback fb={fb} onNext={() => setFb(null)} onRetry={sessionMode && retriesLeft(ctx.records, fb.qid) > 0 ? hint=>setRetry(hint ? "hint" : true) : undefined}/>}{!retry && reviewOffer}</div>;
   if (sessionMode && ms.phase === "retention") return <div className="stack">{head}<p>A delayed check is reserved for a later session. Your completed work is preserved.</p><button className="primary" onClick={onExit}>Next planned competency</button></div>;
@@ -350,7 +355,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
         {head}
         <p className="why">{ms.reason}</p>
         <p className="small muted" role="note" data-content-review={ms.contentReview?.status ?? "unknown"}>{ms.contentReview?.educatorApproved ? ms.contentReview.label : `${ms.contentReview?.label ?? "Demonstration: this explanation has not been approved by an educator."} ${ms.teachingReview === "machine-checked" ? "It has been checked automatically against its question." : "It has not been checked automatically."}`}</p>
-        <Lesson competency={competency} key={ms.strategy.id} resumeKey={resumeKey && `${resumeKey}:lesson:${ms.strategy.id}`} s={ms.strategy} saving={ctx.saving} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
+        <Lesson competency={competency} key={ms.strategy.id} resumeKey={lessonKey && `${lessonKey}:lesson:${ms.strategy.id}`} s={ms.strategy} saving={ctx.saving} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
       </div>
     );
   if (ms.question)
