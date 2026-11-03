@@ -241,7 +241,7 @@ async function walk(w) {
         await card.waitFor();
         const queue = await shot(ep, "educator-marking-queue");
         for (const sel of await card.getByRole("combobox").all()) { const opts = await sel.locator("option").all(); await sel.selectOption({ index: opts.length - 1 }); }
-        await card.getByLabel("Feedback").fill("Clear and correct: every point of the task is answered.");
+        await card.getByLabel("Feedback").fill("All three parts are answered and explained against the criteria.");
         await card.getByRole("button", { name: /Give the mark/ }).click();
         await card.getByRole("status").waitFor();
         const marked = await shot(ep, "educator-marked");
@@ -319,7 +319,7 @@ const WALKS = [
   { key: "a2-missing-recognised", area: "Arithmetic, recognised mistake", grade: 4, book: /Maths Mela/, bookLabel: "Maths Mela (CBSE / NCERT)", tiles: ["Mathematical reasoning", "The Cleanest Village", "The Missing Digits"], chapter: "The Cleanest Village › 7.7 The Missing Digits", skill: "Find missing operands",
     policy: (qid, q, taught) => (taught === 0 && fam(qid) === "acmissing" ? misconception(qid, MISS_BUGS) : null) },
   // same-bottom difficulty, then the written task through an educator, then the delayed check
-  { key: "b-fractions-written", area: "Fractions, same bottom and written work", grade: 4, book: /OpenPath Sample/, bookLabel: "OpenPath Sample", tiles: ["Fractions"], chapter: "Fractions", skill: "Compare fractions with like denominators", delayed: true, educator: true, writtenText: "One half of the whole is the bigger amount. The whole is cut into 2 equal parts and one part is taken. A quarter cuts the same whole into 4 equal parts, so each part is smaller." },
+  { key: "b-fractions-written", area: "Fractions, same bottom and written work", grade: 4, book: /OpenPath Sample/, bookLabel: "OpenPath Sample", tiles: ["Fractions"], chapter: "Fractions", skill: "Compare fractions with like denominators", delayed: true, educator: true, writtenText: "(a) Anu ate more. Both bars are cut into 8 equal parts, so 5 parts are more than 3 parts. (b) Half of 8 is 4, so 3/8 is less than one-half. Half of 7 is 3 and a half, so 4/7 is more than one-half. So 4/7 is greater. (c) 7/8 is missing 1/8 and 5/6 is missing 1/6. 1/8 is the smaller piece, so 7/8 is closer to a whole bar." },
   // same TOP number: right on everything else, the bigger-bottom-bigger mistake on same-top comparisons
   { key: "f-fractions-same-top", area: "Fractions, same top number", grade: 4, book: /OpenPath Sample/, bookLabel: "OpenPath Sample", tiles: ["Fractions"], chapter: "Fractions", skill: "Compare fractions with like denominators",
     policy: (qid, q, taught) => (taught === 0 && ["adfcmp", "adford"].includes(fam(qid)) && params(qid)[0] === 1 ? misconception(qid, new Set(["bigger-bottom-bigger"])) ?? wrongFor(qid, []) : null) },

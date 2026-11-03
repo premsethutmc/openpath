@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          fetch-depth: 3
+          fetch-depth: 10
       - uses: actions/setup-node@v6
         with:
           node-version: "24"
@@ -52,7 +52,7 @@ jobs:
           mkdir -p /tmp/walk
           cd frontend
           # the app commit under test: the newest commit outside the walkthrough script and workflow
-          export WALK_COMMIT=$(git log -1 --format=%H -- . ":(exclude)frontend/e2e/walkthrough" ":(exclude).github/workflows/product-walkthrough.yml")
+          export WALK_COMMIT=$(git -C "$GITHUB_WORKSPACE" log -1 --format=%H -- . ":(exclude)frontend/e2e/walkthrough" ":(exclude).github/workflows/product-walkthrough.yml")
           WALK_URL=http://127.0.0.1:4190 WALK_API=django OPENPATH_TEST_CLOCK_FILE=$OPENPATH_TEST_CLOCK_FILE SHOTS=/tmp/walk/ node --import tsx e2e/walkthrough/product-walkthrough.mjs 2>&1 | tee /tmp/walk/run.log
           echo "app ${WALK_COMMIT} · walkthrough ${GITHUB_SHA}" > /tmp/walk/commit.txt
           # the screenshots, also in the log (artifact downloads are not reachable from every reviewer's workspace)
