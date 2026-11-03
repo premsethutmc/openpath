@@ -485,7 +485,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
       // (and never close to the worked example just shown: not the same answer, not two of its numbers the same)
       const shownEx = st.screens.flatMap((sc) => (sc.instance ? [problemOf(sc.instance)] : [])).filter((p): p is NonNullable<typeof p> => !!p && p.family === gap.family);
       const close = (id: string) => { const p = problemOf(id.replace(/:(mc|w)$/, "")); return !p || shownEx.some((e) => e.answer === p.answer || e.params.filter((v, i) => v === p.params[i]).length >= 2); };
-      const q = (!answered(records, st.check) && withinGrade(records, st.check) ? st.check : null) ?? phasePool(gap.family, "check").find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id) && !close(id)) ?? null;
+      const q = (keyboardOffered(st.check) && !answered(records, st.check) && withinGrade(records, st.check) ? st.check : null) ?? phasePool(gap.family, "check").find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id) && !close(id)) ?? null;
       if (q && !records.attempts.some((a) => a.at > taught.at(-1)!.at && kindOf(st) === problemOf(a.questionId.replace(/:(mc|w)$/, ""))?.family && independentAttempt(a))) return { ...base, phase: "check", question: q, strategy: st, diagnosis: d, reason: "Now one of this kind on your own, with no hints." };
       return { ...base, phase: "pause", diagnosis: d, reason: "This kind of question has not clicked yet, even after the explanation. Carry on, and go through it with a teacher or parent." };
     }
@@ -550,10 +550,11 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     const before = records.teaching.some((t) => t.competency === competency);
     return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? `${established.says} Here is a way to rebuild it.` : open ? `${own!.claim!.says} Here is a way to rebuild it.` : diagnosisReason(d) };
   }
-  if (decision.action === "guided_practice" && st) return { ...base, phase: "guided", question: st.guided, strategy: st, diagnosis: d, decision, reason: "Practise it once, with a hint if you want one. This counts as practice with help." };
+  if (decision.action === "guided_practice" && st && keyboardOffered(st.guided)) return { ...base, phase: "guided", question: st.guided, strategy: st, diagnosis: d, decision, reason: "Practise it once, with a hint if you want one. This counts as practice with help." };
   if (decision.action === "reassess" && st) {
     const q = blockCheck(m, st, records);
     if (q) return { ...base, phase: "check", question: q, strategy: st, diagnosis: d, decision, reason: "Now one new question on your own, with no hints." };
+    if (!keyboardOffered(st.check)) return { ...base, phase: "pause", diagnosis: d, decision, reason: "The check for this is a drawing, which cannot be handed in with keyboard input yet. Other topics are open; go through the drawing with a teacher or parent." };
     return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no new question left to check this on your own yet. Carry on, and go through it with a teacher or parent." };
   }
   if ((decision.action === "recommend_human" || decision.action === "content_gap") && !order.length) return { ...base, phase: "pause", diagnosis: d, decision, reason: NO_EXPLANATION() };
@@ -611,7 +612,7 @@ export function subSkillGap(m: Module, records: LearnerRecords): { family: strin
   return null;
 }
 /** The question for a block's check alone: the strategy's own check if the learner has never seen it, else a fresh one. */
-export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): string | null => (!answered(records, st.check) && withinGrade(records, st.check) ? st.check : fromPool(m, "check", records));
+export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): string | null => (keyboardOffered(st.check) && !answered(records, st.check) && withinGrade(records, st.check) ? st.check : fromPool(m, "check", records));
 
 /**
  * teaching-history@1: for each strategy, instruction DELIVERED (teach records) kept apart from its questions merely
