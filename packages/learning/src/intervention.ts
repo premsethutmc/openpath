@@ -31,6 +31,7 @@ import { contentEligibility, isMisconceptionSpecific, teachingMode, type Content
 import { evidenceBasis, type EvidenceBasis } from "./misconception-evidence";
 import type { Attempt, LearnerRecords } from "./records";
 import { connectedSkill, connectionConfig } from "./skill-connections";
+import { keyboardOffered } from "./written";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
 export const MODULE_POLICY: PlannerPolicy = { ...PLANNER_POLICY_DRAFT, guidedItems: 1, reassessItems: 1, reassessPassMin: 1, reassessContrastItems: 0, version: `${PLANNER_POLICY_DRAFT.version}+learning-module@1` };
@@ -403,7 +404,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const resProbe = here && own!.probeDue ? discriminatingProbe(own!, records) : null;
   const hold = !!own && (own.teachingDue || !!resProbe);
   const shown = (ev.status === "independent" || ev.status === "transfer" || ev.status === "verified") && !hold;
-  const unanswered = (ids: string[]) => ids.find((id) => !answered(records, id) && withinGrade(records, id)) ?? null;
+  const unanswered = (ids: string[]) => ids.find((id) => keyboardOffered(id) && !answered(records, id) && withinGrade(records, id)) ?? null;
   if (ev.retention === "due") {
     // the delayed check: the module's own questions, then fresh ones from the pool's delayed-check part
     const r = unanswered(m.retention) ?? fromPool(m, "retention", records);
