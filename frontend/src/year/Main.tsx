@@ -17,7 +17,7 @@ import { UNSUPPORTED } from "../../../packages/learning/src/coverage";
 import { offersFor } from "../../../packages/learning/src/decomposition";
 import { extract } from "../../../packages/learning/src/extract";
 import { decompose, parseProblem, problemOf } from "../../../packages/learning/src/families";
-import { familyOf } from "../../../packages/learning/src/intervention";
+import { familyOf, moduleState } from "../../../packages/learning/src/intervention";
 import { reviewFixtureActive, useReviewFixture } from "../../../packages/learning/src/evidence";
 import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages/learning/src/goals";
 import { graph } from "../../../packages/learning/src/graph";
@@ -25,7 +25,7 @@ import { years } from "../../../packages/learning/src/plan";
 import { withDecisions, type HandoverAcknowledgement, type LearningActivity, type LearningRecord, type ServerDecision } from "../../../packages/learning/src/records";
 import { delayedCheckFact } from "../../../packages/learning/src/due-display";
 import { learnerState, make, type StudyRecord, type StudyUpdate } from "../../../packages/learning/src/session";
-import { writtenTask, type WrittenMark } from "../../../packages/learning/src/written";
+import { KEYBOARD_UNAVAILABLE, withheldDrawings, writtenTask, type WrittenMark } from "../../../packages/learning/src/written";
 import { isDrawing, SketchView } from "./SketchPad";
 import { contentOf, flatten, tilesFor, type Tile } from "../../../packages/learning/src/tiles";
 import { setActiveRegistry, type Registry } from "../../../packages/learning/src/review";
@@ -312,6 +312,7 @@ function App() {
         <KeyboardPractice key={`${learner}:${view.competency}`} onOpenChange={setKeyboardOpen} api={api} learner={learner} competency={view.competency} onSaved={async () => { if (repo) setEvents(await repo.load()); }}>
           <Module competency={view.competency} reviewOnly={view.reviewOnly} ctx={ctx} onExit={() => setView(view.back)} />
         </KeyboardPractice>
+        <KeyboardNote competency={view.competency} ctx={ctx} />
       </Shell>
     );
   if (view.name === "stuck")
@@ -533,6 +534,22 @@ function App() {
   );
 }
 
+/** keyboard-offer@1: drawn tasks of this topic are not offered with keyboard input; when only they are left, the topic says so
+ *  (never a trap: the learner goes back and other topics are open). Nothing is hidden from the records. */
+function KeyboardNote({ competency, ctx }: { competency: string; ctx: Ctx }) {
+  const ids = withheldDrawings.get(competency);
+  if (!ids?.length) return null;
+  const ev = ctx.evidence(competency);
+  const ms = ctx.module ? ctx.module(competency) : moduleState(competency, ctx.records, ev, ctx.now, ctx.session, null, ctx.evidence);
+  const ended = ms.phase === "done" && !["independent", "transfer", "verified"].includes(ev.status);
+  const n = ids.length;
+  return (
+    <p className={ended ? "why" : "small muted"} role="note" data-keyboard-offer={ended ? "ended" : "withheld"}>
+      {ended ? KEYBOARD_UNAVAILABLE : `${n} drawing or construction task${n === 1 ? " is" : "s are"} not available with keyboard input, so ${n === 1 ? "it is" : "they are"} left out of this topic.`}
+    </p>
+  );
+}
+
 /** written@1: written answers waiting for an educator, the marks given, and the parent's choice of who marks. */
 function WrittenWork({ records, learner }: { records: ReturnType<typeof learnerState>["records"]; learner: string }) {
   const marked = records.attempts.filter((a) => a.written);
@@ -547,6 +564,10 @@ function WrittenWork({ records, learner }: { records: ReturnType<typeof learnerS
     <section aria-label="Written work">
       <div className="section-title"><h2>Written work</h2></div>
       <p className="muted small">Proofs, constructions and explanations are read and marked by an educator, never by the computer. An answer counts only once it is marked correct.</p>
+      <p className="small" role="status" data-written-waiting={records.pending.length}>
+        {records.pending.length ? `${records.pending.length} answer${records.pending.length === 1 ? " is" : "s are"} waiting for an educator. ` : "Nothing is waiting for an educator. "}
+        {shares?.length ? <>Your educator marks them by signing in at <a href="/review/#marking">{location.origin}/review/#marking</a> (Content review → Marking).</> : "Share written work with an educator below; they mark it by signing in to Content review → Marking."}
+      </p>
       {records.pending.map((p) => (
         <div key={p.id} className="panel"><p className="eyebrow">Waiting for an educator · {graph.get(p.competency).name}</p>{isDrawing(p.text) ? <SketchView raw={p.text} canvas={writtenTask(p.questionId)?.canvas} /> : <p className="small">{p.text.slice(0, 280)}{p.text.length > 280 ? "…" : ""}</p>}</div>
       ))}
