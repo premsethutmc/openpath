@@ -13,7 +13,11 @@ import { foundationPlan, FOUNDATION_POLICY, type FoundationPolicy } from "../../
 import { moduleFor, question } from "../../../packages/learning/src/content";
 import { exposureKey, FAMILIES, pool, problemOf } from "../../../packages/learning/src/families";
 import { withDecisions } from "../../../packages/learning/src/records";
-import { teachable } from "../../../packages/learning/src/intervention";
+import { orderStrategies, teachable } from "../../../packages/learning/src/intervention";
+import { hypotheses } from "../../../packages/learning/src/hypotheses";
+import { rightAnswer } from "../../../packages/learning/src/evidence";
+import { runScenario } from "./scenarios";
+import { misconception, right, type Learner } from "./learners";
 import { probeReading } from "../../../packages/learning/src/reasoning";
 import { make, learnerState } from "../../../packages/learning/src/session";
 import { SliceSession } from "./session";
@@ -89,10 +93,24 @@ const TAUGHT: Record<string, string> = {
   "one-step.x-plus-a@1": "x_plus_a", "one-step.x-minus-a@1": "x_minus_a", "one-step.a-times-x@1": "a_times_x", "one-step.x-divided-by-a@1": "x_divided_by_a",
   "digit.missing-in-addend@1": "addend_digit", "digit.missing-in-first-number@1": "first_number_digit",
 };
+/** published fixes: each addresses a mistake that only its own skill models in the competency */
 const FIXES: Record<string, [string, string]> = {
-  fix_added_both: ["missing.box-plus-k@1", "added-both"], fix_added_both_taken: ["missing.n-minus-box@1", "added-both"], fix_took_away_again: ["missing.box-minus-k@1", "took-away-again"],
-  fix_same_operation_add: ["one-step.x-plus-a@1", "same-operation"], fix_same_operation_take: ["one-step.x-minus-a@1", "same-operation"],
+  fix_took_away_again: ["missing.box-minus-k@1", "took-away-again"],
   fix_subtract_coefficient: ["one-step.a-times-x@1", "subtract-coefficient"], fix_add_for_multiply: ["one-step.x-divided-by-a@1", "add-for-multiply"],
+};
+/** authored but withheld: the mistake is modelled by several skills, and misconception evidence is not keyed by skill */
+const WITHHELD: Record<string, [string, string]> = {
+  fix_added_both: ["missing.box-plus-k@1", "added-both"], fix_added_both_taken: ["missing.n-minus-box@1", "added-both"],
+  fix_same_operation_add: ["one-step.x-plus-a@1", "same-operation"], fix_same_operation_take: ["one-step.x-minus-a@1", "same-operation"],
+};
+/** the skills of a competency that model each mistake id, over every served task of every family of the competency */
+const modelledBy = (competency: string) => {
+  const config = INVERSE_PATTERN_CONFIGS.find((c) => c.competency === competency)!, out = new Map<string, Set<string>>();
+  for (const [fam, def] of FAMILIES) if (def.competency === competency) for (const p of pool(fam).items) for (const b of p.bugs) {
+    if (!out.has(b.id)) out.set(b.id, new Set());
+    out.get(b.id)!.add(connectedSkill(config, p.id) ?? `unmapped:${fam}`);
+  }
+  return out;
 };
 const configOf = (skill: string) => INVERSE_PATTERN_CONFIGS.find((c) => c.subSkills.some((s) => s.id === skill))!;
 /** every "a ∘ b = c" line in the math is true (the substitution checks and the undo steps), read independently */
@@ -206,4 +224,75 @@ test("chapter introductions are present and are not counted as skill teaching", 
     assert.ok(m.chapter.length >= 1);
     for (const s of config.subSkills) for (const ch of m.chapter) assert.ok(!strategyConnects(config, s.id, { id: "chapter", title: ch.title, kind: "conceptual", needs: [], screens: [ch], guided: "", check: "" } as never), `${ch.title} is not skill teaching`);
   }
+});
+
+test("cross-skill safety: a fix is published only when its mistake is modelled by its own skill alone; the others are withheld", () => {
+  for (const [id, [skill, bug]] of Object.entries(FIXES)) {
+    const by = modelledBy(configOf(skill).competency).get(bug)!;
+    assert.deepEqual([...by], [skill], `${id}: ${bug} is modelled only by ${skill}`);
+  }
+  for (const [id, [skill, bug]] of Object.entries(WITHHELD)) {
+    const competency = configOf(skill).competency, by = modelledBy(competency).get(bug)!;
+    assert.ok(by.size > 1, `${id}: ${bug} is modelled by ${[...by].join(", ")}`);
+    const m = moduleFor(competency)!;
+    assert.equal(m.strategies.find((st) => st.id === id), undefined, `${id}: withheld, not in the module`);
+    assert.ok(!m.strategies.some((st) => st.addresses === bug), `${id}: no published strategy addresses ${bug}`);
+  }
+  // every published misconception-specific strategy of the three modules is one of the safe fixes
+  for (const c of INVERSE_PATTERN_CONFIGS) for (const st of moduleFor(c.competency)!.strategies) if (st.addresses) assert.ok(FIXES[st.id], `${st.id} is a safe fix`);
+});
+
+/** a learner who makes one modelled mistake only on one family's form, until taught; right everywhere else */
+const formLearner = (fam: string, bug: string, form: number): Learner => ({ name: `${bug} on ${fam} form ${form}`, act: (v) => {
+  const p = problemOf(v.q.replace(/:(mc|w)$/, ""));
+  return { answer: v.taught === 0 && p?.family === fam && p.params[0] === form ? (misconception(v.q, new Set([bug])) ?? right(v.q)) : right(v.q) };
+} });
+
+test("cross-skill regression (recorded evidence): added-both shown on □ + k cannot authorise a targeted fix for n − □; ordinary teaching, fresh checks and replay still work", () => {
+  const MISSN = MISSING_NUMBER_CONFIG.competency, m = moduleFor(MISSN)!;
+  // 1. the engine itself investigates the learner's answers on one form only (□ + k) and records the finding
+  const r = runScenario({ id: "cross-skill", category: 2, start: "gen:acmissing:0,8,7", learner: () => formLearner("acmissing", "added-both", 0), expect: {} });
+  const L = r.f.session, records = L.state().records;
+  const h = hypotheses(records).find((x) => x.claim?.explanation === "added-both");
+  assert.ok(h && ["established", "resolved"].includes(h.status), `recorded evidence for added-both: ${JSON.stringify(hypotheses(records).map((x) => [x.status, x.claim?.explanation]))}`);
+  const supporting = records.attempts.filter((a) => h!.provenance.attempts.includes(a.id) && !rightAnswer(a));
+  assert.ok(supporting.length >= 2 && supporting.every((a) => connectedSkill(MISSING_NUMBER_CONFIG, a.questionId) === "missing.box-plus-k@1"), `the mistakes were all on □ + k: ${supporting.map((a) => a.questionId)}`);
+  // nothing addressing added-both was taught (the fixes are withheld); what was taught is ordinary teaching
+  for (const t of L.events.filter((e) => (e as { record?: string }).record === "teach") as unknown as { competency: string; strategy: string }[]) if (t.competency === MISSN) assert.equal(m.strategies.find((st) => st.id === t.strategy)?.addresses, undefined, t.strategy);
+  // 2. move to the other form (n − □): the recorded finding authorises nothing targeted there; its ordinary teaching remains
+  const ids = ["added-both"], N = "missing.n-minus-box@1";
+  assert.deepEqual(m.strategies.filter((st) => teachable(m, st, ids) && strategyConnects(MISSING_NUMBER_CONFIG, N, st)).map((st) => st.id), ["n_minus_box"]);
+  assert.ok(orderStrategies(m, { asked: [], posterior: {}, next: null, result: "conceptual", confidence: 1, policy: "test" } as never, records, ids).every((st) => !st.addresses), "the engine's own ordering offers no targeted fix");
+  // the reason the cross-skill fixes are withheld (reproducer for shared-engine work): the engine's gate and ordering take the
+  // mistake id alone, never the skill whose answers produced it. Given an id, a registered targeted fix is ordered first on
+  // records that hold no answer of its skill at all: here the published □ − k fix, on records from □ + k answers only.
+  assert.ok(!records.attempts.some((a) => connectedSkill(MISSING_NUMBER_CONFIG, a.questionId) === "missing.box-minus-k@1" && !rightAnswer(a)));
+  assert.equal(orderStrategies(m, { asked: [], posterior: {}, next: null, result: "conceptual", confidence: 1, policy: "test" } as never, records, ["took-away-again"])[0]?.id, "fix_took_away_again", "mistake-id-only gating");
+  // 3. ordinary teaching of n − □ still runs on these same records: teach → guided → fresh check → reload
+  const strategy = m.strategies.find((st) => st.id === "n_minus_box")!;
+  L.events.push(make.pathway({ learnerId: L.learnerId, sessionId: L.session, at: new Date(++L.now).toISOString() }, MISSN));
+  L.events.push(make.teach({ learnerId: L.learnerId, sessionId: L.session, at: new Date(++L.now).toISOString() }, MISSN, strategy.id, "foundation-lesson-review@1"));
+  let next = L.state().module(MISSN);
+  assert.equal(next.phase, "guided", JSON.stringify(next)); assert.equal(next.question, strategy.guided);
+  assert.equal(L.submit(next.question!, question(next.question!).answer, "guided").credit, true);
+  next = L.state().module(MISSN);
+  assert.equal(next.phase, "check", JSON.stringify(next)); assert.ok(next.question);
+  assert.equal(connectedSkill(MISSING_NUMBER_CONFIG, next.question), N, "a fresh check of n − □");
+  assert.ok(!records.attempts.some((a) => exposureKey(a.questionId) === exposureKey(next.question!)), "fresh: not answered before");
+  const saved = JSON.parse(JSON.stringify(withDecisions(L.events, L.decisions)));
+  assert.deepEqual(learnerState(L.learnerId, saved, L.now, { currentSession: L.session }).module(MISSN), next, "saved replay keeps the same check");
+  assert.equal(L.submit(next.question, question(next.question).answer, "check").credit, true);
+  const proj = projectFromEventsWith(MISSING_NUMBER_CONFIG, L.learnerId, withDecisions(L.events, L.decisions), L.now);
+  assert.ok(proj.subSkills.find((x) => x.id === N)!.attempts.independentRight >= 1);
+});
+
+test("a published fix is reached only through its own skill's recorded evidence: took-away-again on □ − k", () => {
+  const MISSN = MISSING_NUMBER_CONFIG.competency;
+  const r = runScenario({ id: "own-skill", category: 2, start: "gen:acmissing:2,15,6", learner: () => formLearner("acmissing", "took-away-again", 2), expect: {} });
+  const records = r.f.session.state().records;
+  const h = hypotheses(records).find((x) => x.claim?.explanation === "took-away-again")!;
+  assert.ok(h && ["established", "resolved"].includes(h.status));
+  assert.ok(records.attempts.filter((a) => h.provenance.attempts.includes(a.id) && !rightAnswer(a)).every((a) => connectedSkill(MISSING_NUMBER_CONFIG, a.questionId) === "missing.box-minus-k@1"));
+  const taught = (r.f.session.events.filter((e) => (e as { record?: string }).record === "teach") as unknown as { competency: string; strategy: string }[]).filter((t) => t.competency === MISSN).map((t) => t.strategy);
+  assert.ok(taught.includes("fix_took_away_again"), `taught: ${taught}`);
 });

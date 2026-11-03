@@ -25,7 +25,7 @@ const P = (id: string) => problemOf(id.replace(/:(mc|w)$/, ""))!;
 const fig = (p: Problem) => (p.figure ? { widget: p.figure as Record<string, unknown> } : {});
 const configOf = (c: string) => [...SCALE_PATTERN_CONFIGS, ...CONVERSION_PATTERN_CONFIGS, ...INVERSE_PATTERN_CONFIGS].find((x) => x.competency === c)!;
 
-interface Spec { id: string; title: string; kind: "conceptual" | "procedural"; family: string; subSkill: string; text: string[]; extra?: (p: Problem) => boolean; example?: (p: Problem) => boolean; addresses?: string; misconception?: (p: Problem) => string[]; regroup?: boolean; conclude?: boolean; math?: (p: Problem) => string[]; distinct?: boolean }
+interface Spec { id: string; title: string; kind: "conceptual" | "procedural"; family: string; subSkill: string; text: string[]; extra?: (p: Problem) => boolean; example?: (p: Problem) => boolean; addresses?: string; misconception?: (p: Problem) => string[]; regroup?: boolean; conclude?: boolean; math?: (p: Problem) => string[]; distinct?: boolean; withheld?: string }
 interface ModuleSpec { competency: string; family: string; title: string; chapter: string[]; seed: (p: Problem) => boolean; strategies: Spec[] }
 
 /** a worked example with several pictures in the row, so the multiplication by the key is visible */
@@ -186,8 +186,12 @@ MODULES.push(
   },
 );
 
-// Misconception evidence is keyed by the mistake's id within a competency, and the same id (added-both, same-operation) is
-// modelled for several kinds of sentence, so a fix's words are written to be true whichever kind produced the evidence.
+// Misconception evidence is keyed by the mistake's id within a competency, not by skill. Where the same id is modelled for
+// several skills (added-both: □ + k and n − □; same-operation: all four one-step forms), an answer on one skill could select
+// the fix written for another, presenting one skill's mistake as proof of a mistake in another. Those fixes are WITHHELD
+// from publication (authored here, kept for when evidence is keyed by skill); a fix is published only when its mistake is
+// modelled by its own skill alone in the competency (took-away-again, subtract-coefficient, add-for-multiply).
+const CROSS_SKILL = "its mistake id is modelled by more than one skill of the competency, and misconception evidence is not yet keyed by skill";
 // ---- "inverse operations undo each other" (subskill-config-inverse.ts). Text reuses the template modules' rule ("ask what
 // was done to the box, then work backwards"; "do the opposite to both sides, then check"; "a missing part is total − other
 // part") split so that each explanation shows its own form, and answers their review notes: every worked example states the
@@ -240,9 +244,9 @@ MODULES.push(
       { id: "check_by_addition", title: "Check a subtraction by adding", kind: "conceptual", family: "acfacts", subSkill: "facts.check-subtraction-by-addition@1", math: factsMath, text: ["Adding undoes taking away.", "To check a subtraction, add the answer to the number taken away: you should get the number you started with."] },
       { id: "division_fact", title: "The division fact of a multiplication", kind: "conceptual", family: "acfacts", subSkill: "facts.division-from-multiplication@1", math: factsMath, text: ["Multiplying and dividing undo each other: a product and its two factors are one family.", "A division fact starts with the product and divides it by one factor; the answer is the other factor."] },
       { id: "dividend_divisor_quotient", title: "Dividend = divisor × quotient", kind: "conceptual", family: "acfacts", subSkill: "facts.dividend-is-divisor-times-quotient@1", math: factsMath, text: ["In a division the dividend is the number being divided, the divisor divides it and the quotient is the answer.", "Multiplying undoes dividing, so the dividend equals the divisor times the quotient."] },
-      { id: "fix_added_both", title: "Not both numbers added", kind: "procedural", family: "acmissing", subSkill: "missing.box-plus-k@1", addresses: "added-both", distinct: true, math: missingMath, text: [],
+      { id: "fix_added_both", withheld: CROSS_SKILL, title: "Not both numbers added", kind: "procedural", family: "acmissing", subSkill: "missing.box-plus-k@1", addresses: "added-both", distinct: true, math: missingMath, text: [],
         misconception: () => ["Both numbers you can see were added. Adding them never undoes what was done to the box.", "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."] },
-      { id: "fix_added_both_taken", title: "Not both numbers added", kind: "procedural", family: "acmissing", subSkill: "missing.n-minus-box@1", addresses: "added-both", distinct: true, math: missingMath, text: [],
+      { id: "fix_added_both_taken", withheld: CROSS_SKILL, title: "Not both numbers added", kind: "procedural", family: "acmissing", subSkill: "missing.n-minus-box@1", addresses: "added-both", distinct: true, math: missingMath, text: [],
         misconception: () => ["Both numbers you can see were added. Adding them never undoes what was done to the box.", "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."] },
       { id: "fix_took_away_again", title: "Add it back, do not take it away again", kind: "procedural", family: "acmissing", subSkill: "missing.box-minus-k@1", addresses: "took-away-again", distinct: true, math: missingMath, text: [],
         misconception: () => ["The number was taken away a second time.", "The box is the number before anything was taken away, so add the number back to what is left."] },
@@ -257,9 +261,9 @@ MODULES.push(
       { id: "x_minus_a", title: "A number is taken away from x", kind: "procedural", family: "ahone", subSkill: "one-step.x-minus-a@1", math: oneStepMath, text: ["A number is taken away from x.", "Add that number to both sides, so x is alone. Then put your answer back into the equation to check it."] },
       { id: "a_times_x", title: "x is multiplied by a number", kind: "procedural", family: "ahone", subSkill: "one-step.a-times-x@1", math: oneStepMath, text: ["The number written next to x multiplies it.", "Divide both sides by that number, so x is alone. Check by multiplying."] },
       { id: "x_divided_by_a", title: "x is divided by a number", kind: "procedural", family: "ahone", subSkill: "one-step.x-divided-by-a@1", math: oneStepMath, text: ["x is divided by a number.", "Multiply both sides by that number, so x is alone. Check by dividing."] },
-      { id: "fix_same_operation_add", title: "Do the opposite, not the same again", kind: "procedural", family: "ahone", subSkill: "one-step.x-plus-a@1", addresses: "same-operation", distinct: true, math: oneStepMath, text: [],
+      { id: "fix_same_operation_add", withheld: CROSS_SKILL, title: "Do the opposite, not the same again", kind: "procedural", family: "ahone", subSkill: "one-step.x-plus-a@1", addresses: "same-operation", distinct: true, math: oneStepMath, text: [],
         misconception: () => ["The same operation was done again instead of its opposite.", "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."] },
-      { id: "fix_same_operation_take", title: "Do the opposite, not the same again", kind: "procedural", family: "ahone", subSkill: "one-step.x-minus-a@1", addresses: "same-operation", distinct: true, math: oneStepMath, text: [],
+      { id: "fix_same_operation_take", withheld: CROSS_SKILL, title: "Do the opposite, not the same again", kind: "procedural", family: "ahone", subSkill: "one-step.x-minus-a@1", addresses: "same-operation", distinct: true, math: oneStepMath, text: [],
         misconception: () => ["The same operation was done again instead of its opposite.", "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."] },
       { id: "fix_subtract_coefficient", title: "Divide by the number next to x", kind: "procedural", family: "ahone", subSkill: "one-step.a-times-x@1", addresses: "subtract-coefficient", distinct: true, math: oneStepMath, text: [],
         misconception: () => ["The number next to x was taken away.", "That number multiplies x, so undo it by dividing both sides by it."] },
@@ -298,7 +302,8 @@ for (const M of MODULES) {
   };
   const seed = phasePool(M.family, "practice").map((x) => x.replace(/:mc$/, "")).find((x) => M.seed(P(x)) && connectedSkill(config, x))!;
   used.add(exposureKey(seed));
-  const strategies = M.strategies.map((s) => {
+  // a fix whose mistake can be evidenced by another skill's answers is authored here but not published (see WITHHELD below)
+  const strategies = M.strategies.filter((s) => !s.withheld).map((s) => {
     const inst = P(pick(s.family, "practice", (x) => inSkill(s, x) && (!s.example || s.example(P(x))), "typed"));
     const guided = pick(s.family, "practice", (x) => inSkill(s, x), "any");
     const check = pick(s.family, "check", (x) => inSkill(s, x), "any");

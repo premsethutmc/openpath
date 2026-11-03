@@ -430,7 +430,7 @@ That is 14 skills in all. **Unmapped, with reasons in the config:**
 - **Review notes answered:** this split answers the `revision_required` notes on the retired template explanations (one form per explanation, a worked example of the checked form, the number named in the undo line, the substitution check shown).
 - **Retired template explanations:** they are no longer served; their registry history (including the blocked revisions) is kept. Two existing tests now state this explicitly: `content-corrections` B and the four corrections, and `linear-equations` J12.
 
-**Misconception teaching, 7 fixes.** Each is offered only with misconception evidence, and only for its skill:
+**Misconception teaching, 7 fixes authored** (see 9a: 4 are withheld because their mistake is modelled by several skills). Each is offered only with misconception evidence:
 
 | Fix | Skill | Mistake (bug) |
 |---|---|---|
@@ -449,7 +449,7 @@ That is 14 skills in all. **Unmapped, with reasons in the config:**
 
 | | Count |
 |---|---|
-| Teaching | 14 general explanations plus 7 evidence-gated fixes. All are demonstration-ready (`pending_review`), and none is educator-approved |
+| Teaching | 14 general explanations plus evidence-gated fixes (7 authored; **3 published after the safety correction in 9a**, 4 withheld). All are demonstration-ready (`pending_review`), and none is educator-approved |
 | Assessment | 14 |
 | Recovery | 14 |
 | Retention | 14 |
@@ -466,3 +466,51 @@ That is 14 skills in all. **Unmapped, with reasons in the config:**
 **Limitations:**
 - **Shared limitation (not a blocker):** misconception evidence is keyed by the mistake's id within a competency, not by skill. `same-operation` is modelled for `ahone` f 0–3, and `added-both` for `acmissing` f 0–1. Reproducer: `teachable(moduleFor("MATH.algebra.linear-intro"), fix_same_operation_add, ["same-operation"])` is true whichever kind of equation produced the evidence. Mitigated in the domain: those fixes' words are true for every kind that models the mistake, and the worked example is the fix's own form. Skill-keyed evidence would be an engine change.
 - **Prerequisite not declared:** the missing-digit skills assume three-digit addition and subtraction with regrouping, and no graph relation records this.
+
+### 9a. Safety correction: cross-skill misconception fixes withheld (`feat/math-inverse-safety`)
+
+**Problem.** Misconception evidence is keyed by the mistake's id within a competency, not by skill, and the engine's intervention ordering puts any eligible targeted fix first by that id alone. Two mistake ids are modelled by several skills:
+- `added-both`: □ + k and n − □;
+- `same-operation`: all four one-step equation forms.
+
+So a learner's mistake on one skill could select the fix written for another, presenting it as proof of a mistake in that other skill.
+
+**Correction (domain only; the engine is unchanged).** The four fixes whose mistake is modelled by more than one skill are withheld from the published modules: `fix_added_both`, `fix_added_both_taken`, `fix_same_operation_add` and `fix_same_operation_take`.
+- They stay authored in `scale-blueprints.mts` (`withheld: CROSS_SKILL`) for when evidence is keyed by skill.
+- Their review records stay `pending_review`.
+- They are not retained as general teaching.
+
+Ordinary same-skill teaching for all 14 skills is unchanged. The published, assessed and retained paths are unaffected.
+
+**Readiness of the seven authored fixes:**
+
+| Fix | Mistake modelled by | Status |
+|---|---|---|
+| `fix_took_away_again` | □ − k only | **Published.** Reached end-to-end through recorded evidence: the engine's own investigation establishes the mistake on □ − k answers, teaches this fix, and the finding resolves |
+| `fix_subtract_coefficient` | ax = b only | **Published, skill-safe, not yet demonstrated.** In the recorded-evidence scenario the finding resolves, but recovery chose a prerequisite pointer of another competency instead |
+| `fix_add_for_multiply` | x ÷ a = b only | **Published, skill-safe, not yet demonstrated.** The engine's investigation did not establish the mistake (its questions span other forms) |
+| `fix_added_both`, `fix_added_both_taken` | □ + k and n − □ | **Withheld** |
+| `fix_same_operation_add`, `fix_same_operation_take` | all four one-step forms | **Withheld** |
+
+All explanations remain pending educator review; none is approved.
+
+**Regression with recorded evidence** (`inverse-pattern.test.ts`):
+1. A scripted learner makes `added-both` only on □ + k questions. The engine's own investigation records the finding, and every supporting answer is □ + k.
+2. Nothing addressing `added-both` is taught.
+3. Moving to n − □, the finding authorises only the ordinary `n_minus_box` explanation, and the engine's own ordering offers no targeted fix.
+4. That explanation still runs on the same records: teach → guided → a fresh n − □ check, the same check after a saved reload, and evidence for that skill.
+
+A second test shows the published □ − k fix is reached only through □ − k evidence.
+
+**Reproducer for shared-engine work.** On records holding no □ − k answer at all,
+`orderStrategies(moduleFor("MATH.algebra.missing-number"), d, records, ["took-away-again"])[0].id === "fix_took_away_again"`.
+The gate and ordering take the mistake id alone. The foundation runtime already checks the strategy's scope against the original question (`teachingMatchesMisconception`); `intervention.orderStrategies` does not.
+
+**Second engine limitation observed.** Intervention orders general explanations by family, not skill. In a scenario where `added-both` is shown on n − □, the engine first taught the □ + k explanation (both forms are family `acmissing`), then n − □. Both are correct general teaching, but the first is of another skill.
+
+**Prerequisite resolved.** The missing-digit skills now have `support` relations from `MATH.number.addition-regroup` and `MATH.number.subtraction-regroup`.
+- These are the competencies the generator's own carry and exchange steps already name.
+- They are curated in `content/learning/src/expansion-audit.v1.json` (audit `1.0.2`).
+- The relations are `support`, not `plausible`: the competency's game and river puzzles do not need regrouping, and support never gates, so chapter access stays open.
+- The expansion generator's cycle check accepts both edges; none is disputed. `test_expansion.py` pins them.
+- The regroup competencies are written for two digits (Grade 2). Three-digit column regrouping has no separate competency, so none was invented.

@@ -30528,7 +30528,7 @@
    "competency": "MATH.algebra.linear-intro",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "6de64b97",
+   "contentHash": "404330f6",
    "state": "draft",
    "history": [
     {
@@ -30561,6 +30561,14 @@
      "role": "engineer",
      "at": "2026-11-02T17:33:22.485Z",
      "contentHash": "6de64b97",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-03T03:14:07.649Z",
+     "contentHash": "404330f6",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -31003,7 +31011,7 @@
    "competency": "MATH.algebra.missing-number",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "c12f2284",
+   "contentHash": "c1a043e3",
    "state": "draft",
    "history": [
     {
@@ -31060,6 +31068,14 @@
      "role": "engineer",
      "at": "2026-11-02T17:33:22.485Z",
      "contentHash": "c12f2284",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-03T03:14:07.649Z",
+     "contentHash": "c1a043e3",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

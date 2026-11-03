@@ -1163,7 +1163,7 @@
       ],
       "content": {
         "chapterScreens": 1,
-        "strategies": 8,
+        "strategies": 6,
         "eligibleStrategies": [
           "x_plus_a",
           "x_minus_a",
@@ -1185,10 +1185,6 @@
           "gen:ahone:2,2,14",
           "gen:ahone:3,7,16:mc",
           "gen:ahone:3,7,10",
-          "gen:ahone:0,4,9:mc",
-          "gen:ahone:0,17,15:mc",
-          "gen:ahone:1,6,16:mc",
-          "gen:ahone:1,8,17",
           "gen:ahone:2,2,10:mc",
           "gen:ahone:2,2,15:mc",
           "gen:ahone:3,7,14:mc",
@@ -1607,7 +1603,7 @@
       ],
       "content": {
         "chapterScreens": 3,
-        "strategies": 11,
+        "strategies": 9,
         "eligibleStrategies": [
           "box_plus_k",
           "n_minus_box",
@@ -1642,10 +1638,6 @@
           "gen:acfacts:2,37,1",
           "gen:acfacts:3,4,0",
           "gen:acfacts:3,14,0",
-          "gen:acmissing:0,8,3:mc",
-          "gen:acmissing:0,11,16:mc",
-          "gen:acmissing:1,15,4:mc",
-          "gen:acmissing:1,15,7",
           "gen:acmissing:2,10,3:mc",
           "gen:acmissing:2,10,4:mc"
         ]

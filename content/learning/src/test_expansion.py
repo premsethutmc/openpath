@@ -23,11 +23,14 @@ class ExpansionTests(unittest.TestCase):
             expansion.main()
         self.assertEqual(len(writes), 25)
         graph = json.loads(writes[expansion.ROOT / 'competency-expansion.v1.json'])
-        self.assertEqual(graph['version'], '1.0.1')
+        self.assertEqual(graph['version'], '1.0.2')
         edges = {(r['target'], r['from']): r['type'] for r in graph['relations']}
         for skill in ('MATH.coordinate.distance-intro', 'MATH.trigonometry.ratios'):
             self.assertEqual(edges['MATH.geometry.pythagoras', skill], 'disputed')
             self.assertEqual(edges[skill, 'MATH.geometry.pythagoras'], 'support')
+        # missing-digit puzzles rest on column regrouping (the generator's own carry and exchange steps): support, never a gate
+        for regroup in ('MATH.number.addition-regroup', 'MATH.number.subtraction-regroup'):
+            self.assertEqual(edges['MATH.reasoning.puzzle-strategy', regroup], 'support')
 
     def test_stale_audit_refuses_silent_overwrite(self):
         read = Path.read_text

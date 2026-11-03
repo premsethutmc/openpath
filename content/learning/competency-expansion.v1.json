@@ -1,6 +1,6 @@
 {
  "schema": "competency-expansion@1",
- "version": "1.0.1",
+ "version": "1.0.2",
  "status": "provisional",
  "note": "New competencies found by comparing the Grades 1-12 CBSE/NCERT and Tamil Nadu State Board inventories (content/learning/syllabus) with the 200-competency graph. Existing ids are unchanged; no learner evidence is remapped. Written by content/learning/src/expansion.py; AI-assisted, not educator-reviewed.",
  "merged": [
@@ -4815,6 +4815,18 @@
    "from": "MATH.geometry.pythagoras",
    "type": "support",
    "reason": "reverse of the disputed trigonometry.ratios → pythagoras relation (adaptive-loop repair audit): finding the third side uses Pythagoras; helpful background, never a gate; pending educator confirmation"
+  },
+  {
+   "target": "MATH.reasoning.puzzle-strategy",
+   "from": "MATH.number.addition-regroup",
+   "type": "support",
+   "reason": "a missing digit in a sum (afmissd) is found column by column with any ten carried from the column on its right; the generator's own carry step is MATH.number.addition-regroup. Helpful background for those puzzle tasks only (the competency's game and river puzzles do not use it), so support, never a gate; pending educator confirmation"
+  },
+  {
+   "target": "MATH.reasoning.puzzle-strategy",
+   "from": "MATH.number.subtraction-regroup",
+   "type": "support",
+   "reason": "a missing digit in a difference (afmissd) is found column by column with any ten exchanged in the column on its right; the generator's own exchange step is MATH.number.subtraction-regroup. Helpful background for those puzzle tasks only, so support, never a gate; pending educator confirmation"
   }
  ],
  "disputed": [

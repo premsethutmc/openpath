@@ -81,7 +81,7 @@ Of 327 modules with a pool, 327 can fill every phase with questions the learner 
 
 ## Graph
 
-338 competencies: 200 from the original inventory (ids unchanged) and 138 added by the curriculum expansion (expansion@1); 363 expansion relations; 8 disputed prerequisites listed for educator review and not followed.
+338 competencies: 200 from the original inventory (ids unchanged) and 138 added by the curriculum expansion (expansion@1); 365 expansion relations; 8 disputed prerequisites listed for educator review and not followed.
 
 ## What to build next (dependency order, then demand)
 
