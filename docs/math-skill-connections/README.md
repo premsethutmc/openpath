@@ -609,3 +609,92 @@ The readiness pathway (`foundation-runtime.ts`) already checked scope; the ordin
 - **Inverse operations (14 skills):** 14 general explanations plus 7 fixes, all published. 4 of the fixes are scope-guarded.
 - **Fractions (9 skills):** 7 skill-connected explanations. 2 skills are taught by the hand-written lessons, which use authored questions and so are not skill-connected. 0 gaps.
 - All explanations remain pending educator review.
+
+## 12. Learner routing, educator hand-off and phone walkthrough (Claude, `integration/fractions-learner-handoff`, from #105 `4919cc15`)
+
+Three parallel workstreams with one coordinator. Nothing is merged, deployed or educator-approved. Every explanation and the disputed graph edge below remain **pending educator review**.
+
+### 12.1 Learner routing: why 10 × □ = 30 led to "Patterns on a calendar"
+
+**Trace.**
+- The question is `gen:acmissing:3,3,10` in `MATH.algebra.missing-number`, sub-skill `missing.k-times-box@1`. Its solution steps use `MATH.number.multiplication-tables`.
+- `recovery()` walked the competency graph (`walkSupports`). That graph's only prerequisite edge is to `MATH.algebra.number-patterns` (`curriculum.v1.json:1828-1830`), whose module is "Patterns on a calendar".
+- So the support link came from the competency graph, not from the question. The detour was inappropriate.
+
+**Fix: shared rule `question-supports@1`** (`intervention.ts` `questionSupports`, used by `recovery()`):
+- **Order:** the skills the question's own steps use come first, nearest to its topic first, then what those skills build on.
+- **Eligibility:** a step skill must have a module and be within the learner's grade or readiness route. Skills 3 or more grades below the question count as background arithmetic and go after the competency's usual supports.
+- **Fallback:** with no eligible step skill, recovery uses the old graph walk unchanged. A step skill that is eligible but already shown does not fall back to the graph (which would bring back the detour); the module carries on to its own teaching.
+- **Graph data unchanged.**
+- **Impact:** 2,161 questions get a different first support and 356 gain one; none lose one. In a 20-question sample: 15 better, 3 neutral, 2 worse (`agptest`, `alrem`, which have sparse step labels).
+
+**Also in this workstream:**
+- **`explore-once@1`:** an exploratory question already answered is never served again. This fixes the repeated `fc-d2` on the curriculum Assessment entry.
+- **`review-scope@1`:** "Review a supported lesson" follows skill-scope@1. A wrong 300 on 10 × □ = 30 now reviews "The box was multiplied", not the wrong operation. A question outside every skill gets no review button.
+- **`lesson-resume@1`:** the lesson position and the open review survive a reload, keyed per learner and per skill.
+
+**Demonstrated** (CBSE Grade 4, real app, phone viewport):
+1. A wrong answer leads to "Use multiplication facts · used directly", with a fresh 7 × 8.
+2. After a reload, the dashboard says "Carry on" and resumes the module.
+3. Other chapters still open.
+
+### 12.2 Educator hand-off for written answers
+
+**Already on this candidate (verified, not rebuilt):**
+- written tasks (`HUMAN={'written'}`, 376 tasks);
+- `WrittenMark`, `MarkingShare` and the `ContentReviewer` educator role;
+- the Marking tab at `/review/`.
+
+Text answers already worked end to end. The stops were:
+1. **Drawing tasks:** 148 tasks in 86 competencies need drawing input, which is off (`HANDWRITING_ENABLED=false`). A learner could reach one and not hand it in.
+2. **No route to marking:** nothing linked to `/review/`.
+3. **Route stopped:** `plan.ts` halted the pathway while a skill waited for a mark.
+
+**Smallest missing pieces built:**
+- **Drawing tasks:** `written.ts` adds `keyboardOffered` and `withheldDrawings`. It filters only what is offered, so content, module lists, review hashes and stored records are unchanged.
+- **Hook:** the coordinator added the hook in `intervention.ts` `unanswered()`.
+- **Coordinator addition:** six construction strategies whose own check is a drawing now reach an honest pause naming the drawing, instead of an unsubmittable task (`drawn-check.test.ts`).
+- **Parent:** the parent's Written work section shows how many answers are waiting and, once shared, the `/review/#marking` link.
+- **Educator:** `#marking` opens the queue directly.
+- **Plan:** a skill waiting for a mark is set aside, and other skills continue.
+
+**Demonstrated in fractions, algebra and geometry:**
+1. The learner hands in a written answer on a phone.
+2. The parent shares it.
+3. The educator signs in on a desktop through the link and marks it (rubric, points, feedback).
+4. The learner reloads and sees "Marked correct · n/n" with the feedback, and continues.
+
+A mark writes no content decision; this is tested in Django and e2e.
+
+### 12.3 Phone walkthrough (baseline `4919cc15`, 390×844, normal app selection)
+
+| Journey | Result | Notes |
+|---|---|---|
+| A: one-step equation / missing number | Completed, with caveats | The review lesson used the wrong operation (fixed in 12.1). Digit-card puzzles (`acplace`) appear in this skill's practice. The delayed check opens after 8 days. Nothing reaches Verified on a non-test build. |
+| B: same-top fraction comparison | Completed, with caveats | Diagnosis and lesson were correct. Same-top cannot be chosen as a skill and is never rechecked. |
+| Either journey | No educator stop | — |
+
+**Other findings:**
+- No link from the English home to `/year/`.
+- The step bar says "Explore" when the status says otherwise.
+- Follow-up questions are labelled "short check to find the starting point".
+- "bottom numbers.." (doubled full stop).
+- The dashboard counts 74 vs 53.
+- A misleading "Check your connection" error.
+
+The phone layout itself is fine.
+
+### 12.4 Still open (owner decisions; none changed here)
+
+| Item | Effect | Suggested |
+|---|---|---|
+| Edge `missing-number` < `number-patterns` | `acfacts` and `acplace` questions, and Grade 1–2 learners, still fall back to calendar patterns | Educator review of the edge |
+| `acplace` (digit-card puzzles) filed under missing-number (`b03.ts:1805-1808`) | 160 of 496 practice, 59 of 196 check and 57 of 194 retention items | Move to `MATH.reasoning.puzzle-strategy`; regenerate the library |
+| 2,245 questions without step labels | Old graph-walk recovery | Label steps |
+| `records.ts:144`: every check after a lesson review counts as assisted | Status "Learning (with help so far)" | Product decision |
+| A reload lands on the dashboard (the screen state lives in `Main.tsx`) | One extra tap ("Carry on") | URL-routed screens |
+| Educator role granted only by `manage.py content_reviewer grant`; the parent must know the educator's email | Teacher setup is not self-service | An invite screen |
+| Drawing tasks | Withheld, not markable | Enable drawing input, then remove the filter (a test ties the two flags) |
+| Construction skills can show "Shown on your own" from auto-marked questions alone | Existing evidence rule | Educator review |
+| Hand-over acknowledgement | API only, no educator screen | A button in the Marking view |
+| `educator-marking.test.mjs` | Not in CI | Add it next to `learning-year.test.mjs` |
