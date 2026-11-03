@@ -41,7 +41,7 @@ const HANDWRITTEN: Record<string, string[]> = {
 };
 /** skills with a scoped explanation */
 const TAUGHT: Record<string, string> = {
-  "fraction.order-same-bottom@1": "order_same_bottom",
+  "fraction.compare-same-top@1": "compare_same_top", "fraction.order-same-bottom@1": "order_same_bottom",
   "fraction.order-same-top@1": "order_same_top", "fraction.compare-unlike@1": "compare_unlike", "fraction.order-unlike@1": "order_unlike",
   "fraction.lowest-terms@1": "lowest_terms", "fraction.equal-by-folding@1": "equal_by_folding",
 };
@@ -49,8 +49,8 @@ const TAUGHT: Record<string, string> = {
 const HANDWRITTEN_TEACHES: Record<string, string[]> = {
   "fraction.compare-same-bottom@1": ["same_size_pieces"], "fraction.equivalent-missing-part@1": ["strip_model", "multiply_both"],
 };
-/** held back with no lesson of its own: it shares its family with the hand-written lesson (the engine orders by family) */
-const HELD_NO_TEACHING = ["fraction.compare-same-top@1"];
+/** held back with no lesson of its own (none since skill-scope@1) */
+const HELD_NO_TEACHING: string[] = [];
 /** the fractions written in a prompt or line, as [top, bottom] */
 const fracs = (t: string) => [...t.matchAll(/(?<![\d/])(\d+)\/(\d+)(?![\d/])/g)].map((m) => [Number(m[1]), Number(m[2])] as const);
 const value = ([t, b]: readonly [number, number]) => t / b;
@@ -201,18 +201,17 @@ test("saved evidence replays under its mapping: order-independent, ledger untouc
   assert.deepEqual([FRACTION_COMPARISON_CONFIG.mapping, EQUIVALENT_FRACTIONS_CONFIG.mapping], ["fraction-comparison-subskills@1", "equivalent-fractions-subskills@1"]);
 });
 
-test("after a mistake on a hand-taught skill: the designed lesson is still chosen for a conceptual difficulty; the known family-ordering limitation is pinned", () => {
+test("after a mistake on a hand-taught skill the designed lesson is chosen, for either diagnosis kind (skill-scope@1)", () => {
   const first = (competency: string, qid: string, wrong: string, kind: string) => {
     const L = new SliceSession(`fr-order-${competency}-${kind}`, competency, at);
     assert.equal(L.submit(qid, wrong, "check").credit, false);
     return orderStrategies(moduleFor(competency)!, { asked: [], posterior: {}, next: null, result: kind, confidence: 1, policy: "test" } as never, L.state().records, [])[0]?.id;
   };
-  // the designed lessons (the browser journey A relies on the strip model after an additive, conceptual mistake)
   assert.equal(first("MATH.number.equivalent-fractions", "gen:eqfrac:2,4,8", "6", "conceptual"), "strip_model");
   assert.equal(first("MATH.number.equivalent-fractions", "gen:eqfrac:2,4,8", "6", "procedural"), "multiply_both");
   assert.equal(first("MATH.number.fraction-comparison", "gen:adfcmp:0,3,1,2,0", "1/3", "conceptual"), "same_size_pieces");
-  // limitation (engine, reported in the handover): explanations are ordered by the family of the last mistake and the diagnosis
-  // kind, not by skill; with a procedural diagnosis after a same-bottom comparison mistake, the procedural same-bottom ORDERING
-  // explanation (another skill of the competency) comes before the conceptual hand-written lesson
-  assert.equal(first("MATH.number.fraction-comparison", "gen:adfcmp:0,3,1,2,0", "1/3", "procedural"), "order_same_bottom");
+  // before skill-scope@1 the procedural same-bottom ORDERING explanation (another skill) came first here
+  assert.equal(first("MATH.number.fraction-comparison", "gen:adfcmp:0,3,1,2,0", "1/3", "procedural"), "same_size_pieces");
+  // and a same-top mistake gets the same-top explanation
+  assert.equal(first("MATH.number.fraction-comparison", "gen:adfcmp:1,1,2,4,0", "1/4", "conceptual"), "compare_same_top");
 });

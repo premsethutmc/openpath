@@ -469,6 +469,8 @@ That is 14 skills in all. **Unmapped, with reasons in the config:**
 
 ### 9a. Safety correction: cross-skill misconception fixes withheld (`feat/math-inverse-safety`)
 
+> Superseded by section 11: the shared rule skill-scope@1 makes the four withheld fixes safe, and they are published again.
+
 **Problem.** Misconception evidence is keyed by the mistake's id within a competency, not by skill, and the engine's intervention ordering puts any eligible targeted fix first by that id alone. Two mistake ids are modelled by several skills:
 - `added-both`: □ + k and n − □;
 - `same-operation`: all four one-step equation forms.
@@ -524,7 +526,7 @@ The gate and ordering take the mistake id alone. The foundation runtime already 
 | Competency (mapping) | Skill | Family, parameters | Answer | Explanation |
 |---|---|---|---|---|
 | `MATH.number.fraction-comparison` (`fraction-comparison-subskills@1`) | compare, same bottom | `adfcmp` mode 0 | fraction | `compare_same_bottom` |
-| | compare, same top | `adfcmp` mode 1 | fraction | **held back** (TP-NUM-01 text kept in the source) |
+| | compare, same top | `adfcmp` mode 1 | fraction | `compare_same_top` (TP-NUM-01 text; re-enabled under skill-scope@1, section 11) |
 | | order, same bottom | `adford` mode 0 | tuple | `order_same_bottom` |
 | | order, same top | `adford` mode 1 | tuple | `order_same_top` |
 | | compare, unlike | `adfcmpu` | fraction | `compare_unlike` |
@@ -541,7 +543,7 @@ The gate and ordering take the mistake id alone. The foundation runtime already 
 
 | | Count |
 |---|---|
-| Teaching | **6** skill-connected scoped explanations, demonstration-ready (`pending_review`), 0 educator-approved. 2 more skills (compare same bottom, missing part) are taught by the existing hand-written lessons, which use authored questions and so are not skill-connected. 1 skill (compare same top) has no teaching yet (held back) |
+| Teaching | **7** skill-connected scoped explanations (after section 11), demonstration-ready (`pending_review`), 0 educator-approved. 2 more skills (compare same bottom, missing part) are taught by the existing hand-written lessons, which use authored questions and so are not skill-connected |
 | Assessment | 9 |
 | Recovery | 9 |
 | Retention | 9 |
@@ -569,3 +571,41 @@ All three stay authored in `fraction-strategies.mts` (`held`), waiting for skill
   - `compare_unlike` shows the family's two-strip picture (both fractions, each strip shaded for its own fraction).
   - `equal_by_folding` shows its question picture.
   - The same-bottom and same-top teaching pictures show only the first fraction, so they are not used, and those explanations are text and worked lines only.
+
+## 11. Shared selection rule skill-scope@1 (Claude, on `feat/math-fractions`, #105)
+
+**Cause.** The ordinary intervention path (`intervention.ts` `orderStrategies`, used by `moduleState`) chose explanations by mistake id, question family and diagnosis kind, never by skill. A skill-scoped explanation or fix could therefore be selected for another skill of the same competency:
+- an ordering lesson after a same-bottom comparison mistake;
+- one equation form's fix after a mistake recorded on another.
+
+The readiness pathway (`foundation-runtime.ts`) already checked scope; the ordinary path did not.
+
+**Rule** (`intervention.ts` `currentSkill` and `scopeAllows`; applied in `orderStrategies`, in the sub-skill-gap path and in the planner's availability count):
+- **Current skill:** read from trusted provenance, never from family or wording. The competency's versioned skill mapping classifies the question of the learner's latest recorded wrong answer in the module. It is `null` when there is no mapping, no such answer, or the question is unmapped.
+- **Explanations without a skill scope** (generic and hand-written lessons) are unchanged.
+- **A skill-scoped general explanation** is offered on its own skill, or, when no current skill is known, as safe general teaching.
+- **A skill-scoped misconception fix** is offered only when the current skill is its skill and the misconception was recorded on that skill (an investigated finding whose original question the mapping classifies as that skill). With missing or ambiguous provenance it abstains, and general teaching remains.
+- Records, mappings and replay are untouched; the rule only reads them.
+
+**Proof on the real automatic path** (`frontend/src/journey/skill-scope.test.ts`, 7 tests). Each runs through `runScenario`: the engine asks, a scripted learner answers, the engine teaches, and no strategy is chosen by the test. Each case also checks that a saved reload gives the same next step.
+
+| Case | Result |
+|---|---|
+| Same-bottom comparison difficulty (generated and hand-written same-bottom questions) | Taught `same_size_pieces`; no ordering, same-top or unlike lesson |
+| Same-top difficulty (positive) | Taught `compare_same_top` |
+| `same-operation` established on an x − a question while the current skill is x + a | No targeted fix; taught `x_plus_a`. The content gate alone would allow both same-operation fixes; the scope rule refuses them |
+| `added-both` established on n − □ while the current skill is □ + k | No targeted fix; taught `box_plus_k` |
+| `added-both` on □ + k, and `same-operation` on x + a (positive) | Taught `fix_added_both` and `fix_same_operation_add` |
+| `took-away-again` on □ − k (positive, skill-unique) | Taught `fix_took_away_again` |
+| No current skill, or a competency without a mapping | Targeted scoped fixes abstain; general teaching is unchanged |
+
+**Re-enabled where the rule makes them safe:**
+- the four inverse-operation fixes withheld in 9a (`fix_added_both`, `fix_added_both_taken`, `fix_same_operation_add`, `fix_same_operation_take`; content identical to #104's original, so the registry is unchanged);
+- the fraction `compare_same_top` explanation.
+
+`equivalent_missing_part` and `compare_same_bottom` stay held. They were held because they would come before the hand-written lesson of the **same** skill; that is ordering preference, not scope, and the rule does not change it.
+
+**Actual teaching coverage now:**
+- **Inverse operations (14 skills):** 14 general explanations plus 7 fixes, all published. 4 of the fixes are scope-guarded.
+- **Fractions (9 skills):** 7 skill-connected explanations. 2 skills are taught by the hand-written lessons, which use authored questions and so are not skill-connected. 0 gaps.
+- All explanations remain pending educator review.

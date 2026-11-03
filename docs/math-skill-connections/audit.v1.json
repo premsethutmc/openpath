@@ -1163,7 +1163,7 @@
       ],
       "content": {
         "chapterScreens": 1,
-        "strategies": 6,
+        "strategies": 8,
         "eligibleStrategies": [
           "x_plus_a",
           "x_minus_a",
@@ -1185,6 +1185,10 @@
           "gen:ahone:2,2,14",
           "gen:ahone:3,7,16:mc",
           "gen:ahone:3,7,10",
+          "gen:ahone:0,4,9:mc",
+          "gen:ahone:0,17,15:mc",
+          "gen:ahone:1,6,16:mc",
+          "gen:ahone:1,8,17",
           "gen:ahone:2,2,10:mc",
           "gen:ahone:2,2,15:mc",
           "gen:ahone:3,7,14:mc",
@@ -1603,7 +1607,7 @@
       ],
       "content": {
         "chapterScreens": 3,
-        "strategies": 9,
+        "strategies": 11,
         "eligibleStrategies": [
           "box_plus_k",
           "n_minus_box",
@@ -1638,6 +1642,10 @@
           "gen:acfacts:2,37,1",
           "gen:acfacts:3,4,0",
           "gen:acfacts:3,14,0",
+          "gen:acmissing:0,8,3:mc",
+          "gen:acmissing:0,11,16:mc",
+          "gen:acmissing:1,15,4:mc",
+          "gen:acmissing:1,15,7",
           "gen:acmissing:2,10,3:mc",
           "gen:acmissing:2,10,4:mc"
         ]
@@ -8760,9 +8768,10 @@
       ],
       "content": {
         "chapterScreens": 1,
-        "strategies": 5,
+        "strategies": 6,
         "eligibleStrategies": [
           "same_size_pieces",
+          "compare_same_top",
           "order_same_bottom",
           "order_same_top",
           "compare_unlike",
@@ -8777,6 +8786,8 @@
           "fc-d2",
           "fc-g1",
           "fc-c1",
+          "gen:adfcmp:1,3,10,4,0",
+          "gen:adfcmp:1,3,10,11,0",
           "gen:adford:0,12,9,8,1:mc",
           "gen:adford:0,9,2,7,3:mc",
           "gen:adford:1,1,10,2,6:mc",
@@ -8830,11 +8841,11 @@
               ]
             }
           ],
-          "status": "gap",
-          "gaps": [
-            "missing-eligible-teaching"
+          "status": "connected-answer-chain",
+          "gaps": [],
+          "strategies": [
+            "compare_same_top"
           ],
-          "strategies": [],
           "freshChecks": 42,
           "retention": 57,
           "diagnosticPredictions": [

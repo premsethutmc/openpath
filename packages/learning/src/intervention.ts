@@ -30,6 +30,7 @@ import { teachingEligibility, type TeachingEligibility } from "./teaching-contra
 import { contentEligibility, isMisconceptionSpecific, teachingMode, type ContentEligibility } from "./explanation-review";
 import { evidenceBasis, type EvidenceBasis } from "./misconception-evidence";
 import type { Attempt, LearnerRecords } from "./records";
+import { connectedSkill, connectionConfig } from "./skill-connections";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
 export const MODULE_POLICY: PlannerPolicy = { ...PLANNER_POLICY_DRAFT, guidedItems: 1, reassessItems: 1, reassessPassMin: 1, reassessContrastItems: 0, version: `${PLANNER_POLICY_DRAFT.version}+learning-module@1` };
@@ -67,6 +68,35 @@ export function questionForRequirement(m: Module, phase: "check" | "retention", 
     && question(id).competency === m.competency && accepts(id)) ?? null;
 }
 
+/**
+ * skill-scope@1: a skill-scoped explanation is for the learner's CURRENT skill only. The current skill is read from trusted
+ * provenance, never from question family or wording: the competency's versioned skill mapping classifies the question of the
+ * learner's latest wrong answer in this module (a recorded attempt). null when the competency has no mapping, there is no
+ * such answer, or its question is unmapped (ambiguous): then no skill is assumed.
+ */
+export function currentSkill(m: Module, records: LearnerRecords): string | null {
+  const config = connectionConfig(m.competency);
+  if (!config) return null;
+  const last = records.attempts.filter((a) => of(m)(a) && !rightAnswer(a)).at(-1);
+  return last ? connectedSkill(config, last.questionId) : null;
+}
+/**
+ * Whether a strategy may be offered for this learner's current skill (skill-scope@1). Explanations without a skill scope
+ * (generic and hand-written lessons) are unchanged. A skill-scoped general explanation is offered on its own skill, or, when
+ * no current skill is known, as safe general teaching. A skill-scoped misconception fix is offered only when the current
+ * skill is its skill AND the misconception was recorded on that skill: an investigated finding whose original question the
+ * mapping classifies as that skill. With missing or ambiguous provenance the fix abstains (general teaching remains).
+ */
+export function scopeAllows(m: Module, s: Strategy, records: LearnerRecords, skill: string | null = currentSkill(m, records)): boolean {
+  const target = s.scope?.subSkill;
+  const config = target ? connectionConfig(m.competency) : null;
+  if (!target || !config) return true;
+  if (!isMisconceptionSpecific(s)) return skill === null || skill === target;
+  if (skill !== target) return false;
+  return hypothesesFor(m.competency, records).some((h) => (h.status === "established" || h.status === "resolved" || h.status === "contested")
+    && h.claim?.explanation === s.addresses && connectedSkill(config, h.scope.question) === target);
+}
+
 /** Strategies in the order to try: the diagnosis's kind first, then by what the probes show the learner can build on. */
 export function orderStrategies(m: Module, d: Diagnosis, records: LearnerRecords, misconceptionEvidence: Evidence = establishedIds(m.competency, records)): Strategy[] {
   const kind = d.result === "conceptual" || d.result === "insufficient_evidence" ? "conceptual" : d.result === "procedural" || d.result === "transfer" ? "procedural" : d.result === "recall" ? "recall" : d.result === "prerequisite" ? "prerequisite" : null;
@@ -85,8 +115,11 @@ export function orderStrategies(m: Module, d: Diagnosis, records: LearnerRecords
   const wrongFamily = lastWrong ? problemOf(lastWrong.questionId.replace(/:(mc|w)$/, ""))?.family ?? null : null;
   const relevant = (s: Strategy) => Number(!!wrongFamily && problemOf(s.check.replace(/:(mc|w)$/, ""))?.family !== wrongFamily);
   // a general explanation of another kind is not offered while there is one of the kind the learner got wrong (all tried: a person)
-  const onTopic = (s: Strategy) => !wrongFamily || isMisconceptionSpecific(s) || !relevant(s) || !m.strategies.some((x) => !isMisconceptionSpecific(x) && !relevant(x));
-  return m.strategies.filter((s) => teachable(m, s, misconceptionEvidence) && onTopic(s)).sort((a, b) => specific(a) - specific(b) || relevant(a) - relevant(b) || Number(a.kind !== kind) - Number(b.kind !== kind) || needState(a) - needState(b) || m.strategies.indexOf(a) - m.strategies.indexOf(b));
+  // (only among explanations this learner's current skill allows: one scoped to another skill does not hide a general one)
+  const skill = currentSkill(m, records);
+  const allowed = m.strategies.filter((x) => scopeAllows(m, x, records, skill));
+  const onTopic = (s: Strategy) => !wrongFamily || isMisconceptionSpecific(s) || !relevant(s) || !allowed.some((x) => !isMisconceptionSpecific(x) && !relevant(x));
+  return allowed.filter((s) => teachable(m, s, misconceptionEvidence) && onTopic(s)).sort((a, b) => specific(a) - specific(b) || relevant(a) - relevant(b) || Number(a.kind !== kind) - Number(b.kind !== kind) || needState(a) - needState(b) || m.strategies.indexOf(a) - m.strategies.indexOf(b));
 }
 /** teaching gate (adaptive-loop repair): an explanation whose sections fail the teaching contract is never chosen as an
  *  intervention. One that was not machine-checked (hand-written modules) may be used, and says so; none is "verified". */
@@ -416,7 +449,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     const forGap = m.strategies.filter((st) => !isMisconceptionSpecific(st) && kindOf(st) === gap.family);
     const taught = records.teaching.filter((t) => t.competency === competency && t.at > gap.since && forGap.some((st) => st.id === t.strategy));
     if (!taught.length) {
-      const st = forGap.find((x) => teachable(m, x, basis0.established));
+      const st = forGap.find((x) => teachable(m, x, basis0.established) && scopeAllows(m, x, records));
       if (st) return { ...base, phase: "chapter", strategy: st, teachingReview: teachingStatus(m, st), contentReview: contentReviewOf(m, st, basis0.established), basis: basis0, diagnosis: d, reason: "Questions of this kind have gone wrong a few times on your own, so here is how to solve them, then one on your own." };
     } else {
       const st = forGap.find((x) => x.id === taught.at(-1)!.strategy)!;
@@ -474,7 +507,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     now: new Date(now).toISOString(),
     sessionStartedAt: sessionStart,
     session,
-    available: { apply: m.strategies.filter((s) => teachable(m, s, misEv) && !answered(records, s.check)).length + (fromPool(m, "check", records) ? 1 : 0), contrast: 0, guided: st && !answered(records, st.guided) ? 1 : 0 },
+    available: { apply: m.strategies.filter((s) => teachable(m, s, misEv) && scopeAllows(m, s, records) && !answered(records, s.check)).length + (fromPool(m, "check", records) ? 1 : 0), contrast: 0, guided: st && !answered(records, st.guided) ? 1 : 0 },
     answeredThisSession: records.attempts.filter((a) => of(m)(a) && a.at >= sessionStart && independentAttempt(a)).length,
     guidedThisBlock: st && records.attempts.some((a) => a.questionId === st.guided && a.at >= last!.at) ? 1 : 0,
     policy: MODULE_POLICY,

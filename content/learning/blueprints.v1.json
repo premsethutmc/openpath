@@ -2717,6 +2717,96 @@
      }
     },
     {
+     "id": "fix_added_both",
+     "title": "Not both numbers added",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Not both numbers added: what went wrong",
+       "text": [
+        "Both numbers you can see were added. Adding them never undoes what was done to the box.",
+        "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."
+       ],
+       "math": [
+        "Not 12, but 8"
+       ],
+       "role": "misconception",
+       "instance": "gen:acmissing:0,8,2",
+       "widget": {
+        "type": "balance",
+        "left": "□ + 2",
+        "right": "10"
+       }
+      },
+      {
+       "title": "Not both numbers added: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "□ + 2 = 10",
+        "2 was added to the box: undo it by taking 2 away",
+        "10 − 2 = 8",
+        "Check: 8 + 2 = 10"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:0,8,2"
+      }
+     ],
+     "guided": "gen:acmissing:0,8,3:mc",
+     "check": "gen:acmissing:0,11,16:mc",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.box-plus-k@1"
+     },
+     "addresses": "added-both"
+    },
+    {
+     "id": "fix_added_both_taken",
+     "title": "Not both numbers added",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Not both numbers added: what went wrong",
+       "text": [
+        "Both numbers you can see were added. Adding them never undoes what was done to the box.",
+        "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."
+       ],
+       "math": [
+        "Not 21, but 15"
+       ],
+       "role": "misconception",
+       "instance": "gen:acmissing:1,15,3",
+       "widget": {
+        "type": "balance",
+        "left": "18 − □",
+        "right": "3"
+       }
+      },
+      {
+       "title": "Not both numbers added: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "18 − □ = 3",
+        "The box was taken away from 18 and 3 is left, so the box is 18 − 3",
+        "18 − 3 = 15",
+        "Check: 18 − 15 = 3"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:1,15,3"
+      }
+     ],
+     "guided": "gen:acmissing:1,15,4:mc",
+     "check": "gen:acmissing:1,15,7",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.n-minus-box@1"
+     },
+     "addresses": "added-both"
+    },
+    {
      "id": "fix_took_away_again",
      "title": "Add it back, do not take it away again",
      "kind": "procedural",
@@ -2892,6 +2982,84 @@
       "family": "ahone",
       "subSkill": "one-step.x-divided-by-a@1"
      }
+    },
+    {
+     "id": "fix_same_operation_add",
+     "title": "Do the opposite, not the same again",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Do the opposite, not the same again: what went wrong",
+       "text": [
+        "The same operation was done again instead of its opposite.",
+        "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."
+       ],
+       "math": [
+        "Not 36, but 14"
+       ],
+       "role": "misconception",
+       "instance": "gen:ahone:0,11,14"
+      },
+      {
+       "title": "Do the opposite, not the same again: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Find x: x + 11 = 25.",
+        "Take 11 from both sides: x = 25 − 11 = 14",
+        "Check: 14 + 11 = 25"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:0,11,14"
+      }
+     ],
+     "guided": "gen:ahone:0,4,9:mc",
+     "check": "gen:ahone:0,17,15:mc",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-plus-a@1"
+     },
+     "addresses": "same-operation"
+    },
+    {
+     "id": "fix_same_operation_take",
+     "title": "Do the opposite, not the same again",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Do the opposite, not the same again: what went wrong",
+       "text": [
+        "The same operation was done again instead of its opposite.",
+        "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."
+       ],
+       "math": [
+        "Not 3, but 9"
+       ],
+       "role": "misconception",
+       "instance": "gen:ahone:1,3,9"
+      },
+      {
+       "title": "Do the opposite, not the same again: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Find x: x − 3 = 6.",
+        "Add 3 to both sides: x = 6 + 3 = 9",
+        "Check: 9 − 3 = 6"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:1,3,9"
+      }
+     ],
+     "guided": "gen:ahone:1,6,16:mc",
+     "check": "gen:ahone:1,8,17",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-minus-a@1"
+     },
+     "addresses": "same-operation"
     },
     {
      "id": "fix_subtract_coefficient",
