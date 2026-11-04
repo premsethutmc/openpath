@@ -204,7 +204,9 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   const familyOf = (qid: string) => (!micro && qid.startsWith("gen:") && !units.some((u) => u.unit.accepts(qid)) ? problemOf(qid.replace(/:(mc|w)$/, ""))?.family ?? null : null);
   const byFamily = new Map<string, Attempt[]>();
   for (const a of ind) { const f = familyOf(a.questionId); if (f) byFamily.set(f, [...(byFamily.get(f) ?? []), a]); }
-  const familyNotShown = [...byFamily.values()].some((xs) => !right(xs.at(-1)!) && (new Set(xs.filter(right).map((a) => a.questionId)).size < 2 || xs.slice(-3).filter((a) => !right(a)).length >= 2));
+  // (coordinator) never on one slip: at least two of the family's own answers alone are wrong (policy A1: an unexplained slip after the
+  // skill is shown is kept as an observation and changes nothing)
+  const familyNotShown = [...byFamily.values()].some((xs) => !right(xs.at(-1)!) && xs.filter((a) => !right(a)).length >= 2 && (new Set(xs.filter(right).map((a) => a.questionId)).size < 2 || xs.slice(-3).filter((a) => !right(a)).length >= 2));
   const covers = (answers: Attempt[]) => taughtUnits.every((u) => answers.some((a) => u.unit.accepts(a.questionId) && right(a)));
   // retention@2: a failed delayed check stays failed (kept in the history, never forgiven); once the skill has been
   // shown again on your own after the failure (INDEPENDENT_MIN distinct fresh questions right, alone, outside the

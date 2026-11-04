@@ -651,19 +651,19 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     // after-pass@1 (#112): the planner ends the visit once the block's check alone was right ("progress, not yet mastery"). When the
     // learner's answers alone on what was taught have gone wrong since that check, that message is not true and the learner was left
     // with no question and no help. One wrong since: one more fresh question of the taught kind alone. Two or more wrong since and none
-    // right: a different explanation for it not given yet, else a pause for a person (handover@1 gives the way back).
+    // right: a pause for a person (handover@1 gives the way back; policy C: one teaching cycle, not a loop).
     const passAt = rs.interventions.at(-1)?.independentAfter.lastAt ?? null;
     const unit = st ? unitOfStrategy(m, st) : null;
-    const since = passAt ? records.attempts.filter((a) => of(m)(a) && independentAttempt(a) && a.activity !== "probe" && a.at > passAt && (!unit || unit.accepts(a.questionId))) : [];
+    // (coordinator) the learner's own practice and checks only: a recovery's investigation questions and original-problem retries
+    // have their own bounded path (policy C: the problem is tried once more, then a person)
+    const since = passAt ? records.attempts.filter((a) => of(m)(a) && independentAttempt(a) && ["practice", "check", "transfer", "retention"].includes(a.activity) && !String(a.context ?? "").startsWith("investigate:") && a.at > passAt && (!unit || unit.accepts(a.questionId))) : [];
     if (st && since.length && !rightAnswer(since.at(-1)!)) {
       const wrongSince = since.length - since.map(rightAnswer).lastIndexOf(true) - 1;
       if (wrongSince < 2) {
         const q = blockCheck(m, st, records);
         if (q) return { ...base, phase: "check", question: q, strategy: st, diagnosis: d, decision, reason: "Now one more of this kind on your own, with no hints." };
       }
-      const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id);
-      const s = order.find((x) => !delivered(x) && (!unit || unitOfStrategy(m, x) === unit));
-      if (s) return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: "Right once on your own after the explanation, but not since, so here is a different explanation." };
+      // (coordinator) no second teaching cycle here: policy C, one own-skill teaching cycle, then a person
       return { ...base, phase: "pause", diagnosis: d, decision, why: `after-pass@1: ${wrongSince} wrong alone since the check after ${st.id}`, reason: "Right once on your own after the explanation, but not since. That is not a failure: carry on with other skills, and go through this one with a teacher or parent." };
     }
     const more = unanswered([...m.practice, ...tr]);
