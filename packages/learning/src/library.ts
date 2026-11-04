@@ -146,14 +146,17 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
     const additions: Strategy[] = bp.strategies.map(st => {
       if (ids.has(st.id)) throw new Error(`${LIBRARY_POLICY}: duplicate strategy ${st.id}`);
       ids.add(st.id);
-      if (!st.scope || st.scope.family !== bp.family || st.buildsOnPrerequisites || st.screens.some(sc => sc.worked || !sc.instance))
+      // the scope may name any family the template module itself draws from (its pools: the competency's other sub-skills),
+      // never a family outside the module
+      const family = st.scope?.family;
+      if (!st.scope || !family || !poolFamilies(base).includes(family) || FAMILIES.get(family)?.competency !== bp.competency || st.buildsOnPrerequisites || st.screens.some(sc => sc.worked || !sc.instance))
         throw new Error(`${LIBRARY_POLICY}: ${st.id}: template additions require explicit scoped instances`);
       for (const key of new Set(st.screens.map(sc => exposureKey(sc.instance!)))) {
         if (reserved.has(key)) throw new Error(`${LIBRARY_POLICY}: ${st.id}: shown example repeats a reserved exposure`);
         reserved.add(key);
       }
       for (const [id, phase] of [[st.guided, 'practice'], [st.check, 'check']] as const) {
-        if (!id || !selectable(id) || reserved.has(exposureKey(id)) || !phasePool(bp.family, phase).some(q => exposureKey(q) === exposureKey(id)))
+        if (!id || !selectable(id) || reserved.has(exposureKey(id)) || !phasePool(family, phase).some(q => exposureKey(q) === exposureKey(id)))
           throw new Error(`${LIBRARY_POLICY}: ${st.id}: ${phase} item unavailable, reused or outside partition`);
         reserved.add(exposureKey(id));
       }

@@ -17,10 +17,9 @@ const sub = (t: GeometryTrace, c: string, id: string) => t.projections[c].subSki
 test("every geometry journey satisfies the ten shared scenario properties, except where the content has no eligible explanation", () => {
   for (const t of Object.values(T)) {
     const failed = t.properties.filter((p) => !p.ok).map((p) => p.property);
-    // G-06: the misconception is diagnosed on the module's only open crossing-lines item; the investigation and practice items are
-    // complementary/supplementary pairs, where it cannot recur, and the module has no misconception-specific explanation (strategies:
-    // worked_steps, count_on, spot_the_mistake), so nothing is taught: the scenario's "some teaching" expectation is not met (a finding)
-    assert.deepEqual(failed, t.id === "G-06" ? ["5 eligible teaching"] : [], `${t.id}: ${JSON.stringify(t.properties.filter((p) => !p.ok))}`);
+    // G-06 used to fail "5 eligible teaching" (no crossing-lines explanation); the vertically-opposite lesson now teaches it
+    // (feat/geometry-two-skills: TP-GEO-02 as a skill-scoped template extension, pending educator review)
+    assert.deepEqual(failed, [], `${t.id}: ${JSON.stringify(t.properties.filter((p) => !p.ok))}`);
   }
 });
 
@@ -40,12 +39,12 @@ test("complete journey (G-02): diagnostic → wrong → investigation → eligib
   assert.deepEqual(t.replay, { identicalState: true, identicalProjection: true, identicalNextModuleDecision: true, reversedOrderProjectionIdentical: true });
 });
 
-test("failed journey needing remediation (G-03): the exterior-angle misconception persists, the competency reads shown, the sub-skill does not", () => {
+test("failed journey needing remediation (G-03): the exterior-angle lesson is now taught; a learner who never learns does not read shown", () => {
   const t = T["G-03"];
-  assert.ok(["independent", "transfer"].includes(t.authoritative[TRI].status), "the authoritative competency status claims it");
+  assert.deepEqual(t.teaching.map((x) => x.strategy), ["exterior_angle", "exterior_via_third"], "this skill's explanations, both tried");
+  assert.ok(!["independent", "transfer", "verified"].includes(t.authoritative[TRI].status), `before the delayed check the competency is not claimed: ${t.authoritative[TRI].status}`);
   assert.notEqual(sub(t, TRI, "triangle-properties.exterior-angle@1").status, "independently-demonstrated");
-  assert.equal(t.teaching.length, 0, "no explanation was given for it");
-  assert.ok(t.projections[TRI].discrepancies.some((d) => d.unsupported.some((u) => u.id === "triangle-properties.exterior-angle@1")), "the shadow projection reports the gap");
+  // after a delayed check that other skills' answers pass, the competency still reaches transfer: see geometry-two-skills.test.ts (todo, shared engine)
 });
 
 test("straight-line (supplementary) success does not establish exterior-angle proficiency", () => {
@@ -53,9 +52,9 @@ test("straight-line (supplementary) success does not establish exterior-angle pr
   assert.equal(sub(t, PAIRS, "angle-pairs.complementary-supplementary@1").status, "independently-demonstrated");
   assert.equal(sub(t, TRI, "triangle-properties.exterior-angle@1").status, "not-attempted");
   assert.equal(t.authoritative[TRI].status, "not_started");
-  // and within angle pairs: the competency reads transfer while the crossing-lines sub-skill is still developing (reported, not corrected)
-  assert.equal(sub(t, PAIRS, "angle-pairs.intersecting-lines@1").status, "developing");
-  assert.ok(t.projections[PAIRS].discrepancies.length > 0);
+  // within angle pairs: the misconception is now taught (vertically_opposite) and the crossing-lines sub-skill is shown after it
+  assert.deepEqual(t.teaching.map((x) => x.strategy), ["vertically_opposite"]);
+  assert.equal(sub(t, PAIRS, "angle-pairs.intersecting-lines@1").status, "independently-demonstrated");
 });
 
 test("a correct numerical answer does not establish proof competence: geometric working is not examined (fail-closed)", () => {

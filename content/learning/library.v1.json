@@ -5786,6 +5786,648 @@
    }
   },
   {
+   "competency": "MATH.geometry.triangle-properties",
+   "title": "The third angle of a triangle",
+   "chapter": [
+    {
+     "title": "The third angle of a triangle",
+     "text": [
+      "The three angles of any triangle add up to 180°: tear off the corners and they fit together on a straight line."
+     ],
+     "math": [
+      "Two angles of a triangle are 35° and 90°, as in the picture (not to scale). What is the third angle, in degrees?",
+      "The two angles together: 35° + 90° = 125°",
+      "Third angle: 180° − 125° = 55°"
+     ],
+     "tip": "The angles were taken from 360°. The three angles of a triangle add up to 180°; 360° is the sum around a point or in a quadrilateral.",
+     "role": "concept",
+     "instance": "gen:ahtri:35,90"
+    },
+    {
+     "title": "The exterior angle of a triangle",
+     "text": [
+      "An exterior angle and the interior angle next to it make a straight line (180°), and the three interior angles also make 180°, so the exterior angle equals the two far interior angles together.",
+      "To find the exterior angle, add the two interior opposite angles. To find one of those, subtract the other from the exterior angle."
+     ],
+     "math": [
+      "One side of a triangle is extended. The two interior angles opposite the exterior angle are 31° and 118°. What is the exterior angle, in degrees?",
+      "Exterior angle = sum of the interior opposite angles: 31° + 118° = 149°"
+     ],
+     "widget": {
+      "type": "triangle",
+      "angles": [
+       "31°",
+       "",
+       "118°"
+      ],
+      "exterior": {
+       "at": 1,
+       "label": "?"
+      },
+      "notToScale": true,
+      "vertices": [
+       "A",
+       "C",
+       "B"
+      ],
+      "extendedTo": "D"
+     }
+    },
+    {
+     "title": "Angles of an isosceles triangle",
+     "text": [
+      "In an isosceles triangle the angles opposite the two equal sides are equal; with the angle sum of 180°, one angle tells you the other two.",
+      "Vertex angle known: take it from 180° and halve. Base angle known: double it and take that from 180°."
+     ],
+     "math": [
+      "In an isosceles triangle each of the two equal angles (opposite the equal sides) is 62°. What is the third angle, in degrees?",
+      "The two equal angles: 2 × 62° = 124°",
+      "180° − 124° = 56°"
+     ]
+    },
+    {
+     "title": "How long can the third side be?",
+     "text": [
+      "In a triangle, any two sides together are longer than the third. So the third side is less than the sum of the other two and more than their difference.",
+      "Longest: one less than the sum of the two sides. Shortest: one more than their difference (for whole numbers)."
+     ],
+     "math": [
+      "Two sides of a triangle are 4 cm and 14 cm. The third side is a whole number of centimetres. What is the longest it can be, in cm?",
+      "The third side must be less than 4 + 14 = 18 cm",
+      "The longest whole number below 18 is 17"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:ahtri:36,26",
+    "gen:ahtri:85,71",
+    "gen:ahtri:24,36"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Add the two angles you know, then take the sum from 180°."
+       ],
+       "math": [
+        "Two angles of a triangle are 56° and 85°, as in the picture (not to scale). What is the third angle, in degrees?",
+        "The two angles together: 56° + 85° = 141°",
+        "Third angle: 180° − 141° = 39°"
+       ],
+       "role": "worked-example",
+       "instance": "gen:ahtri:56,85"
+      }
+     ],
+     "guided": "gen:ahtri:56,29",
+     "check": "gen:ahtri:25,65"
+    },
+    {
+     "id": "tear_corners",
+     "title": "Tear off the corners",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Tear off the corners",
+       "text": [
+        "Cut out a paper triangle, tear off its three corners and place them side by side.",
+        "They make a straight line, which is 180°."
+       ],
+       "math": [
+        "Two angles of a triangle are 36° and 127°, as in the picture (not to scale). What is the third angle, in degrees?",
+        "The two angles together: 36° + 127° = 163°",
+        "Third angle: 180° − 163° = 17°"
+       ],
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "36°",
+         "127°",
+         "17°"
+        ]
+       },
+       "role": "strategy",
+       "instance": "gen:ahtri:36,127"
+      }
+     ],
+     "guided": "gen:ahtri:36,74",
+     "check": "gen:ahtri:35,88:mc"
+    },
+    {
+     "id": "count_on",
+     "title": "Count on to 180",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Count on to 180",
+       "text": [
+        "Start from the sum of the two angles and count up to 180 in easy jumps (to the next ten, then tens).",
+        "The total of the jumps is the third angle."
+       ],
+       "math": [
+        "Two angles of a triangle are 85° and 49°, as in the picture (not to scale). What is the third angle, in degrees?",
+        "The two angles together: 85° + 49° = 134°",
+        "Third angle: 180° − 134° = 46°"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahtri:85,49"
+      }
+     ],
+     "guided": "gen:ahtri:25,79",
+     "check": "gen:ahtri:24,56"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:ahtri:66,43",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Two angles of a triangle are 66° and 43°, as in the picture (not to scale). What is the third angle, in degrees?” A common wrong answer is 251.",
+        "The angles were taken from 360°. The three angles of a triangle add up to 180°; 360° is the sum around a point or in a quadrilateral."
+       ],
+       "math": [
+        "Not 251, but 71"
+       ]
+      }
+     ],
+     "guided": "gen:ahtri:35,92",
+     "check": "gen:ahtri:24,76:mc"
+    },
+    {
+     "id": "check_what_it_uses",
+     "title": "Check what it builds on",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "role": "prerequisite",
+       "title": "What it uses",
+       "text": [
+        "Each step builds on another skill: Measure and draw angles. If a step is slow, practise that skill first.",
+        "Then the method is: Add the two angles you know, then take the sum from 180°."
+       ]
+      }
+     ],
+     "guided": "gen:ahtri:24,40",
+     "check": "gen:ahtri:73,23"
+    },
+    {
+     "id": "exterior_angle",
+     "title": "The exterior angle of a triangle",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "ahext",
+      "subSkill": "triangle-properties.exterior-angle@1"
+     },
+     "screens": [
+      {
+       "title": "The exterior angle of a triangle",
+       "text": [
+        "At C the exterior angle and the interior angle next to it lie on a straight line, so together they make 180°.",
+        "The three interior angles also make 180°. Both pairs make 180° and share the angle at C, so the exterior angle equals the other two interior angles together."
+       ],
+       "math": [
+        "One side of a triangle is extended. The two interior angles opposite the exterior angle are 39° and 112°. What is the exterior angle, in degrees?",
+        "Third interior angle C = 180° − 39° − 112° = 29° (angle sum)",
+        "Exterior angle = 180° − 29° = 151° (straight line)",
+        "Check: 39° + 112° = 151° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:39,112,0",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "39°",
+         "",
+         "112°"
+        ],
+        "exterior": {
+         "at": 1,
+         "label": "?"
+        },
+        "notToScale": true,
+        "vertices": [
+         "A",
+         "C",
+         "B"
+        ],
+        "extendedTo": "D"
+       }
+      },
+      {
+       "title": "When the exterior angle is given",
+       "text": [
+        "The exterior angle equals the two far interior angles together.",
+        "So one far angle is the exterior angle minus the other far angle. Go through the angle next to the exterior angle to check."
+       ],
+       "math": [
+        "One side of a triangle is extended. The exterior angle is 135° and one of the two interior opposite angles is 108°. What is the other interior opposite angle, in degrees?",
+        "Interior angle next to the exterior angle C = 180° − 135° = 45° (straight line)",
+        "Other opposite angle = 180° − 108° − 45° = 27° (angle sum)",
+        "Check: 108° + 27° = 135° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:108,27,1",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "108°",
+         "",
+         "?"
+        ],
+        "exterior": {
+         "at": 1,
+         "label": "135°"
+        },
+        "notToScale": true,
+        "vertices": [
+         "A",
+         "C",
+         "B"
+        ],
+        "extendedTo": "D"
+       }
+      }
+     ],
+     "guided": "gen:ahext:62,79,0:mc",
+     "check": "gen:ahext:86,70,0:mc"
+    },
+    {
+     "id": "exterior_via_third",
+     "title": "Go through the third angle",
+     "kind": "procedural",
+     "needs": [],
+     "scope": {
+      "family": "ahext",
+      "subSkill": "triangle-properties.exterior-angle@1"
+     },
+     "screens": [
+      {
+       "title": "Go through the third angle",
+       "text": [
+        "Find the third interior angle with the angle sum.",
+        "The exterior angle and that angle lie on a straight line, so the exterior angle is a straight angle minus the third angle."
+       ],
+       "math": [
+        "One side of a triangle is extended. The two interior angles opposite the exterior angle are 34° and 27°. What is the exterior angle, in degrees?",
+        "Third interior angle C = 180° − 34° − 27° = 119° (angle sum)",
+        "Exterior angle = 180° − 119° = 61° (straight line)",
+        "Check: 34° + 27° = 61° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:34,27,0",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "34°",
+         "",
+         "27°"
+        ],
+        "exterior": {
+         "at": 1,
+         "label": "?"
+        },
+        "notToScale": true,
+        "vertices": [
+         "A",
+         "C",
+         "B"
+        ],
+        "extendedTo": "D"
+       }
+      }
+     ],
+     "guided": "gen:ahext:34,63,0:mc",
+     "check": "gen:ahext:44,76,1"
+    }
+   ],
+   "practice": [
+    "gen:ahtri:112,33",
+    "gen:ahtri:24,24:mc",
+    "gen:ahtri:110,52",
+    "gen:ahext:34,53,0",
+    "gen:ahiso:62,0",
+    "gen:ahineq:4,14,1"
+   ],
+   "transfer": [
+    "gen:ahtri:53,47:w",
+    "gen:ahext:93,36,1:w",
+    "gen:ahiso:96,0:w"
+   ],
+   "retention": [
+    "gen:ahtri:56,75",
+    "gen:ahext:77,74,1:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "ahtri",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "ahtri",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahext",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahiso",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahineq",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "ahtri",
+    "seed": [
+     35,
+     90
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:ahtri:35,90",
+     "gen:ahtri:66,43",
+     "gen:ahtri:56,85"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.geometry.angle-pairs",
+   "title": "Missing angle in a complementary or supplementary pair",
+   "chapter": [
+    {
+     "title": "Missing angle in a complementary or supplementary pair",
+     "text": [
+      "Complementary angles together make a right angle (90°); supplementary angles together make a straight angle (180°)."
+     ],
+     "math": [
+      "Two angles are supplementary. One of them is 130°. What is the other angle, in degrees?",
+      "Supplementary angles add up to 180°",
+      "180° − 130° = 50°"
+     ],
+     "widget": {
+      "type": "angle",
+      "deg": 180
+     },
+     "tip": "360° is a full turn. Supplementary angles add up to 180°.",
+     "role": "concept",
+     "instance": "gen:afpair:1,130"
+    },
+    {
+     "title": "Angles where two straight lines cross",
+     "text": [
+      "Where two straight lines cross, angles next to each other make a straight line (180°), so opposite angles are equal; all four make a full turn (360°).",
+      "Opposite angle: the same. Angle next to it: 180° minus it. All the others together: 360° minus it."
+     ],
+     "math": [
+      "Two straight lines cross each other, making four angles. One of the angles is 149°. What is an angle next to it (they form a straight line together), in degrees?",
+      "Angles on a straight line add to 180°: 180° − 149° = 31°"
+     ],
+     "widget": {
+      "type": "angle",
+      "deg": 149
+     }
+    }
+   ],
+   "diagnostics": [
+    "gen:afpair:1,29",
+    "gen:afpair:0,64",
+    "gen:afpair:1,34"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Take the given angle away from 90° (complementary) or 180° (supplementary). Check: the two angles should add up to the total."
+       ],
+       "math": [
+        "Two angles are supplementary. One of them is 133°. What is the other angle, in degrees?",
+        "Supplementary angles add up to 180°",
+        "180° − 133° = 47°"
+       ],
+       "widget": {
+        "type": "angle",
+        "deg": 180
+       },
+       "role": "worked-example",
+       "instance": "gen:afpair:1,133"
+      }
+     ],
+     "guided": "gen:afpair:1,132",
+     "check": "gen:afpair:1,137"
+    },
+    {
+     "id": "count_on",
+     "title": "Count on to the total",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Count on to the total",
+       "text": [
+        "Start at the angle you know and count on to 90 (or 180), in tens and then ones.",
+        "For 65° to 90°: 65 → 70 is 5, 70 → 90 is 20, so 25°."
+       ],
+       "math": [
+        "Two angles are supplementary. One of them is 135°. What is the other angle, in degrees?",
+        "Supplementary angles add up to 180°",
+        "180° − 135° = 45°"
+       ],
+       "widget": {
+        "type": "numberline",
+        "from": 130,
+        "to": 180,
+        "step": 10,
+        "marks": [
+         135,
+         180
+        ]
+       },
+       "role": "strategy",
+       "instance": "gen:afpair:1,135"
+      }
+     ],
+     "guided": "gen:afpair:1,134",
+     "check": "gen:afpair:1,157:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:afpair:0,36",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Two angles are complementary. One of them is 36°. What is the other angle, in degrees?” A common wrong answer is 144.",
+        "Complementary angles make a right angle, 90°. 180° is for supplementary angles."
+       ],
+       "math": [
+        "Not 144, but 54"
+       ]
+      }
+     ],
+     "guided": "gen:afpair:1,147",
+     "check": "gen:afpair:1,136:mc"
+    },
+    {
+     "id": "vertically_opposite",
+     "title": "Vertically opposite angles are equal",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "afcross",
+      "subSkill": "angle-pairs.opposite@2"
+     },
+     "screens": [
+      {
+       "title": "Vertically opposite angles are equal",
+       "text": [
+        "Where two straight lines cross, angles next to each other lie on a straight line, so they add to 180°.",
+        "Go round: x, then 180° − x, then 180° − (180° − x) = x again. So opposite angles are equal, and all four add to 360°."
+       ],
+       "math": [
+        "Two straight lines cross each other, making four angles. One of the angles is 128°. What is the angle opposite it (vertically opposite), in degrees?",
+        "next angle round = 180° − 128° = 52° (straight line)",
+        "the one after = 180° − 52° = 128° (straight line): the opposite angle is 128°"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:128,0",
+       "widget": {
+        "type": "angle",
+        "deg": 128,
+        "cross": true,
+        "labels": [
+         "128°",
+         "",
+         "?",
+         ""
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afcross:29,0:mc",
+     "check": "gen:afcross:158,0:mc"
+    },
+    {
+     "id": "crossed_pencils",
+     "title": "Two crossed pencils",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "afcross",
+      "subSkill": "angle-pairs.opposite@2"
+     },
+     "screens": [
+      {
+       "title": "Two crossed pencils",
+       "text": [
+        "Hold two straight pencils crossed like an X.",
+        "Open them wider: the top and bottom angles grow together while the two side angles shrink together. Opposite angles stay equal."
+       ],
+       "math": [
+        "Two straight lines cross each other, making four angles. One of the angles is 104°. What is the angle opposite it (vertically opposite), in degrees?",
+        "next angle round = 180° − 104° = 76° (straight line)",
+        "the one after = 180° − 76° = 104° (straight line): the opposite angle is 104°"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:104,0",
+       "widget": {
+        "type": "angle",
+        "deg": 104,
+        "cross": true,
+        "labels": [
+         "104°",
+         "",
+         "?",
+         ""
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afcross:152,0:mc",
+     "check": "gen:afcross:70,0"
+    }
+   ],
+   "practice": [
+    "gen:afpair:1,140",
+    "gen:afpair:1,141:mc",
+    "gen:afpair:1,142",
+    "gen:afcross:109,0"
+   ],
+   "transfer": [
+    "gen:afpair:1,143:w",
+    "gen:afcross:109,1:w"
+   ],
+   "retention": [
+    "gen:afpair:0,34",
+    "gen:afcross:89,1:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "afpair",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "afpair",
+     "version": "1.0.0"
+    },
+    {
+     "family": "afcross",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "afpair",
+    "seed": [
+     1,
+     130
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:afpair:1,130",
+     "gen:afpair:0,36",
+     "gen:afpair:1,133"
+    ]
+   }
+  },
+  {
    "competency": "MATH.algebra.variables",
    "title": "A value on a straight line",
    "chapter": [
@@ -28226,182 +28868,6 @@
    }
   },
   {
-   "competency": "MATH.geometry.angle-pairs",
-   "title": "Missing angle in a complementary or supplementary pair",
-   "chapter": [
-    {
-     "title": "Missing angle in a complementary or supplementary pair",
-     "text": [
-      "Complementary angles together make a right angle (90°); supplementary angles together make a straight angle (180°)."
-     ],
-     "math": [
-      "Two angles are supplementary. One of them is 130°. What is the other angle, in degrees?",
-      "Supplementary angles add up to 180°",
-      "180° − 130° = 50°"
-     ],
-     "widget": {
-      "type": "angle",
-      "deg": 180
-     },
-     "tip": "360° is a full turn. Supplementary angles add up to 180°.",
-     "role": "concept",
-     "instance": "gen:afpair:1,130"
-    },
-    {
-     "title": "Angles where two straight lines cross",
-     "text": [
-      "Where two straight lines cross, angles next to each other make a straight line (180°), so opposite angles are equal; all four make a full turn (360°).",
-      "Opposite angle: the same. Angle next to it: 180° minus it. All the others together: 360° minus it."
-     ],
-     "math": [
-      "Two straight lines cross each other, making four angles. One of the angles is 149°. What is an angle next to it (they form a straight line together), in degrees?",
-      "Angles on a straight line add to 180°: 180° − 149° = 31°"
-     ],
-     "widget": {
-      "type": "angle",
-      "deg": 149
-     }
-    }
-   ],
-   "diagnostics": [
-    "gen:afpair:1,29",
-    "gen:afpair:0,64",
-    "gen:afpair:1,34"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Take the given angle away from 90° (complementary) or 180° (supplementary). Check: the two angles should add up to the total."
-       ],
-       "math": [
-        "Two angles are supplementary. One of them is 133°. What is the other angle, in degrees?",
-        "Supplementary angles add up to 180°",
-        "180° − 133° = 47°"
-       ],
-       "widget": {
-        "type": "angle",
-        "deg": 180
-       },
-       "role": "worked-example",
-       "instance": "gen:afpair:1,133"
-      }
-     ],
-     "guided": "gen:afpair:1,132",
-     "check": "gen:afpair:1,137"
-    },
-    {
-     "id": "count_on",
-     "title": "Count on to the total",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Count on to the total",
-       "text": [
-        "Start at the angle you know and count on to 90 (or 180), in tens and then ones.",
-        "For 65° to 90°: 65 → 70 is 5, 70 → 90 is 20, so 25°."
-       ],
-       "math": [
-        "Two angles are supplementary. One of them is 135°. What is the other angle, in degrees?",
-        "Supplementary angles add up to 180°",
-        "180° − 135° = 45°"
-       ],
-       "widget": {
-        "type": "numberline",
-        "from": 130,
-        "to": 180,
-        "step": 10,
-        "marks": [
-         135,
-         180
-        ]
-       },
-       "role": "strategy",
-       "instance": "gen:afpair:1,135"
-      }
-     ],
-     "guided": "gen:afpair:1,134",
-     "check": "gen:afpair:1,157:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:afpair:0,36",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Two angles are complementary. One of them is 36°. What is the other angle, in degrees?” A common wrong answer is 144.",
-        "Complementary angles make a right angle, 90°. 180° is for supplementary angles."
-       ],
-       "math": [
-        "Not 144, but 54"
-       ]
-      }
-     ],
-     "guided": "gen:afpair:1,147",
-     "check": "gen:afpair:1,136:mc"
-    }
-   ],
-   "practice": [
-    "gen:afpair:1,140",
-    "gen:afpair:1,141:mc",
-    "gen:afpair:1,142",
-    "gen:afcross:109,0"
-   ],
-   "transfer": [
-    "gen:afpair:1,143:w",
-    "gen:afcross:109,1:w"
-   ],
-   "retention": [
-    "gen:afpair:0,34",
-    "gen:afcross:89,1:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "afpair",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "afpair",
-     "version": "1.0.0"
-    },
-    {
-     "family": "afcross",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "afpair",
-    "seed": [
-     1,
-     130
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:afpair:1,130",
-     "gen:afpair:0,36",
-     "gen:afpair:1,133"
-    ]
-   }
-  },
-  {
    "competency": "MATH.geometry.angles-as-turns",
    "title": "Turns between compass directions as fractions of a full turn",
    "chapter": [
@@ -32687,264 +33153,6 @@
      "gen:ahinv:4,3,3",
      "gen:ahinv:8,10,10",
      "gen:ahinv:3,24,12"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.geometry.triangle-properties",
-   "title": "The third angle of a triangle",
-   "chapter": [
-    {
-     "title": "The third angle of a triangle",
-     "text": [
-      "The three angles of any triangle add up to 180°: tear off the corners and they fit together on a straight line."
-     ],
-     "math": [
-      "Two angles of a triangle are 35° and 90°, as in the picture (not to scale). What is the third angle, in degrees?",
-      "The two angles together: 35° + 90° = 125°",
-      "Third angle: 180° − 125° = 55°"
-     ],
-     "tip": "The angles were taken from 360°. The three angles of a triangle add up to 180°; 360° is the sum around a point or in a quadrilateral.",
-     "role": "concept",
-     "instance": "gen:ahtri:35,90"
-    },
-    {
-     "title": "The exterior angle of a triangle",
-     "text": [
-      "An exterior angle and the interior angle next to it make a straight line (180°), and the three interior angles also make 180°, so the exterior angle equals the two far interior angles together.",
-      "To find the exterior angle, add the two interior opposite angles. To find one of those, subtract the other from the exterior angle."
-     ],
-     "math": [
-      "One side of a triangle is extended. The two interior angles opposite the exterior angle are 31° and 118°. What is the exterior angle, in degrees?",
-      "Exterior angle = sum of the interior opposite angles: 31° + 118° = 149°"
-     ],
-     "widget": {
-      "type": "triangle",
-      "angles": [
-       "31°",
-       "",
-       "118°"
-      ],
-      "exterior": {
-       "at": 1,
-       "label": "?"
-      },
-      "notToScale": true,
-      "vertices": [
-       "A",
-       "C",
-       "B"
-      ],
-      "extendedTo": "D"
-     }
-    },
-    {
-     "title": "Angles of an isosceles triangle",
-     "text": [
-      "In an isosceles triangle the angles opposite the two equal sides are equal; with the angle sum of 180°, one angle tells you the other two.",
-      "Vertex angle known: take it from 180° and halve. Base angle known: double it and take that from 180°."
-     ],
-     "math": [
-      "In an isosceles triangle each of the two equal angles (opposite the equal sides) is 62°. What is the third angle, in degrees?",
-      "The two equal angles: 2 × 62° = 124°",
-      "180° − 124° = 56°"
-     ]
-    },
-    {
-     "title": "How long can the third side be?",
-     "text": [
-      "In a triangle, any two sides together are longer than the third. So the third side is less than the sum of the other two and more than their difference.",
-      "Longest: one less than the sum of the two sides. Shortest: one more than their difference (for whole numbers)."
-     ],
-     "math": [
-      "Two sides of a triangle are 4 cm and 14 cm. The third side is a whole number of centimetres. What is the longest it can be, in cm?",
-      "The third side must be less than 4 + 14 = 18 cm",
-      "The longest whole number below 18 is 17"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:ahtri:36,26",
-    "gen:ahtri:85,71",
-    "gen:ahtri:24,36"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Add the two angles you know, then take the sum from 180°."
-       ],
-       "math": [
-        "Two angles of a triangle are 56° and 85°, as in the picture (not to scale). What is the third angle, in degrees?",
-        "The two angles together: 56° + 85° = 141°",
-        "Third angle: 180° − 141° = 39°"
-       ],
-       "role": "worked-example",
-       "instance": "gen:ahtri:56,85"
-      }
-     ],
-     "guided": "gen:ahtri:56,29",
-     "check": "gen:ahtri:25,65"
-    },
-    {
-     "id": "tear_corners",
-     "title": "Tear off the corners",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Tear off the corners",
-       "text": [
-        "Cut out a paper triangle, tear off its three corners and place them side by side.",
-        "They make a straight line, which is 180°."
-       ],
-       "math": [
-        "Two angles of a triangle are 36° and 127°, as in the picture (not to scale). What is the third angle, in degrees?",
-        "The two angles together: 36° + 127° = 163°",
-        "Third angle: 180° − 163° = 17°"
-       ],
-       "widget": {
-        "type": "triangle",
-        "angles": [
-         "36°",
-         "127°",
-         "17°"
-        ]
-       },
-       "role": "strategy",
-       "instance": "gen:ahtri:36,127"
-      }
-     ],
-     "guided": "gen:ahtri:36,74",
-     "check": "gen:ahtri:35,88:mc"
-    },
-    {
-     "id": "count_on",
-     "title": "Count on to 180",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Count on to 180",
-       "text": [
-        "Start from the sum of the two angles and count up to 180 in easy jumps (to the next ten, then tens).",
-        "The total of the jumps is the third angle."
-       ],
-       "math": [
-        "Two angles of a triangle are 85° and 49°, as in the picture (not to scale). What is the third angle, in degrees?",
-        "The two angles together: 85° + 49° = 134°",
-        "Third angle: 180° − 134° = 46°"
-       ],
-       "role": "strategy",
-       "instance": "gen:ahtri:85,49"
-      }
-     ],
-     "guided": "gen:ahtri:25,79",
-     "check": "gen:ahtri:24,56"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:ahtri:66,43",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Two angles of a triangle are 66° and 43°, as in the picture (not to scale). What is the third angle, in degrees?” A common wrong answer is 251.",
-        "The angles were taken from 360°. The three angles of a triangle add up to 180°; 360° is the sum around a point or in a quadrilateral."
-       ],
-       "math": [
-        "Not 251, but 71"
-       ]
-      }
-     ],
-     "guided": "gen:ahtri:35,92",
-     "check": "gen:ahtri:24,76:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Measure and draw angles. If a step is slow, practise that skill first.",
-        "Then the method is: Add the two angles you know, then take the sum from 180°."
-       ]
-      }
-     ],
-     "guided": "gen:ahtri:24,40",
-     "check": "gen:ahtri:73,23"
-    }
-   ],
-   "practice": [
-    "gen:ahtri:112,33",
-    "gen:ahtri:24,24:mc",
-    "gen:ahtri:110,52",
-    "gen:ahext:34,53,0",
-    "gen:ahiso:62,0",
-    "gen:ahineq:4,14,1"
-   ],
-   "transfer": [
-    "gen:ahtri:53,47:w",
-    "gen:ahext:93,36,1:w",
-    "gen:ahiso:96,0:w"
-   ],
-   "retention": [
-    "gen:ahtri:56,75",
-    "gen:ahext:77,74,1:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "ahtri",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "ahtri",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahext",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahiso",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahineq",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "ahtri",
-    "seed": [
-     35,
-     90
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:ahtri:35,90",
-     "gen:ahtri:66,43",
-     "gen:ahtri:56,85"
     ]
    }
   },
