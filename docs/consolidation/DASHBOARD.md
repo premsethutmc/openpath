@@ -8,7 +8,7 @@
 | **Merge base** | `b578c789` — Spelling Bee PR #38 (shared ancestor of main and educator-access) |
 | **Merge commit** | `3be4c54` — proper `git merge origin/main` into educator-access (1 conflict: .gitignore) |
 | **Integration commit** | `7368570` — 3 branch integrations (shadow, geometry-dice unique files, sub-skill-mastery) |
-| **HEAD** | `f34cea3` (4 commits on consolidation) |
+| **HEAD** | `9ac1681` (5 commits on consolidation) |
 | **Main HEAD at merge** | `7efa0a6` (chore: add frontend/dist-math/ to .gitignore) |
 | **Educator-access HEAD** | `2ea7ad5` (CI: educator-marking and educator-access browser tests) |
 
@@ -24,6 +24,7 @@ This consolidation starts from educator-access and does a proper `git merge orig
 2. `7368570` — consolidation: integrate completed work from 3 active branches (20 files)
 3. `01699be` — fix: correct shadow.test.ts SelectionInput type for recent field
 4. `f34cea3` — docs: corrected consolidation dashboard — verified vs assumed
+5. `9ac1681` — docs: dice false-progress is blocked, not merely unverified
 
 ## Verified test results (on HEAD `01699be`)
 
