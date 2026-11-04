@@ -1,6 +1,6 @@
 /**
  * The geometry/dice integration in the real Year UI against the real Django API (synthetic pupils only; nothing deployed):
- *   dice   totals-equally-likely, order-ignored   (MATH.probability.sample-space · sample-space.dice-exact-total@1)
+ *   dice   totals-equally-likely, order-ignored   (MATH.probability.sample-space · sample-space.dice-exact-total@1; general teaching only, #113)
  *   geometry exterior angle, vertically opposite  (triangle-properties.exterior-angle@1 · angle-pairs.opposite@2)
  * The pupil's first answer (one wrong answer on the skill) is stored through the API; from then on the UI and the engine decide
  * every screen: investigation, the explanation (pending educator review), guided practice, the recheck, reload. A later visit's
@@ -17,13 +17,12 @@ import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import { latestReleases } from "../../packages/learning/src/curricula";
 import { moduleFor, question } from "../../packages/learning/src/content";
-import { problemOf } from "../../packages/learning/src/families";
+import { problemKeyOf, problemOf } from "../../packages/learning/src/families";
 import { probeReading } from "../../packages/learning/src/reasoning";
 import { hypotheses } from "../../packages/learning/src/hypotheses";
 import { learnerState, make } from "../../packages/learning/src/session";
 import { withDecisions } from "../../packages/learning/src/records";
 import { connectedSkill, connectionConfig } from "../../packages/learning/src/skill-connections";
-import { problemIdentity } from "../../packages/learning/src/problem-identity";
 
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_PATH ?? "playwright") as typeof import("playwright");
 const root = fileURLToPath(new URL("../dist-english/", import.meta.url)), port = Number(process.env.PORT ?? 4201), clockFile = process.env.OPENPATH_TEST_CLOCK_FILE ?? "/tmp/integrated-clock.json";
@@ -41,8 +40,8 @@ const DAY = 86_400_000;
 
 interface Case { name: string; competency: string; skill: string; bug: string; start: string; misconceptionFix: string | null }
 const CASES: Case[] = [
-  { name: "dice: totals equally likely", competency: "MATH.probability.sample-space", skill: "sample-space.dice-exact-total@1", bug: "totals-equally-likely", start: "gen:akdice:4,5,0,7", misconceptionFix: "akdice_fix_totals" },
-  { name: "dice: order ignored", competency: "MATH.probability.sample-space", skill: "sample-space.dice-exact-total@1", bug: "order-ignored", start: "gen:akdice:5,5,0,4", misconceptionFix: "akdice_fix_order" },
+  { name: "dice: totals equally likely", competency: "MATH.probability.sample-space", skill: "sample-space.dice-exact-total@1", bug: "totals-equally-likely", start: "gen:akdice:4,5,0,7", misconceptionFix: null },
+  { name: "dice: order ignored", competency: "MATH.probability.sample-space", skill: "sample-space.dice-exact-total@1", bug: "order-ignored", start: "gen:akdice:5,5,0,4", misconceptionFix: null },
   { name: "geometry: exterior angle", competency: "MATH.geometry.triangle-properties", skill: "triangle-properties.exterior-angle@1", bug: "third-interior", start: "", misconceptionFix: null },
   { name: "geometry: vertically opposite", competency: "MATH.geometry.angle-pairs", skill: "angle-pairs.opposite@2", bug: "opposite-as-linear", start: "", misconceptionFix: null },
 ].filter((c) => !process.env.CASE || c.name.includes(process.env.CASE));
@@ -131,7 +130,7 @@ try {
     assert.ok(check.right);
     const strategy = moduleFor(c.competency)!.strategies.find((s) => s.id === taught)!;
     const shownBefore = [...met.slice(0, met.indexOf(check.qid!)), strategy.guided, ...strategy.screens.map((s) => s.instance!).filter(Boolean)];
-    assert.ok(!shownBefore.some((q) => problemIdentity(q) === problemIdentity(check.qid!)), `${c.name}: ${check.qid} repeats or relabels a met problem`);
+    assert.ok(!shownBefore.some((q) => problemKeyOf(q) === problemKeyOf(check.qid!)), `${c.name}: ${check.qid} repeats or relabels a met problem`);
     assert.deepEqual(trail.filter((s) => s.kind === "transfer"), [], `${c.name}: no transfer before the recheck`);
     const s1 = await stateAt(Date.now());
     if (c.misconceptionFix) assert.equal(hypotheses(s1.selectionRecords).find((h) => h.claim?.explanation === c.bug)?.status, "resolved");
@@ -154,14 +153,14 @@ try {
     const ds = await stateAt(realNow + 9 * DAY);
     assert.equal(ds.records.attempts.length >= 1, true);
     assert.equal(skillOf(delayedQ), c.skill, `${c.name}: the delayed check ${delayedQ} is on the taught skill`);
-    assert.ok(!met.some((q) => problemIdentity(q) === problemIdentity(delayedQ)), `${c.name}: delayed ${delayedQ} repeats or relabels`);
+    assert.ok(!met.some((q) => problemKeyOf(q) === problemKeyOf(delayedQ)), `${c.name}: delayed ${delayedQ} repeats or relabels`);
     const dq = question(delayedQ), wrong = dq.type === "choice" || delayedQ.endsWith(":mc") ? (dq.answer === "A" ? "B" : "A") : /^-?\d+$/.test(dq.answer) ? String(Number(dq.answer) + 7) : "1/2";
     const dAns = await answerInUi(wrong); assert.equal(dAns.right, false);
     await continueOn();
     assert.equal(await screen(), "lesson", `${c.name}: after the failed delayed check the skill is explained again`);
     const rs = (await stateAt(realNow + 9 * DAY)).module(c.competency);
     const general = rs.strategy!;
-    assert.equal(general.scope?.subSkill, c.skill); assert.equal(general.addresses, undefined, "the general explanation: one wrong answer is not a misconception");
+    assert.ok([general.guided, general.check, ...general.screens.map((x) => x.instance!).filter(Boolean)].every((q) => skillOf(q) === c.skill), `${c.name}: ${general.id} is scoped to the taught skill`); assert.equal(general.addresses, undefined, "the general explanation: one wrong answer is not a misconception");
     const rl = await lesson(); assert.equal(rl.review, "pending_review");
     assert.equal(await screen(), "question");
     // guided practice may come first; then the fresh recheck alone
@@ -174,7 +173,7 @@ try {
     }
     assert.ok(recovered && recovered.right, `${c.name}: a fresh same-skill recheck after the delayed check`);
     assert.equal(skillOf(recovered.qid), c.skill);
-    assert.ok(![...met, delayedQ, general.guided, ...general.screens.map((s) => s.instance!)].some((q) => q && problemIdentity(q) === problemIdentity(recovered!.qid)), `${c.name}: recovery recheck ${recovered.qid} is fresh`);
+    assert.ok(![...met, delayedQ, general.guided, ...general.screens.map((s) => s.instance!)].some((q) => q && problemKeyOf(q) === problemKeyOf(recovered!.qid)), `${c.name}: recovery recheck ${recovered.qid} is fresh`);
     const b2 = await saved(); await page.reload(); await page.locator("body").waitFor(); const a2 = await saved();
     assert.deepEqual(a2.events, b2.events); assert.deepEqual(a2.decisions, b2.decisions);
     results.push({ case: c.name, competency: c.competency, skill: c.skill, start: c.start, trail, taught, recheck: check.qid, delayed: delayedQ, recovery: { explanation: general.id, recheck: recovered.qid }, savedEvents: a2.count, reloaded: true, educatorApproved: false });

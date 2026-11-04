@@ -21,7 +21,7 @@ import { creditOf } from "./grade";
 import { canonical, isCorrect, moduleFor, question, questions, problems, type Question } from "./content";
 import { graph } from "./graph";
 import type { Attempt, LearnerRecords } from "./records";
-import { heldByTeaching, holdsCompetency, unitStates } from "./skill-units";
+import { heldByTeaching, unitStates } from "./skill-units";
 import { releaseOf, setActiveRegistry, type Registry } from "./review";
 
 const EXPANSION_CAPABILITIES = graph.competencies.filter((c) => c.origin === "expansion").map((c) => ({ id: c.id, name: c.name, strand: c.id.split(".")[1] }));
@@ -224,7 +224,9 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   const held = units.some(heldByTeaching);
   // phone d1-two-dice: a skill whose own answers alone are wrong and not yet shown keeps the competency below "shown on your own",
   // whatever the other skills' answers say (the rest of the chapter stays open)
-  const unshown = units.some((u) => holdsCompetency(u) && !heldByTeaching(u));
+  // (also after its lesson: teaching alone shows nothing; the dice learner read "independent" right after the explanation, with every
+  // exact-total answer wrong, consolidation #112)
+  const unshown = units.some((u) => u.notShown);
   const verified = profileStatus === "verified" && retention === "passed" && !held && !units.some((u) => u.notShown);
   let status: Status = "not_started";
   if (verified) status = "verified";

@@ -66,7 +66,11 @@ export function investigation(qid: string, records: LearnerRecords): { reasoning
   const first = records.attempts.find((a) => a.questionId === qid);
   if (!fam || !first) return { reasoning: null, follow: [] };
   const follow = records.attempts.filter((a) => a.context === investigateContext(qid) && a.n === 1);
-  return { reasoning: reason(fam, [{ questionId: fam, response: first.response }, ...follow.map((a) => ({ questionId: a.questionId, response: a.response }))]), follow };
+  // investigation-scope@1: with a skill mapping, a follow-up of the original question's own skill is asked first (the finding is then
+  // about that skill, which its teaching and recheck are scoped to); one of another skill only when none of its own discriminates
+  const config = connectionConfig(question(qid).competency), skill = config ? connectedSkill(config, qid) : null;
+  const prefer = config && skill ? (p: { id: string }) => connectedSkill(config, p.id) === skill : undefined;
+  return { reasoning: reason(fam, [{ questionId: fam, response: first.response }, ...follow.map((a) => ({ questionId: a.questionId, response: a.response }))], prefer), follow };
 }
 
 export type HypothesisStatus =

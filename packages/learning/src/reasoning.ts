@@ -177,23 +177,26 @@ const POOL_FOLLOW_UPS = 8;
 /** Other problems of the same family to ask next: its written variants, or, for a family that writes none, a fixed
  * selection from the diagnostic part of its release pool (typed form), so that a misunderstanding can be seen again
  * on a different problem in every family. */
-function followUpsOf(root: Problem): Problem[] {
+function followUpsOf(root: Problem, prefer?: (p: Problem) => boolean): Problem[] {
   const own = variantsOf(root);
   if (own.length) return own;
-  const out: Problem[] = [];
+  const all: Problem[] = [];
   for (const id of phasePool(root.family, "diagnostic")) {
-    if (out.length >= POOL_FOLLOW_UPS) break;
     const p = problemOf(id.replace(/:mc$/, ""));
-    if (p && selectable(p.id) && p.id !== root.id && !out.some((x) => x.id === p.id)) out.push(p);
+    if (p && selectable(p.id) && p.id !== root.id && !all.some((x) => x.id === p.id)) all.push(p);
   }
-  return out;
+  // with a preference (the original's own skill), the fixed selection takes its problems first, then the others
+  const ordered = prefer ? [...all.filter(prefer), ...all.filter((p) => !prefer(p))] : all;
+  return ordered.slice(0, POOL_FOLLOW_UPS);
 }
 
 /**
  * Reason about the answers to `original` and any follow-ups (generated variants, of any supported family).
  * `observations` are the learner's first answers, in order (the original first).
  */
-export function reason(original: string, observations: Observation[]): Reasoning | null {
+/** `prefer` (optional) only orders the follow-up: a candidate it accepts is asked before one it does not (e.g. the same skill of the
+ * competency's skill mapping); it never changes what the answers establish. */
+export function reason(original: string, observations: Observation[], prefer?: (p: Problem) => boolean): Reasoning | null {
   const root = problemOf(original);
   if (!root || root.bugs.some(b => b.evidence !== undefined && !validEvidence(root, b.evidence))) return null;
   // The caller's investigation root must be the first recorded exposure. Unrelated correct work is not security evidence here.
@@ -201,7 +204,7 @@ export function reason(original: string, observations: Observation[]): Reasoning
   const asked = observations.map((o) => ({ o, pr: problemOf(o.questionId) })).filter((x): x is { o: Observation; pr: Problem } => x.pr !== null);
   // follow-ups: other problems of the same family, and the direct probe of each explanation (e.g. the fact itself)
   const probes = root.bugs.flatMap((b) => (b.probe ? [problemOf(b.probe)] : [])).filter((p): p is Problem => p !== null);
-  const pool = [root, ...probes, ...followUpsOf(root), ...evidenceProblems(root)];
+  const pool = [root, ...probes, ...followUpsOf(root, prefer), ...evidenceProblems(root)];
   const exps = explanationsFor([root, ...asked.map((x) => x.pr)]);
   let s = prior(exps);
   const observed: Reasoning["observed"] = [];
@@ -234,7 +237,9 @@ export function reason(original: string, observations: Observation[]): Reasoning
     const contrasts = candidates.filter(p => p.family === root.family && outstanding.some(group => matchesParameters(p, group)));
     const awaitingRepeat = inPlay.filter(e => evidenceFor(root, e.id) && observed.filter(o => o.matches.includes(e.id)).length < 2);
     const scoped = candidates.filter(p => awaitingRepeat.some(e => inEvidenceScope(root, p, e.id) && p.bugs.some(b => b.id === e.id && predictions(b, p).some(v => !same(p, v, correctValue(p))))));
-    next = (contrasts.length ? contrasts : scoped.length ? scoped : candidates).map((p) => ({ p, h: expectedEntropy(p, exps, s, root) })).sort((a, b) => a.h - b.h || a.p.id.localeCompare(b.p.id))[0]?.p.id ?? null;
+    const tier = contrasts.length ? contrasts : scoped.length ? scoped : candidates;
+    const preferred = prefer ? tier.filter(prefer) : [];
+    next = (preferred.length ? preferred : tier).map((p) => ({ p, h: expectedEntropy(p, exps, s, root) })).sort((a, b) => a.h - b.h || a.p.id.localeCompare(b.p.id))[0]?.p.id ?? null;
   }
   const status: Reasoning["status"] = firstRight ? "established" : decided ? "established" : out || !next ? "uncertain" : "need_more";
   return {

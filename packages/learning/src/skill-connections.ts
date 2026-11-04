@@ -36,7 +36,23 @@ export const ANGLE_PAIRS_PRECISE_CONFIG: SubSkillConfig = {
   ], unmapped: {}, core: ['complement', 'supplement', 'opposite', 'adjacent', 'other-three'].map((name) => `angle-pairs.${name}@2`),
   broadClaim: (label) => `Angle pairs read ${label} across five distinct angle relationships`,
 };
-export const CONNECTION_CONFIGS = [LINEAR_EQUATIONS_CONFIG, TRIANGLE_PROPERTIES_CONFIG, ADDITION_CONFIG, IDENTITIES_CONFIG, ANGLE_PAIRS_PRECISE_CONFIG, ...SCALE_PATTERN_CONFIGS, ...CONVERSION_PATTERN_CONFIGS, ...INVERSE_PATTERN_CONFIGS, ...FRACTION_PATTERN_CONFIGS];
+const space = 'MATH.probability.sample-space';
+/** sample-space@1: two-dice / two-spinner events are three different skills of the akdice generator (params[2]: 0 the total is
+ * exactly k, 1 the total is k or more, 2 the second is bigger than the first); evidence on one is never evidence on another. */
+export const SAMPLE_SPACE_CONFIG: SubSkillConfig = {
+  version: 'sample-space-subskill-projection@1', mapping: 'sample-space-subskills@1', competency: space,
+  subSkills: [
+    { id: 'sample-space.stages@1', name: 'Count the outcomes of choices made in stages', example: 'gen:akss:2,3,2,0', families: ['akss'], competency: space },
+    { id: 'sample-space.dice-exact-total@1', name: 'Probability of an exact total with two dice or spinners', example: 'gen:akdice:6,6,0,7', families: ['akdice'], competency: space, parameters: [{ index: 2, values: [0] }] },
+    { id: 'sample-space.dice-at-least@1', name: 'Probability of a total of k or more', example: 'gen:akdice:3,6,1,4', families: ['akdice'], competency: space, parameters: [{ index: 2, values: [1] }] },
+    { id: 'sample-space.dice-second-bigger@1', name: 'Probability that the second number is bigger', example: 'gen:akdice:3,4,2,0', families: ['akdice'], competency: space, parameters: [{ index: 2, values: [2] }] },
+    { id: 'sample-space.listing@1', name: 'List a sample space and an event', example: 'gen:akssl:1,1,1', families: ['akssl'], competency: space },
+    { id: 'sample-space.arrangements@1', name: 'Count arrangements that meet a condition', example: 'gen:aksarr:0,3,0', families: ['aksarr'], competency: space },
+  ], unmapped: {},
+  core: ['sample-space.stages@1', 'sample-space.dice-exact-total@1', 'sample-space.dice-at-least@1', 'sample-space.dice-second-bigger@1', 'sample-space.listing@1', 'sample-space.arrangements@1'],
+  broadClaim: (label) => `Sample spaces read ${label} across stage counting, listing, arrangements and three kinds of two-dice event`,
+};
+export const CONNECTION_CONFIGS = [SAMPLE_SPACE_CONFIG, LINEAR_EQUATIONS_CONFIG, TRIANGLE_PROPERTIES_CONFIG, ADDITION_CONFIG, IDENTITIES_CONFIG, ANGLE_PAIRS_PRECISE_CONFIG, ...SCALE_PATTERN_CONFIGS, ...CONVERSION_PATTERN_CONFIGS, ...INVERSE_PATTERN_CONFIGS, ...FRACTION_PATTERN_CONFIGS];
 export const connectionConfig = (competency: string) => CONNECTION_CONFIGS.find((c) => c.competency === competency);
 export function connectedSkill(config: SubSkillConfig, id: string): string | null {
   const c = classifyQuestionWith(config, id);

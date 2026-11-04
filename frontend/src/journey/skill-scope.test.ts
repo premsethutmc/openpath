@@ -77,9 +77,12 @@ test("equations, negative: same-operation recorded on x − a does not trigger t
   }
   assert.ok(t.length >= 1, `teaching continued: ${t}`);
   // the hazard is really present: the mistake is established on one skill while the learner's current skill is another
-  assert.equal(statusAtFirstLesson(r, "same-operation"), "established"); assert.notEqual(recordedOn, skill);
-  assert.ok(t.every((s) => !m.strategies.find((x) => x.id === s)!.addresses), `no targeted fix at all: ${t}`);
-  assert.ok(t.some((s) => m.strategies.find((x) => x.id === s)!.scope?.subSkill === skill), `the current skill's ordinary explanation: ${t}`);
+  // investigation-scope@1: the engine's follow-ups now stay on the original question's skill, so the finding and the current skill
+  // agree; the other skill's fix is still refused by the scope rule (loop above)
+  assert.equal(statusAtFirstLesson(r, "same-operation"), "established"); assert.equal(recordedOn, skill);
+  // the only fix that may be taught is the recorded (and current) skill's own; never the x + a one
+  assert.ok(t.every((s) => !m.strategies.find((x) => x.id === s)!.addresses || m.strategies.find((x) => x.id === s)!.scope?.subSkill === recordedOn), `no other skill's fix: ${t}`);
+  assert.ok(t.some((s) => m.strategies.find((x) => x.id === s)!.scope?.subSkill === skill), `the current skill's own explanation: ${t}`);
   reloads(r, LINI);
 });
 
@@ -94,8 +97,10 @@ test("missing numbers, negative: added-both recorded on n − □ does not trigg
   const fix = m.strategies.find((x) => x.id === (recordedOn === "missing.box-plus-k@1" ? "fix_added_both_taken" : "fix_added_both"))!;
   assert.equal(teachable(m, fix, ["added-both"]), true);
   assert.equal(scopeAllows(m, fix, records), false, "the fix for the other skill is refused");
-  assert.equal(statusAtFirstLesson(r, "added-both"), "established"); assert.notEqual(recordedOn, currentSkill(m, records), "evidence on one skill, current skill another");
-  assert.ok(taught(r, MISS).every((s) => !m.strategies.find((x) => x.id === s)!.addresses), `no targeted fix: ${taught(r, MISS)}`);
+  // investigation-scope@1: follow-ups stay on the original's skill (the finding and the current skill agree); the scope rule still
+  // refuses the fix written for the other skill
+  assert.equal(statusAtFirstLesson(r, "added-both"), "established"); assert.equal(recordedOn, currentSkill(m, records), "investigation stays on the original's skill");
+  assert.ok(taught(r, MISS).every((s) => !m.strategies.find((x) => x.id === s)!.addresses || m.strategies.find((x) => x.id === s)!.scope?.subSkill === recordedOn), `no other skill's fix: ${taught(r, MISS)}`);
   reloads(r, MISS);
 });
 
