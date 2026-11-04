@@ -24,6 +24,9 @@ on:
         "frontend/src/curriculum/**",
         "frontend/e2e/curriculum.test.mjs",
         "frontend/scripts/build-curriculum.mjs",
+        "frontend/src/review/**",
+        "frontend/e2e/educator-marking.test.mjs",
+        "frontend/e2e/educator-access.test.mjs",
         ".github/workflows/learning-year.yml",
       ]
 permissions:
@@ -110,6 +113,11 @@ jobs:
           YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7-session node --import tsx --test e2e/grade7-session.test.mjs
           YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7-practice node --import tsx --test e2e/grade7-practice.test.mjs
           YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7-completion node --import tsx --test e2e/grade7-completion.test.mjs
+          # Educator hand-off on the same shipped build and Django API: marking written work, and an administrator granting
+          # and removing the educator role. Synthetic accounts only; the administrator is a synthetic superuser the test
+          # sets through manage.py in this throwaway database (no secret, no real account).
+          YEAR_URL=http://127.0.0.1:4190 YEAR_MANAGE="python backend/manage.py" CHROMIUM_PATH='' SHOTS=/tmp/year-screens/educator-marking/ node --import tsx --test e2e/educator-marking.test.mjs
+          YEAR_URL=http://127.0.0.1:4190 YEAR_MANAGE="python backend/manage.py" CHROMIUM_PATH='' SHOTS=/tmp/year-screens/educator-access/ node --import tsx --test e2e/educator-access.test.mjs
       - uses: actions/upload-artifact@v7
         if: always()
         with:
