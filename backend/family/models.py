@@ -147,7 +147,8 @@ class ClientMetric(models.Model):
 
 class ContentReviewer(models.Model):
     """An explicit grant of a content-review role to one account (educator: approve, reject, request changes;
-    release manager: release approved content). Granted only by `manage.py content_reviewer grant`."""
+    release manager: release approved content). Granted by `manage.py content_reviewer grant`, or (educator only) by an
+    administrator in Content review → Educator access (educator_access.py)."""
 
     ROLES = [("educator", "Educator"), ("release_manager", "Release manager")]
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="content_roles")

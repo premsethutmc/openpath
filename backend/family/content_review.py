@@ -6,7 +6,7 @@ app hashes them). Decisions are append-only (ContentDecision). The state of an i
 on its CURRENT hash only: when content changes, earlier decisions stay in the history but no longer apply, so a
 changed family or module must be reviewed again.
 
-Roles (ContentReviewer, granted by `manage.py content_reviewer`): an educator approves, rejects or requests changes; a
+Roles (ContentReviewer, granted by `manage.py content_reviewer`, or educator by an administrator: educator_access.py): an educator approves, rejects or requests changes; a
 release manager releases approved content; any reviewer may submit a draft. Learners' apps read the registry to know
 which questions are released (only released content can contribute to verified mastery).
 """
@@ -24,6 +24,7 @@ from rest_framework.response import Response
 
 from .learning import hash_of
 from .models import ContentDecision, ContentReviewer
+from .educator_access import is_admin
 from .views import AccountBase
 
 ROOT = Path(settings.BASE_DIR).parent / 'content/learning'
@@ -121,7 +122,7 @@ class ContentReviewView(AccountBase):
 
     def get(self, request):
         roles = roles_of(request.user)
-        return Response({'roles': roles, 'registry': registry(show_reviewers=bool(roles))})
+        return Response({'roles': roles, 'registry': registry(show_reviewers=bool(roles)), 'canManageEducators': is_admin(request.user)})
 
 
 class ContentDecisionView(AccountBase):

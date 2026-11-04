@@ -26,7 +26,7 @@ import "../year/year.css";
 import "./review.css";
 
 const api = new Api();
-type View = { name: "overview" } | { name: "families" } | { name: "family"; id: string } | { name: "modules" } | { name: "module"; competency: string } | { name: "curricula" } | { name: "curriculum"; item: string } | { name: "marking" };
+type View = { name: "overview" } | { name: "families" } | { name: "family"; id: string } | { name: "modules" } | { name: "module"; competency: string } | { name: "curricula" } | { name: "curriculum"; item: string } | { name: "marking" } | { name: "educators" };
 const STATE_WORD: Record<string, string> = { draft: "Draft", submitted: "Awaiting review", changes_requested: "Changes requested", rejected: "Rejected", approved: "Approved, not released", released: "Released", missing: "Not in the registry" };
 const fams = [...FAMILIES.values()].filter((f) => f.domain).map((f) => f.id);
 
@@ -65,11 +65,11 @@ function App() {
   const [ready, setReady] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [error, setError] = useState("");
-  const [data, setData] = useState<{ roles: string[]; registry: Registry } | null>(null);
+  const [data, setData] = useState<{ roles: string[]; registry: Registry; canManageEducators?: boolean } | null>(null);
   // #marking (the link the parent's Written work section gives) opens the educator's marking queue directly
   const [view, setView] = useState<View>(() => (location.hash.startsWith("#family=") ? { name: "family", id: location.hash.slice(8) } : location.hash === "#marking" ? { name: "marking" } : { name: "overview" }));
   const load = async () => {
-    const r = await api.request<{ roles: string[]; registry: Registry }>("GET", "/content-review/");
+    const r = await api.request<{ roles: string[]; registry: Registry; canManageEducators?: boolean }>("GET", "/content-review/");
     setActiveRegistry(r.registry);
     setData(r);
   };
@@ -97,7 +97,7 @@ function App() {
   };
   const nav = (
     <nav className="review-nav" aria-label="Review sections">
-      {([["overview", "Overview"], ["families", "Question families"], ["modules", "Modules"], ["curricula", "Curriculum mappings"], ["marking", "Marking"]] as const).map(([n, label]) => (
+      {([["overview", "Overview"], ["families", "Question families"], ["modules", "Modules"], ["curricula", "Curriculum mappings"], ["marking", "Marking"], ...(data.canManageEducators ? [["educators", "Educator access"]] : [])] as [string, string][]).map(([n, label]) => (
         <button key={n} className={view.name.startsWith(n.slice(0, -1)) || view.name === n ? "primary" : "secondary"} onClick={() => setView({ name: n } as View)}>{label}</button>
       ))}
     </nav>
@@ -111,8 +111,59 @@ function App() {
     : view.name === "module" ? <ModuleDetail competency={view.competency} e={entry(`module:${view.competency}`)} reg={data.registry} roles={data.roles} decide={decide} openFamily={(id) => setView({ name: "family", id })} />
     : view.name === "curricula" ? <CurriculumList reg={data.registry} open={(item) => setView({ name: "curriculum", item })} />
     : view.name === "marking" ? <Marking roles={data.roles} />
+    : view.name === "educators" ? (data.canManageEducators ? <EducatorAccess onChange={load} /> : <p className="muted">Managing educator access needs an OpenPath administrator account.</p>)
     : <CurriculumDetail item={view.item} e={entry(view.item)} roles={data.roles} decide={decide} />;
   return <Shell error={error}>{nav}{roles}{body}</Shell>;
+}
+
+// ---------------------------------------------------------------- educator access (educator-access@1): administrators only
+
+type Grant = { email: string; active: boolean; grantedAt: string; grantedVia: string; removedAt: string | null };
+function EducatorAccess({ onChange }: { onChange: () => Promise<void> }) {
+  const [grants, setGrants] = useState<Grant[] | null>(null);
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [note, setNote] = useState("");
+  const load = () => api.request<{ educators: Grant[] }>("GET", "/educator-access/").then((r) => setGrants(r.educators)).catch((e) => setError(String(e.message ?? e)));
+  useEffect(() => {
+    load();
+  }, []);
+  const act = async (method: "POST" | "DELETE", who: string) => {
+    setError("");
+    setNote("");
+    try {
+      await api.request(method, "/educator-access/", { email: who });
+      setNote(method === "POST" ? `${who} can now mark written answers (Content review → Marking).` : `${who} no longer has the educator role.`);
+      setEmail("");
+      await load();
+      await onChange();
+    } catch (e) {
+      setError(String((e as Error).message ?? e));
+    }
+  };
+  return (
+    <section>
+      <h2>Educator access</h2>
+      <p className="small muted">Give an existing OpenPath account the educator role, or remove it. An educator marks the written work that parents choose to share with them, and can make content review decisions. The account must be registered first. Learners' records are never shown here.</p>
+      <form onSubmit={(e) => { e.preventDefault(); if (email.trim()) act("POST", email.trim()); }}>
+        <label>Account email <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" required /></label>{" "}
+        <button className="primary" type="submit">Give the educator role</button>
+      </form>
+      {note && <p className="small" role="status">{note}</p>}
+      {error && <p className="error" role="alert">{error}</p>}
+      {!grants ? <p className="muted">Loading…</p> : !grants.length ? <p className="muted">No educators yet.</p> : (
+        <table className="matrix small"><thead><tr><th>Account</th><th>Educator role</th><th></th></tr></thead><tbody>
+          {grants.map((g) => (
+            <tr key={g.email}>
+              <td>{g.email}</td>
+              <td>{g.active ? `Since ${g.grantedAt.slice(0, 10)}` : `Removed ${g.removedAt?.slice(0, 10) ?? ""}`}</td>
+              <td>{g.active ? <button className="secondary" onClick={() => act("DELETE", g.email)} aria-label={`Remove the educator role from ${g.email}`}>Remove</button> : <button className="secondary" onClick={() => act("POST", g.email)} aria-label={`Give the educator role to ${g.email} again`}>Give again</button>}</td>
+            </tr>
+          ))}
+        </tbody></table>
+      )}
+    </section>
+  );
 }
 
 // ---------------------------------------------------------------- marking written answers (written@1)
