@@ -122,3 +122,18 @@ These are shared files, so they were not edited or regenerated here:
   answers are a suspicion, not a fact (contrast-wording@1). Serving them needs an educator/content decision: declare contrast
   evidence for these errors, or write general (not misconception-specific) dice teaching. The fixture (`installForTest`) still
   demonstrates the engine path; nothing here is approved.
+
+## General teaching connected (branch `integration/dice-general-teaching`, product owner's decision 2026-11-04)
+
+Decision: general dice teaching now; contrast checks can improve diagnosis later. `two-dice-candidate.mts` now builds two GENERAL
+explanations (no `addresses`, no "what went wrong" screen, nothing about why a learner answered as they did), reworded from TP-PRO-01:
+
+| Explanation | Teaches | Guided | Recheck |
+|---|---|---|---|
+| `akdice_pairs` "Two dice: count the pairs" | the 6 × 6 = 36 ordered pairs, all equally likely; total 2 (1 pair, 1/36) against total 7 (6 pairs, 1/6); solved step by step | `5,5,0,7:mc` | `4,5,0,5` |
+| `akdice_order` "Red die, blue die: every order counts" | (a, b) and (b, a) are different cells of the table; the ordered pairs for the total; solved | `5,5,0,9:mc` | `6,6,0,3` |
+
+Registered by `content/learning/src/two-dice-register.mts` (template extension of `MATH.probability.sample-space`, scoped to `akdice`
+"total is exactly k"); library and explanation-review registry regenerated (two `pending_review` records). Demonstration content: not
+educator-approved; refused in supervised evaluation. The test-only composition/installation (`composeTwoDice`, `installForTest`) is
+removed. Phone finding fixed: see `docs/math-skill-connections/README.md` §15.

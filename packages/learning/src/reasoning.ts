@@ -280,6 +280,8 @@ export function contrastBacked(original: string, explanation: string): boolean {
   return !!root && evidence !== undefined && validEvidence(root, evidence);
 }
 export const NEUTRAL_CLAIM = "Two of your answers went the same way. That can happen for more than one reason, so OpenPath does not say what caused it: here is the method, step by step.";
+/** a claim sentence followed by what comes next; the neutral sentence already says it (no "rebuild" for a suspicion) */
+export const withTail = (claim: string, tail: string) => (claim === NEUTRAL_CLAIM ? claim : `${claim} ${tail}`);
 export const claimWording = (original: string | null | undefined, explanation: string, says: string) => (original && contrastBacked(original, explanation) ? says : NEUTRAL_CLAIM);
 
 /** What to do next, from a diagnosis: the defensible next activity, and why. */

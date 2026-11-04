@@ -279,9 +279,9 @@
      "needs": [],
      "screens": [
       {
-       "title": "Shaded out of ALL the parts: what went wrong",
+       "title": "Shaded out of ALL the parts: a common mix-up",
        "text": [
-        "The shaded squares were put over the unshaded ones. The bottom number is ALL the equal parts of the whole.",
+        "A common mix-up is to write the shaded squares over the unshaded ones. The bottom number is ALL the equal parts of the whole.",
         "The bottom number counts ALL the equal parts of the whole, the shaded ones too."
        ],
        "math": [
@@ -319,9 +319,9 @@
      "needs": [],
      "screens": [
       {
-       "title": "A fraction is parts out of the whole: what went wrong",
+       "title": "A fraction is parts out of the whole: a common mix-up",
        "text": [
-        "Only the shaded squares were counted. A fraction also says how many equal parts make the whole.",
+        "A common mix-up is to count only the shaded squares. A fraction also says how many equal parts make the whole.",
         "A fraction says how many parts out of how many: write the shaded parts over all the parts."
        ],
        "math": [

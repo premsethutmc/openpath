@@ -1,21 +1,22 @@
 /**
- * Two-dice probability (TP-PRO-01 candidate, pending educator review): outcomes agree with stored answers, the recheck is fresh
- * (freshness@2: not the same or a relabelled problem), and the real learner path (wrong answer → investigation → explanation →
- * fresh same-skill check → saved replay) works through the real grader, session and engine. The candidate strategies are
- * registered in blueprints.v1.json and synthesised into the library; installForTest adds explanation-registry records.
+ * Two-dice probability: GENERAL teaching (product owner's decision 2026-11-04), reworded from TP-PRO-01 and connected in the generated
+ * library, pending educator review. Outcomes agree with stored answers; the teaching makes no claim about why a learner answered as they
+ * did; the real learner path (wrong answer → teaching → guided → fresh exact-total check alone → save/reload → same-skill delayed check
+ * → recovery on the same skill) runs through the real grader, session and engine.
  */
 import test from "node:test";
 import assert from "node:assert/strict";
 import { moduleFor, question } from "../../../packages/learning/src/content";
-import { exposureKey, phasePool, problemOf } from "../../../packages/learning/src/families";
+import { exposureKey, pool, phasePool, problemOf } from "../../../packages/learning/src/families";
 import { gradeRequest } from "../../../packages/learning/src/server-grader";
-import { probeReading } from "../../../packages/learning/src/reasoning";
-import { hypotheses } from "../../../packages/learning/src/hypotheses";
-import { contentEligibility } from "../../../packages/learning/src/explanation-review";
+import { NEUTRAL_CLAIM, probeReading } from "../../../packages/learning/src/reasoning";
+import { contentEligibility, isMisconceptionSpecific } from "../../../packages/learning/src/explanation-review";
+import { unitCheck } from "../../../packages/learning/src/intervention";
+import { skillUnits } from "../../../packages/learning/src/skill-units";
 import { learnerState, make } from "../../../packages/learning/src/session";
 import { withDecisions } from "../../../packages/learning/src/records";
-import { candidateStrategies, pairsWithTotal, unorderedWithTotal } from "../../../content/learning/src/two-dice-candidate.mts";
-import { composeTwoDice, COMPETENCY as C, installForTest, problem, problemKey } from "./two-dice";
+import { candidateStrategies, pairsWithTotal } from "../../../content/learning/src/two-dice-candidate.mts";
+import { COMPETENCY as C, problem, problemKey } from "./two-dice";
 import { SliceSession } from "./session";
 
 const PHASES = ["diagnostic", "practice", "check", "retention"] as const;
@@ -35,25 +36,25 @@ test("outcomes agree with the stored answers: every 'total is exactly k' item, c
   }
 });
 
-test("two ordinary dice: total 7 has six ordered pairs, total 2 has one; the screens say exactly that", () => {
+test("two ordinary dice: 36 ordered pairs; total 7 has six, total 2 has one; the screens say exactly that and nothing about the learner", () => {
   assert.deepEqual(pairsWithTotal(6, 6, 7), [[1, 6], [2, 5], [3, 4], [4, 3], [5, 2], [6, 1]]);
   assert.deepEqual(pairsWithTotal(6, 6, 2), [[1, 1]]);
-  assert.equal(problemOf("gen:akdice:6,6,0,7")!.answer, "1/6"); assert.equal(problemOf("gen:akdice:6,6,0,2")!.answer, "1/36");
-  const [totals, order] = candidateStrategies();
-  const why = totals.screens.find((s) => s.role === "concept")!;
+  const [pairs, order] = candidateStrategies();
+  const why = pairs.screens.find((s) => s.role === "concept")!;
+  assert.ok(why.text[0].includes("6 × 6 = 36 ordered pairs"));
   assert.deepEqual(why.math, ["Total 2: (1, 1), 1 pair, so P = 1/36", "Total 7: (1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1), 6 pairs, so P = 1/6", "6 pairs against 1: a total of 7 is 6 times as likely as a total of 2."]);
-  // every screen's final line is the stored answer of its own instance; the "not X" value is the modelled wrong answer of that instance
-  for (const st of [totals, order]) for (const sc of st.screens) {
-    const p = problem(sc.instance), bug = p.bugs.find((b) => b.id === st.addresses)!;
-    if (sc.role === "strategy") assert.equal(sc.math.at(-1), `So the answer is ${p.answer}`);
-    if (sc.role === "misconception") {
-      const line = sc.math.find((l) => l.startsWith("Not "))!, [x, y] = line.slice(4, line.indexOf(",")).split("/").map(Number);
-      assert.ok(Math.abs(x / y - (bug.predict as number)) < 1e-12, `${line} vs the modelled wrong value ${bug.predict}`); assert.ok(line.endsWith(`but ${p.answer}`));
+  const bugSays = [...new Set(pool("akdice").items.flatMap((p) => p.bugs.map((b) => b.says)))];
+  for (const st of [pairs, order]) {
+    assert.ok(!("addresses" in st), `${st.id}: general teaching, not a misconception fix`);
+    for (const sc of st.screens) {
+      assert.notEqual(sc.role, "misconception");
+      if (sc.role === "strategy") assert.equal(sc.math.at(-1), `So the answer is ${problem(sc.instance).answer}`);
+      const words = [sc.title, ...sc.text, ...sc.math].join(" ");
+      assert.ok(!/went wrong|you (thought|took|counted)|were taken as|was taken|counted once/i.test(words), `${st.id}: no claim about the learner: ${words}`);
+      assert.ok(!bugSays.some((x) => words.includes(x)));
+      if (sc.widget) assert.equal((sc.widget as { rows: unknown[][] }).rows.length, problem(sc.instance).params[0]);
     }
   }
-  const [m, n, , k] = problem(order.screens[0].instance).params;
-  assert.ok(order.screens[0].math.includes(`Counted once: ${unorderedWithTotal(m, n, k).map(([a, b]) => `(${a}, ${b})`).join(", ")}, ${unorderedWithTotal(m, n, k).length} pairs`));
-  for (const st of [totals, order]) for (const sc of st.screens) if (sc.widget) assert.deepEqual((sc.widget as { rows: unknown[][] }).rows.length, problem(sc.instance).params[0]);
 });
 
 test("freshness@2: the problem key treats the mirror total and the :mc / :w forms as the same problem", () => {
@@ -62,129 +63,81 @@ test("freshness@2: the problem key treats the mirror total and the :mc / :w form
   assert.equal(problemKey("gen:akdice:4,5,0,5:mc"), problemKey("gen:akdice:4,5,0,5"));
   assert.notEqual(problemKey("gen:akdice:4,5,0,5"), problemKey("gen:akdice:4,5,0,7"));
   for (const st of candidateStrategies()) for (const id of [st.guided, ...st.screens.map((s) => s.instance)]) assert.notEqual(problemKey(st.check), problemKey(id), `${st.id}: ${st.check} vs ${id}`);
-  assert.equal(candidateStrategies()[0].check, "gen:akdice:5,5,0,3", "totals recheck (5,5,0,3; 4,5,0,5 is reserved by the template)");
+  assert.equal(candidateStrategies()[0].check, "gen:akdice:4,5,0,5", "the corrected recheck of 4e655e73");
 });
 
-test("composition is append-only and refuses a reused, relabelled or out-of-partition recheck", () => {
-  const loaded = moduleFor(C)!;
-  // strip dice strategies from the loaded module to test composition rules from a clean base
-  const base = { ...loaded, strategies: loaded.strategies.filter((s) => !s.id.startsWith("akdice_")) };
-  const m = composeTwoDice(phasePool, base);
-  assert.deepEqual({ ...m, strategies: m.strategies.slice(0, base.strategies.length) }, base);
-  assert.deepEqual(m.strategies.slice(base.strategies.length).map((s) => s.id), ["akdice_fix_totals", "akdice_fix_order"]);
-  const mod = (f: (s: ReturnType<typeof candidateStrategies>) => void) => { const s = candidateStrategies(); f(s); return s; };
-  assert.throws(() => composeTwoDice(phasePool, base, mod((s) => { s[0].id = base.strategies[0].id; })), /duplicate strategy/);
-  assert.throws(() => composeTwoDice(phasePool, base, mod((s) => { s[0].screens[0].instance = base.retention.find((q) => q.includes("akdice"))!; })), /reserved exposure/);
-  assert.throws(() => composeTwoDice(phasePool, base, mod((s) => { s[1].check = s[0].check; })), /unavailable, reused/);
-  assert.throws(() => composeTwoDice(phasePool, base, mod((s) => { s[0].check = "gen:akdice:6,6,0,6"; })), /outside partition/);
-  // gen:akdice:5,5,0,3 is now the totals strategy's check, so reusing it for the order strategy hits reserved-exposure first;
-  // freshness@2 (mirror-total equivalence) is verified for every candidate strategy on line 64 above
-  assert.equal(problemKey("gen:akdice:5,5,0,3"), problemKey("gen:akdice:5,5,0,9:mc"));
-  assert.ok(phasePool("akdice", "check").includes("gen:akdice:5,5,0,3"));
-  assert.throws(() => composeTwoDice(phasePool, base, mod((s) => { s[1].check = "gen:akdice:5,5,0,3"; })), /unavailable, reused/);
-  assert.ok(loaded.strategies.some((s) => s.id.startsWith("akdice_")), "dice strategies are now synthesised into the loaded library");
+test("connected: the loaded module has the two general dice explanations, scoped to 'total is exactly k', pending educator review", () => {
+  const m = moduleFor(C)!;
+  const dice = m.strategies.filter((s) => s.id.startsWith("akdice_"));
+  assert.deepEqual(dice.map((s) => s.id), ["akdice_pairs", "akdice_order"]);
+  for (const s of dice) {
+    assert.equal(isMisconceptionSpecific(s), false);
+    assert.deepEqual(s.scope, { family: "akdice", parameters: [{ index: 2, values: [0] }] });
+    const r = contentEligibility(m, s, { competency: C, usage: "intervention", misconceptionEvidence: [], mode: "demonstration" });
+    assert.equal(r.eligible, true); assert.equal(r.status, "pending_review"); assert.equal(r.educatorApproved, false);
+    assert.equal(contentEligibility(m, s, { competency: C, usage: "intervention", misconceptionEvidence: [], mode: "supervised-evaluation" }).eligible, false, "never in supervised evaluation until approved");
+  }
+  assert.equal(skillUnits(m).length, 1, "one dice skill unit");
 });
 
-for (const [target, id] of [["totals-equally-likely", "akdice_fix_totals"], ["order-ignored", "akdice_fix_order"]] as const) test(`real path (${target}): one wrong answer is not proof; two give the explanation, a fresh check, and a saved replay`, () => {
-  const { restore } = installForTest(phasePool);
-  try {
-    const at = Date.parse("2026-01-01T00:00:00Z"), s = new SliceSession(`two-dice-${target}`, C, at);
-    s.events.push(make.pathway({ learnerId: s.learnerId, sessionId: s.session, at: new Date(at - 1000).toISOString() }, C));
-    const presented: string[] = [];
-    const wrong = (q: string, activity: "check" | "diagnostic", context?: string) => { presented.push(q); s.submit(q, probeReading(q.replace(/:(mc|w)$/, ""), target).predicted[0], activity, context ? { context } : {}); };
-    const first = phasePool("akdice", "diagnostic").map((x) => x.replace(/:mc$/, "")).find((x) => problem(x).params[2] === 0 && probeReading(x, target).discriminates)!;
-    wrong(first, "check");
-    // one matching wrong answer: suspected only; OpenPath investigates with another question instead of teaching
-    let n = s.next(C);
-    assert.deepEqual(hypotheses(s.state().selectionRecords).filter((h) => h.status === "established"), []);
-    assert.equal(n.strategy ?? null, null); assert.ok(n.question && n.question !== first, JSON.stringify(n.phase));
-    const second = probeReading(n.question!.replace(/:(mc|w)$/, ""), target).discriminates ? n.question! : phasePool("akdice", "diagnostic").map((x) => x.replace(/:mc$/, "")).find((x) => x !== first && problem(x).params[2] === 0 && probeReading(x, target).discriminates)!;
-    wrong(second, "diagnostic", n.context);
-    assert.equal(hypotheses(s.state().selectionRecords).find((h) => h.claim?.explanation === target)?.status, "established");
+const T = "totals-equally-likely";
+const wrongReply = (q: string) => (q.endsWith(":mc") ? ["A", "B", "C", "D"].find((x) => x !== String(question(q).answer))! : probeReading(q.replace(/:(mc|w)$/, ""), T).predicted[0] ?? "1/2");
+const exact = (q: string | null | undefined) => !!q && problem(q).family === "akdice" && problem(q).params[2] === 0;
+
+test("real path: wrong exact-total answers → general dice teaching (neutral) → fresh exact-total check alone → save/reload → same-skill delayed check → recovery", () => {
+  const at = Date.parse("2026-01-01T00:00:00Z"), s = new SliceSession("two-dice-general", C, at);
+  s.events.push(make.pathway({ learnerId: s.learnerId, sessionId: s.session, at: new Date(at - 1000).toISOString() }, C));
+  const first = phasePool("akdice", "diagnostic").map((x) => x.replace(/:mc$/, "")).find((x) => exact(x) && probeReading(x, T).discriminates)!;
+  assert.equal(s.submit(first, wrongReply(first), "check").credit, false);
+  const presented = [first];
+  // one wrong answer is not proof: OpenPath asks another question first
+  let n = s.next(C);
+  assert.equal(n.strategy ?? null, null); assert.ok(n.question && n.question !== first, n.phase);
+  presented.push(n.question!); s.submit(n.question!, exact(n.question) ? wrongReply(n.question!) : question(n.question!).answer, n.phase === "explore" ? "diagnostic" : "practice", { context: n.context });
+  for (let i = 0; i < 4 && n.phase !== "chapter"; i++) {
     n = s.next(C);
-    assert.equal(n.phase, "chapter"); assert.equal(n.strategy?.id, id);
-    const review = contentEligibility(moduleFor(C), n.strategy, { competency: C, usage: "intervention", misconceptionEvidence: [target], mode: "demonstration" });
-    assert.equal(review.eligible, true); assert.equal(review.status, "pending_review"); assert.equal(review.educatorApproved, false);
-    assert.equal(contentEligibility(moduleFor(C), n.strategy, { competency: C, usage: "intervention", misconceptionEvidence: [target], mode: "supervised-evaluation" }).eligible, false);
-    presented.push(...n.strategy!.screens.flatMap((sc) => (sc.instance ? [sc.instance] : [])));
-    s.taught(n);
-    // guided, then the same-skill check
-    let check: string | null = null;
-    for (let i = 0; i < 3 && !check; i++) {
-      n = s.next(C);
-      assert.ok(n.phase === "guided" || n.phase === "check", n.phase);
-      const q = n.question!, p = problem(q);
-      assert.equal(p.family, "akdice"); assert.equal(p.params[2], 0, "inside the taught scope: the total is exactly k");
-      if (n.phase === "check") {
-        check = q;
-        assert.ok(!presented.some((x) => exposureKey(x) === exposureKey(q)), `${q} was already presented`);
-        assert.ok(!presented.some((x) => problemKey(x) === problemKey(q)), `${q} is a relabelled problem already presented: ${presented.join(" ")}`);
-        assert.ok(probeReading(q.replace(/:(mc|w)$/, ""), target).discriminates, "the target error is still possible on the check");
-      }
-      presented.push(q);
-      s.submit(q, question(q).answer, n.phase as "guided" | "check");
-    }
-    assert.ok(check, "a check was asked");
-    assert.equal(hypotheses(s.state().selectionRecords).find((h) => h.claim?.explanation === target)?.status, "resolved");
-    // save and reload: the stored events (with server decisions) give the same state, and a restarted session continues identically
-    const saved = JSON.parse(JSON.stringify(withDecisions(s.events, s.decisions)));
-    assert.deepEqual(learnerState(s.learnerId, saved, s.now, { currentSession: s.session }).module(C), s.state().module(C));
-    const r = SliceSession.fromEvents(s.learnerId, C, s.events, s.now, s.session); Object.assign(r.decisions, s.decisions);
-    assert.deepEqual(r.state().module(C), s.state().module(C));
-  } finally { restore(); }
+    if (n.phase === "chapter") break;
+    presented.push(n.question!); s.submit(n.question!, exact(n.question) ? wrongReply(n.question!) : question(n.question!).answer, n.phase === "explore" ? "diagnostic" : "practice", { context: n.context });
+  }
+  assert.equal(n.phase, "chapter", n.reason);
+  assert.ok(n.strategy!.id.startsWith("akdice_"), `the dice teaching: ${n.strategy!.id}`);
+  assert.ok(!n.reason.includes("equally likely") || n.reason.startsWith(NEUTRAL_CLAIM), `no claim about the learner: ${n.reason}`);
+  assert.equal(n.contentReview?.status, "pending_review"); assert.equal(n.contentReview?.educatorApproved, false);
+  assert.ok(!["independent", "transfer", "verified"].includes(s.state().evidence(C).status), "not shown while the dice answers are wrong");
+  presented.push(...n.strategy!.screens.flatMap((sc) => (sc.instance ? [sc.instance] : [])));
+  s.taught(n);
+  n = s.next(C); assert.equal(n.phase, "guided"); assert.ok(exact(n.question)); presented.push(n.question!);
+  s.submit(n.question!, question(n.question!).answer, "guided");
+  n = s.next(C);
+  assert.equal(n.phase, "check", n.reason);
+  assert.ok(exact(n.question), `fresh exact-total question: ${n.question}`);
+  assert.ok(!presented.some((x) => problemKey(x) === problemKey(n.question!)), `${n.question} is not a problem already met, relabelled or not`);
+  // save and reload at the check: the same question comes back
+  const saved = JSON.parse(JSON.stringify(withDecisions(s.events, s.decisions)));
+  assert.deepEqual(learnerState(s.learnerId, saved, s.now, { currentSession: s.session }).module(C), s.state().module(C));
+  const r = SliceSession.fromEvents(s.learnerId, C, s.events, s.now, s.session); Object.assign(r.decisions, s.decisions);
+  assert.equal(r.next(C).question, n.question);
+  assert.equal(s.submit(n.question!, question(n.question!).answer, "check").credit, true, "answered alone, right");
+  // carry on right (other skills of the chapter stay open) until a delayed check is planned
+  for (let i = 0; i < 40; i++) { n = s.next(C); if (!n.question) break; s.submit(n.question, question(n.question).answer, (["guided", "check", "practice", "transfer"].includes(n.phase) ? n.phase : "practice") as never); presented.push(n.question); }
+  assert.equal(s.state().evidence(C).retention, "scheduled", s.state().module(C).reason);
+  s.wait(8); n = s.next(C);
+  assert.equal(n.phase, "retention");
+  assert.ok(exact(n.question), `the delayed check samples the taught dice skill: ${n.question}`);
+  assert.ok(!presented.some((x) => problemKey(x) === problemKey(n.question!)), "fresh");
+  assert.equal(s.submit(n.question!, wrongReply(n.question!), "retention").credit, false);
+  const rc = s.recover(n.question!);
+  assert.equal(rc.phase, "teach"); assert.equal(rc.active, C, "recovery on the dice skill");
+  n = s.next(C, { inRecovery: true });
+  assert.ok(exact(n.question), `recovery question on the dice skill: ${n.question} (${n.reason})`);
+  assert.equal(s.state().evidence(C).retention, "failed");
 });
 
-test("same-skill retention: the delayed check samples the taught dice skill on a fresh problem, and a wrong delayed answer returns to it", () => {
-  const { restore } = installForTest(phasePool);
-  try {
-    const at = Date.parse("2026-01-01T00:00:00Z"), s = new SliceSession("two-dice-delayed", C, at), T = "totals-equally-likely";
-    s.events.push(make.pathway({ learnerId: s.learnerId, sessionId: s.session, at: new Date(at - 1000).toISOString() }, C));
-    s.submit("gen:akdice:4,5,0,7", probeReading("gen:akdice:4,5,0,7", T).predicted[0], "check");
-    let n = s.next(C); s.submit(n.question!, probeReading(n.question!.replace(/:(mc|w)$/, ""), T).predicted[0], "diagnostic", { context: n.context });
-    n = s.next(C); assert.equal(n.strategy?.id, "akdice_fix_totals"); s.taught(n);
-    const presented = [...n.strategy!.screens.flatMap((sc) => (sc.instance ? [sc.instance] : []))];
-    for (let i = 0; i < 40; i++) { n = s.next(C); if (!n.question) break; presented.push(n.question); s.submit(n.question, question(n.question).answer, (["guided", "check", "practice", "transfer"].includes(n.phase) ? n.phase : "practice") as never); }
-    assert.equal(s.state().evidence(C).retention, "scheduled");
-    s.wait(8); n = s.next(C);
-    assert.equal(n.phase, "retention");
-    const p = problem(n.question!);
-    assert.ok(p.family === "akdice" && p.params[2] === 0, `delayed check ${n.question} is on the taught skill (the total is exactly k)`);
-    assert.ok(!presented.some((x) => problemKey(x) === problemKey(n.question!)), `${n.question} is not a relabelled problem already met: ${presented.join(" ")}`);
-    // a delayed pass on other questions alone is not retention evidence for the taught skill
-    const wrongReply = n.question!.endsWith(":mc") ? ["A", "B", "C", "D"].find((x) => x !== String(question(n.question!).answer))! : "1/2";
-    assert.equal(s.submit(n.question!, wrongReply, "retention").credit, false);
-    const rc = s.recover(n.question!);
-    assert.equal(rc.phase, "teach"); assert.equal(rc.active, C, "recovery returns to the dice skill, not to what it builds on");
-    n = s.next(C, { inRecovery: true });
-    assert.ok(n.question, n.reason);
-    const q = problem(n.question!);
-    assert.ok(q.family === "akdice" && q.params[2] === 0, `recovery question ${n.question} is on the taught skill`);
-    assert.equal(s.state().evidence(C).retention, "failed");
-  } finally { restore(); }
-});
-
-test("same-skill + freshness@2: when the explanation's own check was already met, the recheck is a fresh problem inside the scope", () => {
-  // was the pinned gap (docs/two-dice-probability/README.md "Recheck selection"): the learner met 6,6,0,3 (the order explanation's check) earlier
-  const { restore } = installForTest(phasePool);
-  try {
-    const T = "order-ignored", at = Date.parse("2026-01-01T00:00:00Z"), s = new SliceSession("two-dice-recheck", C, at);
-    s.events.push(make.pathway({ learnerId: s.learnerId, sessionId: s.session, at: new Date(at - 1000).toISOString() }, C));
-    s.submit("gen:akdice:6,6,0,3", question("gen:akdice:6,6,0,3").answer, "practice");
-    s.submit("gen:akdice:5,5,0,4", probeReading("gen:akdice:5,5,0,4", T).predicted[0], "check");
-    let n = s.next(C);
-    s.submit("gen:akdice:6,6,1,7", probeReading("gen:akdice:6,6,1,7", T).predicted[0], "diagnostic", { context: n.context });
-    n = s.next(C); assert.equal(n.strategy?.id, "akdice_fix_order"); s.taught(n);
-    const presented = ["gen:akdice:6,6,0,3", "gen:akdice:5,5,0,4", "gen:akdice:6,6,1,7", ...n.strategy!.screens.flatMap((sc) => (sc.instance ? [sc.instance] : []))];
-    n = s.next(C); assert.equal(n.question, "gen:akdice:5,5,0,9:mc"); presented.push(n.question!); s.submit(n.question!, question(n.question!).answer, "guided");
-    for (const ms of [s.state().module(C), s.next(C)]) {
-      assert.equal(ms.phase, "check");
-      const q = ms.question!, p = problem(q);
-      assert.ok(p.family === "akdice" && p.params[2] === 0, `${q} is inside the declared scope`);
-      assert.ok(!presented.some((x) => problemKey(x) === problemKey(q)), `${q} is not a relabelled problem already met`);
-      assert.ok(probeReading(q.replace(/:(mc|w)$/, ""), T).discriminates, "the target error is still possible on it");
-    }
-    n = s.next(C);
-    s.submit(n.question!, question(n.question!).answer, "check");
-    assert.equal(hypotheses(s.state().selectionRecords).find((h) => h.claim?.explanation === T)?.status, "resolved");
-  } finally { restore(); }
+test("no fresh exact-total question left: no recheck is invented and the skill is not counted as shown", () => {
+  const m = moduleFor(C)!, unit = skillUnits(m)[0], st = m.strategies.find((x) => x.id === "akdice_pairs")!;
+  const s = new SliceSession("two-dice-none", C, Date.parse("2026-01-01T00:00:00Z"));
+  const all = [...new Set(["diagnostic", "practice", "check", "retention"].flatMap((ph) => phasePool("akdice", ph as never)))].filter(exact);
+  for (const q of all) s.submit(q, wrongReply(q), "practice");
+  assert.equal(unitCheck(m, unit, s.state().records, st), null, "nothing left to ask on this skill");
+  assert.ok(!["independent", "transfer", "verified"].includes(s.state().evidence(C).status));
 });
