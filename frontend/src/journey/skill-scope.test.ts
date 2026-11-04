@@ -28,6 +28,13 @@ const reloads = (r: Run, competency: string) => {
   assert.deepEqual(learnerState(L.learnerId, saved, L.now, { currentSession: L.session }).module(competency), L.state().module(competency), "reload gives the same next step");
 };
 
+/** the claim's status when the first lesson was chosen (records up to that lesson). After claim-teaching@1 the learner carries
+ *  on past that lesson instead of pausing, so later right answers can contest the claim by the end of the run. */
+const statusAtFirstLesson = (r: Run, explanation: string) => {
+  const L = r.f.session, ev = withDecisions(L.events, L.decisions), k = ev.findIndex((e) => (e as { record?: string }).record === "teach");
+  const recs = learnerState(L.learnerId, k < 0 ? ev : ev.slice(0, k), L.now, { currentSession: L.session }).records;
+  return hypotheses(recs).find((x) => x.claim?.explanation === explanation)?.status ?? null;
+};
 const FCMP = "MATH.number.fraction-comparison", MISS = "MATH.algebra.missing-number", LINI = "MATH.algebra.linear-intro";
 
 test("fractions, negative: a same-bottom comparison difficulty is not taught an ordering or same-top lesson", () => {
@@ -70,7 +77,7 @@ test("equations, negative: same-operation recorded on x − a does not trigger t
   }
   assert.ok(t.length >= 1, `teaching continued: ${t}`);
   // the hazard is really present: the mistake is established on one skill while the learner's current skill is another
-  assert.equal(h!.status, "established"); assert.notEqual(recordedOn, skill);
+  assert.equal(statusAtFirstLesson(r, "same-operation"), "established"); assert.notEqual(recordedOn, skill);
   assert.ok(t.every((s) => !m.strategies.find((x) => x.id === s)!.addresses), `no targeted fix at all: ${t}`);
   assert.ok(t.some((s) => m.strategies.find((x) => x.id === s)!.scope?.subSkill === skill), `the current skill's ordinary explanation: ${t}`);
   reloads(r, LINI);
@@ -87,7 +94,7 @@ test("missing numbers, negative: added-both recorded on n − □ does not trigg
   const fix = m.strategies.find((x) => x.id === (recordedOn === "missing.box-plus-k@1" ? "fix_added_both_taken" : "fix_added_both"))!;
   assert.equal(teachable(m, fix, ["added-both"]), true);
   assert.equal(scopeAllows(m, fix, records), false, "the fix for the other skill is refused");
-  assert.equal(h.status, "established"); assert.notEqual(recordedOn, currentSkill(m, records), "evidence on one skill, current skill another");
+  assert.equal(statusAtFirstLesson(r, "added-both"), "established"); assert.notEqual(recordedOn, currentSkill(m, records), "evidence on one skill, current skill another");
   assert.ok(taught(r, MISS).every((s) => !m.strategies.find((x) => x.id === s)!.addresses), `no targeted fix: ${taught(r, MISS)}`);
   reloads(r, MISS);
 });
