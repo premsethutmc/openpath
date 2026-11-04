@@ -54,7 +54,7 @@ test("equations: the lesson introduction does not claim a kind of difficulty the
   for (const s of reasons(r)) assert.doesNotMatch(s, /You have the idea|The method is fine|Your answers suggest the idea itself/, s);
 });
 
-test("addition: two no-regroup answers on two-digit sums are taught carrying, not 'Use a ten when it helps' within 20", { todo: "proposal diagnosis-1 (no-regroup belongs to MATH.number.addition-regroup); needs regeneration" }, () => {
+test("addition: two no-regroup answers on two-digit sums are taught carrying, not 'Use a ten when it helps' within 20", { todo: "open: chapter-entry hand-off of a mistake to another skill's lesson (diagnosis-3 draft not applied: it broke skill-scope and linear-equations J15); diagnosis-1 applied and regenerated" }, () => {
   for (const entry of ["practice", "diagnostic"] as const) {
     const r = runScenario({ id: `diag-word-add-${entry}`, category: 2, start: "gen:aastadd:1,7", entry, expect: {}, learner: () => mixup(famIs("aastadd"), ["no-regroup"]) });
     const taught = (r.f.session.events.filter((e) => (e as { record?: string }).record === "teach") as unknown as { competency: string; strategy: string }[]);

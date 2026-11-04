@@ -129,8 +129,18 @@ test("same-bottom comparison: never taught the same-TOP lesson for same-bottom m
   assert.ok(!lessons.includes("compare_same_top"), `a same-top lesson for same-bottom mistakes:\n${show(trail)}`);
   reloads(s, FC);
   s.wait(8);
+  // (consolidation #112) the delayed check opens only once the competency is shown on the learner's own (Evidence fix): until then the
+  // engine keeps checking alone, which must be a question, never a dead end
+  for (let i = 0; i < 40 && s.next(FC).phase !== "retention"; i++) {
+    const v = s.next(FC);
+    if (v.phase === "chapter") { s.taught(v); continue; }
+    // answers in the session of a lesson count as helped (records.ts:144): "done" for today, then a later visit
+    if (v.phase === "done" && !v.question) { s.wait(1); continue; }
+    assert.ok(v.question, `${v.phase} with no question before the delayed check: ${v.reason} (status ${s.state().evidence(FC).status})`);
+    s.submit(v.question!, question(v.question!).answer, (v.phase === "explore" ? "diagnostic" : ["guided", "check", "transfer"].includes(v.phase) ? v.phase : "practice") as never, v.context ? { context: v.context } : {});
+  }
   const r = s.next(FC);
-  assert.equal(r.phase, "retention", r.reason);
+  assert.equal(r.phase, "retention", `${r.reason} (status ${s.state().evidence(FC).status})`);
   assert.equal(s.submit(r.question!, wrong(r.question!), "retention").credit, false);
   const n = s.next(FC);
   assert.ok(n.question || n.phase === "chapter" || n.phase === "pause", `${n.phase} with no question: ${n.reason}`);
