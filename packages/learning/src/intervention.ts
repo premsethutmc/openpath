@@ -411,7 +411,8 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   if (!m) return { ...base, phase: "unavailable", reason: "No questions for this skill yet." };
   // written@1: a written answer is with an educator; nothing here moves on until it is marked (other skills can)
   // an educator-marked module waits for its mark; a module answered automatically carries on (written@2)
-  if (!m?.pool && records.pending?.some((p) => graph.evidenceTarget(p.competency) === competency)) return { ...base, phase: "waiting", reason: "Your written answer is with an educator. You will see the mark and their feedback under “Written work”; carry on with other skills meanwhile." };
+  // (#112 evidence-1) a delayed check that is due is not held back by a written answer waiting for its mark: it is auto-marked
+  if (!m?.pool && ev.retention !== "due" && records.pending?.some((p) => graph.evidenceTarget(p.competency) === competency)) return { ...base, phase: "waiting", reason: "Your written answer is with an educator. You will see the mark and their feedback under “Written work”; carry on with other skills meanwhile." };
   // a misunderstanding already established elsewhere (diagnostic@2, on a problem the learner was stuck on) replaces the
   // exploratory questions here: it is not asked again; strategy probes and teaching follow as usual
   const asked = diagnose(m, records.attempts);
@@ -533,7 +534,8 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   // explanations are about different kinds of question, two or more answers alone wrong on one kind, none right alone since, is taught
   // with that kind's general explanation once (through the gate), then rechecked alone on a fresh question of that kind; still wrong
   // after it: a person. The learner's evidence is not changed (a competency is shown or not by the shared engine); only what is taught.
-  const gap = shown && !established ? subSkillGap(m, records) : null;
+  // (#112 evidence-2) also when the status is held below "shown" only by that kind's own answers (evidence familyHeld)
+  const gap = (shown || (!!ev.familyHeld && !hold)) && !established ? subSkillGap(m, records) : null;
   if (gap) {
     const basis0 = evidenceBasis(competency, records, { evidence: ev, diagnosis: d });
     const kindOf = (st: Strategy) => problemOf(st.check.replace(/:(mc|w)$/, ""))?.family;

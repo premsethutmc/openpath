@@ -143,7 +143,7 @@ test("same-bottom comparison: never taught the same-TOP lesson for same-bottom m
 // angle (status "guided" throughout) is then served "A delayed check, a week after you first showed this" instead of the pause's way back,
 // and its failure turns the status into "review" of something never shown. todo until the Evidence patch is applied.
 const TRI = "MATH.geometry.triangle-properties", EXT = "triangle-properties.exterior-angle@1";
-test("evidence: no delayed check for a competency never shown on your own (exterior angle never learnt)", { todo: "Evidence: m112/proposals/teaching-1.patch" }, () => {
+test("evidence: no delayed check for a competency never shown on your own (exterior angle never learnt)", () => {
   const { s, trail } = drive(TRI, EXT, "gen:ahext:20,120,0", "never");
   assert.equal(trail.at(-1)!.phase, "pause", show(trail));
   assert.ok(!["independent", "transfer", "verified"].includes(s.state().evidence(TRI).status));

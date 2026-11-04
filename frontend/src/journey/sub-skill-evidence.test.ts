@@ -19,16 +19,15 @@ test("E1-01 two-step success alone: production says independent for the whole co
   assert.deepEqual(kinds("E1-01"), ["competency-status-without-sub-skill-evidence:variables-both-sides+brackets"]);
 });
 
-test("E1-02 / E1-03 wrong on every both-sides and bracket question: production reaches transfer and passes its delayed check anyway", () => {
+test("E1-02 / E1-03 wrong on every both-sides and bracket question: production no longer reaches transfer or a delayed check (was the leak; family hold, consolidation #112)", () => {
   for (const id of ["E1-02", "E1-03"]) {
-    assert.equal(prod(id).status, "transfer", id);
+    assert.ok(!["independent", "transfer", "verified"].includes(prod(id).status), `${id}: ${prod(id).status}`);
     assert.ok(sub(id, "variables-both-sides").answers.independentRight === 0 && sub(id, "variables-both-sides").answers.independentWrong >= 1, id);
     assert.ok(sub(id, "brackets").answers.independentRight === 0 && sub(id, "brackets").answers.independentWrong >= 1, id);
     assert.deepEqual([sub(id, "variables-both-sides").status, sub(id, "brackets").status], ["exposure", "exposure"], id);
-    assert.ok(kinds(id).includes("competency-status-without-sub-skill-evidence:variables-both-sides+brackets"), id);
+    assert.deepEqual(kinds(id), [], `${id}: no status or delayed check without the sub-skills' evidence`);
   }
-  assert.equal(prod("E1-03").retention, "passed");
-  assert.ok(kinds("E1-03").includes("delayed-check-passed-without-sub-skill-check:variables-both-sides+brackets"));
+  assert.notEqual(prod("E1-03").retention, "passed");
 });
 
 test("E1-04 one-step success establishes nothing about linear equations (production or projection)", () => {

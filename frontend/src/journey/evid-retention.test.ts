@@ -103,7 +103,7 @@ test("a written answer waiting for a mark: a delayed check that is due is not re
   reloads(s, c);
 });
 
-test("a written answer waiting for a mark does not hold back a due delayed check (selection: proposal evidence-1)", { todo: "intervention.ts moduleStep returns 'waiting' before the delayed check" }, () => {
+test("a written answer waiting for a mark does not hold back a due delayed check (selection: proposal evidence-1, applied)", () => {
   const c = "MATH.reasoning.winning-strategies";
   const s = start("evid-written-wait-2", c);
   drive(s, c, right, [], 30);
