@@ -13120,6 +13120,32 @@
    ]
   },
   {
+   "id": "MATH.geometry.angle-pairs#crossed_pencils",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.angle-pairs",
+   "strategy": "crossed_pencils",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:439ea9e4807de50328eb92b777f7045f0312b37d516c7330ceae90d675760d04",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-04T02:10:01.657Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.geometry.angle-pairs#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.geometry.angle-pairs",
@@ -13135,6 +13161,32 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.349Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.angle-pairs#vertically_opposite",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.angle-pairs",
+   "strategy": "vertically_opposite",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:78d8e8f71847af489e4e7c2e0943d581c7c41951a4b281bbcbbc6f07401854b8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-04T02:10:01.656Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -17925,6 +17977,58 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.460Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.triangle-properties#exterior_angle",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.triangle-properties",
+   "strategy": "exterior_angle",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:44307206d21db272cc5f30e44407ebb345ce679b1c36f2bdee1ce223b408fffd",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-04T02:10:01.652Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.triangle-properties#exterior_via_third",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.triangle-properties",
+   "strategy": "exterior_via_third",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:1a9e886cabbefb795c6a4c4aa85bc7027bdcfe658b4abea7e7443b72eb7cfecd",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-04T02:10:01.653Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
