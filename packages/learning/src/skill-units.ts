@@ -46,6 +46,8 @@ export interface UnitState {
   rechecked: boolean;
   /** the learner's latest answer alone on the unit is wrong */
   latestWrong: boolean;
+  /** status@2 on the unit's own answers alone: wrong now and never shown (fewer than two distinct right), or two of its last three wrong */
+  notShown: boolean;
 }
 export function unitStates(m: Module, records: LearnerRecords, judge: Judge): UnitState[] {
   return skillUnits(m).map((unit) => {
@@ -54,11 +56,16 @@ export function unitStates(m: Module, records: LearnerRecords, judge: Judge): Un
     const mine = records.attempts.filter((a) => judge.independent(a) && unit.accepts(a.questionId));
     const rechecked = !!taughtAt && mine.some((a) => a.at > taughtAt && a.activity !== "guided" && judge.right(a));
     const last = mine.at(-1);
-    return { unit, taughtAt, rechecked, latestWrong: !!last && !judge.right(last) };
+    const latestWrong = !!last && !judge.right(last);
+    const rights = new Set(mine.filter(judge.right).map((a) => a.questionId)).size;
+    const notShown = latestWrong && (rights < 2 || mine.slice(-3).filter((a) => !judge.right(a)).length >= 2);
+    return { unit, taughtAt, rechecked, latestWrong, notShown };
   });
 }
 /** taught and not rechecked right alone since, or wrong again since: the competency is not ready for transfer or verification */
 export const heldByTeaching = (s: UnitState) => !!s.taughtAt && (!s.rechecked || s.latestWrong);
+/** answers on other skills of the competency never establish it while this skill's own answers show it is not there yet */
+export const holdsCompetency = (s: UnitState) => heldByTeaching(s) || s.notShown;
 /** no transfer question while a unit is held, or its latest answer alone is wrong (not yet rechecked) */
 export const blocksTransfer = (s: UnitState) => heldByTeaching(s) || s.latestWrong;
 

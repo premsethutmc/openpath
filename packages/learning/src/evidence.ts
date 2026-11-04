@@ -21,7 +21,7 @@ import { creditOf } from "./grade";
 import { canonical, isCorrect, moduleFor, question, questions, problems, type Question } from "./content";
 import { graph } from "./graph";
 import type { Attempt, LearnerRecords } from "./records";
-import { heldByTeaching, unitStates } from "./skill-units";
+import { heldByTeaching, holdsCompetency, unitStates } from "./skill-units";
 import { releaseOf, setActiveRegistry, type Registry } from "./review";
 
 const EXPANSION_CAPABILITIES = graph.competencies.filter((c) => c.origin === "expansion").map((c) => ({ id: c.id, name: c.name, strand: c.id.split(".")[1] }));
@@ -222,12 +222,15 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   // half-day tolerance (6.5 days) and counts any later fresh answers; this surface never shows green before seven days.
   // skill-units@1: a skill taught here and not rechecked right on your own since (or wrong again) holds the competency below transfer
   const held = units.some(heldByTeaching);
-  const verified = profileStatus === "verified" && retention === "passed" && !held;
+  // phone d1-two-dice: a skill whose own answers alone are wrong and not yet shown keeps the competency below "shown on your own",
+  // whatever the other skills' answers say (the rest of the chapter stays open)
+  const unshown = units.some((u) => holdsCompetency(u) && !heldByTeaching(u));
+  const verified = profileStatus === "verified" && retention === "passed" && !held && !units.some((u) => u.notShown);
   let status: Status = "not_started";
   if (verified) status = "verified";
   // a missed delayed check (ours), or the shared engine's own retention schedule saying a check failed or is overdue
   else if (retention === "failed" || engineRetention === "failed" || engineRetention === "overdue") status = "review";
-  else if (isIndependent) status = transferRight && !held ? "transfer" : "independent";
+  else if (isIndependent && !unshown) status = transferRight && !held ? "transfer" : "independent";
   else if (assisted.some(right) || ind.some(right) || probed.some(right)) status = "guided";
   else if (mine.length || taught) status = "exposure";
   return {

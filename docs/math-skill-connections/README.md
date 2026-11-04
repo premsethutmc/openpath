@@ -785,3 +785,46 @@ without scoped explanations.
 - §13.4 items are unchanged (`acplace` filing, 2,245 unlabelled questions, assisted-after-review status, reload landing, educator
   invite, drawing input, construction evidence, hand-over button, `educator-marking.test.mjs` not in CI). Disputed edge
   `missing-number` < `number-patterns`: still pending educator review.
+
+## 15. General dice teaching, honest dice status, neutral answer feedback (Claude, `integration/dice-general-teaching`, from #109 `eeddd031`)
+
+Product owner's decision (2026-11-04): general dice teaching now, without claiming why a student made a mistake. Draft; nothing merged,
+deployed or educator-approved.
+
+### 15.1 Phone d1-two-dice: two wrong dice answers, then "Shown on your own"
+
+Trace (`evidence.skillEvidence`, status@2): two distinct right answers alone make a competency independent; after that only "two wrong
+of the last three answers alone" undoes it. The learner's two exact-total answers were wrong (4,5,0,2:w → 1/8, 3,4,0,7 → 1/6); the
+counting-stages answers after the "tree" lesson pushed them out of the last three, so the status went back to independent, and to
+transfer (a right transfer answer on counting stages). Nothing scoped the evidence to the dice skill: the dice explanations were not
+connected, so the module had no dice unit.
+Fix: the dice skill is a unit (skill-units@1, now that its scoped teaching is connected), and a unit whose own answers alone show it is
+not there yet (latest wrong, and fewer than two distinct right or two of its last three wrong) holds the competency below
+"independent" (`UnitState.notShown`, `holdsCompetency`). The rest of the chapter stays open (the module keeps asking and teaching).
+Regression: `frontend/src/journey/two-dice-status.test.ts` replays the phone's 16 answers and the lesson: status `transfer` on
+`eeddd031`, `guided` after the fix.
+
+### 15.2 Immediate feedback (answer-feedback@1)
+
+One wrong answer cannot show why it was given. `packages/learning/src/answer-feedback.ts` replaces the modelled explanation in the
+learner's feedback (`year/Learn.tsx`, `curriculum/PreviewExperience.tsx`) with "This answer is one that a common mix-up gives, so check
+each step." plus the mathematics of the explanation (its clauses that state what was done are dropped). The review app (educators)
+still shows the modelled explanation.
+
+| Answer | Before | After |
+|---|---|---|
+| ahext 34,53,0 → 93 | The third interior angle was found instead. The exterior angle sits outside, next to that angle, on the straight line. | This answer is one that a common mix-up gives, so check each step. The exterior angle sits outside, next to that angle, on the straight line. |
+| akdice 4,5,0,2 → 1/8 | The 8 possible totals were taken as equally likely. They are not: list all 20 pairs and count the ones that fit. | This answer is one that a common mix-up gives, so check each step. List all 20 pairs and count the ones that fit. |
+
+### 15.3 The 16 misconception-targeted explanations
+
+All 16 neutralised, none withheld: each opening claim ("Both numbers you can see were added.") is reworded as a common mix-up ("A common
+mix-up is to add both numbers you can see."), titles "…: what went wrong" become "…: a common mix-up", and the worked mathematics is
+unchanged. Sources: `modules.v1.json` (fraction models ×2), `blueprints.v1.json` (identities ×2, median/mode ×2, classical probability),
+`src/scale-blueprints.mts` (scaled bars ×2, missing number ×3, linear intro ×4). Each has a new `pending_review` revision.
+`fix_middle_sign` and `fix_one_middle` made no claim: only their titles changed. Test: `neutral-fixes.test.ts`.
+
+### 15.4 `frontend/node_modules`
+
+A symlink to a local environment directory was committed in `a6fe979b` because `.gitignore` had `node_modules/` (directories only).
+Removed from the index; `.gitignore` now has `node_modules` (directory or link). CI installs with `npm ci` in a fresh checkout.

@@ -61,7 +61,7 @@ const MODULES: ModuleSpec[] = [
       { id: "bars_difference", title: "How many more, read against the scale", kind: "procedural", family: "afbar", subSkill: "scaled-bars.difference@1", text: ["Read both bars against the scale.", "\"How many more\" is the bigger value minus the smaller one."] },
       { id: "bars_total", title: "Two bars together", kind: "procedural", family: "afbar", subSkill: "scaled-bars.total@1", text: ["Read both bars against the scale.", "\"Together\" means add the two values."] },
       { id: "fix_assume_tens_read", title: "Read the scale; do not assume ten", kind: "procedural", family: "afbar", subSkill: "scaled-bars.read@1", addresses: "assume-tens", text: [],
-        misconception: (p) => ["Each line was taken as ten. Read the numbers on the scale: they tell how much each line stands for.", "Do not assume ten: two numbers next to each other on the scale differ by the size of one line."] },
+        misconception: (p) => ["A common mix-up is to take each line as ten. Read the numbers on the scale: they tell how much each line stands for.", "Do not assume ten: two numbers next to each other on the scale differ by the size of one line."] },
     ],
   },
   {
@@ -91,9 +91,9 @@ const retainedTotal = {
   "needs": [],
   "screens": [
     {
-      "title": "Read the scale; do not assume 10: what went wrong",
+      "title": "Read the scale; do not assume 10: a common mix-up",
       "text": [
-        "Each line was taken as 10. Read the numbers on the scale: they tell how much each line stands for.",
+        "A common mix-up is to take each line as 10. Read the numbers on the scale: they tell how much each line stands for.",
         "Do not assume 10: read the numbers on the scale to see what one line stands for."
       ],
       "math": [
@@ -243,11 +243,11 @@ MODULES.push(
       { id: "division_fact", title: "The division fact of a multiplication", kind: "conceptual", family: "acfacts", subSkill: "facts.division-from-multiplication@1", math: factsMath, text: ["Multiplying and dividing undo each other: a product and its two factors are one family.", "A division fact starts with the product and divides it by one factor; the answer is the other factor."] },
       { id: "dividend_divisor_quotient", title: "Dividend = divisor × quotient", kind: "conceptual", family: "acfacts", subSkill: "facts.dividend-is-divisor-times-quotient@1", math: factsMath, text: ["In a division the dividend is the number being divided, the divisor divides it and the quotient is the answer.", "Multiplying undoes dividing, so the dividend equals the divisor times the quotient."] },
       { id: "fix_added_both", title: "Not both numbers added", kind: "procedural", family: "acmissing", subSkill: "missing.box-plus-k@1", addresses: "added-both", distinct: true, math: missingMath, text: [],
-        misconception: () => ["Both numbers you can see were added. Adding them never undoes what was done to the box.", "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."] },
+        misconception: () => ["A common mix-up is to add both numbers you can see. Adding them never undoes what was done to the box.", "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."] },
       { id: "fix_added_both_taken", title: "Not both numbers added", kind: "procedural", family: "acmissing", subSkill: "missing.n-minus-box@1", addresses: "added-both", distinct: true, math: missingMath, text: [],
-        misconception: () => ["Both numbers you can see were added. Adding them never undoes what was done to the box.", "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."] },
+        misconception: () => ["A common mix-up is to add both numbers you can see. Adding them never undoes what was done to the box.", "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."] },
       { id: "fix_took_away_again", title: "Add it back, do not take it away again", kind: "procedural", family: "acmissing", subSkill: "missing.box-minus-k@1", addresses: "took-away-again", distinct: true, math: missingMath, text: [],
-        misconception: () => ["The number was taken away a second time.", "The box is the number before anything was taken away, so add the number back to what is left."] },
+        misconception: () => ["A common mix-up is to take the number away a second time.", "The box is the number before anything was taken away, so add the number back to what is left."] },
     ],
   },
   {
@@ -260,13 +260,13 @@ MODULES.push(
       { id: "a_times_x", title: "x is multiplied by a number", kind: "procedural", family: "ahone", subSkill: "one-step.a-times-x@1", math: oneStepMath, text: ["The number written next to x multiplies it.", "Divide both sides by that number, so x is alone. Check by multiplying."] },
       { id: "x_divided_by_a", title: "x is divided by a number", kind: "procedural", family: "ahone", subSkill: "one-step.x-divided-by-a@1", math: oneStepMath, text: ["x is divided by a number.", "Multiply both sides by that number, so x is alone. Check by dividing."] },
       { id: "fix_same_operation_add", title: "Do the opposite, not the same again", kind: "procedural", family: "ahone", subSkill: "one-step.x-plus-a@1", addresses: "same-operation", distinct: true, math: oneStepMath, text: [],
-        misconception: () => ["The same operation was done again instead of its opposite.", "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."] },
+        misconception: () => ["A common mix-up is to do the same operation again instead of its opposite.", "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."] },
       { id: "fix_same_operation_take", title: "Do the opposite, not the same again", kind: "procedural", family: "ahone", subSkill: "one-step.x-minus-a@1", addresses: "same-operation", distinct: true, math: oneStepMath, text: [],
-        misconception: () => ["The same operation was done again instead of its opposite.", "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."] },
+        misconception: () => ["A common mix-up is to do the same operation again instead of its opposite.", "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."] },
       { id: "fix_subtract_coefficient", title: "Divide by the number next to x", kind: "procedural", family: "ahone", subSkill: "one-step.a-times-x@1", addresses: "subtract-coefficient", distinct: true, math: oneStepMath, text: [],
-        misconception: () => ["The number next to x was taken away.", "That number multiplies x, so undo it by dividing both sides by it."] },
+        misconception: () => ["A common mix-up is to take away the number next to x.", "That number multiplies x, so undo it by dividing both sides by it."] },
       { id: "fix_add_for_multiply", title: "Multiply, do not add", kind: "procedural", family: "ahone", subSkill: "one-step.x-divided-by-a@1", addresses: "add-for-multiply", distinct: true, math: oneStepMath, text: [],
-        misconception: () => ["The number was added instead of multiplied.", "x was divided by the number, so undo it by multiplying both sides by it."] },
+        misconception: () => ["A common mix-up is to add the number instead of multiplying by it.", "x was divided by the number, so undo it by multiplying both sides by it."] },
     ],
   },
   {
@@ -307,7 +307,7 @@ for (const M of MODULES) {
     const check = pick(s.family, "check", (x) => inSkill(s, x), "any");
     const screens = s.misconception
       ? (() => { const b = inst.bugs.find((x) => x.id === s.addresses)!; return [
-          { title: `${s.title}: what went wrong`, text: s.misconception(inst), math: [`Not ${b.predict}, but ${inst.answer}`], role: "misconception", instance: inst.id, ...fig(inst) },
+          { title: `${s.title}: a common mix-up`, text: s.misconception(inst), math: [`Not ${b.predict}, but ${inst.answer}`], role: "misconception", instance: inst.id, ...fig(inst) },
           { title: `${s.title}: solved correctly`, text: ["Each step, then the answer."], math: s.math ? s.math(inst) : worked(inst), role: "strategy", instance: inst.id },
         ]; })()
               : [{ title: s.title, text: s.text, math: s.math ? s.math(inst) : s.regroup ? regrouped(inst) : s.conclude ? concluded(inst) : worked(inst), role: "strategy", instance: inst.id, ...fig(inst) }];

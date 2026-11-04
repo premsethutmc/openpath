@@ -13,7 +13,8 @@ import { HANDWRITING_ENABLED } from "../writing/features";
 import { writtenTask } from "../../../packages/learning/src/written";
 import { moduleFor, needsMarking } from "../../../packages/learning/src/content";
 import { creditOf } from "../../../packages/learning/src/grade";
-import { misconceptionOf, question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
+import { question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
+import { answerFeedback } from "../../../packages/learning/src/answer-feedback";
 import { rightAnswer, type SkillEvidence } from "../../../packages/learning/src/evidence";
 import { graph } from "../../../packages/learning/src/graph";
 import { problemOf } from "../../../packages/learning/src/families";
@@ -157,7 +158,8 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigat
       </div>
     );
   const undecided = fb.assessment ? fb.assessment.credit === null : false;
-  const says = fb.right || undecided ? null : misconceptionOf(q, fb.response)?.says;
+  // answer-feedback@1: one answer cannot show why it was given: what is known about the answer, and the mathematics, never a claim
+  const mixup = fb.right || undecided ? null : answerFeedback(q, fb.response);
   const trusted = fb.decision?.decidedBy === "server" && fb.decision.questionId === fb.qid ? fb.decision as unknown as GradingDecision : null;
   const judged = trusted ? workingFeedback(trusted) : null;
   return (
@@ -166,7 +168,7 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigat
         <strong>{undecided ? "Saved, not marked." : fb.right ? "Right." : "Not this time."}</strong>
         {undecided && <p>{fb.assessment!.feedback.message}</p>}
         {!undecided && fb.assessment?.evidence.firstError && <p>{fb.assessment.feedback.message}</p>}
-        {says && <p>{says}</p>}
+        {mixup && <p data-feedback="answer-feedback@1">{mixup.note}{mixup.principle ? ` ${mixup.principle}` : ""}</p>}
         {fb.assessment?.clarification?.kind === "show-step" && !fb.working?.length && <p className="small muted">{fb.assessment.clarification.prompt}</p>}
         {(!onRetry || fb.right) && <p>{q.solution}</p>}
         {onRetry && !fb.right && <><p>Your answer and working are saved. A wrong answer alone does not tell us why.</p><button className="secondary" onClick={()=>onRetry(false)}>Try again</button> <button className="link" onClick={()=>onRetry(true)}>Give me a hint</button></>}
