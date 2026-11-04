@@ -71,10 +71,10 @@ export function diagnose(m: Module, attempts: readonly Attempt[]): Diagnosis {
 
 export const DIAGNOSIS_TEXT: Record<Hypothesis | "insufficient_evidence", string> = {
   secure: "You seem to know this already. One check on your own, then it is shown.",
-  conceptual: "The idea itself needs building. We start with a picture of what it means.",
-  procedural: "You have the idea; a step in the method slips. We go through the method step by step.",
-  recall: "The method is fine; a fact you need is slow or shaky. We rebuild it from facts you know.",
-  prerequisite: "Something this skill builds on looks shaky. We check that first, then come back.",
+  conceptual: "We start with a picture of what it means.",
+  procedural: "We go through the method step by step.",
+  recall: "We rebuild a fact this uses from facts you know.",
+  prerequisite: "We check a skill this builds on first, then come back.",
   transfer: "You can do it in a familiar form; the new kind of problem needs practice of its own.",
   insufficient_evidence: "Not enough to tell yet. We start gently and see how it goes.",
 };

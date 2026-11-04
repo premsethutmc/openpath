@@ -2896,7 +2896,7 @@ const GAP01: Def[] = [
       const [a, b] = storyNums(0, lvl, seed);
       return [
         bug("subtracted", "conceptual", SUB, "The numbers were subtracted. 'Altogether' and 'more get on' join the two groups, so add.", Math.abs(a - b)),
-        bug("no-regroup", "procedural", ADD, "The ten made in the ones column was not carried to the tens. When a column adds up to 10 or more, write the ones and carry the ten.", lvl >= 1 ? digitwise(a, b, (x, y) => (x + y) % 10) : null),
+        bug("no-regroup", "procedural", "MATH.number.addition-regroup", "The ten made in the ones column was not carried to the tens. When a column adds up to 10 or more, write the ones and carry the ten.", lvl >= 1 ? digitwise(a, b, (x, y) => (x + y) % 10) : null),
       ];
     },
     variants: () => [],

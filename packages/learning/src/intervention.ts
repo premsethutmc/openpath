@@ -831,10 +831,12 @@ export function teachingHistory(m: Module, records: LearnerRecords): StrategyHis
 // a lesson on the skill itself (10 × □ = 30: "The box was multiplied") gets the general line instead
 const diagnosisReason = (d: Diagnosis, s?: Strategy) =>
   d.result === "prerequisite" && s && s.kind !== "prerequisite" ? "Here is a short explanation, then practice."
-  : d.result === "conceptual" ? "Your answers suggest the idea itself needs building, so we start with a picture."
-  : d.result === "procedural" ? "You have the idea; a step in the method slips. Here is the method, one step."
-  : d.result === "recall" ? "The method is fine; a fact you need is shaky. Here is a way to rebuild it from facts you know."
-  : d.result === "prerequisite" ? "Something this builds on looks shaky, so we go there first."
+  // diagnosis-wording@1 (Diagnosis worker): the introduction says what comes next, never a kind of difficulty the answers have not
+  // established; a lesson on the skill itself after a "prerequisite" reading is introduced plainly (Teaching worker's guard, above)
+  : d.result === "conceptual" ? "We start with a picture of the idea, then practice."
+  : d.result === "procedural" ? "Here is the method, one step at a time, then practice."
+  : d.result === "recall" ? "Here is a way to rebuild a fact this uses from facts you know."
+  : d.result === "prerequisite" ? "We check a skill this builds on first, then come back."
   : "Here is a short explanation, then practice.";
 
 // ---------------------------------------------------------------- recovery from an original problem

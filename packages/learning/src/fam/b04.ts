@@ -426,6 +426,8 @@ export const B04: Def[] = [
   {
     id: "adfcmp",
     arity: 5,
+    // freshness@2 (#112): "which is greater" and "which is smaller" of the same two fractions, in either order, are one problem
+    problemKey: ([mode, k, x, y]) => `${mode},${k},${Math.min(x, y)},${Math.max(x, y)}`,
     title: "Comparing two fractions with the same bottom or top number",
     competency: FCMP,
     type: "fraction",

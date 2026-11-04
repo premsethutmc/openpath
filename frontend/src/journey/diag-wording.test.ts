@@ -6,7 +6,7 @@
  *    evidence, reading still "need more". Recovery and the module said "Not sure yet. It could be: 2 was added to 12; undoing ÷ 2
  *    needs × 2." — telling the learner what they did. Now the uncertain reading names no cause and keeps the mathematics.
  * 2. Lesson introduction (proposal diagnosis-2, intervention.ts diagnosisReason): the same learner's lesson opens "You have the idea;
- *    a step in the method slips." straight after recovery said it was not sure why. TODO until the proposal is applied.
+ *    a step in the method slips." straight after recovery said it was not sure why. (diagnosis-2 applied at integration.)
  * 3. Addition (proposal diagnosis-1, family content): two no-regroup answers on two-digit story sums (aastadd) are taught
  *    "Use a ten when it helps" (MATH.number.addition: "no full ten is needed … 5 + 2 = 7"), not carrying.
  *    TODO until the proposal is applied (and, for the module path, a moduleState change: see the report).
@@ -49,7 +49,7 @@ test("equations: an uncertain reading does not tell the learner what they did, a
   assert.ok(said.some((s) => /Not sure yet/.test(s) && /Undoing ÷ 2 needs × 2/.test(s)), said.filter((s) => /Not sure/.test(s)).join(" | "));
 });
 
-test("equations: the lesson introduction does not claim a kind of difficulty the answers have not shown", { todo: "proposal diagnosis-2 (intervention.ts diagnosisReason)" }, () => {
+test("equations: the lesson introduction does not claim a kind of difficulty the answers have not shown", () => {
   const r = LIN();
   for (const s of reasons(r)) assert.doesNotMatch(s, /You have the idea|The method is fine|Your answers suggest the idea itself/, s);
 });
