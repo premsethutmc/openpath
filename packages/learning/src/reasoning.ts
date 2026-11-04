@@ -17,6 +17,7 @@
 import { exposureKey, phasePool, problemOf, show, variantsOf, type Bug, type Problem, type Value } from "./families";
 import { selectable } from "./question-status";
 import { canonicalOf, readable, sameAnswer, SAMPLED, HUMAN } from "./answer-types";
+import { principleOf } from "./answer-feedback";
 
 export const REASONING_POLICY = {
   version: "diagnostic@2.2-draft",
@@ -292,8 +293,16 @@ export const claimWording = (original: string | null | undefined, explanation: s
 /** What to do next, from a diagnosis: the defensible next activity, and why. */
 export function nextFromReasoning(r: Reasoning, problemCompetency: string): { kind: "practise" | "teach" | "support" | "unsure"; competency: string | null; why: string } {
   if (r.status !== "established" || !r.best) {
-    const names = r.competing.filter((e) => e.id !== "unexplained").map((e) => e.says.replace(/\.$/, "").toLowerCase());
-    return { kind: "unsure", competency: null, why: names.length ? `Not sure yet. It could be: ${names.join("; or ")}.` : "Not sure why yet: the answers do not match any explanation OpenPath knows, so it will not guess." };
+    // unsure-wording@1: an uncertain reading names no cause (contrast-wording@1, answer-feedback@1); the mathematics of the
+    // mix-ups still in play is kept as the step to check. Educators still see the competing explanations themselves.
+    const mixups = r.competing.filter((e) => e.id !== "unexplained" && e.kind !== "secure");
+    const slip = r.competing.some((e) => e.kind === "secure");
+    const steps = [...new Set(mixups.map((e) => principleOf(e.says)).filter((x): x is string => !!x))];
+    if (!mixups.length && !slip) return { kind: "unsure", competency: null, why: "Not sure why yet: the answers do not match any explanation OpenPath knows, so it will not guess." };
+    const why = mixups.length
+      ? `Not sure yet why: these answers can come about in more than one way, so OpenPath does not say what caused them.${steps.length ? ` Check this step: ${steps.join(" ")}` : ""}`
+      : "Not sure yet why: it may have been a slip.";
+    return { kind: "unsure", competency: null, why };
   }
   if (r.best.kind === "secure") return { kind: "practise", competency: problemCompetency, why: "You know how to do this; the mistake looks like a slip." };
   const why = claimWording(r.observed[0]?.questionId, r.best.id, r.best.says);

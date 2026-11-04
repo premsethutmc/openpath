@@ -1,7 +1,7 @@
 {
  "schema": "math-relation-audit@1",
  "graph": "prerequisites 1.1.0",
- "version": "1.1.1",
+ "version": "1.1.2",
  "status": "proposal: not educator-reviewed",
  "reviewer": "OpenPath engineering (mathematical review by Claude); needs educator review",
  "scope": "Every mandatory edge of graph 1.1.0 whose target is assigned by a sample curriculum, has a learning module, or is a learning support.",
@@ -12,7 +12,7 @@
   "disputed": "not mathematically needed: not traced in recovery; proposed for removal from the mandatory graph",
   "trivial": "true but uninformative (remote foundations): not traced"
  },
- "note": "The mandatory graph is not changed by this file. It changes only which relations recovery follows; no evidence or competency ID changes. 1.1.0 adds the mandatory edges into the competencies of the synthesised modules (6 edges); the 41 edges of 1.0.0 are unchanged. 1.1.1 adds one edge found in a product walkthrough: Find missing operands < Extend additive number patterns is disputed (a sequence-order artefact); its learning supports are listed in competency-additions 1.1.1.",
+ "note": "The mandatory graph is not changed by this file. It changes only which relations recovery follows; no evidence or competency ID changes. 1.1.0 adds the mandatory edges into the competencies of the synthesised modules (6 edges); the 41 edges of 1.0.0 are unchanged. 1.1.1 adds one edge found in a product walkthrough: Find missing operands < Extend additive number patterns is disputed (a sequence-order artefact); its learning supports are listed in competency-additions 1.1.1. 1.1.2 (diagnosis walkthrough m112) disputes Use elementary triangle properties < Construct simple figures with ruler and compass, and, under expansionEdges, the expansion@1 support angle pairs < Use angles with parallel lines (reversed: parallel-line angles build on angle pairs). expansionEdges classifies relations of competency-expansion.v1.json the same way; the expansion file itself is unchanged.",
  "edges": [
   {
    "target": "MATH.algebra.arithmetic-sequences",
@@ -295,6 +295,20 @@
    "source": "MATH.algebra.number-patterns",
    "classification": "disputed",
    "reason": "Finding a missing operand undoes an addition, subtraction or multiplication; it does not need number patterns: a sequence-order artefact."
+  },
+  {
+   "target": "MATH.geometry.triangle-properties",
+   "source": "MATH.geometry.basic-constructions",
+   "classification": "disputed",
+   "reason": "The angle sum, isosceles base angles and exterior angle are reasoned from angle facts; none needs a ruler-and-compass construction (a sequence-order artefact). A wrong angle answer is not a construction gap."
+  }
+ ],
+ "expansionEdges": [
+  {
+   "target": "MATH.geometry.angle-pairs",
+   "source": "MATH.geometry.parallel-angles",
+   "classification": "disputed",
+   "reason": "Reversed: angles with parallel lines (Grade 7) are found with linear pairs and vertically opposite angles; complementary, supplementary and vertically opposite angles do not need parallel lines. Following it sent an angle-pair slip to parallel-line lessons and the triangle angle sum."
   }
  ]
 }
