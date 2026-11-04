@@ -48,12 +48,17 @@ test("a failed delayed check is kept when the shared engine demonstrates the ski
   assert.ok(e.retentionHistory[0].recoveredAt, brief(trail));
   assert.ok(SHOWN.includes(e.status), `${e.status}\n${brief(trail)}`);
   reloads(s, c);
-  s.wait(8);
-  drive(s, c, right, trail, 10, { answerRetention: true });
+  // the competent learner is never stuck: the delayed checks the engine offers end in "verified" (the shared engine first demonstrates
+  // the skill again at the first check after recovery, so that one can be asked again a week later: verification@3)
+  for (let week = 0; week < 3 && s.state().evidence(c).status !== "verified"; week++) {
+    s.wait(8);
+    drive(s, c, right, trail, 10, { answerRetention: true });
+    reloads(s, c);
+  }
   e = s.state().evidence(c);
-  assert.deepEqual(e.retentionHistory.map((h) => h.result), ["failed", "passed"], brief(trail));
   assert.equal(e.status, "verified", brief(trail));
-  reloads(s, c);
+  assert.equal(e.retentionHistory[0].result, "failed", "the failure is kept");
+  assert.equal(e.retentionHistory.at(-1)!.result, "passed");
 });
 
 for (const c of ["MATH.algebra.missing-number", "MATH.algebra.linear-intro"]) {

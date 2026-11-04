@@ -10,6 +10,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { useReviewFixture } from "../../../packages/learning/src/evidence";
+import { problemOf } from "../../../packages/learning/src/families";
 import { SHOWN, brief, drive, reloads, start, unitKey, type Step } from "./evid-driver";
 
 useReviewFixture({ items: [], releasedAt: "2025-01-01T00:00:00Z", all: true });
@@ -18,11 +19,13 @@ const CASES: [string, string][] = [
   ["MATH.algebra.missing-number", "missing.n-minus-box@1"],
   ["MATH.number.fraction-comparison", "fraction.compare-same-top@1"],
   ["MATH.geometry.triangle-properties", "triangle-properties.exterior-angle@1"],
+  // a sub-skill with no scoped explanation, so no skill unit: isosceles triangles (family ahiso; Diagnosis worker's finding)
+  ["MATH.geometry.triangle-properties", "family:ahiso"],
 ];
 for (const [c, weak] of CASES) {
   test(`${c}: wrong on ${weak}, right on the rest: never shown on your own, no delayed check while not shown; reload agrees`, () => {
     const s = start(`evid-weak-${weak}`, c);
-    const isWeak = (q: string) => unitKey(c, q) === weak;
+    const isWeak = (q: string) => (weak.startsWith("family:") ? problemOf(q.replace(/:(mc|w)$/, ""))?.family === weak.slice(7) : unitKey(c, q) === weak);
     let weakWrongSinceRight = false;
     const all: Step[] = [];
     const onStep = (t: Step) => {

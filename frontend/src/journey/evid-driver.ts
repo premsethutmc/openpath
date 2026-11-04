@@ -16,7 +16,7 @@ export function wrongAnswer(q: string): string {
   throw new Error(`no wrong answer for ${q}`);
 }
 export interface Step { phase: string; q?: string; unit?: string | null; right?: boolean; status: string; strategy?: string; reason?: string; retention?: string }
-export interface Learner { right: (q: string, s: { taught: Set<string>; i: number; phase: string }) => boolean }
+export interface Learner { right: (q: string, s: { taught: Set<string>; i: number; phase: string }) => boolean; hints?: (q: string, phase: string) => number }
 
 export function start(id: string, c: string, at = Date.parse("2026-01-01T00:00:00Z"), pathway = true) {
   const s = new SliceSession(id, c, at);
@@ -33,9 +33,11 @@ export function drive(s: SliceSession, c: string, learner: Learner, trail: Step[
     if (!n.question) { trail.push({ phase: n.phase, status: ev().status, reason: n.reason, retention: ev().retention }); return { trail, stop: n }; }
     if (n.phase === "retention" && !o.answerRetention) { trail.push({ phase: "retention", q: n.question, unit: unitKey(c, n.question), status: ev().status, retention: ev().retention }); return { trail, stop: n }; }
     const q = n.question, m = moduleFor(c)!;
-    const activity = n.phase === "explore" ? "diagnostic" : ["guided", "check", "transfer", "retention"].includes(n.phase) ? n.phase : m.transfer.includes(q) ? "transfer" : "practice";
+    // the activity the app records for the step (year/Learn.tsx activityFor)
+    const activity = n.phase === "explore" ? "diagnostic" : n.phase === "strategy" ? "probe" : ["guided", "check", "transfer", "retention"].includes(n.phase) ? n.phase : m.transfer.includes(q) ? "transfer" : "practice";
     const ok = learner.right(q, { taught, i, phase: n.phase });
-    s.submit(q, ok ? question(q).answer : wrongAnswer(q), activity as never, n.context ? { context: n.context } : {});
+    const hints = learner.hints?.(q, n.phase) ?? 0;
+    s.submit(q, ok ? question(q).answer : wrongAnswer(q), activity as never, { ...(n.context ? { context: n.context } : {}), ...(hints ? { hints } : {}) });
     trail.push({ phase: activity, q, unit: unitKey(c, q), right: ok, status: ev().status, retention: ev().retention, ...(n.strategy ? { strategy: n.strategy.id } : {}) });
     o.onStep?.(trail.at(-1)!);
   }

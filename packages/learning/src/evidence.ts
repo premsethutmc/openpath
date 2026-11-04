@@ -20,6 +20,7 @@ import { unifiedAuthoritative } from "./grading/mode";
 import { creditOf } from "./grade";
 import { canonical, isCorrect, moduleFor, question, questions, problems, type Question } from "./content";
 import { graph } from "./graph";
+import { problemOf } from "./families";
 import type { Attempt, LearnerRecords } from "./records";
 import { heldByTeaching, unitStates } from "./skill-units";
 import { releaseOf, setActiveRegistry, type Registry } from "./review";
@@ -179,7 +180,14 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   const isIndependent = !!independentAt && !!lastInd && (right(lastInd) || recentWrong < 2);
   // the delayed check: seven full days after independent success, and after the shared engine's own first
   // demonstration when it has one, so the check this surface offers is one the engine can verify (verification@3)
-  const from = independentAt && engineShownAt && engineShownAt > independentAt ? engineShownAt : independentAt;
+  // (#112) the same for the check after a recovery (the engine drops its demonstration after a failed check, and demonstrates again
+  // later), except that a delayed check already answered wrong on this surface's own schedule stands: the engine demonstrating the
+  // skill later never makes a failed check disappear from the history
+  const dueFrom = (start: string) => {
+    const own = new Date(Date.parse(start) + RETENTION_DAYS * DAY).toISOString();
+    if (!engineShownAt || engineShownAt <= start || ind.some((a) => a.activity === "retention" && a.at >= own && !right(a))) return own;
+    return new Date(Date.parse(engineShownAt) + RETENTION_DAYS * DAY).toISOString();
+  };
   // the delayed check is the skill's retention questions (up to RETENTION_CHECK of them): any wrong fails it
   const mod = moduleFor(id);
   const need = Math.min(RETENTION_CHECK, mod?.retention.length ?? 1);
@@ -187,12 +195,19 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   // pass on other skills of the competency is not retention evidence for it, and recovery after a failed check on it returns to it
   const units = mod ? unitStates(mod, records, { independent: independentAttempt, right: rightAnswer }) : [];
   const taughtUnits = units.filter((u) => u.taughtAt);
+  // (#112) a generator family of the competency outside every declared skill unit (no scoped explanation, e.g. isosceles triangles in
+  // triangle properties) is still a skill of its own for this rule: while its own answers alone say it is not there yet (latest wrong,
+  // and fewer than two distinct right or two of its last three wrong), answers on the other skills do not show the competency on your own
+  const familyOf = (qid: string) => (!micro && qid.startsWith("gen:") && !units.some((u) => u.unit.accepts(qid)) ? problemOf(qid.replace(/:(mc|w)$/, ""))?.family ?? null : null);
+  const byFamily = new Map<string, Attempt[]>();
+  for (const a of ind) { const f = familyOf(a.questionId); if (f) byFamily.set(f, [...(byFamily.get(f) ?? []), a]); }
+  const familyNotShown = [...byFamily.values()].some((xs) => !right(xs.at(-1)!) && (new Set(xs.filter(right).map((a) => a.questionId)).size < 2 || xs.slice(-3).filter((a) => !right(a)).length >= 2));
   const covers = (answers: Attempt[]) => taughtUnits.every((u) => answers.some((a) => u.unit.accepts(a.questionId) && right(a)));
   // retention@2: a failed delayed check stays failed (kept in the history, never forgiven); once the skill has been
   // shown again on your own after the failure (INDEPENDENT_MIN distinct fresh questions right, alone, outside the
   // delayed check), a NEW delayed check is scheduled RETENTION_DAYS later. With no failure this is retention@1 exactly.
   const history: RetentionCycle[] = [];
-  let cycleDue = from ? new Date(Date.parse(from) + RETENTION_DAYS * DAY).toISOString() : null;
+  let cycleDue = independentAt ? dueFrom(independentAt) : null;
   let retention: SkillEvidence["retention"] = "none";
   while (cycleDue) {
     const dueAt = cycleDue;
@@ -211,8 +226,13 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
     for (const a of ind) if (a.at > firstWrong.at && a.activity !== "retention" && right(a)) { seen.add(a.questionId); onUnit ||= failedUnit!.unit.accepts(a.questionId); if (seen.size >= INDEPENDENT_MIN && onUnit) { recoveredAt = a.at; break; } }
     history.push({ due: dueAt, result: "failed", failedAt: firstWrong.at, recoveredAt });
     retention = "failed";
-    cycleDue = recoveredAt ? new Date(Date.parse(recoveredAt) + RETENTION_DAYS * DAY).toISOString() : null;
+    cycleDue = recoveredAt ? dueFrom(recoveredAt) : null;
   }
+  // (#112) the delayed check opens only while the competency is shown on your own here: a week "after you first showed this" is not
+  // true of a learner whose own answers on one of its skills say it is not there yet (or two of the last three are wrong). The cycle
+  // stays pending in the history and opens as soon as it is shown again.
+  const shownNow = isIndependent && !units.some((u) => u.notShown) && !familyNotShown;
+  if ((retention === "due" || retention === "scheduled") && !shownNow) retention = "none";
   const due = history.at(-1)?.due ?? null;
   const transferRight = ind.some((a) => ["transfer", "original", "challenge"].includes(a.activity) && right(a));
   const assisted = mine.filter((a) => !independentAttempt(a));
@@ -226,12 +246,15 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   // whatever the other skills' answers say (the rest of the chapter stays open)
   // (also after its lesson: teaching alone shows nothing; the dice learner read "independent" right after the explanation, with every
   // exact-total answer wrong, consolidation #112)
-  const unshown = units.some((u) => u.notShown);
-  const verified = profileStatus === "verified" && retention === "passed" && !held && !units.some((u) => u.notShown);
+  const unshown = units.some((u) => u.notShown) || familyNotShown;
+  const verified = profileStatus === "verified" && retention === "passed" && !held && !unshown;
   let status: Status = "not_started";
   if (verified) status = "verified";
   // a missed delayed check (ours), or the shared engine's own retention schedule saying a check failed or is overdue
-  else if (retention === "failed" || engineRetention === "failed" || engineRetention === "overdue") status = "review";
+  // (#112) the engine's "failed" / "overdue" is not a missed check while this surface's own check is due and not yet offered (a written
+  // answer waiting for its mark), or scheduled again after recovery from the failure the engine is reporting; nor for a competency
+  // that is not shown on your own here (it is back in learning)
+  else if (retention === "failed" || ((engineRetention === "failed" || engineRetention === "overdue") && shownNow && retention !== "due" && retention !== "scheduled")) status = "review";
   else if (isIndependent && !unshown) status = transferRight && !held ? "transfer" : "independent";
   else if (assisted.some(right) || ind.some(right) || probed.some(right)) status = "guided";
   else if (mine.length || taught) status = "exposure";
