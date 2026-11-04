@@ -433,7 +433,11 @@ test("journeys G and M: an unseen mistake on a typed problem is investigated; an
     asked++;
   }
   assert.ok(asked >= 1 && asked <= 3, `${asked} follow-up questions`);
-  await page.getByRole("note", { name: "What we think happened" }).getByText(/upper limit/).waitFor();
+  // contrast-wording@1: the family declares no contrast evidence, so two matching answers are a suspicion: the learner is told so
+  // neutrally, never "the width was taken as the upper limit" as what happened
+  const note = page.getByRole("note", { name: "What we think happened" });
+  await note.getByText(/Two of your answers went the same way/).waitFor();
+  assert.doesNotMatch(await note.innerText(), /upper limit/);
   await shot(page, "g2-established-teach-phone");
   // the lesson for that misunderstanding, practice, then back to the problem
   for (let i = 0; i < 25; i++) {
