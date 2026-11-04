@@ -132,49 +132,57 @@ for (const [target, id] of [["totals-equally-likely", "akdice_fix_totals"], ["or
   } finally { restore(); }
 });
 
-test("GAP (pinned): the delayed check does not sample the taught dice skill, and its recovery does not return to it", () => {
+test("same-skill retention: the delayed check samples the taught dice skill on a fresh problem, and a wrong delayed answer returns to it", () => {
   const { restore } = installForTest(phasePool);
   try {
     const at = Date.parse("2026-01-01T00:00:00Z"), s = new SliceSession("two-dice-delayed", C, at), T = "totals-equally-likely";
     s.events.push(make.pathway({ learnerId: s.learnerId, sessionId: s.session, at: new Date(at - 1000).toISOString() }, C));
     s.submit("gen:akdice:4,5,0,7", probeReading("gen:akdice:4,5,0,7", T).predicted[0], "check");
     let n = s.next(C); s.submit(n.question!, probeReading(n.question!.replace(/:(mc|w)$/, ""), T).predicted[0], "diagnostic", { context: n.context });
-    n = s.next(C); s.taught(n);
-    for (let i = 0; i < 40; i++) { n = s.next(C); if (!n.question) break; s.submit(n.question, question(n.question).answer, (["guided", "check", "practice", "transfer"].includes(n.phase) ? n.phase : "practice") as never); }
+    n = s.next(C); assert.equal(n.strategy?.id, "akdice_fix_totals"); s.taught(n);
+    const presented = [...n.strategy!.screens.flatMap((sc) => (sc.instance ? [sc.instance] : []))];
+    for (let i = 0; i < 40; i++) { n = s.next(C); if (!n.question) break; presented.push(n.question); s.submit(n.question, question(n.question).answer, (["guided", "check", "practice", "transfer"].includes(n.phase) ? n.phase : "practice") as never); }
     assert.equal(s.state().evidence(C).retention, "scheduled");
     s.wait(8); n = s.next(C);
     assert.equal(n.phase, "retention");
     const p = problem(n.question!);
-    assert.ok(!(p.family === "akdice" && p.params[2] === 0), `delayed check ${n.question} would sample the taught skill: update this gap`);
-    const dice = moduleFor(C)!.retention.filter((q) => problem(q).family === "akdice");
-    assert.ok(dice.every((q) => problem(q).params[2] !== 0), "the module's only dice delayed item asks 'k or more', outside the taught scope");
-    s.submit(n.question!, "1/2", "retention");
+    assert.ok(p.family === "akdice" && p.params[2] === 0, `delayed check ${n.question} is on the taught skill (the total is exactly k)`);
+    assert.ok(!presented.some((x) => problemKey(x) === problemKey(n.question!)), `${n.question} is not a relabelled problem already met: ${presented.join(" ")}`);
+    // a delayed pass on other questions alone is not retention evidence for the taught skill
+    const wrongReply = n.question!.endsWith(":mc") ? ["A", "B", "C", "D"].find((x) => x !== String(question(n.question!).answer))! : "1/2";
+    assert.equal(s.submit(n.question!, wrongReply, "retention").credit, false);
     const rc = s.recover(n.question!);
-    assert.ok(!(rc.question && problem(rc.question)?.family === "akdice"), "recovery does not return to the dice skill");
+    assert.equal(rc.phase, "teach"); assert.equal(rc.active, C, "recovery returns to the dice skill, not to what it builds on");
+    n = s.next(C, { inRecovery: true });
+    assert.ok(n.question, n.reason);
+    const q = problem(n.question!);
+    assert.ok(q.family === "akdice" && q.params[2] === 0, `recovery question ${n.question} is on the taught skill`);
+    assert.equal(s.state().evidence(C).retention, "failed");
   } finally { restore(); }
 });
 
-test("GAP (pinned, shared engine): when the explanation's own check was already met, the recheck leaves the scope or repeats a relabelled problem", () => {
-  // reproducer: docs/two-dice-probability/README.md "Recheck selection". The learner met 6,6,0,3 (the order explanation's check) earlier.
+test("same-skill + freshness@2: when the explanation's own check was already met, the recheck is a fresh problem inside the scope", () => {
+  // was the pinned gap (docs/two-dice-probability/README.md "Recheck selection"): the learner met 6,6,0,3 (the order explanation's check) earlier
   const { restore } = installForTest(phasePool);
   try {
-    const T = "order-ignored", at = Date.parse("2026-01-01T00:00:00Z"), s = new SliceSession("two-dice-recheck-gap", C, at);
+    const T = "order-ignored", at = Date.parse("2026-01-01T00:00:00Z"), s = new SliceSession("two-dice-recheck", C, at);
     s.events.push(make.pathway({ learnerId: s.learnerId, sessionId: s.session, at: new Date(at - 1000).toISOString() }, C));
     s.submit("gen:akdice:6,6,0,3", question("gen:akdice:6,6,0,3").answer, "practice");
     s.submit("gen:akdice:5,5,0,4", probeReading("gen:akdice:5,5,0,4", T).predicted[0], "check");
     let n = s.next(C);
     s.submit("gen:akdice:6,6,1,7", probeReading("gen:akdice:6,6,1,7", T).predicted[0], "diagnostic", { context: n.context });
     n = s.next(C); assert.equal(n.strategy?.id, "akdice_fix_order"); s.taught(n);
-    n = s.next(C); assert.equal(n.question, "gen:akdice:5,5,0,9:mc"); s.submit(n.question!, question(n.question!).answer, "guided");
-    // learnerState().module offers 5,5,0,3: the guided problem relabelled (the same pairs counted), so not a fresh check
-    const viaState = s.state().module(C);
-    assert.equal(viaState.question, "gen:akdice:5,5,0,3"); assert.equal(problemKey(viaState.question!), problemKey("gen:akdice:5,5,0,9:mc"));
-    // the app's call (moduleState with the learner's evidence) offers a counting-stages question: outside the declared dice scope, so it
-    // cannot resolve the misconception, and the relabelled problem follows
+    const presented = ["gen:akdice:6,6,0,3", "gen:akdice:5,5,0,4", "gen:akdice:6,6,1,7", ...n.strategy!.screens.flatMap((sc) => (sc.instance ? [sc.instance] : []))];
+    n = s.next(C); assert.equal(n.question, "gen:akdice:5,5,0,9:mc"); presented.push(n.question!); s.submit(n.question!, question(n.question!).answer, "guided");
+    for (const ms of [s.state().module(C), s.next(C)]) {
+      assert.equal(ms.phase, "check");
+      const q = ms.question!, p = problem(q);
+      assert.ok(p.family === "akdice" && p.params[2] === 0, `${q} is inside the declared scope`);
+      assert.ok(!presented.some((x) => problemKey(x) === problemKey(q)), `${q} is not a relabelled problem already met`);
+      assert.ok(probeReading(q.replace(/:(mc|w)$/, ""), T).discriminates, "the target error is still possible on it");
+    }
     n = s.next(C);
-    assert.equal(n.phase, "check"); assert.equal(problem(n.question!).family, "akss");
     s.submit(n.question!, question(n.question!).answer, "check");
-    assert.equal(hypotheses(s.state().selectionRecords).find((h) => h.claim?.explanation === T)?.status, "established");
-    assert.equal(s.next(C).question, "gen:akdice:5,5,0,3");
+    assert.equal(hypotheses(s.state().selectionRecords).find((h) => h.claim?.explanation === T)?.status, "resolved");
   } finally { restore(); }
 });

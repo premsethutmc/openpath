@@ -6,8 +6,8 @@
  * Text from the TP-GEO-01 / TP-GEO-02 review candidates (feat/math-teaching-content@4e655e73); pending educator review.
  * Synthetic learners only; the engine chooses what to ask and what to teach.
  *
- * Tests marked `todo` state a requirement the shared engine does not meet yet (they run and report, and do not fail the
- * suite); each names its reproducer. They are left for the integration owner of intervention.ts / the evidence engine.
+ * The six blocker reproducers of #107 (transfer gate ×2, competency status ×2, post-teaching recheck scope, vertically-opposite
+ * retention) were `todo` there; the integration (skill-units@1, same-skill@1, freshness@2, contrast-wording@1) makes them pass.
  */
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -15,7 +15,10 @@ import { readFileSync } from "node:fs";
 import { moduleFor, question } from "../../../packages/learning/src/content";
 import { exposureKey, FAMILIES, pool, problemOf } from "../../../packages/learning/src/families";
 import { isMisconceptionSpecific } from "../../../packages/learning/src/explanation-review";
-import { reviewStrategy, teachable } from "../../../packages/learning/src/intervention";
+import { reviewStrategy, teachable, unitCheck } from "../../../packages/learning/src/intervention";
+import { NEUTRAL_CLAIM } from "../../../packages/learning/src/reasoning";
+import { hypotheses } from "../../../packages/learning/src/hypotheses";
+import { teacherEvidence } from "../../../packages/learning/src/teacher-evidence";
 import { connectedSkill, connectionConfig, strategyConnects } from "../../../packages/learning/src/skill-connections";
 import { misconception, learners } from "./learners";
 import { runScenario, type Run } from "./scenarios";
@@ -129,13 +132,13 @@ test("triangle-properties.exterior-angle@1: a later delayed (retention) question
   assert.ok(ret.some((q) => skillOf(TRI, q) === SKILLS[0].skill), `retention asked: ${ret}`);
 });
 
-test("angle-pairs.opposite@2: a later delayed (retention) question on the same skill is selected", { todo: "GAP: module retention is [gen:afpair:0,34, gen:afcross:89,1:mc]; 89,1 is angle-pairs.adjacent@2. The retention partition holds opposite items (e.g. gen:afcross:42,0) but neither the template synthesis (library.ts subSkills: first afcross retention item) nor the retention selector is skill-scoped" }, () => {
+test("angle-pairs.opposite@2: a later delayed (retention) question on the same skill is selected (from the existing retention partition)", () => {
   const r = flow(SKILLS[1], 1);
   const ret = r.actions.filter((a) => a.activity === "retention").map((a) => a.q);
   assert.ok(ret.some((q) => skillOf(PAIRS, q) === SKILLS[1].skill), `retention asked: ${ret}`);
 });
 
-for (const S of SKILLS) test(`${S.skill}: the first question on the learner's own after teaching is a fresh question on the taught skill`, S.family === "afcross" ? { todo: "BLOCKED (shared engine, intervention.ts): the strategy's own check (gen:afcross:158,0:mc) was already served before teaching as an untaught strategy's check; the fallback fromPool(m, \"check\") is not skill-scoped and serves gen:afcross:149,2 (angle-pairs.other-three@2)" } : {}, () => {
+for (const S of SKILLS) test(`${S.skill}: the first question on the learner's own after teaching is a fresh question on the taught skill`, () => {
   const { before, next } = afterTeaching(flow(S, 1));
   assert.ok(next, "a question follows the teaching");
   assert.equal(skillOf(S.competency, next!.q), S.skill, next!.q);
@@ -148,8 +151,7 @@ for (const S of SKILLS) test(`${S.skill}: the first question on the learner's ow
  * practice → transfer → checks, owned by the integration worker; and the competency evidence status, which reads competency-level
  * answers, not the mapped skills). Reproducer: `runScenario` with START_EXT / START_CROSS and learners.misconception([...], n).
  */
-const TRANSFER_TODO = "BLOCKED (shared engine): moduleState serves transfer questions after a wrong, unrechecked answer on a mapped skill of the competency";
-for (const S of SKILLS) test(`${S.skill}: no transfer question while the skill's latest independent answer is wrong and not rechecked`, { todo: TRANSFER_TODO }, () => {
+for (const S of SKILLS) test(`${S.skill}: no transfer question while the skill's latest independent answer is wrong and not rechecked`, () => {
   // from the first wrong answer on the skill until the first right answer on it on the learner's own AFTER teaching
   const t = timeline(flow(S, 1));
   const wrongAt = t.findIndex((s) => s.kind === "attempt" && !s.right && skillOf(S.competency, s.q) === S.skill);
@@ -159,8 +161,7 @@ for (const S of SKILLS) test(`${S.skill}: no transfer question while the skill's
   const served = t.slice(wrongAt + 1, okAt).flatMap((s) => (s.kind === "attempt" && s.activity === "transfer" ? [s.q] : []));
   assert.deepEqual(served, [], "transfer questions served while the skill was weak");
 });
-const STATUS_TODO = "BLOCKED (shared engine): the competency evidence status reaches transfer from other skills' answers while this skill is paused (PR #95 P2; sub-skill-gated mastery PR #93 is shadow only)";
-for (const S of SKILLS) test(`${S.skill}: a learner who never learns the skill does not reach transfer`, { todo: STATUS_TODO }, () => {
+for (const S of SKILLS) test(`${S.skill}: a learner who never learns the skill does not reach transfer`, () => {
   // PR #95 G-03 / G-06: the learner makes the first modelled error wherever it applies and never learns
   const r = flow(S, Infinity, [S.bugs[0]]);
   assert.equal(r.f.ended?.phase, "pause", "the skill pauses after its explanations were tried");
@@ -173,4 +174,87 @@ test("the shown pictures are the existing renderer's data (exterior angle with v
   assert.deepEqual(ext.widget, FAMILIES.get("ahext")!.teach!.visual!(problemOf(ext.instance!)!.params));
   const opp = moduleFor(PAIRS)!.strategies.find((s) => s.id === "vertically_opposite")!.screens[0];
   assert.deepEqual(opp.widget, { type: "angle", deg: 128, cross: true, labels: ["128°", "", "?", ""] });
+});
+
+/** the run's saved records up to (not including) its first delayed-check answer, as a fresh session at that moment */
+function beforeRetention(S: (typeof SKILLS)[number]) {
+  const r = flow(S, 1);
+  const evs = r.f.session.events;
+  const i = evs.findIndex((e) => (e as { record?: string; activity?: string }).record === "attempt" && (e as { activity?: string }).activity === "retention");
+  assert.ok(i > 0, "the run reached a delayed check");
+  const at = Date.parse((evs[i] as { at: string }).at);
+  const L = SliceSession.fromEvents(r.f.session.learnerId, S.competency, evs.slice(0, i), at, (evs[i] as { sessionId: string }).sessionId);
+  return L;
+}
+const wrongFor = (S: (typeof SKILLS)[number], id: string) => misconception(id, new Set(S.bugs)) ?? (id.endsWith(":mc") ? ["A", "B", "C", "D"].find((x) => x !== String(question(id).answer))! : "1");
+
+for (const S of SKILLS) test(`${S.skill}: a delayed pass on the competency's other skills is not retention evidence for the taught skill`, () => {
+  const L = beforeRetention(S);
+  const m = moduleFor(S.competency)!;
+  assert.equal(L.state().evidence(S.competency).retention, "due");
+  const n = L.next(S.competency);
+  assert.equal(n.phase, "retention"); assert.equal(skillOf(S.competency, n.question!), S.skill, `the delayed check starts with the taught skill: ${n.question}`);
+  // answer only other skills' delayed questions, all right
+  const others = [...m.retention, ...pool(S.family).items.map((p) => p.id), ...m.pools!.flatMap((x) => pool(x.family).items.map((p) => p.id))]
+    .filter((id) => skillOf(S.competency, id) !== S.skill && question(id).competency === S.competency).slice(0, 3);
+  for (const id of others) L.submit(id, question(id).answer, "retention");
+  const ev = L.state().evidence(S.competency);
+  assert.notEqual(ev.retention, "passed", `other skills alone: ${others.join(" ")}`);
+  assert.ok(!["verified"].includes(ev.status));
+  // the taught skill's own delayed question, right: now it can pass
+  const own = L.next(S.competency);
+  assert.equal(own.phase, "retention"); assert.equal(skillOf(S.competency, own.question!), S.skill);
+  L.submit(own.question!, question(own.question!).answer, "retention");
+  assert.equal(L.state().evidence(S.competency).retention, "passed");
+});
+
+for (const S of SKILLS) test(`${S.skill}: a wrong delayed answer on the taught skill recovers on that skill (a fresh question on it alone)`, () => {
+  const L = beforeRetention(S);
+  const n = L.next(S.competency);
+  assert.equal(skillOf(S.competency, n.question!), S.skill);
+  assert.equal(L.submit(n.question!, wrongFor(S, n.question!), "retention").credit, false);
+  const rc = L.recover(n.question!);
+  assert.equal(rc.phase, "teach"); assert.equal(rc.active, S.competency, rc.reason);
+  const seen = new Set(L.state().records.attempts.map((a) => exposureKey(a.questionId)));
+  const v = L.next(S.competency, { inRecovery: true });
+  assert.ok(v.question, v.reason);
+  assert.equal(skillOf(S.competency, v.question!), S.skill, `recovery question ${v.question}`);
+  assert.ok(!seen.has(exposureKey(v.question!)), "fresh");
+  L.submit(v.question!, question(v.question!).answer, v.activity === "check" ? "check" : "practice");
+  const v2 = L.next(S.competency);
+  L.submit(v2.question!, question(v2.question!).answer, v2.activity === "check" ? "check" : v2.activity === "retention" ? "retention" : "practice");
+  // the failed delayed check stays failed; recovered on the taught skill alone, a new delayed check is planned
+  assert.deepEqual(L.state().evidence(S.competency).retentionHistory.map((c) => c.result), ["failed", "pending"]);
+});
+
+test("contrast-wording@1: two matching answers without contrast evidence are not told to the learner as what happened", () => {
+  for (const S of SKILLS) {
+    const original = base(S.start);
+    const L = new SliceSession(`geo2-words-${S.family}`, S.competency, at);
+    L.submit(original, misconception(original, new Set(S.bugs))!, "practice");
+    let r = L.recover(original);
+    L.submit(r.question!, misconception(r.question!, new Set(S.bugs)) ?? question(r.question!).answer, "diagnostic", { context: `investigate:${original}` });
+    r = L.recover(original);
+    assert.equal(r.phase, "teach");
+    assert.equal(r.reason, NEUTRAL_CLAIM, r.reason);
+    const lesson = L.next(S.competency, { inRecovery: true });
+    assert.ok(lesson.reason.startsWith(NEUTRAL_CLAIM), lesson.reason);
+    assert.ok(!isMisconceptionSpecific(lesson.strategy!), "general teaching");
+    const says = pool(S.family).items.flatMap((p) => p.bugs.map((b) => b.says));
+    assert.ok(!says.some((x) => lesson.reason.includes(x) || r.reason.includes(x)), "no modelled error is stated as fact");
+    // the educator view still names it, as a possibility
+    assert.ok(hypotheses(L.state().selectionRecords).some((x) => x.status === "established"));
+    const te = teacherEvidence(S.competency, L.state().records, L.state().evidence(S.competency));
+    assert.ok(te.statements.some((x) => x.kind === "hypothesis" && /^Possible misunderstanding \(not a confirmed fact\)/.test(x.text)), JSON.stringify(te.statements.filter((x) => x.kind === "hypothesis")));
+  }
+});
+
+test("same-skill@1: with no fresh question left on the taught skill there is no check, and the skill is not taken as shown", () => {
+  const m = moduleFor(PAIRS)!, st = m.strategies.find((s) => s.id === "vertically_opposite")!;
+  const only = st.check;
+  const unit = { key: "only", strategies: [st], accepts: (id: string) => exposureKey(id) === exposureKey(only) };
+  const L = new SliceSession("geo2-none", PAIRS, at);
+  assert.equal(unitCheck(m, unit, L.state().records, st), only);
+  L.submit(only, question(only).answer, "check");
+  assert.equal(unitCheck(m, unit, L.state().records, st), null);
 });

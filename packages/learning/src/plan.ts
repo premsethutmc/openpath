@@ -6,6 +6,7 @@
  * from a goal overlay (only once the year's skills it rests on are shown). Nothing outside the current curriculum.
  */
 import { hypotheses } from "./hypotheses";
+import { claimWording } from "./reasoning";
 import { assigned, type CurriculumRelease } from "./curriculum";
 import { moduleFor } from "./content";
 import type { SkillEvidence } from "./evidence";
@@ -79,7 +80,7 @@ function nextActivityOf(release: CurriculumRelease, ev: (id: string) => SkillEvi
   // learner-hypothesis@1: an established misunderstanding not yet taught survives into the plan, whatever the skill's
   // broader status says (a skill can read as shown while a narrower misunderstanding in it is still supported)
   const untaught = hypotheses(records).find((h) => h.status === "established" && !h.teaching.deliveredAt && ids.includes(h.scope.observedIn) && !paused.has(h.scope.observedIn));
-  if (untaught) return { kind: "continue", competency: untaught.scope.observedIn, chapter: rows.find((r) => r.competency === untaught.scope.observedIn)?.chapter.title, reason: `${untaught.claim!.says} A short explanation is waiting.` };
+  if (untaught) return { kind: "continue", competency: untaught.scope.observedIn, chapter: rows.find((r) => r.competency === untaught.scope.observedIn)?.chapter.title, reason: `${claimWording(untaught.scope.question, untaught.claim!.explanation, untaught.claim!.says)} A short explanation is waiting.` };
   const inProgress = ids.find((id) => ["exposure", "guided"].includes(ev(id).status) && !paused.has(id) && !held(id));
   if (inProgress) return { kind: "continue", competency: inProgress, chapter: rows.find((r) => r.competency === inProgress)?.chapter.title, reason: "Carry on where you left off." };
   const fresh = rows.find((r) => ev(r.competency).status === "not_started" && !held(r.competency));

@@ -18,7 +18,7 @@ import { contentHash, explanationRegistry, setExplanationRegistry, addressedMisc
 import { candidateStrategies, COMPETENCY, diceProblemKey, type CandidateStrategy } from "../../../content/learning/src/two-dice-candidate.mts";
 
 export { COMPETENCY };
-const shownOf = (s: Pick<Strategy, "screens" | "guided">) => [s.guided, ...s.screens.flatMap((sc) => (sc.instance ? [sc.instance] : []))];
+const shownOf = (s: { guided: string; screens: readonly { instance?: string }[] }) => [s.guided, ...s.screens.flatMap((sc) => (sc.instance ? [sc.instance] : []))];
 
 /** `phasePool` is supplied by the caller (a test or script), so this fixture is not a question selector of its own */
 export type PhasePool = (fam: string, phase: Phase) => string[];

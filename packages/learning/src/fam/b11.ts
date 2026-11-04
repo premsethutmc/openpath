@@ -802,6 +802,8 @@ export const B11: Def[] = [
   {
     id: "akdice",
     arity: 4,
+    // freshness@2 (TP-PRO-01): renumbering every face x → size + 1 − x turns a total k into m + n + 2 − k with exactly the same pairs
+    problemKey: ([m, n, q, s]) => (q === 0 ? `${m},${n},${Math.min(s, m + n + 2 - s)}` : `${m},${n},q${q},${s}`),
     title: "Probability from the sample space of two dice or spinners",
     competency: SS,
     type: "fraction",

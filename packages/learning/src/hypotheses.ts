@@ -1,4 +1,5 @@
 import { taughtExposureKeys } from "./teaching-exposure";
+import { presentedProblems } from "./skill-units";
 import { connectionConfig, connectedSkill, strategyConnects } from "./skill-connections";
 /**
  * learner-hypothesis@1: what the engine has come to believe about WHY a learner answered as they did, kept as a
@@ -21,7 +22,7 @@ import { moduleFor, question, type Strategy } from "./content";
 import { addressedMisconception, isMisconceptionSpecific } from "./explanation-review";
 import { teachingScopeFor } from "./teaching-presentation";
 import { independentAttempt, rightAnswer } from "./evidence";
-import { exposureKey, gradeOfQuestion, parseProblem, problemOf, type Phase } from "./families";
+import { exposureKey, gradeOfQuestion, parseProblem, problemKeyOf, problemOf, type Phase } from "./families";
 import { formCertified } from "./grading/certify";
 import { modulePhasePool } from "./library";
 import { selectable } from "./question-status";
@@ -286,6 +287,8 @@ export function discriminatingProbe(h: LearnerHypothesis, records: LearnerRecord
   if (!m) return null;
   const seen = new Set([...records.attempts, ...(records.pathway?.active && records.readinessRoute?.includes(h.scope.observedIn) ? [...records.unresolved, ...records.pending] : [])].map((x) => exposureKey(x.questionId)));
   if (records.pathway?.active) for (const key of taughtExposureKeys(records)) seen.add(key);
+  // freshness@2: never the same problem (relabelled, or in another format) as one shown in teaching or already answered
+  const presented = presentedProblems(records, moduleFor);
   const g = records.enrolments.at(-1)?.grade ?? null;
   const listed = [...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check), ...m.retention];
   const pooled = m.pool ? PROBE_PHASES.flatMap((ph) => modulePhasePool(m, ph)) : [];
@@ -293,7 +296,7 @@ export function discriminatingProbe(h: LearnerHypothesis, records: LearnerRecord
     && relevantTeaching(t, h.scope.question, h.claim!.explanation, h.scope.observedIn, h.scope.about, records)).at(-1);
   for (const q of [...listed, ...pooled]) {
     if (delivered && !deliveredScopeAccepts(delivered.competency, delivered.strategy, q)) continue;
-    if (!accepts(q) || seen.has(exposureKey(q)) || !selectable(q) || !problemOf(q)) continue;
+    if (!accepts(q) || seen.has(exposureKey(q)) || presented.has(problemKeyOf(q)) || !selectable(q) || !problemOf(q)) continue;
     if (q.startsWith("gen:") && !formCertified(q)) continue;
     const qg = gradeOfQuestion(q);
     if (g !== null && qg !== null && qg > g && !(records.pathway?.active && records.readinessRoute?.includes(question(q).competency))) continue;

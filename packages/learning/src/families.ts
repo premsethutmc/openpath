@@ -1592,6 +1592,14 @@ export const exposureKey = (qid: string) => {
   const fam = base.split(":")[1];
   return (FAMILIES.has(fam) && pool(fam).same.get(base)) || base;
 };
+/** freshness@2: the problem a question asks, whatever its label or answer format (a family's own problemKey, else its exposure). */
+export const problemKeyOf = (qid: string) => {
+  const key = exposureKey(qid);
+  if (!qid.startsWith("gen:")) return key;
+  const p = problemOf(qid.replace(/:(mc|w)$/, ""));
+  const k = p && FAMILIES.get(p.family)?.problemKey;
+  return k ? `problem:${p!.family}:${k(p!.params)}` : key;
+};
 /** Whether a generated question is in its family's release pool. */
 export function inPool(qid: string): boolean {
   const m = qid.match(/^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/);

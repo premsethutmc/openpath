@@ -742,3 +742,46 @@ Evidence: branch `walkthrough/pr106-8ff31cf7`, `docs/walkthrough/8ff31cf7/` (app
 - **Calendar fallback**: already removed by `9be50269` with question-supports@1; reused, no change. All 892 Grade 1–2 missing-number questions (acmissing 364, acplace 276, acfacts 252) lead to addition, subtraction, multiplication-tables or the skill's own lesson; Grades 3–5 sampled the same. Patterns never gate, so chapters stay open.
 - **Fraction rubric**: the stored `wr:frc:half-whole` rubric is task-specific and kept. The earlier "mismatch" was the e2e's generic typed answer, not the content; withdrawn. The e2e now checks that the displayed task, `/written/queue/` (exact response, stored rubric) and the educator screen agree, and marks a relevant answer (4/4, "Marked correct") and an incomplete one (1/4, "Partly correct · 1/4" with feedback); the learner sees the mark and carries on.
 - Content stays pending educator review; nothing merged or deployed.
+
+## 14. Geometry (#107) and two dice (#108) on the finished #106 candidate (Claude, `integration/geometry-dice-107-108`)
+
+Base: #106 `eb297e95` (all 11 checks green; `c43b0ee7` → `09be1483` docs → `eb297e95` test type fix). #107 `a626b914` and
+#108 `3fea9327` merged; their generated files regenerated once after combining. Draft. Nothing merged, deployed or educator-approved.
+
+### 14.1 Lesson builder: one reconciliation
+
+Both PRs needed `library.ts synthesise` to accept a template extension scoped to a pool family of the module. #107 changed it
+(any pool family of the same competency; guided and check from the scoped family's partitions); #108 proposed a 2-line
+`library-scope.patch` doing the same without the competency check. #107's version is kept as is and the patch is not applied:
+it is a superset, the template is unchanged, and `docs/two-dice-probability/reproducer.mts` now synthesises.
+
+### 14.2 Shared engine (skill-units@1, same-skill@1, freshness@2, contrast-wording@1)
+
+`packages/learning/src/skill-units.ts`: the skills a module teaches with scoped explanations (a mapped sub-skill, or a family with
+parameter constraints such as two dice "total is exactly k") are units of evidence inside the competency. No-op for modules
+without scoped explanations.
+
+| Rule | Where | Effect |
+|---|---|---|
+| Recheck after scoped teaching is inside the taught scope, fresh by problem (not relabelled, not another format) and, where possible, one the suspected error would still show on | `intervention.unitCheck` (reassess and the shown branch), `hypotheses.discriminatingProbe` | afcross no longer falls back to `fromPool(m, "check")` (other-three); two dice never offer `5,5,0,3` (= guided `5,5,0,9` relabelled) or an `akss` question |
+| No fresh question left on the taught skill | same | pause with an honest next step; other chapters stay open; not counted as shown |
+| No transfer question while a taught skill is not rechecked right alone, or a skill's latest answer alone is wrong | `moduleStep` | the PR #95 transfer finding |
+| Competency status capped at independent (never transfer / verified) while a taught skill is held | `evidence.skillEvidence` | the never-learns learner does not reach transfer |
+| A delayed check after a skill was taught includes a fresh question of that skill; a pass on other skills alone is not "passed" | `evidence` + `moduleStep` | exterior angle (`ahext` retention), vertically opposite (`gen:afcross:42,0` class, from the existing retention partition) |
+| A wrong delayed answer on a taught skill recovers on that skill (fresh question alone); recovery after a failed check needs a right answer on it | `recovery`, `moduleStep`, `evidence` | no detour to what it builds on |
+| Two matching answers without contrast evidence are not told to the learner as what happened | `reasoning.claimWording` (recovery, module, plan, foundation reasons) | neutral wording; general teaching; educators still see "Possible misunderstanding (not a confirmed fact)" |
+| freshness@2 problem key | `Def.problemKey`, `families.problemKeyOf`; `akdice` declares it (mirror total) | other families: the exposure key, unchanged |
+
+### 14.3 Not done (blocked) and open decisions
+
+- **Two-dice explanations not connected.** Both are misconception fixes whose first screen states the error as fact; `akdice` declares
+  no contrast evidence. Serving them would contradict contrast-wording@1. Needs: contrast evidence declared for
+  `totals-equally-likely` / `order-ignored`, or general dice teaching (educator/content decision). The engine path is tested on the
+  fixture (`two-dice.test.ts`).
+- **Existing misconception fixes without contrast evidence (16 in served modules, all pending review; none declares contrasts)** still follow two matching answers as before
+  (e.g. `fix_added_both`, `fix_shaded_to_unshaded`, `fix_colours_equally_likely`); only the reason line is now neutral, their own
+  "what went wrong" screens are unchanged. Withholding them until contrasts are declared is a product decision (not changed here:
+  it would change existing lessons).
+- §13.4 items are unchanged (`acplace` filing, 2,245 unlabelled questions, assisted-after-review status, reload landing, educator
+  invite, drawing input, construction evidence, hand-over button, `educator-marking.test.mjs` not in CI). Disputed edge
+  `missing-number` < `number-patterns`: still pending educator review.

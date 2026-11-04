@@ -44,7 +44,7 @@ test("failed journey needing remediation (G-03): the exterior-angle lesson is no
   assert.deepEqual(t.teaching.map((x) => x.strategy), ["exterior_angle", "exterior_via_third"], "this skill's explanations, both tried");
   assert.ok(!["independent", "transfer", "verified"].includes(t.authoritative[TRI].status), `before the delayed check the competency is not claimed: ${t.authoritative[TRI].status}`);
   assert.notEqual(sub(t, TRI, "triangle-properties.exterior-angle@1").status, "independently-demonstrated");
-  // after a delayed check that other skills' answers pass, the competency still reaches transfer: see geometry-two-skills.test.ts (todo, shared engine)
+  // a delayed check that only other skills pass is not retention evidence for it: geometry-two-skills.test.ts (skill-units@1)
 });
 
 test("straight-line (supplementary) success does not establish exterior-angle proficiency", () => {

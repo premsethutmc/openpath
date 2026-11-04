@@ -287,6 +287,9 @@ export type Def = {
   /** form@1: the task is to expand or simplify, so the answer must be written without brackets or multiplication signs
    * (x² − 15x + 56, not (x − 8)(x − 7)): an answer equal in value but not expanded is not accepted. */
   expanded?: boolean;
+  /** freshness@2: the underlying problem, when two parameter choices ask the same problem relabelled (e.g. the mirror total of two dice
+   *  counts exactly the same pairs). A recheck is never the same problem as anything already shown or answered. Default: the exposure. */
+  problemKey?: (p: number[]) => string;
   /** Teaching hints for template strategies: the idea, and the method; alternatives are further ways of explaining
    * (template@2); `visual` draws a worked example's parameters for younger learners. */
   teach?: {

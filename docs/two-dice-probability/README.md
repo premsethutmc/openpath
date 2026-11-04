@@ -106,3 +106,19 @@ These are shared files, so they were not edited or regenerated here:
 | Composition | Append-only; refuses a duplicate, a reserved exposure, a reused check, an out-of-partition check, and a relabelled check (`5,5,0,3`) |
 | Real path × 2 | `totals-equally-likely`, `order-ignored` |
 | Gaps pinned × 2 | Delayed check and recovery; out-of-scope or relabelled recheck |
+
+## Integration on the #106 candidate (branch `integration/geometry-dice-107-108`)
+
+- **Library builder**: `library-scope.patch` is not applied. #107's change to `synthesise` (the scope may name any pool family of the
+  module, of the same competency; guided and check come from the scoped family) already covers it; `reproducer.mts` now synthesises.
+- **Gaps 2 and 3 are fixed in the shared engine** (skill-units@1, freshness@2): the recheck after a scoped explanation is a fresh
+  question inside the declared scope, never the same problem relabelled (`akdice` declares `problemKey`: the mirror total is the
+  same problem) and, for a fix, one where its misconception would still show; a delayed check after the dice skill was taught
+  includes a fresh "total is exactly k" question, and a wrong one recovers on the dice skill. The two "GAP (pinned)" tests are now
+  positive tests.
+- **Not connected (blocked): the blueprint is not registered and the library does not serve these explanations.** Both are
+  misconception fixes whose first screen states the error as what happened ("what went wrong: not 1/11, but 1/6"). `akdice`
+  declares no contrast evidence (`bug.evidence.correctContrasts`) for `totals-equally-likely` or `order-ignored`, so two matching
+  answers are a suspicion, not a fact (contrast-wording@1). Serving them needs an educator/content decision: declare contrast
+  evidence for these errors, or write general (not misconception-specific) dice teaching. The fixture (`installForTest`) still
+  demonstrates the engine path; nothing here is approved.

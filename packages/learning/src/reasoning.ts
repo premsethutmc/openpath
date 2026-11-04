@@ -269,6 +269,19 @@ export function probeReading(qid: string, explanation: string, response?: string
   return { discriminates, predicted: preds.map(v => answerText(pr, v)), correct: answerText(pr, right), reading };
 }
 
+/**
+ * contrast-wording@1: two matching answers are a suspicion, not a fact. A claim is worded as what happened only when its family
+ * declares contrast evidence (bug.evidence.correctContrasts, met before it is established); otherwise the learner is told neutrally
+ * that two answers went the same way, and is taught the method in general. Educators still see the suspected claim, labelled as such.
+ */
+export function contrastBacked(original: string, explanation: string): boolean {
+  const root = problemOf(original.replace(/:(mc|w)$/, ""));
+  const evidence = root ? evidenceFor(root, explanation) : undefined;
+  return !!root && evidence !== undefined && validEvidence(root, evidence);
+}
+export const NEUTRAL_CLAIM = "Two of your answers went the same way. That can happen for more than one reason, so OpenPath does not say what caused it: here is the method, step by step.";
+export const claimWording = (original: string | null | undefined, explanation: string, says: string) => (original && contrastBacked(original, explanation) ? says : NEUTRAL_CLAIM);
+
 /** What to do next, from a diagnosis: the defensible next activity, and why. */
 export function nextFromReasoning(r: Reasoning, problemCompetency: string): { kind: "practise" | "teach" | "support" | "unsure"; competency: string | null; why: string } {
   if (r.status !== "established" || !r.best) {
@@ -276,6 +289,7 @@ export function nextFromReasoning(r: Reasoning, problemCompetency: string): { ki
     return { kind: "unsure", competency: null, why: names.length ? `Not sure yet. It could be: ${names.join("; or ")}.` : "Not sure why yet: the answers do not match any explanation OpenPath knows, so it will not guess." };
   }
   if (r.best.kind === "secure") return { kind: "practise", competency: problemCompetency, why: "You know how to do this; the mistake looks like a slip." };
-  if (r.best.competency && r.best.competency !== problemCompetency) return { kind: "support", competency: r.best.competency, why: r.best.says };
-  return { kind: "teach", competency: r.best.competency ?? problemCompetency, why: r.best.says };
+  const why = claimWording(r.observed[0]?.questionId, r.best.id, r.best.says);
+  if (r.best.competency && r.best.competency !== problemCompetency) return { kind: "support", competency: r.best.competency, why };
+  return { kind: "teach", competency: r.best.competency ?? problemCompetency, why };
 }

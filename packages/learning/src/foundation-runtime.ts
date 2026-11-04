@@ -1,4 +1,5 @@
 /** Adapter for explicitly opted-in persisted sessions; no new statistical model. */
+import { claimWording } from "./reasoning";
 import { foundationPlan, withFoundation, FOUNDATION_POLICY } from "./foundation";
 import { connectionConfig, connectionStrategies, strategyConnects, connectedSkill } from "./skill-connections";
 import { pathwayRoute } from "./plan";
@@ -49,7 +50,7 @@ export function pathwayModule(competency: string, learner: string, events: reado
         && (!config || (!!gapSkill && strategyConnects(config, gapSkill, s)))
         && teachable(m, s, [gap.claim!.explanation])
         && !records.teaching.some((t) => t.competency === competency && t.strategy === s.id && t.at > (gap.provenance.established ?? "")));
-      if (strategy && m) return { ...pending, phase: "chapter" as const, strategy, teachingReview: teachingStatus(m, strategy), contentReview: contentReviewOf(m, strategy, [gap.claim.explanation]), reason: `${gap.claim.says} Review this kind of problem, then answer a fresh question that checks this misunderstanding.` };
+      if (strategy && m) return { ...pending, phase: "chapter" as const, strategy, teachingReview: teachingStatus(m, strategy), contentReview: contentReviewOf(m, strategy, [gap.claim.explanation]), reason: `${claimWording(gap.scope.question, gap.claim.explanation, gap.claim.says)} Review this kind of problem, then answer a fresh question that checks this misunderstanding.` };
       return { ...pending, phase: "unavailable" as const, reason: "This diagnosed gap still needs attention, but no eligible explanation for it is available here. This is a content limitation, not a learner failure. Review a supported lesson or choose another goal; the gap remains open." };
     }
     const probe = discriminatingProbe(gap, records, (id) => !config || (!!gapSkill && connectedSkill(config, id) === gapSkill));
