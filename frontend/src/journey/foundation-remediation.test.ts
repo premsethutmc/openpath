@@ -28,10 +28,13 @@ function established(c:typeof cases[number]){
 for(const c of cases){
  test(`${c.journey}: broad historic transfer cannot satisfy a weak geometry family`,()=>{
   const s=runScenario(GEOMETRY_JOURNEYS.find(j=>j.id===c.journey)!.scenario).f.session;
-  assert.equal(s.state().evidence(c.config.competency).status,'transfer');
   const plan=foundationPlan({version:FOUNDATION_POLICY,config:c.config,requirements:c.config.core.map(skill=>({skill,method:false}))},s.learnerId,events(s),s.now,{trustedOnly:true});
-  assert.notEqual(plan.status,'shown');assert.ok(plan.question);
-  assert.equal(problemOf(plan.question)?.family,c.family);
+  // feat/geometry-two-skills: both misconceptions are now taught with their own skill's lesson. G-03 never learns: the family
+  // stays weak and the plan asks for it. G-06 learns after the lesson: its crossing-lines answers now satisfy the plan.
+  const taught=s.events.filter(e=>(e as {record?:string}).record==='teach').map(e=>(e as unknown as {strategy:string}).strategy);
+  assert.ok(taught.some(id=>moduleFor(c.config.competency)!.strategies.find(st=>st.id===id)?.scope?.family===c.family),JSON.stringify(taught));
+  if(c.journey==='G-03'){assert.notEqual(plan.status,'shown');assert.ok(plan.question);assert.equal(problemOf(plan.question)?.family,c.family);}
+  else assert.equal(plan.status,'shown');
  });
  test(`${c.journey}: an unrelated generic lesson cannot settle an established geometry misconception`,()=>{
   const {s,m}=established(c);
@@ -43,9 +46,10 @@ for(const c of cases){
   for (const withinRecovery of [false,true]) {
   const ms=pathwayModule(c.config.competency,s.learnerId,es,records,state.evidence,s.now,s.session,withinRecovery);
   assert.equal(ms.requirementsMet,false);
-  assert.ok(['unavailable','pause'].includes(ms.phase),JSON.stringify(ms));
-  assert.equal(ms.question,null);
-  assert.match(ms.reason,/explanation|teaching|misunderstanding|misconception/i);
+  // the related lesson for this family (feat/geometry-two-skills) is offered instead; the unrelated one settled nothing
+  if(ms.phase==='chapter') assert.equal(ms.strategy?.scope?.family,c.family,JSON.stringify(ms));
+  else { assert.ok(['unavailable','pause'].includes(ms.phase),JSON.stringify(ms)); assert.equal(ms.question,null); }
+  assert.match(ms.reason,/explanation|teaching|misunderstanding|misconception|instead|angle/i);
   }
  });
  test(`${c.journey}: only an explicitly selected readiness route unlocks above-grade resolution probes`,()=>{
