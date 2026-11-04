@@ -24,7 +24,7 @@ import { exposureKey, gradeOfQuestion, parseProblem, phaseOf as phaseOfQ, phaseP
 import { graph, walkSupports } from "./graph";
 import { quarantined } from "./question-status";
 import { modulePhasePool } from "./library";
-import { discriminatingProbe, familyOf, hypothesesFor, investigateContext, investigation, investigationTrigger, openHypothesis } from "./hypotheses";
+import { discriminatingProbe, familyOf, hypothesesFor, investigateContext, investigation, investigationTrigger, openHypothesis, teachingMatchesMisconception } from "./hypotheses";
 import { nextFromReasoning, reason, type Reasoning } from "./reasoning";
 import { teachingEligibility, type TeachingEligibility } from "./teaching-contract";
 import { contentEligibility, isMisconceptionSpecific, teachingMode, type ContentEligibility } from "./explanation-review";
@@ -423,6 +423,8 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   // resolution-probe@1: once taught (and not shown again since), an open hypothesis seen in this skill is resolved only
   // by a question that discriminates it; when none is left, it stays open and the module carries on as usual
   const here = !!own && own.scope.observedIn === competency;
+  // claim-teaching@1: the open claim is named in a lesson's introduction only when that lesson addresses it
+  const claimTaughtBy = (s: Strategy) => !!own?.claim && teachingMatchesMisconception(s, own.scope.question, own.claim.explanation, competency, own.scope.about);
   const resProbe = here && own!.probeDue ? discriminatingProbe(own!, records) : null;
   const hold = !!own && (own.teachingDue || !!resProbe);
   const shown = (ev.status === "independent" || ev.status === "transfer" || ev.status === "verified") && !hold;
@@ -436,7 +438,10 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const inv = pendingInvestigation(m, records, session);
   if (inv) return { ...base, phase: "explore", question: inv.question, diagnosis: d, context: investigateContext(inv.original), why: inv.why, reason: "One more question to understand your last answer." };
   // the misunderstanding showed again after this skill's teaching: a different explanation (all tried: a person)
-  if (here && own!.teachingDue && records.teaching.some((t) => t.competency === competency && t.at > (own!.provenance.established ?? ""))) {
+  // claim-teaching@1: "showed again after teaching" means after teaching that ADDRESSED this misunderstanding (the
+  // hypothesis's own relevant-teaching record), not after any lesson in the skill: a lesson for another form of the skill
+  // (e.g. "The box was multiplied" while the open claim is added-both on n − □) leaves the claim untaught, not exhausted
+  if (here && own!.teachingDue && own!.teaching.lastAt) {
     const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id);
     const s = orderStrategies(m, d, records, [own!.claim!.explanation]).find((x) => !delivered(x));
     if (!s) return { ...base, phase: "pause", diagnosis: d, reason: "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." };
@@ -548,7 +553,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     if (s && delivered(s)) s = order.find((x) => !delivered(x)) ?? null;
     if (!s) return { ...base, phase: "pause", diagnosis: d, decision, reason: order.length ? "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." : NO_EXPLANATION() };
     const before = records.teaching.some((t) => t.competency === competency);
-    return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? `${established.says} Here is a way to rebuild it.` : open ? `${own!.claim!.says} Here is a way to rebuild it.` : diagnosisReason(d) };
+    return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? `${established.says} Here is a way to rebuild it.` : open && claimTaughtBy(s) ? `${own!.claim!.says} Here is a way to rebuild it.` : diagnosisReason(d) };
   }
   if (decision.action === "guided_practice" && st && keyboardOffered(st.guided)) return { ...base, phase: "guided", question: st.guided, strategy: st, diagnosis: d, decision, reason: "Practise it once, with a hint if you want one. This counts as practice with help." };
   if (decision.action === "reassess" && st) {

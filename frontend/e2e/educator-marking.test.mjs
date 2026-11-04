@@ -24,7 +24,12 @@ const shots = process.env.SHOTS ?? fileURLToPath(new URL("../../docs/educator-ma
 mkdirSync(shots, { recursive: true });
 const root = fileURLToPath(new URL("../../", import.meta.url));
 const PASSWORD = "synthetic-family-passphrase-marking";
+// a GENERIC answer for the algebra and geometry mechanics runs (the educator marks it in full: this checks the hand-off, not the rubric)
 const ANSWER = "Each step with its reason: the parts are matched in order, and the rule named is the one the given facts satisfy.";
+// the fraction task wr:frc:half-whole is marked against its own rubric: a relevant complete answer and an incomplete one
+const FRACTION_TASK = "wr:frc:half-whole";
+const RELEVANT = "(a) Anu ate more. Both bars are cut into 8 equal parts, so 5 parts are more than 3 parts. (b) Half of 8 is 4, so 3/8 is less than one-half. Half of 7 is 3 and a half, so 4/7 is more than one-half. So 4/7 is greater. (c) 7/8 is missing 1/8 and 5/6 is missing 1/6. 1/8 is the smaller piece, so 7/8 is closer to a whole bar.";
+const INCOMPLETE = "(a) Anu ate more, because both bars have 8 equal parts and 5 parts are more than 3 parts. (b) 4/7 is bigger.";
 const drawn = (qid) => writtenTask(qid)?.answer === "drawing";
 
 let browser, educator;
@@ -103,8 +108,8 @@ async function toWritten(page, max = 60) {
   }
   throw new Error("no written task within the step limit");
 }
-async function handIn(page, qid, tag) {
-  await page.locator(".qcard textarea").first().fill(ANSWER);
+async function handIn(page, qid, tag, text = ANSWER) {
+  await page.locator(".qcard textarea").first().fill(text);
   await page.screenshot({ path: `${shots}/${tag}-1-learner-written.png`, fullPage: true });
   await page.locator(".qcard").getByRole("button", { name: "Check" }).click();
   await page.getByRole("status").filter({ hasText: /Sent to be marked\./ }).waitFor({ timeout: 15_000 });
@@ -131,7 +136,8 @@ async function share(L, tag) {
   return new URL(await link.getAttribute("href"), base).href;
 }
 /** The educator (desktop) follows the app's link, signs in, finds the answer in the queue and marks it in full. */
-async function mark(link, qid, tag) {
+/** how the educator marks: full points on every criterion (default), or chosen points per rubric criterion id */
+async function mark(link, qid, tag, { text = ANSWER, points = null, feedback = "Clear reasons for each step. Well done.", verdict = "correct" } = {}) {
   const ctx = await browser.newContext({ viewport: { width: 1366, height: 900 } });
   const page = await ctx.newPage();
   try {
@@ -144,12 +150,25 @@ async function mark(link, qid, tag) {
     const card = page.locator("article.qcard").filter({ hasText: writtenTask(qid).prompt.slice(0, 40) }).filter({ has: page.getByRole("button", { name: /Give the mark/ }) }).first();
     await card.waitFor();
     assert.match(await card.innerText(), /learner [0-9a-f]{4}/i, "a pseudonym");
-    assert.match(await card.innerText(), new RegExp(ANSWER.slice(0, 30)));
+    assert.ok((await card.innerText()).includes(text.slice(0, 30)), "the learner's own answer is on the educator's screen");
+    // the API behind the screen returns the stored, task-specific rubric for this task and the learner's exact text
+    const queue = await call(page, "/written/queue/");
+    const row = (queue.data?.queue ?? queue.data?.rows ?? queue.data ?? []).find?.((r) => r.questionId === qid && !r.mark);
+    assert.ok(row, "the answer is in the marking queue API");
+    assert.equal(row.response, text);
+    assert.deepEqual(row.task.rubric, writtenTask(qid).rubric);
+    for (const c of writtenTask(qid).rubric) assert.ok((await card.innerText()).includes(c.criterion), `criterion on screen: ${c.id}`);
     await page.screenshot({ path: `${shots}/${tag}-3-educator-queue.png`, fullPage: false });
-    for (const sel of await card.locator("select").all()) await sel.selectOption({ index: (await sel.locator("option").count()) - 1 });
-    await card.getByLabel("Feedback").fill("Clear reasons for each step. Well done.");
-    await card.getByRole("button", { name: /Give the mark: (\d+)\/\1 \(correct\)/ }).click();
-    await page.locator("article.qcard").filter({ hasText: writtenTask(qid).prompt.slice(0, 40) }).getByText(/Marked correct/).first().waitFor();
+    const rubric = writtenTask(qid).rubric;
+    for (const c of rubric) {
+      const sel = card.getByLabel(`Points for ${c.criterion}`);
+      await sel.selectOption({ index: points ? points[c.id] ?? 0 : c.points });
+    }
+    await card.getByLabel("Feedback").fill(feedback);
+    const total = rubric.reduce((n, c) => n + c.points, 0), score = points ? rubric.reduce((n, c) => n + (points[c.id] ?? 0), 0) : total;
+    const word = verdict === "correct" ? "correct" : verdict === "partial" ? "partly correct" : "not yet correct";
+    await card.getByRole("button", { name: `Give the mark: ${score}/${total} (${word})` }).click();
+    await page.locator("article.qcard").filter({ hasText: writtenTask(qid).prompt.slice(0, 40) }).getByText(verdict === "correct" ? /Marked correct/ : /Marked/).first().waitFor();
     await page.screenshot({ path: `${shots}/${tag}-4-educator-marked.png`, fullPage: false });
     // a mark is not content approval: the review roles and states are what they were
     const reg = await call(page, "/content-review/");
@@ -158,11 +177,11 @@ async function mark(link, qid, tag) {
   } finally { await ctx.close(); }
 }
 /** The learner reloads: the mark and feedback are shown, and the skill carries on (not "With an educator"). */
-async function after_(L, skill, tag) {
+async function after_(L, skill, tag, { label = /Marked correct · \d+\/\d+/, feedback = "Clear reasons for each step" } = {}) {
   await L.page.goto(`${base}/year/?learner=${L.learner}`);
   const ww = L.page.getByRole("region", { name: "Written work" });
-  await ww.getByText(/Marked correct · \d+\/\d+/).waitFor();
-  assert.match(await ww.innerText(), /Clear reasons for each step/);
+  await ww.getByText(label).waitFor();
+  assert.ok((await ww.innerText()).includes(feedback), "the educator's feedback is shown to the learner");
   assert.match(await ww.getByRole("status").first().innerText(), /Nothing is waiting for an educator/);
   await ww.scrollIntoViewIfNeeded();
   await L.page.screenshot({ path: `${shots}/${tag}-5-learner-mark.png`, fullPage: false });
@@ -182,7 +201,8 @@ for (const [tag, skill, grade] of [["fractions", "MATH.number.fraction-compariso
       await openSkill(L, skill);
       const qid = await toWritten(L.page);
       assert.ok(qid, "a written task is reached");
-      await handIn(L.page, qid, tag);
+      if (tag === "fractions") assert.equal(qid, FRACTION_TASK);
+      await handIn(L.page, qid, tag, tag === "fractions" ? RELEVANT : ANSWER);
       if (tag === "fractions") {
         // the module's drawn task (wr:more-sharers) is not offered: the topic ends and says why, and the year is open
         const note = L.page.locator('[data-keyboard-offer]');
@@ -193,8 +213,8 @@ for (const [tag, skill, grade] of [["fractions", "MATH.number.fraction-compariso
       }
       const link = await share(L, tag);
       assert.equal(new URL(link).pathname + new URL(link).hash, "/review/#marking");
-      await mark(link, qid, tag);
-      await after_(L, skill, tag);
+      await mark(link, qid, tag, tag === "fractions" ? { text: RELEVANT, feedback: "All three parts explained with the eighths, the half benchmark and the missing pieces." } : {});
+      await after_(L, skill, tag, tag === "fractions" ? { feedback: "All three parts explained with the eighths, the half benchmark and the missing pieces." } : {});
     } finally { await L.context.close(); }
   });
 }
@@ -214,5 +234,19 @@ test("geometry constructions: drawn tasks are never offered; the topic ends with
     assert.ok(await fits(L.page));
     await L.page.screenshot({ path: `${shots}/constructions-keyboard-note.png`, fullPage: true });
     assert.deepEqual(L.errors, []);
+  } finally { await L.context.close(); }
+});
+
+test("fractions, incomplete answer: the educator gives part marks against the task's rubric; the learner sees them and continues", { timeout: 600_000 }, async () => {
+  const L = await learnerPhone(5);
+  try {
+    await openSkill(L, "MATH.number.fraction-comparison");
+    const qid = await toWritten(L.page);
+    assert.equal(qid, FRACTION_TASK);
+    await handIn(L.page, qid, "fractions-incomplete", INCOMPLETE);
+    const link = await share(L, "fractions-incomplete");
+    const feedback = "(a) is right and well explained. In (b) say how each fraction compares with one-half, and answer (c).";
+    await mark(link, qid, "fractions-incomplete", { text: INCOMPLETE, points: { like: 1, half: 0, whole: 0 }, feedback, verdict: "partial" });
+    await after_(L, "MATH.number.fraction-comparison", "fractions-incomplete", { label: /Partly correct · 1\/4/, feedback });
   } finally { await L.context.close(); }
 });
