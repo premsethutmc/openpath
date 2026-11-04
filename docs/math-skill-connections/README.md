@@ -610,11 +610,32 @@ The readiness pathway (`foundation-runtime.ts`) already checked scope; the ordin
 - **Fractions (9 skills):** 7 skill-connected explanations. 2 skills are taught by the hand-written lessons, which use authored questions and so are not skill-connected. 0 gaps.
 - All explanations remain pending educator review.
 
-## 12. Learner routing, educator hand-off and phone walkthrough (Claude, `integration/fractions-learner-handoff`, from #105 `4919cc15`)
+## 12. Product walkthrough findings (Claude, on `feat/math-fractions`, #105)
+
+A phone-sized walkthrough of the shipped build (provisional content, "Demonstration" labels) against the real Django API,
+through the ordinary learner screens; the script and its workflow live on `walkthrough/*` branches only, never in #105.
+Outcomes are reported as **completed**, **awaiting educator** (written work not yet marked) or **blocked**; a finished
+recording is not a completed journey.
+
+- **Missing operand → calendar-pattern detour (fixed).** "Find missing operands" (`MATH.algebra.missing-number`) had one
+  mandatory edge in graph 1.1.0, from "Extend additive number patterns": a sequence-order artefact that the relation audit
+  had not reviewed. Recovery followed it, so a learner whose mistake the app did not recognise was sent to a calendar
+  pattern question. The frozen inventory and the mandatory graph are unchanged; `graph-audit.v1.json` 1.1.1 classifies the
+  edge `disputed` (not traced in recovery) and `competency-additions.v1.json` 1.1.1 adds supports (never gates) from
+  addition and subtraction within 20 and multiplication facts, the operations the skill's questions undo. Lessons stay open
+  whatever their prerequisites. Regression: `frontend/src/journey/missing-number-support.test.ts` (graph view, the
+  unrecognised-mistake learner, the recognised-mistake learner).
+- **One-step equations** are reached through Grade 6 → Mathematics – Standard Six (Tamil Nadu) → Introduction to Algebra →
+  2.4 Solving unknowns. The Grade 7 sample's "Simple equations" maps only multi-step `linear-equations`.
+- **Same-top comparison** is taught by `compare_same_top` when a learner is right on same-bottom pairs and wrong on same-top.
+- **Written work** uses the existing screens: learner submits; parent shares from the dashboard's "Written work" panel;
+  educator marks at `/review/` → Marking; learner sees the mark. Granting the educator role is an administrator command
+  (`manage.py content_reviewer grant … --role educator`); there is no screen for it.
+## 13. Learner routing, educator hand-off and phone walkthrough (Claude, `integration/fractions-learner-handoff`, from #105 `4919cc15`)
 
 Three parallel workstreams with one coordinator. Nothing is merged, deployed or educator-approved. Every explanation and the disputed graph edge below remain **pending educator review**.
 
-### 12.1 Learner routing: why 10 × □ = 30 led to "Patterns on a calendar"
+### 13.1 Learner routing: why 10 × □ = 30 led to "Patterns on a calendar"
 
 **Trace.**
 - The question is `gen:acmissing:3,3,10` in `MATH.algebra.missing-number`, sub-skill `missing.k-times-box@1`. Its solution steps use `MATH.number.multiplication-tables`.
@@ -638,7 +659,7 @@ Three parallel workstreams with one coordinator. Nothing is merged, deployed or 
 2. After a reload, the dashboard says "Carry on" and resumes the module.
 3. Other chapters still open.
 
-### 12.2 Educator hand-off for written answers
+### 13.2 Educator hand-off for written answers
 
 **Already on this candidate (verified, not rebuilt):**
 - written tasks (`HUMAN={'written'}`, 376 tasks);
@@ -666,11 +687,11 @@ Text answers already worked end to end. The stops were:
 
 A mark writes no content decision; this is tested in Django and e2e.
 
-### 12.3 Phone walkthrough (baseline `4919cc15`, 390×844, normal app selection)
+### 13.3 Phone walkthrough (baseline `4919cc15`, 390×844, normal app selection)
 
 | Journey | Result | Notes |
 |---|---|---|
-| A: one-step equation / missing number | Completed, with caveats | The review lesson used the wrong operation (fixed in 12.1). Digit-card puzzles (`acplace`) appear in this skill's practice. The delayed check opens after 8 days. Nothing reaches Verified on a non-test build. |
+| A: one-step equation / missing number | Completed, with caveats | The review lesson used the wrong operation (fixed in 13.1). Digit-card puzzles (`acplace`) appear in this skill's practice. The delayed check opens after 8 days. Nothing reaches Verified on a non-test build. |
 | B: same-top fraction comparison | Completed, with caveats | Diagnosis and lesson were correct. Same-top cannot be chosen as a skill and is never rechecked. |
 | Either journey | No educator stop | — |
 
@@ -684,7 +705,7 @@ A mark writes no content decision; this is tested in Django and e2e.
 
 The phone layout itself is fine.
 
-### 12.4 Still open (owner decisions; none changed here)
+### 13.4 Still open (owner decisions; none changed here)
 
 | Item | Effect | Suggested |
 |---|---|---|
@@ -700,7 +721,7 @@ The phone layout itself is fine.
 | `educator-marking.test.mjs` | Not in CI | Add it next to `learning-year.test.mjs` |
 | Fractions written task `wr:` (same-denominator comparison, chocolate bars) shows a proof-style marker rubric ("the parts are matched in order…") | The educator gets guidance that does not fit the task | Author a task-specific rubric |
 
-### 12.5 Combined validation (integrated `c978dda4` + docs)
+### 13.5 Combined validation (integrated `c978dda4` + docs)
 
 | Check | Result |
 |---|---|
