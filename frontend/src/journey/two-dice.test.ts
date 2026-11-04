@@ -1,8 +1,8 @@
 /**
  * Two-dice probability (TP-PRO-01 candidate, pending educator review): outcomes agree with stored answers, the recheck is fresh
  * (freshness@2: not the same or a relabelled problem), and the real learner path (wrong answer → investigation → explanation →
- * fresh same-skill check → saved replay) works through the real grader, session and engine. The candidate is installed only
- * inside these tests (see two-dice.ts and docs/two-dice-probability): the library builder does not yet accept it.
+ * fresh same-skill check → saved replay) works through the real grader, session and engine. The candidate strategies are
+ * registered in blueprints.v1.json and synthesised into the library; installForTest adds explanation-registry records.
  */
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -62,11 +62,14 @@ test("freshness@2: the problem key treats the mirror total and the :mc / :w form
   assert.equal(problemKey("gen:akdice:4,5,0,5:mc"), problemKey("gen:akdice:4,5,0,5"));
   assert.notEqual(problemKey("gen:akdice:4,5,0,5"), problemKey("gen:akdice:4,5,0,7"));
   for (const st of candidateStrategies()) for (const id of [st.guided, ...st.screens.map((s) => s.instance)]) assert.notEqual(problemKey(st.check), problemKey(id), `${st.id}: ${st.check} vs ${id}`);
-  assert.equal(candidateStrategies()[0].check, "gen:akdice:4,5,0,5", "the corrected recheck of 4e655e73");
+  assert.equal(candidateStrategies()[0].check, "gen:akdice:5,5,0,3", "totals recheck (5,5,0,3; 4,5,0,5 is reserved by the template)");
 });
 
 test("composition is append-only and refuses a reused, relabelled or out-of-partition recheck", () => {
-  const base = moduleFor(C)!, m = composeTwoDice(phasePool, base);
+  const loaded = moduleFor(C)!;
+  // strip dice strategies from the loaded module to test composition rules from a clean base
+  const base = { ...loaded, strategies: loaded.strategies.filter((s) => !s.id.startsWith("akdice_")) };
+  const m = composeTwoDice(phasePool, base);
   assert.deepEqual({ ...m, strategies: m.strategies.slice(0, base.strategies.length) }, base);
   assert.deepEqual(m.strategies.slice(base.strategies.length).map((s) => s.id), ["akdice_fix_totals", "akdice_fix_order"]);
   const mod = (f: (s: ReturnType<typeof candidateStrategies>) => void) => { const s = candidateStrategies(); f(s); return s; };
@@ -74,13 +77,12 @@ test("composition is append-only and refuses a reused, relabelled or out-of-part
   assert.throws(() => composeTwoDice(phasePool, base, mod((s) => { s[0].screens[0].instance = base.retention.find((q) => q.includes("akdice"))!; })), /reserved exposure/);
   assert.throws(() => composeTwoDice(phasePool, base, mod((s) => { s[1].check = s[0].check; })), /unavailable, reused/);
   assert.throws(() => composeTwoDice(phasePool, base, mod((s) => { s[0].check = "gen:akdice:6,6,0,6"; })), /outside partition/);
-  // a check-partition item that is the shown example relabelled (mirror total) is refused even though its exposure key is new
-  // (gen:akdice:5,5,0,3 is in the check partition and is the order explanation's guided 5,5,0,9:mc relabelled: 5 + 5 + 2 − 9 = 3)
+  // gen:akdice:5,5,0,3 is now the totals strategy's check, so reusing it for the order strategy hits reserved-exposure first;
+  // freshness@2 (mirror-total equivalence) is verified for every candidate strategy on line 64 above
   assert.equal(problemKey("gen:akdice:5,5,0,3"), problemKey("gen:akdice:5,5,0,9:mc"));
   assert.ok(phasePool("akdice", "check").includes("gen:akdice:5,5,0,3"));
-  assert.throws(() => composeTwoDice(phasePool, base, mod((s) => { s[1].check = "gen:akdice:5,5,0,3"; })), /freshness@2/);
-  const loaded = moduleFor(C)!;
-  assert.ok(!loaded.strategies.some((s) => s.id.startsWith("akdice_")), "not connected in the loaded library: needs the library.ts scope change and regeneration");
+  assert.throws(() => composeTwoDice(phasePool, base, mod((s) => { s[1].check = "gen:akdice:5,5,0,3"; })), /unavailable, reused/);
+  assert.ok(loaded.strategies.some((s) => s.id.startsWith("akdice_")), "dice strategies are now synthesised into the loaded library");
 });
 
 for (const [target, id] of [["totals-equally-likely", "akdice_fix_totals"], ["order-ignored", "akdice_fix_order"]] as const) test(`real path (${target}): one wrong answer is not proof; two give the explanation, a fresh check, and a saved replay`, () => {

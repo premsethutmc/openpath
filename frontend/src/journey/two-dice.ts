@@ -1,9 +1,9 @@
 /**
  * Two-dice probability candidate (TP-PRO-01): composition and test-only installation.
  *
- * The library builder (packages/learning/src/library.ts, owned by the integration worker) only lets a template extension
- * (`Blueprint.extendsTemplate`) scope a strategy to the module's MAIN family. MATH.probability.sample-space is seeded from akss;
- * akdice is one of its pool families, so `synthesise` throws for these strategies (reproducer: docs/two-dice-probability).
+ * The library builder (packages/learning/src/library.ts) accepts pool families for template extensions via
+ * `poolFamilies(base).includes(family)`. The dice strategies are now registered in blueprints.v1.json and synthesised
+ * into the library. This fixture remains useful for tests that need a controlled module without regenerating the library.
  * `composeTwoDice` applies the same append-only rules as `synthesise` (unchanged module, unique ids, explicit scoped instances,
  * no reserved exposure, guided from practice and check from the check partition of the SCOPED family, declared scope valid),
  * plus freshness@2 (no recheck that is the same or a relabelled problem). `installForTest` swaps the composed module into the
@@ -57,16 +57,19 @@ export function pendingRecords(m: Module, ids: string[], at = "2026-11-04T00:00:
   });
 }
 
-/** test only: install the composed module and its pending records; returns the restore function */
+/** test only: install the composed module and its pending records; returns the restore function.
+ * When the loaded module already contains the dice strategies (i.e. the library was regenerated from blueprints),
+ * only the explanation registry records are added — no module swap needed. */
 export function installForTest(phasePool: PhasePool): { module: Module; restore: () => void } {
   const i = modules.findIndex((m) => m.competency === COMPETENCY), before = modules[i], regBefore = explanationRegistry();
-  const m = composeTwoDice(phasePool, before);
-  modules[i] = m;
+  const alreadySynthesised = before.strategies.some((s) => s.id.startsWith("akdice_"));
+  const m = alreadySynthesised ? before : composeTwoDice(phasePool, before);
+  if (!alreadySynthesised) modules[i] = m;
   const reg = structuredClone(regBefore) as ExplanationRegistry;
   (reg.entries as unknown[]).push(...pendingRecords(m, candidateStrategies().map((s) => s.id)));
   setExplanationRegistry(reg);
   if (moduleFor(COMPETENCY) !== m) throw new Error("module not installed");
-  return { module: m, restore: () => { modules[i] = before; setExplanationRegistry(regBefore); } };
+  return { module: m, restore: () => { if (!alreadySynthesised) modules[i] = before; setExplanationRegistry(regBefore); } };
 }
 export const problemKey = diceProblemKey;
 export const problem = (id: string) => problemOf(id.replace(/:(mc|w)$/, ""))!;

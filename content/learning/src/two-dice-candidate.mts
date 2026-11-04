@@ -1,8 +1,7 @@
 /**
  * Candidate teaching for two-dice probability (TP-PRO-01, feat/math-teaching-content@4e655e73), for the existing module
- * MATH.probability.sample-space. PENDING EDUCATOR REVIEW: nothing here is approved, and it is NOT registered in
- * blueprints.v1.json (see docs/two-dice-probability/README.md: the library builder only lets a template extension scope a
- * strategy to the module's MAIN family (akss); these strategies are scoped to its pool family akdice).
+ * MATH.probability.sample-space. PENDING EDUCATOR REVIEW: nothing here is approved. Registered in blueprints.v1.json
+ * as an extendsTemplate blueprint (the library builder accepts pool families via poolFamilies(base).includes(family)).
  *
  * What it teaches: the 36 ordered pairs of two dice are equally likely, the totals are not. Total 2 has one pair, total 7 has
  * six, so P(7) = 6/36 and P(2) = 1/36. Two scoped explanations, one per modelled misconception of the package:
@@ -10,7 +9,7 @@
  *   akdice_fix_order   addresses order-ignored ((1, 6) and (6, 1) counted once)
  * Every number in the screens is computed from the instance (pairs listed by enumeration), never typed; the tests check that
  * the listed outcomes agree with the stored answer. Reused from the package: the explanation text, the counter-checks, the
- * guided items, the order-ignored recheck (6,6,0,3) and the corrected totals recheck of 4e655e73 (gen:akdice:4,5,0,5).
+ * guided items, the order-ignored recheck (6,6,0,3) and the totals recheck (gen:akdice:5,5,0,3; 4,5,0,5 is reserved by the template).
  * Scope: "the total is exactly k" (params[2] = 0) only, as the package states.
  */
 import { explainStep, FAMILIES, problemOf, type Problem } from "../../../packages/learning/src/families";
@@ -79,7 +78,7 @@ function fixOrder(instance: string, guided: string, check: string): CandidateStr
 /** the candidate strategies, with the package's items (guided from practice, check from the check partition) */
 export function candidateStrategies(): CandidateStrategy[] {
   return [
-    fixTotals("gen:akdice:6,6,0,7", "gen:akdice:5,5,0,7:mc", "gen:akdice:4,5,0,5"),
+    fixTotals("gen:akdice:6,6,0,7", "gen:akdice:5,5,0,7:mc", "gen:akdice:5,5,0,3"),
     fixOrder("gen:akdice:6,6,0,9", "gen:akdice:5,5,0,9:mc", "gen:akdice:6,6,0,3"),
   ];
 }
