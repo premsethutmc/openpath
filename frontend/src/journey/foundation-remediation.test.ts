@@ -33,7 +33,12 @@ for(const c of cases){
   // stays weak and the plan asks for it. G-06 learns after the lesson: its crossing-lines answers now satisfy the plan.
   const taught=s.events.filter(e=>(e as {record?:string}).record==='teach').map(e=>(e as unknown as {strategy:string}).strategy);
   assert.ok(taught.some(id=>moduleFor(c.config.competency)!.strategies.find(st=>st.id===id)?.scope?.family===c.family),JSON.stringify(taught));
-  if(c.journey==='G-03'){assert.notEqual(plan.status,'shown');assert.ok(plan.question);assert.equal(problemOf(plan.question)?.family,c.family);}
+  // (transfer-hold@1: the never-learning learner is no longer served other skills' transfer questions, so the full plan may ask an
+  // unobserved skill first; the plan for the weak skill itself still asks its family)
+  if(c.journey==='G-03'){assert.notEqual(plan.status,'shown');assert.ok(plan.question);
+   const skill=c.config.subSkills.find(x=>x.families.includes(c.family))!.id;
+   const own=foundationPlan({version:FOUNDATION_POLICY,config:c.config,requirements:[{skill,method:false}]},s.learnerId,events(s),s.now,{trustedOnly:true});
+   assert.notEqual(own.status,'shown');assert.equal(problemOf(own.question!)?.family,c.family,JSON.stringify(own));}
   else assert.equal(plan.status,'shown');
  });
  test(`${c.journey}: an unrelated generic lesson cannot settle an established geometry misconception`,()=>{

@@ -1,4 +1,5 @@
 import { taughtExposureKeys } from "./teaching-exposure";
+import { metProblems, problemIdentity } from "./problem-identity";
 import { connectionConfig, connectedSkill, strategyConnects } from "./skill-connections";
 /**
  * learner-hypothesis@1: what the engine has come to believe about WHY a learner answered as they did, kept as a
@@ -65,7 +66,11 @@ export function investigation(qid: string, records: LearnerRecords): { reasoning
   const first = records.attempts.find((a) => a.questionId === qid);
   if (!fam || !first) return { reasoning: null, follow: [] };
   const follow = records.attempts.filter((a) => a.context === investigateContext(qid) && a.n === 1);
-  return { reasoning: reason(fam, [{ questionId: fam, response: first.response }, ...follow.map((a) => ({ questionId: a.questionId, response: a.response }))]), follow };
+  // investigation-scope@1: with a skill mapping, a follow-up of the original question's own skill is asked first (the finding is then
+  // about that skill, which its teaching and recheck are scoped to); one of another skill only when none of its own discriminates
+  const config = connectionConfig(question(qid).competency), skill = config ? connectedSkill(config, qid) : null;
+  const prefer = config && skill ? (p: { id: string }) => connectedSkill(config, p.id) === skill : undefined;
+  return { reasoning: reason(fam, [{ questionId: fam, response: first.response }, ...follow.map((a) => ({ questionId: a.questionId, response: a.response }))], prefer), follow };
 }
 
 export type HypothesisStatus =
@@ -291,9 +296,11 @@ export function discriminatingProbe(h: LearnerHypothesis, records: LearnerRecord
   const pooled = m.pool ? PROBE_PHASES.flatMap((ph) => modulePhasePool(m, ph)) : [];
   const delivered = records.teaching.filter(t => t.at === h.teaching.lastAt
     && relevantTeaching(t, h.scope.question, h.claim!.explanation, h.scope.observedIn, h.scope.about, records)).at(-1);
+  // problem-identity@1: never a problem already met in another form or relabelled (answered, or shown in delivered teaching)
+  const met = metProblems(records);
   for (const q of [...listed, ...pooled]) {
     if (delivered && !deliveredScopeAccepts(delivered.competency, delivered.strategy, q)) continue;
-    if (!accepts(q) || seen.has(exposureKey(q)) || !selectable(q) || !problemOf(q)) continue;
+    if (!accepts(q) || seen.has(exposureKey(q)) || met.has(problemIdentity(q)) || !selectable(q) || !problemOf(q)) continue;
     if (q.startsWith("gen:") && !formCertified(q)) continue;
     const qg = gradeOfQuestion(q);
     if (g !== null && qg !== null && qg > g && !(records.pathway?.active && records.readinessRoute?.includes(question(q).competency))) continue;

@@ -3548,6 +3548,391 @@
      "check": "gen:afcross:70,0"
     }
    ]
+  },
+  {
+   "extendsTemplate": true,
+   "competency": "MATH.probability.sample-space",
+   "title": "Two dice: count the pairs, not the totals",
+   "family": "akss",
+   "seed": [
+    2,
+    3,
+    2,
+    0
+   ],
+   "author": "Claude candidate 4e655e73 (TP-PRO-01); OpenPath integration (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [],
+   "strategies": [
+    {
+     "id": "akdice_fix_totals",
+     "title": "Count the pairs, not the totals",
+     "kind": "conceptual",
+     "needs": [],
+     "addresses": "totals-equally-likely",
+     "scope": {
+      "family": "akdice",
+      "subSkill": "sample-space.dice-exact-total@1",
+      "parameters": [
+       {
+        "index": 2,
+        "values": [
+         0
+        ]
+       }
+      ]
+     },
+     "screens": [
+      {
+       "title": "Count the pairs, not the totals: what went wrong",
+       "role": "misconception",
+       "instance": "gen:akdice:6,6,0,7",
+       "text": [
+        "With two ordinary dice there are 11 possible totals, 2 to 12, but they are not equally likely.",
+        "Each PAIR (first number, second number) is equally likely. A total is as likely as the number of pairs that make it."
+       ],
+       "math": [
+        "Not 1/11, but 1/6"
+       ]
+      },
+      {
+       "title": "Why a total of 7 is more likely than a total of 2",
+       "role": "concept",
+       "instance": "gen:akdice:6,6,0,7",
+       "widget": {
+        "type": "table",
+        "head": [
+         "+",
+         "1",
+         "2",
+         "3",
+         "4",
+         "5",
+         "6"
+        ],
+        "rows": [
+         [
+          "1",
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+         ],
+         [
+          "2",
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+         ],
+         [
+          "3",
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+         ],
+         [
+          "4",
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+         ],
+         [
+          "5",
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+         ],
+         [
+          "6",
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+         ]
+        ]
+       },
+       "text": [
+        "Every cell of the table is one pair, and all 36 pairs are equally likely.",
+        "A total of 2 can be made in only one way; a total of 7 can be made in 6 ways."
+       ],
+       "math": [
+        "Total 2: (1, 1), 1 pair, so P = 1/36",
+        "Total 7: (1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1), 6 pairs, so P = 1/6",
+        "6 pairs against 1: a total of 7 is 6 times as likely as a total of 2."
+       ]
+      },
+      {
+       "title": "Count the pairs, not the totals: solved correctly",
+       "role": "strategy",
+       "instance": "gen:akdice:6,6,0,7",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "There are 6 × 6 = 36 equally likely pairs",
+        "6 pairs fit: the total of the two numbers is 7",
+        "Probability = 6 ÷ 36 = 1/6",
+        "So the answer is 1/6"
+       ]
+      }
+     ],
+     "guided": "gen:akdice:5,5,0,7:mc",
+     "check": "gen:akdice:4,5,0,5"
+    },
+    {
+     "id": "akdice_fix_order",
+     "title": "The two dice are different: order matters",
+     "kind": "conceptual",
+     "needs": [],
+     "addresses": "order-ignored",
+     "scope": {
+      "family": "akdice",
+      "subSkill": "sample-space.dice-exact-total@1",
+      "parameters": [
+       {
+        "index": 2,
+        "values": [
+         0
+        ]
+       }
+      ]
+     },
+     "screens": [
+      {
+       "title": "Order matters: what went wrong",
+       "role": "misconception",
+       "instance": "gen:akdice:6,6,0,9",
+       "text": [
+        "Pairs such as (3, 6) and (6, 3) were counted once. They are different outcomes: the first and the second die are different objects.",
+        "Colour the first die red and the second blue: red 3 with blue 6 is not the same roll as red 6 with blue 3."
+       ],
+       "math": [
+        "Counted once: (3, 6), (4, 5), 2 pairs",
+        "All the pairs: (3, 6), (4, 5), (5, 4), (6, 3), 4 pairs",
+        "Not 1/18, but 1/9"
+       ]
+      },
+      {
+       "title": "Order matters: solved correctly",
+       "role": "strategy",
+       "instance": "gen:akdice:6,6,0,9",
+       "widget": {
+        "type": "table",
+        "head": [
+         "+",
+         "1",
+         "2",
+         "3",
+         "4",
+         "5",
+         "6"
+        ],
+        "rows": [
+         [
+          "1",
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+         ],
+         [
+          "2",
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+         ],
+         [
+          "3",
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+         ],
+         [
+          "4",
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+         ],
+         [
+          "5",
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+         ],
+         [
+          "6",
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+         ]
+        ]
+       },
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "There are 6 × 6 = 36 equally likely pairs",
+        "4 pairs fit: the total of the two numbers is 9",
+        "Probability = 4 ÷ 36 = 1/9",
+        "So the answer is 1/9"
+       ]
+      }
+     ],
+     "guided": "gen:akdice:5,5,0,9:mc",
+     "check": "gen:akdice:6,6,0,3"
+    },
+    {
+     "id": "akdice_pairs",
+     "title": "Two dice: list the equally likely pairs",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "akdice",
+      "subSkill": "sample-space.dice-exact-total@1",
+      "parameters": [
+       {
+        "index": 2,
+        "values": [
+         0
+        ]
+       }
+      ]
+     },
+     "screens": [
+      {
+       "title": "Two dice: every pair is equally likely",
+       "role": "concept",
+       "instance": "gen:akdice:6,6,0,8",
+       "widget": {
+        "type": "table",
+        "head": [
+         "+",
+         "1",
+         "2",
+         "3",
+         "4",
+         "5",
+         "6"
+        ],
+        "rows": [
+         [
+          "1",
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+         ],
+         [
+          "2",
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+         ],
+         [
+          "3",
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+         ],
+         [
+          "4",
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+         ],
+         [
+          "5",
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+         ],
+         [
+          "6",
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+         ]
+        ]
+       },
+       "text": [
+        "Each die gives each of its numbers equally often, so every PAIR (first number, second number) is equally likely: 6 × 6 = 36 pairs.",
+        "The totals are not equally likely: a middle total can be made by many pairs, an end total by only one."
+       ],
+       "math": [
+        "Total 2: (1, 1), only 1 pair",
+        "Total 8: (2, 6), (3, 5), (4, 4), (5, 3), (6, 2), 5 pairs"
+       ]
+      },
+      {
+       "title": "Two dice: solved step by step",
+       "role": "strategy",
+       "instance": "gen:akdice:6,6,0,8",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "There are 6 × 6 = 36 equally likely pairs",
+        "5 pairs fit: the total of the two numbers is 8",
+        "Probability = 5 ÷ 36 = 5/36",
+        "So the answer is 5/36"
+       ]
+      }
+     ],
+     "guided": "gen:akdice:4,6,0,4",
+     "check": "gen:akdice:5,6,0,9"
+    }
+   ]
   }
  ]
 }

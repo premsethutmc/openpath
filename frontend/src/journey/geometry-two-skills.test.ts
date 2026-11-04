@@ -6,8 +6,8 @@
  * Text from the TP-GEO-01 / TP-GEO-02 review candidates (feat/math-teaching-content@4e655e73); pending educator review.
  * Synthetic learners only; the engine chooses what to ask and what to teach.
  *
- * Tests marked `todo` state a requirement the shared engine does not meet yet (they run and report, and do not fail the
- * suite); each names its reproducer. They are left for the integration owner of intervention.ts / the evidence engine.
+ * The shared-engine requirements first written here as `todo` (recheck@2, transfer-hold@1, retention-scope@1) are met by the
+ * geometry/dice integration and run as ordinary tests.
  */
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -129,13 +129,13 @@ test("triangle-properties.exterior-angle@1: a later delayed (retention) question
   assert.ok(ret.some((q) => skillOf(TRI, q) === SKILLS[0].skill), `retention asked: ${ret}`);
 });
 
-test("angle-pairs.opposite@2: a later delayed (retention) question on the same skill is selected", { todo: "GAP: module retention is [gen:afpair:0,34, gen:afcross:89,1:mc]; 89,1 is angle-pairs.adjacent@2. The retention partition holds opposite items (e.g. gen:afcross:42,0) but neither the template synthesis (library.ts subSkills: first afcross retention item) nor the retention selector is skill-scoped" }, () => {
+test("angle-pairs.opposite@2: a later delayed (retention) question on the same skill is selected (retention-scope@1)", () => {
   const r = flow(SKILLS[1], 1);
   const ret = r.actions.filter((a) => a.activity === "retention").map((a) => a.q);
   assert.ok(ret.some((q) => skillOf(PAIRS, q) === SKILLS[1].skill), `retention asked: ${ret}`);
 });
 
-for (const S of SKILLS) test(`${S.skill}: the first question on the learner's own after teaching is a fresh question on the taught skill`, S.family === "afcross" ? { todo: "BLOCKED (shared engine, intervention.ts): the strategy's own check (gen:afcross:158,0:mc) was already served before teaching as an untaught strategy's check; the fallback fromPool(m, \"check\") is not skill-scoped and serves gen:afcross:149,2 (angle-pairs.other-three@2)" } : {}, () => {
+for (const S of SKILLS) test(`${S.skill}: the first question on the learner's own after teaching is a fresh question on the taught skill`, () => {
   const { before, next } = afterTeaching(flow(S, 1));
   assert.ok(next, "a question follows the teaching");
   assert.equal(skillOf(S.competency, next!.q), S.skill, next!.q);
@@ -149,7 +149,7 @@ for (const S of SKILLS) test(`${S.skill}: the first question on the learner's ow
  * answers, not the mapped skills). Reproducer: `runScenario` with START_EXT / START_CROSS and learners.misconception([...], n).
  */
 const TRANSFER_TODO = "BLOCKED (shared engine): moduleState serves transfer questions after a wrong, unrechecked answer on a mapped skill of the competency";
-for (const S of SKILLS) test(`${S.skill}: no transfer question while the skill's latest independent answer is wrong and not rechecked`, { todo: TRANSFER_TODO }, () => {
+for (const S of SKILLS) test(`${S.skill}: no transfer question while the skill's latest independent answer is wrong and not rechecked`, () => {
   // from the first wrong answer on the skill until the first right answer on it on the learner's own AFTER teaching
   const t = timeline(flow(S, 1));
   const wrongAt = t.findIndex((s) => s.kind === "attempt" && !s.right && skillOf(S.competency, s.q) === S.skill);
@@ -160,7 +160,7 @@ for (const S of SKILLS) test(`${S.skill}: no transfer question while the skill's
   assert.deepEqual(served, [], "transfer questions served while the skill was weak");
 });
 const STATUS_TODO = "BLOCKED (shared engine): the competency evidence status reaches transfer from other skills' answers while this skill is paused (PR #95 P2; sub-skill-gated mastery PR #93 is shadow only)";
-for (const S of SKILLS) test(`${S.skill}: a learner who never learns the skill does not reach transfer`, { todo: STATUS_TODO }, () => {
+for (const S of SKILLS) test(`${S.skill}: a learner who never learns the skill does not reach transfer`, () => {
   // PR #95 G-03 / G-06: the learner makes the first modelled error wherever it applies and never learns
   const r = flow(S, Infinity, [S.bugs[0]]);
   assert.equal(r.f.ended?.phase, "pause", "the skill pauses after its explanations were tried");

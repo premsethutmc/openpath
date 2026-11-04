@@ -1,8 +1,9 @@
 /**
  * Candidate teaching for two-dice probability (TP-PRO-01, feat/math-teaching-content@4e655e73), for the existing module
  * MATH.probability.sample-space. PENDING EDUCATOR REVIEW: nothing here is approved, and it is NOT registered in
- * blueprints.v1.json (see docs/two-dice-probability/README.md: the library builder only lets a template extension scope a
- * strategy to the module's MAIN family (akss); these strategies are scoped to its pool family akdice).
+ * Registered as a template extension in blueprints.v1.json by running this file (the library builder accepts strategies
+ * scoped to a pool family of the module since the geometry/dice integration):
+ *   cd frontend && node --import tsx ../content/learning/src/two-dice-candidate.mts
  *
  * What it teaches: the 36 ordered pairs of two dice are equally likely, the totals are not. Total 2 has one pair, total 7 has
  * six, so P(7) = 6/36 and P(2) = 1/36. Two scoped explanations, one per modelled misconception of the package:
@@ -13,11 +14,13 @@
  * guided items, the order-ignored recheck (6,6,0,3) and the corrected totals recheck of 4e655e73 (gen:akdice:4,5,0,5).
  * Scope: "the total is exactly k" (params[2] = 0) only, as the package states.
  */
+import { readFileSync, writeFileSync } from "node:fs";
 import { explainStep, FAMILIES, problemOf, type Problem } from "../../../packages/learning/src/families";
 
 export const COMPETENCY = "MATH.probability.sample-space";
 export const FAMILY = "akdice";
 export const SOURCE = "feat/math-teaching-content@4e655e737607bcf9d941193538de7479a40c4fe6 TP-PRO-01";
+export const SKILL = "sample-space.dice-exact-total@1";
 
 const P = (id: string) => problemOf(id.replace(/:(mc|w)$/, ""))!;
 /** every ordered pair (first, second) of an m-sided and an n-sided spinner or die whose total is k */
@@ -36,8 +39,8 @@ const sameNumbers = (m: number, n: number) => (m === n ? (m === 6 ? "two ordinar
 
 export interface CandidateScreen { title: string; text: string[]; math: string[]; role: "misconception" | "strategy" | "concept"; instance: string; widget?: Record<string, unknown> }
 export interface CandidateStrategy {
-  id: string; title: string; kind: "conceptual"; needs: string[]; addresses: string;
-  scope: { family: string; parameters: { index: number; values: number[] }[] };
+  id: string; title: string; kind: "conceptual"; needs: string[]; addresses?: string;
+  scope: { family: string; subSkill: string; parameters: { index: number; values: number[] }[] };
   screens: CandidateScreen[]; guided: string; check: string;
 }
 
@@ -47,7 +50,7 @@ function fixTotals(instance: string, guided: string, check: string): CandidateSt
   const seven = pairsWithTotal(m, n, k), two = pairsWithTotal(m, n, lo);
   return {
     id: "akdice_fix_totals", title: "Count the pairs, not the totals", kind: "conceptual", needs: [], addresses: "totals-equally-likely",
-    scope: { family: FAMILY, parameters: [{ index: 2, values: [0] }] },
+    scope: { family: FAMILY, subSkill: SKILL, parameters: [{ index: 2, values: [0] }] },
     screens: [
       { title: "Count the pairs, not the totals: what went wrong", role: "misconception", instance,
         text: [`With ${sameNumbers(m, n)} there are ${totals} possible totals, ${lo} to ${m + n}, but they are not equally likely.`, "Each PAIR (first number, second number) is equally likely. A total is as likely as the number of pairs that make it."],
@@ -65,7 +68,7 @@ function fixOrder(instance: string, guided: string, check: string): CandidateStr
   const p = P(instance), [m, n, , k] = p.params, ordered = pairsWithTotal(m, n, k), once = unorderedWithTotal(m, n, k);
   return {
     id: "akdice_fix_order", title: "The two dice are different: order matters", kind: "conceptual", needs: [], addresses: "order-ignored",
-    scope: { family: FAMILY, parameters: [{ index: 2, values: [0] }] },
+    scope: { family: FAMILY, subSkill: SKILL, parameters: [{ index: 2, values: [0] }] },
     screens: [
       { title: "Order matters: what went wrong", role: "misconception", instance,
         text: [`Pairs such as (${once[0][0]}, ${once[0][1]}) and (${once[0][1]}, ${once[0][0]}) were counted once. They are different outcomes: the first and the second die are different objects.`, "Colour the first die red and the second blue: red " + once[0][0] + " with blue " + once[0][1] + " is not the same roll as red " + once[0][1] + " with blue " + once[0][0] + "."],
@@ -76,11 +79,28 @@ function fixOrder(instance: string, guided: string, check: string): CandidateStr
   };
 }
 
+/** general teaching of the skill (no misconception claimed): for repeated difficulty, or a wrong answer no modelled error explains */
+function pairsConcept(instance: string, guided: string, check: string): CandidateStrategy {
+  const p = P(instance), [m, n, , k] = p.params, all = m * n, fit = pairsWithTotal(m, n, k);
+  return {
+    id: "akdice_pairs", title: "Two dice: list the equally likely pairs", kind: "conceptual", needs: [],
+    scope: { family: FAMILY, subSkill: SKILL, parameters: [{ index: 2, values: [0] }] },
+    screens: [
+      { title: "Two dice: every pair is equally likely", role: "concept", instance, widget: table(p),
+        text: [`Each die gives each of its numbers equally often, so every PAIR (first number, second number) is equally likely: ${m} × ${n} = ${all} pairs.`, "The totals are not equally likely: a middle total can be made by many pairs, an end total by only one."],
+        math: [`Total 2: (1, 1), only 1 pair`, `Total ${k}: ${list(fit)}, ${fit.length} pairs`] },
+      { title: "Two dice: solved step by step", role: "strategy", instance, text: ["Each step, then the answer."], math: solved(p) },
+    ],
+    guided, check,
+  };
+}
+
 /** the candidate strategies, with the package's items (guided from practice, check from the check partition) */
 export function candidateStrategies(): CandidateStrategy[] {
   return [
     fixTotals("gen:akdice:6,6,0,7", "gen:akdice:5,5,0,7:mc", "gen:akdice:4,5,0,5"),
     fixOrder("gen:akdice:6,6,0,9", "gen:akdice:5,5,0,9:mc", "gen:akdice:6,6,0,3"),
+    pairsConcept("gen:akdice:6,6,0,8", "gen:akdice:4,6,0,4", "gen:akdice:5,6,0,9"),
   ];
 }
 
@@ -92,4 +112,19 @@ export function diceProblemKey(id: string): string | null {
   const [m, n, q, k] = p.params;
   if (q !== 0) return `problem:dice:${m},${n},q${q},${k}`;
   return `problem:dice:${Math.min(m, n)},${Math.max(m, n)},${Math.min(k, m + n + 2 - k)}`;
+}
+
+/** the template extension written to blueprints.v1.json */
+export const blueprint = () => ({
+  extendsTemplate: true as const, competency: COMPETENCY, title: "Two dice: count the pairs, not the totals", family: "akss", seed: [2, 3, 2, 0],
+  author: "Claude candidate 4e655e73 (TP-PRO-01); OpenPath integration (written with AI assistance; not educator-reviewed)", aiAssisted: true, licence: "CC0",
+  chapter: [], strategies: candidateStrategies(),
+});
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const file = new URL("../blueprints.v1.json", import.meta.url), bps = JSON.parse(readFileSync(file, "utf8"));
+  const mine = (b: { competency: string; extendsTemplate?: boolean }) => b.competency === COMPETENCY && b.extendsTemplate === true;
+  if (bps.blueprints.some((b: { competency: string; extendsTemplate?: boolean }) => b.competency === COMPETENCY && !mine(b))) throw new Error("a hand-written blueprint already exists for this competency");
+  bps.blueprints = [...bps.blueprints.filter((b: { competency: string; extendsTemplate?: boolean }) => !mine(b)), blueprint()];
+  writeFileSync(file, JSON.stringify(bps, null, 1) + "\n");
+  console.log(`wrote the ${COMPETENCY} template extension (${candidateStrategies().length} strategies)`);
 }

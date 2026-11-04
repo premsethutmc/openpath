@@ -1,4 +1,6 @@
 import { taughtExposureKeys } from "./teaching-exposure";
+import { metProblems, problemIdentity } from "./problem-identity";
+import { teachingScopeFor } from "./teaching-presentation";
 /**
  * The unified learning module (Explore → Strategy → Chapter → Practise → Verify) and prerequisite recovery.
  *
@@ -25,7 +27,7 @@ import { graph, walkSupports } from "./graph";
 import { quarantined } from "./question-status";
 import { modulePhasePool } from "./library";
 import { discriminatingProbe, familyOf, hypothesesFor, investigateContext, investigation, investigationTrigger, openHypothesis, teachingMatchesMisconception } from "./hypotheses";
-import { nextFromReasoning, reason, type Reasoning } from "./reasoning";
+import { nextFromReasoning, probeReading, reason, type Reasoning } from "./reasoning";
 import { teachingEligibility, type TeachingEligibility } from "./teaching-contract";
 import { contentEligibility, isMisconceptionSpecific, teachingMode, type ContentEligibility } from "./explanation-review";
 import { evidenceBasis, type EvidenceBasis } from "./misconception-evidence";
@@ -429,14 +431,40 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const hold = !!own && (own.teachingDue || !!resProbe);
   const shown = (ev.status === "independent" || ev.status === "transfer" || ev.status === "verified") && !hold;
   const unanswered = (ids: string[]) => ids.find((id) => keyboardOffered(id) && !answered(records, id) && withinGrade(records, id)) ?? null;
+  // transfer-hold@1: transfer questions wait while the skill is not secure here: an open misunderstanding still to be taught or
+  // resolved, or (in a competency with a skill mapping) a skill whose latest answer alone is wrong and not yet rechecked right
+  const transfer = hold || weakSkill(m, records) ? [] : m.transfer;
   if (ev.retention === "due") {
-    // the delayed check: the module's own questions, then fresh ones from the pool's delayed-check part
-    const r = unanswered(m.retention) ?? fromPool(m, "retention", records);
-    if (r) return { ...base, phase: "retention", question: r, diagnosis: d, reason: "A delayed check, a week after you first showed this: does it last?" };
+    // retention-scope@1: a skill taught here with a skill-scoped explanation is checked on a fresh delayed question OF THAT SKILL
+    // first (a question of another skill is never its evidence); then the module's own questions, then fresh pool questions
+    const scoped = skillRetention(m, records);
+    const r = scoped.question ?? unanswered(m.retention) ?? fromPool(m, "retention", records);
+    if (r) return { ...base, phase: "retention", question: r, diagnosis: d, ...(scoped.gap ? { why: scoped.gap } : {}), reason: "A delayed check, a week after you first showed this: does it last?" };
   }
   // investigation-trigger@1: a significant or repeated error in practice or verification is investigated (bounded)
   const inv = pendingInvestigation(m, records, session);
   if (inv) return { ...base, phase: "explore", question: inv.question, diagnosis: d, context: investigateContext(inv.original), why: inv.why, reason: "One more question to understand your last answer." };
+  // relapse@1: a delayed-check answer on a taught skill was wrong and nothing on that skill has been right alone since. One wrong
+  // answer is not a misconception: the skill's GENERAL explanation (no misconception claimed) is given once, then a fresh question
+  // of that skill alone; with none left, or still wrong after it, the module pauses here and the learner carries on elsewhere
+  // (a learning-goal pathway has its own scoped recovery for this, foundation-runtime / withFoundation: it is left to it)
+  const lapse = records.pathway?.active && records.readinessRoute?.includes(competency) ? null : relapse(m, records);
+  if (lapse) {
+    // a general explanation of the skill not given before comes first (a different way in), then one already given
+    const before = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id && t.at <= lapse.at);
+    const general = m.strategies.filter((x) => x.scope?.subSkill === lapse.skill && !isMisconceptionSpecific(x) && teachable(m, x, [])).sort((a, b) => Number(before(a)) - Number(before(b)));
+    const given = records.teaching.filter((t) => t.competency === competency && t.at > lapse.at && general.some((x) => x.id === t.strategy)).at(-1);
+    if (!given) {
+      const st = general[0];
+      if (st) return { ...base, phase: "chapter", strategy: st, teachingReview: teachingStatus(m, st), contentReview: contentReviewOf(m, st, []), basis: evidenceBasis(competency, records, { evidence: ev, diagnosis: d }), diagnosis: d, reason: "The delayed check on this kind of question went wrong, so here is the method again, then one on your own." };
+    } else {
+      const st = general.find((x) => x.id === given.strategy)!;
+      const after = records.attempts.some((a) => a.at > given.at && independentAttempt(a) && connectedSkill(connectionConfig(competency)!, a.questionId) === lapse.skill);
+      const q = after ? null : blockCheck(m, st, records);
+      if (q) return { ...base, phase: "check", question: q, strategy: st, diagnosis: d, reason: "Now one of this kind on your own, with no hints." };
+      return { ...base, phase: "pause", diagnosis: d, why: after ? `relapse@1: ${lapse.skill} still wrong after its explanation` : `relapse@1: no fresh ${lapse.skill} question left`, reason: after ? "This kind of question has not clicked yet, even after the explanation. Carry on with other skills, and go through it with a teacher or parent." : "There is no new question of this kind left to check on your own yet. Carry on with other skills meanwhile." };
+    }
+  }
   // the misunderstanding showed again after this skill's teaching: a different explanation (all tried: a person)
   // claim-teaching@1: "showed again after teaching" means after teaching that ADDRESSED this misunderstanding (the
   // hypothesis's own relevant-teaching record), not after any lesson in the skill: a lesson for another form of the skill
@@ -465,7 +493,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
       if (r.phase === "escalate") return { ...base, phase: "pause", diagnosis: d, reason: r.reason };
       if (r.phase === "solved_after_help" || r.phase === "solved_on_retry") {
         // what was missing has been worked on: the skill itself is now checked on a new question alone, not taught again
-        const more = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]) ?? fromPool(m, "check", records);
+        const more = unanswered([...m.practice, ...transfer, ...m.strategies.map((s) => s.check)]) ?? fromPool(m, "check", records);
         if (more) return { ...base, phase: "verify", question: more, diagnosis: d, reason: "What was missing has been worked on. Now a new question on your own." };
       }
     }
@@ -506,7 +534,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     const taughtThisVisit = records.teaching.some((t) => t.competency === competency && t.session === session);
     // written@2: the part an educator marks comes after the questions marked here, never before the fresh checks the
     // shared record needs (a written answer not yet written must not hold up the evidence for the skill)
-    const listed = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]);
+    const listed = unanswered([...m.practice, ...transfer, ...m.strategies.map((s) => s.check)]);
     const written = unanswered(m.written ?? []);
     if (!listed && needsEvidence && taughtThisVisit && m.pool)
       return { ...base, phase: "done", question: null, diagnosis: d, reason: "Shown on your own, straight after the lesson. Come back on another day: a few fresh questions then show it is yours (answers right after teaching are progress, not yet evidence)." };
@@ -519,7 +547,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     // no clear gap: verify on fresh questions alone; a gap that shows there is then taught
     const rs = ruleStateFor(m, d, records);
     if (rs.status !== "weak") {
-      const more = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]) ?? fromPool(m, "check", records);
+      const more = unanswered([...m.practice, ...transfer, ...m.strategies.map((s) => s.check)]) ?? fromPool(m, "check", records);
       if (more) return { ...base, phase: "verify", question: more, diagnosis: d, reason: d.result === "secure" ? "You seem to know this. Now on your own, on a new question." : "Not enough to tell yet. One more question on your own." };
     }
   }
@@ -567,10 +595,10 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   if (decision.action === "recommend_human") return { ...base, phase: "pause", diagnosis: d, decision, reason: "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you." };
   if (resProbe) return { ...base, phase: "verify", question: resProbe, diagnosis: d, decision, why: `resolution probe for ${own!.id}`, reason: "One question on your own that shows whether that misunderstanding has gone." };
   if (decision.action === "done") {
-    const more = unanswered([...m.practice, ...m.transfer]);
+    const more = unanswered([...m.practice, ...transfer]);
     return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, decision, reason: "Right on your own after help: progress, not yet mastery. More practice on your own shows it is yours." };
   }
-  const more = unanswered([...m.practice, ...m.transfer, ...m.strategies.map((s) => s.check)]);
+  const more = unanswered([...m.practice, ...transfer, ...m.strategies.map((s) => s.check)]);
   return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, decision, reason: "One more question on your own." };
 }
 
@@ -580,6 +608,47 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
  * wrong), it comes from a family diagnostic@2 can read, nothing open already explains errors here, and the reading
  * still needs a question nobody has asked. At most two investigations are begun per skill in a session.
  */
+/** retention-scope@1: the skills taught here with a skill-scoped explanation, each checked on a fresh delayed question of its own
+ * (never the same problem relabelled); `gap` names a taught skill that has no such question left (it is reported, not invented). */
+export function skillRetention(m: Module, records: LearnerRecords): { question: string | null; gap: string | null } {
+  const config = connectionConfig(m.competency);
+  if (!config) return { question: null, gap: null };
+  const taught = [...new Set(records.teaching.filter((t) => t.competency === m.competency).map((t) => m.strategies.find((s) => s.id === t.strategy)?.scope?.subSkill).filter((x): x is string => !!x))];
+  const met = metProblems(records);
+  const gaps: string[] = [];
+  for (const skill of taught) {
+    const lastTaught = records.teaching.filter((t) => t.competency === m.competency && m.strategies.find((s) => s.id === t.strategy)?.scope?.subSkill === skill).at(-1)!.at;
+    if (records.attempts.some((a) => a.activity === "retention" && a.at > lastTaught && connectedSkill(config, a.questionId) === skill)) continue;
+    const q = questionForRequirement(m, "retention", records, (id) => connectedSkill(config, id) === skill && !met.has(problemIdentity(id)));
+    if (q) return { question: q, gap: null };
+    gaps.push(skill);
+  }
+  return { question: null, gap: gaps.length ? `retention-scope@1: no fresh delayed question for ${gaps.join(", ")} (not checked; other questions are not its evidence)` : null };
+}
+/** relapse@1: the latest delayed-check answer on a mapped skill was wrong, with no right answer alone on that skill since */
+export function relapse(m: Module, records: LearnerRecords): { skill: string; at: string } | null {
+  const config = connectionConfig(m.competency);
+  if (!config) return null;
+  const ret = records.attempts.filter((a) => of(m)(a) && a.activity === "retention" && !rightAnswer(a)).at(-1);
+  const skill = ret ? connectedSkill(config, ret.questionId) : null;
+  if (!ret || !skill) return null;
+  const since = records.attempts.some((a) => a.at > ret.at && independentAttempt(a) && rightAnswer(a) && connectedSkill(config, a.questionId) === skill);
+  return since ? null : { skill, at: ret.at };
+}
+/** transfer-hold@1: a mapped skill of this module whose latest independent answer (not a probe) is wrong: it has not been rechecked
+ * right since. Without a skill mapping no skill is assumed (null). Answers of other skills never clear it. */
+export function weakSkill(m: Module, records: LearnerRecords): string | null {
+  const config = connectionConfig(m.competency);
+  if (!config) return null;
+  const last = new Map<string, Attempt>();
+  for (const a of records.attempts) {
+    if (!of(m)(a) || !independentAttempt(a) || a.activity === "probe") continue;
+    const k = connectedSkill(config, a.questionId);
+    if (k) last.set(k, a);
+  }
+  for (const [k, a] of last) if (!rightAnswer(a)) return k;
+  return null;
+}
 function pendingInvestigation(m: Module, records: LearnerRecords, session: string): { question: string; original: string; why: string } | null {
   const alone = records.attempts.filter((a) => of(m)(a) && a.n === 1 && independentAttempt(a) && !a.context);
   const latest = alone.at(-1);
@@ -617,7 +686,34 @@ export function subSkillGap(m: Module, records: LearnerRecords): { family: strin
   return null;
 }
 /** The question for a block's check alone: the strategy's own check if the learner has never seen it, else a fresh one. */
-export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): string | null => (keyboardOffered(st.check) && !answered(records, st.check) && withinGrade(records, st.check) ? st.check : fromPool(m, "check", records));
+/**
+ * recheck@2: the question alone after an explanation. Its own check when the learner has not met it (in any form, nor as the same
+ * problem relabelled: problem-identity@1). A SKILL-SCOPED explanation is rechecked only inside its declared scope: when its own
+ * check was met, a fresh check-partition question that the scope accepts; when there is none, null (the module pauses here and
+ * the learner carries on elsewhere): a question of another skill is never put in its place. An unscoped explanation keeps the
+ * module-wide fresh check (recheck@1).
+ */
+export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): string | null => {
+  const met = metProblems(records);
+  const fresh = (id: string) => keyboardOffered(id) && !answered(records, id) && withinGrade(records, id) && !met.has(problemIdentity(id)) && !quarantined(id);
+  if (fresh(st.check)) return st.check;
+  if (st.scope === undefined) return fromPool(m, "check", records);
+  const scope = teachingScopeFor(m, st);
+  const inScope = modulePhasePool(m, "check").filter((id) => { const p = problemOf(id.replace(/:(mc|w)$/, "")); return !!p && scope.accepts(p) && fresh(id); });
+  // the recheck is first a question where the suspected misunderstanding would still show (it discriminates): the one the fix
+  // addresses, or, for general teaching, any modelled error that the learner's latest wrong answer in this scope matched
+  // (a suspicion only: it chooses the question, it claims nothing)
+  const suspects = st.addresses ? [st.addresses] : suspectedErrors(records, (id) => { const p = problemOf(id.replace(/:(mc|w)$/, "")); return !!p && scope.accepts(p); });
+  return inScope.find((id) => suspects.some((b) => probeReading(id.replace(/:(mc|w)$/, ""), b).discriminates)) ?? inScope[0] ?? null;
+};
+/** the modelled errors the learner's latest wrong answer alone (within `accepts`) matches */
+export function suspectedErrors(records: LearnerRecords, accepts: (id: string) => boolean): string[] {
+  const last = records.attempts.filter((a) => accepts(a.questionId) && !rightAnswer(a) && independentAttempt(a)).at(-1);
+  const p = last && problemOf(last.questionId.replace(/:(mc|w)$/, ""));
+  if (!last || !p) return [];
+  const response = last.questionId.endsWith(":mc") ? null : last.response;
+  return p.bugs.filter((b) => response !== null && probeReading(p.id, b.id).predicted.includes(response)).map((b) => b.id);
+}
 
 /**
  * teaching-history@1: for each strategy, instruction DELIVERED (teach records) kept apart from its questions merely

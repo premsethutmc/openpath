@@ -24,6 +24,7 @@ on:
         "frontend/src/curriculum/**",
         "frontend/e2e/curriculum.test.mjs",
         "frontend/scripts/build-curriculum.mjs",
+        "frontend/e2e/integrated-skills.test.mts",
         ".github/workflows/learning-year.yml",
       ]
 permissions:
@@ -101,6 +102,11 @@ jobs:
             exit 1
           fi
           cat /tmp/curriculum-e2e.log
+          # geometry/dice integration: two dice misconceptions and two geometry skills, each through the Year UI and this API: one
+          # wrong answer, the engine's investigation, the explanation (pending review), guided, a fresh same-skill recheck, reload;
+          # nine days on a wrong delayed check, the skill's general explanation, a fresh same-skill recheck, reload
+          mkdir -p /tmp/year-screens
+          PATHWAY_API=http://127.0.0.1:8014 OPENPATH_TEST_CLOCK_FILE=$OPENPATH_TEST_CLOCK_FILE CHROMIUM_PATH='' FAIL_BODY=/tmp/year-screens/integrated-fail INTEGRATED_RESULTS=/tmp/year-screens/integrated-skills.json node --import tsx e2e/integrated-skills.test.mts
           # Keyboard integration uses the actual provisional-content builds, not the educator-review fixture.
           node scripts/build-year.mjs
           node scripts/build-curriculum.mjs

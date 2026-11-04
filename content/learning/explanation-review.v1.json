@@ -34021,6 +34021,84 @@
    ]
   },
   {
+   "id": "MATH.probability.sample-space#akdice_fix_order",
+   "subject": "mathematics",
+   "competency": "MATH.probability.sample-space",
+   "strategy": "akdice_fix_order",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "order-ignored",
+   "revisions": [
+    {
+     "contentHash": "sha256:9dd17c6711104958a9f7808824db7e265dfee0a3884690fc8ccba5b034a7a306",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-04T05:30:44.055Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.probability.sample-space#akdice_fix_totals",
+   "subject": "mathematics",
+   "competency": "MATH.probability.sample-space",
+   "strategy": "akdice_fix_totals",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "totals-equally-likely",
+   "revisions": [
+    {
+     "contentHash": "sha256:45530a6608f0081f49b39d1c9c083dc8b2f265670aa45ba76b66ce1bfd70aca1",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-04T05:30:44.051Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.probability.sample-space#akdice_pairs",
+   "subject": "mathematics",
+   "competency": "MATH.probability.sample-space",
+   "strategy": "akdice_pairs",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:592186e57283476feb4216a83d8d60cdb8b09b0368b7d281f888f094a6cdc7da",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-04T05:30:44.056Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.probability.sample-space#chapter",
    "subject": "mathematics",
    "competency": "MATH.probability.sample-space",
