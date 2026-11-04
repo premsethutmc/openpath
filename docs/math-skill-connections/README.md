@@ -828,3 +828,68 @@ unchanged. Sources: `modules.v1.json` (fraction models ×2), `blueprints.v1.json
 
 A symlink to a local environment directory was committed in `a6fe979b` because `.gitignore` had `node_modules/` (directories only).
 Removed from the index; `.gitignore` now has `node_modules` (directory or link). CI installs with `npm ci` in a fresh checkout.
+
+## 16. Consolidation #112: #113 + #110 on #109, educator access, and three engine workers (Claude, coordinator, `consolidation/openpath-candidate`)
+
+Base: #112 at `2a5bf3cb`. It is main plus #111 `2ea7ad57` (educator access), which already carries #109 `eeddd031`; #111 was not merged again. #114 pointed to the same commit, and no second consolidation was made.
+
+### 16.1 Educator access
+
+- An active Django superuser grants and removes the educator role in Content review → Educator access (`backend/family/educator_access.py`). It is the same `ContentReviewer` grant that `manage.py content_reviewer` writes, and parents, educators, release managers, developers and staff are refused.
+- The educator-marking and educator-access browser tests run in the My Learning Year CI job, on the shipped build and the Django API.
+- **One-time server setup:** nobody can use the screen until the server operator makes one account a superuser (`python manage.py createsuperuser`, or the Django shell for an existing account). No real account was created.
+- This supersedes §13.4's "educator role by command line only" and "educator-marking not in CI".
+
+### 16.2 Dice: #113 reused, #110 reconciled (`a3c6e5f4`, `9830b27e`)
+
+**Taken from each branch:**
+- **#113** merged cleanly. It brings the general dice teaching (`akdice_pairs`, `akdice_order`), the honest dice status (§15.1) and neutral feedback.
+- **#110** adds:
+  - the sample-space skill mapping;
+  - investigation-scope@1;
+  - transfer-hold@1 (an open misunderstanding, or a mapped skill whose latest answer alone is wrong, holds back transfer);
+  - recheck@2's suspected-error choice for general teaching;
+  - relapse@1.
+- **Not taken:** #110's misconception-specific dice fixes. #113's decision to connect only general teaching stands.
+
+**Kept and changed:**
+- **Freshness:** #109's `families.problemKeyOf` is the only mechanism. `akdice` now also treats the same two dice in either order as one problem. #110's `problem-identity.ts` was a duplicate and is removed.
+- **Recovery after a failed delayed check:** #109's fresh question on the skill alone comes first. If that is wrong too, relapse@1 gives the skill's general explanation once, then a fresh recheck.
+
+**Two bugs reproduced on the assembled app and fixed.** Regression: `dice-other-skills.test.ts`, which failed on the merge without these fixes.
+1. After the general dice lesson, the family-gap recheck took any `akdice` check question. It chose `3,6,1,3` ("k or more", another skill), and a right answer there read "independent". The recheck is now the taught skill's fresh check.
+2. Right after the dice lesson, the status jumped to "independent", although no exact-total answer had been right. #113's hold dropped once the skill was taught. A taught skill whose own answers are wrong and never shown now holds the status after its lesson too.
+
+**On the assembled app:** a learner wrong on every exact-total question and right on every other counting question never reads "shown on your own". They get the general explanation, then exact-total rechecks only, then a pause with a person as the way forward. A learner who learns gets a fresh exact-total recheck alone, then a same-skill delayed check on a problem not met before. Reload gives the same status and the same next step at every point. #110's browser test `integrated-skills.test.mts` is adapted to general teaching and runs in CI.
+
+### 16.3 Three workers from `9830b27e` (each with an owner of its files; the coordinator applied proposals for files outside them)
+
+| Worker | Fixed (regression first) | Applied from proposals |
+|---|---|---|
+| **Diagnosis** | (1) An angle-pair or isosceles slip no longer leads to parallel lines, triangle-sum or construction lessons: `graph-audit.v1.json` 1.1.2 disputes those edges for recovery only, and chapters are untouched (`diag-geometry-supports.test.ts`). (2) An uncertain reading no longer tells the learner what they did (`diag-wording.test.ts`). | Lesson introductions name no kind of difficulty the answers have not established. `no-regroup` is filed under addition-regroup (regenerated). |
+| **Teaching** | Guided practice is always a fresh problem (guided-fresh@1). After a right check then a wrong answer, the learner gets one more check, then another lesson or an honest pause, never "done" with "progress" (after-pass@1). Re-entry and family-gap lessons stay on the skill that went wrong. A wrong delayed check on an unmapped question gets a fresh question or a pause, never `done` with no question. Lesson reasons are honest (`teach-follow-up.test.ts`). | Fraction comparison has a problem key, so a recheck is never the same pair reworded. |
+| **Evidence** | No delayed check before the competency is shown on the learner's own. A failed delayed check stays in the history. Recovery from it reaches "verified" one week later instead of sticking at "shown on your own". No "review" while a written answer awaits its mark. A question family with no scoped explanation (isosceles, brackets and both-sides) holds the status while its own answers are wrong (`evid-*.test.ts`). | A due delayed check is not held back by a written answer awaiting its mark. Family-gap teaching runs under the family hold. Teaching's own fix for the delayed-check bug was not applied, because the Evidence fix covers it. |
+
+The `sub-skill-evidence` E1-02/E1-03 test pinned the old leak (a learner wrong on every both-sides and bracket question reached "transfer"). It now pins the fix.
+
+### 16.4 What a learner can do now
+
+- A learner weak on one sub-skill gets no credit from its other skills: no "shown on your own", no delayed check, no "review" for something never shown. This holds in two dice, x − a equations, n − □ missing numbers, same-top fractions, the exterior angle and isosceles triangles.
+- A competent learner, or one who slipped once, reaches "verified", including after a failed delayed check and recovery.
+- Guided practice, rechecks and delayed checks stay on the skill taught, on problems not met before. The app never states a cause it has not established.
+
+### 16.5 Still open
+
+- **Missing content:**
+  - multi-digit addition has no skill mapping and no addition-scoped lesson (the `jumps` lesson's check is subtraction);
+  - same-bottom fraction comparison has no unit (`fc-*` unmapped; `compare_same_bottom` held by `HANDWRITTEN_FIRST`);
+  - supplement, complement, adjacent and other-three angle pairs, and isosceles triangles, have no teachable explanation;
+  - `statistical-questions`: the diagnostic `wm-stq-d2` is graded as held.
+- **Selection:**
+  - The chapter-entry hand-off of a mistake to another skill's lesson is open. Two no-regroup answers on two-digit sums are taught within-20 addition when entered from the chapter. The Diagnosis draft broke `skill-scope` and `linear-equations` J15, so it was not applied.
+  - After a taught skill goes wrong, the verify branch can ask about a dozen questions on other skills before returning to it (seen in linear-intro).
+- **Owner decisions:**
+  - every answer in the session after a lesson review counts as helped (`records.ts:144`);
+  - "Review needed" with "the delayed check was missed" two weeks after verified;
+  - digit-card questions can make up half the missing-number delayed check.
+- All teaching is pending educator review. Nothing is merged or deployed.

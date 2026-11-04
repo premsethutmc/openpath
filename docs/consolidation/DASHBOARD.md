@@ -96,54 +96,28 @@ Per instruction: "Keep unreviewed content pending educator approval."
 ### Experimental / Superseded (~158 branches)
 Walkthroughs, research, old base branches, standalone math engines. All superseded. No branches deleted.
 
-## Dice false-progress — BLOCKED
+## Current candidate: what is integrated (2026-11-04, coordinator)
 
-**The two-dice teaching candidate is NOT connected in the loaded app.** This is not an environment limitation — it is an architectural blocker in the content pipeline itself.
+This supersedes the "Dice false-progress — BLOCKED" analysis that stood here. It was wrong: `library.ts` already let a template extension scope a strategy to any pool family of the module (`poolFamilies`, added for geometry in #107 `a626b914`). #113 then connected the dice teaching in the loaded library. The full account is in `docs/math-skill-connections/README.md` §16.
 
-### Root cause
-
-The library builder (`packages/learning/src/library.ts`) only lets a template extension (`Blueprint.extendsTemplate`) scope a strategy to the module's MAIN family. The probability module `MATH.probability.sample-space` is seeded from `akss`; `akdice` is one of its pool families. `synthesise` throws for strategies targeting pool families. This is documented in the test fixture itself (`frontend/src/journey/two-dice.ts`, lines 4–8).
-
-Three independent confirmations:
-1. `two-dice.ts` line 11: _"It is a test fixture: nothing in the app reads this file."_
-2. `two-dice.test.ts` line 83: `assert.ok(!loaded.strategies.some((s) => s.id.startsWith("akdice_")), "not connected in the loaded library: needs the library.ts scope change and regeneration")`
-3. `library.ts`: zero references to `akdice`, `composeTwoDice`, or `two-dice`
-
-### What IS implemented (code-level, test-fixture only)
-
-| Component | Location | Status |
-|-----------|----------|--------|
-| Misconception detectors | b14.ts "andice" family | ✅ Code present (order-ignored, sums-equally-likely, double-counted, one-die-only, twelve-outcomes) |
-| Generator family | b11.ts "akdice" | ✅ Code present, freshness@2 retention |
-| Problem identity | problem-identity.ts | ✅ Mirror-total equivalence |
-| Composition rules | two-dice.ts `composeTwoDice` | ✅ Append-only, freshness@2 |
-| Test-fixture installation | two-dice.ts `installForTest` | ✅ Bypasses library builder by mutating module array directly |
-| Journey tests | two-dice.test.ts | ✅ 5 tests pass (freshness, composition, real paths ×2, delayed check) |
-| 400 grading cases | b14.ts / b11.ts tests | ✅ Mathematical grading correct |
-
-### What is NOT implemented (blocked by library builder limitation)
-
-- **Library builder scope change**: `library.ts` cannot register strategies for pool families → dice teaching cannot enter the live app
-- **Loaded app reproduction**: Cannot reproduce a learner getting dice wrong in the normal app because the teaching pathway is not live
-- **Displayed status verification**: Cannot verify because teaching is not routed
-- **Saved/reloaded evidence**: Cannot verify outside test fixtures
-- **Fresh same-skill recheck in app**: Proven only inside `installForTest` fixture, not in the live content pipeline
-- **Delayed check in app**: Proven only inside `installForTest` fixture
-
-### What the previous dashboard claimed incorrectly
-
-The previous dashboard (on `consolidation/openpath-candidate`) claimed false-progress was "addressed" based on misconception detectors existing in b14.ts and 400 grading cases passing. These prove mathematical grading correctness, not that the teaching connection is live. PR #110's walkthrough was evidence for a different branch, not for this consolidation.
+| Piece | How it got in | State in the loaded app |
+|---|---|---|
+| #111 educator access (`2ea7ad57`) | Already in this branch's history; not merged again | An active superuser can grant and remove the educator role in Content review → Educator access. The educator-marking and educator-access browser tests are in the My Learning Year CI job. **One-time server setup:** the first administrator must be made a superuser by the server operator (`python manage.py createsuperuser`, or the shell for an existing account). No real account was created. |
+| #113 general dice teaching, honest status, neutral feedback | `a3c6e5f4`, clean merge | Live. `akdice_pairs` and `akdice_order` are pending review, with demonstration labels. |
+| #110 dice mapping, investigation scope, transfer hold, relapse recovery | `9830b27e` | Live. #110's misconception-specific dice fixes are **not** registered: #113's product decision to connect general teaching only stands. |
+| Three workers (diagnosis, teaching, evidence) from `9830b27e` | `3537b853`, `d8b4ffc5`, the evidence merge, `f1af4105`, `9ea38afc` | See README §16.3 |
 
 ## Remaining limitations
 
-1. **Dice false-progress — BLOCKED**: The library builder (`library.ts`) does not support strategies targeting pool families. The dice teaching candidate exists as a test fixture only. Connecting it in the live app requires a scope change to the library builder. **This is explicitly reported as blocked, not unverified.**
-
-2. **Frontend tsc**: Requires `@types/react` (available via `npm install` in CI, not in this restricted environment). Not a code regression.
-
-3. **8 bun-only learning tests**: Require bun runtime. Same on educator-access. Not regressions.
-
-4. **4 teaching content branches deferred**: Pending educator review.
-
-5. **Frontend e2e tests**: Require Django backend + browser. Build succeeds and unit tests pass.
-
-6. **Django backend tests**: Require Python/Django environment. Backend files are from educator-access (which had passing CI).
+See README §16.5. The short list:
+- **Missing content:**
+  - multi-digit addition has no skill mapping and no addition-scoped lesson;
+  - same-bottom fraction comparison has no unit, because the `fc-*` questions are unmapped and `compare_same_bottom` is held by `HANDWRITTEN_FIRST`;
+  - four angle-pair skills and isosceles triangles have no teachable explanation;
+  - `statistical-questions` has a diagnostic that is graded as held.
+- **Open selection issue:** the chapter-entry hand-off of a mistake to another skill's lesson (forgetting to carry on two-digit sums is taught within 20 when entered from the chapter).
+- **Owner decisions:**
+  - every answer after a lesson review counts as helped (`records.ts:144`);
+  - "Review needed" with "the delayed check was missed" two weeks after verified;
+  - digit-card questions in the missing-number delayed check.
+- All teaching content remains pending educator review. Nothing is merged or deployed.

@@ -30206,6 +30206,20 @@
    ]
   },
   {
+   "id": "MATH.geometry.triangle-concurrency",
+   "name": "Locate and construct triangle centres",
+   "grades": [
+    7,
+    10
+   ],
+   "depth": 1,
+   "demand": 2,
+   "missing": [
+    "relations",
+    "review"
+   ]
+  },
+  {
    "id": "MATH.sequences.power-sums",
    "name": "Sum special series of natural numbers",
    "grades": [
@@ -30228,20 +30242,6 @@
    ],
    "depth": 2,
    "demand": 6,
-   "missing": [
-    "relations",
-    "review"
-   ]
-  },
-  {
-   "id": "MATH.geometry.triangle-concurrency",
-   "name": "Locate and construct triangle centres",
-   "grades": [
-    7,
-    10
-   ],
-   "depth": 2,
-   "demand": 2,
    "missing": [
     "relations",
     "review"

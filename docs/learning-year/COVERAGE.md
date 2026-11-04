@@ -462,7 +462,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aasign: Comparing two numbers with <, > or = | `MATH.number.compare-numbers` | 189 | 0 | 29/80/80 | `61337c14` |
 | aadigmax: The greatest or smallest number made from given digits | `MATH.number.compare-numbers` | 300 | 0 | 60/165/75 | `5af85daf` |
 | aapass: Sorting a list by comparing neighbours (passes of swaps) | `MATH.reasoning.algorithms-flowcharts` | 174 | 0 | 40/80/54 | `ad63e19f` |
-| aastadd: How many altogether: addition story problems | `MATH.number.addition` | 298 | 0 | 99/99/100 | `b2589c80` |
+| aastadd: How many altogether: addition story problems | `MATH.number.addition` | 298 | 0 | 99/99/100 | `459e4d9b` |
 | aastsub: How many are left: subtraction story problems | `MATH.number.subtraction` | 296 | 0 | 96/100/100 | `e4886e50` |
 | aasenadd: Choosing the addition sentence for a story | `MATH.number.addition` | 232 | 0 | 112/120/0 | `c997751f` |
 | aasensub: Choosing the subtraction sentence for a take-away story | `MATH.number.subtraction` | 220 | 0 | 144/76/0 | `abc0dc4d` |

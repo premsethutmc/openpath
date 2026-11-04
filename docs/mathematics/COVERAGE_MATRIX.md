@@ -91,8 +91,8 @@ Of 327 modules with a pool, 327 can fill every phase with questions the learner 
 | Combine functions by sum, difference, product, quotient and composition (`MATH.algebra.function-operations`) | 10–12 | 5 | relations |
 | Read and draw pie charts (`MATH.statistics.pie-charts`) | 4–8 | 2 | relations |
 | Perform and describe reflections, translations and rotations of figures (`MATH.geometry.transformations`) | 4–8 | 6 | relations |
+| Locate and construct triangle centres (`MATH.geometry.triangle-concurrency`) | 7–10 | 2 | relations |
 | Sum special series of natural numbers (`MATH.sequences.power-sums`) | 10–11 | 2 | relations |
 | Apply the Baudhayana-Pythagoras theorem and its converse (`MATH.geometry.pythagoras`) | 7–10 | 6 | relations |
-| Locate and construct triangle centres (`MATH.geometry.triangle-concurrency`) | 7–10 | 2 | relations |
 
 
