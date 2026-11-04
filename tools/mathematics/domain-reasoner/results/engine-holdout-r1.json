@@ -1,0 +1,32 @@
+{
+ "summary": {
+  "dataset": "holdout",
+  "stage": "R1",
+  "label": "r1",
+  "sha256": "bff66089d1e2047618082c78f9f4741099aa3df3d18a13a633acbd9c9b08751a",
+  "cases": 300,
+  "correct": 300,
+  "rate": 1,
+  "failuresByCategory": {},
+  "invalidStepsInTraces": 0,
+  "openObligations": 0,
+  "moveVerifyRejected": 0,
+  "movePreconditionRefused": 8264,
+  "visited": {
+   "median": 29,
+   "p95": 75,
+   "worst": 92
+  },
+  "pathLength": {
+   "median": 7,
+   "p95": 9,
+   "worst": 9
+  },
+  "ms": {
+   "median": 79.44,
+   "p95": 240.44,
+   "worst": 695.66
+  }
+ },
+ "failures": []
+}

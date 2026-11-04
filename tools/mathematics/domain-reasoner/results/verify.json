@@ -1,0 +1,38 @@
+{
+ "dev.json": {
+  "items": 206,
+  "withProblems": 0,
+  "notWitnessedOnGrid": 0,
+  "examples": []
+ },
+ "eval.json": {
+  "items": 400,
+  "withProblems": 0,
+  "notWitnessedOnGrid": 0,
+  "examples": []
+ },
+ "holdout.json": {
+  "items": 300,
+  "withProblems": 0,
+  "notWitnessedOnGrid": 0,
+  "examples": []
+ },
+ "unsupported.json": {
+  "items": 112,
+  "withProblems": 0,
+  "notWitnessedOnGrid": 0,
+  "examples": []
+ },
+ "adversarial.json": {
+  "items": 2884,
+  "withProblems": 0,
+  "notWitnessedOnGrid": 0,
+  "examples": []
+ },
+ "claims.json": {
+  "items": 400,
+  "withProblems": 0,
+  "notWitnessedOnGrid": 0,
+  "examples": []
+ }
+}

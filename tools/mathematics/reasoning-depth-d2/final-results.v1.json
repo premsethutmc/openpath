@@ -1,0 +1,3019 @@
+{
+  "version": "openpath-d2-final@1",
+  "benchmarkSha256": "ebdcbadc6a8824340154569f0669812ab2f1ab61a35cd86e5a7292064d41f9c9",
+  "total": 200,
+  "exactMatches": 200,
+  "validSolutions": 120,
+  "validAccepted": 120,
+  "newlyAcceptedValidRoutes": 80,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "firstInvalidStepMatches": 40,
+  "invalidCases": 40,
+  "unsupported": 8,
+  "inconclusive": 0,
+  "resourceExhausted": 8,
+  "kernelCoverage": 200,
+  "results": [
+    {
+      "id": "d2-algebra-equations-00",
+      "category": "algebra-equations",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-01",
+      "category": "algebra-equations",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-02",
+      "category": "algebra-equations",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-03",
+      "category": "algebra-equations",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-04",
+      "category": "algebra-equations",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-05",
+      "category": "algebra-equations",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-06",
+      "category": "algebra-equations",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-07",
+      "category": "algebra-equations",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-08",
+      "category": "algebra-equations",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-09",
+      "category": "algebra-equations",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-10",
+      "category": "algebra-equations",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-11",
+      "category": "algebra-equations",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-12",
+      "category": "algebra-equations",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-13",
+      "category": "algebra-equations",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-14",
+      "category": "algebra-equations",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-15",
+      "category": "algebra-equations",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-16",
+      "category": "algebra-equations",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-17",
+      "category": "algebra-equations",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-18",
+      "category": "algebra-equations",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-19",
+      "category": "algebra-equations",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-20",
+      "category": "algebra-equations",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-21",
+      "category": "algebra-equations",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-22",
+      "category": "algebra-equations",
+      "selectedRoute": "unsupported",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-23",
+      "category": "algebra-equations",
+      "selectedRoute": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-algebra-equations-24",
+      "category": "algebra-equations",
+      "selectedRoute": "resource-boundary",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-00",
+      "category": "trigonometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-01",
+      "category": "trigonometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-02",
+      "category": "trigonometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-03",
+      "category": "trigonometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-04",
+      "category": "trigonometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-05",
+      "category": "trigonometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-06",
+      "category": "trigonometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-07",
+      "category": "trigonometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-08",
+      "category": "trigonometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-09",
+      "category": "trigonometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-10",
+      "category": "trigonometry",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-11",
+      "category": "trigonometry",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-12",
+      "category": "trigonometry",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-13",
+      "category": "trigonometry",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-14",
+      "category": "trigonometry",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-15",
+      "category": "trigonometry",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-16",
+      "category": "trigonometry",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-17",
+      "category": "trigonometry",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-18",
+      "category": "trigonometry",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-19",
+      "category": "trigonometry",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-20",
+      "category": "trigonometry",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-21",
+      "category": "trigonometry",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-22",
+      "category": "trigonometry",
+      "selectedRoute": "unsupported",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-23",
+      "category": "trigonometry",
+      "selectedRoute": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-trigonometry-24",
+      "category": "trigonometry",
+      "selectedRoute": "resource-boundary",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-00",
+      "category": "geometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-01",
+      "category": "geometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-02",
+      "category": "geometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-03",
+      "category": "geometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-04",
+      "category": "geometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-05",
+      "category": "geometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-06",
+      "category": "geometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-07",
+      "category": "geometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-08",
+      "category": "geometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-09",
+      "category": "geometry",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-10",
+      "category": "geometry",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-11",
+      "category": "geometry",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-12",
+      "category": "geometry",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-13",
+      "category": "geometry",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-14",
+      "category": "geometry",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-15",
+      "category": "geometry",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-16",
+      "category": "geometry",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-17",
+      "category": "geometry",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-18",
+      "category": "geometry",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-19",
+      "category": "geometry",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-20",
+      "category": "geometry",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-21",
+      "category": "geometry",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-22",
+      "category": "geometry",
+      "selectedRoute": "unsupported",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-23",
+      "category": "geometry",
+      "selectedRoute": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-geometry-24",
+      "category": "geometry",
+      "selectedRoute": "resource-boundary",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-00",
+      "category": "calculus",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-01",
+      "category": "calculus",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-02",
+      "category": "calculus",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-03",
+      "category": "calculus",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-04",
+      "category": "calculus",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-05",
+      "category": "calculus",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-06",
+      "category": "calculus",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-07",
+      "category": "calculus",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-08",
+      "category": "calculus",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-09",
+      "category": "calculus",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-10",
+      "category": "calculus",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-11",
+      "category": "calculus",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-12",
+      "category": "calculus",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-13",
+      "category": "calculus",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-14",
+      "category": "calculus",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-15",
+      "category": "calculus",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-16",
+      "category": "calculus",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-17",
+      "category": "calculus",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-18",
+      "category": "calculus",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-19",
+      "category": "calculus",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-20",
+      "category": "calculus",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-21",
+      "category": "calculus",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-22",
+      "category": "calculus",
+      "selectedRoute": "unsupported",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-23",
+      "category": "calculus",
+      "selectedRoute": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-calculus-24",
+      "category": "calculus",
+      "selectedRoute": "resource-boundary",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-00",
+      "category": "probability-combinatorics",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-01",
+      "category": "probability-combinatorics",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-02",
+      "category": "probability-combinatorics",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-03",
+      "category": "probability-combinatorics",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-04",
+      "category": "probability-combinatorics",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-05",
+      "category": "probability-combinatorics",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-06",
+      "category": "probability-combinatorics",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-07",
+      "category": "probability-combinatorics",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-08",
+      "category": "probability-combinatorics",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-09",
+      "category": "probability-combinatorics",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-10",
+      "category": "probability-combinatorics",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-11",
+      "category": "probability-combinatorics",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-12",
+      "category": "probability-combinatorics",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-13",
+      "category": "probability-combinatorics",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-14",
+      "category": "probability-combinatorics",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-15",
+      "category": "probability-combinatorics",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-16",
+      "category": "probability-combinatorics",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-17",
+      "category": "probability-combinatorics",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-18",
+      "category": "probability-combinatorics",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-19",
+      "category": "probability-combinatorics",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-20",
+      "category": "probability-combinatorics",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-21",
+      "category": "probability-combinatorics",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-22",
+      "category": "probability-combinatorics",
+      "selectedRoute": "unsupported",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-23",
+      "category": "probability-combinatorics",
+      "selectedRoute": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-probability-combinatorics-24",
+      "category": "probability-combinatorics",
+      "selectedRoute": "resource-boundary",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-00",
+      "category": "vectors-matrices",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-01",
+      "category": "vectors-matrices",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-02",
+      "category": "vectors-matrices",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-03",
+      "category": "vectors-matrices",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-04",
+      "category": "vectors-matrices",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-05",
+      "category": "vectors-matrices",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-06",
+      "category": "vectors-matrices",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-07",
+      "category": "vectors-matrices",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-08",
+      "category": "vectors-matrices",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-09",
+      "category": "vectors-matrices",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-10",
+      "category": "vectors-matrices",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-11",
+      "category": "vectors-matrices",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-12",
+      "category": "vectors-matrices",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-13",
+      "category": "vectors-matrices",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-14",
+      "category": "vectors-matrices",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-15",
+      "category": "vectors-matrices",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-16",
+      "category": "vectors-matrices",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-17",
+      "category": "vectors-matrices",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-18",
+      "category": "vectors-matrices",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-19",
+      "category": "vectors-matrices",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-20",
+      "category": "vectors-matrices",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-21",
+      "category": "vectors-matrices",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-22",
+      "category": "vectors-matrices",
+      "selectedRoute": "unsupported",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-23",
+      "category": "vectors-matrices",
+      "selectedRoute": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-vectors-matrices-24",
+      "category": "vectors-matrices",
+      "selectedRoute": "resource-boundary",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-00",
+      "category": "complex-numbers",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-01",
+      "category": "complex-numbers",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-02",
+      "category": "complex-numbers",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-03",
+      "category": "complex-numbers",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-04",
+      "category": "complex-numbers",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-05",
+      "category": "complex-numbers",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-06",
+      "category": "complex-numbers",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-07",
+      "category": "complex-numbers",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-08",
+      "category": "complex-numbers",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-09",
+      "category": "complex-numbers",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-10",
+      "category": "complex-numbers",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-11",
+      "category": "complex-numbers",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-12",
+      "category": "complex-numbers",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-13",
+      "category": "complex-numbers",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-14",
+      "category": "complex-numbers",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-15",
+      "category": "complex-numbers",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-16",
+      "category": "complex-numbers",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-17",
+      "category": "complex-numbers",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-18",
+      "category": "complex-numbers",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-19",
+      "category": "complex-numbers",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-20",
+      "category": "complex-numbers",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-21",
+      "category": "complex-numbers",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-22",
+      "category": "complex-numbers",
+      "selectedRoute": "unsupported",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-23",
+      "category": "complex-numbers",
+      "selectedRoute": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-complex-numbers-24",
+      "category": "complex-numbers",
+      "selectedRoute": "resource-boundary",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-00",
+      "category": "multi-domain",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-01",
+      "category": "multi-domain",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-02",
+      "category": "multi-domain",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-03",
+      "category": "multi-domain",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-04",
+      "category": "multi-domain",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-05",
+      "category": "multi-domain",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-06",
+      "category": "multi-domain",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-07",
+      "category": "multi-domain",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-08",
+      "category": "multi-domain",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-09",
+      "category": "multi-domain",
+      "selectedRoute": "reference-long",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-10",
+      "category": "multi-domain",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-11",
+      "category": "multi-domain",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-12",
+      "category": "multi-domain",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-13",
+      "category": "multi-domain",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-14",
+      "category": "multi-domain",
+      "selectedRoute": "alternative",
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-15",
+      "category": "multi-domain",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-16",
+      "category": "multi-domain",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-17",
+      "category": "multi-domain",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-18",
+      "category": "multi-domain",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-19",
+      "category": "multi-domain",
+      "selectedRoute": "incorrect",
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "actual": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-20",
+      "category": "multi-domain",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-21",
+      "category": "multi-domain",
+      "selectedRoute": "incomplete",
+      "expected": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "incomplete",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-22",
+      "category": "multi-domain",
+      "selectedRoute": "unsupported",
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-23",
+      "category": "multi-domain",
+      "selectedRoute": "circular",
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "actual": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "kernelBacked": true,
+      "match": true
+    },
+    {
+      "id": "d2-multi-domain-24",
+      "category": "multi-domain",
+      "selectedRoute": "resource-boundary",
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "actual": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "kernelBacked": true,
+      "match": true
+    }
+  ]
+}

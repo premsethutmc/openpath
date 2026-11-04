@@ -1,0 +1,1505 @@
+{
+  "version": "openpath-d2-adversarial@1",
+  "cases": [
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-00",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 0,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-01",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 1,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-02",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 2,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-03",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 3,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-04",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 4,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-05",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 5,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-06",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 6,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-07",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 7,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-08",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 8,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-09",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 9,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-10",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 10,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-11",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 11,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-12",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 12,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-13",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 13,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-14",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 14,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-15",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 15,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-16",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 16,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-17",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 17,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-18",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 18,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-cross-domain-assumption-19",
+      "category": "incorrect-cross-domain-assumption",
+      "variant": 19,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-00",
+      "category": "invalid-substitution",
+      "variant": 0,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-01",
+      "category": "invalid-substitution",
+      "variant": 1,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-02",
+      "category": "invalid-substitution",
+      "variant": 2,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-03",
+      "category": "invalid-substitution",
+      "variant": 3,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-04",
+      "category": "invalid-substitution",
+      "variant": 4,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-05",
+      "category": "invalid-substitution",
+      "variant": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-06",
+      "category": "invalid-substitution",
+      "variant": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-07",
+      "category": "invalid-substitution",
+      "variant": 7,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-08",
+      "category": "invalid-substitution",
+      "variant": 8,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-09",
+      "category": "invalid-substitution",
+      "variant": 9,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-10",
+      "category": "invalid-substitution",
+      "variant": 10,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-11",
+      "category": "invalid-substitution",
+      "variant": 11,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-12",
+      "category": "invalid-substitution",
+      "variant": 12,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-13",
+      "category": "invalid-substitution",
+      "variant": 13,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-14",
+      "category": "invalid-substitution",
+      "variant": 14,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-15",
+      "category": "invalid-substitution",
+      "variant": 15,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-16",
+      "category": "invalid-substitution",
+      "variant": 16,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-17",
+      "category": "invalid-substitution",
+      "variant": 17,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-18",
+      "category": "invalid-substitution",
+      "variant": 18,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-invalid-substitution-19",
+      "category": "invalid-substitution",
+      "variant": 19,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-00",
+      "category": "missing-domain-restriction",
+      "variant": 0,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-01",
+      "category": "missing-domain-restriction",
+      "variant": 1,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-02",
+      "category": "missing-domain-restriction",
+      "variant": 2,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-03",
+      "category": "missing-domain-restriction",
+      "variant": 3,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-04",
+      "category": "missing-domain-restriction",
+      "variant": 4,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-05",
+      "category": "missing-domain-restriction",
+      "variant": 5,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-06",
+      "category": "missing-domain-restriction",
+      "variant": 6,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-07",
+      "category": "missing-domain-restriction",
+      "variant": 7,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-08",
+      "category": "missing-domain-restriction",
+      "variant": 8,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-09",
+      "category": "missing-domain-restriction",
+      "variant": 9,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-10",
+      "category": "missing-domain-restriction",
+      "variant": 10,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-11",
+      "category": "missing-domain-restriction",
+      "variant": 11,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-12",
+      "category": "missing-domain-restriction",
+      "variant": 12,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-13",
+      "category": "missing-domain-restriction",
+      "variant": 13,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-14",
+      "category": "missing-domain-restriction",
+      "variant": 14,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-15",
+      "category": "missing-domain-restriction",
+      "variant": 15,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-16",
+      "category": "missing-domain-restriction",
+      "variant": 16,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-17",
+      "category": "missing-domain-restriction",
+      "variant": 17,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-18",
+      "category": "missing-domain-restriction",
+      "variant": 18,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-missing-domain-restriction-19",
+      "category": "missing-domain-restriction",
+      "variant": 19,
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-00",
+      "category": "circular-reasoning",
+      "variant": 0,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-01",
+      "category": "circular-reasoning",
+      "variant": 1,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-02",
+      "category": "circular-reasoning",
+      "variant": 2,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-03",
+      "category": "circular-reasoning",
+      "variant": 3,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-04",
+      "category": "circular-reasoning",
+      "variant": 4,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-05",
+      "category": "circular-reasoning",
+      "variant": 5,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-06",
+      "category": "circular-reasoning",
+      "variant": 6,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-07",
+      "category": "circular-reasoning",
+      "variant": 7,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-08",
+      "category": "circular-reasoning",
+      "variant": 8,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-09",
+      "category": "circular-reasoning",
+      "variant": 9,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-10",
+      "category": "circular-reasoning",
+      "variant": 10,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-11",
+      "category": "circular-reasoning",
+      "variant": 11,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-12",
+      "category": "circular-reasoning",
+      "variant": 12,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-13",
+      "category": "circular-reasoning",
+      "variant": 13,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-14",
+      "category": "circular-reasoning",
+      "variant": 14,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-15",
+      "category": "circular-reasoning",
+      "variant": 15,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-16",
+      "category": "circular-reasoning",
+      "variant": 16,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-17",
+      "category": "circular-reasoning",
+      "variant": 17,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-18",
+      "category": "circular-reasoning",
+      "variant": 18,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-circular-reasoning-19",
+      "category": "circular-reasoning",
+      "variant": 19,
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-00",
+      "category": "incorrect-method-transition",
+      "variant": 0,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-01",
+      "category": "incorrect-method-transition",
+      "variant": 1,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-02",
+      "category": "incorrect-method-transition",
+      "variant": 2,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-03",
+      "category": "incorrect-method-transition",
+      "variant": 3,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-04",
+      "category": "incorrect-method-transition",
+      "variant": 4,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-05",
+      "category": "incorrect-method-transition",
+      "variant": 5,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-06",
+      "category": "incorrect-method-transition",
+      "variant": 6,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-07",
+      "category": "incorrect-method-transition",
+      "variant": 7,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-08",
+      "category": "incorrect-method-transition",
+      "variant": 8,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-09",
+      "category": "incorrect-method-transition",
+      "variant": 9,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-10",
+      "category": "incorrect-method-transition",
+      "variant": 10,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-11",
+      "category": "incorrect-method-transition",
+      "variant": 11,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-12",
+      "category": "incorrect-method-transition",
+      "variant": 12,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-13",
+      "category": "incorrect-method-transition",
+      "variant": 13,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-14",
+      "category": "incorrect-method-transition",
+      "variant": 14,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-15",
+      "category": "incorrect-method-transition",
+      "variant": 15,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-16",
+      "category": "incorrect-method-transition",
+      "variant": 16,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-17",
+      "category": "incorrect-method-transition",
+      "variant": 17,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-18",
+      "category": "incorrect-method-transition",
+      "variant": 18,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-incorrect-method-transition-19",
+      "category": "incorrect-method-transition",
+      "variant": 19,
+      "expected": {
+        "classification": "unsupported",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-00",
+      "category": "correct-final-after-invalid",
+      "variant": 0,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-01",
+      "category": "correct-final-after-invalid",
+      "variant": 1,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-02",
+      "category": "correct-final-after-invalid",
+      "variant": 2,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-03",
+      "category": "correct-final-after-invalid",
+      "variant": 3,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-04",
+      "category": "correct-final-after-invalid",
+      "variant": 4,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-05",
+      "category": "correct-final-after-invalid",
+      "variant": 5,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-06",
+      "category": "correct-final-after-invalid",
+      "variant": 6,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-07",
+      "category": "correct-final-after-invalid",
+      "variant": 7,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-08",
+      "category": "correct-final-after-invalid",
+      "variant": 8,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-09",
+      "category": "correct-final-after-invalid",
+      "variant": 9,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-10",
+      "category": "correct-final-after-invalid",
+      "variant": 10,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-11",
+      "category": "correct-final-after-invalid",
+      "variant": 11,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-12",
+      "category": "correct-final-after-invalid",
+      "variant": 12,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-13",
+      "category": "correct-final-after-invalid",
+      "variant": 13,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-14",
+      "category": "correct-final-after-invalid",
+      "variant": 14,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-15",
+      "category": "correct-final-after-invalid",
+      "variant": 15,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-16",
+      "category": "correct-final-after-invalid",
+      "variant": 16,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-17",
+      "category": "correct-final-after-invalid",
+      "variant": 17,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-18",
+      "category": "correct-final-after-invalid",
+      "variant": 18,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-correct-final-after-invalid-19",
+      "category": "correct-final-after-invalid",
+      "variant": 19,
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 2
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-00",
+      "category": "valid-unconventional-route",
+      "variant": 0,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-01",
+      "category": "valid-unconventional-route",
+      "variant": 1,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-02",
+      "category": "valid-unconventional-route",
+      "variant": 2,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-03",
+      "category": "valid-unconventional-route",
+      "variant": 3,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-04",
+      "category": "valid-unconventional-route",
+      "variant": 4,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-05",
+      "category": "valid-unconventional-route",
+      "variant": 5,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-06",
+      "category": "valid-unconventional-route",
+      "variant": 6,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-07",
+      "category": "valid-unconventional-route",
+      "variant": 7,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-08",
+      "category": "valid-unconventional-route",
+      "variant": 8,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-09",
+      "category": "valid-unconventional-route",
+      "variant": 9,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-10",
+      "category": "valid-unconventional-route",
+      "variant": 10,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-11",
+      "category": "valid-unconventional-route",
+      "variant": 11,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-12",
+      "category": "valid-unconventional-route",
+      "variant": 12,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-13",
+      "category": "valid-unconventional-route",
+      "variant": 13,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-14",
+      "category": "valid-unconventional-route",
+      "variant": 14,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-15",
+      "category": "valid-unconventional-route",
+      "variant": 15,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-16",
+      "category": "valid-unconventional-route",
+      "variant": 16,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-17",
+      "category": "valid-unconventional-route",
+      "variant": 17,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-18",
+      "category": "valid-unconventional-route",
+      "variant": 18,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-valid-unconventional-route-19",
+      "category": "valid-unconventional-route",
+      "variant": 19,
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-resource-exhaustion-00",
+      "category": "resource-exhaustion",
+      "variant": 0,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-resource-exhaustion-01",
+      "category": "resource-exhaustion",
+      "variant": 1,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-resource-exhaustion-02",
+      "category": "resource-exhaustion",
+      "variant": 2,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-resource-exhaustion-03",
+      "category": "resource-exhaustion",
+      "variant": 3,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-resource-exhaustion-04",
+      "category": "resource-exhaustion",
+      "variant": 4,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-resource-exhaustion-05",
+      "category": "resource-exhaustion",
+      "variant": 5,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-resource-exhaustion-06",
+      "category": "resource-exhaustion",
+      "variant": 6,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-resource-exhaustion-07",
+      "category": "resource-exhaustion",
+      "variant": 7,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-resource-exhaustion-08",
+      "category": "resource-exhaustion",
+      "variant": 8,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    },
+    {
+      "id": "d2-adversarial-resource-exhaustion-09",
+      "category": "resource-exhaustion",
+      "variant": 9,
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored proof-state and exact-domain expectation"
+    }
+  ]
+}

@@ -6,6 +6,7 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
+import { withoutVerification2 } from "./test-helpers.ts";
 import { leafView } from "../../../../packages/english-core/src/index.ts";
 import { Api, ApiError, ServerRepo } from "./account.ts";
 import { loadContent } from "./content.ts";
@@ -103,7 +104,7 @@ test("AC-3 historical replay: a record made by the PR #24 app, imported into an 
   const l = await Learner.open(c, new ServerRepo(api), pupil.id, testClock(history.now));
   assert.deepEqual(JSON.parse(JSON.stringify(l.state.ledger.composite)), history.composite);
   assert.deepEqual(JSON.parse(JSON.stringify(l.state.ledger.decisions)), history.decisions);
-  for (const [id, v] of Object.entries(history.views)) assert.deepEqual(JSON.parse(JSON.stringify(leafView(l.state.ledger.composite, c.index, id, history.now))), v, id);
+  for (const [id, v] of Object.entries(history.views)) assert.deepEqual(withoutVerification2(leafView(l.state.ledger.composite, c.index, id, history.now)), v, id);
   // and the import never replaces an existing record
   await assert.rejects(repo.replaceAll(pupil.id, history.events.slice(0, 3)), (e: unknown) => e instanceof ApiError && e.status === 409);
   assert.equal(server.pupils.get(pupil.id)!.events.length, history.events.length);

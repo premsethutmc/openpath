@@ -1,0 +1,164 @@
+OK   h5-lin-001 valid       fi=None fac=True
+OK   h5-lin-002 valid       fi=None fac=True
+OK   h5-lin-003 valid-jump  fi=None fac=True
+OK   h5-lin-004 invalid     fi=0 fac=False
+OK   h5-lin-005 valid       fi=None fac=True
+OK   h5-lin-006 valid       fi=None fac=True
+OK   h5-lin-007 valid-jump  fi=None fac=True
+OK   h5-lin-008 invalid     fi=0 fac=False
+OK   h5-lin-009 valid       fi=None fac=True
+OK   h5-lin-010 valid       fi=None fac=True
+OK   h5-lin-011 incomplete  fi=None fac=None
+OK   h5-lin-012 invalid     fi=0 fac=False
+OK   h5-lin-013 valid       fi=None fac=True
+OK   h5-lin-014 valid       fi=None fac=True
+OK   h5-lin-015 valid-jump  fi=None fac=True
+OK   h5-lin-016 invalid     fi=0 fac=False
+OK   h5-lin-017 valid       fi=None fac=True
+OK   h5-lin-018 valid       fi=None fac=True
+OK   h5-lin-019 valid-jump  fi=None fac=True
+OK   h5-lin-020 invalid     fi=0 fac=False
+OK   h5-quad-001 valid       fi=None fac=True
+OK   h5-quad-002 invalid     fi=1 fac=False
+OK   h5-quad-003 valid       fi=None fac=True
+OK   h5-quad-004 invalid     fi=1 fac=False
+OK   h5-quad-005 valid       fi=None fac=True
+OK   h5-quad-006 invalid     fi=0 fac=False
+OK   h5-quad-007 valid       fi=None fac=True
+OK   h5-quad-008 invalid     fi=0 fac=False
+OK   h5-quad-009 valid-jump  fi=None fac=True
+OK   h5-quad-010 invalid     fi=0 fac=False
+OK   h5-quad-011 valid       fi=None fac=True
+OK   h5-quad-012 invalid     fi=0 fac=False
+OK   h5-quad-013 valid       fi=None fac=True
+OK   h5-quad-014 incomplete  fi=None fac=None
+OK   h5-quad-015 valid       fi=None fac=True
+OK   h5-quad-016 invalid     fi=1 fac=False
+OK   h5-quad-017 valid       fi=None fac=True
+OK   h5-quad-018 invalid     fi=0 fac=False
+OK   h5-quad-019 valid-jump  fi=None fac=True
+OK   h5-quad-020 invalid     fi=1 fac=False
+OK   h5-rat-001 valid       fi=None fac=True
+OK   h5-rat-002 invalid     fi=1 fac=False
+OK   h5-rat-003 valid       fi=None fac=True
+OK   h5-rat-004 invalid     fi=1 fac=False
+OK   h5-rat-005 valid-jump  fi=None fac=True
+OK   h5-rat-006 valid       fi=None fac=True
+OK   h5-rat-007 invalid     fi=0 fac=False
+OK   h5-rat-008 valid       fi=None fac=True
+OK   h5-rat-009 valid-jump  fi=None fac=True
+OK   h5-rat-010 valid       fi=None fac=True
+OK   h5-rat-011 invalid     fi=0 fac=False
+OK   h5-rat-012 valid       fi=None fac=True
+OK   h5-rat-013 invalid     fi=0 fac=False
+OK   h5-rat-014 valid       fi=None fac=True
+OK   h5-rat-015 invalid     fi=4 fac=False
+OK   h5-rat-016 invalid     fi=4 fac=False
+OK   h5-rat-017 valid       fi=None fac=True
+OK   h5-rat-018 valid-jump  fi=None fac=True
+OK   h5-rat-019 invalid     fi=0 fac=False
+OK   h5-rat-020 incomplete  fi=None fac=None
+OK   h5-rat-021 valid       fi=None fac=True
+OK   h5-sq-001 valid       fi=None fac=True
+OK   h5-sq-002 invalid     fi=5 fac=False
+OK   h5-sq-003 valid       fi=None fac=True
+OK   h5-sq-004 invalid     fi=6 fac=False
+OK   h5-sq-005 valid-jump  fi=None fac=True
+OK   h5-sq-006 invalid     fi=5 fac=False
+OK   h5-sq-007 valid       fi=None fac=True
+OK   h5-sq-008 invalid     fi=5 fac=False
+OK   h5-sq-009 invalid     fi=5 fac=False
+OK   h5-sq-010 valid       fi=None fac=True
+OK   h5-sq-011 invalid     fi=4 fac=False
+OK   h5-sq-012 incomplete  fi=None fac=None
+OK   h5-sq-013 valid       fi=None fac=True
+OK   h5-sq-014 invalid     fi=5 fac=False
+OK   h5-sq-015 valid       fi=None fac=True
+OK   h5-sq-016 valid-jump  fi=None fac=True
+OK   h5-sq-017 invalid     fi=5 fac=False
+OK   h5-sq-018 valid       fi=None fac=True
+OK   h5-sq-019 invalid     fi=5 fac=False
+OK   h5-sq-020 incomplete  fi=None fac=None
+OK   h5-ineq-001 valid       fi=None fac=True
+OK   h5-ineq-002 invalid     fi=1 fac=False
+OK   h5-ineq-003 valid       fi=None fac=True
+OK   h5-ineq-004 invalid     fi=0 fac=False
+OK   h5-ineq-005 valid       fi=None fac=True
+OK   h5-ineq-006 valid       fi=None fac=True
+OK   h5-ineq-007 invalid     fi=1 fac=False
+OK   h5-ineq-008 valid-jump  fi=None fac=True
+OK   h5-ineq-009 invalid     fi=0 fac=False
+OK   h5-ineq-010 valid       fi=None fac=True
+OK   h5-ineq-011 invalid     fi=0 fac=False
+OK   h5-ineq-012 valid       fi=None fac=True
+OK   h5-ineq-013 valid       fi=None fac=True
+OK   h5-ineq-014 invalid     fi=2 fac=False
+OK   h5-ineq-015 valid       fi=None fac=True
+OK   h5-ineq-016 invalid     fi=2 fac=False
+OK   h5-ineq-017 incomplete  fi=None fac=None
+OK   h5-ineq-018 invalid     fi=0 fac=False
+OK   h5-ineq-019 valid-jump  fi=None fac=True
+OK   h5-ineq-020 valid       fi=None fac=True
+OK   h5-ineq-021 invalid     fi=1 fac=False
+OK   h5-sub-001 valid       fi=None fac=True
+OK   h5-sub-002 invalid     fi=1 fac=False
+OK   h5-sub-003 valid       fi=None fac=True
+OK   h5-sub-004 invalid     fi=1 fac=False
+OK   h5-sub-005 valid       fi=None fac=True
+OK   h5-sub-006 invalid     fi=1 fac=False
+OK   h5-sub-007 valid       fi=None fac=True
+OK   h5-sub-008 invalid     fi=1 fac=False
+OK   h5-sub-009 valid       fi=None fac=True
+OK   h5-sub-010 valid-jump  fi=None fac=True
+OK   h5-sub-011 invalid     fi=1 fac=False
+OK   h5-sub-012 valid       fi=None fac=True
+OK   h5-sub-013 valid-jump  fi=None fac=True
+OK   h5-sub-014 invalid     fi=1 fac=False
+OK   h5-sub-015 valid       fi=None fac=True
+OK   h5-sub-016 invalid     fi=1 fac=False
+OK   h5-sub-017 valid       fi=None fac=True
+OK   h5-sub-018 invalid     fi=2 fac=False
+OK   h5-sub-019 incomplete  fi=None fac=None
+OK   h5-sub-020 valid       fi=None fac=True
+OK   h5-sub-021 invalid     fi=1 fac=False
+OK   h5-expr-001 valid       fi=None fac=True
+OK   h5-expr-002 incomplete  fi=None fac=None
+OK   h5-expr-003 invalid     fi=0 fac=False
+OK   h5-expr-004 valid       fi=None fac=True
+OK   h5-expr-005 invalid     fi=0 fac=False
+OK   h5-expr-006 valid       fi=None fac=True
+OK   h5-expr-007 invalid     fi=0 fac=False
+OK   h5-expr-008 valid       fi=None fac=True
+OK   h5-expr-009 invalid     fi=0 fac=False
+OK   h5-expr-010 valid       fi=None fac=True
+OK   h5-expr-011 invalid     fi=0 fac=False
+OK   h5-expr-012 valid       fi=None fac=True
+OK   h5-expr-013 incomplete  fi=None fac=None
+OK   h5-expr-014 valid       fi=None fac=True
+OK   h5-expr-015 invalid     fi=1 fac=False
+OK   h5-expr-016 valid       fi=None fac=True
+OK   h5-expr-017 invalid     fi=0 fac=False
+OK   h5-expr-018 valid-jump  fi=None fac=True
+OK   h5-expr-019 invalid     fi=0 fac=False
+OK   h5-expr-020 valid       fi=None fac=True
+OK   h5-expr-021 invalid     fi=1 fac=False
+OK   h5-expr-022 valid-jump  fi=None fac=True
+OK   h5-expr-023 invalid     fi=1 fac=False
+OK   h5-expr-024 valid       fi=None fac=True
+OK   h5-mal-001 malformed   fi=None fac=None [relation count 2]
+OK   h5-mal-002 malformed   fi=None fac=None [unbalanced]
+OK   h5-mal-003 malformed   fi=None fac=None [letter-digit (x2)]
+OK   h5-mal-004 malformed   fi=None fac=None [a/bx ambiguous]
+OK   h5-mal-005 malformed   fi=None fac=None [chained division]
+OK   h5-mal-006 malformed   fi=None fac=None [stray word so]
+OK   h5-mal-007 malformed   fi=None fac=None [relation count 2]
+OK   h5-mal-008 malformed   fi=None fac=None [doubled operator]
+OK   h5-mal-009 malformed   fi=None fac=None [relation count 2]
+OK   h5-mal-010 malformed   fi=None fac=None [unbalanced]
+OK   h5-mal-011 malformed   fi=None fac=None [doubled operator]
+OK   h5-mal-012 malformed   fi=None fac=None [a/bx ambiguous]
+OK   h5-mal-013 malformed   fi=None fac=None [unbalanced]
+OK   h5-mal-014 malformed   fi=None fac=None [empty]
+OK   h5-mal-015 malformed   fi=None fac=None [stray word ans]
+OK   h5-mal-016 malformed   fi=None fac=None [letter as times sign]
+items=163 disagreements=0

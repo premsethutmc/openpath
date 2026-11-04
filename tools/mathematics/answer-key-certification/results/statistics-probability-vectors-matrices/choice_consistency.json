@@ -1,0 +1,146 @@
+{
+ "anstack": {
+  "9A walk share larger": {
+   "A": 158
+  },
+  "9B walk share larger": {
+   "B": 140
+  },
+  "equal": {
+   "C": 2
+  }
+ },
+ "atcv": {
+  "equal CV": {
+   "C": 98
+  },
+  "first has smaller CV": {
+   "A": 103
+  },
+  "second has smaller CV": {
+   "B": 99
+  }
+ },
+ "anavgav": {
+  "claim right": {
+   "A": 67
+  },
+  "true mean above claim": {
+   "B": 123
+  },
+  "true mean below claim": {
+   "C": 110
+  }
+ },
+ "aqrank": {
+  "inconsistent (no solution)": {
+   "C": 138
+  },
+  "infinitely many": {
+   "B": 129
+  },
+  "unique": {
+   "A": 133
+  }
+ },
+ "ansure": {
+  "impossible": {
+   "A": 31
+  },
+  "neither": {
+   "C": 59
+  },
+  "sure": {
+   "B": 28
+  }
+ },
+ "atindt": {
+  "dependent, mutually exclusive": {
+   "B": 144
+  },
+  "dependent, not mutually exclusive": {
+   "C": 135
+  },
+  "independent, not mutually exclusive": {
+   "A": 121
+  }
+ },
+ "asmex": {
+  "mutually exclusive, exhaustive": {
+   "C": 80
+  },
+  "mutually exclusive, not exhaustive": {
+   "A": 80
+  },
+  "not mutually exclusive, exhaustive": {
+   "B": 80
+  },
+  "not mutually exclusive, not exhaustive": {
+   "D": 80
+  }
+ },
+ "adbartf": {
+  "statement false": {
+   "B": 98,
+   "A": 111
+  },
+  "statement true": {
+   "B": 69,
+   "A": 58
+  }
+ },
+ "akmex": {
+  "mutually exclusive, exhaustive": {
+   "A": 2,
+   "B": 3,
+   "C": 3
+  },
+  "mutually exclusive, not exhaustive": {
+   "B": 3,
+   "D": 6,
+   "C": 4,
+   "A": 4
+  },
+  "not mutually exclusive, exhaustive": {
+   "C": 1,
+   "B": 1
+  },
+  "not mutually exclusive, not exhaustive": {
+   "C": 23,
+   "D": 25,
+   "A": 21,
+   "B": 22
+  }
+ },
+ "akscale": {
+  "0<P<1/2": {
+   "A": 21,
+   "B": 22,
+   "C": 17,
+   "D": 16
+  },
+  "1/2<P<1": {
+   "A": 21,
+   "B": 21,
+   "C": 17,
+   "D": 17
+  },
+  "P=0": {
+   "B": 25,
+   "A": 24,
+   "D": 26,
+   "C": 24
+  },
+  "P=1": {
+   "B": 30,
+   "A": 28,
+   "D": 29,
+   "C": 28
+  },
+  "P=1/2": {
+   "D": 9,
+   "C": 10,
+   "A": 1
+  }
+ }
+}

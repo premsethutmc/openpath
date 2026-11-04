@@ -1,0 +1,19 @@
+{
+ "run": "coordinator mutation test",
+ "mutation": "first number in stored answer +1 (or \" zz\" appended if none); first 40 questions per non-choice family; MC/word dropped",
+ "families": 911,
+ "mutatedQuestions": 36390,
+ "passedAsOk": 1,
+ "mismatch": 36314,
+ "ambiguous": 10,
+ "unsupported(unreadable mutated form)": 61,
+ "referenceError(mutated form not parsable)": 4,
+ "escape": {
+  "family": "aopfint",
+  "id": "gen:aopfint:1,0,0,1,0",
+  "mutatedAnswer": "x + log|x| zz",
+  "explanation": "oracle antiderivative equality treats a trailing free symbol as the constant of integration; not a key defect, a limitation of the shared oracle for deliberately corrupted antiderivative text"
+ },
+ "choiceFamilies": "key-shift test: choice-pass 46/46 families 100% flagged; choice-pass-geo 31/31 100%; choice-recheck 10/10 100%; other choice families (algebra-a 12, algebra-b 15, sets-reasoning 16, calculus, etc.) verified by evaluating every option as a statement (exactly one true)",
+ "agentRuns": "number-a, measurement (40/family), algebra-a (6,480 sampled) ran their own corrupted-answer tests: 0 passed"
+}

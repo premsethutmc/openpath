@@ -1,0 +1,4006 @@
+[
+ {
+  "id": "m00",
+  "text": "3*(x+2)=21",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "5",
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "3*x+3*2=21"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "3*x+6=21"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 6 from both sides",
+    "to": "3*x+6-6=21-6"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms, evaluate numbers)",
+    "to": "3*x=15"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 3",
+    "to": "3*x/3=15/3"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=5"
+   }
+  ],
+  "stats": {
+   "visited": 10,
+   "generated": 12,
+   "duplicates": 1,
+   "depth": 6,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "3*(x+2)=21",
+    "rule": "expand",
+    "to": "3*x+3*2=21",
+    "status": "new"
+   },
+   {
+    "from": "3*x+3*2=21",
+    "rule": "simplify",
+    "to": "3*x+6=21",
+    "status": "new"
+   },
+   {
+    "from": "3*x+6=21",
+    "rule": "subtract-both-sides",
+    "to": "3*x+6-3*x=21-3*x",
+    "status": "new"
+   },
+   {
+    "from": "3*x+6=21",
+    "rule": "subtract-both-sides",
+    "to": "3*x+6-6=21-6",
+    "status": "new"
+   },
+   {
+    "from": "3*x+6-3*x=21-3*x",
+    "rule": "simplify",
+    "to": "6=-(3*x)+21",
+    "status": "new"
+   },
+   {
+    "from": "3*x+6-6=21-6",
+    "rule": "simplify",
+    "to": "3*x=15",
+    "status": "new"
+   },
+   {
+    "from": "6=-(3*x)+21",
+    "rule": "subtract-both-sides",
+    "to": "6-(-(3*x))=-(3*x)+21-(-(3*x))",
+    "status": "new"
+   },
+   {
+    "from": "6=-(3*x)+21",
+    "rule": "subtract-both-sides",
+    "to": "6-21=-(3*x)+21-21",
+    "status": "new"
+   },
+   {
+    "from": "3*x=15",
+    "rule": "divide-both-sides",
+    "to": "3*x/3=15/3",
+    "status": "new"
+   },
+   {
+    "from": "6-(-(3*x))=-(3*x)+21-(-(3*x))",
+    "rule": "simplify",
+    "to": "3*x+6=21",
+    "status": "duplicate"
+   },
+   {
+    "from": "6-21=-(3*x)+21-21",
+    "rule": "simplify",
+    "to": "-15=-(3*x)",
+    "status": "new"
+   },
+   {
+    "from": "3*x/3=15/3",
+    "rule": "simplify",
+    "to": "x=5",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m01",
+  "text": "5*x-7=18",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "5",
+  "steps": [
+   {
+    "rule": "add-both-sides",
+    "explain": "add 7 to both sides",
+    "to": "5*x-7+7=18+7"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms, evaluate numbers)",
+    "to": "5*x=25"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 5",
+    "to": "5*x/5=25/5"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=5"
+   }
+  ],
+  "stats": {
+   "visited": 8,
+   "generated": 10,
+   "duplicates": 1,
+   "depth": 4,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "5*x-7=18",
+    "rule": "subtract-both-sides",
+    "to": "5*x-7-5*x=18-5*x",
+    "status": "new"
+   },
+   {
+    "from": "5*x-7=18",
+    "rule": "add-both-sides",
+    "to": "5*x-7+7=18+7",
+    "status": "new"
+   },
+   {
+    "from": "5*x-7-5*x=18-5*x",
+    "rule": "simplify",
+    "to": "-7=-(5*x)+18",
+    "status": "new"
+   },
+   {
+    "from": "5*x-7+7=18+7",
+    "rule": "simplify",
+    "to": "5*x=25",
+    "status": "new"
+   },
+   {
+    "from": "-7=-(5*x)+18",
+    "rule": "subtract-both-sides",
+    "to": "-7-(-(5*x))=-(5*x)+18-(-(5*x))",
+    "status": "new"
+   },
+   {
+    "from": "-7=-(5*x)+18",
+    "rule": "subtract-both-sides",
+    "to": "-7-18=-(5*x)+18-18",
+    "status": "new"
+   },
+   {
+    "from": "5*x=25",
+    "rule": "divide-both-sides",
+    "to": "5*x/5=25/5",
+    "status": "new"
+   },
+   {
+    "from": "-7-(-(5*x))=-(5*x)+18-(-(5*x))",
+    "rule": "simplify",
+    "to": "5*x-7=18",
+    "status": "duplicate"
+   },
+   {
+    "from": "-7-18=-(5*x)+18-18",
+    "rule": "simplify",
+    "to": "-25=-(5*x)",
+    "status": "new"
+   },
+   {
+    "from": "5*x/5=25/5",
+    "rule": "simplify",
+    "to": "x=5",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m02",
+  "text": "2*(x-3)=x+4",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "10",
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "2*x-2*3=x+4"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "2*x-6=x+4"
+   },
+   {
+    "rule": "add-both-sides",
+    "explain": "add 6 to both sides",
+    "to": "2*x-6+6=x+4+6"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "2*x=x+10"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract x from both sides",
+    "to": "2*x-x=x+10-x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "x=10"
+   }
+  ],
+  "stats": {
+   "visited": 15,
+   "generated": 25,
+   "duplicates": 1,
+   "depth": 6,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "2*(x-3)=x+4",
+    "rule": "expand",
+    "to": "2*x-2*3=x+4",
+    "status": "new"
+   },
+   {
+    "from": "2*x-2*3=x+4",
+    "rule": "simplify",
+    "to": "2*x-6=x+4",
+    "status": "new"
+   },
+   {
+    "from": "2*x-6=x+4",
+    "rule": "subtract-both-sides",
+    "to": "2*x-6-2*x=x+4-2*x",
+    "status": "new"
+   },
+   {
+    "from": "2*x-6=x+4",
+    "rule": "add-both-sides",
+    "to": "2*x-6+6=x+4+6",
+    "status": "new"
+   },
+   {
+    "from": "2*x-6=x+4",
+    "rule": "subtract-both-sides",
+    "to": "2*x-6-x=x+4-x",
+    "status": "new"
+   },
+   {
+    "from": "2*x-6=x+4",
+    "rule": "subtract-both-sides",
+    "to": "2*x-6-4=x+4-4",
+    "status": "new"
+   },
+   {
+    "from": "2*x-6-2*x=x+4-2*x",
+    "rule": "simplify",
+    "to": "-6=-x+4",
+    "status": "new"
+   },
+   {
+    "from": "2*x-6+6=x+4+6",
+    "rule": "simplify",
+    "to": "2*x=x+10",
+    "status": "new"
+   },
+   {
+    "from": "2*x-6-x=x+4-x",
+    "rule": "simplify",
+    "to": "x-6=4",
+    "status": "new"
+   },
+   {
+    "from": "2*x-6-4=x+4-4",
+    "rule": "simplify",
+    "to": "2*x-10=x",
+    "status": "new"
+   },
+   {
+    "from": "-6=-x+4",
+    "rule": "subtract-both-sides",
+    "to": "-6-(-x)=-x+4-(-x)",
+    "status": "new"
+   },
+   {
+    "from": "-6=-x+4",
+    "rule": "subtract-both-sides",
+    "to": "-6-4=-x+4-4",
+    "status": "new"
+   },
+   {
+    "from": "2*x=x+10",
+    "rule": "subtract-both-sides",
+    "to": "2*x-2*x=x+10-2*x",
+    "status": "new"
+   },
+   {
+    "from": "2*x=x+10",
+    "rule": "subtract-both-sides",
+    "to": "2*x-x=x+10-x",
+    "status": "new"
+   },
+   {
+    "from": "2*x=x+10",
+    "rule": "subtract-both-sides",
+    "to": "2*x-10=x+10-10",
+    "status": "new"
+   },
+   {
+    "from": "2*x=x+10",
+    "rule": "divide-both-sides",
+    "to": "2*x/2=(x+10)/2",
+    "status": "new"
+   },
+   {
+    "from": "x-6=4",
+    "rule": "subtract-both-sides",
+    "to": "x-6-x=4-x",
+    "status": "new"
+   },
+   {
+    "from": "x-6=4",
+    "rule": "add-both-sides",
+    "to": "x-6+6=4+6",
+    "status": "new"
+   },
+   {
+    "from": "2*x-10=x",
+    "rule": "subtract-both-sides",
+    "to": "2*x-10-2*x=x-2*x",
+    "status": "new"
+   },
+   {
+    "from": "2*x-10=x",
+    "rule": "add-both-sides",
+    "to": "2*x-10+10=x+10",
+    "status": "new"
+   },
+   {
+    "from": "2*x-10=x",
+    "rule": "subtract-both-sides",
+    "to": "2*x-10-x=x-x",
+    "status": "new"
+   },
+   {
+    "from": "-6-(-x)=-x+4-(-x)",
+    "rule": "simplify",
+    "to": "x-6=4",
+    "status": "duplicate"
+   },
+   {
+    "from": "-6-4=-x+4-4",
+    "rule": "simplify",
+    "to": "-10=-x",
+    "status": "new"
+   },
+   {
+    "from": "2*x-2*x=x+10-2*x",
+    "rule": "simplify",
+    "to": "0=-x+10",
+    "status": "new"
+   },
+   {
+    "from": "2*x-x=x+10-x",
+    "rule": "simplify",
+    "to": "x=10",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m03",
+  "text": "x/3+4=9",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "15",
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient)",
+    "to": "1/3*x+4=9"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 4 from both sides",
+    "to": "1/3*x+4-4=9-4"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms, evaluate numbers)",
+    "to": "1/3*x=5"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 1/3",
+    "to": "1/3*x/(1/3)=5/(1/3)"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=15"
+   }
+  ],
+  "stats": {
+   "visited": 9,
+   "generated": 11,
+   "duplicates": 1,
+   "depth": 5,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "x/3+4=9",
+    "rule": "simplify",
+    "to": "1/3*x+4=9",
+    "status": "new"
+   },
+   {
+    "from": "1/3*x+4=9",
+    "rule": "subtract-both-sides",
+    "to": "1/3*x+4-1/3*x=9-1/3*x",
+    "status": "new"
+   },
+   {
+    "from": "1/3*x+4=9",
+    "rule": "subtract-both-sides",
+    "to": "1/3*x+4-4=9-4",
+    "status": "new"
+   },
+   {
+    "from": "1/3*x+4-1/3*x=9-1/3*x",
+    "rule": "simplify",
+    "to": "4=-(1/3*x)+9",
+    "status": "new"
+   },
+   {
+    "from": "1/3*x+4-4=9-4",
+    "rule": "simplify",
+    "to": "1/3*x=5",
+    "status": "new"
+   },
+   {
+    "from": "4=-(1/3*x)+9",
+    "rule": "subtract-both-sides",
+    "to": "4-(-(1/3*x))=-(1/3*x)+9-(-(1/3*x))",
+    "status": "new"
+   },
+   {
+    "from": "4=-(1/3*x)+9",
+    "rule": "subtract-both-sides",
+    "to": "4-9=-(1/3*x)+9-9",
+    "status": "new"
+   },
+   {
+    "from": "1/3*x=5",
+    "rule": "divide-both-sides",
+    "to": "1/3*x/(1/3)=5/(1/3)",
+    "status": "new"
+   },
+   {
+    "from": "4-(-(1/3*x))=-(1/3*x)+9-(-(1/3*x))",
+    "rule": "simplify",
+    "to": "1/3*x+4=9",
+    "status": "duplicate"
+   },
+   {
+    "from": "4-9=-(1/3*x)+9-9",
+    "rule": "simplify",
+    "to": "-5=-(1/3*x)",
+    "status": "new"
+   },
+   {
+    "from": "1/3*x/(1/3)=5/(1/3)",
+    "rule": "simplify",
+    "to": "x=15",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m04",
+  "text": "4*(x+1)=2*(x+7)",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "5",
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "4*x+4*1=2*(x+7)"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "4*x+4=2*(x+7)"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "4*x+4=2*x+2*7"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "4*x+4=2*x+14"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 4 from both sides",
+    "to": "4*x+4-4=2*x+14-4"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "4*x=2*x+10"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 2*x from both sides",
+    "to": "4*x-2*x=2*x+10-2*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "2*x=10"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 2",
+    "to": "2*x/2=10/2"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=5"
+   }
+  ],
+  "stats": {
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
+   "depth": 10,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "4*(x+1)=2*(x+7)",
+    "rule": "expand",
+    "to": "4*x+4*1=2*(x+7)",
+    "status": "new"
+   },
+   {
+    "from": "4*(x+1)=2*(x+7)",
+    "rule": "expand",
+    "to": "4*(x+1)=2*x+2*7",
+    "status": "new"
+   },
+   {
+    "from": "4*x+4*1=2*(x+7)",
+    "rule": "simplify",
+    "to": "4*x+4=2*(x+7)",
+    "status": "new"
+   },
+   {
+    "from": "4*(x+1)=2*x+2*7",
+    "rule": "simplify",
+    "to": "4*(x+1)=2*x+14",
+    "status": "new"
+   },
+   {
+    "from": "4*x+4=2*(x+7)",
+    "rule": "expand",
+    "to": "4*x+4=2*x+2*7",
+    "status": "new"
+   },
+   {
+    "from": "4*(x+1)=2*x+14",
+    "rule": "expand",
+    "to": "4*x+4*1=2*x+14",
+    "status": "new"
+   },
+   {
+    "from": "4*x+4=2*x+2*7",
+    "rule": "simplify",
+    "to": "4*x+4=2*x+14",
+    "status": "new"
+   },
+   {
+    "from": "4*x+4*1=2*x+14",
+    "rule": "simplify",
+    "to": "4*x+4=2*x+14",
+    "status": "duplicate"
+   },
+   {
+    "from": "4*x+4=2*x+14",
+    "rule": "subtract-both-sides",
+    "to": "4*x+4-4*x=2*x+14-4*x",
+    "status": "new"
+   },
+   {
+    "from": "4*x+4=2*x+14",
+    "rule": "subtract-both-sides",
+    "to": "4*x+4-4=2*x+14-4",
+    "status": "new"
+   },
+   {
+    "from": "4*x+4=2*x+14",
+    "rule": "subtract-both-sides",
+    "to": "4*x+4-2*x=2*x+14-2*x",
+    "status": "new"
+   },
+   {
+    "from": "4*x+4=2*x+14",
+    "rule": "subtract-both-sides",
+    "to": "4*x+4-14=2*x+14-14",
+    "status": "new"
+   },
+   {
+    "from": "4*x+4-4*x=2*x+14-4*x",
+    "rule": "simplify",
+    "to": "4=-(2*x)+14",
+    "status": "new"
+   },
+   {
+    "from": "4*x+4-4=2*x+14-4",
+    "rule": "simplify",
+    "to": "4*x=2*x+10",
+    "status": "new"
+   },
+   {
+    "from": "4*x+4-2*x=2*x+14-2*x",
+    "rule": "simplify",
+    "to": "2*x+4=14",
+    "status": "new"
+   },
+   {
+    "from": "4*x+4-14=2*x+14-14",
+    "rule": "simplify",
+    "to": "4*x-10=2*x",
+    "status": "new"
+   },
+   {
+    "from": "4=-(2*x)+14",
+    "rule": "subtract-both-sides",
+    "to": "4-(-(2*x))=-(2*x)+14-(-(2*x))",
+    "status": "new"
+   },
+   {
+    "from": "4=-(2*x)+14",
+    "rule": "subtract-both-sides",
+    "to": "4-14=-(2*x)+14-14",
+    "status": "new"
+   },
+   {
+    "from": "4*x=2*x+10",
+    "rule": "subtract-both-sides",
+    "to": "4*x-4*x=2*x+10-4*x",
+    "status": "new"
+   },
+   {
+    "from": "4*x=2*x+10",
+    "rule": "subtract-both-sides",
+    "to": "4*x-2*x=2*x+10-2*x",
+    "status": "new"
+   },
+   {
+    "from": "4*x=2*x+10",
+    "rule": "subtract-both-sides",
+    "to": "4*x-10=2*x+10-10",
+    "status": "new"
+   },
+   {
+    "from": "4*x=2*x+10",
+    "rule": "divide-both-sides",
+    "to": "4*x/4=(2*x+10)/4",
+    "status": "new"
+   },
+   {
+    "from": "2*x+4=14",
+    "rule": "subtract-both-sides",
+    "to": "2*x+4-2*x=14-2*x",
+    "status": "new"
+   },
+   {
+    "from": "2*x+4=14",
+    "rule": "subtract-both-sides",
+    "to": "2*x+4-4=14-4",
+    "status": "new"
+   },
+   {
+    "from": "4*x-10=2*x",
+    "rule": "subtract-both-sides",
+    "to": "4*x-10-4*x=2*x-4*x",
+    "status": "new"
+   },
+   {
+    "from": "4*x-10=2*x",
+    "rule": "add-both-sides",
+    "to": "4*x-10+10=2*x+10",
+    "status": "new"
+   },
+   {
+    "from": "4*x-10=2*x",
+    "rule": "subtract-both-sides",
+    "to": "4*x-10-2*x=2*x-2*x",
+    "status": "new"
+   },
+   {
+    "from": "4*x-10=2*x",
+    "rule": "divide-both-sides",
+    "to": "(4*x-10)/2=2*x/2",
+    "status": "new"
+   },
+   {
+    "from": "4-(-(2*x))=-(2*x)+14-(-(2*x))",
+    "rule": "simplify",
+    "to": "2*x+4=14",
+    "status": "duplicate"
+   },
+   {
+    "from": "4-14=-(2*x)+14-14",
+    "rule": "simplify",
+    "to": "-10=-(2*x)",
+    "status": "new"
+   },
+   {
+    "from": "4*x-4*x=2*x+10-4*x",
+    "rule": "simplify",
+    "to": "0=-(2*x)+10",
+    "status": "new"
+   },
+   {
+    "from": "4*x-2*x=2*x+10-2*x",
+    "rule": "simplify",
+    "to": "2*x=10",
+    "status": "new"
+   },
+   {
+    "from": "4*x-10=2*x+10-10",
+    "rule": "simplify",
+    "to": "4*x-10=2*x",
+    "status": "duplicate"
+   },
+   {
+    "from": "4*x/4=(2*x+10)/4",
+    "rule": "simplify",
+    "to": "x=(2*x+10)/4",
+    "status": "new"
+   },
+   {
+    "from": "2*x+4-2*x=14-2*x",
+    "rule": "simplify",
+    "to": "4=-(2*x)+14",
+    "status": "duplicate"
+   },
+   {
+    "from": "2*x+4-4=14-4",
+    "rule": "simplify",
+    "to": "2*x=10",
+    "status": "duplicate"
+   },
+   {
+    "from": "4*x-10-4*x=2*x-4*x",
+    "rule": "simplify",
+    "to": "-10=-(2*x)",
+    "status": "duplicate"
+   },
+   {
+    "from": "4*x-10+10=2*x+10",
+    "rule": "simplify",
+    "to": "4*x=2*x+10",
+    "status": "duplicate"
+   },
+   {
+    "from": "4*x-10-2*x=2*x-2*x",
+    "rule": "simplify",
+    "to": "2*x-10=0",
+    "status": "new"
+   },
+   {
+    "from": "(4*x-10)/2=2*x/2",
+    "rule": "simplify",
+    "to": "(4*x-10)/2=x",
+    "status": "new"
+   },
+   {
+    "from": "-10=-(2*x)",
+    "rule": "simplify",
+    "to": "-10=-2*x",
+    "status": "new"
+   },
+   {
+    "from": "0=-(2*x)+10",
+    "rule": "subtract-both-sides",
+    "to": "0-(-(2*x))=-(2*x)+10-(-(2*x))",
+    "status": "new"
+   },
+   {
+    "from": "0=-(2*x)+10",
+    "rule": "subtract-both-sides",
+    "to": "0-10=-(2*x)+10-10",
+    "status": "new"
+   },
+   {
+    "from": "2*x=10",
+    "rule": "divide-both-sides",
+    "to": "2*x/2=10/2",
+    "status": "new"
+   },
+   {
+    "from": "x=(2*x+10)/4",
+    "rule": "expand",
+    "to": "x=2*x/4+10/4",
+    "status": "new"
+   },
+   {
+    "from": "2*x-10=0",
+    "rule": "subtract-both-sides",
+    "to": "2*x-10-2*x=0-2*x",
+    "status": "new"
+   },
+   {
+    "from": "2*x-10=0",
+    "rule": "add-both-sides",
+    "to": "2*x-10+10=0+10",
+    "status": "new"
+   },
+   {
+    "from": "(4*x-10)/2=x",
+    "rule": "expand",
+    "to": "4*x/2-10/2=x",
+    "status": "new"
+   },
+   {
+    "from": "-10=-2*x",
+    "rule": "divide-both-sides",
+    "to": "-10/-2=-2*x/-2",
+    "status": "new"
+   },
+   {
+    "from": "0-(-(2*x))=-(2*x)+10-(-(2*x))",
+    "rule": "simplify",
+    "to": "2*x=10",
+    "status": "duplicate"
+   },
+   {
+    "from": "0-10=-(2*x)+10-10",
+    "rule": "simplify",
+    "to": "-10=-(2*x)",
+    "status": "duplicate"
+   },
+   {
+    "from": "2*x/2=10/2",
+    "rule": "simplify",
+    "to": "x=5",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m05",
+  "text": "7-2*x=15",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "-4",
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (tidy)",
+    "to": "-(2*x)+7=15"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 7 from both sides",
+    "to": "-(2*x)+7-7=15-7"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms, evaluate numbers)",
+    "to": "-(2*x)=8"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient)",
+    "to": "-2*x=8"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by -2",
+    "to": "-2*x/-2=8/-2"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=-4"
+   }
+  ],
+  "stats": {
+   "visited": 11,
+   "generated": 13,
+   "duplicates": 1,
+   "depth": 6,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "7-2*x=15",
+    "rule": "simplify",
+    "to": "-(2*x)+7=15",
+    "status": "new"
+   },
+   {
+    "from": "-(2*x)+7=15",
+    "rule": "subtract-both-sides",
+    "to": "-(2*x)+7-(-(2*x))=15-(-(2*x))",
+    "status": "new"
+   },
+   {
+    "from": "-(2*x)+7=15",
+    "rule": "subtract-both-sides",
+    "to": "-(2*x)+7-7=15-7",
+    "status": "new"
+   },
+   {
+    "from": "-(2*x)+7-(-(2*x))=15-(-(2*x))",
+    "rule": "simplify",
+    "to": "7=2*x+15",
+    "status": "new"
+   },
+   {
+    "from": "-(2*x)+7-7=15-7",
+    "rule": "simplify",
+    "to": "-(2*x)=8",
+    "status": "new"
+   },
+   {
+    "from": "7=2*x+15",
+    "rule": "subtract-both-sides",
+    "to": "7-2*x=2*x+15-2*x",
+    "status": "new"
+   },
+   {
+    "from": "7=2*x+15",
+    "rule": "subtract-both-sides",
+    "to": "7-15=2*x+15-15",
+    "status": "new"
+   },
+   {
+    "from": "-(2*x)=8",
+    "rule": "simplify",
+    "to": "-2*x=8",
+    "status": "new"
+   },
+   {
+    "from": "7-2*x=2*x+15-2*x",
+    "rule": "simplify",
+    "to": "-(2*x)+7=15",
+    "status": "duplicate"
+   },
+   {
+    "from": "7-15=2*x+15-15",
+    "rule": "simplify",
+    "to": "-8=2*x",
+    "status": "new"
+   },
+   {
+    "from": "-2*x=8",
+    "rule": "divide-both-sides",
+    "to": "-2*x/-2=8/-2",
+    "status": "new"
+   },
+   {
+    "from": "-8=2*x",
+    "rule": "divide-both-sides",
+    "to": "-8/2=2*x/2",
+    "status": "new"
+   },
+   {
+    "from": "-2*x/-2=8/-2",
+    "rule": "simplify",
+    "to": "x=-4",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m06",
+  "text": "(x+3)/2=x-1",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "5",
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "divide each term of the numerator by the denominator",
+    "to": "x/2+3/2=x-1"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "1/2*x+3/2=x-1"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 1/2*x from both sides",
+    "to": "1/2*x+3/2-1/2*x=x-1-1/2*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "3/2=1/2*x-1"
+   },
+   {
+    "rule": "add-both-sides",
+    "explain": "add 1 to both sides",
+    "to": "3/2+1=1/2*x-1+1"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine like terms)",
+    "to": "5/2=1/2*x"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 1/2",
+    "to": "5/2/(1/2)=1/2*x/(1/2)"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine coefficient)",
+    "to": "5=x"
+   },
+   {
+    "rule": "swap-sides",
+    "explain": "write the unknown on the left",
+    "to": "x=5"
+   }
+  ],
+  "stats": {
+   "visited": 35,
+   "generated": 47,
+   "duplicates": 10,
+   "depth": 9,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "(x+3)/2=x-1",
+    "rule": "expand",
+    "to": "x/2+3/2=x-1",
+    "status": "new"
+   },
+   {
+    "from": "x/2+3/2=x-1",
+    "rule": "simplify",
+    "to": "1/2*x+3/2=x-1",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+3/2=x-1",
+    "rule": "subtract-both-sides",
+    "to": "1/2*x+3/2-1/2*x=x-1-1/2*x",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+3/2=x-1",
+    "rule": "subtract-both-sides",
+    "to": "1/2*x+3/2-(3/2)=x-1-(3/2)",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+3/2=x-1",
+    "rule": "subtract-both-sides",
+    "to": "1/2*x+3/2-x=x-1-x",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+3/2=x-1",
+    "rule": "add-both-sides",
+    "to": "1/2*x+3/2+1=x-1+1",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+3/2-1/2*x=x-1-1/2*x",
+    "rule": "simplify",
+    "to": "3/2=1/2*x-1",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+3/2-(3/2)=x-1-(3/2)",
+    "rule": "simplify",
+    "to": "1/2*x=x-(5/2)",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+3/2-x=x-1-x",
+    "rule": "simplify",
+    "to": "-(1/2*x)+3/2=-1",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+3/2+1=x-1+1",
+    "rule": "simplify",
+    "to": "1/2*x+5/2=x",
+    "status": "new"
+   },
+   {
+    "from": "3/2=1/2*x-1",
+    "rule": "subtract-both-sides",
+    "to": "3/2-1/2*x=1/2*x-1-1/2*x",
+    "status": "new"
+   },
+   {
+    "from": "3/2=1/2*x-1",
+    "rule": "add-both-sides",
+    "to": "3/2+1=1/2*x-1+1",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x=x-(5/2)",
+    "rule": "subtract-both-sides",
+    "to": "1/2*x-1/2*x=x-(5/2)-1/2*x",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x=x-(5/2)",
+    "rule": "subtract-both-sides",
+    "to": "1/2*x-x=x-(5/2)-x",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x=x-(5/2)",
+    "rule": "add-both-sides",
+    "to": "1/2*x+5/2=x-(5/2)+5/2",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x=x-(5/2)",
+    "rule": "divide-both-sides",
+    "to": "1/2*x/(1/2)=(x-(5/2))/(1/2)",
+    "status": "new"
+   },
+   {
+    "from": "-(1/2*x)+3/2=-1",
+    "rule": "subtract-both-sides",
+    "to": "-(1/2*x)+3/2-(-(1/2*x))=-1-(-(1/2*x))",
+    "status": "new"
+   },
+   {
+    "from": "-(1/2*x)+3/2=-1",
+    "rule": "subtract-both-sides",
+    "to": "-(1/2*x)+3/2-(3/2)=-1-(3/2)",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+5/2=x",
+    "rule": "subtract-both-sides",
+    "to": "1/2*x+5/2-1/2*x=x-1/2*x",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+5/2=x",
+    "rule": "subtract-both-sides",
+    "to": "1/2*x+5/2-(5/2)=x-(5/2)",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+5/2=x",
+    "rule": "subtract-both-sides",
+    "to": "1/2*x+5/2-x=x-x",
+    "status": "new"
+   },
+   {
+    "from": "3/2-1/2*x=1/2*x-1-1/2*x",
+    "rule": "simplify",
+    "to": "-(1/2*x)+3/2=-1",
+    "status": "duplicate"
+   },
+   {
+    "from": "3/2+1=1/2*x-1+1",
+    "rule": "simplify",
+    "to": "5/2=1/2*x",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x-1/2*x=x-(5/2)-1/2*x",
+    "rule": "simplify",
+    "to": "0=1/2*x-(5/2)",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x-x=x-(5/2)-x",
+    "rule": "simplify",
+    "to": "-(1/2*x)=-5/2",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+5/2=x-(5/2)+5/2",
+    "rule": "simplify",
+    "to": "1/2*x+5/2=x",
+    "status": "duplicate"
+   },
+   {
+    "from": "1/2*x/(1/2)=(x-(5/2))/(1/2)",
+    "rule": "simplify",
+    "to": "x=(x-(5/2))/(1/2)",
+    "status": "new"
+   },
+   {
+    "from": "-(1/2*x)+3/2-(-(1/2*x))=-1-(-(1/2*x))",
+    "rule": "simplify",
+    "to": "3/2=1/2*x-1",
+    "status": "duplicate"
+   },
+   {
+    "from": "-(1/2*x)+3/2-(3/2)=-1-(3/2)",
+    "rule": "simplify",
+    "to": "-(1/2*x)=-5/2",
+    "status": "duplicate"
+   },
+   {
+    "from": "1/2*x+5/2-1/2*x=x-1/2*x",
+    "rule": "simplify",
+    "to": "5/2=1/2*x",
+    "status": "duplicate"
+   },
+   {
+    "from": "1/2*x+5/2-(5/2)=x-(5/2)",
+    "rule": "simplify",
+    "to": "1/2*x=x-(5/2)",
+    "status": "duplicate"
+   },
+   {
+    "from": "1/2*x+5/2-x=x-x",
+    "rule": "simplify",
+    "to": "-(1/2*x)+5/2=0",
+    "status": "new"
+   },
+   {
+    "from": "5/2=1/2*x",
+    "rule": "divide-both-sides",
+    "to": "5/2/(1/2)=1/2*x/(1/2)",
+    "status": "new"
+   },
+   {
+    "from": "0=1/2*x-(5/2)",
+    "rule": "subtract-both-sides",
+    "to": "0-1/2*x=1/2*x-(5/2)-1/2*x",
+    "status": "new"
+   },
+   {
+    "from": "0=1/2*x-(5/2)",
+    "rule": "add-both-sides",
+    "to": "0+5/2=1/2*x-(5/2)+5/2",
+    "status": "new"
+   },
+   {
+    "from": "-(1/2*x)=-5/2",
+    "rule": "simplify",
+    "to": "-1/2*x=-5/2",
+    "status": "new"
+   },
+   {
+    "from": "x=(x-(5/2))/(1/2)",
+    "rule": "expand",
+    "to": "x=x/(1/2)-5/2/(1/2)",
+    "status": "new"
+   },
+   {
+    "from": "-(1/2*x)+5/2=0",
+    "rule": "subtract-both-sides",
+    "to": "-(1/2*x)+5/2-(-(1/2*x))=0-(-(1/2*x))",
+    "status": "new"
+   },
+   {
+    "from": "-(1/2*x)+5/2=0",
+    "rule": "subtract-both-sides",
+    "to": "-(1/2*x)+5/2-(5/2)=0-(5/2)",
+    "status": "new"
+   },
+   {
+    "from": "5/2/(1/2)=1/2*x/(1/2)",
+    "rule": "simplify",
+    "to": "5=x",
+    "status": "new"
+   },
+   {
+    "from": "0-1/2*x=1/2*x-(5/2)-1/2*x",
+    "rule": "simplify",
+    "to": "-(1/2*x)=-5/2",
+    "status": "duplicate"
+   },
+   {
+    "from": "0+5/2=1/2*x-(5/2)+5/2",
+    "rule": "simplify",
+    "to": "5/2=1/2*x",
+    "status": "duplicate"
+   },
+   {
+    "from": "-1/2*x=-5/2",
+    "rule": "divide-both-sides",
+    "to": "-1/2*x/(-1/2)=-5/2/(-1/2)",
+    "status": "new"
+   },
+   {
+    "from": "x=x/(1/2)-5/2/(1/2)",
+    "rule": "simplify",
+    "to": "x=2*x-5",
+    "status": "new"
+   },
+   {
+    "from": "-(1/2*x)+5/2-(-(1/2*x))=0-(-(1/2*x))",
+    "rule": "simplify",
+    "to": "5/2=1/2*x",
+    "status": "duplicate"
+   },
+   {
+    "from": "-(1/2*x)+5/2-(5/2)=0-(5/2)",
+    "rule": "simplify",
+    "to": "-(1/2*x)=-5/2",
+    "status": "duplicate"
+   },
+   {
+    "from": "5=x",
+    "rule": "swap-sides",
+    "to": "x=5",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m07",
+  "text": "x/2+x/3=10",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "12",
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "5/6*x=10"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 5/6",
+    "to": "5/6*x/(5/6)=10/(5/6)"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=12"
+   }
+  ],
+  "stats": {
+   "visited": 3,
+   "generated": 3,
+   "duplicates": 0,
+   "depth": 3,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "x/2+x/3=10",
+    "rule": "simplify",
+    "to": "5/6*x=10",
+    "status": "new"
+   },
+   {
+    "from": "5/6*x=10",
+    "rule": "divide-both-sides",
+    "to": "5/6*x/(5/6)=10/(5/6)",
+    "status": "new"
+   },
+   {
+    "from": "5/6*x/(5/6)=10/(5/6)",
+    "rule": "simplify",
+    "to": "x=12",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m08",
+  "text": "3*(2*x-1)=4*(x+2)-5",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "3",
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "3*(2*x)-3*1=4*(x+2)-5"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "6*x-3=4*(x+2)-5"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "6*x-3=4*x+4*2-5"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine like terms)",
+    "to": "6*x-3=4*x+3"
+   },
+   {
+    "rule": "add-both-sides",
+    "explain": "add 3 to both sides",
+    "to": "6*x-3+3=4*x+3+3"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "6*x=4*x+6"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 4*x from both sides",
+    "to": "6*x-4*x=4*x+6-4*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "2*x=6"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 2",
+    "to": "2*x/2=6/2"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=3"
+   }
+  ],
+  "stats": {
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
+   "depth": 10,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "3*(2*x-1)=4*(x+2)-5",
+    "rule": "expand",
+    "to": "3*(2*x)-3*1=4*(x+2)-5",
+    "status": "new"
+   },
+   {
+    "from": "3*(2*x-1)=4*(x+2)-5",
+    "rule": "expand",
+    "to": "3*(2*x-1)=4*x+4*2-5",
+    "status": "new"
+   },
+   {
+    "from": "3*(2*x)-3*1=4*(x+2)-5",
+    "rule": "simplify",
+    "to": "6*x-3=4*(x+2)-5",
+    "status": "new"
+   },
+   {
+    "from": "3*(2*x-1)=4*x+4*2-5",
+    "rule": "simplify",
+    "to": "3*(2*x-1)=4*x+3",
+    "status": "new"
+   },
+   {
+    "from": "6*x-3=4*(x+2)-5",
+    "rule": "expand",
+    "to": "6*x-3=4*x+4*2-5",
+    "status": "new"
+   },
+   {
+    "from": "3*(2*x-1)=4*x+3",
+    "rule": "expand",
+    "to": "3*(2*x)-3*1=4*x+3",
+    "status": "new"
+   },
+   {
+    "from": "6*x-3=4*x+4*2-5",
+    "rule": "simplify",
+    "to": "6*x-3=4*x+3",
+    "status": "new"
+   },
+   {
+    "from": "3*(2*x)-3*1=4*x+3",
+    "rule": "simplify",
+    "to": "6*x-3=4*x+3",
+    "status": "duplicate"
+   },
+   {
+    "from": "6*x-3=4*x+3",
+    "rule": "subtract-both-sides",
+    "to": "6*x-3-6*x=4*x+3-6*x",
+    "status": "new"
+   },
+   {
+    "from": "6*x-3=4*x+3",
+    "rule": "add-both-sides",
+    "to": "6*x-3+3=4*x+3+3",
+    "status": "new"
+   },
+   {
+    "from": "6*x-3=4*x+3",
+    "rule": "subtract-both-sides",
+    "to": "6*x-3-4*x=4*x+3-4*x",
+    "status": "new"
+   },
+   {
+    "from": "6*x-3=4*x+3",
+    "rule": "subtract-both-sides",
+    "to": "6*x-3-3=4*x+3-3",
+    "status": "new"
+   },
+   {
+    "from": "6*x-3-6*x=4*x+3-6*x",
+    "rule": "simplify",
+    "to": "-3=-(2*x)+3",
+    "status": "new"
+   },
+   {
+    "from": "6*x-3+3=4*x+3+3",
+    "rule": "simplify",
+    "to": "6*x=4*x+6",
+    "status": "new"
+   },
+   {
+    "from": "6*x-3-4*x=4*x+3-4*x",
+    "rule": "simplify",
+    "to": "2*x-3=3",
+    "status": "new"
+   },
+   {
+    "from": "6*x-3-3=4*x+3-3",
+    "rule": "simplify",
+    "to": "6*x-6=4*x",
+    "status": "new"
+   },
+   {
+    "from": "-3=-(2*x)+3",
+    "rule": "subtract-both-sides",
+    "to": "-3-(-(2*x))=-(2*x)+3-(-(2*x))",
+    "status": "new"
+   },
+   {
+    "from": "-3=-(2*x)+3",
+    "rule": "subtract-both-sides",
+    "to": "-3-3=-(2*x)+3-3",
+    "status": "new"
+   },
+   {
+    "from": "6*x=4*x+6",
+    "rule": "subtract-both-sides",
+    "to": "6*x-6*x=4*x+6-6*x",
+    "status": "new"
+   },
+   {
+    "from": "6*x=4*x+6",
+    "rule": "subtract-both-sides",
+    "to": "6*x-4*x=4*x+6-4*x",
+    "status": "new"
+   },
+   {
+    "from": "6*x=4*x+6",
+    "rule": "subtract-both-sides",
+    "to": "6*x-6=4*x+6-6",
+    "status": "new"
+   },
+   {
+    "from": "6*x=4*x+6",
+    "rule": "divide-both-sides",
+    "to": "6*x/6=(4*x+6)/6",
+    "status": "new"
+   },
+   {
+    "from": "2*x-3=3",
+    "rule": "subtract-both-sides",
+    "to": "2*x-3-2*x=3-2*x",
+    "status": "new"
+   },
+   {
+    "from": "2*x-3=3",
+    "rule": "add-both-sides",
+    "to": "2*x-3+3=3+3",
+    "status": "new"
+   },
+   {
+    "from": "6*x-6=4*x",
+    "rule": "subtract-both-sides",
+    "to": "6*x-6-6*x=4*x-6*x",
+    "status": "new"
+   },
+   {
+    "from": "6*x-6=4*x",
+    "rule": "add-both-sides",
+    "to": "6*x-6+6=4*x+6",
+    "status": "new"
+   },
+   {
+    "from": "6*x-6=4*x",
+    "rule": "subtract-both-sides",
+    "to": "6*x-6-4*x=4*x-4*x",
+    "status": "new"
+   },
+   {
+    "from": "6*x-6=4*x",
+    "rule": "divide-both-sides",
+    "to": "(6*x-6)/4=4*x/4",
+    "status": "new"
+   },
+   {
+    "from": "-3-(-(2*x))=-(2*x)+3-(-(2*x))",
+    "rule": "simplify",
+    "to": "2*x-3=3",
+    "status": "duplicate"
+   },
+   {
+    "from": "-3-3=-(2*x)+3-3",
+    "rule": "simplify",
+    "to": "-6=-(2*x)",
+    "status": "new"
+   },
+   {
+    "from": "6*x-6*x=4*x+6-6*x",
+    "rule": "simplify",
+    "to": "0=-(2*x)+6",
+    "status": "new"
+   },
+   {
+    "from": "6*x-4*x=4*x+6-4*x",
+    "rule": "simplify",
+    "to": "2*x=6",
+    "status": "new"
+   },
+   {
+    "from": "6*x-6=4*x+6-6",
+    "rule": "simplify",
+    "to": "6*x-6=4*x",
+    "status": "duplicate"
+   },
+   {
+    "from": "6*x/6=(4*x+6)/6",
+    "rule": "simplify",
+    "to": "x=(4*x+6)/6",
+    "status": "new"
+   },
+   {
+    "from": "2*x-3-2*x=3-2*x",
+    "rule": "simplify",
+    "to": "-3=-(2*x)+3",
+    "status": "duplicate"
+   },
+   {
+    "from": "2*x-3+3=3+3",
+    "rule": "simplify",
+    "to": "2*x=6",
+    "status": "duplicate"
+   },
+   {
+    "from": "6*x-6-6*x=4*x-6*x",
+    "rule": "simplify",
+    "to": "-6=-(2*x)",
+    "status": "duplicate"
+   },
+   {
+    "from": "6*x-6+6=4*x+6",
+    "rule": "simplify",
+    "to": "6*x=4*x+6",
+    "status": "duplicate"
+   },
+   {
+    "from": "6*x-6-4*x=4*x-4*x",
+    "rule": "simplify",
+    "to": "2*x-6=0",
+    "status": "new"
+   },
+   {
+    "from": "(6*x-6)/4=4*x/4",
+    "rule": "simplify",
+    "to": "(6*x-6)/4=x",
+    "status": "new"
+   },
+   {
+    "from": "-6=-(2*x)",
+    "rule": "simplify",
+    "to": "-6=-2*x",
+    "status": "new"
+   },
+   {
+    "from": "0=-(2*x)+6",
+    "rule": "subtract-both-sides",
+    "to": "0-(-(2*x))=-(2*x)+6-(-(2*x))",
+    "status": "new"
+   },
+   {
+    "from": "0=-(2*x)+6",
+    "rule": "subtract-both-sides",
+    "to": "0-6=-(2*x)+6-6",
+    "status": "new"
+   },
+   {
+    "from": "2*x=6",
+    "rule": "divide-both-sides",
+    "to": "2*x/2=6/2",
+    "status": "new"
+   },
+   {
+    "from": "x=(4*x+6)/6",
+    "rule": "expand",
+    "to": "x=4*x/6+6/6",
+    "status": "new"
+   },
+   {
+    "from": "2*x-6=0",
+    "rule": "subtract-both-sides",
+    "to": "2*x-6-2*x=0-2*x",
+    "status": "new"
+   },
+   {
+    "from": "2*x-6=0",
+    "rule": "add-both-sides",
+    "to": "2*x-6+6=0+6",
+    "status": "new"
+   },
+   {
+    "from": "(6*x-6)/4=x",
+    "rule": "expand",
+    "to": "6*x/4-6/4=x",
+    "status": "new"
+   },
+   {
+    "from": "-6=-2*x",
+    "rule": "divide-both-sides",
+    "to": "-6/-2=-2*x/-2",
+    "status": "new"
+   },
+   {
+    "from": "0-(-(2*x))=-(2*x)+6-(-(2*x))",
+    "rule": "simplify",
+    "to": "2*x=6",
+    "status": "duplicate"
+   },
+   {
+    "from": "0-6=-(2*x)+6-6",
+    "rule": "simplify",
+    "to": "-6=-(2*x)",
+    "status": "duplicate"
+   },
+   {
+    "from": "2*x/2=6/2",
+    "rule": "simplify",
+    "to": "x=3",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m09",
+  "text": "-4*x+9=-3*x-2",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "11",
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-(4*x)+9=-(3*x)-2"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(4*x) from both sides",
+    "to": "-(4*x)+9-(-(4*x))=-(3*x)-2-(-(4*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "9=x-2"
+   },
+   {
+    "rule": "add-both-sides",
+    "explain": "add 2 to both sides",
+    "to": "9+2=x-2+2"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine like terms)",
+    "to": "11=x"
+   },
+   {
+    "rule": "swap-sides",
+    "explain": "write the unknown on the left",
+    "to": "x=11"
+   }
+  ],
+  "stats": {
+   "visited": 17,
+   "generated": 28,
+   "duplicates": 2,
+   "depth": 6,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "-4*x+9=-3*x-2",
+    "rule": "simplify",
+    "to": "-(4*x)+9=-(3*x)-2",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+9=-(3*x)-2",
+    "rule": "subtract-both-sides",
+    "to": "-(4*x)+9-(-(4*x))=-(3*x)-2-(-(4*x))",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+9=-(3*x)-2",
+    "rule": "subtract-both-sides",
+    "to": "-(4*x)+9-9=-(3*x)-2-9",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+9=-(3*x)-2",
+    "rule": "subtract-both-sides",
+    "to": "-(4*x)+9-(-(3*x))=-(3*x)-2-(-(3*x))",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+9=-(3*x)-2",
+    "rule": "add-both-sides",
+    "to": "-(4*x)+9+2=-(3*x)-2+2",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+9-(-(4*x))=-(3*x)-2-(-(4*x))",
+    "rule": "simplify",
+    "to": "9=x-2",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+9-9=-(3*x)-2-9",
+    "rule": "simplify",
+    "to": "-(4*x)=-(3*x)-11",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+9-(-(3*x))=-(3*x)-2-(-(3*x))",
+    "rule": "simplify",
+    "to": "-x+9=-2",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+9+2=-(3*x)-2+2",
+    "rule": "simplify",
+    "to": "-(4*x)+11=-(3*x)",
+    "status": "new"
+   },
+   {
+    "from": "9=x-2",
+    "rule": "subtract-both-sides",
+    "to": "9-x=x-2-x",
+    "status": "new"
+   },
+   {
+    "from": "9=x-2",
+    "rule": "add-both-sides",
+    "to": "9+2=x-2+2",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)=-(3*x)-11",
+    "rule": "simplify",
+    "to": "-4*x=-(3*x)-11",
+    "status": "new"
+   },
+   {
+    "from": "-x+9=-2",
+    "rule": "subtract-both-sides",
+    "to": "-x+9-(-x)=-2-(-x)",
+    "status": "new"
+   },
+   {
+    "from": "-x+9=-2",
+    "rule": "subtract-both-sides",
+    "to": "-x+9-9=-2-9",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+11=-(3*x)",
+    "rule": "simplify",
+    "to": "-(4*x)+11=-3*x",
+    "status": "new"
+   },
+   {
+    "from": "9-x=x-2-x",
+    "rule": "simplify",
+    "to": "-x+9=-2",
+    "status": "duplicate"
+   },
+   {
+    "from": "9+2=x-2+2",
+    "rule": "simplify",
+    "to": "11=x",
+    "status": "new"
+   },
+   {
+    "from": "-4*x=-(3*x)-11",
+    "rule": "subtract-both-sides",
+    "to": "-4*x--4*x=-(3*x)-11--4*x",
+    "status": "new"
+   },
+   {
+    "from": "-4*x=-(3*x)-11",
+    "rule": "subtract-both-sides",
+    "to": "-4*x-(-(3*x))=-(3*x)-11-(-(3*x))",
+    "status": "new"
+   },
+   {
+    "from": "-4*x=-(3*x)-11",
+    "rule": "add-both-sides",
+    "to": "-4*x+11=-(3*x)-11+11",
+    "status": "new"
+   },
+   {
+    "from": "-4*x=-(3*x)-11",
+    "rule": "divide-both-sides",
+    "to": "-4*x/-4=(-(3*x)-11)/-4",
+    "status": "new"
+   },
+   {
+    "from": "-x+9-(-x)=-2-(-x)",
+    "rule": "simplify",
+    "to": "9=x-2",
+    "status": "duplicate"
+   },
+   {
+    "from": "-x+9-9=-2-9",
+    "rule": "simplify",
+    "to": "-x=-11",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+11=-3*x",
+    "rule": "subtract-both-sides",
+    "to": "-(4*x)+11-(-(4*x))=-3*x-(-(4*x))",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+11=-3*x",
+    "rule": "subtract-both-sides",
+    "to": "-(4*x)+11-11=-3*x-11",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+11=-3*x",
+    "rule": "subtract-both-sides",
+    "to": "-(4*x)+11--3*x=-3*x--3*x",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+11=-3*x",
+    "rule": "divide-both-sides",
+    "to": "(-(4*x)+11)/-3=-3*x/-3",
+    "status": "new"
+   },
+   {
+    "from": "11=x",
+    "rule": "swap-sides",
+    "to": "x=11",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m10",
+  "text": "2*(3*(x-1)+4)=22",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "10/3",
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "2*(3*x-3*1+4)=22"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine like terms)",
+    "to": "2*(3*x+1)=22"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "2*(3*x)+2*1=22"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "6*x+2=22"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 2 from both sides",
+    "to": "6*x+2-2=22-2"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms, evaluate numbers)",
+    "to": "6*x=20"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 6",
+    "to": "6*x/6=20/6"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=10/3"
+   }
+  ],
+  "stats": {
+   "visited": 17,
+   "generated": 20,
+   "duplicates": 2,
+   "depth": 8,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "2*(3*(x-1)+4)=22",
+    "rule": "expand",
+    "to": "2*(3*(x-1))+2*4=22",
+    "status": "new"
+   },
+   {
+    "from": "2*(3*(x-1)+4)=22",
+    "rule": "expand",
+    "to": "2*(3*x-3*1+4)=22",
+    "status": "new"
+   },
+   {
+    "from": "2*(3*(x-1))+2*4=22",
+    "rule": "simplify",
+    "to": "2*(3*(x-1))+8=22",
+    "status": "new"
+   },
+   {
+    "from": "2*(3*x-3*1+4)=22",
+    "rule": "simplify",
+    "to": "2*(3*x+1)=22",
+    "status": "new"
+   },
+   {
+    "from": "2*(3*(x-1))+8=22",
+    "rule": "expand",
+    "to": "2*(3*x-3*1)+8=22",
+    "status": "new"
+   },
+   {
+    "from": "2*(3*x+1)=22",
+    "rule": "expand",
+    "to": "2*(3*x)+2*1=22",
+    "status": "new"
+   },
+   {
+    "from": "2*(3*x-3*1)+8=22",
+    "rule": "simplify",
+    "to": "2*(3*x-3)+8=22",
+    "status": "new"
+   },
+   {
+    "from": "2*(3*x)+2*1=22",
+    "rule": "simplify",
+    "to": "6*x+2=22",
+    "status": "new"
+   },
+   {
+    "from": "2*(3*x-3)+8=22",
+    "rule": "expand",
+    "to": "2*(3*x)-2*3+8=22",
+    "status": "new"
+   },
+   {
+    "from": "6*x+2=22",
+    "rule": "subtract-both-sides",
+    "to": "6*x+2-6*x=22-6*x",
+    "status": "new"
+   },
+   {
+    "from": "6*x+2=22",
+    "rule": "subtract-both-sides",
+    "to": "6*x+2-2=22-2",
+    "status": "new"
+   },
+   {
+    "from": "2*(3*x)-2*3+8=22",
+    "rule": "simplify",
+    "to": "6*x+2=22",
+    "status": "duplicate"
+   },
+   {
+    "from": "6*x+2-6*x=22-6*x",
+    "rule": "simplify",
+    "to": "2=-(6*x)+22",
+    "status": "new"
+   },
+   {
+    "from": "6*x+2-2=22-2",
+    "rule": "simplify",
+    "to": "6*x=20",
+    "status": "new"
+   },
+   {
+    "from": "2=-(6*x)+22",
+    "rule": "subtract-both-sides",
+    "to": "2-(-(6*x))=-(6*x)+22-(-(6*x))",
+    "status": "new"
+   },
+   {
+    "from": "2=-(6*x)+22",
+    "rule": "subtract-both-sides",
+    "to": "2-22=-(6*x)+22-22",
+    "status": "new"
+   },
+   {
+    "from": "6*x=20",
+    "rule": "divide-both-sides",
+    "to": "6*x/6=20/6",
+    "status": "new"
+   },
+   {
+    "from": "2-(-(6*x))=-(6*x)+22-(-(6*x))",
+    "rule": "simplify",
+    "to": "6*x+2=22",
+    "status": "duplicate"
+   },
+   {
+    "from": "2-22=-(6*x)+22-22",
+    "rule": "simplify",
+    "to": "-20=-(6*x)",
+    "status": "new"
+   },
+   {
+    "from": "6*x/6=20/6",
+    "rule": "simplify",
+    "to": "x=10/3",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m11",
+  "text": "(2/3)*x-5=7",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "18",
+  "steps": [
+   {
+    "rule": "add-both-sides",
+    "explain": "add 5 to both sides",
+    "to": "2/3*x-5+5=7+5"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine like terms)",
+    "to": "2/3*x=12"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 2/3",
+    "to": "2/3*x/(2/3)=12/(2/3)"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=18"
+   }
+  ],
+  "stats": {
+   "visited": 10,
+   "generated": 13,
+   "duplicates": 1,
+   "depth": 4,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "2/3*x-5=7",
+    "rule": "subtract-both-sides",
+    "to": "2/3*x-5-2/3*x=7-2/3*x",
+    "status": "new"
+   },
+   {
+    "from": "2/3*x-5=7",
+    "rule": "add-both-sides",
+    "to": "2/3*x-5+5=7+5",
+    "status": "new"
+   },
+   {
+    "from": "2/3*x-5=7",
+    "rule": "multiply-both-sides",
+    "to": "3*(2/3*x-5)=3*7",
+    "status": "new"
+   },
+   {
+    "from": "2/3*x-5-2/3*x=7-2/3*x",
+    "rule": "simplify",
+    "to": "-5=-(2/3*x)+7",
+    "status": "new"
+   },
+   {
+    "from": "2/3*x-5+5=7+5",
+    "rule": "simplify",
+    "to": "2/3*x=12",
+    "status": "new"
+   },
+   {
+    "from": "3*(2/3*x-5)=3*7",
+    "rule": "simplify",
+    "to": "3*(2/3*x-5)=21",
+    "status": "new"
+   },
+   {
+    "from": "-5=-(2/3*x)+7",
+    "rule": "subtract-both-sides",
+    "to": "-5-(-(2/3*x))=-(2/3*x)+7-(-(2/3*x))",
+    "status": "new"
+   },
+   {
+    "from": "-5=-(2/3*x)+7",
+    "rule": "subtract-both-sides",
+    "to": "-5-7=-(2/3*x)+7-7",
+    "status": "new"
+   },
+   {
+    "from": "2/3*x=12",
+    "rule": "divide-both-sides",
+    "to": "2/3*x/(2/3)=12/(2/3)",
+    "status": "new"
+   },
+   {
+    "from": "3*(2/3*x-5)=21",
+    "rule": "expand",
+    "to": "3*(2/3*x)-3*5=21",
+    "status": "new"
+   },
+   {
+    "from": "-5-(-(2/3*x))=-(2/3*x)+7-(-(2/3*x))",
+    "rule": "simplify",
+    "to": "2/3*x-5=7",
+    "status": "duplicate"
+   },
+   {
+    "from": "-5-7=-(2/3*x)+7-7",
+    "rule": "simplify",
+    "to": "-12=-(2/3*x)",
+    "status": "new"
+   },
+   {
+    "from": "2/3*x/(2/3)=12/(2/3)",
+    "rule": "simplify",
+    "to": "x=18",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m12",
+  "text": "10-(x+4)=3*x",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "3/2",
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-x+6=3*x"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -x from both sides",
+    "to": "-x+6-(-x)=3*x-(-x)"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "6=4*x"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 4",
+    "to": "6/4=4*x/4"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine coefficient)",
+    "to": "3/2=x"
+   },
+   {
+    "rule": "swap-sides",
+    "explain": "write the unknown on the left",
+    "to": "x=3/2"
+   }
+  ],
+  "stats": {
+   "visited": 16,
+   "generated": 23,
+   "duplicates": 1,
+   "depth": 6,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "10-(x+4)=3*x",
+    "rule": "simplify",
+    "to": "-x+6=3*x",
+    "status": "new"
+   },
+   {
+    "from": "-x+6=3*x",
+    "rule": "subtract-both-sides",
+    "to": "-x+6-(-x)=3*x-(-x)",
+    "status": "new"
+   },
+   {
+    "from": "-x+6=3*x",
+    "rule": "subtract-both-sides",
+    "to": "-x+6-6=3*x-6",
+    "status": "new"
+   },
+   {
+    "from": "-x+6=3*x",
+    "rule": "subtract-both-sides",
+    "to": "-x+6-3*x=3*x-3*x",
+    "status": "new"
+   },
+   {
+    "from": "-x+6=3*x",
+    "rule": "divide-both-sides",
+    "to": "(-x+6)/3=3*x/3",
+    "status": "new"
+   },
+   {
+    "from": "-x+6-(-x)=3*x-(-x)",
+    "rule": "simplify",
+    "to": "6=4*x",
+    "status": "new"
+   },
+   {
+    "from": "-x+6-6=3*x-6",
+    "rule": "simplify",
+    "to": "-x=3*x-6",
+    "status": "new"
+   },
+   {
+    "from": "-x+6-3*x=3*x-3*x",
+    "rule": "simplify",
+    "to": "-(4*x)+6=0",
+    "status": "new"
+   },
+   {
+    "from": "(-x+6)/3=3*x/3",
+    "rule": "simplify",
+    "to": "(-x+6)/3=x",
+    "status": "new"
+   },
+   {
+    "from": "6=4*x",
+    "rule": "divide-both-sides",
+    "to": "6/4=4*x/4",
+    "status": "new"
+   },
+   {
+    "from": "-x=3*x-6",
+    "rule": "simplify",
+    "to": "-1*x=3*x-6",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+6=0",
+    "rule": "subtract-both-sides",
+    "to": "-(4*x)+6-(-(4*x))=0-(-(4*x))",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+6=0",
+    "rule": "subtract-both-sides",
+    "to": "-(4*x)+6-6=0-6",
+    "status": "new"
+   },
+   {
+    "from": "(-x+6)/3=x",
+    "rule": "expand",
+    "to": "-x/3+6/3=x",
+    "status": "new"
+   },
+   {
+    "from": "6/4=4*x/4",
+    "rule": "simplify",
+    "to": "3/2=x",
+    "status": "new"
+   },
+   {
+    "from": "-1*x=3*x-6",
+    "rule": "subtract-both-sides",
+    "to": "-1*x--1*x=3*x-6--1*x",
+    "status": "new"
+   },
+   {
+    "from": "-1*x=3*x-6",
+    "rule": "subtract-both-sides",
+    "to": "-1*x-3*x=3*x-6-3*x",
+    "status": "new"
+   },
+   {
+    "from": "-1*x=3*x-6",
+    "rule": "add-both-sides",
+    "to": "-1*x+6=3*x-6+6",
+    "status": "new"
+   },
+   {
+    "from": "-1*x=3*x-6",
+    "rule": "divide-both-sides",
+    "to": "-1*x/-1=(3*x-6)/-1",
+    "status": "new"
+   },
+   {
+    "from": "-(4*x)+6-(-(4*x))=0-(-(4*x))",
+    "rule": "simplify",
+    "to": "6=4*x",
+    "status": "duplicate"
+   },
+   {
+    "from": "-(4*x)+6-6=0-6",
+    "rule": "simplify",
+    "to": "-(4*x)=-6",
+    "status": "new"
+   },
+   {
+    "from": "-x/3+6/3=x",
+    "rule": "simplify",
+    "to": "-(1/3*x)+2=x",
+    "status": "new"
+   },
+   {
+    "from": "3/2=x",
+    "rule": "swap-sides",
+    "to": "x=3/2",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m13",
+  "text": "x/4-x/6=1",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "12",
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "1/12*x=1"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 1/12",
+    "to": "1/12*x/(1/12)=1/(1/12)"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=12"
+   }
+  ],
+  "stats": {
+   "visited": 3,
+   "generated": 3,
+   "duplicates": 0,
+   "depth": 3,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "x/4-x/6=1",
+    "rule": "simplify",
+    "to": "1/12*x=1",
+    "status": "new"
+   },
+   {
+    "from": "1/12*x=1",
+    "rule": "divide-both-sides",
+    "to": "1/12*x/(1/12)=1/(1/12)",
+    "status": "new"
+   },
+   {
+    "from": "1/12*x/(1/12)=1/(1/12)",
+    "rule": "simplify",
+    "to": "x=12",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m14",
+  "text": "6=2*(x-5)+3*x",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "16/5",
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (tidy)",
+    "to": "6=3*x+2*(x-5)"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "6=3*x+2*x-2*5"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine like terms)",
+    "to": "6=5*x-10"
+   },
+   {
+    "rule": "add-both-sides",
+    "explain": "add 10 to both sides",
+    "to": "6+10=5*x-10+10"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine like terms)",
+    "to": "16=5*x"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 5",
+    "to": "16/5=5*x/5"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine coefficient)",
+    "to": "16/5=x"
+   },
+   {
+    "rule": "swap-sides",
+    "explain": "write the unknown on the left",
+    "to": "x=16/5"
+   }
+  ],
+  "stats": {
+   "visited": 13,
+   "generated": 15,
+   "duplicates": 1,
+   "depth": 8,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "6=2*(x-5)+3*x",
+    "rule": "simplify",
+    "to": "6=3*x+2*(x-5)",
+    "status": "new"
+   },
+   {
+    "from": "6=3*x+2*(x-5)",
+    "rule": "expand",
+    "to": "6=3*x+2*x-2*5",
+    "status": "new"
+   },
+   {
+    "from": "6=3*x+2*x-2*5",
+    "rule": "simplify",
+    "to": "6=5*x-10",
+    "status": "new"
+   },
+   {
+    "from": "6=5*x-10",
+    "rule": "subtract-both-sides",
+    "to": "6-5*x=5*x-10-5*x",
+    "status": "new"
+   },
+   {
+    "from": "6=5*x-10",
+    "rule": "add-both-sides",
+    "to": "6+10=5*x-10+10",
+    "status": "new"
+   },
+   {
+    "from": "6-5*x=5*x-10-5*x",
+    "rule": "simplify",
+    "to": "-(5*x)+6=-10",
+    "status": "new"
+   },
+   {
+    "from": "6+10=5*x-10+10",
+    "rule": "simplify",
+    "to": "16=5*x",
+    "status": "new"
+   },
+   {
+    "from": "-(5*x)+6=-10",
+    "rule": "subtract-both-sides",
+    "to": "-(5*x)+6-(-(5*x))=-10-(-(5*x))",
+    "status": "new"
+   },
+   {
+    "from": "-(5*x)+6=-10",
+    "rule": "subtract-both-sides",
+    "to": "-(5*x)+6-6=-10-6",
+    "status": "new"
+   },
+   {
+    "from": "16=5*x",
+    "rule": "divide-both-sides",
+    "to": "16/5=5*x/5",
+    "status": "new"
+   },
+   {
+    "from": "-(5*x)+6-(-(5*x))=-10-(-(5*x))",
+    "rule": "simplify",
+    "to": "6=5*x-10",
+    "status": "duplicate"
+   },
+   {
+    "from": "-(5*x)+6-6=-10-6",
+    "rule": "simplify",
+    "to": "-(5*x)=-16",
+    "status": "new"
+   },
+   {
+    "from": "16/5=5*x/5",
+    "rule": "simplify",
+    "to": "16/5=x",
+    "status": "new"
+   },
+   {
+    "from": "-(5*x)=-16",
+    "rule": "simplify",
+    "to": "-5*x=-16",
+    "status": "new"
+   },
+   {
+    "from": "16/5=x",
+    "rule": "swap-sides",
+    "to": "x=16/5",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m15",
+  "text": "5*(x-2)-3*(x+1)=1",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "7",
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "5*x-5*2-3*(x+1)=1"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "5*x-3*(x+1)-10=1"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "5*x-(3*x+3*1)-10=1"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine like terms)",
+    "to": "2*x-13=1"
+   },
+   {
+    "rule": "add-both-sides",
+    "explain": "add 13 to both sides",
+    "to": "2*x-13+13=1+13"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms, evaluate numbers)",
+    "to": "2*x=14"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 2",
+    "to": "2*x/2=14/2"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=7"
+   }
+  ],
+  "stats": {
+   "visited": 15,
+   "generated": 18,
+   "duplicates": 2,
+   "depth": 8,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "5*(x-2)-3*(x+1)=1",
+    "rule": "expand",
+    "to": "5*x-5*2-3*(x+1)=1",
+    "status": "new"
+   },
+   {
+    "from": "5*(x-2)-3*(x+1)=1",
+    "rule": "expand",
+    "to": "5*(x-2)-(3*x+3*1)=1",
+    "status": "new"
+   },
+   {
+    "from": "5*x-5*2-3*(x+1)=1",
+    "rule": "simplify",
+    "to": "5*x-3*(x+1)-10=1",
+    "status": "new"
+   },
+   {
+    "from": "5*(x-2)-(3*x+3*1)=1",
+    "rule": "simplify",
+    "to": "-(3*x)+5*(x-2)-3=1",
+    "status": "new"
+   },
+   {
+    "from": "5*x-3*(x+1)-10=1",
+    "rule": "expand",
+    "to": "5*x-(3*x+3*1)-10=1",
+    "status": "new"
+   },
+   {
+    "from": "-(3*x)+5*(x-2)-3=1",
+    "rule": "expand",
+    "to": "-(3*x)+5*x-5*2-3=1",
+    "status": "new"
+   },
+   {
+    "from": "5*x-(3*x+3*1)-10=1",
+    "rule": "simplify",
+    "to": "2*x-13=1",
+    "status": "new"
+   },
+   {
+    "from": "-(3*x)+5*x-5*2-3=1",
+    "rule": "simplify",
+    "to": "2*x-13=1",
+    "status": "duplicate"
+   },
+   {
+    "from": "2*x-13=1",
+    "rule": "subtract-both-sides",
+    "to": "2*x-13-2*x=1-2*x",
+    "status": "new"
+   },
+   {
+    "from": "2*x-13=1",
+    "rule": "add-both-sides",
+    "to": "2*x-13+13=1+13",
+    "status": "new"
+   },
+   {
+    "from": "2*x-13-2*x=1-2*x",
+    "rule": "simplify",
+    "to": "-13=-(2*x)+1",
+    "status": "new"
+   },
+   {
+    "from": "2*x-13+13=1+13",
+    "rule": "simplify",
+    "to": "2*x=14",
+    "status": "new"
+   },
+   {
+    "from": "-13=-(2*x)+1",
+    "rule": "subtract-both-sides",
+    "to": "-13-(-(2*x))=-(2*x)+1-(-(2*x))",
+    "status": "new"
+   },
+   {
+    "from": "-13=-(2*x)+1",
+    "rule": "subtract-both-sides",
+    "to": "-13-1=-(2*x)+1-1",
+    "status": "new"
+   },
+   {
+    "from": "2*x=14",
+    "rule": "divide-both-sides",
+    "to": "2*x/2=14/2",
+    "status": "new"
+   },
+   {
+    "from": "-13-(-(2*x))=-(2*x)+1-(-(2*x))",
+    "rule": "simplify",
+    "to": "2*x-13=1",
+    "status": "duplicate"
+   },
+   {
+    "from": "-13-1=-(2*x)+1-1",
+    "rule": "simplify",
+    "to": "-14=-(2*x)",
+    "status": "new"
+   },
+   {
+    "from": "2*x/2=14/2",
+    "rule": "simplify",
+    "to": "x=7",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m16",
+  "text": "(3*x-1)/4=(x+5)/2",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "11",
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "divide each term of the numerator by the denominator",
+    "to": "3*x/4-1/4=(x+5)/2"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "3/4*x-(1/4)=(x+5)/2"
+   },
+   {
+    "rule": "expand",
+    "explain": "divide each term of the numerator by the denominator",
+    "to": "3/4*x-(1/4)=x/2+5/2"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "3/4*x-(1/4)=1/2*x+5/2"
+   },
+   {
+    "rule": "add-both-sides",
+    "explain": "add 1/4 to both sides",
+    "to": "3/4*x-(1/4)+1/4=1/2*x+5/2+1/4"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "3/4*x=1/2*x+11/4"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 1/2*x from both sides",
+    "to": "3/4*x-1/2*x=1/2*x+11/4-1/2*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "1/4*x=11/4"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 1/4",
+    "to": "1/4*x/(1/4)=11/4/(1/4)"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=11"
+   }
+  ],
+  "stats": {
+   "visited": 38,
+   "generated": 52,
+   "duplicates": 9,
+   "depth": 10,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "(3*x-1)/4=(x+5)/2",
+    "rule": "expand",
+    "to": "3*x/4-1/4=(x+5)/2",
+    "status": "new"
+   },
+   {
+    "from": "(3*x-1)/4=(x+5)/2",
+    "rule": "expand",
+    "to": "(3*x-1)/4=x/2+5/2",
+    "status": "new"
+   },
+   {
+    "from": "3*x/4-1/4=(x+5)/2",
+    "rule": "simplify",
+    "to": "3/4*x-(1/4)=(x+5)/2",
+    "status": "new"
+   },
+   {
+    "from": "(3*x-1)/4=x/2+5/2",
+    "rule": "simplify",
+    "to": "(3*x-1)/4=1/2*x+5/2",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(1/4)=(x+5)/2",
+    "rule": "expand",
+    "to": "3/4*x-(1/4)=x/2+5/2",
+    "status": "new"
+   },
+   {
+    "from": "(3*x-1)/4=1/2*x+5/2",
+    "rule": "expand",
+    "to": "3*x/4-1/4=1/2*x+5/2",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(1/4)=x/2+5/2",
+    "rule": "simplify",
+    "to": "3/4*x-(1/4)=1/2*x+5/2",
+    "status": "new"
+   },
+   {
+    "from": "3*x/4-1/4=1/2*x+5/2",
+    "rule": "simplify",
+    "to": "3/4*x-(1/4)=1/2*x+5/2",
+    "status": "duplicate"
+   },
+   {
+    "from": "3/4*x-(1/4)=1/2*x+5/2",
+    "rule": "subtract-both-sides",
+    "to": "3/4*x-(1/4)-3/4*x=1/2*x+5/2-3/4*x",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(1/4)=1/2*x+5/2",
+    "rule": "add-both-sides",
+    "to": "3/4*x-(1/4)+1/4=1/2*x+5/2+1/4",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(1/4)=1/2*x+5/2",
+    "rule": "subtract-both-sides",
+    "to": "3/4*x-(1/4)-1/2*x=1/2*x+5/2-1/2*x",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(1/4)=1/2*x+5/2",
+    "rule": "subtract-both-sides",
+    "to": "3/4*x-(1/4)-(5/2)=1/2*x+5/2-(5/2)",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(1/4)-3/4*x=1/2*x+5/2-3/4*x",
+    "rule": "simplify",
+    "to": "-1/4=-(1/4*x)+5/2",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(1/4)+1/4=1/2*x+5/2+1/4",
+    "rule": "simplify",
+    "to": "3/4*x=1/2*x+11/4",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(1/4)-1/2*x=1/2*x+5/2-1/2*x",
+    "rule": "simplify",
+    "to": "1/4*x-(1/4)=5/2",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(1/4)-(5/2)=1/2*x+5/2-(5/2)",
+    "rule": "simplify",
+    "to": "3/4*x-(11/4)=1/2*x",
+    "status": "new"
+   },
+   {
+    "from": "-1/4=-(1/4*x)+5/2",
+    "rule": "subtract-both-sides",
+    "to": "-1/4-(-(1/4*x))=-(1/4*x)+5/2-(-(1/4*x))",
+    "status": "new"
+   },
+   {
+    "from": "-1/4=-(1/4*x)+5/2",
+    "rule": "subtract-both-sides",
+    "to": "-1/4-(5/2)=-(1/4*x)+5/2-(5/2)",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x=1/2*x+11/4",
+    "rule": "subtract-both-sides",
+    "to": "3/4*x-3/4*x=1/2*x+11/4-3/4*x",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x=1/2*x+11/4",
+    "rule": "subtract-both-sides",
+    "to": "3/4*x-1/2*x=1/2*x+11/4-1/2*x",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x=1/2*x+11/4",
+    "rule": "subtract-both-sides",
+    "to": "3/4*x-(11/4)=1/2*x+11/4-(11/4)",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x=1/2*x+11/4",
+    "rule": "divide-both-sides",
+    "to": "3/4*x/(3/4)=(1/2*x+11/4)/(3/4)",
+    "status": "new"
+   },
+   {
+    "from": "1/4*x-(1/4)=5/2",
+    "rule": "subtract-both-sides",
+    "to": "1/4*x-(1/4)-1/4*x=5/2-1/4*x",
+    "status": "new"
+   },
+   {
+    "from": "1/4*x-(1/4)=5/2",
+    "rule": "add-both-sides",
+    "to": "1/4*x-(1/4)+1/4=5/2+1/4",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(11/4)=1/2*x",
+    "rule": "subtract-both-sides",
+    "to": "3/4*x-(11/4)-3/4*x=1/2*x-3/4*x",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(11/4)=1/2*x",
+    "rule": "add-both-sides",
+    "to": "3/4*x-(11/4)+11/4=1/2*x+11/4",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(11/4)=1/2*x",
+    "rule": "subtract-both-sides",
+    "to": "3/4*x-(11/4)-1/2*x=1/2*x-1/2*x",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(11/4)=1/2*x",
+    "rule": "divide-both-sides",
+    "to": "(3/4*x-(11/4))/(1/2)=1/2*x/(1/2)",
+    "status": "new"
+   },
+   {
+    "from": "-1/4-(-(1/4*x))=-(1/4*x)+5/2-(-(1/4*x))",
+    "rule": "simplify",
+    "to": "1/4*x-(1/4)=5/2",
+    "status": "duplicate"
+   },
+   {
+    "from": "-1/4-(5/2)=-(1/4*x)+5/2-(5/2)",
+    "rule": "simplify",
+    "to": "-11/4=-(1/4*x)",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-3/4*x=1/2*x+11/4-3/4*x",
+    "rule": "simplify",
+    "to": "0=-(1/4*x)+11/4",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-1/2*x=1/2*x+11/4-1/2*x",
+    "rule": "simplify",
+    "to": "1/4*x=11/4",
+    "status": "new"
+   },
+   {
+    "from": "3/4*x-(11/4)=1/2*x+11/4-(11/4)",
+    "rule": "simplify",
+    "to": "3/4*x-(11/4)=1/2*x",
+    "status": "duplicate"
+   },
+   {
+    "from": "3/4*x/(3/4)=(1/2*x+11/4)/(3/4)",
+    "rule": "simplify",
+    "to": "x=(1/2*x+11/4)/(3/4)",
+    "status": "new"
+   },
+   {
+    "from": "1/4*x-(1/4)-1/4*x=5/2-1/4*x",
+    "rule": "simplify",
+    "to": "-1/4=-(1/4*x)+5/2",
+    "status": "duplicate"
+   },
+   {
+    "from": "1/4*x-(1/4)+1/4=5/2+1/4",
+    "rule": "simplify",
+    "to": "1/4*x=11/4",
+    "status": "duplicate"
+   },
+   {
+    "from": "3/4*x-(11/4)-3/4*x=1/2*x-3/4*x",
+    "rule": "simplify",
+    "to": "-11/4=-(1/4*x)",
+    "status": "duplicate"
+   },
+   {
+    "from": "3/4*x-(11/4)+11/4=1/2*x+11/4",
+    "rule": "simplify",
+    "to": "3/4*x=1/2*x+11/4",
+    "status": "duplicate"
+   },
+   {
+    "from": "3/4*x-(11/4)-1/2*x=1/2*x-1/2*x",
+    "rule": "simplify",
+    "to": "1/4*x-(11/4)=0",
+    "status": "new"
+   },
+   {
+    "from": "(3/4*x-(11/4))/(1/2)=1/2*x/(1/2)",
+    "rule": "simplify",
+    "to": "(3/4*x-(11/4))/(1/2)=x",
+    "status": "new"
+   },
+   {
+    "from": "-11/4=-(1/4*x)",
+    "rule": "simplify",
+    "to": "-11/4=-1/4*x",
+    "status": "new"
+   },
+   {
+    "from": "0=-(1/4*x)+11/4",
+    "rule": "subtract-both-sides",
+    "to": "0-(-(1/4*x))=-(1/4*x)+11/4-(-(1/4*x))",
+    "status": "new"
+   },
+   {
+    "from": "0=-(1/4*x)+11/4",
+    "rule": "subtract-both-sides",
+    "to": "0-(11/4)=-(1/4*x)+11/4-(11/4)",
+    "status": "new"
+   },
+   {
+    "from": "1/4*x=11/4",
+    "rule": "divide-both-sides",
+    "to": "1/4*x/(1/4)=11/4/(1/4)",
+    "status": "new"
+   },
+   {
+    "from": "x=(1/2*x+11/4)/(3/4)",
+    "rule": "expand",
+    "to": "x=1/2*x/(3/4)+11/4/(3/4)",
+    "status": "new"
+   },
+   {
+    "from": "1/4*x-(11/4)=0",
+    "rule": "subtract-both-sides",
+    "to": "1/4*x-(11/4)-1/4*x=0-1/4*x",
+    "status": "new"
+   },
+   {
+    "from": "1/4*x-(11/4)=0",
+    "rule": "add-both-sides",
+    "to": "1/4*x-(11/4)+11/4=0+11/4",
+    "status": "new"
+   },
+   {
+    "from": "(3/4*x-(11/4))/(1/2)=x",
+    "rule": "expand",
+    "to": "3/4*x/(1/2)-11/4/(1/2)=x",
+    "status": "new"
+   },
+   {
+    "from": "-11/4=-1/4*x",
+    "rule": "divide-both-sides",
+    "to": "-11/4/(-1/4)=-1/4*x/(-1/4)",
+    "status": "new"
+   },
+   {
+    "from": "0-(-(1/4*x))=-(1/4*x)+11/4-(-(1/4*x))",
+    "rule": "simplify",
+    "to": "1/4*x=11/4",
+    "status": "duplicate"
+   },
+   {
+    "from": "0-(11/4)=-(1/4*x)+11/4-(11/4)",
+    "rule": "simplify",
+    "to": "-11/4=-(1/4*x)",
+    "status": "duplicate"
+   },
+   {
+    "from": "1/4*x/(1/4)=11/4/(1/4)",
+    "rule": "simplify",
+    "to": "x=11",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m17",
+  "text": "0.5*x+1=4",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "6",
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 1 from both sides",
+    "to": "1/2*x+1-1=4-1"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms, evaluate numbers)",
+    "to": "1/2*x=3"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 1/2",
+    "to": "1/2*x/(1/2)=3/(1/2)"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=6"
+   }
+  ],
+  "stats": {
+   "visited": 8,
+   "generated": 10,
+   "duplicates": 1,
+   "depth": 4,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "1/2*x+1=4",
+    "rule": "subtract-both-sides",
+    "to": "1/2*x+1-1/2*x=4-1/2*x",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+1=4",
+    "rule": "subtract-both-sides",
+    "to": "1/2*x+1-1=4-1",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+1-1/2*x=4-1/2*x",
+    "rule": "simplify",
+    "to": "1=-(1/2*x)+4",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x+1-1=4-1",
+    "rule": "simplify",
+    "to": "1/2*x=3",
+    "status": "new"
+   },
+   {
+    "from": "1=-(1/2*x)+4",
+    "rule": "subtract-both-sides",
+    "to": "1-(-(1/2*x))=-(1/2*x)+4-(-(1/2*x))",
+    "status": "new"
+   },
+   {
+    "from": "1=-(1/2*x)+4",
+    "rule": "subtract-both-sides",
+    "to": "1-4=-(1/2*x)+4-4",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x=3",
+    "rule": "divide-both-sides",
+    "to": "1/2*x/(1/2)=3/(1/2)",
+    "status": "new"
+   },
+   {
+    "from": "1-(-(1/2*x))=-(1/2*x)+4-(-(1/2*x))",
+    "rule": "simplify",
+    "to": "1/2*x+1=4",
+    "status": "duplicate"
+   },
+   {
+    "from": "1-4=-(1/2*x)+4-4",
+    "rule": "simplify",
+    "to": "-3=-(1/2*x)",
+    "status": "new"
+   },
+   {
+    "from": "1/2*x/(1/2)=3/(1/2)",
+    "rule": "simplify",
+    "to": "x=6",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m18",
+  "text": "-(x-3)=2*x+9",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "-2",
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "remove the bracket by changing signs",
+    "to": "-x+3=2*x+9"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -x from both sides",
+    "to": "-x+3-(-x)=2*x+9-(-x)"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "3=3*x+9"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 9 from both sides",
+    "to": "3-9=3*x+9-9"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine like terms)",
+    "to": "-6=3*x"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 3",
+    "to": "-6/3=3*x/3"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine coefficient)",
+    "to": "-2=x"
+   },
+   {
+    "rule": "swap-sides",
+    "explain": "write the unknown on the left",
+    "to": "x=-2"
+   }
+  ],
+  "stats": {
+   "visited": 35,
+   "generated": 48,
+   "duplicates": 8,
+   "depth": 8,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "-(x-3)=2*x+9",
+    "rule": "expand",
+    "to": "-x+3=2*x+9",
+    "status": "new"
+   },
+   {
+    "from": "-x+3=2*x+9",
+    "rule": "subtract-both-sides",
+    "to": "-x+3-(-x)=2*x+9-(-x)",
+    "status": "new"
+   },
+   {
+    "from": "-x+3=2*x+9",
+    "rule": "subtract-both-sides",
+    "to": "-x+3-3=2*x+9-3",
+    "status": "new"
+   },
+   {
+    "from": "-x+3=2*x+9",
+    "rule": "subtract-both-sides",
+    "to": "-x+3-2*x=2*x+9-2*x",
+    "status": "new"
+   },
+   {
+    "from": "-x+3=2*x+9",
+    "rule": "subtract-both-sides",
+    "to": "-x+3-9=2*x+9-9",
+    "status": "new"
+   },
+   {
+    "from": "-x+3-(-x)=2*x+9-(-x)",
+    "rule": "simplify",
+    "to": "3=3*x+9",
+    "status": "new"
+   },
+   {
+    "from": "-x+3-3=2*x+9-3",
+    "rule": "simplify",
+    "to": "-x=2*x+6",
+    "status": "new"
+   },
+   {
+    "from": "-x+3-2*x=2*x+9-2*x",
+    "rule": "simplify",
+    "to": "-(3*x)+3=9",
+    "status": "new"
+   },
+   {
+    "from": "-x+3-9=2*x+9-9",
+    "rule": "simplify",
+    "to": "-x-6=2*x",
+    "status": "new"
+   },
+   {
+    "from": "3=3*x+9",
+    "rule": "subtract-both-sides",
+    "to": "3-3*x=3*x+9-3*x",
+    "status": "new"
+   },
+   {
+    "from": "3=3*x+9",
+    "rule": "subtract-both-sides",
+    "to": "3-9=3*x+9-9",
+    "status": "new"
+   },
+   {
+    "from": "-x=2*x+6",
+    "rule": "simplify",
+    "to": "-1*x=2*x+6",
+    "status": "new"
+   },
+   {
+    "from": "-(3*x)+3=9",
+    "rule": "subtract-both-sides",
+    "to": "-(3*x)+3-(-(3*x))=9-(-(3*x))",
+    "status": "new"
+   },
+   {
+    "from": "-(3*x)+3=9",
+    "rule": "subtract-both-sides",
+    "to": "-(3*x)+3-3=9-3",
+    "status": "new"
+   },
+   {
+    "from": "-x-6=2*x",
+    "rule": "subtract-both-sides",
+    "to": "-x-6-(-x)=2*x-(-x)",
+    "status": "new"
+   },
+   {
+    "from": "-x-6=2*x",
+    "rule": "add-both-sides",
+    "to": "-x-6+6=2*x+6",
+    "status": "new"
+   },
+   {
+    "from": "-x-6=2*x",
+    "rule": "subtract-both-sides",
+    "to": "-x-6-2*x=2*x-2*x",
+    "status": "new"
+   },
+   {
+    "from": "-x-6=2*x",
+    "rule": "divide-both-sides",
+    "to": "(-x-6)/2=2*x/2",
+    "status": "new"
+   },
+   {
+    "from": "3-3*x=3*x+9-3*x",
+    "rule": "simplify",
+    "to": "-(3*x)+3=9",
+    "status": "duplicate"
+   },
+   {
+    "from": "3-9=3*x+9-9",
+    "rule": "simplify",
+    "to": "-6=3*x",
+    "status": "new"
+   },
+   {
+    "from": "-1*x=2*x+6",
+    "rule": "subtract-both-sides",
+    "to": "-1*x--1*x=2*x+6--1*x",
+    "status": "new"
+   },
+   {
+    "from": "-1*x=2*x+6",
+    "rule": "subtract-both-sides",
+    "to": "-1*x-2*x=2*x+6-2*x",
+    "status": "new"
+   },
+   {
+    "from": "-1*x=2*x+6",
+    "rule": "subtract-both-sides",
+    "to": "-1*x-6=2*x+6-6",
+    "status": "new"
+   },
+   {
+    "from": "-1*x=2*x+6",
+    "rule": "divide-both-sides",
+    "to": "-1*x/-1=(2*x+6)/-1",
+    "status": "new"
+   },
+   {
+    "from": "-(3*x)+3-(-(3*x))=9-(-(3*x))",
+    "rule": "simplify",
+    "to": "3=3*x+9",
+    "status": "duplicate"
+   },
+   {
+    "from": "-(3*x)+3-3=9-3",
+    "rule": "simplify",
+    "to": "-(3*x)=6",
+    "status": "new"
+   },
+   {
+    "from": "-x-6-(-x)=2*x-(-x)",
+    "rule": "simplify",
+    "to": "-6=3*x",
+    "status": "duplicate"
+   },
+   {
+    "from": "-x-6+6=2*x+6",
+    "rule": "simplify",
+    "to": "-x=2*x+6",
+    "status": "duplicate"
+   },
+   {
+    "from": "-x-6-2*x=2*x-2*x",
+    "rule": "simplify",
+    "to": "-(3*x)-6=0",
+    "status": "new"
+   },
+   {
+    "from": "(-x-6)/2=2*x/2",
+    "rule": "simplify",
+    "to": "(-x-6)/2=x",
+    "status": "new"
+   },
+   {
+    "from": "-6=3*x",
+    "rule": "divide-both-sides",
+    "to": "-6/3=3*x/3",
+    "status": "new"
+   },
+   {
+    "from": "-1*x--1*x=2*x+6--1*x",
+    "rule": "simplify",
+    "to": "0=3*x+6",
+    "status": "new"
+   },
+   {
+    "from": "-1*x-2*x=2*x+6-2*x",
+    "rule": "simplify",
+    "to": "-(3*x)=6",
+    "status": "duplicate"
+   },
+   {
+    "from": "-1*x-6=2*x+6-6",
+    "rule": "simplify",
+    "to": "-x-6=2*x",
+    "status": "duplicate"
+   },
+   {
+    "from": "-1*x/-1=(2*x+6)/-1",
+    "rule": "simplify",
+    "to": "x=(2*x+6)/-1",
+    "status": "new"
+   },
+   {
+    "from": "-(3*x)=6",
+    "rule": "simplify",
+    "to": "-3*x=6",
+    "status": "new"
+   },
+   {
+    "from": "-(3*x)-6=0",
+    "rule": "subtract-both-sides",
+    "to": "-(3*x)-6-(-(3*x))=0-(-(3*x))",
+    "status": "new"
+   },
+   {
+    "from": "-(3*x)-6=0",
+    "rule": "add-both-sides",
+    "to": "-(3*x)-6+6=0+6",
+    "status": "new"
+   },
+   {
+    "from": "(-x-6)/2=x",
+    "rule": "expand",
+    "to": "-x/2-6/2=x",
+    "status": "new"
+   },
+   {
+    "from": "-6/3=3*x/3",
+    "rule": "simplify",
+    "to": "-2=x",
+    "status": "new"
+   },
+   {
+    "from": "0=3*x+6",
+    "rule": "subtract-both-sides",
+    "to": "0-3*x=3*x+6-3*x",
+    "status": "new"
+   },
+   {
+    "from": "0=3*x+6",
+    "rule": "subtract-both-sides",
+    "to": "0-6=3*x+6-6",
+    "status": "new"
+   },
+   {
+    "from": "x=(2*x+6)/-1",
+    "rule": "expand",
+    "to": "x=2*x/-1+6/-1",
+    "status": "new"
+   },
+   {
+    "from": "-3*x=6",
+    "rule": "divide-both-sides",
+    "to": "-3*x/-3=6/-3",
+    "status": "new"
+   },
+   {
+    "from": "-(3*x)-6-(-(3*x))=0-(-(3*x))",
+    "rule": "simplify",
+    "to": "-6=3*x",
+    "status": "duplicate"
+   },
+   {
+    "from": "-(3*x)-6+6=0+6",
+    "rule": "simplify",
+    "to": "-(3*x)=6",
+    "status": "duplicate"
+   },
+   {
+    "from": "-x/2-6/2=x",
+    "rule": "simplify",
+    "to": "-(1/2*x)-3=x",
+    "status": "new"
+   },
+   {
+    "from": "-2=x",
+    "rule": "swap-sides",
+    "to": "x=-2",
+    "status": "new"
+   }
+  ]
+ },
+ {
+  "id": "m19",
+  "text": "9*x-4=5*x+12",
+  "outcome": "solved",
+  "reason": "x isolated",
+  "answer": "4",
+  "steps": [
+   {
+    "rule": "add-both-sides",
+    "explain": "add 4 to both sides",
+    "to": "9*x-4+4=5*x+12+4"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "9*x=5*x+16"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 5*x from both sides",
+    "to": "9*x-5*x=5*x+16-5*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "4*x=16"
+   },
+   {
+    "rule": "divide-both-sides",
+    "explain": "divide both sides by 4",
+    "to": "4*x/4=16/4"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, evaluate numbers)",
+    "to": "x=4"
+   }
+  ],
+  "stats": {
+   "visited": 31,
+   "generated": 44,
+   "duplicates": 8,
+   "depth": 6,
+   "capped": false
+  },
+  "visitLog": [
+   {
+    "from": "9*x-4=5*x+12",
+    "rule": "subtract-both-sides",
+    "to": "9*x-4-9*x=5*x+12-9*x",
+    "status": "new"
+   },
+   {
+    "from": "9*x-4=5*x+12",
+    "rule": "add-both-sides",
+    "to": "9*x-4+4=5*x+12+4",
+    "status": "new"
+   },
+   {
+    "from": "9*x-4=5*x+12",
+    "rule": "subtract-both-sides",
+    "to": "9*x-4-5*x=5*x+12-5*x",
+    "status": "new"
+   },
+   {
+    "from": "9*x-4=5*x+12",
+    "rule": "subtract-both-sides",
+    "to": "9*x-4-12=5*x+12-12",
+    "status": "new"
+   },
+   {
+    "from": "9*x-4-9*x=5*x+12-9*x",
+    "rule": "simplify",
+    "to": "-4=-(4*x)+12",
+    "status": "new"
+   },
+   {
+    "from": "9*x-4+4=5*x+12+4",
+    "rule": "simplify",
+    "to": "9*x=5*x+16",
+    "status": "new"
+   },
+   {
+    "from": "9*x-4-5*x=5*x+12-5*x",
+    "rule": "simplify",
+    "to": "4*x-4=12",
+    "status": "new"
+   },
+   {
+    "from": "9*x-4-12=5*x+12-12",
+    "rule": "simplify",
+    "to": "9*x-16=5*x",
+    "status": "new"
+   },
+   {
+    "from": "-4=-(4*x)+12",
+    "rule": "subtract-both-sides",
+    "to": "-4-(-(4*x))=-(4*x)+12-(-(4*x))",
+    "status": "new"
+   },
+   {
+    "from": "-4=-(4*x)+12",
+    "rule": "subtract-both-sides",
+    "to": "-4-12=-(4*x)+12-12",
+    "status": "new"
+   },
+   {
+    "from": "9*x=5*x+16",
+    "rule": "subtract-both-sides",
+    "to": "9*x-9*x=5*x+16-9*x",
+    "status": "new"
+   },
+   {
+    "from": "9*x=5*x+16",
+    "rule": "subtract-both-sides",
+    "to": "9*x-5*x=5*x+16-5*x",
+    "status": "new"
+   },
+   {
+    "from": "9*x=5*x+16",
+    "rule": "subtract-both-sides",
+    "to": "9*x-16=5*x+16-16",
+    "status": "new"
+   },
+   {
+    "from": "9*x=5*x+16",
+    "rule": "divide-both-sides",
+    "to": "9*x/9=(5*x+16)/9",
+    "status": "new"
+   },
+   {
+    "from": "4*x-4=12",
+    "rule": "subtract-both-sides",
+    "to": "4*x-4-4*x=12-4*x",
+    "status": "new"
+   },
+   {
+    "from": "4*x-4=12",
+    "rule": "add-both-sides",
+    "to": "4*x-4+4=12+4",
+    "status": "new"
+   },
+   {
+    "from": "9*x-16=5*x",
+    "rule": "subtract-both-sides",
+    "to": "9*x-16-9*x=5*x-9*x",
+    "status": "new"
+   },
+   {
+    "from": "9*x-16=5*x",
+    "rule": "add-both-sides",
+    "to": "9*x-16+16=5*x+16",
+    "status": "new"
+   },
+   {
+    "from": "9*x-16=5*x",
+    "rule": "subtract-both-sides",
+    "to": "9*x-16-5*x=5*x-5*x",
+    "status": "new"
+   },
+   {
+    "from": "9*x-16=5*x",
+    "rule": "divide-both-sides",
+    "to": "(9*x-16)/5=5*x/5",
+    "status": "new"
+   },
+   {
+    "from": "-4-(-(4*x))=-(4*x)+12-(-(4*x))",
+    "rule": "simplify",
+    "to": "4*x-4=12",
+    "status": "duplicate"
+   },
+   {
+    "from": "-4-12=-(4*x)+12-12",
+    "rule": "simplify",
+    "to": "-16=-(4*x)",
+    "status": "new"
+   },
+   {
+    "from": "9*x-9*x=5*x+16-9*x",
+    "rule": "simplify",
+    "to": "0=-(4*x)+16",
+    "status": "new"
+   },
+   {
+    "from": "9*x-5*x=5*x+16-5*x",
+    "rule": "simplify",
+    "to": "4*x=16",
+    "status": "new"
+   },
+   {
+    "from": "9*x-16=5*x+16-16",
+    "rule": "simplify",
+    "to": "9*x-16=5*x",
+    "status": "duplicate"
+   },
+   {
+    "from": "9*x/9=(5*x+16)/9",
+    "rule": "simplify",
+    "to": "x=(5*x+16)/9",
+    "status": "new"
+   },
+   {
+    "from": "4*x-4-4*x=12-4*x",
+    "rule": "simplify",
+    "to": "-4=-(4*x)+12",
+    "status": "duplicate"
+   },
+   {
+    "from": "4*x-4+4=12+4",
+    "rule": "simplify",
+    "to": "4*x=16",
+    "status": "duplicate"
+   },
+   {
+    "from": "9*x-16-9*x=5*x-9*x",
+    "rule": "simplify",
+    "to": "-16=-(4*x)",
+    "status": "duplicate"
+   },
+   {
+    "from": "9*x-16+16=5*x+16",
+    "rule": "simplify",
+    "to": "9*x=5*x+16",
+    "status": "duplicate"
+   },
+   {
+    "from": "9*x-16-5*x=5*x-5*x",
+    "rule": "simplify",
+    "to": "4*x-16=0",
+    "status": "new"
+   },
+   {
+    "from": "(9*x-16)/5=5*x/5",
+    "rule": "simplify",
+    "to": "(9*x-16)/5=x",
+    "status": "new"
+   },
+   {
+    "from": "-16=-(4*x)",
+    "rule": "simplify",
+    "to": "-16=-4*x",
+    "status": "new"
+   },
+   {
+    "from": "0=-(4*x)+16",
+    "rule": "subtract-both-sides",
+    "to": "0-(-(4*x))=-(4*x)+16-(-(4*x))",
+    "status": "new"
+   },
+   {
+    "from": "0=-(4*x)+16",
+    "rule": "subtract-both-sides",
+    "to": "0-16=-(4*x)+16-16",
+    "status": "new"
+   },
+   {
+    "from": "4*x=16",
+    "rule": "divide-both-sides",
+    "to": "4*x/4=16/4",
+    "status": "new"
+   },
+   {
+    "from": "x=(5*x+16)/9",
+    "rule": "expand",
+    "to": "x=5*x/9+16/9",
+    "status": "new"
+   },
+   {
+    "from": "4*x-16=0",
+    "rule": "subtract-both-sides",
+    "to": "4*x-16-4*x=0-4*x",
+    "status": "new"
+   },
+   {
+    "from": "4*x-16=0",
+    "rule": "add-both-sides",
+    "to": "4*x-16+16=0+16",
+    "status": "new"
+   },
+   {
+    "from": "(9*x-16)/5=x",
+    "rule": "expand",
+    "to": "9*x/5-16/5=x",
+    "status": "new"
+   },
+   {
+    "from": "-16=-4*x",
+    "rule": "divide-both-sides",
+    "to": "-16/-4=-4*x/-4",
+    "status": "new"
+   },
+   {
+    "from": "0-(-(4*x))=-(4*x)+16-(-(4*x))",
+    "rule": "simplify",
+    "to": "4*x=16",
+    "status": "duplicate"
+   },
+   {
+    "from": "0-16=-(4*x)+16-16",
+    "rule": "simplify",
+    "to": "-16=-(4*x)",
+    "status": "duplicate"
+   },
+   {
+    "from": "4*x/4=16/4",
+    "rule": "simplify",
+    "to": "x=4",
+    "status": "new"
+   }
+  ]
+ }
+]

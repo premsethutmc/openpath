@@ -1,0 +1,2231 @@
+{
+ "id": "wrong-after-teaching",
+ "competency": "MATH.algebra.linear-equations",
+ "truth": {
+  "misconception": "forgot-divide",
+  "heldAtEnd": true,
+  "taughtByEnd": true,
+  "notes": "linear equations, grade 7 (lin): forgot-divide predicts a distinct answer on every lin item; teaching does not change it"
+ },
+ "expect": {
+  "investigation": "either",
+  "resolution": "must-not-resolve",
+  "establish": "should-establish",
+  "notes": "the modelled wrong answer persists after the lesson: the misconception is established and must not be marked resolved; teaching should be revised or escalated, not counted as success"
+ },
+ "steps": [
+  {
+   "step": 1,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "diagnostic",
+   "question": "gen:lin:3,3,2",
+   "activity": "diagnostic",
+   "response": "6",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "not_started",
+    "independent": {
+     "right": 0,
+     "total": 0
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.35,
+    "posterior": {
+     "secure": 0.35,
+     "conceptual": 0.15,
+     "procedural": 0.15,
+     "recall": 0.15,
+     "prerequisite": 0.1,
+     "transfer": 0.1
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 2,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "diagnostic",
+   "question": "gen:lin:3,9,8",
+   "activity": "diagnostic",
+   "response": "24",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.56,
+    "posterior": {
+     "secure": 0.050909090909090904,
+     "conceptual": 0.15272727272727274,
+     "procedural": 0.5563636363636364,
+     "recall": 0.1090909090909091,
+     "prerequisite": 0.10181818181818182,
+     "transfer": 0.02909090909090909
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 3,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "investigate",
+   "question": "gen:lin:2,2,1",
+   "activity": "probe",
+   "context": "investigate:gen:lin:3,3,2",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "3 was taken away but the 3 was not divided out: 3x = 6 means x = 6 ÷ 3. A short explanation is waiting."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85,
+    "posterior": {
+     "secure": 0.0030624521491851684,
+     "conceptual": 0.06431149513288856,
+     "procedural": 0.8534397900032812,
+     "recall": 0.03281198731269824,
+     "prerequisite": 0.042874330088592365,
+     "transfer": 0.003499945313354478
+    }
+   },
+   "reasoning": {
+    "status": "need_more",
+    "best": null,
+    "competing": [
+     "forgot-divide"
+    ],
+    "support": {
+     "forgot-divide": 0.854,
+     "unexplained": 0.061,
+     "added-not-subtracted": 0.03,
+     "divided-first": 0.03,
+     "secure": 0.024
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "One more question to understand what happened (it does not count against you)."
+  },
+  {
+   "step": 4,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "complete",
+   "question": null,
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85,
+    "posterior": {
+     "secure": 0.0030624521491851684,
+     "conceptual": 0.06431149513288856,
+     "procedural": 0.8534397900032812,
+     "recall": 0.03281198731269824,
+     "prerequisite": 0.042874330088592365,
+     "transfer": 0.003499945313354478
+    }
+   },
+   "reasoning": {
+    "status": "established",
+    "best": "forgot-divide",
+    "competing": [
+     "forgot-divide"
+    ],
+    "support": {
+     "forgot-divide": 0.987,
+     "unexplained": 0.01,
+     "added-not-subtracted": 0.001,
+     "divided-first": 0.001,
+     "secure": 0.001
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": {
+     "kind": "teach",
+     "competency": "MATH.algebra.linear-equations",
+     "why": "3 was taken away but the 3 was not divided out: 3x = 6 means x = 6 ÷ 3."
+    }
+   },
+   "reason": "3 was taken away but the 3 was not divided out: 3x = 6 means x = 6 ÷ 3.",
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "3 was taken away but the 3 was not divided out: 3x = 6 means x = 6 ÷ 3. A short explanation is waiting."
+   }
+  },
+  {
+   "step": 5,
+   "stage": "plan",
+   "competency": "MATH.algebra.linear-equations",
+   "planItems": [
+    {
+     "competency": "MATH.algebra.linear-equations",
+     "reason": "3 was taken away but the 3 was not divided out: 3x = 6 means x = 6 ÷ 3. Here is a way to rebuild it."
+    },
+    {
+     "competency": "MATH.algebra.variables",
+     "reason": "Next in Simple equations."
+    }
+   ],
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "hypotheses": [
+    {
+     "contract": "learner-hypothesis@1",
+     "id": "forgot-divide@gen:lin:3,3,2",
+     "claim": {
+      "explanation": "forgot-divide",
+      "kind": "procedural",
+      "says": "3 was taken away but the 3 was not divided out: 3x = 6 means x = 6 ÷ 3."
+     },
+     "scope": {
+      "question": "gen:lin:3,3,2",
+      "family": "gen:lin:3,3,2",
+      "observedIn": "MATH.algebra.linear-equations",
+      "about": "MATH.algebra.linear-equations"
+     },
+     "status": "established",
+     "support": {
+      "forgot-divide": 0.987,
+      "unexplained": 0.01,
+      "added-not-subtracted": 0.001,
+      "divided-first": 0.001,
+      "secure": 0.001
+     },
+     "competing": [
+      "forgot-divide"
+     ],
+     "supporting": [
+      {
+       "attempt": "record#1",
+       "questionId": "gen:lin:3,3,2",
+       "response": "6",
+       "at": "2026-09-01T09:02:00.000Z",
+       "matches": [
+        "forgot-divide"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "kernel",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      },
+      {
+       "attempt": "record#3",
+       "questionId": "gen:lin:2,2,1",
+       "response": "2",
+       "at": "2026-09-01T09:04:00.000Z",
+       "matches": [
+        "forgot-divide"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "kernel",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      }
+     ],
+     "contradicting": [],
+     "obligations": [
+      "teaching in scope",
+      "then a fresh answer alone, in scope"
+     ],
+     "teaching": {
+      "deliveredAt": null,
+      "strategy": null,
+      "competency": null
+     },
+     "resolvedBy": null,
+     "provenance": {
+      "policy": "diagnostic@2-draft",
+      "established": "2026-09-01T09:04:00.000Z",
+      "attempts": [
+       "record#1",
+       "record#3"
+      ]
+     },
+     "use": {
+      "teach": true,
+      "ask": false,
+      "evidence": false,
+      "mastery": false
+     }
+    }
+   ],
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "3 was taken away but the 3 was not divided out: 3x = 6 means x = 6 ÷ 3. A short explanation is waiting."
+   }
+  },
+  {
+   "step": 6,
+   "stage": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "reason": "3 was taken away but the 3 was not divided out: 3x = 6 means x = 6 ÷ 3. Here is a way to rebuild it.",
+   "intervention": {
+    "support": null,
+    "plan": "teach",
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 7,
+   "stage": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "guided",
+   "question": "gen:lin:2,17,12",
+   "activity": "guided",
+   "response": "24",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 8,
+   "stage": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "check",
+   "question": "gen:lin:5,6,5",
+   "activity": "check",
+   "response": "25",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 9,
+   "stage": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "reason": "That way did not lead to a right answer on your own, so here is a different explanation.",
+   "intervention": {
+    "support": null,
+    "plan": "teach",
+    "strategy": {
+     "id": "spot_the_mistake",
+     "kind": "procedural",
+     "title": "Spot the mistake",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 10,
+   "stage": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "guided",
+   "question": "gen:lin:7,9,12",
+   "activity": "guided",
+   "response": "84",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "spot_the_mistake",
+     "kind": "procedural",
+     "title": "Spot the mistake",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 11,
+   "stage": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "check",
+   "question": "gen:lin:3,3,4:mc",
+   "activity": "check",
+   "response": "D",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "spot_the_mistake",
+     "kind": "procedural",
+     "title": "Spot the mistake",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 12,
+   "stage": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "reason": "That way did not lead to a right answer on your own, so here is a different explanation.",
+   "intervention": {
+    "support": null,
+    "plan": "teach",
+    "strategy": {
+     "id": "check_what_it_uses",
+     "kind": "prerequisite",
+     "title": "Check what it builds on",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 13,
+   "stage": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "guided",
+   "question": "gen:lin:2,4,6",
+   "activity": "guided",
+   "response": "12",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 3
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "check_what_it_uses",
+     "kind": "prerequisite",
+     "title": "Check what it builds on",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 14,
+   "stage": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "check",
+   "question": "gen:lin:2,15,1",
+   "activity": "check",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 3
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 3
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "check_what_it_uses",
+     "kind": "prerequisite",
+     "title": "Check what it builds on",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 15,
+   "stage": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "pause",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "reason": "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 3
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 16,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "explore",
+   "question": "gen:linev:8,2,7",
+   "activity": "diagnostic",
+   "response": "58",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": true,
+    "result": "no working written"
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "agree",
+    "projection": "correct",
+    "impliedVerdict": "correct"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "not_started",
+    "independent": {
+     "right": 0,
+     "total": 0
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.variables",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.35
+   },
+   "finding": null,
+   "reason": "A short check to find the right starting point."
+  },
+  {
+   "step": 17,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "explore",
+   "question": "gen:linev:6,6,3",
+   "activity": "diagnostic",
+   "response": "24",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": true,
+    "result": "no working written"
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "agree",
+    "projection": "correct",
+    "impliedVerdict": "correct"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.56
+   },
+   "finding": null,
+   "reason": "A short check to find the right starting point."
+  },
+  {
+   "step": 18,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "verify",
+   "question": "gen:linev:6,-9,3",
+   "activity": "practice",
+   "response": "9",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": true,
+    "result": "no working written"
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "agree",
+    "projection": "correct",
+    "impliedVerdict": "correct"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 19,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "verify",
+   "question": "gen:linev:2,2,8:mc",
+   "activity": "practice",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": true,
+    "result": "no working written"
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 20,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "verify",
+   "question": "gen:linev:5,-9,7",
+   "activity": "practice",
+   "response": "26",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": true,
+    "result": "no working written"
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "agree",
+    "projection": "correct",
+    "impliedVerdict": "correct"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 21,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "verify",
+   "question": "gen:auvexp:4,2,8,4",
+   "activity": "practice",
+   "response": "n/4 + 8",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 6
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 22,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "verify",
+   "question": "gen:linev:6,-9,2:mc",
+   "activity": "transfer",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": true,
+    "result": "no working written"
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 6
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 7,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 23,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "verify",
+   "question": "gen:auvexp:4,0,3,8:w",
+   "activity": "transfer",
+   "response": "x/8 + 3",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 7,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 8,
+     "total": 8
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 24,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "verify",
+   "question": "gen:linev:7,-1,8",
+   "activity": "check",
+   "response": "55",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": true,
+    "result": "no working written"
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "agree",
+    "projection": "correct",
+    "impliedVerdict": "correct"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 8,
+     "total": 8
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 9,
+     "total": 9
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 25,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "verify",
+   "question": "gen:linev:7,-1,9:mc",
+   "activity": "check",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": true,
+    "result": "no working written"
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "process-unresolved",
+    "projection": "unresolved",
+    "impliedVerdict": "unresolved"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 9,
+     "total": 9
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 10,
+     "total": 10
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 26,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "verify",
+   "question": "gen:linev:7,2,8",
+   "activity": "check",
+   "response": "58",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": true,
+    "result": "no working written"
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "agreement": "agree",
+    "projection": "correct",
+    "impliedVerdict": "correct"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 10,
+     "total": 10
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 11,
+     "total": 11
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 27,
+   "stage": "module",
+   "competency": "MATH.algebra.variables",
+   "phase": "done",
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. A delayed check is planned for Tue Sep 08 2026.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 11,
+     "total": 11
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 28,
+   "stage": "session",
+   "competency": null,
+   "reason": "new session after 1 day(s)",
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 29,
+   "stage": "module",
+   "competency": "MATH.algebra.linear-equations",
+   "phase": "pause",
+   "diagnosis": {
+    "result": "procedural",
+    "confidence": 0.85
+   },
+   "finding": {
+    "explanation": "forgot-divide",
+    "kind": "procedural",
+    "competency": "MATH.algebra.linear-equations",
+    "establishedOn": "gen:lin:3,3,2",
+    "resolved": false
+   },
+   "reason": "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 3
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.linear-equations",
+    "chapter": "Simple equations",
+    "reason": "Carry on where you left off."
+   }
+  }
+ ],
+ "final": {
+  "endOfSession1": {
+   "status": "exposure",
+   "independent": {
+    "right": 0,
+    "total": 5
+   },
+   "assisted": {
+    "right": 0,
+    "total": 3
+   },
+   "retention": "none"
+  },
+  "teachings": 3,
+  "facts": {
+   "answered": 20,
+   "discriminatingMet": 9,
+   "showedMisconception": 9,
+   "discriminatingAfterTeaching": 6,
+   "correctOnNonDiscriminatingAfterTeaching": 11,
+   "wrong": [
+    {
+     "q": "gen:lin:3,3,2",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:lin:3,9,8",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:lin:2,2,1",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:lin:2,17,12",
+     "phase": "guided",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:lin:5,6,5",
+     "phase": "check",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:lin:7,9,12",
+     "phase": "guided",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:lin:3,3,4:mc",
+     "phase": "check",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:lin:2,4,6",
+     "phase": "guided",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:lin:2,15,1",
+     "phase": "check",
+     "session": "s1",
+     "misconception": true
+    }
+   ],
+   "phases": [
+    "diagnostic",
+    "guided",
+    "check",
+    "explore",
+    "verify"
+   ]
+  },
+  "snap": {
+   "status": "exposure",
+   "independent": {
+    "right": 0,
+    "total": 5
+   },
+   "assisted": {
+    "right": 0,
+    "total": 3
+   },
+   "retention": "none"
+  },
+  "next": {
+   "kind": "continue",
+   "competency": "MATH.algebra.linear-equations",
+   "chapter": "Simple equations",
+   "reason": "Carry on where you left off."
+  },
+  "hypotheses": [
+   {
+    "contract": "learner-hypothesis@1",
+    "id": "forgot-divide@gen:lin:3,3,2",
+    "claim": {
+     "explanation": "forgot-divide",
+     "kind": "procedural",
+     "says": "3 was taken away but the 3 was not divided out: 3x = 6 means x = 6 ÷ 3."
+    },
+    "scope": {
+     "question": "gen:lin:3,3,2",
+     "family": "gen:lin:3,3,2",
+     "observedIn": "MATH.algebra.linear-equations",
+     "about": "MATH.algebra.linear-equations"
+    },
+    "status": "established",
+    "support": {
+     "forgot-divide": 0.987,
+     "unexplained": 0.01,
+     "added-not-subtracted": 0.001,
+     "divided-first": 0.001,
+     "secure": 0.001
+    },
+    "competing": [
+     "forgot-divide"
+    ],
+    "supporting": [
+     {
+      "attempt": "record#1",
+      "questionId": "gen:lin:3,3,2",
+      "response": "6",
+      "at": "2026-09-01T09:02:00.000Z",
+      "matches": [
+       "forgot-divide"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "kernel",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#3",
+      "questionId": "gen:lin:2,2,1",
+      "response": "2",
+      "at": "2026-09-01T09:04:00.000Z",
+      "matches": [
+       "forgot-divide"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "kernel",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     }
+    ],
+    "contradicting": [],
+    "obligations": [
+     "a fresh answer alone, in scope, after teaching"
+    ],
+    "teaching": {
+     "deliveredAt": "2026-09-01T09:05:00.000Z",
+     "strategy": "worked_steps",
+     "competency": "MATH.algebra.linear-equations"
+    },
+    "resolvedBy": null,
+    "provenance": {
+     "policy": "diagnostic@2-draft",
+     "established": "2026-09-01T09:04:00.000Z",
+     "attempts": [
+      "record#1",
+      "record#3"
+     ]
+    },
+    "use": {
+     "teach": true,
+     "ask": false,
+     "evidence": false,
+     "mastery": false
+    }
+   }
+  ],
+  "teachingHistory": {
+   "MATH.algebra.linear-equations": [
+    {
+     "strategy": "worked_steps",
+     "kind": "procedural",
+     "delivered": [
+      "2026-09-01T09:05:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:06:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:07:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": false
+    },
+    {
+     "strategy": "spot_the_mistake",
+     "kind": "procedural",
+     "delivered": [
+      "2026-09-01T09:08:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:09:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:10:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": false
+    },
+    {
+     "strategy": "check_what_it_uses",
+     "kind": "prerequisite",
+     "delivered": [
+      "2026-09-01T09:11:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:12:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:13:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": false
+    }
+   ],
+   "MATH.algebra.quadratic-discriminant": [
+    {
+     "strategy": "parabola",
+     "kind": "conceptual",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    },
+    {
+     "strategy": "careful_signs",
+     "kind": "procedural",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    },
+    {
+     "strategy": "signed_numbers",
+     "kind": "prerequisite",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    }
+   ]
+  }
+ }
+}

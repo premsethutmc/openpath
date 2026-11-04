@@ -1,0 +1,20 @@
+{"note":"Teacher-style worked solutions written by hand BEFORE running the evaluator; expected outcomes decided by the author and re-derived by check_teacher.py with SymPy (independent of the evaluator). Never used to tune the evaluator.",
+"examples":[
+{"id":"T01-linear","title":"Two-step linear equation","problem":"3x + 5 = 20","lines":["3x = 15","x = 5"],"expected":{"outcome":"verified"}},
+{"id":"T02-alt-distribute","title":"Distribute first","problem":"2(x - 3) = 10","lines":["2x - 6 = 10","2x = 16","x = 8"],"expected":{"outcome":"verified"}},
+{"id":"T03-alt-divide","title":"Divide first (alternative method to T02)","problem":"2(x - 3) = 10","lines":["x - 3 = 5","x = 8"],"expected":{"outcome":"verified"}},
+{"id":"T04-both-sides","title":"Variable on both sides","problem":"5x - 4 = 2x + 11","lines":["3x - 4 = 11","3x = 15","x = 5"],"expected":{"outcome":"verified"}},
+{"id":"T05-fraction","title":"Fraction coefficient","problem":"x/3 + 1 = 4","lines":["x/3 = 3","x = 9"],"expected":{"outcome":"verified"}},
+{"id":"T06-rational","title":"Clear a denominator of the original","problem":"6/(x - 2) = 3","lines":["6 = 3(x - 2)","6 = 3x - 6","12 = 3x","x = 4"],"expected":{"outcome":"verified"}},
+{"id":"T07-first-error","title":"Arithmetic slip in step 1","problem":"3x + 5 = 20","lines":["3x = 25","x = 25/3"],"expected":{"outcome":"invalid","first_invalid":1,"invalid_at":"step"}},
+{"id":"T08-excluded-answer","title":"Steps fine, answer is excluded by the problem","problem":"x/(x - 3) = 3/(x - 3)","lines":["x = 3"],"expected":{"outcome":"invalid","first_invalid":null,"invalid_at":"final-claim"}},
+{"id":"T09-divide-by-x","title":"Divides by x and loses x = 0","problem":"x(x - 3) = 5x","lines":["x - 3 = 5","x = 8"],"expected":{"outcome":"invalid","first_invalid":1,"invalid_at":"step"}},
+{"id":"T10-case-split","title":"The same equation with a case split","problem":"x(x - 3) = 5x","lines":["case x = 0: 0 = 0","case x != 0: x - 3 = 5","x = 8","x = 0 or x = 8"],"expected":{"outcome":"verified"}},
+{"id":"T11-obligation","title":"Multiplies by x - 1, then checks","problem":"2x = 6","lines":["2x(x - 1) = 6(x - 1)","x = 3 or x = 1","x = 3"],"expected":{"outcome":"verified"}},
+{"id":"T12-obligation-open","title":"Multiplies by x - 1 and keeps the extra root","problem":"2x = 6","lines":["2x(x - 1) = 6(x - 1)","x = 3 or x = 1"],"expected":{"outcome":"invalid","first_invalid":null,"invalid_at":"final-claim"}},
+{"id":"T13-incomplete","title":"Correct but unfinished","problem":"4x - 3 = 9","lines":["4x = 12"],"expected":{"outcome":"incomplete"}},
+{"id":"T14-glyphs","title":"Typeset symbols","problem":"7 − 2⋅x = −1 − 7⋅x","lines":["8 = −5⋅x","x = −8∕5"],"expected":{"outcome":"verified"}},
+{"id":"T15-ambiguous","title":"12/2x written without brackets","problem":"12/(2x) = 3","lines":["12/2x = 3","x = 2"],"expected":{"outcome":"ambiguous"},"readings":[["12/2*x = 3","x = 2"],["12/(2*x) = 3","x = 2"]]},
+{"id":"T16-sqrt","title":"Square-root notation (outside the supported language)","problem":"2x + 1 = 7","lines":["√9 x + 1 = 7","x = 2"],"expected":{"outcome":"unsupported"}},
+{"id":"T17-restriction-suffix","title":"Explicit restriction written after the line (unsupported suffix)","problem":"(x^2 - 4)/(x - 2) = 4","lines":["x + 2 = 4, x ≠ 2","no solution"],"expected":{"outcome":"unsupported"}}
+]}

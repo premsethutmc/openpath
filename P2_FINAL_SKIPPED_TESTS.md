@@ -1,0 +1,46 @@
+# Tests skipped by the P2-FINAL fallback removal (44)
+
+- `claim-ledger-e7.test.ts` — a stated modelling assumption is a premise with provenance; denying a task assumption is invalid
+- `parse-integrity-e7.test.ts` — c.d·y = k: right root verified, wrong root not, list numbering changes nothing
+- `premise-binding-e7.test.ts` — generated a·x = b with premise x ⋈ c: the stated root is accepted exactly when it satisfies the premise, in every placement
+- `proof-context-e7.test.ts` — quantities only the student stated are an unresolved premise, and the calculation is not certified by its final value
+- `proof-context-e7.test.ts` — Vieta product with a stated real-coefficient assumption keeps assumption provenance and the grounding
+- `proof-integrity-e2.test.ts` — zero false acceptances, zero unaccounted acceptances, every alternative path still accepted
+- `proof-obligations-e7.test.ts` — each claim gets a derivation obligation discharged by a per-claim kernel item; grounded lines depend on the earlier lines they use
+- `proof-obligations-e7.test.ts` — scenario quantities nothing supplies are unresolved premises, not evidence
+- `proof-obligations-e7.test.ts` — Vieta product: c/a (loop case)
+- `proof-obligations-e7.test.ts` — Vieta product: through the roots (loop case)
+- `proof-obligations-e7.test.ts` — Vieta sum: formula (loop case)
+- `proof-obligations-e7.test.ts` — Vieta sum: through the roots (loop case)
+- `proof-obligations-e7.test.ts` — binomial mean: n*p (loop case)
+- `proof-obligations-e7.test.ts` — quadratic roots with the discriminant (loop case)
+- `rewrite-grounding-e8.test.ts` — expansion, factorisation, collection, completion
+- `semantic-grounding-e7.test.ts` — Vieta product by the formula (loop case)
+- `semantic-grounding-e7.test.ts` — Vieta product by c/a (loop case)
+- `semantic-grounding-e7.test.ts` — Vieta product via the roots, defined first (loop case)
+- `semantic-grounding-e7.test.ts` — Vieta product via the quadratic formula (loop case)
+- `semantic-grounding-e7.test.ts` — Vieta product, roots multiplied in one line (loop case)
+- `verification-closure-e3.test.ts` — valid alternative methods are accepted with independent evidence
+- `verification-closure-e3.test.ts` — multiplying an inequality by a negative number must reverse it
+- `verification-closure-e3.test.ts` — extraneous roots from squaring are checked against the original equation
+- `verification-closure-e4.test.ts` — a squared candidate list followed by the single true root is accepted with independent evidence
+- `verification-closure-e4.test.ts` — two radicals: isolating, squaring and the exact root are accepted; a wrong squaring is not
+- `verification-closure-e4.test.ts` — an equation with no real solution requires the explicit, exactly justified claim
+- `verification-closure-e4.test.ts` — irrational candidates are decided exactly (no floating point) and the extraneous conjugate root is rejected
+- `verification-closure-e4.test.ts` — sqrt = sqrt keeps the radicand domain: a root that makes a radicand negative is not a solution
+- `verification-closure-e4.test.ts` — clearing a denominator may not gain an excluded solution
+- `verification-closure-e4.test.ts` — cancellation keeps x != 3; a lost exclusion is a missing assumption, never a verified solution
+- `verification-closure-e4.test.ts` — factoring, both branches, quadratic formula with a plus-or-minus
+- `verification-closure-e4.test.ts` — large coefficients within the resource limits are exact
+- `verification-closure-e4.test.ts` — substitution, elimination and a conjunction answer are accepted
+- `verification-closure-e4.test.ts` — inconsistent and dependent systems
+- `verification-closure-e4.test.ts` — three unknowns
+- `verification-closure-e4.test.ts` — evaluation uses the given values exactly; swapped bindings are caught
+- `verification-closure-e4.test.ts` — an accepted system carries a per-line U4 replay digest
+- `verification-closure-e6.test.ts` — an unsupported independence assumption is a missing assumption; stating it fixes it
+- `verification-closure-e6.test.ts` — incorrect conjugation is never accepted
+- `verification-closure-e6r.test.ts` — the comma list is licensed only by a typed joint task
+- `verification-closure-e6r.test.ts` — conjugate-product detour and an irrelevant modulus
+- `verification-closure-e6r.test.ts` — over the complex numbers every root is required
+- `verification-closure-e6r.test.ts` — C(n,r) states the unordered convention and P(n,r) the ordered one; the opposite notation is not accepted
+- `verification-closure-e6r.test.ts` — an exact closed form with e^1 and e^(-1) is a final form, and (a + bi)/c with no common factor is a reduced complex quotient

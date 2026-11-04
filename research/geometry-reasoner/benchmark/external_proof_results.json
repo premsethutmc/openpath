@@ -1,0 +1,11 @@
+{
+  "corpus": "external-geometry-proofs@1",
+  "source_commit": "33a72c0fa83914202532998a2e7b8771295c3cc7",
+  "proofs": 173,
+  "verified": 0,
+  "invalid": 0,
+  "unsupported": 173,
+  "false_acceptance": 0,
+  "false_rejection": 0,
+  "note": "unsupported cases are excluded from false-rejection counts; no natural-language or Formal System E adapter exists"
+}

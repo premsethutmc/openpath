@@ -1,0 +1,107 @@
+{
+ "note": "teaching-contract@1 exemptions: reviewed engineering decisions that a flagged section is not a defect, each with its reason. They are not educator approval: an educator confirms or rejects each in review.",
+ "entries": [
+  {
+   "competency": "MATH.number.primes",
+   "title": "The method",
+   "rule": "text-not-instance",
+   "reason": "General rule, not an example: trial division by 2, 3, 5 and 7 suffices below 100."
+  },
+  {
+   "competency": "MATH.number.real-numbers",
+   "title": "Writing a recurring decimal as a fraction",
+   "rule": "text-not-instance",
+   "reason": "General rule, not an example: multiply by a power of 10."
+  },
+  {
+   "competency": "MATH.number.real-numbers",
+   "title": "The method",
+   "rule": "text-not-instance",
+   "reason": "General rule, not an example: multiply by 10 for one repeating digit, by 100 for two."
+  },
+  {
+   "competency": "MATH.measurement.circle-area",
+   "title": "Measure with a string",
+   "rule": "text-not-instance",
+   "reason": "General fact, not an example: the circumference is a little more than 3 diameters."
+  },
+  {
+   "competency": "MATH.measurement.combined-solids",
+   "title": "The method",
+   "rule": "text-not-instance",
+   "reason": "General formulas, not an example: the volume formulas with 1/3 and 2/3."
+  },
+  {
+   "competency": "MATH.trigonometry.ratios",
+   "title": "The square-root pattern",
+   "rule": "text-not-instance",
+   "reason": "Standard values, not an example: sin and cos at 0°, 30°, 45°, 60°, 90°."
+  },
+  {
+   "competency": "MATH.trigonometry.ratios",
+   "title": "Draw the two triangles",
+   "rule": "text-not-instance",
+   "reason": "Standard triangles, not an example: the 30°-60°-90° and 45°-45°-90° triangles."
+  },
+  {
+   "competency": "MATH.trigonometry.heights-distances",
+   "title": "Use the special triangles",
+   "rule": "text-not-instance",
+   "reason": "Standard side ratios of the 30°-60°-90° and 45°-45°-90° triangles, not an example."
+  },
+  {
+   "competency": "MATH.sequences.power-sums",
+   "title": "Sums of natural numbers, odd numbers, squares and cubes",
+   "rule": "text-not-instance",
+   "reason": "General formulas, not an example: the four standard sums."
+  },
+  {
+   "competency": "MATH.geometry.circle-theorems",
+   "title": "The method",
+   "rule": "text-not-instance",
+   "reason": "General relations, not an example: ×2, ÷2, 180° − and 90° −."
+  },
+  {
+   "competency": "MATH.number.factors-multiples",
+   "title": "Factor pairs",
+   "rule": "no-instance",
+   "reason": "Hand-authored lesson whose practice uses authored questions (fx-…), not generated ones: alignment is not mechanically checkable; educator review."
+  },
+  {
+   "competency": "MATH.algebra.quadratics",
+   "title": "Zero products",
+   "rule": "no-instance",
+   "reason": "Hand-authored lesson whose practice uses authored questions (qd-…), not generated ones: alignment is not mechanically checkable; educator review."
+  },
+  {
+   "competency": "MATH.number.irrationality-proofs",
+   "title": "Proof by contradiction",
+   "rule": "no-instance",
+   "reason": "Proof topic: written work marked by an educator; there is no generated question to attach."
+  },
+  {
+   "competency": "MATH.geometry.triangle-proof",
+   "title": "The shape of a proof",
+   "rule": "no-instance",
+   "reason": "Proof topic: written work marked by an educator; its generated family (amcrit) is quarantined as ambiguous."
+  },
+  {
+   "competency": "MATH.geometry.scaled-construction",
+   "title": "Dividing a segment in the ratio m : n",
+   "rule": "no-instance",
+   "reason": "Construction topic: drawn work marked by an educator; there is no generated question to attach."
+  },
+  {
+   "competency": "MATH.geometry.construction-triangles",
+   "title": "Enough information fixes a triangle",
+   "rule": "no-instance",
+   "reason": "Construction topic: drawn work marked by an educator; there is no generated question to attach."
+  },
+  {
+   "competency": "MATH.calculus.derivative-rules",
+   "title": "Not the value: how fast it changes",
+   "rule": "text-not-instance",
+   "reason": "Its numbers are this question's own function (f(x) = x², f′(3)) evaluated just either side of x = 3: 2.9² = 8.41, 3.1² = 9.61, (9.61 − 8.41) ÷ 0.2 = 6 = f′(3). Checked by hand; derived values the mechanical check cannot see."
+  }
+ ]
+}

@@ -1,0 +1,32 @@
+{
+ "dev": {
+  "cases": 206,
+  "label_differences": 0,
+  "examples": []
+ },
+ "eval": {
+  "cases": 400,
+  "label_differences": 0,
+  "examples": []
+ },
+ "holdout": {
+  "cases": 300,
+  "label_differences": 0,
+  "examples": []
+ },
+ "unsupported": {
+  "cases": 112,
+  "label_differences": 0,
+  "examples": []
+ },
+ "adversarial": {
+  "cases": 2884,
+  "label_differences": 0,
+  "examples": []
+ },
+ "claims": {
+  "cases": 400,
+  "label_differences": 0,
+  "examples": []
+ }
+}

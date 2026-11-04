@@ -1,0 +1,806 @@
+{
+  "schema": "openpath-canonical-ir-confirmation@1",
+  "frozenBeforeExecution": true,
+  "cases": [
+    {
+      "id": "d8-confirm-notation-0",
+      "category": "notation",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "a\u00b2"
+      },
+      "right": {
+        "format": "latex",
+        "text": "a^{2}"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-notation-1",
+      "category": "notation",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "b\u00b2"
+      },
+      "right": {
+        "format": "latex",
+        "text": "b^{2}"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-notation-2",
+      "category": "notation",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "m\u00b2"
+      },
+      "right": {
+        "format": "latex",
+        "text": "m^{2}"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-notation-3",
+      "category": "notation",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "n\u00b2"
+      },
+      "right": {
+        "format": "latex",
+        "text": "n^{2}"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-notation-4",
+      "category": "notation",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "q\u00b2"
+      },
+      "right": {
+        "format": "latex",
+        "text": "q^{2}"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-derivative-0",
+      "category": "derivative",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "r'(a)=2a"
+      },
+      "right": {
+        "format": "latex",
+        "text": "r^{\\prime}(a)=2a"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-derivative-1",
+      "category": "derivative",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "r'(b)=2b"
+      },
+      "right": {
+        "format": "latex",
+        "text": "r^{\\prime}(b)=2b"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-derivative-2",
+      "category": "derivative",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "r'(m)=2m"
+      },
+      "right": {
+        "format": "latex",
+        "text": "r^{\\prime}(m)=2m"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-derivative-3",
+      "category": "derivative",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "r'(n)=2n"
+      },
+      "right": {
+        "format": "latex",
+        "text": "r^{\\prime}(n)=2n"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-derivative-4",
+      "category": "derivative",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "r'(q)=2q"
+      },
+      "right": {
+        "format": "latex",
+        "text": "r^{\\prime}(q)=2q"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-scope-0",
+      "category": "scope",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "s"
+            },
+            "exponent": 1
+          },
+          "boundVariable": "s"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "w"
+            },
+            "exponent": 1
+          },
+          "boundVariable": "w"
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-scope-1",
+      "category": "scope",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "s"
+            },
+            "exponent": 2
+          },
+          "boundVariable": "s"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "w"
+            },
+            "exponent": 2
+          },
+          "boundVariable": "w"
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-scope-2",
+      "category": "scope",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "s"
+            },
+            "exponent": 3
+          },
+          "boundVariable": "s"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "w"
+            },
+            "exponent": 3
+          },
+          "boundVariable": "w"
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-scope-3",
+      "category": "scope",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "s"
+            },
+            "exponent": 4
+          },
+          "boundVariable": "s"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "w"
+            },
+            "exponent": 4
+          },
+          "boundVariable": "w"
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-scope-4",
+      "category": "scope",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "s"
+            },
+            "exponent": 5
+          },
+          "boundVariable": "s"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "w"
+            },
+            "exponent": 5
+          },
+          "boundVariable": "w"
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-confirm-domain-0",
+      "category": "domain",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "domainRestrictions": [
+          "nonzero:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "domainRestrictions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-domain-1",
+      "category": "domain",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "domainRestrictions": [
+          "nonzero:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "domainRestrictions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-domain-2",
+      "category": "domain",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "domainRestrictions": [
+          "nonzero:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "domainRestrictions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-domain-3",
+      "category": "domain",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "domainRestrictions": [
+          "nonzero:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "domainRestrictions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-domain-4",
+      "category": "domain",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "domainRestrictions": [
+          "nonzero:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": -1
+        },
+        "domainRestrictions": []
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-binding-0",
+      "category": "binding",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "1",
+        "symbol": {
+          "name": "x",
+          "scope": "s"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "1",
+        "symbol": {
+          "name": "x",
+          "scope": "s"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-binding-1",
+      "category": "binding",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "2",
+        "symbol": {
+          "name": "x",
+          "scope": "s"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "2",
+        "symbol": {
+          "name": "x",
+          "scope": "s"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-binding-2",
+      "category": "binding",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "s"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "s"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-binding-3",
+      "category": "binding",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "4",
+        "symbol": {
+          "name": "x",
+          "scope": "s"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "4",
+        "symbol": {
+          "name": "x",
+          "scope": "s"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-binding-4",
+      "category": "binding",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "5",
+        "symbol": {
+          "name": "x",
+          "scope": "s"
+        },
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "5",
+        "symbol": {
+          "name": "x",
+          "scope": "s"
+        },
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-certificate-0",
+      "category": "certificate",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-certificate-1",
+      "category": "certificate",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-certificate-2",
+      "category": "certificate",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-certificate-3",
+      "category": "certificate",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-confirm-certificate-4",
+      "category": "certificate",
+      "provenance": "new evaluation set frozen after the additive meaning/provenance separation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "dependencies": [
+          "p"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    }
+  ]
+}

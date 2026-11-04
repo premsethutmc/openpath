@@ -1,0 +1,2486 @@
+{
+ "schema": "syllabus@1",
+ "board": "tn",
+ "boardName": "Tamil Nadu State Board (Samacheer Kalvi)",
+ "grade": 5,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Mathematics, Standard V (Term I, Term II, Term III)",
+  "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+  "edition": "Samacheer Kalvi term books of the revised syllabus (introduced 2019-20), annual reprints; selfstudys.com labels them '2020-21' edition; exact 2026 imprint not seen",
+  "terms": 3
+ },
+ "sources": [
+  {
+   "kind": "textbook",
+   "title": "Tamil Nadu textbooks online portal (official PDFs)",
+   "publisher": "Government of Tamil Nadu / TNTB&ESC",
+   "edition": "n/a",
+   "academicYear": "2026-27",
+   "url": "https://textbooksonline.tn.nic.in/",
+   "accessed": "2026-10-19",
+   "used_for": "ATTEMPTED ONLY: fetch refused (robots.txt disallows the fetch tool); no content read"
+  },
+  {
+   "kind": "textbook",
+   "title": "TN Schools portal - textbooks (official)",
+   "publisher": "School Education Department, Government of Tamil Nadu",
+   "edition": "n/a",
+   "academicYear": "2026-27",
+   "url": "https://www.tnschools.gov.in/textbooks",
+   "accessed": "2026-10-19",
+   "used_for": "ATTEMPTED ONLY: page is a JavaScript app; no textbook content retrievable"
+  },
+  {
+   "kind": "notification",
+   "title": "DT Next news: Class 1 to 3 textbooks ready; works for Classes 4 to 12 (7 May 2026) [secondary news report]",
+   "publisher": "DT Next",
+   "edition": "n/a",
+   "academicYear": "2026-27",
+   "url": "https://www.dtnext.in/news/tamilnadu/class-1-to-3-textbooks-ready-works-for-classes-4-to-12-in-primary-stage",
+   "accessed": "2026-10-19",
+   "used_for": "textbook and workbook merged into one book for Classes 1-3; Classes 4-12 books continue on old syllabus"
+  },
+  {
+   "kind": "notification",
+   "title": "DT Next news: Tamil Nadu Classes 4-12 curriculum preparation in third phase [secondary news report]",
+   "publisher": "DT Next",
+   "edition": "n/a",
+   "academicYear": "2026-27",
+   "url": "https://www.dtnext.in/news/tamilnadu/tamil-nadu-classes-4-12-curriculum-preparation-in-third-phase",
+   "accessed": "2026-10-19",
+   "used_for": "new Classes 4-12 textbooks targeted for 2027-28, so 2026-27 Classes 4-5 use existing books"
+  },
+  {
+   "kind": "notification",
+   "title": "Dinamalar Kalvimalar: New curriculum to be introduced in 2027-28 - Minister (7 Nov 2025) [secondary news report]",
+   "publisher": "Dinamalar",
+   "edition": "n/a",
+   "academicYear": "2027-28",
+   "url": "https://www.dinamalar.com/amp/news/kalvimalar-news-en/new-curriculum-to-be-introduced-in-2027-28-minister-mahesh/57913",
+   "accessed": "2026-10-19",
+   "used_for": "earlier plan (new curriculum for Classes 1-8 from 2027-28), since accelerated for Classes 1-3"
+  },
+  {
+   "kind": "textbook",
+   "title": "Maths 5th Std (TN 5th Maths English Medium) - unit and topic index [secondary]",
+   "publisher": "BrainKart",
+   "edition": "unstated (current Samacheer Kalvi term books)",
+   "academicYear": "2026-27",
+   "url": "https://www.brainkart.com/subject/Maths-5th-Std_436/",
+   "accessed": "2026-10-19",
+   "used_for": "chapter and section titles, Terms 1-3"
+  },
+  {
+   "kind": "textbook",
+   "title": "Samacheer Kalvi Solutions Mathematics Term 1 [English] Class 5 TN Board [secondary]",
+   "publisher": "Shaalaa.com",
+   "edition": "unstated",
+   "academicYear": "2026-27",
+   "url": "https://www.shaalaa.com/hin/textbook-solutions/samacheer-kalvi-solutions-mathematics-term-1-english-class-5-tn-board_332",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check of Term 1 chapter titles"
+  },
+  {
+   "kind": "textbook",
+   "title": "Samacheer Kalvi Solutions Mathematics Term 2 [English] Class 5 TN Board [secondary]",
+   "publisher": "Shaalaa.com",
+   "edition": "unstated",
+   "academicYear": "2026-27",
+   "url": "https://www.shaalaa.com/hin/textbook-solutions/samacheer-kalvi-solutions-mathematics-term-2-english-class-5-tn-board_333",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check of Term 2 chapter titles (from search result listing: ch.1 Geometry ... ch.6 Information Processing)"
+  },
+  {
+   "kind": "textbook",
+   "title": "Tamilnadu Board 5th Std Mathematics Term-1 (English medium) [secondary]",
+   "publisher": "selfstudys.com",
+   "edition": "labelled 'New Textbooks 2020-21'",
+   "academicYear": "2020-21",
+   "url": "https://www.selfstudys.com/books/tamilnadu/state-books/class-5th/mathematics-term-1/24886",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check of Term 1 unit titles"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Ennum Ezhuthum Notes of Lesson 2026-2027 [secondary]",
+   "publisher": "kalviimayam.com",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://www.kalviimayam.com/2026/05/ennum-ezhuthum-notes-of-lesson-2026-2027.html",
+   "accessed": "2026-10-19",
+   "used_for": "Ennum Ezhuthum lesson plans continue in 2026-27 for Classes 1-3 and 4-5"
+  }
+ ],
+ "notes": [
+  "Official sources could not be read: textbooksonline.tn.nic.in and textbookcorp.tn.gov.in refuse the fetch tool (robots.txt); tnschools.gov.in and scert.tnschools.gov.in are JavaScript apps that return no content to the fetch tool; the sandbox shell has no internet access. All chapter information comes from secondary sites, so every chapter is verified:false.",
+  "For 2026-27, Classes 4-5 still use the existing Samacheer Kalvi term books (the syllabus revision introduced 2019-20). DT Next (7 May 2026) reports that books for Classes 4-12 are being produced 'still following the old syllabus', and that new-curriculum books for those classes are targeted for 2027-28. Expect a full change of this grade's books in 2027-28.",
+  "Chapter titles are consistent across BrainKart, Shaalaa and selfstudys. They are still verified:false because no official PDF or table of contents could be opened.",
+  "Section lists are BrainKart's topic headings with 'Exercise n.n' entries removed; wording may differ slightly from the printed headings. The exact printed edition statement (e.g. 'Revised Edition 20xx' or 'Reprint 2026') was not seen.",
+  "Proposed-competency ids reuse ids already proposed in other syllabus files (cbse-g01..g08, tn-g06) when the skill is the same, e.g. even-odd, calendar, 24-hour-clock, compute-with-measures, systematic-enumeration, transformations, maps-directions, fraction-of-collection, hcf-lcm, mixed-fractions, angle-pairs, rounding. Grade ranges are widened to include this grade; prerequisites are copied from the first proposal. MATH.statistics.pie-charts (from cbse-g08) lists percentage and angle prerequisites that suit drawing pie charts but are too strong for TN's Grade 4 reading of simple pie charts; review this when merging.",
+  "Ennum Ezhuthum: 2026-27 Ennum Ezhuthum lesson plans and notes of lesson exist for Classes 4-5 (kalviimayam.com, kalviseithiofficial.com). They support the same textbook and do not replace it.",
+  "Grade 5 has 6 units in Term 1, 6 in Term 2 and 7 in Term 3, per BrainKart. Term 1 and Term 2 unit counts and titles are cross-checked with Shaalaa (Term 2 from search-result chapter URLs); selfstudys.com agrees for Term 1.",
+  "Term 2 Unit 6 'Information Processing' has only one listed section, 'Modelling'. Its exact content (route map, plan or other model) is unclear, so its outcome is worded broadly and the maps-routes mapping is tentative.",
+  "Term 3 Unit 1 'Geometry' covers perimeter and area of rectangles and squares, as BrainKart lists it under Geometry.",
+  "selfstudys.com labels its Grade 5 PDFs 'New Textbooks 2020-21'. The imprint of the copy in schools in 2026-27 is unknown."
+ ],
+ "chapters": [
+  {
+   "id": "tn-g05-t1-c01",
+   "number": 1,
+   "term": 1,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t1-c01-s01",
+     "title": "Recall: 2D 3D"
+    },
+    {
+     "id": "tn-g05-t1-c01-s02",
+     "title": "Draw 3-D shapes from 2-D Shapes"
+    },
+    {
+     "id": "tn-g05-t1-c01-s03",
+     "title": "Able to explore rotations of familiar 2-D Shapes intuitively"
+    },
+    {
+     "id": "tn-g05-t1-c01-s04",
+     "title": "Able to explore reflections of familiar 2D shapes intuitively"
+    },
+    {
+     "id": "tn-g05-t1-c01-s05",
+     "title": "Symmetry in familiar 3-D shapes"
+    },
+    {
+     "id": "tn-g05-t1-c01-s06",
+     "title": "Make the shapes of cubes, cylinders and cones using nets"
+    },
+    {
+     "id": "tn-g05-t1-c01-s07",
+     "title": "Introduction of Angles"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t1-c01-o01",
+     "statement": "Draw solid shapes on paper from their 2-D outlines.",
+     "concepts": [
+      "drawing solids"
+     ],
+     "questionTypes": [
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.solid-views",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.solid-views"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c01-o02",
+     "statement": "Recognise rotations (turns) of familiar 2-D shapes.",
+     "concepts": [
+      "rotation"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "diagram-drawing"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.transformations",
+       "name": "Perform and describe reflections, translations and rotations of figures",
+       "strand": "geometry",
+       "gradeRange": [
+        5,
+        8
+       ],
+       "prerequisites": [
+        "MATH.geometry.symmetry-lines"
+       ],
+       "supports": [
+        "MATH.coordinate.cartesian",
+        "MATH.geometry.rotational-symmetry"
+       ],
+       "why": "Reuses the id first proposed in tn-g06.json for the same skill (grade range widened to include Grade 5). No existing competency covers rotating a figure through quarter/half turns."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.transformations"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c01-o03",
+     "statement": "Recognise and draw reflections of 2-D shapes, and spot symmetry in 3-D shapes.",
+     "concepts": [
+      "reflection",
+      "symmetry"
+     ],
+     "questionTypes": [
+      "diagram-drawing",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.transformations",
+       "name": "Perform and describe reflections, translations and rotations of figures",
+       "strand": "geometry",
+       "gradeRange": [
+        5,
+        8
+       ],
+       "prerequisites": [
+        "MATH.geometry.symmetry-lines"
+       ],
+       "supports": [
+        "MATH.coordinate.cartesian",
+        "MATH.geometry.rotational-symmetry"
+       ],
+       "why": "Reuses the id first proposed in tn-g06.json for the same skill (grade range widened to include Grade 5). Symmetry competencies are about a shape's own lines of symmetry; producing the mirror image of a figure is a separate transformation skill with no existing id."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.symmetry-lines",
+      "MATH.geometry.transformations"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c01-o04",
+     "statement": "Match cubes, cylinders and cones to their nets and build them.",
+     "concepts": [
+      "nets"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.nets",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.nets"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c01-o05",
+     "statement": "Recognise angles and tell right, acute and obtuse angles apart.",
+     "concepts": [
+      "angle",
+      "right angle",
+      "acute",
+      "obtuse"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angles-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angles-intro"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t1-c02",
+   "number": 2,
+   "term": 1,
+   "title": "Numbers",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t1-c02-s01",
+     "title": "The uses of numbers beyond 10000 in real life situation"
+    },
+    {
+     "id": "tn-g05-t1-c02-s02",
+     "title": "Place value chart"
+    },
+    {
+     "id": "tn-g05-t1-c02-s03",
+     "title": "Importance of commas or periods"
+    },
+    {
+     "id": "tn-g05-t1-c02-s04",
+     "title": "Comparison of Numbers"
+    },
+    {
+     "id": "tn-g05-t1-c02-s05",
+     "title": "Ascending and descending order of numbers"
+    },
+    {
+     "id": "tn-g05-t1-c02-s06",
+     "title": "Addition"
+    },
+    {
+     "id": "tn-g05-t1-c02-s07",
+     "title": "Subtraction"
+    },
+    {
+     "id": "tn-g05-t1-c02-s08",
+     "title": "Multiplication"
+    },
+    {
+     "id": "tn-g05-t1-c02-s09",
+     "title": "Multiply the three digit numbers by two digit numbers"
+    },
+    {
+     "id": "tn-g05-t1-c02-s10",
+     "title": "Division Algorithm"
+    },
+    {
+     "id": "tn-g05-t1-c02-s11",
+     "title": "Divide 4 digits by 2 digits"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t1-c02-o01",
+     "statement": "Read, write and expand numbers beyond 10,000 using a place-value chart and comma grouping.",
+     "concepts": [
+      "5-digit numbers",
+      "place value",
+      "commas/periods"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.large-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.large-numbers"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c02-o02",
+     "statement": "Compare large numbers and arrange them in ascending or descending order.",
+     "concepts": [
+      "comparison",
+      "ordering"
+     ],
+     "questionTypes": [
+      "ordered-list",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.large-numbers",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compare-numbers",
+      "MATH.number.large-numbers"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c02-o03",
+     "statement": "Add and subtract large numbers with regrouping.",
+     "concepts": [
+      "addition",
+      "subtraction"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.addition-regroup",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.subtraction-regroup",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.multi-digit-add-subtract",
+       "name": "Add and subtract multi-digit numbers with regrouping",
+       "strand": "number",
+       "gradeRange": [
+        3,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.addition-regroup",
+        "MATH.number.subtraction-regroup"
+       ],
+       "supports": [
+        "MATH.number.thousands",
+        "MATH.number.large-numbers"
+       ],
+       "why": "Reuses the id first proposed in cbse-g03.json for the same skill (grade range widened to include Grade 5). Attached alongside the existing-competency mapping for consistency with other grade files."
+      }
+     ],
+     "mapped": [
+      "MATH.number.addition-regroup",
+      "MATH.number.multi-digit-add-subtract",
+      "MATH.number.subtraction-regroup"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c02-o04",
+     "statement": "Multiply a 3-digit number by a 2-digit number.",
+     "concepts": [
+      "long multiplication"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.multi-multiplication",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.multi-multiplication"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c02-o05",
+     "statement": "Divide a 4-digit number by a 2-digit number using the division algorithm, and check with quotient x divisor + remainder.",
+     "concepts": [
+      "long division",
+      "division algorithm"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.long-division",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.division-remainders",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.division-remainders",
+      "MATH.number.long-division"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t1-c03",
+   "number": 3,
+   "term": 1,
+   "title": "Patterns",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t1-c03-s01",
+     "title": "Patterns in Shapes"
+    },
+    {
+     "id": "tn-g05-t1-c03-s02",
+     "title": "Patterns in Numbers: square, triangular numbers"
+    },
+    {
+     "id": "tn-g05-t1-c03-s03",
+     "title": "Relationship between consecutive square numbers and odd numbers"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t1-c03-o01",
+     "statement": "Extend patterns made of shapes and state their rule.",
+     "concepts": [
+      "shape patterns"
+     ],
+     "questionTypes": [
+      "pattern"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.pattern-rules",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.pattern-rules"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c03-o02",
+     "statement": "Recognise and continue square and triangular numbers from dot arrangements.",
+     "concepts": [
+      "square numbers",
+      "triangular numbers"
+     ],
+     "questionTypes": [
+      "pattern",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.figurate-numbers",
+       "name": "Relate figurate number sequences to their dot and shape pictures",
+       "strand": "algebra",
+       "gradeRange": [
+        5,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.algebra.growing-patterns",
+        "MATH.algebra.pattern-rules"
+       ],
+       "why": "Reuses the id first proposed in cbse-g06.json for the same skill (grade range widened to include Grade 5). growing-patterns is generic; square/triangular numbers and their link to sums of odd numbers is a specific skill. MATH.number.square-roots is Grade 8 and about computing roots."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.figurate-numbers"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c03-o03",
+     "statement": "Explain that the gap between consecutive square numbers is an odd number.",
+     "concepts": [
+      "square numbers",
+      "odd numbers"
+     ],
+     "questionTypes": [
+      "written-explanation",
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.figurate-numbers",
+       "name": "Relate figurate number sequences to their dot and shape pictures",
+       "strand": "algebra",
+       "gradeRange": [
+        5,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.algebra.growing-patterns",
+        "MATH.algebra.pattern-rules"
+       ],
+       "why": "Reuses the id first proposed in cbse-g06.json for the same skill (grade range widened to include Grade 5). growing-patterns is generic; square/triangular numbers and their link to sums of odd numbers is a specific skill. MATH.number.square-roots is Grade 8 and about computing roots."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.figurate-numbers"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t1-c04",
+   "number": 4,
+   "term": 1,
+   "title": "Measurements",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t1-c04-s01",
+     "title": "Length"
+    },
+    {
+     "id": "tn-g05-t1-c04-s02",
+     "title": "Conversion of length"
+    },
+    {
+     "id": "tn-g05-t1-c04-s03",
+     "title": "Addition of length"
+    },
+    {
+     "id": "tn-g05-t1-c04-s04",
+     "title": "Subtraction of length"
+    },
+    {
+     "id": "tn-g05-t1-c04-s05",
+     "title": "Multiplication of length"
+    },
+    {
+     "id": "tn-g05-t1-c04-s06",
+     "title": "Division of length"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t1-c04-o01",
+     "statement": "Convert between km, m, cm and mm.",
+     "concepts": [
+      "length units",
+      "conversion"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.unit-conversions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.unit-conversions"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c04-o02",
+     "statement": "Add, subtract, multiply and divide lengths given in mixed units, including word problems.",
+     "concepts": [
+      "length arithmetic"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.compute-with-measures",
+       "name": "Calculate with measured quantities in mixed units",
+       "strand": "measurement",
+       "gradeRange": [
+        4,
+        6
+       ],
+       "prerequisites": [
+        "MATH.measurement.unit-conversions",
+        "MATH.number.multi-digit-add-subtract"
+       ],
+       "supports": [
+        "MATH.number.multi-multiplication",
+        "MATH.number.long-division"
+       ],
+       "why": "Reuses the id first proposed in cbse-g04.json for the same skill (grade range widened to include Grade 5). Existing measurement competencies cover measuring and converting units, but not computing with quantities such as 3 m 40 cm + 2 m 75 cm or 4 kg 250 g x 3, which TN treats as a skill for length, weight and capacity."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.compute-with-measures"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t1-c05",
+   "number": 5,
+   "term": 1,
+   "title": "Time",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t1-c05-s01",
+     "title": "Recall"
+    },
+    {
+     "id": "tn-g05-t1-c05-s02",
+     "title": "Railway time"
+    },
+    {
+     "id": "tn-g05-t1-c05-s03",
+     "title": "Railway time Conversion"
+    },
+    {
+     "id": "tn-g05-t1-c05-s04",
+     "title": "Use addition and subtraction in finding time interval"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t1-c05-o01",
+     "statement": "Convert between 12-hour times and railway (24-hour) times.",
+     "concepts": [
+      "railway time",
+      "24-hour clock"
+     ],
+     "questionTypes": [
+      "time"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.24-hour-clock",
+       "name": "Convert between 12-hour and 24-hour time",
+       "strand": "measurement",
+       "gradeRange": [
+        4,
+        5
+       ],
+       "prerequisites": [
+        "MATH.measurement.clock"
+       ],
+       "supports": [
+        "MATH.measurement.elapsed-time"
+       ],
+       "why": "Reuses the id first proposed in cbse-g04.json for the same skill (grade range widened to include Grade 5). clock covers reading hours and half-hours; a.m./p.m. and 24-hour conversion is a separate skill absent from the list."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.24-hour-clock"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c05-o02",
+     "statement": "Find time intervals by adding and subtracting hours and minutes.",
+     "concepts": [
+      "elapsed time"
+     ],
+     "questionTypes": [
+      "time",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.elapsed-time",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.elapsed-time"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t1-c06",
+   "number": 6,
+   "term": 1,
+   "title": "Information Processing",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t1-c06-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "tn-g05-t1-c06-s02",
+     "title": "Systematic Listing"
+    },
+    {
+     "id": "tn-g05-t1-c06-s03",
+     "title": "Collection of two - dimensional quantitative Data"
+    },
+    {
+     "id": "tn-g05-t1-c06-s04",
+     "title": "Pictograph"
+    },
+    {
+     "id": "tn-g05-t1-c06-s05",
+     "title": "Graphical Representation of Data"
+    },
+    {
+     "id": "tn-g05-t1-c06-s06",
+     "title": "Bar graph"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t1-c06-o01",
+     "statement": "List all possibilities in an organised way.",
+     "concepts": [
+      "systematic listing"
+     ],
+     "questionTypes": [
+      "set",
+      "ordered-list"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.systematic-enumeration",
+       "name": "List or count all arrangements or configurations systematically (including figures within a figure)",
+       "strand": "reasoning",
+       "gradeRange": [
+        5,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.probability.sample-space",
+        "MATH.algebra.permutations"
+       ],
+       "why": "Reuses the id first proposed in tn-g06.json for the same skill (grade range widened to include Grade 5). TN's 'Information Processing' strand repeatedly asks for exhaustive, organised listing (all ways, all arrangements). The nearest existing id, MATH.probability.sample-space, is a Grade 8 probability skill and is not a fit for primary listing tasks."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.systematic-enumeration"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c06-o02",
+     "statement": "Record data with two categories in a table.",
+     "concepts": [
+      "two-way data",
+      "tables"
+     ],
+     "questionTypes": [
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.tables",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.tables"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c06-o03",
+     "statement": "Read and draw pictographs that use a key.",
+     "concepts": [
+      "pictograph",
+      "key"
+     ],
+     "questionTypes": [
+      "data-table",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.pictographs",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.pictographs"
+     ]
+    },
+    {
+     "id": "tn-g05-t1-c06-o04",
+     "statement": "Draw and interpret bar graphs, including ones with a scale.",
+     "concepts": [
+      "bar graph",
+      "scale"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.bar-charts",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.scaled-bars",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.bar-charts",
+      "MATH.statistics.scaled-bars"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t2-c01",
+   "number": 1,
+   "term": 2,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t2-c01-s01",
+     "title": "Recall"
+    },
+    {
+     "id": "tn-g05-t2-c01-s02",
+     "title": "Complementary Angles and Supplementary Angles"
+    },
+    {
+     "id": "tn-g05-t2-c01-s03",
+     "title": "Fractals"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t2-c01-o01",
+     "statement": "Recognise complementary and supplementary angle pairs and find a missing angle.",
+     "concepts": [
+      "complementary angles",
+      "supplementary angles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.angle-pairs",
+       "name": "Use linear pairs, vertically opposite, complementary and supplementary angles",
+       "strand": "geometry",
+       "gradeRange": [
+        5,
+        7
+       ],
+       "prerequisites": [
+        "MATH.geometry.angle-measure"
+       ],
+       "supports": [
+        "MATH.geometry.lines-segments"
+       ],
+       "why": "Reuses the id first proposed in cbse-g07.json for the same skill (grade range widened to include Grade 5). angle-measure is measuring/drawing; parallel-angles is about transversals. Angle pairs summing to 90 or 180 degrees have no id."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.angle-pairs"
+     ]
+    },
+    {
+     "id": "tn-g05-t2-c01-o02",
+     "statement": "Explore fractal-like patterns made by repeating a shape rule at smaller scales.",
+     "concepts": [
+      "fractals",
+      "self-similarity"
+     ],
+     "questionTypes": [
+      "pattern",
+      "diagram-drawing"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.algebra.growing-patterns",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.fractal-iteration",
+       "name": "Describe iterative fractal constructions and quantify each stage",
+       "strand": "geometry",
+       "gradeRange": [
+        5,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.number.exponents",
+        "MATH.algebra.growing-patterns"
+       ],
+       "why": "Reuses the id first proposed in cbse-g08.json for the same skill (grade range widened to include Grade 5). Attached alongside the existing-competency mapping for consistency with other grade files."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.growing-patterns",
+      "MATH.geometry.fractal-iteration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t2-c02",
+   "number": 2,
+   "term": 2,
+   "title": "Numbers",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t2-c02-s01",
+     "title": "Introduction of square numbers"
+    },
+    {
+     "id": "tn-g05-t2-c02-s02",
+     "title": "Factors and multiples"
+    },
+    {
+     "id": "tn-g05-t2-c02-s03",
+     "title": "Composite and Prime Numbers"
+    },
+    {
+     "id": "tn-g05-t2-c02-s04",
+     "title": "Least Common Multiple (L C M )"
+    },
+    {
+     "id": "tn-g05-t2-c02-s05",
+     "title": "Life Applications of L C M"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t2-c02-o01",
+     "statement": "Find the factors and multiples of a number.",
+     "concepts": [
+      "factors",
+      "multiples"
+     ],
+     "questionTypes": [
+      "set",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.factors-multiples",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.factors-multiples"
+     ]
+    },
+    {
+     "id": "tn-g05-t2-c02-o02",
+     "statement": "Classify numbers as prime or composite.",
+     "concepts": [
+      "prime",
+      "composite"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.primes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.primes"
+     ]
+    },
+    {
+     "id": "tn-g05-t2-c02-o03",
+     "statement": "Find the LCM of small numbers and use it in everyday problems.",
+     "concepts": [
+      "LCM"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.hcf-lcm",
+       "name": "Find common factors, common multiples, HCF and LCM",
+       "strand": "number",
+       "gradeRange": [
+        5,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.factors-multiples"
+       ],
+       "supports": [
+        "MATH.number.prime-factorisation"
+       ],
+       "why": "Reuses the id first proposed in cbse-g06.json for the same skill (grade range widened to include Grade 5). factors-multiples lists factors/multiples of one number; finding the least common multiple of two numbers and using it in problems has no id."
+      }
+     ],
+     "mapped": [
+      "MATH.number.hcf-lcm"
+     ]
+    },
+    {
+     "id": "tn-g05-t2-c02-o04",
+     "statement": "Recognise square numbers as products of a number with itself.",
+     "concepts": [
+      "square numbers"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.figurate-numbers",
+       "name": "Relate figurate number sequences to their dot and shape pictures",
+       "strand": "algebra",
+       "gradeRange": [
+        5,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.algebra.growing-patterns",
+        "MATH.algebra.pattern-rules"
+       ],
+       "why": "Reuses the id first proposed in cbse-g06.json for the same skill (grade range widened to include Grade 5). growing-patterns is generic; square/triangular numbers and their link to sums of odd numbers is a specific skill. MATH.number.square-roots is Grade 8 and about computing roots."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.figurate-numbers"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t2-c03",
+   "number": 3,
+   "term": 2,
+   "title": "Patterns",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t2-c03-s01",
+     "title": "Patterns in Geometry"
+    },
+    {
+     "id": "tn-g05-t2-c03-s02",
+     "title": "Patterns of shapes using angles"
+    },
+    {
+     "id": "tn-g05-t2-c03-s03",
+     "title": "Rotating angles"
+    },
+    {
+     "id": "tn-g05-t2-c03-s04",
+     "title": "Find patterns in a collections of words"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t2-c03-o01",
+     "statement": "Make and continue patterns by turning shapes through given angles.",
+     "concepts": [
+      "rotation patterns",
+      "angles"
+     ],
+     "questionTypes": [
+      "pattern",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.repeating-patterns",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.transformations",
+       "name": "Perform and describe reflections, translations and rotations of figures",
+       "strand": "geometry",
+       "gradeRange": [
+        5,
+        8
+       ],
+       "prerequisites": [
+        "MATH.geometry.symmetry-lines"
+       ],
+       "supports": [
+        "MATH.coordinate.cartesian",
+        "MATH.geometry.rotational-symmetry"
+       ],
+       "why": "Reuses the id first proposed in tn-g06.json for the same skill (grade range widened to include Grade 5). No existing competency covers rotating a figure through quarter/half turns."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.repeating-patterns",
+      "MATH.geometry.transformations"
+     ]
+    },
+    {
+     "id": "tn-g05-t2-c03-o02",
+     "statement": "Find and describe the rule in a pattern of letters or words.",
+     "concepts": [
+      "word patterns"
+     ],
+     "questionTypes": [
+      "pattern",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.pattern-rules",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.pattern-rules"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t2-c04",
+   "number": 4,
+   "term": 2,
+   "title": "Measurements",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t2-c04-s01",
+     "title": "Weight"
+    },
+    {
+     "id": "tn-g05-t2-c04-s02",
+     "title": "Conversion in Weight"
+    },
+    {
+     "id": "tn-g05-t2-c04-s03",
+     "title": "Addition and Subtraction in Weight"
+    },
+    {
+     "id": "tn-g05-t2-c04-s04",
+     "title": "Multiplication and Division in Weight"
+    },
+    {
+     "id": "tn-g05-t2-c04-s05",
+     "title": "Capacity"
+    },
+    {
+     "id": "tn-g05-t2-c04-s06",
+     "title": "Conversion in Capacity"
+    },
+    {
+     "id": "tn-g05-t2-c04-s07",
+     "title": "Addition and Subtraction in Capacity"
+    },
+    {
+     "id": "tn-g05-t2-c04-s08",
+     "title": "Multiplication and Division in capacity"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t2-c04-o01",
+     "statement": "Convert weights between kg and g, and capacities between L and mL.",
+     "concepts": [
+      "mass units",
+      "capacity units",
+      "conversion"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.unit-conversions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.unit-conversions"
+     ]
+    },
+    {
+     "id": "tn-g05-t2-c04-o02",
+     "statement": "Add, subtract, multiply and divide weights given in mixed units.",
+     "concepts": [
+      "mass arithmetic"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.compute-with-measures",
+       "name": "Calculate with measured quantities in mixed units",
+       "strand": "measurement",
+       "gradeRange": [
+        4,
+        6
+       ],
+       "prerequisites": [
+        "MATH.measurement.unit-conversions",
+        "MATH.number.multi-digit-add-subtract"
+       ],
+       "supports": [
+        "MATH.number.multi-multiplication",
+        "MATH.number.long-division"
+       ],
+       "why": "Reuses the id first proposed in cbse-g04.json for the same skill (grade range widened to include Grade 5). Existing measurement competencies cover measuring and converting units, but not computing with quantities such as 3 m 40 cm + 2 m 75 cm or 4 kg 250 g x 3, which TN treats as a skill for length, weight and capacity."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.compute-with-measures"
+     ]
+    },
+    {
+     "id": "tn-g05-t2-c04-o03",
+     "statement": "Add, subtract, multiply and divide capacities given in mixed units.",
+     "concepts": [
+      "capacity arithmetic"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.compute-with-measures",
+       "name": "Calculate with measured quantities in mixed units",
+       "strand": "measurement",
+       "gradeRange": [
+        4,
+        6
+       ],
+       "prerequisites": [
+        "MATH.measurement.unit-conversions",
+        "MATH.number.multi-digit-add-subtract"
+       ],
+       "supports": [
+        "MATH.number.multi-multiplication",
+        "MATH.number.long-division"
+       ],
+       "why": "Reuses the id first proposed in cbse-g04.json for the same skill (grade range widened to include Grade 5). Existing measurement competencies cover measuring and converting units, but not computing with quantities such as 3 m 40 cm + 2 m 75 cm or 4 kg 250 g x 3, which TN treats as a skill for length, weight and capacity."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.compute-with-measures"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t2-c05",
+   "number": 5,
+   "term": 2,
+   "title": "Interconcept",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t2-c05-s01",
+     "title": "Comparing Time, Money, Distance"
+    },
+    {
+     "id": "tn-g05-t2-c05-s02",
+     "title": "Create problems integrating time, money and distance"
+    },
+    {
+     "id": "tn-g05-t2-c05-s03",
+     "title": "Relation between Speed, time and Distance"
+    },
+    {
+     "id": "tn-g05-t2-c05-s04",
+     "title": "Relation between Distance and Money"
+    },
+    {
+     "id": "tn-g05-t2-c05-s05",
+     "title": "Use fractions in the context of units of length, time and money"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t2-c05-o01",
+     "statement": "Compare and solve everyday problems that combine time, money and distance.",
+     "concepts": [
+      "integrated problems"
+     ],
+     "questionTypes": [
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.multi-step",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.multi-step"
+     ]
+    },
+    {
+     "id": "tn-g05-t2-c05-o02",
+     "statement": "Relate distance travelled to time taken, and compare speeds as distance per unit time.",
+     "concepts": [
+      "speed",
+      "distance",
+      "time"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.time-speed-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.time-speed-intro"
+     ]
+    },
+    {
+     "id": "tn-g05-t2-c05-o03",
+     "statement": "Work out cost from distance at a fixed rate (e.g. fare per km).",
+     "concepts": [
+      "rate",
+      "cost per unit"
+     ],
+     "questionTypes": [
+      "money",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.unit-rate",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.unit-rate"
+     ]
+    },
+    {
+     "id": "tn-g05-t2-c05-o04",
+     "statement": "Find a fraction of a length, a time or an amount of money (e.g. 3/4 of an hour).",
+     "concepts": [
+      "fraction of a quantity"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "money",
+      "time"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.fraction-of-collection",
+       "name": "Find a fraction of a collection",
+       "strand": "number",
+       "gradeRange": [
+        3,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.sharing",
+        "MATH.number.unit-fractions"
+       ],
+       "supports": [
+        "MATH.number.fraction-models"
+       ],
+       "why": "Reuses the id first proposed in cbse-g03.json for the same skill (grade range widened to include Grade 5). fraction-models represents fractions of a whole shape; finding e.g. 3/4 of 20 objects or 1/2 of Rs 50 (fraction as operator on a set/quantity) is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.number.fraction-of-collection"
+     ]
+    },
+    {
+     "id": "tn-g05-t2-c05-o05",
+     "statement": "Write their own word problems combining time, money and distance.",
+     "concepts": [
+      "problem posing"
+     ],
+     "questionTypes": [
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.operation-choice",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.operation-choice"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t2-c06",
+   "number": 6,
+   "term": 2,
+   "title": "Information Processing",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t2-c06-s01",
+     "title": "Modelling"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t2-c06-o01",
+     "statement": "Represent a real situation with a simple model (diagram, map or table) and use it to answer questions.",
+     "concepts": [
+      "modelling"
+     ],
+     "questionTypes": [
+      "diagram-drawing",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.model-selection",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.maps-directions",
+       "name": "Locate positions and describe routes using grids, maps and directions",
+       "strand": "geometry",
+       "gradeRange": [
+        2,
+        5
+       ],
+       "prerequisites": [
+        "MATH.geometry.positions"
+       ],
+       "supports": [
+        "MATH.geometry.solid-views"
+       ],
+       "why": "Reuses the id first proposed in cbse-g02.json for the same skill (grade range widened to include Grade 5). positions covers relative position words; nothing covers reading/drawing a route map or plan, which TN teaches under Information Processing (modelling)."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.maps-directions",
+      "MATH.reasoning.model-selection"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t3-c01",
+   "number": 1,
+   "term": 3,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t3-c01-s01",
+     "title": "Perimeter of the rectangle and square"
+    },
+    {
+     "id": "tn-g05-t3-c01-s02",
+     "title": "Area of the rectangle and square"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t3-c01-o01",
+     "statement": "Calculate the perimeter of rectangles and squares.",
+     "concepts": [
+      "perimeter"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.rectangle-perimeter",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.rectangle-perimeter"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c01-o02",
+     "statement": "Calculate the area of rectangles and squares in square units.",
+     "concepts": [
+      "area"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.rectangle-area",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.rectangle-area"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c01-o03",
+     "statement": "Tell perimeter and area apart, and choose the right one in a problem.",
+     "concepts": [
+      "perimeter vs area"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.measurement.area-squares",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.measurement.perimeter-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.area-squares",
+      "MATH.measurement.perimeter-intro"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t3-c02",
+   "number": 2,
+   "term": 3,
+   "title": "Numbers",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t3-c02-s01",
+     "title": "Estimation"
+    },
+    {
+     "id": "tn-g05-t3-c02-s02",
+     "title": "Systematic Ordering"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t3-c02-o01",
+     "statement": "Round numbers to estimate results, then judge whether an exact answer is reasonable.",
+     "concepts": [
+      "rounding",
+      "estimation"
+     ],
+     "questionTypes": [
+      "estimation",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.rounding",
+       "name": "Round numbers to the nearest ten, hundred or thousand",
+       "strand": "number",
+       "gradeRange": [
+        4,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.place-value-tens"
+       ],
+       "supports": [
+        "MATH.number.number-line",
+        "MATH.reasoning.estimate-check"
+       ],
+       "why": "Reuses the id first proposed in cbse-g04.json for the same skill (grade range widened to include Grade 5). Attached alongside the existing-competency mapping for consistency with other grade files."
+      }
+     ],
+     "mapped": [
+      "MATH.number.rounding",
+      "MATH.reasoning.estimate-check"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c02-o02",
+     "statement": "Order numbers or items systematically by a stated rule.",
+     "concepts": [
+      "systematic ordering"
+     ],
+     "questionTypes": [
+      "ordered-list"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.systematic-enumeration",
+       "name": "List or count all arrangements or configurations systematically (including figures within a figure)",
+       "strand": "reasoning",
+       "gradeRange": [
+        5,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.probability.sample-space",
+        "MATH.algebra.permutations"
+       ],
+       "why": "Reuses the id first proposed in tn-g06.json for the same skill (grade range widened to include Grade 5). TN's 'Information Processing' strand repeatedly asks for exhaustive, organised listing (all ways, all arrangements). The nearest existing id, MATH.probability.sample-space, is a Grade 8 probability skill and is not a fit for primary listing tasks."
+      }
+     ],
+     "mapped": [
+      "MATH.number.compare-numbers",
+      "MATH.reasoning.systematic-enumeration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t3-c03",
+   "number": 3,
+   "term": 3,
+   "title": "Measurements",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t3-c03-s01",
+     "title": "Volume of a solid body by informal measurement"
+    },
+    {
+     "id": "tn-g05-t3-c03-s02",
+     "title": "Finding volume using water"
+    },
+    {
+     "id": "tn-g05-t3-c03-s03",
+     "title": "Finding volume using unit cubes"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t3-c03-o01",
+     "statement": "Compare the volumes of solids using informal units.",
+     "concepts": [
+      "volume",
+      "informal units"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.volume-cubes",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.volume-cubes"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c03-o02",
+     "statement": "Find the volume of a solid by counting unit cubes.",
+     "concepts": [
+      "unit cubes"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.volume-cubes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.volume-cubes"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c03-o03",
+     "statement": "Find the volume of an object from the rise in water level (displacement).",
+     "concepts": [
+      "displacement"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.volume-cubes",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.measurement.capacity",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.capacity",
+      "MATH.measurement.volume-cubes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t3-c04",
+   "number": 4,
+   "term": 3,
+   "title": "Algebra",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t3-c04-s01",
+     "title": "Equality"
+    },
+    {
+     "id": "tn-g05-t3-c04-s02",
+     "title": "Inequality"
+    },
+    {
+     "id": "tn-g05-t3-c04-s03",
+     "title": "Using letters"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t3-c04-o01",
+     "statement": "Decide whether two number expressions are equal and fill in missing numbers to make them balance.",
+     "concepts": [
+      "equality",
+      "balance"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.missing-number",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.equality-inequality",
+       "name": "Express equality and inequality between expressions using =, < and >",
+       "strand": "algebra",
+       "gradeRange": [
+        3,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.compare-numbers"
+       ],
+       "supports": [
+        "MATH.algebra.missing-number"
+       ],
+       "why": "compare-numbers compares single numbers and missing-number solves for an operand; treating = as a balance between two expressions (e.g. 7+5 = 9+3, 8+6 > 3x4) is a distinct pre-algebra skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.equality-inequality",
+      "MATH.algebra.missing-number"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c04-o02",
+     "statement": "Compare two expressions with <, > or = without necessarily working them out in full.",
+     "concepts": [
+      "inequality",
+      "comparison symbols"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.equality-inequality",
+       "name": "Express equality and inequality between expressions using =, < and >",
+       "strand": "algebra",
+       "gradeRange": [
+        3,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.compare-numbers"
+       ],
+       "supports": [
+        "MATH.algebra.missing-number"
+       ],
+       "why": "compare-numbers compares single numbers and missing-number solves for an operand; treating = as a balance between two expressions (e.g. 7+5 = 9+3, 8+6 > 3x4) is a distinct pre-algebra skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.equality-inequality",
+      "MATH.number.compare-numbers"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c04-o03",
+     "statement": "Use a letter for an unknown or varying number in a simple rule.",
+     "concepts": [
+      "variable",
+      "letter symbol"
+     ],
+     "questionTypes": [
+      "expression",
+      "equation-solution"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.expressions-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.expressions-intro"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t3-c05",
+   "number": 5,
+   "term": 3,
+   "title": "Money",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t3-c05-s01",
+     "title": "Addition and Subtraction using money"
+    },
+    {
+     "id": "tn-g05-t3-c05-s02",
+     "title": "Multiplication and Division in Money"
+    },
+    {
+     "id": "tn-g05-t3-c05-s03",
+     "title": "Expensive, inexpensive costly, cheap, affordable and luxurious"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t3-c05-o01",
+     "statement": "Add and subtract money amounts in rupees and paise.",
+     "concepts": [
+      "money addition",
+      "money subtraction"
+     ],
+     "questionTypes": [
+      "money",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.money-decimals",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.decimal-operations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.money-decimals",
+      "MATH.number.decimal-operations"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c05-o02",
+     "statement": "Multiply and divide money amounts to find total costs or cost per item.",
+     "concepts": [
+      "money multiplication",
+      "unit price"
+     ],
+     "questionTypes": [
+      "money",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.money-decimals",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.unit-rate",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.money-decimals",
+      "MATH.number.unit-rate"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c05-o03",
+     "statement": "Use cost vocabulary (cheap, expensive, affordable) to compare prices and make sensible buying choices.",
+     "concepts": [
+      "comparing prices",
+      "value for money"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.operation-choice",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.operation-choice"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t3-c06",
+   "number": 6,
+   "term": 3,
+   "title": "Fractions",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t3-c06-s01",
+     "title": "Compare fractions"
+    },
+    {
+     "id": "tn-g05-t3-c06-s02",
+     "title": "Types of fractions"
+    },
+    {
+     "id": "tn-g05-t3-c06-s03",
+     "title": "Equivalent fractions"
+    },
+    {
+     "id": "tn-g05-t3-c06-s04",
+     "title": "Like fractions and unlike fractions"
+    },
+    {
+     "id": "tn-g05-t3-c06-s05",
+     "title": "Comparing like fractions"
+    },
+    {
+     "id": "tn-g05-t3-c06-s06",
+     "title": "Comparing fractions with equal numerators"
+    },
+    {
+     "id": "tn-g05-t3-c06-s07",
+     "title": "Addition of like fractions"
+    },
+    {
+     "id": "tn-g05-t3-c06-s08",
+     "title": "Subtraction of like fractions"
+    },
+    {
+     "id": "tn-g05-t3-c06-s09",
+     "title": "Multiplication of fractions by a single digit number"
+    },
+    {
+     "id": "tn-g05-t3-c06-s10",
+     "title": "Relationship between Fractions and Decimals"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t3-c06-o01",
+     "statement": "Classify fractions as proper, improper or mixed, and convert between improper fractions and mixed numbers.",
+     "concepts": [
+      "proper",
+      "improper",
+      "mixed numbers"
+     ],
+     "questionTypes": [
+      "fraction",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.mixed-fractions",
+       "name": "Convert between mixed and improper fractions",
+       "strand": "number",
+       "gradeRange": [
+        5,
+        6
+       ],
+       "prerequisites": [
+        "MATH.number.fraction-models"
+       ],
+       "supports": [
+        "MATH.number.number-line"
+       ],
+       "why": "Reuses the id first proposed in cbse-g05.json for the same skill (grade range widened to include Grade 5). No existing id covers fraction types (proper, improper, mixed) or conversion between improper fractions and mixed numbers."
+      }
+     ],
+     "mapped": [
+      "MATH.number.mixed-fractions"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c06-o02",
+     "statement": "Make equivalent fractions and tell like fractions from unlike ones.",
+     "concepts": [
+      "equivalent fractions",
+      "like/unlike fractions"
+     ],
+     "questionTypes": [
+      "fraction",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.equivalent-fractions",
+       "fit": "exact"
+      },
+      {
+       "id": "MLY.frac.scale",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.equivalent-fractions",
+      "MLY.frac.scale"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c06-o03",
+     "statement": "Compare fractions that share a denominator or a numerator.",
+     "concepts": [
+      "comparing fractions"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "ordered-list"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-comparison",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-comparison"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c06-o04",
+     "statement": "Add and subtract like fractions.",
+     "concepts": [
+      "adding like fractions"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-add-like",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-add-like"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c06-o05",
+     "statement": "Multiply a fraction by a 1-digit whole number.",
+     "concepts": [
+      "fraction x whole number"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-multiply",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-multiply"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c06-o06",
+     "statement": "Write tenths and hundredths as decimals and the other way round.",
+     "concepts": [
+      "fractions to decimals"
+     ],
+     "questionTypes": [
+      "numeric",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "tn-g05-t3-c07",
+   "number": 7,
+   "term": 3,
+   "title": "Information Processing",
+   "verified": false,
+   "sections": [
+    {
+     "id": "tn-g05-t3-c07-s01",
+     "title": "Able to split bigger task into smaller known task"
+    },
+    {
+     "id": "tn-g05-t3-c07-s02",
+     "title": "Find out easy and difficult ways to solve tasks"
+    },
+    {
+     "id": "tn-g05-t3-c07-s03",
+     "title": "Factor Bingo"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "tn-g05-t3-c07-o01",
+     "statement": "Break a larger problem into smaller known steps and solve it step by step.",
+     "concepts": [
+      "problem decomposition"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.multi-step",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.multi-step"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c07-o02",
+     "statement": "Compare different ways of solving a task and pick an efficient one.",
+     "concepts": [
+      "efficient strategies"
+     ],
+     "questionTypes": [
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.multi-step",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.multi-step"
+     ]
+    },
+    {
+     "id": "tn-g05-t3-c07-o03",
+     "statement": "Use factors in a game setting to spot numbers that share factors.",
+     "concepts": [
+      "factors"
+     ],
+     "questionTypes": [
+      "numeric",
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.factors-multiples",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.factors-multiples"
+     ]
+    }
+   ]
+  }
+ ]
+}

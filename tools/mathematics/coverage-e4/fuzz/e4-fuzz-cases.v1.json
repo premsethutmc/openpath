@@ -1,0 +1,4337 @@
+{
+ "contract": "e4-differential-fuzz@1",
+ "seed": 20261102,
+ "oracle": "tools/mathematics/coverage-e4/e4_oracle.py (Fractions + 80-digit Decimal; no OpenPath code)",
+ "cases": [
+  {
+   "kind": "line",
+   "problem": "sqrt(6y - 4) = sqrt(y + 4)",
+   "line": "y = 8/5",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0001"
+  },
+  {
+   "kind": "line",
+   "problem": "(2t + 3)/(t + 1) = 1",
+   "line": "2t + 3 = 1*(t + 1)",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0002"
+  },
+  {
+   "kind": "line",
+   "problem": "(5y + 3)/(y + 4) = 1",
+   "line": "4y - 1 = 0",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0003"
+  },
+  {
+   "kind": "line",
+   "problem": "2y^2 - 12y + 16 = 0",
+   "line": "y = 4 or y = 2 or y = -2",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0004"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5z + 4) = sqrt(2z + 3)",
+   "line": "z = -1/3",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0005"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3k - 1) = sqrt(k - 1)",
+   "line": "3k - 1 = k - 1",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0006"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 2) + sqrt(t + 5) = 5",
+   "line": "t = 12",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0007"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k - 3) = -2k - 4",
+   "line": "-2k - 4 = k - 3",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0008"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4t + 6) = t - 1",
+   "line": "t = 1",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0009"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 6) + sqrt(x + 2) = 2",
+   "line": "4*sqrt(x + 2) = 0",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0010"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 5) + sqrt(u + 10) = 5",
+   "line": "10*sqrt(u + 10) = 30",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0011"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w) + sqrt(w + 2) = 3",
+   "line": "w = -3",
+   "relation": "incomparable",
+   "var": "w",
+   "id": "e4-fuzz-0012"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 + 2z + 2 = 0",
+   "line": "z = 5",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0013"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z + 6) + sqrt(z + 9) = 3",
+   "line": "6*sqrt(z + 9) = 12",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0014"
+  },
+  {
+   "kind": "line",
+   "problem": "(3x + 4)/(x + 4) = 3",
+   "line": "x != -4",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0015"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 3) = 2x + 2",
+   "line": "x = -2 or x = 4",
+   "relation": "incomparable",
+   "var": "x",
+   "id": "e4-fuzz-0016"
+  },
+  {
+   "kind": "line",
+   "problem": "(4z + 4)/(z + 4) = 2",
+   "line": "z != -4",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0017"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w + 4) = sqrt(2w)",
+   "line": "w = 4",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0018"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 7) = -2t - 1",
+   "line": "t = -2",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0019"
+  },
+  {
+   "kind": "line",
+   "problem": "2u^2 - 12u + 16 = 0",
+   "line": "u = 4 or u = 2 or u = -1",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0020"
+  },
+  {
+   "kind": "line",
+   "problem": "2z^2 + 18z + 36 = 0",
+   "line": "z = -6",
+   "relation": "narrowing",
+   "var": "z",
+   "id": "e4-fuzz-0021"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 1) + sqrt(t + 2) = 5",
+   "line": "10*sqrt(t + 2) = 26",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0022"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y + 7) + sqrt(y + 10) = 5",
+   "line": "y = -3",
+   "relation": "incomparable",
+   "var": "y",
+   "id": "e4-fuzz-0023"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3t + 3) = 2t - 3",
+   "line": "4t^2 - 15t + 6 = 0",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0024"
+  },
+  {
+   "kind": "line",
+   "problem": "k^2 + 8k + 15 = 0",
+   "line": "(k - -5)(k - -3) = 0",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0025"
+  },
+  {
+   "kind": "line",
+   "problem": "t^2 + 7t + 10 = 0",
+   "line": "(t - -5)(t - -2) = 0",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0026"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2w) = 3w + 5",
+   "line": "3w + 5 = 2w",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0027"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4w + 7) = sqrt(6w)",
+   "line": "-2w + 7 = 0",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0028"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3x) = 2x - 5",
+   "line": "x = (23 \u00b1 sqrt(129))/8",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0029"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4w + 8) = sqrt(5w - 5)",
+   "line": "w = 5",
+   "relation": "incomparable",
+   "var": "w",
+   "id": "e4-fuzz-0030"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2t + 3) = sqrt(t - 9)",
+   "line": "t = 7",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0031"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z + 8) + sqrt(z + 4) = 4",
+   "line": "sqrt(z + 8) = 4 - sqrt(z + 4)",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0032"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t - 1) = -t + 4",
+   "line": "t = (9 \u00b1 sqrt(13))/2",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0033"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6u + 8) = sqrt(5u + 8)",
+   "line": "u = 2",
+   "relation": "incomparable",
+   "var": "u",
+   "id": "e4-fuzz-0034"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 4) = 3x + 2",
+   "line": "3x + 2 = x + 4",
+   "relation": "incomparable",
+   "var": "x",
+   "id": "e4-fuzz-0035"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4y - 4) = sqrt(6y + 7)",
+   "line": "4y - 4 >= 0",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0036"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2x + 7) = sqrt(4x + 6)",
+   "line": "x = 3",
+   "relation": "incomparable",
+   "var": "x",
+   "id": "e4-fuzz-0037"
+  },
+  {
+   "kind": "line",
+   "problem": "k^2 - 2k - 15 = 0",
+   "line": "(k - -3)(k - 5) = 0",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0038"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5u - 3) = sqrt(6u + 2)",
+   "line": "u = -5",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0039"
+  },
+  {
+   "kind": "line",
+   "problem": "w^2 - 5w + 1 = 0",
+   "line": "w = -2",
+   "relation": "incomparable",
+   "var": "w",
+   "id": "e4-fuzz-0040"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5x + 3) = -x - 2",
+   "line": "5x + 3 = -x - 2",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0041"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 8) = -k",
+   "line": "k + 8 = -k",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0042"
+  },
+  {
+   "kind": "line",
+   "problem": "(5w - 2)/(w + 4) = 4",
+   "line": "w != -4",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0043"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4m - 4) = 2m",
+   "line": "4m - 4 = 2m",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0044"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5y + 4) = sqrt(4y + 3)",
+   "line": "5y + 4 = 4y + 3",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0045"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4y + 9) = sqrt(y - 8)",
+   "line": "y = -17/3",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0046"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 9) = sqrt(3m + 6)",
+   "line": "m = -5",
+   "relation": "incomparable",
+   "var": "m",
+   "id": "e4-fuzz-0047"
+  },
+  {
+   "kind": "line",
+   "problem": "(m + 3)/(m + 5) = 4",
+   "line": "m + 3 = 4m + 20",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0048"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y - 4) = sqrt(2y + 9)",
+   "line": "y = 0",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0049"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y + 1) + sqrt(y + 10) = 2",
+   "line": "y + 1 = 4 - 4*sqrt(y + 10) + y + 10",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0050"
+  },
+  {
+   "kind": "line",
+   "problem": "(2y + 3)/(y + 5) = 1",
+   "line": "2y + 3 = 1y + 5",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0051"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5x + 8) = sqrt(6x + 8)",
+   "line": "-x = 0",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0052"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 2) + sqrt(x + 8) = 3",
+   "line": "x = -7/4",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0053"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 6) + sqrt(m + 2) = 2",
+   "line": "m + 6 = 4 - 4*sqrt(m + 2) + m + 2",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0054"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2y - 2) = y + 5",
+   "line": "y + 5 = 2y - 2",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0055"
+  },
+  {
+   "kind": "line",
+   "problem": "y^2 - 10y + 24 = 0",
+   "line": "(y - 6)(y - 4) = 0",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0056"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z + 3) = sqrt(4z - 4)",
+   "line": "z = 8",
+   "relation": "incomparable",
+   "var": "z",
+   "id": "e4-fuzz-0057"
+  },
+  {
+   "kind": "line",
+   "problem": "w^2 + 4w - 8 = 0",
+   "line": "w = (-4 + sqrt(48))/2",
+   "relation": "narrowing",
+   "var": "w",
+   "id": "e4-fuzz-0058"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2t + 5) = 3t - 1",
+   "line": "9t^2 - 8t - 4 = 0",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0059"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6t) = sqrt(5t - 7)",
+   "line": "t = -7",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0060"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3k + 4) = sqrt(4k + 2)",
+   "line": "k = -1",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0061"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z + 9) + sqrt(z + 1) = 5",
+   "line": "10*sqrt(z + 1) = 17",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0062"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6x + 7) = sqrt(5x + 6)",
+   "line": "x = -1",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0063"
+  },
+  {
+   "kind": "line",
+   "problem": "u^2 - 3u - 18 = 0",
+   "line": "u = -3",
+   "relation": "narrowing",
+   "var": "u",
+   "id": "e4-fuzz-0064"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6t - 1) = sqrt(5t + 8)",
+   "line": "6t - 1 >= 0",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0065"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6w + 8) = sqrt(3w - 2)",
+   "line": "w = -10/3",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0066"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z + 9) + sqrt(z + 10) = 2",
+   "line": "4*sqrt(z + 10) = 5",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0067"
+  },
+  {
+   "kind": "line",
+   "problem": "(4u - 1)/(u + 3) = 3",
+   "line": "4u - 1 = 3*(u + 3)",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0068"
+  },
+  {
+   "kind": "line",
+   "problem": "(z - 5)/(z + 5) = 2",
+   "line": "z != -5",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0069"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 2) + sqrt(x + 3) = 4",
+   "line": "sqrt(x + 2) = 4 - sqrt(x + 3)",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0070"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z - 8) = sqrt(2z + 8)",
+   "line": "-z - 16 = 0",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0071"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4t - 2) = -t + 5",
+   "line": "t = -3",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0072"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 2) = sqrt(6t + 4)",
+   "line": "t + 2 >= 0",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0073"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 5) = m + 3",
+   "line": "m = -4",
+   "relation": "incomparable",
+   "var": "m",
+   "id": "e4-fuzz-0074"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2u + 4) = -u - 6",
+   "line": "2u + 4 = -u - 6",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0075"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6z - 2) = sqrt(3z + 1)",
+   "line": "z = 4",
+   "relation": "incomparable",
+   "var": "z",
+   "id": "e4-fuzz-0076"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 3) + sqrt(x + 7) = 5",
+   "line": "10*sqrt(x + 7) = 29",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0077"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 - 4z - 3 = 0",
+   "line": "z = (4 \u00b1 sqrt(28))/2",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0078"
+  },
+  {
+   "kind": "line",
+   "problem": "k^2 - 1k - 1 = 0",
+   "line": "(k + -1/2)^2 = 5/4",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0079"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2t + 9) = 2t - 4",
+   "line": "t = 0 or t = 4",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0080"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4u + 3) = sqrt(3u + 7)",
+   "line": "4u + 3 = 3u + 7",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0081"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 2) + sqrt(x + 4) = 6",
+   "line": "6 - sqrt(x + 4) = sqrt(x + 2)",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0082"
+  },
+  {
+   "kind": "line",
+   "problem": "(x + 1)/(x + 4) = 3",
+   "line": "x != -4",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0083"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5u - 5) = -u",
+   "line": "5u - 5 = -u",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0084"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5u + 1) = u - 2",
+   "line": "u = (9 \u00b1 sqrt(69))/2",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0085"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2t + 9) = -t + 6",
+   "line": "t^2 - 14t + 27 = 0",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0086"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z + 8) + sqrt(z + 5) = 6",
+   "line": "sqrt(z + 8) = 6 - sqrt(z + 5)",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0087"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 4) = -m - 5",
+   "line": "m = -4",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0088"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3k + 1) = sqrt(k + 8)",
+   "line": "2k - 7 = 0",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0089"
+  },
+  {
+   "kind": "line",
+   "problem": "t^2 + 6t - 6 = 0",
+   "line": "(t + 3)^2 = 15",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0090"
+  },
+  {
+   "kind": "line",
+   "problem": "(4m + 1)/(m + 4) = 2",
+   "line": "4m + 1 = 2m + 8",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0091"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 - 1z - 9 = 0",
+   "line": "z = (1 + sqrt(37))/2 or z = (1 - sqrt(37))/2",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0092"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 7) + sqrt(x + 8) = 4",
+   "line": "4 - sqrt(x + 8) = sqrt(x + 7)",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0093"
+  },
+  {
+   "kind": "line",
+   "problem": "w^2 + 0w - 5 = 0",
+   "line": "(w + 0)^2 = 5",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0094"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w + 6) + sqrt(w + 3) = 5",
+   "line": "10*sqrt(w + 3) = 22",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0095"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 3) + sqrt(u + 10) = 4",
+   "line": "u = 2",
+   "relation": "incomparable",
+   "var": "u",
+   "id": "e4-fuzz-0096"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y + 6) + sqrt(y + 7) = 2",
+   "line": "2 - sqrt(y + 7) = sqrt(y + 6)",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0097"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 + 3z - 5 = 0",
+   "line": "z = (-3 \u00b1 sqrt(29))/2",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0098"
+  },
+  {
+   "kind": "line",
+   "problem": "w^2 + 3w - 5 = 0",
+   "line": "(w + 3/2)^2 = 29/4",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0099"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 1) + sqrt(t + 5) = 5",
+   "line": "sqrt(t + 1) = 5 - sqrt(t + 5)",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0100"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3k - 5) = sqrt(6k - 2)",
+   "line": "3k - 5 >= 0",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0101"
+  },
+  {
+   "kind": "line",
+   "problem": "(2u - 5)/(u + 1) = 1",
+   "line": "u = 6",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0102"
+  },
+  {
+   "kind": "line",
+   "problem": "w^2 - 11w + 30 = 0",
+   "line": "(w - 5)(w - 6) = 0",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0103"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4u - 6) = u + 3",
+   "line": "u + 3 = 4u - 6",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0104"
+  },
+  {
+   "kind": "line",
+   "problem": "y^2 + 4y + 0 = 0",
+   "line": "y = (-4 \u00b1 sqrt(16))/2",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0105"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5k - 4) = k - 6",
+   "line": "k = (17 + sqrt(129))/2 or k = (17 - sqrt(129))/2",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0106"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y - 9) = sqrt(6y + 3)",
+   "line": "y - 9 >= 0",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0107"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2w - 6) = -2w + 2",
+   "line": "w = -1 or w = 3",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0108"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5w - 2) = sqrt(6w + 5)",
+   "line": "-w - 7 = 0",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0109"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 2) + sqrt(m + 9) = 2",
+   "line": "m = -23/16",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0110"
+  },
+  {
+   "kind": "line",
+   "problem": "w^2 + 4w - 5 = 0",
+   "line": "w = 0",
+   "relation": "incomparable",
+   "var": "w",
+   "id": "e4-fuzz-0111"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 8) = t + 4",
+   "line": "t = -4 or t = -1",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0112"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k) + sqrt(k + 12) = 4",
+   "line": "8*sqrt(k + 12) = 28",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0113"
+  },
+  {
+   "kind": "line",
+   "problem": "k^2 + 3k - 5 = 0",
+   "line": "k = 5",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0114"
+  },
+  {
+   "kind": "line",
+   "problem": "y^2 + 5y - 5 = 0",
+   "line": "y = (-5 + sqrt(45))/2",
+   "relation": "narrowing",
+   "var": "y",
+   "id": "e4-fuzz-0115"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 5) = 2t - 1",
+   "line": "t = (5 + sqrt(89))/8 or t = (5 - sqrt(89))/8",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0116"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4m - 4) = sqrt(6m - 3)",
+   "line": "m = -1/2",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0117"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3u + 3) = sqrt(4u - 7)",
+   "line": "3u + 3 = 4u - 7",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0118"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3z + 3) = 2z - 4",
+   "line": "z = (19 + sqrt(153))/8 or z = (19 - sqrt(153))/8",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0119"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3u - 5) = sqrt(6u - 2)",
+   "line": "u = 6",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0120"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 1) + sqrt(k + 2) = 6",
+   "line": "k = 11",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0121"
+  },
+  {
+   "kind": "line",
+   "problem": "t^2 - 11t + 30 = 0",
+   "line": "t = -1",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0122"
+  },
+  {
+   "kind": "line",
+   "problem": "(2u + 1)/(u + 3) = 3",
+   "line": "2u + 1 = 3u + 9",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0123"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 6) + sqrt(t + 1) = 4",
+   "line": "t = 9",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0124"
+  },
+  {
+   "kind": "line",
+   "problem": "t^2 - 5t - 9 = 0",
+   "line": "t = 3",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0125"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6k - 2) = sqrt(2k - 5)",
+   "line": "6k - 2 >= 0",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0126"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3k - 4) = k + 5",
+   "line": "k = -4 or k = 2",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0127"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2y - 4) = -y - 1",
+   "line": "2y - 4 = -y - 1",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0128"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3z + 9) = sqrt(4z - 8)",
+   "line": "-z + 17 = 0",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0129"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4t + 8) = t + 3",
+   "line": "t = (-2 + sqrt(0))/2",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0130"
+  },
+  {
+   "kind": "line",
+   "problem": "(m - 5)/(m + 3) = 2",
+   "line": "m - 5 = 2*(m + 3)",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0131"
+  },
+  {
+   "kind": "line",
+   "problem": "x^2 - 7x - 3 = 0",
+   "line": "(x + -7/2)^2 = 61/4",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0132"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 3) + sqrt(k + 1) = 3",
+   "line": "k = -3",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0133"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2u + 8) = u",
+   "line": "u = (2 + sqrt(36))/2",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0134"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 + 6z - 6 = 0",
+   "line": "z = (-6 \u00b1 sqrt(60))/2",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0135"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5w - 3) = sqrt(6w - 5)",
+   "line": "-w + 2 = 0",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0136"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u) = -u + 4",
+   "line": "u = 3",
+   "relation": "incomparable",
+   "var": "u",
+   "id": "e4-fuzz-0137"
+  },
+  {
+   "kind": "line",
+   "problem": "2m^2 - 22m + 60 = 0",
+   "line": "m = 4",
+   "relation": "incomparable",
+   "var": "m",
+   "id": "e4-fuzz-0138"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5m) = -m + 6",
+   "line": "m = (17 \u00b1 sqrt(145))/2",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0139"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 1) + sqrt(t + 2) = 3",
+   "line": "t + 1 = 9 - 6*sqrt(t + 2) + t + 2",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0140"
+  },
+  {
+   "kind": "line",
+   "problem": "(m)/(m + 4) = 4",
+   "line": "m = 4*(m + 4)",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0141"
+  },
+  {
+   "kind": "line",
+   "problem": "y^2 - 3y + 2 = 0",
+   "line": "y = -1",
+   "relation": "incomparable",
+   "var": "y",
+   "id": "e4-fuzz-0142"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 1) = x + 6",
+   "line": "x + 6 = x + 1",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0143"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3w) = sqrt(4w - 1)",
+   "line": "w = -5",
+   "relation": "incomparable",
+   "var": "w",
+   "id": "e4-fuzz-0144"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 5) = sqrt(3m + 7)",
+   "line": "m + 5 = 3m + 7",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0145"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 8) + sqrt(k + 1) = 5",
+   "line": "k + 8 = 25 - 10*sqrt(k + 1) + k + 1",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0146"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2y + 7) = sqrt(4y - 3)",
+   "line": "y = 7",
+   "relation": "incomparable",
+   "var": "y",
+   "id": "e4-fuzz-0147"
+  },
+  {
+   "kind": "line",
+   "problem": "2x^2 + 6x + 4 = 0",
+   "line": "(x - -2)(x - -1) = 0",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0148"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3y + 2) = sqrt(y + 8)",
+   "line": "y = 3",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0149"
+  },
+  {
+   "kind": "line",
+   "problem": "(3w + 2)/(w + 4) = 4",
+   "line": "-w - 14 = 0",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0150"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3t - 1) = -2t - 3",
+   "line": "t = 4 or t = 1",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0151"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3u + 2) = -2u + 4",
+   "line": "u = 1 or u = -3",
+   "relation": "incomparable",
+   "var": "u",
+   "id": "e4-fuzz-0152"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u) + sqrt(u + 1) = 5",
+   "line": "u + 0 = 25 - 10*sqrt(u + 1) + u + 1",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0153"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 7) = m + 1",
+   "line": "m = 6 or m = 2",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0154"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w) + sqrt(w + 4) = 3",
+   "line": "w = 25/36",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0155"
+  },
+  {
+   "kind": "line",
+   "problem": "(3u + 1)/(u + 3) = 2",
+   "line": "3u + 1 = 2u + 6",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0156"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4z + 9) = sqrt(5z - 2)",
+   "line": "-z + 11 = 0",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0157"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4k + 9) = -k + 6",
+   "line": "k = (16 \u00b1 sqrt(148))/2",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0158"
+  },
+  {
+   "kind": "line",
+   "problem": "w^2 - 6w - 7 = 0",
+   "line": "(w + -3)^2 = 16",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0159"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 1) + sqrt(m + 2) = 4",
+   "line": "m = 161/64",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0160"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 2) + sqrt(x + 11) = 3",
+   "line": "6*sqrt(x + 11) = 18",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0161"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m) = -2m - 3",
+   "line": "m = 4 or m = 5",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0162"
+  },
+  {
+   "kind": "line",
+   "problem": "x^2 + 7x + 12 = 0",
+   "line": "x = -3 or x = -4",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0163"
+  },
+  {
+   "kind": "line",
+   "problem": "(5x + 5)/(x + 5) = 4",
+   "line": "5x + 5 = 4x + 20",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0164"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2x - 6) = sqrt(x - 3)",
+   "line": "x - 3 = 0",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0165"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3y + 6) = -y - 4",
+   "line": "y = 0 or y = 0",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0166"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y - 7) = sqrt(3y + 5)",
+   "line": "y = 7",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0167"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4y + 4) = -2y - 4",
+   "line": "4y + 4 = -2y - 4",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0168"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3x + 1) = 3x - 5",
+   "line": "x = (33 \u00b1 sqrt(225))/18",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0169"
+  },
+  {
+   "kind": "line",
+   "problem": "(3w + 1)/(w + 3) = 4",
+   "line": "w != -3",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0170"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5w + 3) = -w + 3",
+   "line": "5w + 3 = (-w + 3)^2",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0171"
+  },
+  {
+   "kind": "line",
+   "problem": "m^2 + 4m + 4 = 0",
+   "line": "m = -2",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0172"
+  },
+  {
+   "kind": "line",
+   "problem": "(5w - 1)/(w + 2) = 2",
+   "line": "3w - 5 = 0",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0173"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 5) + sqrt(u + 6) = 3",
+   "line": "u + 5 = 9 - 6*sqrt(u + 6) + u + 6",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0174"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 8) + sqrt(x + 6) = 2",
+   "line": "x = 3",
+   "relation": "incomparable",
+   "var": "x",
+   "id": "e4-fuzz-0175"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4x + 9) = 3x + 5",
+   "line": "x = -2",
+   "relation": "incomparable",
+   "var": "x",
+   "id": "e4-fuzz-0176"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 9) = 2m + 2",
+   "line": "m + 9 = 2m + 2",
+   "relation": "incomparable",
+   "var": "m",
+   "id": "e4-fuzz-0177"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2y - 4) = 2y - 6",
+   "line": "y = 2 or y = 1",
+   "relation": "incomparable",
+   "var": "y",
+   "id": "e4-fuzz-0178"
+  },
+  {
+   "kind": "line",
+   "problem": "u^2 - 6u + 1 = 0",
+   "line": "u = (6 + sqrt(32))/2 or u = (6 - sqrt(32))/2",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0179"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2t - 3) = sqrt(5t - 8)",
+   "line": "2t - 3 = 5t - 8",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0180"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u) + sqrt(u + 11) = 4",
+   "line": "u = 25/64",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0181"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z + 4) + sqrt(z + 3) = 4",
+   "line": "z = -1",
+   "relation": "incomparable",
+   "var": "z",
+   "id": "e4-fuzz-0182"
+  },
+  {
+   "kind": "line",
+   "problem": "(2x - 1)/(x + 2) = 3",
+   "line": "2x - 1 = 3*(x + 2)",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0183"
+  },
+  {
+   "kind": "line",
+   "problem": "u^2 - 3u - 4 = 0",
+   "line": "u = 4 or u = -1",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0184"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5u + 3) = -2u - 5",
+   "line": "u = 1 or u = 3",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0185"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5k + 1) = 3k - 5",
+   "line": "k = -4 or k = 6",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0186"
+  },
+  {
+   "kind": "line",
+   "problem": "m^2 + 7m - 3 = 0",
+   "line": "(m + 7/2)^2 = 61/4",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0187"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6x + 9) = sqrt(5x - 1)",
+   "line": "x = -10",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0188"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6w + 3) = sqrt(2w - 3)",
+   "line": "6w + 3 = 2w - 3",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0189"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 2) + sqrt(x + 6) = 2",
+   "line": "4*sqrt(x + 6) = 8",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0190"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 6) + sqrt(x + 10) = 6",
+   "line": "6 - sqrt(x + 10) = sqrt(x + 6)",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0191"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5x + 9) = 3x - 2",
+   "line": "9x^2 - 17x - 5 = 0",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0192"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5x) = 3x + 1",
+   "line": "5x = 3x + 1",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0193"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 8) = -k - 2",
+   "line": "-k - 2 = k + 8",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0194"
+  },
+  {
+   "kind": "line",
+   "problem": "y^2 - 7y + 12 = 0",
+   "line": "y = -4",
+   "relation": "incomparable",
+   "var": "y",
+   "id": "e4-fuzz-0195"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5m + 9) = m - 2",
+   "line": "5m + 9 = m - 2",
+   "relation": "incomparable",
+   "var": "m",
+   "id": "e4-fuzz-0196"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6m - 3) = sqrt(5m - 2)",
+   "line": "m - 1 = 0",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0197"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4u - 2) = 2u - 4",
+   "line": "u = -4 or u = 5",
+   "relation": "incomparable",
+   "var": "u",
+   "id": "e4-fuzz-0198"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y + 6) + sqrt(y + 7) = 6",
+   "line": "6 - sqrt(y + 7) = sqrt(y + 6)",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0199"
+  },
+  {
+   "kind": "line",
+   "problem": "k^2 - 1k - 2 = 0",
+   "line": "k = -3",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0200"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 - 1z - 9 = 0",
+   "line": "z = 2",
+   "relation": "incomparable",
+   "var": "z",
+   "id": "e4-fuzz-0201"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 5) = sqrt(3k)",
+   "line": "k + 5 = 3k",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0202"
+  },
+  {
+   "kind": "line",
+   "problem": "(4y + 5)/(y + 5) = 2",
+   "line": "y = 5/2",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0203"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 1) + sqrt(u + 5) = 3",
+   "line": "u = 0",
+   "relation": "incomparable",
+   "var": "u",
+   "id": "e4-fuzz-0204"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u - 1) = 2u - 2",
+   "line": "u = (9 + sqrt(1))/8",
+   "relation": "narrowing",
+   "var": "u",
+   "id": "e4-fuzz-0205"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4m - 9) = sqrt(5m - 8)",
+   "line": "4m - 9 >= 0",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0206"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 + 2z - 8 = 0",
+   "line": "(z - -4)(z - 2) = 0",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0207"
+  },
+  {
+   "kind": "line",
+   "problem": "2t^2 - 2t - 24 = 0",
+   "line": "t = 4 or t = -3",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0208"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4x + 4) = 3x + 3",
+   "line": "x = (-14 + sqrt(16))/18 or x = (-14 - sqrt(16))/18",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0209"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w + 3) + sqrt(w + 11) = 5",
+   "line": "sqrt(w + 3) = 5 - sqrt(w + 11)",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0210"
+  },
+  {
+   "kind": "line",
+   "problem": "w^2 + 1w - 9 = 0",
+   "line": "w = (-1 + sqrt(37))/2",
+   "relation": "narrowing",
+   "var": "w",
+   "id": "e4-fuzz-0211"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4k - 2) = 2k - 1",
+   "line": "k = (8 \u00b1 sqrt(16))/8",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0212"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6w - 9) = sqrt(5w + 6)",
+   "line": "6w - 9 = 5w + 6",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0213"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 3) + sqrt(t + 7) = 2",
+   "line": "sqrt(t + 3) = 2 - sqrt(t + 7)",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0214"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6m - 6) = sqrt(2m - 1)",
+   "line": "m = 8",
+   "relation": "incomparable",
+   "var": "m",
+   "id": "e4-fuzz-0215"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2k + 9) = sqrt(k - 4)",
+   "line": "k = -4",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0216"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5u + 3) = 2u + 5",
+   "line": "u = 5",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0217"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6k + 6) = sqrt(7k + 2)",
+   "line": "6k + 6 = 7k + 2",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0218"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5w + 5) = -w + 2",
+   "line": "5w + 5 = (-w + 2)^2",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0219"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3z + 6) = -z + 6",
+   "line": "z^2 - 15z + 30 = 0",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0220"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 7) + sqrt(u + 9) = 6",
+   "line": "12*sqrt(u + 9) = 38",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0221"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 4) + sqrt(u + 5) = 4",
+   "line": "4 - sqrt(u + 5) = sqrt(u + 4)",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0222"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4z + 7) = 3z",
+   "line": "z = 6 or z = 5",
+   "relation": "incomparable",
+   "var": "z",
+   "id": "e4-fuzz-0223"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5t + 1) = sqrt(3t + 4)",
+   "line": "t = 9",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0224"
+  },
+  {
+   "kind": "line",
+   "problem": "t^2 + 7t + 0 = 0",
+   "line": "t = (-7 + sqrt(49))/2",
+   "relation": "narrowing",
+   "var": "t",
+   "id": "e4-fuzz-0225"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 4) + sqrt(x + 8) = 6",
+   "line": "x = 28/9",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0226"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5t + 6) = -2t + 2",
+   "line": "-2t + 2 = 5t + 6",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0227"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 + 3z - 4 = 0",
+   "line": "z = (-3 + sqrt(25))/2",
+   "relation": "narrowing",
+   "var": "z",
+   "id": "e4-fuzz-0228"
+  },
+  {
+   "kind": "line",
+   "problem": "t^2 + 1t + 4 = 0",
+   "line": "t = (-1 \u00b1 sqrt(-15))/2",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0229"
+  },
+  {
+   "kind": "line",
+   "problem": "u^2 + 2u - 1 = 0",
+   "line": "u = -4",
+   "relation": "incomparable",
+   "var": "u",
+   "id": "e4-fuzz-0230"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3x - 4) = 2x + 6",
+   "line": "x = -3",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0231"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2t + 1) = 3t - 2",
+   "line": "2t + 1 = (3t - 2)^2",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0232"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5u + 1) = sqrt(6u + 7)",
+   "line": "-u - 6 = 0",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0233"
+  },
+  {
+   "kind": "line",
+   "problem": "k^2 - 4k - 12 = 0",
+   "line": "k = -2 or k = 6 or k = 5",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0234"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5u + 8) = u - 3",
+   "line": "u - 3 = 5u + 8",
+   "relation": "incomparable",
+   "var": "u",
+   "id": "e4-fuzz-0235"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 3) = -2x + 1",
+   "line": "x = (5 + sqrt(57))/8",
+   "relation": "incomparable",
+   "var": "x",
+   "id": "e4-fuzz-0236"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5u + 6) = sqrt(u - 1)",
+   "line": "u = 1",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0237"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3w + 6) = -w + 2",
+   "line": "w = (7 + sqrt(57))/2 or w = (7 - sqrt(57))/2",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0238"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3t) = -2t - 4",
+   "line": "3t = (-2t - 4)^2",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0239"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5x + 4) = sqrt(4x + 9)",
+   "line": "x - 5 = 0",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0240"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3k + 2) = -k - 3",
+   "line": "k = 0 or k = 1",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0241"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2z - 5) = sqrt(3z + 3)",
+   "line": "2z - 5 >= 0",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0242"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 4) + sqrt(m + 8) = 4",
+   "line": "m = -7/4",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0243"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 8) + sqrt(t + 12) = 6",
+   "line": "t + 8 = 36 - 12*sqrt(t + 12) + t + 12",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0244"
+  },
+  {
+   "kind": "line",
+   "problem": "t^2 - 6t + 8 = 0",
+   "line": "t = 4",
+   "relation": "narrowing",
+   "var": "t",
+   "id": "e4-fuzz-0245"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5z - 3) = 2z + 2",
+   "line": "z = 5 or z = 5",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0246"
+  },
+  {
+   "kind": "line",
+   "problem": "(3w + 2)/(w + 4) = 2",
+   "line": "3w + 2 = 2w + 8",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0247"
+  },
+  {
+   "kind": "line",
+   "problem": "(5u - 1)/(u + 5) = 4",
+   "line": "u = 21",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0248"
+  },
+  {
+   "kind": "line",
+   "problem": "2y^2 + 2y - 40 = 0",
+   "line": "y = -6",
+   "relation": "incomparable",
+   "var": "y",
+   "id": "e4-fuzz-0249"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 9) + sqrt(k + 7) = 2",
+   "line": "k = -2",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0250"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5x + 9) = 3x - 6",
+   "line": "x = 5",
+   "relation": "incomparable",
+   "var": "x",
+   "id": "e4-fuzz-0251"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 + 9z + 18 = 0",
+   "line": "z = -6 or z = -3 or z = 4",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0252"
+  },
+  {
+   "kind": "line",
+   "problem": "u^2 + 4u - 5 = 0",
+   "line": "u = 1 or u = -5 or u = -3",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0253"
+  },
+  {
+   "kind": "line",
+   "problem": "m^2 + 5m + 3 = 0",
+   "line": "(m + 5/2)^2 = 13/4",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0254"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3w - 5) = sqrt(5w - 6)",
+   "line": "w = 1/2",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0255"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z) = sqrt(5z - 8)",
+   "line": "-4z + 8 = 0",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0256"
+  },
+  {
+   "kind": "line",
+   "problem": "x^2 + 1x - 2 = 0",
+   "line": "x = -6",
+   "relation": "incomparable",
+   "var": "x",
+   "id": "e4-fuzz-0257"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4w - 2) = -w + 4",
+   "line": "w = (12 + sqrt(72))/2 or w = (12 - sqrt(72))/2",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0258"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4x + 2) = -2x + 5",
+   "line": "x = -1",
+   "relation": "incomparable",
+   "var": "x",
+   "id": "e4-fuzz-0259"
+  },
+  {
+   "kind": "line",
+   "problem": "w^2 - 1w - 6 = 0",
+   "line": "(w - -2)(w - 3) = 0",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0260"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3x + 5) = 2x",
+   "line": "2x = 3x + 5",
+   "relation": "incomparable",
+   "var": "x",
+   "id": "e4-fuzz-0261"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z - 2) = sqrt(4z + 9)",
+   "line": "-3z - 11 = 0",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0262"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y + 1) = 2y - 3",
+   "line": "y = -2",
+   "relation": "incomparable",
+   "var": "y",
+   "id": "e4-fuzz-0263"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2t + 3) = sqrt(3t + 5)",
+   "line": "-t - 2 = 0",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0264"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3m + 5) = sqrt(5m + 1)",
+   "line": "-2m + 4 = 0",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0265"
+  },
+  {
+   "kind": "line",
+   "problem": "(2z - 1)/(z + 4) = 3",
+   "line": "2z - 1 = 3z + 12",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0266"
+  },
+  {
+   "kind": "line",
+   "problem": "(m - 1)/(m + 3) = 3",
+   "line": "m - 1 = 3*(m + 3)",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0267"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5t - 1) = 3t - 1",
+   "line": "t = (11 + sqrt(49))/18 or t = (11 - sqrt(49))/18",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0268"
+  },
+  {
+   "kind": "line",
+   "problem": "(2w - 1)/(w + 1) = 4",
+   "line": "-2w - 5 = 0",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0269"
+  },
+  {
+   "kind": "line",
+   "problem": "u^2 - 3u - 1 = 0",
+   "line": "u = (3 \u00b1 sqrt(13))/2",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0270"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3y - 6) = 3y",
+   "line": "y = 1",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0271"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4u - 2) = -u - 5",
+   "line": "u = 4 or u = -1",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0272"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 8) + sqrt(m + 4) = 2",
+   "line": "4*sqrt(m + 4) = 0",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0273"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y) = y + 1",
+   "line": "y = 4",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0274"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 9) + sqrt(k + 6) = 3",
+   "line": "6*sqrt(k + 6) = 6",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0275"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3z - 7) = sqrt(6z - 4)",
+   "line": "3z - 7 = 6z - 4",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0276"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6x - 3) = sqrt(4x - 7)",
+   "line": "x = -4",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0277"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6w - 6) = sqrt(5w + 2)",
+   "line": "w = 4",
+   "relation": "incomparable",
+   "var": "w",
+   "id": "e4-fuzz-0278"
+  },
+  {
+   "kind": "line",
+   "problem": "(5w - 2)/(w + 5) = 1",
+   "line": "5w - 2 = 1w + 5",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0279"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u - 4) = 3u",
+   "line": "u - 4 = 3u",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0280"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6m + 8) = sqrt(5m + 2)",
+   "line": "m = 3",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0281"
+  },
+  {
+   "kind": "line",
+   "problem": "x^2 - 1x - 5 = 0",
+   "line": "(x + -1/2)^2 = 21/4",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0282"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2w - 6) = -2w - 5",
+   "line": "4w^2 + 18w + 31 = 0",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0283"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w + 7) + sqrt(w + 8) = 6",
+   "line": "12*sqrt(w + 8) = 37",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0284"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5x + 8) = 2x + 6",
+   "line": "2x + 6 = 5x + 8",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0285"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5k - 7) = sqrt(6k + 7)",
+   "line": "k = -14",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0286"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 3) + sqrt(u + 7) = 2",
+   "line": "u = -3",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0287"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 7) + sqrt(k + 12) = 4",
+   "line": "k = -327/64",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0288"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4k - 1) = sqrt(5k - 4)",
+   "line": "4k - 1 >= 0",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0289"
+  },
+  {
+   "kind": "line",
+   "problem": "(3y - 3)/(y + 4) = 1",
+   "line": "3y - 3 = 1*(y + 4)",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0290"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 8) + sqrt(k + 10) = 4",
+   "line": "k + 8 = 16 - 8*sqrt(k + 10) + k + 10",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0291"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y) + sqrt(y + 10) = 4",
+   "line": "y + 0 = 16 - 8*sqrt(y + 10) + y + 10",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0292"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3k - 6) = 2k - 6",
+   "line": "4k^2 - 27k + 42 = 0",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0293"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3w + 3) = w + 1",
+   "line": "w^2 - 1w - 2 = 0",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0294"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5k + 8) = -2k - 6",
+   "line": "k = 5 or k = 6",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0295"
+  },
+  {
+   "kind": "line",
+   "problem": "(3m + 1)/(m + 5) = 3",
+   "line": "m = 0",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0296"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y + 2) = -y + 1",
+   "line": "y + 2 = (-y + 1)^2",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0297"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2m + 7) = -m + 6",
+   "line": "2m + 7 = -m + 6",
+   "relation": "incomparable",
+   "var": "m",
+   "id": "e4-fuzz-0298"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w + 3) + sqrt(w + 2) = 4",
+   "line": "sqrt(w + 3) = 4 - sqrt(w + 2)",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0299"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 7) = 2u + 6",
+   "line": "u = (-23 \u00b1 sqrt(65))/8",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0300"
+  },
+  {
+   "kind": "line",
+   "problem": "k^2 - 1k - 3 = 0",
+   "line": "k = (1 + sqrt(13))/2",
+   "relation": "narrowing",
+   "var": "k",
+   "id": "e4-fuzz-0301"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 6) + sqrt(x + 7) = 6",
+   "line": "x + 6 = 36 - 12*sqrt(x + 7) + x + 7",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0302"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3z - 8) = sqrt(4z + 3)",
+   "line": "-z - 11 = 0",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0303"
+  },
+  {
+   "kind": "line",
+   "problem": "(3m - 1)/(m + 4) = 4",
+   "line": "m = -17",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0304"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 1) + sqrt(m + 7) = 3",
+   "line": "m = -3/4",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0305"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2t + 6) = sqrt(4t - 8)",
+   "line": "2t + 6 = 4t - 8",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0306"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y + 2) + sqrt(y + 12) = 4",
+   "line": "8*sqrt(y + 12) = 26",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0307"
+  },
+  {
+   "kind": "line",
+   "problem": "t^2 - 2t - 4 = 0",
+   "line": "(t + -1)^2 = 5",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0308"
+  },
+  {
+   "kind": "line",
+   "problem": "(y - 3)/(y + 5) = 4",
+   "line": "-3y - 23 = 0",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0309"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4t - 2) = 2t + 6",
+   "line": "4t - 2 = 2t + 6",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0310"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3y + 3) = -y + 5",
+   "line": "-y + 5 = 3y + 3",
+   "relation": "incomparable",
+   "var": "y",
+   "id": "e4-fuzz-0311"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4x - 2) = -2x - 2",
+   "line": "4x - 2 = -2x - 2",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0312"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m - 6) = -2m - 4",
+   "line": "m = 6",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0313"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 8) + sqrt(k + 11) = 4",
+   "line": "k + 8 = 16 - 8*sqrt(k + 11) + k + 11",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0314"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 + 4z + 4 = 0",
+   "line": "z = -1",
+   "relation": "incomparable",
+   "var": "z",
+   "id": "e4-fuzz-0315"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3k - 4) = sqrt(5k + 9)",
+   "line": "k = -13/2",
+   "relation": "widening",
+   "var": "k",
+   "id": "e4-fuzz-0316"
+  },
+  {
+   "kind": "line",
+   "problem": "(5y)/(y + 5) = 3",
+   "line": "y = 15/2",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0317"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3u - 5) = 3u + 3",
+   "line": "u = 0",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0318"
+  },
+  {
+   "kind": "line",
+   "problem": "(5x + 4)/(x + 2) = 1",
+   "line": "5x + 4 = 1x + 2",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0319"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6t - 4) = sqrt(5t - 1)",
+   "line": "6t - 4 >= 0",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0320"
+  },
+  {
+   "kind": "line",
+   "problem": "y^2 + 4y + 0 = 0",
+   "line": "(y + 2)^2 = 4",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0321"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w + 7) = sqrt(3w - 1)",
+   "line": "w + 7 = 3w - 1",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0322"
+  },
+  {
+   "kind": "line",
+   "problem": "x^2 - 5x + 4 = 0",
+   "line": "(x + -5/2)^2 = 9/4",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0323"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(x + 1) + sqrt(x + 2) = 5",
+   "line": "x = 119/25",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0324"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5y - 3) = 2y + 3",
+   "line": "4y^2 + 7y + 12 = 0",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0325"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w) = 3w - 4",
+   "line": "w = (3w - 4)^2",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0326"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 - 7z - 8 = 0",
+   "line": "z = (7 + sqrt(81))/2",
+   "relation": "narrowing",
+   "var": "z",
+   "id": "e4-fuzz-0327"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z - 3) = sqrt(6z - 2)",
+   "line": "-5z - 1 = 0",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0328"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(y + 3) = sqrt(6y + 7)",
+   "line": "y = -4/5",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0329"
+  },
+  {
+   "kind": "line",
+   "problem": "y^2 + 10y + 25 = 0",
+   "line": "y = -5 or y = -5 or y = 4",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0330"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 1) + sqrt(u + 6) = 5",
+   "line": "u = 2",
+   "relation": "incomparable",
+   "var": "u",
+   "id": "e4-fuzz-0331"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5k - 5) = 3k - 3",
+   "line": "3k - 3 = 5k - 5",
+   "relation": "narrowing",
+   "var": "k",
+   "id": "e4-fuzz-0332"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w + 9) + sqrt(w + 8) = 6",
+   "line": "w = 73/144",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0333"
+  },
+  {
+   "kind": "line",
+   "problem": "(x + 4)/(x + 3) = 2",
+   "line": "x != -3",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0334"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 4) + sqrt(k + 2) = 3",
+   "line": "sqrt(k + 4) = 3 - sqrt(k + 2)",
+   "relation": "equal",
+   "var": "k",
+   "id": "e4-fuzz-0335"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 6) = -2u - 1",
+   "line": "u = (-3 + sqrt(89))/8 or u = (-3 - sqrt(89))/8",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0336"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4m + 9) = sqrt(5m - 3)",
+   "line": "4m + 9 = 5m - 3",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0337"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 4) + sqrt(t + 12) = 3",
+   "line": "3 - sqrt(t + 12) = sqrt(t + 4)",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0338"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(2w - 8) = sqrt(3w + 9)",
+   "line": "w = 1",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0339"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5w + 7) = sqrt(3w + 8)",
+   "line": "w = 4",
+   "relation": "incomparable",
+   "var": "w",
+   "id": "e4-fuzz-0340"
+  },
+  {
+   "kind": "line",
+   "problem": "2x^2 - 10x + 12 = 0",
+   "line": "x = 2",
+   "relation": "narrowing",
+   "var": "x",
+   "id": "e4-fuzz-0341"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m - 4) = -2m - 4",
+   "line": "m - 4 = (-2m - 4)^2",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0342"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5t) = -2t - 2",
+   "line": "5t = (-2t - 2)^2",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0343"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 - 2z - 2 = 0",
+   "line": "(z + -1)^2 = 3",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0344"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w + 7) = sqrt(4w + 8)",
+   "line": "w + 7 = 4w + 8",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0345"
+  },
+  {
+   "kind": "line",
+   "problem": "2x^2 + 4x + 0 = 0",
+   "line": "x = 0 or x = -2",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0346"
+  },
+  {
+   "kind": "line",
+   "problem": "w^2 + 4w - 1 = 0",
+   "line": "w = (-4 + sqrt(20))/2",
+   "relation": "narrowing",
+   "var": "w",
+   "id": "e4-fuzz-0347"
+  },
+  {
+   "kind": "line",
+   "problem": "(5t - 2)/(t + 2) = 1",
+   "line": "5t - 2 = 1*(t + 2)",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0348"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4w + 8) = sqrt(5w + 8)",
+   "line": "4w + 8 >= 0",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0349"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4z - 4) = sqrt(3z - 1)",
+   "line": "z - 3 = 0",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0350"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 7) + sqrt(u + 6) = 2",
+   "line": "sqrt(u + 7) = 2 - sqrt(u + 6)",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0351"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5k + 2) = 2k",
+   "line": "2k = 5k + 2",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0352"
+  },
+  {
+   "kind": "line",
+   "problem": "2k^2 - 6k + 0 = 0",
+   "line": "k = 1",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0353"
+  },
+  {
+   "kind": "line",
+   "problem": "(4x + 3)/(x + 4) = 2",
+   "line": "4x + 3 = 2*(x + 4)",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0354"
+  },
+  {
+   "kind": "line",
+   "problem": "y^2 + 6y + 1 = 0",
+   "line": "y = -4",
+   "relation": "incomparable",
+   "var": "y",
+   "id": "e4-fuzz-0355"
+  },
+  {
+   "kind": "line",
+   "problem": "y^2 + 6y + 3 = 0",
+   "line": "(y + 3)^2 = 6",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0356"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6z - 5) = sqrt(5z - 8)",
+   "line": "6z - 5 = 5z - 8",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0357"
+  },
+  {
+   "kind": "line",
+   "problem": "(3m + 1)/(m + 4) = 3",
+   "line": "-11 = 0",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0358"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4z) = 3z - 2",
+   "line": "z = 5 or z = 6",
+   "relation": "incomparable",
+   "var": "z",
+   "id": "e4-fuzz-0359"
+  },
+  {
+   "kind": "line",
+   "problem": "(2y)/(y + 4) = 1",
+   "line": "y - 4 = 0",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0360"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w + 4) + sqrt(w + 11) = 2",
+   "line": "w = -2",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0361"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3x - 4) = -x + 5",
+   "line": "-x + 5 = 3x - 4",
+   "relation": "incomparable",
+   "var": "x",
+   "id": "e4-fuzz-0362"
+  },
+  {
+   "kind": "line",
+   "problem": "(4w - 3)/(w + 1) = 3",
+   "line": "4w - 3 = 3w + 3",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0363"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6x + 1) = sqrt(3x - 1)",
+   "line": "6x + 1 = 3x - 1",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0364"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(z + 8) + sqrt(z + 1) = 4",
+   "line": "8*sqrt(z + 1) = 9",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0365"
+  },
+  {
+   "kind": "line",
+   "problem": "u^2 - 7u + 12 = 0",
+   "line": "u = 4 or u = 3 or u = -3",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0366"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5m - 2) = -m + 5",
+   "line": "-m + 5 = 5m - 2",
+   "relation": "incomparable",
+   "var": "m",
+   "id": "e4-fuzz-0367"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4y + 9) = -2y + 3",
+   "line": "4y^2 - 16y + 0 = 0",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0368"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3x + 4) = 3x + 3",
+   "line": "x = (-15 + sqrt(45))/18",
+   "relation": "equal",
+   "var": "x",
+   "id": "e4-fuzz-0369"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5x - 6) = sqrt(2x - 6)",
+   "line": "x = 0",
+   "relation": "widening",
+   "var": "x",
+   "id": "e4-fuzz-0370"
+  },
+  {
+   "kind": "line",
+   "problem": "z^2 + 11z + 30 = 0",
+   "line": "z = -5 or z = -6 or z = 6",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0371"
+  },
+  {
+   "kind": "line",
+   "problem": "t^2 + 6t - 2 = 0",
+   "line": "t = (-6 \u00b1 sqrt(44))/2",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0372"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6m - 8) = sqrt(m - 7)",
+   "line": "5m - 1 = 0",
+   "relation": "widening",
+   "var": "m",
+   "id": "e4-fuzz-0373"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4u - 6) = sqrt(2u - 7)",
+   "line": "4u - 6 >= 0",
+   "relation": "widening",
+   "var": "u",
+   "id": "e4-fuzz-0374"
+  },
+  {
+   "kind": "line",
+   "problem": "2k^2 - 4k - 30 = 0",
+   "line": "k = -3",
+   "relation": "narrowing",
+   "var": "k",
+   "id": "e4-fuzz-0375"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4z + 3) = 2z + 5",
+   "line": "4z^2 + 16z + 22 = 0",
+   "relation": "equal",
+   "var": "z",
+   "id": "e4-fuzz-0376"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(k + 4) = 2k + 4",
+   "line": "k + 4 = 2k + 4",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0377"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3z + 3) = 2z - 1",
+   "line": "3z + 3 = (2z - 1)^2",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0378"
+  },
+  {
+   "kind": "line",
+   "problem": "(2y - 5)/(y + 2) = 1",
+   "line": "y - 7 = 0",
+   "relation": "equal",
+   "var": "y",
+   "id": "e4-fuzz-0379"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 8) + sqrt(t + 3) = 2",
+   "line": "t = -47/16",
+   "relation": "widening",
+   "var": "t",
+   "id": "e4-fuzz-0380"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(6m + 9) = sqrt(7m)",
+   "line": "-m + 9 = 0",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0381"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(u + 2) + sqrt(u + 6) = 4",
+   "line": "u + 2 = 16 - 8*sqrt(u + 6) + u + 6",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0382"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 8) = 2t",
+   "line": "t = -1 or t = 3",
+   "relation": "incomparable",
+   "var": "t",
+   "id": "e4-fuzz-0383"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t) + sqrt(t + 2) = 5",
+   "line": "t = 529/100",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0384"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5m + 6) = 3m + 2",
+   "line": "5m + 6 = 3m + 2",
+   "relation": "incomparable",
+   "var": "m",
+   "id": "e4-fuzz-0385"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w + 5) = -2w - 2",
+   "line": "w = (-7 \u00b1 sqrt(65))/8",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0386"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(w) + sqrt(w + 8) = 6",
+   "line": "12*sqrt(w + 8) = 44",
+   "relation": "equal",
+   "var": "w",
+   "id": "e4-fuzz-0387"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3w - 1) = -2w + 6",
+   "line": "w = (27 \u00b1 sqrt(137))/8",
+   "relation": "widening",
+   "var": "w",
+   "id": "e4-fuzz-0388"
+  },
+  {
+   "kind": "line",
+   "problem": "2y^2 - 12y + 0 = 0",
+   "line": "y = 6 or y = 0 or y = -1",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0389"
+  },
+  {
+   "kind": "line",
+   "problem": "m^2 + 0m - 3 = 0",
+   "line": "m = (0 + sqrt(12))/2",
+   "relation": "narrowing",
+   "var": "m",
+   "id": "e4-fuzz-0390"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(t + 4) = sqrt(6t)",
+   "line": "-5t + 4 = 0",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0391"
+  },
+  {
+   "kind": "line",
+   "problem": "m^2 - 4m + 4 = 0",
+   "line": "(m - 2)(m - 2) = 0",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0392"
+  },
+  {
+   "kind": "line",
+   "problem": "(2u)/(u + 5) = 1",
+   "line": "2u = 1*(u + 5)",
+   "relation": "equal",
+   "var": "u",
+   "id": "e4-fuzz-0393"
+  },
+  {
+   "kind": "line",
+   "problem": "2y^2 + 0y - 8 = 0",
+   "line": "y = 2 or y = -2 or y = 1",
+   "relation": "widening",
+   "var": "y",
+   "id": "e4-fuzz-0394"
+  },
+  {
+   "kind": "line",
+   "problem": "2k^2 - 10k + 12 = 0",
+   "line": "k = 2",
+   "relation": "narrowing",
+   "var": "k",
+   "id": "e4-fuzz-0395"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(3k - 2) = sqrt(4k - 6)",
+   "line": "k = -3",
+   "relation": "incomparable",
+   "var": "k",
+   "id": "e4-fuzz-0396"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(4t - 3) = 2t + 2",
+   "line": "4t^2 + 4t + 7 = 0",
+   "relation": "equal",
+   "var": "t",
+   "id": "e4-fuzz-0397"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(m + 3) + sqrt(m + 4) = 4",
+   "line": "m = 33/64",
+   "relation": "equal",
+   "var": "m",
+   "id": "e4-fuzz-0398"
+  },
+  {
+   "kind": "line",
+   "problem": "y^2 - 3y - 9 = 0",
+   "line": "y = (3 + sqrt(45))/2",
+   "relation": "narrowing",
+   "var": "y",
+   "id": "e4-fuzz-0399"
+  },
+  {
+   "kind": "line",
+   "problem": "sqrt(5z - 7) = sqrt(6z + 5)",
+   "line": "5z - 7 = 6z + 5",
+   "relation": "widening",
+   "var": "z",
+   "id": "e4-fuzz-0400"
+  },
+  {
+   "kind": "system",
+   "problem": "-2k - 4z = 8 and -2k + 3z = -20",
+   "line": "z = -4",
+   "status": "implied",
+   "vars": [
+    "k",
+    "z"
+   ],
+   "id": "e4-fuzz-0401"
+  },
+  {
+   "kind": "system",
+   "problem": "3m + 4w = 23 and -2m + 5w = 23",
+   "line": "-3w = -13",
+   "status": "false",
+   "vars": [
+    "m",
+    "w"
+   ],
+   "id": "e4-fuzz-0402"
+  },
+  {
+   "kind": "system",
+   "problem": "-3x - k = 11 and 5x - k - 2m = -33 and x + 3k - 4m = -1",
+   "line": "8x - 14m = -68",
+   "status": "implied",
+   "vars": [
+    "x",
+    "k",
+    "m"
+   ],
+   "id": "e4-fuzz-0403"
+  },
+  {
+   "kind": "system",
+   "problem": "-5z + 2k + 3x = -40 and 5z - k + x = 35 and -4z - 5k = 1",
+   "line": "k + 3x = -6",
+   "status": "false",
+   "vars": [
+    "z",
+    "k",
+    "x"
+   ],
+   "id": "e4-fuzz-0404"
+  },
+  {
+   "kind": "system",
+   "problem": "-k + 5u = -14 and -3k = -12",
+   "line": "k = 4 and u = -2",
+   "status": "implied",
+   "vars": [
+    "k",
+    "u"
+   ],
+   "id": "e4-fuzz-0405"
+  },
+  {
+   "kind": "system",
+   "problem": "3w - k = -5 and 4w + 2k = -20",
+   "line": "w = -3 and k = -4",
+   "status": "implied",
+   "vars": [
+    "w",
+    "k"
+   ],
+   "id": "e4-fuzz-0406"
+  },
+  {
+   "kind": "system",
+   "problem": "2m - 5y = -40 and 5m + 3y = -7",
+   "line": "11m + 19y = 59",
+   "status": "implied",
+   "vars": [
+    "m",
+    "y"
+   ],
+   "id": "e4-fuzz-0407"
+  },
+  {
+   "kind": "system",
+   "problem": "w + 3z = -14 and 4w - 4z - 3t = 55 and -4w - 2t = -6",
+   "line": "13w - 13z + 3t = 115",
+   "status": "implied",
+   "vars": [
+    "w",
+    "z",
+    "t"
+   ],
+   "id": "e4-fuzz-0408"
+  },
+  {
+   "kind": "system",
+   "problem": "-4k + 5u = 30 and 2u = 12",
+   "line": "k - 3u = -17",
+   "status": "false",
+   "vars": [
+    "k",
+    "u"
+   ],
+   "id": "e4-fuzz-0409"
+  },
+  {
+   "kind": "system",
+   "problem": "3m + 5u = -6 and -5m + 4u = 10",
+   "line": "m = -1 and u = 0",
+   "status": "false",
+   "vars": [
+    "m",
+    "u"
+   ],
+   "id": "e4-fuzz-0410"
+  },
+  {
+   "kind": "system",
+   "problem": "m - z = 4 and 2m - 3z = 14",
+   "line": "-3z = 20",
+   "status": "false",
+   "vars": [
+    "m",
+    "z"
+   ],
+   "id": "e4-fuzz-0411"
+  },
+  {
+   "kind": "system",
+   "problem": "5y - 2t - 5z = 14 and -4y - 4t - z = 15 and 2y - 3t - 4z = 16",
+   "line": "-7y + 5t + 9z = -30",
+   "status": "implied",
+   "vars": [
+    "y",
+    "t",
+    "z"
+   ],
+   "id": "e4-fuzz-0412"
+  },
+  {
+   "kind": "system",
+   "problem": "2t - 4w = -16 and 3t - w = -14",
+   "line": "w = 2",
+   "status": "implied",
+   "vars": [
+    "t",
+    "w"
+   ],
+   "id": "e4-fuzz-0413"
+  },
+  {
+   "kind": "system",
+   "problem": "-5k = 10 and 4w + 4k = 4",
+   "line": "w = 3 and k = -2",
+   "status": "implied",
+   "vars": [
+    "w",
+    "k"
+   ],
+   "id": "e4-fuzz-0414"
+  },
+  {
+   "kind": "system",
+   "problem": "5u - m = -24 and 5u + 4m = -54",
+   "line": "-5u - 4m = 54",
+   "status": "implied",
+   "vars": [
+    "u",
+    "m"
+   ],
+   "id": "e4-fuzz-0415"
+  },
+  {
+   "kind": "system",
+   "problem": "m + w - 3y = 4 and -2w - 2y = 12 and 5m - 5w + y = 54",
+   "line": "m = 6 and w = -5 and y = -1",
+   "status": "implied",
+   "vars": [
+    "m",
+    "w",
+    "y"
+   ],
+   "id": "e4-fuzz-0416"
+  },
+  {
+   "kind": "system",
+   "problem": "3w - 5m + 3z = 37 and w + 4m + 3z = 11 and 5m - 2z = -20",
+   "line": "w = 5 and m = -2 and z = 5",
+   "status": "false",
+   "vars": [
+    "w",
+    "m",
+    "z"
+   ],
+   "id": "e4-fuzz-0417"
+  },
+  {
+   "kind": "system",
+   "problem": "-3k - 4t = -9 and -5k + 2t = 37",
+   "line": "-16k - 4t = 56",
+   "status": "implied",
+   "vars": [
+    "k",
+    "t"
+   ],
+   "id": "e4-fuzz-0418"
+  },
+  {
+   "kind": "system",
+   "problem": "4z = 8 and -2z + 2y = -14",
+   "line": "z = 3 and y = -5",
+   "status": "false",
+   "vars": [
+    "z",
+    "y"
+   ],
+   "id": "e4-fuzz-0419"
+  },
+  {
+   "kind": "system",
+   "problem": "-2y + 5w = -2 and -3y - 5w = -3",
+   "line": "y = 1 and w = 0",
+   "status": "implied",
+   "vars": [
+    "y",
+    "w"
+   ],
+   "id": "e4-fuzz-0420"
+  },
+  {
+   "kind": "system",
+   "problem": "3u + 3x - t = 4 and -5u + 2x + 5t = -10 and u + 2x - 2t = 3",
+   "line": "u = 1",
+   "status": "implied",
+   "vars": [
+    "u",
+    "x",
+    "t"
+   ],
+   "id": "e4-fuzz-0421"
+  },
+  {
+   "kind": "system",
+   "problem": "-2x - 4u - 3y = 8 and -x + u - y = 5 and -5x + 4u + 4y = -12",
+   "line": "x = 0 and u = 1 and y = -4",
+   "status": "implied",
+   "vars": [
+    "x",
+    "u",
+    "y"
+   ],
+   "id": "e4-fuzz-0422"
+  },
+  {
+   "kind": "system",
+   "problem": "-4y + m = 26 and 5y - 3m = -43",
+   "line": "y = -5 and m = 6",
+   "status": "implied",
+   "vars": [
+    "y",
+    "m"
+   ],
+   "id": "e4-fuzz-0423"
+  },
+  {
+   "kind": "system",
+   "problem": "k + 5y = -27 and -5k - 5y = 35",
+   "line": "2k + y = -8",
+   "status": "false",
+   "vars": [
+    "k",
+    "y"
+   ],
+   "id": "e4-fuzz-0424"
+  },
+  {
+   "kind": "system",
+   "problem": "2k = -10 and -4k = 20",
+   "line": "-12k = 60",
+   "status": "implied",
+   "vars": [
+    "k",
+    "m"
+   ],
+   "id": "e4-fuzz-0425"
+  },
+  {
+   "kind": "system",
+   "problem": "4t - 2x = -24 and -3t - 3x = 0",
+   "line": "-3t + 15x = 72",
+   "status": "implied",
+   "vars": [
+    "t",
+    "x"
+   ],
+   "id": "e4-fuzz-0426"
+  },
+  {
+   "kind": "system",
+   "problem": "5u + 2x = 2 and -2u - 2x = -2",
+   "line": "u = 0 and x = 1",
+   "status": "implied",
+   "vars": [
+    "u",
+    "x"
+   ],
+   "id": "e4-fuzz-0427"
+  },
+  {
+   "kind": "system",
+   "problem": "-m - 5t + 4z = -13 and 5m - 3t - 2z = -37 and 5m - 4t - 5z = -37",
+   "line": "m = -5 and t = 3 and z = -1",
+   "status": "false",
+   "vars": [
+    "m",
+    "t",
+    "z"
+   ],
+   "id": "e4-fuzz-0428"
+  },
+  {
+   "kind": "system",
+   "problem": "-t + 3m + 5u = -14 and -t - 3m = -20 and -3t - u = 0",
+   "line": "14t + 3m - 7u = 88",
+   "status": "implied",
+   "vars": [
+    "t",
+    "m",
+    "u"
+   ],
+   "id": "e4-fuzz-0429"
+  },
+  {
+   "kind": "system",
+   "problem": "-3t - 5z - 3u = 2 and 4t + 5z + 3u = 0 and 2t + 3z + 2u = 0",
+   "line": "3t - z + 2u = 17",
+   "status": "false",
+   "vars": [
+    "t",
+    "z",
+    "u"
+   ],
+   "id": "e4-fuzz-0430"
+  },
+  {
+   "kind": "system",
+   "problem": "3u + 5y = 10 and -4u - y = -19",
+   "line": "y = 1",
+   "status": "false",
+   "vars": [
+    "u",
+    "y"
+   ],
+   "id": "e4-fuzz-0431"
+  },
+  {
+   "kind": "system",
+   "problem": "-3y - 2w = 22 and y - 5w = 21",
+   "line": "-3w = 14",
+   "status": "false",
+   "vars": [
+    "y",
+    "w"
+   ],
+   "id": "e4-fuzz-0432"
+  },
+  {
+   "kind": "system",
+   "problem": "-3u - 3m + 5z = -17 and 5u - 3m + 4z = -53 and -3u - 5m + 3z = -17",
+   "line": "6u + 4m - 12z = 34",
+   "status": "implied",
+   "vars": [
+    "u",
+    "m",
+    "z"
+   ],
+   "id": "e4-fuzz-0433"
+  },
+  {
+   "kind": "system",
+   "problem": "3y - 2m = -26 and -4y + 2m = 32",
+   "line": "y = -5 and m = 4",
+   "status": "false",
+   "vars": [
+    "y",
+    "m"
+   ],
+   "id": "e4-fuzz-0434"
+  },
+  {
+   "kind": "system",
+   "problem": "-4k - 4x = 36 and 2k - 5x = 10",
+   "line": "k = -6 and x = -4",
+   "status": "false",
+   "vars": [
+    "k",
+    "x"
+   ],
+   "id": "e4-fuzz-0435"
+  },
+  {
+   "kind": "system",
+   "problem": "-3u - 5w = 22 and -3u - 4w = 17",
+   "line": "9u + 13w = -56",
+   "status": "implied",
+   "vars": [
+    "u",
+    "w"
+   ],
+   "id": "e4-fuzz-0436"
+  },
+  {
+   "kind": "system",
+   "problem": "4u - 5m = -20 and -5u = 25",
+   "line": "u = -4 and m = 0",
+   "status": "false",
+   "vars": [
+    "u",
+    "m"
+   ],
+   "id": "e4-fuzz-0437"
+  },
+  {
+   "kind": "system",
+   "problem": "-4k - 5t = 10 and -k - 4t = 19",
+   "line": "-k - 2t = 5",
+   "status": "false",
+   "vars": [
+    "k",
+    "t"
+   ],
+   "id": "e4-fuzz-0438"
+  },
+  {
+   "kind": "system",
+   "problem": "k + w = 2 and -3k - 5w = -14",
+   "line": "-2k - 2w = -6",
+   "status": "false",
+   "vars": [
+    "k",
+    "w"
+   ],
+   "id": "e4-fuzz-0439"
+  },
+  {
+   "kind": "system",
+   "problem": "4u - 2x = -12 and 3u + x = 1",
+   "line": "10u = -10",
+   "status": "implied",
+   "vars": [
+    "u",
+    "x"
+   ],
+   "id": "e4-fuzz-0440"
+  },
+  {
+   "kind": "system",
+   "problem": "-5u - 5k = -25 and u - 2k = -13",
+   "line": "u = -1 and k = 6",
+   "status": "implied",
+   "vars": [
+    "u",
+    "k"
+   ],
+   "id": "e4-fuzz-0441"
+  },
+  {
+   "kind": "system",
+   "problem": "3u - 3z + 2w = 37 and 3u - z - 5w = -8 and 5u - 3z - 5w = 10",
+   "line": "u = 4 and z = -5 and w = 5",
+   "status": "implied",
+   "vars": [
+    "u",
+    "z",
+    "w"
+   ],
+   "id": "e4-fuzz-0442"
+  },
+  {
+   "kind": "system",
+   "problem": "m + 2x + t = 4 and -5m - 4x + 2t = -11 and 3m + 3x + 4t = 21",
+   "line": "m = 5 and x = -2 and t = 3",
+   "status": "implied",
+   "vars": [
+    "m",
+    "x",
+    "t"
+   ],
+   "id": "e4-fuzz-0443"
+  },
+  {
+   "kind": "system",
+   "problem": "-3k - 2x = -19 and -k = -3",
+   "line": "k = 4 and x = 5",
+   "status": "false",
+   "vars": [
+    "k",
+    "x"
+   ],
+   "id": "e4-fuzz-0444"
+  },
+  {
+   "kind": "system",
+   "problem": "-5t + 3u = -15 and 5t + 4u = -20",
+   "line": "3u = -17",
+   "status": "false",
+   "vars": [
+    "t",
+    "u"
+   ],
+   "id": "e4-fuzz-0445"
+  },
+  {
+   "kind": "system",
+   "problem": "z + 5k - 5u = 26 and 2z + 4k = 22 and -4z + 3k + u = 11",
+   "line": "z = 1 and k = 5 and u = 0",
+   "status": "implied",
+   "vars": [
+    "z",
+    "k",
+    "u"
+   ],
+   "id": "e4-fuzz-0446"
+  },
+  {
+   "kind": "system",
+   "problem": "2u - 3t - 4z = -34 and 4u - 3t + 5z = -4 and u - 4t + 5z = 1",
+   "line": "u = -3 and t = 4 and z = 4",
+   "status": "implied",
+   "vars": [
+    "u",
+    "t",
+    "z"
+   ],
+   "id": "e4-fuzz-0447"
+  },
+  {
+   "kind": "system",
+   "problem": "3z = 12 and 5z = 20",
+   "line": "x = -4 and z = 4",
+   "status": "implied",
+   "vars": [
+    "x",
+    "z"
+   ],
+   "id": "e4-fuzz-0448"
+  },
+  {
+   "kind": "system",
+   "problem": "2x + z - 5m = -7 and -5x + 3z - 4m = -32 and -x - 4z - 2m = -25",
+   "line": "6x + 3z - 15m = -21",
+   "status": "implied",
+   "vars": [
+    "x",
+    "z",
+    "m"
+   ],
+   "id": "e4-fuzz-0449"
+  },
+  {
+   "kind": "system",
+   "problem": "x - 4t - m = 0 and 5x + t = -30 and -x - 4t - 5m = 36",
+   "line": "-16x - 23t - 17m = 198",
+   "status": "implied",
+   "vars": [
+    "x",
+    "t",
+    "m"
+   ],
+   "id": "e4-fuzz-0450"
+  },
+  {
+   "kind": "system",
+   "problem": "-4w + 4x + 3z = -18 and 2x + 3z = 6 and 2w + 4x + 4z = 20",
+   "line": "w = 6 and x = 0 and z = 2",
+   "status": "implied",
+   "vars": [
+    "w",
+    "x",
+    "z"
+   ],
+   "id": "e4-fuzz-0451"
+  },
+  {
+   "kind": "system",
+   "problem": "m - 3w - 4k = -19 and m + 3w + 5k = 17 and -3m - 2w + 2k = -9",
+   "line": "m = -1 and w = 6 and k = 0",
+   "status": "implied",
+   "vars": [
+    "m",
+    "w",
+    "k"
+   ],
+   "id": "e4-fuzz-0452"
+  },
+  {
+   "kind": "system",
+   "problem": "4t + 5z = 34 and -2t - 4z = -26",
+   "line": "z = 7",
+   "status": "false",
+   "vars": [
+    "t",
+    "z"
+   ],
+   "id": "e4-fuzz-0453"
+  },
+  {
+   "kind": "system",
+   "problem": "-2w - 2y = -12 and -2w - 3y = -14",
+   "line": "2w - 4y = 1",
+   "status": "false",
+   "vars": [
+    "w",
+    "y"
+   ],
+   "id": "e4-fuzz-0454"
+  },
+  {
+   "kind": "system",
+   "problem": "-4m - 2t + 5z = -14 and 5m + 2t = 20 and 3m + 5t = -7",
+   "line": "m = 6 and t = -5 and z = 0",
+   "status": "implied",
+   "vars": [
+    "m",
+    "t",
+    "z"
+   ],
+   "id": "e4-fuzz-0455"
+  },
+  {
+   "kind": "system",
+   "problem": "4m - u = -4 and 5m + 5u = -30",
+   "line": "-3m + 4u = -12",
+   "status": "false",
+   "vars": [
+    "m",
+    "u"
+   ],
+   "id": "e4-fuzz-0456"
+  },
+  {
+   "kind": "system",
+   "problem": "5w + 4y = -33 and -3w + y = 13",
+   "line": "w = -5",
+   "status": "implied",
+   "vars": [
+    "w",
+    "y"
+   ],
+   "id": "e4-fuzz-0457"
+  },
+  {
+   "kind": "system",
+   "problem": "4y - 4m = 20 and -y + 2m = -7",
+   "line": "-6y + 4m = -26",
+   "status": "implied",
+   "vars": [
+    "y",
+    "m"
+   ],
+   "id": "e4-fuzz-0458"
+  },
+  {
+   "kind": "system",
+   "problem": "-3z - x = 9 and -4z + 3x = 38",
+   "line": "x = 5",
+   "status": "false",
+   "vars": [
+    "z",
+    "x"
+   ],
+   "id": "e4-fuzz-0459"
+  },
+  {
+   "kind": "system",
+   "problem": "-3t + 3z = -6 and -4t = -4",
+   "line": "t = 1 and z = -1",
+   "status": "implied",
+   "vars": [
+    "t",
+    "z"
+   ],
+   "id": "e4-fuzz-0460"
+  },
+  {
+   "kind": "system",
+   "problem": "2z + m = -15 and 2z - 5m = 15",
+   "line": "10z - 13m = 15",
+   "status": "implied",
+   "vars": [
+    "z",
+    "m"
+   ],
+   "id": "e4-fuzz-0461"
+  },
+  {
+   "kind": "system",
+   "problem": "-u - 4t = -9 and -5t = -15",
+   "line": "u = -2 and t = 3",
+   "status": "false",
+   "vars": [
+    "u",
+    "t"
+   ],
+   "id": "e4-fuzz-0462"
+  },
+  {
+   "kind": "system",
+   "problem": "-4w - y = 20 and 3w - 4y = -15",
+   "line": "y = 1",
+   "status": "false",
+   "vars": [
+    "w",
+    "y"
+   ],
+   "id": "e4-fuzz-0463"
+  },
+  {
+   "kind": "system",
+   "problem": "3u - 2m = 2 and -3u - 4m + w = 9 and 5u - 2m + 5w = 27",
+   "line": "u + 3m + 2w = 5",
+   "status": "false",
+   "vars": [
+    "u",
+    "m",
+    "w"
+   ],
+   "id": "e4-fuzz-0464"
+  },
+  {
+   "kind": "system",
+   "problem": "5t - 4z - y = 37 and -4t - 2z - 5y = 15 and -4t - 4z + 4y = -24",
+   "line": "3t + 4z + 4y = -19",
+   "status": "false",
+   "vars": [
+    "t",
+    "z",
+    "y"
+   ],
+   "id": "e4-fuzz-0465"
+  },
+  {
+   "kind": "system",
+   "problem": "-2m + 3y - 4x = -26 and -2m + 2y + 5x = 26 and 4m - y + 5x = 44",
+   "line": "m = 4 and y = 2 and x = 6",
+   "status": "implied",
+   "vars": [
+    "m",
+    "y",
+    "x"
+   ],
+   "id": "e4-fuzz-0466"
+  },
+  {
+   "kind": "system",
+   "problem": "2x - 2m = 4 and 4m = 16",
+   "line": "m = 4",
+   "status": "implied",
+   "vars": [
+    "x",
+    "m"
+   ],
+   "id": "e4-fuzz-0467"
+  },
+  {
+   "kind": "system",
+   "problem": "-z - 3m = 11 and -3z - 3m = 21",
+   "line": "5z + 3m = -31",
+   "status": "implied",
+   "vars": [
+    "z",
+    "m"
+   ],
+   "id": "e4-fuzz-0468"
+  },
+  {
+   "kind": "system",
+   "problem": "k = -2 and -u - 4x + k = 28 and 4u + x - 2k = -26",
+   "line": "u = -6 and x = -6 and k = -2",
+   "status": "implied",
+   "vars": [
+    "u",
+    "x",
+    "k"
+   ],
+   "id": "e4-fuzz-0469"
+  },
+  {
+   "kind": "system",
+   "problem": "3u + 5x = -14 and 2x = -2",
+   "line": "-6u - 8x = 26",
+   "status": "implied",
+   "vars": [
+    "u",
+    "x"
+   ],
+   "id": "e4-fuzz-0470"
+  },
+  {
+   "kind": "system",
+   "problem": "3z + y = 16 and -z - 4y = -9",
+   "line": "-9z - 14y = -59",
+   "status": "implied",
+   "vars": [
+    "z",
+    "y"
+   ],
+   "id": "e4-fuzz-0471"
+  },
+  {
+   "kind": "system",
+   "problem": "-3k - 5x = 7 and -2k + 3x = -27",
+   "line": "k = 6 and x = -5",
+   "status": "implied",
+   "vars": [
+    "k",
+    "x"
+   ],
+   "id": "e4-fuzz-0472"
+  },
+  {
+   "kind": "system",
+   "problem": "w + 4m = 2 and -2w - 4m = 0",
+   "line": "4w - m = -11",
+   "status": "false",
+   "vars": [
+    "w",
+    "m"
+   ],
+   "id": "e4-fuzz-0473"
+  },
+  {
+   "kind": "system",
+   "problem": "-2m + 4y = 12 and 5m + y = -19",
+   "line": "m = -3 and y = 1",
+   "status": "false",
+   "vars": [
+    "m",
+    "y"
+   ],
+   "id": "e4-fuzz-0474"
+  },
+  {
+   "kind": "system",
+   "problem": "3t + 3y = -21 and 4t - y = -23",
+   "line": "t = -6 and y = -1",
+   "status": "implied",
+   "vars": [
+    "t",
+    "y"
+   ],
+   "id": "e4-fuzz-0475"
+  },
+  {
+   "kind": "system",
+   "problem": "4k + 3u = -10 and -t + 2k - 4u = 28 and 3t + 4k - 5u = 38",
+   "line": "-14k + 14u = -112",
+   "status": "implied",
+   "vars": [
+    "t",
+    "k",
+    "u"
+   ],
+   "id": "e4-fuzz-0476"
+  },
+  {
+   "kind": "system",
+   "problem": "4m - x = -9 and 3m + x = 2",
+   "line": "m = -1 and x = 5",
+   "status": "implied",
+   "vars": [
+    "m",
+    "x"
+   ],
+   "id": "e4-fuzz-0477"
+  },
+  {
+   "kind": "system",
+   "problem": "-2t + 3w + 4k = 16 and -5t - 4w + 5k = 38 and 3t - 2w - 3k = -14",
+   "line": "-13t - 11w + 7k = 70",
+   "status": "implied",
+   "vars": [
+    "t",
+    "w",
+    "k"
+   ],
+   "id": "e4-fuzz-0478"
+  },
+  {
+   "kind": "system",
+   "problem": "m + 4y = 6 and 5y = 15",
+   "line": "m - 2y = -9",
+   "status": "false",
+   "vars": [
+    "m",
+    "y"
+   ],
+   "id": "e4-fuzz-0479"
+  },
+  {
+   "kind": "system",
+   "problem": "-w - x = -2 and w + 4x = -7",
+   "line": "w = 5",
+   "status": "implied",
+   "vars": [
+    "w",
+    "x"
+   ],
+   "id": "e4-fuzz-0480"
+  },
+  {
+   "kind": "system",
+   "problem": "4z = -24 and -z - k = 3",
+   "line": "z = -6 and k = 3",
+   "status": "implied",
+   "vars": [
+    "z",
+    "k"
+   ],
+   "id": "e4-fuzz-0481"
+  },
+  {
+   "kind": "system",
+   "problem": "4z + t = 15 and -3t = 3",
+   "line": "z = 3",
+   "status": "false",
+   "vars": [
+    "z",
+    "t"
+   ],
+   "id": "e4-fuzz-0482"
+  },
+  {
+   "kind": "system",
+   "problem": "-5t + x + 3m = -28 and 4t - 2x + 3m = 35 and 3t + x - 3m = 6",
+   "line": "26t - 4x - 3m = 151",
+   "status": "implied",
+   "vars": [
+    "t",
+    "x",
+    "m"
+   ],
+   "id": "e4-fuzz-0483"
+  },
+  {
+   "kind": "system",
+   "problem": "-2w - 2x = -10 and w - 4x = -5",
+   "line": "5w = 15",
+   "status": "implied",
+   "vars": [
+    "w",
+    "x"
+   ],
+   "id": "e4-fuzz-0484"
+  },
+  {
+   "kind": "system",
+   "problem": "-3x - 5k = 4 and -x - k = 0 and 2x - 4u + 4k = 16",
+   "line": "x = 2 and u = -5 and k = -2",
+   "status": "implied",
+   "vars": [
+    "x",
+    "u",
+    "k"
+   ],
+   "id": "e4-fuzz-0485"
+  },
+  {
+   "kind": "system",
+   "problem": "-x - 2y = 15 and x = -5",
+   "line": "y = -4",
+   "status": "false",
+   "vars": [
+    "x",
+    "y"
+   ],
+   "id": "e4-fuzz-0486"
+  },
+  {
+   "kind": "system",
+   "problem": "-2m = 2 and -4k - 3m = -17",
+   "line": "4k - 3m = 23",
+   "status": "implied",
+   "vars": [
+    "k",
+    "m"
+   ],
+   "id": "e4-fuzz-0487"
+  },
+  {
+   "kind": "system",
+   "problem": "2t - 2u = -2 and -5t + 3u = 11",
+   "line": "t = -4 and u = -3",
+   "status": "implied",
+   "vars": [
+    "t",
+    "u"
+   ],
+   "id": "e4-fuzz-0488"
+  },
+  {
+   "kind": "system",
+   "problem": "-2m - w = -2 and 3m = 6",
+   "line": "m = 1 and w = -2",
+   "status": "false",
+   "vars": [
+    "m",
+    "w"
+   ],
+   "id": "e4-fuzz-0489"
+  },
+  {
+   "kind": "system",
+   "problem": "w - 2z = -17 and 3w + 2z = -3",
+   "line": "w = -5 and z = 6",
+   "status": "implied",
+   "vars": [
+    "w",
+    "z"
+   ],
+   "id": "e4-fuzz-0490"
+  },
+  {
+   "kind": "system",
+   "problem": "-2k = 8 and -5k - 2x = 24",
+   "line": "-19k - 6x = 88",
+   "status": "implied",
+   "vars": [
+    "k",
+    "x"
+   ],
+   "id": "e4-fuzz-0491"
+  },
+  {
+   "kind": "system",
+   "problem": "-u = 2 and 2u - 4k = 0",
+   "line": "u = 0",
+   "status": "false",
+   "vars": [
+    "u",
+    "k"
+   ],
+   "id": "e4-fuzz-0492"
+  },
+  {
+   "kind": "system",
+   "problem": "4k - 3t = -30 and 3k + 2t = 3",
+   "line": "k = -3",
+   "status": "implied",
+   "vars": [
+    "k",
+    "t"
+   ],
+   "id": "e4-fuzz-0493"
+  },
+  {
+   "kind": "system",
+   "problem": "5y + m = 23 and 3y = 15",
+   "line": "y - m = 7",
+   "status": "implied",
+   "vars": [
+    "y",
+    "m"
+   ],
+   "id": "e4-fuzz-0494"
+  },
+  {
+   "kind": "system",
+   "problem": "-2t - 5z = 27 and -5t - 4z = 42",
+   "line": "11t + 19z = -123",
+   "status": "implied",
+   "vars": [
+    "t",
+    "z"
+   ],
+   "id": "e4-fuzz-0495"
+  },
+  {
+   "kind": "system",
+   "problem": "k = 3 and -3k + x = -14",
+   "line": "-6k + 3x = -33",
+   "status": "implied",
+   "vars": [
+    "k",
+    "x"
+   ],
+   "id": "e4-fuzz-0496"
+  },
+  {
+   "kind": "system",
+   "problem": "-4k + 4m = 8 and 5k + 4m = -10",
+   "line": "k = -2 and m = 0",
+   "status": "implied",
+   "vars": [
+    "k",
+    "m"
+   ],
+   "id": "e4-fuzz-0497"
+  },
+  {
+   "kind": "system",
+   "problem": "-4x = 12 and -2t - 5x = 27",
+   "line": "-2t = 14",
+   "status": "false",
+   "vars": [
+    "t",
+    "x"
+   ],
+   "id": "e4-fuzz-0498"
+  },
+  {
+   "kind": "system",
+   "problem": "2m - 5k - w = -28 and -4m = 24 and -5m + 5k - 5w = 10",
+   "line": "-2m - k - 4w = -12",
+   "status": "false",
+   "vars": [
+    "m",
+    "k",
+    "w"
+   ],
+   "id": "e4-fuzz-0499"
+  },
+  {
+   "kind": "system",
+   "problem": "4u + w = -15 and u - 3w = -20",
+   "line": "-4u - w = 15",
+   "status": "implied",
+   "vars": [
+    "u",
+    "w"
+   ],
+   "id": "e4-fuzz-0500"
+  }
+ ]
+}

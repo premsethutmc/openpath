@@ -1,0 +1,895 @@
+[
+ {
+  "id": "H2-domain-change-002",
+  "cat": "domain-change",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "multiplied both sides by (x+5) (not an original denominator), then accepted the introduced root [DC1]"
+ },
+ {
+  "id": "H2-domain-change-004",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped; the previous line has x = 70; this line has x = -6 or x = 70; it gained x = -6",
+  "notes": "over (x+6) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-005",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped; the previous line has x = 0; this line has x = 0 or x = 12; it gained x = 12",
+  "notes": "over (x-12) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-006",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "wrote both sides over (x+3) [DC3]"
+ },
+ {
+  "id": "H2-domain-change-008",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 4,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "over (x-6) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-009",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped; the previous line has x = -1/2; this line has x = -9 or x = -1/2; it gained x = -9",
+  "notes": "over (x+9) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-013",
+  "cat": "domain-change",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "rational equation multiplied by (x+6) (new factor) [DC5]"
+ },
+ {
+  "id": "H2-domain-change-014",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped; the previous line has x = 5/4; this line has x = 5/4 or x = 6; it gained x = 6",
+  "notes": "over (x-6) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-016",
+  "cat": "domain-change",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "rational equation multiplied by (x+8) (new factor) [DC5]"
+ },
+ {
+  "id": "H2-domain-change-017",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped; the previous line has x = -1/16; this line has x = -13 or x = -1/16; it gained x = -13",
+  "notes": "over (x+13) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-021",
+  "cat": "domain-change",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "multiplied both sides by (x+1) (not an original denominator), then accepted the introduced root [DC1]"
+ },
+ {
+  "id": "H2-domain-change-024",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 3,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "multiplied both sides by (x-10) (not an original denominator), then discarded it [DC1]"
+ },
+ {
+  "id": "H2-domain-change-025",
+  "cat": "domain-change",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "rational equation multiplied by (x-8) (new factor) [DC5]"
+ },
+ {
+  "id": "H2-domain-change-030",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped; the previous line has x = -214/307; this line has x = -11 or x = -214/307; it gained x = -11",
+  "notes": "over (x+11) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-031",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped; the previous line has x = 1/12; this line has x = -9 or x = 1/12; it gained x = -9",
+  "notes": "over (x+9) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-034",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped; the previous line has x = -4/29; this line has x = -11 or x = -4/29; it gained x = -11",
+  "notes": "over (x+11) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-035",
+  "cat": "domain-change",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "multiplied both sides by (x+5) (not an original denominator), then accepted the introduced root [DC1]"
+ },
+ {
+  "id": "H2-domain-change-036",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped",
+  "notes": "wrote both sides over (x+3) [DC3]"
+ },
+ {
+  "id": "H2-domain-change-037",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "wrote both sides over (x+14) [DC3]"
+ },
+ {
+  "id": "H2-domain-change-038",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped",
+  "notes": "wrote both sides over (x+7) [DC3]"
+ },
+ {
+  "id": "H2-domain-change-039",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped; the previous line has x = -32; this line has x = -32 or x = -3; it gained x = -3",
+  "notes": "over (x+3) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-040",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped; the previous line has x = 4/9; this line has x = 4/9 or x = 7; it gained x = 7",
+  "notes": "over (x-7) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-042",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped; the previous line has x = 9; this line has x = 9 or x = 14; it gained x = 14",
+  "notes": "over (x-14) then un-divided (domain grows back) [DC8]"
+ },
+ {
+  "id": "H2-domain-change-043",
+  "cat": "domain-change",
+  "exp": "valid-complete",
+  "got": "invalid",
+  "at": 2,
+  "reasons": [
+   "restriction-dropped"
+  ],
+  "note": "not an equivalent step: a restriction recorded earlier was dropped",
+  "notes": "wrote both sides over (x+12) [DC3]"
+ },
+ {
+  "id": "H2-extraneous-root-002",
+  "cat": "extraneous-root",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "only candidate 7 is excluded; true answer is no solution [EX2-reject]"
+ },
+ {
+  "id": "H2-extraneous-root-008",
+  "cat": "extraneous-root",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "only candidate -12 is excluded; true answer is no solution [EX2-accept]"
+ },
+ {
+  "id": "H2-extraneous-root-015",
+  "cat": "extraneous-root",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "quadratic after clearing; -1 is an extraneous root [EX1-accept]"
+ },
+ {
+  "id": "H2-extraneous-root-021",
+  "cat": "extraneous-root",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "quadratic after clearing; -8 is an extraneous root [EX1-reject]"
+ },
+ {
+  "id": "H2-extraneous-root-025",
+  "cat": "extraneous-root",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "only candidate -11 is excluded; true answer is no solution [EX2-accept]"
+ },
+ {
+  "id": "H2-extraneous-root-027",
+  "cat": "extraneous-root",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "quadratic after clearing; 8 is an extraneous root [EX1-reject]"
+ },
+ {
+  "id": "H2-extraneous-root-031",
+  "cat": "extraneous-root",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "quadratic after clearing; 6 is an extraneous root [EX1-reject]"
+ },
+ {
+  "id": "H2-extraneous-root-033",
+  "cat": "extraneous-root",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "only candidate 2 is excluded; true answer is no solution [EX2-accept]"
+ },
+ {
+  "id": "H2-extraneous-root-040",
+  "cat": "extraneous-root",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "only candidate 8 is excluded; true answer is no solution [EX2-reject]"
+ },
+ {
+  "id": "H2-cancellation-009",
+  "cat": "cancellation",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "cancelled the common factor (x-11); legitimate cancellation [CA2]"
+ },
+ {
+  "id": "H2-cancellation-013",
+  "cat": "cancellation",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "cancelled the x term between numerator and denominator sums [CA1ab]"
+ },
+ {
+  "id": "H2-cancellation-015",
+  "cat": "cancellation",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "cancelled the common factor (x--5); legitimate cancellation [CA2]"
+ },
+ {
+  "id": "H2-cancellation-032",
+  "cat": "cancellation",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "cancelled the common factor (x--4); solution equals the cancelled value [CA2-trap]"
+ },
+ {
+  "id": "H2-cancellation-034",
+  "cat": "cancellation",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "cancelled the common factor (x--5); solution equals the cancelled value [CA2-trap]"
+ },
+ {
+  "id": "H2-cancellation-036",
+  "cat": "cancellation",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "cancelled the x term between numerator and denominator sums [CA1ab]"
+ },
+ {
+  "id": "H2-cancellation-039",
+  "cat": "cancellation",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "cancelled the x term between numerator and denominator sums [CA1ab]"
+ },
+ {
+  "id": "H2-cancellation-043",
+  "cat": "cancellation",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "cancelled the x term between numerator and denominator sums [CA1a]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-001",
+  "cat": "multiplication-by-zero",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "multiplied by (x - r) where r is the solution (set unchanged) [MZ2]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-006",
+  "cat": "multiplication-by-zero",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "correct, then multiplied by (x+s), then substituted the root making a factor 0 [MZ3]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-011",
+  "cat": "multiplication-by-zero",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "multiplied by (x - r), r a valid root of the rational equation [MZ7]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-012",
+  "cat": "multiplication-by-zero",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "correct, then multiplied by (x+s), then substituted the root making a factor 0 [MZ3]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-017",
+  "cat": "multiplication-by-zero",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "multiplied both sides by 0 (0) [MZ1]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-018",
+  "cat": "multiplication-by-zero",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "multiplied by (x-a) with a an original excluded value (equivalent) [MZ5]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-020",
+  "cat": "multiplication-by-zero",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "multiplied by (x-a) with a an original excluded value (equivalent) [MZ5]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-030",
+  "cat": "multiplication-by-zero",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "multiplied by (x-a) with a an original excluded value (equivalent) [MZ5]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-031",
+  "cat": "multiplication-by-zero",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "multiplied by (x - r), r a valid root of the rational equation [MZ7]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-032",
+  "cat": "multiplication-by-zero",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "multiplied both sides by 0 ((7-7)) [MZ1]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-038",
+  "cat": "multiplication-by-zero",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "multiplied both sides by 0 (0) [MZ1]"
+ },
+ {
+  "id": "H2-multiplication-by-zero-040",
+  "cat": "multiplication-by-zero",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "multiplied by (x - r) where r is the solution (set unchanged) [MZ2]"
+ },
+ {
+  "id": "H2-invalid-division-038",
+  "cat": "invalid-division",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "divided both sides by x, losing root 0 [ID3]"
+ },
+ {
+  "id": "H2-rational-expressions-005",
+  "cat": "rational-expressions",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "s1forget error (conseq tail) [RE2]"
+ },
+ {
+  "id": "H2-rational-expressions-013",
+  "cat": "rational-expressions",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "s1sign error (conseq tail) [RE2]"
+ },
+ {
+  "id": "H2-rational-expressions-014",
+  "cat": "rational-expressions",
+  "exp": "valid-incomplete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "correct working of a rational equation (stops after the cleared line, no claim) [RE1]"
+ },
+ {
+  "id": "H2-rational-expressions-023",
+  "cat": "rational-expressions",
+  "exp": "invalid",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "s2sign error (conseq tail) [RE2]"
+ },
+ {
+  "id": "H2-rational-expressions-041",
+  "cat": "rational-expressions",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "correct working of a rational equation [RE1]"
+ },
+ {
+  "id": "H2-rational-expressions-044",
+  "cat": "rational-expressions",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "correct working of a rational equation [RE1]"
+ },
+ {
+  "id": "H2-alternative-paths-005",
+  "cat": "alternative-paths",
+  "exp": "valid-incomplete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "random walk of equivalence-preserving operations [AP1]"
+ },
+ {
+  "id": "H2-alternative-paths-012",
+  "cat": "alternative-paths",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "random walk of equivalence-preserving operations [AP1]"
+ },
+ {
+  "id": "H2-alternative-paths-014",
+  "cat": "alternative-paths",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "random walk of equivalence-preserving operations [AP1]"
+ },
+ {
+  "id": "H2-alternative-paths-015",
+  "cat": "alternative-paths",
+  "exp": "valid-incomplete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "correct working of a rational equation (stops after the expanded line, no claim) [AP2]"
+ },
+ {
+  "id": "H2-alternative-paths-017",
+  "cat": "alternative-paths",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "random walk of equivalence-preserving operations [AP1]"
+ },
+ {
+  "id": "H2-alternative-paths-028",
+  "cat": "alternative-paths",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "random walk of equivalence-preserving operations [AP1]"
+ },
+ {
+  "id": "H2-alternative-paths-032",
+  "cat": "alternative-paths",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "random walk of equivalence-preserving operations [AP1]"
+ },
+ {
+  "id": "H2-alternative-paths-033",
+  "cat": "alternative-paths",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "random walk of equivalence-preserving operations [AP1]"
+ },
+ {
+  "id": "H2-alternative-paths-042",
+  "cat": "alternative-paths",
+  "exp": "valid-incomplete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "random walk of equivalence-preserving operations [AP1]"
+ },
+ {
+  "id": "H2-alternative-paths-044",
+  "cat": "alternative-paths",
+  "exp": "valid-incomplete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "random walk of equivalence-preserving operations [AP1]"
+ },
+ {
+  "id": "H2-correct-controls-004",
+  "cat": "correct-controls",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "standard linear solution [CC1]"
+ },
+ {
+  "id": "H2-correct-controls-007",
+  "cat": "correct-controls",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "correct working of a rational equation [CC2]"
+ },
+ {
+  "id": "H2-correct-controls-009",
+  "cat": "correct-controls",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "standard linear solution [CC1]"
+ },
+ {
+  "id": "H2-correct-controls-013",
+  "cat": "correct-controls",
+  "exp": "valid-incomplete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "standard linear solution [CC1]"
+ },
+ {
+  "id": "H2-correct-controls-016",
+  "cat": "correct-controls",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "correct working of a rational equation [CC2]"
+ },
+ {
+  "id": "H2-correct-controls-020",
+  "cat": "correct-controls",
+  "exp": "valid-incomplete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "correct working of a rational equation (stops after the collected line, no claim) [CC2]"
+ },
+ {
+  "id": "H2-correct-controls-023",
+  "cat": "correct-controls",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "standard linear solution [CC1]"
+ },
+ {
+  "id": "H2-correct-controls-040",
+  "cat": "correct-controls",
+  "exp": "valid-incomplete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "correct working of a rational equation (stops after the expanded line, no claim) [CC3]"
+ },
+ {
+  "id": "H2-ambiguous-notation-003",
+  "cat": "ambiguous-notation",
+  "exp": "ambiguous",
+  "got": "invalid",
+  "at": 1,
+  "reasons": [
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: the previous line has x = 13/6; this line has x = 6/13; it lost x = 13/6; it gained x = 6/13",
+  "notes": "p/qx intended as p/(qx) [AM-B1]"
+ },
+ {
+  "id": "H2-ambiguous-notation-005",
+  "cat": "ambiguous-notation",
+  "exp": "ambiguous",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "p/qx intended as p/(qx) [AM-B1]"
+ },
+ {
+  "id": "H2-ambiguous-notation-009",
+  "cat": "ambiguous-notation",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"⋅\"); it is not judged",
+  "notes": "/(x+s)(1): both readings identical [AM-E2]"
+ },
+ {
+  "id": "H2-ambiguous-notation-024",
+  "cat": "ambiguous-notation",
+  "exp": "valid-complete",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "/q(1): both readings identical [AM-E1]"
+ },
+ {
+  "id": "H2-ambiguous-notation-025",
+  "cat": "ambiguous-notation",
+  "exp": "ambiguous",
+  "got": "unsupported",
+  "at": null,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "p/qx: (p/q)x vs p/(qx) [AM-A2]"
+ },
+ {
+  "id": "H2-ambiguous-notation-042",
+  "cat": "ambiguous-notation",
+  "exp": "ambiguous",
+  "got": "invalid",
+  "at": 3,
+  "reasons": [
+   "solution-set-changed"
+  ],
+  "note": "not an equivalent step: the previous line has x = -175/74; this line has x = -27/74; it lost x = -175/74; it gained x = -27/74",
+  "notes": "p/qx: (p/q)x vs p/(qx) [AM-A2]"
+ },
+ {
+  "id": "H2-ambiguous-notation-043",
+  "cat": "ambiguous-notation",
+  "exp": "ambiguous",
+  "got": "invalid",
+  "at": 3,
+  "reasons": [],
+  "note": "this line cannot be analysed exactly (PARSE_ERROR: PARSE_ERROR: unexpected character \"∕\"); it is not judged",
+  "notes": "k/m(x-a)(x-b): product vs (k/m)*...  [AM-A3]"
+ }
+]

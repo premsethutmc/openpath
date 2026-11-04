@@ -34,3 +34,19 @@ export function wrongAnswer(item: Item): Response {
   }
   throw new Error(item.format);
 }
+
+/**
+ * A leaf view as records made before verification@2 stored it: the additive fields (verifiedLevel, verifiedLevelAt,
+ * on the verification and the retention) removed, after checking they never claim more than the current level.
+ * Historical replays compare everything else exactly.
+ */
+export function withoutVerification2(view: unknown): unknown {
+  const v = JSON.parse(JSON.stringify(view)) as { verification: { currentLevel: number | null; verifiedLevel?: number | null; verifiedLevelAt?: string | null }; retention: { verifiedLevel?: number | null; verifiedLevelAt?: string | null } };
+  const lv = v.verification.verifiedLevel;
+  if (lv !== null && lv !== undefined && (v.verification.currentLevel === null || lv > v.verification.currentLevel)) throw new Error(`verifiedLevel ${lv} above the current level ${v.verification.currentLevel}`);
+  delete v.verification.verifiedLevel;
+  delete v.verification.verifiedLevelAt;
+  delete v.retention.verifiedLevel;
+  delete v.retention.verifiedLevelAt;
+  return v;
+}

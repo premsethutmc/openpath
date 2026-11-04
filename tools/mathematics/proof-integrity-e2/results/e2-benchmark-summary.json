@@ -1,0 +1,236 @@
+{
+ "dev": {
+  "before": {
+   "cases": 100,
+   "falseAcceptances": 17,
+   "unaccountedAcceptances": 26,
+   "falseRejections": 0,
+   "verified": 33,
+   "assessed": 66,
+   "unsupportedOrInconclusive": 34,
+   "firstInvalidExact": [
+    15,
+    47
+   ],
+   "firstInvalidLine": [
+    8,
+    47
+   ],
+   "alternativeAccepted": [
+    15,
+    15
+   ],
+   "restrictionDetected": [
+    0,
+    20
+   ],
+   "byCategory": {
+    "invalid-intermediate-correct-final": {
+     "n": 25,
+     "falseAccept": 13,
+     "verified": 13
+    },
+    "silently-skippable-unsupported-line": {
+     "n": 15,
+     "falseAccept": 2,
+     "verified": 3
+    },
+    "missing-restriction-or-branch": {
+     "n": 20,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "cross-domain-binding-failure": {
+     "n": 15,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "valid-alternative-path": {
+     "n": 15,
+     "falseAccept": 0,
+     "verified": 15
+    },
+    "ambiguous-or-malformed-line": {
+     "n": 10,
+     "falseAccept": 2,
+     "verified": 2
+    }
+   }
+  },
+  "after": {
+   "cases": 100,
+   "falseAcceptances": 0,
+   "unaccountedAcceptances": 0,
+   "falseRejections": 0,
+   "verified": 15,
+   "assessed": 61,
+   "unsupportedOrInconclusive": 39,
+   "firstInvalidExact": [
+    28,
+    47
+   ],
+   "firstInvalidLine": [
+    21,
+    47
+   ],
+   "alternativeAccepted": [
+    15,
+    15
+   ],
+   "restrictionDetected": [
+    10,
+    20
+   ],
+   "byCategory": {
+    "invalid-intermediate-correct-final": {
+     "n": 25,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "silently-skippable-unsupported-line": {
+     "n": 15,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "missing-restriction-or-branch": {
+     "n": 20,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "cross-domain-binding-failure": {
+     "n": 15,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "valid-alternative-path": {
+     "n": 15,
+     "falseAccept": 0,
+     "verified": 15
+    },
+    "ambiguous-or-malformed-line": {
+     "n": 10,
+     "falseAccept": 0,
+     "verified": 0
+    }
+   },
+   "codeDigest": "a273f98039976f998b75e2fbed1982a70dae260ff0e4fa8b41712d9bc2616dcd"
+  }
+ },
+ "sealed": {
+  "before": {
+   "cases": 100,
+   "falseAcceptances": 23,
+   "unaccountedAcceptances": 35,
+   "falseRejections": 0,
+   "verified": 41,
+   "assessed": 75,
+   "unsupportedOrInconclusive": 25,
+   "firstInvalidExact": [
+    15,
+    45
+   ],
+   "firstInvalidLine": [
+    10,
+    45
+   ],
+   "alternativeAccepted": [
+    15,
+    15
+   ],
+   "restrictionDetected": [
+    4,
+    20
+   ],
+   "byCategory": {
+    "invalid-intermediate-correct-final": {
+     "n": 25,
+     "falseAccept": 15,
+     "verified": 15
+    },
+    "silently-skippable-unsupported-line": {
+     "n": 15,
+     "falseAccept": 7,
+     "verified": 10
+    },
+    "missing-restriction-or-branch": {
+     "n": 20,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "cross-domain-binding-failure": {
+     "n": 15,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "valid-alternative-path": {
+     "n": 15,
+     "falseAccept": 0,
+     "verified": 15
+    },
+    "ambiguous-or-malformed-line": {
+     "n": 10,
+     "falseAccept": 1,
+     "verified": 1
+    }
+   }
+  },
+  "after": {
+   "cases": 100,
+   "falseAcceptances": 0,
+   "unaccountedAcceptances": 0,
+   "falseRejections": 0,
+   "verified": 15,
+   "assessed": 64,
+   "unsupportedOrInconclusive": 36,
+   "firstInvalidExact": [
+    34,
+    45
+   ],
+   "firstInvalidLine": [
+    29,
+    45
+   ],
+   "alternativeAccepted": [
+    15,
+    15
+   ],
+   "restrictionDetected": [
+    12,
+    20
+   ],
+   "byCategory": {
+    "invalid-intermediate-correct-final": {
+     "n": 25,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "silently-skippable-unsupported-line": {
+     "n": 15,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "missing-restriction-or-branch": {
+     "n": 20,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "cross-domain-binding-failure": {
+     "n": 15,
+     "falseAccept": 0,
+     "verified": 0
+    },
+    "valid-alternative-path": {
+     "n": 15,
+     "falseAccept": 0,
+     "verified": 15
+    },
+    "ambiguous-or-malformed-line": {
+     "n": 10,
+     "falseAccept": 0,
+     "verified": 0
+    }
+   },
+   "codeDigest": "a273f98039976f998b75e2fbed1982a70dae260ff0e4fa8b41712d9bc2616dcd"
+  }
+ }
+}

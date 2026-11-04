@@ -1,0 +1,4204 @@
+[
+{
+"id": "h7-typed-001",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"typed"
+],
+"p": {
+"der": "(3x+1)^5"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "chain rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "15"
+},
+{
+"kind": "power",
+"base": {
+"kind": "add",
+"terms": [
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "3"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+},
+{
+"kind": "constant",
+"value": "1"
+}
+]
+},
+"exponent": 4
+}
+]
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "d/dx (3x+1)^5 = 5(3x+1)^4*3 = 15(3x+1)^4."
+},
+{
+"id": "h7-typed-002",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text"
+],
+"p": {
+"der": "(3x+1)^5"
+},
+"w": "d/dx (3x+1)^5 = 5(3x+1)^4 * 3\nf'(x) = 15(3x+1)^4",
+"exp": "verified",
+"why": "d/dx (3x+1)^5 = 5(3x+1)^4*3 = 15(3x+1)^4 by the chain rule."
+},
+{
+"id": "h7-typed-003",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"typed"
+],
+"p": {
+"der": "x sin(x)"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "product rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "add",
+"terms": [
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "cos",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+]
+},
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "-1"
+},
+{
+"kind": "sin",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+]
+}
+]
+}
+}
+}
+]
+},
+"exp": "invalid",
+"why": "Product rule gives x cos x + sin x, not x cos x - sin x."
+},
+{
+"id": "h7-typed-004",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text"
+],
+"p": {
+"der": "x sin(x)"
+},
+"w": "By the product rule, d/dx (x sin x) = x cos x - sin x\nso f'(x) = x cos(x) - sin(x)",
+"exp": "invalid",
+"why": "Product rule gives x cos x + sin x; the sign of sin x is wrong."
+},
+{
+"id": "h7-typed-005",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"typed"
+],
+"p": {
+"int": "x e^(x^2)"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "substitution",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "exp",
+"argument": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+},
+{
+"kind": "power",
+"base": {
+"kind": "constant",
+"value": "2"
+},
+"exponent": -1
+}
+]
+},
+"constantIncluded": true
+}
+}
+]
+},
+"exp": "verified",
+"why": "With u=x^2, du=2x dx the integral is e^(x^2)/2 + C."
+},
+{
+"id": "h7-typed-006",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text"
+],
+"p": {
+"int": "x e^(x^2)"
+},
+"w": "Let u = x^2, du = 2x dx\n∫ x e^(x^2) dx = (1/2) ∫ e^u du = (1/2) e^u + C\n= e^(x^2)/2 + C",
+"exp": "verified",
+"why": "With u=x^2, du=2x dx the integral is e^(x^2)/2 + C."
+},
+{
+"id": "h7-typed-007",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"typed",
+"missing-constant"
+],
+"p": {
+"int": "x e^(x^2)"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "substitution",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "exp",
+"argument": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+},
+{
+"kind": "power",
+"base": {
+"kind": "constant",
+"value": "2"
+},
+"exponent": -1
+}
+]
+},
+"constantIncluded": false
+}
+}
+]
+},
+"exp": "missing-assumption",
+"why": "Antiderivative e^(x^2)/2 is right but the constant of integration is omitted."
+},
+{
+"id": "h7-typed-008",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text",
+"missing-constant"
+],
+"p": {
+"int": "x e^(x^2)"
+},
+"w": "Let u = x^2, du = 2x dx\n∫ x e^(x^2) dx = (1/2) e^u\n= e^(x^2)/2",
+"exp": "missing-assumption",
+"why": "Antiderivative e^(x^2)/2 is right but the constant of integration is omitted."
+},
+{
+"id": "h7-typed-009",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"typed"
+],
+"p": {
+"defint": "x^2",
+"a": 0,
+"b": 3
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "fundamental theorem",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 3
+},
+{
+"kind": "power",
+"base": {
+"kind": "constant",
+"value": "3"
+},
+"exponent": -1
+}
+]
+}
+}
+},
+{
+"id": "s1",
+"rule": "evaluate",
+"claim": {
+"kind": "value",
+"value": "9"
+}
+}
+]
+},
+"exp": "verified",
+"why": "Antiderivative x^3/3 gives 27/3 - 0 = 9."
+},
+{
+"id": "h7-typed-010",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text"
+],
+"p": {
+"defint": "x^2",
+"a": 0,
+"b": 3
+},
+"w": "An antiderivative is x^3/3\nF(3) - F(0) = 27/3 - 0 = 9",
+"exp": "verified",
+"why": "Antiderivative x^3/3 gives 27/3 - 0 = 9."
+},
+{
+"id": "h7-typed-011",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"typed"
+],
+"p": {
+"defint": "x^2",
+"a": 0,
+"b": 3
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "fundamental theorem",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 3
+}
+}
+},
+{
+"id": "s1",
+"rule": "evaluate",
+"claim": {
+"kind": "value",
+"value": "27"
+}
+}
+]
+},
+"exp": "invalid",
+"why": "x^3 is not an antiderivative of x^2 (derivative 3x^2); the true value is 9, not 27."
+},
+{
+"id": "h7-typed-012",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text"
+],
+"p": {
+"defint": "x^2",
+"a": 0,
+"b": 3
+},
+"w": "An antiderivative is x^3\nF(3) - F(0) = 27 - 0 = 27",
+"exp": "invalid",
+"why": "x^3 is not an antiderivative of x^2 (derivative 3x^2); the true value is 9, not 27."
+},
+{
+"id": "h7-typed-013",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"typed"
+],
+"p": {
+"lim": "sin(5x)/(2x)",
+"at": "0"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "standard limit",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "finite",
+"value": "5/2"
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "sin(5x)/(2x) = (5/2)(sin 5x)/(5x) -> 5/2."
+},
+{
+"id": "h7-typed-014",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text"
+],
+"p": {
+"lim": "sin(5x)/(2x)",
+"at": "0"
+},
+"w": "sin(5x)/(2x) = (5/2) * sin(5x)/(5x)\nsince sin(u)/u -> 1 as u -> 0, the limit = 5/2",
+"exp": "verified",
+"why": "sin(5x)/(2x) = (5/2)(sin 5x)/(5x) -> 5/2."
+},
+{
+"id": "h7-typed-015",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"typed"
+],
+"p": {
+"lim": "(x^2-4)/(x-2)",
+"at": "2"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "factor",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "add",
+"terms": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "constant",
+"value": "2"
+}
+]
+}
+}
+},
+{
+"id": "s1",
+"rule": "direct substitution",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "finite",
+"value": "4"
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "(x^2-4)/(x-2)=x+2 for x≠2, so the limit as x->2 is 4."
+},
+{
+"id": "h7-typed-016",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text"
+],
+"p": {
+"lim": "(x^2-4)/(x-2)",
+"at": "2"
+},
+"w": "(x^2-4)/(x-2) = (x-2)(x+2)/(x-2) = x+2 for x ≠ 2\nso the limit is 2+2 = 4",
+"exp": "verified",
+"why": "(x^2-4)/(x-2)=x+2 for x≠2, so the limit as x->2 is 4."
+},
+{
+"id": "h7-typed-017",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"typed"
+],
+"p": {
+"lim": "(3x^2+1)/(x^2+5)",
+"at": "infinity"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "divide by highest power",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "finite",
+"value": "3"
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "Dividing by x^2: (3+1/x^2)/(1+5/x^2) -> 3."
+},
+{
+"id": "h7-typed-018",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text"
+],
+"p": {
+"lim": "(3x^2+1)/(x^2+5)",
+"at": "infinity"
+},
+"w": "divide numerator and denominator by x^2: (3 + 1/x^2)/(1 + 5/x^2)\nas x -> infinity this tends to 3/1 = 3",
+"exp": "verified",
+"why": "Dividing by x^2: (3+1/x^2)/(1+5/x^2) -> 3."
+},
+{
+"id": "h7-typed-019",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"typed"
+],
+"p": {
+"lim": "(3x^2+1)/(x^2+5)",
+"at": "infinity"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "substitute",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "finite",
+"value": "1/5"
+}
+}
+}
+]
+},
+"exp": "invalid",
+"why": "Value 1/5 is the quotient at x=0; the limit at infinity is 3."
+},
+{
+"id": "h7-typed-020",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text"
+],
+"p": {
+"lim": "(3x^2+1)/(x^2+5)",
+"at": "infinity"
+},
+"w": "the limit as x -> infinity is 1/5",
+"exp": "invalid",
+"why": "Value 1/5 is the quotient at x=0; the limit at infinity is 3."
+},
+{
+"id": "h7-typed-021",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text-lines"
+],
+"p": {
+"alg": "3x - 7 = 11"
+},
+"w": {
+"raw": [
+"3x = 18",
+"x = 6"
+]
+},
+"exp": "verified",
+"why": "Adding 7 gives 3x=18 and dividing by 3 gives x=6."
+},
+{
+"id": "h7-typed-022",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"natural"
+],
+"p": {
+"alg": "3x - 7 = 11"
+},
+"w": "3x = 18\nx = 6",
+"exp": "verified",
+"why": "Adding 7 gives 3x=18 and dividing by 3 gives x=6."
+},
+{
+"id": "h7-typed-023",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text-lines"
+],
+"p": {
+"alg": "2(x-1) = x+5"
+},
+"w": {
+"raw": [
+"2x - 2 = x + 5",
+"x = 3"
+]
+},
+"exp": "invalid",
+"why": "2x-2=x+5 gives x=7, not 3; last line is false."
+},
+{
+"id": "h7-typed-024",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"natural"
+],
+"p": {
+"alg": "2(x-1) = x+5"
+},
+"w": "2x - 2 = x + 5\nx = 3",
+"exp": "invalid",
+"why": "2x-2=x+5 gives x=7, not 3; last line is false."
+},
+{
+"id": "h7-typed-025",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text-lines"
+],
+"p": {
+"alg": "x^2 - 5x + 6 = 0"
+},
+"w": {
+"raw": [
+"(x-2)(x-3) = 0",
+"x = 2 or x = 3"
+]
+},
+"exp": "verified",
+"why": "x^2-5x+6=(x-2)(x-3), roots 2 and 3."
+},
+{
+"id": "h7-typed-026",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"natural"
+],
+"p": {
+"alg": "x^2 - 5x + 6 = 0"
+},
+"w": "(x-2)(x-3) = 0\nx = 2 or x = 3",
+"exp": "verified",
+"why": "x^2-5x+6=(x-2)(x-3), roots 2 and 3."
+},
+{
+"id": "h7-typed-027",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text-lines",
+"dropped-branch"
+],
+"p": {
+"alg": "x^2 = 9"
+},
+"w": {
+"raw": [
+"x = 3"
+]
+},
+"exp": "missing-assumption",
+"why": "Taking the root drops the branch x=-3; solution set is {3,-3}."
+},
+{
+"id": "h7-typed-028",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"natural",
+"dropped-branch"
+],
+"p": {
+"alg": "x^2 = 9"
+},
+"w": "x = 3",
+"exp": "missing-assumption",
+"why": "Taking the root drops the branch x=-3; solution set is {3,-3}."
+},
+{
+"id": "h7-typed-029",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"text-lines",
+"dropped-branch"
+],
+"p": {
+"alg": "x^2 - 3x = 0"
+},
+"w": {
+"raw": [
+"x^2 = 3x",
+"x = 3"
+]
+},
+"exp": "missing-assumption",
+"why": "Dividing by x without excluding x=0 loses the root x=0."
+},
+{
+"id": "h7-typed-030",
+"cat": "typed-routes",
+"tags": [
+"route-equivalence",
+"natural",
+"dropped-branch"
+],
+"p": {
+"alg": "x^2 - 3x = 0"
+},
+"w": "x^2 = 3x\nx = 3",
+"exp": "missing-assumption",
+"why": "Dividing by x without excluding x=0 loses the root x=0."
+},
+{
+"id": "h7-typed-031",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"typed-relevance"
+],
+"p": {
+"der": "x^2 sin(x)"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+}
+},
+"input": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+},
+{
+"id": "s1",
+"rule": "trig derivative",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "cos",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+},
+"input": {
+"kind": "sin",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+},
+{
+"id": "s2",
+"rule": "product rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "add",
+"terms": [
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "sin",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+]
+},
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+},
+{
+"kind": "cos",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+]
+}
+]
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "Sub-derivatives (x^2)'=2x and (sin x)'=cos x are true and the product rule gives 2x sin x + x^2 cos x."
+},
+{
+"id": "h7-typed-032",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"hidden-false"
+],
+"p": {
+"der": "x^2 sin(x)"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+}
+},
+"input": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+},
+{
+"id": "s1",
+"rule": "trig derivative",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "-1"
+},
+{
+"kind": "cos",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+]
+}
+},
+"input": {
+"kind": "sin",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+},
+{
+"id": "s2",
+"rule": "product rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "add",
+"terms": [
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "sin",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+]
+},
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+},
+{
+"kind": "cos",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+]
+}
+]
+}
+}
+}
+]
+},
+"exp": "invalid",
+"why": "Step s1 claims (sin x)' = -cos x, which is false, even though the final claim is right."
+},
+{
+"id": "h7-typed-033",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"wrong-rule-label"
+],
+"p": {
+"der": "sin(2x)"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "cos",
+"argument": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+}
+}
+]
+}
+}
+}
+]
+},
+"exp": "invalid",
+"why": "The result 2cos(2x) is right but it comes from the chain rule, not the power rule; the cited rule does not justify it."
+},
+{
+"id": "h7-typed-034",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"typed-relevance"
+],
+"p": {
+"der": "x^3"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+}
+},
+"input": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+}
+]
+},
+"exp": "incomplete",
+"why": "(x^2)'=2x is true but concerns a different function and the derivative of x^3 is never stated."
+},
+{
+"id": "h7-typed-035",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"typed-relevance",
+"side-claim"
+],
+"p": {
+"der": "x^3"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+}
+},
+"input": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+},
+{
+"id": "s1",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "3"
+},
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+]
+}
+},
+"input": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 3
+}
+}
+]
+},
+"exp": "verified",
+"why": "The side line (x^2)'=2x is true and the requested (x^3)'=3x^2 is also stated."
+},
+{
+"id": "h7-typed-036",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"side-claim"
+],
+"p": {
+"der": "x^3"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "3"
+},
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+]
+}
+},
+"input": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 3
+}
+},
+{
+"id": "s1",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "3"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+}
+},
+"input": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+}
+]
+},
+"exp": "invalid",
+"why": "The extra claim (x^2)'=3x is false (it is 2x), spoiling the solution."
+},
+{
+"id": "h7-typed-037",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"equivalent-form"
+],
+"p": {
+"der": "(x+1)^2"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "chain rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "add",
+"terms": [
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "constant",
+"value": "2"
+}
+]
+},
+{
+"kind": "constant",
+"value": "2"
+}
+]
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "d/dx (x+1)^2 = 2(x+1) = 2x+2, an equivalent form."
+},
+{
+"id": "h7-typed-038",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"variable-mismatch"
+],
+"p": {
+"raw": {
+"domain": "calculus",
+"task": "derivative",
+"expression": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "y"
+},
+"exponent": 2
+}
+]
+},
+"variable": "x"
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "variable",
+"name": "y"
+}
+]
+}
+}
+}
+]
+},
+"exp": "invalid",
+"why": "With respect to x, y is constant so the derivative is y^2; 2xy is the derivative with respect to y."
+},
+{
+"id": "h7-typed-039",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"variable-mismatch"
+],
+"p": {
+"raw": {
+"domain": "calculus",
+"task": "derivative",
+"expression": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "y"
+},
+"exponent": 2
+}
+]
+},
+"variable": "x"
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "constant multiple",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "y"
+},
+"exponent": 2
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "d/dx (x y^2) = y^2 treating y as a constant."
+},
+{
+"id": "h7-typed-040",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"variable-mismatch"
+],
+"p": {
+"der": "t^3",
+"v": "t"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "3"
+},
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+]
+}
+},
+"input": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 3
+}
+}
+]
+},
+"exp": "ambiguous",
+"why": "The claim 3x^2 is stated in the variable x while the problem is in t; reading x as an alias for t gives the right answer, reading it as a different symbol it is irrelevant.",
+"alt": [
+"invalid",
+"incomplete"
+]
+},
+{
+"id": "h7-typed-041",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"dependent"
+],
+"p": {
+"der": "(x^2+1)^3"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "sum rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "add",
+"terms": [
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+},
+{
+"kind": "constant",
+"value": "1"
+}
+]
+}
+},
+"input": {
+"kind": "add",
+"terms": [
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+},
+{
+"kind": "constant",
+"value": "1"
+}
+]
+}
+},
+{
+"id": "s1",
+"rule": "chain rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "6"
+},
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "power",
+"base": {
+"kind": "add",
+"terms": [
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+},
+{
+"kind": "constant",
+"value": "1"
+}
+]
+},
+"exponent": 2
+}
+]
+}
+},
+"dependencies": [
+"s0"
+]
+}
+]
+},
+"exp": "invalid",
+"why": "s0 claims (x^2+1)'=2x+1, which is false (it is 2x); the later step depends on it."
+},
+{
+"id": "h7-typed-042",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"coincidence"
+],
+"p": {
+"defint": "x^3",
+"a": 0,
+"b": 2
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "fundamental theorem",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+}
+},
+{
+"id": "s1",
+"rule": "evaluate",
+"claim": {
+"kind": "value",
+"value": "4"
+}
+}
+]
+},
+"exp": "invalid",
+"why": "x^2 is not an antiderivative of x^3; the value 4 is only coincidentally right (x^4/4 gives 16/4=4)."
+},
+{
+"id": "h7-typed-043",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"int": "cos(2x)"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "substitution",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "sin",
+"argument": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+}
+},
+{
+"kind": "power",
+"base": {
+"kind": "constant",
+"value": "2"
+},
+"exponent": -1
+}
+]
+},
+"constantIncluded": true
+}
+}
+]
+},
+"exp": "verified",
+"why": "d/dx sin(2x)/2 = cos(2x)."
+},
+{
+"id": "h7-typed-044",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"int": "2x(x^2+1)^3"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "substitution",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "power",
+"base": {
+"kind": "add",
+"terms": [
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+},
+{
+"kind": "constant",
+"value": "1"
+}
+]
+},
+"exponent": 4
+},
+{
+"kind": "power",
+"base": {
+"kind": "constant",
+"value": "4"
+},
+"exponent": -1
+}
+]
+},
+"constantIncluded": true
+}
+}
+]
+},
+"exp": "verified",
+"why": "With u=x^2+1, du=2x dx the integral is u^4/4 + C."
+},
+{
+"id": "h7-typed-045",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"domain"
+],
+"p": {
+"int": "1/x"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "standard integral",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "log",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+},
+"constantIncluded": true
+}
+}
+]
+},
+"exp": "missing-assumption",
+"why": "ln x is an antiderivative of 1/x only for x>0; the answer ln|x|+C or a restriction x>0 is needed.",
+"alt": [
+"invalid"
+]
+},
+{
+"id": "h7-typed-046",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"int": "x e^x"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "integration by parts",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "add",
+"terms": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "-1"
+},
+{
+"kind": "constant",
+"value": "1"
+}
+]
+}
+]
+},
+{
+"kind": "exp",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+]
+},
+"constantIncluded": true
+}
+}
+]
+},
+"exp": "verified",
+"why": "d/dx (x-1)e^x = e^x + (x-1)e^x = x e^x."
+},
+{
+"id": "h7-typed-047",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"int": "x e^x"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "integration by parts",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "add",
+"terms": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "constant",
+"value": "1"
+}
+]
+},
+{
+"kind": "exp",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+]
+},
+"constantIncluded": true
+}
+}
+]
+},
+"exp": "invalid",
+"why": "d/dx (x+1)e^x = (x+2)e^x ≠ x e^x."
+},
+{
+"id": "h7-typed-048",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"alt-method"
+],
+"p": {
+"int": "sin(x)cos(x)"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "substitution u=sin x",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "power",
+"base": {
+"kind": "sin",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+},
+"exponent": 2
+},
+{
+"kind": "power",
+"base": {
+"kind": "constant",
+"value": "2"
+},
+"exponent": -1
+}
+]
+},
+"constantIncluded": true
+}
+}
+]
+},
+"exp": "verified",
+"why": "d/dx sin^2(x)/2 = sin x cos x."
+},
+{
+"id": "h7-typed-049",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"alt-method"
+],
+"p": {
+"int": "sin(x)cos(x)"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "substitution u=cos x",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "-1"
+},
+{
+"kind": "power",
+"base": {
+"kind": "cos",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+},
+"exponent": 2
+},
+{
+"kind": "power",
+"base": {
+"kind": "constant",
+"value": "2"
+},
+"exponent": -1
+}
+]
+},
+"constantIncluded": true
+}
+}
+]
+},
+"exp": "verified",
+"why": "d/dx (-cos^2 x/2) = cos x sin x; it differs from sin^2 x/2 only by a constant."
+},
+{
+"id": "h7-typed-050",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"concise"
+],
+"p": {
+"int": "3x^2"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 3
+},
+"constantIncluded": true
+}
+}
+]
+},
+"exp": "verified",
+"why": "d/dx x^3 = 3x^2."
+},
+{
+"id": "h7-typed-051",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"no-steps"
+],
+"p": {
+"der": "x^4"
+},
+"w": {
+"raw": []
+},
+"exp": "incomplete",
+"why": "No working and no result is given."
+},
+{
+"id": "h7-typed-052",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"defint": "3x^2",
+"a": 1,
+"b": 2
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 3
+}
+}
+},
+{
+"id": "s1",
+"rule": "evaluate F(2)-F(1)",
+"claim": {
+"kind": "value",
+"value": "7"
+}
+}
+]
+},
+"exp": "verified",
+"why": "x^3 is an antiderivative and 8-1=7."
+},
+{
+"id": "h7-typed-053",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"defint": "3x^2",
+"a": 1,
+"b": 2
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 3
+}
+}
+},
+{
+"id": "s1",
+"rule": "evaluate",
+"claim": {
+"kind": "value",
+"value": "9"
+}
+}
+]
+},
+"exp": "invalid",
+"why": "F(2)-F(1)=8-1=7; 9 comes from adding F(1) instead of subtracting."
+},
+{
+"id": "h7-typed-054",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"no-final"
+],
+"p": {
+"defint": "3x^2",
+"a": 1,
+"b": 2
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 3
+}
+}
+}
+]
+},
+"exp": "incomplete",
+"why": "The antiderivative is correct but the value of the integral is never given."
+},
+{
+"id": "h7-typed-055",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"concise"
+],
+"p": {
+"defint": "x",
+"a": -1,
+"b": 1
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "odd function symmetry",
+"claim": {
+"kind": "value",
+"value": "0"
+}
+}
+]
+},
+"exp": "verified",
+"why": "x is odd on [-1,1] so the integral is 0."
+},
+{
+"id": "h7-typed-056",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"defint": "2x",
+"a": 0,
+"b": 3
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "power rule",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+}
+}
+},
+{
+"id": "s1",
+"rule": "evaluate",
+"claim": {
+"kind": "value",
+"value": "9"
+}
+}
+]
+},
+"exp": "verified",
+"why": "x^2 is an antiderivative of 2x and 9-0=9."
+},
+{
+"id": "h7-typed-057",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"lim": "(x^2-9)/(x-3)",
+"at": "3"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "factor",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "add",
+"terms": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "constant",
+"value": "3"
+}
+]
+}
+}
+},
+{
+"id": "s1",
+"rule": "direct substitution",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "finite",
+"value": "6"
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "(x^2-9)/(x-3)=x+3 for x≠3, limit 6."
+},
+{
+"id": "h7-typed-058",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"hidden-false"
+],
+"p": {
+"lim": "(x^2-9)/(x-3)",
+"at": "3"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "factor",
+"claim": {
+"kind": "expression",
+"value": {
+"kind": "add",
+"terms": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "-1"
+},
+{
+"kind": "constant",
+"value": "3"
+}
+]
+}
+]
+}
+}
+},
+{
+"id": "s1",
+"rule": "direct substitution",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "finite",
+"value": "6"
+}
+}
+}
+]
+},
+"exp": "invalid",
+"why": "(x^2-9)/(x-3) equals x+3, not x-3; a false step precedes the right final value."
+},
+{
+"id": "h7-typed-059",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"lim": "1/x",
+"at": "0"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "one-sided limits differ",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "does-not-exist"
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "One-sided limits are -inf and +inf, so the two-sided limit does not exist."
+},
+{
+"id": "h7-typed-060",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"lim": "1/x",
+"at": "0"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "reciprocal",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "positive-infinity"
+}
+}
+}
+]
+},
+"exp": "invalid",
+"why": "The two-sided limit of 1/x at 0 does not exist; the left side goes to -infinity."
+},
+{
+"id": "h7-typed-061",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"typed-relevance"
+],
+"p": {
+"lim": "sin(3x)/x",
+"at": "0"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "standard limit",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "finite",
+"value": "2"
+}
+},
+"input": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "sin",
+"argument": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+}
+},
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": -1
+}
+]
+}
+}
+]
+},
+"exp": "incomplete",
+"why": "lim sin(2x)/x = 2 is true but concerns another function; the requested limit 3 is never established."
+},
+{
+"id": "h7-typed-062",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"typed-relevance",
+"side-claim"
+],
+"p": {
+"lim": "sin(3x)/x",
+"at": "0"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "standard limit",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "finite",
+"value": "2"
+}
+},
+"input": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "sin",
+"argument": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+}
+},
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": -1
+}
+]
+}
+},
+{
+"id": "s1",
+"rule": "standard limit",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "finite",
+"value": "3"
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "The side claim lim sin(2x)/x = 2 is true and the requested limit 3 is stated."
+},
+{
+"id": "h7-typed-063",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"lim": "(2x+1)/(x-5)",
+"at": "infinity"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "leading coefficients",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "finite",
+"value": "2"
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "Leading terms give 2x/x -> 2."
+},
+{
+"id": "h7-typed-064",
+"cat": "typed-routes",
+"tags": [
+"typed"
+],
+"p": {
+"lim": "x^2/(x+1)",
+"at": "infinity"
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "degree comparison",
+"claim": {
+"kind": "limit",
+"value": {
+"kind": "positive-infinity"
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "x^2/(x+1) ~ x grows without bound."
+},
+{
+"id": "h7-typed-065",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"symbolic"
+],
+"p": {
+"raw": {
+"domain": "symbolic",
+"start": {
+"kind": "power",
+"base": {
+"kind": "add",
+"terms": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "constant",
+"value": "2"
+}
+]
+},
+"exponent": 2
+}
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"expression": {
+"kind": "add",
+"terms": [
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+},
+{
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "4"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+},
+{
+"kind": "constant",
+"value": "4"
+}
+]
+}
+}
+]
+},
+"exp": "verified",
+"why": "(x+2)^2 = x^2+4x+4."
+},
+{
+"id": "h7-typed-066",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"symbolic"
+],
+"p": {
+"raw": {
+"domain": "symbolic",
+"start": {
+"kind": "power",
+"base": {
+"kind": "add",
+"terms": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "constant",
+"value": "2"
+}
+]
+},
+"exponent": 2
+}
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"expression": {
+"kind": "add",
+"terms": [
+{
+"kind": "power",
+"base": {
+"kind": "variable",
+"name": "x"
+},
+"exponent": 2
+},
+{
+"kind": "constant",
+"value": "4"
+}
+]
+}
+}
+]
+},
+"exp": "invalid",
+"why": "(x+2)^2 = x^2+4x+4; dropping the cross term 4x is a forged identity."
+},
+{
+"id": "h7-typed-067",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"symbolic"
+],
+"p": {
+"raw": {
+"domain": "symbolic",
+"start": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "sin",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+},
+{
+"kind": "cos",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+}
+]
+}
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"expression": {
+"kind": "sin",
+"argument": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "constant",
+"value": "2"
+},
+{
+"kind": "variable",
+"name": "x"
+}
+]
+}
+}
+}
+]
+},
+"exp": "verified",
+"why": "Double-angle identity 2 sin x cos x = sin 2x."
+},
+{
+"id": "h7-typed-068",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"symbolic"
+],
+"p": {
+"raw": {
+"domain": "symbolic",
+"start": {
+"kind": "log",
+"argument": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "variable",
+"name": "y"
+}
+]
+}
+},
+"assumptions": [
+{
+"kind": "positive",
+"expression": {
+"kind": "variable",
+"name": "x"
+}
+},
+{
+"kind": "positive",
+"expression": {
+"kind": "variable",
+"name": "y"
+}
+}
+]
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"expression": {
+"kind": "add",
+"terms": [
+{
+"kind": "log",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+},
+{
+"kind": "log",
+"argument": {
+"kind": "variable",
+"name": "y"
+}
+}
+]
+}
+}
+]
+},
+"exp": "verified",
+"why": "For x,y>0, ln(xy)=ln x + ln y."
+},
+{
+"id": "h7-typed-069",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"symbolic",
+"domain"
+],
+"p": {
+"raw": {
+"domain": "symbolic",
+"start": {
+"kind": "log",
+"argument": {
+"kind": "multiply",
+"factors": [
+{
+"kind": "variable",
+"name": "x"
+},
+{
+"kind": "variable",
+"name": "y"
+}
+]
+}
+}
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"expression": {
+"kind": "add",
+"terms": [
+{
+"kind": "log",
+"argument": {
+"kind": "variable",
+"name": "x"
+}
+},
+{
+"kind": "log",
+"argument": {
+"kind": "variable",
+"name": "y"
+}
+}
+]
+}
+}
+]
+},
+"exp": "missing-assumption",
+"why": "ln(xy)=ln x+ln y requires x>0 and y>0, which are not given."
+},
+{
+"id": "h7-typed-070",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"linear-algebra"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "vector",
+"task": "dot",
+"data": {
+"a": [
+"2",
+"-1",
+"3"
+],
+"b": [
+"4",
+"5",
+"1"
+],
+"scalar": "2"
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "dot-product",
+"result": {
+"kind": "scalar",
+"value": "6"
+},
+"dependencies": []
+}
+]
+},
+"exp": "verified",
+"why": "2*4 + (-1)*5 + 3*1 = 8-5+3 = 6."
+},
+{
+"id": "h7-typed-071",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"linear-algebra"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "vector",
+"task": "dot",
+"data": {
+"a": [
+"2",
+"-1",
+"3"
+],
+"b": [
+"4",
+"5",
+"1"
+],
+"scalar": "2"
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "dot-product",
+"result": {
+"kind": "scalar",
+"value": "16"
+},
+"dependencies": []
+}
+]
+},
+"exp": "invalid",
+"why": "The middle product is -5, giving 6; 16 comes from adding +5."
+},
+{
+"id": "h7-typed-072",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"linear-algebra"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "determinant",
+"task": "determinant",
+"data": {
+"a": [
+[
+"2",
+"3"
+],
+[
+"1",
+"4"
+]
+],
+"b": [
+[
+"1",
+"2"
+],
+[
+"0",
+"1"
+]
+],
+"scalar": "2"
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "cofactor-expansion",
+"result": {
+"kind": "scalar",
+"value": "5"
+},
+"dependencies": []
+}
+]
+},
+"exp": "verified",
+"why": "det = 2*4 - 3*1 = 5."
+},
+{
+"id": "h7-typed-073",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"linear-algebra"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "matrix",
+"task": "inverse",
+"data": {
+"a": [
+[
+"2",
+"1"
+],
+[
+"5",
+"3"
+]
+],
+"b": [
+[
+"1",
+"2"
+],
+[
+"0",
+"1"
+]
+],
+"scalar": "2"
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "inverse-method",
+"result": {
+"kind": "matrix",
+"value": [
+[
+"3",
+"-1"
+],
+[
+"-5",
+"2"
+]
+]
+},
+"dependencies": []
+}
+]
+},
+"exp": "verified",
+"why": "det=1, so the inverse is [[3,-1],[-5,2]]."
+},
+{
+"id": "h7-typed-074",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"linear-algebra"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "system",
+"task": "solve",
+"data": {
+"a": [
+[
+"2",
+"1"
+],
+[
+"1",
+"-1"
+]
+],
+"b": [
+"5",
+"1"
+]
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "elimination",
+"result": {
+"kind": "system",
+"status": "unique",
+"values": [
+"2",
+"1"
+]
+},
+"dependencies": []
+}
+]
+},
+"exp": "verified",
+"why": "Adding the equations gives 3x=6, x=2, then y=1."
+},
+{
+"id": "h7-typed-075",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"linear-algebra"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "matrix",
+"task": "multiply",
+"data": {
+"a": [
+[
+"1",
+"2"
+],
+[
+"3",
+"4"
+]
+],
+"b": [
+[
+"0",
+"1"
+],
+[
+"1",
+"0"
+]
+],
+"scalar": "2"
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "component-wise",
+"result": {
+"kind": "matrix",
+"value": [
+[
+"1",
+"2"
+],
+[
+"3",
+"4"
+]
+]
+},
+"dependencies": []
+}
+]
+},
+"exp": "invalid",
+"why": "AB = [[2,1],[4,3]] (columns swapped); the claimed matrix is A itself."
+},
+{
+"id": "h7-typed-076",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"probability"
+],
+"p": {
+"raw": {
+"domain": "probability-statistics",
+"area": "combinatorics",
+"task": "combination",
+"data": {
+"n": 7,
+"r": 2,
+"a": 7,
+"b": 9,
+"intersection": 2
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "direct",
+"result": {
+"kind": "integer",
+"value": "21"
+},
+"dependencies": []
+}
+]
+},
+"exp": "verified",
+"why": "C(7,2)=21."
+},
+{
+"id": "h7-typed-077",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"probability"
+],
+"p": {
+"raw": {
+"domain": "probability-statistics",
+"area": "combinatorics",
+"task": "combination",
+"data": {
+"n": 7,
+"r": 2,
+"a": 7,
+"b": 9,
+"intersection": 2
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "direct",
+"result": {
+"kind": "integer",
+"value": "42"
+},
+"dependencies": []
+}
+]
+},
+"exp": "invalid",
+"why": "42 = P(7,2) ordered count; C(7,2)=21."
+},
+{
+"id": "h7-typed-078",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"probability"
+],
+"p": {
+"raw": {
+"domain": "probability-statistics",
+"area": "probability",
+"task": "union",
+"data": {
+"pa": "1/3",
+"pb": "1/4",
+"pab": "1/12",
+"favourable": 3,
+"total": 6,
+"terms": [
+{
+"prior": "1/3",
+"conditional": "1/2"
+},
+{
+"prior": "2/3",
+"conditional": "1/4"
+}
+],
+"prior": "1/3",
+"likelihood": "1/2",
+"evidence": "1/3"
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "direct",
+"result": {
+"kind": "rational",
+"value": "1/2"
+},
+"dependencies": []
+}
+]
+},
+"exp": "verified",
+"why": "P(A∪B)=1/3+1/4-1/12=1/2."
+},
+{
+"id": "h7-typed-079",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"probability"
+],
+"p": {
+"raw": {
+"domain": "probability-statistics",
+"area": "probability",
+"task": "union",
+"data": {
+"pa": "1/3",
+"pb": "1/4",
+"pab": "1/12",
+"favourable": 3,
+"total": 6,
+"terms": [
+{
+"prior": "1/3",
+"conditional": "1/2"
+},
+{
+"prior": "2/3",
+"conditional": "1/4"
+}
+],
+"prior": "1/3",
+"likelihood": "1/2",
+"evidence": "1/3"
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "direct",
+"result": {
+"kind": "rational",
+"value": "7/12"
+},
+"dependencies": []
+}
+]
+},
+"exp": "invalid",
+"why": "7/12 is P(A)+P(B); the overlap 1/12 must be subtracted giving 1/2."
+},
+{
+"id": "h7-typed-080",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"probability"
+],
+"p": {
+"raw": {
+"domain": "probability-statistics",
+"area": "distribution",
+"task": "binomial-mean",
+"data": {
+"p": "1/3",
+"n": 9,
+"low": 1,
+"high": 5,
+"values": [
+0,
+1,
+2
+],
+"probabilities": [
+"1/4",
+"1/2",
+"1/4"
+]
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "direct",
+"result": {
+"kind": "rational",
+"value": "3"
+},
+"dependencies": []
+}
+]
+},
+"exp": "verified",
+"why": "np = 9*(1/3) = 3."
+},
+{
+"id": "h7-typed-081",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"probability"
+],
+"p": {
+"raw": {
+"domain": "probability-statistics",
+"area": "statistics",
+"task": "median",
+"data": {
+"values": [
+3,
+9,
+4,
+8
+],
+"frequencies": [
+1,
+1,
+1,
+1
+]
+},
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "direct",
+"result": {
+"kind": "rational",
+"value": "6"
+},
+"dependencies": []
+}
+]
+},
+"exp": "verified",
+"why": "Sorted 3,4,8,9: median (4+8)/2 = 6."
+},
+{
+"id": "h7-typed-082",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"complex"
+],
+"p": {
+"raw": {
+"domain": "complex-polynomial",
+"area": "arithmetic",
+"task": "add",
+"data": {
+"a": {
+"re": "3",
+"im": "2"
+},
+"b": {
+"re": "1",
+"im": "-5"
+},
+"n": 0
+},
+"coefficientDomain": "complex",
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "cartesian-arithmetic",
+"result": {
+"kind": "complex",
+"value": {
+"re": "4",
+"im": "-3"
+}
+},
+"dependencies": []
+}
+]
+},
+"exp": "verified",
+"why": "(3+2i)+(1-5i)=4-3i."
+},
+{
+"id": "h7-typed-083",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"complex"
+],
+"p": {
+"raw": {
+"domain": "complex-polynomial",
+"area": "arithmetic",
+"task": "multiply",
+"data": {
+"a": {
+"re": "2",
+"im": "1"
+},
+"b": {
+"re": "1",
+"im": "-3"
+},
+"n": 0
+},
+"coefficientDomain": "complex",
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "cartesian-arithmetic",
+"result": {
+"kind": "complex",
+"value": {
+"re": "5",
+"im": "-5"
+}
+},
+"dependencies": []
+}
+]
+},
+"exp": "verified",
+"why": "(2+i)(1-3i)=2-6i+i-3i^2 = 5-5i."
+},
+{
+"id": "h7-typed-084",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"complex"
+],
+"p": {
+"raw": {
+"domain": "complex-polynomial",
+"area": "arithmetic",
+"task": "multiply",
+"data": {
+"a": {
+"re": "2",
+"im": "1"
+},
+"b": {
+"re": "1",
+"im": "-3"
+},
+"n": 0
+},
+"coefficientDomain": "complex",
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "cartesian-arithmetic",
+"result": {
+"kind": "complex",
+"value": {
+"re": "-1",
+"im": "-5"
+}
+},
+"dependencies": []
+}
+]
+},
+"exp": "invalid",
+"why": "The i^2 term -3i^2 equals +3, not -3, so the product is 5-5i, not -1-5i."
+},
+{
+"id": "h7-typed-085",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"complex"
+],
+"p": {
+"raw": {
+"domain": "complex-polynomial",
+"area": "polynomial",
+"task": "verify-root",
+"data": {
+"coefficients": [
+"1",
+"0",
+"4"
+],
+"root": {
+"re": "0",
+"im": "2"
+}
+},
+"coefficientDomain": "complex",
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "factor-theorem",
+"result": {
+"kind": "boolean",
+"value": true
+},
+"dependencies": []
+}
+]
+},
+"exp": "verified",
+"why": "(2i)^2+4 = -4+4 = 0."
+},
+{
+"id": "h7-typed-086",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"complex"
+],
+"p": {
+"raw": {
+"domain": "complex-polynomial",
+"area": "polynomial",
+"task": "verify-root",
+"data": {
+"coefficients": [
+"1",
+"0",
+"4"
+],
+"root": {
+"re": "2",
+"im": "0"
+}
+},
+"coefficientDomain": "complex",
+"assumptions": []
+}
+},
+"w": {
+"raw": [
+{
+"id": "s0",
+"rule": "factor-theorem",
+"result": {
+"kind": "boolean",
+"value": true
+},
+"dependencies": []
+}
+]
+},
+"exp": "invalid",
+"why": "2^2+4 = 8 ≠ 0 so 2 is not a root of x^2+4."
+},
+{
+"id": "h7-typed-087",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"geometry"
+],
+"p": {
+"raw": {
+"domain": "geometry",
+"problem": {
+"id": "g1",
+"objects": [
+{
+"id": "T",
+"kind": "triangle",
+"data": {
+"angles": [
+"A",
+"B",
+"C"
+],
+"sides": [
+"AB",
+"BC",
+"CA"
+]
+}
+}
+],
+"facts": [
+{
+"predicate": "angle_measure",
+"args": [
+"A"
+],
+"value": 50
+},
+{
+"predicate": "angle_measure",
+"args": [
+"B"
+],
+"value": 60
+}
+],
+"conditions": [
+"nondegenerate:T"
+],
+"goal": {
+"predicate": "angle_measure",
+"args": [
+"C"
+],
+"value": 70
+},
+"skill": "geometry.triangle-angle-sum"
+}
+}
+},
+"w": {
+"raw": {
+"steps": [
+{
+"id": "s1",
+"statement": {
+"predicate": "angle_measure",
+"args": [
+"C"
+],
+"value": 70
+},
+"cited_theorem": "triangle-sum"
+}
+]
+}
+},
+"exp": "verified",
+"why": "180-50-60=70."
+},
+{
+"id": "h7-typed-088",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"geometry",
+"wrong-rule-label"
+],
+"p": {
+"raw": {
+"domain": "geometry",
+"problem": {
+"id": "g2",
+"objects": [
+{
+"id": "T",
+"kind": "triangle",
+"data": {
+"angles": [
+"A",
+"B",
+"C"
+],
+"sides": [
+"AB",
+"BC",
+"CA"
+]
+}
+}
+],
+"facts": [
+{
+"predicate": "angle_measure",
+"args": [
+"A"
+],
+"value": 50
+},
+{
+"predicate": "angle_measure",
+"args": [
+"B"
+],
+"value": 60
+}
+],
+"conditions": [
+"nondegenerate:T"
+],
+"goal": {
+"predicate": "angle_measure",
+"args": [
+"C"
+],
+"value": 70
+},
+"skill": "geometry.triangle-angle-sum"
+}
+}
+},
+"w": {
+"raw": {
+"steps": [
+{
+"id": "s1",
+"statement": {
+"predicate": "angle_measure",
+"args": [
+"C"
+],
+"value": 70
+},
+"cited_theorem": "vertical-angles"
+}
+]
+}
+},
+"exp": "invalid",
+"why": "C=70 is correct but vertical angles do not justify it; the triangle angle sum does."
+},
+{
+"id": "h7-typed-089",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"geometry"
+],
+"p": {
+"raw": {
+"domain": "geometry",
+"problem": {
+"id": "g3",
+"objects": [
+{
+"id": "T",
+"kind": "triangle",
+"data": {
+"angles": [
+"A",
+"B",
+"C"
+],
+"sides": [
+"AB",
+"BC",
+"CA"
+]
+}
+}
+],
+"facts": [
+{
+"predicate": "angle_measure",
+"args": [
+"A"
+],
+"value": 50
+},
+{
+"predicate": "angle_measure",
+"args": [
+"B"
+],
+"value": 60
+}
+],
+"conditions": [
+"nondegenerate:T"
+],
+"goal": {
+"predicate": "angle_measure",
+"args": [
+"C"
+],
+"value": 70
+},
+"skill": "geometry.triangle-angle-sum"
+}
+}
+},
+"w": {
+"raw": {
+"steps": [
+{
+"id": "s1",
+"statement": {
+"predicate": "angle_measure",
+"args": [
+"A"
+],
+"value": 50
+}
+}
+]
+}
+},
+"exp": "incomplete",
+"why": "Restating the given angle A=50 does not determine C."
+},
+{
+"id": "h7-typed-090",
+"cat": "typed-routes",
+"tags": [
+"typed",
+"geometry"
+],
+"p": {
+"raw": {
+"domain": "geometry",
+"problem": {
+"id": "g4",
+"objects": [
+{
+"id": "T",
+"kind": "triangle",
+"data": {
+"angles": [
+"A",
+"B",
+"C"
+],
+"sides": [
+"AB",
+"BC",
+"CA"
+]
+}
+}
+],
+"facts": [
+{
+"predicate": "angle_measure",
+"args": [
+"A"
+],
+"value": 50
+},
+{
+"predicate": "angle_measure",
+"args": [
+"B"
+],
+"value": 60
+}
+],
+"conditions": [
+"nondegenerate:T"
+],
+"goal": {
+"predicate": "angle_measure",
+"args": [
+"C"
+],
+"value": 70
+},
+"skill": "geometry.triangle-angle-sum"
+}
+}
+},
+"w": {
+"raw": {
+"steps": [
+{
+"id": "s1",
+"statement": {
+"predicate": "angle_measure",
+"args": [
+"C"
+],
+"value": 80
+},
+"cited_theorem": "triangle-sum"
+}
+]
+}
+},
+"exp": "invalid",
+"why": "180-50-60=70, not 80."
+},
+{
+"id": "h7-typed-091",
+"cat": "typed-routes",
+"tags": [
+"text-lines",
+"conditional"
+],
+"p": {
+"alg": "x^2 = 4x"
+},
+"w": {
+"raw": [
+"Case x = 0: 0 = 0 holds, so x = 0 is a solution.",
+"Case x ≠ 0: divide by x to get x = 4.",
+"Hence x = 0 or x = 4."
+]
+},
+"exp": "verified",
+"why": "Splitting on x=0 and x≠0 gives solutions 0 and 4."
+},
+{
+"id": "h7-typed-092",
+"cat": "typed-routes",
+"tags": [
+"text-lines",
+"conditional"
+],
+"p": {
+"alg": "|x-1| = 2"
+},
+"w": {
+"raw": [
+"If x - 1 ≥ 0 then x - 1 = 2, so x = 3.",
+"If x - 1 < 0 then 1 - x = 2, so x = -1.",
+"Therefore x = 3 or x = -1."
+]
+},
+"exp": "verified",
+"why": "Both branches are consistent with their conditions; solutions 3 and -1."
+},
+{
+"id": "h7-typed-093",
+"cat": "typed-routes",
+"tags": [
+"text-lines",
+"incomplete"
+],
+"p": {
+"alg": "5x - 2 = 13"
+},
+"w": {
+"raw": [
+"5x = 15"
+]
+},
+"exp": "incomplete",
+"why": "5x=15 is true but x is never solved for."
+},
+{
+"id": "h7-typed-094",
+"cat": "typed-routes",
+"tags": [
+"text-lines",
+"coincidence"
+],
+"p": {
+"alg": "4x + 1 = 9"
+},
+"w": {
+"raw": [
+"9 - 1 = 8",
+"8 / 4 = 2"
+]
+},
+"exp": "incomplete",
+"why": "Arithmetic is true and ends with 2, but the lines never connect to the equation or state x.",
+"alt": [
+"invalid"
+]
+},
+{
+"id": "h7-typed-095",
+"cat": "typed-routes",
+"tags": [
+"text-lines",
+"side-claim"
+],
+"p": {
+"alg": "x + 5 = 12"
+},
+"w": {
+"raw": [
+"x = 12 - 5 = 7",
+"3 + 4 = 7"
+]
+},
+"exp": "verified",
+"why": "x=7 is correct and the extra line 3+4=7 is a harmless true remark."
+},
+{
+"id": "h7-typed-096",
+"cat": "typed-routes",
+"tags": [
+"text-lines",
+"side-claim"
+],
+"p": {
+"alg": "x + 5 = 12"
+},
+"w": {
+"raw": [
+"x = 12 - 5 = 7",
+"7 * 7 = 48"
+]
+},
+"exp": "invalid",
+"why": "x=7 is right but the extra line 7*7=48 is false (49)."
+},
+{
+"id": "h7-typed-097",
+"cat": "typed-routes",
+"tags": [
+"text-lines",
+"side-claim"
+],
+"p": {
+"alg": "x + 5 = 12"
+},
+"w": {
+"raw": [
+"3 + 4 = 7",
+"7 * 2 = 14"
+]
+},
+"exp": "incomplete",
+"why": "Only true but irrelevant arithmetic; x is never determined."
+},
+{
+"id": "h7-typed-098",
+"cat": "typed-routes",
+"tags": [
+"text-lines"
+],
+"p": {
+"alg": "3x - 6 = 2x + 1"
+},
+"w": {
+"raw": [
+"3x - 2x = 1 - 6",
+"x = -5"
+]
+},
+"exp": "invalid",
+"why": "Moving -6 across gives 3x-2x = 1+6, so x=7; the line 1-6 is a sign error."
+},
+{
+"id": "h7-typed-099",
+"cat": "typed-routes",
+"tags": [
+"text-lines",
+"concise"
+],
+"p": {
+"alg": "5x = 20"
+},
+"w": {
+"raw": [
+"x = 4"
+]
+},
+"exp": "verified",
+"why": "x=4 is the unique solution."
+},
+{
+"id": "h7-typed-100",
+"cat": "typed-routes",
+"tags": [
+"text-lines",
+"extraneous"
+],
+"p": {
+"alg": "sqrt(x+2) = x"
+},
+"w": {
+"raw": [
+"x + 2 = x^2",
+"x^2 - x - 2 = 0",
+"(x-2)(x+1) = 0",
+"x = 2 or x = -1"
+]
+},
+"exp": "invalid",
+"why": "x=-1 is extraneous (sqrt(1)=1≠-1); only x=2 solves the equation."
+}
+]

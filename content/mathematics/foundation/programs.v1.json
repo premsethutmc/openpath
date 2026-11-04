@@ -1,0 +1,389 @@
+{
+  "version": "1.0.0",
+  "programs": [
+    {
+      "id": "numbers-addition-g1",
+      "version": "1.0.0",
+      "grade": 1,
+      "competencyId": "MATH.number.addition",
+      "title": "Put numbers together",
+      "model": "objects",
+      "status": "provisional",
+      "provenance": "Original AI-assisted teaching; mathematically checked in tests; no educator review",
+      "retentionDelayDays": 1,
+      "stages": [
+        {
+          "id": "concept",
+          "title": "Meet the idea",
+          "text": "Touch each apple once. Say one number for each apple: one, two, three. The last number tells how many. Zero means none. When more apples arrive, keep the first apples and count the new apples too. Addition joins two groups.",
+          "questions": []
+        },
+        {
+          "id": "explore",
+          "title": "Try it with your hands",
+          "text": "Tap + to bring apples. Tap − to take one away. Make 3 apples and 2 apples. Count all five. On the number line start at 3 and make two forward jumps: 4, 5. Moving forward adds one each time.",
+          "questions": []
+        },
+        {
+          "id": "worked",
+          "title": "Watch an example",
+          "text": "Mina has 2 apples. Her friend brings 3. Keep the 2, then count on: 3, 4, 5. So 2 + 3 = 5. Adding zero brings no new apples: 2 + 0 = 2.",
+          "questions": []
+        },
+        {
+          "id": "guided",
+          "title": "Try together",
+          "text": "Use the model. Then tell us what you notice.",
+          "questions": [
+            "guided"
+          ]
+        },
+        {
+          "id": "independent",
+          "title": "Try on your own",
+          "text": "Try before opening a hint. A mistake is a chance to investigate.",
+          "questions": [
+            "independent-a",
+            "independent-b"
+          ]
+        },
+        {
+          "id": "application",
+          "title": "Use it in a story",
+          "text": "Picture the situation before choosing an operation.",
+          "questions": [
+            "application"
+          ]
+        },
+        {
+          "id": "transfer",
+          "title": "Try a new situation",
+          "text": "Use the same idea in a different picture.",
+          "questions": [
+            "transfer"
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "Remember tomorrow",
+          "text": "Come back after a day. Your finished work stays finished.",
+          "questions": [
+            "retention"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "guided",
+          "prompt": "There are 3 apples. Add 2 more. How many altogether?",
+          "answer": "5",
+          "hint": "Start at 3. Count two jumps: 4, 5.",
+          "solution": "3 + 2 = 5. Count every apple once.",
+          "commonError": "2",
+          "misconception": "You counted only the new apples. Keep the first three too."
+        },
+        {
+          "id": "independent-a",
+          "prompt": "4 apples and 1 more apple. How many?",
+          "answer": "5",
+          "hint": "Count on one from 4.",
+          "solution": "4 + 1 = 5.",
+          "commonError": "4",
+          "misconception": "The new apple also belongs in the total."
+        },
+        {
+          "id": "independent-b",
+          "prompt": "2 apples and no more apples. How many?",
+          "answer": "2",
+          "hint": "No more means zero added.",
+          "solution": "2 + 0 = 2. Zero leaves the group unchanged.",
+          "commonError": "0",
+          "misconception": "Zero is the number arriving, not the number already there."
+        },
+        {
+          "id": "application",
+          "prompt": "3 birds sit on a wall. 3 birds land beside them. How many birds now?",
+          "answer": "6",
+          "hint": "Keep the first birds. Count the arriving birds too.",
+          "solution": "3 + 3 = 6 birds.",
+          "commonError": "3",
+          "misconception": "Both groups stay on the wall."
+        },
+        {
+          "id": "transfer",
+          "prompt": "Start on 2 on a number line. Jump forward 4 times. Where do you land?",
+          "answer": "6",
+          "hint": "The first landing is 3, not 2.",
+          "solution": "Land on 3, 4, 5, 6. Four jumps from 2 land on 6.",
+          "commonError": "5",
+          "misconception": "Count jumps, not the starting point."
+        },
+        {
+          "id": "retention",
+          "prompt": "You have 5 shells and find 2 more. How many shells?",
+          "answer": "7",
+          "hint": "Count on two from 5.",
+          "solution": "5 + 2 = 7 shells.",
+          "commonError": "2",
+          "misconception": "Keep the shells you already had."
+        }
+      ]
+    },
+    {
+      "id": "equal-groups-g3",
+      "version": "1.0.0",
+      "grade": 3,
+      "competencyId": "MATH.number.equal-groups",
+      "title": "Equal groups make multiplication",
+      "model": "groups",
+      "status": "provisional",
+      "provenance": "Original AI-assisted teaching; mathematically checked in tests; no educator review",
+      "retentionDelayDays": 1,
+      "stages": [
+        {
+          "id": "concept",
+          "title": "Meet the idea",
+          "text": "An equal group has the same number of objects as every other group. Three bags with two marbles each make 2 + 2 + 2 = 6. We write 3 × 2 = 6: three groups, two in each group. The total counts objects, not bags.",
+          "questions": []
+        },
+        {
+          "id": "explore",
+          "title": "Try it with your hands",
+          "text": "Change the rows and the marbles in each row. Each row is one equal group. Try 3 rows of 4. Count across a row, then count 4, 8, 12. Turn it around: 4 rows of 3 also make 12, though the groups look different.",
+          "questions": []
+        },
+        {
+          "id": "worked",
+          "title": "Watch an example",
+          "text": "Four plates hold 3 idlis each. Draw four rows with three dots in every row. 3 + 3 + 3 + 3 = 12, so 4 × 3 = 12. Four plates with 3, 3, 2, 3 idlis are not four equal groups of 3.",
+          "questions": []
+        },
+        {
+          "id": "guided",
+          "title": "Try together",
+          "text": "Use the model. Then tell us what you notice.",
+          "questions": [
+            "guided"
+          ]
+        },
+        {
+          "id": "independent",
+          "title": "Try on your own",
+          "text": "Try before opening a hint. A mistake is a chance to investigate.",
+          "questions": [
+            "independent-a",
+            "independent-b"
+          ]
+        },
+        {
+          "id": "application",
+          "title": "Use it in a story",
+          "text": "Picture the situation before choosing an operation.",
+          "questions": [
+            "application"
+          ]
+        },
+        {
+          "id": "transfer",
+          "title": "Try a new situation",
+          "text": "Use the same idea in a different picture.",
+          "questions": [
+            "transfer"
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "Remember tomorrow",
+          "text": "Come back after a day. Your finished work stays finished.",
+          "questions": [
+            "retention"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "guided",
+          "prompt": "3 equal groups have 2 marbles each. How many marbles?",
+          "answer": "6",
+          "hint": "Add 2 three times, or make 3 rows of 2.",
+          "solution": "2 + 2 + 2 = 6, so 3 × 2 = 6.",
+          "commonError": "5",
+          "misconception": "Adding 3 and 2 counts group labels, not all the objects."
+        },
+        {
+          "id": "independent-a",
+          "prompt": "4 rows have 3 dots each. How many dots?",
+          "answer": "12",
+          "hint": "Count 3, 6, 9, 12.",
+          "solution": "4 × 3 = 12.",
+          "commonError": "7",
+          "misconception": "Rows plus dots per row is not the total dots."
+        },
+        {
+          "id": "independent-b",
+          "prompt": "2 bags contain 5 marbles each. How many marbles?",
+          "answer": "10",
+          "hint": "Make 2 groups of 5.",
+          "solution": "5 + 5 = 10.",
+          "commonError": "7",
+          "misconception": "Add the objects in both bags."
+        },
+        {
+          "id": "application",
+          "prompt": "A shop packs 5 boxes with 4 pencils each. How many pencils?",
+          "answer": "20",
+          "hint": "Draw one row for each box.",
+          "solution": "4 + 4 + 4 + 4 + 4 = 20 pencils.",
+          "commonError": "9",
+          "misconception": "There are five groups of four, not five and four objects."
+        },
+        {
+          "id": "transfer",
+          "prompt": "An array has 3 rows and 4 columns. Turn it to 4 rows and 3 columns. How many dots now?",
+          "answer": "12",
+          "hint": "Turning does not add or remove dots.",
+          "solution": "3 × 4 = 4 × 3 = 12 dots.",
+          "commonError": "7",
+          "misconception": "The arrangement changes; the total does not."
+        },
+        {
+          "id": "retention",
+          "prompt": "6 tables each seat 2 people. How many seats?",
+          "answer": "12",
+          "hint": "Count by twos six times.",
+          "solution": "6 × 2 = 12 seats.",
+          "commonError": "8",
+          "misconception": "Count equal groups, not the two labels."
+        }
+      ]
+    },
+    {
+      "id": "fraction-equivalence-g5",
+      "version": "1.0.0",
+      "grade": 5,
+      "competencyId": "MATH.number.equivalent-fractions",
+      "title": "Same whole, different pieces",
+      "model": "fractions",
+      "status": "provisional",
+      "provenance": "Original AI-assisted teaching; mathematically checked in tests; no educator review",
+      "retentionDelayDays": 1,
+      "stages": [
+        {
+          "id": "concept",
+          "title": "Meet the idea",
+          "text": "A fraction describes equal parts of one whole. In 1/2, the 2 counts all equal parts and the 1 counts selected parts. Cut each half in two: there are now 4 equal parts and 2 are selected. 1/2 and 2/4 name the same amount of the same whole.",
+          "questions": []
+        },
+        {
+          "id": "explore",
+          "title": "Try it with your hands",
+          "text": "Choose the number of equal parts and tap pieces to shade them. Compare two bars of the same length. Make 1/2 on one bar and 2/4 on the other. Their shaded lengths match. Try 2/3 and 4/6. Unequal pieces cannot be counted as equal fraction parts.",
+          "questions": []
+        },
+        {
+          "id": "worked",
+          "title": "Watch an example",
+          "text": "To compare 2/3 and 3/4, split both same-sized wholes into 12 equal parts. 2/3 = 8/12 and 3/4 = 9/12, so 3/4 is larger. Multiplying BOTH numbers by the same positive number preserves the amount. Adding one to both does not: 1/2 is not 2/3.",
+          "questions": []
+        },
+        {
+          "id": "guided",
+          "title": "Try together",
+          "text": "Use the model. Then tell us what you notice.",
+          "questions": [
+            "guided"
+          ]
+        },
+        {
+          "id": "independent",
+          "title": "Try on your own",
+          "text": "Try before opening a hint. A mistake is a chance to investigate.",
+          "questions": [
+            "independent-a",
+            "independent-b"
+          ]
+        },
+        {
+          "id": "application",
+          "title": "Use it in a story",
+          "text": "Picture the situation before choosing an operation.",
+          "questions": [
+            "application"
+          ]
+        },
+        {
+          "id": "transfer",
+          "title": "Try a new situation",
+          "text": "Use the same idea in a different picture.",
+          "questions": [
+            "transfer"
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "Remember tomorrow",
+          "text": "Come back after a day. Your finished work stays finished.",
+          "questions": [
+            "retention"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "guided",
+          "prompt": "1/2 = ?/4. What is the missing numerator?",
+          "answer": "2",
+          "hint": "Each half becomes two quarters.",
+          "solution": "Multiply top and bottom by 2: 1/2 = 2/4.",
+          "commonError": "1",
+          "misconception": "When pieces become smaller, more pieces are needed for the same amount."
+        },
+        {
+          "id": "independent-a",
+          "prompt": "2/3 = ?/6. What is the missing numerator?",
+          "answer": "4",
+          "hint": "Every third becomes two sixths.",
+          "solution": "Multiply both numbers by 2: 2/3 = 4/6.",
+          "commonError": "2",
+          "misconception": "Changing only the denominator changes the amount."
+        },
+        {
+          "id": "independent-b",
+          "prompt": "Which is larger: 2/3 or 3/4? Enter the larger fraction.",
+          "answer": "3/4",
+          "hint": "Compare 8/12 and 9/12.",
+          "solution": "2/3 = 8/12 and 3/4 = 9/12. 3/4 is larger.",
+          "commonError": "2/3",
+          "misconception": "Compare equal-sized pieces, not just numerators or denominators."
+        },
+        {
+          "id": "application",
+          "prompt": "Two equal-size ribbons: Arun uses 1/2 of one; Devi uses 3/4 of the other. What fraction of a whole ribbon is the longer used piece?",
+          "answer": "3/4",
+          "hint": "One half is two quarters.",
+          "solution": "3/4 is longer than 2/4. Same-size wholes make the comparison fair.",
+          "commonError": "1/2",
+          "misconception": "More equal quarters cover more length."
+        },
+        {
+          "id": "transfer",
+          "prompt": "A same-length path is marked in 10 equal steps. Half the path is how many steps?",
+          "answer": "5",
+          "hint": "Split ten steps into two equal groups.",
+          "solution": "1/2 = 5/10, so half the path is 5 steps.",
+          "commonError": "2",
+          "misconception": "The denominator counts parts; it is not the number of selected steps."
+        },
+        {
+          "id": "retention",
+          "prompt": "3/5 = ?/10. What is the missing numerator?",
+          "answer": "6",
+          "hint": "Each fifth is split into two.",
+          "solution": "Multiply both numbers by 2: 3/5 = 6/10.",
+          "commonError": "3",
+          "misconception": "Double both numbers to preserve the fraction."
+        }
+      ]
+    }
+  ]
+}

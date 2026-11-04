@@ -1,0 +1,1511 @@
+{
+ "summary": {
+  "byCategory": {
+   "domain-change": {
+    "n": 41,
+    "statusAgree": 34,
+    "falseAccept": 7,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 31
+   },
+   "extraneous-root": {
+    "n": 41,
+    "statusAgree": 41,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 27
+   },
+   "cancellation": {
+    "n": 41,
+    "statusAgree": 41,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 36
+   },
+   "multiplication-by-zero": {
+    "n": 41,
+    "statusAgree": 29,
+    "falseAccept": 12,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 27
+   },
+   "invalid-division": {
+    "n": 41,
+    "statusAgree": 41,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 41
+   },
+   "rational-expressions": {
+    "n": 41,
+    "statusAgree": 41,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 39
+   },
+   "ambiguous-notation": {
+    "n": 44,
+    "statusAgree": 39,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 43
+   },
+   "alternative-paths": {
+    "n": 41,
+    "statusAgree": 39,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 41
+   },
+   "correct-controls": {
+    "n": 41,
+    "statusAgree": 41,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 41
+   },
+   "unsupported": {
+    "n": 41,
+    "statusAgree": 29,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 12,
+    "firstOk": 29
+   }
+  },
+  "definitions": {
+   "verdictAccuracy": "status equals oracle status / all tasks",
+   "falseAcceptance": "evaluator says valid-complete|valid-incomplete where oracle says invalid|unsupported|ambiguous / oracle non-valid tasks",
+   "falseRejection": "evaluator says invalid where oracle says valid-* / oracle valid tasks",
+   "overRefusal": "evaluator says unsupported|ambiguous where oracle gives a definite verdict / oracle definite tasks",
+   "underRefusal": "evaluator gives a definite verdict where oracle says unsupported|ambiguous / those tasks",
+   "firstErrorLocalization": "first invalid line equal and invalid_at=step / oracle step-invalid tasks"
+  },
+  "metrics": {
+   "exp_validish": 227,
+   "falseRejection": 0,
+   "exp_nonvalid": 186,
+   "falseAcceptance": 19,
+   "exp_decidable": 342,
+   "overRefusal": 0,
+   "exp_unsupportedOrAmbiguous": 71,
+   "underRefusal": 12,
+   "exp_stepInvalid": 81,
+   "firstOk": 69,
+   "exp_finalClaim": 34,
+   "finalOk": 26,
+   "wrongVerdict": 26
+  },
+  "tasks": 413,
+  "crashes": 0,
+  "unsafeCertifications": 19,
+  "statusAgree": 375,
+  "firstInvalidAgree": 355,
+  "byFamily": {
+   "H": {
+    "n": 413,
+    "status": 375,
+    "first": 355
+   }
+  },
+  "confusion": {
+   "invalid -> invalid": 96,
+   "valid-complete -> valid-complete": 214,
+   "invalid -> valid-incomplete": 12,
+   "invalid -> valid-complete": 7,
+   "valid-incomplete -> valid-incomplete": 6,
+   "ambiguous -> ambiguous": 30,
+   "valid-complete -> valid-incomplete": 7,
+   "unsupported -> unsupported": 29,
+   "unsupported -> invalid": 12
+  }
+ },
+ "misconceptionByClass": {
+  "final-claim": {
+   "(none)": 34
+  },
+  "none": {
+   "(none)": 227
+  },
+  "step": {
+   "divided-by-unknown-factor": 37,
+   "divided-by-unknown-factor+cancel-additive-term": 1,
+   "arithmetic-slip": 24,
+   "cancel-additive-term": 2,
+   "cancel-additive-term+cross-multiply-straight": 1,
+   "(none)": 13,
+   "cross-multiply-straight": 3
+  },
+  "ambiguous": {
+   "arithmetic-slip": 19,
+   "(none)": 11
+  },
+  "unsupported": {
+   "(none)": 40,
+   "partial-distribution": 1
+  }
+ },
+ "mismatches": [
+  {
+   "id": "H-DC-001",
+   "family": "H",
+   "category": "domain-change",
+   "lines": [
+    "( − 5 ÷ 6)x − 6 = (2 ÷ 3)",
+    "x = − 8"
+   ],
+   "problem": "((-5/6)*x-6)*(x+8)/(x+8)=(2/3)",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-DC-005",
+   "family": "H",
+   "category": "domain-change",
+   "lines": [
+    "(9x+(3/4))^2=7^2",
+    "9x+(3/4)=7 or 9x+(3/4)=-7",
+    "x=(25/36) or x=(-31/36)"
+   ],
+   "problem": "9*x+(3/4)=7",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-DC-007",
+   "family": "H",
+   "category": "domain-change",
+   "lines": [
+    "- 5x - 3 = 42",
+    "x = - 9"
+   ],
+   "problem": "(-5*x-3)*(x+9)/(x+9)=42",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-DC-008",
+   "family": "H",
+   "category": "domain-change",
+   "lines": [
+    "(19x - 30)^2 = 14^2",
+    "19x - 30 = 14 or 19x - 30 = - 14",
+    "x = (44 / 19) or x = (16 / 19)"
+   ],
+   "problem": "19*x-30=14",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-DC-012",
+   "family": "H",
+   "category": "domain-change",
+   "lines": [
+    "(( − 5 ÷ 6)x + 7)(x − 1) = (( − 9 ÷ 8))(x − 1)",
+    "x = 1 or ( − 5 ÷ 6)x + 7 = ( − 9 ÷ 8)",
+    "x = 1 or x = (39 ÷ 4)"
+   ],
+   "problem": "(-5/6)*x+7=(-9/8)",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-DC-014",
+   "family": "H",
+   "category": "domain-change",
+   "lines": [
+    "(( - 17 / 3)x + 39)^2 = 11^2",
+    "( - 17 / 3)x + 39 = 11 or ( - 17 / 3)x + 39 = - 11",
+    "x = (84 / 17) or x = (150 / 17)"
+   ],
+   "problem": "(-17/3)*x+39=11",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-DC-022",
+   "family": "H",
+   "category": "domain-change",
+   "lines": [
+    "( - 8x + 6)^2 = 9^2",
+    "- 8x + 6 = 9 or - 8x + 6 = - 9",
+    "x = ( - 3 / 8) or x = (15 / 8)"
+   ],
+   "problem": "-8*x+6=9",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-DC-028",
+   "family": "H",
+   "category": "domain-change",
+   "lines": [
+    "( - 16x + (4 / 3))^2 = 12^2",
+    "- 16x + (4 / 3) = 12 or - 16x + (4 / 3) = - 12",
+    "x = ( - 2 / 3) or x = (5 / 6)"
+   ],
+   "problem": "-16*x+(4/3)=12",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-DC-034",
+   "family": "H",
+   "category": "domain-change",
+   "lines": [
+    "(4x - 6)^2 = 8^2",
+    "4x - 6 = 8 or 4x - 6 = - 8",
+    "x = (7 / 2) or x = ( - 1 / 2)"
+   ],
+   "problem": "4*x-6=8",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-DC-038",
+   "family": "H",
+   "category": "domain-change",
+   "lines": [
+    "28*x-2=194",
+    "x=7"
+   ],
+   "problem": "(28*x-2)*(x-7)/(x-7)=194",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-004",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "((3 ÷ 4)(x − 3) + ( − 5)(x + 5)) ÷ ((x + 5)(x − 3)) = ( − 6) ÷ ((x + 5)(x − 3))",
+    "(3 ÷ 4)(x − 3) + ( − 5)(x + 5) = − 6",
+    "( − 17 ÷ 4)x − (109 ÷ 4) = − 6",
+    "x = − 5"
+   ],
+   "problem": "(3/4)/(x+5)+(-5)/(x-3)=(-6)/((x+5)*(x-3))",
+   "expected": [
+    "invalid",
+    4,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-008",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "(x+4)*(x+9)=0",
+    "x=-4 or x=-9"
+   ],
+   "problem": "(x+4)*(x+9)/(x+9)=0",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-010",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "(x-3)/(x-3)=1",
+    "1=1",
+    "all real numbers"
+   ],
+   "problem": "x/(x-3)-3/(x-3)=1",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-013",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "(x-1)(x+9)=0",
+    "x=1 or x=-9"
+   ],
+   "problem": "(x-1)*(x+9)/(x+9)=0",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-014",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "((-9)(x-8)+(-2)(x+9))/((x+9)(x-8))=153/((x+9)(x-8))",
+    "(-9)(x-8)+(-2)(x+9)=153",
+    "-11x+54=153",
+    "x=-9"
+   ],
+   "problem": "(-9)/(x+9)+(-2)/(x-8)=153/((x+9)*(x-8))",
+   "expected": [
+    "invalid",
+    4,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-019",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "((13/8)(x-7)+4(x-3))/((x-3)(x-7))=((-13/2))/((x-3)(x-7))",
+    "(13/8)(x-7)+4(x-3)=(-13/2)",
+    "(45/8)x-(187/8)=(-13/2)",
+    "x=3"
+   ],
+   "problem": "(13/8)/(x-3)+4/(x-7)=((-13/2))/((x-3)*(x-7))",
+   "expected": [
+    "invalid",
+    4,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-026",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "6x+25=19",
+    "x=-1"
+   ],
+   "problem": "(6*x+25)/(x+1)=19/(x+1)",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-027",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "-5x-1=-41",
+    "x=8"
+   ],
+   "problem": "(-5*x-1)/(x-8)=(-41)/(x-8)",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-028",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "((( − 5 ÷ 3))(x − 3) + 28(x + 8)) ÷ ((x + 8)(x − 3)) = (55 ÷ 3) ÷ ((x + 8)(x − 3))",
+    "(( − 5 ÷ 3))(x − 3) + 28(x + 8) = (55 ÷ 3)",
+    "(79 ÷ 3)x + 229 = (55 ÷ 3)",
+    "x = − 8"
+   ],
+   "problem": "((-5/3))/(x+8)+28/(x-3)=(55/3)/((x+8)*(x-3))",
+   "expected": [
+    "invalid",
+    4,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-029",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "(x+5)*(x-6)=0",
+    "x=-5 or x=6"
+   ],
+   "problem": "(x+5)*(x-6)/(x-6)=0",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-036",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "(x-1)/(x-1)=1",
+    "1=1",
+    "all real numbers"
+   ],
+   "problem": "x/(x-1)-1/(x-1)=1",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-037",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "((-3)*(x+7)+8*(x+5))/((x+5)*(x+7))=(-6)/((x+5)*(x+7))",
+    "(-3)*(x+7)+8*(x+5)=-6",
+    "5*x+19=-6",
+    "x=-5"
+   ],
+   "problem": "(-3)/(x+5)+8/(x+7)=(-6)/((x+5)*(x+7))",
+   "expected": [
+    "invalid",
+    4,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-038",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "(x-1)*(x-5)=0",
+    "x=1 or x=5"
+   ],
+   "problem": "(x-1)*(x-5)/(x-5)=0",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-EX-041",
+   "family": "H",
+   "category": "extraneous-root",
+   "lines": [
+    "(x − 5)(x − 7) = 0",
+    "x = 5 or x = 7"
+   ],
+   "problem": "(x-5)*(x-7)/(x-7)=0",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-CA-005",
+   "family": "H",
+   "category": "cancellation",
+   "lines": [
+    "(x+2)/(x-9)=(-5/6)",
+    "(x+2)=((-5/6))*(x-9)",
+    "x=3"
+   ],
+   "problem": "(x-3)*(x+2)/((x-3)*(x-9))=((-5/6))",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-CA-006",
+   "family": "H",
+   "category": "cancellation",
+   "lines": [
+    "x + 9 = 18",
+    "x = 9"
+   ],
+   "problem": "(x-9)*(x+9)/(x-9)=18",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-CA-012",
+   "family": "H",
+   "category": "cancellation",
+   "lines": [
+    "x+5=10",
+    "x=5"
+   ],
+   "problem": "(x^2-25)/(x-5)=10",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-CA-018",
+   "family": "H",
+   "category": "cancellation",
+   "lines": [
+    "29x-16=158",
+    "x=6"
+   ],
+   "problem": "(29*x-16)*(x-6)/(x-6)=158",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-CA-037",
+   "family": "H",
+   "category": "cancellation",
+   "lines": [
+    "-6*x-3=3",
+    "x=-1"
+   ],
+   "problem": "(-6*x-3)*(x+1)/(x+1)=3",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-MZ-005",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0*(-5*x-(1/4))=0*(-3)",
+    "0=0",
+    "x=11/20"
+   ],
+   "problem": "-5*x-(1/4)=-3",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "valid-complete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-008",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0(-7x-(3/4))=0(-1)",
+    "0=0",
+    "x=1/28"
+   ],
+   "problem": "-7*x-(3/4)=-1",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "valid-complete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-011",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0*(-5*x-8)=0*(-7)",
+    "0=0",
+    "x=-1/5"
+   ],
+   "problem": "-5*x-8=-7",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "valid-complete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-012",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0(-2x+9)=0*13",
+    "0=0",
+    "x=-2"
+   ],
+   "problem": "-2*x+9=13",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "valid-complete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-013",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0*(8*x-(1/6))=0*6",
+    "0=0",
+    "x=37/48"
+   ],
+   "problem": "8*x-(1/6)=6",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "valid-complete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-014",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0( - 8x - (1 / 5)) = 0 * 35",
+    "0 = 0",
+    "all real numbers"
+   ],
+   "problem": "-8*x-(1/5)=35",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-MZ-015",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0(x+2)(6x+(3/4))=0(-6)",
+    "0=0"
+   ],
+   "problem": "6*x+(3/4)=-6",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-018",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0( − 7x − 17) = 0 × 31",
+    "0 = 0",
+    "x = − 48 ÷ 7"
+   ],
+   "problem": "-7*x-17=31",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "valid-complete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-020",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0(x − 6)(24x + 9) = 0 × 4",
+    "0 = 0"
+   ],
+   "problem": "24*x+9=4",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-022",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0(x + 3)( - 7x + 4) = 0 * 1",
+    "0 = 0"
+   ],
+   "problem": "-7*x+4=1",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-023",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0( − 6x − (4 ÷ 3)) = 0 × 2",
+    "0 = 0",
+    "x = − 5 ÷ 9"
+   ],
+   "problem": "-6*x-(4/3)=2",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "valid-complete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-027",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "x(-3x+22)=(-4)x",
+    "x=0 or -3x+22=-4",
+    "x=0 or x=(26/3)"
+   ],
+   "problem": "-3*x+22=-4",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-037",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "0(x − 5)(16x + 4) = 0( − 2)",
+    "0 = 0"
+   ],
+   "problem": "16*x+4=-2",
+   "expected": [
+    "invalid",
+    1,
+    "step"
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-MZ-041",
+   "family": "H",
+   "category": "multiplication-by-zero",
+   "lines": [
+    "(x − 8)( − x + 6) = 2(x − 8)",
+    "(x − 8) = 0 or − x + 6 = 2",
+    "x = 8 or x = 4"
+   ],
+   "problem": "-x+6=2",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-RE-006",
+   "family": "H",
+   "category": "rational-expressions",
+   "lines": [
+    "3 ÷ (x + 5) + 3 = 3 ÷ (x + 5)",
+    "x = − 5"
+   ],
+   "problem": "3/(x+5)^2+3/(x+5)=3/(x+5)^2",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-RE-028",
+   "family": "H",
+   "category": "rational-expressions",
+   "lines": [
+    "(9 / 5) + (3 / 2)(x - 6) = (9 / 5)",
+    "(3 / 2)x - (36 / 5) = (9 / 5)",
+    "x = 6"
+   ],
+   "problem": "(9/5)/(x-6)^2+(3/2)/(x-6)=(9/5)/(x-6)^2",
+   "expected": [
+    "invalid",
+    3,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-AM-016",
+   "family": "H",
+   "category": "ambiguous-notation",
+   "lines": [
+    "2/7(x+7)(x+4)=0",
+    "x=-3"
+   ],
+   "problem": "2/(7*(x+7)*(x+4))=0",
+   "expected": [
+    "invalid",
+    2,
+    "final-claim"
+   ],
+   "got": [
+    "invalid",
+    null,
+    "final-claim"
+   ]
+  },
+  {
+   "id": "H-AM-018",
+   "family": "H",
+   "category": "ambiguous-notation",
+   "lines": [
+    "9x / 6 + 3(x - 8) = 2",
+    "x = (52 / 9)"
+   ],
+   "problem": "9*x/6+3*(x-8)=2",
+   "expected": [
+    "valid-complete",
+    null,
+    null
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-AM-032",
+   "family": "H",
+   "category": "ambiguous-notation",
+   "lines": [
+    "12x / 6 + 8(x - - 8) = - 14",
+    "x = ( - 39 / 5)"
+   ],
+   "problem": "12*x/6+8*(x--8)=-14",
+   "expected": [
+    "valid-complete",
+    null,
+    null
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-AM-034",
+   "family": "H",
+   "category": "ambiguous-notation",
+   "lines": [
+    "7x / 4 + 7(x - - 8) = 1",
+    "x = ( - 44 / 7)"
+   ],
+   "problem": "7*x/4+7*(x--8)=1",
+   "expected": [
+    "valid-complete",
+    null,
+    null
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-AM-040",
+   "family": "H",
+   "category": "ambiguous-notation",
+   "lines": [
+    "7x / 4 + 2(x - 2) = - 3",
+    "x = (4 / 15)"
+   ],
+   "problem": "7*x/4+2*(x-2)=-3",
+   "expected": [
+    "valid-complete",
+    null,
+    null
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-AM-044",
+   "family": "H",
+   "category": "ambiguous-notation",
+   "lines": [
+    "12x / 6 + 4(x - - 2) = 19",
+    "x = (11 / 6)"
+   ],
+   "problem": "12*x/6+4*(x--2)=19",
+   "expected": [
+    "valid-complete",
+    null,
+    null
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-AP-030",
+   "family": "H",
+   "category": "alternative-paths",
+   "lines": [
+    "- 36x - 2 = - 3x - 40",
+    "- 38 = - 33x",
+    "(38 / 33) = x"
+   ],
+   "problem": "-3*x-40=-36*x-2",
+   "expected": [
+    "valid-complete",
+    null,
+    null
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-AP-031",
+   "family": "H",
+   "category": "alternative-paths",
+   "lines": [
+    "- 7x + 10 = (1 / 5)x - 3",
+    "- 13 = ( - 36 / 5)x",
+    "(65 / 36) = x"
+   ],
+   "problem": "(1/5)*x-3=-7*x+10",
+   "expected": [
+    "valid-complete",
+    null,
+    null
+   ],
+   "got": [
+    "valid-incomplete",
+    null,
+    null
+   ]
+  },
+  {
+   "id": "H-UN-003",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "x^2 = 5",
+    "6x = - 7",
+    "x = - 7 / 6"
+   ],
+   "problem": "6*x+8=1",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    1,
+    "step"
+   ]
+  },
+  {
+   "id": "H-UN-008",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "x^2=23",
+    "5*x=(-3/2)",
+    "x=-3/10"
+   ],
+   "problem": "5*x-(3/2)=-3",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    1,
+    "step"
+   ]
+  },
+  {
+   "id": "H-UN-013",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "x(x - 4) = 7x",
+    "x(x - 4) = 7"
+   ],
+   "problem": "x*(x-4)=7*x",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    2,
+    "step"
+   ]
+  },
+  {
+   "id": "H-UN-016",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "(5 / 2)x = (32 / 5)",
+    "x = 64 / 25",
+    "x^2 = 11"
+   ],
+   "problem": "(5/2)*x-(17/5)=3",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    3,
+    "step"
+   ]
+  },
+  {
+   "id": "H-UN-018",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "6*x=(-22/5)",
+    "x^2=7",
+    "x=-11/15"
+   ],
+   "problem": "6*x+2=(-12/5)",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    2,
+    "step"
+   ]
+  },
+  {
+   "id": "H-UN-023",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "x(x-6)=6x",
+    "x(x-6)=6",
+    "x=0 or x=12"
+   ],
+   "problem": "x*(x-6)=6*x",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    2,
+    "step"
+   ]
+  },
+  {
+   "id": "H-UN-024",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "x^2=13",
+    "4*x=-1",
+    "x=-1/4"
+   ],
+   "problem": "4*x-8=-9",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    1,
+    "step"
+   ]
+  },
+  {
+   "id": "H-UN-025",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "( - 5 / 2)x = ( - 9 / 5)",
+    "x^2 = 11",
+    "x = 18 / 25"
+   ],
+   "problem": "(-5/2)*x+5=(16/5)",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    2,
+    "step"
+   ]
+  },
+  {
+   "id": "H-UN-029",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "-2x=13",
+    "x=-13/2",
+    "x^2=7"
+   ],
+   "problem": "-2*x-7=6",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    3,
+    "step"
+   ]
+  },
+  {
+   "id": "H-UN-032",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "x(x - 2) = 4x",
+    "x(x - 2) = 4"
+   ],
+   "problem": "x*(x-2)=4*x",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    2,
+    "step"
+   ]
+  },
+  {
+   "id": "H-UN-036",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "x(x − 5) = 7x",
+    "x(x − 5) = 7"
+   ],
+   "problem": "x*(x-5)=7*x",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    2,
+    "step"
+   ]
+  },
+  {
+   "id": "H-UN-041",
+   "family": "H",
+   "category": "unsupported",
+   "lines": [
+    "x^2 = 5",
+    "4x = - 7",
+    "x = - 7 / 4"
+   ],
+   "problem": "4*x+5=-2",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    1,
+    "step"
+   ]
+  }
+ ]
+}

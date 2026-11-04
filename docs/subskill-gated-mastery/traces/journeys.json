@@ -1,0 +1,5946 @@
+[
+ {
+  "id": 1,
+  "name": "Two-step success only",
+  "submissions": [
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "7x = 70",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "2x = 10",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:7,9,12",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "12",
+    "working": [
+     "7x = 84",
+     "x = 12"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 3,
+     "total": 3
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.both-sides@1, linear-equations.brackets@1, linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.both-sides@1, linear-equations.brackets@1, linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-method",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.both-sides@1, linear-equations.brackets@1, linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-slip",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.both-sides@1, linear-equations.brackets@1, linear-equations.modelling@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "developing",
+     "shown": [
+      "two-step"
+     ],
+     "missing": [
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "developing",
+     "shown": [
+      "two-step"
+     ],
+     "missing": [
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "developing",
+     "shown": [
+      "two-step"
+     ],
+     "missing": [
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "developing",
+     "shown": [
+      "two-step"
+     ],
+     "missing": [
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": []
+ },
+ {
+  "id": 2,
+  "name": "Both-sides success only",
+  "submissions": [
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "4x + 15 = 35",
+     "4x = 20",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "x + 5 = 15",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,13,4,11",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "11",
+    "working": [
+     "2x + 13 = 35",
+     "2x = 22",
+     "x = 11"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 3,
+     "total": 3
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.brackets@1, linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.brackets@1, linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-method",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.brackets@1, linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-slip",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.brackets@1, linear-equations.modelling@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "developing",
+     "shown": [
+      "both-sides"
+     ],
+     "missing": [
+      "two-step",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "developing",
+     "shown": [
+      "both-sides"
+     ],
+     "missing": [
+      "two-step",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "developing",
+     "shown": [
+      "both-sides"
+     ],
+     "missing": [
+      "two-step",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "developing",
+     "shown": [
+      "both-sides"
+     ],
+     "missing": [
+      "two-step",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": []
+ },
+ {
+  "id": 3,
+  "name": "Bracket success only",
+  "submissions": [
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "4x - 25 = 15",
+     "4x = 40",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "14",
+    "working": [
+     "3x - 5 = 37",
+     "3x = 42",
+     "x = 14"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:6,3,5,8",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "8",
+    "working": [
+     "x + 18 = 26",
+     "x = 8"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 3,
+     "total": 3
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.both-sides@1, linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.both-sides@1, linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-method",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.both-sides@1, linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-slip",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.both-sides@1, linear-equations.modelling@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "developing",
+     "shown": [
+      "brackets"
+     ],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "developing",
+     "shown": [
+      "brackets"
+     ],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "developing",
+     "shown": [
+      "brackets"
+     ],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "developing",
+     "shown": [
+      "brackets"
+     ],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": []
+ },
+ {
+  "id": 4,
+  "name": "Modelling success only",
+  "submissions": [
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:2,9,6,4",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 3,
+     "total": 3
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.both-sides@1, linear-equations.brackets@1"
+    },
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "insufficient-evidence",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.both-sides@1, linear-equations.brackets@1, linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-method",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.both-sides@1, linear-equations.brackets@1"
+    },
+    {
+     "variant": "gated-slip",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.both-sides@1, linear-equations.brackets@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "developing",
+     "shown": [
+      "modelling"
+     ],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "insufficient-evidence",
+     "shown": [],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "developing",
+     "shown": [
+      "modelling"
+     ],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "developing",
+     "shown": [
+      "modelling"
+     ],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": []
+ },
+ {
+  "id": 5,
+  "name": "All core sub-skills demonstrated (verified working where the family has a contract)",
+  "submissions": [
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "7x = 70",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "2x = 10",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "4x + 15 = 35",
+     "4x = 20",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "x + 5 = 15",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "4x - 25 = 15",
+     "4x = 40",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "14",
+    "working": [
+     "3x - 5 = 37",
+     "3x = 42",
+     "x = 14"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 8,
+     "total": 8
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.modelling@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "missing": [
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": []
+ },
+ {
+  "id": 6,
+  "name": "Correct answer with invalid working (two-step), other sub-skills shown",
+  "submissions": [
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "4x + 15 = 35",
+     "4x = 20",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "x + 5 = 15",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "4x - 25 = 15",
+     "4x = 40",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "14",
+    "working": [
+     "3x - 5 = 37",
+     "3x = 42",
+     "x = 14"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "7x = 80",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "invalid",
+    "methodEvidence": "method-false-step"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "2x = 18",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "invalid",
+    "methodEvidence": "method-false-step"
+   },
+   {
+    "q": "gen:lin:7,9,12",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "12",
+    "working": [
+     "7x = 102",
+     "x = 12"
+    ],
+    "verdict": "correct",
+    "workingStatus": "invalid",
+    "methodEvidence": "method-false-step"
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 9,
+     "total": 9
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1"
+    },
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-method",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1"
+    },
+    {
+     "variant": "gated-slip",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "developing",
+     "shown": [
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [
+      "two-step"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "contradicted (verified 0, false step 3)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "developing",
+     "shown": [
+      "both-sides",
+      "brackets"
+     ],
+     "missing": [
+      "two-step",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "contradicted (verified 0, false step 3)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "developing",
+     "shown": [
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [
+      "two-step"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "contradicted (verified 0, false step 3)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "developing",
+     "shown": [
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [
+      "two-step"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "contradicted (verified 0, false step 3)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": [],
+  "extra": {
+   "forgedClientVerdict": {
+    "gated": "developing",
+    "twoStep": "insufficient-evidence",
+    "twoStepMethod": "not-established",
+    "verified": 0,
+    "gatedMethod": "developing"
+   }
+  }
+ },
+ {
+  "id": 7,
+  "name": "Bare correct answers on every core sub-skill (no working)",
+  "submissions": [
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "14",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 8,
+     "total": 8
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-method",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.two-step@1, linear-equations.both-sides@1, linear-equations.brackets@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "missing": [
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "developing",
+     "shown": [
+      "modelling"
+     ],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "developing",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)",
+       "note": "no independent right answer with verified working yet"
+      },
+      "both-sides": {
+       "status": "developing",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)",
+       "note": "no independent right answer with verified working yet"
+      },
+      "brackets": {
+       "status": "developing",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)",
+       "note": "no independent right answer with verified working yet"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": []
+ },
+ {
+  "id": 8,
+  "name": "Assisted success on every core sub-skill (a hint each time)",
+  "submissions": [
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 1,
+    "response": "10",
+    "working": [
+     "7x = 70",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 1,
+    "response": "5",
+    "working": [
+     "2x = 10",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:7,9,12",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 1,
+    "response": "12",
+    "working": [
+     "7x = 84",
+     "x = 12"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 1,
+    "response": "5",
+    "working": [
+     "4x + 15 = 35",
+     "4x = 20",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 1,
+    "response": "10",
+    "working": [
+     "x + 5 = 15",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,13,4,11",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 1,
+    "response": "11",
+    "working": [
+     "2x + 13 = 35",
+     "2x = 22",
+     "x = 11"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 1,
+    "response": "10",
+    "working": [
+     "4x - 25 = 15",
+     "4x = 40",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 1,
+    "response": "14",
+    "working": [
+     "3x - 5 = 37",
+     "3x = 42",
+     "x = 14"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:6,3,5,8",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 1,
+    "response": "8",
+    "working": [
+     "x + 18 = 26",
+     "x = 8"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 1,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 1,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:2,9,6,4",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 1,
+    "response": "A",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "guided",
+    "verified": false,
+    "claimsCompetence": false,
+    "retention": "none",
+    "retentionDueAt": null,
+    "recoveryRequired": false,
+    "independent": {
+     "right": 0,
+     "total": 0
+    }
+   },
+   "disagreements": [],
+   "proposed": {
+    "gated": {
+     "status": "insufficient-evidence",
+     "shown": [],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "insufficient-evidence",
+     "shown": [],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "insufficient-evidence",
+     "shown": [],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "insufficient-evidence",
+     "shown": [],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "3/3",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": []
+ },
+ {
+  "id": 9,
+  "name": "Repeated guessed answers (always option A)",
+  "submissions": [
+   {
+    "q": "gen:lin:6,17,3:mc",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lin:2,17,12:mc",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lin:2,4,6:mc",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lin:7,9,11:mc",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lin:2,4,7:mc",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lin:7,9,10:mc",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lboth:7,7,4,3:mc",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lboth:6,18,3,10:mc",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lboth:6,14,5,12:mc",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lboth:4,5,3,6:mc",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lboth:5,18,1,1:mc",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lboth:6,7,4,2:mc",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lbrk:4,4,2,1:mc",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lbrk:3,3,2,14:mc",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,13:mc",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,15:mc",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,12:mc",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:lbrk:2,-1,1,14:mc",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:aulwp:2,2,7,16:mc",
+    "family": "aulwp",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:aulwp:2,2,7,17:mc",
+    "family": "aulwp",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:aulwp:2,2,4,6:mc",
+    "family": "aulwp",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:aulwp:1,6,3,4:mc",
+    "family": "aulwp",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:aulwp:2,2,7,11:mc",
+    "family": "aulwp",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:aulwp:2,2,1,24:mc",
+    "family": "aulwp",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:2,9,6,4",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:0,4,14,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "A",
+    "working": [],
+    "verdict": "incorrect",
+    "workingStatus": null,
+    "methodEvidence": null
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "guided",
+    "verified": false,
+    "claimsCompetence": false,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-09T09:10:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 6,
+     "total": 28
+    }
+   },
+   "disagreements": [],
+   "proposed": {
+    "gated": {
+     "status": "developing",
+     "shown": [
+      "brackets",
+      "modelling"
+     ],
+     "missing": [
+      "two-step",
+      "both-sides"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "developing",
+       "historical": false,
+       "independent": "1/6",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "developing",
+       "historical": false,
+       "independent": "1/6",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/6",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/10",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "insufficient-evidence",
+     "shown": [],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "developing",
+     "shown": [
+      "modelling"
+     ],
+     "missing": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "developing",
+       "historical": false,
+       "independent": "1/6",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "developing",
+       "historical": false,
+       "independent": "1/6",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "developing",
+       "historical": true,
+       "independent": "2/6",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)",
+       "note": "no independent right answer with verified working yet"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/10",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "developing",
+     "shown": [
+      "brackets",
+      "modelling"
+     ],
+     "missing": [
+      "two-step",
+      "both-sides"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "developing",
+       "historical": false,
+       "independent": "1/6",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "both-sides": {
+       "status": "developing",
+       "historical": false,
+       "independent": "1/6",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/6",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/10",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": [],
+  "extra": {
+   "guesses": [
+    {
+     "q": "gen:lin:6,17,3:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lin:2,17,12:mc",
+     "right": true
+    },
+    {
+     "q": "gen:lin:2,4,6:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lin:7,9,11:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lin:2,4,7:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lin:7,9,10:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lboth:7,7,4,3:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lboth:6,18,3,10:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lboth:6,14,5,12:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lboth:4,5,3,6:mc",
+     "right": true
+    },
+    {
+     "q": "gen:lboth:5,18,1,1:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lboth:6,7,4,2:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lbrk:4,4,2,1:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lbrk:3,3,2,14:mc",
+     "right": true
+    },
+    {
+     "q": "gen:lbrk:5,-5,1,13:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lbrk:5,-1,2,15:mc",
+     "right": false
+    },
+    {
+     "q": "gen:lbrk:5,-5,1,12:mc",
+     "right": true
+    },
+    {
+     "q": "gen:lbrk:2,-1,1,14:mc",
+     "right": false
+    },
+    {
+     "q": "gen:aulwp:2,2,7,16:mc",
+     "right": false
+    },
+    {
+     "q": "gen:aulwp:2,2,7,17:mc",
+     "right": false
+    },
+    {
+     "q": "gen:aulwp:2,2,4,6:mc",
+     "right": false
+    },
+    {
+     "q": "gen:aulwp:1,6,3,4:mc",
+     "right": true
+    },
+    {
+     "q": "gen:aulwp:2,2,7,11:mc",
+     "right": false
+    },
+    {
+     "q": "gen:aulwp:2,2,1,24:mc",
+     "right": false
+    },
+    {
+     "q": "gen:auleq:0,8,16,13",
+     "right": false
+    },
+    {
+     "q": "gen:auleq:1,2,9,10",
+     "right": false
+    },
+    {
+     "q": "gen:auleq:2,9,6,4",
+     "right": true
+    },
+    {
+     "q": "gen:auleq:0,4,14,10",
+     "right": false
+    }
+   ]
+  }
+ },
+ {
+  "id": 10,
+  "name": "Failed delayed check in one sub-skill (brackets)",
+  "submissions": [
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "7x = 70",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "2x = 10",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "4x + 15 = 35",
+     "4x = 20",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "x + 5 = 15",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "4x - 25 = 15",
+     "4x = 40",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "14",
+    "working": [
+     "3x - 5 = 37",
+     "3x = 42",
+     "x = 14"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:lin:6,17,2",
+    "family": "lin",
+    "activity": "retention",
+    "hints": 0,
+    "response": "2",
+    "working": [
+     "6x = 12",
+     "x = 2"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,13,1,7",
+    "family": "lboth",
+    "activity": "retention",
+    "hints": 0,
+    "response": "7",
+    "working": [
+     "6x + 13 = 55",
+     "6x = 42",
+     "x = 7"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:9,6,6,6",
+    "family": "lboth",
+    "activity": "retention",
+    "hints": 0,
+    "response": "6",
+    "working": [
+     "3x + 6 = 24",
+     "3x = 18",
+     "x = 6"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:4,-1,3,6",
+    "family": "lbrk",
+    "activity": "retention",
+    "hints": 0,
+    "response": "7",
+    "working": [
+     "x - 4 = 2",
+     "x = 6"
+    ],
+    "verdict": "incorrect",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:4,-1,3,5",
+    "family": "lbrk",
+    "activity": "retention",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "x - 4 = 1",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:aulwp:3,2,8,28",
+    "family": "aulwp",
+    "activity": "retention",
+    "hints": 0,
+    "response": "28",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "review",
+    "verified": false,
+    "claimsCompetence": false,
+    "retention": "failed",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": true,
+    "independent": {
+     "right": 13,
+     "total": 14
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated-slip",
+     "existing": "review (recovery required)",
+     "proposed": "developing",
+     "why": "recovered on the sub-skill that failed, or the failure was on another sub-skill"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "recovery-required",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "missing": [
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [
+      "brackets"
+     ],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "recovery-required",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "recovery-required",
+     "shown": [
+      "two-step",
+      "both-sides"
+     ],
+     "missing": [
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [
+      "brackets"
+     ],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "recovery-required",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "1/1",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "recovery-required",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "missing": [
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [
+      "brackets"
+     ],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "recovery-required",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "missing": [
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "developing",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": [],
+  "extra": {
+   "checkPlan": [
+    {
+     "subSkill": "linear-equations.two-step@1",
+     "questions": [
+      "gen:lin:6,17,2"
+     ],
+     "unchecked": false,
+     "reason": "1 fresh retention item(s) from lin"
+    },
+    {
+     "subSkill": "linear-equations.both-sides@1",
+     "questions": [
+      "gen:lboth:7,13,1,7",
+      "gen:lboth:9,6,6,6"
+     ],
+     "unchecked": false,
+     "reason": "2 fresh retention item(s) from lboth"
+    },
+    {
+     "subSkill": "linear-equations.brackets@1",
+     "questions": [
+      "gen:lbrk:4,-1,3,6",
+      "gen:lbrk:4,-1,3,5"
+     ],
+     "unchecked": false,
+     "reason": "2 fresh retention item(s) from lbrk"
+    },
+    {
+     "subSkill": "linear-equations.modelling@1",
+     "questions": [
+      "gen:aulwp:3,2,8,28"
+     ],
+     "unchecked": false,
+     "reason": "1 fresh retention item(s) from auleq/aulwp"
+    }
+   ]
+  }
+ },
+ {
+  "id": 11,
+  "name": "Successful recovery in that sub-skill (two fresh bracket questions right alone)",
+  "submissions": [
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "7x = 70",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "2x = 10",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "4x + 15 = 35",
+     "4x = 20",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "x + 5 = 15",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "4x - 25 = 15",
+     "4x = 40",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "14",
+    "working": [
+     "3x - 5 = 37",
+     "3x = 42",
+     "x = 14"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:lin:6,17,2",
+    "family": "lin",
+    "activity": "retention",
+    "hints": 0,
+    "response": "2",
+    "working": [
+     "6x = 12",
+     "x = 2"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,13,1,7",
+    "family": "lboth",
+    "activity": "retention",
+    "hints": 0,
+    "response": "7",
+    "working": [
+     "6x + 13 = 55",
+     "6x = 42",
+     "x = 7"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:9,6,6,6",
+    "family": "lboth",
+    "activity": "retention",
+    "hints": 0,
+    "response": "6",
+    "working": [
+     "3x + 6 = 24",
+     "3x = 18",
+     "x = 6"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:4,-1,3,6",
+    "family": "lbrk",
+    "activity": "retention",
+    "hints": 0,
+    "response": "7",
+    "working": [
+     "x - 4 = 2",
+     "x = 6"
+    ],
+    "verdict": "incorrect",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:4,-1,3,5",
+    "family": "lbrk",
+    "activity": "retention",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "x - 4 = 1",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:aulwp:3,2,8,28",
+    "family": "aulwp",
+    "activity": "retention",
+    "hints": 0,
+    "response": "28",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:lbrk:6,3,5,8",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "8",
+    "working": [
+     "x + 18 = 26",
+     "x = 8"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-4,2,1",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "1",
+    "working": [
+     "3x - 20 = -17",
+     "3x = 3",
+     "x = 1"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-17T09:16:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 15,
+     "total": 16
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-slip",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.brackets@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "5/6",
+       "assisted": "0/0",
+       "method": "verified (verified 5, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "missing": [
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "5/6",
+       "assisted": "0/0",
+       "method": "verified (verified 5, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "1/1",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "5/6",
+       "assisted": "0/0",
+       "method": "verified (verified 5, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "missing": [
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "developing",
+       "historical": true,
+       "independent": "5/6",
+       "assisted": "0/0",
+       "method": "verified (verified 5, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": [],
+  "extra": {
+   "beforeRecovery": {
+    "gated": "recovery-required",
+    "recoveryRequired": [
+     "linear-equations.brackets@1"
+    ],
+    "existing": {
+     "status": "review",
+     "verified": false,
+     "claimsCompetence": false,
+     "retention": "failed",
+     "retentionDueAt": "2026-03-09T09:02:00.000Z",
+     "recoveryRequired": true,
+     "independent": {
+      "right": 13,
+      "total": 14
+     }
+    }
+   }
+  }
+ },
+ {
+  "id": 12,
+  "name": "Unrelated success during recovery (two-step and both-sides right; brackets still failed)",
+  "submissions": [
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "7x = 70",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "2x = 10",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "4x + 15 = 35",
+     "4x = 20",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "x + 5 = 15",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "4x - 25 = 15",
+     "4x = 40",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "14",
+    "working": [
+     "3x - 5 = 37",
+     "3x = 42",
+     "x = 14"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:lin:6,17,2",
+    "family": "lin",
+    "activity": "retention",
+    "hints": 0,
+    "response": "2",
+    "working": [
+     "6x = 12",
+     "x = 2"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,13,1,7",
+    "family": "lboth",
+    "activity": "retention",
+    "hints": 0,
+    "response": "7",
+    "working": [
+     "6x + 13 = 55",
+     "6x = 42",
+     "x = 7"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:9,6,6,6",
+    "family": "lboth",
+    "activity": "retention",
+    "hints": 0,
+    "response": "6",
+    "working": [
+     "3x + 6 = 24",
+     "3x = 18",
+     "x = 6"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:4,-1,3,6",
+    "family": "lbrk",
+    "activity": "retention",
+    "hints": 0,
+    "response": "7",
+    "working": [
+     "x - 4 = 2",
+     "x = 6"
+    ],
+    "verdict": "incorrect",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:4,-1,3,5",
+    "family": "lbrk",
+    "activity": "retention",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "x - 4 = 1",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:aulwp:3,2,8,28",
+    "family": "aulwp",
+    "activity": "retention",
+    "hints": 0,
+    "response": "28",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:lin:7,9,12",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "12",
+    "working": [
+     "7x = 84",
+     "x = 12"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:2,17,11",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "11",
+    "working": [
+     "2x = 22",
+     "x = 11"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,13,4,11",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "11",
+    "working": [
+     "2x + 13 = 35",
+     "2x = 22",
+     "x = 11"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:4,18,2,4",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "4",
+    "working": [
+     "2x + 18 = 26",
+     "2x = 8",
+     "x = 4"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-17T09:16:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 17,
+     "total": 18
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated",
+     "existing": "independent",
+     "proposed": "recovery-required",
+     "why": "recovery required on linear-equations.brackets@1"
+    },
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "recovery-required",
+     "why": "recovery required on linear-equations.brackets@1"
+    },
+    {
+     "variant": "gated-method",
+     "existing": "independent",
+     "proposed": "recovery-required",
+     "why": "recovery required on linear-equations.brackets@1"
+    },
+    {
+     "variant": "gated-slip",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.brackets@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "recovery-required",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "missing": [
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [
+      "brackets"
+     ],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "5/5",
+       "assisted": "0/0",
+       "method": "verified (verified 5, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "6/6",
+       "assisted": "0/0",
+       "method": "verified (verified 6, false step 0)"
+      },
+      "brackets": {
+       "status": "recovery-required",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "recovery-required",
+     "shown": [
+      "two-step",
+      "both-sides"
+     ],
+     "missing": [
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [
+      "brackets"
+     ],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "5/5",
+       "assisted": "0/0",
+       "method": "verified (verified 5, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "6/6",
+       "assisted": "0/0",
+       "method": "verified (verified 6, false step 0)"
+      },
+      "brackets": {
+       "status": "recovery-required",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "1/1",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "recovery-required",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "missing": [
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [
+      "brackets"
+     ],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "5/5",
+       "assisted": "0/0",
+       "method": "verified (verified 5, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "6/6",
+       "assisted": "0/0",
+       "method": "verified (verified 6, false step 0)"
+      },
+      "brackets": {
+       "status": "recovery-required",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "missing": [
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "5/5",
+       "assisted": "0/0",
+       "method": "verified (verified 5, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "6/6",
+       "assisted": "0/0",
+       "method": "verified (verified 6, false step 0)"
+      },
+      "brackets": {
+       "status": "developing",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": []
+ },
+ {
+  "id": 13,
+  "name": "One careless slip after prior success (a practice slip, then one wrong answer in the brackets delayed check)",
+  "submissions": [
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "7x = 70",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "2x = 10",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "4x + 15 = 35",
+     "4x = 20",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "x + 5 = 15",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "4x - 25 = 15",
+     "4x = 40",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "14",
+    "working": [
+     "3x - 5 = 37",
+     "3x = 42",
+     "x = 14"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:lin:7,9,12",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "13",
+    "working": [
+     "7x = 84",
+     "x = 12"
+    ],
+    "verdict": "incorrect",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:4,-1,3,6",
+    "family": "lbrk",
+    "activity": "retention",
+    "hints": 0,
+    "response": "7",
+    "working": [
+     "x - 4 = 2",
+     "x = 6"
+    ],
+    "verdict": "incorrect",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:4,-1,3,5",
+    "family": "lbrk",
+    "activity": "retention",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "x - 4 = 1",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:3,-3,2,13",
+    "family": "lbrk",
+    "activity": "retention",
+    "hints": 0,
+    "response": "13",
+    "working": [
+     "x - 9 = 4",
+     "x = 13"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:6,17,2",
+    "family": "lin",
+    "activity": "retention",
+    "hints": 0,
+    "response": "2",
+    "working": [
+     "6x = 12",
+     "x = 2"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,13,1,7",
+    "family": "lboth",
+    "activity": "retention",
+    "hints": 0,
+    "response": "7",
+    "working": [
+     "6x + 13 = 55",
+     "6x = 42",
+     "x = 7"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:9,6,6,6",
+    "family": "lboth",
+    "activity": "retention",
+    "hints": 0,
+    "response": "6",
+    "working": [
+     "3x + 6 = 24",
+     "3x = 18",
+     "x = 6"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:aulwp:3,2,8,28",
+    "family": "aulwp",
+    "activity": "retention",
+    "hints": 0,
+    "response": "28",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "review",
+    "verified": false,
+    "claimsCompetence": false,
+    "retention": "failed",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": true,
+    "independent": {
+     "right": 14,
+     "total": 16
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated-slip",
+     "existing": "review",
+     "proposed": "independently-demonstrated",
+     "why": "the existing policy requires recovery (competency-wide); every sub-skill is currently shown"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "recovery-required",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "missing": [
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [
+      "brackets"
+     ],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "recovery-required",
+       "historical": true,
+       "independent": "4/5",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "recovery-required",
+     "shown": [
+      "two-step",
+      "both-sides"
+     ],
+     "missing": [
+      "brackets",
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [
+      "brackets"
+     ],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "recovery-required",
+       "historical": true,
+       "independent": "4/5",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "1/1",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "recovery-required",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "modelling"
+     ],
+     "missing": [
+      "brackets"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [
+      "brackets"
+     ],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "recovery-required",
+       "historical": true,
+       "independent": "4/5",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/4",
+       "assisted": "0/0",
+       "method": "verified (verified 3, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/4",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "4/5",
+       "assisted": "0/0",
+       "method": "verified (verified 4, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "3/3",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": [],
+  "extra": {
+   "afterPracticeSlip": {
+    "gated": "independently-demonstrated",
+    "existing": "independent"
+   }
+  }
+ },
+ {
+  "id": 14,
+  "name": "Historical evidence replay (current authority, older authority, before D1)",
+  "submissions": [
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "7x = 70",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "2x = 10",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "4x + 15 = 35",
+     "4x = 20",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "x + 5 = 15",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "4x - 25 = 15",
+     "4x = 40",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "14",
+    "working": [
+     "3x - 5 = 37",
+     "3x = 42",
+     "x = 14"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 8,
+     "total": 8
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.modelling@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "missing": [
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": [],
+  "extra": {
+   "current": {
+    "existing": "independent",
+    "gated": "independently-demonstrated",
+    "method": "independently-demonstrated",
+    "verified": [
+     2,
+     2,
+     2,
+     0
+    ],
+    "methodStatus": [
+     "verified",
+     "verified",
+     "verified",
+     "not-established"
+    ]
+   },
+   "olderAuthority": {
+    "existing": "independent",
+    "gated": "independently-demonstrated",
+    "method": "developing",
+    "verified": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "methodStatus": [
+     "not-established",
+     "not-established",
+     "not-established",
+     "not-established"
+    ]
+   },
+   "beforeD1": {
+    "existing": "independent",
+    "gated": "independently-demonstrated",
+    "method": "developing",
+    "verified": [
+     0,
+     0,
+     0,
+     0
+    ],
+    "methodStatus": [
+     "not-established",
+     "not-established",
+     "not-established",
+     "not-established"
+    ]
+   },
+   "olderAuthorityFalseStep": {
+    "gated": "developing",
+    "twoStep": "insufficient-evidence",
+    "twoStepMethod": "contradicted"
+   },
+   "replayIdentical": true
+  }
+ },
+ {
+  "id": 15,
+  "name": "Unknown question family (meet) in place of modelling",
+  "submissions": [
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "7x = 70",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "2x = 10",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "4x + 15 = 35",
+     "4x = 20",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "x + 5 = 15",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "4x - 25 = 15",
+     "4x = 40",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "14",
+    "working": [
+     "3x - 5 = 37",
+     "3x = 42",
+     "x = 14"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:meet:3,0",
+    "family": "meet",
+    "activity": "practice",
+    "hints": 0,
+    "response": "0,3",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:meet:3,-2",
+    "family": "meet",
+    "activity": "practice",
+    "hints": 0,
+    "response": "1,2",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   },
+   {
+    "q": "gen:meet:2,3",
+    "family": "meet",
+    "activity": "practice",
+    "hints": 0,
+    "response": "-1,3",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": "none",
+    "methodEvidence": "no-method-evidence"
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 9,
+     "total": 9
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-method",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.modelling@1"
+    },
+    {
+     "variant": "gated-slip",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.modelling@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "missing": [
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 3,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "missing": [
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 3,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "missing": [
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 3,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "missing": [
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 3,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "not-attempted",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": []
+ },
+ {
+  "id": 16,
+  "name": "Restart and persistence (rebuilt session, reversed store order, client-supplied claims ignored)",
+  "submissions": [
+   {
+    "q": "gen:lin:7,5,10",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "7x = 70",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lin:2,4,5",
+    "family": "lin",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "2x = 10",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:7,15,3,5",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "5",
+    "working": [
+     "4x + 15 = 35",
+     "4x = 20",
+     "x = 5"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lboth:6,5,5,10",
+    "family": "lboth",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "x + 5 = 15",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-5,1,10",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "10",
+    "working": [
+     "4x - 25 = 15",
+     "4x = 40",
+     "x = 10"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:lbrk:5,-1,2,14",
+    "family": "lbrk",
+    "activity": "practice",
+    "hints": 0,
+    "response": "14",
+    "working": [
+     "3x - 5 = 37",
+     "3x = 42",
+     "x = 14"
+    ],
+    "verdict": "correct",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   },
+   {
+    "q": "gen:auleq:0,8,16,13",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:auleq:1,2,9,10",
+    "family": "auleq",
+    "activity": "practice",
+    "hints": 0,
+    "response": "C",
+    "working": [],
+    "verdict": "correct",
+    "workingStatus": null,
+    "methodEvidence": null
+   },
+   {
+    "q": "gen:lbrk:3,-3,2,11",
+    "family": "lbrk",
+    "activity": "check",
+    "hints": 0,
+    "response": "12",
+    "working": [
+     "x - 9 = 2",
+     "x = 11"
+    ],
+    "verdict": "incorrect",
+    "workingStatus": "verified",
+    "methodEvidence": "method-verified"
+   }
+  ],
+  "comparison": {
+   "existing": {
+    "status": "independent",
+    "verified": false,
+    "claimsCompetence": true,
+    "retention": "scheduled",
+    "retentionDueAt": "2026-03-09T09:02:00.000Z",
+    "recoveryRequired": false,
+    "independent": {
+     "right": 8,
+     "total": 9
+    }
+   },
+   "disagreements": [
+    {
+     "variant": "gated-typed",
+     "existing": "independent",
+     "proposed": "developing",
+     "why": "not shown: linear-equations.modelling@1"
+    }
+   ],
+   "proposed": {
+    "gated": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/3",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-typed": {
+     "status": "developing",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets"
+     ],
+     "missing": [
+      "modelling"
+     ],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": false,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/3",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "insufficient-evidence",
+       "historical": false,
+       "independent": "0/0",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-method": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/3",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    },
+    "gated-slip": {
+     "status": "independently-demonstrated",
+     "shown": [
+      "two-step",
+      "both-sides",
+      "brackets",
+      "modelling"
+     ],
+     "missing": [],
+     "retentionDue": [],
+     "recoveryRequired": [],
+     "historicalAchievement": true,
+     "unknown": 0,
+     "subSkills": {
+      "two-step": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "both-sides": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "brackets": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/3",
+       "assisted": "0/0",
+       "method": "verified (verified 2, false step 0)"
+      },
+      "modelling": {
+       "status": "independently-demonstrated",
+       "historical": true,
+       "independent": "2/2",
+       "assisted": "0/0",
+       "method": "not-established (verified 0, false step 0)"
+      }
+     }
+    }
+   }
+  },
+  "retentionPlan": [],
+  "extra": {
+   "identicalAfterRestart": true,
+   "identicalWithReversedStoreOrder": true,
+   "clientClaimsIgnored": true
+  }
+ }
+]

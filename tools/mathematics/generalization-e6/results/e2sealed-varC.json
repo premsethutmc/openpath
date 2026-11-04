@@ -1,0 +1,5205 @@
+{
+ "summary": {
+  "label": "varC",
+  "partition": "e2sealed",
+  "codeDigest": "1348f462966fd30915e288560b4c11294dee732d2ba1dc3f39c26ea516cce629",
+  "cases": 100,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "correctlyVerified": 15,
+  "referenceVerified": 21,
+  "correctlyInvalid": 36,
+  "referenceInvalid": 45,
+  "exactVerdicts": 79,
+  "engineClassCounts": {
+   "invalid": 41,
+   "unsupported": 15,
+   "ambiguous": 4,
+   "incomplete": 11,
+   "missing-assumption": 5,
+   "malformed": 9,
+   "verified": 15
+  },
+  "assessed": 72,
+  "assessedCorrect": 67,
+  "assessmentCoverage": 0.72,
+  "correctAssessmentCoverage": 0.67,
+  "abstentions": 28,
+  "unaccountedAcceptances": 0,
+  "firstInvalidExact": [
+   36,
+   45
+  ],
+  "alternativeAccepted": [
+   15,
+   15
+  ],
+  "restrictionDetected": [
+   11,
+   11
+  ],
+  "branchDetected": [
+   9,
+   9
+  ],
+  "defectiveRestrictionBranchSafe": [
+   61,
+   61
+  ],
+  "verifiedTotal": 15,
+  "independentlyVerified": 15,
+  "independentVerificationCoverage": 1,
+  "thrown": 0,
+  "maxRssMB": 77,
+  "slowest": [
+   {
+    "id": "e2-sealed-000",
+    "ms": 60.1
+   },
+   {
+    "id": "e2-sealed-002",
+    "ms": 30
+   },
+   {
+    "id": "e2-sealed-049",
+    "ms": 26.6
+   },
+   {
+    "id": "e2-sealed-009",
+    "ms": 24.9
+   },
+   {
+    "id": "e2-sealed-001",
+    "ms": 21.7
+   }
+  ],
+  "latencyMs": {
+   "p50": 1.2716720000000237,
+   "p95": 19.319499000000008,
+   "p99": 29.98290300000002,
+   "max": 60.059163
+  },
+  "byFamily": {
+   "algebra": {
+    "n": 40,
+    "assessed": 36,
+    "exact": 40,
+    "falseAccept": 0
+   },
+   "functions": {
+    "n": 17,
+    "assessed": 9,
+    "exact": 12,
+    "falseAccept": 0
+   },
+   "complex": {
+    "n": 8,
+    "assessed": 5,
+    "exact": 5,
+    "falseAccept": 0
+   },
+   "matrices": {
+    "n": 11,
+    "assessed": 5,
+    "exact": 7,
+    "falseAccept": 0
+   },
+   "statistics": {
+    "n": 9,
+    "assessed": 5,
+    "exact": 5,
+    "falseAccept": 0
+   },
+   "cross-domain": {
+    "n": 15,
+    "assessed": 12,
+    "exact": 10,
+    "falseAccept": 0
+   }
+  },
+  "byCategory": {
+   "invalid-intermediate-correct-final": {
+    "n": 25,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "verified": 0,
+    "exact": 25
+   },
+   "silently-skippable-unsupported-line": {
+    "n": 15,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "verified": 0,
+    "exact": 0
+   },
+   "missing-restriction-or-branch": {
+    "n": 20,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "verified": 0,
+    "exact": 20
+   },
+   "cross-domain-binding-failure": {
+    "n": 15,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "verified": 0,
+    "exact": 10
+   },
+   "valid-alternative-path": {
+    "n": 15,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "verified": 15,
+    "exact": 15
+   },
+   "ambiguous-or-malformed-line": {
+    "n": 10,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "verified": 0,
+    "exact": 9
+   }
+  }
+ },
+ "cases": [
+  {
+   "id": "e2-sealed-000",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "line 2: neither follows from nor is equivalent to the previous statement ({-6} versus {-4})",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 60.059163
+  },
+  {
+   "id": "e2-sealed-001",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "line 2: neither follows from nor is equivalent to the previous statement ({4} versus {5})",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 21.680751999999984
+  },
+  {
+   "id": "e2-sealed-002",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "line 2: neither follows from nor is equivalent to the previous statement ({6} versus {7})",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 29.98290300000002
+  },
+  {
+   "id": "e2-sealed-003",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "line 2: neither follows from nor is equivalent to the previous statement ({-4} versus {-3})",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 19.319499000000008
+  },
+  {
+   "id": "e2-sealed-004",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "line 2: neither follows from nor is equivalent to the previous statement ({8} versus {10})",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 13.903864999999996
+  },
+  {
+   "id": "e2-sealed-005",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "line 2: neither follows from nor is equivalent to the previous statement ({-3} versus {-2})",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 10.867459999999994
+  },
+  {
+   "id": "e2-sealed-006",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "line 2: neither follows from nor is equivalent to the previous statement ({4} versus {-4})",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 9.373916000000008
+  },
+  {
+   "id": "e2-sealed-007",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "line 2: neither follows from nor is equivalent to the previous statement ({-5} versus {-5/2})",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 17.717765000000014
+  },
+  {
+   "id": "e2-sealed-008",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "line 2: neither follows from nor is equivalent to the previous statement ({3} versus {4})",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 12.939964999999972
+  },
+  {
+   "id": "e2-sealed-009",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "line 2: neither follows from nor is equivalent to the previous statement ({4} versus {-4})",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 24.939010999999994
+  },
+  {
+   "id": "e2-sealed-010",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 10.968653000000018
+  },
+  {
+   "id": "e2-sealed-011",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.0793940000000362
+  },
+  {
+   "id": "e2-sealed-012",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.7510029999999688
+  },
+  {
+   "id": "e2-sealed-013",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.313676999999984
+  },
+  {
+   "id": "e2-sealed-014",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.949939000000029
+  },
+  {
+   "id": "e2-sealed-015",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "complex",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:complex-modulus",
+     "complex-polynomial:b3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 7.969852000000003
+  },
+  {
+   "id": "e2-sealed-016",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "complex",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:complex-modulus",
+     "complex-polynomial:b3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.8744440000000395
+  },
+  {
+   "id": "e2-sealed-017",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "matrices",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.9926079999999615
+  },
+  {
+   "id": "e2-sealed-018",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "matrices",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.42549100000002227
+  },
+  {
+   "id": "e2-sealed-019",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "matrices",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.37003900000001977
+  },
+  {
+   "id": "e2-sealed-020",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "matrices",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.27533500000004096
+  },
+  {
+   "id": "e2-sealed-021",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "statistics",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:statistics-mean",
+     "probability-statistics:b1"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 10.065771999999981
+  },
+  {
+   "id": "e2-sealed-022",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "statistics",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:statistics-mean",
+     "probability-statistics:b1"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.9025169999999889
+  },
+  {
+   "id": "e2-sealed-023",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "statistics",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:statistics-mean",
+     "probability-statistics:b1"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.7604870000000119
+  },
+  {
+   "id": "e2-sealed-024",
+   "partition": "sealed-holdout",
+   "category": "invalid-intermediate-correct-final",
+   "family": null,
+   "tags": [],
+   "area": "statistics",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:statistics-mean",
+     "probability-statistics:b1"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 2.263496000000032
+  },
+  {
+   "id": "e2-sealed-025",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "unsupported character '∪' at 6",
+    "obligations": [
+     "unsupported character '∪' at 6"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.811431999999968
+  },
+  {
+   "id": "e2-sealed-026",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter function-evaluation can verify only part of the submission (line is not an evaluation of the defined function); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.2716720000000237
+  },
+  {
+   "id": "e2-sealed-027",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter function-evaluation can verify only part of the submission (line is not an evaluation of the defined function); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.8770079999999894
+  },
+  {
+   "id": "e2-sealed-028",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter function-evaluation can verify only part of the submission (line is not an evaluation of the defined function); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.16624100000001363
+  },
+  {
+   "id": "e2-sealed-029",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "matrices",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "unsupported character '∪' at 6",
+    "obligations": [
+     "unsupported character '∪' at 6"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.19874499999997397
+  },
+  {
+   "id": "e2-sealed-030",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "matrices",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter linear-determinant can verify only part of the submission (line is not a determinant claim); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.2080869999999777
+  },
+  {
+   "id": "e2-sealed-031",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "matrices",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter linear-determinant can verify only part of the submission (line is not a determinant claim); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.14022399999998925
+  },
+  {
+   "id": "e2-sealed-032",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "matrices",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter linear-determinant can verify only part of the submission (line is not a determinant claim); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.07206899999999905
+  },
+  {
+   "id": "e2-sealed-033",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "complex",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-generalization-e6"
+    ],
+    "justification": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified",
+    "obligations": [
+     "verify line 1: the problem data could not be read exactly",
+     "verify line 2: the problem data could not be read exactly",
+     "verify line 3: the problem data could not be read exactly"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.2733519999999885
+  },
+  {
+   "id": "e2-sealed-034",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "complex",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-generalization-e6"
+    ],
+    "justification": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified",
+    "obligations": [
+     "verify line 1: the problem data could not be read exactly",
+     "verify line 2: the problem data could not be read exactly",
+     "verify line 3: the problem data could not be read exactly"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.318266000000051
+  },
+  {
+   "id": "e2-sealed-035",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "complex",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-generalization-e6"
+    ],
+    "justification": "line(s) 1, 2, 3 could not be verified (unsupported); the submission cannot be certified",
+    "obligations": [
+     "verify line 1: the problem data could not be read exactly",
+     "verify line 2: the problem data could not be read exactly",
+     "verify line 3: the problem data could not be read exactly"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.289086999999995
+  },
+  {
+   "id": "e2-sealed-036",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "statistics",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-generalization-e6"
+    ],
+    "justification": "line(s) 2 could not be verified (ambiguous); the submission cannot be certified",
+    "obligations": [
+     "verify line 2: division followed by implicit multiplication has multiple conventional readings"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "ambiguous",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.0085109999999986
+  },
+  {
+   "id": "e2-sealed-037",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "statistics",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-generalization-e6"
+    ],
+    "justification": "line(s) 2 could not be verified (unsupported); the submission cannot be certified",
+    "obligations": [
+     "verify line 2: a line must state an equality; a bare expression is not a derivation step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.42854399999998805
+  },
+  {
+   "id": "e2-sealed-038",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "statistics",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-generalization-e6"
+    ],
+    "justification": "line(s) 2 could not be verified (unsupported); the submission cannot be certified",
+    "obligations": [
+     "verify line 2: the symbol sin is not bound to the problem data or to an earlier definition"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.7800889999999754
+  },
+  {
+   "id": "e2-sealed-039",
+   "partition": "sealed-holdout",
+   "category": "silently-skippable-unsupported-line",
+   "family": null,
+   "tags": [],
+   "area": "statistics",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-generalization-e6"
+    ],
+    "justification": "line(s) 2 could not be verified (unsupported); the submission cannot be certified",
+    "obligations": [
+     "verify line 2: unsupported character '>'"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.5546769999999697
+  },
+  {
+   "id": "e2-sealed-040",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "a step lost solutions or jumped to a smaller set without justification",
+    "obligations": [
+     "justify every solution-changing step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "incomplete",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": true,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 11.912571000000014
+  },
+  {
+   "id": "e2-sealed-041",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "a step lost solutions or jumped to a smaller set without justification",
+    "obligations": [
+     "justify every solution-changing step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "incomplete",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": true,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 11.541271999999992
+  },
+  {
+   "id": "e2-sealed-042",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "a step lost solutions or jumped to a smaller set without justification",
+    "obligations": [
+     "justify every solution-changing step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "incomplete",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": true,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 7.654003999999986
+  },
+  {
+   "id": "e2-sealed-043",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "a step lost solutions or jumped to a smaller set without justification",
+    "obligations": [
+     "justify every solution-changing step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "incomplete",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": true,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 11.453073999999958
+  },
+  {
+   "id": "e2-sealed-044",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "missing-assumption",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "the conclusion ignores the domain restriction: x != 3",
+    "obligations": [
+     "state the restriction x != 3"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "missing-assumption",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 11.841801000000032
+  },
+  {
+   "id": "e2-sealed-045",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "missing-assumption",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "the conclusion ignores the domain restriction: x != 4",
+    "obligations": [
+     "state the restriction x != 4"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "missing-assumption",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.436108000000047
+  },
+  {
+   "id": "e2-sealed-046",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "missing-assumption",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "the conclusion ignores the domain restriction: x != 5",
+    "obligations": [
+     "state the restriction x != 5"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "missing-assumption",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 5.502068000000008
+  },
+  {
+   "id": "e2-sealed-047",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "missing-assumption",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "the conclusion ignores the domain restriction: x != 7",
+    "obligations": [
+     "state the restriction x != 7"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "missing-assumption",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.457065
+  },
+  {
+   "id": "e2-sealed-048",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "missing-assumption",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "the conclusion ignores the domain restriction: x != 8",
+    "obligations": [
+     "state the restriction x != 8"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "missing-assumption",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.6072350000000029
+  },
+  {
+   "id": "e2-sealed-049",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "a step lost solutions or jumped to a smaller set without justification",
+    "obligations": [
+     "justify every solution-changing step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "incomplete",
+     "evidence": 3
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": true,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 26.602244999999982
+  },
+  {
+   "id": "e2-sealed-050",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "a step lost solutions or jumped to a smaller set without justification",
+    "obligations": [
+     "justify every solution-changing step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "incomplete",
+     "evidence": 3
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": true,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 15.024413999999979
+  },
+  {
+   "id": "e2-sealed-051",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "a step lost solutions or jumped to a smaller set without justification",
+    "obligations": [
+     "justify every solution-changing step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "incomplete",
+     "evidence": 3
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": true,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 8.810320999999988
+  },
+  {
+   "id": "e2-sealed-052",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "a step lost solutions or jumped to a smaller set without justification",
+    "obligations": [
+     "justify every solution-changing step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "incomplete",
+     "evidence": 3
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": true,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 16.612686000000053
+  },
+  {
+   "id": "e2-sealed-053",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 4,
+    "firstInvalidLine": 5,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "the final statement ({-2, 3}) includes values that are not solutions; the problem's solution set is {3}",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 5
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 9.594171000000017
+  },
+  {
+   "id": "e2-sealed-054",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 4,
+    "firstInvalidLine": 5,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "the final statement ({-3, 4}) includes values that are not solutions; the problem's solution set is {4}",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 5
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.0281269999999836
+  },
+  {
+   "id": "e2-sealed-055",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "a step lost solutions or jumped to a smaller set without justification",
+    "obligations": [
+     "justify every solution-changing step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "incomplete",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": true,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 7.101195000000018
+  },
+  {
+   "id": "e2-sealed-056",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "the final statement ({2}) includes values that are not solutions; the problem's solution set is no real solutions",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 9.943139999999971
+  },
+  {
+   "id": "e2-sealed-057",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "the final statement ({3}) includes values that are not solutions; the problem's solution set is no real solutions",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 7.2212820000000875
+  },
+  {
+   "id": "e2-sealed-058",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "the final statement ({4}) includes values that are not solutions; the problem's solution set is no real solutions",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 5.386002000000076
+  },
+  {
+   "id": "e2-sealed-059",
+   "partition": "sealed-holdout",
+   "category": "missing-restriction-or-branch",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": 2,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation",
+     "independent-checker"
+    ],
+    "justification": "the final statement ({5}) includes values that are not solutions; the problem's solution set is no real solutions",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 7.599423999999999
+  },
+  {
+   "id": "e2-sealed-060",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     0
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source: step 1 is mathematically invalid",
+    "obligations": [
+     "stage source: step 1 is mathematically invalid"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.0042430000000877
+  },
+  {
+   "id": "e2-sealed-061",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     0
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source: step 1 is mathematically invalid",
+    "obligations": [
+     "stage source: step 1 is mathematically invalid"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.13382000000001426
+  },
+  {
+   "id": "e2-sealed-062",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     0
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source: step 1 is mathematically invalid",
+    "obligations": [
+     "stage source: step 1 is mathematically invalid"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.04636799999991581
+  },
+  {
+   "id": "e2-sealed-063",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "linear-algebra:b2",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage destination: step 1: exact linear-algebra calculation differs",
+    "obligations": [
+     "stage destination: step 1: exact linear-algebra calculation differs"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.067898000000014
+  },
+  {
+   "id": "e2-sealed-064",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ]
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "linear-algebra:b2",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage destination: step 1: exact linear-algebra calculation differs",
+    "obligations": [
+     "stage destination: step 1: exact linear-algebra calculation differs"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": true,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.23463700000002063
+  },
+  {
+   "id": "e2-sealed-065",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage destination does not depend on binding source source",
+    "obligations": [
+     "stage destination does not depend on binding source source"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.10539199999993798
+  },
+  {
+   "id": "e2-sealed-066",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage destination does not depend on binding source source",
+    "obligations": [
+     "stage destination does not depend on binding source source"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.09391700000003311
+  },
+  {
+   "id": "e2-sealed-067",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "binding source is not a verified proof step",
+    "obligations": [
+     "binding source is not a verified proof step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.04868299999998271
+  },
+  {
+   "id": "e2-sealed-068",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "binding source is not a verified proof step",
+    "obligations": [
+     "binding source is not a verified proof step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.04996700000003784
+  },
+  {
+   "id": "e2-sealed-069",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "binding source is not a verified proof step",
+    "obligations": [
+     "binding source is not a verified proof step"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "invalid",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.04266999999993004
+  },
+  {
+   "id": "e2-sealed-070",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source is incomplete",
+    "obligations": [
+     "stage source is incomplete"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "incomplete",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.011162000000012995
+  },
+  {
+   "id": "e2-sealed-071",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "unified:d3-bindings"
+    ],
+    "justification": "dependency destination is not established",
+    "obligations": [
+     "dependency destination is not established"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "malformed",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.027926999999976942
+  },
+  {
+   "id": "e2-sealed-072",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "unified:d3-bindings"
+    ],
+    "justification": "dependency destination is not established",
+    "obligations": [
+     "dependency destination is not established"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "malformed",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.01379199999996672
+  },
+  {
+   "id": "e2-sealed-073",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "unified:d3-bindings"
+    ],
+    "justification": "dependency destination is not established",
+    "obligations": [
+     "dependency destination is not established"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "malformed",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.052733999999986736
+  },
+  {
+   "id": "e2-sealed-074",
+   "partition": "sealed-holdout",
+   "category": "cross-domain-binding-failure",
+   "family": null,
+   "tags": [],
+   "area": "cross-domain",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source: no reasoning submitted",
+    "obligations": [
+     "stage source: no reasoning submitted"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "incomplete",
+     "evidence": 1
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": true,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.04189099999996415
+  },
+  {
+   "id": "e2-sealed-075",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 3 steps are valid and the answer is correct",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 3
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 4.662029999999959
+  },
+  {
+   "id": "e2-sealed-076",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 3 steps are valid and the answer is correct",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 3
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 2.0946589999999787
+  },
+  {
+   "id": "e2-sealed-077",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 3 steps are valid and the answer is correct",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 3
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 2.3959429999999884
+  },
+  {
+   "id": "e2-sealed-078",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 3 steps are valid and the answer is correct",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 3
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 4.525734000000057
+  },
+  {
+   "id": "e2-sealed-079",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 3 steps are valid and the answer is correct",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 3
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.9284490000000005
+  },
+  {
+   "id": "e2-sealed-080",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "matrices",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.301887000000079
+  },
+  {
+   "id": "e2-sealed-081",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "complex",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:complex-modulus",
+     "complex-polynomial:b3"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.7820940000000292
+  },
+  {
+   "id": "e2-sealed-082",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "complex",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:complex-modulus",
+     "complex-polynomial:b3"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.523676999999907
+  },
+  {
+   "id": "e2-sealed-083",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "complex",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:complex-modulus",
+     "complex-polynomial:b3"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.6014470000000074
+  },
+  {
+   "id": "e2-sealed-084",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.5223560000000589
+  },
+  {
+   "id": "e2-sealed-085",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.1185409999999365
+  },
+  {
+   "id": "e2-sealed-086",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.560600000000022
+  },
+  {
+   "id": "e2-sealed-087",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.212175000000002
+  },
+  {
+   "id": "e2-sealed-088",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 4 steps are valid and the answer is correct",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 4
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 11.890087999999992
+  },
+  {
+   "id": "e2-sealed-089",
+   "partition": "sealed-holdout",
+   "category": "valid-alternative-path",
+   "family": null,
+   "tags": [],
+   "area": "statistics",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:statistics-mean",
+     "probability-statistics:b1"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": [],
+    "gate": {
+     "independentlyVerified": true,
+     "verdict": "verified",
+     "evidence": 2
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": true,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 9.55780900000002
+  },
+  {
+   "id": "e2-sealed-090",
+   "partition": "sealed-holdout",
+   "category": "ambiguous-or-malformed-line",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "expected expression",
+    "obligations": [
+     "expected expression"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "malformed",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.17001700000002984
+  },
+  {
+   "id": "e2-sealed-091",
+   "partition": "sealed-holdout",
+   "category": "ambiguous-or-malformed-line",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "missing closing parenthesis",
+    "obligations": [
+     "missing closing parenthesis"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "malformed",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.12103899999999612
+  },
+  {
+   "id": "e2-sealed-092",
+   "partition": "sealed-holdout",
+   "category": "ambiguous-or-malformed-line",
+   "family": null,
+   "tags": [],
+   "area": "matrices",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "unexpected token *",
+    "obligations": [
+     "unexpected token *"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "malformed",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.08249000000000706
+  },
+  {
+   "id": "e2-sealed-093",
+   "partition": "sealed-holdout",
+   "category": "ambiguous-or-malformed-line",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "unexpected token =",
+    "obligations": [
+     "unexpected token ="
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "malformed",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.08156000000008135
+  },
+  {
+   "id": "e2-sealed-094",
+   "partition": "sealed-holdout",
+   "category": "ambiguous-or-malformed-line",
+   "family": null,
+   "tags": [],
+   "area": "matrices",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "missing closing parenthesis",
+    "obligations": [
+     "missing closing parenthesis"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "malformed",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.07341900000005808
+  },
+  {
+   "id": "e2-sealed-095",
+   "partition": "sealed-holdout",
+   "category": "ambiguous-or-malformed-line",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "unexpected token *",
+    "obligations": [
+     "unexpected token *"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "malformed",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.09471699999994598
+  },
+  {
+   "id": "e2-sealed-096",
+   "partition": "sealed-holdout",
+   "category": "ambiguous-or-malformed-line",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "ambiguous",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.0766479999999774
+  },
+  {
+   "id": "e2-sealed-097",
+   "partition": "sealed-holdout",
+   "category": "ambiguous-or-malformed-line",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "ambiguous",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.06283099999996011
+  },
+  {
+   "id": "e2-sealed-098",
+   "partition": "sealed-holdout",
+   "category": "ambiguous-or-malformed-line",
+   "family": null,
+   "tags": [],
+   "area": "algebra",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "ambiguous",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.05591100000003735
+  },
+  {
+   "id": "e2-sealed-099",
+   "partition": "sealed-holdout",
+   "category": "ambiguous-or-malformed-line",
+   "family": null,
+   "tags": [],
+   "area": "functions",
+   "coverage": "in-scope",
+   "adjudicated": false,
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidAcceptable": []
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidLine": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter function-evaluation can verify only part of the submission (line is not an evaluation of the defined function); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ],
+    "gate": {
+     "independentlyVerified": false,
+     "verdict": "unsupported",
+     "evidence": 0
+    }
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "correctlyVerified": false,
+    "correctlyInvalid": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "branchDetected": null,
+    "safeOnDefective": null,
+    "independentlyVerified": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.22868100000005143
+  }
+ ]
+}

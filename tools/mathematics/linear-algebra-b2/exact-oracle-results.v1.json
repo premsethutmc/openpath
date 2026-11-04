@@ -1,0 +1,1407 @@
+{
+  "version": "linear-algebra-b2-oracle@1",
+  "total": 200,
+  "matched": 200,
+  "results": [
+    {
+      "id": "vector-0",
+      "area": "vector",
+      "expected": "0",
+      "oracle": "0",
+      "match": true
+    },
+    {
+      "id": "vector-1",
+      "area": "vector",
+      "expected": "5",
+      "oracle": "5",
+      "match": true
+    },
+    {
+      "id": "vector-2",
+      "area": "vector",
+      "expected": "10",
+      "oracle": "10",
+      "match": true
+    },
+    {
+      "id": "vector-3",
+      "area": "vector",
+      "expected": "6",
+      "oracle": "6",
+      "match": true
+    },
+    {
+      "id": "vector-4",
+      "area": "vector",
+      "expected": "11",
+      "oracle": "11",
+      "match": true
+    },
+    {
+      "id": "vector-5",
+      "area": "vector",
+      "expected": "6",
+      "oracle": "6",
+      "match": true
+    },
+    {
+      "id": "vector-6",
+      "area": "vector",
+      "expected": "2",
+      "oracle": "2",
+      "match": true
+    },
+    {
+      "id": "vector-7",
+      "area": "vector",
+      "expected": "7",
+      "oracle": "7",
+      "match": true
+    },
+    {
+      "id": "vector-8",
+      "area": "vector",
+      "expected": "12",
+      "oracle": "12",
+      "match": true
+    },
+    {
+      "id": "vector-9",
+      "area": "vector",
+      "expected": "8",
+      "oracle": "8",
+      "match": true
+    },
+    {
+      "id": "vector-10",
+      "area": "vector",
+      "expected": "3",
+      "oracle": "3",
+      "match": true
+    },
+    {
+      "id": "vector-11",
+      "area": "vector",
+      "expected": "8",
+      "oracle": "8",
+      "match": true
+    },
+    {
+      "id": "vector-12",
+      "area": "vector",
+      "expected": "4",
+      "oracle": "4",
+      "match": true
+    },
+    {
+      "id": "vector-13",
+      "area": "vector",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "vector-14",
+      "area": "vector",
+      "expected": "14",
+      "oracle": "14",
+      "match": true
+    },
+    {
+      "id": "vector-15",
+      "area": "vector",
+      "expected": "0",
+      "oracle": "0",
+      "match": true
+    },
+    {
+      "id": "vector-16",
+      "area": "vector",
+      "expected": "5",
+      "oracle": "5",
+      "match": true
+    },
+    {
+      "id": "vector-17",
+      "area": "vector",
+      "expected": "10",
+      "oracle": "10",
+      "match": true
+    },
+    {
+      "id": "vector-18",
+      "area": "vector",
+      "expected": "6",
+      "oracle": "6",
+      "match": true
+    },
+    {
+      "id": "vector-19",
+      "area": "vector",
+      "expected": "11",
+      "oracle": "11",
+      "match": true
+    },
+    {
+      "id": "vector-20",
+      "area": "vector",
+      "expected": "6",
+      "oracle": "6",
+      "match": true
+    },
+    {
+      "id": "vector-21",
+      "area": "vector",
+      "expected": "2",
+      "oracle": "2",
+      "match": true
+    },
+    {
+      "id": "vector-22",
+      "area": "vector",
+      "expected": "7",
+      "oracle": "7",
+      "match": true
+    },
+    {
+      "id": "vector-23",
+      "area": "vector",
+      "expected": "12",
+      "oracle": "12",
+      "match": true
+    },
+    {
+      "id": "vector-24",
+      "area": "vector",
+      "expected": "8",
+      "oracle": "8",
+      "match": true
+    },
+    {
+      "id": "vector-25",
+      "area": "vector",
+      "expected": "3",
+      "oracle": "3",
+      "match": true
+    },
+    {
+      "id": "vector-26",
+      "area": "vector",
+      "expected": "8",
+      "oracle": "8",
+      "match": true
+    },
+    {
+      "id": "vector-27",
+      "area": "vector",
+      "expected": "4",
+      "oracle": "4",
+      "match": true
+    },
+    {
+      "id": "vector-28",
+      "area": "vector",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "vector-29",
+      "area": "vector",
+      "expected": "14",
+      "oracle": "14",
+      "match": true
+    },
+    {
+      "id": "vector-30",
+      "area": "vector",
+      "expected": "0",
+      "oracle": "0",
+      "match": true
+    },
+    {
+      "id": "vector-31",
+      "area": "vector",
+      "expected": "5",
+      "oracle": "5",
+      "match": true
+    },
+    {
+      "id": "vector-32",
+      "area": "vector",
+      "expected": "10",
+      "oracle": "10",
+      "match": true
+    },
+    {
+      "id": "vector-33",
+      "area": "vector",
+      "expected": "6",
+      "oracle": "6",
+      "match": true
+    },
+    {
+      "id": "vector-34",
+      "area": "vector",
+      "expected": "11",
+      "oracle": "11",
+      "match": true
+    },
+    {
+      "id": "vector-35",
+      "area": "vector",
+      "expected": "6",
+      "oracle": "6",
+      "match": true
+    },
+    {
+      "id": "vector-36",
+      "area": "vector",
+      "expected": "2",
+      "oracle": "2",
+      "match": true
+    },
+    {
+      "id": "vector-37",
+      "area": "vector",
+      "expected": "7",
+      "oracle": "7",
+      "match": true
+    },
+    {
+      "id": "vector-38",
+      "area": "vector",
+      "expected": "12",
+      "oracle": "12",
+      "match": true
+    },
+    {
+      "id": "vector-39",
+      "area": "vector",
+      "expected": "8",
+      "oracle": "8",
+      "match": true
+    },
+    {
+      "id": "vector-40",
+      "area": "vector",
+      "expected": "3",
+      "oracle": "3",
+      "match": true
+    },
+    {
+      "id": "vector-41",
+      "area": "vector",
+      "expected": "8",
+      "oracle": "8",
+      "match": true
+    },
+    {
+      "id": "vector-42",
+      "area": "vector",
+      "expected": "4",
+      "oracle": "4",
+      "match": true
+    },
+    {
+      "id": "vector-43",
+      "area": "vector",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "vector-44",
+      "area": "vector",
+      "expected": "14",
+      "oracle": "14",
+      "match": true
+    },
+    {
+      "id": "vector-45",
+      "area": "vector",
+      "expected": "0",
+      "oracle": "0",
+      "match": true
+    },
+    {
+      "id": "vector-46",
+      "area": "vector",
+      "expected": "5",
+      "oracle": "5",
+      "match": true
+    },
+    {
+      "id": "vector-47",
+      "area": "vector",
+      "expected": "10",
+      "oracle": "10",
+      "match": true
+    },
+    {
+      "id": "vector-48",
+      "area": "vector",
+      "expected": "6",
+      "oracle": "6",
+      "match": true
+    },
+    {
+      "id": "vector-49",
+      "area": "vector",
+      "expected": "11",
+      "oracle": "11",
+      "match": true
+    },
+    {
+      "id": "matrix-0",
+      "area": "matrix",
+      "expected": "Matrix([[4, 3], [10, 7]])",
+      "oracle": "Matrix([[4, 3], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-1",
+      "area": "matrix",
+      "expected": "Matrix([[6, 6], [10, 11]])",
+      "oracle": "Matrix([[6, 6], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-2",
+      "area": "matrix",
+      "expected": "Matrix([[8, 9], [10, 15]])",
+      "oracle": "Matrix([[8, 9], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-3",
+      "area": "matrix",
+      "expected": "Matrix([[10, 6], [10, 7]])",
+      "oracle": "Matrix([[10, 6], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-4",
+      "area": "matrix",
+      "expected": "Matrix([[4, 5], [10, 11]])",
+      "oracle": "Matrix([[4, 5], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-5",
+      "area": "matrix",
+      "expected": "Matrix([[6, 8], [10, 15]])",
+      "oracle": "Matrix([[6, 8], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-6",
+      "area": "matrix",
+      "expected": "Matrix([[8, 5], [10, 7]])",
+      "oracle": "Matrix([[8, 5], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-7",
+      "area": "matrix",
+      "expected": "Matrix([[10, 8], [10, 11]])",
+      "oracle": "Matrix([[10, 8], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-8",
+      "area": "matrix",
+      "expected": "Matrix([[4, 7], [10, 15]])",
+      "oracle": "Matrix([[4, 7], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-9",
+      "area": "matrix",
+      "expected": "Matrix([[6, 4], [10, 7]])",
+      "oracle": "Matrix([[6, 4], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-10",
+      "area": "matrix",
+      "expected": "Matrix([[8, 7], [10, 11]])",
+      "oracle": "Matrix([[8, 7], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-11",
+      "area": "matrix",
+      "expected": "Matrix([[10, 10], [10, 15]])",
+      "oracle": "Matrix([[10, 10], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-12",
+      "area": "matrix",
+      "expected": "Matrix([[4, 3], [10, 7]])",
+      "oracle": "Matrix([[4, 3], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-13",
+      "area": "matrix",
+      "expected": "Matrix([[6, 6], [10, 11]])",
+      "oracle": "Matrix([[6, 6], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-14",
+      "area": "matrix",
+      "expected": "Matrix([[8, 9], [10, 15]])",
+      "oracle": "Matrix([[8, 9], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-15",
+      "area": "matrix",
+      "expected": "Matrix([[10, 6], [10, 7]])",
+      "oracle": "Matrix([[10, 6], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-16",
+      "area": "matrix",
+      "expected": "Matrix([[4, 5], [10, 11]])",
+      "oracle": "Matrix([[4, 5], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-17",
+      "area": "matrix",
+      "expected": "Matrix([[6, 8], [10, 15]])",
+      "oracle": "Matrix([[6, 8], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-18",
+      "area": "matrix",
+      "expected": "Matrix([[8, 5], [10, 7]])",
+      "oracle": "Matrix([[8, 5], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-19",
+      "area": "matrix",
+      "expected": "Matrix([[10, 8], [10, 11]])",
+      "oracle": "Matrix([[10, 8], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-20",
+      "area": "matrix",
+      "expected": "Matrix([[4, 7], [10, 15]])",
+      "oracle": "Matrix([[4, 7], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-21",
+      "area": "matrix",
+      "expected": "Matrix([[6, 4], [10, 7]])",
+      "oracle": "Matrix([[6, 4], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-22",
+      "area": "matrix",
+      "expected": "Matrix([[8, 7], [10, 11]])",
+      "oracle": "Matrix([[8, 7], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-23",
+      "area": "matrix",
+      "expected": "Matrix([[10, 10], [10, 15]])",
+      "oracle": "Matrix([[10, 10], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-24",
+      "area": "matrix",
+      "expected": "Matrix([[4, 3], [10, 7]])",
+      "oracle": "Matrix([[4, 3], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-25",
+      "area": "matrix",
+      "expected": "Matrix([[6, 6], [10, 11]])",
+      "oracle": "Matrix([[6, 6], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-26",
+      "area": "matrix",
+      "expected": "Matrix([[8, 9], [10, 15]])",
+      "oracle": "Matrix([[8, 9], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-27",
+      "area": "matrix",
+      "expected": "Matrix([[10, 6], [10, 7]])",
+      "oracle": "Matrix([[10, 6], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-28",
+      "area": "matrix",
+      "expected": "Matrix([[4, 5], [10, 11]])",
+      "oracle": "Matrix([[4, 5], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-29",
+      "area": "matrix",
+      "expected": "Matrix([[6, 8], [10, 15]])",
+      "oracle": "Matrix([[6, 8], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-30",
+      "area": "matrix",
+      "expected": "Matrix([[8, 5], [10, 7]])",
+      "oracle": "Matrix([[8, 5], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-31",
+      "area": "matrix",
+      "expected": "Matrix([[10, 8], [10, 11]])",
+      "oracle": "Matrix([[10, 8], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-32",
+      "area": "matrix",
+      "expected": "Matrix([[4, 7], [10, 15]])",
+      "oracle": "Matrix([[4, 7], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-33",
+      "area": "matrix",
+      "expected": "Matrix([[6, 4], [10, 7]])",
+      "oracle": "Matrix([[6, 4], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-34",
+      "area": "matrix",
+      "expected": "Matrix([[8, 7], [10, 11]])",
+      "oracle": "Matrix([[8, 7], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-35",
+      "area": "matrix",
+      "expected": "Matrix([[10, 10], [10, 15]])",
+      "oracle": "Matrix([[10, 10], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-36",
+      "area": "matrix",
+      "expected": "Matrix([[4, 3], [10, 7]])",
+      "oracle": "Matrix([[4, 3], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-37",
+      "area": "matrix",
+      "expected": "Matrix([[6, 6], [10, 11]])",
+      "oracle": "Matrix([[6, 6], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-38",
+      "area": "matrix",
+      "expected": "Matrix([[8, 9], [10, 15]])",
+      "oracle": "Matrix([[8, 9], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-39",
+      "area": "matrix",
+      "expected": "Matrix([[10, 6], [10, 7]])",
+      "oracle": "Matrix([[10, 6], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-40",
+      "area": "matrix",
+      "expected": "Matrix([[4, 5], [10, 11]])",
+      "oracle": "Matrix([[4, 5], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-41",
+      "area": "matrix",
+      "expected": "Matrix([[6, 8], [10, 15]])",
+      "oracle": "Matrix([[6, 8], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-42",
+      "area": "matrix",
+      "expected": "Matrix([[8, 5], [10, 7]])",
+      "oracle": "Matrix([[8, 5], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-43",
+      "area": "matrix",
+      "expected": "Matrix([[10, 8], [10, 11]])",
+      "oracle": "Matrix([[10, 8], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-44",
+      "area": "matrix",
+      "expected": "Matrix([[4, 7], [10, 15]])",
+      "oracle": "Matrix([[4, 7], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-45",
+      "area": "matrix",
+      "expected": "Matrix([[6, 4], [10, 7]])",
+      "oracle": "Matrix([[6, 4], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-46",
+      "area": "matrix",
+      "expected": "Matrix([[8, 7], [10, 11]])",
+      "oracle": "Matrix([[8, 7], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "matrix-47",
+      "area": "matrix",
+      "expected": "Matrix([[10, 10], [10, 15]])",
+      "oracle": "Matrix([[10, 10], [10, 15]])",
+      "match": true
+    },
+    {
+      "id": "matrix-48",
+      "area": "matrix",
+      "expected": "Matrix([[4, 3], [10, 7]])",
+      "oracle": "Matrix([[4, 3], [10, 7]])",
+      "match": true
+    },
+    {
+      "id": "matrix-49",
+      "area": "matrix",
+      "expected": "Matrix([[6, 6], [10, 11]])",
+      "oracle": "Matrix([[6, 6], [10, 11]])",
+      "match": true
+    },
+    {
+      "id": "determinant-0",
+      "area": "determinant",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "determinant-1",
+      "area": "determinant",
+      "expected": "20",
+      "oracle": "20",
+      "match": true
+    },
+    {
+      "id": "determinant-2",
+      "area": "determinant",
+      "expected": "31",
+      "oracle": "31",
+      "match": true
+    },
+    {
+      "id": "determinant-3",
+      "area": "determinant",
+      "expected": "42",
+      "oracle": "42",
+      "match": true
+    },
+    {
+      "id": "determinant-4",
+      "area": "determinant",
+      "expected": "53",
+      "oracle": "53",
+      "match": true
+    },
+    {
+      "id": "determinant-5",
+      "area": "determinant",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "determinant-6",
+      "area": "determinant",
+      "expected": "20",
+      "oracle": "20",
+      "match": true
+    },
+    {
+      "id": "determinant-7",
+      "area": "determinant",
+      "expected": "31",
+      "oracle": "31",
+      "match": true
+    },
+    {
+      "id": "determinant-8",
+      "area": "determinant",
+      "expected": "42",
+      "oracle": "42",
+      "match": true
+    },
+    {
+      "id": "determinant-9",
+      "area": "determinant",
+      "expected": "53",
+      "oracle": "53",
+      "match": true
+    },
+    {
+      "id": "determinant-10",
+      "area": "determinant",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "determinant-11",
+      "area": "determinant",
+      "expected": "20",
+      "oracle": "20",
+      "match": true
+    },
+    {
+      "id": "determinant-12",
+      "area": "determinant",
+      "expected": "31",
+      "oracle": "31",
+      "match": true
+    },
+    {
+      "id": "determinant-13",
+      "area": "determinant",
+      "expected": "42",
+      "oracle": "42",
+      "match": true
+    },
+    {
+      "id": "determinant-14",
+      "area": "determinant",
+      "expected": "53",
+      "oracle": "53",
+      "match": true
+    },
+    {
+      "id": "determinant-15",
+      "area": "determinant",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "determinant-16",
+      "area": "determinant",
+      "expected": "20",
+      "oracle": "20",
+      "match": true
+    },
+    {
+      "id": "determinant-17",
+      "area": "determinant",
+      "expected": "31",
+      "oracle": "31",
+      "match": true
+    },
+    {
+      "id": "determinant-18",
+      "area": "determinant",
+      "expected": "42",
+      "oracle": "42",
+      "match": true
+    },
+    {
+      "id": "determinant-19",
+      "area": "determinant",
+      "expected": "53",
+      "oracle": "53",
+      "match": true
+    },
+    {
+      "id": "determinant-20",
+      "area": "determinant",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "determinant-21",
+      "area": "determinant",
+      "expected": "20",
+      "oracle": "20",
+      "match": true
+    },
+    {
+      "id": "determinant-22",
+      "area": "determinant",
+      "expected": "31",
+      "oracle": "31",
+      "match": true
+    },
+    {
+      "id": "determinant-23",
+      "area": "determinant",
+      "expected": "42",
+      "oracle": "42",
+      "match": true
+    },
+    {
+      "id": "determinant-24",
+      "area": "determinant",
+      "expected": "53",
+      "oracle": "53",
+      "match": true
+    },
+    {
+      "id": "determinant-25",
+      "area": "determinant",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "determinant-26",
+      "area": "determinant",
+      "expected": "20",
+      "oracle": "20",
+      "match": true
+    },
+    {
+      "id": "determinant-27",
+      "area": "determinant",
+      "expected": "31",
+      "oracle": "31",
+      "match": true
+    },
+    {
+      "id": "determinant-28",
+      "area": "determinant",
+      "expected": "42",
+      "oracle": "42",
+      "match": true
+    },
+    {
+      "id": "determinant-29",
+      "area": "determinant",
+      "expected": "53",
+      "oracle": "53",
+      "match": true
+    },
+    {
+      "id": "determinant-30",
+      "area": "determinant",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "determinant-31",
+      "area": "determinant",
+      "expected": "20",
+      "oracle": "20",
+      "match": true
+    },
+    {
+      "id": "determinant-32",
+      "area": "determinant",
+      "expected": "31",
+      "oracle": "31",
+      "match": true
+    },
+    {
+      "id": "determinant-33",
+      "area": "determinant",
+      "expected": "42",
+      "oracle": "42",
+      "match": true
+    },
+    {
+      "id": "determinant-34",
+      "area": "determinant",
+      "expected": "53",
+      "oracle": "53",
+      "match": true
+    },
+    {
+      "id": "determinant-35",
+      "area": "determinant",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "determinant-36",
+      "area": "determinant",
+      "expected": "20",
+      "oracle": "20",
+      "match": true
+    },
+    {
+      "id": "determinant-37",
+      "area": "determinant",
+      "expected": "31",
+      "oracle": "31",
+      "match": true
+    },
+    {
+      "id": "determinant-38",
+      "area": "determinant",
+      "expected": "42",
+      "oracle": "42",
+      "match": true
+    },
+    {
+      "id": "determinant-39",
+      "area": "determinant",
+      "expected": "53",
+      "oracle": "53",
+      "match": true
+    },
+    {
+      "id": "determinant-40",
+      "area": "determinant",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "determinant-41",
+      "area": "determinant",
+      "expected": "20",
+      "oracle": "20",
+      "match": true
+    },
+    {
+      "id": "determinant-42",
+      "area": "determinant",
+      "expected": "31",
+      "oracle": "31",
+      "match": true
+    },
+    {
+      "id": "determinant-43",
+      "area": "determinant",
+      "expected": "42",
+      "oracle": "42",
+      "match": true
+    },
+    {
+      "id": "determinant-44",
+      "area": "determinant",
+      "expected": "53",
+      "oracle": "53",
+      "match": true
+    },
+    {
+      "id": "determinant-45",
+      "area": "determinant",
+      "expected": "9",
+      "oracle": "9",
+      "match": true
+    },
+    {
+      "id": "determinant-46",
+      "area": "determinant",
+      "expected": "20",
+      "oracle": "20",
+      "match": true
+    },
+    {
+      "id": "determinant-47",
+      "area": "determinant",
+      "expected": "31",
+      "oracle": "31",
+      "match": true
+    },
+    {
+      "id": "determinant-48",
+      "area": "determinant",
+      "expected": "42",
+      "oracle": "42",
+      "match": true
+    },
+    {
+      "id": "determinant-49",
+      "area": "determinant",
+      "expected": "53",
+      "oracle": "53",
+      "match": true
+    },
+    {
+      "id": "system-0",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-1",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-2",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-3",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-4",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-5",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-6",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-7",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-8",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-9",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-10",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-11",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-12",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-13",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-14",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-15",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-16",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-17",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-18",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-19",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-20",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-21",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-22",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-23",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-24",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-25",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-26",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-27",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-28",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-29",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-30",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-31",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-32",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-33",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-34",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-35",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-36",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-37",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-38",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-39",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-40",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-41",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-42",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-43",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-44",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-45",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-46",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-47",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-48",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    },
+    {
+      "id": "system-49",
+      "area": "system",
+      "expected": "unique",
+      "oracle": "unique",
+      "match": true
+    }
+  ]
+}

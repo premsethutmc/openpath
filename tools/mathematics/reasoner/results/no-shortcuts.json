@@ -1,0 +1,40 @@
+{
+ "checks": [
+  {
+   "check": "planner imports only the kernel and expr-text",
+   "ok": true,
+   "detail": "['../math-kernel.ts', './expr-text.ts']"
+  },
+  {
+   "check": "expr-text imports only the kernel",
+   "ok": true,
+   "detail": "['../math-kernel.ts']"
+  },
+  {
+   "check": "no file/JSON/process/network/SymPy use in planner sources",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "generator does not import the planner",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "plan() takes the equation text only",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "no frozen equation text appears in planner sources (1476 equations)",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "check": "no table of answers (no long numeric literal lists)",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "allOk": true
+}

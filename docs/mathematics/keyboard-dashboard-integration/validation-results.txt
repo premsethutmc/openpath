@@ -1,0 +1,162 @@
+Local verification on 2026-10-21. Synthetic accounts and databases only.
+Runner summaries, not GitHub CI claims. Final command exits: 0.
+
+Frontend, full Node 24 suite
+✔ configurable layouts accept arbitrary division and free writing without changing learner engine (0.496851ms)
+✔ contract exposes spatial worksheet and original entry sequence without scoring fields (0.474468ms)
+ℹ tests 450
+ℹ suites 0
+ℹ pass 450
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1275868.954072
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice
+
+Django, full suite
+Creating test database for alias 'default'...
+................................................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran 240 tests in 91.558s
+
+OK
+Destroying test database for alias 'default'...
+Found 240 test(s).
+System check identified no issues (0 silenced).
+
+Dashboard A–N
+✔ A + L: Grade 1 loads its chapters and competencies from the release (no setup), two columns at phone width (2302.156335ms)
+✔ C + D + K: Grade 10 → Real Numbers and Grade 12 → Integrals: nested tiles, modules, assessment, coverage apart from mastery (7433.683588ms)
+✔ E–I + K + N: a learner's evidence through Django: unassessed, a lesson, shown, seven full days, verified; a method skill needs a mark; counted once (26131.848213ms)
+✔ B: a Grade 5 learner sees their own year and goal foundations, nothing from later grades (3890.997389ms)
+✔ J: arranging tiles changes only the order on this device: the curriculum and evidence stay the same (6604.633673ms)
+✔ M: a partially covered outcome stays partial on its tile and in its chapter's coverage (1398.629432ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 49558.681085
+
+Learning year, existing browser regressions
+✔ journeys A, E, F: Grade 4 textbook → Fractions → diagnostic → strategy → practice → logout/login → Grade 5 → missed delayed check (47308.802148ms)
+✔ journey B: Grade 5 with an IIT-JEE Advanced goal: age-appropriate tiles, goal foundations, gated challenges, nothing advanced (13935.196877ms)
+✔ journeys C and D: integration problem → verified supports green → 7 × 8 fails → decomposition → back; the full advanced problem once ready (78228.23081ms)
+✔ journey D: an advanced problem decomposed into a Grade 7 step and a Grade 8 step (17209.580817ms)
+✔ journeys G and M: an unseen mistake on a typed problem is investigated; an unsupported problem is declined (38955.443918ms)
+✔ journey I: two learners solve 7 × 8 in different ways; both are valid and recognised, neither is required (18415.137577ms)
+✔ journeys J and K: the plan continues across visits without reteaching; no delayed check or green before seven days (37597.63487ms)
+✔ journey L: a second board's textbook, worded differently, maps to the same skills or asks the reviewer (12534.131332ms)
+✔ journey N: a Grade 5 JEE learner builds foundations; Grade 11 later uses the same evidence and gets an exam plan (27994.626713ms)
+✔ platform B: Grade 10 board textbook → Algebra → Quadratic equations → sections; a gap in expanding brackets repaired (33367.583082ms)
+✔ platform C: Grade 12 → Calculus → Integrals → Techniques of integration → capabilities; recovery to powers (Grade 7) (37031.228046ms)
+✔ platform E and F: an unseen textbook through the same screens; then the next year keeps the evidence (49699.91423ms)
+✔ content system: an educator reviews a question family and its module in the browser; a release manager releases them; a Grade 4 learner then reaches verified (74699.702601ms)
+✔ content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, recovery, a week away, verified on released content (372402.95707ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 862403.742796
+
+Keyboard, actual Django frontend
+✔ 360px: Grade 7 tiles → keyboard division, recovery, correction, resume and inadmissible evidence (6512.110014ms)
+✔ 393px: Grade 7 tiles → keyboard division, recovery, correction, resume and inadmissible evidence (6069.778289ms)
+✔ same current learner journey supports equivalent fractions and guided multiplication without drawing controls (4933.70914ms)
+✔ legacy writing and institutional routes cannot expose deferred controls (34517.590425ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 53280.322667
+
+Workspace components
+✔ disabled policy overrides host recognizer, preserves archived ink and accepts keyboard working (2326.926558ms)
+✔ host validator clarification is editable and confirmed callback carries versioned input only (1254.635153ms)
+✔ late validator feedback is discarded after a student edits a step (1365.689445ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6143.420547
+
+Drawing boundary/archive component
+✔ drawing tasks remain unavailable, not converted to final answers; archived drawings still render read-only (4316.013594ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4911.40533
+
+Writing model on Node 22
+  type: 'test'
+  ...
+1..22
+# tests 22
+# suites 0
+# pass 22
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 706.559124
+
+Writing model on Node 24
+✔ draft store restores history, rejects unsupported/corrupt data and reports quota failures (1.07105ms)
+✔ configurable layouts accept arbitrary division and free writing without changing learner engine (0.339523ms)
+✔ contract exposes spatial worksheet and original entry sequence without scoring fields (0.269477ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 480.352409
+
+Builds
+wrote dist-english/ (version d5bc20b9d829, app.js 3566 kB)
+Built additive mathematics.html and maths/ alongside unchanged English entry point.
+Built My Learning Year at /year/ and content review at /review/.
+dashboard data: 24 releases, 1080 families, 376 written tasks, 1197 outcomes → /workspace/openpath/frontend//dist-english/curriculum/data
+Built the Mathematics curriculum dashboard at /curriculum/.
+
+Fresh migration graph
+  Applying learners.0001_initial... OK
+  Applying evaluation.0001_initial... OK
+  Applying evaluation.0002_essayevaluationrecord... OK
+  Applying evidence.0001_initial... OK
+  Applying family.0001_initial... OK
+  Applying family.0002_apimetric_servererror_pupil_shared_at_and_more... OK
+  Applying family.0003_content_review... OK
+  Applying family.0004_written_marking... OK
+  Applying family.0003_writing_draft... OK
+  Applying family.0005_keyboard_written_join... OK
+  Applying sessions.0001_initial... OK
+No changes detected
+
+Existing synthetic archive migration
+Operations to perform:
+  Apply all migrations: auth, contenttypes, evaluation, evidence, family, learners, sessions
+Running migrations:
+  Applying family.0004_written_marking... OK
+  Applying family.0005_keyboard_written_join... OK

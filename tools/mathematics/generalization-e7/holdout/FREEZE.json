@@ -1,0 +1,18 @@
+{
+ "engineCommit": "5d0a7b4f72a30f30da86708a3e6568131e455281",
+ "frozenBeforeExecution": true,
+ "n": 678,
+ "sha256": {
+  "cases.json": "15e1ffc1586bae2e3cc4ee555eea6d77bd339108193b5b8b4455ac623c1594a2",
+  "labels.json": "11ba4b5ce3f7a882c1488ef6d783ced8c367e2e7982a4d688645d4471990f7b1",
+  "audit.json": "6316cf6fa59e9c303236d7972fb37e1fc3feab76e793477301964d0cbb42b1a2",
+  "authored/algA.json": "2ed5194750e194fa74abad72ed091c228b4a85ab327d6dbd2acae14a5555d4cf",
+  "authored/algB.json": "a82bd0c8fb9b066df464b2122b1284ab385171a686e8c9d9d572f38fc62811d9",
+  "authored/calcD.json": "49aa7bf0fa8347e049de520b244fec965206addc97c18e355c1b55a29b3f68ce",
+  "authored/calcI.json": "f0562c9ab1d6c4c5886636107ecf9a8b97efce745c51b34ddacc68da9a1f5baa",
+  "authored/calcL.json": "3b50e3130ea7aa18a899612e8b7509f5c4b432875a5ef77f8370d8e2d5977b83",
+  "authored/dom.json": "d33eec8a264ab71b392298955f50678bd86b194594b3c5c5cf7fb3e753e85b58",
+  "authored/geo.json": "aa0ff3483dd35001162b0e62826d9ef306b258ca52b9b8f3704fc346b64f11e0",
+  "authored/typed.json": "20acd15e361f48f57c80b0bbe2c866ccede8a11b4176e974c9a83a268480b952"
+ }
+}

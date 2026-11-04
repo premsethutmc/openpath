@@ -1,0 +1,1095 @@
+[
+ {
+  "id": "h7-calcL-001",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "standard-limit"
+  ],
+  "p": {
+   "lim": "sin(5x)/(2x)",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "sin(5x)/(2x) = (5/2)*sin(5x)/(5x)\nas x -> 0, 5x -> 0 so sin(5x)/(5x) -> 1\nhence the limit is 5/2",
+  "exp": "verified",
+  "why": "standard limit sin(u)/u->1 gives 5/2"
+ },
+ {
+  "id": "h7-calcL-002",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "factor"
+  ],
+  "p": {
+   "lim": "(x^2-9)/(x-3)",
+   "at": "3",
+   "side": "both"
+  },
+  "w": "x^2 - 9 = (x-3)(x+3)\nfor x != 3, (x^2-9)/(x-3) = x+3\nso the limit is 3+3 = 6",
+  "exp": "verified",
+  "why": "cancel removable factor, value 6"
+ },
+ {
+  "id": "h7-calcL-003",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "conjugate"
+  ],
+  "p": {
+   "lim": "(sqrt(x+4)-2)/x",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "multiply top and bottom by sqrt(x+4)+2\n(sqrt(x+4)-2)(sqrt(x+4)+2) = (x+4)-4 = x\nso the expression = x/(x(sqrt(x+4)+2)) = 1/(sqrt(x+4)+2) for x != 0\nlimit = 1/(2+2) = 1/4",
+  "exp": "verified",
+  "why": "conjugate gives 1/(sqrt(x+4)+2)->1/4"
+ },
+ {
+  "id": "h7-calcL-004",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "infinity"
+  ],
+  "p": {
+   "lim": "(3x^2+2x)/(5x^2-1)",
+   "at": "infinity",
+   "side": "both"
+  },
+  "w": "divide numerator and denominator by x^2\n(3+2/x)/(5-1/x^2)\nas x -> infinity, 2/x -> 0 and 1/x^2 -> 0\nso the limit is 3/5",
+  "exp": "verified",
+  "why": "ratio of leading coefficients 3/5"
+ },
+ {
+  "id": "h7-calcL-005",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "lhopital-correct"
+  ],
+  "p": {
+   "lim": "(1-cos(x))/x^2",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "at x=0 the form is 0/0, so L'Hopital applies\nlim (1-cos x)/x^2 = lim sin x/(2x)\nthis is again 0/0, apply again: lim cos x/2\n= 1/2",
+  "exp": "verified",
+  "why": "two valid L'Hopital steps, each 0/0, giving 1/2"
+ },
+ {
+  "id": "h7-calcL-006",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "different-method"
+  ],
+  "p": {
+   "lim": "(1-cos(x))/x^2",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "1 - cos x = 2 sin^2(x/2)\n(1-cos x)/x^2 = (1/2)(sin(x/2)/(x/2))^2\nsince sin(u)/u -> 1 as u -> 0 the limit is (1/2)*1^2 = 1/2",
+  "exp": "verified",
+  "why": "half-angle identity route to 1/2, valid alternative to L'Hopital"
+ },
+ {
+  "id": "h7-calcL-007",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "one-sided"
+  ],
+  "p": {
+   "lim": "abs(x)/x",
+   "at": "0",
+   "side": "right"
+  },
+  "w": "for x > 0 we have |x| = x\nso |x|/x = 1\nthe right-hand limit is 1",
+  "exp": "verified",
+  "why": "on x>0 the quotient is identically 1"
+ },
+ {
+  "id": "h7-calcL-008",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "concise"
+  ],
+  "p": {
+   "lim": "(e^(2x)-1)/x",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "2",
+  "exp": "verified",
+  "why": "derivative of e^(2x) at 0 is 2"
+ },
+ {
+  "id": "h7-calcL-009",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "lhopital-correct",
+   "one-sided"
+  ],
+  "p": {
+   "lim": "x ln(x)",
+   "at": "0",
+   "side": "right"
+  },
+  "w": "x ln x = ln x/(1/x), form -infinity/infinity as x -> 0+\nL'Hopital: (1/x)/(-1/x^2) = -x\n-x -> 0 as x -> 0+\nso the limit is 0",
+  "exp": "verified",
+  "why": "rewrite as quotient, L'Hopital valid, gives 0"
+ },
+ {
+  "id": "h7-calcL-010",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "conjugate",
+   "infinity"
+  ],
+  "p": {
+   "lim": "x(sqrt(x^2+1)-x)",
+   "at": "infinity",
+   "side": "both"
+  },
+  "w": "x(sqrt(x^2+1)-x) = x*(x^2+1-x^2)/(sqrt(x^2+1)+x) = x/(sqrt(x^2+1)+x)\ndivide top and bottom by x (x>0): 1/(sqrt(1+1/x^2)+1)\nas x -> infinity this tends to 1/(1+1) = 1/2",
+  "exp": "verified",
+  "why": "conjugate then divide by x gives 1/2"
+ },
+ {
+  "id": "h7-calcL-011",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "concise"
+  ],
+  "p": {
+   "lim": "tan(x)/x",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "1",
+  "exp": "verified",
+  "why": "tan x/x -> 1 as x->0"
+ },
+ {
+  "id": "h7-calcL-012",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "concise"
+  ],
+  "p": {
+   "lim": "(x^3-8)/(x-2)",
+   "at": "2",
+   "side": "both"
+  },
+  "w": "12",
+  "exp": "verified",
+  "why": "x^2+2x+4 at 2 equals 12"
+ },
+ {
+  "id": "h7-calcL-013",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "taylor"
+  ],
+  "p": {
+   "stmt": "Use Taylor series to evaluate lim_{x->0} (sin x - x)/x^3",
+   "domain": "calculus",
+   "task": "taylor"
+  },
+  "w": "sin x = x - x^3/6 + x^5/120 - ...\nsin x - x = -x^3/6 + x^5/120 - ...\n(sin x - x)/x^3 = -1/6 + x^2/120 - ...\nso the limit is -1/6",
+  "exp": "verified",
+  "why": "Maclaurin expansion of sin gives -1/6"
+ },
+ {
+  "id": "h7-calcL-014",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "sequence"
+  ],
+  "p": {
+   "stmt": "Find lim_{n->infinity} (2n+1)/(n+3)",
+   "domain": "calculus",
+   "task": "sequence-limit"
+  },
+  "w": "divide top and bottom by n: (2+1/n)/(1+3/n)\n1/n -> 0 so the limit is 2/1 = 2",
+  "exp": "verified",
+  "why": "limit laws give 2"
+ },
+ {
+  "id": "h7-calcL-015",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "squeeze"
+  ],
+  "p": {
+   "stmt": "Use the squeeze theorem to find lim_{x->0} x^2 sin(1/x)",
+   "domain": "calculus",
+   "task": "limit-squeeze"
+  },
+  "w": "-1 <= sin(1/x) <= 1 for x != 0\nx^2 >= 0 so -x^2 <= x^2 sin(1/x) <= x^2\nboth -x^2 and x^2 tend to 0\nby the squeeze theorem the limit is 0",
+  "exp": "verified",
+  "why": "valid squeeze, multiplying by nonnegative x^2"
+ },
+ {
+  "id": "h7-calcL-016",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "comparison"
+  ],
+  "p": {
+   "stmt": "Determine whether sum_{n=1}^infinity 1/(n^2+1) converges",
+   "domain": "calculus",
+   "task": "series-convergence"
+  },
+  "w": "0 < 1/(n^2+1) < 1/n^2 for n >= 1\nsum 1/n^2 is a convergent p-series (p = 2 > 1)\nby the comparison test the series converges",
+  "exp": "verified",
+  "why": "direct comparison with p-series"
+ },
+ {
+  "id": "h7-calcL-017",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "ratio-test"
+  ],
+  "p": {
+   "stmt": "Determine whether sum_{n=1}^infinity n/2^n converges",
+   "domain": "calculus",
+   "task": "series-convergence"
+  },
+  "w": "a_n = n/2^n > 0\na_{n+1}/a_n = (n+1)/(2n) = (1/2)(1+1/n)\nthis tends to 1/2 < 1\nby the ratio test the series converges",
+  "exp": "verified",
+  "why": "ratio limit 1/2<1"
+ },
+ {
+  "id": "h7-calcL-018",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "continuity"
+  ],
+  "p": {
+   "stmt": "Let f(x) = (x^2-1)/(x-1) for x != 1 and f(1) = 2. Is f continuous at x = 1?",
+   "domain": "calculus",
+   "task": "continuity"
+  },
+  "w": "for x != 1, f(x) = x+1\nlim_{x->1} f(x) = 2\nf(1) = 2 equals the limit\nso f is continuous at 1",
+  "exp": "verified",
+  "why": "limit equals f(1)=2"
+ },
+ {
+  "id": "h7-calcL-019",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "differentiability"
+  ],
+  "p": {
+   "stmt": "Is f(x) = |x| differentiable at x = 0?",
+   "domain": "calculus",
+   "task": "differentiability"
+  },
+  "w": "(f(h)-f(0))/h = |h|/h\nfor h > 0 this is 1, so the right-hand derivative is 1\nfor h < 0 it is -1, so the left-hand derivative is -1\nthe one-sided derivatives differ, so f is not differentiable at 0",
+  "exp": "verified",
+  "why": "unequal one-sided derivatives"
+ },
+ {
+  "id": "h7-calcL-020",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "epsilon-delta",
+   "conditional"
+  ],
+  "p": {
+   "stmt": "Prove using epsilon-delta that lim_{x->2} (3x-1) = 5",
+   "domain": "calculus",
+   "task": "epsilon-delta-proof"
+  },
+  "w": "Let epsilon > 0 be given. Choose delta = epsilon/3.\nSuppose 0 < |x-2| < delta.\nThen |(3x-1)-5| = |3x-6| = 3|x-2| < 3*delta = epsilon.\nHence lim_{x->2}(3x-1) = 5.",
+  "exp": "verified",
+  "why": "delta=eps/3 works exactly"
+ },
+ {
+  "id": "h7-calcL-021",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "alternating"
+  ],
+  "p": {
+   "stmt": "Does sum_{n=1}^infinity (-1)^n/n converge absolutely, converge conditionally, or diverge?",
+   "domain": "calculus",
+   "task": "series-convergence"
+  },
+  "w": "the terms 1/n are positive, decreasing and tend to 0, so the alternating series test gives convergence\nthe series of absolute values is the harmonic series, which diverges\nso the series converges conditionally",
+  "exp": "verified",
+  "why": "Leibniz test plus divergent harmonic series"
+ },
+ {
+  "id": "h7-calcL-022",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "squeeze",
+   "infinity"
+  ],
+  "p": {
+   "lim": "(2x+sin(x))/x",
+   "at": "infinity",
+   "side": "both"
+  },
+  "w": "(2x+sin x)/x = 2 + sin(x)/x\nfor x > 0, -1/x <= sin(x)/x <= 1/x\nby squeeze sin(x)/x -> 0 as x -> infinity\nso the limit is 2",
+  "exp": "verified",
+  "why": "split and squeeze the bounded term"
+ },
+ {
+  "id": "h7-calcL-023",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "lhopital-correct"
+  ],
+  "p": {
+   "lim": "ln(x)/(x-1)",
+   "at": "1",
+   "side": "both"
+  },
+  "w": "at x = 1 the form is 0/0, L'Hopital applies\nlim (1/x)/1 = 1",
+  "exp": "verified",
+  "why": "single valid L'Hopital step"
+ },
+ {
+  "id": "h7-calcL-024",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "different-method"
+  ],
+  "p": {
+   "lim": "ln(x)/(x-1)",
+   "at": "1",
+   "side": "both"
+  },
+  "w": "ln(1) = 0 so ln(x)/(x-1) = (ln x - ln 1)/(x-1)\nthis is the difference quotient of ln at 1\nd/dx ln x = 1/x which equals 1 at x = 1\nso the limit is 1",
+  "exp": "verified",
+  "why": "derivative definition, no L'Hopital"
+ },
+ {
+  "id": "h7-calcL-025",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "squeeze",
+   "sequence"
+  ],
+  "p": {
+   "stmt": "Show that lim_{n->infinity} n!/n^n = 0",
+   "domain": "calculus",
+   "task": "limit-squeeze"
+  },
+  "w": "n!/n^n = (1/n)(2/n)(3/n)...(n/n)\neach factor k/n is at most 1, so 0 < n!/n^n <= 1/n\n1/n -> 0\nby the squeeze theorem n!/n^n -> 0",
+  "exp": "verified",
+  "why": "product bounded by 1/n"
+ },
+ {
+  "id": "h7-calcL-026",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "conditional",
+   "one-sided"
+  ],
+  "p": {
+   "lim": "abs(x-1)/(x-1)",
+   "at": "1",
+   "side": "both"
+  },
+  "w": "Case x > 1: |x-1| = x-1 so the quotient is 1\nCase x < 1: |x-1| = -(x-1) so the quotient is -1\nthe one-sided limits 1 and -1 differ\nso the limit does not exist",
+  "exp": "verified",
+  "why": "case split shows unequal one-sided limits"
+ },
+ {
+  "id": "h7-calcL-027",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "epsilon-delta",
+   "conditional"
+  ],
+  "p": {
+   "stmt": "Prove: if lim_{x->a} f(x) = L and lim_{x->a} g(x) = M then lim_{x->a} (f(x)+g(x)) = L+M",
+   "domain": "calculus",
+   "task": "epsilon-delta-proof"
+  },
+  "w": "Let epsilon > 0. Since f -> L there is delta1 with |f(x)-L| < epsilon/2 when 0<|x-a|<delta1.\nSince g -> M there is delta2 with |g(x)-M| < epsilon/2 when 0<|x-a|<delta2.\nLet delta = min(delta1, delta2) and suppose 0<|x-a|<delta.\nThen |f(x)+g(x)-(L+M)| <= |f(x)-L| + |g(x)-M| < epsilon/2 + epsilon/2 = epsilon.",
+  "exp": "verified",
+  "why": "standard epsilon/2 argument via triangle inequality"
+ },
+ {
+  "id": "h7-calcL-028",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "lim": "sin(7x)/(3x)",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "sin(7x)/(3x) = (7/3)*sin(7x)/(7x) -> 7/3\nNote also that lim_{x->0} cos(x) = 1, which is not needed here.\nanswer: 7/3",
+  "exp": "verified",
+  "why": "correct solution; extra line lim cos x=1 is true and harmless"
+ },
+ {
+  "id": "h7-calcL-029",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "stmt": "Determine whether sum_{n=1}^infinity 1/n^2 converges",
+   "domain": "calculus",
+   "task": "series-convergence"
+  },
+  "w": "this is a p-series with p = 2 > 1, so it converges\nRemark: the harmonic series sum 1/n diverges, a different series",
+  "exp": "verified",
+  "why": "p-series test; side remark about harmonic series is true"
+ },
+ {
+  "id": "h7-calcL-030",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "squeeze"
+  ],
+  "p": {
+   "stmt": "Find lim_{x->0} x sin(1/x)",
+   "domain": "calculus",
+   "task": "limit-squeeze"
+  },
+  "w": "0 <= |x sin(1/x)| = |x||sin(1/x)| <= |x|\n|x| -> 0 as x -> 0\nby the squeeze theorem |x sin(1/x)| -> 0\nhence x sin(1/x) -> 0",
+  "exp": "verified",
+  "why": "absolute-value squeeze valid on both sides"
+ },
+ {
+  "id": "h7-calcL-031",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "lhopital-misuse"
+  ],
+  "p": {
+   "lim": "(x+1)/(x+2)",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "the limit has the form 0/0 so apply L'Hopital\nnumerator' = 1, denominator' = 1\nthe limit is 1",
+  "exp": "invalid",
+  "why": "form at 0 is 1/2 not 0/0; L'Hopital misapplied and true limit is 1/2"
+ },
+ {
+  "id": "h7-calcL-032",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "lhopital-misuse",
+   "coincidence"
+  ],
+  "p": {
+   "lim": "e^x/(x+1)",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "apply L'Hopital: derivative of numerator is e^x, of denominator is 1\nlimit = e^0/1 = 1",
+  "exp": "invalid",
+  "why": "quotient is 1/1 at 0, not indeterminate, so L'Hopital step is illegitimate even though 1 is right"
+ },
+ {
+  "id": "h7-calcL-033",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "standard-limit"
+  ],
+  "p": {
+   "lim": "sin(3x)/x",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "let u = 3x; sin(u)/u -> 1 as u -> 0\nso sin(3x)/x -> 1",
+  "exp": "invalid",
+  "why": "sin(3x)/x = 3 sin(3x)/(3x) -> 3; denominator x is not u"
+ },
+ {
+  "id": "h7-calcL-034",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "indeterminate"
+  ],
+  "p": {
+   "lim": "x ln(1+1/x)",
+   "at": "infinity",
+   "side": "both"
+  },
+  "w": "as x -> infinity, 1/x -> 0 so ln(1+1/x) -> ln 1 = 0\nthen x ln(1+1/x) -> infinity * 0 = 0\nthe limit is 0",
+  "exp": "invalid",
+  "why": "infinity*0 is indeterminate; the limit equals 1"
+ },
+ {
+  "id": "h7-calcL-035",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "conjugate"
+  ],
+  "p": {
+   "lim": "(sqrt(x+4)-2)/x",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "multiply by the conjugate sqrt(x+4)+2\n(sqrt(x+4)-2)(sqrt(x+4)+2) = x+4-2 = x+2\nso the expression is (x+2)/(x(sqrt(x+4)+2))\nthe limit does not exist",
+  "exp": "invalid",
+  "why": "difference of squares gives (x+4)-4=x, not x+2"
+ },
+ {
+  "id": "h7-calcL-036",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "infinity"
+  ],
+  "p": {
+   "lim": "(x^2+1)/(x+1)",
+   "at": "infinity",
+   "side": "both"
+  },
+  "w": "the leading coefficients are 1 and 1\nso the limit is 1/1 = 1",
+  "exp": "invalid",
+  "why": "degrees differ; the quotient grows like x and diverges"
+ },
+ {
+  "id": "h7-calcL-037",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "one-sided"
+  ],
+  "p": {
+   "lim": "abs(x)/x",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "for x > 0, |x|/x = 1\nso the limit as x -> 0 is 1",
+  "exp": "invalid",
+  "why": "left limit is -1, two-sided limit does not exist"
+ },
+ {
+  "id": "h7-calcL-038",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "squeeze-misuse"
+  ],
+  "p": {
+   "lim": "x sin(1/x)",
+   "at": "infinity",
+   "side": "both"
+  },
+  "w": "-1 <= sin(1/x) <= 1\nso -x <= x sin(1/x) <= x\nboth bounds tend to 0, so the limit is 0",
+  "exp": "invalid",
+  "why": "bounds -x,x do not tend to 0 at infinity; true limit is 1"
+ },
+ {
+  "id": "h7-calcL-039",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "wrong-theorem"
+  ],
+  "p": {
+   "stmt": "Does sum_{n=1}^infinity 1/n converge?",
+   "domain": "calculus",
+   "task": "series-convergence"
+  },
+  "w": "a_n = 1/n tends to 0\nsince the terms tend to 0, the series converges",
+  "exp": "invalid",
+  "why": "converse of divergence test is false; harmonic series diverges"
+ },
+ {
+  "id": "h7-calcL-040",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "wrong-theorem",
+   "coincidence"
+  ],
+  "p": {
+   "stmt": "Does sum_{n=1}^infinity 1/n^2 converge?",
+   "domain": "calculus",
+   "task": "series-convergence"
+  },
+  "w": "a_{n+1}/a_n = n^2/(n+1)^2 -> 1\nthe ratio test gives convergence when the limit is at most 1\nso the series converges",
+  "exp": "invalid",
+  "why": "ratio test is inconclusive at 1; misstated rule though conclusion is true"
+ },
+ {
+  "id": "h7-calcL-041",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "continuity"
+  ],
+  "p": {
+   "stmt": "Let f(x) = sin(x)/x for x != 0 and f(0) = 0. Is f continuous at 0?",
+   "domain": "calculus",
+   "task": "continuity"
+  },
+  "w": "lim_{x->0} sin(x)/x = 1, which exists\nsince the limit exists, f is continuous at 0",
+  "exp": "invalid",
+  "why": "limit 1 differs from f(0)=0, so f is discontinuous"
+ },
+ {
+  "id": "h7-calcL-042",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "epsilon-delta"
+  ],
+  "p": {
+   "stmt": "Prove using epsilon-delta that lim_{x->3} x^2 = 9",
+   "domain": "calculus",
+   "task": "epsilon-delta-proof"
+  },
+  "w": "Let epsilon > 0. |x^2-9| = |x-3||x+3|\nchoose delta = epsilon/|x+3|\nthen |x^2-9| < epsilon",
+  "exp": "invalid",
+  "why": "delta may not depend on x"
+ },
+ {
+  "id": "h7-calcL-043",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "epsilon-delta",
+   "conditional"
+  ],
+  "p": {
+   "stmt": "Prove using epsilon-delta that lim_{x->2} (3x-1) = 5",
+   "domain": "calculus",
+   "task": "epsilon-delta-proof"
+  },
+  "w": "Suppose epsilon > 0 is given and let delta = epsilon.\nIf 0 < |x-2| < delta then |(3x-1)-5| = 3|x-2|.\nSince |x-2| < epsilon, 3|x-2| < epsilon.\nSo the limit is 5.",
+  "exp": "invalid",
+  "why": "3|x-2|<3 eps, not eps; delta=eps fails"
+ },
+ {
+  "id": "h7-calcL-044",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "taylor"
+  ],
+  "p": {
+   "stmt": "Use Taylor series to find lim_{x->0} (cos x - 1)/x^2",
+   "domain": "calculus",
+   "task": "taylor"
+  },
+  "w": "cos x = 1 - x^2 + x^4/24 - ...\n(cos x - 1)/x^2 = -1 + x^2/24 - ...\nso the limit is -1",
+  "exp": "invalid",
+  "why": "cos x = 1 - x^2/2 + ..., true limit is -1/2"
+ },
+ {
+  "id": "h7-calcL-045",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "sequence",
+   "indeterminate"
+  ],
+  "p": {
+   "stmt": "Find lim_{n->infinity} n/(n+1)",
+   "domain": "calculus",
+   "task": "sequence-limit"
+  },
+  "w": "n/(n+1) = n * (1/(n+1))\n1/(n+1) -> 0\nso the product tends to 0",
+  "exp": "invalid",
+  "why": "infinity*0 form; the limit is 1"
+ },
+ {
+  "id": "h7-calcL-046",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "taylor"
+  ],
+  "p": {
+   "stmt": "Use Taylor series to evaluate lim_{x->0} (sin x - x)/x^3",
+   "domain": "calculus",
+   "task": "taylor"
+  },
+  "w": "sin x = x - x^3/3 + x^5/5 - ...\nsin x - x = -x^3/3 + ...\nthe limit is -1/3",
+  "exp": "invalid",
+  "why": "sin coefficients are 1/3!, 1/5!; limit is -1/6"
+ },
+ {
+  "id": "h7-calcL-047",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "dependent"
+  ],
+  "p": {
+   "lim": "(e^x-1)/x",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "near 0, e^x is approximately 1 + 2x\nso e^x - 1 is approximately 2x\nthen (e^x-1)/x is approximately 2\nthe limit is 2",
+  "exp": "invalid",
+  "why": "e^x ~ 1+x, so limit is 1; first line false and later lines depend on it"
+ },
+ {
+  "id": "h7-calcL-048",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "lhopital-misuse"
+  ],
+  "p": {
+   "lim": "(x+sin(x))/x",
+   "at": "infinity",
+   "side": "both"
+  },
+  "w": "the form is infinity/infinity, so L'Hopital: (1+cos x)/1\n1 + cos x oscillates between 0 and 2\nso the limit does not exist",
+  "exp": "invalid",
+  "why": "L'Hopital inconclusive when derivative-limit fails; actual limit is 1"
+ },
+ {
+  "id": "h7-calcL-049",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "infinity",
+   "sign"
+  ],
+  "p": {
+   "lim": "sqrt(x^2+1)/x",
+   "at": "-infinity",
+   "side": "both"
+  },
+  "w": "divide top and bottom by x\nsqrt(x^2+1)/x = sqrt(1+1/x^2)\nas x -> -infinity this tends to 1",
+  "exp": "invalid",
+  "why": "for x<0, x=-sqrt(x^2), so the limit is -1"
+ },
+ {
+  "id": "h7-calcL-050",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "lim": "(x^2-9)/(x-3)",
+   "at": "3",
+   "side": "both"
+  },
+  "w": "(x^2-9)/(x-3) = x+3 for x != 3\nthe limit is 6\nAlso lim_{x->0} (1-cos x)/x = 1/2",
+  "exp": "invalid",
+  "why": "main answer right but side claim is false (that limit is 0)"
+ },
+ {
+  "id": "h7-calcL-051",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "stmt": "Does sum_{n=1}^infinity 1/n^2 converge?",
+   "domain": "calculus",
+   "task": "series-convergence"
+  },
+  "w": "p-series with p = 2 > 1 converges\nsimilarly sum 1/sqrt(n) converges because its terms tend to 0",
+  "exp": "invalid",
+  "why": "irrelevant false side claim: sum 1/sqrt(n) diverges"
+ },
+ {
+  "id": "h7-calcL-052",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "squeeze-misuse"
+  ],
+  "p": {
+   "stmt": "Find lim_{x->0} x^2 cos(1/x)",
+   "domain": "calculus",
+   "task": "limit-squeeze"
+  },
+  "w": "cos(1/x) <= 1\nso x^2 cos(1/x) <= x^2\nx^2 -> 0 so the limit is 0",
+  "exp": "invalid",
+  "alt": [
+   "incomplete"
+  ],
+  "why": "only an upper bound is given; squeeze needs a lower bound too (non-sequitur)"
+ },
+ {
+  "id": "h7-calcL-053",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "geometric"
+  ],
+  "p": {
+   "stmt": "For a real number r, does sum_{n=0}^infinity r^n converge?",
+   "domain": "calculus",
+   "task": "series-convergence"
+  },
+  "w": "this is a geometric series with ratio r\nits sum is 1/(1-r)\nso the series converges",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "why": "convergence requires |r|<1, which is not stated and fails for other r"
+ },
+ {
+  "id": "h7-calcL-054",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "alternating"
+  ],
+  "p": {
+   "stmt": "Does sum_{n=1}^infinity (-1)^n/sqrt(n) converge?",
+   "domain": "calculus",
+   "task": "series-convergence"
+  },
+  "w": "the terms 1/sqrt(n) tend to 0\nso by the alternating series test the series converges",
+  "exp": "missing-assumption",
+  "why": "alternating test also needs monotone decrease of 1/sqrt(n), not checked"
+ },
+ {
+  "id": "h7-calcL-055",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "epsilon-delta",
+   "conditional"
+  ],
+  "p": {
+   "stmt": "Prove using epsilon-delta that lim_{x->3} x^2 = 9",
+   "domain": "calculus",
+   "task": "epsilon-delta-proof"
+  },
+  "w": "Let epsilon > 0 and let delta = epsilon/7.\nSuppose 0 < |x-3| < delta.\n|x^2-9| = |x-3||x+3|\n|x+3| < 7\nso |x^2-9| < 7*delta = epsilon",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "why": "bound |x+3|<7 needs delta<=1, an unstated restriction"
+ },
+ {
+  "id": "h7-calcL-056",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "squeeze"
+  ],
+  "p": {
+   "stmt": "Find lim_{x->0} x sin(1/x)",
+   "domain": "calculus",
+   "task": "limit-squeeze"
+  },
+  "w": "-1 <= sin(1/x) <= 1\nmultiply by x: -x <= x sin(1/x) <= x\n-x -> 0 and x -> 0\nby the squeeze theorem the limit is 0",
+  "exp": "missing-assumption",
+  "alt": [
+   "invalid"
+  ],
+  "why": "multiplying by x flips inequalities for x<0; sign case is omitted"
+ },
+ {
+  "id": "h7-calcL-057",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "conditional"
+  ],
+  "p": {
+   "stmt": "Let a_1 = sqrt(2) and a_{n+1} = sqrt(2 + a_n). Find lim a_n.",
+   "domain": "calculus",
+   "task": "sequence-limit"
+  },
+  "w": "Assume the limit L exists.\nThen L = sqrt(2+L)\nL^2 = L+2\n(L-2)(L+1) = 0\nso L = 2",
+  "exp": "missing-assumption",
+  "why": "existence of the limit and rejection of root -1 (needs L>=0) are not established"
+ },
+ {
+  "id": "h7-calcL-058",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "factor"
+  ],
+  "p": {
+   "lim": "(x^2-16)/(x-4)",
+   "at": "4",
+   "side": "both"
+  },
+  "w": "x^2 - 16 = (x-4)(x+4)\n(x^2-16)/(x-4) = ((x-4)(x+4))/(x-4)",
+  "exp": "incomplete",
+  "why": "factors but never evaluates the limit"
+ },
+ {
+  "id": "h7-calcL-059",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "ratio-test"
+  ],
+  "p": {
+   "stmt": "Does sum_{n=1}^infinity n^2/3^n converge?",
+   "domain": "calculus",
+   "task": "series-convergence"
+  },
+  "w": "a_n = n^2/3^n\na_{n+1}/a_n = (n+1)^2/(3n^2)",
+  "exp": "incomplete",
+  "why": "ratio computed but no limit or conclusion"
+ },
+ {
+  "id": "h7-calcL-060",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "epsilon-delta"
+  ],
+  "p": {
+   "stmt": "Prove using epsilon-delta that lim_{x->2} (5x+2) = 12",
+   "domain": "calculus",
+   "task": "epsilon-delta-proof"
+  },
+  "w": "Let epsilon > 0 be given.\n|(5x+2)-12| = |5x-10| = 5|x-2|",
+  "exp": "incomplete",
+  "why": "no delta chosen, proof not completed"
+ },
+ {
+  "id": "h7-calcL-061",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "taylor"
+  ],
+  "p": {
+   "stmt": "Use Taylor series to evaluate lim_{x->0} (e^x - 1 - x)/x^2",
+   "domain": "calculus",
+   "task": "taylor"
+  },
+  "w": "e^x = 1 + x + x^2/2 + x^3/6 + ...\ne^x - 1 - x = x^2/2 + x^3/6 + ...",
+  "exp": "incomplete",
+  "why": "expansion true but never divides or takes the limit"
+ },
+ {
+  "id": "h7-calcL-062",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "one-sided"
+  ],
+  "p": {
+   "lim": "x/abs(x)",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "for x > 0, x/|x| = 1\nso the right-hand limit is 1",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "why": "left side never examined; two-sided conclusion absent"
+ },
+ {
+  "id": "h7-calcL-063",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "differentiability"
+  ],
+  "p": {
+   "stmt": "Is f(x) = |x-2| differentiable at x = 2?",
+   "domain": "calculus",
+   "task": "differentiability"
+  },
+  "w": "(f(2+h)-f(2))/h = |h|/h\nfor h > 0 this equals 1, so the right-hand derivative is 1",
+  "exp": "incomplete",
+  "why": "left derivative missing, so no conclusion"
+ },
+ {
+  "id": "h7-calcL-064",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "lim": "(x^2-25)/(x-5)",
+   "at": "5",
+   "side": "both"
+  },
+  "w": "lim_{x->0} sin(x)/x = 1\nlim_{x->2} (x+1) = 3\n5^2 - 25 = 0",
+  "exp": "incomplete",
+  "why": "true but irrelevant calculations never evaluate the requested limit"
+ },
+ {
+  "id": "h7-calcL-065",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "coincidence"
+  ],
+  "p": {
+   "lim": "(e^(3x)-1)/x",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "at x = 0.001 the quotient is about 3.0045\nso the limit is 3",
+  "exp": "incomplete",
+  "alt": [
+   "invalid"
+  ],
+  "why": "numerical value suggests but does not establish the limit"
+ },
+ {
+  "id": "h7-calcL-066",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "restate"
+  ],
+  "p": {
+   "stmt": "Show that lim_{n->infinity} n!/n^n = 0",
+   "domain": "calculus",
+   "task": "limit-squeeze"
+  },
+  "w": "We want to show that n!/n^n tends to 0 as n tends to infinity.",
+  "exp": "incomplete",
+  "why": "only restates the goal"
+ },
+ {
+  "id": "h7-calcL-067",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "non-elementary"
+  ],
+  "p": {
+   "stmt": "Find the exact closed form of sum_{n=1}^infinity 1/n^3",
+   "domain": "calculus",
+   "task": "series"
+  },
+  "w": "the partial sums are 1, 1.125, 1.162, 1.178, ...\nthe sum is approximately 1.2020569",
+  "exp": "unsupported",
+  "alt": [
+   "incomplete"
+  ],
+  "why": "zeta(3) has no known elementary closed form"
+ },
+ {
+  "id": "h7-calcL-068",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "deep"
+  ],
+  "p": {
+   "stmt": "Determine whether sum_{n=1}^infinity 1/(n^3 sin^2(n)) converges",
+   "domain": "calculus",
+   "task": "series-convergence"
+  },
+  "w": "0 < sin^2(n) <= 1 so 1/(n^3 sin^2 n) >= 1/n^3\na lower bound by a convergent series gives no information",
+  "exp": "unsupported",
+  "alt": [
+   "incomplete"
+  ],
+  "why": "Flint Hills series convergence is an open problem"
+ },
+ {
+  "id": "h7-calcL-069",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "deep"
+  ],
+  "p": {
+   "stmt": "Prove that the Euler-Mascheroni constant gamma = lim (1 + 1/2 + ... + 1/n - ln n) is irrational",
+   "domain": "calculus",
+   "task": "epsilon-delta-proof"
+  },
+  "w": "H_n - ln n is decreasing and bounded below by 0, so gamma exists\nnumerically gamma = 0.5772156649",
+  "exp": "unsupported",
+  "alt": [
+   "incomplete"
+  ],
+  "why": "irrationality of gamma is an open problem"
+ },
+ {
+  "id": "h7-calcL-070",
+  "cat": "calculus-limits-series",
+  "tags": [
+   "units"
+  ],
+  "p": {
+   "lim": "sin(x)/x",
+   "at": "0",
+   "side": "both"
+  },
+  "w": "if x is measured in degrees then sin(x)/x -> pi/180\nthe limit is pi/180",
+  "exp": "ambiguous",
+  "alt": [
+   "invalid"
+  ],
+  "why": "correct only under a degree-measure reading; standard radian reading gives 1"
+ }
+]

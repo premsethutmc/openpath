@@ -1,0 +1,136 @@
+{
+ "id": "openpath-sample-mathematics-grade-10",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 10,
+ "title": "OpenPath Sample Mathematics, Grade 10",
+ "hash": "1b679e3d",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 10",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-01T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing: the top proposed competency for each outcome was accepted. Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-quadratic-equations",
+     "number": 1,
+     "title": "Quadratic equations",
+     "pages": "1–20",
+     "outcomes": [
+      {
+       "id": "ch1-quadratic-equations.o1",
+       "text": "Solve quadratic equations by factorisation and completing the square",
+       "pages": "2",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.quadratics",
+          "score": 0.5,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch1-quadratic-equations.o2",
+       "text": "Interpret the quadratic discriminant",
+       "pages": "14",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.quadratic-discriminant",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 1.1",
+       "pages": "10"
+      }
+     ]
+    },
+    {
+     "id": "ch2-arithmetic-progressions",
+     "number": 2,
+     "title": "Arithmetic progressions",
+     "pages": "21–34",
+     "outcomes": [
+      {
+       "id": "ch2-arithmetic-progressions.o1",
+       "text": "Use arithmetic progressions",
+       "pages": "22",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.arithmetic-sequences",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 2.1",
+       "pages": "28"
+      }
+     ]
+    },
+    {
+     "id": "ch3-coordinate-geometry",
+     "number": 3,
+     "title": "Coordinate geometry",
+     "pages": "35–48",
+     "outcomes": [
+      {
+       "id": "ch3-coordinate-geometry.o1",
+       "text": "Use coordinate distance and section formulas",
+       "pages": "36",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.coordinate.distance",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 3.1",
+       "pages": "42"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

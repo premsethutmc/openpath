@@ -1,0 +1,3307 @@
+{
+  "version": "openpath-d3-cross-domain-benchmark@1",
+  "frozen": true,
+  "frozenBeforeImplementation": true,
+  "cases": [
+    {
+      "id": "d3-000",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "valid-reference",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-001",
+      "journey": "algebra-functions-calculus",
+      "mode": "valid-reference",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-002",
+      "journey": "vectors-geometry-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-003",
+      "journey": "matrices-systems-functions",
+      "mode": "valid-reference",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-004",
+      "journey": "probability-algebra-statistics",
+      "mode": "valid-reference",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-005",
+      "journey": "complex-polynomial-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-006",
+      "journey": "sequences-limits",
+      "mode": "valid-reference",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-007",
+      "journey": "calculus-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-008",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "valid-reference",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-009",
+      "journey": "algebra-functions-calculus",
+      "mode": "valid-reference",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-010",
+      "journey": "vectors-geometry-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-011",
+      "journey": "matrices-systems-functions",
+      "mode": "valid-reference",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-012",
+      "journey": "probability-algebra-statistics",
+      "mode": "valid-reference",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-013",
+      "journey": "complex-polynomial-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-014",
+      "journey": "sequences-limits",
+      "mode": "valid-reference",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-015",
+      "journey": "calculus-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-016",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "valid-reference",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-017",
+      "journey": "algebra-functions-calculus",
+      "mode": "valid-reference",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-018",
+      "journey": "vectors-geometry-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-019",
+      "journey": "matrices-systems-functions",
+      "mode": "valid-reference",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-020",
+      "journey": "probability-algebra-statistics",
+      "mode": "valid-reference",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-021",
+      "journey": "complex-polynomial-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-022",
+      "journey": "sequences-limits",
+      "mode": "valid-reference",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-023",
+      "journey": "calculus-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-024",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "valid-reference",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-025",
+      "journey": "algebra-functions-calculus",
+      "mode": "valid-reference",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-026",
+      "journey": "vectors-geometry-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-027",
+      "journey": "matrices-systems-functions",
+      "mode": "valid-reference",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-028",
+      "journey": "probability-algebra-statistics",
+      "mode": "valid-reference",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-029",
+      "journey": "complex-polynomial-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-030",
+      "journey": "sequences-limits",
+      "mode": "valid-reference",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-031",
+      "journey": "calculus-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-032",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "valid-reference",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-033",
+      "journey": "algebra-functions-calculus",
+      "mode": "valid-reference",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-034",
+      "journey": "vectors-geometry-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-035",
+      "journey": "matrices-systems-functions",
+      "mode": "valid-reference",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-036",
+      "journey": "probability-algebra-statistics",
+      "mode": "valid-reference",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-037",
+      "journey": "complex-polynomial-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-038",
+      "journey": "sequences-limits",
+      "mode": "valid-reference",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-039",
+      "journey": "calculus-algebra",
+      "mode": "valid-reference",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-040",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-041",
+      "journey": "algebra-functions-calculus",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-042",
+      "journey": "vectors-geometry-algebra",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-043",
+      "journey": "matrices-systems-functions",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-044",
+      "journey": "probability-algebra-statistics",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-045",
+      "journey": "complex-polynomial-algebra",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-046",
+      "journey": "sequences-limits",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-047",
+      "journey": "calculus-algebra",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-048",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-049",
+      "journey": "algebra-functions-calculus",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-050",
+      "journey": "vectors-geometry-algebra",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-051",
+      "journey": "matrices-systems-functions",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-052",
+      "journey": "probability-algebra-statistics",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-053",
+      "journey": "complex-polynomial-algebra",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-054",
+      "journey": "sequences-limits",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-055",
+      "journey": "calculus-algebra",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-056",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-057",
+      "journey": "algebra-functions-calculus",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-058",
+      "journey": "vectors-geometry-algebra",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-059",
+      "journey": "matrices-systems-functions",
+      "mode": "valid-alternative",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "verified",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-060",
+      "journey": "probability-algebra-statistics",
+      "mode": "invalid-type",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-061",
+      "journey": "complex-polynomial-algebra",
+      "mode": "invalid-type",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-062",
+      "journey": "sequences-limits",
+      "mode": "invalid-type",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-063",
+      "journey": "calculus-algebra",
+      "mode": "invalid-type",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-064",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "invalid-type",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-065",
+      "journey": "algebra-functions-calculus",
+      "mode": "invalid-type",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-066",
+      "journey": "vectors-geometry-algebra",
+      "mode": "invalid-type",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-067",
+      "journey": "matrices-systems-functions",
+      "mode": "invalid-type",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-068",
+      "journey": "probability-algebra-statistics",
+      "mode": "invalid-type",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-069",
+      "journey": "complex-polynomial-algebra",
+      "mode": "invalid-type",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-070",
+      "journey": "sequences-limits",
+      "mode": "invalid-type",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-071",
+      "journey": "calculus-algebra",
+      "mode": "invalid-type",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-072",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "invalid-type",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-073",
+      "journey": "algebra-functions-calculus",
+      "mode": "invalid-type",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-074",
+      "journey": "vectors-geometry-algebra",
+      "mode": "invalid-type",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-075",
+      "journey": "matrices-systems-functions",
+      "mode": "invalid-type",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-076",
+      "journey": "probability-algebra-statistics",
+      "mode": "invalid-type",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-077",
+      "journey": "complex-polynomial-algebra",
+      "mode": "invalid-type",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-078",
+      "journey": "sequences-limits",
+      "mode": "invalid-type",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-079",
+      "journey": "calculus-algebra",
+      "mode": "invalid-type",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-080",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-081",
+      "journey": "algebra-functions-calculus",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-082",
+      "journey": "vectors-geometry-algebra",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-083",
+      "journey": "matrices-systems-functions",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-084",
+      "journey": "probability-algebra-statistics",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-085",
+      "journey": "complex-polynomial-algebra",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-086",
+      "journey": "sequences-limits",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-087",
+      "journey": "calculus-algebra",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-088",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-089",
+      "journey": "algebra-functions-calculus",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-090",
+      "journey": "vectors-geometry-algebra",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-091",
+      "journey": "matrices-systems-functions",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-092",
+      "journey": "probability-algebra-statistics",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-093",
+      "journey": "complex-polynomial-algebra",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-094",
+      "journey": "sequences-limits",
+      "mode": "missing-assumption",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "missing-assumption",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-095",
+      "journey": "calculus-algebra",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-096",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-097",
+      "journey": "algebra-functions-calculus",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-098",
+      "journey": "vectors-geometry-algebra",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-099",
+      "journey": "matrices-systems-functions",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-100",
+      "journey": "probability-algebra-statistics",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-101",
+      "journey": "complex-polynomial-algebra",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-102",
+      "journey": "sequences-limits",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-103",
+      "journey": "calculus-algebra",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-104",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-105",
+      "journey": "algebra-functions-calculus",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-106",
+      "journey": "vectors-geometry-algebra",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-107",
+      "journey": "matrices-systems-functions",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-108",
+      "journey": "probability-algebra-statistics",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-109",
+      "journey": "complex-polynomial-algebra",
+      "mode": "wrong-scope",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-110",
+      "journey": "sequences-limits",
+      "mode": "domain-mismatch",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-111",
+      "journey": "calculus-algebra",
+      "mode": "domain-mismatch",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-112",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "domain-mismatch",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-113",
+      "journey": "algebra-functions-calculus",
+      "mode": "domain-mismatch",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-114",
+      "journey": "vectors-geometry-algebra",
+      "mode": "domain-mismatch",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-115",
+      "journey": "matrices-systems-functions",
+      "mode": "domain-mismatch",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-116",
+      "journey": "probability-algebra-statistics",
+      "mode": "domain-mismatch",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-117",
+      "journey": "complex-polynomial-algebra",
+      "mode": "domain-mismatch",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-118",
+      "journey": "sequences-limits",
+      "mode": "domain-mismatch",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-119",
+      "journey": "calculus-algebra",
+      "mode": "domain-mismatch",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 1
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-120",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "circular",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-121",
+      "journey": "algebra-functions-calculus",
+      "mode": "circular",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-122",
+      "journey": "vectors-geometry-algebra",
+      "mode": "circular",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-123",
+      "journey": "matrices-systems-functions",
+      "mode": "circular",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-124",
+      "journey": "probability-algebra-statistics",
+      "mode": "circular",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-125",
+      "journey": "complex-polynomial-algebra",
+      "mode": "circular",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-126",
+      "journey": "sequences-limits",
+      "mode": "circular",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-127",
+      "journey": "calculus-algebra",
+      "mode": "circular",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-128",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "circular",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-129",
+      "journey": "algebra-functions-calculus",
+      "mode": "circular",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "malformed",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-130",
+      "journey": "vectors-geometry-algebra",
+      "mode": "unverified-source",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-131",
+      "journey": "matrices-systems-functions",
+      "mode": "unverified-source",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-132",
+      "journey": "probability-algebra-statistics",
+      "mode": "unverified-source",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-133",
+      "journey": "complex-polynomial-algebra",
+      "mode": "unverified-source",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-134",
+      "journey": "sequences-limits",
+      "mode": "unverified-source",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-135",
+      "journey": "calculus-algebra",
+      "mode": "unverified-source",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-136",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "unverified-source",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-137",
+      "journey": "algebra-functions-calculus",
+      "mode": "unverified-source",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-138",
+      "journey": "vectors-geometry-algebra",
+      "mode": "unverified-source",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-139",
+      "journey": "matrices-systems-functions",
+      "mode": "unverified-source",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "invalid",
+        "firstInvalidStep": 0
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-140",
+      "journey": "probability-algebra-statistics",
+      "mode": "resource-exhausted",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-141",
+      "journey": "complex-polynomial-algebra",
+      "mode": "resource-exhausted",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-142",
+      "journey": "sequences-limits",
+      "mode": "resource-exhausted",
+      "problemStatement": "A verified sequence term is scoped as an exact scalar and used in a supported limiting expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-143",
+      "journey": "calculus-algebra",
+      "mode": "resource-exhausted",
+      "problemStatement": "A verified calculus result is bound as an exact expression or scalar and used in a downstream algebraic constraint.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-144",
+      "journey": "geometry-algebra-trigonometry",
+      "mode": "resource-exhausted",
+      "problemStatement": "A verified triangle angle is bound as \u03b8, reused in an algebraic equation, then supplied to an exact trigonometric-value problem.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-145",
+      "journey": "algebra-functions-calculus",
+      "mode": "resource-exhausted",
+      "problemStatement": "A verified algebraic scalar is scoped as x, substituted into a function parameter, and retained in a calculus expression.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-146",
+      "journey": "vectors-geometry-algebra",
+      "mode": "resource-exhausted",
+      "problemStatement": "A verified dot product is bound as a scalar constraint and reused without promoting an unproved perpendicularity claim.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-147",
+      "journey": "matrices-systems-functions",
+      "mode": "resource-exhausted",
+      "problemStatement": "A verified determinant is bound as a scalar, used under its invertibility condition, and supplied to a function calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-148",
+      "journey": "probability-algebra-statistics",
+      "mode": "resource-exhausted",
+      "problemStatement": "A verified exact probability is rebound as a rational scalar and reused in a supported exact calculation.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    },
+    {
+      "id": "d3-149",
+      "journey": "complex-polynomial-algebra",
+      "mode": "resource-exhausted",
+      "problemStatement": "A verified complex norm or root fact is transferred to a polynomial constraint and then to exact algebra.",
+      "assumptions": [
+        "only source steps verified by their native reasoner may be exported",
+        "symbol scopes must match explicitly"
+      ],
+      "referenceTransfer": [
+        "verify the source step",
+        "create an exact typed binding",
+        "check type, scope, restrictions and obligations",
+        "substitute into the destination problem",
+        "verify the destination step"
+      ],
+      "expected": {
+        "classification": "resource-exhausted",
+        "firstInvalidStep": null
+      },
+      "oracle": "independently authored type, scope, dependency, and exact-value expectation"
+    }
+  ]
+}

@@ -1,0 +1,2138 @@
+{
+ "id": "tn-samacheer-mathematics-grade-12",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 12,
+ "title": "Mathematics (Higher Secondary Second Year), Volume I and Volume II — Grade 12 Mathematics (Tamil Nadu State Board)",
+ "hash": "f6e61dc2",
+ "source": {
+  "kind": "textbook",
+  "title": "Mathematics (Higher Secondary Second Year), Volume I and Volume II",
+  "edition": "First Edition 2019; Revised Edition 2020 (Published under New Syllabus); 2026-27 reprint year not verified",
+  "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+  "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/tn-g12.json. Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://cdn1.byjus.com/wp-content/uploads/2022/08/TN-Board-Class-12-Mathematics-Vol-1-Textbook.pdf https://cdn1.byjus.com/wp-content/uploads/2019/10/TN-Board-Class-12-Maths-Textbook-Volume-1-English-Medium.pdf https://cdn1.byjus.com/wp-content/uploads/2022/08/TN-Board-Class-12-Mathematics-Vol-2-Textbook.pdf https://www.shaalaa.com/syllabus/tamil-nadu-board-of-secondary-education-class-12-mathematics_8973. Notes: Official sites textbooksonline.tn.nic.in and textbookcorp.tn.gov.in could not be read: WebFetch was refused by their robots.txt, and the shell has no internet access. dge.tn.gov.in and tnschools.gov.in were not reached either. The chapter and section titles were therefore taken from copies of the official SCERT/Government of Tamil Nadu textbook PDFs hosted on cdn1.byjus.com (and, for Grade 11 Vol I, on 11thstudymaterials.wordpress.com). These are mirrors of the government PDF (cover 'GOVERNMENT OF TAMIL NADU', '(c) SCERT', 'A publication under Free Textbook Programme') and were used only because the official host was unreachable. Section titles are the top-level numbered sections from each volume's contents page, as reported by the fetch tool. Capitalisation follows the printed contents, which is inconsistent in the book itself. The fetched PDF text had OCR/ligature artefacts (e.g. 'Th eorem'), so small punctuation or capitalisation differences are possible. Sub-sections (e.g. 1.2.1) are omitted because they could not be seen for every chapter. Edition for 2026-27: the books in use are still the 'Published under New Syllabus' set (first edition 2018 for Std XI, 2019 for Std XII, with later revised editions). News reports (DT Next, updated 16 Aug 2026; Madhyamam, 6 Nov 2025) say new textbook",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "tn-g12-c02",
+     "number": 2,
+     "title": "Complex Numbers",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c02-s01",
+       "number": "2.1",
+       "title": "Introduction to Complex Numbers",
+       "outcomes": [
+        {
+         "id": "tn-g12-c02-o01",
+         "text": "Perform arithmetic with complex numbers, including powers of i, and represent them in the Argand plane.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.complex",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, coordinate)."
+         }
+        },
+        {
+         "id": "tn-g12-c02-o03",
+         "text": "Interpret equations and inequalities in z as loci or regions (circles, lines, perpendicular bisectors) in the complex plane.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.complex-locus",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; equation-solution, graph-sketch)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c02-s02",
+       "number": "2.2",
+       "title": "Complex Numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c02-s03",
+       "number": "2.3",
+       "title": "Basic Algebraic Properties of Complex Numbers",
+       "outcomes": [
+        {
+         "id": "tn-g12-c02-o02",
+         "text": "Use properties of conjugate and modulus, including the triangle inequality, and find square roots of complex numbers.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.complex",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; expression, numeric, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c02-s04",
+       "number": "2.4",
+       "title": "Conjugate of a Complex Number",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c02-s05",
+       "number": "2.5",
+       "title": "Modulus of a Complex Number",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c02-s06",
+       "number": "2.6",
+       "title": "Geometry and Locus of Complex Numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c02-s07",
+       "number": "2.7",
+       "title": "Polar and Euler form of a Complex Number",
+       "outcomes": [
+        {
+         "id": "tn-g12-c02-o04",
+         "text": "Convert complex numbers between rectangular, polar and Euler forms and multiply or divide in polar form.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.complex",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.complex-polar-form",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c02-s08",
+       "number": "2.8",
+       "title": "de Moivre's Theorem and its Applications",
+       "outcomes": [
+        {
+         "id": "tn-g12-c02-o05",
+         "text": "Use de Moivre's theorem to compute powers, find nth roots of a complex number and solve equations involving roots of unity.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.de-moivre-roots",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; expression, set, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "tn-g12-c01",
+     "number": 1,
+     "title": "Applications of Matrices and Determinants",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c01-s01",
+       "number": "1.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c01-s02",
+       "number": "1.2",
+       "title": "Inverse of a Non-Singular Square Matrix",
+       "outcomes": [
+        {
+         "id": "tn-g12-c01-o01",
+         "text": "Find the adjoint and inverse of a non-singular square matrix and use properties of inverses and adjoints.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.determinants",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.matrices",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.matrices.adjoint-inverse",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; vector-matrix, proof)."
+         }
+        },
+        {
+         "id": "tn-g12-c01-o06",
+         "text": "Determine when a homogeneous system has non-trivial solutions and find them, including parameter values that make a system consistent.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.determinants",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.matrices.system-consistency",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c01-s03",
+       "number": "1.3",
+       "title": "Elementary Transformations of a Matrix",
+       "outcomes": [
+        {
+         "id": "tn-g12-c01-o02",
+         "text": "Apply matrices to geometric transformations (e.g. rotations, orthogonal matrices) and to simple encoding and decoding of messages.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.matrices",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; vector-matrix, word-problem)."
+         }
+        },
+        {
+         "id": "tn-g12-c01-o03",
+         "text": "Use elementary row operations to reduce a matrix to row-echelon form, find its rank and find inverses by the Gauss-Jordan method.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.matrices.rank-row-reduction",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, vector-matrix)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c01-s04",
+       "number": "1.4",
+       "title": "Applications of Matrices: Solving System of Linear Equations",
+       "outcomes": [
+        {
+         "id": "tn-g12-c01-o04",
+         "text": "Model a situation as a system of linear equations and solve it by matrix inversion, Cramer's rule or Gaussian elimination.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.matrix-systems",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; vector-matrix, word-problem, equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c01-s05",
+       "number": "1.5",
+       "title": "Applications of Matrices: Consistency of system of linear equations by rank method",
+       "outcomes": [
+        {
+         "id": "tn-g12-c01-o05",
+         "text": "Decide by comparing ranks whether a non-homogeneous system has a unique solution, infinitely many solutions or none, and find the solution set.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.matrices.system-consistency",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, vector-matrix, equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "tn-g12-c03",
+     "number": 3,
+     "title": "Theory of Equations",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c03-s01",
+       "number": "3.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c03-s02",
+       "number": "3.2",
+       "title": "Basics of Polynomial Equations",
+       "outcomes": [
+        {
+         "id": "tn-g12-c03-o05",
+         "text": "Use polynomial equations to solve geometric problems such as finding dimensions satisfying volume or area conditions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.polynomial-equation-solving",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.model-selection",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c03-s03",
+       "number": "3.3",
+       "title": "Vieta's Formulae and Formation of Polynomial Equations",
+       "outcomes": [
+        {
+         "id": "tn-g12-c03-o01",
+         "text": "Relate the roots and coefficients of polynomial equations using Vieta's formulae, and form equations with given or transformed roots.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.polynomials",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.vieta-relations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, equation-solution, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c03-s04",
+       "number": "3.4",
+       "title": "Nature of Roots and Nature of Coefficients of Polynomial Equations",
+       "outcomes": [
+        {
+         "id": "tn-g12-c03-o02",
+         "text": "Use the conjugate-pair theorems for imaginary and surd roots and the nature of coefficients to deduce remaining roots.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.polynomial-root-analysis",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.quadratic-complex",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, equation-solution)."
+         }
+        },
+        {
+         "id": "tn-g12-c03-o04",
+         "text": "Solve polynomial equations without extra information using the rational root theorem, reciprocal equations and reducible non-polynomial equations.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.polynomial-equation-solving",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c03-s05",
+       "number": "3.5",
+       "title": "Applications to Geometrical Problems",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c03-s06",
+       "number": "3.6",
+       "title": "Roots of Higher Degree Polynomial Equations",
+       "outcomes": [
+        {
+         "id": "tn-g12-c03-o03",
+         "text": "Solve higher-degree polynomial equations using additional information such as roots in progression, partial factorisation or coefficient sums.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.factor-theorem",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.polynomial-equation-solving",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c03-s07",
+       "number": "3.7",
+       "title": "Polynomials with Additional Information",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c03-s08",
+       "number": "3.8",
+       "title": "Polynomial Equations with no additional information",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c03-s09",
+       "number": "3.9",
+       "title": "Descartes Rule",
+       "outcomes": [
+        {
+         "id": "tn-g12-c03-o06",
+         "text": "Apply Descartes' rule of signs to bound the numbers of positive, negative and non-real roots.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.polynomial-root-analysis",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "tn-g12-c11",
+     "number": 11,
+     "title": "Probability Distributions",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c11-s01",
+       "number": "11.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c11-s02",
+       "number": "11.2",
+       "title": "Random Variable",
+       "outcomes": [
+        {
+         "id": "tn-g12-c11-o03",
+         "text": "Compute the mean, variance and expectations of functions of discrete and continuous random variables and use properties of expectation.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.continuous-random-variables",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.random-variables",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c11-s03",
+       "number": "11.3",
+       "title": "Types of Random Variable",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c11-s04",
+       "number": "11.4",
+       "title": "Continuous Distributions",
+       "outcomes": [
+        {
+         "id": "tn-g12-c11-o02",
+         "text": "Work with probability density functions of continuous random variables, obtaining the distribution function from the density and vice versa and computing probabilities.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.continuous-random-variables",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c11-s05",
+       "number": "11.5",
+       "title": "Mathematical Expectation",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c11-s06",
+       "number": "11.6",
+       "title": "Theoretical Distributions: Some Special Discrete Distributions",
+       "outcomes": [
+        {
+         "id": "tn-g12-c11-o01",
+         "text": "Define random variables on a sample space and construct the probability mass function and cumulative distribution function of a discrete random variable.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.random-variables",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; data-table, numeric)."
+         }
+        },
+        {
+         "id": "tn-g12-c11-o04",
+         "text": "Recognise one-point, two-point, Bernoulli and binomial distributions and compute their probabilities, mean and variance.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.binomial-distribution",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-probability",
+      "number": 3,
+      "title": "Probability"
+     }
+    },
+    {
+     "id": "tn-g12-c12",
+     "number": 12,
+     "title": "Discrete Mathematics",
+     "outcomes": [
+      {
+       "id": "tn-g12-c12-o03",
+       "text": "Identify statements, form compound statements with logical connectives and construct truth tables.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.logic",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.propositional-logic",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; data-table, true-false)."
+       }
+      },
+      {
+       "id": "tn-g12-c12-o04",
+       "text": "Classify statement forms as tautology, contradiction or contingency, write duals, and establish logical equivalences.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.logic",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.propositional-logic",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, proof, data-table)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c12-s01",
+       "number": "12.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c12-s02",
+       "number": "12.2",
+       "title": "Binary Operations",
+       "outcomes": [
+        {
+         "id": "tn-g12-c12-o01",
+         "text": "Decide whether an operation is a binary operation on a set and test closure, commutativity and associativity, including operations given by tables, on matrices and modulo n.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.sets-relations.binary-operations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; true-false, data-table, proof)."
+         }
+        },
+        {
+         "id": "tn-g12-c12-o02",
+         "text": "Find identity and inverse elements for binary operations, where they exist.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.sets-relations.binary-operations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c12-s03",
+       "number": "12.3",
+       "title": "Mathematical Logic",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-reasoning",
+      "number": 4,
+      "title": "Mathematical reasoning"
+     }
+    },
+    {
+     "id": "tn-g12-c07",
+     "number": 7,
+     "title": "Applications of Differential Calculus",
+     "outcomes": [
+      {
+       "id": "tn-g12-c07-o06",
+       "text": "Solve optimisation problems arising in geometry and real-life contexts.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.applications",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; word-problem, numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c07-s01",
+       "number": "7.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c07-s02",
+       "number": "7.2",
+       "title": "Meaning of Derivatives",
+       "outcomes": [
+        {
+         "id": "tn-g12-c07-o01",
+         "text": "Use derivatives as rates of change, solve related-rates problems, and find tangents, normals and angles between curves.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.applications",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, equation-solution, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c07-s03",
+       "number": "7.3",
+       "title": "Mean Value Theorem",
+       "outcomes": [
+        {
+         "id": "tn-g12-c07-o02",
+         "text": "Verify the hypotheses of Rolle's theorem and Lagrange's mean value theorem and apply them to find guaranteed points or prove inequalities.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.mean-value-theorems",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, proof, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c07-s04",
+       "number": "7.4",
+       "title": "Series Expansions",
+       "outcomes": [
+        {
+         "id": "tn-g12-c07-o03",
+         "text": "Obtain Taylor and Maclaurin series expansions of standard functions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.taylor-series",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c07-s05",
+       "number": "7.5",
+       "title": "Indeterminate Forms",
+       "outcomes": [
+        {
+         "id": "tn-g12-c07-o04",
+         "text": "Evaluate indeterminate forms using l'Hopital's rule, including exponential forms.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.lhopital",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.limits",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c07-s06",
+       "number": "7.6",
+       "title": "Applications of First Derivative",
+       "outcomes": [
+        {
+         "id": "tn-g12-c07-o05",
+         "text": "Find intervals of monotonicity and local and absolute extrema using the first and second derivative tests.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.applications",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; interval, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c07-s07",
+       "number": "7.7",
+       "title": "Applications of Second Derivative",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c07-s08",
+       "number": "7.8",
+       "title": "Applications in Optimization",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c07-s09",
+       "number": "7.9",
+       "title": "Symmetry and Asymptotes",
+       "outcomes": [
+        {
+         "id": "tn-g12-c07-o07",
+         "text": "Determine concavity, points of inflection, symmetry and asymptotes and use them to sketch curves.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.applications",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.curve-sketching",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; graph-sketch, interval, coordinate)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c07-s10",
+       "number": "7.10",
+       "title": "Sketching of Curves",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-calculus",
+      "number": 5,
+      "title": "Calculus"
+     }
+    },
+    {
+     "id": "tn-g12-c08",
+     "number": 8,
+     "title": "Differentials and Partial Derivatives",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c08-s01",
+       "number": "8.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c08-s02",
+       "number": "8.2",
+       "title": "Linear Approximation and Differentials",
+       "outcomes": [
+        {
+         "id": "tn-g12-c08-o01",
+         "text": "Use linear approximation and differentials to estimate values and compute absolute, relative and percentage errors.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.linear-approximation",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, estimation, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c08-s03",
+       "number": "8.3",
+       "title": "Functions of Several Variables",
+       "outcomes": [
+        {
+         "id": "tn-g12-c08-o05",
+         "text": "Identify homogeneous functions and verify or apply Euler's theorem.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.partial-derivatives",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; proof, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c08-s04",
+       "number": "8.4",
+       "title": "Limit and Continuity of Functions of Two Variables",
+       "outcomes": [
+        {
+         "id": "tn-g12-c08-o02",
+         "text": "Evaluate limits of functions of two variables and test their continuity.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.multivariable-limits",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, true-false)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c08-s05",
+       "number": "8.5",
+       "title": "Partial Derivatives",
+       "outcomes": [
+        {
+         "id": "tn-g12-c08-o03",
+         "text": "Compute first and higher-order partial derivatives and verify equality of mixed partials.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.partial-derivatives",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; expression, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c08-s06",
+       "number": "8.6",
+       "title": "Linear Approximation and Differential of a Function of Several Variables",
+       "outcomes": [
+        {
+         "id": "tn-g12-c08-o04",
+         "text": "Find the total differential and linear approximation of a function of several variables and apply the chain rule for composite functions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.linear-approximation",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.partial-derivatives",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-calculus",
+      "number": 5,
+      "title": "Calculus"
+     }
+    },
+    {
+     "id": "tn-g12-c09",
+     "number": 9,
+     "title": "Applications of Integration",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c09-s01",
+       "number": "9.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c09-s02",
+       "number": "9.2",
+       "title": "Definite Integral as the Limit of a Sum",
+       "outcomes": [
+        {
+         "id": "tn-g12-c09-o01",
+         "text": "Approximate and evaluate definite integrals as limits of Riemann sums.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.definite-integrals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, estimation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c09-s03",
+       "number": "9.3",
+       "title": "Fundamental Theorems of Integral Calculus and their Applications",
+       "outcomes": [
+        {
+         "id": "tn-g12-c09-o02",
+         "text": "Evaluate definite integrals using the fundamental theorems and properties of definite integrals, including Bernoulli's formula.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.definite-integrals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.integration-methods",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c09-s04",
+       "number": "9.4",
+       "title": "Bernoulli's Formula",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c09-s05",
+       "number": "9.5",
+       "title": "Improper Integrals",
+       "outcomes": [
+        {
+         "id": "tn-g12-c09-o03",
+         "text": "Evaluate improper integrals and use the gamma integral.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.improper-gamma-integrals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c09-s06",
+       "number": "9.6",
+       "title": "Reduction Formulae",
+       "outcomes": [
+        {
+         "id": "tn-g12-c09-o04",
+         "text": "Apply reduction formulae to evaluate integrals of powers of trigonometric functions and related forms.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.reduction-formulae",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c09-s07",
+       "number": "9.7",
+       "title": "Gamma Integral",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c09-s08",
+       "number": "9.8",
+       "title": "Evaluation of Bounded Plane Area by Integration",
+       "outcomes": [
+        {
+         "id": "tn-g12-c09-o05",
+         "text": "Find areas bounded by curves and the axes or between two curves.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.area-integrals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, graph-sketch)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c09-s09",
+       "number": "9.9",
+       "title": "Volume of a Solid obtained by Revolving Area about an Axis",
+       "outcomes": [
+        {
+         "id": "tn-g12-c09-o06",
+         "text": "Find volumes of solids generated by revolving a region about a coordinate axis.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.volumes-of-revolution",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-calculus",
+      "number": 5,
+      "title": "Calculus"
+     }
+    },
+    {
+     "id": "tn-g12-c10",
+     "number": 10,
+     "title": "Ordinary Differential Equations",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c10-s01",
+       "number": "10.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c10-s02",
+       "number": "10.2",
+       "title": "Differential Equation, Order, and Degree",
+       "outcomes": [
+        {
+         "id": "tn-g12-c10-o01",
+         "text": "Determine the order and degree of a differential equation and classify it (ordinary/partial, linear/non-linear).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+         }
+        },
+        {
+         "id": "tn-g12-c10-o02",
+         "text": "Form a differential equation by eliminating arbitrary constants from a family of curves.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.higher-derivatives",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c10-s03",
+       "number": "10.3",
+       "title": "Classification of Differential Equations",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c10-s04",
+       "number": "10.4",
+       "title": "Formation of Differential Equations",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c10-s05",
+       "number": "10.5",
+       "title": "Solution of Ordinary Differential Equations",
+       "outcomes": [
+        {
+         "id": "tn-g12-c10-o03",
+         "text": "Verify general and particular solutions and solve variables-separable equations and those reducible to it by substitution.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c10-s06",
+       "number": "10.6",
+       "title": "Solution of First Order and First Degree Differential Equations",
+       "outcomes": [
+        {
+         "id": "tn-g12-c10-o04",
+         "text": "Solve homogeneous first-order differential equations.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.homogeneous-de",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution)."
+         }
+        },
+        {
+         "id": "tn-g12-c10-o05",
+         "text": "Solve first-order linear differential equations using an integrating factor.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution)."
+         }
+        },
+        {
+         "id": "tn-g12-c10-o06",
+         "text": "Set up and solve first-order models for population growth, radioactive decay, Newton's law of cooling and mixture problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.ode-modelling",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c10-s07",
+       "number": "10.7",
+       "title": "First Order Linear Differential Equations",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c10-s08",
+       "number": "10.8",
+       "title": "Applications of First Order Ordinary Differential Equations",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-calculus",
+      "number": 5,
+      "title": "Calculus"
+     }
+    },
+    {
+     "id": "tn-g12-c05",
+     "number": 5,
+     "title": "Two Dimensional Analytical Geometry-II",
+     "outcomes": [
+      {
+       "id": "tn-g12-c05-o02",
+       "text": "Derive and use standard equations of parabola, ellipse and hyperbola from focus-directrix-eccentricity, finding vertices, foci, axes, latus rectum and directrices.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.coordinate.conics",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; equation-solution, coordinate, graph-sketch)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c05-s01",
+       "number": "5.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c05-s02",
+       "number": "5.2",
+       "title": "Circle",
+       "outcomes": [
+        {
+         "id": "tn-g12-c05-o01",
+         "text": "Find the equation of a circle from given conditions, its centre and radius from the general equation, and the position of a point relative to it.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.conics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, coordinate)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c05-s03",
+       "number": "5.3",
+       "title": "Conics",
+       "outcomes": [
+        {
+         "id": "tn-g12-c05-o03",
+         "text": "Identify the type of conic represented by a general second-degree equation.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.conics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c05-s04",
+       "number": "5.4",
+       "title": "Conic Sections",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c05-s05",
+       "number": "5.5",
+       "title": "Parametric form of Conics",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c05-s06",
+       "number": "5.6",
+       "title": "Tangents and Normals to Conics",
+       "outcomes": [
+        {
+         "id": "tn-g12-c05-o04",
+         "text": "Write parametric equations of conics and find equations of tangents and normals to circles and conics, including the condition for y = mx + c to be a tangent.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.conic-tangents-normals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.conics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c05-s07",
+       "number": "5.7",
+       "title": "Real life Applications of Conics",
+       "outcomes": [
+        {
+         "id": "tn-g12-c05-o05",
+         "text": "Model real-life situations such as arches, reflectors, orbits and cables with conics and solve for required measurements.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.conics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.model-selection",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-coordinate",
+      "number": 6,
+      "title": "Coordinate geometry"
+     }
+    },
+    {
+     "id": "tn-g12-c06",
+     "number": 6,
+     "title": "Applications of Vector Algebra",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c06-s01",
+       "number": "6.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c06-s02",
+       "number": "6.2",
+       "title": "Geometric Introduction to Vectors",
+       "outcomes": [
+        {
+         "id": "tn-g12-c06-o03",
+         "text": "Write vector and Cartesian equations of lines in space; find the angle between lines, their point of intersection and the shortest distance between skew or parallel lines.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.skew-line-distance",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.space-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, numeric, coordinate)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c06-s03",
+       "number": "6.3",
+       "title": "Scalar Product and Vector Product",
+       "outcomes": [
+        {
+         "id": "tn-g12-c06-o01",
+         "text": "Use dot and cross products to prove geometric and trigonometric results and to compute work done and torque.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.vectors.products",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; proof, numeric, measurement-with-unit)."
+         }
+        },
+        {
+         "id": "tn-g12-c06-o02",
+         "text": "Compute scalar and vector triple products, interpret them as volume and coplanarity tests, and apply Lagrange's and Jacobi's identities.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.vectors.triple-products",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, vector-matrix, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c06-s04",
+       "number": "6.4",
+       "title": "Scalar triple product",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c06-s05",
+       "number": "6.5",
+       "title": "Vector triple product",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c06-s06",
+       "number": "6.6",
+       "title": "Jacobi's Identity and Lagrange's Identity",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c06-s07",
+       "number": "6.7",
+       "title": "Different forms of Equation of a Straight line",
+       "outcomes": [
+        {
+         "id": "tn-g12-c06-o04",
+         "text": "Write equations of planes in normal, intercept and point forms, through three points or containing given lines, and find angles and distances involving planes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.space-planes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c06-s08",
+       "number": "6.8",
+       "title": "Different forms of Equation of a plane",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c06-s09",
+       "number": "6.9",
+       "title": "Image of a point in a plane",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c06-s10",
+       "number": "6.10",
+       "title": "Meeting point of a line and a plane",
+       "outcomes": [
+        {
+         "id": "tn-g12-c06-o05",
+         "text": "Find the image of a point in a plane and the point where a line meets a plane.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.space-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.space-planes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; coordinate)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-coordinate",
+      "number": 6,
+      "title": "Coordinate geometry"
+     }
+    },
+    {
+     "id": "tn-g12-c04",
+     "number": 4,
+     "title": "Inverse Trigonometric Functions",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g12-c04-s01",
+       "number": "4.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c04-s02",
+       "number": "4.2",
+       "title": "Some Fundamental Concepts",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c04-s03",
+       "number": "4.3",
+       "title": "Sine Function and Inverse Sine Function",
+       "outcomes": [
+        {
+         "id": "tn-g12-c04-o01",
+         "text": "Use domain, range, period and amplitude to describe graphs of trigonometric functions and explain why restrictions are needed for inverses.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.inverse-functions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.trigonometry.functions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, interval, written-explanation)."
+         }
+        },
+        {
+         "id": "tn-g12-c04-o02",
+         "text": "State domains and ranges of the six inverse trigonometric functions and sketch their graphs.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.inverse",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; interval, graph-sketch)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c04-s04",
+       "number": "4.4",
+       "title": "The Cosine Function and Inverse Cosine Function",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c04-s05",
+       "number": "4.5",
+       "title": "The Tangent Function and the Inverse Tangent Function",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c04-s06",
+       "number": "4.6",
+       "title": "The Cosecant Function and the Inverse Cosecant Function",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c04-s07",
+       "number": "4.7",
+       "title": "The Secant Function and Inverse Secant Function",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c04-s08",
+       "number": "4.8",
+       "title": "The Cotangent Function and the Inverse Cotangent Function",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c04-s09",
+       "number": "4.9",
+       "title": "Principal Value of Inverse Trigonometric Functions",
+       "outcomes": [
+        {
+         "id": "tn-g12-c04-o03",
+         "text": "Find principal values of inverse trigonometric expressions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.inverse",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g12-c04-s10",
+       "number": "4.10",
+       "title": "Properties of Inverse Trigonometric Functions",
+       "outcomes": [
+        {
+         "id": "tn-g12-c04-o04",
+         "text": "Apply properties of inverse trigonometric functions, such as sum formulae and composition rules, to simplify expressions, prove results and solve equations.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.inverse",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; expression, proof, equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-trigonometry",
+      "number": 7,
+      "title": "Trigonometry"
+     }
+    }
+   ]
+  }
+ ]
+}

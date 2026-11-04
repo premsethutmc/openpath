@@ -1,0 +1,3894 @@
+[
+ {
+  "title": "A. Strong learner, one isolated arithmetic slip",
+  "r": {
+   "learner": "A-strong-one-slip",
+   "competency": "MATH.algebra.arithmetic-sequences",
+   "release": "cbse-ncert-mathematics-grade-10",
+   "steps": [
+    {
+     "n": 1,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:apn:13,7,19",
+     "prompt": "An arithmetic progression starts 13, 20, 27, … What is term number 19?",
+     "response": "139",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "guided",
+      "independent": "1/1",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 2,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:apn:12,5,15",
+     "prompt": "An arithmetic progression starts 12, 17, 22, … What is term number 15?",
+     "response": "81",
+     "working": [
+      "15 − 1 = 14",
+      "14 × 5 = 70",
+      "12 + 70 = 81"
+     ],
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": {
+      "valid": false,
+      "note": "A line has a slip: 12 + 70 is 82, but 81 is 81."
+     },
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "guided",
+      "independent": "1/2",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 3,
+     "path": "recovery",
+     "phase": "return",
+     "reason": "Not sure why yet: the answers do not match any explanation OpenPath knows, so it will not guess. Try the problem again, or ask a teacher to look at your working.",
+     "activity": "original",
+     "question": "gen:apn:12,5,15",
+     "prompt": "An arithmetic progression starts 12, 17, 22, … What is term number 15?",
+     "response": "82",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "guided",
+      "independent": "1/2",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "reasoning": {
+      "status": "uncertain",
+      "best": null,
+      "competency": null,
+      "plan": "unsure:-"
+     }
+    },
+    {
+     "n": 4,
+     "path": "recovery",
+     "phase": "solved_on_retry",
+     "reason": "Solved on a second try, without help. A second try is practice: it does not count as solving it on your own the first time.",
+     "reasoning": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "guided",
+      "independent": "1/2",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 5,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:apn:18,2,12",
+     "prompt": "An arithmetic progression starts 18, 20, 22, … What is term number 12?",
+     "response": "40",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "independent",
+      "independent": "2/3",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.35,
+      "asked": 0
+     }
+    },
+    {
+     "n": 6,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:apn:7,7,10:mc",
+     "prompt": "An arithmetic progression starts 7, 14, 21, … What is term number 10? Choose one.",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "independent",
+      "independent": "3/4",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 7,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:apn:18,6,20",
+     "prompt": "An arithmetic progression starts 18, 24, 30, … What is term number 20?",
+     "response": "132",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "independent",
+      "independent": "4/5",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 8,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:auapis:16,6,1,3",
+     "prompt": "The first five terms of a list are 16, 22, 28, 35, 40. Which statement is true?",
+     "response": "A",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "independent",
+      "independent": "5/6",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 9,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:auapk:1,19,2,27,3",
+     "prompt": "The AP 19, 21, 23, …, 71 ends at 71. Find its 3th term from the end.",
+     "response": "67",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "independent",
+      "independent": "6/7",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 10,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:auaps:58,1,8",
+     "prompt": "Find the sum of the first 8 terms of the AP 58, 59, 60, ….",
+     "response": "492",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "independent",
+      "independent": "7/8",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 11,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:auapc:-5,2,3,1,0,7",
+     "prompt": "For which value of k are 2k, 3k + 7 and k − 1 (in this order) consecutive terms of an AP?",
+     "response": "-5",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "independent",
+      "independent": "8/9",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 12,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:auaprec:0,-1,5,-3",
+     "prompt": "A sequence is given by aₙ = −n² − 3n + 5. Write its first four terms as (a₁, a₂, a₃, a₄).",
+     "response": "(1, −5, −13, −23)",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "independent",
+      "independent": "9/10",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 13,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:auapln:1,3,7",
+     "prompt": "The terms of an AP are plotted as points (n, aₙ) for n = 1, 2, 3, …, and they lie on the line y = 7x − 4. Find the first term a and the common difference d of the AP, as (a, d).",
+     "response": "(3, 7)",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "independent",
+      "independent": "10/11",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 14,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:apn:12,5,14:mc",
+     "prompt": "An arithmetic progression starts 12, 17, 22, … What is term number 14? Choose one.",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "11/12",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 15,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:auaps:13,11,24:w",
+     "prompt": "Ravi saves ₹13 in the first week and each week saves ₹11 more than the week before. How much has Ravi saved in all after 24 weeks, in rupees?",
+     "response": "3348",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "12/13",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 16,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:auapln:1,24,7:w",
+     "prompt": "A taxi's fares for 1, 2, 3, … km, plotted as points (distance in km, fare in ₹), lie on the line y = 7x + 17. Find the fare for the first kilometre and the extra charge for each further kilometre, as (fare for 1 km, extra per km).",
+     "response": "(24, 7)",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "13/14",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 17,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:apn:14,3,13",
+     "prompt": "An arithmetic progression starts 14, 17, 20, … What is term number 13?",
+     "response": "50",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "14/15",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 18,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:apn:11,3,6:mc",
+     "prompt": "An arithmetic progression starts 11, 14, 17, … What is term number 6? Choose one.",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "15/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 19,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:apn:10,6,20",
+     "prompt": "An arithmetic progression starts 10, 16, 22, … What is term number 20?",
+     "response": "124",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "16/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 20,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile).",
+     "activity": "practice",
+     "question": "wr:ap:derive-sum",
+     "prompt": "(a) Derive the formula 1 + 2 + 3 + … + n = n(n + 1)/2 by writing the sum forwards and backwards (or by another argument that works for every n). (b) Use the same idea to derive the sum Sₙ of the first n terms of an arithmetic progression with first term a and common difference d. (c) Use your formula to find the sum of all two-digit multiples of 7.",
+     "response": "written:marked-correct",
+     "hints": 0,
+     "grading": {
+      "verdict": "pending-educator",
+      "reason": "pending-educator",
+      "credit": null,
+      "source": "educator",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "16/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 21,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile).",
+     "activity": "practice",
+     "question": "wr:ap:derive-nth",
+     "prompt": "An arithmetic progression has first term a and common difference d. (a) Explain why its nth term is aₙ = a + (n − 1)d. (b) Use this to show that for any two terms, aₘ − aₙ = (m − n)d. (c) The 4th term of an AP is 19 and its 11th term is 47: use (b) to find d and then the first term.",
+     "response": "written:marked-correct",
+     "hints": 0,
+     "grading": {
+      "verdict": "pending-educator",
+      "reason": "pending-educator",
+      "credit": null,
+      "source": "educator",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "16/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 22,
+     "path": "module",
+     "phase": "done",
+     "reason": "Shown on your own. A delayed check is planned for Mon Nov 09 2026.",
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     },
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "16/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     }
+    },
+    {
+     "n": 23,
+     "path": "module",
+     "phase": "done (day +1)",
+     "reason": "Shown on your own. A delayed check is planned for Mon Nov 09 2026.",
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "16/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     }
+    },
+    {
+     "n": 24,
+     "path": "module",
+     "phase": "retention",
+     "reason": "A delayed check, a week after you first showed this: does it last?",
+     "activity": "retention",
+     "question": "gen:apn:18,2,13",
+     "prompt": "An arithmetic progression starts 18, 20, 22, … What is term number 13?",
+     "response": "42",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "17/18",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "due"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 25,
+     "path": "module",
+     "phase": "retention",
+     "reason": "A delayed check, a week after you first showed this: does it last?",
+     "activity": "retention",
+     "question": "gen:auapis:13,-3,1,2",
+     "prompt": "The first five terms of a list are 13, 10, 8, 4, 1. Which statement is true?",
+     "response": "C",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "18/19",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "passed"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 26,
+     "path": "module",
+     "phase": "done (day +8)",
+     "reason": "Shown on your own.",
+     "evidence": {
+      "competency": "MATH.algebra.arithmetic-sequences",
+      "status": "transfer",
+      "independent": "18/19",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "passed"
+     }
+    }
+   ],
+   "final": {
+    "competency": "MATH.algebra.arithmetic-sequences",
+    "status": "transfer",
+    "independent": "18/19",
+    "assisted": "1/1",
+    "engine": "unavailable",
+    "retention": "passed"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.euclid-algorithm",
+    "reason": "Next in Real Numbers.",
+    "paused": []
+   },
+   "supports": []
+  }
+ },
+ {
+  "title": "B. Demonstrated prerequisite gap (square roots), entering from Practice",
+  "r": {
+   "learner": "B-prerequisite-gap",
+   "competency": "MATH.geometry.pythagoras",
+   "release": "tn-samacheer-mathematics-grade-10",
+   "steps": [
+    {
+     "n": 1,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:ahpyth:16,30,2",
+     "prompt": "A right-angled triangle has hypotenuse 34 cm and one shorter side 16 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "900",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/1",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 2,
+     "path": "recovery",
+     "phase": "investigate",
+     "reason": "One more question to help work out what happened. Like every answer you give on your own, it is part of your record and helps OpenPath choose what comes next.",
+     "activity": "diagnostic",
+     "question": "gen:ahpyth:14,48,2",
+     "prompt": "A right-angled triangle has hypotenuse 50 cm and one shorter side 14 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "2304",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/2",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "reasoning": {
+      "status": "need_more",
+      "best": null,
+      "competency": null,
+      "plan": null
+     }
+    },
+    {
+     "n": 3,
+     "path": "recovery",
+     "phase": "chapter",
+     "reason": "1156 − 256 = 900 is the square of the side; its square root is the length. Here is a way to rebuild it.",
+     "teaching": {
+      "competency": "MATH.number.square-roots",
+      "strategy": "worked_steps",
+      "kind": "procedural",
+      "review": "machine-checked",
+      "sections": [
+       {
+        "title": "The square root of a perfect square, step by step",
+        "label": "Worked example",
+        "verified": true,
+        "violations": []
+       }
+      ]
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.35,
+      "asked": 0
+     },
+     "evidence": {
+      "competency": "MATH.number.square-roots",
+      "status": "exposure",
+      "independent": "0/0",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
+     }
+    },
+    {
+     "n": 4,
+     "path": "recovery",
+     "phase": "guided",
+     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+     "activity": "guided",
+     "question": "gen:root:33",
+     "prompt": "√1089 = ?",
+     "response": "33",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.number.square-roots",
+      "status": "guided",
+      "independent": "0/0",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.35,
+      "asked": 0
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
+     }
+    },
+    {
+     "n": 5,
+     "path": "recovery",
+     "phase": "check",
+     "reason": "Now one new question on your own, with no hints.",
+     "activity": "check",
+     "question": "gen:root:43",
+     "prompt": "√1849 = ?",
+     "response": "43",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.number.square-roots",
+      "status": "guided",
+      "independent": "1/1",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.35,
+      "asked": 0
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
+     }
+    },
+    {
+     "n": 6,
+     "path": "recovery",
+     "phase": "verify",
+     "reason": "Right on your own after help: progress, not yet mastery. More practice on your own shows it is yours.",
+     "activity": "practice",
+     "question": "gen:root:30",
+     "prompt": "√900 = ?",
+     "response": "30",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.number.square-roots",
+      "status": "independent",
+      "independent": "2/2",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.35,
+      "asked": 0
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
+     }
+    },
+    {
+     "n": 7,
+     "path": "recovery",
+     "phase": "return",
+     "reason": "Back to the original problem.",
+     "activity": "original",
+     "question": "gen:ahpyth:16,30,2",
+     "prompt": "A right-angled triangle has hypotenuse 34 cm and one shorter side 16 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "30",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "guided",
+      "independent": "0/2",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
+     }
+    },
+    {
+     "n": 8,
+     "path": "recovery",
+     "phase": "solved_after_help",
+     "reason": "Solved after help. That counts as help, not as work on your own.",
+     "reasoning": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "guided",
+      "independent": "0/2",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 9,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:ahpyth:36,77,2",
+     "prompt": "A right-angled triangle has hypotenuse 85 cm and one shorter side 36 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "77",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "guided",
+      "independent": "1/3",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.35,
+      "asked": 0
+     }
+    },
+    {
+     "n": 10,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:ahpyth:21,28,0",
+     "prompt": "A right-angled triangle has shorter sides 21 cm and 28 cm, as in the picture. How long is the hypotenuse, in cm?",
+     "response": "35",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "2/4",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 11,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:ahpyth:40,75,0",
+     "prompt": "A right-angled triangle has shorter sides 40 cm and 75 cm, as in the picture. How long is the hypotenuse, in cm?",
+     "response": "85",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "3/5",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 12,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:ahpyth:39,80,2:mc",
+     "prompt": "A right-angled triangle has hypotenuse 89 cm and one shorter side 39 cm, as in the picture. How long is the other shorter side, in cm? Choose one.",
+     "response": "D",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "4/6",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 13,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:ahpyth:16,63,1",
+     "prompt": "A right-angled triangle has hypotenuse 65 cm and one shorter side 63 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "16",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "5/7",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 14,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:ahconv:10,0,1,0",
+     "prompt": "A triangle has sides 30 cm, 18 cm and 24 cm. Is it a right-angled triangle?",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "6/8",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 15,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:ahgen:0,5,0",
+     "prompt": "For any whole number m greater than 1, the numbers 2m, m² − 1 and m² + 1 form a Pythagorean triple. Find the triple that contains 10 as its even member 2m. What is its largest number?",
+     "response": "26",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "7/9",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 16,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:ahpyth:16,63,0:w",
+     "prompt": "A rectangular playground is 16 m wide and 63 m long. A straight path runs across it from one corner to the opposite corner. How long is the path, in metres?",
+     "response": "65",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "8/10",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 17,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:ahconv:2,0,0,0:w",
+     "prompt": "Imran makes a triangular frame for a kite from three sticks 5 cm, 12 cm and 13 cm long. Will one corner of the frame be a right angle?",
+     "response": "A",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "9/11",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 18,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:ahgen:3,9,5:w",
+     "prompt": "A carpenter builds right-angled frames using the rule: sides m² − n², 2mn and m² + n². For m = 9 and n = 5, how long is the side 2mn, in cm?",
+     "response": "90",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "10/12",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 19,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:11,60,1",
+     "prompt": "A right-angled triangle has hypotenuse 61 cm and one shorter side 60 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "11",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "11/13",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 20,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:11,60,0:mc",
+     "prompt": "A right-angled triangle has shorter sides 11 cm and 60 cm, as in the picture. How long is the hypotenuse, in cm? Choose one.",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "12/14",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 21,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:18,80,0",
+     "prompt": "A right-angled triangle has shorter sides 18 cm and 80 cm, as in the picture. How long is the hypotenuse, in cm?",
+     "response": "82",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "13/15",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 22,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:18,80,1:mc",
+     "prompt": "A right-angled triangle has hypotenuse 82 cm and one shorter side 80 cm, as in the picture. How long is the other shorter side, in cm? Choose one.",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "14/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 23,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:24,70,2",
+     "prompt": "A right-angled triangle has hypotenuse 74 cm and one shorter side 24 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "70",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "15/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 24,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile).",
+     "activity": "practice",
+     "question": "wr:pyth:similarity-proof",
+     "prompt": "(a) Prove the Pythagoras theorem: in triangle ABC with ∠B = 90°, AB² + BC² = AC². Draw (or describe) the perpendicular BD from B to AC and give a reason for every step. (b) A triangle has sides 20 cm, 21 cm and 29 cm. Use the converse of the theorem to decide whether it is right-angled, and if so name the side opposite the right angle.",
+     "response": "written:marked-correct",
+     "hints": 0,
+     "grading": {
+      "verdict": "pending-educator",
+      "reason": "pending-educator",
+      "credit": null,
+      "source": "educator",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "15/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 25,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile).",
+     "activity": "practice",
+     "question": "wr:pyth:converse-proof",
+     "prompt": "Prove the converse of the Pythagoras theorem: in △ABC, if AC² = AB² + BC², then ∠B = 90°. (Hint: draw a second triangle PQR with ∠Q = 90°, PQ = AB and QR = BC.) Give the reason for each step. Then use the converse to decide whether a triangle with sides 20 cm, 21 cm and 29 cm is right-angled.",
+     "response": "written:marked-correct",
+     "hints": 0,
+     "grading": {
+      "verdict": "pending-educator",
+      "reason": "pending-educator",
+      "credit": null,
+      "source": "educator",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "15/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 26,
+     "path": "module",
+     "phase": "done",
+     "reason": "Shown on your own. A delayed check is planned for Mon Nov 09 2026.",
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     },
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "15/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     }
+    },
+    {
+     "n": 27,
+     "path": "module",
+     "phase": "done (day +1)",
+     "reason": "Shown on your own. A delayed check is planned for Mon Nov 09 2026.",
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "15/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     }
+    },
+    {
+     "n": 28,
+     "path": "module",
+     "phase": "retention",
+     "reason": "A delayed check, a week after you first showed this: does it last?",
+     "activity": "retention",
+     "question": "gen:ahpyth:6,8,2",
+     "prompt": "A right-angled triangle has hypotenuse 10 cm and one shorter side 6 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "8",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "16/18",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "due"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 29,
+     "path": "module",
+     "phase": "retention",
+     "reason": "A delayed check, a week after you first showed this: does it last?",
+     "activity": "retention",
+     "question": "gen:ahconv:3,0,0,0",
+     "prompt": "A triangle has sides 9 cm, 12 cm and 15 cm. Is it a right-angled triangle?",
+     "response": "A",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "17/19",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "passed"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.69,
+      "asked": 2
+     }
+    },
+    {
+     "n": 30,
+     "path": "module",
+     "phase": "done (day +8)",
+     "reason": "Shown on your own.",
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "17/19",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "passed"
+     }
+    }
+   ],
+   "final": {
+    "competency": "MATH.geometry.pythagoras",
+    "status": "transfer",
+    "independent": "17/19",
+    "assisted": "1/1",
+    "engine": "unavailable",
+    "retention": "passed"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.number.square-roots",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you.",
+    "paused": []
+   },
+   "supports": [
+    "plausible:MATH.geometry.triangle-types",
+    "support:MATH.geometry.similarity",
+    "support:MATH.geometry.triangle-properties",
+    "support:MATH.measurement.area-squares",
+    "mandatory:MATH.geometry.angle-measure",
+    "mandatory:MATH.geometry.constructions-bisectors",
+    "mandatory:MATH.geometry.basic-constructions"
+   ]
+  }
+ },
+ {
+  "title": "B2. The same gap, entering from the Assessment stage (failed case)",
+  "r": {
+   "learner": "B2-prerequisite-gap-assessment-entry",
+   "competency": "MATH.geometry.pythagoras",
+   "release": "tn-samacheer-mathematics-grade-10",
+   "steps": [
+    {
+     "n": 1,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:ahpyth:36,77,2",
+     "prompt": "A right-angled triangle has hypotenuse 85 cm and one shorter side 36 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "5929",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/1",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.35,
+      "asked": 0
+     }
+    },
+    {
+     "n": 2,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:ahpyth:21,28,0",
+     "prompt": "A right-angled triangle has shorter sides 21 cm and 28 cm, as in the picture. How long is the hypotenuse, in cm?",
+     "response": "1225",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/2",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.56,
+      "asked": 1
+     }
+    },
+    {
+     "n": 3,
+     "path": "module",
+     "phase": "recover",
+     "reason": "One more question to help work out what happened. Like every answer you give on your own, it is part of your record and helps OpenPath choose what comes next.",
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     },
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/2",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 4,
+     "path": "recovery",
+     "phase": "investigate",
+     "reason": "One more question to help work out what happened. Like every answer you give on your own, it is part of your record and helps OpenPath choose what comes next.",
+     "activity": "diagnostic",
+     "question": "gen:ahpyth:14,48,2",
+     "prompt": "A right-angled triangle has hypotenuse 50 cm and one shorter side 14 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "2304",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/3",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "reasoning": {
+      "status": "need_more",
+      "best": null,
+      "competency": null,
+      "plan": null
+     }
+    },
+    {
+     "n": 5,
+     "path": "module",
+     "phase": "recover",
+     "reason": "7225 − 1296 = 5929 is the square of the side; its square root is the length.",
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     },
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/3",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 6,
+     "path": "recovery",
+     "phase": "chapter",
+     "reason": "7225 − 1296 = 5929 is the square of the side; its square root is the length. Here is a way to rebuild it.",
+     "teaching": {
+      "competency": "MATH.number.square-roots",
+      "strategy": "worked_steps",
+      "kind": "procedural",
+      "review": "machine-checked",
+      "sections": [
+       {
+        "title": "The square root of a perfect square, step by step",
+        "label": "Worked example",
+        "verified": true,
+        "violations": []
+       }
+      ]
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.35,
+      "asked": 0
+     },
+     "evidence": {
+      "competency": "MATH.number.square-roots",
+      "status": "exposure",
+      "independent": "0/0",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
+     }
+    },
+    {
+     "n": 7,
+     "path": "module",
+     "phase": "recover",
+     "reason": "7225 − 1296 = 5929 is the square of the side; its square root is the length.",
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     },
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/3",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 8,
+     "path": "recovery",
+     "phase": "guided",
+     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+     "activity": "guided",
+     "question": "gen:root:33",
+     "prompt": "√1089 = ?",
+     "response": "33",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.number.square-roots",
+      "status": "guided",
+      "independent": "0/0",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.35,
+      "asked": 0
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
+     }
+    },
+    {
+     "n": 9,
+     "path": "module",
+     "phase": "recover",
+     "reason": "7225 − 1296 = 5929 is the square of the side; its square root is the length.",
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     },
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/3",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 10,
+     "path": "recovery",
+     "phase": "check",
+     "reason": "Now one new question on your own, with no hints.",
+     "activity": "check",
+     "question": "gen:root:43",
+     "prompt": "√1849 = ?",
+     "response": "43",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.number.square-roots",
+      "status": "guided",
+      "independent": "1/1",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.35,
+      "asked": 0
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
+     }
+    },
+    {
+     "n": 11,
+     "path": "module",
+     "phase": "recover",
+     "reason": "7225 − 1296 = 5929 is the square of the side; its square root is the length.",
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     },
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/3",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 12,
+     "path": "recovery",
+     "phase": "verify",
+     "reason": "Right on your own after help: progress, not yet mastery. More practice on your own shows it is yours.",
+     "activity": "practice",
+     "question": "gen:root:30",
+     "prompt": "√900 = ?",
+     "response": "30",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "kernel",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.number.square-roots",
+      "status": "independent",
+      "independent": "2/2",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.35,
+      "asked": 0
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
+     }
+    },
+    {
+     "n": 13,
+     "path": "module",
+     "phase": "recover",
+     "reason": "Back to the original problem.",
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     },
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "exposure",
+      "independent": "0/3",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 14,
+     "path": "recovery",
+     "phase": "return",
+     "reason": "Back to the original problem.",
+     "activity": "original",
+     "question": "gen:ahpyth:36,77,2",
+     "prompt": "A right-angled triangle has hypotenuse 85 cm and one shorter side 36 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "77",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "guided",
+      "independent": "0/3",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "reasoning": {
+      "status": "established",
+      "best": "no-square-root",
+      "competency": "MATH.number.square-roots",
+      "plan": "support:MATH.number.square-roots"
+     }
+    },
+    {
+     "n": 15,
+     "path": "module",
+     "phase": "verify",
+     "reason": "What was missing has been worked on. Now a new question on your own.",
+     "activity": "practice",
+     "question": "gen:ahpyth:40,75,0",
+     "prompt": "A right-angled triangle has shorter sides 40 cm and 75 cm, as in the picture. How long is the hypotenuse, in cm?",
+     "response": "85",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "guided",
+      "independent": "1/4",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 16,
+     "path": "module",
+     "phase": "verify",
+     "reason": "What was missing has been worked on. Now a new question on your own.",
+     "activity": "practice",
+     "question": "gen:ahpyth:39,80,2:mc",
+     "prompt": "A right-angled triangle has hypotenuse 89 cm and one shorter side 39 cm, as in the picture. How long is the other shorter side, in cm? Choose one.",
+     "response": "D",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "2/5",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 17,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:ahpyth:16,63,1",
+     "prompt": "A right-angled triangle has hypotenuse 65 cm and one shorter side 63 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "16",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "3/6",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 18,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:ahconv:10,0,1,0",
+     "prompt": "A triangle has sides 30 cm, 18 cm and 24 cm. Is it a right-angled triangle?",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "4/7",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 19,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "practice",
+     "question": "gen:ahgen:0,5,0",
+     "prompt": "For any whole number m greater than 1, the numbers 2m, m² − 1 and m² + 1 form a Pythagorean triple. Find the triple that contains 10 as its even member 2m. What is its largest number?",
+     "response": "26",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "independent",
+      "independent": "5/8",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 20,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:ahpyth:16,63,0:w",
+     "prompt": "A rectangular playground is 16 m wide and 63 m long. A straight path runs across it from one corner to the opposite corner. How long is the path, in metres?",
+     "response": "65",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "6/9",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 21,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:ahconv:2,0,0,0:w",
+     "prompt": "Imran makes a triangular frame for a kite from three sticks 5 cm, 12 cm and 13 cm long. Will one corner of the frame be a right angle?",
+     "response": "A",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "7/10",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 22,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "transfer",
+     "question": "gen:ahgen:3,9,5:w",
+     "prompt": "A carpenter builds right-angled frames using the rule: sides m² − n², 2mn and m² + n². For m = 9 and n = 5, how long is the side 2mn, in cm?",
+     "response": "90",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "8/11",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 23,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:11,60,1",
+     "prompt": "A right-angled triangle has hypotenuse 61 cm and one shorter side 60 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "11",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "9/12",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 24,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:11,60,0:mc",
+     "prompt": "A right-angled triangle has shorter sides 11 cm and 60 cm, as in the picture. How long is the hypotenuse, in cm? Choose one.",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "10/13",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 25,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:18,80,0",
+     "prompt": "A right-angled triangle has shorter sides 18 cm and 80 cm, as in the picture. How long is the hypotenuse, in cm?",
+     "response": "82",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "11/14",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 26,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:18,80,1:mc",
+     "prompt": "A right-angled triangle has hypotenuse 82 cm and one shorter side 80 cm, as in the picture. How long is the other shorter side, in cm? Choose one.",
+     "response": "B",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "12/15",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 27,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. More practice is optional.",
+     "activity": "check",
+     "question": "gen:ahpyth:24,70,2",
+     "prompt": "A right-angled triangle has hypotenuse 74 cm and one shorter side 24 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "70",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "13/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 28,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile).",
+     "activity": "practice",
+     "question": "wr:pyth:similarity-proof",
+     "prompt": "(a) Prove the Pythagoras theorem: in triangle ABC with ∠B = 90°, AB² + BC² = AC². Draw (or describe) the perpendicular BD from B to AC and give a reason for every step. (b) A triangle has sides 20 cm, 21 cm and 29 cm. Use the converse of the theorem to decide whether it is right-angled, and if so name the side opposite the right angle.",
+     "response": "written:marked-correct",
+     "hints": 0,
+     "grading": {
+      "verdict": "pending-educator",
+      "reason": "pending-educator",
+      "credit": null,
+      "source": "educator",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "13/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 29,
+     "path": "module",
+     "phase": "verify",
+     "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile).",
+     "activity": "practice",
+     "question": "wr:pyth:converse-proof",
+     "prompt": "Prove the converse of the Pythagoras theorem: in △ABC, if AC² = AB² + BC², then ∠B = 90°. (Hint: draw a second triangle PQR with ∠Q = 90°, PQ = AB and QR = BC.) Give the reason for each step. Then use the converse to decide whether a triangle with sides 20 cm, 21 cm and 29 cm is right-angled.",
+     "response": "written:marked-correct",
+     "hints": 0,
+     "grading": {
+      "verdict": "pending-educator",
+      "reason": "pending-educator",
+      "credit": null,
+      "source": "educator",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "13/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 30,
+     "path": "module",
+     "phase": "done",
+     "reason": "Shown on your own. A delayed check is planned for Mon Nov 09 2026.",
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     },
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "13/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     }
+    },
+    {
+     "n": 31,
+     "path": "module",
+     "phase": "done (day +1)",
+     "reason": "Shown on your own. A delayed check is planned for Mon Nov 09 2026.",
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "13/16",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "scheduled"
+     }
+    },
+    {
+     "n": 32,
+     "path": "module",
+     "phase": "retention",
+     "reason": "A delayed check, a week after you first showed this: does it last?",
+     "activity": "retention",
+     "question": "gen:ahpyth:6,8,2",
+     "prompt": "A right-angled triangle has hypotenuse 10 cm and one shorter side 6 cm, as in the picture. How long is the other shorter side, in cm?",
+     "response": "8",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "14/17",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "due"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 33,
+     "path": "module",
+     "phase": "retention",
+     "reason": "A delayed check, a week after you first showed this: does it last?",
+     "activity": "retention",
+     "question": "gen:ahconv:3,0,0,0",
+     "prompt": "A triangle has sides 9 cm, 12 cm and 15 cm. Is it a right-angled triangle?",
+     "response": "A",
+     "hints": 0,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "15/18",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "passed"
+     },
+     "diagnosis": {
+      "result": "procedural",
+      "confidence": 0.85,
+      "asked": 2
+     }
+    },
+    {
+     "n": 34,
+     "path": "module",
+     "phase": "done (day +8)",
+     "reason": "Shown on your own.",
+     "evidence": {
+      "competency": "MATH.geometry.pythagoras",
+      "status": "transfer",
+      "independent": "15/18",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "passed"
+     }
+    }
+   ],
+   "final": {
+    "competency": "MATH.geometry.pythagoras",
+    "status": "transfer",
+    "independent": "15/18",
+    "assisted": "1/1",
+    "engine": "unavailable",
+    "retention": "passed"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.number.square-roots",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you.",
+    "paused": []
+   },
+   "supports": [
+    "plausible:MATH.geometry.triangle-types",
+    "support:MATH.geometry.similarity",
+    "support:MATH.geometry.triangle-properties",
+    "support:MATH.measurement.area-squares",
+    "mandatory:MATH.geometry.angle-measure",
+    "mandatory:MATH.geometry.constructions-bisectors",
+    "mandatory:MATH.geometry.basic-constructions"
+   ]
+  }
+ },
+ {
+  "title": "C. Apparent success entirely assisted",
+  "r": {
+   "learner": "C-assisted-only",
+   "competency": "MATH.probability.classical",
+   "release": "cbse-ncert-mathematics-grade-10",
+   "steps": [
+    {
+     "n": 1,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:2,2,3,0",
+     "prompt": "A bag has 2 red, 2 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+     "response": "0.4",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "exposure",
+      "independent": "0/1",
+      "assisted": "0/0",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 2,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:2,2,3,0",
+     "prompt": "A bag has 2 red, 2 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+     "response": "2/7",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/1",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 3,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:8,7,3,1",
+     "prompt": "A bag has 8 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.",
+     "response": "0.6363636363636364",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/2",
+      "assisted": "1/1",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 4,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:8,7,3,1",
+     "prompt": "A bag has 8 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.",
+     "response": "7/18",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/2",
+      "assisted": "2/2",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 5,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:2,8,5,2",
+     "prompt": "A bag has 2 red, 8 blue and 5 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+     "response": "0.5",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/3",
+      "assisted": "2/2",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 6,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:2,8,5,2",
+     "prompt": "A bag has 2 red, 8 blue and 5 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+     "response": "1/3",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/3",
+      "assisted": "3/3",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 7,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:3,9,6,1",
+     "prompt": "A bag has 3 red, 9 blue and 6 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.",
+     "response": "1",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/4",
+      "assisted": "3/3",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 8,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:3,9,6,1",
+     "prompt": "A bag has 3 red, 9 blue and 6 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.",
+     "response": "1/2",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/4",
+      "assisted": "4/4",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 9,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:9,1,8,2",
+     "prompt": "A bag has 9 red, 1 blue and 8 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+     "response": "0.8",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/5",
+      "assisted": "4/4",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 10,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:9,1,8,2",
+     "prompt": "A bag has 9 red, 1 blue and 8 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+     "response": "4/9",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/5",
+      "assisted": "5/5",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 11,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:2,2,3,2",
+     "prompt": "A bag has 2 red, 2 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+     "response": "0.75",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/6",
+      "assisted": "5/5",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 12,
+     "path": "practice",
+     "phase": "practice",
+     "reason": "Practice this concept (the lesson page).",
+     "activity": "practice",
+     "question": "gen:anbag:2,2,3,2",
+     "prompt": "A bag has 2 red, 2 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+     "response": "3/7",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/6",
+      "assisted": "6/6",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 13,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:anbag:6,9,7,2",
+     "prompt": "A bag has 6 red, 9 blue and 7 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+     "response": "0.4666666666666667",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/7",
+      "assisted": "6/6",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 14,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:anbag:6,9,7,2",
+     "prompt": "A bag has 6 red, 9 blue and 7 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+     "response": "7/22",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/7",
+      "assisted": "7/7",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.35,
+      "asked": 0
+     }
+    },
+    {
+     "n": 15,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:anbag:9,2,4,1",
+     "prompt": "A bag has 9 red, 2 blue and 4 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.",
+     "response": "0.15384615384615385",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/8",
+      "assisted": "7/7",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 16,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:anbag:9,2,4,1",
+     "prompt": "A bag has 9 red, 2 blue and 4 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction.",
+     "response": "2/15",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/8",
+      "assisted": "8/8",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.29,
+      "asked": 1
+     }
+    },
+    {
+     "n": 17,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:anbag:1,4,3,2",
+     "prompt": "A bag has 1 red, 4 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+     "response": "0.6",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/9",
+      "assisted": "8/8",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 18,
+     "path": "module",
+     "phase": "explore",
+     "reason": "A short check to find the right starting point.",
+     "activity": "diagnostic",
+     "question": "gen:anbag:1,4,3,2",
+     "prompt": "A bag has 1 red, 4 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is green? Give a fraction.",
+     "response": "3/8",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/9",
+      "assisted": "9/9",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": null,
+      "confidence": 0.39,
+      "asked": 2
+     }
+    },
+    {
+     "n": 19,
+     "path": "module",
+     "phase": "chapter",
+     "reason": "Here is a short explanation, then practice.",
+     "teaching": {
+      "competency": "MATH.probability.classical",
+      "strategy": "out-of",
+      "kind": "conceptual",
+      "review": "machine-checked",
+      "sections": [
+       {
+        "title": "Out of how many?",
+        "label": "Another way",
+        "verified": null,
+        "violations": []
+       }
+      ]
+     },
+     "diagnosis": {
+      "result": "insufficient_evidence",
+      "confidence": 0.51,
+      "asked": 3
+     },
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/9",
+      "assisted": "9/9",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 20,
+     "path": "module",
+     "phase": "guided",
+     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+     "activity": "guided",
+     "question": "gen:anbag:9,7,3,0",
+     "prompt": "A bag has 9 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+     "response": "0.9",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/9",
+      "assisted": "9/10",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 21,
+     "path": "module",
+     "phase": "guided",
+     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+     "activity": "guided",
+     "question": "gen:anbag:9,7,3,0",
+     "prompt": "A bag has 9 red, 7 blue and 3 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+     "response": "9/19",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/9",
+      "assisted": "10/11",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "insufficient_evidence",
+      "confidence": 0.51,
+      "asked": 3
+     }
+    },
+    {
+     "n": 22,
+     "path": "module",
+     "phase": "check",
+     "reason": "Now one new question on your own, with no hints.",
+     "activity": "check",
+     "question": "gen:anbag:5,6,8,1:mc",
+     "prompt": "A bag has 5 red, 6 blue and 8 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction. Choose one.",
+     "response": "A",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/10",
+      "assisted": "10/11",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 23,
+     "path": "module",
+     "phase": "check",
+     "reason": "Now one new question on your own, with no hints.",
+     "activity": "check",
+     "question": "gen:anbag:5,6,8,1:mc",
+     "prompt": "A bag has 5 red, 6 blue and 8 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction. Choose one.",
+     "response": "C",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/10",
+      "assisted": "11/12",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "insufficient_evidence",
+      "confidence": 0.51,
+      "asked": 3
+     }
+    },
+    {
+     "n": 24,
+     "path": "module",
+     "phase": "chapter",
+     "reason": "That way did not lead to a right answer on your own, so here is a different explanation.",
+     "teaching": {
+      "competency": "MATH.probability.classical",
+      "strategy": "spot_the_mistake",
+      "kind": "conceptual",
+      "review": "machine-checked",
+      "sections": [
+       {
+        "title": "A common wrong answer",
+        "label": "Common mistake",
+        "verified": null,
+        "violations": []
+       }
+      ]
+     },
+     "diagnosis": {
+      "result": "insufficient_evidence",
+      "confidence": 0.51,
+      "asked": 3
+     },
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/10",
+      "assisted": "11/12",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 25,
+     "path": "module",
+     "phase": "guided",
+     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+     "activity": "guided",
+     "question": "gen:anbag:6,3,0,0",
+     "prompt": "A bag has 6 red, 3 blue balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+     "response": "2",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/10",
+      "assisted": "11/13",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 26,
+     "path": "module",
+     "phase": "guided",
+     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+     "activity": "guided",
+     "question": "gen:anbag:6,3,0,0",
+     "prompt": "A bag has 6 red, 3 blue balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+     "response": "2/3",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/10",
+      "assisted": "12/14",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "insufficient_evidence",
+      "confidence": 0.51,
+      "asked": 3
+     }
+    },
+    {
+     "n": 27,
+     "path": "module",
+     "phase": "check",
+     "reason": "Now one new question on your own, with no hints.",
+     "activity": "check",
+     "question": "gen:anbag:5,4,5,1:mc",
+     "prompt": "A bag has 5 red, 4 blue and 5 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction. Choose one.",
+     "response": "A",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/11",
+      "assisted": "12/14",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 28,
+     "path": "module",
+     "phase": "check",
+     "reason": "Now one new question on your own, with no hints.",
+     "activity": "check",
+     "question": "gen:anbag:5,4,5,1:mc",
+     "prompt": "A bag has 5 red, 4 blue and 5 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is blue? Give a fraction. Choose one.",
+     "response": "B",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/11",
+      "assisted": "13/15",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "insufficient_evidence",
+      "confidence": 0.51,
+      "asked": 3
+     }
+    },
+    {
+     "n": 29,
+     "path": "module",
+     "phase": "chapter",
+     "reason": "That way did not lead to a right answer on your own, so here is a different explanation.",
+     "teaching": {
+      "competency": "MATH.probability.classical",
+      "strategy": "worked_steps",
+      "kind": "procedural",
+      "review": "machine-checked",
+      "sections": [
+       {
+        "title": "Equally likely outcomes, step by step",
+        "label": "Worked example",
+        "verified": true,
+        "violations": []
+       }
+      ]
+     },
+     "diagnosis": {
+      "result": "insufficient_evidence",
+      "confidence": 0.51,
+      "asked": 3
+     },
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/11",
+      "assisted": "13/15",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 30,
+     "path": "module",
+     "phase": "guided",
+     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+     "activity": "guided",
+     "question": "gen:anbag:2,8,5,0",
+     "prompt": "A bag has 2 red, 8 blue and 5 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+     "response": "0.15384615384615385",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/11",
+      "assisted": "13/16",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 31,
+     "path": "module",
+     "phase": "guided",
+     "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+     "activity": "guided",
+     "question": "gen:anbag:2,8,5,0",
+     "prompt": "A bag has 2 red, 8 blue and 5 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+     "response": "2/15",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/11",
+      "assisted": "14/17",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "insufficient_evidence",
+      "confidence": 0.51,
+      "asked": 3
+     }
+    },
+    {
+     "n": 32,
+     "path": "module",
+     "phase": "check",
+     "reason": "Now one new question on your own, with no hints.",
+     "activity": "check",
+     "question": "gen:anbag:5,4,5,0",
+     "prompt": "A bag has 5 red, 4 blue and 5 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+     "response": "0.5555555555555556",
+     "hints": 0,
+     "grading": {
+      "verdict": "incorrect",
+      "reason": "incorrect.value",
+      "credit": false,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/12",
+      "assisted": "14/17",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 33,
+     "path": "module",
+     "phase": "check",
+     "reason": "Now one new question on your own, with no hints.",
+     "activity": "check",
+     "question": "gen:anbag:5,4,5,0",
+     "prompt": "A bag has 5 red, 4 blue and 5 green balls, all of the same size. One ball is taken out without looking. What is the probability that it is red? Give a fraction.",
+     "response": "5/14",
+     "hints": 1,
+     "grading": {
+      "verdict": "correct",
+      "reason": "correct.equal",
+      "credit": true,
+      "source": "verifier",
+      "methodExamined": false,
+      "firstError": null
+     },
+     "workingCheck": null,
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/12",
+      "assisted": "15/18",
+      "engine": "unavailable",
+      "retention": "none"
+     },
+     "diagnosis": {
+      "result": "insufficient_evidence",
+      "confidence": 0.51,
+      "asked": 3
+     }
+    },
+    {
+     "n": 34,
+     "path": "module",
+     "phase": "pause",
+     "reason": "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you.",
+     "diagnosis": {
+      "result": "insufficient_evidence",
+      "confidence": 0.51,
+      "asked": 3
+     },
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/12",
+      "assisted": "15/18",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 35,
+     "path": "module",
+     "phase": "pause (day +1)",
+     "reason": "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you.",
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/12",
+      "assisted": "15/18",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    },
+    {
+     "n": 36,
+     "path": "module",
+     "phase": "pause (day +8)",
+     "reason": "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you.",
+     "evidence": {
+      "competency": "MATH.probability.classical",
+      "status": "guided",
+      "independent": "0/12",
+      "assisted": "15/18",
+      "engine": "unavailable",
+      "retention": "none"
+     }
+    }
+   ],
+   "final": {
+    "competency": "MATH.probability.classical",
+    "status": "guided",
+    "independent": "0/12",
+    "assisted": "15/18",
+    "engine": "unavailable",
+    "retention": "none"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.euclid-algorithm",
+    "reason": "Next in Real Numbers.",
+    "paused": [
+     "MATH.probability.classical"
+    ]
+   },
+   "supports": [
+    "mandatory:MATH.probability.sample-space",
+    "mandatory:MATH.probability.experimental"
+   ]
+  }
+ }
+]

@@ -1,0 +1,2370 @@
+{
+ "schema": "syllabus@1",
+ "board": "cbse",
+ "boardName": "CBSE (NCERT textbooks)",
+ "grade": 4,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Maths Mela: Textbook of Mathematics for Grade 4",
+  "publisher": "NCERT",
+  "edition": "First Edition March 2025 (Chaitra 1947); Reprint 2026-27; ISBN 978-93-5729-703-5",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "textbook",
+   "title": "Maths Mela: Textbook of Mathematics for Grade 4 - prelims and contents",
+   "publisher": "NCERT",
+   "edition": "First Edition March 2025; Reprint 2026-27",
+   "academicYear": "2026-27",
+   "url": "https://www.ncert.nic.in/textbook/pdf/demm1ps.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "chapter list, edition"
+  },
+  {
+   "kind": "textbook",
+   "title": "Maths Mela Grade 4 chapter PDFs demm101-demm114",
+   "publisher": "NCERT",
+   "edition": "Reprint 2026-27",
+   "academicYear": "2026-27",
+   "url": "https://www.ncert.nic.in/textbook/pdf/demm101.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "section headings (chapters 1-8, 10-14; chapter 9 PDF robots-blocked)"
+  },
+  {
+   "kind": "textbook",
+   "title": "Maths Mela, Class 4 - audio book",
+   "publisher": "NCERT (CIET)",
+   "edition": "current",
+   "academicYear": "2026-27",
+   "url": "https://ciet.ncert.gov.in/audio-book/158",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check of chapter titles"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Class 4 Mathematics syllabus (split-up) 2026-27",
+   "publisher": "Directorate of Education, Govt. of NCT of Delhi",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://edustud.nic.in/edu/Syllabus_2026_27/4/4_math_english_2026_27.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "confirms chapter list for 2026-27; chapter topics and outcomes used to shape outcomes"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Month-wise split-up syllabus Classes III and IV (adapted from KVS HQ split-up)",
+   "publisher": "Kendriya Vidyalaya (school site on s3waas.gov.in)",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://cdnbbsr.s3waas.gov.in/s3kv029d694a6658ed18ddc82b9c5abe4d/uploads/2026/09/2026090381.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check of Class 3 and Class 4 chapter lists"
+  },
+  {
+   "kind": "learning-outcomes",
+   "title": "Learning Outcomes at the Elementary Stage",
+   "publisher": "NCERT",
+   "edition": "2017",
+   "academicYear": "2019-20 onward (adopted by CBSE circular Acad-05/2019)",
+   "url": "https://ncert.nic.in/pdf/publication/otherpublications/tilops101.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "intended for outcomes; could NOT be opened (robots-blocked) - outcomes written from chapter content and DoE/KVS split-ups"
+  },
+  {
+   "kind": "notification",
+   "title": "CBSE Circular Acad-05/2019: adoption of NCERT Learning Outcomes",
+   "publisher": "CBSE",
+   "edition": "18 Jan 2019",
+   "academicYear": "2019-20 onward",
+   "url": "https://www.cbseacademic.nic.in/web_material/Circulars/2019/05_Circular_2019.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "establishes NCERT learning outcomes as the CBSE reference for Classes I-VIII"
+  }
+ ],
+ "notes": [
+  "CBSE does not publish its own Classes 1-5 mathematics syllabus; CBSE schools follow the NCERT textbooks. The 2026-27 prescription was confirmed via official government split-up syllabi (Delhi Directorate of Education; KVS where available) and the NCERT reprint 2026-27 label.",
+  "NCERT's 'Learning Outcomes at the Elementary Stage' (tilops101.pdf) could not be opened (robots-blocked); outcomes are written in my own words from the chapter content and the official DoE/KVS split-up outcomes.",
+  "Outcomes are not copied from the textbook; questionTypes and difficulty are my judgement.",
+  "Textbook is a single annual volume; CBSE has no term split for these books, so term is null. School split-ups (DoE Delhi) divide chapters across mid-term and annual exams, which varies by school.",
+  "All 14 chapter titles verified on NCERT's contents page (demm1ps.pdf). Chapter 3 is 'Pattern Around Us' in the contents (CIET audio and the chapter page show 'Patterns Around Us'). Chapter 10 contents prints 'Elephants,Tigers, and Leopards' (missing space corrected).",
+  "Section headings were read through the fetch tool's text extraction/summary of each chapter PDF, not by viewing the page; capitalisation is as reported (some headings are printed in capitals). Recurring activity labels ('Let Us Do', 'Let Us Think', 'Let Us Solve', 'Discuss', 'Note for Teachers', 'Project Work', 'Do You Know?') are deliberately omitted.",
+  "Chapter 1 sections are incomplete: the extraction only covered pages 2, 5 and 11-15. The circles outcome (centre/radius/diameter) comes from the DoE split-up, not from a heading I saw.",
+  "Chapter 2: 'Boxy Buldings' is recorded as the extraction reported it ('sic'); it may be a printing or extraction error for 'Boxy Buildings'.",
+  "Chapter 9 (Equal Groups) PDF was robots-blocked: sections [] and outcomes based on DoE split-up (repeated addition, sharing, tables to 10x10).",
+  "Chapter 11: extraction reported a 'Complete the designs below' grouping containing 'Symmetry in shapes' and 'Games with a Mirror'; I listed only the latter two plus the other topical headings. 'Floor patterns and the catty wall' and the nature-walk project were reported as headings but omitted as uncertain.",
+  "Chapter 12: the chapter has untitled opening sections (calendar/leap year, a.m./p.m. and 24-hour time, clock reading); only the two printed headings are listed.",
+  "Chapter 14 PDF also contains the book's Learning Material Sheets (cut-outs, nets, fraction kit); those are not sections.",
+  "Chapter 14 bar-graph outcome comes from the DoE split-up; the chapter headings show tables and pictographs only."
+ ],
+ "chapters": [
+  {
+   "id": "cbse-g04-c01",
+   "number": 1,
+   "term": null,
+   "title": "Shapes Around Us",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c01-s01",
+     "title": "Right Angles"
+    },
+    {
+     "id": "cbse-g04-c01-s02",
+     "title": "Acute and Obtuse Angles"
+    },
+    {
+     "id": "cbse-g04-c01-s03",
+     "title": "Shapes with Straws"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c01-o01",
+     "statement": "Describe and classify 3D shapes by their faces, edges and corners and by flat or curved surfaces.",
+     "concepts": [
+      "faces edges corners",
+      "flat and curved surfaces"
+     ],
+     "questionTypes": [
+      "numeric",
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shape-properties",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shape-properties"
+     ]
+    },
+    {
+     "id": "cbse-g04-c01-o02",
+     "statement": "Identify right angles in objects and figures and check them with a folded-paper right-angle tool.",
+     "concepts": [
+      "right angle"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angles-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angles-intro"
+     ]
+    },
+    {
+     "id": "cbse-g04-c01-o03",
+     "statement": "Classify angles as acute, right or obtuse and draw each kind on a dot grid.",
+     "concepts": [
+      "acute",
+      "obtuse",
+      "right angle"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angles-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angles-intro"
+     ]
+    },
+    {
+     "id": "cbse-g04-c01-o04",
+     "statement": "Investigate which straw shapes are rigid and count right angles in triangles and quadrilaterals, recognising a square as a special rectangle.",
+     "concepts": [
+      "rigidity",
+      "square as rectangle"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shape-properties",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shape-properties"
+     ]
+    },
+    {
+     "id": "cbse-g04-c01-o05",
+     "statement": "Identify the centre, radius and diameter of a circle.",
+     "concepts": [
+      "circle",
+      "radius",
+      "diameter"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circles",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circles"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c02",
+   "number": 2,
+   "term": null,
+   "title": "Hide and Seek",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c02-s01",
+     "title": "WHERE ARE YOU HIDING?"
+    },
+    {
+     "id": "cbse-g04-c02-s02",
+     "title": "Boxy Buldings"
+    },
+    {
+     "id": "cbse-g04-c02-s03",
+     "title": "Cat Finds Jagat"
+    },
+    {
+     "id": "cbse-g04-c02-s04",
+     "title": "Grid Game"
+    },
+    {
+     "id": "cbse-g04-c02-s05",
+     "title": "Grid Game — Treasure Hunt"
+    },
+    {
+     "id": "cbse-g04-c02-s06",
+     "title": "Drone Around the School"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c02-o01",
+     "statement": "Match top, front and side views to objects and block buildings, and draw simple views.",
+     "concepts": [
+      "top view",
+      "front view",
+      "side view"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.solid-views",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.nets",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Views of block buildings (afview: squares seen from the top, front and side of a building of stacked cubes) and top/front views of solids (afnet) live in the nets competency; the outcome is mapped only to solid-views (Grade 8), whose family counts faces of prisms."
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.nets",
+      "MATH.geometry.solid-views"
+     ]
+    },
+    {
+     "id": "cbse-g04-c02-o02",
+     "statement": "Describe positions in a seating layout using rows, columns and ordinal words.",
+     "concepts": [
+      "rows and columns",
+      "ordinal position"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.positions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.maps-directions",
+       "name": "Locate positions and describe routes using grids, maps and directions",
+       "strand": "geometry",
+       "gradeRange": [
+        2,
+        5
+       ],
+       "prerequisites": [
+        "MATH.geometry.positions"
+       ],
+       "supports": [
+        "MATH.geometry.solid-views"
+       ],
+       "why": "MATH.geometry.positions covers relative position words only; grid locations, step-counted paths, map reading and compass directions have no entry."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.maps-directions",
+      "MATH.geometry.positions"
+     ]
+    },
+    {
+     "id": "cbse-g04-c02-o03",
+     "statement": "Locate objects on a grid from clues and describe paths with left/right/up/down moves, finding a shorter path.",
+     "concepts": [
+      "grid location",
+      "paths",
+      "shortest route"
+     ],
+     "questionTypes": [
+      "coordinate",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.maps-directions",
+       "name": "Locate positions and describe routes using grids, maps and directions",
+       "strand": "geometry",
+       "gradeRange": [
+        2,
+        5
+       ],
+       "prerequisites": [
+        "MATH.geometry.positions"
+       ],
+       "supports": [
+        "MATH.geometry.solid-views"
+       ],
+       "why": "MATH.geometry.positions covers relative position words only; grid locations, step-counted paths, map reading and compass directions have no entry."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.maps-directions"
+     ]
+    },
+    {
+     "id": "cbse-g04-c02-o04",
+     "statement": "Read a simple top-view map, identify landmarks and give route directions with turns.",
+     "concepts": [
+      "map reading",
+      "route directions"
+     ],
+     "questionTypes": [
+      "written-explanation",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.maps-directions",
+       "name": "Locate positions and describe routes using grids, maps and directions",
+       "strand": "geometry",
+       "gradeRange": [
+        2,
+        5
+       ],
+       "prerequisites": [
+        "MATH.geometry.positions"
+       ],
+       "supports": [
+        "MATH.geometry.solid-views"
+       ],
+       "why": "MATH.geometry.positions covers relative position words only; grid locations, step-counted paths, map reading and compass directions have no entry."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.maps-directions"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c03",
+   "number": 3,
+   "term": null,
+   "title": "Pattern Around Us",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c03-s01",
+     "title": "Let Us Count"
+    },
+    {
+     "id": "cbse-g04-c03-s02",
+     "title": "Patterns with Money"
+    },
+    {
+     "id": "cbse-g04-c03-s03",
+     "title": "Crayons Arrangement"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c03-o01",
+     "statement": "Count arranged collections efficiently by spotting equal groups.",
+     "concepts": [
+      "counting in groups"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.equal-groups",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.equal-groups"
+     ]
+    },
+    {
+     "id": "cbse-g04-c03-o02",
+     "statement": "Classify numbers as even or odd by pairing and by the last digit.",
+     "concepts": [
+      "even numbers",
+      "odd numbers"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.even-odd",
+       "name": "Classify numbers as even or odd",
+       "strand": "number",
+       "gradeRange": [
+        4,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.count-objects"
+       ],
+       "supports": [
+        "MATH.number.equal-groups"
+       ],
+       "why": "Parity (pairing, even/odd sums) is assessed from Grade 4 onward and has no existing entry."
+      }
+     ],
+     "mapped": [
+      "MATH.number.even-odd"
+     ]
+    },
+    {
+     "id": "cbse-g04-c03-o03",
+     "statement": "Find and describe patterns on a 1-100 number grid.",
+     "concepts": [
+      "number grid patterns"
+     ],
+     "questionTypes": [
+      "pattern",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.pattern-rules",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.pattern-rules"
+     ]
+    },
+    {
+     "id": "cbse-g04-c03-o04",
+     "statement": "Show the same amount of money with different combinations of notes and coins.",
+     "concepts": [
+      "money combinations"
+     ],
+     "questionTypes": [
+      "money",
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.money-totals",
+       "name": "Make and total amounts with notes and coins",
+       "strand": "measurement",
+       "gradeRange": [
+        1,
+        4
+       ],
+       "prerequisites": [
+        "MATH.measurement.money-coins",
+        "MATH.number.addition"
+       ],
+       "supports": [
+        "MATH.measurement.money-change"
+       ],
+       "why": "MATH.measurement.money-coins is recognition only and money-change is finding change; composing a given amount in different ways and totalling a purchase is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.money-totals"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c04",
+   "number": 4,
+   "term": null,
+   "title": "Thousands Around Us",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c04-s01",
+     "title": "1000s AROUND US"
+    },
+    {
+     "id": "cbse-g04-c04-s02",
+     "title": "My country"
+    },
+    {
+     "id": "cbse-g04-c04-s03",
+     "title": "Let Us Break Up One-Thousand"
+    },
+    {
+     "id": "cbse-g04-c04-s04",
+     "title": "Grouping and Regrouping"
+    },
+    {
+     "id": "cbse-g04-c04-s05",
+     "title": "Numbers Beyond 1000 (One Thousand)"
+    },
+    {
+     "id": "cbse-g04-c04-s06",
+     "title": "Number Line"
+    },
+    {
+     "id": "cbse-g04-c04-s07",
+     "title": "Find Me!"
+    },
+    {
+     "id": "cbse-g04-c04-s08",
+     "title": "COMPARING NUMBERS"
+    },
+    {
+     "id": "cbse-g04-c04-s09",
+     "title": "CHALLENGE!"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c04-o01",
+     "statement": "Read and write four-digit numbers in numerals, words and expanded form using a Th-H-T-O table.",
+     "concepts": [
+      "four-digit numbers",
+      "expanded form",
+      "number names"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.thousands",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.thousands"
+     ]
+    },
+    {
+     "id": "cbse-g04-c04-o02",
+     "statement": "Group and regroup ones, tens and hundreds, and find how much more is needed to make 1000.",
+     "concepts": [
+      "regrouping",
+      "complements to 1000"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.thousands",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.hundreds",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Regrouping such as 14 tens as 1 hundred 4 tens (numbers built from 10 to 19 tens or ones) is abreg; making 1000 is already ad1000."
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.hundreds",
+      "MATH.number.thousands"
+     ]
+    },
+    {
+     "id": "cbse-g04-c04-o03",
+     "statement": "Locate and compare four-digit numbers on number lines with different scales.",
+     "concepts": [
+      "number line scales"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.number-line",
+       "name": "Locate and compare numbers on a number line",
+       "strand": "number",
+       "gradeRange": [
+        2,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.compare-numbers"
+       ],
+       "supports": [
+        "MATH.number.place-value-tens",
+        "MATH.number.hundreds"
+       ],
+       "why": "No existing competency covers placing numbers on a number line with different scales or using it to count on and back."
+      }
+     ],
+     "mapped": [
+      "MATH.number.number-line"
+     ]
+    },
+    {
+     "id": "cbse-g04-c04-o04",
+     "statement": "Compare and order four-digit numbers using < and > by comparing place values from the left.",
+     "concepts": [
+      "comparison symbols",
+      "ordering"
+     ],
+     "questionTypes": [
+      "true-false",
+      "ordered-list"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.large-numbers",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compare-numbers",
+      "MATH.number.large-numbers"
+     ]
+    },
+    {
+     "id": "cbse-g04-c04-o05",
+     "statement": "Count how many whole numbers lie between two given four-digit numbers.",
+     "concepts": [
+      "counting between numbers"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.thousands",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.number-line",
+       "name": "Locate and compare numbers on a number line",
+       "strand": "number",
+       "gradeRange": [
+        2,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.compare-numbers"
+       ],
+       "supports": [
+        "MATH.number.place-value-tens",
+        "MATH.number.hundreds"
+       ],
+       "why": "No existing competency covers placing numbers on a number line with different scales or using it to count on and back."
+      }
+     ],
+     "mapped": [
+      "MATH.number.number-line",
+      "MATH.number.thousands"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c05",
+   "number": 5,
+   "term": null,
+   "title": "Sharing and Measuring",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c05-s01",
+     "title": "PARTS AND WHOLES"
+    },
+    {
+     "id": "cbse-g04-c05-s02",
+     "title": "Many Ways to Make Halves and Quarters"
+    },
+    {
+     "id": "cbse-g04-c05-s03",
+     "title": "DING DONG BELL!!"
+    },
+    {
+     "id": "cbse-g04-c05-s04",
+     "title": "DREAM DOSA DESIGNER!!"
+    },
+    {
+     "id": "cbse-g04-c05-s05",
+     "title": "Let Us Find Fractions in Our Surroundings"
+    },
+    {
+     "id": "cbse-g04-c05-s06",
+     "title": "My Flower Garden"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c05-o01",
+     "statement": "Divide a shape into halves or quarters in several ways and check that the parts are equal.",
+     "concepts": [
+      "halves",
+      "quarters",
+      "equal parts"
+     ],
+     "questionTypes": [
+      "fraction",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-models",
+       "fit": "exact"
+      },
+      {
+       "id": "MLY.frac.same-whole",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-models",
+      "MLY.frac.same-whole"
+     ]
+    },
+    {
+     "id": "cbse-g04-c05-o02",
+     "statement": "Name unit fractions that come from sharing a whole equally and explain that more sharers give smaller shares.",
+     "concepts": [
+      "unit fractions",
+      "comparing unit fractions"
+     ],
+     "questionTypes": [
+      "fraction",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-models",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.fraction-comparison",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-comparison",
+      "MATH.number.fraction-models"
+     ]
+    },
+    {
+     "id": "cbse-g04-c05-o03",
+     "statement": "Build fractions such as 3/8 from unit fractions and add unit fractions with the same denominator.",
+     "concepts": [
+      "non-unit fractions",
+      "adding like fractions"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-add-like",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.fraction-models",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-add-like",
+      "MATH.number.fraction-models"
+     ]
+    },
+    {
+     "id": "cbse-g04-c05-o04",
+     "statement": "Find a fraction of a collection, such as one-quarter of 12 objects.",
+     "concepts": [
+      "fraction of a collection"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.fraction-of-collection",
+       "name": "Find a fraction of a collection",
+       "strand": "number",
+       "gradeRange": [
+        3,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.sharing",
+        "MATH.number.unit-fractions"
+       ],
+       "supports": [
+        "MATH.number.fraction-models"
+       ],
+       "why": "Existing fraction entries model fractions of a continuous whole; finding a fraction of a set of discrete objects is a separate skill."
+      }
+     ],
+     "mapped": [
+      "MATH.number.fraction-of-collection"
+     ]
+    },
+    {
+     "id": "cbse-g04-c05-o05",
+     "statement": "Recognise equal fractions made by repeated folding, such as 1/3 and 2/6.",
+     "concepts": [
+      "equivalent fractions"
+     ],
+     "questionTypes": [
+      "fraction",
+      "true-false"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.equivalent-fractions",
+       "fit": "partial"
+      },
+      {
+       "id": "MLY.frac.check-equal",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.equivalent-fractions",
+      "MLY.frac.check-equal"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c06",
+   "number": 6,
+   "term": null,
+   "title": "Measuring Length",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c06-s01",
+     "title": "Measuring is Fun"
+    },
+    {
+     "id": "cbse-g04-c06-s02",
+     "title": "Long Jump"
+    },
+    {
+     "id": "cbse-g04-c06-s03",
+     "title": "Guess the Length"
+    },
+    {
+     "id": "cbse-g04-c06-s04",
+     "title": "Measuring Small Things"
+    },
+    {
+     "id": "cbse-g04-c06-s05",
+     "title": "Metre and Centimetres"
+    },
+    {
+     "id": "cbse-g04-c06-s06",
+     "title": "Fencing and Lacing"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c06-o01",
+     "statement": "Estimate lengths in metres, half metres and quarter metres and check by measuring.",
+     "concepts": [
+      "metre",
+      "half and quarter metre",
+      "estimation"
+     ],
+     "questionTypes": [
+      "estimation",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.standard-length",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.standard-length",
+      "MATH.reasoning.estimate-check"
+     ]
+    },
+    {
+     "id": "cbse-g04-c06-o02",
+     "statement": "Measure small objects in centimetres with a ruler.",
+     "concepts": [
+      "centimetre",
+      "ruler"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.standard-length",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.standard-length"
+     ]
+    },
+    {
+     "id": "cbse-g04-c06-o03",
+     "statement": "Convert between metres and centimetres and compare lengths written as m and cm.",
+     "concepts": [
+      "1 m = 100 cm",
+      "mixed units"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.length-conversion",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.length-conversion"
+     ]
+    },
+    {
+     "id": "cbse-g04-c06-o04",
+     "statement": "Find the perimeter of a closed figure by measuring its boundary and draw shapes with a given perimeter on a dot grid.",
+     "concepts": [
+      "perimeter"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.measurement.perimeter-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.perimeter-intro"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c07",
+   "number": 7,
+   "term": null,
+   "title": "The Cleanest Village",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c07-s01",
+     "title": "My School Trip"
+    },
+    {
+     "id": "cbse-g04-c07-s02",
+     "title": "Daisy and Lou Go Shopping"
+    },
+    {
+     "id": "cbse-g04-c07-s03",
+     "title": "A Strange Puzzle!"
+    },
+    {
+     "id": "cbse-g04-c07-s04",
+     "title": "Add Up"
+    },
+    {
+     "id": "cbse-g04-c07-s05",
+     "title": "Subtract It"
+    },
+    {
+     "id": "cbse-g04-c07-s06",
+     "title": "Number Pair Hunt"
+    },
+    {
+     "id": "cbse-g04-c07-s07",
+     "title": "The Missing Digits"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c07-o01",
+     "statement": "Add two- and three-digit numbers with regrouping and check by estimating.",
+     "concepts": [
+      "column addition",
+      "regrouping"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.multi-digit-add-subtract",
+       "name": "Add and subtract multi-digit numbers with regrouping",
+       "strand": "number",
+       "gradeRange": [
+        3,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.addition-regroup",
+        "MATH.number.subtraction-regroup"
+       ],
+       "supports": [
+        "MATH.number.thousands",
+        "MATH.number.large-numbers"
+       ],
+       "why": "Existing regrouping entries are for two-digit numbers (Grade 2); there is no entry for 3- to 5-digit column or strategy-based addition/subtraction."
+      }
+     ],
+     "mapped": [
+      "MATH.number.multi-digit-add-subtract"
+     ]
+    },
+    {
+     "id": "cbse-g04-c07-o02",
+     "statement": "Subtract two- and three-digit numbers with regrouping and check by estimating.",
+     "concepts": [
+      "column subtraction",
+      "regrouping"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.multi-digit-add-subtract",
+       "name": "Add and subtract multi-digit numbers with regrouping",
+       "strand": "number",
+       "gradeRange": [
+        3,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.addition-regroup",
+        "MATH.number.subtraction-regroup"
+       ],
+       "supports": [
+        "MATH.number.thousands",
+        "MATH.number.large-numbers"
+       ],
+       "why": "Existing regrouping entries are for two-digit numbers (Grade 2); there is no entry for 3- to 5-digit column or strategy-based addition/subtraction."
+      }
+     ],
+     "mapped": [
+      "MATH.number.multi-digit-add-subtract",
+      "MATH.reasoning.estimate-check"
+     ]
+    },
+    {
+     "id": "cbse-g04-c07-o03",
+     "statement": "Solve shopping problems involving costs, amounts paid, balance and combinations of items within Rs 1000.",
+     "concepts": [
+      "money problems",
+      "change",
+      "combinations"
+     ],
+     "questionTypes": [
+      "money",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.money-change",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.multi-step",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.money-change",
+      "MATH.reasoning.multi-step"
+     ]
+    },
+    {
+     "id": "cbse-g04-c07-o04",
+     "statement": "Find missing digits in addition and subtraction and solve number-placement puzzles.",
+     "concepts": [
+      "missing digits",
+      "magic triangle"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.missing-number",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.puzzle-strategy",
+       "name": "Reason systematically to solve puzzles and strategy games",
+       "strand": "reasoning",
+       "gradeRange": [
+        4,
+        5
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.number.addition"
+       ],
+       "why": "Puzzles and two-player strategy games (e.g. NIM, magic triangles, river crossing) recur across books; no existing reasoning entry targets systematic search or winning-position analysis."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.missing-number",
+      "MATH.reasoning.puzzle-strategy"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c08",
+   "number": 8,
+   "term": null,
+   "title": "Weigh it, Pour it",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c08-s01",
+     "title": "Fun at Vegetable Market!"
+    },
+    {
+     "id": "cbse-g04-c08-s02",
+     "title": "Weighing Machines"
+    },
+    {
+     "id": "cbse-g04-c08-s03",
+     "title": "Boxes of Sweet"
+    },
+    {
+     "id": "cbse-g04-c08-s04",
+     "title": "Measuring Capacity"
+    },
+    {
+     "id": "cbse-g04-c08-s05",
+     "title": "Water Conservation in Everyday Life"
+    },
+    {
+     "id": "cbse-g04-c08-s06",
+     "title": "Containers Used for Measuring Capacity"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c08-o01",
+     "statement": "Estimate and measure weights in kilograms and grams.",
+     "concepts": [
+      "kilogram",
+      "gram",
+      "estimation"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "estimation"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.standard-mass",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.standard-mass"
+     ]
+    },
+    {
+     "id": "cbse-g04-c08-o02",
+     "statement": "Relate 1 kg to parts such as 500 g, 250 g and 100 g and find how many parts make a kilogram.",
+     "concepts": [
+      "fractions of a kilogram"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.unit-conversions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.unit-conversions"
+     ]
+    },
+    {
+     "id": "cbse-g04-c08-o03",
+     "statement": "Measure and compare capacities in litres and millilitres against 1 litre.",
+     "concepts": [
+      "litre",
+      "millilitre"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.capacity",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.capacity"
+     ]
+    },
+    {
+     "id": "cbse-g04-c08-o04",
+     "statement": "Solve problems with weight and capacity, such as water lost from a dripping tap over a day or week.",
+     "concepts": [
+      "measurement word problems"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "measurement-with-unit"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.multi-step",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.measurement.compute-with-measures",
+       "name": "Calculate with measured quantities in mixed units",
+       "strand": "measurement",
+       "gradeRange": [
+        4,
+        6
+       ],
+       "prerequisites": [
+        "MATH.measurement.unit-conversions",
+        "MATH.number.multi-digit-add-subtract"
+       ],
+       "supports": [
+        "MATH.number.multi-multiplication",
+        "MATH.number.long-division"
+       ],
+       "why": "Conversion entries exist, but adding, subtracting, multiplying and dividing lengths, weights and capacities given in mixed units (e.g. 2 kg 300 g) has no entry."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.compute-with-measures",
+      "MATH.reasoning.multi-step"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c09",
+   "number": 9,
+   "term": null,
+   "title": "Equal Groups",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c09-o01",
+     "statement": "Represent multiplication as repeated addition and as arrays of equal rows.",
+     "concepts": [
+      "repeated addition",
+      "arrays"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.equal-groups",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.equal-groups"
+     ]
+    },
+    {
+     "id": "cbse-g04-c09-o02",
+     "statement": "Recall multiplication facts up to 10 x 10.",
+     "concepts": [
+      "times tables to 10"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.multiplication-tables",
+       "fit": "exact"
+      },
+      {
+       "id": "MLY.mult.facts-6-9",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.multiplication-tables",
+      "MLY.mult.facts-6-9"
+     ]
+    },
+    {
+     "id": "cbse-g04-c09-o03",
+     "statement": "Divide by equal sharing and grouping and relate division to multiplication.",
+     "concepts": [
+      "division",
+      "inverse of multiplication"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.sharing",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.division-remainders",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.division-remainders",
+      "MATH.number.sharing"
+     ]
+    },
+    {
+     "id": "cbse-g04-c09-o04",
+     "statement": "Solve word problems on equal groups by choosing multiplication or division.",
+     "concepts": [
+      "word problems"
+     ],
+     "questionTypes": [
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.operation-choice",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.operation-choice"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c10",
+   "number": 10,
+   "term": null,
+   "title": "Elephants, Tigers, and Leopards",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c10-s01",
+     "title": "NIM Game (2 Player Game)"
+    },
+    {
+     "id": "cbse-g04-c10-s02",
+     "title": "Addition Chart"
+    },
+    {
+     "id": "cbse-g04-c10-s03",
+     "title": "Reverse and Add"
+    },
+    {
+     "id": "cbse-g04-c10-s04",
+     "title": "How Many Animals?"
+    },
+    {
+     "id": "cbse-g04-c10-s05",
+     "title": "More or Less?"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c10-o01",
+     "statement": "Add four-digit numbers with regrouping in census-style word problems.",
+     "concepts": [
+      "four-digit addition"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.multi-digit-add-subtract",
+       "name": "Add and subtract multi-digit numbers with regrouping",
+       "strand": "number",
+       "gradeRange": [
+        3,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.addition-regroup",
+        "MATH.number.subtraction-regroup"
+       ],
+       "supports": [
+        "MATH.number.thousands",
+        "MATH.number.large-numbers"
+       ],
+       "why": "Existing regrouping entries are for two-digit numbers (Grade 2); there is no entry for 3- to 5-digit column or strategy-based addition/subtraction."
+      }
+     ],
+     "mapped": [
+      "MATH.number.multi-digit-add-subtract"
+     ]
+    },
+    {
+     "id": "cbse-g04-c10-o02",
+     "statement": "Subtract four-digit numbers with regrouping to find increases and decreases.",
+     "concepts": [
+      "four-digit subtraction"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.multi-digit-add-subtract",
+       "name": "Add and subtract multi-digit numbers with regrouping",
+       "strand": "number",
+       "gradeRange": [
+        3,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.addition-regroup",
+        "MATH.number.subtraction-regroup"
+       ],
+       "supports": [
+        "MATH.number.thousands",
+        "MATH.number.large-numbers"
+       ],
+       "why": "Existing regrouping entries are for two-digit numbers (Grade 2); there is no entry for 3- to 5-digit column or strategy-based addition/subtraction."
+      }
+     ],
+     "mapped": [
+      "MATH.number.multi-digit-add-subtract"
+     ]
+    },
+    {
+     "id": "cbse-g04-c10-o03",
+     "statement": "Round to the nearest ten or hundred to estimate an answer before calculating.",
+     "concepts": [
+      "rounding",
+      "estimation"
+     ],
+     "questionTypes": [
+      "estimation",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.rounding",
+       "name": "Round numbers to the nearest ten, hundred or thousand",
+       "strand": "number",
+       "gradeRange": [
+        4,
+        7
+       ],
+       "prerequisites": [
+        "MATH.number.place-value-tens"
+       ],
+       "supports": [
+        "MATH.number.number-line",
+        "MATH.reasoning.estimate-check"
+       ],
+       "why": "MATH.reasoning.estimate-check covers checking answers by estimation but not the rounding procedure itself."
+      }
+     ],
+     "mapped": [
+      "MATH.number.rounding",
+      "MATH.reasoning.estimate-check"
+     ]
+    },
+    {
+     "id": "cbse-g04-c10-o04",
+     "statement": "Explore patterns in an addition chart and in reverse-and-add sums, including odd/even rows.",
+     "concepts": [
+      "addition chart",
+      "reverse and add"
+     ],
+     "questionTypes": [
+      "pattern",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.pattern-rules",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.even-odd",
+       "name": "Classify numbers as even or odd",
+       "strand": "number",
+       "gradeRange": [
+        4,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.count-objects"
+       ],
+       "supports": [
+        "MATH.number.equal-groups"
+       ],
+       "why": "Parity (pairing, even/odd sums) is assessed from Grade 4 onward and has no existing entry."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.pattern-rules",
+      "MATH.number.even-odd"
+     ]
+    },
+    {
+     "id": "cbse-g04-c10-o05",
+     "statement": "Find winning positions in a two-player adding game (NIM).",
+     "concepts": [
+      "strategy game",
+      "winning positions"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.puzzle-strategy",
+       "name": "Reason systematically to solve puzzles and strategy games",
+       "strand": "reasoning",
+       "gradeRange": [
+        4,
+        5
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.number.addition"
+       ],
+       "why": "Puzzles and two-player strategy games (e.g. NIM, magic triangles, river crossing) recur across books; no existing reasoning entry targets systematic search or winning-position analysis."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.puzzle-strategy"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c11",
+   "number": 11,
+   "term": null,
+   "title": "Fun with Symmetry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c11-s01",
+     "title": "Ink Design"
+    },
+    {
+     "id": "cbse-g04-c11-s02",
+     "title": "Making a paper airplane"
+    },
+    {
+     "id": "cbse-g04-c11-s03",
+     "title": "Holes and Cuts"
+    },
+    {
+     "id": "cbse-g04-c11-s04",
+     "title": "Symmetry in shapes"
+    },
+    {
+     "id": "cbse-g04-c11-s05",
+     "title": "Games with a Mirror"
+    },
+    {
+     "id": "cbse-g04-c11-s06",
+     "title": "Tiling the Tiles"
+    },
+    {
+     "id": "cbse-g04-c11-s07",
+     "title": "Tiles at the Tile Shop"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c11-o01",
+     "statement": "Find and count lines of symmetry in shapes and designs.",
+     "concepts": [
+      "line of symmetry"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.symmetry-lines"
+     ]
+    },
+    {
+     "id": "cbse-g04-c11-o02",
+     "statement": "Predict fold-and-cut designs and complete figures so they are symmetrical about a line.",
+     "concepts": [
+      "completing symmetric figures",
+      "reflection"
+     ],
+     "questionTypes": [
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.symmetry-lines"
+     ]
+    },
+    {
+     "id": "cbse-g04-c11-o03",
+     "statement": "Describe mirror images of letters, digits and words.",
+     "concepts": [
+      "mirror image"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.symmetry-lines"
+     ]
+    },
+    {
+     "id": "cbse-g04-c11-o04",
+     "statement": "Identify the repeating unit in a tiling and extend it without gaps or overlaps using slides, flips and turns.",
+     "concepts": [
+      "tiling",
+      "slide flip turn"
+     ],
+     "questionTypes": [
+      "pattern",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shape-tiling",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shape-tiling"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c12",
+   "number": 12,
+   "term": null,
+   "title": "Ticking Clocks and Turning Calendar",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c12-s01",
+     "title": "How many hours in a day?"
+    },
+    {
+     "id": "cbse-g04-c12-s02",
+     "title": "Hours and minutes"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c12-o01",
+     "statement": "Use a calendar to find days in a month, identify leap years, write dates as DD/MM/YYYY and find ages and durations in days.",
+     "concepts": [
+      "calendar",
+      "leap year",
+      "date format"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.calendar",
+       "name": "Read and use a calendar",
+       "strand": "measurement",
+       "gradeRange": [
+        1,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.count-objects"
+       ],
+       "supports": [
+        "MATH.measurement.time-order"
+       ],
+       "why": "No existing entry covers days/weeks/months, finding dates, leap years or counting days on a calendar."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.calendar"
+     ]
+    },
+    {
+     "id": "cbse-g04-c12-o02",
+     "statement": "Convert times between the 12-hour (a.m./p.m.) and 24-hour formats.",
+     "concepts": [
+      "24-hour clock",
+      "a.m. and p.m."
+     ],
+     "questionTypes": [
+      "time"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.24-hour-clock",
+       "name": "Convert between 12-hour and 24-hour time",
+       "strand": "measurement",
+       "gradeRange": [
+        4,
+        5
+       ],
+       "prerequisites": [
+        "MATH.measurement.clock"
+       ],
+       "supports": [
+        "MATH.measurement.elapsed-time"
+       ],
+       "why": "No existing entry covers a.m./p.m. and 24-hour time."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.24-hour-clock"
+     ]
+    },
+    {
+     "id": "cbse-g04-c12-o03",
+     "statement": "Calculate elapsed time in hours and minutes.",
+     "concepts": [
+      "elapsed time"
+     ],
+     "questionTypes": [
+      "time",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.elapsed-time",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.elapsed-time"
+     ]
+    },
+    {
+     "id": "cbse-g04-c12-o04",
+     "statement": "Read an analogue clock to the minute and relate hours, half hours and quarter hours to minutes.",
+     "concepts": [
+      "clock reading",
+      "quarter hour"
+     ],
+     "questionTypes": [
+      "time",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.clock",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.measurement.time-unit-conversion",
+       "name": "Convert between hours, minutes and seconds",
+       "strand": "measurement",
+       "gradeRange": [
+        3,
+        5
+       ],
+       "prerequisites": [
+        "MATH.measurement.clock",
+        "MATH.number.multiplication-tables"
+       ],
+       "supports": [
+        "MATH.measurement.elapsed-time"
+       ],
+       "why": "MATH.measurement.unit-conversions is for metric units; time units are non-decimal and have no entry."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.clock",
+      "MATH.measurement.time-unit-conversion"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c13",
+   "number": 13,
+   "term": null,
+   "title": "The Transport Museum",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c13-s01",
+     "title": "Mystery Matrix"
+    },
+    {
+     "id": "cbse-g04-c13-s02",
+     "title": "Constructing Tables"
+    },
+    {
+     "id": "cbse-g04-c13-s03",
+     "title": "Making tables by splitting into equal groups"
+    },
+    {
+     "id": "cbse-g04-c13-s04",
+     "title": "Multiples of 10"
+    },
+    {
+     "id": "cbse-g04-c13-s05",
+     "title": "A Day at the Transport Museum"
+    },
+    {
+     "id": "cbse-g04-c13-s06",
+     "title": "Dividing by 10 and 100"
+    },
+    {
+     "id": "cbse-g04-c13-s07",
+     "title": "Multiples of 100"
+    },
+    {
+     "id": "cbse-g04-c13-s08",
+     "title": "Chinnu's Coins"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c13-o01",
+     "statement": "Build new multiplication tables (such as x14, x15) by splitting, doubling and halving known facts.",
+     "concepts": [
+      "derived facts",
+      "doubling and halving",
+      "distributive splitting"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MLY.mult.derive",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MLY.mult.derive"
+     ]
+    },
+    {
+     "id": "cbse-g04-c13-o02",
+     "statement": "Multiply by 10, 100 and their multiples using place value.",
+     "concepts": [
+      "multiplying by 10 and 100"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.multiply-divide-powers-of-ten",
+       "name": "Multiply and divide by 10, 100 and 1000",
+       "strand": "number",
+       "gradeRange": [
+        4,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.thousands",
+        "MATH.number.multiplication-tables"
+       ],
+       "supports": [
+        "MATH.number.multi-multiplication"
+       ],
+       "why": "No existing entry covers the place-value effect of multiplying or dividing by 10, 100 and 1000 and by their multiples."
+      }
+     ],
+     "mapped": [
+      "MATH.number.multiply-divide-powers-of-ten"
+     ]
+    },
+    {
+     "id": "cbse-g04-c13-o03",
+     "statement": "Multiply two-digit numbers using partial products.",
+     "concepts": [
+      "partial products",
+      "two-digit multiplication"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.multi-multiplication",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.multi-multiplication"
+     ]
+    },
+    {
+     "id": "cbse-g04-c13-o04",
+     "statement": "Divide by 10, 100 and by small numbers, finding quotient and remainder.",
+     "concepts": [
+      "division",
+      "remainders"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.division-remainders",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.long-division",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.multiply-divide-powers-of-ten",
+       "name": "Multiply and divide by 10, 100 and 1000",
+       "strand": "number",
+       "gradeRange": [
+        4,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.thousands",
+        "MATH.number.multiplication-tables"
+       ],
+       "supports": [
+        "MATH.number.multi-multiplication"
+       ],
+       "why": "No existing entry covers the place-value effect of multiplying or dividing by 10, 100 and 1000 and by their multiples."
+      }
+     ],
+     "mapped": [
+      "MATH.number.division-remainders",
+      "MATH.number.long-division",
+      "MATH.number.multiply-divide-powers-of-ten"
+     ]
+    },
+    {
+     "id": "cbse-g04-c13-o05",
+     "statement": "Solve ticket and money problems that need multiplication.",
+     "concepts": [
+      "multiplication word problems"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "money"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.multi-step",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.multi-step"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g04-c14",
+   "number": 14,
+   "term": null,
+   "title": "Data Handling",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g04-c14-s01",
+     "title": "Bal Mela"
+    },
+    {
+     "id": "cbse-g04-c14-s02",
+     "title": "Colourful Golas"
+    },
+    {
+     "id": "cbse-g04-c14-s03",
+     "title": "Chess or Cricket"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g04-c14-o01",
+     "statement": "Collect data with a survey and organise it with tally marks in a frequency table.",
+     "concepts": [
+      "survey",
+      "tally",
+      "frequency table"
+     ],
+     "questionTypes": [
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.tables",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.tables"
+     ]
+    },
+    {
+     "id": "cbse-g04-c14-o02",
+     "statement": "Read and complete pictographs and tables and find totals and the largest category.",
+     "concepts": [
+      "pictographs",
+      "tables"
+     ],
+     "questionTypes": [
+      "data-table",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.pictographs",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.pictographs"
+     ]
+    },
+    {
+     "id": "cbse-g04-c14-o03",
+     "statement": "Interpret a two-way table, such as children who play only one game, both or neither.",
+     "concepts": [
+      "two-way table"
+     ],
+     "questionTypes": [
+      "data-table",
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.tables",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.tables"
+     ]
+    },
+    {
+     "id": "cbse-g04-c14-o04",
+     "statement": "Represent data in a simple bar graph and read it.",
+     "concepts": [
+      "bar graph"
+     ],
+     "questionTypes": [
+      "data-table",
+      "graph-sketch"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.bar-charts",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.bar-charts"
+     ]
+    }
+   ]
+  }
+ ]
+}

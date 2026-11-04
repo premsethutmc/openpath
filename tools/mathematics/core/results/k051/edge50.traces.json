@@ -1,0 +1,1337 @@
+[
+ {
+  "id": "e00",
+  "text": "x+5=x+12",
+  "outcome": "no-solution",
+  "reason": "reduces to 5 = 12, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract x from both sides",
+    "to": "x+5-x=x+12-x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "5=12"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e01",
+  "text": "-7*x+8=-7*x-1",
+  "outcome": "no-solution",
+  "reason": "reduces to 8 = -1, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-(7*x)+8=-(7*x)-1"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(7*x) from both sides",
+    "to": "-(7*x)+8-(-(7*x))=-(7*x)-1-(-(7*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "8=-1"
+   }
+  ],
+  "stats": {
+   "visited": 3,
+   "generated": 5,
+   "duplicates": 0,
+   "depth": 3,
+   "capped": false
+  }
+ },
+ {
+  "id": "e02",
+  "text": "4*x+2=4*x+6",
+  "outcome": "no-solution",
+  "reason": "reduces to 2 = 6, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 4*x from both sides",
+    "to": "4*x+2-4*x=4*x+6-4*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "2=6"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e03",
+  "text": "9*x-8=9*x-17",
+  "outcome": "no-solution",
+  "reason": "reduces to -8 = -17, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 9*x from both sides",
+    "to": "9*x-8-9*x=9*x-17-9*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-8=-17"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e04",
+  "text": "6*x-12=6*x-10",
+  "outcome": "no-solution",
+  "reason": "reduces to -12 = -10, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 6*x from both sides",
+    "to": "6*x-12-6*x=6*x-10-6*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-12=-10"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e05",
+  "text": "5*x-12=5*x-15",
+  "outcome": "no-solution",
+  "reason": "reduces to -12 = -15, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 5*x from both sides",
+    "to": "5*x-12-5*x=5*x-15-5*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-12=-15"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e06",
+  "text": "x+14=x+22",
+  "outcome": "no-solution",
+  "reason": "reduces to 14 = 22, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract x from both sides",
+    "to": "x+14-x=x+22-x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "14=22"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e07",
+  "text": "-5*x-11=-5*x-14",
+  "outcome": "no-solution",
+  "reason": "reduces to -11 = -14, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-(5*x)-11=-(5*x)-14"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(5*x) from both sides",
+    "to": "-(5*x)-11-(-(5*x))=-(5*x)-14-(-(5*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "-11=-14"
+   }
+  ],
+  "stats": {
+   "visited": 3,
+   "generated": 5,
+   "duplicates": 0,
+   "depth": 3,
+   "capped": false
+  }
+ },
+ {
+  "id": "e08",
+  "text": "x-2=x+6",
+  "outcome": "no-solution",
+  "reason": "reduces to -2 = 6, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract x from both sides",
+    "to": "x-2-x=x+6-x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-2=6"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e09",
+  "text": "2*x+9=2*x+17",
+  "outcome": "no-solution",
+  "reason": "reduces to 9 = 17, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 2*x from both sides",
+    "to": "2*x+9-2*x=2*x+17-2*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "9=17"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e10",
+  "text": "-9*x-11=-9*x-4",
+  "outcome": "no-solution",
+  "reason": "reduces to -11 = -4, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-(9*x)-11=-(9*x)-4"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(9*x) from both sides",
+    "to": "-(9*x)-11-(-(9*x))=-(9*x)-4-(-(9*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "-11=-4"
+   }
+  ],
+  "stats": {
+   "visited": 3,
+   "generated": 5,
+   "duplicates": 0,
+   "depth": 3,
+   "capped": false
+  }
+ },
+ {
+  "id": "e11",
+  "text": "-3*x-8=-3*x+1",
+  "outcome": "no-solution",
+  "reason": "reduces to -8 = 1, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-(3*x)-8=-(3*x)+1"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(3*x) from both sides",
+    "to": "-(3*x)-8-(-(3*x))=-(3*x)+1-(-(3*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "-8=1"
+   }
+  ],
+  "stats": {
+   "visited": 3,
+   "generated": 5,
+   "duplicates": 0,
+   "depth": 3,
+   "capped": false
+  }
+ },
+ {
+  "id": "e12",
+  "text": "-6*x+9=-6*x+6",
+  "outcome": "no-solution",
+  "reason": "reduces to 9 = 6, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-(6*x)+9=-(6*x)+6"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(6*x) from both sides",
+    "to": "-(6*x)+9-(-(6*x))=-(6*x)+6-(-(6*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "9=6"
+   }
+  ],
+  "stats": {
+   "visited": 3,
+   "generated": 5,
+   "duplicates": 0,
+   "depth": 3,
+   "capped": false
+  }
+ },
+ {
+  "id": "e13",
+  "text": "4*x-3=4*x-10",
+  "outcome": "no-solution",
+  "reason": "reduces to -3 = -10, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 4*x from both sides",
+    "to": "4*x-3-4*x=4*x-10-4*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-3=-10"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e14",
+  "text": "9*x-6=9*x-7",
+  "outcome": "no-solution",
+  "reason": "reduces to -6 = -7, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 9*x from both sides",
+    "to": "9*x-6-9*x=9*x-7-9*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-6=-7"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e15",
+  "text": "8*x-12=8*x-4",
+  "outcome": "no-solution",
+  "reason": "reduces to -12 = -4, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 8*x from both sides",
+    "to": "8*x-12-8*x=8*x-4-8*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-12=-4"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e16",
+  "text": "6*x-13=6*x-5",
+  "outcome": "no-solution",
+  "reason": "reduces to -13 = -5, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 6*x from both sides",
+    "to": "6*x-13-6*x=6*x-5-6*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-13=-5"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e17",
+  "text": "-4*x+9=-4*x+16",
+  "outcome": "no-solution",
+  "reason": "reduces to 9 = 16, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-(4*x)+9=-(4*x)+16"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(4*x) from both sides",
+    "to": "-(4*x)+9-(-(4*x))=-(4*x)+16-(-(4*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "9=16"
+   }
+  ],
+  "stats": {
+   "visited": 3,
+   "generated": 5,
+   "duplicates": 0,
+   "depth": 3,
+   "capped": false
+  }
+ },
+ {
+  "id": "e18",
+  "text": "6*x-13=6*x-9",
+  "outcome": "no-solution",
+  "reason": "reduces to -13 = -9, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 6*x from both sides",
+    "to": "6*x-13-6*x=6*x-9-6*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-13=-9"
+   }
+  ],
+  "stats": {
+   "visited": 2,
+   "generated": 4,
+   "duplicates": 0,
+   "depth": 2,
+   "capped": false
+  }
+ },
+ {
+  "id": "e19",
+  "text": "-2*x-14=-2*x-21",
+  "outcome": "no-solution",
+  "reason": "reduces to -14 = -21, which is false for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-(2*x)-14=-(2*x)-21"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(2*x) from both sides",
+    "to": "-(2*x)-14-(-(2*x))=-(2*x)-21-(-(2*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "-14=-21"
+   }
+  ],
+  "stats": {
+   "visited": 3,
+   "generated": 5,
+   "duplicates": 0,
+   "depth": 3,
+   "capped": false
+  }
+ },
+ {
+  "id": "e20",
+  "text": "-8*(x-9)=-8*x+72",
+  "outcome": "identity",
+  "reason": "both sides equal for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-8*(x-9)=-(8*x)+72"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "-8*x--8*9=-(8*x)+72"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine coefficient)",
+    "to": "-(8*x)+72=-(8*x)+72"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(8*x) from both sides",
+    "to": "-(8*x)+72-(-(8*x))=-(8*x)+72-(-(8*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "72=72"
+   }
+  ],
+  "stats": {
+   "visited": 5,
+   "generated": 6,
+   "duplicates": 0,
+   "depth": 5,
+   "capped": false
+  }
+ },
+ {
+  "id": "e21",
+  "text": "-5*(x+5)=-5*x-25",
+  "outcome": "identity",
+  "reason": "both sides equal for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-5*(x+5)=-(5*x)-25"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "-5*x+-5*5=-(5*x)-25"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine coefficient)",
+    "to": "-(5*x)-25=-(5*x)-25"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(5*x) from both sides",
+    "to": "-(5*x)-25-(-(5*x))=-(5*x)-25-(-(5*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "-25=-25"
+   }
+  ],
+  "stats": {
+   "visited": 5,
+   "generated": 6,
+   "duplicates": 0,
+   "depth": 5,
+   "capped": false
+  }
+ },
+ {
+  "id": "e22",
+  "text": "-7*(x-6)=-7*x+42",
+  "outcome": "identity",
+  "reason": "both sides equal for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-7*(x-6)=-(7*x)+42"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "-7*x--7*6=-(7*x)+42"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine coefficient)",
+    "to": "-(7*x)+42=-(7*x)+42"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(7*x) from both sides",
+    "to": "-(7*x)+42-(-(7*x))=-(7*x)+42-(-(7*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "42=42"
+   }
+  ],
+  "stats": {
+   "visited": 5,
+   "generated": 6,
+   "duplicates": 0,
+   "depth": 5,
+   "capped": false
+  }
+ },
+ {
+  "id": "e23",
+  "text": "-2*(x-10)=-2*x+20",
+  "outcome": "identity",
+  "reason": "both sides equal for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-2*(x-10)=-(2*x)+20"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "-2*x--2*10=-(2*x)+20"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine coefficient)",
+    "to": "-(2*x)+20=-(2*x)+20"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(2*x) from both sides",
+    "to": "-(2*x)+20-(-(2*x))=-(2*x)+20-(-(2*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "20=20"
+   }
+  ],
+  "stats": {
+   "visited": 5,
+   "generated": 6,
+   "duplicates": 0,
+   "depth": 5,
+   "capped": false
+  }
+ },
+ {
+  "id": "e24",
+  "text": "-6*(x-9)=-6*x+54",
+  "outcome": "identity",
+  "reason": "both sides equal for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-6*(x-9)=-(6*x)+54"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "-6*x--6*9=-(6*x)+54"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine coefficient)",
+    "to": "-(6*x)+54=-(6*x)+54"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(6*x) from both sides",
+    "to": "-(6*x)+54-(-(6*x))=-(6*x)+54-(-(6*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "54=54"
+   }
+  ],
+  "stats": {
+   "visited": 5,
+   "generated": 6,
+   "duplicates": 0,
+   "depth": 5,
+   "capped": false
+  }
+ },
+ {
+  "id": "e25",
+  "text": "4*(x-7)=4*x-28",
+  "outcome": "identity",
+  "reason": "both sides equal for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "4*x-4*7=4*x-28"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "4*x-28=4*x-28"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 4*x from both sides",
+    "to": "4*x-28-4*x=4*x-28-4*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-28=-28"
+   }
+  ],
+  "stats": {
+   "visited": 4,
+   "generated": 5,
+   "duplicates": 0,
+   "depth": 4,
+   "capped": false
+  }
+ },
+ {
+  "id": "e26",
+  "text": "9*(x+4)=9*x+36",
+  "outcome": "identity",
+  "reason": "both sides equal for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "9*x+9*4=9*x+36"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "9*x+36=9*x+36"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 9*x from both sides",
+    "to": "9*x+36-9*x=9*x+36-9*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "36=36"
+   }
+  ],
+  "stats": {
+   "visited": 4,
+   "generated": 5,
+   "duplicates": 0,
+   "depth": 4,
+   "capped": false
+  }
+ },
+ {
+  "id": "e27",
+  "text": "-7*(x-2)=-7*x+14",
+  "outcome": "identity",
+  "reason": "both sides equal for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "-7*(x-2)=-(7*x)+14"
+   },
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "-7*x--7*2=-(7*x)+14"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers, combine coefficient)",
+    "to": "-(7*x)+14=-(7*x)+14"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract -(7*x) from both sides",
+    "to": "-(7*x)+14-(-(7*x))=-(7*x)+14-(-(7*x))"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine coefficient, combine like terms)",
+    "to": "14=14"
+   }
+  ],
+  "stats": {
+   "visited": 5,
+   "generated": 6,
+   "duplicates": 0,
+   "depth": 5,
+   "capped": false
+  }
+ },
+ {
+  "id": "e28",
+  "text": "3*(x-8)=3*x-24",
+  "outcome": "identity",
+  "reason": "both sides equal for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "3*x-3*8=3*x-24"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "3*x-24=3*x-24"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 3*x from both sides",
+    "to": "3*x-24-3*x=3*x-24-3*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "-24=-24"
+   }
+  ],
+  "stats": {
+   "visited": 4,
+   "generated": 5,
+   "duplicates": 0,
+   "depth": 4,
+   "capped": false
+  }
+ },
+ {
+  "id": "e29",
+  "text": "7*(x+12)=7*x+84",
+  "outcome": "identity",
+  "reason": "both sides equal for every x",
+  "answer": null,
+  "steps": [
+   {
+    "rule": "expand",
+    "explain": "multiply the factor into each term of the bracket",
+    "to": "7*x+7*12=7*x+84"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (evaluate numbers)",
+    "to": "7*x+84=7*x+84"
+   },
+   {
+    "rule": "subtract-both-sides",
+    "explain": "subtract 7*x from both sides",
+    "to": "7*x+84-7*x=7*x+84-7*x"
+   },
+   {
+    "rule": "simplify",
+    "explain": "simplify both sides (combine like terms)",
+    "to": "84=84"
+   }
+  ],
+  "stats": {
+   "visited": 4,
+   "generated": 5,
+   "duplicates": 0,
+   "depth": 4,
+   "capped": false
+  }
+ },
+ {
+  "id": "e30",
+  "text": "1*x^2=47",
+  "outcome": "unsupported",
+  "reason": "nonlinear: x raised to a power (not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e31",
+  "text": "x^2-1=-29",
+  "outcome": "unsupported",
+  "reason": "nonlinear: x raised to a power (not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e32",
+  "text": "x*x-4*x=0",
+  "outcome": "unsupported",
+  "reason": "nonlinear: x times x (not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e33",
+  "text": "x^2+1=30",
+  "outcome": "unsupported",
+  "reason": "nonlinear: x raised to a power (not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e34",
+  "text": "x*(x-6)=-8",
+  "outcome": "unsupported",
+  "reason": "nonlinear: x times x (not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e35",
+  "text": "x*x-2*x=0",
+  "outcome": "unsupported",
+  "reason": "nonlinear: x times x (not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e36",
+  "text": "x^2-2=24",
+  "outcome": "unsupported",
+  "reason": "nonlinear: x raised to a power (not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e37",
+  "text": "3*x^2=2",
+  "outcome": "unsupported",
+  "reason": "nonlinear: x raised to a power (not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e38",
+  "text": "x^2+8=19",
+  "outcome": "unsupported",
+  "reason": "nonlinear: x raised to a power (not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e39",
+  "text": "x*x-1*x=0",
+  "outcome": "unsupported",
+  "reason": "nonlinear: x times x (not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e40",
+  "text": "(5*x)/x=6+1",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e41",
+  "text": "2/(x+2)=2",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e42",
+  "text": "3/(x+5)=2",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e43",
+  "text": "(9*x)/x=8+1",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e44",
+  "text": "(9*x)/x=1+1",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e45",
+  "text": "(7*x)/x=9+1",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e46",
+  "text": "1/x+4=9",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e47",
+  "text": "1/x+9=8",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e48",
+  "text": "1/x+9=9",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e49",
+  "text": "3/x=3",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e50",
+  "text": "(9*x)/x=5+1",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e51",
+  "text": "(8*x)/x=3+1",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e52",
+  "text": "6/(x+2)=2",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e53",
+  "text": "9/x=1",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e54",
+  "text": "1/x+1=7",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ },
+ {
+  "id": "e55",
+  "text": "1/x+1=6",
+  "outcome": "unsupported",
+  "reason": "variable in a denominator (needs excluded values; not in the move set)",
+  "answer": null,
+  "steps": [],
+  "stats": {
+   "visited": 0,
+   "generated": 0,
+   "duplicates": 0,
+   "depth": 0,
+   "capped": false
+  }
+ }
+]

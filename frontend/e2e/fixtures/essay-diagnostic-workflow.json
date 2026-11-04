@@ -1,0 +1,366 @@
+{
+ "note": "SYNTHETIC test fixture for the essay-to-diagnostic workflow (Karthik, Grade 8, Chithirai Festival). Invented by the OpenPath development team; Karthik is not a real child. These are the outputs a mocked model returns in deterministic tests: they are not model outputs and say nothing about any model's accuracy.",
+ "essays": {
+  "karthik": {
+   "title": "The Chithirai Festival in Madurai",
+   "prompt": "Describe a festival in your town.",
+   "text": "Every April, my family travels to Madurai for the Chithirai Festival. The city become very crowded because thousands of peoples come from many village nearby. On the first day we watched the celestial wedding of Meenakshi and Sundareswarar at the temple. Many womans wore bright silk sarees, and the childrens carried small flags. The streets was full of stalls selling sweets, bangle and wooden toys. My favourite moment is when Kallazhagar enters the Vaigai river on a golden horse. My father lifted my little brother onto his shoulders so he could see. We bought two box of jasmine flowers for my grandmother. At night the lights on the temple towers looks beautiful. I think the festival teaches us to respect our traditions and our neighbours.",
+   "marker": "Chithirai"
+  },
+  "second": {
+   "title": "Our sports day",
+   "prompt": "Write about a day at school you enjoyed.",
+   "text": "Last week our school held its sports day on the big ground. All the classes marched past the stage in neat lines. My friend Divya won two medal in the relay and the long jump. The teachers gave every runner a bottle of water and some biscuits. In the evening the principal thanked the parents for coming. I enjoyed the day because everyone cheered for each other.",
+   "marker": "sports day"
+  }
+ },
+ "observations": {
+  "karthik": [
+   {
+    "competency": "EN.GRM.NOUN.plurals_countability",
+    "kind": "error",
+    "quote": "thousands of peoples",
+    "explanation": "People is already plural, so it takes no -s.",
+    "confidence": "high",
+    "verification": "required",
+    "correction": "thousands of people",
+    "misconception": "regularised_plural"
+   },
+   {
+    "competency": "EN.GRM.NOUN.plurals_countability",
+    "kind": "error",
+    "quote": "many village",
+    "explanation": "After many, a countable noun is plural: many villages.",
+    "confidence": "high",
+    "verification": "required",
+    "correction": "many villages"
+   },
+   {
+    "competency": "EN.GRM.NOUN.plurals_countability",
+    "kind": "error",
+    "quote": "Many womans",
+    "explanation": "Woman has an irregular plural, women, with no -s.",
+    "confidence": "high",
+    "verification": "required",
+    "correction": "Many women",
+    "misconception": "regularised_plural"
+   },
+   {
+    "competency": "EN.GRM.NOUN.plurals_countability",
+    "kind": "error",
+    "quote": "the childrens",
+    "explanation": "Children is already plural, so it takes no -s.",
+    "confidence": "high",
+    "verification": "required",
+    "correction": "the children",
+    "misconception": "regularised_plural"
+   },
+   {
+    "competency": "EN.GRM.NOUN.plurals_countability",
+    "kind": "error",
+    "quote": "bangle and wooden toys",
+    "explanation": "In a list of things sold, bangle should be plural like sweets and toys.",
+    "confidence": "high",
+    "verification": "required",
+    "correction": "bangles and wooden toys"
+   },
+   {
+    "competency": "EN.GRM.NOUN.plurals_countability",
+    "kind": "error",
+    "quote": "two box of jasmine",
+    "explanation": "After two, the noun is plural, and box adds -es: boxes.",
+    "confidence": "high",
+    "verification": "required",
+    "correction": "two boxes of jasmine"
+   },
+   {
+    "competency": "EN.GRM.VERB.sva",
+    "kind": "error",
+    "quote": "The city become",
+    "explanation": "The city is singular, so the present verb needs -s: becomes.",
+    "confidence": "high",
+    "verification": "required",
+    "correction": "The city becomes",
+    "misconception": "third_person_s"
+   },
+   {
+    "competency": "EN.GRM.VERB.sva",
+    "kind": "error",
+    "quote": "The streets was",
+    "explanation": "The subject streets is plural, so the verb is were.",
+    "confidence": "high",
+    "verification": "required",
+    "correction": "The streets were"
+   },
+   {
+    "competency": "EN.GRM.VERB.sva",
+    "kind": "error",
+    "quote": "the temple towers looks",
+    "explanation": "The subject is the lights (plural), so the verb is look.",
+    "confidence": "high",
+    "verification": "required",
+    "correction": "the temple towers look",
+    "misconception": "attraction_error"
+   },
+   {
+    "competency": "EN.VOC.USE.word_choice",
+    "kind": "strength",
+    "quote": "celestial wedding",
+    "explanation": "Celestial is a precise, vivid word for the divine wedding.",
+    "confidence": "medium",
+    "verification": "not_required"
+   }
+  ],
+  "second": [
+   {
+    "competency": "EN.GRM.NOUN.plurals_countability",
+    "kind": "error",
+    "quote": "won two medal",
+    "explanation": "After two, the noun is plural: two medals.",
+    "confidence": "high",
+    "verification": "required",
+    "correction": "won two medals"
+   }
+  ]
+ },
+ "questions": {
+  "EN.GRM.NOUN.plurals_countability": [
+   [
+    {
+     "format": "choice",
+     "stem": "During the festival, three ___ sold flower garlands near the temple gate.",
+     "options": [
+      "woman",
+      "women",
+      "womans",
+      "womens"
+     ],
+     "answer": 1,
+     "correct_sentence": "During the festival, three women sold flower garlands near the temple gate.",
+     "explanation": "Woman has an irregular plural: women, with no -s added.",
+     "band": 4.5,
+     "misconceptions": {
+      "2": "regularised_plural",
+      "3": "regularised_plural"
+     }
+    },
+    {
+     "format": "typed",
+     "stem": "Write the plural of leaf: In autumn, the ___ in our school garden turn brown.",
+     "answers": [
+      "leaves"
+     ],
+     "correct_sentence": "Write the plural of leaf: In autumn, the leaves in our school garden turn brown.",
+     "explanation": "Leaf ends in f, so its plural is leaves, not leafs.",
+     "band": 4.75,
+     "misconceptions": {
+      "leafs": "regularised_plural"
+     }
+    },
+    {
+     "format": "choice",
+     "stem": "There were so many ___ at the bus stand that we waited for an hour.",
+     "options": [
+      "people",
+      "peoples",
+      "person"
+     ],
+     "answer": 0,
+     "correct_sentence": "There were so many people at the bus stand that we waited for an hour.",
+     "explanation": "People is already plural, so it takes no -s: so many people.",
+     "band": 5,
+     "misconceptions": {
+      "1": "regularised_plural"
+     }
+    },
+    {
+     "format": "choice",
+     "stem": "My grandmother asked me to buy two ___ of sweets for the guests.",
+     "options": [
+      "box",
+      "boxs",
+      "boxes"
+     ],
+     "answer": 2,
+     "correct_sentence": "My grandmother asked me to buy two boxes of sweets for the guests.",
+     "explanation": "After two the noun is plural, and nouns ending in x add -es: boxes.",
+     "band": 4
+    },
+    {
+     "format": "choice",
+     "stem": "We could not carry all our ___ onto the crowded train.",
+     "options": [
+      "luggages",
+      "luggage",
+      "luggage's"
+     ],
+     "answer": 1,
+     "correct_sentence": "We could not carry all our luggage onto the crowded train.",
+     "explanation": "Luggage is uncountable, so it has no plural form: all our luggage.",
+     "band": 5.75,
+     "misconceptions": {
+      "0": "plural_uncountable"
+     }
+    }
+   ],
+   [
+    {
+     "format": "choice",
+     "stem": "The farmer counted the ___ in his field before sunset.",
+     "options": [
+      "sheep",
+      "sheeps",
+      "sheepes"
+     ],
+     "answer": 0,
+     "correct_sentence": "The farmer counted the sheep in his field before sunset.",
+     "explanation": "Sheep has the same form for one and many: the sheep.",
+     "band": 5.25,
+     "misconceptions": {
+      "1": "regularised_plural"
+     }
+    },
+    {
+     "format": "choice",
+     "stem": "How ___ water should we carry for the school trip?",
+     "options": [
+      "many",
+      "much",
+      "a few"
+     ],
+     "answer": 1,
+     "correct_sentence": "How much water should we carry for the school trip?",
+     "explanation": "Water cannot be counted, so we use much: how much water.",
+     "band": 4.5,
+     "misconceptions": {
+      "0": "much_many_confusion"
+     }
+    },
+    {
+     "format": "typed",
+     "stem": "Write the plural of knife: Please wash the ___ after lunch.",
+     "answers": [
+      "knives"
+     ],
+     "correct_sentence": "Write the plural of knife: Please wash the knives after lunch.",
+     "explanation": "Knife ends in -fe, which changes to -ves: knives.",
+     "band": 4.75,
+     "misconceptions": {
+      "knifes": "regularised_plural"
+     }
+    },
+    {
+     "format": "choice",
+     "stem": "The museum guide gave us a lot of ___ about the old coins.",
+     "options": [
+      "informations",
+      "information",
+      "an information"
+     ],
+     "answer": 1,
+     "correct_sentence": "The museum guide gave us a lot of information about the old coins.",
+     "explanation": "Information is uncountable: a lot of information, never informations.",
+     "band": 5.5,
+     "misconceptions": {
+      "0": "plural_uncountable"
+     }
+    },
+    {
+     "format": "choice",
+     "stem": "Both ___ in our class wear glasses.",
+     "options": [
+      "twin",
+      "twins",
+      "twinses"
+     ],
+     "answer": 1,
+     "correct_sentence": "Both twins in our class wear glasses.",
+     "explanation": "Both means two, so the noun is plural: twins.",
+     "band": 3.75
+    }
+   ]
+  ],
+  "EN.GRM.VERB.sva": [
+   [
+    {
+     "format": "choice",
+     "stem": "The box of crayons ___ on the teacher's desk.",
+     "options": [
+      "is",
+      "are",
+      "were"
+     ],
+     "answer": 0,
+     "correct_sentence": "The box of crayons is on the teacher's desk.",
+     "explanation": "The subject is box (singular), so the verb is is.",
+     "band": 5.5,
+     "misconceptions": {
+      "1": "attraction_error",
+      "2": "attraction_error"
+     }
+    },
+    {
+     "format": "choice",
+     "stem": "My cousin ___ to school by bicycle every day.",
+     "options": [
+      "go",
+      "goes",
+      "going"
+     ],
+     "answer": 1,
+     "correct_sentence": "My cousin goes to school by bicycle every day.",
+     "explanation": "A singular subject in the present takes the -s form: goes.",
+     "band": 4,
+     "misconceptions": {
+      "0": "third_person_s"
+     }
+    },
+    {
+     "format": "choice",
+     "stem": "Each of the players ___ a new jersey for the match.",
+     "options": [
+      "has",
+      "have",
+      "having"
+     ],
+     "answer": 0,
+     "correct_sentence": "Each of the players has a new jersey for the match.",
+     "explanation": "Each is singular, so the verb is has.",
+     "band": 6.25,
+     "misconceptions": {
+      "1": "attraction_error"
+     }
+    },
+    {
+     "format": "choice",
+     "stem": "The lights on the festival street ___ bright at night.",
+     "options": [
+      "look",
+      "looks",
+      "looking"
+     ],
+     "answer": 0,
+     "correct_sentence": "The lights on the festival street look bright at night.",
+     "explanation": "The subject lights is plural, so the verb is look.",
+     "band": 5.75,
+     "misconceptions": {
+      "1": "attraction_error"
+     }
+    },
+    {
+     "format": "typed",
+     "stem": "Write the correct form of play: Ravi ___ cricket with his friends on Sundays.",
+     "answers": [
+      "plays"
+     ],
+     "correct_sentence": "Write the correct form of play: Ravi plays cricket with his friends on Sundays.",
+     "explanation": "Ravi is one person, so the verb takes -s: plays.",
+     "band": 4.25,
+     "misconceptions": {
+      "play": "third_person_s"
+     }
+    }
+   ]
+  ]
+ }
+}

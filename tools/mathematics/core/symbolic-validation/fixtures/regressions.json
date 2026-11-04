@@ -1,0 +1,164 @@
+[
+ {
+  "id": "leading-minus-1",
+  "seed": 1,
+  "class": "engine defect",
+  "problem": "Factorise -a^3+z^3",
+  "lines": [
+   "-(a^3-z^3)"
+  ],
+  "note": "verb stripping removed a leading '-' (regex [:,-]); fixed in both engines",
+  "oracle": {
+   "steps": [
+    "valid"
+   ],
+   "first_invalid": null,
+   "final": {
+    "missing": false,
+    "narrowed": false
+   }
+  }
+ },
+ {
+  "id": "leading-minus-2",
+  "seed": 1,
+  "class": "engine defect",
+  "problem": "Expand -3*x - 2-(2*x)",
+  "lines": [
+   "3x-2-2x"
+  ],
+  "note": "false accept: the leading minus was dropped",
+  "oracle": {
+   "steps": [
+    "invalid"
+   ],
+   "first_invalid": 1,
+   "final": {
+    "missing": false,
+    "narrowed": false
+   }
+  }
+ },
+ {
+  "id": "poly-restriction-stmt",
+  "seed": 1,
+  "class": "engine defect",
+  "problem": "Simplify (b^2-4)/(b-2)",
+  "lines": [
+   "b+2",
+   "b-2 ≠ 0"
+  ],
+  "note": "univariate engine only read 'x ≠ number'; polynomial restrictions are now read",
+  "oracle": {
+   "steps": [
+    "conditional",
+    "statement"
+   ],
+   "first_invalid": null,
+   "final": {
+    "missing": false,
+    "narrowed": false
+   }
+  }
+ },
+ {
+  "id": "stray-letter",
+  "seed": 1,
+  "class": "engine gap",
+  "problem": "Expand (z+1)^2",
+  "lines": [
+   "z^2+2*z*c+1"
+  ],
+  "note": "a letter not in the problem was refused; now decided (not an identity)",
+  "oracle": {
+   "steps": [
+    "invalid"
+   ],
+   "first_invalid": 1,
+   "final": {
+    "missing": false,
+    "narrowed": false
+   }
+  }
+ },
+ {
+  "id": "symexp-exp-cancels-1",
+  "seed": 2,
+  "class": "engine defect",
+  "problem": "Simplify (x^2)^(n+1)/(x^2)^(n)",
+  "lines": [
+   "(x^2)^(n+1-(n))"
+  ],
+  "note": "exponent written with a variable: base != 0 required on both sides",
+  "oracle": {
+   "steps": [
+    "valid"
+   ],
+   "first_invalid": null,
+   "final": {
+    "missing": false,
+    "narrowed": false
+   }
+  }
+ },
+ {
+  "id": "symexp-exp-cancels-2",
+  "seed": 2,
+  "class": "engine defect",
+  "problem": "Simplify ((x+1))^(m+2)/((x+1))^(m)",
+  "lines": [
+   "((x+1))^(m+2-(m))"
+  ],
+  "note": "same",
+  "oracle": {
+   "steps": [
+    "valid"
+   ],
+   "first_invalid": null,
+   "final": {
+    "missing": false,
+    "narrowed": false
+   }
+  }
+ },
+ {
+  "id": "witness-a-minus-3-2",
+  "seed": 3,
+  "class": "oracle defect",
+  "problem": "Simplify (2*a + 3*z + 3)/(2*a + 3*z + 3)",
+  "lines": [
+   "(2a + 3)/(2a + 3)"
+  ],
+  "note": "grid lacked a=-3/2; see ORACLE_CORRECTIONS.md C1",
+  "oracle": {
+   "steps": [
+    "invalid"
+   ],
+   "first_invalid": 1,
+   "final": {
+    "missing": false,
+    "narrowed": false
+   }
+  }
+ },
+ {
+  "id": "sqfree-base",
+  "seed": 1,
+  "class": "engine defect",
+  "problem": "Simplify (a^2+2*a*b+b^2)^n/(a+b)^(2*n)",
+  "lines": [
+   "1"
+  ],
+  "note": "square-free decomposition of the base so (a+b)^(2n) and ((a+b)^2)^n agree",
+  "oracle": {
+   "steps": [
+    "conditional"
+   ],
+   "first_invalid": null,
+   "final": {
+    "missing": true,
+    "narrowed": false
+   }
+  }
+ }
+]

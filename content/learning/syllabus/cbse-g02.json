@@ -1,0 +1,1213 @@
+{
+ "schema": "syllabus@1",
+ "board": "cbse",
+ "boardName": "CBSE (NCERT textbooks)",
+ "grade": 2,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Joyful Mathematics (Textbook of Mathematics for Grade 2)",
+  "publisher": "NCERT",
+  "edition": "NCERT reprint 2026-27 assumed (first edition 2023 per my knowledge; not verified)",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "textbook",
+   "title": "Joyful Mathematics, Class 2 - audio book chapter list",
+   "publisher": "NCERT (CIET)",
+   "edition": "current",
+   "academicYear": "2026-27",
+   "url": "https://ciet.ncert.gov.in/audio-book/121",
+   "accessed": "2026-10-19",
+   "used_for": "chapter list (English)"
+  },
+  {
+   "kind": "textbook",
+   "title": "Anandmay Ganit (Hindi edition), Class 2 - audio book",
+   "publisher": "NCERT (CIET)",
+   "edition": "current",
+   "academicYear": "2026-27",
+   "url": "https://ciet.ncert.gov.in/audio-book/122",
+   "accessed": "2026-10-19",
+   "used_for": "cross-check of chapter count and order"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Class 2 Mathematics syllabus (split-up) 2026-27",
+   "publisher": "Directorate of Education, Govt. of NCT of Delhi",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://edustud.nic.in/edu/Syllabus_2026_27/2/2_math_english_2026_27.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "confirms chapter list for 2026-27; chapter topics and outcomes used to shape outcomes"
+  },
+  {
+   "kind": "learning-outcomes",
+   "title": "Learning Outcomes at the Elementary Stage",
+   "publisher": "NCERT",
+   "edition": "2017",
+   "academicYear": "2019-20 onward (adopted by CBSE circular Acad-05/2019)",
+   "url": "https://ncert.nic.in/pdf/publication/otherpublications/tilops101.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "intended for outcomes; could NOT be opened (robots-blocked) - outcomes written from chapter content and DoE/KVS split-ups"
+  },
+  {
+   "kind": "notification",
+   "title": "CBSE Circular Acad-05/2019: adoption of NCERT Learning Outcomes",
+   "publisher": "CBSE",
+   "edition": "18 Jan 2019",
+   "academicYear": "2019-20 onward",
+   "url": "https://www.cbseacademic.nic.in/web_material/Circulars/2019/05_Circular_2019.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "establishes NCERT learning outcomes as the CBSE reference for Classes I-VIII"
+  }
+ ],
+ "notes": [
+  "CBSE does not publish its own Classes 1-5 mathematics syllabus; CBSE schools follow the NCERT textbooks. The 2026-27 prescription was confirmed via official government split-up syllabi (Delhi Directorate of Education; KVS where available) and the NCERT reprint 2026-27 label.",
+  "NCERT's 'Learning Outcomes at the Elementary Stage' (tilops101.pdf) could not be opened (robots-blocked); outcomes are written in my own words from the chapter content and the official DoE/KVS split-up outcomes.",
+  "Outcomes are not copied from the textbook; questionTypes and difficulty are my judgement.",
+  "Textbook is a single annual volume; CBSE has no term split for these books, so term is null. School split-ups (DoE Delhi) divide chapters across mid-term and annual exams, which varies by school.",
+  "Chapter titles verified on NCERT's CIET audio-book page and the DoE Delhi 2026-27 syllabus. Chapter 4 is listed on CIET as 'Shadow Story (Togalu)'; recorded as 'Shadow Story' (DoE also prints 'Shadow Story' with 'Togalu' in brackets) - whether '(Togalu)' is part of the printed title is unverified.",
+  "DoE Delhi prints chapter 3 before chapter 2 in its teaching sequence; the book's numbering (CIET) is used here.",
+  "Edition: NCERT prelims PDF (bejm1ps.pdf) could not be opened; reprint year and first-edition year unverified.",
+  "Chapter 9 (Which Season is it?): the 'directions' outcome comes from DoE teaching points only; unverified in the book.",
+  "Section lists are [] for this grade: NCERT chapter PDFs for this book returned robots-blocked errors to the fetch tool, and no other official source lists sub-sections. Nothing was invented."
+ ],
+ "chapters": [
+  {
+   "id": "cbse-g02-c01",
+   "number": 1,
+   "term": null,
+   "title": "A Day at the Beach",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g02-c01-o01",
+     "statement": "Count collections up to 99 by first making groups of ten.",
+     "concepts": [
+      "grouping in tens",
+      "counting to 99"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.place-value-tens",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.place-value-tens"
+     ]
+    },
+    {
+     "id": "cbse-g02-c01-o02",
+     "statement": "Count forwards and backwards and skip count in tens from any number.",
+     "concepts": [
+      "forward and backward counting",
+      "skip counting"
+     ],
+     "questionTypes": [
+      "numeric",
+      "pattern"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.number-patterns",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.number-patterns"
+     ]
+    },
+    {
+     "id": "cbse-g02-c01-o03",
+     "statement": "Read and write numerals up to 99 and state the value of each digit.",
+     "concepts": [
+      "place value",
+      "tens and ones"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.place-value-tens",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.place-value-tens"
+     ]
+    },
+    {
+     "id": "cbse-g02-c01-o04",
+     "statement": "Compare two quantities or numbers and say which is more or less.",
+     "concepts": [
+      "comparison"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compare-numbers"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g02-c02",
+   "number": 2,
+   "term": null,
+   "title": "Shapes Around Us",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g02-c02-o01",
+     "statement": "Identify cubes, cuboids, cylinders, cones and spheres among everyday objects.",
+     "concepts": [
+      "3D shapes",
+      "naming solids"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "set"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shapes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shapes"
+     ]
+    },
+    {
+     "id": "cbse-g02-c02-o02",
+     "statement": "Describe solids by their faces, edges and corners and count them.",
+     "concepts": [
+      "faces",
+      "edges",
+      "corners"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shape-properties",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shape-properties"
+     ]
+    },
+    {
+     "id": "cbse-g02-c02-o03",
+     "statement": "Sort objects using more than one property, such as whether they roll, slide or stack.",
+     "concepts": [
+      "multi-attribute sorting",
+      "roll slide stack"
+     ],
+     "questionTypes": [
+      "set",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shape-properties",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.sort-by-attribute",
+       "name": "Sort and match objects by attributes",
+       "strand": "reasoning",
+       "gradeRange": [
+        1,
+        2
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.geometry.shapes"
+       ],
+       "why": "No existing competency covers pre-number classification: sorting, matching and grouping by colour, size, shape or use."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.shape-properties",
+      "MATH.reasoning.sort-by-attribute"
+     ]
+    },
+    {
+     "id": "cbse-g02-c02-o04",
+     "statement": "Trace the flat face of a solid and name the 2D shape it makes.",
+     "concepts": [
+      "faces as 2D shapes"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shapes",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shapes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g02-c03",
+   "number": 3,
+   "term": null,
+   "title": "Fun with Numbers",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g02-c03-o01",
+     "statement": "Read, write and order numbers up to 100 in ascending and descending order.",
+     "concepts": [
+      "ordering to 100"
+     ],
+     "questionTypes": [
+      "ordered-list",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compare-numbers"
+     ]
+    },
+    {
+     "id": "cbse-g02-c03-o02",
+     "statement": "Find and continue patterns on a hundred chart, including skip counting.",
+     "concepts": [
+      "number chart patterns",
+      "skip counting"
+     ],
+     "questionTypes": [
+      "pattern",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.number-patterns",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.number-patterns"
+     ]
+    },
+    {
+     "id": "cbse-g02-c03-o03",
+     "statement": "Place numbers on a number line and use it to count on and count back.",
+     "concepts": [
+      "number line"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.number-line",
+       "name": "Locate and compare numbers on a number line",
+       "strand": "number",
+       "gradeRange": [
+        2,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.compare-numbers"
+       ],
+       "supports": [
+        "MATH.number.place-value-tens",
+        "MATH.number.hundreds"
+       ],
+       "why": "No existing competency covers placing numbers on a number line with different scales or using it to count on and back."
+      }
+     ],
+     "mapped": [
+      "MATH.number.number-line"
+     ]
+    },
+    {
+     "id": "cbse-g02-c03-o04",
+     "statement": "Form the greatest and smallest two-digit numbers from given digits.",
+     "concepts": [
+      "greatest and smallest numbers",
+      "place value"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.place-value-tens",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.place-value-tens"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g02-c04",
+   "number": 4,
+   "term": null,
+   "title": "Shadow Story",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g02-c04-o01",
+     "statement": "Identify circles, triangles, squares and rectangles and count their sides and corners.",
+     "concepts": [
+      "2D shapes",
+      "sides and corners"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shapes",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.shape-properties",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shape-properties",
+      "MATH.geometry.shapes"
+     ]
+    },
+    {
+     "id": "cbse-g02-c04-o02",
+     "statement": "Match an object with its shadow or face print and name the 2D shape formed.",
+     "concepts": [
+      "shadows",
+      "faces of solids"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shapes",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shapes"
+     ]
+    },
+    {
+     "id": "cbse-g02-c04-o03",
+     "statement": "Make and extend patterns by stamping or arranging shapes.",
+     "concepts": [
+      "shape patterns"
+     ],
+     "questionTypes": [
+      "pattern"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.repeating-patterns",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.repeating-patterns"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g02-c05",
+   "number": 5,
+   "term": null,
+   "title": "Playing with Lines",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g02-c05-o01",
+     "statement": "Tell straight lines from curved lines in pictures, letters and objects.",
+     "concepts": [
+      "straight lines",
+      "curved lines"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "set"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shape-properties",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Telling straight from curved edges in drawn shapes (pictures) is abcurve in shape-properties; objects are covered by the new abobj in line-types, which is already mapped."
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.line-types",
+       "name": "Identify and draw straight and curved lines in different orientations",
+       "strand": "geometry",
+       "gradeRange": [
+        2,
+        3
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.geometry.shapes"
+       ],
+       "why": "MATH.geometry.lines-segments distinguishes lines, rays and segments; the earlier skill of straight vs curved and horizontal/vertical/slanting lines has no entry."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.line-types",
+      "MATH.geometry.shape-properties"
+     ]
+    },
+    {
+     "id": "cbse-g02-c05-o02",
+     "statement": "Draw straight lines in horizontal, vertical and slanting directions and use lines to make pictures.",
+     "concepts": [
+      "horizontal",
+      "vertical",
+      "slanting"
+     ],
+     "questionTypes": [
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.line-types",
+       "name": "Identify and draw straight and curved lines in different orientations",
+       "strand": "geometry",
+       "gradeRange": [
+        2,
+        3
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.geometry.shapes"
+       ],
+       "why": "MATH.geometry.lines-segments distinguishes lines, rays and segments; the earlier skill of straight vs curved and horizontal/vertical/slanting lines has no entry."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.line-types"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g02-c06",
+   "number": 6,
+   "term": null,
+   "title": "Decoration for Festival",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g02-c06-o01",
+     "statement": "Add two-digit numbers, with and without regrouping, by breaking numbers into tens and ones.",
+     "concepts": [
+      "two-digit addition",
+      "regrouping",
+      "decomposition"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.addition-regroup",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.addition-regroup"
+     ]
+    },
+    {
+     "id": "cbse-g02-c06-o02",
+     "statement": "Subtract two-digit numbers, with and without regrouping.",
+     "concepts": [
+      "two-digit subtraction",
+      "regrouping"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.subtraction-regroup",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.subtraction-regroup"
+     ]
+    },
+    {
+     "id": "cbse-g02-c06-o03",
+     "statement": "Solve one-step word problems by choosing addition or subtraction.",
+     "concepts": [
+      "word problems",
+      "choosing an operation"
+     ],
+     "questionTypes": [
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.operation-choice",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.operation-choice"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g02-c07",
+   "number": 7,
+   "term": null,
+   "title": "Rani's Gift",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g02-c07-o01",
+     "statement": "Measure and compare lengths using non-standard units such as hand spans, clips or strips.",
+     "concepts": [
+      "non-standard length units"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.non-standard-units",
+       "name": "Measure with non-standard units",
+       "strand": "measurement",
+       "gradeRange": [
+        1,
+        3
+       ],
+       "prerequisites": [
+        "MATH.number.count-objects"
+       ],
+       "supports": [
+        "MATH.measurement.length-comparison",
+        "MATH.measurement.mass-comparison"
+       ],
+       "why": "Existing measurement entries cover direct comparison or standard units; none covers iterating an informal unit (hand spans, steps, cups) and seeing why standard units are needed."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.non-standard-units"
+     ]
+    },
+    {
+     "id": "cbse-g02-c07-o02",
+     "statement": "Compare the weights of objects using a simple balance and order them from lightest to heaviest.",
+     "concepts": [
+      "balance",
+      "heavier and lighter"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "ordered-list"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.mass-comparison",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.mass-comparison"
+     ]
+    },
+    {
+     "id": "cbse-g02-c07-o03",
+     "statement": "Compare and order containers by how much they hold using a small cup or glass as the unit.",
+     "concepts": [
+      "capacity",
+      "non-standard units"
+     ],
+     "questionTypes": [
+      "ordered-list",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.capacity",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.measurement.non-standard-units",
+       "name": "Measure with non-standard units",
+       "strand": "measurement",
+       "gradeRange": [
+        1,
+        3
+       ],
+       "prerequisites": [
+        "MATH.number.count-objects"
+       ],
+       "supports": [
+        "MATH.measurement.length-comparison",
+        "MATH.measurement.mass-comparison"
+       ],
+       "why": "Existing measurement entries cover direct comparison or standard units; none covers iterating an informal unit (hand spans, steps, cups) and seeing why standard units are needed."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.capacity",
+      "MATH.measurement.non-standard-units"
+     ]
+    },
+    {
+     "id": "cbse-g02-c07-o04",
+     "statement": "Estimate a length, weight or capacity before measuring and check the estimate.",
+     "concepts": [
+      "estimation"
+     ],
+     "questionTypes": [
+      "estimation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.estimate-check"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g02-c08",
+   "number": 8,
+   "term": null,
+   "title": "Grouping and Sharing",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g02-c08-o01",
+     "statement": "Represent multiplication as repeated addition of equal groups.",
+     "concepts": [
+      "equal groups",
+      "repeated addition"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.equal-groups",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.equal-groups"
+     ]
+    },
+    {
+     "id": "cbse-g02-c08-o02",
+     "statement": "Share a collection equally, or make groups of a given size, and say how many each gets or how many groups there are.",
+     "concepts": [
+      "equal sharing",
+      "grouping"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.sharing",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.sharing"
+     ]
+    },
+    {
+     "id": "cbse-g02-c08-o03",
+     "statement": "Skip count in 2s, 3s, 5s and 10s and use this to build early multiplication facts.",
+     "concepts": [
+      "skip counting",
+      "multiplication facts"
+     ],
+     "questionTypes": [
+      "pattern",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MLY.mult.facts-2-5-10",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.number-patterns",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.number-patterns",
+      "MLY.mult.facts-2-5-10"
+     ]
+    },
+    {
+     "id": "cbse-g02-c08-o04",
+     "statement": "Solve simple word problems that involve grouping or sharing.",
+     "concepts": [
+      "word problems"
+     ],
+     "questionTypes": [
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.operation-choice",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.operation-choice"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g02-c09",
+   "number": 9,
+   "term": null,
+   "title": "Which Season is it?",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g02-c09-o01",
+     "statement": "Read time on a clock to the hour and half hour.",
+     "concepts": [
+      "clock reading",
+      "hour and half hour"
+     ],
+     "questionTypes": [
+      "time",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.clock",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.clock"
+     ]
+    },
+    {
+     "id": "cbse-g02-c09-o02",
+     "statement": "Use a calendar to find days, dates, weeks and months and relate months to seasons.",
+     "concepts": [
+      "calendar",
+      "seasons"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.calendar",
+       "name": "Read and use a calendar",
+       "strand": "measurement",
+       "gradeRange": [
+        1,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.count-objects"
+       ],
+       "supports": [
+        "MATH.measurement.time-order"
+       ],
+       "why": "No existing entry covers days/weeks/months, finding dates, leap years or counting days on a calendar."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.calendar"
+     ]
+    },
+    {
+     "id": "cbse-g02-c09-o03",
+     "statement": "Compare durations of everyday events using minutes, hours, days, weeks and months.",
+     "concepts": [
+      "duration",
+      "time units"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.time-order",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.time-order"
+     ]
+    },
+    {
+     "id": "cbse-g02-c09-o04",
+     "statement": "Name the four main directions in simple contexts.",
+     "concepts": [
+      "directions"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.maps-directions",
+       "name": "Locate positions and describe routes using grids, maps and directions",
+       "strand": "geometry",
+       "gradeRange": [
+        2,
+        5
+       ],
+       "prerequisites": [
+        "MATH.geometry.positions"
+       ],
+       "supports": [
+        "MATH.geometry.solid-views"
+       ],
+       "why": "MATH.geometry.positions covers relative position words only; grid locations, step-counted paths, map reading and compass directions have no entry."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.maps-directions"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g02-c10",
+   "number": 10,
+   "term": null,
+   "title": "Fun at the Fair",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g02-c10-o01",
+     "statement": "Identify Indian coins and notes up to Rs 100 and their values.",
+     "concepts": [
+      "coins",
+      "notes"
+     ],
+     "questionTypes": [
+      "money",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.money-coins",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.money-coins"
+     ]
+    },
+    {
+     "id": "cbse-g02-c10-o02",
+     "statement": "Make and add amounts up to Rs 100 using notes and coins.",
+     "concepts": [
+      "making amounts",
+      "adding money"
+     ],
+     "questionTypes": [
+      "money"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.money-totals",
+       "name": "Make and total amounts with notes and coins",
+       "strand": "measurement",
+       "gradeRange": [
+        1,
+        4
+       ],
+       "prerequisites": [
+        "MATH.measurement.money-coins",
+        "MATH.number.addition"
+       ],
+       "supports": [
+        "MATH.measurement.money-change"
+       ],
+       "why": "MATH.measurement.money-coins is recognition only and money-change is finding change; composing a given amount in different ways and totalling a purchase is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.money-totals"
+     ]
+    },
+    {
+     "id": "cbse-g02-c10-o03",
+     "statement": "Work out the change in a simple purchase.",
+     "concepts": [
+      "change"
+     ],
+     "questionTypes": [
+      "money",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.money-change",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.money-change"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g02-c11",
+   "number": 11,
+   "term": null,
+   "title": "Data Handling",
+   "verified": true,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "cbse-g02-c11-o01",
+     "statement": "Collect simple data and record it in a table using counts or marks.",
+     "concepts": [
+      "collecting data",
+      "tabulating"
+     ],
+     "questionTypes": [
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.tables",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.tables"
+     ]
+    },
+    {
+     "id": "cbse-g02-c11-o02",
+     "statement": "Read a pictograph or simple table and answer questions about it.",
+     "concepts": [
+      "pictographs",
+      "reading tables"
+     ],
+     "questionTypes": [
+      "data-table",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.pictographs",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.pictographs"
+     ]
+    },
+    {
+     "id": "cbse-g02-c11-o03",
+     "statement": "Compare categories in recorded data and draw a simple conclusion.",
+     "concepts": [
+      "most and least",
+      "inference"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.pictographs",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.pictographs"
+     ]
+    }
+   ]
+  }
+ ]
+}

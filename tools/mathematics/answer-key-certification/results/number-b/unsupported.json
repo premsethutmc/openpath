@@ -1,0 +1,17 @@
+{
+ "ajcmpx": "type choice: the exported question has no options (no mc field, none in the prompt); the letter A/B/C cannot be mapped to a sign, and for the same relation (e.g. \"=\") the stored letter varies A/B/C across questions, so options are evidently per-question; correctness of the key cannot be established from the export",
+ "ajpfdc": "type choice: statements A-D are not in the prompt or export; the key letter cannot be mapped to a statement",
+ "ajprop": "type choice: property names for A-D are not in the prompt or export; the key letter cannot be mapped to a property",
+ "ajrcmp": "type choice: the statements A-D are not in the prompt or export; the key letter cannot be mapped to a statement",
+ "ajrcq": "type choice: the statements A-D are not in the prompt or export; the key letter cannot be mapped to a statement",
+ "amdec": "type choice: options A-D (decimal expansions) are not in the prompt or export; the key letter cannot be mapped to an expansion",
+ "amirr": "type choice: the four candidate numbers are not in the prompt or export; the key letter cannot be mapped to a number",
+ "amterm": "type choice: the option texts A-D (kinds of decimal expansion) are not in the prompt or export; the key letter cannot be mapped to an option",
+ "anweek": "type choice: options A-D (days of the week) are not in the prompt or export; the key letter cannot be mapped to a day",
+ "ascpow": "type choice: options A-D are not in the prompt or export; the key letter cannot be mapped to a value of i^n. Observation only (not verification): the stored letters depend solely on n mod 4 (0:A, 1:B, 2:C, 3:D), i.e. consistent with a fixed option order 1, i, -1, -i, which the export does not state",
+ "avdfact": "type choice: options A-D (multiplication facts) are not in the prompt or export; the key letter cannot be mapped to a fact",
+ "avdirv": "type choice: options A-D are not in the prompt or export; the key letter cannot be mapped to a statement (the table in the figure could be checked, but not what A/B mean)",
+ "avfold": "type choice: options A-D (fractions) are not in the prompt or export; the key letter cannot be mapped to a fraction",
+ "avlike": "type choice: the candidate pairs A-D are not in the prompt or export; the key letter cannot be mapped to a pair",
+ "avprop": "type choice: options A-D are not in the prompt or export; the key letter cannot be mapped to yes/no (or any other reading)"
+}

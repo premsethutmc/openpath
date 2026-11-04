@@ -1,0 +1,3103 @@
+{
+ "id": "practice-error-investigation",
+ "competency": "MATH.algebra.factorisation",
+ "truth": {
+  "misconception": "squares-in-brackets",
+  "heldAtEnd": true,
+  "taughtByEnd": true,
+  "notes": "factorisation, grade 8: writes a² − b² style factors as squares in brackets; invisible on the diagnostics, shown on every later question where it predicts a distinct answer"
+ },
+ "expect": {
+  "investigation": "should",
+  "resolution": "must-not-resolve",
+  "establish": "either",
+  "notes": "repeated practice/verification errors matching one modelled misconception should trigger investigation even though the starting check looked secure; with two or more matching errors establishing is reasonable but not required by the spec"
+ },
+ "steps": [
+  {
+   "step": 1,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "diagnostic",
+   "question": "gen:factor:-6,-8",
+   "activity": "diagnostic",
+   "response": "-8",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "not_started",
+    "independent": {
+     "right": 0,
+     "total": 0
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.factorisation",
+    "chapter": "Algebraic identities",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.35,
+    "posterior": {
+     "secure": 0.35,
+     "conceptual": 0.15,
+     "procedural": 0.15,
+     "recall": 0.15,
+     "prerequisite": 0.1,
+     "transfer": 0.1
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 2,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "diagnostic",
+   "question": "gen:factor:-7,-3",
+   "activity": "diagnostic",
+   "response": "-3",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.56,
+    "posterior": {
+     "secure": 0.5550660792951541,
+     "conceptual": 0.079295154185022,
+     "procedural": 0.039647577092511,
+     "recall": 0.13215859030837002,
+     "prerequisite": 0.052863436123348005,
+     "transfer": 0.1409691629955947
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 3,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "diagnostic",
+   "question": "gen:factor:-6,-2",
+   "activity": "diagnostic",
+   "response": "-2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69,
+    "posterior": {
+     "secure": 0.6899908731365987,
+     "conceptual": 0.032856708244599936,
+     "procedural": 0.008214177061149984,
+     "recall": 0.09126863401277761,
+     "prerequisite": 0.021904472163066624,
+     "transfer": 0.15576513538180714
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 4,
+   "stage": "topic-check",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "complete",
+   "question": null,
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77,
+    "posterior": {
+     "secure": 0.767700321567595,
+     "conceptual": 0.012185719389961826,
+     "procedural": 0.0015232149237452283,
+     "recall": 0.056415367546119574,
+     "prerequisite": 0.008123812926641216,
+     "transfer": 0.1540515636459372
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "Starting-point check recorded.",
+   "finding": null,
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   }
+  },
+  {
+   "step": 5,
+   "stage": "plan",
+   "competency": "MATH.algebra.factorisation",
+   "planItems": [
+    {
+     "competency": "MATH.algebra.identities",
+     "reason": "Next in Algebraic identities."
+    }
+   ],
+   "finding": null,
+   "hypotheses": [],
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   }
+  },
+  {
+   "step": 6,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "explore",
+   "question": "gen:expand:-6,4",
+   "activity": "diagnostic",
+   "response": "-2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "not_started",
+    "independent": {
+     "right": 0,
+     "total": 0
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.algebra.identities",
+    "chapter": "Algebraic identities",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.35
+   },
+   "finding": null,
+   "reason": "A short check to find the right starting point."
+  },
+  {
+   "step": 7,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "explore",
+   "question": "gen:expand:-1,3",
+   "activity": "diagnostic",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "guided",
+    "independent": {
+     "right": 1,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.56
+   },
+   "finding": null,
+   "reason": "A short check to find the right starting point."
+  },
+  {
+   "step": 8,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "gen:expand:-6,3",
+   "activity": "practice",
+   "response": "-3",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 2,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 9,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "gen:expand:-6,1:mc",
+   "activity": "practice",
+   "response": "C",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 10,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "gen:expand:-6,9",
+   "activity": "practice",
+   "response": "3",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 11,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "gen:ahid:2,3,9,2",
+   "activity": "practice",
+   "response": "-81",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 6
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 12,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "gen:ahidn:2,1,1",
+   "activity": "practice",
+   "response": "99",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 6
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 7,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 13,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "gen:expand:-5,4:mc",
+   "activity": "transfer",
+   "response": "D",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 7,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 8,
+     "total": 8
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 14,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "gen:ahid:0,3,1,2:w",
+   "activity": "transfer",
+   "response": "1",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 8,
+     "total": 8
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 9,
+     "total": 9
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 15,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "gen:ahidn:0,3,1:w",
+   "activity": "transfer",
+   "response": "961",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 9,
+     "total": 9
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 10,
+     "total": 10
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 16,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "gen:expand:-6,7",
+   "activity": "check",
+   "response": "1",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 10,
+     "total": 10
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 11,
+     "total": 11
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 17,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "gen:expand:-7,-4:mc",
+   "activity": "check",
+   "response": "A",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 11,
+     "total": 11
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 12,
+     "total": 12
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 18,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "gen:expand:-5,3",
+   "activity": "check",
+   "response": "-2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 12,
+     "total": 12
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 19,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "wr:idt:diff-squares-area",
+   "activity": "practice",
+   "response": "written:marked-correct",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "pending-educator",
+    "reason": "pending-educator",
+    "credit": null
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": false,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)."
+  },
+  {
+   "step": 20,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "wr:idt:errors-mental",
+   "activity": "practice",
+   "response": "written:marked-correct",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "pending-educator",
+    "reason": "pending-educator",
+    "credit": null
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": false,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)."
+  },
+  {
+   "step": 21,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "wr:idt:area-models-g9",
+   "activity": "practice",
+   "response": "written:marked-correct",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "pending-educator",
+    "reason": "pending-educator",
+    "credit": null
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": false,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)."
+  },
+  {
+   "step": 22,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "verify",
+   "question": "wr:idt:a-minus-b-area",
+   "activity": "practice",
+   "response": "written:marked-correct",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "pending-educator",
+    "reason": "pending-educator",
+    "credit": null
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": false,
+    "quarantined": false
+   },
+   "recordedAsAttempt": false,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)."
+  },
+  {
+   "step": 23,
+   "stage": "module",
+   "competency": "MATH.algebra.identities",
+   "phase": "done",
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.69
+   },
+   "finding": null,
+   "reason": "Shown on your own. A delayed check is planned for Tue Sep 08 2026.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   }
+  },
+  {
+   "step": 24,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "verify",
+   "question": "gen:factor:-5,4",
+   "activity": "practice",
+   "response": "4",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 3,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 25,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "verify",
+   "question": "gen:factor:-7,-6:mc",
+   "activity": "practice",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 4,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 26,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "verify",
+   "question": "gen:factor:-6,-4",
+   "activity": "practice",
+   "response": "-4",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 5,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 6
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 27,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "verify",
+   "question": "gen:ajfsq:2,3,7,0",
+   "activity": "practice",
+   "response": "(9, 49)",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 6
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 28,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "verify",
+   "question": "gen:ajfgrp:1,5,1,2,-2",
+   "activity": "practice",
+   "response": "(1, 2)",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 6,
+     "total": 7
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 7,
+     "total": 8
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 29,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "verify",
+   "question": "gen:alsplit:1,4,-5,3,-2",
+   "activity": "practice",
+   "response": "2/3,5/4",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 7,
+     "total": 8
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "independent",
+    "independent": {
+     "right": 8,
+     "total": 9
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 30,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "verify",
+   "question": "gen:factor:-6,-5:mc",
+   "activity": "transfer",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "independent",
+    "independent": {
+     "right": 8,
+     "total": 9
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 9,
+     "total": 10
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 31,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "verify",
+   "question": "gen:ajfsq:0,5,12,0:w",
+   "activity": "transfer",
+   "response": "(25, 144)",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 9,
+     "total": 10
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 9,
+     "total": 11
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 32,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "verify",
+   "question": "gen:factor:-5,2",
+   "activity": "check",
+   "response": "2",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 9,
+     "total": 11
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 10,
+     "total": 12
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 33,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "verify",
+   "question": "gen:factor:-5,3:mc",
+   "activity": "check",
+   "response": "B",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 10,
+     "total": 12
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 11,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 34,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "verify",
+   "question": "gen:factor:-4,-5",
+   "activity": "check",
+   "response": "-5",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 11,
+     "total": 13
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 12,
+     "total": 14
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. More practice is optional."
+  },
+  {
+   "step": 35,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "done",
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. A delayed check is planned for Tue Sep 08 2026.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 12,
+     "total": 14
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "start",
+    "competency": "MATH.number.square-roots",
+    "chapter": "Squares and square roots",
+    "reason": "Next in Squares and square roots."
+   }
+  },
+  {
+   "step": 36,
+   "stage": "session",
+   "competency": null,
+   "reason": "new session after 8 day(s)",
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   }
+  },
+  {
+   "step": 37,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "retention",
+   "question": "gen:factor:-5,8",
+   "activity": "retention",
+   "response": "8",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 12,
+     "total": 14
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "due"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 15
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "due"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "A delayed check, a week after you first showed this: does it last?"
+  },
+  {
+   "step": 38,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "retention",
+   "question": "gen:ajfsq:1,11,9,0:mc",
+   "activity": "retention",
+   "response": "D",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "transfer",
+    "independent": {
+     "right": 13,
+     "total": 15
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "due"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 13,
+     "total": 16
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "A delayed check, a week after you first showed this: does it last?"
+  },
+  {
+   "step": 39,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Here is a short explanation, then practice.",
+   "intervention": {
+    "support": null,
+    "plan": "teach",
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 13,
+     "total": 16
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 13,
+     "total": 16
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   }
+  },
+  {
+   "step": 40,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "guided",
+   "question": "gen:factor:-4,-6",
+   "activity": "guided",
+   "response": "-6",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 13,
+     "total": 16
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 13,
+     "total": 16
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 41,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "check",
+   "question": "gen:ajfsq:1,5,8,1",
+   "activity": "check",
+   "response": "(25, 64)",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 13,
+     "total": 16
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 13,
+     "total": 17
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 42,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "explore",
+   "question": "gen:ajfsq:3,7,11,0",
+   "activity": "diagnostic",
+   "context": "investigate:gen:ajfsq:1,5,8,1",
+   "response": "(7, 11)",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 13,
+     "total": 17
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 18
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "One more question to understand your last answer."
+  },
+  {
+   "step": 43,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "explore",
+   "question": "gen:ajfsq:0,10,11,1",
+   "activity": "diagnostic",
+   "context": "investigate:gen:ajfsq:1,5,8,1",
+   "response": "(100, 121)",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 18
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 19
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "One more question to understand your last answer."
+  },
+  {
+   "step": 44,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "explore",
+   "question": "gen:ajfsq:0,11,2,0",
+   "activity": "diagnostic",
+   "context": "investigate:gen:ajfsq:1,5,8,1",
+   "response": "(121, 4)",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 19
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 20
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "One more question to understand your last answer."
+  },
+  {
+   "step": 45,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "That way did not lead to a right answer on your own, so here is a different explanation.",
+   "intervention": {
+    "support": null,
+    "plan": "teach",
+    "strategy": {
+     "id": "spot_the_mistake",
+     "kind": "conceptual",
+     "title": "Spot the mistake",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 20
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 20
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   }
+  },
+  {
+   "step": 46,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "guided",
+   "question": "gen:factor:-5,7",
+   "activity": "guided",
+   "response": "7",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 20
+    },
+    "assisted": {
+     "right": 1,
+     "total": 1
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 20
+    },
+    "assisted": {
+     "right": 2,
+     "total": 2
+    },
+    "retention": "failed"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "spot_the_mistake",
+     "kind": "conceptual",
+     "title": "Spot the mistake",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 47,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "check",
+   "question": "gen:ajfgrp:1,4,3,-2,-3",
+   "activity": "check",
+   "response": "(3, −2)",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "credit": true
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "review",
+    "independent": {
+     "right": 14,
+     "total": 20
+    },
+    "assisted": {
+     "right": 2,
+     "total": 2
+    },
+    "retention": "failed"
+   },
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 21
+    },
+    "assisted": {
+     "right": 2,
+     "total": 2
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   },
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "spot_the_mistake",
+     "kind": "conceptual",
+     "title": "Spot the mistake",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 48,
+   "stage": "module",
+   "competency": "MATH.algebra.factorisation",
+   "phase": "done",
+   "diagnosis": {
+    "result": "secure",
+    "confidence": 0.77
+   },
+   "finding": null,
+   "reason": "Shown on your own. A delayed check is planned for Wed Sep 16 2026.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "transfer",
+    "independent": {
+     "right": 15,
+     "total": 21
+    },
+    "assisted": {
+     "right": 2,
+     "total": 2
+    },
+    "retention": "scheduled"
+   },
+   "next": {
+    "kind": "retention",
+    "competency": "MATH.algebra.identities",
+    "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+   }
+  }
+ ],
+ "final": {
+  "facts": {
+   "answered": 40,
+   "discriminatingMet": 6,
+   "showedMisconception": 6,
+   "discriminatingAfterTeaching": 3,
+   "correctOnNonDiscriminatingAfterTeaching": 4,
+   "wrong": [
+    {
+     "q": "gen:ajfsq:2,3,7,0",
+     "phase": "verify",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:ajfsq:0,5,12,0:w",
+     "phase": "verify",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:ajfsq:1,11,9,0:mc",
+     "phase": "retention",
+     "session": "s2",
+     "misconception": true
+    },
+    {
+     "q": "gen:ajfsq:1,5,8,1",
+     "phase": "check",
+     "session": "s2",
+     "misconception": true
+    },
+    {
+     "q": "gen:ajfsq:0,10,11,1",
+     "phase": "explore",
+     "session": "s2",
+     "misconception": true
+    },
+    {
+     "q": "gen:ajfsq:0,11,2,0",
+     "phase": "explore",
+     "session": "s2",
+     "misconception": true
+    }
+   ],
+   "phases": [
+    "diagnostic",
+    "explore",
+    "verify",
+    "retention",
+    "guided",
+    "check"
+   ]
+  },
+  "snap": {
+   "status": "transfer",
+   "independent": {
+    "right": 15,
+    "total": 21
+   },
+   "assisted": {
+    "right": 2,
+    "total": 2
+   },
+   "retention": "scheduled"
+  },
+  "next": {
+   "kind": "retention",
+   "competency": "MATH.algebra.identities",
+   "reason": "A delayed check is due: a few questions to see the skill has stayed with you."
+  },
+  "hypotheses": [
+   {
+    "contract": "learner-hypothesis@1",
+    "id": "?@gen:ajfsq:1,5,8,1",
+    "claim": null,
+    "scope": {
+     "question": "gen:ajfsq:1,5,8,1",
+     "family": "gen:ajfsq:1,5,8,1",
+     "observedIn": "MATH.algebra.factorisation",
+     "about": null
+    },
+    "status": "unsupported",
+    "support": {
+     "unexplained": 1,
+     "squares-in-brackets": 0,
+     "constant-not-rooted": 0,
+     "factor-not-taken": 0,
+     "secure": 0
+    },
+    "competing": [
+     "unexplained"
+    ],
+    "supporting": [],
+    "contradicting": [],
+    "obligations": [
+     "none the engine can ask: no known explanation fits; a person may look at the working"
+    ],
+    "teaching": {
+     "deliveredAt": null,
+     "strategy": null,
+     "competency": null,
+     "lastAt": null
+    },
+    "resolvedBy": null,
+    "probes": [],
+    "uncertainty": {
+     "supporting": 0,
+     "contradicting": 0,
+     "inconclusive": 0,
+     "note": "nothing established"
+    },
+    "teachingDue": false,
+    "probeDue": false,
+    "trigger": {
+     "kind": "repeated-errors",
+     "detail": "2 of the last 3 answers alone in this skill were wrong"
+    },
+    "provenance": {
+     "policy": "diagnostic@2-draft",
+     "established": null,
+     "attempts": [
+      "record#36",
+      "record#37",
+      "record#38",
+      "record#39"
+     ]
+    },
+    "use": {
+     "teach": false,
+     "ask": false,
+     "evidence": false,
+     "mastery": false
+    }
+   }
+  ],
+  "teachingHistory": {
+   "MATH.algebra.factorisation": [
+    {
+     "strategy": "worked_steps",
+     "kind": "procedural",
+     "delivered": [
+      "2026-09-09T09:35:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-09T09:36:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:30:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": false
+    },
+    {
+     "strategy": "spot_the_mistake",
+     "kind": "conceptual",
+     "delivered": [
+      "2026-09-09T09:41:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-09T09:42:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:31:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": true
+    },
+    {
+     "strategy": "check_what_it_uses",
+     "kind": "prerequisite",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": {
+      "at": "2026-09-01T09:32:00.000Z",
+      "activity": "check",
+      "inBlock": false
+     },
+     "effective": null
+    }
+   ],
+   "MATH.algebra.quadratic-discriminant": [
+    {
+     "strategy": "parabola",
+     "kind": "conceptual",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    },
+    {
+     "strategy": "careful_signs",
+     "kind": "procedural",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    },
+    {
+     "strategy": "signed_numbers",
+     "kind": "prerequisite",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    }
+   ]
+  }
+ }
+}

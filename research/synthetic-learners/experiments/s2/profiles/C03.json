@@ -1,0 +1,54 @@
+{
+ "schema": "synthetic-learner-profile@1",
+ "id": "C03",
+ "version": "1.0.0",
+ "synthetic": "All parameters are synthetic and configurable; they are not empirical statistics about real students.",
+ "name": "Temporary learning followed by forgetting",
+ "description": "Learns fully from every explanation, but all of it is fragile, never consolidates, and is gone within days (negative control for retention).",
+ "seed": 80003,
+ "skills": {
+  "one-step": 0.6,
+  "two-step": 0.3,
+  "both-sides": 0.2,
+  "brackets": 0.15,
+  "modelling": 0.3
+ },
+ "misconceptions": {
+  "only-one-side": 0.3
+ },
+ "slip": 0.04,
+ "guess": 0.0,
+ "invalidWorkingWithCorrectAnswer": 0.0,
+ "working": {
+  "full": 0.75,
+  "partial": 0.1,
+  "bare": 0.1,
+  "none": 0.05,
+  "unsupportedNotation": 0.1
+ },
+ "hints": {
+  "seek": 0.3,
+  "help": 0.2
+ },
+ "instruction": {
+  "full": 1,
+  "partial": 0,
+  "gain": 0.9,
+  "fragileShare": 1,
+  "misconceptionReduction": 0.7,
+  "misconceptionResponse": 0.6,
+  "offTargetGain": 0.05
+ },
+ "practice": {
+  "consolidate": 0,
+  "gainRight": 0,
+  "gainWrong": 0
+ },
+ "forgetting": {
+  "halfLifeDays": 30,
+  "floor": 0.1,
+  "fragileHalfLifeDays": 1,
+  "relapse": 0.8
+ },
+ "cohort": "C"
+}

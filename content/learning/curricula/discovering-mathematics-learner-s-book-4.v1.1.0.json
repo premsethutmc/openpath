@@ -1,0 +1,587 @@
+{
+ "id": "discovering-mathematics-learner-s-book-4",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 4,
+ "title": "Discovering Mathematics — Learner's Book 4",
+ "hash": "0eb3a858",
+ "source": {
+  "kind": "textbook",
+  "title": "Discovering Mathematics — Learner's Book 4",
+  "edition": "A synthetic textbook written for OpenPath testing. Not a real board or publisher. CC0.; Board: Sample Board B (synthetic)",
+  "board": "Sample Board B (synthetic)",
+  "academicYear": "2026-27",
+  "licence": "A synthetic textbook written for OpenPath testing. Not a real board or publisher. CC0.",
+  "synthetic": true,
+  "extractor": "plain-text@1"
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing (mapping@2). Clear mappings: the top proposal was accepted. Uncertain mappings were accepted only where release 1.0.0 had accepted the same competency (for an educator to check: ch3-parts-of-a-whole.o5 (left unmapped)). Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-numbers-to-100-000",
+     "number": 1,
+     "title": "Numbers to 100 000",
+     "pages": "1–16",
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch1-numbers-to-100-000.o1",
+       "text": "read, write and order numbers up to 100 000",
+       "pages": "3",
+       "location": {
+        "line": 11,
+        "page": 3
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.large-numbers",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.thousands",
+          "score": 0.695,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.measurement.capacity",
+          "score": 0.525,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on comparison, largeNumbers.",
+        "concepts": [
+         "comparison",
+         "largeNumbers"
+        ]
+       }
+      },
+      {
+       "id": "ch1-numbers-to-100-000.o2",
+       "text": "round a number to the nearest 10, 100 or 1000",
+       "pages": "11",
+       "location": {
+        "line": 12,
+        "page": 11
+       },
+       "mapping": {
+        "competencies": [],
+        "verdict": "missing",
+        "why": "No competency covers rounding.",
+        "concepts": [
+         "rounding"
+        ],
+        "proposal": {
+         "id": "proposal.discovering-mathematics-learner-s-book-4.ch1-numbers-to-100-000.o2",
+         "name": "round a number to the nearest 10, 100 or 1000",
+         "status": "provisional-proposal",
+         "source": {
+          "textbook": "Discovering Mathematics — Learner's Book 4",
+          "chapter": "Numbers to 100 000",
+          "pages": "11"
+         },
+         "note": "No existing competency carries this outcome's mathematics. Recorded as a proposal with its textbook reference; it is not a registered competency and has no questions."
+        }
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch2-times-tables-and-sharing",
+     "number": 2,
+     "title": "Times Tables and Sharing",
+     "pages": "17–36",
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch2-times-tables-and-sharing.o1",
+       "text": "recall the times tables up to 10 × 10 quickly",
+       "pages": "18",
+       "location": {
+        "line": 16,
+        "page": 18
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.multiplication-tables",
+          "score": 0.94,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.statistics.tables",
+          "score": 0.68,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.statistics.data-frequency",
+          "score": 0.62,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on multiplication, facts.",
+        "concepts": [
+         "multiplication",
+         "facts"
+        ]
+       }
+      },
+      {
+       "id": "ch2-times-tables-and-sharing.o2",
+       "text": "multiply a three-digit number by a one-digit number in columns",
+       "pages": "24",
+       "location": {
+        "line": 17,
+        "page": 24
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.multi-multiplication",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.long-division",
+          "score": 0.559,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on multiplication, multiDigit.",
+        "concepts": [
+         "multiplication",
+         "multiDigit"
+        ]
+       }
+      },
+      {
+       "id": "ch2-times-tables-and-sharing.o3",
+       "text": "share a number into equal groups and say what is left over",
+       "pages": "30",
+       "location": {
+        "line": 18,
+        "page": 30
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.division-remainders",
+          "score": 0.94,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.sharing",
+          "score": 0.54,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.reasoning.divisibility",
+          "score": 0.54,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on division, remainder.",
+        "concepts": [
+         "division",
+         "remainder"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch3-parts-of-a-whole",
+     "number": 3,
+     "title": "Parts of a Whole",
+     "pages": "37–58",
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch3-parts-of-a-whole.o1",
+       "text": "name a part of a shape divided into equal pieces as a fraction",
+       "pages": "38",
+       "location": {
+        "line": 22,
+        "page": 38
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-models",
+          "score": 0.761,
+          "method": "meaning@2",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on fraction, wholePart.",
+        "concepts": [
+         "fraction",
+         "division",
+         "wholePart"
+        ]
+       }
+      },
+      {
+       "id": "ch3-parts-of-a-whole.o2",
+       "text": "recognise fractions that name the same amount, such as 1/2 and 2/4",
+       "pages": "43",
+       "location": {
+        "line": 23,
+        "page": 43
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.equivalent-fractions",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.unit-fractions",
+          "score": 0.549,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on fraction, equivalence.",
+        "concepts": [
+         "fraction",
+         "equivalence"
+        ]
+       }
+      },
+      {
+       "id": "ch3-parts-of-a-whole.o3",
+       "text": "decide which of two fractions with the same bottom number is bigger",
+       "pages": "49",
+       "location": {
+        "line": 24,
+        "page": 49
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-comparison",
+          "score": 0.94,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.fraction-add-like",
+          "score": 0.638,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on fraction, comparison, likeDenominators.",
+        "concepts": [
+         "fraction",
+         "comparison",
+         "likeDenominators"
+        ]
+       }
+      },
+      {
+       "id": "ch3-parts-of-a-whole.o4",
+       "text": "find the total of two fractions that have the same denominator",
+       "pages": "53",
+       "location": {
+        "line": 25,
+        "page": 53
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-add-like",
+          "score": 0.898,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.fraction-comparison",
+          "score": 0.649,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on fraction, likeDenominators, addition.",
+        "concepts": [
+         "fraction",
+         "likeDenominators",
+         "addition"
+        ]
+       }
+      },
+      {
+       "id": "ch3-parts-of-a-whole.o5",
+       "text": "solve word problems involving fractions",
+       "pages": "57",
+       "location": {
+        "line": 26,
+        "page": 57
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.unit-fractions",
+          "score": 0.88,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.number.decimal-tenths",
+          "score": 0.779,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.number.equivalent-fractions",
+          "score": 0.779,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "uncertain",
+        "why": "Two skills are close (Recognise halves and quarters; Represent tenths and hundredths): a reviewer should choose.",
+        "concepts": [
+         "fraction"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch4-covering-and-fencing",
+     "number": 4,
+     "title": "Covering and Fencing",
+     "pages": "59–72",
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch4-covering-and-fencing.o1",
+       "text": "find the space covered by a shape by counting unit squares",
+       "pages": "60",
+       "location": {
+        "line": 30,
+        "page": 60
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.area-squares",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.triangle-area",
+          "score": 0.88,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.measurement.surface-area-intro",
+          "score": 0.82,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on area.",
+        "concepts": [
+         "area"
+        ]
+       }
+      },
+      {
+       "id": "ch4-covering-and-fencing.o2",
+       "text": "work out the distance around a rectangle",
+       "pages": "66",
+       "location": {
+        "line": 31,
+        "page": 66
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.rectangle-perimeter",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.perimeter-intro",
+          "score": 0.64,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on perimeter, rectangle.",
+        "concepts": [
+         "perimeter",
+         "rectangle"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch5-turning-and-circles",
+     "number": 5,
+     "title": "Turning and Circles",
+     "pages": "73–84",
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch5-turning-and-circles.o1",
+       "text": "identify right angles, and angles smaller or larger than a right angle",
+       "pages": "74",
+       "location": {
+        "line": 35,
+        "page": 74
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.angles-intro",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.geometry.angle-measure",
+          "score": 0.65,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.measurement.capacity",
+          "score": 0.57,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on comparison, angle.",
+        "concepts": [
+         "comparison",
+         "angle"
+        ]
+       }
+      },
+      {
+       "id": "ch5-turning-and-circles.o2",
+       "text": "name the centre, radius and diameter of a circle",
+       "pages": "80",
+       "location": {
+        "line": 36,
+        "page": 80
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.circles",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.circle-area",
+          "score": 0.644,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.coordinate.conics",
+          "score": 0.58,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on circle.",
+        "concepts": [
+         "circle"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch6-timetables",
+     "number": 6,
+     "title": "Timetables",
+     "pages": "85–92",
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch6-timetables.o1",
+       "text": "use a bus timetable to plan a short journey",
+       "pages": "86",
+       "location": {
+        "line": 40,
+        "page": 86
+       },
+       "mapping": {
+        "competencies": [],
+        "verdict": "missing",
+        "why": "No competency covers timetable.",
+        "concepts": [
+         "timetable"
+        ],
+        "proposal": {
+         "id": "proposal.discovering-mathematics-learner-s-book-4.ch6-timetables.o1",
+         "name": "use a bus timetable to plan a short journey",
+         "status": "provisional-proposal",
+         "source": {
+          "textbook": "Discovering Mathematics — Learner's Book 4",
+          "chapter": "Timetables",
+          "pages": "86"
+         },
+         "note": "No existing competency carries this outcome's mathematics. Recorded as a proposal with its textbook reference; it is not a registered competency and has no questions."
+        }
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

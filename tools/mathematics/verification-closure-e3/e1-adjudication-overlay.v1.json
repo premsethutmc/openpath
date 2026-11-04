@@ -1,0 +1,115 @@
+{
+ "contract": "openpath-e1-adjudication-overlay@1",
+ "version": 1,
+ "adjudicatedAt": "2026-10-27",
+ "baseCorpus": "tools/mathematics/end-to-end-e1/frozen-corpus.v1.json",
+ "baseCorpusSha256": "1dd38f189df008e2b4e67e5398a1774542d5b27d20a5163092bbdbc3f23867e8",
+ "note": "The E1 corpus is NOT modified. This overlay only records independently argued label corrections; metrics are reported under both the original and the adjudicated labels.",
+ "adjudications": [
+  {
+   "caseId": "e1-116",
+   "partition": "diagnostic",
+   "question": "Evaluate f(x)=x^2+1x+2 at input 1 (polynomial coefficients [2,1,1], input \"1\").",
+   "studentWorking": [
+    "f(x) = x^2 + 1x + 2",
+    "f(1) = 1^2 + 1 + 2",
+    "f(1) = 4"
+   ],
+   "originalReference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "interpretation": "The nx term was evaluated as n instead of n times x."
+   },
+   "independentAnalysis": [
+    "Line 1 restates the typed polynomial exactly (coefficients 2,1,1).",
+    "Line 2 replaces x by 1. The middle term is 1*x with x=1, which is 1*1=1, written '1'. The line is therefore a true statement about f(1): 1^2+1*1+2.",
+    "The original label reads the '1' as 'n instead of n*x'. That diagnosis is only a valid error when x differs from 1. With the stated input 1, n*x equals n for every n, so replacing n*x by n is value-preserving here and justified by the problem's own input.",
+    "Line 3: 1+1+2=4, and f(1)=1+1+2=4. Every line is a true statement and the final value is correct and complete; nothing in the written working is mathematically false.",
+    "A misconception cannot be inferred from a write-up that is correct line by line; assessing a hidden intent would be unsupported speculation."
+   ],
+   "adjudicatedReference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "complete": true
+   },
+   "referenceLabelWrong": true,
+   "engineVerdict": "verified (route adapter-converted, gate level u4-kernel, independently verified)",
+   "engineDefect": false,
+   "engineDefectNote": "None. The engine accepts because the written working is correct. A pedagogical hint ('did you mean n*x?') is outside the mathematical-verification contract.",
+   "residualCaveat": "If a future benchmark wants to flag this habit, it must use an input different from 1 so that n*x != n.",
+   "correctedClassification": "verified",
+   "correctedFirstInvalidStep": null,
+   "correctedFirstInvalidAcceptable": []
+  },
+  {
+   "caseId": "e1-126",
+   "partition": "sealed-holdout",
+   "question": "Evaluate f(x)=x^2+1x+2 at input 1 (polynomial coefficients [2,1,1], input \"1\").",
+   "studentWorking": [
+    "f(x) = x^2 + 1x + 2",
+    "f(1) = 1^2 + 1 + 2",
+    "f(1) = 4"
+   ],
+   "originalReference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "interpretation": "The nx term was evaluated as n instead of n times x."
+   },
+   "independentAnalysis": [
+    "Line 1 restates the typed polynomial exactly (coefficients 2,1,1).",
+    "Line 2 replaces x by 1. The middle term is 1*x with x=1, which is 1*1=1, written '1'. The line is therefore a true statement about f(1): 1^2+1*1+2.",
+    "The original label reads the '1' as 'n instead of n*x'. That diagnosis is only a valid error when x differs from 1. With the stated input 1, n*x equals n for every n, so replacing n*x by n is value-preserving here and justified by the problem's own input.",
+    "Line 3: 1+1+2=4, and f(1)=1+1+2=4. Every line is a true statement and the final value is correct and complete; nothing in the written working is mathematically false.",
+    "A misconception cannot be inferred from a write-up that is correct line by line; assessing a hidden intent would be unsupported speculation."
+   ],
+   "adjudicatedReference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "complete": true
+   },
+   "referenceLabelWrong": true,
+   "engineVerdict": "verified (route adapter-converted, gate level u4-kernel, independently verified)",
+   "engineDefect": false,
+   "engineDefectNote": "None. The engine accepts because the written working is correct. A pedagogical hint ('did you mean n*x?') is outside the mathematical-verification contract.",
+   "residualCaveat": "If a future benchmark wants to flag this habit, it must use an input different from 1 so that n*x != n.",
+   "correctedClassification": "verified",
+   "correctedFirstInvalidStep": null,
+   "correctedFirstInvalidAcceptable": []
+  },
+  {
+   "caseId": "e1-141",
+   "partition": "sealed-holdout",
+   "question": "Evaluate f(x)=x^2+1x+2 at input 1 (polynomial coefficients [2,1,1], input \"1\").",
+   "studentWorking": [
+    "f(x) = x^2 + 1x + 2",
+    "f(1) = 1^2 + 1 + 2",
+    "f(1) = 4"
+   ],
+   "originalReference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "interpretation": "The nx term was evaluated as n instead of n times x."
+   },
+   "independentAnalysis": [
+    "Line 1 restates the typed polynomial exactly (coefficients 2,1,1).",
+    "Line 2 replaces x by 1. The middle term is 1*x with x=1, which is 1*1=1, written '1'. The line is therefore a true statement about f(1): 1^2+1*1+2.",
+    "The original label reads the '1' as 'n instead of n*x'. That diagnosis is only a valid error when x differs from 1. With the stated input 1, n*x equals n for every n, so replacing n*x by n is value-preserving here and justified by the problem's own input.",
+    "Line 3: 1+1+2=4, and f(1)=1+1+2=4. Every line is a true statement and the final value is correct and complete; nothing in the written working is mathematically false.",
+    "A misconception cannot be inferred from a write-up that is correct line by line; assessing a hidden intent would be unsupported speculation."
+   ],
+   "adjudicatedReference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "complete": true
+   },
+   "referenceLabelWrong": true,
+   "engineVerdict": "verified (route adapter-converted, gate level u4-kernel, independently verified)",
+   "engineDefect": false,
+   "engineDefectNote": "None. The engine accepts because the written working is correct. A pedagogical hint ('did you mean n*x?') is outside the mathematical-verification contract.",
+   "residualCaveat": "If a future benchmark wants to flag this habit, it must use an input different from 1 so that n*x != n.",
+   "correctedClassification": "verified",
+   "correctedFirstInvalidStep": null,
+   "correctedFirstInvalidAcceptable": []
+  }
+ ]
+}

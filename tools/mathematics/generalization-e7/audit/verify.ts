@@ -1,0 +1,14 @@
+const { assessMathematicalWorking: A } = await import("/home/claude/e7/packages/learning/src/unified-math-engine.ts");
+const { parseExpr } = await import("/home/claude/e7/tools/mathematics/generalization-e7/holdout/dsl.ts");
+const nat = (t: string) => ({ format: "natural", text: t });
+const show = async (label: string, p: any, w: any) => { const m: any = await A(p, w, {}); console.log(label.padEnd(44), m.classification, m.certification?.rule ?? ""); };
+await show("premise ignored: 2x=6, x<0 | x=3", { domain: "algebra", statement: "2x=6, x<0" }, nat("2x=6\nx=3"));
+await show("decimal strip: 5y=10 | 1.5y=10, y=2", { domain: "algebra", statement: "5y=10" }, nat("1.5y=10\ny=2"));
+await show("different problem same root: 2x+3=11", { domain: "algebra", statement: "2x+3=11" }, nat("3x-5=7\n3x=12\nx=4"));
+const defint = { domain: "calculus", task: "definite-integral", integrand: parseExpr("x^(-2)"), variable: "x", lower: "-1", upper: "1" };
+await show("typed divergent ∫_-1^1 x^-2 = -2", defint, [{ id: "s0", rule: "antiderivative", claim: { kind: "expression", value: parseExpr("-x^(-1)") } }, { id: "s1", rule: "evaluate", claim: { kind: "value", value: "-2" } }]);
+const ln = { domain: "calculus", task: "indefinite-integral", integrand: parseExpr("x^(-1)"), variable: "x" };
+await show("typed ∫1/x = ln x + C", ln, [{ id: "s0", rule: "standard", claim: { kind: "expression", value: { kind: "log", argument: { kind: "variable", name: "x" } }, constantIncluded: true } }]);
+await show("natural ∫1/x dx = ln(x)+C", ln, nat("∫ 1/x dx = ln(x) + C"));
+await show("typed rule label 'asdf' (d/dx sin 2x)", { domain: "calculus", task: "derivative", expression: parseExpr("sin(2x)"), variable: "x" }, [{ id: "s0", rule: "asdf", claim: { kind: "expression", value: parseExpr("2cos(2x)") } }]);
+process.exit(0);

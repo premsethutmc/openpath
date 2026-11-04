@@ -1,0 +1,443 @@
+{
+ "id": "openpath-sample-mathematics-grade-4",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 4,
+ "title": "OpenPath Sample Mathematics, Grade 4",
+ "hash": "911be86f",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 4",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-01T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing: the top proposed competency for each outcome was accepted. Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-large-numbers",
+     "number": 1,
+     "title": "Large numbers",
+     "pages": "1–14",
+     "outcomes": [
+      {
+       "id": "ch1-large-numbers.o1",
+       "text": "Read and compare large numbers using place value",
+       "pages": "2",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.large-numbers",
+          "score": 0.6,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch1-large-numbers.o2",
+       "text": "Round numbers to the nearest thousand",
+       "pages": "9",
+       "mapping": {
+        "competencies": [],
+        "proposal": {
+         "id": "proposal.openpath-sample-mathematics-grade-4.ch1-large-numbers.o2",
+         "name": "Round numbers to the nearest thousand",
+         "status": "provisional-proposal",
+         "source": {
+          "textbook": "OpenPath Sample Mathematics, Grade 4",
+          "chapter": "Large numbers",
+          "pages": "9"
+         },
+         "note": "No existing competency matched. Recorded as a proposal with its textbook reference; it is not a registered competency and has no questions."
+        }
+       }
+      }
+     ],
+     "examples": [
+      {
+       "title": "Which is larger: 45,210 or 45,120?",
+       "pages": "4"
+      }
+     ],
+     "exercises": [
+      {
+       "ref": "Exercise 1.1",
+       "pages": "6"
+      },
+      {
+       "ref": "Exercise 1.2",
+       "pages": "12"
+      }
+     ]
+    },
+    {
+     "id": "ch2-multiplication-and-division",
+     "number": 2,
+     "title": "Multiplication and division",
+     "pages": "15–32",
+     "outcomes": [
+      {
+       "id": "ch2-multiplication-and-division.o1",
+       "text": "Use multiplication facts up to 10 × 10",
+       "pages": "16",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.multiplication-tables",
+          "score": 0.587,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch2-multiplication-and-division.o2",
+       "text": "Multiply multi-digit numbers by a one-digit number",
+       "pages": "20",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.multi-multiplication",
+          "score": 0.75,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.long-division",
+          "score": 0.5,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch2-multiplication-and-division.o3",
+       "text": "Divide multi-digit numbers and interpret the remainder",
+       "pages": "26",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.long-division",
+          "score": 0.6,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.multi-multiplication",
+          "score": 0.4,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [
+      {
+       "title": "7 × 8 from 7 × 5 and 7 × 3",
+       "pages": "18"
+      },
+      {
+       "title": "324 × 6 in columns",
+       "pages": "21"
+      }
+     ],
+     "exercises": [
+      {
+       "ref": "Exercise 2.1",
+       "pages": "19"
+      },
+      {
+       "ref": "Exercise 2.2",
+       "pages": "24"
+      }
+     ]
+    },
+    {
+     "id": "ch3-fractions",
+     "number": 3,
+     "title": "Fractions",
+     "pages": "33–52",
+     "outcomes": [
+      {
+       "id": "ch3-fractions.o1",
+       "text": "Represent fractions of a whole with equal parts",
+       "pages": "34",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-models",
+          "score": 0.42,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.equivalent-fractions",
+          "score": 0.35,
+          "method": "text-match@1",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.number.fraction-add-like",
+          "score": 0.35,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch3-fractions.o2",
+       "text": "Generate equivalent fractions by multiplying numerator and denominator",
+       "pages": "38",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.equivalent-fractions",
+          "score": 0.5,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch3-fractions.o3",
+       "text": "Compare fractions with like denominators",
+       "pages": "44",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-comparison",
+          "score": 0.92,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.fraction-add-like",
+          "score": 0.5,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch3-fractions.o4",
+       "text": "Add and subtract like fractions",
+       "pages": "48",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-add-like",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.decimal-operations",
+          "score": 0.42,
+          "method": "text-match@1",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.number.fraction-add",
+          "score": 0.42,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [
+      {
+       "title": "1/2 and 2/4 of the same strip",
+       "pages": "39"
+      },
+      {
+       "title": "3/8 + 2/8",
+       "pages": "49"
+      }
+     ],
+     "exercises": [
+      {
+       "ref": "Exercise 3.1",
+       "pages": "41"
+      },
+      {
+       "ref": "Exercise 3.2",
+       "pages": "46"
+      },
+      {
+       "ref": "Exercise 3.3",
+       "pages": "51"
+      }
+     ]
+    },
+    {
+     "id": "ch4-area-and-perimeter",
+     "number": 4,
+     "title": "Area and perimeter",
+     "pages": "53–66",
+     "outcomes": [
+      {
+       "id": "ch4-area-and-perimeter.o1",
+       "text": "Measure area in square units",
+       "pages": "54",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.area-squares",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.volume-cubes",
+          "score": 0.42,
+          "method": "text-match@1",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.measurement.standard-length",
+          "score": 0.34,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch4-area-and-perimeter.o2",
+       "text": "Calculate rectangle perimeter",
+       "pages": "60",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.rectangle-perimeter",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.rectangle-area",
+          "score": 0.587,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [
+      {
+       "title": "Counting squares inside a garden plan",
+       "pages": "55"
+      }
+     ],
+     "exercises": [
+      {
+       "ref": "Exercise 4.1",
+       "pages": "58"
+      }
+     ]
+    },
+    {
+     "id": "ch5-angles-and-circles",
+     "number": 5,
+     "title": "Angles and circles",
+     "pages": "67–78",
+     "outcomes": [
+      {
+       "id": "ch5-angles-and-circles.o1",
+       "text": "Compare right, acute and obtuse angles",
+       "pages": "68",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.angles-intro",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch5-angles-and-circles.o2",
+       "text": "Identify centres, radii and diameters of circles",
+       "pages": "74",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.circles",
+          "score": 0.8,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 5.1",
+       "pages": "72"
+      }
+     ]
+    },
+    {
+     "id": "ch6-time-and-timetables",
+     "number": 6,
+     "title": "Time and timetables",
+     "pages": "79–86",
+     "outcomes": [
+      {
+       "id": "ch6-time-and-timetables.o1",
+       "text": "Read a bus timetable to plan a journey",
+       "pages": "80",
+       "mapping": {
+        "competencies": [],
+        "proposal": {
+         "id": "proposal.openpath-sample-mathematics-grade-4.ch6-time-and-timetables.o1",
+         "name": "Read a bus timetable to plan a journey",
+         "status": "provisional-proposal",
+         "source": {
+          "textbook": "OpenPath Sample Mathematics, Grade 4",
+          "chapter": "Time and timetables",
+          "pages": "80"
+         },
+         "note": "No existing competency matched. Recorded as a proposal with its textbook reference; it is not a registered competency and has no questions."
+        }
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 6.1",
+       "pages": "84"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

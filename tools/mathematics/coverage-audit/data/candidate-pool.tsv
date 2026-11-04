@@ -1,0 +1,432 @@
+calculus	cint	792	integer	// [a, b, c]: ∫ from a to b of c dx	∫ from 3 to 9 of 12 dx = ?
+calculus	arlindx	468	expression	// [f, a, b, c]: 0 dx/dy + a x = b, x(0) = c; 1 dx/dy + (a/y)x = yᵇ, x(1) = c; 2 y dx − (x + a yᵇ⁺¹) dy = 0, x(1) = c	Solve dx/dy + 4x = −5, where x is a function of y, given that x = 3 wh
+calculus	aqmono	400	interval		Find the interval(s) on which f(x) = −2x³ + 9x² + 24x + 1 is strictly 
+calculus	aqext	400	integer		Find the local maximum value of f(x) = 2x³ − 12x² − 30x + 10.
+calculus	aqrr	400	integer		The total revenue, in rupees, from selling x items is R(x) = 5x² + 4x.
+calculus	aqconc	400	interval		Find the interval(s) on which the curve y = x⁴ − 10x³ + 36x² is concav
+calculus	aqtann	400	exact	// [kind, d, a, b, c, x0]: 0 tangent, 1 normal to y = dx³ + ax² + bx + c at x = x0; 2 tan θ between y = ax² + c and y = c + (a + b)x0² − bx²	Find the equation of the normal to the curve y = x³ − 3x² − 2x + 3 at 
+calculus	arerror	400	fraction	// [s, x, k, q]: square area / cube volume / cube surface; side x cm, error k/100 cm; q = 0 absolute, 1 percentage	The side of a cube is measured as 10 cm, with a possible error of 0.03
+calculus	arpartial	400	expression	// [a, m, n, b, c, p, w]: f = a xᵐyⁿ + b xᵖ + c yᵖ; w = 0 ∂/∂x, 1 ∂/∂y	For f(x, y) = 2x³y³ + 3x³ + 2y³, find ∂f/∂y.
+calculus	arpfint	400	antiderivative	// [a, b, A, B]: ∫ [A/(x − a) + B/(x − b)] dx, written as one fraction over x² − (a+b)x + ab	Find ∫ (2x − 3)/(x² − 3x − 4) dx.
+calculus	aultab	400	integer		f(x) = 2x − 4 for x < 4, and f(x) = 3x − 3 for x ≥ 4. Find the left-ha
+calculus	auliinf	400	fraction		Evaluate lim (x → ∞) of (8x² + 2x − 5)/(x² + 3).
+calculus	audsum	400	exact		Differentiate f(x) = 3x⁴ + 4x² + 4x + 12 with respect to x.
+calculus	audquo	400	expression		Differentiate y = 5x²/(x + 6) with respect to x, and simplify.
+calculus	audch	400	expression		Differentiate y = sin(x² + 2) with respect to x.
+calculus	austd	400	antiderivative		Find ∫ (6cos x − 2sec x tan x) dx.
+calculus	auinit	400	exact		f′(x) = 3x² − x + 16 and f(1) = 30. Find f(x).
+calculus	autrig	400	antiderivative		Find ∫ (6x − 4)/(3x² − 4x + 7) dx. (log is the natural logarithm.)
+calculus	auform	400	antiderivative		Find ∫ (5x − 3)/(x² − 8x + 12) dx. (log is the natural logarithm.)
+calculus	aupfr	400	antiderivative		Find ∫ (4x − 7)/(x − 3)² dx.
+calculus	audfp	400	fraction		Evaluate ∫ from 3 to 6 of (x² + 6x + 7) dx.
+calculus	auinvf	400	antiderivative		Find ∫ 3/√(−x² + 2x + 15) dx.
+calculus	auprq	400	antiderivative		Find ∫ (−5x² + 5x − 27)/(x(x² + 9)) dx. (log is the natural logarithm.
+calculus	pint	360	fraction	// [a, b, k, n]: ∫ from a to b of k xⁿ dx	∫ from 1 to 2 of 12x³ dx = ? (A fraction is fine.)
+calculus	aqorddeg	360	tuple		Find the order and the degree of the differential equation (d²y/dx²)⁵ 
+calculus	aulstd	360	fraction		Evaluate lim (x → 0) of (e^(5x) − 1)/(4x).
+calculus	arodemod	315	fraction	// [t, a, b, c]: t = 0 bacteria doubling, 1 radioactive half-life, 2 Newton cooling	A radioactive sample decays at a rate proportional to the amount prese
+calculus	aqfp	300	expression		Using the definition f′(x) = lim (h → 0) [f(x + h) − f(x)]/h, find f′(
+calculus	aqvel	300	integer		A particle moves along a straight line so that its distance from a fix
+calculus	aqabs	300	integer		Find the absolute minimum value of f(x) = 2x³ − 3x² − 12x on the inter
+calculus	aqodd	300	fraction		Evaluate ∫₋₂² (x e^(x²) + 5x² + 3) dx.
+calculus	aqking	300	fraction		Evaluate ∫₁₀¹⁶ x³/(x³ + (26 − x)³) dx.
+calculus	aqdiffab	300	tuple		f(x) = x² + ax + b for x < −1, and f(x) = 4x − 1 for x ≥ −1. Find a an
+calculus	aqsep	300	expression		Solve the differential equation dy/dx = (x − 3)y, given that y = 4 whe
+calculus	aqlinde	300	expression		Solve dy/dx + 2y/x = 3x³, x > 0, given that y = 3 when x = 1. Write y 
+calculus	aqlarea	300	fraction	// [kind, u, v, w, z]: 0 the line vx + uy = uv and the axes; 1 y = ux + v, the x-axis, x = w and x = z; 2 y = u(x − w), y = −v(x − z) and th	Using integration, find the area of the region bounded by the line y =
+calculus	aqivp	300	fraction	// [kind, a, b, c, d, T]: 0 position from velocity at² + bt + c with s(0) = d; 1 cost from marginal cost ax + b with fixed cost 100d; 2 f′ =	A small workshop in Tiruppur finds that the marginal cost of making x 
+calculus	aqsubsep	300	expression	// [m, c, k, s]: dy/dx = (mx + y + c)² + k² − m, y(0) = sk − c; v = mx + y + c gives dv/dx = v² + k²	Solve dy/dx = y² + 4, given that y = −2 when x = 0, by separating the 
+calculus	arimpl	300	expression	// [a, b, c, d]: a x² + b xy + c y² + d y = a + c + 10	The equation 3x² − xy + y² + 3y = 14 defines y implicitly as a functio
+calculus	arparam	300	expression	// [p, m, q, n]: x = p tᵐ, y = q tⁿ	A curve is given by x = 2t⁴, y = 4t³. Find dy/dx in terms of t (t ≠ 0)
+calculus	areuler	300	integer	// [d, A, B, C, u, v]: f = A xᵈ + B xᵈ⁻¹y + C yᵈ at (u, v)	f(x, y) = 2x³ + x²y − 3y³ is a homogeneous function. Find the value of
+calculus	arlinapp2	300	fraction	// [a, b, c, x0, y0, d, ask]: f = a x² + b xy + c y²; (dx, dy) = LA_D[d]; ask 0 the approximation of f(x0 + dx, y0 + dy), 1 the total differ	Use the linear approximation of f(x, y) = 3xy + 3y² at (2, 3) to estim
+calculus	archain	300	integer	// [a, b, c, p, u, v, t0]: w = a x² + b xy + c y², x = pt + u, y = t² + v, at t = t0	w = 3xy + 3y², where x = 2t − 1 and y = t² − 3. Use the chain rule to 
+calculus	armix	300	expression	// [i, r, c, q]: tank of MIX_V[i] litres, brine of c g/L in at r L/min (c = 0: fresh water), mixture out at r L/min, q × 10 g of salt at the	A tank holds 400 litres of salt water containing 240 g of salt. Salt w
+calculus	aulax	300	antiderivative		Find ∫ cos(6x + 5) dx.
+calculus	arlinde	299	expression	// [f, a, b, c]: f = 0: y′ + a y = b, y(0) = c;  f = 1: y′ + (a/x) y = xᵇ, y(1) = c	Solve dy/dx + 3y = 2, given that y(0) = 1. Write y in terms of x.
+calculus	aulpow	298	fraction		Evaluate lim (x → −1) of (x⁶ − 1)/(x⁴ − 1).
+calculus	arrolle	289	roots	// [p, a, b]: f(x) = x³ + px² + qx on [a, b] with q chosen so that f(a) = f(b)	Verify that f(x) = x³ − 7x satisfies the conditions of Rolle's theorem
+calculus	armvt	266	roots	// [p, a, b]: f(x) = x³ + p x² + q x on [a, b], q fixed by the parameters	Find all values of c in (−1, 0) that satisfy the conclusion of Lagrang
+calculus	aqcontk	243	fraction		f(x) = kx − 1 for x ≤ 3, and f(x) = 3x² − 2 for x > 3. Find the value 
+calculus	audel	240	expression		Differentiate y = 4e^(4x) + 6 log x with respect to x (x > 0; log is t
+calculus	aupi	225	exact		Evaluate ∫ from 0 to 5 of √(25 − x²) dx. Give the exact value in terms
+calculus	auparts	220	antiderivative		Find ∫ 2x² log(3x) dx (x > 0; log is the natural logarithm).
+calculus	audinv	198	expression		Differentiate y = 3tan⁻¹(x/5) with respect to x.
+calculus	aqabsint	193	fraction		Evaluate ∫₋₂⁵ |x| dx.
+calculus	armono	180	interval	// [α, β, s, k]: f′ = 6σ(x − α)(x − β), σ = +1 (k = 0) or −1 (k = 1); s = 1 increasing, 0 decreasing	For f(x) = −2x³ + 3x² + 36x − 2, find where f is strictly decreasing. 
+calculus	armvlim	160	integer	// [t, k, b]: four forms that are 0/0 at the point but have a limit	Evaluate lim ((x, y) → (0, 5)) of sin(4xy)/x.
+calculus	aurie	159	exact		Evaluate lim (n → ∞) of the sum Σ from r = 1 to n of (3r² + 2n²)/n³, b
+calculus	arlhinf	152	fraction	// [f, a, b]: 0 ∞/∞ ratio of quadratics; 1 bx sin(a/x) (x → ∞); 2 bx cot(ax) (x → 0); 3 bx(e^(a/x) − 1) (x → ∞); 4 b(1/(x − 1) − a/(xᵃ − 1))	Evaluate lim (x → 0) of 4x cot 4x, an indeterminate form of type 0 × ∞
+calculus	arlhop	151	expression	// [f, a, b]: five standard forms, 0/0 and 1^∞	Evaluate lim (x → 0) of (2^x − 6^x)/x. Give the exact value (log is th
+calculus	arlinapp	144	fraction	// [f, a, d]: √(a² + d) (f = 0) or ∛(a³ + d) (f = 1)	Use the linear approximation of f(x) = √x at x = 100 to estimate √103.
+calculus	aqhom	141	expression		Solve the homogeneous differential equation dy/dx = (3y + 2x)/x, x > 0
+calculus	dpow	138	integer	// [k, n, t]: f(x) = k xⁿ, f′(t)	f(x) = 5x³. What is f′(2)?
+calculus	aqarea	121	exact		Find the area of the region bounded by the curve y = 2x³, the x-axis a
+calculus	arwallis	121	expression	// [m, n, r]: r = 0 over [0, π/2], r = 1 over [0, π] (n even)	Evaluate ∫ from 0 to π/2 of sin⁴x cos⁶x dx.
+calculus	dprod	120	expression	// [k, n, f, a]: d/dx (k xⁿ sin(ax)) (f = 0) or (k xⁿ cos(ax)) (f = 1)	Differentiate y = 3x^2 cos(3x) with respect to x.
+calculus	aqcarea	120	exact	// [kind, r, t]: 0 x² + y² = r² cut by x + y = r (t = 0 smaller part, 1 larger); 1 the sector between an axis and a line through O (t = 0 … 	Find the area of the region in the first quadrant bounded by the y-axi
+calculus	artaylor	115	fraction	// [f, a, k]: the coefficient of (x − a)ᵏ for 0 a polynomial (fixed by a), 1 1/x, 2 log x, 3 √x (a = m²), 4 xⁿ (n = 6 − a)	Find the coefficient of (x − 1)⁴ in the Taylor series of f(x) = log x 
+calculus	arvolrev	109	expression	// [f, a, b]: y = √(ax), y = ax, y = ax² on [0, b] about the x-axis; y = ax², 0 ≤ y ≤ b about the y-axis	The region bounded by y = 2x, the x-axis and the line x = 2 is rotated
+calculus	armaclaurin	105	fraction	// [f, a, k]: coefficient of xᵏ in e^(ax), sin(ax), cos(ax), ln(1 + ax), 1/(1 − ax)	Find the coefficient of x⁴ in the Maclaurin series of ln(1 − 2x).
+calculus	aqd2rel	104	tuple		If y = Aeˣ + Be^(2x), where A and B are arbitrary constants, find the 
+calculus	argamma	100	expression	// [t, u, v]: ∫₀^∞ xᵘe^(−vx); ∫ᵥ^∞ dx/xᵘ; ∫₀^∞ dx/(x² + v²); ∫₀^∞ e^(−ux) sin vx; ∫₀^∞ e^(−ux) cos vx	Evaluate ∫ from 0 to ∞ of 1/(x² + 64) dx.
+calculus	arlogdiff	96	expression	// [a, b, k]: y = (a x + b)^(k x)	Differentiate y = (2x + 5)^(4x) with respect to x (x > 0).
+calculus	ausbd	96	integer		Evaluate ∫ from 0 to 15 of 6t/√(t² + 64) dt, using the substitution u 
+calculus	auspd	95	integer		Evaluate lim (t → 2) of 3(t⁴ − 16)/(t − 2).
+calculus	aqd2	90	expression		If y = x⁵ log x, find d²y/dx². (log is the natural logarithm.)
+calculus	audbe	90	expression		Evaluate ∫ from 0 to π/2 of 9x² cos x dx. Give the exact value.
+calculus	subst	72	fraction	// [a, b, c, n]: ∫ from a to b of 2x (x² + c)ⁿ dx	∫ from 0 to 3 of 2x(x² + 4)³ dx = ? (A fraction is fine.)
+calculus	lim	54	integer	// [a, k]: lim x→a of k(x² − a²)/(x − a)	Find lim (x → 5) of 3(x² − 25) ⁄ (x − 5).
+calculus	alp	17	fraction	// [m, c]: the region x² ≤ y ≤ m x + c	Find the area of the region {(x, y) : x² ≤ y ≤ 2x + 3}.
+complex	ascop	400	tuple		Write (1 − 5i) ÷ (3 − 6i) in the form x + iy. Type the answer as the p
+complex	ascmod	400	exact		Find |z|, where z = (−i)/(5 − 2i).
+complex	ascloc	400	tuple		In the Argand plane, the points z with |z − (5 + 5i)| = 3|z − (−3 + 2i
+complex	ascinv	400	tuple		Find the multiplicative inverse of z = −i in the form x + iy. Type it 
+complex	aocq	300	tuple		Solve 2x² − 3x + 9 = 0 over the complex numbers. The roots are p + qi 
+complex	asconj	300	tuple		Find the conjugate of (4i) ÷ (−1 + i), in the form x + iy. Type it as 
+complex	aspolm	242	expression		z₁ = 3(cos π + i sin π) and z₂ = 5(cos π/2 + i sin π/2). Find the prin
+complex	aoconj	234	tuple		The number 3i is a root of 2x² + px + q = 0, where p and q are real. F
+complex	asarg	135	expression		Find the principal argument θ (−π < θ ≤ π) of z = −5 − 5√3 i. Write θ 
+complex	ascsqrt	128	tuple		Find the square root of −48 + 64i that has a positive real part. Type 
+complex	asroot	120	set		Solve z⁴ = 81(cos 3π/4 + i sin 3π/4). Every solution has modulus 3. Gi
+complex	asdemo	110	tuple		Use de Moivre's theorem to write (√3 + i)¹² in the form x + iy. Type t
+geometry-measure-formula	ammodel	818	exact	// [m, k, H, L]: radius 7k/2; m 0 a tent with upright walls H and a pointed roof of slant L (canvas); 1 a bowl (capacity);	A tent stands on a circular floor of diameter 14 m. Its walls rise str
+geometry-measure-formula	alangle	628	integer	// [kind, x]: 0 centre from circumference, 1 circumference from centre (2x given), 2 cyclic quadrilateral,	O is the centre of a circle and A, B are points on it. ∠AOB = 38°. Fin
+geometry-measure-formula	aesym	551	integer	// [axis, seed]: axis 0 vertical, 1 horizontal; the seed chooses five different capital letters	Look at these capital letters: A  D  F  C  Z. How many of them have a 
+geometry-measure-formula	amcshape	450	exact	// [m, x, y, k]: d = 7k (k 1–4); m 0 area of an x by d rectangle with a semicircle on a side d; 1 its perimeter;	A rectangular card 21 cm by 31 cm has a quadrant (a quarter of a circl
+geometry-measure-formula	aeang	400	integer	// [t, a, o, r]: kind asked (0 acute, 1 right, 2 obtuse, 3 straight); acute 5a°, obtuse 5o°; r turns the order	The table gives the sizes of four angles: P = 180°, Q = 85°, R = 90°, 
+geometry-measure-formula	aerefl	400	tuple	// [axis, m, x, y]: reflect P(x, y) in x = m (axis 0) or y = m (axis 1)	In the picture, the point P is at (10, 9) and the mirror line is x = 9
+geometry-measure-formula	aetrans	400	tuple	// [x, y, a, b]: move P(x, y) a units right (left if negative) and b units up (down if negative)	The point P is at (5, 3). Slide it 4 units to the left and 4 units up.
+geometry-measure-formula	aeperar	400	integer	// [need, a, b, ctx]: need 0 area (covering), 1 perimeter (going round); a rectangle a by b	A rectangular stage is 15 m long and 13 m wide. How many square mats o
+geometry-measure-formula	afpside	400	integer	// [mode, a, b]: 0 parallelogram, perimeter 2(a + b) and side a → the other side b; 1 rhombus, perimeter 4a → side;	In parallelogram ABCD, AB = (3x + 4) cm and CD = (4x − 3) cm. What is 
+geometry-measure-formula	ahtri	400	integer	// [a, b]: two angles	Two angles of a triangle are 48° and 56°, as in the picture (not to sc
+geometry-measure-formula	ahext	400	integer	// [a, b, f]: interior opposite angles a, b; f 0 find the exterior angle, 1 given exterior a + b and a, find b	One side of a triangle is extended. The two interior angles opposite t
+geometry-measure-formula	ahcong	400	integer	// [perm, f, ask, s1, s2, s3]: ΔABC ≅ Δ(PQR permuted); f 0 a side, 1 an angle	In triangle ABC, AB = 3 cm, BC = 5 cm and CA = 6 cm. Triangle ABC ≅ tr
+geometry-measure-formula	ahpar	400	integer	// [a, rel]: an interior angle of a°, find its rel-related angle	Two parallel lines are cut by a transversal. One of the angles between
+geometry-measure-formula	ahparx	400	integer	// [rel, p, r, x, qq]: angles (px + q)° and (rx + s)°, q = 5qq − 10; rel 0 alternate (equal), 1 co-interior (sum 180)	Two parallel lines are cut by a transversal. A pair of alternate inter
+geometry-measure-formula	aiquad	400	integer	// [a, b, c]: three angles in steps of 5°	In quadrilateral PQRS, ∠P = 100°, ∠Q = 125° and ∠R = 60°. Find ∠S, in 
+geometry-measure-formula	aicvol	400	integer		A cuboid is 18 cm long, 18 cm wide and 24 cm high. What is its volume,
+geometry-measure-formula	aitri	400	exact	// [b, h, right]: right 1: a right triangle with legs b and h	In a right-angled triangle, the two sides that meet at the right angle
+geometry-measure-formula	aitrih	400	exact	// [b, h, ask]: area ½bh given; ask 0 the height (base given), 1 the base (height given)	A triangle has an area of 58.5 cm² and a height of 9 cm. How long is i
+geometry-measure-formula	aipara	400	exact	// [b, h, mode]: base b, height h, slanting side s = h + 1 + (b + h) % 5; mode 0 area, 1 height from area, 2 perimeter	A parallelogram has a base of 14 cm, slanting sides of 6 cm and a heig
+geometry-measure-formula	aitrap	400	exact	// [a, b, h]: parallel sides a > b, height h	A trapezium has parallel sides of 21 cm and 18 cm, and the distance be
+geometry-measure-formula	ailshape	400	integer	// [W, H, p, q, ask]: a W × H rectangle with a p × q rectangle cut from one corner; ask 0 area, 1 perimeter	The shape in the picture is an 8 cm by 11 cm rectangle with a 1 cm by 
+geometry-measure-formula	aipath	400	integer	// [L, W, x, side]: a garden L × W m with a path x m wide; side 0 outside the garden, 1 inside along its edge	A rectangular garden is 21 m long and 18 m wide. A path 2 m wide runs 
+geometry-measure-formula	aisplit	400	fraction	// [mode, a, b, c, d]: see splitAns	A field is shaped like a trapezium with parallel sides 29 m and 19 m, 
+geometry-measure-formula	aihollow	400	fraction	// [ask, R, r, h]: outer radius 7R/2 cm, inner radius 7r/2 cm, length h cm; ask 0 curved surface (outside and inside), 1 total surface, 2 vo	A hollow metal pipe is 110 cm long. Its outer radius is 28 cm and its 
+geometry-measure-formula	amheron	400	exact	// [a, b, c]: sides with a ≤ b ≤ c and an even perimeter (so s is a whole number)	A triangle has sides of 10 cm, 10 cm and 12 cm. Use Heron's formula to
+geometry-measure-formula	amcube	400	exact	// [m, w, a, k, h]: cube of edge a cm; radius 7k/2 cm; m 0 hemisphere on top, 1 cylinder of height h on top, 2 hemispherical	A solid is a cube of edge 28 cm with a cylinder of radius 3.5 cm and h
+geometry-measure-formula	ammidc	400	exact	// [m, x, y]: D is the midpoint of AB (AB = y cm) and the line through D parallel to BC meets AC at E; m 0 AC = x → AE;	In ΔABC, AB = 12 cm and D is the midpoint of AB. The line through D pa
+geometry-measure-formula	ampyrp	400	exact	// [m, a, s, i]: m 0 the i-th rectangular-based pyramid (RPYR); 1 lateral area of a regular POLY[i]-gon pyramid with	A pyramid has a regular octagon as its base, with edges of 19 cm, and 
+geometry-measure-formula	amsimang	400	integer	// [m, x, y]: m 0 ∠A = ∠P = x°, ∠B = ∠Q = y°: find ∠R; 1 ΔABC ~ ΔPQR with ∠A = x°, ∠Q = y°: find ∠C; 2 ∠A = x°, ∠B = y°,	ΔABC ~ ΔPQR (A matches P, B matches Q and C matches R). ∠A = 55° and ∠
+geometry-measure-formula	amalt	400	exact	// [w, m, n, x]: the triangles' sides are in the ratio m : n; w 0 altitude x of the first → the second's; 1 perimeter;	Two similar triangles have corresponding sides of 15 cm and 6 cm. The 
+geometry-measure-formula	amctan	400	integer	// [m, r1, r2, d]: radii r1 ≥ r2 and centres d cm apart; m 0 how many common tangents; 1 the length of a direct common	Two circles have radii 15 cm and 3 cm, and their centres are 20 cm apa
+geometry-measure-formula	avfence	400	integer	// [l, w, k]: a rectangle l m by w m; fencing costs ₹5k per metre	A rectangular garden is 27 m long and 21 m wide. Fencing costs ₹5 per 
+geometry-measure-formula	ahineq	380	integer	// [a, b, f]: sides a ≤ b; f 0 longest whole third side, 1 shortest	Two sides of a triangle are 7 cm and 16 cm. The third side is a whole 
+geometry-measure-formula	aeirr	370	fraction	// [kind, s]: kind 0 an irregular shape on squared paper (full, more than half, half, less than half squares);	The picture shows a leaf traced on squared paper. ■ is a square fully 
+geometry-measure-formula	aedigsym	347	integer	// [axis, s]: axis 0 vertical, 1 horizontal; the seed chooses five digits or numbers drawn as on a digital clock	These are written the way a digital clock shows them, with straight ba
+geometry-measure-formula	aarow	300	integer	// [n, k, kind, seed]: n animals in a row, the k-th from the left; kind 0 place from left, 1 place from right, 2 how many to the left, 3 how	The animals in the picture stand in a row. How many animals are to the
+geometry-measure-formula	aasolid	300	integer	// [tg, seed]: the solid SOLIDS[TARGETS[tg]]; six everyday things chosen by seed	The picture shows a cube. Here are some things: a paneer cube, a duste
+geometry-measure-formula	aaflat	300	integer	// [tg, len, seed]: FLATN[tg] in a row of len shapes	How many squares are in the picture? Look carefully: some shapes are t
+geometry-measure-formula	abgrid	300	integer		On the grid, S is the start and E is the end. You may move only along 
+geometry-measure-formula	abmove	300	tuple		Anu starts at the point A, which is at (2, 5) on the grid. She moves 2
+geometry-measure-formula	abroll	300	integer		Look at the things in the table. How many of them can roll?
+geometry-measure-formula	abdiag	300	integer		There are 3 hexagons. How many corners do they have in all?
+geometry-measure-formula	abcurved	300	integer	// [s1, k1, s2, k2, q]: k1 of CS[s1] (a curved solid) and k2 of CS[s2]; q: CQ[q]	Ravi has 2 cones and 3 cylinders. How many flat faces do they have in 
+geometry-measure-formula	abdisp	300	integer	// [kind, w, s, n]: water at 50·w ml; the object(s) take s·5 ml; kind 0 find the volume, 1 find the new reading, 2 n equal marbles: the volu	A measuring jar has water up to the 250 ml mark. A metal block of volu
+geometry-measure-formula	abseat	300	tuple	// [kind, seed, t]: a seating plan of 4 rows (row 1 at the front) and 5 seats (seat 1 at the left); kind 0 where child t sits; kind 1 where 	The table is the seating plan of a classroom: row 1 is at the front an
+geometry-measure-formula	afprot	300	integer	// [x, y]: the arms pass the marks reading 5x and 5y on the inner scale (180 − 5x and 180 − 5y on the outer scale)	A protractor is placed with its centre on the corner of an angle. One 
+geometry-measure-formula	afcross	300	integer	// [a, rel]: one angle a; rel 0: the angle opposite, 1: the angle next to it, 2: the other three angles together	Two straight lines cross each other, making four angles. One of the an
+geometry-measure-formula	afapr	300	integer	// [kind, l, w, c]: kind 0: same area as l × w, one side c, find its perimeter; kind 1: same perimeter, one side c, find its area	The rectangle in the picture is 12 cm long and 12 cm wide (each square
+geometry-measure-formula	aidiag	300	integer	// [shape, m, b]: rectangle (0): AC = 2m, AB = b, find OB; parallelogram (1): OA = m, OB = b, find AC	In rectangle ABCD, the diagonals AC and BD cross at O. AC = 40 cm and 
+geometry-measure-formula	aicap	300	integer	// [a, b, c, u]: u 0 edges 10a, 10b, 10c cm; u 1 edges a, b, c m	A tank is 60 cm long, 20 cm wide and 40 cm deep. How many litres of wa
+geometry-measure-formula	aipack	300	integer	// [a, L, W, H]: cubes of edge a cm into an L × W × H cm box	How many cubes of edge 3 cm can be packed into a box 20 cm long, 13 cm
+geometry-measure-formula	aiwheel	300	exact	// [k, n, mode]: wheel diameter 14k cm (circumference 44k cm); mode 0 distance after n turns (m), 1 turns for a distance	A wheel has a diameter of 42 cm. How many full turns does it make in r
+geometry-measure-formula	airhomb	300	exact	// [p, q, mode]: diagonals p and q; mode 0 area, 1 the second diagonal from the area	The diagonals of a rhombus are 19 cm and 13 cm long. Find its area, in
+geometry-measure-formula	aitsa	300	integer		A cuboid is 12 cm long, 8 cm wide and 2 cm high. Find its total surfac
+geometry-measure-formula	ailsa	300	integer		A room is 11 m long, 11 m wide and 5 m high. Find the total area of it
+geometry-measure-formula	aicylv	300	exact	// [k, h, g]: radius 7k/2 cm (diameter 7k), height h; g 0 radius given, 1 diameter given; π = 22/7	A cylinder has a diameter of 21 cm and a height of 29 cm. Taking π = 2
+geometry-measure-formula	aicyls	300	exact	// [k, h, ask]: radius 7k/2 cm; ask 0 curved surface area, 1 total surface area	A closed cylinder has a radius of 10.5 cm and a height of 30 cm. Takin
+geometry-measure-formula	aipi	300	fraction	// [mode, o, d]: mode 0 object OBJ[o] of diameter d mm (its measured circumference πd, to the nearest mm); mode 1 APPROX[o] as a decimal	an ancient Egyptian scribe used 256/81 for π. Write this value as a de
+geometry-measure-formula	amshell	300	exact	// [r, t, s]: inner radius r cm, thickness t cm (outer radius R = r + t); s 0 metal in a hollow sphere, 1 metal in a hemispherical bowl, 2 t	A hollow metal ball has an inner radius of 11 cm and an outer radius o
+geometry-measure-formula	ambrahma	300	exact	// [a, b, c, d]: AB, BC, CD, DA with an even perimeter and each side shorter than the other three together	ABCD is a cyclic quadrilateral (its four corners lie on a circle) with
+geometry-measure-formula	ampyrv	300	exact	// [bt, x, y, h]: base 0 square of side x, 1 rectangle x × y, 2 right triangle with legs x and y; height h	A pyramid has a rectangular base 6 cm by 12 cm and a vertical height o
+geometry-measure-formula	amcombv	300	exact	// [s, k, H, h]: radius 7k/2 cm; s 0 cone on a hemisphere (cone height h), 1 cylinder (height H) with a cone (height h), 2 capsule (cylinder	A solid is a cylinder of radius 21 cm and height 10 cm with a cone of 
+geometry-measure-formula	amrecast	300	exact	// [m, a, b, c, d]: m 0 a solid of radius a·b into solids of radius a (count; c 1 sphere → spheres, 2 hemisphere →	A solid metal sphere of radius 8 cm is melted and drawn into a solid c
+geometry-measure-formula	amfrust	300	exact	// [a, t, k, o, r]: R − r, the height h and the slant height l are TRIPLES[t] × k; small radius r; a 0 volume, 1 curved surface, 2 total sur	A frustum of a cone (a cone with its top cut off parallel to the base)
+geometry-measure-formula	amclock	300	exact	// [L, t, hand, ask]: hand length L cm; hand 0 minute hand for 5t minutes, 1 hour hand for t hours; ask 0 area swept, 1 distance travelled b	The hour hand of a clock is 12 cm long. Taking π = 3.14, find the dist
+geometry-measure-formula	amsim	300	exact	// [ti, m, ni, ask]: ΔABC with sides SIM_TRIS[ti] and ΔPQR ~ ΔABC with scale m/SIM_N[ni]; ask 0 QR, 1 RP, 2 the perimeter of PQR	ΔABC ~ ΔPQR (A matches P, B matches Q and C matches R). AB = 4 cm, BC 
+geometry-measure-formula	ambpt	300	exact	// [mode, p, q, r]: DE ∥ BC with D on AB, E on AC; AD = p, DB = q; mode 0 AE = r → EC, 1 BC = r → DE, 2 AC = r → AE	In ΔABC, D is on AB and E is on AC with DE ∥ BC. AD = 7 cm, DB = 3 cm 
+geometry-measure-formula	amsarea	300	exact	// [mode, m, n, x]: sides in the ratio m : n; mode 0 the first area is x·m² → find the second; 1 areas x·m² and x·n², first side m·t → find 	Two triangles are similar, and their corresponding sides are in the ra
+geometry-measure-formula	amtlen	300	exact	// [x, y, ask]: ask 0 radius x, OP = y → PT; 1 radius x, PT = y → OP; 2 PT = x, OP = y → radius	The tangent from a point P touches a circle with centre O at T. PT = 1
+geometry-measure-formula	amtquad	300	exact	// [m, p, q, r]: m 0 quadrilateral ABCD round a circle, AB = p, BC = q, CD = r → DA; 1 triangle with incircle, AB = p, BC = q, CA = r → AF (	A circle touches all four sides of quadrilateral ABCD. AB = 20 cm, BC 
+geometry-measure-formula	amceva	300	ratio	// [m, a, b, c, d]: BD : DC = a : b, CE : EA = c : d; m 0 cevians AD, BE, CF meet at a point; 1 a straight line cuts AB at F, CA at E and BC	In ΔABC, the lines AD, BE and CF meet at one point, with D on BC, E on
+geometry-measure-formula	ampgx	300	tuple	// [x, y, m, s]: m 0 diagonals bisect each other, 1 opposite sides equal; expressions from PG_COEF[s]	In quadrilateral ABCD, AB = 3x + 4, CD = 5x − 8, AD = y + 6 and BC = 2
+geometry-measure-formula	amabis	300	exact	// [m, x, y, z]: AD bisects ∠A, D on BC; m 0 AB = x, AC = y, BC = z → BD; 1 BD = x, DC = y, AB = z → AC	In ΔABC, the bisector of ∠A meets BC at D. AB = 15 cm, AC = 10 cm and 
+geometry-measure-formula	amcombs	295	exact	// [s, t, k, o, H]: s 0 cone on a hemisphere, 1 cylinder with a cone on top, 2 capsule, 3 cylinder with a hemisphere on top;	A solid is a cylinder of radius 16 cm and height 15 cm, standing on it
+geometry-measure-formula	adpreg	288	integer	// [n, s, mode]: a regular n-gon (n 3 to 8) with side s cm; mode 0 the perimeter, mode 1 the side from the perimeter	The perimeter of a regular pentagon is 125 cm. All its sides are equal
+geometry-measure-formula	abside	284	integer		There are 3 squares and 1 pentagon, as in the table. How many corners 
+geometry-measure-formula	abcurve	264	integer	// [len, seed, kind]: a row of len shapes; kind 0 only straight sides, 1 any curved side, 2 both straight and curved	How many shapes in the picture have both straight and curved sides?
+geometry-measure-formula	ammid	257	exact	// [m, x, y, z]: m 0 BC = x → DE; 1 DE = x → BC; 2 sides x ≤ y ≤ z → perimeter of the triangle joining the midpoints	ΔABC has sides of 6 cm, 15 cm and 19 cm. D, E and F are the midpoints 
+geometry-measure-formula	amtang	248	integer	// [u, mode]: angle x = 2u degrees; mode 0 ∠APB → ∠AOB; 1 ∠APB → ∠PAB; 2 ∠APB → ∠OAB; 3 tangent–chord angle → angle in the alternate segment	PT is the tangent to a circle at A, and AB is a chord with ∠BAT = 80°.
+geometry-measure-formula	aisector	234	exact	// [k, t, ask]: radius 7k cm, angle ANGLES[t]; ask 0 arc length, 1 area, 2 perimeter	A sector of a circle has a radius of 21 cm and an angle of 300°. Takin
+geometry-measure-formula	awinc	233	integer		In △ABC, ∠B = 50° and ∠C = 110°. The bisectors of ∠B and ∠C meet at th
+geometry-measure-formula	afpair	220	integer	// [kind, a]: 0 complementary, 1 supplementary	Two angles are supplementary. One of them is 49°. What is the other an
+geometry-measure-formula	amsecinv	212	exact	// [k, ti, ask]: radius 7k cm, angle INV_ANG[ti]; ask 0 angle from arc length, 1 angle from area, 2 radius from area and angle	A sector with an angle of 300° has an area of 1155 cm². Taking π = 22/
+geometry-measure-formula	alchord	208	exact	// [kind, r, d]: kind 0 radius r, distance d → chord length; kind 1 radius r, chord length 2d → distance	A chord of a circle with radius 15 cm is 14 cm from the centre. Find t
+geometry-measure-formula	aipolymiss	203	integer		A hexagon has 6 angles. 5 of them are 145°, 135°, 125°, 140° and 130°.
+geometry-measure-formula	vol	196	integer		A box is built from 1 cm cubes: 6 long, 5 wide and 8 high. How many cu
+geometry-measure-formula	rperim	190	integer		A rectangle is 15 cm long and 4 cm wide. What is its perimeter in cent
+geometry-measure-formula	afquad	180	integer	// [ask, seed]: ask 0 rectangles, 1 rhombuses, 2 parallelograms; five shapes from the seed	The table describes five quadrilaterals, A to E. The sides and the ang
+geometry-measure-formula	aftri	180	integer	// [ask, seed]: ask 0 acute-angled, 1 right-angled, 2 obtuse-angled; five triangles from the seed	The table gives the three angles of five triangles, A to E. How many o
+geometry-measure-formula	aftris	180	integer	// [ask, seed]: ask 0 scalene, 1 equilateral, 2 exactly two equal sides	The table gives the side lengths of five triangles, A to E. How many o
+geometry-measure-formula	afview	180	integer	// [g, ask]: building VIEW_GRIDS[g]; ask 0 top view, 1 front view, 2 right-hand side view: how many squares does it show?	The table is a plan of a building made of cubes standing on a mat: eac
+geometry-measure-formula	adperim	178	integer		Find the perimeter of the five-sided shape in the picture. The length 
+geometry-measure-formula	admper	178	integer		The perimeter of the five-sided shape in the picture is 36 cm. One sid
+geometry-measure-formula	aiwiper	177	fraction	// [mode, a, b, t]: see wipAns; t indexes WANG	A car's wiper blade cleans the part of the windscreen between 21 cm an
+geometry-measure-formula	abroute	174	integer	// [kind, seed]: kind 0 a walk described with directions on a squared map with a scale; kind 1 the shortest route between two towns in a roa	On the map, each side of a square stands for 100 m. Divya starts at S,
+geometry-measure-formula	awcen	172	fraction		In △ABC, AD is a median (D is the midpoint of BC) and G is the centroi
+geometry-measure-formula	aiscale	168	integer	// [i, d, dir]: k = SCALES[i]; dir 0 map → real; dir 1 real → map	On a map, 1 cm stands for 10 km. Two towns are really 150 km apart. Ho
+geometry-measure-formula	aipgram	162	integer	// [A, ask, shape]: ∠A = 5A degrees; ask 0 ∠B, 1 ∠C, 2 ∠D; shape 0 parallelogram, 1 rhombus	ABCD is a parallelogram with ∠A = 105°. Find ∠C, in degrees.
+geometry-measure-formula	amcone	159	exact	// [t, k, o, ask]: radius and height are the legs of TRIPLES[t] × k (o swaps them); ask 0 slant height, 1 curved surface area, 2 total surfa	A right circular cone has a base radius of 20 cm and a height of 48 cm
+geometry-measure-formula	ahpyth	156	integer	// [a, b, f]: legs a < b, hypotenuse c (whole); f 0 find c, 1 find a, 2 find b	A right-angled triangle has hypotenuse 74 cm and one shorter side 24 c
+geometry-measure-formula	aedsym	146	integer	// [kind, s]: kind 0 — a square design of shaded squares (seed s); kind 1 — the shape SSHAPES[s]	The picture shows a square design made of shaded and white squares. Ho
+geometry-measure-formula	ahgen	146	integer	// [mode, m, n]: 0/1: the triple 2m, m² − 1, m² + 1, asking the largest (0) or the middle (1) number; 2–4: m² − n², 2mn, m² + n² asking that	The numbers m² − n², 2mn and m² + n² form a Pythagorean triple for who
+geometry-measure-formula	amtcount	145	integer	// [r, d]: a circle of radius r cm and a point d cm from its centre	O is the centre of a circle of radius 9 cm, and P is a point with OP =
+geometry-measure-formula	airatio	140	exact	// [i, d]: scale 1 : RATIOS[i], drawing length d cm; answer in m (n ≤ 1000) or km	A plan is drawn to the scale 1 : 1000. A wall is 10 cm long on the pla
+geometry-measure-formula	ahiso	137	integer	// [v, f]: f 0 vertex angle v → base angle; f 1 base angle v → vertex angle	In an isosceles triangle each of the two equal angles (opposite the eq
+geometry-measure-formula	aeturn	132	integer	// [p, s]: a hand points at p and turns clockwise s numbers	On a clock face, a hand points at 6. It turns clockwise until it point
+geometry-measure-formula	afclock	132	integer	// [from, k]: the minute hand points at the number `from` and turns clockwise past k numbers	The minute hand of the clock in the picture points to 6. It turns cloc
+geometry-measure-formula	airad	130	fraction	// [mode, k, n]: 0 circumference 44k cm, find the radius; 1 find the diameter; 2 a wheel rolls 44kn cm in n turns, find its radius	A cart wheel rolls 88 m along a road in 50 full turns. Taking π = 22/7
+geometry-measure-formula	actile	124	integer	// [R, C, ti]: an R × C grid covered with tiles TILES[ti] (h rows by w columns), all the same way round	The floor in the picture is a grid of 5 rows and 6 columns of squares.
+geometry-measure-formula	amseg	122	exact	// [r, ai, ask]: radius r cm, central angle 60°, 90° or 120°; ask 0 minor segment, 1 major segment	In a circle of radius 23 cm, the chord AB makes an angle of 90° at the
+geometry-measure-formula	rect	121	integer		A rectangle is 7 cm by 7 cm. What is its area in square centimetres?
+geometry-measure-formula	aashelf	120	integer	// [S, t, dir, seed]: S shelves (top first), the thing on shelf t; dir 0 the shelf just above, 1 just below	Look at the shelves in the picture. How many things are on the shelf j
+geometry-measure-formula	abobj	120	integer	// [seed, q]: six everyday things; q 0 how many have only straight edges, 1 how many are curved	Think of the outline of each of these things: a door, a brick, a kite,
+geometry-measure-formula	aecirc	120	integer	// [dir, x]: dir 0 radius x → diameter; dir 1 diameter x (even) → radius	A circle has a radius of 60 cm. How long is its diameter, in cm?
+geometry-measure-formula	ahtile	119	integer	// [n1, k1, n2, k2, t]: k1 regular n1-gons and k2 regular n2-gons (k2 = 0: none) meet at a point with t more equal corners	At one point of a floor tiling, one square and one regular nonagon mee
+geometry-measure-formula	affrac	118	integer	// [a, k, n, ctx]: a pieces at stage 0, each replaced by k smaller pieces at every stage; stage n; ctx 0 shapes, 1 a branching tree	A pattern starts (stage 0) with 2 shaded squares. At each stage, every
+geometry-measure-formula	aicircum	114	exact	// [r, g, pm]: radius r; g 0 radius given, 1 diameter given; pm 0 π = 22/7 (r a multiple of 7), 1 π = 3.14	A circle has a radius of 26 cm. Taking π = 3.14, find its circumferenc
+geometry-measure-formula	airing	114	exact	// [r, w]: inner radius r m, path width w m, π = 3.14	A circular garden has a radius of 11 m. A path 3 m wide runs all the w
+geometry-measure-formula	afturn	112	fraction	// [s, e, cw]: start and end directions (0 North … 7 North-West), clockwise (1) or anticlockwise (0)	Anu is facing South-East. Anu turns clockwise until facing North-West.
+geometry-measure-formula	amsph	112	exact	// [k, s, a, g]: radius 7k/2 cm; s 0 sphere, 1 solid hemisphere; a 0 surface area, 1 volume; g 0 radius given, 1 diameter given	A solid hemisphere has a diameter of 49 cm. Taking π = 22/7, find its 
+geometry-measure-formula	amherq	112	integer	// [i]: QUADS[i] = [AB, BC, CD, DA, AC, area ABC, area ACD]	A quadrilateral field ABCD has AB = 8 m, BC = 17 m, CD = 13 m and DA =
+geometry-measure-formula	afpara	108	integer	// [shape, a, ask]: parallelogram (0) or rhombus (1) with angle A = a; ask 0 opposite angle C, 1 next angle B, 2 (rhombus) angle between dia	In rhombus ABCD, angle A is 40°. What is angle C (opposite A), in degr
+geometry-measure-formula	afrot	107	fraction	// [shape, ask, m]: ROT[shape]; ask 0 order, 1 smallest angle (degrees), 2 smallest turn as a fraction, 3 the m-th angle	A regular dodecagon (a shape with 12 equal sides) (as in the picture) 
+geometry-measure-formula	amconev	106	exact	// [t, k, o, g]: radius and height from TRIPLES[t] × k; g 0 radius and height given, 1 radius and slant height given	A right circular cone has a base radius of 20 cm and a height of 48 cm
+geometry-measure-formula	aearea	99	integer	// [r, c]: a rectangle of r rows and c columns of unit squares	Each small square in the picture is 1 square unit. The rectangle has 6
+geometry-measure-formula	afsolid	96	integer	// [solid, n, ask, mode]: prism (0) or pyramid (1) on an n-sided base; ask 0 faces, 1 edges, 2 vertices; mode 1: from the other two counts w	A solid with flat faces has 12 faces and 30 edges. Using Euler's rule 
+geometry-measure-formula	aipolyreg	96	integer	// [n, mode]: 0 angle sum of an n-gon; 1 sides from the angle sum; 2 each angle of a regular n-gon; 3 sides of a regular polygon from its ex	The interior angles of a polygon add up to 2700°. How many sides does 
+geometry-measure-formula	aisolid	96	integer	// [kind, n, what, net]: prism (0) or pyramid (1) on an n-gon; what 0 faces, 1 edges, 2 vertices; net 0 named, 1 described by its net	A net is made of 2 decagons and 10 rectangles. When it is folded up in
+geometry-measure-formula	abline	93	integer		Look at the word CAT in the picture. Count every letter you see. How m
+geometry-measure-formula	absolid	93	integer		Kavya has 1 cube and 3 square pyramids. How many edges do they have in
+geometry-measure-formula	absym	92	integer		Look at the word DOG in the picture. A letter is symmetrical if you ca
+geometry-measure-formula	ampyrs	92	exact	// [t, k, o, a, g]: half the base side m, the height h and the slant height l are TRIPLES[t] × k; a 0 lateral, 1 total; g 0 slant height giv	A square pyramid has a base of side 24 cm and a vertical height of 5 c
+geometry-measure-formula	aclines	90	integer	// [n, k, s]: k = 0, n points on one straight line, count segments; k = 1, n points no three in a line, count lines	The 5 points in the picture (A, B, C, D, E) are marked on one straight
+geometry-measure-formula	aieuler	90	integer	// [kind, n, ask]: the counts of a prism (0), pyramid (1) or double pyramid (2) on an n-gon; ask 0 edges, 1 faces, 2 vertices	A polyhedron has 8 faces and 14 edges. Using Euler's formula, how many
+geometry-measure-formula	aicarea	90	exact	// [r, g, pm]: as aicircum	A circle has a radius of 21 cm. Taking π = 22/7, find its area, in cm²
+geometry-measure-formula	afpaint	84	integer	// [a, b, c, ask]: an a × b × c block (a ≤ b ≤ c) painted outside; ask 1 exactly two faces, 2 exactly one face, 3 no paint	A 3 × 4 × 5 block is built from small cubes, as in the picture. The wh
+linear-algebra	apmeq	2171	tuple	// [f, x, y, z]: f 0 [[x + y, 3], [−1, x − y]]; f 1 [[2x − y, 5], [x + 2y, 0]]; f 2 [[x + 3, 2y], [z − 4, 7]]	If [[x + 3, 2y], [z − 4, 7]] = [[2, −2], [−6, 7]], find x, y and z. Wr
+linear-algebra	det2	2076	integer	// [a, b, c, d]: |a b; c d|	Find the determinant of the matrix [[2, 5], [3, 5]] (first row 2, 5; s
+linear-algebra	alsys	500	tuple	// [a1, b1, a2, b2, x, y]	Solve the pair of equations 3x − y = −9 and 4x − 2y = −12. Give the so
+linear-algebra	alsysx	400	tuple	// [kind, u, v, w]: 0 ages (son u, multiple v, w years ago), 1 digits (tens u, units v, w = 1), 2 boat (still water u,	A motor boat goes 33 km downstream in 3 hours, and 12 km upstream in 4
+linear-algebra	apmmul	400	matrix	// [a, b, c, d, e, f, g, h]: A = [[a, b], [c, d]], B = [[e, f], [g, h]]; AB	A = [[1, −1], [4, −2]] and B = [[0, −3], [0, −3]]. Find AB, written as
+linear-algebra	apmlin	400	matrix	// [k, s, x1..x4, a1..a4]: kX + A = B (s = 0) or kX − A = B (s = 1), with X = [[x1, x2], [x3, x4]]	A = [[1, 0], [2, 0]] and B = [[16, 3], [8, −12]]. Find the matrix X su
+linear-algebra	apsys3	400	tuple	// [a11 … a33, x, y, z]: AX = B with the solution (x, y, z)	Solve by the matrix method (X = A⁻¹B): 3y + 3z = −9; 2x + z = 1; 3y + 
+linear-algebra	apsys2	400	tuple	// [a, b, c, d, x, y]: [[a, b], [c, d]] X = B with solution (x, y)	Use the inverse of A = [[3, 6], [5, 5]] to solve AX = B, where X = [[x
+linear-algebra	apinv2	400	matrix	// [a, b, c, d]: A = [[a, b], [c, d]]	A = [[1, −1], [6, 3]]. Find A⁻¹. (Fractions are fine as entries, e.g. 
+linear-algebra	apsysw	400	tuple	// [x, y, z, t, m, s]: the solution, the situation SYSCTX[t], the method METH[m], the coefficient matrix sysA(s)	In a farm survey near Namakkal, Farm P used 2 bags of fertiliser A, 3 
+linear-algebra	aprot	400	tuple	// [t, x, y]: TRM[t] applied to the point (x, y)	The matrix T = [[0, 1], [−1, 0]] represents a rotation through 270° an
+linear-algebra	aqcpar	400	integer		For which value of μ does the system x + z = 3, x + 3y + 2z = 1, 3x + 
+linear-algebra	aqsym	400	matrix		A = [[2, 0, 5], [5, −1, 0], [−4, 3, 2]]. Write A = P + Q, where P is s
+linear-algebra	aqtrab	400	matrix		A = [[0, 4], [4, −1]] and B = [[4, 3], [−3, −1]]. Find (AB)′, written 
+linear-algebra	asdist3	400	exact		Find the distance between the points P(0, −2, 3) and Q(5, −4, −2).
+linear-algebra	assect3	400	tuple		Find the coordinates of the point that divides the segment from A(0, 0
+linear-algebra	asdcos	400	tuple		Find the direction cosines of the line through A(0, 0, −4) and B(−4, −
+linear-algebra	asangl	400	exact		Find cos θ, where θ is the angle between the lines r⃗ = (2î − 2ĵ + 2k̂
+linear-algebra	asfoot	400	tuple		Find the foot of the perpendicular from the point P(0, 7, 5) to the li
+linear-algebra	asskew	400	exact		Find the shortest distance between the lines r⃗ = (−î − 2ĵ) + λ(k̂) an
+linear-algebra	asparl3	400	exact		The lines r⃗ = (−î + ĵ + 2k̂) + λ(2k̂) and r⃗ = (−2î + k̂) + μ(2k̂) ar
+linear-algebra	asplaned	400	exact		Find the distance of the point (1, −1, 4) from the plane 2x − 2z + 3 =
+linear-algebra	asmeet	400	tuple		Find the point where the line r⃗ = (−2k̂) + λ(î + 2ĵ − k̂) meets the p
+linear-algebra	asimage	400	tuple		Find the image (reflection) of the point P(0, −1, −2) in the plane z =
+linear-algebra	asplaneq	400	tuple		Find the equation of the plane that cuts off intercepts −3, −3 and −4 
+linear-algebra	atsec	400	tuple	// [P, Q, m, n, e]: internal (e = 0) or external (e = 1) division in m : n	Points P and Q have position vectors −ĵ − 4k̂ and −2î + ĵ + 3k̂. Find 
+linear-algebra	atang	400	exact		Find cos θ, where θ is the angle between the vectors a = −4k̂ and b = 
+linear-algebra	atproj	400	exact		Find the projection of the vector a = −ĵ − k̂ on the vector b = 4î − ĵ
+linear-algebra	atcross	400	tuple		Find a × b for a = −ĵ + 3k̂ and b = −3î − 2ĵ − k̂. Write it as compone
+linear-algebra	atstp	400	integer		Find the scalar triple product [a b c] = a · (b × c) for a = −ĵ + 3k̂,
+linear-algebra	au3ce	400	tuple		Find the centroid of the triangle with vertices A(1, −2, 5), B(0, −3, 
+linear-algebra	au3ex	400	tuple		Find the point that divides the segment joining A(0, −3, 3) and B(0, −
+linear-algebra	audt3	400	integer		Evaluate the determinant of A = [[2, −2, 2], [4, 0, −2], [−1, −3, −1]]
+linear-algebra	audk	400	set		The area of the triangle with vertices (0, −1), (1, 4) and (k, 1) is 1
+linear-algebra	audsg	400	integer		For which value of k is the matrix [[4, −2, 2], [2, 0, 2], [−3, −2, k]
+linear-algebra	auinv	400	matrix		A = [[0, 3, 3], [2, −1, −2], [3, 0, −2]]. Find A⁻¹, written as [[a, b,
+linear-algebra	alsysw	300	tuple	// [a1, b1, a2, b2, x, j]: a pens and b notebooks; pen ₹x, notebook ₹5j	Arjun buys 2 pens and 4 notebooks for ₹162. Divya buys 4 pens and 3 no
+linear-algebra	al3sys	300	tuple	// [k, x, y, z]: coefficient rows M3[k], solution (x, y, z)	Solve the system: x + y + 2z = 13; 2x − y + z = 11; 3x + y − z = 9. Gi
+linear-algebra	alkcase	300	integer	// [cs, a1, b1, c1, m, d]: second equation built from m × the first; cs 0: (m a1)x + ky = m c1 + d (no solution);	For which value of k does the pair of equations 4x − 3y = 2 and 8x − 6
+linear-algebra	apmcost	300	matrix	// [q11, q12, q13, q21, q22, q23, i1, i2, i3]: quantities (2 × 3) times prices PRICES[i] (3 × 1)	Q = [[5, 3, 1], [3, 6, 7]] (order 2 × 3) and P = [[30], [20], [80]] (o
+linear-algebra	apadj3	300	matrix	// [a11 … a33]	A = [[0, 3, 2], [2, −2, −2], [1, −1, −2]]. Find adj A, written as [[a,
+linear-algebra	aprank	300	integer	// [r, seed]: a 3 × 4 matrix of rank r built from the seed (rankRows)	Find the rank of the matrix [[−2, 0, −3, −1], [3, 2, −1, 3], [−7, −2, 
+linear-algebra	apmmod	300	matrix	// [q11 … q23, ctx, s]: production (2 × 3) times needs per item MMR[s] (3 × 2); ctx 0 workshops, 1 canteens	Two furniture workshops in Madurai make chairs, tables and cupboards. 
+linear-algebra	apcode	300	tuple	// [dir, i, m1, m2]: dir 0 decode the column CODEA[i]·M; dir 1 encode M	In a matrix code, each letter is replaced by its position in the alpha
+linear-algebra	aqsolset	300	tuple	// [a, b, c, e, x0, y0, m, k]: rows (1, a, b), (c, 1 + ac, e), m·row1 + k·row2; the solutions (x0, y0, 0) + t·(row1 × row2)	The system x = 2, x + y + 2z = 2, −y − 2z = 0 has infinitely many solu
+linear-algebra	asleq	300	tuple		Find the vector equation of the line through A(0, 0, 2) and B(−3, 1, 2
+linear-algebra	asint3	300	tuple		Show that the lines r⃗ = (−2î + 2ĵ − 2k̂) + λ(2î − ĵ + k̂) and r⃗ = (−
+linear-algebra	atlin	300	tuple	// [a1..a3, b1..b3, p, q]: p a + q b	If a = ĵ + 3k̂ and b = −5î − 5k̂, find −3a + 3b. Write it as component
+linear-algebra	atmag	300	exact		Points A and B have position vectors −î − ĵ − 2k̂ and −4î − 3ĵ + k̂. F
+linear-algebra	atdc	300	tuple	// [d1, d2, d3, A1, A2, A3]: B = A + d	A and B are the points (3, 2, −2) and (3, 0, −7). Find the direction c
+linear-algebra	atvarea	300	exact		Find the area of the triangle with vertices A(0, 0, −3), B(3, −1, 4) a
+linear-algebra	atcopl	300	fraction	// [a, b, c1, c2]: c = c1 î + c2 ĵ + λ k̂	Find the value of λ for which the vectors a = −ĵ + 2k̂, b = −3î and c 
+linear-algebra	atvtp	300	tuple		Find a × (b × c) for a = ĵ − 2k̂, b = −2î + 3ĵ and c = 3î + 2ĵ. Write 
+linear-algebra	atpara	300	exact	// [kind, x1, x2, x3, y1, y2, y3]: kind 0 adjacent sides a = x, b = y; kind 1 diagonals d₁ = x, d₂ = y	Find the area of the parallelogram whose adjacent sides are given by t
+linear-algebra	attorq	300	tuple	// [P, A, F]: a force F acts at the point P; the torque about A is (P − A) × F	A force F = −3î − 3k̂ (in newtons) acts at the point P(0, 1, −3). Find
+linear-algebra	atvol	300	fraction	// [kind, a, b, c]: kind 0 parallelepiped with edges a, b, c; kind 1 tetrahedron with edges a, b, c from one vertex	Find the volume of the parallelepiped whose three edges from one corne
+linear-algebra	aporth	208	matrix	// [d, i, s]: d 0 a 2 × 2 rotation or reflection from a Pythagorean triple; d 1 a 3 × 3 orthogonal matrix (rows permuted, columns signed)	A = [[2/3, −1/3, 2/3], [2/3, 2/3, −1/3], [1/3, −2/3, −2/3]] is an orth
+linear-algebra	apgj3	200	matrix	// [seed]: a 3 × 3 matrix with determinant ±1 built from row operations (gjA)	A = [[1, −1, 0], [0, 1, −1], [−2, 2, 1]]. Find A⁻¹ by the Gauss–Jordan
+linear-algebra	asplang	193	exact		Find sin φ, where φ is the angle between the line r⃗ = (î − ĵ + 2k̂) +
+linear-algebra	apmcon	160	matrix	// [m, n, t, T]: an m × n matrix with aᵢⱼ = MRULES[t]; T = 1 asks for Aᵀ	Construct the 2 × 2 matrix A = [aᵢⱼ] whose elements are given by aᵢⱼ =
+prob-stat-comb	condp	625	fraction	// [p, q, r, s]: counts: chess club & girls p, chess & boys q, not chess & girls r, not chess & boys s. P(chess | girl)	In a class, 4 girls and 4 boys are in the chess club; 4 girls and 4 bo
+prob-stat-comb	aofund	604	integer	// [q, a, b, c]: q 0 outfits (a × b × c), 1 codes from a digits with (b = 0) or without (b = 1) repetition, 2 routes via Y or direct (ab + c	A canteen menu has 3 South Indian dishes, 7 North Indian dishes and 3 
+prob-stat-comb	avcond	513	fraction	// [u, v, mode]: P(A ∩ B) = u/20, P(B) = v/20; mode 0: P(A | B); 1: P(A′ | B); 2: P(A ∩ B) from P(B) and P(A | B)	For events A and B, P(A ∩ B) = 0.3 and P(B) = 0.6. Find P(A′ | B), the
+prob-stat-comb	avmiss	420	integer	// [m, d1, d2, d3, d4, mode]: five values with mean m, four given as m + dᵢ; mode 0: the fifth value; mode 1: its deviation from the mean	The mean of five numbers is 17. Four of them are 9, 12, 13, 19. What i
+prob-stat-comb	avfmed	420	integer	// [x0, f1 … f5]: values x0 … x0 + 4 with frequencies f1 … f5	The table in the picture shows the number of books each student in a c
+prob-stat-comb	akchance	400	fraction		A bag has 5 red and 6 blue marbles, as in the table. Lakshmi picks one
+prob-stat-comb	akexp	400	fraction		Arjun rolled a die 50 times and recorded the results in the table. Bas
+prob-stat-comb	akgroup	400	integer		The table shows the marks (out of 50) of 30 students. Group them into 
+prob-stat-comb	akmed	400	fraction		Find the median of these numbers: 82, 75, 39, 20, 22.
+prob-stat-comb	anbag	400	fraction		A bag has 5 red, 5 blue and 9 green balls, all of the same size. One b
+prob-stat-comb	ancardn	400	fraction		Cards numbered 1 to 39 are shuffled, and one card is drawn at random. 
+prob-stat-comb	antree	400	fraction		A bag has 4 red and 8 blue counters. Two counters are taken out one af
+prob-stat-comb	anempir	400	fraction	// [kind, M, d, seed]: kind 0 the mode of a frequency table (seed); 1 mode from mean M and median M + d; 2 median from	For a moderately skewed distribution the mean is 80 and the median is 
+prob-stat-comb	anncr	400	fraction	// [kind, m, w, r, k]: kind 0 a committee of r from m boys and w girls with exactly k girls; kind 1 r bulbs from m good	A box has 3 good bulbs and 8 faulty bulbs. 3 bulbs are taken out toget
+prob-stat-comb	asaddp	400	fraction		For two events A and B, P(A) = 18/25, P(B) = 12/25 and P(A ∩ B) = 2/5.
+prob-stat-comb	asbayes	400	fraction		A factory has 3 machines. Machine A makes 40%, Machine B makes 50% and
+prob-stat-comb	astotp	400	fraction		A die is thrown. If it shows a 1, 2 or 3, a ball is drawn from Bag I, 
+prob-stat-comb	asbinom	400	fraction		X has a binomial distribution with n = 4 and p = 2/5. Find P(X = 2).
+prob-stat-comb	asbinmv	400	tuple		A binomial random variable X has mean 16/5 and variance 64/25. Find n 
+prob-stat-comb	atrvmean	400	fraction	// [s, w0..w3]: X takes s, s+1, s+2, s+3 with probabilities w_i / Σw	The probability distribution of a random variable X is given in the ta
+prob-stat-comb	atrvvar	400	fraction		The probability distribution of a random variable X is given in the ta
+prob-stat-comb	attotal	400	fraction	// [k, r1, b1, r2, b2]: die shows 1..k → bag I, else bag II	A die is thrown. If it shows 1, 2 or 3, a ball is drawn from Bag I, wh
+prob-stat-comb	atvar	400	fraction	// [a, d, f1..f5]: x = a, a+d, …, a+4d with frequencies f	Find the variance of the distribution in the table (x is the value, f 
+prob-stat-comb	atsd	400	exact		Find the standard deviation of the data 16, 20, 9, 10, 15, 5. Give the
+prob-stat-comb	atmdmean	400	fraction		Find the mean deviation about the mean of the data 20, 39, 23, 6, 13, 
+prob-stat-comb	atmdmed	400	fraction		Find the mean deviation about the median of the data 25, 27, 29, 24, 1
+prob-stat-comb	atmdf	400	fraction	// [kind, x0, st, seed]: kind 0 discrete, about the mean; 1 discrete, about the median; 2 classes of width 5·st from	Find the mean deviation about the median for the frequency distributio
+prob-stat-comb	atgvar	400	fraction	// [kind, si, hi, seed]: five classes of width h = GH[hi] from 10·si; kind 0 the variance, 1 Σfu² with u = (x − A)/h,	For the grouped frequency distribution in the table, take the assumed 
+prob-stat-comb	atcexp	400	fraction		A random variable X has mean E(X) = 6. Find E(X − 1).
+prob-stat-comb	avmix	400	fraction	// [q1, x1, q2, x2, kind]: kind 0 rice at ₹(20 + 4x) per kg; kind 1 syrup of 5x% sugar	A grocer mixes 5 kg of rice costing ₹40 per kg with 3 kg of rice costi
+prob-stat-comb	akss	375	integer		A school canteen offers 4 kinds of rice, 4 curries and 3 sweets. A mea
+prob-stat-comb	akfreq	360	integer		The table shows the shoe sizes of 24 students. Organise the data in a 
+prob-stat-comb	atindu	324	fraction	// [a, b, kind]: P(A) = a/10, P(B) = b/10; kind 0 both, 1 at least one, 2 neither, 3 exactly one	A and B are independent events with P(A) = 0.5 and P(B) = 0.5. Find P(
+prob-stat-comb	avdraw	324	fraction	// [r, b, mode]: r red and b blue balls; mode 0 both red; 1 red then blue; 2 both the same colour (all without replacement); 3 both red with	A bag has 6 red balls and 6 blue balls. Two balls are drawn one after 
+prob-stat-comb	ancomp	300	fraction	// [m, a, c, d]: m = 0: P(E) = a/d, find P(not E) (c = 0); m = 1: P(win) = a/d, P(draw) = c/d, find P(lose)	A match can end in a win, a draw or a loss. The probability of a win i
+prob-stat-comb	anunion	300	fraction		For two events A and B, P(A) = 7/17, P(B) = 7/17 and P(A and B) = 5/17
+prob-stat-comb	anfreq	300	integer		The marks (out of 50) scored by 20 students in a test are: 24, 20, 47,
+prob-stat-comb	anumean	300	fraction		Find the mean of the frequency distribution in the table (x is the val
+prob-stat-comb	anwmean	300	fraction		In a test, Section A has 26 students with a mean mark of 80, and Secti
+prob-stat-comb	anaddv	300	fraction		The mean of 9 numbers is 19. The number 24 is added to the list. What 
+prob-stat-comb	angmean	300	fraction		Find the mean of the grouped frequency distribution in the table.
+prob-stat-comb	angmedian	300	fraction		Find the median of the grouped frequency distribution in the table.
+prob-stat-comb	angmode	300	fraction		Find the mode of the grouped frequency distribution in the table.
+prob-stat-comb	angstep	300	integer	// [m, si, hi, seed]: m 0 Σfd with d = x − a (assumed mean); m 1 Σfu with u = (x − a)/h (step deviation); a is the	To find the mean of the grouped data in the table by the assumed-mean 
+prob-stat-comb	anfmed	300	fraction	// [x0, st, seed]: values x0, x0 + st, …, x0 + 4st with frequencies 1–9	The table shows the values x and their frequencies f. Find the median 
+prob-stat-comb	aocomm	300	integer		A committee of 3 is to be chosen from 6 men and 7 women. In how many w
+prob-stat-comb	asevset	300	set		A card is drawn from ten cards numbered 1 to 10, so the sample space i
+prob-stat-comb	asadd3	300	fraction		For events A, B and C, P(A) = 11/29, P(B) = 15/29, P(C) = 14/29, P(A ∩
+prob-stat-comb	asbern	300	fraction		A random variable X takes the value 7 with probability 4/5 and the val
+prob-stat-comb	aksarr	290	integer	// [t, n, s]: t 0 n friends in a row with one at the left end; 1 two friends side by side; 2 one friend not at either	In how many different ways can Kavya, Ravi, Priya and Arjun stand in a
+prob-stat-comb	aoncrp	231	integer	// [q, a, b]: q 0 ⁿCₐ = ⁿC_b → n; 1 r from ⁿPᵣ and ⁿCᵣ (n = a, r = b); 2 ⁿC₂ given → n (n = a); 3 ᵃC_b + ᵃC_(b−1)	For some r, ⁵Pᵣ = 60 and ⁵Cᵣ = 10. Find r.
+prob-stat-comb	akfmean	203	fraction		The frequency table shows the number of goals per match for a group. F
+prob-stat-comb	akmode	200	integer		Here are the marks (out of 10) in a spelling test: 8, 4, 5, 7, 9, 8, 7
+prob-stat-comb	akdice	160	fraction		Imran uses a spinner numbered 1 to 4 and a spinner numbered 1 to 5. Th
+prob-stat-comb	aoncr	153	integer		Find ¹⁵C₁₂, the number of ways of choosing 12 of 15 distinct objects.
+prob-stat-comb	aogeoc	137	integer	// [q, n, m]: q 0 diagonals of an n-gon, 1 triangles from its vertices, 2 triangles from n points with m collinear, 3 lines through them	There are 13 points in a plane, of which exactly 7 lie on one straight
+prob-stat-comb	atpdfp	130	fraction	// [n, a, b, c]: f(x) = (n+1)xⁿ/aⁿ⁺¹ on [0, a]; P(b ≤ X ≤ c)	A continuous random variable X has probability density function f(x) =
+prob-stat-comb	mean4	126	integer		What is the mean of 2, 5, 9 and 12?
+prob-stat-comb	atpdfk	124	fraction	// [n, lo, hi]: f(x) = k xⁿ on [lo, hi]	The function f(x) = kx for 4 ≤ x ≤ 6, and f(x) = 0 otherwise, is a pro
+prob-stat-comb	aomulti	111	integer		Find the number of distinct arrangements in a row of the 9 letters A, 
+prob-stat-comb	atpmf	111	fraction	// [kind, n, k]: 0 n coins, X = number of heads: P(X = k); 1 the same: F(k) = P(X ≤ k); 2 two dice, X = the larger	Two fair dice are thrown, and the random variable X is the sum of the 
+prob-stat-comb	aonpr	110	integer		Find ¹³P₅, the number of ways of arranging 5 of 13 distinct objects in
+prob-stat-comb	aofact	100	integer	// [q, n, m]: q 0 n!/m!, 1 1/n! + 1/(n+1)! = x/(n+2)!, 2 n!/(m!(n − m)!), 3 n!/(n − 2)! = n(n − 1) given, find n	Evaluate 7!/(3! × 4!).
+prob-stat-comb	andice	98	fraction		Two fair dice are thrown at the same time. What is the probability tha
+prob-stat-comb	atcdf	96	expression	// [kind, n, a]: kind 0: f(x) = (n + 1)xⁿ/aⁿ⁺¹ on [0, a]; find F(x). kind 1: F(x) = (x/a)ⁿ⁺¹ on [0, a]; find f(x).	A continuous random variable X has distribution function F(x) = x⁵/102
+prob-stat-comb	aomix	95	integer	// [q, n, r, b]: q 0 a selection (order does not matter), 1 distinct roles (order matters), 2 choose b vowels of n and 2 consonants of r and	A class of 12 students elects a captain and a vice-captain, all differ
+prob-stat-comb	aoarr	91	integer	// [q, n, r]: q 0 r-letter codes from n letters with repetition; 1 n in a row, two together; 2 two apart; 3 round table; 4 necklace; 5 rank 	In how many ways can 6 people stand in a row if three particular peopl
+trig-explog-sequence-radical	apn	2560	integer	// [a, d, n]	An arithmetic progression starts 10, 19, 28, … What is term number 20?
+trig-explog-sequence-radical	aogpuse	569	fraction	// [q, a, b, c]: q 0 the decimal c.(block b of length a) recurring; 1 a ball dropped from a m rising BOUNCE[b]; 2 squares from side a; 3 tri	Write the recurring decimal 0.808080… (the block 80 repeats for ever) 
+trig-explog-sequence-radical	ahexp	504	tuple	// [mode, a, b]: 0 tₙ = an + b, give (t₁, t₂, t₃); 1 tₙ = an + b, give (t₁, d) for t₁ and tₙ = tₙ₋₁ + d; 2 tₙ = b × aⁿ⁻¹, give (t₁, r) for t	A sequence has the explicit rule tₙ = −5n + 9. Write the same sequence
+trig-explog-sequence-radical	ajlaw	450	integer		Write 5¹² × 5¹⁰ as a single power of 5, that is 5 to the power □. What
+trig-explog-sequence-radical	amnline	450	exact	// [m, a, b, c, d]: m 0 |a/b − c|; 1 the distance between a/b and c/d; 2 the point s = c parts of 1/b to the left (d = 0)	How far apart are −2/5 and −7/8 on the number line? (A fraction is fin
+trig-explog-sequence-radical	amrec	400	exact	// [f, n, x]: f 0 n.ddd… (x = d), 1 n.ababab… (x = ab), 2 0.nxxx… (n = the digit that does not repeat)	Write 1.323232… (the block 32 repeats for ever) as a fraction p/q.
+trig-explog-sequence-radical	amcyc	400	integer	// [t, k, n]: t 0 k/7, t 1 k/13; the n-th digit after the decimal point	1/7 = 0.142857142857…, and every fraction k/7 repeats the same six dig
+trig-explog-sequence-radical	amrop	400	exact	// [t, a, b, m, k]: t 0 a√m + b√(k²m); 1 (a + √m)(a − √m); 2 (√m + √k)²; 3 (a + b√m)(k + √m)	Simplify: (6 + √7)(6 − √7). (Write the answer without brackets, like 7
+trig-explog-sequence-radical	anstd	400	exact		Find the exact value of cos²45° − sin²90°.
+trig-explog-sequence-radical	anratio	400	exact		If cos θ = 4/5, where θ is an acute angle, find cot θ. Give the exact 
+trig-explog-sequence-radical	antable	400	fraction	// [f, d, m6, k]: f 0 sin, 1 cos, 2 tan, 3 a ladder (L = 4 + d % 5 metres) with the sine table; the angle d° (6·m6 + k)′	Using the table of natural cosines in the picture (with its mean diffe
+trig-explog-sequence-radical	aoexpeq	400	fraction	// [f, ci, i, j, u, w]: f 0 (cⁱ)^(x + u) = (cʲ)^(x + w); f 1 (cⁱ)^x = cᵘ; c = EXB[ci]	Solve 27^(x + 1) = 81^(x − 2). (A fraction is fine.)
+trig-explog-sequence-radical	apins	400	tuple	// [a, d, k]: k arithmetic means between a and a + (k + 1)d	Insert 5 arithmetic means between 6 and −24. Write the means in order,
+trig-explog-sequence-radical	aptel	400	exact	// [d, e, n]: Σ (k = 1 to n) 1/((dk + e)(dk + e + d))	Find the sum Σ (k = 1 to 19) 1/((2k + 6)(2k + 8)). Give the answer as 
+trig-explog-sequence-radical	apsumk	400	integer	// [c3, c2, c1, c0, n]: Σ (k = 1 to n) (c3 k³ + c2 k² + c1 k + c0)	Evaluate Σ (k = 1 to 6) (k³ + k² − 3k − 2).
+trig-explog-sequence-radical	atval	400	exact	// [f, m]: f(15m°)	Find the exact value of tan 1050°. Simplify fully, with no square root
+trig-explog-sequence-radical	atarc	400	fraction		An arc of length 17 cm lies on a circle of radius 2 cm. Find the angle
+trig-explog-sequence-radical	atcosr	400	fraction		In triangle ABC, a = 10 cm, b = 5 cm and c = 13 cm. Find cos A.
+trig-explog-sequence-radical	atapp	400	exact		Two ships leave a port at the same time. One sails 20 km in a straight
+trig-explog-sequence-radical	auapk	400	integer		The AP 6, 4, 2, …, −52 ends at −52. Find its 7th term from the end.
+trig-explog-sequence-radical	auaps	400	integer		Find the sum of the first 10 terms of the AP 31, 36, 41, ….
+trig-explog-sequence-radical	auaprec	400	tuple		A sequence is given by aₙ = 3n² + 3n + 6. Write its first four terms a
+trig-explog-sequence-radical	apgent	384	exact	// [t, d, e]: aₙ = dn + e (t = 0) or n² + dn + e (t = 1)	A sequence begins −3, 2, 7, 12, 17, … and continues by the same rule. 
+trig-explog-sequence-radical	atinv	384	expression	// [f, i, g, j, s]: f⁻¹(arg i) (s = 0), or f⁻¹(arg i) ± g⁻¹(arg j) (s = 1, 2)	Find the value of tan⁻¹(√3) − cot⁻¹(√3) using principal values. Write 
+trig-explog-sequence-radical	auapln	371	tuple		The terms of an AP are plotted as points (n, aₙ) for n = 1, 2, 3, …, a
+trig-explog-sequence-radical	apamgm	360	exact		For x > 0, find the least value of 6x + 30/x. Give the exact value (a 
+trig-explog-sequence-radical	ajudig	350	integer		What is the units digit of 19⁴²?
+trig-explog-sequence-radical	avexpn	320	tuple	// [i, j, m, n, o]: m factors of BASES[i] and n of BASES[j]; o 0 grouped, 1 mixed in order	Write 7 × a × 7 × a × 7 × 7 in exponential form, as 7^□ × a^□. Give th
+trig-explog-sequence-radical	ahnth	300	exact	// [a, d]: t₁ = a, tₙ₊₁ = tₙ + d → tₙ = dn + (a − d)	A sequence has t₁ = 4 and tₙ₊₁ = tₙ + 9. Write a formula for tₙ in ter
+trig-explog-sequence-radical	ahfib	300	integer	// [a, b, k]: t₁ = a, t₂ = b, tₙ = tₙ₋₁ + tₙ₋₂; term k	A sequence begins 5, 5, and every term after that is the sum of the tw
+trig-explog-sequence-radical	aksqe	300	tuple		√742 lies between two consecutive whole numbers. Which two? Give the a
+trig-explog-sequence-radical	alsumr	300	integer	// [kind, m, n]: Σ k^(kind+1) for k = m … n	Find 9² + 10² + 11² + … + 15².
+trig-explog-sequence-radical	alsump	300	integer	// [form, n, a, b]: form 0 Σ k(k + a); form 1 Σ (ak + b)²; form 2 Σ k²(k + a) for k = 1 … n (b = 0 except form 1)	Find the sum of the first 11 terms of the series 1² + 3² + 5² + ….
+trig-explog-sequence-radical	amplaces	300	integer	// [p, m, n]: p / (2^m × 5^n)	29/4000 has a terminating decimal expansion. After how many decimal pl
+trig-explog-sequence-radical	ancompa	300	integer		If sin(2A + 30°) = cos(3A + 30°), where both angles are acute, find A 
+trig-explog-sequence-radical	ancomps	300	integer	// [form, t, a, b]: θ = t°, φ = another acute angle; a, b small whole numbers	Without using tables, find the value of 4 tan 40° × tan 50°.
+trig-explog-sequence-radical	aogp	300	integer		Find the 8th term of the geometric progression −1, 3, −9, …
+trig-explog-sequence-radical	aogpsum	300	integer		Find the sum of the first 6 terms of the geometric progression 1 − 3 +
+trig-explog-sequence-radical	aogpinf	300	fraction		Find the sum to infinity of the geometric series 2 + 3/2 + 9/8 + ⋯ (A 
+trig-explog-sequence-radical	aoagp	300	fraction		Find the sum to infinity of the arithmetico-geometric series 5 + 8(2/5
+trig-explog-sequence-radical	aohm	300	fraction		Find the harmonic mean of 8 and 17. (A fraction is fine.)
+trig-explog-sequence-radical	atsiner	300	exact	// [pair, a]: angles A, B and side a; find b	In triangle ABC, A = 60°, B = 30° and a = 11 cm. Using the sine rule, 
+trig-explog-sequence-radical	atarea	300	exact		In triangle ABC, a = 6 cm, b = 15 cm and C = 90°. Find the area of the
+trig-explog-sequence-radical	atinvc	300	expression	// [f, k, m]: f⁻¹(f(kπ/m)), θ outside the principal range	Find the value of cos⁻¹(cos(−4π/5)). Write the answer in terms of π (y
+trig-explog-sequence-radical	athalft	300	exact	// [h, a, b, c]: sides a, b, c with an even perimeter; h 0 sin(A/2), 1 cos(A/2), 2 tan(A/2)	In triangle ABC, a = 10 cm, b = 3 cm and c = 11 cm. Using a half-angle
+trig-explog-sequence-radical	auapc	300	integer		For which value of k are 2k + 8, k and k − 9 (in this order) consecuti
+trig-explog-sequence-radical	atrad	288	expression	// [m]: 5m degrees	Convert −5° into radians. Write the answer in terms of π (you may type
+trig-explog-sequence-radical	aologeq	268	set		Solve log₅ x + log₅(x + 3124) = 5. Give every solution, separated by c
+trig-explog-sequence-radical	ahrec	262	tuple	// [a, r, d]: t₁ = a, tₙ₊₁ = r tₙ + d	A sequence has t₁ = 5 and tₙ₊₁ = tₙ + 6. Write the first five terms as
+trig-explog-sequence-radical	atdeg	236	fraction	// [k, d]: kπ/d radians	Convert −π/12 radians into degrees.
+trig-explog-sequence-radical	antwo	234	exact		From a point on level ground, the angle of elevation of the top of a t
+trig-explog-sequence-radical	avfexp	234	fraction	// [r, p, q, f]: f 0 (r^q)^(p/q); f 2 (r^q)^(−p/q); f 1 the q-th root of x^p in index form (r unused, 2)	Find the value of 625^(1/4).
+trig-explog-sequence-radical	aogpgr	228	fraction	// [q, pi, ri, n]: q 0 population growth, 1 depreciation, 2 compound interest (rate GPRATE[ri]); 3 doubling or tripling (factor ri + 2)	₹20,000 is invested at 20% per year compound interest (compounded year
+trig-explog-sequence-radical	avppf	225	tuple	// [a, b, c, d]: n = 2ᵃ × 3ᵇ × 5ᶜ × 7ᵈ	Write 540 as a product of powers of primes: 540 = 2ᵃ × 3ᵇ × 5ᶜ × 7ᵈ. G
+trig-explog-sequence-radical	ajneg	224	fraction		Find the value of 5³ × 5⁻⁵. (A fraction is fine.)
+trig-explog-sequence-radical	ansecpt	216	fraction		If sec θ + tan θ = 7/3 for an acute angle θ, find sin θ.
+trig-explog-sequence-radical	aolog	212	fraction		Evaluate log₉ (1/243). (A fraction is fine.)
+trig-explog-sequence-radical	surd	211	exact		Write √315 in its simplest form.
+trig-explog-sequence-radical	ahrhy	192	integer	// [ctx, mode, n]: mode 0 all arrangements of length n; 1 those starting with a long (2) part; 2 those starting with a short (1) part	A staircase has 18 steps. Ravi climbs it taking either 1 or 2 steps at
+trig-explog-sequence-radical	aochb	192	fraction	// [q, ci, i, j, bi]: q 0 log_(cⁱ) b × log_b cʲ; q 1 1/log_A X + 1/log_B X with X = (AB)ʲ	Using the change of base rule, evaluate log₂₇ 10 × log₁₀ 243. (A fract
+trig-explog-sequence-radical	atcomp	192	exact	// [ai, bi, o, f]: f(A ± B), A from CA, B from CB	Use a compound-angle formula to find the exact value of tan(330° − 135
+trig-explog-sequence-radical	aologlaw	190	exact		Given log 2 = a and log 3 = b (logarithms to base 10), express log 20 
+trig-explog-sequence-radical	ahsqd	186	fraction		Find √103 correct to one decimal place (use the long-division method, 
+trig-explog-sequence-radical	anheight	180	exact		A kite is flying at a height of 50 m above the ground. Its string, pul
+trig-explog-sequence-radical	aksqf	176	fraction		Find √12769. (Prime factorisation can help.)
+trig-explog-sequence-radical	atprinc	141	roots	// [f, v, k, w]: f(kx) = value v; w = 1 writes it rearranged	Solve 2 cos x + 1 = 0 for 0 ≤ x < 2π (x in radians). Give every soluti
+trig-explog-sequence-radical	apgms	134	tuple	// [a, r, k, s]: k positive geometric means between a and a r^(k+1) (s = 0), or the other way round (s = 1)	Insert 3 geometric means between 5 and 80, all of them positive. Write
+trig-explog-sequence-radical	apbin	132	exact	// [p, q, k, r]: coefficient of x^r in (1 + kx)^(p/q)	Find the coefficient of x³ in the expansion of (1 − x)^(−1/2) in ascen
+trig-explog-sequence-radical	atinveq	127	fraction	// [kind, a, b]: 0 solve tan⁻¹(ax) + tan⁻¹(bx) = π/4 (x > 0); 1 tan⁻¹(1/a) + tan⁻¹(1/b) = tan⁻¹ x; 2 2 tan⁻¹(1/a) =	Find x if tan⁻¹(1/2) − tan⁻¹ 1 = tan⁻¹ x. (A fraction is fine.)
+trig-explog-sequence-radical	apexlog	120	exact	// [f, a, b, r]: coefficient of x^r in e^((a/b)x) (f = 0) or log(1 + (a/b)x) (f = 1)	Find the coefficient of x⁵ in the expansion of e^(3x) in ascending pow
+trig-explog-sequence-radical	atdbl	120	fraction	// [t, g, q, h]: triple t, given sin (g = 0) or cos (g = 1), quadrant q, target sin2A / cos2A / tan2A	Given sin A = −8/17 and 3π/2 < A < 2π, find tan 2A.
+trig-explog-sequence-radical	athalf	120	exact	// [t, g, q, h]: triple t, given sin A (g = 0) or cos A (g = 1), A in quadrant q (0 < A < 2π); find sin, cos or tan of A/2	Given sin A = −8/17 and 3π/2 < A < 2π, find tan(A/2). Give the exact v
+trig-explog-sequence-radical	alsum	104	integer	// [kind, n]: 0 Σk, 1 Σ(2k − 1), 2 Σk², 3 Σk³ for k = 1 … n	Find the sum 1 + 3 + 5 + … + 59.
+trig-explog-sequence-radical	atunit	104	tuple	// [mi, k]: t = kπ/M with M = UM[mi]	For a real number t, P(t) is the point reached by going a distance t r
+trig-explog-sequence-radical	apsapp	102	fraction	// [q, ni, k, m]: q 0 (1 + k/100)^n with n = SN[ni] (m = 1: √(100 + k)); q 1 e^(k/100); q 2 log(1 + 3k/100)	Use the first three terms of the binomial series to find an approximat
+trig-explog-sequence-radical	root	99	integer		√2601 = ?
+trig-explog-sequence-radical	aksqb	98	integer		How many whole numbers lie between 50² and 51², not counting these two

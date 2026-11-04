@@ -1,0 +1,40 @@
+{
+ "revision": 1,
+ "sha256": "a4ece4bf0474b47feceb6ba98cb86d56301e17b665ea5d96489a814becc312e8",
+ "cases": 2382,
+ "frozenAtUTC": "2026-10-29T04:03:44Z",
+ "engineBaselineCommit": "837c79cc8d7b1effa06b8553960322af7ec3f88b",
+ "byCategory": {
+  "ADV": 332,
+  "ALG": 221,
+  "CAL": 237,
+  "DOM": 217,
+  "EQN": 226,
+  "FUN": 186,
+  "INE": 182,
+  "LIM": 189,
+  "MUL": 197,
+  "PRF": 205,
+  "TRG": 190
+ },
+ "oracleStatus": {
+  "agree": 2250,
+  "policy": 102,
+  "uncertified": 30
+ },
+ "byRelation": {
+  "domain-violation": 186,
+  "valid-equivalence": 1132,
+  "invalid": 748,
+  "valid-implication": 111,
+  "insufficient-information": 39,
+  "wrong-reason": 46,
+  "incomplete": 42,
+  "unsupported": 78
+ },
+ "byKind": {
+  "transition": 1213,
+  "working": 1169
+ },
+ "note": "Expected verdicts are author-declared and oracle-checked; frozen before any E7 execution. The freeze commit is recorded in results/RUN.md."
+}

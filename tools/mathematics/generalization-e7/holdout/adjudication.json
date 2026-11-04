@@ -1,0 +1,37 @@
+{
+ "h7-geo-012": {
+  "engine": "verified",
+  "author": "incomplete",
+  "audit": "incomplete",
+  "adjudication": "CONFIRMED false acceptance",
+  "class": "one-step numerical grounding (40 = 75-35 is derived from task numbers, but no theorem justifies it)"
+ },
+ "h7-geo-013": {
+  "engine": "verified",
+  "author": "incomplete",
+  "audit": "incomplete",
+  "adjudication": "CONFIRMED false acceptance",
+  "class": "numerical coincidence (120/2 = 60 equals 180-120 by accident)"
+ },
+ "h7-algA-048": {
+  "engine": "verified",
+  "author": "invalid",
+  "audit": "invalid",
+  "adjudication": "CONFIRMED false acceptance (low severity)",
+  "class": "numerical coincidence (x=8-6 equals 8/4); line is true but not a justified consequence of 4x=8"
+ },
+ "h7-typed-045": {
+  "engine": "verified",
+  "author": "missing-assumption",
+  "audit": "missing-assumption",
+  "adjudication": "CONFIRMED false acceptance (moderate; same issue family as contested e6-251)",
+  "class": "domain: ln x + C for integral of 1/x covers only x>0"
+ },
+ "h7-typed-033": {
+  "engine": "verified",
+  "author": "invalid",
+  "audit": "verified",
+  "adjudication": "CONTESTED - preserved, not decided",
+  "class": "result 2cos(2x) is correct; rule label \"power rule\" is wrong. Whether a rule label is part of the claim is a contract question"
+ }
+}

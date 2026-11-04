@@ -1,0 +1,55 @@
+{
+ "schema": "synthetic-learner-profile@1",
+ "id": "S006",
+ "version": "1.0.0",
+ "synthetic": "All parameters are synthetic and configurable; they are not empirical statistics about real students.",
+ "name": "Forgetful learner",
+ "description": "Learns during instruction (mostly fragile knowledge) but loses competence over simulated days.",
+ "seed": 6006,
+ "skills": {
+  "one-step": 0.7,
+  "two-step": 0.45,
+  "both-sides": 0.3,
+  "brackets": 0.25,
+  "modelling": 0.35
+ },
+ "misconceptions": {
+  "added-not-subtracted": 0.3,
+  "only-one-side": 0.35,
+  "first-term-only": 0.35
+ },
+ "slip": 0.06,
+ "guess": 0.0,
+ "invalidWorkingWithCorrectAnswer": 0.0,
+ "working": {
+  "full": 0.55,
+  "partial": 0.15,
+  "bare": 0.2,
+  "none": 0.1,
+  "unsupportedNotation": 0.1
+ },
+ "hints": {
+  "seek": 0.4,
+  "help": 0.25
+ },
+ "instruction": {
+  "full": 0.7,
+  "partial": 0.2,
+  "gain": 0.65,
+  "fragileShare": 0.8,
+  "misconceptionReduction": 0.7,
+  "misconceptionResponse": 0.7,
+  "offTargetGain": 0.1
+ },
+ "practice": {
+  "consolidate": 0.15,
+  "gainRight": 0.03,
+  "gainWrong": 0.0
+ },
+ "forgetting": {
+  "halfLifeDays": 6,
+  "floor": 0.25,
+  "fragileHalfLifeDays": 2,
+  "relapse": 0.6
+ }
+}

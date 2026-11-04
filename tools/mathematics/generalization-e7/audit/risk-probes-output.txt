@@ -1,0 +1,322 @@
+## G1 symbolic vs numeric
+g1a-lines-int | exp=unsupported/invalid: x^2=x only at 0,1 | verified | single-route
+g1b-sqrtx2 | exp=invalid: sqrt(x^2)=x false for neg | unsupported | single-route
+g1c-sqrtx2abs | exp=valid | unsupported | single-route
+g1d-x2=x | exp=invalid | invalid | single-route
+g1e-expand-bad | exp=invalid: (x+1)^2 != x^2+1 | invalid | single-route
+g1f-expand-bad2 | exp=invalid: coincide at x=0 | invalid | single-route
+g1g-poly-cancels-int | exp=invalid:(x^2+x)=2x only x=0,1 | invalid | single-route
+g1h-sin-int | exp=invalid:sin(pi x)=0 at ints but not identity | unsupported | single-route
+g1i-neareq | exp=invalid: 0.1+0.2 vs 0.3000001 | invalid | single-route
+g1j-neareq2 | exp=invalid:x=1.0000001 | invalid | single-route
+g1k-neareq3 | exp=valid | invalid | single-route
+g1l-sqrt2 | exp=approx | invalid | single-route
+## G2 exact/approx, scope
+g2a-compute-ok | exp=valid | verified | single-route
+g2b-compute-dec | exp=valid(0.8333 approx)? | invalid | single-route
+g2c-3x=1-exact | exp=valid | verified | single-route
+g2d-3x=1-dec | exp=approx-not-exact | invalid | single-route
+g2e-3x=1-dec2 | exp=approx-not-exact | invalid | single-route
+g2f-3x=1-bad | exp=invalid | invalid | single-route
+g2g-eq-dec | exp=valid | verified | single-route
+g2h-pi | exp=valid | unsupported | single-route
+g2i-scope-reuse | exp=x used as var then number? invalid | invalid | single-route
+g2j-two-var | exp=valid | unsupported | single-route
+g2k-param | exp=valid x=-b/a | unsupported | single-route
+g2l-param-bad | exp=invalid | unsupported | single-route
+g2m-shadow | exp=x reused: x=3 then 'let x=5' new quantity | unsupported | single-route
+g2n-solve-for-y | exp=valid | unsupported | single-route
+g2o-solve-for-y-wrong | exp=invalid | unsupported | single-route
+g2p-bind-x4 | exp=valid x=4 -> substitute | incomplete | single-route
+g2q-bind-neg | exp=invalid x=-4 violates x>0 | incomplete | single-route
+g2r-both | exp=incomplete? x=±4 given x>0 => x=4 and -4 claimed invalid | verified | single-route
+## G3 extraneous / domain
+g3a-x2=16-only4 | exp=incomplete | incomplete | single-route
+g3b-x2=16-both | exp=valid | verified | single-route
+g3c-constraint-ignored | exp=invalid (x>0 excludes -4) | unsupported | single-route
+g3d-sqrt-unchecked | exp=invalid: x=1 extraneous | invalid | single-route
+g3e-sqrt-checked | exp=valid x=6 | unsupported | single-route
+g3f-sqrt-only6-unchecked | exp=valid answer, unjustified rejection? | verified | single-route
+g3g-rational-unchecked | exp=invalid x=2 extraneous | invalid | single-route
+g3h-rational-ok | exp=valid x=-2 | malformed | single-route
+g3i-rational2 | exp=invalid x=1 extraneous | invalid | single-route
+g3j-log-unchecked | exp=invalid x=-5 extraneous | unsupported | single-route
+g3k-abs | exp=valid x=3 or -3 | verified | single-route
+g3l-abs-bad | exp=invalid | invalid | single-route
+g3m-abs-oneonly | exp=incomplete | incomplete | single-route
+g3n-sqrt-neg | exp=invalid no real solution | invalid | single-route
+g3o-div0-cancel | exp=invalid cancelling x loses root x=0 | incomplete | single-route
+g3p-div0-cancel-ok | exp=valid | verified | single-route
+g3q-div-by-zero-line | exp=invalid divides by 0 | incomplete | single-route
+g3r-0=0-trick | exp=invalid proof 1=2 | invalid | single-route
+## G4 unjustified/side claims/dependencies
+g4a-final-only | exp=accept? no work shown | verified | single-route
+g4b-bad-step-right-final | exp=invalid line 1 false | invalid | single-route
+g4c-false-side-correct-final | exp=side false line independent | unsupported | single-route
+g4d-false-then-correct | exp=earlier false line (3*3=10), final fine | invalid | single-route
+g4e-nonsequitur | exp=x=4 from unrelated eq | verified | single-route
+g4f-unrelated-true | exp=true unrelated lines then final | incomplete | single-route
+g4g-magic-step | exp=jump x^2=16 -> x=4 w/ different problem | incomplete | single-route
+g4h-two-wrong-cancel | exp=errors cancel: 2x=8 -> x=8-6=2? (algA-048 shape) | verified | single-route
+g4i-4x=8-b | exp=4x=8; x=8/4 | verified | single-route
+g4j-4x=8-c | exp=4x=8; x=8-6 =2 | verified | single-route
+g4k-4x=8-d | exp=4x=8 ; x = 8 - 6 | verified | single-route
+g4l-4x=8-e | exp=coincidence 2=2 : x=sqrt(4) | verified | single-route
+g4m-wrong-op-right-ans | exp=3x=6 -> x=6-3+...  | verified | single-route
+g4n-add-instead | exp=x+2=4 ; x=4/2 | verified | single-route
+g4o-x-3=5 | exp=x-3=5 ; x=5-3 wrong, final 2? (final wrong) | invalid | single-route
+g4p-x*x=4-wrongroute | exp=x+x=4 ; x*x=4 => x=2 (coincidence) | verified | single-route
+g4q-halve | exp=2x=4; x=4-2 | verified | single-route
+g4r-final-claimed-wrong-justif | exp=x=2: because 2 is my favourite | unsupported | single-route
+## G5 representations / simplify
+g5a-factor | exp=valid | unsupported | single-route
+g5b-factor-bad | exp=invalid | invalid | single-route
+g5c-expand-ans-unsimplified | exp=valid/partially? unsimplified | incomplete | single-route
+g5d-expand-simplified | exp=valid | unsupported | single-route
+g5e-factored-answer-for-expand | exp=equiv but not expanded | incomplete | single-route
+g5f-ans-tautology | exp=tautology not answering | incomplete | single-route
+g5g-rationalise | exp=valid | ambiguous | single-route
+g5h-rationalise-unrat | exp=unrationalised restated | ambiguous | single-route
+g5i-simplify-frac | exp=valid | unsupported | single-route
+g5j-simplify-frac-domain | exp=valid w/ x!=1; engine? | malformed | single-route
+g5k-simplify-unsimpl | exp=identity unchanged | incomplete | single-route
+g5l-sqrt-simp | exp=valid | unsupported | single-route
+g5m-sqrt-bad | exp=invalid | unsupported | single-route
+g5n-sqrt-sum | exp=invalid sqrt(a+b) | malformed | single-route
+g5o-sqrt-sum-ok | exp=valid | malformed | single-route
+g5p-freshman | exp=invalid (a+b)^2 | invalid | single-route
+g5q-frac-add | exp=invalid | invalid | single-route
+g5r-log | exp=invalid log(a+b) | unsupported | single-route
+g5s-log-ok | exp=valid | unsupported | single-route
+g5t-exp-bad | exp=invalid | invalid | single-route
+## G6 probability premises
+g6a-indep-given | exp=valid | missing-assumption | open-obligations
+g6b-intersect-noindep-task | exp=P(A∩B) product without independence stated | unsupported | no-route-decided
+g6c-union-add-nonexcl | exp=P(AuB)=pa+pb wrong w/o exclusivity | unsupported | no-route-decided
+g6d-union-excl-stated | exp=valid | missing-assumption | open-obligations
+g6e-union-incl-excl-missing-int | exp=cannot compute, pab missing | unsupported | no-route-decided
+g6f-union-with-pab | exp=valid | incomplete | open-obligations
+g6g-binom-noindep | exp=independent not stated | missing-assumption | open-obligations
+g6h-binom-indep-wrongorder | exp=(2/3)^2(1/3)^3 swapped = 40/243 correct?; swapped p -> 80/243 is the wrong | verified | accepted-by-obligations
+g6i-binom-correct | exp=valid 80/243 | verified | accepted-by-obligations
+g6j-cond-swapped | exp=P(A|B) vs P(B|A) | incomplete | open-obligations
+g6k-cond-right | exp=valid 1/2 | verified | accepted-by-obligations
+g6l-finite-noequip | exp=3 outcomes ratio w/o equiprobable | missing-assumption | open-obligations
+g6m-finite-equip | exp=valid | verified | accepted-by-obligations
+g6n-finite-flaw | exp=3*(1/6)=1/2 reaches wrong claim for 91/216 | invalid | disproven-claim
+g6o-finite-right-ans-wrong-method | exp=91/216 by wrong reasoning | invalid | disproven-claim
+g6p-mean-ans-only | exp=answer only | verified | accepted-by-obligations
+g6q-pop-var-vs-sample | exp=pop var vs sample var | invalid | disproven-claim
+g6r-pop-var-ok | exp=valid 2/3 | verified | accepted-by-obligations
+## G7 geometry
+g7a-tri-ok | exp=valid | verified | accepted-by-obligations
+g7b-tri-sum-360 | exp=invalid | invalid | disproven-claim
+g7c-tri-wrong-final | exp=invalid | invalid | disproven-claim
+g7d-tri-no-nondeg | exp=valid? conditions empty | missing-assumption | open-obligations
+g7e-ans-only | exp=answer only | verified | accepted-by-obligations
+g7f-wrong-theorem-right-num | exp=C=180-47-68 via 'exterior angle' | unsupported | no-route-decided
+g7g-corr-par | exp=valid | verified | accepted-by-obligations
+g7h-corr-NOpar | exp=parallel not given: unsupported | missing-assumption | open-obligations
+g7i-corr-NOpar-silent | exp=parallel not given, not mentioned | missing-assumption | open-obligations
+g7j-alt-wrong-rule | exp=called alternate but pair is corr; still equal | invalid | disproven-claim
+g7k-vert-linear-swap | exp=vertical vs supplement | invalid | disproven-claim
+g7l-vert-ok | exp=valid | verified | accepted-by-obligations
+g7m-vert-NOfact | exp=vertical not given: ∠BOD=∠AOC not justified | missing-assumption | open-obligations
+g7n-dist-ok | exp=valid | unsupported | no-route-decided
+g7o-dist-sumabs | exp=|dx|+|dy|=17 wrong | invalid | disproven-claim
+g7p-dist-coincide | exp=wrong formula right num: 13^2 | missing-assumption | objection-stands
+g7q-dist-coord-swap | exp=used wrong coords gives 169? (2,3)->(7,15) dy=12; used (15-3) | verified | accepted-by-obligations
+g7r-congr-2sides | exp=not enough | unsupported | no-route-decided
+g7s-sss-wrongname | exp=SSS ok; call it SAS | unsupported | no-route-decided
+g7t-sss-ok | exp=valid | unsupported | no-route-decided
+g7u-sss-extra-unsup | exp=AB=DE plus extra claim angle A=D unsupported but true | unsupported | no-route-decided
+## G8 calculus natural
+g8a-d-ok | exp=valid | verified | accepted-by-obligations
+g8b-d-nochain | exp=invalid | invalid | disproven-claim
+g8c-d-ok-unsimpl | exp=valid | verified | accepted-by-obligations
+g8d-d-equiv-expanded | exp=valid (expanded form) | verified | accepted-by-obligations
+g8e-d-abs | exp=|x|' = x/|x| (x!=0) | verified | accepted-by-obligations
+g8f-d-sqrt | exp=valid | verified | accepted-by-obligations
+g8g-d-lnabs | exp=d/dx ln x = 1/x | verified | accepted-by-obligations
+g8h-d-tan | exp=valid sec^2 | verified | accepted-by-obligations
+g8i-int-noC | exp=missing +C | unsupported | no-route-decided
+g8j-int-C | exp=valid | unsupported | no-route-decided
+g8k-int-1/x-lnx | exp=ln x + C wrong domain (x<0) holdout typed-045; natural | unsupported | no-route-decided
+g8l-int-1/x-lnabs | exp=valid | unsupported | no-route-decided
+g8m-int-dyn-diff | exp=answer F differs by constant: x^4/4 + 7 | unsupported | no-route-decided
+g8n-int-wrong-by-const-diff-fn | exp=x^4/4 + x | unsupported | no-route-decided
+g8o-int-power-n=-1 | exp=x^0/0 | unsupported | no-route-decided
+g8p-int-sin | exp=valid -cos | unsupported | no-route-decided
+g8q-int-sin-sign | exp=invalid | unsupported | no-route-decided
+g8r-int-cos2x | exp=half missing | unsupported | no-route-decided
+g8s-int-by-parts-wrong | exp=x e^x  | unsupported | no-route-decided
+g8t-int-trig-alt | exp=sin^2 = -cos^2/2 vs -cos2x/4+x/2 equal | unsupported | no-route-decided
+g8u-int-trig-alt2 | exp=valid alt form sin^2/2 | unsupported | no-route-decided
+g8v-int-trig-alt3 | exp=valid alt form -cos(2x)/4 | unsupported | no-route-decided
+## G9 integrals with integral sign
+g9a-ok | exp=valid | verified | accepted-by-obligations
+g9b-noC | exp=missing +C (incomplete?) | missing-assumption | missing-constant-contract
+g9c-C-const7 | exp=x^4/4+7 valid family member | missing-assumption | missing-constant-contract
+g9d-lnx | exp=ln x + C: not valid for x<0 / ln|x| needed | missing-assumption | objection-stands
+g9e-lnabs | exp=valid | verified | accepted-by-obligations
+g9f-x^-1 | exp=x^0/0 invalid | unsupported | no-route-decided
+g9g-sign | exp=invalid | invalid | disproven-claim
+g9h-sin-ok | exp=valid | verified | accepted-by-obligations
+g9i-chain-missing | exp=invalid half | invalid | disproven-claim
+g9j-chain-ok | exp=valid | verified | accepted-by-obligations
+g9k-alt-forms | exp=valid -cos^2/2 + C | verified | accepted-by-obligations
+g9l-diff-by-nonconst | exp=x^4/4 + x invalid | invalid | disproven-claim
+g9m-1/x^2 | exp=valid -1/x | verified | accepted-by-obligations
+g9n-1/x^2-sign | exp=invalid | invalid | disproven-claim
+g9o-sqrt | exp=valid 2/3x^1.5 | verified | accepted-by-obligations
+g9p-e^x | exp=valid | verified | accepted-by-obligations
+g9q-two-C-different | exp=by-parts ok | verified | accepted-by-obligations
+g9r-by-parts-wrong | exp=invalid | invalid | disproven-claim
+g9s-sec2-tan | exp=valid | verified | accepted-by-obligations
+g9t-sec2-tan-domain | exp=tan(x)+C fine on intervals; accept | verified | accepted-by-obligations
+## G10 typed, limits, definite
+g10a-typed-lnx | exp=invalid/unsupported (domain) | verified | single-route
+g10b-typed-lnabs | exp=valid | malformed | single-route
+g10c-typed-x4/4 | exp=valid | invalid | single-route
+g10d-typed-x4/4-noC | exp=missing const | invalid | single-route
+g10e-typed-wrong-rule-name | exp=right claim, wrong rule name | invalid | single-route
+g10f-typed-bad-claim-right-rule | exp=wrong claim | invalid | single-route
+g10g-typed-unknown-rule | exp=right claim, nonsense rule | invalid | single-route
+g10h-typed-method-rule | exp=right claim w/ u-sub name | verified | single-route
+# limits
+g10i-lim-sinx/x | exp=1 | malformed | no-route-decided
+g10j-lim-1/x-both | exp=DNE; claim 0 | malformed | no-route-decided
+g10k-lim-1/x-both-DNE | exp=valid DNE | incomplete | open-obligations
+g10l-lim-1/x-right | exp=+inf | verified | accepted-by-obligations
+g10m-lim-by-sub-0/0 | exp=wrong plugging | malformed | no-route-decided
+g10n-lim-factor | exp=valid 2 | malformed | no-route-decided
+g10o-lim-answer-only | exp=2 | unsupported | no-route-decided
+g10p-lim-lhopital-misuse | exp=non-indeterminate lhopital | malformed | no-route-decided
+g10q-lim-right-ans-bad-method | exp=lhopital wrong ->1/2 true | malformed | no-route-decided
+# definite
+g10r-defint-ok | exp=valid 1/3 | verified | accepted-by-obligations
+g10s-defint-1/x2 | exp=diverge; claim -2 | unsupported | no-route-decided
+g10t-defint-area-sign | exp=sin on [0,2pi] =0 | unsupported | no-route-decided
+g10u-defint-abs | exp=valid 1 | invalid | disproven-claim
+## G11 domain/branch-sensitive equalities (calc IR)
+g11a-d-sqrt(x^2)=1 | exp=false for x<0 | invalid | disproven-claim
+g11b-d-sqrt(x^2)-ok | exp=valid x/|x| | verified | accepted-by-obligations
+g11c-d-ln(x^2)=1/x*2 | exp=valid 2/x | verified | accepted-by-obligations
+g11d-d-ln(x^2)-wrong | exp=1/(x^2)*2x = 2/x valid | verified | accepted-by-obligations
+g11e-d-x^x? | exp=skip | verified | accepted-by-obligations
+g11f-int-tan-lncos | exp=-ln(cos x) only cos>0 | unsupported | no-route-decided
+g11g-int-tan-lnabs | exp=valid | verified | accepted-by-obligations
+g11h-int-2x/(x^2)-lnx2 | exp=ln(x^2) valid for x!=0 | verified | accepted-by-obligations
+g11i-int-2x/(x^2)-lnx | exp=ln x -> 1/x not 2/x invalid | invalid | disproven-claim
+g11j-int-2x/(x^2)-2lnx | exp=2 ln x - domain x>0 only | missing-assumption | objection-stands
+g11k-int-1/(x-1)-ln(x-1) | exp=domain | missing-assumption | objection-stands
+g11l-int-sqrt-of-square | exp=∫sqrt(x^2) dx = x^2/2 false for x<0 | invalid | disproven-claim
+g11m-int-abs | exp=∫|x| = x|x|/2 | invalid | disproven-claim
+g11n-d-abs-1 | exp=x/|x| not 1 | invalid | disproven-claim
+g11o-d-x^(1/2)-x=0 | exp=f'(0) undefined | verified | accepted-by-obligations
+g11p-d-atan | exp=valid | verified | accepted-by-obligations
+g11q-d-atan-wrong-sign | exp=invalid | invalid | disproven-claim
+## G12 typed path domain
+g12a-typed-2lnx | exp=ln x for 2/x : domain x>0 | invalid | single-route
+g12b-typed-ln(x-1) | exp=domain | verified | single-route
+g12c-typed-lnx2 | exp=valid | verified | single-route
+g12d-typed-d-sqrtx2=1 | exp=false x<0 | malformed | single-route
+g12e-typed-d-ok | exp=valid | malformed | single-route
+g12f-typed-sqrtx2int | exp=x^2/2 false | invalid | single-route
+g12g-typed-ln-wrong-rulename | exp=rulename mismatch ln x right | verified | single-route
+g12h-typed-sqrtx2-int | exp=x|x|/2 valid | malformed | single-route
+g12i-typed-no-rule | exp=valid claim missing rule | verified | single-route
+g12j-typed-two-steps-first-wrong | exp=false then right | invalid | single-route
+g12k-typed-2steps-ok-then-false | exp=right then final false | invalid | single-route
+## G13 notation & inequalities & systems
+g13a-1/2x | exp=1/2x=3: ambiguous (x/2 vs 1/(2x)) | ambiguous | single-route
+g13b-1/2x-alt | exp=1/2x=3 -> x=1/6 (reading 1/(2x)) | ambiguous | single-route
+g13c-6/2(1+2) | exp=Compute 6/2(1+2): 9 vs 1 | ambiguous | single-route
+g13d-6/2(1+2)=1 | exp= | ambiguous | single-route
+g13e-sin2x | exp=sin^2 x ambiguity | unsupported | single-route
+g13f-neg-sq | exp=-3^2 = -9 | verified | single-route
+g13g-neg-sq-9 | exp=-3^2=9 (misreading) | invalid | single-route
+g13h-2^3^2 | exp=right assoc 512 vs 64 | malformed | single-route
+g13i-2^3^2=64 | exp= | malformed | single-route
+g13j-ineq-ok | exp=x>2 | verified | single-route
+g13k-ineq-flip-missing | exp=invalid | invalid | single-route
+g13l-ineq-flip | exp=valid | verified | single-route
+g13m-ineq-lineq-nonstrict | exp=x>=2 vs x>2 | invalid | single-route
+g13n-sys-ok | exp=valid | unsupported | single-route
+g13o-sys-bad | exp=invalid | unsupported | single-route
+g13p-quad-formula | exp=valid | verified | single-route
+g13q-quad-lost-root | exp=incomplete | incomplete | single-route
+g13r-quad-extra-root | exp=invalid | invalid | single-route
+g13s-zero-product | exp=x(x-1)=2 -> x=2 or x-1=2 (invalid inference) | malformed | single-route
+g13t-zero-product-lucky | exp=x(x-1)=2 lucky root 2 ok other bad | incomplete | single-route
+g13u-sq-both-sides | exp=x=-2: squaring introduces | invalid | single-route
+g13v-sq-both-sides-2 | exp=x=2 -> x^2=4 -> x=2 ok?  | verified | single-route
+## G14 root-coincidence mechanism
+g14a-sq-line | exp=x^2=16 non-equiv w/ x=4 | verified | single-route
+g14b-x+1=5 | exp=unrelated eq with same root | verified | single-route
+g14c-0x | exp=0*x=0 after: all x | incomplete | single-route
+g14d-guess-check | exp=guess and check | malformed | single-route
+g14e-verified-by-substitution | exp=valid check | unsupported | single-route
+g14f-line-true-only-at-root-wrong-reasoning | exp=3x=12 invalid derivation? 2x+3=11 -> 3x=12 (true at 4, but not equivalent) | verified | single-route
+g14g-chain | exp=3x=12 -> 4x=16 -> x=4 | verified | single-route
+g14h-quad-fake | exp=x^2+x=20 -> x=4 (wrong deriv, root true) | verified | single-route
+g14i-lin-fake | exp=(x-4)(x+7)=0 -> x=4 loses root -7 : not equivalent | verified | single-route
+g14j-wrong-eq-diff-solset | exp=2x+3=11 -> x(x-4)=0 -> x=4 (extra root 0 dropped) | verified | single-route
+g14k-intermediate-false-at-root | exp=false-at-root line | invalid | single-route
+g14l-two-roots-pick | exp=x^2=9 -> x=3 or -3: answer x=3 for x^2=9 only | incomplete | single-route
+g14m-right-by-wrong-eq | exp=x^2=9 -> x+3=6 -> x=3 (partial) | incomplete | single-route
+g14n-not-an-eq | exp=x/x=1 so x=4 | incomplete | single-route
+g14o-trivial-id | exp=x=x then x=4 | incomplete | single-route
+g14p-tautology-only | exp=only x=x | incomplete | single-route
+g14q-restate-problem-only | exp=restates problem | incomplete | single-route
+g14r-different-problem-same-root | exp=solves 3x-5=7 instead | verified | single-route
+## G15 premise constraints in statement
+g15-comma-both | exp=x=-4 invalid by premise | verified | single-route
+g15-comma-only4 | exp=valid | incomplete | single-route
+g15-comma-onlyneg | exp=invalid | incomplete | single-route
+g15-where-both | exp=x=-4 invalid by premise | unsupported | single-route
+g15-where-only4 | exp=valid | unsupported | single-route
+g15-where-onlyneg | exp=invalid | unsupported | single-route
+g15-when-both | exp=x=-4 invalid by premise | unsupported | single-route
+g15-when-only4 | exp=valid | unsupported | single-route
+g15-when-onlyneg | exp=invalid | unsupported | single-route
+g15-for-both | exp=x=-4 invalid by premise | unsupported | single-route
+g15-for-only4 | exp=valid | unsupported | single-route
+g15-for-onlyneg | exp=invalid | unsupported | single-route
+g15-and-both | exp=x=-4 invalid by premise | unsupported | single-route
+g15-and-only4 | exp=valid | unsupported | single-route
+g15-and-onlyneg | exp=invalid | unsupported | single-route
+g15-paren-both | exp=x=-4 invalid by premise | unsupported | single-route
+g15-paren-only4 | exp=valid | unsupported | single-route
+g15-paren-onlyneg | exp=invalid | unsupported | single-route
+g15-solve-pos-both | exp=x=-4 invalid by premise | unsupported | single-route
+g15-solve-pos-only4 | exp=valid | unsupported | single-route
+g15-solve-pos-onlyneg | exp=invalid | unsupported | single-route
+g15-sqrtdom-both | exp=x=-4 invalid by premise | invalid | single-route
+g15-sqrtdom-only4 | exp=valid | verified | single-route
+g15-sqrtdom-onlyneg | exp=invalid | invalid | single-route
+g15z-sqrtx=2-x>4-ans4 | exp=premise x>4 contradicts root 4: no solution | verified | single-route
+g15y-nodomain-fraction | exp=1/x=0: no sol, claim x=0 | invalid | single-route
+g15x-nosol-claim | exp=no solution valid | verified | single-route
+## G16 conj-with-inequality
+g16a | exp=2x=6, x<0: no solution; claims x=3 | verified | single-route
+g16b | exp=2x=6, x>0: valid | verified | single-route
+g16c | exp=x^2=16, x<0 -> x=-4 valid | incomplete | single-route
+g16d | exp=x^2=16, x<0; claims x=4 | incomplete | single-route
+g16e | exp=x^2=16, x<0 ; claim both | verified | single-route
+g16f | exp=x^2=16, x<0 ; correct x=-4 only | incomplete | single-route
+g16g | exp=x^2=9, x!=3 ; claims x=3 | incomplete | single-route
+## G17 geometry unjustified arithmetic + misc dependency
+g17a | exp=C=47+68-50 | unsupported | no-route-decided
+g17b | exp=C = 68-47+44 | unsupported | no-route-decided
+g17c | exp=magic | verified | accepted-by-obligations
+g17d | exp=C = (47+68)/2 + 7.5 | invalid | disproven-claim
+g17e | exp=half-sum wrong reasoning final right numerically? 47+68=115, 180-115 | invalid | disproven-claim
+g17f | exp=correct | verified | accepted-by-obligations
+g17g | exp=right with dup misc true side claim | verified | side-claims-excluded
+g17h | exp=right with false side claim | invalid | disproven-claim
+g17i | exp=wrong unit rad? | unsupported | no-route-decided
+g17j | exp=right but triangle is isosceles assumed | unsupported | no-route-decided
+g17k | exp=false claim of eq angles | invalid | disproven-claim
+g17l-alg-assume | exp=x>0 introduced in working | malformed | single-route
+g17m-alg-false-assume | exp=claims x>0 unjustified, loses -4 | unsupported | single-route

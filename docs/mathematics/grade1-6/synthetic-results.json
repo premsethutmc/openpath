@@ -1,0 +1,63 @@
+{
+  "syntheticOnly": true,
+  "at": "2026-10-19T00:00:00Z",
+  "graph": {
+    "nodes": 200,
+    "edges": 261,
+    "audited": 92,
+    "proposedRefinements": 14
+  },
+  "scenarios": [
+    {
+      "program": "numbers-addition-g1",
+      "grade": 1,
+      "competencyId": "MATH.number.addition",
+      "completedBeforeReview": 7,
+      "totalActivities": 8,
+      "completedAfterResume": 7,
+      "retentionDueAt": "2026-10-20T00:00:00Z",
+      "schoolCompletionAfterGre": 7,
+      "greCompletion": 1,
+      "nativeAnswers": 5,
+      "directN": 0,
+      "sharedStatus": "unavailable",
+      "strongSupport": "Both independent examples matched. Continue to the new context; extra practice is optional.",
+      "strugglingSupport": "These examples suggest trying the visual model again. This does not establish a missing skill.",
+      "strugglingStatus": "unavailable"
+    },
+    {
+      "program": "equal-groups-g3",
+      "grade": 3,
+      "competencyId": "MATH.number.equal-groups",
+      "completedBeforeReview": 7,
+      "totalActivities": 8,
+      "completedAfterResume": 7,
+      "retentionDueAt": "2026-10-20T00:00:00Z",
+      "schoolCompletionAfterGre": 7,
+      "greCompletion": 1,
+      "nativeAnswers": 5,
+      "directN": 0,
+      "sharedStatus": "unavailable",
+      "strongSupport": "Both independent examples matched. Continue to the new context; extra practice is optional.",
+      "strugglingSupport": "These examples suggest trying the visual model again. This does not establish a missing skill.",
+      "strugglingStatus": "unavailable"
+    },
+    {
+      "program": "fraction-equivalence-g5",
+      "grade": 5,
+      "competencyId": "MATH.number.equivalent-fractions",
+      "completedBeforeReview": 7,
+      "totalActivities": 8,
+      "completedAfterResume": 7,
+      "retentionDueAt": "2026-10-20T00:00:00Z",
+      "schoolCompletionAfterGre": 7,
+      "greCompletion": 1,
+      "nativeAnswers": 5,
+      "directN": 0,
+      "sharedStatus": "unavailable",
+      "strongSupport": "Both independent examples matched. Continue to the new context; extra practice is optional.",
+      "strugglingSupport": "These examples suggest trying the visual model again. This does not establish a missing skill.",
+      "strugglingStatus": "unavailable"
+    }
+  ]
+}

@@ -1,0 +1,382 @@
+{
+ "groups": {
+  "number": {
+   "families": 18,
+   "questions": 9789,
+   "failures": 0,
+   "priorKernel": 0,
+   "priorPartial": 10,
+   "priorCompat": 8,
+   "rows": [
+    {
+     "id": "hcf",
+     "competency": "MATH.number.euclid-algorithm",
+     "priorClass": "compat",
+     "questions": 1402,
+     "failures": 0,
+     "steps": true
+    },
+    {
+     "id": "faddu",
+     "competency": "MATH.number.fraction-add",
+     "priorClass": "partial",
+     "questions": 870,
+     "failures": 0,
+     "steps": true
+    },
+    {
+     "id": "avfas",
+     "competency": "MATH.number.fraction-add",
+     "priorClass": "compat",
+     "questions": 420,
+     "failures": 0,
+     "steps": true
+    },
+    {
+     "id": "avdiv",
+     "competency": "MATH.number.long-division",
+     "priorClass": "partial",
+     "questions": 500,
+     "failures": 0,
+     "steps": true
+    },
+    {
+     "id": "adcol3",
+     "competency": "MATH.number.multi-digit-add-subtract",
+     "priorClass": "partial",
+     "questions": 500,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "adcolx",
+     "competency": "MATH.number.multi-digit-add-subtract",
+     "priorClass": "compat",
+     "questions": 500,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "ajsi",
+     "competency": "MATH.number.profit-loss",
+     "priorClass": "partial",
+     "questions": 500,
+     "failures": 0,
+     "steps": true
+    },
+    {
+     "id": "avmarked",
+     "competency": "MATH.number.profit-loss",
+     "priorClass": "partial",
+     "questions": 420,
+     "failures": 0,
+     "steps": true
+    },
+    {
+     "id": "eqfrac",
+     "competency": "MATH.number.equivalent-fractions",
+     "priorClass": "partial",
+     "questions": 405,
+     "failures": 0,
+     "steps": true
+    },
+    {
+     "id": "fmulw",
+     "competency": "MATH.number.fraction-multiply",
+     "priorClass": "partial",
+     "questions": 528,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "aiint",
+     "competency": "MATH.number.integer-add",
+     "priorClass": "partial",
+     "questions": 500,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "agdec",
+     "competency": "MATH.number.decimal-operations",
+     "priorClass": "partial",
+     "questions": 500,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "ajrat",
+     "competency": "MATH.number.ratio",
+     "priorClass": "compat",
+     "questions": 450,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "aerdec",
+     "competency": "MATH.number.rounding",
+     "priorClass": "compat",
+     "questions": 594,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "aeround",
+     "competency": "MATH.number.rounding",
+     "priorClass": "partial",
+     "questions": 450,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "adford",
+     "competency": "MATH.number.fraction-comparison",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "adfordu",
+     "competency": "MATH.number.fraction-comparison",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "ajcrore",
+     "competency": "MATH.number.indian-international-numeration",
+     "priorClass": "compat",
+     "questions": 450,
+     "failures": 0,
+     "steps": false
+    }
+   ]
+  },
+  "statistics+probability": {
+   "families": 22,
+   "questions": 8740,
+   "failures": 0,
+   "priorKernel": 0,
+   "priorPartial": 10,
+   "priorCompat": 12,
+   "rows": [
+    {
+     "id": "akmed",
+     "competency": "MATH.statistics.median-mode",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "avmiss",
+     "competency": "MATH.statistics.averages-intro",
+     "priorClass": "compat",
+     "questions": 420,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "avfmed",
+     "competency": "MATH.statistics.median-mode",
+     "priorClass": "compat",
+     "questions": 420,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "atmdmean",
+     "competency": "MATH.statistics.mean-deviation",
+     "priorClass": "partial",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "atmdmed",
+     "competency": "MATH.statistics.mean-deviation",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "atsd",
+     "competency": "MATH.statistics.dispersion",
+     "priorClass": "partial",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "atvar",
+     "competency": "MATH.statistics.dispersion",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "anumean",
+     "competency": "MATH.statistics.grouped-data",
+     "priorClass": "partial",
+     "questions": 300,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "atrvmean",
+     "competency": "MATH.probability.random-variables",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "atrvvar",
+     "competency": "MATH.probability.random-variables",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "akexp",
+     "competency": "MATH.probability.experimental",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "akchance",
+     "competency": "MATH.probability.chance-language",
+     "priorClass": "partial",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "ancardn",
+     "competency": "MATH.probability.classical",
+     "priorClass": "partial",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "anbag",
+     "competency": "MATH.probability.classical",
+     "priorClass": "partial",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "antree",
+     "competency": "MATH.probability.tree-diagrams",
+     "priorClass": "partial",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "anncr",
+     "competency": "MATH.probability.classical",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "asaddp",
+     "competency": "MATH.probability.events",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "asbayes",
+     "competency": "MATH.probability.bayes",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "astotp",
+     "competency": "MATH.probability.bayes",
+     "priorClass": "partial",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "attotal",
+     "competency": "MATH.probability.total-probability",
+     "priorClass": "partial",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "asbinom",
+     "competency": "MATH.probability.binomial-distribution",
+     "priorClass": "compat",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    },
+    {
+     "id": "asbinmv",
+     "competency": "MATH.probability.binomial-distribution",
+     "priorClass": "partial",
+     "questions": 400,
+     "failures": 0,
+     "steps": false
+    }
+   ]
+  }
+ },
+ "latency": {
+  "questions": 18529,
+  "meanMs": 0.2531,
+  "p50Ms": 0.0776,
+  "p95Ms": 1.2931,
+  "p99Ms": 2.1981,
+  "maxMs": 63.46,
+  "note": "one checkItem = independent derivation + isCorrect on exact/equivalent/wrong responses + MC options + steps; warm node, 1 process"
+ },
+ "families": {
+  "exactTotal": 40,
+  "newlyVerified": 40,
+  "alreadyKernel": 0
+ },
+ "competencies": {
+  "withExactFamily": 28,
+  "anyVerifiedBefore": 115,
+  "anyVerifiedAfter": 133,
+  "newlyAnyVerified": 18,
+  "allVerifiedBefore": 18,
+  "allVerifiedAfter": 27,
+  "newlyAllVerified": [
+   "MATH.number.fraction-add",
+   "MATH.number.fraction-multiply",
+   "MATH.number.integer-add",
+   "MATH.number.long-division",
+   "MATH.probability.bayes",
+   "MATH.probability.experimental",
+   "MATH.probability.total-probability",
+   "MATH.probability.tree-diagrams",
+   "MATH.statistics.averages-intro"
+  ]
+ },
+ "volume": {
+  "exactVerifiedQuestions": 18529,
+  "previousKernelBackedQuestions": 62838,
+  "totalQuestions": 341483
+ }
+}

@@ -1,0 +1,3112 @@
+{
+ "summary": {
+  "engineRoot": "/home/claude/core",
+  "suiteSha256": "a0216bf722fccfbfe3bed146e827b094d92df51da48685fbe79296cb23485133",
+  "cases": 155,
+  "byDefect": {
+   "D1": {
+    "PASS": 38,
+    "PASS-REFUSED": 15
+   },
+   "D3": {
+    "PASS": 54,
+    "PASS-REFUSED": 3
+   },
+   "D4": {
+    "PASS": 3
+   },
+   "D2": {
+    "PASS": 42
+   }
+  }
+ },
+ "rows": [
+  {
+   "id": "d1-01",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1=2",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-02",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^(-1)=2",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-03",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x+1)^-1=1",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "0"
+    ],
+    "excluded": [
+     "-1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "0"
+    ],
+    "restrictions": [
+     "-1"
+    ]
+   }
+  },
+  {
+   "id": "d1-04",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x-2)^(-1)=3",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "7/3"
+    ],
+    "excluded": [
+     "2"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "7/3"
+    ],
+    "restrictions": [
+     "2"
+    ]
+   }
+  },
+  {
+   "id": "d1-05",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "2*x^-1=1",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-06",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1+1=0",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "-1"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "-1"
+    ],
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-07",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1=x^-1",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-08",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1*x=1",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-09",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x*x^-1=1",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-10",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1*x=2",
+   "truth": {
+    "class": "none",
+    "solution": [],
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "none",
+    "solution": null,
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-11",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x-1)^-1*(x-1)=2",
+   "truth": {
+    "class": "none",
+    "solution": [],
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "none",
+    "solution": null,
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d1-12",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1*x^2=x",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-13",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^2*x^-2=1",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-14",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^(1-3)*x=1",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "1"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "1"
+    ],
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-15",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^(1-3)=1/x^2",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-16",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1=x^-1+x",
+   "truth": {
+    "class": "none",
+    "solution": [],
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "none",
+    "solution": null,
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-17",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x-1)^-1=(x-1)^-1*x",
+   "truth": {
+    "class": "none",
+    "solution": [],
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "none",
+    "solution": null,
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d1-18",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1+x^-2=0",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "-1"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "-1"
+    ],
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-19",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1-(x-1)^-1=0",
+   "truth": {
+    "class": "none",
+    "solution": [],
+    "excluded": [
+     "0",
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "none",
+    "solution": null,
+    "restrictions": [
+     "0",
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d1-20",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1=(x+1)^-1",
+   "truth": {
+    "class": "none",
+    "solution": [],
+    "excluded": [
+     "-1",
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "none",
+    "solution": null,
+    "restrictions": [
+     "-1",
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-21",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1+(x-2)^-1=2*(x-1)*x^-1*(x-2)^-1",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "0",
+     "2"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "0",
+     "2"
+    ]
+   }
+  },
+  {
+   "id": "d1-22",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x^2-1)^-1=1/(x-1)*1/(x+1)",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "-1",
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "-1",
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d1-23",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x^2-1)^-1=(x+1)^-1",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "-1",
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "restrictions": [
+     "-1",
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d1-24",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x-1)^-2=(x-1)^-1",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d1-25",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "3*(x-1)^-1=6*(2*x-2)^-1",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d1-26",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(2*x)^-1=1",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d1-27",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x*(x-1))^-1=2/x",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "excluded": [
+     "0",
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "restrictions": [
+     "0",
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d1-28",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "2^-1*x/(x-1)=1",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d1-29",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^0/(x-1)=1",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "0",
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "restrictions": [
+     "0",
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d1-30",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x+1)^-1=(x+1)^-1*(x-1)^0",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "-1",
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "-1",
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d1-31",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^0=1",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "identity-on-domain",
+     "solution": null,
+     "excluded": [
+      "0"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "no-variable-denominator"
+    ]
+   }
+  },
+  {
+   "id": "d1-32",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x-1)^0=1",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "identity-on-domain",
+     "solution": null,
+     "excluded": [
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "no-variable-denominator"
+    ]
+   }
+  },
+  {
+   "id": "d1-33",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "1/x^-1=3",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "3"
+     ],
+     "excluded": [
+      "0"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-34",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(1/x)^-1=3",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "3"
+     ],
+     "excluded": [
+      "0"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-35",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "1/(1/x)=2",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "2"
+     ],
+     "excluded": [
+      "0"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-36",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "1/(x-1/x)=1/(x+1)",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "none",
+     "solution": [],
+     "excluded": [
+      "-1",
+      "0",
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-37",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "1/(x-1/x)=x/(x^2-1)",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "identity-on-domain",
+     "solution": null,
+     "excluded": [
+      "-1",
+      "0",
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-38",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "1/(x-1/x)=2/(x+1)",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "2"
+     ],
+     "excluded": [
+      "-1",
+      "0",
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-39",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x/(x-1))^-1=2",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "-1"
+     ],
+     "excluded": [
+      "0",
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-40",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x/(x-1))^-2=1",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "1/2"
+     ],
+     "excluded": [
+      "0",
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-41",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x/(x-1))^-2=4",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "-1",
+      "1/3"
+     ],
+     "excluded": [
+      "0",
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary",
+     "reduced-degree>=2"
+    ]
+   }
+  },
+  {
+   "id": "d1-42",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "1/(1/x-1)=1",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "1/2"
+     ],
+     "excluded": [
+      "0",
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-43",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(1/(x-1))/(1/x)=1",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "none",
+     "solution": [],
+     "excluded": [
+      "0",
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-44",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x/(x-1))/(x/(x+1))=1",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "none",
+     "solution": [],
+     "excluded": [
+      "-1",
+      "0",
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-45",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "1/(x-1)^-1=2",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "3"
+     ],
+     "excluded": [
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-r1",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-4=1",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary",
+     "reduced-degree>=2"
+    ]
+   }
+  },
+  {
+   "id": "d1-r2",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "1/(x-1)=0^0",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d1-r3",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "1/(x-1)=0^-1",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": [
+     "numerator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-r4",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x-x)^0=1",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": [
+     "no-variable-denominator"
+    ]
+   }
+  },
+  {
+   "id": "d1-r5",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1=1/(x^2+1)",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED",
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-r6",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1=1/(x^2-2)",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED",
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-r7",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "(x^2-2)^-1=1",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED",
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d1-r8",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "x^-1=x^2",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "reduced-degree>=2"
+    ]
+   }
+  },
+  {
+   "id": "d3-ok01",
+   "defect": "D3",
+   "kind": "equation",
+   "text": " 1 /( x - 1 ) = 2 ",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d3-ok02",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=2.5",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "7/5"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "7/5"
+    ],
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d3-ok03",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=1.0",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d3-ok04",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "2*x/(x-1)=1",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "-1"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "-1"
+    ],
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d3-ok05",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "2*(x-1)/(x-1)=2",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d3-ok06",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "x/(x-1)=0.5",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "-1"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "-1"
+    ],
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d3-ok07",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "(1)/((x-1))=2",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d3-ok08",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1 / ( x - 1 ) = 1 / 2",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "3"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "3"
+    ],
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d3-01",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "2x/(x-1)=1",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-02",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "2(x-1)/(x-1)=2",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-03",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "x/(x-1)=.5",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-04",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=1e0",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-05",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "+1/(x-1)=2",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-06",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=y",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-07",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=2=3",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-08",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1 0/(x-1)=10/(x-1)",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-09",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=1 0",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-10",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=2.",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-11",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "=2",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-12",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-13",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-14",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-15",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1=2",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-16",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "((1/x)=2",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-17",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/()=2",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-18",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1//x=1",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-19",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "a/(x-1)=2",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-20",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "X/(X-1)=2",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-21",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=2x",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-22",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x−1)=2",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-23",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=2*",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-24",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=x^",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-25",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=x^(1/2)",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_OPERATOR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_OPERATOR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-26",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=x^x",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_OPERATOR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_OPERATOR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-27",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=2^x",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_OPERATOR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_OPERATOR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-28",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=sqrt(x)",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_OPERATOR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_OPERATOR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-29",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=|x|",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_OPERATOR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_OPERATOR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-30",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=x!",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_OPERATOR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_OPERATOR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-31",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=sin(x)",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_OPERATOR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_OPERATOR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-32",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=foo(x)",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_OPERATOR",
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-33",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "x/0=1",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": [
+     "no-variable-denominator",
+     "numerator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d3-34",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-x)=1",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": [
+     "numerator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d3-35",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "x/(x-1)=1/0",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": [
+     "numerator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d3-36",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=1/(x-1-x+1)",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": [
+     "numerator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d3-37",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "x+1=2",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "no-variable-denominator"
+    ]
+   }
+  },
+  {
+   "id": "d3-38",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/2=0.5",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "no-variable-denominator"
+    ]
+   }
+  },
+  {
+   "id": "d3-39",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=x",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "reduced-degree>=2"
+    ]
+   }
+  },
+  {
+   "id": "d3-40",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "x^3/(x-1)=2",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "numerator-outside-boundary",
+     "reduced-degree>=2"
+    ]
+   }
+  },
+  {
+   "id": "d3-41",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/((x-1)*(x+1)*(x+2)*(x+3))=1",
+   "truth": {
+    "refusal": [
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": [
+     "denominator-outside-boundary",
+     "reduced-degree>=2"
+    ]
+   }
+  },
+  {
+   "id": "d3-42",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x^2+1)=1",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED",
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d3-43",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x^2-2)=1",
+   "truth": {
+    "refusal": [
+     "DOMAIN_UNRESOLVED",
+     "UNSUPPORTED_EXPRESSION"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": [
+     "denominator-outside-boundary"
+    ]
+   }
+  },
+  {
+   "id": "d3-long1",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=2+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR",
+     "UNSUPPORTED_OPERATOR",
+     "UNSUPPORTED_EXPRESSION",
+     "DOMAIN_UNRESOLVED"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "3/2"
+     ],
+     "excluded": [
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-long2",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((x-1)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))=2",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR",
+     "UNSUPPORTED_OPERATOR",
+     "UNSUPPORTED_EXPRESSION",
+     "DOMAIN_UNRESOLVED"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "3/2"
+     ],
+     "excluded": [
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "UNSUPPORTED_EXPRESSION",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-long3",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR",
+     "UNSUPPORTED_OPERATOR",
+     "UNSUPPORTED_EXPRESSION",
+     "DOMAIN_UNRESOLVED"
+    ],
+    "if_answered": {
+     "class": "unique",
+     "solution": [
+      "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000/9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
+     ],
+     "excluded": [
+      "1"
+     ]
+    }
+   },
+   "verdict": "PASS-REFUSED",
+   "detail": {
+    "class": "refused",
+    "outcome": "DOMAIN_UNRESOLVED",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-long4",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((1",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-long5",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d3-long6",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1/(x-1)=++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++1",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "refused",
+    "outcome": "PARSE_ERROR",
+    "reasons": []
+   }
+  },
+  {
+   "id": "d4-e01",
+   "defect": "D4",
+   "kind": "equation",
+   "text": "1/(0.25*x)=8",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "restrictions": [
+     "0"
+    ]
+   }
+  },
+  {
+   "id": "d4-e02",
+   "defect": "D4",
+   "kind": "equation",
+   "text": "0.001/(x-1)=0.002/(x+1)",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "3"
+    ],
+    "excluded": [
+     "-1",
+     "1"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "3"
+    ],
+    "restrictions": [
+     "-1",
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "d4-e03",
+   "defect": "D4",
+   "kind": "equation",
+   "text": "x/(x-0.01)=100",
+   "truth": {
+    "class": "unique",
+    "solution": [
+     "1/99"
+    ],
+    "excluded": [
+     "1/100"
+    ]
+   },
+   "verdict": "PASS",
+   "detail": {
+    "class": "unique",
+    "solution": [
+     "1/99"
+    ],
+    "restrictions": [
+     "1/100"
+    ]
+   }
+  },
+  {
+   "id": "d2-01",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(x-1)=2 -> 1=2*(x-1)",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-02",
+   "defect": "D2",
+   "kind": "step",
+   "text": "(x^2-1)/(x-1)=2 -> x+1=2",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-03",
+   "defect": "D2",
+   "kind": "step",
+   "text": "(x^2-1)/(x-1)=2 -> x+1=2",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-04",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x+1=2 -> (x^2-1)/(x-1)=2",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-05",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^-1=2 -> 1=2*x",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-06",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^-1*x=1 -> 1=1",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-07",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x/(x-1)=1/(x-1) -> x=1",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-08",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x/(x-1)=3 -> x^2/(x-1)^2=9",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-09",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^-1+x^-2=0 -> x+1=0",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-10",
+   "defect": "D2",
+   "kind": "step",
+   "text": "(x-1)^-1=(x-1)^-1*x -> 1=x",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-11",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(1/x)=2 -> x=2",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-12",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^0=1 -> 1=1",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-13",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(x-1/x)=1/(x+1) -> x=x-1",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-14",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(x-1)+1/(x+1)=2/(x-1) -> 2*x=2*(x+1)",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-15",
+   "defect": "D2",
+   "kind": "step",
+   "text": "2/(x-1)=4/(2*x-2) -> 1=1",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-16",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(x-1)=1/(x+1) -> x+1=x-1",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-17",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^-2=4*x^-2 -> 1=4",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-18",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(x-1)=2 -> 1/(x-1)=2",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-19",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^-1=x^-1+x -> x=0",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-20",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^(1-3)*x=1 -> x=1",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-21",
+   "defect": "D2",
+   "kind": "step",
+   "text": "(x/(x-1))^-1=2 -> x-1=2*x",
+   "truth": "valid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": true,
+    "reasons": [],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-22",
+   "defect": "D2",
+   "kind": "step",
+   "text": "(x^2-1)/(x-1)=2 -> x+1=2",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "from-restriction-missing"
+    ],
+    "refusal": null,
+    "legacyAgrees": false
+   }
+  },
+  {
+   "id": "d2-23",
+   "defect": "D2",
+   "kind": "step",
+   "text": "(x^2-1)/(x-1)=2 -> x+1=2",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "from-restriction-missing",
+     "solution-set-changed"
+    ],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-24",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(x-1)=2 -> 1=2*(x-1)",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "from-restriction-missing"
+    ],
+    "refusal": null,
+    "legacyAgrees": false
+   }
+  },
+  {
+   "id": "d2-25",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^-1=2 -> 1=2*x",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "from-restriction-missing"
+    ],
+    "refusal": null,
+    "legacyAgrees": false
+   }
+  },
+  {
+   "id": "d2-26",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^-1=2 -> 1=2*x",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "from-restriction-missing"
+    ],
+    "refusal": null,
+    "legacyAgrees": false
+   }
+  },
+  {
+   "id": "d2-27",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(x-1)=2 -> 1=2*(x-1)",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "from-restriction-missing"
+    ],
+    "refusal": null,
+    "legacyAgrees": false
+   }
+  },
+  {
+   "id": "d2-28",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(1/x)=2 -> x=2",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "from-restriction-missing"
+    ],
+    "refusal": null,
+    "legacyAgrees": false
+   }
+  },
+  {
+   "id": "d2-29",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(x-1/x)=1/(x+1) -> x=x-1",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "from-restriction-missing"
+    ],
+    "refusal": null,
+    "legacyAgrees": false
+   }
+  },
+  {
+   "id": "d2-30",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^0=1 -> 1=1",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "from-restriction-missing"
+    ],
+    "refusal": null,
+    "legacyAgrees": false
+   }
+  },
+  {
+   "id": "d2-31",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(x-1)=2 -> 1/(x-1)=2",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "restriction-closure-violated",
+     "restriction-dropped"
+    ],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-32",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(x-1)=2 -> 1/(x-1)=2",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "restriction-closure-violated",
+     "restriction-dropped"
+    ],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-33",
+   "defect": "D2",
+   "kind": "step",
+   "text": "(x^2-1)/(x-1)=2 -> x+1=2",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "restriction-dropped",
+     "solution-set-changed"
+    ],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-34",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^-1*x=1 -> 1=1",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "restriction-dropped",
+     "solution-set-changed"
+    ],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-35",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/(x-1)=2 -> 1=2*(x+1)",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "solution-set-changed"
+    ],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-36",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x/(x-1)=3 -> x^2/(x-1)^2=9",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "solution-set-changed"
+    ],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-37",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^2/(x-1)^2=9 -> x/(x-1)=3",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "solution-set-lost"
+    ],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-38",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x/(x-1)=1/(x-1) -> x=1",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "restriction-dropped",
+     "solution-set-changed"
+    ],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-39",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^-1=x^-1+x -> x=0",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "restriction-dropped",
+     "solution-set-changed"
+    ],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  },
+  {
+   "id": "d2-40",
+   "defect": "D2",
+   "kind": "step",
+   "text": "x^(1-3)*x=1 -> x=1",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "from-restriction-missing"
+    ],
+    "refusal": null,
+    "legacyAgrees": false
+   }
+  },
+  {
+   "id": "d2-41",
+   "defect": "D2",
+   "kind": "step",
+   "text": "(x/(x-1))^-1=2 -> x-1=2*x",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "from-restriction-missing"
+    ],
+    "refusal": null,
+    "legacyAgrees": false
+   }
+  },
+  {
+   "id": "d2-42",
+   "defect": "D2",
+   "kind": "step",
+   "text": "1/x=1/x -> 1=1",
+   "truth": "invalid",
+   "verdict": "PASS",
+   "detail": {
+    "valid": false,
+    "reasons": [
+     "restriction-dropped",
+     "solution-set-changed"
+    ],
+    "refusal": null,
+    "legacyAgrees": true
+   }
+  }
+ ]
+}

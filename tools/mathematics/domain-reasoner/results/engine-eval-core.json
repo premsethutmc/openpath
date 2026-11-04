@@ -1,0 +1,32 @@
+{
+ "summary": {
+  "dataset": "eval",
+  "stage": "CORE",
+  "label": "core",
+  "sha256": "6147a52e23e0028323e9fb4d714234171e484c03c8ad0c3f121d69c3e236603d",
+  "cases": 400,
+  "correct": 400,
+  "rate": 1,
+  "failuresByCategory": {},
+  "invalidStepsInTraces": 0,
+  "openObligations": 0,
+  "moveVerifyRejected": 0,
+  "movePreconditionRefused": 3351,
+  "visited": {
+   "median": 13,
+   "p95": 45,
+   "worst": 60
+  },
+  "pathLength": {
+   "median": 6,
+   "p95": 10,
+   "worst": 10
+  },
+  "ms": {
+   "median": 16.89,
+   "p95": 79.69,
+   "worst": 287.77
+  }
+ },
+ "failures": []
+}

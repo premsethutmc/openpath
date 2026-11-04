@@ -1,0 +1,1691 @@
+{
+ "id": "repeated-misconception",
+ "competency": "MATH.coordinate.distance",
+ "truth": {
+  "misconception": "added-sides",
+  "heldAtEnd": true,
+  "taughtByEnd": true,
+  "notes": "coordinate distance (cdist): adds the horizontal and vertical gaps on every question where that predicts a distinct answer, before and after any teaching"
+ },
+ "expect": {
+  "investigation": "should",
+  "resolution": "must-not-resolve",
+  "establish": "should-establish",
+  "notes": "the same modelled wrong answer repeated across independent questions is the textbook case for investigating and establishing the misconception; nothing the learner does is evidence it has gone"
+ },
+ "steps": [
+  {
+   "step": 1,
+   "stage": "topic-check",
+   "competency": "MATH.coordinate.distance",
+   "phase": "diagnostic",
+   "question": "gen:cdist:-2,-4,4,4",
+   "activity": "diagnostic",
+   "response": "14",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "not_started",
+    "independent": {
+     "right": 0,
+     "total": 0
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.35,
+    "posterior": {
+     "secure": 0.35,
+     "conceptual": 0.15,
+     "procedural": 0.15,
+     "recall": 0.15,
+     "prerequisite": 0.1,
+     "transfer": 0.1
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 2,
+   "stage": "topic-check",
+   "competency": "MATH.coordinate.distance",
+   "phase": "diagnostic",
+   "question": "gen:cdist:-3,5,3,-3",
+   "activity": "diagnostic",
+   "response": "14",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 1
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": null,
+    "confidence": 0.49,
+    "posterior": {
+     "secure": 0.05447470817120622,
+     "conceptual": 0.49027237354085607,
+     "procedural": 0.198443579766537,
+     "recall": 0.11673151750972766,
+     "prerequisite": 0.10894941634241247,
+     "transfer": 0.031128404669260704
+    }
+   },
+   "reasoning": null,
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "A short starting-point check."
+  },
+  {
+   "step": 3,
+   "stage": "topic-check",
+   "competency": "MATH.coordinate.distance",
+   "phase": "investigate",
+   "question": "gen:cdist:-1,-2,2,2",
+   "activity": "probe",
+   "context": "investigate:gen:cdist:-2,-4,4,4",
+   "response": "7",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²). A short explanation is waiting."
+   },
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77,
+    "posterior": {
+     "secure": 0.004051512082187816,
+     "conceptual": 0.7657357835334974,
+     "procedural": 0.12545217768774422,
+     "recall": 0.04340905802344091,
+     "prerequisite": 0.05672116915062944,
+     "transfer": 0.004630299522500362
+    }
+   },
+   "reasoning": {
+    "status": "need_more",
+    "best": null,
+    "competing": [
+     "added-sides"
+    ],
+    "support": {
+     "added-sides": 0.854,
+     "unexplained": 0.061,
+     "no-root": 0.03,
+     "sign-slip": 0.03,
+     "secure": 0.024
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": null
+   },
+   "reason": "One more question to understand what happened (it does not count against you)."
+  },
+  {
+   "step": 4,
+   "stage": "topic-check",
+   "competency": "MATH.coordinate.distance",
+   "phase": "complete",
+   "question": null,
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77,
+    "posterior": {
+     "secure": 0.004051512082187816,
+     "conceptual": 0.7657357835334974,
+     "procedural": 0.12545217768774422,
+     "recall": 0.04340905802344091,
+     "prerequisite": 0.05672116915062944,
+     "transfer": 0.004630299522500362
+    }
+   },
+   "reasoning": {
+    "status": "established",
+    "best": "added-sides",
+    "competing": [
+     "added-sides"
+    ],
+    "support": {
+     "added-sides": 0.987,
+     "unexplained": 0.01,
+     "no-root": 0.001,
+     "sign-slip": 0.001,
+     "secure": 0.001
+    }
+   },
+   "intervention": {
+    "support": null,
+    "plan": {
+     "kind": "teach",
+     "competency": "MATH.coordinate.distance",
+     "why": "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²)."
+    }
+   },
+   "reason": "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²).",
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²). A short explanation is waiting."
+   }
+  },
+  {
+   "step": 5,
+   "stage": "plan",
+   "competency": "MATH.coordinate.distance",
+   "planItems": [
+    {
+     "competency": "MATH.coordinate.distance",
+     "reason": "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²). Here is a way to rebuild it."
+    }
+   ],
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "hypotheses": [
+    {
+     "contract": "learner-hypothesis@1",
+     "id": "added-sides@gen:cdist:-2,-4,4,4",
+     "claim": {
+      "explanation": "added-sides",
+      "kind": "conceptual",
+      "says": "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²)."
+     },
+     "scope": {
+      "question": "gen:cdist:-2,-4,4,4",
+      "family": "gen:cdist:-2,-4,4,4",
+      "observedIn": "MATH.coordinate.distance",
+      "about": "MATH.coordinate.distance"
+     },
+     "status": "established",
+     "support": {
+      "added-sides": 0.987,
+      "unexplained": 0.01,
+      "no-root": 0.001,
+      "sign-slip": 0.001,
+      "secure": 0.001
+     },
+     "competing": [
+      "added-sides"
+     ],
+     "supporting": [
+      {
+       "attempt": "record#1",
+       "questionId": "gen:cdist:-2,-4,4,4",
+       "response": "14",
+       "at": "2026-09-01T09:02:00.000Z",
+       "matches": [
+        "added-sides"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "verifier",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      },
+      {
+       "attempt": "record#3",
+       "questionId": "gen:cdist:-1,-2,2,2",
+       "response": "7",
+       "at": "2026-09-01T09:04:00.000Z",
+       "matches": [
+        "added-sides"
+       ],
+       "mathematical": {
+        "credit": null,
+        "assessment": {
+         "source": "verifier",
+         "methodExamined": false,
+         "firstError": null
+        }
+       }
+      }
+     ],
+     "contradicting": [],
+     "obligations": [
+      "teaching in scope",
+      "then a right answer alone to a question that discriminates it"
+     ],
+     "teaching": {
+      "deliveredAt": null,
+      "strategy": null,
+      "competency": null,
+      "lastAt": null
+     },
+     "resolvedBy": null,
+     "probes": [],
+     "uncertainty": {
+      "supporting": 0,
+      "contradicting": 0,
+      "inconclusive": 0,
+      "note": "no discriminating answer since it was established"
+     },
+     "teachingDue": true,
+     "probeDue": false,
+     "trigger": {
+      "kind": "starting-check",
+      "detail": "a wrong answer in the starting-point check"
+     },
+     "provenance": {
+      "policy": "diagnostic@2-draft",
+      "established": "2026-09-01T09:04:00.000Z",
+      "attempts": [
+       "record#1",
+       "record#3"
+      ]
+     },
+     "use": {
+      "teach": true,
+      "ask": false,
+      "evidence": false,
+      "mastery": false
+     }
+    }
+   ],
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²). A short explanation is waiting."
+   }
+  },
+  {
+   "step": 6,
+   "stage": "module",
+   "competency": "MATH.coordinate.distance",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77
+   },
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "reason": "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²). Here is a way to rebuild it.",
+   "intervention": {
+    "support": null,
+    "plan": "teach",
+    "strategy": {
+     "id": "spot_the_mistake",
+     "kind": "conceptual",
+     "title": "Spot the mistake",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 7,
+   "stage": "module",
+   "competency": "MATH.coordinate.distance",
+   "phase": "guided",
+   "question": "gen:cdist:-1,1,3,4",
+   "activity": "guided",
+   "response": "7",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 0
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77
+   },
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "spot_the_mistake",
+     "kind": "conceptual",
+     "title": "Spot the mistake",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 8,
+   "stage": "module",
+   "competency": "MATH.coordinate.distance",
+   "phase": "check",
+   "question": "gen:cdist:-1,-3,3,-6:mc",
+   "activity": "check",
+   "response": "C",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 2
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77
+   },
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "spot_the_mistake",
+     "kind": "conceptual",
+     "title": "Spot the mistake",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 9,
+   "stage": "module",
+   "competency": "MATH.coordinate.distance",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77
+   },
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "reason": "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²). It showed again after the last explanation, so here is a different one.",
+   "intervention": {
+    "support": null,
+    "plan": null,
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 10,
+   "stage": "module",
+   "competency": "MATH.coordinate.distance",
+   "phase": "guided",
+   "question": "gen:cdist:-6,-2,6,3",
+   "activity": "guided",
+   "response": "17",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 1
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77
+   },
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 11,
+   "stage": "module",
+   "competency": "MATH.coordinate.distance",
+   "phase": "check",
+   "question": "gen:cdist:0,-1,4,-4",
+   "activity": "check",
+   "response": "7",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 3
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77
+   },
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "worked_steps",
+     "kind": "procedural",
+     "title": "Step by step",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 12,
+   "stage": "module",
+   "competency": "MATH.coordinate.distance",
+   "phase": "chapter",
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77
+   },
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "reason": "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²). It showed again after the last explanation, so here is a different one.",
+   "intervention": {
+    "support": null,
+    "plan": null,
+    "strategy": {
+     "id": "check_what_it_uses",
+     "kind": "prerequisite",
+     "title": "Check what it builds on",
+     "screens": 1
+    },
+    "moduleReview": "draft"
+   },
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   }
+  },
+  {
+   "step": 13,
+   "stage": "module",
+   "competency": "MATH.coordinate.distance",
+   "phase": "guided",
+   "question": "gen:cdist:-2,4,4,-4",
+   "activity": "guided",
+   "response": "14",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 2
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 3
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77
+   },
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "reason": "Practise it once, with a hint if you want one. This counts as practice with help.",
+   "intervention": {
+    "support": null,
+    "plan": "guided_practice",
+    "strategy": {
+     "id": "check_what_it_uses",
+     "kind": "prerequisite",
+     "title": "Check what it builds on",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 14,
+   "stage": "module",
+   "competency": "MATH.coordinate.distance",
+   "phase": "check",
+   "question": "gen:cdist:-2,6,1,2",
+   "activity": "check",
+   "response": "7",
+   "hints": 0,
+   "authoritative": {
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "credit": false
+   },
+   "stepFindings": {
+    "supported": false
+   },
+   "e7Shadow": {
+    "advisory": true,
+    "notApplicable": "no algebra statement in this question's contract (the process policy covers algebra kernels)"
+   },
+   "questionStatus": {
+    "formCertified": true,
+    "quarantined": false
+   },
+   "recordedAsAttempt": true,
+   "evidenceBefore": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 4
+    },
+    "assisted": {
+     "right": 0,
+     "total": 3
+    },
+    "retention": "none"
+   },
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 3
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   },
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77
+   },
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "reason": "Now one new question on your own, with no hints.",
+   "intervention": {
+    "support": null,
+    "plan": "reassess",
+    "strategy": {
+     "id": "check_what_it_uses",
+     "kind": "prerequisite",
+     "title": "Check what it builds on",
+     "screens": 1
+    }
+   }
+  },
+  {
+   "step": 15,
+   "stage": "module",
+   "competency": "MATH.coordinate.distance",
+   "phase": "pause",
+   "diagnosis": {
+    "result": "conceptual",
+    "confidence": 0.77
+   },
+   "finding": {
+    "explanation": "added-sides",
+    "kind": "conceptual",
+    "competency": "MATH.coordinate.distance",
+    "establishedOn": "gen:cdist:-2,-4,4,4",
+    "resolved": false
+   },
+   "reason": "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back.",
+   "question": null,
+   "evidenceAfter": {
+    "status": "exposure",
+    "independent": {
+     "right": 0,
+     "total": 5
+    },
+    "assisted": {
+     "right": 0,
+     "total": 3
+    },
+    "retention": "none"
+   },
+   "next": {
+    "kind": "continue",
+    "competency": "MATH.coordinate.distance",
+    "chapter": "Coordinate geometry",
+    "reason": "Carry on where you left off."
+   }
+  }
+ ],
+ "final": {
+  "facts": {
+   "answered": 9,
+   "discriminatingMet": 9,
+   "showedMisconception": 9,
+   "discriminatingAfterTeaching": 6,
+   "correctOnNonDiscriminatingAfterTeaching": 0,
+   "wrong": [
+    {
+     "q": "gen:cdist:-2,-4,4,4",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:cdist:-3,5,3,-3",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:cdist:-1,-2,2,2",
+     "phase": "diagnostic",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:cdist:-1,1,3,4",
+     "phase": "guided",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:cdist:-1,-3,3,-6:mc",
+     "phase": "check",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:cdist:-6,-2,6,3",
+     "phase": "guided",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:cdist:0,-1,4,-4",
+     "phase": "check",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:cdist:-2,4,4,-4",
+     "phase": "guided",
+     "session": "s1",
+     "misconception": true
+    },
+    {
+     "q": "gen:cdist:-2,6,1,2",
+     "phase": "check",
+     "session": "s1",
+     "misconception": true
+    }
+   ],
+   "phases": [
+    "diagnostic",
+    "guided",
+    "check"
+   ]
+  },
+  "snap": {
+   "status": "exposure",
+   "independent": {
+    "right": 0,
+    "total": 5
+   },
+   "assisted": {
+    "right": 0,
+    "total": 3
+   },
+   "retention": "none"
+  },
+  "next": {
+   "kind": "continue",
+   "competency": "MATH.coordinate.distance",
+   "chapter": "Coordinate geometry",
+   "reason": "Carry on where you left off."
+  },
+  "hypotheses": [
+   {
+    "contract": "learner-hypothesis@1",
+    "id": "added-sides@gen:cdist:-2,-4,4,4",
+    "claim": {
+     "explanation": "added-sides",
+     "kind": "conceptual",
+     "says": "The across and up distances were added; the straight distance is the hypotenuse: √(across² + up²)."
+    },
+    "scope": {
+     "question": "gen:cdist:-2,-4,4,4",
+     "family": "gen:cdist:-2,-4,4,4",
+     "observedIn": "MATH.coordinate.distance",
+     "about": "MATH.coordinate.distance"
+    },
+    "status": "established",
+    "support": {
+     "added-sides": 0.987,
+     "unexplained": 0.01,
+     "no-root": 0.001,
+     "sign-slip": 0.001,
+     "secure": 0.001
+    },
+    "competing": [
+     "added-sides"
+    ],
+    "supporting": [
+     {
+      "attempt": "record#1",
+      "questionId": "gen:cdist:-2,-4,4,4",
+      "response": "14",
+      "at": "2026-09-01T09:02:00.000Z",
+      "matches": [
+       "added-sides"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#3",
+      "questionId": "gen:cdist:-1,-2,2,2",
+      "response": "7",
+      "at": "2026-09-01T09:04:00.000Z",
+      "matches": [
+       "added-sides"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#6",
+      "questionId": "gen:cdist:-1,-3,3,-6:mc",
+      "response": "C",
+      "at": "2026-09-01T09:07:00.000Z",
+      "matches": [
+       "added-sides"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#9",
+      "questionId": "gen:cdist:0,-1,4,-4",
+      "response": "7",
+      "at": "2026-09-01T09:10:00.000Z",
+      "matches": [
+       "added-sides"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     },
+     {
+      "attempt": "record#12",
+      "questionId": "gen:cdist:-2,6,1,2",
+      "response": "7",
+      "at": "2026-09-01T09:13:00.000Z",
+      "matches": [
+       "added-sides"
+      ],
+      "mathematical": {
+       "credit": null,
+       "assessment": {
+        "source": "verifier",
+        "methodExamined": false,
+        "firstError": null
+       }
+      }
+     }
+    ],
+    "contradicting": [],
+    "obligations": [
+     "teaching in scope",
+     "then a right answer alone to a question that discriminates it"
+    ],
+    "teaching": {
+     "deliveredAt": "2026-09-01T09:05:00.000Z",
+     "strategy": "spot_the_mistake",
+     "competency": "MATH.coordinate.distance",
+     "lastAt": "2026-09-01T09:11:00.000Z"
+    },
+    "resolvedBy": null,
+    "probes": [
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "added-sides@gen:cdist:-2,-4,4,4",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:cdist:-1,1,3,4",
+      "family": "cdist",
+      "prediction": {
+       "explanation": "added-sides",
+       "values": [
+        "7"
+       ]
+      },
+      "expected": {
+       "target": "5",
+       "distinguishes": true
+      },
+      "response": "7",
+      "assistance": {
+       "activity": "guided",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": false
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "inconclusive",
+      "at": "2026-09-01T09:06:00.000Z",
+      "attempt": "record#5"
+     },
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "added-sides@gen:cdist:-2,-4,4,4",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:cdist:-1,-3,3,-6:mc",
+      "family": "cdist",
+      "prediction": {
+       "explanation": "added-sides",
+       "values": [
+        "2"
+       ]
+      },
+      "expected": {
+       "target": "0",
+       "distinguishes": true
+      },
+      "response": "C",
+      "assistance": {
+       "activity": "check",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": true
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "supports",
+      "at": "2026-09-01T09:07:00.000Z",
+      "attempt": "record#6"
+     },
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "added-sides@gen:cdist:-2,-4,4,4",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:cdist:-6,-2,6,3",
+      "family": "cdist",
+      "prediction": {
+       "explanation": "added-sides",
+       "values": [
+        "17"
+       ]
+      },
+      "expected": {
+       "target": "13",
+       "distinguishes": true
+      },
+      "response": "17",
+      "assistance": {
+       "activity": "guided",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": false
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "inconclusive",
+      "at": "2026-09-01T09:09:00.000Z",
+      "attempt": "record#8"
+     },
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "added-sides@gen:cdist:-2,-4,4,4",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:cdist:0,-1,4,-4",
+      "family": "cdist",
+      "prediction": {
+       "explanation": "added-sides",
+       "values": [
+        "7"
+       ]
+      },
+      "expected": {
+       "target": "5",
+       "distinguishes": true
+      },
+      "response": "7",
+      "assistance": {
+       "activity": "check",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": true
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "supports",
+      "at": "2026-09-01T09:10:00.000Z",
+      "attempt": "record#9"
+     },
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "added-sides@gen:cdist:-2,-4,4,4",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:cdist:-2,4,4,-4",
+      "family": "cdist",
+      "prediction": {
+       "explanation": "added-sides",
+       "values": [
+        "14"
+       ]
+      },
+      "expected": {
+       "target": "10",
+       "distinguishes": true
+      },
+      "response": "14",
+      "assistance": {
+       "activity": "guided",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": false
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "inconclusive",
+      "at": "2026-09-01T09:12:00.000Z",
+      "attempt": "record#11"
+     },
+     {
+      "contract": "resolution-probe@1",
+      "hypothesis": {
+       "id": "added-sides@gen:cdist:-2,-4,4,4",
+       "contract": "learner-hypothesis@1",
+       "policy": "diagnostic@2-draft"
+      },
+      "question": "gen:cdist:-2,6,1,2",
+      "family": "cdist",
+      "prediction": {
+       "explanation": "added-sides",
+       "values": [
+        "7"
+       ]
+      },
+      "expected": {
+       "target": "5",
+       "distinguishes": true
+      },
+      "response": "7",
+      "assistance": {
+       "activity": "check",
+       "hints": 0,
+       "solution": false,
+       "n": 1,
+       "independent": true
+      },
+      "grader": {
+       "credit": null,
+       "source": "verifier"
+      },
+      "afterTeaching": true,
+      "outcome": "supports",
+      "at": "2026-09-01T09:13:00.000Z",
+      "attempt": "record#12"
+     }
+    ],
+    "uncertainty": {
+     "supporting": 3,
+     "contradicting": 0,
+     "inconclusive": 3,
+     "note": "0 against, 3 for, after it was established (counts, not a probability)"
+    },
+    "teachingDue": true,
+    "probeDue": false,
+    "trigger": {
+     "kind": "starting-check",
+     "detail": "a wrong answer in the starting-point check"
+    },
+    "provenance": {
+     "policy": "diagnostic@2-draft",
+     "established": "2026-09-01T09:04:00.000Z",
+     "attempts": [
+      "record#1",
+      "record#3"
+     ]
+    },
+    "use": {
+     "teach": true,
+     "ask": false,
+     "evidence": false,
+     "mastery": false
+    }
+   }
+  ],
+  "teachingHistory": {
+   "MATH.coordinate.distance": [
+    {
+     "strategy": "worked_steps",
+     "kind": "procedural",
+     "delivered": [
+      "2026-09-01T09:08:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:09:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:10:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": false
+    },
+    {
+     "strategy": "spot_the_mistake",
+     "kind": "conceptual",
+     "delivered": [
+      "2026-09-01T09:05:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:06:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:07:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": false
+    },
+    {
+     "strategy": "check_what_it_uses",
+     "kind": "prerequisite",
+     "delivered": [
+      "2026-09-01T09:11:00.000Z"
+     ],
+     "guidedSeen": {
+      "at": "2026-09-01T09:12:00.000Z",
+      "activity": "guided"
+     },
+     "checkSeen": {
+      "at": "2026-09-01T09:13:00.000Z",
+      "activity": "check",
+      "inBlock": true
+     },
+     "effective": false
+    }
+   ],
+   "MATH.algebra.quadratic-discriminant": [
+    {
+     "strategy": "parabola",
+     "kind": "conceptual",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    },
+    {
+     "strategy": "careful_signs",
+     "kind": "procedural",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    },
+    {
+     "strategy": "signed_numbers",
+     "kind": "prerequisite",
+     "delivered": [],
+     "guidedSeen": null,
+     "checkSeen": null,
+     "effective": null
+    }
+   ]
+  }
+ }
+}

@@ -33,7 +33,7 @@ test("the research response-model seam is off in production and changes nothing 
   const b = await runLearner({ ...ctx, researchBinaryUpdate: binaryUpdate }, LEARNERS[3], o);
   assert.deepEqual(b.ledger.composite, a.ledger.composite);
   // production code never imports the research tools
-  for (const f of readdirSync(join(REPO, "packages", "english-core", "src"))) assert.doesNotMatch(readFileSync(join(REPO, "packages", "english-core", "src", f), "utf8"), /research\//, f);
+  for (const f of readdirSync(join(REPO, "packages", "english-core", "src"), { recursive: true }).map(String).filter((f) => f.endsWith(".ts"))) assert.doesNotMatch(readFileSync(join(REPO, "packages", "english-core", "src", f), "utf8"), /research\//, f);
 });
 
 test("the slip-aware research model reduces to the production update when s = 0", () => {

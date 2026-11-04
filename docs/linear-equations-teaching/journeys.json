@@ -1,0 +1,246 @@
+[
+ {
+  "id": "J2",
+  "what": "two-step equations, right alone",
+  "mode": "demonstration",
+  "ended": "done",
+  "answers": 22,
+  "decisions": [],
+  "after": {
+   "status": "transfer",
+   "verified": false,
+   "recoveryRequired": false,
+   "retention": "scheduled",
+   "retentionDue": "2026-10-08T09:02:00.000Z",
+   "history": [
+    "pending"
+   ]
+  }
+ },
+ {
+  "id": "J3",
+  "what": "x on both sides: moves an x term without changing its sign",
+  "mode": "demonstration",
+  "ended": "done",
+  "answers": 24,
+  "decisions": [
+   {
+    "explanation": "fix_sign_move",
+    "basis": "verified-misconception",
+    "misconceptionEvidence": true,
+    "review": "pending_review",
+    "label": "Demonstration: this explanation has not been approved by an educator.",
+    "displayed": true,
+    "recheck": {
+     "question": "Solve 7x + 16 = 5x + 28. What is x?",
+     "attempted": true,
+     "correct": true,
+     "method": "method-verified"
+    }
+   }
+  ],
+  "after": {
+   "status": "transfer",
+   "verified": false,
+   "recoveryRequired": false,
+   "retention": "scheduled",
+   "retentionDue": "2026-10-08T09:02:00.000Z",
+   "history": [
+    "pending"
+   ]
+  }
+ },
+ {
+  "id": "J4",
+  "what": "brackets: multiplies only the first term",
+  "mode": "demonstration",
+  "ended": "done",
+  "answers": 24,
+  "decisions": [
+   {
+    "explanation": "fix_distribution",
+    "basis": "verified-misconception",
+    "misconceptionEvidence": true,
+    "review": "pending_review",
+    "label": "Demonstration: this explanation has not been approved by an educator.",
+    "displayed": true,
+    "recheck": {
+     "question": "Solve 4(x + 3) = 3x + 16. What is x?",
+     "attempted": true,
+     "correct": true,
+     "method": "method-verified"
+    }
+   }
+  ],
+  "after": {
+   "status": "transfer",
+   "verified": false,
+   "recoveryRequired": false,
+   "retention": "scheduled",
+   "retentionDue": "2026-10-08T09:02:00.000Z",
+   "history": [
+    "pending"
+   ]
+  }
+ },
+ {
+  "id": "J6",
+  "what": "two-step: forgets to divide; recovers; remembers 8 days later",
+  "mode": "demonstration",
+  "ended": "done",
+  "answers": 28,
+  "decisions": [
+   {
+    "explanation": "fix_finish",
+    "basis": "verified-misconception",
+    "misconceptionEvidence": true,
+    "review": "pending_review",
+    "label": "Demonstration: this explanation has not been approved by an educator.",
+    "displayed": true,
+    "recheck": {
+     "question": "Solve 3x + 3 = 15. What is x?",
+     "attempted": true,
+     "correct": true,
+     "method": "method-verified"
+    }
+   }
+  ],
+  "after": {
+   "status": "transfer",
+   "verified": false,
+   "recoveryRequired": false,
+   "retention": "passed",
+   "retentionDue": "2026-10-08T09:08:00.000Z",
+   "history": [
+    "passed"
+   ]
+  }
+ },
+ {
+  "id": "J7",
+  "what": "repeated difficulty, no misconception established (always wrong)",
+  "mode": "demonstration",
+  "ended": "pause",
+  "answers": 9,
+  "decisions": [
+   {
+    "explanation": "balance",
+    "basis": "repeated-difficulty",
+    "misconceptionEvidence": false,
+    "review": "pending_review",
+    "label": "Demonstration: this explanation has not been approved by an educator.",
+    "displayed": true,
+    "recheck": {
+     "question": "Solve 2x + 15 = 17. What is x?",
+     "attempted": true,
+     "correct": false,
+     "method": "no working given"
+    }
+   },
+   {
+    "explanation": "two_steps",
+    "basis": "repeated-difficulty",
+    "misconceptionEvidence": false,
+    "review": "pending_review",
+    "label": "Demonstration: this explanation has not been approved by an educator.",
+    "displayed": true,
+    "recheck": {
+     "question": "Solve 5x + 6 = 31. What is x?",
+     "attempted": true,
+     "correct": false,
+     "method": "no working given"
+    }
+   }
+  ],
+  "after": {
+   "status": "exposure",
+   "verified": false,
+   "recoveryRequired": false,
+   "retention": "none",
+   "retentionDue": null,
+   "history": []
+  }
+ },
+ {
+  "id": "J9",
+  "what": "fails the first recheck after teaching",
+  "mode": "demonstration",
+  "ended": "done",
+  "answers": 27,
+  "decisions": [
+   {
+    "explanation": "fix_finish",
+    "basis": "verified-misconception",
+    "misconceptionEvidence": true,
+    "review": "pending_review",
+    "label": "Demonstration: this explanation has not been approved by an educator.",
+    "displayed": true,
+    "recheck": {
+     "question": "Solve 3x + 3 = 15. What is x?",
+     "attempted": true,
+     "correct": false,
+     "method": "no working given"
+    }
+   },
+   {
+    "explanation": "balance",
+    "basis": "verified-misconception",
+    "misconceptionEvidence": true,
+    "review": "pending_review",
+    "label": "Demonstration: this explanation has not been approved by an educator.",
+    "displayed": true,
+    "recheck": {
+     "question": "Solve 2x + 15 = 17. What is x?",
+     "attempted": true,
+     "correct": true,
+     "method": "no working given"
+    }
+   }
+  ],
+  "after": {
+   "status": "transfer",
+   "verified": false,
+   "recoveryRequired": false,
+   "retention": "scheduled",
+   "retentionDue": "2026-10-08T09:11:00.000Z",
+   "history": [
+    "pending"
+   ]
+  }
+ },
+ {
+  "id": "J10",
+  "what": "fails the delayed check, then recovers",
+  "mode": "demonstration",
+  "ended": "done",
+  "answers": 25,
+  "decisions": [],
+  "after": {
+   "status": "transfer",
+   "verified": false,
+   "recoveryRequired": false,
+   "retention": "scheduled",
+   "retentionDue": "2026-10-16T09:26:00.000Z",
+   "history": [
+    "failed",
+    "pending"
+   ]
+  }
+ },
+ {
+  "id": "J11",
+  "what": "supervised evaluation, nothing approved: forgot-divide",
+  "mode": "supervised-evaluation",
+  "ended": "pause",
+  "answers": 4,
+  "decisions": [],
+  "after": {
+   "status": "exposure",
+   "verified": false,
+   "recoveryRequired": false,
+   "retention": "none",
+   "retentionDue": null,
+   "history": []
+  }
+ }
+]

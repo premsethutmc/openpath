@@ -1,0 +1,30 @@
+FAIL F1a  answer-first    sqrt(x+1)=2 | sqrt(x+1 = 2                                 -> incomplete [equivalent]      want unsupported|unresolved
+FAIL F1b  unified-natural sqrt(x+1)=2 | sqrt(x+1 = 2 / x+1=4 / x=3                   -> verified                     want malformed
+FAIL F1c  parser          3sec(3x)tan(3x)                                            -> parsed:{expression,{multiply,[{multiply,[{multiply,[{constant,3},{v want unsupported
+FAIL F1d  parser          sin x^2                                                    -> parsed:{expression,{power,{sin,{variable,x}},2}} want ambiguous
+FAIL F1e  parser          atan(x)                                                    -> parsed:{expression,{multiply,[{variable,atan},{variable,x}]}} want parsed:{atan
+FAIL F1f  parser          sqrt(x+1 = 2                                               -> parsed:{equation,{root,{add,[{variable,x},{constant,1}]},2},{consta want malformed
+FAIL F2a  unified-natural indefinite-integral | ∫2x/(x^2-1) dx = ln(x^2-1) + C       -> verified                     want missing-assumption|incomplete|invalid
+ok   F2b  unified-natural indefinite-integral | ∫2x/(x^2-1) dx = ln|x^2-1| + C       -> verified                     want verified
+ok   F2c  unified-natural indefinite-integral | ∫1/x dx = ln(x) + C                  -> missing-assumption           want missing-assumption|incomplete|invalid
+FAIL F3a  symbolic        cos(-x) -> cos x                                           -> invalid                      want verified
+FAIL F3b  symbolic        cos^2 x -> (1+cos 2x)/2                                    -> invalid                      want verified|unsupported
+FAIL F3c  symbolic        cos(2pi/3) -> -1/2                                         -> invalid                      want verified|unsupported
+ok   F3d  symbolic        sin(-x) -> sin x  (false)                                  -> unsupported                  want invalid|unsupported (safe: no witness exhibited)
+FAIL F4a  symbolic        6x*6^-1 -> x                                               -> missing-assumption           want verified
+FAIL F4b  symbolic        x^2*(x^3)^-1 -> x^-1                                       -> missing-assumption           want verified
+FAIL F4c  symbolic        x^-2 -> (x^2)^-1                                           -> missing-assumption           want verified
+FAIL F4d  symbolic        (x^2-1)^-1 -> ((x-1)(x+1))^-1                              -> missing-assumption           want verified
+FAIL F5a  symbolic        ln(x^2) -> 2 ln x  [x>0]                                   -> missing-assumption           want verified
+ok   F5b  symbolic        |x| -> x  [x>0]                                            -> verified                     want verified
+FAIL F5c  symbolic        |x+y| -> x+y  [x>0,y>0]                                    -> missing-assumption           want verified
+ok   F5d  symbolic        ln(x^2) -> 2 ln x  (none)                                  -> missing-assumption           want missing-assumption|invalid
+FAIL F6a  unified-natural x/(x-2)=3/(x-2) | x != 2 / x=3                             -> incomplete                   want verified
+FAIL F6b  answer-first    x/(x-2)=3/(x-2) | x != 2 / x=3                             -> correct [implied,narrowing]  want correct [equivalent]
+FAIL F6c  answer-first    (x^2-1)/(x-1)=2 for x != 1 | x+1=2 / x=1                   -> incorrect [implied,equivalent] want incorrect [equivalent,equivalent]
+FAIL F7a  unified-natural x^2=9 | x=3                                                -> incomplete                   want invalid
+FAIL F7b  unified-natural x^3=4x | x^2=4 / x=2 or x=-2                               -> incomplete                   want invalid
+FAIL F7c  answer-first    x^3=4x | x^2=4 / x=2 or x=-2                               -> incomplete [invalid,equivalent] want incorrect
+FAIL F7d  unified-natural x^2>4 | x>2                                                -> incomplete                   want invalid
+ok   F8a  unified-natural x^2/(x-3)=9/(x-3) | x^2=9 / x=-3                           -> verified                     want verified (implicit policy)|incomplete (shown policy)
+FAIL F8b  unified-natural 2x+5=2(x+3) | 2x+5=2x+6 / 5=6 / no solution                -> invalid                      want verified

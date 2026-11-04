@@ -1,0 +1,41 @@
+{
+ "seeds": {
+  "dev": 20261101,
+  "eval": 20261102,
+  "holdout": 20261103,
+  "unsupported": 20261104,
+  "adversarial": 20261105
+ },
+ "sympy": "1.14.0",
+ "generatorTries": {
+  "dev": 355,
+  "eval": 705,
+  "holdout": 576
+ },
+ "files": {
+  "dev.json": {
+   "items": 206,
+   "sha256": "ec299ae02e95f516a31fadcd83161ad02ca4df82f28af719e26740bce9cfc487"
+  },
+  "eval.json": {
+   "items": 400,
+   "sha256": "6147a52e23e0028323e9fb4d714234171e484c03c8ad0c3f121d69c3e236603d"
+  },
+  "holdout.json": {
+   "items": 300,
+   "sha256": "bff66089d1e2047618082c78f9f4741099aa3df3d18a13a633acbd9c9b08751a"
+  },
+  "unsupported.json": {
+   "items": 112,
+   "sha256": "4301bfe43af1a17a88b28e2e227de181bb43ab08285b6f68841fa2125ec8b0ea"
+  },
+  "adversarial.json": {
+   "items": 2884,
+   "sha256": "00d7821dd54c3c2aaf4ffc16ed204c213d99e2b9b6e9c3d9a8c3b790cb8a113d"
+  },
+  "claims.json": {
+   "items": 400,
+   "sha256": "ef6fdd221c06ea0ce5975af734efd36163d3f612fb98c889658852e7413a632c"
+  }
+ }
+}

@@ -1,0 +1,7 @@
+{"probe":"RR1 unbound numeric chain ending at the truth (no use of task data)","verdict":"verified","expectation":"verified expected = REMAINING"}
+{"probe":"RR1 coincidental chain","verdict":"verified","expectation":"verified expected = REMAINING"}
+{"probe":"RR2 vague non-mathematical-looking claim not in the predicate vocabulary","verdict":"verified","expectation":"verified expected = REMAINING (recall limit of the ledger)"}
+{"probe":"RR3 recognised predicate (control: blocked)","verdict":"unsupported","expectation":"not verified expected"}
+{"probe":"RR4 route precedence (s6-034; ref=ambiguous)","verdict":"invalid","expectation":"see ref"}
+{"probe":"RR4 route precedence (s6-048; ref=ambiguous)","verdict":"invalid","expectation":"see ref"}
+{"probe":"RR4 route precedence (s6-314; ref=verified)","verdict":"invalid","expectation":"see ref"}

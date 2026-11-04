@@ -1,0 +1,509 @@
+{
+  "oracle": "SymPy 1.14.0",
+  "total": 100,
+  "passed": 100,
+  "failed": 0,
+  "elapsedMs": 57.35203900258057,
+  "results": [
+    {
+      "id": "sub-0",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-1",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-2",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-3",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-4",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-5",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-6",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-7",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-8",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-9",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-10",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-11",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-12",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-13",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-14",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-15",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-16",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-17",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-18",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-19",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-20",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-21",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-22",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-23",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "sub-24",
+      "area": "substitution",
+      "passed": true
+    },
+    {
+      "id": "det-0",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-1",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-2",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-3",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-4",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-5",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-6",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-7",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-8",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-9",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-10",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-11",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-12",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-13",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-14",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-15",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-16",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-17",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-18",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-19",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-20",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-21",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-22",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-23",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "det-24",
+      "area": "determinant",
+      "passed": true
+    },
+    {
+      "id": "derivative-0",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-1",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-2",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-3",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-4",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-5",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-6",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-7",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-8",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-9",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-10",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-11",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-12",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-13",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-14",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-15",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-16",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-17",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-18",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-19",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-20",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-21",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-22",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-23",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "derivative-24",
+      "area": "derivative",
+      "passed": true
+    },
+    {
+      "id": "function-0",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-1",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-2",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-3",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-4",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-5",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-6",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-7",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-8",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-9",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-10",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-11",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-12",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-13",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-14",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-15",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-16",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-17",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-18",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-19",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-20",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-21",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-22",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-23",
+      "area": "function",
+      "passed": true
+    },
+    {
+      "id": "function-24",
+      "area": "function",
+      "passed": true
+    }
+  ]
+}

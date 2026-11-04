@@ -1,0 +1,27 @@
+{
+ "challenge": {
+  "cases": 75,
+  "greedyCorrect": 49,
+  "rate": 0.6533,
+  "failedIds": [
+   "syntax_equiv-01",
+   "syntax_equiv-02",
+   "syntax_equiv-04",
+   "syntax_equiv-05",
+   "syntax_equiv-06",
+   "rule_order-02",
+   "rule_order-06",
+   "greedy_trap-01",
+   "greedy_trap-03",
+   "greedy_trap-04",
+   "repeated_multi_excl-01",
+   "repeated_multi_excl-02",
+   "removable-01",
+   "removable-02",
+   "candidate_excluded-02"
+  ],
+  "failedByGot": {
+   "stuck": 26
+  }
+ }
+}

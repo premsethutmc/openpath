@@ -1,0 +1,48 @@
+{
+  "version": "math-domains-m2-results@1",
+  "nativeCases": 480,
+  "crossDomainCases": 120,
+  "totalCases": 600,
+  "byArea": {
+    "trigonometry": {
+      "cases": 120,
+      "matched": 120,
+      "falseAcceptance": 0,
+      "falseRejection": 0,
+      "firstInvalidMatched": 120
+    },
+    "exponential-log": {
+      "cases": 120,
+      "matched": 120,
+      "falseAcceptance": 0,
+      "falseRejection": 0,
+      "firstInvalidMatched": 120
+    },
+    "sequence-series": {
+      "cases": 120,
+      "matched": 120,
+      "falseAcceptance": 0,
+      "falseRejection": 0,
+      "firstInvalidMatched": 120
+    },
+    "radical": {
+      "cases": 120,
+      "matched": 120,
+      "falseAcceptance": 0,
+      "falseRejection": 0,
+      "firstInvalidMatched": 120
+    }
+  },
+  "totals": {
+    "matched": 480,
+    "falseAcceptance": 0,
+    "falseRejection": 0,
+    "firstInvalidMatched": 480
+  },
+  "latencyMs": {
+    "p50": 0.008833000000002755,
+    "p95": 0.05777700000000152,
+    "p99": 0.3019350000000003,
+    "max": 1.646127
+  }
+}

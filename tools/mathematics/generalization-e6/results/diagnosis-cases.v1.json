@@ -1,0 +1,3841 @@
+[
+ {
+  "set": "e1",
+  "id": "e1-022",
+  "area": "algebra",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Find all integer solutions of x^3 + y^3 = z^3"
+  },
+  "working": {
+   "format": "natural",
+   "text": "Assume x,y,z > 0\nx^3 + y^3 = z^3\nUse a complete proof of Fermat's Last Theorem"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "comma suffix must be a domain restriction",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "comma suffix must be a domain restriction"
+  },
+  "stopLine": 0,
+  "stopReason": "comma suffix must be a domain restriction"
+ },
+ {
+  "set": "e1",
+  "id": "e1-050",
+  "area": "algebra",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Find all integer solutions of x^3 + y^3 = z^3"
+  },
+  "working": {
+   "format": "natural",
+   "text": "Assume x,y,z > 0\nx^3 + y^3 = z^3\nUse a complete proof of Fermat's Last Theorem"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "comma suffix must be a domain restriction",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "comma suffix must be a domain restriction"
+  },
+  "stopLine": 0,
+  "stopReason": "comma suffix must be a domain restriction"
+ },
+ {
+  "set": "e1",
+  "id": "e1-064",
+  "area": "algebra",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Find all integer solutions of x^3 + y^3 = z^3"
+  },
+  "working": {
+   "format": "natural",
+   "text": "Assume x,y,z > 0\nx^3 + y^3 = z^3\nUse a complete proof of Fermat's Last Theorem"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "comma suffix must be a domain restriction",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "comma suffix must be a domain restriction"
+  },
+  "stopLine": 0,
+  "stopReason": "comma suffix must be a domain restriction"
+ },
+ {
+  "set": "e1",
+  "id": "e1-074",
+  "area": "algebra",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "algebra",
+   "statement": "Find all integer solutions of x^3 + y^3 = z^3"
+  },
+  "working": {
+   "format": "natural",
+   "text": "Assume x,y,z > 0\nx^3 + y^3 = z^3\nUse a complete proof of Fermat's Last Theorem"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "comma suffix must be a domain restriction",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "comma suffix must be a domain restriction"
+  },
+  "stopLine": 0,
+  "stopReason": "comma suffix must be a domain restriction"
+ },
+ {
+  "set": "e1",
+  "id": "e1-101",
+  "area": "functions-trigonometry-logarithms",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "algebra",
+   "statement": "log(x^2) = 2log(x)"
+  },
+  "working": {
+   "format": "natural",
+   "text": "log(x^2) = 2log(x)\nTherefore this holds for all real x"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: function log); the working is not judged",
+  "reasoners": [
+   "natural-working-parser",
+   "math-core:equation"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": null,
+  "stopReason": null
+ },
+ {
+  "set": "e1",
+  "id": "e1-117",
+  "area": "functions-trigonometry-logarithms",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "algebra",
+   "statement": "log(x^2) = 2log(x)"
+  },
+  "working": {
+   "format": "natural",
+   "text": "log(x^2) = 2log(x)\nTherefore this holds for all real x"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: function log); the working is not judged",
+  "reasoners": [
+   "natural-working-parser",
+   "math-core:equation"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": null,
+  "stopReason": null
+ },
+ {
+  "set": "e1",
+  "id": "e1-129",
+  "area": "functions-trigonometry-logarithms",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "algebra",
+   "statement": "log(x^2) = 2log(x)"
+  },
+  "working": {
+   "format": "natural",
+   "text": "log(x^2) = 2log(x)\nTherefore this holds for all real x"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: function log); the working is not judged",
+  "reasoners": [
+   "natural-working-parser",
+   "math-core:equation"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": null,
+  "stopReason": null
+ },
+ {
+  "set": "e1",
+  "id": "e1-136",
+  "area": "functions-trigonometry-logarithms",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "algebra",
+   "statement": "log(x^2) = 2log(x)"
+  },
+  "working": {
+   "format": "natural",
+   "text": "log(x^2) = 2log(x)\nTherefore this holds for all real x"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: function log); the working is not judged",
+  "reasoners": [
+   "natural-working-parser",
+   "math-core:equation"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": null,
+  "stopReason": null
+ },
+ {
+  "set": "e1",
+  "id": "e1-152",
+  "area": "functions-trigonometry-logarithms",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "algebra",
+   "statement": "log(x^2) = 2log(x)"
+  },
+  "working": {
+   "format": "natural",
+   "text": "log(x^2) = 2log(x)\nTherefore this holds for all real x"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: function log); the working is not judged",
+  "reasoners": [
+   "natural-working-parser",
+   "math-core:equation"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": null,
+  "stopReason": null
+ },
+ {
+  "set": "e1",
+  "id": "e1-154",
+  "area": "functions-trigonometry-logarithms",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "algebra",
+   "statement": "log(x^2) = 2log(x)"
+  },
+  "working": {
+   "format": "natural",
+   "text": "log(x^2) = 2log(x)\nTherefore this holds for all real x"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: function log); the working is not judged",
+  "reasoners": [
+   "natural-working-parser",
+   "math-core:equation"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": null,
+  "stopReason": null
+ },
+ {
+  "set": "e1",
+  "id": "e1-164",
+  "area": "calculus",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "calculus",
+   "task": "solve-pde",
+   "statement": "Solve the Navier-Stokes initial boundary value problem"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∂u/∂t + (u·∇)u = -∇p + νΔu\n∇·u=0\nFind every smooth global solution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "expected expression"
+ },
+ {
+  "set": "e1",
+  "id": "e1-167",
+  "area": "calculus",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x = x^2\nf'(x) = 2x"
+  },
+  "reference": "malformed",
+  "engine": "invalid",
+  "justification": "line 2 is mathematically invalid; line 1 is unsupported; the earliest invalid line cannot be asserted with confidence (verified invalid: line 2)",
+  "reasoners": [
+   "natural-geocalc-e5"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "missing closing parenthesis"
+  },
+  "stopLine": 0,
+  "stopReason": "a derivative line must be an equation"
+ },
+ {
+  "set": "e1",
+  "id": "e1-168",
+  "area": "calculus",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∫ x^7 dx = x^8/8\nDifferentiate x^8/8 to check"
+  },
+  "reference": "missing-assumption",
+  "engine": "ambiguous",
+  "justification": "division followed by implicit multiplication has multiple conventional readings",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "ambiguous",
+   "lines": 1,
+   "message": "division followed by implicit multiplication has multiple conventional readings"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-169",
+  "area": "calculus",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∫ x^2 dx = x^3/3\nDifferentiate x^3/3 to check"
+  },
+  "reference": "missing-assumption",
+  "engine": "ambiguous",
+  "justification": "division followed by implicit multiplication has multiple conventional readings",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "ambiguous",
+   "lines": 1,
+   "message": "division followed by implicit multiplication has multiple conventional readings"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-172",
+  "area": "calculus",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∫ x^5 dx = x^6/6\nDifferentiate x^6/6 to check"
+  },
+  "reference": "missing-assumption",
+  "engine": "ambiguous",
+  "justification": "division followed by implicit multiplication has multiple conventional readings",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "ambiguous",
+   "lines": 1,
+   "message": "division followed by implicit multiplication has multiple conventional readings"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-174",
+  "area": "calculus",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∫ x^7 dx = x^8/8\nDifferentiate x^8/8 to check"
+  },
+  "reference": "missing-assumption",
+  "engine": "ambiguous",
+  "justification": "division followed by implicit multiplication has multiple conventional readings",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "ambiguous",
+   "lines": 1,
+   "message": "division followed by implicit multiplication has multiple conventional readings"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-180",
+  "area": "calculus",
+  "category": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x) = x^7\nUse the power rule"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e1",
+  "id": "e1-186",
+  "area": "calculus",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "calculus",
+   "task": "solve-pde",
+   "statement": "Solve the Navier-Stokes initial boundary value problem"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∂u/∂t + (u·∇)u = -∇p + νΔu\n∇·u=0\nFind every smooth global solution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "expected expression"
+ },
+ {
+  "set": "e1",
+  "id": "e1-189",
+  "area": "calculus",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "calculus",
+   "task": "solve-pde",
+   "statement": "Solve the Navier-Stokes initial boundary value problem"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∂u/∂t + (u·∇)u = -∇p + νΔu\n∇·u=0\nFind every smooth global solution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "expected expression"
+ },
+ {
+  "set": "e1",
+  "id": "e1-195",
+  "area": "calculus",
+  "category": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x) = x^4\nUse the power rule"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e1",
+  "id": "e1-196",
+  "area": "calculus",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "calculus",
+   "task": "solve-pde",
+   "statement": "Solve the Navier-Stokes initial boundary value problem"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∂u/∂t + (u·∇)u = -∇p + νΔu\n∇·u=0\nFind every smooth global solution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "expected expression"
+ },
+ {
+  "set": "e1",
+  "id": "e1-199",
+  "area": "calculus",
+  "category": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x) = x^2\nUse the power rule"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e1",
+  "id": "e1-201",
+  "area": "calculus",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∫ x^4 dx = x^5/5\nDifferentiate x^5/5 to check"
+  },
+  "reference": "missing-assumption",
+  "engine": "ambiguous",
+  "justification": "division followed by implicit multiplication has multiple conventional readings",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "ambiguous",
+   "lines": 1,
+   "message": "division followed by implicit multiplication has multiple conventional readings"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-204",
+  "area": "calculus",
+  "category": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x) = x^7\nUse the power rule"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e1",
+  "id": "e1-208",
+  "area": "calculus",
+  "category": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x) = x^5\nUse the power rule"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e1",
+  "id": "e1-212",
+  "area": "calculus",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∫ x^3 dx = x^4/4\nDifferentiate x^4/4 to check"
+  },
+  "reference": "missing-assumption",
+  "engine": "ambiguous",
+  "justification": "division followed by implicit multiplication has multiple conventional readings",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "ambiguous",
+   "lines": 1,
+   "message": "division followed by implicit multiplication has multiple conventional readings"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-215",
+  "area": "calculus",
+  "category": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x) = x^6\nUse the power rule"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e1",
+  "id": "e1-224",
+  "area": "calculus",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x = x^2\nf'(x) = 2x"
+  },
+  "reference": "malformed",
+  "engine": "invalid",
+  "justification": "line 2 is mathematically invalid; line 1 is unsupported; the earliest invalid line cannot be asserted with confidence (verified invalid: line 2)",
+  "reasoners": [
+   "natural-geocalc-e5"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "missing closing parenthesis"
+  },
+  "stopLine": 0,
+  "stopReason": "a derivative line must be an equation"
+ },
+ {
+  "set": "e1",
+  "id": "e1-227",
+  "area": "calculus",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "calculus",
+   "task": "solve-pde",
+   "statement": "Solve the Navier-Stokes initial boundary value problem"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∂u/∂t + (u·∇)u = -∇p + νΔu\n∇·u=0\nFind every smooth global solution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "expected expression"
+ },
+ {
+  "set": "e1",
+  "id": "e1-233",
+  "area": "geometry-coordinate-geometry",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A + B + C = 180°\nTherefore C = 180° - A - B"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "unsupported character '°' at 15",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '°' at 15"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '°' at 15"
+ },
+ {
+  "set": "e1",
+  "id": "e1-245",
+  "area": "geometry-coordinate-geometry",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A + B + C = 180°\nTherefore C = 180° - A - B"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "unsupported character '°' at 15",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '°' at 15"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '°' at 15"
+ },
+ {
+  "set": "e1",
+  "id": "e1-259",
+  "area": "geometry-coordinate-geometry",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A + B + C = 180°\nTherefore C = 180° - A - B"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "unsupported character '°' at 15",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '°' at 15"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '°' at 15"
+ },
+ {
+  "set": "e1",
+  "id": "e1-263",
+  "area": "geometry-coordinate-geometry",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A + B + C = 180°\nTherefore C = 180° - A - B"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "unsupported character '°' at 15",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '°' at 15"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '°' at 15"
+ },
+ {
+  "set": "e1",
+  "id": "e1-268",
+  "area": "geometry-coordinate-geometry",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A + B + C = 180°\nTherefore C = 180° - A - B"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "unsupported character '°' at 15",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '°' at 15"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '°' at 15"
+ },
+ {
+  "set": "e1",
+  "id": "e1-272",
+  "area": "geometry-coordinate-geometry",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 40
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 70
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "AB = 5\nAC = 5\nangle B = angle C maybe from picture"
+  },
+  "reference": "ambiguous",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for geometry",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for geometry"
+ },
+ {
+  "set": "e1",
+  "id": "e1-273",
+  "area": "geometry-coordinate-geometry",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A + B + C = 180°\nTherefore C = 180° - A - B"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "unsupported character '°' at 15",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '°' at 15"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '°' at 15"
+ },
+ {
+  "set": "e1",
+  "id": "e1-292",
+  "area": "geometry-coordinate-geometry",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A + B + C = 180°\nTherefore C = 180° - A - B"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "unsupported character '°' at 15",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '°' at 15"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '°' at 15"
+ },
+ {
+  "set": "e1",
+  "id": "e1-297",
+  "area": "geometry-coordinate-geometry",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A + B + C = 180°\nTherefore C = 180° - A - B"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "unsupported character '°' at 15",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '°' at 15"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '°' at 15"
+ },
+ {
+  "set": "e1",
+  "id": "e1-300",
+  "area": "geometry-coordinate-geometry",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A + B + C = 180°\nTherefore C = 180° - A - B"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "unsupported character '°' at 15",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '°' at 15"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '°' at 15"
+ },
+ {
+  "set": "e1",
+  "id": "e1-303",
+  "area": "probability-combinatorics-statistics",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "4/11"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "There are 7 non-red outcomes out of 11\nP(not R) = 7/11\nP(not R) = 7/11"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-305",
+  "area": "probability-combinatorics-statistics",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "1/2"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "P(A|B = 1/2\nP(A and B)=1/4"
+  },
+  "reference": "malformed",
+  "engine": "unsupported",
+  "justification": "unsupported: a conjunction may only join equations",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 1,
+   "message": "unsupported: a conjunction may only join equations"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-307",
+  "area": "probability-combinatorics-statistics",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "3/8"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "There are 5 non-red outcomes out of 8\nP(not R) = 5/8\nP(not R) = 5/8"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-308",
+  "area": "probability-combinatorics-statistics",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "4/11"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "There are 7 non-red outcomes out of 11\nP(not R) = 7/11\nP(not R) = 7/11"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-309",
+  "area": "probability-combinatorics-statistics",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "5/9"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "P(A|B = 1/2\nP(A and B)=1/4"
+  },
+  "reference": "malformed",
+  "engine": "unsupported",
+  "justification": "unsupported: a conjunction may only join equations",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 1,
+   "message": "unsupported: a conjunction may only join equations"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-310",
+  "area": "probability-combinatorics-statistics",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "1/2"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "P(A|B = 1/2\nP(A and B)=1/4"
+  },
+  "reference": "malformed",
+  "engine": "unsupported",
+  "justification": "unsupported: a conjunction may only join equations",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 1,
+   "message": "unsupported: a conjunction may only join equations"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-312",
+  "area": "probability-combinatorics-statistics",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "3/8"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "P(A|B = 1/2\nP(A and B)=1/4"
+  },
+  "reference": "malformed",
+  "engine": "unsupported",
+  "justification": "unsupported: a conjunction may only join equations",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 1,
+   "message": "unsupported: a conjunction may only join equations"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-317",
+  "area": "probability-combinatorics-statistics",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "3/8"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "There are 5 non-red outcomes out of 8\nP(not R) = 5/8\nP(not R) = 5/8"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-318",
+  "area": "probability-combinatorics-statistics",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "distribution",
+   "task": "continuous-stochastic-process",
+   "data": {}
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let W(t) be Brownian motion\nUse Ito's lemma\nFind the stopping-time distribution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-321",
+  "area": "probability-combinatorics-statistics",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "2/5"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "There are 3 non-red outcomes out of 5\nP(not R) = 3/5\nP(not R) = 3/5"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-323",
+  "area": "probability-combinatorics-statistics",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "distribution",
+   "task": "continuous-stochastic-process",
+   "data": {}
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let W(t) be Brownian motion\nUse Ito's lemma\nFind the stopping-time distribution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-327",
+  "area": "probability-combinatorics-statistics",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "distribution",
+   "task": "continuous-stochastic-process",
+   "data": {}
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let W(t) be Brownian motion\nUse Ito's lemma\nFind the stopping-time distribution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-328",
+  "area": "probability-combinatorics-statistics",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "independent-intersection",
+   "data": {
+    "pa": "1/2",
+    "pb": "1/3"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "P(A)=1/2\nP(B)=1/3\nP(A∩B)=P(A)P(B)=1/6"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-333",
+  "area": "probability-combinatorics-statistics",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "4/11"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "There are 7 non-red outcomes out of 11\nP(not R) = 7/11\nP(not R) = 7/11"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-335",
+  "area": "probability-combinatorics-statistics",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "distribution",
+   "task": "continuous-stochastic-process",
+   "data": {}
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let W(t) be Brownian motion\nUse Ito's lemma\nFind the stopping-time distribution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-336",
+  "area": "probability-combinatorics-statistics",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "2/5"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "There are 3 non-red outcomes out of 5\nP(not R) = 3/5\nP(not R) = 3/5"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-342",
+  "area": "probability-combinatorics-statistics",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "3/8"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "There are 5 non-red outcomes out of 8\nP(not R) = 5/8\nP(not R) = 5/8"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-343",
+  "area": "probability-combinatorics-statistics",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "distribution",
+   "task": "continuous-stochastic-process",
+   "data": {}
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let W(t) be Brownian motion\nUse Ito's lemma\nFind the stopping-time distribution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-345",
+  "area": "probability-combinatorics-statistics",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "independent-intersection",
+   "data": {
+    "pa": "1/2",
+    "pb": "1/3"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "P(A)=1/2\nP(B)=1/3\nP(A∩B)=P(A)P(B)=1/6"
+  },
+  "reference": "missing-assumption",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-346",
+  "area": "probability-combinatorics-statistics",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "2/5"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "There are 3 non-red outcomes out of 5\nP(not R) = 3/5\nP(not R) = 3/5"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-349",
+  "area": "probability-combinatorics-statistics",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "distribution",
+   "task": "continuous-stochastic-process",
+   "data": {}
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let W(t) be Brownian motion\nUse Ito's lemma\nFind the stopping-time distribution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-351",
+  "area": "probability-combinatorics-statistics",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "distribution",
+   "task": "continuous-stochastic-process",
+   "data": {}
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let W(t) be Brownian motion\nUse Ito's lemma\nFind the stopping-time distribution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-352",
+  "area": "probability-combinatorics-statistics",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "distribution",
+   "task": "continuous-stochastic-process",
+   "data": {}
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let W(t) be Brownian motion\nUse Ito's lemma\nFind the stopping-time distribution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-354",
+  "area": "probability-combinatorics-statistics",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "distribution",
+   "task": "continuous-stochastic-process",
+   "data": {}
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let W(t) be Brownian motion\nUse Ito's lemma\nFind the stopping-time distribution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-358",
+  "area": "probability-combinatorics-statistics",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "distribution",
+   "task": "continuous-stochastic-process",
+   "data": {}
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let W(t) be Brownian motion\nUse Ito's lemma\nFind the stopping-time distribution"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "expected expression",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "expected expression"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-359",
+  "area": "probability-combinatorics-statistics",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "probability-statistics",
+   "area": "probability",
+   "task": "complement",
+   "data": {
+    "pa": "5/9"
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "There are 4 non-red outcomes out of 9\nP(not R) = 4/9\nP(not R) = 4/9"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for probability-statistics",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for probability-statistics"
+ },
+ {
+  "set": "e1",
+  "id": "e1-380",
+  "area": "vectors-matrices",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "linear-algebra",
+   "area": "matrix",
+   "task": "determinant",
+   "data": {
+    "a": [
+     [
+      "4",
+      "5"
+     ],
+     [
+      "4",
+      "6"
+     ]
+    ]
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A = [[1,2],[3]\ndet(A) = -2"
+  },
+  "reference": "malformed",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for linear-algebra",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for linear-algebra"
+ },
+ {
+  "set": "e1",
+  "id": "e1-385",
+  "area": "vectors-matrices",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "linear-algebra",
+   "area": "matrix",
+   "task": "inverse",
+   "data": {
+    "a": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "4"
+     ]
+    ]
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A = [[1,2],[2,4]]\nA^-1 = 1/det(A) adj(A)\nCompute A^-1"
+  },
+  "reference": "missing-assumption",
+  "engine": "ambiguous",
+  "justification": "division followed by implicit multiplication has multiple conventional readings",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "ambiguous",
+   "lines": 1,
+   "message": "division followed by implicit multiplication has multiple conventional readings"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-386",
+  "area": "vectors-matrices",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "linear-algebra",
+   "area": "matrix",
+   "task": "determinant",
+   "data": {
+    "a": [
+     [
+      "2",
+      "2"
+     ],
+     [
+      "6",
+      "6"
+     ]
+    ]
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A = [[1,2],[3]\ndet(A) = -2"
+  },
+  "reference": "malformed",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for linear-algebra",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for linear-algebra"
+ },
+ {
+  "set": "e1",
+  "id": "e1-395",
+  "area": "vectors-matrices",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "linear-algebra",
+   "area": "matrix",
+   "task": "determinant",
+   "data": {
+    "a": [
+     [
+      "3",
+      "5"
+     ],
+     [
+      "5",
+      "3"
+     ]
+    ]
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A = [[1,2],[3]\ndet(A) = -2"
+  },
+  "reference": "malformed",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for linear-algebra",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for linear-algebra"
+ },
+ {
+  "set": "e1",
+  "id": "e1-403",
+  "area": "vectors-matrices",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "linear-algebra",
+   "area": "matrix",
+   "task": "inverse",
+   "data": {
+    "a": [
+     [
+      "1",
+      "2"
+     ],
+     [
+      "2",
+      "4"
+     ]
+    ]
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "A = [[1,2],[2,4]]\nA^-1 = 1/det(A) adj(A)\nCompute A^-1"
+  },
+  "reference": "missing-assumption",
+  "engine": "ambiguous",
+  "justification": "division followed by implicit multiplication has multiple conventional readings",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "ambiguous",
+   "lines": 1,
+   "message": "division followed by implicit multiplication has multiple conventional readings"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-416",
+  "area": "complex-polynomial-roots",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "arithmetic",
+   "task": "modulus-square",
+   "data": {
+    "a": {
+     "re": "1",
+     "im": "1"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = 1 + 1i\nz*conj(z) = (1+1i)(1-1i)\nz*conj(z) = 2\n|z| = sqrt(2)"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "adapter complex-modulus can verify only part of the submission (line is not a modulus claim for the written complex number); source line(s) 2 are not accounted for",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 4,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not certified: the submission cannot be certified while other lines are unverified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-417",
+  "area": "complex-polynomial-roots",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "arithmetic",
+   "task": "modulus-square",
+   "data": {
+    "a": {
+     "re": "2",
+     "im": "3"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = 2 + 3i\nz*conj(z) = (2+3i)(2-3i)\nz*conj(z) = 13\n|z| = sqrt(13)"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "adapter complex-modulus can verify only part of the submission (line is not a modulus claim for the written complex number); source line(s) 2 are not accounted for",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 4,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not certified: the submission cannot be certified while other lines are unverified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-421",
+  "area": "complex-polynomial-roots",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "arithmetic",
+   "task": "modulus-square",
+   "data": {
+    "a": {
+     "re": "1",
+     "im": "1"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = 2 + 3i\nsqrt(z^2) = z always"
+  },
+  "reference": "ambiguous",
+  "engine": "unsupported",
+  "justification": "written complex value does not match the typed problem",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: written complex value does not match the typed problem"
+ },
+ {
+  "set": "e1",
+  "id": "e1-429",
+  "area": "complex-polynomial-roots",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "polar",
+   "task": "argument",
+   "data": {
+    "a": {
+     "re": "-1",
+     "im": "0"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = -1\narg(z) = pi"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for complex-polynomial",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for complex-polynomial"
+ },
+ {
+  "set": "e1",
+  "id": "e1-432",
+  "area": "complex-polynomial-roots",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "arithmetic",
+   "task": "modulus-square",
+   "data": {
+    "a": {
+     "re": "2",
+     "im": "3"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = 2 + 3i\nz*conj(z) = (2+3i)(2-3i)\nz*conj(z) = 13\n|z| = sqrt(13)"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "adapter complex-modulus can verify only part of the submission (line is not a modulus claim for the written complex number); source line(s) 2 are not accounted for",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 4,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not certified: the submission cannot be certified while other lines are unverified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-438",
+  "area": "complex-polynomial-roots",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "polar",
+   "task": "argument",
+   "data": {
+    "a": {
+     "re": "-1",
+     "im": "0"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = -1\narg(z) = pi"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for complex-polynomial",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for complex-polynomial"
+ },
+ {
+  "set": "e1",
+  "id": "e1-439",
+  "area": "complex-polynomial-roots",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "polar",
+   "task": "argument",
+   "data": {
+    "a": {
+     "re": "-1",
+     "im": "0"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = -1\narg(z) = pi"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for complex-polynomial",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for complex-polynomial"
+ },
+ {
+  "set": "e1",
+  "id": "e1-440",
+  "area": "complex-polynomial-roots",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "arithmetic",
+   "task": "modulus-square",
+   "data": {
+    "a": {
+     "re": "5",
+     "im": "4"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = 5 + 4i\nz*conj(z) = (5+4i)(5-4i)\nz*conj(z) = 41\n|z| = sqrt(41)"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "adapter complex-modulus can verify only part of the submission (line is not a modulus claim for the written complex number); source line(s) 2 are not accounted for",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 4,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not certified: the submission cannot be certified while other lines are unverified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-441",
+  "area": "complex-polynomial-roots",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "arithmetic",
+   "task": "modulus-square",
+   "data": {
+    "a": {
+     "re": "1",
+     "im": "1"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = 2 + 3i\nsqrt(z^2) = z always"
+  },
+  "reference": "ambiguous",
+  "engine": "unsupported",
+  "justification": "written complex value does not match the typed problem",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: written complex value does not match the typed problem"
+ },
+ {
+  "set": "e1",
+  "id": "e1-444",
+  "area": "complex-polynomial-roots",
+  "category": "correct-alternative",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "arithmetic",
+   "task": "modulus-square",
+   "data": {
+    "a": {
+     "re": "4",
+     "im": "2"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = 4 + 2i\nz*conj(z) = (4+2i)(4-2i)\nz*conj(z) = 20\n|z| = sqrt(20)"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "adapter complex-modulus can verify only part of the submission (line is not a modulus claim for the written complex number); source line(s) 2 are not accounted for",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 4,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not certified: the submission cannot be certified while other lines are unverified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-447",
+  "area": "complex-polynomial-roots",
+  "category": "missing-restriction-or-branch",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "polar",
+   "task": "argument",
+   "data": {
+    "a": {
+     "re": "-1",
+     "im": "0"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = -1\narg(z) = pi"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for complex-polynomial",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for complex-polynomial"
+ },
+ {
+  "set": "e1",
+  "id": "e1-450",
+  "area": "complex-polynomial-roots",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "arithmetic",
+   "task": "modulus-square",
+   "data": {
+    "a": {
+     "re": "5",
+     "im": "4"
+    }
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "z = 2 + 3i\nsqrt(z^2) = z always"
+  },
+  "reference": "ambiguous",
+  "engine": "unsupported",
+  "justification": "written complex value does not match the typed problem",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: written complex value does not match the typed problem"
+ },
+ {
+  "set": "e1",
+  "id": "e1-453",
+  "area": "mixed-domain",
+  "category": "unsupported-out-of-scope",
+  "problem": {
+   "domain": "mixed",
+   "statement": "Combine a general algebraic variety with sheaf cohomology"
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let X be a projective scheme\nCompute H^i(X,F)\nUse the derived category"
+  },
+  "reference": "unsupported",
+  "engine": "malformed",
+  "justification": "power exponent must be a bounded integer",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "power exponent must be a bounded integer"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-454",
+  "area": "mixed-domain",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2 = 25"
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let f x = x^2\nf^-1(25)=5"
+  },
+  "reference": "ambiguous",
+  "engine": "malformed",
+  "justification": "power exponent must be a bounded integer",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "power exponent must be a bounded integer"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-468",
+  "area": "mixed-domain",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2 = 16"
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let f x = x^2\nf^-1(16)=4"
+  },
+  "reference": "ambiguous",
+  "engine": "malformed",
+  "justification": "power exponent must be a bounded integer",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "power exponent must be a bounded integer"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-477",
+  "area": "mixed-domain",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2 = 9"
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let f x = x^2\nf^-1(9)=3"
+  },
+  "reference": "ambiguous",
+  "engine": "malformed",
+  "justification": "power exponent must be a bounded integer",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "power exponent must be a bounded integer"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-496",
+  "area": "mixed-domain",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2 = 4"
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let f x = x^2\nf^-1(4)=2"
+  },
+  "reference": "ambiguous",
+  "engine": "malformed",
+  "justification": "power exponent must be a bounded integer",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "power exponent must be a bounded integer"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e1",
+  "id": "e1-498",
+  "area": "mixed-domain",
+  "category": "ambiguous-or-malformed",
+  "problem": {
+   "domain": "algebra",
+   "statement": "x^2 = 16"
+  },
+  "working": {
+   "format": "natural",
+   "text": "Let f x = x^2\nf^-1(16)=4"
+  },
+  "reference": "ambiguous",
+  "engine": "malformed",
+  "justification": "power exponent must be a bounded integer",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 1,
+   "message": "power exponent must be a bounded integer"
+  },
+  "stopLine": 0,
+  "stopReason": "line parses on its own but the submission as a whole was not interpretable, so it is not verified"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-014",
+  "area": "differentiation",
+  "category": "differentiation",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 6
+     },
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "-1"
+       },
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "2"
+         },
+         {
+          "kind": "power",
+          "base": {
+           "kind": "variable",
+           "name": "x"
+          },
+          "exponent": 3
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x) = x^6 - 2x^3\nUse the power rule"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-023",
+  "area": "integration",
+  "category": "integration",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "1"
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∫ 1/x dx = ln(abs(x)) + C"
+  },
+  "reference": "verified",
+  "engine": "ambiguous",
+  "justification": "division followed by implicit multiplication has multiple conventional readings",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "ambiguous",
+   "lines": 0,
+   "message": "division followed by implicit multiplication has multiple conventional readings"
+  },
+  "stopLine": 0,
+  "stopReason": "division followed by implicit multiplication has multiple conventional readings"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-037",
+  "area": "differentiation",
+  "category": "differentiation",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "add",
+     "terms": [
+      {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 3
+      },
+      {
+       "kind": "multiply",
+       "factors": [
+        {
+         "kind": "constant",
+         "value": "-1"
+        },
+        {
+         "kind": "variable",
+         "name": "x"
+        }
+       ]
+      }
+     ]
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x) = (x^3 - x)^2\nUse the chain rule"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-046",
+  "area": "differentiation",
+  "category": "differentiation",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 4
+     },
+     {
+      "kind": "sin",
+      "argument": {
+       "kind": "variable",
+       "name": "x"
+      }
+     }
+    ]
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x) = x^4 sin(x)\nUse the product rule"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-050",
+  "area": "integration",
+  "category": "integration",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "3"
+       },
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       }
+      ]
+     },
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "4"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ]
+     }
+    ]
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∫ (3x^2 + 4x) dx\nIntegrate term by term"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-057",
+  "area": "differentiation",
+  "category": "differentiation",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "1"
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "power",
+         "base": {
+          "kind": "variable",
+          "name": "x"
+         },
+         "exponent": 2
+        },
+        {
+         "kind": "constant",
+         "value": "1"
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "f(x) = 1/(x^2 + 1)\nUse the quotient rule"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 2,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-058",
+  "area": "limits-continuity",
+  "category": "limits-continuity",
+  "problem": {
+   "domain": "calculus",
+   "task": "limit",
+   "expression": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "1"
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "variable": "x",
+   "approach": "0",
+   "side": "right",
+   "method": "reciprocal"
+  },
+  "working": {
+   "format": "natural",
+   "text": "lim_(x→0+) 1/x = ∞"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "unsupported character '→' at 6",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '→' at 6"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '→' at 6"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-069",
+  "area": "limits-continuity",
+  "category": "limits-continuity",
+  "problem": {
+   "domain": "calculus",
+   "task": "limit",
+   "expression": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "constant",
+        "value": "1"
+       },
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "-1"
+         },
+         {
+          "kind": "cos",
+          "argument": {
+           "kind": "variable",
+           "name": "x"
+          }
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "power",
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "variable": "x",
+   "approach": "0",
+   "side": "both",
+   "method": "direct"
+  },
+  "working": {
+   "format": "natural",
+   "text": "lim_(x→0) (1 - cos(x))/x^2 = 1/2"
+  },
+  "reference": "verified",
+  "engine": "unsupported",
+  "justification": "unsupported character '→' at 6",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '→' at 6"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '→' at 6"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-076",
+  "area": "integration",
+  "category": "integration",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "6"
+       },
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       }
+      ]
+     },
+     {
+      "kind": "multiply",
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "-1"
+       },
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "4"
+         },
+         {
+          "kind": "variable",
+          "name": "x"
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∫ (6x^2 - 4x) dx = 2x^3 - 2x^2"
+  },
+  "reference": "missing-assumption",
+  "engine": "invalid",
+  "justification": "line 1 is mathematically invalid",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-adapter:calculus-integral",
+   "calculus:exact"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 1,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "an indefinite integral requires an arbitrary constant on each connected domain component"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-079",
+  "area": "integration",
+  "category": "integration",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "sin",
+    "argument": {
+     "kind": "multiply",
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "3"
+      },
+      {
+       "kind": "variable",
+       "name": "x"
+      }
+     ]
+    }
+   },
+   "variable": "x"
+  },
+  "working": {
+   "format": "natural",
+   "text": "∫ sin(3x) dx = -cos(3x)/3"
+  },
+  "reference": "missing-assumption",
+  "engine": "invalid",
+  "justification": "line 1 is mathematically invalid",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-adapter:calculus-integral",
+   "calculus:exact"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 1,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "an indefinite integral requires an arbitrary constant on each connected domain component"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-080",
+  "area": "limits-continuity",
+  "category": "limits-continuity",
+  "problem": {
+   "domain": "calculus",
+   "task": "limit",
+   "expression": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "-1"
+         },
+         {
+          "kind": "constant",
+          "value": "9"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "3"
+          }
+         ]
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "variable": "x",
+   "approach": "3",
+   "side": "both",
+   "method": "removable",
+   "equivalentExpression": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "variable",
+      "name": "x"
+     },
+     {
+      "kind": "constant",
+      "value": "3"
+     }
+    ]
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "lim_(x→3) (x^2 - 9)/(x - 3) = 0/0 = 0"
+  },
+  "reference": "invalid",
+  "engine": "malformed",
+  "justification": "unexpected trailing notation",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "malformed",
+   "lines": 0,
+   "message": "unexpected trailing notation"
+  },
+  "stopLine": 0,
+  "stopReason": "unexpected trailing notation"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-090",
+  "area": "integration",
+  "category": "integration",
+  "problem": {
+   "domain": "calculus",
+   "task": "definite-integral",
+   "integrand": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "6"
+     },
+     {
+      "kind": "variable",
+      "name": "x"
+     }
+    ]
+   },
+   "variable": "x",
+   "lower": "1",
+   "upper": "4"
+  },
+  "working": {
+   "format": "natural",
+   "text": "F(x) = 3x^2\nF(1) - F(4) = 3 - 48\nF(1) - F(4) = -45"
+  },
+  "reference": "invalid",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 3,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-094",
+  "area": "limits-continuity",
+  "category": "limits-continuity",
+  "problem": {
+   "domain": "calculus",
+   "task": "limit",
+   "expression": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "power",
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 2
+       },
+       {
+        "kind": "multiply",
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "-1"
+         },
+         {
+          "kind": "constant",
+          "value": "1"
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "add",
+       "terms": [
+        {
+         "kind": "variable",
+         "name": "x"
+        },
+        {
+         "kind": "multiply",
+         "factors": [
+          {
+           "kind": "constant",
+           "value": "-1"
+          },
+          {
+           "kind": "constant",
+           "value": "1"
+          }
+         ]
+        }
+       ]
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "variable": "x",
+   "approach": "1",
+   "side": "both",
+   "method": "removable",
+   "equivalentExpression": {
+    "kind": "add",
+    "terms": [
+     {
+      "kind": "variable",
+      "name": "x"
+     },
+     {
+      "kind": "constant",
+      "value": "1"
+     }
+    ]
+   }
+  },
+  "working": {
+   "format": "natural",
+   "text": "lim_(x→1) (x^2 - 1)/(x - 1) = (1 - 1)/(1 - 1)"
+  },
+  "reference": "incomplete",
+  "engine": "unsupported",
+  "justification": "no lossless natural adapter for calculus",
+  "reasoners": [
+   "natural-working-parser",
+   "natural-domain-adapter"
+  ],
+  "parse": {
+   "classification": "parsed",
+   "lines": 1,
+   "message": "notation parsed into existing typed mathematical representations"
+  },
+  "stopLine": 0,
+  "stopReason": "line 1 was not verified: no lossless natural adapter for calculus"
+ },
+ {
+  "set": "e5sealed",
+  "id": "e5-sealed-098",
+  "area": "limits-continuity",
+  "category": "limits-continuity",
+  "problem": {
+   "domain": "calculus",
+   "task": "limit",
+   "expression": {
+    "kind": "multiply",
+    "factors": [
+     {
+      "kind": "constant",
+      "value": "1"
+     },
+     {
+      "kind": "power",
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": -1
+     }
+    ]
+   },
+   "variable": "x",
+   "approach": "0",
+   "side": "left",
+   "method": "reciprocal"
+  },
+  "working": {
+   "format": "natural",
+   "text": "lim_(x→0-) 1/x = ∞"
+  },
+  "reference": "invalid",
+  "engine": "unsupported",
+  "justification": "unsupported character '→' at 6",
+  "reasoners": [
+   "natural-working-parser"
+  ],
+  "parse": {
+   "classification": "unsupported",
+   "lines": 0,
+   "message": "unsupported character '→' at 6"
+  },
+  "stopLine": 0,
+  "stopReason": "unsupported character '→' at 6"
+ }
+]

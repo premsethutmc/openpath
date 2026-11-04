@@ -1,0 +1,44 @@
+{
+  "implementationCommit": "dfc12bda67d05011610d0f5782cc92254bad2248",
+  "frontendAggregate": {
+    "passed": 47,
+    "failed": 0
+  },
+  "finalRemediationFile": {
+    "passed": 8,
+    "failed": 0,
+    "note": "rerun after final trusted-credit and unresolved-exposure changes; overlaps aggregate"
+  },
+  "django": {
+    "run": 15,
+    "passed": 14,
+    "skipped": 1,
+    "skip": "H1_DIR export round-trip fixture absent; environment-dependent"
+  },
+  "mainTypecheck": "pass",
+  "mathematicsTypecheck": {
+    "inherited": 188,
+    "new": 0
+  },
+  "yearBuild": "pass",
+  "graderManifest": {
+    "sha256": "22e0fca6e6b93542a84fe37537d799847878b5e78860328d9c9847feb1883f31",
+    "inputs": 210,
+    "pythonInputs": 11,
+    "allHashesVerified": true
+  },
+  "phone": {
+    "passed": true,
+    "topics": [],
+    "attempted": 0,
+    "events": 2,
+    "phone": "390x844",
+    "freshLogin": true,
+    "gapFallback": true,
+    "geometryWorking": "verified",
+    "gradingPolicy": "grading-policy@1"
+  },
+  "phoneScope": "Geometry submission, saved verified method, lesson, fresh login/replay, two API-seeded misconception attempts, actual gap UI and review; empty topics/zero attempted counters refer to omitted earlier eight-topic loop, not geometry attempts.",
+  "researchMain": "46fcf5feb0f49e8fed04b595ae51604fcf8eb5aa",
+  "productionActivation": false
+}

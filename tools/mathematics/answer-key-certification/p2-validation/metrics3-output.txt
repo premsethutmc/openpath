@@ -1,0 +1,29 @@
+5d6003e   false-math-accept=0 unjustified-authorized=36 legit-verified=46/186 invalid-detected=70/114 wrong-firstInvalid=0 debatable-verified=3/7 ms p50=2.56 p95=30.17 p99=51.31 max=140.6 total=4085
+   unsafe ids: [('UNJUST', 'va-066'), ('UNJUST', 'cs-001'), ('UNJUST', 'cs-002'), ('UNJUST', 'cs-003'), ('UNJUST', 'cs-004'), ('UNJUST', 'cs-005'), ('UNJUST', 'cs-006'), ('UNJUST', 'cs-007'), ('UNJUST', 'cs-008'), ('UNJUST', 'cs-009'), ('UNJUST', 'cs-010'), ('UNJUST', 'cs-012'), ('UNJUST', 'cs-014'), ('UNJUST', 'cs-015'), ('UNJUST', 'cs-016'), ('UNJUST', 'cs-018'), ('UNJUST', 'cs-019'), ('UNJUST', 'cs-020'), ('UNJUST', 'cs-021'), ('UNJUST', 'cs-022'), ('UNJUST', 'cs-023'), ('UNJUST', 'cs-024'), ('UNJUST', 'cs-025'), ('UNJUST', 'cs-026'), ('UNJUST', 'cs-027'), ('UNJUST', 'tr-002'), ('UNJUST', 'tr-006'), ('UNJUST', 'tr-021'), ('UNJUST', 'at-004'), ('UNJUST', 'at-005'), ('UNJUST', 'at-013'), ('UNJUST', 'at-024'), ('UNJUST', 'rl-001'), ('UNJUST', 'rl-003'), ('UNJUST', 'rl-005'), ('UNJUST', 'mf-045')]
+32c7f2c   false-math-accept=0 unjustified-authorized=36 legit-verified=40/186 invalid-detected=70/114 wrong-firstInvalid=0 debatable-verified=3/7 ms p50=2.05 p95=34.21 p99=76.52 max=230.6 total=4365
+   unsafe ids: [('UNJUST', 'va-066'), ('UNJUST', 'cs-001'), ('UNJUST', 'cs-002'), ('UNJUST', 'cs-003'), ('UNJUST', 'cs-004'), ('UNJUST', 'cs-005'), ('UNJUST', 'cs-006'), ('UNJUST', 'cs-007'), ('UNJUST', 'cs-008'), ('UNJUST', 'cs-009'), ('UNJUST', 'cs-010'), ('UNJUST', 'cs-012'), ('UNJUST', 'cs-014'), ('UNJUST', 'cs-015'), ('UNJUST', 'cs-016'), ('UNJUST', 'cs-018'), ('UNJUST', 'cs-019'), ('UNJUST', 'cs-020'), ('UNJUST', 'cs-021'), ('UNJUST', 'cs-022'), ('UNJUST', 'cs-023'), ('UNJUST', 'cs-024'), ('UNJUST', 'cs-025'), ('UNJUST', 'cs-026'), ('UNJUST', 'cs-027'), ('UNJUST', 'tr-002'), ('UNJUST', 'tr-006'), ('UNJUST', 'tr-021'), ('UNJUST', 'at-004'), ('UNJUST', 'at-005'), ('UNJUST', 'at-013'), ('UNJUST', 'at-024'), ('UNJUST', 'rl-001'), ('UNJUST', 'rl-003'), ('UNJUST', 'rl-005'), ('UNJUST', 'mf-045')]
+99aea8e   false-math-accept=0 unjustified-authorized=17 legit-verified=52/186 invalid-detected=70/114 wrong-firstInvalid=0 debatable-verified=3/7 ms p50=3.52 p95=29.04 p99=55.69 max=102.9 total=4211
+   unsafe ids: [('UNJUST', 'cs-003'), ('UNJUST', 'cs-007'), ('UNJUST', 'cs-008'), ('UNJUST', 'cs-010'), ('UNJUST', 'cs-015'), ('UNJUST', 'cs-018'), ('UNJUST', 'cs-021'), ('UNJUST', 'cs-023'), ('UNJUST', 'cs-024'), ('UNJUST', 'cs-025'), ('UNJUST', 'tr-002'), ('UNJUST', 'tr-006'), ('UNJUST', 'tr-021'), ('UNJUST', 'at-021'), ('UNJUST', 'rl-001'), ('UNJUST', 'rl-003'), ('UNJUST', 'rl-005')]
+P2-FINAL  false-math-accept=0 unjustified-authorized=3 legit-verified=57/186 invalid-detected=70/114 wrong-firstInvalid=0 debatable-verified=3/7 ms p50=1.91 p95=19.18 p99=49.63 max=89.5 total=2713
+   unsafe ids: [('UNJUST', 'tr-002'), ('UNJUST', 'tr-006'), ('UNJUST', 'tr-021')]
+legit regressions b5d->P2-FINAL: 0 []; gains 11
+legit regressions b32->P2-FINAL: 0 []; gains 17
+legit regressions b99->P2-FINAL: 0 []; gains 5
+
+per category (P2-FINAL): verified-labelled verified / invalid detected / unsupported-labelled verified
+  arbitrary-introduced-terms   legit 3/5  invalid 4/5  unsupported-verified 0/25
+  circular-substitution        legit 0/0  invalid 8/8  unsupported-verified 0/27
+  domain-manipulation          legit 0/18  invalid 2/10  unsupported-verified 0/19
+  invalid-intermediate         legit 0/0  invalid 38/55  unsupported-verified 0/0
+  mixed-formatting             legit 3/25  invalid 5/12  unsupported-verified 0/8
+  radicals-logs-syntax         legit 0/0  invalid 5/16  unsupported-verified 0/27
+  task-restatement             legit 8/10  invalid 5/5  unsupported-verified 3/22
+  truncated-derivation         legit 0/0  invalid 3/3  unsupported-verified 0/32
+  valid-multistep-algebra      legit 0/64  invalid 0/0  unsupported-verified 0/4
+  valid-multistep-arithmetic   legit 43/64  invalid 0/0  unsupported-verified 0/6
+
+verdict distribution P2-FINAL by label:
+  verified {'verified': 57, 'unsupported': 113, 'ambiguous': 16}
+  unsupported {'unsupported': 115, 'incomplete': 44, 'verified': 3, 'invalid': 2, 'ambiguous': 6}
+  debatable {'unsupported': 4, 'verified': 3}
+  invalid {'invalid': 70, 'unsupported': 38, 'ambiguous': 6}

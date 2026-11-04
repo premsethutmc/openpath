@@ -1,0 +1,2518 @@
+[
+{
+"id": "h7-dom-001",
+"cat": "other-domains",
+"tags": [
+"probability",
+"finite"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"favourable": 5,
+"total": 36
+},
+"domain": "probability-statistics",
+"task": "finite",
+"assumptions": [
+"equiprobable"
+]
+}
+},
+"w": "Outcomes (a,b) with a+b=8: (2,6),(3,5),(4,4),(5,3),(6,2), so 5 favourable out of 36\nP(sum = 8) = 5/36",
+"exp": "verified",
+"why": "Five of 36 equally likely ordered pairs sum to 8."
+},
+{
+"id": "h7-dom-002",
+"cat": "other-domains",
+"tags": [
+"probability",
+"complement",
+"concise"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"pa": "7/12"
+},
+"domain": "probability-statistics",
+"task": "complement"
+}
+},
+"w": "P(A') = 5/12",
+"exp": "verified",
+"why": "1 - 7/12 = 5/12."
+},
+{
+"id": "h7-dom-003",
+"cat": "other-domains",
+"tags": [
+"probability",
+"missing-independence"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"pa": "2/5",
+"pb": "5/6"
+},
+"domain": "probability-statistics",
+"task": "independent-intersection"
+}
+},
+"w": "P(A∩B) = P(A)P(B) = 2/5 * 5/6 = 10/30 = 1/3",
+"exp": "missing-assumption",
+"why": "The product rule needs independence, which neither the task nor the working states.",
+"alt": [
+"invalid"
+]
+},
+{
+"id": "h7-dom-004",
+"cat": "other-domains",
+"tags": [
+"probability",
+"missing-exclusivity"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"pa": "1/4",
+"pb": "1/3"
+},
+"domain": "probability-statistics",
+"task": "exclusive-union"
+}
+},
+"w": "P(A or B) = 1/4 + 1/3 = 7/12",
+"exp": "missing-assumption",
+"why": "Adding P(A) and P(B) requires mutual exclusivity, never stated.",
+"alt": [
+"invalid"
+]
+},
+{
+"id": "h7-dom-005",
+"cat": "other-domains",
+"tags": [
+"probability",
+"conditional"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"pa": "1/4",
+"pb": "1/3"
+},
+"domain": "probability-statistics",
+"task": "exclusive-union"
+}
+},
+"w": "Suppose A and B are mutually exclusive.\nThen P(A∩B) = 0 and P(A or B) = P(A) + P(B) = 1/4 + 1/3 = 7/12",
+"exp": "verified",
+"why": "The exclusivity assumption is stated explicitly and the sum 7/12 follows."
+},
+{
+"id": "h7-dom-006",
+"cat": "other-domains",
+"tags": [
+"probability",
+"binomial",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"area": "distribution",
+"data": {
+"n": 5,
+"k": 2,
+"p": "1/3"
+},
+"domain": "probability-statistics",
+"task": "binomial-pmf",
+"assumptions": [
+"independent"
+]
+}
+},
+"w": "C(5,2) = 10\nP(X=2) = 10 * (2/3)^2 * (1/3)^3 = 10 * 4/9 * 1/27 = 40/243",
+"exp": "invalid",
+"why": "Success and failure probabilities are swapped; correct value is 80/243."
+},
+{
+"id": "h7-dom-007",
+"cat": "other-domains",
+"tags": [
+"probability",
+"binomial-variance",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"area": "distribution",
+"data": {
+"n": 20,
+"p": "1/5"
+},
+"domain": "probability-statistics",
+"task": "binomial-variance"
+}
+},
+"w": "Var(X) = np = 20 * 1/5 = 4",
+"exp": "invalid",
+"why": "np is the mean; the variance is np(1-p)=16/5."
+},
+{
+"id": "h7-dom-008",
+"cat": "other-domains",
+"tags": [
+"probability",
+"binomial-variance",
+"side-claim"
+],
+"p": {
+"raw": {
+"area": "distribution",
+"data": {
+"n": 20,
+"p": "1/5"
+},
+"domain": "probability-statistics",
+"task": "binomial-variance"
+}
+},
+"w": "Var(X) = np(1-p) = 20 * 1/5 * 4/5 = 16/5\nAlso E[X] = np = 4",
+"exp": "verified",
+"why": "Correct variance; the extra mean line is true and harmless."
+},
+{
+"id": "h7-dom-009",
+"cat": "other-domains",
+"tags": [
+"probability",
+"pmf-mean"
+],
+"p": {
+"raw": {
+"area": "distribution",
+"data": {
+"values": [
+"1",
+"2",
+"5"
+],
+"probabilities": [
+"1/2",
+"1/3",
+"1/6"
+]
+},
+"domain": "probability-statistics",
+"task": "pmf-mean"
+}
+},
+"w": "E[X] = 1*(1/2) + 2*(1/3) + 5*(1/6) = 3/6 + 4/6 + 5/6 = 12/6 = 2",
+"exp": "verified",
+"why": "Weighted sum equals 2."
+},
+{
+"id": "h7-dom-010",
+"cat": "other-domains",
+"tags": [
+"probability",
+"pmf-mean",
+"incomplete"
+],
+"p": {
+"raw": {
+"area": "distribution",
+"data": {
+"values": [
+"1",
+"2",
+"5"
+],
+"probabilities": [
+"1/2",
+"1/3",
+"1/6"
+]
+},
+"domain": "probability-statistics",
+"task": "pmf-mean"
+}
+},
+"w": "E[X] = 1*(1/2) + 2*(1/3) + 5*(1/6)\nthe probabilities 1/2 + 1/3 + 1/6 add to 1",
+"exp": "incomplete",
+"why": "Setup and a true check but the expected value is never computed."
+},
+{
+"id": "h7-dom-011",
+"cat": "other-domains",
+"tags": [
+"probability",
+"variance",
+"alt-method"
+],
+"p": {
+"raw": {
+"area": "statistics",
+"data": {
+"values": [
+"1",
+"3",
+"5",
+"7"
+]
+},
+"domain": "probability-statistics",
+"task": "population-variance",
+"assumptions": [
+"population"
+]
+}
+},
+"w": "E[X^2] = (1 + 9 + 25 + 49)/4 = 84/4 = 21\nmu = 16/4 = 4\nVar = E[X^2] - mu^2 = 21 - 16 = 5",
+"exp": "verified",
+"why": "Shortcut formula E[X^2]-mu^2 gives 5, matching the definition."
+},
+{
+"id": "h7-dom-012",
+"cat": "other-domains",
+"tags": [
+"probability",
+"sample-variance",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"area": "statistics",
+"data": {
+"values": [
+"2",
+"4",
+"6"
+]
+},
+"domain": "probability-statistics",
+"task": "sample-variance",
+"assumptions": [
+"sample"
+]
+}
+},
+"w": "mean = 4\nsum of squared deviations = 4 + 0 + 4 = 8\ns^2 = 8/3",
+"exp": "invalid",
+"why": "Sample variance divides by n-1=2, giving 4, not 8/3."
+},
+{
+"id": "h7-dom-013",
+"cat": "other-domains",
+"tags": [
+"probability",
+"combination"
+],
+"p": {
+"raw": {
+"area": "combinatorics",
+"data": {
+"n": 10,
+"r": 4
+},
+"domain": "probability-statistics",
+"task": "combination",
+"assumptions": [
+"unordered"
+]
+}
+},
+"w": "10C4 = 10!/(4! 6!) = (10*9*8*7)/(4*3*2*1) = 5040/24 = 210",
+"exp": "verified",
+"why": "C(10,4)=210."
+},
+{
+"id": "h7-dom-014",
+"cat": "other-domains",
+"tags": [
+"probability",
+"combination",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"area": "combinatorics",
+"data": {
+"n": 10,
+"r": 4
+},
+"domain": "probability-statistics",
+"task": "combination",
+"assumptions": [
+"unordered"
+]
+}
+},
+"w": "Choosing is an arrangement: 10*9*8*7 = 5040",
+"exp": "invalid",
+"why": "That counts ordered selections; unordered gives 210."
+},
+{
+"id": "h7-dom-015",
+"cat": "other-domains",
+"tags": [
+"probability",
+"conditional"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"pab": "1/6",
+"pb": "1/3"
+},
+"domain": "probability-statistics",
+"task": "conditional"
+}
+},
+"w": "P(A|B) = P(A∩B)/P(B) = (1/6)/(1/3) = 1/2",
+"exp": "verified",
+"why": "Definition of conditional probability."
+},
+{
+"id": "h7-dom-016",
+"cat": "other-domains",
+"tags": [
+"probability",
+"conditional",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"pab": "1/6",
+"pb": "1/3"
+},
+"domain": "probability-statistics",
+"task": "conditional"
+}
+},
+"w": "P(A|B) = P(A∩B) * P(B) = 1/6 * 1/3 = 1/18",
+"exp": "invalid",
+"why": "Conditional probability divides by P(B), it does not multiply."
+},
+{
+"id": "h7-dom-017",
+"cat": "other-domains",
+"tags": [
+"probability",
+"finite",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"favourable": 91,
+"total": 216
+},
+"domain": "probability-statistics",
+"task": "finite",
+"assumptions": [
+"equiprobable",
+"independent"
+]
+}
+},
+"w": "P(at least one six in 3 rolls) = 3 * (1/6) = 1/2",
+"exp": "invalid",
+"why": "Events are not exclusive; correct is 1-(5/6)^3=91/216."
+},
+{
+"id": "h7-dom-018",
+"cat": "other-domains",
+"tags": [
+"probability",
+"finite",
+"alt-method"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"favourable": 91,
+"total": 216
+},
+"domain": "probability-statistics",
+"task": "finite",
+"assumptions": [
+"equiprobable",
+"independent"
+]
+}
+},
+"w": "P(no six) = (5/6)^3 = 125/216\nP(at least one six) = 1 - 125/216 = 91/216",
+"exp": "verified",
+"why": "Complement method gives 91/216."
+},
+{
+"id": "h7-dom-019",
+"cat": "other-domains",
+"tags": [
+"probability",
+"complement",
+"side-claim"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"pa": "7/12"
+},
+"domain": "probability-statistics",
+"task": "complement"
+}
+},
+"w": "P(A') = 1 - 7/12 = 5/12\nNote that 7/12 > 1/2.",
+"exp": "verified",
+"why": "True irrelevant remark after correct answer."
+},
+{
+"id": "h7-dom-020",
+"cat": "other-domains",
+"tags": [
+"probability",
+"complement",
+"side-claim"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"pa": "7/12"
+},
+"domain": "probability-statistics",
+"task": "complement"
+}
+},
+"w": "P(A') = 1 - 7/12 = 5/12\nAlso C(12,2) = 60",
+"exp": "invalid",
+"why": "C(12,2)=66, so the side line is false."
+},
+{
+"id": "h7-dom-021",
+"cat": "other-domains",
+"tags": [
+"probability",
+"complement",
+"dependent"
+],
+"p": {
+"raw": {
+"area": "probability",
+"data": {
+"pa": "4/9"
+},
+"domain": "probability-statistics",
+"task": "complement"
+}
+},
+"w": "P(A) = 5/9\nP(A') = 1 - 5/9 = 4/9",
+"exp": "invalid",
+"why": "First line misstates the given P(A)=4/9 and the answer should be 5/9."
+},
+{
+"id": "h7-dom-022",
+"cat": "other-domains",
+"tags": [
+"probability",
+"mean",
+"concise"
+],
+"p": {
+"raw": {
+"area": "statistics",
+"data": {
+"values": [
+"3",
+"7",
+"8",
+"12"
+]
+},
+"domain": "probability-statistics",
+"task": "mean"
+}
+},
+"w": "mean = 15/2",
+"exp": "verified",
+"why": "30/4 = 15/2."
+},
+{
+"id": "h7-dom-023",
+"cat": "other-domains",
+"tags": [
+"probability",
+"unsupported"
+],
+"p": {
+"raw": {
+"area": "statistics",
+"data": {},
+"domain": "probability-statistics",
+"task": "hypothesis-test"
+}
+},
+"w": "H0: p = 1/2 against H1: p != 1/2 with 62 heads in 100 tosses\nz = (62 - 50)/5 = 2.4 > 1.96\nreject H0 at the 5% level",
+"exp": "unsupported",
+"why": "Hypothesis testing with critical values is beyond exact symbolic checking.",
+"alt": [
+"incomplete"
+]
+},
+{
+"id": "h7-dom-024",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"determinant",
+"alt-method"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "determinant",
+"task": "determinant",
+"data": {
+"a": [
+[
+"2",
+"0",
+"1"
+],
+[
+"1",
+"3",
+"2"
+],
+[
+"0",
+"-1",
+"4"
+]
+]
+},
+"assumptions": []
+}
+},
+"w": "expand along column 2: det = 3(2*4 - 1*0) - (-1)(2*2 - 1*1) = 24 + 3 = 27",
+"exp": "verified",
+"why": "Column expansion with the zero entry yields 27."
+},
+{
+"id": "h7-dom-025",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"determinant"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "determinant",
+"task": "determinant",
+"data": {
+"a": [
+[
+"2",
+"0",
+"1"
+],
+[
+"1",
+"3",
+"2"
+],
+[
+"0",
+"-1",
+"4"
+]
+]
+},
+"assumptions": []
+}
+},
+"w": "det = 2(3*4 - 2*(-1)) - 0 - 1(1*(-1) - 3*0) = 28 + 1 = 29",
+"exp": "invalid",
+"why": "The (1,3) cofactor has sign +, so the term is -1 and det is 27."
+},
+{
+"id": "h7-dom-026",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"determinant",
+"incomplete"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "determinant",
+"task": "determinant",
+"data": {
+"a": [
+[
+"2",
+"0",
+"1"
+],
+[
+"1",
+"3",
+"2"
+],
+[
+"0",
+"-1",
+"4"
+]
+]
+},
+"assumptions": []
+}
+},
+"w": "2(3*4 - 2*(-1)) = 2*14 = 28",
+"exp": "incomplete",
+"why": "True first term only; the other cofactors and the total are missing."
+},
+{
+"id": "h7-dom-027",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"determinant",
+"coincidence"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "determinant",
+"task": "determinant",
+"data": {
+"a": [
+[
+"3",
+"5"
+],
+[
+"2",
+"4"
+]
+]
+},
+"assumptions": []
+}
+},
+"w": "3 + 5 = 8\n2 + 4 = 6\n8 - 6 = 2",
+"exp": "incomplete",
+"why": "True sums whose difference merely equals ad-bc here; no determinant formula is established.",
+"alt": [
+"invalid"
+]
+},
+{
+"id": "h7-dom-028",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"determinant",
+"alt-method"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "determinant",
+"task": "determinant",
+"data": {
+"a": [
+[
+"1",
+"2",
+"3"
+],
+[
+"2",
+"4",
+"6"
+],
+[
+"0",
+"1",
+"5"
+]
+]
+},
+"assumptions": []
+}
+},
+"w": "row 2 = 2 * row 1, so the rows are linearly dependent\ndet = 0",
+"exp": "verified",
+"why": "Proportional rows force determinant zero."
+},
+{
+"id": "h7-dom-029",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"inverse"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "matrix",
+"task": "inverse",
+"data": {
+"a": [
+[
+"3",
+"1"
+],
+[
+"5",
+"2"
+]
+]
+},
+"assumptions": []
+}
+},
+"w": "det = 3*2 - 1*5 = 1\ninverse = (1/1) [[2, -1], [-5, 3]] = [[2, -1], [-5, 3]]",
+"exp": "verified",
+"why": "Adjugate over det 1."
+},
+{
+"id": "h7-dom-030",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"inverse"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "matrix",
+"task": "inverse",
+"data": {
+"a": [
+[
+"3",
+"1"
+],
+[
+"5",
+"2"
+]
+]
+},
+"assumptions": []
+}
+},
+"w": "det = 3*2 - 1*5 = 1\ninverse = [[2, 1], [5, 3]]",
+"exp": "invalid",
+"why": "Off-diagonal entries of the adjugate must be negated."
+},
+{
+"id": "h7-dom-031",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"solve",
+"alt-method"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "system",
+"task": "solve",
+"data": {
+"a": [
+[
+"3",
+"2"
+],
+[
+"1",
+"-1"
+]
+],
+"b": [
+"7",
+"-1"
+]
+},
+"assumptions": []
+}
+},
+"w": "det = 3*(-1) - 2*1 = -5\nx = (7*(-1) - 2*(-1))/(-5) = 1\ny = (3*(-1) - 7*1)/(-5) = 2",
+"exp": "verified",
+"why": "Cramer's rule gives (1,2)."
+},
+{
+"id": "h7-dom-032",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"solve",
+"incomplete"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "system",
+"task": "solve",
+"data": {
+"a": [
+[
+"3",
+"2"
+],
+[
+"1",
+"-1"
+]
+],
+"b": [
+"7",
+"-1"
+]
+},
+"assumptions": []
+}
+},
+"w": "from x - y = -1: x = y - 1\n3(y - 1) + 2y = 7\n5y = 10\ny = 2",
+"exp": "incomplete",
+"why": "x is never found, so the solution is not complete."
+},
+{
+"id": "h7-dom-033",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"solve",
+"dependent"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "system",
+"task": "solve",
+"data": {
+"a": [
+[
+"3",
+"2"
+],
+[
+"1",
+"-1"
+]
+],
+"b": [
+"7",
+"-1"
+]
+},
+"assumptions": []
+}
+},
+"w": "from x - y = -1: x = y + 1\n3(y + 1) + 2y = 7\n5y = 4\ny = 4/5, x = 9/5",
+"exp": "invalid",
+"why": "x = y + 1 is false (x = y - 1) and everything after depends on it."
+},
+{
+"id": "h7-dom-034",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"multiply",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "matrix",
+"task": "multiply",
+"data": {
+"a": [
+[
+"1",
+"2"
+],
+[
+"0",
+"3"
+]
+],
+"b": [
+[
+"4",
+"1"
+],
+[
+"2",
+"0"
+]
+]
+},
+"assumptions": []
+}
+},
+"w": "AB = BA = [[4*1+1*0, 4*2+1*3],[2*1+0*0, 2*2+0*3]] = [[4, 11],[2, 4]]",
+"exp": "invalid",
+"why": "Matrix multiplication is not commutative; AB=[[8,1],[6,0]]."
+},
+{
+"id": "h7-dom-035",
+"cat": "other-domains",
+"tags": [
+"linear-algebra",
+"add",
+"concise"
+],
+"p": {
+"raw": {
+"domain": "linear-algebra",
+"area": "matrix",
+"task": "add",
+"data": {
+"a": [
+[
+"1",
+"0",
+"2"
+],
+[
+"3",
+"-1",
+"4"
+],
+[
+"0",
+"5",
+"-2"
+]
+],
+"b": [
+[
+"2",
+"2",
+"-1"
+],
+[
+"-3",
+"1",
+"0"
+],
+[
+"1",
+"1",
+"1"
+]
+]
+},
+"assumptions": []
+}
+},
+"w": "[[3, 2, 1],[0, 0, 4],[1, 6, -1]]",
+"exp": "verified",
+"why": "Entrywise sum."
+},
+{
+"id": "h7-dom-036",
+"cat": "other-domains",
+"tags": [
+"complex",
+"modulus",
+"side-claim"
+],
+"p": {
+"raw": {
+"area": "arithmetic",
+"data": {
+"z": {
+"re": "5",
+"im": "-12"
+}
+},
+"domain": "complex-polynomial",
+"task": "modulus-square"
+}
+},
+"w": "|z|^2 = 25 + 144 = 169\nAlso z^2 = (5 - 12i)^2 = -119 - 120i",
+"exp": "verified",
+"why": "Extra z^2 line is true and does not affect the result."
+},
+{
+"id": "h7-dom-037",
+"cat": "other-domains",
+"tags": [
+"complex",
+"modulus",
+"side-claim"
+],
+"p": {
+"raw": {
+"area": "arithmetic",
+"data": {
+"z": {
+"re": "5",
+"im": "-12"
+}
+},
+"domain": "complex-polynomial",
+"task": "modulus-square"
+}
+},
+"w": "z^2 = (5 - 12i)^2 = 25 - 120i - 144 = -119 - 120i",
+"exp": "incomplete",
+"why": "True calculation of z^2 only; |z|^2 is never found."
+},
+{
+"id": "h7-dom-038",
+"cat": "other-domains",
+"tags": [
+"complex",
+"modulus",
+"side-claim"
+],
+"p": {
+"raw": {
+"area": "arithmetic",
+"data": {
+"z": {
+"re": "5",
+"im": "-12"
+}
+},
+"domain": "complex-polynomial",
+"task": "modulus-square"
+}
+},
+"w": "|z|^2 = 25 + 144 = 169\nAlso conj(z) = 5 - 12i",
+"exp": "invalid",
+"why": "The conjugate is 5 + 12i, so the side line is false."
+},
+{
+"id": "h7-dom-039",
+"cat": "other-domains",
+"tags": [
+"complex",
+"multiply"
+],
+"p": {
+"raw": {
+"area": "arithmetic",
+"data": {
+"a": {
+"re": "2",
+"im": "-1"
+},
+"b": {
+"re": "3",
+"im": "4"
+}
+},
+"domain": "complex-polynomial",
+"task": "multiply"
+}
+},
+"w": "(2 - i)(3 + 4i) = 6 + 8i - 3i + 4i^2 = 6 + 5i + 4 = 10 + 5i",
+"exp": "invalid",
+"why": "The term is -4i^2, not +4i^2; the line is false though the final value is right."
+},
+{
+"id": "h7-dom-040",
+"cat": "other-domains",
+"tags": [
+"complex",
+"divide",
+"alt-method"
+],
+"p": {
+"raw": {
+"area": "arithmetic",
+"data": {
+"a": {
+"re": "3",
+"im": "1"
+},
+"b": {
+"re": "1",
+"im": "-2"
+}
+},
+"domain": "complex-polynomial",
+"task": "divide"
+}
+},
+"w": "let (a + bi)(1 - 2i) = 3 + i\nthen a + 2b = 3 and b - 2a = 1\nb = 1 + 2a, 5a + 2 = 3, a = 1/5, b = 7/5\nso the quotient is 1/5 + (7/5)i",
+"exp": "verified",
+"why": "Solving for real and imaginary parts gives the same quotient."
+},
+{
+"id": "h7-dom-041",
+"cat": "other-domains",
+"tags": [
+"complex",
+"power-i"
+],
+"p": {
+"raw": {
+"area": "arithmetic",
+"data": {
+"exponent": 50
+},
+"domain": "complex-polynomial",
+"task": "power-i"
+}
+},
+"w": "50 = 4*12 + 2\ni^50 = (i^4)^12 * i^2 = -1",
+"exp": "verified",
+"why": "i^4=1 and i^2=-1."
+},
+{
+"id": "h7-dom-042",
+"cat": "other-domains",
+"tags": [
+"complex",
+"power-i"
+],
+"p": {
+"raw": {
+"area": "arithmetic",
+"data": {
+"exponent": 50
+},
+"domain": "complex-polynomial",
+"task": "power-i"
+}
+},
+"w": "50 mod 4 = 1, so i^50 = i^1 = i",
+"exp": "invalid",
+"why": "50 mod 4 is 2, so the power is -1."
+},
+{
+"id": "h7-dom-043",
+"cat": "other-domains",
+"tags": [
+"complex",
+"quadratic",
+"alt-method"
+],
+"p": {
+"raw": {
+"area": "polynomial",
+"data": {
+"coefficients": [
+"1",
+"2",
+"10"
+]
+},
+"domain": "complex-polynomial",
+"task": "quadratic-roots",
+"coefficientDomain": "complex"
+}
+},
+"w": "x^2 + 2x + 10 = 0\n(x + 1)^2 = -9\nx + 1 = ±3i\nx = -1 ± 3i",
+"exp": "verified",
+"why": "Completing the square."
+},
+{
+"id": "h7-dom-044",
+"cat": "other-domains",
+"tags": [
+"complex",
+"quadratic",
+"missing-branch"
+],
+"p": {
+"raw": {
+"area": "polynomial",
+"data": {
+"coefficients": [
+"1",
+"2",
+"10"
+]
+},
+"domain": "complex-polynomial",
+"task": "quadratic-roots",
+"coefficientDomain": "complex"
+}
+},
+"w": "discriminant = 4 - 40 = -36\nx = (-2 + 6i)/2 = -1 + 3i",
+"exp": "incomplete",
+"why": "The conjugate root -1-3i is omitted.",
+"alt": [
+"missing-assumption"
+]
+},
+{
+"id": "h7-dom-045",
+"cat": "other-domains",
+"tags": [
+"complex",
+"remainder"
+],
+"p": {
+"raw": {
+"area": "polynomial",
+"data": {
+"coefficients": [
+"2",
+"-3",
+"0",
+"5"
+],
+"divisor_root": "2"
+},
+"domain": "complex-polynomial",
+"task": "remainder",
+"coefficientDomain": "real"
+}
+},
+"w": "remainder = p(2) = 2*8 - 3*4 + 0 + 5 = 9",
+"exp": "verified",
+"why": "Remainder theorem."
+},
+{
+"id": "h7-dom-046",
+"cat": "other-domains",
+"tags": [
+"complex",
+"remainder",
+"alt-method"
+],
+"p": {
+"raw": {
+"area": "polynomial",
+"data": {
+"coefficients": [
+"2",
+"-3",
+"0",
+"5"
+],
+"divisor_root": "2"
+},
+"domain": "complex-polynomial",
+"task": "remainder",
+"coefficientDomain": "real"
+}
+},
+"w": "synthetic division by 2: 2 -> 2*2 + (-3) = 1 -> 1*2 + 0 = 2 -> 2*2 + 5 = 9\nremainder 9",
+"exp": "verified",
+"why": "Synthetic division yields 9."
+},
+{
+"id": "h7-dom-047",
+"cat": "other-domains",
+"tags": [
+"complex",
+"remainder",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"area": "polynomial",
+"data": {
+"coefficients": [
+"2",
+"-3",
+"0",
+"5"
+],
+"divisor_root": "2"
+},
+"domain": "complex-polynomial",
+"task": "remainder",
+"coefficientDomain": "real"
+}
+},
+"w": "remainder = p(-2) = 2*(-8) - 3*4 + 5 = -23",
+"exp": "invalid",
+"why": "Dividing by x-2 needs p(2)=9, not p(-2)."
+},
+{
+"id": "h7-dom-048",
+"cat": "other-domains",
+"tags": [
+"complex",
+"vieta",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"area": "polynomial",
+"data": {
+"coefficients": [
+"2",
+"-8",
+"10"
+]
+},
+"domain": "complex-polynomial",
+"task": "vieta-product",
+"coefficientDomain": "complex"
+}
+},
+"w": "product of roots = -c/a = -10/2 = -5",
+"exp": "invalid",
+"why": "For a quadratic the product is +c/a."
+},
+{
+"id": "h7-dom-049",
+"cat": "other-domains",
+"tags": [
+"complex",
+"verify-root"
+],
+"p": {
+"raw": {
+"area": "polynomial",
+"data": {
+"coefficients": [
+"1",
+"-4",
+"5"
+],
+"root": {
+"re": "2",
+"im": "-1"
+}
+},
+"domain": "complex-polynomial",
+"task": "verify-root",
+"coefficientDomain": "complex"
+}
+},
+"w": "(2 - i)^2 - 4(2 - i) + 5 = 4 - 4i - 1 - 8 + 4i + 5 = 0",
+"exp": "verified",
+"why": "Substitution gives zero."
+},
+{
+"id": "h7-dom-050",
+"cat": "other-domains",
+"tags": [
+"complex",
+"conjugate-root",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"area": "polynomial",
+"data": {
+"coefficients": [
+"1",
+{
+"re": "-3",
+"im": "-1"
+},
+{
+"re": "2",
+"im": "2"
+}
+],
+"root": {
+"re": "1",
+"im": "1"
+}
+},
+"domain": "complex-polynomial",
+"task": "conjugate-root",
+"coefficientDomain": "complex"
+}
+},
+"w": "By the conjugate root theorem, 1 - i is also a root",
+"exp": "invalid",
+"why": "Coefficients are not real; the roots are 1+i and 2.",
+"alt": [
+"missing-assumption"
+]
+},
+{
+"id": "h7-dom-051",
+"cat": "other-domains",
+"tags": [
+"complex",
+"de-moivre"
+],
+"p": {
+"raw": {
+"area": "polar",
+"data": {
+"n": 8,
+"z": {
+"re": "1",
+"im": "1"
+}
+},
+"domain": "complex-polynomial",
+"task": "de-moivre"
+}
+},
+"w": "(1 + i)^8 = 1^8 + i^8 = 1 + 1 = 2",
+"exp": "invalid",
+"why": "Powers do not distribute over sums; the value is 16."
+},
+{
+"id": "h7-dom-052",
+"cat": "other-domains",
+"tags": [
+"trig",
+"equation",
+"missing-branch"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "equation",
+"fn": "sin",
+"value": "1/2"
+}
+},
+"w": "x = π/6 + 2kπ, k an integer",
+"exp": "incomplete",
+"why": "The branch 5π/6 + 2kπ is missing.",
+"alt": [
+"missing-assumption"
+]
+},
+{
+"id": "h7-dom-053",
+"cat": "other-domains",
+"tags": [
+"trig",
+"equation",
+"alt-form"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "equation",
+"fn": "tan",
+"value": "1"
+}
+},
+"w": "x = π/4 + 2kπ or x = 5π/4 + 2kπ, k an integer",
+"exp": "verified",
+"why": "The union equals π/4 + kπ."
+},
+{
+"id": "h7-dom-054",
+"cat": "other-domains",
+"tags": [
+"trig",
+"equation",
+"missing-branch"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "equation",
+"fn": "tan",
+"value": "1"
+}
+},
+"w": "x = π/4 + 2kπ",
+"exp": "incomplete",
+"why": "Misses 5π/4 + 2kπ.",
+"alt": [
+"missing-assumption"
+]
+},
+{
+"id": "h7-dom-055",
+"cat": "other-domains",
+"tags": [
+"trig",
+"equation",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "equation",
+"fn": "cos",
+"value": "-1/2"
+}
+},
+"w": "x = π/3 + 2kπ or x = 5π/3 + 2kπ",
+"exp": "invalid",
+"why": "Those angles give cos = +1/2."
+},
+{
+"id": "h7-dom-056",
+"cat": "other-domains",
+"tags": [
+"trig",
+"equation",
+"concise"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "equation",
+"fn": "cos",
+"value": "0"
+}
+},
+"w": "x = π/2 + kπ",
+"exp": "verified",
+"why": "cos vanishes at odd multiples of π/2."
+},
+{
+"id": "h7-dom-057",
+"cat": "other-domains",
+"tags": [
+"trig",
+"equation"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "equation",
+"fn": "cos",
+"value": "0"
+}
+},
+"w": "cos x = 0 so x = kπ",
+"exp": "invalid",
+"why": "sin x vanishes at kπ; cos x vanishes at π/2 + kπ."
+},
+{
+"id": "h7-dom-058",
+"cat": "other-domains",
+"tags": [
+"trig",
+"equation-statement",
+"division"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "equation-statement",
+"statement": "sin x = sin x cos x"
+}
+},
+"w": "divide both sides by sin x: 1 = cos x\nx = 2kπ",
+"exp": "missing-assumption",
+"why": "Dividing by sin x drops the case sin x = 0; solutions are x = kπ.",
+"alt": [
+"invalid",
+"incomplete"
+]
+},
+{
+"id": "h7-dom-059",
+"cat": "other-domains",
+"tags": [
+"trig",
+"value",
+"side-claim"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "value",
+"fn": "sin",
+"degrees": 150
+}
+},
+"w": "sin 150° = sin 30° = 1/2\nalso cos 150° = 1/2",
+"exp": "invalid",
+"why": "cos 150° = -√3/2, so the side line is false."
+},
+{
+"id": "h7-dom-060",
+"cat": "other-domains",
+"tags": [
+"trig",
+"value"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "value",
+"fn": "cos",
+"degrees": 240
+}
+},
+"w": "cos 240° = cos(180° + 60°) = cos 60° = 1/2",
+"exp": "invalid",
+"why": "cos(180°+θ) = -cos θ so the value is -1/2."
+},
+{
+"id": "h7-dom-061",
+"cat": "other-domains",
+"tags": [
+"trig",
+"value",
+"concise"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "value",
+"fn": "tan",
+"degrees": 135
+}
+},
+"w": "-1",
+"exp": "verified",
+"why": "tan 135° = -tan 45° = -1."
+},
+{
+"id": "h7-dom-062",
+"cat": "other-domains",
+"tags": [
+"trig",
+"value",
+"side-claim"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "value",
+"fn": "cos",
+"degrees": 300
+}
+},
+"w": "cos 300° = cos(360° - 60°) = cos 60° = 1/2\nalso sin 300° = -√3/2",
+"exp": "verified",
+"why": "Correct value with a true extra line."
+},
+{
+"id": "h7-dom-063",
+"cat": "other-domains",
+"tags": [
+"trig",
+"identity",
+"forged"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "identity",
+"identity": "double-angle"
+}
+},
+"w": "sin 2x = 2 sin x",
+"exp": "invalid",
+"why": "Correct identity is sin 2x = 2 sin x cos x."
+},
+{
+"id": "h7-dom-064",
+"cat": "other-domains",
+"tags": [
+"trig",
+"identity",
+"forged"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "identity",
+"identity": "angle-addition"
+}
+},
+"w": "sin(a + b) = sin a + sin b",
+"exp": "invalid",
+"why": "Forged: sin(a+b) = sin a cos b + cos a sin b."
+},
+{
+"id": "h7-dom-065",
+"cat": "other-domains",
+"tags": [
+"trig",
+"identity"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "identity",
+"identity": "pythagorean"
+}
+},
+"w": "sin^2 x + cos^2 x = 1\ndivide by cos^2 x (cos x ≠ 0): tan^2 x + 1 = sec^2 x",
+"exp": "verified",
+"why": "Division with the nonzero condition stated."
+},
+{
+"id": "h7-dom-066",
+"cat": "other-domains",
+"tags": [
+"trig",
+"identity",
+"missing-condition"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "identity",
+"identity": "tan-ratio"
+}
+},
+"w": "tan x = sin x / cos x for every real x",
+"exp": "missing-assumption",
+"why": "Needs cos x ≠ 0; tan x is undefined where cos x = 0.",
+"alt": [
+"invalid"
+]
+},
+{
+"id": "h7-dom-067",
+"cat": "other-domains",
+"tags": [
+"trig",
+"unsupported"
+],
+"p": {
+"raw": {
+"domain": "trigonometry",
+"task": "equation-statement",
+"statement": "sin x = x/2"
+}
+},
+"w": "x ≈ 2 gives sin 2 = 0.909 and 1 = ...\nNewton's method gives x ≈ 1.8955",
+"exp": "unsupported",
+"why": "Transcendental equation has no exact closed form.",
+"alt": [
+"incomplete"
+]
+},
+{
+"id": "h7-dom-068",
+"cat": "other-domains",
+"tags": [
+"explog",
+"exponential",
+"alt-method"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "exponential-equation",
+"base": "2",
+"left": {
+"a": "3",
+"b": "1"
+},
+"rightExponent": "7"
+}
+},
+"w": "(3x + 1) ln 2 = 7 ln 2\nln 2 ≠ 0, so 3x + 1 = 7\nx = 2",
+"exp": "verified",
+"why": "Taking logs gives the same x=2."
+},
+{
+"id": "h7-dom-069",
+"cat": "other-domains",
+"tags": [
+"explog",
+"exponential",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "exponential-equation",
+"base": "2",
+"left": {
+"a": "3",
+"b": "1"
+},
+"rightExponent": "7"
+}
+},
+"w": "3x + 1 = 7\n3x = 7 + 1 = 8\nx = 8/3",
+"exp": "invalid",
+"why": "Moving +1 across should subtract; x=2."
+},
+{
+"id": "h7-dom-070",
+"cat": "other-domains",
+"tags": [
+"explog",
+"exponential",
+"incomplete"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "exponential-equation",
+"base": "2",
+"left": {
+"a": "3",
+"b": "1"
+},
+"rightExponent": "7"
+}
+},
+"w": "2^(3x+1) = 2^7\n3x + 1 = 7",
+"exp": "incomplete",
+"why": "x is not solved."
+},
+{
+"id": "h7-dom-071",
+"cat": "other-domains",
+"tags": [
+"explog",
+"exponential",
+"coincidence"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "exponential-equation",
+"base": "2",
+"left": {
+"a": "3",
+"b": "1"
+},
+"rightExponent": "7"
+}
+},
+"w": "2^7 = 128\n128/64 = 2\nso x = 2",
+"exp": "incomplete",
+"why": "True arithmetic with an unjustified 64; no link to 3x+1=7 is shown.",
+"alt": [
+"invalid"
+]
+},
+{
+"id": "h7-dom-072",
+"cat": "other-domains",
+"tags": [
+"explog",
+"exponential",
+"concise"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "exponential-equation",
+"base": "5",
+"left": {
+"a": "2",
+"b": "-3"
+},
+"rightExponent": "1"
+}
+},
+"w": "x = 2",
+"exp": "verified",
+"why": "2x-3=1 gives x=2."
+},
+{
+"id": "h7-dom-073",
+"cat": "other-domains",
+"tags": [
+"explog",
+"log"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "log-equation",
+"base": "3",
+"argument": {
+"a": "2",
+"b": "1"
+},
+"rhs": 3
+}
+},
+"w": "2x + 1 = 3^3 = 27\nx = 13\ncheck: 2*13 + 1 = 27 > 0",
+"exp": "verified",
+"why": "Exponentiation and domain check."
+},
+{
+"id": "h7-dom-074",
+"cat": "other-domains",
+"tags": [
+"explog",
+"log",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "log-equation",
+"base": "3",
+"argument": {
+"a": "2",
+"b": "1"
+},
+"rhs": 3
+}
+},
+"w": "2x + 1 = 3*3 = 9\nx = 4",
+"exp": "invalid",
+"why": "3^3 is 27, not 3*3; x=13."
+},
+{
+"id": "h7-dom-075",
+"cat": "other-domains",
+"tags": [
+"explog",
+"log-statement",
+"extraneous"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "log-equation-statement",
+"statement": "log_2(x) + log_2(x-2) = 3"
+}
+},
+"w": "x(x - 2) = 2^3 = 8\nx^2 - 2x - 8 = 0\n(x - 4)(x + 2) = 0\nx = 4 or x = -2",
+"exp": "missing-assumption",
+"why": "x = -2 is extraneous since log arguments must be positive; domain x > 2 is never checked.",
+"alt": [
+"invalid"
+]
+},
+{
+"id": "h7-dom-076",
+"cat": "other-domains",
+"tags": [
+"explog",
+"law",
+"forged"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "law",
+"law": "log-quotient"
+}
+},
+"w": "log(a/b) = log a / log b",
+"exp": "invalid",
+"why": "Quotient law is a difference, not a quotient."
+},
+{
+"id": "h7-dom-077",
+"cat": "other-domains",
+"tags": [
+"explog",
+"law",
+"forged"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "law",
+"law": "product-powers"
+}
+},
+"w": "a^m * a^n = a^(mn)",
+"exp": "invalid",
+"why": "Exponents add: a^(m+n)."
+},
+{
+"id": "h7-dom-078",
+"cat": "other-domains",
+"tags": [
+"explog",
+"inequality",
+"alt-method"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "exponential-inequality",
+"base": "1/3",
+"left": {
+"a": "2",
+"b": "0"
+},
+"rightExponent": "4",
+"relation": "<"
+}
+},
+"w": "3^(-2x) < 3^(-4)\n3^t is increasing so -2x < -4\nx > 2",
+"exp": "verified",
+"why": "Rewriting with base 3 yields x>2."
+},
+{
+"id": "h7-dom-079",
+"cat": "other-domains",
+"tags": [
+"explog",
+"inequality",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"domain": "exponential-log",
+"task": "exponential-inequality",
+"base": "1/3",
+"left": {
+"a": "2",
+"b": "0"
+},
+"rightExponent": "4",
+"relation": "<"
+}
+},
+"w": "(1/3)^(2x) < (1/3)^4\n2x < 4\nx < 2",
+"exp": "invalid",
+"why": "Base below 1 reverses the inequality; correct x>2."
+},
+{
+"id": "h7-dom-080",
+"cat": "other-domains",
+"tags": [
+"seq",
+"ap-term",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "ap-term",
+"first": "7",
+"difference": "-3",
+"n": 12
+}
+},
+"w": "a_12 = 7 + 12*(-3) = -29",
+"exp": "invalid",
+"why": "Uses n instead of n-1."
+},
+{
+"id": "h7-dom-081",
+"cat": "other-domains",
+"tags": [
+"seq",
+"ap-sum",
+"alt-method"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "ap-sum",
+"first": "4",
+"difference": "5",
+"n": 20
+}
+},
+"w": "a_20 = 4 + 19*5 = 99\nS_20 = 20(4 + 99)/2 = 1030",
+"exp": "verified",
+"why": "Sum via first and last term."
+},
+{
+"id": "h7-dom-082",
+"cat": "other-domains",
+"tags": [
+"seq",
+"ap-sum",
+"incomplete"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "ap-sum",
+"first": "4",
+"difference": "5",
+"n": 20
+}
+},
+"w": "a_20 = 4 + 19*5 = 99",
+"exp": "incomplete",
+"why": "Last term only; sum not computed."
+},
+{
+"id": "h7-dom-083",
+"cat": "other-domains",
+"tags": [
+"seq",
+"ap-sum",
+"alt-method"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "ap-sum",
+"first": "1",
+"difference": "2",
+"n": 10
+}
+},
+"w": "the terms are 1, 3, 5, ..., 19, the first ten odd numbers\ntheir sum is 10^2 = 100",
+"exp": "verified",
+"why": "Sum of first n odd numbers is n^2."
+},
+{
+"id": "h7-dom-084",
+"cat": "other-domains",
+"tags": [
+"seq",
+"gp-term",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "gp-term",
+"first": "3",
+"ratio": "-2",
+"n": 6
+}
+},
+"w": "a_6 = 3*(-2)^6 = 192",
+"exp": "invalid",
+"why": "Exponent should be n-1=5."
+},
+{
+"id": "h7-dom-085",
+"cat": "other-domains",
+"tags": [
+"seq",
+"gp-term",
+"concise"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "gp-term",
+"first": "27",
+"ratio": "-2/3",
+"n": 4
+}
+},
+"w": "-8",
+"exp": "verified",
+"why": "27*(-2/3)^3=-8."
+},
+{
+"id": "h7-dom-086",
+"cat": "other-domains",
+"tags": [
+"seq",
+"gp-sum",
+"alt-method"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "gp-sum",
+"first": "2",
+"ratio": "3",
+"n": 5
+}
+},
+"w": "2 + 6 + 18 + 54 + 162 = 242",
+"exp": "verified",
+"why": "Direct addition."
+},
+{
+"id": "h7-dom-087",
+"cat": "other-domains",
+"tags": [
+"seq",
+"gp-sum",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "gp-sum",
+"first": "2",
+"ratio": "3",
+"n": 5
+}
+},
+"w": "S_5 = 2(1 - 3^5)/(3 - 1) = 2*(-242)/2 = -242",
+"exp": "invalid",
+"why": "Numerator and denominator signs mismatch; sum is +242."
+},
+{
+"id": "h7-dom-088",
+"cat": "other-domains",
+"tags": [
+"seq",
+"gp-sum",
+"division"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "gp-sum",
+"first": "4",
+"ratio": "1",
+"n": 6
+}
+},
+"w": "S_6 = 4(1 - 1^6)/(1 - 1)",
+"exp": "incomplete",
+"why": "Formula is 0/0 at r=1; the sum is not found.",
+"alt": [
+"missing-assumption"
+]
+},
+{
+"id": "h7-dom-089",
+"cat": "other-domains",
+"tags": [
+"seq",
+"infinite-gp"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "infinite-gp",
+"first": "8",
+"ratio": "1/4"
+}
+},
+"w": "|r| = 1/4 < 1 so it converges\nS = 8/(1 - 1/4) = 32/3",
+"exp": "verified",
+"why": "a/(1-r) with |r|<1."
+},
+{
+"id": "h7-dom-090",
+"cat": "other-domains",
+"tags": [
+"seq",
+"infinite-gp",
+"wrong-formula"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "infinite-gp",
+"first": "5",
+"ratio": "3/2"
+}
+},
+"w": "S = 5/(1 - 3/2) = -10",
+"exp": "invalid",
+"why": "|r|>1 so the series diverges; the formula does not apply."
+},
+{
+"id": "h7-dom-091",
+"cat": "other-domains",
+"tags": [
+"seq",
+"unsupported"
+],
+"p": {
+"raw": {
+"domain": "sequence-series",
+"task": "series",
+"statement": "Evaluate the sum of 1/n^2 for n from 1 to infinity"
+}
+},
+"w": "the sum converges to π^2/6",
+"exp": "unsupported",
+"why": "Basel problem needs deeper analysis than an elementary exact check.",
+"alt": [
+"incomplete"
+]
+},
+{
+"id": "h7-dom-092",
+"cat": "other-domains",
+"tags": [
+"radical",
+"sqrt",
+"forged"
+],
+"p": {
+"raw": {
+"domain": "radical",
+"task": "sqrt",
+"radicand": 75
+}
+},
+"w": "√75 = √(25 + 50) = √25 + √50 = 5 + 5√2",
+"exp": "invalid",
+"why": "√(a+b) ≠ √a + √b."
+},
+{
+"id": "h7-dom-093",
+"cat": "other-domains",
+"tags": [
+"radical",
+"nth-root"
+],
+"p": {
+"raw": {
+"domain": "radical",
+"task": "nth-root",
+"radicand": 54,
+"index": 3
+}
+},
+"w": "54 = 27*2\n∛54 = ∛27 ∛2 = 3∛2",
+"exp": "verified",
+"why": "Cube factor extracted."
+},
+{
+"id": "h7-dom-094",
+"cat": "other-domains",
+"tags": [
+"radical",
+"rationalize",
+"alt-method"
+],
+"p": {
+"raw": {
+"domain": "radical",
+"task": "rationalize",
+"numerator": "6",
+"radicand": 3
+}
+},
+"w": "6 = 2*3 = 2√3 * √3\n6/√3 = 2√3",
+"exp": "verified",
+"why": "Factor 6 as 2√3·√3."
+},
+{
+"id": "h7-dom-095",
+"cat": "other-domains",
+"tags": [
+"radical",
+"rationalize"
+],
+"p": {
+"raw": {
+"domain": "radical",
+"task": "rationalize",
+"numerator": "6",
+"radicand": 3
+}
+},
+"w": "6/√3 = 6√3/√3√3 = 6√3/9 = 2√3/3",
+"exp": "invalid",
+"why": "√3·√3 = 3, not 9; the value is 2√3."
+},
+{
+"id": "h7-dom-096",
+"cat": "other-domains",
+"tags": [
+"radical",
+"sqrt-square",
+"missing-condition"
+],
+"p": {
+"raw": {
+"domain": "radical",
+"task": "sqrt-square",
+"symbol": "x",
+"assumption": "real"
+}
+},
+"w": "√(x^2) = x",
+"exp": "missing-assumption",
+"why": "For x<0 the value is -x; x ≥ 0 is not given.",
+"alt": [
+"invalid"
+]
+},
+{
+"id": "h7-dom-097",
+"cat": "other-domains",
+"tags": [
+"radical",
+"sqrt-square",
+"conditional"
+],
+"p": {
+"raw": {
+"domain": "radical",
+"task": "sqrt-square",
+"symbol": "x",
+"assumption": "real"
+}
+},
+"w": "Case x ≥ 0: √(x^2) = x\nCase x < 0: √(x^2) = -x\nso √(x^2) = |x|",
+"exp": "verified",
+"why": "Both cases are covered."
+},
+{
+"id": "h7-dom-098",
+"cat": "other-domains",
+"tags": [
+"radical",
+"equation",
+"extraneous"
+],
+"p": {
+"raw": {
+"domain": "radical",
+"task": "equation",
+"offset": "2",
+"rightOffset": "0"
+}
+},
+"w": "squaring: x + 2 = x^2\n(x - 2)(x + 1) = 0\nx = 2 or x = -1",
+"exp": "missing-assumption",
+"why": "Squaring introduces -1, which fails the original equation; no check was made.",
+"alt": [
+"invalid"
+]
+},
+{
+"id": "h7-dom-099",
+"cat": "other-domains",
+"tags": [
+"radical",
+"nested",
+"forged"
+],
+"p": {
+"raw": {
+"domain": "radical",
+"task": "nested",
+"sum": 5,
+"product": 6
+}
+},
+"w": "√(5 + 2√6) = √5 + √6",
+"exp": "invalid",
+"why": "(√5+√6)^2 = 11+2√30."
+},
+{
+"id": "h7-dom-100",
+"cat": "other-domains",
+"tags": [
+"radical",
+"ambiguous"
+],
+"p": {
+"raw": {
+"domain": "radical",
+"task": "sqrt",
+"radicand": 16
+}
+},
+"w": "√16 = ±4",
+"exp": "ambiguous",
+"why": "As the value of √16 it is false (principal root 4), as the solution set of x^2=16 it is right.",
+"alt": [
+"invalid"
+]
+}
+]

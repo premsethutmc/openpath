@@ -1,0 +1,56 @@
+{
+ "e1-after": {
+  "cases": 500,
+  "casesWithLineAccount": 500,
+  "lineStatusCounts": {
+   "verified-valid": 584,
+   "inconclusive": 420,
+   "ambiguous": 44,
+   "incomplete": 11,
+   "verified-invalid": 77,
+   "malformed": 33,
+   "unsupported": 223
+  },
+  "verifiedCases": 124,
+  "verifiedWithEveryLineVerifiedValid": 124,
+  "verifiedCasesWithoutLineAccount": 0,
+  "unaccountedAcceptances": 0,
+  "thrown": 0
+ },
+ "dev-after": {
+  "cases": 100,
+  "casesWithLineAccount": 85,
+  "lineStatusCounts": {
+   "verified-valid": 91,
+   "verified-invalid": 29,
+   "inconclusive": 109,
+   "unsupported": 12,
+   "malformed": 8,
+   "ambiguous": 9,
+   "incomplete": 10
+  },
+  "verifiedCases": 15,
+  "verifiedWithEveryLineVerifiedValid": 15,
+  "verifiedCasesWithoutLineAccount": 0,
+  "unaccountedAcceptances": 0,
+  "thrown": 0
+ },
+ "sealed-after": {
+  "cases": 100,
+  "casesWithLineAccount": 85,
+  "lineStatusCounts": {
+   "verified-valid": 97,
+   "verified-invalid": 39,
+   "inconclusive": 86,
+   "unsupported": 18,
+   "ambiguous": 5,
+   "malformed": 7,
+   "incomplete": 8
+  },
+  "verifiedCases": 15,
+  "verifiedWithEveryLineVerifiedValid": 15,
+  "verifiedCasesWithoutLineAccount": 0,
+  "unaccountedAcceptances": 0,
+  "thrown": 0
+ }
+}

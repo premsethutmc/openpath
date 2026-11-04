@@ -1,0 +1,14 @@
+{
+ "version": 1,
+ "note": "Adjudication of corpus label defects found after the E5 code freeze. Frozen corpus files are NOT modified; the overlay is applied only when scoring. The defect was found by a read-only text-vs-row audit of the generator (generate_e5_corpus.py AUDIT) on the development fuzz partitions, and independently confirmed by hand.",
+ "adjudications": [
+  {
+   "caseId": "e5-sealed-007",
+   "originalClassification": "invalid",
+   "correctedClassification": "verified",
+   "reason": "Isosceles with AB=CA and A=20: B=C, A+B+C=180, 20+2B=180, B=80 is a correct solution. The generator's arithmetic-slip variant (family isosceles-base-angles, k==3) altered the machine-readable row but left the displayed text unchanged, so the working shown is correct.",
+   "mechanism": "generator text/row inconsistency",
+   "engineWasCorrect": true
+  }
+ ]
+}

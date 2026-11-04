@@ -1,0 +1,2596 @@
+[
+ {
+  "kind": "code",
+  "id": "sup.g8.sva.01",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Write the correct form of 'be' (is or are): The list of winners ___ pinned on the notice board.",
+  "step": "intervening",
+  "rationale": "Agreement with the head noun 'list' across 'of winners'; the nearer plural noun pulls towards 'are'.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "is"
+  ],
+  "wrong": {
+   "are": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sva.02",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "choice:grammar",
+  "b": 5.25,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "step": "intervening",
+  "rationale": "A plural subject with a long phrase (two nouns) before the verb; distractors agree with the nearer singular nouns.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The flowers in the garden behind our flats needs water.",
+   "The flowers in the garden behind our flats need water.",
+   "The flowers in the garden behind our flats is needing water.",
+   "The flowers in the garden behind our flats has needed water."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "attraction_error",
+   "2": "attraction_error",
+   "3": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sva.03",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:correction",
+  "b": 5.5,
+  "a": 1.3,
+  "prompt": "One word in this sentence is wrong. Type the correct word: \"The price of these new running shoes are too high for me.\"",
+  "step": "intervening",
+  "rationale": "Find and fix: the singular head 'price' is separated from the verb by a plural phrase.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "is"
+  ],
+  "wrong": {
+   "are": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sva.04",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "choice:grammar",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Choose the correct verb: Every student and teacher in the school ___ invited to the annual day.",
+  "step": "indefinite",
+  "rationale": "'Every' before joined nouns takes a singular verb, against the pull of 'and'.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "is",
+   "have been",
+   "are",
+   "were"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "attraction_error",
+   "3": "attraction_error",
+   "1": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sva.05",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "typed:cloze",
+  "b": 6.0,
+  "a": 1.3,
+  "prompt": "Write has or have: Neither of the two buses ___ arrived yet.",
+  "step": "indefinite",
+  "rationale": "'Neither of' with a plural noun still takes a singular verb in formal written English.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "has"
+  ],
+  "wrong": {
+   "have": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sva.06",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "multi:error_spot",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Two of these sentences have an agreement mistake. Choose both.",
+  "step": "indefinite",
+  "rationale": "Finds agreement errors after indefinite pronouns among correct sentences; both must be found and nothing else chosen.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Each of the players has a new shirt.",
+   "Somebody in the class have left a bag here.",
+   "The team of volunteers is meeting today.",
+   "Everyone in the two classes are going on the trip.",
+   "The children in the front row are singing."
+  ],
+  "answer_set": [
+   1,
+   3
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sva.07",
+  "version": 1,
+  "target": "EN.GRM.VERB.sva",
+  "format": "choice:grammar",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Choose the correct verb: Either my sisters or my brother ___ going to collect me.",
+  "step": "either_neither",
+  "rationale": "With either … or, the verb agrees with the nearer subject ('my brother'), not the first.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "were",
+   "have been",
+   "are",
+   "is"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "2": "attraction_error",
+   "0": "attraction_error"
+  },
+  "addresses": [
+   "attraction_error"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pps.01",
+  "version": 1,
+  "target": "EN.GRM.VERB.present_past_simple",
+  "format": "typed:cloze",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Write the past simple of the verb in brackets: Last Monday the coach (choose) ___ Meera as captain.",
+  "step": "consistency_less_common",
+  "rationale": "A less common irregular past (choose → chose), with a past time phrase.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "chose"
+  ],
+  "wrong": {
+   "choosed": "regularised_past",
+   "chosen": "regularised_past",
+   "choose": "tense_shift"
+  },
+  "addresses": [
+   "regularised_past"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pps.02",
+  "version": 1,
+  "target": "EN.GRM.VERB.present_past_simple",
+  "format": "typed:cloze",
+  "b": 5.25,
+  "a": 1.3,
+  "prompt": "Write the past simple of the verb in brackets: The guide (lead) ___ us through the old fort before lunch.",
+  "step": "consistency_less_common",
+  "rationale": "Irregular past 'led', easily over-regularised as 'leaded'.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "led"
+  ],
+  "wrong": {
+   "leaded": "regularised_past",
+   "lead": "tense_shift"
+  },
+  "addresses": [
+   "regularised_past"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pps.03",
+  "version": 1,
+  "target": "EN.GRM.VERB.present_past_simple",
+  "format": "choice:grammar",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which sentence keeps the tense consistent?",
+  "step": "consistency_less_common",
+  "rationale": "Keeps a past narrative in the past; distractors shift to the present in one clause.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "We reached the station at six, but the train leaves without us.",
+   "We reached the station at six, but the train had left without us.",
+   "We reach the station at six, but the train left without us.",
+   "We reached the station at six, but the train leave without us."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "tense_shift",
+   "2": "tense_shift",
+   "3": "tense_shift"
+  },
+  "addresses": [
+   "tense_shift"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pps.04",
+  "version": 1,
+  "target": "EN.GRM.VERB.present_past_simple",
+  "format": "typed:correction",
+  "b": 5.75,
+  "a": 1.3,
+  "prompt": "One verb in this short story is in the wrong tense. Type the correct word: \"Ravi opened the box and finds an old letter from his grandfather.\"",
+  "step": "consistency_less_common",
+  "rationale": "Finds a tense shift inside a past narrative and restores an irregular past form.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "found"
+  ],
+  "wrong": {
+   "finds": "tense_shift",
+   "finded": "regularised_past"
+  },
+  "addresses": [
+   "tense_shift"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pps.05",
+  "version": 1,
+  "target": "EN.GRM.VERB.present_past_simple",
+  "format": "typed:cloze",
+  "b": 5.75,
+  "a": 1.3,
+  "prompt": "Write the past simple of the verb in brackets: My uncle (bring) ___ sweets from Kolkata when he visited.",
+  "step": "consistency_less_common",
+  "rationale": "Irregular past 'brought', often confused with 'bringed' or 'brang'.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "brought"
+  ],
+  "wrong": {
+   "bringed": "regularised_past",
+   "brang": "regularised_past"
+  },
+  "addresses": [
+   "regularised_past"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pps.06",
+  "version": 1,
+  "target": "EN.GRM.VERB.present_past_simple",
+  "format": "multi:error_spot",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "This diary entry should be in the past. Choose the two sentences with a tense mistake.",
+  "step": "consistency_less_common",
+  "rationale": "Finds two present-tense slips in a past narrative; both must be found.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "On Saturday we went to the science fair.",
+   "My friend shows his solar oven to the judges.",
+   "They asked him many questions.",
+   "He answers all of them calmly.",
+   "In the end he won second prize."
+  ],
+  "answer_set": [
+   1,
+   3
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pps.07",
+  "version": 1,
+  "target": "EN.GRM.VERB.present_past_simple",
+  "format": "choice:grammar",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "step": "consistency_less_common",
+  "rationale": "Base form after 'did' with a less common irregular verb (buy/bought) where the past form is tempting.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Did she buy the tickets yesterday?",
+   "Does she bought the tickets yesterday?",
+   "Did she bought the tickets yesterday?",
+   "Did she buys the tickets yesterday?"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "past_after_did",
+   "3": "past_after_did",
+   "1": "tense_shift"
+  },
+  "addresses": [
+   "past_after_did"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.asp.01",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "choice:grammar",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Choose the correct verb: We ___ in this town since 2019.",
+  "step": "perfect_vs_past",
+  "rationale": "Present perfect with 'since' for a period that continues to now.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "lived",
+   "have lived",
+   "are living",
+   "live"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "perfect_with_finished_time"
+  },
+  "addresses": [
+   "perfect_with_finished_time"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.asp.02",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "typed:correction",
+  "b": 5.25,
+  "a": 1.3,
+  "prompt": "One verb in this sentence is wrong. Type the correct form (one word): \"We have visited the planetarium two days ago.\"",
+  "step": "perfect_vs_past",
+  "rationale": "A finished time ('two days ago') needs the past simple, not the present perfect.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "visited"
+  ],
+  "wrong": {
+   "have visited": "perfect_with_finished_time"
+  },
+  "addresses": [
+   "perfect_with_finished_time"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.asp.03",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "choice:grammar",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Choose the best answer: \"Is Arjun here?\" \"No, he ___ left.\"",
+  "step": "perfect_just",
+  "rationale": "Present perfect with 'just' for a very recent action.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "has just",
+   "just has been",
+   "is just",
+   "was just being"
+  ],
+  "answer": 0,
+  "addresses": [
+   "perfect_with_finished_time"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.asp.04",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "choice:grammar",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "step": "past_perfect",
+  "rationale": "Past perfect for the earlier of two past events, signalled by 'by the time'.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "By the time the doctor came, the fever goes down.",
+   "By the time the doctor came, the fever went down.",
+   "By the time the doctor came, the fever has gone down.",
+   "By the time the doctor came, the fever had gone down."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "1": "perfect_with_finished_time"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.asp.05",
+  "version": 1,
+  "target": "EN.GRM.VERB.aspect",
+  "format": "typed:cloze",
+  "b": 6.25,
+  "a": 1.3,
+  "prompt": "Write the correct form of the verb in brackets (two words): When we got to the cinema, the film (already start) ___.",
+  "step": "past_perfect",
+  "rationale": "Past perfect with 'already' for an action completed before another past action.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "had already started",
+   "had started already"
+  ],
+  "wrong": {
+   "already started": "perfect_with_finished_time",
+   "has already started": "perfect_with_finished_time"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.art.01",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:cloze",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Write a, an or the: We watched ___ moon rise over the lake.",
+  "step": "unique_the",
+  "rationale": "'the' for something unique (the moon).",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "the"
+  ],
+  "wrong": {
+   "a": "article_omission"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.art.02",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "choice:grammar",
+  "b": 5.25,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "step": "unique_the",
+  "rationale": "'the' with a superlative; distractors omit it or misuse it with a country name.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The Ganga is a longest river in India.",
+   "The Ganga is the longest river in India.",
+   "Ganga is longest river in the India.",
+   "The Ganga is longest river in India."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "3": "article_omission",
+   "0": "article_omission",
+   "2": "article_omission"
+  },
+  "addresses": [
+   "article_omission"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.art.03",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "choice:grammar",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Choose the correct sentence.",
+  "step": "zero_uncountable",
+  "rationale": "No a/an and no plural with the uncountable noun 'information'.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "She gave us useful information about the exam.",
+   "She gave us a useful informations about the exam.",
+   "She gave us an useful informations about the exam.",
+   "She gave us an useful information about the exam."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "3": "article_with_uncountable",
+   "1": "article_with_uncountable",
+   "2": "article_with_uncountable"
+  },
+  "addresses": [
+   "article_with_uncountable"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.art.04",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "typed:correction",
+  "b": 5.75,
+  "a": 1.3,
+  "prompt": "One word in this sentence must be removed. Type the word to remove: \"Our class needs an equipment for the science fair.\"",
+  "step": "zero_uncountable",
+  "rationale": "'equipment' is uncountable, so the article must go.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "an"
+  ],
+  "addresses": [
+   "article_with_uncountable"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.art.05",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "multi:error_spot",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Two of these sentences use an article wrongly. Choose both.",
+  "step": "zero_uncountable",
+  "rationale": "Finds a/an used with uncountable nouns (advice, luggage) beside correct countable uses; both must be found.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The equipment in the lab is new.",
+   "Can I have a piece of advice?",
+   "He asked for an advice about his project.",
+   "We need some luggage trolleys.",
+   "They carried a heavy luggage to the bus."
+  ],
+  "answer_set": [
+   2,
+   4
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.art.06",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "choice:grammar",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Which sentence makes a general statement correctly?",
+  "step": "generic_abstract",
+  "rationale": "No article with an abstract noun used in a general sense (Patience is …).",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The patience is important for the teacher in general.",
+   "The patience is important for a teacher.",
+   "A patience is important for teacher.",
+   "Patience is important for a teacher."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "1": "article_with_uncountable",
+   "2": "article_with_uncountable"
+  },
+  "addresses": [
+   "article_with_uncountable"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.art.07",
+  "version": 1,
+  "target": "EN.GRM.NOUN.articles",
+  "format": "choice:grammar",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which sentence is a correct general statement about elephants as a kind of animal?",
+  "step": "generic_abstract",
+  "rationale": "Zero article with a plural noun for a general statement; 'The elephants' would mean particular ones.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The elephants need large forests to survive.",
+   "An elephants need large forests to survive.",
+   "Elephants need large forests to survive.",
+   "Elephant need large forests to survive."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "0": "article_omission",
+   "1": "article_omission",
+   "3": "article_omission"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.gra.01",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "choice:proofread",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Which sentence in this short paragraph has a grammar mistake?",
+  "step": "complex",
+  "rationale": "Agreement after 'One of' in a short text; the other sentences are correct.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Most of them are growing well.",
+   "One of the saplings have dried up, sadly.",
+   "We water them every Friday.",
+   "Our class planted twenty trees in June."
+  ],
+  "answer": 1,
+  "addresses": [
+   "third_person_s"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.gra.02",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "typed:correction",
+  "b": 5.25,
+  "a": 1.3,
+  "prompt": "One word in this sentence is wrong. Type the correct word: \"If it will rain tomorrow, the match will be cancelled.\"",
+  "step": "complex",
+  "rationale": "First conditional: present tense in the if-clause, not 'will'.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "rains"
+  ],
+  "wrong": {
+   "will": "tense_shift"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.gra.03",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "choice:proofread",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which sentence has a grammar mistake?",
+  "step": "complex",
+  "rationale": "neither … nor with a nearer plural subject; correct sentences include traps that look wrong (news was, Mathematics is).",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Neither the teacher nor the students was ready.",
+   "Mathematics is my favourite subject.",
+   "She is one of the students who always help others.",
+   "The news about the floods was worrying."
+  ],
+  "answer": 0,
+  "addresses": [
+   "third_person_s"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.gra.04",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "multi:error_spot",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "Two sentences in this notice have grammar mistakes. Choose both.",
+  "step": "complex",
+  "rationale": "Finds agreement and conditional-tense errors in a realistic notice; both must be found.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The library will be closed on Friday.",
+   "Students who has borrowed books must return them by Thursday.",
+   "Late returns will be charged a small fine.",
+   "If you will lose your card, please tell the librarian at once.",
+   "Thank you for your help."
+  ],
+  "answer_set": [
+   1,
+   3
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.gra.05",
+  "version": 1,
+  "target": "EN.WRT.ACC.grammar",
+  "format": "choice:proofread",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Which sentence is written correctly?",
+  "step": "complex",
+  "rationale": "Avoids a dangling participle: the walker must be the subject of the main clause.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Walking to school, sudden rain caught.",
+   "Walking to school, it was raining on me suddenly.",
+   "Walking to school, the rain started suddenly.",
+   "Walking to school, I was caught in sudden rain."
+  ],
+  "answer": 3
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pre.01",
+  "version": 1,
+  "target": "EN.GRM.PREP.time_place",
+  "format": "typed:cloze",
+  "b": 5.0,
+  "a": 1.3,
+  "prompt": "Write since or for: My grandmother has lived in Pune ___ forty years.",
+  "step": "since_for",
+  "rationale": "'for' with a length of time.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "for"
+  ],
+  "wrong": {
+   "since": "since_for_confusion"
+  },
+  "addresses": [
+   "since_for_confusion"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pre.02",
+  "version": 1,
+  "target": "EN.GRM.PREP.time_place",
+  "format": "typed:cloze",
+  "b": 5.25,
+  "a": 1.3,
+  "prompt": "Write since or for: The shop on our corner has been closed ___ last Diwali.",
+  "step": "since_for",
+  "rationale": "'since' with a point in time, here a festival rather than a year.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "since"
+  ],
+  "wrong": {
+   "for": "since_for_confusion"
+  },
+  "addresses": [
+   "since_for_confusion"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pre.03",
+  "version": 1,
+  "target": "EN.GRM.PREP.time_place",
+  "format": "choice:grammar",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "step": "since_for",
+  "rationale": "'for' with a length of time in the present perfect; distractors misuse 'since' and the tense.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "I have known Anil since three years.",
+   "I have known Anil for three years.",
+   "I know Anil since three years.",
+   "I am knowing Anil for three years."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "since_for_confusion",
+   "2": "since_for_confusion"
+  },
+  "addresses": [
+   "since_for_confusion"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pre.04",
+  "version": 1,
+  "target": "EN.GRM.PREP.time_place",
+  "format": "choice:grammar",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Choose the correct word: Please hand in your project ___ Friday at the latest.",
+  "step": "by_until_during",
+  "rationale": "'by' for a deadline, against 'until' for a continuing state.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "by",
+   "during",
+   "since",
+   "until"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "3": "in_on_at_confusion",
+   "2": "since_for_confusion"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pre.05",
+  "version": 1,
+  "target": "EN.GRM.PREP.time_place",
+  "format": "typed:cloze",
+  "b": 6.25,
+  "a": 1.3,
+  "prompt": "Write during or while: My phone rang ___ the science test.",
+  "step": "by_until_during",
+  "rationale": "'during' before a noun phrase; 'while' needs a clause.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "during"
+  ],
+  "wrong": {
+   "while": "in_on_at_confusion"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.pre.06",
+  "version": 1,
+  "target": "EN.GRM.PREP.time_place",
+  "format": "choice:grammar",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "step": "by_until_during",
+  "rationale": "'until' for an action continuing up to a moment; 'by' and 'during' do not fit before a clause here.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "We waited during the bus came.",
+   "We waited while the bus came by six.",
+   "We waited by the bus came.",
+   "We waited until the bus came."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "2": "in_on_at_confusion",
+   "0": "in_on_at_confusion"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.fra.01",
+  "version": 1,
+  "target": "EN.SEN.CMP.fragments",
+  "format": "choice:sentence_boundaries",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Which is a complete sentence?",
+  "step": "ing_which",
+  "rationale": "An -ing phrase attached to a main clause, against -ing and which fragments.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Hoping to finish the model before the exhibition.",
+   "We worked late, hoping to finish the model before the exhibition.",
+   "Hoping to finish the model. Before the exhibition.",
+   "Which we hoped to finish before the exhibition."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "missing_verb",
+   "2": "missing_verb",
+   "3": "subordinate_fragment"
+  },
+  "addresses": [
+   "missing_verb",
+   "subordinate_fragment"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.fra.02",
+  "version": 1,
+  "target": "EN.SEN.CMP.fragments",
+  "format": "choice:sentence_boundaries",
+  "b": 5.25,
+  "a": 1.1,
+  "prompt": "Which is written as complete sentences?",
+  "step": "ing_which",
+  "rationale": "A which-clause attached with a comma, against which and -ing fragments.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The old bridge was closed, which made everyone late.",
+   "The old bridge closed. Making everyone late.",
+   "The old bridge, which made everyone late.",
+   "The old bridge was closed. Which made everyone late."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "3": "subordinate_fragment",
+   "1": "missing_verb",
+   "2": "missing_verb"
+  },
+  "addresses": [
+   "subordinate_fragment"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.fra.03",
+  "version": 1,
+  "target": "EN.SEN.CMP.fragments",
+  "format": "choice:find_error",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which of these is a fragment, not a sentence?",
+  "step": "ing_which",
+  "rationale": "Spots an -ing phrase standing alone among complete sentences.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Our neighbour waters her plants daily.",
+   "Every evening, the street lights come on at six.",
+   "The children ran across the field.",
+   "Running across the field with their kites."
+  ],
+  "answer": 3,
+  "addresses": [
+   "missing_verb"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.fra.05",
+  "version": 1,
+  "target": "EN.SEN.CMP.fragments",
+  "format": "multi:sentences",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "Two of these are fragments. Choose both.",
+  "step": "ing_which",
+  "rationale": "Finds a subordinate and a which fragment beside complete sentences, one of which begins with a subordinate clause.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Although the shop was open.",
+   "The shop was open until nine.",
+   "Which nobody had seen before.",
+   "Nobody had seen it before.",
+   "When the rain stopped, we went out."
+  ],
+  "answer_set": [
+   0,
+   2
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.fra.06",
+  "version": 1,
+  "target": "EN.SEN.CMP.fragments",
+  "format": "choice:repair",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "How should this be corrected? \"The project was finished on time. Because everyone helped.\"",
+  "step": "ing_which",
+  "rationale": "Repairs a because-fragment by joining it to the main clause; distractors move or keep the fragment.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Because everyone helped. The project was finished on time.",
+   "The project was finished on time. Because everyone, helped.",
+   "The project was finished on time because everyone helped.",
+   "The project was finished. On time because everyone helped."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "1": "subordinate_fragment",
+   "3": "subordinate_fragment",
+   "0": "subordinate_fragment"
+  },
+  "addresses": [
+   "subordinate_fragment"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.fra.07",
+  "version": 1,
+  "target": "EN.SEN.CMP.fragments",
+  "format": "choice:find_error",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "In this short paragraph, which part is a fragment? (A) The museum opened a new gallery last month. (B) It shows tools used by farmers long ago. (C) Including a plough made entirely of wood. (D) Many schools have already visited it.",
+  "step": "ing_which",
+  "rationale": "Finds an -ing ('Including …') fragment inside a paragraph of longer sentences.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "A",
+   "B",
+   "C",
+   "D"
+  ],
+  "answer": 2,
+  "addresses": [
+   "missing_verb"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.run.01",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:repair",
+  "b": 5.25,
+  "a": 1.1,
+  "prompt": "How should this be corrected? \"The library was quiet, we could study well.\"",
+  "step": "repair",
+  "rationale": "Repairs a comma splice with 'so'.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The library was quiet we could study well.",
+   "The library was quiet, so we could study well.",
+   "The library, was quiet we could study well.",
+   "The library was quiet, we could, study well."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "fused_sentence",
+   "2": "fused_sentence"
+  },
+  "addresses": [
+   "comma_splice"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.run.02",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:sentence_boundaries",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which is written correctly?",
+  "step": "repair",
+  "rationale": "Subordination as the repair, against a splice, a fused sentence and a fragment.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "When it started to rain, we went inside.",
+   "When it started to rain. We went inside.",
+   "It started to rain, we went inside.",
+   "It started to rain we went inside."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "comma_splice",
+   "3": "fused_sentence",
+   "1": "over_fragmenting"
+  },
+  "addresses": [
+   "comma_splice",
+   "over_fragmenting"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.run.03",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:punctuation",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Which sentence is punctuated correctly?",
+  "step": "transitions",
+  "rationale": "A semicolon before 'however' joining two clauses; a comma alone makes a splice.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The tickets were sold out however we watched it online.",
+   "The tickets were sold out, however we watched it online.",
+   "The tickets were sold out, however, we watched it online.",
+   "The tickets were sold out; however, we watched it online."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "2": "comma_splice",
+   "0": "fused_sentence",
+   "1": "comma_splice"
+  },
+  "addresses": [
+   "comma_splice"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.run.04",
+  "version": 1,
+  "target": "EN.SEN.CMP.run_ons",
+  "format": "choice:punctuation",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Which is written correctly?",
+  "step": "transitions",
+  "rationale": "A full stop (or semicolon) before 'Therefore'; distractors join two clauses with commas or nothing.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Our team practised every day, therefore we won the final.",
+   "Our team practised every day therefore we won the final.",
+   "Our team practised every day. Therefore, we won the final.",
+   "Our team practised every day, therefore, we won the final."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "0": "comma_splice",
+   "1": "fused_sentence",
+   "3": "comma_splice"
+  },
+  "addresses": [
+   "comma_splice"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.coo.01",
+  "version": 1,
+  "target": "EN.SEN.CMB.coordination",
+  "format": "choice:joining_word",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Choose the best joining word: The test was difficult, ___ most of us finished it on time.",
+  "step": "yet_nor_paired",
+  "rationale": "'yet' for an unexpected contrast.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "so",
+   "yet",
+   "or",
+   "for"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "wrong_coordinator",
+   "2": "wrong_coordinator"
+  },
+  "addresses": [
+   "wrong_coordinator"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.coo.02",
+  "version": 1,
+  "target": "EN.SEN.CMB.coordination",
+  "format": "typed:cloze",
+  "b": 5.25,
+  "a": 1.3,
+  "prompt": "Write the missing word: My brother does not like spinach, ___ does he like peas.",
+  "step": "yet_nor_paired",
+  "rationale": "'nor' adds a second negative and takes inverted word order (nor does he).",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "nor"
+  ],
+  "wrong": {
+   "or": "wrong_coordinator",
+   "and": "wrong_coordinator"
+  },
+  "addresses": [
+   "wrong_coordinator"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.coo.03",
+  "version": 1,
+  "target": "EN.SEN.CMB.coordination",
+  "format": "choice:combine",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which sentence best combines the ideas without a long chain of 'and'?",
+  "step": "yet_nor_paired",
+  "rationale": "Avoids chaining with 'and' by listing actions and using a time phrase.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "We packed our bags, caught the bus and, after reaching the camp, set up our tents.",
+   "We packed our bags and caught the bus and reached the camp and set up our tents.",
+   "We packed our bags, and we caught, the bus and set up our tents.",
+   "We packed our bags and we caught the bus and we reached the camp and we set up our tents."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "3": "and_chaining",
+   "1": "and_chaining"
+  },
+  "addresses": [
+   "and_chaining"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.coo.04",
+  "version": 1,
+  "target": "EN.SEN.CMB.coordination",
+  "format": "choice:grammar",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which sentence uses the paired words correctly?",
+  "step": "yet_nor_paired",
+  "rationale": "either … or placed before parallel parts; distractors misplace 'either' or mix in 'nor'. Reviewer: 'either take the train or the bus' is common informally; the key follows the parallel-structure rule taught for formal writing.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "You can take either the train nor the bus.",
+   "You can take the train either or the bus.",
+   "You can either take the train or the bus.",
+   "You can take either the train or the bus."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "wrong_coordinator",
+   "1": "wrong_coordinator"
+  },
+  "addresses": [
+   "wrong_coordinator"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.coo.05",
+  "version": 1,
+  "target": "EN.SEN.CMB.coordination",
+  "format": "typed:cloze",
+  "b": 5.75,
+  "a": 1.3,
+  "prompt": "Write the missing word: Both the captain ___ the coach praised the young bowler.",
+  "step": "yet_nor_paired",
+  "rationale": "both … and as a paired form.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "and"
+  ],
+  "wrong": {
+   "or": "wrong_coordinator",
+   "nor": "wrong_coordinator"
+  },
+  "addresses": [
+   "wrong_coordinator"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.coo.06",
+  "version": 1,
+  "target": "EN.SEN.CMB.coordination",
+  "format": "choice:grammar",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Which sentence is correct?",
+  "step": "yet_nor_paired",
+  "rationale": "neither … nor with the right pair and agreement with the nearer subject.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Neither the fan nor the lights was working.",
+   "Neither the fan or the lights were working.",
+   "Neither the fan nor the lights were working.",
+   "Neither the fan and the lights were working."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "1": "wrong_coordinator",
+   "3": "wrong_coordinator"
+  },
+  "addresses": [
+   "wrong_coordinator"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.coo.07",
+  "version": 1,
+  "target": "EN.SEN.CMB.coordination",
+  "format": "multi:sentences",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Two of these sentences use a joining word that does not fit the meaning. Choose both.",
+  "step": "yet_nor_paired",
+  "rationale": "Judges whether the coordinator fits the logic (so, yet, or); two misfits must be found.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "It was cold, yet he wore only a T-shirt.",
+   "She was tired, so she went to bed early.",
+   "He studied hard, so he failed the test.",
+   "We can walk, or we can take an auto.",
+   "The shop had a sale, yet we bought far more than we planned."
+  ],
+  "answer_set": [
+   2,
+   4
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.fra.04",
+  "version": 1,
+  "target": "EN.SEN.CMP.fragments",
+  "format": "choice:repair",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which correction turns this fragment into a sentence? \"Leaving early to avoid the traffic.\"",
+  "step": "ing_which",
+  "rationale": "Repairs an -ing fragment by giving it a subject and a finite verb.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Leaving early, to avoid the traffic.",
+   "We left early to avoid the traffic.",
+   "Leaving early. To avoid the traffic.",
+   "Which left early to avoid the traffic."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "missing_verb",
+   "2": "missing_verb",
+   "3": "subordinate_fragment"
+  },
+  "addresses": [
+   "missing_verb"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sub.01",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:joining_word",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Choose the best joining words: Take an umbrella ___ it rains on the way home.",
+  "step": "purpose_precaution",
+  "rationale": "'in case' for a precaution, against purpose ('so that'), condition and contrast.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "so that",
+   "in case",
+   "unless",
+   "whereas"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "wrong_relationship",
+   "2": "wrong_relationship",
+   "3": "wrong_relationship"
+  },
+  "addresses": [
+   "wrong_relationship"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sub.02",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:combine",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "Which sentence best combines the ideas? \"Neha set two alarms. She did not want to miss the early train.\"",
+  "step": "purpose_precaution",
+  "rationale": "Combines with 'so that' for purpose; distractors give the wrong relationship or a broken structure.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Neha set two alarms so that she would not miss the early train.",
+   "Neha set two alarms although she did not want to miss the early train.",
+   "So that Neha set two alarms, she did not miss the early train.",
+   "Neha set two alarms in case she wanted to miss the early train."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "3": "wrong_relationship",
+   "1": "wrong_relationship",
+   "2": "dangling_subordinate"
+  },
+  "addresses": [
+   "wrong_relationship"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sub.03",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:joining_word",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Choose the best joining word: Rahul enjoys loud music, ___ his sister prefers silence while she reads.",
+  "step": "variety",
+  "rationale": "'whereas' for a direct contrast between two people.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "in case",
+   "since",
+   "so that",
+   "whereas"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "1": "wrong_relationship",
+   "2": "wrong_relationship",
+   "0": "wrong_relationship"
+  },
+  "addresses": [
+   "wrong_relationship"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sub.04",
+  "version": 1,
+  "target": "EN.SEN.CMB.subordination",
+  "format": "choice:joining_word",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "In which sentence does 'since' mean 'because'?",
+  "step": "variety",
+  "rationale": "A less common use of 'since' as a reason subordinator, against its time meaning.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "I have studied French since I was ten.",
+   "Since the summer holidays, the park has been closed.",
+   "Since you are already here, you can help us set up.",
+   "He has not called since Monday."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "0": "wrong_relationship",
+   "1": "wrong_relationship",
+   "3": "wrong_relationship"
+  },
+  "addresses": [
+   "wrong_relationship"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.com.01",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:punctuation",
+  "b": 5.25,
+  "a": 1.1,
+  "prompt": "Which sentence is punctuated correctly?",
+  "step": "nonessential",
+  "rationale": "A pair of commas around a non-essential phrase (an appositive).",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Dr Rao our family doctor, lives next door.",
+   "Dr Rao, our family doctor, lives next door.",
+   "Dr Rao our, family doctor lives next door.",
+   "Dr Rao, our family doctor lives next door."
+  ],
+  "answer": 1
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.com.02",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "choice:punctuation",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "Which sentence needs a comma before the joining word, and has it?",
+  "step": "before_conjunction",
+  "rationale": "A comma before 'but' joining two full clauses; the distractors put a comma before words or phrases.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "I wanted to go to the fair, but my parents were busy.",
+   "She bought apples, and oranges.",
+   "He was tired but, happy.",
+   "We visited the fort, and the museum."
+  ],
+  "answer": 0,
+  "addresses": [
+   "comma_splice"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.com.03",
+  "version": 1,
+  "target": "EN.GRM.PUN.commas",
+  "format": "multi:comma_places",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Choose the two places where a comma is needed: \"The Taj Mahal which was built in the seventeenth century attracts millions of visitors every year.\"",
+  "step": "nonessential",
+  "rationale": "A pair of commas around a non-defining clause about something unique; both are needed.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "after 'Mahal'",
+   "after 'built'",
+   "after 'century'",
+   "after 'attracts'",
+   "after 'visitors'"
+  ],
+  "answer_set": [
+   0,
+   2
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.wch.01",
+  "version": 1,
+  "target": "EN.VOC.USE.word_choice",
+  "format": "choice:word_choice",
+  "b": 5.25,
+  "a": 1.1,
+  "prompt": "Which sentence is the most precise for a school notice?",
+  "step": "precise_purpose",
+  "rationale": "Precise time and place suit a notice; distractors are vague.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The meeting is sometime next week.",
+   "The meeting is on Tuesday at 3 p.m. in Room 12.",
+   "The meeting is soon, in a room.",
+   "There will be a meeting, probably."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "vague_word",
+   "2": "vague_word",
+   "3": "vague_word"
+  },
+  "addresses": [
+   "vague_word"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.wch.02",
+  "version": 1,
+  "target": "EN.VOC.USE.word_choice",
+  "format": "choice:word_choice",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Choose the most precise verb for a news report: The river ___ its banks after three days of rain.",
+  "step": "precise_purpose",
+  "rationale": "A precise verb (overflowed) against vague, general verbs.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "overflowed",
+   "got",
+   "went over",
+   "did"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "vague_word",
+   "3": "vague_word",
+   "1": "vague_word"
+  },
+  "addresses": [
+   "vague_word"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.wch.03",
+  "version": 1,
+  "target": "EN.VOC.USE.word_choice",
+  "format": "choice:word_choice",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "Which word best replaces 'nice' in a book review? \"The ending was nice.\"",
+  "step": "precise_purpose",
+  "rationale": "A precise adjective that says how the ending affected the reader.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "good stuff",
+   "okay",
+   "thing",
+   "moving"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "2": "vague_word",
+   "0": "vague_word",
+   "1": "vague_word"
+  },
+  "addresses": [
+   "vague_word"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.wch.07",
+  "version": 1,
+  "target": "EN.VOC.USE.word_choice",
+  "format": "typed:first_letter",
+  "b": 6.5,
+  "a": 1.3,
+  "prompt": "Write a more precise word for 'said' that shows the speaker was very quiet. It starts with w: \"Don't wake the baby,\" she w_______.",
+  "step": "precise_purpose",
+  "rationale": "Recalls a precise speech verb that conveys manner.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "whispered"
+  ],
+  "wrong": {
+   "said": "vague_word"
+  },
+  "addresses": [
+   "vague_word"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.wch.04",
+  "version": 1,
+  "target": "EN.VOC.USE.word_choice",
+  "format": "choice:word_choice",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "In which sentence is the word in capitals used correctly?",
+  "step": "precise_purpose",
+  "rationale": "Judges whether a word fits its context; the distractors misuse it.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The FRIENDLY mountain was covered in snow all year.",
+   "The rain was FRIENDLY on our picnic and ruined it.",
+   "The two teams had a FRIENDLY rivalry and shook hands after the match.",
+   "The soup was so FRIENDLY that I asked for more."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "3": "misused_advanced_word",
+   "0": "misused_advanced_word",
+   "1": "misused_advanced_word"
+  },
+  "addresses": [
+   "misused_advanced_word"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.wch.06",
+  "version": 1,
+  "target": "EN.VOC.USE.word_choice",
+  "format": "multi:word_choice",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Choose the two sentences where the word in capitals is used precisely and correctly.",
+  "step": "precise_purpose",
+  "rationale": "Precise use against words that contradict their context; both correct uses must be found.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The scientist made a CAREFUL measurement of the temperature.",
+   "The road was so ANCIENT that it was built last year.",
+   "The volunteers were GENEROUS with their time.",
+   "She ate a HUMBLE amount of rice, so she was very full.",
+   "The explanation was so VIVID that nobody could picture it."
+  ],
+  "answer_set": [
+   0,
+   2
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.wch.05",
+  "version": 1,
+  "target": "EN.VOC.USE.word_choice",
+  "format": "choice:word_choice",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Which sentence suits a formal letter to the principal?",
+  "step": "precise_purpose",
+  "rationale": "Formal wording that suits the purpose and reader; distractors are informal or exaggerated.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "We really want a new water cooler, it's super hot.",
+   "I am writing to request a new water cooler for our classroom.",
+   "Give us a water cooler, please, we're melting here.",
+   "Hey, can we get a cooler or something?"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "vague_word",
+   "2": "vague_word",
+   "3": "vague_word"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.col.01",
+  "version": 1,
+  "target": "EN.VOC.REL.collocations",
+  "format": "choice:collocation",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Choose the word that sounds natural: 'We had to drive slowly because of the ___ traffic.'",
+  "step": "adj_noun_adverb",
+  "rationale": "Adjective–noun collocation (heavy traffic).",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "big",
+   "heavy",
+   "strong",
+   "thick"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "word_by_word",
+   "2": "word_by_word",
+   "3": "word_by_word"
+  },
+  "addresses": [
+   "word_by_word"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.col.02",
+  "version": 1,
+  "target": "EN.VOC.REL.collocations",
+  "format": "choice:collocation",
+  "b": 5.25,
+  "a": 1.1,
+  "prompt": "Choose the word that sounds natural: 'Grandpa likes his tea very ___.'",
+  "step": "adj_noun_adverb",
+  "rationale": "strong tea, against near-synonyms that do not collocate.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "strong",
+   "hard",
+   "powerful",
+   "heavy"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "word_by_word",
+   "3": "word_by_word",
+   "1": "word_by_word"
+  },
+  "addresses": [
+   "word_by_word"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.col.03",
+  "version": 1,
+  "target": "EN.VOC.REL.collocations",
+  "format": "typed:cloze",
+  "b": 5.5,
+  "a": 1.3,
+  "prompt": "Write make or do: Please don't ___ a noise while the baby is sleeping.",
+  "step": "adj_noun_adverb",
+  "rationale": "make a noise, a fixed verb–noun collocation.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "make"
+  ],
+  "wrong": {
+   "do": "make_do_confusion"
+  },
+  "addresses": [
+   "make_do_confusion"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.col.04",
+  "version": 1,
+  "target": "EN.VOC.REL.collocations",
+  "format": "choice:collocation",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Choose the adverb that sounds natural: 'I am ___ sorry for being late.'",
+  "step": "adj_noun_adverb",
+  "rationale": "Adverb collocation (deeply sorry).",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "highly",
+   "strongly",
+   "heavily",
+   "deeply"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "word_by_word",
+   "1": "word_by_word",
+   "2": "word_by_word"
+  },
+  "addresses": [
+   "word_by_word"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.col.05",
+  "version": 1,
+  "target": "EN.VOC.REL.collocations",
+  "format": "choice:collocation",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "Which sentence sounds natural?",
+  "step": "adj_noun_adverb",
+  "rationale": "make an argument (also 'a strong argument'); distractors use verbs that do not collocate.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "She took a strong argument for longer lunch breaks.",
+   "She gave a strong argument for longer lunch breaks.",
+   "She made a strong argument for longer lunch breaks.",
+   "She did a strong argument for longer lunch breaks."
+  ],
+  "answer": 2,
+  "distractor_tags": {
+   "1": "word_by_word",
+   "3": "make_do_confusion",
+   "0": "word_by_word"
+  },
+  "addresses": [
+   "make_do_confusion"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.col.06",
+  "version": 1,
+  "target": "EN.VOC.REL.collocations",
+  "format": "multi:collocation",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Two of these sentences use a word combination that does not sound natural. Choose both.",
+  "step": "adj_noun_adverb",
+  "rationale": "Spots unnatural combinations among natural collocations; both must be found.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "It is highly unlikely to snow in Chennai.",
+   "We did a mistake in the last question.",
+   "There was heavy rain all night.",
+   "He has a big knowledge of cricket.",
+   "She takes great care of her plants."
+  ],
+  "answer_set": [
+   1,
+   3
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.col.07",
+  "version": 1,
+  "target": "EN.VOC.REL.collocations",
+  "format": "order:words",
+  "b": 6.25,
+  "a": 1.2,
+  "prompt": "Put the words in order to make a natural sentence.",
+  "step": "adj_noun_adverb",
+  "rationale": "Builds a sentence around the collocation 'deeply grateful for'.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "deeply",
+   "the",
+   "grateful",
+   "for",
+   "help",
+   "we",
+   "are"
+  ],
+  "answer_order": [
+   5,
+   6,
+   0,
+   2,
+   3,
+   1,
+   4
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.cnx.01",
+  "version": 1,
+  "target": "EN.SEN.COH.connectives",
+  "format": "choice:connective",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "Choose the connective that shows the exact link: 'Many birds visit the lake in winter. ___, flamingos arrive from as far as Gujarat.'",
+  "step": "exact_relationship",
+  "rationale": "An example connective, against result, contrast and concession.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "As a result",
+   "For instance",
+   "However",
+   "Despite this"
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "wrong_connective",
+   "2": "wrong_connective",
+   "3": "wrong_connective"
+  },
+  "addresses": [
+   "wrong_connective"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.cnx.02",
+  "version": 1,
+  "target": "EN.SEN.COH.connectives",
+  "format": "choice:connective",
+  "b": 5.25,
+  "a": 1.1,
+  "prompt": "Choose the connective that shows the exact link: 'The match was delayed by rain. ___, the crowd stayed until the end.'",
+  "step": "exact_relationship",
+  "rationale": "A concession connective: the crowd stayed although something discouraged it.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Despite this",
+   "Similarly",
+   "For example",
+   "Therefore"
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "2": "wrong_connective",
+   "3": "wrong_connective",
+   "1": "wrong_connective"
+  },
+  "addresses": [
+   "wrong_connective"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.cnx.03",
+  "version": 1,
+  "target": "EN.SEN.COH.connectives",
+  "format": "choice:connective",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Choose the connective that shows the exact link: 'Our school uses solar panels. ___, its electricity bill has fallen by half.'",
+  "step": "exact_relationship",
+  "rationale": "A result connective.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "In contrast",
+   "For instance",
+   "Meanwhile",
+   "As a result"
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "0": "wrong_connective",
+   "1": "wrong_connective",
+   "2": "wrong_connective"
+  },
+  "addresses": [
+   "wrong_connective"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.cnx.04",
+  "version": 1,
+  "target": "EN.SEN.COH.connectives",
+  "format": "choice:connective",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "Which connective does NOT fit? 'Plastic straws harm turtles. ___, many cafés now use paper straws.'",
+  "step": "exact_relationship",
+  "rationale": "Tells three result connectives from a concession that contradicts the logic.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Consequently",
+   "As a result",
+   "Nevertheless",
+   "Therefore"
+  ],
+  "answer": 2,
+  "addresses": [
+   "wrong_connective"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.cnx.05",
+  "version": 1,
+  "target": "EN.SEN.COH.connectives",
+  "format": "typed:first_letter",
+  "b": 5.75,
+  "a": 1.3,
+  "prompt": "Write the connective that adds a similar point. It starts with S: 'Cycling keeps you fit. S________, it causes no pollution.'",
+  "step": "exact_relationship",
+  "rationale": "Recalls an addition/similarity connective from its first letter and the link.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "answers": [
+   "similarly"
+  ],
+  "wrong": {
+   "however": "wrong_connective"
+  },
+  "addresses": [
+   "wrong_connective"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.cnx.06",
+  "version": 1,
+  "target": "EN.SEN.COH.connectives",
+  "format": "choice:connective",
+  "b": 6.0,
+  "a": 1.1,
+  "prompt": "Which sentence uses 'however' correctly?",
+  "step": "exact_relationship",
+  "rationale": "'However' for contrast, correctly placed and punctuated.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "I was hungry, however I ate a big lunch.",
+   "I wanted to come. However, I had a fever.",
+   "However I was tired so I slept.",
+   "I like mangoes, however, so I bought some."
+  ],
+  "answer": 1,
+  "distractor_tags": {
+   "0": "wrong_connective",
+   "2": "wrong_connective",
+   "3": "wrong_connective"
+  },
+  "addresses": [
+   "wrong_connective"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.cnx.07",
+  "version": 1,
+  "target": "EN.SEN.COH.connectives",
+  "format": "multi:connective",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Choose the two connectives that could start the second sentence: 'The new road is wider than the old one. ___, journeys to the city are now much shorter.'",
+  "step": "exact_relationship",
+  "rationale": "Two result connectives must be found; the others show different relationships.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "As a result",
+   "For example",
+   "Consequently",
+   "In contrast",
+   "Meanwhile"
+  ],
+  "answer_set": [
+   0,
+   2
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sqn.01",
+  "version": 1,
+  "target": "EN.WRT.ORG.sequencing",
+  "format": "order:sentences",
+  "b": 5.0,
+  "a": 1.2,
+  "prompt": "Put these sentences in the most logical order for instructions on planting a seed.",
+  "step": "logical_links",
+  "rationale": "Orders steps using the sequence words and the logic of the task.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Then cover the seed with a little soil.",
+   "First, fill a small pot with soil.",
+   "Finally, water it gently and keep it in the sun.",
+   "Next, press a seed into the soil."
+  ],
+  "answer_order": [
+   1,
+   3,
+   0,
+   2
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sqn.02",
+  "version": 1,
+  "target": "EN.WRT.ORG.sequencing",
+  "format": "order:sentences",
+  "b": 5.25,
+  "a": 1.2,
+  "prompt": "Put these sentences in the most logical order for a paragraph about a school garden.",
+  "step": "logical_links",
+  "rationale": "Orders a short account by time and cause, following the time phrases.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Since then, students have grown tomatoes and spinach.",
+   "Last year, our school turned an empty plot into a garden.",
+   "This year, we even sold vegetables at the school fair.",
+   "At first, the soil was hard and full of stones."
+  ],
+  "answer_order": [
+   1,
+   3,
+   0,
+   2
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sqn.03",
+  "version": 1,
+  "target": "EN.WRT.ORG.sequencing",
+  "format": "choice:paragraph_order",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "A paragraph argues that students should drink more water. Which sentence does NOT belong?",
+  "step": "logical_links",
+  "rationale": "Spots a sentence that breaks the logical line of an argument.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Many students feel tired because they drink too little.",
+   "My cousin has a blue water bottle.",
+   "Schools could add more drinking taps.",
+   "Water helps the brain to concentrate."
+  ],
+  "answer": 1,
+  "addresses": [
+   "jumps_between_ideas"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sqn.04",
+  "version": 1,
+  "target": "EN.WRT.ORG.sequencing",
+  "format": "choice:paragraph_order",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "Which sentence best fills the gap? 'Our town has too many cars. ___ Because of this, the air is often unhealthy to breathe.'",
+  "step": "logical_links",
+  "rationale": "Chooses the sentence that links the cause to the stated result.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "They release a lot of fumes into the air.",
+   "Some cars are red.",
+   "My father wants a new car.",
+   "Cars are made in many countries."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "3": "jumps_between_ideas",
+   "1": "jumps_between_ideas",
+   "2": "jumps_between_ideas"
+  },
+  "addresses": [
+   "jumps_between_ideas"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sqn.05",
+  "version": 1,
+  "target": "EN.WRT.ORG.sequencing",
+  "format": "order:sentences",
+  "b": 6.0,
+  "a": 1.2,
+  "prompt": "Put these sentences in the most logical order for a paragraph arguing for a longer lunch break.",
+  "step": "logical_links",
+  "rationale": "Orders an argument: situation, problem, further problem, conclusion.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "For this reason, the break should be extended to forty minutes.",
+   "Our lunch break lasts only twenty minutes.",
+   "In that time, many students cannot finish eating.",
+   "Some also have no time to play or rest."
+  ],
+  "answer_order": [
+   1,
+   2,
+   3,
+   0
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sqn.06",
+  "version": 1,
+  "target": "EN.WRT.ORG.sequencing",
+  "format": "choice:paragraph_order",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Which is the best final sentence for this paragraph? 'Reading every day improves vocabulary. It also helps us understand other people's lives. Most importantly, it can be relaxing after a busy day.'",
+  "step": "logical_links",
+  "rationale": "A concluding sentence that ties the listed points together.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "My favourite book is about a detective.",
+   "However, reading is difficult.",
+   "Some books are very long.",
+   "For all these reasons, reading daily is worth the time."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "2": "jumps_between_ideas",
+   "0": "jumps_between_ideas",
+   "1": "jumps_between_ideas"
+  },
+  "addresses": [
+   "jumps_between_ideas"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.sqn.07",
+  "version": 1,
+  "target": "EN.WRT.ORG.sequencing",
+  "format": "order:sentences",
+  "b": 6.25,
+  "a": 1.2,
+  "prompt": "Put these sentences in the most logical order for a paragraph comparing trains and buses.",
+  "step": "logical_links",
+  "rationale": "Orders a comparison: one side, its second point, the other side, a balanced conclusion.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Buses, however, can reach small villages.",
+   "Trains are faster over long distances.",
+   "Each, therefore, suits a different kind of journey.",
+   "They are also more comfortable for sleeping."
+  ],
+  "answer_order": [
+   1,
+   3,
+   0,
+   2
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.par.01",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "multi:paragraph_breaks",
+  "b": 5.0,
+  "a": 1.1,
+  "prompt": "This text should have three paragraphs. Choose the two places where a new paragraph should begin. (1) Bamboo is a fast-growing grass. (2) Some kinds grow almost a metre in a day. (3) People use bamboo in many ways. (4) It is used to build houses and make furniture. (5) However, bamboo forests need protection. (6) Too much cutting can harm the animals that live there.",
+  "step": "unity",
+  "rationale": "Breaks follow changes of focus: what bamboo is, its uses, the need to protect it.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "before sentence 2",
+   "before sentence 3",
+   "before sentence 4",
+   "before sentence 5",
+   "before sentence 6"
+  ],
+  "answer_set": [
+   1,
+   3
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.par.02",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 5.25,
+  "a": 1.1,
+  "prompt": "A paragraph about the school sports day contains these sentences. Which one should start a new paragraph?",
+  "step": "unity",
+  "rationale": "Spots the sentence whose focus is a different topic.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The relay was the most exciting event.",
+   "Next month, our school will hold a book fair.",
+   "Parents cheered from the stands.",
+   "The races began at nine."
+  ],
+  "answer": 1,
+  "addresses": [
+   "no_paragraphs"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.par.03",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 5.5,
+  "a": 1.1,
+  "prompt": "Which is the best topic sentence for a paragraph about the benefits of trees in cities?",
+  "step": "unity",
+  "rationale": "A topic sentence that announces the paragraph's single focus.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Trees in cities bring several important benefits.",
+   "I climbed a tree yesterday.",
+   "Some cities are very large.",
+   "Trees are tall."
+  ],
+  "answer": 0,
+  "distractor_tags": {
+   "3": "no_paragraphs",
+   "1": "no_paragraphs",
+   "2": "no_paragraphs"
+  }
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.par.04",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_break",
+  "b": 5.75,
+  "a": 1.1,
+  "prompt": "A student writes every sentence of her essay as a separate paragraph. What is the best advice?",
+  "step": "unity",
+  "rationale": "Recognises one-sentence paragraphs and the remedy: one focus per paragraph.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "Write one long paragraph for the whole essay.",
+   "Start every paragraph with 'Firstly'.",
+   "Use longer words.",
+   "Group sentences on the same point into one paragraph."
+  ],
+  "answer": 3,
+  "distractor_tags": {
+   "2": "one_sentence_paragraphs",
+   "0": "no_paragraphs",
+   "1": "one_sentence_paragraphs"
+  },
+  "addresses": [
+   "one_sentence_paragraphs"
+  ]
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.par.05",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_order",
+  "b": 6.25,
+  "a": 1.1,
+  "prompt": "Paragraph 1 of an essay describes the problem of litter in the park. Which sentence best begins paragraph 2, about solutions?",
+  "step": "linking",
+  "rationale": "A linking sentence that moves from the problem to solutions.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "In conclusion, the park is nice.",
+   "The park has a small pond.",
+   "There are, however, simple ways to keep the park clean.",
+   "Litter is everywhere in the park."
+  ],
+  "answer": 2
+ },
+ {
+  "kind": "code",
+  "id": "sup.g8.par.06",
+  "version": 1,
+  "target": "EN.WRT.ORG.paragraphing",
+  "format": "choice:paragraph_order",
+  "b": 6.5,
+  "a": 1.1,
+  "prompt": "Which sentence best links a paragraph about the history of the school library to one about its future plans?",
+  "step": "linking",
+  "rationale": "A transition that summarises the previous paragraph and points to the next.",
+  "difficulty_source": "expert_estimate",
+  "review": "draft-unreviewed",
+  "evidence_status": "provisional",
+  "options": [
+   "The library has thousands of books.",
+   "Having grown so much in fifty years, the library now plans its next step.",
+   "Books are important.",
+   "The first librarian was strict."
+  ],
+  "answer": 1
+ }
+]

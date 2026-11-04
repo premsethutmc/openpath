@@ -1,0 +1,189 @@
+{
+ "natural-text|algebra": {
+  "n": 356,
+  "verified": 109,
+  "with_obligations": 356
+ },
+ "natural-text|symbolic": {
+  "n": 84,
+  "verified": 51,
+  "with_obligations": 84
+ },
+ "natural-text|function": {
+  "n": 159,
+  "verified": 98,
+  "with_obligations": 159
+ },
+ "natural-text|calculus": {
+  "n": 438,
+  "verified": 264,
+  "with_obligations": 438
+ },
+ "natural-text|geometry": {
+  "n": 146,
+  "with_obligations": 146,
+  "verified": 65
+ },
+ "natural-text|linear-algebra": {
+  "n": 163,
+  "verified": 120,
+  "with_obligations": 163
+ },
+ "natural-text|probability-statistics": {
+  "n": 142,
+  "verified": 101,
+  "with_obligations": 142
+ },
+ "natural-text|complex-polynomial": {
+  "n": 111,
+  "verified": 55,
+  "with_obligations": 111
+ },
+ "natural-text|d3-cross-domain": {
+  "n": 100,
+  "with_obligations": 100
+ },
+ "typed-steps|d3-cross-domain": {
+  "n": 238,
+  "verified": 67,
+  "with_obligations": 238
+ },
+ "typed-steps|symbolic": {
+  "n": 1086,
+  "with_obligations": 1086,
+  "verified": 619
+ },
+ "text-lines|arithmetic": {
+  "n": 49,
+  "verified": 31,
+  "with_obligations": 49
+ },
+ "typed-steps|arithmetic": {
+  "n": 2,
+  "with_obligations": 2
+ },
+ "text-lines|algebra": {
+  "n": 72,
+  "verified": 53,
+  "with_obligations": 72
+ },
+ "typed-steps|algebra": {
+  "n": 3,
+  "with_obligations": 3
+ },
+ "typed-steps|geometry": {
+  "n": 53,
+  "verified": 20,
+  "with_obligations": 53
+ },
+ "typed-steps|mixed": {
+  "n": 564,
+  "verified": 377,
+  "with_obligations": 564
+ },
+ "typed-steps|trigonometry": {
+  "n": 154,
+  "verified": 113,
+  "with_obligations": 154
+ },
+ "text-lines|trigonometry": {
+  "n": 7,
+  "with_obligations": 7
+ },
+ "typed-steps|exponential-log": {
+  "n": 122,
+  "verified": 91,
+  "with_obligations": 122
+ },
+ "text-lines|exponential-log": {
+  "n": 6,
+  "with_obligations": 6
+ },
+ "typed-steps|sequence-series": {
+  "n": 114,
+  "verified": 90,
+  "with_obligations": 114
+ },
+ "text-lines|sequence-series": {
+  "n": 7,
+  "with_obligations": 7
+ },
+ "typed-steps|radical": {
+  "n": 115,
+  "verified": 90,
+  "with_obligations": 115
+ },
+ "text-lines|radical": {
+  "n": 6,
+  "with_obligations": 6
+ },
+ "typed-steps|m2-cross-domain": {
+  "n": 730,
+  "verified": 385,
+  "with_obligations": 730
+ },
+ "typed-steps|inequality": {
+  "n": 136,
+  "verified": 116,
+  "with_obligations": 136
+ },
+ "text-lines|inequality": {
+  "n": 10,
+  "with_obligations": 10
+ },
+ "typed-steps|quadratic": {
+  "n": 131,
+  "verified": 116,
+  "with_obligations": 131
+ },
+ "text-lines|quadratic": {
+  "n": 10,
+  "with_obligations": 10
+ },
+ "typed-steps|function": {
+  "n": 116,
+  "verified": 101,
+  "with_obligations": 116
+ },
+ "text-lines|function": {
+  "n": 5,
+  "with_obligations": 5
+ },
+ "typed-steps|coordinate": {
+  "n": 115,
+  "verified": 100,
+  "with_obligations": 115
+ },
+ "text-lines|coordinate": {
+  "n": 5,
+  "with_obligations": 5
+ },
+ "typed-steps|calculus": {
+  "n": 1083,
+  "verified": 777,
+  "with_obligations": 1083
+ },
+ "text-lines|symbolic": {
+  "n": 54,
+  "with_obligations": 54
+ },
+ "text-lines|calculus": {
+  "n": 34,
+  "with_obligations": 34
+ },
+ "typed-steps|probability-statistics": {
+  "n": 403,
+  "verified": 212,
+  "with_obligations": 403
+ },
+ "typed-steps|complex-polynomial": {
+  "n": 408,
+  "verified": 221,
+  "with_obligations": 408
+ },
+ "typed-steps|linear-algebra": {
+  "n": 400,
+  "verified": 200,
+  "with_obligations": 400
+ }
+}

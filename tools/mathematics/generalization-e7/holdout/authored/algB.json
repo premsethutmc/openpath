@@ -1,0 +1,1126 @@
+[
+ {
+  "id": "h7-algB-001",
+  "cat": "algebra-expressions",
+  "tags": [
+   "expand"
+  ],
+  "p": {
+   "alg": "Expand and simplify (x+3)^2 - (x-3)^2"
+  },
+  "w": "(x+3)^2-(x-3)^2 = (x^2+6x+9)-(x^2-6x+9)\n= 12x",
+  "exp": "verified",
+  "why": "Direct expansion; the x^2 and 9 terms cancel leaving 12x."
+ },
+ {
+  "id": "h7-algB-002",
+  "cat": "algebra-expressions",
+  "tags": [
+   "different-method"
+  ],
+  "p": {
+   "alg": "Evaluate 1001^2 - 999^2 without a calculator"
+  },
+  "w": "1001^2 - 999^2 = (1001-999)(1001+999)\n= 2 * 2000\n= 4000",
+  "exp": "verified",
+  "why": "Difference of squares gives 2*2000=4000."
+ },
+ {
+  "id": "h7-algB-003",
+  "cat": "algebra-expressions",
+  "tags": [
+   "factor",
+   "concise"
+  ],
+  "p": {
+   "alg": "Factor x^3 - 8"
+  },
+  "w": "x^3 - 8 = (x-2)(x^2+2x+4)",
+  "exp": "verified",
+  "why": "Difference of cubes; one-line correct factorisation, quadratic factor irreducible."
+ },
+ {
+  "id": "h7-algB-004",
+  "cat": "algebra-expressions",
+  "tags": [
+   "system",
+   "concise"
+  ],
+  "p": {
+   "alg": "Solve the system x+y=7, x-y=1"
+  },
+  "w": "x = 4, y = 3",
+  "exp": "verified",
+  "why": "Adding gives 2x=8 so x=4, y=3; concise correct answer."
+ },
+ {
+  "id": "h7-algB-005",
+  "cat": "algebra-expressions",
+  "tags": [
+   "system-3x3"
+  ],
+  "p": {
+   "alg": "Solve the system x+y+z=6, 2x-y+z=3, x+2y-z=2"
+  },
+  "w": "Add equations 2 and 3: 3x+y=5\nAdd equations 1 and 3: 2x+3y=8\nFrom the first, y=5-3x; then 2x+15-9x=8, so x=1\nHence y=2 and z=6-1-2=3",
+  "exp": "verified",
+  "why": "Elimination is valid and (1,2,3) satisfies all three equations."
+ },
+ {
+  "id": "h7-algB-006",
+  "cat": "algebra-expressions",
+  "tags": [
+   "rational",
+   "domain"
+  ],
+  "p": {
+   "alg": "Simplify (x^2-4)/(x^2-x-2) and state the values of x that must be excluded"
+  },
+  "w": "(x^2-4)/(x^2-x-2) = (x-2)(x+2)/((x-2)(x+1))\n= (x+2)/(x+1), valid for x ≠ 2 and x ≠ -1",
+  "exp": "verified",
+  "why": "Cancellation of x-2 is legitimate with x≠2 stated; denominator zeros are 2 and -1."
+ },
+ {
+  "id": "h7-algB-007",
+  "cat": "algebra-expressions",
+  "tags": [
+   "log",
+   "conditional"
+  ],
+  "p": {
+   "alg": "Show that log2(8x) = 3 + log2(x) for x > 0"
+  },
+  "w": "Since x > 0, log2(8x) = log2(8) + log2(x)\n= 3 + log2(x)",
+  "exp": "verified",
+  "why": "Product rule for logs valid for positive arguments and log2 8 = 3."
+ },
+ {
+  "id": "h7-algB-008",
+  "cat": "algebra-expressions",
+  "tags": [
+   "exponent"
+  ],
+  "p": {
+   "alg": "Simplify (2^(n+3) - 2^n)/7"
+  },
+  "w": "2^(n+3) = 8 * 2^n\n(8*2^n - 2^n)/7 = 7*2^n/7\n= 2^n",
+  "exp": "verified",
+  "why": "Factor 2^n out: 2^n(8-1)/7 = 2^n."
+ },
+ {
+  "id": "h7-algB-009",
+  "cat": "algebra-expressions",
+  "tags": [
+   "surd"
+  ],
+  "p": {
+   "alg": "Rationalise the denominator of 1/(sqrt(5)-sqrt(3))"
+  },
+  "w": "1/(√5−√3) × (√5+√3)/(√5+√3)\n= (√5+√3)/(5−3)\n= (√5+√3)/2",
+  "exp": "verified",
+  "why": "Multiplying by the conjugate gives difference of squares 5-3=2."
+ },
+ {
+  "id": "h7-algB-010",
+  "cat": "algebra-expressions",
+  "tags": [
+   "surd"
+  ],
+  "p": {
+   "alg": "Simplify sqrt(12) + sqrt(27)"
+  },
+  "w": "√12 = 2√3 and √27 = 3√3\nso the sum is 5√3",
+  "exp": "verified",
+  "why": "Extract square factors 4 and 9; 2√3+3√3=5√3."
+ },
+ {
+  "id": "h7-algB-011",
+  "cat": "algebra-expressions",
+  "tags": [
+   "extraneous"
+  ],
+  "p": {
+   "alg": "Solve sqrt(x+6) = x"
+  },
+  "w": "Square both sides: x+6 = x^2\n(x-3)(x+2) = 0, so x = 3 or x = -2\nCheck x=3: √9 = 3, ok. Check x=-2: √4 = 2 ≠ -2, reject\nTherefore x = 3",
+  "exp": "verified",
+  "why": "Squaring introduces x=-2 which is checked and rejected; x=3 satisfies the original."
+ },
+ {
+  "id": "h7-algB-012",
+  "cat": "algebra-expressions",
+  "tags": [
+   "conditional"
+  ],
+  "p": {
+   "alg": "Assume x > 0. Simplify sqrt(x^2)/x"
+  },
+  "w": "Since x > 0, sqrt(x^2) = x\nhence sqrt(x^2)/x = 1",
+  "exp": "verified",
+  "why": "For positive x, sqrt(x^2)=|x|=x, so ratio is 1."
+ },
+ {
+  "id": "h7-algB-013",
+  "cat": "algebra-expressions",
+  "tags": [
+   "factor"
+  ],
+  "p": {
+   "alg": "Factor 6x^2 + x - 12"
+  },
+  "w": "6x^2 + x - 12 = 6x^2 - 8x + 9x - 12\n= 2x(3x-4) + 3(3x-4)\n= (2x+3)(3x-4)",
+  "exp": "verified",
+  "why": "Splitting x as -8x+9x (product -72) then grouping gives correct factors."
+ },
+ {
+  "id": "h7-algB-014",
+  "cat": "algebra-expressions",
+  "tags": [
+   "system",
+   "inconsistent"
+  ],
+  "p": {
+   "alg": "Solve the system 2x+4y=6, x+2y=5"
+  },
+  "w": "Multiply the second equation by 2: 2x+4y = 10\nBut the first equation says 2x+4y = 6, so 6 = 10, a contradiction\nThe system has no solution",
+  "exp": "verified",
+  "why": "Parallel distinct lines: the two equations are incompatible, so no solution."
+ },
+ {
+  "id": "h7-algB-015",
+  "cat": "algebra-expressions",
+  "tags": [
+   "system",
+   "dependent-equations"
+  ],
+  "p": {
+   "alg": "Solve the system 3x-6y=9, x-2y=3"
+  },
+  "w": "The first equation is 3 times the second\nso there is only one independent equation\nSolutions: x = 3+2y for any real y",
+  "exp": "verified",
+  "why": "Dependent equations describe the same line; infinitely many solutions."
+ },
+ {
+  "id": "h7-algB-016",
+  "cat": "algebra-expressions",
+  "tags": [
+   "word"
+  ],
+  "p": {
+   "alg": "The sum of two numbers is 20 and their difference is 6. Find the numbers."
+  },
+  "w": "x+y = 20, x-y = 6\nAdding: 2x = 26, so x = 13\nThen y = 7",
+  "exp": "verified",
+  "why": "13+7=20 and 13-7=6."
+ },
+ {
+  "id": "h7-algB-017",
+  "cat": "algebra-expressions",
+  "tags": [
+   "word",
+   "different-method"
+  ],
+  "p": {
+   "alg": "A rectangle's length is 3 more than its width and its perimeter is 26. Find the width."
+  },
+  "w": "Half the perimeter is 13, so w + l = 13\nl = w+3, so 2w+3 = 13\nw = 5",
+  "exp": "verified",
+  "why": "Different but valid route via semi-perimeter; width 5, length 8, perimeter 26."
+ },
+ {
+  "id": "h7-algB-018",
+  "cat": "algebra-expressions",
+  "tags": [
+   "word"
+  ],
+  "p": {
+   "alg": "Anna is twice as old as Ben. In 5 years the sum of their ages will be 40. How old is Ben now?"
+  },
+  "w": "Let Ben's age be b, so Anna is 2b\n(2b+5) + (b+5) = 40\n3b = 30\nb = 10",
+  "exp": "verified",
+  "why": "Linear equation 3b+10=40 gives b=10; check 25+15=40."
+ },
+ {
+  "id": "h7-algB-019",
+  "cat": "algebra-expressions",
+  "tags": [
+   "conditional",
+   "cases"
+  ],
+  "p": {
+   "alg": "Solve |x-2| = 3"
+  },
+  "w": "Case x ≥ 2: x-2 = 3, so x = 5 (valid)\nCase x < 2: -(x-2) = 3, so x = -1 (valid)\nSo x = 5 or x = -1",
+  "exp": "verified",
+  "why": "Both cases handled and each root satisfies its case condition."
+ },
+ {
+  "id": "h7-algB-020",
+  "cat": "algebra-expressions",
+  "tags": [
+   "conditional"
+  ],
+  "p": {
+   "alg": "Suppose a and b are positive reals with a^2 = b^2. Show that a = b."
+  },
+  "w": "a^2 - b^2 = 0, so (a-b)(a+b) = 0\nSince a, b > 0, a+b > 0\nhence a-b = 0, i.e. a = b",
+  "exp": "verified",
+  "why": "Zero product with a+b>0 forces a-b=0."
+ },
+ {
+  "id": "h7-algB-021",
+  "cat": "algebra-expressions",
+  "tags": [
+   "conditional",
+   "cases",
+   "inequality"
+  ],
+  "p": {
+   "alg": "Solve 3/(x-1) > 2"
+  },
+  "w": "Case x > 1: multiply by x-1 > 0 to get 3 > 2(x-1), so x < 5/2, giving 1 < x < 5/2\nCase x < 1: multiplying by x-1 < 0 flips the inequality: 3 < 2(x-1), so x > 5/2, which contradicts x < 1\nSolution: 1 < x < 5/2",
+  "exp": "verified",
+  "why": "Sign of the multiplier handled by cases; only 1<x<5/2 survives."
+ },
+ {
+  "id": "h7-algB-022",
+  "cat": "algebra-expressions",
+  "tags": [
+   "log",
+   "concise"
+  ],
+  "p": {
+   "alg": "Simplify ln(x^2) for x > 0"
+  },
+  "w": "ln(x^2) = 2 ln(x), by the power rule (valid as x > 0)",
+  "exp": "verified",
+  "why": "Power rule for logs with positive argument; stated condition."
+ },
+ {
+  "id": "h7-algB-023",
+  "cat": "algebra-expressions",
+  "tags": [
+   "rational",
+   "extraneous"
+  ],
+  "p": {
+   "alg": "Solve (x^2-9)/(x-3) = 6"
+  },
+  "w": "We need x ≠ 3. For x ≠ 3 the left side is x+3, so x+3 = 6 and x = 3\nThis contradicts x ≠ 3, so there is no solution",
+  "exp": "verified",
+  "why": "The only candidate x=3 is excluded from the domain, so no solution."
+ },
+ {
+  "id": "h7-algB-024",
+  "cat": "algebra-expressions",
+  "tags": [
+   "log",
+   "domain"
+  ],
+  "p": {
+   "alg": "Solve ln(x) + ln(x-2) = ln(3)"
+  },
+  "w": "Domain: x > 2\nln(x(x-2)) = ln 3, so x^2 - 2x - 3 = 0, (x-3)(x+1) = 0\nx = 3 or x = -1; but x = -1 is outside the domain\nSo x = 3",
+  "exp": "verified",
+  "why": "Domain x>2 rules out x=-1; x=3 satisfies the equation."
+ },
+ {
+  "id": "h7-algB-025",
+  "cat": "algebra-expressions",
+  "tags": [
+   "factor"
+  ],
+  "p": {
+   "alg": "Solve (x-2)(x+1) = 4(x-2)"
+  },
+  "w": "(x-2)(x+1) - 4(x-2) = 0\n(x-2)(x+1-4) = 0\n(x-2)(x-3) = 0\nx = 2 or x = 3",
+  "exp": "verified",
+  "why": "Factoring out x-2 instead of dividing keeps the root x=2."
+ },
+ {
+  "id": "h7-algB-026",
+  "cat": "algebra-expressions",
+  "tags": [
+   "system",
+   "concise"
+  ],
+  "p": {
+   "alg": "Solve 2x+y=5, x-y=1"
+  },
+  "w": "x = 2, y = 1",
+  "exp": "verified",
+  "why": "Adding gives 3x=6; concise correct solution satisfying both equations."
+ },
+ {
+  "id": "h7-algB-027",
+  "cat": "algebra-expressions",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "alg": "Solve 2x + 3 = 11"
+  },
+  "w": "2x = 8\nx = 4\n(Aside: 3^2 = 9.)",
+  "exp": "verified",
+  "why": "Correct solution; the aside 3^2=9 is true and harmless."
+ },
+ {
+  "id": "h7-algB-028",
+  "cat": "algebra-expressions",
+  "tags": [
+   "side-claim",
+   "exponent"
+  ],
+  "p": {
+   "alg": "Simplify (a^2 b)^3 / (ab)^2"
+  },
+  "w": "(a^2 b)^3 = a^6 b^3 and (ab)^2 = a^2 b^2\nso the quotient is a^4 b\n(For reference, 2^10 = 1024.)",
+  "exp": "verified",
+  "why": "Exponent laws give a^4 b (a,b nonzero implied by the denominator); extra true remark is harmless."
+ },
+ {
+  "id": "h7-algB-029",
+  "cat": "algebra-expressions",
+  "tags": [
+   "rational"
+  ],
+  "p": {
+   "alg": "Simplify 1/(1 + 1/x), where x ≠ 0 and x ≠ -1"
+  },
+  "w": "1 + 1/x = (x+1)/x\nso 1/(1+1/x) = x/(x+1)",
+  "exp": "verified",
+  "why": "Compound fraction inversion; restrictions given in the statement."
+ },
+ {
+  "id": "h7-algB-030",
+  "cat": "algebra-expressions",
+  "tags": [
+   "concise"
+  ],
+  "p": {
+   "alg": "Write x^2 + 6x + 2 in the form (x+p)^2 + q"
+  },
+  "w": "x^2+6x+2 = (x+3)^2 - 7",
+  "exp": "verified",
+  "why": "(x+3)^2 = x^2+6x+9, so subtracting 7 recovers the constant 2."
+ },
+ {
+  "id": "h7-algB-031",
+  "cat": "algebra-expressions",
+  "tags": [
+   "different-method"
+  ],
+  "p": {
+   "alg": "Solve x^2 - 5x + 6 = 0"
+  },
+  "w": "(x - 5/2)^2 = 1/4\nx - 5/2 = ±1/2\nx = 3 or x = 2",
+  "exp": "verified",
+  "why": "Completing the square is a valid alternative to factoring; roots 2 and 3."
+ },
+ {
+  "id": "h7-algB-032",
+  "cat": "algebra-expressions",
+  "tags": [
+   "conditional"
+  ],
+  "p": {
+   "alg": "Suppose x > 0 and x^2 = 49. Find x."
+  },
+  "w": "x^2 - 49 = 0, so (x-7)(x+7) = 0, hence x = 7 or x = -7\nSince x > 0, x = 7",
+  "exp": "verified",
+  "why": "Positivity condition selects x=7."
+ },
+ {
+  "id": "h7-algB-033",
+  "cat": "algebra-expressions",
+  "tags": [
+   "expand"
+  ],
+  "p": {
+   "alg": "Expand (x+4)^2"
+  },
+  "w": "(x+4)^2 = x^2 + 16",
+  "exp": "invalid",
+  "why": "Omits cross term 8x; correct expansion is x^2+8x+16."
+ },
+ {
+  "id": "h7-algB-034",
+  "cat": "algebra-expressions",
+  "tags": [
+   "forged",
+   "right-answer-wrong-step"
+  ],
+  "p": {
+   "alg": "Solve x^2 - 5x + 6 = 0"
+  },
+  "w": "(x-2)(x-3) = x^2 - 6x + 5\nso x^2 - 5x + 6 = 0 gives x = 2 or x = 3",
+  "exp": "invalid",
+  "why": "The first line is false ((x-2)(x-3)=x^2-5x+6); correct roots reached from a forged identity."
+ },
+ {
+  "id": "h7-algB-035",
+  "cat": "algebra-expressions",
+  "tags": [
+   "log"
+  ],
+  "p": {
+   "alg": "Simplify log2(16) - log2(4)"
+  },
+  "w": "log2(16) - log2(4) = log2(16-4)\n= log2(12)",
+  "exp": "invalid",
+  "why": "Difference of logs is log of the quotient, not difference; correct value is 2."
+ },
+ {
+  "id": "h7-algB-036",
+  "cat": "algebra-expressions",
+  "tags": [
+   "exponent"
+  ],
+  "p": {
+   "alg": "Simplify (3^4)^2 / 3^5"
+  },
+  "w": "(3^4)^2 = 3^6\n3^6 / 3^5 = 3",
+  "exp": "invalid",
+  "why": "(3^4)^2=3^8 not 3^6; answer should be 27."
+ },
+ {
+  "id": "h7-algB-037",
+  "cat": "algebra-expressions",
+  "tags": [
+   "expand",
+   "wrong-rule"
+  ],
+  "p": {
+   "alg": "Expand (x+1)^3"
+  },
+  "w": "(x+1)^3 = x^3 + 1",
+  "exp": "invalid",
+  "why": "Missing 3x^2+3x terms; (a+b)^3 is not a^3+b^3."
+ },
+ {
+  "id": "h7-algB-038",
+  "cat": "algebra-expressions",
+  "tags": [
+   "sign"
+  ],
+  "p": {
+   "alg": "Expand -(2x-3)(x+1)"
+  },
+  "w": "-(2x-3)(x+1) = -(2x^2 - x - 3)\n= -2x^2 - x + 3",
+  "exp": "invalid",
+  "why": "Negating the bracket should give -2x^2 + x + 3; sign slip on the x term."
+ },
+ {
+  "id": "h7-algB-039",
+  "cat": "algebra-expressions",
+  "tags": [
+   "system-3x3",
+   "coincidence"
+  ],
+  "p": {
+   "alg": "Solve x+y+z=6, x-y+z=2, x+y-z=0"
+  },
+  "w": "Try x=2, y=2, z=2\nCheck eq1: 2+2+2 = 6, ok. Check eq2: 2-2+2 = 2, ok\nSo the solution is x=y=z=2",
+  "exp": "invalid",
+  "why": "Third equation fails (2+2-2=2≠0); true solution is (1,2,3)."
+ },
+ {
+  "id": "h7-algB-040",
+  "cat": "algebra-expressions",
+  "tags": [
+   "rational",
+   "cancel"
+  ],
+  "p": {
+   "alg": "Simplify (2x+6)/2"
+  },
+  "w": "(2x+6)/2 = x + 6",
+  "exp": "invalid",
+  "why": "Cancel 2 must divide both terms: result is x+3."
+ },
+ {
+  "id": "h7-algB-041",
+  "cat": "algebra-expressions",
+  "tags": [
+   "surd",
+   "wrong-rule"
+  ],
+  "p": {
+   "alg": "Simplify sqrt(9+16)"
+  },
+  "w": "√(9+16) = √9 + √16\n= 3 + 4 = 7",
+  "exp": "invalid",
+  "why": "sqrt does not distribute over addition; sqrt(25)=5."
+ },
+ {
+  "id": "h7-algB-042",
+  "cat": "algebra-expressions",
+  "tags": [
+   "fraction"
+  ],
+  "p": {
+   "alg": "Compute 2/3 + 3/4"
+  },
+  "w": "2/3 + 3/4 = 5/7",
+  "exp": "invalid",
+  "why": "Added numerators and denominators; correct sum is 17/12."
+ },
+ {
+  "id": "h7-algB-043",
+  "cat": "algebra-expressions",
+  "tags": [
+   "complete-square"
+  ],
+  "p": {
+   "alg": "Write x^2 + 6x + 2 in the form (x+p)^2 + q"
+  },
+  "w": "x^2+6x+2 = (x+3)^2 + 2",
+  "exp": "invalid",
+  "why": "(x+3)^2 = x^2+6x+9 so constant must be -7, not +2."
+ },
+ {
+  "id": "h7-algB-044",
+  "cat": "algebra-expressions",
+  "tags": [
+   "inequality",
+   "sign"
+  ],
+  "p": {
+   "alg": "Solve -2x > 6"
+  },
+  "w": "-2x > 6\nx > -3",
+  "exp": "invalid",
+  "why": "Dividing by a negative flips the inequality: x < -3."
+ },
+ {
+  "id": "h7-algB-045",
+  "cat": "algebra-expressions",
+  "tags": [
+   "quadratic-formula"
+  ],
+  "p": {
+   "alg": "Solve x^2 - 3x - 4 = 0"
+  },
+  "w": "x = (3 ± √(9-16))/2\nso there are no real solutions",
+  "exp": "invalid",
+  "why": "Discriminant is 9+16=25, not 9-16; roots are 4 and -1."
+ },
+ {
+  "id": "h7-algB-046",
+  "cat": "algebra-expressions",
+  "tags": [
+   "dependent",
+   "system"
+  ],
+  "p": {
+   "alg": "Solve 2x+3y=12, x-y=1"
+  },
+  "w": "x = y - 1\n2(y-1) + 3y = 12\n5y = 14\ny = 14/5, x = 9/5",
+  "exp": "invalid",
+  "why": "First line is false (x=y+1); later lines follow from it but the answer is wrong (true: x=3,y=2)."
+ },
+ {
+  "id": "h7-algB-047",
+  "cat": "algebra-expressions",
+  "tags": [
+   "dependent"
+  ],
+  "p": {
+   "alg": "Solve x^2 - 4x + 4 = 0"
+  },
+  "w": "x^2 - 4x + 4 = (x-1)^2\nso (x-1)^2 = 0\nx = 1",
+  "exp": "invalid",
+  "why": "x^2-4x+4=(x-2)^2, so the first line is false and root should be 2."
+ },
+ {
+  "id": "h7-algB-048",
+  "cat": "algebra-expressions",
+  "tags": [
+   "dependent"
+  ],
+  "p": {
+   "alg": "Find (1+2+...+10)/5"
+  },
+  "w": "1 + 2 + ... + 10 = 56\n56/5 = 11.2",
+  "exp": "invalid",
+  "why": "The sum is 55 not 56, so the division line inherits a false premise; answer is 11."
+ },
+ {
+  "id": "h7-algB-049",
+  "cat": "algebra-expressions",
+  "tags": [
+   "domain"
+  ],
+  "p": {
+   "alg": "Simplify sqrt(x^2)/x for real x ≠ 0"
+  },
+  "w": "sqrt(x^2)/x = x/x = 1",
+  "exp": "invalid",
+  "why": "sqrt(x^2)=|x|, so result is -1 for x<0; the claimed identity is false in general.",
+  "alt": [
+   "missing-assumption"
+  ]
+ },
+ {
+  "id": "h7-algB-050",
+  "cat": "algebra-expressions",
+  "tags": [
+   "inequality",
+   "conditional"
+  ],
+  "p": {
+   "alg": "Solve 3/(x-1) > 2"
+  },
+  "w": "Multiply both sides by x-1: 3 > 2(x-1)\n3 > 2x - 2, so x < 5/2",
+  "exp": "invalid",
+  "why": "Multiplying by x-1 ignores its sign; stated answer x<5/2 includes x<1 where 3/(x-1) is negative.",
+  "alt": [
+   "missing-assumption"
+  ]
+ },
+ {
+  "id": "h7-algB-051",
+  "cat": "algebra-expressions",
+  "tags": [
+   "conditional",
+   "false-claim"
+  ],
+  "p": {
+   "alg": "Suppose a^2 = b^2 for real numbers a and b. Show that a = b."
+  },
+  "w": "a^2 = b^2\ntaking square roots, a = b",
+  "exp": "invalid",
+  "why": "Claim is false (a=1,b=-1); sqrt gives |a|=|b|."
+ },
+ {
+  "id": "h7-algB-052",
+  "cat": "algebra-expressions",
+  "tags": [
+   "word"
+  ],
+  "p": {
+   "alg": "A rectangle's length is 3 more than its width and its perimeter is 26. Find the width."
+  },
+  "w": "Let width w, length w+3\nPerimeter: 2w + 3 = 26\nw = 11.5",
+  "exp": "invalid",
+  "why": "Perimeter is 2(w + w+3)=4w+6; the equation 2w+3=26 is wrong (width is 5)."
+ },
+ {
+  "id": "h7-algB-053",
+  "cat": "algebra-expressions",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "alg": "Solve 3x - 1 = 8"
+  },
+  "w": "3x = 9\nx = 3\nAlso 7 * 8 = 54",
+  "exp": "invalid",
+  "why": "Solution is right but the irrelevant side line 7*8=54 is false (56)."
+ },
+ {
+  "id": "h7-algB-054",
+  "cat": "algebra-expressions",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "alg": "Solve x^2 = 9"
+  },
+  "w": "x = 3 or x = -3, since 3^3 = 9",
+  "exp": "invalid",
+  "why": "Answer correct but the justification 3^3=9 is false (27)."
+ },
+ {
+  "id": "h7-algB-055",
+  "cat": "algebra-expressions",
+  "tags": [
+   "expand"
+  ],
+  "p": {
+   "alg": "Expand and simplify (x+y)^2 - (x-y)^2"
+  },
+  "w": "(x+y)^2 - (x-y)^2 = x^2 + y^2 - x^2 - y^2\n= 0",
+  "exp": "invalid",
+  "why": "Expansions drop cross terms 2xy; correct result is 4xy."
+ },
+ {
+  "id": "h7-algB-056",
+  "cat": "algebra-expressions",
+  "tags": [
+   "dependent"
+  ],
+  "p": {
+   "alg": "Simplify (x+1)^2 - (x-1)^2"
+  },
+  "w": "(x+1)^2 = x^2 + 1\n(x-1)^2 = x^2 - 1\nso the difference is 2",
+  "exp": "invalid",
+  "why": "(x+1)^2 = x^2+2x+1 so first line false; correct difference is 4x."
+ },
+ {
+  "id": "h7-algB-057",
+  "cat": "algebra-expressions",
+  "tags": [
+   "system"
+  ],
+  "p": {
+   "alg": "Solve x+y=3, 2x+2y=6"
+  },
+  "w": "Subtract twice the first equation from the second: 0 = 0\nHence there is no solution",
+  "exp": "invalid",
+  "why": "0=0 means the equations are dependent, giving infinitely many solutions, not none."
+ },
+ {
+  "id": "h7-algB-058",
+  "cat": "algebra-expressions",
+  "tags": [
+   "log",
+   "wrong-rule"
+  ],
+  "p": {
+   "alg": "Solve log2(x) + log2(x-2) = 3"
+  },
+  "w": "log2(x) + log2(x-2) = log2(2x-2)\n2x - 2 = 8, so x = 5",
+  "exp": "invalid",
+  "why": "Sum of logs is log of the product x(x-2), not x+(x-2); true answer x=4."
+ },
+ {
+  "id": "h7-algB-059",
+  "cat": "algebra-expressions",
+  "tags": [
+   "rational",
+   "domain"
+  ],
+  "p": {
+   "alg": "Simplify (x^2-4)/(x^2-x-2), stating any values of x that are excluded"
+  },
+  "w": "(x^2-4)/(x^2-x-2) = (x-2)(x+2)/((x-2)(x+1))\n= (x+2)/(x+1)",
+  "exp": "missing-assumption",
+  "why": "Cancels x-2 and never states x≠2 (and x≠-1) as required."
+ },
+ {
+  "id": "h7-algB-060",
+  "cat": "algebra-expressions",
+  "tags": [
+   "division-by-zero"
+  ],
+  "p": {
+   "alg": "Solve x^2 = 5x"
+  },
+  "w": "Divide both sides by x: x = 5",
+  "exp": "missing-assumption",
+  "why": "Dividing by x discards the root x=0 without a case split."
+ },
+ {
+  "id": "h7-algB-061",
+  "cat": "algebra-expressions",
+  "tags": [
+   "extraneous"
+  ],
+  "p": {
+   "alg": "Solve sqrt(x+6) = x"
+  },
+  "w": "x + 6 = x^2\n(x-3)(x+2) = 0\nx = 3 or x = -2",
+  "exp": "missing-assumption",
+  "why": "Squaring can add extraneous roots; x=-2 is not checked and is wrong (sqrt 4 = 2)."
+ },
+ {
+  "id": "h7-algB-062",
+  "cat": "algebra-expressions",
+  "tags": [
+   "cases"
+  ],
+  "p": {
+   "alg": "Solve |x-2| = 3"
+  },
+  "w": "x - 2 = 3\nx = 5",
+  "exp": "missing-assumption",
+  "why": "Negative case x-2=-3 (x=-1) is dropped."
+ },
+ {
+  "id": "h7-algB-063",
+  "cat": "algebra-expressions",
+  "tags": [
+   "log",
+   "domain"
+  ],
+  "p": {
+   "alg": "Simplify ln(x^2) for real x ≠ 0"
+  },
+  "w": "ln(x^2) = 2 ln(x)",
+  "exp": "missing-assumption",
+  "why": "Valid only for x>0; for x<0 ln x is undefined and the result should be 2 ln|x|.",
+  "alt": [
+   "invalid"
+  ]
+ },
+ {
+  "id": "h7-algB-064",
+  "cat": "algebra-expressions",
+  "tags": [
+   "rational",
+   "extraneous"
+  ],
+  "p": {
+   "alg": "Solve (x^2-9)/(x-3) = 6"
+  },
+  "w": "(x-3)(x+3)/(x-3) = 6\nx + 3 = 6\nx = 3",
+  "exp": "missing-assumption",
+  "why": "x=3 makes the original denominator zero, so it is extraneous; no solution exists and the exclusion is not noted.",
+  "alt": [
+   "invalid"
+  ]
+ },
+ {
+  "id": "h7-algB-065",
+  "cat": "algebra-expressions",
+  "tags": [
+   "log",
+   "domain",
+   "extraneous"
+  ],
+  "p": {
+   "alg": "Solve ln(x) + ln(x-2) = ln(3)"
+  },
+  "w": "ln(x(x-2)) = ln 3\nx^2 - 2x - 3 = 0\n(x-3)(x+1) = 0, so x = 3 or x = -1",
+  "exp": "missing-assumption",
+  "why": "x=-1 is outside the domain of the logs and is not rejected."
+ },
+ {
+  "id": "h7-algB-066",
+  "cat": "algebra-expressions",
+  "tags": [
+   "division-by-zero"
+  ],
+  "p": {
+   "alg": "Solve (x-2)(x+1) = 4(x-2)"
+  },
+  "w": "Divide both sides by x-2: x + 1 = 4\nx = 3",
+  "exp": "missing-assumption",
+  "why": "Division by x-2 is only valid if x≠2; root x=2 is lost."
+ },
+ {
+  "id": "h7-algB-067",
+  "cat": "algebra-expressions",
+  "tags": [
+   "conditional",
+   "cases"
+  ],
+  "p": {
+   "alg": "Assume x > 2. Simplify |x-2| + |x-5|"
+  },
+  "w": "Since x > 2, |x-2| = x-2 and also |x-5| = x-5\nso the sum is 2x - 7",
+  "exp": "missing-assumption",
+  "why": "x>2 does not imply x>=5; for 2<x<5 the sum is 3. Needs the extra case.",
+  "alt": [
+   "invalid"
+  ]
+ },
+ {
+  "id": "h7-algB-068",
+  "cat": "algebra-expressions",
+  "tags": [
+   "factor"
+  ],
+  "p": {
+   "alg": "Factor x^4 - 16 completely over the integers"
+  },
+  "w": "x^4 - 16 = (x^2)^2 - 4^2\n= (x^2-4)(x^2+4)",
+  "exp": "incomplete",
+  "why": "Lines are true but x^2-4 = (x-2)(x+2) still factors, so not complete."
+ },
+ {
+  "id": "h7-algB-069",
+  "cat": "algebra-expressions",
+  "tags": [
+   "word"
+  ],
+  "p": {
+   "alg": "A rectangle's length is 3 more than its width and its perimeter is 26. Find the width."
+  },
+  "w": "Let width w, length w+3\n2(w + w+3) = 26\n4w + 6 = 26",
+  "exp": "incomplete",
+  "why": "True equations set up but width never found."
+ },
+ {
+  "id": "h7-algB-070",
+  "cat": "algebra-expressions",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "alg": "Factor x^2 - 5x + 6"
+  },
+  "w": "The discriminant is (-5)^2 - 4*1*6 = 1",
+  "exp": "incomplete",
+  "why": "True but irrelevant to the requested factorisation; no factors given."
+ },
+ {
+  "id": "h7-algB-071",
+  "cat": "algebra-expressions",
+  "tags": [
+   "expand"
+  ],
+  "p": {
+   "alg": "Expand (x+2)^3"
+  },
+  "w": "(x+2)^3 = (x+2)(x+2)^2\n= (x+2)(x^2+4x+4)",
+  "exp": "incomplete",
+  "why": "Correct setup but product not multiplied out (x^3+6x^2+12x+8)."
+ },
+ {
+  "id": "h7-algB-072",
+  "cat": "algebra-expressions",
+  "tags": [
+   "system-3x3"
+  ],
+  "p": {
+   "alg": "Solve x+y+z=6, 2x-y+z=3, x+2y-z=2"
+  },
+  "w": "Add equations 2 and 3: 3x + y = 5\nAdd equations 1 and 3: 2x + 3y = 8",
+  "exp": "incomplete",
+  "why": "True eliminations, but x,y,z are never solved."
+ },
+ {
+  "id": "h7-algB-073",
+  "cat": "algebra-expressions",
+  "tags": [
+   "rational"
+  ],
+  "p": {
+   "alg": "Simplify (x^2-1)/(x^2+x)"
+  },
+  "w": "(x^2-1)/(x^2+x) = (x-1)(x+1)/(x(x+1))",
+  "exp": "incomplete",
+  "why": "Factorisation is true but the fraction is not reduced to (x-1)/x with x≠0,-1."
+ },
+ {
+  "id": "h7-algB-074",
+  "cat": "algebra-expressions",
+  "tags": [
+   "coincidence"
+  ],
+  "p": {
+   "alg": "Simplify (x^2-1)/(x-1)"
+  },
+  "w": "At x = 3: (9-1)/(3-1) = 8/2 = 4 = 3 + 1\nSo (x^2-1)/(x-1) = x + 1",
+  "exp": "incomplete",
+  "why": "A single test value does not establish the identity (and x≠1 is not stated); correct result reached without justification.",
+  "alt": [
+   "invalid"
+  ]
+ },
+ {
+  "id": "h7-algB-075",
+  "cat": "algebra-expressions",
+  "tags": [
+   "coincidence"
+  ],
+  "p": {
+   "alg": "Expand (a+b)^2"
+  },
+  "w": "With a=1, b=2: (1+2)^2 = 9\n1^2 + 2^2 = 5 and 2*1*2 = 4, and 5+4 = 9\nSo (a+b)^2 = a^2 + 2ab + b^2",
+  "exp": "incomplete",
+  "why": "One numeric instance cannot prove the general identity; the stated answer is correct but ungrounded.",
+  "alt": [
+   "invalid"
+  ]
+ },
+ {
+  "id": "h7-algB-076",
+  "cat": "algebra-expressions",
+  "tags": [
+   "coincidence",
+   "surd"
+  ],
+  "p": {
+   "alg": "Show that sqrt(50) = 5 sqrt(2)"
+  },
+  "w": "sqrt(50) ≈ 7.07\n5 sqrt(2) ≈ 5 * 1.414 = 7.07\nSo they are equal",
+  "exp": "incomplete",
+  "why": "Agreement of rounded decimals does not prove exact equality; need 50=25*2.",
+  "alt": [
+   "invalid"
+  ]
+ },
+ {
+  "id": "h7-algB-077",
+  "cat": "algebra-expressions",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "alg": "Maria buys 4 pens at $3 each and some notebooks at $5 each, paying $37 in total. How many notebooks did she buy?"
+  },
+  "w": "3 * 4 = 12\n5 * 7 = 35\n12 + 35 = 47",
+  "exp": "incomplete",
+  "why": "True arithmetic that never sets up or solves 12+5n=37 (n=5).",
+  "alt": [
+   "invalid"
+  ]
+ },
+ {
+  "id": "h7-algB-078",
+  "cat": "algebra-expressions",
+  "tags": [
+   "unsupported"
+  ],
+  "p": {
+   "alg": "Solve x^5 - x + 1 = 0 exactly in radicals"
+  },
+  "w": "f(-2) = -29 and f(-1) = 1, so there is a root in (-2,-1)",
+  "exp": "unsupported",
+  "why": "The quintic x^5-x+1 is not solvable by radicals (Galois group S5); only numerical bracketing is possible.",
+  "alt": [
+   "incomplete"
+  ]
+ },
+ {
+  "id": "h7-algB-079",
+  "cat": "algebra-expressions",
+  "tags": [
+   "unsupported"
+  ],
+  "p": {
+   "alg": "Solve e^x = x + 2 in elementary closed form"
+  },
+  "w": "Let f(x) = e^x - x - 2. Then f(1) = e - 3 < 0 and f(2) = e^2 - 4 > 0\nSo a root lies in (1,2)",
+  "exp": "unsupported",
+  "why": "The root requires the Lambert W function; no elementary closed form exists.",
+  "alt": [
+   "incomplete"
+  ]
+ },
+ {
+  "id": "h7-algB-080",
+  "cat": "algebra-expressions",
+  "tags": [
+   "ambiguous-notation"
+  ],
+  "p": {
+   "alg": "Evaluate 6/2(1+2)"
+  },
+  "w": "6/2(1+2) = 3 * 3 = 9",
+  "exp": "ambiguous",
+  "why": "Left-to-right reading gives 9 but 2(1+2) read as a single denominator gives 1.",
+  "alt": [
+   "invalid"
+  ]
+ },
+ {
+  "id": "h7-algB-081",
+  "cat": "algebra-expressions",
+  "tags": [
+   "ambiguous-notation"
+  ],
+  "p": {
+   "alg": "Evaluate 1/2x when x = 4"
+  },
+  "w": "1/2x = 1/(2*4) = 1/8",
+  "exp": "ambiguous",
+  "why": "1/2x may mean (1/2)x = 2 or 1/(2x) = 1/8; working picks one reading.",
+  "alt": [
+   "invalid"
+  ]
+ }
+]

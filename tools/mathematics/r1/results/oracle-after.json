@@ -1,0 +1,505 @@
+{
+ "oracle_dir": "/home/claude/r1/tools/mathematics/domain-reasoner",
+ "cases": 22,
+ "passed": 22,
+ "rows": [
+  {
+   "id": "d4-o01",
+   "text": "0.001/(x-1)=0.002/(x+1)",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "3"
+    ],
+    "excluded": [
+     "-1",
+     "1"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "3"
+    ],
+    "excluded": [
+     "-1",
+     "1"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o02",
+   "text": "1/(0.25*x)=8",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o03",
+   "text": "0.1/(x-1)=0.2",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o04",
+   "text": "12.5/(x-1)=25",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o05",
+   "text": "3.75/(x+2)=1.25",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "1"
+    ],
+    "excluded": [
+     "-2"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "1"
+    ],
+    "excluded": [
+     "-2"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o06",
+   "text": "100.0625/(x-1)=1",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "1617/16"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "1617/16"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o07",
+   "text": "0.1/(x-0.1)=1",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "1/5"
+    ],
+    "excluded": [
+     "1/10"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "1/5"
+    ],
+    "excluded": [
+     "1/10"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o08",
+   "text": "1/(x-0.5)=2",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "1"
+    ],
+    "excluded": [
+     "1/2"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "1"
+    ],
+    "excluded": [
+     "1/2"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o09",
+   "text": "0.1*x/(x-0.3)=0.2",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "3/5"
+    ],
+    "excluded": [
+     "3/10"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "3/5"
+    ],
+    "excluded": [
+     "3/10"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o10",
+   "text": "0.7/(x-0.7)=0.7/(x-0.7)",
+   "expect": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "7/10"
+    ]
+   },
+   "got": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "7/10"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o11",
+   "text": "0.1/(x-0.1)=0.3/(x-0.3)",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "0"
+    ],
+    "excluded": [
+     "1/10",
+     "3/10"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "0"
+    ],
+    "excluded": [
+     "1/10",
+     "3/10"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o12",
+   "text": "1/(x-0.1)=1/(x-0.1)+0.000001",
+   "expect": {
+    "class": "none",
+    "solution": [],
+    "excluded": [
+     "1/10"
+    ]
+   },
+   "got": {
+    "class": "none",
+    "solution": [],
+    "excluded": [
+     "1/10"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o13",
+   "text": "0.5/(x-1)+0.25/(x-1)=0.75/(x-1)",
+   "expect": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "1"
+    ]
+   },
+   "got": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "1"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o14",
+   "text": "0.3/(x-0.3)=1",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "3/5"
+    ],
+    "excluded": [
+     "3/10"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "3/5"
+    ],
+    "excluded": [
+     "3/10"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o15",
+   "text": "3.14159/(x-1)=3.14159",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o16",
+   "text": "2.5*x^-1=5",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "excluded": [
+     "0"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o17",
+   "text": "x/(x-0.01)=100",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "1/99"
+    ],
+    "excluded": [
+     "1/100"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "1/99"
+    ],
+    "excluded": [
+     "1/100"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o18",
+   "text": "0.0001/(x-1)=0.0003/(x+1)",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "-1",
+     "1"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "-1",
+     "1"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o19",
+   "text": "0.1/(x-0.3)=0.2/(x-0.4)",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "1/5"
+    ],
+    "excluded": [
+     "3/10",
+     "2/5"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "1/5"
+    ],
+    "excluded": [
+     "3/10",
+     "2/5"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o20",
+   "text": "0.2/(x-0.2)=0.6/(3*x-0.6)",
+   "expect": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "1/5"
+    ]
+   },
+   "got": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "1/5"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o21",
+   "text": "0.07/(x-0.07)=1",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "7/50"
+    ],
+    "excluded": [
+     "7/100"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "7/50"
+    ],
+    "excluded": [
+     "7/100"
+    ]
+   },
+   "pass": true
+  },
+  {
+   "id": "d4-o22",
+   "text": "1/(x-0.125)=0.5",
+   "expect": {
+    "class": "unique",
+    "solution": [
+     "17/8"
+    ],
+    "excluded": [
+     "1/8"
+    ]
+   },
+   "got": {
+    "class": "unique",
+    "solution": [
+     "17/8"
+    ],
+    "excluded": [
+     "1/8"
+    ]
+   },
+   "pass": true
+  }
+ ]
+}

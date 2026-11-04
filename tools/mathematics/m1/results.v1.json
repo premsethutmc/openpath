@@ -1,0 +1,38 @@
+{
+  "version": "math-domains-m1-evaluation@1",
+  "total": 400,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "firstInvalidStepMatches": 400,
+  "failures": 0,
+  "categories": {
+    "inequality": {
+      "cases": 100,
+      "failures": 0,
+      "unsupported": 5,
+      "ms": 6.164,
+      "meanMs": 0.0616
+    },
+    "quadratic": {
+      "cases": 100,
+      "failures": 0,
+      "unsupported": 0,
+      "ms": 3.411,
+      "meanMs": 0.0341
+    },
+    "function": {
+      "cases": 100,
+      "failures": 0,
+      "unsupported": 0,
+      "ms": 1.305,
+      "meanMs": 0.013
+    },
+    "coordinate": {
+      "cases": 100,
+      "failures": 0,
+      "unsupported": 0,
+      "ms": 1.072,
+      "meanMs": 0.0107
+    }
+  }
+}

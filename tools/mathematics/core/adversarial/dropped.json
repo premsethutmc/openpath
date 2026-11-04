@@ -1,0 +1,116 @@
+{
+ "count": 10,
+ "dropped": [
+  {
+   "category": "domain-change",
+   "tag": "dc_mult_one_side",
+   "problem": "-5*x+3=2",
+   "lines": [
+    "( − 5x + 3)(x − 9) = 2",
+    "x = 1 ÷ 5"
+   ],
+   "reason": "intent-mismatch",
+   "detail": "intended invalid got unsupported"
+  },
+  {
+   "category": "extraneous-root",
+   "tag": "re_repeated_single_power",
+   "problem": "(-25)/(x+7)^2+(-8)/(x+7)=14/(x+7)^2",
+   "lines": [
+    "( - 25) / (x + 7) + ( - 8) = 14 / (x + 7)",
+    "x = - 95 / 8"
+   ],
+   "reason": "intent-mismatch",
+   "detail": "intended invalid got valid-complete"
+  },
+  {
+   "category": "extraneous-root",
+   "tag": "re_repeated_single_power",
+   "problem": "(9/4)/(x+8)^2+(-5)/(x+8)=(-18)/(x+8)^2",
+   "lines": [
+    "(9 ÷ 4) ÷ (x + 8) + ( − 5) = ( − 18) ÷ (x + 8)",
+    "x = − 79 ÷ 20"
+   ],
+   "reason": "intent-mismatch",
+   "detail": "intended invalid got valid-complete"
+  },
+  {
+   "category": "rational-expressions",
+   "tag": "re_repeated_single_power",
+   "problem": "((-11/2))/(x-7)^2+(-29)/(x-7)=(-7)/(x-7)^2",
+   "lines": [
+    "((-11/2))/(x-7)+(-29)=(-7)/(x-7)",
+    "x=409/58"
+   ],
+   "reason": "intent-mismatch",
+   "detail": "intended invalid got valid-complete"
+  },
+  {
+   "category": "rational-expressions",
+   "tag": "re_three_partial",
+   "problem": "9/x+(-5)/(x-2)=29/(x*(x-2))",
+   "lines": [
+    "9(x - 2) + ( - 5)x = 29 / (x(x - 2))",
+    "x = 47 / 4"
+   ],
+   "reason": "intent-mismatch",
+   "detail": "intended invalid got unsupported"
+  },
+  {
+   "category": "rational-expressions",
+   "tag": "re_lcd2_wrong_add",
+   "problem": "12/(x-4)+(-7)/(x+2)=(-4)/((x-4)*(x+2))",
+   "lines": [
+    "(5)/((x-4)+(x+2))=(-4)/((x-4)*(x+2))",
+    "x=-56/5"
+   ],
+   "reason": "intent-mismatch",
+   "detail": "intended invalid got unsupported"
+  },
+  {
+   "category": "rational-expressions",
+   "tag": "re_three_partial",
+   "problem": "34/x+6/(x+8)=4/(x*(x+8))",
+   "lines": [
+    "34(x + 8) + 6x = 4 / (x(x + 8))",
+    "x = - 67 / 10"
+   ],
+   "reason": "intent-mismatch",
+   "detail": "intended invalid got unsupported"
+  },
+  {
+   "category": "rational-expressions",
+   "tag": "re_repeated_single_power",
+   "problem": "(-6)/(x+2)^2+4/(x+2)=7/(x+2)^2",
+   "lines": [
+    "(-6)/(x+2)+4=7/(x+2)",
+    "x=5/4"
+   ],
+   "reason": "intent-mismatch",
+   "detail": "intended invalid got valid-complete"
+  },
+  {
+   "category": "rational-expressions",
+   "tag": "re_lcd2_wrong_add",
+   "problem": "(-7)/(x-8)+(-9)/(x+6)=(-4)/((x-8)*(x+6))",
+   "lines": [
+    "((-16))/((x-8)+(x+6))=(-4)/((x-8)(x+6))",
+    "x=17/8"
+   ],
+   "reason": "intent-mismatch",
+   "detail": "intended invalid got unsupported"
+  },
+  {
+   "category": "correct-controls",
+   "tag": "re_repeated_ok",
+   "problem": "(-9)/(x+2)^2+2/(x+2)=(-9)/(x+2)^2",
+   "lines": [
+    "( - 9) + 2(x + 2) = - 9",
+    "2x - 5 = - 9",
+    "x = - 2"
+   ],
+   "reason": "intent-mismatch",
+   "detail": "intended valid-complete got invalid"
+  }
+ ]
+}

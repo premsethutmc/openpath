@@ -1,0 +1,498 @@
+{
+ "C1 x^2+1=0 <=> x^2+4=0": {
+  "valid": false,
+  "reasons": [
+   "solution-set-changed"
+  ]
+ },
+ "C2 x^2+1=0 <=> 1=0 (no solution)": {
+  "valid": false,
+  "reasons": [
+   "solution-set-changed"
+  ]
+ },
+ "C3 x^2+1=0 => x=5 (implication, vacuous)": {
+  "valid": false,
+  "reasons": [
+   "solution-set-lost"
+  ]
+ },
+ "C4 x^4=4 <=> x^2=2": {
+  "valid": false,
+  "reasons": [
+   "solution-set-changed"
+  ]
+ },
+ "C5 (x^2+1)(x-1)=0 <=> x-1=0": {
+  "valid": false,
+  "reasons": [
+   "solution-set-changed"
+  ]
+ },
+ "C6 claim x^2+1=0 -> []": {
+  "valid": false,
+  "truth": "undecidable"
+ },
+ "C7 claim (x-1)(x^2+1)=0 -> [1]": {
+  "valid": false,
+  "truth": "undecidable"
+ },
+ "C8 claim (x-1)(x^2-2)=0 -> [1] (false claim)": {
+  "valid": false,
+  "truth": "undecidable"
+ },
+ "C9 claim x^2-2=0 -> [] (false claim)": {
+  "valid": false,
+  "truth": "undecidable"
+ },
+ "C10 x^2=2 <=> x^2=3 (truly different)": {
+  "valid": false,
+  "reasons": [
+   "solution-set-changed"
+  ]
+ },
+ "C11 x^2=2 => x^4=4 (true implication)": {
+  "valid": true,
+  "reasons": []
+ },
+ "C12 x^4=4 => x^2=2 (true over R)": {
+  "valid": false,
+  "reasons": [
+   "solution-set-lost"
+  ]
+ },
+ "R1 (x-1)^2=0 <=> x-1=0": {
+  "valid": true,
+  "reasons": []
+ },
+ "R2 (x-1)^2(x-2)=0 [1] <=> x-2=0 [1]": {
+  "valid": true,
+  "reasons": []
+ },
+ "R3 (x-1)^2/(x-1)=0 claim []": {
+  "valid": true,
+  "truth": []
+ },
+ "R4 (x-1)/(x-1)^2=0 claim []": {
+  "valid": true,
+  "truth": []
+ },
+ "R5 x*(x-1)=0 [1] <=> x=0 [1]": {
+  "valid": true,
+  "reasons": []
+ },
+ "R6 x*(x-1)=0 [] <=> x=0 [1] (must be rejected: 1 is a solution of from)": {
+  "valid": false,
+  "reasons": [
+   "solution-set-changed"
+  ]
+ },
+ "I1 1/(x^2-2)=0 closure": {
+  "valid": true,
+  "reasons": []
+ },
+ "I2 1/(x^2+1)=1 (denominator without real zeros)": {
+  "valid": true,
+  "reasons": []
+ },
+ "I3 x*(x^2-2)=0 [0] <=> x^2-2=0 [0]": {
+  "valid": true,
+  "reasons": []
+ },
+ "I4 claim for equation with irrational denominator": {
+  "THROWS": "OutsideBoundary: denominator does not split into linear factors over Q"
+ },
+ "A1 x/x=1 [0] <=> 1=1 [0]": {
+  "valid": true,
+  "reasons": []
+ },
+ "A2 x/x=1 [0] <=> x=x [] (excluded dropped)": {
+  "valid": false,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ]
+ },
+ "A3 x=1 => x^2=x (forward)": {
+  "valid": true,
+  "reasons": []
+ },
+ "A4 x^2=x => x=1 (backward must fail)": {
+  "valid": false,
+  "reasons": [
+   "solution-set-lost"
+  ]
+ },
+ "A5 x=x [] => x=1 (all into finite set must fail)": {
+  "valid": false,
+  "reasons": [
+   "solution-set-lost"
+  ]
+ },
+ "A6 x=1 [] => x=x [] (set into all)": {
+  "valid": true,
+  "reasons": []
+ },
+ "A7 x=0 [] => x/x=1 [0] (0 not in target domain: must fail)": {
+  "valid": false,
+  "reasons": [
+   "solution-set-lost"
+  ]
+ },
+ "A8 x/x=1 [0] => x=x [] (subset ok, but restriction dropped)": {
+  "valid": false,
+  "reasons": [
+   "restriction-dropped"
+  ]
+ },
+ "A9 x=x [] => x=x [0] (R not inside R\\{0}: must fail)": {
+  "valid": false,
+  "reasons": [
+   "solution-set-lost"
+  ]
+ },
+ "A10 0=0 <=> x-x=0": {
+  "valid": true,
+  "reasons": []
+ },
+ "A11 1=0 <=> 2=0": {
+  "valid": true,
+  "reasons": []
+ },
+ "A12 0*x=0 <=> 0=0": {
+  "valid": true,
+  "reasons": []
+ },
+ "A13 claim identity all-real for x=x": {
+  "valid": false,
+  "truth": "all-except-excluded"
+ },
+ "A14 claim identity all-except-excluded for x=x": {
+  "valid": true,
+  "truth": "all-except-excluded"
+ },
+ "A15 claim identity all-except-excluded for x/x=1": {
+  "valid": true,
+  "truth": "all-except-excluded"
+ },
+ "A16 claim []-for-contradiction 1=0": {
+  "valid": true,
+  "truth": []
+ },
+ "F1 (x^2-1)/(x-1)=2 [] <=> x+1=2 []  (from not closed)": {
+  "valid": true,
+  "reasons": []
+ },
+ "F2 0/x=0 [] <=> 0=0 []": {
+  "valid": true,
+  "reasons": []
+ },
+ "F3 (x^2-1)/(x-1)=2 [1] <=> x+1=2 [1]": {
+  "valid": true,
+  "reasons": []
+ },
+ "F4 (x^2-1)/(x-1)=2 [1] <=> x+1=2 []  (restriction dropped)": {
+  "valid": false,
+  "reasons": [
+   "restriction-dropped",
+   "solution-set-changed"
+  ]
+ },
+ "F5 (x^2-x)/x=-1 claim": {
+  "valid": true,
+  "truth": []
+ },
+ "F6 (x^2-x)/x=x-1 claim": {
+  "valid": true,
+  "truth": "all-except-excluded"
+ },
+ "Z1 x/0=1": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "Z2 0/x=0 [0] <=> 0=0 [0]": {
+  "valid": true,
+  "reasons": []
+ },
+ "Z3 x/(x-x)=1": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "Z4 x/(1-1)=1 claim": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "Z5 0/0=1": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "Z6 x*0/x=0 [0]": {
+  "valid": true,
+  "reasons": []
+ },
+ "Z7 zerosOfDenominators(1/(x-x))": [],
+ "P1 x^-1*x=1 [] <=> 1=1 []  (x^-1 undefined at 0)": {
+  "valid": true,
+  "reasons": []
+ },
+ "P2 same with x^(-1)": {
+  "valid": true,
+  "reasons": []
+ },
+ "P3 x^(1-2)*x=1": {
+  "valid": true,
+  "reasons": []
+ },
+ "P4 claim 1/(x-1)+0*x^-1=-1 -> [0]": {
+  "valid": true,
+  "truth": [
+   "0"
+  ]
+ },
+ "P5 solve 1/(x-1)+0*x^-1=-1": {
+  "class": "none",
+  "solution": null,
+  "restrictions": [
+   "1"
+  ],
+  "note": "candidate x = 0 rejected: it is excluded by the original domain or fails the original equation"
+ },
+ "P6 zerosOfDenominators(x^-1)": [],
+ "P7 zerosOfDenominators(1/x)": [
+  "0"
+ ],
+ "P8 zerosOfDenominators(x^(-2))": [],
+ "P9 x^0=1 [] <=> 1=1 [] (0^0 convention)": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "P10 (x-1)^0=1": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "P11 x^13=0": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "P12 x^(1/2)=1": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "P13 x^(2/2)=1 <=> x=1": {
+  "valid": true,
+  "reasons": []
+ },
+ "P14 x^(x/x)=x [] <=> x=x [] (exponent undefined at 0)": {
+  "valid": true,
+  "reasons": []
+ },
+ "P15 x^99999999999999999999=0": {
+  "THROWS": "RangeError: Rational num 99999999999999999999 is beyond the exact range of a JS number; use numBig"
+ },
+ "P16 0^0 = 1": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "P17 0^-1 = 1": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "P18 x^12 = x^12 ok": {
+  "valid": true,
+  "reasons": []
+ },
+ "P19 (1/x)^0=1 [0]": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "P20 (1/x)^0=1 [] (closure)": {
+  "THROWS": "OutsideBoundary: not a rational function of x"
+ },
+ "P21 Poly.fromExpr((1/x)^0) is polynomial?": "null",
+ "P22 eval x^-1 at 0 in kernel": "n/a",
+ "L1 rationalRoots 1e13*x - 1e13": {
+  "THROWS": "OutsideBoundary: coefficients beyond the stated boundary"
+ },
+ "L2 rationalRoots x - 1e13": {
+  "THROWS": "OutsideBoundary: coefficients beyond the stated boundary"
+ },
+ "L3 rationalRoots x - 1e12": [
+  "1000000000000"
+ ],
+ "L4 solEquals with huge coeffs (no limit)": {
+  "valid": true,
+  "reasons": []
+ },
+ "L5 solve with huge coefficient denominator": {
+  "class": "refused",
+  "reasons": [
+   "denominator-outside-boundary"
+  ]
+ },
+ "L6 solve huge numerator quadratic": {
+  "THROWS": "OutsideBoundary: coefficients beyond the stated boundary"
+ },
+ "L7 claim huge root": {
+  "THROWS": "OutsideBoundary: coefficients beyond the stated boundary"
+ },
+ "L8 claim huge root 2x^2 quad": {
+  "THROWS": "OutsideBoundary: coefficients beyond the stated boundary"
+ },
+ "L9 splitLinear content 1e13": {
+  "THROWS": "OutsideBoundary: coefficients beyond the stated boundary"
+ },
+ "L10 zerosOfDenominators 1/(x-1e13)": {
+  "THROWS": "OutsideBoundary: coefficients beyond the stated boundary"
+ },
+ "L11 claim x-1e13 with step(1/(x-1e13)=0)": {
+  "valid": true,
+  "reasons": []
+ },
+ "D1 divide by x^2-2 with restricted []": [
+  "FAIL: the divisor is non-zero on the domain (zeros not all rational: cannot show they are restricted)"
+ ],
+ "D2 divide by x^2+1 (no real zeros) restricted []": [
+  "FAIL: the divisor is non-zero on the domain (zeros not all rational: cannot show they are restricted)"
+ ],
+ "D3 divide by (x-1)^2 restricted [1]": [
+  "ok: the divisor is non-zero on the domain (its zeros (1, 1) are all restricted)"
+ ],
+ "D4 divide by (x-1)*(x^2+1) restricted [1]": [
+  "FAIL: the divisor is non-zero on the domain (zeros not all rational: cannot show they are restricted)"
+ ],
+ "D5 divide by 0": [
+  "FAIL: the divisor is non-zero on the domain (the factor is the zero polynomial)"
+ ],
+ "D6 divide by x-x": [
+  "FAIL: the divisor is non-zero on the domain (the factor is the zero polynomial)"
+ ],
+ "D7 divide by 1e13*x-1e13 restricted [1]": {
+  "THROWS": "OutsideBoundary: coefficients beyond the stated boundary"
+ },
+ "D8 multiply by x restricted [0]": [
+  "ok: the factor is non-zero on the domain (its zeros (0) are all restricted)"
+ ],
+ "D9 multiply by x restricted []": [
+  "FAIL: the factor is non-zero on the domain (x = 0 is not restricted, so the factor may be zero)"
+ ],
+ "D10 cancel-common-factor 0/x restricted [0]": [
+  "ok: numerator and denominator have a common factor of degree >= 1 (gcd degree 1)",
+  "ok: the common factor's zeros are restricted (its zeros (0) are all restricted)"
+ ],
+ "D11 cancel (x^2-1)/(x-1) restricted [1]": [
+  "ok: numerator and denominator have a common factor of degree >= 1 (gcd degree 1)",
+  "ok: the common factor's zeros are restricted (its zeros (1) are all restricted)"
+ ],
+ "D12 cancel (x^2-1)/(x-1) restricted []": [
+  "ok: numerator and denominator have a common factor of degree >= 1 (gcd degree 1)",
+  "FAIL: the common factor's zeros are restricted (x = 1 is not restricted, so the factor may be zero)"
+ ],
+ "D13 clear-denominators with x^-1 hidden denominator": [
+  "ok: the LCD's zeros are restricted (it is non-zero on the domain) (its zeros (1) are all restricted)",
+  "ok: both sides become polynomials after multiplying ()"
+ ],
+ "D14 clear-denominators 1/x+1/(x-1)=1 restricted [0,1]": [
+  "ok: the LCD's zeros are restricted (it is non-zero on the domain) (its zeros (0, 1) are all restricted)",
+  "ok: both sides become polynomials after multiplying ()"
+ ],
+ "D15 clear-denominators 1/(x^2-2)=1 ": [
+  "FAIL: the LCD's zeros are restricted (it is non-zero on the domain) (zeros not all rational: cannot show they are restricted)",
+  "ok: both sides become polynomials after multiplying ()"
+ ],
+ "D16 clear-denominators 1/(x^2+1)=1": [
+  "FAIL: the LCD's zeros are restricted (it is non-zero on the domain) (zeros not all rational: cannot show they are restricted)",
+  "ok: both sides become polynomials after multiplying ()"
+ ],
+ "E1 (x^2-x)/x=-1": {
+  "class": "none",
+  "solution": null,
+  "restrictions": [
+   "0"
+  ],
+  "reasons": [],
+  "note": "candidate x = 0 rejected: it is excluded by the original domain or fails the original equation"
+ },
+ "E2 (x^2-1)/(x-1)=2": {
+  "class": "none",
+  "solution": null,
+  "restrictions": [
+   "1"
+  ],
+  "reasons": [],
+  "note": "candidate x = 1 rejected: it is excluded by the original domain or fails the original equation"
+ },
+ "E3 x/(x-1)=1/(x-1)": {
+  "class": "none",
+  "solution": null,
+  "restrictions": [
+   "1"
+  ],
+  "reasons": [],
+  "note": "candidate x = 1 rejected: it is excluded by the original domain or fails the original equation"
+ },
+ "E4 1/x+1/(x-1)=1/(x*(x-1))": {
+  "class": "none",
+  "solution": null,
+  "restrictions": [
+   "0",
+   "1"
+  ],
+  "reasons": [],
+  "note": "the equation reduces to a false statement: no solution"
+ },
+ "E5 (x-1)^2/(x-1)=0": {
+  "class": "none",
+  "solution": null,
+  "restrictions": [
+   "1"
+  ],
+  "reasons": [],
+  "note": "candidate x = 1 rejected: it is excluded by the original domain or fails the original equation"
+ },
+ "E6 1/x^2=1/x": {
+  "class": "unique",
+  "solution": [
+   "1"
+  ],
+  "restrictions": [
+   "0"
+  ],
+  "reasons": [],
+  "note": "x = 1 verified by exact substitution into the original equation and not excluded"
+ },
+ "E7 0/x=0": {
+  "class": "identity-on-domain",
+  "solution": null,
+  "restrictions": [
+   "0"
+  ],
+  "reasons": [],
+  "note": "both sides equal for every allowed x; every value except the restricted ones is a solution"
+ },
+ "E8 x/0=1": {
+  "class": "refused",
+  "solution": null,
+  "restrictions": [],
+  "reasons": [
+   "no-variable-denominator",
+   "numerator-outside-boundary"
+  ],
+  "note": "outside the stated scope boundary; refused rather than guessed"
+ },
+ "E9 1/(x-x)=1": {
+  "class": "refused",
+  "solution": null,
+  "restrictions": [],
+  "reasons": [
+   "numerator-outside-boundary"
+  ],
+  "note": "outside the stated scope boundary; refused rather than guessed"
+ },
+ "E10 1/(x-1)+x^-1*0=-1": {
+  "class": "none",
+  "solution": null,
+  "restrictions": [
+   "1"
+  ],
+  "reasons": [],
+  "note": "candidate x = 0 rejected: it is excluded by the original domain or fails the original equation"
+ },
+ "E11 x/(x-1)+x^-1*(x-1)=... mixes": {
+  "class": "none",
+  "solution": null,
+  "restrictions": [
+   "1"
+  ],
+  "reasons": [],
+  "note": "the equation reduces to a false statement: no solution"
+ }
+}

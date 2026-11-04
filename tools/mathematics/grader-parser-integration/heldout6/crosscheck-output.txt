@@ -1,0 +1,224 @@
+h6-lin-001     OK  valid       fi=None fac=True  rel=equ,equ {6}
+h6-lin-002     OK  invalid     fi=0    fac=False rel=nei,equ {6}
+h6-lin-003     OK  valid       fi=None fac=True  rel=equ,equ {-4}
+h6-lin-004     OK  invalid     fi=1    fac=False rel=equ,nei {-4}
+h6-lin-005     OK  valid       fi=None fac=True  rel=equ,equ,equ {9}
+h6-lin-006     OK  valid       fi=None fac=True  rel=equ,equ,equ {9}
+h6-lin-007     OK  invalid     fi=0    fac=False rel=nei,equ,equ {9}
+h6-lin-008     OK  valid       fi=None fac=True  rel=equ,equ {2}
+h6-lin-009     OK  invalid     fi=0    fac=False rel=nei,equ {2}
+h6-lin-010     OK  valid       fi=None fac=True  rel=equ,equ,equ,equ,equ {2}
+h6-lin-011     OK  invalid     fi=0    fac=False rel=nei,equ,equ,equ,equ {2}
+h6-lin-012     OK  valid       fi=None fac=True  rel=equ,equ,equ {12}
+h6-lin-013     OK  valid       fi=None fac=True  rel=equ,equ {12}
+h6-lin-014     OK  invalid     fi=0    fac=False rel=nei,equ {12}
+h6-lin-015     OK  valid       fi=None fac=True  rel=equ,equ,equ {5}
+h6-lin-016     OK  valid-jump  fi=None fac=True  rel=equ,equ,equ {5}
+h6-lin-017     OK  invalid     fi=0    fac=False rel=nei,equ,equ {5}
+h6-lin-018     OK  valid       fi=None fac=True  rel=equ,equ,equ,equ {5}
+h6-lin-019     OK  invalid     fi=0    fac=False rel=nei,equ,equ,equ {5}
+h6-lin-020     OK  valid       fi=None fac=True  rel=equ,equ,equ,equ,equ {11/2}
+h6-lin-021     OK  valid-jump  fi=None fac=True  rel=equ,equ,equ {11/2}
+h6-lin-022     OK  incomplete  fi=None fac=None  rel=equ,equ {11/2}
+h6-quad-001    OK  valid       fi=None fac=True  rel=equ,equ,equ {2, 3}
+h6-quad-002    OK  invalid     fi=0    fac=False rel=nei,equ {2, 3}
+h6-quad-003    OK  valid       fi=None fac=True  rel=equ,equ,equ {-3/2, 1}
+h6-quad-004    OK  invalid     fi=0    fac=False rel=nei,equ {-3/2, 1}
+h6-quad-005    OK  valid       fi=None fac=True  rel=equ,equ,equ {0, 7}
+h6-quad-006    OK  invalid     fi=0    fac=False rel=imp {0, 7}
+h6-quad-007    OK  valid       fi=None fac=True  rel=equ,equ {1, 7}
+h6-quad-008    OK  valid       fi=None fac=True  rel=equ,equ,equ {1, 7}
+h6-quad-009    OK  invalid     fi=0    fac=False rel=imp,equ {1, 7}
+h6-quad-010    OK  valid       fi=None fac=True  rel=equ,equ,equ {-3/2, 3/2}
+h6-quad-011    OK  valid       fi=None fac=True  rel=equ,equ {-3/2, 3/2}
+h6-quad-012    OK  invalid     fi=1    fac=False rel=equ,imp {-3/2, 3/2}
+h6-quad-013    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ {-5, 3}
+h6-quad-014    OK  invalid     fi=0    fac=False rel=nei,equ {-5, 3}
+h6-quad-015    OK  valid       fi=None fac=True  rel=equ,equ {-1/2, 2/3}
+h6-quad-016    OK  invalid     fi=0    fac=False rel=nei,equ {-1/2, 2/3}
+h6-quad-017    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ {-2, 4}
+h6-quad-018    OK  invalid     fi=0    fac=False rel=nei,equ {-2, 4}
+h6-quad-019    OK  invalid     fi=0    fac=False rel=nei,equ,equ {-2, 4}
+h6-quad-020    OK  valid       fi=None fac=True  rel=equ,equ,equ {-2, 3}
+h6-quad-021    OK  valid-jump  fi=None fac=True  rel=equ,equ,equ,equ,equ {-5, -1}
+h6-quad-022    OK  incomplete  fi=None fac=None  rel=equ {-3, 4}
+h6-rat-001     OK  valid       fi=None fac=True  rel=equ,equ,equ,equ,equ {7/2}
+h6-rat-002     OK  invalid     fi=0    fac=False rel=nei,equ,equ {7/2}
+h6-rat-003     OK  valid       fi=None fac=True  rel=equ,equ,equ,equ,equ {-6}
+h6-rat-004     OK  valid       fi=None fac=True  rel=equ,equ,equ {5}
+h6-rat-005     OK  valid       fi=None fac=True  rel=equ,equ,equ EmptySet
+h6-rat-006     OK  invalid     fi=1    fac=False rel=equ,equ EmptySet
+h6-rat-007     OK  valid       fi=None fac=True  rel=equ,equ,equ,equ,equ EmptySet
+h6-rat-008     OK  invalid     fi=3    fac=False rel=equ,equ,equ,equ EmptySet
+h6-rat-009     OK  valid       fi=None fac=True  rel=equ,equ,equ,equ,equ {-4/3, 2}
+h6-rat-010     OK  invalid     fi=0    fac=False rel=nei,equ,equ,equ {-4/3, 2}
+h6-rat-011     OK  valid       fi=None fac=True  rel=equ,equ,equ,equ {-5}
+h6-rat-012     OK  invalid     fi=0    fac=False rel=nei,equ,equ {-5}
+h6-rat-013     OK  valid       fi=None fac=True  rel=equ,equ,equ EmptySet
+h6-rat-014     OK  invalid     fi=1    fac=False rel=equ,equ EmptySet
+h6-rat-015     OK  valid       fi=None fac=True  rel=equ,equ,equ,equ EmptySet
+h6-rat-016     OK  valid       fi=None fac=True  rel=equ,equ,equ {4}
+h6-rat-017     OK  valid       fi=None fac=True  rel=equ,equ,equ EmptySet
+h6-rat-018     OK  invalid     fi=1    fac=False rel=equ,equ EmptySet
+h6-rat-019     OK  valid       fi=None fac=True  rel=equ,equ,equ,equ {-1, 4}
+h6-rat-020     OK  invalid     fi=0    fac=False rel=nei,equ,equ {-1, 4}
+h6-rat-021     OK  valid       fi=None fac=True  rel=equ,equ,equ {3}
+h6-rat-022     OK  incomplete  fi=None fac=None  rel=equ,equ {5/4 - sqrt(17)/4, sqrt(17)/4 + 5/4}
+h6-ineq-001    OK  valid       fi=None fac=True  rel=equ,equ Interval.open(-oo, 4)
+h6-ineq-002    OK  valid       fi=None fac=True  rel=equ,equ Interval(-oo, -4)
+h6-ineq-003    OK  invalid     fi=1    fac=False rel=equ,nei Interval(-oo, -4)
+h6-ineq-004    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ Interval.open(-oo, 4)
+h6-ineq-005    OK  valid-jump  fi=None fac=True  rel=equ,equ,equ Interval.open(-oo, 4)
+h6-ineq-006    OK  invalid     fi=1    fac=False rel=equ,nei Interval.open(-oo, 4)
+h6-ineq-007    OK  valid       fi=None fac=True  rel=equ,equ Interval(-5, oo)
+h6-ineq-008    OK  invalid     fi=0    fac=False rel=nei,equ Interval(-5, oo)
+h6-ineq-009    OK  valid       fi=None fac=True  rel=equ Interval.open(-6, oo)
+h6-ineq-010    OK  invalid     fi=0    fac=False rel=nei Interval.open(-6, oo)
+h6-ineq-011    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ,equ Interval(-oo, -3)
+h6-ineq-012    OK  invalid     fi=3    fac=False rel=equ,equ,equ,nei Interval(-oo, -3)
+h6-ineq-013    OK  valid       fi=None fac=True  rel=equ,equ,equ Interval.open(0, 2)
+h6-ineq-014    OK  invalid     fi=0    fac=False rel=imp,equ Union(Interval.open(-oo, 0), Interval.open(3, oo))
+h6-ineq-015    OK  valid       fi=None fac=True  rel=equ,equ,equ Interval.Lopen(0, 2)
+h6-ineq-016    OK  valid       fi=None fac=True  rel=equ,equ EmptySet
+h6-ineq-017    OK  invalid     fi=0    fac=False rel=imp,equ EmptySet
+h6-ineq-018    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ EmptySet
+h6-ineq-019    OK  valid       fi=None fac=True  rel=equ,equ,equ Interval(-oo, 5)
+h6-ineq-020    OK  invalid     fi=2    fac=False rel=equ,equ,imp Interval(-oo, 5)
+h6-ineq-021    OK  valid       fi=None fac=True  rel=equ,equ Interval.Lopen(-2, 3)
+h6-ineq-022    OK  incomplete  fi=None fac=None  rel=equ,equ Interval(3, oo)
+h6-sub-001     OK  valid       fi=None fac=True  rel=equ,equ,equ value 17
+h6-sub-002     OK  invalid     fi=1    fac=False rel=equ,nei,equ value 17
+h6-sub-003     OK  invalid     fi=1    fac=False rel=equ,nei,equ value 17
+h6-sub-004     OK  valid       fi=None fac=True  rel=equ,equ,equ value 27
+h6-sub-005     OK  invalid     fi=1    fac=False rel=equ,nei,equ value 27
+h6-sub-006     OK  valid       fi=None fac=True  rel=equ,equ,equ value 3
+h6-sub-007     OK  invalid     fi=0    fac=False rel=nei,equ,equ value 3
+h6-sub-008     OK  valid       fi=None fac=True  rel=equ,equ,equ value -4
+h6-sub-009     OK  invalid     fi=2    fac=False rel=equ,equ,nei value -4
+h6-sub-010     OK  valid       fi=None fac=True  rel=equ,equ,equ value -7
+h6-sub-011     OK  invalid     fi=1    fac=False rel=equ,nei,equ value -7
+h6-sub-012     OK  valid       fi=None fac=True  rel=equ,equ,equ,equ value 8
+h6-sub-013     OK  invalid     fi=1    fac=False rel=equ,nei,equ value 8
+h6-sub-014     OK  valid       fi=None fac=True  rel=equ,equ,equ value -24
+h6-sub-015     OK  invalid     fi=1    fac=False rel=equ,nei,equ value -24
+h6-sub-016     OK  valid       fi=None fac=True  rel=equ,equ,equ value 6
+h6-sub-017     OK  valid       fi=None fac=True  rel=equ,equ,equ value 8
+h6-sub-018     OK  invalid     fi=1    fac=False rel=equ,nei,equ value 8
+h6-sub-019     OK  valid       fi=None fac=True  rel=equ,equ,equ value 3
+h6-sub-020     OK  valid       fi=None fac=True  rel=equ,equ,equ value 17
+h6-sub-021     OK  invalid     fi=1    fac=False rel=equ,nei,equ value 17
+h6-sub-022     OK  incomplete  fi=None fac=None  rel=equ,equ value 8
+h6-sq-001      OK  valid       fi=None fac=True  rel=imp,equ,equ,equ,equ,imp {6}
+h6-sq-002      OK  invalid     fi=4    fac=False rel=imp,equ,equ,equ,equ {6}
+h6-sq-003      OK  valid       fi=None fac=True  rel=imp,equ,equ,equ,imp {3}
+h6-sq-004      OK  invalid     fi=3    fac=False rel=imp,equ,equ,equ {3}
+h6-sq-005      OK  valid       fi=None fac=True  rel=imp,equ,equ,equ,equ,imp {4}
+h6-sq-006      OK  invalid     fi=0    fac=False rel=nei,equ,equ {4}
+h6-sq-007      OK  valid       fi=None fac=True  rel=imp,equ,equ,equ,equ,imp {2}
+h6-sq-008      OK  invalid     fi=3    fac=False rel=imp,equ,equ,nei,equ {2}
+h6-sq-009      OK  valid       fi=None fac=True  rel=imp,equ,equ,equ,equ,imp {9}
+h6-sq-010      OK  invalid     fi=0    fac=False rel=nei,equ,equ {9}
+h6-sq-011      OK  valid-jump  fi=None fac=True  rel=equ,equ,equ {1, 5}
+h6-sq-012      OK  invalid     fi=0    fac=False rel=imp,equ {1, 5}
+h6-sq-013      OK  valid       fi=None fac=True  rel=equ,equ,equ,equ {1}
+h6-sq-014      OK  invalid     fi=0    fac=False rel=imp,equ,equ {1}
+h6-sq-015      OK  valid       fi=None fac=True  rel=imp,equ,equ,equ,equ,imp {5}
+h6-sq-016      OK  invalid     fi=4    fac=False rel=imp,equ,equ,equ,equ {3}
+h6-sq-017      OK  valid       fi=None fac=True  rel=imp,equ,equ,equ,equ,imp {3}
+h6-sq-018      OK  invalid     fi=5    fac=False rel=imp,equ,equ,equ,equ,imp {3}
+h6-sq-019      OK  valid       fi=None fac=True  rel=imp,equ,equ,equ,equ,imp {8}
+h6-sq-020      OK  incomplete  fi=None fac=None  rel=imp,equ,equ {6}
+h6-sq-021      OK  valid       fi=None fac=True  rel=imp,equ,equ,equ,imp {5}
+h6-sq-022      OK  invalid     fi=4    fac=False rel=imp,equ,equ,equ,imp {5}
+h6-nota-001    OK  valid       fi=None fac=True  rel=equ,equ,equ {4}
+h6-nota-002    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ {5}
+h6-nota-003    OK  valid       fi=None fac=True  rel=equ,equ,equ {2, 3}
+h6-nota-004    OK  valid       fi=None fac=True  rel=equ,equ,equ {5}
+h6-nota-005    OK  valid       fi=None fac=True  rel=equ,equ,equ {28/5}
+h6-nota-006    OK  invalid     fi=0    fac=False rel=nei,equ,equ {28/5}
+h6-nota-007    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ,equ {-4}
+h6-nota-008    OK  invalid     fi=0    fac=False rel=nei,equ,equ,equ,equ {-4}
+h6-nota-009    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ {-2, 0, 2}
+h6-nota-010    OK  invalid     fi=0    fac=False rel=imp,equ {-2, 0, 2}
+h6-nota-011    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ Interval(-oo, 4)
+h6-nota-012    OK  valid       fi=None fac=True  rel=equ Interval(-oo, -4)
+h6-nota-013    OK  invalid     fi=0    fac=False rel=nei Interval(-oo, -4)
+h6-nota-014    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ,equ {0}
+h6-nota-015    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ,equ,equ EmptySet
+h6-nota-016    OK  invalid     fi=4    fac=False rel=equ,equ,equ,equ,equ EmptySet
+h6-nota-017    OK  valid       fi=None fac=True  rel=equ,equ {-5}
+h6-nota-018    OK  valid       fi=None fac=True  rel=equ,equ {2}
+h6-nota-019    OK  valid-jump  fi=None fac=True  rel=equ,equ,equ {9}
+h6-nota-020    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ {-2, 4}
+h6-nota-021    OK  valid       fi=None fac=True  rel=equ,equ Interval.open(-oo, -3)
+h6-nota-022    OK  invalid     fi=1    fac=False rel=equ,nei Interval.open(-oo, -3)
+h6-nota-023    OK  valid       fi=None fac=True  rel=equ,equ,equ {5/2}
+h6-nota-024    OK  valid       fi=None fac=True  rel=equ,equ,equ {-2}
+h6-nota-025    OK  valid       fi=None fac=True  rel=equ {-7, 7}
+h6-nota-026    OK  invalid     fi=0    fac=False rel=imp {-7, 7}
+h6-nota-027    OK  valid       fi=None fac=True  rel=equ {-1, 4}
+h6-nota-028    OK  valid       fi=None fac=True  rel=equ,equ,equ,equ {3}
+h6-nota-029    OK  invalid     fi=0    fac=False rel=nei,equ,equ,equ {3}
+h6-nota-030    OK  valid-jump  fi=None fac=True  rel=equ,equ,equ Interval(-oo, 6)
+h6-ambm-001    OK  ambiguous   fi=None fac=None  rel=n/a,n/a n/m juxtaposed
+h6-ambm-002    OK  ambiguous   fi=None fac=None  rel=n/a,n/a a/b/c
+h6-ambm-003    OK  ambiguous   fi=None fac=None  rel=n/a,n/a a^b^c
+h6-ambm-004    OK  ambiguous   fi=None fac=None  rel=n/a,n/a,n/a a/bc
+h6-ambm-005    OK  ambiguous   fi=None fac=None  rel=n/a,n/a,n/a a^n/m
+h6-ambm-006    OK  ambiguous   fi=None fac=None  rel=n/a,n/a n/m juxtaposed
+h6-ambm-007    OK  ambiguous   fi=None fac=None  rel=n/a,n/a n/m juxtaposed
+h6-ambm-008    OK  ambiguous   fi=None fac=None  rel=n/a,n/a a/b/c
+h6-ambm-009    OK  ambiguous   fi=None fac=None  rel=n/a,n/a,n/a n/m juxtaposed
+h6-ambm-010    OK  ambiguous   fi=None fac=None  rel=n/a,n/a,n/a n/m juxtaposed
+h6-ambm-011    OK  ambiguous   fi=None fac=None  rel=n/a,n/a a^b^c
+h6-ambm-012    OK  ambiguous   fi=None fac=None  rel=n/a,n/a a^n/m
+h6-ambm-013    OK  ambiguous   fi=None fac=None  rel=n/a,n/a,n/a n/m juxtaposed
+h6-ambm-014    OK  ambiguous   fi=None fac=None  rel=n/a,n/a,n/a n/m juxtaposed
+h6-ambm-015    OK  ambiguous   fi=None fac=None  rel=n/a,n/a a/b/c
+h6-ambm-016    OK  malformed   fi=None fac=None  rel=n/a,n/a doubled relation
+h6-ambm-017    OK  malformed   fi=None fac=None  rel=n/a,n/a,n/a unbalanced ()
+h6-ambm-018    OK  malformed   fi=None fac=None  rel=n/a,n/a dangling operator
+h6-ambm-019    OK  malformed   fi=None fac=None  rel=n/a,n/a,n/a stray word 'plus'
+h6-ambm-020    OK  malformed   fi=None fac=None  rel=n/a,n/a dangling operator
+h6-ambm-021    OK  malformed   fi=None fac=None  rel=n/a,n/a unbalanced ()
+h6-ambm-022    OK  malformed   fi=None fac=None  rel=n/a,n/a doubled operator
+h6-ambm-023    OK  malformed   fi=None fac=None  rel=n/a,n/a dangling operator
+h6-ambm-024    OK  malformed   fi=None fac=None  rel=n/a,n/a stray word 'equals'
+h6-ambm-025    OK  malformed   fi=None fac=None  rel=n/a,n/a doubled relation
+h6-ambm-026    OK  malformed   fi=None fac=None  rel=n/a,n/a unbalanced ()
+h6-ambm-027    OK  malformed   fi=None fac=None  rel=n/a,n/a unbalanced ()
+h6-ambm-028    OK  malformed   fi=None fac=None  rel=n/a,n/a dangling operator
+h6-ambm-029    OK  malformed   fi=None fac=None  rel=n/a,n/a doubled operator
+h6-ambm-030    OK  malformed   fi=None fac=None  rel=n/a,n/a stray word 'cm'
+h6-cainv-001   OK  invalid     fi=0    fac=True  rel=nei,nei {3}
+h6-cainv-002   OK  invalid     fi=0    fac=True  rel=imp,imp {0, 4}
+h6-cainv-003   OK  invalid     fi=0    fac=True  rel=nei,nei,equ {4}
+h6-cainv-004   OK  invalid     fi=0    fac=True  rel=nei,nei {4}
+h6-cainv-005   OK  invalid     fi=0    fac=True  rel=nei,nei,nei {4}
+h6-cainv-006   OK  invalid     fi=0    fac=True  rel=nei,nei Interval.open(-3, oo)
+h6-cainv-007   OK  invalid     fi=0    fac=True  rel=imp,equ,imp Interval(5, oo)
+h6-cainv-008   OK  invalid     fi=1    fac=True  rel=equ,nei,nei value 3
+h6-cainv-009   OK  invalid     fi=0    fac=True  rel=nei,nei {-3, 2}
+h6-cainv-010   OK  invalid     fi=2    fac=True  rel=imp,equ,nei,equ,nei {2}
+h6-cainv-011   OK  invalid     fi=0    fac=True  rel=nei,nei {5}
+h6-cainv-012   OK  invalid     fi=0    fac=True  rel=nei,nei {6}
+h6-cainv-013   OK  invalid     fi=0    fac=True  rel=nei,equ,nei {3}
+h6-cainv-014   OK  invalid     fi=0    fac=True  rel=nei,equ,nei {3}
+h6-cainv-015   OK  invalid     fi=1    fac=True  rel=equ,imp,imp {-3, 3}
+h6-wavs-001    OK  invalid     fi=2    fac=False rel=equ,equ,nei {6}
+h6-wavs-002    OK  invalid     fi=1    fac=False rel=equ,nei {-3, 5}
+h6-wavs-003    OK  invalid     fi=2    fac=False rel=equ,equ,nei,equ {5}
+h6-wavs-004    OK  invalid     fi=1    fac=False rel=equ,imp {3}
+h6-wavs-005    OK  invalid     fi=1    fac=False rel=equ,nei Interval.open(-oo, -2)
+h6-wavs-006    OK  invalid     fi=1    fac=False rel=equ,nei {-6, 2}
+h6-wavs-007    OK  invalid     fi=3    fac=False rel=equ,equ,equ,nei value 39
+h6-wavs-008    OK  invalid     fi=4    fac=False rel=imp,equ,equ,equ,imp {3}
+h6-wavs-009    OK  invalid     fi=2    fac=False rel=equ,equ,nei {6}
+h6-wavs-010    OK  invalid     fi=3    fac=False rel=equ,equ,equ,nei Interval(-4, oo)
+h6-wavs-011    OK  invalid     fi=2    fac=False rel=equ,equ,nei {-6, 2}
+h6-wavs-012    OK  invalid     fi=3    fac=False rel=equ,equ,equ,nei {3}
+h6-wavs-013    OK  invalid     fi=3    fac=False rel=equ,equ,equ,nei value 14
+h6-wavs-014    OK  invalid     fi=3    fac=False rel=equ,equ,equ,nei {4/3}
+h6-wavs-015    OK  invalid     fi=1    fac=False rel=equ,nei Interval(1, oo)
+
+items=222 disagreements=0 undecidable=0

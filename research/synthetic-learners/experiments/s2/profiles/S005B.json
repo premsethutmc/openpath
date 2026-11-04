@@ -1,0 +1,53 @@
+{
+ "schema": "synthetic-learner-profile@1",
+ "id": "S005B",
+ "version": "1.0.0",
+ "synthetic": "All parameters are synthetic and configurable; they are not empirical statistics about real students.",
+ "name": "Careless learner (cohort B: unrecognised errors, neutral learning response)",
+ "description": "Understands the methods but makes intermittent arithmetic slips. Cohort B: each catalogued misconception is replaced by an error at the same step that OpenPath's teaching taxonomy does not represent (same strength); instruction is understood only from the kind of equations an explanation works through (no title recognition, no misconception targeting).",
+ "seed": 75005,
+ "skills": {
+  "one-step": 0.98,
+  "two-step": 0.97,
+  "both-sides": 0.95,
+  "brackets": 0.94,
+  "modelling": 0.9
+ },
+ "misconceptions": {},
+ "slip": 0.18,
+ "guess": 0.0,
+ "invalidWorkingWithCorrectAnswer": 0.0,
+ "working": {
+  "full": 0.7,
+  "partial": 0.1,
+  "bare": 0.15,
+  "none": 0.05,
+  "unsupportedNotation": 0.05
+ },
+ "hints": {
+  "seek": 0.05,
+  "help": 0.1
+ },
+ "instruction": {
+  "full": 0.6,
+  "partial": 0.25,
+  "gain": 0.5,
+  "fragileShare": 0.3,
+  "misconceptionReduction": 0.8,
+  "misconceptionResponse": 0.8,
+  "offTargetGain": 0.1
+ },
+ "practice": {
+  "consolidate": 0.5,
+  "gainRight": 0.04,
+  "gainWrong": 0.01
+ },
+ "forgetting": {
+  "halfLifeDays": 150,
+  "floor": 0.8,
+  "fragileHalfLifeDays": 20,
+  "relapse": 0.05
+ },
+ "cohort": "B",
+ "learningModel": "content-features"
+}

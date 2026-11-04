@@ -1,0 +1,67 @@
+{
+ "SOLVE": [
+  "collect-terms",
+  "cancel-common-factor",
+  "divide-restricted-factor",
+  "restrict",
+  "expand",
+  "accept-candidate",
+  "mul-div-const",
+  "clear-denominators",
+  "move-to-left",
+  "combine-terms",
+  "add-sub-both-sides"
+ ],
+ "EXPANDED_POLY": [
+  "divide-restricted-factor",
+  "collect-terms",
+  "mul-div-const",
+  "expand",
+  "restrict",
+  "combine-terms",
+  "clear-denominators",
+  "cancel-common-factor",
+  "move-to-left",
+  "accept-candidate",
+  "add-sub-both-sides"
+ ],
+ "ONE_FRACTION_ZERO": [
+  "restrict",
+  "cancel-common-factor",
+  "clear-denominators",
+  "expand",
+  "collect-terms",
+  "move-to-left",
+  "divide-restricted-factor",
+  "add-sub-both-sides",
+  "mul-div-const",
+  "combine-terms",
+  "accept-candidate"
+ ],
+ "CLEARED": [
+  "restrict",
+  "cancel-common-factor",
+  "clear-denominators",
+  "expand",
+  "collect-terms",
+  "move-to-left",
+  "divide-restricted-factor",
+  "add-sub-both-sides",
+  "mul-div-const",
+  "combine-terms",
+  "accept-candidate"
+ ],
+ "REDUCED": [
+  "restrict",
+  "cancel-common-factor",
+  "clear-denominators",
+  "expand",
+  "collect-terms",
+  "move-to-left",
+  "divide-restricted-factor",
+  "add-sub-both-sides",
+  "mul-div-const",
+  "combine-terms",
+  "accept-candidate"
+ ]
+}

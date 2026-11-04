@@ -1,0 +1,2526 @@
+{
+ "totalMs": 1018,
+ "cases": 280,
+ "results": {
+  "designed-1": {
+   "group": "designed",
+   "expect": "verified",
+   "label": "37 + 59 = (30 + 50) + (7 + 9)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 42
+  },
+  "designed-2": {
+   "group": "designed",
+   "expect": "verified",
+   "label": "37 + 59 = (31 + 49) + (6 + 10)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 11
+  },
+  "designed-3": {
+   "group": "designed",
+   "expect": "verified",
+   "label": "12 * 4 = (10 + 2) * 4",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 13
+  },
+  "designed-4": {
+   "group": "designed",
+   "expect": "verified",
+   "label": "7 * 98 = 7 * (100 - 2)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 8
+  },
+  "designed-5": {
+   "group": "designed",
+   "expect": "verified",
+   "label": "5/6 = 1/2 + 1/3",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 13
+  },
+  "designed-6": {
+   "group": "designed",
+   "expect": "verified",
+   "label": "1/2 + 1/3 = 3/6 + 2/6",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 7
+  },
+  "designed-7": {
+   "group": "designed",
+   "expect": "verified",
+   "label": "37 + 59 = (37 + 3) + (59 - 3)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "designed-8": {
+   "group": "designed",
+   "expect": "verified",
+   "label": "37 + 59 = (37 + 22) + (59 - 22)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 11
+  },
+  "designed-9": {
+   "group": "designed",
+   "expect": "verified",
+   "label": "100 - 37 = (100 - 40) + 3",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 8
+  },
+  "designed-10": {
+   "group": "designed",
+   "expect": "verified",
+   "label": "63 + 28 = 63 + (30 - 2)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 3
+  },
+  "adv-designed-11": {
+   "group": "adv-designed",
+   "expect": "unsupported",
+   "label": "37 + 59 = (96 + 17) - 17",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 6
+  },
+  "adv-designed-12": {
+   "group": "adv-designed",
+   "expect": "unsupported",
+   "label": "37 + 59 = 37 + 59 + (5 - 5)",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "adv-designed-13": {
+   "group": "adv-designed",
+   "expect": "unsupported",
+   "label": "37 + 59 = 96 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "adv-designed-14": {
+   "group": "adv-designed",
+   "expect": "unsupported",
+   "label": "37 + 59 = 2 * 48",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "adv-designed-15": {
+   "group": "adv-designed",
+   "expect": "unsupported",
+   "label": "37 + 59 = 40 + 56",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "adv-designed-16": {
+   "group": "adv-designed",
+   "expect": "unsupported",
+   "label": "37 + 59 = 95 + 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "adv-designed-17": {
+   "group": "adv-designed",
+   "expect": "unsupported",
+   "label": "37 + 59 = 100 - 4",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 3
+  },
+  "adv-designed-18": {
+   "group": "adv-designed",
+   "expect": "invalid",
+   "label": "37 + 59 = 8 + 16",
+   "classification": "invalid",
+   "firstInvalidStep": 0,
+   "steps": "iu",
+   "ms": 3
+  },
+  "adv-designed-19": {
+   "group": "adv-designed",
+   "expect": "invalid",
+   "label": "37 + 59 = (30 + 50) + (7 + 9)",
+   "classification": "invalid",
+   "firstInvalidStep": 2,
+   "steps": "vvi",
+   "ms": 5
+  },
+  "adv-designed-20": {
+   "group": "adv-designed",
+   "expect": "invalid",
+   "label": "37 + 59 = (30 + 50) + (7 + 9)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 4
+  },
+  "adv-designed-21": {
+   "group": "adv-designed",
+   "expect": "invalid",
+   "label": "37 + 59 = (30 + 50) + (7 + 8)",
+   "classification": "invalid",
+   "firstInvalidStep": 0,
+   "steps": "iu",
+   "ms": 1
+  },
+  "adv-designed-22": {
+   "group": "adv-designed",
+   "expect": "invalid",
+   "label": "37 + 59 = (37 + 3) + (59 - 4)",
+   "classification": "invalid",
+   "firstInvalidStep": 0,
+   "steps": "iu",
+   "ms": 1
+  },
+  "symbolic-23": {
+   "group": "symbolic",
+   "expect": "verified",
+   "label": "3(x + 4) = 18",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 24
+  },
+  "symbolic-24": {
+   "group": "symbolic",
+   "expect": "verified",
+   "label": "x^2 + 5x + 6 = 0",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 24
+  },
+  "symbolic-25": {
+   "group": "symbolic",
+   "expect": "verified",
+   "label": "2x + 6 = 12",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "symbolic-26": {
+   "group": "symbolic",
+   "expect": "verified",
+   "label": "2x + 6 = 12",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 19
+  },
+  "symbolic-27": {
+   "group": "symbolic",
+   "expect": "verified",
+   "label": "2x + 6 = 12",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 6
+  },
+  "symbolic-28": {
+   "group": "symbolic",
+   "expect": "unsupported",
+   "label": "2x + 6 = 12",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 7
+  },
+  "symbolic-29": {
+   "group": "symbolic",
+   "expect": "unsupported",
+   "label": "2x + 6 = 12",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 5
+  },
+  "symbolic-30": {
+   "group": "symbolic",
+   "expect": "unsupported",
+   "label": "2x + 6 = 12",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 6
+  },
+  "symbolic-31": {
+   "group": "symbolic",
+   "expect": "unsupported",
+   "label": "2x + 6 = 12",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 5
+  },
+  "symbolic-32": {
+   "group": "symbolic",
+   "expect": "unsupported",
+   "label": "2x + 6 = 12",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 9
+  },
+  "symbolic-33": {
+   "group": "symbolic",
+   "expect": "unsupported",
+   "label": "2x + 6 = 12",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 14
+  },
+  "symbolic-34": {
+   "group": "symbolic",
+   "expect": "invalid",
+   "label": "2x + 6 = 12",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viuu",
+   "ms": 31
+  },
+  "symbolic-35": {
+   "group": "symbolic",
+   "expect": "invalid",
+   "label": "2x + 6 = 12",
+   "classification": "invalid",
+   "firstInvalidStep": 2,
+   "steps": "vviu",
+   "ms": 19
+  },
+  "symbolic-36": {
+   "group": "symbolic",
+   "expect": "verified",
+   "label": "x^2 + 6x + 5 = 0",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 7
+  },
+  "symbolic-37": {
+   "group": "symbolic",
+   "expect": null,
+   "label": "x^2 + 6x + 5 = 0",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 7
+  },
+  "symbolic-38": {
+   "group": "symbolic",
+   "expect": "verified",
+   "label": "(x + 2)^2 = 9",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvvvv",
+   "ms": 10
+  },
+  "symbolic-39": {
+   "group": "symbolic",
+   "expect": "verified",
+   "label": "4x - 2(x - 3) = 10",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvvv",
+   "ms": 5
+  },
+  "symbolic-40": {
+   "group": "symbolic",
+   "expect": "unsupported",
+   "label": "2x + 3 = 11",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vuu",
+   "ms": 2
+  },
+  "gen-decomp-41": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "67 + 11 = (60 + 10) + (7 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-slip-42": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "67 + 11 = (60 + 10) + (7 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-43": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "67 + 11 = (67 + 16) + (11 - 16)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 9
+  },
+  "gen-pad-44": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "67 + 11 = (78 + 16) - 16",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-unshown-45": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "67 + 11 = 83 + -5",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-smuggle-46": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "67 + 11 = 78 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-decomp-47": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "27 + 11 = (20 + 10) + (7 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-slip-48": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "27 + 11 = (20 + 10) + (7 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-49": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "27 + 11 = (27 + 6) + (11 - 6)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-pad-50": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "27 + 11 = (38 + 6) - 6",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-51": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "27 + 11 = 33 + 5",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 4
+  },
+  "gen-decomp-52": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "43 + 27 = (40 + 20) + (3 + 7)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-53": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "43 + 27 = (40 + 20) + (3 + 7)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-54": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "43 + 27 = (43 + 22) + (27 - 22)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-55": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "43 + 27 = (70 + 22) - 22",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-56": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "43 + 27 = 65 + 5",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-57": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "43 + 27 = 70 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-58": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "11 + 75 = (10 + 70) + (1 + 5)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-slip-59": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "11 + 75 = (10 + 70) + (1 + 5)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 6
+  },
+  "gen-shift-60": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "11 + 75 = (11 + 22) + (75 - 22)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-pad-61": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "11 + 75 = (86 + 22) - 22",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 3
+  },
+  "gen-unshown-62": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "11 + 75 = 33 + 53",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-decomp-63": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "27 + 59 = (20 + 50) + (7 + 9)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-slip-64": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "27 + 59 = (20 + 50) + (7 + 9)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 3
+  },
+  "gen-shift-65": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "27 + 59 = (27 + 10) + (59 - 10)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-pad-66": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "27 + 59 = (86 + 10) - 10",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-unshown-67": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "27 + 59 = 37 + 49",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 3
+  },
+  "gen-smuggle-68": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "27 + 59 = 86 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-decomp-69": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "75 + 11 = (70 + 10) + (5 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-70": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "75 + 11 = (70 + 10) + (5 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-71": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "75 + 11 = (75 + 30) + (11 - 30)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-pad-72": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "75 + 11 = (86 + 30) - 30",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-73": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "75 + 11 = 105 + -19",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-decomp-74": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "59 + 43 = (50 + 40) + (9 + 3)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-75": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "59 + 43 = (50 + 40) + (9 + 3)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 4
+  },
+  "gen-shift-76": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "59 + 43 = (59 + 12) + (43 - 12)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-77": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "59 + 43 = (102 + 12) - 12",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-unshown-78": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "59 + 43 = 71 + 31",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-79": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "59 + 43 = 102 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-decomp-80": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "43 + 59 = (40 + 50) + (3 + 9)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-81": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "43 + 59 = (40 + 50) + (3 + 9)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-82": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "43 + 59 = (43 + 10) + (59 - 10)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-83": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "43 + 59 = (102 + 10) - 10",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-unshown-84": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "43 + 59 = 53 + 49",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 3
+  },
+  "gen-decomp-85": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "27 + 11 = (20 + 10) + (7 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-86": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "27 + 11 = (20 + 10) + (7 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-87": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "27 + 11 = (27 + 24) + (11 - 24)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-88": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "27 + 11 = (38 + 24) - 24",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-89": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "27 + 11 = 51 + -13",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-90": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "27 + 11 = 38 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-91": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "11 + 11 = (10 + 10) + (1 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-92": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "11 + 11 = (10 + 10) + (1 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 9
+  },
+  "gen-shift-93": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "11 + 11 = (11 + 14) + (11 - 14)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-94": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "11 + 11 = (22 + 14) - 14",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-95": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "11 + 11 = 25 + -3",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-96": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "59 + 75 = (50 + 70) + (9 + 5)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 7
+  },
+  "gen-slip-97": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "59 + 75 = (50 + 70) + (9 + 5)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 3
+  },
+  "gen-shift-98": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "59 + 75 = (59 + 2) + (75 - 2)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 7
+  },
+  "gen-pad-99": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "59 + 75 = (134 + 2) - 2",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-unshown-100": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "59 + 75 = 61 + 73",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 3
+  },
+  "gen-smuggle-101": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "59 + 75 = 134 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-decomp-102": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "27 + 59 = (20 + 50) + (7 + 9)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-103": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "27 + 59 = (20 + 50) + (7 + 9)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-104": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "27 + 59 = (27 + 2) + (59 - 2)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-pad-105": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "27 + 59 = (86 + 2) - 2",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-106": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "27 + 59 = 29 + 57",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-107": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "75 + 43 = (70 + 40) + (5 + 3)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-slip-108": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "75 + 43 = (70 + 40) + (5 + 3)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 3
+  },
+  "gen-shift-109": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "75 + 43 = (75 + 18) + (43 - 18)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 8
+  },
+  "gen-pad-110": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "75 + 43 = (118 + 18) - 18",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-111": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "75 + 43 = 93 + 25",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-112": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "75 + 43 = 118 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-113": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "59 + 75 = (50 + 70) + (9 + 5)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-114": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "59 + 75 = (50 + 70) + (9 + 5)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-115": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "59 + 75 = (59 + 30) + (75 - 30)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-116": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "59 + 75 = (134 + 30) - 30",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-117": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "59 + 75 = 89 + 45",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-decomp-118": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "43 + 75 = (40 + 70) + (3 + 5)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-slip-119": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "43 + 75 = (40 + 70) + (3 + 5)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-120": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "43 + 75 = (43 + 24) + (75 - 24)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-121": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "43 + 75 = (118 + 24) - 24",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-122": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "43 + 75 = 67 + 51",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-123": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "43 + 75 = 118 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-124": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "75 + 43 = (70 + 40) + (5 + 3)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-125": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "75 + 43 = (70 + 40) + (5 + 3)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-126": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "75 + 43 = (75 + 6) + (43 - 6)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-pad-127": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "75 + 43 = (118 + 6) - 6",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-unshown-128": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "75 + 43 = 81 + 37",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-129": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "75 + 59 = (70 + 50) + (5 + 9)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-130": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "75 + 59 = (70 + 50) + (5 + 9)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-131": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "75 + 59 = (75 + 24) + (59 - 24)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-132": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "75 + 59 = (134 + 24) - 24",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-133": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "75 + 59 = 99 + 35",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-134": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "75 + 59 = 134 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-135": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "11 + 27 = (10 + 20) + (1 + 7)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-slip-136": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "11 + 27 = (10 + 20) + (1 + 7)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-137": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "11 + 27 = (11 + 18) + (27 - 18)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-138": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "11 + 27 = (38 + 18) - 18",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-139": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "11 + 27 = 29 + 9",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-140": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "59 + 27 = (50 + 20) + (9 + 7)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-141": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "59 + 27 = (50 + 20) + (9 + 7)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-142": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "59 + 27 = (59 + 10) + (27 - 10)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-pad-143": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "59 + 27 = (86 + 10) - 10",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-unshown-144": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "59 + 27 = 69 + 17",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-145": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "59 + 27 = 86 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-146": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "27 + 27 = (20 + 20) + (7 + 7)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-147": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "27 + 27 = (20 + 20) + (7 + 7)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-148": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "27 + 27 = (27 + 20) + (27 - 20)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-149": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "27 + 27 = (54 + 20) - 20",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-150": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "27 + 27 = 47 + 7",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-151": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "27 + 27 = (20 + 20) + (7 + 7)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-slip-152": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "27 + 27 = (20 + 20) + (7 + 7)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-153": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "27 + 27 = (27 + 20) + (27 - 20)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-154": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "27 + 27 = (54 + 20) - 20",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-155": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "27 + 27 = 47 + 7",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-156": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "27 + 27 = 54 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-157": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "43 + 59 = (40 + 50) + (3 + 9)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-158": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "43 + 59 = (40 + 50) + (3 + 9)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-159": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "43 + 59 = (43 + 4) + (59 - 4)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-pad-160": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "43 + 59 = (102 + 4) - 4",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 3
+  },
+  "gen-unshown-161": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "43 + 59 = 47 + 55",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-162": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "43 + 11 = (40 + 10) + (3 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-163": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "43 + 11 = (40 + 10) + (3 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-164": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "43 + 11 = (43 + 10) + (11 - 10)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-165": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "43 + 11 = (54 + 10) - 10",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-166": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "43 + 11 = 53 + 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-167": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "43 + 11 = 54 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-168": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "75 + 11 = (70 + 10) + (5 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-169": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "75 + 11 = (70 + 10) + (5 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 3
+  },
+  "gen-shift-170": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "75 + 11 = (75 + 6) + (11 - 6)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-171": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "75 + 11 = (86 + 6) - 6",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-172": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "75 + 11 = 81 + 5",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-173": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "43 + 43 = (40 + 40) + (3 + 3)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-174": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "43 + 43 = (40 + 40) + (3 + 3)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-175": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "43 + 43 = (43 + 22) + (43 - 22)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-176": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "43 + 43 = (86 + 22) - 22",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-177": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "43 + 43 = 65 + 21",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-178": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "43 + 43 = 86 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-decomp-179": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "43 + 43 = (40 + 40) + (3 + 3)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-180": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "43 + 43 = (40 + 40) + (3 + 3)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 1
+  },
+  "gen-shift-181": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "43 + 43 = (43 + 4) + (43 - 4)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-182": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "43 + 43 = (86 + 4) - 4",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-183": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "43 + 43 = 47 + 39",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-184": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "11 + 59 = (10 + 50) + (1 + 9)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-185": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "11 + 59 = (10 + 50) + (1 + 9)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-186": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "11 + 59 = (11 + 16) + (59 - 16)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-pad-187": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "11 + 59 = (70 + 16) - 16",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-188": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "11 + 59 = 27 + 43",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-189": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "11 + 59 = 70 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-190": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "59 + 43 = (50 + 40) + (9 + 3)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-191": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "59 + 43 = (50 + 40) + (9 + 3)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-192": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "59 + 43 = (59 + 14) + (43 - 14)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-193": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "59 + 43 = (102 + 14) - 14",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-194": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "59 + 43 = 73 + 29",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-195": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "27 + 11 = (20 + 10) + (7 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-slip-196": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "27 + 11 = (20 + 10) + (7 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-197": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "27 + 11 = (27 + 16) + (11 - 16)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-198": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "27 + 11 = (38 + 16) - 16",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-199": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "27 + 11 = 43 + -5",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-200": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "27 + 11 = 38 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-201": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "11 + 27 = (10 + 20) + (1 + 7)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-202": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "11 + 27 = (10 + 20) + (1 + 7)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-203": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "11 + 27 = (11 + 18) + (27 - 18)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 10
+  },
+  "gen-pad-204": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "11 + 27 = (38 + 18) - 18",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-unshown-205": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "11 + 27 = 29 + 9",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-206": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "43 + 11 = (40 + 10) + (3 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-207": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "43 + 11 = (40 + 10) + (3 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-208": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "43 + 11 = (43 + 26) + (11 - 26)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-209": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "43 + 11 = (54 + 26) - 26",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-210": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "43 + 11 = 69 + -15",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-211": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "43 + 11 = 54 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-212": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "75 + 59 = (70 + 50) + (5 + 9)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-slip-213": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "75 + 59 = (70 + 50) + (5 + 9)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 4
+  },
+  "gen-shift-214": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "75 + 59 = (75 + 8) + (59 - 8)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-215": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "75 + 59 = (134 + 8) - 8",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-216": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "75 + 59 = 83 + 51",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-217": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "11 + 59 = (10 + 50) + (1 + 9)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-218": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "11 + 59 = (10 + 50) + (1 + 9)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-219": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "11 + 59 = (11 + 18) + (59 - 18)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-220": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "11 + 59 = (70 + 18) - 18",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-221": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "11 + 59 = 29 + 41",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-222": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "11 + 59 = 70 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 4
+  },
+  "gen-decomp-223": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "43 + 11 = (40 + 10) + (3 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-224": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "43 + 11 = (40 + 10) + (3 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-225": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "43 + 11 = (43 + 8) + (11 - 8)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-226": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "43 + 11 = (54 + 8) - 8",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-227": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "43 + 11 = 51 + 3",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-228": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "11 + 27 = (10 + 20) + (1 + 7)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-229": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "11 + 27 = (10 + 20) + (1 + 7)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-230": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "11 + 27 = (11 + 8) + (27 - 8)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-pad-231": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "11 + 27 = (38 + 8) - 8",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-232": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "11 + 27 = 19 + 19",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-233": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "11 + 27 = 38 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-234": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "59 + 11 = (50 + 10) + (9 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-235": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "59 + 11 = (50 + 10) + (9 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-236": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "59 + 11 = (59 + 30) + (11 - 30)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-237": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "59 + 11 = (70 + 30) - 30",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-238": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "59 + 11 = 89 + -19",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-decomp-239": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "59 + 75 = (50 + 70) + (9 + 5)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-slip-240": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "59 + 75 = (50 + 70) + (9 + 5)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-241": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "59 + 75 = (59 + 10) + (75 - 10)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-242": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "59 + 75 = (134 + 10) - 10",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-243": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "59 + 75 = 69 + 65",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 2
+  },
+  "gen-smuggle-244": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "59 + 75 = 134 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-245": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "75 + 43 = (70 + 40) + (5 + 3)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-246": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "75 + 43 = (70 + 40) + (5 + 3)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-247": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "75 + 43 = (75 + 6) + (43 - 6)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-pad-248": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "75 + 43 = (118 + 6) - 6",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-249": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "75 + 43 = 81 + 37",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-250": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "43 + 11 = (40 + 10) + (3 + 1)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-slip-251": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "43 + 11 = (40 + 10) + (3 + 1)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 2
+  },
+  "gen-shift-252": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "43 + 11 = (43 + 24) + (11 - 24)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-pad-253": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "43 + 11 = (54 + 24) - 24",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-254": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "43 + 11 = 67 + -13",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-smuggle-255": {
+   "group": "gen-smuggle",
+   "expect": "unsupported",
+   "label": "43 + 11 = 54 * 1",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-decomp-256": {
+   "group": "gen-decomp",
+   "expect": "verified",
+   "label": "27 + 43 = (20 + 40) + (7 + 3)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-slip-257": {
+   "group": "gen-slip",
+   "expect": "invalid",
+   "label": "27 + 43 = (20 + 40) + (7 + 3)",
+   "classification": "invalid",
+   "firstInvalidStep": 1,
+   "steps": "viu",
+   "ms": 8
+  },
+  "gen-shift-258": {
+   "group": "gen-shift",
+   "expect": "verified",
+   "label": "27 + 43 = (27 + 10) + (43 - 10)",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-pad-259": {
+   "group": "gen-pad",
+   "expect": "unsupported",
+   "label": "27 + 43 = (70 + 10) - 10",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-unshown-260": {
+   "group": "gen-unshown",
+   "expect": "unsupported",
+   "label": "27 + 43 = 37 + 33",
+   "classification": "unsupported",
+   "firstInvalidStep": null,
+   "steps": "vv",
+   "ms": 1
+  },
+  "gen-mult-261": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "27 * 2 = (20 + 7) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-mult-262": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "19 * 2 = (10 + 9) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-263": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "27 * 2 = (20 + 7) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-264": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "43 * 2 = (40 + 3) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-265": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "19 * 2 = (10 + 9) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 4
+  },
+  "gen-mult-266": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "11 * 2 = (10 + 1) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-267": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "27 * 2 = (20 + 7) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-268": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "19 * 2 = (10 + 9) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 2
+  },
+  "gen-mult-269": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "35 * 2 = (30 + 5) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-270": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "27 * 2 = (20 + 7) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-271": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "35 * 2 = (30 + 5) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-272": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "19 * 2 = (10 + 9) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 5
+  },
+  "gen-mult-273": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "27 * 2 = (20 + 7) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-274": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "43 * 2 = (40 + 3) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-275": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "11 * 2 = (10 + 1) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 2
+  },
+  "gen-mult-276": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "43 * 2 = (40 + 3) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 2
+  },
+  "gen-mult-277": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "11 * 2 = (10 + 1) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-278": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "27 * 2 = (20 + 7) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 3
+  },
+  "gen-mult-279": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "43 * 2 = (40 + 3) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 6
+  },
+  "gen-mult-280": {
+   "group": "gen-mult",
+   "expect": "verified",
+   "label": "35 * 2 = (30 + 5) * 2",
+   "classification": "verified",
+   "firstInvalidStep": null,
+   "steps": "vvv",
+   "ms": 2
+  }
+ }
+}

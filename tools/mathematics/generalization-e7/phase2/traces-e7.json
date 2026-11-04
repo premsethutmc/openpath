@@ -1,0 +1,175 @@
+{
+ "engine": "/home/claude/e7",
+ "rows": [
+  {
+   "bypass": "1 prose is proof",
+   "name": "s6-217 forged identity",
+   "verdict": "invalid",
+   "ok": true,
+   "why": "line 1 is mathematically invalid",
+   "ledger": [
+    "relation[P(A|B) = P(A∩B) − P(B)]=disproven",
+    "relation[P(A|B) = (3/16)/(3/4) = 1/4]=proven"
+   ]
+  },
+  {
+   "bypass": "1 prose is proof",
+   "name": "s6-226 forged symmetry",
+   "verdict": "invalid",
+   "ok": true,
+   "why": "line 1 is mathematically invalid",
+   "ledger": [
+    "relation[C(11,3) = C(11,4)]=disproven",
+    "relation[C(11,3) = (11*10*9)/(3*2*1) = 165]=proven"
+   ]
+  },
+  {
+   "bypass": "1 prose is proof",
+   "name": "s6-238 forged Vieta formula",
+   "verdict": "unsupported",
+   "ok": true,
+   "why": "line(s) 1 could not be verified (unsupported); the submission cannot be certified",
+   "ledger": [
+    "assertion[the product of the roots is -c/a]=unsupported",
+    "relation[product of roots = 5/2]=proven"
+   ]
+  },
+  {
+   "bypass": "1 prose is proof",
+   "name": "false limit sentence",
+   "verdict": "unsupported",
+   "ok": true,
+   "why": "line(s) 1 could not be verified (unsupported); the submission cannot be certified",
+   "ledger": [
+    "assertion[The limit of x^2 as x->2 equals 9]=unsupported",
+    "relation[lim_(x->2) (x^2-4)/(x-2) = 4]=proven"
+   ]
+  },
+  {
+   "bypass": "1 prose is proof",
+   "name": "false arithmetic in prose",
+   "verdict": "invalid",
+   "ok": true,
+   "why": "line 1 is mathematically invalid",
+   "ledger": [
+    "relation[1+1=3]=disproven",
+    "relation[lim_(x->2) (x^2-4)/(x-2) = 4]=proven"
+   ]
+  },
+  {
+   "bypass": "1 prose is proof",
+   "name": "derivative sentence, wrong",
+   "verdict": "unsupported",
+   "ok": true,
+   "why": "line(s) 1 could not be verified (unsupported); the submission cannot be certified",
+   "ledger": [
+    "assertion[The derivative of x^2 is 3x]=unsupported",
+    "relation[f'(x) = 2x]=proven"
+   ]
+  },
+  {
+   "bypass": "2 label-agnostic answer",
+   "name": "sum of roots = 5/2 (product task)",
+   "verdict": "incomplete",
+   "ok": true,
+   "why": "finish with the requested quantity as a single reduced number",
+   "ledger": [
+    "relation[sum of roots = 5/2]=disproven"
+   ]
+  },
+  {
+   "bypass": "2 label-agnostic answer",
+   "name": "banana = 5/2",
+   "verdict": "incomplete",
+   "ok": true,
+   "why": "finish with the requested quantity as a single reduced number",
+   "ledger": [
+    "relation[banana = 5/2]=disproven"
+   ]
+  },
+  {
+   "bypass": "3 back-solved event",
+   "name": "s6-182",
+   "verdict": "missing-assumption",
+   "ok": true,
+   "why": "finish with the requested quantity as a single reduced number",
+   "ledger": [
+    "relation[P(at least one head) = 1 - P(no head) = 1 - (1/2)^3 = 7/8]=disproven"
+   ]
+  },
+  {
+   "bypass": "3 back-solved event",
+   "name": "unfamiliar: tails",
+   "verdict": "missing-assumption",
+   "ok": true,
+   "why": "finish with the requested quantity as a single reduced number",
+   "ledger": [
+    "relation[P(at least one tail) = 1 - P(no tail) = 7/8]=disproven"
+   ]
+  },
+  {
+   "bypass": "4 student assumption vs task",
+   "name": "Assume x>0 under x<0",
+   "verdict": "invalid",
+   "ok": true,
+   "why": "line 1: the assumed condition \"x>0\" contradicts the task restriction (task restrictions are immutable; a student assumption cannot replace t",
+   "ledger": [
+    "assumption[x>0]=disproven",
+    "relation[ln(x^2) = 2ln(x)]=proven",
+    "relation[f'(x) = 2/x]=proven"
+   ]
+  },
+  {
+   "bypass": "6 shared blind spot",
+   "name": "s6-299 disjoint domain components",
+   "verdict": "missing-assumption",
+   "ok": true,
+   "why": "finish with the antiderivative plus + C",
+   "ledger": [
+    "relation[∫ 1/(x-2) dx = ln(x-2) + C]=disproven"
+   ]
+  },
+  {
+   "bypass": "control",
+   "name": "valid: direct",
+   "verdict": "verified",
+   "ok": true,
+   "why": "all 1 submitted line(s) are accounted for and verified",
+   "ledger": [
+    "relation[lim_(x->2) (x^2-4)/(x-2) = lim_(x->2) (x+2) = 4]=proven"
+   ]
+  },
+  {
+   "bypass": "control",
+   "name": "valid: prose + true identity",
+   "verdict": "verified",
+   "ok": true,
+   "why": "all 2 submitted line(s) are accounted for and verified",
+   "ledger": [
+    "relation[x^2-4 = (x-2)(x+2)]=proven",
+    "relation[lim_(x->2) (x^2-4)/(x-2) = lim_(x->2) (x+2) = 4]=proven"
+   ]
+  },
+  {
+   "bypass": "control",
+   "name": "valid: compatible student assumption",
+   "verdict": "verified",
+   "ok": true,
+   "why": "all 3 submitted line(s) are accounted for and verified",
+   "ledger": [
+    "relation[ln(x^2) = 2ln(-x)]=proven",
+    "relation[f'(x) = 2/x]=proven"
+   ]
+  },
+  {
+   "bypass": "control",
+   "name": "valid: Vieta labelled",
+   "verdict": "verified",
+   "ok": true,
+   "why": "all 1 submitted line(s) are accounted for and verified",
+   "ledger": [
+    "relation[product of roots = 5/2]=proven"
+   ]
+  }
+ ]
+}

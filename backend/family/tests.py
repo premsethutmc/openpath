@@ -280,7 +280,7 @@ class LedgerTests(FamilyTestCase):
         arun = self.pupil(client)
         for bad in [{"id": "x", "at": "2026-10-14T09:00:00Z"}, {"kind": "attempt", "at": "2026-10-14T09:00:00Z"}, {"kind": "attempt", "id": "x", "at": "yesterday"}, "text", {"kind": "attempt", "id": "x", "at": "2026-10-14T09:00:00Z", "pad": "x" * 40_000}]:
             self.assertEqual(self.append(client, arun, 0, bad).status_code, 400, bad if isinstance(bad, str) else list(bad))
-        self.assertEqual(self.append(client, arun, 0, event(0), subject="mathematics").status_code, 400, "mathematics is reserved, not active yet")
+        self.assertEqual(self.append(client, arun, 0, event(0), subject="science").status_code, 400, "unregistered subjects remain inactive")
         self.assertEqual(PupilEvent.objects.count(), 0)
 
     def test_export_holds_the_whole_record(self):

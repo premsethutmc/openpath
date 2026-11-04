@@ -1,0 +1,30 @@
+{
+ "traces": 137,
+ "steps_checked": 289,
+ "invalid_steps": 0,
+ "claims_not_confirmed_by_sympy_oracle": 3,
+ "problems": [
+  [
+   "parser_stress-06",
+   "claim",
+   [
+    "3"
+   ],
+   "irrational excluded value 3.00000000000000"
+  ],
+  [
+   "parser_stress-19",
+   "claim",
+   "all-except-excluded",
+   "invalid syntax (<string>, line 1)"
+  ],
+  [
+   "const_times_x-04",
+   "claim",
+   [
+    "1/2"
+   ],
+   "irrational excluded value 0.500000000000000"
+  ]
+ ]
+}

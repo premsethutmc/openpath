@@ -1,0 +1,57 @@
+{
+ "seed": 20261028,
+ "dropped_count": 0,
+ "generation_stats": {
+  "domain-change": {
+   "candidates": 47,
+   "skipped_redraws": 3,
+   "accepted": 44
+  },
+  "extraneous-root": {
+   "candidates": 48,
+   "skipped_redraws": 4,
+   "accepted": 44
+  },
+  "cancellation": {
+   "candidates": 45,
+   "skipped_redraws": 1,
+   "accepted": 44
+  },
+  "multiplication-by-zero": {
+   "candidates": 48,
+   "skipped_redraws": 4,
+   "accepted": 44
+  },
+  "invalid-division": {
+   "candidates": 50,
+   "skipped_redraws": 6,
+   "accepted": 44
+  },
+  "rational-expressions": {
+   "candidates": 68,
+   "skipped_redraws": 24,
+   "accepted": 44
+  },
+  "alternative-paths": {
+   "candidates": 44,
+   "skipped_redraws": 0,
+   "accepted": 44
+  },
+  "correct-controls": {
+   "candidates": 44,
+   "skipped_redraws": 0,
+   "accepted": 44
+  },
+  "ambiguous-notation": {
+   "candidates": 44,
+   "skipped_redraws": 0,
+   "accepted": 44
+  },
+  "unsupported": {
+   "candidates": 59,
+   "skipped_redraws": 15,
+   "accepted": 44
+  }
+ },
+ "dropped": []
+}

@@ -17,7 +17,7 @@ import { blockedKeyPoints, criteriaFor, scrubForEvaluation, criterionConsistency
 import { parseProposal, scrubIdentifiers } from "./evaluation.ts";
 import { type FrameworkIndex, misconceptionIds } from "./framework.ts";
 import { type ItemParams, bandUpdate, binaryUpdate } from "./model.ts";
-import { type Composite, type Decision, type Estimate, type EvidenceEvent, type Exposure, type InterventionEvent, type LedgerEvent, type ProposalEvent, type QualificationEvent, type ShortItem, type WritingTask, PASSAGE_POLICY, isIndependentProvenance } from "./types.ts";
+import { type Composite, type Decision, type Estimate, type EvidenceEvent, type Exposure, type InterventionEvent, type LedgerEvent, type ProposalEvent, type QualificationEvent, type ShortItem, type WritingTask, PASSAGE_POLICY, ASSISTED_POLICY, isIndependentProvenance } from "./types.ts";
 
 export interface Context {
   index: FrameworkIndex;
@@ -90,6 +90,8 @@ export class Ledger {
   private heldSurprise = new Map<string, { band: number; proposal: string }>();
   private exposureOf = new Map<string, Exposure>();
   private interventions = new Map<string, InterventionEvent>();
+  /** Items met with help: answered as assisted, or displayed in teaching (assisted@1). */
+  private helped = new Set<string>();
   /** session#capability → time of the first teaching (intervention) on that capability in that session. */
   private taughtInSession = new Map<string, string>();
   /**
@@ -148,13 +150,20 @@ export class Ledger {
         return this.record([], event);
       case "revoke":
         return this.record([], event);
+      case "assisted_response":
+        this.helped.add(event.item.id);
+        return this.record([], event);
       case "presented":
       case "hint":
-      case "assisted_response":
         // provenance: recorded for the learner record and rule-level projections; never an estimate change
+        return this.record([], event);
+      case "essay":
+        // essay-contract@1: submissions, tentative observations, diagnostic plans, journeys and rewrites are
+        // kept in the learner record for the essay projections; none of them is evidence for an estimate
         return this.record([], event);
       case "intervention":
         this.interventions.set(event.id, event);
+        for (const i of event.items ?? []) this.helped.add(i);
         if (event.capability) {
           const key = `${event.session}#${event.capability}`;
           if (!this.taughtInSession.has(key)) this.taughtInSession.set(key, event.at);
@@ -170,7 +179,10 @@ export class Ledger {
     if (!item)
       return [{ id: `d:${ev.id}`, at: ev.at, source: ev.id, capability: null, verdict: "rejected", reasons: [`unknown item ${ev.item.id} v${ev.item.version}`] }];
     this.evidence.set(ev.id, ev);
-    const exposure: Exposure = this.exposures.has(item.id) ? "repeat" : this.familyExposures.has(familyOf(item)) ? "variant" : "fresh";
+    // assisted@1: an item already met with help is a repeat for this learner, whatever the ledger's evidence says
+    const seenBefore = this.exposures.has(item.id);
+    const metWithHelp = !seenBefore && this.helped.has(item.id) && !!ev.provenance?.policies?.includes(ASSISTED_POLICY);
+    const exposure: Exposure = seenBefore || metWithHelp ? "repeat" : this.familyExposures.has(familyOf(item)) ? "variant" : "fresh";
     const bump = (m: Map<string, { count: number; lastAt: string }>, k: string) => m.set(k, { count: (m.get(k)?.count ?? 0) + 1, lastAt: ev.at });
     bump(this.exposures, item.id);
     bump(this.familyExposures, familyOf(item));
@@ -269,7 +281,7 @@ export class Ledger {
         verdict: "accepted",
         reasons: [
           `scored by code: ${correct ? "right" : "wrong"} on an item of difficulty ${item.b}`,
-          ...(exposure === "repeat" ? ["repeated item: recorded for retention only; the ability estimate is not changed"] : exposure === "variant" ? ["variant of an item seen before"] : []),
+          ...(metWithHelp ? ["met earlier with help or in teaching (assisted@1): it can never be fresh evidence, so it is recorded as a repeat for retention only; the ability estimate is not changed"] : exposure === "repeat" ? ["repeated item: recorded for retention only; the ability estimate is not changed"] : exposure === "variant" ? ["variant of an item seen before"] : []),
           ...(afterTeaching ? ["answered after teaching on this capability in the same session: it updates the estimate, but cannot demonstrate, master or count as a later check"] : []),
         ],
         observation,

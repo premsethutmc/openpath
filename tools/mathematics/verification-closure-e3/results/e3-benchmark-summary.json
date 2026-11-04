@@ -1,0 +1,521 @@
+{
+ "e1-final-after": {
+  "cases": 500,
+  "falseAcceptances": 3,
+  "falseRejections": 0,
+  "correctlyVerified": 121,
+  "referenceVerified": 225,
+  "correctlyInvalid": 77,
+  "referenceInvalid": 100,
+  "exactVerdicts": 278,
+  "assessed": 257,
+  "assessmentCoverage": 0.514,
+  "correctAssessmentCoverage": 0.508,
+  "abstentions": 243,
+  "firstInvalidExact": [
+   77,
+   100
+  ],
+  "alternativeAccepted": [
+   30,
+   75
+  ],
+  "restrictionDetected": [
+   0,
+   25
+  ],
+  "branchDetected": [
+   11,
+   15
+  ],
+  "verifiedTotal": 124,
+  "independentlyVerified": 124,
+  "independentVerificationCoverage": 1,
+  "engineClassCounts": {
+   "verified": 124,
+   "incomplete": 56,
+   "ambiguous": 44,
+   "invalid": 77,
+   "malformed": 27,
+   "unsupported": 172
+  },
+  "latencyMs": {
+   "p50": 0.18809199999998327,
+   "p95": 6.442912000000007,
+   "p99": 10.716909000000015,
+   "max": 34.610371
+  }
+ },
+ "e1-final-before": {
+  "cases": 500,
+  "falseAcceptances": 3,
+  "falseRejections": 0,
+  "correctlyVerified": 121,
+  "referenceVerified": 225,
+  "correctlyInvalid": 77,
+  "referenceInvalid": 100,
+  "exactVerdicts": 278,
+  "assessed": 257,
+  "assessmentCoverage": 0.514,
+  "correctAssessmentCoverage": 0.508,
+  "abstentions": 243,
+  "firstInvalidExact": [
+   77,
+   100
+  ],
+  "alternativeAccepted": [
+   30,
+   75
+  ],
+  "restrictionDetected": [
+   0,
+   25
+  ],
+  "branchDetected": [
+   11,
+   15
+  ],
+  "verifiedTotal": 124,
+  "independentlyVerified": 0,
+  "independentVerificationCoverage": 0,
+  "engineClassCounts": {
+   "verified": 124,
+   "incomplete": 56,
+   "ambiguous": 44,
+   "invalid": 77,
+   "malformed": 27,
+   "unsupported": 172
+  },
+  "latencyMs": {
+   "p50": 0.16067000000003873,
+   "p95": 4.013155000000012,
+   "p99": 7.294722999999976,
+   "max": 18.454671000000005
+  }
+ },
+ "e1adj-final-after": {
+  "cases": 500,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "correctlyVerified": 124,
+  "referenceVerified": 228,
+  "correctlyInvalid": 77,
+  "referenceInvalid": 97,
+  "exactVerdicts": 281,
+  "assessed": 257,
+  "assessmentCoverage": 0.514,
+  "correctAssessmentCoverage": 0.514,
+  "abstentions": 243,
+  "firstInvalidExact": [
+   77,
+   97
+  ],
+  "alternativeAccepted": [
+   30,
+   75
+  ],
+  "restrictionDetected": [
+   0,
+   25
+  ],
+  "branchDetected": [
+   11,
+   15
+  ],
+  "verifiedTotal": 124,
+  "independentlyVerified": 124,
+  "independentVerificationCoverage": 1,
+  "engineClassCounts": {
+   "verified": 124,
+   "incomplete": 56,
+   "ambiguous": 44,
+   "invalid": 77,
+   "malformed": 27,
+   "unsupported": 172
+  },
+  "latencyMs": {
+   "p50": 0.2267699999999877,
+   "p95": 6.247818999999936,
+   "p99": 15.102774000000068,
+   "max": 41.957768
+  }
+ },
+ "e2dev-final-after": {
+  "cases": 100,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "correctlyVerified": 15,
+  "referenceVerified": 19,
+  "correctlyInvalid": 32,
+  "referenceInvalid": 47,
+  "exactVerdicts": 75,
+  "assessed": 71,
+  "assessmentCoverage": 0.71,
+  "correctAssessmentCoverage": 0.68,
+  "abstentions": 29,
+  "firstInvalidExact": [
+   32,
+   47
+  ],
+  "alternativeAccepted": [
+   15,
+   15
+  ],
+  "restrictionDetected": [
+   7,
+   7
+  ],
+  "branchDetected": [
+   13,
+   13
+  ],
+  "verifiedTotal": 15,
+  "independentlyVerified": 15,
+  "independentVerificationCoverage": 1,
+  "engineClassCounts": {
+   "invalid": 35,
+   "unsupported": 12,
+   "malformed": 8,
+   "ambiguous": 9,
+   "incomplete": 18,
+   "missing-assumption": 3,
+   "verified": 15
+  },
+  "latencyMs": {
+   "p50": 0.5379259999999988,
+   "p95": 13.499888999999996,
+   "p99": 20.794961999999998,
+   "max": 46.454501
+  }
+ },
+ "e2dev-final-before": {
+  "cases": 100,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "correctlyVerified": 15,
+  "referenceVerified": 19,
+  "correctlyInvalid": 28,
+  "referenceInvalid": 47,
+  "exactVerdicts": 65,
+  "assessed": 61,
+  "assessmentCoverage": 0.61,
+  "correctAssessmentCoverage": 0.58,
+  "abstentions": 39,
+  "firstInvalidExact": [
+   28,
+   47
+  ],
+  "alternativeAccepted": [
+   15,
+   15
+  ],
+  "restrictionDetected": [
+   0,
+   7
+  ],
+  "branchDetected": [
+   10,
+   13
+  ],
+  "verifiedTotal": 15,
+  "independentlyVerified": 0,
+  "independentVerificationCoverage": 0,
+  "engineClassCounts": {
+   "invalid": 31,
+   "unsupported": 22,
+   "malformed": 8,
+   "ambiguous": 9,
+   "incomplete": 15,
+   "verified": 15
+  },
+  "latencyMs": {
+   "p50": 0.6034069999999758,
+   "p95": 9.240179000000012,
+   "p99": 34.85388999999999,
+   "max": 43.722206000000014
+  }
+ },
+ "e2sealed-final-after": {
+  "cases": 100,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "correctlyVerified": 15,
+  "referenceVerified": 21,
+  "correctlyInvalid": 36,
+  "referenceInvalid": 45,
+  "exactVerdicts": 79,
+  "assessed": 72,
+  "assessmentCoverage": 0.72,
+  "correctAssessmentCoverage": 0.67,
+  "abstentions": 28,
+  "firstInvalidExact": [
+   36,
+   45
+  ],
+  "alternativeAccepted": [
+   15,
+   15
+  ],
+  "restrictionDetected": [
+   11,
+   11
+  ],
+  "branchDetected": [
+   9,
+   9
+  ],
+  "verifiedTotal": 15,
+  "independentlyVerified": 15,
+  "independentVerificationCoverage": 1,
+  "engineClassCounts": {
+   "invalid": 41,
+   "unsupported": 13,
+   "ambiguous": 5,
+   "malformed": 10,
+   "incomplete": 11,
+   "missing-assumption": 5,
+   "verified": 15
+  },
+  "latencyMs": {
+   "p50": 0.942327999999975,
+   "p95": 13.500599999999991,
+   "p99": 22.43960800000002,
+   "max": 74.313388
+  }
+ },
+ "e2sealed-final-before": {
+  "cases": 100,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "correctlyVerified": 15,
+  "referenceVerified": 21,
+  "correctlyInvalid": 34,
+  "referenceInvalid": 45,
+  "exactVerdicts": 71,
+  "assessed": 64,
+  "assessmentCoverage": 0.64,
+  "correctAssessmentCoverage": 0.59,
+  "abstentions": 36,
+  "firstInvalidExact": [
+   34,
+   45
+  ],
+  "alternativeAccepted": [
+   15,
+   15
+  ],
+  "restrictionDetected": [
+   4,
+   11
+  ],
+  "branchDetected": [
+   8,
+   9
+  ],
+  "verifiedTotal": 15,
+  "independentlyVerified": 0,
+  "independentVerificationCoverage": 0,
+  "engineClassCounts": {
+   "invalid": 39,
+   "unsupported": 21,
+   "ambiguous": 5,
+   "malformed": 10,
+   "incomplete": 10,
+   "verified": 15
+  },
+  "latencyMs": {
+   "p50": 0.6998889999999847,
+   "p95": 10.09112399999998,
+   "p99": 19.628419000000008,
+   "max": 51.797314
+  }
+ },
+ "e3dev-final-after": {
+  "cases": 75,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "correctlyVerified": 14,
+  "referenceVerified": 18,
+  "correctlyInvalid": 30,
+  "referenceInvalid": 35,
+  "exactVerdicts": 63,
+  "assessed": 60,
+  "assessmentCoverage": 0.8,
+  "correctAssessmentCoverage": 0.76,
+  "abstentions": 15,
+  "firstInvalidExact": [
+   30,
+   35
+  ],
+  "alternativeAccepted": [
+   14,
+   15
+  ],
+  "restrictionDetected": [
+   12,
+   12
+  ],
+  "branchDetected": [
+   3,
+   3
+  ],
+  "verifiedTotal": 14,
+  "independentlyVerified": 14,
+  "independentVerificationCoverage": 1,
+  "engineClassCounts": {
+   "invalid": 33,
+   "verified": 14,
+   "unsupported": 9,
+   "incomplete": 11,
+   "missing-assumption": 2,
+   "malformed": 5,
+   "ambiguous": 1
+  },
+  "latencyMs": {
+   "p50": 3.3764189999999985,
+   "p95": 16.689163000000008,
+   "p99": 21.087131999999997,
+   "max": 68.314298
+  }
+ },
+ "e3dev-final-before": {
+  "cases": 75,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "correctlyVerified": 12,
+  "referenceVerified": 18,
+  "correctlyInvalid": 21,
+  "referenceInvalid": 35,
+  "exactVerdicts": 46,
+  "assessed": 44,
+  "assessmentCoverage": 0.5866666666666667,
+  "correctAssessmentCoverage": 0.5333333333333333,
+  "abstentions": 31,
+  "firstInvalidExact": [
+   21,
+   35
+  ],
+  "alternativeAccepted": [
+   12,
+   15
+  ],
+  "restrictionDetected": [
+   4,
+   12
+  ],
+  "branchDetected": [
+   2,
+   3
+  ],
+  "verifiedTotal": 12,
+  "independentlyVerified": 0,
+  "independentVerificationCoverage": 0,
+  "engineClassCounts": {
+   "invalid": 24,
+   "unsupported": 25,
+   "verified": 12,
+   "incomplete": 8,
+   "malformed": 5,
+   "ambiguous": 1
+  },
+  "latencyMs": {
+   "p50": 1.1888590000000363,
+   "p95": 11.857743999999997,
+   "p99": 17.970337999999998,
+   "max": 40.549149
+  }
+ },
+ "e3sealed-sealed-after": {
+  "cases": 75,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "correctlyVerified": 14,
+  "referenceVerified": 20,
+  "correctlyInvalid": 25,
+  "referenceInvalid": 30,
+  "exactVerdicts": 62,
+  "assessed": 60,
+  "assessmentCoverage": 0.8,
+  "correctAssessmentCoverage": 0.7733333333333333,
+  "abstentions": 15,
+  "firstInvalidExact": [
+   25,
+   30
+  ],
+  "alternativeAccepted": [
+   13,
+   15
+  ],
+  "restrictionDetected": [
+   10,
+   10
+  ],
+  "branchDetected": [
+   5,
+   5
+  ],
+  "verifiedTotal": 14,
+  "independentlyVerified": 14,
+  "independentVerificationCoverage": 1,
+  "engineClassCounts": {
+   "invalid": 27,
+   "verified": 14,
+   "unsupported": 11,
+   "incomplete": 16,
+   "missing-assumption": 3,
+   "ambiguous": 4
+  },
+  "latencyMs": {
+   "p50": 3.1547449999999913,
+   "p95": 13.893984999999986,
+   "p99": 36.308487000000014,
+   "max": 73.368324
+  }
+ },
+ "e3sealed-sealed-before": {
+  "cases": 75,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "correctlyVerified": 9,
+  "referenceVerified": 20,
+  "correctlyInvalid": 17,
+  "referenceInvalid": 30,
+  "exactVerdicts": 42,
+  "assessed": 39,
+  "assessmentCoverage": 0.52,
+  "correctAssessmentCoverage": 0.5066666666666667,
+  "abstentions": 36,
+  "firstInvalidExact": [
+   17,
+   30
+  ],
+  "alternativeAccepted": [
+   9,
+   15
+  ],
+  "restrictionDetected": [
+   1,
+   10
+  ],
+  "branchDetected": [
+   3,
+   5
+  ],
+  "verifiedTotal": 9,
+  "independentlyVerified": 0,
+  "independentVerificationCoverage": 0,
+  "engineClassCounts": {
+   "invalid": 18,
+   "unsupported": 32,
+   "verified": 9,
+   "incomplete": 12,
+   "ambiguous": 4
+  },
+  "latencyMs": {
+   "p50": 0.9308359999999993,
+   "p95": 13.945825999999997,
+   "p99": 19.672919000000007,
+   "max": 42.651574
+  }
+ }
+}

@@ -1,0 +1,2965 @@
+[
+ {
+  "id": "1a",
+  "category": 1,
+  "learner": "strong, one slip at answer 1",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 13,
+  "interactions": 26,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 12 + unresolved 0 + awaiting a teacher 1 vs submissions 13"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "2 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 11/12 of 12 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 11 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 26 interactions"
+   }
+  ]
+ },
+ {
+  "id": "1b",
+  "category": 1,
+  "learner": "strong, one slip at answer 3",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 12,
+  "interactions": 24,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 11 + unresolved 0 + awaiting a teacher 1 vs submissions 12"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "after the slip: 0 starting-check question(s) resumed, no diagnosis of the slip, no teaching"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 10/11 of 11 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 10 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 24 interactions"
+   }
+  ]
+ },
+ {
+  "id": "1c",
+  "category": 1,
+  "learner": "strong, one slip at answer 5",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 12,
+  "interactions": 24,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 11 + unresolved 0 + awaiting a teacher 1 vs submissions 12"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "after the slip: 0 starting-check question(s) resumed, no diagnosis of the slip, no teaching"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 10/11 of 11 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 10 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 24 interactions"
+   }
+  ]
+ },
+ {
+  "id": "1d",
+  "category": 1,
+  "learner": "strong, one slip at answer 4",
+  "start": "gen:lin:3,9,8",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 13,
+  "interactions": 26,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 12 + unresolved 0 + awaiting a teacher 1 vs submissions 13"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "after the slip: 0 starting-check question(s) resumed, no diagnosis of the slip, no teaching"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 11/12 of 12 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 11 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 26 interactions"
+   }
+  ]
+ },
+ {
+  "id": "1e",
+  "category": 1,
+  "learner": "strong, one slip at answer 4",
+  "start": "gen:lneg:5,-5,9",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 15,
+  "interactions": 30,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 15 + unresolved 0 + awaiting a teacher 0 vs submissions 15"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "after the slip: 0 starting-check question(s) resumed, no diagnosis of the slip, no teaching"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 14/15 of 15 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 14 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 30 interactions"
+   }
+  ]
+ },
+ {
+  "id": "1f",
+  "category": 1,
+  "learner": "strong, one slip at answer 3",
+  "start": "gen:lin:2,17,11",
+  "entry": "practice",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 12,
+  "interactions": 24,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 11 + unresolved 0 + awaiting a teacher 1 vs submissions 12"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "1 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 10/11 of 11 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 10 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 24 interactions"
+   }
+  ]
+ },
+ {
+  "id": "1g",
+  "category": 1,
+  "learner": "strong (always right)",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 12,
+  "interactions": 24,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 11 + unresolved 0 + awaiting a teacher 1 vs submissions 12"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "1 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 11/11 of 11 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 11 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 24 interactions"
+   }
+  ]
+ },
+ {
+  "id": "2a",
+  "category": 2,
+  "learner": "misconception forgot-divide until 1 explanation(s)",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "spot_the_mistake"
+  ],
+  "submissions": 16,
+  "interactions": 35,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 15 + unresolved 0 + awaiting a teacher 1 vs submissions 16"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses resolved"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "4 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "1 explanation(s): spot_the_mistake"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 9/13 of 13 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 9 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 35 interactions"
+   }
+  ]
+ },
+ {
+  "id": "2b",
+  "category": 2,
+  "learner": "misconception forgot-divide until never explanation(s)",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": null,
+  "status": "exposure",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [
+   "spot_the_mistake",
+   "check_what_it_uses"
+  ],
+  "submissions": 8,
+  "interactions": 21,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 8 + unresolved 0 + awaiting a teacher 0 vs submissions 8"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses established"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "4 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): spot_the_mistake,check_what_it_uses"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status exposure"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/6 of 6 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status exposure; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 21 interactions"
+   }
+  ]
+ },
+ {
+  "id": "2c",
+  "category": 2,
+  "learner": "misconception added-not-subtracted until 1 explanation(s)",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "spot_the_mistake"
+  ],
+  "submissions": 16,
+  "interactions": 35,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 15 + unresolved 0 + awaiting a teacher 1 vs submissions 16"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses resolved"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "4 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "1 explanation(s): spot_the_mistake"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 9/13 of 13 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 9 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 35 interactions"
+   }
+  ]
+ },
+ {
+  "id": "2d",
+  "category": 2,
+  "learner": "misconception forgot-divide, retries every time",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": true,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": null,
+  "status": "exposure",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [],
+  "submissions": 9,
+  "interactions": 18,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 9 + unresolved 0 + awaiting a teacher 0 vs submissions 9"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "2 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status exposure"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/3 of 3 unaided first answers; 6 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status exposure; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 18 interactions"
+   }
+  ]
+ },
+ {
+  "id": "2e",
+  "category": 2,
+  "learner": "wrong first, right on the retry",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": true,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 16,
+  "interactions": 32,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 15 + unresolved 0 + awaiting a teacher 1 vs submissions 16"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "3 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 11/13 of 13 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 11 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 32 interactions"
+   }
+  ]
+ },
+ {
+  "id": "2f",
+  "category": 2,
+  "learner": "unreadable always",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": "bounded-input@1: 2 unreadable answers to gen:lin:3,3,2",
+  "status": "not_started",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [],
+  "submissions": 3,
+  "interactions": 6,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 0 + unresolved 3 + awaiting a teacher 0 vs submissions 3"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "2 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status not_started"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/0 of 0 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status not_started; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 6 interactions"
+   }
+  ]
+ },
+ {
+  "id": "2g",
+  "category": 2,
+  "learner": "unreadable 1 time(s), then right",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 14,
+  "interactions": 28,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 12 + unresolved 1 + awaiting a teacher 1 vs submissions 14"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "2 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 12/12 of 12 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 12 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 28 interactions"
+   }
+  ]
+ },
+ {
+  "id": "2h",
+  "category": 2,
+  "learner": "misconception minus-c-sign until never explanation(s)",
+  "start": "gen:disc:-1,-6:mc",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": null,
+  "status": "exposure",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [
+   "parabola",
+   "square_meaning",
+   "two_numbers"
+  ],
+  "submissions": 15,
+  "interactions": 35,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 15 + unresolved 0 + awaiting a teacher 0 vs submissions 15"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses unsupported,established"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "9 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "3 explanation(s): parabola,square_meaning,two_numbers"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status exposure"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/7 of 7 unaided first answers; 1 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status exposure; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 35 interactions"
+   }
+  ]
+ },
+ {
+  "id": "3a",
+  "category": 3,
+  "learner": "lacks integer-add (minus-c-sign+minus-negative-as-minus) until it is taught",
+  "start": "gen:disc:-2,-7",
+  "entry": "practice",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "tokens",
+   "signed_numbers"
+  ],
+  "submissions": 17,
+  "interactions": 39,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 16 + unresolved 0 + awaiting a teacher 1 vs submissions 17"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses resolved"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "1 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): tokens,signed_numbers"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 9/11 of 11 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 9 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 39 interactions"
+   }
+  ]
+ },
+ {
+  "id": "3b",
+  "category": 3,
+  "learner": "lacks integer-add (move-keep-sign) until it is taught",
+  "start": "gen:lneg:5,-5,9",
+  "entry": "practice",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "tokens"
+  ],
+  "submissions": 33,
+  "interactions": 70,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 33 + unresolved 0 + awaiting a teacher 0 vs submissions 33"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses resolved,insufficient"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "15 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "1 explanation(s): tokens"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 16/18 of 18 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 16 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 70 interactions"
+   }
+  ]
+ },
+ {
+  "id": "3c",
+  "category": 3,
+  "learner": "lacks place-value-tens (no-regroup) until it is taught",
+  "start": "gen:addr:36,24",
+  "entry": "practice",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "count_on"
+  ],
+  "submissions": 26,
+  "interactions": 58,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 26 + unresolved 0 + awaiting a teacher 0 vs submissions 26"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses resolved,unsupported"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "11 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "1 explanation(s): count_on"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 13/15 of 15 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 13 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 58 interactions"
+   }
+  ]
+ },
+ {
+  "id": "3d",
+  "category": 3,
+  "learner": "lacks multiplication-tables (fact-slip:5x6) until it is taught",
+  "start": "gen:mmul:25,6",
+  "entry": "practice",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "near_fact",
+   "check_what_it_uses"
+  ],
+  "submissions": 24,
+  "interactions": 52,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 24 + unresolved 0 + awaiting a teacher 0 vs submissions 24"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses resolved"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "2 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): near_fact,check_what_it_uses"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 14/16 of 16 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 14 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 52 interactions"
+   }
+  ]
+ },
+ {
+  "id": "3e",
+  "category": 3,
+  "learner": "lacks integer-add (sign-dropped) until it is taught",
+  "start": "gen:ahlike:9,-9,-5,-3",
+  "entry": "practice",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "tokens"
+  ],
+  "submissions": 32,
+  "interactions": 68,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 32 + unresolved 0 + awaiting a teacher 0 vs submissions 32"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "13 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "1 explanation(s): tokens"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 16/17 of 17 unaided first answers; 1 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 16 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 68 interactions"
+   }
+  ]
+ },
+ {
+  "id": "3f",
+  "category": 3,
+  "learner": "misconception minus-c-sign+minus-negative-as-minus until never explanation(s)",
+  "start": "gen:disc:-2,-7",
+  "entry": "practice",
+  "retry": false,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": null,
+  "status": "exposure",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [
+   "tokens",
+   "spot_the_mistake",
+   "signed_numbers",
+   "parabola",
+   "careful_signs"
+  ],
+  "submissions": 12,
+  "interactions": 39,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 12 + unresolved 0 + awaiting a teacher 0 vs submissions 12"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses established"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "1 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "5 explanation(s): tokens,spot_the_mistake,signed_numbers,parabola,careful_signs"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status exposure"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/5 of 5 unaided first answers; 3 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status exposure; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 39 interactions"
+   }
+  ]
+ },
+ {
+  "id": "3h",
+  "category": 3,
+  "learner": "misconception sign-dropped until never explanation(s)",
+  "start": "gen:ahlike:9,-9,-5,-3",
+  "entry": "practice",
+  "retry": false,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": null,
+  "status": "exposure",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [],
+  "submissions": 18,
+  "interactions": 36,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 18 + unresolved 0 + awaiting a teacher 0 vs submissions 18"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "14 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status exposure"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/4 of 4 unaided first answers; 4 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status exposure; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 36 interactions"
+   }
+  ]
+ },
+ {
+  "id": "3g",
+  "category": 3,
+  "learner": "lacks integer-add (minus-c-sign+minus-negative-as-minus) until it is taught",
+  "start": "gen:disc:-2,-7",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "tokens"
+  ],
+  "submissions": 33,
+  "interactions": 70,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 32 + unresolved 0 + awaiting a teacher 1 vs submissions 33"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses resolved"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "19 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "1 explanation(s): tokens"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 10/14 of 14 unaided first answers; 1 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 10 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 70 interactions"
+   }
+  ]
+ },
+ {
+  "id": "4a",
+  "category": 4,
+  "learner": "right only after a hint",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": null,
+  "status": "guided",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [
+   "spot_the_mistake",
+   "check_what_it_uses"
+  ],
+  "submissions": 10,
+  "interactions": 35,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 10 + unresolved 0 + awaiting a teacher 0 vs submissions 10"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses unsupported"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "5 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): spot_the_mistake,check_what_it_uses"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status guided"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/8 of 8 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status guided; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 35 interactions"
+   }
+  ]
+ },
+ {
+  "id": "4b",
+  "category": 4,
+  "learner": "hint in guided practice, then right alone",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 15,
+  "interactions": 30,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 14 + unresolved 0 + awaiting a teacher 1 vs submissions 15"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses unsupported"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "4 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 11/14 of 14 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 11 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 30 interactions"
+   }
+  ]
+ },
+ {
+  "id": "4c",
+  "category": 4,
+  "learner": "hint, still wrong",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "spot_the_mistake",
+   "check_what_it_uses"
+  ],
+  "submissions": 18,
+  "interactions": 43,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 17 + unresolved 0 + awaiting a teacher 1 vs submissions 18"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses unsupported"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "5 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): spot_the_mistake,check_what_it_uses"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 8/15 of 15 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 8 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 43 interactions"
+   }
+  ]
+ },
+ {
+  "id": "4d",
+  "category": 4,
+  "learner": "asks for hints everywhere",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 12,
+  "interactions": 36,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 11 + unresolved 0 + awaiting a teacher 1 vs submissions 12"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "1 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 11/11 of 11 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 11 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 36 interactions"
+   }
+  ]
+ },
+ {
+  "id": "4e",
+  "category": 4,
+  "learner": "right only after a hint",
+  "start": "gen:lneg:5,-5,9",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": null,
+  "status": "guided",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [
+   "spot_the_mistake",
+   "check_what_it_uses"
+  ],
+  "submissions": 9,
+  "interactions": 32,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 9 + unresolved 0 + awaiting a teacher 0 vs submissions 9"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses unsupported"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "4 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): spot_the_mistake,check_what_it_uses"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status guided"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/7 of 7 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status guided; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 32 interactions"
+   }
+  ]
+ },
+ {
+  "id": "4f",
+  "category": 4,
+  "learner": "right with help, wrong alone",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": null,
+  "status": "guided",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [
+   "spot_the_mistake",
+   "check_what_it_uses"
+  ],
+  "submissions": 10,
+  "interactions": 25,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 10 + unresolved 0 + awaiting a teacher 0 vs submissions 10"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses unsupported"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "5 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): spot_the_mistake,check_what_it_uses"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status guided"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/8 of 8 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status guided; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 25 interactions"
+   }
+  ]
+ },
+ {
+  "id": "5a",
+  "category": 5,
+  "learner": "misconception forgot-divide until 2 explanation(s)",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "spot_the_mistake",
+   "check_what_it_uses"
+  ],
+  "submissions": 17,
+  "interactions": 39,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 16 + unresolved 0 + awaiting a teacher 1 vs submissions 17"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses resolved"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "4 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): spot_the_mistake,check_what_it_uses"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 8/13 of 13 unaided first answers; 3 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 8 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 39 interactions"
+   }
+  ]
+ },
+ {
+  "id": "5b",
+  "category": 5,
+  "learner": "always wrong (readable)",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": null,
+  "status": "exposure",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [
+   "spot_the_mistake",
+   "check_what_it_uses"
+  ],
+  "submissions": 10,
+  "interactions": 25,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 10 + unresolved 0 + awaiting a teacher 0 vs submissions 10"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses unsupported"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "5 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): spot_the_mistake,check_what_it_uses"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status exposure"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/8 of 8 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status exposure; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 25 interactions"
+   }
+  ]
+ },
+ {
+  "id": "5c",
+  "category": 5,
+  "learner": "misconception forgot-divide, slips the first check after teaching",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "spot_the_mistake",
+   "check_what_it_uses"
+  ],
+  "submissions": 17,
+  "interactions": 39,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 16 + unresolved 0 + awaiting a teacher 1 vs submissions 17"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses resolved"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "4 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): spot_the_mistake,check_what_it_uses"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 8/13 of 13 unaided first answers; 3 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 8 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 39 interactions"
+   }
+  ]
+ },
+ {
+  "id": "5d",
+  "category": 5,
+  "learner": "misconception forgot-divide until 2 explanation(s)",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": true,
+  "later": [],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [
+   "spot_the_mistake",
+   "check_what_it_uses"
+  ],
+  "submissions": 17,
+  "interactions": 39,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 16 + unresolved 0 + awaiting a teacher 1 vs submissions 17"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses resolved"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "4 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): spot_the_mistake,check_what_it_uses"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 8/13 of 13 unaided first answers; 3 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 8 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 39 interactions"
+   }
+  ]
+ },
+ {
+  "id": "5e",
+  "category": 5,
+  "learner": "misconception move-keep-sign until 2 explanation(s)",
+  "start": "gen:lneg:5,-5,9",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": null,
+  "status": "exposure",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [],
+  "submissions": 18,
+  "interactions": 36,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 18 + unresolved 0 + awaiting a teacher 0 vs submissions 18"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "16 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status exposure"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/4 of 4 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status exposure; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 36 interactions"
+   }
+  ]
+ },
+ {
+  "id": "5f",
+  "category": 5,
+  "learner": "misconception forgot-divide until 3 explanation(s)",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [],
+  "ended": "pause",
+  "endedWhy": null,
+  "status": "exposure",
+  "retention": "none",
+  "cycles": [],
+  "teaches": [
+   "spot_the_mistake",
+   "check_what_it_uses"
+  ],
+  "submissions": 8,
+  "interactions": 21,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 8 + unresolved 0 + awaiting a teacher 0 vs submissions 8"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses established"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "4 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "2 explanation(s): spot_the_mistake,check_what_it_uses"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status exposure"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 0/6 of 6 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status exposure; 0 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention none; cycles none"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended pause after 21 interactions"
+   }
+  ]
+ },
+ {
+  "id": "6a",
+  "category": 6,
+  "learner": "strong, slips once on the delayed check",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [
+   8
+  ],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "failed",
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 15,
+  "interactions": 30,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 14 + unresolved 0 + awaiting a teacher 1 vs submissions 15"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "3 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 13/14 of 14 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 13 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles failed,pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 30 interactions"
+   }
+  ]
+ },
+ {
+  "id": "6b",
+  "category": 6,
+  "learner": "strong (always right)",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [
+   3
+  ],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 12,
+  "interactions": 24,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 11 + unresolved 0 + awaiting a teacher 1 vs submissions 12"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "1 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 11/11 of 11 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 11 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 24 interactions"
+   }
+  ]
+ },
+ {
+  "id": "6c",
+  "category": 6,
+  "learner": "strong (always right)",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [
+   8
+  ],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "passed",
+  "cycles": [
+   "passed"
+  ],
+  "teaches": [],
+  "submissions": 14,
+  "interactions": 28,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 13 + unresolved 0 + awaiting a teacher 1 vs submissions 14"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "1 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 13/13 of 13 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 13 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention passed; cycles passed"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 28 interactions"
+   }
+  ]
+ },
+ {
+  "id": "6d",
+  "category": 6,
+  "learner": "misconception forgot-divide until 1 explanation(s)",
+  "start": "gen:lin:2,17,11",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [
+   8,
+   8
+  ],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "passed",
+  "cycles": [
+   "passed"
+  ],
+  "teaches": [
+   "spot_the_mistake"
+  ],
+  "submissions": 18,
+  "interactions": 39,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 17 + unresolved 0 + awaiting a teacher 1 vs submissions 18"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses resolved"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "4 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "1 explanation(s): spot_the_mistake"
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 11/15 of 15 unaided first answers; 2 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 11 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention passed; cycles passed"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 39 interactions"
+   }
+  ]
+ },
+ {
+  "id": "6e",
+  "category": 6,
+  "learner": "strong, slips once on the delayed check",
+  "start": "gen:disc:-2,-7",
+  "entry": "practice",
+  "retry": false,
+  "later": [
+   8
+  ],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "failed",
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 15,
+  "interactions": 30,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 14 + unresolved 0 + awaiting a teacher 1 vs submissions 15"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "3 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 13/14 of 14 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 13 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles failed,pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 30 interactions"
+   }
+  ]
+ },
+ {
+  "id": "6f",
+  "category": 6,
+  "learner": "strong, slips once on the delayed check",
+  "start": "gen:lneg:5,-5,9",
+  "entry": "diagnostic",
+  "retry": false,
+  "later": [
+   8
+  ],
+  "ended": "done",
+  "endedWhy": null,
+  "status": "transfer",
+  "retention": "scheduled",
+  "cycles": [
+   "failed",
+   "pending"
+  ],
+  "teaches": [],
+  "submissions": 18,
+  "interactions": 36,
+  "checks": [
+   {
+    "property": "1 grading authority",
+    "ok": true,
+    "detail": ""
+   },
+   {
+    "property": "2 evidence recording",
+    "ok": true,
+    "detail": "attempts 18 + unresolved 0 + awaiting a teacher 0 vs submissions 18"
+   },
+   {
+    "property": "3 honest uncertainty",
+    "ok": true,
+    "detail": "hypotheses none"
+   },
+   {
+    "property": "4 investigation decision",
+    "ok": true,
+    "detail": "3 investigation step(s)"
+   },
+   {
+    "property": "5 eligible teaching",
+    "ok": true,
+    "detail": "0 explanation(s): "
+   },
+   {
+    "property": "6 independent recheck",
+    "ok": true,
+    "detail": "status transfer"
+   },
+   {
+    "property": "7 assistance history",
+    "ok": true,
+    "detail": "independent 17/18 of 18 unaided first answers; 0 assisted"
+   },
+   {
+    "property": "8 no false mastery",
+    "ok": true,
+    "detail": "status transfer; 17 unaided right"
+   },
+   {
+    "property": "9 retention / recovery decision",
+    "ok": true,
+    "detail": "retention scheduled; cycles failed,pending"
+   },
+   {
+    "property": "10 bounded termination",
+    "ok": true,
+    "detail": "ended done after 36 interactions"
+   }
+  ]
+ }
+]

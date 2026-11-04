@@ -1,0 +1,172 @@
+{
+  "normal_build_and_browser": [
+    {
+      "name": "build-year",
+      "command": [
+        "node",
+        "scripts/build-year.mjs"
+      ],
+      "exit": 0,
+      "seconds": 4.64,
+      "log": "/tmp/year-final-build-year.log"
+    },
+    {
+      "name": "build-curriculum",
+      "command": [
+        "node",
+        "scripts/build-curriculum.mjs"
+      ],
+      "exit": 0,
+      "seconds": 15.92,
+      "log": "/tmp/year-final-build-curriculum.log"
+    },
+    {
+      "name": "keyboard-dashboard",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-reporter=tap",
+        "e2e/keyboard-dashboard.test.mjs"
+      ],
+      "exit": 0,
+      "seconds": 49.19,
+      "log": "/tmp/year-final-keyboard-dashboard.log"
+    },
+    {
+      "name": "grade7-entry",
+      "command": [
+        "node",
+        "--test",
+        "--test-reporter=tap",
+        "e2e/grade7-entry.test.mjs"
+      ],
+      "exit": 0,
+      "seconds": 93.1,
+      "log": "/tmp/year-final-grade7-entry.log"
+    },
+    {
+      "name": "grade7-session",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-reporter=tap",
+        "e2e/grade7-session.test.mjs"
+      ],
+      "exit": 0,
+      "seconds": 120.0,
+      "log": "/tmp/year-final-grade7-session.log"
+    },
+    {
+      "name": "grade7-practice",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-reporter=tap",
+        "e2e/grade7-practice.test.mjs"
+      ],
+      "exit": 0,
+      "seconds": 190.36,
+      "log": "/tmp/year-final-grade7-practice.log"
+    },
+    {
+      "name": "grade7-completion",
+      "command": [
+        "node",
+        "--import",
+        "tsx",
+        "--test",
+        "--test-reporter=tap",
+        "e2e/grade7-completion.test.mjs"
+      ],
+      "exit": 0,
+      "seconds": 160.01,
+      "log": "/tmp/year-final-grade7-completion.log"
+    }
+  ],
+  "focused_tests": {
+    "recovery_pathway_geometry": 16,
+    "trusted_grader_django": 11,
+    "input_components_browser": 4,
+    "final_feedback_browser": 4,
+    "final_released_content_browser": 1,
+    "curriculum_cases_across_runs": 6
+  },
+  "maths_typecheck_diagnostics": 0,
+  "grader_sha256": "1e9848f145a556defe735c28e9208c181f1b16b51e3187615b5971c195edba4e",
+  "grader_diff": "Only three expected recovery-context edits; not byte-identical to 57438b4",
+  "rerun_limit": "No full local Year or learning-package rerun after final source change; complete exact-head CI remains required",
+  "logs": {
+    "/tmp/year-recovery-tests.log": {
+      "sha256": "f824715a35a4dfba3fe69234abd8e872ed3399cceb61bdeeea36be255da76ee7",
+      "bytes": 1771
+    },
+    "/tmp/year-recovery-final-typecheck.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/year-target-retention.log": {
+      "sha256": "b7ddaa4f9b9184e4045fc2eae72cfe6f0f84b4cbd436070a622924d69115d1bc",
+      "bytes": 446
+    },
+    "/tmp/year-final-feedback-regressions.log": {
+      "sha256": "817a54ccab43b1e97a8af2a4309eec171b9dea0cb988a250ccada4444a02beea",
+      "bytes": 1347
+    },
+    "/tmp/year-final-kernel-tests.log": {
+      "sha256": "4f9cf39929ce9d70115cd2467e17c21ac31545a1358fbdeef620168bb0e41751",
+      "bytes": 177
+    },
+    "/tmp/year-final-curriculum-eb.log": {
+      "sha256": "2b873dea594c31d785c0d26118c0b53c5ca6b0915736cf949e69cf0ee1b99c73",
+      "bytes": 1296
+    },
+    "/tmp/year-final-curriculum-b.log": {
+      "sha256": "993136e8696245b62a3f495d9ad71c28c56bb50061531e2c9bf163c1d7dd18c5",
+      "bytes": 372
+    },
+    "/tmp/disclosure-before.log": {
+      "sha256": "86a4f9af85b4283adeae510c2538bd9aa1baf80c7d2af113b2ecca735450cfc1",
+      "bytes": 960
+    },
+    "/tmp/disclosure-after.log": {
+      "sha256": "55e114213be7d2bb9ffc8ab4a00d2096ca9af8e02ccef4bd9dc58e0a94e2679b",
+      "bytes": 685
+    },
+    "/tmp/disclosure-practice.log": {
+      "sha256": "b7e76618fd387bea6493053a21e4872032b3e8f09f40476050d0842bffa51fa6",
+      "bytes": 597
+    },
+    "/tmp/disclosure-completion.log": {
+      "sha256": "1a21a0bc3e873b24bc4f3416a4c5d58775aa088600f396b3782bb5a5aa0c97fe",
+      "bytes": 666
+    },
+    "/tmp/disclosure-typecheck.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/year-gate-curriculum-final.log": {
+      "sha256": "175c13ac02d3922252e0833ce204c970144dcf3ce851a778c78f43492b9da976",
+      "bytes": 2542
+    }
+  },
+  "disclosure_followup": {
+    "previous_head": "be2c8782254b71a1bf10638793b2519a1e5ec514",
+    "ci_run": 41338334863,
+    "ci_failure": "Four Grade 7 practice cases: working textbox hidden after reload/hint; completion skipped",
+    "before_fix_reduced_test": "fails: saved working-open false immediately after activation",
+    "after_fix": {
+      "input_component_checks": 5,
+      "grade7_practice": 4,
+      "grade7_completion": 4,
+      "mathematics_typecheck_diagnostics": 0
+    },
+    "browser_limit": "Local Chromium 154. Exact Chromium 156 CI timing not reproduced; prior download denied, not retried.",
+    "semantics": "No changed grading, assistance, mastery, content or ledger semantics"
+  }
+}

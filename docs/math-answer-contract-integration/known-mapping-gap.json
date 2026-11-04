@@ -1,0 +1,31 @@
+{
+  "question": "gen:acpicthalf:0,8,1,0",
+  "selectedRowHalves": 2,
+  "answer": "2",
+  "before": {
+    "source": "6a9ce36 and Claude81923a1",
+    "mapping": "pictographs-subskills@1",
+    "actualSkill": "pictographs.half-symbol@1"
+  },
+  "after": {
+    "mapping": "pictographs-subskills@3",
+    "projection": "pictographs-subskill-projection@3",
+    "contract": "parameterTuples",
+    "actualSkill": null,
+    "expectedSkill": null
+  },
+  "status": "resolved in versioned integration; classification, projection, selection and immutable replay regressions active",
+  "tupleSource": "81923a149727d2ae1825c6bc444c2c5c18f156fe",
+  "verifiedSpace": {
+    "valid": 472,
+    "genuine": 275,
+    "whole": 197,
+    "served": 242,
+    "genuineServed": 142
+  },
+  "versionHistory": {
+    "pictographs-subskills@1": "legacy: every row task counted (overclaim)",
+    "pictographs-subskills@2": "PR101 withdrawal: row tasks earn no skill evidence",
+    "pictographs-subskills@3": "precise: parameterTuples from HALF_SYMBOL_ROWS (first labelled @2 in PR102; renumbered to avoid the collision)"
+  }
+}

@@ -1,0 +1,2432 @@
+{
+ "schema": "syllabus@1",
+ "board": "cbse",
+ "boardName": "CBSE (NCERT textbooks)",
+ "grade": 8,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Ganita Prakash: Textbook of Mathematics for Grade 8, Part I and Part II",
+  "publisher": "NCERT",
+  "edition": "Part I first edition 2025; Part II first edition (2025-26 session, exact date not verified); 2026-27 reprint not verified",
+  "terms": 2
+ },
+ "sources": [
+  {
+   "kind": "textbook",
+   "title": "Ganita Prakash (Class 8) audio book: Part I chapter list",
+   "publisher": "CIET-NCERT",
+   "edition": "2025",
+   "academicYear": "current",
+   "url": "https://ciet.ncert.gov.in/audio-book/130",
+   "accessed": "2026-10-19",
+   "used_for": "official confirmation of Part I chapter titles 1-7"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Annual Syllabus Mathematics Class VIII (2026-27), English medium",
+   "publisher": "Directorate of Education, Govt. of NCT of Delhi",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://edustud.nic.in/edu/Syllabus_2026_27/8/8_MATH_SYLLABUS_2026_27_EM.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "confirmation that this book/part is in use for 2026-27; chapter titles; subtopic (section) list"
+  },
+  {
+   "kind": "notification",
+   "title": "Circular Acad-48/2025 (28.07.2025): introduction of new Grade 5 and Grade 8 textbooks",
+   "publisher": "CBSE",
+   "edition": "28 July 2025",
+   "academicYear": "2025-26",
+   "url": "https://cbseacademic.nic.in/web_material/Circulars/2025/48_Circular_2025.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "Grade 8 mathematics textbook is Ganita Prakash; schools to adopt it after the bridge programme"
+  },
+  {
+   "kind": "notification",
+   "title": "Circular Acad-12/2025 (26.03.2025): availability of new NCERT textbooks and bridge programmes",
+   "publisher": "CBSE",
+   "edition": "26 March 2025",
+   "academicYear": "2025-26",
+   "url": "https://www.cbseacademic.nic.in/web_material/Circulars/2025/12_Circular_2025.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "new NCERT mathematics textbooks for Grades 7 and 8 introduced from 2025-26; Grade 6 book already in place"
+  },
+  {
+   "kind": "notification",
+   "title": "Circular Acad-14/2026 (01.04.2026): release of curriculum 2026-27 (Classes IX-XII)",
+   "publisher": "CBSE",
+   "edition": "1 April 2026",
+   "academicYear": "2026-27",
+   "url": "https://cbseacademic.nic.in/web_material/Circulars/2026/14_Circular_2026.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "checked for Grades 6-8: CBSE's 2026-27 curriculum release covers only Classes IX-XII; no separate CBSE syllabus for Grades 6-8 (NCERT textbooks apply)"
+  }
+ ],
+ "notes": [
+  "ncert.nic.in (textbook.php and the textbook PDF/prelims files) refused automated fetching (robots.txt disallow) on 2026-10-19, so the NCERT contents pages, printed section headings and edition/reprint lines could not be read directly. Chapter titles were verified instead against other official government sources: NCERT's CIET audio-book pages (ciet.ncert.gov.in) and the Delhi Directorate of Education 2026-27 syllabus (edustud.nic.in), which prescribes NCERT books. 'verified': true means the title was seen in at least one of those sources.",
+  "CBSE does not publish its own mathematics syllabus for Grades 6-8. Its 2026-27 curriculum release (Circular Acad-14/2026) covers Classes IX-XII only, and CBSE circulars direct schools to the new NCERT textbooks. The 2026-27 prescription is therefore inferred from those circulars plus the Delhi DoE 2026-27 syllabus. No CBSE or NCERT notice found replaces or withdraws Ganita Prakash for 2026-27.",
+  "Section titles come from the subtopic lists in the Delhi DoE 2026-27 annual syllabus, not from the printed textbook. They appear to quote the textbook's section headings, but DoE may have shortened, merged or left some out (its list is 'for assessment purpose only'), and capitalisation follows DoE. Check them against the printed NCERT book before using them as exact headings.",
+  "Learning outcomes are written by the compiler from the chapter and section scope. They are not copied from NCERT's Learning Outcomes document, which was not consulted because ncert.nic.in was inaccessible.",
+  "Secondary sites (teachoo.com, edzy.ai, esaral.com, aglasem.com, collegedunia.com) were used only to locate official documents and to cross-check chapter order and titles. Nothing was taken from them as authoritative.",
+  "Grade 8: the new NCERT book (Ganita Prakash) came in from 2025-26 (CBSE Circulars Acad-12/2025 and Acad-48/2025). The Delhi DoE 2026-27 Grade 8 syllabus prescribes 'NCERT Class VIII Mathematics Part I' for Term I and 'Part II' for Term II, with the chapter lists used here, so both parts are in use in 2026-27.",
+  "Chapter numbering starts again at 1 in Part II. Here 'term' records the book part (1 = Part I, 2 = Part II), and chapter ids follow the term-book pattern (cbse-g08-t1-c01 ... cbse-g08-t2-c07). In the Delhi DoE plan Part I = Term I and Part II = Term II. CBSE itself does not set terms for Grade 8.",
+  "Part II chapter titles were verified only against the Delhi DoE 2026-27 syllabus. No NCERT page for Part II (CIET audio book, contents page or library record) could be found or opened. Secondary sites agree on the same seven titles in the same order.",
+  "Part II Ch 2: the source prints 'THE BAUDHAYANAPYTHAGORAS THEOREM' (hyphen lost), while the subtopic list writes 'Baudhāyana - Pythagoras'. The title 'The Baudhāyana-Pythagoras Theorem' is a best reconstruction. The diacritic and dash style of the printed title were not verified.",
+  "Part I Ch 6 title: DoE prints 'WE DISTRIBUTE, YET THINGS MULTIPLY' (with comma). The CIET file name has no punctuation.",
+  "Part I Ch 6 sections: DoE lists 'Mind the Mistake' / 'Mend the Mistake' and 'This Way or That Way' / 'All Ways Lead to the Bay' as separate items. These are probably single headings in the book ('Mind the Mistake, Mend the Mistake' and 'This Way or That Way, All Ways Lead to the Bay'). They are kept as DoE wrote them.",
+  "Part I Ch 1 and Ch 5: DoE's subtopic lists are shorter than secondary topic lists (e.g. 'Square and cube roots', 'Sum of consecutive numbers' are not listed by DoE). The outcomes cover the wider scope seen in secondary sources, and the section lists stay as DoE gave them. Items such as 'Spreadsheets' (Ch 5 and Part II Ch 5) and 'Supercells' (Part II Ch 3) may be boxed activities rather than numbered sections.",
+  "Part II edition: the release date of Part II (expected during 2025-26) and its edition statement were not verified.",
+  "Part II Ch 1 (Fractions in Disguise): it was not verified whether the chapter includes percentage increase/decrease, discounts, profit and loss, or interest. No outcomes were written for those topics. Check the printed chapter and add them if present (MATH.number.profit-loss would then apply)."
+ ],
+ "chapters": [
+  {
+   "id": "cbse-g08-t1-c01",
+   "number": 1,
+   "term": 1,
+   "title": "A Square and a Cube",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t1-c01-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g08-t1-c01-s02",
+     "title": "Square Numbers"
+    },
+    {
+     "id": "cbse-g08-t1-c01-s03",
+     "title": "Cubic Numbers"
+    },
+    {
+     "id": "cbse-g08-t1-c01-s04",
+     "title": "A Pinch of History"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t1-c01-o01",
+     "statement": "Recognise perfect squares and use their properties (possible last digits, sums of consecutive odd numbers, numbers between consecutive squares).",
+     "concepts": [
+      "perfect squares",
+      "properties of squares"
+     ],
+     "questionTypes": [
+      "true-false",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.square-roots",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.figurate-numbers",
+       "name": "Relate figurate number sequences to their dot and shape pictures",
+       "strand": "algebra",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.algebra.growing-patterns",
+        "MATH.algebra.pattern-rules"
+       ],
+       "why": "Existing pattern competencies cover extending patterns and stating rules; none covers square/triangular/cube number sequences, their pictorial representations and the relations between them (e.g. sums of odd numbers are squares)."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.figurate-numbers",
+      "MATH.number.square-roots"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c01-o02",
+     "statement": "Find square roots of perfect squares (e.g. by prime factorisation or by repeatedly subtracting odd numbers) and estimate square roots of other numbers between consecutive integers.",
+     "concepts": [
+      "square root",
+      "estimating square roots"
+     ],
+     "questionTypes": [
+      "numeric",
+      "estimation"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.square-roots",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.prime-factorisation",
+       "name": "Express a number as a product of primes",
+       "strand": "number",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [
+        "MATH.number.primes"
+       ],
+       "supports": [
+        "MATH.number.factors-multiples"
+       ],
+       "why": "The only existing mention is inside MATH.number.euclid-algorithm (Grade 10, combined with the Euclidean algorithm); Grade 6 needs prime factorisation as a standalone skill."
+      }
+     ],
+     "mapped": [
+      "MATH.number.prime-factorisation",
+      "MATH.number.square-roots"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c01-o03",
+     "statement": "Find cubes and cube roots of perfect cubes and recognise perfect cubes.",
+     "concepts": [
+      "cubes",
+      "cube roots"
+     ],
+     "questionTypes": [
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.cubes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.cubes"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c01-o04",
+     "statement": "Explore and explain patterns involving squares and cubes, such as cubes as sums of consecutive odd numbers or numbers that are sums of two cubes in two ways.",
+     "concepts": [
+      "patterns in squares and cubes",
+      "taxicab numbers"
+     ],
+     "questionTypes": [
+      "pattern",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.cubes",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.conjecture-testing",
+       "name": "Formulate and test conjectures from number explorations",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.counterexamples-intro"
+       ],
+       "why": "MATH.reasoning.counterexamples-intro (Grade 5) is about testing a given generalisation; Ganita Prakash repeatedly asks learners to generate conjectures from explorations (Kaprekar, Collatz, palindromes, consecutive sums) and test them systematically."
+      }
+     ],
+     "mapped": [
+      "MATH.number.cubes",
+      "MATH.reasoning.conjecture-testing"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t1-c02",
+   "number": 2,
+   "term": 1,
+   "title": "Power Play",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t1-c02-s01",
+     "title": "Experiencing the Power Play"
+    },
+    {
+     "id": "cbse-g08-t1-c02-s02",
+     "title": "Exponential Notation and Operations"
+    },
+    {
+     "id": "cbse-g08-t1-c02-s03",
+     "title": "The Other Side of Powers"
+    },
+    {
+     "id": "cbse-g08-t1-c02-s04",
+     "title": "Powers of 10"
+    },
+    {
+     "id": "cbse-g08-t1-c02-s05",
+     "title": "Did You Ever Wonder?"
+    },
+    {
+     "id": "cbse-g08-t1-c02-s06",
+     "title": "A Pinch of History"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t1-c02-o01",
+     "statement": "Write repeated multiplication in exponential notation and evaluate powers.",
+     "concepts": [
+      "exponential notation",
+      "base and exponent"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.exponents",
+       "fit": "partial"
+      },
+      {
+       "id": "MLY.pow.whole",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.exponents",
+      "MLY.pow.whole"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c02-o02",
+     "statement": "Apply the laws of exponents, including zero and negative exponents, to simplify expressions.",
+     "concepts": [
+      "laws of exponents",
+      "negative exponents",
+      "zero exponent"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.exponents",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.exponents"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c02-o03",
+     "statement": "Write very large and very small quantities in scientific notation using powers of 10, and compare them.",
+     "concepts": [
+      "powers of 10",
+      "scientific notation"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.scientific-notation",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.scientific-notation"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c02-o04",
+     "statement": "Compare linear and exponential growth in situations such as repeated doubling or folding paper.",
+     "concepts": [
+      "exponential growth",
+      "doubling"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.exponential-growth",
+       "name": "Compare linear and exponential growth",
+       "strand": "number",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [
+        "MATH.number.exponents"
+       ],
+       "supports": [
+        "MATH.number.compound-interest"
+       ],
+       "why": "MATH.number.compound-interest is a financial application; contrasting repeated addition with repeated multiplication (doubling, paper folding) is a separate skill."
+      }
+     ],
+     "mapped": [
+      "MATH.number.exponential-growth"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c02-o05",
+     "statement": "Estimate the order of magnitude of large real-world quantities and judge whether a claim is plausible.",
+     "concepts": [
+      "sense of large numbers",
+      "order of magnitude"
+     ],
+     "questionTypes": [
+      "estimation"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.scientific-notation",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.scientific-notation",
+      "MATH.reasoning.estimate-check"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t1-c03",
+   "number": 3,
+   "term": 1,
+   "title": "A Story of Numbers",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t1-c03-s01",
+     "title": "Reema's Curiosity"
+    },
+    {
+     "id": "cbse-g08-t1-c03-s02",
+     "title": "Some Early Number Systems"
+    },
+    {
+     "id": "cbse-g08-t1-c03-s03",
+     "title": "The Idea of a Base"
+    },
+    {
+     "id": "cbse-g08-t1-c03-s04",
+     "title": "Place Value Representation"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t1-c03-o01",
+     "statement": "Describe how some early number systems recorded numbers and explain their limitations compared with a place-value system.",
+     "concepts": [
+      "early number systems",
+      "history of numerals"
+     ],
+     "questionTypes": [
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.number-bases",
+       "name": "Represent numbers in place-value systems with different bases",
+       "strand": "number",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [
+        "MLY.pow.whole"
+       ],
+       "supports": [
+        "MATH.number.large-numbers"
+       ],
+       "why": "No existing competency covers number systems other than base ten or the historical development of place value."
+      }
+     ],
+     "mapped": [
+      "MATH.number.number-bases"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c03-o02",
+     "statement": "Write numbers in a base other than ten and convert numbers between such a base and base ten.",
+     "concepts": [
+      "base",
+      "base conversion"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.number-bases",
+       "name": "Represent numbers in place-value systems with different bases",
+       "strand": "number",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [
+        "MLY.pow.whole"
+       ],
+       "supports": [
+        "MATH.number.large-numbers"
+       ],
+       "why": "No existing competency covers number systems other than base ten or the historical development of place value."
+      }
+     ],
+     "mapped": [
+      "MATH.number.number-bases"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c03-o03",
+     "statement": "Explain how place value and a symbol for zero make the Hindu (Indian) numeral system efficient.",
+     "concepts": [
+      "place value",
+      "zero",
+      "Hindu numeral system"
+     ],
+     "questionTypes": [
+      "written-explanation",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.large-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.number-bases",
+       "name": "Represent numbers in place-value systems with different bases",
+       "strand": "number",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [
+        "MLY.pow.whole"
+       ],
+       "supports": [
+        "MATH.number.large-numbers"
+       ],
+       "why": "No existing competency covers number systems other than base ten or the historical development of place value."
+      }
+     ],
+     "mapped": [
+      "MATH.number.large-numbers",
+      "MATH.number.number-bases"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t1-c04",
+   "number": 4,
+   "term": 1,
+   "title": "Quadrilaterals",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t1-c04-s01",
+     "title": "Rectangles and Squares"
+    },
+    {
+     "id": "cbse-g08-t1-c04-s02",
+     "title": "Angles in a Quadrilateral"
+    },
+    {
+     "id": "cbse-g08-t1-c04-s03",
+     "title": "More Quadrilaterals with Parallel Opposite Sides"
+    },
+    {
+     "id": "cbse-g08-t1-c04-s04",
+     "title": "Quadrilaterals with Equal Sidelengths"
+    },
+    {
+     "id": "cbse-g08-t1-c04-s05",
+     "title": "Playing with Quadrilaterals"
+    },
+    {
+     "id": "cbse-g08-t1-c04-s06",
+     "title": "Kite and Trapezium"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t1-c04-o01",
+     "statement": "State and justify properties of rectangles and squares, including those of their diagonals.",
+     "concepts": [
+      "rectangle",
+      "square",
+      "diagonals"
+     ],
+     "questionTypes": [
+      "written-explanation",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.quadrilateral-classification",
+       "name": "Classify quadrilaterals by side, angle and diagonal properties",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.geometry.quadrilaterals",
+        "MATH.geometry.congruence",
+        "MATH.geometry.parallel-angles"
+       ],
+       "why": "MATH.geometry.quadrilaterals is about angle properties; classifying rectangles, squares, parallelograms, rhombuses, kites and trapeziums by sides and diagonals (and their inclusion relations) is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.quadrilateral-classification"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c04-o02",
+     "statement": "Use the angle sum of a quadrilateral to find unknown angles.",
+     "concepts": [
+      "angle sum of quadrilateral"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.quadrilaterals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.quadrilaterals"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c04-o03",
+     "statement": "Use the properties of parallelograms and rhombuses to find unknown sides and angles.",
+     "concepts": [
+      "parallelogram",
+      "rhombus"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.quadrilaterals",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.quadrilateral-classification",
+       "name": "Classify quadrilaterals by side, angle and diagonal properties",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.geometry.quadrilaterals",
+        "MATH.geometry.congruence",
+        "MATH.geometry.parallel-angles"
+       ],
+       "why": "MATH.geometry.quadrilaterals is about angle properties; classifying rectangles, squares, parallelograms, rhombuses, kites and trapeziums by sides and diagonals (and their inclusion relations) is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.quadrilateral-classification",
+      "MATH.geometry.quadrilaterals"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c04-o04",
+     "statement": "Identify kites and trapeziums by their properties and classify quadrilaterals, including how the types relate to one another (e.g. every square is a rhombus).",
+     "concepts": [
+      "kite",
+      "trapezium",
+      "classification hierarchy"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.quadrilateral-classification",
+       "name": "Classify quadrilaterals by side, angle and diagonal properties",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.geometry.quadrilaterals",
+        "MATH.geometry.congruence",
+        "MATH.geometry.parallel-angles"
+       ],
+       "why": "MATH.geometry.quadrilaterals is about angle properties; classifying rectangles, squares, parallelograms, rhombuses, kites and trapeziums by sides and diagonals (and their inclusion relations) is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.quadrilateral-classification"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c04-o05",
+     "statement": "Justify a quadrilateral property with an argument based on congruent triangles or parallel-line angles.",
+     "concepts": [
+      "geometric justification"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.congruence",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.proof-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.quadrilateral-classification",
+       "name": "Classify quadrilaterals by side, angle and diagonal properties",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.geometry.quadrilaterals",
+        "MATH.geometry.congruence",
+        "MATH.geometry.parallel-angles"
+       ],
+       "why": "MATH.geometry.quadrilaterals is about angle properties; classifying rectangles, squares, parallelograms, rhombuses, kites and trapeziums by sides and diagonals (and their inclusion relations) is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.congruence",
+      "MATH.geometry.quadrilateral-classification",
+      "MATH.reasoning.proof-intro"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t1-c05",
+   "number": 5,
+   "term": 1,
+   "title": "Number Play",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t1-c05-s01",
+     "title": "Is This a Multiple Of?"
+    },
+    {
+     "id": "cbse-g08-t1-c05-s02",
+     "title": "Checking Divisibility Quickly"
+    },
+    {
+     "id": "cbse-g08-t1-c05-s03",
+     "title": "Spreadsheets"
+    },
+    {
+     "id": "cbse-g08-t1-c05-s04",
+     "title": "Digits in Disguise"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t1-c05-o01",
+     "statement": "Decide whether a number is a multiple of another and reason about remainders.",
+     "concepts": [
+      "multiples",
+      "remainders"
+     ],
+     "questionTypes": [
+      "true-false",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.factors-multiples",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.division-remainders",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.divisibility",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Grade 8 reasoning about remainders (of sums and products, numbers leaving a given remainder) is written in the divisibility-reasoning competency, above the Grade 3 and 5 competencies the outcome is mapped to."
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.division-remainders",
+      "MATH.number.factors-multiples",
+      "MATH.reasoning.divisibility"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c05-o02",
+     "statement": "Apply divisibility shortcuts and explain them using place value.",
+     "concepts": [
+      "divisibility rules"
+     ],
+     "questionTypes": [
+      "true-false",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.divisibility",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.divisibility"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c05-o03",
+     "statement": "Explore which numbers are sums of consecutive numbers and whether sums of several numbers are even or odd, and justify the patterns.",
+     "concepts": [
+      "consecutive sums",
+      "parity"
+     ],
+     "questionTypes": [
+      "pattern",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.parity",
+       "name": "Reason with parity of sums and products",
+       "strand": "reasoning",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.number.factors-multiples"
+       ],
+       "why": "No existing competency covers predicting/justifying whether sums and products are even or odd, a recurring Ganita Prakash theme (Grade 7 'Picking Parity', Grade 8 'Exploring Even and Odd Sums')."
+      },
+      {
+       "id": "MATH.reasoning.conjecture-testing",
+       "name": "Formulate and test conjectures from number explorations",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.counterexamples-intro"
+       ],
+       "why": "MATH.reasoning.counterexamples-intro (Grade 5) is about testing a given generalisation; Ganita Prakash repeatedly asks learners to generate conjectures from explorations (Kaprekar, Collatz, palindromes, consecutive sums) and test them systematically."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.conjecture-testing",
+      "MATH.reasoning.parity"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c05-o04",
+     "statement": "Solve cryptarithm (digits in disguise) puzzles.",
+     "concepts": [
+      "cryptarithms"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.digit-puzzles",
+       "name": "Solve cryptarithm (digits-in-disguise) puzzles",
+       "strand": "reasoning",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.number.large-numbers",
+        "MATH.number.multi-multiplication"
+       ],
+       "why": "Deducing hidden digits in letter-coded arithmetic uses place value and carrying in a way no existing competency describes."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.digit-puzzles"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t1-c06",
+   "number": 6,
+   "term": 1,
+   "title": "We Distribute, Yet Things Multiply",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t1-c06-s01",
+     "title": "Some Properties of Multiplication"
+    },
+    {
+     "id": "cbse-g08-t1-c06-s02",
+     "title": "Special Cases of the Distributive Property"
+    },
+    {
+     "id": "cbse-g08-t1-c06-s03",
+     "title": "Mind the Mistake"
+    },
+    {
+     "id": "cbse-g08-t1-c06-s04",
+     "title": "Mend the Mistake"
+    },
+    {
+     "id": "cbse-g08-t1-c06-s05",
+     "title": "This Way or That Way"
+    },
+    {
+     "id": "cbse-g08-t1-c06-s06",
+     "title": "All Ways Lead to the Bay"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t1-c06-o01",
+     "statement": "Use the distributive property to multiply algebraic expressions, such as a binomial by a binomial.",
+     "concepts": [
+      "distributive property",
+      "multiplying expressions"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MLY.alg.distributive",
+       "fit": "exact"
+      },
+      {
+       "id": "MLY.alg.expand-binomials",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.identities-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.identities-intro",
+      "MLY.alg.distributive",
+      "MLY.alg.expand-binomials"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c06-o02",
+     "statement": "Use the identities for (a + b)^2, (a - b)^2 and (a + b)(a - b) to expand expressions.",
+     "concepts": [
+      "algebraic identities"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.identities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.identities"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c06-o03",
+     "statement": "Find and correct errors in algebraic expansions.",
+     "concepts": [
+      "error analysis"
+     ],
+     "questionTypes": [
+      "written-explanation",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.identities",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.identities"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c06-o04",
+     "statement": "Use identities and the distributive property for quick mental calculations (e.g. 98 x 102, 49^2) and show that different routes give the same result.",
+     "concepts": [
+      "fast multiplication",
+      "mental math"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.identities",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.operation-properties",
+       "name": "Use commutative, associative and distributive properties to transform and compare expressions",
+       "strand": "number",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MLY.alg.distributive",
+        "MATH.number.order-of-operations"
+       ],
+       "why": "MLY.alg.distributive covers only a(x+b); comparing or regrouping expressions using swapping/grouping properties (and sign changes on removing brackets) has no competency."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.identities",
+      "MATH.number.operation-properties"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t1-c07",
+   "number": 7,
+   "term": 1,
+   "title": "Proportional Reasoning-1",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t1-c07-s01",
+     "title": "Observing Similarity in Change"
+    },
+    {
+     "id": "cbse-g08-t1-c07-s02",
+     "title": "Ratios"
+    },
+    {
+     "id": "cbse-g08-t1-c07-s03",
+     "title": "Ratios in their Simplest Form"
+    },
+    {
+     "id": "cbse-g08-t1-c07-s04",
+     "title": "Problem Solving with Proportional Reasoning"
+    },
+    {
+     "id": "cbse-g08-t1-c07-s05",
+     "title": "Sharing but Not Equally!"
+    },
+    {
+     "id": "cbse-g08-t1-c07-s06",
+     "title": "Unit Conversions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t1-c07-o01",
+     "statement": "Tell whether a change is proportional or additive (e.g. resizing images or recipes) and explain why.",
+     "concepts": [
+      "proportional vs additive change"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.proportional-check",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.proportional-check"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c07-o02",
+     "statement": "Write ratios, decide whether two ratios are equivalent, and simplify a ratio to its simplest form.",
+     "concepts": [
+      "ratio",
+      "equivalent ratios",
+      "simplest form"
+     ],
+     "questionTypes": [
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.ratio",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.ratio"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c07-o03",
+     "statement": "Solve problems using proportions, including finding a missing term.",
+     "concepts": [
+      "proportion",
+      "missing term"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.proportion",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.proportion"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c07-o04",
+     "statement": "Divide a quantity in a given ratio.",
+     "concepts": [
+      "sharing in a ratio"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.ratio-division",
+       "name": "Divide a quantity in a given ratio",
+       "strand": "number",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [
+        "MATH.number.ratio"
+       ],
+       "supports": [
+        "MATH.number.proportion"
+       ],
+       "why": "MATH.number.ratio covers representing/simplifying ratios; sharing a whole in a given (possibly three-term) ratio is a distinct assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.number.ratio-division"
+     ]
+    },
+    {
+     "id": "cbse-g08-t1-c07-o05",
+     "statement": "Convert between units, using proportional reasoning with conversion factors.",
+     "concepts": [
+      "unit conversion",
+      "conversion factor"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.unit-conversions",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.unit-rate",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.unit-conversions",
+      "MATH.number.unit-rate"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t2-c01",
+   "number": 1,
+   "term": 2,
+   "title": "Fractions in Disguise",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t2-c01-s01",
+     "title": "Fractions as Percentages"
+    },
+    {
+     "id": "cbse-g08-t2-c01-s02",
+     "title": "Percentage of Some Quantity"
+    },
+    {
+     "id": "cbse-g08-t2-c01-s03",
+     "title": "Using Percentages"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t2-c01-o01",
+     "statement": "Convert between fractions, decimals and percentages.",
+     "concepts": [
+      "percentage",
+      "fraction-percentage conversion"
+     ],
+     "questionTypes": [
+      "numeric",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percentage",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.percent-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percent-intro",
+      "MATH.number.percentage"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c01-o02",
+     "statement": "Find a given percentage of a quantity, and find what percentage one quantity is of another.",
+     "concepts": [
+      "percentage of a quantity"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percentage",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percentage"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c01-o03",
+     "statement": "Use percentages to compare proportions in groups of different sizes and to judge claims stated as percentages.",
+     "concepts": [
+      "comparing with percentages"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.percentage",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.proportional-check",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percentage",
+      "MATH.reasoning.proportional-check"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t2-c02",
+   "number": 2,
+   "term": 2,
+   "title": "The Baudhāyana-Pythagoras Theorem",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t2-c02-s01",
+     "title": "Doubling a Square"
+    },
+    {
+     "id": "cbse-g08-t2-c02-s02",
+     "title": "Halving a Square"
+    },
+    {
+     "id": "cbse-g08-t2-c02-s03",
+     "title": "Hypotenuse of an Isosceles Right Triangle"
+    },
+    {
+     "id": "cbse-g08-t2-c02-s04",
+     "title": "Combining Two Different Squares"
+    },
+    {
+     "id": "cbse-g08-t2-c02-s05",
+     "title": "Right–Triangles Having Integer Sidelengths"
+    },
+    {
+     "id": "cbse-g08-t2-c02-s06",
+     "title": "A Long-Standing Open Problem"
+    },
+    {
+     "id": "cbse-g08-t2-c02-s07",
+     "title": "Further Applications of the Baudhāyana - Pythagoras Theorem"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t2-c02-o01",
+     "statement": "Construct squares with double or half the area of a given square and find their side lengths.",
+     "concepts": [
+      "doubling a square",
+      "halving a square"
+     ],
+     "questionTypes": [
+      "construction",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.square-roots",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.pythagoras",
+       "name": "Apply the Baudhayana-Pythagoras theorem and its converse",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        9
+       ],
+       "prerequisites": [
+        "MATH.number.square-roots"
+       ],
+       "supports": [
+        "MATH.measurement.area-squares",
+        "MATH.geometry.triangle-properties"
+       ],
+       "why": "The existing list has no competency for the right-triangle theorem itself."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.pythagoras",
+      "MATH.number.square-roots"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c02-o02",
+     "statement": "Use the Baudhayana-Pythagoras theorem to find an unknown side of a right triangle.",
+     "concepts": [
+      "hypotenuse",
+      "Pythagoras theorem"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.pythagoras",
+       "name": "Apply the Baudhayana-Pythagoras theorem and its converse",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        9
+       ],
+       "prerequisites": [
+        "MATH.number.square-roots"
+       ],
+       "supports": [
+        "MATH.measurement.area-squares",
+        "MATH.geometry.triangle-properties"
+       ],
+       "why": "The existing list has no competency for the right-triangle theorem itself."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.pythagoras"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c02-o03",
+     "statement": "Find and generate Pythagorean triples (right triangles with whole-number sides).",
+     "concepts": [
+      "Pythagorean triples"
+     ],
+     "questionTypes": [
+      "numeric",
+      "set"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.pythagoras",
+       "name": "Apply the Baudhayana-Pythagoras theorem and its converse",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        9
+       ],
+       "prerequisites": [
+        "MATH.number.square-roots"
+       ],
+       "supports": [
+        "MATH.measurement.area-squares",
+        "MATH.geometry.triangle-properties"
+       ],
+       "why": "The existing list has no competency for the right-triangle theorem itself."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.pythagoras"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c02-o04",
+     "statement": "Apply the theorem and its converse in real-life and geometric problems, including deciding whether a triangle is right-angled.",
+     "concepts": [
+      "converse",
+      "applications"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.pythagoras",
+       "name": "Apply the Baudhayana-Pythagoras theorem and its converse",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        9
+       ],
+       "prerequisites": [
+        "MATH.number.square-roots"
+       ],
+       "supports": [
+        "MATH.measurement.area-squares",
+        "MATH.geometry.triangle-properties"
+       ],
+       "why": "The existing list has no competency for the right-triangle theorem itself."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.pythagoras"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t2-c03",
+   "number": 3,
+   "term": 2,
+   "title": "Proportional Reasoning-2",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t2-c03-s01",
+     "title": "Proportionality — A Quick Recap"
+    },
+    {
+     "id": "cbse-g08-t2-c03-s02",
+     "title": "Supercells"
+    },
+    {
+     "id": "cbse-g08-t2-c03-s03",
+     "title": "Ratios in Maps"
+    },
+    {
+     "id": "cbse-g08-t2-c03-s04",
+     "title": "Ratios with More than 2 Terms"
+    },
+    {
+     "id": "cbse-g08-t2-c03-s05",
+     "title": "Dividing a Whole in a Given Ratio"
+    },
+    {
+     "id": "cbse-g08-t2-c03-s06",
+     "title": "A Slice of the Pie"
+    },
+    {
+     "id": "cbse-g08-t2-c03-s07",
+     "title": "Inverse Proportions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t2-c03-o01",
+     "statement": "Use a map scale to find actual distances from map distances, and the reverse.",
+     "concepts": [
+      "map scale"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.proportion",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.geometry.scale-drawings",
+       "name": "Use scales on maps and scale drawings",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [
+        "MATH.number.ratio"
+       ],
+       "supports": [
+        "MATH.measurement.unit-conversions"
+       ],
+       "why": "No existing competency covers interpreting a map scale as a ratio; MATH.geometry.scaled-construction (Grade 10) is about constructing similar figures."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.scale-drawings",
+      "MATH.number.proportion"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c03-o02",
+     "statement": "Work with ratios of three or more terms and divide a whole in a given ratio.",
+     "concepts": [
+      "three-term ratio",
+      "dividing in a ratio"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.ratio",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.ratio-division",
+       "name": "Divide a quantity in a given ratio",
+       "strand": "number",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [
+        "MATH.number.ratio"
+       ],
+       "supports": [
+        "MATH.number.proportion"
+       ],
+       "why": "MATH.number.ratio covers representing/simplifying ratios; sharing a whole in a given (possibly three-term) ratio is a distinct assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.number.ratio",
+      "MATH.number.ratio-division"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c03-o03",
+     "statement": "Read pie charts and draw them by turning proportions into sector angles.",
+     "concepts": [
+      "pie chart",
+      "sector angle"
+     ],
+     "questionTypes": [
+      "data-table",
+      "diagram-drawing",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.statistics.pie-charts",
+       "name": "Read and draw pie charts",
+       "strand": "statistics",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [
+        "MATH.number.percentage",
+        "MATH.geometry.angle-measure"
+       ],
+       "supports": [
+        "MATH.number.ratio"
+       ],
+       "why": "No existing statistics competency covers pie charts."
+      }
+     ],
+     "mapped": [
+      "MATH.statistics.pie-charts"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c03-o04",
+     "statement": "Recognise inverse proportion and solve inverse-proportion problems (e.g. workers and time).",
+     "concepts": [
+      "inverse proportion"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inverse-proportion",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inverse-proportion"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t2-c04",
+   "number": 4,
+   "term": 2,
+   "title": "Exploring Some Geometric Themes",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t2-c04-s01",
+     "title": "Fractals"
+    },
+    {
+     "id": "cbse-g08-t2-c04-s02",
+     "title": "Visualising Solids"
+    },
+    {
+     "id": "cbse-g08-t2-c04-s03",
+     "title": "Shortest Paths on a Cube"
+    },
+    {
+     "id": "cbse-g08-t2-c04-s04",
+     "title": "Representation of Solids on a Plane Surface"
+    },
+    {
+     "id": "cbse-g08-t2-c04-s05",
+     "title": "Isometric Projections"
+    },
+    {
+     "id": "cbse-g08-t2-c04-s06",
+     "title": "Drawing on Isometric Grids"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t2-c04-o01",
+     "statement": "Build the stages of fractals such as the Sierpinski carpet or gasket and the Koch snowflake, and count the pieces or find the perimeter or area remaining at each stage.",
+     "concepts": [
+      "fractals",
+      "self-similarity",
+      "iteration"
+     ],
+     "questionTypes": [
+      "pattern",
+      "numeric",
+      "diagram-drawing"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.fractal-iteration",
+       "name": "Describe iterative fractal constructions and quantify each stage",
+       "strand": "geometry",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.number.exponents",
+        "MATH.algebra.growing-patterns"
+       ],
+       "why": "No existing competency covers self-similar iterative constructions such as the Sierpinski carpet/gasket or Koch snowflake."
+      }
+     ],
+     "mapped": [
+      "MATH.geometry.fractal-iteration"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c04-o02",
+     "statement": "Visualise solids from their nets and count their faces, edges and vertices.",
+     "concepts": [
+      "solids",
+      "nets",
+      "faces edges vertices"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.nets",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.solid-views",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.nets",
+      "MATH.geometry.solid-views"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c04-o03",
+     "statement": "Find shortest paths on the surface of a cube by unfolding it into a net.",
+     "concepts": [
+      "shortest path",
+      "unfolding"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "diagram-drawing"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.nets",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.nets"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c04-o04",
+     "statement": "Draw solids on paper from different views and on isometric grids, and interpret such drawings.",
+     "concepts": [
+      "views of solids",
+      "isometric drawing",
+      "projections"
+     ],
+     "questionTypes": [
+      "diagram-drawing",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.solid-views",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.solid-views"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t2-c05",
+   "number": 5,
+   "term": 2,
+   "title": "Tales by Dots and Lines",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t2-c05-s01",
+     "title": "The Balancing Act"
+    },
+    {
+     "id": "cbse-g08-t2-c05-s02",
+     "title": "Mean and Median with Frequencies"
+    },
+    {
+     "id": "cbse-g08-t2-c05-s03",
+     "title": "Spreadsheets"
+    },
+    {
+     "id": "cbse-g08-t2-c05-s04",
+     "title": "Visualising and Interpreting Data"
+    },
+    {
+     "id": "cbse-g08-t2-c05-s05",
+     "title": "Infographics"
+    },
+    {
+     "id": "cbse-g08-t2-c05-s06",
+     "title": "Data Story: Sleepy-Deepy"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t2-c05-o01",
+     "statement": "Interpret the mean as a balance point, compute it, and predict how it changes when data values are added or changed.",
+     "concepts": [
+      "mean",
+      "balance point"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.averages-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.averages-intro"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c05-o02",
+     "statement": "Find a missing data value given the mean of the data.",
+     "concepts": [
+      "missing value",
+      "mean"
+     ],
+     "questionTypes": [
+      "numeric",
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.averages-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.averages-intro"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c05-o03",
+     "statement": "Calculate the mean and median of data given in a frequency table.",
+     "concepts": [
+      "frequency table",
+      "mean",
+      "median"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.median-mode",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.statistics.averages-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.averages-intro",
+      "MATH.statistics.median-mode"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c05-o04",
+     "statement": "Read, critique and build data displays and infographics (including with a spreadsheet) and tell a story with data.",
+     "concepts": [
+      "data visualisation",
+      "infographics",
+      "spreadsheets"
+     ],
+     "questionTypes": [
+      "written-explanation",
+      "graph-sketch"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.statistics.evaluate-data-displays",
+       "name": "Choose, design and critique data displays and infographics",
+       "strand": "statistics",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [
+        "MATH.statistics.scaled-bars"
+       ],
+       "supports": [
+        "MATH.statistics.pictographs"
+       ],
+       "why": "Ganita Prakash assesses aesthetic/misleading-display considerations and infographics; existing competencies only cover reading and drawing specific charts."
+      },
+      {
+       "id": "MATH.statistics.statistical-questions",
+       "name": "Pose statistical questions and draw conclusions from data",
+       "strand": "statistics",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.statistics.data-frequency"
+       ],
+       "why": "Existing statistics competencies are about organising/displaying data or computing measures; distinguishing statistical questions from statements and reasoning from data to a conclusion is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.statistics.evaluate-data-displays",
+      "MATH.statistics.statistical-questions"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t2-c06",
+   "number": 6,
+   "term": 2,
+   "title": "Algebra Play",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t2-c06-s01",
+     "title": "Algebra Play"
+    },
+    {
+     "id": "cbse-g08-t2-c06-s02",
+     "title": "Thinking about 'Think of a Number' Tricks"
+    },
+    {
+     "id": "cbse-g08-t2-c06-s03",
+     "title": "Number Pyramids"
+    },
+    {
+     "id": "cbse-g08-t2-c06-s04",
+     "title": "Fun with Grids"
+    },
+    {
+     "id": "cbse-g08-t2-c06-s05",
+     "title": "The Largest Product"
+    },
+    {
+     "id": "cbse-g08-t2-c06-s06",
+     "title": "Decoding Divisibility Tricks"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t2-c06-o01",
+     "statement": "Use algebra to explain why 'think of a number' tricks always work.",
+     "concepts": [
+      "algebraic justification"
+     ],
+     "questionTypes": [
+      "written-explanation",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.proof-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.generalise-with-expressions",
+       "name": "Express and justify a general pattern with an algebraic expression",
+       "strand": "algebra",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [
+        "MATH.algebra.variables"
+       ],
+       "supports": [
+        "MATH.algebra.pattern-rules",
+        "MATH.algebra.algebra-simplify"
+       ],
+       "why": "MATH.algebra.pattern-rules is in words (Grade 4) and MATH.algebra.variables is evaluation; writing an algebraic generalisation of a pattern or trick and using it to justify the pattern is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.generalise-with-expressions",
+      "MATH.reasoning.proof-intro"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c06-o02",
+     "statement": "Write and simplify expressions for the cells of number pyramids and calendar or grid patterns, and use them to predict results.",
+     "concepts": [
+      "number pyramids",
+      "grid patterns"
+     ],
+     "questionTypes": [
+      "expression",
+      "pattern"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.algebra-simplify",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.generalise-with-expressions",
+       "name": "Express and justify a general pattern with an algebraic expression",
+       "strand": "algebra",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [
+        "MATH.algebra.variables"
+       ],
+       "supports": [
+        "MATH.algebra.pattern-rules",
+        "MATH.algebra.algebra-simplify"
+       ],
+       "why": "MATH.algebra.pattern-rules is in words (Grade 4) and MATH.algebra.variables is evaluation; writing an algebraic generalisation of a pattern or trick and using it to justify the pattern is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.algebra-simplify",
+      "MATH.algebra.generalise-with-expressions"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c06-o03",
+     "statement": "Arrange given digits to make the largest possible product and justify the arrangement.",
+     "concepts": [
+      "optimisation",
+      "place value"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.mathematical-argument",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.reasoning.conjecture-testing",
+       "name": "Formulate and test conjectures from number explorations",
+       "strand": "reasoning",
+       "gradeRange": [
+        6,
+        8
+       ],
+       "prerequisites": [],
+       "supports": [
+        "MATH.reasoning.counterexamples-intro"
+       ],
+       "why": "MATH.reasoning.counterexamples-intro (Grade 5) is about testing a given generalisation; Ganita Prakash repeatedly asks learners to generate conjectures from explorations (Kaprekar, Collatz, palindromes, consecutive sums) and test them systematically."
+      }
+     ],
+     "mapped": [
+      "MATH.reasoning.conjecture-testing",
+      "MATH.reasoning.mathematical-argument"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c06-o04",
+     "statement": "Use algebraic expressions to prove divisibility tricks.",
+     "concepts": [
+      "divisibility proofs"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.divisibility",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.proof-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.generalise-with-expressions",
+       "name": "Express and justify a general pattern with an algebraic expression",
+       "strand": "algebra",
+       "gradeRange": [
+        7,
+        8
+       ],
+       "prerequisites": [
+        "MATH.algebra.variables"
+       ],
+       "supports": [
+        "MATH.algebra.pattern-rules",
+        "MATH.algebra.algebra-simplify"
+       ],
+       "why": "MATH.algebra.pattern-rules is in words (Grade 4) and MATH.algebra.variables is evaluation; writing an algebraic generalisation of a pattern or trick and using it to justify the pattern is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.generalise-with-expressions",
+      "MATH.reasoning.divisibility",
+      "MATH.reasoning.proof-intro"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g08-t2-c07",
+   "number": 7,
+   "term": 2,
+   "title": "Area",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g08-t2-c07-s01",
+     "title": "Rectangle and Squares"
+    },
+    {
+     "id": "cbse-g08-t2-c07-s02",
+     "title": "Triangles"
+    },
+    {
+     "id": "cbse-g08-t2-c07-s03",
+     "title": "Triangles between Parallel Lines with a Common Base"
+    },
+    {
+     "id": "cbse-g08-t2-c07-s04",
+     "title": "Area of any Polygon"
+    },
+    {
+     "id": "cbse-g08-t2-c07-s05",
+     "title": "Parallelogram"
+    },
+    {
+     "id": "cbse-g08-t2-c07-s06",
+     "title": "Rhombus"
+    },
+    {
+     "id": "cbse-g08-t2-c07-s07",
+     "title": "Trapezium"
+    },
+    {
+     "id": "cbse-g08-t2-c07-s08",
+     "title": "Areas in Real Life"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g08-t2-c07-o01",
+     "statement": "Find areas of triangles, and explain why triangles on the same base between the same parallel lines have equal areas.",
+     "concepts": [
+      "area of triangle",
+      "same base same parallels"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "written-explanation"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.measurement.triangle-area",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.triangle-area"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c07-o02",
+     "statement": "Find the area of a parallelogram from its base and height, and the area of a rhombus from its diagonals.",
+     "concepts": [
+      "parallelogram area",
+      "rhombus area"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.measurement.parallelogram-rhombus-area",
+       "name": "Calculate areas of parallelograms and rhombuses",
+       "strand": "measurement",
+       "gradeRange": [
+        8,
+        8
+       ],
+       "prerequisites": [
+        "MATH.measurement.rectangle-area"
+       ],
+       "supports": [
+        "MATH.measurement.triangle-area"
+       ],
+       "why": "MATH.measurement.trapezium-area covers trapeziums and composites; base-height area of a parallelogram and diagonal area of a rhombus have no competency."
+      }
+     ],
+     "mapped": [
+      "MATH.measurement.parallelogram-rhombus-area"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c07-o03",
+     "statement": "Find the area of a trapezium.",
+     "concepts": [
+      "trapezium area"
+     ],
+     "questionTypes": [
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.trapezium-area",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.trapezium-area"
+     ]
+    },
+    {
+     "id": "cbse-g08-t2-c07-o04",
+     "statement": "Find the area of any polygon by splitting it into triangles and other known shapes, including in real-life problems.",
+     "concepts": [
+      "area of polygon",
+      "composite area"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.trapezium-area",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.trapezium-area"
+     ]
+    }
+   ]
+  }
+ ]
+}

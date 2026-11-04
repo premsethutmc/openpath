@@ -1,0 +1,40 @@
+route decisions by engine domain (line-level):
+┌────────────┬───────┬────────────┬────────────────────┬─────────────────────┬──────────┐
+│            │ calls │ authorized │ refusedUnjustified │ refusedUnrecognized │ verified │
+├────────────┼───────┼────────────┼────────────────────┼─────────────────────┼──────────┤
+│ arithmetic │ 257   │ 236        │ 126                │ 20                  │ 63       │
+│    algebra │ 220   │ 0          │ 0                  │ 0                   │ 0        │
+└────────────┴───────┴────────────┴────────────────────┴─────────────────────┴──────────┘
+{
+  verifiedChains: 182,
+  ownTaskReplayFailures: 0,
+  crossTaskReplays: 182,
+  crossTaskAccepted: 0,
+  sameTaskPairsSkipped: 0,
+  truncatedTested: 147,
+  truncatedAccepted: 0,
+  tamperedTested: 182,
+  tamperedAccepted: 0,
+  forgedConsistentTested: 182,
+  forgedConsistentAccepted: 0,
+}
+route decisions by engine domain (line-level):
+┌────────────┬───────┬────────────┬────────────────────┬─────────────────────┬──────────┐
+│            │ calls │ authorized │ refusedUnjustified │ refusedUnrecognized │ verified │
+├────────────┼───────┼────────────┼────────────────────┼─────────────────────┼──────────┤
+│ arithmetic │ 257   │ 316        │ 142                │ 20                  │ 81       │
+│    algebra │ 220   │ 230        │ 0                  │ 42                  │ 34       │
+└────────────┴───────┴────────────┴────────────────────┴─────────────────────┴──────────┘
+{
+  verifiedChains: 182,
+  ownTaskReplayFailures: 0,
+  crossTaskReplays: 182,
+  crossTaskAccepted: 0,
+  sameTaskPairsSkipped: 0,
+  truncatedTested: 147,
+  truncatedAccepted: 0,
+  tamperedTested: 182,
+  tamperedAccepted: 0,
+  forgedConsistentTested: 182,
+  forgedConsistentAccepted: 0,
+}

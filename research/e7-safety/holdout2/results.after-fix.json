@@ -1,0 +1,872 @@
+[
+ {
+  "id": "N-001",
+  "feature": "F1",
+  "channel": "algebra",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "ms": 48.8
+ },
+ {
+  "id": "N-002",
+  "feature": "F1",
+  "channel": "algebra",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "ms": 10.1
+ },
+ {
+  "id": "N-003",
+  "feature": "F1",
+  "channel": "algebra",
+  "kind": "negative",
+  "expected": [
+   "incomplete"
+  ],
+  "got": "incomplete",
+  "outcome": "agree",
+  "ms": 14.6
+ },
+ {
+  "id": "N-004",
+  "feature": "F1",
+  "channel": "answer-first",
+  "kind": "negative",
+  "expected": [
+   "incomplete"
+  ],
+  "got": "incomplete",
+  "outcome": "agree",
+  "ms": 3.8
+ },
+ {
+  "id": "N-005",
+  "feature": "F1",
+  "channel": "algebra",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "ms": 8
+ },
+ {
+  "id": "N-006",
+  "feature": "F1",
+  "channel": "answer-first",
+  "kind": "positive",
+  "expected": [
+   "correct"
+  ],
+  "got": "correct",
+  "outcome": "agree",
+  "ms": 0.6
+ },
+ {
+  "id": "N-007",
+  "feature": "F1",
+  "channel": "algebra",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "ms": 3.4
+ },
+ {
+  "id": "N-008",
+  "feature": "F1",
+  "channel": "answer-first",
+  "kind": "negative",
+  "expected": [
+   "incomplete"
+  ],
+  "got": "incomplete",
+  "outcome": "agree",
+  "ms": 3.6
+ },
+ {
+  "id": "N-009",
+  "feature": "F1",
+  "channel": "algebra",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "ms": 9.3
+ },
+ {
+  "id": "N-010",
+  "feature": "F1",
+  "channel": "algebra",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "ms": 6.1
+ },
+ {
+  "id": "N-011",
+  "feature": "F1",
+  "channel": "algebra",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "ms": 2.1
+ },
+ {
+  "id": "N-012",
+  "feature": "F1",
+  "channel": "algebra",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "ms": 17.1
+ },
+ {
+  "id": "N-013",
+  "feature": "F1",
+  "channel": "algebra",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "ms": 12.6
+ },
+ {
+  "id": "N-014",
+  "feature": "F1",
+  "channel": "algebra",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "ms": 7.8
+ },
+ {
+  "id": "N-015",
+  "feature": "F1",
+  "channel": "answer-first",
+  "kind": "positive",
+  "expected": [
+   "correct"
+  ],
+  "got": "unresolved",
+  "outcome": "abstain",
+  "ms": 0.3
+ },
+ {
+  "id": "N-016",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "positive",
+  "expected": [
+   "full"
+  ],
+  "got": "full",
+  "outcome": "agree",
+  "ms": 1.3
+ },
+ {
+  "id": "N-017",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "negative",
+  "expected": [
+   "none"
+  ],
+  "got": "none",
+  "outcome": "agree",
+  "ms": 1
+ },
+ {
+  "id": "N-018",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "positive",
+  "expected": [
+   "full"
+  ],
+  "got": "full",
+  "outcome": "agree",
+  "ms": 11.4
+ },
+ {
+  "id": "N-019",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "negative",
+  "expected": [
+   "partial"
+  ],
+  "got": "partial",
+  "outcome": "agree",
+  "ms": 16.5
+ },
+ {
+  "id": "N-020",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "negative",
+  "expected": [
+   "partial"
+  ],
+  "got": "partial",
+  "outcome": "agree",
+  "ms": 8
+ },
+ {
+  "id": "N-021",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "positive",
+  "expected": [
+   "full"
+  ],
+  "got": "full",
+  "outcome": "agree",
+  "ms": 10.3
+ },
+ {
+  "id": "N-022",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "negative",
+  "expected": [
+   "none"
+  ],
+  "got": "none",
+  "outcome": "agree",
+  "ms": 6.8
+ },
+ {
+  "id": "N-023",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "negative",
+  "expected": [
+   "partial"
+  ],
+  "got": "partial",
+  "outcome": "agree",
+  "ms": 7.9
+ },
+ {
+  "id": "N-024",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "positive",
+  "expected": [
+   "full"
+  ],
+  "got": "full",
+  "outcome": "agree",
+  "ms": 10.5
+ },
+ {
+  "id": "N-025",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "positive",
+  "expected": [
+   "full"
+  ],
+  "got": "full",
+  "outcome": "agree",
+  "ms": 0.5
+ },
+ {
+  "id": "N-026",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "positive",
+  "expected": [
+   "full"
+  ],
+  "got": "full",
+  "outcome": "agree",
+  "ms": 7.7
+ },
+ {
+  "id": "N-027",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "negative",
+  "expected": [
+   "partial"
+  ],
+  "got": "partial",
+  "outcome": "agree",
+  "ms": 5.7
+ },
+ {
+  "id": "N-028",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "positive",
+  "expected": [
+   "full",
+   "unresolved"
+  ],
+  "got": "unresolved",
+  "outcome": "agree",
+  "ms": 2.3
+ },
+ {
+  "id": "N-029",
+  "feature": "F2",
+  "channel": "policy",
+  "kind": "negative",
+  "expected": [
+   "partial"
+  ],
+  "got": "partial",
+  "outcome": "agree",
+  "ms": 7.1
+ },
+ {
+  "id": "N-030",
+  "feature": "F3",
+  "channel": "identity",
+  "kind": "ambiguous",
+  "expected": [
+   "ambiguous"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 5.9
+ },
+ {
+  "id": "N-031",
+  "feature": "F3",
+  "channel": "identity",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 1
+ },
+ {
+  "id": "N-032",
+  "feature": "F3",
+  "channel": "identity",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "ms": 0.9
+ },
+ {
+  "id": "N-033",
+  "feature": "F3",
+  "channel": "identity",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 1
+ },
+ {
+  "id": "N-034",
+  "feature": "F3",
+  "channel": "identity",
+  "kind": "positive",
+  "expected": [
+   "verified",
+   "ambiguous",
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 3.2
+ },
+ {
+  "id": "N-035",
+  "feature": "F3",
+  "channel": "identity",
+  "kind": "domain",
+  "expected": [
+   "missing-assumption",
+   "invalid",
+   "unsupported",
+   "ambiguous"
+  ],
+  "got": "missing-assumption",
+  "outcome": "agree",
+  "ms": 18.9
+ },
+ {
+  "id": "N-036",
+  "feature": "F3",
+  "channel": "identity",
+  "kind": "positive",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 1.3
+ },
+ {
+  "id": "N-037",
+  "feature": "F3",
+  "channel": "identity",
+  "kind": "negative",
+  "expected": [
+   "invalid",
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 0.9
+ },
+ {
+  "id": "N-038",
+  "feature": "F3",
+  "channel": "algebra",
+  "kind": "ambiguous",
+  "expected": [
+   "ambiguous"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 1.5
+ },
+ {
+  "id": "N-039",
+  "feature": "F3",
+  "channel": "algebra",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 0.5
+ },
+ {
+  "id": "N-040",
+  "feature": "F3",
+  "channel": "algebra",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 0.5
+ },
+ {
+  "id": "N-041",
+  "feature": "F3",
+  "channel": "algebra",
+  "kind": "positive",
+  "expected": [
+   "verified",
+   "ambiguous"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 0.8
+ },
+ {
+  "id": "N-042",
+  "feature": "F3",
+  "channel": "algebra",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 0.4
+ },
+ {
+  "id": "N-043",
+  "feature": "F3",
+  "channel": "algebra",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 0.5
+ },
+ {
+  "id": "N-044",
+  "feature": "F4",
+  "channel": "parser",
+  "kind": "negative",
+  "expected": [
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 0
+ },
+ {
+  "id": "N-045",
+  "feature": "F4",
+  "channel": "parser",
+  "kind": "negative",
+  "expected": [
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 0
+ },
+ {
+  "id": "N-046",
+  "feature": "F4",
+  "channel": "parser",
+  "kind": "malformed",
+  "expected": [
+   "malformed"
+  ],
+  "got": "malformed",
+  "outcome": "agree",
+  "ms": 0
+ },
+ {
+  "id": "N-047",
+  "feature": "F4",
+  "channel": "parser",
+  "kind": "positive",
+  "expected": [
+   "parsed"
+  ],
+  "got": "parsed",
+  "outcome": "agree",
+  "ms": 0
+ },
+ {
+  "id": "N-048",
+  "feature": "F4",
+  "channel": "identity",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 0.5
+ },
+ {
+  "id": "N-049",
+  "feature": "F4",
+  "channel": "identity",
+  "kind": "positive",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 1.9
+ },
+ {
+  "id": "N-050",
+  "feature": "F4",
+  "channel": "identity",
+  "kind": "negative",
+  "expected": [
+   "invalid",
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 1.1
+ },
+ {
+  "id": "N-051",
+  "feature": "F4",
+  "channel": "identity",
+  "kind": "negative",
+  "expected": [
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 0
+ },
+ {
+  "id": "N-052",
+  "feature": "F4",
+  "channel": "identity",
+  "kind": "positive",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 0.5
+ },
+ {
+  "id": "N-053",
+  "feature": "F4",
+  "channel": "derivative",
+  "kind": "positive",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 17.7
+ },
+ {
+  "id": "N-054",
+  "feature": "F4",
+  "channel": "derivative",
+  "kind": "positive",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 1
+ },
+ {
+  "id": "N-055",
+  "feature": "F4",
+  "channel": "algebra",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 2.8
+ },
+ {
+  "id": "N-056",
+  "feature": "F4",
+  "channel": "algebra",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 0.6
+ },
+ {
+  "id": "N-057",
+  "feature": "F4",
+  "channel": "answer-first",
+  "kind": "positive",
+  "expected": [
+   "correct"
+  ],
+  "got": "unsupported",
+  "outcome": "abstain",
+  "ms": 0.4
+ },
+ {
+  "id": "N-058",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "ms": 23.4
+ },
+ {
+  "id": "N-059",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "ms": 6.3
+ },
+ {
+  "id": "N-060",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "ms": 3.4
+ },
+ {
+  "id": "N-061",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "ms": 2.7
+ },
+ {
+  "id": "N-062",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "ms": 3.7
+ },
+ {
+  "id": "N-063",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "ms": 5
+ },
+ {
+  "id": "N-064",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "ms": 11.3
+ },
+ {
+  "id": "N-065",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "ambiguous",
+  "expected": [
+   "unsupported",
+   "invalid",
+   "verified"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "ms": 5.3
+ },
+ {
+  "id": "N-066",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "ms": 9.5
+ },
+ {
+  "id": "N-067",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "positive",
+  "expected": [
+   "verified"
+  ],
+  "got": "verified",
+  "outcome": "agree",
+  "ms": 3.1
+ },
+ {
+  "id": "N-068",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "positive",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "malformed",
+  "outcome": "abstain",
+  "ms": 3.9
+ },
+ {
+  "id": "N-069",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "negative",
+  "expected": [
+   "incomplete"
+  ],
+  "got": "incomplete",
+  "outcome": "agree",
+  "ms": 5.7
+ },
+ {
+  "id": "N-070",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "positive",
+  "expected": [
+   "verified",
+   "unsupported"
+  ],
+  "got": "unsupported",
+  "outcome": "agree",
+  "ms": 1
+ },
+ {
+  "id": "N-071",
+  "feature": "F5",
+  "channel": "limit",
+  "kind": "negative",
+  "expected": [
+   "invalid"
+  ],
+  "got": "invalid",
+  "outcome": "agree",
+  "ms": 1.7
+ }
+]

@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0",
+  "total": 200,
+  "grade": {
+    "1": 15,
+    "2": 16,
+    "3": 16,
+    "4": 15,
+    "5": 15,
+    "6": 15,
+    "7": 16,
+    "8": 17,
+    "9": 15,
+    "10": 17,
+    "11": 20,
+    "12": 23
+  },
+  "strand": {
+    "number": 48,
+    "algebra": 35,
+    "geometry": 27,
+    "measurement": 29,
+    "statistics": 12,
+    "reasoning": 12,
+    "probability": 9,
+    "coordinate": 8,
+    "trigonometry": 7,
+    "calculus": 11,
+    "vectors": 2
+  },
+  "programs": 200,
+  "executablePrograms": 12,
+  "families": 14,
+  "errors": []
+}

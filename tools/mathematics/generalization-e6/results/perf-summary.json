@@ -1,0 +1,18 @@
+{
+ "E6": {
+  "wallSeconds": 0.38,
+  "p50ms": 1.57,
+  "p95ms": 9.75,
+  "maxms": 31.86,
+  "sumMs": 312.1,
+  "peakRssMBCumulativeMax": 76.7
+ },
+ "E5-baseline": {
+  "wallSeconds": 0.28,
+  "p50ms": 0.87,
+  "p95ms": 7.34,
+  "maxms": 19.16,
+  "sumMs": 216.1,
+  "peakRssMBCumulativeMax": 76.7
+ }
+}

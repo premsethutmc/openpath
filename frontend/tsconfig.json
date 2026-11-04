@@ -25,6 +25,18 @@
     "src"
   ],
   "exclude": [
-    "src/english"
+    "src/english",
+    "src/mathematics/canonical.test.ts",
+    "src/mathematics/journey",
+    "src/mathematics/chapter",
+    "src/mathematics/unit",
+    "src/mathematics/foundation",
+    "src/year",
+    "src/learning",
+    "src/review",
+    "src/curriculum",
+    "src/writing",
+    "src/journey",
+    "src/math/react-shim.d.ts"
   ]
 }

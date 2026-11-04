@@ -1,0 +1,603 @@
+[
+ {
+  "id": "S1",
+  "title": "Fails the diagnostic, then improves after teaching",
+  "steps": [
+   {
+    "step": "essay and diagnostic",
+    "outcome": {
+     "journeyCompleted": null,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 2.5,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help: a later check, in a new sitting, is recommended from 2026-10-20"
+    },
+    "engine": {
+     "mean": 3.51,
+     "sd": 0.88,
+     "n": 3,
+     "status": "demonstrated",
+     "currentLevel": 2.5
+    },
+    "note": "diagnostic questions b = 4, 4, 3.5"
+   },
+   {
+    "step": "journey: teach, practise with help, check next day",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 4,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 4.81,
+     "sd": 0.85,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 4
+    }
+   },
+   {
+    "step": "later verification check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 4,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 4.81,
+     "sd": 0.85,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 4
+    },
+    "note": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+   },
+   {
+    "step": "delayed retention check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 4,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 4.81,
+     "sd": 0.85,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 4
+    },
+    "note": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+   }
+  ],
+  "final": {
+   "journeyCompleted": true,
+   "demonstrated": false,
+   "verified": false,
+   "currentLevel": 4,
+   "retention": "not_applicable",
+   "retentionDueAt": null,
+   "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+  },
+  "reachedTarget": false,
+  "verified": false,
+  "verifiedForPilot": false,
+  "assistedCountedAsFresh": [],
+  "findings": [
+   "the journey's check (b 6, 6.25) was answered right, yet the level stays 4: the wrong diagnostic answers from before teaching stay in the single cumulative estimate (the model has no change point; uncertainty grows by only 0.0047 per day), so the lower 80% bound needs more right answers at or above band 5",
+   "no later verification check could be planned: not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again",
+   "counterfactual (a copy, not the workflow): answering the 2 retention-reserved questions (b 5, 5.5) right on later days gives level 4.5 (demonstrated)",
+   "hypothetical content (a copy, not the workflow): 4 more right answers, one per day, on new reviewed questions at b 5.5 would reach band 5; at b 5: 5; at b 6: 4"
+  ]
+ },
+ {
+  "id": "S2",
+  "title": "Answers hard independent questions right throughout",
+  "steps": [
+   {
+    "step": "essay and diagnostic",
+    "outcome": {
+     "journeyCompleted": null,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 4,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help: a later check, in a new sitting, is recommended from 2026-10-20"
+    },
+    "engine": {
+     "mean": 5.1,
+     "sd": 0.92,
+     "n": 3,
+     "status": "demonstrated",
+     "currentLevel": 4
+    }
+   },
+   {
+    "step": "journey check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": true,
+     "verified": false,
+     "currentLevel": 5,
+     "retention": "pending",
+     "retentionDueAt": "2026-10-27T09:04:00.000Z",
+     "pending": "retention pending: the delayed check is due on 2026-10-27"
+    },
+    "engine": {
+     "mean": 6.08,
+     "sd": 0.76,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 5
+    }
+   },
+   {
+    "step": "next check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": true,
+     "verified": true,
+     "currentLevel": 5.5,
+     "retention": "demonstrated",
+     "retentionDueAt": "2026-11-11T09:06:00.000Z",
+     "pending": null
+    },
+    "engine": {
+     "mean": 6.33,
+     "sd": 0.7,
+     "n": 7,
+     "status": "verified",
+     "currentLevel": 5.5
+    },
+    "note": "retention from 2026-10-27; offered early: no"
+   }
+  ],
+  "final": {
+   "journeyCompleted": true,
+   "demonstrated": true,
+   "verified": true,
+   "currentLevel": 5.5,
+   "retention": "demonstrated",
+   "retentionDueAt": "2026-11-11T09:06:00.000Z",
+   "pending": null
+  },
+  "reachedTarget": true,
+  "verified": true,
+  "verifiedForPilot": false,
+  "assistedCountedAsFresh": [],
+  "findings": []
+ },
+ {
+  "id": "S3",
+  "title": "Completes practice with help, fails every independent check",
+  "steps": [
+   {
+    "step": "journey completed (practice done with help)",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 2.5,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 3.44,
+     "sd": 0.86,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 2.5
+    }
+   },
+   {
+    "step": "later verification check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 2.5,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 3.44,
+     "sd": 0.86,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 2.5
+    },
+    "note": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+   },
+   {
+    "step": "another check?",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 2.5,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 3.44,
+     "sd": 0.86,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 2.5
+    },
+    "note": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+   }
+  ],
+  "final": {
+   "journeyCompleted": true,
+   "demonstrated": false,
+   "verified": false,
+   "currentLevel": 2.5,
+   "retention": "not_applicable",
+   "retentionDueAt": null,
+   "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+  },
+  "reachedTarget": false,
+  "verified": false,
+  "verifiedForPilot": false,
+  "assistedCountedAsFresh": [],
+  "findings": []
+ },
+ {
+  "id": "S4",
+  "title": "Passes the checks, then fails the delayed retention check",
+  "steps": [
+   {
+    "step": "journey check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": true,
+     "verified": false,
+     "currentLevel": 5,
+     "retention": "pending",
+     "retentionDueAt": "2026-10-27T09:04:00.000Z",
+     "pending": "retention pending: the delayed check is due on 2026-10-27"
+    },
+    "engine": {
+     "mean": 6.08,
+     "sd": 0.76,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 5
+    }
+   },
+   {
+    "step": "retention check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": null,
+     "retention": "not_demonstrated",
+     "retentionDueAt": "2026-10-31T21:06:00.000Z",
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 5.25,
+     "sd": 0.7,
+     "n": 7,
+     "status": "failed",
+     "currentLevel": null
+    },
+    "note": "from 2026-10-27"
+   },
+   {
+    "step": "no further check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": null,
+     "retention": "not_demonstrated",
+     "retentionDueAt": "2026-10-31T21:06:00.000Z",
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 5.25,
+     "sd": 0.7,
+     "n": 7,
+     "status": "failed",
+     "currentLevel": null
+    },
+    "note": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+   }
+  ],
+  "final": {
+   "journeyCompleted": true,
+   "demonstrated": false,
+   "verified": false,
+   "currentLevel": null,
+   "retention": "not_demonstrated",
+   "retentionDueAt": "2026-10-31T21:06:00.000Z",
+   "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+  },
+  "reachedTarget": false,
+  "verified": false,
+  "verifiedForPilot": false,
+  "assistedCountedAsFresh": [],
+  "findings": []
+ },
+ {
+  "id": "S4b",
+  "title": "One wrong answer in the delayed retention check",
+  "steps": [
+   {
+    "step": "journey check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": true,
+     "verified": false,
+     "currentLevel": 5,
+     "retention": "pending",
+     "retentionDueAt": "2026-10-27T09:04:00.000Z",
+     "pending": "retention pending: the delayed check is due on 2026-10-27"
+    },
+    "engine": {
+     "mean": 6.08,
+     "sd": 0.76,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 5
+    }
+   },
+   {
+    "step": "retention check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": true,
+     "verified": true,
+     "currentLevel": 5,
+     "retention": "demonstrated",
+     "retentionDueAt": "2026-11-11T09:06:00.000Z",
+     "pending": null
+    },
+    "engine": {
+     "mean": 5.85,
+     "sd": 0.7,
+     "n": 7,
+     "status": "verified",
+     "currentLevel": 5
+    },
+    "note": "from 2026-10-27, questions b = 5, 5.5: one right, one wrong"
+   }
+  ],
+  "final": {
+   "journeyCompleted": true,
+   "demonstrated": true,
+   "verified": true,
+   "currentLevel": 5,
+   "retention": "demonstrated",
+   "retentionDueAt": "2026-11-11T09:06:00.000Z",
+   "pending": null
+  },
+  "reachedTarget": true,
+  "verified": true,
+  "verifiedForPilot": false,
+  "assistedCountedAsFresh": [],
+  "findings": []
+ },
+ {
+  "id": "S7",
+  "title": "Improves gradually after teaching; needs several later checks",
+  "steps": [
+   {
+    "step": "journey check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 2.5,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 3.44,
+     "sd": 0.86,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 2.5
+    }
+   },
+   {
+    "step": "no further check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 2.5,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 3.44,
+     "sd": 0.86,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 2.5
+    },
+    "note": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+   }
+  ],
+  "final": {
+   "journeyCompleted": true,
+   "demonstrated": false,
+   "verified": false,
+   "currentLevel": 2.5,
+   "retention": "not_applicable",
+   "retentionDueAt": null,
+   "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+  },
+  "reachedTarget": false,
+  "verified": false,
+  "verifiedForPilot": false,
+  "assistedCountedAsFresh": [],
+  "findings": [
+   "stopped after 0 later checks: not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+  ]
+ },
+ {
+  "id": "S5",
+  "title": "Questions at the target already used up (earlier practice with help)",
+  "steps": [
+   {
+    "step": "journey (check blocked: not enough unseen questions at the target)",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 2.5,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 3.51,
+     "sd": 0.89,
+     "n": 3,
+     "status": "demonstrated",
+     "currentLevel": 2.5
+    },
+    "note": "Subject–verb agreement: only 1 unseen question between band 5 and 6.5 left for the delayed retention check (2 needed); Subject–verb agreement: 0 unseen questions between band 5 and 6.5 for independent checks; the journey's check and 3 later checks need 8; Subject–verb agreement: only 0 unseen questions between band 5 and 6.5 left for an independent check (2 needed); Subject–verb agreement: only 2 unseen practice questions below the target band"
+   },
+   {
+    "step": "later check?",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 2.5,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 3.51,
+     "sd": 0.89,
+     "n": 3,
+     "status": "demonstrated",
+     "currentLevel": 2.5
+    },
+    "note": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+   }
+  ],
+  "final": {
+   "journeyCompleted": true,
+   "demonstrated": false,
+   "verified": false,
+   "currentLevel": 2.5,
+   "retention": "not_applicable",
+   "retentionDueAt": null,
+   "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+  },
+  "reachedTarget": false,
+  "verified": false,
+  "verifiedForPilot": false,
+  "assistedCountedAsFresh": [],
+  "findings": []
+ },
+ {
+  "id": "S6",
+  "title": "Returns for a second essay with evidence from the first",
+  "steps": [
+   {
+    "step": "after the first essay's journey and later check",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": 4,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 4.81,
+     "sd": 0.85,
+     "n": 5,
+     "status": "demonstrated",
+     "currentLevel": 4
+    }
+   },
+   {
+    "step": "second essay",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": null,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 4.81,
+     "sd": 0.9,
+     "n": 5,
+     "status": "overdue",
+     "currentLevel": null
+    },
+    "note": "new diagnostic on SVA: 0 questions (only 0 unseen questions on Subject–verb agreement; at least 2 are needed); any reused: no"
+   },
+   {
+    "step": "second journey",
+    "outcome": {
+     "journeyCompleted": true,
+     "demonstrated": false,
+     "verified": false,
+     "currentLevel": null,
+     "retention": "not_applicable",
+     "retentionDueAt": null,
+     "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+    },
+    "engine": {
+     "mean": 4.81,
+     "sd": 0.9,
+     "n": 5,
+     "status": "overdue",
+     "currentLevel": null
+    },
+    "note": "SVA steps: teach, guided_practice, independent_check (blocked: Not enough unseen questions at the target band to check Subject–verb agreement: a later check is needed once more reviewed questions exist)"
+   }
+  ],
+  "final": {
+   "journeyCompleted": true,
+   "demonstrated": false,
+   "verified": false,
+   "currentLevel": null,
+   "retention": "not_applicable",
+   "retentionDueAt": null,
+   "pending": "not yet shown at band 5 without help, and the question bank has only 0 unseen questions between band 5 and 6.5 (2 needed): more reviewed questions are needed before it can be checked again"
+  },
+  "reachedTarget": false,
+  "verified": false,
+  "verifiedForPilot": false,
+  "assistedCountedAsFresh": [],
+  "findings": [
+   "evidence persists: 5 answers on agreement across both essays; no question answered twice: yes"
+  ]
+ }
+]

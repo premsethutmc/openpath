@@ -1,0 +1,281 @@
+{
+ "id": "openpath-sample-mathematics-grade-11",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 11,
+ "title": "OpenPath Sample Mathematics, Grade 11",
+ "hash": "62b64d64",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 11",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true,
+  "extractor": "structured-text@1"
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing (mapping@2). Clear mappings: the top proposal was accepted. Uncertain mappings were accepted only where release 1.0.0 had accepted the same competency (for an educator to check: ch4-limits-and-derivatives.o2). Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-sets-and-functions",
+     "number": 1,
+     "title": "Sets and functions",
+     "pages": "1–22",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 1.1",
+       "pages": "9"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch1-sets-and-functions.o1",
+       "text": "Use set operations",
+       "pages": "2",
+       "location": {
+        "line": 12,
+        "page": 2
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.sets",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.trigonometry.ratios",
+          "score": 0.556,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on sets, ratio.",
+        "concepts": [
+         "sets",
+         "ratio"
+        ]
+       }
+      },
+      {
+       "id": "ch1-sets-and-functions.o2",
+       "text": "Identify domain, range and functions",
+       "pages": "12",
+       "location": {
+        "line": 13,
+        "page": 12
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.functions",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.trigonometry.functions",
+          "score": 0.794,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on functions.",
+        "concepts": [
+         "functions"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch2-straight-lines",
+     "number": 2,
+     "title": "Straight lines",
+     "pages": "23–40",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 2.1",
+       "pages": "33"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch2-straight-lines.o1",
+       "text": "Use straight-line equations",
+       "pages": "24",
+       "location": {
+        "line": 18,
+        "page": 24
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.coordinate.straight-lines",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.trigonometry.equations",
+          "score": 0.637,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.calculus.differential-equations",
+          "score": 0.577,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on equations, straightLine.",
+        "concepts": [
+         "equations",
+         "straightLine"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch3-linear-inequalities",
+     "number": 3,
+     "title": "Linear inequalities",
+     "pages": "41–52",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 3.1",
+       "pages": "48"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch3-linear-inequalities.o1",
+       "text": "Solve linear inequalities",
+       "pages": "42",
+       "location": {
+        "line": 23,
+        "page": 42
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.inequalities",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.linear-programming",
+          "score": 0.587,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on linear, inequalities.",
+        "concepts": [
+         "linear",
+         "inequalities"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch4-limits-and-derivatives",
+     "number": 4,
+     "title": "Limits and derivatives",
+     "pages": "53–74",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 4.1",
+       "pages": "61"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch4-limits-and-derivatives.o1",
+       "text": "Evaluate elementary limits",
+       "pages": "54",
+       "location": {
+        "line": 28,
+        "page": 54
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.limits",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on limits.",
+        "concepts": [
+         "limits"
+        ]
+       }
+      },
+      {
+       "id": "ch4-limits-and-derivatives.o2",
+       "text": "Differentiate from first principles",
+       "pages": "64",
+       "location": {
+        "line": 29,
+        "page": 64
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.derivatives",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.calculus.applications",
+          "score": 0.94,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.calculus.indefinite-integrals",
+          "score": 0.94,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "uncertain",
+        "why": "Two skills are close (Differentiate from first principles; Use derivatives for rates and extrema): a reviewer should choose.",
+        "concepts": [
+         "derivatives"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

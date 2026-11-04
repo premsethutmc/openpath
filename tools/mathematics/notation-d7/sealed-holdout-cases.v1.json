@@ -1,0 +1,1999 @@
+{
+  "schema": "openpath-notation-d7-benchmark@1",
+  "frozenBeforeImplementation": true,
+  "sealedUntilFinalEvaluation": true,
+  "cases": [
+    {
+      "id": "d7-derivative-042",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\frac{d^2 R}{ds^2} = 12s^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": null,
+        "dependent": "R",
+        "variable": "s",
+        "order": 2,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "s"
+          },
+          "exponent": 4
+        },
+        "variable": "s",
+        "order": 2
+      },
+      "expectedAssessment": "verified"
+    },
+    {
+      "id": "d7-derivative-043",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "d^2velocity/ds^2 = 20s^3"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": null,
+        "dependent": "velocity",
+        "variable": "s",
+        "order": 2,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "s"
+          },
+          "exponent": 5
+        },
+        "variable": "s",
+        "order": 2
+      },
+      "expectedAssessment": "verified"
+    },
+    {
+      "id": "d7-derivative-044",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "phi''(s) = 30s^4"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "phi",
+        "dependent": "phi",
+        "variable": "s",
+        "order": 2,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "s"
+          },
+          "exponent": 6
+        },
+        "variable": "s",
+        "order": 2
+      },
+      "expectedAssessment": "verified"
+    },
+    {
+      "id": "d7-derivative-045",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "p\u2032\u2032(z) = 2z^0"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "z",
+        "order": 2,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "exponent": 2
+        },
+        "variable": "z",
+        "order": 2
+      },
+      "expectedAssessment": "verified"
+    },
+    {
+      "id": "d7-derivative-046",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\frac{d^2 q}{dz^2} = 6z^1"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": null,
+        "dependent": "q",
+        "variable": "z",
+        "order": 2,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "exponent": 3
+        },
+        "variable": "z",
+        "order": 2
+      },
+      "expectedAssessment": "verified"
+    },
+    {
+      "id": "d7-derivative-047",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "d^2R/dz^2 = 12z^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": null,
+        "dependent": "R",
+        "variable": "z",
+        "order": 2,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "exponent": 4
+        },
+        "variable": "z",
+        "order": 2
+      },
+      "expectedAssessment": "verified"
+    },
+    {
+      "id": "d7-derivative-048",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "velocity''(z) = 20z^3"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "velocity",
+        "dependent": "velocity",
+        "variable": "z",
+        "order": 2,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "exponent": 5
+        },
+        "variable": "z",
+        "order": 2
+      },
+      "expectedAssessment": "verified"
+    },
+    {
+      "id": "d7-derivative-049",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "phi\u2032\u2032(z) = 30z^4"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "phi",
+        "dependent": "phi",
+        "variable": "z",
+        "order": 2,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "z"
+          },
+          "exponent": 6
+        },
+        "variable": "z",
+        "order": 2
+      },
+      "expectedAssessment": "verified"
+    },
+    {
+      "id": "d7-derivative-050",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "\u2202p/\u2202x = 2x^1"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "x",
+        "order": 1,
+        "partial": true
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "variable": "x",
+        "order": 1
+      },
+      "expectedAssessment": "unsupported"
+    },
+    {
+      "id": "d7-derivative-051",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\frac{\\partial q}{\\partial x} = 3x^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "q",
+        "dependent": "q",
+        "variable": "x",
+        "order": 1,
+        "partial": true
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 3
+        },
+        "variable": "x",
+        "order": 1
+      },
+      "expectedAssessment": "unsupported"
+    },
+    {
+      "id": "d7-derivative-052",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "\u2202R/\u2202x = 4x^3"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "R",
+        "dependent": "R",
+        "variable": "x",
+        "order": 1,
+        "partial": true
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 4
+        },
+        "variable": "x",
+        "order": 1
+      },
+      "expectedAssessment": "unsupported"
+    },
+    {
+      "id": "d7-derivative-053",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\frac{\\partial velocity}{\\partial x} = 5x^4"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "velocity",
+        "dependent": "velocity",
+        "variable": "x",
+        "order": 1,
+        "partial": true
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 5
+        },
+        "variable": "x",
+        "order": 1
+      },
+      "expectedAssessment": "unsupported"
+    },
+    {
+      "id": "d7-derivative-054",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "\u2202phi/\u2202x = 6x^5"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "phi",
+        "dependent": "phi",
+        "variable": "x",
+        "order": 1,
+        "partial": true
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 6
+        },
+        "variable": "x",
+        "order": 1
+      },
+      "expectedAssessment": "unsupported"
+    },
+    {
+      "id": "d7-derivative-055",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\frac{\\partial p}{\\partial t} = 2t^1"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "t",
+        "order": 1,
+        "partial": true
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "t"
+          },
+          "exponent": 2
+        },
+        "variable": "t",
+        "order": 1
+      },
+      "expectedAssessment": "unsupported"
+    },
+    {
+      "id": "d7-derivative-056",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "\u2202q/\u2202t = 3t^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "q",
+        "dependent": "q",
+        "variable": "t",
+        "order": 1,
+        "partial": true
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "t"
+          },
+          "exponent": 3
+        },
+        "variable": "t",
+        "order": 1
+      },
+      "expectedAssessment": "unsupported"
+    },
+    {
+      "id": "d7-derivative-057",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\frac{\\partial R}{\\partial t} = 4t^3"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "R",
+        "dependent": "R",
+        "variable": "t",
+        "order": 1,
+        "partial": true
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "t"
+          },
+          "exponent": 4
+        },
+        "variable": "t",
+        "order": 1
+      },
+      "expectedAssessment": "unsupported"
+    },
+    {
+      "id": "d7-derivative-058",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "\u2202velocity/\u2202t = 5t^4"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "velocity",
+        "dependent": "velocity",
+        "variable": "t",
+        "order": 1,
+        "partial": true
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "t"
+          },
+          "exponent": 5
+        },
+        "variable": "t",
+        "order": 1
+      },
+      "expectedAssessment": "unsupported"
+    },
+    {
+      "id": "d7-derivative-059",
+      "category": "derivative",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\frac{\\partial phi}{\\partial t} = 6t^5"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "phi",
+        "dependent": "phi",
+        "variable": "t",
+        "order": 1,
+        "partial": true
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "t"
+          },
+          "exponent": 6
+        },
+        "variable": "t",
+        "order": 1
+      },
+      "expectedAssessment": "unsupported"
+    },
+    {
+      "id": "d7-function-028",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "P(sin(x))"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "P",
+        "argument": "sin(x)",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-function-029",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "q(x+1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "q",
+        "argument": "x+1",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-function-030",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "rate(g(x))"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "rate",
+        "argument": "g(x)",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-function-031",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "F(sin(x))"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "F",
+        "argument": "sin(x)",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-function-032",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "P(x+1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "P",
+        "argument": "x+1",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-function-033",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "q(g(x))"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "q",
+        "argument": "g(x)",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-function-034",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "rate(sin(x))"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "rate",
+        "argument": "sin(x)",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-function-035",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "F(x+1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "F",
+        "argument": "x+1",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-function-036",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "P(g(x))"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "P",
+        "argument": "g(x)",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-function-037",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "q(sin(x))"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "q",
+        "argument": "sin(x)",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-function-038",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "rate(x+1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "rate",
+        "argument": "x+1",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-function-039",
+      "category": "function",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "F(g(x))"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "function",
+        "functionName": "F",
+        "argument": "g(x)",
+        "nested": true
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-028",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "(x+1)(x-2)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-029",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "2sin(y)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "2"
+            },
+            {
+              "kind": "sin",
+              "argument": {
+                "kind": "variable",
+                "name": "y"
+              }
+            }
+          ]
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-030",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "xsqrt(x+1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "variable",
+              "name": "x"
+            },
+            {
+              "kind": "root",
+              "radicand": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "1"
+                  }
+                ]
+              },
+              "index": 2
+            }
+          ]
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-031",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "1/2t"
+      },
+      "expectedParse": "ambiguous",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-032",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "-y^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "-1"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "y"
+              },
+              "exponent": 2
+            }
+          ]
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-033",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "(-x)^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "multiply",
+            "factors": [
+              {
+                "kind": "constant",
+                "value": "-1"
+              },
+              {
+                "kind": "variable",
+                "name": "x"
+              }
+            ]
+          },
+          "exponent": 2
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-034",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "2t^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "2"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "t"
+              },
+              "exponent": 2
+            }
+          ]
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-035",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "2(y+1)^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "2"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "y"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "1"
+                  }
+                ]
+              },
+              "exponent": 2
+            }
+          ]
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-036",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "(x+1)(x-1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-037",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "2sin(t)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "2"
+            },
+            {
+              "kind": "sin",
+              "argument": {
+                "kind": "variable",
+                "name": "t"
+              }
+            }
+          ]
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-038",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "ysqrt(y+1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "variable",
+              "name": "y"
+            },
+            {
+              "kind": "root",
+              "radicand": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "y"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "1"
+                  }
+                ]
+              },
+              "index": 2
+            }
+          ]
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-implicit-039",
+      "category": "implicit",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "1/2x"
+      },
+      "expectedParse": "ambiguous",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-028",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "\u221a(a+1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "root",
+          "radicand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "a"
+              },
+              {
+                "kind": "constant",
+                "value": "1"
+              }
+            ]
+          },
+          "index": 2
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-029",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "t\u00b2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "t"
+          },
+          "exponent": 2
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-030",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "(sin(x))^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "sin",
+            "argument": {
+              "kind": "variable",
+              "name": "x"
+            }
+          },
+          "exponent": 2
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-031",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "log(a\u00b2+1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "log",
+          "argument": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "power",
+                "base": {
+                  "kind": "variable",
+                  "name": "a"
+                },
+                "exponent": 2
+              },
+              {
+                "kind": "constant",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-032",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\sqrt{t+1}"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "root",
+          "radicand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "t"
+              },
+              {
+                "kind": "constant",
+                "value": "1"
+              }
+            ]
+          },
+          "index": 2
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-033",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "x^{2}"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-034",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\sin^2(a)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "sin",
+            "argument": {
+              "kind": "variable",
+              "name": "a"
+            }
+          },
+          "exponent": 2
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-035",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\ln(t^2+1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "log",
+          "argument": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "power",
+                "base": {
+                  "kind": "variable",
+                  "name": "t"
+                },
+                "exponent": 2
+              },
+              {
+                "kind": "constant",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-036",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "sqrt(x+1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "root",
+          "radicand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "constant",
+                "value": "1"
+              }
+            ]
+          },
+          "index": 2
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-037",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "a^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "a"
+          },
+          "exponent": 2
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-038",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "sin^2(t)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "sin",
+            "argument": {
+              "kind": "variable",
+              "name": "t"
+            }
+          },
+          "exponent": 2
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-equivalence-039",
+      "category": "equivalence",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "ln(x^2+1)"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "expression",
+        "expression": {
+          "kind": "log",
+          "argument": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "power",
+                "base": {
+                  "kind": "variable",
+                  "name": "x"
+                },
+                "exponent": 2
+              },
+              {
+                "kind": "constant",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-multiline-021",
+      "category": "multiline",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "p'(x) = 4x^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "x",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 3
+        },
+        "variable": "x"
+      },
+      "expectedAssessment": "invalid"
+    },
+    {
+      "id": "d7-multiline-022",
+      "category": "multiline",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "p'(t) = 5t^3"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "t",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "t"
+          },
+          "exponent": 4
+        },
+        "variable": "t"
+      },
+      "expectedAssessment": "invalid"
+    },
+    {
+      "id": "d7-multiline-023",
+      "category": "multiline",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "p'(u) = 6u^4"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "u",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "u"
+          },
+          "exponent": 5
+        },
+        "variable": "u"
+      },
+      "expectedAssessment": "invalid"
+    },
+    {
+      "id": "d7-multiline-024",
+      "category": "multiline",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "p'(x) = 3x^1"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "x",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "variable": "x"
+      },
+      "expectedAssessment": "invalid"
+    },
+    {
+      "id": "d7-multiline-025",
+      "category": "multiline",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "p'(t) = 4t^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "t",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "t"
+          },
+          "exponent": 3
+        },
+        "variable": "t"
+      },
+      "expectedAssessment": "invalid"
+    },
+    {
+      "id": "d7-multiline-026",
+      "category": "multiline",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "p'(u) = 5u^3"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "u",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "u"
+          },
+          "exponent": 4
+        },
+        "variable": "u"
+      },
+      "expectedAssessment": "invalid"
+    },
+    {
+      "id": "d7-multiline-027",
+      "category": "multiline",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "p'(x) = 6x^4"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "x",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 5
+        },
+        "variable": "x"
+      },
+      "expectedAssessment": "invalid"
+    },
+    {
+      "id": "d7-multiline-028",
+      "category": "multiline",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "p'(t) = 3t^1"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "t",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "t"
+          },
+          "exponent": 2
+        },
+        "variable": "t"
+      },
+      "expectedAssessment": "invalid"
+    },
+    {
+      "id": "d7-multiline-029",
+      "category": "multiline",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "p'(u) = 4u^2"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "u",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "u"
+          },
+          "exponent": 3
+        },
+        "variable": "u"
+      },
+      "expectedAssessment": "invalid"
+    },
+    {
+      "id": "d7-adversarial-028",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "1/2x = 3"
+      },
+      "expectedParse": "ambiguous",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-adversarial-029",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\frac{x+1}{"
+      },
+      "expectedParse": "malformed",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-adversarial-030",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      },
+      "expectedParse": "resource-exhausted",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-adversarial-031",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "q'(x) = 99x"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "q",
+        "dependent": "q",
+        "variable": "x",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "variable": "x"
+      },
+      "expectedAssessment": "invalid"
+    },
+    {
+      "id": "d7-adversarial-032",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "1/6x = 3"
+      },
+      "expectedParse": "ambiguous",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-adversarial-033",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\frac{x+1}{"
+      },
+      "expectedParse": "malformed",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-adversarial-034",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      },
+      "expectedParse": "resource-exhausted",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-adversarial-035",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "q'(x) = 99x"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "q",
+        "dependent": "q",
+        "variable": "x",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "variable": "x"
+      },
+      "expectedAssessment": "invalid"
+    },
+    {
+      "id": "d7-adversarial-036",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "1/3x = 3"
+      },
+      "expectedParse": "ambiguous",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-adversarial-037",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "latex",
+        "text": "\\frac{x+1}{"
+      },
+      "expectedParse": "malformed",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-adversarial-038",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "((((((((((((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))))))))))))"
+      },
+      "expectedParse": "resource-exhausted",
+      "expectedRelation": null,
+      "problem": null,
+      "expectedAssessment": null
+    },
+    {
+      "id": "d7-adversarial-039",
+      "category": "adversarial",
+      "provenance": "independently authored before D7 implementation",
+      "input": {
+        "format": "natural",
+        "text": "q'(x) = 99x"
+      },
+      "expectedParse": "parsed",
+      "expectedRelation": {
+        "kind": "derivative",
+        "functionName": "q",
+        "dependent": "q",
+        "variable": "x",
+        "order": 1,
+        "partial": false
+      },
+      "problem": {
+        "domain": "calculus",
+        "task": "derivative",
+        "expression": {
+          "kind": "power",
+          "base": {
+            "kind": "variable",
+            "name": "x"
+          },
+          "exponent": 2
+        },
+        "variable": "x"
+      },
+      "expectedAssessment": "invalid"
+    }
+  ]
+}

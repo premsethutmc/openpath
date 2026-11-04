@@ -1,0 +1,5527 @@
+{
+ "partition": "e6r-holdout2",
+ "cases": {
+  "s6-001": {
+   "family": "forged-power-of-power",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "(x^2)^3 = x^6, not x^5; the next line silently differentiates x^6",
+   "contestable": false
+  },
+  "s6-002": {
+   "family": "reciprocal-quadratic-power-form",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-003": {
+   "family": "reciprocal-sqrt-power-form",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-004": {
+   "family": "log-properties-first",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-005": {
+   "family": "ambiguous-bare-log-derivative",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "log without a base may be natural or base 10, and 1/x is the derivative only for the natural log",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between ln and log10 reading"
+  },
+  "s6-006": {
+   "family": "second-derivative-quartic",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-007": {
+   "family": "cube-of-sine-lines",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-008": {
+   "family": "expand-then-differentiate-square",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-009": {
+   "family": "exp-quadratic-exponent",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-010": {
+   "family": "ambiguous-unparenthesised-trig-sum",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "sin 2x + 1 may be sin(2x)+1 or sin(2x+1) and the claimed derivative fits only the first",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-011": {
+   "family": "err-sqrt-lost-inner",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "final": "invalid",
+   "justification": "the inner derivative 2x is missing",
+   "contestable": false
+  },
+  "s6-012": {
+   "family": "incomplete-first-derivative-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "only the first derivative is found; the task asks for the second derivative",
+   "contestable": false
+  },
+  "s6-013": {
+   "family": "forged-power-rule-index",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "5x^5 is not the derivative of x^5",
+   "contestable": false
+  },
+  "s6-014": {
+   "family": "latex-power-of-quadratic",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-015": {
+   "family": "exp-times-trig",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-016": {
+   "family": "x-log-x",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-017": {
+   "family": "nested-trig-log",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-018": {
+   "family": "expand-square-of-quadratic-alternative",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-019": {
+   "family": "unicode-gaussian-like",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-020": {
+   "family": "err-log-scaled-argument",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the chain-rule factor 4 is missing so the derivative should be 1/x",
+   "contestable": false
+  },
+  "s6-021": {
+   "family": "err-arctan-denominator",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the denominator should be 1+(3x)^2 = 1+9x^2",
+   "contestable": false
+  },
+  "s6-022": {
+   "family": "forged-quotient-denominator",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the quotient-rule denominator (x+1)^2 is dropped and the claimed result 1/(x+1) is not the derivative",
+   "contestable": false
+  },
+  "s6-023": {
+   "family": "log-of-quadratic",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-024": {
+   "family": "forged-cancel-wrong-simplification",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "(x^2-1)/(x-1) equals x+1, not x-1",
+   "contestable": false
+  },
+  "s6-025": {
+   "family": "cancel-then-differentiate",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "note": "cancellation valid because x=5 is excluded from the posed expression"
+  },
+  "s6-026": {
+   "family": "sqrt-product-split-unrestricted",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "sqrt(ab)=sqrt(a)sqrt(b) needs x>=0, but the posed expression is also defined for x<=-2",
+   "contestable": false
+  },
+  "s6-027": {
+   "family": "incomplete-substitution-parts-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the chain-rule factors are found but never combined into dy/dx",
+   "contestable": false
+  },
+  "s6-028": {
+   "family": "forged-expand-constant",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "(x+5)^2 expands with constant term 25, not 24",
+   "contestable": false
+  },
+  "s6-029": {
+   "family": "reciprocal-quadratic-quotient-rule",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-030": {
+   "family": "forged-chain-line",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the first line omits the inner derivative 2x, which is silently restored in the next line",
+   "contestable": false
+  },
+  "s6-031": {
+   "family": "err-product-of-derivatives",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the derivative of a product is not the product of the derivatives",
+   "contestable": false
+  },
+  "s6-032": {
+   "family": "err-exp-power-rule",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the power rule is misapplied to an exponential",
+   "contestable": false
+  },
+  "s6-033": {
+   "family": "forged-rule-coincidence-xe",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "final": "invalid",
+   "justification": "the stated product rule u'v'+uv is false in general; it only matches here by coincidence",
+   "contestable": false
+  },
+  "s6-034": {
+   "family": "ambiguous-sin-x-squared",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "sin x^2 and cos x^2 may mean sin(x^2), cos(x^2) (claim correct) or (sin x)^2, (cos x)^2 (claim false)",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-035": {
+   "family": "unsupported-implicit-cubic",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "implicit differentiation of a general curve is outside the typed derivative language",
+   "contestable": false
+  },
+  "s6-036": {
+   "family": "incomplete-rewrite-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the rewrite is valid but the derivative is never taken",
+   "contestable": false
+  },
+  "s6-037": {
+   "family": "ambiguous-exp-no-parens",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "e^2x may mean e^(2x) or (e^2)x and the claimed 2e^2x is its derivative only in the first reading",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-038": {
+   "family": "unsupported-derivative-of-integral",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "differentiating an integral with a variable upper limit is outside the typed language",
+   "contestable": false
+  },
+  "s6-039": {
+   "family": "unicode-cube-log",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-040": {
+   "family": "forged-log-offset",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "ln(x^2) = 2 ln|x| exactly, with no added 1",
+   "contestable": false
+  },
+  "s6-041": {
+   "family": "quotient-linear-over-quadratic",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-042": {
+   "family": "unicode-sqrt-radical",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-043": {
+   "family": "sin-squared-half-angle-alternative",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-044": {
+   "family": "log-power-split-unrestricted",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "ln(x^10)=10ln(x) holds only for x>0 but the task domain is x != 0 and no sign restriction is given",
+   "contestable": false
+  },
+  "s6-045": {
+   "family": "forged-trig-identity",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "sin^2 x + cos^2 x equals 1, not 2; the constant is lost on differentiating, hiding the error",
+   "contestable": false
+  },
+  "s6-046": {
+   "family": "unsupported-log-diff-variable-exponent",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "a variable exponent is outside the typed expression language",
+   "contestable": false
+  },
+  "s6-047": {
+   "family": "latex-quotient-over-linear",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-048": {
+   "family": "ambiguous-ln-x-squared",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "ln x^2 may mean ln(x^2) or (ln x)^2 and the claimed 2/x is correct only for the first",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-049": {
+   "family": "unsupported-parametric-derivative",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "parametric differentiation is outside the typed derivative task",
+   "contestable": false
+  },
+  "s6-050": {
+   "family": "sqrt-chain-fraction-exponent",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-051": {
+   "family": "log-exp-split-unrestricted",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "ln(x^2)=2ln x needs x>0 which is not given; the correct general form is 2ln|x|",
+   "contestable": false
+  },
+  "s6-052": {
+   "family": "ambiguous-reciprocal-no-parens",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "1/3x may mean 1/(3x) or (1/3)x and -1/3x^2 is read as -1/(3x^2) or -(1/3)x^2",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-053": {
+   "family": "ambiguous-d-dx-scope",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "d/dx may act on x^2 only or on the whole product, and the claimed result is the derivative only of the whole product",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-054": {
+   "family": "log-product-split-unrestricted",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "splitting the log needs x>3 (both factors positive) which the task does not supply; the left side is also defined for x<-5",
+   "contestable": false
+  },
+  "s6-055": {
+   "family": "incomplete-product-rule-unfinished",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the product rule is set up but d/dx[cos(3x)] is never evaluated",
+   "contestable": false
+  },
+  "s6-056": {
+   "family": "def-expand-then-integrate",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-057": {
+   "family": "sin-cos-form-one",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-058": {
+   "family": "partial-fractions-difference-of-squares",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-059": {
+   "family": "unsupported-double-integral",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "iterated integrals are outside the single-variable calculus task set",
+   "contestable": false
+  },
+  "s6-060": {
+   "family": "noC-poly-oneline",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "the antiderivative is right but the arbitrary constant +C is omitted",
+   "contestable": false
+  },
+  "s6-061": {
+   "family": "def-area-style-square",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-062": {
+   "family": "forged-sub-dx-relation",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "du = 3 dx, not dx/3",
+   "contestable": false
+  },
+  "s6-063": {
+   "family": "forged-du-false-final-right",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "du = 2x dx; the false du = x dx is silently corrected in the following line",
+   "contestable": false
+  },
+  "s6-064": {
+   "family": "err-inverse-square",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the antiderivative of x^-2 is -1/x",
+   "contestable": false
+  },
+  "s6-065": {
+   "family": "log-without-abs-shift",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "ln(x-5) needs x>5 which is neither given nor stated",
+   "contestable": false
+  },
+  "s6-066": {
+   "family": "one-over-x-assume-positive",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": true,
+   "contestReason": "verified under an explicitly stated sign assumption narrowing the domain, following the independent adjudicator fixture d11"
+  },
+  "s6-067": {
+   "family": "latex-exp-linear",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-068": {
+   "family": "def-log-over-x",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-069": {
+   "family": "incomplete-def-antiderivative-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the bracket is correct but never evaluated at the bounds",
+   "contestable": false
+  },
+  "s6-070": {
+   "family": "unicode-reciprocal-sqrt",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-071": {
+   "family": "half-angle-sin-squared",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-072": {
+   "family": "log-without-abs-reciprocal",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "ln(x) covers only x>0 and no sign condition is given for the integrand 7/x",
+   "contestable": false
+  },
+  "s6-073": {
+   "family": "log-derivative-form-or-partial-fractions",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-074": {
+   "family": "latex-parts-x-sin",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-075": {
+   "family": "log-without-abs-quadratic",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "ln(x^2-4) is real only for |x|>2 while the integrand is defined for all x != +-2, and no restriction is given",
+   "contestable": false
+  },
+  "s6-076": {
+   "family": "err-cos-scaled-no-factor",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the factor 1/5 is missing",
+   "contestable": false
+  },
+  "s6-077": {
+   "family": "noC-multiline-final",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "the final antiderivative has no +C",
+   "contestable": false
+  },
+  "s6-078": {
+   "family": "ambiguous-bare-log-parts",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "log without a base may be natural or base 10 and the formula is an antiderivative only for the natural log",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-079": {
+   "family": "err-definite-arithmetic",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "16/4 - 1/4 equals 15/4, not 17/4",
+   "contestable": false
+  },
+  "s6-080": {
+   "family": "noC-exp-chain",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "no +C",
+   "contestable": false
+  },
+  "s6-081": {
+   "family": "noC-latex",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "no +C on an indefinite integral",
+   "contestable": false
+  },
+  "s6-082": {
+   "family": "ambiguous-half-x-fraction",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "1/2x may mean 1/(2x) or (1/2)x and the claimed result is an antiderivative only of the first",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-083": {
+   "family": "noC-parts-final",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "the final antiderivative has no +C",
+   "contestable": false
+  },
+  "s6-084": {
+   "family": "noC-unicode",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "no +C",
+   "contestable": false
+  },
+  "s6-085": {
+   "family": "unsupported-first-order-ode",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "differential equations are outside the supported integration tasks",
+   "contestable": false
+  },
+  "s6-086": {
+   "family": "multi-line-final-with-constant",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-087": {
+   "family": "def-symmetry-alternative",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-088": {
+   "family": "unsupported-trig-substitution",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "trigonometric substitution is outside the supported integration rules",
+   "contestable": false
+  },
+  "s6-089": {
+   "family": "ambiguous-log-over-x",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "log without a base may be natural or base 10 and the claimed result is an antiderivative only for the natural log",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-090": {
+   "family": "err-parts-sign",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "final": "invalid",
+   "justification": "integrating -∫sin x dx gives +cos x, so the antiderivative is x sin x + cos x",
+   "contestable": false
+  },
+  "s6-091": {
+   "family": "unicode-x-over-sqrt",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-092": {
+   "family": "ambiguous-exp-two-x",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "e^3x may mean e^(3x) or (e^3)x and the claimed result is correct only in the first reading",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-093": {
+   "family": "parts-x-log",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-094": {
+   "family": "log-without-abs-linear",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "ln(3x+2) is an antiderivative only where 3x+2>0, but the integrand is defined for x<-2/3 too; the sign condition is not given",
+   "contestable": false
+  },
+  "s6-095": {
+   "family": "ambiguous-cos-over-two",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "sin x/5 may mean sin(x/5) or (sin x)/5 and the claimed result fits only the first",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-096": {
+   "family": "def-unicode-exp",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-097": {
+   "family": "forged-definite-sum",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "9 + 3 equals 12, not 10; the final number is only right because the chain jumps back to 10",
+   "contestable": false
+  },
+  "s6-098": {
+   "family": "latex-sub-cubic",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-099": {
+   "family": "incomplete-unevaluated-u-integral",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the transformed integral is not evaluated",
+   "contestable": false
+  },
+  "s6-100": {
+   "family": "linear-denominator-abs",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-101": {
+   "family": "unsupported-improper-inverse-square",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "improper integrals are outside the supported definite-integral task",
+   "contestable": false
+  },
+  "s6-102": {
+   "family": "sin-cos-form-two",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-103": {
+   "family": "expand-then-integrate",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-104": {
+   "family": "noC-log-abs",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "no +C",
+   "contestable": false
+  },
+  "s6-105": {
+   "family": "def-cubic-minus-linear-negative-bound",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-106": {
+   "family": "incomplete-parts-first-step",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the remaining integral is left unevaluated",
+   "contestable": false
+  },
+  "s6-107": {
+   "family": "forged-partial-fractions-coefficient",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the decomposition has a factor 1/2 missing: 1/(x-1) - 1/(x+1) = 2/(x^2-1)",
+   "contestable": false
+  },
+  "s6-108": {
+   "family": "unsupported-improper-exp-decay",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "improper integrals are outside the supported definite-integral task",
+   "contestable": false
+  },
+  "s6-109": {
+   "family": "sin-cos-double-angle",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-110": {
+   "family": "ln-by-parts",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-111": {
+   "family": "forged-du-exp-linear",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "du = 5 dx, not dx; the later factor 1/5 silently repairs it",
+   "contestable": false
+  },
+  "s6-112": {
+   "family": "err-integral-of-product",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the integral of a product is not the product of the integrals",
+   "contestable": false
+  },
+  "s6-113": {
+   "family": "incomplete-u-du-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the substitution is set up but never integrated",
+   "contestable": false
+  },
+  "s6-114": {
+   "family": "forged-parts-formula",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the parts step should leave ∫ e^x dx, not ∫ x e^x dx",
+   "contestable": false
+  },
+  "s6-115": {
+   "family": "expand-square-then-integrate",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-116": {
+   "family": "sub-x-sqrt-shift",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-117": {
+   "family": "def-latex-reciprocal",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-118": {
+   "family": "unicode-poly",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-119": {
+   "family": "def-linear-quartic",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-120": {
+   "family": "incomplete-prose-parts",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "only a plan is stated; no antiderivative is produced",
+   "contestable": false
+  },
+  "s6-121": {
+   "family": "noC-cos",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "no +C",
+   "contestable": false
+  },
+  "s6-122": {
+   "family": "conjugate-at-infinity",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-123": {
+   "family": "differentiability-smooth-join",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-124": {
+   "family": "err-standard-limit-scaled",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "sin(6x)/x tends to 6, not 1",
+   "contestable": false
+  },
+  "s6-125": {
+   "family": "direct-substitution-rational",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-126": {
+   "family": "err-negative-infinity-sqrt-sign",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "for x<0, sqrt(9x^2+1)/x is negative, so the equality with sqrt(9+1/x^2) is false and the limit is -3",
+   "contestable": false
+  },
+  "s6-127": {
+   "family": "cube-difference-long-division",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-128": {
+   "family": "log-scale-split-two-sided",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "the split uses ln(x) and is valid only for x>0 although the two-sided limit also involves x<0",
+   "contestable": false
+  },
+  "s6-129": {
+   "family": "standard-sin-ratio",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-130": {
+   "family": "ambiguous-ln-x-squared-quotient",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "ln x^2 may mean ln(x^2) (limit 2) or (ln x)^2 (limit 0)",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-131": {
+   "family": "err-exp-infinity-claim",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "inf*0 is indeterminate and the limit is 0, not 2",
+   "contestable": false
+  },
+  "s6-132": {
+   "family": "log-over-x-at-infinity",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": true,
+   "contestReason": "accepted as valid on the standard growth-rate fact; no formal justification is given"
+  },
+  "s6-133": {
+   "family": "negative-infinity-exponential",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-134": {
+   "family": "err-infinity-leading-coefficient",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the ratio of leading coefficients is 6/3 = 2, not 3/6",
+   "contestable": false
+  },
+  "s6-135": {
+   "family": "log-square-split-two-sided",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "ln(x^2)=2ln(x) needs x>0 but the limit is two-sided, so the left neighbourhood (x<0) is not covered",
+   "contestable": false
+  },
+  "s6-136": {
+   "family": "err-continuous-implies-differentiable",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 2
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 2
+   },
+   "final": "invalid",
+   "justification": "agreeing values give continuity only; the slopes 1 and 2 differ, so f is not differentiable at 1",
+   "contestable": false
+  },
+  "s6-137": {
+   "family": "unsupported-epsilon-delta",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "epsilon-delta proofs are outside the typed limit tasks",
+   "contestable": false
+  },
+  "s6-138": {
+   "family": "incomplete-differentiability-values-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "continuity is checked but the slopes and the conclusion are missing",
+   "contestable": false
+  },
+  "s6-139": {
+   "family": "infinity-lower-degree",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-140": {
+   "family": "err-conjugate-arithmetic",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "final": "invalid",
+   "justification": "1/(sqrt(16)+4) = 1/8, not 1/4",
+   "contestable": false
+  },
+  "s6-141": {
+   "family": "incomplete-factor-cancel-no-limit",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the simplification is valid but the limit value is never stated",
+   "contestable": false
+  },
+  "s6-142": {
+   "family": "infinity-equal-degree-rational",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-143": {
+   "family": "unsupported-series-ratio-test",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "series convergence tests are outside the supported tasks",
+   "contestable": false
+  },
+  "s6-144": {
+   "family": "sqrt-difference-factor-alternative",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-145": {
+   "family": "ambiguous-tan-argument-over-x",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "tan 2x/x may mean tan(2x)/x (limit 2) or tan(2x/x) = tan 2 (limit tan 2)",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-146": {
+   "family": "continuity-not-from-matching-slopes",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-147": {
+   "family": "forged-continuity-value",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "1^2+2*1 equals 3, not 4; the line that follows quietly uses 3",
+   "contestable": false
+  },
+  "s6-148": {
+   "family": "ambiguous-plus-minus-limit",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "±1 may report the two one-sided limits (so the limit does not exist) or claim the limit equals one of two values",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-149": {
+   "family": "differentiability-corner-quadratic-linear",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-150": {
+   "family": "incomplete-left-side-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "only the left-hand limit is found; the two-sided limit statement (does not exist) is missing",
+   "contestable": false
+  },
+  "s6-151": {
+   "family": "ambiguous-bare-log-slope",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "log may be natural (limit 1/3) or base 10 (limit 1/(3 ln 10))",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-152": {
+   "family": "tan-over-x",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-153": {
+   "family": "incomplete-continuity-left-value",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "only the left value is computed; no right value and no conclusion",
+   "contestable": false
+  },
+  "s6-154": {
+   "family": "infinite-two-sided-square",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-155": {
+   "family": "negative-infinity-sqrt-sign-care",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-156": {
+   "family": "incomplete-divide-by-power-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the division by x^3 is valid but the limit 7/2 is never reached",
+   "contestable": false
+  },
+  "s6-157": {
+   "family": "ambiguous-sin-argument-over-x",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "sin 7x/x may mean sin(7x)/x (limit 7) or sin(7x/x) = sin 7 (limit sin 7)",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-158": {
+   "family": "rationalise-sqrt-numerator",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-159": {
+   "family": "forged-sin-identity",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "sin(4x) is not 4 sin(x); the final value 4 is right only by coincidence",
+   "contestable": false
+  },
+  "s6-160": {
+   "family": "err-limit-product-form",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "0/0 is indeterminate and cannot be set equal to 1",
+   "contestable": false
+  },
+  "s6-161": {
+   "family": "one-sided-abs-left",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-162": {
+   "family": "continuity-piecewise-jump",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-163": {
+   "family": "latex-sin-ratio",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-164": {
+   "family": "one-sided-abs-right",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "note": "the equality |x-3|/(x-3)=1 is only needed on the right-hand neighbourhood"
+  },
+  "s6-165": {
+   "family": "exp-minus-one-scaled",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-166": {
+   "family": "latex-factor-cancel",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-167": {
+   "family": "differentiability-fails-by-jump",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-168": {
+   "family": "forged-rational-infinity-line",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the first line is not an identity (dividing by x^2 gives (4+1/x)/(2-3/x^2))",
+   "contestable": false
+  },
+  "s6-169": {
+   "family": "infinite-one-sided-right",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-170": {
+   "family": "unicode-conjugate-sqrt",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-171": {
+   "family": "forged-factor-step",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "x^2+x-6 = (x-2)(x+3), not (x-2)(x+4); the limit 5 is only reached through an unrelated line",
+   "contestable": false
+  },
+  "s6-172": {
+   "family": "err-reciprocal-zero",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "1/x grows without bound as x → 0+",
+   "contestable": false
+  },
+  "s6-173": {
+   "family": "unicode-infinity-rational",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-174": {
+   "family": "err-cancel-wrong-factor",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "(x^2-25)/(x-5) = x+5, not x-5; the limit is 10",
+   "contestable": false
+  },
+  "s6-175": {
+   "family": "unsupported-sequence-factorial",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "sequence limits and squeeze arguments are outside the typed limit tasks",
+   "contestable": false
+  },
+  "s6-176": {
+   "family": "ambiguous-fraction-times-x",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "(3x+1)/2x may mean (3x+1)/(2x) (limit 3/2) or ((3x+1)/2)x (diverges)",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-177": {
+   "family": "conditional-from-counts",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-178": {
+   "family": "at-least-one-head-direct-sum",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-179": {
+   "family": "incomplete-binomial-coefficient-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "only the coefficient is computed",
+   "contestable": false
+  },
+  "s6-180": {
+   "family": "population-variance-typed",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "population"
+   ]
+  },
+  "s6-181": {
+   "family": "forged-combination-factorial-denominator",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the denominator should be 3!6!; 9!/(3!3!)=10080",
+   "contestable": false
+  },
+  "s6-182": {
+   "family": "complement-independent-unstated",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "cubing 1/2 uses independence of the tosses, which is not typed (only equiprobable is) nor stated",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "independent"
+   ]
+  },
+  "s6-183": {
+   "family": "at-least-two-heads-complement-route",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-184": {
+   "family": "union-add-unstated",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "adding the two probabilities requires mutual exclusivity, which is neither typed nor stated",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "mutually-exclusive"
+   ]
+  },
+  "s6-185": {
+   "family": "joint-multiply-unicode-unstated",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "the product rule needs independence, which is not given",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "independent"
+   ]
+  },
+  "s6-186": {
+   "family": "incomplete-permutation-setup",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the method is described but no count is produced",
+   "contestable": false
+  },
+  "s6-187": {
+   "family": "forged-binomial-simplification",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the product 10*(8/125)*(9/25) is 720/3125; 720/3000 is a false step",
+   "contestable": false
+  },
+  "s6-188": {
+   "family": "complement-single-event",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-189": {
+   "family": "ambiguous-percent-vs-probability",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "bare 35 and 65 may be percentages (35%, 65%) or raw probabilities; the numbers are consistent only as percentages of 100",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-190": {
+   "family": "unreduced-but-correct",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-191": {
+   "family": "incomplete-mean-only-variance-asked",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the mean is correct but the question asks for the variance",
+   "contestable": false
+  },
+  "s6-192": {
+   "family": "finite-fair-stated-in-prose",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "equiprobable"
+   ]
+  },
+  "s6-193": {
+   "family": "joint-independent-typed",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "independent"
+   ]
+  },
+  "s6-194": {
+   "family": "finite-dice-unstated",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "counting favourable over total presumes equally likely outcomes, which is not given",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "equiprobable"
+   ]
+  },
+  "s6-195": {
+   "family": "pmf-mean-three-values",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-196": {
+   "family": "err-without-replacement-as-with",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "drawing two cards without replacement gives (4/52)(3/51)=1/221",
+   "contestable": false
+  },
+  "s6-197": {
+   "family": "complement-at-least-one-six",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-198": {
+   "family": "variance-divisor-unstated",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "dividing by n treats the data as a whole population, which is neither typed nor stated",
+   "contestable": true,
+   "contestReason": "the task type names a population variance but the typed assumption is absent; the dev corpus treats this pattern as needing the assumption",
+   "assumptionsNeeded": [
+    "population"
+   ]
+  },
+  "s6-199": {
+   "family": "err-independence-sum",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "for independent events the joint probability is the product 1/12",
+   "contestable": false
+  },
+  "s6-200": {
+   "family": "union-exclusive-typed",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "mutually-exclusive"
+   ]
+  },
+  "s6-201": {
+   "family": "binomial-variance-unicode",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-202": {
+   "family": "two-draws-product-unstated",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "the product (2/7)(2/7) presumes draws with replacement or independence, which is not stated",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "independent"
+   ]
+  },
+  "s6-203": {
+   "family": "unsupported-markov-two-state",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "Markov chain stationary distributions are outside the supported tasks",
+   "contestable": false
+  },
+  "s6-204": {
+   "family": "combination-symmetry-alternative",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-205": {
+   "family": "conditional-latex",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-206": {
+   "family": "combination-latex",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-207": {
+   "family": "unsupported-confidence-interval",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "confidence intervals are outside the supported statistics tasks",
+   "contestable": false
+  },
+  "s6-208": {
+   "family": "unsupported-normal-probability",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "the normal distribution is outside the supported probability tasks",
+   "contestable": false
+  },
+  "s6-209": {
+   "family": "unsupported-poisson-pmf",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "the Poisson distribution is outside the supported probability tasks",
+   "contestable": false
+  },
+  "s6-210": {
+   "family": "err-total-prob-weights",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "each conditional probability must be weighted by the probability of its own branch: (1/4)(2/3)+(3/4)(1/6)=7/24",
+   "contestable": false
+  },
+  "s6-211": {
+   "family": "err-pmf-mean-uses-squares",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "E[X] weights the values, not their squares; the mean is 2",
+   "contestable": false
+  },
+  "s6-212": {
+   "family": "incomplete-conditional-numerator-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the ratio is set up but no value is computed",
+   "contestable": false
+  },
+  "s6-213": {
+   "family": "incomplete-combination-formula-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the formula is instantiated but never evaluated",
+   "contestable": false
+  },
+  "s6-214": {
+   "family": "sample-variance-typed",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "sample"
+   ]
+  },
+  "s6-215": {
+   "family": "union-stated-exclusive-prose",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "mutually-exclusive"
+   ]
+  },
+  "s6-216": {
+   "family": "joint-multiply-unstated",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "multiplying marginals requires independence, which is neither typed nor stated",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "independent"
+   ]
+  },
+  "s6-217": {
+   "family": "forged-conditional-rule-statement",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the stated rule is false (conditional probability is a ratio), even though the following arithmetic is the correct ratio",
+   "contestable": false
+  },
+  "s6-218": {
+   "family": "joint-independent-prose",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "independent"
+   ]
+  },
+  "s6-219": {
+   "family": "err-binomial-no-coefficient",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the binomial coefficient C(6,2)=15 is missing",
+   "contestable": false
+  },
+  "s6-220": {
+   "family": "forged-pmf-mean-term",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "5*(1/5)=1, so the sum is 1/2+3/5+1; the chain with +2 is false",
+   "contestable": false
+  },
+  "s6-221": {
+   "family": "ambiguous-factorial-denominator-big",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "9!/4!5! may mean 9!/(4!·5!) = 126 or (9!/4!)·5!, which differs",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-222": {
+   "family": "ambiguous-second-moment-brackets",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "E X^2 may mean E[X^2] = 5/2 or (E X)^2 = 1; the variance line is right only for the first",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-223": {
+   "family": "binomial-pmf-stated",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-224": {
+   "family": "forged-independent-product",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "(1/4)(2/3) = 2/12, not 3/12",
+   "contestable": false
+  },
+  "s6-225": {
+   "family": "ambiguous-factorial-denominator-chain",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "6!/4!2! may mean 6!/(4!·2!) = 15 or (6!/4!)·2! = 60",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-226": {
+   "family": "forged-choose-symmetry-claim",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the symmetry is C(11,3)=C(11,8); C(11,4)=330",
+   "contestable": false
+  },
+  "s6-227": {
+   "family": "err-population-variance-n-minus-one",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "final": "invalid",
+   "justification": "for a population the divisor is n=3, giving 8/3",
+   "contestable": false
+  },
+  "s6-228": {
+   "family": "ambiguous-factorial-denominator-seven",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "8!/5!3! may mean 8!/(5!·3!) = 56 or (8!/5!)·3! = 336*6 = 2016, which differs",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-229": {
+   "family": "binomial-pmf-no-restatement",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": true,
+   "contestReason": "binomial task names independent identical trials, so no separate independence statement is required (the e6 dev corpus labels the same pattern differently)"
+  },
+  "s6-230": {
+   "family": "incomplete-variance-stops-at-moment",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "E[X] and E[X^2] are correct but the variance is never computed",
+   "contestable": false
+  },
+  "s6-231": {
+   "family": "factorial-eight",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-232": {
+   "family": "divide-latex",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-233": {
+   "family": "power-i-unicode",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-234": {
+   "family": "forged-modulus-radicand",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "36+64 = 100, not 110",
+   "contestable": false
+  },
+  "s6-235": {
+   "family": "incomplete-one-root-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "only x = 3 is reported; the second root -2 is missing",
+   "contestable": false
+  },
+  "s6-236": {
+   "family": "err-real-roots-for-negative-discriminant",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "final": "invalid",
+   "justification": "x^2 = -4 has no real solution; x = ±2 gives x^2 = 4",
+   "contestable": false
+  },
+  "s6-237": {
+   "family": "ambiguous-reciprocal-two-i",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "1/2i may mean 1/(2i) = -i/2 (as claimed) or (1/2)i = i/2",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-238": {
+   "family": "forged-vieta-statement",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the product is c/a; the stated -c/a is false (it only happens that the next line gives c/a)",
+   "contestable": false
+  },
+  "s6-239": {
+   "family": "add-complex",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-240": {
+   "family": "err-division-wrong-conjugate",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the conjugate of 3-i is 3+i; (3-i)(3-i) = 8-6i, not 8",
+   "contestable": false
+  },
+  "s6-241": {
+   "family": "divide-by-conjugate",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-242": {
+   "family": "err-discriminant-sign",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "b^2-4ac = 4-40 = -36, not 44",
+   "contestable": false
+  },
+  "s6-243": {
+   "family": "forged-discriminant",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "4-20 = -16, not -24; later lines silently use -16",
+   "contestable": false
+  },
+  "s6-244": {
+   "family": "factor-theorem-imaginary-root",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-245": {
+   "family": "principal-argument-second-quadrant",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-246": {
+   "family": "modulus-via-conjugate-product",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-247": {
+   "family": "quadratic-two-rational-roots",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-248": {
+   "family": "unsupported-contour-integral",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "contour integration is outside the supported complex tasks",
+   "contestable": false
+  },
+  "s6-249": {
+   "family": "vieta-product-direct",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-250": {
+   "family": "ambiguous-fraction-over-two-plus-i",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "1/3+i may mean 1/(3+i) = (3-i)/10 (as claimed) or (1/3)+i",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-251": {
+   "family": "translate-point",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-252": {
+   "family": "modulus-pythagorean",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-253": {
+   "family": "conjugate-root-stated-in-prose-ok",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "real-coefficients"
+   ]
+  },
+  "s6-254": {
+   "family": "roots-of-unity-check",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-255": {
+   "family": "de-moivre-polar",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-256": {
+   "family": "incomplete-quadratic-formula-prose",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "only a plan is given; no roots are produced",
+   "contestable": false
+  },
+  "s6-257": {
+   "family": "conjugate-root-typed-assumption-ok",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "real-coefficients"
+   ]
+  },
+  "s6-258": {
+   "family": "de-moivre-by-squaring",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-259": {
+   "family": "vieta-product-via-roots-alternative",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-260": {
+   "family": "conjugate-root-stated-real-coefficients",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-261": {
+   "family": "err-power-of-i-wrong-residue",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "30 = 4*7+2 so i^30 = i^2 = -1",
+   "contestable": false
+  },
+  "s6-262": {
+   "family": "unsupported-matrix-eigenvalues",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "eigenvalues of a matrix are outside the supported tasks",
+   "contestable": false
+  },
+  "s6-263": {
+   "family": "incomplete-modulus-squared-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "625 is |z|^2; the modulus 25 is never stated",
+   "contestable": false
+  },
+  "s6-264": {
+   "family": "divide-check-by-multiplication",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-265": {
+   "family": "err-factor-theorem-evaluation",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "1 - 3 + 3 - 1 = 0",
+   "contestable": false
+  },
+  "s6-266": {
+   "family": "unsupported-cauchy-riemann",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "complex differentiability and Cauchy-Riemann equations are outside the supported complex tasks",
+   "contestable": false
+  },
+  "s6-267": {
+   "family": "unsupported-matrix-determinant",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "matrices are outside the supported complex and polynomial tasks",
+   "contestable": false
+  },
+  "s6-268": {
+   "family": "vieta-sum-formula",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-269": {
+   "family": "ambiguous-principal-sqrt-pm",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "±5i conflates the two solutions of z^2=-25 with the principal square root 5i",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-270": {
+   "family": "power-of-i-negative-exponent",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-271": {
+   "family": "incomplete-discriminant-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the discriminant is correct but the roots are never produced",
+   "contestable": false
+  },
+  "s6-272": {
+   "family": "forged-conjugate-denominator",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "(1+2i)(1-2i) = 5, not 7, though the next line divides by 5",
+   "contestable": false
+  },
+  "s6-273": {
+   "family": "unsupported-euler-identity",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "the complex exponential is outside the supported complex tasks",
+   "contestable": false
+  },
+  "s6-274": {
+   "family": "conjugate-root-unstated-realness-two",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "no statement (typed or in the working) that the coefficients are real",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "real-coefficients"
+   ]
+  },
+  "s6-275": {
+   "family": "multiply-latex",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-276": {
+   "family": "incomplete-division-numerator-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the numerator after multiplying by the conjugate is right but the division by 5 is missing",
+   "contestable": false
+  },
+  "s6-277": {
+   "family": "conjugate-root-unstated-realness",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "the conjugate-root theorem needs real coefficients, which the task does not give and the working does not state",
+   "contestable": false,
+   "assumptionsNeeded": [
+    "real-coefficients"
+   ]
+  },
+  "s6-278": {
+   "family": "err-verify-root-arithmetic",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the expression simplifies to 0, so 1+i is a root",
+   "contestable": false
+  },
+  "s6-279": {
+   "family": "de-moivre-eighth-power-squaring",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-280": {
+   "family": "err-conjugate-flips-both",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the conjugate changes only the sign of the imaginary part: 4+7i",
+   "contestable": false
+  },
+  "s6-281": {
+   "family": "quadratic-complex-negative-discriminant",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-282": {
+   "family": "incomplete-multiply-unexpanded",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the expansion is correct but i^2 is never replaced and the result is not simplified",
+   "contestable": false
+  },
+  "s6-283": {
+   "family": "ambiguous-argument-plus-minus-pi",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "±π may list the two boundary values of the general argument or claim the principal value is either; the principal argument is π",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-284": {
+   "family": "forged-square-binomial-complex",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "16i^2 = -16, so the step 9+24i+16 is false although the final -7+24i is right",
+   "contestable": false
+  },
+  "s6-285": {
+   "family": "unreduced-but-correct-multiplication",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-286": {
+   "family": "quadratic-unicode",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-287": {
+   "family": "pdf-mean-cubic-density",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-288": {
+   "family": "restricted-sqrt-square-negative-wrong",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "for x<0, sqrt(x^2) = -x, so the identity sqrt(x^2)=x is false on the whole task domain",
+   "contestable": false
+  },
+  "s6-289": {
+   "family": "letters-arrangement-probability",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-290": {
+   "family": "integral-after-wrong-cancellation",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "(x^2-1)/(x+1) = x-1, not x+1",
+   "contestable": false
+  },
+  "s6-291": {
+   "family": "roots-of-unity-sum-pair",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-292": {
+   "family": "restricted-abs-shift-right-of-three",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-293": {
+   "family": "pdf-mean-linear-density",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-294": {
+   "family": "restricted-log-square-negative-wrong",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "ln(x) is undefined for x<0 so ln(9x^2)=ln 9+2ln(x) cannot be used on this domain; 2ln(-x) is the correct form",
+   "contestable": false
+  },
+  "s6-295": {
+   "family": "pdf-arithmetic-slip-mean",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "2^4 = 16, so the value is (3/32)*16 = 3/2",
+   "contestable": false
+  },
+  "s6-296": {
+   "family": "integral-reciprocal-positive-component",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-297": {
+   "family": "restricted-log-square-positive",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-298": {
+   "family": "committee-probability",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-299": {
+   "family": "integral-reciprocal-both-components-no-abs",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "ln(x-2) covers only the component x>2 while the typed domain has two components",
+   "contestable": false
+  },
+  "s6-300": {
+   "family": "integral-sqrt-positive-component",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-301": {
+   "family": "restricted-sqrt-square-positive",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-302": {
+   "family": "pdf-linear-transform-expectation",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-303": {
+   "family": "cancel-then-differentiate-cubes",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "note": "x=-2 is excluded from the posed expression"
+  },
+  "s6-304": {
+   "family": "integral-complete-square-wrong-shift",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-305": {
+   "family": "unrestricted-log-split-same-expression",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "the split is valid only for x>2 but the posed expression is also defined for x<-2 and no restriction is given",
+   "contestable": false
+  },
+  "s6-306": {
+   "family": "incomplete-area-antiderivative-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the bracket is right but not evaluated at the bounds",
+   "contestable": false
+  },
+  "s6-307": {
+   "family": "restriction-supplied-but-unneeded",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-308": {
+   "family": "incomplete-vieta-roots-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the roots are stated but their product is never computed",
+   "contestable": false
+  },
+  "s6-309": {
+   "family": "sqrt-split-needs-restriction",
+   "firstPass": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "missing-assumption",
+    "firstInvalidStep": null
+   },
+   "final": "missing-assumption",
+   "justification": "sqrt(ab)=sqrt(a)sqrt(b) needs x>=1; the posed expression is also defined for x<=-1",
+   "contestable": false
+  },
+  "s6-310": {
+   "family": "unsupported-implicit-circle-other-curve",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "implicit differentiation of a general curve is outside the typed tasks",
+   "contestable": false
+  },
+  "s6-311": {
+   "family": "limit-two-roots-difference",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-312": {
+   "family": "limit-conjugate-arithmetic-slip",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 1
+   },
+   "final": "invalid",
+   "justification": "sqrt(1-6/x) tends to 1, not 0, so the limit is 3",
+   "contestable": false
+  },
+  "s6-313": {
+   "family": "limit-removable-cube-difference",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-314": {
+   "family": "restricted-sqrt-square-negative-correct",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-315": {
+   "family": "vieta-from-complex-roots-sum",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-316": {
+   "family": "restricted-abs-product-negative",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-317": {
+   "family": "wrong-branch-log-split",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "on x<-2 both x-2 and x+2 are negative so the right side is undefined; the split uses the wrong branch",
+   "contestable": false
+  },
+  "s6-318": {
+   "family": "limit-cancel-slip-in-product",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-319": {
+   "family": "incomplete-restricted-log-split-only",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the split is valid under x>3 but the derivative is never taken",
+   "contestable": false
+  },
+  "s6-320": {
+   "family": "unsupported-separable-ode",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "differential equations are outside the supported calculus tasks",
+   "contestable": false
+  },
+  "s6-321": {
+   "family": "integral-reciprocal-both-components-abs",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-322": {
+   "family": "unsupported-jacobian-matrix",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "matrices and multivariable derivatives are outside the supported tasks",
+   "contestable": false
+  },
+  "s6-323": {
+   "family": "unsupported-trig-sub-expectation",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "trigonometric substitution is outside the supported integration rules",
+   "contestable": false
+  },
+  "s6-324": {
+   "family": "integral-complete-square-bad-constant",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "x^2+6x+13 = (x+3)^2+4, not (x+3)^2+13",
+   "contestable": false
+  },
+  "s6-325": {
+   "family": "integral-after-cancellation",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "note": "x=5 excluded from the integrand"
+  },
+  "s6-326": {
+   "family": "password-count-then-probability",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-327": {
+   "family": "factor-theorem-bad-power",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "(1+i)^3 = -2+2i, not 2i",
+   "contestable": false
+  },
+  "s6-328": {
+   "family": "factor-theorem-complex-root-cubic",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-329": {
+   "family": "forged-log-split-offset",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "ln(x^5) = 5ln(x) exactly on x>0; the added 3 is false though it vanishes on differentiating",
+   "contestable": false
+  },
+  "s6-330": {
+   "family": "cancel-wrong-factorisation",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "x^2+4 does not equal (x+2)^2",
+   "contestable": false
+  },
+  "s6-331": {
+   "family": "implied-domain-product-of-roots",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "note": "x>=1 is implied by the posed expression, so no restriction is missing"
+  },
+  "s6-332": {
+   "family": "integral-complete-square-arctan",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-333": {
+   "family": "unsupported-gaussian-expectation",
+   "firstPass": {
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "unsupported",
+    "firstInvalidStep": null
+   },
+   "final": "unsupported",
+   "justification": "the normal distribution and its improper integrals are outside the supported tasks",
+   "contestable": false
+  },
+  "s6-334": {
+   "family": "derivative-by-quotient-with-cancellation",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-335": {
+   "family": "pdf-mean-forgets-x-factor",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "E[X] integrates x f(x) = 2x^2, not f(x) = 2x; integrating the density gives the total probability 1",
+   "contestable": false
+  },
+  "s6-336": {
+   "family": "pdf-wrong-limits",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "the integral should run from 0 to 1/2, not 0 to 1",
+   "contestable": false
+  },
+  "s6-337": {
+   "family": "ambiguous-restricted-log-square",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "ln x^4 may mean ln(x^4) (derivative 4/x) or (ln x)^4 (derivative 4 (ln x)^3 / x) even with x>0",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-338": {
+   "family": "forged-cancel-then-derivative",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "(x^2-4x+3)/(x-1) = x-3, not x+3; the derivative 1 is unaffected by the constant",
+   "contestable": false
+  },
+  "s6-339": {
+   "family": "vieta-from-complex-roots-product",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-340": {
+   "family": "ambiguous-bare-log-restricted",
+   "firstPass": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "manual-blind-reread",
+    "classification": "ambiguous",
+    "firstInvalidStep": null
+   },
+   "final": "ambiguous",
+   "justification": "log may be natural (derivative 1/x) or base 10 (1/(x ln 10)) and 5x may be (log 5)x",
+   "contestable": true,
+   "contestReason": "notation convention: verdict depends on how the bare notation is read",
+   "note": "verdict flips between readings"
+  },
+  "s6-341": {
+   "family": "pdf-symmetric-half",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-342": {
+   "family": "restricted-log-split-alternative-quotient",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-343": {
+   "family": "area-between-curves",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-344": {
+   "family": "integral-reciprocal-negative-component-correct",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-345": {
+   "family": "incomplete-pdf-integral-setup",
+   "firstPass": {
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "incomplete",
+    "firstInvalidStep": null
+   },
+   "final": "incomplete",
+   "justification": "the integral is set up correctly but never evaluated",
+   "contestable": false
+  },
+  "s6-346": {
+   "family": "pdf-exponential-weight",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-347": {
+   "family": "pdf-uniform-mean",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-348": {
+   "family": "derivative-rationalised-first",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-349": {
+   "family": "integral-reciprocal-negative-component-wrong",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "on the component x<2 ln(x-2) is undefined; the antiderivative there is ln(2-x) (or ln|x-2|)",
+   "contestable": false
+  },
+  "s6-350": {
+   "family": "limit-rationalise-denominator",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-351": {
+   "family": "complex-modulus-of-product",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-352": {
+   "family": "unrestricted-sqrt-square-equals-x",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "sqrt(x^2) = |x|, which equals x only for x>=0, and no sign information is given",
+   "contestable": false
+  },
+  "s6-353": {
+   "family": "committee-probability-ordered-denominator",
+   "firstPass": {
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "invalid",
+    "firstInvalidStep": 0
+   },
+   "final": "invalid",
+   "justification": "selecting a committee of 3 from 9 has C(9,3)=84 equally likely outcomes, not 9^3",
+   "contestable": false
+  },
+  "s6-354": {
+   "family": "sqrt-split-with-restriction",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-355": {
+   "family": "pdf-linearity-alternative",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-356": {
+   "family": "restricted-log-split-negative-branch",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-357": {
+   "family": "limit-infinity-conjugate-linear-radical",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false,
+   "note": "for large positive x, x = sqrt(x^2), so dividing by x is safe"
+  },
+  "s6-358": {
+   "family": "pdf-second-moment",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-359": {
+   "family": "pdf-cdf-quarter",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  },
+  "s6-360": {
+   "family": "restricted-log-split-positive-branch",
+   "firstPass": {
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "secondPass": {
+    "method": "independent-numeric-line-check+rule-derivation",
+    "classification": "verified",
+    "firstInvalidStep": null
+   },
+   "final": "verified",
+   "justification": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "contestable": false
+  }
+ }
+}

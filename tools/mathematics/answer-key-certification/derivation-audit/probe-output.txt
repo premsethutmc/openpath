@@ -1,0 +1,31 @@
+R1 concatenate step                today=invalid     (reported invalid) desired=invalid
+    first unmet: derivation@L1 the two sides are not exactly equal
+R2 concatenate one line            today=invalid     (reported invalid) desired=invalid
+    first unmet: derivation@L1 the two sides are not exactly equal
+R3 place-value decomposition       today=unsupported (reported unsupported) desired=verified
+    first unmet: grounding@L1 the numbers 30, 50, 7, 9 come from neither the task data nor an earlier verified result
+R4 decomposition, no-carry error   today=invalid     (reported invalid) desired=invalid
+    first unmet: grounding@L1 the numbers 30, 50, 7, 9 come from neither the task data nor an earlier verified result
+R5 arithmetic slip 95              today=invalid     (reported invalid) desired=invalid
+    first unmet: grounding@L1 the numbers 30, 50, 7, 9 come from neither the task data nor an earlier verified result
+P1 place-value multiply            today=unsupported (reported unsupported) desired=verified
+    first unmet: grounding@L1 the number 10 comes from neither the task data nor an earlier verified result
+P2 distributive 7*(100-2)          today=unsupported (reported unsupported) desired=verified
+    first unmet: grounding@L1 the numbers 100, 2 come from neither the task data nor an earlier verified result
+P3 fraction split 5/6              today=unsupported (reported unsupported) desired=verified
+    first unmet: grounding@L1 the numbers 2, 3 come from neither the task data nor an earlier verified result
+P4 common denominator              today=verified    (reported verified) desired=verified
+P5 symbolic expansion              today=verified    (reported verified) desired=verified
+P6 factorisation                   today=verified    (reported verified) desired=verified
+N1 add-zero (96+17)-17             today=unsupported (reported unsupported) desired=unsupported
+    first unmet: grounding@L1 the number 17 comes from neither the task data nor an earlier verified result
+N2 unrelated parts 40+56           today=unsupported (reported unsupported) desired=unsupported
+    first unmet: grounding@L1 the numbers 40, 56 come from neither the task data nor an earlier verified result
+N3 false equality                  today=invalid     (reported invalid) desired=invalid
+    first unmet: derivation@L1 the two sides are not exactly equal
+N4 invented constraint             today=unsupported (reported unsupported) desired=unsupported
+    first unmet: derivation@L1 the route certifies this submission in aggregate only; no per-claim evidence exists for this claim
+L1 SYMBOLIC LEAK (2x+17)-11        today=verified    (reported verified (leak)) desired=unsupported or justified-partition
+L2 symbolic pad +17-17             today=unsupported (reported unsupported) desired=unsupported
+    first unmet: grounding@L2 the number 17 comes from neither the task data nor an earlier verified result
+all reproduced as reported

@@ -1,0 +1,1951 @@
+{
+ "id": "cbse-ncert-mathematics-grade-4",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 4,
+ "title": "Maths Mela: Textbook of Mathematics for Grade 4 — Grade 4 Mathematics (CBSE / NCERT)",
+ "hash": "ee6d5b17",
+ "source": {
+  "kind": "textbook",
+  "title": "Maths Mela: Textbook of Mathematics for Grade 4",
+  "edition": "First Edition March 2025 (Chaitra 1947); Reprint 2026-27; ISBN 978-93-5729-703-5",
+  "publisher": "NCERT",
+  "board": "CBSE (NCERT textbooks)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/cbse-g04.json. Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://www.ncert.nic.in/textbook/pdf/demm1ps.pdf https://www.ncert.nic.in/textbook/pdf/demm101.pdf https://ciet.ncert.gov.in/audio-book/158 https://edustud.nic.in/edu/Syllabus_2026_27/4/4_math_english_2026_27.pdf. Notes: CBSE does not publish its own Classes 1-5 mathematics syllabus; CBSE schools follow the NCERT textbooks. The 2026-27 prescription was confirmed via official government split-up syllabi (Delhi Directorate of Education; KVS where available) and the NCERT reprint 2026-27 label. NCERT's 'Learning Outcomes at the Elementary Stage' (tilops101.pdf) could not be opened (robots-blocked); outcomes are written in my own words from the chapter content and the official DoE/KVS split-up outcomes. Outcomes are not copied from the textbook; questionTypes and difficulty are my judgement.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "cbse-g04-c03",
+     "number": 3,
+     "title": "Pattern Around Us",
+     "outcomes": [
+      {
+       "id": "cbse-g04-c03-o02",
+       "text": "Classify numbers as even or odd by pairing and by the last digit.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.even-odd",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, set)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c03-s01",
+       "number": "3.1",
+       "title": "Let Us Count",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c03-o01",
+         "text": "Count arranged collections efficiently by spotting equal groups.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.equal-groups",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c03-s02",
+       "number": "3.2",
+       "title": "Patterns with Money",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c03-o03",
+         "text": "Find and describe patterns on a 1-100 number grid.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.pattern-rules",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; pattern, written-explanation)."
+         }
+        },
+        {
+         "id": "cbse-g04-c03-o04",
+         "text": "Show the same amount of money with different combinations of notes and coins.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.money-totals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; money, set)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c03-s03",
+       "number": "3.3",
+       "title": "Crayons Arrangement",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g04-c04",
+     "number": 4,
+     "title": "Thousands Around Us",
+     "outcomes": [
+      {
+       "id": "cbse-g04-c04-o01",
+       "text": "Read and write four-digit numbers in numerals, words and expanded form using a Th-H-T-O table.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.thousands",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+       }
+      },
+      {
+       "id": "cbse-g04-c04-o03",
+       "text": "Locate and compare four-digit numbers on number lines with different scales.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.number-line",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "cbse-g04-c04-o05",
+       "text": "Count how many whole numbers lie between two given four-digit numbers.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.number-line",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.thousands",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c04-s01",
+       "number": "4.1",
+       "title": "1000s AROUND US",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c04-s02",
+       "number": "4.2",
+       "title": "My country",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c04-s03",
+       "number": "4.3",
+       "title": "Let Us Break Up One-Thousand",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c04-s04",
+       "number": "4.4",
+       "title": "Grouping and Regrouping",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c04-o02",
+         "text": "Group and regroup ones, tens and hundreds, and find how much more is needed to make 1000.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.hundreds",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.thousands",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c04-s05",
+       "number": "4.5",
+       "title": "Numbers Beyond 1000 (One Thousand)",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c04-s06",
+       "number": "4.6",
+       "title": "Number Line",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c04-s07",
+       "number": "4.7",
+       "title": "Find Me!",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c04-s08",
+       "number": "4.8",
+       "title": "COMPARING NUMBERS",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c04-o04",
+         "text": "Compare and order four-digit numbers using < and > by comparing place values from the left.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.compare-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.large-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; true-false, ordered-list)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c04-s09",
+       "number": "4.9",
+       "title": "CHALLENGE!",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g04-c05",
+     "number": 5,
+     "title": "Sharing and Measuring",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c05-s01",
+       "number": "5.1",
+       "title": "PARTS AND WHOLES",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c05-s02",
+       "number": "5.2",
+       "title": "Many Ways to Make Halves and Quarters",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c05-o01",
+         "text": "Divide a shape into halves or quarters in several ways and check that the parts are equal.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-models",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MLY.frac.same-whole",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; fraction, diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c05-s03",
+       "number": "5.3",
+       "title": "DING DONG BELL!!",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c05-s04",
+       "number": "5.4",
+       "title": "DREAM DOSA DESIGNER!!",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c05-s05",
+       "number": "5.5",
+       "title": "Let Us Find Fractions in Our Surroundings",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c05-o02",
+         "text": "Name unit fractions that come from sharing a whole equally and explain that more sharers give smaller shares.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-comparison",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.fraction-models",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, multiple-choice)."
+         }
+        },
+        {
+         "id": "cbse-g04-c05-o03",
+         "text": "Build fractions such as 3/8 from unit fractions and add unit fractions with the same denominator.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-add-like",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.fraction-models",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+         }
+        },
+        {
+         "id": "cbse-g04-c05-o04",
+         "text": "Find a fraction of a collection, such as one-quarter of 12 objects.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.fraction-of-collection",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+         }
+        },
+        {
+         "id": "cbse-g04-c05-o05",
+         "text": "Recognise equal fractions made by repeated folding, such as 1/3 and 2/6.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.equivalent-fractions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MLY.frac.check-equal",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, true-false)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c05-s06",
+       "number": "5.6",
+       "title": "My Flower Garden",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g04-c09",
+     "number": 9,
+     "title": "Equal Groups",
+     "outcomes": [
+      {
+       "id": "cbse-g04-c09-o01",
+       "text": "Represent multiplication as repeated addition and as arrays of equal rows.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.equal-groups",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+       }
+      },
+      {
+       "id": "cbse-g04-c09-o02",
+       "text": "Recall multiplication facts up to 10 x 10.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.multiplication-tables",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MLY.mult.facts-6-9",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "cbse-g04-c09-o03",
+       "text": "Divide by equal sharing and grouping and relate division to multiplication.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.division-remainders",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.sharing",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "cbse-g04-c09-o04",
+       "text": "Solve word problems on equal groups by choosing multiplication or division.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.operation-choice",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g04-c10",
+     "number": 10,
+     "title": "Elephants, Tigers, and Leopards",
+     "outcomes": [
+      {
+       "id": "cbse-g04-c10-o02",
+       "text": "Subtract four-digit numbers with regrouping to find increases and decreases.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.multi-digit-add-subtract",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+       }
+      },
+      {
+       "id": "cbse-g04-c10-o03",
+       "text": "Round to the nearest ten or hundred to estimate an answer before calculating.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.rounding",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.estimate-check",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; estimation, numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c10-s01",
+       "number": "10.1",
+       "title": "NIM Game (2 Player Game)",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c10-o05",
+         "text": "Find winning positions in a two-player adding game (NIM).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.puzzle-strategy",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c10-s02",
+       "number": "10.2",
+       "title": "Addition Chart",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c10-o04",
+         "text": "Explore patterns in an addition chart and in reverse-and-add sums, including odd/even rows.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.pattern-rules",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.even-odd",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; pattern, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c10-s03",
+       "number": "10.3",
+       "title": "Reverse and Add",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c10-o01",
+         "text": "Add four-digit numbers with regrouping in census-style word problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.multi-digit-add-subtract",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c10-s04",
+       "number": "10.4",
+       "title": "How Many Animals?",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c10-s05",
+       "number": "10.5",
+       "title": "More or Less?",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g04-c13",
+     "number": 13,
+     "title": "The Transport Museum",
+     "outcomes": [
+      {
+       "id": "cbse-g04-c13-o03",
+       "text": "Multiply two-digit numbers using partial products.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.multi-multiplication",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "cbse-g04-c13-o05",
+       "text": "Solve ticket and money problems that need multiplication.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.multi-step",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; word-problem, money)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c13-s01",
+       "number": "13.1",
+       "title": "Mystery Matrix",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c13-s02",
+       "number": "13.2",
+       "title": "Constructing Tables",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c13-s03",
+       "number": "13.3",
+       "title": "Making tables by splitting into equal groups",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c13-o01",
+         "text": "Build new multiplication tables (such as x14, x15) by splitting, doubling and halving known facts.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MLY.mult.derive",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c13-s04",
+       "number": "13.4",
+       "title": "Multiples of 10",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c13-s05",
+       "number": "13.5",
+       "title": "A Day at the Transport Museum",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c13-s06",
+       "number": "13.6",
+       "title": "Dividing by 10 and 100",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c13-o04",
+         "text": "Divide by 10, 100 and by small numbers, finding quotient and remainder.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.division-remainders",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.long-division",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.multiply-divide-powers-of-ten",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c13-s07",
+       "number": "13.7",
+       "title": "Multiples of 100",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c13-o02",
+         "text": "Multiply by 10, 100 and their multiples using place value.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.multiply-divide-powers-of-ten",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c13-s08",
+       "number": "13.8",
+       "title": "Chinnu's Coins",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g04-c01",
+     "number": 1,
+     "title": "Shapes Around Us",
+     "outcomes": [
+      {
+       "id": "cbse-g04-c01-o05",
+       "text": "Identify the centre, radius and diameter of a circle.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.circles",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, measurement-with-unit)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c01-s01",
+       "number": "1.1",
+       "title": "Right Angles",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c01-o02",
+         "text": "Identify right angles in objects and figures and check them with a folded-paper right-angle tool.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.angles-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, true-false)."
+         }
+        },
+        {
+         "id": "cbse-g04-c01-o04",
+         "text": "Investigate which straw shapes are rigid and count right angles in triangles and quadrilaterals, recognising a square as a special rectangle.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.shape-properties",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c01-s02",
+       "number": "1.2",
+       "title": "Acute and Obtuse Angles",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c01-o03",
+         "text": "Classify angles as acute, right or obtuse and draw each kind on a dot grid.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.angles-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c01-s03",
+       "number": "1.3",
+       "title": "Shapes with Straws",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c01-o01",
+         "text": "Describe and classify 3D shapes by their faces, edges and corners and by flat or curved surfaces.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.shape-properties",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, set)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-geometry",
+      "number": 2,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "cbse-g04-c02",
+     "number": 2,
+     "title": "Hide and Seek",
+     "outcomes": [
+      {
+       "id": "cbse-g04-c02-o01",
+       "text": "Match top, front and side views to objects and block buildings, and draw simple views.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.nets",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.geometry.solid-views",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, diagram-drawing)."
+       }
+      },
+      {
+       "id": "cbse-g04-c02-o02",
+       "text": "Describe positions in a seating layout using rows, columns and ordinal words.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.maps-directions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.geometry.positions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, coordinate)."
+       }
+      },
+      {
+       "id": "cbse-g04-c02-o04",
+       "text": "Read a simple top-view map, identify landmarks and give route directions with turns.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.maps-directions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; written-explanation, multiple-choice)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c02-s01",
+       "number": "2.1",
+       "title": "WHERE ARE YOU HIDING?",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c02-s02",
+       "number": "2.2",
+       "title": "Boxy Buldings",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c02-s03",
+       "number": "2.3",
+       "title": "Cat Finds Jagat",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c02-o03",
+         "text": "Locate objects on a grid from clues and describe paths with left/right/up/down moves, finding a shorter path.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.maps-directions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; coordinate, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c02-s04",
+       "number": "2.4",
+       "title": "Grid Game",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c02-s05",
+       "number": "2.5",
+       "title": "Grid Game — Treasure Hunt",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c02-s06",
+       "number": "2.6",
+       "title": "Drone Around the School",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-geometry",
+      "number": 2,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "cbse-g04-c11",
+     "number": 11,
+     "title": "Fun with Symmetry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c11-s01",
+       "number": "11.1",
+       "title": "Ink Design",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c11-o02",
+         "text": "Predict fold-and-cut designs and complete figures so they are symmetrical about a line.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.symmetry-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c11-s02",
+       "number": "11.2",
+       "title": "Making a paper airplane",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c11-s03",
+       "number": "11.3",
+       "title": "Holes and Cuts",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c11-s04",
+       "number": "11.4",
+       "title": "Symmetry in shapes",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c11-o01",
+         "text": "Find and count lines of symmetry in shapes and designs.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.symmetry-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c11-s05",
+       "number": "11.5",
+       "title": "Games with a Mirror",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c11-o03",
+         "text": "Describe mirror images of letters, digits and words.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.symmetry-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c11-s06",
+       "number": "11.6",
+       "title": "Tiling the Tiles",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c11-o04",
+         "text": "Identify the repeating unit in a tiling and extend it without gaps or overlaps using slides, flips and turns.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.shape-tiling",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; pattern, diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c11-s07",
+       "number": "11.7",
+       "title": "Tiles at the Tile Shop",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-geometry",
+      "number": 2,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "cbse-g04-c06",
+     "number": 6,
+     "title": "Measuring Length",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c06-s01",
+       "number": "6.1",
+       "title": "Measuring is Fun",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c06-o01",
+         "text": "Estimate lengths in metres, half metres and quarter metres and check by measuring.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.standard-length",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.estimate-check",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; estimation, measurement-with-unit)."
+         }
+        },
+        {
+         "id": "cbse-g04-c06-o04",
+         "text": "Find the perimeter of a closed figure by measuring its boundary and draw shapes with a given perimeter on a dot grid.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.perimeter-intro",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; measurement-with-unit, diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c06-s02",
+       "number": "6.2",
+       "title": "Long Jump",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c06-s03",
+       "number": "6.3",
+       "title": "Guess the Length",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c06-o03",
+         "text": "Convert between metres and centimetres and compare lengths written as m and cm.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.length-conversion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, true-false)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c06-s04",
+       "number": "6.4",
+       "title": "Measuring Small Things",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c06-o02",
+         "text": "Measure small objects in centimetres with a ruler.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.standard-length",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c06-s05",
+       "number": "6.5",
+       "title": "Metre and Centimetres",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c06-s06",
+       "number": "6.6",
+       "title": "Fencing and Lacing",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-measurement",
+      "number": 3,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "cbse-g04-c08",
+     "number": 8,
+     "title": "Weigh it, Pour it",
+     "outcomes": [
+      {
+       "id": "cbse-g04-c08-o01",
+       "text": "Estimate and measure weights in kilograms and grams.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.standard-mass",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, estimation)."
+       }
+      },
+      {
+       "id": "cbse-g04-c08-o02",
+       "text": "Relate 1 kg to parts such as 500 g, 250 g and 100 g and find how many parts make a kilogram.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.unit-conversions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c08-s01",
+       "number": "8.1",
+       "title": "Fun at Vegetable Market!",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c08-s02",
+       "number": "8.2",
+       "title": "Weighing Machines",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c08-s03",
+       "number": "8.3",
+       "title": "Boxes of Sweet",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c08-s04",
+       "number": "8.4",
+       "title": "Measuring Capacity",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c08-o03",
+         "text": "Measure and compare capacities in litres and millilitres against 1 litre.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.capacity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, multiple-choice)."
+         }
+        },
+        {
+         "id": "cbse-g04-c08-o04",
+         "text": "Solve problems with weight and capacity, such as water lost from a dripping tap over a day or week.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.compute-with-measures",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.multi-step",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c08-s05",
+       "number": "8.5",
+       "title": "Water Conservation in Everyday Life",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c08-s06",
+       "number": "8.6",
+       "title": "Containers Used for Measuring Capacity",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-measurement",
+      "number": 3,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "cbse-g04-c12",
+     "number": 12,
+     "title": "Ticking Clocks and Turning Calendar",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c12-s01",
+       "number": "12.1",
+       "title": "How many hours in a day?",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c12-o01",
+         "text": "Use a calendar to find days in a month, identify leap years, write dates as DD/MM/YYYY and find ages and durations in days.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.calendar",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+         }
+        },
+        {
+         "id": "cbse-g04-c12-o02",
+         "text": "Convert times between the 12-hour (a.m./p.m.) and 24-hour formats.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.24-hour-clock",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; time)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c12-s02",
+       "number": "12.2",
+       "title": "Hours and minutes",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c12-o03",
+         "text": "Calculate elapsed time in hours and minutes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.elapsed-time",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; time, word-problem)."
+         }
+        },
+        {
+         "id": "cbse-g04-c12-o04",
+         "text": "Read an analogue clock to the minute and relate hours, half hours and quarter hours to minutes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.clock",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.time-unit-conversion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; time, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-measurement",
+      "number": 3,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "cbse-g04-c14",
+     "number": 14,
+     "title": "Data Handling",
+     "outcomes": [
+      {
+       "id": "cbse-g04-c14-o01",
+       "text": "Collect data with a survey and organise it with tally marks in a frequency table.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.tables",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; data-table)."
+       }
+      },
+      {
+       "id": "cbse-g04-c14-o02",
+       "text": "Read and complete pictographs and tables and find totals and the largest category.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.pictographs",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; data-table, numeric)."
+       }
+      },
+      {
+       "id": "cbse-g04-c14-o03",
+       "text": "Interpret a two-way table, such as children who play only one game, both or neither.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.tables",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; data-table, numeric)."
+       }
+      },
+      {
+       "id": "cbse-g04-c14-o04",
+       "text": "Represent data in a simple bar graph and read it.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.bar-charts",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; data-table, graph-sketch)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c14-s01",
+       "number": "14.1",
+       "title": "Bal Mela",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c14-s02",
+       "number": "14.2",
+       "title": "Colourful Golas",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c14-s03",
+       "number": "14.3",
+       "title": "Chess or Cricket",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-statistics",
+      "number": 4,
+      "title": "Data handling and statistics"
+     }
+    },
+    {
+     "id": "cbse-g04-c07",
+     "number": 7,
+     "title": "The Cleanest Village",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g04-c07-s01",
+       "number": "7.1",
+       "title": "My School Trip",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c07-s02",
+       "number": "7.2",
+       "title": "Daisy and Lou Go Shopping",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c07-o03",
+         "text": "Solve shopping problems involving costs, amounts paid, balance and combinations of items within Rs 1000.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.money-change",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.multi-step",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; money, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c07-s03",
+       "number": "7.3",
+       "title": "A Strange Puzzle!",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c07-s04",
+       "number": "7.4",
+       "title": "Add Up",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c07-o01",
+         "text": "Add two- and three-digit numbers with regrouping and check by estimating.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.multi-digit-add-subtract",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c07-s05",
+       "number": "7.5",
+       "title": "Subtract It",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c07-o02",
+         "text": "Subtract two- and three-digit numbers with regrouping and check by estimating.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.multi-digit-add-subtract",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.estimate-check",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c07-s06",
+       "number": "7.6",
+       "title": "Number Pair Hunt",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g04-c07-s07",
+       "number": "7.7",
+       "title": "The Missing Digits",
+       "outcomes": [
+        {
+         "id": "cbse-g04-c07-o04",
+         "text": "Find missing digits in addition and subtraction and solve number-placement puzzles.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.missing-number",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.puzzle-strategy",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-reasoning",
+      "number": 5,
+      "title": "Mathematical reasoning"
+     }
+    }
+   ]
+  }
+ ]
+}

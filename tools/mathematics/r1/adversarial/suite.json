@@ -1,0 +1,3304 @@
+[
+ {
+  "id": "d1-01",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1=2",
+  "why": "bare negative exponent: 1/x=2, x != 0",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1/2"
+   ],
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-02",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^(-1)=2",
+  "why": "parenthesised negative exponent",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1/2"
+   ],
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-03",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x+1)^-1=1",
+  "why": "negative exponent of a linear binomial; pole at -1, solution 0",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "-1"
+   ]
+  }
+ },
+ {
+  "id": "d1-04",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x-2)^(-1)=3",
+  "why": "pole at 2, solution 7/3",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "7/3"
+   ],
+   "excluded": [
+    "2"
+   ]
+  }
+ },
+ {
+  "id": "d1-05",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "2*x^-1=1",
+  "why": "coefficient times x^-1",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-06",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1+1=0",
+  "why": "x^-1 in a sum; x=-1",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "-1"
+   ],
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-07",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1=x^-1",
+  "why": "identity on R minus {0}, not all reals",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-08",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1*x=1",
+  "why": "written denominator x cancels but x != 0 stays: identity on domain minus 0",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-09",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x*x^-1=1",
+  "why": "same, factors swapped",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-10",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1*x=2",
+  "why": "after cancelling 1=2: none (not 'x=anything')",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-11",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x-1)^-1*(x-1)=2",
+  "why": "none, excluded {1}",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d1-12",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1*x^2=x",
+  "why": "x^-1*x^2 = x only for x != 0: identity on domain",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-13",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^2*x^-2=1",
+  "why": "identity on domain, x != 0",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-14",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^(1-3)*x=1",
+  "why": "exponent written as constant expression 1-3 = -2; reduces to 1/x=1 -> x=1",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1"
+   ],
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-15",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^(1-3)=1/x^2",
+  "why": "identity on domain; exponent expression -2",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-16",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1=x^-1+x",
+  "why": "candidate x=0 equals the excluded value -> none",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-17",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x-1)^-1=(x-1)^-1*x",
+  "why": "candidate x=1 is excluded -> none",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d1-18",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1+x^-2=0",
+  "why": "(x+1)/x^2=0 -> -1, excluded 0",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "-1"
+   ],
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-19",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1-(x-1)^-1=0",
+  "why": "-1/(x(x-1))=0 -> none, excluded {0,1}",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "0",
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d1-20",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1=(x+1)^-1",
+  "why": "none; excluded {-1,0}",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-21",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1+(x-2)^-1=2*(x-1)*x^-1*(x-2)^-1",
+  "why": "identity on R minus {0,2}",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "0",
+    "2"
+   ]
+  }
+ },
+ {
+  "id": "d1-22",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x^2-1)^-1=1/(x-1)*1/(x+1)",
+  "why": "identity on R minus {-1,1}",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d1-23",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x^2-1)^-1=(x+1)^-1",
+  "why": "candidates -1 (excluded) and 2",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d1-24",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x-1)^-2=(x-1)^-1",
+  "why": "candidates 1 (excluded) and 2",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d1-25",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "3*(x-1)^-1=6*(2*x-2)^-1",
+  "why": "identity on R minus {1}",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d1-26",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(2*x)^-1=1",
+  "why": "1/(2x)=1 -> 1/2, excluded 0",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1/2"
+   ],
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d1-27",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x*(x-1))^-1=2/x",
+  "why": "1/(x(x-1))=2/x -> 3/2, excluded {0,1}",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "3/2"
+   ],
+   "excluded": [
+    "0",
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d1-28",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "2^-1*x/(x-1)=1",
+  "why": "numeric negative power is just 1/2; only x != 1",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d1-29",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^0/(x-1)=1",
+  "why": "x^0 requires x != 0: excluded {0,1}; solution 2",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "0",
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d1-30",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x+1)^-1=(x+1)^-1*(x-1)^0",
+  "why": "(x-1)^0 requires x != 1: identity on R minus {-1,1}",
+  "tags": [],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d1-31",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^0=1",
+  "why": "base^0 requires base != 0: identity on R minus {0}",
+  "tags": [
+   "no-variable-denominator"
+  ],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "0"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-32",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x-1)^0=1",
+  "why": "identity on R minus {1}",
+  "tags": [
+   "no-variable-denominator"
+  ],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-33",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "1/x^-1=3",
+  "why": "1/(x^-1)=x; written pole at 0",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "3"
+    ],
+    "excluded": [
+     "0"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-34",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(1/x)^-1=3",
+  "why": "(1/x)^-1 = x; written restriction x != 0",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "3"
+    ],
+    "excluded": [
+     "0"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-35",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "1/(1/x)=2",
+  "why": "nested denominator: x != 0 although 1/x is never 0",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "0"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-36",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "1/(x-1/x)=1/(x+1)",
+  "why": "x-1/x = (x^2-1)/x -> excluded {-1,0,1}; none",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "none",
+    "solution": [],
+    "excluded": [
+     "-1",
+     "0",
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-37",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "1/(x-1/x)=x/(x^2-1)",
+  "why": "identity on R minus {-1,0,1}; 0 is excluded only via the nested 1/x",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "-1",
+     "0",
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-38",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "1/(x-1/x)=2/(x+1)",
+  "why": "solution 2, excluded {-1,0,1}",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "2"
+    ],
+    "excluded": [
+     "-1",
+     "0",
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-39",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x/(x-1))^-1=2",
+  "why": "(x-1)/x=2 -> -1; excluded {0,1} (base != 0 and base defined)",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "-1"
+    ],
+    "excluded": [
+     "0",
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-40",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x/(x-1))^-2=1",
+  "why": "(x-1)^2/x^2=1 -> 1/2; excluded {0,1}",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "excluded": [
+     "0",
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-41",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x/(x-1))^-2=4",
+  "why": "two candidates -1 and 1/3 (reduced degree 2: refusal tolerated)",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "-1",
+     "1/3"
+    ],
+    "excluded": [
+     "0",
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-42",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "1/(1/x-1)=1",
+  "why": "x/(1-x)=1 -> 1/2; divisor 1/x-1 zero at 1 and undefined at 0",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "1/2"
+    ],
+    "excluded": [
+     "0",
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-43",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(1/(x-1))/(1/x)=1",
+  "why": "x/(x-1)=1 -> none; excluded {0,1} (divisor 1/x undefined at 0)",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "none",
+    "solution": [],
+    "excluded": [
+     "0",
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-44",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x/(x-1))/(x/(x+1))=1",
+  "why": "divisor zero at 0; (x+1)/(x-1)=1 -> none; excluded {-1,0,1}",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "none",
+    "solution": [],
+    "excluded": [
+     "-1",
+     "0",
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-45",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "1/(x-1)^-1=2",
+  "why": "1/((x-1)^-1)=x-1 -> 3; excluded {1}",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "3"
+    ],
+    "excluded": [
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d1-r1",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-4=1",
+  "why": "denominator x^4 has 4 linear factors (>3): outside scope",
+  "tags": [
+   "scope"
+  ],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d1-r2",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "1/(x-1)=0^0",
+  "why": "0^0 undefined everywhere",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED"
+   ]
+  }
+ },
+ {
+  "id": "d1-r3",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "1/(x-1)=0^-1",
+  "why": "0^-1 = 1/0 undefined everywhere",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED"
+   ]
+  }
+ },
+ {
+  "id": "d1-r4",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x-x)^0=1",
+  "why": "base x-x is 0 everywhere, base^0 needs base != 0: undefined everywhere",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED"
+   ]
+  }
+ },
+ {
+  "id": "d1-r5",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1=1/(x^2+1)",
+  "why": "complex poles of 1/(x^2+1): not an exactly resolvable rational domain",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED",
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d1-r6",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1=1/(x^2-2)",
+  "why": "irrational poles +-sqrt2",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED",
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d1-r7",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "(x^2-2)^-1=1",
+  "why": "negative exponent whose base has irrational zeros",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED",
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d1-r8",
+  "defect": "D1",
+  "kind": "equation",
+  "text": "x^-1=x^2",
+  "why": "1=x^3: reduced numerator degree 3 with irrational root",
+  "tags": [
+   "scope"
+  ],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d3-ok01",
+  "defect": "D3",
+  "kind": "equation",
+  "text": " 1 /( x - 1 ) = 2 ",
+  "why": "spaces between tokens are allowed",
+  "tags": [
+   "lookalike"
+  ],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "3/2"
+   ],
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d3-ok02",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=2.5",
+  "why": "decimal literal on rhs, 7/5",
+  "tags": [
+   "lookalike"
+  ],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "7/5"
+   ],
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d3-ok03",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=1.0",
+  "why": "decimal 1.0",
+  "tags": [
+   "lookalike"
+  ],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d3-ok04",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "2*x/(x-1)=1",
+  "why": "explicit * where '2x' would be a parse error",
+  "tags": [
+   "lookalike"
+  ],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "-1"
+   ],
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d3-ok05",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "2*(x-1)/(x-1)=2",
+  "why": "identity on R minus {1}",
+  "tags": [
+   "lookalike"
+  ],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d3-ok06",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "x/(x-1)=0.5",
+  "why": "leading-zero decimal accepted, '.5' is not",
+  "tags": [
+   "lookalike"
+  ],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "-1"
+   ],
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d3-ok07",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "(1)/((x-1))=2",
+  "why": "redundant parentheses",
+  "tags": [
+   "lookalike"
+  ],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "3/2"
+   ],
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d3-ok08",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1 / ( x - 1 ) = 1 / 2",
+  "why": "spaced tokens, rational rhs",
+  "tags": [
+   "lookalike"
+  ],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "3"
+   ],
+   "excluded": [
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d3-01",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "2x/(x-1)=1",
+  "why": "implicit multiplication number*variable",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-02",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "2(x-1)/(x-1)=2",
+  "why": "implicit multiplication number*parenthesis",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-03",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "x/(x-1)=.5",
+  "why": "decimal without leading digit",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-04",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=1e0",
+  "why": "scientific notation",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-05",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "+1/(x-1)=2",
+  "why": "unary plus",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-06",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=y",
+  "why": "second unknown",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-07",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=2=3",
+  "why": "multiple equals signs",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-08",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1 0/(x-1)=10/(x-1)",
+  "why": "whitespace inside a number must not become 10",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-09",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=1 0",
+  "why": "whitespace inside number on rhs",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-10",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=2.",
+  "why": "trailing decimal point",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-11",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "=2",
+  "why": "empty left side",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-12",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=",
+  "why": "empty right side",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-13",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "",
+  "why": "empty input",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-14",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)",
+  "why": "no equals sign",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-15",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1=2",
+  "why": "unbalanced: missing )",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-16",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "((1/x)=2",
+  "why": "unbalanced: extra (",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-17",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/()=2",
+  "why": "empty parentheses",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-18",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1//x=1",
+  "why": "double operator",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-19",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "a/(x-1)=2",
+  "why": "unknown letter a",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-20",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "X/(X-1)=2",
+  "why": "upper-case X is not the variable",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-21",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=2x",
+  "why": "implicit multiplication on rhs",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-22",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x−1)=2",
+  "why": "unicode minus sign",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-23",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=2*",
+  "why": "dangling operator",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-24",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=x^",
+  "why": "missing exponent",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-25",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=x^(1/2)",
+  "why": "fractional exponent",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_OPERATOR"
+   ]
+  }
+ },
+ {
+  "id": "d3-26",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=x^x",
+  "why": "variable exponent",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_OPERATOR"
+   ]
+  }
+ },
+ {
+  "id": "d3-27",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=2^x",
+  "why": "variable in exponent",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_OPERATOR"
+   ]
+  }
+ },
+ {
+  "id": "d3-28",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=sqrt(x)",
+  "why": "sqrt",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_OPERATOR"
+   ]
+  }
+ },
+ {
+  "id": "d3-29",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=|x|",
+  "why": "absolute value",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_OPERATOR"
+   ]
+  }
+ },
+ {
+  "id": "d3-30",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=x!",
+  "why": "factorial",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_OPERATOR"
+   ]
+  }
+ },
+ {
+  "id": "d3-31",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=sin(x)",
+  "why": "trig function",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_OPERATOR"
+   ]
+  }
+ },
+ {
+  "id": "d3-32",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=foo(x)",
+  "why": "unknown function name",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_OPERATOR",
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-33",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "x/0=1",
+  "why": "division by constant zero",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED"
+   ]
+  }
+ },
+ {
+  "id": "d3-34",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-x)=1",
+  "why": "denominator identically zero",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED"
+   ]
+  }
+ },
+ {
+  "id": "d3-35",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "x/(x-1)=1/0",
+  "why": "1/0 on rhs",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED"
+   ]
+  }
+ },
+ {
+  "id": "d3-36",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=1/(x-1-x+1)",
+  "why": "second denominator simplifies to 0",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED"
+   ]
+  }
+ },
+ {
+  "id": "d3-37",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "x+1=2",
+  "why": "no variable denominator",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d3-38",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/2=0.5",
+  "why": "no variable at all",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d3-39",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=x",
+  "why": "reduced degree 2 with irrational roots",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d3-40",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "x^3/(x-1)=2",
+  "why": "numerator degree 3",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d3-41",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/((x-1)*(x+1)*(x+2)*(x+3))=1",
+  "why": "denominator with 4 linear factors",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d3-42",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x^2+1)=1",
+  "why": "denominator without real zeros (complex poles)",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED",
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d3-43",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x^2-2)=1",
+  "why": "denominator with irrational zeros",
+  "tags": [],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "DOMAIN_UNRESOLVED",
+    "UNSUPPORTED_EXPRESSION"
+   ]
+  }
+ },
+ {
+  "id": "d3-long1",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=2+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0+0",
+  "why": "very long but valid sum of zeros",
+  "tags": [
+   "long"
+  ],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR",
+    "UNSUPPORTED_OPERATOR",
+    "UNSUPPORTED_EXPRESSION",
+    "DOMAIN_UNRESOLVED"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d3-long2",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((x-1)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))=2",
+  "why": "1000 nested parentheses",
+  "tags": [
+   "long"
+  ],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR",
+    "UNSUPPORTED_OPERATOR",
+    "UNSUPPORTED_EXPRESSION",
+    "DOMAIN_UNRESOLVED"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "3/2"
+    ],
+    "excluded": [
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d3-long3",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+  "why": "400-digit integer rhs: x = 1 + 1/N",
+  "tags": [
+   "long"
+  ],
+  "must_answer": false,
+  "must_refuse": false,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR",
+    "UNSUPPORTED_OPERATOR",
+    "UNSUPPORTED_EXPRESSION",
+    "DOMAIN_UNRESOLVED"
+   ],
+   "if_answered": {
+    "class": "unique",
+    "solution": [
+     "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000/9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
+    ],
+    "excluded": [
+     "1"
+    ]
+   }
+  }
+ },
+ {
+  "id": "d3-long4",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((1",
+  "why": "5000 unclosed parentheses",
+  "tags": [
+   "long"
+  ],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-long5",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "why": "3000-letter identifier",
+  "tags": [
+   "long"
+  ],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d3-long6",
+  "defect": "D3",
+  "kind": "equation",
+  "text": "1/(x-1)=++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++1",
+  "why": "5000 unary pluses",
+  "tags": [
+   "long"
+  ],
+  "must_answer": false,
+  "must_refuse": true,
+  "expect": {
+   "refusal": [
+    "PARSE_ERROR"
+   ]
+  }
+ },
+ {
+  "id": "d4-o01",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.001/(x-1)=0.002/(x+1)",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "3"
+   ],
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o02",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "1/(0.25*x)=8",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1/2"
+   ],
+   "excluded": [
+    "0"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o03",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.1/(x-1)=0.2",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "3/2"
+   ],
+   "excluded": [
+    "1"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o04",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "12.5/(x-1)=25",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "3/2"
+   ],
+   "excluded": [
+    "1"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o05",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "3.75/(x+2)=1.25",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1"
+   ],
+   "excluded": [
+    "-2"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o06",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "100.0625/(x-1)=1",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1617/16"
+   ],
+   "excluded": [
+    "1"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o07",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.1/(x-0.1)=1",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1/5"
+   ],
+   "excluded": [
+    "1/10"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o08",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "1/(x-0.5)=2",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1"
+   ],
+   "excluded": [
+    "1/2"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o09",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.1*x/(x-0.3)=0.2",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "3/5"
+   ],
+   "excluded": [
+    "3/10"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o10",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.7/(x-0.7)=0.7/(x-0.7)",
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "7/10"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o11",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.1/(x-0.1)=0.3/(x-0.3)",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "1/10",
+    "3/10"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o12",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "1/(x-0.1)=1/(x-0.1)+0.000001",
+  "expect": {
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1/10"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o13",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.5/(x-1)+0.25/(x-1)=0.75/(x-1)",
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "1"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o14",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.3/(x-0.3)=1",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "3/5"
+   ],
+   "excluded": [
+    "3/10"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o15",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "3.14159/(x-1)=3.14159",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "1"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o16",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "2.5*x^-1=5",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1/2"
+   ],
+   "excluded": [
+    "0"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o17",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "x/(x-0.01)=100",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1/99"
+   ],
+   "excluded": [
+    "1/100"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o18",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.0001/(x-1)=0.0003/(x+1)",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o19",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.1/(x-0.3)=0.2/(x-0.4)",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1/5"
+   ],
+   "excluded": [
+    "3/10",
+    "2/5"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o20",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.2/(x-0.2)=0.6/(3*x-0.6)",
+  "expect": {
+   "class": "identity-on-domain",
+   "solution": null,
+   "excluded": [
+    "1/5"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o21",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "0.07/(x-0.07)=1",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "7/50"
+   ],
+   "excluded": [
+    "7/100"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-o22",
+  "defect": "D4",
+  "kind": "oracle",
+  "text": "1/(x-0.125)=0.5",
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "17/8"
+   ],
+   "excluded": [
+    "1/8"
+   ]
+  },
+  "why": "exact decimal literals must be read as rationals, not floats"
+ },
+ {
+  "id": "d4-e01",
+  "defect": "D4",
+  "kind": "equation",
+  "text": "1/(0.25*x)=8",
+  "why": "solver (not just oracle) must keep decimals exact",
+  "tags": [
+   "decimal"
+  ],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1/2"
+   ],
+   "excluded": [
+    "0"
+   ]
+  }
+ },
+ {
+  "id": "d4-e02",
+  "defect": "D4",
+  "kind": "equation",
+  "text": "0.001/(x-1)=0.002/(x+1)",
+  "why": "solver (not just oracle) must keep decimals exact",
+  "tags": [
+   "decimal"
+  ],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "3"
+   ],
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  }
+ },
+ {
+  "id": "d4-e03",
+  "defect": "D4",
+  "kind": "equation",
+  "text": "x/(x-0.01)=100",
+  "why": "solver (not just oracle) must keep decimals exact",
+  "tags": [
+   "decimal"
+  ],
+  "must_answer": true,
+  "must_refuse": false,
+  "expect": {
+   "class": "unique",
+   "solution": [
+    "1/99"
+   ],
+   "excluded": [
+    "1/100"
+   ]
+  }
+ },
+ {
+  "id": "d2-01",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(x-1)=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "1=2*(x-1)",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "clear denominator, restriction carried",
+  "tags": []
+ },
+ {
+  "id": "d2-02",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "(x^2-1)/(x-1)=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x+1=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "cancel common factor, restriction x!=1 carried: both solution sets empty",
+  "tags": []
+ },
+ {
+  "id": "d2-03",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "(x^2-1)/(x-1)=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x+1=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "implication",
+  "truth": "valid",
+  "reason": "same step claimed as implication",
+  "tags": []
+ },
+ {
+  "id": "d2-04",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x+1=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "(x^2-1)/(x-1)=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "reverse: multiply by x-1 with restriction kept",
+  "tags": []
+ },
+ {
+  "id": "d2-05",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^-1=2",
+   "excluded": [
+    "0"
+   ]
+  },
+  "to": {
+   "eq": "1=2*x",
+   "excluded": [
+    "0"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "negative exponent cleared",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-06",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^-1*x=1",
+   "excluded": [
+    "0"
+   ]
+  },
+  "to": {
+   "eq": "1=1",
+   "excluded": [
+    "0"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "cancellation with restriction kept: identity on R minus 0",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-07",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x/(x-1)=1/(x-1)",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x=1",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "multiply by x-1, candidate 1 excluded",
+  "tags": []
+ },
+ {
+  "id": "d2-08",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x/(x-1)=3",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x^2/(x-1)^2=9",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "implication",
+  "truth": "valid",
+  "reason": "squaring is an implication: {3/2} subset of {3/2,3/4}",
+  "tags": []
+ },
+ {
+  "id": "d2-09",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^-1+x^-2=0",
+   "excluded": [
+    "0"
+   ]
+  },
+  "to": {
+   "eq": "x+1=0",
+   "excluded": [
+    "0"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "combine: (x+1)/x^2=0",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-10",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "(x-1)^-1=(x-1)^-1*x",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "1=x",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "multiply by x-1, both empty",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-11",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(1/x)=2",
+   "excluded": [
+    "0"
+   ]
+  },
+  "to": {
+   "eq": "x=2",
+   "excluded": [
+    "0"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "nested denominator simplifies",
+  "tags": [
+   "neg-exp",
+   "nested"
+  ]
+ },
+ {
+  "id": "d2-12",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^0=1",
+   "excluded": [
+    "0"
+   ]
+  },
+  "to": {
+   "eq": "1=1",
+   "excluded": [
+    "0"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "x^0=1 with x!=0 carried",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-13",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(x-1/x)=1/(x+1)",
+   "excluded": [
+    "-1",
+    "0",
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x=x-1",
+   "excluded": [
+    "-1",
+    "0",
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "closed nested state; both empty",
+  "tags": [
+   "nested"
+  ]
+ },
+ {
+  "id": "d2-14",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(x-1)+1/(x+1)=2/(x-1)",
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "2*x=2*(x+1)",
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "combine fractions; both empty",
+  "tags": []
+ },
+ {
+  "id": "d2-15",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "2/(x-1)=4/(2*x-2)",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "1=1",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "identity on R minus 1",
+  "tags": []
+ },
+ {
+  "id": "d2-16",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(x-1)=1/(x+1)",
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x+1=x-1",
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "cross-multiply; both empty",
+  "tags": []
+ },
+ {
+  "id": "d2-17",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^-2=4*x^-2",
+   "excluded": [
+    "0"
+   ]
+  },
+  "to": {
+   "eq": "1=4",
+   "excluded": [
+    "0"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "(1-4)/x^2=0: both empty",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-18",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(x-1)=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "1/(x-1)=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "identity step",
+  "tags": []
+ },
+ {
+  "id": "d2-19",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^-1=x^-1+x",
+   "excluded": [
+    "0"
+   ]
+  },
+  "to": {
+   "eq": "x=0",
+   "excluded": [
+    "0"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "root 0 is excluded: both empty",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-20",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^(1-3)*x=1",
+   "excluded": [
+    "0"
+   ]
+  },
+  "to": {
+   "eq": "x=1",
+   "excluded": [
+    "0"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "1/x=1 -> x=1",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-21",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "(x/(x-1))^-1=2",
+   "excluded": [
+    "0",
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x-1=2*x",
+   "excluded": [
+    "0",
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "valid",
+  "reason": "invert: (x-1)/x=2 -> -1",
+  "tags": [
+   "neg-exp",
+   "nested"
+  ]
+ },
+ {
+  "id": "d2-22",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "(x^2-1)/(x-1)=2",
+   "excluded": []
+  },
+  "to": {
+   "eq": "x+1=2",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "from-state omits x!=1 (the audited false accept)",
+  "tags": []
+ },
+ {
+  "id": "d2-23",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "(x^2-1)/(x-1)=2",
+   "excluded": []
+  },
+  "to": {
+   "eq": "x+1=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "from-state not closed even though to-state is fine",
+  "tags": []
+ },
+ {
+  "id": "d2-24",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(x-1)=2",
+   "excluded": []
+  },
+  "to": {
+   "eq": "1=2*(x-1)",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "from-state missing 1",
+  "tags": []
+ },
+ {
+  "id": "d2-25",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^-1=2",
+   "excluded": []
+  },
+  "to": {
+   "eq": "1=2*x",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "from-state missing 0 (negative exponent)",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-26",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^-1=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "1=2*x",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "from-state lists 1 but misses 0",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-27",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(x-1)=2",
+   "excluded": [
+    "2"
+   ]
+  },
+  "to": {
+   "eq": "1=2*(x-1)",
+   "excluded": [
+    "2"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "from-state lists a wrong value, misses 1",
+  "tags": []
+ },
+ {
+  "id": "d2-28",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(1/x)=2",
+   "excluded": []
+  },
+  "to": {
+   "eq": "x=2",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "from-state misses 0 from nested denominator",
+  "tags": [
+   "nested"
+  ]
+ },
+ {
+  "id": "d2-29",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(x-1/x)=1/(x+1)",
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x=x-1",
+   "excluded": [
+    "-1",
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "from-state misses 0",
+  "tags": [
+   "nested"
+  ]
+ },
+ {
+  "id": "d2-30",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^0=1",
+   "excluded": []
+  },
+  "to": {
+   "eq": "1=1",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "from-state misses 0 for x^0",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-31",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(x-1)=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "1/(x-1)=2",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "to-state not closed",
+  "tags": []
+ },
+ {
+  "id": "d2-32",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(x-1)=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "1/(x-1)=2",
+   "excluded": [
+    "0"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "to-state lists wrong value",
+  "tags": []
+ },
+ {
+  "id": "d2-33",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "(x^2-1)/(x-1)=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x+1=2",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "dropping restriction adds extraneous root 1",
+  "tags": []
+ },
+ {
+  "id": "d2-34",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^-1*x=1",
+   "excluded": [
+    "0"
+   ]
+  },
+  "to": {
+   "eq": "1=1",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "dropping x!=0: identity on R vs R minus 0",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-35",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/(x-1)=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "1=2*(x+1)",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "wrong algebra: -1/2 vs 3/2",
+  "tags": []
+ },
+ {
+  "id": "d2-36",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x/(x-1)=3",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x^2/(x-1)^2=9",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "squaring is not an equivalence",
+  "tags": []
+ },
+ {
+  "id": "d2-37",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^2/(x-1)^2=9",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x/(x-1)=3",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "implication",
+  "truth": "invalid",
+  "reason": "backwards implication: {3/2,3/4} not subset of {3/2}",
+  "tags": []
+ },
+ {
+  "id": "d2-38",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x/(x-1)=1/(x-1)",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x=1",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "equivalence fails: empty vs {1}",
+  "tags": []
+ },
+ {
+  "id": "d2-39",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^-1=x^-1+x",
+   "excluded": [
+    "0"
+   ]
+  },
+  "to": {
+   "eq": "x=0",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "dropped restriction readmits 0",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-40",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "x^(1-3)*x=1",
+   "excluded": []
+  },
+  "to": {
+   "eq": "x=1",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "from-state misses 0 (exponent 1-3)",
+  "tags": [
+   "neg-exp"
+  ]
+ },
+ {
+  "id": "d2-41",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "(x/(x-1))^-1=2",
+   "excluded": [
+    "1"
+   ]
+  },
+  "to": {
+   "eq": "x-1=2*x",
+   "excluded": [
+    "1"
+   ]
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "from-state misses 0",
+  "tags": [
+   "neg-exp",
+   "nested"
+  ]
+ },
+ {
+  "id": "d2-42",
+  "defect": "D2",
+  "kind": "step",
+  "from": {
+   "eq": "1/x=1/x",
+   "excluded": [
+    "0"
+   ]
+  },
+  "to": {
+   "eq": "1=1",
+   "excluded": []
+  },
+  "effect": "equivalence",
+  "truth": "invalid",
+  "reason": "dropping x!=0 changes identity domain",
+  "tags": []
+ }
+]

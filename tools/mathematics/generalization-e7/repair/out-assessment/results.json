@@ -1,0 +1,196 @@
+{
+ "note": "diagnostic evaluation on generated OpenPath questions; ground truth from an independent reference computed from the prompt text; not a blind holdout",
+ "population": {
+  "questions": 743,
+  "submissions": 16996,
+  "referenceVsGeneratorMismatches": 0
+ },
+ "falseAcceptance": {
+  "n": 0,
+  "of": 10971,
+  "rate": 0,
+  "examples": []
+ },
+ "falseRejection": {
+  "n": 0,
+  "of": 4539,
+  "rate": 0,
+  "examples": []
+ },
+ "autoGradingCoverage": {
+  "allSubmissions": {
+   "n": 15510,
+   "of": 16996,
+   "rate": 0.91257
+  },
+  "wellFormedSubmissions": {
+   "n": 15510,
+   "of": 15510,
+   "rate": 1
+  },
+  "legacyFamiliesNote": "families without an independent kernel are graded by the stored answer (legacy) and are not part of the kernel coverage figure"
+ },
+ "unresolvedRate": {
+  "onWellFormedInput": {
+   "n": 0,
+   "of": 15510,
+   "rate": 0
+  },
+  "ambiguousInputNotGraded": {
+   "n": 1486,
+   "of": 1486,
+   "rate": 1
+  },
+  "ambiguousInputGradedWrongly": {
+   "n": 0,
+   "of": 1486,
+   "rate": 0
+  }
+ },
+ "firstErrorLocalisation": {
+  "cases": 547,
+  "localised": 547,
+  "accuracy": 1,
+  "methodExaminedWhenAnswerWrong": 547
+ },
+ "rightAnswerAfterBadWorking": {
+  "n": 220,
+  "credited": 220,
+  "workingAnalysed": 0
+ },
+ "missingWorkingOfferShown": {
+  "n": 5212,
+  "of": 5212,
+  "rate": 1
+ },
+ "clarification": {
+  "unreadableThenClarifiedDecided": {
+   "n": 163,
+   "of": 163,
+   "rate": 1
+  },
+  "unreadableTwicePendingAndFallbackEligible": {
+   "n": 163,
+   "of": 163,
+   "rate": 1
+  }
+ },
+ "latencyMs": {
+  "kernelPath": {
+   "p50": 0.11,
+   "p95": 0.756,
+   "p99": 1.802,
+   "n": 16996
+  },
+  "legacyPath": {
+   "p50": 0.031,
+   "p95": 0.247,
+   "n": 477
+  }
+ },
+ "legacyFamilies": {
+  "questions": 477,
+  "verified": 60,
+  "legacy": 417,
+  "held": 0,
+  "human": 0,
+  "families": [
+   "rect",
+   "eqfrac",
+   "fadd",
+   "cint",
+   "above",
+   "alp",
+   "dist",
+   "expand",
+   "dpow",
+   "pint",
+   "subst",
+   "disc",
+   "rperim",
+   "mmul",
+   "divr",
+   "ldiv",
+   "fmulw",
+   "faddu",
+   "pct",
+   "mean4",
+   "root",
+   "vol",
+   "prop",
+   "factor"
+  ]
+ },
+ "fallback": {
+  "sampleRequestEstimate": {
+   "inputTokens": 228,
+   "outputTokens": 250,
+   "usd": 0.001478
+  },
+  "tokensPerRequestInputEstimate": 228,
+  "eligibleInThisSuite": 163,
+  "note": "no provider is called; costs are in the report"
+ },
+ "byCategory": {
+  "alt-form": {
+   "n": 4319,
+   "credited": 4319,
+   "rejected": 0,
+   "unresolved": 0,
+   "offer": 0,
+   "localised": 0,
+   "localisable": 0,
+   "examined": 0
+  },
+  "incorrect": {
+   "n": 5212,
+   "credited": 0,
+   "rejected": 5212,
+   "unresolved": 0,
+   "offer": 0,
+   "localised": 0,
+   "localisable": 0,
+   "examined": 0
+  },
+  "missing-working": {
+   "n": 5212,
+   "credited": 0,
+   "rejected": 5212,
+   "unresolved": 0,
+   "offer": 0,
+   "localised": 0,
+   "localisable": 0,
+   "examined": 0
+  },
+  "ambiguous": {
+   "n": 1486,
+   "credited": 0,
+   "rejected": 0,
+   "unresolved": 1486,
+   "offer": 0,
+   "localised": 0,
+   "localisable": 0,
+   "examined": 0
+  },
+  "first-error": {
+   "n": 547,
+   "credited": 0,
+   "rejected": 547,
+   "unresolved": 0,
+   "offer": 0,
+   "localised": 547,
+   "localisable": 547,
+   "examined": 547
+  },
+  "right-after-bad-working": {
+   "n": 220,
+   "credited": 220,
+   "rejected": 0,
+   "unresolved": 0,
+   "offer": 0,
+   "localised": 0,
+   "localisable": 0,
+   "examined": 0
+  }
+ }
+}

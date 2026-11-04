@@ -1,0 +1,544 @@
+{
+  "total": 14,
+  "classifications": {
+    "harmlessRepresentationDifference": 14
+  },
+  "cases": [
+    {
+      "id": "d7-derivative-050",
+      "notation": "∂p/∂x = 2x^1",
+      "expectedInterpretation": "first partial derivative of the named dependent with respect to the named variable",
+      "actualTypedRepresentation": {
+        "kind": "derivative",
+        "notation": "∂p/∂x = 2x^1",
+        "dependent": "p",
+        "variable": "x",
+        "order": 1,
+        "partial": true,
+        "result": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "2"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "x"
+              },
+              "exponent": 1
+            }
+          ]
+        }
+      },
+      "expectedTypedRepresentation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "x",
+        "order": 1,
+        "partial": true
+      },
+      "exactDifference": "expected duplicates dependent into functionName; actual stores the dependent identity once",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "dependent is the function-valued symbol for partial notation; duplication is not semantic"
+    },
+    {
+      "id": "d7-derivative-051",
+      "notation": "\\frac{\\partial q}{\\partial x} = 3x^2",
+      "expectedInterpretation": "first partial derivative of the named dependent with respect to the named variable",
+      "actualTypedRepresentation": {
+        "kind": "derivative",
+        "notation": "\\frac{\\partial q}{\\partial x} = 3x^2",
+        "dependent": "q",
+        "variable": "x",
+        "order": 1,
+        "partial": true,
+        "result": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "3"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "x"
+              },
+              "exponent": 2
+            }
+          ]
+        }
+      },
+      "expectedTypedRepresentation": {
+        "kind": "derivative",
+        "functionName": "q",
+        "dependent": "q",
+        "variable": "x",
+        "order": 1,
+        "partial": true
+      },
+      "exactDifference": "expected duplicates dependent into functionName; actual stores the dependent identity once",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "dependent is the function-valued symbol for partial notation; duplication is not semantic"
+    },
+    {
+      "id": "d7-derivative-052",
+      "notation": "∂R/∂x = 4x^3",
+      "expectedInterpretation": "first partial derivative of the named dependent with respect to the named variable",
+      "actualTypedRepresentation": {
+        "kind": "derivative",
+        "notation": "∂R/∂x = 4x^3",
+        "dependent": "R",
+        "variable": "x",
+        "order": 1,
+        "partial": true,
+        "result": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "4"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "x"
+              },
+              "exponent": 3
+            }
+          ]
+        }
+      },
+      "expectedTypedRepresentation": {
+        "kind": "derivative",
+        "functionName": "R",
+        "dependent": "R",
+        "variable": "x",
+        "order": 1,
+        "partial": true
+      },
+      "exactDifference": "expected duplicates dependent into functionName; actual stores the dependent identity once",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "dependent is the function-valued symbol for partial notation; duplication is not semantic"
+    },
+    {
+      "id": "d7-derivative-053",
+      "notation": "\\frac{\\partial velocity}{\\partial x} = 5x^4",
+      "expectedInterpretation": "first partial derivative of the named dependent with respect to the named variable",
+      "actualTypedRepresentation": {
+        "kind": "derivative",
+        "notation": "\\frac{\\partial velocity}{\\partial x} = 5x^4",
+        "dependent": "velocity",
+        "variable": "x",
+        "order": 1,
+        "partial": true,
+        "result": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "5"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "x"
+              },
+              "exponent": 4
+            }
+          ]
+        }
+      },
+      "expectedTypedRepresentation": {
+        "kind": "derivative",
+        "functionName": "velocity",
+        "dependent": "velocity",
+        "variable": "x",
+        "order": 1,
+        "partial": true
+      },
+      "exactDifference": "expected duplicates dependent into functionName; actual stores the dependent identity once",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "dependent is the function-valued symbol for partial notation; duplication is not semantic"
+    },
+    {
+      "id": "d7-derivative-054",
+      "notation": "∂phi/∂x = 6x^5",
+      "expectedInterpretation": "first partial derivative of the named dependent with respect to the named variable",
+      "actualTypedRepresentation": {
+        "kind": "derivative",
+        "notation": "∂phi/∂x = 6x^5",
+        "dependent": "phi",
+        "variable": "x",
+        "order": 1,
+        "partial": true,
+        "result": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "6"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "x"
+              },
+              "exponent": 5
+            }
+          ]
+        }
+      },
+      "expectedTypedRepresentation": {
+        "kind": "derivative",
+        "functionName": "phi",
+        "dependent": "phi",
+        "variable": "x",
+        "order": 1,
+        "partial": true
+      },
+      "exactDifference": "expected duplicates dependent into functionName; actual stores the dependent identity once",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "dependent is the function-valued symbol for partial notation; duplication is not semantic"
+    },
+    {
+      "id": "d7-derivative-055",
+      "notation": "\\frac{\\partial p}{\\partial t} = 2t^1",
+      "expectedInterpretation": "first partial derivative of the named dependent with respect to the named variable",
+      "actualTypedRepresentation": {
+        "kind": "derivative",
+        "notation": "\\frac{\\partial p}{\\partial t} = 2t^1",
+        "dependent": "p",
+        "variable": "t",
+        "order": 1,
+        "partial": true,
+        "result": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "2"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "t"
+              },
+              "exponent": 1
+            }
+          ]
+        }
+      },
+      "expectedTypedRepresentation": {
+        "kind": "derivative",
+        "functionName": "p",
+        "dependent": "p",
+        "variable": "t",
+        "order": 1,
+        "partial": true
+      },
+      "exactDifference": "expected duplicates dependent into functionName; actual stores the dependent identity once",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "dependent is the function-valued symbol for partial notation; duplication is not semantic"
+    },
+    {
+      "id": "d7-derivative-056",
+      "notation": "∂q/∂t = 3t^2",
+      "expectedInterpretation": "first partial derivative of the named dependent with respect to the named variable",
+      "actualTypedRepresentation": {
+        "kind": "derivative",
+        "notation": "∂q/∂t = 3t^2",
+        "dependent": "q",
+        "variable": "t",
+        "order": 1,
+        "partial": true,
+        "result": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "3"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "t"
+              },
+              "exponent": 2
+            }
+          ]
+        }
+      },
+      "expectedTypedRepresentation": {
+        "kind": "derivative",
+        "functionName": "q",
+        "dependent": "q",
+        "variable": "t",
+        "order": 1,
+        "partial": true
+      },
+      "exactDifference": "expected duplicates dependent into functionName; actual stores the dependent identity once",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "dependent is the function-valued symbol for partial notation; duplication is not semantic"
+    },
+    {
+      "id": "d7-derivative-057",
+      "notation": "\\frac{\\partial R}{\\partial t} = 4t^3",
+      "expectedInterpretation": "first partial derivative of the named dependent with respect to the named variable",
+      "actualTypedRepresentation": {
+        "kind": "derivative",
+        "notation": "\\frac{\\partial R}{\\partial t} = 4t^3",
+        "dependent": "R",
+        "variable": "t",
+        "order": 1,
+        "partial": true,
+        "result": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "4"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "t"
+              },
+              "exponent": 3
+            }
+          ]
+        }
+      },
+      "expectedTypedRepresentation": {
+        "kind": "derivative",
+        "functionName": "R",
+        "dependent": "R",
+        "variable": "t",
+        "order": 1,
+        "partial": true
+      },
+      "exactDifference": "expected duplicates dependent into functionName; actual stores the dependent identity once",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "dependent is the function-valued symbol for partial notation; duplication is not semantic"
+    },
+    {
+      "id": "d7-derivative-058",
+      "notation": "∂velocity/∂t = 5t^4",
+      "expectedInterpretation": "first partial derivative of the named dependent with respect to the named variable",
+      "actualTypedRepresentation": {
+        "kind": "derivative",
+        "notation": "∂velocity/∂t = 5t^4",
+        "dependent": "velocity",
+        "variable": "t",
+        "order": 1,
+        "partial": true,
+        "result": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "5"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "t"
+              },
+              "exponent": 4
+            }
+          ]
+        }
+      },
+      "expectedTypedRepresentation": {
+        "kind": "derivative",
+        "functionName": "velocity",
+        "dependent": "velocity",
+        "variable": "t",
+        "order": 1,
+        "partial": true
+      },
+      "exactDifference": "expected duplicates dependent into functionName; actual stores the dependent identity once",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "dependent is the function-valued symbol for partial notation; duplication is not semantic"
+    },
+    {
+      "id": "d7-derivative-059",
+      "notation": "\\frac{\\partial phi}{\\partial t} = 6t^5",
+      "expectedInterpretation": "first partial derivative of the named dependent with respect to the named variable",
+      "actualTypedRepresentation": {
+        "kind": "derivative",
+        "notation": "\\frac{\\partial phi}{\\partial t} = 6t^5",
+        "dependent": "phi",
+        "variable": "t",
+        "order": 1,
+        "partial": true,
+        "result": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "constant",
+              "value": "6"
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "variable",
+                "name": "t"
+              },
+              "exponent": 5
+            }
+          ]
+        }
+      },
+      "expectedTypedRepresentation": {
+        "kind": "derivative",
+        "functionName": "phi",
+        "dependent": "phi",
+        "variable": "t",
+        "order": 1,
+        "partial": true
+      },
+      "exactDifference": "expected duplicates dependent into functionName; actual stores the dependent identity once",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "dependent is the function-valued symbol for partial notation; duplication is not semantic"
+    },
+    {
+      "id": "d7-function-029",
+      "notation": "q(x+1)",
+      "expectedInterpretation": "application of the named function to the expression x + 1",
+      "actualTypedRepresentation": {
+        "kind": "function",
+        "notation": "q(x+1)",
+        "functionName": "q",
+        "argument": "x+1",
+        "nested": false
+      },
+      "expectedTypedRepresentation": {
+        "kind": "function",
+        "functionName": "q",
+        "argument": "x+1",
+        "nested": true
+      },
+      "exactDifference": "expected nested=true although x+1 contains no function application; actual derives nested=false",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "nested is derived syntax metadata and must not redefine the function application"
+    },
+    {
+      "id": "d7-function-032",
+      "notation": "P(x+1)",
+      "expectedInterpretation": "application of the named function to the expression x + 1",
+      "actualTypedRepresentation": {
+        "kind": "function",
+        "notation": "P(x+1)",
+        "functionName": "P",
+        "argument": "x+1",
+        "nested": false
+      },
+      "expectedTypedRepresentation": {
+        "kind": "function",
+        "functionName": "P",
+        "argument": "x+1",
+        "nested": true
+      },
+      "exactDifference": "expected nested=true although x+1 contains no function application; actual derives nested=false",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "nested is derived syntax metadata and must not redefine the function application"
+    },
+    {
+      "id": "d7-function-035",
+      "notation": "F(x+1)",
+      "expectedInterpretation": "application of the named function to the expression x + 1",
+      "actualTypedRepresentation": {
+        "kind": "function",
+        "notation": "F(x+1)",
+        "functionName": "F",
+        "argument": "x+1",
+        "nested": false
+      },
+      "expectedTypedRepresentation": {
+        "kind": "function",
+        "functionName": "F",
+        "argument": "x+1",
+        "nested": true
+      },
+      "exactDifference": "expected nested=true although x+1 contains no function application; actual derives nested=false",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "nested is derived syntax metadata and must not redefine the function application"
+    },
+    {
+      "id": "d7-function-038",
+      "notation": "rate(x+1)",
+      "expectedInterpretation": "application of the named function to the expression x + 1",
+      "actualTypedRepresentation": {
+        "kind": "function",
+        "notation": "rate(x+1)",
+        "functionName": "rate",
+        "argument": "x+1",
+        "nested": false
+      },
+      "expectedTypedRepresentation": {
+        "kind": "function",
+        "functionName": "rate",
+        "argument": "x+1",
+        "nested": true
+      },
+      "exactDifference": "expected nested=true although x+1 contains no function application; actual derives nested=false",
+      "classification": "harmless representation/reference-shape difference",
+      "mathematicalMeaningChanges": false,
+      "d3BindingBehaviorChanges": false,
+      "u4VerificationChanges": false,
+      "reason": "nested is derived syntax metadata and must not redefine the function application"
+    }
+  ]
+}

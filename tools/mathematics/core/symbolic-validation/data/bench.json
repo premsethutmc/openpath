@@ -1,0 +1,99 @@
+[
+ {
+  "cat": "uni-simple",
+  "n": 200,
+  "median": 0.35,
+  "p95": 3.3,
+  "p99": 9.4,
+  "max": 10.9,
+  "maxRSS_MB": 124,
+  "heapDelta_MB": 4,
+  "outcomes": {
+   "verified": 200
+  }
+ },
+ {
+  "cat": "mv-expand",
+  "n": 200,
+  "median": 4.05,
+  "p95": 13.6,
+  "p99": 30,
+  "max": 43.7,
+  "maxRSS_MB": 134,
+  "heapDelta_MB": 3,
+  "outcomes": {
+   "verified": 200
+  }
+ },
+ {
+  "cat": "rational",
+  "n": 200,
+  "median": 3.28,
+  "p95": 9.3,
+  "p99": 28.5,
+  "max": 42.2,
+  "maxRSS_MB": 135,
+  "heapDelta_MB": 7,
+  "outcomes": {
+   "verified": 175,
+   "incomplete": 25
+  }
+ },
+ {
+  "cat": "long-derivation",
+  "n": 200,
+  "median": 37.48,
+  "p95": 52.1,
+  "p99": 85.1,
+  "max": 122.2,
+  "maxRSS_MB": 156,
+  "heapDelta_MB": 18,
+  "outcomes": {
+   "verified": 200
+  }
+ },
+ {
+  "cat": "high-degree",
+  "n": 200,
+  "median": 1.28,
+  "p95": 7.5,
+  "p99": 16.2,
+  "max": 20.7,
+  "maxRSS_MB": 135,
+  "heapDelta_MB": 3,
+  "outcomes": {
+   "incomplete": 134,
+   "verified": 66
+  }
+ },
+ {
+  "cat": "adversarial",
+  "n": 200,
+  "median": 21.36,
+  "p95": 1037.7,
+  "p99": 1228.7,
+  "max": 1245.4,
+  "maxRSS_MB": 260,
+  "heapDelta_MB": 38,
+  "outcomes": {
+   "unsupported(resource-limit)": 100,
+   "unsupported": 25,
+   "invalid": 50,
+   "verified": 25
+  }
+ },
+ {
+  "cat": "symexp",
+  "n": 200,
+  "median": 1.59,
+  "p95": 6.8,
+  "p99": 19.3,
+  "max": 19.5,
+  "maxRSS_MB": 129,
+  "heapDelta_MB": 4,
+  "outcomes": {
+   "verified": 199,
+   "incomplete": 1
+  }
+ }
+]

@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "scope": "Synthetic actual Year UI + server-graded evidence/retention regression; no teaching or curriculum-completion claim",
+  "wholeRows": [
+    "gen:acpicthalf:0,0,0,0",
+    "gen:acpicthalf:0,0,2,0",
+    "gen:acpicthalf:0,3,0,0",
+    "gen:acpicthalf:0,7,0,0"
+  ],
+  "wholeRowAnswerCredit": true,
+  "wholeRowHalfSkillCredit": false,
+  "delayed": "gen:acpicthalf:2,22,3,0",
+  "recoveryQuestions": [
+    "gen:acpicthalf:1,19,3,0:mc",
+    "gen:acpicthalf:1,24,1,0"
+  ],
+  "finalStatus": "independently-demonstrated",
+  "reloaded": true,
+  "timings": [
+    {
+      "phase": "delayed-question",
+      "milliseconds": 2641
+    },
+    {
+      "phase": "recovery-question",
+      "milliseconds": 1913
+    },
+    {
+      "phase": "recovery-question",
+      "milliseconds": 2317
+    }
+  ]
+}

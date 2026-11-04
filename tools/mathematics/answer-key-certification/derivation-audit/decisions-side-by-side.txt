@@ -1,0 +1,49 @@
+transitions old -> new:
+  invalid      -> invalid      47
+  unsupported  -> unsupported  85
+  unsupported  -> verified     102
+  verified     -> unsupported  29
+  verified     -> verified     17
+vs design labels   old: {'false-reject': 102, 'match': 148, 'false-accept': 29}
+                   new: {'match': 279}
+changed decisions: 131
+  designed-1         [designed] '37 + 59 = (30 + 50) + (7 + 9)': unsupported -> verified (design expects verified)
+  designed-2         [designed] '37 + 59 = (31 + 49) + (6 + 10)': unsupported -> verified (design expects verified)
+  designed-3         [designed] '12 * 4 = (10 + 2) * 4': unsupported -> verified (design expects verified)
+  designed-4         [designed] '7 * 98 = 7 * (100 - 2)': unsupported -> verified (design expects verified)
+  designed-5         [designed] '5/6 = 1/2 + 1/3': unsupported -> verified (design expects verified)
+  designed-7         [designed] '37 + 59 = (37 + 3) + (59 - 3)': unsupported -> verified (design expects verified)
+  designed-9         [designed] '100 - 37 = (100 - 40) + 3': unsupported -> verified (design expects verified)
+  designed-10        [designed] '63 + 28 = 63 + (30 - 2)': unsupported -> verified (design expects verified)
+  adv-designed-13    [adv-designed] '37 + 59 = 96 * 1': verified -> unsupported (design expects unsupported)
+  adv-designed-16    [adv-designed] '37 + 59 = 95 + 1': verified -> unsupported (design expects unsupported)
+  symbolic-27        [symbolic] '2x + 6 = 12': unsupported -> verified (design expects verified)
+  symbolic-28        [symbolic] '2x + 6 = 12': verified -> unsupported (design expects unsupported)
+  symbolic-29        [symbolic] '2x + 6 = 12': verified -> unsupported (design expects unsupported)
+  symbolic-33        [symbolic] '2x + 6 = 12': verified -> unsupported (design expects unsupported)
+  gen-decomp-41      [gen-decomp] '67 + 11 = (60 + 10) + (7 + 1)': unsupported -> verified (design expects verified)
+  gen-shift-43       [gen-shift] '67 + 11 = (67 + 16) + (11 - 16)': unsupported -> verified (design expects verified)
+  gen-smuggle-46     [gen-smuggle] '67 + 11 = 78 * 1': verified -> unsupported (design expects unsupported)
+  gen-decomp-47      [gen-decomp] '27 + 11 = (20 + 10) + (7 + 1)': unsupported -> verified (design expects verified)
+  gen-shift-49       [gen-shift] '27 + 11 = (27 + 6) + (11 - 6)': unsupported -> verified (design expects verified)
+  gen-decomp-52      [gen-decomp] '43 + 27 = (40 + 20) + (3 + 7)': unsupported -> verified (design expects verified)
+  gen-shift-54       [gen-shift] '43 + 27 = (43 + 22) + (27 - 22)': unsupported -> verified (design expects verified)
+  gen-smuggle-57     [gen-smuggle] '43 + 27 = 70 * 1': verified -> unsupported (design expects unsupported)
+  gen-decomp-58      [gen-decomp] '11 + 75 = (10 + 70) + (1 + 5)': unsupported -> verified (design expects verified)
+  gen-pad-61         [gen-pad] '11 + 75 = (86 + 22) - 22': verified -> unsupported (design expects unsupported)
+  gen-decomp-63      [gen-decomp] '27 + 59 = (20 + 50) + (7 + 9)': unsupported -> verified (design expects verified)
+  gen-shift-65       [gen-shift] '27 + 59 = (27 + 10) + (59 - 10)': unsupported -> verified (design expects verified)
+  gen-smuggle-68     [gen-smuggle] '27 + 59 = 86 * 1': verified -> unsupported (design expects unsupported)
+  gen-decomp-69      [gen-decomp] '75 + 11 = (70 + 10) + (5 + 1)': unsupported -> verified (design expects verified)
+  gen-shift-71       [gen-shift] '75 + 11 = (75 + 30) + (11 - 30)': unsupported -> verified (design expects verified)
+  gen-decomp-74      [gen-decomp] '59 + 43 = (50 + 40) + (9 + 3)': unsupported -> verified (design expects verified)
+  gen-shift-76       [gen-shift] '59 + 43 = (59 + 12) + (43 - 12)': unsupported -> verified (design expects verified)
+  gen-smuggle-79     [gen-smuggle] '59 + 43 = 102 * 1': verified -> unsupported (design expects unsupported)
+  gen-decomp-80      [gen-decomp] '43 + 59 = (40 + 50) + (3 + 9)': unsupported -> verified (design expects verified)
+  gen-shift-82       [gen-shift] '43 + 59 = (43 + 10) + (59 - 10)': unsupported -> verified (design expects verified)
+  gen-decomp-85      [gen-decomp] '27 + 11 = (20 + 10) + (7 + 1)': unsupported -> verified (design expects verified)
+  gen-shift-87       [gen-shift] '27 + 11 = (27 + 24) + (11 - 24)': unsupported -> verified (design expects verified)
+  gen-smuggle-90     [gen-smuggle] '27 + 11 = 38 * 1': verified -> unsupported (design expects unsupported)
+  gen-shift-93       [gen-shift] '11 + 11 = (11 + 14) + (11 - 14)': unsupported -> verified (design expects verified)
+  gen-decomp-96      [gen-decomp] '59 + 75 = (50 + 70) + (9 + 5)': unsupported -> verified (design expects verified)
+  gen-shift-98       [gen-shift] '59 + 75 = (59 + 2) + (75 - 2)': unsupported -> verified (design expects verified)

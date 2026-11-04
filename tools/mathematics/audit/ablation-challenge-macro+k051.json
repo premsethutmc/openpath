@@ -1,0 +1,9 @@
+{
+ "challenge": {
+  "cases": 75,
+  "greedyCorrect": 75,
+  "rate": 1,
+  "failedIds": [],
+  "failedByGot": {}
+ }
+}

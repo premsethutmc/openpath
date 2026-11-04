@@ -1,0 +1,43 @@
+== baseline (eca220f0)
+   ambiguous_refused                    8
+   ambiguous_total                      15
+   engine_reaches_p2                    0
+   incomplete_reported_incomplete       0
+   incomplete_total                     6
+   invalid_detected                     0
+   invalid_total                        91
+   items                                222
+   malformed_not_judged                 15
+   malformed_total                      15
+   p2_decides                           113
+   valid_certified                      0
+   valid_strict_certified               0
+   valid_strict_total                   88
+   valid_total                          95
+   false mathematical accepts            0
+   false rejects (valid not certified, by kind)  Counter({'reported malformed': 26})  [('h6-quad-001', 'reported malformed'), ('h6-quad-003', 'reported malformed'), ('h6-quad-007', 'reported malformed'), ('h6-quad-020', 'reported malformed'), ('h6-rat-005', 'reported malformed'), ('h6-rat-007', 'reported malformed'), ('h6-rat-013', 'reported malformed'), ('h6-rat-017', 'reported malformed'), ('h6-ineq-016', 'reported malformed'), ('h6-ineq-021', 'reported malformed')]
+   valid/invalid items left unsupported by family: {'correct-answer-invalid-working (invalid item not detected)': 15, 'inequality': 11, 'inequality (invalid item not detected)': 8, 'linear': 13, 'linear (invalid item not detected)': 8, 'notation-new': 21, 'notation-new (invalid item not detected)': 8, 'quadratic': 8, 'quadratic (invalid item not detected)': 9, 'rational': 9, 'rational (invalid item not detected)': 8, 'squaring': 7, 'squaring (invalid item not detected)': 10, 'substitution (invalid item not detected)': 10, 'wrong-answer-valid-start (invalid item not detected)': 15}
+   ambiguous items reported as: {'ambiguous': 8, 'unsupported': 3, 'malformed': 4}
+   final answer (P2 evidence vs label): {'decided': 121, 'agrees_with_label': 121}
+== B2
+   ambiguous_refused                    11
+   ambiguous_total                      15
+   engine_reaches_p2                    108
+   first_invalid_exact                  65
+   incomplete_reported_incomplete       3
+   incomplete_total                     6
+   invalid_detected                     65
+   invalid_total                        91
+   items                                222
+   malformed_not_judged                 15
+   malformed_total                      15
+   p2_decides                           113
+   valid_certified                      43
+   valid_strict_certified               43
+   valid_strict_total                   88
+   valid_total                          95
+   false mathematical accepts            0
+   false rejects (valid not certified, by kind)  Counter({'reported malformed': 21})  [('h6-rat-005', 'reported malformed'), ('h6-rat-007', 'reported malformed'), ('h6-rat-013', 'reported malformed'), ('h6-rat-017', 'reported malformed'), ('h6-ineq-016', 'reported malformed'), ('h6-ineq-021', 'reported malformed'), ('h6-sub-001', 'reported malformed'), ('h6-sub-004', 'reported malformed'), ('h6-sub-006', 'reported malformed'), ('h6-sub-008', 'reported malformed')]
+   valid/invalid items left unsupported by family: {'correct-answer-invalid-working (invalid item not detected)': 2, 'inequality': 4, 'inequality (invalid item not detected)': 1, 'linear': 4, 'notation-new': 8, 'notation-new (invalid item not detected)': 2, 'quadratic': 3, 'rational': 5, 'squaring': 7, 'squaring (invalid item not detected)': 8, 'substitution (invalid item not detected)': 10, 'wrong-answer-valid-start (invalid item not detected)': 3}
+   ambiguous items reported as: {'ambiguous': 11, 'malformed': 4}
+   final answer (P2 evidence vs label): {'decided': 121, 'agrees_with_label': 121}

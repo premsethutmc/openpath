@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo B: Linear Equation</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 16px; background: #f8f9fa; color: #1a1a2e; line-height: 1.5; }
+  h1 { font-size: 20px; margin-bottom: 12px; color: #16213e; }
+  h2 { font-size: 16px; margin: 16px 0 8px; color: #0f3460; border-bottom: 2px solid #e2e8f0; padding-bottom: 4px; }
+  .card { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  .equation { font-size: 20px; font-weight: 700; text-align: center; padding: 12px; color: #2d3748; font-family: "Courier New", monospace; }
+  .arrow { text-align: center; color: #718096; font-size: 14px; padding: 4px; }
+  .step { background: #f0f7ff; border-left: 3px solid #3182ce; padding: 12px; margin: 8px 0; border-radius: 0 8px 8px 0; }
+  .step-expr { font-weight: 600; font-size: 15px; color: #2d3748; }
+  .step-explain { font-size: 14px; color: #4a5568; margin-top: 4px; }
+  .before-after { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; margin: 8px 0; }
+  .state { background: #edf2f7; padding: 8px 12px; border-radius: 8px; text-align: center; font-family: "Courier New", monospace; font-size: 14px; }
+  .op-label { text-align: center; font-size: 12px; color: #718096; }
+  .verify { background: #f0fff4; border: 2px solid #48bb78; border-radius: 8px; padding: 12px; margin: 12px 0; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+  .badge-ok { background: #c6f6d5; color: #22543d; }
+  .practice { background: #f0fff4; border: 1px solid #c6f6d5; border-radius: 8px; padding: 12px; margin: 8px 0; }
+</style>
+</head>
+<body>
+<h1>🔢 Solving: 3x + 7 = 19</h1>
+<p style="font-size: 14px; color: #718096; margin-bottom: 12px;">Find the value of x that makes both sides equal</p>
+<div class="card"><h2>Meaning of Equality</h2>
+  <p style="font-size:14px;">The equation says: <em>"three times some number, plus seven, equals nineteen."</em></p>
+  <p style="font-size:14px;margin-top:8px;">Both sides must always represent the same value. Whatever we do to one side, we must do to both.</p>
+</div><div class="card"><h2>Transformation Chain</h2><div class="equation">3x + 7 = 19</div><div class="arrow">↓</div><div class="equation">3x = 19 − (7) = 12</div><div class="arrow">↓</div><div class="equation">x = 12 ÷ 3 = 4</div></div><div class="card"><h2>Step-by-Step (Before → After)</h2><div class="step">
+      <div class="step-expr">Step 1: Take 7 from both sides: 12</div>
+      <div class="step-explain">3x + 7 = 19 → subtract 7 on both sides → 3x = 12. The equation stays balanced because the same operation is applied to both sides.</div><div class="before-after" style="margin-top:8px;">
+        <div class="state">3x + 7 = 19</div>
+        <div class="op-label">subtract<br>7</div>
+        <div class="state">3x = 12</div>
+      </div></div><div class="step">
+      <div class="step-expr">Step 2: Divide by 3: 12 ÷ 3 = 4</div>
+      <div class="step-explain">divide by 3 undoes the multiply → x = 4. The inverse operation isolates the unknown.</div></div></div><div class="verify"><h2 style="margin-top:0;color:#22543d;">✓ Verification by Substitution</h2>
+  <p style="font-size:14px;margin-top:8px;">Substitute x = 4 into 3x + 7:</p>
+  <div class="equation" style="font-size:16px;">3(4) + 7 = 12 + 7 = 19</div>
+  <p style="font-size:14px;text-align:center;">LHS = RHS = 19 ✓</p>
+</div><div class="practice"><h2 style="margin-top:0">Practice</h2>
+  <p style="font-size:14px;">Competency: MATH.number.place-value</p>
+  <p style="font-size:14px;">Questions ready: 3</p>
+  <span class="badge badge-ok">✓ Validated</span>
+</div><div style="text-align:center;margin-top:16px;"><span class="badge badge-ok">✓ All claims correct</span></div></body></html>

@@ -1,0 +1,115 @@
+{
+ "G1 (x^2-2)/(x^2-2)=1 [] <=> x=x [] (irrational poles in from, unchecked)": {
+  "valid": true,
+  "reasons": []
+ },
+ "G2 (x^2+1)/(x^2+1)=1 [] <=> x=x [] (true: x^2+1 never zero)": {
+  "valid": true,
+  "reasons": []
+ },
+ "G3 1/(x^2-2)=0 [] <=> 1=0 []": {
+  "valid": true,
+  "reasons": []
+ },
+ "G4 x*x/x=x [] <=> x=x [] (from lacks 0)": {
+  "valid": true,
+  "reasons": []
+ },
+ "G5 x*x/x=x [0] <=> x=x [0]": {
+  "valid": true,
+  "reasons": []
+ },
+ "G6 to-state with irrational denominators": {
+  "THROWS": "OutsideBoundary: denominator does not split into linear factors over Q"
+ },
+ "G7 claim (x^2-2)/(x^2-2)=1": {
+  "THROWS": "OutsideBoundary: denominator does not split into linear factors over Q"
+ },
+ "G8 claim x/(x-1)=1/(x-1) -> [1]": {
+  "valid": false,
+  "truth": []
+ },
+ "G9 claim 1/x=1/x all-real": {
+  "valid": false,
+  "truth": "all-except-excluded"
+ },
+ "G10 duplicated claim [1,1] for x=1": {
+  "valid": true,
+  "truth": [
+   "1"
+  ]
+ },
+ "G11 claim [2/2] for x=1": {
+  "valid": true,
+  "truth": [
+   "1"
+  ]
+ },
+ "G12 claim [1/0]": {
+  "THROWS": "Error: Division by zero"
+ },
+ "G13 claim 0.5": {
+  "THROWS": "SyntaxError: Cannot convert 0.5 to a BigInt"
+ },
+ "W1 parse '1 0' (whitespace stripped inside number)": "10",
+ "W2 parse 'x^-1'": "{\"kind\":\"pow\",\"base\":{\"kind\":\"var\",\"name\":\"x\"},\"exp\":{\"kind\":\"neg\",\"operand\":{\"kind\":\"num\",\"value\":{\"numBig\":\"1\",\"denBig\":\"1\"}}}}",
+ "W3 parse '-x^2'": "-x^2",
+ "W4 parse '2^3^2'": "2^(3^2)",
+ "EP1 solve 1/(x-1)-1/(x-1)=x^-1*x-1  (truth: identity on R\\{0,1})": {
+  "class": "identity-on-domain",
+  "solution": null,
+  "restrictions": [
+   "1"
+  ],
+  "reasons": [],
+  "note": "both sides equal for every allowed x; every value except the restricted ones is a solution"
+ },
+ "EP2 solve 1/(x-1)=x^-1*x-1+1/(x-1)": {
+  "class": "identity-on-domain",
+  "solution": null,
+  "restrictions": [
+   "1"
+  ],
+  "reasons": [],
+  "note": "both sides equal for every allowed x; every value except the restricted ones is a solution"
+ },
+ "EP3 solve 1/(x-1)+x^-1*x=2/(x-1)+1-1/(x-1)": {
+  "class": "identity-on-domain",
+  "solution": null,
+  "restrictions": [
+   "1"
+  ],
+  "reasons": [],
+  "note": "both sides equal for every allowed x; every value except the restricted ones is a solution"
+ },
+ "EP4 solve (x^2-x)/x=x^-1*(x^2-x)": {
+  "class": "identity-on-domain",
+  "solution": null,
+  "restrictions": [
+   "0"
+  ],
+  "reasons": [],
+  "note": "both sides equal for every allowed x; every value except the restricted ones is a solution"
+ },
+ "EP5 solve 1/(x-1)=1/(x-1)+0*x^(1-2)": {
+  "class": "identity-on-domain",
+  "solution": null,
+  "restrictions": [
+   "1"
+  ],
+  "reasons": [],
+  "note": "both sides equal for every allowed x; every value except the restricted ones is a solution"
+ },
+ "EP6 solve 1/(x-1)=x^(x/x)/x  (exponent pole)": {
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "restrictions": [
+   "0",
+   "1"
+  ],
+  "reasons": [],
+  "note": "x = 2 verified by exact substitution into the original equation and not excluded"
+ }
+}

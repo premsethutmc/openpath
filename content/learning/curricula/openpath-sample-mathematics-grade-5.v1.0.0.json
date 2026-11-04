@@ -1,0 +1,368 @@
+{
+ "id": "openpath-sample-mathematics-grade-5",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 5,
+ "title": "OpenPath Sample Mathematics, Grade 5",
+ "hash": "3144d336",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 5",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-01T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing: the top proposed competency for each outcome was accepted. Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-factors-and-multiples",
+     "number": 1,
+     "title": "Factors and multiples",
+     "pages": "1–16",
+     "outcomes": [
+      {
+       "id": "ch1-factors-and-multiples.o1",
+       "text": "Find factors and multiples of whole numbers",
+       "pages": "2",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.factors-multiples",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch1-factors-and-multiples.o2",
+       "text": "Distinguish prime and composite numbers",
+       "pages": "10",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.primes",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [
+      {
+       "title": "All the factors of 36",
+       "pages": "4"
+      }
+     ],
+     "exercises": [
+      {
+       "ref": "Exercise 1.1",
+       "pages": "7"
+      }
+     ]
+    },
+    {
+     "id": "ch2-more-fractions",
+     "number": 2,
+     "title": "More fractions",
+     "pages": "17–36",
+     "outcomes": [
+      {
+       "id": "ch2-more-fractions.o1",
+       "text": "Generate equivalent fractions to compare and simplify",
+       "pages": "18",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.equivalent-fractions",
+          "score": 0.52,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch2-more-fractions.o2",
+       "text": "Add unlike fractions using a common denominator",
+       "pages": "24",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-add",
+          "score": 0.6,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch2-more-fractions.o3",
+       "text": "Multiply fractions by whole numbers",
+       "pages": "31",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-multiply",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.fraction-product",
+          "score": 0.587,
+          "method": "text-match@1",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.number.fraction-models",
+          "score": 0.34,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [
+      {
+       "title": "1/2 + 1/3 with sixths",
+       "pages": "25"
+      }
+     ],
+     "exercises": [
+      {
+       "ref": "Exercise 2.1",
+       "pages": "22"
+      },
+      {
+       "ref": "Exercise 2.2",
+       "pages": "29"
+      }
+     ]
+    },
+    {
+     "id": "ch3-decimals",
+     "number": 3,
+     "title": "Decimals",
+     "pages": "37–50",
+     "outcomes": [
+      {
+       "id": "ch3-decimals.o1",
+       "text": "Add and subtract decimals",
+       "pages": "38",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-operations",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.integer-add",
+          "score": 0.587,
+          "method": "text-match@1",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.number.fraction-add-like",
+          "score": 0.42,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch3-decimals.o2",
+       "text": "Represent percentages as hundredths",
+       "pages": "46",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.percent-intro",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.decimal-tenths",
+          "score": 0.587,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 3.1",
+       "pages": "43"
+      }
+     ]
+    },
+    {
+     "id": "ch4-area-and-volume",
+     "number": 4,
+     "title": "Area and volume",
+     "pages": "51–66",
+     "outcomes": [
+      {
+       "id": "ch4-area-and-volume.o1",
+       "text": "Calculate rectangle area",
+       "pages": "52",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.rectangle-area",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.rectangle-perimeter",
+          "score": 0.587,
+          "method": "text-match@1",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.measurement.triangle-area",
+          "score": 0.587,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch4-area-and-volume.o2",
+       "text": "Measure volume with unit cubes",
+       "pages": "60",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.volume-cubes",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.area-squares",
+          "score": 0.42,
+          "method": "text-match@1",
+          "status": "rejected"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [
+      {
+       "title": "Area of a 7 m by 8 m floor",
+       "pages": "53"
+      }
+     ],
+     "exercises": [
+      {
+       "ref": "Exercise 4.1",
+       "pages": "57"
+      }
+     ]
+    },
+    {
+     "id": "ch5-patterns-and-reasoning",
+     "number": 5,
+     "title": "Patterns and reasoning",
+     "pages": "67–80",
+     "outcomes": [
+      {
+       "id": "ch5-patterns-and-reasoning.o1",
+       "text": "Represent a number rule with a symbol",
+       "pages": "68",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.expressions-intro",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      },
+      {
+       "id": "ch5-patterns-and-reasoning.o2",
+       "text": "Test a generalisation with examples and counterexamples",
+       "pages": "74",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.counterexamples-intro",
+          "score": 0.75,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 5.1",
+       "pages": "72"
+      }
+     ]
+    },
+    {
+     "id": "ch6-data",
+     "number": 6,
+     "title": "Data",
+     "pages": "81–90",
+     "outcomes": [
+      {
+       "id": "ch6-data.o1",
+       "text": "Find and interpret a mean",
+       "pages": "82",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.averages-intro",
+          "score": 1,
+          "method": "text-match@1",
+          "status": "accepted"
+         }
+        ]
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 6.1",
+       "pages": "87"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

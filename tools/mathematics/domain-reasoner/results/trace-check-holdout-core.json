@@ -1,0 +1,9 @@
+{
+ "dataset": "holdout",
+ "label": "core",
+ "traces": 300,
+ "steps_checked": 1932,
+ "invalid_steps": 0,
+ "wrong_claims": 0,
+ "problems": []
+}

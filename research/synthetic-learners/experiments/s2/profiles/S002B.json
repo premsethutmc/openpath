@@ -1,0 +1,60 @@
+{
+ "schema": "synthetic-learner-profile@1",
+ "id": "S002B",
+ "version": "1.0.0",
+ "synthetic": "All parameters are synthetic and configurable; they are not empirical statistics about real students.",
+ "name": "Struggling beginner (cohort B: unrecognised errors, neutral learning response)",
+ "description": "Weak prerequisites (one-step) and repeated conceptual errors; instruction helps only sometimes. Cohort B: each catalogued misconception is replaced by an error at the same step that OpenPath's teaching taxonomy does not represent (same strength); instruction is understood only from the kind of equations an explanation works through (no title recognition, no misconception targeting).",
+ "seed": 72002,
+ "skills": {
+  "one-step": 0.45,
+  "two-step": 0.2,
+  "both-sides": 0.1,
+  "brackets": 0.08,
+  "modelling": 0.15
+ },
+ "misconceptions": {
+  "reversed-subtraction": 0.55,
+  "negate-on-divide": 0.45,
+  "coefficient-dropped": 0.6,
+  "bracket-add": 0.6,
+  "model-swap": 0.6,
+  "divide-wrong-way": 0.2
+ },
+ "slip": 0.12,
+ "guess": 0.05,
+ "invalidWorkingWithCorrectAnswer": 0.0,
+ "working": {
+  "full": 0.5,
+  "partial": 0.2,
+  "bare": 0.2,
+  "none": 0.1,
+  "unsupportedNotation": 0.25
+ },
+ "hints": {
+  "seek": 0.7,
+  "help": 0.25
+ },
+ "instruction": {
+  "full": 0.25,
+  "partial": 0.35,
+  "gain": 0.4,
+  "fragileShare": 0.6,
+  "misconceptionReduction": 0.5,
+  "misconceptionResponse": 0.35,
+  "offTargetGain": 0.05
+ },
+ "practice": {
+  "consolidate": 0.25,
+  "gainRight": 0.03,
+  "gainWrong": 0.0
+ },
+ "forgetting": {
+  "halfLifeDays": 21,
+  "floor": 0.1,
+  "fragileHalfLifeDays": 4,
+  "relapse": 0.4
+ },
+ "cohort": "B",
+ "learningModel": "content-features"
+}

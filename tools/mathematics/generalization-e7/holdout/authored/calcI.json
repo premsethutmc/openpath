@@ -1,0 +1,1060 @@
+[
+ {
+  "id": "h7-calcI-001",
+  "cat": "calculus-integral",
+  "tags": [
+   "concise"
+  ],
+  "p": {
+   "int": "x^3"
+  },
+  "w": "x^4/4 + C",
+  "exp": "verified",
+  "why": "Power rule gives x^4/4 and the constant is included."
+ },
+ {
+  "id": "h7-calcI-002",
+  "cat": "calculus-integral",
+  "tags": [
+   "concise"
+  ],
+  "p": {
+   "int": "3x^2+2x"
+  },
+  "w": "∫(3x^2+2x)dx = x^3 + x^2 + C",
+  "exp": "verified",
+  "why": "Termwise power rule is correct, constant included."
+ },
+ {
+  "id": "h7-calcI-003",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "int": "cos(3x)"
+  },
+  "w": "let u = 3x, so du = 3dx\n∫cos(3x)dx = (1/3)∫cos(u)du = (1/3)sin(u) + C\n= sin(3x)/3 + C",
+  "exp": "verified",
+  "why": "u-substitution with the 1/3 factor gives sin(3x)/3 + C."
+ },
+ {
+  "id": "h7-calcI-004",
+  "cat": "calculus-integral",
+  "tags": [
+   "concise"
+  ],
+  "p": {
+   "int": "e^(2x)"
+  },
+  "w": "(1/2) e^(2x) + C",
+  "exp": "verified",
+  "why": "d/dx of e^(2x)/2 is e^(2x); constant present."
+ },
+ {
+  "id": "h7-calcI-005",
+  "cat": "calculus-integral",
+  "tags": [
+   "concise"
+  ],
+  "p": {
+   "int": "1/x"
+  },
+  "w": "ln|x| + C",
+  "exp": "verified",
+  "why": "Antiderivative of 1/x on any domain avoiding 0 is ln|x| + C."
+ },
+ {
+  "id": "h7-calcI-006",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "int": "x e^x"
+  },
+  "w": "parts with u = x, dv = e^x dx, so du = dx, v = e^x\n∫x e^x dx = x e^x - ∫e^x dx\n= x e^x - e^x + C",
+  "exp": "verified",
+  "why": "Integration by parts executed correctly with constant."
+ },
+ {
+  "id": "h7-calcI-007",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "int": "1/(x^2-1)"
+  },
+  "w": "1/(x^2-1) = (1/2)(1/(x-1) - 1/(x+1))\nso ∫ = (1/2)ln|x-1| - (1/2)ln|x+1| + C",
+  "exp": "verified",
+  "why": "Partial fractions are correct and logs carry absolute values."
+ },
+ {
+  "id": "h7-calcI-008",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "int": "2x/(x^2+1)"
+  },
+  "w": "u = x^2 + 1, du = 2x dx\n∫du/u = ln|u| + C\nhence ln(x^2+1) + C",
+  "exp": "verified",
+  "why": "Substitution is exact; x^2+1>0 so absolute value drops legitimately."
+ },
+ {
+  "id": "h7-calcI-009",
+  "cat": "calculus-integral",
+  "tags": [
+   "alt-route"
+  ],
+  "p": {
+   "int": "sin(x)cos(x)"
+  },
+  "w": "sin x cos x = sin(2x)/2\n∫ sin(2x)/2 dx = -cos(2x)/4 + C",
+  "exp": "verified",
+  "why": "Double-angle route gives -cos(2x)/4 + C, differing from sin^2/2 only by a constant."
+ },
+ {
+  "id": "h7-calcI-010",
+  "cat": "calculus-integral",
+  "tags": [
+   "alt-route"
+  ],
+  "p": {
+   "int": "sin(x)cos(x)"
+  },
+  "w": "u = sin x, du = cos x dx\n∫u du = u^2/2 + C\n= sin(x)^2/2 + C",
+  "exp": "verified",
+  "why": "Substitution u = sin x is valid and yields sin^2(x)/2 + C."
+ },
+ {
+  "id": "h7-calcI-011",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "defint": "x^2",
+   "a": 0,
+   "b": 3
+  },
+  "w": "[x^3/3] from 0 to 3 = 27/3 - 0 = 9",
+  "exp": "verified",
+  "why": "F(3)-F(0) = 9."
+ },
+ {
+  "id": "h7-calcI-012",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "defint": "1/x",
+   "a": 1,
+   "b": 2
+  },
+  "w": "∫_1^2 dx/x = [ln|x|]_1^2 = ln 2 - ln 1 = ln 2",
+  "exp": "verified",
+  "why": "Bounds 1,2 are positive; value ln 2."
+ },
+ {
+  "id": "h7-calcI-013",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "defint": "2x e^(x^2)",
+   "a": 0,
+   "b": 1
+  },
+  "w": "u = x^2, du = 2x dx; x=0 gives u=0, x=1 gives u=1\n∫_0^1 e^u du = e - 1",
+  "exp": "verified",
+  "why": "Substitution with transformed bounds gives e-1."
+ },
+ {
+  "id": "h7-calcI-014",
+  "cat": "calculus-integral",
+  "tags": [
+   "alt-route"
+  ],
+  "p": {
+   "defint": "(x+1)^3",
+   "a": 0,
+   "b": 1
+  },
+  "w": "u = x+1, bounds become 1 and 2\n∫_1^2 u^3 du = (16-1)/4 = 15/4",
+  "exp": "verified",
+  "why": "Shifted bounds 1..2 and u^4/4 give 15/4."
+ },
+ {
+  "id": "h7-calcI-015",
+  "cat": "calculus-integral",
+  "tags": [
+   "symmetry",
+   "alt-route"
+  ],
+  "p": {
+   "defint": "x^3",
+   "a": -1,
+   "b": 1
+  },
+  "w": "x^3 is odd and the interval is symmetric about 0\nhence the integral is 0",
+  "exp": "verified",
+  "why": "Odd integrand over symmetric interval integrates to zero (also F(1)-F(-1)=0)."
+ },
+ {
+  "id": "h7-calcI-016",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "int": "x ln(x)"
+  },
+  "w": "u = ln x, dv = x dx, du = dx/x, v = x^2/2\n∫x ln x dx = (x^2/2)ln x - ∫(x/2)dx\n= (x^2/2)ln x - x^2/4 + C",
+  "exp": "verified",
+  "why": "Parts with correct v and remaining integral x/2."
+ },
+ {
+  "id": "h7-calcI-017",
+  "cat": "calculus-integral",
+  "tags": [
+   "concise"
+  ],
+  "p": {
+   "int": "1/(x^2+4)"
+  },
+  "w": "(1/2)atan(x/2) + C",
+  "exp": "verified",
+  "why": "Derivative of (1/2)atan(x/2) is 1/(x^2+4)."
+ },
+ {
+  "id": "h7-calcI-018",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "int": "tan(x)"
+  },
+  "w": "tan x = sin x/cos x, u = cos x, du = -sin x dx\n∫tan x dx = -∫du/u = -ln|cos x| + C",
+  "exp": "verified",
+  "why": "Standard substitution; sign and absolute value correct."
+ },
+ {
+  "id": "h7-calcI-019",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "stmt": "Evaluate the improper integral of 1/x^2 from 1 to infinity",
+   "domain": "calculus",
+   "task": "improper-integral"
+  },
+  "w": "∫_1^b x^(-2) dx = 1 - 1/b\nas b → ∞ this tends to 1\nso the integral converges to 1",
+  "exp": "verified",
+  "why": "Limit definition gives 1."
+ },
+ {
+  "id": "h7-calcI-020",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "stmt": "Determine whether the improper integral of 1/x from 1 to infinity converges",
+   "domain": "calculus",
+   "task": "improper-integral"
+  },
+  "w": "∫_1^b dx/x = ln b\nln b → ∞ as b → ∞\nso the integral diverges",
+  "exp": "verified",
+  "why": "ln b is unbounded, so divergence is correct."
+ },
+ {
+  "id": "h7-calcI-021",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "stmt": "Find d/dx of the integral of sin(t) dt from 0 to x^2",
+   "domain": "calculus",
+   "task": "fundamental-theorem-derivative"
+  },
+  "w": "by FTC and the chain rule, d/dx ∫_0^{x^2} sin t dt = sin(x^2)·2x\n= 2x sin(x^2)",
+  "exp": "verified",
+  "why": "FTC part 1 with chain factor 2x."
+ },
+ {
+  "id": "h7-calcI-022",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "stmt": "Evaluate the double integral of x*y over 0<=x<=1, 0<=y<=2",
+   "domain": "calculus",
+   "task": "double-integral"
+  },
+  "w": "inner: ∫_0^2 xy dy = x[y^2/2]_0^2 = 2x\nouter: ∫_0^1 2x dx = 1",
+  "exp": "verified",
+  "why": "Iterated integral: 2x then 1."
+ },
+ {
+  "id": "h7-calcI-023",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "stmt": "Evaluate the integral of 1/sqrt(4-x^2) dx using trigonometric substitution",
+   "domain": "calculus",
+   "task": "trigonometric-substitution"
+  },
+  "w": "x = 2 sin θ, dx = 2 cos θ dθ, with -π/2<θ<π/2 so cos θ>0\n√(4-x^2) = 2 cos θ\n∫ dθ = θ + C = arcsin(x/2) + C",
+  "exp": "verified",
+  "why": "Substitution valid on |x|<2 where cos θ>0; result arcsin(x/2)+C."
+ },
+ {
+  "id": "h7-calcI-024",
+  "cat": "calculus-integral",
+  "tags": [
+   "alt-form"
+  ],
+  "p": {
+   "int": "1/(x(x+1))"
+  },
+  "w": "1/(x(x+1)) = 1/x - 1/(x+1)\n∫ = ln|x| - ln|x+1| + C = ln|x/(x+1)| + C",
+  "exp": "verified",
+  "why": "Partial fractions correct; combined log form equivalent."
+ },
+ {
+  "id": "h7-calcI-025",
+  "cat": "calculus-integral",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "int": "2x"
+  },
+  "w": "∫2x dx = x^2 + C\nside note: 3·4 = 12 and d/dx x^2 = 2x",
+  "exp": "verified",
+  "why": "Complete correct solution; the extra remarks are true and harmless."
+ },
+ {
+  "id": "h7-calcI-026",
+  "cat": "calculus-integral",
+  "tags": [
+   "alt-route"
+  ],
+  "p": {
+   "int": "x sqrt(x+1)"
+  },
+  "w": "u = x+1, x = u-1, du = dx\n∫(u-1)u^(1/2)du = (2/5)u^(5/2) - (2/3)u^(3/2) + C\n= (2/5)(x+1)^(5/2) - (2/3)(x+1)^(3/2) + C",
+  "exp": "verified",
+  "why": "Substitution u=x+1 and power rule yield correct antiderivative."
+ },
+ {
+  "id": "h7-calcI-027",
+  "cat": "calculus-integral",
+  "tags": [
+   "alt-route"
+  ],
+  "p": {
+   "int": "sin(x)^2"
+  },
+  "w": "sin^2 x = (1 - cos 2x)/2\n∫ = x/2 - sin(2x)/4 + C",
+  "exp": "verified",
+  "why": "Half-angle identity then termwise integration."
+ },
+ {
+  "id": "h7-calcI-028",
+  "cat": "calculus-integral",
+  "tags": [],
+  "p": {
+   "defint": "x e^x",
+   "a": 0,
+   "b": 1
+  },
+  "w": "antiderivative x e^x - e^x (by parts)\n[x e^x - e^x]_0^1 = (e - e) - (0 - 1) = 1",
+  "exp": "verified",
+  "why": "F(1)-F(0)=0-(-1)=1."
+ },
+ {
+  "id": "h7-calcI-029",
+  "cat": "calculus-integral",
+  "tags": [
+   "comparison"
+  ],
+  "p": {
+   "stmt": "Does the improper integral of sin(x)/x^2 from 1 to infinity converge?",
+   "domain": "calculus",
+   "task": "improper-integral"
+  },
+  "w": "|sin x / x^2| ≤ 1/x^2 for x ≥ 1\n∫_1^∞ 1/x^2 dx = 1 converges\nby comparison the integral converges absolutely, hence converges",
+  "exp": "verified",
+  "why": "Comparison test with 1/x^2."
+ },
+ {
+  "id": "h7-calcI-030",
+  "cat": "calculus-integral",
+  "tags": [
+   "conditional"
+  ],
+  "p": {
+   "int": "1/x"
+  },
+  "w": "Case x > 0: ∫dx/x = ln x + C\nCase x < 0: ∫dx/x = ln(-x) + C\nboth cases combine to ln|x| + C",
+  "exp": "verified",
+  "why": "Each branch is correct and combined result is ln|x|+C."
+ },
+ {
+  "id": "h7-calcI-031",
+  "cat": "calculus-integral",
+  "tags": [
+   "conditional"
+  ],
+  "p": {
+   "stmt": "For which p > 0 does the integral of x^(-p) from 1 to infinity converge?",
+   "domain": "calculus",
+   "task": "improper-integral"
+  },
+  "w": "Suppose p ≠ 1: ∫_1^b x^(-p)dx = (b^(1-p) - 1)/(1-p)\nIf p > 1, b^(1-p) → 0 and the value is 1/(p-1)\nIf p < 1, b^(1-p) → ∞ so it diverges\nIf p = 1: ∫ = ln b → ∞\nso it converges exactly when p > 1",
+  "exp": "verified",
+  "why": "Case analysis is complete and correct."
+ },
+ {
+  "id": "h7-calcI-032",
+  "cat": "calculus-integral",
+  "tags": [
+   "conditional"
+  ],
+  "p": {
+   "stmt": "Does the improper integral of 1/x from 1 to infinity converge?",
+   "domain": "calculus",
+   "task": "improper-integral"
+  },
+  "w": "Suppose it converges to a finite I\nbut ∫_1^b dx/x = ln b grows without bound as b → ∞\nthis contradicts finiteness, so it diverges",
+  "exp": "verified",
+  "why": "Proof by contradiction is valid."
+ },
+ {
+  "id": "h7-calcI-033",
+  "cat": "calculus-integral",
+  "tags": [
+   "concise"
+  ],
+  "p": {
+   "defint": "x",
+   "a": 0,
+   "b": 1
+  },
+  "w": "1/2",
+  "exp": "verified",
+  "why": "∫_0^1 x dx = 1/2."
+ },
+ {
+  "id": "h7-calcI-034",
+  "cat": "calculus-integral",
+  "tags": [
+   "chain-factor"
+  ],
+  "p": {
+   "int": "cos(3x)"
+  },
+  "w": "sin(3x) + C",
+  "exp": "invalid",
+  "why": "Chain factor 1/3 is omitted; derivative of sin(3x) is 3cos(3x)."
+ },
+ {
+  "id": "h7-calcI-035",
+  "cat": "calculus-integral",
+  "tags": [
+   "sign"
+  ],
+  "p": {
+   "int": "sin(x)"
+  },
+  "w": "∫sin x dx = cos x + C",
+  "exp": "invalid",
+  "why": "Antiderivative of sin x is -cos x."
+ },
+ {
+  "id": "h7-calcI-036",
+  "cat": "calculus-integral",
+  "tags": [
+   "sign",
+   "chain-factor"
+  ],
+  "p": {
+   "int": "e^(-x)"
+  },
+  "w": "∫e^(-x)dx = e^(-x) + C",
+  "exp": "invalid",
+  "why": "Correct is -e^(-x)+C; derivative of e^(-x) is -e^(-x)."
+ },
+ {
+  "id": "h7-calcI-037",
+  "cat": "calculus-integral",
+  "tags": [
+   "sign"
+  ],
+  "p": {
+   "int": "cos(x)"
+  },
+  "w": "-sin(x) + C",
+  "exp": "invalid",
+  "why": "Antiderivative of cos x is sin x, not -sin x."
+ },
+ {
+  "id": "h7-calcI-038",
+  "cat": "calculus-integral",
+  "tags": [
+   "bounds"
+  ],
+  "p": {
+   "defint": "x^2",
+   "a": 0,
+   "b": 3
+  },
+  "w": "F(x) = x^3/3\nF(0) - F(3) = 0 - 9 = -9",
+  "exp": "invalid",
+  "why": "Bounds applied in reverse order give -9, not 9."
+ },
+ {
+  "id": "h7-calcI-039",
+  "cat": "calculus-integral",
+  "tags": [
+   "bounds"
+  ],
+  "p": {
+   "defint": "2x",
+   "a": 1,
+   "b": 3
+  },
+  "w": "F(x) = x^2\nF(3) + F(1) = 9 + 1 = 10",
+  "exp": "invalid",
+  "why": "Should subtract: 9-1=8; adding F(1) is wrong."
+ },
+ {
+  "id": "h7-calcI-040",
+  "cat": "calculus-integral",
+  "tags": [
+   "sign"
+  ],
+  "p": {
+   "int": "x e^x"
+  },
+  "w": "u = x, dv = e^x dx\n∫x e^x dx = x e^x + ∫e^x dx\n= x e^x + e^x + C",
+  "exp": "invalid",
+  "why": "Parts formula has minus sign; the sign error gives a wrong antiderivative."
+ },
+ {
+  "id": "h7-calcI-041",
+  "cat": "calculus-integral",
+  "tags": [
+   "forged"
+  ],
+  "p": {
+   "int": "1/(x^2-1)"
+  },
+  "w": "∫ dx/(x^2-1) = ln|x^2-1| + C",
+  "exp": "invalid",
+  "why": "Derivative of ln|x^2-1| is 2x/(x^2-1), not 1/(x^2-1)."
+ },
+ {
+  "id": "h7-calcI-042",
+  "cat": "calculus-integral",
+  "tags": [
+   "chain-factor"
+  ],
+  "p": {
+   "int": "x/(x^2+1)"
+  },
+  "w": "u = x^2 + 1, du = 2x dx\n∫ du/u = ln|u| + C\nso ln(x^2+1) + C",
+  "exp": "invalid",
+  "why": "du = 2x dx means x dx = du/2; factor 1/2 forgotten."
+ },
+ {
+  "id": "h7-calcI-043",
+  "cat": "calculus-integral",
+  "tags": [
+   "divergence"
+  ],
+  "p": {
+   "stmt": "Evaluate the improper integral of 1/x from 1 to infinity",
+   "domain": "calculus",
+   "task": "improper-integral"
+  },
+  "w": "1/x → 0 as x → ∞\nso the integral converges to 0",
+  "exp": "invalid",
+  "why": "Integrand tending to 0 does not imply convergence; the integral diverges."
+ },
+ {
+  "id": "h7-calcI-044",
+  "cat": "calculus-integral",
+  "tags": [
+   "divergence"
+  ],
+  "p": {
+   "stmt": "Does the improper integral of x^(-1/2) from 1 to infinity converge?",
+   "domain": "calculus",
+   "task": "improper-integral"
+  },
+  "w": "x^(-1/2) → 0 as x → ∞\nso the integral converges to a finite value",
+  "exp": "invalid",
+  "why": "Integral of x^(-1/2) equals 2√b - 2 → ∞, so it diverges."
+ },
+ {
+  "id": "h7-calcI-045",
+  "cat": "calculus-integral",
+  "tags": [
+   "bounds"
+  ],
+  "p": {
+   "defint": "2x e^(x^2)",
+   "a": 0,
+   "b": 2
+  },
+  "w": "u = x^2, du = 2x dx\nbounds stay 0 to 2: ∫_0^2 e^u du = e^2 - 1",
+  "exp": "invalid",
+  "why": "Bounds must become u=0 to 4, giving e^4-1."
+ },
+ {
+  "id": "h7-calcI-046",
+  "cat": "calculus-integral",
+  "tags": [
+   "chain-factor"
+  ],
+  "p": {
+   "stmt": "Find d/dx of the integral of sin(t) dt from 0 to x^2",
+   "domain": "calculus",
+   "task": "fundamental-theorem-derivative"
+  },
+  "w": "by FTC, d/dx ∫_0^{x^2} sin t dt = sin(x^2)",
+  "exp": "invalid",
+  "why": "Chain-rule factor 2x is missing."
+ },
+ {
+  "id": "h7-calcI-047",
+  "cat": "calculus-integral",
+  "tags": [
+   "arithmetic"
+  ],
+  "p": {
+   "stmt": "Evaluate the double integral of x*y over 0<=x<=1, 0<=y<=2",
+   "domain": "calculus",
+   "task": "double-integral"
+  },
+  "w": "inner: ∫_0^2 xy dy = x[y^2/2]_0^2 = 2x\nouter: ∫_0^1 2x dx = 2",
+  "exp": "invalid",
+  "why": "∫_0^1 2x dx = 1, not 2."
+ },
+ {
+  "id": "h7-calcI-048",
+  "cat": "calculus-integral",
+  "tags": [
+   "sign"
+  ],
+  "p": {
+   "int": "tan(x)"
+  },
+  "w": "tan x = sin x/cos x, u = cos x, du = -sin x dx\n∫tan x dx = ln|cos x| + C",
+  "exp": "invalid",
+  "why": "The minus sign from du = -sin x dx is dropped."
+ },
+ {
+  "id": "h7-calcI-049",
+  "cat": "calculus-integral",
+  "tags": [
+   "chain-factor"
+  ],
+  "p": {
+   "int": "1/(x^2+4)"
+  },
+  "w": "atan(x/2) + C",
+  "exp": "invalid",
+  "why": "Missing 1/2: derivative of atan(x/2) is 2/(x^2+4)."
+ },
+ {
+  "id": "h7-calcI-050",
+  "cat": "calculus-integral",
+  "tags": [
+   "wrong-rule"
+  ],
+  "p": {
+   "int": "1/x^2"
+  },
+  "w": "∫ dx/x^2 = ln|x^2| + C",
+  "exp": "invalid",
+  "why": "1/x^2 integrates to -1/x; the log rule applies only to 1/x."
+ },
+ {
+  "id": "h7-calcI-051",
+  "cat": "calculus-integral",
+  "tags": [
+   "coincidence"
+  ],
+  "p": {
+   "defint": "2x",
+   "a": 0,
+   "b": 2
+  },
+  "w": "2x at x = 2 equals 4\nso the integral is 4",
+  "exp": "invalid",
+  "why": "Evaluating the integrand at the upper bound is not integration; 4 is right only by coincidence."
+ },
+ {
+  "id": "h7-calcI-052",
+  "cat": "calculus-integral",
+  "tags": [
+   "bad-middle"
+  ],
+  "p": {
+   "int": "2x(x^2+1)^3"
+  },
+  "w": "u = x^2 + 1, du = 2x dx\n∫u^3 du = u^4/3 + C\n= (x^2+1)^4/4 + C",
+  "exp": "invalid",
+  "why": "u^4/3 is false (should be u^4/4), so a middle line is wrong though the final answer is right."
+ },
+ {
+  "id": "h7-calcI-053",
+  "cat": "calculus-integral",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "int": "2x"
+  },
+  "w": "∫2x dx = x^2 + C\nalso ∫_0^1 2x dx = 2",
+  "exp": "invalid",
+  "why": "Irrelevant side line is false: ∫_0^1 2x dx = 1."
+ },
+ {
+  "id": "h7-calcI-054",
+  "cat": "calculus-integral",
+  "tags": [
+   "back-substitution"
+  ],
+  "p": {
+   "stmt": "Evaluate the integral of 1/sqrt(4-x^2) dx using trigonometric substitution",
+   "domain": "calculus",
+   "task": "trigonometric-substitution"
+  },
+  "w": "x = 2 sin θ, dx = 2 cos θ dθ\n√(4-x^2) = 2 cos θ\n∫ dθ = θ + C = arcsin(x) + C",
+  "exp": "invalid",
+  "why": "θ = arcsin(x/2), not arcsin(x); back-substitution is wrong."
+ },
+ {
+  "id": "h7-calcI-055",
+  "cat": "calculus-integral",
+  "tags": [
+   "dependent"
+  ],
+  "p": {
+   "defint": "x e^x",
+   "a": 0,
+   "b": 1
+  },
+  "w": "∫x e^x dx = x e^x + e^x\nvalue = (e + e) - (0 + 1) = 2e - 1",
+  "exp": "invalid",
+  "why": "First line is false (sign error) and the value 2e-1 depends on it; true value is 1."
+ },
+ {
+  "id": "h7-calcI-056",
+  "cat": "calculus-integral",
+  "tags": [
+   "coincidence"
+  ],
+  "p": {
+   "defint": "3x^2",
+   "a": 0,
+   "b": 1
+  },
+  "w": "∫_0^1 3x^2 dx = ∫_0^1 4x^3 dx = [x^4]_0^1 = 1",
+  "exp": "invalid",
+  "why": "Replacing the integrand by a different function is unjustified; equal values here are a coincidence."
+ },
+ {
+  "id": "h7-calcI-057",
+  "cat": "calculus-integral",
+  "tags": [
+   "coincidence"
+  ],
+  "p": {
+   "defint": "x^2",
+   "a": 0,
+   "b": 3
+  },
+  "w": "x^2 at x = 3 is 9\nhence the integral from 0 to 3 is 9",
+  "exp": "invalid",
+  "why": "Evaluating integrand instead of antiderivative; 9 matches only by coincidence."
+ },
+ {
+  "id": "h7-calcI-058",
+  "cat": "calculus-integral",
+  "tags": [
+   "divergence"
+  ],
+  "p": {
+   "stmt": "Evaluate the improper integral of 1/x^2 from -1 to 1",
+   "domain": "calculus",
+   "task": "improper-integral"
+  },
+  "w": "[-1/x]_{-1}^{1} = -1 - 1 = -2",
+  "exp": "invalid",
+  "why": "Integrand has a non-integrable singularity at 0 and is positive; the integral diverges, and -2 is nonsense."
+ },
+ {
+  "id": "h7-calcI-059",
+  "cat": "calculus-integral",
+  "tags": [
+   "conditional",
+   "divergence"
+  ],
+  "p": {
+   "stmt": "Evaluate the improper integral of sin(x) from 0 to infinity",
+   "domain": "calculus",
+   "task": "improper-integral"
+  },
+  "w": "Suppose the integral converges\nthen it equals [-cos x]_0^∞ = 0 - (-1) = 1",
+  "exp": "invalid",
+  "why": "cos(x) has no limit at infinity, so cos(∞)=0 is false; the integral diverges."
+ },
+ {
+  "id": "h7-calcI-060",
+  "cat": "calculus-integral",
+  "tags": [
+   "no-constant"
+  ],
+  "p": {
+   "int": "x^3"
+  },
+  "w": "x^4/4",
+  "exp": "missing-assumption",
+  "why": "Constant of integration omitted."
+ },
+ {
+  "id": "h7-calcI-061",
+  "cat": "calculus-integral",
+  "tags": [
+   "no-constant"
+  ],
+  "p": {
+   "int": "cos(3x)"
+  },
+  "w": "u = 3x, du = 3dx\n∫cos(3x)dx = (1/3)sin(3x)",
+  "exp": "missing-assumption",
+  "why": "Correct antiderivative but +C missing."
+ },
+ {
+  "id": "h7-calcI-062",
+  "cat": "calculus-integral",
+  "tags": [
+   "no-constant"
+  ],
+  "p": {
+   "int": "e^(2x)"
+  },
+  "w": "∫e^(2x)dx = e^(2x)/2",
+  "exp": "missing-assumption",
+  "why": "+C omitted."
+ },
+ {
+  "id": "h7-calcI-063",
+  "cat": "calculus-integral",
+  "tags": [
+   "no-constant"
+  ],
+  "p": {
+   "int": "x e^x"
+  },
+  "w": "u = x, dv = e^x dx\n∫x e^x dx = x e^x - ∫e^x dx = x e^x - e^x",
+  "exp": "missing-assumption",
+  "why": "Correct but no constant of integration."
+ },
+ {
+  "id": "h7-calcI-064",
+  "cat": "calculus-integral",
+  "tags": [
+   "abs-value"
+  ],
+  "p": {
+   "int": "1/x"
+  },
+  "w": "∫ dx/x = ln x + C",
+  "exp": "missing-assumption",
+  "why": "Needs |x| (or x>0); domain of 1/x includes negative x, which is not restricted."
+ },
+ {
+  "id": "h7-calcI-065",
+  "cat": "calculus-integral",
+  "tags": [
+   "abs-value"
+  ],
+  "p": {
+   "int": "1/(x-2)"
+  },
+  "w": "u = x - 2, du = dx\n∫du/u = ln(x-2) + C",
+  "exp": "missing-assumption",
+  "why": "Without |x-2| or x>2 the result fails for x<2."
+ },
+ {
+  "id": "h7-calcI-066",
+  "cat": "calculus-integral",
+  "tags": [
+   "abs-value"
+  ],
+  "p": {
+   "int": "1/(x^2-1)"
+  },
+  "w": "1/(x^2-1) = (1/2)(1/(x-1) - 1/(x+1))\n∫ = (1/2)ln(x-1) - (1/2)ln(x+1) + C",
+  "exp": "missing-assumption",
+  "why": "Logs need absolute values; for |x|<1 neither argument is positive."
+ },
+ {
+  "id": "h7-calcI-067",
+  "cat": "calculus-integral",
+  "tags": [
+   "abs-value"
+  ],
+  "p": {
+   "int": "1/(x ln(x))"
+  },
+  "w": "u = ln x, du = dx/x\n∫du/u = ln(ln x) + C",
+  "exp": "missing-assumption",
+  "why": "Needs ln|ln x|; ln x may be negative for 0<x<1."
+ },
+ {
+  "id": "h7-calcI-068",
+  "cat": "calculus-integral",
+  "tags": [
+   "abs-value"
+  ],
+  "p": {
+   "int": "tan(x)"
+  },
+  "w": "∫tan x dx = -ln(cos x) + C",
+  "exp": "missing-assumption",
+  "why": "cos x can be negative; requires absolute value or restricted domain."
+ },
+ {
+  "id": "h7-calcI-069",
+  "cat": "calculus-integral",
+  "tags": [
+   "stops-early"
+  ],
+  "p": {
+   "int": "x e^x"
+  },
+  "w": "let u = x and dv = e^x dx\nthen du = dx and v = e^x",
+  "exp": "incomplete",
+  "why": "Setup only; integral never computed."
+ },
+ {
+  "id": "h7-calcI-070",
+  "cat": "calculus-integral",
+  "tags": [
+   "stops-early"
+  ],
+  "p": {
+   "defint": "x^2",
+   "a": 0,
+   "b": 3
+  },
+  "w": "an antiderivative of x^2 is x^3/3",
+  "exp": "incomplete",
+  "why": "True but the bounds are never evaluated."
+ },
+ {
+  "id": "h7-calcI-071",
+  "cat": "calculus-integral",
+  "tags": [
+   "stops-early"
+  ],
+  "p": {
+   "int": "1/(x^2-1)"
+  },
+  "w": "1/(x^2-1) = (1/2)(1/(x-1) - 1/(x+1))",
+  "exp": "incomplete",
+  "why": "Decomposition true, but no integration performed."
+ },
+ {
+  "id": "h7-calcI-072",
+  "cat": "calculus-integral",
+  "tags": [
+   "stops-early"
+  ],
+  "p": {
+   "stmt": "Evaluate the improper integral of 1/x^2 from 1 to infinity",
+   "domain": "calculus",
+   "task": "improper-integral"
+  },
+  "w": "∫_1^b x^(-2) dx = 1 - 1/b",
+  "exp": "incomplete",
+  "why": "Limit b → ∞ never taken."
+ },
+ {
+  "id": "h7-calcI-073",
+  "cat": "calculus-integral",
+  "tags": [
+   "stops-early"
+  ],
+  "p": {
+   "stmt": "Evaluate the double integral of x*y over 0<=x<=1, 0<=y<=2",
+   "domain": "calculus",
+   "task": "double-integral"
+  },
+  "w": "inner: ∫_0^2 xy dy = 2x",
+  "exp": "incomplete",
+  "why": "Outer integration missing."
+ },
+ {
+  "id": "h7-calcI-074",
+  "cat": "calculus-integral",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "int": "x^3"
+  },
+  "w": "4·4 = 16\n∫x dx = x^2/2 + C",
+  "exp": "incomplete",
+  "why": "True lines concern other quantities; the requested integral is never found."
+ },
+ {
+  "id": "h7-calcI-075",
+  "cat": "calculus-integral",
+  "tags": [
+   "side-claim"
+  ],
+  "p": {
+   "defint": "e^x",
+   "a": 0,
+   "b": 1
+  },
+  "w": "d/dx e^x = e^x\ne^0 = 1",
+  "exp": "incomplete",
+  "why": "True facts, but F(1)-F(0) never established."
+ },
+ {
+  "id": "h7-calcI-076",
+  "cat": "calculus-integral",
+  "tags": [
+   "stops-early"
+  ],
+  "p": {
+   "stmt": "Find d/dx of the integral of sin(t) dt from 0 to x^2",
+   "domain": "calculus",
+   "task": "fundamental-theorem-derivative"
+  },
+  "w": "let F(x) = ∫_0^x sin t dt\nthen F'(x) = sin x",
+  "exp": "incomplete",
+  "why": "Related true fact but composite with x^2 not addressed."
+ },
+ {
+  "id": "h7-calcI-077",
+  "cat": "calculus-integral",
+  "tags": [
+   "stops-early"
+  ],
+  "p": {
+   "int": "cos(3x)"
+  },
+  "w": "let u = 3x, so du = 3dx",
+  "exp": "incomplete",
+  "why": "Substitution set up; integral not evaluated."
+ },
+ {
+  "id": "h7-calcI-078",
+  "cat": "calculus-integral",
+  "tags": [
+   "non-elementary"
+  ],
+  "p": {
+   "int": "e^(x^2)"
+  },
+  "w": "∫e^(x^2)dx = (√π/2) erfi(x) + C",
+  "exp": "unsupported",
+  "alt": [
+   "incomplete"
+  ],
+  "why": "No elementary antiderivative; answer uses a non-elementary special function."
+ }
+]

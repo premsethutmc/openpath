@@ -1,0 +1,1345 @@
+{
+ "id": "tn-samacheer-mathematics-grade-8",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 8,
+ "title": "Mathematics - Standard Eight (single annual volume), English Medium — Grade 8 Mathematics (Tamil Nadu State Board)",
+ "hash": "1141605b",
+ "source": {
+  "kind": "textbook",
+  "title": "Mathematics - Standard Eight (single annual volume), English Medium",
+  "edition": "Samacheer Kalvi new-syllabus content (introduced 2019-20), issued as a single annual volume since about 2023-24 and reprinted for 2026-27; exact imprint/reprint line not verified",
+  "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+  "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/tn-g08.json. 7 of 7 chapter titles could not be checked against an official source (marked sourceVerified: false). Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://www.textbooksonline.tn.nic.in/ https://tnschools.gov.in/ https://www.shaalaa.com/textbook-solutions/samacheer-kalvi-solutions-mathematics-english-class-8-tn-board_302 https://www.shaalaa.com/textbook-solutions/c/samacheer-kalvi-solutions-mathematics-english-class-8-tn-board-chapter-1-numbers_4175. Notes: Official sources could not be opened: textbooksonline.tn.nic.in and e-learn.tnschools.gov.in refuse automated fetching via robots.txt, tnschools.gov.in and scert.tnschools.gov.in are JavaScript apps that returned no content, and the sandbox shell has no internet access. Because of this every chapter is marked verified:false. Chapter titles were cross-checked between two independent secondary sites (Shaalaa and Brainkart), which agree on every chapter title and order. Neither is official. Edition currency for 2026-27: DT Next (8 May 2026; 16 Aug 2026) reports that only Classes 1-3 received new-syllabus books in 2026-27. Classes 4-12 continue on the existing Samacheer Kalvi syllabus (the 2018-19 / 2019-20 'new syllabus' books), and the new State Education Policy curriculum is targeted for 2027-28. The same article says Classes 4-12 books with the old syllabus were 'being prepared' for 2026-27, so a 2026 reprint or re-typeset printing may exist. I could not see its imprint page to confirm the edition line or any content changes. Section titles come from Brainkart's topic index for this book, which follows the textbook's headings. They were not checked against the official PDF. I dropped exercise, summary, 'Try these' and worked-example entries and kept only content headings. Section ids are po",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "tn-g08-c01",
+     "number": 1,
+     "title": "Numbers",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g08-c01-s01",
+       "number": "1.1",
+       "title": "Rational Numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s02",
+       "number": "1.2",
+       "title": "Rational numbers on a number line",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s03",
+       "number": "1.3",
+       "title": "Decimal representation of a rational number",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s04",
+       "number": "1.4",
+       "title": "Positive and Negative rational numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s05",
+       "number": "1.5",
+       "title": "Equivalent rational numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s06",
+       "number": "1.6",
+       "title": "Rational numbers in Standard form",
+       "outcomes": [
+        {
+         "id": "tn-g08-c01-o06",
+         "text": "Simplify expressions with zero and negative integer exponents using the laws of exponents, and write numbers in standard (scientific) form.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.exponents",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.scientific-notation",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s07",
+       "number": "1.7",
+       "title": "Comparison of rational numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s08",
+       "number": "1.8",
+       "title": "Rational numbers between any two given rational numbers",
+       "outcomes": [
+        {
+         "id": "tn-g08-c01-o01",
+         "text": "Represent rational numbers on a number line and in standard form, compare them, and find rational numbers between any two given ones.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.rational-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, ordered-list)."
+         }
+        },
+        {
+         "id": "tn-g08-c01-o02",
+         "text": "Add, subtract, multiply and divide rational numbers and solve word problems with them.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.rational-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, word-problem)."
+         }
+        },
+        {
+         "id": "tn-g08-c01-o03",
+         "text": "Check which properties (closure, commutative, associative, distributive, identity, inverse) hold for rational-number operations.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.operation-properties",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.rational-numbers",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; true-false, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s09",
+       "number": "1.9",
+       "title": "Basic Arithmetic Operations on Rational Numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s10",
+       "number": "1.10",
+       "title": "Word Problems on the basic operations",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s11",
+       "number": "1.11",
+       "title": "Properties of Rational Numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s12",
+       "number": "1.12",
+       "title": "Introduction to Square Numbers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s13",
+       "number": "1.13",
+       "title": "Square Root",
+       "outcomes": [
+        {
+         "id": "tn-g08-c01-o04",
+         "text": "Identify perfect squares and find square roots by prime factorisation and long division, including for decimals, and estimate non-perfect square roots.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.square-roots",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, estimation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s14",
+       "number": "1.14",
+       "title": "Cubes and Cube Roots",
+       "outcomes": [
+        {
+         "id": "tn-g08-c01-o05",
+         "text": "Find cubes and cube roots using prime factorisation, and identify perfect cubes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.cubes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c01-s15",
+       "number": "1.15",
+       "title": "Exponents and Powers",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "tn-g08-c04",
+     "number": 4,
+     "title": "Life Mathematics",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g08-c04-s01",
+       "number": "4.1",
+       "title": "Applications of Percentage in Word Problems",
+       "outcomes": [
+        {
+         "id": "tn-g08-c04-o01",
+         "text": "Solve percentage word problems, including percentage increase and decrease.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.percentage",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c04-s02",
+       "number": "4.2",
+       "title": "Profit, Loss, Discount, Overhead Expenses and GST",
+       "outcomes": [
+        {
+         "id": "tn-g08-c04-o02",
+         "text": "Calculate profit, loss, discount, overhead expenses and GST to find marked price, selling price or cost price.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.percentage",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.profit-loss",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; money, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c04-s03",
+       "number": "4.3",
+       "title": "Compound Interest",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c04-s04",
+       "number": "4.4",
+       "title": "Applications of Compound Interest Formula",
+       "outcomes": [
+        {
+         "id": "tn-g08-c04-o03",
+         "text": "Calculate compound interest with annual, half-yearly or quarterly compounding, apply the formula to growth and depreciation, and compare it with simple interest.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.compound-interest",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; money, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c04-s05",
+       "number": "4.5",
+       "title": "Difference between C I and S I",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c04-s06",
+       "number": "4.6",
+       "title": "Compound Variation",
+       "outcomes": [
+        {
+         "id": "tn-g08-c04-o04",
+         "text": "Solve compound variation problems that combine direct and inverse proportion.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.inverse-proportion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.proportion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c04-s07",
+       "number": "4.7",
+       "title": "Time and Work",
+       "outcomes": [
+        {
+         "id": "tn-g08-c04-o05",
+         "text": "Solve time and work problems using each worker's rate of work per unit time.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.inverse-proportion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.unit-rate",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, fraction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "tn-g08-c03",
+     "number": 3,
+     "title": "Algebra",
+     "outcomes": [
+      {
+       "id": "tn-g08-c03-o01",
+       "text": "Multiply polynomials and divide a polynomial by a monomial or binomial.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.polynomials",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MLY.alg.expand-binomials",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g08-c03-s01",
+       "number": "3.1",
+       "title": "Multiplication of Algebraic Expressions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s02",
+       "number": "3.2",
+       "title": "Division of Algebraic Expressions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s03",
+       "number": "3.3",
+       "title": "Identities",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s04",
+       "number": "3.4",
+       "title": "Cubic Identities",
+       "outcomes": [
+        {
+         "id": "tn-g08-c03-o02",
+         "text": "Use the square, product and cubic identities, such as (a+b)^3, (a-b)^3 and (x+a)(x+b)(x+c), to expand expressions and evaluate numerical expressions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.identities",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        },
+        {
+         "id": "tn-g08-c03-o03",
+         "text": "Factorise expressions by common factors, grouping and standard (including cubic) identities.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.factorisation",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s05",
+       "number": "3.5",
+       "title": "Application of Cubic Identities",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s06",
+       "number": "3.6",
+       "title": "Factorisation",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s07",
+       "number": "3.7",
+       "title": "Factorisation using cubic identities",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s08",
+       "number": "3.8",
+       "title": "Linear Equation in One Variable",
+       "outcomes": [
+        {
+         "id": "tn-g08-c03-o04",
+         "text": "Solve linear equations in one variable, including ones with rational coefficients and the variable on both sides, and apply them to word problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.linear-rational",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s09",
+       "number": "3.9",
+       "title": "Word problems that involve linear equations",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s10",
+       "number": "3.10",
+       "title": "Graph",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s11",
+       "number": "3.11",
+       "title": "Graph: To obtain a straight line",
+       "outcomes": [
+        {
+         "id": "tn-g08-c03-o06",
+         "text": "Draw the straight-line graph of a linear relation, including lines parallel to the axes, and read values from it.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.linear-two-variables",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.cartesian",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; graph-sketch, coordinate)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s12",
+       "number": "3.12",
+       "title": "Graph: Line parallel to the coordinate axes",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s13",
+       "number": "3.13",
+       "title": "Scale in a graph",
+       "outcomes": [
+        {
+         "id": "tn-g08-c03-o05",
+         "text": "Plot points in all four quadrants and choose a suitable scale for the axes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.cartesian",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; coordinate, graph-sketch)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c03-s14",
+       "number": "3.14",
+       "title": "Linear Graph",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "tn-g08-c05",
+     "number": 5,
+     "title": "Geometry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g08-c05-s01",
+       "number": "5.1",
+       "title": "Congruent and Similar Shapes",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s02",
+       "number": "5.2",
+       "title": "Congruent Triangles",
+       "outcomes": [
+        {
+         "id": "tn-g08-c05-o01",
+         "text": "Use the congruence criteria to prove two triangles congruent and deduce that corresponding parts are equal.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.congruence",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; proof, multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s03",
+       "number": "5.3",
+       "title": "Similar Triangles",
+       "outcomes": [
+        {
+         "id": "tn-g08-c05-o02",
+         "text": "Recognise similar triangles (AA, SAS, SSS) and use proportional sides to find unknown lengths.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.similarity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s04",
+       "number": "5.4",
+       "title": "The Pythagorean Theorem",
+       "outcomes": [
+        {
+         "id": "tn-g08-c05-o03",
+         "text": "Use the Pythagorean theorem to find missing sides of right triangles, and its converse to test whether a triangle is right-angled.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.pythagoras",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, true-false, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s05",
+       "number": "5.5",
+       "title": "Converse of Pythagoras Theorem",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s06",
+       "number": "5.6",
+       "title": "Point of Concurrency",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s07",
+       "number": "5.7",
+       "title": "Medians of a Triangle",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s08",
+       "number": "5.8",
+       "title": "Altitude of a Triangle",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s09",
+       "number": "5.9",
+       "title": "Perpendicular Bisectors of a Triangle",
+       "outcomes": [
+        {
+         "id": "tn-g08-c05-o04",
+         "text": "Construct medians, altitudes, perpendicular bisectors and angle bisectors of a triangle and locate the centroid, orthocentre, circumcentre and incentre.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.triangle-concurrency",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; construction, multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s10",
+       "number": "5.10",
+       "title": "Angle Bisectors of a Triangle",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s11",
+       "number": "5.11",
+       "title": "Construction of Quadrilaterals",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s12",
+       "number": "5.12",
+       "title": "Construction of Trapeziums",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s13",
+       "number": "5.13",
+       "title": "Construction of Special Quadrilaterals",
+       "outcomes": [
+        {
+         "id": "tn-g08-c05-o05",
+         "text": "Construct a general quadrilateral, a trapezium and special quadrilaterals (parallelogram, rhombus, rectangle, square) from given measurements, and find the area.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.construction-quadrilaterals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; construction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s14",
+       "number": "5.14",
+       "title": "Construction of a Parallelogram",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s15",
+       "number": "5.15",
+       "title": "Construction of a Rhombus",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s16",
+       "number": "5.16",
+       "title": "Construction of a Rectangle",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c05-s17",
+       "number": "5.17",
+       "title": "Construction of a Square",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "tn-g08-c02",
+     "number": 2,
+     "title": "Measurements",
+     "outcomes": [
+      {
+       "id": "tn-g08-c02-o01",
+       "text": "Calculate the arc length, area and perimeter of a sector from the radius and the central angle.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.circle-area",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.sectors",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit)."
+       }
+      },
+      {
+       "id": "tn-g08-c02-o03",
+       "text": "Match 3-D solids to their nets and views, and count their faces, edges and vertices to verify Euler's formula.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.nets",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.geometry.polyhedra-euler",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.geometry.solid-views",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g08-c02-s01",
+       "number": "2.1",
+       "title": "Parts of a Circle",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c02-s02",
+       "number": "2.2",
+       "title": "Combined shapes",
+       "outcomes": [
+        {
+         "id": "tn-g08-c02-o02",
+         "text": "Find the perimeter and area of combined shapes made of rectangles, triangles, trapeziums, semicircles and sectors.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.sectors",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.measurement.trapezium-area",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c02-s03",
+       "number": "2.3",
+       "title": "Three dimensional (3-D) shapes",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "tn-g08-c06",
+     "number": 6,
+     "title": "Statistics",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g08-c06-s01",
+       "number": "6.1",
+       "title": "Frequency Distribution Table",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c06-s02",
+       "number": "6.2",
+       "title": "Graphical Representation of the Frequency Distribution for Ungrouped Data",
+       "outcomes": [
+        {
+         "id": "tn-g08-c06-o01",
+         "text": "Organise raw data into ungrouped and grouped frequency distribution tables using class intervals.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.data-frequency",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.statistics.grouped-data",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; data-table)."
+         }
+        },
+        {
+         "id": "tn-g08-c06-o02",
+         "text": "Represent an ungrouped frequency distribution graphically and interpret the graph.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.scaled-bars",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; graph-sketch, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c06-s03",
+       "number": "6.3",
+       "title": "Graphical Representation of the Frequency Distribution for Grouped Data",
+       "outcomes": [
+        {
+         "id": "tn-g08-c06-o03",
+         "text": "Draw and interpret histograms and frequency polygons for grouped data.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.histograms",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; graph-sketch, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-statistics",
+      "number": 5,
+      "title": "Data handling and statistics"
+     }
+    },
+    {
+     "id": "tn-g08-c07",
+     "number": 7,
+     "title": "Information Processing",
+     "outcomes": [
+      {
+       "id": "tn-g08-c07-o04",
+       "text": "Encode and decode messages using simple substitution or shift ciphers.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.coding-ciphers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; pattern)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g08-c07-s01",
+       "number": "7.1",
+       "title": "Principles of Counting",
+       "outcomes": [
+        {
+         "id": "tn-g08-c07-o01",
+         "text": "Count outcomes with the addition and multiplication principles of counting.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.permutations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.sample-space",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.systematic-enumeration",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c07-s02",
+       "number": "7.2",
+       "title": "SET - Game",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c07-s03",
+       "number": "7.3",
+       "title": "Map Colouring",
+       "outcomes": [
+        {
+         "id": "tn-g08-c07-o02",
+         "text": "Solve attribute-matching and map-colouring puzzles under the given rules, using as few colours as possible.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.multi-step",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.systematic-enumeration",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; diagram-drawing, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c07-s04",
+       "number": "7.4",
+       "title": "Fibonacci Numbers",
+       "outcomes": [
+        {
+         "id": "tn-g08-c07-o03",
+         "text": "Generate Fibonacci numbers and find the HCF by repeated division, noting the link to Fibonacci numbers.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.pattern-rules",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.euclid-algorithm",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.algorithms-flowcharts",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; pattern, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c07-s05",
+       "number": "7.5",
+       "title": "Highest Common Factor",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c07-s06",
+       "number": "7.6",
+       "title": "Cryptology",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c07-s07",
+       "number": "7.7",
+       "title": "Shopping Comparison",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g08-c07-s08",
+       "number": "7.8",
+       "title": "Packing",
+       "outcomes": [
+        {
+         "id": "tn-g08-c07-o05",
+         "text": "Compare offers by unit price to make the best buy, and solve simple packing problems that fit items into a space.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.cube-volume",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.unit-rate",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; money, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-reasoning",
+      "number": 6,
+      "title": "Mathematical reasoning"
+     }
+    }
+   ]
+  }
+ ]
+}

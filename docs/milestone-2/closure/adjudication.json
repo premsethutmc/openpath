@@ -1,0 +1,152 @@
+[
+ {
+  "id": "rl-044",
+  "label": "debatable",
+  "note": "d: gives only the positive root; claim true but incomplete",
+  "statement": "Solve x^2 = 25",
+  "lines": [
+   "x^2 = 25",
+   "x = 5"
+  ],
+  "task": {
+   "mode": "equation",
+   "sides": [
+    "x^2",
+    "25"
+   ],
+   "conditions": [],
+   "assumptions": []
+  },
+  "verdict": {
+   "status": "invalid",
+   "at": 1,
+   "reason": "loses-solution: x = -5 satisfies the line before but not this one"
+  },
+  "prefix": [
+   {
+    "line": "x^2 = 25",
+    "authorized": true,
+    "valid": null,
+    "reason": "identity",
+    "move": {
+     "kind": "identity",
+     "parameter": null
+    },
+    "digest": "6b4dace4308d"
+   },
+   {
+    "line": "x = 5",
+    "authorized": false,
+    "valid": null,
+    "reason": "no-registered-equation-move",
+    "move": null,
+    "digest": null
+   }
+  ],
+  "prefixReplay": {
+   "ok": true,
+   "reason": "replayed: every line re-authorized in the original task context",
+   "at": null
+  }
+ },
+ {
+  "id": "rl-045",
+  "label": "debatable",
+  "note": "d: gives only the positive root; claim true but incomplete",
+  "statement": "Solve x^2 = 49",
+  "lines": [
+   "x^2 = 49",
+   "x = 7"
+  ],
+  "task": {
+   "mode": "equation",
+   "sides": [
+    "x^2",
+    "49"
+   ],
+   "conditions": [],
+   "assumptions": []
+  },
+  "verdict": {
+   "status": "invalid",
+   "at": 1,
+   "reason": "loses-solution: x = -7 satisfies the line before but not this one"
+  },
+  "prefix": [
+   {
+    "line": "x^2 = 49",
+    "authorized": true,
+    "valid": null,
+    "reason": "identity",
+    "move": {
+     "kind": "identity",
+     "parameter": null
+    },
+    "digest": "a921754e33c8"
+   },
+   {
+    "line": "x = 7",
+    "authorized": false,
+    "valid": null,
+    "reason": "no-registered-equation-move",
+    "move": null,
+    "digest": null
+   }
+  ],
+  "prefixReplay": {
+   "ok": true,
+   "reason": "replayed: every line re-authorized in the original task context",
+   "at": null
+  }
+ },
+ {
+  "id": "domain-division-by-zero-017",
+  "label": "debatable",
+  "note": "divides by x without condition, losing root x=0; second line not equivalent",
+  "statement": "Solve x^2=6x",
+  "lines": [
+   "x^2=6x",
+   "x=6"
+  ],
+  "task": {
+   "mode": "equation",
+   "sides": [
+    "x^2",
+    "6*x"
+   ],
+   "conditions": [],
+   "assumptions": []
+  },
+  "verdict": {
+   "status": "invalid",
+   "at": 1,
+   "reason": "loses-solution: x = 0 satisfies the line before but not this one"
+  },
+  "prefix": [
+   {
+    "line": "x^2=6x",
+    "authorized": true,
+    "valid": null,
+    "reason": "identity",
+    "move": {
+     "kind": "identity",
+     "parameter": null
+    },
+    "digest": "fefc03d3f9da"
+   },
+   {
+    "line": "x=6",
+    "authorized": false,
+    "valid": null,
+    "reason": "no-registered-equation-move",
+    "move": null,
+    "digest": null
+   }
+  ],
+  "prefixReplay": {
+   "ok": true,
+   "reason": "replayed: every line re-authorized in the original task context",
+   "at": null
+  }
+ }
+]

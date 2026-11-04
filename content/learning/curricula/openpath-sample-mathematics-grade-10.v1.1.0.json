@@ -1,0 +1,207 @@
+{
+ "id": "openpath-sample-mathematics-grade-10",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 10,
+ "title": "OpenPath Sample Mathematics, Grade 10",
+ "hash": "dc19952d",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 10",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true,
+  "extractor": "structured-text@1"
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing (mapping@2). Clear mappings: the top proposal was accepted. Uncertain mappings were accepted only where release 1.0.0 had accepted the same competency. Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-quadratic-equations",
+     "number": 1,
+     "title": "Quadratic equations",
+     "pages": "1–20",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 1.1",
+       "pages": "10"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch1-quadratic-equations.o1",
+       "text": "Solve quadratic equations by factorisation and completing the square",
+       "pages": "2",
+       "location": {
+        "line": 12,
+        "page": 2
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.quadratics",
+          "score": 0.76,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.quadratic-complex",
+          "score": 0.544,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on equations, quadratic.",
+        "concepts": [
+         "equations",
+         "quadratic",
+         "factorise"
+        ]
+       }
+      },
+      {
+       "id": "ch1-quadratic-equations.o2",
+       "text": "Interpret the quadratic discriminant",
+       "pages": "14",
+       "location": {
+        "line": 13,
+        "page": 14
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.quadratic-discriminant",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.quadratic-complex",
+          "score": 0.616,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.algebra.quadratics",
+          "score": 0.502,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on quadratic, discriminant.",
+        "concepts": [
+         "quadratic",
+         "discriminant"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch2-arithmetic-progressions",
+     "number": 2,
+     "title": "Arithmetic progressions",
+     "pages": "21–34",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 2.1",
+       "pages": "28"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch2-arithmetic-progressions.o1",
+       "text": "Use arithmetic progressions",
+       "pages": "22",
+       "location": {
+        "line": 18,
+        "page": 22
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.arithmetic-sequences",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on progression.",
+        "concepts": [
+         "progression"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch3-coordinate-geometry",
+     "number": 3,
+     "title": "Coordinate geometry",
+     "pages": "35–48",
+     "examples": [],
+     "exercises": [
+      {
+       "ref": "Exercise 3.1",
+       "pages": "42"
+      }
+     ],
+     "outcomes": [
+      {
+       "id": "ch3-coordinate-geometry.o1",
+       "text": "Use coordinate distance and section formulas",
+       "pages": "36",
+       "location": {
+        "line": 23,
+        "page": 36
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.coordinate.distance",
+          "score": 1,
+          "method": "meaning@2",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.coordinate.distance-intro",
+          "score": 0.616,
+          "method": "meaning@2",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.coordinate.cartesian",
+          "score": 0.556,
+          "method": "meaning@2",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on coordinates, distance.",
+        "concepts": [
+         "coordinates",
+         "distance"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

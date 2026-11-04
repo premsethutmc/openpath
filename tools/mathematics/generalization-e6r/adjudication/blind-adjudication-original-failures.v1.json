@@ -1,0 +1,58 @@
+[
+ {
+  "caseId": "e6-124",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "The posed expression is 1*(x-2)^-1 with approach 2 from the right. For x slightly above 2, x-2 is a small positive number, so 1/(x-2) grows without bound positively. The single line states the limit is infinity, which is the correct divergent right-hand limit. Reading unsigned infinity as +infinity is standard.",
+  "contestable": true,
+  "contestableWhy": "Unsigned infinity rather than +infinity is a minor notation point; a very strict grader might want the sign."
+ },
+ {
+  "caseId": "e6-126",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "The expression is 1/(x-1) at 1 with side both. The right-hand limit is +infinity and the left-hand limit is -infinity, both correct. Since the one-sided limits differ, the two-sided limit does not exist, which is the correct conclusion. All three lines are valid and answer the two-sided question.",
+  "contestable": false,
+  "contestableWhy": ""
+ },
+ {
+  "caseId": "e6-204",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "Under the stated independence assumption, P(A and B)=P(A)P(B)=1/2*1/3=1/6. The line gives 1/6, which is correct. P(A, B) is the standard joint-probability notation for the intersection. The working gives no explicit product step, but the line is true and the assumption comes from the task.",
+  "contestable": true,
+  "contestableWhy": "P(A, B) is slightly informal notation for the intersection, and no justification line is shown; a strict grader might want the product shown."
+ },
+ {
+  "caseId": "e6-220",
+  "verdict": "incomplete",
+  "firstInvalidStep": null,
+  "reasoning": "The discriminant is 16-52=-36, and sqrt(-36)=6i, so (-4+6i)/2=-2+3i is a correct root. Every line is valid. The task asks for all roots over the complex domain, and the conjugate root -2-3i is never given. The answer covers only part of the solution set, so it is incomplete rather than invalid.",
+  "contestable": false,
+  "contestableWhy": ""
+ },
+ {
+  "caseId": "e6-263",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "The posed expression ln(x)+ln(x^2) is real only for x>0, because ln(x) needs x>0. On that domain ln(x)+ln(x^2)=ln(x)+2ln(x)=3ln(x)=ln(x^3), so the first line is valid. The derivative is 3/x, which is correct. The restriction x>0 is implied by the task, so it is not a missing assumption.",
+  "contestable": true,
+  "contestableWhy": "The identity ln(x^2)=2ln(x) fails for x<0, so a grader who ignores the domain implied by ln(x) could call this a missing assumption."
+ },
+ {
+  "caseId": "e6-213",
+  "verdict": "incomplete",
+  "firstInvalidStep": null,
+  "reasoning": "The task asks for the product (1+2i)(3-i)=3-i+6i-2i^2=5+5i. The student computes the conjugate of the product. The conj(a*b)=conj(a)*conj(b) step is valid, and (1-2i)(3+i)=5-5i is correct arithmetic. Every line is true, but the result is the conjugate 5-5i, a different quantity from the requested 5+5i, so the working is incomplete.",
+  "contestable": true,
+  "contestableWhy": "A grader might call this invalid because the final answer 5-5i is wrong for the posed product, but no individual line is false."
+ },
+ {
+  "caseId": "e6-288",
+  "verdict": "incomplete",
+  "firstInvalidStep": null,
+  "reasoning": "To verify that 3+4i is a root of x^2-6x+25, one must show p(3+4i)=0: (3+4i)^2-6(3+4i)+25=(-7+24i)-18-24i+25=0. The student only computes |3+4i|=5, which is true but does not show the polynomial vanishes. Its modulus equals sqrt(25), but that is not a verification. All lines are valid but the requested conclusion is not reached, so incomplete.",
+  "contestable": true,
+  "contestableWhy": "A grader might call this invalid or irrelevant because the modulus step does not bear on the root check."
+ }
+]

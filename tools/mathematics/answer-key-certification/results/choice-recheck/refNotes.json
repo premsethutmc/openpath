@@ -1,0 +1,7 @@
+{
+ "all": "Judges read each option text as a claim and evaluate it from statement/figure/params; keyed letter is only compared after, never used to derive. No letter map. Geometry classifiers copied from geometry_coordinate_6/10 then given a second method (collinear: distances; triangle: vertex dot products; conic: eigenvalue signs; skew lines: linsolve; aspar: direction vectors).",
+ "alcyc": "formula-based (converse of cyclic-quadrilateral / same-side equal-angle / opposite-side supplementary theorems); no independent numeric cross-check. 'cannot be decided' option treated as false because angles are given.",
+ "alnear": "two statement variants (distances given / lengths given); options are per-variant claim sets (longer vs nearer); exact squared quantities.",
+ "mutation": "keyed letter shifted +1 mod option count; every decided question must flip to mismatch (all 10 families: 100%).",
+ "numberFamilies": "options parsed from option texts; options equal the prompt list in the same order for all questions (checked), so the earlier assumed A..D order is now confirmed by real texts."
+}

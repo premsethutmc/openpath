@@ -1,0 +1,2509 @@
+{
+  "schema": "openpath-canonical-ir-benchmark@1",
+  "frozenBeforeImplementation": true,
+  "sealedUntilFinalEvaluation": true,
+  "cases": [
+    {
+      "id": "d8-notation-028",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "x+1"
+      },
+      "right": {
+        "format": "natural",
+        "text": "1+x"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-notation-029",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "t^2"
+      },
+      "right": {
+        "format": "natural",
+        "text": "t^3"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-notation-030",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "u^2"
+      },
+      "right": {
+        "format": "latex",
+        "text": "u^{2}"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-notation-031",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "sqrt(z+1)"
+      },
+      "right": {
+        "format": "latex",
+        "text": "\\sqrt{z+1}"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-notation-032",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "sin^2(x)"
+      },
+      "right": {
+        "format": "natural",
+        "text": "(sin(x))^2"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-notation-033",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "t+1"
+      },
+      "right": {
+        "format": "natural",
+        "text": "1+t"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-notation-034",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "u^2"
+      },
+      "right": {
+        "format": "natural",
+        "text": "u^3"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-notation-035",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "z^2"
+      },
+      "right": {
+        "format": "latex",
+        "text": "z^{2}"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-notation-036",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "sqrt(x+1)"
+      },
+      "right": {
+        "format": "latex",
+        "text": "\\sqrt{x+1}"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-notation-037",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "sin^2(t)"
+      },
+      "right": {
+        "format": "natural",
+        "text": "(sin(t))^2"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-notation-038",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "u+1"
+      },
+      "right": {
+        "format": "natural",
+        "text": "1+u"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-notation-039",
+      "category": "notation",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "z^2"
+      },
+      "right": {
+        "format": "natural",
+        "text": "z^3"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-function-derivative-028",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "f(x+1)"
+      },
+      "right": {
+        "format": "natural",
+        "text": "f(1+x)"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-function-derivative-029",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "g(g(t))"
+      },
+      "right": {
+        "format": "natural",
+        "text": "g(t)"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-function-derivative-030",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "rate'(x)=2x"
+      },
+      "right": {
+        "format": "latex",
+        "text": "rate^{\\prime}(x)=2x"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-function-derivative-031",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "phi'(t)=2t"
+      },
+      "right": {
+        "format": "natural",
+        "text": "phi''(t)=2t"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-function-derivative-032",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "\u2202f/\u2202x=2x"
+      },
+      "right": {
+        "format": "latex",
+        "text": "\\frac{\\partial f}{\\partial x}=2x"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-function-derivative-033",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "g(t+1)"
+      },
+      "right": {
+        "format": "natural",
+        "text": "g(1+t)"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-function-derivative-034",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "rate(g(x))"
+      },
+      "right": {
+        "format": "natural",
+        "text": "rate(x)"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-function-derivative-035",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "phi'(t)=2t"
+      },
+      "right": {
+        "format": "latex",
+        "text": "phi^{\\prime}(t)=2t"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-function-derivative-036",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "f'(x)=2x"
+      },
+      "right": {
+        "format": "natural",
+        "text": "f''(x)=2x"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-function-derivative-037",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "\u2202g/\u2202t=2t"
+      },
+      "right": {
+        "format": "latex",
+        "text": "\\frac{\\partial g}{\\partial t}=2t"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-function-derivative-038",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "rate(x+1)"
+      },
+      "right": {
+        "format": "natural",
+        "text": "rate(1+x)"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-function-derivative-039",
+      "category": "function-derivative",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "natural",
+      "left": {
+        "format": "natural",
+        "text": "phi(g(t))"
+      },
+      "right": {
+        "format": "natural",
+        "text": "phi(t)"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-scope-021",
+      "category": "scope",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "u"
+            },
+            "exponent": 2
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-scope-022",
+      "category": "scope",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "add",
+          "terms": [
+            {
+              "kind": "variable",
+              "name": "x"
+            },
+            {
+              "kind": "variable",
+              "name": "y"
+            }
+          ]
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "add",
+          "terms": [
+            {
+              "kind": "variable",
+              "name": "x"
+            },
+            {
+              "kind": "variable",
+              "name": "z"
+            }
+          ]
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-scope-023",
+      "category": "scope",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-scope-024",
+      "category": "scope",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "u"
+            },
+            "exponent": 2
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-scope-025",
+      "category": "scope",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "add",
+          "terms": [
+            {
+              "kind": "variable",
+              "name": "x"
+            },
+            {
+              "kind": "variable",
+              "name": "y"
+            }
+          ]
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "add",
+          "terms": [
+            {
+              "kind": "variable",
+              "name": "x"
+            },
+            {
+              "kind": "variable",
+              "name": "z"
+            }
+          ]
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-scope-026",
+      "category": "scope",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-scope-027",
+      "category": "scope",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "u"
+            },
+            "exponent": 2
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-scope-028",
+      "category": "scope",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "add",
+          "terms": [
+            {
+              "kind": "variable",
+              "name": "x"
+            },
+            {
+              "kind": "variable",
+              "name": "y"
+            }
+          ]
+        }
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "add",
+          "terms": [
+            {
+              "kind": "variable",
+              "name": "x"
+            },
+            {
+              "kind": "variable",
+              "name": "z"
+            }
+          ]
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-scope-029",
+      "category": "scope",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "x"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "x"
+        }
+      },
+      "right": {
+        "mathematicalType": "integral",
+        "value": {
+          "integrand": {
+            "kind": "add",
+            "terms": [
+              {
+                "kind": "variable",
+                "name": "u"
+              },
+              {
+                "kind": "variable",
+                "name": "u"
+              }
+            ]
+          },
+          "boundVariable": "u"
+        }
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-domain-021",
+      "category": "domain",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-domain-022",
+      "category": "domain",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-domain-023",
+      "category": "domain",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "complex:x"
+        ]
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-domain-024",
+      "category": "domain",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-domain-025",
+      "category": "domain",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-domain-026",
+      "category": "domain",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "complex:x"
+        ]
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-domain-027",
+      "category": "domain",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-domain-028",
+      "category": "domain",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-domain-029",
+      "category": "domain",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "real:x"
+        ]
+      },
+      "right": {
+        "mathematicalType": "symbolic-expression",
+        "value": {
+          "kind": "multiply",
+          "factors": [
+            {
+              "kind": "add",
+              "terms": [
+                {
+                  "kind": "power",
+                  "base": {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  "exponent": 2
+                },
+                {
+                  "kind": "constant",
+                  "value": "-1"
+                }
+              ]
+            },
+            {
+              "kind": "power",
+              "base": {
+                "kind": "add",
+                "terms": [
+                  {
+                    "kind": "variable",
+                    "name": "x"
+                  },
+                  {
+                    "kind": "constant",
+                    "value": "-1"
+                  }
+                ]
+              },
+              "exponent": -1
+            }
+          ]
+        },
+        "domainRestrictions": [
+          "nonzero:x-1"
+        ],
+        "assumptions": [
+          "complex:x"
+        ]
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-binding-021",
+      "category": "binding",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-b"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-binding-022",
+      "category": "binding",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-binding-023",
+      "category": "binding",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-binding-024",
+      "category": "binding",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [
+          "prove:x>0"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-binding-025",
+      "category": "binding",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-binding-026",
+      "category": "binding",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-b"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-binding-027",
+      "category": "binding",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "probability",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-binding-028",
+      "category": "binding",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-binding-029",
+      "category": "binding",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "exact-scalar",
+        "value": "3",
+        "symbol": {
+          "name": "x",
+          "scope": "stage-a"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": [
+          "prove:x>0"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-certificate-021",
+      "category": "certificate",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 3
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-certificate-022",
+      "category": "certificate",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-certificate-023",
+      "category": "certificate",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-certificate-024",
+      "category": "certificate",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-certificate-025",
+      "category": "certificate",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": true
+    },
+    {
+      "id": "d8-certificate-026",
+      "category": "certificate",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 3
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-certificate-027",
+      "category": "certificate",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-certificate-028",
+      "category": "certificate",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "forged"
+        ],
+        "verificationStatus": "verified"
+      },
+      "expectedSameIdentity": false
+    },
+    {
+      "id": "d8-certificate-029",
+      "category": "certificate",
+      "provenance": "independently authored before D8 implementation",
+      "inputKind": "direct",
+      "left": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "verified"
+      },
+      "right": {
+        "mathematicalType": "proof-claim",
+        "value": {
+          "before": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          },
+          "after": {
+            "kind": "power",
+            "base": {
+              "kind": "variable",
+              "name": "x"
+            },
+            "exponent": 2
+          }
+        },
+        "assumptions": [
+          "real:x"
+        ],
+        "domainRestrictions": [],
+        "dependencies": [
+          "problem"
+        ],
+        "verificationStatus": "unverified"
+      },
+      "expectedSameIdentity": false
+    }
+  ]
+}

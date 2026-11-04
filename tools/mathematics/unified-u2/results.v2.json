@@ -1,0 +1,52 @@
+{
+  "version": "unified-math-u2-evaluation@1",
+  "totalCases": 250,
+  "failures": 0,
+  "falseAcceptances": 0,
+  "falseRejections": 0,
+  "firstInvalidStepMatches": 250,
+  "coldStartupMs": 40.058,
+  "warmMeanMs": 1.223,
+  "concurrent50Ms": 51.057,
+  "workerPidStable": true,
+  "workerMaxRssKbBefore": 33380,
+  "workerMaxRssKbAfter": 33380,
+  "categories": {
+    "triangle-angle": {
+      "cases": 40,
+      "failures": 0,
+      "elapsedMs": 81.929,
+      "meanMs": 2.048
+    },
+    "isosceles": {
+      "cases": 40,
+      "failures": 0,
+      "elapsedMs": 45.016,
+      "meanMs": 1.125
+    },
+    "similarity": {
+      "cases": 40,
+      "failures": 0,
+      "elapsedMs": 41.242,
+      "meanMs": 1.031
+    },
+    "pythagorean": {
+      "cases": 40,
+      "failures": 0,
+      "elapsedMs": 44.789,
+      "meanMs": 1.12
+    },
+    "parallel": {
+      "cases": 40,
+      "failures": 0,
+      "elapsedMs": 41.965,
+      "meanMs": 1.049
+    },
+    "adversarial": {
+      "cases": 50,
+      "failures": 0,
+      "elapsedMs": 47.195,
+      "meanMs": 0.944
+    }
+  }
+}

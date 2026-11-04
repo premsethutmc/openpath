@@ -1,0 +1,74 @@
+[
+ {
+  "index": 0,
+  "statement": "3x = 9, x > -2",
+  "text": "3x = 9\nx = 3",
+  "was": "verified",
+  "postRemoval": "unsupported",
+  "now": "verified",
+  "rule": "condition x > -2 now parsed (general x \u22c8 c conditions); one-step solve, 3 lies in the domain"
+ },
+ {
+  "index": 11,
+  "statement": "-2x < 6",
+  "text": "-2x < 6\nx > -3",
+  "was": "verified",
+  "postRemoval": "unsupported",
+  "now": "verified",
+  "rule": "inequality: divide by -2, relation reversed (balance-divide, sign proven)"
+ },
+ {
+  "index": 16,
+  "statement": "3x + 2 >= -1",
+  "text": "3x + 2 >= -1\n3x >= -3\nx >= -1",
+  "was": "verified",
+  "postRemoval": "unsupported",
+  "now": "verified",
+  "rule": "inequality: subtract 2 (balance-add), divide by 3"
+ },
+ {
+  "index": 17,
+  "statement": "-5x < 20",
+  "text": "-5x < 20\nx > -4",
+  "was": "verified",
+  "postRemoval": "unsupported",
+  "now": "verified",
+  "rule": "inequality: divide by -5, relation reversed"
+ },
+ {
+  "index": 18,
+  "statement": "x^2 = 9",
+  "text": "x^2 = 9\nx^2 - 9 = 0\n(x - 3)(x + 3) = 0\nx = 3 or x = -3",
+  "was": "verified",
+  "postRemoval": "unsupported",
+  "now": "verified",
+  "rule": "subtract the whole right side (balance-add), factorise, zero-product reading"
+ },
+ {
+  "index": 19,
+  "statement": "x^2 = 16",
+  "text": "x^2 = 16\nx^2 - 16 = 0\n(x - 4)(x + 4) = 0\nx = 4 or x = -4",
+  "was": "verified",
+  "postRemoval": "unsupported",
+  "now": "verified",
+  "rule": "subtract the whole right side (balance-add), factorise, zero-product reading"
+ },
+ {
+  "index": 32,
+  "statement": "x^2 - 1000000007x + 1000000006 = 0",
+  "text": "x^2 - 1000000007x + 1000000006 = 0\n(x - 1)(x - 1000000006) = 0\nx = 1 or x = 1000000006",
+  "was": "verified",
+  "postRemoval": "unsupported",
+  "now": "verified",
+  "rule": "factorisation (kernel-checked) then zero-product reading; exact big-integer arithmetic"
+ },
+ {
+  "index": 36,
+  "statement": "a^2 - 3b when a = 2 and b = 1",
+  "text": "a^2 - 3b\n2^2 - 3*1\n4 - 3\n1",
+  "was": "verified",
+  "postRemoval": "unsupported",
+  "now": "verified",
+  "rule": "substitution under the task's bindings, then exact evaluation"
+ }
+]

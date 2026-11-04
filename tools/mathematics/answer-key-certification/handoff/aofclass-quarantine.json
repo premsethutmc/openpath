@@ -1,0 +1,97 @@
+{
+ "handoff": "critical-quarantine/v1",
+ "status": "CONFIRMED (hand-checked by the coordinator and derived independently by the certification agent)",
+ "for": "Agent 1 (owns grading, quarantine and release gating)",
+ "from": "Agent 2 (answer-key certification)",
+ "branch": "feat/math-answer-key-certification",
+ "baseCommit": "3e4c62d",
+ "family": "aofclass",
+ "classification": "Generator defect (invalid question as written); stored key cannot be marked right or wrong",
+ "severity": "critical",
+ "confidence": "high",
+ "releasedQuestionsInFamily": 300,
+ "affectedTypedQuestions": 41,
+ "affectedQuestionIds": [
+  "gen:aofclass:-4,-4,-5,2",
+  "gen:aofclass:-3,2,-5,2",
+  "gen:aofclass:-2,0,-3,2",
+  "gen:aofclass:-2,9,-5,2",
+  "gen:aofclass:-1,-8,-3,2",
+  "gen:aofclass:-1,-6,-3,2",
+  "gen:aofclass:-1,-6,-2,2",
+  "gen:aofclass:-1,-3,-4,2",
+  "gen:aofclass:-1,6,-2,2",
+  "gen:aofclass:-1,7,-4,2",
+  "gen:aofclass:-1,9,-2,2",
+  "gen:aofclass:0,-9,-3,2",
+  "gen:aofclass:0,-7,-2,2",
+  "gen:aofclass:0,-6,-3,2",
+  "gen:aofclass:0,-3,-1,2",
+  "gen:aofclass:0,1,-3,2",
+  "gen:aofclass:1,3,-2,2",
+  "gen:aofclass:1,7,-1,2",
+  "gen:aofclass:1,8,0,2",
+  "gen:aofclass:2,-7,1,2",
+  "gen:aofclass:2,-1,-1,2",
+  "gen:aofclass:2,-1,0,2",
+  "gen:aofclass:2,8,0,2",
+  "gen:aofclass:2,8,1,2",
+  "gen:aofclass:2,9,-1,2",
+  "gen:aofclass:3,-5,0,2",
+  "gen:aofclass:3,-5,1,2",
+  "gen:aofclass:3,-1,2,2",
+  "gen:aofclass:3,8,0,2",
+  "gen:aofclass:4,-8,2,2",
+  "gen:aofclass:4,-5,2,2",
+  "gen:aofclass:4,-1,2,2",
+  "gen:aofclass:4,0,3,2",
+  "gen:aofclass:4,4,3,2",
+  "gen:aofclass:5,-9,2,2",
+  "gen:aofclass:5,-8,3,2",
+  "gen:aofclass:5,-7,3,2",
+  "gen:aofclass:5,-3,3,2",
+  "gen:aofclass:5,-2,4,2",
+  "gen:aofclass:5,0,3,2",
+  "gen:aofclass:5,5,4,2"
+ ],
+ "affectedPresentations": "each affected id also exists as a multiple-choice presentation id + ':mc' (and ':w' if the family has a word form); the family's typed form is already a choice question, so quarantine the id and any suffixed variants of the same parameters",
+ "representative": {
+  "id": "gen:aofclass:-3,2,-5,2",
+  "params": [
+   -3,
+   2,
+   -5,
+   2
+  ],
+  "parameterMeaning": "[h, c, d, s]: f(x) = (x-h)^2 + c on [d, oo); s=0 codomain R, s=1 codomain [c, oo), s=2 codomain [f(d), oo)",
+  "prompt": "Let f : [−5, ∞) → [6, ∞) be given by f(x) = x² + 6x + 11. Which statement is true?",
+  "storedAnswer": "C",
+  "storedMeaning": "C = onto but not one-one (option letters per the family's fixed choice list)"
+ },
+ "counterexample": "f(x) = x^2 + 6x + 11 = (x+3)^2 + 2 on [-5, oo). x = -3 lies in the domain and f(-3) = 2, which is not in the stated codomain [6, oo) (f(-5) = 6 is not the minimum). So f is not a function into [6, oo); none of the four statements about 'f : [-5,oo) -> [6,oo)' is true as written.",
+ "rootCause": "In packages/learning/src/fam/b15.ts (family aofclass) variant s=2 sets the codomain to [f(d), oo) whatever d is, and marks it 'onto' unconditionally. [f(d), oo) equals the range only when the vertex is not inside the domain (d >= h); when d < h the minimum is c = f(h) < f(d). The reject() predicate (fclOk) does not exclude s=2 with d<h, and the generator's own validate() only samples codomain targets y >= f(d), so it never tests that every f(x) lies inside the codomain: a blind spot, not a numerical slip.",
+ "scope": {
+  "onlyThisVariant": true,
+  "variantsChecked": {
+   "s=0": "109 questions, codomain R: well-posed",
+   "s=1": "104 questions, codomain [c,oo) contains the range for every d: well-posed",
+   "s=2": "87 questions: 41 invalid (d < h), 46 valid (d >= h, f(d) is the minimum)"
+  },
+  "rule": "s == 2 and d < h",
+  "verify": "python3 tools/mathematics/answer-key-certification/handoff/verify_aofclass.py <export>/q/aofclass.jsonl reproduces exactly these 41 ids"
+ },
+ "recommendedQuarantineScope": {
+  "immediate": "withhold the 41 listed ids (and their :mc/:w presentations) from learners and from mastery evidence; do not re-key them",
+  "family": "the other 259 questions of aofclass are mathematically well-posed on independent evaluation and need not be withheld",
+  "history": "attempts already recorded on the 41 ids carry an invalid statement: treat as unresolved evidence rather than correct/incorrect"
+ },
+ "proposedCorrection": {
+  "label": "PROPOSAL, not applied",
+  "statement": "For s=2 write the codomain as [c, oo) (the vertex value) when d < h; then 'onto but not one-one' (stored C) is true.",
+  "alternative": "only generate s=2 when d >= h (then f(d) is the minimum and the item is the one-one onto case), and add a validate() check that every sampled f(x) lies inside the stated codomain"
+ },
+ "evidence": [
+  "tools/mathematics/answer-key-certification/handoff/verify_aofclass.py",
+  "certification agent (algebra-b): independent evaluation of f on an exact dyadic grid against the stated codomain; 41 mismatches, identical id set"
+ ]
+}

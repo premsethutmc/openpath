@@ -1,0 +1,185 @@
+[
+ {
+  "rank": 1,
+  "bucket": "R8",
+  "description": "other single cases",
+  "recoverableByIntegration": true,
+  "cases": 19,
+  "ids": [
+   "e1-101",
+   "e1-117",
+   "e1-129",
+   "e1-136",
+   "e1-152",
+   "e1-154",
+   "e1-233",
+   "e1-245",
+   "e1-259",
+   "e1-263",
+   "e1-268",
+   "e1-273",
+   "e1-292",
+   "e1-297",
+   "e1-300",
+   "e1-385",
+   "e1-403",
+   "e5-sealed-076",
+   "e5-sealed-079"
+  ]
+ },
+ {
+  "rank": 2,
+  "bucket": "R5",
+  "description": "probability: counting/complement/independence working has no lossless B1 adapter",
+  "recoverableByIntegration": true,
+  "cases": 12,
+  "ids": [
+   "e1-303",
+   "e1-307",
+   "e1-308",
+   "e1-317",
+   "e1-321",
+   "e1-328",
+   "e1-333",
+   "e1-336",
+   "e1-342",
+   "e1-345",
+   "e1-346",
+   "e1-359"
+  ]
+ },
+ {
+  "rank": 3,
+  "bucket": "R1",
+  "description": "calculus: restatement + prose method line -> incomplete (E5 proposer returns no plan)",
+  "recoverableByIntegration": true,
+  "cases": 11,
+  "ids": [
+   "e1-180",
+   "e1-195",
+   "e1-199",
+   "e1-204",
+   "e1-208",
+   "e1-215",
+   "e5-sealed-014",
+   "e5-sealed-037",
+   "e5-sealed-046",
+   "e5-sealed-050",
+   "e5-sealed-057"
+  ]
+ },
+ {
+  "rank": 4,
+  "bucket": "R6",
+  "description": "complex: modulus via z*conj(z) / arg / sqrt(z^2) notation not certified",
+  "recoverableByIntegration": true,
+  "cases": 9,
+  "ids": [
+   "e1-416",
+   "e1-417",
+   "e1-429",
+   "e1-432",
+   "e1-438",
+   "e1-439",
+   "e1-440",
+   "e1-444",
+   "e1-447"
+  ]
+ },
+ {
+  "rank": 5,
+  "bucket": "R2",
+  "description": "calculus: integral missing +C followed by a prose check line",
+  "recoverableByIntegration": true,
+  "cases": 6,
+  "ids": [
+   "e1-168",
+   "e1-169",
+   "e1-172",
+   "e1-174",
+   "e1-201",
+   "e1-212"
+  ]
+ },
+ {
+  "rank": 6,
+  "bucket": "R3",
+  "description": "calculus: Unicode arrow / one-sided / standard-limit notation reaching the limit binder",
+  "recoverableByIntegration": true,
+  "cases": 5,
+  "ids": [
+   "e5-sealed-058",
+   "e5-sealed-069",
+   "e5-sealed-080",
+   "e5-sealed-094",
+   "e5-sealed-098"
+  ]
+ },
+ {
+  "rank": 7,
+  "bucket": "R4",
+  "description": "calculus: function-definition line, undefined-expression member, log|x| notation",
+  "recoverableByIntegration": true,
+  "cases": 2,
+  "ids": [
+   "e5-sealed-023",
+   "e5-sealed-090"
+  ]
+ },
+ {
+  "rank": 8,
+  "bucket": "G1",
+  "description": "genuinely out of scope; correct to refuse but class is malformed/unsupported mismatch",
+  "recoverableByIntegration": false,
+  "cases": 20,
+  "ids": [
+   "e1-022",
+   "e1-050",
+   "e1-064",
+   "e1-074",
+   "e1-164",
+   "e1-186",
+   "e1-189",
+   "e1-196",
+   "e1-227",
+   "e1-318",
+   "e1-323",
+   "e1-327",
+   "e1-335",
+   "e1-343",
+   "e1-349",
+   "e1-351",
+   "e1-352",
+   "e1-354",
+   "e1-358",
+   "e1-453"
+  ]
+ },
+ {
+  "rank": 9,
+  "bucket": "G2",
+  "description": "malformed/ambiguous source: refusal is right; class label differs (malformed vs ambiguous vs unsupported)",
+  "recoverableByIntegration": false,
+  "cases": 18,
+  "ids": [
+   "e1-167",
+   "e1-224",
+   "e1-272",
+   "e1-305",
+   "e1-309",
+   "e1-310",
+   "e1-312",
+   "e1-380",
+   "e1-386",
+   "e1-395",
+   "e1-421",
+   "e1-441",
+   "e1-450",
+   "e1-454",
+   "e1-468",
+   "e1-477",
+   "e1-496",
+   "e1-498"
+  ]
+ }
+]

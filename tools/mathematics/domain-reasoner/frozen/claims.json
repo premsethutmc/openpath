@@ -1,0 +1,4676 @@
+[
+ {
+  "id": "k0000",
+  "text": "5/(x-7)+-3/(x+3)=-5/((x^2-4*x-21))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-41/2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-41/2"
+  ]
+ },
+ {
+  "id": "k0001",
+  "text": "5/(x-7)+-3/(x+3)=-5/((x^2-4*x-21))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-41/2"
+  ]
+ },
+ {
+  "id": "k0002",
+  "text": "5/(x-7)+-3/(x+3)=-5/((x^2-4*x-21))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-39/2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-41/2"
+  ]
+ },
+ {
+  "id": "k0003",
+  "text": "5/(x-7)+-3/(x+3)=-5/((x^2-4*x-21))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-41/2"
+  ]
+ },
+ {
+  "id": "k0004",
+  "text": "-3/(x-6)--3/(x-8)=7/((x^2-14*x+48))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0005",
+  "text": "-3/(x-6)--3/(x-8)=7/((x^2-14*x+48))",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0006",
+  "text": "-3/(x-6)--3/(x-8)=7/((x^2-14*x+48))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "6"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0007",
+  "text": "(x+7)/(x+7)=5",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0008",
+  "text": "(x+7)/(x+7)=5",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0009",
+  "text": "(x+7)/(x+7)=5",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "1"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0010",
+  "text": "(x+7)/(x+7)=5",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0011",
+  "text": "x+-9/(x-8)=(x^2-8*x-9)/(x-8)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0012",
+  "text": "x+-9/(x-8)=(x^2-8*x-9)/(x-8)",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0013",
+  "text": "1/(x+3)+-1/(x-4)=(0*x-7)/((x+3)*(x-4))+1",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0014",
+  "text": "1/(x+3)+-1/(x-4)=(0*x-7)/((x+3)*(x-4))+1",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-3",
+   "4"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0015",
+  "text": "1/(x+3)+-1/(x-4)=(0*x-7)/((x+3)*(x-4))+1",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0016",
+  "text": "1/(x+3)+-1/(x-4)=(0*x-7)/((x+3)*(x-4))+1",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0017",
+  "text": "-3/(x-4)+4/(x+7)=-44/((x^2+3*x-28))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0018",
+  "text": "-3/(x-4)+4/(x+7)=-44/((x^2+3*x-28))",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0019",
+  "text": "-3/(x-4)+4/(x+7)=-44/((x^2+3*x-28))",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-2"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0020",
+  "text": "-3/(x-4)+4/(x+7)=-44/((x^2+3*x-28))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0021",
+  "text": "5/(x+2)+-5/(x+5)=(0*x+15)/((x+2)*(x+5))+2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0022",
+  "text": "5/(x+2)+-5/(x+5)=(0*x+15)/((x+2)*(x+5))+2",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-2",
+   "-5"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0023",
+  "text": "5/(x+2)+-5/(x+5)=(0*x+15)/((x+2)*(x+5))+2",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-2"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0024",
+  "text": "5/(x+2)+-5/(x+5)=(0*x+15)/((x+2)*(x+5))+2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-5"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0025",
+  "text": "-3/(x-6)=-1/(x-6)-2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "7"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "7"
+  ]
+ },
+ {
+  "id": "k0026",
+  "text": "-3/(x-6)=-1/(x-6)-2",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "7"
+  ]
+ },
+ {
+  "id": "k0027",
+  "text": "-3/(x-6)=-1/(x-6)-2",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "7"
+  ]
+ },
+ {
+  "id": "k0028",
+  "text": "-3/(x-6)=-1/(x-6)-2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "6"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "7"
+  ]
+ },
+ {
+  "id": "k0029",
+  "text": "((x+5)*(x-6))/(x+5)=-8",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-2"
+  ]
+ },
+ {
+  "id": "k0030",
+  "text": "((x+5)*(x-6))/(x+5)=-8",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-2",
+   "-5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-2"
+  ]
+ },
+ {
+  "id": "k0031",
+  "text": "((x+5)*(x-6))/(x+5)=-8",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-2"
+  ]
+ },
+ {
+  "id": "k0032",
+  "text": "((x+5)*(x-6))/(x+5)=-8",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "0"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-2"
+  ]
+ },
+ {
+  "id": "k0033",
+  "text": "((x+5)*(x-6))/(x+5)=-8",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-2"
+  ]
+ },
+ {
+  "id": "k0034",
+  "text": "(x+1)/(x+5)=(x+2)/(x-5)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-15/11"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-15/11"
+  ]
+ },
+ {
+  "id": "k0035",
+  "text": "(x+1)/(x+5)=(x+2)/(x-5)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-15/11"
+  ]
+ },
+ {
+  "id": "k0036",
+  "text": "(x+1)/(x+5)=(x+2)/(x-5)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "7/11"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-15/11"
+  ]
+ },
+ {
+  "id": "k0037",
+  "text": "(x+1)/(x+5)=(x+2)/(x-5)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-15/11"
+  ]
+ },
+ {
+  "id": "k0038",
+  "text": "(-x+7)/(x-8)=(-x-5)/(x+8)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "4"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "4"
+  ]
+ },
+ {
+  "id": "k0039",
+  "text": "(-x+7)/(x-8)=(-x-5)/(x+8)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "4"
+  ]
+ },
+ {
+  "id": "k0040",
+  "text": "(-x+7)/(x-8)=(-x-5)/(x+8)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "4"
+  ]
+ },
+ {
+  "id": "k0041",
+  "text": "(-x+7)/(x-8)=(-x-5)/(x+8)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "4"
+  ]
+ },
+ {
+  "id": "k0042",
+  "text": "4/(x-4)+-1/(x-5)=(3*x-16)/((x-4)*(x-5))+3",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0043",
+  "text": "4/(x-4)+-1/(x-5)=(3*x-16)/((x-4)*(x-5))+3",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "4",
+   "5"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0044",
+  "text": "4/(x-4)+-1/(x-5)=(3*x-16)/((x-4)*(x-5))+3",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "9"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0045",
+  "text": "4/(x-4)+-1/(x-5)=(3*x-16)/((x-4)*(x-5))+3",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "4"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0046",
+  "text": "((x+8)*(x+7))/(x+8)=3",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-4"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-4"
+  ]
+ },
+ {
+  "id": "k0047",
+  "text": "((x+8)*(x+7))/(x+8)=3",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-4",
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-4"
+  ]
+ },
+ {
+  "id": "k0048",
+  "text": "((x+8)*(x+7))/(x+8)=3",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-4"
+  ]
+ },
+ {
+  "id": "k0049",
+  "text": "((x+8)*(x+7))/(x+8)=3",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-6"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-4"
+  ]
+ },
+ {
+  "id": "k0050",
+  "text": "((x+8)*(x+7))/(x+8)=3",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-4"
+  ]
+ },
+ {
+  "id": "k0051",
+  "text": "-2/(x+1)-4/(x-6)=2/((x^2-5*x-6))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "1"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0052",
+  "text": "-2/(x+1)-4/(x-6)=2/((x^2-5*x-6))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0053",
+  "text": "-2/(x+1)-4/(x-6)=2/((x^2-5*x-6))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "0"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0054",
+  "text": "-2/(x+1)-4/(x-6)=2/((x^2-5*x-6))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0055",
+  "text": "(-x-4)/(x-8)=(-2*x-6)/(2*x+6)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0056",
+  "text": "(-x-4)/(x-8)=(-2*x-6)/(2*x+6)",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0057",
+  "text": "(-x-4)/(x-8)=(-2*x-6)/(2*x+6)",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "2"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0058",
+  "text": "(-x-4)/(x-8)=(-2*x-6)/(2*x+6)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0059",
+  "text": "5/(x-5)--1/(x-6)=-1/((x^2-11*x+30))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "17/3"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "17/3"
+  ]
+ },
+ {
+  "id": "k0060",
+  "text": "5/(x-5)--1/(x-6)=-1/((x^2-11*x+30))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "17/3"
+  ]
+ },
+ {
+  "id": "k0061",
+  "text": "5/(x-5)--1/(x-6)=-1/((x^2-11*x+30))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "20/3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "17/3"
+  ]
+ },
+ {
+  "id": "k0062",
+  "text": "5/(x-5)--1/(x-6)=-1/((x^2-11*x+30))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "17/3"
+  ]
+ },
+ {
+  "id": "k0063",
+  "text": "-1/(2*x+8)=-2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-15/4"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-15/4"
+  ]
+ },
+ {
+  "id": "k0064",
+  "text": "-1/(2*x+8)=-2",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-15/4"
+  ]
+ },
+ {
+  "id": "k0065",
+  "text": "-1/(2*x+8)=-2",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-23/4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-15/4"
+  ]
+ },
+ {
+  "id": "k0066",
+  "text": "-1/(2*x+8)=-2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-15/4"
+  ]
+ },
+ {
+  "id": "k0067",
+  "text": "3*x+9/(x-4)=(3*x^2-12*x+9)/(x-4)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0068",
+  "text": "3*x+9/(x-4)=(3*x^2-12*x+9)/(x-4)",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0069",
+  "text": "3/(x+2)+1/(x-4)=-17/((x+2)*(x-4))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-7/4"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-7/4"
+  ]
+ },
+ {
+  "id": "k0070",
+  "text": "3/(x+2)+1/(x-4)=-17/((x+2)*(x-4))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-7/4"
+  ]
+ },
+ {
+  "id": "k0071",
+  "text": "3/(x+2)+1/(x-4)=-17/((x+2)*(x-4))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-11/4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-7/4"
+  ]
+ },
+ {
+  "id": "k0072",
+  "text": "3/(x+2)+1/(x-4)=-17/((x+2)*(x-4))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-7/4"
+  ]
+ },
+ {
+  "id": "k0073",
+  "text": "1/(x-6)+-1/(x+9)=10/((x-6)*(x+9))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0074",
+  "text": "1/(x-6)+-1/(x+9)=10/((x-6)*(x+9))",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0075",
+  "text": "1/(x-6)+-1/(x+9)=10/((x-6)*(x+9))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0076",
+  "text": "1/(x-8)-8=1",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "73/9"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "73/9"
+  ]
+ },
+ {
+  "id": "k0077",
+  "text": "1/(x-8)-8=1",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "73/9"
+  ]
+ },
+ {
+  "id": "k0078",
+  "text": "1/(x-8)-8=1",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "82/9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "73/9"
+  ]
+ },
+ {
+  "id": "k0079",
+  "text": "1/(x-8)-8=1",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "73/9"
+  ]
+ },
+ {
+  "id": "k0080",
+  "text": "-5/(x-7)+-3/(x+2)=(-8*x+11)/((x-7)*(x+2))+3",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0081",
+  "text": "-5/(x-7)+-3/(x+2)=(-8*x+11)/((x-7)*(x+2))+3",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-2",
+   "7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0082",
+  "text": "-5/(x-7)+-3/(x+2)=(-8*x+11)/((x-7)*(x+2))+3",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0083",
+  "text": "-5/(x-7)+-3/(x+2)=(-8*x+11)/((x-7)*(x+2))+3",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-2"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0084",
+  "text": "4/(x+8)--3/(x-1)=3/((x+8)*(x-1))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-17/7"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-17/7"
+  ]
+ },
+ {
+  "id": "k0085",
+  "text": "4/(x+8)--3/(x-1)=3/((x+8)*(x-1))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-17/7"
+  ]
+ },
+ {
+  "id": "k0086",
+  "text": "4/(x+8)--3/(x-1)=3/((x+8)*(x-1))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-10/7"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-17/7"
+  ]
+ },
+ {
+  "id": "k0087",
+  "text": "4/(x+8)--3/(x-1)=3/((x+8)*(x-1))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-17/7"
+  ]
+ },
+ {
+  "id": "k0088",
+  "text": "x+5+(x^2-9)/(x-3)=-6",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-7"
+  ]
+ },
+ {
+  "id": "k0089",
+  "text": "x+5+(x^2-9)/(x-3)=-6",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-7",
+   "3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-7"
+  ]
+ },
+ {
+  "id": "k0090",
+  "text": "x+5+(x^2-9)/(x-3)=-6",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-7"
+  ]
+ },
+ {
+  "id": "k0091",
+  "text": "x+5+(x^2-9)/(x-3)=-6",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-7"
+  ]
+ },
+ {
+  "id": "k0092",
+  "text": "x+5+(x^2-9)/(x-3)=-6",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-7"
+  ]
+ },
+ {
+  "id": "k0093",
+  "text": "4/(x-8)+5/(x+3)=13/((x^2-5*x-24))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "41/9"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "41/9"
+  ]
+ },
+ {
+  "id": "k0094",
+  "text": "4/(x-8)+5/(x+3)=13/((x^2-5*x-24))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "41/9"
+  ]
+ },
+ {
+  "id": "k0095",
+  "text": "4/(x-8)+5/(x+3)=13/((x^2-5*x-24))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "59/9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "41/9"
+  ]
+ },
+ {
+  "id": "k0096",
+  "text": "4/(x-8)+5/(x+3)=13/((x^2-5*x-24))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "41/9"
+  ]
+ },
+ {
+  "id": "k0097",
+  "text": "x+-8/(x+7)=(x^2+7*x-8)/(x+7)+1",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0098",
+  "text": "x+-8/(x+7)=(x^2+7*x-8)/(x+7)+1",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0099",
+  "text": "x+-8/(x+7)=(x^2+7*x-8)/(x+7)+1",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0100",
+  "text": "x+-8/(x+7)=(x^2+7*x-8)/(x+7)+1",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0101",
+  "text": "-3/(x+1)+-4/(x+9)=(-7*x-31)/((x+1)*(x+9))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0102",
+  "text": "-3/(x+1)+-4/(x+9)=(-7*x-31)/((x+1)*(x+9))",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0103",
+  "text": "(2*x-3)/(x+2)=(2*x+3)/(x-1)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-1/4"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-1/4"
+  ]
+ },
+ {
+  "id": "k0104",
+  "text": "(2*x-3)/(x+2)=(2*x+3)/(x-1)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-1/4"
+  ]
+ },
+ {
+  "id": "k0105",
+  "text": "(2*x-3)/(x+2)=(2*x+3)/(x-1)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-5/4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-1/4"
+  ]
+ },
+ {
+  "id": "k0106",
+  "text": "(2*x-3)/(x+2)=(2*x+3)/(x-1)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-1/4"
+  ]
+ },
+ {
+  "id": "k0107",
+  "text": "5/(x+6)-1/(x+8)=-20/((x+6)*(x+8))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-27/2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-27/2"
+  ]
+ },
+ {
+  "id": "k0108",
+  "text": "5/(x+6)-1/(x+8)=-20/((x+6)*(x+8))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-27/2"
+  ]
+ },
+ {
+  "id": "k0109",
+  "text": "5/(x+6)-1/(x+8)=-20/((x+6)*(x+8))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-29/2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-27/2"
+  ]
+ },
+ {
+  "id": "k0110",
+  "text": "5/(x+6)-1/(x+8)=-20/((x+6)*(x+8))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-27/2"
+  ]
+ },
+ {
+  "id": "k0111",
+  "text": "5/(x+9)+5/(x+2)=(10*x+55)/((x+9)*(x+2))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0112",
+  "text": "5/(x+9)+5/(x+2)=(10*x+55)/((x+9)*(x+2))",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0113",
+  "text": "1/(x+9)-4/(x-6)=-11/((x^2+3*x-54))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-31/3"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-31/3"
+  ]
+ },
+ {
+  "id": "k0114",
+  "text": "1/(x+9)-4/(x-6)=-11/((x^2+3*x-54))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-31/3"
+  ]
+ },
+ {
+  "id": "k0115",
+  "text": "1/(x+9)-4/(x-6)=-11/((x^2+3*x-54))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-28/3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-31/3"
+  ]
+ },
+ {
+  "id": "k0116",
+  "text": "1/(x+9)-4/(x-6)=-11/((x^2+3*x-54))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-31/3"
+  ]
+ },
+ {
+  "id": "k0117",
+  "text": "(x^2+14*x+48)/(x+8)=-2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0118",
+  "text": "(x^2+14*x+48)/(x+8)=-2",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0119",
+  "text": "(x^2+14*x+48)/(x+8)=-2",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "2"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0120",
+  "text": "(x^2+14*x+48)/(x+8)=-2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0121",
+  "text": "(2*x+3)/(x+1)=(2*x-7)/(x-4)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0122",
+  "text": "(2*x+3)/(x+1)=(2*x-7)/(x-4)",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "5"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0123",
+  "text": "(2*x+3)/(x+1)=(2*x-7)/(x-4)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0124",
+  "text": "-6/(x+9)-1=1",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-12"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-12"
+  ]
+ },
+ {
+  "id": "k0125",
+  "text": "-6/(x+9)-1=1",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-12"
+  ]
+ },
+ {
+  "id": "k0126",
+  "text": "-6/(x+9)-1=1",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-13"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-12"
+  ]
+ },
+ {
+  "id": "k0127",
+  "text": "-6/(x+9)-1=1",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-12"
+  ]
+ },
+ {
+  "id": "k0128",
+  "text": "2/(x+9)+3/(x-6)=(5*x+15)/((x+9)*(x-6))+2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0129",
+  "text": "2/(x+9)+3/(x-6)=(5*x+15)/((x+9)*(x-6))+2",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-9",
+   "6"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0130",
+  "text": "2/(x+9)+3/(x-6)=(5*x+15)/((x+9)*(x-6))+2",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "3"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0131",
+  "text": "2/(x+9)+3/(x-6)=(5*x+15)/((x+9)*(x-6))+2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0132",
+  "text": "-2/(x+9)+-6/(x+1)=-48/((x^2+10*x+9))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0133",
+  "text": "-2/(x+9)+-6/(x+1)=-48/((x^2+10*x+9))",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0134",
+  "text": "-2/(x+9)+-6/(x+1)=-48/((x^2+10*x+9))",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0135",
+  "text": "-2/(x+9)+-6/(x+1)=-48/((x^2+10*x+9))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0136",
+  "text": "(x-7)/(x+8)=(x+3)/(x+3)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0137",
+  "text": "(x-7)/(x+8)=(x+3)/(x+3)",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0138",
+  "text": "(x-7)/(x+8)=(x+3)/(x+3)",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0139",
+  "text": "(x-7)/(x+8)=(x+3)/(x+3)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0140",
+  "text": "(x^2-64)/(x-8)=-9",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-17"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-17"
+  ]
+ },
+ {
+  "id": "k0141",
+  "text": "(x^2-64)/(x-8)=-9",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-17",
+   "8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-17"
+  ]
+ },
+ {
+  "id": "k0142",
+  "text": "(x^2-64)/(x-8)=-9",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-17"
+  ]
+ },
+ {
+  "id": "k0143",
+  "text": "(x^2-64)/(x-8)=-9",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-19"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-17"
+  ]
+ },
+ {
+  "id": "k0144",
+  "text": "(x^2-64)/(x-8)=-9",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-17"
+  ]
+ },
+ {
+  "id": "k0145",
+  "text": "2/(x-8)+4/(x-5)=(6*x-42)/((x-8)*(x-5))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0146",
+  "text": "2/(x-8)+4/(x-5)=(6*x-42)/((x-8)*(x-5))",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0147",
+  "text": "3/(x-2)--1/(x-1)=8/((x-2)*(x-1))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "13/4"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "13/4"
+  ]
+ },
+ {
+  "id": "k0148",
+  "text": "3/(x-2)--1/(x-1)=8/((x-2)*(x-1))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "13/4"
+  ]
+ },
+ {
+  "id": "k0149",
+  "text": "3/(x-2)--1/(x-1)=8/((x-2)*(x-1))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "21/4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "13/4"
+  ]
+ },
+ {
+  "id": "k0150",
+  "text": "3/(x-2)--1/(x-1)=8/((x-2)*(x-1))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "1"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "13/4"
+  ]
+ },
+ {
+  "id": "k0151",
+  "text": "(5*x-15)/(x-3)=5",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0152",
+  "text": "(5*x-15)/(x-3)=5",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0153",
+  "text": "-2/(x+1)=-7",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-5/7"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-5/7"
+  ]
+ },
+ {
+  "id": "k0154",
+  "text": "-2/(x+1)=-7",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-5/7"
+  ]
+ },
+ {
+  "id": "k0155",
+  "text": "-2/(x+1)=-7",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "2/7"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-5/7"
+  ]
+ },
+ {
+  "id": "k0156",
+  "text": "-2/(x+1)=-7",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-5/7"
+  ]
+ },
+ {
+  "id": "k0157",
+  "text": "4/(x-9)-4/(x-7)=1/((x^2-16*x+63))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0158",
+  "text": "4/(x-9)-4/(x-7)=1/((x^2-16*x+63))",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0159",
+  "text": "4/(x-9)-4/(x-7)=1/((x^2-16*x+63))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0160",
+  "text": "-5/(x-9)+1/(x-6)=(-4*x+21)/((x-9)*(x-6))+2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0161",
+  "text": "-5/(x-9)+1/(x-6)=(-4*x+21)/((x-9)*(x-6))+2",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "6",
+   "9"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0162",
+  "text": "-5/(x-9)+1/(x-6)=(-4*x+21)/((x-9)*(x-6))+2",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-2"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0163",
+  "text": "-5/(x-9)+1/(x-6)=(-4*x+21)/((x-9)*(x-6))+2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "6"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0164",
+  "text": "2/(x+9)+2=-8",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-46/5"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-46/5"
+  ]
+ },
+ {
+  "id": "k0165",
+  "text": "2/(x+9)+2=-8",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-46/5"
+  ]
+ },
+ {
+  "id": "k0166",
+  "text": "2/(x+9)+2=-8",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-41/5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-46/5"
+  ]
+ },
+ {
+  "id": "k0167",
+  "text": "2/(x+9)+2=-8",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-46/5"
+  ]
+ },
+ {
+  "id": "k0168",
+  "text": "(x^2-25)/(x-5)=7",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "2"
+  ]
+ },
+ {
+  "id": "k0169",
+  "text": "(x^2-25)/(x-5)=7",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "2",
+   "5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "2"
+  ]
+ },
+ {
+  "id": "k0170",
+  "text": "(x^2-25)/(x-5)=7",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "2"
+  ]
+ },
+ {
+  "id": "k0171",
+  "text": "(x^2-25)/(x-5)=7",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "1"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "2"
+  ]
+ },
+ {
+  "id": "k0172",
+  "text": "(x^2-25)/(x-5)=7",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "2"
+  ]
+ },
+ {
+  "id": "k0173",
+  "text": "-2/(x-6)+5/(x+8)=(3*x-46)/((x-6)*(x+8))-3",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0174",
+  "text": "-2/(x-6)+5/(x+8)=(3*x-46)/((x-6)*(x+8))-3",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-8",
+   "6"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0175",
+  "text": "-2/(x-6)+5/(x+8)=(3*x-46)/((x-6)*(x+8))-3",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-6"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0176",
+  "text": "-2/(x-6)+5/(x+8)=(3*x-46)/((x-6)*(x+8))-3",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0177",
+  "text": "-5/(x+7)+4/(x+2)=-9/((x+7)*(x+2))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "27"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "27"
+  ]
+ },
+ {
+  "id": "k0178",
+  "text": "-5/(x+7)+4/(x+2)=-9/((x+7)*(x+2))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "27"
+  ]
+ },
+ {
+  "id": "k0179",
+  "text": "-5/(x+7)+4/(x+2)=-9/((x+7)*(x+2))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "29"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "27"
+  ]
+ },
+ {
+  "id": "k0180",
+  "text": "-5/(x+7)+4/(x+2)=-9/((x+7)*(x+2))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "27"
+  ]
+ },
+ {
+  "id": "k0181",
+  "text": "5/(x+7)+2/(x)=(7*x+14)/((x+7)*(x))-1",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0182",
+  "text": "5/(x+7)+2/(x)=(7*x+14)/((x+7)*(x))-1",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-7",
+   "0"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0183",
+  "text": "5/(x+7)+2/(x)=(7*x+14)/((x+7)*(x))-1",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0184",
+  "text": "5/(x+7)+2/(x)=(7*x+14)/((x+7)*(x))-1",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0185",
+  "text": "(2*x+4)/(x-9)=(2*x+4)/(x-9)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0186",
+  "text": "(2*x+4)/(x-9)=(2*x+4)/(x-9)",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0187",
+  "text": "3/(x-4)+4/(x+7)=(7*x+5)/((x-4)*(x+7))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0188",
+  "text": "3/(x-4)+4/(x+7)=(7*x+5)/((x-4)*(x+7))",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0189",
+  "text": "3/(x)+2/(x-8)=(5*x-24)/((x)*(x-8))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0190",
+  "text": "3/(x)+2/(x-8)=(5*x-24)/((x)*(x-8))",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0191",
+  "text": "x-3+(x^2-49)/(x-7)=-10",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-7"
+  ]
+ },
+ {
+  "id": "k0192",
+  "text": "x-3+(x^2-49)/(x-7)=-10",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-7",
+   "7"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-7"
+  ]
+ },
+ {
+  "id": "k0193",
+  "text": "x-3+(x^2-49)/(x-7)=-10",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-7"
+  ]
+ },
+ {
+  "id": "k0194",
+  "text": "x-3+(x^2-49)/(x-7)=-10",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-7"
+  ]
+ },
+ {
+  "id": "k0195",
+  "text": "x-3+(x^2-49)/(x-7)=-10",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "7"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-7"
+  ]
+ },
+ {
+  "id": "k0196",
+  "text": "-5/(x-7)+-3/(x+3)=(-8*x+6)/((x-7)*(x+3))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0197",
+  "text": "-5/(x-7)+-3/(x+3)=(-8*x+6)/((x-7)*(x+3))",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0198",
+  "text": "2/(x-6)+-1/(x+1)=4/((x^2-5*x-6))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-4"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-4"
+  ]
+ },
+ {
+  "id": "k0199",
+  "text": "2/(x-6)+-1/(x+1)=4/((x^2-5*x-6))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-4"
+  ]
+ },
+ {
+  "id": "k0200",
+  "text": "2/(x-6)+-1/(x+1)=4/((x^2-5*x-6))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-4"
+  ]
+ },
+ {
+  "id": "k0201",
+  "text": "2/(x-6)+-1/(x+1)=4/((x^2-5*x-6))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-4"
+  ]
+ },
+ {
+  "id": "k0202",
+  "text": "6/(x+4)-3/(x-1)=-15/((x+4)*(x-1))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0203",
+  "text": "6/(x+4)-3/(x-1)=-15/((x+4)*(x-1))",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "1"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0204",
+  "text": "6/(x+4)-3/(x-1)=-15/((x+4)*(x-1))",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0205",
+  "text": "6/(x+4)-3/(x-1)=-15/((x+4)*(x-1))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-4"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0206",
+  "text": "(x^2-8*x+12)/(x-2)=3",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "9"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "9"
+  ]
+ },
+ {
+  "id": "k0207",
+  "text": "(x^2-8*x+12)/(x-2)=3",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "2",
+   "9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "9"
+  ]
+ },
+ {
+  "id": "k0208",
+  "text": "(x^2-8*x+12)/(x-2)=3",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "9"
+  ]
+ },
+ {
+  "id": "k0209",
+  "text": "(x^2-8*x+12)/(x-2)=3",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "11"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "9"
+  ]
+ },
+ {
+  "id": "k0210",
+  "text": "(x^2-8*x+12)/(x-2)=3",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "9"
+  ]
+ },
+ {
+  "id": "k0211",
+  "text": "(x+9)/(x-4)=(x+1)/(x+2)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-11/7"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-11/7"
+  ]
+ },
+ {
+  "id": "k0212",
+  "text": "(x+9)/(x-4)=(x+1)/(x+2)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-11/7"
+  ]
+ },
+ {
+  "id": "k0213",
+  "text": "(x+9)/(x-4)=(x+1)/(x+2)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-4/7"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-11/7"
+  ]
+ },
+ {
+  "id": "k0214",
+  "text": "(x+9)/(x-4)=(x+1)/(x+2)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-11/7"
+  ]
+ },
+ {
+  "id": "k0215",
+  "text": "(2*x+3)/(2*x+8)=(2*x-9)/(2*x+3)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-81/14"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-81/14"
+  ]
+ },
+ {
+  "id": "k0216",
+  "text": "(2*x+3)/(2*x+8)=(2*x-9)/(2*x+3)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-81/14"
+  ]
+ },
+ {
+  "id": "k0217",
+  "text": "(2*x+3)/(2*x+8)=(2*x-9)/(2*x+3)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-95/14"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-81/14"
+  ]
+ },
+ {
+  "id": "k0218",
+  "text": "(2*x+3)/(2*x+8)=(2*x-9)/(2*x+3)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-81/14"
+  ]
+ },
+ {
+  "id": "k0219",
+  "text": "-3/(x+3)=5/(x+3)-2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "1"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0220",
+  "text": "-3/(x+3)=5/(x+3)-2",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0221",
+  "text": "-3/(x+3)=5/(x+3)-2",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "0"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0222",
+  "text": "-3/(x+3)=5/(x+3)-2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0223",
+  "text": "(2*x-2)/(2*x+8)=(x-4)/(x-3)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "19/4"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "19/4"
+  ]
+ },
+ {
+  "id": "k0224",
+  "text": "(2*x-2)/(2*x+8)=(x-4)/(x-3)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "19/4"
+  ]
+ },
+ {
+  "id": "k0225",
+  "text": "(2*x-2)/(2*x+8)=(x-4)/(x-3)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "27/4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "19/4"
+  ]
+ },
+ {
+  "id": "k0226",
+  "text": "(2*x-2)/(2*x+8)=(x-4)/(x-3)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "19/4"
+  ]
+ },
+ {
+  "id": "k0227",
+  "text": "-4/(x-4)=-1/(x-4)+2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "5/2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "5/2"
+  ]
+ },
+ {
+  "id": "k0228",
+  "text": "-4/(x-4)=-1/(x-4)+2",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "5/2"
+  ]
+ },
+ {
+  "id": "k0229",
+  "text": "-4/(x-4)=-1/(x-4)+2",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "7/2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "5/2"
+  ]
+ },
+ {
+  "id": "k0230",
+  "text": "-4/(x-4)=-1/(x-4)+2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "5/2"
+  ]
+ },
+ {
+  "id": "k0231",
+  "text": "x-4+(x^2-25)/(x+5)=-3",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "3"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "3"
+  ]
+ },
+ {
+  "id": "k0232",
+  "text": "x-4+(x^2-25)/(x+5)=-3",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-5",
+   "3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "3"
+  ]
+ },
+ {
+  "id": "k0233",
+  "text": "x-4+(x^2-25)/(x+5)=-3",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "3"
+  ]
+ },
+ {
+  "id": "k0234",
+  "text": "x-4+(x^2-25)/(x+5)=-3",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "3"
+  ]
+ },
+ {
+  "id": "k0235",
+  "text": "x-4+(x^2-25)/(x+5)=-3",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "3"
+  ]
+ },
+ {
+  "id": "k0236",
+  "text": "2/(x-8)+5/(x+8)=-80/((x^2-64))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0237",
+  "text": "2/(x-8)+5/(x+8)=-80/((x^2-64))",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0238",
+  "text": "2/(x-8)+5/(x+8)=-80/((x^2-64))",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "9"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0239",
+  "text": "2/(x-8)+5/(x+8)=-80/((x^2-64))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0240",
+  "text": "(x+7)/(x+7)=-5",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0241",
+  "text": "(x+7)/(x+7)=-5",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0242",
+  "text": "(x+7)/(x+7)=-5",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "3"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0243",
+  "text": "(x+7)/(x+7)=-5",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0244",
+  "text": "-5/(x+3)+-1/(x+6)=(-6*x-33)/((x+3)*(x+6))-2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0245",
+  "text": "-5/(x+3)+-1/(x+6)=(-6*x-33)/((x+3)*(x+6))-2",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-3",
+   "-6"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0246",
+  "text": "-5/(x+3)+-1/(x+6)=(-6*x-33)/((x+3)*(x+6))-2",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0247",
+  "text": "-5/(x+3)+-1/(x+6)=(-6*x-33)/((x+3)*(x+6))-2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-6"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0248",
+  "text": "4/(x+3)--3/(x+1)=6/((x+3)*(x+1))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0249",
+  "text": "4/(x+3)--3/(x+1)=6/((x+3)*(x+1))",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0250",
+  "text": "4/(x+3)--3/(x+1)=6/((x+3)*(x+1))",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0251",
+  "text": "4/(x+3)--3/(x+1)=6/((x+3)*(x+1))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0252",
+  "text": "(-x-7)/(x+2)=(-2*x-9)/(2*x+8)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-38/9"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-38/9"
+  ]
+ },
+ {
+  "id": "k0253",
+  "text": "(-x-7)/(x+2)=(-2*x-9)/(2*x+8)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-38/9"
+  ]
+ },
+ {
+  "id": "k0254",
+  "text": "(-x-7)/(x+2)=(-2*x-9)/(2*x+8)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-47/9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-38/9"
+  ]
+ },
+ {
+  "id": "k0255",
+  "text": "(-x-7)/(x+2)=(-2*x-9)/(2*x+8)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-38/9"
+  ]
+ },
+ {
+  "id": "k0256",
+  "text": "(-x+4)/(x+6)=(-x-6)/(x-1)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-32/17"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-32/17"
+  ]
+ },
+ {
+  "id": "k0257",
+  "text": "(-x+4)/(x+6)=(-x-6)/(x-1)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-32/17"
+  ]
+ },
+ {
+  "id": "k0258",
+  "text": "(-x+4)/(x+6)=(-x-6)/(x-1)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-66/17"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-32/17"
+  ]
+ },
+ {
+  "id": "k0259",
+  "text": "(-x+4)/(x+6)=(-x-6)/(x-1)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-6"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-32/17"
+  ]
+ },
+ {
+  "id": "k0260",
+  "text": "(2*x-3)/(x+9)=(2*x+8)/(x-3)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-9/5"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-9/5"
+  ]
+ },
+ {
+  "id": "k0261",
+  "text": "(2*x-3)/(x+9)=(2*x+8)/(x-3)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-9/5"
+  ]
+ },
+ {
+  "id": "k0262",
+  "text": "(2*x-3)/(x+9)=(2*x+8)/(x-3)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-4/5"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-9/5"
+  ]
+ },
+ {
+  "id": "k0263",
+  "text": "(2*x-3)/(x+9)=(2*x+8)/(x-3)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-9/5"
+  ]
+ },
+ {
+  "id": "k0264",
+  "text": "(x^2-11*x+18)/(x-2)=8",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "17"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "17"
+  ]
+ },
+ {
+  "id": "k0265",
+  "text": "(x^2-11*x+18)/(x-2)=8",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "17",
+   "2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "17"
+  ]
+ },
+ {
+  "id": "k0266",
+  "text": "(x^2-11*x+18)/(x-2)=8",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "17"
+  ]
+ },
+ {
+  "id": "k0267",
+  "text": "(x^2-11*x+18)/(x-2)=8",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "16"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "17"
+  ]
+ },
+ {
+  "id": "k0268",
+  "text": "(x^2-11*x+18)/(x-2)=8",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "17"
+  ]
+ },
+ {
+  "id": "k0269",
+  "text": "(x+4)/(x+8)=(x-9)/(x+4)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-88/9"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-88/9"
+  ]
+ },
+ {
+  "id": "k0270",
+  "text": "(x+4)/(x+8)=(x-9)/(x+4)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-88/9"
+  ]
+ },
+ {
+  "id": "k0271",
+  "text": "(x+4)/(x+8)=(x-9)/(x+4)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-97/9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-88/9"
+  ]
+ },
+ {
+  "id": "k0272",
+  "text": "(x+4)/(x+8)=(x-9)/(x+4)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-88/9"
+  ]
+ },
+ {
+  "id": "k0273",
+  "text": "(x+6)/(x-2)=(x-5)/(x-6)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "46/7"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "46/7"
+  ]
+ },
+ {
+  "id": "k0274",
+  "text": "(x+6)/(x-2)=(x-5)/(x-6)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "46/7"
+  ]
+ },
+ {
+  "id": "k0275",
+  "text": "(x+6)/(x-2)=(x-5)/(x-6)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "60/7"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "46/7"
+  ]
+ },
+ {
+  "id": "k0276",
+  "text": "(x+6)/(x-2)=(x-5)/(x-6)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "46/7"
+  ]
+ },
+ {
+  "id": "k0277",
+  "text": "9/(x+7)=-3",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-10"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-10"
+  ]
+ },
+ {
+  "id": "k0278",
+  "text": "9/(x+7)=-3",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-10"
+  ]
+ },
+ {
+  "id": "k0279",
+  "text": "9/(x+7)=-3",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-10"
+  ]
+ },
+ {
+  "id": "k0280",
+  "text": "9/(x+7)=-3",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-10"
+  ]
+ },
+ {
+  "id": "k0281",
+  "text": "5/(x+3)--3/(x+9)=-6/((x^2+12*x+27))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-15/2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-15/2"
+  ]
+ },
+ {
+  "id": "k0282",
+  "text": "5/(x+3)--3/(x+9)=-6/((x^2+12*x+27))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-15/2"
+  ]
+ },
+ {
+  "id": "k0283",
+  "text": "5/(x+3)--3/(x+9)=-6/((x^2+12*x+27))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-19/2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-15/2"
+  ]
+ },
+ {
+  "id": "k0284",
+  "text": "5/(x+3)--3/(x+9)=-6/((x^2+12*x+27))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-15/2"
+  ]
+ },
+ {
+  "id": "k0285",
+  "text": "-3/(x-9)+-6/(x-2)=3/((x^2-11*x+18))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "19/3"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "19/3"
+  ]
+ },
+ {
+  "id": "k0286",
+  "text": "-3/(x-9)+-6/(x-2)=3/((x^2-11*x+18))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "19/3"
+  ]
+ },
+ {
+  "id": "k0287",
+  "text": "-3/(x-9)+-6/(x-2)=3/((x^2-11*x+18))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "16/3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "19/3"
+  ]
+ },
+ {
+  "id": "k0288",
+  "text": "-3/(x-9)+-6/(x-2)=3/((x^2-11*x+18))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "19/3"
+  ]
+ },
+ {
+  "id": "k0289",
+  "text": "-4/(x-8)+4=5",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "4"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "4"
+  ]
+ },
+ {
+  "id": "k0290",
+  "text": "-4/(x-8)+4=5",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "4"
+  ]
+ },
+ {
+  "id": "k0291",
+  "text": "-4/(x-8)+4=5",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "4"
+  ]
+ },
+ {
+  "id": "k0292",
+  "text": "-4/(x-8)+4=5",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "4"
+  ]
+ },
+ {
+  "id": "k0293",
+  "text": "(4*x)/x=4",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0294",
+  "text": "(4*x)/x=4",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0295",
+  "text": "-5/(x-5)+1/(x+6)=(-4*x-35)/((x-5)*(x+6))+1",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0296",
+  "text": "-5/(x-5)+1/(x+6)=(-4*x-35)/((x-5)*(x+6))+1",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-6",
+   "5"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0297",
+  "text": "-5/(x-5)+1/(x+6)=(-4*x-35)/((x-5)*(x+6))+1",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0298",
+  "text": "-5/(x-5)+1/(x+6)=(-4*x-35)/((x-5)*(x+6))+1",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-6"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0299",
+  "text": "(x-9)/(x+3)=-2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "1"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0300",
+  "text": "(x-9)/(x+3)=-2",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0301",
+  "text": "(x-9)/(x+3)=-2",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0302",
+  "text": "(x-9)/(x+3)=-2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "1"
+  ]
+ },
+ {
+  "id": "k0303",
+  "text": "4/(x-7)-5/(x+3)=40/((x^2-4*x-21))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0304",
+  "text": "4/(x-7)-5/(x+3)=40/((x^2-4*x-21))",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0305",
+  "text": "4/(x-7)-5/(x+3)=40/((x^2-4*x-21))",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "7"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0306",
+  "text": "4/(x-7)-5/(x+3)=40/((x^2-4*x-21))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0307",
+  "text": "(x^2-1)/(x+1)=-2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0308",
+  "text": "(x^2-1)/(x+1)=-2",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0309",
+  "text": "(x^2-1)/(x+1)=-2",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0310",
+  "text": "(x^2-1)/(x+1)=-2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0311",
+  "text": "(-2*x-6)/(2*x+9)=(-2*x+6)/(2*x+1)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-15/2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-15/2"
+  ]
+ },
+ {
+  "id": "k0312",
+  "text": "(-2*x-6)/(2*x+9)=(-2*x+6)/(2*x+1)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-15/2"
+  ]
+ },
+ {
+  "id": "k0313",
+  "text": "(-2*x-6)/(2*x+9)=(-2*x+6)/(2*x+1)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-19/2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-15/2"
+  ]
+ },
+ {
+  "id": "k0314",
+  "text": "(-2*x-6)/(2*x+9)=(-2*x+6)/(2*x+1)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9/2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-15/2"
+  ]
+ },
+ {
+  "id": "k0315",
+  "text": "(x^2-2*x-3)/(x-3)=9",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "8"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "8"
+  ]
+ },
+ {
+  "id": "k0316",
+  "text": "(x^2-2*x-3)/(x-3)=9",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "3",
+   "8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "8"
+  ]
+ },
+ {
+  "id": "k0317",
+  "text": "(x^2-2*x-3)/(x-3)=9",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "8"
+  ]
+ },
+ {
+  "id": "k0318",
+  "text": "(x^2-2*x-3)/(x-3)=9",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "10"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "8"
+  ]
+ },
+ {
+  "id": "k0319",
+  "text": "(x^2-2*x-3)/(x-3)=9",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "8"
+  ]
+ },
+ {
+  "id": "k0320",
+  "text": "3*x+-6/(x-1)=(3*x^2-3*x-6)/(x-1)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0321",
+  "text": "3*x+-6/(x-1)=(3*x^2-3*x-6)/(x-1)",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0322",
+  "text": "(4*x-1)/(2*x+7)=(4*x+2)/(2*x+8)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-11"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-11"
+  ]
+ },
+ {
+  "id": "k0323",
+  "text": "(4*x-1)/(2*x+7)=(4*x+2)/(2*x+8)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-11"
+  ]
+ },
+ {
+  "id": "k0324",
+  "text": "(4*x-1)/(2*x+7)=(4*x+2)/(2*x+8)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-11"
+  ]
+ },
+ {
+  "id": "k0325",
+  "text": "(4*x-1)/(2*x+7)=(4*x+2)/(2*x+8)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-11"
+  ]
+ },
+ {
+  "id": "k0326",
+  "text": "-5/(x-5)+-6/(x+8)=19/((x^2+3*x-40))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-29/11"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-29/11"
+  ]
+ },
+ {
+  "id": "k0327",
+  "text": "-5/(x-5)+-6/(x+8)=19/((x^2+3*x-40))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-29/11"
+  ]
+ },
+ {
+  "id": "k0328",
+  "text": "-5/(x-5)+-6/(x+8)=19/((x^2+3*x-40))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-40/11"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-29/11"
+  ]
+ },
+ {
+  "id": "k0329",
+  "text": "-5/(x-5)+-6/(x+8)=19/((x^2+3*x-40))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-29/11"
+  ]
+ },
+ {
+  "id": "k0330",
+  "text": "x+8/(x+6)=(x^2+6*x+8)/(x+6)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0331",
+  "text": "x+8/(x+6)=(x^2+6*x+8)/(x+6)",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0332",
+  "text": "6/(x+2)--2/(x+8)=-12/((x^2+10*x+16))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0333",
+  "text": "6/(x+2)--2/(x+8)=-12/((x^2+10*x+16))",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0334",
+  "text": "6/(x+2)--2/(x+8)=-12/((x^2+10*x+16))",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0335",
+  "text": "6/(x+2)--2/(x+8)=-12/((x^2+10*x+16))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0336",
+  "text": "x-2+(x^2-9)/(x-3)=0",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-1/2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-1/2"
+  ]
+ },
+ {
+  "id": "k0337",
+  "text": "x-2+(x^2-9)/(x-3)=0",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-1/2",
+   "3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-1/2"
+  ]
+ },
+ {
+  "id": "k0338",
+  "text": "x-2+(x^2-9)/(x-3)=0",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-1/2"
+  ]
+ },
+ {
+  "id": "k0339",
+  "text": "x-2+(x^2-9)/(x-3)=0",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "3/2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-1/2"
+  ]
+ },
+ {
+  "id": "k0340",
+  "text": "x-2+(x^2-9)/(x-3)=0",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-1/2"
+  ]
+ },
+ {
+  "id": "k0341",
+  "text": "-8/(2*x+8)=8",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-9/2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-9/2"
+  ]
+ },
+ {
+  "id": "k0342",
+  "text": "-8/(2*x+8)=8",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-9/2"
+  ]
+ },
+ {
+  "id": "k0343",
+  "text": "-8/(2*x+8)=8",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-13/2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-9/2"
+  ]
+ },
+ {
+  "id": "k0344",
+  "text": "-8/(2*x+8)=8",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-9/2"
+  ]
+ },
+ {
+  "id": "k0345",
+  "text": "(x+3)/(x+1)=(x+5)/(x+5)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0346",
+  "text": "(x+3)/(x+1)=(x+5)/(x+5)",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-5"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0347",
+  "text": "(x+3)/(x+1)=(x+5)/(x+5)",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "1"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0348",
+  "text": "(x+3)/(x+1)=(x+5)/(x+5)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-5"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0349",
+  "text": "x-0+(x^2-36)/(x-6)=-3",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-9/2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-9/2"
+  ]
+ },
+ {
+  "id": "k0350",
+  "text": "x-0+(x^2-36)/(x-6)=-3",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "-9/2",
+   "6"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-9/2"
+  ]
+ },
+ {
+  "id": "k0351",
+  "text": "x-0+(x^2-36)/(x-6)=-3",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-9/2"
+  ]
+ },
+ {
+  "id": "k0352",
+  "text": "x-0+(x^2-36)/(x-6)=-3",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-11/2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-9/2"
+  ]
+ },
+ {
+  "id": "k0353",
+  "text": "x-0+(x^2-36)/(x-6)=-3",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "6"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-9/2"
+  ]
+ },
+ {
+  "id": "k0354",
+  "text": "-x+6/(x-1)=(-x^2+x+6)/(x-1)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0355",
+  "text": "-x+6/(x-1)=(-x^2+x+6)/(x-1)",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0356",
+  "text": "(x-2)/(x+7)=(2*x-1)/(2*x-3)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "13/20"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "13/20"
+  ]
+ },
+ {
+  "id": "k0357",
+  "text": "(x-2)/(x+7)=(2*x-1)/(2*x-3)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "13/20"
+  ]
+ },
+ {
+  "id": "k0358",
+  "text": "(x-2)/(x+7)=(2*x-1)/(2*x-3)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-7/20"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "13/20"
+  ]
+ },
+ {
+  "id": "k0359",
+  "text": "(x-2)/(x+7)=(2*x-1)/(2*x-3)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "13/20"
+  ]
+ },
+ {
+  "id": "k0360",
+  "text": "(8*x)/x=6",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0361",
+  "text": "(8*x)/x=6",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "0"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0362",
+  "text": "(8*x)/x=6",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-4"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0363",
+  "text": "(8*x)/x=6",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "0"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0364",
+  "text": "6/(x-3)+2/(x-4)=5/((x^2-7*x+12))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "35/8"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "35/8"
+  ]
+ },
+ {
+  "id": "k0365",
+  "text": "6/(x-3)+2/(x-4)=5/((x^2-7*x+12))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "35/8"
+  ]
+ },
+ {
+  "id": "k0366",
+  "text": "6/(x-3)+2/(x-4)=5/((x^2-7*x+12))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "27/8"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "35/8"
+  ]
+ },
+ {
+  "id": "k0367",
+  "text": "6/(x-3)+2/(x-4)=5/((x^2-7*x+12))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "35/8"
+  ]
+ },
+ {
+  "id": "k0368",
+  "text": "-1/(x+9)=-2/(x+9)+1",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-8"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-8"
+  ]
+ },
+ {
+  "id": "k0369",
+  "text": "-1/(x+9)=-2/(x+9)+1",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-8"
+  ]
+ },
+ {
+  "id": "k0370",
+  "text": "-1/(x+9)=-2/(x+9)+1",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-7"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-8"
+  ]
+ },
+ {
+  "id": "k0371",
+  "text": "-1/(x+9)=-2/(x+9)+1",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-8"
+  ]
+ },
+ {
+  "id": "k0372",
+  "text": "-9/(x+4)=2",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-17/2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-17/2"
+  ]
+ },
+ {
+  "id": "k0373",
+  "text": "-9/(x+4)=2",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-17/2"
+  ]
+ },
+ {
+  "id": "k0374",
+  "text": "-9/(x+4)=2",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-19/2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-17/2"
+  ]
+ },
+ {
+  "id": "k0375",
+  "text": "-9/(x+4)=2",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-17/2"
+  ]
+ },
+ {
+  "id": "k0376",
+  "text": "3/(x+9)--3/(x-2)=-13/((x^2+7*x-18))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-17/3"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-17/3"
+  ]
+ },
+ {
+  "id": "k0377",
+  "text": "3/(x+9)--3/(x-2)=-13/((x^2+7*x-18))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-17/3"
+  ]
+ },
+ {
+  "id": "k0378",
+  "text": "3/(x+9)--3/(x-2)=-13/((x^2+7*x-18))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-23/3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-17/3"
+  ]
+ },
+ {
+  "id": "k0379",
+  "text": "3/(x+9)--3/(x-2)=-13/((x^2+7*x-18))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-17/3"
+  ]
+ },
+ {
+  "id": "k0380",
+  "text": "3/(x-8)--4/(x+3)=33/((x-8)*(x+3))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [],
+  "expectedValid": true,
+  "truth": []
+ },
+ {
+  "id": "k0381",
+  "text": "3/(x-8)--4/(x+3)=33/((x-8)*(x+3))",
+  "kind": "accept-extraneous-candidate",
+  "intent": "illegal",
+  "claimed": [
+   "8"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0382",
+  "text": "3/(x-8)--4/(x+3)=33/((x-8)*(x+3))",
+  "kind": "claim-spurious-root",
+  "intent": "illegal",
+  "claimed": [
+   "-6"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0383",
+  "text": "3/(x-8)--4/(x+3)=33/((x-8)*(x+3))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": []
+ },
+ {
+  "id": "k0384",
+  "text": "-4/(x)--6/(x+9)=-7/((x)*(x+9))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "29/2"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "29/2"
+  ]
+ },
+ {
+  "id": "k0385",
+  "text": "-4/(x)--6/(x+9)=-7/((x)*(x+9))",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "29/2"
+  ]
+ },
+ {
+  "id": "k0386",
+  "text": "-4/(x)--6/(x+9)=-7/((x)*(x+9))",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "27/2"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "29/2"
+  ]
+ },
+ {
+  "id": "k0387",
+  "text": "-4/(x)--6/(x+9)=-7/((x)*(x+9))",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-9"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "29/2"
+  ]
+ },
+ {
+  "id": "k0388",
+  "text": "-9/(x+1)=1",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "-10"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "-10"
+  ]
+ },
+ {
+  "id": "k0389",
+  "text": "-9/(x+1)=1",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "-10"
+  ]
+ },
+ {
+  "id": "k0390",
+  "text": "-9/(x+1)=1",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "-11"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-10"
+  ]
+ },
+ {
+  "id": "k0391",
+  "text": "-9/(x+1)=1",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-1"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "-10"
+  ]
+ },
+ {
+  "id": "k0392",
+  "text": "(x+6)/(x+3)=(x-5)/(x-4)",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": [
+   "9/4"
+  ],
+  "expectedValid": true,
+  "truth": [
+   "9/4"
+  ]
+ },
+ {
+  "id": "k0393",
+  "text": "(x+6)/(x+3)=(x-5)/(x-4)",
+  "kind": "claim-no-solution",
+  "intent": "illegal",
+  "claimed": [],
+  "expectedValid": false,
+  "truth": [
+   "9/4"
+  ]
+ },
+ {
+  "id": "k0394",
+  "text": "(x+6)/(x+3)=(x-5)/(x-4)",
+  "kind": "wrong-root",
+  "intent": "illegal",
+  "claimed": [
+   "1/4"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "9/4"
+  ]
+ },
+ {
+  "id": "k0395",
+  "text": "(x+6)/(x+3)=(x-5)/(x-4)",
+  "kind": "claim-excluded-value",
+  "intent": "illegal",
+  "claimed": [
+   "-3"
+  ],
+  "expectedValid": false,
+  "truth": [
+   "9/4"
+  ]
+ },
+ {
+  "id": "k0396",
+  "text": "1/(x+9)+4/(x+4)=(5*x+40)/((x+9)*(x+4))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0397",
+  "text": "1/(x+9)+4/(x+4)=(5*x+40)/((x+9)*(x+4))",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0398",
+  "text": "-1/(x-1)+-1/(x+6)=(-2*x-5)/((x-1)*(x+6))",
+  "kind": "true-claim",
+  "intent": "legal",
+  "claimed": "all-except-excluded",
+  "expectedValid": true,
+  "truth": "all-except-excluded"
+ },
+ {
+  "id": "k0399",
+  "text": "-1/(x-1)+-1/(x+6)=(-2*x-5)/((x-1)*(x+6))",
+  "kind": "ignore-domain-all-reals",
+  "intent": "illegal",
+  "claimed": "all-real",
+  "expectedValid": false,
+  "truth": "all-except-excluded"
+ }
+]

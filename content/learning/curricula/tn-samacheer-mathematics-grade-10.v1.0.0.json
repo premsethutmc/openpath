@@ -1,0 +1,1492 @@
+{
+ "id": "tn-samacheer-mathematics-grade-10",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 10,
+ "title": "Mathematics, Standard Ten — Grade 10 Mathematics (Tamil Nadu State Board)",
+ "hash": "25e419ba",
+ "source": {
+  "kind": "textbook",
+  "title": "Mathematics, Standard Ten",
+  "edition": "First Edition 2019; Revised Editions 2020 and 2021; reprinted annually (latest circulating copy labelled 2025 edition)",
+  "publisher": "Tamil Nadu Textbook and Educational Services Corporation (content: SCERT Tamil Nadu)",
+  "board": "Tamil Nadu State Board (Samacheer Kalvi)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/tn-g10.json. Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://cdn1.byjus.com/wp-content/uploads/2022/08/TN-Board-SSLC-Class-10-Mathematics-Textbook.pdf https://cdn1.byjus.com/wp-content/uploads/2019/10/Tamil-Nadu-State-Board-Textbooks_Samacheer-Kalvi-Books_Class-10_Maths-English-Medium-Chapter-4.pdf https://www.brainkart.com/subject/Maths-10th-Std_397/ https://www.shaalaa.com/syllabus/tamil-nadu-board-of-secondary-education-class-10-mathematics_8934. Notes: Official sites could not be read: textbooksonline.tn.nic.in (robots disallowed for the fetch tool), tnschools.gov.in/scert (JavaScript-rendered), the official cloudfront e-book HTML/PDF links (fetch errors), textbookcorp.tn.gov.in price list (robots disallowed), dge.tn.gov.in (no syllabus/blueprint notices visible). The chapter and section list comes from a copy of the official TNTBESC/SCERT PDF (Revised Edition 2021 front matter) hosted on cdn1.byjus.com. Chapters are marked verified:true on that basis. Single volume confirmed from the front matter: no term split. Edition for 2026-27: News (DT Next, Sep 2026) says the new SEP-based syllabus applies only to classes 1-3 in 2026-27, so Std 10 should continue with the 2019 book (revised 2020/2021, annual reprints). A file labelled '2025 Edition' circulates but could not be opened, so later minor revisions after 2021 cannot be ruled out. Std 10 is not listed among the 2026-27 'new' books on third-party sites.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "tn-g10-c01",
+     "number": 1,
+     "title": "Relations and Functions",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g10-c01-s01",
+       "number": "1.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c01-s02",
+       "number": "1.2",
+       "title": "Ordered Pair",
+       "outcomes": [
+        {
+         "id": "tn-g10-c01-o01",
+         "text": "Form ordered pairs and Cartesian products of two or three sets and find the number of elements in a product.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.relations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.sets",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, numeric)."
+         }
+        },
+        {
+         "id": "tn-g10-c01-o03",
+         "text": "Decide whether a relation is a function using arrow diagrams, ordered pairs, tables, rules and the vertical line test, and represent functions in these forms.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.functions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; true-false, multiple-choice, set)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c01-s03",
+       "number": "1.3",
+       "title": "Cartesian Product",
+       "outcomes": [
+        {
+         "id": "tn-g10-c01-o02",
+         "text": "Identify relations as subsets of a Cartesian product and state their domain, co-domain and range.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.relations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c01-s04",
+       "number": "1.4",
+       "title": "Relations",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c01-s05",
+       "number": "1.5",
+       "title": "Functions",
+       "outcomes": [
+        {
+         "id": "tn-g10-c01-o04",
+         "text": "Classify functions as one-one, many-one, onto, into or bijective, and recognise constant, identity and real-valued functions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.functions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.inverse-functions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c01-s06",
+       "number": "1.6",
+       "title": "Representation of Functions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c01-s07",
+       "number": "1.7",
+       "title": "Types of Functions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c01-s08",
+       "number": "1.8",
+       "title": "Special Cases of Functions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c01-s09",
+       "number": "1.9",
+       "title": "Composition of Functions",
+       "outcomes": [
+        {
+         "id": "tn-g10-c01-o05",
+         "text": "Form and evaluate compositions of functions and check whether composition is commutative or associative for given functions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.function-operations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; expression, numeric, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c01-s10",
+       "number": "1.10",
+       "title": "Identifying the Graphs of Linear, Quadratic, Cubic and Reciprocal Functions",
+       "outcomes": [
+        {
+         "id": "tn-g10-c01-o06",
+         "text": "Recognise and sketch graphs of linear, modulus, quadratic, cubic, reciprocal and constant functions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.functions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; graph-sketch, multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "tn-g10-c02",
+     "number": 2,
+     "title": "Numbers and Sequences",
+     "outcomes": [
+      {
+       "id": "tn-g10-c02-o03",
+       "text": "Use congruence modulo n to find remainders, solve simple congruences and model cyclic situations such as clock times and weekdays.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.modular-arithmetic",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g10-c02-s01",
+       "number": "2.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c02-s02",
+       "number": "2.2",
+       "title": "Euclid's Division Lemma",
+       "outcomes": [
+        {
+         "id": "tn-g10-c02-o01",
+         "text": "Apply Euclid's division lemma and algorithm to find the HCF of integers and to prove statements about integer forms.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.euclid-algorithm",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c02-s03",
+       "number": "2.3",
+       "title": "Euclid's Division Algorithm",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c02-s04",
+       "number": "2.4",
+       "title": "Fundamental Theorem of Arithmetic",
+       "outcomes": [
+        {
+         "id": "tn-g10-c02-o02",
+         "text": "Use the fundamental theorem of arithmetic to factorise numbers, find HCF and LCM, and reason about divisibility and terminating decimals.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.number.euclid-algorithm",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c02-s05",
+       "number": "2.5",
+       "title": "Modular Arithmetic",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c02-s06",
+       "number": "2.6",
+       "title": "Sequences",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c02-s07",
+       "number": "2.7",
+       "title": "Arithmetic Progression",
+       "outcomes": [
+        {
+         "id": "tn-g10-c02-o04",
+         "text": "Find terms of sequences from general or recursive rules, and find nth terms, number of terms and conditions for arithmetic progressions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.arithmetic-sequences",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression, pattern)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c02-s08",
+       "number": "2.8",
+       "title": "Series",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c02-s09",
+       "number": "2.9",
+       "title": "Geometric Progression",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c02-s10",
+       "number": "2.10",
+       "title": "Sum to n terms of a Geometric Progression",
+       "outcomes": [
+        {
+         "id": "tn-g10-c02-o05",
+         "text": "Find the sum of the first n terms of an arithmetic series and solve related word problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.arithmetic-sequences",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+         }
+        },
+        {
+         "id": "tn-g10-c02-o06",
+         "text": "Find nth terms of geometric progressions, sums of finite and infinite geometric series, and solve related problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.geometric-sequences",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, fraction, word-problem)."
+         }
+        },
+        {
+         "id": "tn-g10-c02-o07",
+         "text": "Evaluate sums of the first n natural numbers, odd numbers, squares and cubes using standard formulas.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.sequences.power-sums",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c02-s11",
+       "number": "2.11",
+       "title": "Special Series",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "tn-g10-c03",
+     "number": 3,
+     "title": "Algebra",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g10-c03-s01",
+       "number": "3.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c03-s02",
+       "number": "3.2",
+       "title": "Simultaneous Linear Equations in Three Variables",
+       "outcomes": [
+        {
+         "id": "tn-g10-c03-o01",
+         "text": "Solve a system of three linear equations in three variables by elimination and recognise systems with no or infinitely many solutions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.linear-systems",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.linear-systems-three-variables",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c03-s03",
+       "number": "3.3",
+       "title": "GCD and LCM of Polynomials",
+       "outcomes": [
+        {
+         "id": "tn-g10-c03-o02",
+         "text": "Find the GCD and LCM of polynomials and use the relation that their product equals the product of the two polynomials.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.polynomial-gcd-lcm",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c03-s04",
+       "number": "3.4",
+       "title": "Rational Expressions",
+       "outcomes": [
+        {
+         "id": "tn-g10-c03-o03",
+         "text": "Reduce rational expressions to lowest terms, state excluded values, and multiply, divide, add and subtract rational expressions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.rational-expressions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c03-s05",
+       "number": "3.5",
+       "title": "Square Root of Polynomials",
+       "outcomes": [
+        {
+         "id": "tn-g10-c03-o04",
+         "text": "Find the square root of a perfect-square polynomial by factorisation and by the long-division method.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.polynomial-square-root",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c03-s06",
+       "number": "3.6",
+       "title": "Quadratic Equations",
+       "outcomes": [
+        {
+         "id": "tn-g10-c03-o05",
+         "text": "Solve quadratic equations by factorisation, completing the square and the formula, and apply them to word problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, word-problem)."
+         }
+        },
+        {
+         "id": "tn-g10-c03-o06",
+         "text": "Analyse the roots of a quadratic without fully solving it: use the discriminant to determine their nature and find parameter values, and use the sum and product of roots to form equations and evaluate symmetric expressions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.polynomial-zeros",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.quadratic-discriminant",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric, expression)."
+         }
+        },
+        {
+         "id": "tn-g10-c03-o07",
+         "text": "Draw graphs of direct and inverse variation, and plot quadratic graphs to solve quadratic equations, including by intersection with a straight line.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.inverse-proportion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.quadratic-graphs",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.number.proportion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; graph-sketch, equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c03-s07",
+       "number": "3.7",
+       "title": "Graph of Variations",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c03-s08",
+       "number": "3.8",
+       "title": "Quadratic Graphs",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c03-s09",
+       "number": "3.9",
+       "title": "Matrices",
+       "outcomes": [
+        {
+         "id": "tn-g10-c03-o08",
+         "text": "Identify the order and types of matrices, and add, subtract, scalar-multiply, multiply and transpose matrices, verifying their properties.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.matrices",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; vector-matrix, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "tn-g10-c04",
+     "number": 4,
+     "title": "Geometry",
+     "outcomes": [
+      {
+       "id": "tn-g10-c04-o02",
+       "text": "Construct a triangle similar to a given triangle for a given scale factor less than or greater than 1.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.scaled-construction",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked by an educator; construction)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g10-c04-s01",
+       "number": "4.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c04-s02",
+       "number": "4.2",
+       "title": "Similarity",
+       "outcomes": [
+        {
+         "id": "tn-g10-c04-o01",
+         "text": "Use AA, SAS and SSS similarity criteria and results on ratios of altitudes, perimeters and areas of similar triangles to solve problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.similarity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c04-s03",
+       "number": "4.3",
+       "title": "Thales Theorem and Angle Bisector Theorem",
+       "outcomes": [
+        {
+         "id": "tn-g10-c04-o03",
+         "text": "Prove and apply the basic proportionality (Thales) theorem, the angle bisector theorem, and their converses.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.similarity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.triangle-proof",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; proof, numeric)."
+         }
+        },
+        {
+         "id": "tn-g10-c04-o04",
+         "text": "Construct a triangle given its base, vertical angle and either the median, the altitude, or the point where the vertical-angle bisector meets the base.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.circle-theorems",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.construction-triangles",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; construction)."
+         }
+        },
+        {
+         "id": "tn-g10-c04-o05",
+         "text": "Prove the Pythagoras theorem and its converse and apply them, including Pythagorean triples.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.pythagoras",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.geometry.similarity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; proof, numeric, word-problem)."
+         }
+        },
+        {
+         "id": "tn-g10-c04-o06",
+         "text": "Apply tangent properties (radius–tangent perpendicularity, equal tangents from an external point, alternate segment theorem, common tangents) to find lengths and angles.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.circle-tangents",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, proof)."
+         }
+        },
+        {
+         "id": "tn-g10-c04-o08",
+         "text": "Apply Ceva's theorem to test concurrency of cevians and Menelaus' theorem to test collinearity, and find unknown segment ratios.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.ceva-menelaus",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c04-s04",
+       "number": "4.4",
+       "title": "Pythagoras Theorem",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c04-s05",
+       "number": "4.5",
+       "title": "Circles and Tangents",
+       "outcomes": [
+        {
+         "id": "tn-g10-c04-o07",
+         "text": "Construct a tangent at a point on a circle and a pair of tangents from an external point, and measure their lengths.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.geometry.circle-tangents",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; construction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c04-s06",
+       "number": "4.6",
+       "title": "Concurrency Theorems",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-geometry",
+      "number": 2,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "tn-g10-c07",
+     "number": 7,
+     "title": "Mensuration",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g10-c07-s01",
+       "number": "7.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c07-s02",
+       "number": "7.2",
+       "title": "Surface Area",
+       "outcomes": [
+        {
+         "id": "tn-g10-c07-o02",
+         "text": "Calculate surface areas and volumes of right circular cones, spheres, hemispheres and hollow hemispheres/spherical shells.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.cones-spheres",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c07-s03",
+       "number": "7.3",
+       "title": "Volume",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c07-s04",
+       "number": "7.4",
+       "title": "Volume and Surface Area of Combined Solids",
+       "outcomes": [
+        {
+         "id": "tn-g10-c07-o01",
+         "text": "Calculate curved and total surface areas of solid and hollow cylinders.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.cylinder",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        },
+        {
+         "id": "tn-g10-c07-o03",
+         "text": "Calculate surface area and volume of a frustum of a cone.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.frustum",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        },
+        {
+         "id": "tn-g10-c07-o04",
+         "text": "Find surface areas and volumes of solids formed by combining cylinders, cones, spheres and hemispheres.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.combined-solids",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c07-s05",
+       "number": "7.5",
+       "title": "Conversion of Solids from one Shape to another with no change in Volume",
+       "outcomes": [
+        {
+         "id": "tn-g10-c07-o05",
+         "text": "Solve problems where a solid is melted or recast into another shape using conservation of volume.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.measurement.combined-solids",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-measurement",
+      "number": 3,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "tn-g10-c08",
+     "number": 8,
+     "title": "Statistics and Probability",
+     "outcomes": [
+      {
+       "id": "tn-g10-c08-o02",
+       "text": "Compute variance and standard deviation for raw, ungrouped and grouped data by direct, mean, assumed-mean and step-deviation methods.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.dispersion",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, data-table)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g10-c08-s01",
+       "number": "8.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c08-s02",
+       "number": "8.2",
+       "title": "Measures of Dispersion",
+       "outcomes": [
+        {
+         "id": "tn-g10-c08-o01",
+         "text": "Find the range and coefficient of range of a data set and explain what dispersion measures.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.dispersion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c08-s03",
+       "number": "8.3",
+       "title": "Coefficient of Variation",
+       "outcomes": [
+        {
+         "id": "tn-g10-c08-o03",
+         "text": "Compute the coefficient of variation and use it to compare the consistency of two data sets.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.statistics.dispersion",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, written-explanation)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c08-s04",
+       "number": "8.4",
+       "title": "Probability",
+       "outcomes": [
+        {
+         "id": "tn-g10-c08-o04",
+         "text": "List sample spaces of random experiments using tree diagrams and find probabilities of events.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.classical",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.sample-space",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; set, fraction)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c08-s05",
+       "number": "8.5",
+       "title": "Algebra of Events",
+       "outcomes": [
+        {
+         "id": "tn-g10-c08-o05",
+         "text": "Use the algebra of events (union, intersection, complement) and types of events (mutually exclusive, complementary, sure, impossible) to compute probabilities.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.complements",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.events",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, set)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c08-s06",
+       "number": "8.6",
+       "title": "Addition Theorem of Probability",
+       "outcomes": [
+        {
+         "id": "tn-g10-c08-o06",
+         "text": "Apply the addition theorem of probability for two and three events to solve problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.events",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-probability",
+      "number": 4,
+      "title": "Probability"
+     }
+    },
+    {
+     "id": "tn-g10-c05",
+     "number": 5,
+     "title": "Coordinate Geometry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g10-c05-s01",
+       "number": "5.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c05-s02",
+       "number": "5.2",
+       "title": "Area of a Triangle",
+       "outcomes": [
+        {
+         "id": "tn-g10-c05-o01",
+         "text": "Find the area of a triangle and of a quadrilateral from the coordinates of their vertices, and use zero area to test collinearity.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.polygon-area",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c05-s03",
+       "number": "5.3",
+       "title": "Area of a Quadrilateral",
+       "outcomes": [
+        {
+         "id": "tn-g10-c05-o05",
+         "text": "Use coordinate methods to solve geometric problems such as finding vertices, altitudes or the type of a quadrilateral.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.distance",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.straight-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; coordinate, proof, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c05-s04",
+       "number": "5.4",
+       "title": "Inclination of a Line",
+       "outcomes": [
+        {
+         "id": "tn-g10-c05-o02",
+         "text": "Find the slope of a line from its inclination or from two points, and use slopes to test parallelism, perpendicularity and collinearity.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.straight-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, true-false)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c05-s05",
+       "number": "5.5",
+       "title": "Straight Line",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c05-s06",
+       "number": "5.6",
+       "title": "General Form of a Straight Line",
+       "outcomes": [
+        {
+         "id": "tn-g10-c05-o03",
+         "text": "Write the equation of a straight line in slope-intercept, point-slope, two-point and intercept forms, including lines parallel to the axes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.straight-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, expression)."
+         }
+        },
+        {
+         "id": "tn-g10-c05-o04",
+         "text": "Convert between general form ax+by+c=0 and other forms, read slope and intercepts, and find equations of lines parallel or perpendicular to a given line.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.straight-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-coordinate",
+      "number": 5,
+      "title": "Coordinate geometry"
+     }
+    },
+    {
+     "id": "tn-g10-c06",
+     "number": 6,
+     "title": "Trigonometry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "tn-g10-c06-s01",
+       "number": "6.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c06-s02",
+       "number": "6.2",
+       "title": "Trigonometric Identities",
+       "outcomes": [
+        {
+         "id": "tn-g10-c06-o01",
+         "text": "Recall trigonometric ratios and their values for standard and complementary angles as a basis for identities.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.ratios",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        },
+        {
+         "id": "tn-g10-c06-o02",
+         "text": "Prove trigonometric identities using the Pythagorean identities and the reciprocal and quotient relations.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.identities",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; proof)."
+         }
+        },
+        {
+         "id": "tn-g10-c06-o03",
+         "text": "Use identities to simplify expressions and find values of other ratios from given conditions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.identities",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "tn-g10-c06-s03",
+       "number": "6.3",
+       "title": "Heights and Distances",
+       "outcomes": [
+        {
+         "id": "tn-g10-c06-o04",
+         "text": "Solve height and distance problems involving angles of elevation, depression, or both, including two-observation problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.trigonometry.heights-distances",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-trigonometry",
+      "number": 6,
+      "title": "Trigonometry"
+     }
+    }
+   ]
+  }
+ ]
+}

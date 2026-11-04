@@ -1,0 +1,1056 @@
+{
+  "version": "proof-kernel-u4-adversarial@1",
+  "frozenBeforeEvaluation": true,
+  "cases": [
+    {
+      "id": "u4-forged-digest-00",
+      "category": "forged-digest",
+      "parameter": 1,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-01",
+      "category": "forged-digest",
+      "parameter": 2,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-02",
+      "category": "forged-digest",
+      "parameter": 3,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-03",
+      "category": "forged-digest",
+      "parameter": 4,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-04",
+      "category": "forged-digest",
+      "parameter": 5,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-05",
+      "category": "forged-digest",
+      "parameter": 6,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-06",
+      "category": "forged-digest",
+      "parameter": 7,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-07",
+      "category": "forged-digest",
+      "parameter": 8,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-08",
+      "category": "forged-digest",
+      "parameter": 9,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-09",
+      "category": "forged-digest",
+      "parameter": 10,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-10",
+      "category": "forged-digest",
+      "parameter": 11,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-11",
+      "category": "forged-digest",
+      "parameter": 12,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-12",
+      "category": "forged-digest",
+      "parameter": 13,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-13",
+      "category": "forged-digest",
+      "parameter": 14,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-14",
+      "category": "forged-digest",
+      "parameter": 15,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-15",
+      "category": "forged-digest",
+      "parameter": 16,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-16",
+      "category": "forged-digest",
+      "parameter": 17,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-17",
+      "category": "forged-digest",
+      "parameter": 18,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-18",
+      "category": "forged-digest",
+      "parameter": 19,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-19",
+      "category": "forged-digest",
+      "parameter": 20,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-20",
+      "category": "forged-digest",
+      "parameter": 21,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-21",
+      "category": "forged-digest",
+      "parameter": 22,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-22",
+      "category": "forged-digest",
+      "parameter": 23,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-23",
+      "category": "forged-digest",
+      "parameter": 24,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-forged-digest-24",
+      "category": "forged-digest",
+      "parameter": 25,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-00",
+      "category": "valid-digest-false-math",
+      "parameter": 1,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-01",
+      "category": "valid-digest-false-math",
+      "parameter": 2,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-02",
+      "category": "valid-digest-false-math",
+      "parameter": 3,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-03",
+      "category": "valid-digest-false-math",
+      "parameter": 4,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-04",
+      "category": "valid-digest-false-math",
+      "parameter": 5,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-05",
+      "category": "valid-digest-false-math",
+      "parameter": 6,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-06",
+      "category": "valid-digest-false-math",
+      "parameter": 7,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-07",
+      "category": "valid-digest-false-math",
+      "parameter": 8,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-08",
+      "category": "valid-digest-false-math",
+      "parameter": 9,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-09",
+      "category": "valid-digest-false-math",
+      "parameter": 10,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-10",
+      "category": "valid-digest-false-math",
+      "parameter": 11,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-11",
+      "category": "valid-digest-false-math",
+      "parameter": 12,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-12",
+      "category": "valid-digest-false-math",
+      "parameter": 13,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-13",
+      "category": "valid-digest-false-math",
+      "parameter": 14,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-14",
+      "category": "valid-digest-false-math",
+      "parameter": 15,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-15",
+      "category": "valid-digest-false-math",
+      "parameter": 16,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-16",
+      "category": "valid-digest-false-math",
+      "parameter": 17,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-17",
+      "category": "valid-digest-false-math",
+      "parameter": 18,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-18",
+      "category": "valid-digest-false-math",
+      "parameter": 19,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-19",
+      "category": "valid-digest-false-math",
+      "parameter": 20,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-20",
+      "category": "valid-digest-false-math",
+      "parameter": 21,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-21",
+      "category": "valid-digest-false-math",
+      "parameter": 22,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-22",
+      "category": "valid-digest-false-math",
+      "parameter": 23,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-23",
+      "category": "valid-digest-false-math",
+      "parameter": 24,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-digest-false-math-24",
+      "category": "valid-digest-false-math",
+      "parameter": 25,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-00",
+      "category": "missing-assumption",
+      "parameter": 1,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-01",
+      "category": "missing-assumption",
+      "parameter": 2,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-02",
+      "category": "missing-assumption",
+      "parameter": 3,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-03",
+      "category": "missing-assumption",
+      "parameter": 4,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-04",
+      "category": "missing-assumption",
+      "parameter": 5,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-05",
+      "category": "missing-assumption",
+      "parameter": 6,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-06",
+      "category": "missing-assumption",
+      "parameter": 7,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-07",
+      "category": "missing-assumption",
+      "parameter": 8,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-08",
+      "category": "missing-assumption",
+      "parameter": 9,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-09",
+      "category": "missing-assumption",
+      "parameter": 10,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-10",
+      "category": "missing-assumption",
+      "parameter": 11,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-11",
+      "category": "missing-assumption",
+      "parameter": 12,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-12",
+      "category": "missing-assumption",
+      "parameter": 13,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-13",
+      "category": "missing-assumption",
+      "parameter": 14,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-14",
+      "category": "missing-assumption",
+      "parameter": 15,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-15",
+      "category": "missing-assumption",
+      "parameter": 16,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-16",
+      "category": "missing-assumption",
+      "parameter": 17,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-17",
+      "category": "missing-assumption",
+      "parameter": 18,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-18",
+      "category": "missing-assumption",
+      "parameter": 19,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-19",
+      "category": "missing-assumption",
+      "parameter": 20,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-20",
+      "category": "missing-assumption",
+      "parameter": 21,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-21",
+      "category": "missing-assumption",
+      "parameter": 22,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-22",
+      "category": "missing-assumption",
+      "parameter": 23,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-23",
+      "category": "missing-assumption",
+      "parameter": 24,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-missing-assumption-24",
+      "category": "missing-assumption",
+      "parameter": 25,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-00",
+      "category": "incorrect-rule",
+      "parameter": 1,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-01",
+      "category": "incorrect-rule",
+      "parameter": 2,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-02",
+      "category": "incorrect-rule",
+      "parameter": 3,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-03",
+      "category": "incorrect-rule",
+      "parameter": 4,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-04",
+      "category": "incorrect-rule",
+      "parameter": 5,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-05",
+      "category": "incorrect-rule",
+      "parameter": 6,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-06",
+      "category": "incorrect-rule",
+      "parameter": 7,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-07",
+      "category": "incorrect-rule",
+      "parameter": 8,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-08",
+      "category": "incorrect-rule",
+      "parameter": 9,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-09",
+      "category": "incorrect-rule",
+      "parameter": 10,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-10",
+      "category": "incorrect-rule",
+      "parameter": 11,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-11",
+      "category": "incorrect-rule",
+      "parameter": 12,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-12",
+      "category": "incorrect-rule",
+      "parameter": 13,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-13",
+      "category": "incorrect-rule",
+      "parameter": 14,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-14",
+      "category": "incorrect-rule",
+      "parameter": 15,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-15",
+      "category": "incorrect-rule",
+      "parameter": 16,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-16",
+      "category": "incorrect-rule",
+      "parameter": 17,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-17",
+      "category": "incorrect-rule",
+      "parameter": 18,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-18",
+      "category": "incorrect-rule",
+      "parameter": 19,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-19",
+      "category": "incorrect-rule",
+      "parameter": 20,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-20",
+      "category": "incorrect-rule",
+      "parameter": 21,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-21",
+      "category": "incorrect-rule",
+      "parameter": 22,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-22",
+      "category": "incorrect-rule",
+      "parameter": 23,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-23",
+      "category": "incorrect-rule",
+      "parameter": 24,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-incorrect-rule-24",
+      "category": "incorrect-rule",
+      "parameter": 25,
+      "expected": "rejected",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-00",
+      "category": "invalid-dependency",
+      "parameter": 1,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-01",
+      "category": "invalid-dependency",
+      "parameter": 2,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-02",
+      "category": "invalid-dependency",
+      "parameter": 3,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-03",
+      "category": "invalid-dependency",
+      "parameter": 4,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-04",
+      "category": "invalid-dependency",
+      "parameter": 5,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-05",
+      "category": "invalid-dependency",
+      "parameter": 6,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-06",
+      "category": "invalid-dependency",
+      "parameter": 7,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-07",
+      "category": "invalid-dependency",
+      "parameter": 8,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-08",
+      "category": "invalid-dependency",
+      "parameter": 9,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-09",
+      "category": "invalid-dependency",
+      "parameter": 10,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-10",
+      "category": "invalid-dependency",
+      "parameter": 11,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-11",
+      "category": "invalid-dependency",
+      "parameter": 12,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-12",
+      "category": "invalid-dependency",
+      "parameter": 13,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-13",
+      "category": "invalid-dependency",
+      "parameter": 14,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-14",
+      "category": "invalid-dependency",
+      "parameter": 15,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-15",
+      "category": "invalid-dependency",
+      "parameter": 16,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-16",
+      "category": "invalid-dependency",
+      "parameter": 17,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-17",
+      "category": "invalid-dependency",
+      "parameter": 18,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-18",
+      "category": "invalid-dependency",
+      "parameter": 19,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-19",
+      "category": "invalid-dependency",
+      "parameter": 20,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-20",
+      "category": "invalid-dependency",
+      "parameter": 21,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-21",
+      "category": "invalid-dependency",
+      "parameter": 22,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-22",
+      "category": "invalid-dependency",
+      "parameter": 23,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-23",
+      "category": "invalid-dependency",
+      "parameter": 24,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-invalid-dependency-24",
+      "category": "invalid-dependency",
+      "parameter": 25,
+      "expected": "invalid",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-00",
+      "category": "valid-or-unsupported-route",
+      "parameter": 1,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-01",
+      "category": "valid-or-unsupported-route",
+      "parameter": 2,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-02",
+      "category": "valid-or-unsupported-route",
+      "parameter": 3,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-03",
+      "category": "valid-or-unsupported-route",
+      "parameter": 4,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-04",
+      "category": "valid-or-unsupported-route",
+      "parameter": 5,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-05",
+      "category": "valid-or-unsupported-route",
+      "parameter": 6,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-06",
+      "category": "valid-or-unsupported-route",
+      "parameter": 7,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-07",
+      "category": "valid-or-unsupported-route",
+      "parameter": 8,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-08",
+      "category": "valid-or-unsupported-route",
+      "parameter": 9,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-09",
+      "category": "valid-or-unsupported-route",
+      "parameter": 10,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-10",
+      "category": "valid-or-unsupported-route",
+      "parameter": 11,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-11",
+      "category": "valid-or-unsupported-route",
+      "parameter": 12,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-12",
+      "category": "valid-or-unsupported-route",
+      "parameter": 13,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-13",
+      "category": "valid-or-unsupported-route",
+      "parameter": 14,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-14",
+      "category": "valid-or-unsupported-route",
+      "parameter": 15,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-15",
+      "category": "valid-or-unsupported-route",
+      "parameter": 16,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-16",
+      "category": "valid-or-unsupported-route",
+      "parameter": 17,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-17",
+      "category": "valid-or-unsupported-route",
+      "parameter": 18,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-18",
+      "category": "valid-or-unsupported-route",
+      "parameter": 19,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-19",
+      "category": "valid-or-unsupported-route",
+      "parameter": 20,
+      "expected": "verified",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-20",
+      "category": "valid-or-unsupported-route",
+      "parameter": 21,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-21",
+      "category": "valid-or-unsupported-route",
+      "parameter": 22,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-22",
+      "category": "valid-or-unsupported-route",
+      "parameter": 23,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-23",
+      "category": "valid-or-unsupported-route",
+      "parameter": 24,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    },
+    {
+      "id": "u4-valid-or-unsupported-route-24",
+      "category": "valid-or-unsupported-route",
+      "parameter": 25,
+      "expected": "unsupported",
+      "oracle": "independently specified certificate integrity, exact algebra, assumption, or dependency invariant"
+    }
+  ]
+}

@@ -1,0 +1,5584 @@
+[
+ {
+  "id": "e1-161",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^6\nf'(x) = 6x^6\nf'(x) = 6x^6",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-162",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^7\nf'(x) = 7x^7\nf'(x) = 7x^7",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-163",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^2\nx^2 = x*x^1\nf'(x) = x*(1x^0) + x^1\nf'(x) = 2x^1",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-164",
+  "domain": "calculus",
+  "task": "solve-pde",
+  "referenceVerdict": "unsupported",
+  "problem": {
+   "domain": "calculus",
+   "task": "solve-pde",
+   "statement": "Solve the Navier-Stokes initial boundary value problem"
+  },
+  "studentText": "∂u/∂t + (u·∇)u = -∇p + νΔu\n∇·u=0\nFind every smooth global solution",
+  "parser": "malformed",
+  "lineKinds": [],
+  "parserMessage": "expected expression",
+  "adapter": "malformed",
+  "adapterMessage": "expected expression",
+  "engineVerdict": "malformed",
+  "engineJustification": "expected expression",
+  "gate": false
+ },
+ {
+  "id": "e1-165",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^4\nf'(x) = 4x^4\nf'(x) = 4x^4",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-166",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^5\nf'(x) = 5x^4\nd/dx x^5 = 5x^4",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-167",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "malformed",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x = x^2\nf'(x) = 2x",
+  "parser": "malformed",
+  "lineKinds": [],
+  "parserMessage": "missing closing parenthesis",
+  "adapter": "malformed",
+  "adapterMessage": "missing closing parenthesis",
+  "engineVerdict": "malformed",
+  "engineJustification": "missing closing parenthesis",
+  "gate": false
+ },
+ {
+  "id": "e1-168",
+  "domain": "calculus",
+  "task": "indefinite-integral",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "studentText": "∫ x^7 dx = x^8/8\nDifferentiate x^8/8 to check",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "integral"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-169",
+  "domain": "calculus",
+  "task": "indefinite-integral",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "∫ x^2 dx = x^3/3\nDifferentiate x^3/3 to check",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "integral"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-170",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^3\nf'(x) = 3x^2\nd/dx x^3 = 3x^2",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-171",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^4\nf'(x) = 4x^4\nf'(x) = 4x^4",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-172",
+  "domain": "calculus",
+  "task": "indefinite-integral",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "studentText": "∫ x^5 dx = x^6/6\nDifferentiate x^6/6 to check",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "integral"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-173",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^6\nf'(x) = 6x^5\nd/dx x^6 = 6x^5",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-174",
+  "domain": "calculus",
+  "task": "indefinite-integral",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "studentText": "∫ x^7 dx = x^8/8\nDifferentiate x^8/8 to check",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "integral"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-175",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^2\nf'(x) = 2x^1\nd/dx x^2 = 2x^1",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-176",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^3\nf'(x) = 3x^2\nd/dx x^3 = 3x^2",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-177",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^4\nx^4 = x*x^3\nf'(x) = x*(3x^2) + x^3\nf'(x) = 4x^3",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-178",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^5\nf'(x) = 5x^4\nd/dx x^5 = 5x^4",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-179",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^6\nf'(x) = 6x^5\nd/dx x^6 = 6x^5",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-180",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^7\nUse the power rule",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "expression"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-181",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^2\nf'(x) = 2x^2\nf'(x) = 2x^2",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-182",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^3\nx^3 = x*x^2\nf'(x) = x*(2x^1) + x^2\nf'(x) = 3x^2",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-183",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^4\nx^4 = x*x^3\nf'(x) = x*(3x^2) + x^3\nf'(x) = 4x^3",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-184",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^5\nf'(x) = 5x^4\nd/dx x^5 = 5x^4",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-185",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^6\nf'(x) = 6x^6\nf'(x) = 6x^6",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-186",
+  "domain": "calculus",
+  "task": "solve-pde",
+  "referenceVerdict": "unsupported",
+  "problem": {
+   "domain": "calculus",
+   "task": "solve-pde",
+   "statement": "Solve the Navier-Stokes initial boundary value problem"
+  },
+  "studentText": "∂u/∂t + (u·∇)u = -∇p + νΔu\n∇·u=0\nFind every smooth global solution",
+  "parser": "malformed",
+  "lineKinds": [],
+  "parserMessage": "expected expression",
+  "adapter": "malformed",
+  "adapterMessage": "expected expression",
+  "engineVerdict": "malformed",
+  "engineJustification": "expected expression",
+  "gate": false
+ },
+ {
+  "id": "e1-187",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^2\nf'(x) = 2x^1\nd/dx x^2 = 2x^1",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-188",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^3\nf'(x) = 3x^2\nd/dx x^3 = 3x^2",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-189",
+  "domain": "calculus",
+  "task": "solve-pde",
+  "referenceVerdict": "unsupported",
+  "problem": {
+   "domain": "calculus",
+   "task": "solve-pde",
+   "statement": "Solve the Navier-Stokes initial boundary value problem"
+  },
+  "studentText": "∂u/∂t + (u·∇)u = -∇p + νΔu\n∇·u=0\nFind every smooth global solution",
+  "parser": "malformed",
+  "lineKinds": [],
+  "parserMessage": "expected expression",
+  "adapter": "malformed",
+  "adapterMessage": "expected expression",
+  "engineVerdict": "malformed",
+  "engineJustification": "expected expression",
+  "gate": false
+ },
+ {
+  "id": "e1-190",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^5\nf'(x) = 5x^4\nd/dx x^5 = 5x^4",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-191",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^6\nf'(x) = 6x^6\nf'(x) = 6x^6",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-192",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^7\nx^7 = x*x^6\nf'(x) = x*(6x^5) + x^6\nf'(x) = 7x^6",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-193",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^2\nf'(x) = 2x^1\nd/dx x^2 = 2x^1",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-194",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^3\nf'(x) = 3x^2\nd/dx x^3 = 3x^2",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-195",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^4\nUse the power rule",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "expression"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-196",
+  "domain": "calculus",
+  "task": "solve-pde",
+  "referenceVerdict": "unsupported",
+  "problem": {
+   "domain": "calculus",
+   "task": "solve-pde",
+   "statement": "Solve the Navier-Stokes initial boundary value problem"
+  },
+  "studentText": "∂u/∂t + (u·∇)u = -∇p + νΔu\n∇·u=0\nFind every smooth global solution",
+  "parser": "malformed",
+  "lineKinds": [],
+  "parserMessage": "expected expression",
+  "adapter": "malformed",
+  "adapterMessage": "expected expression",
+  "engineVerdict": "malformed",
+  "engineJustification": "expected expression",
+  "gate": false
+ },
+ {
+  "id": "e1-197",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^6\nx^6 = x*x^5\nf'(x) = x*(5x^4) + x^5\nf'(x) = 6x^5",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-198",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^7\nf'(x) = 7x^7\nf'(x) = 7x^7",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-199",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^2\nUse the power rule",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "expression"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-200",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^3\nf'(x) = 3x^2\nd/dx x^3 = 3x^2",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-201",
+  "domain": "calculus",
+  "task": "indefinite-integral",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "studentText": "∫ x^4 dx = x^5/5\nDifferentiate x^5/5 to check",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "integral"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-202",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^5\nx^5 = x*x^4\nf'(x) = x*(4x^3) + x^4\nf'(x) = 5x^4",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-203",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^6\nf'(x) = 6x^5\nd/dx x^6 = 6x^5",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-204",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^7\nUse the power rule",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "expression"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-205",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^2\nx^2 = x*x^1\nf'(x) = x*(1x^0) + x^1\nf'(x) = 2x^1",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-206",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^3\nx^3 = x*x^2\nf'(x) = x*(2x^1) + x^2\nf'(x) = 3x^2",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-207",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^4\nf'(x) = 4x^3\nd/dx x^4 = 4x^3",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-208",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^5\nUse the power rule",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "expression"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-209",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^6\nx^6 = x*x^5\nf'(x) = x*(5x^4) + x^5\nf'(x) = 6x^5",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-210",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^7\nf'(x) = 7x^7\nf'(x) = 7x^7",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-211",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^2\nf'(x) = 2x^1\nd/dx x^2 = 2x^1",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-212",
+  "domain": "calculus",
+  "task": "indefinite-integral",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "calculus",
+   "task": "indefinite-integral",
+   "integrand": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "studentText": "∫ x^3 dx = x^4/4\nDifferentiate x^4/4 to check",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "integral"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-213",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^4\nx^4 = x*x^3\nf'(x) = x*(3x^2) + x^3\nf'(x) = 4x^3",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-214",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^5\nf'(x) = 5x^5\nf'(x) = 5x^5",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-215",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^6\nUse the power rule",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "expression"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-216",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^7\nx^7 = x*x^6\nf'(x) = x*(6x^5) + x^6\nf'(x) = 7x^6",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-217",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^2\nf'(x) = 2x^1\nd/dx x^2 = 2x^1",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-218",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^3\nf'(x) = 3x^2\nd/dx x^3 = 3x^2",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-219",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^4\nf'(x) = 4x^4\nf'(x) = 4x^4",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-220",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^5\nx^5 = x*x^4\nf'(x) = x*(4x^3) + x^4\nf'(x) = 5x^4",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-221",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 6
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^6\nf'(x) = 6x^5\nd/dx x^6 = 6x^5",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-222",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^7\nf'(x) = 7x^7\nf'(x) = 7x^7",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-223",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^2\nf'(x) = 2x^1\nd/dx x^2 = 2x^1",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-224",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "malformed",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x = x^2\nf'(x) = 2x",
+  "parser": "malformed",
+  "lineKinds": [],
+  "parserMessage": "missing closing parenthesis",
+  "adapter": "malformed",
+  "adapterMessage": "missing closing parenthesis",
+  "engineVerdict": "malformed",
+  "engineJustification": "missing closing parenthesis",
+  "gate": false
+ },
+ {
+  "id": "e1-225",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 4
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^4\nx^4 = x*x^3\nf'(x) = x*(3x^2) + x^3\nf'(x) = 4x^3",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-226",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 5
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^5\nf'(x) = 5x^4\nd/dx x^5 = 5x^4",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-227",
+  "domain": "calculus",
+  "task": "solve-pde",
+  "referenceVerdict": "unsupported",
+  "problem": {
+   "domain": "calculus",
+   "task": "solve-pde",
+   "statement": "Solve the Navier-Stokes initial boundary value problem"
+  },
+  "studentText": "∂u/∂t + (u·∇)u = -∇p + νΔu\n∇·u=0\nFind every smooth global solution",
+  "parser": "malformed",
+  "lineKinds": [],
+  "parserMessage": "expected expression",
+  "adapter": "malformed",
+  "adapterMessage": "expected expression",
+  "engineVerdict": "malformed",
+  "engineJustification": "expected expression",
+  "gate": false
+ },
+ {
+  "id": "e1-228",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 7
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^7\nx^7 = x*x^6\nf'(x) = x*(6x^5) + x^6\nf'(x) = 7x^6",
+  "parser": "parsed",
+  "lineKinds": [
+   "function",
+   "equation",
+   "derivative",
+   "derivative"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for calculus",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for calculus",
+  "gate": false
+ },
+ {
+  "id": "e1-229",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 2
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^2\nf'(x) = 2x^1\nd/dx x^2 = 2x^1",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-230",
+  "domain": "calculus",
+  "task": "derivative",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "calculus",
+   "task": "derivative",
+   "expression": {
+    "kind": "power",
+    "base": {
+     "kind": "variable",
+     "name": "x"
+    },
+    "exponent": 3
+   },
+   "variable": "x"
+  },
+  "studentText": "f(x) = x^3\nf'(x) = 3x^2\nd/dx x^3 = 3x^2",
+  "parser": "ambiguous",
+  "lineKinds": [
+   "function",
+   "derivative"
+  ],
+  "parserMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "adapter": "ambiguous",
+  "adapterMessage": "division followed by implicit multiplication has multiple conventional readings",
+  "engineVerdict": "ambiguous",
+  "engineJustification": "division followed by implicit multiplication has multiple conventional readings",
+  "gate": false
+ },
+ {
+  "id": "e1-231",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 90
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n30° + 60° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-232",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 40
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 70
+    }
+   }
+  },
+  "studentText": "A + B = 110°\nC = 180° - 110°\nC = 70°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 11",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 11",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 11",
+  "gate": false
+ },
+ {
+  "id": "e1-233",
+  "domain": "geometry",
+  "task": "angle_sum",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nTherefore C = 180° - A - B",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-234",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 70
+    }
+   }
+  },
+  "studentText": "A + B = 110°\nC = 180° - 110°\nC = 70°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 11",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 11",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 11",
+  "gate": false
+ },
+ {
+  "id": "e1-235",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 50
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nC = 180° - 70° + 60°\nC = 170°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-236",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n30° + 70° + C = 180°\nC = 80°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-237",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 40
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 100
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n40° + 40° + C = 180°\nC = 100°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-238",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 50
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B = 100°\nC = 180° - 100°\nC = 80°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 11",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 11",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 11",
+  "gate": false
+ },
+ {
+  "id": "e1-239",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 60
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n60° + 60° + C = 180°\nC = 60°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-240",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 40
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n70° + 70° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-241",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 110
+    }
+   }
+  },
+  "studentText": "A + B = 70°\nC = 180° - 70°\nC = 110°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 10",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 10",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 10",
+  "gate": false
+ },
+ {
+  "id": "e1-242",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 40
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 90
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n40° + 50° + C = 180°\nC = 90°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-243",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 50
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 70
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n50° + 60° + C = 180°\nC = 70°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-244",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 50
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n60° + 70° + C = 180°\nC = 50°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-245",
+  "domain": "geometry",
+  "task": "angle_sum",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nTherefore C = 180° - A - B",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-246",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 100
+    }
+   }
+  },
+  "studentText": "A + B = 80°\nC = 180° - 80°\nC = 100°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 10",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 10",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 10",
+  "gate": false
+ },
+ {
+  "id": "e1-247",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 40
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B = 100°\nC = 180° - 100°\nC = 80°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 11",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 11",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 11",
+  "gate": false
+ },
+ {
+  "id": "e1-248",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 50
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 60
+    }
+   }
+  },
+  "studentText": "A + B = 120°\nC = 180° - 120°\nC = 60°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 11",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 11",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 11",
+  "gate": false
+ },
+ {
+  "id": "e1-249",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n60° + 40° + C = 180°\nC = 80°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-250",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 60
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n70° + 50° + C = 180°\nC = 60°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-251",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 90
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nC = 180° - 30° + 60°\nC = 210°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-252",
+  "domain": "geometry",
+  "task": "statement",
+  "referenceVerdict": "unsupported",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "statement": "Prove the general Jordan curve theorem"
+   }
+  },
+  "studentText": "Let C be any simple closed curve\nIt separates the plane\nGive a complete topological proof",
+  "parser": "parsed",
+  "lineKinds": [
+   "expression",
+   "expression",
+   "expression"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for geometry",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for geometry",
+  "gate": false
+ },
+ {
+  "id": "e1-253",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 50
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 90
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n50° + 40° + C = 180°\nC = 90°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-254",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 70
+    }
+   }
+  },
+  "studentText": "A + B = 110°\nC = 180° - 110°\nC = 70°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 11",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 11",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 11",
+  "gate": false
+ },
+ {
+  "id": "e1-255",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 50
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n70° + 60° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-256",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B = 100°\nC = 180° - 100°\nC = 80°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 11",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 11",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 11",
+  "gate": false
+ },
+ {
+  "id": "e1-257",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 40
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 100
+    }
+   }
+  },
+  "studentText": "A + B = 80°\nC = 180° - 80°\nC = 100°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 10",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 10",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 10",
+  "gate": false
+ },
+ {
+  "id": "e1-258",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 50
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n50° + 50° + C = 180°\nC = 80°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-259",
+  "domain": "geometry",
+  "task": "angle_sum",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nTherefore C = 180° - A - B",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-260",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 40
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n70° + 70° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-261",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 110
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n30° + 40° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-262",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 40
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 90
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n40° + 50° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-263",
+  "domain": "geometry",
+  "task": "angle_sum",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nTherefore C = 180° - A - B",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-264",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 50
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nC = 180° - 60° + 70°\nC = 190°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-265",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 70
+    }
+   }
+  },
+  "studentText": "A + B = 110°\nC = 180° - 110°\nC = 70°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 11",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 11",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 11",
+  "gate": false
+ },
+ {
+  "id": "e1-266",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 100
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nC = 180° - 30° + 50°\nC = 200°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-267",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 40
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nC = 180° - 40° + 60°\nC = 200°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-268",
+  "domain": "geometry",
+  "task": "angle_sum",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nTherefore C = 180° - A - B",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-269",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n60° + 40° + C = 180°\nC = 80°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-270",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 60
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n70° + 50° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-271",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 90
+    }
+   }
+  },
+  "studentText": "A + B = 90°\nC = 180° - 90°\nC = 90°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 10",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 10",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 10",
+  "gate": false
+ },
+ {
+  "id": "e1-272",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "ambiguous",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 40
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 70
+    }
+   }
+  },
+  "studentText": "AB = 5\nAC = 5\nangle B = angle C maybe from picture",
+  "parser": "parsed",
+  "lineKinds": [
+   "equation",
+   "equation",
+   "equation"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for geometry",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for geometry",
+  "gate": false
+ },
+ {
+  "id": "e1-273",
+  "domain": "geometry",
+  "task": "angle_sum",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nTherefore C = 180° - A - B",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-274",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 70
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n60° + 50° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-275",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 50
+    }
+   }
+  },
+  "studentText": "A + B = 130°\nC = 180° - 130°\nC = 50°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 11",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 11",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 11",
+  "gate": false
+ },
+ {
+  "id": "e1-276",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n30° + 70° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-277",
+  "domain": "geometry",
+  "task": "statement",
+  "referenceVerdict": "unsupported",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "statement": "Prove the general Jordan curve theorem"
+   }
+  },
+  "studentText": "Let C be any simple closed curve\nIt separates the plane\nGive a complete topological proof",
+  "parser": "parsed",
+  "lineKinds": [
+   "expression",
+   "expression",
+   "expression"
+  ],
+  "parserMessage": "notation parsed into existing typed mathematical representations",
+  "adapter": "unsupported",
+  "adapterMessage": "no lossless natural adapter for geometry",
+  "engineVerdict": "unsupported",
+  "engineJustification": "no lossless natural adapter for geometry",
+  "gate": false
+ },
+ {
+  "id": "e1-278",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 50
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nC = 180° - 50° + 50°\nC = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-279",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 60
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n60° + 60° + C = 180°\nC = 60°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-280",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 40
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n70° + 70° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-281",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 110
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n30° + 40° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-282",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 40
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 90
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n40° + 50° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-283",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 50
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 70
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n50° + 60° + C = 180°\nC = 70°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-284",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 50
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n60° + 70° + C = 180°\nC = 50°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-285",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 70
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nC = 180° - 70° + 40°\nC = 150°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-286",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "incomplete",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 100
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n30° + 50° + C = 180°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-287",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "invalid",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 40
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nC = 180° - 40° + 60°\nC = 200°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-288",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 50
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 60
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n50° + 70° + C = 180°\nC = 60°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-289",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n60° + 40° + C = 180°\nC = 80°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-290",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 60
+    }
+   }
+  },
+  "studentText": "A + B = 120°\nC = 180° - 120°\nC = 60°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 11",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 11",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 11",
+  "gate": false
+ },
+ {
+  "id": "e1-291",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 90
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n30° + 60° + C = 180°\nC = 90°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-292",
+  "domain": "geometry",
+  "task": "angle_sum",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nTherefore C = 180° - A - B",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-293",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 50
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 40
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 90
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n50° + 40° + C = 180°\nC = 90°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-294",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 70
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n60° + 50° + C = 180°\nC = 70°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-295",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 70
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 50
+    }
+   }
+  },
+  "studentText": "A + B = 130°\nC = 180° - 130°\nC = 50°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 11",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 11",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 11",
+  "gate": false
+ },
+ {
+  "id": "e1-296",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 30
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 70
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n30° + 70° + C = 180°\nC = 80°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-297",
+  "domain": "geometry",
+  "task": "angle_sum",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nTherefore C = 180° - A - B",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-298",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 50
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 50
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 80
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n50° + 50° + C = 180°\nC = 80°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-299",
+  "domain": "geometry",
+  "task": "angle_measure",
+  "referenceVerdict": "verified",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "A"
+      ],
+      "value": 60
+     },
+     {
+      "predicate": "angle_measure",
+      "args": [
+       "B"
+      ],
+      "value": 60
+     }
+    ],
+    "conditions": [
+     "nondegenerate:ABC"
+    ],
+    "goal": {
+     "predicate": "angle_measure",
+     "args": [
+      "C"
+     ],
+     "value": 60
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\n60° + 60° + C = 180°\nC = 60°",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ },
+ {
+  "id": "e1-300",
+  "domain": "geometry",
+  "task": "angle_sum",
+  "referenceVerdict": "missing-assumption",
+  "problem": {
+   "domain": "geometry",
+   "problem": {
+    "objects": [
+     {
+      "id": "ABC",
+      "kind": "triangle"
+     }
+    ],
+    "facts": [],
+    "conditions": [],
+    "goal": {
+     "predicate": "angle_sum",
+     "args": [
+      "ABC"
+     ],
+     "value": 180
+    }
+   }
+  },
+  "studentText": "A + B + C = 180°\nTherefore C = 180° - A - B",
+  "parser": "unsupported",
+  "lineKinds": [],
+  "parserMessage": "unsupported character '°' at 15",
+  "adapter": "unsupported",
+  "adapterMessage": "unsupported character '°' at 15",
+  "engineVerdict": "unsupported",
+  "engineJustification": "unsupported character '°' at 15",
+  "gate": false
+ }
+]

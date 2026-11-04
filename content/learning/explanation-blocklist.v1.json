@@ -1,0 +1,34 @@
+{
+ "schema": "explanation-blocklist@1",
+ "note": "Blocked explanation revisions (explanation-review@1). A revision listed here is refused in every teaching mode whatever the registry says. Entries are added when a revision is blocked; removing one is a deliberate, reviewed change. Correcting a blocked explanation means new content (a new revision), never unblocking the old one.",
+ "entries": [
+  {
+   "id": "MATH.number.multiplication-tables#doubling",
+   "contentHash": "sha256:b8eb70b54170cae335a6efc96a21019374adddc7e02bc9c9b973043b496e309f",
+   "reason": "text says \"double three times\" from 7 × 2 = 14; it is twice (14 → 28 → 56). Verified.",
+   "blockedAt": "2026-10-31T00:00:00.000Z",
+   "by": "Milestone 2 closure audit (AI screening, error verified by hand)"
+  },
+  {
+   "id": "MATH.number.rational-numbers#spot_the_mistake",
+   "contentHash": "sha256:1cb06cc7f93a6367517be822be4f265a0f4c49faa2f2ad21db37ba0a73fd6e22",
+   "reason": "the misconception screen cuts the question off at \"Work out 2/5 ×\" (the question itself, 2/5 × (−7/9), displays correctly). Verified.",
+   "blockedAt": "2026-10-31T00:00:00.000Z",
+   "by": "Milestone 2 closure audit (AI screening, error verified by hand)"
+  },
+  {
+   "id": "MATH.algebra.missing-number#worked_steps",
+   "contentHash": "sha256:25ddff6090f1d85b56c19b6629c8b25e01a6d0b6b393698b8fc97b6f1e4ef41e",
+   "reason": "rule \"do the opposite to the other number\" gives 36 for 27 − □ = 9 (its own check question); the answer is 18. Verified.",
+   "blockedAt": "2026-10-31T00:00:00.000Z",
+   "by": "Milestone 2 closure audit (AI screening, error verified by hand)"
+  },
+  {
+   "id": "MATH.algebra.missing-number#check_what_it_uses",
+   "contentHash": "sha256:dcb2f8c4dcabc3b9daaa9f5330605bab111ac559003445f4dcebaa3a6b196d2f",
+   "reason": "repeats the same rule. Verified.",
+   "blockedAt": "2026-10-31T00:00:00.000Z",
+   "by": "Milestone 2 closure audit (AI screening, error verified by hand)"
+  }
+ ]
+}

@@ -1,0 +1,298 @@
+{
+ "summary": {
+  "byCategory": {
+   "A": {
+    "n": 150,
+    "statusAgree": 150,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 150
+   },
+   "B": {
+    "n": 350,
+    "statusAgree": 350,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 350
+   },
+   "C": {
+    "n": 70,
+    "statusAgree": 70,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 70
+   },
+   "D": {
+    "n": 50,
+    "statusAgree": 50,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 50
+   },
+   "E": {
+    "n": 40,
+    "statusAgree": 40,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 0,
+    "firstOk": 40
+   },
+   "F": {
+    "n": 40,
+    "statusAgree": 35,
+    "falseAccept": 0,
+    "falseReject": 0,
+    "overRefuse": 0,
+    "underRefuse": 5,
+    "firstOk": 35
+   }
+  },
+  "definitions": {
+   "verdictAccuracy": "status equals oracle status / all tasks",
+   "falseAcceptance": "evaluator says valid-complete|valid-incomplete where oracle says invalid|unsupported|ambiguous / oracle non-valid tasks",
+   "falseRejection": "evaluator says invalid where oracle says valid-* / oracle valid tasks",
+   "overRefusal": "evaluator says unsupported|ambiguous where oracle gives a definite verdict / oracle definite tasks",
+   "underRefusal": "evaluator gives a definite verdict where oracle says unsupported|ambiguous / those tasks",
+   "firstErrorLocalization": "first invalid line equal and invalid_at=step / oracle step-invalid tasks"
+  },
+  "metrics": {
+   "exp_validish": 173,
+   "falseRejection": 0,
+   "exp_nonvalid": 527,
+   "falseAcceptance": 0,
+   "exp_decidable": 634,
+   "overRefusal": 0,
+   "exp_unsupportedOrAmbiguous": 66,
+   "underRefusal": 5,
+   "exp_stepInvalid": 364,
+   "firstOk": 364,
+   "exp_finalClaim": 97,
+   "finalOk": 97,
+   "wrongVerdict": 0
+  },
+  "tasks": 700,
+  "crashes": 0,
+  "unsafeCertifications": 0,
+  "statusAgree": 695,
+  "firstInvalidAgree": 695,
+  "byFamily": {
+   "A": {
+    "n": 150,
+    "status": 150,
+    "first": 150
+   },
+   "B": {
+    "n": 350,
+    "status": 350,
+    "first": 350
+   },
+   "C": {
+    "n": 70,
+    "status": 70,
+    "first": 70
+   },
+   "D": {
+    "n": 50,
+    "status": 50,
+    "first": 50
+   },
+   "E": {
+    "n": 40,
+    "status": 40,
+    "first": 40
+   },
+   "F": {
+    "n": 40,
+    "status": 35,
+    "first": 35
+   }
+  },
+  "confusion": {
+   "valid-complete -> valid-complete": 145,
+   "valid-incomplete -> valid-incomplete": 28,
+   "invalid -> invalid": 461,
+   "ambiguous -> ambiguous": 26,
+   "unsupported -> unsupported": 35,
+   "unsupported -> invalid": 5
+  }
+ },
+ "misconceptionByClass": {
+  "sign-error-moving-term": {
+   "sign-error-moving-term": 23,
+   "sign-error-moving-term+partial-division+divided-by-unknown-factor": 2
+  },
+  "one-sided-term-removal": {
+   "one-sided-term-removal": 23,
+   "sign-error-moving-term+one-sided-term-removal": 1,
+   "one-sided-term-removal+partial-division": 1
+  },
+  "partial-division": {
+   "partial-division": 8,
+   "unbalanced-division": 15,
+   "sign-error-moving-term+unbalanced-division": 1,
+   "partial-division+unbalanced-division": 1
+  },
+  "partial-distribution": {
+   "partial-distribution": 25
+  },
+  "distribute-sign-error": {
+   "distribute-sign-error": 8,
+   "arithmetic-slip": 15,
+   "sign-error-moving-term+distribute-sign-error": 2
+  },
+  "add-denominators": {
+   "add-denominators": 22,
+   "partial-division+add-denominators": 1,
+   "(none)": 1,
+   "one-sided-term-removal+add-denominators": 1
+  },
+  "cross-multiply-straight": {
+   "cross-multiply-straight": 23,
+   "cross-multiply-straight+drop-denominator": 1,
+   "cross-multiply-straight+unbalanced-multiplication": 1
+  },
+  "cancel-additive-term": {
+   "cancel-additive-term": 12,
+   "(none)": 6,
+   "drop-denominator": 3,
+   "cross-multiply-straight+drop-denominator": 3,
+   "cross-multiply-straight": 1
+  },
+  "inverse-operation": {
+   "inverse-operation": 20,
+   "arithmetic-slip": 5
+  },
+  "partial-clearing": {
+   "partial-clearing": 14,
+   "arithmetic-slip": 9,
+   "partial-clearing+unbalanced-multiplication": 2
+  },
+  "drop-denominator": {
+   "drop-denominator+cancel-additive-term": 1,
+   "drop-denominator": 24
+  },
+  "unbalanced-multiplication": {
+   "unbalanced-division": 12,
+   "one-sided-term-removal+unbalanced-division+partial-clearing+unbalanced-multiplication": 1,
+   "unbalanced-division+partial-clearing+unbalanced-multiplication": 11,
+   "sign-error-moving-term+one-sided-term-removal+unbalanced-division+partial-clearing+unbalanced-multiplication": 1
+  },
+  "divided-by-unknown-factor": {
+   "divided-by-unknown-factor": 25
+  },
+  "arithmetic-slip": {
+   "arithmetic-slip": 33,
+   "sign-error-moving-term": 3,
+   "one-sided-term-removal": 1,
+   "divided-by-unknown-factor": 1,
+   "partial-division": 1
+  }
+ },
+ "mismatches": [
+  {
+   "id": "F-0005",
+   "family": "F",
+   "lines": [
+    "x^2-3=0"
+   ],
+   "problem": "-2*(x-3)+3=3*x-26",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    1,
+    "step"
+   ]
+  },
+  {
+   "id": "F-0013",
+   "family": "F",
+   "lines": [
+    "x^2-6=0"
+   ],
+   "problem": "-1*(x+3)=-2",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    1,
+    "step"
+   ]
+  },
+  {
+   "id": "F-0021",
+   "family": "F",
+   "lines": [
+    "x^2-36=-1(x-6)",
+    "x^2-3=0"
+   ],
+   "problem": "(x^2-36)/(x-6)=-1",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    2,
+    "step"
+   ]
+  },
+  {
+   "id": "F-0029",
+   "family": "F",
+   "lines": [
+    "-7*x-14+7=5*x-67",
+    "-7*x-7=5*x-67",
+    "x^2=10"
+   ],
+   "problem": "-7*(x+2)+7=5*x-67",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    3,
+    "step"
+   ]
+  },
+  {
+   "id": "F-0037",
+   "family": "F",
+   "lines": [
+    "5(x+4)=-7(x-5)",
+    "5x+20=-7x+35",
+    "5x+7x=-20+35",
+    "x^2-7=0"
+   ],
+   "problem": "5/(x-5)=-7/(x+4)",
+   "expected": [
+    "unsupported",
+    null,
+    null
+   ],
+   "got": [
+    "invalid",
+    4,
+    "step"
+   ]
+  }
+ ]
+}

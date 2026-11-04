@@ -171,3 +171,7 @@ the token belonging to that learner.
 - Visits played before consent are uploaded when consent is given. A production
   server dates them all at upload time, so their spacing in days is lost.
 - No offline queue beyond "retry unsent visits next time"; no mobile app yet.
+
+## Tamil foundation candidate
+
+An isolated Tamil literacy pilot is available with `cd frontend && npm run tamil:build && npm run tamil:preview` (local port 4176). It includes Tamil instructions, script construction, a small diagnostic-to-practice journey, and exportable provisional evidence. It does not alter English inference or claim validated mastery. See [Tamil coverage, run instructions and shared-engine handoff](docs/tamil/README.md).

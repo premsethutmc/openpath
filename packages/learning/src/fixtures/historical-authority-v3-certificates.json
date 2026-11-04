@@ -1,0 +1,526 @@
+[
+ {
+  "statement": "3x = 19 - 4",
+  "lines": [
+   "3x = 15",
+   "x = 5"
+  ],
+  "note": "unchanged meaning: the reference derivation",
+  "issuedBy": "be91d17",
+  "verdict": "verified",
+  "chain": [
+   {
+    "version": "openpath-derivation-certificate@3",
+    "task": {
+     "digest": "93c4b7390c16152573ccb0a6ee12418a8a958516b88a0328244cffa8db1e1b3c",
+     "conditions": []
+    },
+    "line": 0,
+    "sources": [
+     "*[3,x]",
+     "+[-4,19]"
+    ],
+    "results": [
+     "*[3,x]",
+     "15"
+    ],
+    "parts": [
+     {
+      "side": 1,
+      "rule": "rewrite",
+      "grade": "determined",
+      "source": "19-4",
+      "replacement": "15",
+      "rewrite": {
+       "version": "openpath-rewrite-certificate@2",
+       "visible": "+[-4,19]",
+       "result": "15",
+       "steps": [
+        {
+         "rule": "evaluate",
+         "ctx": "terms",
+         "path": [],
+         "indices": [
+          0,
+          1
+         ],
+         "source": [
+          "19",
+          "~(4)"
+         ],
+         "replacement": [
+          "15"
+         ],
+         "kernel": {
+          "strategy": "canonical-identity",
+          "sourceCanonical": "{\"kind\":\"constant\",\"value\":\"15\"}",
+          "targetCanonical": "{\"kind\":\"constant\",\"value\":\"15\"}",
+          "rules": [],
+          "assumptions": [],
+          "restrictions": [],
+          "obligations": [],
+          "replayDigest": "66e1d3aa769dc820c8009d032a9242c64a9321bfceaa623b6d7d8afd1bea645f"
+         }
+        }
+       ],
+       "assumptions": [],
+       "restrictions": [],
+       "whole": {
+        "strategy": "canonical-identity",
+        "sourceCanonical": "{\"kind\":\"constant\",\"value\":\"15\"}",
+        "targetCanonical": "{\"kind\":\"constant\",\"value\":\"15\"}",
+        "rules": [],
+        "assumptions": [],
+        "restrictions": [],
+        "obligations": [],
+        "replayDigest": "66e1d3aa769dc820c8009d032a9242c64a9321bfceaa623b6d7d8afd1bea645f"
+       },
+       "digest": "10514a38a03e8425f631461f9461ebf95db959bb03a40d42d2d483baefb0318b"
+      },
+      "kernel": {
+       "strategy": "canonical-identity",
+       "sourceCanonical": "{\"kind\":\"constant\",\"value\":\"15\"}",
+       "targetCanonical": "{\"kind\":\"constant\",\"value\":\"15\"}",
+       "rules": [],
+       "assumptions": [],
+       "restrictions": [],
+       "obligations": [],
+       "replayDigest": "66e1d3aa769dc820c8009d032a9242c64a9321bfceaa623b6d7d8afd1bea645f"
+      },
+      "assumptions": []
+     }
+    ],
+    "move": {
+     "kind": "side-rewrite",
+     "parameter": null
+    },
+    "assumptions": [],
+    "domainConditions": [],
+    "dependencies": [],
+    "versions": {
+     "authority": "openpath-derivation-authority@3",
+     "registry": "openpath-rewrite-registry@3",
+     "kernel": "openpath-symbolic-proof-kernel@1"
+    },
+    "digest": "b9edc10ae8df047f68cc15c063a64d16a89ae24ec1bcdb6a793f12b99e5bf769"
+   },
+   {
+    "version": "openpath-derivation-certificate@3",
+    "task": {
+     "digest": "93c4b7390c16152573ccb0a6ee12418a8a958516b88a0328244cffa8db1e1b3c",
+     "conditions": []
+    },
+    "line": 1,
+    "sources": [
+     "*[3,x]",
+     "15"
+    ],
+    "results": [
+     "x",
+     "5"
+    ],
+    "parts": [
+     {
+      "side": 1,
+      "rule": "representation",
+      "grade": "determined",
+      "source": "15/3",
+      "replacement": "5",
+      "rewrite": null,
+      "kernel": null,
+      "assumptions": []
+     }
+    ],
+    "move": {
+     "kind": "cancel-factor",
+     "parameter": "/3"
+    },
+    "assumptions": [],
+    "domainConditions": [],
+    "dependencies": [
+     {
+      "line": 0,
+      "digest": "b9edc10ae8df047f68cc15c063a64d16a89ae24ec1bcdb6a793f12b99e5bf769"
+     }
+    ],
+    "versions": {
+     "authority": "openpath-derivation-authority@3",
+     "registry": "openpath-rewrite-registry@3",
+     "kernel": "openpath-symbolic-proof-kernel@1"
+    },
+    "digest": "9a6e03311cd8075ab4b19e7dba253ecf47e4bc943e13fa9a77f4aed1f86f3ebc"
+   }
+  ]
+ },
+ {
+  "statement": "10 = 2x + 4",
+  "lines": [
+   "6 = 2x",
+   "x = 3"
+  ],
+  "note": "unchanged meaning",
+  "issuedBy": "be91d17",
+  "verdict": "verified",
+  "chain": [
+   {
+    "version": "openpath-derivation-certificate@3",
+    "task": {
+     "digest": "85ccce23e60d5ec4d374e48aaccaba4ca0ad6d47213e0178204b690c1ce776a7",
+     "conditions": []
+    },
+    "line": 0,
+    "sources": [
+     "10",
+     "+[*[2,x],4]"
+    ],
+    "results": [
+     "6",
+     "*[2,x]"
+    ],
+    "parts": [
+     {
+      "side": 0,
+      "rule": "rewrite",
+      "grade": "determined",
+      "source": "10-4",
+      "replacement": "6",
+      "rewrite": {
+       "version": "openpath-rewrite-certificate@2",
+       "visible": "+[-4,10]",
+       "result": "6",
+       "steps": [
+        {
+         "rule": "evaluate",
+         "ctx": "terms",
+         "path": [],
+         "indices": [
+          0,
+          1
+         ],
+         "source": [
+          "10",
+          "~(4)"
+         ],
+         "replacement": [
+          "6"
+         ],
+         "kernel": {
+          "strategy": "canonical-identity",
+          "sourceCanonical": "{\"kind\":\"constant\",\"value\":\"6\"}",
+          "targetCanonical": "{\"kind\":\"constant\",\"value\":\"6\"}",
+          "rules": [],
+          "assumptions": [],
+          "restrictions": [],
+          "obligations": [],
+          "replayDigest": "0da3d609d01b821b6ab9e8627515513ff54d2eb0f87411b4a1fbe6fded0cd072"
+         }
+        }
+       ],
+       "assumptions": [],
+       "restrictions": [],
+       "whole": {
+        "strategy": "canonical-identity",
+        "sourceCanonical": "{\"kind\":\"constant\",\"value\":\"6\"}",
+        "targetCanonical": "{\"kind\":\"constant\",\"value\":\"6\"}",
+        "rules": [],
+        "assumptions": [],
+        "restrictions": [],
+        "obligations": [],
+        "replayDigest": "0da3d609d01b821b6ab9e8627515513ff54d2eb0f87411b4a1fbe6fded0cd072"
+       },
+       "digest": "7eb9ae9a18e02473d2d93c1388e9b68784575d4def062ad1808c934378745bd2"
+      },
+      "kernel": {
+       "strategy": "canonical-identity",
+       "sourceCanonical": "{\"kind\":\"constant\",\"value\":\"6\"}",
+       "targetCanonical": "{\"kind\":\"constant\",\"value\":\"6\"}",
+       "rules": [],
+       "assumptions": [],
+       "restrictions": [],
+       "obligations": [],
+       "replayDigest": "0da3d609d01b821b6ab9e8627515513ff54d2eb0f87411b4a1fbe6fded0cd072"
+      },
+      "assumptions": []
+     }
+    ],
+    "move": {
+     "kind": "transposition",
+     "parameter": "-4"
+    },
+    "assumptions": [],
+    "domainConditions": [],
+    "dependencies": [],
+    "versions": {
+     "authority": "openpath-derivation-authority@3",
+     "registry": "openpath-rewrite-registry@3",
+     "kernel": "openpath-symbolic-proof-kernel@1"
+    },
+    "digest": "776fe1740df5b1805e6a8aaf6665dcf410539d396cb060a938cc6af0f8b92446"
+   },
+   {
+    "version": "openpath-derivation-certificate@3",
+    "task": {
+     "digest": "85ccce23e60d5ec4d374e48aaccaba4ca0ad6d47213e0178204b690c1ce776a7",
+     "conditions": []
+    },
+    "line": 1,
+    "sources": [
+     "6",
+     "*[2,x]"
+    ],
+    "results": [
+     "x",
+     "3"
+    ],
+    "parts": [],
+    "move": {
+     "kind": "solve-linear",
+     "parameter": null
+    },
+    "assumptions": [],
+    "domainConditions": [],
+    "dependencies": [
+     {
+      "line": 0,
+      "digest": "776fe1740df5b1805e6a8aaf6665dcf410539d396cb060a938cc6af0f8b92446"
+     }
+    ],
+    "versions": {
+     "authority": "openpath-derivation-authority@3",
+     "registry": "openpath-rewrite-registry@3",
+     "kernel": "openpath-symbolic-proof-kernel@1"
+    },
+    "digest": "0f4db78e159e410bab3ed9e0d100db7834845a5338a0a3c9ca8b0d2e4c1b2382"
+   }
+  ]
+ },
+ {
+  "statement": "6 < 2x",
+  "lines": [
+   "3 < x"
+  ],
+  "note": "unchanged meaning (inequality, no symmetry)",
+  "issuedBy": "be91d17",
+  "verdict": "verified",
+  "chain": [
+   {
+    "version": "openpath-derivation-certificate@3",
+    "task": {
+     "digest": "87c5af9982b11b32d2e62a76210a71fbc48aa7789d621f85a352027ac8c6fbd8",
+     "conditions": []
+    },
+    "line": 0,
+    "sources": [
+     "6",
+     "*[2,x]"
+    ],
+    "results": [
+     "3",
+     "<",
+     "x"
+    ],
+    "parts": [
+     {
+      "side": 0,
+      "rule": "representation",
+      "grade": "determined",
+      "source": "6/2",
+      "replacement": "3",
+      "rewrite": null,
+      "kernel": null,
+      "assumptions": []
+     },
+     {
+      "side": 1,
+      "rule": "polynomial-normalization",
+      "grade": "determined",
+      "source": "2*x/2",
+      "replacement": "x",
+      "rewrite": null,
+      "kernel": {
+       "strategy": "rational-normal-form",
+       "sourceCanonical": "{\"kind\":\"multiply\",\"factors\":[{\"kind\":\"constant\",\"value\":\"2\"},{\"kind\":\"power\",\"base\":{\"kind\":\"constant\",\"value\":\"2\"},\"exponent\":-1},{\"kind\":\"variable\",\"name\":\"x\"}]}",
+       "targetCanonical": "{\"kind\":\"variable\",\"name\":\"x\"}",
+       "rules": [],
+       "assumptions": [],
+       "restrictions": [
+        "nonzero:{\"kind\":\"constant\",\"value\":\"2\"}"
+       ],
+       "obligations": [],
+       "replayDigest": "a039c3840168376be95edd2be467c1de6a58144b699c377a1dd2abd815b93b56"
+      },
+      "assumptions": []
+     }
+    ],
+    "move": {
+     "kind": "balance-divide",
+     "parameter": "/2"
+    },
+    "assumptions": [],
+    "domainConditions": [
+     "nonzero:{\"kind\":\"constant\",\"value\":\"2\"}"
+    ],
+    "dependencies": [],
+    "versions": {
+     "authority": "openpath-derivation-authority@3",
+     "registry": "openpath-rewrite-registry@3",
+     "kernel": "openpath-symbolic-proof-kernel@1"
+    },
+    "digest": "ada377a69ac65c79e57d77254e0053b3375eed223e20b1eab393e869aa023734"
+   }
+  ]
+ },
+ {
+  "statement": "2^3x = 64",
+  "lines": [
+   "8x = 64",
+   "x = 8"
+  ],
+  "note": "meaning changed: authority@3 as of be91d17 read 2^3x as 2^3·x; the integrated authority refuses the task as ambiguous (notation@2)",
+  "issuedBy": "be91d17",
+  "verdict": "verified",
+  "chain": [
+   {
+    "version": "openpath-derivation-certificate@3",
+    "task": {
+     "digest": "32cc8f6747ca0f93422d7fcddaa3d8de4b8695b0cb701d1dea6d1a5926565376",
+     "conditions": []
+    },
+    "line": 0,
+    "sources": [
+     "*[(2^3),x]",
+     "64"
+    ],
+    "results": [
+     "*[8,x]",
+     "64"
+    ],
+    "parts": [
+     {
+      "side": 0,
+      "rule": "rewrite",
+      "grade": "determined",
+      "source": "2^3*x",
+      "replacement": "8*x",
+      "rewrite": {
+       "version": "openpath-rewrite-certificate@2",
+       "visible": "*[(2^3),x]",
+       "result": "*[8,x]",
+       "steps": [
+        {
+         "rule": "evaluate",
+         "ctx": "terms",
+         "path": [
+          "f0"
+         ],
+         "indices": [
+          0
+         ],
+         "source": [
+          "2^3"
+         ],
+         "replacement": [
+          "8"
+         ],
+         "kernel": {
+          "strategy": "canonical-identity",
+          "sourceCanonical": "{\"kind\":\"constant\",\"value\":\"8\"}",
+          "targetCanonical": "{\"kind\":\"constant\",\"value\":\"8\"}",
+          "rules": [],
+          "assumptions": [],
+          "restrictions": [],
+          "obligations": [],
+          "replayDigest": "4efc4b57f18c56ced65fe608903adbad0eb1a5456a488ef1e866d9556bd85ee2"
+         }
+        }
+       ],
+       "assumptions": [],
+       "restrictions": [],
+       "whole": {
+        "strategy": "canonical-identity",
+        "sourceCanonical": "{\"kind\":\"multiply\",\"factors\":[{\"kind\":\"constant\",\"value\":\"8\"},{\"kind\":\"variable\",\"name\":\"x\"}]}",
+        "targetCanonical": "{\"kind\":\"multiply\",\"factors\":[{\"kind\":\"constant\",\"value\":\"8\"},{\"kind\":\"variable\",\"name\":\"x\"}]}",
+        "rules": [],
+        "assumptions": [],
+        "restrictions": [],
+        "obligations": [],
+        "replayDigest": "9a1d7365ef13f587b77a7bbe0f32f7e82dcee739df06f54d7a2d6c5872369b4d"
+       },
+       "digest": "bdea424442c14119a15dde8b19ef065bf1d6e8928d0b0dc675037c8d6606d7f8"
+      },
+      "kernel": {
+       "strategy": "canonical-identity",
+       "sourceCanonical": "{\"kind\":\"multiply\",\"factors\":[{\"kind\":\"constant\",\"value\":\"8\"},{\"kind\":\"variable\",\"name\":\"x\"}]}",
+       "targetCanonical": "{\"kind\":\"multiply\",\"factors\":[{\"kind\":\"constant\",\"value\":\"8\"},{\"kind\":\"variable\",\"name\":\"x\"}]}",
+       "rules": [],
+       "assumptions": [],
+       "restrictions": [],
+       "obligations": [],
+       "replayDigest": "9a1d7365ef13f587b77a7bbe0f32f7e82dcee739df06f54d7a2d6c5872369b4d"
+      },
+      "assumptions": []
+     }
+    ],
+    "move": {
+     "kind": "side-rewrite",
+     "parameter": null
+    },
+    "assumptions": [],
+    "domainConditions": [],
+    "dependencies": [],
+    "versions": {
+     "authority": "openpath-derivation-authority@3",
+     "registry": "openpath-rewrite-registry@3",
+     "kernel": "openpath-symbolic-proof-kernel@1"
+    },
+    "digest": "98c6eaf0535662b88a1c4ac4dba6eb162a1b0cff09af26b08dd411e239d5f70d"
+   },
+   {
+    "version": "openpath-derivation-certificate@3",
+    "task": {
+     "digest": "32cc8f6747ca0f93422d7fcddaa3d8de4b8695b0cb701d1dea6d1a5926565376",
+     "conditions": []
+    },
+    "line": 1,
+    "sources": [
+     "*[8,x]",
+     "64"
+    ],
+    "results": [
+     "x",
+     "8"
+    ],
+    "parts": [
+     {
+      "side": 1,
+      "rule": "representation",
+      "grade": "determined",
+      "source": "64/8",
+      "replacement": "8",
+      "rewrite": null,
+      "kernel": null,
+      "assumptions": []
+     }
+    ],
+    "move": {
+     "kind": "cancel-factor",
+     "parameter": "/8"
+    },
+    "assumptions": [],
+    "domainConditions": [],
+    "dependencies": [
+     {
+      "line": 0,
+      "digest": "98c6eaf0535662b88a1c4ac4dba6eb162a1b0cff09af26b08dd411e239d5f70d"
+     }
+    ],
+    "versions": {
+     "authority": "openpath-derivation-authority@3",
+     "registry": "openpath-rewrite-registry@3",
+     "kernel": "openpath-symbolic-proof-kernel@1"
+    },
+    "digest": "f50396b9a81c5490a64e7a73bf0a3d14e7a75de8cba04dbfead224cb104046a3"
+   }
+  ]
+ }
+]

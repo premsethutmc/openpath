@@ -1,0 +1,222 @@
+{
+ "near_duplicates": [
+  [
+   "e6-038",
+   "e6-020",
+   0.9
+  ],
+  [
+   "e6-049",
+   "e6-048",
+   0.78
+  ],
+  [
+   "e6-051",
+   "e6-030",
+   0.83
+  ],
+  [
+   "e6-088",
+   "e6-079",
+   0.84
+  ],
+  [
+   "e6-088",
+   "e6-087",
+   0.84
+  ],
+  [
+   "e6-097",
+   "e6-092",
+   0.79
+  ],
+  [
+   "e6-104",
+   "e6-100",
+   0.79
+  ],
+  [
+   "e6-112",
+   "e6-106",
+   0.92
+  ],
+  [
+   "e6-142",
+   "e6-131",
+   0.8
+  ],
+  [
+   "e6-146",
+   "e6-129",
+   0.77
+  ],
+  [
+   "e6-183",
+   "e6-182",
+   0.83
+  ],
+  [
+   "e6-184",
+   "e6-172",
+   1.0
+  ],
+  [
+   "e6-189",
+   "e6-178",
+   1.0
+  ],
+  [
+   "e6-190",
+   "e6-172",
+   0.86
+  ],
+  [
+   "e6-190",
+   "e6-184",
+   0.86
+  ],
+  [
+   "e6-192",
+   "e6-191",
+   1.0
+  ],
+  [
+   "e6-196",
+   "e6-187",
+   1.0
+  ],
+  [
+   "e6-200",
+   "e6-197",
+   0.83
+  ],
+  [
+   "e6-222",
+   "e6-215",
+   0.8
+  ],
+  [
+   "e6-230",
+   "e6-205",
+   0.81
+  ],
+  [
+   "e6-234",
+   "e6-219",
+   0.78
+  ],
+  [
+   "e6-241",
+   "e6-240",
+   1.0
+  ],
+  [
+   "e6-263",
+   "e6-253",
+   0.79
+  ],
+  [
+   "e6-275",
+   "e6-274",
+   0.78
+  ],
+  [
+   "e6-276",
+   "e6-122",
+   0.78
+  ],
+  [
+   "e6-285",
+   "e6-284",
+   1.0
+  ],
+  [
+   "e6-291",
+   "e6-230",
+   0.81
+  ],
+  [
+   "e6-294",
+   "e6-168",
+   0.79
+  ]
+ ],
+ "historical_similarity_over_0_6": {
+  "e6-002": 0.62,
+  "e6-030": 0.77,
+  "e6-032": 0.68,
+  "e6-038": 0.61,
+  "e6-042": 0.69,
+  "e6-046": 0.63,
+  "e6-051": 0.67,
+  "e6-059": 0.71,
+  "e6-143": 0.74,
+  "e6-158": 0.64,
+  "e6-178": 0.67,
+  "e6-189": 0.67
+ },
+ "stats": {
+  "dev": {
+   "by_class": {
+    "verified": 55,
+    "invalid": 27,
+    "incomplete": 9,
+    "unsupported": 4,
+    "missing-assumption": 3,
+    "ambiguous": 2
+   },
+   "by_category": {
+    "differentiation": 20,
+    "integration": 20,
+    "limits-continuity": 13,
+    "probability-combinatorics": 15,
+    "complex-polynomial": 15,
+    "mixed-domain": 17
+   },
+   "alternative": 4
+  },
+  "validation": {
+   "by_class": {
+    "verified": 54,
+    "invalid": 27,
+    "incomplete": 8,
+    "malformed": 1,
+    "ambiguous": 2,
+    "missing-assumption": 6,
+    "unsupported": 2
+   },
+   "by_category": {
+    "differentiation": 20,
+    "integration": 20,
+    "limits-continuity": 14,
+    "probability-combinatorics": 15,
+    "complex-polynomial": 15,
+    "mixed-domain": 16
+   },
+   "alternative": 10
+  },
+  "sealed": {
+   "by_class": {
+    "verified": 52,
+    "invalid": 27,
+    "incomplete": 10,
+    "ambiguous": 2,
+    "missing-assumption": 5,
+    "unsupported": 4
+   },
+   "by_category": {
+    "differentiation": 20,
+    "integration": 20,
+    "limits-continuity": 13,
+    "probability-combinatorics": 15,
+    "complex-polynomial": 15,
+    "mixed-domain": 17
+   },
+   "alternative": 5
+  }
+ },
+ "dropped_families": [
+  "alt-negative-exponent",
+  "sum-split"
+ ]
+}

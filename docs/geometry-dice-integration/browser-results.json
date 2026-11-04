@@ -1,0 +1,169 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "case": "dice: totals equally likely",
+      "competency": "MATH.probability.sample-space",
+      "skill": "sample-space.dice-exact-total@1",
+      "start": "gen:akdice:4,5,0,7",
+      "trail": [
+        {
+          "kind": "diagnostic",
+          "qid": "gen:akdice:3,4,0,7",
+          "right": false,
+          "skill": "sample-space.dice-exact-total@1"
+        },
+        {
+          "kind": "lesson",
+          "strategy": "akdice_fix_totals",
+          "review": "pending_review"
+        },
+        {
+          "kind": "guided",
+          "qid": "gen:akdice:5,5,0,7:mc",
+          "right": true,
+          "skill": "sample-space.dice-exact-total@1"
+        },
+        {
+          "kind": "check",
+          "qid": "gen:akdice:4,5,0,5",
+          "right": true,
+          "skill": "sample-space.dice-exact-total@1"
+        }
+      ],
+      "taught": "akdice_fix_totals",
+      "recheck": "gen:akdice:4,5,0,5",
+      "delayed": "gen:akdice:5,5,0,6:mc",
+      "recovery": {
+        "explanation": "akdice_pairs",
+        "recheck": "gen:akdice:5,5,0,2:mc"
+      },
+      "savedEvents": 24,
+      "reloaded": true,
+      "educatorApproved": false
+    },
+    {
+      "case": "dice: order ignored",
+      "competency": "MATH.probability.sample-space",
+      "skill": "sample-space.dice-exact-total@1",
+      "start": "gen:akdice:5,5,0,4",
+      "trail": [
+        {
+          "kind": "diagnostic",
+          "qid": "gen:akdice:6,6,0,4",
+          "right": false,
+          "skill": "sample-space.dice-exact-total@1"
+        },
+        {
+          "kind": "lesson",
+          "strategy": "akdice_fix_order",
+          "review": "pending_review"
+        },
+        {
+          "kind": "guided",
+          "qid": "gen:akdice:5,5,0,9:mc",
+          "right": true,
+          "skill": "sample-space.dice-exact-total@1"
+        },
+        {
+          "kind": "check",
+          "qid": "gen:akdice:6,6,0,3",
+          "right": true,
+          "skill": "sample-space.dice-exact-total@1"
+        }
+      ],
+      "taught": "akdice_fix_order",
+      "recheck": "gen:akdice:6,6,0,3",
+      "delayed": "gen:akdice:5,5,0,5",
+      "recovery": {
+        "explanation": "akdice_pairs",
+        "recheck": "gen:akdice:4,5,0,4:mc"
+      },
+      "savedEvents": 24,
+      "reloaded": true,
+      "educatorApproved": false
+    },
+    {
+      "case": "geometry: exterior angle",
+      "competency": "MATH.geometry.triangle-properties",
+      "skill": "triangle-properties.exterior-angle@1",
+      "start": "gen:ahext:34,53,0",
+      "trail": [
+        {
+          "kind": "diagnostic",
+          "qid": "gen:ahext:100,28,0",
+          "right": false,
+          "skill": "triangle-properties.exterior-angle@1"
+        },
+        {
+          "kind": "lesson",
+          "strategy": "exterior_angle",
+          "review": "pending_review"
+        },
+        {
+          "kind": "guided",
+          "qid": "gen:ahext:62,79,0:mc",
+          "right": true,
+          "skill": "triangle-properties.exterior-angle@1"
+        },
+        {
+          "kind": "check",
+          "qid": "gen:ahext:86,70,0:mc",
+          "right": true,
+          "skill": "triangle-properties.exterior-angle@1"
+        }
+      ],
+      "taught": "exterior_angle",
+      "recheck": "gen:ahext:86,70,0:mc",
+      "delayed": "gen:ahext:77,74,1",
+      "recovery": {
+        "explanation": "exterior_via_third",
+        "recheck": "gen:ahext:47,45,1"
+      },
+      "savedEvents": 25,
+      "reloaded": true,
+      "educatorApproved": false
+    },
+    {
+      "case": "geometry: vertically opposite",
+      "competency": "MATH.geometry.angle-pairs",
+      "skill": "angle-pairs.opposite@2",
+      "start": "gen:afcross:109,0",
+      "trail": [
+        {
+          "kind": "diagnostic",
+          "qid": "gen:afcross:105,0",
+          "right": false,
+          "skill": "angle-pairs.opposite@2"
+        },
+        {
+          "kind": "lesson",
+          "strategy": "vertically_opposite",
+          "review": "pending_review"
+        },
+        {
+          "kind": "guided",
+          "qid": "gen:afcross:29,0:mc",
+          "right": true,
+          "skill": "angle-pairs.opposite@2"
+        },
+        {
+          "kind": "check",
+          "qid": "gen:afcross:158,0:mc",
+          "right": true,
+          "skill": "angle-pairs.opposite@2"
+        }
+      ],
+      "taught": "vertically_opposite",
+      "recheck": "gen:afcross:158,0:mc",
+      "delayed": "gen:afcross:54,0",
+      "recovery": {
+        "explanation": "crossed_pencils",
+        "recheck": "gen:afcross:84,0:mc"
+      },
+      "savedEvents": 19,
+      "reloaded": true,
+      "educatorApproved": false
+    }
+  ]
+}

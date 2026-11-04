@@ -1,0 +1,2160 @@
+{
+ "id": "cbse-ncert-mathematics-grade-12",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 12,
+ "title": "Mathematics: Textbook for Class XII, Part I (Chapters 1-6) and Part II (Chapters 7-13) — Grade 12 Mathematics (CBSE / NCERT)",
+ "hash": "6dfb8196",
+ "source": {
+  "kind": "textbook",
+  "title": "Mathematics: Textbook for Class XII, Part I (Chapters 1-6) and Part II (Chapters 7-13)",
+  "edition": "Part I first edition November 2006 (ISBN 81-7450-629-2); rationalised content in force since 2022-23 and continued unchanged in 2026-27; the exact 2026-27 reprint line of Part I and Part II could not be read (ncert.nic.in PDFs blocked to my fetcher)",
+  "publisher": "NCERT",
+  "board": "CBSE (NCERT textbooks)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/cbse-g12.json. 3 of 13 chapter titles could not be checked against an official source (marked sourceVerified: false). Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Maths_SecP2_2026-27.pdf https://cbseacademic.nic.in/curriculum_2027.html https://www.cbseacademic.nic.in/web_material/CurriculumMain26/SrSec/Maths_SrSec_2025-26.pdf https://ncert.nic.in/textbook/pdf/lemh1ps.pdf. Notes: Textbook: no new NCERT Class XII Mathematics book exists for 2026-27; CBSE 2026-27 prescribes 'Mathematics Part I' and 'Part II' (NCERT) plus Exemplar and Lab Manual, editions unstated. I could not read the current Part I/Part II prelims (ncert.nic.in/textbook/pdf is blocked by robots for my fetcher; an older 2019-20 Part I prelims was returned from cache), so the reprint year is not verified. Section lists were DERIVED, not read from the current print: the pre-rationalisation contents (official, 2019-20) minus the sections NCERT's 2022 rationalisation list removes, cross-checked against the SATHEE reproduction. Section numbering in the current book may differ; titles only are recorded. Conflicts between sources: SATHEE still shows '5.8 Mean Value Theorem' (Ch 5), a 'Properties of Determinants' heading (Ch 4), '8.2.1 area bounded by a curve and a line' (Ch 8), and the whole Plane material 11.6-11.10 (Ch 11), all of which the NCERT rationalisation list removes and none of which is in the CBSE 2026-27 topic list. I followed the rationalisation list and the CBSE curriculum and left them out.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "cbse-g12-c01",
+     "number": 1,
+     "title": "Relations and Functions",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c01-s01",
+       "number": "1.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c01-s02",
+       "number": "1.2",
+       "title": "Types of Relations",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c01-o01",
+         "text": "Test whether a given relation is reflexive, symmetric or transitive, and justify the answer.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.relations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.sets-relations.relation-properties",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; true-false, proof, multiple-choice)."
+         }
+        },
+        {
+         "id": "cbse-g12-c01-o02",
+         "text": "Show that a relation is an equivalence relation and describe its equivalence classes.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.relations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.mathematical-argument",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.sets-relations.relation-properties",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; proof, set)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c01-s03",
+       "number": "1.3",
+       "title": "Types of Functions",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c01-s04",
+       "number": "1.4",
+       "title": "Composition of Functions and Invertible Function",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c01-o03",
+         "text": "Decide whether a function is one-one, onto or bijective, using algebraic arguments or graphs.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.functions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.sets-relations.function-types",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; true-false, proof, multiple-choice)."
+         }
+        },
+        {
+         "id": "cbse-g12-c01-o04",
+         "text": "(Extension; in book, not in CBSE 2026-27 topic list) Compose functions and find the inverse of a bijective function.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.function-operations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.inverse-functions",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "cbse-g12-c03",
+     "number": 3,
+     "title": "Matrices",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c03-s01",
+       "number": "3.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c03-s02",
+       "number": "3.2",
+       "title": "Matrix",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c03-o03",
+         "text": "Use properties of matrix operations and show with order-2 examples that multiplication is not commutative and that AB = O is possible with A, B non-zero.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.matrices",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; vector-matrix, true-false, written-explanation)."
+         }
+        },
+        {
+         "id": "cbse-g12-c03-o05",
+         "text": "Explain invertibility of a square matrix and prove that an inverse, if it exists, is unique.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.matrices",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.mathematical-argument",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; proof, true-false)."
+         }
+        },
+        {
+         "id": "cbse-g12-c03-o06",
+         "text": "Model simple real situations (costs, quantities) with matrix products.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.matrices",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.model-selection",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, vector-matrix)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c03-s03",
+       "number": "3.3",
+       "title": "Types of Matrices",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c03-o01",
+         "text": "Read and construct matrices from data or a rule, state their order, identify types (row, column, square, diagonal, scalar, identity, zero) and use equality of matrices.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.matrices",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; vector-matrix, multiple-choice, equation-solution)."
+         }
+        },
+        {
+         "id": "cbse-g12-c03-o02",
+         "text": "Add matrices, multiply by a scalar and multiply conformable matrices.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.matrices",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; vector-matrix)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c03-s04",
+       "number": "3.4",
+       "title": "Operations on Matrices",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c03-s05",
+       "number": "3.5",
+       "title": "Transpose of a Matrix",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c03-s06",
+       "number": "3.6",
+       "title": "Symmetric and Skew Symmetric Matrices",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c03-o04",
+         "text": "Find transposes, use (AB)' = B'A', and write a square matrix as a sum of symmetric and skew-symmetric matrices.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.matrices",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.matrices.transpose-symmetry",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; vector-matrix, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c03-s07",
+       "number": "3.7",
+       "title": "Invertible Matrices",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "cbse-g12-c04",
+     "number": 4,
+     "title": "Determinants",
+     "outcomes": [
+      {
+       "id": "cbse-g12-c04-o05",
+       "text": "Decide from examples whether a system of linear equations is consistent and how many solutions it has.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.matrix-systems",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, written-explanation)."
+       }
+      },
+      {
+       "id": "cbse-g12-c04-o06",
+       "text": "Solve systems of two or three linear equations with a unique solution using X = A^-1 B, including word problems.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.matrix-systems",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.matrices.adjoint-inverse",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, word-problem, vector-matrix)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c04-s01",
+       "number": "4.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c04-s02",
+       "number": "4.2",
+       "title": "Determinant",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c04-s03",
+       "number": "4.3",
+       "title": "Area of a Triangle",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c04-o02",
+         "text": "Use determinants to find the area of a triangle from vertex coordinates and to test collinearity or find an unknown vertex.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.determinants",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.distance",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.polygon-area",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, equation-solution, coordinate)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c04-s04",
+       "number": "4.4",
+       "title": "Minors and Cofactors",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c04-o03",
+         "text": "Find minors, cofactors and the adjoint of a matrix and use A(adj A) = |A| I.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.determinants",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.matrices.adjoint-inverse",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; vector-matrix, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c04-s05",
+       "number": "4.5",
+       "title": "Adjoint and Inverse of a Matrix",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c04-o04",
+         "text": "Decide whether a matrix is singular and find the inverse of a non-singular matrix of order up to 3.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.determinants",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.matrices.adjoint-inverse",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; vector-matrix, true-false)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c04-s06",
+       "number": "4.6",
+       "title": "Applications of Determinants and Matrices",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c04-o01",
+         "text": "Evaluate determinants of square matrices up to order 3.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.determinants",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "cbse-g12-c12",
+     "number": 12,
+     "title": "Linear Programming",
+     "outcomes": [
+      {
+       "id": "cbse-g12-c12-o01",
+       "text": "Explain LP terms: decision variables, objective function, constraints, feasible region, feasible and optimal solutions.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.linear-programming",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, written-explanation)."
+       }
+      },
+      {
+       "id": "cbse-g12-c12-o03",
+       "text": "Draw the feasible region of a system of constraints and identify its corner points.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.inequalities-two-variables",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.linear-programming",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; graph-sketch, coordinate)."
+       }
+      },
+      {
+       "id": "cbse-g12-c12-o04",
+       "text": "Find the optimal value by the corner-point method and handle unbounded or infeasible cases correctly.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.linear-programming",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, coordinate, written-explanation)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c12-s01",
+       "number": "12.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c12-s02",
+       "number": "12.2",
+       "title": "Linear Programming Problem and its Mathematical Formulation",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c12-o02",
+         "text": "Formulate a two-variable linear programming problem from a word situation (with up to three non-trivial constraints).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.linear-programming",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; word-problem, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 1,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "cbse-g12-c13",
+     "number": 13,
+     "title": "Probability",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c13-s01",
+       "number": "13.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c13-s02",
+       "number": "13.2",
+       "title": "Conditional Probability",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c13-o01",
+         "text": "Calculate conditional probabilities P(A|B) and use their properties.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.conditional",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c13-s03",
+       "number": "13.3",
+       "title": "Multiplication Theorem on Probability",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c13-o02",
+         "text": "Use the multiplication theorem to find probabilities of joint events, including draws without replacement.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.conditional",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, word-problem)."
+         }
+        },
+        {
+         "id": "cbse-g12-c13-o04",
+         "text": "Use a partition of the sample space and the theorem of total probability.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.bayes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.total-probability",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, word-problem)."
+         }
+        },
+        {
+         "id": "cbse-g12-c13-o05",
+         "text": "Apply Bayes' theorem to revise probabilities in context (tests, machines, urns).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.bayes",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; fraction, word-problem)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c13-s04",
+       "number": "13.4",
+       "title": "Independent Events",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c13-o03",
+         "text": "Test whether events are independent and use independence to find probabilities.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.conditional",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.independent-events",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; true-false, fraction, word-problem)."
+         }
+        },
+        {
+         "id": "cbse-g12-c13-o06",
+         "text": "Distinguish mutually exclusive from independent events and explain the difference with examples.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.probability.events",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.probability.independent-events",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; written-explanation, multiple-choice)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c13-s05",
+       "number": "13.5",
+       "title": "Bayes' Theorem",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-probability",
+      "number": 2,
+      "title": "Probability"
+     }
+    },
+    {
+     "id": "cbse-g12-c05",
+     "number": 5,
+     "title": "Continuity and Differentiability",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c05-s01",
+       "number": "5.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c05-s02",
+       "number": "5.2",
+       "title": "Continuity",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c05-o01",
+         "text": "Test continuity of a function at a point and on its domain, including piecewise functions, and find parameter values that make a function continuous.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.continuity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; true-false, equation-solution, numeric)."
+         }
+        },
+        {
+         "id": "cbse-g12-c05-o02",
+         "text": "Test differentiability at a point and explain that differentiability implies continuity but not conversely.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differentiability",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; true-false, written-explanation, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c05-s03",
+       "number": "5.3",
+       "title": "Differentiability",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c05-s04",
+       "number": "5.4",
+       "title": "Exponential and Logarithmic Functions",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c05-o03",
+         "text": "Differentiate composite functions by the chain rule, including sin^-1 x, cos^-1 x and tan^-1 x.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.derivative-rules",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        },
+        {
+         "id": "cbse-g12-c05-o04",
+         "text": "Differentiate exponential and logarithmic functions and their combinations.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.derivative-rules",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c05-s05",
+       "number": "5.5",
+       "title": "Logarithmic Differentiation",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c05-s06",
+       "number": "5.6",
+       "title": "Derivatives of Functions in Parametric Forms",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c05-o05",
+         "text": "Differentiate implicitly defined functions, functions in parametric form, and functions of the form u(x)^v(x) by logarithmic differentiation.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.derivative-rules",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.implicit-parametric-differentiation",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c05-s07",
+       "number": "5.7",
+       "title": "Second Order Derivative",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c05-o06",
+         "text": "Find second-order derivatives and verify given differential relations.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.higher-derivatives",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; expression, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-calculus",
+      "number": 3,
+      "title": "Calculus"
+     }
+    },
+    {
+     "id": "cbse-g12-c06",
+     "number": 6,
+     "title": "Application of Derivatives",
+     "outcomes": [
+      {
+       "id": "cbse-g12-c06-o04",
+       "text": "Use the second-derivative test to classify critical points.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.applications",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.calculus.higher-derivatives",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "cbse-g12-c06-o06",
+       "text": "Formulate and solve optimisation problems from geometry and everyday contexts.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.applications",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.model-selection",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; word-problem, measurement-with-unit)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c06-s01",
+       "number": "6.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c06-s02",
+       "number": "6.2",
+       "title": "Rate of Change of Quantities",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c06-o01",
+         "text": "Use derivatives to find rates of change of related quantities (areas, volumes, marginal cost/revenue).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.applications",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; word-problem, measurement-with-unit, numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c06-s03",
+       "number": "6.3",
+       "title": "Increasing and Decreasing Functions",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c06-o02",
+         "text": "Find intervals on which a function is increasing or decreasing using the sign of its derivative.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.applications",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.monotonicity",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; interval)."
+         }
+        },
+        {
+         "id": "cbse-g12-c06-o05",
+         "text": "Find absolute maximum and minimum values of a function on a closed interval.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.applications",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c06-s04",
+       "number": "6.4",
+       "title": "Maxima and Minima",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c06-o03",
+         "text": "Locate local maxima and minima using the first-derivative test.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.applications",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, coordinate)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-calculus",
+      "number": 3,
+      "title": "Calculus"
+     }
+    },
+    {
+     "id": "cbse-g12-c07",
+     "number": 7,
+     "title": "Integrals",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c07-s01",
+       "number": "7.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c07-s02",
+       "number": "7.2",
+       "title": "Integration as an Inverse Process of Differentiation",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c07-o01",
+         "text": "Find antiderivatives of standard functions using integration as the inverse of differentiation and basic properties of indefinite integrals.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.indefinite-integrals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MLY.calc.power-antiderivative",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c07-s03",
+       "number": "7.3",
+       "title": "Methods of Integration",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c07-s04",
+       "number": "7.4",
+       "title": "Integrals of Some Particular Functions",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c07-o03",
+         "text": "Evaluate integrals of the specified standard forms such as 1/(x^2 +/- a^2), 1/sqrt(a^2 - x^2), (px+q)/(ax^2+bx+c) and sqrt(x^2 +/- a^2).",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.integration-methods",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        },
+        {
+         "id": "cbse-g12-c07-o05",
+         "text": "Integrate by parts, including integrals of the form e^x[f(x) + f'(x)].",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.integration-methods",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MLY.calc.by-parts",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c07-s05",
+       "number": "7.5",
+       "title": "Integration by Partial Fractions",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c07-o04",
+         "text": "Integrate rational functions by decomposing them into partial fractions.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.integration-methods",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.partial-fractions-integration",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c07-s06",
+       "number": "7.6",
+       "title": "Integration by Parts",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c07-s07",
+       "number": "7.7",
+       "title": "Definite Integral",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c07-s08",
+       "number": "7.8",
+       "title": "Fundamental Theorem of Calculus",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c07-o06",
+         "text": "Evaluate definite integrals using the Fundamental Theorem of Calculus (stated without proof), including by substitution.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.definite-integrals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.integration-methods",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c07-s09",
+       "number": "7.9",
+       "title": "Evaluation of Definite Integrals by Substitution",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c07-o02",
+         "text": "Integrate by substitution, including use of trigonometric identities.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.integration-methods",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MLY.calc.substitution",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c07-s10",
+       "number": "7.10",
+       "title": "Some Properties of Definite Integrals",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c07-o07",
+         "text": "Use properties of definite integrals (e.g. f(a+b-x), odd/even functions, splitting the interval) to evaluate integrals.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.definite-integral-properties",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.definite-integrals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-calculus",
+      "number": 3,
+      "title": "Calculus"
+     }
+    },
+    {
+     "id": "cbse-g12-c08",
+     "number": 8,
+     "title": "Application of Integrals",
+     "outcomes": [
+      {
+       "id": "cbse-g12-c08-o04",
+       "text": "Sketch the region before integrating and choose limits correctly, using symmetry where possible.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.area-integrals",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; graph-sketch, numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c08-s01",
+       "number": "8.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c08-s02",
+       "number": "8.2",
+       "title": "Area under Simple Curves",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c08-o01",
+         "text": "Express the area between a curve and an axis as a definite integral using vertical or horizontal strips.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.area-integrals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MLY.calc.area-constant",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; expression, written-explanation)."
+         }
+        },
+        {
+         "id": "cbse-g12-c08-o02",
+         "text": "Find areas bounded by lines and the coordinate axes using integration.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.area-integrals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+         }
+        },
+        {
+         "id": "cbse-g12-c08-o03",
+         "text": "Find areas of regions bounded by circles, parabolas and ellipses in standard form.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.area-integrals",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.conics",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, measurement-with-unit)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-calculus",
+      "number": 3,
+      "title": "Calculus"
+     }
+    },
+    {
+     "id": "cbse-g12-c09",
+     "number": 9,
+     "title": "Differential Equations",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c09-s01",
+       "number": "9.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c09-s02",
+       "number": "9.2",
+       "title": "Basic Concepts",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c09-s03",
+       "number": "9.3",
+       "title": "General and Particular Solutions of a Differential Equation",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c09-o02",
+         "text": "Verify that a function is a general or particular solution of a given differential equation.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.higher-derivatives",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; proof, true-false)."
+         }
+        },
+        {
+         "id": "cbse-g12-c09-o03",
+         "text": "Solve differential equations by separation of variables, including initial-value problems.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, expression)."
+         }
+        },
+        {
+         "id": "cbse-g12-c09-o05",
+         "text": "Solve linear differential equations dy/dx + Py = Q or dx/dy + P1 x = Q1 using an integrating factor.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.linear-first-order-de",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c09-s04",
+       "number": "9.4",
+       "title": "Methods of Solving First Order, First Degree Differential Equations",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c09-o01",
+         "text": "Find the order and degree (when defined) of a differential equation.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+         }
+        },
+        {
+         "id": "cbse-g12-c09-o04",
+         "text": "Recognise and solve homogeneous first-order first-degree differential equations with the substitution y = vx.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.calculus.homogeneous-de",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution)."
+         }
+        },
+        {
+         "id": "cbse-g12-c09-o06",
+         "text": "Model simple growth, decay or geometric situations with a first-order differential equation and solve it.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.differential-equations",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.reasoning.model-selection",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; word-problem, equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-calculus",
+      "number": 3,
+      "title": "Calculus"
+     }
+    },
+    {
+     "id": "cbse-g12-c11",
+     "number": 11,
+     "title": "Three Dimensional Geometry",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c11-s01",
+       "number": "11.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c11-s02",
+       "number": "11.2",
+       "title": "Direction Cosines and Direction Ratios of a Line",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c11-o01",
+         "text": "Find direction cosines and direction ratios of a line, including the line through two points.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.space-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.vectors.direction-cosines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, vector-matrix)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c11-s03",
+       "number": "11.3",
+       "title": "Equation of a Line in Space",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c11-o02",
+         "text": "Write vector and Cartesian equations of a line through a point parallel to a given vector, and convert between the forms.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.space-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; equation-solution, expression)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c11-s04",
+       "number": "11.4",
+       "title": "Angle between Two Lines",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c11-o03",
+         "text": "Find the angle between two lines and test lines for parallelism or perpendicularity.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.space-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.vectors.products",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, true-false)."
+         }
+        },
+        {
+         "id": "cbse-g12-c11-o05",
+         "text": "Decide whether two lines intersect and find the point of intersection or the foot of a perpendicular from a point to a line.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.space-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; coordinate, equation-solution)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c11-s05",
+       "number": "11.5",
+       "title": "Shortest Distance between Two Lines",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c11-o04",
+         "text": "Identify skew lines and find the shortest distance between two skew lines or two parallel lines.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.skew-line-distance",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.coordinate.space-lines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, true-false)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-coordinate",
+      "number": 4,
+      "title": "Coordinate geometry"
+     }
+    },
+    {
+     "id": "cbse-g12-c02",
+     "number": 2,
+     "title": "Inverse Trigonometric Functions",
+     "outcomes": [
+      {
+       "id": "cbse-g12-c02-o01",
+       "text": "Explain why trigonometric functions must be restricted to be invertible and state domain, range and principal value branch of each inverse function.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.sets-relations.function-types",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.trigonometry.inverse",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; interval, multiple-choice, written-explanation)."
+       }
+      },
+      {
+       "id": "cbse-g12-c02-o02",
+       "text": "Find principal values of inverse trigonometric expressions.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.trigonometry.inverse",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+       }
+      },
+      {
+       "id": "cbse-g12-c02-o03",
+       "text": "Sketch the graphs of inverse trigonometric functions by reflecting the restricted trigonometric graphs in y = x.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.trigonometry.inverse",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked by an educator; graph-sketch)."
+       }
+      },
+      {
+       "id": "cbse-g12-c02-o04",
+       "text": "Evaluate compositions such as sin(sin^-1 x) or sin^-1(sin x) correctly using the principal branch.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.trigonometry.inverse",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c02-s01",
+       "number": "2.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c02-s02",
+       "number": "2.2",
+       "title": "Basic Concepts",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "unit": {
+      "id": "domain-trigonometry",
+      "number": 5,
+      "title": "Trigonometry"
+     }
+    },
+    {
+     "id": "cbse-g12-c10",
+     "number": 10,
+     "title": "Vector Algebra",
+     "outcomes": [],
+     "examples": [],
+     "exercises": [],
+     "sections": [
+      {
+       "id": "cbse-g12-c10-s01",
+       "number": "10.1",
+       "title": "Introduction",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c10-s02",
+       "number": "10.2",
+       "title": "Some Basic Concepts",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c10-s03",
+       "number": "10.3",
+       "title": "Types of Vectors",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c10-o02",
+         "text": "Find direction cosines and direction ratios of a vector.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.vectors.algebra",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.vectors.direction-cosines",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; vector-matrix, numeric)."
+         }
+        },
+        {
+         "id": "cbse-g12-c10-o04",
+         "text": "Find the position vector of a point dividing a segment internally or externally in a given ratio.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.coordinate.distance",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.vectors.algebra",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; vector-matrix)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c10-s04",
+       "number": "10.4",
+       "title": "Addition of Vectors",
+       "outcomes": [],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c10-s05",
+       "number": "10.5",
+       "title": "Multiplication of a Vector by a Scalar",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c10-o01",
+         "text": "Distinguish scalars from vectors, find magnitude and identify zero, unit, equal, negative, collinear and co-initial vectors.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.vectors.algebra",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric, true-false)."
+         }
+        },
+        {
+         "id": "cbse-g12-c10-o03",
+         "text": "Add vectors (triangle and parallelogram laws), multiply by scalars and work with components in i, j, k form, including the vector joining two points.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.vectors.algebra",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (partly marked by an educator; vector-matrix, diagram-drawing)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      },
+      {
+       "id": "cbse-g12-c10-s06",
+       "number": "10.6",
+       "title": "Product of Two Vectors",
+       "outcomes": [
+        {
+         "id": "cbse-g12-c10-o05",
+         "text": "Compute dot products and use them to find angles between vectors, test perpendicularity and find projections.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.vectors.products",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; numeric, vector-matrix, true-false)."
+         }
+        },
+        {
+         "id": "cbse-g12-c10-o06",
+         "text": "Compute cross products and use them to find perpendicular vectors and areas of triangles and parallelograms.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.vectors.products",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked automatically; vector-matrix, numeric)."
+         }
+        },
+        {
+         "id": "cbse-g12-c10-o07",
+         "text": "Prove geometric results using properties of dot and cross products.",
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.reasoning.mathematical-argument",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.vectors.products",
+            "score": 1,
+            "method": "inventory@1",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Mapped by the curriculum inventory (marked by an educator; proof)."
+         }
+        }
+       ],
+       "examples": [],
+       "exercises": []
+      }
+     ],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-vectors",
+      "number": 6,
+      "title": "Vectors and three-dimensional geometry"
+     }
+    }
+   ]
+  }
+ ]
+}

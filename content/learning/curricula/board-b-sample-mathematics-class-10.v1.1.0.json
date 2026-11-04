@@ -1,0 +1,354 @@
+{
+ "id": "board-b-sample-mathematics-class-10",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 10,
+ "title": "Board B Sample Mathematics, Class 10",
+ "hash": "57f70817",
+ "source": {
+  "kind": "textbook",
+  "title": "Board B Sample Mathematics, Class 10",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "Sample Board B (synthetic, not a real board)",
+  "academicYear": "2026-27",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true,
+  "extractor": "structured-text@1"
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing (mapping@2). Clear mappings: the top proposal was accepted. Uncertain mappings were accepted only where release 1.0.0 had accepted the same competency, or where the book's review file records a reviewer's decision (for an educator to check: ch2-polynomials.s2-1.o1, ch2-polynomials.s2-2.o1). Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-real-numbers",
+     "number": 1,
+     "title": "Real numbers",
+     "pages": "1–18",
+     "unit": {
+      "id": "unit1-number-systems",
+      "number": 1,
+      "title": "Number systems"
+     },
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch1-real-numbers.o1",
+       "text": "Use the Euclidean algorithm and prime factorisation",
+       "pages": "2",
+       "location": {
+        "line": 14,
+        "page": 2
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.euclid-algorithm",
+          "score": 1,
+          "method": "meaning@3",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on primes, factorise.",
+        "concepts": [
+         "primes",
+         "factorise"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch2-polynomials",
+     "number": 2,
+     "title": "Polynomials",
+     "pages": "19–40",
+     "unit": {
+      "id": "unit2-algebra",
+      "number": 2,
+      "title": "Algebra"
+     },
+     "examples": [],
+     "exercises": [],
+     "outcomes": [],
+     "sections": [
+      {
+       "id": "ch2-polynomials.s2-1",
+       "number": "2.1",
+       "title": "Expanding brackets",
+       "pages": "19–28",
+       "examples": [],
+       "exercises": [],
+       "outcomes": [
+        {
+         "id": "ch2-polynomials.s2-1.o1",
+         "text": "Expand products of two binomials such as (x + a)(x + b)",
+         "pages": "20",
+         "location": {
+          "line": 19,
+          "page": 20
+         },
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.identities",
+            "score": 0.605,
+            "method": "meaning@3",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "uncertain",
+          "why": "A weak match (Use algebraic identities): a reviewer should confirm.",
+          "concepts": [
+           "multiplication",
+           "expansion",
+           "binomialProduct"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "ch2-polynomials.s2-2",
+       "number": "2.2",
+       "title": "Factorisation",
+       "pages": "29–40",
+       "examples": [],
+       "exercises": [],
+       "outcomes": [
+        {
+         "id": "ch2-polynomials.s2-2.o1",
+         "text": "Factorise quadratic expressions",
+         "pages": "30",
+         "location": {
+          "line": 22,
+          "page": 30
+         },
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.factorisation",
+            "score": 0.532,
+            "method": "meaning@3",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "uncertain",
+          "why": "A weak match (Factor algebraic expressions): a reviewer should confirm.",
+          "concepts": [
+           "expressions",
+           "quadratic",
+           "factorise"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ch3-quadratic-equations",
+     "number": 3,
+     "title": "Quadratic equations",
+     "pages": "41–70",
+     "unit": {
+      "id": "unit2-algebra",
+      "number": 2,
+      "title": "Algebra"
+     },
+     "examples": [],
+     "exercises": [],
+     "outcomes": [],
+     "sections": [
+      {
+       "id": "ch3-quadratic-equations.s3-1",
+       "number": "3.1",
+       "title": "Solving by factorisation",
+       "pages": "41–54",
+       "examples": [],
+       "exercises": [],
+       "outcomes": [
+        {
+         "id": "ch3-quadratic-equations.s3-1.o1",
+         "text": "Solve quadratic equations by factorisation",
+         "pages": "42",
+         "location": {
+          "line": 26,
+          "page": 42
+         },
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratics",
+            "score": 0.769,
+            "method": "meaning@3",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.quadratic-discriminant",
+            "score": 0.607,
+            "method": "meaning@3",
+            "status": "rejected"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Matches on equations, quadratic.",
+          "concepts": [
+           "equations",
+           "quadratic",
+           "factorise"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "ch3-quadratic-equations.s3-2",
+       "number": "3.2",
+       "title": "Nature of roots",
+       "pages": "55–70",
+       "examples": [],
+       "exercises": [],
+       "outcomes": [
+        {
+         "id": "ch3-quadratic-equations.s3-2.o1",
+         "text": "Use the discriminant to decide how many real roots a quadratic equation has",
+         "pages": "56",
+         "location": {
+          "line": 29,
+          "page": 56
+         },
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.algebra.quadratic-discriminant",
+            "score": 1,
+            "method": "meaning@3",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.quadratics",
+            "score": 0.756,
+            "method": "meaning@3",
+            "status": "rejected"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Matches on equations, quadratic, discriminant.",
+          "concepts": [
+           "equations",
+           "quadratic",
+           "discriminant"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ch4-arithmetic-progressions",
+     "number": 4,
+     "title": "Arithmetic progressions",
+     "pages": "71–90",
+     "unit": {
+      "id": "unit2-algebra",
+      "number": 2,
+      "title": "Algebra"
+     },
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch4-arithmetic-progressions.o1",
+       "text": "Find the nth term and the sum of an arithmetic progression",
+       "pages": "72",
+       "location": {
+        "line": 32,
+        "page": 72
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.arithmetic-sequences",
+          "score": 0.74,
+          "method": "meaning@3",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on progression.",
+        "concepts": [
+         "addition",
+         "progression"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch5-introduction-to-trigonometry",
+     "number": 5,
+     "title": "Introduction to trigonometry",
+     "pages": "91–120",
+     "unit": {
+      "id": "unit3-trigonometry",
+      "number": 3,
+      "title": "Trigonometry"
+     },
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch5-introduction-to-trigonometry.o1",
+       "text": "Use trigonometric ratios of acute angles",
+       "pages": "92",
+       "location": {
+        "line": 36,
+        "page": 92
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.trigonometry.ratios",
+          "score": 0.798,
+          "method": "meaning@3",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.geometry.constructions-bisectors",
+          "score": 0.542,
+          "method": "meaning@3",
+          "status": "rejected"
+         },
+         {
+          "id": "MATH.trigonometry.radians",
+          "score": 0.542,
+          "method": "meaning@3",
+          "status": "rejected"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on ratio, trigonometry.",
+        "concepts": [
+         "angle",
+         "ratio",
+         "trigonometry"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,216 @@
+{
+  "id": "ta-foundation",
+  "version": "0.1.0",
+  "review": "provisional",
+  "nodes": [
+    {
+      "id": "TA.literacy",
+      "name": "தமிழ் எழுத்தறிவு",
+      "requires": [],
+      "composes": [
+        "TA.script",
+        "TA.words",
+        "TA.language"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "TA.script",
+      "name": "எழுத்துகள்",
+      "requires": [],
+      "composes": [
+        "TA.vowels",
+        "TA.consonants",
+        "TA.aytham",
+        "TA.length",
+        "TA.composition",
+        "TA.signs"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "TA.vowels",
+      "name": "உயிரெழுத்துகள்",
+      "requires": [],
+      "composes": [],
+      "status": "pilot"
+    },
+    {
+      "id": "TA.consonants",
+      "name": "மெய்யெழுத்துகள்",
+      "requires": [],
+      "composes": [],
+      "status": "pilot"
+    },
+    {
+      "id": "TA.aytham",
+      "name": "ஆய்த எழுத்து",
+      "requires": [],
+      "composes": [],
+      "status": "pilot"
+    },
+    {
+      "id": "TA.length",
+      "name": "குறிலும் நெடிலும்",
+      "requires": [
+        "TA.vowels"
+      ],
+      "composes": [],
+      "status": "pilot"
+    },
+    {
+      "id": "TA.composition",
+      "name": "உயிர்மெய் உருவாக்கம்",
+      "requires": [
+        "TA.vowels",
+        "TA.consonants"
+      ],
+      "composes": [],
+      "status": "pilot"
+    },
+    {
+      "id": "TA.signs",
+      "name": "உயிர்க்குறிகளின் இடம்",
+      "requires": [
+        "TA.composition"
+      ],
+      "composes": [],
+      "status": "pilot"
+    },
+    {
+      "id": "TA.sound-to-script",
+      "name": "ஒலியிலிருந்து எழுத்து",
+      "requires": [
+        "TA.vowels",
+        "TA.consonants"
+      ],
+      "composes": [],
+      "status": "planned"
+    },
+    {
+      "id": "TA.script-to-sound",
+      "name": "எழுத்திலிருந்து ஒலி",
+      "requires": [
+        "TA.composition"
+      ],
+      "composes": [],
+      "status": "planned"
+    },
+    {
+      "id": "TA.words",
+      "name": "சொற்கள்",
+      "requires": [],
+      "composes": [
+        "TA.recognition",
+        "TA.decoding",
+        "TA.spelling"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "TA.recognition",
+      "name": "சொல் அடையாளம்",
+      "requires": [
+        "TA.composition"
+      ],
+      "composes": [],
+      "status": "pilot"
+    },
+    {
+      "id": "TA.decoding",
+      "name": "சொல் வாசித்தல்",
+      "requires": [
+        "TA.composition",
+        "TA.script-to-sound"
+      ],
+      "composes": [],
+      "status": "planned"
+    },
+    {
+      "id": "TA.spelling",
+      "name": "சொல் எழுத்தமைப்பு",
+      "requires": [
+        "TA.composition"
+      ],
+      "composes": [],
+      "status": "pilot"
+    },
+    {
+      "id": "TA.language",
+      "name": "மொழி பயன்பாடு",
+      "requires": [],
+      "composes": [
+        "TA.morphology",
+        "TA.grammar",
+        "TA.comprehension",
+        "TA.register"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "TA.morphology",
+      "name": "சொல் வடிவங்கள்",
+      "requires": [],
+      "composes": [
+        "TA.suffix",
+        "TA.inflection"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "TA.suffix",
+      "name": "விகுதிகள்",
+      "requires": [
+        "TA.recognition"
+      ],
+      "composes": [],
+      "status": "planned"
+    },
+    {
+      "id": "TA.inflection",
+      "name": "சொல் உருபேற்றம்",
+      "requires": [
+        "TA.suffix"
+      ],
+      "composes": [],
+      "status": "planned"
+    },
+    {
+      "id": "TA.grammar",
+      "name": "இலக்கணமும் வாக்கியமும்",
+      "requires": [],
+      "composes": [
+        "TA.sentence"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "TA.sentence",
+      "name": "வாக்கிய அமைப்பு",
+      "requires": [
+        "TA.recognition"
+      ],
+      "composes": [],
+      "status": "planned"
+    },
+    {
+      "id": "TA.comprehension",
+      "name": "படித்துப் புரிந்துகொள்ளுதல்",
+      "requires": [
+        "TA.decoding",
+        "TA.sentence"
+      ],
+      "composes": [],
+      "status": "planned"
+    },
+    {
+      "id": "TA.register",
+      "name": "பேச்சுத் தமிழும் எழுத்துத் தமிழும்",
+      "requires": [
+        "TA.sentence"
+      ],
+      "composes": [],
+      "status": "planned"
+    }
+  ]
+}

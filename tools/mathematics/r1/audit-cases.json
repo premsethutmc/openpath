@@ -1,0 +1,8 @@
+[
+ {"id":"s1-identity-wrong","defect":"D1","kind":"equation","text":"1/(x-1)-1/(x-1)=x^-1*x-1","why":"audit S1: written x^-1 requires x != 0; true set is R minus {0,1}","tags":["audit"],"must_answer":true,"must_refuse":false,"expect":{"class":"identity-on-domain","solution":null,"excluded":["0","1"]}},
+ {"id":"s1-step","defect":"D1","kind":"step","from":{"eq":"x^-1*x=1","excluded":[]},"to":{"eq":"1=1","excluded":[]},"effect":"equivalence","truth":"invalid","reason":"audit S1: from-state lacks x != 0","tags":["audit"]},
+ {"id":"s2-from-state","defect":"D2","kind":"step","from":{"eq":"(x^2-1)/(x-1)=2","excluded":[]},"to":{"eq":"x+1=2","excluded":[]},"effect":"equivalence","truth":"invalid","reason":"audit S2: from-state is not closed (1 missing)","tags":["audit"]},
+ {"id":"s2-zero-over-x","defect":"D2","kind":"step","from":{"eq":"0/x=0","excluded":[]},"to":{"eq":"0=0","excluded":[]},"effect":"equivalence","truth":"invalid","reason":"audit S2","tags":["audit"]},
+ {"id":"s4-exp-x","defect":"D3","kind":"step","from":{"eq":"x^(x/x)=x","excluded":[]},"to":{"eq":"x=x","excluded":[]},"effect":"equivalence","truth":"invalid","reason":"audit S6: x in exponent is outside the grammar; must not be accepted","tags":["audit"]},
+ {"id":"s6-space-number","defect":"D3","kind":"equation","text":"1 0/(x-1)=10/(x-1)","why":"audit S6: whitespace inside a number must be a parse error","tags":["audit"],"must_answer":false,"must_refuse":true,"expect":{"refusal":["PARSE_ERROR"]}}
+]

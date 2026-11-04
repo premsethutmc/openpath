@@ -1,0 +1,633 @@
+[
+ {
+  "scenario": "1a",
+  "learner": "strong, one slip at answer 1",
+  "answers": {
+   "lin": "✗✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "1b",
+  "learner": "strong, one slip at answer 3",
+  "answers": {
+   "lin": "✓✓✗✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "1c",
+  "learner": "strong, one slip at answer 5",
+  "answers": {
+   "lin": "✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✗",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "1d",
+  "learner": "strong, one slip at answer 4",
+  "answers": {
+   "lin": "✓✓✓✗✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "1f",
+  "learner": "strong, one slip at answer 3",
+  "answers": {
+   "lin": "✓✓✗✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "1g",
+  "learner": "strong (always right)",
+  "answers": {
+   "lin": "✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "2a",
+  "learner": "misconception forgot-divide until 1 explanation(s)",
+  "answers": {
+   "lin": "✗✗✗✗✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "2b",
+  "learner": "misconception forgot-divide until never explanation(s)",
+  "answers": {
+   "lin": "✗✗✗✗✗✗✗✗✗✗"
+  },
+  "authoritative": {
+   "status": "exposure",
+   "verified": false,
+   "retention": "none"
+  },
+  "subSkills": {
+   "two-step": "developing; check none (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "2c",
+  "learner": "misconception added-not-subtracted until 1 explanation(s)",
+  "answers": {
+   "lin": "✗✗✗✗✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "2d",
+  "learner": "misconception forgot-divide, retries every time",
+  "answers": {
+   "lin": "✗✗✗✗✗✗✗✗✗"
+  },
+  "authoritative": {
+   "status": "exposure",
+   "verified": false,
+   "retention": "none"
+  },
+  "subSkills": {
+   "two-step": "developing; check none (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "2e",
+  "learner": "wrong first, right on the retry",
+  "answers": {
+   "lin": "✗✓✗✓✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "2f",
+  "learner": "unreadable always",
+  "answers": {},
+  "authoritative": {
+   "status": "not_started",
+   "verified": false,
+   "retention": "none"
+  },
+  "subSkills": {},
+  "discrepancy": []
+ },
+ {
+  "scenario": "2g",
+  "learner": "unreadable 1 time(s), then right",
+  "answers": {
+   "lin": "✓✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "4a",
+  "learner": "right only after a hint",
+  "answers": {
+   "lin": "✗✗✗✗✓✗✓✗✗"
+  },
+  "authoritative": {
+   "status": "guided",
+   "verified": false,
+   "retention": "none"
+  },
+  "subSkills": {
+   "two-step": "developing; check none (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "4b",
+  "learner": "hint in guided practice, then right alone",
+  "answers": {
+   "lin": "✓✓✓✓✓✗✗✓✓✗✓✗✗✓✓",
+   "auleq": "✓✗",
+   "aulwp": "✓✓✓",
+   "lboth": "✓✗✓✗✗✗✓",
+   "lbrk": "✓✗✗✗✗✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "4c",
+  "learner": "hint, still wrong",
+  "answers": {
+   "lin": "✗✗✗✗✗✗✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "4d",
+  "learner": "asks for hints everywhere",
+  "answers": {
+   "lin": "✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "4f",
+  "learner": "right with help, wrong alone",
+  "answers": {
+   "lin": "✗✗✗✗✓✗✓✗✗"
+  },
+  "authoritative": {
+   "status": "guided",
+   "verified": false,
+   "retention": "none"
+  },
+  "subSkills": {
+   "two-step": "developing; check none (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "5a",
+  "learner": "misconception forgot-divide until 2 explanation(s)",
+  "answers": {
+   "lin": "✗✗✗✗✗✗✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "5b",
+  "learner": "always wrong (readable)",
+  "answers": {
+   "lin": "✗✗✗✗✗✗✗✗✗"
+  },
+  "authoritative": {
+   "status": "exposure",
+   "verified": false,
+   "retention": "none"
+  },
+  "subSkills": {
+   "two-step": "developing; check none (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "5c",
+  "learner": "misconception forgot-divide, slips the first check after teaching",
+  "answers": {
+   "lin": "✗✗✗✗✓✗✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "5d",
+  "learner": "misconception forgot-divide until 2 explanation(s)",
+  "answers": {
+   "lin": "✗✗✗✗✗✗✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "5f",
+  "learner": "misconception forgot-divide until 3 explanation(s)",
+  "answers": {
+   "lin": "✗✗✗✗✗✗✗✗✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "6a",
+  "learner": "strong, slips once on the delayed check",
+  "answers": {
+   "lin": "✓✓✓✓✓✓✓✓✓✓✗✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "retention-due; check due (need 2, sampled false)",
+   "brackets": "retention-due; check due (need 2, sampled false)",
+   "modelling": "retention-due; check due (need 1, sampled true)"
+  },
+  "discrepancy": [
+   "both-sides=retention-due, brackets=retention-due"
+  ]
+ },
+ {
+  "scenario": "6b",
+  "learner": "strong (always right)",
+  "answers": {
+   "lin": "✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "brackets": "independently-demonstrated; check scheduled (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": []
+ },
+ {
+  "scenario": "6c",
+  "learner": "strong (always right)",
+  "answers": {
+   "lin": "✓✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "passed"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check passed (need 1, sampled true)",
+   "both-sides": "retention-due; check due (need 2, sampled false)",
+   "brackets": "retention-due; check due (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check passed (need 1, sampled true)"
+  },
+  "discrepancy": [
+   "both-sides=retention-due, brackets=retention-due"
+  ]
+ },
+ {
+  "scenario": "6d",
+  "learner": "misconception forgot-divide until 1 explanation(s)",
+  "answers": {
+   "lin": "✗✗✗✗✓✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓✓",
+   "aulwp": "✓✓",
+   "lboth": "✓✓✓✓✓",
+   "lbrk": "✓✓✓✓"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "passed"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check passed (need 1, sampled true)",
+   "both-sides": "retention-due; check due (need 2, sampled false)",
+   "brackets": "retention-due; check due (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check passed (need 1, sampled true)"
+  },
+  "discrepancy": [
+   "both-sides=retention-due, brackets=retention-due"
+  ]
+ },
+ {
+  "scenario": "X1",
+  "learner": "right only on lin, auleq, aulwp",
+  "answers": {
+   "lin": "✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓",
+   "aulwp": "✓✓",
+   "lboth": "✗✗✗✗",
+   "lbrk": "✗"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "scheduled"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check scheduled (need 1, sampled true)",
+   "both-sides": "developing; check none (need 2, sampled false)",
+   "brackets": "insufficient-evidence; check none (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check scheduled (need 1, sampled true)"
+  },
+  "discrepancy": [
+   "both-sides=developing, brackets=insufficient-evidence"
+  ]
+ },
+ {
+  "scenario": "X2",
+  "learner": "right only on lin, auleq, aulwp",
+  "answers": {
+   "lin": "✓✓✓✓✓✓✓✓✓✓",
+   "auleq": "✓✓",
+   "aulwp": "✓✓",
+   "lboth": "✗✗✗✗",
+   "lbrk": "✗"
+  },
+  "authoritative": {
+   "status": "transfer",
+   "verified": false,
+   "retention": "passed"
+  },
+  "subSkills": {
+   "two-step": "independently-demonstrated; check passed (need 1, sampled true)",
+   "both-sides": "developing; check none (need 2, sampled false)",
+   "brackets": "insufficient-evidence; check none (need 2, sampled false)",
+   "modelling": "independently-demonstrated; check passed (need 1, sampled true)"
+  },
+  "discrepancy": [
+   "both-sides=developing, brackets=insufficient-evidence"
+  ]
+ }
+]

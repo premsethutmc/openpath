@@ -1,0 +1,111 @@
+{
+ "summary": {
+  "engineRoot": "/home/claude/k052",
+  "suiteSha256": "ceb61055f693c9eaf2b4b5010003bc4512aa559b9a3193884f53e6761d97c83f",
+  "cases": 6,
+  "byDefect": {
+   "D1": {
+    "WRONG-ANSWER": 1,
+    "ACCEPTED-INVALID": 1
+   },
+   "D2": {
+    "ACCEPTED-INVALID": 2
+   },
+   "D3": {
+    "ACCEPTED-INVALID": 1,
+    "ANSWERED-BUT-MUST-REFUSE": 1
+   }
+  }
+ },
+ "rows": [
+  {
+   "id": "s1-identity-wrong",
+   "defect": "D1",
+   "kind": "equation",
+   "text": "1/(x-1)-1/(x-1)=x^-1*x-1",
+   "truth": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "excluded": [
+     "0",
+     "1"
+    ]
+   },
+   "verdict": "WRONG-ANSWER",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "1"
+    ]
+   }
+  },
+  {
+   "id": "s1-step",
+   "defect": "D1",
+   "kind": "step",
+   "text": "x^-1*x=1 -> 1=1",
+   "truth": "invalid",
+   "verdict": "ACCEPTED-INVALID",
+   "detail": {
+    "valid": true,
+    "reasons": []
+   }
+  },
+  {
+   "id": "s2-from-state",
+   "defect": "D2",
+   "kind": "step",
+   "text": "(x^2-1)/(x-1)=2 -> x+1=2",
+   "truth": "invalid",
+   "verdict": "ACCEPTED-INVALID",
+   "detail": {
+    "valid": true,
+    "reasons": []
+   }
+  },
+  {
+   "id": "s2-zero-over-x",
+   "defect": "D2",
+   "kind": "step",
+   "text": "0/x=0 -> 0=0",
+   "truth": "invalid",
+   "verdict": "ACCEPTED-INVALID",
+   "detail": {
+    "valid": true,
+    "reasons": []
+   }
+  },
+  {
+   "id": "s4-exp-x",
+   "defect": "D3",
+   "kind": "step",
+   "text": "x^(x/x)=x -> x=x",
+   "truth": "invalid",
+   "verdict": "ACCEPTED-INVALID",
+   "detail": {
+    "valid": true,
+    "reasons": []
+   }
+  },
+  {
+   "id": "s6-space-number",
+   "defect": "D3",
+   "kind": "equation",
+   "text": "1 0/(x-1)=10/(x-1)",
+   "truth": {
+    "refusal": [
+     "PARSE_ERROR"
+    ]
+   },
+   "verdict": "ANSWERED-BUT-MUST-REFUSE",
+   "detail": {
+    "class": "identity-on-domain",
+    "solution": null,
+    "restrictions": [
+     "1"
+    ]
+   }
+  }
+ ]
+}

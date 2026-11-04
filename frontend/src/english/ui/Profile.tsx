@@ -18,7 +18,7 @@ export function ParentOverviewView({ profile, overview }: { profile: LearnerProf
             <>
               <ul>
                 {o.shown.map((x) => (
-                  <li key={x.id} data-mastery={x.mastery ?? ""}>{`${x.name}${x.shownLevel !== null ? `: at about level ${x.shownLevel} of 8` : ""}${x.mastery === "verified" ? " (verified on educator-approved questions)" : " (provisional: on draft questions, not yet approved by an educator)"}.`}</li>
+                  <li key={x.id} data-mastery={x.mastery ?? ""}>{`${x.name}${x.shownLevel !== null ? `: at about level ${x.shownLevel} of 8` : ""}${x.mastery === "verified" ? ` (verified at about level ${x.verifiedLevel}: on educator-approved questions, and kept at a later check)` : x.masteryBasis === "approved" ? " (on educator-approved questions; verified after a later check)" : " (provisional: on draft questions, not yet approved by an educator)"}.`}</li>
                 ))}
               </ul>
               <p className="small">Shown on fresh questions, without help, outside a lesson. The level is what has been shown, not a ceiling: harder questions at that skill may still be wrong.</p>

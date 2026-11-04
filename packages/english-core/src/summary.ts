@@ -36,7 +36,12 @@ export function summarise(v: LeafView): CapabilitySummary {
   let status: string;
   switch (ver.status) {
     case "verified":
-      status = v.mastered !== null ? `Mastered at band ${band(v.mastered)}, confirmed on ${day(ver.verifiedAt)}. Next check due ${day(r.dueAt)}.` : `Confirmed at band ${band(ver.currentLevel!)} on ${day(ver.verifiedAt)}. Next check due ${day(r.dueAt)}.`;
+      // verification@2: the band confirmed is the band a delayed check verified, never a band shown only since
+      if (ver.verifiedLevel === null) status = `Shown at band ${band(ver.currentLevel!)}; a later check of that band is still to come. Next check due ${day(r.dueAt)}.`;
+      else {
+        status = v.mastered !== null ? `Mastered at band ${band(Math.min(v.mastered, ver.verifiedLevel))}, confirmed on ${day(ver.verifiedLevelAt)}. Next check due ${day(r.dueAt)}.` : `Confirmed at band ${band(ver.verifiedLevel)} on ${day(ver.verifiedLevelAt)}. Next check due ${day(r.dueAt)}.`;
+        if (ver.currentLevel !== null && ver.currentLevel > ver.verifiedLevel) status += ` Band ${band(ver.currentLevel)} is shown, not yet confirmed by a later check.`;
+      }
       break;
     case "demonstrated":
       status = `Shown at band ${band(ver.currentLevel!)} on ${day(r.firstDemonstratedAt)}. A first check is due ${day(r.dueAt)}.`;

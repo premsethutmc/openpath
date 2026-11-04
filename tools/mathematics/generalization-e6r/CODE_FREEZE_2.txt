@@ -1,0 +1,11 @@
+Code freeze before fresh holdout #2 is scored.
+frozenAt: 2026-10-28T03:17:27Z
+frozenImplementationCommit: e8f036fd49941a0917d0db6908ec779837a048ff   (branch feat/math-natural-generalization-e6r, base 9ac079e)
+repositoryStatusAtFreeze: clean (git status --short empty)
+engineAndEvaluatorFiles: no modification permitted after this record until holdout #2 is scored; verify with: git diff e8f036f HEAD -- packages tools/mathematics/generalization-e6 (must be empty)
+evaluatorSha256 (tools/mathematics/generalization-e6/evaluate.ts): 40d5135a42b3dabb8b9a64684b0309a0d6add1f98ce2336e44150ae23f7c5c6d
+adjudicationOverlaySha256 (E6 overlay v1): d38efa14c16b5bb415e484834d1355c54b597934eb0aba0b1539b6edb4a573d5
+contractSha256 (CONTRACT.md): c27cbc1c349e15bccc6978cef5cf114f6ba122da4b9a91d7ed17c3b83acccebb
+testsAtFreeze: packages/learning 1056 pass + 27 closure tests (in that count) 0 fail; english-core 2 and frontend/src/mathematics 2 failures identical to the E5 baseline
+holdout2Authoring: separate agent (a3578a6e4b20e8158) that never ran the verifier and had no access to this repository's cases; output stored outside the repository at /home/claude/e6r-holdout2/. The implementer has not read its cases or labels.
+scoringCommand: E6R_HOLDOUT_DIR=/home/claude/e6r-holdout2/ E6R_RESULTS_DIR=/home/claude/e6r-holdout2-results/ bun tools/mathematics/generalization-e6/evaluate.ts r6holdout e6r-holdout2-once

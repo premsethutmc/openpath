@@ -1,0 +1,102 @@
+{
+ "sympy": "1.14.0",
+ "k02": {
+  "seed": 20261023,
+  "total": {
+   "cases": 10000,
+   "correct": 10000
+  },
+  "byCategory": {
+   "integer-small": {
+    "cases": 2000,
+    "correct": 2000
+   },
+   "integer-large": {
+    "cases": 1500,
+    "correct": 1500
+   },
+   "fraction": {
+    "cases": 2500,
+    "correct": 2500
+   },
+   "decimal": {
+    "cases": 1500,
+    "correct": 1500
+   },
+   "power": {
+    "cases": 1500,
+    "correct": 1500
+   },
+   "expression": {
+    "cases": 1000,
+    "correct": 1000
+   }
+  },
+  "wrongExamples": [],
+  "kernel": "spike/oss-math-engine (bigint Rational)"
+ },
+ "k04": {
+  "seed": 20261023,
+  "solver": "@cortex-js/compute-engine",
+  "total": {
+   "equations": 1000,
+   "complete": 1000,
+   "identity-reported-as-parameter": 25,
+   "complex-roots": 77
+  },
+  "byKind": {
+   "linear-basic": {
+    "equations": 150,
+    "complete": 150
+   },
+   "linear-both-sides": {
+    "equations": 120,
+    "complete": 120
+   },
+   "linear-fractions": {
+    "equations": 120,
+    "complete": 120
+   },
+   "linear-brackets": {
+    "equations": 60,
+    "complete": 60
+   },
+   "linear-no-solution": {
+    "equations": 25,
+    "complete": 25
+   },
+   "linear-identity": {
+    "equations": 25,
+    "complete": 25,
+    "identity-reported-as-parameter": 25
+   },
+   "quadratic-integer-roots": {
+    "equations": 150,
+    "complete": 150
+   },
+   "quadratic-rational-roots": {
+    "equations": 100,
+    "complete": 100
+   },
+   "quadratic-irrational-roots": {
+    "equations": 100,
+    "complete": 100
+   },
+   "quadratic-no-real-roots": {
+    "equations": 60,
+    "complete": 60,
+    "complex-roots": 60
+   },
+   "quadratic-repeated-root": {
+    "equations": 40,
+    "complete": 40
+   },
+   "quadratic-rearrange": {
+    "equations": 50,
+    "complete": 50,
+    "complex-roots": 17
+   }
+  },
+  "problems": []
+ }
+}

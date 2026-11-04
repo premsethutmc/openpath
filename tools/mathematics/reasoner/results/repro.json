@@ -1,0 +1,46 @@
+{
+ "codeCommit": "f8e20fd38fd648ac4c719e2514d1df4b1bfb46ce",
+ "branch": "feat/math-reasoner",
+ "sourceTreeCleanAtRun": true,
+ "uncommittedSourceChanges": [],
+ "seeds": {
+  "gen_sets frozen (smoke20/seeded500/edge50)": 20261025,
+  "holdout-b": 20261026,
+  "constructed generator": 20261027,
+  "rejection mutations": 20261029,
+  "planner": "none (deterministic BFS, no randomness)"
+ },
+ "frozenSha256": {
+  "constructed/constructed.json": "6dd650e916bd801770aba8504ca31b512e3872c0d3833e4fc60544323214615f",
+  "edge50.json": "ace50253407547595209356ac367deb5832fdf29984c91bd5b16f02e4e219f1b",
+  "holdout-b/edge50.json": "8e57bde9853433c01e9dfa9eab29f81d7b1ed2f082d9b213ad42c79cd5dc9f8b",
+  "holdout-b/manifest.json": "c23a58e5ded4578cec7c28e90addc12ef278e15c8c9a59e79600cee16f6e8642",
+  "holdout-b/seeded500.json": "bffbab210bef65bc879e4aa3001de8b2b3868fcd6c61872df1975bf8c7fccda1",
+  "holdout-b/smoke20.json": "583f9f50bca03e31feacd0e8cd75d8715a5c3c81d8a48e78bc48495d8fba02a0",
+  "manifest.json": "72981e3cbeb0e42cce87da05832c4f788023bb42288c0011ced4c7dd6899420d",
+  "seeded500.json": "77d496e1864cdba8e5152f1d4d0b06d1243ce37f3198eb06d4f03dfa8ab803ec",
+  "smoke20.json": "583f9f50bca03e31feacd0e8cd75d8715a5c3c81d8a48e78bc48495d8fba02a0"
+ },
+ "codeSha256": {
+  "packages/learning/src/reasoner/construct.ts": "a83478335702551be3959f7430e36f2717d6de8463d79478a01902462aba964a",
+  "packages/learning/src/reasoner/demo.ts": "caff21accbf5a10e9fc4f30368f795f27f8c33132672bd80190193b082f52452",
+  "packages/learning/src/reasoner/expr-text.ts": "77fef4ace7b58faabb59c8ee80f2927f135764171289dc6a3dc379fea9a6c98a",
+  "packages/learning/src/reasoner/planner.test.ts": "c049fe112e8be96c2ab086f5b32eb81a693b885a2362253bb5990ff64abf736a",
+  "packages/learning/src/reasoner/planner.ts": "9912cb2f55d524895ea7db0c75b13c5c859cbdb52c32e207fb3be8ab2276d983",
+  "packages/learning/src/reasoner/run-construct.ts": "641dd171d46df24a5f3667cc18d751b5c54ea212390244950632541fc96e779a",
+  "packages/learning/src/reasoner/run-frozen.ts": "2f4a8ce0c0614a89b5915cacaa7ec82e40cf892aae1d4e75a39f395f2fc90048",
+  "tools/mathematics/reasoner/check.py": "7d86be22c9ba03299fd1906567dfeab8790f7364b49db17deb35b50d3e2c90ad",
+  "tools/mathematics/reasoner/domain_test.py": "97dffdf07635d5f87c702da020d975e060172efd067b80231b697b6e717d5264",
+  "tools/mathematics/reasoner/gen_sets.py": "c033a9b971c26387ec554a280f4d45382ae891f8f32d298c585f13d00c1e9dbe",
+  "tools/mathematics/reasoner/make_report.py": "7d5d1467c2e45559d491029d7a7ff3b9cc93728de631bba0e2536187276f45e5",
+  "tools/mathematics/reasoner/make_repro.py": "0ae7b53a9b1f5734c952c2183d9c40325e425d9c1a03a332ce669819a6559cf0",
+  "tools/mathematics/reasoner/no_shortcuts.py": "de0442537639c59dddf110499b010f29e9ad4153d1f52d5c64423c3e9ef9cd6d",
+  "tools/mathematics/reasoner/reject_test.py": "ca60236525f23decbf3a8194a65880a2d915eca68567f251ea5a03e9aed2abdd",
+  "tools/mathematics/reasoner/run-e3.sh": "0bddc47cbf2d88d8ded9573da1db34da0d281cbf1958f731288e6884fbe48c15"
+ },
+ "node": "v22.22.0",
+ "python": "3.13.16",
+ "sympy": "1.14.0",
+ "command": "tools/mathematics/reasoner/run-e3.sh",
+ "baseBranch": "spike/oss-math-engine (PR #69)"
+}

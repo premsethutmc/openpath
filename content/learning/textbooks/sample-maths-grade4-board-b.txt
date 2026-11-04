@@ -1,0 +1,40 @@
+Discovering Mathematics — Learner's Book 4
+A synthetic textbook written for OpenPath testing. Not a real board or publisher. CC0.
+Board: Sample Board B (synthetic)
+Grade 4
+Academic year 2026–27
+
+Contents
+
+Chapter One — Numbers to 100 000 (pages 1 to 16)
+By the end of this chapter, learners can:
+• read, write and order numbers up to 100 000 (page 3)
+• round a number to the nearest 10, 100 or 1000 (page 11)
+
+Chapter Two — Times Tables and Sharing (pages 17 to 36)
+By the end of this chapter, learners can:
+• recall the times tables up to 10 × 10 quickly (page 18)
+• multiply a three-digit number by a one-digit number in columns (page 24)
+• share a number into equal groups and say what is left over (page 30)
+
+Chapter Three — Parts of a Whole (pages 37 to 58)
+By the end of this chapter, learners can:
+• name a part of a shape divided into equal pieces as a fraction (page 38)
+• recognise fractions that name the same amount, such as 1/2 and 2/4 (page 43)
+• decide which of two fractions with the same bottom number is bigger (page 49)
+• find the total of two fractions that have the same denominator (page 53)
+• solve word problems involving fractions (page 57)
+
+Chapter Four — Covering and Fencing (pages 59 to 72)
+By the end of this chapter, learners can:
+• find the space covered by a shape by counting unit squares (page 60)
+• work out the distance around a rectangle (page 66)
+
+Chapter Five — Turning and Circles (pages 73 to 84)
+By the end of this chapter, learners can:
+• identify right angles, and angles smaller or larger than a right angle (page 74)
+• name the centre, radius and diameter of a circle (page 80)
+
+Chapter Six — Timetables (pages 85 to 92)
+By the end of this chapter, learners can:
+• use a bus timetable to plan a short journey (page 86)

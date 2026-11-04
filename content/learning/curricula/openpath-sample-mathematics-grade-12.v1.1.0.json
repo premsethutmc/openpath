@@ -1,0 +1,417 @@
+{
+ "id": "openpath-sample-mathematics-grade-12",
+ "version": "1.1.0",
+ "status": "reviewed",
+ "grade": 12,
+ "title": "OpenPath Sample Mathematics, Grade 12",
+ "hash": "76999a5b",
+ "source": {
+  "kind": "textbook",
+  "title": "OpenPath Sample Mathematics, Grade 12",
+  "edition": "2026 synthetic edition",
+  "publisher": "OpenPath test content (not a real publisher)",
+  "board": "OpenPath sample (synthetic, not a real board)",
+  "academicYear": "2026-27",
+  "licence": "CC0, written for OpenPath testing",
+  "synthetic": true,
+  "extractor": "structured-text@1"
+ },
+ "review": {
+  "by": "OpenPath sample review (not an educator)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Sample release for development and acceptance testing (mapping@2). Clear mappings: the top proposal was accepted. Uncertain mappings were accepted only where release 1.0.0 had accepted the same competency, or where the book's review file records a reviewer's decision. Not an educator review.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "ch1-matrices-and-determinants",
+     "number": 1,
+     "title": "Matrices and determinants",
+     "pages": "1–40",
+     "unit": {
+      "id": "unit1-algebra",
+      "number": 1,
+      "title": "Algebra"
+     },
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch1-matrices-and-determinants.o1",
+       "text": "Operate on matrices",
+       "pages": "2",
+       "location": {
+        "line": 14,
+        "page": 2
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.matrices",
+          "score": 1,
+          "method": "meaning@3",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on matrices.",
+        "concepts": [
+         "matrices"
+        ]
+       }
+      },
+      {
+       "id": "ch1-matrices-and-determinants.o2",
+       "text": "Evaluate determinants",
+       "pages": "20",
+       "location": {
+        "line": 15,
+        "page": 20
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.determinants",
+          "score": 1,
+          "method": "meaning@3",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on determinants.",
+        "concepts": [
+         "determinants"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch2-differentiation",
+     "number": 2,
+     "title": "Differentiation",
+     "pages": "41–80",
+     "unit": {
+      "id": "unit2-calculus",
+      "number": 2,
+      "title": "Calculus"
+     },
+     "examples": [],
+     "exercises": [],
+     "outcomes": [],
+     "sections": [
+      {
+       "id": "ch2-differentiation.s2-1",
+       "number": "2.1",
+       "title": "Continuity",
+       "pages": "41–52",
+       "examples": [],
+       "exercises": [],
+       "outcomes": [
+        {
+         "id": "ch2-differentiation.s2-1.o1",
+         "text": "Test the continuity of a function at a point",
+         "pages": "42",
+         "location": {
+          "line": 20,
+          "page": 42
+         },
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.continuity",
+            "score": 0.733,
+            "method": "meaning@3",
+            "status": "accepted"
+           },
+           {
+            "id": "MATH.algebra.functions",
+            "score": 0.607,
+            "method": "meaning@3",
+            "status": "rejected"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Matches on continuity.",
+          "concepts": [
+           "functions",
+           "continuity"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "ch2-differentiation.s2-2",
+       "number": "2.2",
+       "title": "Rules of differentiation",
+       "pages": "53–80",
+       "examples": [],
+       "exercises": [],
+       "outcomes": [
+        {
+         "id": "ch2-differentiation.s2-2.o1",
+         "text": "Apply the power rule to differentiate powers of x",
+         "pages": "54",
+         "location": {
+          "line": 23,
+          "page": 54
+         },
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.derivative-rules",
+            "score": 0.786,
+            "method": "meaning@3",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Matches on derivatives, differentiationRules.",
+          "concepts": [
+           "derivatives",
+           "powers",
+           "differentiationRules"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ch3-integrals",
+     "number": 3,
+     "title": "Integrals",
+     "pages": "81–140",
+     "unit": {
+      "id": "unit2-calculus",
+      "number": 2,
+      "title": "Calculus"
+     },
+     "examples": [],
+     "exercises": [],
+     "outcomes": [],
+     "sections": [
+      {
+       "id": "ch3-integrals.s3-1",
+       "number": "3.1",
+       "title": "Antiderivatives",
+       "pages": "81–96",
+       "examples": [],
+       "exercises": [],
+       "outcomes": [
+        {
+         "id": "ch3-integrals.s3-1.o1",
+         "text": "Find antiderivatives of powers of x",
+         "pages": "82",
+         "location": {
+          "line": 27,
+          "page": 82
+         },
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.indefinite-integrals",
+            "score": 0.663,
+            "method": "meaning@3",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Matches on derivatives, antiderivative.",
+          "concepts": [
+           "derivatives",
+           "powers",
+           "antiderivative"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "ch3-integrals.s3-2",
+       "number": "3.2",
+       "title": "Techniques of integration",
+       "pages": "97–120",
+       "examples": [],
+       "exercises": [],
+       "outcomes": [
+        {
+         "id": "ch3-integrals.s3-2.o1",
+         "text": "Integrate by substitution and by parts",
+         "pages": "98",
+         "location": {
+          "line": 30,
+          "page": 98
+         },
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.integration-methods",
+            "score": 1,
+            "method": "meaning@3",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Matches on integrals, substitution, byParts.",
+          "concepts": [
+           "integrals",
+           "substitution",
+           "byParts"
+          ]
+         }
+        }
+       ]
+      },
+      {
+       "id": "ch3-integrals.s3-3",
+       "number": "3.3",
+       "title": "Definite integrals",
+       "pages": "121–140",
+       "examples": [],
+       "exercises": [],
+       "outcomes": [
+        {
+         "id": "ch3-integrals.s3-3.o1",
+         "text": "Evaluate definite integrals",
+         "pages": "122",
+         "location": {
+          "line": 33,
+          "page": 122
+         },
+         "mapping": {
+          "competencies": [
+           {
+            "id": "MATH.calculus.definite-integrals",
+            "score": 1,
+            "method": "meaning@3",
+            "status": "accepted"
+           }
+          ],
+          "verdict": "clear",
+          "why": "Matches on integrals, definite.",
+          "concepts": [
+           "integrals",
+           "definite"
+          ]
+         }
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ch4-applications-of-the-integral",
+     "number": 4,
+     "title": "Applications of the integral",
+     "pages": "141–160",
+     "unit": {
+      "id": "unit2-calculus",
+      "number": 2,
+      "title": "Calculus"
+     },
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch4-applications-of-the-integral.o1",
+       "text": "Calculate the area between a line and a parabola using integration",
+       "pages": "142",
+       "location": {
+        "line": 36,
+        "page": 142
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.calculus.area-integrals",
+          "score": 1,
+          "method": "meaning@3",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on area, integrals, ratio.",
+        "concepts": [
+         "area",
+         "integrals",
+         "ratio"
+        ]
+       }
+      }
+     ]
+    },
+    {
+     "id": "ch5-probability",
+     "number": 5,
+     "title": "Probability",
+     "pages": "161–200",
+     "unit": {
+      "id": "unit3-probability",
+      "number": 3,
+      "title": "Probability"
+     },
+     "examples": [],
+     "exercises": [],
+     "outcomes": [
+      {
+       "id": "ch5-probability.o1",
+       "text": "Calculate conditional probabilities",
+       "pages": "162",
+       "location": {
+        "line": 40,
+        "page": 162
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.probability.conditional",
+          "score": 1,
+          "method": "meaning@3",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on probability, conditional.",
+        "concepts": [
+         "probability",
+         "conditional"
+        ]
+       }
+      },
+      {
+       "id": "ch5-probability.o2",
+       "text": "Apply Bayes theorem",
+       "pages": "180",
+       "location": {
+        "line": 41,
+        "page": 180
+       },
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.probability.bayes",
+          "score": 0.822,
+          "method": "meaning@3",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Matches on bayes.",
+        "concepts": [
+         "bayes"
+        ]
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

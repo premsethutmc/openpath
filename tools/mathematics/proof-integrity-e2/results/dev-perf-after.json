@@ -1,0 +1,4756 @@
+{
+ "summary": {
+  "label": "perf-after",
+  "partition": "dev",
+  "cases": 100,
+  "falseAcceptances": 0,
+  "unaccountedAcceptances": 0,
+  "falseRejections": 0,
+  "verified": 15,
+  "assessed": 61,
+  "unsupportedOrInconclusive": 39,
+  "firstInvalidExact": [
+   28,
+   47
+  ],
+  "firstInvalidLine": [
+   21,
+   47
+  ],
+  "alternativeAccepted": [
+   15,
+   15
+  ],
+  "restrictionDetected": [
+   10,
+   20
+  ],
+  "thrown": 0,
+  "latencyMs": {
+   "p50": 0.35477399999999193,
+   "p95": 6.602564000000001,
+   "p99": 15.416539999999998,
+   "max": 33.989256000000005
+  },
+  "byCategory": {
+   "invalid-intermediate-correct-final": {
+    "n": 25,
+    "falseAccept": 0,
+    "verified": 0
+   },
+   "silently-skippable-unsupported-line": {
+    "n": 15,
+    "falseAccept": 0,
+    "verified": 0
+   },
+   "missing-restriction-or-branch": {
+    "n": 20,
+    "falseAccept": 0,
+    "verified": 0
+   },
+   "cross-domain-binding-failure": {
+    "n": 15,
+    "falseAccept": 0,
+    "verified": 0
+   },
+   "valid-alternative-path": {
+    "n": 15,
+    "falseAccept": 0,
+    "verified": 15
+   },
+   "ambiguous-or-malformed-line": {
+    "n": 10,
+    "falseAccept": 0,
+    "verified": 0
+   }
+  }
+ },
+ "cases": [
+  {
+   "id": "e2-dev-000",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 7,
+     "text": "5x = 25"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "step 2 (5x + 4 = -21  ->  5x = 25) is the first invalid step: not an equivalent step: the solutions both changed in two directions; the previous line has x = -5; this line has x = 5; it lost x = -5; it gained x = 5. Possible cause: moved a term to the other side without changing its sign",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "verified-invalid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 33.989256000000005
+  },
+  {
+   "id": "e2-dev-001",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 6,
+     "text": "2x = 4"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "step 2 (2x + 8 = -4  ->  2x = 4) is the first invalid step: not an equivalent step: the solutions both changed in two directions; the previous line has x = -6; this line has x = 2; it lost x = -6; it gained x = 2. Possible cause: moved a term to the other side without changing its sign",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "verified-valid",
+     "line-4": "verified-invalid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 6.998408999999995
+  },
+  {
+   "id": "e2-dev-002",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 7,
+     "text": "5x = 10"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "step 2 (5x + 1 = 6  ->  5x = 10) is the first invalid step: not an equivalent step: the solutions both changed in two directions; the previous line has x = 1; this line has x = 2; it lost x = 1; it gained x = 2. Possible cause: a numerical slip in an otherwise correct step",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "verified-invalid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 15.416539999999998
+  },
+  {
+   "id": "e2-dev-003",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 8,
+     "text": "2x = -12"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "step 2 (2x + 7 = 19  ->  2x = -12) is the first invalid step: not an equivalent step: the solutions both changed in two directions; the previous line has x = 6; this line has x = -6; it lost x = 6; it gained x = -6. Possible cause: moved a term to the other side without changing its sign",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "verified-valid",
+     "line-4": "verified-invalid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 12.183975000000004
+  },
+  {
+   "id": "e2-dev-004",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 7,
+     "text": "3x = 37"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "step 2 (3x + 8 = 29  ->  3x = 37) is the first invalid step: not an equivalent step: the solutions both changed in two directions; the previous line has x = 7; this line has x = 37/3; it lost x = 7; it gained x = 37/3. Possible cause: moved a term to the other side without changing its sign",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "verified-invalid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 5.233818000000014
+  },
+  {
+   "id": "e2-dev-005",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 7,
+     "text": "4x = -4"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "step 2 (4x + 3 = 7  ->  4x = -4) is the first invalid step: not an equivalent step: the solutions both changed in two directions; the previous line has x = 1; this line has x = -1; it lost x = 1; it gained x = -1. Possible cause: moved a term to the other side without changing its sign",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "verified-invalid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 4.447838999999988
+  },
+  {
+   "id": "e2-dev-006",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 7,
+     "text": "3x = 18"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "step 2 (3x + 6 = 12  ->  3x = 18) is the first invalid step: not an equivalent step: the solutions both changed in two directions; the previous line has x = 2; this line has x = 6; it lost x = 2; it gained x = 6. Possible cause: moved a term to the other side without changing its sign",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "verified-valid",
+     "line-4": "verified-invalid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.582379000000003
+  },
+  {
+   "id": "e2-dev-007",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 6,
+     "text": "4x = 4"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "step 2 (4x + 2 = -2  ->  4x = 4) is the first invalid step: not an equivalent step: the solutions both changed in two directions; the previous line has x = -1; this line has x = 1; it lost x = -1; it gained x = 1. Possible cause: moved a term to the other side without changing its sign",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "verified-valid",
+     "line-4": "verified-invalid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.887697000000003
+  },
+  {
+   "id": "e2-dev-008",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "functions",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 18,
+     "text": "f(5) = 5^2 + 4 + 3"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive",
+     "line-4": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 9.263723999999996
+  },
+  {
+   "id": "e2-dev-009",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "functions",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 18,
+     "text": "f(3) = 3^2 + 2 + 2"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive",
+     "line-4": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.9923009999999977
+  },
+  {
+   "id": "e2-dev-010",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "functions",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 18,
+     "text": "f(4) = 4^2 + 3 + 5"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive",
+     "line-4": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.0257489999999905
+  },
+  {
+   "id": "e2-dev-011",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "functions",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 18,
+     "text": "f(2) = 2^2 + 6 + 5"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive",
+     "line-4": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.9458160000000078
+  },
+  {
+   "id": "e2-dev-012",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "functions",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 18,
+     "text": "f(3) = 3^2 + 3 + 3"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:function-evaluation",
+     "symbolic:m3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive",
+     "line-4": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.9235960000000034
+  },
+  {
+   "id": "e2-dev-013",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "complex",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 10,
+     "text": "|z| = 5+12"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:complex-modulus",
+     "complex-polynomial:b3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 2.305125000000004
+  },
+  {
+   "id": "e2-dev-014",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "complex",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 10,
+     "text": "|z| = 8+15"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:complex-modulus",
+     "complex-polynomial:b3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.30615600000001564
+  },
+  {
+   "id": "e2-dev-015",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "complex",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 9,
+     "text": "|z| = 6+8"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:complex-modulus",
+     "complex-polynomial:b3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.22902500000000714
+  },
+  {
+   "id": "e2-dev-016",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "complex",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 11,
+     "text": "|z| = 20+21"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:complex-modulus",
+     "complex-polynomial:b3"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.5368510000000128
+  },
+  {
+   "id": "e2-dev-017",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "matrices",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 18,
+     "text": "det(A) = 5*5 + 2*3"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.93321499999999
+  },
+  {
+   "id": "e2-dev-018",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "matrices",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 18,
+     "text": "det(A) = 5*3 + 3*5"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.35477399999999193
+  },
+  {
+   "id": "e2-dev-019",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "matrices",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 18,
+     "text": "det(A) = 1*3 + 4*3"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 2.559547000000009
+  },
+  {
+   "id": "e2-dev-020",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "matrices",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": {
+     "line": 2,
+     "start": 0,
+     "end": 18,
+     "text": "det(A) = 2*3 + 5*4"
+    },
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "line 2 is mathematically invalid",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-invalid",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": true,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.33905599999999936
+  },
+  {
+   "id": "e2-dev-021",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "calculus",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "no lossless natural adapter for calculus",
+    "obligations": [
+     "no lossless natural adapter for calculus"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 0,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "inconclusive",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.6390009999999791
+  },
+  {
+   "id": "e2-dev-022",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "calculus",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "no lossless natural adapter for calculus",
+    "obligations": [
+     "no lossless natural adapter for calculus"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 0,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "inconclusive",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.10344899999998347
+  },
+  {
+   "id": "e2-dev-023",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "calculus",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "no lossless natural adapter for calculus",
+    "obligations": [
+     "no lossless natural adapter for calculus"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 0,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "inconclusive",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.08247799999998051
+  },
+  {
+   "id": "e2-dev-024",
+   "partition": "development",
+   "category": "invalid-intermediate-correct-final",
+   "area": "calculus",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "no lossless natural adapter for calculus",
+    "obligations": [
+     "no lossless natural adapter for calculus"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 0,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "inconclusive",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.0669809999999984
+  },
+  {
+   "id": "e2-dev-025",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "functions",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter function-evaluation can verify only part of the submission (line is not an evaluation of the defined function); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 0,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "unsupported",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.2765939999999887
+  },
+  {
+   "id": "e2-dev-026",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "functions",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "expected expression",
+    "obligations": [
+     "expected expression"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.25735299999999484
+  },
+  {
+   "id": "e2-dev-027",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "functions",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter function-evaluation can verify only part of the submission (line is not an evaluation of the defined function); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 0,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "unsupported",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.15832900000000905
+  },
+  {
+   "id": "e2-dev-028",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "functions",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.022479000000004135
+  },
+  {
+   "id": "e2-dev-029",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "functions",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.0186649999999986
+  },
+  {
+   "id": "e2-dev-030",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "functions",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "expected expression",
+    "obligations": [
+     "expected expression"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.18891499999998018
+  },
+  {
+   "id": "e2-dev-031",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "matrices",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.02278200000000652
+  },
+  {
+   "id": "e2-dev-032",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "matrices",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.026230999999995674
+  },
+  {
+   "id": "e2-dev-033",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "matrices",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "expected expression",
+    "obligations": [
+     "expected expression"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.026121999999986656
+  },
+  {
+   "id": "e2-dev-034",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "matrices",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.005920000000003256
+  },
+  {
+   "id": "e2-dev-035",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "complex",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "unsupported character '∪' at 6",
+    "obligations": [
+     "unsupported character '∪' at 6"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.137141999999983
+  },
+  {
+   "id": "e2-dev-036",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "complex",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "expected expression",
+    "obligations": [
+     "expected expression"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.03790999999998235
+  },
+  {
+   "id": "e2-dev-037",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "complex",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter complex-modulus can verify only part of the submission (line is not a modulus claim for the written complex number); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 0,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "unsupported",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.17215200000001118
+  },
+  {
+   "id": "e2-dev-038",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "statistics",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "unsupported character '∪' at 6",
+    "obligations": [
+     "unsupported character '∪' at 6"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.027897999999993317
+  },
+  {
+   "id": "e2-dev-039",
+   "partition": "development",
+   "category": "silently-skippable-unsupported-line",
+   "area": "statistics",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.007418000000001257
+  },
+  {
+   "id": "e2-dev-040",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "every step is valid, but the working narrows the solution set and does not account for all solutions",
+    "obligations": [
+     "line 2: a solution of the previous line is lost (discarding earlier extra candidates needs the whole working: use assessWorking)"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "incomplete"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.241310999999996
+  },
+  {
+   "id": "e2-dev-041",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "every step is valid, but the working narrows the solution set and does not account for all solutions",
+    "obligations": [
+     "line 2: a solution of the previous line is lost (discarding earlier extra candidates needs the whole working: use assessWorking)"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "incomplete"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 2.0886999999999887
+  },
+  {
+   "id": "e2-dev-042",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "every step is valid, but the working narrows the solution set and does not account for all solutions",
+    "obligations": [
+     "line 2: a solution of the previous line is lost (discarding earlier extra candidates needs the whole working: use assessWorking)"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "incomplete"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.287498999999997
+  },
+  {
+   "id": "e2-dev-043",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "every step is valid, but the working narrows the solution set and does not account for all solutions",
+    "obligations": [
+     "line 2: a solution of the previous line is lost (discarding earlier extra candidates needs the whole working: use assessWorking)"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "incomplete"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 4.192408999999998
+  },
+  {
+   "id": "e2-dev-044",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "every step is valid, but the working narrows the solution set and does not account for all solutions",
+    "obligations": [
+     "line 2: a solution of the previous line is lost (discarding earlier extra candidates needs the whole working: use assessWorking)"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "incomplete"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 2.148467000000011
+  },
+  {
+   "id": "e2-dev-045",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "every step is valid, but the working narrows the solution set and does not account for all solutions",
+    "obligations": [
+     "line 2: a solution of the previous line is lost (discarding earlier extra candidates needs the whole working: use assessWorking)"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "incomplete"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 2.01898300000002
+  },
+  {
+   "id": "e2-dev-046",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "some lines could not be analysed exactly; they are not judged, and the working is not certified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "unsupported"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": false,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.578706000000011
+  },
+  {
+   "id": "e2-dev-047",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "some lines could not be analysed exactly; they are not judged, and the working is not certified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "unsupported"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": false,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.7429459999999892
+  },
+  {
+   "id": "e2-dev-048",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "some lines could not be analysed exactly; they are not judged, and the working is not certified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "unsupported"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": false,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.6397440000000074
+  },
+  {
+   "id": "e2-dev-049",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "every step is valid, but the working narrows the solution set and does not account for all solutions",
+    "obligations": [
+     "line 3: a solution of the previous line is lost (discarding earlier extra candidates needs the whole working: use assessWorking)"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "incomplete"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 6.602564000000001
+  },
+  {
+   "id": "e2-dev-050",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "every step is valid, but the working narrows the solution set and does not account for all solutions",
+    "obligations": [
+     "line 3: a solution of the previous line is lost (discarding earlier extra candidates needs the whole working: use assessWorking)"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "incomplete"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 3.461905999999999
+  },
+  {
+   "id": "e2-dev-051",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "every step is valid, but the working narrows the solution set and does not account for all solutions",
+    "obligations": [
+     "line 3: a solution of the previous line is lost (discarding earlier extra candidates needs the whole working: use assessWorking)"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "incomplete"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 5.14257600000002
+  },
+  {
+   "id": "e2-dev-052",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "every step is valid, but the working narrows the solution set and does not account for all solutions",
+    "obligations": [
+     "line 3: a solution of the previous line is lost (discarding earlier extra candidates needs the whole working: use assessWorking)"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "incomplete"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": true,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 4.887340999999992
+  },
+  {
+   "id": "e2-dev-053",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 4,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: function sqrt); the working is not judged",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 5,
+    "linesConsumed": 5,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "inconclusive",
+     "line-3": "inconclusive",
+     "line-4": "inconclusive",
+     "line-5": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": false,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.9938339999999926
+  },
+  {
+   "id": "e2-dev-054",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 4,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: function sqrt); the working is not judged",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 5,
+    "linesConsumed": 5,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "inconclusive",
+     "line-3": "inconclusive",
+     "line-4": "inconclusive",
+     "line-5": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": false,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.3236909999999966
+  },
+  {
+   "id": "e2-dev-055",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 4,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: function sqrt); the working is not judged",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 5,
+    "linesConsumed": 5,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "inconclusive",
+     "line-3": "inconclusive",
+     "line-4": "inconclusive",
+     "line-5": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": false,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.38131400000000326
+  },
+  {
+   "id": "e2-dev-056",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 4,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: function sqrt); the working is not judged",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 5,
+    "linesConsumed": 5,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "inconclusive",
+     "line-3": "inconclusive",
+     "line-4": "inconclusive",
+     "line-5": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": false,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": false,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.3980410000000063
+  },
+  {
+   "id": "e2-dev-057",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: operator |); the working is not judged",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": false,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.2858579999999904
+  },
+  {
+   "id": "e2-dev-058",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: operator |); the working is not judged",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": false,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.09796700000001124
+  },
+  {
+   "id": "e2-dev-059",
+   "partition": "development",
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "the problem itself cannot be analysed exactly (UNSUPPORTED_OPERATOR: UNSUPPORTED_OPERATOR: operator |); the working is not judged",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 2,
+    "linesConsumed": 2,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": false,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.06570100000001844
+  },
+  {
+   "id": "e2-dev-060",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source: step 1 is mathematically invalid",
+    "obligations": [
+     "stage source: step 1 is mathematically invalid"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.4977419999999881
+  },
+  {
+   "id": "e2-dev-061",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source: step 1 is mathematically invalid",
+    "obligations": [
+     "stage source: step 1 is mathematically invalid"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.18875099999999634
+  },
+  {
+   "id": "e2-dev-062",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 0,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source: step 1 is mathematically invalid",
+    "obligations": [
+     "stage source: step 1 is mathematically invalid"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.0545489999999802
+  },
+  {
+   "id": "e2-dev-063",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "linear-algebra:b2",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage destination: step 1: exact linear-algebra calculation differs",
+    "obligations": [
+     "stage destination: step 1: exact linear-algebra calculation differs"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.8830670000000111
+  },
+  {
+   "id": "e2-dev-064",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "linear-algebra:b2",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage destination: step 1: exact linear-algebra calculation differs",
+    "obligations": [
+     "stage destination: step 1: exact linear-algebra calculation differs"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.3881439999999827
+  },
+  {
+   "id": "e2-dev-065",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "linear-algebra:b2",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage destination: step 1: exact linear-algebra calculation differs",
+    "obligations": [
+     "stage destination: step 1: exact linear-algebra calculation differs"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.14806100000001265
+  },
+  {
+   "id": "e2-dev-066",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidStep": 1,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "linear-algebra:b2",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage destination: step 1: exact linear-algebra calculation differs",
+    "obligations": [
+     "stage destination: step 1: exact linear-algebra calculation differs"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": true,
+    "firstInvalidLineMatch": false,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.14380199999999377
+  },
+  {
+   "id": "e2-dev-067",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage destination does not depend on binding source source",
+    "obligations": [
+     "stage destination does not depend on binding source source"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.126041999999984
+  },
+  {
+   "id": "e2-dev-068",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 1,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage destination does not depend on binding source source",
+    "obligations": [
+     "stage destination does not depend on binding source source"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.1894489999999962
+  },
+  {
+   "id": "e2-dev-069",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "invalid",
+    "complete": false,
+    "firstInvalidStep": 0,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "binding source is not a verified proof step",
+    "obligations": [
+     "binding source is not a verified proof step"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.05663699999999494
+  },
+  {
+   "id": "e2-dev-070",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source is incomplete",
+    "obligations": [
+     "stage source is incomplete"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.010834000000016886
+  },
+  {
+   "id": "e2-dev-071",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source is incomplete",
+    "obligations": [
+     "stage source is incomplete"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.010322999999999638
+  },
+  {
+   "id": "e2-dev-072",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source is incomplete",
+    "obligations": [
+     "stage source is incomplete"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.010427999999990334
+  },
+  {
+   "id": "e2-dev-073",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source: no reasoning submitted",
+    "obligations": [
+     "stage source: no reasoning submitted"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.02440400000000409
+  },
+  {
+   "id": "e2-dev-074",
+   "partition": "development",
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "incomplete",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "probability-statistics:b1",
+     "unified:d3-bindings"
+    ],
+    "justification": "stage source: no reasoning submitted",
+    "obligations": [
+     "stage source: no reasoning submitted"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.013884999999987713
+  },
+  {
+   "id": "e2-dev-075",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 3 steps are valid and the answer is correct",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.8592350000000124
+  },
+  {
+   "id": "e2-dev-076",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 3 steps are valid and the answer is correct",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.5482609999999966
+  },
+  {
+   "id": "e2-dev-077",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 3 steps are valid and the answer is correct",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.2093830000000025
+  },
+  {
+   "id": "e2-dev-078",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 3 steps are valid and the answer is correct",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.7814099999999939
+  },
+  {
+   "id": "e2-dev-079",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 3 steps are valid and the answer is correct",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.7898350000000107
+  },
+  {
+   "id": "e2-dev-080",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "matrices",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.5637529999999913
+  },
+  {
+   "id": "e2-dev-081",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "matrices",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.31168199999999047
+  },
+  {
+   "id": "e2-dev-082",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "matrices",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.2748939999999891
+  },
+  {
+   "id": "e2-dev-083",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "matrices",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.2664269999999931
+  },
+  {
+   "id": "e2-dev-084",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "matrices",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:linear-determinant",
+     "linear-algebra:b2"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.5087110000000052
+  },
+  {
+   "id": "e2-dev-085",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "complex",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:complex-modulus",
+     "complex-polynomial:b3"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.5269619999999975
+  },
+  {
+   "id": "e2-dev-086",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 4 steps are valid and the answer is correct",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid",
+     "line-4": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.7347910000000013
+  },
+  {
+   "id": "e2-dev-087",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "all 4 steps are valid and the answer is correct",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid",
+     "line-4": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 4.0632400000000075
+  },
+  {
+   "id": "e2-dev-088",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "statistics",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:statistics-mean",
+     "probability-statistics:b1"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 1.2618669999999952
+  },
+  {
+   "id": "e2-dev-089",
+   "partition": "development",
+   "category": "valid-alternative-path",
+   "area": "statistics",
+   "reference": {
+    "classification": "verified",
+    "firstInvalidStep": null,
+    "mustNotVerify": false
+   },
+   "engine": {
+    "classification": "verified",
+    "complete": true,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-adapter:statistics-mean",
+     "probability-statistics:b1"
+    ],
+    "justification": "all 3 submitted line(s) are accounted for and verified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 3,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "verified-valid",
+     "line-3": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": true,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": true,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.42721199999999726
+  },
+  {
+   "id": "e2-dev-090",
+   "partition": "development",
+   "category": "ambiguous-or-malformed-line",
+   "area": "algebra",
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "unexpected token =",
+    "obligations": [
+     "unexpected token ="
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.06780700000001616
+  },
+  {
+   "id": "e2-dev-091",
+   "partition": "development",
+   "category": "ambiguous-or-malformed-line",
+   "area": "algebra",
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "expected expression",
+    "obligations": [
+     "expected expression"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.017531999999988557
+  },
+  {
+   "id": "e2-dev-092",
+   "partition": "development",
+   "category": "ambiguous-or-malformed-line",
+   "area": "algebra",
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "expected expression",
+    "obligations": [
+     "expected expression"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.02568899999999985
+  },
+  {
+   "id": "e2-dev-093",
+   "partition": "development",
+   "category": "ambiguous-or-malformed-line",
+   "area": "algebra",
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "malformed",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "expected expression",
+    "obligations": [
+     "expected expression"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.020102000000008502
+  },
+  {
+   "id": "e2-dev-094",
+   "partition": "development",
+   "category": "ambiguous-or-malformed-line",
+   "area": "matrices",
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter linear-determinant can verify only part of the submission (line is not a determinant claim); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 0,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "unsupported",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.19658299999997553
+  },
+  {
+   "id": "e2-dev-095",
+   "partition": "development",
+   "category": "ambiguous-or-malformed-line",
+   "area": "matrices",
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.008867999999978338
+  },
+  {
+   "id": "e2-dev-096",
+   "partition": "development",
+   "category": "ambiguous-or-malformed-line",
+   "area": "algebra",
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "math-core:equation"
+    ],
+    "justification": "some lines could not be analysed exactly; they are not judged, and the working is not certified",
+    "obligations": []
+   },
+   "integrity": {
+    "mathematicalLines": 4,
+    "linesConsumed": 4,
+    "lineStatuses": {
+     "line-1": "verified-valid",
+     "line-2": "unsupported",
+     "line-3": "unsupported",
+     "line-4": "verified-valid"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.9358709999999917
+  },
+  {
+   "id": "e2-dev-097",
+   "partition": "development",
+   "category": "ambiguous-or-malformed-line",
+   "area": "algebra",
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.023123999999995704
+  },
+  {
+   "id": "e2-dev-098",
+   "partition": "development",
+   "category": "ambiguous-or-malformed-line",
+   "area": "functions",
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "ambiguous",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser"
+    ],
+    "justification": "division followed by implicit multiplication has multiple conventional readings",
+    "obligations": [
+     "division followed by implicit multiplication has multiple conventional readings"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": null,
+    "linesConsumed": null,
+    "lineStatuses": null,
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": true,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.025558000000017955
+  },
+  {
+   "id": "e2-dev-099",
+   "partition": "development",
+   "category": "ambiguous-or-malformed-line",
+   "area": "matrices",
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidStep": null,
+    "mustNotVerify": true
+   },
+   "engine": {
+    "classification": "unsupported",
+    "complete": false,
+    "firstInvalidStep": null,
+    "firstInvalidSource": null,
+    "reasoners": [
+     "natural-working-parser",
+     "natural-domain-adapter"
+    ],
+    "justification": "adapter linear-determinant can verify only part of the submission (line is not a determinant claim); source line(s) 2 are not accounted for",
+    "obligations": [
+     "verify source line 2"
+    ]
+   },
+   "integrity": {
+    "mathematicalLines": 3,
+    "linesConsumed": 0,
+    "lineStatuses": {
+     "line-1": "inconclusive",
+     "line-2": "unsupported",
+     "line-3": "inconclusive"
+    },
+    "unaccountedAcceptance": false
+   },
+   "metrics": {
+    "falseAcceptance": false,
+    "falseRejection": false,
+    "exact": false,
+    "assessed": false,
+    "firstInvalidMatch": null,
+    "firstInvalidLineMatch": null,
+    "alternativeAccepted": null,
+    "restrictionDetected": null,
+    "unaccountedAcceptance": false,
+    "thrown": null
+   },
+   "ms": 0.10424399999999423
+  }
+ ]
+}

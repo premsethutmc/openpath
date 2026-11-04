@@ -1,0 +1,11 @@
+[project]
+name = "openpath-geometry-reasoner-research"
+version = "0.1.0"
+requires-python = ">=3.11"
+description = "Experimental geometry step verifier for OpenPath research"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["geometry_reasoner"]

@@ -1,0 +1,4946 @@
+{
+ "schema": "written-modules@1",
+ "note": "Modules for competencies an educator marks (proofs, constructions, written reasoning): teaching, auto-marked component questions (choice and number answers) and written tasks (written.v1.json). Original, written for OpenPath; CC0; provisional until educator-reviewed.",
+ "questions": [
+  {
+   "id": "wm-bas-d1",
+   "competency": "MATH.geometry.basic-constructions",
+   "skill": "MATH.geometry.basic-constructions",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Kavya draws an arc with centre O and radius 3 cm. X and Y are two points on the arc. Which is true?",
+   "answer": "C",
+   "solution": "Every point of an arc is the same distance from its centre (that is what the compasses keep fixed), so OX = OY = 3 cm. XY can be any length up to 6 cm.",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "XY = 3 cm",
+    "OX = 3 cm, but OY could be longer",
+    "OX = OY = 3 cm",
+    "OX + OY = 3 cm"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "The radius is measured from the centre O, not between two points on the arc."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "The compasses keep the same opening for the whole arc, so every point on it is 3 cm from O."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Each of OX and OY is a radius: each one is 3 cm on its own."
+    }
+   ]
+  },
+  {
+   "id": "wm-bas-d2",
+   "competency": "MATH.geometry.basic-constructions",
+   "skill": "MATH.geometry.basic-constructions",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "You are constructing a line perpendicular to line l at the point P on l. You have drawn an arc centred at P that cuts l at A and B. What do you do next?",
+   "answer": "B",
+   "solution": "Next, from A and from B draw arcs with the same radius (bigger than PA) that cross at Q. Q is the same distance from A and B, so PQ is perpendicular to l.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Join A to B",
+    "With centres A and B and the same radius (more than PA), draw arcs that cross at a point Q",
+    "Measure 90° at P with a protractor",
+    "With centre A, draw an arc through P only"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "A and B are already on l; joining them gives l again."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "The construction uses only ruler and compasses; the right angle comes from equal arcs."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "You need two equal arcs, one from A and one from B, so that their crossing point is the same distance from both."
+    }
+   ]
+  },
+  {
+   "id": "wm-bas-g1",
+   "competency": "MATH.geometry.basic-constructions",
+   "skill": "MATH.geometry.basic-constructions",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "Two arcs cross at a point Q. One arc has centre A and radius 5 cm; the other has centre B and radius 5 cm. Which is true?",
+   "answer": "D",
+   "solution": "Q lies on both arcs, so QA = 5 cm (arc centred at A) and QB = 5 cm (arc centred at B). Q is the same distance from A and from B.",
+   "difficulty": 1,
+   "hint": "Q is on BOTH arcs. What does being on an arc with centre A tell you?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Q is the midpoint of AB",
+    "QA + QB = 5 cm",
+    "QA = 5 cm, but QB is unknown",
+    "QA = QB = 5 cm"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Q is the same distance from A and B, but it is not on AB unless the arcs only just touch."
+    },
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "Each distance is a full radius of 5 cm."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Q is also on the arc centred at B, so QB is a radius of that arc: 5 cm."
+    }
+   ]
+  },
+  {
+   "id": "wm-bas-c1",
+   "competency": "MATH.geometry.basic-constructions",
+   "skill": "MATH.geometry.basic-constructions",
+   "role": "check",
+   "type": "choice",
+   "prompt": "To drop a perpendicular from a point P to a line l, you draw one arc with centre P that cuts l at A and B. Why is P then the same distance from A and from B?",
+   "answer": "A",
+   "solution": "PA and PB are both radii of the same arc (one compass opening), so PA = PB.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "PA and PB are radii of the same arc",
+    "A and B are both on the line l",
+    "Angle APB is 90°",
+    "The arc is exactly half a circle"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "Lots of points are on l; being on l says nothing about the distance from P."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "The angle at P is not 90° in general; the equal distances come from the compass opening."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "The size of the arc does not matter; what matters is that both points are on one arc centred at P."
+    }
+   ]
+  },
+  {
+   "id": "wm-bas-g2",
+   "competency": "MATH.geometry.basic-constructions",
+   "skill": "MATH.geometry.basic-constructions",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "You want the line through P parallel to line l. You have already constructed PM perpendicular to l, with M on l. What next?",
+   "answer": "C",
+   "solution": "Construct the line through P perpendicular to PM. Two lines that are both perpendicular to PM are parallel.",
+   "difficulty": 1,
+   "hint": "Both l and the new line should make a right angle with the same line PM.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "At M, construct another perpendicular to l",
+    "Join P to any point on l",
+    "At P, construct a line perpendicular to PM",
+    "Draw a circle centred at M through P"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "The perpendicular to l at M is PM itself; you need a line through P."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "A line from P to l meets l, so it cannot be parallel to l."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "A circle gives points at one distance from M; it does not give a line through P."
+    }
+   ]
+  },
+  {
+   "id": "wm-bas-p1",
+   "competency": "MATH.geometry.basic-constructions",
+   "skill": "MATH.geometry.basic-constructions",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "You are constructing a rectangle ABCD with AB = 6 cm and BC = 4 cm. You have drawn AB and the perpendicular at B. To what radius, in cm, do you open the compasses to mark C on the perpendicular?",
+   "answer": "4",
+   "solution": "C is on the perpendicular at B with BC = 4 cm, so set the compasses to 4 cm and draw an arc centred at B.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "6",
+     "hypothesis": "procedural",
+     "says": "6 cm is AB. C is marked on the perpendicular at B, and BC = 4 cm."
+    },
+    {
+     "when": "10",
+     "hypothesis": "procedural",
+     "says": "10 cm is AB + BC; you only need the distance from B to C."
+    }
+   ]
+  },
+  {
+   "id": "wm-bas-p2",
+   "competency": "MATH.geometry.basic-constructions",
+   "skill": "MATH.geometry.basic-constructions",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Which set of steps is sure to give a square of side 4 cm?",
+   "answer": "B",
+   "solution": "A square needs four equal sides AND a right angle. Constructing a right angle at A with AB = AD = 4 cm, then arcs of 4 cm from B and D to find C, gives four equal sides and a right angle, so all angles are right.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Join four 4 cm segments end to end into a closed shape",
+    "Draw AB = 4 cm, construct a right angle at A, mark AD = 4 cm, then draw arcs of radius 4 cm from B and D to meet at C",
+    "Draw AB = 4 cm and AD = 4 cm with a 60° angle at A, then arcs of radius 4 cm from B and D",
+    "Draw AB = 4 cm and BC = 4 cm at a right angle, then CD = 2 cm"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Four equal sides can lean over into a rhombus; a square also needs a right angle."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "With a 60° angle you get a rhombus, not a square."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "All four sides of a square are 4 cm, so CD must be 4 cm too."
+    }
+   ]
+  },
+  {
+   "id": "wm-bas-r1",
+   "competency": "MATH.geometry.basic-constructions",
+   "skill": "MATH.geometry.basic-constructions",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "To construct a 60° angle at O on a ray OA, you draw an arc centred at O cutting OA at P, then with centre P and the same radius cut the arc at Q. Why is angle QOP equal to 60°?",
+   "answer": "D",
+   "solution": "OP = OQ (radii of the first arc) and PQ = OP (same compass opening), so triangle OPQ is equilateral and each of its angles is 60°.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Because the arc is 60 mm long",
+    "Because PQ is half of OP",
+    "Because the compasses were set to 6 cm",
+    "Because OP = OQ = PQ, so triangle OPQ is equilateral"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "The angle does not depend on the length of the arc; it comes from the equal sides of triangle OPQ."
+    },
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "PQ is drawn with the same opening as OP, so PQ = OP, not half of it."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Any radius works; the angle comes from keeping the radius the same, not from its size."
+    }
+   ]
+  },
+  {
+   "id": "wm-tri-d1",
+   "competency": "MATH.geometry.construction-triangles",
+   "skill": "MATH.geometry.construction-triangles",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Which information fixes exactly one triangle (only its position on the page can change)?",
+   "answer": "C",
+   "solution": "Two sides and the angle between them (SAS) fix one triangle. Three angles fix only the shape, and two sides with an angle that is not between them can give two different triangles.",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Angles of 50°, 60° and 70°",
+    "AB = 5 cm, BC = 6 cm and angle A = 40°",
+    "AB = 5 cm, BC = 6 cm and angle B = 40°",
+    "AB = 5 cm and angle A = 40°"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Three angles fix the shape but not the size: you can draw small and large triangles with those angles."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "Angle A is not between AB and BC, so C can sometimes be in two places."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Two facts are not enough: you need three, such as two sides and the angle between them."
+    }
+   ]
+  },
+  {
+   "id": "wm-tri-d2",
+   "competency": "MATH.geometry.construction-triangles",
+   "skill": "MATH.geometry.construction-triangles",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Two sides of a triangle are 4 cm and 7 cm. Which length can NOT be the third side?",
+   "answer": "A",
+   "solution": "The two shorter sides must add to more than the longest. 4 + 7 = 11 is not more than 11, so 11 cm is impossible: the arcs would only meet on the base line.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "11 cm",
+    "4 cm",
+    "10 cm",
+    "6 cm"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "4 cm works: 4 + 4 = 8 is more than 7."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "10 cm works: 4 + 7 = 11 is more than 10."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "6 cm works: 4 + 6 = 10 is more than 7."
+    }
+   ]
+  },
+  {
+   "id": "wm-tri-g1",
+   "competency": "MATH.geometry.construction-triangles",
+   "skill": "MATH.geometry.construction-triangles",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "Two sides of a triangle are 5 cm and 9 cm. What is the longest whole number of centimetres the third side can be?",
+   "answer": "13",
+   "solution": "The third side must be less than 5 + 9 = 14 cm. The largest whole number less than 14 is 13.",
+   "difficulty": 1,
+   "hint": "Imagine the 5 cm and 9 cm sides opening out flat. How long would the base be then?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "14",
+     "hypothesis": "conceptual",
+     "says": "With 14 cm the two arcs only touch on the base line: the 'triangle' is flat. The third side must be LESS than 14."
+    },
+    {
+     "when": "4",
+     "hypothesis": "conceptual",
+     "says": "4 = 9 − 5 is the limit at the short end (the third side must be MORE than 4). The question asks for the longest."
+    }
+   ]
+  },
+  {
+   "id": "wm-tri-c1",
+   "competency": "MATH.geometry.construction-triangles",
+   "skill": "MATH.geometry.construction-triangles",
+   "role": "check",
+   "type": "choice",
+   "prompt": "For which three lengths do the two arcs meet, so that a triangle can be constructed?",
+   "answer": "B",
+   "solution": "3 + 5 = 8 is more than 7, so 3, 5, 7 makes a triangle. For the others the two shorter sides add to the longest side or less.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "2 cm, 3 cm, 6 cm",
+    "3 cm, 5 cm, 7 cm",
+    "4 cm, 4 cm, 8 cm",
+    "1 cm, 2 cm, 3 cm"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "2 + 3 = 5 is less than 6: arcs of 2 cm and 3 cm from the ends of a 6 cm base do not reach each other."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "4 + 4 = 8 exactly: the arcs only touch on the base, giving a flat line, not a triangle."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "1 + 2 = 3 exactly: the 'triangle' would be flat."
+    }
+   ]
+  },
+  {
+   "id": "wm-tri-g2",
+   "competency": "MATH.geometry.construction-triangles",
+   "skill": "MATH.geometry.construction-triangles",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "You are constructing triangle ABC with AB = 7 cm, angle A = 50° and AC = 5 cm. You have drawn AB and the 50° angle at A. What next?",
+   "answer": "D",
+   "solution": "C is on the arm of the 50° angle, 5 cm from A: mark it with the compasses set to 5 cm and centred at A, then join BC.",
+   "difficulty": 1,
+   "hint": "Which side starts at A and goes along the arm of the angle?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Make a 50° angle at B as well",
+    "Draw an arc of radius 5 cm centred at B",
+    "Draw an arc of radius 7 cm centred at A",
+    "Mark C on the arm of the angle, 5 cm from A, and join BC"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "Only angle A is given. The second piece of information is a side, AC."
+    },
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "AC = 5 cm is measured from A, not from B."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "7 cm is AB, which is already drawn. Use AC = 5 cm along the arm."
+    }
+   ]
+  },
+  {
+   "id": "wm-tri-p1",
+   "competency": "MATH.geometry.construction-triangles",
+   "skill": "MATH.geometry.construction-triangles",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Construct triangle XYZ with YZ = 6 cm, angle Y = 45° and angle Z = 75°. After drawing YZ and both angles, how do you find X?",
+   "answer": "A",
+   "solution": "X is on both arms: the arm of the 45° angle at Y and the arm of the 75° angle at Z. Where they cross is X (ASA).",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "X is where the arms of the two angles cross",
+    "Draw an arc of radius 6 cm from Y",
+    "Measure 6 cm along the 45° arm",
+    "Construct a 60° angle at X"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "No side from Y to X is given; X is fixed by the two angles."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "6 cm is YZ. The length YX is not given; it comes out of the construction."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "X is not known yet, so you cannot draw an angle there. (Angle X will measure 60°.)"
+    }
+   ]
+  },
+  {
+   "id": "wm-tri-p2",
+   "competency": "MATH.geometry.construction-triangles",
+   "skill": "MATH.geometry.construction-triangles",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "In an ASA construction, angle P = 65° and angle Q = 70° are drawn at the two ends of PQ. When the arms meet at R, what will angle R measure, in degrees?",
+   "answer": "45",
+   "solution": "The angles of a triangle add to 180°: 180 − 65 − 70 = 45.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "135",
+     "hypothesis": "procedural",
+     "says": "135 is 65 + 70. Angle R is what is left from 180°."
+    },
+    {
+     "when": "225",
+     "hypothesis": "procedural",
+     "says": "Angles of a triangle add to 180°, not 360°."
+    }
+   ]
+  },
+  {
+   "id": "wm-tri-r1",
+   "competency": "MATH.geometry.construction-triangles",
+   "skill": "MATH.geometry.construction-triangles",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "Arcs of radius 3 cm and 4 cm are drawn from the two ends of an 8 cm segment. They do not meet. Why?",
+   "answer": "C",
+   "solution": "3 + 4 = 7 is less than 8, so no point can be 3 cm from one end and 4 cm from the other: no triangle has sides 3, 4 and 8 cm.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "The compasses were not opened wide enough",
+    "The arcs should be drawn on both sides",
+    "3 + 4 is less than 8, so no point is 3 cm from one end and 4 cm from the other",
+    "An 8 cm side is too long for any triangle"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "The radii are fixed by the measurements; opening wider would change the triangle."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "On the other side the distances are the same, so the arcs do not meet there either."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "An 8 cm side is fine with longer partners, for example 5 cm and 6 cm."
+    }
+   ]
+  },
+  {
+   "id": "wm-prf-d1",
+   "competency": "MATH.reasoning.proof-intro",
+   "skill": "MATH.reasoning.proof-intro",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Which of these is true about checking examples?",
+   "answer": "B",
+   "solution": "Examples can make a statement believable, but only a general argument proves it for all numbers. A single example where it fails (a counterexample) shows it is false.",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "If enough examples work, the statement is proved for all numbers",
+    "One example where the statement fails shows it is false",
+    "An example that fails is bad luck and can be ignored",
+    "Examples never tell us anything"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "However many examples work, the next one might fail. A proof has to cover every case at once."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "A statement that says 'always' is false if even one case fails."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "Examples are useful: they suggest what might be true, and one failing example disproves a claim."
+    }
+   ]
+  },
+  {
+   "id": "wm-prf-d2",
+   "competency": "MATH.reasoning.proof-intro",
+   "skill": "MATH.reasoning.proof-intro",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Which pair of expressions can stand for ANY two odd numbers (which may be different), where m and n are whole numbers?",
+   "answer": "D",
+   "solution": "Every odd number is one more than an even number, 2 × (something) + 1. Different letters let the two numbers be different.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "2n + 1 and 2n + 1",
+    "n and n + 2",
+    "2n and 2n + 2",
+    "2m + 1 and 2n + 1"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "Using the same letter makes the two numbers equal. Use different letters for numbers that can be different."
+    },
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "n might be even; 2n + 1 is always odd."
+    },
+    {
+     "when": "C",
+     "hypothesis": "recall",
+     "says": "2n and 2n + 2 are even numbers."
+    }
+   ]
+  },
+  {
+   "id": "wm-prf-g1",
+   "competency": "MATH.reasoning.proof-intro",
+   "skill": "MATH.reasoning.proof-intro",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "Meena claims: 'Every number ending in 3 is prime.' She checks 3, 13, 23 and 43. Which number shows she is wrong?",
+   "answer": "C",
+   "solution": "33 = 3 × 11, so it ends in 3 but is not prime. One counterexample is enough to show the claim is false.",
+   "difficulty": 1,
+   "hint": "Look for a number ending in 3 that is in a times table.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "53",
+    "73",
+    "33",
+    "83"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "recall",
+     "says": "53 is prime (no factors other than 1 and 53), so it agrees with Meena."
+    },
+    {
+     "when": "B",
+     "hypothesis": "recall",
+     "says": "73 is prime, so it agrees with Meena."
+    },
+    {
+     "when": "D",
+     "hypothesis": "recall",
+     "says": "83 is prime, so it agrees with Meena."
+    }
+   ]
+  },
+  {
+   "id": "wm-prf-c1",
+   "competency": "MATH.reasoning.proof-intro",
+   "skill": "MATH.reasoning.proof-intro",
+   "role": "check",
+   "type": "choice",
+   "prompt": "Which of these PROVES that the sum of any three consecutive whole numbers is a multiple of 3?",
+   "answer": "A",
+   "solution": "n + (n + 1) + (n + 2) = 3n + 3 = 3(n + 1). Because n stands for any whole number, this covers every case.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "n + (n + 1) + (n + 2) = 3n + 3 = 3(n + 1)",
+    "1 + 2 + 3 = 6, 4 + 5 + 6 = 15 and 10 + 11 + 12 = 33 are all multiples of 3",
+    "It worked for every starting number I tried up to 100",
+    "3 + 4 + 5 = 12, and 12 is a multiple of 3"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "Three examples make it believable but do not cover every case."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Even 100 examples are not all whole numbers; a proof must work for every n."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "One example cannot prove an 'always' statement (it can only disprove one)."
+    }
+   ]
+  },
+  {
+   "id": "wm-prf-g2",
+   "competency": "MATH.reasoning.proof-intro",
+   "skill": "MATH.reasoning.proof-intro",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "Think of a number n. Multiply it by 3, add 12, divide by 3, then subtract n. What number does everyone end with?",
+   "answer": "4",
+   "solution": "3n → 3n + 12 → (3n + 12) ÷ 3 = n + 4 → n + 4 − n = 4.",
+   "difficulty": 1,
+   "hint": "Write the expression after each step: 3n, then 3n + 12, then …",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "12",
+     "hypothesis": "procedural",
+     "says": "Dividing by 3 divides the 12 as well: (3n + 12) ÷ 3 = n + 4."
+    },
+    {
+     "when": "0",
+     "hypothesis": "procedural",
+     "says": "Subtracting n takes away only the n: n + 4 − n = 4."
+    }
+   ]
+  },
+  {
+   "id": "wm-prf-p1",
+   "competency": "MATH.reasoning.proof-intro",
+   "skill": "MATH.reasoning.proof-intro",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "In the proof that (2m + 1) + (2n + 1) is even, which step uses what 'even' means?",
+   "answer": "B",
+   "solution": "An even number is a multiple of 2. Writing the sum as 2(m + n + 1) shows it is 2 times a whole number, so it is even.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Writing the sum as 2m + 2n + 2",
+    "Writing the sum as 2(m + n + 1) and saying it is a multiple of 2",
+    "Choosing the letters m and n",
+    "Checking that 3 + 5 = 8"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "2m + 2n + 2 is correct, but the proof is finished only when you show it is 2 × (a whole number)."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "Choosing letters sets the proof up; it does not use the meaning of 'even'."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "An example is not part of the general proof."
+    }
+   ]
+  },
+  {
+   "id": "wm-prf-p2",
+   "competency": "MATH.reasoning.proof-intro",
+   "skill": "MATH.reasoning.proof-intro",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "To prove a fact about every two-digit number, you write the number with tens digit a and units digit b as 10a + b. How do you write the number with its digits reversed?",
+   "answer": "A",
+   "solution": "Reversed, b is the tens digit and a is the units digit: 10b + a.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "10b + a",
+    "ba",
+    "a + b",
+    "10a − b"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "In algebra 'ba' means b × a, not a two-digit number."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "a + b adds the digits; the tens digit must be multiplied by 10."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Reversing swaps the places of the digits: b becomes the tens digit."
+    }
+   ]
+  },
+  {
+   "id": "wm-prf-r1",
+   "competency": "MATH.reasoning.proof-intro",
+   "skill": "MATH.reasoning.proof-intro",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "Which number is a counterexample to: 'If a number is divisible by 4, then it is divisible by 8'?",
+   "answer": "D",
+   "solution": "12 is divisible by 4 but not by 8, so it shows the statement is false.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "16",
+    "24",
+    "7",
+    "12"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "16 is divisible by both 4 and 8, so it agrees with the statement."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "24 is divisible by both 4 and 8, so it agrees with the statement."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "7 is not divisible by 4, so the statement says nothing about it: it is not a counterexample."
+    }
+   ]
+  },
+  {
+   "id": "wm-tpf-d1",
+   "competency": "MATH.geometry.triangle-proof",
+   "skill": "MATH.geometry.triangle-proof",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Which set of equal parts does NOT always make two triangles congruent?",
+   "answer": "C",
+   "solution": "Two sides and an angle that is not between them (SSA) can fit two different triangles. SSS, SAS and AAS always give congruence.",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Three pairs of equal sides (SSS)",
+    "Two sides and the angle between them (SAS)",
+    "Two sides and an angle that is not between them (SSA)",
+    "Two angles and a side not between them (AAS)"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "recall",
+     "says": "SSS is a congruence criterion: three sides fix a triangle."
+    },
+    {
+     "when": "B",
+     "hypothesis": "recall",
+     "says": "SAS is a criterion, as long as the angle is between the two sides."
+    },
+    {
+     "when": "D",
+     "hypothesis": "recall",
+     "says": "AAS works: the third angles are equal too, so it becomes ASA."
+    }
+   ]
+  },
+  {
+   "id": "wm-tpf-d2",
+   "competency": "MATH.geometry.triangle-proof",
+   "skill": "MATH.geometry.triangle-proof",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "In a proof, you have just shown △ABD ≅ △ACD. You now write ∠B = ∠C. What is the reason?",
+   "answer": "B",
+   "solution": "Corresponding parts of congruent triangles are equal (CPCT). The congruence was proved first, so this step follows from it.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "SAS",
+    "CPCT (corresponding parts of congruent triangles)",
+    "Given",
+    "Angles opposite equal sides are equal"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "SAS was the reason for the congruence. Equal parts that follow from a congruence use CPCT."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "∠B = ∠C was not given; it is what the congruence tells you."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "If that is the theorem you are proving, you cannot use it as a reason: the proof would go round in a circle."
+    }
+   ]
+  },
+  {
+   "id": "wm-tpf-g1",
+   "competency": "MATH.geometry.triangle-proof",
+   "skill": "MATH.geometry.triangle-proof",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "In quadrilateral ABCD, AB = AD and CB = CD. To prove △ABC ≅ △ADC, which three facts and which criterion do you use?",
+   "answer": "A",
+   "solution": "AB = AD and CB = CD are given, and AC is a side of both triangles. Three pairs of sides: SSS.",
+   "difficulty": 1,
+   "hint": "Is there a side that belongs to both triangles?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "AB = AD, CB = CD, AC = AC (common): SSS",
+    "AB = AD, CB = CD, ∠B = ∠D: SAS",
+    "AB = AD, ∠BAC = ∠DAC, AC = AC: SAS",
+    "AC = AC, AB = CD, BC = AD: SSS"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "∠B = ∠D is not given, and it is not between the two sides anyway."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "∠BAC = ∠DAC is not given; it is something you could prove afterwards by CPCT."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "AB = CD is not given. Match the given sides: AB with AD, CB with CD."
+    }
+   ]
+  },
+  {
+   "id": "wm-tpf-c1",
+   "competency": "MATH.geometry.triangle-proof",
+   "skill": "MATH.geometry.triangle-proof",
+   "role": "check",
+   "type": "choice",
+   "prompt": "Segments AB and CD cross at O, and O is the midpoint of both. Which criterion shows △AOC ≅ △BOD?",
+   "answer": "D",
+   "solution": "OA = OB and OC = OD (O is the midpoint of each), and ∠AOC = ∠BOD (vertically opposite angles). The angle is between the two sides: SAS.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "SSS",
+    "ASA",
+    "RHS",
+    "SAS"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "AC and BD are not known to be equal, so SSS cannot be used."
+    },
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "Only one pair of angles is known (the vertically opposite angles at O)."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "There is no right angle given."
+    }
+   ]
+  },
+  {
+   "id": "wm-tpf-g2",
+   "competency": "MATH.geometry.triangle-proof",
+   "skill": "MATH.geometry.triangle-proof",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "In △PQR, S is the midpoint of QR and PS ⊥ QR. To prove PQ = PR, which two triangles should you show congruent?",
+   "answer": "B",
+   "solution": "Work backwards: PQ and PR are sides of △PSQ and △PSR. These two triangles share PS and have the given facts about S.",
+   "difficulty": 1,
+   "hint": "Which triangle has PQ as a side? Which has PR?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "△PQR and △PRQ",
+    "△PSQ and △PSR",
+    "△PQS and △RQS",
+    "△PSR and △QSR"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "That is one triangle named twice; you need two triangles, each containing one of PQ and PR."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "△RQS is not a triangle: R, Q and S lie on one line."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Again Q, S and R lie on one line. Pick the triangles that contain PQ and PR."
+    }
+   ]
+  },
+  {
+   "id": "wm-tpf-p1",
+   "competency": "MATH.geometry.triangle-proof",
+   "skill": "MATH.geometry.triangle-proof",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "In △PQR, PQ = PR and ∠P = 40°. What is ∠Q, in degrees?",
+   "answer": "70",
+   "solution": "Angles opposite equal sides are equal, so ∠Q = ∠R. Then ∠Q + ∠R = 180° − 40° = 140°, so ∠Q = 70°.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "40",
+     "hypothesis": "conceptual",
+     "says": "∠Q equals ∠R (the angles opposite the equal sides), not ∠P."
+    },
+    {
+     "when": "140",
+     "hypothesis": "procedural",
+     "says": "140° is ∠Q + ∠R together; share it equally between them."
+    }
+   ]
+  },
+  {
+   "id": "wm-tpf-p2",
+   "competency": "MATH.geometry.triangle-proof",
+   "skill": "MATH.geometry.triangle-proof",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "In △XYZ, ∠Y = ∠Z. What can you conclude?",
+   "answer": "C",
+   "solution": "Sides opposite equal angles are equal. The side opposite ∠Y is XZ and the side opposite ∠Z is XY, so XY = XZ.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "YZ = XY",
+    "XY = YZ = XZ",
+    "XY = XZ",
+    "Nothing, without measuring"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "Pair each angle with the side opposite it: ∠Y faces XZ and ∠Z faces XY."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "Only two angles are known to be equal, so only two sides follow; the triangle need not be equilateral."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "Equal angles always give equal opposite sides (the converse of the isosceles theorem)."
+    }
+   ]
+  },
+  {
+   "id": "wm-tpf-r1",
+   "competency": "MATH.geometry.triangle-proof",
+   "skill": "MATH.geometry.triangle-proof",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "Which is the CONVERSE of: 'If two sides of a triangle are equal, then the angles opposite them are equal'?",
+   "answer": "A",
+   "solution": "The converse swaps the 'if' and the 'then' parts.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "If two angles of a triangle are equal, then the sides opposite them are equal",
+    "If no two sides of a triangle are equal, then no two angles are equal",
+    "If the angles opposite two sides are not equal, then the sides are not equal",
+    "A triangle with two equal sides has two equal angles"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "This puts 'not' in both parts (the inverse); the converse swaps the parts."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "This is the contrapositive, which says the same as the original statement."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "This is the original statement in other words."
+    }
+   ]
+  },
+  {
+   "id": "wm-bis-d1",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "skill": "MATH.geometry.constructions-bisectors",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "A point P is 5 cm from A and also 5 cm from B. Where can P be?",
+   "answer": "D",
+   "solution": "Every point that is the same distance from A and B lies on the perpendicular bisector of AB (and every point on it is the same distance from A and B).",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Only at the midpoint of AB",
+    "Anywhere on the line AB",
+    "On the circle with diameter AB",
+    "On the perpendicular bisector of AB"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "The midpoint is one such point, but there are others above and below AB."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "On the line AB, only the midpoint is the same distance from A and B."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Points on that circle make a right angle with A and B; they need not be equally far from A and B."
+    }
+   ]
+  },
+  {
+   "id": "wm-bis-d2",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "skill": "MATH.geometry.constructions-bisectors",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "AB = 8 cm. You construct its perpendicular bisector with arcs of the same whole-number radius from A and from B. What is the smallest radius, in cm, for which the arcs cross at two points?",
+   "answer": "5",
+   "solution": "The radius must be more than half of AB, which is 4 cm. The smallest whole number more than 4 is 5.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "4",
+     "hypothesis": "conceptual",
+     "says": "Arcs of exactly half of AB only touch at the midpoint; they do not cross at two points."
+    },
+    {
+     "when": "8",
+     "hypothesis": "procedural",
+     "says": "8 cm works, but smaller radii work too. Anything more than half of AB will do."
+    }
+   ]
+  },
+  {
+   "id": "wm-bis-g1",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "skill": "MATH.geometry.constructions-bisectors",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "To bisect an angle at O, an arc centred at O cuts the arms at P and Q, then equal arcs from P and Q meet at R. Which congruence shows ∠POR = ∠QOR?",
+   "answer": "C",
+   "solution": "OP = OQ (same first arc), PR = QR (equal arcs) and OR is common: △OPR ≅ △OQR by SSS, so ∠POR = ∠QOR by CPCT.",
+   "difficulty": 1,
+   "hint": "List the three pairs of equal lengths the compasses gave you.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "△OPR ≅ △OQR by SAS",
+    "△OPR ≅ △OQR by RHS",
+    "△OPR ≅ △OQR by SSS",
+    "△OPQ ≅ △RPQ by ASA"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "We do not know an angle yet; we know three pairs of sides."
+    },
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "There is no right angle in these triangles."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "The angles at O are in △OPR and △OQR; those are the triangles to compare."
+    }
+   ]
+  },
+  {
+   "id": "wm-bis-c1",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "skill": "MATH.geometry.constructions-bisectors",
+   "role": "check",
+   "type": "choice",
+   "prompt": "In the perpendicular-bisector construction for AB, why must the radius be more than half of AB?",
+   "answer": "B",
+   "solution": "If the radius is at most half of AB, the arcs from A and B do not cross at two points, so there is no line to draw.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "So that the angle made is exactly 90°",
+    "So that the arcs from A and B cross at two points",
+    "So that the bisector is longer than AB",
+    "So that the midpoint lies on the arcs"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Any radius that gives two crossing points gives the right angle; the size is about the arcs meeting."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "The length of the drawn line does not matter."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "The midpoint is found where the bisector crosses AB, not on the arcs."
+    }
+   ]
+  },
+  {
+   "id": "wm-bis-g2",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "skill": "MATH.geometry.constructions-bisectors",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "How do you construct a 45° angle with a ruler and compasses only?",
+   "answer": "A",
+   "solution": "Construct 90° (a perpendicular), then bisect it: half of 90° is 45°.",
+   "difficulty": 1,
+   "hint": "45 is half of which angle you can already make?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Construct 90°, then bisect it",
+    "Construct 60°, then bisect it",
+    "Construct 120°, then bisect it",
+    "Bisect a 60° angle twice"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "Half of 60° is 30°, not 45°."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "Half of 120° is 60°."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Bisecting 60° twice gives 15°."
+    }
+   ]
+  },
+  {
+   "id": "wm-bis-p1",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "skill": "MATH.geometry.constructions-bisectors",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "To find the point that is the same distance from all three corners of a triangle, what do you construct?",
+   "answer": "C",
+   "solution": "A point on the perpendicular bisector of a side is the same distance from its two ends. Where the bisectors of two sides meet (the circumcentre), the point is the same distance from all three corners.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "The bisectors of two angles",
+    "Two medians",
+    "The perpendicular bisectors of two sides",
+    "Two altitudes"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Angle bisectors meet at a point the same distance from the three SIDES (the incentre)."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "Medians meet at the centroid, which is not in general the same distance from the corners."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "Altitudes meet at the orthocentre, which is not in general the same distance from the corners."
+    }
+   ]
+  },
+  {
+   "id": "wm-bis-p2",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "skill": "MATH.geometry.constructions-bisectors",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "You construct a 120° angle, bisect it, and then bisect one of the two halves. What is the size, in degrees, of the smallest angle you have made?",
+   "answer": "30",
+   "solution": "120° ÷ 2 = 60°, and 60° ÷ 2 = 30°.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "60",
+     "hypothesis": "procedural",
+     "says": "60° is after one bisection; the second bisection halves it again."
+    },
+    {
+     "when": "40",
+     "hypothesis": "procedural",
+     "says": "Bisecting halves an angle; it does not split it into three."
+    }
+   ]
+  },
+  {
+   "id": "wm-bis-r1",
+   "competency": "MATH.geometry.constructions-bisectors",
+   "skill": "MATH.geometry.constructions-bisectors",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "In △ABC, I is the point where the bisectors of ∠A and ∠B meet. Which is true?",
+   "answer": "B",
+   "solution": "A point on the bisector of an angle is the same distance from its two arms. I is on two bisectors, so it is the same distance from all three sides: it is the centre of the incircle.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "I is the same distance from A, B and C",
+    "I is the same distance from the three sides",
+    "I is the midpoint of AB",
+    "I lies on side AB"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "That is the circumcentre, found with perpendicular bisectors of the sides."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "The angle bisectors from A and B meet inside the triangle, not on AB."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "The bisectors start at A and B and go into the triangle; they meet inside it."
+    }
+   ]
+  },
+  {
+   "id": "wm-scl-d1",
+   "competency": "MATH.geometry.scaled-construction",
+   "skill": "MATH.geometry.scaled-construction",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "Triangle A′B′C′ is similar to triangle ABC with scale factor 3/4. BC = 8 cm. How long is B′C′, in cm?",
+   "answer": "6",
+   "solution": "Each side of the new triangle is 3/4 of the matching side: 3/4 × 8 = 6 cm.",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "7",
+     "hypothesis": "conceptual",
+     "says": "A scale factor multiplies lengths; it does not subtract. 3/4 × 8 = 6."
+    },
+    {
+     "when": "11",
+     "hypothesis": "conceptual",
+     "says": "A scale factor multiplies every length: 8 × 3/4 = 6."
+    }
+   ]
+  },
+  {
+   "id": "wm-scl-d2",
+   "competency": "MATH.geometry.scaled-construction",
+   "skill": "MATH.geometry.scaled-construction",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "To construct a triangle similar to ABC with scale factor 5/3, you mark 5 equal steps B₁ … B₅ on a ray BX. Which mark do you join to C?",
+   "answer": "B",
+   "solution": "Join the mark for the denominator, B₃, to C. Then the parallel to B₃C through B₅ meets BC extended at C′ with BC′/BC = 5/3.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "B₅",
+    "B₃",
+    "B₁",
+    "B₈"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "Joining B₅C and drawing the parallel through B₃ gives the scale factor 3/5, the reciprocal."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "Joining B₁ would compare with one step; the scale factor 5/3 compares 5 steps with 3."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "You only need max(5, 3) = 5 steps. 5 + 3 = 8 steps is for dividing a segment in the ratio 5 : 3."
+    }
+   ]
+  },
+  {
+   "id": "wm-scl-g1",
+   "competency": "MATH.geometry.scaled-construction",
+   "skill": "MATH.geometry.scaled-construction",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "In △ABC, D is on AB and E is on AC with DE ∥ BC. AD = 4 cm, DB = 6 cm and AE = 6 cm. How long is EC, in cm?",
+   "answer": "9",
+   "solution": "By the Basic Proportionality Theorem, AD/DB = AE/EC, so 4/6 = 6/EC and EC = 9 cm.",
+   "difficulty": 1,
+   "hint": "The parallel line divides the two sides in the same ratio: AD/DB = AE/EC.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "4",
+     "hypothesis": "procedural",
+     "says": "The ratio AD : DB is 4 : 6, so AE : EC must also be 2 : 3: EC = 9."
+    },
+    {
+     "when": "8",
+     "hypothesis": "procedural",
+     "says": "Use the same ratio, not the same difference: 4/6 = 6/EC gives EC = 9."
+    }
+   ]
+  },
+  {
+   "id": "wm-scl-c1",
+   "competency": "MATH.geometry.scaled-construction",
+   "skill": "MATH.geometry.scaled-construction",
+   "role": "check",
+   "type": "choice",
+   "prompt": "AB is divided in the ratio 3 : 2 by marking 5 equal steps on a ray AX, joining A₅B, and drawing through A₃ a parallel to A₅B meeting AB at C. Why is AC : CB = 3 : 2?",
+   "answer": "D",
+   "solution": "A₃C ∥ A₅B, so by the Basic Proportionality Theorem AC/CB = AA₃/A₃A₅ = 3 steps / 2 steps.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Because C is 3 cm from A",
+    "Because the ray AX is 5 cm long",
+    "Because the angle at A is acute",
+    "Because A₃C ∥ A₅B, so AC/CB = AA₃/A₃A₅ = 3/2 (Basic Proportionality Theorem)"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "The construction works for any length of AB; the ratio comes from the parallel lines, not a measurement."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "The steps can be any equal size; what matters is the ratio of 3 steps to 2 steps."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Any angle works; the acute angle just keeps the figure easy to draw."
+    }
+   ]
+  },
+  {
+   "id": "wm-scl-g2",
+   "competency": "MATH.geometry.scaled-construction",
+   "skill": "MATH.geometry.scaled-construction",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "To divide PQ in the ratio 2 : 5, how many equal steps do you mark on the ray PX, and which mark do you join to Q?",
+   "answer": "C",
+   "solution": "A ratio 2 : 5 has 2 + 5 = 7 parts: mark 7 steps and join P₇ to Q; the parallel through P₂ cuts PQ in the ratio 2 : 5.",
+   "difficulty": 1,
+   "hint": "How many equal parts does the whole segment have?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "5 steps; join P₅ to Q",
+    "2 steps; join P₂ to Q",
+    "7 steps; join P₇ to Q",
+    "7 steps; join P₂ to Q"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "The whole segment has 2 + 5 = 7 parts, so you need 7 steps."
+    },
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "2 steps only show one part of the ratio; the whole is 2 + 5 = 7 parts."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Join the LAST mark, P₇, to Q; then draw the parallel through P₂."
+    }
+   ]
+  },
+  {
+   "id": "wm-scl-p1",
+   "competency": "MATH.geometry.scaled-construction",
+   "skill": "MATH.geometry.scaled-construction",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "A 12 cm segment is divided in the ratio 1 : 3. How long is the shorter part, in cm?",
+   "answer": "3",
+   "solution": "1 : 3 means 4 equal parts of 12 ÷ 4 = 3 cm. The shorter part is 1 part = 3 cm.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "4",
+     "hypothesis": "procedural",
+     "says": "12 ÷ 3 = 4 forgets the 1 part: the ratio 1 : 3 has 1 + 3 = 4 parts."
+    },
+    {
+     "when": "9",
+     "hypothesis": "procedural",
+     "says": "9 cm is the longer part (3 parts)."
+    }
+   ]
+  },
+  {
+   "id": "wm-scl-p2",
+   "competency": "MATH.geometry.scaled-construction",
+   "skill": "MATH.geometry.scaled-construction",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "A triangle is constructed similar to a given triangle with scale factor 4/7. How does it compare with the given triangle?",
+   "answer": "A",
+   "solution": "4/7 is less than 1, so every side is shorter: the new triangle is smaller, with the same angles.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Smaller, with the same angles",
+    "Larger, with the same angles",
+    "The same size",
+    "Smaller, with smaller angles"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "A scale factor less than 1 shrinks lengths."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Only a scale factor of 1 keeps the same size."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "Similar triangles always have equal angles; only the sides change."
+    }
+   ]
+  },
+  {
+   "id": "wm-scl-r1",
+   "competency": "MATH.geometry.scaled-construction",
+   "skill": "MATH.geometry.scaled-construction",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "In constructing △A′BC′ similar to △ABC, after finding C′ on BC you draw C′A′ parallel to CA. Why parallel?",
+   "answer": "B",
+   "solution": "Parallel lines make equal corresponding angles: ∠BC′A′ = ∠BCA, and ∠B is shared, so the triangles are similar (AA).",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "So that A′C′ = AC",
+    "Parallel lines give equal corresponding angles, so the triangles are similar (AA)",
+    "So that A′ is the midpoint of BA",
+    "So that ∠A′ is a right angle"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "A′C′ is not equal to AC; it is scaled by the same factor as the other sides."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "A′ is the midpoint only for a scale factor of 1/2."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "The angles stay the same as in △ABC; no right angle is made."
+    }
+   ]
+  },
+  {
+   "id": "wm-quad-d1",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "skill": "MATH.geometry.construction-quadrilaterals",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "In general, how many independent measurements (sides, diagonals and angles) are needed to construct one particular quadrilateral?",
+   "answer": "5",
+   "solution": "A diagonal splits the quadrilateral into two triangles. The first needs 3 measurements; the second shares the diagonal and needs 2 more: 3 + 2 = 5.",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "4",
+     "hypothesis": "conceptual",
+     "says": "Four sides alone let the shape flex (a square can be pushed into a rhombus). One more measurement, such as a diagonal, fixes it."
+    },
+    {
+     "when": "6",
+     "hypothesis": "conceptual",
+     "says": "The two triangles share the diagonal, so it is counted only once: 3 + 2 = 5."
+    }
+   ]
+  },
+  {
+   "id": "wm-quad-d2",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "skill": "MATH.geometry.construction-quadrilaterals",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "You are constructing PQRS from its four sides and the diagonal PR. You have constructed △PQR. Where must S go?",
+   "answer": "A",
+   "solution": "S is found by arcs of PS from P and RS from R, on the opposite side of PR from Q, so that PR is a diagonal inside the quadrilateral.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "On the opposite side of PR from Q",
+    "On the same side of PR as Q",
+    "On the line PR",
+    "Anywhere 5 cm from Q"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "On the same side as Q, PR would no longer be a diagonal: the shape folds over itself."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "S is a corner, so it cannot lie on the diagonal PR."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "S is fixed by its distances from P and R, not from Q."
+    }
+   ]
+  },
+  {
+   "id": "wm-quad-g1",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "skill": "MATH.geometry.construction-quadrilaterals",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "Which set of measurements is enough to construct exactly one quadrilateral ABCD?",
+   "answer": "D",
+   "solution": "Three sides and both diagonals give two triangles: ABC from AB, BC, AC, and then D from CD and BD, which are 5 independent measurements.",
+   "difficulty": 1,
+   "hint": "Can you split the shape into two triangles that are each fixed?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "AB, BC, CD and DA only",
+    "AB, BC and the diagonal AC only",
+    "The four angles only",
+    "AB, BC, CD and the diagonals AC and BD"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Four sides alone let the shape flex; you need a diagonal or an angle as well."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "These fix triangle ABC, but nothing yet fixes D."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Angles fix no lengths at all: the shape can be any size."
+    }
+   ]
+  },
+  {
+   "id": "wm-quad-c1",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "skill": "MATH.geometry.construction-quadrilaterals",
+   "role": "check",
+   "type": "choice",
+   "prompt": "A rhombus has four equal sides. Which information is enough to construct a particular rhombus?",
+   "answer": "C",
+   "solution": "Side 5 cm and diagonal 6 cm give two triangles with sides 5, 5, 6 sharing the diagonal: the rhombus is fixed. (A rhombus needs only 2 measurements because its sides are equal.)",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "The side only",
+    "One angle only",
+    "The side, 5 cm, and one diagonal, 6 cm",
+    "Two neighbouring angles, 70° and 110°"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "With the side only, the rhombus can be squashed into many shapes."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "An angle fixes the shape but not the size."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "Neighbouring angles of a rhombus always add to 180°, so this is really one angle, and no length."
+    }
+   ]
+  },
+  {
+   "id": "wm-quad-g2",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "skill": "MATH.geometry.construction-quadrilaterals",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "Trapezium ABCD has AB ∥ DC. You have drawn AB and BC with ∠B = 60°. How do you make the line through C parallel to AB?",
+   "answer": "B",
+   "solution": "Co-interior angles between parallel lines add to 180°, so make ∠BCY = 180° − 60° = 120°, on the same side of BC as A.",
+   "difficulty": 1,
+   "hint": "∠B and ∠C are between the same two parallel lines, on the same side of BC.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Make ∠BCY = 60° at C",
+    "Make ∠BCY = 120° at C, on the same side of BC as A",
+    "Draw an arc of radius AB from C",
+    "Construct the perpendicular to BC at C"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "∠B and ∠C are co-interior angles: they add to 180°, so ∠C = 120°, not 60°."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "An arc fixes a distance, not a direction."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "A perpendicular to BC is parallel to AB only if ∠B is 90°."
+    }
+   ]
+  },
+  {
+   "id": "wm-quad-p1",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "skill": "MATH.geometry.construction-quadrilaterals",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Which of these is NOT enough to construct one particular quadrilateral?",
+   "answer": "C",
+   "solution": "Four sides alone let the quadrilateral flex. Each of the other sets has 5 independent measurements.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Four sides and one diagonal",
+    "Three sides and both diagonals",
+    "Four sides only",
+    "Three sides and the two angles between them"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Four sides and a diagonal give two fixed triangles: that is enough."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "Three sides and two diagonals give two fixed triangles: that is enough."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "Three sides and the two included angles fix the shape step by step: that is enough."
+    }
+   ]
+  },
+  {
+   "id": "wm-quad-p2",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "skill": "MATH.geometry.construction-quadrilaterals",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "In trapezium ABCD with AB ∥ DC, ∠B = 65°. What is ∠C, in degrees?",
+   "answer": "115",
+   "solution": "∠B and ∠C are co-interior angles between the parallel lines AB and DC, so they add to 180°: 180 − 65 = 115.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "65",
+     "hypothesis": "conceptual",
+     "says": "∠B and ∠C are co-interior angles: they add to 180°, they are not equal."
+    },
+    {
+     "when": "25",
+     "hypothesis": "procedural",
+     "says": "Co-interior angles add to 180°, not 90°."
+    }
+   ]
+  },
+  {
+   "id": "wm-quad-r1",
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "skill": "MATH.geometry.construction-quadrilaterals",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "Which is enough to construct a particular rectangle?",
+   "answer": "A",
+   "solution": "A rectangle has right angles and equal opposite sides, so its length and breadth fix it.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Its length and its breadth",
+    "One diagonal only",
+    "Its perimeter only",
+    "One side only"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "Many rectangles have the same diagonal (long and thin, or nearly square)."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Many rectangles have the same perimeter, e.g. 2 by 8 and 4 by 6."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "One side leaves the other side free."
+    }
+   ]
+  },
+  {
+   "id": "wm-irr-d1",
+   "competency": "MATH.number.irrationality-proofs",
+   "skill": "MATH.number.irrationality-proofs",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "To prove a statement by contradiction, what do you do first?",
+   "answer": "C",
+   "solution": "You assume the statement is false, then reason correctly until you reach something impossible. So the assumption was wrong, and the statement is true.",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Check several examples",
+    "Assume the statement is true",
+    "Assume the statement is false",
+    "Square both sides"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Examples do not prove a statement; a proof by contradiction starts from the opposite of what you want."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "Assuming what you want to prove gives nothing to contradict; you assume the opposite."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Squaring may come later in a particular proof; the first step is to assume the opposite."
+    }
+   ]
+  },
+  {
+   "id": "wm-irr-d2",
+   "competency": "MATH.number.irrationality-proofs",
+   "skill": "MATH.number.irrationality-proofs",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Which number is rational?",
+   "answer": "B",
+   "solution": "√(9/4) = 3/2, a ratio of integers. √12 = 2√3, 2 + √5 and π are irrational.",
+   "difficulty": 1,
+   "probe": "recall",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "√12",
+    "√(9/4)",
+    "2 + √5",
+    "π"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "recall",
+     "says": "12 is not a perfect square, so √12 = 2√3 is irrational."
+    },
+    {
+     "when": "C",
+     "hypothesis": "recall",
+     "says": "A rational number plus an irrational number is irrational."
+    },
+    {
+     "when": "D",
+     "hypothesis": "recall",
+     "says": "π is irrational; 22/7 and 3.14 are only approximations."
+    }
+   ]
+  },
+  {
+   "id": "wm-irr-g1",
+   "competency": "MATH.number.irrationality-proofs",
+   "skill": "MATH.number.irrationality-proofs",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "In the proof that √3 is irrational, we assume √3 = a/b where a and b have no common factor other than 1. We then show 3 divides a and 3 divides b. Why is this a contradiction?",
+   "answer": "A",
+   "solution": "We chose a and b with no common factor other than 1, but now 3 is a common factor. The assumption cannot be true.",
+   "difficulty": 1,
+   "hint": "Look back at what was assumed about a and b at the start.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "a and b were chosen with no common factor other than 1",
+    "3 is a prime number",
+    "√3 is not a whole number",
+    "a and b must both be even"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "That 3 is prime is used earlier (to go from 3 | a² to 3 | a); the contradiction is with 'no common factor'."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "That √3 is not a whole number does not stop it being a fraction; the contradiction is about common factors."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Nothing says a and b are even; the common factor found is 3."
+    }
+   ]
+  },
+  {
+   "id": "wm-irr-c1",
+   "competency": "MATH.number.irrationality-proofs",
+   "skill": "MATH.number.irrationality-proofs",
+   "role": "check",
+   "type": "choice",
+   "prompt": "Which fact lets you go from '7 divides a²' to '7 divides a'?",
+   "answer": "D",
+   "solution": "If a prime p divides a², then p divides a: the prime factors of a² are exactly those of a (each appearing twice).",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Every square number is divisible by 7",
+    "7 is an odd number",
+    "a² = 7b²",
+    "If a prime divides a², then it divides a"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "recall",
+     "says": "Most squares (1, 4, 9, …) are not divisible by 7."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "Being odd is not the reason: 9 divides 36 = 6², but 9 does not divide 6. It works because 7 is prime."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "a² = 7b² tells you 7 divides a²; you still need a reason to get to 7 dividing a."
+    }
+   ]
+  },
+  {
+   "id": "wm-irr-g2",
+   "competency": "MATH.number.irrationality-proofs",
+   "skill": "MATH.number.irrationality-proofs",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "To prove that 7 + 4√3 is irrational (given that √3 is irrational), you assume 7 + 4√3 = r, a rational number. What is the next line?",
+   "answer": "C",
+   "solution": "Rearrange to isolate √3: 4√3 = r − 7, so √3 = (r − 7)/4. Then argue that (r − 7)/4 is rational.",
+   "difficulty": 1,
+   "hint": "Get √3 on its own on one side.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "√3 = r − 7/4",
+    "√3 = (r + 7)/4",
+    "√3 = (r − 7)/4",
+    "r² = 49 + 48"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "Divide all of r − 7 by 4: √3 = (r − 7)/4."
+    },
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "Subtract 7 from both sides: 4√3 = r − 7."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Squaring is not needed and is wrong here; (7 + 4√3)² is not 49 + 48. Isolate √3 instead."
+    }
+   ]
+  },
+  {
+   "id": "wm-irr-p1",
+   "competency": "MATH.number.irrationality-proofs",
+   "skill": "MATH.number.irrationality-proofs",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Suppose √6 = a/b in lowest terms. This gives a² = 6b². Which conclusion follows correctly next?",
+   "answer": "A",
+   "solution": "6b² is even, so a² is even; since 2 is prime, 2 divides a. Then a = 2c gives 4c² = 6b², so 2c² = 3b², and b² is even, so b is even: a contradiction.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "2 divides a², so 2 divides a",
+    "6 divides b",
+    "a = 6b",
+    "b must be odd"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "a² = 6b² tells you about a first: 2 (and 3) divide a², so they divide a."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "a² = 6b² does not mean a = 6b; take care with the squares."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "Nothing yet tells you b is odd; the argument goes through a first."
+    }
+   ]
+  },
+  {
+   "id": "wm-irr-p2",
+   "competency": "MATH.number.irrationality-proofs",
+   "skill": "MATH.number.irrationality-proofs",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Which number is irrational?",
+   "answer": "D",
+   "solution": "3√2 − 1: if it were rational r, then √2 = (r + 1)/3 would be rational, which is false. The others are ratios of integers.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "0.75",
+    "√49",
+    "22/7",
+    "3√2 − 1"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "recall",
+     "says": "0.75 = 3/4, a ratio of integers."
+    },
+    {
+     "when": "B",
+     "hypothesis": "recall",
+     "says": "√49 = 7, a whole number."
+    },
+    {
+     "when": "C",
+     "hypothesis": "recall",
+     "says": "22/7 is a ratio of integers; it is only an approximation to π."
+    }
+   ]
+  },
+  {
+   "id": "wm-irr-r1",
+   "competency": "MATH.number.irrationality-proofs",
+   "skill": "MATH.number.irrationality-proofs",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "In the proof that √5 is irrational, which line contains the contradiction?",
+   "answer": "B",
+   "solution": "We assumed a/b in lowest terms; finding that 5 divides both a and b contradicts that.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "√5 = a/b",
+    "5 divides both a and b, but a/b was in lowest terms",
+    "a² = 5b²",
+    "a = 5c"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "This is the assumption, not the contradiction."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "This is a correct step from the assumption; nothing impossible yet."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "This follows from 5 dividing a; the contradiction comes when b is also a multiple of 5."
+    }
+   ]
+  },
+  {
+   "id": "wm-root-d1",
+   "competency": "MATH.number.root-length-construction",
+   "skill": "MATH.number.root-length-construction",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "A right-angled triangle has legs of 1 unit and 3 units. What is the SQUARE of the length of its hypotenuse?",
+   "answer": "10",
+   "solution": "By Pythagoras, hypotenuse² = 1² + 3² = 1 + 9 = 10, so the hypotenuse is √10.",
+   "difficulty": 1,
+   "probe": "recall",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "4",
+     "hypothesis": "recall",
+     "says": "Pythagoras adds the SQUARES of the legs: 1² + 3² = 10, not 1 + 3."
+    },
+    {
+     "when": "16",
+     "hypothesis": "recall",
+     "says": "16 = (1 + 3)²; Pythagoras squares each leg first: 1 + 9 = 10."
+    }
+   ]
+  },
+  {
+   "id": "wm-root-d2",
+   "competency": "MATH.number.root-length-construction",
+   "skill": "MATH.number.root-length-construction",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "You have constructed a segment OB of length √5, with O at 0 on the number line. How do you mark √5 on the number line?",
+   "answer": "D",
+   "solution": "An arc centred at O with radius OB meets the number line at a point √5 from 0, because every point on the arc is the same distance from O.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Draw an arc centred at the point 2 through B",
+    "Measure OB with a ruler and mark 2.2",
+    "Drop a perpendicular from B to the number line",
+    "Draw an arc centred at O with radius OB to meet the number line"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "The arc must be centred at 0, so that the distance from 0 stays √5."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "√5 is not exactly 2.2; the construction gives the exact length."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "The perpendicular from B lands back at 2, not at √5."
+    }
+   ]
+  },
+  {
+   "id": "wm-root-g1",
+   "competency": "MATH.number.root-length-construction",
+   "skill": "MATH.number.root-length-construction",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "To construct √13 as the hypotenuse of a right triangle with whole-number legs, one leg is 2. What is the other leg?",
+   "answer": "3",
+   "solution": "We need 2² + k² = 13, so k² = 9 and k = 3.",
+   "difficulty": 1,
+   "hint": "2² + (other leg)² = 13.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "11",
+     "hypothesis": "recall",
+     "says": "Square the legs: 2² + k² = 13, so k² = 9."
+    },
+    {
+     "when": "9",
+     "hypothesis": "procedural",
+     "says": "k² = 9, so k = 3."
+    }
+   ]
+  },
+  {
+   "id": "wm-root-c1",
+   "competency": "MATH.number.root-length-construction",
+   "skill": "MATH.number.root-length-construction",
+   "role": "check",
+   "type": "choice",
+   "prompt": "Which pair of legs gives a hypotenuse of √20?",
+   "answer": "B",
+   "solution": "4² + 2² = 16 + 4 = 20, so the hypotenuse is √20.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "10 and 10",
+    "4 and 2",
+    "5 and 4",
+    "4 and 4"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "recall",
+     "says": "10 + 10 = 20 adds the legs; Pythagoras adds their squares: 100 + 100 = 200."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "5² + 4² = 41, so that hypotenuse is √41."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "4² + 4² = 32, so that hypotenuse is √32."
+    }
+   ]
+  },
+  {
+   "id": "wm-root-g2",
+   "competency": "MATH.number.root-length-construction",
+   "skill": "MATH.number.root-length-construction",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "In the square-root spiral you have just drawn a hypotenuse of length √7. You draw 1 unit perpendicular to it at its end and join back to O. What is the square of the new length?",
+   "answer": "8",
+   "solution": "Pythagoras: (√7)² + 1² = 7 + 1 = 8. The new length is √8.",
+   "difficulty": 1,
+   "hint": "(√7)² + 1² = ?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "50",
+     "hypothesis": "recall",
+     "says": "(√7)² is 7, not 49."
+    },
+    {
+     "when": "7",
+     "hypothesis": "procedural",
+     "says": "Adding the 1-unit leg adds 1 to the square: 7 + 1 = 8."
+    }
+   ]
+  },
+  {
+   "id": "wm-root-p1",
+   "competency": "MATH.number.root-length-construction",
+   "skill": "MATH.number.root-length-construction",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "On a number line, a perpendicular of 1 unit is drawn at the point 2, ending at B. An arc centred at 0 through B cuts the number line at P. What number is at P?",
+   "answer": "C",
+   "solution": "OB² = 2² + 1² = 5, so OB = √5, and the arc keeps that distance: P = √5.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "3",
+    "√3",
+    "√5",
+    "5"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "recall",
+     "says": "Adding the legs (2 + 1) is not Pythagoras: OB² = 4 + 1 = 5."
+    },
+    {
+     "when": "B",
+     "hypothesis": "recall",
+     "says": "Square each leg: 2² + 1² = 5, not 2 + 1 = 3."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "5 is OB², not OB. The length is √5."
+    }
+   ]
+  },
+  {
+   "id": "wm-root-p2",
+   "competency": "MATH.number.root-length-construction",
+   "skill": "MATH.number.root-length-construction",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "To construct √17 as the hypotenuse of a right triangle with legs 4 and k, where k is a whole number, what is k?",
+   "answer": "1",
+   "solution": "4² + k² = 17, so k² = 1 and k = 1.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "13",
+     "hypothesis": "recall",
+     "says": "Square the leg 4: 16 + k² = 17, so k² = 1."
+    }
+   ]
+  },
+  {
+   "id": "wm-root-r1",
+   "competency": "MATH.number.root-length-construction",
+   "skill": "MATH.number.root-length-construction",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "Why is the n-th hypotenuse of the square-root spiral of length √n?",
+   "answer": "A",
+   "solution": "Each new triangle has the previous hypotenuse and a 1-unit leg at right angles, so by Pythagoras its hypotenuse squared is one more than before: 1, 2, 3, …, n.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Each step adds 1 to the square of the length (Pythagoras with a 1-unit leg)",
+    "Each step adds 1 to the length",
+    "Each triangle is half the size of the next",
+    "The angles at O are all 45°"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "The lengths go 1, √2, √3, 2, …; it is the SQUARES that go up by 1."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "The triangles grow slowly; their sizes are not doubling."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "Only the first angle at O is 45°; the angles get smaller."
+    }
+   ]
+  },
+  {
+   "id": "wm-ind-d1",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "skill": "MATH.reasoning.mathematical-induction",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Which two things must a proof by mathematical induction show?",
+   "answer": "A",
+   "solution": "P(1) is true (the base case), and for every k ≥ 1, if P(k) is true then P(k + 1) is true (the inductive step). Together they reach every n.",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "P(1) is true, and P(k) ⇒ P(k + 1) for every k ≥ 1",
+    "P(1), P(2) and P(3) are true",
+    "P(k) is true for some large k",
+    "P(k + 1) ⇒ P(k) for every k"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "Checking cases is not a proof: the step from k to k + 1 is what reaches every n."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "One large case says nothing about the others."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "That goes backwards; the chain must go forwards from P(1)."
+    }
+   ]
+  },
+  {
+   "id": "wm-ind-d2",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "skill": "MATH.reasoning.mathematical-induction",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "You want to prove 2ⁿ > n + 4 by induction for all integers n from some starting value onwards. What is the smallest positive integer n for which it is true, so the base case can start there?",
+   "answer": "3",
+   "solution": "n = 1: 2 > 5 false; n = 2: 4 > 6 false; n = 3: 8 > 7 true. So the base case is n = 3.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "1",
+     "hypothesis": "procedural",
+     "says": "At n = 1, 2¹ = 2 is not more than 1 + 4 = 5. Check the base case before using it."
+    },
+    {
+     "when": "2",
+     "hypothesis": "procedural",
+     "says": "At n = 2, 2² = 4 is not more than 6."
+    }
+   ]
+  },
+  {
+   "id": "wm-ind-g1",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "skill": "MATH.reasoning.mathematical-induction",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "Someone shows correctly that if k² + k is odd then (k + 1)² + (k + 1) is odd. Is n² + n odd for every positive integer n?",
+   "answer": "C",
+   "solution": "No. The base case fails: 1² + 1 = 2 is even. Without a true starting case, the step never gets going. (In fact n² + n = n(n + 1) is always even.)",
+   "difficulty": 1,
+   "hint": "Check n = 1.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Yes, the inductive step proves it",
+    "Yes, but only for large n",
+    "No: the base case 1² + 1 = 2 is even, so the chain never starts",
+    "Only for odd n"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "The step alone proves nothing; it needs a true first case."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "With no true case to start from, the step gives no true cases at all."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Try n = 1: 1 + 1 = 2 is even."
+    }
+   ]
+  },
+  {
+   "id": "wm-ind-c1",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "skill": "MATH.reasoning.mathematical-induction",
+   "role": "check",
+   "type": "choice",
+   "prompt": "P(n): 4ⁿ − 1 is divisible by 3. Which is P(k + 1)?",
+   "answer": "B",
+   "solution": "Replace n by k + 1 everywhere: 4ᵏ⁺¹ − 1 is divisible by 3.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "4ᵏ − 1 + 1 is divisible by 3",
+    "4ᵏ⁺¹ − 1 is divisible by 3",
+    "4ᵏ + 1 is divisible by 3",
+    "4ᵏ − 1 is divisible by 3 + 1"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "Replace n by k + 1 inside the power: 4ᵏ⁺¹ − 1."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "Only n changes; the '− 1' stays: 4ᵏ⁺¹ − 1."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Only n changes; the divisor stays 3."
+    }
+   ]
+  },
+  {
+   "id": "wm-ind-g2",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "skill": "MATH.reasoning.mathematical-induction",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "Assume 1 + 2 + … + k = k(k + 1)/2. What does the left-hand side for n = k + 1 equal?",
+   "answer": "D",
+   "solution": "1 + 2 + … + k + (k + 1) = [1 + 2 + … + k] + (k + 1) = k(k + 1)/2 + (k + 1), by the hypothesis.",
+   "difficulty": 1,
+   "hint": "The sum up to k + 1 is the sum up to k, plus the next term.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "k(k + 1)/2 + k",
+    "(k + 1)(k + 2)/2 + (k + 1)",
+    "k(k + 1)/2 × (k + 1)",
+    "k(k + 1)/2 + (k + 1)"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "The new term for n = k + 1 is k + 1, not k."
+    },
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "(k + 1)(k + 2)/2 is the target, not the sum so far. Start from the hypothesis: k(k + 1)/2."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "The next term is added, not multiplied."
+    }
+   ]
+  },
+  {
+   "id": "wm-ind-p1",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "skill": "MATH.reasoning.mathematical-induction",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "In proving that 7ⁿ − 1 is divisible by 6, you write 7ᵏ⁺¹ − 1 = 7(7ᵏ − 1) + c. What is c?",
+   "answer": "6",
+   "solution": "7(7ᵏ − 1) = 7ᵏ⁺¹ − 7, so 7ᵏ⁺¹ − 1 = 7(7ᵏ − 1) + 6.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "-1",
+     "hypothesis": "procedural",
+     "says": "7(7ᵏ − 1) = 7ᵏ⁺¹ − 7; to get back to − 1 you add 6."
+    },
+    {
+     "when": "7",
+     "hypothesis": "procedural",
+     "says": "7ᵏ⁺¹ − 7 + 7 = 7ᵏ⁺¹, but we need 7ᵏ⁺¹ − 1: add 6."
+    }
+   ]
+  },
+  {
+   "id": "wm-ind-p2",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "skill": "MATH.reasoning.mathematical-induction",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "In an induction proof that 1 + 2 + … + n = n(n + 1)/2, which line uses the induction hypothesis?",
+   "answer": "A",
+   "solution": "Replacing 1 + 2 + … + k by k(k + 1)/2 uses the hypothesis P(k).",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "1 + 2 + … + k + (k + 1) = k(k + 1)/2 + (k + 1)",
+    "When n = 1: 1 = 1 × 2/2",
+    "(k + 1)(k + 2)/2 = (k + 1)((k + 1) + 1)/2",
+    "Hence it is true for all positive integers n"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "This is the base case; it uses no hypothesis."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "This rewrites the target; it does not use the hypothesis."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "This is the conclusion, using the principle of induction."
+    }
+   ]
+  },
+  {
+   "id": "wm-ind-r1",
+   "competency": "MATH.reasoning.mathematical-induction",
+   "skill": "MATH.reasoning.mathematical-induction",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "To prove a statement P(n) for every integer n ≥ 5 by induction, what is the base case?",
+   "answer": "C",
+   "solution": "The chain must start at the first n claimed: check P(5).",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "P(1)",
+    "P(0)",
+    "P(5)",
+    "P(6)"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "The statement is only claimed from n = 5; P(1) may even be false."
+    },
+    {
+     "when": "B",
+     "hypothesis": "procedural",
+     "says": "The statement is only claimed from n = 5."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "Starting at 6 would leave n = 5 unproved."
+    }
+   ]
+  },
+  {
+   "id": "wm-game-d1",
+   "competency": "MATH.reasoning.winning-strategies",
+   "skill": "MATH.reasoning.winning-strategies",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Players take 1 or 2 counters in turn; whoever takes the last counter wins. There are 3 counters left and it is your turn. What happens if your friend plays well?",
+   "answer": "D",
+   "solution": "If you take 1, two are left and your friend takes both. If you take 2, one is left and your friend takes it. Either way your friend wins: 3 is a losing number to face.",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "You take 2 and win",
+    "You take 1 and win",
+    "It is a draw",
+    "Whatever you take, your friend can take the last counter"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "After you take 2, one counter is left and your friend takes it."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "After you take 1, two are left and your friend takes both."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Someone must take the last counter, so there are no draws."
+    }
+   ]
+  },
+  {
+   "id": "wm-game-d2",
+   "competency": "MATH.reasoning.winning-strategies",
+   "skill": "MATH.reasoning.winning-strategies",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "Players take 1, 2 or 3 matches in turn; whoever takes the last match wins. There are 10 matches and it is your turn. How many should you take?",
+   "answer": "2",
+   "solution": "Leave a multiple of 4: 10 − 2 = 8. Then answer each move t with 4 − t, leaving 4 and then 0.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "3",
+     "hypothesis": "procedural",
+     "says": "Taking 3 leaves 7; your friend takes 3 and leaves you 4, a losing number."
+    },
+    {
+     "when": "1",
+     "hypothesis": "procedural",
+     "says": "Taking 1 leaves 9; your friend takes 1 and leaves you 8, a losing number."
+    }
+   ]
+  },
+  {
+   "id": "wm-game-g1",
+   "competency": "MATH.reasoning.winning-strategies",
+   "skill": "MATH.reasoning.winning-strategies",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "Players count up from 1, each saying 1 or 2 numbers in turn; whoever says 10 wins. The safe numbers to say are the ones that let you reach 10. Which safe number comes just before 10?",
+   "answer": "7",
+   "solution": "If you say 7, your friend says 8 (or 8, 9) and you say 9, 10 (or 10). Counting back in 3s from 10: 7, 4, 1.",
+   "difficulty": 1,
+   "hint": "Each round (your turn and your friend's) can always make 3. Count back 3 from 10.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "8",
+     "hypothesis": "conceptual",
+     "says": "If you say 8, your friend says 9, 10 and wins. You want a gap of 3 (1 + 2) before 10."
+    },
+    {
+     "when": "9",
+     "hypothesis": "conceptual",
+     "says": "If you say 9, your friend says 10."
+    }
+   ]
+  },
+  {
+   "id": "wm-game-c1",
+   "competency": "MATH.reasoning.winning-strategies",
+   "skill": "MATH.reasoning.winning-strategies",
+   "role": "check",
+   "type": "choice",
+   "prompt": "Players count up from 1, saying 1, 2 or 3 numbers in turn; whoever says 15 wins. Which list shows all the safe numbers to say?",
+   "answer": "B",
+   "solution": "Count back in 4s from 15: 15, 11, 7, 3. Say 3 first, then always make the round add up to 4.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "1, 5, 9, 13",
+    "3, 7, 11, 15",
+    "4, 8, 12",
+    "5, 10, 15"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "1, 5, 9, 13 would be right for a target of 21 (or 17); count back in 4s from 15."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "Multiples of 4 do not include 15; count back in 4s from the target 15."
+    },
+    {
+     "when": "D",
+     "hypothesis": "procedural",
+     "says": "The step is 1 + 3 = 4 (the most plus the least), not 5."
+    }
+   ]
+  },
+  {
+   "id": "wm-game-g2",
+   "competency": "MATH.reasoning.winning-strategies",
+   "skill": "MATH.reasoning.winning-strategies",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "Players take 1, 2, 3 or 4 counters in turn; whoever takes the last counter wins. You are keeping each round to a total of 5. Your friend takes 3. How many do you take?",
+   "answer": "2",
+   "solution": "3 + 2 = 5, so the round removes 5 counters and you keep leaving a multiple of 5.",
+   "difficulty": 1,
+   "hint": "Your number + your friend's number = 5.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "3",
+     "hypothesis": "procedural",
+     "says": "Copying your friend makes 6 in the round; you want 5 − 3 = 2."
+    },
+    {
+     "when": "4",
+     "hypothesis": "procedural",
+     "says": "3 + 4 = 7; the round should total 5."
+    }
+   ]
+  },
+  {
+   "id": "wm-game-p1",
+   "competency": "MATH.reasoning.winning-strategies",
+   "skill": "MATH.reasoning.winning-strategies",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "A pile has 23 counters. Players take 1, 2 or 3 in turn; whoever takes the last counter wins. You go first. How many do you take?",
+   "answer": "3",
+   "solution": "Leave a multiple of 4: 23 − 3 = 20. Then answer each move t with 4 − t.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "1",
+     "hypothesis": "procedural",
+     "says": "23 − 1 = 22 is not a multiple of 4; your friend can take 2 and leave you 20."
+    },
+    {
+     "when": "2",
+     "hypothesis": "procedural",
+     "says": "23 − 2 = 21 is not a multiple of 4; your friend can take 1 and leave you 20."
+    }
+   ]
+  },
+  {
+   "id": "wm-game-p2",
+   "competency": "MATH.reasoning.winning-strategies",
+   "skill": "MATH.reasoning.winning-strategies",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Players count up from 1, saying 1, 2 or 3 numbers in turn; whoever says 30 wins. What should you do?",
+   "answer": "A",
+   "solution": "Safe numbers: 30, 26, 22, …, 6, 2 (count back in 4s). Go first and say '1, 2'; then make each round add up to 4.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Go first and say '1, 2'",
+    "Go second",
+    "Go first and say '1'",
+    "It does not matter"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "The first player can reach the safe number 2 straight away, so going first wins."
+    },
+    {
+     "when": "C",
+     "hypothesis": "procedural",
+     "says": "Stopping at 1 lets your friend say 2, a safe number."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "With best play, one choice always wins; find the safe numbers by counting back in 4s."
+    }
+   ]
+  },
+  {
+   "id": "wm-game-r1",
+   "competency": "MATH.reasoning.winning-strategies",
+   "skill": "MATH.reasoning.winning-strategies",
+   "role": "retention",
+   "type": "integer",
+   "prompt": "A pile has 26 sticks. Players take 1 to 5 sticks in turn; whoever takes the last stick wins. You go first. How many do you take?",
+   "answer": "2",
+   "solution": "Each round can always make 6 (1 + 5), so leave a multiple of 6: 26 − 2 = 24.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "1",
+     "hypothesis": "procedural",
+     "says": "26 − 1 = 25 is not a multiple of 6; leave 24."
+    },
+    {
+     "when": "5",
+     "hypothesis": "procedural",
+     "says": "26 − 5 = 21 is not a multiple of 6; leave 24."
+    }
+   ]
+  },
+  {
+   "id": "wm-disp-d1",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "skill": "MATH.statistics.evaluate-data-displays",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Which data set suits a pie chart best?",
+   "answer": "B",
+   "solution": "A pie chart shows how one whole is split into parts. How 40 students travel splits one group of 40 into categories that add up to the whole.",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "The temperature at every hour of one day",
+    "How 40 students travel to school: walk, bus, cycle, car",
+    "The heights of five friends",
+    "A student's marks in each of four terms"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Temperatures over time do not add up to a whole; a line graph shows change over time."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Heights are not parts of one whole; a bar graph compares them."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "Marks over terms show change over time, not parts of a whole."
+    }
+   ]
+  },
+  {
+   "id": "wm-disp-d2",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "skill": "MATH.statistics.evaluate-data-displays",
+   "role": "diagnostic",
+   "type": "integer",
+   "prompt": "In a pictograph, one apple picture stands for 4 apples. Ravi's row has 3 whole pictures and one half picture. How many apples does his row show?",
+   "answer": "14",
+   "solution": "3 × 4 = 12, and half a picture is 2 more: 14.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "7",
+     "hypothesis": "procedural",
+     "says": "Each whole picture is 4 apples, not 2: 3 × 4 + 2 = 14."
+    },
+    {
+     "when": "16",
+     "hypothesis": "procedural",
+     "says": "Half a picture is half of 4, which is 2, not 4."
+    },
+    {
+     "when": "4",
+     "hypothesis": "procedural",
+     "says": "Count the pictures and multiply by 4: 3½ × 4 = 14."
+    }
+   ]
+  },
+  {
+   "id": "wm-disp-g1",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "skill": "MATH.statistics.evaluate-data-displays",
+   "role": "guided",
+   "type": "integer",
+   "prompt": "A bar graph's vertical axis starts at 50. Bar A shows 55 and bar B shows 70. How many times as tall as bar A does bar B LOOK?",
+   "answer": "4",
+   "solution": "The bars start at 50, so bar A is 5 units tall and bar B is 20 units tall: B looks 4 times as tall, though 70 is not even 1.5 times 55.",
+   "difficulty": 1,
+   "hint": "How tall is each bar above the 50 line?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "1",
+     "hypothesis": "conceptual",
+     "says": "On the page, bar A is only 55 − 50 = 5 units tall, and bar B is 70 − 50 = 20 units."
+    },
+    {
+     "when": "15",
+     "hypothesis": "procedural",
+     "says": "15 is the difference 70 − 55; the question asks how many times as tall: 20 ÷ 5."
+    }
+   ]
+  },
+  {
+   "id": "wm-disp-c1",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "skill": "MATH.statistics.evaluate-data-displays",
+   "role": "check",
+   "type": "choice",
+   "prompt": "Which display is most likely to mislead?",
+   "answer": "C",
+   "solution": "A bar graph whose axis starts at 80 makes small differences look huge: 82 and 88 become bars of 2 and 8 units.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "A bar graph from 0 with labelled axes and a title",
+    "A pie chart whose sectors add to 100% and are labelled",
+    "A bar graph of 82 and 88 whose axis starts at 80, with no break mark",
+    "A line graph of rainfall with equal intervals between months"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Starting at 0 with labels and a title is what a fair bar graph does."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "Labelled sectors that add to 100% are a fair pie chart."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "Equal intervals on the time axis are fair."
+    }
+   ]
+  },
+  {
+   "id": "wm-disp-g2",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "skill": "MATH.statistics.evaluate-data-displays",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "You want to show how the rainfall in a city rises and falls through the 12 months of a year. Which display fits best?",
+   "answer": "A",
+   "solution": "A line graph shows how one quantity changes over time.",
+   "difficulty": 1,
+   "hint": "The question is about change over time.",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "A line graph",
+    "A pie chart",
+    "A pictograph of one month",
+    "A single number: the total rainfall"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "A pie chart shows parts of a whole, not how something changes over time."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "One month cannot show the rise and fall over the year."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "A total hides how the rainfall changes from month to month."
+    }
+   ]
+  },
+  {
+   "id": "wm-disp-p1",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "skill": "MATH.statistics.evaluate-data-displays",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "A pie chart has three sectors labelled 50%, 30% and 25%. What is wrong?",
+   "answer": "D",
+   "solution": "The sectors are parts of one whole, so they must add to 100%. Here they add to 105%.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Nothing is wrong",
+    "A pie chart needs at least four sectors",
+    "The largest sector should be on top",
+    "The percentages add to 105%, but the parts of a whole must add to 100%"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "procedural",
+     "says": "Add them up: 50 + 30 + 25 = 105."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "A pie chart can have any number of sectors."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Where a sector sits does not matter; the sizes must add to the whole."
+    }
+   ]
+  },
+  {
+   "id": "wm-disp-p2",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "skill": "MATH.statistics.evaluate-data-displays",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "In a pie chart of 60 students, 15 chose cricket. What angle, in degrees, should the cricket sector be?",
+   "answer": "90",
+   "solution": "15 out of 60 is 1/4 of the class, and 1/4 of 360° is 90°.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "15",
+     "hypothesis": "procedural",
+     "says": "15 is the number of students; the angle is 15/60 × 360°."
+    },
+    {
+     "when": "25",
+     "hypothesis": "procedural",
+     "says": "25 is the percentage; the angle is 25% of 360°, which is 90°."
+    }
+   ]
+  },
+  {
+   "id": "wm-disp-r1",
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "skill": "MATH.statistics.evaluate-data-displays",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "A pictograph shows village A's cow picture twice as tall AND twice as wide as village B's, to mean 'twice as many cows'. Why is this misleading?",
+   "answer": "B",
+   "solution": "Doubling the height and the width makes the area 4 times as big, so the picture looks like 4 times as many cows.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "The pictures should be in colour",
+    "The bigger picture has 4 times the area, so it looks like 4 times as many",
+    "Cows should not be used as pictures",
+    "The picture should be three times as big"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Colour does not change what the sizes say."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "Any picture works; the problem is the size."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "To show twice as many, use two pictures of the same size (or a bar twice as long)."
+    }
+   ]
+  },
+  {
+   "id": "wm-stq-d1",
+   "competency": "MATH.statistics.statistical-questions",
+   "skill": "MATH.statistics.statistical-questions",
+   "role": "diagnostic",
+   "type": "choice",
+   "prompt": "Which is a statistical question?",
+   "answer": "B",
+   "solution": "A statistical question is answered by collecting data that varies. The number of books read differs from student to student.",
+   "difficulty": 1,
+   "probe": "concept",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "How many pages does this book have?",
+    "How many books did each student in our class read this summer?",
+    "Is 17 a prime number?",
+    "In which year did India become independent?"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "This has one fixed answer you can find by looking; the data does not vary."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "This has one answer you can work out; no data is collected."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "This is one fact; no varying data is needed."
+    }
+   ]
+  },
+  {
+   "id": "wm-stq-d2",
+   "competency": "MATH.statistics.statistical-questions",
+   "skill": "MATH.statistics.statistical-questions",
+   "role": "diagnostic",
+   "type": "fraction",
+   "prompt": "In a survey of 25 students, 10 walk to school, 8 come by bus and 7 cycle. What fraction of the students walk? Give it in its simplest form.",
+   "answer": "2/5",
+   "solution": "10 out of 25 walk: 10/25 = 2/5.",
+   "difficulty": 1,
+   "probe": "procedure",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "10/15",
+     "hypothesis": "procedural",
+     "says": "Compare with all 25 students surveyed, not with the 15 who do not walk."
+    },
+    {
+     "when": "1/10",
+     "hypothesis": "procedural",
+     "says": "10 is the number who walk; the fraction is 10 out of 25."
+    }
+   ]
+  },
+  {
+   "id": "wm-stq-g1",
+   "competency": "MATH.statistics.statistical-questions",
+   "skill": "MATH.statistics.statistical-questions",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "Which question needs data that varies to answer it?",
+   "answer": "D",
+   "solution": "Students take different amounts of time to reach school, so you must collect data from many students.",
+   "difficulty": 1,
+   "hint": "Would different people give different answers?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "How far is my house from school?",
+    "What is the capital of Tamil Nadu?",
+    "How many students are in Class 7B?",
+    "How long does it take students in our class to get to school?"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "This is about one house: there is one answer."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "This is one fact, Chennai; no data varies."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "This is one count with one answer; the data does not vary."
+    }
+   ]
+  },
+  {
+   "id": "wm-stq-c1",
+   "competency": "MATH.statistics.statistical-questions",
+   "skill": "MATH.statistics.statistical-questions",
+   "role": "check",
+   "type": "choice",
+   "prompt": "Which of these is a statistical question?",
+   "answer": "A",
+   "solution": "Shoe sizes vary from student to student, so answering needs data from many students.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "What shoe sizes do the students in Class 8 wear?",
+    "What is my shoe size?",
+    "How many days are there in a leap year?",
+    "What is 15% of 200?"
+   ],
+   "misconceptions": [
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "This is about one person: one answer, no variation."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "This has one fixed answer: 366."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "This is a calculation with one answer: 30."
+    }
+   ]
+  },
+  {
+   "id": "wm-stq-g2",
+   "competency": "MATH.statistics.statistical-questions",
+   "skill": "MATH.statistics.statistical-questions",
+   "role": "guided",
+   "type": "choice",
+   "prompt": "In a survey of 30 students in Class 8B, 18 said they prefer mathematics to science. Which conclusion does the data support?",
+   "answer": "C",
+   "solution": "The data is about the 30 students asked in Class 8B, so the conclusion must stay within that group.",
+   "difficulty": 1,
+   "hint": "Who exactly was asked?",
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "All Indian students prefer mathematics",
+    "Mathematics is easier than science",
+    "Of the 30 students asked in Class 8B, more preferred mathematics (18 of 30)",
+    "60% of every class prefers mathematics"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "One class cannot speak for every student in India."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "The survey asked about preference, not difficulty."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "The data is from one class only; other classes may differ."
+    }
+   ]
+  },
+  {
+   "id": "wm-stq-p1",
+   "competency": "MATH.statistics.statistical-questions",
+   "skill": "MATH.statistics.statistical-questions",
+   "role": "practice",
+   "type": "choice",
+   "prompt": "Ravi wants to know: 'Do students in my school like the new canteen menu?' Which plan for collecting data is best?",
+   "answer": "B",
+   "solution": "Asking some students from every class gives a fairer picture of the whole school.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Ask only his friends",
+    "Ask a sample of students from every class",
+    "Ask the canteen owner",
+    "Ask one teacher"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "His friends may think alike; they do not represent the whole school."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "The owner is not a student and may not be neutral."
+    },
+    {
+     "when": "D",
+     "hypothesis": "conceptual",
+     "says": "One person cannot show what many students think."
+    }
+   ]
+  },
+  {
+   "id": "wm-stq-p2",
+   "competency": "MATH.statistics.statistical-questions",
+   "skill": "MATH.statistics.statistical-questions",
+   "role": "practice",
+   "type": "integer",
+   "prompt": "The hours of sleep of 5 students are 7, 8, 9, 9 and 12. What is the mean, in hours?",
+   "answer": "9",
+   "solution": "Total = 7 + 8 + 9 + 9 + 12 = 45; mean = 45 ÷ 5 = 9.",
+   "difficulty": 1,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "misconceptions": [
+    {
+     "when": "45",
+     "hypothesis": "procedural",
+     "says": "45 is the total; divide by the 5 students to get the mean."
+    },
+    {
+     "when": "5",
+     "hypothesis": "procedural",
+     "says": "5 is the range (12 − 7); the mean is the total divided by 5."
+    }
+   ]
+  },
+  {
+   "id": "wm-stq-r1",
+   "competency": "MATH.statistics.statistical-questions",
+   "skill": "MATH.statistics.statistical-questions",
+   "role": "retention",
+   "type": "choice",
+   "prompt": "Data from one school shows that students who eat breakfast tend to score higher marks. Which conclusion is careful?",
+   "answer": "D",
+   "solution": "The data shows the two things go together in this school. It does not show that one causes the other, and other schools may differ.",
+   "difficulty": 2,
+   "source": "Original, written for OpenPath",
+   "licence": "CC0",
+   "review": "provisional",
+   "options": [
+    "Eating breakfast makes every student score higher",
+    "Students who score high marks eat more breakfast",
+    "Breakfast has nothing to do with marks",
+    "In this school, students who eat breakfast tended to score higher; this does not prove that breakfast causes it"
+   ],
+   "misconceptions": [
+    {
+     "when": "A",
+     "hypothesis": "conceptual",
+     "says": "Going together is not the same as causing, and 'every' is more than the data shows."
+    },
+    {
+     "when": "B",
+     "hypothesis": "conceptual",
+     "says": "This turns the link round into a cause the data does not show."
+    },
+    {
+     "when": "C",
+     "hypothesis": "conceptual",
+     "says": "The data does show a link; we just cannot say what causes it."
+    }
+   ]
+  }
+ ],
+ "modules": [
+  {
+   "competency": "MATH.geometry.basic-constructions",
+   "title": "Construct simple figures with ruler and compasses",
+   "chapter": [
+    {
+     "title": "What the compasses keep the same",
+     "text": [
+      "Compasses keep one distance fixed. Every point on an arc is the same distance from its centre: that distance is the radius.",
+      "Almost every construction uses this one idea. If a point lies on two arcs, you know its distance from two centres at once."
+     ],
+     "math": [
+      "Arc with centre P and radius 4 cm: every point on it is 4 cm from P",
+      "Q on an arc centred at A and an arc centred at B (same radius r): QA = QB = r"
+     ],
+     "tip": "Keep the same compass opening when two arcs must be equal. If the compasses slip, the construction no longer works."
+    },
+    {
+     "title": "Worked: a perpendicular at a point P on a line l",
+     "text": [
+      "Each step says what you do and, after the dash, why."
+     ],
+     "math": [
+      "1. With centre P and any radius, draw arcs cutting l at A and B. — Same radius, so PA = PB.",
+      "2. With centres A and B and one radius larger than PA, draw arcs crossing at Q. — Same radius, so QA = QB.",
+      "3. Join PQ. — P and Q are both the same distance from A and B, so PQ crosses AB at its middle and at a right angle: PQ ⊥ l."
+     ],
+     "tip": "Use a radius bigger than PA in step 2. If it is too small, the arcs do not meet."
+    },
+    {
+     "title": "Worked: a square of side 5 cm",
+     "text": [
+      "A square needs four equal sides and a right angle. Four equal sides alone can lean over into a rhombus."
+     ],
+     "math": [
+      "1. Draw AB = 5 cm (set the compasses to 5 cm on the ruler). — The first side.",
+      "2. Construct the perpendicular to AB at A. — The right angle at A.",
+      "3. With centre A and radius 5 cm, mark D on the perpendicular. — AD = 5 cm.",
+      "4. With centres B and D and radius 5 cm, draw arcs meeting at C. — BC = DC = 5 cm.",
+      "5. Join BC and DC. — Four sides of 5 cm and a right angle at A: a square."
+     ],
+     "tip": "Measure lengths with the compasses from the ruler instead of judging them by eye."
+    }
+   ],
+   "diagnostics": [
+    "wm-bas-d1",
+    "wm-bas-d2"
+   ],
+   "strategies": [
+    {
+     "id": "why_it_works",
+     "title": "Why it works: equal distances",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A point on two arcs",
+       "text": [
+        "If Q is on an arc centred at A and on an arc of the same radius centred at B, then Q is the same distance from A and from B.",
+        "Points that are the same distance from A and B lie on one straight line: the line that cuts AB in half at a right angle. That is why two crossing pairs of arcs give a perpendicular."
+       ],
+       "math": [
+        "QA = QB and PA = PB  ⇒  line PQ ⊥ AB"
+       ]
+      }
+     ],
+     "guided": "wm-bas-g1",
+     "check": "wm-bas-c1"
+    },
+    {
+     "id": "step_by_step",
+     "title": "Step by step: perpendiculars, then parallels",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A parallel line from two perpendiculars",
+       "text": [
+        "To draw a line through P parallel to l, first drop a perpendicular from P to l, meeting it at M. Then construct a second perpendicular, to PM, at P."
+       ],
+       "math": [
+        "1. Arc centred at P cuts l at A and B; equal arcs from A and B cross at Q; PQ meets l at M. — PM ⊥ l.",
+        "2. At P, construct the perpendicular to PM. — New line ⊥ PM.",
+        "3. Both l and the new line are perpendicular to PM. — So they never meet: they are parallel."
+       ],
+       "tip": "Check the second perpendicular is at P, not at M."
+      }
+     ],
+     "guided": "wm-bas-g2",
+     "check": "wr:bas:parallel"
+    }
+   ],
+   "practice": [
+    "wm-bas-p1",
+    "wm-bas-p2",
+    "wr:con:basic60"
+   ],
+   "transfer": [
+    "wr:bas:altitude"
+   ],
+   "retention": [
+    "wr:bas:rectangle",
+    "wm-bas-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.geometry.construction-triangles",
+   "title": "Construct triangles from sufficient data",
+   "chapter": [
+    {
+     "title": "Enough information fixes a triangle",
+     "text": [
+      "A triangle is fixed (only its position can change) by any of these: three sides (SSS); two sides and the angle between them (SAS); two angles and the side between them (ASA); a right angle, the hypotenuse and one side (RHS).",
+      "Three angles alone are not enough: they fix the shape but not the size."
+     ],
+     "math": [
+      "SSS: 5 cm, 6 cm, 7 cm",
+      "SAS: 6 cm, 4 cm and the 60° angle between them",
+      "ASA: 40° and 75° at the ends of a 6 cm side",
+      "RHS: right angle, hypotenuse 10 cm, side 6 cm"
+     ],
+     "tip": "Two sides and an angle that is NOT between them can give two different triangles, or none."
+    },
+    {
+     "title": "Worked: triangle PQR with PQ = 6 cm, QR = 5 cm, PR = 4 cm",
+     "text": [
+      "Each step says what you do and, after the dash, why."
+     ],
+     "math": [
+      "0. Check: 4 + 5 = 9 > 6. — The two shorter sides beat the longest, so the triangle exists.",
+      "1. Draw PQ = 6 cm. — The base; the longest side is easiest.",
+      "2. Arc with centre P, radius 4 cm. — R is somewhere on it, because PR = 4 cm.",
+      "3. Arc with centre Q, radius 5 cm. — R is also on this arc, because QR = 5 cm.",
+      "4. The arcs cross at R; join PR and QR. — R is the only point (on this side) 4 cm from P and 5 cm from Q."
+     ],
+     "tip": "Match each radius to the right end: the 4 cm arc goes round P because PR = 4 cm."
+    },
+    {
+     "title": "When there is no triangle",
+     "text": [
+      "Try 3 cm, 4 cm and 8 cm. Draw the 8 cm base. Arcs of 3 cm and 4 cm from its ends cannot reach each other, because together they cover only 7 cm."
+     ],
+     "math": [
+      "3 + 4 = 7 < 8  ⇒  no triangle",
+      "Rule: each side is less than the sum of the other two."
+     ],
+     "tip": "Check before you construct: add the two shorter sides and compare with the longest."
+    }
+   ],
+   "diagnostics": [
+    "wm-tri-d1",
+    "wm-tri-d2"
+   ],
+   "strategies": [
+    {
+     "id": "why_arcs_meet",
+     "title": "Why the arcs meet (or don't)",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Two circles of possible places",
+       "text": [
+        "The third corner must be on a circle round each end of the base. A triangle exists only when those two circles cross.",
+        "If the two radii add to less than the base, the circles are too small to reach each other; if they add to exactly the base, they touch on the base and the triangle is flat."
+       ],
+       "math": [
+        "radii r and s, base b: the arcs cross when r + s > b (and each of r, s is less than the other plus b)"
+       ]
+      }
+     ],
+     "guided": "wm-tri-g1",
+     "check": "wm-tri-c1"
+    },
+    {
+     "id": "step_by_step",
+     "title": "Step by step: SAS and ASA",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "SAS and ASA in order",
+       "text": [
+        "SAS: draw one side, make the given angle at one end, mark the second side along its arm, join.",
+        "ASA: draw the given side, make both angles at its two ends on the same side, and the arms meet at the third corner."
+       ],
+       "math": [
+        "SAS (AB = 6, ∠A = 60°, AC = 4.5): AB, then 60° at A, then AC = 4.5 on the arm, then join BC",
+        "ASA (PQ = 6.5, ∠P = 40°, ∠Q = 110°): PQ, then 40° at P and 110° at Q on the same side, R where the arms meet"
+       ],
+       "tip": "In ASA the two angles must add to less than 180°, or the arms never meet."
+      }
+     ],
+     "guided": "wm-tri-g2",
+     "check": "wr:tri:sas"
+    }
+   ],
+   "practice": [
+    "wm-tri-p1",
+    "wm-tri-p2",
+    "wr:tri:sss"
+   ],
+   "transfer": [
+    "wr:tri:asa"
+   ],
+   "retention": [
+    "wr:tri:rhs",
+    "wm-tri-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.reasoning.proof-intro",
+   "title": "Tell a proof from examples",
+   "chapter": [
+    {
+     "title": "Examples are not a proof",
+     "text": [
+      "Checking cases tells you a statement might be true. It cannot show it is ALWAYS true, because there are infinitely many cases.",
+      "Here is a warning. The rule n² + n + 41 gives a prime number for n = 0, 1, 2, … all the way to 39. But at n = 40 it fails."
+     ],
+     "math": [
+      "n = 1: 1 + 1 + 41 = 43 (prime)",
+      "n = 40: 40² + 40 + 41 = 40 × 41 + 41 = 41 × 41 (not prime)"
+     ],
+     "tip": "One example where an 'always' statement fails (a counterexample) is enough to show it is false."
+    },
+    {
+     "title": "Worked proof: odd + odd is even",
+     "text": [
+      "A proof uses letters that stand for ANY number, so one argument covers every case."
+     ],
+     "math": [
+      "1. Let the odd numbers be 2m + 1 and 2n + 1 (m, n whole numbers). — Every odd number is one more than an even number.",
+      "2. Their sum is 2m + 2n + 2. — Adding.",
+      "3. 2m + 2n + 2 = 2(m + n + 1). — Taking out the common factor 2.",
+      "4. So the sum is a multiple of 2: it is even. — That is what 'even' means.",
+      "5. m and n were any whole numbers, so this is true for every pair of odd numbers."
+     ],
+     "tip": "Use different letters for numbers that can be different. With 2n + 1 twice you have only shown that 'double an odd number is even'."
+    },
+    {
+     "title": "Worked: why a number trick works",
+     "text": [
+      "Trick: think of a number, double it, add 10, halve the result, subtract your number. You always get 5."
+     ],
+     "math": [
+      "n → 2n — doubling",
+      "2n → 2n + 10 — adding 10",
+      "2n + 10 → n + 5 — halving both parts",
+      "n + 5 − n = 5 — the n cancels, whatever it was"
+     ],
+     "tip": "Writing one example (7 → 14 → 24 → 12 → 5) shows the trick, but only the algebra explains why it always works."
+    }
+   ],
+   "diagnostics": [
+    "wm-prf-d1",
+    "wm-prf-d2"
+   ],
+   "strategies": [
+    {
+     "id": "counterexamples",
+     "title": "Why examples are not enough",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Hunt for a case that breaks it",
+       "text": [
+        "Before trying to prove a claim, test it on unusual cases: 0, 1, big numbers, numbers in a times table. If one case breaks it, you are done: it is false.",
+        "If nothing breaks it, write the general case with letters and argue with them."
+       ],
+       "math": [
+        "Claim: every number ending in 7 is prime. 7, 17, 37 work … but 27 = 3 × 9. False."
+       ]
+      }
+     ],
+     "guided": "wm-prf-g1",
+     "check": "wm-prf-c1"
+    },
+    {
+     "id": "with_letters",
+     "title": "Write it with letters, step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Turning words into algebra",
+       "text": [
+        "Give the starting number a letter. Write each step of the trick or statement as an expression. Simplify. Read what the final expression says."
+       ],
+       "math": [
+        "Think of n; add 5 → n + 5; multiply by 2 → 2n + 10; subtract 4 → 2n + 6; halve → n + 3; subtract n → 3"
+       ],
+       "tip": "Halving 2n + 6 halves both parts: n + 3, not n + 6."
+      }
+     ],
+     "guided": "wm-prf-g2",
+     "check": "wr:prf:trick"
+    }
+   ],
+   "practice": [
+    "wm-prf-p1",
+    "wm-prf-p2",
+    "wr:prf:odd-product"
+   ],
+   "transfer": [
+    "wr:prf:reverse"
+   ],
+   "retention": [
+    "wr:prf:parallelogram",
+    "wm-prf-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.geometry.triangle-proof",
+   "title": "Prove triangle relationships",
+   "chapter": [
+    {
+     "title": "The shape of a proof",
+     "text": [
+      "A geometry proof states what is Given, what is To be proved, any Construction you add, and then the Proof: each statement with its reason.",
+      "Reasons are given facts, definitions, earlier theorems, or a congruence criterion. When two triangles are congruent, all their matching parts are equal (CPCT)."
+     ],
+     "math": [
+      "Congruence criteria: SSS, SAS (angle included), ASA, AAS, RHS",
+      "CPCT: corresponding parts of congruent triangles are equal"
+     ]
+    },
+    {
+     "title": "Worked: angles opposite equal sides are equal",
+     "text": [
+      "Given △ABC with AB = AC. To prove ∠B = ∠C. Construction: draw AD, the bisector of ∠A, meeting BC at D."
+     ],
+     "math": [
+      "In △ABD and △ACD:",
+      "AB = AC — given",
+      "∠BAD = ∠CAD — AD bisects ∠A (construction)",
+      "AD = AD — common side",
+      "∴ △ABD ≅ △ACD — SAS (the angle is between the two sides)",
+      "∴ ∠B = ∠C — CPCT"
+     ],
+     "tip": "Prove the congruence before you use CPCT. Writing '∠B = ∠C by CPCT' first, or using the result you are proving as a reason, loses the mark."
+    },
+    {
+     "title": "Why SSA is not a criterion",
+     "text": [
+      "Take ∠B = 30°, AB = 10 cm and AC = 6 cm. Draw the 30° angle at B and mark A on one arm. The circle of radius 6 cm round A cuts the other arm in TWO points, because the distance from A to that arm is 10 × sin 30° = 5 cm, less than 6 cm. Two different triangles fit the same data."
+     ],
+     "math": [
+      "SSA: AB = 10, AC = 6, ∠B = 30°  ⇒  two possible positions of C"
+     ],
+     "tip": "In SAS the equal angle must be between the two equal sides."
+    }
+   ],
+   "diagnostics": [
+    "wm-tpf-d1",
+    "wm-tpf-d2"
+   ],
+   "strategies": [
+    {
+     "id": "statement_reason",
+     "title": "Statement and reason, in order",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Build the table",
+       "text": [
+        "List the two triangles. Under them, write three pairs of equal parts, each with a reason. Name the criterion. Only then use CPCT for the part you want."
+       ],
+       "math": [
+        "Statement | Reason",
+        "AB = AD | given",
+        "CB = CD | given",
+        "AC = AC | common",
+        "△ABC ≅ △ADC | SSS",
+        "∠BAC = ∠DAC | CPCT"
+       ]
+      }
+     ],
+     "guided": "wm-tpf-g1",
+     "check": "wm-tpf-c1"
+    },
+    {
+     "id": "work_backwards",
+     "title": "Work backwards from what you must prove",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Start at the end",
+       "text": [
+        "Ask: what am I proving? Which two triangles contain those parts? What do I already know about those triangles? Which criterion fits what I know?",
+        "Then write the proof forwards."
+       ],
+       "math": [
+        "Want PQ = PR  →  PQ is in △PSQ, PR is in △PSR",
+        "Know QS = RS, ∠PSQ = ∠PSR = 90°, PS common  →  SAS",
+        "So △PSQ ≅ △PSR, then PQ = PR by CPCT"
+       ]
+      }
+     ],
+     "guided": "wm-tpf-g2",
+     "check": "wr:tpf:perp-mid"
+    }
+   ],
+   "practice": [
+    "wm-tpf-p1",
+    "wm-tpf-p2",
+    "wr:tpf:isosceles-converse"
+   ],
+   "transfer": [
+    "wr:tpf:diagonals"
+   ],
+   "retention": [
+    "wr:tpf:pythag-converse",
+    "wm-tpf-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.geometry.constructions-bisectors",
+   "title": "Construct perpendicular bisectors and angle bisectors",
+   "chapter": [
+    {
+     "title": "Two sets of equal distances",
+     "text": [
+      "The perpendicular bisector of AB is the set of all points the same distance from A and from B.",
+      "The bisector of an angle is the set of all points the same distance from its two arms.",
+      "Both constructions find two such points with the compasses and join them."
+     ],
+     "math": [
+      "P on the perpendicular bisector of AB  ⇔  PA = PB",
+      "P on the bisector of ∠XOY  ⇔  P is equally far from OX and OY"
+     ]
+    },
+    {
+     "title": "Worked: the perpendicular bisector of AB = 6 cm",
+     "text": [
+      "Each step says what you do and, after the dash, why."
+     ],
+     "math": [
+      "1. With centres A and B and radius r > 3 cm, draw arcs above and below AB, crossing at P and Q. — r > ½AB, so the arcs cross.",
+      "2. PA = PB = r and QA = QB = r. — Equal radii.",
+      "3. Join PQ, cutting AB at M. — The line through two points equally far from A and B.",
+      "4. △PAQ ≅ △PBQ (SSS: PA = PB, QA = QB, PQ common), so ∠APM = ∠BPM. — CPCT",
+      "5. △APM ≅ △BPM (SAS: PA = PB, ∠APM = ∠BPM, PM common), so AM = BM and ∠AMP = ∠BMP. — CPCT",
+      "6. ∠AMP + ∠BMP = 180° and they are equal, so each is 90°. — Linear pair"
+     ],
+     "tip": "If the radius is half of AB or less, the arcs do not cross and there is nothing to join."
+    },
+    {
+     "title": "Worked: bisecting an angle at O",
+     "text": [],
+     "math": [
+      "1. With centre O, draw an arc cutting the arms at P and Q. — OP = OQ",
+      "2. With centres P and Q and one radius, draw arcs meeting at R inside the angle. — PR = QR",
+      "3. Join OR. — △OPR ≅ △OQR (SSS, OR common), so ∠POR = ∠QOR by CPCT."
+     ],
+     "tip": "In step 2 the two arcs must have the same radius; otherwise R is not equally far from P and Q."
+    }
+   ],
+   "diagnostics": [
+    "wm-bis-d1",
+    "wm-bis-d2"
+   ],
+   "strategies": [
+    {
+     "id": "why_it_works",
+     "title": "Why it works: congruent triangles",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Every arc is a pair of equal lengths",
+       "text": [
+        "Write down every pair of equal lengths the compasses gave you. Then look for two triangles that use them. In both bisector constructions, SSS gives the congruence, and CPCT gives the equal angles."
+       ],
+       "math": [
+        "Angle bisector: OP = OQ, PR = QR, OR common  ⇒  △OPR ≅ △OQR (SSS)  ⇒  ∠POR = ∠QOR"
+       ]
+      }
+     ],
+     "guided": "wm-bis-g1",
+     "check": "wm-bis-c1"
+    },
+    {
+     "id": "special_angles",
+     "title": "Step by step: special angles from bisecting",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Build angles from 60° and 90°",
+       "text": [
+        "60° comes from an equilateral triangle (same radius twice). 90° comes from a perpendicular. Bisecting halves any angle you can make."
+       ],
+       "math": [
+        "90° — perpendicular at a point",
+        "45° — bisect 90°",
+        "60° — equal radius twice along an arc",
+        "30° — bisect 60°",
+        "120° — step the same radius twice round the arc",
+        "135° — 90° + 45°"
+       ],
+       "tip": "Say which angle in your figure is the one asked for: bisecting a right angle makes 45° on one side and 135° with the other ray."
+      }
+     ],
+     "guided": "wm-bis-g2",
+     "check": "wr:bis:135"
+    }
+   ],
+   "practice": [
+    "wm-bis-p1",
+    "wm-bis-p2",
+    "wr:con:perpbis"
+   ],
+   "transfer": [
+    "wr:bis:circumcircle"
+   ],
+   "retention": [
+    "wr:con:angbis",
+    "wm-bis-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.geometry.scaled-construction",
+   "title": "Construct similar figures and divide a segment in a ratio",
+   "chapter": [
+    {
+     "title": "Dividing a segment in the ratio m : n",
+     "text": [
+      "Draw AB and a ray AX at an acute angle. Mark m + n equal steps A₁, A₂, … on AX with a fixed compass opening. Join the last mark to B. Through Aₘ draw a line parallel to that join; it cuts AB at C."
+     ],
+     "math": [
+      "Ratio 3 : 4: mark A₁ … A₇, join A₇B, through A₃ draw A₃C ∥ A₇B.",
+      "In △AA₇B, A₃C ∥ A₇B  ⇒  AC/CB = AA₃/A₃A₇ = 3/4 — Basic Proportionality Theorem"
+     ],
+     "tip": "The steps must be equal: they turn 'count the marks' into 'compare the lengths'."
+    },
+    {
+     "title": "Worked: a triangle similar to ABC with scale factor 3/5",
+     "text": [
+      "Each step says what you do and, after the dash, why."
+     ],
+     "math": [
+      "1. Draw ray BX at an acute angle to BC, on the side away from A. — A working line",
+      "2. Mark B₁ … B₅ with equal steps (5 = the larger of 3 and 5). — Equal parts",
+      "3. Join B₅C (5 = the denominator). — The reference line",
+      "4. Through B₃ draw a line ∥ B₅C, meeting BC at C′. — BC′/BC = BB₃/BB₅ = 3/5 (BPT)",
+      "5. Through C′ draw a line ∥ CA, meeting BA at A′. — ∠BC′A′ = ∠BCA (corresponding angles), ∠B common",
+      "6. △A′BC′ ~ △ABC (AA), and BC′/BC = 3/5, so every side of A′BC′ is 3/5 of the matching side."
+     ]
+    },
+    {
+     "title": "Scale factor more than 1",
+     "text": [
+      "For 7/5: mark 7 steps, join B₅C, and draw the parallel through B₇. It meets BC extended beyond C at C′; then a parallel to CA through C′ meets BA extended at A′."
+     ],
+     "math": [
+      "BC′/BC = BB₇/BB₅ = 7/5"
+     ],
+     "tip": "For a scale factor m/n, join the n-th mark (the denominator) to C and draw the parallel through the m-th. Swapping them gives the reciprocal scale factor."
+    }
+   ],
+   "diagnostics": [
+    "wm-scl-d1",
+    "wm-scl-d2"
+   ],
+   "strategies": [
+    {
+     "id": "why_bpt",
+     "title": "Why it works: the Basic Proportionality Theorem",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Parallel lines share out lengths in proportion",
+       "text": [
+        "If a line parallel to one side of a triangle cuts the other two sides, it divides them in the same ratio. Equal steps on the ray give a ratio you can count; the parallel copies that ratio onto the segment."
+       ],
+       "math": [
+        "DE ∥ BC in △ABC  ⇒  AD/DB = AE/EC",
+        "Count on the ray, read off on the segment"
+       ]
+      }
+     ],
+     "guided": "wm-scl-g1",
+     "check": "wm-scl-c1"
+    },
+    {
+     "id": "step_by_step",
+     "title": "Step by step: count, join, parallel",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Three questions to ask",
+       "text": [
+        "1. How many steps? Ratio m : n → m + n steps. Scale factor m/n → the larger of m and n.",
+        "2. Which mark do I join? The last mark for a ratio; the n-th (denominator) for a scale factor.",
+        "3. Through which mark is the parallel? The m-th."
+       ],
+       "math": [
+        "Ratio 2 : 5 → 7 steps, join P₇Q, parallel through P₂",
+        "Scale 2/3 → 3 steps, join B₃C, parallel through B₂"
+       ]
+      }
+     ],
+     "guided": "wm-scl-g2",
+     "check": "wr:scl:smaller"
+    }
+   ],
+   "practice": [
+    "wm-scl-p1",
+    "wm-scl-p2",
+    "wr:con:scaled"
+   ],
+   "transfer": [
+    "wr:scl:larger"
+   ],
+   "retention": [
+    "wr:scl:why-bpt",
+    "wm-scl-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "title": "Construct quadrilaterals from sufficient data",
+   "chapter": [
+    {
+     "title": "Why five measurements",
+     "text": [
+      "A diagonal splits a quadrilateral into two triangles. The first triangle needs 3 measurements; the second shares the diagonal, so it needs only 2 more.",
+      "Four sides alone are not enough: a quadrilateral made of four hinged sticks can be pushed into many shapes."
+     ],
+     "math": [
+      "3 + 2 = 5 independent measurements",
+      "Enough: 4 sides + a diagonal; 3 sides + 2 diagonals; 2 neighbouring sides + 3 angles; 3 sides + the 2 angles between them"
+     ],
+     "tip": "Special quadrilaterals need fewer, because their properties supply the rest: a rhombus needs a side and a diagonal; a rectangle needs length and breadth."
+    },
+    {
+     "title": "Worked: ABCD with AB = 4 cm, BC = 5 cm, CD = 6 cm, DA = 4.5 cm and AC = 7 cm",
+     "text": [
+      "Each step says what you do and, after the dash, why."
+     ],
+     "math": [
+      "1. Draw AC = 7 cm. — The diagonal both triangles share",
+      "2. Arcs of 4 cm from A and 5 cm from C meet at B. — △ABC by SSS",
+      "3. On the other side of AC, arcs of 4.5 cm from A and 6 cm from C meet at D. — △ADC by SSS",
+      "4. Join AB, BC, CD, DA. — Two fixed triangles make one fixed quadrilateral"
+     ],
+     "tip": "Put D on the opposite side of AC from B. On the same side, the shape folds over itself."
+    },
+    {
+     "title": "Worked: a trapezium",
+     "text": [
+      "Trapezium ABCD with AB ∥ DC, AB = 7 cm, BC = 5 cm, ∠B = 60°, DC = 4 cm."
+     ],
+     "math": [
+      "1. Draw AB = 7 cm; make ∠B = 60°; mark BC = 5 cm. — SAS fixes A, B, C",
+      "2. At C make ∠BCY = 120° on the same side as A. — 60° + 120° = 180°: co-interior angles, so CY ∥ AB",
+      "3. Mark CD = 4 cm along CY towards A; join AD. — D is fixed by its distance from C on the parallel line"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "wm-quad-d1",
+    "wm-quad-d2"
+   ],
+   "strategies": [
+    {
+     "id": "split_triangles",
+     "title": "Split it into triangles",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Two triangles, one shared side",
+       "text": [
+        "Look at the measurements given. Can you find a triangle with three known parts? Construct it. Does the rest of the quadrilateral form a second triangle with two more known parts? Then it is fixed."
+       ],
+       "math": [
+        "4 sides + diagonal AC: △ABC (AB, BC, AC), then △ACD (CD, DA)",
+        "4 sides only: no triangle has three known parts, so the shape can flex"
+       ]
+      }
+     ],
+     "guided": "wm-quad-g1",
+     "check": "wm-quad-c1"
+    },
+    {
+     "id": "order_of_steps",
+     "title": "Step by step: plan the order",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Plan before you draw",
+       "text": [
+        "1. Start with a side or diagonal that has the most known parts at its ends.",
+        "2. Fix one triangle.",
+        "3. Use the next known part to fix the fourth corner: two arcs, an angle and a length, or a parallel line.",
+        "4. Join and check the last measurement if one was spare."
+       ],
+       "math": [
+        "Trapezium: parallel sides give angle pairs that add to 180°",
+        "Parallelogram: opposite sides equal, so two neighbouring sides and an angle are enough"
+       ]
+      }
+     ],
+     "guided": "wm-quad-g2",
+     "check": "wr:quad:trapezium"
+    }
+   ],
+   "practice": [
+    "wm-quad-p1",
+    "wm-quad-p2",
+    "wr:con:quad"
+   ],
+   "transfer": [
+    "wr:quad:angles"
+   ],
+   "retention": [
+    "wr:quad:rhombus",
+    "wm-quad-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.number.irrationality-proofs",
+   "title": "Prove that a number is irrational",
+   "chapter": [
+    {
+     "title": "Proof by contradiction",
+     "text": [
+      "To prove a statement by contradiction, assume it is false and reason correctly until you reach something impossible. Then the assumption must have been false.",
+      "For √p (p prime), the key fact comes from prime factorisation: in a², every prime factor of a appears twice, so a prime that divides a² must divide a."
+     ],
+     "math": [
+      "p prime, p | a²  ⇒  p | a",
+      "A rational number is a/b with a, b integers, b ≠ 0, and we may take a, b coprime (lowest terms)"
+     ]
+    },
+    {
+     "title": "Worked: √2 is irrational",
+     "text": [
+      "Each line gives a statement and, after the dash, its reason."
+     ],
+     "math": [
+      "1. Suppose √2 = a/b, a, b integers, b ≠ 0, HCF(a, b) = 1. — Assume the opposite; any fraction can be put in lowest terms",
+      "2. 2b² = a². — Squaring and multiplying by b²",
+      "3. 2 | a², so 2 | a. — 2 is prime",
+      "4. a = 2c for some integer c. — Definition of 'divides'",
+      "5. 2b² = 4c², so b² = 2c². — Substituting and dividing by 2",
+      "6. 2 | b², so 2 | b. — 2 is prime",
+      "7. 2 divides both a and b, contradicting HCF(a, b) = 1. — Lines 3, 6 and 1",
+      "8. So √2 is irrational."
+     ],
+     "tip": "'Lowest terms' is what is contradicted. Leave it out and the proof has nothing to contradict."
+    },
+    {
+     "title": "Irrational combinations",
+     "text": [
+      "Given that √2 is irrational, prove 5 − 3√2 is irrational."
+     ],
+     "math": [
+      "Suppose 5 − 3√2 = r, r rational. — Assume the opposite",
+      "√2 = (5 − r)/3. — Rearranging",
+      "(5 − r)/3 is rational. — Rationals are closed under subtraction and division by a non-zero rational",
+      "So √2 is rational: a contradiction. Hence 5 − 3√2 is irrational."
+     ],
+     "tip": "Say WHY the rearranged expression is rational; that sentence carries the mark."
+    }
+   ],
+   "diagnostics": [
+    "wm-irr-d1",
+    "wm-irr-d2"
+   ],
+   "strategies": [
+    {
+     "id": "the_contradiction",
+     "title": "What exactly is contradicted",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Find the clash",
+       "text": [
+        "Every proof by contradiction ends with two statements that cannot both be true. In the √p proofs, the clash is: 'a and b have no common factor' (assumed) and 'p divides both a and b' (proved)."
+       ],
+       "math": [
+        "Assumed: HCF(a, b) = 1",
+        "Proved: p | a and p | b",
+        "Both cannot hold, so √p = a/b is impossible"
+       ]
+      }
+     ],
+     "guided": "wm-irr-g1",
+     "check": "wm-irr-c1"
+    },
+    {
+     "id": "template",
+     "title": "A template for √p and for a + b√p",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Two templates",
+       "text": [
+        "√p (p prime): assume a/b in lowest terms → a² = pb² → p | a → a = pc → b² = pc² → p | b → contradiction.",
+        "a + b√p: assume it equals r → isolate √p → say why the other side is rational → contradiction."
+       ],
+       "math": [
+        "7 + 4√3 = r  ⇒  √3 = (r − 7)/4, rational  ⇒  contradiction"
+       ],
+       "tip": "Isolate the surd by undoing the operations in reverse order: subtract first, then divide."
+      }
+     ],
+     "guided": "wm-irr-g2",
+     "check": "wr:irr:sqrt3"
+    }
+   ],
+   "practice": [
+    "wm-irr-p1",
+    "wm-irr-p2",
+    "wr:irr:sum"
+   ],
+   "transfer": [
+    "wr:irr:reciprocal"
+   ],
+   "retention": [
+    "wr:irr:sqrt5",
+    "wm-irr-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.number.root-length-construction",
+   "title": "Construct irrational lengths such as √n",
+   "chapter": [
+    {
+     "title": "Pythagoras makes square roots",
+     "text": [
+      "A right triangle with legs a and b has hypotenuse √(a² + b²). Choose legs whose squares add to n, and the hypotenuse has length √n exactly."
+     ],
+     "math": [
+      "legs 1, 1 → √2",
+      "legs 2, 1 → √5",
+      "legs 3, 1 → √10",
+      "legs 3, 2 → √13"
+     ]
+    },
+    {
+     "title": "Worked: √10 on the number line",
+     "text": [
+      "Each step says what you do and, after the dash, why."
+     ],
+     "math": [
+      "1. Mark O at 0 and A at 3. — OA = 3",
+      "2. Construct the perpendicular to the number line at A; mark AB = 1 on it. — A right angle at A",
+      "3. Join OB. — OB² = OA² + AB² = 9 + 1 = 10 (Pythagoras), so OB = √10",
+      "4. With centre O and radius OB, draw an arc to meet the number line at P. — OP = OB (radii)",
+      "5. P is the point √10."
+     ],
+     "tip": "Centre the arc at O (0), not at A; centring at A gives the point 4."
+    },
+    {
+     "title": "The square-root spiral",
+     "text": [
+      "Start with OA₁ = 1. At A₁ draw 1 unit perpendicular to OA₁ to get A₂; at A₂ draw 1 unit perpendicular to OA₂; and so on."
+     ],
+     "math": [
+      "OA₂² = 1² + 1² = 2",
+      "OA₃² = (√2)² + 1² = 3",
+      "OAₙ² = (√(n − 1))² + 1² = n"
+     ],
+     "tip": "Each unit leg is perpendicular to the LAST hypotenuse, not to the first segment."
+    }
+   ],
+   "diagnostics": [
+    "wm-root-d1",
+    "wm-root-d2"
+   ],
+   "strategies": [
+    {
+     "id": "choose_legs",
+     "title": "Choose legs whose squares add to n",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Write n as a sum of two squares",
+       "text": [
+        "Look for two square numbers that add to n: 13 = 9 + 4, 20 = 16 + 4, 17 = 16 + 1. Use their square roots as legs. If no pair exists (like 7), build up from an earlier root: 7 = (√6)² + 1²."
+       ],
+       "math": [
+        "13 = 3² + 2²",
+        "20 = 4² + 2²",
+        "7 = (√6)² + 1²"
+       ]
+      }
+     ],
+     "guided": "wm-root-g1",
+     "check": "wm-root-c1"
+    },
+    {
+     "id": "spiral_steps",
+     "title": "Step by step: the spiral",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "One unit at a time",
+       "text": [
+        "Each turn of the spiral adds one triangle: draw 1 unit at right angles to the newest hypotenuse, and join back to O. The square of the length goes up by exactly 1 each time."
+       ],
+       "math": [
+        "√7 → √8: (√7)² + 1² = 8"
+       ]
+      }
+     ],
+     "guided": "wm-root-g2",
+     "check": "wr:root:spiral"
+    }
+   ],
+   "practice": [
+    "wm-root-p1",
+    "wm-root-p2",
+    "wr:root:sqrt5"
+   ],
+   "transfer": [
+    "wr:root:semicircle"
+   ],
+   "retention": [
+    "wr:root:sqrt13",
+    "wm-root-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.reasoning.mathematical-induction",
+   "title": "Prove statements by mathematical induction",
+   "chapter": [
+    {
+     "title": "Dominoes",
+     "text": [
+      "Principle of mathematical induction: let P(n) be a statement about a positive integer n. If P(1) is true, and P(k) ⇒ P(k + 1) for every k ≥ 1, then P(n) is true for every positive integer n.",
+      "Both parts matter. For 'n² + n is odd' the step works (if k² + k is odd, so is k² + k + 2k + 2), but P(1) is false, so nothing is proved."
+     ],
+     "math": [
+      "P(1) true",
+      "P(k) ⇒ P(k + 1) for all k ≥ 1",
+      "⇒ P(n) true for all n ∈ ℕ"
+     ]
+    },
+    {
+     "title": "Worked: 1·2 + 2·3 + … + n(n + 1) = n(n + 1)(n + 2)/3",
+     "text": [
+      "Each line gives a statement and, after the dash, its reason."
+     ],
+     "math": [
+      "Base: n = 1: LHS = 1·2 = 2, RHS = 1·2·3/3 = 2. — P(1) true",
+      "Hypothesis: 1·2 + … + k(k + 1) = k(k + 1)(k + 2)/3. — Assume P(k)",
+      "Target: 1·2 + … + (k + 1)(k + 2) = (k + 1)(k + 2)(k + 3)/3. — Write P(k + 1)",
+      "LHS = k(k + 1)(k + 2)/3 + (k + 1)(k + 2). — Hypothesis, plus the next term",
+      "= (k + 1)(k + 2)(k/3 + 1) = (k + 1)(k + 2)(k + 3)/3. — Common factor (k + 1)(k + 2)",
+      "So P(k) ⇒ P(k + 1); with P(1), P(n) holds for all n. — Principle of induction"
+     ]
+    },
+    {
+     "title": "Worked: 7ⁿ − 1 is divisible by 6",
+     "text": [],
+     "math": [
+      "Base: 7 − 1 = 6. — Divisible by 6",
+      "Hypothesis: 7ᵏ − 1 = 6m for some integer m. — Assume P(k)",
+      "7ᵏ⁺¹ − 1 = 7 · 7ᵏ − 1 = 7(7ᵏ − 1) + 6. — Rewrite to bring in 7ᵏ − 1",
+      "= 7 · 6m + 6 = 6(7m + 1). — Hypothesis",
+      "So 6 divides 7ᵏ⁺¹ − 1; by induction, 6 divides 7ⁿ − 1 for all n."
+     ],
+     "tip": "Assume P(k) for one k, not 'for all n' (that would assume what you are proving). Write out P(k + 1) first so you know your target."
+    }
+   ],
+   "diagnostics": [
+    "wm-ind-d1",
+    "wm-ind-d2"
+   ],
+   "strategies": [
+    {
+     "id": "why_both",
+     "title": "Why both parts matter",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A chain needs a first link",
+       "text": [
+        "The step says: if one domino falls, the next one falls. The base case pushes the first domino. Without the push, nothing falls; without the step, only the first one does."
+       ],
+       "math": [
+        "P(1) ✓, P(k) ⇒ P(k + 1)  ⇒  P(2) ✓ ⇒ P(3) ✓ ⇒ …"
+       ]
+      }
+     ],
+     "guided": "wm-ind-g1",
+     "check": "wm-ind-c1"
+    },
+    {
+     "id": "template",
+     "title": "The four-line template",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Base, hypothesis, step, conclusion",
+       "text": [
+        "1. Base: check P(1) (or the first value claimed).",
+        "2. Hypothesis: assume P(k) for some k.",
+        "3. Step: write P(k + 1) as the target; start from its left side, bring in the hypothesis, and simplify to the right side.",
+        "4. Conclusion: by the principle of induction, P(n) is true for all n."
+       ],
+       "math": [
+        "Sum: LHS(k + 1) = LHS(k) + next term",
+        "Divisibility: a·bᵏ⁺¹ − c rewritten using bᵏ − c"
+       ]
+      }
+     ],
+     "guided": "wm-ind-g2",
+     "check": "wr:ind:odd"
+    }
+   ],
+   "practice": [
+    "wm-ind-p1",
+    "wm-ind-p2",
+    "wr:ind:sum"
+   ],
+   "transfer": [
+    "wr:ind:ineq"
+   ],
+   "retention": [
+    "wr:ind:div",
+    "wm-ind-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.reasoning.winning-strategies",
+   "title": "Find and justify winning strategies in number games",
+   "chapter": [
+    {
+     "title": "Work backwards from the end",
+     "text": [
+      "In a game where you take or say numbers, start from the winning moment and ask: which positions let me win next turn, whatever happens? Those are 'safe' positions.",
+      "Game: count up from 1, saying 1 or 2 numbers each turn; whoever says 10 wins. If I say 7, my friend says 8 or 8, 9, and I can always reach 10."
+     ],
+     "math": [
+      "Safe numbers: 10, 7, 4, 1 (count back in 3s = 1 + 2)"
+     ]
+    },
+    {
+     "title": "Worked: 15 matches, take 1, 2 or 3, last match wins",
+     "text": [
+      "Each step says what happens and, after the dash, why."
+     ],
+     "math": [
+      "1. I go first and take 3, leaving 12. — 12 is a multiple of 4",
+      "2. My friend takes t (1, 2 or 3); I take 4 − t. — Each round removes exactly 4",
+      "3. The pile goes 12 → 8 → 4 → 0. — Always a multiple of 4 after my turn",
+      "4. I take the last match. — From 4, my friend cannot take all; I take what is left"
+     ]
+    },
+    {
+     "title": "Why the strategy always works",
+     "text": [
+      "A strategy is a rule for every situation, not a lucky game. Check it against EVERY move the other player could make: whatever they take, you can make the round add up to 4."
+     ],
+     "math": [
+      "friend 1 → me 3; friend 2 → me 2; friend 3 → me 1"
+     ],
+     "tip": "If the pile already starts at a multiple of 4, you would rather go second. Show one game as an example, but explain the rule for every move."
+    }
+   ],
+   "diagnostics": [
+    "wm-game-d1",
+    "wm-game-d2"
+   ],
+   "strategies": [
+    {
+     "id": "work_backwards",
+     "title": "Work backwards: find the safe numbers",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Count back from the target",
+       "text": [
+        "The step between safe numbers is (smallest move + largest move). Saying 1–3 numbers: step 4. Taking 1–4: step 5."
+       ],
+       "math": [
+        "Target 15, moves 1–3: 15, 11, 7, 3",
+        "Target 21, moves 1–3: 21, 17, 13, 9, 5, 1"
+       ]
+      }
+     ],
+     "guided": "wm-game-g1",
+     "check": "wm-game-c1"
+    },
+    {
+     "id": "same_total",
+     "title": "Make every round add up to the same total",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Answer each move",
+       "text": [
+        "Find the round total: smallest move + largest move. Whatever your friend does, you do 'round total minus their move'. Make your first move so that what is left is a multiple of the round total."
+       ],
+       "math": [
+        "Moves 1–4, round total 5: friend 1 → you 4, friend 3 → you 2",
+        "17 counters: take 2 first (17 = 3 × 5 + 2)"
+       ]
+      }
+     ],
+     "guided": "wm-game-g2",
+     "check": "wr:game:pile"
+    }
+   ],
+   "practice": [
+    "wm-game-p1",
+    "wm-game-p2",
+    "wr:game:21"
+   ],
+   "transfer": [
+    "wr:game:misere"
+   ],
+   "retention": [
+    "wr:game:target",
+    "wm-game-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "title": "Choose, design and critique data displays",
+   "chapter": [
+    {
+     "title": "Match the display to the data",
+     "text": [
+      "Ask what the display is for. Comparing categories: bar graph or pictograph. Parts of one whole: pie chart. Change over time: line graph. Two groups across the same categories: double bar graph."
+     ],
+     "math": [
+      "Pie chart angle = (part ÷ whole) × 360°",
+      "Pictograph: number = pictures × the value of one picture"
+     ]
+    },
+    {
+     "title": "Worked: a misleading bar graph",
+     "text": [
+      "A shop's graph shows sales of 82 in March and 88 in April, with the axis starting at 80."
+     ],
+     "math": [
+      "1. On the page, the March bar is 82 − 80 = 2 units tall. — The axis starts at 80",
+      "2. The April bar is 88 − 80 = 8 units tall. — Same reason",
+      "3. April LOOKS 4 times as big. — 8 ÷ 2 = 4",
+      "4. Really, 88 ÷ 82 ≈ 1.07: about 7% more. — Comparing the true values",
+      "5. Fix: start the axis at 0, or mark a clear break and say so."
+     ],
+     "tip": "Bars must start at 0 to compare fairly by height."
+    },
+    {
+     "title": "A checklist for a clear, honest display",
+     "text": [
+      "Title that says what the data is (not what to think). Labelled axes with units. A scale with equal steps, from 0 for bars. A key for pictures. The source and the number of people asked.",
+      "Watch for 3-D effects, pictures that grow in both directions, and percentages that do not add up."
+     ],
+     "tip": "A picture twice as tall and twice as wide has 4 times the area. Show 'twice as many' with twice as many pictures."
+    }
+   ],
+   "diagnostics": [
+    "wm-disp-d1",
+    "wm-disp-d2"
+   ],
+   "strategies": [
+    {
+     "id": "what_it_suggests",
+     "title": "Ask what the display makes you believe",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Compare the look with the numbers",
+       "text": [
+        "Look at the display first, and say what it seems to show. Then read the numbers. If the look and the numbers disagree, the display is misleading."
+       ],
+       "math": [
+        "Axis from 50: bars of 55 and 70 look like 5 and 20 units, a ratio of 4",
+        "True ratio: 70 ÷ 55 ≈ 1.3"
+       ]
+      }
+     ],
+     "guided": "wm-disp-g1",
+     "check": "wm-disp-c1"
+    },
+    {
+     "id": "choose_by_question",
+     "title": "Choose by the question you are answering",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Three questions to choose a display",
+       "text": [
+        "1. Are the values parts of one whole? Pie chart.",
+        "2. Is it about change over time? Line graph.",
+        "3. Are you comparing categories (or two groups across categories)? Bar graph (or double bar graph)."
+       ],
+       "math": [
+        "Travel to school (one class) → pie or bar",
+        "Noon temperature for 14 days → line",
+        "Books read by boys and girls in Classes 6–8 → double bar"
+       ]
+      }
+     ],
+     "guided": "wm-disp-g2",
+     "check": "wr:disp:choose"
+    }
+   ],
+   "practice": [
+    "wm-disp-p1",
+    "wm-disp-p2",
+    "wr:disp:critique"
+   ],
+   "transfer": [
+    "wr:disp:design"
+   ],
+   "retention": [
+    "wr:disp:infographic",
+    "wm-disp-r1"
+   ],
+   "probes": []
+  },
+  {
+   "competency": "MATH.statistics.statistical-questions",
+   "title": "Pose statistical questions and draw conclusions from data",
+   "chapter": [
+    {
+     "title": "What makes a question statistical",
+     "text": [
+      "A statistical question is answered by collecting data that VARIES. 'How tall am I?' has one answer. 'How tall are the students in Class 7?' needs many measurements that differ."
+     ],
+     "math": [
+      "Not statistical: What time does school start?",
+      "Statistical: What time do students in our class wake up on school days?"
+     ]
+    },
+    {
+     "title": "Worked: an investigation from question to conclusion",
+     "text": [
+      "Question: Do students in Class 7 sleep more on weekend nights than on school nights?"
+     ],
+     "math": [
+      "1. Plan: ask all 20 students in the class the hours they slept last Sunday night and last Tuesday night. — The same nights for everyone",
+      "2. Collect and record in a table. — One row per student",
+      "3. Summarise: school night total 162 h, mean 162 ÷ 20 = 8.1 h; weekend total 186 h, mean 186 ÷ 20 = 9.3 h. — Mean = total ÷ number",
+      "4. Display: a double bar graph of grouped hours. — Compares two sets",
+      "5. Conclude: these students slept about 1.2 hours more on the weekend night. — From the evidence",
+      "6. Limit: one class, one week, hours remembered by the students. — What the data cannot show"
+     ]
+    },
+    {
+     "title": "Conclusions the data can support",
+     "text": [
+      "A conclusion must stay inside the group the data came from, and must not claim more than the data shows."
+     ],
+     "tip": "A survey of your class says something about your class, not all of India. And when two things go together, that does not prove one causes the other."
+    }
+   ],
+   "diagnostics": [
+    "wm-stq-d1",
+    "wm-stq-d2"
+   ],
+   "strategies": [
+    {
+     "id": "variability",
+     "title": "Look for variability",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Would different people give different answers?",
+       "text": [
+        "Ask: to answer this, would I need to collect answers from many people or things, and would those answers differ? If yes, it is statistical."
+       ],
+       "math": [
+        "'How many brothers and sisters do students in our class have?' → answers vary → statistical",
+        "'How many students are in our class?' → one count → not statistical"
+       ]
+      }
+     ],
+     "guided": "wm-stq-g1",
+     "check": "wm-stq-c1"
+    },
+    {
+     "id": "question_to_conclusion",
+     "title": "From question to conclusion, step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Plan, collect, organise, conclude",
+       "text": [
+        "1. Make the question precise: who, what, when, which units.",
+        "2. Choose who to ask: a fair sample, not only friends.",
+        "3. Record and organise: table, then a display.",
+        "4. Conclude from the evidence, and state the limits."
+       ],
+       "math": [
+        "Vague: Do people like sport?",
+        "Precise: Which sport do students in Classes 6–8 of our school most like to play?"
+       ]
+      }
+     ],
+     "guided": "wm-stq-g2",
+     "check": "wr:stq:plan"
+    }
+   ],
+   "practice": [
+    "wm-stq-p1",
+    "wm-stq-p2",
+    "wr:stq:pose"
+   ],
+   "transfer": [
+    "wr:stq:conclude"
+   ],
+   "retention": [
+    "wr:stq:claim",
+    "wm-stq-r1"
+   ],
+   "probes": []
+  }
+ ]
+}

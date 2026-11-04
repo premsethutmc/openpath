@@ -1,0 +1,188 @@
+[
+ {
+  "kind": "irrelevant",
+  "name": "Vieta product: 10/4 = 5/2",
+  "lines": [
+   "10/4 = 5/2"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "irrelevant",
+  "name": "Vieta product: (2+3)/2 = 5/2",
+  "lines": [
+   "(2+3)/2 = 5/2"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "irrelevant",
+  "name": "Vieta product: 7/14 + 2 = 5/2",
+  "lines": [
+   "7/14 + 2 = 5/2"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "irrelevant",
+  "name": "Vieta product: student-chosen numbers in prose",
+  "lines": [
+   "Let the numbers be 10 and 4",
+   "10/4 = 5/2"
+  ],
+  "classification": "verified",
+  "justification": "all 2 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "irrelevant",
+  "name": "mean: 20/4 = 5",
+  "lines": [
+   "20/4 = 5"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "irrelevant",
+  "name": "mean: (9+9+7)/5 = 5",
+  "lines": [
+   "(9+9+7)/5 = 5"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "irrelevant",
+  "name": "finite probability: 6/16 = 3/8",
+  "lines": [
+   "6/16 = 3/8"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "wrong-quantity",
+  "name": "Vieta product: sum of roots = 5/2",
+  "lines": [
+   "sum of roots = 5/2"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "wrong-quantity",
+  "name": "Vieta sum: product of roots = 3",
+  "lines": [
+   "product of roots = 3"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta product: formula",
+  "lines": [
+   "product of roots = c/a = 5/2"
+  ],
+  "classification": "unsupported",
+  "justification": "line(s) 1 could not be verified (unsupported); the submission cannot be certified",
+  "provenance": []
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta product: c/a",
+  "lines": [
+   "c/a = 5/2"
+  ],
+  "classification": "unsupported",
+  "justification": "line(s) 1 could not be verified (unsupported); the submission cannot be certified",
+  "provenance": []
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta product: answer only",
+  "lines": [
+   "product of roots = 5/2"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta product: roots defined, then multiplied",
+  "lines": [
+   "z = (3+i)/2",
+   "w = (3-i)/2",
+   "z*w = 10/4 = 5/2"
+  ],
+  "classification": "verified",
+  "justification": "all 3 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta product: quadratic formula, then multiplied",
+  "lines": [
+   "x = (6 + sqrt(36-40))/4 = (3+i)/2",
+   "y = (6 - sqrt(36-40))/4 = (3-i)/2",
+   "product of roots = x*y = 10/4 = 5/2"
+  ],
+  "classification": "verified",
+  "justification": "all 3 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "alternative",
+  "name": "Vieta product: roots multiplied in one line",
+  "lines": [
+   "(3+i)/2 * (3-i)/2 = 10/4 = 5/2"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "alternative",
+  "name": "mean: from the data",
+  "lines": [
+   "mean = (4+8+3)/3 = 5"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "alternative",
+  "name": "mean: via an intermediate sum",
+  "lines": [
+   "sum = 4+8+3 = 15",
+   "mean = 15/3 = 5"
+  ],
+  "classification": "verified",
+  "justification": "all 2 submitted line(s) are accounted for and verified",
+  "provenance": []
+ },
+ {
+  "kind": "alternative",
+  "name": "finite probability: by a complement",
+  "lines": [
+   "P = 1 - 5/8 = 3/8"
+  ],
+  "classification": "verified",
+  "justification": "all 1 submitted line(s) are accounted for and verified",
+  "provenance": []
+ }
+]

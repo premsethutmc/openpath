@@ -1,0 +1,3804 @@
+{
+ "schema": "module-blueprint@1",
+ "version": "1.0.0",
+ "status": "draft",
+ "note": "Module blueprints for the content-production pipeline (packages/learning/src/library.ts). A blueprint holds the teaching text a person wrote; synthesis adds questions from the problem family, each checked by the family's independent check. Original, CC0, written with AI assistance, not educator-reviewed: every synthesised module starts as a draft in content/learning/review.v1.json.",
+ "blueprints": [
+  {
+   "competency": "MATH.number.exponents",
+   "title": "Work out powers",
+   "family": "pow",
+   "seed": [
+    2,
+    5
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "A power is repeated multiplication",
+     "text": [
+      "2⁵ means 2 multiplied by itself 5 times. The small raised number (the power) counts how many 2s there are; it is not a number to multiply by."
+     ],
+     "worked": true,
+     "tip": "2⁵ is not 2 × 5 = 10. It is 2 × 2 × 2 × 2 × 2 = 32."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "count_factors",
+     "title": "Write out the factors",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Count them out",
+       "text": [
+        "Write the number as many times as the power says, with × between them. Then multiply two at a time."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "build_up",
+     "title": "Build it up one step at a time",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Multiply again and again",
+       "text": [
+        "Start with the number and multiply by it again for each extra power. That is one multiplication fewer than the power."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "facts_first",
+     "title": "Use the multiplication facts you know",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Each step is a fact",
+       "text": [
+        "Every step of a power is a multiplication fact: 2 × 2 = 4, 4 × 2 = 8, 8 × 2 = 16. If a step is slow, say that times table first."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.identities-intro",
+   "title": "Expand a bracket: a(x + b)",
+   "family": "dist",
+   "seed": [
+    3,
+    4
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "The number outside multiplies everything inside",
+     "text": [
+      "3(x + 4) means three lots of (x + 4): (x + 4) + (x + 4) + (x + 4). That is three x's and three 4s."
+     ],
+     "math": [
+      "3(x + 4) = 3 × x + 3 × 4 = 3x + 12"
+     ],
+     "tip": "Multiply every term in the bracket, not only the first one."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "area_model",
+     "title": "See it as a rectangle",
+     "kind": "conceptual",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "Split the rectangle",
+       "text": [
+        "Draw a rectangle a high and x + b long. Split the long side into x and b. The two parts have areas a × x and a × b; together they are the whole rectangle."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "arrows",
+     "title": "An arrow to each term",
+     "kind": "procedural",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "Multiply along each arrow",
+       "text": [
+        "Draw an arrow from the number outside the bracket to each term inside it, and multiply along each arrow."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "times_fact",
+     "title": "Check the multiplication fact",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "The last term is a fact",
+       "text": [
+        "The number at the end is the number outside times the number inside: 3 × 4 = 12. If that fact is slow, rebuild it from one you know: 3 × 4 is 3 × 2 doubled."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.identities",
+   "title": "Expand (x + a)(x + b)",
+   "family": "expand",
+   "seed": [
+    2,
+    5
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Four products",
+     "text": [
+      "In (x + 2)(x + 5), each term of the first bracket multiplies each term of the second: x × x, x × 5, 2 × x and 2 × 5."
+     ],
+     "math": [
+      "(x + 2)(x + 5) = x² + 5x + 2x + 10 = x² + 7x + 10"
+     ],
+     "tip": "The x term is the SUM of the two numbers; the last term is their PRODUCT."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "grid",
+     "title": "Use a grid (an area model)",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Fill the four cells",
+       "text": [
+        "Draw a 2 by 2 grid. Write x and a along the top, x and b down the side. Fill each cell with the product of its row and column, then add the two cells that have an x."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "four_products",
+     "title": "First, outer, inner, last",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Two of the four products have an x",
+       "text": [
+        "Multiply the first terms, the outer terms, the inner terms and the last terms. The outer and inner products are the two x terms: add them."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "signed_sum",
+     "title": "Add the signed numbers",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Keep each sign",
+       "text": [
+        "When a number is negative, keep its sign in each product. The x term is the sum of the two signed products, so a negative product makes it smaller."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ahid_concept",
+     "title": "(a + b)²: why the middle term is 2ab",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "The idea",
+       "text": [
+        "(a + b)² = (a + b)(a + b). Multiplying every term by every term gives a×a, a×b, b×a and b×b.",
+        "a×b and b×a are the same, and there are TWO of them: a² + 2ab + b². The area picture shows them as two equal rectangles."
+       ],
+       "math": [
+        "(5x + 2)² = 25x² + 20x + 4 (every term times every term)",
+        "The box is the x coefficient: 20"
+       ],
+       "widget": {
+        "type": "grid",
+        "rows": 2,
+        "cols": 2,
+        "labels": [
+         "a²",
+         "ab",
+         "ab",
+         "b²"
+        ]
+       },
+       "role": "concept",
+       "instance": "gen:ahid:0,5,2,1"
+      },
+      {
+       "title": "Another example",
+       "text": [
+        "The same idea on a different question."
+       ],
+       "math": [
+        "(3x − 8)² = 9x² − 48x + 64 (every term times every term)",
+        "The box is the x coefficient: -48"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahid:1,3,8,1"
+      },
+      {
+       "title": "Multiply it out",
+       "text": [
+        "Write (px + q)² as (px + q)(px + q) and multiply each term by each term.",
+        "The two middle products come out equal, so the middle term is doubled."
+       ],
+       "role": "strategy",
+       "instance": "gen:ahid:0,5,2,1"
+      },
+      {
+       "title": "Another way: Multiply it out: four products",
+       "text": [
+        "The same answer by another valid method."
+       ],
+       "math": [
+        "25x² + 10x + 10x + 4 (first×first, first×second, second×first, second×second)",
+        "collect the two x terms: 10 + 10 = 20"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahid:0,5,2,1"
+      }
+     ],
+     "guided": "gen:ahid:1,2,8,1:mc",
+     "check": "gen:ahid:0,3,9,1:mc",
+     "scope": {
+      "family": "ahid",
+      "subSkill": "identities.square-cross-term@1"
+     }
+    },
+    {
+     "id": "fix_middle_not_doubled",
+     "title": "The middle term is 2ab",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "The middle term is 2ab: a common mix-up",
+       "text": [
+        "A common mix-up is to write the middle term as ab. The identity has 2ab: the two products 5x × 7 and 7 × 5x are both there.",
+        "There are two middle products, a×b and b×a; together they make 2ab."
+       ],
+       "math": [
+        "Not 35, but 70",
+        "Check at x = 1: the left side is 144. With the middle term 70: 25 + 70 + 49 = 144. With 35 instead: 109, which is not 144."
+       ],
+       "role": "misconception",
+       "instance": "gen:ahid:0,5,7,1"
+      },
+      {
+       "title": "The middle term is 2ab: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "(5x + 7)² = 25x² + 70x + 49 (every term times every term)",
+        "The box is the x coefficient: 70"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahid:0,5,7,1"
+      }
+     ],
+     "guided": "gen:ahid:0,2,5,1:mc",
+     "check": "gen:ahid:1,4,5,1",
+     "scope": {
+      "family": "ahid",
+      "subSkill": "identities.square-cross-term@1"
+     },
+     "addresses": "middle-not-doubled"
+    },
+    {
+     "id": "fix_middle_sign",
+     "title": "The sign of the middle term",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "The sign of the middle term: a common mix-up",
+       "text": [
+        "The middle term of (a + b)² is +2ab.",
+        "Square of a sum: +2ab. Square of a difference: −2ab."
+       ],
+       "math": [
+        "Not -40, but 40",
+        "Check at x = 1: the left side is 81. With the middle term 40: 25 + 40 + 16 = 81. With -40 instead: 1, which is not 81."
+       ],
+       "role": "misconception",
+       "instance": "gen:ahid:0,5,4,1"
+      },
+      {
+       "title": "The sign of the middle term: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "(5x + 4)² = 25x² + 40x + 16 (every term times every term)",
+        "The box is the x coefficient: 40"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahid:0,5,4,1"
+      }
+     ],
+     "guided": "gen:ahid:1,3,4,1:mc",
+     "check": "gen:ahid:0,4,6,1",
+     "scope": {
+      "family": "ahid",
+      "subSkill": "identities.square-cross-term@1"
+     },
+     "addresses": "middle-sign"
+    }
+   ]
+  },
+  {
+   "competency": "MATH.calculus.derivative-rules",
+   "title": "Differentiate powers of x",
+   "family": "dpow",
+   "seed": [
+    2,
+    3,
+    2
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "The power rule",
+     "text": [
+      "To differentiate k xⁿ, bring the power down as a factor and lower the power by one: the derivative is k n xⁿ⁻¹. Then put in the value of x."
+     ],
+     "worked": true,
+     "tip": "Lower the power first, then substitute."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "slope",
+     "title": "A derivative is a rate of change",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Not the value: how fast it changes",
+       "instance": "gen:dpow:1,2,3",
+       "text": [
+        "f′(3) is how fast f is changing at x = 3, not the value f(3). For f(x) = x², the values at 2.9, 3 and 3.1 are 8.41, 9 and 9.61: they rise by 1.2 over 0.2, which is 6 per unit, and the rule gives 2 × 3 = 6."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "two_moves",
+     "title": "Two moves: multiply, then lower",
+     "kind": "procedural",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "In this order",
+       "text": [
+        "Multiply the coefficient by the power, then take one off the power. Only then put in the number."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "powers_first",
+     "title": "Work out the power carefully",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "A power is repeated multiplication",
+       "text": [
+        "2² = 2 × 2 = 4 and 2³ = 2 × 2 × 2 = 8. A power is not the number times the power: 2³ is not 6."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.calculus.indefinite-integrals",
+   "title": "Integrate powers of x",
+   "family": "pint",
+   "seed": [
+    0,
+    2,
+    3,
+    2
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Reverse the power rule",
+     "text": [
+      "Differentiating xⁿ⁺¹ ⁄ (n + 1) gives xⁿ. So an antiderivative of k xⁿ is k xⁿ⁺¹ ⁄ (n + 1): raise the power by one, then divide by the new power."
+     ],
+     "math": [
+      "∫ k xⁿ dx = k xⁿ⁺¹ ⁄ (n + 1) + C"
+     ]
+    },
+    {
+     "title": "Between two limits",
+     "text": [
+      "For a definite integral, work out the antiderivative F at the upper limit and at the lower limit, then subtract: F(upper) − F(lower). The constant C cancels."
+     ],
+     "worked": true
+    }
+   ],
+   "strategies": [
+    {
+     "id": "differentiate_back",
+     "title": "Check by differentiating back",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Undo, then check",
+       "text": [
+        "Whatever antiderivative you write, differentiate it: you must get back the function you started with. x³ differentiates to 3x², so ∫ 3x² dx = x³ + C."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "raise_then_divide",
+     "title": "Raise, then divide",
+     "kind": "procedural",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "Two moves, then the limits",
+       "text": [
+        "Add one to the power, then divide by that new power. Then put in the upper limit and the lower limit, and subtract."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "powers_and_fractions",
+     "title": "Powers and fractions first",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "What the working needs",
+       "text": [
+        "The working needs powers (2³ = 8) and fractions with the same denominator (16⁄3 − 2⁄3 = 14⁄3). If either is slow, practise it first; the integration itself is two moves."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.calculus.integration-methods",
+   "title": "Integrate by substitution",
+   "family": "subst",
+   "seed": [
+    0,
+    1,
+    1,
+    2
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Spot u and du",
+     "text": [
+      "In ∫ 2x(x² + 1)² dx, call the inside of the bracket u = x² + 1. Its derivative, 2x, is already there: du = 2x dx. So the integral is ∫ u² du."
+     ],
+     "math": [
+      "u = x² + 1, du = 2x dx",
+      "∫ 2x(x² + 1)² dx = ∫ u² du = u³ ⁄ 3 + C"
+     ]
+    },
+    {
+     "title": "Change the limits",
+     "text": [
+      "With limits, change them too: put each x limit into u = x² + 1, and integrate between those u values. You never go back to x."
+     ],
+     "worked": true,
+     "tip": "Using the x limits for u is the most common slip."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "why_du",
+     "title": "Why 2x dx becomes du",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Nothing left to divide by",
+       "text": [
+        "du ⁄ dx = 2x, so a small change dx in x changes u by 2x dx. The 2x in the integral is exactly what turns dx into du: there is no extra 2 to divide by."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "limits_table",
+     "title": "Make a little table of limits",
+     "kind": "procedural",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "x row, u row",
+       "text": [
+        "Write two rows, x and u. Under x put the two limits; under u put x² + c for each. Then integrate in u between the u values."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "powers_check",
+     "title": "Work out the powers",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "The last step is arithmetic",
+       "text": [
+        "The last step is powers of whole numbers, like 2³ = 8 and 5³ = 125, then a subtraction and a division. A power is repeated multiplication, not the number times the power."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.quadratic-discriminant",
+   "title": "How many solutions? The discriminant",
+   "family": "disc",
+   "seed": [
+    2,
+    5
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "b² − 4ac decides",
+     "text": [
+      "For ax² + bx + c = 0, work out the discriminant b² − 4ac. Positive: two different real solutions. Zero: one (repeated) solution. Negative: no real solutions."
+     ],
+     "worked": true,
+     "tip": "b² is never negative, even when b is."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "parabola",
+     "title": "Picture the parabola",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Crossings",
+       "text": [
+        "y = x² + bx + c is a U-shaped curve. Two solutions: it crosses the x-axis twice. One: it just touches it. None: it stays above it. The discriminant tells you which, without drawing."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "careful_signs",
+     "title": "Write each part with its sign",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "b², then 4ac, then subtract",
+       "text": [
+        "Write b², then 4ac with c's own sign, then subtract."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "signed_numbers",
+     "title": "Subtracting a negative",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Two sign facts",
+       "text": [
+        "Taking away a negative number adds: 16 − (−20) = 36. And a square is never negative: (−4)² = 16."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "extendsTemplate": true,
+   "competency": "MATH.statistics.median-mode",
+   "title": "The median: order first, then find the middle",
+   "family": "akmed",
+   "seed": [
+    71,
+    9
+   ],
+   "author": "Claude candidate 4e655e73; Codex integration",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [],
+   "strategies": [
+    {
+     "id": "fix_mean_for_median",
+     "title": "The median is not the mean",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The median is not the mean: a common mix-up",
+       "text": [
+        "A common mix-up is to work out the mean instead. The median is the middle value once the numbers are in order.",
+        "The mean shares the total equally; the median is the middle value in order. They are different averages."
+       ],
+       "math": [
+        "Not 55, but 62",
+        "Check: the total 495 shared equally among 9 values is 55 (the mean); in order, 21, 25, 41, 47, 62, 64, 74, 80, 81, the middle value is different."
+       ],
+       "role": "misconception",
+       "instance": "gen:akmed:71,9"
+      },
+      {
+       "title": "The median is not the mean: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "In order: 21, 25, 41, 47, 62, 64, 74, 80, 81 (9 values)",
+        "The middle one is the 5th value: 62"
+       ],
+       "role": "strategy",
+       "instance": "gen:akmed:71,9"
+      }
+     ],
+     "guided": "gen:akmed:77,5:mc",
+     "check": "gen:akmed:29,5",
+     "scope": {
+      "family": "akmed",
+      "parameters": [
+       {
+        "index": 1,
+        "values": [
+         5,
+         7,
+         9
+        ]
+       }
+      ]
+     },
+     "addresses": "mean-for-median"
+    },
+    {
+     "id": "fix_one_middle",
+     "title": "Two middle values: take halfway",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Two middle values: take halfway: a common mix-up",
+       "text": [
+        "With 6 numbers there are two middle numbers (66 and 75); the median is halfway between them.",
+        "With an even number of values there are two middle values: take halfway between them."
+       ],
+       "math": [
+        "Not 66, but 70.5",
+        "Check: 6 values have no single middle; the 3rd and 4th values, 66 and 75, share the middle, so the median is halfway: 70.5."
+       ],
+       "role": "misconception",
+       "instance": "gen:akmed:32,6"
+      },
+      {
+       "title": "Two middle values: take halfway: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "In order: 14, 58, 66, 75, 81, 95 (6 values)",
+        "The two middle values are the 3rd and 4th: 66 and 75; halfway: (66 + 75) ÷ 2 = 70.5"
+       ],
+       "role": "strategy",
+       "instance": "gen:akmed:32,6"
+      }
+     ],
+     "guided": "gen:akmed:79,6:mc",
+     "check": "gen:akmed:33,6",
+     "scope": {
+      "family": "akmed",
+      "parameters": [
+       {
+        "index": 1,
+        "values": [
+         6,
+         8,
+         10
+        ]
+       }
+      ]
+     },
+     "addresses": "one-middle"
+    }
+   ]
+  },
+  {
+   "extendsTemplate": true,
+   "competency": "MATH.probability.classical",
+   "title": "Balls of different counts: each ball is equally likely",
+   "family": "anbag",
+   "seed": [
+    2,
+    6,
+    2,
+    2
+   ],
+   "author": "Claude candidate 4e655e73; Codex integration",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [],
+   "strategies": [
+    {
+     "id": "fix_colours_equally_likely",
+     "title": "Count balls, not colours",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Count balls, not colours: a common mix-up",
+       "text": [
+        "A common mix-up is to take each colour as equally likely; the colours have different numbers of balls, and it is the balls that are equally likely.",
+        "It is the balls that are equally likely, not the colours."
+       ],
+       "math": [
+        "Not 1/3, but 1/5",
+        "Check: 6 blue balls and only 2 green balls: a green ball is less likely to come out than a blue one, so the colours cannot all have the same chance."
+       ],
+       "role": "misconception",
+       "instance": "gen:anbag:2,6,2,2"
+      },
+      {
+       "title": "Count balls, not colours: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "All the balls: 2 red + 6 blue + 2 green = 10, each equally likely",
+        "Balls that fit \"green\": 2",
+        "P = 2/10 = 1/5"
+       ],
+       "role": "strategy",
+       "instance": "gen:anbag:2,6,2,2"
+      }
+     ],
+     "guided": "gen:anbag:9,2,4,2",
+     "check": "gen:anbag:6,8,0,1:mc",
+     "scope": {
+      "family": "anbag"
+     },
+     "addresses": "colours-equally-likely"
+    }
+   ]
+  },
+  {
+   "competency": "MATH.statistics.pictographs",
+   "title": "Reading a pictograph with a key",
+   "family": "acpict",
+   "seed": [
+    3,
+    11,
+    1
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Reading a pictograph with a key",
+     "text": [
+      "In a pictograph every picture stands for the same number of things: the number in the key.",
+      "One picture does not always stand for one thing. Count the pictures, then use the key."
+     ],
+     "worked": true,
+     "widget": {
+      "type": "pictograph",
+      "labels": [
+       "Kabaddi",
+       "Cricket",
+       "Kho-kho",
+       "Football"
+      ],
+      "counts": [
+       80,
+       10,
+       40,
+       10
+      ],
+      "key": 10
+     }
+    }
+   ],
+   "strategies": [
+    {
+     "id": "read_with_key",
+     "title": "Read a row with the key",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Read a row with the key",
+       "text": [
+        "Every picture in the row stands for the key's number, not for one.",
+        "Count the pictures in the row, then multiply by the key."
+       ],
+       "math": [
+        "The pictograph shows the favourite fruits of the children of a school. Each ● stands for 5 children. How many children chose Guava?",
+        "The row for Guava has 4 pictures",
+        "4 pictures × 5 = 20"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpict:2,3,2",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Mango",
+         "Banana",
+         "Guava",
+         "Apple"
+        ],
+        "counts": [
+         40,
+         25,
+         20,
+         25
+        ],
+        "key": 5
+       }
+      }
+     ],
+     "guided": "gen:acpict:1,11,3",
+     "check": "gen:acpict:1,11,0",
+     "scope": {
+      "family": "acpict",
+      "subSkill": "pictographs.read-with-key@1"
+     }
+    },
+    {
+     "id": "table",
+     "title": "Turn it into a table",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Turn it into a table",
+       "text": [
+        "Write each label with its number of pictures.",
+        "Multiply each by the key and write the real number beside it."
+       ],
+       "math": [
+        "The pictograph shows the favourite games of the children of a school. Each ● stands for 10 children. How many children chose Kho-kho?",
+        "The row for Kho-kho has 7 pictures",
+        "7 pictures × 10 = 70"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpict:3,14,2",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Kabaddi",
+         "Cricket",
+         "Kho-kho",
+         "Football"
+        ],
+        "counts": [
+         70,
+         20,
+         70,
+         60
+        ],
+        "key": 10
+       }
+      }
+     ],
+     "guided": "gen:acpict:1,11,2:mc",
+     "check": "gen:acpict:1,26,1:mc",
+     "scope": {
+      "family": "acpict",
+      "subSkill": "pictographs.read-with-key@1"
+     }
+    },
+    {
+     "id": "half_pictures",
+     "title": "Half pictures",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Half pictures",
+       "text": [
+        "A whole picture stands for the key; a half picture stands for half the key.",
+        "Count the row in halves: a whole picture is two halves and a half picture is one. Then multiply the number of halves by half the key."
+       ],
+       "math": [
+        "The pictograph shows the favourite games of the children of a school. Each ● stands for 20 children, and a half ● stands for 10. How many children chose Kho-kho?",
+        "Count in half pictures for Kho-kho: 13 halves",
+        "13 halves × 10 = 130 children"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicthalf:3,2,2,0",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Kabaddi",
+         "Cricket",
+         "Kho-kho",
+         "Football"
+        ],
+        "counts": [
+         70,
+         130,
+         130,
+         120
+        ],
+        "key": 20
+       }
+      }
+     ],
+     "guided": "gen:acpicthalf:2,5,2,0:mc",
+     "check": "gen:acpicthalf:1,23,3,0:mc",
+     "scope": {
+      "family": "acpicthalf",
+      "subSkill": "pictographs.half-symbol@1"
+     }
+    },
+    {
+     "id": "half_pictures_total",
+     "title": "The total with half pictures",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "The total with half pictures",
+       "text": [
+        "Count every row in halves: a whole picture is two halves and a half picture is one.",
+        "Add the halves of all the rows, then multiply by half the key."
+       ],
+       "math": [
+        "The pictograph shows the favourite games of the children of a school. Each ● stands for 4 children, and a half ● stands for 2. How many children are there in all?",
+        "Count in half pictures for all rows: 35 halves",
+        "35 halves × 2 = 70 children"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicthalf:1,29,0,1",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Kabaddi",
+         "Cricket",
+         "Kho-kho",
+         "Football"
+        ],
+        "counts": [
+         12,
+         18,
+         24,
+         16
+        ],
+        "key": 4
+       }
+      }
+     ],
+     "guided": "gen:acpicthalf:3,0,0,1:mc",
+     "check": "gen:acpicthalf:1,27,0,1",
+     "scope": {
+      "family": "acpicthalf",
+      "subSkill": "pictographs.half-symbol-total@1"
+     }
+    },
+    {
+     "id": "compare_rows",
+     "title": "How many more, with the key",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "How many more, with the key",
+       "text": [
+        "\"How many more\" compares two amounts: it is the bigger amount minus the smaller one.",
+        "Read both rows using the key, then take the smaller number from the bigger one."
+       ],
+       "math": [
+        "The pictograph shows the favourite fruits of the children of a school. Each ● stands for 10 children. How many more children chose Apple than Guava?",
+        "8 pictures × 10 = 80",
+        "7 pictures × 10 = 70",
+        "80 − 70 = 10"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpictmore:3,18,5",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Mango",
+         "Banana",
+         "Guava",
+         "Apple"
+        ],
+        "counts": [
+         30,
+         80,
+         70,
+         80
+        ],
+        "key": 10
+       }
+      }
+     ],
+     "guided": "gen:acpictmore:3,8,4:mc",
+     "check": "gen:acpictmore:3,26,5",
+     "scope": {
+      "family": "acpictmore",
+      "subSkill": "pictographs.compare-rows@1"
+     }
+    },
+    {
+     "id": "draw_from_table",
+     "title": "Draw a row from a table",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Draw a row from a table",
+       "text": [
+        "The key says how many each picture stands for.",
+        "To draw a row, share the number into groups of the key: one picture for each group, not one for each thing."
+       ],
+       "math": [
+        "The table shows the favourite games of the children of a school. A pictograph of it is drawn with each ● standing for 2 children. How many ● should be drawn for Cricket?",
+        "4 children ÷ 2 = 2 pictures"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicttab:0,17,1,0",
+       "widget": {
+        "type": "table",
+        "head": [
+         "Choice",
+         "Children"
+        ],
+        "rows": [
+         [
+          "Kabaddi",
+          12
+         ],
+         [
+          "Cricket",
+          4
+         ],
+         [
+          "Kho-kho",
+          16
+         ],
+         [
+          "Football",
+          16
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:acpicttab:0,19,1,0:mc",
+     "check": "gen:acpicttab:0,22,1,0:mc",
+     "scope": {
+      "family": "acpicttab",
+      "subSkill": "pictographs.draw-from-table@1"
+     }
+    },
+    {
+     "id": "pictograph_total",
+     "title": "The total of a pictograph",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "The total of a pictograph",
+       "text": [
+        "Add the pictures in all the rows first.",
+        "Then multiply the number of pictures by the key."
+       ],
+       "math": [
+        "The pictograph shows how the children of a school come to school. Each ● stands for 2 children. How many children are there in all?",
+        "There are 2 + 4 + 8 + 6 = 20 pictures in all",
+        "20 pictures × 2 = 40 children"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicttab:0,13,0,1",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Walk",
+         "Bus",
+         "Cycle",
+         "Auto"
+        ],
+        "counts": [
+         4,
+         8,
+         16,
+         12
+        ],
+        "key": 2
+       }
+      }
+     ],
+     "guided": "gen:acpicttab:2,16,0,1:mc",
+     "check": "gen:acpicttab:1,0,0,1:mc",
+     "scope": {
+      "family": "acpicttab",
+      "subSkill": "pictographs.total@1"
+     }
+    },
+    {
+     "id": "largest_group",
+     "title": "The largest group",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "The largest group",
+       "text": [
+        "The row with the most pictures is the largest group.",
+        "Count its pictures and multiply by the key: the answer is the number of things, not the number of pictures."
+       ],
+       "math": [
+        "The pictograph shows the favourite games of the children of a school. Each ● stands for 2 children. How many children are in the largest group?",
+        "The longest row has 8 pictures",
+        "8 pictures × 2 = 16 children"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpicttab:0,17,0,2",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Kabaddi",
+         "Cricket",
+         "Kho-kho",
+         "Football"
+        ],
+        "counts": [
+         12,
+         4,
+         16,
+         16
+        ],
+        "key": 2
+       }
+      }
+     ],
+     "guided": "gen:acpicttab:2,5,0,2",
+     "check": "gen:acpicttab:2,16,0,2",
+     "scope": {
+      "family": "acpicttab",
+      "subSkill": "pictographs.largest-group@1"
+     }
+    }
+   ]
+  },
+  {
+   "competency": "MATH.statistics.scaled-bars",
+   "title": "Reading a bar chart with a scale",
+   "family": "afbar",
+   "seed": [
+    4,
+    0,
+    3
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Reading a bar chart with a scale",
+     "text": [
+      "On a scaled bar chart each line on the side stands for more than one. The height of a bar is read off the scale, not by counting the lines as ones."
+     ],
+     "worked": true,
+     "widget": {
+      "type": "bars",
+      "title": "Saplings planted by each class",
+      "labels": [
+       "Class 1",
+       "Class 2",
+       "Class 3",
+       "Class 4",
+       "Class 5"
+      ],
+      "values": [
+       100,
+       450,
+       350,
+       400,
+       100
+      ],
+      "scale": 50
+     }
+    }
+   ],
+   "strategies": [
+    {
+     "id": "skip_count",
+     "title": "Skip-count up the scale",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Skip-count up the scale",
+       "text": [
+        "Find how much one line stands for from two numbers next to each other on the scale.",
+        "Put a finger at the bottom of the bar and count up the lines in steps of the scale; stop at the top of the bar."
+       ],
+       "math": [
+        "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Tuesday?",
+        "The bar reaches 3 lines; each line is 2, so it shows 6"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:0,0,5",
+       "widget": {
+        "type": "bars",
+        "title": "Mangoes sold at a shop",
+        "labels": [
+         "Mon",
+         "Tue",
+         "Wed",
+         "Thu",
+         "Fri"
+        ],
+        "values": [
+         14,
+         6,
+         8,
+         18,
+         20
+        ],
+        "scale": 2
+       }
+      }
+     ],
+     "guided": "gen:afbar:4,0,8:mc",
+     "check": "gen:afbar:0,0,2:mc",
+     "scope": {
+      "family": "afbar",
+      "subSkill": "scaled-bars.read@1"
+     }
+    },
+    {
+     "id": "bars_difference",
+     "title": "How many more, read against the scale",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "How many more, read against the scale",
+       "text": [
+        "Read both bars against the scale.",
+        "\"How many more\" is the bigger value minus the smaller one."
+       ],
+       "math": [
+        "The bar chart shows saplings planted by each class. Read the scale carefully. How many more saplings were planted by Class 1 than by Class 2?",
+        "The bar reaches 9 lines; each line is 10, so it shows 90",
+        "The bar reaches 3 lines; each line is 10, so it shows 30",
+        "How many more: 90 − 30 = 60"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:2,1,3",
+       "widget": {
+        "type": "bars",
+        "title": "Saplings planted by each class",
+        "labels": [
+         "Class 1",
+         "Class 2",
+         "Class 3",
+         "Class 4",
+         "Class 5"
+        ],
+        "values": [
+         90,
+         30,
+         10,
+         90,
+         90
+        ],
+        "scale": 10
+       }
+      }
+     ],
+     "guided": "gen:afbar:2,1,2:mc",
+     "check": "gen:afbar:2,1,5:mc",
+     "scope": {
+      "family": "afbar",
+      "subSkill": "scaled-bars.difference@1"
+     }
+    },
+    {
+     "id": "bars_total",
+     "title": "Two bars together",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Two bars together",
+       "text": [
+        "Read both bars against the scale.",
+        "\"Together\" means add the two values."
+       ],
+       "math": [
+        "The bar chart shows mangoes sold at a shop. Read the scale carefully. How many mangoes were sold on Tuesday and on Monday together?",
+        "The bar reaches 7 lines; each line is 5, so it shows 35",
+        "The bar reaches 8 lines; each line is 5, so it shows 40",
+        "Together: 35 + 40 = 75"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:1,2,17",
+       "widget": {
+        "type": "bars",
+        "title": "Mangoes sold at a shop",
+        "labels": [
+         "Mon",
+         "Tue",
+         "Wed",
+         "Thu",
+         "Fri"
+        ],
+        "values": [
+         40,
+         35,
+         10,
+         5,
+         10
+        ],
+        "scale": 5
+       }
+      }
+     ],
+     "guided": "gen:afbar:1,2,16:mc",
+     "check": "gen:afbar:1,2,14:mc",
+     "scope": {
+      "family": "afbar",
+      "subSkill": "scaled-bars.total@1"
+     }
+    },
+    {
+     "id": "fix_assume_tens_read",
+     "title": "Read the scale; do not assume ten",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Read the scale; do not assume ten: a common mix-up",
+       "text": [
+        "A common mix-up is to take each line as ten. Read the numbers on the scale: they tell how much each line stands for.",
+        "Do not assume ten: two numbers next to each other on the scale differ by the size of one line."
+       ],
+       "math": [
+        "Not 40, but 8"
+       ],
+       "role": "misconception",
+       "instance": "gen:afbar:0,0,7",
+       "widget": {
+        "type": "bars",
+        "title": "Saplings planted by each class",
+        "labels": [
+         "Class 1",
+         "Class 2",
+         "Class 3",
+         "Class 4",
+         "Class 5"
+        ],
+        "values": [
+         10,
+         20,
+         8,
+         20,
+         6
+        ],
+        "scale": 2
+       }
+      },
+      {
+       "title": "Read the scale; do not assume ten: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "The bar chart shows saplings planted by each class. Read the scale carefully. How many saplings were planted by Class 3?",
+        "The bar reaches 4 lines; each line is 2, so it shows 8"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:0,0,7"
+      }
+     ],
+     "guided": "gen:afbar:0,0,4:mc",
+     "check": "gen:afbar:0,0,3",
+     "scope": {
+      "family": "afbar",
+      "subSkill": "scaled-bars.read@1"
+     },
+     "addresses": "assume-tens"
+    },
+    {
+     "id": "fix_assume_tens",
+     "title": "Read the scale; do not assume 10",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Read the scale; do not assume 10: a common mix-up",
+       "text": [
+        "A common mix-up is to take each line as 10. Read the numbers on the scale: they tell how much each line stands for.",
+        "Do not assume 10: read the numbers on the scale to see what one line stands for."
+       ],
+       "math": [
+        "Not 80, but 16",
+        "Check: two numbers next to each other on the scale differ by the size of one line."
+       ],
+       "role": "misconception",
+       "instance": "gen:afbar:0,2,5"
+      },
+      {
+       "title": "Read the scale; do not assume 10: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Thu: 2; Fri: 14 (scale 2 per line)",
+        "2 + 14 = 16"
+       ],
+       "role": "strategy",
+       "instance": "gen:afbar:0,2,5"
+      }
+     ],
+     "guided": "gen:afbar:0,2,2",
+     "check": "gen:afbar:0,2,7",
+     "scope": {
+      "family": "afbar",
+      "subSkill": "scaled-bars.total@1",
+      "parameters": [
+       {
+        "index": 1,
+        "values": [
+         2
+        ]
+       }
+      ]
+     },
+     "addresses": "assume-tens"
+    }
+   ]
+  },
+  {
+   "competency": "MATH.number.place-value-tens",
+   "title": "Tens and ones: what number do the blocks show",
+   "family": "aatens",
+   "seed": [
+    3,
+    3
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Tens and ones: what number do the blocks show",
+     "text": [
+      "A long block is a ten and a small cube is a one. The number is the tens and the ones together."
+     ],
+     "worked": true,
+     "widget": {
+      "type": "blocks",
+      "hundreds": 0,
+      "tens": 3,
+      "ones": 3
+     }
+    }
+   ],
+   "strategies": [
+    {
+     "id": "bundles",
+     "title": "Bundle the loose ones",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Bundle the loose ones",
+       "text": [
+        "Each long block is a bundle of ten; each small cube is a one.",
+        "When there are ten or more loose cubes, tie ten of them into another ten first. Then count the tens in tens and count on the ones."
+       ],
+       "math": [
+        "What number do the blocks in the picture show?",
+        "8 tens and 14 ones",
+        "14 ones = 1 ten and 4 ones",
+        "8 tens and 1 ten = 9 tens",
+        "9 tens and 4 ones = 94"
+       ],
+       "role": "strategy",
+       "instance": "gen:aatens:8,14",
+       "widget": {
+        "type": "blocks",
+        "hundreds": 0,
+        "tens": 8,
+        "ones": 14
+       }
+      }
+     ],
+     "guided": "gen:aatens:4,11:mc",
+     "check": "gen:aatens:8,13",
+     "scope": {
+      "family": "aatens",
+      "subSkill": "place-value.blocks-to-number@1"
+     }
+    },
+    {
+     "id": "count_on",
+     "title": "Count the tens, then the ones",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Count the tens, then the ones",
+       "text": [
+        "Touch each long block in the picture and count in tens.",
+        "Then count on the small cubes one by one."
+       ],
+       "math": [
+        "What number do the blocks in the picture show?",
+        "2 tens are 20.",
+        "7 ones.",
+        "20 and 7 make 27."
+       ],
+       "role": "strategy",
+       "instance": "gen:aatens:2,7",
+       "widget": {
+        "type": "blocks",
+        "hundreds": 0,
+        "tens": 2,
+        "ones": 7
+       }
+      }
+     ],
+     "guided": "gen:aatens:3,1:mc",
+     "check": "gen:aatens:3,2",
+     "scope": {
+      "family": "aatens",
+      "subSkill": "place-value.blocks-to-number@1"
+     }
+    },
+    {
+     "id": "tens_digit_value",
+     "title": "The value of the tens digit",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "The value of the tens digit",
+       "text": [
+        "In a two-digit number the first digit counts tens and the second counts ones.",
+        "The value of the tens digit is that many tens."
+       ],
+       "math": [
+        "In 46, what is the value of the digit 4?",
+        "In 46, the first digit is in the tens place.",
+        "So the answer is 40."
+       ],
+       "role": "strategy",
+       "instance": "gen:aadigit:46,0",
+       "widget": {
+        "type": "blocks",
+        "hundreds": 0,
+        "tens": 4,
+        "ones": 6
+       }
+      }
+     ],
+     "guided": "gen:aadigit:52,0:mc",
+     "check": "gen:aadigit:40,0:mc",
+     "scope": {
+      "family": "aadigit",
+      "subSkill": "place-value.tens-digit-value@1"
+     }
+    },
+    {
+     "id": "count_tens",
+     "title": "How many tens",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "How many tens",
+       "text": [
+        "\"How many tens\" asks for a count of bundles of ten, not for their value.",
+        "In a two-digit number it is the first digit."
+       ],
+       "math": [
+        "How many tens are there in 52?",
+        "In 52, the first digit is in the tens place.",
+        "So the answer is 5."
+       ],
+       "role": "strategy",
+       "instance": "gen:aadigit:52,1"
+      }
+     ],
+     "guided": "gen:aadigit:93,1",
+     "check": "gen:aadigit:40,1",
+     "scope": {
+      "family": "aadigit",
+      "subSkill": "place-value.count-tens@1"
+     }
+    },
+    {
+     "id": "ones_digit_value",
+     "title": "The value of the ones digit",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "The value of the ones digit",
+       "text": [
+        "The second digit of a two-digit number counts ones.",
+        "So the ones digit is worth just that many ones."
+       ],
+       "math": [
+        "In 23, what is the value of the digit 3?",
+        "In 23, the last digit is in the ones place.",
+        "So the answer is 3."
+       ],
+       "role": "strategy",
+       "instance": "gen:aadigit:23,2",
+       "widget": {
+        "type": "blocks",
+        "hundreds": 0,
+        "tens": 2,
+        "ones": 3
+       }
+      }
+     ],
+     "guided": "gen:aadigit:52,2:mc",
+     "check": "gen:aadigit:19,2",
+     "scope": {
+      "family": "aadigit",
+      "subSkill": "place-value.ones-digit-value@1"
+     }
+    },
+    {
+     "id": "full_tens",
+     "title": "Make full tens",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Make full tens",
+       "text": [
+        "Rows of different lengths are not tens: count the objects, not the rows.",
+        "Put them into groups of ten; each full group is one ten. Count the full groups."
+       ],
+       "math": [
+        "The shells in the picture lie in rows of different lengths. Imran puts them into groups of ten. How many full groups of ten can be made?",
+        "Grouping gives 2 tens and 3 ones.",
+        "So the answer is 2."
+       ],
+       "role": "strategy",
+       "instance": "gen:aabund:3,2,0",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Row 1",
+         "Row 2",
+         "Row 3"
+        ],
+        "counts": [
+         10,
+         5,
+         8
+        ],
+        "key": 1
+       }
+      }
+     ],
+     "guided": "gen:aabund:3,19,0:mc",
+     "check": "gen:aabund:3,3,0",
+     "scope": {
+      "family": "aabund",
+      "subSkill": "place-value.full-tens@1"
+     }
+    },
+    {
+     "id": "left_over_ones",
+     "title": "The ones left over",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "The ones left over",
+       "text": [
+        "Make as many full tens as you can.",
+        "The objects that are not in a full ten are the ones left over."
+       ],
+       "math": [
+        "The shells in the picture lie in rows of different lengths. Meena puts them into groups of ten. How many shells are left over, not in a full group of ten?",
+        "Grouping gives 5 tens and 6 ones.",
+        "So the answer is 6."
+       ],
+       "role": "strategy",
+       "instance": "gen:aabund:8,6,1",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Row 1",
+         "Row 2",
+         "Row 3",
+         "Row 4",
+         "Row 5",
+         "Row 6",
+         "Row 7",
+         "Row 8"
+        ],
+        "counts": [
+         9,
+         7,
+         7,
+         6,
+         6,
+         6,
+         8,
+         7
+        ],
+        "key": 1
+       }
+      }
+     ],
+     "guided": "gen:aabund:3,2,1",
+     "check": "gen:aabund:3,3,1:mc",
+     "scope": {
+      "family": "aabund",
+      "subSkill": "place-value.left-over-ones@1"
+     }
+    },
+    {
+     "id": "grouped_total",
+     "title": "Tens and ones together",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Tens and ones together",
+       "text": [
+        "Make full tens and count them in tens.",
+        "Then count on the ones left over: that is how many there are in all."
+       ],
+       "math": [
+        "The shells in the picture lie in rows of different lengths. Divya puts them into groups of ten. How many shells are there in all?",
+        "Grouping gives 2 tens and 8 ones.",
+        "So the answer is 28."
+       ],
+       "role": "strategy",
+       "instance": "gen:aabund:3,3,2",
+       "widget": {
+        "type": "pictograph",
+        "labels": [
+         "Row 1",
+         "Row 2",
+         "Row 3"
+        ],
+        "counts": [
+         7,
+         10,
+         11
+        ],
+        "key": 1
+       }
+      }
+     ],
+     "guided": "gen:aabund:8,6,2:mc",
+     "check": "gen:aabund:5,1,2:mc",
+     "scope": {
+      "family": "aabund",
+      "subSkill": "place-value.grouped-total@1"
+     }
+    }
+   ]
+  },
+  {
+   "competency": "MATH.measurement.money-decimals",
+   "title": "Changing between rupees and paise",
+   "family": "acpaise",
+   "seed": [
+    3,
+    1,
+    1
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Changing between rupees and paise",
+     "text": [
+      "A bigger unit is made of a fixed number of smaller units.",
+      "One rupee is a hundred paise. In an amount written with a dot, the digits before the dot are rupees and the two digits after it are paise."
+     ],
+     "worked": true,
+     "widget": {
+      "type": "table",
+      "head": [
+       "Rupees (₹)",
+       "Paise"
+      ],
+      "rows": [
+       [
+        3,
+        "05"
+       ]
+      ]
+     }
+    }
+   ],
+   "strategies": [
+    {
+     "id": "paise_to_rupees",
+     "title": "Paise into rupees",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Paise into rupees",
+       "text": [
+        "A hundred paise make one rupee, so every hundred paise is a rupee.",
+        "Divide the paise by a hundred: the number of whole hundreds is the rupees, and the last two digits are the paise, written after the dot."
+       ],
+       "math": [
+        "Change 3,260 paise into rupees. Write the answer in rupees, like 4.50.",
+        "3,260 paise holds 32 groups of 100 paise: ₹32",
+        "60 paise are left over, written after the point"
+       ],
+       "role": "strategy",
+       "instance": "gen:acp2r:32,12",
+       "widget": {
+        "type": "table",
+        "head": [
+         "Paise",
+         "Rupees (₹)"
+        ],
+        "rows": [
+         [
+          "3,260",
+          "?"
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:acp2r:29,14:mc",
+     "check": "gen:acp2r:29,17:mc",
+     "scope": {
+      "family": "acp2r",
+      "subSkill": "money.paise-to-rupees@1"
+     }
+    },
+    {
+     "id": "rupees_and_paise_to_paise",
+     "title": "Rupees and paise into paise",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Rupees and paise into paise",
+       "text": [
+        "One rupee is a hundred paise.",
+        "Multiply the rupees by a hundred to get paise, then add the paise."
+       ],
+       "math": [
+        "How many paise are there in ₹12 and 5 paise?",
+        "₹12 = 12 × 100 paise = 1200 paise",
+        "1200 + 5 = 1205 paise"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpaise:12,1,0",
+       "widget": {
+        "type": "table",
+        "head": [
+         "Rupees (₹)",
+         "Paise"
+        ],
+        "rows": [
+         [
+          12,
+          5
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:acpaise:3,4,0:mc",
+     "check": "gen:acpaise:5,11,0:mc",
+     "scope": {
+      "family": "acpaise",
+      "subSkill": "money.rupees-and-paise-to-paise@1"
+     }
+    },
+    {
+     "id": "decimal_rupees_to_paise",
+     "title": "Rupees written with a dot, into paise",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Rupees written with a dot, into paise",
+       "text": [
+        "The digits before the dot are rupees and the two digits after it are paise.",
+        "Multiply the rupees by a hundred to get paise, then add the paise after the dot. That is the same as reading all the digits without the dot."
+       ],
+       "math": [
+        "How many paise make ₹2.70?",
+        "₹2 = 2 × 100 paise = 200 paise",
+        "200 + 70 = 270 paise"
+       ],
+       "role": "strategy",
+       "instance": "gen:acpaise:2,14,1",
+       "widget": {
+        "type": "table",
+        "head": [
+         "Rupees (₹)",
+         "Paise"
+        ],
+        "rows": [
+         [
+          2,
+          "70"
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:acpaise:13,18,1:mc",
+     "check": "gen:acpaise:5,11,1",
+     "scope": {
+      "family": "acpaise",
+      "subSkill": "money.decimal-rupees-to-paise@1"
+     }
+    }
+   ]
+  },
+  {
+   "competency": "MATH.measurement.length-conversion",
+   "title": "Changing between units of length",
+   "family": "acmcm",
+   "seed": [
+    2,
+    90,
+    0
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Changing between units of length",
+     "text": [
+      "A bigger unit is made of a fixed number of smaller units.",
+      "Ten millimetres make a centimetre, a hundred centimetres make a metre and a thousand metres make a kilometre. Going to a smaller unit gives a bigger number; going to a bigger unit gives a smaller number, as whole units and some left over, or as a decimal."
+     ],
+     "worked": true
+    }
+   ],
+   "strategies": [
+    {
+     "id": "cm_to_decimal_m",
+     "title": "Centimetres as a decimal of a metre",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Centimetres as a decimal of a metre",
+       "text": [
+        "A hundred centimetres make a metre, so one centimetre is one hundredth of a metre.",
+        "To write centimetres in metres, divide by a hundred: the point moves two places to the left."
+       ],
+       "math": [
+        "Write 846 cm in metres, as a decimal.",
+        "The bigger unit is 100 of the smaller unit",
+        "846 ÷ 100 = 8.46"
+       ],
+       "role": "strategy",
+       "instance": "gen:acdecu:0,846"
+      }
+     ],
+     "guided": "gen:acdecu:0,866:mc",
+     "check": "gen:acdecu:0,826",
+     "scope": {
+      "family": "acdecu",
+      "subSkill": "length.cm-to-decimal-m@1"
+     }
+    },
+    {
+     "id": "mm_to_decimal_cm",
+     "title": "Millimetres as a decimal of a centimetre",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Millimetres as a decimal of a centimetre",
+       "text": [
+        "Ten millimetres make a centimetre, so one millimetre is one tenth of a centimetre.",
+        "To write millimetres in centimetres, divide by ten: the point moves one place to the left."
+       ],
+       "math": [
+        "Write 862 mm in centimetres, as a decimal.",
+        "The bigger unit is 10 of the smaller unit",
+        "862 ÷ 10 = 86.2"
+       ],
+       "role": "strategy",
+       "instance": "gen:acdecu:1,862"
+      }
+     ],
+     "guided": "gen:acdecu:1,568:mc",
+     "check": "gen:acdecu:1,572",
+     "scope": {
+      "family": "acdecu",
+      "subSkill": "length.mm-to-decimal-cm@1"
+     }
+    },
+    {
+     "id": "m_to_decimal_km",
+     "title": "Metres as a decimal of a kilometre",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Metres as a decimal of a kilometre",
+       "text": [
+        "A thousand metres make a kilometre, so one metre is one thousandth of a kilometre.",
+        "To write metres in kilometres, divide by a thousand: the point moves three places to the left."
+       ],
+       "math": [
+        "Write 1,600 m in kilometres, as a decimal.",
+        "The bigger unit is 1000 of the smaller unit",
+        "1600 ÷ 1000 = 1.6"
+       ],
+       "role": "strategy",
+       "instance": "gen:acdecu:2,1600"
+      }
+     ],
+     "guided": "gen:acdecu:2,8960:mc",
+     "check": "gen:acdecu:2,600:mc",
+     "scope": {
+      "family": "acdecu",
+      "subSkill": "length.m-to-decimal-km@1"
+     }
+    },
+    {
+     "id": "decimal_m_to_cm",
+     "title": "Metres written as a decimal, into centimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Metres written as a decimal, into centimetres",
+       "text": [
+        "One metre is a hundred centimetres.",
+        "Multiply the metres by a hundred: the point moves two places to the right."
+       ],
+       "math": [
+        "3.99 m = how many centimetres?",
+        "The bigger unit is 100 of the smaller unit",
+        "3.99 × 100 = 399"
+       ],
+       "role": "strategy",
+       "instance": "gen:acdecu:3,399"
+      }
+     ],
+     "guided": "gen:acdecu:3,492:mc",
+     "check": "gen:acdecu:3,372",
+     "scope": {
+      "family": "acdecu",
+      "subSkill": "length.decimal-m-to-cm@1"
+     }
+    },
+    {
+     "id": "m_cm_to_cm",
+     "title": "Metres and centimetres into centimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Metres and centimetres into centimetres",
+       "text": [
+        "Metres and centimetres are different sizes, so change the metres first: one metre is a hundred centimetres.",
+        "Multiply the metres by a hundred, then add the extra centimetres."
+       ],
+       "math": [
+        "6 m 49 cm = how many centimetres?",
+        "6 m = 600 cm",
+        "600 cm + 49 cm = 649 cm"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmcm:6,49,0"
+      }
+     ],
+     "guided": "gen:acmcm:9,3,0:mc",
+     "check": "gen:acmcm:6,65,0:mc",
+     "scope": {
+      "family": "acmcm",
+      "subSkill": "length.m-cm-to-cm@1"
+     }
+    },
+    {
+     "id": "cm_to_m_cm",
+     "title": "Centimetres into metres and centimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Centimetres into metres and centimetres",
+       "text": [
+        "Every hundred centimetres make one metre.",
+        "Take away the whole metres as hundreds of centimetres; the centimetres left are the answer."
+       ],
+       "math": [
+        "903 cm = 9 m and how many cm?",
+        "9 m = 900 cm",
+        "903 cm − 900 cm = 3 cm left over"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmcm:9,3,1"
+      }
+     ],
+     "guided": "gen:acmcm:6,49,1:mc",
+     "check": "gen:acmcm:9,36,1",
+     "scope": {
+      "family": "acmcm",
+      "subSkill": "length.cm-to-m-cm@1"
+     }
+    },
+    {
+     "id": "cm_mm_to_mm",
+     "title": "Centimetres and millimetres into millimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Centimetres and millimetres into millimetres",
+       "text": [
+        "One centimetre is ten millimetres.",
+        "Multiply the centimetres by ten, then add the extra millimetres."
+       ],
+       "math": [
+        "8 cm 3 mm = how many millimetres?",
+        "8 cm = 80 mm",
+        "80 + 3 = 83 mm"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmmkm:0,8,3"
+      }
+     ],
+     "guided": "gen:acmmkm:0,8,2:mc",
+     "check": "gen:acmmkm:0,4,1:mc",
+     "scope": {
+      "family": "acmmkm",
+      "subSkill": "length.cm-mm-to-mm@1"
+     }
+    },
+    {
+     "id": "mm_to_cm_mm",
+     "title": "Millimetres into centimetres and millimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Millimetres into centimetres and millimetres",
+       "text": [
+        "Every ten millimetres make one centimetre.",
+        "Take away the whole centimetres as tens of millimetres; the millimetres left are the answer."
+       ],
+       "math": [
+        "69 mm = 6 cm and how many mm?",
+        "6 cm = 60 mm",
+        "69 − 60 = 9 left over"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmmkm:1,6,9"
+      }
+     ],
+     "guided": "gen:acmmkm:1,10,2:mc",
+     "check": "gen:acmmkm:1,7,1:mc",
+     "scope": {
+      "family": "acmmkm",
+      "subSkill": "length.mm-to-cm-mm@1"
+     }
+    },
+    {
+     "id": "m_to_km_m",
+     "title": "Metres into kilometres and metres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Metres into kilometres and metres",
+       "text": [
+        "Every thousand metres make one kilometre.",
+        "Take away the whole kilometres as thousands of metres; the metres left are the answer."
+       ],
+       "math": [
+        "2,405 m = 2 km and how many m?",
+        "2 km = 2000 m",
+        "2405 − 2000 = 405 left over"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmmkm:2,2,81"
+      }
+     ],
+     "guided": "gen:acmmkm:2,1,98",
+     "check": "gen:acmmkm:2,1,38:mc",
+     "scope": {
+      "family": "acmmkm",
+      "subSkill": "length.m-to-km-m@1"
+     }
+    },
+    {
+     "id": "m_to_whole_km",
+     "title": "Thousands of metres into kilometres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Thousands of metres into kilometres",
+       "text": [
+        "A thousand metres make one kilometre.",
+        "Divide the metres by a thousand to count the kilometres."
+       ],
+       "math": [
+        "11,000 m = how many kilometres?",
+        "11000 ÷ 1000 = 11"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmmkm:3,11,0"
+      }
+     ],
+     "guided": "gen:acmmkm:3,18,0:mc",
+     "check": "gen:acmmkm:3,6,0",
+     "scope": {
+      "family": "acmmkm",
+      "subSkill": "length.m-to-whole-km@1"
+     }
+    },
+    {
+     "id": "compare_m_cm",
+     "title": "Which is longer: change to one unit first",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Which is longer: change to one unit first",
+       "text": [
+        "Metres and centimetres are different sizes, so the two lengths cannot be compared digit by digit.",
+        "Change the length in metres and centimetres into centimetres (one metre is a hundred centimetres), then compare the two numbers of centimetres. If they are equal, the lengths are the same."
+       ],
+       "math": [
+        "Which is longer: 7 m 76 cm or 772 cm?",
+        "7 m 76 cm = 776 cm",
+        "Compare 776 cm with 772 cm",
+        "So: 7 m 76 cm is longer"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmcmp:7,76,2,1"
+      }
+     ],
+     "guided": "gen:acmcmp:7,59,0,0",
+     "check": "gen:acmcmp:7,67,2,4",
+     "scope": {
+      "family": "acmcmp",
+      "subSkill": "length.compare-m-cm@1"
+     }
+    },
+    {
+     "id": "mm_to_whole_cm",
+     "title": "Tens of millimetres into centimetres",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Tens of millimetres into centimetres",
+       "text": [
+        "Ten millimetres make one centimetre.",
+        "Divide the millimetres by ten to count the centimetres."
+       ],
+       "math": [
+        "100 mm = how many centimetres?",
+        "100 ÷ 10 = 10"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmmkm:4,10,0"
+      }
+     ],
+     "guided": "gen:acmmkm:4,21,0:mc",
+     "check": "gen:acmmkm:4,9,0",
+     "scope": {
+      "family": "acmmkm",
+      "subSkill": "length.mm-to-whole-cm@1"
+     }
+    }
+   ]
+  },
+  {
+   "competency": "MATH.geometry.scale-drawings",
+   "title": "Using a map or plan scale",
+   "family": "aiscale",
+   "seed": [
+    5,
+    4,
+    0
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Using a map or plan scale",
+     "text": [
+      "A scale says how much real length each length on the map or plan stands for. Map lengths and real lengths are in the same proportion."
+     ],
+     "worked": true
+    }
+   ],
+   "strategies": [
+    {
+     "id": "map_to_real",
+     "title": "From the map to the real distance",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "From the map to the real distance",
+       "text": [
+        "The scale says how many real kilometres one centimetre on the map stands for.",
+        "Map to real: multiply the map length by the scale. The real distance is the bigger number."
+       ],
+       "math": [
+        "On a map, 1 cm stands for 50 km. Two villages are 10 cm apart on the map. How far apart are they really, in km?",
+        "10 cm × 50 km for each cm = 500 km"
+       ],
+       "role": "strategy",
+       "instance": "gen:aiscale:5,10,0"
+      }
+     ],
+     "guided": "gen:aiscale:0,13,0",
+     "check": "gen:aiscale:4,6,0:mc",
+     "scope": {
+      "family": "aiscale",
+      "subSkill": "scale.map-to-real@1"
+     }
+    },
+    {
+     "id": "real_to_map",
+     "title": "From the real distance to the map",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "From the real distance to the map",
+       "text": [
+        "The map is smaller than the real world, so the map distance is the smaller number.",
+        "Real to map: divide the real distance by the scale."
+       ],
+       "math": [
+        "On a map, 1 cm stands for 2 km. Two towns are really 26 km apart. How far apart are they on the map, in cm?",
+        "26 km ÷ 2 km for each cm = 13 cm"
+       ],
+       "role": "strategy",
+       "instance": "gen:aiscale:0,13,1"
+      }
+     ],
+     "guided": "gen:aiscale:2,14,1:mc",
+     "check": "gen:aiscale:4,6,1",
+     "scope": {
+      "family": "aiscale",
+      "subSkill": "scale.real-to-map@1"
+     }
+    },
+    {
+     "id": "ratio_plan_to_metres",
+     "title": "A plan scale written as a ratio",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "A plan scale written as a ratio",
+       "text": [
+        "A scale of one to n means every real length is n times the length on the plan, in the same unit.",
+        "Multiply the plan length by n to get real centimetres, then divide by a hundred to get metres."
+       ],
+       "math": [
+        "A plan is drawn to the scale 1 : 500. A wall is 19 cm long on the plan. How long is the real wall, in metres?",
+        "Every 1 cm stands for 500 cm: 19 × 500 = 9500 cm",
+        "9500 cm ÷ 100 = 95 m"
+       ],
+       "role": "strategy",
+       "instance": "gen:airatio:2,19"
+      }
+     ],
+     "guided": "gen:airatio:2,18:mc",
+     "check": "gen:airatio:2,10:mc",
+     "scope": {
+      "family": "airatio",
+      "subSkill": "scale.ratio-plan-to-metres@1"
+     }
+    },
+    {
+     "id": "ratio_map_to_km",
+     "title": "A map scale written as a ratio",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "A map scale written as a ratio",
+       "text": [
+        "A scale of one to n means every real length is n times the length on the map, in the same unit.",
+        "Multiply the map length by n to get real centimetres, then divide by a hundred thousand to get kilometres."
+       ],
+       "math": [
+        "A map is drawn to the scale 1 : 25000. A road is 14 cm long on the map. How long is the real road, in km?",
+        "Every 1 cm stands for 25000 cm: 14 × 25000 = 350000 cm",
+        "350000 cm ÷ 100000 = 3.5 km"
+       ],
+       "role": "strategy",
+       "instance": "gen:airatio:4,14"
+      }
+     ],
+     "guided": "gen:airatio:5,6:mc",
+     "check": "gen:airatio:5,20",
+     "scope": {
+      "family": "airatio",
+      "subSkill": "scale.ratio-map-to-km@1"
+     }
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.missing-number",
+   "title": "Missing numbers and related facts",
+   "family": "acmissing",
+   "seed": [
+    0,
+    16,
+    9
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Missing numbers and related facts",
+     "text": [
+      "Adding and taking away undo each other, and so do multiplying and dividing. To find a missing number, ask what was done to it, then work backwards; put your answer back in to check."
+     ],
+     "worked": true,
+     "widget": {
+      "type": "balance",
+      "left": "□ + 9",
+      "right": "25"
+     }
+    }
+   ],
+   "strategies": [
+    {
+     "id": "box_plus_k",
+     "title": "A number was added to the box",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "A number was added to the box",
+       "text": [
+        "Ask what was done to the box: a number was added to it, and the total is on the other side.",
+        "Undo the adding: take that number away from the total. Then put your answer in the box and check that the sentence is true."
+       ],
+       "math": [
+        "□ + 10 = 21",
+        "10 was added to the box: undo it by taking 10 away",
+        "21 − 10 = 11",
+        "Check: 11 + 10 = 21"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:0,11,10",
+       "widget": {
+        "type": "balance",
+        "left": "□ + 10",
+        "right": "21"
+       }
+      }
+     ],
+     "guided": "gen:acmissing:0,11,13",
+     "check": "gen:acmissing:0,11,17",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.box-plus-k@1"
+     }
+    },
+    {
+     "id": "n_minus_box",
+     "title": "The box is the number taken away",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "The box is the number taken away",
+       "text": [
+        "Here the box is taken away from the first number, and the number on the right is what is left.",
+        "So the box is the first number take away what is left. Check by taking your answer away from the first number."
+       ],
+       "math": [
+        "20 − □ = 6",
+        "The box was taken away from 20 and 6 is left, so the box is 20 − 6",
+        "20 − 6 = 14",
+        "Check: 20 − 14 = 6"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:1,14,6",
+       "widget": {
+        "type": "balance",
+        "left": "20 − □",
+        "right": "6"
+       }
+      }
+     ],
+     "guided": "gen:acmissing:1,15,5:mc",
+     "check": "gen:acmissing:1,15,13:mc",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.n-minus-box@1"
+     }
+    },
+    {
+     "id": "box_minus_k",
+     "title": "A number was taken away from the box",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "A number was taken away from the box",
+       "text": [
+        "A number was taken away from the box, and the number on the right is what is left.",
+        "Undo the taking away: add that number back to what is left. Check by taking it away again."
+       ],
+       "math": [
+        "□ − 3 = 15",
+        "3 was taken away from the box: undo it by adding 3 back",
+        "15 + 3 = 18",
+        "Check: 18 − 3 = 15"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:2,18,3",
+       "widget": {
+        "type": "balance",
+        "left": "□ − 3",
+        "right": "15"
+       }
+      }
+     ],
+     "guided": "gen:acmissing:2,18,2:mc",
+     "check": "gen:acmissing:2,10,5",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.box-minus-k@1"
+     }
+    },
+    {
+     "id": "k_times_box",
+     "title": "The box was multiplied",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "The box was multiplied",
+       "text": [
+        "The box was multiplied by a number, and the product is on the other side.",
+        "Undo the multiplying: divide the product by that number, using the times table. Check by multiplying."
+       ],
+       "math": [
+        "7 × □ = 28",
+        "The box was multiplied by 7: undo it by dividing by 7",
+        "28 ÷ 7 = 4",
+        "Check: 7 × 4 = 28"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:3,4,7",
+       "widget": {
+        "type": "balance",
+        "left": "7 × □",
+        "right": "28"
+       }
+      }
+     ],
+     "guided": "gen:acmissing:3,4,8:mc",
+     "check": "gen:acmissing:3,5,6",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.k-times-box@1"
+     }
+    },
+    {
+     "id": "subtraction_fact",
+     "title": "The subtraction fact of an addition",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "The subtraction fact of an addition",
+       "text": [
+        "An addition fact and its subtraction facts are one family: a total and its two parts.",
+        "A subtraction fact starts with the total and takes away one part; what is left is the other part."
+       ],
+       "math": [
+        "6,712 + 4,470 = 11,182. Which subtraction fact belongs to the same fact family?",
+        "Check: 11,182 − 6,712 = 4,470 is true",
+        "So: 11,182 − 6,712 = 4,470"
+       ],
+       "role": "strategy",
+       "instance": "gen:acfacts:0,27,0"
+      }
+     ],
+     "guided": "gen:acfacts:0,27,1",
+     "check": "gen:acfacts:0,29,0",
+     "scope": {
+      "family": "acfacts",
+      "subSkill": "facts.subtraction-from-addition@1"
+     }
+    },
+    {
+     "id": "check_by_addition",
+     "title": "Check a subtraction by adding",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Check a subtraction by adding",
+       "text": [
+        "Adding undoes taking away.",
+        "To check a subtraction, add the answer to the number taken away: you should get the number you started with."
+       ],
+       "math": [
+        "Priya worked out 5,449 − 425 = 5,024. Which addition can Priya use to check this answer?",
+        "Check: 5,024 + 425 = 5,449 is true",
+        "So: 5,024 + 425 = 5,449"
+       ],
+       "role": "strategy",
+       "instance": "gen:acfacts:1,19,0"
+      }
+     ],
+     "guided": "gen:acfacts:1,19,1",
+     "check": "gen:acfacts:1,17,0",
+     "scope": {
+      "family": "acfacts",
+      "subSkill": "facts.check-subtraction-by-addition@1"
+     }
+    },
+    {
+     "id": "division_fact",
+     "title": "The division fact of a multiplication",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "The division fact of a multiplication",
+       "text": [
+        "Multiplying and dividing undo each other: a product and its two factors are one family.",
+        "A division fact starts with the product and divides it by one factor; the answer is the other factor."
+       ],
+       "math": [
+        "11 × 12 = 132. Which division fact comes from this multiplication fact?",
+        "Check: 132 ÷ 11 = 12 is true",
+        "So: 132 ÷ 11 = 12"
+       ],
+       "role": "strategy",
+       "instance": "gen:acfacts:2,9,0"
+      }
+     ],
+     "guided": "gen:acfacts:2,9,1",
+     "check": "gen:acfacts:2,37,1",
+     "scope": {
+      "family": "acfacts",
+      "subSkill": "facts.division-from-multiplication@1"
+     }
+    },
+    {
+     "id": "dividend_divisor_quotient",
+     "title": "Dividend = divisor × quotient",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Dividend = divisor × quotient",
+       "text": [
+        "In a division the dividend is the number being divided, the divisor divides it and the quotient is the answer.",
+        "Multiplying undoes dividing, so the dividend equals the divisor times the quotient."
+       ],
+       "math": [
+        "In 110 ÷ 10 = 11, 110 is the dividend, 10 the divisor and 11 the quotient. Which sentence shows dividend = divisor × quotient for it?",
+        "Check: 10 × 11 = 110, so the sentence is true",
+        "So: 110 = 10 × 11"
+       ],
+       "role": "strategy",
+       "instance": "gen:acfacts:3,8,0"
+      }
+     ],
+     "guided": "gen:acfacts:3,4,0",
+     "check": "gen:acfacts:3,14,0",
+     "scope": {
+      "family": "acfacts",
+      "subSkill": "facts.dividend-is-divisor-times-quotient@1"
+     }
+    },
+    {
+     "id": "fix_added_both",
+     "title": "Not both numbers added",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Not both numbers added: a common mix-up",
+       "text": [
+        "A common mix-up is to add both numbers you can see. Adding them never undoes what was done to the box.",
+        "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."
+       ],
+       "math": [
+        "Not 12, but 8"
+       ],
+       "role": "misconception",
+       "instance": "gen:acmissing:0,8,2",
+       "widget": {
+        "type": "balance",
+        "left": "□ + 2",
+        "right": "10"
+       }
+      },
+      {
+       "title": "Not both numbers added: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "□ + 2 = 10",
+        "2 was added to the box: undo it by taking 2 away",
+        "10 − 2 = 8",
+        "Check: 8 + 2 = 10"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:0,8,2"
+      }
+     ],
+     "guided": "gen:acmissing:0,8,3:mc",
+     "check": "gen:acmissing:0,11,16:mc",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.box-plus-k@1"
+     },
+     "addresses": "added-both"
+    },
+    {
+     "id": "fix_added_both_taken",
+     "title": "Not both numbers added",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Not both numbers added: a common mix-up",
+       "text": [
+        "A common mix-up is to add both numbers you can see. Adding them never undoes what was done to the box.",
+        "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."
+       ],
+       "math": [
+        "Not 21, but 15"
+       ],
+       "role": "misconception",
+       "instance": "gen:acmissing:1,15,3",
+       "widget": {
+        "type": "balance",
+        "left": "18 − □",
+        "right": "3"
+       }
+      },
+      {
+       "title": "Not both numbers added: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "18 − □ = 3",
+        "The box was taken away from 18 and 3 is left, so the box is 18 − 3",
+        "18 − 3 = 15",
+        "Check: 18 − 15 = 3"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:1,15,3"
+      }
+     ],
+     "guided": "gen:acmissing:1,15,4:mc",
+     "check": "gen:acmissing:1,15,7",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.n-minus-box@1"
+     },
+     "addresses": "added-both"
+    },
+    {
+     "id": "fix_took_away_again",
+     "title": "Add it back, do not take it away again",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Add it back, do not take it away again: a common mix-up",
+       "text": [
+        "A common mix-up is to take the number away a second time.",
+        "The box is the number before anything was taken away, so add the number back to what is left."
+       ],
+       "math": [
+        "Not 4, but 18"
+       ],
+       "role": "misconception",
+       "instance": "gen:acmissing:2,18,7",
+       "widget": {
+        "type": "balance",
+        "left": "□ − 7",
+        "right": "11"
+       }
+      },
+      {
+       "title": "Add it back, do not take it away again: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "□ − 7 = 11",
+        "7 was taken away from the box: undo it by adding 7 back",
+        "11 + 7 = 18",
+        "Check: 18 − 7 = 11"
+       ],
+       "role": "strategy",
+       "instance": "gen:acmissing:2,18,7"
+      }
+     ],
+     "guided": "gen:acmissing:2,10,3:mc",
+     "check": "gen:acmissing:2,10,4:mc",
+     "scope": {
+      "family": "acmissing",
+      "subSkill": "missing.box-minus-k@1"
+     },
+     "addresses": "took-away-again"
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.linear-intro",
+   "title": "Solving a one-step equation",
+   "family": "ahone",
+   "seed": [
+    2,
+    3,
+    11
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Solving a one-step equation",
+     "text": [
+      "An equation is a balance: both sides have the same value. Doing the opposite operation to both sides keeps it balanced and leaves x alone; put your answer back in to check."
+     ],
+     "worked": true
+    }
+   ],
+   "strategies": [
+    {
+     "id": "x_plus_a",
+     "title": "A number is added to x",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "A number is added to x",
+       "text": [
+        "A number is added to x.",
+        "Take that number away from both sides, so x is alone. Then put your answer back into the equation to check it."
+       ],
+       "math": [
+        "Find x: x + 4 = 9.",
+        "Take 4 from both sides: x = 9 − 4 = 5",
+        "Check: 5 + 4 = 9"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:0,4,5"
+      }
+     ],
+     "guided": "gen:ahone:0,17,18:mc",
+     "check": "gen:ahone:0,17,14",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-plus-a@1"
+     }
+    },
+    {
+     "id": "x_minus_a",
+     "title": "A number is taken away from x",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "A number is taken away from x",
+       "text": [
+        "A number is taken away from x.",
+        "Add that number to both sides, so x is alone. Then put your answer back into the equation to check it."
+       ],
+       "math": [
+        "Find x: x − 5 = 4.",
+        "Add 5 to both sides: x = 4 + 5 = 9",
+        "Check: 9 − 5 = 4"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:1,5,9"
+      }
+     ],
+     "guided": "gen:ahone:1,2,18:mc",
+     "check": "gen:ahone:1,6,11",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-minus-a@1"
+     }
+    },
+    {
+     "id": "a_times_x",
+     "title": "x is multiplied by a number",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "x is multiplied by a number",
+       "text": [
+        "The number written next to x multiplies it.",
+        "Divide both sides by that number, so x is alone. Check by multiplying."
+       ],
+       "math": [
+        "Find x: 2x = 24.",
+        "Divide both sides by 2: x = 24 ÷ 2 = 12",
+        "Check: 2 × 12 = 24"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:2,2,12"
+      }
+     ],
+     "guided": "gen:ahone:2,2,13:mc",
+     "check": "gen:ahone:2,2,14",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.a-times-x@1"
+     }
+    },
+    {
+     "id": "x_divided_by_a",
+     "title": "x is divided by a number",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "x is divided by a number",
+       "text": [
+        "x is divided by a number.",
+        "Multiply both sides by that number, so x is alone. Check by dividing."
+       ],
+       "math": [
+        "Find x: x ÷ 6 = 20.",
+        "Multiply both sides by 6: x = 20 × 6 = 120",
+        "Check: 120 ÷ 6 = 20"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:3,6,20"
+      }
+     ],
+     "guided": "gen:ahone:3,7,16:mc",
+     "check": "gen:ahone:3,7,10",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-divided-by-a@1"
+     }
+    },
+    {
+     "id": "fix_same_operation_add",
+     "title": "Do the opposite, not the same again",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Do the opposite, not the same again: a common mix-up",
+       "text": [
+        "A common mix-up is to do the same operation again instead of its opposite.",
+        "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."
+       ],
+       "math": [
+        "Not 36, but 14"
+       ],
+       "role": "misconception",
+       "instance": "gen:ahone:0,11,14"
+      },
+      {
+       "title": "Do the opposite, not the same again: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Find x: x + 11 = 25.",
+        "Take 11 from both sides: x = 25 − 11 = 14",
+        "Check: 14 + 11 = 25"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:0,11,14"
+      }
+     ],
+     "guided": "gen:ahone:0,4,9:mc",
+     "check": "gen:ahone:0,17,15:mc",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-plus-a@1"
+     },
+     "addresses": "same-operation"
+    },
+    {
+     "id": "fix_same_operation_take",
+     "title": "Do the opposite, not the same again",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Do the opposite, not the same again: a common mix-up",
+       "text": [
+        "A common mix-up is to do the same operation again instead of its opposite.",
+        "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."
+       ],
+       "math": [
+        "Not 3, but 9"
+       ],
+       "role": "misconception",
+       "instance": "gen:ahone:1,3,9"
+      },
+      {
+       "title": "Do the opposite, not the same again: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Find x: x − 3 = 6.",
+        "Add 3 to both sides: x = 6 + 3 = 9",
+        "Check: 9 − 3 = 6"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:1,3,9"
+      }
+     ],
+     "guided": "gen:ahone:1,6,16:mc",
+     "check": "gen:ahone:1,8,17",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-minus-a@1"
+     },
+     "addresses": "same-operation"
+    },
+    {
+     "id": "fix_subtract_coefficient",
+     "title": "Divide by the number next to x",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Divide by the number next to x: a common mix-up",
+       "text": [
+        "A common mix-up is to take away the number next to x.",
+        "That number multiplies x, so undo it by dividing both sides by it."
+       ],
+       "math": [
+        "Not 34, but 18"
+       ],
+       "role": "misconception",
+       "instance": "gen:ahone:2,2,18"
+      },
+      {
+       "title": "Divide by the number next to x: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Find x: 2x = 36.",
+        "Divide both sides by 2: x = 36 ÷ 2 = 18",
+        "Check: 2 × 18 = 36"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:2,2,18"
+      }
+     ],
+     "guided": "gen:ahone:2,2,10:mc",
+     "check": "gen:ahone:2,2,15:mc",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.a-times-x@1"
+     },
+     "addresses": "subtract-coefficient"
+    },
+    {
+     "id": "fix_add_for_multiply",
+     "title": "Multiply, do not add",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Multiply, do not add: a common mix-up",
+       "text": [
+        "A common mix-up is to add the number instead of multiplying by it.",
+        "x was divided by the number, so undo it by multiplying both sides by it."
+       ],
+       "math": [
+        "Not 24, but 119"
+       ],
+       "role": "misconception",
+       "instance": "gen:ahone:3,7,17"
+      },
+      {
+       "title": "Multiply, do not add: solved correctly",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "Find x: x ÷ 7 = 17.",
+        "Multiply both sides by 7: x = 17 × 7 = 119",
+        "Check: 119 ÷ 7 = 17"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahone:3,7,17"
+      }
+     ],
+     "guided": "gen:ahone:3,7,14:mc",
+     "check": "gen:ahone:3,7,11:mc",
+     "scope": {
+      "family": "ahone",
+      "subSkill": "one-step.x-divided-by-a@1"
+     },
+     "addresses": "add-for-multiply"
+    }
+   ]
+  },
+  {
+   "competency": "MATH.reasoning.puzzle-strategy",
+   "title": "Finding a missing digit by undoing",
+   "family": "afmissd",
+   "seed": [
+    25,
+    2,
+    0,
+    0
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Finding a missing digit by undoing",
+     "text": [
+      "A sum or difference is a true sentence. When the hidden digit is in the first number, undo the operation to find the whole first number, then read the digit."
+     ],
+     "worked": true,
+     "widget": {
+      "type": "table",
+      "head": [
+       "",
+       "H",
+       "T",
+       "O"
+      ],
+      "rows": [
+       [
+        "",
+        "5",
+        "7",
+        "□"
+       ],
+       [
+        "+",
+        "2",
+        "3",
+        "9"
+       ],
+       [
+        "=",
+        "8",
+        "1",
+        "1"
+       ]
+      ]
+     }
+    }
+   ],
+   "strategies": [
+    {
+     "id": "addend_digit",
+     "title": "A digit hidden in a number being added",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "A digit hidden in a number being added",
+       "text": [
+        "The two numbers being added make the total, so the number with the hidden digit is a part.",
+        "A missing part is the total take away the other part. Work that out, read the digit in the box's place, and check by doing the whole addition."
+       ],
+       "math": [
+        "4□8 + 255 = 713.",
+        "The first number is the total take away the other part: 713 − 255 = 458",
+        "4□8 = 458, so the missing digit is 5",
+        "Check: 458 + 255 = 713"
+       ],
+       "role": "strategy",
+       "instance": "gen:afmissd:8,1,0,0",
+       "widget": {
+        "type": "table",
+        "head": [
+         "",
+         "H",
+         "T",
+         "O"
+        ],
+        "rows": [
+         [
+          "",
+          "4",
+          "□",
+          "8"
+         ],
+         [
+          "+",
+          "2",
+          "5",
+          "5"
+         ],
+         [
+          "=",
+          "7",
+          "1",
+          "3"
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afmissd:3,1,0,0:mc",
+     "check": "gen:afmissd:27,1,0,0",
+     "scope": {
+      "family": "afmissd",
+      "subSkill": "digit.missing-in-addend@1"
+     }
+    },
+    {
+     "id": "first_number_digit",
+     "title": "A digit hidden in the first number of a subtraction",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "A digit hidden in the first number of a subtraction",
+       "text": [
+        "The first number of a subtraction is what you started with.",
+        "Undo the taking away: add the answer to the number taken away, read the digit in the box's place, and check by doing the subtraction."
+       ],
+       "math": [
+        "38□ − 168 = 218.",
+        "The first number is the answer add the number taken away: 218 + 168 = 386",
+        "38□ = 386, so the missing digit is 6",
+        "Check: 386 − 168 = 218"
+       ],
+       "role": "strategy",
+       "instance": "gen:afmissd:32,2,0,1",
+       "widget": {
+        "type": "table",
+        "head": [
+         "",
+         "H",
+         "T",
+         "O"
+        ],
+        "rows": [
+         [
+          "",
+          "3",
+          "8",
+          "□"
+         ],
+         [
+          "−",
+          "1",
+          "6",
+          "8"
+         ],
+         [
+          "=",
+          "2",
+          "1",
+          "8"
+         ]
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afmissd:14,0,0,1:mc",
+     "check": "gen:afmissd:27,1,0,1:mc",
+     "scope": {
+      "family": "afmissd",
+      "subSkill": "digit.missing-in-first-number@1"
+     }
+    }
+   ]
+  },
+  {
+   "extendsTemplate": true,
+   "competency": "MATH.geometry.triangle-properties",
+   "title": "The third angle of a triangle",
+   "family": "ahtri",
+   "seed": [
+    35,
+    90
+   ],
+   "author": "Claude candidate 4e655e73 (TP-GEO-01, TP-GEO-02); OpenPath integration (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [],
+   "strategies": [
+    {
+     "id": "exterior_angle",
+     "title": "The exterior angle of a triangle",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "ahext",
+      "subSkill": "triangle-properties.exterior-angle@1"
+     },
+     "screens": [
+      {
+       "title": "The exterior angle of a triangle",
+       "text": [
+        "At C the exterior angle and the interior angle next to it lie on a straight line, so together they make 180°.",
+        "The three interior angles also make 180°. Both pairs make 180° and share the angle at C, so the exterior angle equals the other two interior angles together."
+       ],
+       "math": [
+        "One side of a triangle is extended. The two interior angles opposite the exterior angle are 39° and 112°. What is the exterior angle, in degrees?",
+        "Third interior angle C = 180° − 39° − 112° = 29° (angle sum)",
+        "Exterior angle = 180° − 29° = 151° (straight line)",
+        "Check: 39° + 112° = 151° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:39,112,0",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "39°",
+         "",
+         "112°"
+        ],
+        "exterior": {
+         "at": 1,
+         "label": "?"
+        },
+        "notToScale": true,
+        "vertices": [
+         "A",
+         "C",
+         "B"
+        ],
+        "extendedTo": "D"
+       }
+      },
+      {
+       "title": "When the exterior angle is given",
+       "text": [
+        "The exterior angle equals the two far interior angles together.",
+        "So one far angle is the exterior angle minus the other far angle. Go through the angle next to the exterior angle to check."
+       ],
+       "math": [
+        "One side of a triangle is extended. The exterior angle is 135° and one of the two interior opposite angles is 108°. What is the other interior opposite angle, in degrees?",
+        "Interior angle next to the exterior angle C = 180° − 135° = 45° (straight line)",
+        "Other opposite angle = 180° − 108° − 45° = 27° (angle sum)",
+        "Check: 108° + 27° = 135° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:108,27,1",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "108°",
+         "",
+         "?"
+        ],
+        "exterior": {
+         "at": 1,
+         "label": "135°"
+        },
+        "notToScale": true,
+        "vertices": [
+         "A",
+         "C",
+         "B"
+        ],
+        "extendedTo": "D"
+       }
+      }
+     ],
+     "guided": "gen:ahext:62,79,0:mc",
+     "check": "gen:ahext:86,70,0:mc"
+    },
+    {
+     "id": "exterior_via_third",
+     "title": "Go through the third angle",
+     "kind": "procedural",
+     "needs": [],
+     "scope": {
+      "family": "ahext",
+      "subSkill": "triangle-properties.exterior-angle@1"
+     },
+     "screens": [
+      {
+       "title": "Go through the third angle",
+       "text": [
+        "Find the third interior angle with the angle sum.",
+        "The exterior angle and that angle lie on a straight line, so the exterior angle is a straight angle minus the third angle."
+       ],
+       "math": [
+        "One side of a triangle is extended. The two interior angles opposite the exterior angle are 34° and 27°. What is the exterior angle, in degrees?",
+        "Third interior angle C = 180° − 34° − 27° = 119° (angle sum)",
+        "Exterior angle = 180° − 119° = 61° (straight line)",
+        "Check: 34° + 27° = 61° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:34,27,0",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "34°",
+         "",
+         "27°"
+        ],
+        "exterior": {
+         "at": 1,
+         "label": "?"
+        },
+        "notToScale": true,
+        "vertices": [
+         "A",
+         "C",
+         "B"
+        ],
+        "extendedTo": "D"
+       }
+      }
+     ],
+     "guided": "gen:ahext:34,63,0:mc",
+     "check": "gen:ahext:44,76,1"
+    }
+   ]
+  },
+  {
+   "extendsTemplate": true,
+   "competency": "MATH.geometry.angle-pairs",
+   "title": "Missing angle in a complementary or supplementary pair",
+   "family": "afpair",
+   "seed": [
+    1,
+    130
+   ],
+   "author": "Claude candidate 4e655e73 (TP-GEO-01, TP-GEO-02); OpenPath integration (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [],
+   "strategies": [
+    {
+     "id": "vertically_opposite",
+     "title": "Vertically opposite angles are equal",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "afcross",
+      "subSkill": "angle-pairs.opposite@2"
+     },
+     "screens": [
+      {
+       "title": "Vertically opposite angles are equal",
+       "text": [
+        "Where two straight lines cross, angles next to each other lie on a straight line, so they add to 180°.",
+        "Go round: x, then 180° − x, then 180° − (180° − x) = x again. So opposite angles are equal, and all four add to 360°."
+       ],
+       "math": [
+        "Two straight lines cross each other, making four angles. One of the angles is 128°. What is the angle opposite it (vertically opposite), in degrees?",
+        "next angle round = 180° − 128° = 52° (straight line)",
+        "the one after = 180° − 52° = 128° (straight line): the opposite angle is 128°"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:128,0",
+       "widget": {
+        "type": "angle",
+        "deg": 128,
+        "cross": true,
+        "labels": [
+         "128°",
+         "",
+         "?",
+         ""
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afcross:29,0:mc",
+     "check": "gen:afcross:158,0:mc"
+    },
+    {
+     "id": "crossed_pencils",
+     "title": "Two crossed pencils",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "afcross",
+      "subSkill": "angle-pairs.opposite@2"
+     },
+     "screens": [
+      {
+       "title": "Two crossed pencils",
+       "text": [
+        "Hold two straight pencils crossed like an X.",
+        "Open them wider: the top and bottom angles grow together while the two side angles shrink together. Opposite angles stay equal."
+       ],
+       "math": [
+        "Two straight lines cross each other, making four angles. One of the angles is 104°. What is the angle opposite it (vertically opposite), in degrees?",
+        "next angle round = 180° − 104° = 76° (straight line)",
+        "the one after = 180° − 76° = 104° (straight line): the opposite angle is 104°"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:104,0",
+       "widget": {
+        "type": "angle",
+        "deg": 104,
+        "cross": true,
+        "labels": [
+         "104°",
+         "",
+         "?",
+         ""
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afcross:152,0:mc",
+     "check": "gen:afcross:70,0"
+    }
+   ]
+  },
+  {
+   "extendsTemplate": true,
+   "competency": "MATH.probability.sample-space",
+   "title": "Two dice: count the pairs",
+   "family": "akss",
+   "seed": [
+    2,
+    3,
+    2,
+    0
+   ],
+   "author": "Claude, general teaching reworded from feat/math-teaching-content@4e655e737607bcf9d941193538de7479a40c4fe6 TP-PRO-01 (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [],
+   "strategies": [
+    {
+     "id": "akdice_pairs",
+     "title": "Two dice: count the pairs",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "akdice",
+      "parameters": [
+       {
+        "index": 2,
+        "values": [
+         0
+        ]
+       }
+      ]
+     },
+     "screens": [
+      {
+       "title": "36 ordered pairs, all equally likely",
+       "role": "concept",
+       "instance": "gen:akdice:6,6,0,7",
+       "widget": {
+        "type": "table",
+        "head": [
+         "+",
+         "1",
+         "2",
+         "3",
+         "4",
+         "5",
+         "6"
+        ],
+        "rows": [
+         [
+          "1",
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+         ],
+         [
+          "2",
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+         ],
+         [
+          "3",
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+         ],
+         [
+          "4",
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+         ],
+         [
+          "5",
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+         ],
+         [
+          "6",
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+         ]
+        ]
+       },
+       "text": [
+        "With two ordinary dice there are 6 × 6 = 36 ordered pairs (first number, second number). Every cell of the table is one pair, and all 36 pairs are equally likely.",
+        "There are 11 possible totals, 2 to 12, but they are not equally likely: a total is as likely as the number of pairs that make it."
+       ],
+       "math": [
+        "Total 2: (1, 1), 1 pair, so P = 1/36",
+        "Total 7: (1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1), 6 pairs, so P = 1/6",
+        "6 pairs against 1: a total of 7 is 6 times as likely as a total of 2."
+       ]
+      },
+      {
+       "title": "Count the pairs: solved step by step",
+       "role": "strategy",
+       "instance": "gen:akdice:6,6,0,7",
+       "text": [
+        "List the pairs that give the total, count them, and divide by the number of all pairs."
+       ],
+       "math": [
+        "There are 6 × 6 = 36 equally likely pairs",
+        "6 pairs fit: the total of the two numbers is 7",
+        "Probability = 6 ÷ 36 = 1/6",
+        "So the answer is 1/6"
+       ]
+      }
+     ],
+     "guided": "gen:akdice:5,5,0,7:mc",
+     "check": "gen:akdice:4,5,0,5"
+    },
+    {
+     "id": "akdice_order",
+     "title": "Red die, blue die: every order counts",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "akdice",
+      "parameters": [
+       {
+        "index": 2,
+        "values": [
+         0
+        ]
+       }
+      ]
+     },
+     "screens": [
+      {
+       "title": "Every order is its own outcome",
+       "role": "concept",
+       "instance": "gen:akdice:6,6,0,9",
+       "widget": {
+        "type": "table",
+        "head": [
+         "+",
+         "1",
+         "2",
+         "3",
+         "4",
+         "5",
+         "6"
+        ],
+        "rows": [
+         [
+          "1",
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+         ],
+         [
+          "2",
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+         ],
+         [
+          "3",
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+         ],
+         [
+          "4",
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+         ],
+         [
+          "5",
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+         ],
+         [
+          "6",
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+         ]
+        ]
+       },
+       "text": [
+        "Colour the first die red and the second blue: red 3 with blue 6 is a different roll from red 6 with blue 3. Both are in the table, as different cells.",
+        "So list the pairs in order: each one is an equally likely outcome out of 36."
+       ],
+       "math": [
+        "The pairs with total 9, in order: (3, 6), (4, 5), (5, 4), (6, 3), 4 pairs",
+        "P(total 9) = 4/36 = 1/9"
+       ]
+      },
+      {
+       "title": "Every order counts: solved step by step",
+       "role": "strategy",
+       "instance": "gen:akdice:6,6,0,9",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "There are 6 × 6 = 36 equally likely pairs",
+        "4 pairs fit: the total of the two numbers is 9",
+        "Probability = 4 ÷ 36 = 1/9",
+        "So the answer is 1/9"
+       ]
+      }
+     ],
+     "guided": "gen:akdice:5,5,0,9:mc",
+     "check": "gen:akdice:6,6,0,3"
+    }
+   ]
+  }
+ ]
+}

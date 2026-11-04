@@ -1,0 +1,83 @@
+{
+ "summary": {
+  "transitions": 2884,
+  "agree": 2884,
+  "disagree": 0,
+  "judgedValidWhileOracleSaysInvalid": 0,
+  "judgedNotValidWhileOracleSaysValid": 0,
+  "oracleInvalidButImplicationFlagged": 232,
+  "medianMs": 0.67,
+  "p95Ms": 13.51
+ },
+ "byKind": {
+  "multiply-by-expression-no-check": {
+   "n": 425,
+   "ok": 425
+  },
+  "multiply-by-expression-record-restriction": {
+   "n": 281,
+   "ok": 281
+  },
+  "divide-by-expression-no-restriction": {
+   "n": 425,
+   "ok": 425
+  },
+  "divide-by-expression-record-restriction": {
+   "n": 281,
+   "ok": 281
+  },
+  "clear-denominators-drop-restriction": {
+   "n": 140,
+   "ok": 140
+  },
+  "clear-denominators-keep-restriction": {
+   "n": 88,
+   "ok": 88
+  },
+  "add-to-both-sides": {
+   "n": 140,
+   "ok": 140
+  },
+  "scale-both-sides-by-nonzero-constant": {
+   "n": 140,
+   "ok": 140
+  },
+  "cancel-common-factor-drop-restriction": {
+   "n": 167,
+   "ok": 167
+  },
+  "cancel-common-factor-keep-restriction": {
+   "n": 90,
+   "ok": 90
+  },
+  "factor-numerator": {
+   "n": 77,
+   "ok": 77
+  },
+  "cancel-non-factor": {
+   "n": 180,
+   "ok": 180
+  },
+  "combine-fractions-add-denominators": {
+   "n": 90,
+   "ok": 90
+  },
+  "combine-fractions-correctly": {
+   "n": 90,
+   "ok": 90
+  },
+  "cross-multiply-wrong": {
+   "n": 90,
+   "ok": 90
+  },
+  "cross-multiply": {
+   "n": 90,
+   "ok": 90
+  },
+  "cross-multiply-drop-restriction": {
+   "n": 90,
+   "ok": 90
+  }
+ },
+ "mismatches": []
+}

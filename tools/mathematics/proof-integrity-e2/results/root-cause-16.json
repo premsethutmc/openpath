@@ -1,0 +1,1482 @@
+[
+ {
+  "id": "e1-091",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "studentWorking": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1(1) + 2",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1(1) + 2"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-093",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "4",
+     "3",
+     "1"
+    ]
+   },
+   "input": "3"
+  },
+  "studentWorking": "f(x) = x^2 + 3x + 4\nf(3) = 3^2 + 3(3) + 4",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 3x + 4"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(3) = 3^2 + 3(3) + 4"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-094",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "5",
+     "4",
+     "1"
+    ]
+   },
+   "input": "4"
+  },
+  "studentWorking": "f(x) = x^2 + 4x + 5\nf(4) = 4^2 + 4(4) + 5",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 4x + 5"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(4) = 4^2 + 4(4) + 5"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-097",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "3",
+     "2",
+     "1"
+    ]
+   },
+   "input": "2"
+  },
+  "studentWorking": "f(x) = x^2 + 2x + 3\nf(2) = 2^2 + 2(2) + 3",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 2x + 3"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(2) = 2^2 + 2(2) + 3"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-114",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "5",
+     "4",
+     "1"
+    ]
+   },
+   "input": "4"
+  },
+  "studentWorking": "f(x) = x^2 + 4x + 5\nf(4) = 4^2 + 4(4) + 5",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 4x + 5"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(4) = 4^2 + 4(4) + 5"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-116",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "studentWorking": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1 + 2\nf(1) = 4",
+  "expected": {
+   "classification": "invalid",
+   "firstInvalidStep": 1
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1 + 2"
+   },
+   {
+    "id": "line-3",
+    "line": 3,
+    "text": "f(1) = 4"
+   }
+  ],
+  "linesRetainedBefore": [
+   3
+  ],
+  "linesDiscardedBefore": [
+   1,
+   2
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   },
+   {
+    "line": 3,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 2,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "reference-label-defect (every written line is a true statement at input 1)"
+  ],
+  "resolved": true,
+  "resolution": "reference disputed: engine verdict is mathematically correct"
+ },
+ {
+  "id": "e1-123",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "4",
+     "3",
+     "1"
+    ]
+   },
+   "input": "3"
+  },
+  "studentWorking": "f(x) = x^2 + 3x + 4\nf(3) = 3^2 + 3(3) + 4",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 3x + 4"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(3) = 3^2 + 3(3) + 4"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-133",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "4",
+     "3",
+     "1"
+    ]
+   },
+   "input": "3"
+  },
+  "studentWorking": "f(x) = x^2 + 3x + 4\nf(3) = 3^2 + 3(3) + 4",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 3x + 4"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(3) = 3^2 + 3(3) + 4"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-143",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "4",
+     "3",
+     "1"
+    ]
+   },
+   "input": "3"
+  },
+  "studentWorking": "f(x) = x^2 + 3x + 4\nf(3) = 3^2 + 3(3) + 4",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 3x + 4"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(3) = 3^2 + 3(3) + 4"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-151",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "studentWorking": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1(1) + 2",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1(1) + 2"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-158",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "4",
+     "3",
+     "1"
+    ]
+   },
+   "input": "3"
+  },
+  "studentWorking": "f(x) = x^2 + 3x + 4\nf(3) = 3^2 + 3(3) + 4",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 3x + 4"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(3) = 3^2 + 3(3) + 4"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-446",
+  "partition": "diagnostic",
+  "problem": {
+   "domain": "complex-polynomial",
+   "area": "arithmetic",
+   "task": "modulus-square",
+   "data": {
+    "a": {
+     "re": "1",
+     "im": "1"
+    }
+   }
+  },
+  "studentWorking": "z = 1 + 1i\n|z| = 1+1\n|z| = 2",
+  "expected": {
+   "classification": "invalid",
+   "firstInvalidStep": 1
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:complex-modulus",
+    "complex-polynomial:b3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "invalid",
+   "complete": false,
+   "firstInvalidStep": 1,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:complex-modulus",
+    "complex-polynomial:b3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "z = 1 + 1i"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "|z| = 1+1"
+   },
+   {
+    "id": "line-3",
+    "line": 3,
+    "text": "|z| = 2"
+   }
+  ],
+  "linesRetainedBefore": [
+   3
+  ],
+  "linesDiscardedBefore": [
+   1,
+   2
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-invalid",
+    "role": "claim-step"
+   },
+   {
+    "line": 3,
+    "status": "inconclusive",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "complex-modulus",
+  "proofEvidenceBefore": {
+   "certificates": 0,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 0,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "invalid-step-omission",
+   "proof-certificate-mismatch (|z|=2 was converted to the different claim |z|^2=2 for a modulus-square problem)",
+   "invalid-step-omission"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; invalid"
+ },
+ {
+  "id": "e1-126",
+  "partition": "sealed-holdout",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "studentWorking": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1 + 2\nf(1) = 4",
+  "expected": {
+   "classification": "invalid",
+   "firstInvalidStep": 1
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1 + 2"
+   },
+   {
+    "id": "line-3",
+    "line": 3,
+    "text": "f(1) = 4"
+   }
+  ],
+  "linesRetainedBefore": [
+   3
+  ],
+  "linesDiscardedBefore": [
+   1,
+   2
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   },
+   {
+    "line": 3,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 2,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "reference-label-defect (every written line is a true statement at input 1)"
+  ],
+  "resolved": true,
+  "resolution": "reference disputed: engine verdict is mathematically correct"
+ },
+ {
+  "id": "e1-131",
+  "partition": "sealed-holdout",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "studentWorking": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1(1) + 2",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1(1) + 2"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-134",
+  "partition": "sealed-holdout",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "5",
+     "4",
+     "1"
+    ]
+   },
+   "input": "4"
+  },
+  "studentWorking": "f(x) = x^2 + 4x + 5\nf(4) = 4^2 + 4(4) + 5",
+  "expected": {
+   "classification": "incomplete",
+   "firstInvalidStep": null
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "incomplete",
+   "complete": false,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 4x + 5"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(4) = 4^2 + 4(4) + 5"
+   }
+  ],
+  "linesRetainedBefore": [
+   2
+  ],
+  "linesDiscardedBefore": [
+   1
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 1,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "unsupported-step-omission (no evaluated-form completeness obligation)",
+   "incorrect-dependency-construction (chain started from the typed problem, not the written definition line)"
+  ],
+  "resolved": true,
+  "resolution": "no longer verified; incomplete"
+ },
+ {
+  "id": "e1-141",
+  "partition": "sealed-holdout",
+  "problem": {
+   "domain": "function",
+   "task": "evaluate",
+   "f": {
+    "kind": "polynomial",
+    "coefficients": [
+     "2",
+     "1",
+     "1"
+    ]
+   },
+   "input": "1"
+  },
+  "studentWorking": "f(x) = x^2 + 1x + 2\nf(1) = 1^2 + 1 + 2\nf(1) = 4",
+  "expected": {
+   "classification": "invalid",
+   "firstInvalidStep": 1
+  },
+  "actualBefore": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "actualAfter": {
+   "classification": "verified",
+   "complete": true,
+   "firstInvalidStep": null,
+   "reasoners": [
+    "natural-working-parser",
+    "natural-adapter:function-evaluation",
+    "symbolic:m3"
+   ]
+  },
+  "originalLines": [
+   {
+    "id": "line-1",
+    "line": 1,
+    "text": "f(x) = x^2 + 1x + 2"
+   },
+   {
+    "id": "line-2",
+    "line": 2,
+    "text": "f(1) = 1^2 + 1 + 2"
+   },
+   {
+    "id": "line-3",
+    "line": 3,
+    "text": "f(1) = 4"
+   }
+  ],
+  "linesRetainedBefore": [
+   3
+  ],
+  "linesDiscardedBefore": [
+   1,
+   2
+  ],
+  "lineStatusesAfter": [
+   {
+    "line": 1,
+    "status": "verified-valid",
+    "role": "given-matched"
+   },
+   {
+    "line": 2,
+    "status": "verified-valid",
+    "role": "claim-step"
+   },
+   {
+    "line": 3,
+    "status": "verified-valid",
+    "role": "claim-step"
+   }
+  ],
+  "adapter": "function-evaluation",
+  "proofEvidenceBefore": {
+   "certificates": 1,
+   "note": "certificate(s) covered the final expression only"
+  },
+  "proofEvidenceAfter": {
+   "certificates": 2,
+   "claimBinding": "bound"
+  },
+  "rootCauses": [
+   "lost-student-lines",
+   "final-answer-only-verification",
+   "incorrect-source-mapping",
+   "reference-label-defect (every written line is a true statement at input 1)"
+  ],
+  "resolved": true,
+  "resolution": "reference disputed: engine verdict is mathematically correct"
+ }
+]

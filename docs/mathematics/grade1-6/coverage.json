@@ -1,0 +1,27 @@
+{
+  "nodes": 200,
+  "edges": 261,
+  "audited": 92,
+  "proposedRefinements": 14,
+  "grade1to6": 92,
+  "byGrade": {
+    "1": 15,
+    "2": 16,
+    "3": 16,
+    "4": 15,
+    "5": 15,
+    "6": 15
+  },
+  "byStrand": {
+    "number": 35,
+    "algebra": 8,
+    "geometry": 14,
+    "measurement": 21,
+    "statistics": 7,
+    "reasoning": 6,
+    "probability": 1
+  },
+  "changedPrerequisiteRecords": 83,
+  "implementedReferenceJourneys": 3,
+  "educatorReviewedJourneys": 0
+}

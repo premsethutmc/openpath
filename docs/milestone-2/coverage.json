@@ -1,0 +1,938 @@
+[
+ {
+  "id": "MATH.number.place-value-tens",
+  "name": "Compose tens and ones",
+  "start": "gen:aatens:4,5",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 5,
+   "machineChecked": 5,
+   "eligible": 4
+  },
+  "grading": {
+   "verifier": 69,
+   "educator": 3,
+   "parser": 2
+  },
+  "prerequisitesInSet": [],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "1 of 5 explanations not machine-checked-eligible",
+   "3 answer(s) not decided automatically (held / educator)"
+  ]
+ },
+ {
+  "id": "MATH.number.addition-regroup",
+  "name": "Add two-digit numbers with regrouping",
+  "start": "gen:addr:66,15",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 4,
+   "machineChecked": 4,
+   "eligible": 2
+  },
+  "grading": {
+   "kernel": 37,
+   "verifier": 16,
+   "parser": 2
+  },
+  "prerequisitesInSet": [
+   "MATH.number.place-value-tens"
+  ],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "2 of 4 explanations not machine-checked-eligible"
+  ]
+ },
+ {
+  "id": "MATH.number.multiplication-tables",
+  "name": "Use multiplication facts",
+  "start": "mt-d1",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 5,
+   "machineChecked": 0,
+   "eligible": 0
+  },
+  "grading": {
+   "verifier": 41,
+   "kernel": 1,
+   "parser": 2
+  },
+  "prerequisitesInSet": [],
+  "newLogicNeeded": false,
+  "support": "demonstration-only",
+  "limitations": [
+   "the first question's family models no misconception (diagnosis can only tell right from wrong)",
+   "no machine-checked eligible explanation"
+  ]
+ },
+ {
+  "id": "MATH.number.multi-multiplication",
+  "name": "Multiply multi-digit numbers",
+  "start": "gen:mmul:94,7",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 3,
+   "machineChecked": 3,
+   "eligible": 2
+  },
+  "grading": {
+   "kernel": 41,
+   "verifier": 16,
+   "parser": 2
+  },
+  "prerequisitesInSet": [
+   "MATH.number.multiplication-tables"
+  ],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "1 of 3 explanations not machine-checked-eligible"
+  ]
+ },
+ {
+  "id": "MATH.number.division-remainders",
+  "name": "Interpret quotients and remainders",
+  "start": "gen:divr:25,9",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 3,
+   "machineChecked": 3,
+   "eligible": 2
+  },
+  "grading": {
+   "verifier": 54,
+   "parser": 2
+  },
+  "prerequisitesInSet": [
+   "MATH.number.multiplication-tables"
+  ],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "1 of 3 explanations not machine-checked-eligible"
+  ]
+ },
+ {
+  "id": "MATH.number.order-of-operations",
+  "name": "Evaluate arithmetic expressions using brackets and operation precedence",
+  "start": "gen:agbod:1,27,3,5",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 4,
+   "machineChecked": 4,
+   "eligible": 2
+  },
+  "grading": {
+   "kernel": 45,
+   "verifier": 18,
+   "parser": 2
+  },
+  "prerequisitesInSet": [
+   "MATH.number.addition-regroup",
+   "MATH.number.multi-multiplication",
+   "MATH.number.multiplication-tables",
+   "MATH.algebra.variables"
+  ],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "2 of 4 explanations not machine-checked-eligible"
+  ]
+ },
+ {
+  "id": "MATH.number.integers",
+  "name": "Order signed integers",
+  "start": "gen:ajord:8,-5,-8,-1",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 3,
+   "machineChecked": 3,
+   "eligible": 1
+  },
+  "grading": {
+   "verifier": 34,
+   "parser": 2
+  },
+  "prerequisitesInSet": [],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "2 of 3 explanations not machine-checked-eligible"
+  ]
+ },
+ {
+  "id": "MATH.number.integer-add",
+  "name": "Add and subtract integers",
+  "start": "gen:aiint:-26,29,0",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 3,
+   "machineChecked": 3,
+   "eligible": 2
+  },
+  "grading": {
+   "kernel": 38,
+   "verifier": 13,
+   "educator": 3,
+   "parser": 2
+  },
+  "prerequisitesInSet": [
+   "MATH.number.integers"
+  ],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "1 of 3 explanations not machine-checked-eligible",
+   "3 answer(s) not decided automatically (held / educator)"
+  ]
+ },
+ {
+  "id": "MATH.number.integer-multiply",
+  "name": "Multiply integers using sign rules",
+  "start": "gen:aiintx:1,-8,4,-60,-4",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 5,
+   "machineChecked": 5,
+   "eligible": 4
+  },
+  "grading": {
+   "kernel": 58,
+   "verifier": 4,
+   "educator": 3,
+   "parser": 2
+  },
+  "prerequisitesInSet": [
+   "MATH.number.integers",
+   "MATH.number.integer-add"
+  ],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "1 of 5 explanations not machine-checked-eligible",
+   "3 answer(s) not decided automatically (held / educator)"
+  ]
+ },
+ {
+  "id": "MATH.number.rational-numbers",
+  "name": "Operate on rational numbers",
+  "start": "gen:ajrq:-7,8,3,5,3",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "pause",
+    "status": "guided",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 3,
+   "machineChecked": 3,
+   "eligible": 2
+  },
+  "grading": {
+   "kernel": 35,
+   "verifier": 13,
+   "educator": 2,
+   "parser": 2
+  },
+  "prerequisitesInSet": [],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "1 of 3 explanations not machine-checked-eligible",
+   "2 answer(s) not decided automatically (held / educator)"
+  ]
+ },
+ {
+  "id": "MATH.algebra.missing-number",
+  "name": "Find missing operands",
+  "start": "gen:acmissing:3,3,10",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 4,
+   "machineChecked": 4,
+   "eligible": 2
+  },
+  "grading": {
+   "verifier": 65,
+   "kernel": 1,
+   "parser": 2
+  },
+  "prerequisitesInSet": [],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "2 of 4 explanations not machine-checked-eligible"
+  ]
+ },
+ {
+  "id": "MATH.algebra.variables",
+  "name": "Evaluate variable expressions",
+  "start": "gen:linev:8,2,7",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 3,
+   "machineChecked": 3,
+   "eligible": 2
+  },
+  "grading": {
+   "kernel": 39,
+   "verifier": 7,
+   "parser": 2
+  },
+  "prerequisitesInSet": [
+   "MATH.algebra.expressions-intro"
+  ],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "1 of 3 explanations not machine-checked-eligible"
+  ]
+ },
+ {
+  "id": "MATH.algebra.expressions-intro",
+  "name": "Represent a number rule with a symbol",
+  "start": "gen:afletter:3,2,7",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 3,
+   "machineChecked": 3,
+   "eligible": 2
+  },
+  "grading": {
+   "verifier": 50,
+   "parser": 2
+  },
+  "prerequisitesInSet": [],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "1 of 3 explanations not machine-checked-eligible"
+  ]
+ },
+ {
+  "id": "MATH.algebra.algebra-simplify",
+  "name": "Simplify linear expressions",
+  "start": "gen:ahlike:2,8,5,-9",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 5,
+   "machineChecked": 5,
+   "eligible": 3
+  },
+  "grading": {
+   "verifier": 50,
+   "kernel": 9,
+   "parser": 2
+  },
+  "prerequisitesInSet": [
+   "MATH.algebra.linear-equations"
+  ],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "2 of 5 explanations not machine-checked-eligible"
+  ]
+ },
+ {
+  "id": "MATH.algebra.linear-intro",
+  "name": "Solve one-step equations",
+  "start": "gen:ahone:3,2,12",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 4,
+   "machineChecked": 4,
+   "eligible": 3
+  },
+  "grading": {
+   "kernel": 46,
+   "parser": 2
+  },
+  "prerequisitesInSet": [
+   "MATH.algebra.variables"
+  ],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "1 of 4 explanations not machine-checked-eligible"
+  ]
+ },
+ {
+  "id": "MATH.algebra.linear-equations",
+  "name": "Solve linear equations",
+  "start": "gen:lin:3,3,2",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 3,
+   "machineChecked": 3,
+   "eligible": 2
+  },
+  "grading": {
+   "kernel": 41,
+   "verifier": 10,
+   "educator": 3,
+   "parser": 2
+  },
+  "prerequisitesInSet": [
+   "MATH.algebra.linear-intro",
+   "MATH.number.rational-numbers",
+   "MATH.number.integer-add",
+   "MATH.number.integer-multiply"
+  ],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "1 of 3 explanations not machine-checked-eligible",
+   "3 answer(s) not decided automatically (held / educator)"
+  ]
+ },
+ {
+  "id": "MATH.algebra.linear-rational",
+  "name": "Solve equations with rational coefficients",
+  "start": "gen:lneg:-2,10,3",
+  "learners": [
+   {
+    "name": "strong",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "misconception",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "never right",
+    "ended": "pause",
+    "status": "exposure",
+    "failed": []
+   },
+   {
+    "name": "forgets",
+    "ended": "done",
+    "status": "transfer",
+    "failed": []
+   },
+   {
+    "name": "unreadable",
+    "ended": "pause",
+    "status": "not_started",
+    "failed": []
+   }
+  ],
+  "strategies": {
+   "total": 4,
+   "machineChecked": 4,
+   "eligible": 2
+  },
+  "grading": {
+   "verifier": 48,
+   "kernel": 10,
+   "parser": 2
+  },
+  "prerequisitesInSet": [
+   "MATH.number.integer-add"
+  ],
+  "newLogicNeeded": false,
+  "support": "supported with documented limitations",
+  "limitations": [
+   "2 of 4 explanations not machine-checked-eligible"
+  ]
+ }
+]

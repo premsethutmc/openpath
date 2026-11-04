@@ -1,0 +1,5 @@
+{"caseId":"e6-251","adjudicator":"B (blind, independent agent; brief contained task, working and verdict contract only)","verdict":"missing-assumption","confidence":0.6,"competingVerdict":"verified",
+"reasoning":"Line 2 cancels (x-2)/(x-2) and writes f = x+2 without qualifier; the equality holds only for x!=2. Read pointwise on f's own domain every line is true, so a grader may treat x!=2 as implied.",
+"firstAdjudicator":{"file":"../generalization-e6r/adjudication/blind-adjudication-e6-251.v1.json","verdict":"verified","contestable":true},
+"outcome":"SPLIT. Reference label (missing-assumption) is supported by adjudicator B and contradicted by adjudicator A; neither is certain. e6-251 remains CONTESTED; it is not reclassified as a confirmed false acceptance nor as a label defect.",
+"caveat":"Adjudicator B's brief named the x!=2 question explicitly (priming risk); adjudicator A's did not."}

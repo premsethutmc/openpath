@@ -1,0 +1,160 @@
+diff -ru '--exclude=results' '--exclude=*.json' '--exclude=*.md' h/e002p/src/benchmark.ts h2/e002p/src/benchmark.ts
+--- h/e002p/src/benchmark.ts	2026-10-18 17:39:45.488644266 +0530
++++ h2/e002p/src/benchmark.ts	2026-10-18 19:09:59.036722865 +0530
+@@ -13,7 +13,7 @@
+ import { AVAILABLE_DAYS, benchEpisode, type Episode, HORIZON, LEARNER_ID, type SimLearnerModel } from "./episode.ts";
+ import { CONTEXT_START } from "./fit.ts";
+ import { type PolicyName, POLICIES, runPolicy } from "./policies.ts";
+-import { core, pinCheck } from "./prod.ts";
++import { core, pinCheck, essayLeaf } from "./prod.ts";
+ import { LEARNER_TYPES, LEARNING_SIMS, type LearnerType, type LearningSim, rng, TARGET, TYPE_LABEL } from "./sim.ts";
+ import { isoAt, makeWorld, TARGET_CAP, type World } from "./world.ts";
+ 
+@@ -55,7 +55,7 @@
+     const end = isoAt(day + 1);
+     const evs = ep.events.filter((e) => (e as { at: string }).at < end);
+     const L = core.Ledger.rebuild(world.ectx.ctx, LEARNER_ID, evs);
+-    const v = core.leafView(L.composite, world.ectx.ctx.index, TARGET_CAP, isoAt(day + 0.99));
++    const v = essayLeaf(world.ectx, L.composite, TARGET_CAP, isoAt(day + 0.99));
+     claims.push({ day, claim: core.engineClaim(world.ectx, TARGET_CAP, v).level, acts: acts.filter((a) => a.day <= day).length });
+   }
+   const first = claims.find((c) => c.claim !== "none");
+@@ -90,6 +90,11 @@
+     engineClaimTrue: first ? truthOn(first.day) : null,
+     engineClaim30: claims.at(-1)!.claim !== "none",
+     engineFalseClaim: claims.some((c) => c.claim !== "none" && !truthOn(c.day)),
++    // retention timing (openpath policy @4 comparison): "verified" sooner than 7 days after the target was first shown
++    verifiedEarly: !!first && claims.some((c) => c.claim === "verified" && c.day - first.day < 7),
++    verified30: claims.at(-1)!.claim === "verified",
++    trueClaimDays: claims.filter((c) => c.claim !== "none" && truthOn(c.day)).length,
++    falseClaimDays: claims.filter((c) => c.claim !== "none" && !truthOn(c.day)).length,
+     activities: acts.length,
+     questions: acts.filter((a) => ["diagnostic", "prereq_diagnostic", "check", "retention_check"].includes(a.kind)).length,
+     diagnostics: acts.filter((a) => a.kind === "diagnostic" || a.kind === "prereq_diagnostic").length,
+diff -ru '--exclude=results' '--exclude=*.json' '--exclude=*.md' h/e002p/src/episode.ts h2/e002p/src/episode.ts
+--- h/e002p/src/episode.ts	2026-10-18 16:52:55.000000000 +0530
++++ h2/e002p/src/episode.ts	2026-10-18 18:53:14.940136355 +0530
+@@ -6,7 +6,7 @@
+  * are written and observed) and a `LearnerModel` (how the learner answers and learns). The decision benchmark uses the
+  * synthetic world (world.ts + sim.ts); the Karthik journey uses the real Grade 8 bank (karthik.ts).
+  */
+-import { core } from "./prod.ts";
++import { core, essayLeaf } from "./prod.ts";
+ import { type LearnerType, type LearningSim, makeLearner, rng, type SimItem, type SimLearner, TARGET } from "./sim.ts";
+ import { dayOf, fixtureEvaluator, isoAt, makeEssay, MISCONCEPTION, PREREQ_CAP, respond, TARGET_CAP, type World } from "./world.ts";
+ 
+@@ -157,7 +157,7 @@
+   }
+   /** The engine's claim at the grade target (production engineClaim on leafView). */
+   claim(cap = this.setup.target): "none" | "demonstrated" | "verified" {
+-    return core.engineClaim(this.ectx, cap, this.view(cap)).level;
++    return core.engineClaim(this.ectx, cap, essayLeaf(this.ectx, this.ledger().composite, cap, isoAt(this.t()))).level;
+   }
+   markAdvanced() {
+     if (this.advancedAt === null) {
+diff -ru '--exclude=results' '--exclude=*.json' '--exclude=*.md' h/e002p/src/karthik.ts h2/e002p/src/karthik.ts
+--- h/e002p/src/karthik.ts	2026-10-18 17:29:21.305511386 +0530
++++ h2/e002p/src/karthik.ts	2026-10-18 18:53:14.940689828 +0530
+@@ -25,7 +25,7 @@
+ import { CONTEXT_START } from "./fit.ts";
+ import { Episode, type LearnerModel, type Setup } from "./episode.ts";
+ import { contextReader, productionReader, runCurrent, runStateAware, type Trace } from "./policies.ts";
+-import { core, essayLoad, pinCheck } from "./prod.ts";
++import { core, essayLoad, pinCheck, essayLeaf } from "./prod.ts";
+ import { isoAt } from "./world.ts";
+ 
+ export const PLURALS = "EN.GRM.NOUN.plurals_countability";
+@@ -237,7 +237,7 @@
+   const final: RunResult["final"] = {};
+   for (const cap of [PLURALS, SVA, GRAMMAR]) {
+     const v = core.leafView(L.composite, ectx.ctx.index, cap, end);
+-    final[cap] = { stage: v.stage, demonstrated: v.demonstrated, status: v.verification.status, currentLevel: v.verification.currentLevel, mean: +v.direct.mean.toFixed(2), sd: +v.direct.sd.toFixed(2), n: v.direct.n, claim: ectx.profile.byCapability.has(cap) ? core.engineClaim(ectx, cap, v).level : "not in profile" };
++    final[cap] = { stage: v.stage, demonstrated: v.demonstrated, status: v.verification.status, currentLevel: v.verification.currentLevel, mean: +v.direct.mean.toFixed(2), sd: +v.direct.sd.toFixed(2), n: v.direct.n, claim: ectx.profile.byCapability.has(cap) ? core.engineClaim(ectx, cap, essayLeaf(ectx, L.composite, cap, end)).level : "not in profile" };
+   }
+   // 7. preserved across sessions: serialise the ledger events, reload, rebuild — identical estimates
+   const reloaded = core.Ledger.rebuild(ectx.ctx, KARTHIK, JSON.parse(JSON.stringify(ep.events)));
+@@ -275,7 +275,7 @@
+   const claimBefore2 = (() => {
+     const i = ep.events.findIndex((e) => (e as { kind: string; at: string }).kind === "essay" && (e as { at: string }).at >= isoAt(10));
+     const L = core.Ledger.rebuild(ectx.ctx, KARTHIK, ep.events.slice(0, Math.max(0, i)));
+-    return ectx.profile.byCapability.has(target) ? core.engineClaim(ectx, target, core.leafView(L.composite, ectx.ctx.index, target, isoAt(10))).level : "n/a";
++    return ectx.profile.byCapability.has(target) ? core.engineClaim(ectx, target, essayLeaf(ectx, L.composite, target, isoAt(10))).level : "n/a";
+   })();
+   out.push({ id: 8, item: "Avoids unnecessary repeated diagnostics", pass: claimBefore2 !== "none" && claimBefore2 !== "n/a" ? diag2.length === 0 : null, evidence: `engine claim before essay 2: ${claimBefore2}; diagnostic questions after essay 2: ${diag2.length}` });
+   const ret = acts.filter((a) => a.kind === "retention_check" && a.cap === target);
+@@ -283,7 +283,7 @@
+   const shownDay = ectx.profile.byCapability.has(target)
+     ? (ep.setup.days.find((d) => {
+         const L = core.Ledger.rebuild(ectx.ctx, KARTHIK, ep.events.filter((e) => (e as { at: string }).at < isoAt(d + 1)));
+-        return core.engineClaim(ectx, target, core.leafView(L.composite, ectx.ctx.index, target, isoAt(d + 0.99))).level !== "none";
++        return core.engineClaim(ectx, target, essayLeaf(ectx, L.composite, target, isoAt(d + 0.99))).level !== "none";
+       }) ?? null)
+     : null;
+   out.push({ id: 9, item: "Schedules retention checks appropriately", pass: ret.length && shownDay !== null ? ret[0].day - shownDay >= 7 : null, evidence: ret.length ? `delayed check on day ${ret[0].day}; target first shown on day ${shownDay}` : `no delayed check taken by day 21${shownDay !== null ? ` (target first shown on day ${shownDay})` : " (target never shown)"}` });
+diff -ru '--exclude=results' '--exclude=*.json' '--exclude=*.md' h/e002p/src/policies.ts h2/e002p/src/policies.ts
+--- h/e002p/src/policies.ts	2026-10-18 17:28:47.494382798 +0530
++++ h2/e002p/src/policies.ts	2026-10-18 18:59:21.414323853 +0530
+@@ -58,7 +58,24 @@
+   let journey: { id: string } | null = null;
+   const note = (decision: string) => trace?.push({ day: ep.day, decision });
+   type Step = { id: string; kind: string; status: string; competency: string; order: number; content: { refs: string[]; note: string } };
+-  const stepsOf = () => (core.journeyStatus(ectx, ep.events, journey!.id, isoAt(ep.t())).trees.flatMap((t: { nodes: { steps: Step[] }[] }) => t.nodes.flatMap((n) => n.steps)) as Step[]).sort((a, b) => a.order - b.order);
++  // policy @4 (studio.ts nextStep): a review's lesson and practice follow the journey's own steps; its check is a later check
++  const stepsOf = () => {
++    const st = core.journeyStatus(ectx, ep.events, journey!.id, isoAt(ep.t()));
++    const own = (st.trees.flatMap((t: { nodes: { steps: Step[] }[] }) => t.nodes.flatMap((n) => n.steps)) as Step[]).sort((a, b) => a.order - b.order);
++    const reviews = ((st.reviews ?? []) as { steps: Step[] }[]).flatMap((r) => r.steps.filter((x) => x.kind !== "independent_check"));
++    return [...own, ...reviews];
++  };
++  const planReviews = () => {
++    if (typeof core.planReview !== "function" || process.env.NO_REVIEW) return;
++    const caps = new Set<string>(core.plannedChecks(ep.events).filter((c: { kind: string }) => c.kind === "retention").map((c: { competency: string }) => c.competency));
++    for (const cap of caps)
++      try {
++        ep.events.push(core.planReview(ectx, ep.events, ep.meta(), cap).event);
++        note(`review recorded for ${cap} after a failed delayed check`);
++      } catch {
++        /* no review required */
++      }
++  };
+   const taughtToday = (cap: string) => ep.events.some((e) => (e as { kind: string; session: string; capability?: string }).kind === "intervention" && (e as { session: string }).session === ep.session && (e as { capability?: string }).capability === cap);
+   const done = new Set<string>();
+   const walk = () => {
+@@ -100,6 +117,7 @@
+     if (journey && !stepsOf().some((x) => x.status === "pending" && !done.has(x.id))) {
+       const caps = new Set<string>();
+       for (const rec of core.essayRecords(ep.events, "journey")) for (const t of rec.record.journey.trees) for (const n of t.nodes) if (n.role === "target") caps.add(n.competency);
++      planReviews();
+       for (const cap of caps) {
+         const holder = [...core.essayRecords(ep.events, "journey")].reverse().find((rec: { record: { journey: { trees: { nodes: { competency: string }[] }[] } } }) => rec.record.journey.trees.some((t) => t.nodes.some((n) => n.competency === cap)));
+         try {
+@@ -110,8 +128,13 @@
+           if (day === S.days.at(-1)) note(`no further check for ${cap}: ${(e as Error).message}`);
+         }
+       }
+-      for (let q = core.dueCheck(ectx, ep.events, isoAt(ep.t())); q; q = core.dueCheck(ectx, ep.events, isoAt(ep.t())))
++      for (let q = core.dueCheck(ectx, ep.events, isoAt(ep.t())); q; q = core.dueCheck(ectx, ep.events, isoAt(ep.t()))) {
+         ep.answer(q.item, q.check.kind === "retention" ? "retention_check" : "check", q.check.kind === "retention" ? "retention" : "assessment");
++        // studio.ts answerLaterCheck: a failed delayed check records its review at once
++        if (q.position === q.total && q.check.kind === "retention") planReviews();
++      }
++      // the review's lesson and practice in the same sitting (its check comes in a later sitting)
++      walk();
+     }
+     if (ep.claim() !== "none") ep.markAdvanced();
+   }
+diff -ru '--exclude=results' '--exclude=*.json' '--exclude=*.md' h/e002p/src/prod.ts h2/e002p/src/prod.ts
+--- h/e002p/src/prod.ts	2026-10-18 16:52:55.000000000 +0530
++++ h2/e002p/src/prod.ts	2026-10-18 18:53:14.939718224 +0530
+@@ -57,3 +57,11 @@
+     throw new Error(`OPENPATH_ROOT is at ${head}, not the pinned ${PINNED_COMMIT}; set E002P_ALLOW_UNPINNED=1 to run anyway (results will not match the reports)`);
+   return head;
+ }
++
++/**
++ * The essay layer's view of a competency: production's essayView (policy @4, the schedule anchored to the grade target)
++ * where the checkout has it, otherwise leafView (earlier checkouts, whose essay claim read leafView directly).
++ */
++export function essayLeaf(ectx: any, composite: any, cap: string, at: string): any {
++  return typeof (core as any).essayView === "function" ? (core as any).essayView(ectx, composite, cap, at) : core.leafView(composite, ectx.ctx.index, cap, at);
++}

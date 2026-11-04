@@ -1,0 +1,24 @@
+{
+  "schema": "fingerprint-investigation-summary@1",
+  "runtime22": "v22.18.0",
+  "runtime24": "v24.19.0",
+  "newFingerprintImplemented": false,
+  "banks": [
+    {
+      "bank": "e1",
+      "node22": "f66325454dfd2e24a2e84baf4d48ee21c98dc7462adffc204653dd43b02637fb",
+      "node24": "feb221e68259ede60ed4d9786983c5f42e19135547b7fad7382cf09fd4523ed0",
+      "differentFields": 10,
+      "maxAbsoluteDifference": 5.551115123125783e-17,
+      "otherFieldDifferences": 0
+    },
+    {
+      "bank": "e2a",
+      "node22": "94def3e4c98a7ba4dab463bb1672180c5bb2ba5bc08925bea0b6be978a07c0db",
+      "node24": "931a9c11fff42b5464714f54722066d5e575efb8eb585bbde428ba31c628245e",
+      "differentFields": 8,
+      "maxAbsoluteDifference": 5.551115123125783e-17,
+      "otherFieldDifferences": 0
+    }
+  ]
+}

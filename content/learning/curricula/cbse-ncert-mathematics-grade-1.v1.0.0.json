@@ -1,0 +1,964 @@
+{
+ "id": "cbse-ncert-mathematics-grade-1",
+ "version": "1.0.0",
+ "status": "reviewed",
+ "grade": 1,
+ "title": "Joyful Mathematics (Textbook of Mathematics for Grade 1) — Grade 1 Mathematics (CBSE / NCERT)",
+ "hash": "f631216d",
+ "source": {
+  "kind": "textbook",
+  "title": "Joyful Mathematics (Textbook of Mathematics for Grade 1)",
+  "edition": "NCERT reprint 2026-27 (first edition 2023 per my knowledge; not verified)",
+  "publisher": "NCERT",
+  "board": "CBSE (NCERT textbooks)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/cbse-g01.json. Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://ciet.ncert.gov.in/audio-book/118 https://ciet.ncert.gov.in/audio-book/119 https://ncert.nic.in/textbook/pdf/aejm1ps.pdf https://edustud.nic.in/edu/Syllabus_2026_27/1/1_math_english_2026_27.pdf. Notes: CBSE does not publish its own Classes 1-5 mathematics syllabus; CBSE schools follow the NCERT textbooks. The 2026-27 prescription was confirmed via official government split-up syllabi (Delhi Directorate of Education; KVS where available) and the NCERT reprint 2026-27 label. NCERT's 'Learning Outcomes at the Elementary Stage' (tilops101.pdf) could not be opened (robots-blocked); outcomes are written in my own words from the chapter content and the official DoE/KVS split-up outcomes. Outcomes are not copied from the textbook; questionTypes and difficulty are my judgement.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "cbse-g01-c01",
+     "number": 1,
+     "title": "Finding the Furry Cat!",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c01-o01",
+       "text": "Describe where an object is using position words such as inside/outside, above/below, near/far, in front of/behind.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.positions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      },
+      {
+       "id": "cbse-g01-c01-o02",
+       "text": "Sort, match and group everyday objects by a shared attribute such as colour, size or shape.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.sort-by-attribute",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; set, multiple-choice)."
+       }
+      },
+      {
+       "id": "cbse-g01-c01-o03",
+       "text": "Compare two objects or groups using words like big/small and more/fewer without counting.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g01-c03",
+     "number": 3,
+     "title": "Mango Treat",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c03-o01",
+       "text": "Count a collection of up to 9 objects by matching one number name to each object.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.count-objects",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "cbse-g01-c03-o02",
+       "text": "Read and write the numerals 1 to 9 and match each numeral to a quantity.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.count-objects",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "cbse-g01-c03-o03",
+       "text": "Compare two numbers or groups up to 9 and say which is more, which is less or whether they are equal.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, true-false)."
+       }
+      },
+      {
+       "id": "cbse-g01-c03-o04",
+       "text": "Put numbers up to 9 in order and name the number just before or just after a given number.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; ordered-list, numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g01-c04",
+     "number": 4,
+     "title": "Making 10",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c04-o01",
+       "text": "Count, read and write numbers from 10 to 20.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.count-objects",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "cbse-g01-c04-o02",
+       "text": "Use zero as the number for an empty collection and write it as 0.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.zero",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "cbse-g01-c04-o03",
+       "text": "Make 10 from two smaller numbers in different ways and show a teen number as one ten and some ones.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.addition",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.place-value-tens",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, expression)."
+       }
+      },
+      {
+       "id": "cbse-g01-c04-o04",
+       "text": "Compare and order numbers up to 20.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, ordered-list)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g01-c05",
+     "number": 5,
+     "title": "How Many?",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c05-o01",
+       "text": "Add two small groups by putting them together and counting the total, with sums up to 9.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.addition",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "cbse-g01-c05-o02",
+       "text": "Subtract by taking away objects from a group of up to 9 and counting what is left.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.subtraction",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "cbse-g01-c05-o03",
+       "text": "Solve and make up short oral number stories that need adding or taking away within 9.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.operation-choice",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; word-problem, numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g01-c06",
+     "number": 6,
+     "title": "Vegetable Farm",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c06-o01",
+       "text": "Add two numbers with a total up to 20 using objects, counting on or a number strip.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.addition",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "cbse-g01-c06-o02",
+       "text": "Subtract within 20 by taking away or counting back and check by recounting.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.subtraction",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "cbse-g01-c06-o03",
+       "text": "Solve simple farm-themed word problems within 20 by deciding whether to add or subtract.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.operation-choice",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g01-c08",
+     "number": 8,
+     "title": "Fun with Numbers",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c08-o01",
+       "text": "Read and write numbers from 21 to 99 and show them as tens and ones.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.place-value-tens",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "cbse-g01-c08-o02",
+       "text": "Count in tens and find the number before, after or between given two-digit numbers.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.number-patterns",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, pattern)."
+       }
+      },
+      {
+       "id": "cbse-g01-c08-o03",
+       "text": "Compare two-digit numbers using the tens digit first and then the ones digit.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, true-false)."
+       }
+      },
+      {
+       "id": "cbse-g01-c08-o04",
+       "text": "Add or subtract simple two-digit numbers without regrouping in everyday contexts.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.addition",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.subtraction",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g01-c11",
+     "number": 11,
+     "title": "How Many Times?",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c11-o01",
+       "text": "Make equal groups and find the total by repeated addition or skip counting.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.equal-groups",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "cbse-g01-c11-o02",
+       "text": "Solve small story problems about a number of equal groups.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.equal-groups",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.operation-choice",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "cbse-g01-c09",
+     "number": 9,
+     "title": "Utsav",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c09-o01",
+       "text": "Identify the repeating unit in a pattern of colours, shapes or sizes and continue the pattern.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.repeating-patterns",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; pattern, multiple-choice)."
+       }
+      },
+      {
+       "id": "cbse-g01-c09-o02",
+       "text": "Create a repeating pattern of one's own and describe how it repeats.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.repeating-patterns",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked by an educator; pattern, written-explanation)."
+       }
+      },
+      {
+       "id": "cbse-g01-c09-o03",
+       "text": "Recognise simple growing patterns with shapes or numbers and say what comes next.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.growing-patterns",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; pattern, numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "cbse-g01-c02",
+     "number": 2,
+     "title": "What is Long? What is Round?",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c02-o01",
+       "text": "Recognise and name common solid shapes in the surroundings and sort objects into round and flat-faced groups.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.shapes",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, set)."
+       }
+      },
+      {
+       "id": "cbse-g01-c02-o02",
+       "text": "Predict whether an object will roll, slide or do both from the kind of surfaces it has.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.shape-properties",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, true-false)."
+       }
+      },
+      {
+       "id": "cbse-g01-c02-o03",
+       "text": "Compare two or three objects by length or height and order them from shortest to longest.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.length-comparison",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, ordered-list)."
+       }
+      },
+      {
+       "id": "cbse-g01-c02-o04",
+       "text": "Describe simple flat shapes by their straight or curved sides and corners.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.shape-properties",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "cbse-g01-c07",
+     "number": 7,
+     "title": "Lina's Family",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c07-o01",
+       "text": "Compare and order people or objects by height or length using taller/shorter and longer/shorter.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.length-comparison",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, ordered-list)."
+       }
+      },
+      {
+       "id": "cbse-g01-c07-o02",
+       "text": "Measure a length by repeating a non-standard unit such as a hand span, foot or stick and report the count.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.non-standard-units",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, measurement-with-unit)."
+       }
+      },
+      {
+       "id": "cbse-g01-c07-o03",
+       "text": "Compare objects as heavier or lighter by holding them or using a simple balance.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.mass-comparison",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      },
+      {
+       "id": "cbse-g01-c07-o04",
+       "text": "Estimate a length in informal units before measuring and compare the estimate with the measurement.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.non-standard-units",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.estimate-check",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; estimation, numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "cbse-g01-c10",
+     "number": 10,
+     "title": "How do I Spend my Day?",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c10-o01",
+       "text": "Put daily activities in order using words such as morning, afternoon, earlier and later.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.time-order",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; ordered-list)."
+       }
+      },
+      {
+       "id": "cbse-g01-c10-o02",
+       "text": "Compare activities by how long they take and say which takes more or less time.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.time-order",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      },
+      {
+       "id": "cbse-g01-c10-o03",
+       "text": "Name the days of the week and months of the year in order.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.calendar",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; ordered-list, multiple-choice)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "cbse-g01-c12",
+     "number": 12,
+     "title": "How Much Can We Spend?",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c12-o01",
+       "text": "Recognise Indian coins and notes up to Rs 20 and state their values.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.money-coins",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, money)."
+       }
+      },
+      {
+       "id": "cbse-g01-c12-o02",
+       "text": "Make a given amount up to Rs 20 using different combinations of coins and notes.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.money-totals",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; money, set)."
+       }
+      },
+      {
+       "id": "cbse-g01-c12-o03",
+       "text": "Solve simple buying problems: find the total cost of two items and decide whether an amount is enough.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.money-change",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.money-totals",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; money, word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "cbse-g01-c13",
+     "number": 13,
+     "title": "So Many Toys",
+     "outcomes": [
+      {
+       "id": "cbse-g01-c13-o01",
+       "text": "Read a simple picture record and answer how many there are of each kind and which has the most.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.picture-data",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; data-table, numeric)."
+       }
+      },
+      {
+       "id": "cbse-g01-c13-o02",
+       "text": "Collect counts of objects by an attribute such as colour or shape and record them as pictures or marks.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.picture-data",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.statistics.tables",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; data-table)."
+       }
+      },
+      {
+       "id": "cbse-g01-c13-o03",
+       "text": "Compare two categories in picture data and find how many more one has than the other.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.subtraction",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.statistics.picture-data",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "unit": {
+      "id": "domain-statistics",
+      "number": 5,
+      "title": "Data handling and statistics"
+     }
+    }
+   ]
+  }
+ ]
+}

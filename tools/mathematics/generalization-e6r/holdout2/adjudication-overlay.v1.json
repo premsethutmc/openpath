@@ -1,0 +1,603 @@
+{
+ "version": 1,
+ "note": "Blind adjudication by two independent agents that saw only the typed problem and the working (no reference, no engine output). Both were given the same neutral verdict vocabulary. The adjudicated labels are an OVERLAY: the frozen corpus and the raw results are unchanged. Caveat: the brief told adjudicators that a task name may or may not carry its standard model; this may have primed the two binomial/independence items.",
+ "records": [
+  {
+   "caseId": "s6-238",
+   "holdout": "2",
+   "problem": {
+    "area": "polynomial",
+    "coefficientDomain": "complex",
+    "data": {
+     "coefficients": [
+      "2",
+      "-6",
+      "5"
+     ]
+    },
+    "domain": "complex-polynomial",
+    "task": "vieta-product"
+   },
+   "studentWorking": "the product of the roots is -c/a\nproduct of roots = 5/2",
+   "referenceVerdict": "invalid",
+   "referenceRationale": "the product is c/a; the stated -c/a is false (it only happens that the next line gives c/a)",
+   "engineVerdictAtScoring": "verified",
+   "adjudicatorA": {
+    "verdict": "invalid",
+    "confidence": "certain",
+    "alternative": "verified (if only the final value were graded)"
+   },
+   "adjudicatorB": {
+    "verdict": "invalid",
+    "confidence": "certain",
+    "alternative": "verified (if only the final value were judged)"
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "invalid",
+   "referenceUpheld": true,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": false
+  },
+  {
+   "caseId": "s6-316",
+   "holdout": "2",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "factors": [
+      {
+       "kind": "variable",
+       "name": "x"
+      },
+      {
+       "argument": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "kind": "abs"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "restrictions": [
+     "x<0"
+    ],
+    "task": "derivative",
+    "variable": "x"
+   },
+   "studentWorking": "x|x| = x(-x) = -x^2\nf'(x) = -2x",
+   "referenceVerdict": "verified",
+   "referenceRationale": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "engineVerdictAtScoring": "invalid",
+   "adjudicatorA": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorB": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "verified",
+   "referenceUpheld": true,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": false
+  },
+  {
+   "caseId": "r6-220",
+   "holdout": "1",
+   "problem": {
+    "area": "distribution",
+    "data": {
+     "n": 10,
+     "p": "3/10"
+    },
+    "domain": "probability-statistics",
+    "task": "binomial-variance"
+   },
+   "studentWorking": "Var(X) = 10(3/10)*(7/10) = 21/10",
+   "referenceVerdict": "missing-assumption",
+   "referenceRationale": "np(1-p) assumes n independent identical trials, never stated.",
+   "engineVerdictAtScoring": "verified",
+   "adjudicatorA": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorB": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "verified",
+   "referenceUpheld": false,
+   "engineCorrectAfterAdjudication": true,
+   "labelChanged": true
+  },
+  {
+   "caseId": "s6-096",
+   "holdout": "2",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "argument": {
+      "factors": [
+       {
+        "kind": "constant",
+        "value": "2"
+       },
+       {
+        "kind": "variable",
+        "name": "x"
+       }
+      ],
+      "kind": "multiply"
+     },
+     "kind": "exp"
+    },
+    "lower": "0",
+    "task": "definite-integral",
+    "upper": "1",
+    "variable": "x"
+   },
+   "studentWorking": "\u222b_0^1 e^(2x) dx = [e^(2x)/2]_0^1 = e^(2)/2 - 1/2 = (e^(2) - 1)/2",
+   "referenceVerdict": "verified",
+   "referenceRationale": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "engineVerdictAtScoring": "incomplete",
+   "adjudicatorA": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorB": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "verified",
+   "referenceUpheld": true,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": false
+  },
+  {
+   "caseId": "s6-292",
+   "holdout": "2",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "argument": {
+      "kind": "add",
+      "terms": [
+       {
+        "kind": "variable",
+        "name": "x"
+       },
+       {
+        "factors": [
+         {
+          "kind": "constant",
+          "value": "-1"
+         },
+         {
+          "kind": "constant",
+          "value": "3"
+         }
+        ],
+        "kind": "multiply"
+       }
+      ]
+     },
+     "kind": "abs"
+    },
+    "restrictions": [
+     "x>3"
+    ],
+    "task": "derivative",
+    "variable": "x"
+   },
+   "studentWorking": "|x-3| = x-3\nf'(x) = 1",
+   "referenceVerdict": "verified",
+   "referenceRationale": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "engineVerdictAtScoring": "invalid",
+   "adjudicatorA": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorB": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "verified",
+   "referenceUpheld": true,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": false
+  },
+  {
+   "caseId": "s6-299",
+   "holdout": "2",
+   "problem": {
+    "domain": "calculus",
+    "domainComponents": [
+     "x<2",
+     "x>2"
+    ],
+    "integrand": {
+     "factors": [
+      {
+       "kind": "constant",
+       "value": "1"
+      },
+      {
+       "base": {
+        "kind": "add",
+        "terms": [
+         {
+          "kind": "variable",
+          "name": "x"
+         },
+         {
+          "factors": [
+           {
+            "kind": "constant",
+            "value": "-1"
+           },
+           {
+            "kind": "constant",
+            "value": "2"
+           }
+          ],
+          "kind": "multiply"
+         }
+        ]
+       },
+       "exponent": -1,
+       "kind": "power"
+      }
+     ],
+     "kind": "multiply"
+    },
+    "task": "indefinite-integral",
+    "variable": "x"
+   },
+   "studentWorking": "\u222b 1/(x-2) dx = ln(x-2) + C",
+   "referenceVerdict": "missing-assumption",
+   "referenceRationale": "ln(x-2) covers only the component x>2 while the typed domain has two components",
+   "engineVerdictAtScoring": "verified",
+   "adjudicatorA": {
+    "verdict": "invalid",
+    "confidence": "likely",
+    "alternative": "missing-assumption (valid only if restricted to x>2, which is not stated)"
+   },
+   "adjudicatorB": {
+    "verdict": "invalid",
+    "confidence": "likely",
+    "alternative": "missing-assumption (valid only if x>2 is assumed, which is not stated)"
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "invalid",
+   "referenceUpheld": false,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": true
+  },
+  {
+   "caseId": "r6-194",
+   "holdout": "1",
+   "problem": {
+    "area": "probability",
+    "assumptions": [
+     "independent"
+    ],
+    "data": {
+     "pa": "1/3",
+     "pb": "1/2"
+    },
+    "domain": "probability-statistics",
+    "task": "independent-intersection"
+   },
+   "studentWorking": "A, B independent with P(A) = 1/3, P(B) = 1/2\nP(A,B) = 1/3 * 1/2 = 1/6",
+   "referenceVerdict": "ambiguous",
+   "referenceRationale": "P(A,B) may denote P(A\u2229B) (valid) or P(A\u222aB) (the product is not the union).",
+   "engineVerdictAtScoring": "verified",
+   "adjudicatorA": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorB": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "verified",
+   "referenceUpheld": false,
+   "engineCorrectAfterAdjudication": true,
+   "labelChanged": true
+  },
+  {
+   "caseId": "s6-229",
+   "holdout": "2",
+   "problem": {
+    "area": "distribution",
+    "data": {
+     "k": 3,
+     "n": 5,
+     "p": "2/5"
+    },
+    "domain": "probability-statistics",
+    "task": "binomial-pmf"
+   },
+   "studentWorking": "P(X = 3) = C(5,3)*(2/5)^3*(3/5)^2 = 10*(8/125)*(9/25) = 720/3125 = 144/625",
+   "referenceVerdict": "verified",
+   "referenceRationale": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "engineVerdictAtScoring": "missing-assumption",
+   "adjudicatorA": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorB": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "verified",
+   "referenceUpheld": true,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": false
+  },
+  {
+   "caseId": "s6-217",
+   "holdout": "2",
+   "problem": {
+    "area": "probability",
+    "data": {
+     "pab": "3/16",
+     "pb": "3/4"
+    },
+    "domain": "probability-statistics",
+    "task": "conditional"
+   },
+   "studentWorking": "P(A|B) = P(A\u2229B) \u2212 P(B) when B is the smaller event\nP(A|B) = (3/16)/(3/4) = 1/4",
+   "referenceVerdict": "invalid",
+   "referenceRationale": "the stated rule is false (conditional probability is a ratio), even though the following arithmetic is the correct ratio",
+   "engineVerdictAtScoring": "verified",
+   "adjudicatorA": {
+    "verdict": "invalid",
+    "confidence": "certain",
+    "alternative": "verified if only line 2 and the final answer were graded"
+   },
+   "adjudicatorB": {
+    "verdict": "invalid",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "invalid",
+   "referenceUpheld": true,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": false
+  },
+  {
+   "caseId": "s6-182",
+   "holdout": "2",
+   "problem": {
+    "area": "probability",
+    "assumptions": [
+     "equiprobable"
+    ],
+    "data": {
+     "favourable": 7,
+     "total": 8
+    },
+    "domain": "probability-statistics",
+    "task": "finite"
+   },
+   "studentWorking": "P(at least one head) = 1 - P(no head) = 1 - (1/2)^3 = 7/8",
+   "referenceVerdict": "missing-assumption",
+   "referenceRationale": "cubing 1/2 uses independence of the tosses, which is not typed (only equiprobable is) nor stated",
+   "engineVerdictAtScoring": "verified",
+   "adjudicatorA": {
+    "verdict": "missing-assumption",
+    "confidence": "uncertain",
+    "alternative": "verified (the lines are mathematically true and reach 7/8; the coin story could be viewed as just an illustrative reading of 7/8)"
+   },
+   "adjudicatorB": {
+    "verdict": "missing-assumption",
+    "confidence": "uncertain",
+    "alternative": "verified (result 7/8 matches favourable/total and the coin model is the natural reading of 7/8)"
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "missing-assumption",
+   "referenceUpheld": true,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": false
+  },
+  {
+   "caseId": "s6-314",
+   "holdout": "2",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "index": 2,
+     "kind": "root",
+     "radicand": {
+      "base": {
+       "kind": "variable",
+       "name": "x"
+      },
+      "exponent": 2,
+      "kind": "power"
+     }
+    },
+    "restrictions": [
+     "x<0"
+    ],
+    "task": "derivative",
+    "variable": "x"
+   },
+   "studentWorking": "sqrt(x^2) = -x\ny' = -1",
+   "referenceVerdict": "verified",
+   "referenceRationale": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "engineVerdictAtScoring": "invalid",
+   "adjudicatorA": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorB": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "verified",
+   "referenceUpheld": true,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": false
+  },
+  {
+   "caseId": "s6-087",
+   "holdout": "2",
+   "problem": {
+    "domain": "calculus",
+    "integrand": {
+     "kind": "add",
+     "terms": [
+      {
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 3,
+       "kind": "power"
+      },
+      {
+       "base": {
+        "kind": "variable",
+        "name": "x"
+       },
+       "exponent": 2,
+       "kind": "power"
+      }
+     ]
+    },
+    "lower": "-1",
+    "task": "definite-integral",
+    "upper": "1",
+    "variable": "x"
+   },
+   "studentWorking": "the odd part x^3 integrates to 0 on [-1,1]\n\u222b_-1^1 x^3 + x^2 dx = \u222b_-1^1 x^2 dx = [x^3/3]_-1^1 = 1/3 + 1/3 = 2/3",
+   "referenceVerdict": "verified",
+   "referenceRationale": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "engineVerdictAtScoring": "invalid",
+   "adjudicatorA": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorB": {
+    "verdict": "verified",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "verified",
+   "referenceUpheld": true,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": false
+  },
+  {
+   "caseId": "s6-226",
+   "holdout": "2",
+   "problem": {
+    "area": "combinatorics",
+    "data": {
+     "n": 11,
+     "r": 3
+    },
+    "domain": "probability-statistics",
+    "task": "combination"
+   },
+   "studentWorking": "C(11,3) = C(11,4) by symmetry\nC(11,3) = (11*10*9)/(3*2*1) = 165",
+   "referenceVerdict": "invalid",
+   "referenceRationale": "the symmetry is C(11,3)=C(11,8); C(11,4)=330",
+   "engineVerdictAtScoring": "verified",
+   "adjudicatorA": {
+    "verdict": "invalid",
+    "confidence": "certain",
+    "alternative": "verified if only the computation were graded"
+   },
+   "adjudicatorB": {
+    "verdict": "invalid",
+    "confidence": "certain",
+    "alternative": null
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "invalid",
+   "referenceUpheld": true,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": false
+  },
+  {
+   "caseId": "s6-004",
+   "holdout": "2",
+   "problem": {
+    "domain": "calculus",
+    "expression": {
+     "argument": {
+      "factors": [
+       {
+        "base": {
+         "kind": "variable",
+         "name": "x"
+        },
+        "exponent": 3,
+        "kind": "power"
+       },
+       {
+        "index": 2,
+        "kind": "root",
+        "radicand": {
+         "kind": "variable",
+         "name": "x"
+        }
+       }
+      ],
+      "kind": "multiply"
+     },
+     "kind": "log"
+    },
+    "task": "derivative",
+    "variable": "x"
+   },
+   "studentWorking": "ln(x^3 sqrt(x)) = 3ln(x) + (1/2)ln(x) = (7/2)ln(x)\nd/dx[(7/2)ln(x)] = 7/(2x)",
+   "referenceVerdict": "verified",
+   "referenceRationale": "every line is mathematically valid under the task, its typed restrictions/assumptions and the real domain, and the requested answer is reached.",
+   "engineVerdictAtScoring": "invalid",
+   "adjudicatorA": {
+    "verdict": "verified",
+    "confidence": "likely",
+    "alternative": "missing-assumption (if x>0 must be stated explicitly)"
+   },
+   "adjudicatorB": {
+    "verdict": "verified",
+    "confidence": "likely",
+    "alternative": "missing-assumption (x>0 not stated explicitly before splitting the log)"
+   },
+   "adjudicatorsAgree": true,
+   "adjudicatedVerdict": "verified",
+   "referenceUpheld": true,
+   "engineCorrectAfterAdjudication": false,
+   "labelChanged": false
+  }
+ ]
+}

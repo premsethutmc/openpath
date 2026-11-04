@@ -37,7 +37,14 @@ export function isSpecified(c: Capability): boolean {
   return !!(c.bands && c.description && c.misconceptions);
 }
 
-export function validateFramework(fw: Framework): string[] {
+export interface SubjectRegistration {
+  root: string;
+  /** Stable IDs may be siblings of metadata sub-strands, but must stay in their strand namespace. */
+  stableCapabilityIds?: boolean;
+}
+/** Default registration remains the historical EN hierarchy. New subjects opt in explicitly. */
+export function validateFramework(fw: Framework, registration:SubjectRegistration={root:ROOT}): string[] {
+  const root = registration.root;
   const problems: string[] = [];
   const need = (cond: unknown, msg: string) => {
     if (!cond) problems.push(msg);
@@ -61,6 +68,7 @@ export function validateFramework(fw: Framework): string[] {
     need(p.time_variance_per_day >= 0, "time_variance_per_day must not be negative");
   }
 
+  need(typeof root === "string" && /^[A-Z][A-Z0-9_]*$/.test(root), "invalid subject root");
   const seen = new Set<string>();
   const leaves = new Map<string, Capability>();
   const dup = (id: string) => {
@@ -70,7 +78,7 @@ export function validateFramework(fw: Framework): string[] {
   if (!Array.isArray(fw.strands) || fw.strands.length === 0) problems.push("no strands");
   for (const s of fw.strands ?? []) {
     dup(s.id);
-    need(s.id?.startsWith(`${ROOT}.`), `strand id must start with ${ROOT}.: ${s.id}`);
+    need(s.id?.startsWith(`${root}.`), `strand id must start with ${root}.: ${s.id}`);
     need(s.name, `strand ${s.id} has no name`);
     if (!s.substrands?.length) problems.push(`strand ${s.id} has no sub-strands`);
     for (const ss of s.substrands ?? []) {
@@ -79,7 +87,7 @@ export function validateFramework(fw: Framework): string[] {
       if (!ss.capabilities?.length) problems.push(`sub-strand ${ss.id} has no capabilities`);
       for (const c of ss.capabilities ?? []) {
         dup(c.id);
-        need(c.id?.startsWith(`${ss.id}.`), `capability ${c.id} is not inside ${ss.id}`);
+        need(c.id?.startsWith(`${registration.stableCapabilityIds ? s.id : ss.id}.`), `capability ${c.id} is not inside ${ss.id}`);
         need(c.name, `capability ${c.id} has no name`);
         need(["skeleton", "core", "planned"].includes(c.tier), `capability ${c.id} has an unknown tier`);
         need(c.weight > 0, `capability ${c.id} must have a positive weight`);
@@ -136,18 +144,19 @@ export function validateFramework(fw: Framework): string[] {
   return problems;
 }
 
-export function indexFramework(fw: Framework): FrameworkIndex {
-  const problems = validateFramework(fw);
+export function indexFramework(fw: Framework, registration:SubjectRegistration={root:ROOT}): FrameworkIndex {
+  const root = registration.root;
+  const problems = validateFramework(fw, registration);
   if (problems.length) throw new FrameworkError(problems);
   const leaves = new Map<string, Capability>();
   const leafIds: string[] = [];
   const parent = new Map<string, string>();
   const children = new Map<string, { id: string; weight: number }[]>();
-  const names = new Map<string, string>([[ROOT, "English"]]);
-  children.set(ROOT, []);
+  const names = new Map<string, string>([[root, root === ROOT ? "English" : fw.title]]);
+  children.set(root, []);
   for (const s of fw.strands) {
-    parent.set(s.id, ROOT);
-    children.get(ROOT)!.push({ id: s.id, weight: s.weight });
+    parent.set(s.id, root);
+    children.get(root)!.push({ id: s.id, weight: s.weight });
     names.set(s.id, s.name);
     children.set(s.id, []);
     for (const ss of s.substrands) {

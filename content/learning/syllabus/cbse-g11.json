@@ -1,0 +1,2661 @@
+{
+ "schema": "syllabus@1",
+ "board": "cbse",
+ "boardName": "CBSE (NCERT textbooks)",
+ "grade": 11,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "Mathematics: Textbook for Class XI",
+  "publisher": "NCERT",
+  "edition": "First edition February 2006; revised (rationalised) edition November 2022; reprinted March 2024, June 2024, January 2025 and February 2026 (printing marked 'Reprint 2026-27'); ISBN 81-7450-486-9",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "syllabus",
+   "title": "Mathematics (Code No. 041) Classes XI-XII, Senior Secondary (Secondary Part 2) Curriculum 2026-27",
+   "publisher": "CBSE",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://cbseacademic.nic.in/web_material/CurriculumMain27/SecPart2/Maths_SecP2_2026-27.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "units, marks (Sets and Functions 23, Algebra 25, Coordinate Geometry 12, Calculus 8, Statistics and Probability 12; 80 theory + 20 internal), chapter topic lists, formative-only topics, internal assessment, question paper design, prescribed books"
+  },
+  {
+   "kind": "syllabus",
+   "title": "CBSE Curriculum 2026-27 index page (links to Secondary Part 1 and Part 2 subject curricula)",
+   "publisher": "CBSE",
+   "edition": "2026-27",
+   "academicYear": "2026-27",
+   "url": "https://cbseacademic.nic.in/curriculum_2027.html",
+   "accessed": "2026-10-19",
+   "used_for": "locating the official 2026-27 Mathematics (041) curriculum PDF"
+  },
+  {
+   "kind": "syllabus",
+   "title": "Mathematics Senior Secondary Curriculum 2025-26",
+   "publisher": "CBSE",
+   "edition": "2025-26",
+   "academicYear": "2025-26",
+   "url": "https://www.cbseacademic.nic.in/web_material/CurriculumMain26/SrSec/Maths_SrSec_2025-26.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "comparison: Class XI topic lists and formative-only list are unchanged from 2025-26 to 2026-27"
+  },
+  {
+   "kind": "textbook",
+   "title": "Mathematics: Textbook for Class XI - prelims and contents (kemh1ps.pdf)",
+   "publisher": "NCERT",
+   "edition": "Reprint 2026-27 (February 2026) of the November 2022 revised edition",
+   "academicYear": "2026-27",
+   "url": "https://ncert.nic.in/textbook/pdf/kemh1ps.pdf",
+   "accessed": "2026-10-19",
+   "used_for": "edition history, chapter titles and section titles"
+  },
+  {
+   "kind": "notification",
+   "title": "News report of NCERT notice: no new textbooks for Classes 10 and 11 in 2026-27; new books from 2027-28",
+   "publisher": "Kerala Kaumudi (secondary report of an NCERT notice)",
+   "edition": "18 March 2026",
+   "academicYear": "2026-27",
+   "url": "https://keralakaumudi.com/en/news/news-amp.php?id=1717483",
+   "accessed": "2026-10-19",
+   "used_for": "confirming the existing (rationalised) Class XI book continues in 2026-27"
+  },
+  {
+   "kind": "notification",
+   "title": "Old NCERT books continue for Classes 10, 11 in 2026-27",
+   "publisher": "myCBSEguide (secondary report)",
+   "edition": "27 March 2026",
+   "academicYear": "2026-27",
+   "url": "https://mycbseguide.com/blog/old-ncert-books-continue-for-classes-10-11-in-2026-27/",
+   "accessed": "2026-10-19",
+   "used_for": "corroborating that only Grade 9 got new NCERT books in 2026-27"
+  }
+ ],
+ "notes": [
+  "Textbook status: the NCERT Class XI prelims PDF on ncert.nic.in carries the line 'Reprint 2026-27' (February 2026) of the November 2022 rationalised edition. Two secondary news reports (March 2026) of an NCERT notice say new NCF-SE-based books for Classes 10 and 11 are deferred to 2027-28. I could not open the NCERT notice itself; treat the deferral as reported, not verified. In 2027-28 this file will need replacing.",
+  "Curriculum: CBSE moved Classes XI-XII to a 'Secondary Part 2' curriculum for 2026-27 (file Maths_SecP2_2026-27.pdf). Its Class XI content, unit marks and formative-only list read the same as the 2025-26 Senior Secondary document.",
+  "Formative-only topics (not in summative assessment) per CBSE 2026-27: practical problems on union/intersection of two sets; composition of functions; general solutions of sin y = sin a, cos y = cos a, tan y = tan a; principle of mathematical induction; polar representation of complex numbers, statement of the Fundamental Theorem of Algebra and solving quadratics with real coefficients in the complex number system; graphical solution of linear inequalities in two variables and of systems of them; general and middle terms of a binomial expansion; sums of k, k^2, k^3; normal form and general equation of a line; section formula in 3D; derivative of composite functions (chain rule); random experiments, outcomes and sample spaces. Outcomes for these are included with difficulty 'extension' and flagged in the statement.",
+  "Principle of Mathematical Induction is formative-only in CBSE 2026-27 but there is no PMI chapter in the rationalised NCERT Class XI contents (the 2022 rationalisation removed it), so no chapter/outcome is recorded for it. The existing competency MATH.reasoning.logic (Mathematical Reasoning, grade 11) is not mapped: that chapter was also removed in the rationalised book and is absent from the 2026-27 curriculum.",
+  "Whether some formative-only topics (e.g. polar form 4.5, general/middle terms, sums of k^2/k^3) remain in the printed textbook text is only partly confirmed: the contents list shows '4.5 Argand Plane and Polar Representation', but sub-section level was not checked.",
+  "Chapter 14 Probability in the rationalised book begins at '14.1 Event' (no Introduction/random-experiment section in the contents); the sample-space material is formative-only in CBSE 2026-27.",
+  "Assessment (CBSE 2026-27): 80-mark 3-hour paper, typology 55% remembering/understanding, 25% applying, 20% analysing/evaluating/creating; no chapter-wise weightage; 33% internal choice. Internal assessment 20 = periodic tests 10 (best 2 of 3) + mathematics activities 10 (10 Lab Manual activities: record 5, year-end activity test 3, viva 2 - breakdown given under Class XII and referenced from Class XI).",
+  "Prescribed with the textbook: NCERT Exemplar Problems Class XI and NCERT Lab Manual Class XI (editions not stated by CBSE).",
+  "Section titles are from the NCERT contents page; sub-sections were not recorded. Outcomes are written by me from the CBSE topic lists, not copied from the book.",
+  "Several existing competencies are tagged grades 12-12 (e.g. MATH.calculus.derivative-rules) but are used here because Class XI already teaches sum/product/quotient rules; the fit reflects the skill, not the grade tag."
+ ],
+ "chapters": [
+  {
+   "id": "cbse-g11-c01",
+   "number": 1,
+   "term": null,
+   "title": "Sets",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c01-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c01-s02",
+     "title": "Sets and their Representations"
+    },
+    {
+     "id": "cbse-g11-c01-s03",
+     "title": "The Empty Set"
+    },
+    {
+     "id": "cbse-g11-c01-s04",
+     "title": "Finite and Infinite Sets"
+    },
+    {
+     "id": "cbse-g11-c01-s05",
+     "title": "Equal Sets"
+    },
+    {
+     "id": "cbse-g11-c01-s06",
+     "title": "Subsets"
+    },
+    {
+     "id": "cbse-g11-c01-s07",
+     "title": "Universal Set"
+    },
+    {
+     "id": "cbse-g11-c01-s08",
+     "title": "Venn Diagrams"
+    },
+    {
+     "id": "cbse-g11-c01-s09",
+     "title": "Operations on Sets"
+    },
+    {
+     "id": "cbse-g11-c01-s10",
+     "title": "Complement of a Set"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c01-o01",
+     "statement": "Describe a set in roster and set-builder form and classify it as empty, finite, infinite or equal to another set.",
+     "concepts": [
+      "roster form",
+      "set-builder form",
+      "empty set",
+      "finite and infinite sets",
+      "equal sets"
+     ],
+     "questionTypes": [
+      "set",
+      "multiple-choice",
+      "true-false"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ]
+    },
+    {
+     "id": "cbse-g11-c01-o02",
+     "statement": "Identify subsets, proper subsets and the power set of a finite set, and count the subsets.",
+     "concepts": [
+      "subset",
+      "proper subset",
+      "power set"
+     ],
+     "questionTypes": [
+      "set",
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ]
+    },
+    {
+     "id": "cbse-g11-c01-o03",
+     "statement": "Write subsets of the real numbers using interval notation and convert between interval, inequality and number-line forms.",
+     "concepts": [
+      "open interval",
+      "closed interval",
+      "half-open interval"
+     ],
+     "questionTypes": [
+      "interval",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.sets-relations.real-intervals",
+       "name": "Represent subsets of the real line in interval notation",
+       "strand": "sets-relations",
+       "gradeRange": [
+        11,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.sets",
+        "MATH.number.real-numbers"
+       ],
+       "supports": [
+        "MATH.algebra.inequalities"
+       ],
+       "why": "MATH.algebra.sets covers set operations generally; writing and reading open/closed/half-open intervals is a distinct notational skill reused in inequalities, domains and calculus."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.sets",
+      "MATH.sets-relations.real-intervals"
+     ]
+    },
+    {
+     "id": "cbse-g11-c01-o04",
+     "statement": "Find unions, intersections, differences and complements of sets and represent them in Venn diagrams.",
+     "concepts": [
+      "union",
+      "intersection",
+      "difference",
+      "complement",
+      "Venn diagram"
+     ],
+     "questionTypes": [
+      "set",
+      "diagram-drawing",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ]
+    },
+    {
+     "id": "cbse-g11-c01-o05",
+     "statement": "Use the laws of set algebra, including De Morgan's laws and complement properties, to simplify or justify set statements.",
+     "concepts": [
+      "De Morgan's laws",
+      "distributive laws",
+      "complement laws"
+     ],
+     "questionTypes": [
+      "proof",
+      "true-false",
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.mathematical-argument",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets",
+      "MATH.reasoning.mathematical-argument"
+     ]
+    },
+    {
+     "id": "cbse-g11-c01-o06",
+     "statement": "(Formative-only) Solve practical counting problems using n(A union B) = n(A) + n(B) - n(A intersection B).",
+     "concepts": [
+      "cardinality of union",
+      "inclusion-exclusion for two sets"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c02",
+   "number": 2,
+   "term": null,
+   "title": "Relations and Functions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c02-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c02-s02",
+     "title": "Cartesian Product of Sets"
+    },
+    {
+     "id": "cbse-g11-c02-s03",
+     "title": "Relations"
+    },
+    {
+     "id": "cbse-g11-c02-s04",
+     "title": "Functions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c02-o01",
+     "statement": "Form ordered pairs and the Cartesian product of two or three sets, and count the elements of a product of finite sets.",
+     "concepts": [
+      "ordered pair",
+      "Cartesian product",
+      "n(A x B)"
+     ],
+     "questionTypes": [
+      "set",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.relations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.sets-relations.cartesian-product",
+       "name": "Form Cartesian products and count their elements",
+       "strand": "sets-relations",
+       "gradeRange": [
+        11,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.sets"
+       ],
+       "supports": [
+        "MATH.algebra.relations"
+       ],
+       "why": "MATH.algebra.relations is about representing relations; forming A x B (and A x B x C) and counting n(A x B) is a prior, separately assessable skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.relations",
+      "MATH.sets-relations.cartesian-product"
+     ]
+    },
+    {
+     "id": "cbse-g11-c02-o02",
+     "statement": "Represent a relation from A to B as a subset of A x B, and state its domain, codomain and range.",
+     "concepts": [
+      "relation",
+      "domain",
+      "codomain",
+      "range",
+      "arrow diagram"
+     ],
+     "questionTypes": [
+      "set",
+      "diagram-drawing",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.relations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.relations"
+     ]
+    },
+    {
+     "id": "cbse-g11-c02-o03",
+     "statement": "Decide whether a relation is a function and find the domain and range of real-valued functions.",
+     "concepts": [
+      "function as a special relation",
+      "real function",
+      "domain and range"
+     ],
+     "questionTypes": [
+      "true-false",
+      "interval",
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.functions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.functions"
+     ]
+    },
+    {
+     "id": "cbse-g11-c02-o04",
+     "statement": "Sketch and interpret graphs of identity, constant, polynomial, rational, modulus, signum, greatest-integer, exponential and logarithmic functions.",
+     "concepts": [
+      "modulus function",
+      "signum function",
+      "greatest integer function",
+      "exponential and logarithmic graphs"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.functions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.algebra.standard-function-graphs",
+       "name": "Sketch and read graphs of standard real functions",
+       "strand": "algebra",
+       "gradeRange": [
+        11,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.functions"
+       ],
+       "supports": [
+        "MATH.coordinate.straight-lines"
+       ],
+       "why": "MATH.algebra.functions covers domain/range and recognising functions; sketching modulus, signum, greatest-integer, rational, exponential and logarithmic graphs is a separate graphing skill."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.functions",
+      "MATH.algebra.standard-function-graphs"
+     ]
+    },
+    {
+     "id": "cbse-g11-c02-o05",
+     "statement": "Combine real functions by sum, difference, product and quotient, and state the domain of the result.",
+     "concepts": [
+      "algebra of functions",
+      "domain of a quotient"
+     ],
+     "questionTypes": [
+      "expression",
+      "interval"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.function-operations",
+       "name": "Combine functions by sum, difference, product, quotient and composition",
+       "strand": "algebra",
+       "gradeRange": [
+        11,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.functions"
+       ],
+       "supports": [
+        "MATH.algebra.inverse-functions"
+       ],
+       "why": "No existing competency covers the algebra of functions or composition; MATH.algebra.inverse-functions presupposes it."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.function-operations"
+     ]
+    },
+    {
+     "id": "cbse-g11-c02-o06",
+     "statement": "(Formative-only) Form the composition of two functions and evaluate it.",
+     "concepts": [
+      "composite function"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.function-operations",
+       "name": "Combine functions by sum, difference, product, quotient and composition",
+       "strand": "algebra",
+       "gradeRange": [
+        11,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.functions"
+       ],
+       "supports": [
+        "MATH.algebra.inverse-functions"
+       ],
+       "why": "No existing competency covers the algebra of functions or composition; MATH.algebra.inverse-functions presupposes it."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.function-operations"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c03",
+   "number": 3,
+   "term": null,
+   "title": "Trigonometric Functions",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c03-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c03-s02",
+     "title": "Angles"
+    },
+    {
+     "id": "cbse-g11-c03-s03",
+     "title": "Trigonometric Functions"
+    },
+    {
+     "id": "cbse-g11-c03-s04",
+     "title": "Trigonometric Functions of Sum and Difference of Two Angles"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c03-o01",
+     "statement": "Measure positive and negative angles in degrees and radians, convert between them, and use arc length = radius x angle.",
+     "concepts": [
+      "radian measure",
+      "degree-radian conversion",
+      "arc length"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit",
+      "expression"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.radians",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.radians"
+     ]
+    },
+    {
+     "id": "cbse-g11-c03-o02",
+     "statement": "Define trigonometric functions of any real number using the unit circle and determine their signs in each quadrant.",
+     "concepts": [
+      "unit circle",
+      "signs by quadrant",
+      "sin^2 x + cos^2 x = 1"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.functions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.functions"
+     ]
+    },
+    {
+     "id": "cbse-g11-c03-o03",
+     "statement": "State domain, range and period of the six trigonometric functions and sketch their graphs.",
+     "concepts": [
+      "domain and range",
+      "periodicity",
+      "graphs of sin, cos, tan"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "interval",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.functions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.functions"
+     ]
+    },
+    {
+     "id": "cbse-g11-c03-o04",
+     "statement": "Use sum and difference formulas to find exact values and simplify trigonometric expressions.",
+     "concepts": [
+      "sin(x +/- y)",
+      "cos(x +/- y)",
+      "tan(x +/- y)",
+      "allied angles"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.functions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.trigonometry.compound-angle-identities",
+       "name": "Apply compound, multiple-angle and sum-to-product identities",
+       "strand": "trigonometry",
+       "gradeRange": [
+        11,
+        11
+       ],
+       "prerequisites": [
+        "MATH.trigonometry.functions"
+       ],
+       "supports": [
+        "MATH.trigonometry.identities"
+       ],
+       "why": "MATH.trigonometry.functions is broad (definitions, signs, basic identities); expanding sin(x+y), cos 2x, sin 3x and converting sums to products is a distinct, heavily assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.trigonometry.compound-angle-identities",
+      "MATH.trigonometry.functions"
+     ]
+    },
+    {
+     "id": "cbse-g11-c03-o05",
+     "statement": "Prove identities using double-angle, triple-angle and sum-to-product / product-to-sum formulas.",
+     "concepts": [
+      "cos 2x",
+      "sin 3x",
+      "sum-to-product formulas"
+     ],
+     "questionTypes": [
+      "proof",
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.identities",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.trigonometry.compound-angle-identities",
+       "name": "Apply compound, multiple-angle and sum-to-product identities",
+       "strand": "trigonometry",
+       "gradeRange": [
+        11,
+        11
+       ],
+       "prerequisites": [
+        "MATH.trigonometry.functions"
+       ],
+       "supports": [
+        "MATH.trigonometry.identities"
+       ],
+       "why": "MATH.trigonometry.functions is broad (definitions, signs, basic identities); expanding sin(x+y), cos 2x, sin 3x and converting sums to products is a distinct, heavily assessed skill."
+      }
+     ],
+     "mapped": [
+      "MATH.trigonometry.compound-angle-identities",
+      "MATH.trigonometry.identities"
+     ]
+    },
+    {
+     "id": "cbse-g11-c03-o06",
+     "statement": "(Formative-only) Find general solutions of equations of the form sin y = sin a, cos y = cos a and tan y = tan a.",
+     "concepts": [
+      "principal solution",
+      "general solution"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.equations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.equations"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c04",
+   "number": 4,
+   "term": null,
+   "title": "Complex Numbers and Quadratic Equations",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c04-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c04-s02",
+     "title": "Complex Numbers"
+    },
+    {
+     "id": "cbse-g11-c04-s03",
+     "title": "Algebra of Complex Numbers"
+    },
+    {
+     "id": "cbse-g11-c04-s04",
+     "title": "The Modulus and the Conjugate of a Complex Number"
+    },
+    {
+     "id": "cbse-g11-c04-s05",
+     "title": "Argand Plane and Polar Representation"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c04-o01",
+     "statement": "Explain why the imaginary unit i is needed and write complex numbers in the form a + ib with real and imaginary parts.",
+     "concepts": [
+      "imaginary unit",
+      "real and imaginary parts",
+      "powers of i"
+     ],
+     "questionTypes": [
+      "expression",
+      "written-explanation",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.complex",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.complex"
+     ]
+    },
+    {
+     "id": "cbse-g11-c04-o02",
+     "statement": "Add, subtract, multiply and divide complex numbers and find multiplicative inverses.",
+     "concepts": [
+      "complex arithmetic",
+      "multiplicative inverse"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.complex",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.complex"
+     ]
+    },
+    {
+     "id": "cbse-g11-c04-o03",
+     "statement": "Find the modulus and conjugate of a complex number and use their properties.",
+     "concepts": [
+      "modulus",
+      "conjugate",
+      "|z1 z2| = |z1||z2|"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.complex",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.complex"
+     ]
+    },
+    {
+     "id": "cbse-g11-c04-o04",
+     "statement": "Plot complex numbers as points in the Argand plane and interpret modulus as distance from the origin.",
+     "concepts": [
+      "Argand plane",
+      "geometric representation"
+     ],
+     "questionTypes": [
+      "coordinate",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.number.complex",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.complex"
+     ]
+    },
+    {
+     "id": "cbse-g11-c04-o05",
+     "statement": "(Formative-only) Express a complex number in polar form using its modulus and argument.",
+     "concepts": [
+      "argument",
+      "polar form"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.complex",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.number.complex-polar-form",
+       "name": "Write complex numbers in modulus-argument (polar) form",
+       "strand": "number",
+       "gradeRange": [
+        11,
+        11
+       ],
+       "prerequisites": [
+        "MATH.number.complex",
+        "MATH.trigonometry.functions"
+       ],
+       "supports": [],
+       "why": "MATH.number.complex covers Cartesian representation and arithmetic; converting to r(cos t + i sin t) is a separate skill (formative-only in CBSE 2026-27)."
+      }
+     ],
+     "mapped": [
+      "MATH.number.complex",
+      "MATH.number.complex-polar-form"
+     ]
+    },
+    {
+     "id": "cbse-g11-c04-o06",
+     "statement": "(Formative-only) Solve quadratic equations with real coefficients and negative discriminant in the complex numbers.",
+     "concepts": [
+      "complex roots",
+      "Fundamental Theorem of Algebra (statement)"
+     ],
+     "questionTypes": [
+      "equation-solution"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratic-complex",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.quadratic-complex"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c05",
+   "number": 5,
+   "term": null,
+   "title": "Linear Inequalities",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c05-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c05-s02",
+     "title": "Inequalities"
+    },
+    {
+     "id": "cbse-g11-c05-s03",
+     "title": "Algebraic Solutions of Linear Inequalities in One Variable and their Graphical Representation"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c05-o01",
+     "statement": "Apply the rules for operating on inequalities, including reversing the sign when multiplying or dividing by a negative number.",
+     "concepts": [
+      "rules of inequalities",
+      "strict and non-strict inequalities"
+     ],
+     "questionTypes": [
+      "true-false",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inequalities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inequalities"
+     ]
+    },
+    {
+     "id": "cbse-g11-c05-o02",
+     "statement": "Solve linear inequalities in one variable over integers or reals and show the solution on a number line.",
+     "concepts": [
+      "solution set",
+      "number-line representation"
+     ],
+     "questionTypes": [
+      "interval",
+      "set",
+      "graph-sketch"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inequalities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.sets-relations.real-intervals",
+       "name": "Represent subsets of the real line in interval notation",
+       "strand": "sets-relations",
+       "gradeRange": [
+        11,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.sets",
+        "MATH.number.real-numbers"
+       ],
+       "supports": [
+        "MATH.algebra.inequalities"
+       ],
+       "why": "MATH.algebra.sets covers set operations generally; writing and reading open/closed/half-open intervals is a distinct notational skill reused in inequalities, domains and calculus."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.inequalities",
+      "MATH.sets-relations.real-intervals"
+     ]
+    },
+    {
+     "id": "cbse-g11-c05-o03",
+     "statement": "Solve systems (and compound/double) linear inequalities in one variable.",
+     "concepts": [
+      "simultaneous inequalities",
+      "double inequality"
+     ],
+     "questionTypes": [
+      "interval"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inequalities",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.sets-relations.real-intervals",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Compound (double) linear inequalities are solved by apineq; systems of two separate inequalities are the new family aeineqs."
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inequalities",
+      "MATH.sets-relations.real-intervals"
+     ]
+    },
+    {
+     "id": "cbse-g11-c05-o04",
+     "statement": "Model word problems (marks, temperatures, mixtures) with linear inequalities and interpret the solution.",
+     "concepts": [
+      "modelling with inequalities"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "interval"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inequalities",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.model-selection",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inequalities",
+      "MATH.reasoning.model-selection"
+     ]
+    },
+    {
+     "id": "cbse-g11-c05-o05",
+     "statement": "(Formative-only) Graph linear inequalities and systems in two variables by shading half-planes.",
+     "concepts": [
+      "half-plane",
+      "boundary line",
+      "feasible region"
+     ],
+     "questionTypes": [
+      "graph-sketch"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.algebra.inequalities-two-variables",
+       "name": "Graph linear inequalities and systems in two variables",
+       "strand": "algebra",
+       "gradeRange": [
+        11,
+        12
+       ],
+       "prerequisites": [
+        "MATH.algebra.inequalities",
+        "MATH.algebra.linear-two-variables"
+       ],
+       "supports": [
+        "MATH.algebra.linear-programming"
+       ],
+       "why": "MATH.algebra.inequalities is one-variable algebraic solving; shading half-planes and feasible regions is a separate graphical skill and the direct prerequisite for linear programming."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.inequalities-two-variables"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c06",
+   "number": 6,
+   "term": null,
+   "title": "Permutations and Combinations",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c06-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c06-s02",
+     "title": "Fundamental Principle of Counting"
+    },
+    {
+     "id": "cbse-g11-c06-s03",
+     "title": "Permutations"
+    },
+    {
+     "id": "cbse-g11-c06-s04",
+     "title": "Combinations"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c06-o01",
+     "statement": "Use the fundamental (multiplication) principle of counting to count arrangements and choices.",
+     "concepts": [
+      "multiplication principle"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.permutations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.permutations"
+     ]
+    },
+    {
+     "id": "cbse-g11-c06-o02",
+     "statement": "Use factorial notation and evaluate expressions involving n!.",
+     "concepts": [
+      "factorial"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.permutations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.permutations"
+     ]
+    },
+    {
+     "id": "cbse-g11-c06-o03",
+     "statement": "Count permutations of distinct objects and of objects that are not all distinct using nPr and n!/(p!q!...).",
+     "concepts": [
+      "nPr",
+      "permutations with repetition of objects"
+     ],
+     "questionTypes": [
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.permutations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.permutations"
+     ]
+    },
+    {
+     "id": "cbse-g11-c06-o04",
+     "statement": "Count selections using nCr and use nCr = nC(n-r) and the relation between nPr and nCr.",
+     "concepts": [
+      "nCr",
+      "nPr = r! nCr",
+      "Pascal's rule"
+     ],
+     "questionTypes": [
+      "numeric",
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.permutations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.permutations"
+     ]
+    },
+    {
+     "id": "cbse-g11-c06-o05",
+     "statement": "Decide whether order matters and combine permutations and combinations to solve multi-step counting problems.",
+     "concepts": [
+      "selection vs arrangement",
+      "restricted arrangements"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.permutations",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.model-selection",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.permutations",
+      "MATH.reasoning.model-selection"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c07",
+   "number": 7,
+   "term": null,
+   "title": "Binomial Theorem",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c07-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c07-s02",
+     "title": "Binomial Theorem for Positive Integral Indices"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c07-o01",
+     "statement": "Build Pascal's triangle and relate its entries to binomial coefficients.",
+     "concepts": [
+      "Pascal's triangle",
+      "binomial coefficients"
+     ],
+     "questionTypes": [
+      "pattern",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.binomial",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.binomial"
+     ]
+    },
+    {
+     "id": "cbse-g11-c07-o02",
+     "statement": "Expand (a + b)^n for a positive integer n using the binomial theorem.",
+     "concepts": [
+      "binomial expansion",
+      "sigma form of expansion"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.binomial",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.binomial"
+     ]
+    },
+    {
+     "id": "cbse-g11-c07-o03",
+     "statement": "Use binomial expansion for numerical approximation and comparison (e.g. evaluating (1.01)^n or (99)^5).",
+     "concepts": [
+      "applications of expansion"
+     ],
+     "questionTypes": [
+      "numeric",
+      "estimation"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.binomial",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.binomial"
+     ]
+    },
+    {
+     "id": "cbse-g11-c07-o04",
+     "statement": "Explain the proof of the binomial theorem for positive integral index and use it to prove divisibility results.",
+     "concepts": [
+      "proof of binomial theorem",
+      "divisibility"
+     ],
+     "questionTypes": [
+      "proof",
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.algebra.binomial",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.reasoning.mathematical-argument",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.binomial",
+      "MATH.reasoning.mathematical-argument"
+     ]
+    },
+    {
+     "id": "cbse-g11-c07-o05",
+     "statement": "(Formative-only) Find a specified general term, a term independent of x, or the middle term(s) of an expansion.",
+     "concepts": [
+      "general term",
+      "middle term"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.binomial",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.binomial"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c08",
+   "number": 8,
+   "term": null,
+   "title": "Sequences and Series",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c08-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c08-s02",
+     "title": "Sequences"
+    },
+    {
+     "id": "cbse-g11-c08-s03",
+     "title": "Series"
+    },
+    {
+     "id": "cbse-g11-c08-s04",
+     "title": "Geometric Progression (G.P.)"
+    },
+    {
+     "id": "cbse-g11-c08-s05",
+     "title": "Relationship Between A.M. and G.M."
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c08-o01",
+     "statement": "Describe a sequence by its general term or a recurrence and write the corresponding series in sigma notation.",
+     "concepts": [
+      "general term",
+      "recursive sequence",
+      "sigma notation"
+     ],
+     "questionTypes": [
+      "expression",
+      "pattern",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.sequences.explicit-recursive-rules",
+       "fit": "partial",
+       "source": "gap@1 remap",
+       "why": "Describing a sequence by a recurrence relation is exactly what these families assess (terms from a recursive rule, and from a recursive rule to a formula); the outcome is mapped only to sequence-notation, so the recurrence part looks missing."
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.sequences.sequence-notation",
+       "name": "Describe sequences and series by general term, recursion and sigma notation",
+       "strand": "sequences",
+       "gradeRange": [
+        11,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.arithmetic-sequences"
+       ],
+       "supports": [],
+       "why": "Existing sequence competencies are AP- or GP-specific; the general idea of a sequence as a function of n, recursive definitions and series notation is not covered."
+      }
+     ],
+     "mapped": [
+      "MATH.sequences.explicit-recursive-rules",
+      "MATH.sequences.sequence-notation"
+     ]
+    },
+    {
+     "id": "cbse-g11-c08-o02",
+     "statement": "Find the general term and the sum of n terms of a geometric progression.",
+     "concepts": [
+      "common ratio",
+      "nth term of a GP",
+      "sum of n terms"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.geometric-sequences",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.geometric-sequences"
+     ]
+    },
+    {
+     "id": "cbse-g11-c08-o03",
+     "statement": "Find the sum of an infinite geometric series when |r| < 1 and use it (e.g. recurring decimals).",
+     "concepts": [
+      "infinite GP",
+      "convergence condition"
+     ],
+     "questionTypes": [
+      "numeric",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.geometric-sequences",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.geometric-sequences"
+     ]
+    },
+    {
+     "id": "cbse-g11-c08-o04",
+     "statement": "Insert arithmetic and geometric means between two numbers and use AM >= GM.",
+     "concepts": [
+      "arithmetic mean",
+      "geometric mean",
+      "AM-GM inequality"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.arithmetic-sequences",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.sequences.am-gm-relation",
+       "name": "Use arithmetic and geometric means and the AM-GM inequality",
+       "strand": "sequences",
+       "gradeRange": [
+        11,
+        11
+       ],
+       "prerequisites": [
+        "MATH.algebra.arithmetic-sequences",
+        "MATH.algebra.geometric-sequences"
+       ],
+       "supports": [
+        "MATH.reasoning.mathematical-argument"
+       ],
+       "why": "Inserting means and using AM >= GM goes beyond computing terms and sums of a GP."
+      }
+     ],
+     "mapped": [
+      "MATH.algebra.arithmetic-sequences",
+      "MATH.sequences.am-gm-relation"
+     ]
+    },
+    {
+     "id": "cbse-g11-c08-o05",
+     "statement": "Solve word problems (growth, depreciation, compound interest) using geometric progressions.",
+     "concepts": [
+      "geometric growth",
+      "applications of GP"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "money"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.geometric-sequences",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.geometric-sequences"
+     ]
+    },
+    {
+     "id": "cbse-g11-c08-o06",
+     "statement": "(Formative-only) Evaluate sums of k, k^2 and k^3 to n terms and use them to sum related series.",
+     "concepts": [
+      "sum of first n naturals",
+      "sum of squares",
+      "sum of cubes"
+     ],
+     "questionTypes": [
+      "expression",
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.sequences.power-sums",
+       "name": "Evaluate sums of k, k squared and k cubed and series built from them",
+       "strand": "sequences",
+       "gradeRange": [
+        11,
+        11
+       ],
+       "prerequisites": [
+        "MATH.sequences.sequence-notation"
+       ],
+       "supports": [
+        "MATH.algebra.arithmetic-sequences"
+       ],
+       "why": "No existing competency covers closed forms for sums of powers of natural numbers (formative-only in CBSE 2026-27)."
+      }
+     ],
+     "mapped": [
+      "MATH.sequences.power-sums"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c09",
+   "number": 9,
+   "term": null,
+   "title": "Straight Lines",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c09-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c09-s02",
+     "title": "Slope of a Line"
+    },
+    {
+     "id": "cbse-g11-c09-s03",
+     "title": "Various Forms of the Equation of a Line"
+    },
+    {
+     "id": "cbse-g11-c09-s04",
+     "title": "Distance of a Point From a Line"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c09-o01",
+     "statement": "Find the slope of a line from two points or its inclination, and use slopes to test parallel, perpendicular and collinear points.",
+     "concepts": [
+      "slope",
+      "inclination",
+      "parallel and perpendicular lines",
+      "collinearity"
+     ],
+     "questionTypes": [
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.straight-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.straight-lines"
+     ]
+    },
+    {
+     "id": "cbse-g11-c09-o02",
+     "statement": "Find the angle between two lines from their slopes.",
+     "concepts": [
+      "angle between lines"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.straight-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.straight-lines"
+     ]
+    },
+    {
+     "id": "cbse-g11-c09-o03",
+     "statement": "Write the equation of a line in point-slope, slope-intercept, two-point and intercept forms, including lines parallel to the axes.",
+     "concepts": [
+      "point-slope form",
+      "slope-intercept form",
+      "two-point form",
+      "intercept form"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.straight-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.straight-lines"
+     ]
+    },
+    {
+     "id": "cbse-g11-c09-o04",
+     "statement": "Find the perpendicular distance from a point to a line and the distance between parallel lines.",
+     "concepts": [
+      "point-line distance",
+      "distance between parallel lines"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.straight-lines",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance",
+      "MATH.coordinate.straight-lines"
+     ]
+    },
+    {
+     "id": "cbse-g11-c09-o05",
+     "statement": "(Formative-only) Convert a general linear equation Ax + By + C = 0 to slope-intercept, intercept and normal forms.",
+     "concepts": [
+      "general equation",
+      "normal form"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.straight-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.straight-lines"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c10",
+   "number": 10,
+   "term": null,
+   "title": "Conic Sections",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c10-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c10-s02",
+     "title": "Sections of a Cone"
+    },
+    {
+     "id": "cbse-g11-c10-s03",
+     "title": "Circle"
+    },
+    {
+     "id": "cbse-g11-c10-s04",
+     "title": "Parabola"
+    },
+    {
+     "id": "cbse-g11-c10-s05",
+     "title": "Ellipse"
+    },
+    {
+     "id": "cbse-g11-c10-s06",
+     "title": "Hyperbola"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c10-o01",
+     "statement": "Describe circles, ellipses, parabolas, hyperbolas and degenerate cases as sections of a double cone.",
+     "concepts": [
+      "double-napped cone",
+      "degenerate conics"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.conics"
+     ]
+    },
+    {
+     "id": "cbse-g11-c10-o02",
+     "statement": "Write the equation of a circle from its centre and radius and find centre and radius from a given equation.",
+     "concepts": [
+      "standard equation of a circle",
+      "completing the square"
+     ],
+     "questionTypes": [
+      "equation-solution",
+      "coordinate"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.conics"
+     ]
+    },
+    {
+     "id": "cbse-g11-c10-o03",
+     "statement": "Find focus, directrix, axis and latus rectum of a parabola in standard form, and its equation from given data.",
+     "concepts": [
+      "focus",
+      "directrix",
+      "latus rectum"
+     ],
+     "questionTypes": [
+      "coordinate",
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.conics"
+     ]
+    },
+    {
+     "id": "cbse-g11-c10-o04",
+     "statement": "Find foci, vertices, axes lengths, eccentricity and latus rectum of an ellipse in standard form, and its equation from given data.",
+     "concepts": [
+      "major and minor axes",
+      "eccentricity",
+      "foci"
+     ],
+     "questionTypes": [
+      "coordinate",
+      "numeric",
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.conics"
+     ]
+    },
+    {
+     "id": "cbse-g11-c10-o05",
+     "statement": "Find foci, vertices, transverse/conjugate axes, eccentricity and latus rectum of a hyperbola in standard form, and its equation from given data.",
+     "concepts": [
+      "transverse axis",
+      "conjugate axis",
+      "eccentricity"
+     ],
+     "questionTypes": [
+      "coordinate",
+      "numeric",
+      "equation-solution"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.conics"
+     ]
+    },
+    {
+     "id": "cbse-g11-c10-o06",
+     "statement": "Sketch a conic from its standard equation and apply conic properties to simple real-world contexts (arches, reflectors).",
+     "concepts": [
+      "sketching conics",
+      "applications"
+     ],
+     "questionTypes": [
+      "graph-sketch",
+      "word-problem"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.conics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.conics"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c11",
+   "number": 11,
+   "term": null,
+   "title": "Introduction to Three Dimensional Geometry",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c11-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c11-s02",
+     "title": "Coordinate Axes and Coordinate Planes in Three Dimensional Space"
+    },
+    {
+     "id": "cbse-g11-c11-s03",
+     "title": "Coordinates of a Point in Space"
+    },
+    {
+     "id": "cbse-g11-c11-s04",
+     "title": "Distance between Two Points"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c11-o01",
+     "statement": "Identify coordinate axes, coordinate planes and octants in three-dimensional space.",
+     "concepts": [
+      "coordinate axes",
+      "coordinate planes",
+      "octants"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "coordinate"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-coordinates",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.space-coordinates"
+     ]
+    },
+    {
+     "id": "cbse-g11-c11-o02",
+     "statement": "Locate and plot a point from its coordinates (x, y, z) and give coordinates of points on axes and planes.",
+     "concepts": [
+      "coordinates in space"
+     ],
+     "questionTypes": [
+      "coordinate",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-coordinates",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.space-coordinates"
+     ]
+    },
+    {
+     "id": "cbse-g11-c11-o03",
+     "statement": "Use the distance formula in space to find lengths and test collinearity or classify triangles.",
+     "concepts": [
+      "3D distance formula"
+     ],
+     "questionTypes": [
+      "numeric",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-coordinates",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance",
+      "MATH.coordinate.space-coordinates"
+     ]
+    },
+    {
+     "id": "cbse-g11-c11-o04",
+     "statement": "(Formative-only) Find the point dividing a segment in space in a given ratio, including the midpoint and centroid.",
+     "concepts": [
+      "section formula in 3D",
+      "midpoint",
+      "centroid"
+     ],
+     "questionTypes": [
+      "coordinate"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.space-coordinates",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance",
+      "MATH.coordinate.space-coordinates"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c12",
+   "number": 12,
+   "term": null,
+   "title": "Limits and Derivatives",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c12-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c12-s02",
+     "title": "Intuitive Idea of Derivatives"
+    },
+    {
+     "id": "cbse-g11-c12-s03",
+     "title": "Limits"
+    },
+    {
+     "id": "cbse-g11-c12-s04",
+     "title": "Limits of Trigonometric Functions"
+    },
+    {
+     "id": "cbse-g11-c12-s05",
+     "title": "Derivatives"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c12-o01",
+     "statement": "Interpret the derivative as an instantaneous rate of change and as the slope of a tangent, using distance-time data.",
+     "concepts": [
+      "average vs instantaneous rate",
+      "tangent slope"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.calculus.derivatives",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.derivatives"
+     ]
+    },
+    {
+     "id": "cbse-g11-c12-o02",
+     "statement": "Estimate limits from tables or graphs and distinguish left-hand and right-hand limits.",
+     "concepts": [
+      "intuitive limit",
+      "one-sided limits"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table",
+      "true-false"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.limits",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.limits"
+     ]
+    },
+    {
+     "id": "cbse-g11-c12-o03",
+     "statement": "Evaluate limits of polynomial and rational functions using limit algebra, factorisation and the standard limit of (x^n - a^n)/(x - a).",
+     "concepts": [
+      "algebra of limits",
+      "indeterminate form 0/0"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.limits",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.limits"
+     ]
+    },
+    {
+     "id": "cbse-g11-c12-o04",
+     "statement": "Evaluate limits involving trigonometric, exponential and logarithmic functions using standard limits such as sin x / x.",
+     "concepts": [
+      "lim sin x / x",
+      "lim (1 - cos x)/x",
+      "lim (e^x - 1)/x",
+      "lim log(1+x)/x"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.limits",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.limits"
+     ]
+    },
+    {
+     "id": "cbse-g11-c12-o05",
+     "statement": "Find the derivative of simple functions from first principles.",
+     "concepts": [
+      "first principle",
+      "definition of derivative"
+     ],
+     "questionTypes": [
+      "expression",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.calculus.derivatives",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.derivatives"
+     ]
+    },
+    {
+     "id": "cbse-g11-c12-o06",
+     "statement": "Differentiate sums, differences, products and quotients of polynomial and trigonometric functions.",
+     "concepts": [
+      "power rule",
+      "product rule",
+      "quotient rule",
+      "derivatives of sin and cos"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.derivative-rules",
+       "fit": "exact"
+      },
+      {
+       "id": "MLY.calc.power-derivative",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.derivative-rules",
+      "MLY.calc.power-derivative"
+     ]
+    },
+    {
+     "id": "cbse-g11-c12-o07",
+     "statement": "(Formative-only) Differentiate a composite function using the chain rule.",
+     "concepts": [
+      "chain rule"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.calculus.derivative-rules",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.calculus.derivative-rules"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c13",
+   "number": 13,
+   "term": null,
+   "title": "Statistics",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c13-s01",
+     "title": "Introduction"
+    },
+    {
+     "id": "cbse-g11-c13-s02",
+     "title": "Measures of Dispersion"
+    },
+    {
+     "id": "cbse-g11-c13-s03",
+     "title": "Range"
+    },
+    {
+     "id": "cbse-g11-c13-s04",
+     "title": "Mean Deviation"
+    },
+    {
+     "id": "cbse-g11-c13-s05",
+     "title": "Variance and Standard Deviation"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c13-o01",
+     "statement": "Explain why measures of central tendency are not enough and find the range of a data set.",
+     "concepts": [
+      "dispersion",
+      "range"
+     ],
+     "questionTypes": [
+      "numeric",
+      "written-explanation"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.dispersion",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.dispersion"
+     ]
+    },
+    {
+     "id": "cbse-g11-c13-o02",
+     "statement": "Calculate mean deviation about the mean and about the median for ungrouped, discrete and continuous frequency data.",
+     "concepts": [
+      "mean deviation about mean",
+      "mean deviation about median"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.dispersion",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [
+      {
+       "id": "MATH.statistics.mean-deviation",
+       "name": "Calculate mean deviation about the mean or median",
+       "strand": "statistics",
+       "gradeRange": [
+        11,
+        11
+       ],
+       "prerequisites": [
+        "MATH.statistics.grouped-mean"
+       ],
+       "supports": [
+        "MATH.statistics.dispersion"
+       ],
+       "why": "MATH.statistics.dispersion names variance and standard deviation; mean deviation (ungrouped, discrete and continuous frequency data) is a separate measure with its own procedure."
+      }
+     ],
+     "mapped": [
+      "MATH.statistics.dispersion",
+      "MATH.statistics.mean-deviation"
+     ]
+    },
+    {
+     "id": "cbse-g11-c13-o03",
+     "statement": "Calculate variance and standard deviation of ungrouped and grouped data, including by the step-deviation (shortcut) method.",
+     "concepts": [
+      "variance",
+      "standard deviation",
+      "step-deviation method"
+     ],
+     "questionTypes": [
+      "numeric",
+      "data-table"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.dispersion",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.grouped-mean",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.dispersion",
+      "MATH.statistics.grouped-mean"
+     ]
+    },
+    {
+     "id": "cbse-g11-c13-o04",
+     "statement": "Compare the variability of two distributions and interpret the result in context.",
+     "concepts": [
+      "comparing spread",
+      "interpretation"
+     ],
+     "questionTypes": [
+      "data-table",
+      "written-explanation",
+      "multiple-choice"
+     ],
+     "difficulty": "extension",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.dispersion",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.dispersion"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "cbse-g11-c14",
+   "number": 14,
+   "term": null,
+   "title": "Probability",
+   "verified": true,
+   "sections": [
+    {
+     "id": "cbse-g11-c14-s01",
+     "title": "Event"
+    },
+    {
+     "id": "cbse-g11-c14-s02",
+     "title": "Axiomatic Approach to Probability"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "cbse-g11-c14-o01",
+     "statement": "(Formative-only) Describe random experiments, outcomes and sample spaces using set notation.",
+     "concepts": [
+      "random experiment",
+      "outcome",
+      "sample space"
+     ],
+     "questionTypes": [
+      "set"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.events",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.algebra.sets",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.sets",
+      "MATH.probability.events"
+     ]
+    },
+    {
+     "id": "cbse-g11-c14-o02",
+     "statement": "Describe events as subsets of a sample space and form 'not A', 'A and B', 'A or B' events.",
+     "concepts": [
+      "event",
+      "complementary event",
+      "compound events"
+     ],
+     "questionTypes": [
+      "set",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.events",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.events"
+     ]
+    },
+    {
+     "id": "cbse-g11-c14-o03",
+     "statement": "Identify mutually exclusive and exhaustive events.",
+     "concepts": [
+      "mutually exclusive events",
+      "exhaustive events"
+     ],
+     "questionTypes": [
+      "true-false",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.events",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.events"
+     ]
+    },
+    {
+     "id": "cbse-g11-c14-o04",
+     "statement": "Check whether a probability assignment satisfies the axioms and find probabilities of events on a finite sample space.",
+     "concepts": [
+      "axioms of probability",
+      "probability of an event"
+     ],
+     "questionTypes": [
+      "numeric",
+      "fraction",
+      "true-false"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.classical",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.probability.events",
+       "fit": "partial",
+       "note": "merged from proposed MATH.probability.axiomatic"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.classical",
+      "MATH.probability.events"
+     ]
+    },
+    {
+     "id": "cbse-g11-c14-o05",
+     "statement": "Use P(A or B) = P(A) + P(B) - P(A and B) and P(not A) = 1 - P(A) to solve probability problems.",
+     "concepts": [
+      "addition rule",
+      "complement rule"
+     ],
+     "questionTypes": [
+      "fraction",
+      "numeric",
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.events",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.probability.complements",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.complements",
+      "MATH.probability.events"
+     ]
+    }
+   ]
+  }
+ ]
+}

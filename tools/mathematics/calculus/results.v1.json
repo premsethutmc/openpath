@@ -1,0 +1,48 @@
+{
+  "version": "calculus-c2-results@1",
+  "nativeCases": 550,
+  "crossDomainCases": 50,
+  "totalCases": 600,
+  "areas": {
+    "differentiation": {
+      "cases": 150,
+      "matches": 150,
+      "falseAcceptances": 0,
+      "falseRejections": 0,
+      "firstInvalidMatches": 150
+    },
+    "indefinite": {
+      "cases": 150,
+      "matches": 150,
+      "falseAcceptances": 0,
+      "falseRejections": 0,
+      "firstInvalidMatches": 150
+    },
+    "definite-improper": {
+      "cases": 100,
+      "matches": 100,
+      "falseAcceptances": 0,
+      "falseRejections": 0,
+      "firstInvalidMatches": 100
+    },
+    "limits-continuity": {
+      "cases": 150,
+      "matches": 150,
+      "falseAcceptances": 0,
+      "falseRejections": 0,
+      "firstInvalidMatches": 150
+    }
+  },
+  "totals": {
+    "matches": 600,
+    "falseAcceptances": 0,
+    "falseRejections": 0,
+    "firstInvalidMatches": 600
+  },
+  "latencyMs": {
+    "p50": 0.017926999999993143,
+    "p95": 0.0836660000000009,
+    "p99": 0.2377480000000034,
+    "max": 1.9884319999999995
+  }
+}

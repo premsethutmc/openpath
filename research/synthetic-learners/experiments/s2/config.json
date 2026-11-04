@@ -1,0 +1,15 @@
+{
+ "experiment": "openpath-s2-synthetic-learner-experiment@1",
+ "base": "cd40422b1d5f2c7c464b0eb10a0c73c340a3f7ec",
+ "simulator": "750e20e91c2beeaffb2ae7eaf39cb61bff3d77b1 (+ S2 cohort extensions)",
+ "journey": "synthetic-experiment-journey@1",
+ "metrics": "synthetic-experiment-metrics@1",
+ "limits": { "visits": 16, "days": 120, "perVisit": 250, "stalledVisits": 3 },
+ "cohorts": {
+  "A": { "label": "known misconceptions (primary)", "profiles": ["S001", "S002", "S003", "S004", "S005", "S006"], "seedsPerProfile": 50, "profileDir": "../../profiles" },
+  "B": { "label": "unrecognised misconceptions, neutral learning response (blinded)", "profiles": ["S001B", "S002B", "S003B", "S004B", "S005B", "S006B"], "seedsPerProfile": 20, "profileDir": "profiles" },
+  "C": { "label": "negative controls", "profiles": ["C01", "C02", "C03", "C04"], "seedsPerProfile": 20, "profileDir": "profiles" }
+ },
+ "seedRule": "seed(i) = profile.seed + 7919 * i, i = 0 .. seedsPerProfile-1",
+ "returnPolicy": "topic-page delayed-check date → that date 09:00 UTC; Passed → stop; otherwise next day (2 days after a teacher/parent pause)"
+}

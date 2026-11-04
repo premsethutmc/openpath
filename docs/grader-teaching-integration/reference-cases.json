@@ -1,0 +1,1130 @@
+[
+ {
+  "case": "A",
+  "required": "Incorrect final answer; no verified misconception",
+  "typed": "x = 4",
+  "request": {
+   "id": "le-ref-3x-19-4",
+   "response": "x = 4",
+   "working": []
+  },
+  "reply": {
+   "v": 2,
+   "id": "le-ref-3x-19-4",
+   "known": true,
+   "credit": false,
+   "verdict": "incorrect",
+   "reason": "incorrect.value",
+   "source": "verifier",
+   "expected": "5",
+   "decision": {
+    "schema": "grading-decision@1",
+    "policy": "grading-policy@1",
+    "questionId": "le-ref-3x-19-4",
+    "contract": {
+     "schema": "openpath-assessment@2",
+     "hash": "733f1c59496e8b636ebbec60f4c27064218ca525cf00dbf3f548e011532c484b",
+     "status": "provisional",
+     "keyAuthority": "generator-only"
+    },
+    "parser": "parser@1",
+    "verifier": "rational-exact@1",
+    "certified": false,
+    "certifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "response": {
+     "raw": "x = 4",
+     "working": []
+    },
+    "interpretation": {
+     "canonical": "4",
+     "value": "4"
+    },
+    "form": null,
+    "method": {
+     "examined": false,
+     "verified": false
+    },
+    "diagnosis": null,
+    "working": {
+     "schema": "working-assessment@1",
+     "statement": "3x = 19 - 4",
+     "substitution": {
+      "variable": "x",
+      "value": "4",
+      "left": "3x",
+      "right": "19 - 4",
+      "leftValue": "12",
+      "rightValue": "15",
+      "holds": false
+     },
+     "versions": {
+      "authority": "openpath-derivation-authority@4",
+      "registry": "openpath-rewrite-registry@3",
+      "kernel": "openpath-symbolic-proof-kernel@1"
+     },
+     "lines": [],
+     "firstInvalid": null,
+     "workingAnswer": null,
+     "agreesWithResponse": null,
+     "certificates": [],
+     "replayed": false,
+     "replayedLines": 0,
+     "status": "none",
+     "methodEvidence": "no-method-evidence",
+     "completeness": "no-working",
+     "reason": "no working submitted: a bare answer is not method evidence"
+    }
+   }
+  },
+  "shown": {
+   "level": "incorrect",
+   "message": "Put x = 4 into 3x = 19 − 4: the left side is 12 and the right side is 15, so they are not equal and x = 4 is not the solution.",
+   "evidence": "Marked by the answer checker (incorrect.value)",
+   "workingLines": []
+  }
+ },
+ {
+  "case": "B",
+  "required": "Correct final answer; no method evidence from a bare answer",
+  "typed": "x = 5",
+  "request": {
+   "id": "le-ref-3x-19-4",
+   "response": "x = 5",
+   "working": []
+  },
+  "reply": {
+   "v": 2,
+   "id": "le-ref-3x-19-4",
+   "known": true,
+   "credit": true,
+   "verdict": "correct",
+   "reason": "correct.equal",
+   "source": "verifier",
+   "expected": "5",
+   "decision": {
+    "schema": "grading-decision@1",
+    "policy": "grading-policy@1",
+    "questionId": "le-ref-3x-19-4",
+    "contract": {
+     "schema": "openpath-assessment@2",
+     "hash": "733f1c59496e8b636ebbec60f4c27064218ca525cf00dbf3f548e011532c484b",
+     "status": "provisional",
+     "keyAuthority": "generator-only"
+    },
+    "parser": "parser@1",
+    "verifier": "rational-exact@1",
+    "certified": false,
+    "certifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "response": {
+     "raw": "x = 5",
+     "working": []
+    },
+    "interpretation": {
+     "canonical": "5",
+     "value": "5"
+    },
+    "form": null,
+    "method": {
+     "examined": false,
+     "verified": false
+    },
+    "diagnosis": null,
+    "working": {
+     "schema": "working-assessment@1",
+     "statement": "3x = 19 - 4",
+     "substitution": null,
+     "versions": {
+      "authority": "openpath-derivation-authority@4",
+      "registry": "openpath-rewrite-registry@3",
+      "kernel": "openpath-symbolic-proof-kernel@1"
+     },
+     "lines": [],
+     "firstInvalid": null,
+     "workingAnswer": null,
+     "agreesWithResponse": null,
+     "certificates": [],
+     "replayed": false,
+     "replayedLines": 0,
+     "status": "none",
+     "methodEvidence": "no-method-evidence",
+     "completeness": "no-working",
+     "reason": "no working submitted: a bare answer is not method evidence"
+    }
+   }
+  },
+  "shown": {
+   "level": "correct",
+   "message": "That answer is right. You gave the answer only, so your method was not checked.",
+   "evidence": "Marked by the answer checker (correct.equal)",
+   "workingLines": []
+  }
+ },
+ {
+  "case": "C",
+  "required": "Correct answer and verified working, if supported by the certificate checker",
+  "typed": "3x = 15; x = 5",
+  "request": {
+   "id": "le-ref-3x-19-4",
+   "response": "x = 5",
+   "working": [
+    "3x = 15",
+    "x = 5"
+   ]
+  },
+  "reply": {
+   "v": 2,
+   "id": "le-ref-3x-19-4",
+   "known": true,
+   "credit": true,
+   "verdict": "correct",
+   "reason": "correct.equal",
+   "source": "verifier",
+   "expected": "5",
+   "decision": {
+    "schema": "grading-decision@1",
+    "policy": "grading-policy@1",
+    "questionId": "le-ref-3x-19-4",
+    "contract": {
+     "schema": "openpath-assessment@2",
+     "hash": "733f1c59496e8b636ebbec60f4c27064218ca525cf00dbf3f548e011532c484b",
+     "status": "provisional",
+     "keyAuthority": "generator-only"
+    },
+    "parser": "parser@1",
+    "verifier": "rational-exact@1",
+    "certified": false,
+    "certifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "response": {
+     "raw": "x = 5",
+     "working": [
+      "3x = 15",
+      "x = 5"
+     ]
+    },
+    "interpretation": {
+     "canonical": "5",
+     "value": "5"
+    },
+    "form": null,
+    "method": {
+     "examined": false,
+     "verified": false
+    },
+    "diagnosis": null,
+    "working": {
+     "schema": "working-assessment@1",
+     "statement": "3x = 19 - 4",
+     "substitution": null,
+     "versions": {
+      "authority": "openpath-derivation-authority@4",
+      "registry": "openpath-rewrite-registry@3",
+      "kernel": "openpath-symbolic-proof-kernel@1"
+     },
+     "lines": [
+      {
+       "text": "3x = 15",
+       "status": "certified-equivalence",
+       "move": "side-rewrite"
+      },
+      {
+       "text": "x = 5",
+       "status": "certified-equivalence",
+       "move": "cancel-factor"
+      }
+     ],
+     "workingAnswer": {
+      "claimed": "x = 5",
+      "correct": true
+     },
+     "agreesWithResponse": true,
+     "certificates": [
+      "9b0ab91d0e6cea2c6bf8f9fc2df3da6e8b8356027b01cfa73dc534543175b2c7",
+      "ac1aab96ae8863de0d9a8318b86f7a9b90199d2a2b4aef5aed32e8c6a3f3a1fc"
+     ],
+     "replayed": true,
+     "replayedLines": 2,
+     "firstInvalid": null,
+     "status": "verified",
+     "methodEvidence": "method-verified",
+     "completeness": "complete",
+     "reason": "all-lines-authorized"
+    }
+   }
+  },
+  "shown": {
+   "level": "correct",
+   "message": "That answer is right. Every line of your working was checked: each one follows from the line before.",
+   "evidence": "Marked by the answer checker (correct.equal)",
+   "workingLines": [
+    {
+     "line": "3x = 15",
+     "label": "Checked: follows from the line before",
+     "checked": true,
+     "badge": null
+    },
+    {
+     "line": "x = 5",
+     "label": "Checked: follows from the line before",
+     "checked": true,
+     "badge": null
+    }
+   ]
+  }
+ },
+ {
+  "case": "D",
+  "required": "Incorrect final answer; first invalid transformation identified",
+  "typed": "3x = 15; x = 4",
+  "request": {
+   "id": "le-ref-3x-19-4",
+   "response": "x = 4",
+   "working": [
+    "3x = 15",
+    "x = 4"
+   ]
+  },
+  "reply": {
+   "v": 2,
+   "id": "le-ref-3x-19-4",
+   "known": true,
+   "credit": false,
+   "verdict": "incorrect",
+   "reason": "incorrect.value",
+   "source": "verifier",
+   "expected": "5",
+   "decision": {
+    "schema": "grading-decision@1",
+    "policy": "grading-policy@1",
+    "questionId": "le-ref-3x-19-4",
+    "contract": {
+     "schema": "openpath-assessment@2",
+     "hash": "733f1c59496e8b636ebbec60f4c27064218ca525cf00dbf3f548e011532c484b",
+     "status": "provisional",
+     "keyAuthority": "generator-only"
+    },
+    "parser": "parser@1",
+    "verifier": "rational-exact@1",
+    "certified": false,
+    "certifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "response": {
+     "raw": "x = 4",
+     "working": [
+      "3x = 15",
+      "x = 4"
+     ]
+    },
+    "interpretation": {
+     "canonical": "4",
+     "value": "4"
+    },
+    "form": null,
+    "method": {
+     "examined": false,
+     "verified": false
+    },
+    "diagnosis": null,
+    "working": {
+     "schema": "working-assessment@1",
+     "statement": "3x = 19 - 4",
+     "substitution": {
+      "variable": "x",
+      "value": "4",
+      "left": "3x",
+      "right": "19 - 4",
+      "leftValue": "12",
+      "rightValue": "15",
+      "holds": false
+     },
+     "versions": {
+      "authority": "openpath-derivation-authority@4",
+      "registry": "openpath-rewrite-registry@3",
+      "kernel": "openpath-symbolic-proof-kernel@1"
+     },
+     "lines": [
+      {
+       "text": "3x = 15",
+       "status": "certified-equivalence",
+       "move": "side-rewrite"
+      },
+      {
+       "text": "x = 4",
+       "status": "invalid",
+       "move": null
+      }
+     ],
+     "workingAnswer": {
+      "claimed": "x = 4",
+      "correct": false
+     },
+     "agreesWithResponse": true,
+     "certificates": [
+      "9b0ab91d0e6cea2c6bf8f9fc2df3da6e8b8356027b01cfa73dc534543175b2c7"
+     ],
+     "replayed": true,
+     "replayedLines": 1,
+     "status": "invalid",
+     "methodEvidence": "method-false-step",
+     "completeness": "complete",
+     "reason": "loses-solution: x = 5 satisfies the line before but not this one",
+     "firstInvalid": {
+      "index": 1,
+      "text": "x = 4",
+      "from": "3x = 15",
+      "reason": "loses-solution: x = 5 satisfies the line before but not this one",
+      "lost": "5",
+      "gained": "4"
+     }
+    }
+   }
+  },
+  "shown": {
+   "level": "incorrect",
+   "message": "Put x = 4 into 3x = 19 − 4: the left side is 12 and the right side is 15, so they are not equal and x = 4 is not the solution. The first step that does not follow is x = 4: x = 5 makes 3x = 15 true but not x = 4, so this step changed the solution.",
+   "evidence": "Marked by the answer checker (incorrect.value)",
+   "workingLines": [
+    {
+     "line": "3x = 15",
+     "label": "Checked: follows from the line before",
+     "checked": true,
+     "badge": null
+    },
+    {
+     "line": "x = 4",
+     "label": "First step that does not follow",
+     "checked": false,
+     "badge": "invalid"
+    }
+   ]
+  }
+ },
+ {
+  "case": "E",
+  "required": "Incorrect transformation from the original equation; identify the first invalid step",
+  "typed": "3x = 16; x = 16/3",
+  "request": {
+   "id": "le-ref-3x-19-4",
+   "response": "x = 16/3",
+   "working": [
+    "3x = 16",
+    "x = 16/3"
+   ]
+  },
+  "reply": {
+   "v": 2,
+   "id": "le-ref-3x-19-4",
+   "known": true,
+   "credit": false,
+   "verdict": "incorrect",
+   "reason": "incorrect.value",
+   "source": "verifier",
+   "expected": "5",
+   "decision": {
+    "schema": "grading-decision@1",
+    "policy": "grading-policy@1",
+    "questionId": "le-ref-3x-19-4",
+    "contract": {
+     "schema": "openpath-assessment@2",
+     "hash": "733f1c59496e8b636ebbec60f4c27064218ca525cf00dbf3f548e011532c484b",
+     "status": "provisional",
+     "keyAuthority": "generator-only"
+    },
+    "parser": "parser@1",
+    "verifier": "rational-exact@1",
+    "certified": false,
+    "certifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
+    "verdict": "incorrect",
+    "reason": "incorrect.value",
+    "response": {
+     "raw": "x = 16/3",
+     "working": [
+      "3x = 16",
+      "x = 16/3"
+     ]
+    },
+    "interpretation": {
+     "canonical": "16/3",
+     "value": "16/3"
+    },
+    "form": null,
+    "method": {
+     "examined": false,
+     "verified": false
+    },
+    "diagnosis": null,
+    "working": {
+     "schema": "working-assessment@1",
+     "statement": "3x = 19 - 4",
+     "substitution": {
+      "variable": "x",
+      "value": "16/3",
+      "left": "3x",
+      "right": "19 - 4",
+      "leftValue": "16",
+      "rightValue": "15",
+      "holds": false
+     },
+     "versions": {
+      "authority": "openpath-derivation-authority@4",
+      "registry": "openpath-rewrite-registry@3",
+      "kernel": "openpath-symbolic-proof-kernel@1"
+     },
+     "lines": [
+      {
+       "text": "3x = 16",
+       "status": "invalid",
+       "move": null
+      },
+      {
+       "text": "x = 16/3",
+       "status": "unsupported",
+       "move": null
+      }
+     ],
+     "workingAnswer": {
+      "claimed": "x = 16/3",
+      "correct": false
+     },
+     "agreesWithResponse": true,
+     "certificates": [],
+     "replayed": false,
+     "replayedLines": 0,
+     "status": "invalid",
+     "methodEvidence": "method-false-step",
+     "completeness": "complete",
+     "reason": "loses-solution: x = 5 satisfies the line before but not this one",
+     "firstInvalid": {
+      "index": 0,
+      "text": "3x = 16",
+      "from": "3x = 19 - 4",
+      "reason": "loses-solution: x = 5 satisfies the line before but not this one",
+      "lost": "5",
+      "gained": "16/3"
+     }
+    }
+   }
+  },
+  "shown": {
+   "level": "incorrect",
+   "message": "Put x = 16/3 into 3x = 19 − 4: the left side is 16 and the right side is 15, so they are not equal and x = 16/3 is not the solution. The first step that does not follow is 3x = 16: x = 5 makes 3x = 19 − 4 true but not 3x = 16, so this step changed the solution.",
+   "evidence": "Marked by the answer checker (incorrect.value)",
+   "workingLines": [
+    {
+     "line": "3x = 16",
+     "label": "First step that does not follow",
+     "checked": false,
+     "badge": "invalid"
+    },
+    {
+     "line": "x = 16/3",
+     "label": "Not checked: comes after a step that does not follow",
+     "checked": false,
+     "badge": "not checked"
+    }
+   ]
+  }
+ },
+ {
+  "case": "F",
+  "required": "Valid partial working; incomplete final solution",
+  "typed": "3x = 15",
+  "request": {
+   "id": "le-ref-3x-19-4",
+   "response": "",
+   "working": [
+    "3x = 15"
+   ]
+  },
+  "reply": {
+   "v": 2,
+   "id": "le-ref-3x-19-4",
+   "known": true,
+   "credit": null,
+   "verdict": "unresolved",
+   "reason": "unresolved.invalid-response",
+   "source": "parser",
+   "expected": "5",
+   "decision": {
+    "schema": "grading-decision@1",
+    "policy": "grading-policy@1",
+    "questionId": "le-ref-3x-19-4",
+    "contract": {
+     "schema": "openpath-assessment@2",
+     "hash": "733f1c59496e8b636ebbec60f4c27064218ca525cf00dbf3f548e011532c484b",
+     "status": "provisional",
+     "keyAuthority": "generator-only"
+    },
+    "parser": "parser@1",
+    "verifier": null,
+    "certified": false,
+    "certifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
+    "verdict": "unresolved",
+    "reason": "unresolved.invalid-response",
+    "response": {
+     "raw": "",
+     "working": [
+      "3x = 15"
+     ]
+    },
+    "interpretation": null,
+    "form": null,
+    "method": {
+     "examined": false,
+     "verified": false
+    },
+    "diagnosis": null,
+    "working": {
+     "schema": "working-assessment@1",
+     "statement": "3x = 19 - 4",
+     "substitution": null,
+     "versions": {
+      "authority": "openpath-derivation-authority@4",
+      "registry": "openpath-rewrite-registry@3",
+      "kernel": "openpath-symbolic-proof-kernel@1"
+     },
+     "lines": [
+      {
+       "text": "3x = 15",
+       "status": "certified-equivalence",
+       "move": "side-rewrite"
+      }
+     ],
+     "workingAnswer": null,
+     "agreesWithResponse": null,
+     "certificates": [
+      "9b0ab91d0e6cea2c6bf8f9fc2df3da6e8b8356027b01cfa73dc534543175b2c7"
+     ],
+     "replayed": true,
+     "replayedLines": 1,
+     "firstInvalid": null,
+     "status": "partial",
+     "methodEvidence": "no-method-evidence",
+     "completeness": "incomplete",
+     "reason": "all-lines-authorized"
+    }
+   }
+  },
+  "shown": {
+   "level": "partial",
+   "message": "No final answer was marked. Your working is right so far: each line follows from the line before. It is not finished: it does not end with the answer yet. Next step: get the unknown on its own.",
+   "evidence": "Not marked by the answer checker (unresolved.invalid-response)",
+   "workingLines": [
+    {
+     "line": "3x = 15",
+     "label": "Checked: follows from the line before",
+     "checked": true,
+     "badge": null
+    }
+   ]
+  }
+ },
+ {
+  "case": "G1",
+  "required": "Unsupported or ambiguous notation: no fabricated verdict or method evidence",
+  "typed": "3x=15 => x=5",
+  "request": {
+   "id": "le-ref-3x-19-4",
+   "response": "",
+   "working": [
+    "3x=15 => x=5"
+   ]
+  },
+  "reply": {
+   "v": 2,
+   "id": "le-ref-3x-19-4",
+   "known": true,
+   "credit": null,
+   "verdict": "unresolved",
+   "reason": "unresolved.invalid-response",
+   "source": "parser",
+   "expected": "5",
+   "decision": {
+    "schema": "grading-decision@1",
+    "policy": "grading-policy@1",
+    "questionId": "le-ref-3x-19-4",
+    "contract": {
+     "schema": "openpath-assessment@2",
+     "hash": "733f1c59496e8b636ebbec60f4c27064218ca525cf00dbf3f548e011532c484b",
+     "status": "provisional",
+     "keyAuthority": "generator-only"
+    },
+    "parser": "parser@1",
+    "verifier": null,
+    "certified": false,
+    "certifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
+    "verdict": "unresolved",
+    "reason": "unresolved.invalid-response",
+    "response": {
+     "raw": "",
+     "working": [
+      "3x=15 => x=5"
+     ]
+    },
+    "interpretation": null,
+    "form": null,
+    "method": {
+     "examined": false,
+     "verified": false
+    },
+    "diagnosis": null,
+    "working": {
+     "schema": "working-assessment@1",
+     "statement": "3x = 19 - 4",
+     "substitution": null,
+     "versions": {
+      "authority": "openpath-derivation-authority@4",
+      "registry": "openpath-rewrite-registry@3",
+      "kernel": "openpath-symbolic-proof-kernel@1"
+     },
+     "lines": [
+      {
+       "text": "3x=15 => x=5",
+       "status": "unsupported",
+       "move": null
+      }
+     ],
+     "workingAnswer": null,
+     "agreesWithResponse": null,
+     "certificates": [],
+     "replayed": false,
+     "replayedLines": 0,
+     "firstInvalid": null,
+     "status": "unsupported",
+     "methodEvidence": "no-method-evidence",
+     "completeness": "incomplete",
+     "reason": "line-unparsed"
+    }
+   }
+  },
+  "shown": {
+   "level": "partial",
+   "message": "No final answer was marked. Your working could not be checked automatically, so it is not marked right or wrong. Writing each step as an equation on its own line, ending with the answer, lets it be checked.",
+   "evidence": "Not marked by the answer checker (unresolved.invalid-response)",
+   "workingLines": [
+    {
+     "line": "Not checked: 3x=15 => x=5",
+     "label": "Not checked: 3x=15 => x=5",
+     "checked": false,
+     "badge": "not checked"
+    }
+   ]
+  }
+ },
+ {
+  "case": "G2",
+  "required": "Unsupported or ambiguous notation: no fabricated verdict or method evidence",
+  "typed": "x = 15/3x",
+  "request": {
+   "id": "le-ref-3x-19-4",
+   "response": "",
+   "working": [
+    "x = 15/3x"
+   ]
+  },
+  "reply": {
+   "v": 2,
+   "id": "le-ref-3x-19-4",
+   "known": true,
+   "credit": null,
+   "verdict": "unresolved",
+   "reason": "unresolved.invalid-response",
+   "source": "parser",
+   "expected": "5",
+   "decision": {
+    "schema": "grading-decision@1",
+    "policy": "grading-policy@1",
+    "questionId": "le-ref-3x-19-4",
+    "contract": {
+     "schema": "openpath-assessment@2",
+     "hash": "733f1c59496e8b636ebbec60f4c27064218ca525cf00dbf3f548e011532c484b",
+     "status": "provisional",
+     "keyAuthority": "generator-only"
+    },
+    "parser": "parser@1",
+    "verifier": null,
+    "certified": false,
+    "certifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
+    "verdict": "unresolved",
+    "reason": "unresolved.invalid-response",
+    "response": {
+     "raw": "",
+     "working": [
+      "x = 15/3x"
+     ]
+    },
+    "interpretation": null,
+    "form": null,
+    "method": {
+     "examined": false,
+     "verified": false
+    },
+    "diagnosis": null,
+    "working": {
+     "schema": "working-assessment@1",
+     "statement": "3x = 19 - 4",
+     "substitution": null,
+     "versions": {
+      "authority": "openpath-derivation-authority@4",
+      "registry": "openpath-rewrite-registry@3",
+      "kernel": "openpath-symbolic-proof-kernel@1"
+     },
+     "lines": [
+      {
+       "text": "x = 15/3x",
+       "status": "unsupported",
+       "move": null
+      }
+     ],
+     "workingAnswer": null,
+     "agreesWithResponse": null,
+     "certificates": [],
+     "replayed": false,
+     "replayedLines": 0,
+     "firstInvalid": null,
+     "status": "unsupported",
+     "methodEvidence": "no-method-evidence",
+     "completeness": "incomplete",
+     "reason": "line-unparsed"
+    }
+   }
+  },
+  "shown": {
+   "level": "partial",
+   "message": "No final answer was marked. Your working could not be checked automatically, so it is not marked right or wrong. Writing each step as an equation on its own line, ending with the answer, lets it be checked.",
+   "evidence": "Not marked by the answer checker (unresolved.invalid-response)",
+   "workingLines": [
+    {
+     "line": "x = 15/3x",
+     "label": "Not checked",
+     "checked": false,
+     "badge": "not checked"
+    }
+   ]
+  }
+ },
+ {
+  "case": "G3",
+  "required": "Unsupported or ambiguous notation: no fabricated verdict or method evidence",
+  "typed": "divide by 3 so x is 5",
+  "request": {
+   "id": "le-ref-3x-19-4",
+   "response": "",
+   "working": [
+    "divide by 3 so x is 5"
+   ]
+  },
+  "reply": {
+   "v": 2,
+   "id": "le-ref-3x-19-4",
+   "known": true,
+   "credit": null,
+   "verdict": "unresolved",
+   "reason": "unresolved.invalid-response",
+   "source": "parser",
+   "expected": "5",
+   "decision": {
+    "schema": "grading-decision@1",
+    "policy": "grading-policy@1",
+    "questionId": "le-ref-3x-19-4",
+    "contract": {
+     "schema": "openpath-assessment@2",
+     "hash": "733f1c59496e8b636ebbec60f4c27064218ca525cf00dbf3f548e011532c484b",
+     "status": "provisional",
+     "keyAuthority": "generator-only"
+    },
+    "parser": "parser@1",
+    "verifier": null,
+    "certified": false,
+    "certifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
+    "verdict": "unresolved",
+    "reason": "unresolved.invalid-response",
+    "response": {
+     "raw": "",
+     "working": [
+      "divide by 3 so x is 5"
+     ]
+    },
+    "interpretation": null,
+    "form": null,
+    "method": {
+     "examined": false,
+     "verified": false
+    },
+    "diagnosis": null,
+    "working": {
+     "schema": "working-assessment@1",
+     "statement": "3x = 19 - 4",
+     "substitution": null,
+     "versions": {
+      "authority": "openpath-derivation-authority@4",
+      "registry": "openpath-rewrite-registry@3",
+      "kernel": "openpath-symbolic-proof-kernel@1"
+     },
+     "lines": [
+      {
+       "text": "divide by 3 so x is 5",
+       "status": "unsupported",
+       "move": null
+      }
+     ],
+     "workingAnswer": null,
+     "agreesWithResponse": null,
+     "certificates": [],
+     "replayed": false,
+     "replayedLines": 0,
+     "firstInvalid": null,
+     "status": "unsupported",
+     "methodEvidence": "no-method-evidence",
+     "completeness": "incomplete",
+     "reason": "line-unparsed"
+    }
+   }
+  },
+  "shown": {
+   "level": "partial",
+   "message": "No final answer was marked. Your working could not be checked automatically, so it is not marked right or wrong. Writing each step as an equation on its own line, ending with the answer, lets it be checked.",
+   "evidence": "Not marked by the answer checker (unresolved.invalid-response)",
+   "workingLines": [
+    {
+     "line": "Not checked: divide by 3 so x is 5",
+     "label": "Not checked: divide by 3 so x is 5",
+     "checked": false,
+     "badge": "not checked"
+    }
+   ]
+  }
+ },
+ {
+  "case": "G4",
+  "required": "Unsupported working beside a correct final answer",
+  "typed": "3x = 15 => x = 5; x = 5",
+  "request": {
+   "id": "le-ref-3x-19-4",
+   "response": "x = 5",
+   "working": [
+    "3x = 15 => x = 5",
+    "x = 5"
+   ]
+  },
+  "reply": {
+   "v": 2,
+   "id": "le-ref-3x-19-4",
+   "known": true,
+   "credit": true,
+   "verdict": "correct",
+   "reason": "correct.equal",
+   "source": "verifier",
+   "expected": "5",
+   "decision": {
+    "schema": "grading-decision@1",
+    "policy": "grading-policy@1",
+    "questionId": "le-ref-3x-19-4",
+    "contract": {
+     "schema": "openpath-assessment@2",
+     "hash": "733f1c59496e8b636ebbec60f4c27064218ca525cf00dbf3f548e011532c484b",
+     "status": "provisional",
+     "keyAuthority": "generator-only"
+    },
+    "parser": "parser@1",
+    "verifier": "rational-exact@1",
+    "certified": false,
+    "certifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "response": {
+     "raw": "x = 5",
+     "working": [
+      "3x = 15 => x = 5",
+      "x = 5"
+     ]
+    },
+    "interpretation": {
+     "canonical": "5",
+     "value": "5"
+    },
+    "form": null,
+    "method": {
+     "examined": false,
+     "verified": false
+    },
+    "diagnosis": null,
+    "working": {
+     "schema": "working-assessment@1",
+     "statement": "3x = 19 - 4",
+     "substitution": null,
+     "versions": {
+      "authority": "openpath-derivation-authority@4",
+      "registry": "openpath-rewrite-registry@3",
+      "kernel": "openpath-symbolic-proof-kernel@1"
+     },
+     "lines": [
+      {
+       "text": "3x = 15 => x = 5",
+       "status": "unsupported",
+       "move": null
+      },
+      {
+       "text": "x = 5",
+       "status": "unsupported",
+       "move": null
+      }
+     ],
+     "workingAnswer": null,
+     "agreesWithResponse": null,
+     "certificates": [],
+     "replayed": false,
+     "replayedLines": 0,
+     "firstInvalid": null,
+     "status": "unsupported",
+     "methodEvidence": "no-method-evidence",
+     "completeness": "complete",
+     "reason": "line-unparsed"
+    }
+   }
+  },
+  "shown": {
+   "level": "correct",
+   "message": "That answer is right. Your working could not be checked automatically, so it is not marked right or wrong. Writing each step as an equation on its own line, ending with the answer, lets it be checked.",
+   "evidence": "Marked by the answer checker (correct.equal)",
+   "workingLines": [
+    {
+     "line": "Not checked: 3x = 15 => x = 5",
+     "label": "Not checked: 3x = 15 => x = 5",
+     "checked": false,
+     "badge": "not checked"
+    },
+    {
+     "line": "x = 5",
+     "label": "Not checked",
+     "checked": false,
+     "badge": "not checked"
+    }
+   ]
+  }
+ },
+ {
+  "case": "X",
+  "required": "(extra) correct answer reached through invalid working",
+  "typed": "3x = 16; x = 5",
+  "request": {
+   "id": "le-ref-3x-19-4",
+   "response": "x = 5",
+   "working": [
+    "3x = 16",
+    "x = 5"
+   ]
+  },
+  "reply": {
+   "v": 2,
+   "id": "le-ref-3x-19-4",
+   "known": true,
+   "credit": true,
+   "verdict": "correct",
+   "reason": "correct.equal",
+   "source": "verifier",
+   "expected": "5",
+   "decision": {
+    "schema": "grading-decision@1",
+    "policy": "grading-policy@1",
+    "questionId": "le-ref-3x-19-4",
+    "contract": {
+     "schema": "openpath-assessment@2",
+     "hash": "733f1c59496e8b636ebbec60f4c27064218ca525cf00dbf3f548e011532c484b",
+     "status": "provisional",
+     "keyAuthority": "generator-only"
+    },
+    "parser": "parser@1",
+    "verifier": "rational-exact@1",
+    "certified": false,
+    "certifications": "621f51bf70fb5e3e40827df3d389ddda42408f45cad420186c406e26c1d9e64d",
+    "verdict": "correct",
+    "reason": "correct.equal",
+    "response": {
+     "raw": "x = 5",
+     "working": [
+      "3x = 16",
+      "x = 5"
+     ]
+    },
+    "interpretation": {
+     "canonical": "5",
+     "value": "5"
+    },
+    "form": null,
+    "method": {
+     "examined": false,
+     "verified": false
+    },
+    "diagnosis": null,
+    "working": {
+     "schema": "working-assessment@1",
+     "statement": "3x = 19 - 4",
+     "substitution": null,
+     "versions": {
+      "authority": "openpath-derivation-authority@4",
+      "registry": "openpath-rewrite-registry@3",
+      "kernel": "openpath-symbolic-proof-kernel@1"
+     },
+     "lines": [
+      {
+       "text": "3x = 16",
+       "status": "invalid",
+       "move": null
+      },
+      {
+       "text": "x = 5",
+       "status": "unsupported",
+       "move": null
+      }
+     ],
+     "workingAnswer": {
+      "claimed": "x = 5",
+      "correct": true
+     },
+     "agreesWithResponse": true,
+     "certificates": [],
+     "replayed": false,
+     "replayedLines": 0,
+     "status": "invalid",
+     "methodEvidence": "method-false-step",
+     "completeness": "complete",
+     "reason": "loses-solution: x = 5 satisfies the line before but not this one",
+     "firstInvalid": {
+      "index": 0,
+      "text": "3x = 16",
+      "from": "3x = 19 - 4",
+      "reason": "loses-solution: x = 5 satisfies the line before but not this one",
+      "lost": "5",
+      "gained": "16/3"
+     }
+    }
+   }
+  },
+  "shown": {
+   "level": "correct",
+   "message": "That answer is right. But a step in your working is not right. The first step that does not follow is 3x = 16: x = 5 makes 3x = 19 − 4 true but not 3x = 16, so this step changed the solution.",
+   "evidence": "Marked by the answer checker (correct.equal)",
+   "workingLines": [
+    {
+     "line": "3x = 16",
+     "label": "First step that does not follow",
+     "checked": false,
+     "badge": "invalid"
+    },
+    {
+     "line": "x = 5",
+     "label": "Not checked: comes after a step that does not follow",
+     "checked": false,
+     "badge": "not checked"
+    }
+   ]
+  }
+ }
+]

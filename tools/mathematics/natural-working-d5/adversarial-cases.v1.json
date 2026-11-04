@@ -1,0 +1,1356 @@
+{
+  "schema": "openpath-natural-working-d5-adversarial@1",
+  "frozenBeforeEvaluation": true,
+  "cases": [
+    {
+      "id": "d5-adv-incorrect-trig-identity-00",
+      "category": "incorrect-trig-identity",
+      "parameter": 0,
+      "raw": "sin(x)^2 + cos(x)^2\n2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-trig-identity-01",
+      "category": "incorrect-trig-identity",
+      "parameter": 1,
+      "raw": "sin(x)^2 + cos(x)^2\n2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-trig-identity-02",
+      "category": "incorrect-trig-identity",
+      "parameter": 2,
+      "raw": "sin(x)^2 + cos(x)^2\n2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-trig-identity-03",
+      "category": "incorrect-trig-identity",
+      "parameter": 3,
+      "raw": "sin(x)^2 + cos(x)^2\n2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-trig-identity-04",
+      "category": "incorrect-trig-identity",
+      "parameter": 4,
+      "raw": "sin(x)^2 + cos(x)^2\n2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-trig-identity-05",
+      "category": "incorrect-trig-identity",
+      "parameter": 5,
+      "raw": "sin(x)^2 + cos(x)^2\n2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-trig-identity-06",
+      "category": "incorrect-trig-identity",
+      "parameter": 6,
+      "raw": "sin(x)^2 + cos(x)^2\n2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-trig-identity-07",
+      "category": "incorrect-trig-identity",
+      "parameter": 7,
+      "raw": "sin(x)^2 + cos(x)^2\n2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-trig-identity-08",
+      "category": "incorrect-trig-identity",
+      "parameter": 8,
+      "raw": "sin(x)^2 + cos(x)^2\n2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-trig-identity-09",
+      "category": "incorrect-trig-identity",
+      "parameter": 9,
+      "raw": "sin(x)^2 + cos(x)^2\n2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-periodic-solutions-00",
+      "category": "missing-periodic-solutions",
+      "parameter": 0,
+      "raw": "x = pi/6",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-periodic-solutions-01",
+      "category": "missing-periodic-solutions",
+      "parameter": 1,
+      "raw": "x = pi/6",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-periodic-solutions-02",
+      "category": "missing-periodic-solutions",
+      "parameter": 2,
+      "raw": "x = pi/6",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-periodic-solutions-03",
+      "category": "missing-periodic-solutions",
+      "parameter": 3,
+      "raw": "x = pi/6",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-periodic-solutions-04",
+      "category": "missing-periodic-solutions",
+      "parameter": 4,
+      "raw": "x = pi/6",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-periodic-solutions-05",
+      "category": "missing-periodic-solutions",
+      "parameter": 5,
+      "raw": "x = pi/6",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-periodic-solutions-06",
+      "category": "missing-periodic-solutions",
+      "parameter": 6,
+      "raw": "x = pi/6",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-periodic-solutions-07",
+      "category": "missing-periodic-solutions",
+      "parameter": 7,
+      "raw": "x = pi/6",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-periodic-solutions-08",
+      "category": "missing-periodic-solutions",
+      "parameter": 8,
+      "raw": "x = pi/6",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-periodic-solutions-09",
+      "category": "missing-periodic-solutions",
+      "parameter": 9,
+      "raw": "x = pi/6",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-log-domain-00",
+      "category": "invalid-log-domain",
+      "parameter": 0,
+      "raw": "2log(x)",
+      "expectedClassification": "missing-assumption",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-log-domain-01",
+      "category": "invalid-log-domain",
+      "parameter": 1,
+      "raw": "2log(x)",
+      "expectedClassification": "missing-assumption",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-log-domain-02",
+      "category": "invalid-log-domain",
+      "parameter": 2,
+      "raw": "2log(x)",
+      "expectedClassification": "missing-assumption",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-log-domain-03",
+      "category": "invalid-log-domain",
+      "parameter": 3,
+      "raw": "2log(x)",
+      "expectedClassification": "missing-assumption",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-log-domain-04",
+      "category": "invalid-log-domain",
+      "parameter": 4,
+      "raw": "2log(x)",
+      "expectedClassification": "missing-assumption",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-log-domain-05",
+      "category": "invalid-log-domain",
+      "parameter": 5,
+      "raw": "2log(x)",
+      "expectedClassification": "missing-assumption",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-log-domain-06",
+      "category": "invalid-log-domain",
+      "parameter": 6,
+      "raw": "2log(x)",
+      "expectedClassification": "missing-assumption",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-log-domain-07",
+      "category": "invalid-log-domain",
+      "parameter": 7,
+      "raw": "2log(x)",
+      "expectedClassification": "missing-assumption",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-log-domain-08",
+      "category": "invalid-log-domain",
+      "parameter": 8,
+      "raw": "2log(x)",
+      "expectedClassification": "missing-assumption",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-log-domain-09",
+      "category": "invalid-log-domain",
+      "parameter": 9,
+      "raw": "2log(x)",
+      "expectedClassification": "missing-assumption",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-differentiation-00",
+      "category": "incorrect-differentiation",
+      "parameter": 0,
+      "raw": "f'(x) = 3x",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-differentiation-01",
+      "category": "incorrect-differentiation",
+      "parameter": 1,
+      "raw": "f'(x) = 4x",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-differentiation-02",
+      "category": "incorrect-differentiation",
+      "parameter": 2,
+      "raw": "f'(x) = 5x",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-differentiation-03",
+      "category": "incorrect-differentiation",
+      "parameter": 3,
+      "raw": "f'(x) = 6x",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-differentiation-04",
+      "category": "incorrect-differentiation",
+      "parameter": 4,
+      "raw": "f'(x) = 7x",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-differentiation-05",
+      "category": "incorrect-differentiation",
+      "parameter": 5,
+      "raw": "f'(x) = 8x",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-differentiation-06",
+      "category": "incorrect-differentiation",
+      "parameter": 6,
+      "raw": "f'(x) = 9x",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-differentiation-07",
+      "category": "incorrect-differentiation",
+      "parameter": 7,
+      "raw": "f'(x) = 10x",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-differentiation-08",
+      "category": "incorrect-differentiation",
+      "parameter": 8,
+      "raw": "f'(x) = 11x",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-differentiation-09",
+      "category": "incorrect-differentiation",
+      "parameter": 9,
+      "raw": "f'(x) = 12x",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-integration-constant-00",
+      "category": "missing-integration-constant",
+      "parameter": 0,
+      "raw": "\\int 2x \\, dx = x^2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-integration-constant-01",
+      "category": "missing-integration-constant",
+      "parameter": 1,
+      "raw": "\\int 2x \\, dx = x^2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-integration-constant-02",
+      "category": "missing-integration-constant",
+      "parameter": 2,
+      "raw": "\\int 2x \\, dx = x^2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-integration-constant-03",
+      "category": "missing-integration-constant",
+      "parameter": 3,
+      "raw": "\\int 2x \\, dx = x^2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-integration-constant-04",
+      "category": "missing-integration-constant",
+      "parameter": 4,
+      "raw": "\\int 2x \\, dx = x^2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-integration-constant-05",
+      "category": "missing-integration-constant",
+      "parameter": 5,
+      "raw": "\\int 2x \\, dx = x^2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-integration-constant-06",
+      "category": "missing-integration-constant",
+      "parameter": 6,
+      "raw": "\\int 2x \\, dx = x^2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-integration-constant-07",
+      "category": "missing-integration-constant",
+      "parameter": 7,
+      "raw": "\\int 2x \\, dx = x^2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-integration-constant-08",
+      "category": "missing-integration-constant",
+      "parameter": 8,
+      "raw": "\\int 2x \\, dx = x^2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-integration-constant-09",
+      "category": "missing-integration-constant",
+      "parameter": 9,
+      "raw": "\\int 2x \\, dx = x^2",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-matrix-dimension-mismatch-00",
+      "category": "matrix-dimension-mismatch",
+      "parameter": 0,
+      "raw": "u = [1, 2]\nv = [1, 2, 3]\nu + v = [2, 4]",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-matrix-dimension-mismatch-01",
+      "category": "matrix-dimension-mismatch",
+      "parameter": 1,
+      "raw": "u = [1, 2]\nv = [1, 2, 3]\nu + v = [2, 4]",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-matrix-dimension-mismatch-02",
+      "category": "matrix-dimension-mismatch",
+      "parameter": 2,
+      "raw": "u = [1, 2]\nv = [1, 2, 3]\nu + v = [2, 4]",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-matrix-dimension-mismatch-03",
+      "category": "matrix-dimension-mismatch",
+      "parameter": 3,
+      "raw": "u = [1, 2]\nv = [1, 2, 3]\nu + v = [2, 4]",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-matrix-dimension-mismatch-04",
+      "category": "matrix-dimension-mismatch",
+      "parameter": 4,
+      "raw": "u = [1, 2]\nv = [1, 2, 3]\nu + v = [2, 4]",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-matrix-dimension-mismatch-05",
+      "category": "matrix-dimension-mismatch",
+      "parameter": 5,
+      "raw": "u = [1, 2]\nv = [1, 2, 3]\nu + v = [2, 4]",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-matrix-dimension-mismatch-06",
+      "category": "matrix-dimension-mismatch",
+      "parameter": 6,
+      "raw": "u = [1, 2]\nv = [1, 2, 3]\nu + v = [2, 4]",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-matrix-dimension-mismatch-07",
+      "category": "matrix-dimension-mismatch",
+      "parameter": 7,
+      "raw": "u = [1, 2]\nv = [1, 2, 3]\nu + v = [2, 4]",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-matrix-dimension-mismatch-08",
+      "category": "matrix-dimension-mismatch",
+      "parameter": 8,
+      "raw": "u = [1, 2]\nv = [1, 2, 3]\nu + v = [2, 4]",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-matrix-dimension-mismatch-09",
+      "category": "matrix-dimension-mismatch",
+      "parameter": 9,
+      "raw": "u = [1, 2]\nv = [1, 2, 3]\nu + v = [2, 4]",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-singular-matrix-inverse-00",
+      "category": "singular-matrix-inverse",
+      "parameter": 0,
+      "raw": "A = [[1,2],[2,4]]\nA^-1 = [[0,0],[0,0]]",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-singular-matrix-inverse-01",
+      "category": "singular-matrix-inverse",
+      "parameter": 1,
+      "raw": "A = [[1,2],[2,4]]\nA^-1 = [[0,0],[0,0]]",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-singular-matrix-inverse-02",
+      "category": "singular-matrix-inverse",
+      "parameter": 2,
+      "raw": "A = [[1,2],[2,4]]\nA^-1 = [[0,0],[0,0]]",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-singular-matrix-inverse-03",
+      "category": "singular-matrix-inverse",
+      "parameter": 3,
+      "raw": "A = [[1,2],[2,4]]\nA^-1 = [[0,0],[0,0]]",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-singular-matrix-inverse-04",
+      "category": "singular-matrix-inverse",
+      "parameter": 4,
+      "raw": "A = [[1,2],[2,4]]\nA^-1 = [[0,0],[0,0]]",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-singular-matrix-inverse-05",
+      "category": "singular-matrix-inverse",
+      "parameter": 5,
+      "raw": "A = [[1,2],[2,4]]\nA^-1 = [[0,0],[0,0]]",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-singular-matrix-inverse-06",
+      "category": "singular-matrix-inverse",
+      "parameter": 6,
+      "raw": "A = [[1,2],[2,4]]\nA^-1 = [[0,0],[0,0]]",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-singular-matrix-inverse-07",
+      "category": "singular-matrix-inverse",
+      "parameter": 7,
+      "raw": "A = [[1,2],[2,4]]\nA^-1 = [[0,0],[0,0]]",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-singular-matrix-inverse-08",
+      "category": "singular-matrix-inverse",
+      "parameter": 8,
+      "raw": "A = [[1,2],[2,4]]\nA^-1 = [[0,0],[0,0]]",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-singular-matrix-inverse-09",
+      "category": "singular-matrix-inverse",
+      "parameter": 9,
+      "raw": "A = [[1,2],[2,4]]\nA^-1 = [[0,0],[0,0]]",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-complex-conjugation-00",
+      "category": "invalid-complex-conjugation",
+      "parameter": 0,
+      "raw": "z = 3 + 4i\nconj(z) = 3 + 4i",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-complex-conjugation-01",
+      "category": "invalid-complex-conjugation",
+      "parameter": 1,
+      "raw": "z = 3 + 4i\nconj(z) = 3 + 4i",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-complex-conjugation-02",
+      "category": "invalid-complex-conjugation",
+      "parameter": 2,
+      "raw": "z = 3 + 4i\nconj(z) = 3 + 4i",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-complex-conjugation-03",
+      "category": "invalid-complex-conjugation",
+      "parameter": 3,
+      "raw": "z = 3 + 4i\nconj(z) = 3 + 4i",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-complex-conjugation-04",
+      "category": "invalid-complex-conjugation",
+      "parameter": 4,
+      "raw": "z = 3 + 4i\nconj(z) = 3 + 4i",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-complex-conjugation-05",
+      "category": "invalid-complex-conjugation",
+      "parameter": 5,
+      "raw": "z = 3 + 4i\nconj(z) = 3 + 4i",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-complex-conjugation-06",
+      "category": "invalid-complex-conjugation",
+      "parameter": 6,
+      "raw": "z = 3 + 4i\nconj(z) = 3 + 4i",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-complex-conjugation-07",
+      "category": "invalid-complex-conjugation",
+      "parameter": 7,
+      "raw": "z = 3 + 4i\nconj(z) = 3 + 4i",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-complex-conjugation-08",
+      "category": "invalid-complex-conjugation",
+      "parameter": 8,
+      "raw": "z = 3 + 4i\nconj(z) = 3 + 4i",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-invalid-complex-conjugation-09",
+      "category": "invalid-complex-conjugation",
+      "parameter": 9,
+      "raw": "z = 3 + 4i\nconj(z) = 3 + 4i",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-probability-assumption-00",
+      "category": "missing-probability-assumption",
+      "parameter": 0,
+      "raw": "P(A) = 1/2\nP(B) = 1/2\nP(A and B) = 1/4",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-probability-assumption-01",
+      "category": "missing-probability-assumption",
+      "parameter": 1,
+      "raw": "P(A) = 1/2\nP(B) = 1/2\nP(A and B) = 1/4",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-probability-assumption-02",
+      "category": "missing-probability-assumption",
+      "parameter": 2,
+      "raw": "P(A) = 1/2\nP(B) = 1/2\nP(A and B) = 1/4",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-probability-assumption-03",
+      "category": "missing-probability-assumption",
+      "parameter": 3,
+      "raw": "P(A) = 1/2\nP(B) = 1/2\nP(A and B) = 1/4",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-probability-assumption-04",
+      "category": "missing-probability-assumption",
+      "parameter": 4,
+      "raw": "P(A) = 1/2\nP(B) = 1/2\nP(A and B) = 1/4",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-probability-assumption-05",
+      "category": "missing-probability-assumption",
+      "parameter": 5,
+      "raw": "P(A) = 1/2\nP(B) = 1/2\nP(A and B) = 1/4",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-probability-assumption-06",
+      "category": "missing-probability-assumption",
+      "parameter": 6,
+      "raw": "P(A) = 1/2\nP(B) = 1/2\nP(A and B) = 1/4",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-probability-assumption-07",
+      "category": "missing-probability-assumption",
+      "parameter": 7,
+      "raw": "P(A) = 1/2\nP(B) = 1/2\nP(A and B) = 1/4",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-probability-assumption-08",
+      "category": "missing-probability-assumption",
+      "parameter": 8,
+      "raw": "P(A) = 1/2\nP(B) = 1/2\nP(A and B) = 1/4",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-missing-probability-assumption-09",
+      "category": "missing-probability-assumption",
+      "parameter": 9,
+      "raw": "P(A) = 1/2\nP(B) = 1/2\nP(A and B) = 1/4",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-unsupported-geometry-claim-00",
+      "category": "unsupported-geometry-claim",
+      "parameter": 0,
+      "raw": "AB = AC\nangle B = angle C",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-unsupported-geometry-claim-01",
+      "category": "unsupported-geometry-claim",
+      "parameter": 1,
+      "raw": "AB = AC\nangle B = angle C",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-unsupported-geometry-claim-02",
+      "category": "unsupported-geometry-claim",
+      "parameter": 2,
+      "raw": "AB = AC\nangle B = angle C",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-unsupported-geometry-claim-03",
+      "category": "unsupported-geometry-claim",
+      "parameter": 3,
+      "raw": "AB = AC\nangle B = angle C",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-unsupported-geometry-claim-04",
+      "category": "unsupported-geometry-claim",
+      "parameter": 4,
+      "raw": "AB = AC\nangle B = angle C",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-unsupported-geometry-claim-05",
+      "category": "unsupported-geometry-claim",
+      "parameter": 5,
+      "raw": "AB = AC\nangle B = angle C",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-unsupported-geometry-claim-06",
+      "category": "unsupported-geometry-claim",
+      "parameter": 6,
+      "raw": "AB = AC\nangle B = angle C",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-unsupported-geometry-claim-07",
+      "category": "unsupported-geometry-claim",
+      "parameter": 7,
+      "raw": "AB = AC\nangle B = angle C",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-unsupported-geometry-claim-08",
+      "category": "unsupported-geometry-claim",
+      "parameter": 8,
+      "raw": "AB = AC\nangle B = angle C",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-unsupported-geometry-claim-09",
+      "category": "unsupported-geometry-claim",
+      "parameter": 9,
+      "raw": "AB = AC\nangle B = angle C",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-cross-domain-substitution-00",
+      "category": "incorrect-cross-domain-substitution",
+      "parameter": 0,
+      "raw": "x = 3\nf(x) = x^2\nf(x) = 8",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-cross-domain-substitution-01",
+      "category": "incorrect-cross-domain-substitution",
+      "parameter": 1,
+      "raw": "x = 3\nf(x) = x^2\nf(x) = 8",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-cross-domain-substitution-02",
+      "category": "incorrect-cross-domain-substitution",
+      "parameter": 2,
+      "raw": "x = 3\nf(x) = x^2\nf(x) = 8",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-cross-domain-substitution-03",
+      "category": "incorrect-cross-domain-substitution",
+      "parameter": 3,
+      "raw": "x = 3\nf(x) = x^2\nf(x) = 8",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-cross-domain-substitution-04",
+      "category": "incorrect-cross-domain-substitution",
+      "parameter": 4,
+      "raw": "x = 3\nf(x) = x^2\nf(x) = 8",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-cross-domain-substitution-05",
+      "category": "incorrect-cross-domain-substitution",
+      "parameter": 5,
+      "raw": "x = 3\nf(x) = x^2\nf(x) = 8",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-cross-domain-substitution-06",
+      "category": "incorrect-cross-domain-substitution",
+      "parameter": 6,
+      "raw": "x = 3\nf(x) = x^2\nf(x) = 8",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-cross-domain-substitution-07",
+      "category": "incorrect-cross-domain-substitution",
+      "parameter": 7,
+      "raw": "x = 3\nf(x) = x^2\nf(x) = 8",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-cross-domain-substitution-08",
+      "category": "incorrect-cross-domain-substitution",
+      "parameter": 8,
+      "raw": "x = 3\nf(x) = x^2\nf(x) = 8",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-incorrect-cross-domain-substitution-09",
+      "category": "incorrect-cross-domain-substitution",
+      "parameter": 9,
+      "raw": "x = 3\nf(x) = x^2\nf(x) = 8",
+      "expectedClassification": "unsupported",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-correct-final-after-invalid-step-00",
+      "category": "correct-final-after-invalid-step",
+      "parameter": 0,
+      "raw": "2x = 10\nx = 4",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-correct-final-after-invalid-step-01",
+      "category": "correct-final-after-invalid-step",
+      "parameter": 1,
+      "raw": "2x = 10\nx = 4",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-correct-final-after-invalid-step-02",
+      "category": "correct-final-after-invalid-step",
+      "parameter": 2,
+      "raw": "2x = 10\nx = 4",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-correct-final-after-invalid-step-03",
+      "category": "correct-final-after-invalid-step",
+      "parameter": 3,
+      "raw": "2x = 10\nx = 4",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-correct-final-after-invalid-step-04",
+      "category": "correct-final-after-invalid-step",
+      "parameter": 4,
+      "raw": "2x = 10\nx = 4",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-correct-final-after-invalid-step-05",
+      "category": "correct-final-after-invalid-step",
+      "parameter": 5,
+      "raw": "2x = 10\nx = 4",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-correct-final-after-invalid-step-06",
+      "category": "correct-final-after-invalid-step",
+      "parameter": 6,
+      "raw": "2x = 10\nx = 4",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-correct-final-after-invalid-step-07",
+      "category": "correct-final-after-invalid-step",
+      "parameter": 7,
+      "raw": "2x = 10\nx = 4",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-correct-final-after-invalid-step-08",
+      "category": "correct-final-after-invalid-step",
+      "parameter": 8,
+      "raw": "2x = 10\nx = 4",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-correct-final-after-invalid-step-09",
+      "category": "correct-final-after-invalid-step",
+      "parameter": 9,
+      "raw": "2x = 10\nx = 4",
+      "expectedClassification": "invalid",
+      "expectedFirstInvalidStep": 0,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-ambiguous-notation-00",
+      "category": "ambiguous-notation",
+      "parameter": 0,
+      "raw": "1/2x = 3",
+      "expectedClassification": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-ambiguous-notation-01",
+      "category": "ambiguous-notation",
+      "parameter": 1,
+      "raw": "1/2x = 3",
+      "expectedClassification": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-ambiguous-notation-02",
+      "category": "ambiguous-notation",
+      "parameter": 2,
+      "raw": "1/2x = 3",
+      "expectedClassification": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-ambiguous-notation-03",
+      "category": "ambiguous-notation",
+      "parameter": 3,
+      "raw": "1/2x = 3",
+      "expectedClassification": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-ambiguous-notation-04",
+      "category": "ambiguous-notation",
+      "parameter": 4,
+      "raw": "1/2x = 3",
+      "expectedClassification": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-ambiguous-notation-05",
+      "category": "ambiguous-notation",
+      "parameter": 5,
+      "raw": "1/2x = 3",
+      "expectedClassification": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-ambiguous-notation-06",
+      "category": "ambiguous-notation",
+      "parameter": 6,
+      "raw": "1/2x = 3",
+      "expectedClassification": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-ambiguous-notation-07",
+      "category": "ambiguous-notation",
+      "parameter": 7,
+      "raw": "1/2x = 3",
+      "expectedClassification": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-ambiguous-notation-08",
+      "category": "ambiguous-notation",
+      "parameter": 8,
+      "raw": "1/2x = 3",
+      "expectedClassification": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-ambiguous-notation-09",
+      "category": "ambiguous-notation",
+      "parameter": 9,
+      "raw": "1/2x = 3",
+      "expectedClassification": "ambiguous",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-malformed-expression-00",
+      "category": "malformed-expression",
+      "parameter": 0,
+      "raw": "\\frac{x+1}{",
+      "expectedClassification": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-malformed-expression-01",
+      "category": "malformed-expression",
+      "parameter": 1,
+      "raw": "\\frac{x+1}{",
+      "expectedClassification": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-malformed-expression-02",
+      "category": "malformed-expression",
+      "parameter": 2,
+      "raw": "\\frac{x+1}{",
+      "expectedClassification": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-malformed-expression-03",
+      "category": "malformed-expression",
+      "parameter": 3,
+      "raw": "\\frac{x+1}{",
+      "expectedClassification": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-malformed-expression-04",
+      "category": "malformed-expression",
+      "parameter": 4,
+      "raw": "\\frac{x+1}{",
+      "expectedClassification": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-malformed-expression-05",
+      "category": "malformed-expression",
+      "parameter": 5,
+      "raw": "\\frac{x+1}{",
+      "expectedClassification": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-malformed-expression-06",
+      "category": "malformed-expression",
+      "parameter": 6,
+      "raw": "\\frac{x+1}{",
+      "expectedClassification": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-malformed-expression-07",
+      "category": "malformed-expression",
+      "parameter": 7,
+      "raw": "\\frac{x+1}{",
+      "expectedClassification": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-malformed-expression-08",
+      "category": "malformed-expression",
+      "parameter": 8,
+      "raw": "\\frac{x+1}{",
+      "expectedClassification": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-malformed-expression-09",
+      "category": "malformed-expression",
+      "parameter": 9,
+      "raw": "\\frac{x+1}{",
+      "expectedClassification": "malformed",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-valid-supported-adapter-00",
+      "category": "valid-supported-adapter",
+      "parameter": 0,
+      "raw": "f'(x) = 2x^1",
+      "expectedClassification": "verified",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-valid-supported-adapter-01",
+      "category": "valid-supported-adapter",
+      "parameter": 1,
+      "raw": "f'(x) = 4x^3",
+      "expectedClassification": "verified",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-valid-supported-adapter-02",
+      "category": "valid-supported-adapter",
+      "parameter": 2,
+      "raw": "f'(x) = 6x^5",
+      "expectedClassification": "verified",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-valid-supported-adapter-03",
+      "category": "valid-supported-adapter",
+      "parameter": 3,
+      "raw": "f'(x) = 8x^7",
+      "expectedClassification": "verified",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-valid-supported-adapter-04",
+      "category": "valid-supported-adapter",
+      "parameter": 4,
+      "raw": "f'(x) = 10x^9",
+      "expectedClassification": "verified",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-valid-supported-adapter-05",
+      "category": "valid-supported-adapter",
+      "parameter": 5,
+      "raw": "f'(x) = 12x^11",
+      "expectedClassification": "verified",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-valid-supported-adapter-06",
+      "category": "valid-supported-adapter",
+      "parameter": 6,
+      "raw": "f'(x) = 14x^13",
+      "expectedClassification": "verified",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-valid-supported-adapter-07",
+      "category": "valid-supported-adapter",
+      "parameter": 7,
+      "raw": "f'(x) = 16x^15",
+      "expectedClassification": "verified",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-valid-supported-adapter-08",
+      "category": "valid-supported-adapter",
+      "parameter": 8,
+      "raw": "f'(x) = 18x^17",
+      "expectedClassification": "verified",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    },
+    {
+      "id": "d5-adv-valid-supported-adapter-09",
+      "category": "valid-supported-adapter",
+      "parameter": 9,
+      "raw": "f'(x) = 20x^19",
+      "expectedClassification": "verified",
+      "expectedFirstInvalidStep": null,
+      "labelAuthority": "independently authored before adapter tuning"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+[
+ {
+  "caseId": "e6-251",
+  "verdict": "verified",
+  "firstInvalidStep": null,
+  "reasoning": "The posed function (x^2-4)/(x-2) has real domain x!=2. On it (x-2)(x+2)/(x-2)=x+2 is valid because the cancelled factor is nonzero there. The right side x+2 has a larger natural domain, but the equality holds on the whole posed domain, so no stated restriction is needed. Writing f for f(x) is harmless shorthand. The derivative is 1 on x!=2, which is the requested answer on the posed domain.",
+  "contestable": true,
+  "contestableWhy": "A very strict grader might want 'x != 2' stated, or read the shorthand 'f' as ambiguous, but both readings give the same result.",
+  "domainCategory": "restricted-domain-equality"
+ }
+]

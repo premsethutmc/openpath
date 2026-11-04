@@ -1,0 +1,3399 @@
+{
+ "benchmark": "openpath-e3-verification-closure",
+ "version": "1",
+ "cases": [
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "6x + 1 = 7x + 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "6x + 1 = 7x + 4\n-x = 5\nx = -3"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-000",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "4x + 8 = 2x + 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "4x + 8 = 2x + 4\n2x = 12\nx = -2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-001",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "4x + 7 = 5x + 5"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "4x + 7 = 5x + 5\n-x + 7 = 5\n-x = 12\nx = 2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-002",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "4(x + 1) = 16"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "4(x + 1) = 16\n4x + 1 = 16\nx = 3"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-003",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "5(x + 4) = 50"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "5(x + 4) = 50\n5x + 4 = 50\nx = 6"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-004",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "4(x + 6) = 32"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "4(x + 6) = 32\n4x + 6 = 32\nx = 2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-005",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 + 8x + 12 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 + 8x + 12 = 0\n(x + 4)(x - 3) = 0\nx = -6 or x = -2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-006",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - 3x - 4 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - 3x - 4 = 0\n(x - 6)(x - 5) = 0\nx = -1 or x = 4"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-007",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - 4x + 3 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - 4x + 3 = 0\n(x + 2)(x - 4) = 0\nx = 1 or x = 3"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-008",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "2x + 4x - 3 = 21"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "2x + 4x - 3 = 21\n8x - 3 = 21\nx = 4"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-009",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "5x + 2x - 5 = 30"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "5x + 2x - 5 = 30\n10x - 5 = 30\n7x = 35\nx = 5"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-010",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "5x + 6x - 5 = 17"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "5x + 6x - 5 = 17\n30x - 5 = 17\n11x = 22\nx = 2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-011",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "7x = 56"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "7x = 56\nx = 49\nx = 8"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-012",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "-2x < 12"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "-2x < 12\nx < -6\nx > -6"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-013",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "invalid-intermediate-correct-final",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "-5x < 5"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "-5x < 5\nx < -1\nx > -1"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "invalid",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-014",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "4x + 3 = 7x + 8"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "4x + 3 = 7x + 8\n-3x = 5\nx = -5/3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-015",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "3(x + 4) + 2 = 23"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3(x + 4) + 2 = 23\n3x + 12 + 2 = 23\n3x + 14 = 23\n3x = 9\nx = 3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-016",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "3(x + 5) + 1 = 34"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3(x + 5) + 1 = 34\n3x + 15 + 1 = 34\n3x + 16 = 34\n3x = 18\nx = 6"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-017",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - 8x + 7 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - 8x + 7 = 0\n(x - 7)(x - 1) = 0\nx = 1 or x = 7"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-018",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 + 8x + 7 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 + 8x + 7 = 0\n(x + 1)(x + 7) = 0\nx = -1 or x = -7"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-019",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "5x + 6 < 11"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "5x + 6 < 11\n5x < 5\nx < 1"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-020",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "5x + 2 > 22"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "5x + 2 > 22\n5x > 20\nx > 4"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-021",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "2x + 5 <= 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "2x + 5 <= 1\n2x <= -4\nx <= -2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-022",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "-2x < 8"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "-2x < 8\nx > -4"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-023",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "4x + 5x - 2 = 16"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "4x + 5x - 2 = 16\n9x - 2 = 16\n9x = 18\nx = 2"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-024",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "2x + 4x - 9 = 9"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "2x + 4x - 9 = 9\n6x - 9 = 9\n6x = 18\nx = 3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-025",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "3x + 4x - 6 = 36"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3x + 4x - 6 = 36\n7x - 6 = 36\n7x = 42\nx = 6"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-026",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "5x + 6x - 2 = 64"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "5x + 6x - 2 = 64\n11x - 2 = 64\n11x = 66\nx = 6"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-027",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x = 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x = 4\ny = 4x + 1\ny = 17"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "valid",
+     "valid"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "beyond-scope",
+    "derivation": "y=kx+1 with x=v gives y=kv+1"
+   },
+   "id": "e3-sealed-028",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "valid-alternative-path",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x = 6"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x = 6\ny = 5x + 1\ny = 31"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "valid",
+     "valid"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": true,
+    "coverage": "beyond-scope",
+    "derivation": "y=kx+1 with x=v gives y=kv+1"
+   },
+   "id": "e3-sealed-029",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x - 5)^2 = 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x - 5)^2 = 4\nx - 5 = 2\nx = 7"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "narrowing",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "x-a=-k branch lost"
+   },
+   "id": "e3-sealed-030",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 = 5x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 = 5x\nx = 5"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "narrowing"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-031",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 = 6x"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 = 6x\nx = 6"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "narrowing"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-032",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(2x + 3) = x - 6"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(2x + 3) = x - 6\n2x + 3 = (x - 6)^2\nx^2 - 14x + 33 = 0\n(x - 3)(x - 11) = 0\nx = 3 or x = 11"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [
+     "given",
+     "widening",
+     "equivalent",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-033",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(2x + 6) = x - 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(2x + 6) = x - 1\n2x + 6 = (x - 1)^2\nx^2 - 4x - 5 = 0\n(x + 1)(x - 5) = 0\nx = -1 or x = 5"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [
+     "given",
+     "widening",
+     "equivalent",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-034",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(4x - 3) = x - 6"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(4x - 3) = x - 6\n4x - 3 = (x - 6)^2\nx^2 - 16x + 39 = 0\n(x - 3)(x - 13) = 0\nx = 3 or x = 13"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [
+     "given",
+     "widening",
+     "equivalent",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-035",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(2x + 1) = x - 1"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(2x + 1) = x - 1\n2x + 1 = (x - 1)^2\nx^2 - 4x = 0\n(x - 0)(x - 4) = 0\nx = 0 or x = 4"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [
+     "given",
+     "widening",
+     "equivalent",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-036",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "sqrt(4x + 5) = x - 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "sqrt(4x + 5) = x - 4\n4x + 5 = (x - 4)^2\nx^2 - 12x + 11 = 0\n(x - 1)(x - 11) = 0\nx = 1 or x = 11"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     4
+    ],
+    "firstInvalidStep": 4,
+    "lineRelations": [
+     "given",
+     "widening",
+     "equivalent",
+     "equivalent",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-037",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 16)/(x - 4) = x + 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 16)/(x - 4) = x + 4\nTherefore this holds for all real x"
+   },
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "claim-without-restriction"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "identity fails at the excluded value"
+   },
+   "id": "e3-sealed-038",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 5x)/x = x - 5"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 5x)/x = x - 5\nx - 5 = x - 5\nTherefore this holds for every real x"
+   },
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "claim-without-restriction",
+     "claim-without-restriction"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "identity fails at the excluded value"
+   },
+   "id": "e3-sealed-039",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 36)/(x - 6) = x + 6"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 36)/(x - 6) = x + 6\nTherefore this holds for all real x"
+   },
+   "reference": {
+    "classification": "missing-assumption",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "claim-without-restriction"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "identity fails at the excluded value"
+   },
+   "id": "e3-sealed-040",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "(x^2 - 25)/(x - 5) = 10"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "(x^2 - 25)/(x - 5) = 10\nx + 5 = 10\nx = 5"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [
+     "given",
+     "widening",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-041",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "|x - 0| = 6"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "|x - 0| = 6\nx = 6"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "narrowing"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-042",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "|x - 4| = 4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "|x - 4| = 4\nx = 8"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "narrowing"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-043",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "missing-restriction-or-branch",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "6 - 4x > -2"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "6 - 4x > -2\n-4x > -8\nx > 2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     2
+    ],
+    "firstInvalidStep": 2,
+    "lineRelations": [
+     "given",
+     "equivalent",
+     "invalid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-044",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "unsupported-line-insertion",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "5x + 4 = 19"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "5x + 4 = 19\n5! = 100\n5x = 15\nx = 3"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "false-unsupported",
+     "valid",
+     "valid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-045",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "unsupported-line-insertion",
+   "area": "complex",
+   "problem": {
+    "domain": "complex-polynomial",
+    "area": "arithmetic",
+    "task": "modulus",
+    "data": {
+     "a": {
+      "re": "5",
+      "im": "12"
+     }
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "z = 5 + 12i\n|-3| = -3\n|z| = 13"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "false-unsupported",
+     "valid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-046",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "unsupported-line-insertion",
+   "area": "statistics",
+   "problem": {
+    "domain": "probability-statistics",
+    "area": "statistics",
+    "task": "mean",
+    "data": {
+     "values": [
+      "8",
+      "6",
+      "1"
+     ]
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "mean = (8+6+1)/3\ngcd(12, 18) = 4\nmean = 5"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "false-unsupported",
+     "valid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-047",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "unsupported-line-insertion",
+   "area": "matrices",
+   "problem": {
+    "domain": "linear-algebra",
+    "area": "matrix",
+    "task": "determinant",
+    "data": {
+     "a": [
+      [
+       "5",
+       "2"
+      ],
+      [
+       "4",
+       "2"
+      ]
+     ]
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "A = [[5,2],[4,2]]\nsin(0) = 1\ndet(A) = 2"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "false-unsupported",
+     "valid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-048",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "unsupported-line-insertion",
+   "area": "statistics",
+   "problem": {
+    "domain": "probability-statistics",
+    "area": "statistics",
+    "task": "mean",
+    "data": {
+     "values": [
+      "2",
+      "2",
+      "8"
+     ]
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "mean = (2+2+8)/3\ncos(0) = 0\nmean = 4"
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "given",
+     "false-unsupported",
+     "valid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-049",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "unsupported-line-insertion",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "5x + 2 = 22"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "5x + 2 = 22\ne^0 = 1\n5x = 20\nx = 4"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "true-unsupported",
+     "valid",
+     "valid"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "beyond-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-050",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "unsupported-line-insertion",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "5x + 4 = 19"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "5x + 4 = 19\ntan(0) = 0\n5x = 15\nx = 3"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "true-unsupported",
+     "valid",
+     "valid"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "beyond-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-051",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "unsupported-line-insertion",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "2x + 4 = 14"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "2x + 4 = 14\nsqrt(16) = 4\n2x = 10\nx = 5"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "true-unsupported",
+     "valid",
+     "valid"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "beyond-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-052",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "unsupported-line-insertion",
+   "area": "functions",
+   "problem": {
+    "domain": "function",
+    "task": "evaluate",
+    "f": {
+     "kind": "polynomial",
+     "coefficients": [
+      "3",
+      "2",
+      "1"
+     ]
+    },
+    "input": "4"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "f(x) = x^2 + 2x + 3\n(-2)^2 = 4\nf(4) = 27"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "true-unsupported",
+     "valid"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "beyond-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-053",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "unsupported-line-insertion",
+   "area": "statistics",
+   "problem": {
+    "domain": "probability-statistics",
+    "area": "statistics",
+    "task": "mean",
+    "data": {
+     "values": [
+      "4",
+      "8",
+      "3"
+     ]
+    }
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "mean = (4+8+3)/3\n2^10 = 1024\nmean = 5"
+   },
+   "reference": {
+    "classification": "verified",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "true-unsupported",
+     "valid"
+    ],
+    "mustNotVerify": false,
+    "complete": true,
+    "alternativeMethodValid": false,
+    "coverage": "beyond-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-054",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "correct-but-incomplete",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "4x + 4 = 32"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "4x + 4 = 32\n4x = 28"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-055",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "correct-but-incomplete",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "5x + 6 = 36"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "5x + 6 = 36\n5x = 30"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-056",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "correct-but-incomplete",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "3x + 7 = 19"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3x + 7 = 19\n3x = 12"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-057",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "correct-but-incomplete",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "4x + 1 = 5"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "4x + 1 = 5\n4x = 4"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-058",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "correct-but-incomplete",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - 7x + 12 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - 7x + 12 = 0\n(x - 3)(x - 4) = 0"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-059",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "correct-but-incomplete",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "x^2 - 11x + 30 = 0"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "x^2 - 11x + 30 = 0\n(x - 5)(x - 6) = 0"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-060",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "correct-but-incomplete",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "5x + 3 < 8"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "5x + 3 < 8\n5x < 5"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-061",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "correct-but-incomplete",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "4x + 7 < 15"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "4x + 7 < 15\n4x < 8"
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "equivalent"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "oracle-derived over rational grid k/12"
+   },
+   "id": "e3-sealed-062",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "problem": {
+    "domain": "d3-cross-domain",
+    "stages": [
+     {
+      "id": "source",
+      "problem": {
+       "domain": "probability-statistics",
+       "area": "combinatorics",
+       "task": "factorial",
+       "data": {
+        "n": 6,
+        "r": 3,
+        "a": 3,
+        "b": 5,
+        "intersection": 2
+       },
+       "assumptions": []
+      },
+      "dependsOn": [],
+      "exports": [
+       {
+        "id": "count",
+        "mathematicalType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        },
+        "source": {
+         "workingPath": [
+          "1",
+          "result"
+         ],
+         "proofStepId": "s1"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": []
+       }
+      ]
+     },
+     {
+      "id": "destination",
+      "problem": {
+       "domain": "linear-algebra",
+       "area": "vector",
+       "task": "scalar-multiply",
+       "data": {
+        "a": [
+         "1",
+         "2",
+         "3"
+        ],
+        "scalar": {
+         "kind": "binding-reference",
+         "bindingId": "count",
+         "expectedType": "exact-scalar",
+         "symbol": {
+          "name": "n",
+          "scope": "problem"
+         }
+        }
+       },
+       "assumptions": []
+      },
+      "dependsOn": [
+       "source"
+      ],
+      "imports": [
+       {
+        "bindingId": "count",
+        "expectedType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "studentWorking": {
+    "stages": [
+     {
+      "id": "source",
+      "working": [
+       {
+        "id": "s0",
+        "rule": "direct",
+        "result": {
+         "kind": "integer",
+         "value": "721"
+        },
+        "dependencies": []
+       },
+       {
+        "id": "s1",
+        "rule": "direct",
+        "result": {
+         "kind": "integer",
+         "value": "720"
+        },
+        "dependencies": [
+         "s0"
+        ]
+       }
+      ]
+     },
+     {
+      "id": "destination",
+      "working": [
+       {
+        "id": "s0",
+        "rule": "component-wise",
+        "result": {
+         "kind": "vector",
+         "value": [
+          "720",
+          "1440",
+          "2160"
+         ]
+        },
+        "dependencies": []
+       }
+      ]
+     }
+    ]
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     0
+    ],
+    "firstInvalidStep": 0,
+    "lineRelations": [
+     "unverified-first"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "unverified-first: n=6, n!=720"
+   },
+   "id": "e3-sealed-063",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "problem": {
+    "domain": "d3-cross-domain",
+    "stages": [
+     {
+      "id": "source",
+      "problem": {
+       "domain": "probability-statistics",
+       "area": "combinatorics",
+       "task": "factorial",
+       "data": {
+        "n": 7,
+        "r": 3,
+        "a": 3,
+        "b": 5,
+        "intersection": 2
+       },
+       "assumptions": []
+      },
+      "dependsOn": [],
+      "exports": [
+       {
+        "id": "count",
+        "mathematicalType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        },
+        "source": {
+         "workingPath": [
+          "0",
+          "result"
+         ],
+         "proofStepId": "s0"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": []
+       }
+      ]
+     },
+     {
+      "id": "destination",
+      "problem": {
+       "domain": "linear-algebra",
+       "area": "vector",
+       "task": "scalar-multiply",
+       "data": {
+        "a": [
+         "1",
+         "2",
+         "3"
+        ],
+        "scalar": {
+         "kind": "binding-reference",
+         "bindingId": "count",
+         "expectedType": "exact-scalar",
+         "symbol": {
+          "name": "n",
+          "scope": "problem"
+         }
+        }
+       },
+       "assumptions": []
+      },
+      "dependsOn": [
+       "source"
+      ],
+      "imports": [
+       {
+        "bindingId": "count",
+        "expectedType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "studentWorking": {
+    "stages": [
+     {
+      "id": "source",
+      "working": [
+       {
+        "id": "s0",
+        "rule": "direct",
+        "result": {
+         "kind": "integer",
+         "value": "5040"
+        },
+        "dependencies": []
+       }
+      ]
+     },
+     {
+      "id": "destination",
+      "working": [
+       {
+        "id": "s0",
+        "rule": "component-wise",
+        "result": {
+         "kind": "vector",
+         "value": [
+          "5042",
+          "10084",
+          "15126"
+         ]
+        },
+        "dependencies": []
+       }
+      ]
+     }
+    ]
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "wrong-scalar"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "wrong-scalar: n=7, n!=5040"
+   },
+   "id": "e3-sealed-064",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "problem": {
+    "domain": "d3-cross-domain",
+    "stages": [
+     {
+      "id": "source",
+      "problem": {
+       "domain": "probability-statistics",
+       "area": "combinatorics",
+       "task": "factorial",
+       "data": {
+        "n": 3,
+        "r": 3,
+        "a": 3,
+        "b": 5,
+        "intersection": 2
+       },
+       "assumptions": []
+      },
+      "dependsOn": [],
+      "exports": [
+       {
+        "id": "count",
+        "mathematicalType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        },
+        "source": {
+         "workingPath": [
+          "0",
+          "result"
+         ],
+         "proofStepId": "s0"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": []
+       }
+      ]
+     },
+     {
+      "id": "destination",
+      "problem": {
+       "domain": "linear-algebra",
+       "area": "vector",
+       "task": "scalar-multiply",
+       "data": {
+        "a": [
+         "1",
+         "2",
+         "3"
+        ],
+        "scalar": {
+         "kind": "binding-reference",
+         "bindingId": "count",
+         "expectedType": "exact-scalar",
+         "symbol": {
+          "name": "n",
+          "scope": "problem"
+         }
+        }
+       },
+       "assumptions": []
+      },
+      "dependsOn": [
+       "source"
+      ],
+      "imports": [
+       {
+        "bindingId": "count",
+        "expectedType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "studentWorking": {
+    "stages": [
+     {
+      "id": "source",
+      "working": [
+       {
+        "id": "s0",
+        "rule": "direct",
+        "result": {
+         "kind": "integer",
+         "value": "6"
+        },
+        "dependencies": []
+       }
+      ]
+     },
+     {
+      "id": "destination",
+      "working": [
+       {
+        "id": "s0",
+        "rule": "component-wise",
+        "result": {
+         "kind": "vector",
+         "value": [
+          "11",
+          "22",
+          "33"
+         ]
+        },
+        "dependencies": []
+       }
+      ]
+     }
+    ]
+   },
+   "reference": {
+    "classification": "invalid",
+    "firstInvalidAcceptable": [
+     1
+    ],
+    "firstInvalidStep": 1,
+    "lineRelations": [
+     "wrong-scalar"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "wrong-scalar: n=3, n!=6"
+   },
+   "id": "e3-sealed-065",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "problem": {
+    "domain": "d3-cross-domain",
+    "stages": [
+     {
+      "id": "source",
+      "problem": {
+       "domain": "probability-statistics",
+       "area": "combinatorics",
+       "task": "factorial",
+       "data": {
+        "n": 7,
+        "r": 3,
+        "a": 3,
+        "b": 5,
+        "intersection": 2
+       },
+       "assumptions": []
+      },
+      "dependsOn": [],
+      "exports": [
+       {
+        "id": "count",
+        "mathematicalType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        },
+        "source": {
+         "workingPath": [
+          "0",
+          "result"
+         ],
+         "proofStepId": "s9"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": []
+       }
+      ]
+     },
+     {
+      "id": "destination",
+      "problem": {
+       "domain": "linear-algebra",
+       "area": "vector",
+       "task": "scalar-multiply",
+       "data": {
+        "a": [
+         "1",
+         "2",
+         "3"
+        ],
+        "scalar": {
+         "kind": "binding-reference",
+         "bindingId": "count",
+         "expectedType": "exact-scalar",
+         "symbol": {
+          "name": "n",
+          "scope": "problem"
+         }
+        }
+       },
+       "assumptions": []
+      },
+      "dependsOn": [
+       "source"
+      ],
+      "imports": [
+       {
+        "bindingId": "count",
+        "expectedType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "studentWorking": {
+    "stages": [
+     {
+      "id": "source",
+      "working": [
+       {
+        "id": "s0",
+        "rule": "direct",
+        "result": {
+         "kind": "integer",
+         "value": "5040"
+        },
+        "dependencies": []
+       }
+      ]
+     },
+     {
+      "id": "destination",
+      "working": [
+       {
+        "id": "s0",
+        "rule": "component-wise",
+        "result": {
+         "kind": "vector",
+         "value": [
+          "5040",
+          "10080",
+          "15120"
+         ]
+        },
+        "dependencies": []
+       }
+      ]
+     }
+    ]
+   },
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "forged-step"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "forged-step: n=7, n!=5040"
+   },
+   "id": "e3-sealed-066",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "problem": {
+    "domain": "d3-cross-domain",
+    "stages": [
+     {
+      "id": "source",
+      "problem": {
+       "domain": "probability-statistics",
+       "area": "combinatorics",
+       "task": "factorial",
+       "data": {
+        "n": 5,
+        "r": 3,
+        "a": 3,
+        "b": 5,
+        "intersection": 2
+       },
+       "assumptions": []
+      },
+      "dependsOn": [],
+      "exports": [
+       {
+        "id": "count",
+        "mathematicalType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        },
+        "source": {
+         "workingPath": [
+          "0",
+          "result"
+         ],
+         "proofStepId": "s0"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": []
+       }
+      ]
+     },
+     {
+      "id": "destination",
+      "problem": {
+       "domain": "linear-algebra",
+       "area": "vector",
+       "task": "scalar-multiply",
+       "data": {
+        "a": [
+         "1",
+         "2",
+         "3"
+        ],
+        "scalar": {
+         "kind": "binding-reference",
+         "bindingId": "count",
+         "expectedType": "exact-scalar",
+         "symbol": {
+          "name": "n",
+          "scope": "problem"
+         }
+        }
+       },
+       "assumptions": []
+      },
+      "dependsOn": [
+       "source"
+      ],
+      "imports": [
+       {
+        "bindingId": "count",
+        "expectedType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "studentWorking": {
+    "stages": [
+     {
+      "id": "destination",
+      "working": [
+       {
+        "id": "s0",
+        "rule": "component-wise",
+        "result": {
+         "kind": "vector",
+         "value": [
+          "120",
+          "240",
+          "360"
+         ]
+        },
+        "dependencies": []
+       }
+      ]
+     }
+    ]
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "destination-only"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "destination-only: n=5, n!=120"
+   },
+   "id": "e3-sealed-067",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "problem": {
+    "domain": "d3-cross-domain",
+    "stages": [
+     {
+      "id": "source",
+      "problem": {
+       "domain": "probability-statistics",
+       "area": "combinatorics",
+       "task": "factorial",
+       "data": {
+        "n": 4,
+        "r": 3,
+        "a": 3,
+        "b": 5,
+        "intersection": 2
+       },
+       "assumptions": []
+      },
+      "dependsOn": [],
+      "exports": [
+       {
+        "id": "count",
+        "mathematicalType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        },
+        "source": {
+         "workingPath": [
+          "0",
+          "result"
+         ],
+         "proofStepId": "s0"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": []
+       }
+      ]
+     },
+     {
+      "id": "destination",
+      "problem": {
+       "domain": "linear-algebra",
+       "area": "vector",
+       "task": "scalar-multiply",
+       "data": {
+        "a": [
+         "1",
+         "2",
+         "3"
+        ],
+        "scalar": {
+         "kind": "binding-reference",
+         "bindingId": "count",
+         "expectedType": "exact-scalar",
+         "symbol": {
+          "name": "n",
+          "scope": "problem"
+         }
+        }
+       },
+       "assumptions": []
+      },
+      "dependsOn": [
+       "source"
+      ],
+      "imports": [
+       {
+        "bindingId": "count",
+        "expectedType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "studentWorking": {
+    "stages": [
+     {
+      "id": "destination",
+      "working": [
+       {
+        "id": "s0",
+        "rule": "component-wise",
+        "result": {
+         "kind": "vector",
+         "value": [
+          "24",
+          "48",
+          "72"
+         ]
+        },
+        "dependencies": []
+       }
+      ]
+     }
+    ]
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "destination-only"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "destination-only: n=4, n!=24"
+   },
+   "id": "e3-sealed-068",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "cross-domain-binding-failure",
+   "area": "cross-domain",
+   "problem": {
+    "domain": "d3-cross-domain",
+    "stages": [
+     {
+      "id": "source",
+      "problem": {
+       "domain": "probability-statistics",
+       "area": "combinatorics",
+       "task": "factorial",
+       "data": {
+        "n": 7,
+        "r": 3,
+        "a": 3,
+        "b": 5,
+        "intersection": 2
+       },
+       "assumptions": []
+      },
+      "dependsOn": [],
+      "exports": [
+       {
+        "id": "count",
+        "mathematicalType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        },
+        "source": {
+         "workingPath": [
+          "0",
+          "result"
+         ],
+         "proofStepId": "s0"
+        },
+        "assumptions": [],
+        "domainRestrictions": [],
+        "outstandingObligations": []
+       }
+      ]
+     },
+     {
+      "id": "destination",
+      "problem": {
+       "domain": "linear-algebra",
+       "area": "vector",
+       "task": "scalar-multiply",
+       "data": {
+        "a": [
+         "1",
+         "2",
+         "3"
+        ],
+        "scalar": {
+         "kind": "binding-reference",
+         "bindingId": "count",
+         "expectedType": "exact-scalar",
+         "symbol": {
+          "name": "n",
+          "scope": "problem"
+         }
+        }
+       },
+       "assumptions": []
+      },
+      "dependsOn": [
+       "source"
+      ],
+      "imports": [
+       {
+        "bindingId": "count",
+        "expectedType": "exact-scalar",
+        "symbol": {
+         "name": "n",
+         "scope": "problem"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   "studentWorking": {
+    "stages": [
+     {
+      "id": "source",
+      "working": []
+     },
+     {
+      "id": "destination",
+      "working": [
+       {
+        "id": "s0",
+        "rule": "component-wise",
+        "result": {
+         "kind": "vector",
+         "value": [
+          "5040",
+          "10080",
+          "15120"
+         ]
+        },
+        "dependencies": []
+       }
+      ]
+     }
+    ]
+   },
+   "reference": {
+    "classification": "incomplete",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "empty-source"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "empty-source: n=7, n!=5040"
+   },
+   "id": "e3-sealed-069",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "ambiguous-or-malformed-line",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "2x + 1 = 13"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "2x + 1 = 13\nx + + 2 = 5\n2x = 12\nx = 6"
+   },
+   "reference": {
+    "classification": "malformed",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "malformed",
+     "valid",
+     "valid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "inserted line is not a unique well-formed statement"
+   },
+   "id": "e3-sealed-070",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "ambiguous-or-malformed-line",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "3x + 3 = 12"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "3x + 3 = 12\n2/3x = 6\n3x = 9\nx = 3"
+   },
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "ambiguous",
+     "valid",
+     "valid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "inserted line is not a unique well-formed statement"
+   },
+   "id": "e3-sealed-071",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "ambiguous-or-malformed-line",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "2x + 1 = 11"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "2x + 1 = 11\nx/2y = 1\n2x = 10\nx = 5"
+   },
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "ambiguous",
+     "valid",
+     "valid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "inserted line is not a unique well-formed statement"
+   },
+   "id": "e3-sealed-072",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "ambiguous-or-malformed-line",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "4x + 5 = 29"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "4x + 5 = 29\n12/3(2) = 8\n4x = 24\nx = 6"
+   },
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "ambiguous",
+     "valid",
+     "valid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "inserted line is not a unique well-formed statement"
+   },
+   "id": "e3-sealed-073",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  },
+  {
+   "category": "ambiguous-or-malformed-line",
+   "area": "algebra",
+   "problem": {
+    "domain": "algebra",
+    "statement": "4x + 1 = 17"
+   },
+   "studentWorking": {
+    "format": "natural",
+    "text": "4x + 1 = 17\n6/2(1 + 2) = 9\n4x = 16\nx = 4"
+   },
+   "reference": {
+    "classification": "ambiguous",
+    "firstInvalidAcceptable": [],
+    "firstInvalidStep": null,
+    "lineRelations": [
+     "given",
+     "ambiguous",
+     "valid",
+     "valid"
+    ],
+    "mustNotVerify": true,
+    "complete": false,
+    "alternativeMethodValid": false,
+    "coverage": "in-scope",
+    "derivation": "inserted line is not a unique well-formed statement"
+   },
+   "id": "e3-sealed-074",
+   "partition": "sealed-holdout",
+   "provenance": {
+    "kind": "independently-authored",
+    "license": "CC0-1.0",
+    "oracle": "independent exact rational-grid oracle (generate_corpus.py); no OpenPath code"
+   }
+  }
+ ]
+}

@@ -1,0 +1,938 @@
+# Subtest: golden cases were generated for this curriculum
+ok 1 - golden cases were generated for this curriculum
+# Subtest: session: right_first_time_in_all_three_rounds
+ok 2 - session: right_first_time_in_all_three_rounds
+# Subtest: session: takes_every_apple_then_fixes_it_after_a_hint
+ok 3 - session: takes_every_apple_then_fixes_it_after_a_hint
+# Subtest: session: misses_numerals_but_matches_a_pictured_set
+ok 4 - session: misses_numerals_but_matches_a_pictured_set
+# Subtest: session: misses_everything_so_numeral_reading_stays_unjudged
+ok 5 - session: misses_everything_so_numeral_reading_stays_unjudged
+# Subtest: session: overshoots_and_self_corrects_before_checking
+ok 6 - session: overshoots_and_self_corrects_before_checking
+# Subtest: session: adds_a_wrong_fruit_then_fixes_it
+ok 7 - session: adds_a_wrong_fruit_then_fixes_it
+# Subtest: session: never_checks_so_there_is_no_evidence
+ok 8 - session: never_checks_so_there_is_no_evidence
+# Subtest: session: tampered_check_is_rejected
+ok 9 - session: tampered_check_is_rejected
+# Subtest: session: completion_without_a_correct_check_is_rejected
+ok 10 - session: completion_without_a_correct_check_is_rejected
+# Subtest: history: no_sessions_yet
+ok 11 - history: no_sessions_yet
+# Subtest: history: one_perfect_session
+ok 12 - history: one_perfect_session
+# Subtest: history: two_perfect_sessions_on_the_same_day
+ok 13 - history: two_perfect_sessions_on_the_same_day
+# Subtest: history: two_perfect_sessions_three_days_apart
+ok 14 - history: two_perfect_sessions_three_days_apart
+# Subtest: history: the_same_five_apples_every_time
+ok 15 - history: the_same_five_apples_every_time
+# Subtest: history: only_ever_succeeds_with_help
+ok 16 - history: only_ever_succeeds_with_help
+# Subtest: history: retained_then_slips_twice
+ok 17 - history: retained_then_slips_twice
+# Subtest: history: one_slip_among_many_successes
+ok 18 - history: one_slip_among_many_successes
+# Subtest: event order follows seq, not arrival order
+ok 19 - event order follows seq, not arrival order
+# Subtest: AC-1 a pupil's record goes to the server event by event, in order, and comes back identical on another device
+ok 20 - AC-1 a pupil's record goes to the server event by event, in order, and comes back identical on another device
+# Subtest: AC-2 another parent cannot open the pupil, and two devices cannot interleave events
+ok 21 - AC-2 another parent cannot open the pupil, and two devices cannot interleave events
+# Subtest: AC-3 historical replay: a record made by the PR \#24 app, imported into an account, gives exactly the same results
+ok 22 - AC-3 historical replay: a record made by the PR \#24 app, imported into an account, gives exactly the same results
+# Subtest: AC-4 a lesson and a confirming check through the server keep teaching and independent evidence apart
+ok 23 - AC-4 a lesson and a confirming check through the server keep teaching and independent evidence apart
+# Subtest: MB-1 everything comes from the text: words, sentences, choices and answers; the same text gives the same activities
+ok 24 - MB-1 everything comes from the text: words, sentences, choices and answers; the same text gives the same activities
+# Subtest: MB-2 names: written with a capital mid-sentence, never in lower case, used twice; titles and days are not names
+ok 25 - MB-2 names: written with a capital mid-sentence, never in lower case, used twice; titles and days are not names
+# Subtest: MB-3 a short or empty text gives no activities, and says why
+ok 26 - MB-3 a short or empty text gives no activities, and says why
+# Subtest: MB-4 nothing reaches the learner until approved; approvals are for this exact text; spelling uses the shared engine
+ok 27 - MB-4 nothing reaches the learner until approved; approvals are for this exact text; spelling uses the shared engine
+# Subtest: MB-5 a learner in a parent account keeps books with their record; limits; no My Books in a pilot build
+ok 28 - MB-5 a learner in a parent account keeps books with their record; limits; no My Books in a pilot build
+# Subtest: MB-6 quality (rule version 2): accurate skill labels and none of the known giveaways, on two different stories
+ok 29 - MB-6 quality (rule version 2): accurate skill labels and none of the known giveaways, on two different stories
+# Subtest: MB-7 one engine for every source: editing or deleting a book never changes the Bee, a list, or answers already given
+ok 30 - MB-7 one engine for every source: editing or deleting a book never changes the Bee, a list, or answers already given
+# Subtest: MB-8 deleting a book removes its text, approvals and activities from the stored record, keeps answers without its words, and changes nothing else
+ok 31 - MB-8 deleting a book removes its text, approvals and activities from the stored record, keeps answers without its words, and changes nothing else
+# Subtest: Api: every request settles: answer, HTTP error, no connection, or the time limit
+ok 32 - Api: every request settles: answer, HTTP error, no connection, or the time limit
+# Subtest: developer access: the outcomes when everything works
+ok 33 - developer access: the outcomes when everything works
+# Subtest: developer access: an older API without the developer routes (the PR \#27 hang) gives a clear error, not a spinner
+ok 34 - developer access: an older API without the developer routes (the PR \#27 hang) gives a clear error, not a spinner
+# Subtest: developer access: rejected, stalled and unreachable requests end in an error with the step that failed
+ok 35 - developer access: rejected, stalled and unreachable requests end in an error with the step that failed
+# Subtest: developer access: a session that ended between the two requests asks to sign in again
+ok 36 - developer access: a session that ended between the two requests asks to sign in again
+# Subtest: every question shown has a trace recorded with it, naming exactly that question and what the engine knew then
+ok 37 - every question shown has a trace recorded with it, naming exactly that question and what the engine knew then
+# Subtest: a plan trace records what Today offered at the moment each session was started
+ok 38 - a plan trace records what Today offered at the moment each session was started
+# Subtest: traces never change the Learner Vector, the profile or the plan
+ok 39 - traces never change the Learner Vector, the profile or the plan
+# Subtest: the diagnosis uses the engine's own numbers: the Learner Vector is leafView, each answer's effect is the ledger's decision
+ok 40 - the diagnosis uses the engine's own numbers: the Learner Vector is leafView, each answer's effect is the ledger's decision
+# Subtest: questions and sessions from before tracing are labelled not recorded, never explained after the fact
+ok 41 - questions and sessions from before tracing are labelled not recorded, never explained after the fact
+# Subtest: reports are read-only: the record, the stored copy and the learner are unchanged
+ok 42 - reports are read-only: the record, the stored copy and the learner are unchanged
+# Subtest: reports are redacted by default: no name, record id, email or flag note; the full version names the pupil
+ok 43 - reports are redacted by default: no name, record id, email or flag note; the full version names the pupil
+# Subtest: plan changes are stated as facts: first suggestion and standings
+ok 44 - plan changes are stated as facts: first suggestion and standings
+# Subtest: telemetry: durations and failures are measured without any answer or name, and a failed save is recorded
+ok 45 - telemetry: durations and failures are measured without any answer or name, and a failed save is recorded
+# Subtest: the doubling journey records its rule planner's decision with each question it shows
+ok 46 - the doubling journey records its rule planner's decision with each question it shows
+# Subtest: redaction works for names in any alphabet and never breaks the JSON
+ok 47 - redaction works for names in any alphabet and never breaks the JSON
+# Subtest: a malformed or foreign event is left out and reported, and cannot break the diagnosis
+ok 48 - a malformed or foreign event is left out and reported, and cannot break the diagnosis
+# Subtest: a trace that cannot be saved never stops the learner
+ok 49 - a trace that cannot be saved never stops the learner
+# Subtest: word counting supports empty, pasted whitespace and exactly fifty sample words without scoring
+ok 50 - word counting supports empty, pasted whitespace and exactly fifty sample words without scoring
+# Subtest: analysis uses explicit scripted sample projections and does not evaluate edited essays
+ok 51 - analysis uses explicit scripted sample projections and does not evaluate edited essays
+# Subtest: different diagnostic answers produce the same prewritten scene, not correctness decisions
+ok 52 - different diagnostic answers produce the same prewritten scene, not correctness decisions
+# Subtest: complete storyboard opens rewrite but never verifies all competencies or updates a real learner
+ok 53 - complete storyboard opens rewrite but never verifies all competencies or updates a real learner
+# Subtest: gates reject empty answers, premature independent work and a non-fifty-word rewrite
+ok 54 - gates reject empty answers, premature independent work and a non-fifty-word rewrite
+# Subtest: unfinished guided response, expanded branch and exact screen survive reload
+ok 55 - unfinished guided response, expanded branch and exact screen survive reload
+# Subtest: interrupted async work does not complete the scene and can safely resume
+ok 56 - interrupted async work does not complete the scene and can safely resume
+# Subtest: simulated loading failure preserves draft and permits retry
+ok 57 - simulated loading failure preserves draft and permits retry
+# Subtest: storage failure is reported and corrupt records are preserved
+ok 58 - storage failure is reported and corrupt records are preserved
+# Subtest: editing an essay invalidates only the fictional walkthrough; reset leaves English data alone
+ok 59 - editing an essay invalidates only the fictional walkthrough; reset leaves English data alone
+# Subtest: verified styling requires a shared-contract policy, never a fixture or a completion click
+ok 60 - verified styling requires a shared-contract policy, never a fixture or a completion click
+# Subtest: published essay-contract@1 types back the fixture profile, journey, evidence and rewrite
+ok 61 - published essay-contract@1 types back the fixture profile, journey, evidence and rewrite
+# Subtest: ESSAY-DIAG two tracks: bank diagnosis confirms, model practice is formative only, verification unavailability is stated, the profile persists
+ok 62 - ESSAY-DIAG two tracks: bank diagnosis confirms, model practice is formative only, verification unavailability is stated, the profile persists
+# Subtest: ESSAY-DIAG without a question writer, bank diagnostics are planned at once and no practice can be generated
+ok 63 - ESSAY-DIAG without a question writer, bank diagnostics are planned at once and no practice can be generated
+# Subtest: ESSAY-LESSONS the lesson programme: completed over sessions, kept after a reload and a second essay, awaiting verification, never a claim
+ok 64 - ESSAY-LESSONS the lesson programme: completed over sessions, kept after a reload and a second essay, awaiting verification, never a claim
+# Subtest: LABELS one label per evidence state; verified mastery only as the engine and policy say; lessons kept apart
+ok 65 - LABELS one label per evidence state; verified mastery only as the engine and policy say; lessons kept apart
+# Subtest: PILOT-JOURNEY the ten stages: what works, what is blocked, what uses recorded evaluator outputs; no mastery is fabricated
+ok 66 - PILOT-JOURNEY the ten stages: what works, what is blocked, what uses recorded evaluator outputs; no mastery is fabricated
+# Subtest: STUDIO-REVIEW a failed delayed check records the review at once, in Karthik's existing journey, without another essay
+ok 67 - STUDIO-REVIEW a failed delayed check records the review at once, in Karthik's existing journey, without another essay
+# Subtest: ESSAY-INT acceptance: essay → observations → diagnosis → profile → steps → rewrite → reload → second essay
+ok 68 - ESSAY-INT acceptance: essay → observations → diagnosis → profile → steps → rewrite → reload → second essay
+# Subtest: ESSAY-INT second essay, wrong again: agreement is taught again with questions never used before
+ok 69 - ESSAY-INT second essay, wrong again: agreement is taught again with questions never used before
+# Subtest: ESSAY-INT a rewrite with no connected evaluator is kept and held, never judged
+ok 70 - ESSAY-INT a rewrite with no connected evaluator is kept and held, never judged
+# Subtest: ESSAY-INT other text goes to the pattern stand-in, labelled as such, through the same validation
+ok 71 - ESSAY-INT other text goes to the pattern stand-in, labelled as such, through the same validation
+# Subtest: ESSAY-INT a pilot build refuses the essay studio before anything is recorded
+ok 72 - ESSAY-INT a pilot build refuses the essay studio before anything is recorded
+# Subtest: ESSAY-INT v2: with the server's evaluator connected, analyses and rewrites go through it and keep their provenance
+ok 73 - ESSAY-INT v2: with the server's evaluator connected, analyses and rewrites go through it and keep their provenance
+# Subtest: ESSAY-INT v2: when the server's evaluator fails, the failure is recorded and the local fallback answers, labelled
+ok 74 - ESSAY-INT v2: when the server's evaluator fails, the failure is recorded and the local fallback answers, labelled
+# Subtest: RETENTION-STUDIO the journey finishes with separate claims; later checks are planned on reserved questions and never offered early
+ok 75 - RETENTION-STUDIO the journey finishes with separate claims; later checks are planned on reserved questions and never offered early
+# Subtest: OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S1): spelling-check answers never change the Learner Vector, though recorded as assessment
+ok 76 - OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S1): spelling-check answers never change the Learner Vector, though recorded as assessment
+# Subtest: OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S2): the spelling check asks every pattern up to two bands above the estimate, however far below
+ok 77 - OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S2): the spelling check asks every pattern up to two bands above the estimate, however far below
+# Subtest: OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S3): with speech available, the check still prefers 'add an ending' over hear-and-type
+ok 78 - OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S3): with speech available, the check still prefers 'add an ending' over hear-and-type
+# Subtest: OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S4): without speech, a definition clue replaces dictation in the spelling check
+ok 79 - OLD FIXED-LIST CHECK, no longer offered, kept so earlier records replay (finding S4): without speech, a definition clue replaces dictation in the spelling check
+# Subtest: CURRENT BEHAVIOUR (finding L5): one tagged wrong answer makes a misconception active
+ok 80 - CURRENT BEHAVIOUR (finding L5): one tagged wrong answer makes a misconception active
+# Subtest: CURRENT BEHAVIOUR (finding L6): unreviewed (candidate) questions can make a skill 'shown'
+ok 81 - CURRENT BEHAVIOUR (finding L6): unreviewed (candidate) questions can make a skill 'shown'
+# Subtest: FIXED (finding D1): report redaction keeps version identifiers such as en@0.2.0, and still removes emails
+ok 82 - FIXED (finding D1): report redaction keeps version identifiers such as en@0.2.0, and still removes emails
+# Subtest: FIXED (finding D2): every spelling session records whether speech was available, switched on, and the voice
+ok 83 - FIXED (finding D2): every spelling session records whether speech was available, switched on, and the voice
+# Subtest: R-1 refreshing in the middle of a lesson and of guided practice: the same step comes back, nothing is lost or added
+ok 84 - R-1 refreshing in the middle of a lesson and of guided practice: the same step comes back, nothing is lost or added
+# Subtest: R-2 leaving for another activity and returning: the journey carries on the same teaching block in a new session
+ok 85 - R-2 leaving for another activity and returning: the journey carries on the same teaching block in a new session
+# Subtest: R-3 running out of unseen assessment questions: a content gap, no mastery, no crash, and reopening adds nothing
+ok 86 - R-3 running out of unseen assessment questions: a content gap, no mastery, no crash, and reopening adds nothing
+# Subtest: R-4 running out of retention questions: the delayed check is reported as a gap; the earlier result stands and is not verified
+ok 87 - R-4 running out of retention questions: the delayed check is reported as a gap; the earlier result stands and is not verified
+# Subtest: R-5 retrying after failed strategies: a learner paused for support is not taught the same way again on later days
+ok 88 - R-5 retrying after failed strategies: a learner paused for support is not taught the same way again on later days
+# Subtest: R-6 a delayed check taken well after its date: right answers confirm retention; the claim stays a demonstration on provisional questions
+ok 89 - R-6 a delayed check taken well after its date: right answers confirm retention; the claim stays a demonstration on provisional questions
+# Subtest: R-7 opening the journey repeatedly never duplicates events
+ok 90 - R-7 opening the journey repeatedly never duplicates events
+# Subtest: R-8 every journey question is provisional: no journey answer ever reaches the official estimate or supports a validated claim
+ok 91 - R-8 every journey question is provisional: no journey answer ever reaches the official estimate or supports a validated claim
+# Subtest: R-8b a word already answered on the bank item is not asked again through its journey copy
+ok 92 - R-8b a word already answered on the bank item is not asked again through its journey copy
+# Subtest: R-9 a finished journey is closed when its summary appears, even if the app is then simply closed; a return a week later is a new session with a real delayed check
+ok 93 - R-9 a finished journey is closed when its summary appears, even if the app is then simply closed; a return a week later is a new session with a real delayed check
+# Subtest: R-10 a journey left open in the middle and reopened days later is ended and a new session starts; nothing is lost
+ok 94 - R-10 a journey left open in the middle and reopened days later is ended and a new session starts; nothing is lost
+# Subtest: Learner A understands doubling: independent questions only, shown on new words, no teaching, retention pending
+ok 95 - Learner A understands doubling: independent questions only, shown on new words, no teaching, retention pending
+# Subtest: Learner B fails at first, responds to teaching and succeeds on unfamiliar words: progress, not mastery
+ok 96 - Learner B fails at first, responds to teaching and succeeds on unfamiliar words: progress, not mastery
+# Subtest: Learner C fails the first explanation and receives a different strategy, which works
+ok 97 - Learner C fails the first explanation and receives a different strategy, which works
+# Subtest: Learner D succeeds only after hints: helped answers are never evidence and no independent success is claimed
+ok 98 - Learner D succeeds only after hints: helped answers are never evidence and no independent success is claimed
+# Subtest: Learner E repeatedly fails: three different approaches, then the app stops and recommends support (no 58 repetitions)
+ok 99 - Learner E repeatedly fails: three different approaches, then the app stops and recommends support (no 58 repetitions)
+# Subtest: Learner F returns after seven days and fails retention: status changes, earlier progress is kept
+ok 100 - Learner F returns after seven days and fails retention: status changes, earlier progress is kept
+# Subtest: a slip (two letters swapped) is reported as a slip: no pattern, no rule error, evidence linked
+ok 101 - a slip (two letters swapped) is reported as a slip: no pattern, no rule error, evidence linked
+# Subtest: Learner G makes one typing slip: no misconception, no teaching; another question is asked instead and the rule is shown
+ok 102 - Learner G makes one typing slip: no misconception, no teaching; another question is asked instead and the rule is shown
+# Subtest: a learner whose every answer is a slip: never taught, never diagnosed; when questions run out it is insufficient evidence, reported as a gap
+ok 103 - a learner whose every answer is a slip: never taught, never diagnosed; when questions run out it is insufficient evidence, reported as a gap
+# Subtest: Learner H doubles every consonant: right on every 'must double' word, yet never passes a reassessment; the gap in questions is reported, not hidden
+ok 104 - Learner H doubles every consonant: right on every 'must double' word, yet never passes a reassessment; the gap in questions is reported, not hidden
+# Subtest: the final hint is a labelled worked example: the reveal is recorded, the answer after it is assisted, and the next item is a new word tried without a hint first
+ok 105 - the final hint is a labelled worked example: the reveal is recorded, the answer after it is assisted, and the next item is a new word tried without a hint first
+# Subtest: an answer after a hint is never independent, even on an assessment question
+ok 106 - an answer after a hint is never independent, even on an assessment question
+# Subtest: legacy records with unknown assistance stay unknown: nothing is confirmed from them
+ok 107 - legacy records with unknown assistance stay unknown: nothing is confirmed from them
+# Subtest: the journey's provisional questions are never used by placement, practice or checks
+ok 108 - the journey's provisional questions are never used by placement, practice or checks
+# Subtest: the planner's draft policy is configurable: two strategies before support
+ok 109 - the planner's draft policy is configurable: two strategies before support
+# Subtest: content: the engine's 56 capabilities, the hand-written bank, generated spelling items, and a lesson for every guided step
+ok 110 - content: the engine's 56 capabilities, the hand-written bank, generated spelling items, and a lesson for every guided step
+# Subtest: placement uses the engine's assessment mode on hand-written items only, and stops between its limits
+ok 111 - placement uses the engine's assessment mode on hand-written items only, and stops between its limits
+# Subtest: composite integration: the app's estimates are exactly the engine's, rebuilt from the evidence alone
+ok 112 - composite integration: the app's estimates are exactly the engine's, rebuilt from the evidence alone
+# Subtest: persistence: every answer is stored before the state moves on, and reopening resumes the same question
+ok 113 - persistence: every answer is stored before the state moves on, and reopening resumes the same question
+# Subtest: export and import: a backup rebuilds exactly the same learner on another device; damaged files are refused
+ok 114 - export and import: a backup rebuilds exactly the same learner on another device; damaged files are refused
+# Subtest: spelling: a lesson comes first, practice uses unseen words, and generated answers change no estimate
+ok 115 - spelling: a lesson comes first, practice uses unseen words, and generated answers change no estimate
+# Subtest: hints and second tries are assisted practice: one piece of evidence per item, and a misspelt word enters word memory
+ok 116 - hints and second tries are assisted practice: one piece of evidence per item, and a misspelt word enters word memory
+# Subtest: word memory: due words come back after 1, 3, 7 and 14 days until learned; a miss starts again
+ok 117 - word memory: due words come back after 1, 3, 7 and 14 days until learned; a miss starts again
+# Subtest: transfer: practise a pattern well, then a check with words never seen; passing makes it secure
+ok 118 - transfer: practise a pattern well, then a check with words never seen; passing makes it secure
+# Subtest: without on-device speech, no dictation item is ever chosen
+ok 119 - without on-device speech, no dictation item is ever chosen
+# Subtest: grammar and vocabulary: a lesson, then the engine's own scheduler; evidence records assessment or practice as the engine chose
+ok 120 - grammar and vocabulary: a lesson, then the engine's own scheduler; evidence records assessment or practice as the engine chose
+# Subtest: more practice reaches every capability through the existing engine, without pretending to teach it
+ok 121 - more practice reaches every capability through the existing engine, without pretending to teach it
+# Subtest: display rule: not assessed, early estimate, measured; practice on generated words is shown apart
+ok 122 - display rule: not assessed, early estimate, measured; practice on generated words is shown apart
+# Subtest: the same answers always give the same record and the same plan (deterministic)
+ok 123 - the same answers always give the same record and the same plan (deterministic)
+# Subtest: a reported problem with a question is kept with the record and exported
+ok 124 - a reported problem with a question is kept with the record and exported
+# Subtest: S1–S6: the gate decides what is called shown, and at which level; the engine's estimate and level are untouched and stay visible
+ok 125 - S1–S6: the gate decides what is called shown, and at which level; the engine's estimate and level are untouched and stay visible
+# Subtest: S2 and S4: right answers on easier questions never show a harder level; the gate says exactly what is missing
+ok 126 - S2 and S4: right answers on easier questions never show a harder level; the gate says exactly what is missing
+# Subtest: S5 alternating right and wrong at one level: the gate allows the level the engine supports (2.5), and the record keeps every wrong answer
+ok 127 - S5 alternating right and wrong at one level: the gate allows the level the engine supports (2.5), and the record keeps every wrong answer
+# Subtest: a recent wrong answer on a clearly easier question blocks the claim; one is probed, two or more lead to practice
+ok 128 - a recent wrong answer on a clearly easier question blocks the claim; one is probed, two or more lead to practice
+# Subtest: improvement after teaching: answers before the latest lesson are history for the claim, never erased
+ok 129 - improvement after teaching: answers before the latest lesson are history for the claim, never erased
+# Subtest: repeated questions and repeated words never count twice
+ok 130 - repeated questions and repeated words never count twice
+# Subtest: assisted answers and answers straight after a lesson never establish mastery: the claim rests only on answers given alone
+ok 131 - assisted answers and answers straight after a lesson never establish mastery: the claim rests only on answers given alone
+# Subtest: later-day retention: confirmed needs the existing retention check; a check is due only on a level the gate supported
+ok 132 - later-day retention: confirmed needs the existing retention check; a check is due only on a level the gate supported
+# Subtest: candidate vs educator-approved content: C′ met on draft questions stays provisional; verified needs approved questions behind the claim and a later check
+ok 133 - candidate vs educator-approved content: C′ met on draft questions stays provisional; verified needs approved questions behind the claim and a later check
+# Subtest: dictation alone can demonstrate direct spelling, with word and pattern diversity instead of a second format; other skills still need two formats
+ok 134 - dictation alone can demonstrate direct spelling, with word and pattern diversity instead of a second format; other skills still need two formats
+# Subtest: R1–R4: two right answers resolve a misconception only at the difficulty of the error and on a later day; every status lists its answers
+ok 135 - R1–R4: two right answers resolve a misconception only at the difficulty of the error and on a later day; every status lists its answers
+# Subtest: a later matching error contradicts a resolution; supported keeps its evidence through improving and resolved
+ok 136 - a later matching error contradicts a resolution; supported keeps its evidence through improving and resolved
+# Subtest: the planner keeps learning going: it collects the missing evidence at the right difficulty, says why, and the check fills the gap
+ok 137 - the planner keeps learning going: it collects the missing evidence at the right difficulty, says why, and the check fills the gap
+# Subtest: historical records: the rules are recomputed from the record, nothing is written, and a replay gives the same result
+ok 138 - historical records: the rules are recomputed from the record, nothing is written, and a replay gives the same result
+# Subtest: practice-only words (generated, not yet checked) are recorded but never enter the evidence gate
+ok 139 - practice-only words (generated, not yet checked) are recorded but never enter the evidence gate
+# Subtest: review fixes: confirmed needs the retention gap after the first claim the gate supported, not after the engine's own first level
+ok 140 - review fixes: confirmed needs the retention gap after the first claim the gate supported, not after the engine's own first level
+# Subtest: review fixes: one right answer keeps a supported misconception's teaching priority; resolved below needs a later day too
+ok 141 - review fixes: one right answer keeps a supported misconception's teaching priority; resolved below needs a later day too
+# Subtest: review fixes: going on with an adult reader keeps the evidence check's skill, range and remaining length
+ok 142 - review fixes: going on with an adult reader keeps the evidence check's skill, range and remaining length
+# Subtest: estimate 4, demonstrated 3: level 3 is shown and stands; level 4 is reported as not yet shown, with what is missing
+ok 143 - estimate 4, demonstrated 3: level 3 is shown and stands; level 4 is reported as not yet shown, with what is missing
+# Subtest: the planner keeps going: it gathers evidence for the estimate above the shown level, at that level, never easier
+ok 144 - the planner keeps going: it gathers evidence for the estimate above the shown level, at that level, never easier
+# Subtest: the estimate rises without losing a supported lower level
+ok 145 - the estimate rises without losing a supported lower level
+# Subtest: no qualifying evidence at any level: nothing shown, nothing estimated as demonstrated, no level invented
+ok 146 - no qualifying evidence at any level: nothing shown, nothing estimated as demonstrated, no level invented
+# Subtest: history with insufficient current evidence is history: never presented as a current level
+ok 147 - history with insufficient current evidence is history: never presented as a current level
+# Subtest: an easy slip caps the current level only where the rule says it contradicts (≤ L − 1), and is probed, not taught
+ok 148 - an easy slip caps the current level only where the rule says it contradicts (≤ L − 1), and is probed, not taught
+# Subtest: contradictory misconception evidence changes the claim only through the answers themselves
+ok 149 - contradictory misconception evidence changes the claim only through the answers themselves
+# Subtest: a demonstrated level is never retention-confirmed before the delayed check
+ok 150 - a demonstrated level is never retention-confirmed before the delayed check
+# Subtest: lesson scope is OFF by default: every lesson supersedes earlier answers on the whole skill (conservative, until an educator reviews pattern relations)
+ok 151 - lesson scope is OFF by default: every lesson supersedes earlier answers on the whole skill (conservative, until an educator reviews pattern relations)
+# Subtest: lesson scope when switched on (behind LESSON_SCOPE, for educator review): a spelling lesson supersedes earlier answers on its pattern and patterns sharing a misconception tag; unrelated patterns keep theirs
+ok 152 - lesson scope when switched on (behind LESSON_SCOPE, for educator review): a spelling lesson supersedes earlier answers on its pattern and patterns sharing a misconception tag; unrelated patterns keep theirs
+# Subtest: calendar days: UTC by default for every existing record; the pupil's time zone when recorded, across midnight and daylight saving
+ok 153 - calendar days: UTC by default for every existing record; the pupil's time zone when recorded, across midnight and daylight saving
+# Subtest: misconception resolution across midnight: a later day in Kolkata, the same day in UTC; stored timestamps never change
+ok 154 - misconception resolution across midnight: a later day in Kolkata, the same day in UTC; stored timestamps never change
+# Subtest: existing results where the refinement does not apply are unchanged (same level as the engine, same standing); replay is identical
+ok 155 - existing results where the refinement does not apply are unchanged (same level as the engine, same standing); replay is identical
+# Subtest: duplicate words and assisted answers never count at any candidate level
+ok 156 - duplicate words and assisted answers never count at any candidate level
+# Subtest: review fixes: a level first supported in the later check itself is shown, not confirmed; the confirmed level is the one supported 7+ days before
+ok 157 - review fixes: a level first supported in the later check itself is shown, not confirmed; the confirmed level is the one supported 7+ days before
+# Subtest: review fixes: the check for a higher level never asks questions easier than the level shown, even after a slip
+ok 158 - review fixes: the check for a higher level never asks questions easier than the level shown, even after a slip
+# Subtest: review fixes: the recorded time zone survives a later preferences change without one; an empty override is no override
+ok 159 - review fixes: the recorded time zone survives a later preferences change without one; an empty override is no override
+# Subtest: review 1: the estimate does not fall from time passing or from errors far above the level; the level shown stays
+ok 160 - review 1: the estimate does not fall from time passing or from errors far above the level; the level shown stays
+# Subtest: review 1: when the estimate falls after wrong answers AT the level, the cap is doing real work the gate alone does not
+ok 161 - review 1: when the estimate falls after wrong answers AT the level, the cap is doing real work the gate alone does not
+# Subtest: review 1 (fix): a later check that is due is reported for a level the gate supported, even below the engine's retained level
+ok 162 - review 1 (fix): a later check that is due is reported for a level the gate supported, even below the engine's retained level
+# Subtest: review 3: a later calendar day never substitutes for the seven-day retention interval
+ok 163 - review 3: a later calendar day never substitutes for the seven-day retention interval
+# Subtest: PB-1 a pilot build with no approvals compiled in shows nothing (fail closed); the committed record holds only the owner's approval of the 291
+ok 164 - PB-1 a pilot build with no approvals compiled in shows nothing (fail closed); the committed record holds only the owner's approval of the 291
+# Subtest: PB-2 approvals count only for allowlisted questions at that exact version; anything else is refused
+ok 165 - PB-2 approvals count only for allowlisted questions at that exact version; anything else is refused
+# Subtest: PB-3 with approvals: placement and the spelling check present only approved, allowlisted questions; the rest stays closed
+ok 166 - PB-3 with approvals: placement and the spelling check present only approved, allowlisted questions; the rest stays closed
+# Subtest: PB-4 an unapproved question is refused at the last line, even when asked for directly
+ok 167 - PB-4 an unapproved question is refused at the last line, even when asked for directly
+# Subtest: PB-5 a session the pilot does not allow, resumed from an older or imported record, is ended without showing anything
+ok 168 - PB-5 a session the pilot does not allow, resumed from an older or imported record, is ended without showing anything
+# Subtest: PB-6 development and preview builds are unchanged: no gate, every activity open
+ok 169 - PB-6 development and preview builds are unchanged: no gate, every activity open
+# Subtest: PB-7 the allowlist holds placement candidates and dictation words only, never generated or journey questions
+ok 170 - PB-7 the allowlist holds placement candidates and dictation words only, never generated or journey questions
+# Subtest: PB-8 a pilot build collects nothing beyond answers: no ratings, notes or written question reports; older ones still replay
+ok 171 - PB-8 a pilot build collects nothing beyond answers: no ratings, notes or written question reports; older ones still replay
+# Subtest: PC-1 every pilot question is unique: ids, prompts within a capability, and the new passages
+ok 172 - PC-1 every pilot question is unique: ids, prompts within a capability, and the new passages
+# Subtest: PC-2 every answer key is valid: options in range and distinct, typed answers given, wrong answers never accepted
+ok 173 - PC-2 every answer key is valid: options in range and distinct, typed answers given, wrong answers never accepted
+# Subtest: PC-3 capability and difficulty mapping: a pilot capability, a difficulty on the 1–8 scale, a known step, defined misconceptions
+ok 174 - PC-3 capability and difficulty mapping: a pilot capability, a difficulty on the 1–8 scale, a known step, defined misconceptions
+# Subtest: PC-4 review status and provenance: every new question is a candidate awaiting review; nothing is marked approved
+ok 175 - PC-4 review status and provenance: every new question is a candidate awaiting review; nothing is marked approved
+# Subtest: PC-5 enough reserved questions at the easier levels for diagnosis, confirmation and a later check
+ok 176 - PC-5 enough reserved questions at the easier levels for diagnosis, confirmation and a later check
+# Subtest: PC-6 teaching and assessment are separate: no lesson shows the answer to a question kept for confirmation or a later check, and reading lessons use their own texts
+ok 177 - PC-6 teaching and assessment are separate: no lesson shows the answer to a question kept for confirmation or a later check, and reading lessons use their own texts
+# Subtest: PC-7 selection keeps each reserved question for its use
+ok 178 - PC-7 selection keeps each reserved question for its use
+# Subtest: PC-8 a confirming check uses only confirmation questions; a later check only retention questions; one question per passage
+ok 179 - PC-8 a confirming check uses only confirmation questions; a later check only retention questions; one question per passage
+# Subtest: PC-9 exhaustion: when the confirmation questions run out, the check ends with nothing asked and the plan offers it no longer
+ok 180 - PC-9 exhaustion: when the confirmation questions run out, the check ends with nothing asked and the plan offers it no longer
+# Subtest: PC-10 the child journey on a pilot reading capability: diagnosis, a lesson, practice, a fresh confirming check, and a later check
+ok 181 - PC-10 the child journey on a pilot reading capability: diagnosis, a lesson, practice, a fresh confirming check, and a later check
+# Subtest: PC-11 a skill is never reported as shown while its own answers are mostly wrong, even if the engine supports a low level
+ok 182 - PC-11 a skill is never reported as shown while its own answers are mostly wrong, even if the engine supports a low level
+# Subtest: PI-1 a record made at PR \#24 replays with exactly the results it had: estimates, decisions, levels and profile
+ok 183 - PI-1 a record made at PR \#24 replays with exactly the results it had: estimates, decisions, levels and profile
+# Subtest: PI-2 continuing that record: history keeps its results, and only new answers follow passage@1
+ok 184 - PI-2 continuing that record: history keeps its results, and only new answers follow passage@1
+# Subtest: PI-3 teaching on every pilot capability uses practice questions only: no first-check, confirmation or later-check question, and the first-check supply is untouched
+ok 185 - PI-3 teaching on every pilot capability uses practice questions only: no first-check, confirmation or later-check question, and the first-check supply is untouched
+# Subtest: PI-4 when practice questions run out, teaching asks nothing more rather than borrowing assessment questions
+ok 186 - PI-4 when practice questions run out, teaching asks nothing more rather than borrowing assessment questions
+# Subtest: PI-5 the spelling module: practice inserts only practice questions; the transfer check only first-check questions
+ok 187 - PI-5 the spelling module: practice inserts only practice questions; the transfer check only first-check questions
+# Subtest: PI-6 practice supply: one full teaching session per grammar capability, every taught spelling step, and all three reading lessons
+ok 188 - PI-6 practice supply: one full teaching session per grammar capability, every taught spelling step, and all three reading lessons
+# Subtest: PI-7 reading in the app: selection never returns to a passage already answered for that skill, across sessions
+ok 189 - PI-7 reading in the app: selection never returns to a passage already answered for that skill, across sessions
+# Subtest: PI-8 a second answer on a counted passage is recorded and shown, but not counted: the profile says so
+ok 190 - PI-8 a second answer on a counted passage is recorded and shown, but not counted: the profile says so
+# Subtest: word mastery: recognition alone is 'met'; only an unaided written answer counts as recall
+ok 191 - word mastery: recognition alone is 'met'; only an unaided written answer counts as recall
+# Subtest: word mastery: delayed retention needs a day's gap; mastered needs two later-day passes a week apart; a mistake resets it
+ok 192 - word mastery: delayed retention needs a day's gap; mastered needs two later-day passes a week apart; a mistake resets it
+# Subtest: words spelt right are checked again after a few days, so retention is measured for them too; word mastery never moves an estimate
+ok 193 - words spelt right are checked again after a few days, so retention is measured for them too; word mastery never moves an estimate
+# Subtest: practice-word review: approvals and exclusions are applied; a pilot build offers no generated practice at all (pilot boundary)
+ok 194 - practice-word review: approvals and exclusions are applied; a pilot build offers no generated practice at all (pilot boundary)
+# Subtest: trial record: ratings and notes are kept, exported and imported; the trial summary has no name and keeps the three spelling levels apart
+ok 195 - trial record: ratings and notes are kept, exported and imported; the trial summary has no name and keeps the three spelling levels apart
+# Subtest: an import with an unknown rating is refused
+ok 196 - an import with an unknown rating is refused
+# Subtest: the committed review record is what the app reads
+ok 197 - the committed review record is what the app reads
+# Subtest: word memory moves a word up only when it is written: choosing the right spelling in a review does not count
+ok 198 - word memory moves a word up only when it is written: choosing the right spelling in a review does not count
+# Subtest: older exercise versions: answers given to a retired version still count, as that version
+ok 199 - older exercise versions: answers given to a retired version still count, as that version
+# Subtest: preview build: exactly the pilot set (typed exercises, four suffix patterns), nothing flagged or excluded, and none of it marked approved
+ok 200 - preview build: exactly the pilot set (typed exercises, four suffix patterns), nothing flagged or excluded, and none of it marked approved
+# Subtest: F: little evidence across all capabilities: an initial assessment, and no capability is called weak
+ok 201 - F: little evidence across all capabilities: an initial assessment, and no capability is called weak
+# Subtest: missing evidence versus weakness: an unchecked capability is 'not checked', a capability with wrong answers alone is 'found hard'
+ok 202 - missing evidence versus weakness: an unchecked capability is 'not checked', a capability with wrong answers alone is 'found hard'
+# Subtest: A: strong spelling, uncertain comprehension: the plan asks about comprehension, not more spelling; many capabilities in one learner
+ok 203 - A: strong spelling, uncertain comprehension: the plan asks about comprehension, not more spelling; many capabilities in one learner
+# Subtest: B: a hard capability with an unmeasured prerequisite: the prerequisite is checked first; when it is shown, the plan moves on and says why
+ok 204 - B: a hard capability with an unmeasured prerequisite: the prerequisite is checked first; when it is shown, the plan moves on and says why
+# Subtest: B2: a hard capability whose prerequisite is also hard: the prerequisite is taught first, never the dependent skill
+ok 205 - B2: a hard capability whose prerequisite is also hard: the prerequisite is taught first, never the dependent skill
+# Subtest: C / G: wrong on their own, a lesson, right in practice straight after it: 'improving, awaiting confirmation', never 'shown'; the next step is a fresh check
+ok 206 - C / G: wrong on their own, a lesson, right in practice straight after it: 'improving, awaiting confirmation', never 'shown'; the next step is a fresh check
+# Subtest: H: after the lesson, right on fresh questions in a separate check: the skill can be shown by the existing rules
+ok 207 - H: after the lesson, right on fresh questions in a separate check: the skill can be shown by the existing rules
+# Subtest: I: shown after teaching and a fresh check, then wrong at the check ten days later: refreshing comes first
+ok 208 - I: shown after teaching and a fresh check, then wrong at the check ten days later: refreshing comes first
+# Subtest: J: second attempts and hints add no independent proficiency: the estimate and independent counts match a learner who never retried
+ok 209 - J: second attempts and hints add no independent proficiency: the estimate and independent counts match a learner who never retried
+# Subtest: K: historical records without provenance, or from before lessons were tracked, are never relabelled independent
+ok 210 - K: historical records without provenance, or from before lessons were tracked, are never relabelled independent
+# Subtest: D: shown, then wrong at a later check: refreshing it comes first
+ok 211 - D: shown, then wrong at a later check: refreshing it comes first
+# Subtest: E: many answers with help, little on their own: help is never taken for mastery
+ok 212 - E: many answers with help, little on their own: help is never taken for mastery
+# Subtest: content exhaustion: a capability with every question used is never offered to the child; the plan says so to an adult
+ok 213 - content exhaustion: a capability with every question used is never offered to the child; the plan says so to an adult
+# Subtest: provisional content stays apart: journey answers never move an estimate, never make a capability shown, and are labelled
+ok 214 - provisional content stays apart: journey answers never move an estimate, never make a capability shown, and are labelled
+# Subtest: the profile is a view of the record, not a second store: nothing new is written by reading it
+ok 215 - the profile is a view of the record, not a second store: nothing new is written by reading it
+# weak: 4.68 → 3.30 ± 0.52
+# middle: 4.19 → 4.71 ± 0.53
+# strong: 5.73 → 5.84 ± 0.53
+# inconsistent (true 5, 25% careless slips): 4.41 → 3.16 ± 0.57
+# guesser (typing at random half the time, true 5): 5.37 → 5.43 ± 0.51
+# Subtest: bank: 60–100 common words on spelling patterns, every one a candidate with its provenance, never marked reviewed
+ok 216 - bank: 60–100 common words on spelling patterns, every one a candidate with its provenance, never marked reviewed
+# Subtest: scoring: the exact spelling is right (capitals, spaces and a full stop ignored); a rule error is wrong and tagged
+ok 217 - scoring: the exact spelling is right (capitals, spaces and a full stop ignored); a rule error is wrong and tagged
+# Subtest: no feedback on a dictation word shows another word of the check (right, or any listed wrong spelling)
+ok 218 - no feedback on a dictation word shows another word of the check (right, or any listed wrong spelling)
+# Subtest: words already shown elsewhere are not asked: in a question's prompt, or in a lesson that was read
+ok 219 - words already shown elsewhere are not asked: in a question's prompt, or in a lesson that was read
+# Subtest: a check left unfinished is offered again; a finished one is not
+ok 220 - a check left unfinished is offered again; a finished one is not
+# Subtest: speech lost during the check: no unheard word is recorded; an adult reader can take over (recorded)
+ok 221 - speech lost during the check: no unheard word is recorded; an adult reader can take over (recorded)
+# Subtest: evidence: dictation answers count as independent evidence and move the estimate; generated practice words still do not
+ok 222 - evidence: dictation answers count as independent evidence and move the estimate; generated practice words still do not
+# Subtest: adaptive: each word is chosen after the last answer, near the current estimate, never repeated or already met
+ok 223 - adaptive: each word is chosen after the last answer, near the current estimate, never repeated or already met
+# Subtest: adaptive: two pupils with the same placement diverge after one different answer
+ok 224 - adaptive: two pupils with the same placement diverge after one different answer
+# Subtest: follow-up: a rule error is followed by a different word on the same pattern; one error stays a suspicion
+ok 225 - follow-up: a rule error is followed by a different word on the same pattern; one error stays a suspicion
+# Subtest: misconceptions: suspected after one error, supported after errors on two questions; two later right answers the same day only make it improving, resolved needs a later day
+ok 226 - misconceptions: suspected after one error, supported after errors on two questions; two later right answers the same day only make it improving, resolved needs a later day
+# Subtest: insufficient content: when no unused word is within reach, the check stops and says so instead of asking anything else
+ok 227 - insufficient content: when no unused word is within reach, the check stops and says so instead of asking anything else
+# Subtest: speech: without a voice the check cannot start silently; an adult reader can, and both are recorded
+ok 228 - speech: without a voice the check cannot start silently; an adult reader can, and both are recorded
+# Subtest: history: records made before dictation replay exactly, and an unfinished old check still resumes its fixed list
+ok 229 - history: records made before dictation replay exactly, and an unfinished old check still resumes its fixed list
+# Subtest: simulated pupils (model check, not validity): the estimate moves towards each pupil's level, including guessers and inconsistent pupils
+ok 230 - simulated pupils (model check, not validity): the estimate moves towards each pupil's level, including guessers and inconsistent pupils
+# Subtest: A: a skill shown on draft questions is provisional, never presented as verified; approved questions make it verified
+ok 231 - A: a skill shown on draft questions is provisional, never presented as verified; approved questions make it verified
+# Subtest: B: one misspelt word is a suspicion to probe, not a reason to teach; errors on separate words may lead to teaching
+ok 232 - B: one misspelt word is a suspicion to probe, not a reason to teach; errors on separate words may lead to teaching
+# Subtest: SB-1 exactly 100 preloaded words, 20 at each of five levels, unique, each with a spelling and a sentence
+ok 233 - SB-1 exactly 100 preloaded words, 20 at each of five levels, unique, each with a spelling and a sentence
+# Subtest: SB-2 provenance: 79 are the owner-approved dictation questions (same words); the 21 new ones are owner-approved separately (provisional, pilot use)
+ok 234 - SB-2 provenance: 79 are the owner-approved dictation questions (same words); the 21 new ones are owner-approved separately (provisional, pilot use)
+# Subtest: SB-12 levels follow the spelling rule each word tests (15 October 2026 levels)
+ok 235 - SB-12 levels follow the spelling rule each word tests (15 October 2026 levels)
+# Subtest: SB-3 scoring: capital letters, spaces and a final full stop do not matter; listed variants are accepted; anything else is wrong
+ok 236 - SB-3 scoring: capital letters, spaces and a final full stop do not matter; listed variants are accepted; anything else is wrong
+# Subtest: SB-4 the first session: 10 new words at level 1, without any placement
+ok 237 - SB-4 the first session: 10 new words at level 1, without any placement
+# Subtest: SB-5 levels: 4 of 5 right at the level moves up; 3 wrong moves down; never below 1 or above 5; other levels' answers do not count
+ok 238 - SB-5 levels: 4 of 5 right at the level moves up; 3 wrong moves down; never below 1 or above 5; other levels' answers do not count
+# Subtest: SB-6 the plan follows the level: after moving up, new words come from the new level, then the nearest
+ok 239 - SB-6 the plan follows the level: after moving up, new words come from the new level, then the nearest
+# Subtest: SB-7 review: a misspelt word comes back next session (not the same one), then after 1, 3 and 7 days while it is right
+ok 240 - SB-7 review: a misspelt word comes back next session (not the same one), then after 1, 3 and 7 days while it is right
+# Subtest: SB-8 a word spelt right is not asked again while new words remain; when all are practised, the oldest come back
+ok 241 - SB-8 a word spelt right is not asked again while new words remain; when all are practised, the oldest come back
+# Subtest: SB-9 in the app: a session without placement, answers recorded, the session ends by itself, and resumes after a reload
+ok 242 - SB-9 in the app: a session without placement, answers recorded, the session ends by itself, and resumes after a reload
+# Subtest: SB-10 a pilot build: the Spelling Bee's approved words, and only those; none without approvals (fail closed)
+ok 243 - SB-10 a pilot build: the Spelling Bee's approved words, and only those; none without approvals (fail closed)
+# Subtest: SB-11 text shown while a word is asked never contains that word (whole words; any capital letters)
+ok 244 - SB-11 text shown while a word is asked never contains that word (whole words; any capital letters)
+# Subtest: UX-1 Journey stages follow the profile's standing, one stage at a time
+ok 245 - UX-1 Journey stages follow the profile's standing, one stage at a time
+# Subtest: UX-2 the Journey offers only what the app can deliver: Today's activity, or a first check on an unchecked skill
+ok 246 - UX-2 the Journey offers only what the app can deliver: Today's activity, or a first check on an unchecked skill
+# Subtest: UX-3 the goal changes the Journey's order only: estimates, questions and the plan are the same
+ok 247 - UX-3 the goal changes the Journey's order only: estimates, questions and the plan are the same
+# Subtest: UX-4 'What OpenPath noticed' is the engine's decision on that answer
+ok 248 - UX-4 'What OpenPath noticed' is the engine's decision on that answer
+# Subtest: MW-1 typed, pasted and CSV text: new lines, commas, semicolons and tabs separate words; quotes and spaces are tidied
+ok 249 - MW-1 typed, pasted and CSV text: new lines, commas, semicolons and tabs separate words; quotes and spaces are tidied
+# Subtest: MW-2 problems are reported, never silently dropped: numbers, symbols, too long, duplicates, too many
+ok 250 - MW-2 problems are reported, never silently dropped: numbers, symbols, too long, duplicates, too many
+# Subtest: MW-3 accepted variants: colour/color gives a word and an alternative; the list text round-trips
+ok 251 - MW-3 accepted variants: colour/color gives a word and an alternative; the list text round-trips
+# Subtest: MW-4 save, practise with the shared engine (variants accepted), progress per list, edit keeps history, delete
+ok 252 - MW-4 save, practise with the shared engine (variants accepted), progress per list, edit keeps history, delete
+# Subtest: MW-5 a list must have a name and words; a pilot build offers no My Words
+ok 253 - MW-5 a list must have a name and words; a pilot build offers no My Words
+# Subtest: MW-6 a learner in a parent account: lists are saved in the learner's record (on the server), practised and reloaded like on a device; an oversized list is refused before saving
+ok 254 - MW-6 a learner in a parent account: lists are saved in the learner's record (on the server), practised and reloaded like on a device; an oversized list is refused before saving
+# Subtest: MW-7 editing or deleting a list never changes other progress: the Bee, other lists, and the answers already given
+ok 255 - MW-7 editing or deleting a list never changes other progress: the Bee, other lists, and the answers already given
+# Subtest: MW-8 deleting a list removes its words from the stored record (every version, every answer), keeps the learning history without them, and changes nothing else
+ok 256 - MW-8 deleting a list removes its words from the stored record (every version, every answer), keeps the learning history without them, and changes nothing else
+# Subtest: every family specification validates: deterministic, property-based and boundary checks
+not ok 257 - every family specification validates: deterministic, property-based and boundary checks
+# Subtest: a released family validates its whole pool; outside the approved domain nothing is released
+ok 258 - a released family validates its whole pool; outside the approved domain nothing is released
+# Subtest: a material generator change makes the approval stale (reapproval needed); a failing item is excluded automatically
+ok 259 - a material generator change makes the approval stale (reapproval needed); a failing item is excluded automatically
+# Subtest: depth: two early mistakes do not exhaust a released module; fresh checks continue until the shared record can verify
+ok 260 - depth: two early mistakes do not exhaust a released module; fresh checks continue until the shared record can verify
+# Subtest: repeated exposure is never independent evidence: the other format of a seen problem counts as help
+ok 261 - repeated exposure is never independent evidence: the other format of a seen problem counts as help
+# Subtest: depth limits are reported, never papered over
+ok 262 - depth limits are reported, never papered over
+# Subtest: every module's questions come from the right part of its family's pool, and the parts never overlap
+ok 263 - every module's questions come from the right part of its family's pool, and the parts never overlap
+# Subtest: an exhausted pool: the module stops, never repeats a problem, and never reports mastery it has not seen
+not ok 264 - an exhausted pool: the module stops, never repeats a problem, and never reports mastery it has not seen
+# Subtest: repeated questions cannot create false mastery: the same problems answered again and again stay one exposure each
+ok 265 - repeated questions cannot create false mastery: the same problems answered again and again stay one exposure each
+# Subtest: one pipeline for every grade: no grade-specific branch in the learning engine
+ok 266 - one pipeline for every grade: no grade-specific branch in the learning engine
+# Subtest: real counts come from the repository, not constants
+ok 267 - real counts come from the repository, not constants
+# Subtest: mapping integrity: exactly the release's accepted mappings, the same stable ids, one scope per board
+ok 268 - mapping integrity: exactly the release's accepted mappings, the same stable ids, one scope per board
+# Subtest: coverage per release is the compiler's own count (no new judgement)
+ok 269 - coverage per release is the compiler's own count (no new judgement)
+# Subtest: M: a partially covered outcome stays partial at every level above it
+ok 270 - M: a partially covered outcome stays partial at every level above it
+# Subtest: review state shown is review.ts's effective state (a changed item is draft; nothing is approved by the UI)
+ok 271 - review state shown is review.ts's effective state (a changed item is draft; nothing is approved by the UI)
+# Subtest: I: a competency that appears in several places is one record and counts once
+ok 272 - I: a competency that appears in several places is one record and counts once
+# Subtest: mastery display: green only for verified; awaiting the delayed check and learning are not green; no evidence is not assessed
+ok 273 - mastery display: green only for verified; awaiting the delayed check and learning are not green; no evidence is not assessed
+# Subtest: E–H through the shared engine: no evidence → not assessed; a lesson → not verified; shown → awaiting; seven full days later → verified
+ok 274 - E–H through the shared engine: no evidence → not assessed; a lesson → not verified; shown → awaiting; seven full days later → verified
+# Subtest: B: a Grade 5 learner's goal adds only skills from their own year
+ok 275 - B: a Grade 5 learner's goal adds only skills from their own year
+# Subtest: J: display order is presentation only
+ok 276 - J: display order is presentation only
+# Subtest: N: each board and grade has its own structure (no tiles shared between scopes)
+ok 277 - N: each board and grade has its own structure (no tiles shared between scopes)
+# Subtest: D: Grade 12 Integrals has nested skills with modules and assessment
+ok 278 - D: Grade 12 Integrals has nested skills with modules and assessment
+# Subtest: every question and fragment has an answer that its own checker accepts, and that matches a second key
+ok 279 - every question and fragment has an answer that its own checker accepts, and that matches a second key
+# Subtest: answers are checked by meaning: equivalent forms are accepted, malformed ones are not
+ok 280 - answers are checked by meaning: equivalent forms are accepted, malformed ones are not
+# Subtest: modules are complete: diagnostics, strategies with their own guided and check questions, practice and a two-question delayed check
+ok 281 - modules are complete: diagnostics, strategies with their own guided and check questions, practice and a two-question delayed check
+# Subtest: a textbook becomes a draft with mapped outcomes and source references, and only a review makes it assignable
+ok 282 - a textbook becomes a draft with mapped outcomes and source references, and only a review makes it assignable
+# Subtest: mapping proposals pick the right competency for every outcome of the sample textbooks
+ok 283 - mapping proposals pick the right competency for every outcome of the sample textbooks
+# Subtest: releases are versioned by content: a changed release has a different hash, and a reference to a stale hash resolves to nothing
+ok 284 - releases are versioned by content: a changed release has a different hash, and a reference to a stale hash resolves to nothing
+# Subtest: the graph: micro-skills are part of one competency, and the support walk is bounded and cycle-safe
+ok 285 - the graph: micro-skills are part of one competency, and the support walk is bounded and cycle-safe
+# Subtest: diagnostics: at most three questions, chosen by expected information, distinguishing kinds of difficulty
+ok 286 - diagnostics: at most three questions, chosen by expected information, distinguishing kinds of difficulty
+# Subtest: strategy choice by prior knowledge: knows 7 × 5 and 7 × 3 but not 7 × 7 → decomposition
+ok 287 - strategy choice by prior knowledge: knows 7 × 5 and 7 × 3 but not 7 × 7 → decomposition
+# Subtest: help is never independence: guided answers, hints and second attempts stay assisted
+ok 288 - help is never independence: guided answers, hints and second attempts stay assisted
+# Subtest: journey F: a missed delayed check means review, not verified, even when every question counts for verification
+ok 289 - journey F: a missed delayed check means review, not verified, even when every question counts for verification
+# Subtest: verification is the shared engine's alone: on shipped (provisional) content a skill is at most shown, never green
+ok 290 - verification is the shared engine's alone: on shipped (provisional) content a skill is at most shown, never green
+# Subtest: tiles: subject → chapter → skill → micro-skills, with labels and icons, and aggregation that never turns a full orange bar green
+ok 291 - tiles: subject → chapter → skill → micro-skills, with labels and icons, and aggregation that never turns a full orange bar green
+# Subtest: one competency, one evidence record: the same skill in two curricula shows the same status
+ok 292 - one competency, one evidence record: the same skill in two curricula shows the same status
+# Subtest: journey A: Grade 4 textbook → Fractions → diagnostic → strategy → practice, and it all persists across sessions
+ok 293 - journey A: Grade 4 textbook → Fractions → diagnostic → strategy → practice, and it all persists across sessions
+# Subtest: journey B: Grade 5 with an IIT-JEE Advanced goal sees age-appropriate tiles, goal-marked foundations and gated enrichment; nothing advanced
+ok 294 - journey B: Grade 5 with an IIT-JEE Advanced goal sees age-appropriate tiles, goal-marked foundations and gated enrichment; nothing advanced
+# Subtest: journey C: Grade 10 integration problem → supports traced, verified ones skipped, 7 × 8 fails → decomposition → back to the problem
+ok 295 - journey C: Grade 10 integration problem → supports traced, verified ones skipped, 7 × 8 fails → decomposition → back to the problem
+# Subtest: journey D: an advanced problem decomposed: Grade 7 and Grade 8 fragments, the full problem only for a ready learner
+ok 296 - journey D: an advanced problem decomposed: Grade 7 and Grade 8 fragments, the full problem only for a ready learner
+# Subtest: journey E: Grade 4 → Grade 5 keeps every record; a skill shown in Grade 4 is still shown in Grade 5
+ok 297 - journey E: Grade 4 → Grade 5 keeps every record; a skill shown in Grade 4 is still shown in Grade 5
+# Subtest: records from another learner, malformed times and duplicates are ignored
+ok 298 - records from another learner, malformed times and duplicates are ignored
+# diagnostic@2 synthetic check: {"trials":10609,"identified":6466,"uncertain":4143,"wrongClaim":0}; random answers: {"trials":10609,"claimed":0}
+# Subtest: relations: one per pair, supports never repeat a mandatory edge, disputed edges are not followed
+ok 299 - relations: one per pair, supports never repeat a mandatory edge, disputed edges are not followed
+# Subtest: A: correcting a relationship changes what recovery recommends, never the recorded evidence
+ok 300 - A: correcting a relationship changes what recovery recommends, never the recorded evidence
+# Subtest: H: a learner who shows a higher skill is not sent back to a missing lower one
+ok 301 - H: a learner who shows a higher skill is not sent back to a missing lower one
+# Subtest: G: an unseen mistake on a problem the learner types in is investigated and leads to a defensible next step
+ok 302 - G: an unseen mistake on a problem the learner types in is investigated and leads to a defensible next step
+# Subtest: B: diagnosis generalises across families and unseen parameter combinations, and says when it is unsure
+ok 303 - B: diagnosis generalises across families and unseen parameter combinations, and says when it is unsure
+# Subtest: C: every family's answer passes an independent check, and decomposition gives grade-appropriate steps
+ok 304 - C: every family's answer passes an independent check, and decomposition gives grade-appropriate steps
+# Subtest: M: a problem outside the supported families is declined, with a reason, and nothing is diagnosed or claimed
+ok 305 - M: a problem outside the supported families is declined, with a reason, and nothing is diagnosed or claimed
+# Subtest: I: two learners solve the same problem differently; both methods are valid and recognised, neither is required
+ok 306 - I: two learners solve the same problem differently; both methods are valid and recognised, neither is required
+# Subtest: J: across sessions the plan continues without reteaching, explains its changes, and changes on new evidence
+ok 307 - J: across sessions the plan continues without reteaching, explains its changes, and changes on new evidence
+# Subtest: K: nothing verifies before seven full days (verification@3, in the engine and on this surface); the delayed check at seven days verifies
+ok 308 - K: nothing verifies before seven full days (verification@3, in the engine and on this surface); the delayed check at seven days verifies
+# Subtest: L: two textbooks saying the same mathematics differently map to the same skills, or are flagged for review
+ok 309 - L: two textbooks saying the same mathematics differently map to the same skills, or are flagged for review
+# Subtest: L: the same textbook read from a PDF's text layer gives the same outcomes; a scan is declined
+ok 310 - L: the same textbook read from a PDF's text layer gives the same outcomes; a scan is declined
+# Subtest: N: a Grade 5 JEE learner builds foundations in their own year; later years use the same evidence
+ok 311 - N: a Grade 5 JEE learner builds foundations in their own year; later years use the same evidence
+# Subtest: mapping exemplars: the index is generated from the inventory and is current
+ok 312 - mapping exemplars: the index is generated from the inventory and is current
+# Subtest: mapping evaluation never sees the held-out outcome or book
+ok 313 - mapping evaluation never sees the held-out outcome or book
+# Subtest: mapping accuracy, leave-one-out: well above meaning@3, and rarely clear but wrong
+ok 314 - mapping accuracy, leave-one-out: well above meaning@3, and rarely clear but wrong
+# Subtest: mapping accuracy, leave-one-file-out (an unseen textbook)
+ok 315 - mapping accuracy, leave-one-file-out (an unseen textbook)
+# Subtest: mapping accuracy, leave-one-board-out (an unseen board)
+ok 316 - mapping accuracy, leave-one-board-out (an unseen board)
+# Subtest: meaning@4 keeps its refusals: no mathematics, or mathematics the map does not have, is never forced onto a skill
+ok 317 - meaning@4 keeps its refusals: no mathematics, or mathematics the map does not have, is never forced onto a skill
+# Subtest: answers@2: every shared case gives the agreed verdict (the server checks the same table)
+ok 318 - answers@2: every shared case gives the agreed verdict (the server checks the same table)
+# Subtest: mixed@1: a mixed number in a fraction answer is its value, in the app and on the server (never 11/2 for 1 1/2)
+ok 319 - mixed@1: a mixed number in a fraction answer is its value, in the app and on the server (never 11/2 for 1 1/2)
+# Subtest: form@1: an expand task's answer must be written expanded (the question typed back is refused), app and server alike
+ok 320 - form@1: an expand task's answer must be written expanded (the question typed back is refused), app and server alike
+# Subtest: written@1: an unmarked written answer is pending and never evidence; only the educator's mark enters the engine
+ok 321 - written@1: an unmarked written answer is pending and never evidence; only the educator's mark enters the engine
+# Subtest: boards@1: CBSE and Tamil Nadu releases for Grades 1–12, valid, through one builder and the same hierarchy
+ok 322 - boards@1: CBSE and Tamil Nadu releases for Grades 1–12, valid, through one builder and the same hierarchy
+# Subtest: expansion@1: existing competency ids are kept, new ones are unique, relations never cycle, disputed ones are not followed
+ok 323 - expansion@1: existing competency ids are kept, new ones are unique, relations never cycle, disputed ones are not followed
+# Subtest: compiler@1: twelve criteria from the content itself; nothing is called validated without educator review
+ok 324 - compiler@1: twelve criteria from the content itself; nothing is called validated without educator review
+# Subtest: expansion@1 competencies are capabilities of the shared engine: answering their questions builds evidence
+ok 325 - expansion@1 competencies are capabilities of the shared engine: answering their questions builds evidence
+# Subtest: pipeline: the library is exactly what blueprints and templates build; every module validates; nothing is approved
+ok 326 - pipeline: the library is exactly what blueprints and templates build; every module validates; nothing is approved
+# Subtest: pipeline: review needs an educator who is not the author; a module is released only after its families
+ok 327 - pipeline: review needs an educator who is not the author; a module is released only after its families
+# Subtest: every sample release: each skill tile with content opens a working module; a tile without content says so and is never counted
+ok 328 - every sample release: each skill tile with content opens a working module; a tile without content says so and is never counted
+# Subtest: A: Grade 4 textbook → dashboard → Fractions → Equivalent fractions → assessment, learning, delayed verification
+ok 329 - A: Grade 4 textbook → dashboard → Fractions → Equivalent fractions → assessment, learning, delayed verification
+# Subtest: B: Grade 10 board textbook → Algebra → Quadratic equations → a gap in expanding brackets found, repaired, and back
+ok 330 - B: Grade 10 board textbook → Algebra → Quadratic equations → a gap in expanding brackets found, repaired, and back
+# Subtest: C: Grade 12 → Calculus → Integrals → Techniques of integration → capabilities; a struggle leads to prerequisite recovery
+ok 331 - C: Grade 12 → Calculus → Integrals → Techniques of integration → capabilities; a struggle leads to prerequisite recovery
+# Subtest: D: IIT-JEE: a Grade 5 learner builds age-appropriate foundations; a Grade 12 learner works full problems and their parts
+ok 332 - D: IIT-JEE: a Grade 5 learner builds age-appropriate foundations; a Grade 12 learner works full problems and their parts
+# Subtest: E: an unseen textbook goes through the same pipeline with no new code; its modules are validated and reviewed the same way
+ok 333 - E: an unseen textbook goes through the same pipeline with no new code; its modules are validated and reviewed the same way
+# Subtest: F: Grade 10 → Grade 12: every record kept, valid evidence carried over, a newly synthesised plan
+ok 334 - F: Grade 10 → Grade 12: every record kept, valid evidence carried over, a newly synthesised plan
+# Subtest: coverage: eight categories reported separately; complete platform ≠ complete content
+ok 335 - coverage: eight categories reported separately; complete platform ≠ complete content
+# Subtest: one canonical learner: school fractions -> GRE Quant shares history, separate resume and zero mastery from generated practice
+ok 336 - one canonical learner: school fractions -> GRE Quant shares history, separate resume and zero mastery from generated practice
+# Subtest: all 14 families use native scoring and native provisional eligibility, including equivalent answers
+ok 337 - all 14 families use native scoring and native provisional eligibility, including equivalent answers
+# Subtest: same parameter variants retain native identity even when shuffled choice positions change
+ok 338 - same parameter variants retain native identity even when shuffled choice positions change
+# Subtest: identity, registration, version, receipt integrity and unsupported syntax fail before append
+ok 339 - identity, registration, version, receipt integrity and unsupported syntax fail before append
+# Subtest: hint and solution counts remain sidecar facts; unknown provenance is never fabricated as independent
+ok 340 - hint and solution counts remain sidecar facts; unknown provenance is never fabricated as independent
+# Subtest: real host presentation/hint provenance is linked and held; forged eligibility upgrade is rejected
+ok 341 - real host presentation/hint provenance is linked and held; forged eligibility upgrade is rejected
+# Subtest: activity percentages deduplicate completion receipts and never use answer correctness
+ok 342 - activity percentages deduplicate completion receipts and never use answer correctness
+# Subtest: v1 inventory stays byte-for-byte frozen and audits cover all executable programs and families
+ok 343 - v1 inventory stays byte-for-byte frozen and audits cover all executable programs and families
+# Subtest: identical stems with unused parameter changes replay as repeats, not fresh assessment
+ok 344 - identical stems with unused parameter changes replay as repeats, not fresh assessment
+# Subtest: supported wrong answers remain wrong under the native codec for every family
+ok 345 - supported wrong answers remain wrong under the native codec for every family
+# Subtest: sharedProfile uses the canonical verification definition: schedule 'verified' on unreviewed answers is not verified mastery
+ok 346 - sharedProfile uses the canonical verification definition: schedule 'verified' on unreviewed answers is not verified mastery
+# Subtest: provisional mathematics practice never verifies mastery, however long and however right
+ok 347 - provisional mathematics practice never verifies mastery, however long and however right
+# Subtest: every answer key agrees with an independent computation, and every question is well formed
+ok 348 - every answer key agrees with an independent computation, and every question is well formed
+# Subtest: answers are normalised: letters any case, integers with − or a + sign; anything else is not an answer
+ok 349 - answers are normalised: letters any case, integers with − or a + sign; anything else is not an answer
+# Subtest: progress counts steps; the timed section scores +4 / −1 / 0 and may end with questions unanswered
+ok 350 - progress counts steps; the timed section scores +4 / −1 / 0 and may end with questions unanswered
+# Subtest: the revision check opens after its date; finishing it completes the chapter
+ok 351 - the revision check opens after its date; finishing it completes the chapter
+# Subtest: a step cannot be skipped, and an early answer is the one that counts (no retries on the same question)
+ok 352 - a step cannot be skipped, and an early answer is the one that counts (no retries on the same question)
+# Subtest: chapter practice is provisional: nothing is verified, and the fractions program ignores the chapter's records
+ok 353 - chapter practice is provisional: nothing is verified, and the fractions program ignores the chapter's records
+# Subtest: developmental overlay keeps all historical IDs and a cycle-free domain graph, roots justified
+ok 354 - developmental overlay keeps all historical IDs and a cycle-free domain graph, roots justified
+# Subtest: three substantive programs contain concept, exploration, worked contrasts, application and distinct delayed review
+ok 355 - three substantive programs contain concept, exploration, worked contrasts, application and distinct delayed review
+# Subtest: independent numerical oracle checks every answer, equivalence and semantic distinctions
+ok 356 - independent numerical oracle checks every answer, equivalence and semantic distinctions
+# Subtest: all three synthetic learners finish fixed programs, resume drafts, retain progress until delayed review, never gain mastery
+ok 357 - all three synthetic learners finish fixed programs, resume drafts, retain progress until delayed review, never gain mastery
+# Subtest: one learner shares fraction identity across school and GRE but never program completion; old evidence remains
+ok 358 - one learner shares fraction identity across school and GRE but never program completion; old evidence remains
+# Subtest: strong, uncertain and struggling practice patterns select support without rewriting programs or diagnosing a missing skill
+ok 359 - strong, uncertain and struggling practice patterns select support without rewriting programs or diagnosing a missing skill
+# Subtest: draft edits are not submitted answers; mixed historical events keep append order
+ok 360 - draft edits are not submitted answers; mixed historical events keep append order
+# Subtest: exactly 34 mandatory removals; all IDs, frozen inventory and the remaining 49 proposals stay untouched
+ok 361 - exactly 34 mandatory removals; all IDs, frozen inventory and the remaining 49 proposals stay untouched
+# Subtest: each intermediate correction preserves policies, item eligibility, evidence, decisions and all learner estimates
+ok 362 - each intermediate correction preserves policies, item eligibility, evidence, decisions and all learner estimates
+# Subtest: versioned registration allows explicit historical replay and only changes framework key and mandatory edges
+ok 363 - versioned registration allows explicit historical replay and only changes framework key and mandatory edges
+# Subtest: patch is fail closed on stale preconditions, invalid IDs or cycles; source graph cannot be mutated by callers
+ok 364 - patch is fail closed on stale preconditions, invalid IDs or cycles; source graph cannot be mutated by callers
+# Subtest: subject-neutral registration uses real indexer and keeps English default identity unchanged
+ok 365 - subject-neutral registration uses real indexer and keeps English default identity unchanged
+# Subtest: fixed content has independently checked fractions, solutions and distinct delayed items
+ok 366 - fixed content has independently checked fractions, solutions and distinct delayed items
+# Subtest: complete school, resume, enter GRE and satisfy delayed activity without any mastery from provisional content
+ok 367 - complete school, resume, enter GRE and satisfy delayed activity without any mastery from provisional content
+# Subtest: provisional wrong and supported responses cannot modify any node; other learner is rejected
+ok 368 - provisional wrong and supported responses cannot modify any node; other learner is rejected
+# Subtest: equivalence normalization preserves a request for simplest fraction form
+ok 369 - equivalence normalization preserves a request for simplest fraction form
+# Subtest: 200 competencies across every grade and required strands have a valid DAG
+ok 370 - 200 competencies across every grade and required strands have a valid DAG
+# Subtest: graph validator rejects missing references cycles duplicate IDs and unjustified roots
+ok 371 - graph validator rejects missing references cycles duplicate IDs and unjustified roots
+# Subtest: all family and exam mappings resolve and programs preserve versioned references
+ok 372 - all family and exam mappings resolve and programs preserve versioned references
+# Subtest: exact numeric normalization preserves signs and rejects undefined/ambiguous notation
+ok 373 - exact numeric normalization preserves signs and rejects undefined/ambiguous notation
+# Subtest: bounded polynomial equivalence is exact and rejects unsupported variable division
+ok 374 - bounded polynomial equivalence is exact and rejects unsupported variable division
+# Subtest: arithmetic: 512 reproducible seeds satisfy independent mathematical invariants
+ok 375 - arithmetic: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: fractions: 512 reproducible seeds satisfy independent mathematical invariants
+ok 376 - fractions: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: percent: 512 reproducible seeds satisfy independent mathematical invariants
+ok 377 - percent: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: linear: 512 reproducible seeds satisfy independent mathematical invariants
+ok 378 - linear: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: polynomial: 512 reproducible seeds satisfy independent mathematical invariants
+ok 379 - polynomial: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: quadratic-numerical: 512 reproducible seeds satisfy independent mathematical invariants
+ok 380 - quadratic-numerical: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: quadratic: 512 reproducible seeds satisfy independent mathematical invariants
+ok 381 - quadratic: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: geometry: 512 reproducible seeds satisfy independent mathematical invariants
+ok 382 - geometry: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: trigonometry: 512 reproducible seeds satisfy independent mathematical invariants
+ok 383 - trigonometry: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: coordinate: 512 reproducible seeds satisfy independent mathematical invariants
+ok 384 - coordinate: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: probability: 512 reproducible seeds satisfy independent mathematical invariants
+ok 385 - probability: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: calculus-numerical: 512 reproducible seeds satisfy independent mathematical invariants
+ok 386 - calculus-numerical: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: calculus: 512 reproducible seeds satisfy independent mathematical invariants
+ok 387 - calculus: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: comparison: 512 reproducible seeds satisfy independent mathematical invariants
+ok 388 - comparison: 512 reproducible seeds satisfy independent mathematical invariants
+# Subtest: seed and batch validation, uniqueness and exhaustion fail closed
+ok 389 - seed and batch validation, uniqueness and exhaustion fail closed
+# Subtest: fixed program resumes through JSON persistence without inferring proficiency
+ok 390 - fixed program resumes through JSON persistence without inferring proficiency
+# Subtest: shared competency identity does not mix exam and school progress
+ok 391 - shared competency identity does not mix exam and school progress
+# Subtest: candidate evidence retains hints repeats provenance and cannot become admissible
+ok 392 - candidate evidence retains hints repeats provenance and cannot become admissible
+# Subtest: exam speed and strategy receipts stay separate; unverified timed/scoring paths fail closed
+ok 393 - exam speed and strategy receipts stay separate; unverified timed/scoring paths fail closed
+# Subtest: each initial competitive track delivers original practice in its configured candidate formats
+ok 394 - each initial competitive track delivers original practice in its configured candidate formats
+# Subtest: instructional time receipts persist idempotently and cannot verify proficiency
+ok 395 - instructional time receipts persist idempotently and cannot verify proficiency
+# Subtest: weak foundations: prerequisite teaching first, inside step 1, then back to the lesson
+ok 396 - weak foundations: prerequisite teaching first, inside step 1, then back to the lesson
+# Subtest: the same mistake twice: a different explanation each time, ending in the prerequisite; not the same one repeated
+ok 397 - the same mistake twice: a different explanation each time, ending in the prerequisite; not the same one repeated
+# Subtest: procedure right but transfer wrong: diagnosed first, then application-specific teaching (not the formula again)
+ok 398 - procedure right but transfer wrong: diagnosed first, then application-specific teaching (not the formula again)
+# Subtest: an ambiguous answer is never read as a specific misconception
+ok 399 - an ambiguous answer is never read as a specific misconception
+# Subtest: a strong student advances without any help branch
+ok 400 - a strong student advances without any help branch
+# Subtest: a returning learner resumes the unfinished help, then the lesson, at the same place
+ok 401 - a returning learner resumes the unfinished help, then the lesson, at the same place
+# Subtest: still struggling after support: a calm pause after two strategies, said once, and the unit goes on
+ok 402 - still struggling after support: a calm pause after two strategies, said once, and the unit goes on
+# Subtest: the help is a temporary branch: completion, resume point and the nine steps are untouched
+ok 403 - the help is a temporary branch: completion, resume point and the nine steps are untouched
+# Subtest: evidence: guided help is assisted, checks are independent; the shared gate holds everything; nothing verifies
+ok 404 - evidence: guided help is assisted, checks are independent; the shared gate holds everything; nothing verifies
+# Subtest: progress after a failed revision is kept, and independent work is reported apart from helped work
+ok 405 - progress after a failed revision is kept, and independent work is reported apart from helped work
+# Subtest: skipping help is recorded and shown as unsupported progress, not understanding
+ok 406 - skipping help is recorded and shown as unsupported progress, not understanding
+# Subtest: prerequisites point to the curriculum graph; the planner policy only sets this unit's block size
+ok 407 - prerequisites point to the curriculum graph; the planner policy only sets this unit's block size
+# Subtest: every answer key agrees with an independent computation; every question and misconception is well formed
+ok 408 - every answer key agrees with an independent computation; every question and misconception is well formed
+# Subtest: the unit's structure separates teaching from assessment and runs from school foundations towards JEE Main
+ok 409 - the unit's structure separates teaching from assessment and runs from school foundations towards JEE Main
+# Subtest: journey 1: a beginner with weak algebra gets the prerequisite re-explanations and extra practice first
+ok 410 - journey 1: a beginner with weak algebra gets the prerequisite re-explanations and extra practice first
+# Subtest: journey 2: knows the identities but cannot complete the square: the picture stage catches it and re-teaches
+ok 411 - journey 2: knows the identities but cannot complete the square: the picture stage catches it and re-teaches
+# Subtest: journey 3: follows the worked examples but fails unfamiliar problems: the gap shows in transfer, not in completion
+ok 412 - journey 3: follows the worked examples but fails unfamiliar problems: the gap shows in transfer, not in completion
+# Subtest: journey 4: a strong student moves straight through, with nothing extra pushed on them; still never verified
+ok 413 - journey 4: a strong student moves straight through, with nothing extra pushed on them; still never verified
+# Subtest: journey 5: a returning student resumes at the same step and question days later; the revision opens after a week
+ok 414 - journey 5: a returning student resumes at the same step and question days later; the revision opens after a week
+# Subtest: history is never erased: records of other versions and programs are kept apart, and compatible versions replay
+ok 415 - history is never erased: records of other versions and programs are kept apart, and compatible versions replay
+# Subtest: evidence semantics: teaching answers are assisted responses, hints are recorded, unaided answers use the normal path
+ok 416 - evidence semantics: teaching answers are assisted responses, hints are recorded, unaided answers use the normal path
+# Subtest: Tamil canonical equivalence preserves pulli, vowel length and consonant identities
+ok 417 - Tamil canonical equivalence preserves pulli, vowel length and consonant identities
+# Subtest: all 216 native consonant-vowel compositions use logical Unicode order
+ok 418 - all 216 native consonant-vowel compositions use logical Unicode order
+# Subtest: versioned sparse graph, content and activity contracts are internally consistent
+ok 419 - versioned sparse graph, content and activity contracts are internally consistent
+# Subtest: all answer keys score correctly and composition keys follow the Tamil rules
+ok 420 - all answer keys score correctly and composition keys follow the Tamil rules
+# Subtest: wrong answer tags are observations, unknown mistakes are not invented diagnoses
+ok 421 - wrong answer tags are observations, unknown mistakes are not invented diagnoses
+# Subtest: provisional, hinted, revealed, guided, repeated and family evidence cannot prove understanding
+ok 422 - provisional, hinted, revealed, guided, repeated and family evidence cannot prove understanding
+# Subtest: bounded practice reserves different families and does not manufacture aytham transfer
+ok 423 - bounded practice reserves different families and does not manufacture aytham transfer
+# Subtest: actual session moves from diagnosis to relevant Tamil teaching, practice and structured export
+ok 424 - actual session moves from diagnosis to relevant Tamil teaching, practice and structured export
+# Subtest: hints survive reload and abandoned/reopened prompts are repeated exposure
+ok 425 - hints survive reload and abandoned/reopened prompts are repeated exposure
+# Subtest: restart keeps learner identity, history and exposure while selecting fresh diagnostic families
+ok 426 - restart keeps learner identity, history and exposure while selecting fresh diagnostic families
+# Subtest: invalid storage and invalid responses fail without replacing the ledger
+ok 427 - invalid storage and invalid responses fail without replacing the ledger
+# Subtest: every pilot competency is reachable through a focused diagnostic and its own teaching
+ok 428 - every pilot competency is reachable through a focused diagnostic and its own teaching
+# Subtest: handwriting policy is disabled independently of role, URL and saved work
+ok 429 - handwriting policy is disabled independently of role, URL and saved work
+# Subtest: keyboard confirmation preserves archived ink coordinates, metadata and correction history
+ok 430 - keyboard confirmation preserves archived ink coordinates, metadata and correction history
+# Subtest: paper and answer modes reuse the unchanged practice variations
+ok 431 - paper and answer modes reuse the unchanged practice variations
+# Subtest: pen metadata and replay survive immutable edits; region mapping is geometric
+ok 432 - pen metadata and replay survive immutable edits; region mapping is geometric
+# Subtest: eraser hits segments between sparse samples; undo, redo and clear retain originals
+ok 433 - eraser hits segments between sparse samples; undo, redo and clear retain originals
+# Subtest: paper coordinates align after resizing and zoom/pan
+ok 434 - paper coordinates align after resizing and zoom/pan
+# Subtest: confidence 0.9, threshold 0.9 gives accepted
+ok 435 - confidence 0.9, threshold 0.9 gives accepted
+# Subtest: confidence 0.899, threshold 0.9 gives uncertain
+ok 436 - confidence 0.899, threshold 0.9 gives uncertain
+# Subtest: confidence null, threshold 0.9 gives uncertain
+ok 437 - confidence null, threshold 0.9 gives uncertain
+# Subtest: confidence 0.98, threshold 0.99 gives uncertain
+ok 438 - confidence 0.98, threshold 0.99 gives uncertain
+# Subtest: confidence 1, threshold 1 gives accepted
+ok 439 - confidence 1, threshold 1 gives accepted
+# Subtest: clarification changes only ambiguous token, preserves ink and does not ask again on recognition
+ok 440 - clarification changes only ambiguous token, preserves ink and does not ask again on recognition
+# Subtest: student may correct a confident recognition without mathematical penalty
+ok 441 - student may correct a confident recognition without mathematical penalty
+# Subtest: unavailable recognition permits complete typed division in fixed region order
+ok 442 - unavailable recognition permits complete typed division in fixed region order
+# Subtest: manual entry links only unrecognized ink, leaving previously interpreted tokens intact
+ok 443 - manual entry links only unrecognized ink, leaving previously interpreted tokens intact
+# Subtest: late, invalid, duplicate and unknown-stroke recognitions fail without changing work
+ok 444 - late, invalid, duplicate and unknown-stroke recognitions fail without changing work
+# Subtest: erasing interpreted strokes invalidates linked tokens; corrections remain historical
+ok 445 - erasing interpreted strokes invalidates linked tokens; corrections remain historical
+# Subtest: fixture adapter never recognizes student ink; ambiguity localized to one digit
+ok 446 - fixture adapter never recognizes student ink; ambiguity localized to one digit
+# Subtest: incorrect intermediate digit is transported unchanged, never diagnosed by input layer
+ok 447 - incorrect intermediate digit is transported unchanged, never diagnosed by input layer
+# Subtest: draft store restores history, rejects unsupported/corrupt data and reports quota failures
+ok 448 - draft store restores history, rejects unsupported/corrupt data and reports quota failures
+# Subtest: configurable layouts accept arbitrary division and free writing without changing learner engine
+ok 449 - configurable layouts accept arbitrary division and free writing without changing learner engine
+# Subtest: contract exposes spatial worksheet and original entry sequence without scoring fields
+ok 450 - contract exposes spatial worksheet and original entry sequence without scoring fields
+# Subtest: changing Grade 7 board preserves verified competency evidence, history and academic year
+ok 451 - changing Grade 7 board preserves verified competency evidence, history and academic year
+# Subtest: visible active, solving subset, idle and hidden time partition without wall-clock catch-up
+ok 452 - visible active, solving subset, idle and hidden time partition without wall-clock catch-up
+# Subtest: 15-minute budget expires on active learning, not idle or background
+ok 453 - 15-minute budget expires on active learning, not idle or background
+# Subtest: 30-minute budget expires on active learning, not idle or background
+ok 454 - 30-minute budget expires on active learning, not idle or background
+# Subtest: 60-minute budget expires on active learning, not idle or background
+ok 455 - 60-minute budget expires on active learning, not idle or background
+# Subtest: submillisecond samples retain cumulative integer invariants across mode switches (reproducible)
+ok 456 - submillisecond samples retain cumulative integer invariants across mode switches (reproducible)
+# Subtest: session metadata does not alter ability; summary recommendations reuse the canonical planner
+ok 457 - session metadata does not alter ability; summary recommendations reuse the canonical planner
+# Subtest: an existing established prerequisite finding survives a successful helped retry
+ok 458 - an existing established prerequisite finding survives a successful helped retry
+# Subtest: the plan retains established diagnostic prerequisite findings without counting diagnostic answers twice
+ok 459 - the plan retains established diagnostic prerequisite findings without counting diagnostic answers twice
+# Subtest: cbse: diagnostics and prerequisite recovery come from existing engines; budgets do not change evidence
+ok 460 - cbse: diagnostics and prerequisite recovery come from existing engines; budgets do not change evidence
+# Subtest: tn: diagnostics and prerequisite recovery come from existing engines; budgets do not change evidence
+ok 461 - tn: diagnostics and prerequisite recovery come from existing engines; budgets do not change evidence
+# Subtest: saved session metadata and verified starting points cannot create or erase mastery
+ok 462 - saved session metadata and verified starting points cannot create or erase mastery
+# tests 462
+# suites 0
+# pass 460
+# fail 2
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 2295420.52319

@@ -1,0 +1,6 @@
+{
+ "schema": "supplement-review@1",
+ "content_version": "g8-supplement@1",
+ "note": "Educator decisions go here, one record per question: { id, version, decision: approve|revise|reject, issues[], comment, reviewer, authority: 'educator', date }. Owner approval is not educator review. An approved question still needs its status changed in a separate, reviewed change.",
+ "records": []
+}

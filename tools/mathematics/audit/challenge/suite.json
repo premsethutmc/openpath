@@ -1,0 +1,3677 @@
+[
+ {
+  "id": "syntax_equiv-01",
+  "category": "syntax_equiv",
+  "text": "3/(x-2)+1=5/(x-2)",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "4"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "4"
+   ],
+   "excluded": [
+    "2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "syntax_equiv-02",
+  "category": "syntax_equiv",
+  "text": "-(-(3/(x-2)))-(-1)=5/(x-2)",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "4"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "4"
+   ],
+   "excluded": [
+    "2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "syntax_equiv-03",
+  "category": "syntax_equiv",
+  "text": "x*(1/x)=1",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "syntax_equiv-04",
+  "category": "syntax_equiv",
+  "text": "3/4*x/(x-1)=1/2",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "-2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "-2"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "syntax_equiv-05",
+  "category": "syntax_equiv",
+  "text": "2-(1-(1/(x+1)))=3/2",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "1"
+  ],
+  "excluded": [
+   "-1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "1"
+   ],
+   "excluded": [
+    "-1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "syntax_equiv-06",
+  "category": "syntax_equiv",
+  "text": "2^2/(x-1)=2^-1",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "9"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "9"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "syntax_equiv-07",
+  "category": "syntax_equiv",
+  "text": "3/4x/(x-1)=1/2",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "syntax-rejected"
+  ],
+  "truth": {
+   "status": "parse-error",
+   "error": "parse error at 3 in \"3/4x/(x-1)\": trailing input",
+   "class": "out-of-scope",
+   "solution": null,
+   "excluded": null
+  },
+  "why": "Outside the documented boundary (syntax-rejected); expected behaviour is a refusal with one of these reason codes.",
+  "intent_note": []
+ },
+ {
+  "id": "syntax_equiv-08",
+  "category": "syntax_equiv",
+  "text": "2*(1/(x-1)+1)=4",
+  "label": "ambiguous",
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [
+   "complex-structure"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (complex-structure; complex-structure: a grouped sum that contains a fraction in x is used as a factor). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=unique, rational solutions=['2'], excluded=['1'].",
+  "intent_note": [
+   "complex-structure: a grouped sum that contains a fraction in x is used as a factor"
+  ]
+ },
+ {
+  "id": "rule_order-01",
+  "category": "rule_order",
+  "text": "1/(x-1)+1/(x+1)=2/((x-1)*(x+1))",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "rule_order-02",
+  "category": "rule_order",
+  "text": "1/(x-2)+3=(x+1)/(x-2)",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "3"
+   ],
+   "excluded": [
+    "2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "rule_order-03",
+  "category": "rule_order",
+  "text": "1/(x-1)-1/(x-2)=-1/((x-1)*(x-2))",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1",
+   "2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1",
+    "2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "rule_order-04",
+  "category": "rule_order",
+  "text": "(x-1)/(x+2)*(x+2)/(x-1)=1",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-2",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-2",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "rule_order-05",
+  "category": "rule_order",
+  "text": "2/(x+4)+3/(x-1)=(5*x+10)/((x+4)*(x-1))",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-4",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-4",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "rule_order-06",
+  "category": "rule_order",
+  "text": "1/(2*x-4)+1/(x-2)=3/2",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "3"
+   ],
+   "excluded": [
+    "2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "rule_order-07",
+  "category": "rule_order",
+  "text": "(x+1)/(x-1)+(x-1)/(x+1)=3",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=[], excluded=['-1', '1'].",
+  "intent_note": []
+ },
+ {
+  "id": "rule_order-08",
+  "category": "rule_order",
+  "text": "(x+1)/(x-1)*(x-1)/(x+1)*(x+2)/(x+2)=1",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-2",
+   "-1",
+   "1"
+  ],
+  "reasons": [
+   "numerator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-2",
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (numerator-outside-boundary; literal terms exceed the boundary but the fully reduced function is inside it). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['-2', '-1', '1'].",
+  "intent_note": [
+   "literal terms exceed the boundary but the fully reduced function is inside it"
+  ]
+ },
+ {
+  "id": "greedy_trap-01",
+  "category": "greedy_trap",
+  "text": "(x^2-9)/(x-3)=6",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "3"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "greedy_trap-02",
+  "category": "greedy_trap",
+  "text": "(x^2-9)/(x-3)=x+3",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "3"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "greedy_trap-03",
+  "category": "greedy_trap",
+  "text": "x*(x-2)/x=0",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "greedy_trap-04",
+  "category": "greedy_trap",
+  "text": "(x-1)^2/(x-1)=0",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "greedy_trap-05",
+  "category": "greedy_trap",
+  "text": "(x+2)/(x+2)+1/x=1/x+1",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-2",
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-2",
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "greedy_trap-06",
+  "category": "greedy_trap",
+  "text": "(x^2-5*x+6)/(x-2)=(x^2-5*x+6)/(x-3)",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "2",
+   "3"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "2",
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "greedy_trap-07",
+  "category": "greedy_trap",
+  "text": "(x^2-9)/(x-3)=x*(x+3)",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "-3",
+    "1"
+   ],
+   "excluded": [
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['-3', '1'], excluded=['3'].",
+  "intent_note": []
+ },
+ {
+  "id": "greedy_trap-08",
+  "category": "greedy_trap",
+  "text": "(x^2-9)*(x+1)/(x-3)=(x+3)*(x+1)",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "3"
+  ],
+  "reasons": [
+   "numerator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (numerator-outside-boundary; literal terms exceed the boundary but the fully reduced function is inside it). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['3'].",
+  "intent_note": [
+   "literal terms exceed the boundary but the fully reduced function is inside it"
+  ]
+ },
+ {
+  "id": "expansion-01",
+  "category": "expansion",
+  "text": "(x+1)^2/(x-1)=(x^2+2*x+1)/(x-1)",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "expansion-02",
+  "category": "expansion",
+  "text": "(x+1)*(x+2)/(x-1)=(x^2+3*x+2)/(x-1)",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "expansion-03",
+  "category": "expansion",
+  "text": "(2*x+2)/(x^2-1)=2/(x-1)",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "expansion-04",
+  "category": "expansion",
+  "text": "1/(x-1)^2-1/(x-1)=(2-x)/(x-1)^2",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "expansion-05",
+  "category": "expansion",
+  "text": "3/(x^2-x)=3/x-3/(x-1)+3/(x*(x-1))",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "0",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "expansion-06",
+  "category": "expansion",
+  "text": "1/(x*(x-1))=1/(x-1)-1/x",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "0",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "0",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "expansion-07",
+  "category": "expansion",
+  "text": "(x+1)^3/(x-1)=0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "numerator-outside-boundary",
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "-1"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (numerator-outside-boundary, reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['-1'], excluded=['1'].",
+  "intent_note": []
+ },
+ {
+  "id": "expansion-08",
+  "category": "expansion",
+  "text": "(x+1)^3/(x+1)^2=x+1",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-1"
+  ],
+  "reasons": [
+   "numerator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (numerator-outside-boundary; literal terms exceed the boundary but the fully reduced function is inside it). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['-1'].",
+  "intent_note": [
+   "literal terms exceed the boundary but the fully reduced function is inside it"
+  ]
+ },
+ {
+  "id": "restricted_identity_empty-01",
+  "category": "restricted_identity_empty",
+  "text": "1/x+1/x=2/x",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "restricted_identity_empty-02",
+  "category": "restricted_identity_empty",
+  "text": "1/x=0",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "restricted_identity_empty-03",
+  "category": "restricted_identity_empty",
+  "text": "(x-1)/(x-1)=2",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "restricted_identity_empty-04",
+  "category": "restricted_identity_empty",
+  "text": "(3*x+6)/(x+2)=3",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "restricted_identity_empty-05",
+  "category": "restricted_identity_empty",
+  "text": "(3*x+6)/(x+2)=4",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "-2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "restricted_identity_empty-06",
+  "category": "restricted_identity_empty",
+  "text": "x/(x-1)+1/(1-x)=1",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "restricted_identity_empty-07",
+  "category": "restricted_identity_empty",
+  "text": "1/(x^2+1)=1/(x^2+1)",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary); expected behaviour is a refusal with one of these reason codes. Exact truth: class=identity-on-domain, rational solutions=[], excluded=[].",
+  "intent_note": []
+ },
+ {
+  "id": "restricted_identity_empty-08",
+  "category": "restricted_identity_empty",
+  "text": "x/x=x^0",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [
+   "convention",
+   "x^0"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (convention; x^0; x^0). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['0'].",
+  "intent_note": [
+   "x^0"
+  ]
+ },
+ {
+  "id": "repeated_multi_excl-01",
+  "category": "repeated_multi_excl",
+  "text": "1/(x-1)^2=1/(x-1)",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "repeated_multi_excl-02",
+  "category": "repeated_multi_excl",
+  "text": "x/(x-1)^2+1/(x-1)=2/(x-1)^2",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "3/2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "3/2"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "repeated_multi_excl-03",
+  "category": "repeated_multi_excl",
+  "text": "(x-1)/(x-1)^3=0",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "repeated_multi_excl-04",
+  "category": "repeated_multi_excl",
+  "text": "1/(x-1)-1/(x-2)+1/(x-2)-1/(x-3)+1/(x-3)-1/(x-4)=1/(x-1)-1/(x-4)",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "repeated_multi_excl-05",
+  "category": "repeated_multi_excl",
+  "text": "x/((x-1)*(x-2)*(x-3))=0",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "1",
+   "2",
+   "3"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "1",
+    "2",
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "repeated_multi_excl-06",
+  "category": "repeated_multi_excl",
+  "text": "x^2/(x*(x-1))=1",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "0",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "repeated_multi_excl-07",
+  "category": "repeated_multi_excl",
+  "text": "1/(x-1)^2=4",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "1/2",
+    "3/2"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['1/2', '3/2'], excluded=['1'].",
+  "intent_note": []
+ },
+ {
+  "id": "repeated_multi_excl-08",
+  "category": "repeated_multi_excl",
+  "text": "1/(x-1)+1/(x-2)+1/(x-3)=0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [],
+   "excluded": [
+    "1",
+    "2",
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=[], excluded=['1', '2', '3'].",
+  "intent_note": []
+ },
+ {
+  "id": "repeated_multi_excl-09",
+  "category": "repeated_multi_excl",
+  "text": "(x-1)^2*(x+1)/((x-1)^2*(x+1))=1",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "reasons": [
+   "numerator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (numerator-outside-boundary; literal terms exceed the boundary but the fully reduced function is inside it). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['-1', '1'].",
+  "intent_note": [
+   "literal terms exceed the boundary but the fully reduced function is inside it"
+  ]
+ },
+ {
+  "id": "removable-01",
+  "category": "removable",
+  "text": "(x^2-1)/(x-1)=2",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "removable-02",
+  "category": "removable",
+  "text": "(x^2-1)/(x-1)=0",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "-1"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "-1"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "removable-03",
+  "category": "removable",
+  "text": "(2*x^2-2)/(x^2-1)=2",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "removable-04",
+  "category": "removable",
+  "text": "(x^2-x-6)/(x-3)=x+2",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "3"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "removable-05",
+  "category": "removable",
+  "text": "(x^2-x)/(x-1)=3",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "3"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "removable-06",
+  "category": "removable",
+  "text": "(x^2-x)/(x-1)=0",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "removable-07",
+  "category": "removable",
+  "text": "(x^3-x)/(x-1)=0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "numerator-outside-boundary",
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "-1",
+    "0"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (numerator-outside-boundary, reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['-1', '0'], excluded=['1'].",
+  "intent_note": []
+ },
+ {
+  "id": "removable-08",
+  "category": "removable",
+  "text": "(x^3-x)/(x-1)=x^2+x",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [
+   "numerator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (numerator-outside-boundary; literal terms exceed the boundary but the fully reduced function is inside it). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['1'].",
+  "intent_note": [
+   "literal terms exceed the boundary but the fully reduced function is inside it"
+  ]
+ },
+ {
+  "id": "candidate_excluded-01",
+  "category": "candidate_excluded",
+  "text": "x/(x-1)=1/(x-1)",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "candidate_excluded-02",
+  "category": "candidate_excluded",
+  "text": "5/(x-1)=(x+4)/(x-1)",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "candidate_excluded-03",
+  "category": "candidate_excluded",
+  "text": "1/(x+1)+1/(x-1)=2/(x^2-1)",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "candidate_excluded-04",
+  "category": "candidate_excluded",
+  "text": "1/x+1/(x-1)=1/(x*(x-1))",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "0",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "candidate_excluded-05",
+  "category": "candidate_excluded",
+  "text": "(x^2-3*x)/(x-3)=3",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "3"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "candidate_excluded-06",
+  "category": "candidate_excluded",
+  "text": "x^2/(x-1)=1/(x-1)",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "-1"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "-1"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "candidate_excluded-07",
+  "category": "candidate_excluded",
+  "text": "x^2/(x-1)=x^2/(x-2)",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "1",
+    "2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['0'], excluded=['1', '2'].",
+  "intent_note": []
+ },
+ {
+  "id": "candidate_excluded-08",
+  "category": "candidate_excluded",
+  "text": "(x^2-x)*x/(x*(x-1))=x",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "0",
+   "1"
+  ],
+  "reasons": [
+   "numerator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "0",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (numerator-outside-boundary; literal terms exceed the boundary but the fully reduced function is inside it). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['0', '1'].",
+  "intent_note": [
+   "literal terms exceed the boundary but the fully reduced function is inside it"
+  ]
+ },
+ {
+  "id": "lookalike_factors-01",
+  "category": "lookalike_factors",
+  "text": "(x-2)/(2-x)=-1",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "lookalike_factors-02",
+  "category": "lookalike_factors",
+  "text": "(2*x-4)/(x-2)=2",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "lookalike_factors-03",
+  "category": "lookalike_factors",
+  "text": "(x-4)/(x-2)=0",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "4"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "4"
+   ],
+   "excluded": [
+    "2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "lookalike_factors-04",
+  "category": "lookalike_factors",
+  "text": "(x+1)/(x-1)=(x-1)/(x+1)",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "lookalike_factors-05",
+  "category": "lookalike_factors",
+  "text": "(x+1)/(x-1)=-1",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "lookalike_factors-06",
+  "category": "lookalike_factors",
+  "text": "(3-x)/(x-3)=x",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "-1"
+  ],
+  "excluded": [
+   "3"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "-1"
+   ],
+   "excluded": [
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "lookalike_factors-07",
+  "category": "lookalike_factors",
+  "text": "(x-1)^2/(x+1)=(x+1)^2/(x-1)",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=[], excluded=['-1', '1'].",
+  "intent_note": []
+ },
+ {
+  "id": "lookalike_factors-08",
+  "category": "lookalike_factors",
+  "text": "(x^2-1)/(x+1)*(x+1)/(x-1)=1",
+  "label": "ambiguous",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "reasons": [
+   "numerator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (numerator-outside-boundary; literal terms exceed the boundary but the fully reduced function is inside it). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=unique, rational solutions=['0'], excluded=['-1', '1'].",
+  "intent_note": [
+   "literal terms exceed the boundary but the fully reduced function is inside it"
+  ]
+ },
+ {
+  "id": "near_boundary-01",
+  "category": "near_boundary",
+  "text": "1/((x-1)*(x-2)*(x-3))=0",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1",
+   "2",
+   "3"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1",
+    "2",
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "near_boundary-02",
+  "category": "near_boundary",
+  "text": "1/(x-1)^3=0",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "near_boundary-03",
+  "category": "near_boundary",
+  "text": "1/(x^3-x)=0",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "0",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "0",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "near_boundary-04",
+  "category": "near_boundary",
+  "text": "1/((x-1)*(x-2)*(x-3)*(x-4))=1",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary",
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [],
+   "excluded": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary, reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=[], excluded=['1', '2', '3', '4'].",
+  "intent_note": []
+ },
+ {
+  "id": "near_boundary-05",
+  "category": "near_boundary",
+  "text": "1/(x-1)^4=0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary); expected behaviour is a refusal with one of these reason codes. Exact truth: class=none, rational solutions=[], excluded=['1'].",
+  "intent_note": []
+ },
+ {
+  "id": "near_boundary-06",
+  "category": "near_boundary",
+  "text": "1/(x^3-2)=0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [],
+   "irrational_excluded_values": 1
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary); expected behaviour is a refusal with one of these reason codes. Exact truth: class=none, rational solutions=[], excluded=[], plus 1 irrational excluded value(s).",
+  "intent_note": []
+ },
+ {
+  "id": "near_boundary-07",
+  "category": "near_boundary",
+  "text": "(x^2-5*x+6)/(x-1)=0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "2",
+    "3"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['2', '3'], excluded=['1'].",
+  "intent_note": []
+ },
+ {
+  "id": "near_boundary-08",
+  "category": "near_boundary",
+  "text": "(x^2-1)/(x-1)+(x^2-4)/(x-2)=7",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1",
+   "2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1",
+    "2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "near_boundary-09",
+  "category": "near_boundary",
+  "text": "(x^2-1)/(x-1)=x*(x+1)",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "-1"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['-1'], excluded=['1'].",
+  "intent_note": []
+ },
+ {
+  "id": "near_boundary-10",
+  "category": "near_boundary",
+  "text": "x/(x-1)=x/(x+1)",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "0"
+  ],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "near_boundary-11",
+  "category": "near_boundary",
+  "text": "x/(x*(x-1)*(x-2)*(x-3))=0",
+  "label": "ambiguous",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0",
+   "1",
+   "2",
+   "3"
+  ],
+  "reasons": [
+   "denominator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "0",
+    "1",
+    "2",
+    "3"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (denominator-outside-boundary; literal terms exceed the boundary but the fully reduced function is inside it). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=none, rational solutions=[], excluded=['0', '1', '2', '3'].",
+  "intent_note": [
+   "literal terms exceed the boundary but the fully reduced function is inside it"
+  ]
+ },
+ {
+  "id": "near_boundary-12",
+  "category": "near_boundary",
+  "text": "1/((x-1)*(x-2))*1/((x-3)*(x-4))=0",
+  "label": "ambiguous",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "reasons": [
+   "product of two fractions: each denominator has 2 factors, the combined term has 4"
+  ],
+  "override": true,
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (product of two fractions: each denominator has 2 factors, the combined term has 4). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=none, rational solutions=[], excluded=['1', '2', '3', '4'].",
+  "intent_note": []
+ },
+ {
+  "id": "irrational-01",
+  "category": "irrational",
+  "text": "1/(x^2-2)=1",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary",
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [],
+   "excluded": [],
+   "irrational_excluded_values": 2
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary, reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=[], excluded=[], plus 2 irrational excluded value(s).",
+  "intent_note": []
+ },
+ {
+  "id": "irrational-02",
+  "category": "irrational",
+  "text": "3/(x^2-3)=0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [],
+   "irrational_excluded_values": 2
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary); expected behaviour is a refusal with one of these reason codes. Exact truth: class=none, rational solutions=[], excluded=[], plus 2 irrational excluded value(s).",
+  "intent_note": []
+ },
+ {
+  "id": "irrational-03",
+  "category": "irrational",
+  "text": "x/(x^2-x-1)=1",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary",
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [],
+   "excluded": [],
+   "irrational_excluded_values": 2
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary, reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=[], excluded=[], plus 2 irrational excluded value(s).",
+  "intent_note": []
+ },
+ {
+  "id": "irrational-04",
+  "category": "irrational",
+  "text": "1/(x^2-2)+1/(x^2-2)=2/(x^2-2)",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [],
+   "irrational_excluded_values": 2
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary); expected behaviour is a refusal with one of these reason codes. Exact truth: class=identity-on-domain, rational solutions=[], excluded=[], plus 2 irrational excluded value(s).",
+  "intent_note": []
+ },
+ {
+  "id": "irrational-05",
+  "category": "irrational",
+  "text": "1/(2*x^2-1)=1",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary",
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "-1",
+    "1"
+   ],
+   "excluded": [],
+   "irrational_excluded_values": 2
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary, reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['-1', '1'], excluded=[], plus 2 irrational excluded value(s).",
+  "intent_note": []
+ },
+ {
+  "id": "irrational-06",
+  "category": "irrational",
+  "text": "(x+1)/(x^2-2*x-1)=0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "-1"
+   ],
+   "excluded": [],
+   "irrational_excluded_values": 2
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary); expected behaviour is a refusal with one of these reason codes. Exact truth: class=unique, rational solutions=['-1'], excluded=[], plus 2 irrational excluded value(s).",
+  "intent_note": []
+ },
+ {
+  "id": "irrational-07",
+  "category": "irrational",
+  "text": "(x^2-2)/(x-1)=x+1-1/(x-1)",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [
+   "numerator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (numerator-outside-boundary; literal terms exceed the boundary but the fully reduced function is inside it). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['1'].",
+  "intent_note": [
+   "literal terms exceed the boundary but the fully reduced function is inside it"
+  ]
+ },
+ {
+  "id": "irrational-08",
+  "category": "irrational",
+  "text": "x/(x^2+x+1)=1/3",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary",
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "1"
+   ],
+   "excluded": [],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary, reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['1'], excluded=[].",
+  "intent_note": []
+ },
+ {
+  "id": "outside_boundary-01",
+  "category": "outside_boundary",
+  "text": "(x^3-1)/(x-1)=3",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "numerator-outside-boundary",
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "-2"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (numerator-outside-boundary, reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['-2'], excluded=['1'].",
+  "intent_note": []
+ },
+ {
+  "id": "outside_boundary-02",
+  "category": "outside_boundary",
+  "text": "x^4/(x-1)=0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "numerator-outside-boundary",
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (numerator-outside-boundary, reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['0'], excluded=['1'].",
+  "intent_note": []
+ },
+ {
+  "id": "outside_boundary-03",
+  "category": "outside_boundary",
+  "text": "(x^2+1)/(x+1)=(x^2+1)/(x-1)",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "numerator-outside-boundary",
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (numerator-outside-boundary, reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=[], excluded=['-1', '1'].",
+  "intent_note": []
+ },
+ {
+  "id": "outside_boundary-04",
+  "category": "outside_boundary",
+  "text": "x/(x^4-1)=0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary); expected behaviour is a refusal with one of these reason codes. Exact truth: class=unique, rational solutions=['0'], excluded=['-1', '1'].",
+  "intent_note": []
+ },
+ {
+  "id": "outside_boundary-05",
+  "category": "outside_boundary",
+  "text": "1/(x^3-x^2+x-1)=0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "denominator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (denominator-outside-boundary); expected behaviour is a refusal with one of these reason codes. Exact truth: class=none, rational solutions=[], excluded=['1'].",
+  "intent_note": []
+ },
+ {
+  "id": "outside_boundary-06",
+  "category": "outside_boundary",
+  "text": "1/(x-x)=1",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "undefined-expression"
+  ],
+  "truth": {
+   "status": "undefined",
+   "error": "division by an expression that is identically zero",
+   "class": "out-of-scope",
+   "solution": null,
+   "excluded": null
+  },
+  "why": "Outside the documented boundary (undefined-expression); expected behaviour is a refusal with one of these reason codes.",
+  "intent_note": []
+ },
+ {
+  "id": "outside_boundary-07",
+  "category": "outside_boundary",
+  "text": "x^(1/2)/(x-1)=1",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "outside-grammar:non-integer exponent"
+  ],
+  "truth": {
+   "status": "out-of-grammar",
+   "error": "non-integer exponent",
+   "class": "out-of-scope",
+   "solution": null,
+   "excluded": null
+  },
+  "why": "Outside the documented boundary (outside-grammar:non-integer exponent); expected behaviour is a refusal with one of these reason codes.",
+  "intent_note": []
+ },
+ {
+  "id": "outside_boundary-08",
+  "category": "outside_boundary",
+  "text": "(x^2+x+1)/(x+1)=1",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "numerator-outside-boundary",
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "0"
+   ],
+   "excluded": [
+    "-1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (numerator-outside-boundary, reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['0'], excluded=['-1'].",
+  "intent_note": []
+ },
+ {
+  "id": "no_var_denominator-01",
+  "category": "no_var_denominator",
+  "text": "x/2+1=3",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "no-variable-denominator"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "4"
+   ],
+   "excluded": [],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (no-variable-denominator); expected behaviour is a refusal with one of these reason codes. Exact truth: class=unique, rational solutions=['4'], excluded=[].",
+  "intent_note": []
+ },
+ {
+  "id": "no_var_denominator-02",
+  "category": "no_var_denominator",
+  "text": "1/2*x=5/3",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "no-variable-denominator"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "10/3"
+   ],
+   "excluded": [],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (no-variable-denominator); expected behaviour is a refusal with one of these reason codes. Exact truth: class=unique, rational solutions=['10/3'], excluded=[].",
+  "intent_note": []
+ },
+ {
+  "id": "no_var_denominator-03",
+  "category": "no_var_denominator",
+  "text": "3*x/4-x/2=1",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "no-variable-denominator"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "4"
+   ],
+   "excluded": [],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (no-variable-denominator); expected behaviour is a refusal with one of these reason codes. Exact truth: class=unique, rational solutions=['4'], excluded=[].",
+  "intent_note": []
+ },
+ {
+  "id": "no_var_denominator-04",
+  "category": "no_var_denominator",
+  "text": "x=7",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "no-variable-denominator"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "7"
+   ],
+   "excluded": [],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (no-variable-denominator); expected behaviour is a refusal with one of these reason codes. Exact truth: class=unique, rational solutions=['7'], excluded=[].",
+  "intent_note": []
+ },
+ {
+  "id": "no_var_denominator-05",
+  "category": "no_var_denominator",
+  "text": "1/2+1/3=5/6",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "no-variable-denominator"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (no-variable-denominator); expected behaviour is a refusal with one of these reason codes. Exact truth: class=identity-on-domain, rational solutions=[], excluded=[].",
+  "intent_note": []
+ },
+ {
+  "id": "no_var_denominator-06",
+  "category": "no_var_denominator",
+  "text": "x/0=1",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "undefined-expression"
+  ],
+  "truth": {
+   "status": "undefined",
+   "error": "division by an expression that is identically zero",
+   "class": "out-of-scope",
+   "solution": null,
+   "excluded": null
+  },
+  "why": "Outside the documented boundary (undefined-expression); expected behaviour is a refusal with one of these reason codes.",
+  "intent_note": []
+ },
+ {
+  "id": "no_var_denominator-07",
+  "category": "no_var_denominator",
+  "text": "2*x/(1+1)=x",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "no-variable-denominator"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (no-variable-denominator); expected behaviour is a refusal with one of these reason codes. Exact truth: class=identity-on-domain, rational solutions=[], excluded=[].",
+  "intent_note": []
+ },
+ {
+  "id": "no_var_denominator-08",
+  "category": "no_var_denominator",
+  "text": "(x+1)/3=2",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "no-variable-denominator"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "5"
+   ],
+   "excluded": [],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (no-variable-denominator); expected behaviour is a refusal with one of these reason codes. Exact truth: class=unique, rational solutions=['5'], excluded=[].",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-01",
+  "category": "parser_stress",
+  "text": "   3 / ( x - 2 )   +  1 = 5/(x-2)",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "4"
+  ],
+  "excluded": [
+   "2"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "4"
+   ],
+   "excluded": [
+    "2"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-02",
+  "category": "parser_stress",
+  "text": "x^1/(x-1)=2",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-03",
+  "category": "parser_stress",
+  "text": "0*x/(x-1)=0",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-04",
+  "category": "parser_stress",
+  "text": "999999*x/(x-1)=999999",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-05",
+  "category": "parser_stress",
+  "text": "1/1000*x/(x-1)=1/1000",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-06",
+  "category": "parser_stress",
+  "text": "0.001/(x-1)=0.002/(x+1)",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "3"
+   ],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-07",
+  "category": "parser_stress",
+  "text": "12/3/(x-1)=4/(x-1)",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-08",
+  "category": "parser_stress",
+  "text": "1/(x-1)=2^3^2/512",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-09",
+  "category": "parser_stress",
+  "text": "-x^2/x^2=-1",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-10",
+  "category": "parser_stress",
+  "text": "2x/(x-1)=1",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "syntax-rejected"
+  ],
+  "truth": {
+   "status": "parse-error",
+   "error": "parse error at 1 in \"2x/(x-1)\": trailing input",
+   "class": "out-of-scope",
+   "solution": null,
+   "excluded": null
+  },
+  "why": "Outside the documented boundary (syntax-rejected); expected behaviour is a refusal with one of these reason codes.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-11",
+  "category": "parser_stress",
+  "text": "2(x-1)/(x-1)=2",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "syntax-rejected"
+  ],
+  "truth": {
+   "status": "parse-error",
+   "error": "parse error at 1 in \"2(x-1)/(x-1)\": trailing input",
+   "class": "out-of-scope",
+   "solution": null,
+   "excluded": null
+  },
+  "why": "Outside the documented boundary (syntax-rejected); expected behaviour is a refusal with one of these reason codes.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-12",
+  "category": "parser_stress",
+  "text": "x/(x-1)=.5",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "syntax-rejected"
+  ],
+  "truth": {
+   "status": "parse-error",
+   "error": "parse error at 0 in \".5\": unexpected token",
+   "class": "out-of-scope",
+   "solution": null,
+   "excluded": null
+  },
+  "why": "Outside the documented boundary (syntax-rejected); expected behaviour is a refusal with one of these reason codes.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-13",
+  "category": "parser_stress",
+  "text": "1/(x-1)=1e0",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "syntax-rejected"
+  ],
+  "truth": {
+   "status": "parse-error",
+   "error": "parse error at 1 in \"1e0\": trailing input",
+   "class": "out-of-scope",
+   "solution": null,
+   "excluded": null
+  },
+  "why": "Outside the documented boundary (syntax-rejected); expected behaviour is a refusal with one of these reason codes.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-14",
+  "category": "parser_stress",
+  "text": "+1/(x-1)=2",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "syntax-rejected"
+  ],
+  "truth": {
+   "status": "parse-error",
+   "error": "parse error at 0 in \"+1/(x-1)\": unexpected token",
+   "class": "out-of-scope",
+   "solution": null,
+   "excluded": null
+  },
+  "why": "Outside the documented boundary (syntax-rejected); expected behaviour is a refusal with one of these reason codes.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-15",
+  "category": "parser_stress",
+  "text": "1/(x-1)=y",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "syntax-rejected"
+  ],
+  "truth": {
+   "status": "parse-error",
+   "error": "parse error at 0 in \"y\": unexpected token",
+   "class": "out-of-scope",
+   "solution": null,
+   "excluded": null
+  },
+  "why": "Outside the documented boundary (syntax-rejected); expected behaviour is a refusal with one of these reason codes.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-16",
+  "category": "parser_stress",
+  "text": "x^0/(x-1)=1",
+  "label": "ambiguous",
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [
+   "convention",
+   "x^0"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (convention; x^0; x^0). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=unique, rational solutions=['2'], excluded=['1'].",
+  "intent_note": [
+   "x^0"
+  ]
+ },
+ {
+  "id": "parser_stress-17",
+  "category": "parser_stress",
+  "text": "1000000/(x-1)=1000000",
+  "label": "ambiguous",
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [
+   "convention",
+   "coefficient>=1e6"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (convention; coefficient>=1e6; coefficient>=1e6). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=unique, rational solutions=['2'], excluded=['1'].",
+  "intent_note": [
+   "coefficient>=1e6"
+  ]
+ },
+ {
+  "id": "parser_stress-18",
+  "category": "parser_stress",
+  "text": "1/(x-1)=2=3",
+  "label": "ambiguous",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "multiple '=' signs: the documented grammar does not say how the equation splits"
+  ],
+  "override": true,
+  "truth": {
+   "status": "parse-error",
+   "error": "expected exactly one '=' (got 2)",
+   "class": "out-of-scope",
+   "solution": null,
+   "excluded": null
+  },
+  "why": "Documented boundary does not clearly decide (multiple '=' signs: the documented grammar does not say how the equation splits). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible.",
+  "intent_note": []
+ },
+ {
+  "id": "parser_stress-19",
+  "category": "parser_stress",
+  "text": "1 0/(x-1)=10/(x-1)",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [
+   "convention",
+   "whitespace-inside-number"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (convention; whitespace-inside-number; whitespace-inside-number). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['1'].",
+  "intent_note": [
+   "whitespace-inside-number"
+  ]
+ },
+ {
+  "id": "parser_stress-20",
+  "category": "parser_stress",
+  "text": "x/(x-1000000)=2",
+  "label": "ambiguous",
+  "class": "unique",
+  "solution": [
+   "2000000"
+  ],
+  "excluded": [
+   "1000000"
+  ],
+  "reasons": [
+   "convention",
+   "coefficient>=1e6"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "2000000"
+   ],
+   "excluded": [
+    "1000000"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (convention; coefficient>=1e6; coefficient>=1e6). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=unique, rational solutions=['2000000'], excluded=['1000000'].",
+  "intent_note": [
+   "coefficient>=1e6"
+  ]
+ },
+ {
+  "id": "const_times_x-01",
+  "category": "const_times_x",
+  "text": "1/(3*x)=1/6",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "2"
+  ],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "2"
+   ],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "const_times_x-02",
+  "category": "const_times_x",
+  "text": "5/(2*x)+1=3/(2*x)",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "-1"
+  ],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "-1"
+   ],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "const_times_x-03",
+  "category": "const_times_x",
+  "text": "1/(x/2)=4",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "1/2"
+  ],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "1/2"
+   ],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "const_times_x-04",
+  "category": "const_times_x",
+  "text": "1/(0.25*x)=8",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "1/2"
+  ],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "1/2"
+   ],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "const_times_x-05",
+  "category": "const_times_x",
+  "text": "(1/2)/(3/4*x)=2/3",
+  "label": "supported",
+  "class": "unique",
+  "solution": [
+   "1"
+  ],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "1"
+   ],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "const_times_x-06",
+  "category": "const_times_x",
+  "text": "x/(5*x)=1/5",
+  "label": "supported",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "const_times_x-07",
+  "category": "const_times_x",
+  "text": "4/(2*x)=2/x+1",
+  "label": "supported",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Inside the documented boundary; expected values derived by exact reduction.",
+  "intent_note": []
+ },
+ {
+  "id": "const_times_x-08",
+  "category": "const_times_x",
+  "text": "4/(3*x^2)=1/3",
+  "label": "unsupported",
+  "class": "out-of-scope",
+  "solution": null,
+  "excluded": null,
+  "reasons": [
+   "reduced-degree>=2"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "degree>=2",
+   "solution": [
+    "-2",
+    "2"
+   ],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Outside the documented boundary (reduced-degree>=2); expected behaviour is a refusal with one of these reason codes. Exact truth: class=degree>=2, rational solutions=['-2', '2'], excluded=['0'].",
+  "intent_note": []
+ },
+ {
+  "id": "ambiguous_shape-01",
+  "category": "ambiguous_shape",
+  "text": "(x^2-1)*(x+2)/(x-1)=x^2+3*x+1",
+  "label": "ambiguous",
+  "class": "none",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [
+   "numerator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "none",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (numerator-outside-boundary; literal terms exceed the boundary but the fully reduced function is inside it). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=none, rational solutions=[], excluded=['1'].",
+  "intent_note": [
+   "literal terms exceed the boundary but the fully reduced function is inside it"
+  ]
+ },
+ {
+  "id": "ambiguous_shape-02",
+  "category": "ambiguous_shape",
+  "text": "1/(x^2-1)=1/2*(1/(x-1)-1/(x+1))",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "reasons": [
+   "complex-structure"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (complex-structure; complex-structure: a grouped sum that contains a fraction in x is used as a factor). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['-1', '1'].",
+  "intent_note": [
+   "complex-structure: a grouped sum that contains a fraction in x is used as a factor"
+  ]
+ },
+ {
+  "id": "ambiguous_shape-03",
+  "category": "ambiguous_shape",
+  "text": "2*(1/(x-1)+1/(x+1))=4*x/(x^2-1)",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "1"
+  ],
+  "reasons": [
+   "complex-structure"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (complex-structure; complex-structure: a grouped sum that contains a fraction in x is used as a factor). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['-1', '1'].",
+  "intent_note": [
+   "complex-structure: a grouped sum that contains a fraction in x is used as a factor"
+  ]
+ },
+ {
+  "id": "ambiguous_shape-04",
+  "category": "ambiguous_shape",
+  "text": "(1/x+1)/(1/x)=x+1",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [
+   "complex-structure"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (complex-structure; complex-structure: a grouped sum that contains a fraction in x is used as a factor). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['0'].",
+  "intent_note": [
+   "complex-structure: a grouped sum that contains a fraction in x is used as a factor"
+  ]
+ },
+ {
+  "id": "ambiguous_shape-05",
+  "category": "ambiguous_shape",
+  "text": "1/(1/x)=3",
+  "label": "ambiguous",
+  "class": "unique",
+  "solution": [
+   "3"
+  ],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [
+   "complex-structure"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "3"
+   ],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (complex-structure; complex-structure: a fraction in x appears inside a denominator (nested denominator)). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=unique, rational solutions=['3'], excluded=['0'].",
+  "intent_note": [
+   "complex-structure: a fraction in x appears inside a denominator (nested denominator)"
+  ]
+ },
+ {
+  "id": "ambiguous_shape-06",
+  "category": "ambiguous_shape",
+  "text": "1/(x-1/x)=1/(x-1/x)",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "-1",
+   "0",
+   "1"
+  ],
+  "reasons": [
+   "complex-structure"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "-1",
+    "0",
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (complex-structure; complex-structure: a grouped sum that contains a fraction in x is used as a factor). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['-1', '0', '1'].",
+  "intent_note": [
+   "complex-structure: a grouped sum that contains a fraction in x is used as a factor"
+  ]
+ },
+ {
+  "id": "ambiguous_shape-07",
+  "category": "ambiguous_shape",
+  "text": "x^-1=2",
+  "label": "ambiguous",
+  "class": "unique",
+  "solution": [
+   "1/2"
+  ],
+  "excluded": [
+   "0"
+  ],
+  "reasons": [
+   "complex-structure"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "unique",
+   "solution": [
+    "1/2"
+   ],
+   "excluded": [
+    "0"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (complex-structure; complex-structure: negative exponent on x-containing base (denominator not written with '/')). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=unique, rational solutions=['1/2'], excluded=['0'].",
+  "intent_note": [
+   "complex-structure: negative exponent on x-containing base (denominator not written with '/')"
+  ]
+ },
+ {
+  "id": "ambiguous_shape-08",
+  "category": "ambiguous_shape",
+  "text": "(x^2+1)/(x-1)=x+1+2/(x-1)",
+  "label": "ambiguous",
+  "class": "identity-on-domain",
+  "solution": [],
+  "excluded": [
+   "1"
+  ],
+  "reasons": [
+   "numerator-outside-boundary"
+  ],
+  "truth": {
+   "status": "ok",
+   "class": "identity-on-domain",
+   "solution": [],
+   "excluded": [
+    "1"
+   ],
+   "irrational_excluded_values": 0
+  },
+  "why": "Documented boundary does not clearly decide (numerator-outside-boundary; literal terms exceed the boundary but the fully reduced function is inside it). If the engine accepts, class/solution/excluded below are the exact truth; a refusal is also defensible. Exact truth: class=identity-on-domain, rational solutions=[], excluded=['1'].",
+  "intent_note": [
+   "literal terms exceed the boundary but the fully reduced function is inside it"
+  ]
+ }
+]

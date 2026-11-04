@@ -1,0 +1,87 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "competency": "MATH.statistics.median-mode",
+      "strategy": "fix_mean_for_median",
+      "diagnostics": [
+        "gen:akmed:8,5",
+        "gen:akmed:51,5"
+      ],
+      "renderedScreens": 2,
+      "fresh": "gen:akmed:2,5:mc",
+      "savedEvents": 6,
+      "reloaded": true,
+      "educatorApproved": false,
+      "retention": {
+        "demonstrated": true,
+        "question": "gen:akmed:43,7",
+        "family": "akmed",
+        "parameterScopeMatched": true,
+        "reloaded": true,
+        "claim": "One delayed answer in this declared scope; not mastery of every family form"
+      }
+    },
+    {
+      "competency": "MATH.probability.classical",
+      "strategy": "fix_colours_equally_likely",
+      "diagnostics": [
+        "gen:anbag:6,9,7,2",
+        "gen:anbag:9,2,4,1"
+      ],
+      "renderedScreens": 2,
+      "fresh": "gen:anbag:2,2,3,0",
+      "savedEvents": 6,
+      "reloaded": true,
+      "educatorApproved": false,
+      "retention": {
+        "demonstrated": true,
+        "question": "gen:anbag:3,4,7,1",
+        "family": "anbag",
+        "parameterScopeMatched": true,
+        "reloaded": true,
+        "claim": "One delayed answer in this declared scope; not mastery of every family form"
+      }
+    },
+    {
+      "competency": "MATH.number.fraction-models",
+      "strategy": "fix_shaded_to_unshaded",
+      "diagnostics": [
+        "gen:adfname:2,6,7",
+        "gen:adfname:1,3,1"
+      ],
+      "renderedScreens": 2,
+      "fresh": "gen:adfname:4,4,9",
+      "savedEvents": 6,
+      "reloaded": true,
+      "educatorApproved": false,
+      "retention": {
+        "demonstrated": false,
+        "reason": "No scoped delayed question selected by the existing runtime",
+        "phase": "retention",
+        "question": "fm-r1"
+      }
+    },
+    {
+      "competency": "MATH.statistics.scaled-bars",
+      "strategy": "fix_assume_tens",
+      "diagnostics": [
+        "gen:afbar:3,2,6",
+        "gen:afbar:4,0,5"
+      ],
+      "renderedScreens": 2,
+      "fresh": "gen:afbar:3,2,3",
+      "savedEvents": 6,
+      "reloaded": true,
+      "educatorApproved": false,
+      "retention": {
+        "demonstrated": true,
+        "question": "gen:afbar:3,2,7",
+        "family": "afbar",
+        "parameterScopeMatched": true,
+        "reloaded": true,
+        "claim": "One delayed answer in this declared scope; not mastery of every family form"
+      }
+    }
+  ]
+}
