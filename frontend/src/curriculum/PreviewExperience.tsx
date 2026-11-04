@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { creditOf } from "../../../packages/learning/src/grade";
-import { misconceptionOf, moduleFor, question } from "../../../packages/learning/src/content";
+import { moduleFor, question } from "../../../packages/learning/src/content";
+import { answerFeedback } from "../../../packages/learning/src/answer-feedback";
 import { familyOf } from "../../../packages/learning/src/intervention";
 import { problemOf } from "../../../packages/learning/src/families";
 import { canCheckWorking, checkWorking } from "../../../packages/learning/src/working";
@@ -62,7 +63,7 @@ export function PreviewExperience({ release, competency, home, back }: { release
         </div>
         {workingResult ? <aside className={`working-feedback ${workingResult.valid ? "right" : "wrong"}`}><strong>Your working</strong><p>{workingResult.note}</p></aside> : null}
         {hint ? <aside className="practice-hint"><strong>A little help</strong><p>{q.hint ?? focusedIdea ?? "Look back at the worked example and take one step at a time."}</p></aside> : null}
-        {result === "wrong" ? <aside className="practice-feedback wrong" role="status"><strong>Not quite yet.</strong><p>{misconceptionOf(q, answer)?.says ?? q.hint ?? focusedIdea ?? "Use the rule from the worked example, then check each step."}</p><div><button className="secondary" type="button" onClick={() => setResult(null)}>Try again</button><button className="link" type="button" onClick={() => setHint(true)}>Give me a hint</button></div></aside> : null}
+        {result === "wrong" ? <aside className="practice-feedback wrong" role="status"><strong>Not quite yet.</strong><p>{(() => { const f = answerFeedback(q, answer); return f ? `${f.note}${f.principle ? ` ${f.principle}` : ""}` : null; })() ?? q.hint ?? focusedIdea ?? "Use the rule from the worked example, then check each step."}</p><div><button className="secondary" type="button" onClick={() => setResult(null)}>Try again</button><button className="link" type="button" onClick={() => setHint(true)}>Give me a hint</button></div></aside> : null}
         {result === "right" ? <aside className="practice-feedback right" role="status"><strong>That’s right.</strong><p>{q.solution}</p><button className="primary" type="button" onClick={next}>{index + 1 < practice.length ? "Another question" : "Finish practice"}</button></aside> : null}
       </> : null}
     </main> : null}

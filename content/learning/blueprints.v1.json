@@ -279,9 +279,9 @@
      "kind": "conceptual",
      "screens": [
       {
-       "title": "The middle term is 2ab: what went wrong",
+       "title": "The middle term is 2ab: a common mix-up",
        "text": [
-        "The middle term was written as ab. The identity has 2ab: the two products 5x × 7 and 7 × 5x are both there.",
+        "A common mix-up is to write the middle term as ab. The identity has 2ab: the two products 5x × 7 and 7 × 5x are both there.",
         "There are two middle products, a×b and b×a; together they make 2ab."
        ],
        "math": [
@@ -318,7 +318,7 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "The sign of the middle term: what went wrong",
+       "title": "The sign of the middle term: a common mix-up",
        "text": [
         "The middle term of (a + b)² is +2ab.",
         "Square of a sum: +2ab. Square of a difference: −2ab."
@@ -657,9 +657,9 @@
      "needs": [],
      "screens": [
       {
-       "title": "The median is not the mean: what went wrong",
+       "title": "The median is not the mean: a common mix-up",
        "text": [
-        "The mean was worked out. The median is the middle value once the numbers are in order.",
+        "A common mix-up is to work out the mean instead. The median is the middle value once the numbers are in order.",
         "The mean shares the total equally; the median is the middle value in order. They are different averages."
        ],
        "math": [
@@ -706,7 +706,7 @@
      "needs": [],
      "screens": [
       {
-       "title": "Two middle values: take halfway: what went wrong",
+       "title": "Two middle values: take halfway: a common mix-up",
        "text": [
         "With 6 numbers there are two middle numbers (66 and 75); the median is halfway between them.",
         "With an even number of values there are two middle values: take halfway between them."
@@ -773,9 +773,9 @@
      "needs": [],
      "screens": [
       {
-       "title": "Count balls, not colours: what went wrong",
+       "title": "Count balls, not colours: a common mix-up",
        "text": [
-        "Each colour was taken as equally likely; the colours have different numbers of balls, and it is the balls that are equally likely.",
+        "A common mix-up is to take each colour as equally likely; the colours have different numbers of balls, and it is the balls that are equally likely.",
         "It is the balls that are equally likely, not the colours."
        ],
        "math": [
@@ -1388,9 +1388,9 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "Read the scale; do not assume ten: what went wrong",
+       "title": "Read the scale; do not assume ten: a common mix-up",
        "text": [
-        "Each line was taken as ten. Read the numbers on the scale: they tell how much each line stands for.",
+        "A common mix-up is to take each line as ten. Read the numbers on the scale: they tell how much each line stands for.",
         "Do not assume ten: two numbers next to each other on the scale differ by the size of one line."
        ],
        "math": [
@@ -1446,9 +1446,9 @@
      "needs": [],
      "screens": [
       {
-       "title": "Read the scale; do not assume 10: what went wrong",
+       "title": "Read the scale; do not assume 10: a common mix-up",
        "text": [
-        "Each line was taken as 10. Read the numbers on the scale: they tell how much each line stands for.",
+        "A common mix-up is to take each line as 10. Read the numbers on the scale: they tell how much each line stands for.",
         "Do not assume 10: read the numbers on the scale to see what one line stands for."
        ],
        "math": [
@@ -2722,9 +2722,9 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "Not both numbers added: what went wrong",
+       "title": "Not both numbers added: a common mix-up",
        "text": [
-        "Both numbers you can see were added. Adding them never undoes what was done to the box.",
+        "A common mix-up is to add both numbers you can see. Adding them never undoes what was done to the box.",
         "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."
        ],
        "math": [
@@ -2767,9 +2767,9 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "Not both numbers added: what went wrong",
+       "title": "Not both numbers added: a common mix-up",
        "text": [
-        "Both numbers you can see were added. Adding them never undoes what was done to the box.",
+        "A common mix-up is to add both numbers you can see. Adding them never undoes what was done to the box.",
         "Ask what was done to the box, then undo it: the missing number is found by taking away, not by adding the two numbers."
        ],
        "math": [
@@ -2812,9 +2812,9 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "Add it back, do not take it away again: what went wrong",
+       "title": "Add it back, do not take it away again: a common mix-up",
        "text": [
-        "The number was taken away a second time.",
+        "A common mix-up is to take the number away a second time.",
         "The box is the number before anything was taken away, so add the number back to what is left."
        ],
        "math": [
@@ -2989,9 +2989,9 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "Do the opposite, not the same again: what went wrong",
+       "title": "Do the opposite, not the same again: a common mix-up",
        "text": [
-        "The same operation was done again instead of its opposite.",
+        "A common mix-up is to do the same operation again instead of its opposite.",
         "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."
        ],
        "math": [
@@ -3028,9 +3028,9 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "Do the opposite, not the same again: what went wrong",
+       "title": "Do the opposite, not the same again: a common mix-up",
        "text": [
-        "The same operation was done again instead of its opposite.",
+        "A common mix-up is to do the same operation again instead of its opposite.",
         "To leave x alone, undo what was done to x: take away a number that was added, add back a number that was taken away, divide by a number that multiplies x, multiply by a number that divides x."
        ],
        "math": [
@@ -3067,9 +3067,9 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "Divide by the number next to x: what went wrong",
+       "title": "Divide by the number next to x: a common mix-up",
        "text": [
-        "The number next to x was taken away.",
+        "A common mix-up is to take away the number next to x.",
         "That number multiplies x, so undo it by dividing both sides by it."
        ],
        "math": [
@@ -3106,9 +3106,9 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "Multiply, do not add: what went wrong",
+       "title": "Multiply, do not add: a common mix-up",
        "text": [
-        "The number was added instead of multiplied.",
+        "A common mix-up is to add the number instead of multiplying by it.",
         "x was divided by the number, so undo it by multiplying both sides by it."
        ],
        "math": [
@@ -3546,6 +3546,257 @@
      ],
      "guided": "gen:afcross:152,0:mc",
      "check": "gen:afcross:70,0"
+    }
+   ]
+  },
+  {
+   "extendsTemplate": true,
+   "competency": "MATH.probability.sample-space",
+   "title": "Two dice: count the pairs",
+   "family": "akss",
+   "seed": [
+    2,
+    3,
+    2,
+    0
+   ],
+   "author": "Claude, general teaching reworded from feat/math-teaching-content@4e655e737607bcf9d941193538de7479a40c4fe6 TP-PRO-01 (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [],
+   "strategies": [
+    {
+     "id": "akdice_pairs",
+     "title": "Two dice: count the pairs",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "akdice",
+      "parameters": [
+       {
+        "index": 2,
+        "values": [
+         0
+        ]
+       }
+      ]
+     },
+     "screens": [
+      {
+       "title": "36 ordered pairs, all equally likely",
+       "role": "concept",
+       "instance": "gen:akdice:6,6,0,7",
+       "widget": {
+        "type": "table",
+        "head": [
+         "+",
+         "1",
+         "2",
+         "3",
+         "4",
+         "5",
+         "6"
+        ],
+        "rows": [
+         [
+          "1",
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+         ],
+         [
+          "2",
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+         ],
+         [
+          "3",
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+         ],
+         [
+          "4",
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+         ],
+         [
+          "5",
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+         ],
+         [
+          "6",
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+         ]
+        ]
+       },
+       "text": [
+        "With two ordinary dice there are 6 × 6 = 36 ordered pairs (first number, second number). Every cell of the table is one pair, and all 36 pairs are equally likely.",
+        "There are 11 possible totals, 2 to 12, but they are not equally likely: a total is as likely as the number of pairs that make it."
+       ],
+       "math": [
+        "Total 2: (1, 1), 1 pair, so P = 1/36",
+        "Total 7: (1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1), 6 pairs, so P = 1/6",
+        "6 pairs against 1: a total of 7 is 6 times as likely as a total of 2."
+       ]
+      },
+      {
+       "title": "Count the pairs: solved step by step",
+       "role": "strategy",
+       "instance": "gen:akdice:6,6,0,7",
+       "text": [
+        "List the pairs that give the total, count them, and divide by the number of all pairs."
+       ],
+       "math": [
+        "There are 6 × 6 = 36 equally likely pairs",
+        "6 pairs fit: the total of the two numbers is 7",
+        "Probability = 6 ÷ 36 = 1/6",
+        "So the answer is 1/6"
+       ]
+      }
+     ],
+     "guided": "gen:akdice:5,5,0,7:mc",
+     "check": "gen:akdice:4,5,0,5"
+    },
+    {
+     "id": "akdice_order",
+     "title": "Red die, blue die: every order counts",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "akdice",
+      "parameters": [
+       {
+        "index": 2,
+        "values": [
+         0
+        ]
+       }
+      ]
+     },
+     "screens": [
+      {
+       "title": "Every order is its own outcome",
+       "role": "concept",
+       "instance": "gen:akdice:6,6,0,9",
+       "widget": {
+        "type": "table",
+        "head": [
+         "+",
+         "1",
+         "2",
+         "3",
+         "4",
+         "5",
+         "6"
+        ],
+        "rows": [
+         [
+          "1",
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+         ],
+         [
+          "2",
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+         ],
+         [
+          "3",
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+         ],
+         [
+          "4",
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+         ],
+         [
+          "5",
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+         ],
+         [
+          "6",
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+         ]
+        ]
+       },
+       "text": [
+        "Colour the first die red and the second blue: red 3 with blue 6 is a different roll from red 6 with blue 3. Both are in the table, as different cells.",
+        "So list the pairs in order: each one is an equally likely outcome out of 36."
+       ],
+       "math": [
+        "The pairs with total 9, in order: (3, 6), (4, 5), (5, 4), (6, 3), 4 pairs",
+        "P(total 9) = 4/36 = 1/9"
+       ]
+      },
+      {
+       "title": "Every order counts: solved step by step",
+       "role": "strategy",
+       "instance": "gen:akdice:6,6,0,9",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "There are 6 × 6 = 36 equally likely pairs",
+        "4 pairs fit: the total of the two numbers is 9",
+        "Probability = 4 ÷ 36 = 1/9",
+        "So the answer is 1/9"
+       ]
+      }
+     ],
+     "guided": "gen:akdice:5,5,0,9:mc",
+     "check": "gen:akdice:6,6,0,3"
     }
    ]
   }
