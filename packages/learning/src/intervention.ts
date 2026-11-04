@@ -180,7 +180,8 @@ function ruleStateFor(m: Module, d: Diagnosis, records: LearnerRecords): RuleSta
     const st = m.strategies.find((s) => s.id === t.strategy)!;
     const until = taught[i + 1]?.at ?? "9999";
     const within = (id: string) => mine.find((a) => a.questionId === id && a.at >= t.at && a.at < until) ?? null;
-    const g = within(st.guided);
+    // guided-fresh@1: the block's guided practice is its own guided question, or the fresh one asked in its place
+    const g = within(st.guided) ?? mine.find((a) => a.at >= t.at && a.at < until && a.activity === "guided") ?? null;
     // teaching-history@1: the block's check alone is its own check question, or (when that question had already been
     // seen elsewhere) the fresh question asked in its place: the first answer alone labelled "check" in the block
     const c = within(st.check) ?? mine.find((a) => a.at >= t.at && a.at < until && a.activity === "check" && a.n === 1 && a.questionId !== st.guided && !a.context) ?? null;
@@ -350,7 +351,13 @@ function withHandover(ms: ModuleState, m: Module, records: LearnerRecords, now: 
     // module has fresh questions of it; else the module's own unanswered diagnostic questions, else a fresh check question
     const lastWrong = records.attempts.filter((a) => own(ms.competency)(a) && independentAttempt(a) && !rightAnswer(a)).sort((x, y) => Date.parse(y.at) - Date.parse(x.at))[0];
     const fam = lastWrong ? problemOf(lastWrong.questionId.replace(/:(mc|w)$/, ""))?.family : undefined;
-    const ofKind = fam ? phasePool(fam, "check").find((id) => !tried(id) && withinGrade(records, id) && moduleHasFamily(m, fam)) ?? null : null;
+    // same-skill@1 (#112): where the competency has a skill mapping, the recheck is of the latest wrong answer's own skill, not another skill
+    // of the same family (10 × □ wrong was rechecked on 18 − □), and never a problem already met in another form (problemKeyOf)
+    const config = connectionConfig(ms.competency);
+    const skill = config && lastWrong ? connectedSkill(config, lastWrong.questionId) : null;
+    const met = presentedProblems(records, moduleFor);
+    const ofSkill = fam && skill ? phasePool(fam, "check").find((id) => !tried(id) && !met.has(problemKeyOf(id)) && withinGrade(records, id) && keyboardOffered(id) && connectedSkill(config!, id) === skill && moduleHasFamily(m, fam)) ?? null : null;
+    const ofKind = ofSkill ?? (fam ? phasePool(fam, "check").find((id) => !tried(id) && withinGrade(records, id) && moduleHasFamily(m, fam)) ?? null : null);
     const q = ofKind ?? m.diagnostics.find((id) => !tried(id) && withinGrade(records, id)) ?? freshFromPool(m, records, tried);
     if (q) return { ...ms, phase: "reentry", question: q, activity: "diagnostic", context: reentryContext(ms.competency), handover: h,
       reason: h.route === "reentry-acknowledged"
@@ -597,15 +604,17 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const sessionStart = records.sessions[session] ?? new Date(now).toISOString();
   const last = records.teaching.filter((t) => t.competency === competency).at(-1);
   const st = last && m.strategies.find((s) => s.id === last.strategy);
+  const guided = st ? guidedItem(m, st, records) : null;
   const decision = planRule({
     rule: rs,
     strategies: order.map((s) => s.id),
     now: new Date(now).toISOString(),
     sessionStartedAt: sessionStart,
     session,
-    available: { apply: m.strategies.filter((s) => teachable(m, s, misEv) && scopeAllows(m, s, records) && !answered(records, s.check)).length + (fromPool(m, "check", records) ? 1 : 0), contrast: 0, guided: st && !answered(records, st.guided) ? 1 : 0 },
+    available: { apply: m.strategies.filter((s) => teachable(m, s, misEv) && scopeAllows(m, s, records) && !answered(records, s.check)).length + (fromPool(m, "check", records) ? 1 : 0), contrast: 0, guided: guided ? 1 : 0 },
     answeredThisSession: records.attempts.filter((a) => of(m)(a) && a.at >= sessionStart && independentAttempt(a)).length,
-    guidedThisBlock: st && records.attempts.some((a) => a.questionId === st.guided && a.at >= last!.at) ? 1 : 0,
+    // guided-fresh@1: the block's guided practice is its own guided question or the fresh one asked in its place
+    guidedThisBlock: st && records.attempts.some((a) => a.at >= last!.at && (a.questionId === st.guided || (a.activity === "guided" && of(m)(a)))) ? 1 : 0,
     policy: MODULE_POLICY,
   });
   const byId = (id?: string) => m.strategies.find((s) => s.id === id) ?? null;
@@ -617,9 +626,9 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     if (s && delivered(s)) s = order.find((x) => !delivered(x)) ?? null;
     if (!s) return { ...base, phase: "pause", diagnosis: d, decision, reason: order.length ? "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." : NO_EXPLANATION() };
     const before = records.teaching.some((t) => t.competency === competency);
-    return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? withTail(established.says, "Here is a way to rebuild it.") : open && claimTaughtBy(s) ? withTail(claimWording(own!.scope.question, own!.claim!.explanation, own!.claim!.says), "Here is a way to rebuild it.") : diagnosisReason(d) };
+    return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: before && ev.retention === "failed" ? "The delayed check did not come out, so here is the topic again, explained another way, then one on your own." : before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? withTail(established.says, "Here is a way to rebuild it.") : open && claimTaughtBy(s) ? withTail(claimWording(own!.scope.question, own!.claim!.explanation, own!.claim!.says), "Here is a way to rebuild it.") : diagnosisReason(d, s) };
   }
-  if (decision.action === "guided_practice" && st && keyboardOffered(st.guided)) return { ...base, phase: "guided", question: st.guided, strategy: st, diagnosis: d, decision, reason: "Practise it once, with a hint if you want one. This counts as practice with help." };
+  if (decision.action === "guided_practice" && st && guided) return { ...base, phase: "guided", question: guided, strategy: st, diagnosis: d, decision, reason: "Practise it once, with a hint if you want one. This counts as practice with help." };
   if (decision.action === "reassess" && st) {
     const q = blockCheck(m, st, records);
     if (q) return { ...base, phase: "check", question: q, strategy: st, diagnosis: d, decision, reason: "Now one new question on your own, with no hints." };
@@ -632,6 +641,24 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   if (decision.action === "recommend_human") return { ...base, phase: "pause", diagnosis: d, decision, reason: "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you." };
   if (resProbe) return { ...base, phase: "verify", question: resProbe, diagnosis: d, decision, why: `resolution probe for ${own!.id}`, reason: "One question on your own that shows whether that misunderstanding has gone." };
   if (decision.action === "done") {
+    // after-pass@1 (#112): the planner ends the visit once the block's check alone was right ("progress, not yet mastery"). When the
+    // learner's answers alone on what was taught have gone wrong since that check, that message is not true and the learner was left
+    // with no question and no help. One wrong since: one more fresh question of the taught kind alone. Two or more wrong since and none
+    // right: a different explanation for it not given yet, else a pause for a person (handover@1 gives the way back).
+    const passAt = rs.interventions.at(-1)?.independentAfter.lastAt ?? null;
+    const unit = st ? unitOfStrategy(m, st) : null;
+    const since = passAt ? records.attempts.filter((a) => of(m)(a) && independentAttempt(a) && a.activity !== "probe" && a.at > passAt && (!unit || unit.accepts(a.questionId))) : [];
+    if (st && since.length && !rightAnswer(since.at(-1)!)) {
+      const wrongSince = since.length - since.map(rightAnswer).lastIndexOf(true) - 1;
+      if (wrongSince < 2) {
+        const q = blockCheck(m, st, records);
+        if (q) return { ...base, phase: "check", question: q, strategy: st, diagnosis: d, decision, reason: "Now one more of this kind on your own, with no hints." };
+      }
+      const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id);
+      const s = order.find((x) => !delivered(x) && (!unit || unitOfStrategy(m, x) === unit));
+      if (s) return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: "Right once on your own after the explanation, but not since, so here is a different explanation." };
+      return { ...base, phase: "pause", diagnosis: d, decision, why: `after-pass@1: ${wrongSince} wrong alone since the check after ${st.id}`, reason: "Right once on your own after the explanation, but not since. That is not a failure: carry on with other skills, and go through this one with a teacher or parent." };
+    }
     const more = unanswered([...m.practice, ...tr]);
     return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, decision, reason: "Right on your own after help: progress, not yet mastery. More practice on your own shows it is yours." };
   }
@@ -705,6 +732,27 @@ export function subSkillGap(m: Module, records: LearnerRecords): { family: strin
   }
   return null;
 }
+/**
+ * guided-fresh@1 (#112): the guided practice question of a block. The strategy's own guided question when the learner has not met that
+ * problem (in either format, or relabelled: problemKeyOf); else a fresh one of the same kind from the practice part of its family's pool:
+ * inside the strategy's taught scope (skill-units@1) when it has one, else the same family and, where the competency has a skill mapping,
+ * the same mapped skill. Never the strategy's own check or worked example. null when none is left (the block then goes straight to its
+ * check, as before). Before this, a learner who had met the guided problem (e.g. 2x = 26 as the practice question that started the
+ * recovery, then 2x = 26 "choose one" as the guided item) got no guided practice at all.
+ */
+export function guidedItem(m: Module, st: Strategy, records: LearnerRecords): string | null {
+  const met = new Set([...records.attempts, ...records.unresolved, ...(records.pending ?? [])].map((a) => problemKeyOf(a.questionId)));
+  if (keyboardOffered(st.guided) && !answered(records, st.guided) && !met.has(problemKeyOf(st.guided))) return st.guided;
+  const p = problemOf(st.guided.replace(/:(mc|w)$/, ""));
+  if (!p) return null;
+  const unit = unitOfStrategy(m, st);
+  const config = connectionConfig(m.competency);
+  const skill = config ? connectedSkill(config, st.guided) : null;
+  const avoid = new Set([st.check, ...st.screens.map((x) => x.instance ?? ""), ...m.chapter.map((x) => x.instance ?? "")].filter(Boolean).map(problemKeyOf));
+  const inScope = (id: string) => (unit ? unit.accepts(id) : !skill || connectedSkill(config!, id) === skill);
+  return phasePool(p.family, "practice").find((id) => !met.has(problemKeyOf(id)) && !avoid.has(problemKeyOf(id)) && !answered(records, id) && keyboardOffered(id)
+    && withinGrade(records, id) && !quarantined(id) && question(id).competency === m.competency && inScope(id)) ?? null;
+}
 /** The question for a block's check alone: the strategy's own check if the learner has never seen it, else a fresh one. */
 export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): string | null => {
   const unit = unitOfStrategy(m, st);
@@ -769,8 +817,11 @@ export function teachingHistory(m: Module, records: LearnerRecords): StrategyHis
   });
 }
 
-const diagnosisReason = (d: Diagnosis) =>
-  d.result === "conceptual" ? "Your answers suggest the idea itself needs building, so we start with a picture."
+// (#112) a "prerequisite" diagnosis says the lesson goes to what the skill builds on: only when the chosen lesson does (kind "prerequisite");
+// a lesson on the skill itself (10 × □ = 30: "The box was multiplied") gets the general line instead
+const diagnosisReason = (d: Diagnosis, s?: Strategy) =>
+  d.result === "prerequisite" && s && s.kind !== "prerequisite" ? "Here is a short explanation, then practice."
+  : d.result === "conceptual" ? "Your answers suggest the idea itself needs building, so we start with a picture."
   : d.result === "procedural" ? "You have the idea; a step in the method slips. Here is the method, one step."
   : d.result === "recall" ? "The method is fine; a fact you need is shaky. Here is a way to rebuild it from facts you know."
   : d.result === "prerequisite" ? "Something this builds on looks shaky, so we go there first."
