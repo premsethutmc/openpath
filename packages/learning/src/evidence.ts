@@ -147,6 +147,9 @@ export interface SkillEvidence {
   assisted: { right: number; total: number };
   attempts: string[];
   verified: boolean;
+  /** (#112) the status is held below "shown on your own" only by a generator family outside every skill unit (its own answers alone
+   *  are wrong and not shown): the competency is otherwise shown, so that kind's own teaching (sub-skill difficulty) still applies */
+  familyHeld?: boolean;
   /** The shared engine's own status for the competency (unavailable for a micro-skill). */
   engine: string;
   /** The shared engine's retention status (verification@2 schedule). */
@@ -269,6 +272,7 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
     independent: { right: ind.filter(right).length, total: ind.length },
     assisted: { right: assisted.filter(right).length, total: assisted.length },
     attempts: mine.map((a) => a.id),
+    ...(familyNotShown && isIndependent && !units.some((u) => u.notShown) ? { familyHeld: true } : {}),
     verified,
     engine: profileStatus,
     engineRetention,
