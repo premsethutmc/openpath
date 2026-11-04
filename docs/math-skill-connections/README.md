@@ -709,7 +709,7 @@ The phone layout itself is fine.
 
 | Item | Effect | Suggested |
 |---|---|---|
-| Edge `missing-number` < `number-patterns` | `acfacts` and `acplace` questions, and Grade 1–2 learners, still fall back to calendar patterns | Educator review of the edge |
+| ~~Edge `missing-number` < `number-patterns`~~ | **Resolved by #105 `9be50269`** (edge disputed, operation supports added; see 13.6): no calendar fallback remains | Edge still pending educator review |
 | `acplace` (digit-card puzzles) filed under missing-number (`b03.ts:1805-1808`) | 160 of 496 practice, 59 of 196 check and 57 of 194 retention items | Move to `MATH.reasoning.puzzle-strategy`; regenerate the library |
 | 2,245 questions without step labels | Old graph-walk recovery | Label steps |
 | `records.ts:144`: every check after a lesson review counts as assisted | Status "Learning (with help so far)" | Product decision |
@@ -719,7 +719,6 @@ The phone layout itself is fine.
 | Construction skills can show "Shown on your own" from auto-marked questions alone | Existing evidence rule | Educator review |
 | Hand-over acknowledgement | API only, no educator screen | A button in the Marking view |
 | `educator-marking.test.mjs` | Not in CI | Add it next to `learning-year.test.mjs` |
-| Fractions written task `wr:` (same-denominator comparison, chocolate bars) shows a proof-style marker rubric ("the parts are matched in order…") | The educator gets guidance that does not fit the task | Author a task-specific rubric |
 
 ### 13.5 Combined validation (integrated `c978dda4` + docs)
 
