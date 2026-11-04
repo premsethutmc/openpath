@@ -118,3 +118,19 @@ test("re-entry after a pause on 10 × □ is on the same skill; the lesson on th
   assert.ok(!trail.filter((t) => t.session === "s1" && t.q).some((t) => problemKeyOf(t.q!) === problemKeyOf(re!.q!)), "a problem not met before");
   reloads(s, MISS);
 });
+
+// Evidence (proposal m112/proposals/teaching-1.patch, evidence.ts): the delayed check is scheduled from two distinct right answers alone on
+// ANY skill of the competency, even while a taught skill holds the status below "shown on your own". The never-learner on the exterior
+// angle (status "guided" throughout) is then served "A delayed check, a week after you first showed this" instead of the pause's way back,
+// and its failure turns the status into "review" of something never shown. todo until the Evidence patch is applied.
+const TRI = "MATH.geometry.triangle-properties", EXT = "triangle-properties.exterior-angle@1";
+test("evidence: no delayed check for a competency never shown on your own (exterior angle never learnt)", { todo: "Evidence: m112/proposals/teaching-1.patch" }, () => {
+  const { s, trail } = drive(TRI, EXT, "gen:ahext:20,120,0", "never");
+  assert.equal(trail.at(-1)!.phase, "pause", show(trail));
+  assert.ok(!["independent", "transfer", "verified"].includes(s.state().evidence(TRI).status));
+  s.wait(8);
+  const ev = s.state().evidence(TRI);
+  assert.notEqual(ev.retention, "due", `status ${ev.status}, delayed check ${ev.retention}`);
+  const n = s.next(TRI);
+  assert.notEqual(n.phase, "retention", n.reason);
+});
