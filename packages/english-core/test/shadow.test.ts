@@ -526,7 +526,7 @@ test("Safety 3: shadow enabled does not change adaptive decisions", () => {
 
   // Selection should be identical — shadow never touches production composite
   const goal = { id: "g1", name: "test", weights: { "EN": 1 }, targets: {} };
-  const shared = { content, index, goal, seen: new Set<string>(), recent: [] as string[], writingThisSession: 0, writingAvailable: false };
+  const shared = { content, index, goal, seen: new Set<string>(), recent: [] as { item: string; targets: string[]; format: string }[], writingThisSession: 0, writingAvailable: false };
   const rec1 = recommend({ ...shared, composite: prodOnly, now: T(0, 1) });
   const rec2 = recommend({ ...shared, composite: prodWithShadow, now: T(0, 1) });
 
