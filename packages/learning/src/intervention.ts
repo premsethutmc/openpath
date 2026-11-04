@@ -537,7 +537,12 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   if (gap) {
     const basis0 = evidenceBasis(competency, records, { evidence: ev, diagnosis: d });
     const kindOf = (st: Strategy) => problemOf(st.check.replace(/:(mc|w)$/, ""))?.family;
-    const forGap = m.strategies.filter((st) => !isMisconceptionSpecific(st) && kindOf(st) === gap.family);
+    // same-skill@1 (#112): a family can hold several mapped skills (adfcmp: same bottom AND same top). The gap's lesson is for the skills its
+    // wrong answers are on: a lesson scoped to another skill of the family is not offered (was: wrong on same-bottom comparisons, taught
+    // "Same top number: more parts are smaller parts", because the latest wrong answer was an unmapped hand-written question)
+    const gapConfig = connectionConfig(competency);
+    const gapSkills = new Set(gapConfig ? records.attempts.filter((a) => of(m)(a) && independentAttempt(a) && !rightAnswer(a) && a.at >= gap.since && problemOf(a.questionId.replace(/:(mc|w)$/, ""))?.family === gap.family).map((a) => connectedSkill(gapConfig, a.questionId)).filter((x): x is string => !!x) : []);
+    const forGap = m.strategies.filter((st) => !isMisconceptionSpecific(st) && kindOf(st) === gap.family && (!gapSkills.size || !st.scope?.subSkill || gapSkills.has(st.scope.subSkill)));
     const taught = records.teaching.filter((t) => t.competency === competency && t.at > gap.since && forGap.some((st) => st.id === t.strategy));
     if (!taught.length) {
       const st = forGap.find((x) => teachable(m, x, basis0.established) && scopeAllows(m, x, records));
@@ -662,8 +667,13 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     const more = unanswered([...m.practice, ...tr]);
     return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, decision, reason: "Right on your own after help: progress, not yet mastery. More practice on your own shows it is yours." };
   }
-  const more = unanswered([...m.practice, ...tr, ...m.strategies.map((s) => s.check)]);
-  return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, decision, reason: "One more question on your own." };
+  // no-dead-end@1 (#112): the planner asks for more answers alone ("assess"), e.g. after a failed delayed check on a question no skill
+  // mapping covers (fc-r1, "Which is larger: 2/5 or 4/5?"). The module's listed questions may all be answered: a fresh check from the
+  // pool is asked then. With none left this is not "done" (was: phase "done", no question, "One more question on your own."): it pauses
+  // honestly, and handover@1 gives the way back.
+  const more = unanswered([...m.practice, ...tr, ...m.strategies.map((s) => s.check)]) ?? fromPool(m, "check", records);
+  if (more) return { ...base, phase: "verify", question: more, diagnosis: d, decision, reason: "One more question on your own." };
+  return { ...base, phase: "pause", diagnosis: d, decision, why: `no-dead-end@1: ${decision.action} with no fresh question`, reason: "There is no new question left to check this on your own yet. Carry on with other skills, and go through it with a teacher or parent." };
 }
 
 /**

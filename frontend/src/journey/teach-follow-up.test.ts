@@ -26,10 +26,10 @@ const skillOf = (c: string, q: string) => connectedSkill(connectionConfig(c)!, q
 
 /** the learner is wrong on `skill` until it is taught; then right ("learns"), never right ("never"), or right on the guided question
  *  and the first check after the lesson only ("lapses"). Right on everything else. */
-function drive(competency: string, skill: string, start: string, mode: Mode, laters: number[] = [], id = `teach-${mode}-${skill}`) {
+function drive(competency: string, skill: string, start: string, mode: Mode, laters: number[] = [], id = `teach-${mode}-${skill}`, also: (q: string) => boolean = () => false) {
   const f = new SliceFlow(start, id, Date.parse("2026-11-04T09:00:00Z"), { entry: "practice" });
   const s = f.session, trail: Step[] = [];
-  const target = (q: string) => question(q).competency === competency && skillOf(competency, q) === skill;
+  const target = (q: string) => question(q).competency === competency && (skillOf(competency, q) === skill || also(q));
   const taught = () => s.events.some((e) => (e as { record?: string; competency?: string }).record === "teach" && (e as { competency: string }).competency === competency);
   let checks = 0;
   const answer = (q: string, activity: string) => {
@@ -117,6 +117,25 @@ test("re-entry after a pause on 10 × □ is on the same skill; the lesson on th
   assert.equal(re!.skill, KBOX, `re-entry ${re!.q} is on the paused skill`);
   assert.ok(!trail.filter((t) => t.session === "s1" && t.q).some((t) => problemKeyOf(t.q!) === problemKeyOf(re!.q!)), "a problem not met before");
   reloads(s, MISS);
+});
+
+const FC = "MATH.number.fraction-comparison", SAME_BOTTOM = "fraction.compare-same-bottom@1";
+test("same-bottom comparison: never taught the same-TOP lesson for same-bottom mistakes; a wrong delayed check is never a dead end", () => {
+  // the hand-written fc-* questions are all same-bottom comparisons (unmapped): this learner gets them wrong too until taught
+  const start = pool("adfcmp").items.map((p) => p.id).filter((id) => skillOf(FC, id) === SAME_BOTTOM)[3];
+  const { s, trail } = drive(FC, SAME_BOTTOM, start, "learns", [], "teach-same-bottom", (q) => q.startsWith("fc-"));
+  const lessons = trail.filter((t) => t.kind === "teach").map((t) => t.strategy);
+  assert.ok(lessons.includes("same_size_pieces"), show(trail));
+  assert.ok(!lessons.includes("compare_same_top"), `a same-top lesson for same-bottom mistakes:\n${show(trail)}`);
+  reloads(s, FC);
+  s.wait(8);
+  const r = s.next(FC);
+  assert.equal(r.phase, "retention", r.reason);
+  assert.equal(s.submit(r.question!, wrong(r.question!), "retention").credit, false);
+  const n = s.next(FC);
+  assert.ok(n.question || n.phase === "chapter" || n.phase === "pause", `${n.phase} with no question: ${n.reason}`);
+  assert.notEqual(n.phase, "done", n.reason);
+  reloads(s, FC);
 });
 
 // Evidence (proposal m112/proposals/teaching-1.patch, evidence.ts): the delayed check is scheduled from two distinct right answers alone on
