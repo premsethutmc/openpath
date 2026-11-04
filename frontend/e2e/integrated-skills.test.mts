@@ -157,7 +157,17 @@ try {
     const dq = question(delayedQ), wrong = dq.type === "choice" || delayedQ.endsWith(":mc") ? (dq.answer === "A" ? "B" : "A") : /^-?\d+$/.test(dq.answer) ? String(Number(dq.answer) + 7) : "1/2";
     const dAns = await answerInUi(wrong); assert.equal(dAns.right, false);
     await continueOn();
-    assert.equal(await screen(), "lesson", `${c.name}: after the failed delayed check the skill is explained again`);
+    // skill-units@1 (#109): first a fresh question on the taught skill alone; wrong again → relapse@1 (#110): the general explanation
+    assert.equal(await screen(), "question", `${c.name}: after the failed delayed check, a fresh question on the skill alone`);
+    const freshQ = (await page.locator("[data-qid]").getAttribute("data-qid"))!;
+    assert.equal(skillOf(freshQ), c.skill, `${c.name}: the fresh question ${freshQ} is on the taught skill`);
+    assert.ok(![...met, delayedQ].some((q) => problemKeyOf(q) === problemKeyOf(freshQ)), `${c.name}: ${freshQ} is fresh`);
+    const fq = question(freshQ), fWrong = fq.type === "choice" || freshQ.endsWith(":mc") ? (fq.answer === "A" ? "B" : "A") : /^-?\d+$/.test(fq.answer) ? String(Number(fq.answer) + 7) : "1/2";
+    assert.equal((await answerInUi(fWrong)).right, false); met.push(freshQ, delayedQ);
+    await continueOn();
+    // a bounded investigation question may come first (answered right); then the explanation
+    for (let i = 0; i < 3 && (await screen()) === "question"; i++) { const iq = (await page.locator("[data-qid]").getAttribute("data-qid"))!; met.push(iq); await answerInUi(question(iq).answer); await continueOn(); }
+    assert.equal(await screen(), "lesson", `${c.name}: still wrong on the skill alone → the skill is explained again`);
     const rs = (await stateAt(realNow + 9 * DAY)).module(c.competency);
     const general = rs.strategy!;
     assert.ok([general.guided, general.check, ...general.screens.map((x) => x.instance!).filter(Boolean)].every((q) => skillOf(q) === c.skill), `${c.name}: ${general.id} is scoped to the taught skill`); assert.equal(general.addresses, undefined, "the general explanation: one wrong answer is not a misconception");
