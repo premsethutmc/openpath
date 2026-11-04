@@ -9,7 +9,7 @@ import { learnerState, make } from "./session.ts";
 
 const ORIGINAL = "gen:acmissing:3,3,10"; // What number goes in the box? 10 × □ = 30
 const T0 = Date.parse("2026-11-01T09:00:00Z");
-function learner(board: string, grade: number) {
+function learner(board: "cbse" | "tn", grade: number) {
   const events: LearningRecord[] = []; let now = T0;
   const ctx = () => ({ learnerId: "synthetic-routing", sessionId: "s1", at: new Date((now += 60_000)).toISOString() });
   events.push(make.enrol(ctx(), grade, "2026-27", boardFor(board, grade)!));
