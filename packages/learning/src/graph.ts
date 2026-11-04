@@ -78,6 +78,13 @@ for (const e of audit.edges) {
   known(e.source, "audit");
   auditByPair.set(`${e.target}<${e.source}`, { classification: e.classification as RelationType, reason: e.reason });
 }
+/** the audit's classification of expansion@1 relations (same meaning as `edges`; the expansion file itself is unchanged) */
+const expansionAudit = new Map<string, { classification: RelationType; reason: string }>();
+for (const e of (audit as { expansionEdges?: { target: string; source: string; classification: string; reason: string }[] }).expansionEdges ?? []) {
+  known(e.target, "audit");
+  known(e.source, "audit");
+  expansionAudit.set(`${e.target}<${e.source}`, { classification: e.classification as RelationType, reason: e.reason });
+}
 
 const cache = new Map<string, Map<string, Relation[]>>();
 /** Every relation into each competency, one per pair, for a graph version (with or without the audit). */
@@ -105,7 +112,8 @@ export function relations(opts: RelationOptions = {}): Map<string, Relation[]> {
   for (const r of expansion.relations) {
     known(r.target, "expansion");
     known(r.from, "expansion");
-    put(r.target, { from: r.from, type: r.type as RelationType, source: "expansion@1", reason: r.reason });
+    const a = useAudit ? expansionAudit.get(`${r.target}<${r.from}`) : undefined;
+    put(r.target, a ? { from: r.from, type: a.classification, source: "audit@1", reason: a.reason } : { from: r.from, type: r.type as RelationType, source: "expansion@1", reason: r.reason });
   }
   for (const s of additions.supports) {
     known(s.competency, "supports");
