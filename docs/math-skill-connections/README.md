@@ -720,16 +720,25 @@ The phone layout itself is fine.
 | Hand-over acknowledgement | API only, no educator screen | A button in the Marking view |
 | `educator-marking.test.mjs` | Not in CI | Add it next to `learning-year.test.mjs` |
 
-### 13.5 Combined validation (integrated `c978dda4` + docs)
+### 13.5 Combined validation (candidate `c43b0ee7`: #106 + #105 `9be50269` + claim-teaching@1), one run
 
 | Check | Result |
 |---|---|
-| Learning package (`bun test packages/learning`) | 1804 pass, 41 skip, 0 fail |
-| Frontend unit, every `src/**/*.test.ts` (run per file; the two longest alone) | 1008 pass, 0 fail (92 files) |
+| Learning package (`bun test packages/learning`) | 1845 pass, 41 skip, 0 fail (112 files) |
+| Frontend unit, every `src/**/*.test.ts` (per file) | 1012 pass, 0 fail (93 files) |
 | Typecheck `tsconfig.json`, `tsconfig.english.json` | 0 errors |
-| Typecheck `tsconfig.mathematics-integration.json` | 1 error, `@types/bun` missing in this environment; the same on baseline `4919cc15` |
+| Typecheck `tsconfig.mathematics-integration.json` | 1 error, `@types/bun` missing in this environment (same on baseline) |
 | Django, whole suite | 327 OK (3 skipped) |
-| Browser: `e2e/educator-marking.test.mjs` (real Django, `preview-english.mjs`) | 4/4 pass (fractions, algebra, geometry, constructions) |
-| Phone walkthrough A and B on the integrated build (390×844) | Both completed. A reload during a lesson review reopens the review after Continue; then fresh questions; "shown on your own" |
-| Grader bundle and manifest | Rebuilt (`BUNDLER=bun`, 216 inputs); the manifest test passes |
 | CI generated artifacts (specs, library, parity, coverage, expansion, board releases, compile-coverage) | Regenerated; no file changed |
+| Browser: `e2e/educator-marking.test.mjs` | 5/5 (fractions relevant, fractions incomplete, algebra, geometry, constructions) |
+| Phone walkthrough, all five #105 journeys, shipped build | 4 completed, 1 awaiting educator (f, written work not submitted; as on `9be50269`) |
+
+Evidence: branch `walkthrough/pr106-8ff31cf7`, `docs/walkthrough/8ff31cf7/` (app code `8ff31cf7`; `c43b0ee7` changes docs only), with `educator/` for the marking screens.
+
+### 13.6 Reconciliation with #105 `9be50269`
+
+- **Merge** (`49c0b879`): #105's graph-audit 1.1.1 (edge `missing-number` < `number-patterns` disputed) and competency-additions 1.1.1 (supports from addition, subtraction, multiplication-tables) kept alongside question-supports@1, explore-once@1, review-scope@1, lesson-resume@1 and the hand-over work. Only conflict: this README (both added §12; #105's stays §12, this is §13).
+- **a2 replayed exactly** on the merge: reproduced both faults. Cause: `moduleState` treated any lesson in the skill after the claim as its teaching (so the claim looked "taught and shown again" and paused at once), and the lesson's introduction quoted the open claim ("…were added…") even when the chosen lesson (`k_times_box`) does not address it. **claim-teaching@1** (`intervention.ts`): the pause needs the claim's own relevant teaching (`teaching.lastAt`), and the introduction names the claim only when `teachingMatchesMisconception` says the lesson addresses it. Regression: `missing-number-support.test.ts` replays the 14 recorded a2 answers through the real session (fails on `49c0b879`, passes now). Walkthrough a2: was blocked, now completed (lesson, guided, fresh check alone, reload, "Shown on your own, also on new problems").
+- **Calendar fallback**: already removed by `9be50269` with question-supports@1; reused, no change. All 892 Grade 1–2 missing-number questions (acmissing 364, acplace 276, acfacts 252) lead to addition, subtraction, multiplication-tables or the skill's own lesson; Grades 3–5 sampled the same. Patterns never gate, so chapters stay open.
+- **Fraction rubric**: the stored `wr:frc:half-whole` rubric is task-specific and kept. The earlier "mismatch" was the e2e's generic typed answer, not the content; withdrawn. The e2e now checks that the displayed task, `/written/queue/` (exact response, stored rubric) and the educator screen agree, and marks a relevant answer (4/4, "Marked correct") and an incomplete one (1/4, "Partly correct · 1/4" with feedback); the learner sees the mark and carries on.
+- Content stays pending educator review; nothing merged or deployed.
