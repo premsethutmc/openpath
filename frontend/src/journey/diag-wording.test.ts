@@ -61,6 +61,6 @@ test("addition: two no-regroup answers on two-digit sums are taught carrying, no
     assert.ok(taught.length >= 1, `${entry}: something was taught`);
     const first = taught[0], s = moduleFor(first.competency)!.strategies.find((x) => x.id === first.strategy)!;
     assert.equal(graph.evidenceTarget(first.competency), "MATH.number.addition-regroup", `${entry}: taught ${first.competency} · ${first.strategy}`);
-    assert.ok(s.screens.some((x) => /carry/i.test(x.text)), `${entry}: the lesson shows carrying`);
+    assert.ok(s.screens.some((x) => /carry/i.test([x.text].flat().join(" "))), `${entry}: the lesson shows carrying`);
   }
 });
