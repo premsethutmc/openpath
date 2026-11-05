@@ -932,10 +932,22 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
   if (tries.length >= 1 + RETRY_LIMIT) return { ...base, phase: "escalate", active: null, reason: "This problem has been tried several times after the extra work, and it is still not coming out. That is not a failure: go through it with a teacher or parent." };
   // skill-units@1: a wrong delayed-check answer on a skill taught here goes back to that skill, not to what it builds on: its module
   // asks a fresh question on it alone (moduleStep, failed delayed check) until one is right
+  // recovery-scope@1: when the initial teaching used an unscoped (prerequisite) strategy, the unit's own taughtAt is null even though
+  // the module was taught. If a unit accepts the failed question and the module has any teaching record, the unit was implicitly
+  // covered — route to same-skill recovery, not prerequisite support.
   if (tries[0].activity === "retention") {
     const m = moduleFor(q.competency);
     const u = m ? unitsOf(m, records).find((x) => x.taughtAt && x.unit.accepts(originalQid)) : undefined;
-    if (u && !records.attempts.some((a) => a.at > tries[0].at && a.activity !== "retention" && independentAttempt(a) && rightAnswer(a) && u.unit.accepts(a.questionId)))
+    // recovery-scope@1: fall back to a unit that accepts the question when the module was taught (any strategy) but the unit's own
+    // taughtAt is null because the teaching used an unscoped prerequisite strategy (e.g. check_what_it_uses)
+    const uFallback = !u && m ? (() => {
+      const accepting = unitOfQuestion(m, originalQid);
+      if (!accepting) return undefined;
+      const moduleTaught = records.teaching.some((t) => t.competency === q.competency);
+      return moduleTaught ? { unit: accepting, taughtAt: records.teaching.filter((t) => t.competency === q.competency).at(-1)!.at } : undefined;
+    })() : undefined;
+    const matched = u ?? uFallback;
+    if (matched && !records.attempts.some((a) => a.at > tries[0].at && a.activity !== "retention" && independentAttempt(a) && rightAnswer(a) && matched.unit.accepts(a.questionId)))
       return { ...base, phase: "teach", active: q.competency, reason: "The delayed check on this skill did not come out. Back to this skill first: a fresh question on it on your own." };
   }
   // own-skill teaching (Milestone 2 closure, decision C): when the skills this problem builds on show no gap and the problem is still wrong after a
