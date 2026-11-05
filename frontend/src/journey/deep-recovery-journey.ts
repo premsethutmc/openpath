@@ -11,10 +11,12 @@ import { right, wrong } from "./learners";
 import { SliceSession } from "./session";
 
 export type Answerer = (qid: string, ctx: { taughtSkills: string[]; answered: number; activity: string }) => string;
-export interface DeepStep { kind: "ask" | "teach" | "decide"; phase: string; skill: string | null; qid?: string; correct?: boolean; path: string; reason?: string }
+export interface DeepStep { kind: "ask" | "teach" | "decide"; phase: string; skill: string | null; qid?: string; correct?: boolean; path: string; reason?: string;
+  /** the engine's decision for this step (phase, why, effort used before it): for traces */
+  decision?: { phase: string; active: string | null; effort: number | null; why: string } }
 const sh = (s: string | null) => (s ?? "-").replace(/^MATH\./, "");
 const skillOf = (q: string) => graph.evidenceTarget(question(q.replace(/:(mc|w)$/, "")).competency);
-const TERMINAL = new Set(["solved", "solved_after_help", "blocked", "escalate"]);
+const TERMINAL = new Set(["solved", "solved_after_help", "blocked", "escalate", "pause"]);
 
 /**
  * A learner whose knowledge has a real dependency structure: a skill in `gap` is right only after it has been taught AFTER every
@@ -40,7 +42,7 @@ export function runDeep(s: SliceSession, original: string, answer: Answerer, o: 
   const say = (qid: string, activity: string, context?: string | null, phase = "", path = "") => {
     const a = answer(qid, { taughtSkills: taughtSkills(), answered: s.replies.length, activity });
     const r = s.submit(qid, a, activity as never, context ? { context } : {});
-    steps.push({ kind: "ask", phase, skill: skillOf(qid), qid, correct: r.credit === true, path });
+    steps.push({ kind: "ask", phase, skill: skillOf(qid), qid, correct: r.credit === true, path, ...(st ? { decision: { phase: st.phase, active: st.active, effort: st.effort ?? null, why: st.reason } } : {}) });
   };
   let st: DeepRecoveryState | null = null;
   const decisions: { phase: string; active: string | null; diagnosis: string | null; cause: string | null }[] = [];
@@ -50,11 +52,11 @@ export function runDeep(s: SliceSession, original: string, answer: Answerer, o: 
     st = (o.engine ?? deepRecovery)(original, recs.records, recs.evidence, s.now, s.session, o);
     decisions.push({ phase: st.phase, active: st.active, diagnosis: st.diagnosis ?? null, cause: st.cause ?? null });
     const path = st.path.map(sh).join(">");
-    if (TERMINAL.has(st.phase)) { steps.push({ kind: "decide", phase: st.phase, skill: st.active, path, reason: st.reason }); break; }
+    if (TERMINAL.has(st.phase)) { steps.push({ kind: "decide", phase: st.phase, skill: st.active, path, reason: st.reason, decision: { phase: st.phase, active: st.active, effort: st.effort ?? null, why: st.reason } }); break; }
     if (st.phase === "attempt") { say(original, "original", st.context, "attempt", path); continue; }
     if (st.phase === "teach") {
       const ms = s.next(st.active!, { inRecovery: true });
-      if (ms.phase === "chapter" && ms.strategy) { if (o.attribution === "adjacency") s.taught(ms); else s.taught(ms, st.episode ?? undefined); steps.push({ kind: "teach", phase: "teach", skill: st.active, path, reason: ms.strategy.id }); continue; }
+      if (ms.phase === "chapter" && ms.strategy) { if (o.attribution === "adjacency") s.taught(ms); else s.taught(ms, st.episode ?? undefined); steps.push({ kind: "teach", phase: "teach", skill: st.active, path, reason: ms.strategy.id, decision: { phase: st.phase, active: st.active, effort: st.effort ?? null, why: st.reason } }); continue; }
       if (!ms.question) { steps.push({ kind: "decide", phase: "escalate", skill: st.active, path, reason: ms.reason }); break; }
       // every answer of the episode carries its context, the module's too (episode evidence, effort, saved path)
       say(ms.question, activityFor(ms), st.context, `module:${ms.phase}`, path);

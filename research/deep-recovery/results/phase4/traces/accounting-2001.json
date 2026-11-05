@@ -1,0 +1,19 @@
+{
+  "run": "p3-selective O1 multiple-gaps seed 2001 (phase-3 held-out record in results/phase3/heldout-B-broad.jsonl; trace p3-selective-O1-multiple-gaps-2001.tsv)",
+  "budget": "effort 40 = 36 questions after the first try + 4 lessons (the first try is not counted)",
+  "questions_by_purpose": {
+    "goal (first try + slip check)": 2,
+    "checks of prerequisites the learner knew (polynomials, integer-add, identities-intro, factor-theorem: 1 each; linear-equations: 3 for its 3 core sub-skills)": 7,
+    "confirming a failing skill (two wrong each: partial-fractions, factorisation, identities, linear-systems, linear-two-variables)": 10,
+    "module's own diagnostic before its lesson (identities, linear-two-variables)": 2,
+    "checks after a lesson (identities 5 = one per core sub-skill; factorisation, linear-two-variables, linear-systems 1 each)": 8,
+    "re-checks of a parent after a lesson below (factorisation x2, partial-fractions x2 BEFORE linear systems was even tried, linear-systems x2, partial-fractions x2)": 8
+  },
+  "total_questions": 37,
+  "loops": "none (no skill re-entered the path; no question repeated: all problem keys distinct)",
+  "irrelevant_prerequisites": "none outside the mapped graph; the 4 known-skill checks are mapped candidates the learner happened to know (no prior records to skip them)",
+  "repeated_evidence": "the parent re-checks: 2 of the 8 (partial-fractions at steps 23-24) were premature (an untested prerequisite, linear systems, remained); 3 more were second confirmations of a parent already failing before the lesson below",
+  "genuine_need": "partial-fractions is itself missing in this learner model: it still needed a lesson, a check and the goal confirmation (two fresh goal answers after help) = about 5-6 more steps after step 41",
+  "reachability": "with the 4 taught skills repaired the learner model answers a fresh goal question WRONG (partial-fractions missing); a fresh typed goal question exists (gen:aupfr:1,1,2,-1,3). Repaired prerequisites did not make the goal reachable.",
+  "phase4_same_seed": "reuse + per-sitting pause: 36 questions, 5 lessons, effort 40, solved_after_help with two fresh unaided goal answers; learner model RIGHT on a fresh goal question"
+}
