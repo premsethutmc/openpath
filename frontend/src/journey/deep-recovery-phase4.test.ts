@@ -130,3 +130,10 @@ test("KNOWN LIMITATION (kept visible): two right answers do not rule out lucky g
   assert.equal(r.final!.phase, "solved", "the engine cannot tell two lucky answers from knowledge");
   assert.equal(s.replies.length, 3);
 });
+
+test("regression (held-out seed 3014, phase 4): one wrong answer right after a skill's OWN lesson is not taken as 'still failing'", async () => {
+  const { simulate4 } = await import("./deep-recovery-sim4");
+  const r = simulate4("p4", "O2", "single-gap", 3014) as Record<string, unknown>;
+  assert.equal(r.status, "ok");
+  assert.equal(r.outcome, "solved-fresh-unaided", JSON.stringify(r.perSitting));
+});

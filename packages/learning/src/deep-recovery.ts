@@ -218,8 +218,9 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
       let trailing = 0;
       for (let i = post.length - 1; i >= 0 && !rightAnswer(post[i]); i--) trailing++;
       verdict = trailing === 0 ? (enough(post) ? "known" : "unsure") : trailing >= 2 || post.length > perSkill ? "failing" : "unsure";
-      // reuse: wrong again after a lesson below, having been failing before it (two or more wrong, never right): still failing
-      if (o.reuse && verdict === "unsure" && c !== own && helped && ans.filter((a) => a.at <= lastTeach && !rightAnswer(a)).length >= 2 && !ans.some(rightAnswer)) verdict = "failing";
+      // reuse: wrong again after a lesson BELOW it (never after its own lesson: that is its module's business), having been
+      // failing before (two or more wrong, never right): still failing. Held-out seed 3014 (phase 4) showed the own-lesson case.
+      if (o.reuse && verdict === "unsure" && c !== own && helped && !myTeaching.some((t) => target(t.competency) === c) && ans.filter((a) => a.at <= lastTeach && !rightAnswer(a)).length >= 2 && !ans.some(rightAnswer)) verdict = "failing";
     } else verdict = ans.length ? (rightAnswer(ans[ans.length - 1]) ? (enough(ans) ? "known" : "unknown") : "unknown") : shownBefore ? "known" : "unknown";
     if (verdict === "known" && ans.length && uncovered(c).length) verdict = "unsure";
     const r = { skill: c, verdict, right, wrong, shownBefore };
