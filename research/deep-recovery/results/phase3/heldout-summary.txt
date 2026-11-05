@@ -1,0 +1,472 @@
+runs 1790: ok 1750, error 0, incomplete 0, timeout 0, n/a 40
+
+O1 fails-to-learn app  n=10  outcomes app:done:9 app:pause:1
+  false reassurance 0/10 0% [0–28] | questions 41.9 [40.2–43.0] | lessons 3.1 [3.0–3.3] | prerequisite questions 9.0 [9.0–9.0]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O1 fails-to-learn p2  n=10  outcomes escalate:10
+  false reassurance 0/10 0% [0–28] | questions 22.4 [22.0–22.9] | lessons 2.0 [2.0–2.0] | prerequisite questions 20.4 [20.0–20.9]
+  roots 10: identified 10/10 100% [72–100] | taught 10/10 100% [72–100] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 0/10 0% [0–28] | diagnosis null:10
+
+O1 fails-to-learn p3-selective  n=30  outcomes escalate:30
+  false reassurance 0/30 0% [0–11] | questions 24.6 [24.2–25.3] | lessons 2.0 [2.0–2.0] | prerequisite questions 22.6 [22.2–23.3]
+  roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired 0/30 0% [0–11] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 0/30 0% [0–11] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis prerequisite:30
+
+O1 forgetting app  n=10  outcomes app:done:7 app:pause:3
+  false reassurance 0/10 0% [0–28] | questions 37.6 [35.4–40.1] | lessons 3.0 [3.0–3.0] | prerequisite questions 9.0 [9.0–9.0]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+  2nd episode (after forgetting) run in 0/10: roots repaired – | false reassurance – | outcomes  | questions –
+
+O1 forgetting p2  n=10  outcomes solved_after_help:10
+  false reassurance 0/10 0% [0–28] | questions 22.4 [22.1–22.7] | lessons 3.0 [3.0–3.0] | prerequisite questions 19.4 [19.1–19.7]
+  roots 10: identified 10/10 100% [72–100] | taught 10/10 100% [72–100] | repaired 10/10 100% [72–100] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 10/10 100% [72–100] | wrong skill designated 0/10 0% [0–28] | own skill taught 0/10 0% [0–28] | diagnosis null:10
+  2nd episode (after forgetting) run in 10/10: roots repaired 10/10 100% [72–100] | false reassurance 0/10 0% [0–28] | outcomes solved_after_help:9 escalate:1 | questions 29.3 [28.1–31.1]
+
+O1 forgetting p3-selective  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 0% [0–11] | questions 26.4 [25.6–27.4] | lessons 3.0 [3.0–3.0] | prerequisite questions 22.4 [21.6–23.4]
+  roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired 30/30 100% [89–100] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 30/30 100% [89–100] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis prerequisite:30
+  2nd episode (after forgetting) run in 30/30: roots repaired 30/30 100% [89–100] | false reassurance 0/30 0% [0–11] | outcomes solved_after_help:29 escalate:1 | questions 29.1 [28.4–30.1]
+
+O1 lucky app  n=10  outcomes app:done:9 app:pause:1
+  false reassurance 2/10 20% [6–51] | questions 42.9 [38.6–47.1] | lessons 3.4 [3.0–4.0] | prerequisite questions 12.7 [9.8–16.1]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 3/10 30% [11–60] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O1 lucky p2  n=10  outcomes solved_after_help:6 escalate:4
+  false reassurance 0/10 0% [0–28] | questions 23.4 [20.8–27.1] | lessons 2.7 [2.3–3.0] | prerequisite questions 18.8 [17.4–20.1]
+  roots 10: identified 6/10 60% [31–83] | taught 6/10 60% [31–83] | repaired 6/10 60% [31–83] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 6/10 60% [31–83] | wrong skill designated 0/10 0% [0–28] | own skill taught 1/10 10% [2–40] | diagnosis null:10
+
+O1 lucky p3-current  n=30  outcomes solved_after_help:18 escalate:11 solved:1
+  false reassurance 1/30 3% [1–17] | questions 22.9 [20.3–25.2] | lessons 2.5 [2.1–2.8] | prerequisite questions 18.7 [15.9–21.0]
+  roots 30: identified 20/30 67% [49–81] | taught 20/30 67% [49–81] | repaired 20/30 67% [49–81] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 20/30 67% [49–81] | wrong skill designated 0/30 0% [0–11] | own skill taught 7/30 23% [12–41] | diagnosis prerequisite:22 unexplained:7 slip:1
+
+O1 lucky p3-selective  n=30  outcomes solved_after_help:18 escalate:12
+  false reassurance 0/30 0% [0–11] | questions 24.7 [22.5–26.7] | lessons 2.7 [2.3–3.0] | prerequisite questions 19.8 [17.4–22.0]
+  roots 30: identified 20/30 67% [49–81] | taught 20/30 67% [49–81] | repaired 20/30 67% [49–81] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 20/30 67% [49–81] | wrong skill designated 0/30 0% [0–11] | own skill taught 7/30 23% [12–41] | diagnosis prerequisite:23 unexplained:7
+
+O1 lucky p3-two-fresh  n=30  outcomes solved_after_help:18 escalate:12
+  false reassurance 0/30 0% [0–11] | questions 24.7 [22.5–26.7] | lessons 2.7 [2.3–3.0] | prerequisite questions 19.8 [17.4–22.0]
+  roots 30: identified 20/30 67% [49–81] | taught 20/30 67% [49–81] | repaired 20/30 67% [49–81] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 20/30 67% [49–81] | wrong skill designated 0/30 0% [0–11] | own skill taught 7/30 23% [12–41] | diagnosis prerequisite:23 unexplained:7
+
+O1 missing-content app  n=10  outcomes app:done:8 app:pause:2
+  false reassurance 0/10 0% [0–28] | questions 38.0 [35.1–40.6] | lessons 3.0 [3.0–3.0] | prerequisite questions 9.0 [9.0–9.0]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O1 missing-content p2  n=10  outcomes blocked:10
+  false reassurance 0/10 0% [0–28] | questions 11.0 [11.0–11.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 9.0 [9.0–9.0]
+  roots 10: identified 10/10 100% [72–100] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 10/10 100% [72–100] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 0/10 0% [0–28] | diagnosis null:10
+
+O1 missing-content p3-selective  n=30  outcomes blocked:30
+  false reassurance 0/30 0% [0–11] | questions 11.1 [11.0–11.2] | lessons 0.0 [0.0–0.0] | prerequisite questions 9.1 [9.0–9.2]
+  roots 30: identified 30/30 100% [89–100] | taught 0/30 0% [0–11] | repaired 0/30 0% [0–11] | blocked-with-root-named 30/30 100% [89–100] runs
+  runs with every root repaired 0/30 0% [0–11] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis prerequisite:30
+
+O1 multiple-gaps app  n=10  outcomes app:done:9 app:pause:1
+  false reassurance 0/10 0% [0–28] | questions 39.3 [36.6–41.8] | lessons 3.1 [3.0–3.3] | prerequisite questions 9.0 [9.0–9.0]
+  roots 20: identified 0/20 0% [0–16] | taught 0/20 0% [0–16] | repaired 0/20 0% [0–16] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O1 multiple-gaps p2  n=10  outcomes solved_after_help:9 escalate:1
+  false reassurance 0/10 0% [0–28] | questions 33.7 [33.1–34.6] | lessons 4.9 [4.7–5.0] | prerequisite questions 30.8 [30.1–31.9]
+  roots 20: identified 20/20 100% [84–100] | taught 20/20 100% [84–100] | repaired 20/20 100% [84–100] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 10/10 100% [72–100] | wrong skill designated 0/10 0% [0–28] | own skill taught 0/10 0% [0–28] | diagnosis null:10
+
+O1 multiple-gaps p3-selective  n=30  outcomes escalate:30
+  false reassurance 0/30 0% [0–11] | questions 37.1 [37.0–37.3] | lessons 3.9 [3.7–4.0] | prerequisite questions 35.1 [35.0–35.3]
+  roots 60: identified 60/60 100% [94–100] | taught 59/60 98% [91–100] | repaired 59/60 98% [91–100] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 29/30 97% [83–99] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis null:30
+
+O1 outside-map app  n=10  outcomes app:done:8 app:pause:2
+  false reassurance 0/10 0% [0–28] | questions 42.7 [40.0–45.2] | lessons 1.0 [1.0–1.0] | prerequisite questions 9.1 [8.6–9.7]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 10/10 100% [72–100] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O1 outside-map p2  n=10  outcomes escalate:10
+  false reassurance 0/10 0% [0–28] | questions 39.8 [39.4–40.0] | lessons 1.2 [1.0–1.6] | prerequisite questions 5.4 [5.0–5.8]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O1 outside-map p3-selective  n=30  outcomes escalate:30
+  false reassurance 0/30 0% [0–11] | questions 12.3 [12.1–12.5] | lessons 1.0 [1.0–1.0] | prerequisite questions 5.3 [5.1–5.5]
+  roots 30: identified 0/30 0% [0–11] | taught 0/30 0% [0–11] | repaired 0/30 0% [0–11] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 0/30 0% [0–11] | wrong skill designated 0/30 0% [0–11] | own skill taught 30/30 100% [89–100] | diagnosis unexplained:30
+
+O1 single-gap app  n=10  outcomes app:done:9 app:pause:1
+  false reassurance 0/10 0% [0–28] | questions 38.3 [36.3–40.5] | lessons 3.1 [3.0–3.3] | prerequisite questions 9.0 [9.0–9.0]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O1 single-gap p2  n=10  outcomes solved_after_help:10
+  false reassurance 0/10 0% [0–28] | questions 22.0 [21.3–23.1] | lessons 3.0 [3.0–3.0] | prerequisite questions 19.0 [18.3–20.1]
+  roots 10: identified 10/10 100% [72–100] | taught 10/10 100% [72–100] | repaired 10/10 100% [72–100] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 10/10 100% [72–100] | wrong skill designated 0/10 0% [0–28] | own skill taught 0/10 0% [0–28] | diagnosis null:10
+
+O1 single-gap p3-current  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 0% [0–11] | questions 25.7 [25.0–26.5] | lessons 3.0 [3.0–3.0] | prerequisite questions 22.6 [21.9–23.5]
+  roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired 30/30 100% [89–100] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 30/30 100% [89–100] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis prerequisite:30
+
+O1 single-gap p3-selective  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 0% [0–11] | questions 26.8 [26.1–27.7] | lessons 3.0 [3.0–3.0] | prerequisite questions 22.6 [21.9–23.5]
+  roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired 30/30 100% [89–100] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 30/30 100% [89–100] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis prerequisite:30
+
+O1 single-gap p3-two-fresh  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 0% [0–11] | questions 26.8 [26.1–27.7] | lessons 3.0 [3.0–3.0] | prerequisite questions 22.6 [21.9–23.5]
+  roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired 30/30 100% [89–100] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 30/30 100% [89–100] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis prerequisite:30
+
+O1 strong-history p2  n=10  outcomes solved:10
+  false reassurance 0/10 0% [0–28] | questions 2.0 [2.0–2.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 10/10 100% [72–100] | unnecessary questions 0.0 [0.0–0.0] | any lesson 0/10 0% [0–28] | any prerequisite question 0/10 0% [0–28]
+
+O1 strong-history p3-current  n=30  outcomes solved:30
+  false reassurance 0/30 0% [0–11] | questions 2.0 [2.0–2.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 30/30 100% [89–100] | unnecessary questions 0.0 [0.0–0.0] | any lesson 0/30 0% [0–11] | any prerequisite question 0/30 0% [0–11]
+
+O1 strong-history p3-selective  n=30  outcomes solved:30
+  false reassurance 0/30 0% [0–11] | questions 2.0 [2.0–2.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 30/30 100% [89–100] | unnecessary questions 0.0 [0.0–0.0] | any lesson 0/30 0% [0–11] | any prerequisite question 0/30 0% [0–11]
+
+O1 strong-history p3-two-fresh  n=30  outcomes solved:29 solved_after_help:1
+  false reassurance 0/30 0% [0–11] | questions 3.4 [3.0–4.1] | lessons 0.0 [0.0–0.1] | prerequisite questions 0.2 [0.0–0.6]
+  strong recognised (solved, no lesson) 29/30 97% [83–99] | unnecessary questions 1.4 [1.0–2.1] | any lesson 1/30 3% [1–17] | any prerequisite question 1/30 3% [1–17]
+
+O1 strong-new app  n=10  outcomes app:done:10
+  false reassurance 0/10 0% [0–28] | questions 30.9 [29.4–32.8] | lessons 0.2 [0.0–0.5] | prerequisite questions 9.6 [8.9–10.3]
+  strong recognised (solved, no lesson) 8/10 80% [49–94] | unnecessary questions 28.9 [27.4–30.8] | any lesson 2/10 20% [6–51] | any prerequisite question 10/10 100% [72–100]
+
+O1 strong-new p2  n=10  outcomes solved:10
+  false reassurance 0/10 0% [0–28] | questions 2.0 [2.0–2.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 10/10 100% [72–100] | unnecessary questions 0.0 [0.0–0.0] | any lesson 0/10 0% [0–28] | any prerequisite question 0/10 0% [0–28]
+
+O1 strong-new p3-current  n=30  outcomes solved:28 solved_after_help:2
+  false reassurance 0/30 0% [0–11] | questions 2.6 [2.0–3.6] | lessons 0.1 [0.0–0.2] | prerequisite questions 0.4 [0.0–0.9]
+  strong recognised (solved, no lesson) 28/30 93% [79–98] | unnecessary questions 0.6 [0.0–1.6] | any lesson 2/30 7% [2–21] | any prerequisite question 2/30 7% [2–21]
+
+O1 strong-new p3-selective  n=30  outcomes solved:26 solved_after_help:3 escalate:1
+  false reassurance 0/30 0% [0–11] | questions 4.5 [3.3–6.0] | lessons 0.1 [0.0–0.3] | prerequisite questions 0.8 [0.2–1.7]
+  strong recognised (solved, no lesson) 26/30 87% [70–95] | unnecessary questions 2.5 [1.3–4.0] | any lesson 4/30 13% [5–30] | any prerequisite question 4/30 13% [5–30]
+
+O1 strong-new p3-two-fresh  n=30  outcomes solved:26 solved_after_help:3 escalate:1
+  false reassurance 0/30 0% [0–11] | questions 4.5 [3.3–6.0] | lessons 0.1 [0.0–0.3] | prerequisite questions 0.8 [0.2–1.7]
+  strong recognised (solved, no lesson) 26/30 87% [70–95] | unnecessary questions 2.5 [1.3–4.0] | any lesson 4/30 13% [5–30] | any prerequisite question 4/30 13% [5–30]
+
+O1 strong-slips app  n=10  outcomes app:done:10
+  false reassurance 0/10 0% [0–28] | questions 33.2 [31.3–34.8] | lessons 0.8 [0.3–1.3] | prerequisite questions 11.4 [9.7–13.1]
+  strong recognised (solved, no lesson) 4/10 40% [17–69] | unnecessary questions 31.2 [29.3–32.8] | any lesson 6/10 60% [31–83] | any prerequisite question 10/10 100% [72–100]
+
+O1 strong-slips p2  n=10  outcomes solved:8 solved_after_help:2
+  false reassurance 0/10 0% [0–28] | questions 4.5 [2.0–8.0] | lessons 0.2 [0.0–0.5] | prerequisite questions 1.7 [0.0–4.0]
+  strong recognised (solved, no lesson) 8/10 80% [49–94] | unnecessary questions 2.5 [0.0–6.0] | any lesson 2/10 20% [6–51] | any prerequisite question 2/10 20% [6–51]
+
+O1 strong-slips p3-current  n=30  outcomes solved:24 solved_after_help:6
+  false reassurance 0/30 0% [0–11] | questions 4.4 [2.8–6.3] | lessons 0.2 [0.1–0.3] | prerequisite questions 1.6 [0.5–2.9]
+  strong recognised (solved, no lesson) 24/30 80% [63–90] | unnecessary questions 2.4 [0.8–4.3] | any lesson 6/30 20% [10–37] | any prerequisite question 6/30 20% [10–37]
+
+O1 strong-slips p3-selective  n=30  outcomes solved:21 solved_after_help:9
+  false reassurance 0/30 0% [0–11] | questions 6.5 [4.6–8.5] | lessons 0.3 [0.1–0.5] | prerequisite questions 2.2 [1.0–3.4]
+  strong recognised (solved, no lesson) 21/30 70% [52–83] | unnecessary questions 4.5 [2.6–6.5] | any lesson 9/30 30% [17–48] | any prerequisite question 9/30 30% [17–48]
+
+O1 strong-slips p3-two-fresh  n=30  outcomes solved:21 solved_after_help:9
+  false reassurance 0/30 0% [0–11] | questions 6.5 [4.6–8.5] | lessons 0.3 [0.1–0.5] | prerequisite questions 2.2 [1.0–3.4]
+  strong recognised (solved, no lesson) 21/30 70% [52–83] | unnecessary questions 4.5 [2.6–6.5] | any lesson 9/30 30% [17–48] | any prerequisite question 9/30 30% [17–48]
+
+O1 typed-guesser app  n=10  outcomes app:done:10
+  false reassurance 7/10 70% [40–89] | questions 31.0 [23.4–39.0] | lessons 2.0 [0.9–3.2] | prerequisite questions 8.3 [3.6–13.1]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 3/10 30% [11–60] | own skill taught 4/10 40% [17–69] | diagnosis null:10
+
+O1 typed-guesser p2  n=10  outcomes escalate:3 solved:4 solved_after_help:3
+  false reassurance 7/10 70% [40–89] | questions 16.7 [7.9–27.1] | lessons 0.7 [0.3–1.1] | prerequisite questions 4.0 [1.8–6.3]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 6/10 60% [31–83] | diagnosis null:10
+
+O1 typed-guesser p3-current  n=30  outcomes escalate:10 solved:10 solved_after_help:10
+  false reassurance 18/30 60% [42–75] | questions 12.6 [9.0–16.0] | lessons 1.1 [0.7–1.4] | prerequisite questions 8.1 [5.0–11.2]
+  roots 30: identified 5/30 17% [7–34] | taught 5/30 17% [7–34] | repaired 5/30 17% [7–34] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 5/30 17% [7–34] | wrong skill designated 0/30 0% [0–11] | own skill taught 14/30 47% [30–64] | diagnosis unexplained:8 null:5 own-or-unmapped:4 slip:5 prerequisite:8
+
+O1 typed-guesser p3-selective  n=30  outcomes escalate:22 solved_after_help:5 solved:3
+  false reassurance 5/30 17% [7–34] | questions 18.6 [15.2–21.8] | lessons 1.6 [1.2–1.9] | prerequisite questions 11.8 [8.7–14.9]
+  roots 30: identified 7/30 23% [12–41] | taught 7/30 23% [12–41] | repaired 7/30 23% [12–41] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 7/30 23% [12–41] | wrong skill designated 0/30 0% [0–11] | own skill taught 20/30 67% [49–81] | diagnosis unexplained:18 own-or-unmapped:1 prerequisite:7 null:4
+
+O1 typed-guesser p3-two-fresh  n=30  outcomes escalate:22 solved_after_help:5 solved:3
+  false reassurance 5/30 17% [7–34] | questions 18.6 [15.2–21.8] | lessons 1.6 [1.2–1.9] | prerequisite questions 11.8 [8.7–14.9]
+  roots 30: identified 7/30 23% [12–41] | taught 7/30 23% [12–41] | repaired 7/30 23% [12–41] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 7/30 23% [12–41] | wrong skill designated 0/30 0% [0–11] | own skill taught 20/30 67% [49–81] | diagnosis unexplained:18 own-or-unmapped:1 prerequisite:7 null:4
+
+O2 fails-to-learn app  n=10  outcomes app:done:8 app:pause:2
+  false reassurance 0/10 0% [0–28] | questions 33.3 [32.1–34.5] | lessons 4.0 [4.0–4.0] | prerequisite questions 9.0 [9.0–9.0]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O2 fails-to-learn p2  n=10  outcomes escalate:10
+  false reassurance 0/10 0% [0–28] | questions 20.0 [20.0–20.0] | lessons 3.0 [3.0–3.0] | prerequisite questions 18.0 [18.0–18.0]
+  roots 10: identified 10/10 100% [72–100] | taught 10/10 100% [72–100] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 0/10 0% [0–28] | diagnosis null:10
+
+O2 fails-to-learn p3-selective  n=30  outcomes escalate:30
+  false reassurance 0/30 0% [0–11] | questions 20.0 [20.0–20.1] | lessons 3.0 [3.0–3.0] | prerequisite questions 18.0 [18.0–18.1]
+  roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired 0/30 0% [0–11] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 0/30 0% [0–11] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis prerequisite:30
+
+O2 forgetting app  n=10  outcomes app:pause:1 app:done:9
+  false reassurance 0/10 0% [0–28] | questions 33.2 [32.0–34.0] | lessons 4.0 [4.0–4.0] | prerequisite questions 9.0 [9.0–9.0]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+  2nd episode (after forgetting) run in 0/10: roots repaired – | false reassurance – | outcomes  | questions –
+
+O2 forgetting p2  n=10  outcomes solved_after_help:10
+  false reassurance 0/10 0% [0–28] | questions 13.2 [13.0–13.5] | lessons 2.0 [2.0–2.0] | prerequisite questions 10.2 [10.0–10.5]
+  roots 10: identified 10/10 100% [72–100] | taught 10/10 100% [72–100] | repaired 10/10 100% [72–100] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 10/10 100% [72–100] | wrong skill designated 0/10 0% [0–28] | own skill taught 0/10 0% [0–28] | diagnosis null:10
+  2nd episode (after forgetting) run in 10/10: roots repaired 10/10 100% [72–100] | false reassurance 0/10 0% [0–28] | outcomes solved_after_help:10 | questions 17.3 [17.0–17.6]
+
+O2 forgetting p3-selective  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 0% [0–11] | questions 14.7 [14.2–15.3] | lessons 2.0 [2.0–2.1] | prerequisite questions 10.3 [10.1–10.5]
+  roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired 30/30 100% [89–100] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 30/30 100% [89–100] | wrong skill designated 0/30 0% [0–11] | own skill taught 1/30 3% [1–17] | diagnosis prerequisite:30
+  2nd episode (after forgetting) run in 30/30: roots repaired 30/30 100% [89–100] | false reassurance 0/30 0% [0–11] | outcomes solved_after_help:30 | questions 18.3 [18.1–18.4]
+
+O2 lucky app  n=10  outcomes app:pause:3 app:done:7
+  false reassurance 3/10 30% [11–60] | questions 29.5 [23.9–35.3] | lessons 3.1 [2.0–4.0] | prerequisite questions 8.4 [5.4–11.7]
+  roots 10: identified 1/10 10% [2–40] | taught 1/10 10% [2–40] | repaired 1/10 10% [2–40] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 1/10 10% [2–40] | wrong skill designated 1/10 10% [2–40] | own skill taught 8/10 80% [49–94] | diagnosis null:10
+
+O2 lucky p2  n=10  outcomes solved_after_help:7 solved:2 escalate:1
+  false reassurance 2/10 20% [6–51] | questions 13.6 [8.5–19.9] | lessons 1.6 [1.0–2.0] | prerequisite questions 8.0 [5.1–10.1]
+  roots 10: identified 8/10 80% [49–94] | taught 8/10 80% [49–94] | repaired 8/10 80% [49–94] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 8/10 80% [49–94] | wrong skill designated 0/10 0% [0–28] | own skill taught 1/10 10% [2–40] | diagnosis null:10
+
+O2 lucky p3-current  n=30  outcomes solved_after_help:22 solved:5 escalate:3
+  false reassurance 9/30 30% [17–48] | questions 11.3 [9.5–12.9] | lessons 1.5 [1.2–1.8] | prerequisite questions 7.7 [6.3–9.0]
+  roots 30: identified 25/30 83% [66–93] | taught 25/30 83% [66–93] | repaired 25/30 83% [66–93] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 25/30 83% [66–93] | wrong skill designated 0/30 0% [0–11] | own skill taught 3/30 10% [3–26] | diagnosis prerequisite:22 null:3 slip:2 unexplained:3
+
+O2 lucky p3-selective  n=30  outcomes solved_after_help:20 solved:3 escalate:7
+  false reassurance 3/30 10% [3–26] | questions 14.0 [12.2–15.4] | lessons 1.8 [1.5–2.0] | prerequisite questions 8.5 [7.3–9.5]
+  roots 30: identified 27/30 90% [74–97] | taught 27/30 90% [74–97] | repaired 27/30 90% [74–97] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 27/30 90% [74–97] | wrong skill designated 0/30 0% [0–11] | own skill taught 7/30 23% [12–41] | diagnosis prerequisite:20 null:3 unexplained:7
+
+O2 lucky p3-two-fresh  n=30  outcomes solved_after_help:20 solved:3 escalate:7
+  false reassurance 3/30 10% [3–26] | questions 14.0 [12.2–15.4] | lessons 1.8 [1.5–2.0] | prerequisite questions 8.5 [7.3–9.5]
+  roots 30: identified 27/30 90% [74–97] | taught 27/30 90% [74–97] | repaired 27/30 90% [74–97] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 27/30 90% [74–97] | wrong skill designated 0/30 0% [0–11] | own skill taught 7/30 23% [12–41] | diagnosis prerequisite:20 null:3 unexplained:7
+
+O2 multiple-gaps app  n=10  outcomes app:done:9 app:pause:1
+  false reassurance 0/10 0% [0–28] | questions 34.2 [32.5–35.7] | lessons 4.2 [4.0–4.5] | prerequisite questions 9.0 [9.0–9.0]
+  roots 20: identified 0/20 0% [0–16] | taught 0/20 0% [0–16] | repaired 0/20 0% [0–16] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 0/10 0% [0–28] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O2 multiple-gaps p2  n=10  outcomes solved_after_help:10
+  false reassurance 0/10 0% [0–28] | questions 24.1 [24.0–24.3] | lessons 4.0 [4.0–4.0] | prerequisite questions 19.0 [19.0–19.0]
+  roots 20: identified 20/20 100% [84–100] | taught 20/20 100% [84–100] | repaired 20/20 100% [84–100] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 10/10 100% [72–100] | wrong skill designated 0/10 0% [0–28] | own skill taught 0/10 0% [0–28] | diagnosis null:10
+
+O2 multiple-gaps p3-selective  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 0% [0–11] | questions 25.5 [25.3–25.8] | lessons 4.0 [4.0–4.0] | prerequisite questions 19.3 [19.1–19.5]
+  roots 60: identified 60/60 100% [94–100] | taught 60/60 100% [94–100] | repaired 60/60 100% [94–100] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 30/30 100% [89–100] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis prerequisite:30
+
+O2 outside-map app  n=10  outcomes app:done:10
+  false reassurance 0/10 0% [0–28] | questions 39.7 [38.3–41.2] | lessons 1.3 [1.0–1.6] | prerequisite questions 13.4 [12.4–14.6]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 10/10 100% [72–100] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O2 outside-map p2  n=10  outcomes escalate:10
+  false reassurance 0/10 0% [0–28] | questions 36.2 [31.0–40.0] | lessons 1.2 [1.0–1.5] | prerequisite questions 4.4 [3.8–5.0]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 2/10 20% [6–51] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O2 outside-map p3-selective  n=30  outcomes escalate:30
+  false reassurance 0/30 0% [0–11] | questions 10.5 [10.2–10.9] | lessons 1.0 [1.0–1.1] | prerequisite questions 3.4 [3.2–3.7]
+  roots 30: identified 0/30 0% [0–11] | taught 0/30 0% [0–11] | repaired 0/30 0% [0–11] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 0/30 0% [0–11] | wrong skill designated 1/30 3% [1–17] | own skill taught 30/30 100% [89–100] | diagnosis unexplained:30
+
+O2 single-gap app  n=10  outcomes app:pause:3 app:done:7
+  false reassurance 0/10 0% [0–28] | questions 33.1 [31.2–34.9] | lessons 3.2 [2.6–3.8] | prerequisite questions 8.7 [8.4–9.0]
+  roots 10: identified 0/10 0% [0–28] | taught 0/10 0% [0–28] | repaired 0/10 0% [0–28] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 0/10 0% [0–28] | wrong skill designated 4/10 40% [17–69] | own skill taught 10/10 100% [72–100] | diagnosis null:10
+
+O2 single-gap p2  n=10  outcomes solved_after_help:10
+  false reassurance 0/10 0% [0–28] | questions 13.4 [13.1–13.7] | lessons 2.0 [2.0–2.0] | prerequisite questions 10.4 [10.1–10.7]
+  roots 10: identified 10/10 100% [72–100] | taught 10/10 100% [72–100] | repaired 10/10 100% [72–100] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 10/10 100% [72–100] | wrong skill designated 0/10 0% [0–28] | own skill taught 0/10 0% [0–28] | diagnosis null:10
+
+O2 single-gap p3-current  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 0% [0–11] | questions 14.0 [13.7–14.3] | lessons 2.0 [2.0–2.0] | prerequisite questions 10.8 [10.6–11.1]
+  roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired 30/30 100% [89–100] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 30/30 100% [89–100] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis prerequisite:30
+
+O2 single-gap p3-selective  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 0% [0–11] | questions 15.0 [14.7–15.3] | lessons 2.0 [2.0–2.0] | prerequisite questions 10.8 [10.6–11.1]
+  roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired 30/30 100% [89–100] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 30/30 100% [89–100] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis prerequisite:30
+
+O2 single-gap p3-two-fresh  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 0% [0–11] | questions 15.0 [14.7–15.3] | lessons 2.0 [2.0–2.0] | prerequisite questions 10.8 [10.6–11.1]
+  roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired 30/30 100% [89–100] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 30/30 100% [89–100] | wrong skill designated 0/30 0% [0–11] | own skill taught 0/30 0% [0–11] | diagnosis prerequisite:30
+
+O2 strong-history p2  n=10  outcomes solved:10
+  false reassurance 0/10 0% [0–28] | questions 2.0 [2.0–2.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 10/10 100% [72–100] | unnecessary questions 0.0 [0.0–0.0] | any lesson 0/10 0% [0–28] | any prerequisite question 0/10 0% [0–28]
+
+O2 strong-history p3-current  n=30  outcomes solved:29 solved_after_help:1
+  false reassurance 0/30 0% [0–11] | questions 2.2 [2.0–2.7] | lessons 0.0 [0.0–0.1] | prerequisite questions 0.1 [0.0–0.3]
+  strong recognised (solved, no lesson) 29/30 97% [83–99] | unnecessary questions 0.2 [0.0–0.7] | any lesson 1/30 3% [1–17] | any prerequisite question 1/30 3% [1–17]
+
+O2 strong-history p3-selective  n=30  outcomes solved:29 solved_after_help:1
+  false reassurance 0/30 0% [0–11] | questions 2.3 [2.0–2.8] | lessons 0.0 [0.0–0.1] | prerequisite questions 0.1 [0.0–0.3]
+  strong recognised (solved, no lesson) 29/30 97% [83–99] | unnecessary questions 0.3 [0.0–0.8] | any lesson 1/30 3% [1–17] | any prerequisite question 1/30 3% [1–17]
+
+O2 strong-history p3-two-fresh  n=30  outcomes solved:29 solved_after_help:1
+  false reassurance 0/30 0% [0–11] | questions 3.2 [3.0–3.7] | lessons 0.0 [0.0–0.1] | prerequisite questions 0.1 [0.0–0.3]
+  strong recognised (solved, no lesson) 29/30 97% [83–99] | unnecessary questions 1.2 [1.0–1.7] | any lesson 1/30 3% [1–17] | any prerequisite question 1/30 3% [1–17]
+
+O2 strong-new app  n=10  outcomes app:done:10
+  false reassurance 0/10 0% [0–28] | questions 28.9 [28.4–29.5] | lessons 0.0 [0.0–0.0] | prerequisite questions 12.5 [12.1–12.9]
+  strong recognised (solved, no lesson) 10/10 100% [72–100] | unnecessary questions 26.9 [26.4–27.5] | any lesson 0/10 0% [0–28] | any prerequisite question 10/10 100% [72–100]
+
+O2 strong-new p2  n=10  outcomes solved:9 solved_after_help:1
+  false reassurance 0/10 0% [0–28] | questions 2.7 [2.0–4.1] | lessons 0.1 [0.0–0.3] | prerequisite questions 0.3 [0.0–0.9]
+  strong recognised (solved, no lesson) 9/10 90% [60–98] | unnecessary questions 0.7 [0.0–2.1] | any lesson 1/10 10% [2–40] | any prerequisite question 1/10 10% [2–40]
+
+O2 strong-new p3-current  n=30  outcomes solved:29 solved_after_help:1
+  false reassurance 0/30 0% [0–11] | questions 2.2 [2.0–2.7] | lessons 0.0 [0.0–0.1] | prerequisite questions 0.1 [0.0–0.3]
+  strong recognised (solved, no lesson) 29/30 97% [83–99] | unnecessary questions 0.2 [0.0–0.7] | any lesson 1/30 3% [1–17] | any prerequisite question 1/30 3% [1–17]
+
+O2 strong-new p3-selective  n=30  outcomes solved:25 solved_after_help:5
+  false reassurance 0/30 0% [0–11] | questions 4.3 [3.3–5.5] | lessons 0.2 [0.0–0.3] | prerequisite questions 0.5 [0.1–1.0]
+  strong recognised (solved, no lesson) 25/30 83% [66–93] | unnecessary questions 2.3 [1.3–3.5] | any lesson 5/30 17% [7–34] | any prerequisite question 5/30 17% [7–34]
+
+O2 strong-new p3-two-fresh  n=30  outcomes solved:25 solved_after_help:5
+  false reassurance 0/30 0% [0–11] | questions 4.3 [3.3–5.5] | lessons 0.2 [0.0–0.3] | prerequisite questions 0.5 [0.1–1.0]
+  strong recognised (solved, no lesson) 25/30 83% [66–93] | unnecessary questions 2.3 [1.3–3.5] | any lesson 5/30 17% [7–34] | any prerequisite question 5/30 17% [7–34]
+
+O2 strong-slips app  n=10  outcomes app:done:9 app:pause:1
+  false reassurance 0/10 0% [0–28] | questions 34.6 [33.0–36.1] | lessons 1.2 [0.6–1.9] | prerequisite questions 15.2 [14.0–16.4]
+  strong recognised (solved, no lesson) 3/10 30% [11–60] | unnecessary questions 32.6 [31.0–34.1] | any lesson 7/10 70% [40–89] | any prerequisite question 10/10 100% [72–100]
+
+O2 strong-slips p2  n=10  outcomes solved_after_help:4 solved:6
+  false reassurance 0/10 0% [0–28] | questions 5.4 [2.9–8.1] | lessons 0.4 [0.1–0.7] | prerequisite questions 1.8 [0.5–3.3]
+  strong recognised (solved, no lesson) 6/10 60% [31–83] | unnecessary questions 3.4 [0.9–6.1] | any lesson 4/10 40% [17–69] | any prerequisite question 4/10 40% [17–69]
+
+O2 strong-slips p3-current  n=30  outcomes solved_after_help:6 solved:24
+  false reassurance 0/30 0% [0–11] | questions 3.7 [2.6–4.9] | lessons 0.2 [0.1–0.3] | prerequisite questions 0.9 [0.3–1.5]
+  strong recognised (solved, no lesson) 24/30 80% [63–90] | unnecessary questions 1.7 [0.6–2.9] | any lesson 6/30 20% [10–37] | any prerequisite question 6/30 20% [10–37]
+
+O2 strong-slips p3-selective  n=30  outcomes solved_after_help:7 escalate:2 solved:21
+  false reassurance 0/30 0% [0–11] | questions 5.7 [4.3–7.2] | lessons 0.3 [0.1–0.5] | prerequisite questions 1.2 [0.6–1.9]
+  strong recognised (solved, no lesson) 21/30 70% [52–83] | unnecessary questions 3.7 [2.3–5.2] | any lesson 9/30 30% [17–48] | any prerequisite question 9/30 30% [17–48]
+
+O2 strong-slips p3-two-fresh  n=30  outcomes solved_after_help:7 escalate:2 solved:21
+  false reassurance 0/30 0% [0–11] | questions 5.7 [4.3–7.2] | lessons 0.3 [0.1–0.5] | prerequisite questions 1.2 [0.6–1.9]
+  strong recognised (solved, no lesson) 21/30 70% [52–83] | unnecessary questions 3.7 [2.3–5.2] | any lesson 9/30 30% [17–48] | any prerequisite question 9/30 30% [17–48]
+
+O2 typed-guesser app  n=10  outcomes app:pause:3 app:done:7
+  false reassurance 6/10 60% [31–83] | questions 36.1 [27.6–43.7] | lessons 3.2 [2.0–4.1] | prerequisite questions 13.6 [7.8–19.0]
+  roots 10: identified 5/10 50% [24–76] | taught 4/10 40% [17–69] | repaired 4/10 40% [17–69] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 4/10 40% [17–69] | wrong skill designated 5/10 50% [24–76] | own skill taught 8/10 80% [49–94] | diagnosis null:10
+
+O2 typed-guesser p2  n=10  outcomes solved_after_help:6 escalate:3 solved:1
+  false reassurance 5/10 50% [24–76] | questions 18.0 [10.8–26.0] | lessons 1.4 [0.9–1.9] | prerequisite questions 6.9 [4.5–9.3]
+  roots 10: identified 5/10 50% [24–76] | taught 5/10 50% [24–76] | repaired 5/10 50% [24–76] | blocked-with-root-named 0/10 0% [0–28] runs
+  runs with every root repaired 5/10 50% [24–76] | wrong skill designated 0/10 0% [0–28] | own skill taught 5/10 50% [24–76] | diagnosis null:10
+
+O2 typed-guesser p3-current  n=30  outcomes solved_after_help:19 escalate:5 solved:6
+  false reassurance 17/30 57% [39–73] | questions 11.1 [8.9–13.2] | lessons 1.3 [1.0–1.6] | prerequisite questions 6.4 [4.8–7.9]
+  roots 30: identified 18/30 60% [42–75] | taught 18/30 60% [42–75] | repaired 18/30 60% [42–75] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 18/30 60% [42–75] | wrong skill designated 0/30 0% [0–11] | own skill taught 11/30 37% [22–54] | diagnosis own-or-unmapped:3 unexplained:5 null:4 prerequisite:16 slip:2
+
+O2 typed-guesser p3-selective  n=30  outcomes escalate:14 solved:5 solved_after_help:11
+  false reassurance 8/30 27% [14–44] | questions 13.5 [11.2–15.7] | lessons 1.5 [1.2–1.8] | prerequisite questions 6.9 [5.4–8.3]
+  roots 30: identified 19/30 63% [46–78] | taught 19/30 63% [46–78] | repaired 19/30 63% [46–78] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 19/30 63% [46–78] | wrong skill designated 1/30 3% [1–17] | own skill taught 16/30 53% [36–70] | diagnosis unexplained:14 null:4 prerequisite:10 own-or-unmapped:1 slip:1
+
+O2 typed-guesser p3-two-fresh  n=30  outcomes escalate:14 solved:5 solved_after_help:11
+  false reassurance 8/30 27% [14–44] | questions 13.5 [11.2–15.7] | lessons 1.5 [1.2–1.8] | prerequisite questions 6.9 [5.4–8.3]
+  roots 30: identified 19/30 63% [46–78] | taught 19/30 63% [46–78] | repaired 19/30 63% [46–78] | blocked-with-root-named 0/30 0% [0–11] runs
+  runs with every root repaired 19/30 63% [46–78] | wrong skill designated 1/30 3% [1–17] | own skill taught 16/30 53% [36–70] | diagnosis unexplained:14 null:4 prerequisite:10 own-or-unmapped:1 slip:1
+
+paired vs p3-selective (same learner seed): mean difference in questions [bootstrap 95%], false-reassurance runs (other / selective)
+  O1 fails-to-learn app n=10: Δquestions 17.8 [15.8–19.0] | FR 0/0
+  O1 fails-to-learn p2 n=10: Δquestions -1.7 [-2.0–-1.4] | FR 0/0
+  O1 forgetting app n=10: Δquestions 11.7 [9.5–14.1] | FR 0/0
+  O1 forgetting p2 n=10: Δquestions -3.5 [-4.1–-3.0] | FR 0/0
+  O1 lucky app n=10: Δquestions 18.2 [13.1–23.1] | FR 2/0
+  O1 lucky p2 n=10: Δquestions -1.3 [-3.4–2.1] | FR 0/0
+  O1 lucky p3-current n=30: Δquestions -1.8 [-4.1–-0.5] | FR 1/0
+  O1 lucky p3-two-fresh n=30: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O1 missing-content app n=10: Δquestions 27.0 [24.1–29.6] | FR 0/0
+  O1 missing-content p2 n=10: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O1 multiple-gaps app n=10: Δquestions 2.1 [-0.8–4.8] | FR 0/0
+  O1 multiple-gaps p2 n=10: Δquestions -3.5 [-4.1–-2.6] | FR 0/0
+  O1 outside-map app n=10: Δquestions 30.5 [27.8–33.1] | FR 0/0
+  O1 outside-map p2 n=10: Δquestions 27.6 [27.1–28.0] | FR 0/0
+  O1 single-gap app n=10: Δquestions 11.9 [9.6–14.4] | FR 0/0
+  O1 single-gap p2 n=10: Δquestions -4.4 [-5.6–-3.0] | FR 0/0
+  O1 single-gap p3-current n=30: Δquestions -1.1 [-1.3–-1.0] | FR 0/0
+  O1 single-gap p3-two-fresh n=30: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O1 strong-history p2 n=10: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O1 strong-history p3-current n=30: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O1 strong-history p3-two-fresh n=30: Δquestions 1.4 [1.0–2.1] | FR 0/0
+  O1 strong-new app n=10: Δquestions 26.9 [25.2–29.0] | FR 0/0
+  O1 strong-new p2 n=10: Δquestions -2.0 [-4.0–-1.0] | FR 0/0
+  O1 strong-new p3-current n=30: Δquestions -1.9 [-3.1–-1.0] | FR 0/0
+  O1 strong-new p3-two-fresh n=30: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O1 strong-slips app n=10: Δquestions 26.5 [23.1–29.6] | FR 0/0
+  O1 strong-slips p2 n=10: Δquestions -2.2 [-4.6–-1.0] | FR 0/0
+  O1 strong-slips p3-current n=30: Δquestions -2.1 [-3.4–-1.0] | FR 0/0
+  O1 strong-slips p3-two-fresh n=30: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O1 typed-guesser app n=10: Δquestions 15.3 [5.7–24.5] | FR 7/2
+  O1 typed-guesser p2 n=10: Δquestions 1.0 [-9.9–12.9] | FR 7/2
+  O1 typed-guesser p3-current n=30: Δquestions -6.1 [-9.6–-2.9] | FR 18/5
+  O1 typed-guesser p3-two-fresh n=30: Δquestions 0.0 [0.0–0.0] | FR 5/5
+  O2 fails-to-learn app n=10: Δquestions 13.3 [12.1–14.5] | FR 0/0
+  O2 fails-to-learn p2 n=10: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O2 forgetting app n=10: Δquestions 19.0 [17.9–19.8] | FR 0/0
+  O2 forgetting p2 n=10: Δquestions -1.0 [-1.0–-1.0] | FR 0/0
+  O2 lucky app n=10: Δquestions 16.1 [11.2–20.4] | FR 3/1
+  O2 lucky p2 n=10: Δquestions 0.2 [-4.5–5.9] | FR 2/1
+  O2 lucky p3-current n=30: Δquestions -2.7 [-4.1–-1.4] | FR 9/3
+  O2 lucky p3-two-fresh n=30: Δquestions 0.0 [0.0–0.0] | FR 3/3
+  O2 multiple-gaps app n=10: Δquestions 8.9 [7.3–10.5] | FR 0/0
+  O2 multiple-gaps p2 n=10: Δquestions -1.2 [-1.6–-1.0] | FR 0/0
+  O2 outside-map app n=10: Δquestions 28.8 [27.7–29.9] | FR 0/0
+  O2 outside-map p2 n=10: Δquestions 25.3 [20.0–29.3] | FR 0/0
+  O2 single-gap app n=10: Δquestions 18.5 [16.4–20.6] | FR 0/0
+  O2 single-gap p2 n=10: Δquestions -1.2 [-1.6–-1.0] | FR 0/0
+  O2 single-gap p3-current n=30: Δquestions -1.1 [-1.2–-1.0] | FR 0/0
+  O2 single-gap p3-two-fresh n=30: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O2 strong-history p2 n=10: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O2 strong-history p3-current n=30: Δquestions -0.0 [-0.1–0.0] | FR 0/0
+  O2 strong-history p3-two-fresh n=30: Δquestions 1.0 [0.9–1.0] | FR 0/0
+  O2 strong-new app n=10: Δquestions 24.4 [22.3–26.0] | FR 0/0
+  O2 strong-new p2 n=10: Δquestions -1.8 [-3.4–-1.0] | FR 0/0
+  O2 strong-new p3-current n=30: Δquestions -2.1 [-3.2–-1.3] | FR 0/0
+  O2 strong-new p3-two-fresh n=30: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O2 strong-slips app n=10: Δquestions 26.2 [23.6–28.9] | FR 0/0
+  O2 strong-slips p2 n=10: Δquestions -3.0 [-5.5–-1.0] | FR 0/0
+  O2 strong-slips p3-current n=30: Δquestions -2.0 [-3.2–-1.1] | FR 0/0
+  O2 strong-slips p3-two-fresh n=30: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O2 typed-guesser app n=10: Δquestions 22.9 [15.6–29.4] | FR 6/2
+  O2 typed-guesser p2 n=10: Δquestions 4.8 [-0.6–11.3] | FR 5/2
+  O2 typed-guesser p3-current n=30: Δquestions -2.5 [-4.1–-1.2] | FR 17/8
+  O2 typed-guesser p3-two-fresh n=30: Δquestions 0.0 [0.0–0.0] | FR 8/8
+
+n/a cells: O1 strong-history app (the app harness cannot pre-load history); O2 strong-history app (the app harness cannot pre-load history); O2 missing-content app; O2 missing-content p2

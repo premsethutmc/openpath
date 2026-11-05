@@ -1,0 +1,21 @@
+O1 fails-to-learn selective n30 FR0 sol0 q24.6 id30 tg30 rp0/30 | p2 n10 FR0 sol0 q22.4 id10 tg10 rp0/10 | app n10 FR0 sol0 q41.9 id0 tg0 rp0/10
+O1 forgetting selective n30 FR0 sol30 q26.4 id30 tg30 rp30/30 | p2 n10 FR0 sol10 q22.4 id10 tg10 rp10/10 | app n10 FR0 sol0 q37.6 id0 tg0 rp0/10
+O1 lucky selective n30 FR0 sol18 q24.7 id20 tg20 rp20/30 | two-fresh n30 FR0 sol18 q24.7 id20 tg20 rp20/30 | current n30 FR1 sol19 q22.9 id20 tg20 rp20/30 | p2 n10 FR0 sol6 q23.4 id6 tg6 rp6/10 | app n10 FR2 sol2 q42.9 id0 tg0 rp0/10
+O1 missing-content selective n30 FR0 sol0 q11.1 id30 tg0 rp0/30 | p2 n10 FR0 sol0 q11.0 id10 tg0 rp0/10 | app n10 FR0 sol0 q38.0 id0 tg0 rp0/10
+O1 multiple-gaps selective n30 FR0 sol0 q37.1 id60 tg59 rp59/60 | p2 n10 FR0 sol9 q33.7 id20 tg20 rp20/20 | app n10 FR0 sol0 q39.3 id0 tg0 rp0/20
+O1 outside-map selective n30 FR0 sol0 q12.3 id0 tg0 rp0/30 | p2 n10 FR0 sol0 q39.8 id0 tg0 rp0/10 | app n10 FR0 sol0 q42.7 id0 tg0 rp0/10
+O1 single-gap selective n30 FR0 sol30 q26.8 id30 tg30 rp30/30 | two-fresh n30 FR0 sol30 q26.8 id30 tg30 rp30/30 | current n30 FR0 sol30 q25.7 id30 tg30 rp30/30 | p2 n10 FR0 sol10 q22.0 id10 tg10 rp10/10 | app n10 FR0 sol0 q38.3 id0 tg0 rp0/10
+O1 strong-history selective n30 FR0 sol30 q2.0 rec30 unq0.0 | two-fresh n30 FR0 sol30 q3.4 rec29 unq1.4 | current n30 FR0 sol30 q2.0 rec30 unq0.0 | p2 n10 FR0 sol10 q2.0 rec10 unq0.0
+O1 strong-new selective n30 FR0 sol29 q4.5 rec26 unq2.5 | two-fresh n30 FR0 sol29 q4.5 rec26 unq2.5 | current n30 FR0 sol30 q2.6 rec28 unq0.6 | p2 n10 FR0 sol10 q2.0 rec10 unq0.0 | app n10 FR0 sol10 q30.9 rec8 unq28.9
+O1 strong-slips selective n30 FR0 sol30 q6.5 rec21 unq4.5 | two-fresh n30 FR0 sol30 q6.5 rec21 unq4.5 | current n30 FR0 sol30 q4.4 rec24 unq2.4 | p2 n10 FR0 sol10 q4.5 rec8 unq2.5 | app n10 FR0 sol9 q33.2 rec4 unq31.2
+O1 typed-guesser selective n30 FR5 sol8 q18.6 id7 tg7 rp7/30 | two-fresh n30 FR5 sol8 q18.6 id7 tg7 rp7/30 | current n30 FR18 sol20 q12.6 id5 tg5 rp5/30 | p2 n10 FR7 sol7 q16.7 id0 tg0 rp0/10 | app n10 FR7 sol7 q31.0 id0 tg0 rp0/10
+O2 fails-to-learn selective n30 FR0 sol0 q20.0 id30 tg30 rp0/30 | p2 n10 FR0 sol0 q20.0 id10 tg10 rp0/10 | app n10 FR0 sol0 q33.3 id0 tg0 rp0/10
+O2 forgetting selective n30 FR0 sol30 q14.7 id30 tg30 rp30/30 | p2 n10 FR0 sol10 q13.2 id10 tg10 rp10/10 | app n10 FR0 sol0 q33.2 id0 tg0 rp0/10
+O2 lucky selective n30 FR3 sol23 q14.0 id27 tg27 rp27/30 | two-fresh n30 FR3 sol23 q14.0 id27 tg27 rp27/30 | current n30 FR9 sol27 q11.3 id25 tg25 rp25/30 | p2 n10 FR2 sol9 q13.6 id8 tg8 rp8/10 | app n10 FR3 sol3 q29.5 id1 tg1 rp1/10
+O2 multiple-gaps selective n30 FR0 sol30 q25.5 id60 tg60 rp60/60 | p2 n10 FR0 sol10 q24.1 id20 tg20 rp20/20 | app n10 FR0 sol0 q34.2 id0 tg0 rp0/20
+O2 outside-map selective n30 FR0 sol0 q10.5 id0 tg0 rp0/30 | p2 n10 FR0 sol0 q36.2 id0 tg0 rp0/10 | app n10 FR0 sol0 q39.7 id0 tg0 rp0/10
+O2 single-gap selective n30 FR0 sol30 q15.0 id30 tg30 rp30/30 | two-fresh n30 FR0 sol30 q15.0 id30 tg30 rp30/30 | current n30 FR0 sol30 q14.0 id30 tg30 rp30/30 | p2 n10 FR0 sol10 q13.4 id10 tg10 rp10/10 | app n10 FR0 sol0 q33.1 id0 tg0 rp0/10
+O2 strong-history selective n30 FR0 sol30 q2.3 rec29 unq0.3 | two-fresh n30 FR0 sol30 q3.2 rec29 unq1.2 | current n30 FR0 sol30 q2.2 rec29 unq0.2 | p2 n10 FR0 sol10 q2.0 rec10 unq0.0
+O2 strong-new selective n30 FR0 sol30 q4.3 rec25 unq2.3 | two-fresh n30 FR0 sol30 q4.3 rec25 unq2.3 | current n30 FR0 sol30 q2.2 rec29 unq0.2 | p2 n10 FR0 sol10 q2.7 rec9 unq0.7 | app n10 FR0 sol10 q28.9 rec10 unq26.9
+O2 strong-slips selective n30 FR0 sol28 q5.7 rec21 unq3.7 | two-fresh n30 FR0 sol28 q5.7 rec21 unq3.7 | current n30 FR0 sol30 q3.7 rec24 unq1.7 | p2 n10 FR0 sol10 q5.4 rec6 unq3.4 | app n10 FR0 sol6 q34.6 rec3 unq32.6
+O2 typed-guesser selective n30 FR8 sol16 q13.5 id19 tg19 rp19/30 | two-fresh n30 FR8 sol16 q13.5 id19 tg19 rp19/30 | current n30 FR17 sol25 q11.1 id18 tg18 rp18/30 | p2 n10 FR5 sol7 q18.0 id5 tg5 rp5/10 | app n10 FR6 sol6 q36.1 id5 tg4 rp4/10

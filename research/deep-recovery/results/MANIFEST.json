@@ -1,0 +1,39 @@
+{
+  "note": "SIMULATED learners only (seeded learner models). Not evidence about real children. No real learner data is stored here.",
+  "phase2": {
+    "dir": "results/phase2-d98ba668",
+    "engine_commit": "d98ba668",
+    "heldout_seeds": "1001-1030 (n=30 per learner type, original gen:aupfr only)",
+    "tuning_seeds": "1-10 (three tuning rounds, files tuning-seeds-1-10-*.jsonl)",
+    "produce": "cd frontend && node --import tsx src/journey/deep-recovery-sim.ts 1001 1030 <types>   (at d98ba668)",
+    "summaries": {
+      "summary-heldout-1001-1030.txt": "node --import tsx src/journey/deep-recovery-sim-summary.ts ../research/deep-recovery/results/phase2-d98ba668/heldout-1001-1030-group*.jsonl",
+      "corrected-gap-measures.txt": "node --import tsx src/journey/deep-recovery-summary3.ts --phase2 ../research/deep-recovery/results/phase2-d98ba668/heldout-1001-1030-group*.jsonl"
+    },
+    "caveat": "phase-2 'gap found' counted a root that was taught OR named as blocked; repaired was not recorded (corrected-gap-measures.txt gives a derived lower bound)."
+  },
+  "phase3": {
+    "dir": "results/phase3",
+    "tuning": { "file": "tuning-seeds-1-5-selective-v1.jsonl", "seeds": "1-5", "engine_commit": "149c6235 + lazy pool scan (committed in d36cbf8b) with selective rule v1", "used_for": "choosing selective v2" },
+    "heldout_seeds": { "p3-current,p3-two-fresh,p3-selective (12 cells)": "2001-2030", "p3-selective (9 more cells)": "2001-2030", "p2 (frozen d98ba668 engine), app (shipped recovery 61edf730)": "2001-2010 (n=10 per cell, bounded for runtime)" },
+    "files": {
+      "heldout-A-rules.jsonl": "engine commit d36cbf8b",
+      "heldout-B-broad.jsonl": "engine commit d36cbf8b",
+      "heldout-D-p2.jsonl": "engine commit d36cbf8b (frozen phase-2 engine)",
+      "heldout-C-app.jsonl": "harness fix committed with this manifest (app measured on its own session); engines unchanged from d36cbf8b",
+      "superseded-C-app-INVALID-wrong-learner-id.jsonl": "first app run, INVALID: measured the wrong learner id (all statuses not_started); kept for audit, excluded from summaries"
+    },
+    "produce": [
+      "cd frontend && node --import tsx src/journey/deep-recovery-sim3.ts 2001 2030 p3-current,p3-two-fresh,p3-selective O1:strong-new,O1:strong-history,O1:strong-slips,O2:strong-new,O2:strong-history,O2:strong-slips,O1:lucky,O2:lucky,O1:typed-guesser,O2:typed-guesser,O1:single-gap,O2:single-gap",
+      "node --import tsx src/journey/deep-recovery-sim3.ts 2001 2030 p3-selective O1:multiple-gaps,O2:multiple-gaps,O1:missing-content,O1:fails-to-learn,O2:fails-to-learn,O1:forgetting,O2:forgetting,O1:outside-map,O2:outside-map",
+      "node --import tsx src/journey/deep-recovery-sim3.ts 2001 2010 p2 <all 22 cells>",
+      "node --import tsx src/journey/deep-recovery-sim3.ts 2001 2010 app <all 22 cells>"
+    ],
+    "summarise": [
+      "node --import tsx src/journey/deep-recovery-summary3.ts ../research/deep-recovery/results/phase3/heldout-{A-rules,B-broad,C-app,D-p2}.jsonl > heldout-summary.txt",
+      "cd research/deep-recovery/results/phase3 && python3 ../../compact-table.py > heldout-compact-table.txt"
+    ],
+    "runs": "1790 held-out records: 1750 ok, 0 error, 0 incomplete, 0 timeout, 40 n/a (O2 missing-content for p2/app; strong-history for app)",
+    "gap_measures": "identified = root designated as the missing piece (lesson decision, blocked, or hand-over naming it); taught = lesson on the root delivered; repaired = after that lesson, a right first-try unaided answer on the root in the episode; blockedNamed = ended blocked naming the root (identified, not taught)."
+  }
+}

@@ -80,21 +80,18 @@ export function simulate3(engine: Engine, ok: OK, type: string, seed: number) {
   const L = new SimLearner(truth, rnd);
   rec.original = original;
   try {
-    const s = new SliceSession(`sim3-${engine}-${ok}-${type}-${seed}`, O.own, Date.parse("2026-11-05T09:00:00Z"));
+    let s = new SliceSession(`sim3-${engine}-${ok}-${type}-${seed}`, O.own, Date.parse("2026-11-05T09:00:00Z"));
     if (truth.history) {
       for (const q of phasePool(O.family, "practice").filter((x) => !x.endsWith(":mc")).slice(0, 3)) s.submit(q, right(q), "practice");
       s.wait(3);
     }
     const episode = (orig: string) => {
-      const evFrom = s.events.length, repFrom = s.replies.length;
+      let evFrom = s.events.length, repFrom = s.replies.length;
       let outcome: string, diagnosis: string | null = null, cause: string | null = null, effort: number | null = null, designated: string[] = [], status = "ok";
       if (engine === "app") {
         const r = runScenario({ id: `sim3-${seed}`, category: 3, start: orig, entry: "practice", expect: {}, learner: () => ({ name: type, act: (v) => ({ answer: L.answer(v.q, { taughtSkills: v.taughtSkills, answered: v.answered }) }) }) } as never);
-        // the app's own session replaces ours for this run
-        (s as unknown as { events: unknown[] }).events.push(...r.f.session.events);
-        Object.assign(s.decisions, r.f.session.decisions);
-        s.replies.push(...r.f.session.replies);
-        s.now = r.f.session.now; s.session = r.f.session.session;
+        // the app's own session (its own learner id and records) is the one measured
+        s = r.f.session; evFrom = 0; repFrom = 0;
         outcome = `app:${r.f.ended?.phase ?? (r.terminated ? "ended" : "running")}`;
         if (!r.terminated) status = "incomplete";
         const recs = r.f.session.trace.filter((t) => t.component === "intervention.recovery").map((t) => t.output as { phase: string; active: string | null });
