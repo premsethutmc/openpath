@@ -98,11 +98,11 @@ test("AUDIT-2 solution field set to true after foundation-lesson-review (same co
   ];
   const recs = readRecords("audit-2", events);
   const attempt = recs.attempts[0];
-  // The bug: solution is true because of the foundation-lesson-review@1 in the same session
+  // solution-scope@1: practice answers after teaching are independent (solution=false)
   console.log(`  After foundation-lesson-review@1 on ${LR}:`);
   console.log(`  - Answer on same competency: solution = ${attempt.solution}`);
-  console.log(`  - This makes assistedAttempt() return true, so the answer CANNOT be independent evidence`);
-  assert.equal(attempt.solution, true, "solution is set to true after lesson review (the bug)");
+  console.log(`  - solution-scope@1: practice answer is independent, not falsely marked as assisted`);
+  assert.equal(attempt.solution, false, "solution-scope@1: practice answer after teaching is independent");
 });
 
 test("AUDIT-2b solution field for a DIFFERENT competency in the same session", () => {
