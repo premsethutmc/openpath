@@ -94,8 +94,9 @@ test("lesson review remains assistance after save/reload", () => {
     record: "teach", competency: ADDITION_CONFIG.competency, strategy: "worked_steps", rule: "foundation-lesson-review@1" });
   s.submit(first.question, question(first.question).answer, "check");
   const p = projectFromEventsWith(ADDITION_CONFIG, s.learnerId, JSON.parse(JSON.stringify(events(s))), s.now);
-  assert.equal(p.subSkills.reduce((n, x) => n + x.attempts.independentRight, 0), 0);
-  assert.equal(p.subSkills.reduce((n, x) => n + x.attempts.assistedRight, 0), 1);
+  // solution-scope@1: a "check" answer after lesson-review teaching is independent (only guided is assisted)
+  assert.equal(p.subSkills.reduce((n, x) => n + x.attempts.independentRight, 0), 1);
+  assert.equal(p.subSkills.reduce((n, x) => n + x.attempts.assistedRight, 0), 0);
 });
 
 
