@@ -33,7 +33,7 @@ import type { Attempt, LearnerRecords } from "./records";
 import { connectedSkill, connectionConfig } from "./skill-connections";
 import { classifyQuestionWith } from "./subskill-projection";
 import { keyboardOffered } from "./written";
-import { blocksTransfer, heldByTeaching, presentedProblems, unitOfStrategy, unitStates, type SkillUnit, type UnitState } from "./skill-units";
+import { blocksTransfer, heldByTeaching, presentedProblems, unitOfQuestion, unitOfStrategy, unitStates, type SkillUnit, type UnitState } from "./skill-units";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
 export const MODULE_POLICY: PlannerPolicy = { ...PLANNER_POLICY_DRAFT, guidedItems: 1, reassessItems: 1, reassessPassMin: 1, reassessContrastItems: 0, version: `${PLANNER_POLICY_DRAFT.version}+learning-module@1` };
@@ -520,7 +520,12 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     if (wrong) {
       const r = recovery(wrong, records, evidence, now, session);
       const again = records.attempts.filter((a) => a.questionId === wrong).length;
-      if (r.phase === "investigate" || r.phase === "support" || r.phase === "teach" || (r.phase === "return" && again < 2))
+      // scoped-teaching-priority@1: when recovery would send the learner to a prerequisite module, but this module
+      // has a scoped skill unit that covers the wrong answer (its own teaching for that question kind), prefer the
+      // module's own teaching path. The prerequisite bugs are correct (a carrying error rests on place value), but the
+      // module's carrying-specific explanations should be tried before routing away. §16.5
+      const ownUnit = (r.phase === "support" || (r.phase === "teach" && r.active !== competency)) ? unitOfQuestion(m, wrong) : null;
+      if (r.phase === "investigate" || ((r.phase === "support" || r.phase === "teach" || (r.phase === "return" && again < 2)) && !ownUnit))
         return { ...base, phase: "recover", original: wrong, diagnosis: d, reason: r.reason };
       if (r.phase === "escalate") return { ...base, phase: "pause", diagnosis: d, reason: r.reason };
       if (r.phase === "solved_after_help" || r.phase === "solved_on_retry") {

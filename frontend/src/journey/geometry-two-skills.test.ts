@@ -48,8 +48,10 @@ for (const S of SKILLS) test(`${S.skill}: general skill-scoped teaching exists, 
     const recs = registry().filter((r) => r.competency === S.competency && r.strategy === s.id);
     assert.equal(recs.length, 1); assert.equal(recs[0].revisions.at(-1)!.status, "pending_review", `${s.id} awaits an educator`);
   }
-  // the template module is unchanged apart from the appended explanations
-  assert.ok(m.strategies.slice(0, m.strategies.length - scoped.length).every((s) => !s.scope));
+  // scope-from-config@1: template strategies whose family maps to a subSkill without parameter constraints
+  // also receive scope; blueprint-authored strategies always have scope (set in the blueprint itself)
+  const unscoped = m.strategies.filter((s) => !s.scope);
+  assert.ok(unscoped.every((s) => s.kind === "prerequisite" || s.kind === "procedural"), "unscoped strategies are prerequisite or template-generated procedural");
   // "Review a supported lesson" on a question of this skill opens this skill's lesson, not the main family's
   const q = pool(S.family).items.map((p) => p.id).find((id) => skillOf(S.competency, id) === S.skill)!;
   assert.equal(reviewStrategy(m, { attempts: [], unresolved: [], pending: [] } as never, q)?.id, S.first);

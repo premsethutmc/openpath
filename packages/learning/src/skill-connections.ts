@@ -10,6 +10,7 @@ import { SCALE_PATTERN_CONFIGS } from './subskill-config-scale';
 import { CONVERSION_PATTERN_CONFIGS } from './subskill-config-conversion';
 import { INVERSE_PATTERN_CONFIGS } from './subskill-config-inverse';
 import { FRACTION_PATTERN_CONFIGS } from './subskill-config-fractions';
+import { ADDITION_REGROUP_CONFIG } from './subskill-config-addition-regroup';
 
 const identity = 'MATH.algebra.identities';
 export const IDENTITIES_CONFIG: SubSkillConfig = {
@@ -52,7 +53,7 @@ export const SAMPLE_SPACE_CONFIG: SubSkillConfig = {
   core: ['sample-space.stages@1', 'sample-space.dice-exact-total@1', 'sample-space.dice-at-least@1', 'sample-space.dice-second-bigger@1', 'sample-space.listing@1', 'sample-space.arrangements@1'],
   broadClaim: (label) => `Sample spaces read ${label} across stage counting, listing, arrangements and three kinds of two-dice event`,
 };
-export const CONNECTION_CONFIGS = [SAMPLE_SPACE_CONFIG, LINEAR_EQUATIONS_CONFIG, TRIANGLE_PROPERTIES_CONFIG, ADDITION_CONFIG, IDENTITIES_CONFIG, ANGLE_PAIRS_PRECISE_CONFIG, ...SCALE_PATTERN_CONFIGS, ...CONVERSION_PATTERN_CONFIGS, ...INVERSE_PATTERN_CONFIGS, ...FRACTION_PATTERN_CONFIGS];
+export const CONNECTION_CONFIGS = [SAMPLE_SPACE_CONFIG, LINEAR_EQUATIONS_CONFIG, TRIANGLE_PROPERTIES_CONFIG, ADDITION_CONFIG, ADDITION_REGROUP_CONFIG, IDENTITIES_CONFIG, ANGLE_PAIRS_PRECISE_CONFIG, ...SCALE_PATTERN_CONFIGS, ...CONVERSION_PATTERN_CONFIGS, ...INVERSE_PATTERN_CONFIGS, ...FRACTION_PATTERN_CONFIGS];
 export const connectionConfig = (competency: string) => CONNECTION_CONFIGS.find((c) => c.competency === competency);
 export function connectedSkill(config: SubSkillConfig, id: string): string | null {
   const c = classifyQuestionWith(config, id);
