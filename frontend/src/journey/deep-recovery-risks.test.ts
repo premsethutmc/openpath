@@ -129,3 +129,13 @@ test("R6: the effort limit counts the module's teaching and practice, not only t
   assert.ok(s.replies.length + lessons <= budget + 1, `questions ${s.replies.length} + lessons ${lessons} > ${budget} (+1 for the original)`);
   assert.equal(final!.phase, "escalate");
 });
+
+test("R2c: a right first try picked from options is not 'solved on your own' until a fresh one confirms it", () => {
+  const s = new SliceSession("risk-r2c", OWN, T0);
+  const mc = "gen:aupfr:1,-1,3,-4,-3:mc";
+  s.submit(mc, right(mc), "original", { context: decide(s, mc).context! });
+  const st = decide(s, mc);
+  assert.notEqual(st.phase, "solved", st.reason);
+  assert.equal(fam(st.question), "aupfr");
+  assert.ok(!st.question!.endsWith(":mc"), "the confirming question is typed when one exists");
+});

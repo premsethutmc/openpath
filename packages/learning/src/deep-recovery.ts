@@ -28,6 +28,8 @@
  * of these has no fresh equivalent: recovery stops and says so rather than substitute another question.
  * Independence: evidence.independentAttempt (no hint, no shown solution, not guided, first try). Freshness: families.problemKeyOf
  * against everything presented or answered (skill-units.presentedProblems).
+ * Guessing: a right answer chosen from options is weak evidence: "known" or "solved" needs a typed right answer or two rights in a
+ * row; open-response questions are preferred when choosing. (Simulation finding on the tuning seeds: 8/10 false reassurance.)
  * Effort: the budget counts every question of the episode (probes, returns and the module's own) and every lesson.
  * Cycle protection: a candidate already on the path is never followed; skills are read from records once (shared prerequisites).
  * Missing content: a root skill with no module, or no explanation that passes the teaching-eligibility gate, stops as "blocked".
@@ -87,6 +89,9 @@ const skillOfQ = (qid: string): string | null => { try { return target(question(
 const tag = (orig: string) => `deep:${orig}|`;
 const nameOf = (id: string) => (graph.byId.has(id) ? graph.get(id).name : id);
 const familyOf = (qid: string) => (qid.startsWith("gen:") ? problemOf(base(qid))?.family ?? null : null);
+/** a question answered by choosing among options (the ":mc" format, or a choice item) */
+const isChoice = (qid: string) => { if (qid.endsWith(":mc")) return true; try { return !!question(qid).options?.length; } catch { return false; } };
+const openFirst = (ids: string[]) => ids.find((id) => !isChoice(id)) ?? ids[0] ?? null;
 const PHASES: Phase[] = ["diagnostic", "practice", "check", "transfer", "retention"];
 
 /** How a question is judged to test the same skill as the original, from the existing mappings only. */
@@ -117,7 +122,8 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   const plain = { active: null, question: null, context: null, confidence: null } as const;
   if (!firsts.length) return out({ ...plain, phase: "attempt", path: [own], active: own, question: originalQid, context: `${tag(originalQid)}${own}@${own}`, reason: "Try the problem." });
   const first = firsts[0];
-  if (rightAnswer(first) && independentAttempt(first)) return out({ ...plain, phase: "solved", path: [own], confidence: "direct", reason: "Solved on your own." });
+  // a right first try is "solved on your own" only when it was unaided and typed (a pick from options may be a lucky guess)
+  if (rightAnswer(first) && independentAttempt(first) && !isChoice(first.questionId)) return out({ ...plain, phase: "solved", path: [own], confidence: "direct", reason: "Solved on your own." });
   const t0 = first.at;
 
   // ---- the episode: this recovery's own answers and lessons
@@ -145,6 +151,8 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   const presented = presentedProblems(records, (c) => moduleFor(c) ?? null);
   const fresh = (q: string) => !presented.has(problemKeyOf(q));
 
+  // a right answer chosen from options can be a guess: the trailing run of right answers must hold an open (typed) answer, or two
+  const enough = (xs: Attempt[]) => { const run: Attempt[] = []; for (let i = xs.length - 1; i >= 0 && rightAnswer(xs[i]); i--) run.push(xs[i]); return run.some((a) => !isChoice(a.questionId)) || run.length >= 2; };
   const reading = (c: string): SkillReading => {
     const hit = memo.get(c);
     if (hit) return hit;
@@ -159,8 +167,8 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
     if (post.length) {
       let trailing = 0;
       for (let i = post.length - 1; i >= 0 && !rightAnswer(post[i]); i--) trailing++;
-      verdict = trailing === 0 ? "known" : trailing >= 2 || post.length > perSkill ? "failing" : "unsure";
-    } else verdict = ans.length ? (rightAnswer(ans[ans.length - 1]) ? "known" : "unknown") : shownBefore ? "known" : "unknown";
+      verdict = trailing === 0 ? (enough(post) ? "known" : "unsure") : trailing >= 2 || post.length > perSkill ? "failing" : "unsure";
+    } else verdict = ans.length ? (rightAnswer(ans[ans.length - 1]) ? (enough(ans) ? "known" : "unknown") : "unknown") : shownBefore ? "known" : "unknown";
     const r = { skill: c, verdict, right, wrong, shownBefore };
     memo.set(c, r);
     return r;
@@ -170,14 +178,14 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   const pools = (m: Module) => [...m.diagnostics, ...m.practice, ...m.transfer, ...PHASES.flatMap((ph) => (m.pool ? modulePhasePool(m, ph) : []))];
   const freshOn = (c: string): string | null => {
     const m = moduleFor(c);
-    return m ? pools(m).find((id) => skillOfQ(id) === c && fresh(id)) ?? null : null;
+    return m ? openFirst(pools(m).filter((id) => skillOfQ(id) === c && fresh(id))) : null;
   };
   const freshOriginal = (): string | null => {
     if (!match.scope) return null;
     const fam = familyOf(originalQid);
     const m = moduleFor(own);
     const cands = [...(fam ? PHASES.flatMap((ph) => phasePool(fam, ph)) : []), ...(m ? pools(m) : [])];
-    return cands.find((id) => fresh(id) && match.accepts(id)) ?? null;
+    return openFirst(cands.filter((id) => fresh(id) && match.accepts(id)));
   };
   const teachableSkill = (c: string): { ok: boolean; why: string } => {
     const m = moduleFor(c);
@@ -202,7 +210,7 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
       if (overBudget()) return tired(path, own);
       const q = freshOriginal();
       if (!q) return noFresh(path);
-      return out({ ...plain, phase: helped ? "return" : "slip-check", path, active: own, question: q, context: ctx(path, own), reason: helped ? "Back to a fresh problem of the same kind." : rightAnswer(first) ? "That was right with help. Now a fresh one of the same kind, unaided." : "One more of the same kind, to see whether that was a slip." });
+      return out({ ...plain, phase: helped ? "return" : "slip-check", path, active: own, question: q, context: ctx(path, own), reason: helped ? "Back to a fresh problem of the same kind." : rightAnswer(first) ? (independentAttempt(first) ? "Right. One more of the same kind, to be sure it was not a lucky pick." : "That was right with help. Now a fresh one of the same kind, unaided.") : "One more of the same kind, to see whether that was a slip." });
     }
     if (!atTop && rn.verdict === "known") { path = path.slice(0, -1); continue; }
     if (!atTop && (rn.verdict === "unknown" || rn.verdict === "unsure")) {
