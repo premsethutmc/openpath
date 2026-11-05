@@ -30,7 +30,7 @@ const wrongCarrying = (q: string): string => {
     return ["A", "B", "C", "D"].find((x) => x !== correct)!;
   }
   const noRegroup = p.bugs.find((b) => b.id === "no-regroup");
-  return noRegroup && typeof noRegroup.predict === "number" ? String(noRegroup.predict) : String(p.answer - 10);
+  return noRegroup && typeof noRegroup.predict === "number" ? String(noRegroup.predict) : String(Number(p.answer) - 10);
 };
 
 test("connected: the module has a carrying skill unit covering all addr strategies, pending educator review", () => {
