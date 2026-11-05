@@ -33,7 +33,8 @@ export function structuredLearner(deps: Record<string, string[]>, gap: Iterable<
   };
 }
 
-export function runDeep(s: SliceSession, original: string, answer: Answerer, o: DeepRecoveryOptions & { maxSteps?: number; stopAfter?: number } = {}) {
+/** `engine`: the decision function (default: this branch's deepRecovery; the simulation also passes the frozen phase-2 copy) */
+export function runDeep(s: SliceSession, original: string, answer: Answerer, o: DeepRecoveryOptions & { maxSteps?: number; stopAfter?: number; engine?: typeof deepRecovery } = {}) {
   const steps: DeepStep[] = [];
   const taughtSkills = () => s.events.filter((e) => (e as { record?: string }).record === "teach").map((e) => graph.evidenceTarget((e as { competency: string }).competency));
   const say = (qid: string, activity: string, context?: string | null, phase = "", path = "") => {
@@ -46,14 +47,14 @@ export function runDeep(s: SliceSession, original: string, answer: Answerer, o: 
   for (let i = 0; i < (o.maxSteps ?? 150); i++) {
     if (o.stopAfter !== undefined && s.replies.length >= o.stopAfter) break;
     const recs = s.state();
-    st = deepRecovery(original, recs.records, recs.evidence, s.now, s.session, o);
-    decisions.push({ phase: st.phase, active: st.active, diagnosis: st.diagnosis, cause: st.cause });
+    st = (o.engine ?? deepRecovery)(original, recs.records, recs.evidence, s.now, s.session, o);
+    decisions.push({ phase: st.phase, active: st.active, diagnosis: st.diagnosis ?? null, cause: st.cause ?? null });
     const path = st.path.map(sh).join(">");
     if (TERMINAL.has(st.phase)) { steps.push({ kind: "decide", phase: st.phase, skill: st.active, path, reason: st.reason }); break; }
     if (st.phase === "attempt") { say(original, "original", st.context, "attempt", path); continue; }
     if (st.phase === "teach") {
       const ms = s.next(st.active!, { inRecovery: true });
-      if (ms.phase === "chapter" && ms.strategy) { if (o.attribution === "adjacency") s.taught(ms); else s.taught(ms, st.episode!); steps.push({ kind: "teach", phase: "teach", skill: st.active, path, reason: ms.strategy.id }); continue; }
+      if (ms.phase === "chapter" && ms.strategy) { if (o.attribution === "adjacency") s.taught(ms); else s.taught(ms, st.episode ?? undefined); steps.push({ kind: "teach", phase: "teach", skill: st.active, path, reason: ms.strategy.id }); continue; }
       if (!ms.question) { steps.push({ kind: "decide", phase: "escalate", skill: st.active, path, reason: ms.reason }); break; }
       // every answer of the episode carries its context, the module's too (episode evidence, effort, saved path)
       say(ms.question, activityFor(ms), st.context, `module:${ms.phase}`, path);

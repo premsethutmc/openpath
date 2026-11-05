@@ -56,8 +56,8 @@ export interface DeepRecoveryOptions {
   /** how the original skill counts as independently shown again (phase 3 comparison):
    *  current    one fresh unaided matching right (two if picked from options)            [phase-2 rule]
    *  two-fresh  two fresh unaided matching rights in a row
-   *  selective  a second one only when confidence is low: picked from options, or no lesson in this episode and the skill
-   *             was not shown before the episode began (a lone right after a wrong could be luck or a slip) */
+   *  selective  one typed right only for a slip without help by a learner whose skill was shown before the episode began;
+   *             otherwise two (after a lesson, after "own-or-unmapped", without prior evidence, or picked from options) */
   confirm?: "current" | "two-fresh" | "selective";
   /** lesson attribution: "episode" uses a lesson's recovery id when the record has one (adjacency for older records);
    *  "adjacency" ignores ids (phase-2 behaviour, kept for comparison) */
@@ -108,6 +108,12 @@ const familyOf = (qid: string) => (qid.startsWith("gen:") ? problemOf(base(qid))
 /** a question answered by choosing among options (the ":mc" format, or a choice item) */
 const isChoice = (qid: string) => { if (qid.endsWith(":mc")) return true; try { return !!question(qid).options?.length; } catch { return false; } };
 const openFirst = (ids: string[]) => ids.find((id) => !isChoice(id)) ?? ids[0] ?? null;
+/** the first id (typed first, then from options) passing `ok`, scanning lazily: pools hold thousands of generated items */
+const firstPassing = (lists: (() => string[])[], ok: (id: string) => boolean): string | null => {
+  let choice: string | null = null;
+  for (const list of lists) for (const id of list()) if (ok(id)) { if (!isChoice(id)) return id; choice ??= id; }
+  return choice;
+};
 const PHASES: Phase[] = ["diagnostic", "practice", "check", "transfer", "retention"];
 
 /** How a question is judged to test the same skill as the original, from the existing mappings only. */
@@ -168,7 +174,8 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
 
   // standing before the recovery began (unrelated later work is not mixed in)
   const before: LearnerRecords = { ...records, attempts: records.attempts.filter((a) => a.at < t0), teaching: records.teaching.filter((t) => t.at < t0) };
-  const evBefore = evidenceFor("deep-recovery", before, Date.parse(t0)).get;
+  let evB: ((id: string) => SkillEvidence) | null = null;
+  const evBefore = (id: string) => (evB ??= evidenceFor("deep-recovery", before, Date.parse(t0)).get)(id);
   const presented = presentedProblems(records, (c) => moduleFor(c) ?? null);
   const fresh = (q: string) => !presented.has(problemKeyOf(q));
 
@@ -207,21 +214,25 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   };
   const ctx = (p: string[], skill: string) => `${tag(originalQid)}${p.join(">")}@${skill}`;
   const lastWrongOn = (c: string) => mine.filter((a) => independentAttempt(a) && !rightAnswer(a) && skillOfQ(a.questionId) === c).at(-1)?.questionId ?? null;
-  const pools = (m: Module) => [...m.diagnostics, ...m.practice, ...m.transfer, ...PHASES.flatMap((ph) => (m.pool ? modulePhasePool(m, ph) : []))];
+  const poolLists = (m: Module): (() => string[])[] => [() => [...m.diagnostics, ...m.practice, ...m.transfer], ...PHASES.map((ph) => () => (m.pool ? modulePhasePool(m, ph) : []))];
   const freshOn = (c: string): string | null => {
     const m = moduleFor(c);
     if (!m) return null;
-    const all = pools(m).filter((id) => skillOfQ(id) === c && fresh(id));
+    const lists = poolLists(m);
+    const usable = (id: string) => fresh(id) && skillOfQ(id) === c;
     const need = uncovered(c), cfg = cfgOf(c);
-    const narrowed = cfg && need.length ? all.filter((id) => { const sub = subOf(c, id); return !!sub && need.includes(sub) && validSkillTask(cfg, sub, base(id)); }) : [];
-    return openFirst(narrowed.length ? narrowed : all);
+    if (cfg && need.length) {
+      // a question of an uncovered core sub-skill (validated lazily: the validator grades the item)
+      const hit = firstPassing(lists, (id) => { if (!usable(id)) return false; const sub = subOf(c, id); return !!sub && need.includes(sub) && validSkillTask(cfg, sub, base(id)); });
+      if (hit) return hit;
+    }
+    return firstPassing(lists, usable);
   };
   const freshOriginal = (): string | null => {
     if (!match.scope) return null;
     const fam = familyOf(originalQid);
     const m = moduleFor(own);
-    const cands = [...(fam ? PHASES.flatMap((ph) => phasePool(fam, ph)) : []), ...(m ? pools(m) : [])];
-    return openFirst(cands.filter((id) => fresh(id) && match.accepts(id)));
+    return firstPassing([...(fam ? PHASES.map((ph) => () => phasePool(fam, ph)) : []), ...(m ? poolLists(m) : [])], (id) => fresh(id) && match.accepts(id));
   };
   const teachableSkill = (c: string): { ok: boolean; why: string } => {
     const m = moduleFor(c);
@@ -242,7 +253,9 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   const confirmed = () => {
     const run = ownRun();
     if (confirm === "two-fresh") return run.length >= 2;
-    if (confirm === "selective") return run.length >= 2 || (run.length === 1 && !isChoice(run[0].questionId) && (helped || ownShownBefore));
+    // tuning seeds 1-5 (phase 3): exempting episodes with a lesson let lucky typed answers through (6/10 typed-guesser runs), so
+    // only an unhelped slip by a learner whose skill was shown before the episode is confirmed by one typed answer
+    if (confirm === "selective") return run.length >= 2 || (run.length === 1 && !isChoice(run[0].questionId) && !helped && ownShownBefore);
     return true; // current: reading(own) already required a typed right or two
   };
   for (let guard = 0; guard < 64; guard++) {
