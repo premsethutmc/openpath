@@ -10,7 +10,7 @@
  */
 import test from "node:test";
 import assert from "node:assert/strict";
-import { question } from "../../../packages/learning/src/content";
+import { moduleFor, question } from "../../../packages/learning/src/content";
 import { deepRecovery, type DeepRecoveryState } from "../../../packages/learning/src/deep-recovery";
 import { problemOf } from "../../../packages/learning/src/families";
 import { withDecisions } from "../../../packages/learning/src/records";
@@ -27,7 +27,8 @@ const deepGap = () => structuredLearner({ "fam:aupfr": [PF], [PF]: [LS], [LS]: [
 const fam = (q: string | null) => (q ? problemOf(q.replace(/:(mc|w)$/, ""))?.family ?? null : null);
 const ctx = (s: SliceSession) => { s.now += 60_000; return { learnerId: s.learnerId, sessionId: s.session, at: new Date(s.now).toISOString() }; };
 const decide = (s: SliceSession, orig = ORIG): DeepRecoveryState => { const st = s.state(); return deepRecovery(orig, st.records, st.evidence, s.now, s.session); };
-const teach = (s: SliceSession, competency: string, strategy = "unrelated-lesson") => s.events.push(make.teach(ctx(s), competency, strategy, "diagnosis"));
+/** a lesson as the app records it: one of that module's real explanations */
+const teach = (s: SliceSession, competency: string, strategy = moduleFor(competency)!.strategies[0].id) => s.events.push(make.teach(ctx(s), competency, strategy, "diagnosis"));
 /** the original, wrong, as the prototype asks it */
 const failOriginal = (s: SliceSession, orig = ORIG) => { const st = decide(s, orig); s.submit(orig, wrong(orig), "original", { context: st.context! }); };
 const SOLVED = new Set(["solved", "solved_after_help"]);
@@ -81,7 +82,7 @@ test("R3b: teaching in another recovery episode does not reset this diagnosis", 
   assert.ok(before.path.includes(PF), `diagnosis has reached partial fractions: ${before.path.join(">")}`);
   // another episode: a different original's recovery asks a question and teaches linear systems
   s.submit("gen:subst:1,2,1,2", wrong("gen:subst:1,2,1,2"), "original", { context: "recovery:gen:subst:1,2,1,2" });
-  teach(s, LS, "other-episode");
+  teach(s, LS);
   teach(s, P + "number.exponents");
   const after = decide(s);
   assert.deepEqual(after.path, before.path);
@@ -110,7 +111,7 @@ test("R5: after an interruption and unrelated work, the saved recovery resumes w
   // unrelated work that day: linear systems in the learner's class lesson (two right, one with the solution shown), a lesson on it,
   // and partial fractions practice
   for (const q of ["gen:alsys:2,2,4,1,5,-2", "gen:alsys:4,1,5,-2,-3,1"]) { try { question(q); other.submit(q, right(q), "practice"); } catch { /* id not in this build */ } }
-  teach(other, LS, "class-lesson");
+  teach(other, LS);
   const pf = "gen:aopf:2,3,-1,2";
   other.submit(pf, right(pf), "practice", { hints: 1 });
   const a = decide(control), b = decide(other);

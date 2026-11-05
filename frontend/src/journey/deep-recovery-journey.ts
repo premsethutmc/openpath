@@ -53,7 +53,8 @@ export function runDeep(s: SliceSession, original: string, answer: Answerer, o: 
       const ms = s.next(st.active!, { inRecovery: true });
       if (ms.phase === "chapter" && ms.strategy) { s.taught(ms); steps.push({ kind: "teach", phase: "teach", skill: st.active, path, reason: ms.strategy.id }); continue; }
       if (!ms.question) { steps.push({ kind: "decide", phase: "escalate", skill: st.active, path, reason: ms.reason }); break; }
-      say(ms.question, activityFor(ms), ms.context, `module:${ms.phase}`, path);
+      // every answer of the episode carries its context, the module's too (episode evidence, effort, saved path)
+      say(ms.question, activityFor(ms), st.context, `module:${ms.phase}`, path);
       continue;
     }
     say(st.question!, st.phase === "return" || st.phase === "slip-check" ? "original" : "probe", st.context, st.phase, path);
