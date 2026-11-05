@@ -53,6 +53,15 @@ export interface DeepRecoveryOptions {
   perSkill?: number;
   /** test seam: replaces the graph's followed relations (e.g. to inject a cycle) */
   supportsOf?: (id: string) => string[];
+  /** how the original skill counts as independently shown again (phase 3 comparison):
+   *  current    one fresh unaided matching right (two if picked from options)            [phase-2 rule]
+   *  two-fresh  two fresh unaided matching rights in a row
+   *  selective  a second one only when confidence is low: picked from options, or no lesson in this episode and the skill
+   *             was not shown before the episode began (a lone right after a wrong could be luck or a slip) */
+  confirm?: "current" | "two-fresh" | "selective";
+  /** lesson attribution: "episode" uses a lesson's recovery id when the record has one (adjacency for older records);
+   *  "adjacency" ignores ids (phase-2 behaviour, kept for comparison) */
+  attribution?: "episode" | "adjacency";
 }
 export type Verdict = "known" | "unknown" | "unsure" | "failing";
 export interface SkillReading { skill: string; verdict: Verdict; right: number; wrong: number; shownBefore: boolean }
@@ -79,6 +88,13 @@ export interface DeepRecoveryState {
   originalScope: string | null;
   /** effort used: questions and lessons of this episode */
   effort: number;
+  /** this episode's id: lessons it delivers carry it (records.teaching[].episode) */
+  episode: string | null;
+  /** what the episode concluded about the cause (null while undecided):
+   *  slip | prerequisite (a mapped skill below, named in `cause`) | own-or-unmapped (no mapped gap; the skill itself is taught
+   *  once) | unexplained (no mapped gap and teaching the skill itself did not fix it: the cause is not identified) */
+  diagnosis: "slip" | "prerequisite" | "own-or-unmapped" | "unexplained" | null;
+  cause: string | null;
   reason: string;
 }
 
@@ -117,14 +133,17 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   const unchecked = new Set<string>();
   const memo = new Map<string, SkillReading>();
   let effort = 0;
-  const out = (s: Omit<DeepRecoveryState, "policy" | "original" | "readings" | "unchecked" | "originalScope" | "effort">): DeepRecoveryState =>
-    ({ ...s, policy: DEEP_RECOVERY_POLICY, original: originalQid, readings: [...memo.values()], unchecked: [...unchecked], originalScope: match.scope, effort });
+  let episode: string | null = null;
+  const out = (s: Omit<DeepRecoveryState, "policy" | "original" | "readings" | "unchecked" | "originalScope" | "effort" | "episode" | "diagnosis" | "cause"> & { diagnosis?: DeepRecoveryState["diagnosis"]; cause?: string | null }): DeepRecoveryState =>
+    ({ diagnosis: null, cause: null, ...s, policy: DEEP_RECOVERY_POLICY, original: originalQid, readings: [...memo.values()], unchecked: [...unchecked], originalScope: match.scope, effort, episode });
   const plain = { active: null, question: null, context: null, confidence: null } as const;
+  const confirm = o.confirm ?? "current";
   if (!firsts.length) return out({ ...plain, phase: "attempt", path: [own], active: own, question: originalQid, context: `${tag(originalQid)}${own}@${own}`, reason: "Try the problem." });
   const first = firsts[0];
   // a right first try is "solved on your own" only when it was unaided and typed (a pick from options may be a lucky guess)
   if (rightAnswer(first) && independentAttempt(first) && !isChoice(first.questionId)) return out({ ...plain, phase: "solved", path: [own], confidence: "direct", reason: "Solved on your own." });
   const t0 = first.at;
+  episode = `deep:${originalQid}#${t0}`;
 
   // ---- the episode: this recovery's own answers and lessons
   const parse = (c: string) => { const [p, at] = c.slice(tag(originalQid).length).split("@"); return { path: p.split(">").filter(Boolean), skill: at ?? null }; };
@@ -133,6 +152,8 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   const ordered = [...records.attempts].sort((a, b) => (a.at < b.at ? -1 : a.at > b.at ? 1 : 0));
   const myTeaching = records.teaching.filter((t) => {
     if (t.at <= t0) return false;
+    // an explicit recovery id decides (research records); older records without one fall back to adjacency
+    if (t.episode !== undefined && (o.attribution ?? "episode") === "episode") return t.episode === episode;
     const prev = ordered.filter((a) => a.at <= t.at).at(-1);
     if (!prev || !isMine(prev) || prev.session !== t.session || !prev.context) return prev === first && prev.session === t.session && target(t.competency) === own;
     const c = parse(prev.context);
@@ -153,6 +174,16 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
 
   // a right answer chosen from options can be a guess: the trailing run of right answers must hold an open (typed) answer, or two
   const enough = (xs: Attempt[]) => { const run: Attempt[] = []; for (let i = xs.length - 1; i >= 0 && rightAnswer(xs[i]); i--) run.push(xs[i]); return run.some((a) => !isChoice(a.questionId)) || run.length >= 2; };
+  // sub-skills (skill-connections): a competency with a versioned sub-skill mapping is "known" only when its core sub-skills (the
+  // ones a broad "shown alone" claim implies) each have a right answer in this episode; one easy sub-skill does not stand for all
+  const cfgOf = (c: string) => (c === own ? undefined : connectionConfig(c));
+  const subOf = (c: string, q: string) => { const cfg = cfgOf(c); if (!cfg || !q.startsWith("gen:")) return null; try { return connectedSkill(cfg, base(q)); } catch { return null; } };
+  const uncovered = (c: string): string[] => {
+    const cfg = cfgOf(c);
+    if (!cfg) return [];
+    const got = new Set(mine.filter((a) => independentAttempt(a) && rightAnswer(a) && skillOfQ(a.questionId) === c).map((a) => subOf(c, a.questionId)));
+    return cfg.core.filter((id) => !got.has(id));
+  };
   const reading = (c: string): SkillReading => {
     const hit = memo.get(c);
     if (hit) return hit;
@@ -169,6 +200,7 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
       for (let i = post.length - 1; i >= 0 && !rightAnswer(post[i]); i--) trailing++;
       verdict = trailing === 0 ? (enough(post) ? "known" : "unsure") : trailing >= 2 || post.length > perSkill ? "failing" : "unsure";
     } else verdict = ans.length ? (rightAnswer(ans[ans.length - 1]) ? (enough(ans) ? "known" : "unknown") : "unknown") : shownBefore ? "known" : "unknown";
+    if (verdict === "known" && ans.length && uncovered(c).length) verdict = "unsure";
     const r = { skill: c, verdict, right, wrong, shownBefore };
     memo.set(c, r);
     return r;
@@ -178,7 +210,11 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   const pools = (m: Module) => [...m.diagnostics, ...m.practice, ...m.transfer, ...PHASES.flatMap((ph) => (m.pool ? modulePhasePool(m, ph) : []))];
   const freshOn = (c: string): string | null => {
     const m = moduleFor(c);
-    return m ? openFirst(pools(m).filter((id) => skillOfQ(id) === c && fresh(id))) : null;
+    if (!m) return null;
+    const all = pools(m).filter((id) => skillOfQ(id) === c && fresh(id));
+    const need = uncovered(c), cfg = cfgOf(c);
+    const narrowed = cfg && need.length ? all.filter((id) => { const sub = subOf(c, id); return !!sub && need.includes(sub) && validSkillTask(cfg, sub, base(id)); }) : [];
+    return openFirst(narrowed.length ? narrowed : all);
   };
   const freshOriginal = (): string | null => {
     if (!match.scope) return null;
@@ -198,19 +234,32 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   const tired = (p: string[], active: string | null) => out({ ...plain, phase: "escalate", path: p, active, confidence: "unsure", reason: `This recovery has used its effort limit (${effort} questions and lessons) without settling it. What is known so far is shown with it. Go through it with a teacher or parent.` });
   const noFresh = (p: string[]) => out({ ...plain, phase: "escalate", path: p, active: own, confidence: "unsure", reason: match.scope ? `There is no fresh question left that tests the same skill as the original (${match.scope}), and OpenPath will not substitute a different one. Go through it with a teacher or parent.` : "There is no fresh question that OpenPath can show tests the same skill as this one (it has no skill mapping), and it will not substitute a different one. Go through it with a teacher or parent." });
 
+  let ownShownBefore = false;
+  try { ownShownBefore = SHOWN.includes(evBefore(own).status); } catch { /* none */ }
+  const ownTaught = myTeaching.some((t) => target(t.competency) === own);
+  /** the trailing run of fresh, unaided, matching rights on the original skill (the first try itself is never fresh) */
+  const ownRun = () => { const xs = mine.filter((a) => a !== first && independentAttempt(a) && match.accepts(a.questionId) && (!helped || a.at > lastTeach)); const run: Attempt[] = []; for (let i = xs.length - 1; i >= 0 && rightAnswer(xs[i]); i--) run.push(xs[i]); return run; };
+  const confirmed = () => {
+    const run = ownRun();
+    if (confirm === "two-fresh") return run.length >= 2;
+    if (confirm === "selective") return run.length >= 2 || (run.length === 1 && !isChoice(run[0].questionId) && (helped || ownShownBefore));
+    return true; // current: reading(own) already required a typed right or two
+  };
   for (let guard = 0; guard < 64; guard++) {
     const n = path[path.length - 1];
-    const rn = reading(n);
+    let rn = reading(n);
     const atTop = path.length === 1;
+    if (atTop && rn.verdict === "known" && !confirmed()) rn = { ...rn, verdict: "unsure" };
     if (atTop && rn.verdict === "known") {
       // only a fresh, unaided, matching answer of this episode reaches here (reading(own) counts nothing else as right)
-      return out({ ...plain, phase: helped ? "solved_after_help" : "solved", path, confidence: "direct", reason: helped ? "Right on a fresh question of the same kind after the work on what it builds on. That counts as help, not as work on your own the first time." : rightAnswer(first) ? "Right on a fresh question of the same kind, unaided." : "The next question of the same kind was right, unaided, so the first answer was most likely a slip. No extra work needed." });
+      return out({ ...plain, phase: helped ? "solved_after_help" : "solved", path, confidence: "direct", diagnosis: helped ? (ownTaught && myTeaching.every((t) => target(t.competency) === own) ? "own-or-unmapped" : "prerequisite") : rightAnswer(first) ? null : "slip", cause: helped ? myTeaching.map((t) => target(t.competency)).filter((x) => x !== own)[0] ?? null : null, reason: helped ? "Right on a fresh question of the same kind after the work on what it builds on. That counts as help, not as work on your own the first time." : rightAnswer(first) ? "Right on a fresh question of the same kind, unaided." : "The next question of the same kind was right, unaided, so the first answer was most likely a slip. No extra work needed." });
     }
     if (atTop && (rn.verdict === "unknown" || rn.verdict === "unsure")) {
       if (overBudget()) return tired(path, own);
       const q = freshOriginal();
       if (!q) return noFresh(path);
-      return out({ ...plain, phase: helped ? "return" : "slip-check", path, active: own, question: q, context: ctx(path, own), reason: helped ? "Back to a fresh problem of the same kind." : rightAnswer(first) ? (independentAttempt(first) ? "Right. One more of the same kind, to be sure it was not a lucky pick." : "That was right with help. Now a fresh one of the same kind, unaided.") : "One more of the same kind, to see whether that was a slip." });
+      const another = ownRun().length > 0;
+      return out({ ...plain, phase: helped ? "return" : "slip-check", path, active: own, question: q, context: ctx(path, own), reason: another ? "Right. One more fresh one of the same kind, to be sure." : helped ? "Back to a fresh problem of the same kind." : rightAnswer(first) ? (independentAttempt(first) ? "Right. One more of the same kind, to be sure it was not a lucky pick." : "That was right with help. Now a fresh one of the same kind, unaided.") : "One more of the same kind, to see whether that was a slip." });
     }
     if (!atTop && rn.verdict === "known") { path = path.slice(0, -1); continue; }
     if (!atTop && (rn.verdict === "unknown" || rn.verdict === "unsure")) {
@@ -234,10 +283,22 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
     }
     if (descended) continue;
     // nothing below N is missing (as far as could be checked): N itself is the most likely gap
+    if (n === own) {
+      // no mapped cause: either the skill itself needs teaching, or the cause is something the graph does not map. The evidence
+      // does not tell these apart, so the skill itself is taught ONCE; if that does not help, recovery says the cause is not found
+      const checked = [...memo.values()].filter((r) => r.skill !== own && r.verdict === "known").map((r) => nameOf(r.skill));
+      if (ownTaught) return out({ ...plain, phase: "escalate", path, active: own, confidence: "unsure", diagnosis: "unexplained", reason: `No gap was found in the skills OpenPath maps under ${nameOf(own)} (right: ${checked.join(", ") || "none checked"}), and teaching ${nameOf(own)} itself did not fix it. The cause may be a skill OpenPath does not link to this one; OpenPath will not guess which. Go through the working with a teacher or parent.` });
+      const t0k = teachableSkill(own);
+      if (!t0k.ok) return out({ ...plain, phase: "escalate", path, active: own, confidence: "unsure", diagnosis: "unexplained", reason: `No gap was found in the skills OpenPath maps under ${nameOf(own)}, and OpenPath cannot teach ${nameOf(own)} itself (${t0k.why}). Go through it with a teacher or parent.` });
+      if (overBudget()) return tired(path, own);
+      const mo = moduleState(own, records, evidence(own), now, session, null);
+      if (mo.phase === "pause" || mo.phase === "reentry" || (mo.phase !== "chapter" && !mo.question)) return out({ ...plain, phase: "escalate", path, active: own, confidence: "unsure", diagnosis: "unexplained", module: mo, reason: `No gap was found in the skills OpenPath maps under ${nameOf(own)}, and its module has no explanation to offer now. Go through it with a teacher or parent.` });
+      return out({ ...plain, phase: "teach", path, active: own, context: ctx(path, own), confidence: "unsure", diagnosis: "own-or-unmapped", module: mo, reason: `No gap was found in the skills OpenPath maps under this one (right: ${checked.join(", ") || "none checked"}). Two things fit: ${nameOf(own)} itself needs teaching, or the cause is something OpenPath does not map. One explanation of ${nameOf(own)} now; if that does not help, a teacher should look.` });
+    }
     const t = teachableSkill(n);
     const conf: DeepRecoveryState["confidence"] = unchecked.size ? "unsure" : "likely";
     const hedge = unchecked.size ? ` Some skills it builds on could not be checked here (${[...unchecked].map(nameOf).join(", ")}), so this is a best guess.` : " This is the most likely missing piece from the answers so far, not a certainty.";
-    if (!t.ok) return out({ ...plain, phase: "blocked", path, active: n, confidence: conf, blocked: { skill: n, why: t.why }, reason: `The answers point to ${nameOf(n)} (${evidenceLine(rn)}). OpenPath cannot teach it yet: ${t.why}. That is a gap in OpenPath's content, not in you. Go through ${nameOf(n)} with a teacher or parent, then come back to the problem.${unchecked.size ? hedge : ""}` });
+    if (!t.ok) return out({ ...plain, phase: "blocked", path, active: n, confidence: conf, diagnosis: "prerequisite", cause: n, blocked: { skill: n, why: t.why }, reason: `The answers point to ${nameOf(n)} (${evidenceLine(rn)}). OpenPath cannot teach it yet: ${t.why}. That is a gap in OpenPath's content, not in you. Go through ${nameOf(n)} with a teacher or parent, then come back to the problem.${unchecked.size ? hedge : ""}` });
     if (overBudget()) return tired(path, n);
     const ms0 = moduleState(n, records, evidence(n), now, session, null);
     if (ms0.phase === "done") {
@@ -245,8 +306,8 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
       if (q) return out({ ...plain, phase: "probe", path, active: n, question: q, context: ctx(path, n), reason: `A fresh question on ${nameOf(n)}, to see where things stand now.` });
     }
     if (ms0.phase === "pause" || ms0.phase === "reentry" || (ms0.phase !== "chapter" && !ms0.question))
-      return out({ ...plain, phase: "escalate", path, active: n, confidence: conf, module: ms0, reason: `${nameOf(n)} looks like the missing piece, and the explanations OpenPath has for it have not clicked yet. Go through it with a teacher or parent.` });
-    return out({ ...plain, phase: "teach", path, active: n, context: ctx(path, n), confidence: conf, module: ms0, reason: `${nameOf(n)}: ${evidenceLine(rn)}, and what it builds on was right.${hedge} We work on it now, then come back up to the problem.` });
+      return out({ ...plain, phase: "escalate", path, active: n, confidence: conf, diagnosis: "prerequisite", cause: n, module: ms0, reason: `${nameOf(n)} looks like the missing piece, and the explanations OpenPath has for it have not clicked yet. Go through it with a teacher or parent.` });
+    return out({ ...plain, phase: "teach", path, active: n, context: ctx(path, n), confidence: conf, diagnosis: "prerequisite", cause: n, module: ms0, reason: `${nameOf(n)}: ${evidenceLine(rn)}, and what it builds on was right.${hedge} We work on it now, then come back up to the problem.` });
   }
   return out({ ...plain, phase: "escalate", path, confidence: "unsure", reason: "Recovery could not settle on a next step. Go through it with a teacher or parent." });
 }

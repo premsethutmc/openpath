@@ -103,8 +103,8 @@ export class SliceSession {
   /** Advance time (retention scheduling is read from the evidence engine's own schedule). */
   wait(days: number) { this.now += days * DAY; this.session = `s${Number(this.session.slice(1)) + 1}`; }
   /** The teaching event the app writes when it shows an explanation. */
-  taught(ms: ModuleState) {
-    this.events.push(make.teach(this.ctx(), ms.competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis"));
+  taught(ms: ModuleState, episode?: string) {
+    this.events.push(make.teach(this.ctx(), ms.competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis", episode !== undefined ? { episode } : {}));
     this.log("evidence-engine", "observation", "session.make.teach", { strategy: ms.strategy!.id }, { recorded: true });
   }
   investigationTriggerFor(qid: string) {

@@ -42,24 +42,27 @@ export function runDeep(s: SliceSession, original: string, answer: Answerer, o: 
     steps.push({ kind: "ask", phase, skill: skillOf(qid), qid, correct: r.credit === true, path });
   };
   let st: DeepRecoveryState | null = null;
+  const decisions: { phase: string; active: string | null; diagnosis: string | null; cause: string | null }[] = [];
   for (let i = 0; i < (o.maxSteps ?? 150); i++) {
     if (o.stopAfter !== undefined && s.replies.length >= o.stopAfter) break;
     const recs = s.state();
     st = deepRecovery(original, recs.records, recs.evidence, s.now, s.session, o);
+    decisions.push({ phase: st.phase, active: st.active, diagnosis: st.diagnosis, cause: st.cause });
     const path = st.path.map(sh).join(">");
     if (TERMINAL.has(st.phase)) { steps.push({ kind: "decide", phase: st.phase, skill: st.active, path, reason: st.reason }); break; }
     if (st.phase === "attempt") { say(original, "original", st.context, "attempt", path); continue; }
     if (st.phase === "teach") {
       const ms = s.next(st.active!, { inRecovery: true });
-      if (ms.phase === "chapter" && ms.strategy) { s.taught(ms); steps.push({ kind: "teach", phase: "teach", skill: st.active, path, reason: ms.strategy.id }); continue; }
+      if (ms.phase === "chapter" && ms.strategy) { if (o.attribution === "adjacency") s.taught(ms); else s.taught(ms, st.episode!); steps.push({ kind: "teach", phase: "teach", skill: st.active, path, reason: ms.strategy.id }); continue; }
       if (!ms.question) { steps.push({ kind: "decide", phase: "escalate", skill: st.active, path, reason: ms.reason }); break; }
       // every answer of the episode carries its context, the module's too (episode evidence, effort, saved path)
       say(ms.question, activityFor(ms), st.context, `module:${ms.phase}`, path);
       continue;
     }
-    say(st.question!, st.phase === "return" || st.phase === "slip-check" ? "original" : "probe", st.context, st.phase, path);
+    // probes are recorded as "diagnostic": the backend (family/learning.py INDEPENDENT) does not count "probe" as independent work
+    say(st.question!, st.phase === "return" || st.phase === "slip-check" ? "original" : "diagnostic", st.context, st.phase, path);
   }
-  return { steps, final: st };
+  return { steps, final: st, decisions };
 }
 
 /** compact one-line-per-step trace */
