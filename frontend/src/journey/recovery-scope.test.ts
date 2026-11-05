@@ -133,7 +133,7 @@ test("regression: relapse@1 picks same-skill strategy after failed retention on 
   } else {
     // relapse@1 may have paused, or the engine took another path (support, recover, investigate).
     // Record what happened for the regression baseline.
-    console.log(`relapse@1 regression: phase=${n.phase} reason=${n.reason} why=${n.why} active=${n.active} strategy=${n.strategy?.id}`);
+    console.log(`relapse@1 regression: phase=${n.phase} reason=${n.reason} why=${(n as any).why} active=${(n as any).active} strategy=${n.strategy?.id}`);
     // The competency must stay on addition-regroup regardless of which path fires
     assert.equal(n.competency, C_REGROUP, "competency stays on addition-regroup after failed retention");
   }
