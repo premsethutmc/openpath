@@ -13212,6 +13212,32 @@
    ]
   },
   {
+   "id": "MATH.geometry.angle-pairs#adjacent_linear_pair",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.angle-pairs",
+   "strategy": "adjacent_linear_pair",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:e48431ebbdf8b35112c3c552ec3d9227b2178af3eceb97cb02db7ab2196485d2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.981Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.geometry.angle-pairs#chapter",
    "subject": "mathematics",
    "competency": "MATH.geometry.angle-pairs",
@@ -13227,6 +13253,32 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.349Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.angle-pairs#complementary_angles",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.angle-pairs",
+   "strategy": "complementary_angles",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:f4a40ccef489e1d46754645299140091ed2102cc0b88eff594c5c021c17f5dc4",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.980Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -13290,6 +13342,32 @@
    ]
   },
   {
+   "id": "MATH.geometry.angle-pairs#other_three_angles",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.angle-pairs",
+   "strategy": "other_three_angles",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:3ba9659ebc06293f29c63b4d4fb86a85a58136adcd68c93cc9e3f6bec3367da1",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.981Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.geometry.angle-pairs#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.geometry.angle-pairs",
@@ -13305,6 +13383,32 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.349Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.angle-pairs#supplementary_angles",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.angle-pairs",
+   "strategy": "supplementary_angles",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:10480a99cf3b55a25414730035837fa10497343819b3581277715e642d2d3616",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.980Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -18128,6 +18232,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:6b304a9c5f61b7c9b980ec58cf52a810407defe68204dff6323cf17cf0f1ec12",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.977Z",
+      "note": "content changed: the decision on sha256:b09810207124 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:b098102071242b4d0a7f598a7065dc58c4f9be8ea7abb74c3987b731f751f182"
     }
    ]
   },
@@ -18184,6 +18304,58 @@
    ]
   },
   {
+   "id": "MATH.geometry.triangle-properties#isosceles_base",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.triangle-properties",
+   "strategy": "isosceles_base",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:4058e8af29da82573ef4598098dc7366c2fa56ef3f6e5f185fffb199b94748e2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.978Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.triangle-properties#isosceles_vertex",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.triangle-properties",
+   "strategy": "isosceles_vertex",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:e42c164ca326ef9f1b20b86650f9c171e8ea20e43c8bd282b1cb380612ded632",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.978Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.geometry.triangle-properties#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.geometry.triangle-properties",
@@ -18206,6 +18378,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:1193ca04e9ddcc1e04f94180424264bbabe7d43f441fd9eec2b7bea2f76b132b",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.977Z",
+      "note": "content changed: the decision on sha256:346399f4d19d (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:346399f4d19d68888a6999afc5674ad07c0e9a6073ba5a3e687e2f3e237e1023"
     }
    ]
   },
@@ -18232,6 +18420,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:7cabf2dbee31b3484fcd6fd02f86ea5478ac22411ecdb315a28c2828d0734337",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.976Z",
+      "note": "content changed: the decision on sha256:2a62ff5bae5e (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:2a62ff5bae5e35dc2842993e3189475bab60f1b7cb7d598fb815e67d800e7b19"
     }
    ]
   },
@@ -18258,6 +18462,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:fe58f20f561312b1f1b139e667e29f1338ff16001e2fa442475790d122e7cd78",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.976Z",
+      "note": "content changed: the decision on sha256:c2dedf30ee43 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:c2dedf30ee4375242ff59d7fadb6711b5e7633e7be1bbbed54405b086b104afc"
     }
    ]
   },
@@ -24114,6 +24334,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:75e370ed5ecd6b29d0753265c2de8b05bf4df54b2b1ee53ef7af43406e017b5c",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:26.033Z",
+      "note": "content changed: the decision on sha256:6dc376856ab5 (revision_required) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:6dc376856ab542d21a59a4f9f116838eca918a43db37ba881c37f8b6f206bfdf"
     }
    ]
   },
@@ -24141,6 +24377,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:4f7934939e1d570d24021d59a8c503aa728ce28caf5fc28ad0adde3d018005ae",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:26.033Z",
+      "note": "content changed: the decision on sha256:7c183e524fda (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:7c183e524fda92e19186b7d11fbfbbceb264ffab91938428948b979554dd4298"
     }
    ]
   },
@@ -24170,6 +24422,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:71eda03559392f132b33dd731e6333dc52822ede6611ad8bbeea84a3a6099518",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:26.032Z",
+      "note": "content changed: the decision on sha256:78c5a34dc3d2 (revision_required) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:78c5a34dc3d294f80efb93ba49b843a1473281d446677ce257ac1f90310af96c"
     }
    ]
   },
@@ -24254,6 +24522,22 @@
       "demonstration"
      ],
      "supersedes": "sha256:56bc7553691fb86531bab11616a0e82824c6fd6681052a8c146bc219ba4c9d7f"
+    },
+    {
+     "contentHash": "sha256:75dd369eb2105200f4e66fbc765592e38f966b5443f35bdba793ff8bb80ff44d",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:26.079Z",
+      "note": "content changed: the decision on sha256:fd55397189a4 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:fd55397189a4d6a895c6dab153d45203f27abce0516792eb455caeea58475674"
     }
    ]
   },
@@ -24280,6 +24564,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:593a7caeb2795f78565896a1d60064d7b3dac582785c42f14c18097860f1a0b5",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:26.079Z",
+      "note": "content changed: the decision on sha256:fe8e1ddbc247 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:fe8e1ddbc247d54b08ca32bff79e8224dd5ccfa77198350fb5c9e5e6efcaa8f2"
     }
    ]
   },
@@ -24306,6 +24606,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:743dc0877d1b43d1211475c2b688351bfefa6252e45b6b3c02eb24482a4c31a8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:26.079Z",
+      "note": "content changed: the decision on sha256:80065a3ea186 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:80065a3ea18625aa5f6526bd6083b61a9c72d21e99e1bfd118aaa77b10086289"
     }
    ]
   },
@@ -24348,6 +24664,22 @@
       "demonstration"
      ],
      "supersedes": "sha256:6d41504a003b0e45d380cb3abddf1b344988a6d70554a12d34aac11912a2fd4a"
+    },
+    {
+     "contentHash": "sha256:64b2c0cd35f9056015439723e8b5a8ecfd999f45d4c2742628d19820e4f2de1e",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:26.079Z",
+      "note": "content changed: the decision on sha256:329eeb7eb75f (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:329eeb7eb75fcaf6412d0fdbff3642f38e1c513c870ff6eb25f8f1d81df5d164"
     }
    ]
   },
@@ -34313,6 +34645,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:c55a96ce31467f04e5fef689defde23980983ba5c8009c6b4e9f713b2229f5e4",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.982Z",
+      "note": "content changed: the decision on sha256:d4094f93d44b (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:d4094f93d44b527092f7ae8be404c93dbdb2bcaf70968d6b59d4ab29f11eb36f"
     }
    ]
   },
@@ -34339,6 +34687,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:21198278a8953f8f0de5de106af0642853886d273515161ec975895594b01bcb",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.982Z",
+      "note": "content changed: the decision on sha256:a1b314eed8e5 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:a1b314eed8e5690d740464baed4096d0d336d190f3b9d975fcbfe4a2e7896394"
     }
    ]
   },
@@ -34365,6 +34729,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:106c8540bc78d38f4c94e103f3fd6f415f6592772f17ff51f3378f945ca6b263",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.981Z",
+      "note": "content changed: the decision on sha256:a19e992b9a6f (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:a19e992b9a6f4471c98702ff282a87ff61139efe6836184a43a2d3bfb4b18a26"
     }
    ]
   },

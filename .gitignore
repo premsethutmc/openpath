@@ -26,3 +26,4 @@ frontend/dist-english-pilot-approved/
 frontend/dist-tamil/
 package-lock.json
 test-results/
+.claude/

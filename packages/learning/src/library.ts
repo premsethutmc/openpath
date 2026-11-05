@@ -21,6 +21,7 @@ import { graph } from "./graph";
 import { selectable } from "./question-status";
 import { FAMILY_VERSION } from "./spec";
 import { strategyScopeProblems } from "./teaching-presentation";
+import { CONNECTION_CONFIGS } from "./skill-connections";
 
 export const LIBRARY_POLICY = "library@2";
 
@@ -283,6 +284,20 @@ export function fromTemplate(family: string, competency: string, version: string
   }
   if (uses.length)
     strategies.push({ id: "check_what_it_uses", title: "Check what it builds on", kind: "prerequisite", needs: [], screens: [{ role: "prerequisite", title: "What it uses", text: [`Each step builds on another skill: ${uses.join("; ")}. If a step is slow, practise that skill first.`, `Then the method is: ${def.teach.method}`] }], guided: take("practice", "typed"), check: take("check", "typed") });
+  // scope-from-config@1: when a connectionConfig maps the main family to a subSkill,
+  // every non-prerequisite strategy gets that scope so skillUnits() and unitOfQuestion()
+  // can identify the skill unit; without this, template modules with subskill configs
+  // route wrong answers to prerequisites instead of their own teaching (§16.5).
+  const cfg = CONNECTION_CONFIGS.find((c) => c.competency === competency);
+  // Only add scope when the subSkill covers the ENTIRE family (no parameter constraints),
+  // so template-generated questions always match; parameter-constrained skills (e.g.
+  // angle-pairs.complement covers only afpair params[0]=0) need blueprint-authored scope.
+  const mainSkill = cfg?.subSkills.find((s) => s.families.includes(family) && !("parameters" in s));
+  if (mainSkill) {
+    for (const st of strategies) {
+      if (st.kind !== "prerequisite") st.scope = { family, subSkill: mainSkill.id };
+    }
+  }
   const sub = subSkills(competency, family, used);
   const own = [take("practice", "typed"), take("practice", "mc"), take("practice", "typed")];
   return {

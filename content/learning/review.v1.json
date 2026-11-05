@@ -34642,7 +34642,7 @@
    "competency": "MATH.geometry.angle-pairs",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "eb407a9b",
+   "contentHash": "52579a28",
    "state": "draft",
    "history": [
     {
@@ -34683,6 +34683,14 @@
      "role": "engineer",
      "at": "2026-11-04T02:10:02.722Z",
      "contentHash": "eb407a9b",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-05T03:29:12.797Z",
+     "contentHash": "52579a28",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -36357,7 +36365,7 @@
    "competency": "MATH.geometry.triangle-properties",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "4a62372e",
+   "contentHash": "9d2cd059",
    "state": "draft",
    "history": [
     {
@@ -36406,6 +36414,14 @@
      "role": "engineer",
      "at": "2026-11-04T02:10:02.722Z",
      "contentHash": "4a62372e",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-05T03:29:12.797Z",
+     "contentHash": "9d2cd059",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -38726,7 +38742,7 @@
    "competency": "MATH.number.addition",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "a3b654e0",
+   "contentHash": "d1901f7c",
    "state": "draft",
    "history": [
     {
@@ -38776,6 +38792,14 @@
      "at": "2026-11-01T09:08:59.837Z",
      "contentHash": "a3b654e0",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-05T03:29:12.797Z",
+     "contentHash": "d1901f7c",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
   },
@@ -38785,7 +38809,7 @@
    "competency": "MATH.number.addition-regroup",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "030d9e28",
+   "contentHash": "10beb40d",
    "state": "draft",
    "history": [
     {
@@ -38826,6 +38850,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "030d9e28",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-05T03:29:12.797Z",
+     "contentHash": "10beb40d",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -43301,7 +43333,7 @@
    "competency": "MATH.probability.sample-space",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "dea22611",
+   "contentHash": "d98bf485",
    "state": "draft",
    "history": [
     {
@@ -43350,6 +43382,14 @@
      "role": "engineer",
      "at": "2026-11-04T09:35:12.139Z",
      "contentHash": "dea22611",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-05T03:29:12.797Z",
+     "contentHash": "d98bf485",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

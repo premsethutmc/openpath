@@ -88,8 +88,8 @@ for (const competency of ['MATH.number.addition','MATH.geometry.triangle-propert
   const saved=JSON.parse(JSON.stringify(withDecisions(s.events,s.decisions)));
   assert.deepEqual(learnerState(s.learnerId,saved,s.now,{currentSession:s.session}).module(competency),next);
   s.submit(next.question,question(next.question).answer,'check');
-  assert.equal(s.state().records.attempts.at(-1)?.solution,true,'lesson-review assistance persists');
-  assert.notEqual(s.state().module(competency).context,`foundation:${connectedSkill(config,strategy.guided)}`,'an assisted reassessment closes the teaching block without mastery credit');
+  assert.equal(s.state().records.attempts.at(-1)?.solution,false,'solution-scope@1: check answer after teaching is independent');
+  assert.notEqual(s.state().module(competency).context,`foundation:${connectedSkill(config,strategy.guided)}`,'the reassessment closes the teaching block');
 });
 
 import { hypotheses, investigateContext } from '../../../packages/learning/src/hypotheses';
