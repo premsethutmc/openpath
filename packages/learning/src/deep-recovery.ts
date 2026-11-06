@@ -58,7 +58,16 @@ export interface DeepRecoveryOptions {
    *  two-fresh  two fresh unaided matching rights in a row
    *  selective  one typed right only for a slip without help by a learner whose skill was shown before the episode began;
    *             otherwise two (after a lesson, after "own-or-unmapped", without prior evidence, or picked from options) */
-  confirm?: "current" | "two-fresh" | "selective";
+  confirm?: "current" | "two-fresh" | "selective" | "three-fresh" | "different-form";
+  /** phase 5 (confidence; off by default):
+   *  delayed    "add": the in-sitting rule, plus one fresh unaided goal answer in a LATER sitting before "solved";
+   *             "replace": one typed right now (or two picked from options), then one in a later sitting.
+   *             Until then the episode ends the sitting as "provisional" (learner-visible, nothing claimed as solved)
+   *  firstTry   "provisional": a right first try (typed, unaided) is not "solved on your own" until a later-sitting check
+   *  different-form (confirm): the confirming answers must include both formats (typed and picked from options) when a fresh item of
+   *             the other format exists */
+  delayed?: "add" | "replace";
+  firstTry?: "accept" | "provisional";
   /** lesson attribution: "episode" uses a lesson's recovery id when the record has one (adjacency for older records);
    *  "adjacency" ignores ids (phase-2 behaviour, kept for comparison) */
   attribution?: "episode" | "adjacency";
@@ -77,7 +86,7 @@ export interface SkillReading { skill: string; verdict: Verdict; right: number; 
 export interface DeepRecoveryState {
   policy: typeof DEEP_RECOVERY_POLICY;
   original: string;
-  phase: "attempt" | "slip-check" | "probe" | "teach" | "return" | "solved" | "solved_after_help" | "blocked" | "escalate" | "pause";
+  phase: "attempt" | "slip-check" | "probe" | "teach" | "return" | "solved" | "solved_after_help" | "blocked" | "escalate" | "pause" | "provisional";
   /** phase "pause": what the episode will do first when the learner comes back */
   next?: { phase: "goal" | "check" | "teach"; active: string | null };
   /** the diagnosis path from the problem's skill down to the skill being worked on */
@@ -158,7 +167,8 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   if (!firsts.length) return out({ ...plain, phase: "attempt", path: [own], active: own, question: originalQid, context: `${tag(originalQid)}${own}@${own}`, reason: "Try the problem." });
   const first = firsts[0];
   // a right first try is "solved on your own" only when it was unaided and typed (a pick from options may be a lucky guess)
-  if (rightAnswer(first) && independentAttempt(first) && !isChoice(first.questionId)) return out({ ...plain, phase: "solved", path: [own], confidence: "direct", reason: "Solved on your own." });
+  const firstCounts = o.firstTry === "provisional" && rightAnswer(first) && independentAttempt(first) && !isChoice(first.questionId);
+  if (rightAnswer(first) && independentAttempt(first) && !isChoice(first.questionId) && !firstCounts) return out({ ...plain, phase: "solved", path: [own], confidence: "direct", reason: "Solved on your own." });
   const t0 = first.at;
   episode = `deep:${originalQid}#${t0}`;
 
@@ -247,8 +257,14 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
     }
     return firstPassing(lists, usable);
   };
-  const freshOriginal = (): string | null => {
+  const freshOriginal = (format?: "typed" | "choice", strict = false): string | null => {
     if (!match.scope) return null;
+    if (format) {
+      const want = format === "choice";
+      const famF = familyOf(originalQid), mF = moduleFor(own);
+      const hit = firstPassing([...(famF ? PHASES.map((ph) => () => phasePool(famF, ph)) : []), ...(mF ? poolLists(mF) : [])], (id) => isChoice(id) === want && fresh(id) && match.accepts(id));
+      if (hit || strict) return hit;
+    }
     const fam = familyOf(originalQid);
     const m = moduleFor(own);
     return firstPassing([...(fam ? PHASES.map((ph) => () => phasePool(fam, ph)) : []), ...(m ? poolLists(m) : [])], (id) => fresh(id) && match.accepts(id));
@@ -274,9 +290,22 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   try { ownShownBefore = SHOWN.includes(evBefore(own).status); } catch { /* none */ }
   const ownTaught = myTeaching.some((t) => target(t.competency) === own);
   /** the trailing run of fresh, unaided, matching rights on the original skill (the first try itself is never fresh) */
-  const ownRun = () => { const xs = mine.filter((a) => a !== first && valid(a) && independentAttempt(a) && match.accepts(a.questionId) && (!helped || a.at > lastTeach)); const run: Attempt[] = []; for (let i = xs.length - 1; i >= 0 && rightAnswer(xs[i]); i--) run.push(xs[i]); return run; };
-  const confirmed = () => {
-    const run = ownRun();
+  const ownRun = () => { const xs = mine.filter((a) => (a !== first || firstCounts) && valid(a) && independentAttempt(a) && match.accepts(a.questionId) && (!helped || a.at > lastTeach)); const run: Attempt[] = []; for (let i = xs.length - 1; i >= 0 && rightAnswer(xs[i]); i--) run.push(xs[i]); return run; };
+  const typedIn = (run: Attempt[]) => run.some((a) => !isChoice(a.questionId));
+  let otherFormatFresh: Map<boolean, boolean> | null = null;
+  const freshOfFormat = (choice: boolean) => { otherFormatFresh ??= new Map(); if (!otherFormatFresh.has(choice)) otherFormatFresh.set(choice, freshOriginal(choice ? "choice" : "typed", true) !== null); return otherFormatFresh.get(choice)!; };
+  /** the in-sitting part of the rule (the phase-4 rules unchanged when `delayed` is off) */
+  const baseOk = (run: Attempt[]): boolean => {
+    if (o.delayed === "replace") return typedIn(run) || run.length >= 2;
+    if (confirm === "three-fresh") return run.length >= 3;
+    if (confirm === "different-form") return run.length >= 2 && (new Set(run.map((a) => isChoice(a.questionId))).size === 2 || !freshOfFormat(!isChoice(run[0].questionId)));
+    return confirmedBase(run);
+  };
+  const spans = (run: Attempt[]) => (!o.delayed && !firstCounts) || new Set(run.map((a) => a.session)).size >= 2;
+  const confirmed = () => { const run = ownRun(); return baseOk(run) && spans(run); };
+  /** right today by the in-sitting rule, but the later-sitting check is still owed */
+  const provisional = () => { if (!o.delayed && !firstCounts) return false; const run = ownRun(); return baseOk(run) && !spans(run) && run.every((a) => a.session === session); };
+  const confirmedBase = (run: Attempt[]) => {
     if (confirm === "two-fresh") return run.length >= 2;
     // tuning seeds 1-5 (phase 3): exempting episodes with a lesson let lucky typed answers through (6/10 typed-guesser runs), so
     // only an unhelped slip by a learner whose skill was shown before the episode is confirmed by one typed answer
@@ -287,6 +316,7 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
     const n = path[path.length - 1];
     let rn = reading(n);
     const atTop = path.length === 1;
+    if (atTop && rn.verdict === "known" && provisional()) return out({ ...plain, phase: "provisional", path, active: own, confidence: "likely", next: { phase: "goal", active: own }, reason: "Right on your own today. OpenPath will check once more, with a fresh problem next time, before calling this solved." });
     if (atTop && rn.verdict === "known" && !confirmed()) rn = { ...rn, verdict: "unsure" };
     if (atTop && rn.verdict === "known") {
       // only a fresh, unaided, matching answer of this episode reaches here (reading(own) counts nothing else as right)
@@ -294,9 +324,11 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
     }
     if (atTop && (rn.verdict === "unknown" || rn.verdict === "unsure")) {
       if (overBudget()) return tired(path, own, "goal");
-      const q = freshOriginal();
+      const run0 = ownRun();
+      const q = confirm === "different-form" && run0.length === 1 ? freshOriginal(isChoice(run0[0].questionId) ? "typed" : "choice") : freshOriginal();
       if (!q) return noFresh(path);
-      const another = ownRun().length > 0;
+      const another = run0.length > 0;
+      if (another && (o.delayed || firstCounts) && run0.every((a) => a.session !== session)) return out({ ...plain, phase: "return", path, active: own, question: q, context: ctx(path, own), reason: "The check promised last time: one fresh problem of the same kind, on your own." });
       return out({ ...plain, phase: helped ? "return" : "slip-check", path, active: own, question: q, context: ctx(path, own), reason: another ? "Right. One more fresh one of the same kind, to be sure." : helped ? "Back to a fresh problem of the same kind." : rightAnswer(first) ? (independentAttempt(first) ? "Right. One more of the same kind, to be sure it was not a lucky pick." : "That was right with help. Now a fresh one of the same kind, unaided.") : "One more of the same kind, to see whether that was a slip." });
     }
     if (!atTop && rn.verdict === "known") { path = path.slice(0, -1); continue; }

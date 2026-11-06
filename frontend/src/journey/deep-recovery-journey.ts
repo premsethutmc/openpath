@@ -16,7 +16,7 @@ export interface DeepStep { kind: "ask" | "teach" | "decide"; phase: string; ski
   decision?: { phase: string; active: string | null; effort: number | null; why: string } }
 const sh = (s: string | null) => (s ?? "-").replace(/^MATH\./, "");
 const skillOf = (q: string) => graph.evidenceTarget(question(q.replace(/:(mc|w)$/, "")).competency);
-const TERMINAL = new Set(["solved", "solved_after_help", "blocked", "escalate", "pause"]);
+const TERMINAL = new Set(["solved", "solved_after_help", "blocked", "escalate", "pause", "provisional"]);
 
 /**
  * A learner whose knowledge has a real dependency structure: a skill in `gap` is right only after it has been taught AFTER every

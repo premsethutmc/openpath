@@ -24,7 +24,8 @@ export const CELLS = ["O1:single-gap", "O2:single-gap", "O1:multiple-gaps", "O2:
 const MAX_SITTINGS = 3;
 const skillOf = (q: string) => graph.evidenceTarget(question(q.replace(/:(mc|w)$/, "")).competency);
 
-export function simulate4(engine: "p3" | "p4", ok: "O1" | "O2", type: string, seed: number) {
+/** `onAnswer` (analysis only; no effect on the run): sees each answer with whether the learner model could do the item */
+export function simulate4(engine: "p3" | "p4", ok: "O1" | "O2", type: string, seed: number, onAnswer?: (x: { qid: string; answer: string; can: boolean; phase: number }) => void) {
   const t0 = Date.now();
   const O = ORIGINALS[ok];
   const rec: Record<string, unknown> = { phase: 4, engine, orig: ok, type, seed };
@@ -44,7 +45,7 @@ export function simulate4(engine: "p3" | "p4", ok: "O1" | "O2", type: string, se
     for (let k = 0; k < (engine === "p4" ? MAX_SITTINGS : 1); k++) {
       if (k) s.wait(1);
       const q0 = s.replies.length, l0 = s.events.filter((e) => (e as { record?: string }).record === "teach").length;
-      const r = runDeep(s, original, (q, c) => L.answer(q, { ...c, answered: s.replies.length }), o);
+      const r = runDeep(s, original, (q, c) => { const ans = L.answer(q, { ...c, answered: s.replies.length }); onAnswer?.({ qid: q, answer: ans, can: L.can(q.replace(/:(mc|w)$/, "")), phase: k }); return ans; }, o);
       final = r.final;
       sittings.push({ outcome: final!.phase, questions: s.replies.length - q0, lessons: s.events.filter((e) => (e as { record?: string }).record === "teach").length - l0, effort: final!.effort });
       if (final!.phase !== "pause") break;
