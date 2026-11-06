@@ -13,7 +13,7 @@ mkdir -p "$OUT"
 if [[ "${START_API:-0}" == "1" ]]; then
   echo '{}' > "$OPENPATH_TEST_CLOCK_FILE"
   (cd ../backend && python3 manage.py migrate --noinput > "$OUT/migrate.log" 2>&1)
-  (cd ../backend && OPENPATH_ACCOUNT_RATE=1000/hour exec python3 manage.py runserver 127.0.0.1:8014 --noreload --nothreading > "$OUT/api.log" 2>&1) &
+  (cd ../backend && OPENPATH_ACCOUNT_RATE=1000/hour exec python3 manage.py runserver "${DEEP_API#http://}" --noreload --nothreading > "$OUT/api.log" 2>&1) &
   api_pid=$!
   trap 'kill "$api_pid" 2>/dev/null || true' EXIT
   for _ in $(seq 1 60); do curl --fail --silent "$DEEP_API/api/account/" > /dev/null && break; sleep 1; done
@@ -27,7 +27,7 @@ run() { # $1 cases, rest: build flags
   fi
   tail -1 "$OUT/$cases.log"
 }
-run main --test --deep-recovery
+run main,module,goal --test --deep-recovery
 run pause --test --deep-recovery --deep-sitting=12
 run shipped
-echo "deep-recovery browser journeys: main, pause, shipped passed (results in $OUT)"
+echo "deep-recovery browser journeys: main+module+goal, pause, shipped passed (results in $OUT)"

@@ -23,6 +23,7 @@ import { decide } from "../../../packages/learning/src/session";
 // deep-recovery@0 in a module (RESEARCH, research builds only, default off: deep-recovery-flag.ts; MODULE-RECOVERY.md)
 import { deepRecoveryOn } from "./deep-recovery-flag";
 import { deepModuleState } from "../learning/deep-module";
+import { DEEP_GOAL_POLICY } from "../learning/deep-goal";
 import { DeepRecovery } from "./DeepRecovery";
 import { DeepModuleHandoff } from "./DeepRecoveryHandoff";
 // the build constant is read here directly (as in Main.tsx) so a shipped bundle folds this to false and never reads ?deep
@@ -359,7 +360,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
     return <div className="stack">{head}<AnswerInput q={question(ms.question)} value="" setValue={()=>{}} disabled/><button className="secondary" onClick={onExit}>Next planned competency</button></div>;
   if (ms.phase === "unavailable") return <div className="stack">{head}<p className="why">{ms.reason}</p>{reviewOffer}<button className="secondary wide" onClick={onExit}>Back</button></div>;
   // the same investigation as from Practice: the wrong answer is looked into, and the skill it points to is worked on first
-  if (ms.phase === "recover" && ms.original) return <div className="stack">{head}{DEEP_MODULE ? <DeepRecovery key={ms.original} original={ms.original} ctx={ctx} onExit={onExit} exitLabel="Back" onFeedback={setFb} /> : <Recovery original={ms.original} ctx={ctx} onExit={onExit} embedded onFeedback={setFb} />}</div>;
+  if (ms.phase === "recover" && ms.original) return <div className="stack">{head}{DEEP_MODULE && (!ctx.module || ms.why === DEEP_GOAL_POLICY) /* a learning goal: only the one connected goal (deep-goal.ts) */ ? <DeepRecovery key={ms.original} original={ms.original} ctx={ctx} onExit={onExit} exitLabel="Back" onFeedback={setFb} /> : <Recovery original={ms.original} ctx={ctx} onExit={onExit} embedded onFeedback={setFb} />}</div>;
   if (ms.phase === "chapter" && ms.strategy)
     return (
       <div className="stack">
