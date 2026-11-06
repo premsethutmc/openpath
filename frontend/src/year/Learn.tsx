@@ -20,6 +20,11 @@ import { graph } from "../../../packages/learning/src/graph";
 import { problemOf } from "../../../packages/learning/src/families";
 import { retriesLeft, reviewStrategy as reviewStrategyFor, familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
 import { decide } from "../../../packages/learning/src/session";
+// deep-recovery@0 in a module (RESEARCH, research builds only, default off: deep-recovery-flag.ts; MODULE-RECOVERY.md)
+import { deepRecoveryOn } from "./deep-recovery-flag";
+import { deepModuleState } from "../learning/deep-module";
+import { DeepRecovery } from "./DeepRecovery";
+const DEEP_MODULE = deepRecoveryOn();
 import type { Assessment } from "../../../packages/learning/src/assessment";
 import { workingFeedback } from "../journey/renderer-adapter";
 import type { GradingDecision } from "../../../packages/learning/src/grading/decision";
@@ -320,7 +325,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   const fb = onFeedback ? null : own;
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
-  const ms = ctx.module && !established ? ctx.module(competency, withinRecovery) : moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established, withinRecovery ? undefined : ctx.evidence);
+  const ms = ctx.module && !established ? ctx.module(competency, withinRecovery) : DEEP_MODULE ? deepModuleState(true, competency, ctx.records, ev, ctx.now, ctx.session, established, withinRecovery ? undefined : ctx.evidence) : moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established, withinRecovery ? undefined : ctx.evidence);
   const name = graph.get(competency).name;
   const step = flowIndex(ms.phase);
   const stepper = (
@@ -351,7 +356,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
     return <div className="stack">{head}<AnswerInput q={question(ms.question)} value="" setValue={()=>{}} disabled/><button className="secondary" onClick={onExit}>Next planned competency</button></div>;
   if (ms.phase === "unavailable") return <div className="stack">{head}<p className="why">{ms.reason}</p>{reviewOffer}<button className="secondary wide" onClick={onExit}>Back</button></div>;
   // the same investigation as from Practice: the wrong answer is looked into, and the skill it points to is worked on first
-  if (ms.phase === "recover" && ms.original) return <div className="stack">{head}<Recovery original={ms.original} ctx={ctx} onExit={onExit} embedded onFeedback={setFb} /></div>;
+  if (ms.phase === "recover" && ms.original) return <div className="stack">{head}{DEEP_MODULE ? <DeepRecovery key={ms.original} original={ms.original} ctx={ctx} onExit={onExit} exitLabel="Back" onFeedback={setFb} /> : <Recovery original={ms.original} ctx={ctx} onExit={onExit} embedded onFeedback={setFb} />}</div>;
   if (ms.phase === "chapter" && ms.strategy)
     return (
       <div className="stack">

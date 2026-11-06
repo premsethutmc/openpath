@@ -12,8 +12,12 @@ import { Ask, Feedback, Lesson, type Ctx, type Fb } from "./Learn";
 
 const nameOf = (id: string) => (graph.byId.has(id) ? graph.get(id).name : id);
 
-export function DeepRecovery({ original, ctx, onExit, exitLabel = "Back to the year" }: { original: string; ctx: Ctx; onExit: () => void; exitLabel?: string }) {
-  const [fb, setFb] = useState<Fb | null>(null);
+export function DeepRecovery({ original, ctx, onExit, exitLabel = "Back to the year", onFeedback }: { original: string; ctx: Ctx; onExit: () => void; exitLabel?: string; onFeedback?: (fb: Fb) => void }) {
+  // [worker C, in-module recovery] embedded in a module, feedback is kept by the module: the episode can end with the answer just
+  // saved (this view then unmounts), and the learner must still see that answer's feedback
+  const [own, setOwn] = useState<Fb | null>(null);
+  const fb = onFeedback ? null : own;
+  const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const s = deepScreen(original, ctx.records, ctx.evidence, ctx.now);
   const q = question(original);
   // learner-scoped draft keys (session ids are "learn:<learner>:<visit>"): a typed answer or a lesson screen survives a reload
