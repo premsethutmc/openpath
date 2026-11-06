@@ -345,3 +345,7 @@ class HandoverAcknowledgement(models.Model):
     def delete(self, *args, **kwargs):
         raise ValueError("hand-over acknowledgements are append-only")
 
+
+
+# recovery-handoff@0 (RESEARCH, deep-recovery@0): defined in handoff_models.py, registered here
+from .handoff_models import RecoveryHandoff  # noqa: E402,F401
