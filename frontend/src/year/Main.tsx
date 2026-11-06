@@ -31,6 +31,9 @@ import { contentOf, flatten, tilesFor, type Tile } from "../../../packages/learn
 import { setActiveRegistry, type Registry } from "../../../packages/learning/src/review";
 import { Icon } from "./icons";
 import { Module, Recovery, Single, STATUS_WORD, type Ctx } from "./Learn";
+import { DeepRecovery } from "./DeepRecovery";
+import { deepRecoveryOn } from "./deep-recovery-flag";
+import { openDeepRecoveries } from "../learning/deep-recovery-app";
 import "../mathematics/chapter/chapter.css";
 import "./year.css";
 
@@ -39,6 +42,8 @@ declare const OPENPATH_REVIEW_FIXTURE: boolean;
 if (typeof OPENPATH_REVIEW_FIXTURE !== "undefined" && OPENPATH_REVIEW_FIXTURE) useReviewFixture({ items: questions.map((q) => q.id), releasedAt: "2020-01-01T00:00:00Z", all: true }); // generated questions too (the dashboard's test build reads the same)
 
 const api = new Api();
+/** deep-recovery@0 (research): false in every shipped build (deep-recovery-flag.ts) */
+const DEEP = deepRecoveryOn();
 const uid = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 /** Problems a learner may bring when stuck (a class or coaching problem): opened by the learner, never pushed. */
 const STUCK = questions.filter((q) => q.role === "original");
@@ -107,7 +112,9 @@ function App() {
   const [events, setEvents] = useState<{ kind: string }[] | null>(null);
   const showPathway = new URLSearchParams(location.search).get("foundation") === "1" || !!events?.some((e) => (e as LearningRecord).record === "foundation_pathway");
   const pathwayChoices = useMemo(() => showPathway ? graph.competencies.filter((c) => !c.partOf && moduleFor(c.id)) : [], [showPathway]);
-  const [view, setView] = useState<View>(new URLSearchParams(location.search).get("curriculum") === "change" ? { name: "setup", sameYear: true } : { name: "year" });
+  // deep-recovery@0 (research builds only): ?stuck=<question> opens the recovery from that problem
+  const stuckQ = DEEP ? new URLSearchParams(location.search).get("stuck") : null;
+  const [view, setView] = useState<View>(new URLSearchParams(location.search).get("curriculum") === "change" ? { name: "setup", sameYear: true } : stuckQ && (() => { try { return !!question(stuckQ); } catch { return false; } })() ? { name: "stuck", qid: stuckQ } : { name: "year" });
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const [now, setNow] = useState(Date.now());
@@ -233,7 +240,7 @@ function App() {
     saving,
     answer: (qid: string, response: string, activity: LearningActivity, o = {}) => save(make.attempt(ctxOf(), qid, response, activity, o)),
     recorded: () => lastDecision.current,
-    teach: (competency: string, strategy: string, rule: string) => save(make.teach(ctxOf(), competency, strategy, rule.slice(0, 40))),
+    teach: (competency: string, strategy: string, rule: string, o?: { episode?: string }) => save(make.teach(ctxOf(), competency, strategy, rule.slice(0, 40), o?.episode ? { episode: o.episode } : {})),
   };
   const top = (left: React.ReactNode, title: string) => <TopBar left={left} title={title} />;
   const home = <button className="link" onClick={() => setView({ name: "year" })}>← My year</button>;
@@ -318,7 +325,8 @@ function App() {
   if (view.name === "stuck")
     return (
       <Shell banner={banner} error={error} top={top(home, name)}>
-        <Recovery original={view.qid} ctx={ctx} onExit={() => setView(view.back ?? { name: "year" })} exitLabel={view.back ? "Back to the lesson" : undefined} />
+        {DEEP ? <DeepRecovery original={view.qid} ctx={ctx} onExit={() => setView(view.back ?? { name: "year" })} exitLabel={view.back ? "Back to the lesson" : undefined} />
+          : <Recovery original={view.qid} ctx={ctx} onExit={() => setView(view.back ?? { name: "year" })} exitLabel={view.back ? "Back to the lesson" : undefined} />}
       </Shell>
     );
   if (view.name === "single")
@@ -449,6 +457,11 @@ function App() {
       ) : (
         <div className="next"><p className="eyebrow">Next</p><p>{next.reason}</p>{next.reviewCompetency && <button className="secondary" onClick={() => setView({ name: "module", competency: next.reviewCompetency!, reviewOnly: true, back: { name: "year" } })}>Review a supported lesson</button>}</div>
       )}
+      {DEEP && (() => { const open = openDeepRecoveries(st.records, st.evidence, now); return open.length ? (
+        <section aria-label="Continue a recovery">
+          <div className="section-title"><h2>Continue where you left off</h2></div>
+          <div className="cards">{open.map((o) => <button key={o.original} className="card" data-deep-continue={o.original} onClick={() => setView({ name: "stuck", qid: o.original })}><span className="card-title">{graph.get(question(o.original).competency).name}</span><span className="card-sub">{o.screen.kind === "end" ? "Paused: your place is saved" : "A recovery in progress"}</span></button>)}</div>
+        </section>) : null; })()}
       {next.paused?.length ? <p className="why" role="note"><b>Paused for a teacher or parent:</b> {next.paused.map((id) => graph.get(id).name).join(", ")}. Different explanations have not worked yet, so OpenPath does not ask more on {next.paused.length > 1 ? "these" : "this"} on its own.</p> : null}
       {tiles.map((s) => (
         <section key={s.id} aria-label={s.title}>
