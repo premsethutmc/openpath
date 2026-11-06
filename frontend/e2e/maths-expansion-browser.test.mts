@@ -148,6 +148,16 @@ try {
     const shownBefore = [...met.slice(0, met.indexOf(check.qid!)), strategy.guided, ...strategy.screens.map((s) => s.instance!).filter(Boolean)];
     assert.ok(!shownBefore.some((q) => problemKeyOf(q) === problemKeyOf(check.qid!)), `${c.name}: ${check.qid} repeats or relabels a met problem`);
     assert.deepEqual(trail.filter((s) => s.kind === "transfer"), [], `${c.name}: no transfer before the recheck`);
+    // the engine may keep recovery open for one more question on the learner's own (inequalities): answer it in the UI
+    for (let i = 0; i < 6 && (await stateAt(Date.now())).module(c.competency).phase === "recover"; i++) {
+      await continueOn();
+      if ((await screen()) === "lesson") { await lesson(); continue; }
+      const qid = (await page.locator("[data-qid]").getAttribute("data-qid"))!;
+      assert.ok(onSkill(qid), `${c.name}: recovery question ${qid} is on the competency`);
+      assert.ok(!met.some((q) => problemKeyOf(q) === problemKeyOf(qid)), `${c.name}: recovery question ${qid} is fresh`);
+      const a = await answerInUi(question(qid).answer); met.push(qid);
+      trail.push({ kind: (await stateAt(Date.now())).records.attempts.at(-1)!.activity, qid, right: a.right });
+    }
     const before = await saved(); await page.reload(); await page.locator("body").waitFor(); const after = await saved();
     assert.deepEqual(after.events, before.events); assert.deepEqual(after.decisions, before.decisions);
     // ---- a later visit: independent answers chosen by the engine (stored through the API)
