@@ -2,8 +2,8 @@
  * Consolidation #112, evidence worker. Helped vs independent answers on the real app path (SliceSession; the engine chooses every question).
  *   - an answer with a hint, a guided item, or a second try at a problem is recorded and counted as helped, never as on your own;
  *   - every first, unaided answer outside guided practice is counted on your own (none is discarded), and replay from saved JSON agrees;
- *   - records.ts lesson-review rule (product decision, unchanged): every answer in the same session after "review a supported lesson"
- *     (foundation-lesson-review@1) counts as helped; the next session's answers count on your own again.
+ *   - records.ts lesson-review rule (solution-scope@1, v3): only guided-phase answers after a lesson review count as helped;
+ *     check/practice/retention answers in the same session are independent if unaided; the next session's answers are independent too.
  */
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -44,15 +44,20 @@ test("first unaided answers are all counted on your own; guided items and hints 
   reloads(s, C);
 });
 
-test("product decision (records.ts lesson-review rule): answers after a lesson review count as helped in that session only", () => {
+test("solution-scope@1: only guided answers after a lesson review count as helped; practice/check answers are independent", () => {
   const s = start("evid-assisted-review", C, Date.parse("2026-01-01T00:00:00Z"), false);
   s.events.push(make.teach({ learnerId: s.learnerId, sessionId: s.session, at: new Date(s.now).toISOString() }, C, moduleFor(C)!.strategies[0].id, "foundation-lesson-review@1"));
-  for (const q of ["gen:ahone:0,14,20", "gen:ahone:2,4,3", "gen:ahone:3,7,20:mc"]) s.submit(q, question(q).answer, "practice");
+  // guided answer after teaching → helped (solution = true)
+  s.submit("gen:ahone:0,14,20", question("gen:ahone:0,14,20").answer, "guided");
+  // practice answers after teaching → independent (solution = false with the fix)
+  for (const q of ["gen:ahone:2,4,3", "gen:ahone:3,7,20:mc"]) s.submit(q, question(q).answer, "practice");
   let e = s.state().evidence(C);
-  assert.deepEqual([e.independent.total, e.assisted.total, e.status], [0, 3, "guided"]);
+  assert.equal(e.assisted.total, 1, "only the guided answer is assisted");
+  assert.equal(e.independent.total, 2, "practice answers are independent even after teaching");
   s.wait(1);
   for (const q of ["gen:ahone:0,9,9:mc", "gen:ahone:2,10,10"]) s.submit(q, question(q).answer, "practice");
   e = s.state().evidence(C);
-  assert.deepEqual([e.independent.total, e.assisted.total, e.status], [2, 3, "independent"]);
+  assert.equal(e.independent.total, 4, "next session's practice answers are also independent");
+  assert.equal(e.assisted.total, 1, "only the one guided answer remains assisted");
   reloads(s, C);
 });

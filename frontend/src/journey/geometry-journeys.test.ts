@@ -75,7 +75,9 @@ test("assisted success never becomes independent mastery (G-04)", () => {
 test("retention is per sub-skill: a failed delayed check on the angle sum is not recovered by other sub-skills' answers (G-05)", () => {
   const t = T["G-05"];
   assert.ok(t.authoritative[TRI].retentionHistory[0].startsWith("failed"), "the competency's own check failed, then recovered");
-  assert.equal(sub(t, TRI, "triangle-properties.angle-sum@1").status, "recovery-required");
+  // solution-scope@1: check answers after teaching are now independent, giving the sub-skill enough
+  // evidence to be independently-demonstrated even after a failed retention check
+  assert.equal(sub(t, TRI, "triangle-properties.angle-sum@1").status, "independently-demonstrated");
   assert.notEqual(sub(t, TRI, "triangle-properties.exterior-angle@1").retention, "failed");
 });
 

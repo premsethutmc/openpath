@@ -3452,6 +3452,126 @@
      ],
      "guided": "gen:ahext:34,63,0:mc",
      "check": "gen:ahext:44,76,1"
+    },
+    {
+     "id": "isosceles_base",
+     "title": "Base angles of an isosceles triangle",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "ahiso",
+      "subSkill": "triangle-properties.isosceles-angles@1"
+     },
+     "screens": [
+      {
+       "title": "Base angles of an isosceles triangle",
+       "text": [
+        "In an isosceles triangle the two sides that are equal face two equal angles (the base angles).",
+        "Take the vertex angle (the one between the equal sides) from 180deg, then halve what is left: each base angle is half of the remainder."
+       ],
+       "math": [
+        "In an isosceles triangle the angle between the two equal sides is 50°. What is each of the other two angles, in degrees?",
+        "Angle sum: 180deg",
+        "Two equal base angles share 180deg - 50deg = 130deg",
+        "Each base angle: 130deg / 2 = 65deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahiso:50,0",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "?",
+         "?",
+         "50deg"
+        ]
+       }
+      },
+      {
+       "title": "A wider vertex angle",
+       "text": [
+        "The bigger the vertex angle, the smaller each base angle.",
+        "Always start with 180deg minus the vertex angle, then divide by 2."
+       ],
+       "math": [
+        "In an isosceles triangle the angle between the two equal sides is 100°. What is each of the other two angles, in degrees?",
+        "Angle sum: 180deg",
+        "Two equal base angles share 180deg - 100deg = 80deg",
+        "Each base angle: 80deg / 2 = 40deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahiso:100,0",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "?",
+         "?",
+         "100deg"
+        ]
+       }
+      }
+     ],
+     "guided": "gen:ahiso:57,1:mc",
+     "check": "gen:ahiso:24,1"
+    },
+    {
+     "id": "isosceles_vertex",
+     "title": "Vertex angle from a base angle",
+     "kind": "procedural",
+     "needs": [],
+     "scope": {
+      "family": "ahiso",
+      "subSkill": "triangle-properties.isosceles-angles@1"
+     },
+     "screens": [
+      {
+       "title": "Find the vertex angle from a base angle",
+       "text": [
+        "If you know one base angle, you know both (they are equal). Double the base angle and take it from 180deg.",
+        "Check: the vertex angle plus both base angles should add to 180deg."
+       ],
+       "math": [
+        "In an isosceles triangle each of the two equal angles (opposite the equal sides) is 35°. What is the third angle, in degrees?",
+        "Both base angles are 35deg",
+        "Together: 2 x 35deg = 70deg",
+        "Vertex angle: 180deg - 70deg = 110deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahiso:35,1",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "35deg",
+         "35deg",
+         "?"
+        ]
+       }
+      },
+      {
+       "title": "A larger base angle",
+       "text": [
+        "Larger base angles leave less room for the vertex angle.",
+        "Double the base angle first, then subtract from 180deg."
+       ],
+       "math": [
+        "In an isosceles triangle each of the two equal angles (opposite the equal sides) is 75°. What is the third angle, in degrees?",
+        "Both base angles are 75deg",
+        "Together: 2 x 75deg = 150deg",
+        "Vertex angle: 180deg - 150deg = 30deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahiso:75,1",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "75deg",
+         "75deg",
+         "?"
+        ]
+       }
+      }
+     ],
+     "guided": "gen:ahiso:142,0:mc",
+     "check": "gen:ahiso:47,1"
     }
    ]
   },
@@ -3546,6 +3666,246 @@
      ],
      "guided": "gen:afcross:152,0:mc",
      "check": "gen:afcross:70,0"
+    },
+    {
+     "id": "complementary_angles",
+     "title": "Complementary angles add up to 90deg",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "afpair",
+      "subSkill": "angle-pairs.complement@2"
+     },
+     "screens": [
+      {
+       "title": "Complementary angles add up to 90deg",
+       "text": [
+        "Two angles are complementary when they together make a right angle: 90deg.",
+        "To find the missing complement, take the given angle away from 90deg."
+       ],
+       "math": [
+        "Two angles are complementary. One of them is 35°. What is the other angle, in degrees?",
+        "Complementary angles add up to 90deg",
+        "90deg - 35deg = 55deg",
+        "Check: 35deg + 55deg = 90deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:afpair:0,35",
+       "widget": {
+        "type": "angle",
+        "deg": 35,
+        "note": "with a right angle"
+       }
+      },
+      {
+       "title": "Complement of a larger angle",
+       "text": [
+        "The closer the given angle is to 90deg, the smaller its complement.",
+        "Take the given angle from 90deg. Check that the two angles add up to 90deg."
+       ],
+       "math": [
+        "Two angles are complementary. One of them is 72°. What is the other angle, in degrees?",
+        "Complementary angles add up to 90deg",
+        "90deg - 72deg = 18deg",
+        "Check: 72deg + 18deg = 90deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:afpair:0,72",
+       "widget": {
+        "type": "angle",
+        "deg": 72,
+        "note": "with a right angle"
+       }
+      }
+     ],
+     "guided": "gen:afpair:0,62:mc",
+     "check": "gen:afpair:0,66"
+    },
+    {
+     "id": "supplementary_angles",
+     "title": "Supplementary angles add up to 180deg",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "afpair",
+      "subSkill": "angle-pairs.supplement@2"
+     },
+     "screens": [
+      {
+       "title": "Supplementary angles add up to 180deg",
+       "text": [
+        "Two angles are supplementary when they together make a straight angle: 180deg.",
+        "To find the missing supplement, take the given angle away from 180deg."
+       ],
+       "math": [
+        "Two angles are supplementary. One of them is 55°. What is the other angle, in degrees?",
+        "Supplementary angles add up to 180deg",
+        "180deg - 55deg = 125deg",
+        "Check: 55deg + 125deg = 180deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:afpair:1,55",
+       "widget": {
+        "type": "angle",
+        "deg": 55,
+        "note": "on a straight line"
+       }
+      },
+      {
+       "title": "Supplement of an obtuse angle",
+       "text": [
+        "When the given angle is obtuse (more than 90deg), its supplement is acute (less than 90deg).",
+        "Take the given angle from 180deg. Check that the two add to 180deg."
+       ],
+       "math": [
+        "Two angles are supplementary. One of them is 125°. What is the other angle, in degrees?",
+        "Supplementary angles add up to 180deg",
+        "180deg - 125deg = 55deg",
+        "Check: 125deg + 55deg = 180deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:afpair:1,125",
+       "widget": {
+        "type": "angle",
+        "deg": 125,
+        "note": "on a straight line"
+       }
+      }
+     ],
+     "guided": "gen:afpair:1,152:mc",
+     "check": "gen:afpair:1,27"
+    },
+    {
+     "id": "adjacent_linear_pair",
+     "title": "Adjacent angles on a straight line",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "afcross",
+      "subSkill": "angle-pairs.adjacent@2"
+     },
+     "screens": [
+      {
+       "title": "Adjacent angles on a straight line",
+       "text": [
+        "Where two straight lines cross, each pair of neighbouring angles lies on a straight line.",
+        "Angles on a straight line add up to 180deg. Take the known angle from 180deg to find the one next to it."
+       ],
+       "math": [
+        "Two straight lines cross each other, making four angles. One of the angles is 52°. What is an angle next to it (they form a straight line together), in degrees?",
+        "Angles on a straight line add up to 180deg",
+        "180deg - 52deg = 128deg",
+        "The angle next to 52deg is 128deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:52,1",
+       "widget": {
+        "type": "angle",
+        "deg": 52,
+        "cross": true,
+        "labels": [
+         "52deg",
+         "?",
+         "",
+         ""
+        ]
+       }
+      },
+      {
+       "title": "Larger adjacent angle",
+       "text": [
+        "If the known angle is acute, the adjacent angle is obtuse, and the other way round.",
+        "Take the known angle from 180deg. The two together always make exactly 180deg."
+       ],
+       "math": [
+        "Two straight lines cross each other, making four angles. One of the angles is 138°. What is an angle next to it (they form a straight line together), in degrees?",
+        "Angles on a straight line add up to 180deg",
+        "180deg - 138deg = 42deg",
+        "The angle next to 138deg is 42deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:138,1",
+       "widget": {
+        "type": "angle",
+        "deg": 138,
+        "cross": true,
+        "labels": [
+         "138deg",
+         "?",
+         "",
+         ""
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afcross:92,1:mc",
+     "check": "gen:afcross:84,1"
+    },
+    {
+     "id": "other_three_angles",
+     "title": "The other three angles at a crossing",
+     "kind": "procedural",
+     "needs": [],
+     "scope": {
+      "family": "afcross",
+      "subSkill": "angle-pairs.other-three@2"
+     },
+     "screens": [
+      {
+       "title": "The other three angles at a crossing",
+       "text": [
+        "All four angles at a crossing add up to 360deg (a full turn).",
+        "Find the other three by going round: opposite is equal, neighbours add to 180deg. Then add all three."
+       ],
+       "math": [
+        "Two straight lines cross each other, making four angles. One of the angles is 47°. What do the other three angles add up to, in degrees?",
+        "The angle next to 47deg is 180deg - 47deg = 133deg",
+        "Opposite 47deg is another 47deg; opposite 133deg is another 133deg",
+        "Other three: 133deg + 47deg + 133deg = 313deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:47,2",
+       "widget": {
+        "type": "angle",
+        "deg": 47,
+        "cross": true,
+        "labels": [
+         "47deg",
+         "?",
+         "?",
+         "?"
+        ]
+       }
+      },
+      {
+       "title": "When the angle is obtuse",
+       "text": [
+        "Even with an obtuse angle, the rule is the same: go round the crossing.",
+        "The four angles are the given angle, 180deg minus it, the given angle again, and 180deg minus it again. The other three add to 360deg minus the given."
+       ],
+       "math": [
+        "Two straight lines cross each other, making four angles. One of the angles is 131°. What do the other three angles add up to, in degrees?",
+        "The angle next to 131deg is 180deg - 131deg = 49deg",
+        "Opposite 131deg is another 131deg; opposite 49deg is another 49deg",
+        "Other three: 49deg + 131deg + 49deg = 229deg"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:131,2",
+       "widget": {
+        "type": "angle",
+        "deg": 131,
+        "cross": true,
+        "labels": [
+         "131deg",
+         "?",
+         "?",
+         "?"
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afcross:92,2:mc",
+     "check": "gen:afcross:149,2"
     }
    ]
   },
