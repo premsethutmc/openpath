@@ -2901,6 +2901,1200 @@
    }
   },
   {
+   "competency": "MATH.algebra.linear-rational",
+   "title": "Solving a linear equation with negative numbers",
+   "chapter": [
+    {
+     "title": "Negative coefficients and constants",
+     "text": [
+      "When the coefficient of x or the constants are negative, the same method works: undo in reverse order. Pay extra attention to subtracting a negative (which adds) and dividing by a negative (which flips the sign of the answer)."
+     ],
+     "math": [
+      "−9x − 20 = −29",
+      "Add 20: −9x = −9",
+      "Divide by −9: x = 1",
+      "Solve −9x − 20 = −29.",
+      "Add 20 to both sides (this undoes the −20): −29 + 20 = −9",
+      "Divide both sides by −9: −9 ÷ −9 = 1"
+     ],
+     "tip": "−9 ÷ (−9) = 1: dividing two negatives gives a positive.",
+     "role": "concept",
+     "instance": "gen:lneg:-9,-20,1"
+    },
+    {
+     "title": "Word problems that lead to a linear equation",
+     "text": [
+      "A word problem becomes an equation when the unknown gets a letter and each sentence is written in symbols. Solving the equation and checking the answer in the story finishes the problem.",
+      "Let x be what is asked. Write the other quantities with x (mother's age kx, next multiple x + k, length x + k). Write the fact the story gives as an equation, solve it, and check in the words of the story."
+     ],
+     "math": [
+      "The sum of three consecutive multiples of 7 is 147. What is the smallest of them?",
+      "Let x be the unknown; the story gives x + (x + 7) + (x + 14) = 147",
+      "Solve the equation: x = 42 (the smallest multiple)"
+     ]
+    },
+    {
+     "title": "An equation with fractions of x",
+     "text": [
+      "Multiplying every term on both sides by the same number keeps an equation true; choosing the least common multiple of the denominators clears all the fractions.",
+      "Find the LCM of the denominators, multiply every term by it, collect the x terms, then divide."
+     ],
+     "math": [
+      "Solve x/4 + x/5 = 54. What is x?",
+      "Multiply every term by 20: the right side becomes 1080",
+      "The left side becomes 5x + 4x = 9x",
+      "x = 1080 ÷ 9 = 120"
+     ]
+    },
+    {
+     "title": "An equation with x on both sides",
+     "text": [
+      "An equation stays balanced when the same thing is added to or taken from both sides, including a number of x's.",
+      "Take the smaller x term from both sides so x is on one side only, move the numbers to the other side, then divide by the coefficient of x. Check by substituting."
+     ],
+     "math": [
+      "Solve 9x + 15 = −x − 15.",
+      "Take −x from both sides: 10x on the left",
+      "Take 15 from both sides: −15 − 15 = −30 on the right",
+      "x = −30 ÷ 10 = −3"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:lneg:-2,10,3",
+    "gen:lneg:5,5,-2",
+    "gen:lneg:-3,-12,12"
+   ],
+   "strategies": [
+    {
+     "id": "same_both_sides",
+     "title": "Do the same to both sides",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Add or subtract, then divide",
+       "text": [
+        "Add or subtract the constant from both sides to isolate the x term. Then divide both sides by the coefficient. A negative divided by a negative is positive."
+       ],
+       "math": [
+        "Solve 5x − 5 = 40.",
+        "Add 5 to both sides (this undoes the −5): 40 + 5 = 45",
+        "Divide both sides by 5: 45 ÷ 5 = 9"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lneg:5,-5,9"
+      }
+     ],
+     "guided": "gen:lneg:-2,8,5",
+     "check": "gen:lneg:3,-11,2"
+    },
+    {
+     "id": "negative_rules",
+     "title": "Signs when dividing",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Same signs → positive, different signs → negative",
+       "text": [
+        "When dividing (or multiplying): positive ÷ positive = positive, negative ÷ negative = positive, positive ÷ negative = negative. This decides the sign of x."
+       ],
+       "role": "strategy",
+       "instance": "gen:lneg:-9,-20,1"
+      }
+     ],
+     "guided": "gen:lneg:-6,3,-8",
+     "check": "gen:lneg:-3,-12,10:mc"
+    },
+    {
+     "id": "integer_sub",
+     "title": "Subtracting negatives",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Subtracting a negative adds",
+       "text": [
+        "−20 − (−20) = −20 + 20 = 0. Two negatives in a row make a positive. If this is slow, practise integer arithmetic first."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:lneg:-3,3,-6",
+     "check": "gen:lneg:-5,11,-9"
+    }
+   ],
+   "practice": [
+    "gen:lneg:-4,-10,-8",
+    "gen:lneg:-9,15,-1:mc",
+    "gen:lneg:-4,2,-4",
+    "gen:aelinw:2,5,10",
+    "gen:ahfrac:4,9,2,0",
+    "gen:ahboth:3,6,7,4"
+   ],
+   "transfer": [
+    "gen:lneg:-2,-10,-8:mc",
+    "gen:aelinw:1,6,6:w",
+    "gen:ahfrac:5,6,2,0:w"
+   ],
+   "retention": [
+    "gen:lneg:-1,-11,-12",
+    "gen:aelinw:2,5,11:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "lneg",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "lneg",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aelinw",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahfrac",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahboth",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "lneg",
+    "seed": [
+     -9,
+     -20,
+     1
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:lneg:-9,-20,1",
+     "gen:lneg:5,-5,9"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.algebra.functions",
+   "title": "The domain of a real function",
+   "chapter": [
+    {
+     "title": "Where the formula works",
+     "text": [
+      "The domain is every real x for which the formula gives a real output. A square root needs a non-negative radicand; a denominator cannot be zero; a logarithm needs a positive argument."
+     ],
+     "math": [
+      "f(x) = √(−6x): need −6x ≥ 0, so x ≤ 0",
+      "Domain: (−∞, 0]"
+     ],
+     "tip": "Dividing by a negative reverses the inequality: −6x ≥ 0 becomes x ≤ 0.",
+     "role": "concept",
+     "instance": "gen:aodom:0,-6,0"
+    },
+    {
+     "title": "The range of a quadratic function",
+     "text": [
+      "Writing f(x) = a(x − h)² + k shows the range: (x − h)² takes every value ≥ 0, so f takes every value from k upwards when a > 0, and from k downwards when a < 0.",
+      "Complete the square (or find the vertex at x = −b/(2a)), work out k = f(h), and write [k, ∞) or (−∞, k]."
+     ],
+     "math": [
+      "Find the range of f : ℝ → ℝ, f(x) = 3x² − 12x + 13. Write it in interval notation.",
+      "Complete the square: f(x) = 3(x − 2)² + 1",
+      "The square is never negative, so the least value is f(2) = 1"
+     ]
+    },
+    {
+     "title": "Is a quadratic on a restricted domain one-one, onto, both or neither?",
+     "text": [
+      "One-one: f(x₁) = f(x₂) only when x₁ = x₂. Onto: every element of the codomain is f(x) for some x in the domain. For a quadratic both depend on where the domain starts compared with the vertex.",
+      "Complete the square to find the vertex (h, c). If the domain [d, ∞) starts at or to the right of h, f only increases (one-one) and its range is [f(d), ∞); otherwise f(d) = f(2h − d) and the range is [c, ∞). Compare the range with the codomain."
+     ],
+     "math": [
+      "Let f : [3, ∞) → [6, ∞) be given by f(x) = x² − 6x + 15. Which statement is true?",
+      "Complete the square: f(x) = (x − 3)² + 6, so the vertex is at x = 3",
+      "One-one (the domain starts at 3, not left of the vertex): yes",
+      "Onto (the range is [6, ∞); is every element of the codomain reached?): yes"
+     ]
+    },
+    {
+     "title": "Deciding whether a relation is a function",
+     "text": [
+      "A relation R from A to B is a function when every element of A has exactly one image in B. Two elements may share an image (many-one), but one element may not have two images, and none may be left without an image.",
+      "Go through A one element at a time and count its pairs in R. If every count is exactly 1, R is a function. On a graph this is the vertical line test: no vertical line through an element of A meets the graph twice."
+     ],
+     "math": [
+      "A = {−2, −1, 0, 1} and B = {1, 3, 5}. The picture shows the pairs (x, y) of a relation R from A to B as points; use the vertical line test. Is R a function from A to B?",
+      "Count the images of each element of A: No: an element of A has two or more images in B",
+      "So: No: an element of A has two or more images in B"
+     ]
+    },
+    {
+     "title": "Naming a function: one-one or many-one, onto or into, identity or constant",
+     "text": [
+      "f : A → B is one-one if different elements have different images, and many-one otherwise; it is onto if every element of B is an image, and into otherwise. On A → A, the identity sends each x to x, and a constant function sends every x to one value.",
+      "List the images f(a). Repeated images → many-one. Compare the set of images (the range) with B: equal → onto, smaller → into."
+     ],
+     "math": [
+      "A = {2, 3, 4, 5}, B = {2, 5, 8, 11} and f : A → B is the function f = {(2, 2), (3, 5), (4, 8), (5, 11)}. Which statement is true?",
+      "Checking images: f is one-one and onto (a bijection)",
+      "So: f is one-one and onto (a bijection)"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:aodom:4,4,5",
+    "gen:aodom:0,-2,2",
+    "gen:aodom:3,-5,2"
+   ],
+   "strategies": [
+    {
+     "id": "restriction_rules",
+     "title": "Three restrictions to check",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Square root, denominator, logarithm",
+       "text": [
+        "√(expression): set expression ≥ 0. 1/(expression): set expression ≠ 0. log(expression): set expression > 0. Solve the resulting inequality and write the domain in interval notation."
+       ],
+       "math": [
+        "Find the domain of the real function f(x) = √(3x − 3). Write it in interval notation.",
+        "The quantity under the root must be non-negative: 3x − 3 ≥ 0",
+        "Solve the condition: x ∈ [1, ∞)"
+       ],
+       "role": "worked-example",
+       "instance": "gen:aodom:0,3,-3"
+      }
+     ],
+     "guided": "gen:aodom:0,3,-2",
+     "check": "gen:aodom:0,3,-7"
+    },
+    {
+     "id": "interval_notation",
+     "title": "Writing interval notation",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Round bracket excludes, square bracket includes",
+       "text": [
+        "(a, b) means a < x < b. [a, b] means a ≤ x ≤ b. Use ∞ with a round bracket always: (−∞, 0] means x ≤ 0."
+       ],
+       "role": "strategy",
+       "instance": "gen:aodom:0,-6,0"
+      }
+     ],
+     "guided": "gen:aodom:0,3,-1",
+     "check": "gen:aodom:0,3,-6:mc"
+    },
+    {
+     "id": "inequality_solving",
+     "title": "Solving the inequality",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Flip when dividing by negative",
+       "text": [
+        "−6x ≥ 0: divide by −6, flip the sign: x ≤ 0. The sign reversal is the most common error in domain questions."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:aodom:1,3,5",
+     "check": "gen:aodom:4,-6,-5"
+    }
+   ],
+   "practice": [
+    "gen:aodom:4,-6,-2",
+    "gen:aodom:1,3,4:mc",
+    "gen:aodom:4,-6,-1",
+    "gen:aorange:-3,-5,-9",
+    "gen:aofclass:2,-1,0,0",
+    "gen:aoisfn:0,2,15",
+    "gen:aofname:0,0,20"
+   ],
+   "transfer": [
+    "gen:aodom:1,3,6:mc",
+    "gen:aoisfn:2,1,3:w",
+    "gen:aofname:0,0,21:w"
+   ],
+   "retention": [
+    "gen:aodom:4,-6,-3",
+    "gen:aorange:3,0,-1:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aodom",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "aodom",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aorange",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aofclass",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aoisfn",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aofname",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "aodom",
+    "seed": [
+     0,
+     -6,
+     0
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aodom:0,-6,0",
+     "gen:aodom:0,3,-3"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.algebra.logarithms",
+   "title": "Expressing log N in terms of log 2 and log 3",
+   "chapter": [
+    {
+     "title": "Three laws of logarithms",
+     "text": [
+      "log(xy) = log x + log y (product), log(x/y) = log x − log y (quotient), log xⁿ = n log x (power). With log 2 = a and log 3 = b, express any number built from 2s, 3s and powers of 10."
+     ],
+     "math": [
+      "log 0.05 = log(1/20) = −log 20 = −log(4 × 5)",
+      "= −(log 4 + log 5) = −(2a + log(10/2))",
+      "= −(2a + 1 − a) = −a − 1"
+     ],
+     "tip": "Write the number as a product of 2s and 3s (and 10s): 0.05 = 1/20 = 1/(4 × 5) = 1/(2² × 10/2).",
+     "role": "concept",
+     "instance": "gen:aologlaw:-2,0,-1"
+    },
+    {
+     "title": "Evaluating a logarithm by writing both numbers as powers of one base",
+     "text": [
+      "log_B X = y means Bʸ = X. If B = cⁱ and X = cʲ, then (cⁱ)ʸ = cʲ, so iy = j and y = j/i.",
+      "Write the base and the number as powers of the same prime, then divide the power of the number by the power of the base."
+     ],
+     "math": [
+      "Evaluate log₁₂₅ 3125.",
+      "Write both as powers of 5: 125 = 5³, 3125 = 5⁵",
+      "(c^3)^y = c^5 when 3y = 5, so the logarithm is 5/3"
+     ]
+    },
+    {
+     "title": "Solving log x + log(x ± c) = k",
+     "text": [
+      "log x + log y = log(xy), and log_B N = k means N = Bᵏ. A logarithm is only defined for positive numbers, so every root must be checked.",
+      "Combine the logs into one, rewrite as x(x ± c) = Bᵏ, solve the quadratic, and keep only roots that make both x and x ± c positive."
+     ],
+     "math": [
+      "Solve log₇ x + log₇(x − 6) = 1. Give every solution, separated by commas.",
+      "log x + log y = log(xy), and log_B(…) = 1 means … = 7¹: x(x − 6) = 7",
+      "Solve the quadratic: x = 7 or x = −1",
+      "Only x = 7 keeps both logarithms defined"
+     ]
+    },
+    {
+     "title": "Solving simple exponential equations by writing powers of one base",
+     "text": [
+      "If aᵐ = aⁿ with a > 0, a ≠ 1, then m = n. So an exponential equation whose two sides are powers of the same number becomes an ordinary equation in the powers.",
+      "Write each base as a power of one prime (9 = 3², 27 = 3³), use (cⁱ)ᵗ = c^(it) on the whole exponent, equate the exponents and solve."
+     ],
+     "math": [
+      "Solve 4^(x + 1) = 2^x.",
+      "Write both sides as powers of 2 and equate the powers: 2(x + 1) = 1x",
+      "x = −2"
+     ]
+    },
+    {
+     "title": "Change of base: products and sums of logarithms",
+     "text": [
+      "Change of base: log_a x = log x / log a (any base for both). So log_a b × log_b c = log_a c, and 1/log_a x = log_x a.",
+      "Rewrite each logarithm as a quotient of logarithms to one base, cancel what is common, then evaluate using powers of the same prime."
+     ],
+     "math": [
+      "Using the change of base rule, evaluate log₅ 3 × log₃ 25.",
+      "Change of base: log 3/log 5 × log 25/log 3 = log 25/log 5",
+      "So the value is 2"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:aologlaw:-1,3,2",
+    "gen:aologlaw:-1,3,-1",
+    "gen:aologlaw:2,0,-2"
+   ],
+   "strategies": [
+    {
+     "id": "factorise_number",
+     "title": "Break the number into 2s and 3s",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Prime factorise, then apply the laws",
+       "text": [
+        "Write N as a product of powers of 2, 3 and 10. Then apply the product rule (log of a product = sum of logs) and the power rule (log of a power = power × log). Replace log 10 with 1."
+       ],
+       "math": [
+        "Given log 2 = a and log 3 = b (logarithms to base 10), express log 51.84 in terms of a and b.",
+        "Write 51.84 with powers of 2, 3 and 5: 2⁴ × 3⁴ × 5⁻²",
+        "log 5 = log(10/2) = 1 − a",
+        "log(xy) = log x + log y and log xⁿ = n log x give 6a + 4b − 2"
+       ],
+       "role": "worked-example",
+       "instance": "gen:aologlaw:4,4,-2"
+      }
+     ],
+     "guided": "gen:aologlaw:4,4,-1",
+     "check": "gen:aologlaw:-1,1,-2"
+    },
+    {
+     "id": "log_ten",
+     "title": "log 10 = 1",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The base is 10",
+       "text": [
+        "log₁₀ 10 = 1 and log₁₀ 1 = 0. Use these to turn 5 into 10/2 (so log 5 = 1 − a) and 0.1 into 10⁻¹ (so log 0.1 = −1)."
+       ],
+       "role": "strategy",
+       "instance": "gen:aologlaw:-2,0,-1"
+      }
+     ],
+     "guided": "gen:aologlaw:1,1,0",
+     "check": "gen:aologlaw:2,3,-1:mc"
+    },
+    {
+     "id": "sign_of_log",
+     "title": "Log of a fraction is negative",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "log(1/N) = −log N",
+       "text": [
+        "Numbers between 0 and 1 have negative logarithms (base 10). log(0.05) is negative because 0.05 < 1. Use log(1/N) = −log N to handle decimals."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:aologlaw:5,2,0",
+     "check": "gen:aologlaw:5,2,2"
+    }
+   ],
+   "practice": [
+    "gen:aologlaw:5,3,2",
+    "gen:aologlaw:5,2,1:mc",
+    "gen:aologlaw:-2,0,0",
+    "gen:aolog:2,3,1",
+    "gen:aologeq:0,6,32,1",
+    "gen:aoexpeq:0,0,3,1,1,2",
+    "gen:aochb:0,1,5,1,4"
+   ],
+   "transfer": [
+    "gen:aologlaw:-2,0,1:mc",
+    "gen:aoexpeq:0,0,2,1,0,-3:w"
+   ],
+   "retention": [
+    "gen:aologlaw:1,1,2",
+    "gen:aolog:2,3,4:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aologlaw",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "aologlaw",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aolog",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aologeq",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aoexpeq",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aochb",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "aologlaw",
+    "seed": [
+     -2,
+     0,
+     -1
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aologlaw:-2,0,-1",
+     "gen:aologlaw:4,4,-2"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.trigonometry.compound-angle-identities",
+   "title": "Exact values by compound-angle formulas",
+   "chapter": [
+    {
+     "title": "sin(A ± B) and cos(A ± B)",
+     "text": [
+      "sin(A + B) = sin A cos B + cos A sin B. cos(A + B) = cos A cos B − sin A sin B. Use these to find exact values of angles like 75° (= 30° + 45°) or 15° (= 45° − 30°)."
+     ],
+     "math": [
+      "sin(30° + 45°) = sin 30° cos 45° + cos 30° sin 45°",
+      "= (1/2)(√2/2) + (√3/2)(√2/2)",
+      "= √2/4 + √6/4 = (√6 + √2)/4"
+     ],
+     "tip": "Keep the formula's signs exactly: sin(A+B) has +, cos(A+B) has −.",
+     "role": "concept",
+     "instance": "gen:atcomp:0,1,0,0"
+    },
+    {
+     "title": "Double-angle values from one ratio",
+     "text": [
+      "sin 2A = 2 sin A cos A, cos 2A = cos²A − sin²A, tan 2A = 2 tan A/(1 − tan²A); the quadrant fixes the sign of the ratio you work out.",
+      "Use sin²A + cos²A = 1 to find the other ratio, give it the sign of its quadrant, then substitute into the double-angle formula."
+     ],
+     "math": [
+      "Given sin A = 8/17 and π/2 < A < π, find sin 2A.",
+      "From sin²A + cos²A = 1 with the quadrant's sign: cos A = −15/17",
+      "sin 2A = 2 sin A cos A = −240/289"
+     ]
+    },
+    {
+     "title": "Products of sines and cosines as sums",
+     "text": [
+      "Adding sin(A + B) and sin(A − B) cancels the cos A sin B parts and leaves 2 sin A cos B; the other three product formulas come the same way.",
+      "Pick the formula for the product, put A = ax and B = bx, and write the angles A + B and A − B."
+     ],
+     "math": [
+      "Which of these is equal to 2 sin 9x cos x, written as a sum or difference of sines or cosines?",
+      "The angles are A + B = 10x and A − B = 8x: 2 sin 9x cos x = sin 10x + sin 8x",
+      "So the equal option is B"
+     ]
+    },
+    {
+     "title": "Simplifying with the compound-angle formulas",
+     "text": [
+      "Read the formulas backwards: sin A cos B ± cos A sin B = sin(A ± B); cos A cos B ∓ sin A sin B = cos(A ± B) (the sign flips); (tan A ± tan B)/(1 ∓ tan A tan B) = tan(A ± B).",
+      "Match the pattern: which functions appear, in which order, and with which sign between the products. Then write the single function of kx ± mx."
+     ],
+     "math": [
+      "Which of these is equal to cos 7x cos 3x − sin 7x sin 3x?",
+      "cos 7x cos 3x − sin 7x sin 3x = cos 10x",
+      "So the answer is C"
+     ]
+    },
+    {
+     "title": "Half-angle values from one ratio",
+     "text": [
+      "From cos A = 1 − 2 sin²(A/2) = 2 cos²(A/2) − 1: sin(A/2) = ±√((1 − cos A)/2), cos(A/2) = ±√((1 + cos A)/2), and tan(A/2) = sin A/(1 + cos A). The sign comes from the quadrant of A/2.",
+      "Find cos A (and sin A) with its quadrant's sign, substitute into the half-angle formula, choose the sign from where A/2 lies (0 < A/2 < π), and rationalise."
+     ],
+     "math": [
+      "Given sin A = 5/13 and π/2 < A < π, find sin(A/2). Give the exact value with no square root in the denominator.",
+      "From sin²A + cos²A = 1 with the quadrant's sign: cos A = −12/13",
+      "sin(A/2) = ±√((1 − cos A)/2) with the sign for A/2: 5√26/26"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:atcomp:4,4,0,1",
+    "gen:atcomp:14,0,0,0",
+    "gen:atcomp:6,4,1,2"
+   ],
+   "strategies": [
+    {
+     "id": "choose_split",
+     "title": "Choose how to split the angle",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Write as a sum or difference of standard angles",
+       "text": [
+        "75° = 30° + 45°, 15° = 45° − 30°, 105° = 60° + 45°. Choose the split that uses 30°, 45° or 60° so you can substitute exact values."
+       ],
+       "math": [
+        "Use a compound-angle formula to find the exact value of sin(60° − 45°). Simplify fully, with no square root in the denominator.",
+        "sin 60°, cos 60° and sin 45°, cos 45°: √3/2, 1/2; √2/2, √2/2",
+        "Put them into the sin(A − B) formula and simplify: (√6 − √2)/4"
+       ],
+       "role": "worked-example",
+       "instance": "gen:atcomp:1,1,1,0"
+      }
+     ],
+     "guided": "gen:atcomp:1,1,1,1",
+     "check": "gen:atcomp:7,4,1,2"
+    },
+    {
+     "id": "sign_in_formula",
+     "title": "The signs in each formula",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "sin has same sign, cos has opposite sign",
+       "text": [
+        "sin(A + B) uses +, sin(A − B) uses −. cos(A + B) uses −, cos(A − B) uses +. The sign in cos is opposite to the sign between A and B."
+       ],
+       "role": "strategy",
+       "instance": "gen:atcomp:0,1,0,0"
+      }
+     ],
+     "guided": "gen:atcomp:7,4,1,1",
+     "check": "gen:atcomp:13,5,1,1:mc"
+    },
+    {
+     "id": "surd_multiply",
+     "title": "Multiplying surds",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "√a × √b = √(ab)",
+       "text": [
+        "(1/2)(√2/2) = √2/4. Multiply tops and bottoms. √2 × √3 = √6. Common denominators let you add: √2/4 + √6/4 = (√2 + √6)/4."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:atcomp:7,4,1,0",
+     "check": "gen:atcomp:13,5,1,0"
+    }
+   ],
+   "practice": [
+    "gen:atcomp:7,4,0,1",
+    "gen:atcomp:7,4,0,2:mc",
+    "gen:atcomp:14,0,1,2",
+    "gen:atdbl:3,0,3,0",
+    "gen:atp2s:1,4,1",
+    "gen:atcsimp:4,5,1",
+    "gen:athalf:0,0,4,2"
+   ],
+   "transfer": [
+    "gen:atcomp:14,0,1,1:mc",
+    "gen:atcomp:1,4,1,2:w"
+   ],
+   "retention": [
+    "gen:atcomp:7,4,0,0",
+    "gen:atdbl:2,0,3,2:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "atcomp",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "atcomp",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atdbl",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atp2s",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atcsimp",
+     "version": "1.0.0"
+    },
+    {
+     "family": "athalf",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "atcomp",
+    "seed": [
+     0,
+     1,
+     0,
+     0
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:atcomp:0,1,0,0",
+     "gen:atcomp:1,1,1,0"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.calculus.applications",
+   "title": "Where a function is increasing or decreasing",
+   "chapter": [
+    {
+     "title": "f′(x) > 0 means increasing",
+     "text": [
+      "A function is strictly increasing where its derivative is positive and strictly decreasing where its derivative is negative. Find f′(x), set it to zero to find critical points, then test the sign of f′ in each interval."
+     ],
+     "math": [
+      "f(x) = −2x³ − 21x² − 72x + 1",
+      "f′(x) = −6x² − 42x − 72 = −6(x² + 7x + 12) = −6(x + 3)(x + 4)",
+      "f′(x) > 0 when (x + 3)(x + 4) < 0, i.e. −4 < x < −3",
+      "Increasing on (−4, −3)"
+     ],
+     "tip": "The sign of f′ changes at each root. Test one point in each interval.",
+     "role": "concept",
+     "instance": "gen:aqmono:-4,-3,-1,0,1"
+    },
+    {
+     "title": "The local maximum or minimum value of a cubic",
+     "text": [
+      "At a local maximum f′ changes from + to − (f″ < 0 there); at a local minimum from − to + (f″ > 0).",
+      "Solve f′(x) = 0, decide which root is the maximum and which the minimum (first or second derivative test), then substitute that x into f."
+     ],
+     "math": [
+      "Find the local minimum value of f(x) = 2x³ + 9x² + 12x − 3.",
+      "f′(x) = 0 at x = −2, −1",
+      "By the sign of f′ (or f″), the local minimum is at x = −1",
+      "f(−1) = −8"
+     ]
+    },
+    {
+     "title": "Absolute maximum and minimum on a closed interval",
+     "text": [
+      "A continuous function on a closed interval has an absolute maximum and minimum, and they occur either at a turning point inside or at an end point.",
+      "Find the critical points inside [p, q]; evaluate f there and at p and q; the largest value is the absolute maximum, the smallest the absolute minimum."
+     ],
+     "math": [
+      "Find the absolute minimum value of f(x) = 2x³ − 3x² − 12x on the interval [−3, 1].",
+      "Turning points inside the interval: x = −1",
+      "f at the end points and turning points: −45, −13, 7",
+      "The least of these is −45"
+     ]
+    },
+    {
+     "title": "Rates of change of related quantities",
+     "text": [
+      "If a quantity Q depends on x and x changes with time, then dQ/dt = (dQ/dx) × (dx/dt): the rates are linked by the chain rule.",
+      "Write the formula linking the quantities, differentiate both sides with respect to t, then substitute the values at the moment asked about."
+     ],
+     "math": [
+      "The total revenue, in rupees, from selling x items is R(x) = 4x² + 8x. Find the marginal revenue, in rupees per item, when x = 12.",
+      "Differentiate with respect to time (chain rule): MR = dR/dx",
+      "Substitute the values: 104"
+     ]
+    },
+    {
+     "title": "Classifying a critical point by the second-derivative test",
+     "text": [
+      "At a critical point c (f′(c) = 0): if f″(c) < 0 the graph bends downward there, so c is a local maximum; if f″(c) > 0 it bends upward, a local minimum; if f″(c) = 0 the test gives no conclusion.",
+      "Differentiate twice, substitute the critical point into f″, and read the sign. If f″(c) = 0, say the test fails and use the first-derivative test instead."
+     ],
+     "math": [
+      "For f(x) = x + 16/x, x = −4 is a critical point (f′(−4) = 0). What does the second-derivative test say about x = −4?",
+      "f″(x) = 32/x³",
+      "At x = −4, f″ = −0.5",
+      "So: f″ < 0, so f has a local maximum at this point"
+     ]
+    },
+    {
+     "title": "Tangents and normals to a curve, and the angle between two curves",
+     "text": [
+      "The tangent at a point has slope dy/dx there; the normal is perpendicular to it, with slope −1/(dy/dx). The angle between two curves where they meet is the angle between their tangents there.",
+      "Find the point (x₁, y₁) and the slope m = f′(x₁). Tangent: y − y₁ = m(x − x₁); normal: y − y₁ = −(1/m)(x − x₁). For two curves, find both slopes m₁, m₂ at the meeting point and use tan θ = |(m₁ − m₂)/(1 + m₁m₂)|."
+     ],
+     "math": [
+      "Find the equation of the tangent to the curve y = −2x² − 3x − 4 at the point where x = 1. Write it as y = mx + k and type the right-hand side.",
+      "At x = 1, y = −9",
+      "dy/dx at x = 1 is −7",
+      "y − y₁ = m(x − x₁) with slope −7: y = −7x − 2"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:aqmono:-4,-3,1,0,2",
+    "gen:aqmono:-4,1,-1,1,1",
+    "gen:aqmono:-2,3,1,0,3"
+   ],
+   "strategies": [
+    {
+     "id": "sign_chart",
+     "title": "Make a sign chart",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Roots of f′, then test intervals",
+       "text": [
+        "Find the roots of f′(x) = 0. They divide the number line into intervals. Test one x in each interval: if f′(x) > 0 there, f is increasing; if f′(x) < 0, f is decreasing."
+       ],
+       "math": [
+        "Find the interval(s) on which f(x) = −2x³ − 12x² − 1 is strictly decreasing. Write open intervals, joined by ∪ if there are two (for example (−∞, p) ∪ (q, ∞)).",
+        "f′(x) = −6x(x + 4)",
+        "f′(x) = 0 at x = −4, 0",
+        "Test the sign of f′ on each side of the roots: f′ < 0 on (−∞, −4) ∪ (0, ∞)"
+       ],
+       "role": "worked-example",
+       "instance": "gen:aqmono:-4,0,-1,1,-1"
+      }
+     ],
+     "guided": "gen:aqmono:-3,1,-1,1,-1",
+     "check": "gen:aqmono:-3,1,-1,1,-3"
+    },
+    {
+     "id": "derivative_sign",
+     "title": "Why the sign of f′ matters",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Positive slope vs negative slope",
+       "text": [
+        "f′(x) is the slope of the tangent. Positive slope: the graph goes up (increasing). Negative slope: the graph goes down (decreasing). Zero slope: a local maximum or minimum."
+       ],
+       "role": "strategy",
+       "instance": "gen:aqmono:-4,-3,-1,0,1"
+      }
+     ],
+     "guided": "gen:aqmono:-2,0,-1,1,0",
+     "check": "gen:aqmono:-3,1,-1,1,-2:mc"
+    },
+    {
+     "id": "factorise_derivative",
+     "title": "Factorising the derivative",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Factor out the leading coefficient",
+       "text": [
+        "−6x² − 42x − 72: factor out −6 to get −6(x² + 7x + 12), then factorise the quadratic: −6(x + 3)(x + 4). The roots are x = −3 and x = −4."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:aqmono:-3,0,-1,0,3",
+     "check": "gen:aqmono:-2,-1,1,1,1"
+    }
+   ],
+   "practice": [
+    "gen:aqmono:-2,0,-1,1,1",
+    "gen:aqmono:1,4,1,0,-3:mc",
+    "gen:aqmono:1,2,-1,0,-1",
+    "gen:aqext:1,4,-1,0,9",
+    "gen:aqabs:-3,-1,-4,1,1",
+    "gen:aqrr:2,4,2,1",
+    "gen:aqd2test:0,2,5,1,0",
+    "gen:aqtann:1,1,0,3,1,0"
+   ],
+   "transfer": [
+    "gen:aqmono:1,4,1,0,-2:mc",
+    "gen:aqmono:1,2,-1,0,-2:w"
+   ],
+   "retention": [
+    "gen:aqmono:-3,0,-1,0,2",
+    "gen:aqext:-2,0,-1,0,-2:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aqmono",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "aqmono",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aqext",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aqabs",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aqrr",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aqd2test",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aqtann",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "aqmono",
+    "seed": [
+     -4,
+     -3,
+     -1,
+     0,
+     1
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aqmono:-4,-3,-1,0,1",
+     "gen:aqmono:-4,0,-1,1,-1"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.calculus.differential-equations",
+   "title": "Separating the variables",
+   "chapter": [
+    {
+     "title": "Put y on one side, x on the other",
+     "text": [
+      "When dy/dx = g(x) × h(y), separate the variables: move all y terms (including dy) to one side and all x terms (including dx) to the other. Then integrate both sides."
+     ],
+     "math": [
+      "dy/dx = (−4x − 3)y",
+      "dy/y = (−4x − 3) dx",
+      "∫ dy/y = ∫ (−4x − 3) dx",
+      "ln|y| = −2x² − 3x + C",
+      "y(0) = 1 → C = 0 → y = e^(−2x² − 3x)"
+     ],
+     "tip": "After separating and integrating, use the initial condition to find C.",
+     "role": "concept",
+     "instance": "gen:aqsep:0,-4,-3,1"
+    },
+    {
+     "title": "The order and degree of a differential equation",
+     "text": [
+      "The order is that of the highest derivative in the equation; the degree (defined when the equation is a polynomial in the derivatives) is the power of that highest derivative.",
+      "Find the derivative with the most dashes (the largest k in dᵏy/dxᵏ): that k is the order. Its power is the degree; powers of lower derivatives do not matter."
+     ],
+     "math": [
+      "Find the order and the degree of the differential equation (dy/dx)² − y⁶ = eˣ. Write the answer as (order, degree).",
+      "The highest derivative is dy/dx: order 1",
+      "It appears to the power 2: degree 2"
+     ]
+    },
+    {
+     "title": "A linear differential equation with an integrating factor",
+     "text": [
+      "For dy/dx + Py = Q, multiplying by the integrating factor e^(∫P dx) turns the left side into the derivative of y × IF.",
+      "Find IF = e^(∫P dx) (here xᵏ), write y × IF = ∫ Q × IF dx + C, divide by IF, and use the initial condition for C."
+     ],
+     "math": [
+      "Solve dy/dx + 2y/x = 5x², x > 0, given that y = 2 when x = 1. Write y in terms of x.",
+      "Integrating factor: e^(∫2/x dx) = x²",
+      "Multiply through and integrate: y·x² = x⁵ + C",
+      "Use y(1) = 2: y = x³ + 1/x²"
+     ]
+    },
+    {
+     "title": "Ordinary or partial, linear or non-linear: classifying a differential equation",
+     "text": [
+      "An ordinary differential equation has one independent variable (derivatives d/dx); a partial one has several (∂/∂x, ∂/∂y). It is linear when the unknown and its derivatives appear only to the first power, are not multiplied together and are not inside functions such as sin or e^( ).",
+      "First look at the derivative signs: d means ordinary, ∂ means partial. Then check every term containing the unknown: a square, a product of the unknown with a derivative, or a function of the unknown makes it non-linear; coefficients that depend only on x do not."
+     ],
+     "math": [
+      "Is the differential equation x ∂u/∂x + y ∂u/∂y = 4u (u is the unknown function) ordinary or partial?",
+      "partial derivatives ∂: partial",
+      "So the answer is option B"
+     ]
+    },
+    {
+     "title": "dy/dx = f(ax + y + c) by a substitution that separates the variables",
+     "text": [
+      "When dy/dx is a function of one combination v = ax + y + c, that combination is the natural new unknown: dv/dx = a + dy/dx depends on v alone, so the variables separate.",
+      "Put v = mx + y + c, so dy/dx = dv/dx − m. Rewrite the equation as dv/dx = g(v), separate and integrate (here ∫ dv/(v² + k²) = (1/k) tan⁻¹(v/k)), use the starting value, and finally write y = v − mx − c."
+     ],
+     "math": [
+      "Solve dy/dx = (−3x + y − 2)² + 7, given that y = 2 when x = 0, by a substitution that makes the variables separable. Write y in terms of x.",
+      "Put v = −3x + y − 2: dv/dx = −3 + dy/dx = v² + 4",
+      "Separate: dv/(v² + 4) = dx, so (1/2) tan⁻¹(v/2) = x + C",
+      "Use the starting value and go back to y: y = 2tan(2x) + 3x + 2"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:aqsep:0,-4,0,4",
+    "gen:aqsep:1,2,0,2",
+    "gen:aqsep:0,4,1,4"
+   ],
+   "strategies": [
+    {
+     "id": "separate_integrate",
+     "title": "Separate, integrate, solve for C",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Three steps",
+       "text": [
+        "Step 1: rewrite as (1/h(y)) dy = g(x) dx. Step 2: integrate both sides. Step 3: use the initial condition y(x₀) = y₀ to find the constant C. Step 4: solve for y if possible."
+       ],
+       "math": [
+        "Solve the differential equation dy/dx = (−3x − 1)y, given that y = 2 when x = 0. Write y in terms of x.",
+        "Separate the variables: dy/y = (−3x − 1) dx",
+        "Integrate both sides: log y = −3x²/2 − x + C",
+        "Use y = 2 at the starting point to find the constant: y = 2e^(−3x²/2 − x)"
+       ],
+       "role": "worked-example",
+       "instance": "gen:aqsep:0,-3,-1,2"
+      }
+     ],
+     "guided": "gen:aqsep:0,-3,-1,1",
+     "check": "gen:aqsep:1,2,0,4"
+    },
+    {
+     "id": "why_separate",
+     "title": "Why separation works",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Each side depends on one variable only",
+       "text": [
+        "After separation, the left side depends only on y and the right only on x. Each side integrates independently. The two constants of integration combine into one C."
+       ],
+       "role": "strategy",
+       "instance": "gen:aqsep:0,-4,-3,1"
+      }
+     ],
+     "guided": "gen:aqsep:0,-2,1,2",
+     "check": "gen:aqsep:0,-3,-1,5:mc"
+    },
+    {
+     "id": "log_integral",
+     "title": "∫ dy/y = ln|y|",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The integral of 1/y",
+       "text": [
+        "∫ 1/y dy = ln|y| + C. This is the reverse of d/dx[ln x] = 1/x. To go from ln|y| = f(x) + C to y, exponentiate: y = ±e^(f(x)+C) = Ae^(f(x))."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:aqsep:0,-2,1,1",
+     "check": "gen:aqsep:1,2,0,5"
+    }
+   ],
+   "practice": [
+    "gen:aqsep:0,-4,0,1",
+    "gen:aqsep:0,-4,0,2:mc",
+    "gen:aqsep:1,2,0,1",
+    "gen:aqorddeg:4,3,4,1",
+    "gen:aqlinde:2,5,2,3",
+    "gen:aqdecl:15,3",
+    "gen:aqsubsep:-2,-3,1,-1"
+   ],
+   "transfer": [
+    "gen:aqsep:0,-4,0,3:mc",
+    "gen:aqsep:0,4,1,1:w"
+   ],
+   "retention": [
+    "gen:aqsep:0,-3,-1,3",
+    "gen:aqorddeg:3,4,2,2:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aqsep",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "aqsep",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aqorddeg",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aqlinde",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aqdecl",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aqsubsep",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "aqsep",
+    "seed": [
+     0,
+     -4,
+     -3,
+     1
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aqsep:0,-4,-3,1",
+     "gen:aqsep:0,-3,-1,2"
+    ]
+   }
+  },
+  {
    "competency": "MATH.algebra.quadratics",
    "title": "Solving a quadratic by factorising",
    "chapter": [
@@ -12927,243 +14121,6 @@
      "gen:surd:24",
      "gen:surd:99",
      "gen:surd:96"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.algebra.linear-rational",
-   "title": "Solving a linear equation with negative numbers",
-   "chapter": [
-    {
-     "title": "Solving a linear equation with negative numbers",
-     "text": [
-      "An equation is a balance: doing the same to both sides keeps it true. With negative numbers, the inverse of adding −5 is subtracting −5, which is adding 5."
-     ],
-     "math": [
-      "Solve 5x − 5 = 40.",
-      "Add 5 to both sides (this undoes the −5): 40 + 5 = 45",
-      "Divide both sides by 5: 45 ÷ 5 = 9"
-     ],
-     "widget": {
-      "type": "balance",
-      "left": "5x − 5",
-      "right": "40"
-     },
-     "tip": "−5 was moved to the other side without changing its sign: subtracting −5 from 40 gives 45.",
-     "role": "concept",
-     "instance": "gen:lneg:5,-5,9"
-    },
-    {
-     "title": "Word problems that lead to a linear equation",
-     "text": [
-      "A word problem becomes an equation when the unknown gets a letter and each sentence is written in symbols. Solving the equation and checking the answer in the story finishes the problem.",
-      "Let x be what is asked. Write the other quantities with x (mother's age kx, next multiple x + k, length x + k). Write the fact the story gives as an equation, solve it, and check in the words of the story."
-     ],
-     "math": [
-      "The sum of three consecutive multiples of 7 is 147. What is the smallest of them?",
-      "Let x be the unknown; the story gives x + (x + 7) + (x + 14) = 147",
-      "Solve the equation: x = 42 (the smallest multiple)"
-     ]
-    },
-    {
-     "title": "An equation with fractions of x",
-     "text": [
-      "Multiplying every term on both sides by the same number keeps an equation true; choosing the least common multiple of the denominators clears all the fractions.",
-      "Find the LCM of the denominators, multiply every term by it, collect the x terms, then divide."
-     ],
-     "math": [
-      "Solve x/4 + x/5 = 54. What is x?",
-      "Multiply every term by 20: the right side becomes 1080",
-      "The left side becomes 5x + 4x = 9x",
-      "x = 1080 ÷ 9 = 120"
-     ]
-    },
-    {
-     "title": "An equation with x on both sides",
-     "text": [
-      "An equation stays balanced when the same thing is added to or taken from both sides, including a number of x's.",
-      "Take the smaller x term from both sides so x is on one side only, move the numbers to the other side, then divide by the coefficient of x. Check by substituting."
-     ],
-     "math": [
-      "Solve 9x + 15 = −x − 15.",
-      "Take −x from both sides: 10x on the left",
-      "Take 15 from both sides: −15 − 15 = −30 on the right",
-      "x = −30 ÷ 10 = −3"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:lneg:-2,10,3",
-    "gen:lneg:5,5,-2",
-    "gen:lneg:-3,-12,12"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [
-      "gen:aiint:40,-5,1"
-     ],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Undo the constant term (subtract it from both sides, with its sign), then divide both sides by the coefficient (watch the sign rules). Check by substituting."
-       ],
-       "math": [
-        "Solve −6x + 3 = 51.",
-        "Subtract 3 from both sides: 51 − 3 = 48",
-        "Divide both sides by −6: 48 ÷ −6 = −8"
-       ],
-       "widget": {
-        "type": "balance",
-        "left": "−6x + 3",
-        "right": "51"
-       },
-       "role": "worked-example",
-       "instance": "gen:lneg:-6,3,-8"
-      }
-     ],
-     "guided": "gen:lneg:-3,3,-6",
-     "check": "gen:lneg:3,-11,2"
-    },
-    {
-     "id": "number_line_check",
-     "title": "Check signs on a number line",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Check signs on a number line",
-       "text": [
-        "Before moving a term, say what it does: “+ (−7)” moves 7 to the left.",
-        "Undoing it moves 7 to the right: add 7 to both sides."
-       ],
-       "math": [
-        "Solve −4x − 10 = 22.",
-        "Add 10 to both sides (this undoes the −10): 22 + 10 = 32",
-        "Divide both sides by −4: 32 ÷ −4 = −8"
-       ],
-       "widget": {
-        "type": "numberline",
-        "from": -2,
-        "to": 34,
-        "step": 1,
-        "jumps": [
-         [
-          22,
-          32
-         ]
-        ]
-       },
-       "role": "strategy",
-       "instance": "gen:lneg:-4,-10,-8"
-      }
-     ],
-     "guided": "gen:lneg:-9,15,-1",
-     "check": "gen:lneg:-3,-12,10:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:lneg:-2,8,5",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Solve −2x + 8 = −2.” A common wrong answer is −3.",
-        "8 was moved to the other side without changing its sign: subtracting 8 from −2 gives −10."
-       ],
-       "math": [
-        "Not −3, but 5"
-       ]
-      }
-     ],
-     "guided": "gen:lneg:-4,2,-4",
-     "check": "gen:lneg:-5,11,-9:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Add and subtract integers; Multiply integers using sign rules. If a step is slow, practise that skill first.",
-        "Then the method is: Undo the constant term (subtract it from both sides, with its sign), then divide both sides by the coefficient (watch the sign rules). Check by substituting."
-       ]
-      }
-     ],
-     "guided": "gen:lneg:-2,-10,-8",
-     "check": "gen:lneg:3,-1,4"
-    }
-   ],
-   "practice": [
-    "gen:lneg:-7,8,4",
-    "gen:lneg:-6,4,-6:mc",
-    "gen:lneg:-1,3,-7",
-    "gen:aelinw:2,5,10",
-    "gen:ahfrac:4,9,2,0",
-    "gen:ahboth:3,6,7,4"
-   ],
-   "transfer": [
-    "gen:lneg:4,13,-5:w",
-    "gen:aelinw:1,6,6:w",
-    "gen:ahfrac:5,6,2,0:w"
-   ],
-   "retention": [
-    "gen:lneg:-1,-11,-12",
-    "gen:aelinw:2,5,11:mc"
-   ],
-   "probes": [
-    "gen:aiint:40,-5,1"
-   ],
-   "pool": {
-    "family": "lneg",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "lneg",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aelinw",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahfrac",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahboth",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "lneg",
-    "seed": [
-     5,
-     -5,
-     9
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:lneg:5,-5,9",
-     "gen:lneg:-2,8,5",
-     "gen:lneg:-6,3,-8"
     ]
    }
   },
@@ -52683,268 +53640,6 @@
    }
   },
   {
-   "competency": "MATH.algebra.functions",
-   "title": "The domain of a real function",
-   "chapter": [
-    {
-     "title": "The domain of a real function",
-     "text": [
-      "The domain of a real function is every real x for which the formula gives a real number: what is under a square root must be ≥ 0, and a denominator must not be 0."
-     ],
-     "math": [
-      "Find the domain of the real function f(x) = √(3x − 3). Write it in interval notation.",
-      "The quantity under the root must be non-negative: 3x − 3 ≥ 0",
-      "Solve the condition: x ∈ [1, ∞)"
-     ],
-     "tip": "x = 1 was left out; √0 = 0 is a real number, so the end point belongs to the domain.",
-     "role": "concept",
-     "instance": "gen:aodom:0,3,-3"
-    },
-    {
-     "title": "The range of a quadratic function",
-     "text": [
-      "Writing f(x) = a(x − h)² + k shows the range: (x − h)² takes every value ≥ 0, so f takes every value from k upwards when a > 0, and from k downwards when a < 0.",
-      "Complete the square (or find the vertex at x = −b/(2a)), work out k = f(h), and write [k, ∞) or (−∞, k]."
-     ],
-     "math": [
-      "Find the range of f : ℝ → ℝ, f(x) = 3x² − 12x + 13. Write it in interval notation.",
-      "Complete the square: f(x) = 3(x − 2)² + 1",
-      "The square is never negative, so the least value is f(2) = 1"
-     ]
-    },
-    {
-     "title": "Is a quadratic on a restricted domain one-one, onto, both or neither?",
-     "text": [
-      "One-one: f(x₁) = f(x₂) only when x₁ = x₂. Onto: every element of the codomain is f(x) for some x in the domain. For a quadratic both depend on where the domain starts compared with the vertex.",
-      "Complete the square to find the vertex (h, c). If the domain [d, ∞) starts at or to the right of h, f only increases (one-one) and its range is [f(d), ∞); otherwise f(d) = f(2h − d) and the range is [c, ∞). Compare the range with the codomain."
-     ],
-     "math": [
-      "Let f : [3, ∞) → [6, ∞) be given by f(x) = x² − 6x + 15. Which statement is true?",
-      "Complete the square: f(x) = (x − 3)² + 6, so the vertex is at x = 3",
-      "One-one (the domain starts at 3, not left of the vertex): yes",
-      "Onto (the range is [6, ∞); is every element of the codomain reached?): yes"
-     ]
-    },
-    {
-     "title": "Deciding whether a relation is a function",
-     "text": [
-      "A relation R from A to B is a function when every element of A has exactly one image in B. Two elements may share an image (many-one), but one element may not have two images, and none may be left without an image.",
-      "Go through A one element at a time and count its pairs in R. If every count is exactly 1, R is a function. On a graph this is the vertical line test: no vertical line through an element of A meets the graph twice."
-     ],
-     "math": [
-      "A = {−2, −1, 0, 1} and B = {1, 3, 5}. The picture shows the pairs (x, y) of a relation R from A to B as points; use the vertical line test. Is R a function from A to B?",
-      "Count the images of each element of A: No: an element of A has two or more images in B",
-      "So: No: an element of A has two or more images in B"
-     ]
-    },
-    {
-     "title": "Naming a function: one-one or many-one, onto or into, identity or constant",
-     "text": [
-      "f : A → B is one-one if different elements have different images, and many-one otherwise; it is onto if every element of B is an image, and into otherwise. On A → A, the identity sends each x to x, and a constant function sends every x to one value.",
-      "List the images f(a). Repeated images → many-one. Compare the set of images (the range) with B: equal → onto, smaller → into."
-     ],
-     "math": [
-      "A = {2, 3, 4, 5}, B = {2, 5, 8, 11} and f : A → B is the function f = {(2, 2), (3, 5), (4, 8), (5, 11)}. Which statement is true?",
-      "Checking images: f is one-one and onto (a bijection)",
-      "So: f is one-one and onto (a bijection)"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:aodom:4,4,5",
-    "gen:aodom:0,-2,2",
-    "gen:aodom:3,-5,2"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Write the condition (≥ 0, > 0 or ≠ 0), factorise any quadratic, decide the sign of each region between the roots, and write the answer in interval notation."
-       ],
-       "math": [
-        "Find the domain of the real function f(x) = √(3x − 1). Write it in interval notation.",
-        "The quantity under the root must be non-negative: 3x − 1 ≥ 0",
-        "Solve the condition: x ∈ [1/3, ∞)"
-       ],
-       "role": "worked-example",
-       "instance": "gen:aodom:0,3,-1"
-      }
-     ],
-     "guided": "gen:aodom:1,3,5",
-     "check": "gen:aodom:0,3,-7"
-    },
-    {
-     "id": "sign-chart",
-     "title": "A sign chart",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "A sign chart",
-       "text": [
-        "Mark the roots on a number line; they cut it into regions.",
-        "Pick one number in each region and find the sign of the quadratic there; keep the regions that meet the condition, and decide each end point separately."
-       ],
-       "math": [
-        "Find the domain of the real function f(x) = √(−x² − 8x − 12). Write it in interval notation.",
-        "Factorise: (x + 6)(x + 2)",
-        "Condition on (x − a)(x − b): ≤ 0",
-        "Solve the condition: x ∈ [−6, −2]"
-       ],
-       "widget": {
-        "type": "numberline",
-        "from": -9,
-        "to": 1,
-        "marks": [
-         -6,
-         -2
-        ]
-       },
-       "role": "strategy",
-       "instance": "gen:aodom:4,-6,-2"
-      }
-     ],
-     "guided": "gen:aodom:1,3,4",
-     "check": "gen:aodom:0,3,-6:mc"
-    },
-    {
-     "id": "test-points",
-     "title": "Test numbers in f",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Test numbers in f",
-       "text": [
-        "Try a few values of x in the formula: if you need the square root of a negative number, or divide by zero, x is not in the domain.",
-        "The boundary values are where the quantity is exactly 0: test them separately."
-       ],
-       "math": [
-        "Find the domain of the real function f(x) = √(−x² − 7x − 6). Write it in interval notation.",
-        "Factorise: (x + 6)(x + 1)",
-        "Condition on (x − a)(x − b): ≤ 0",
-        "Solve the condition: x ∈ [−6, −1]"
-       ],
-       "role": "strategy",
-       "instance": "gen:aodom:4,-6,-1"
-      }
-     ],
-     "guided": "gen:aodom:1,3,6",
-     "check": "gen:aodom:4,-6,-5"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:aodom:0,3,-2",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Find the domain of the real function f(x) = √(3x − 2). Write it in interval notation.” A common wrong answer is (2/3, ∞).",
-        "x = 2/3 was left out; √0 = 0 is a real number, so the end point belongs to the domain."
-       ],
-       "math": [
-        "Not (2/3, ∞), but [2/3, ∞)"
-       ]
-      }
-     ],
-     "guided": "gen:aodom:0,3,-9",
-     "check": "gen:aodom:4,-6,-4:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Solve linear inequalities. If a step is slow, practise that skill first.",
-        "Then the method is: Write the condition (≥ 0, > 0 or ≠ 0), factorise any quadratic, decide the sign of each region between the roots, and write the answer in interval notation."
-       ]
-      }
-     ],
-     "guided": "gen:aodom:0,3,-8",
-     "check": "gen:aodom:3,-4,-2"
-    }
-   ],
-   "practice": [
-    "gen:aodom:3,-5,-3",
-    "gen:aodom:3,-5,-2:mc",
-    "gen:aodom:4,-5,6",
-    "gen:aorange:-3,-5,-9",
-    "gen:aofclass:2,-1,0,0",
-    "gen:aoisfn:0,2,15",
-    "gen:aofname:0,0,20"
-   ],
-   "transfer": [
-    "gen:aodom:3,-5,-4:w",
-    "gen:aoisfn:2,1,3:w",
-    "gen:aofname:0,0,21:w"
-   ],
-   "retention": [
-    "gen:aodom:4,-6,-3",
-    "gen:aorange:3,0,-1:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "aodom",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "aodom",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aorange",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aofclass",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aoisfn",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aofname",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "aodom",
-    "seed": [
-     0,
-     3,
-     -3
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:aodom:0,3,-3",
-     "gen:aodom:0,3,-2",
-     "gen:aodom:0,3,-1"
-    ]
-   }
-  },
-  {
    "competency": "MATH.algebra.function-transformations",
    "title": "A point on a transformed graph",
    "chapter": [
@@ -54966,234 +55661,6 @@
      "gen:aoagp:4,3,1,4",
      "gen:aoagp:4,5,2,5",
      "gen:aoagp:7,5,3,4"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.algebra.logarithms",
-   "title": "Using the laws of logarithms: log N in terms of log 2 and log 3",
-   "chapter": [
-    {
-     "title": "Using the laws of logarithms: log N in terms of log 2 and log 3",
-     "text": [
-      "log(xy) = log x + log y, log(x/y) = log x − log y and log xⁿ = n log x. With log 10 = 1, log 5 = log(10/2) = 1 − log 2."
-     ],
-     "math": [
-      "Given log 2 = a and log 3 = b (logarithms to base 10), express log 6 in terms of a and b.",
-      "Write 6 with powers of 2, 3 and 5: 2¹ × 3¹ × 5⁰",
-      "log 5 = log(10/2) = 1 − a",
-      "log(xy) = log x + log y and log xⁿ = n log x give a + b"
-     ],
-     "role": "concept",
-     "instance": "gen:aologlaw:1,1,0"
-    },
-    {
-     "title": "Evaluating a logarithm by writing both numbers as powers of one base",
-     "text": [
-      "log_B X = y means Bʸ = X. If B = cⁱ and X = cʲ, then (cⁱ)ʸ = cʲ, so iy = j and y = j/i.",
-      "Write the base and the number as powers of the same prime, then divide the power of the number by the power of the base."
-     ],
-     "math": [
-      "Evaluate log₁₂₅ 3125.",
-      "Write both as powers of 5: 125 = 5³, 3125 = 5⁵",
-      "(c^3)^y = c^5 when 3y = 5, so the logarithm is 5/3"
-     ]
-    },
-    {
-     "title": "Solving log x + log(x ± c) = k",
-     "text": [
-      "log x + log y = log(xy), and log_B N = k means N = Bᵏ. A logarithm is only defined for positive numbers, so every root must be checked.",
-      "Combine the logs into one, rewrite as x(x ± c) = Bᵏ, solve the quadratic, and keep only roots that make both x and x ± c positive."
-     ],
-     "math": [
-      "Solve log₇ x + log₇(x − 6) = 1. Give every solution, separated by commas.",
-      "log x + log y = log(xy), and log_B(…) = 1 means … = 7¹: x(x − 6) = 7",
-      "Solve the quadratic: x = 7 or x = −1",
-      "Only x = 7 keeps both logarithms defined"
-     ]
-    },
-    {
-     "title": "Solving simple exponential equations by writing powers of one base",
-     "text": [
-      "If aᵐ = aⁿ with a > 0, a ≠ 1, then m = n. So an exponential equation whose two sides are powers of the same number becomes an ordinary equation in the powers.",
-      "Write each base as a power of one prime (9 = 3², 27 = 3³), use (cⁱ)ᵗ = c^(it) on the whole exponent, equate the exponents and solve."
-     ],
-     "math": [
-      "Solve 4^(x + 1) = 2^x.",
-      "Write both sides as powers of 2 and equate the powers: 2(x + 1) = 1x",
-      "x = −2"
-     ]
-    },
-    {
-     "title": "Change of base: products and sums of logarithms",
-     "text": [
-      "Change of base: log_a x = log x / log a (any base for both). So log_a b × log_b c = log_a c, and 1/log_a x = log_x a.",
-      "Rewrite each logarithm as a quotient of logarithms to one base, cancel what is common, then evaluate using powers of the same prime."
-     ],
-     "math": [
-      "Using the change of base rule, evaluate log₅ 3 × log₃ 25.",
-      "Change of base: log 3/log 5 × log 25/log 3 = log 25/log 5",
-      "So the value is 2"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:aologlaw:-1,3,2",
-    "gen:aologlaw:-1,3,-1",
-    "gen:aologlaw:2,0,-2"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Write the number as a product of powers of 2, 3 and 5 (a decimal is a whole number over a power of 10), take logs term by term, and replace log 5 by 1 − a."
-       ],
-       "math": [
-        "Given log 2 = a and log 3 = b (logarithms to base 10), express log 259.2 in terms of a and b.",
-        "Write 259.2 with powers of 2, 3 and 5: 2⁴ × 3⁴ × 5⁻¹",
-        "log 5 = log(10/2) = 1 − a",
-        "log(xy) = log x + log y and log xⁿ = n log x give 5a + 4b − 1"
-       ],
-       "role": "worked-example",
-       "instance": "gen:aologlaw:4,4,-1"
-      }
-     ],
-     "guided": "gen:aologlaw:5,2,0",
-     "check": "gen:aologlaw:-1,1,-2"
-    },
-    {
-     "id": "check",
-     "title": "Check with a calculator",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Check with a calculator",
-       "text": [
-        "log 2 ≈ 0.3010 and log 3 ≈ 0.4771.",
-        "Put these into your answer: it should match log of the number to four decimal places."
-       ],
-       "math": [
-        "Given log 2 = a and log 3 = b (logarithms to base 10), express log 21600 in terms of a and b.",
-        "Write 21600 with powers of 2, 3 and 5: 2⁵ × 3³ × 5²",
-        "log 5 = log(10/2) = 1 − a",
-        "log(xy) = log x + log y and log xⁿ = n log x give 3a + 3b + 2"
-       ],
-       "role": "strategy",
-       "instance": "gen:aologlaw:5,3,2"
-      }
-     ],
-     "guided": "gen:aologlaw:5,2,1",
-     "check": "gen:aologlaw:2,3,-1:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:aologlaw:4,4,-2",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Given log 2 = a and log 3 = b (logarithms to base 10), express log 51.84 in terms of a and b.” A common wrong answer is 2a + 2b.",
-        "log 5 was taken as log 2 + log 3, because 2 + 3 = 5; logs turn products into sums, and 5 = 10 ÷ 2, so log 5 = 1 − a."
-       ],
-       "math": [
-        "Not 2a + 2b, but 6a + 4b − 2"
-       ]
-      }
-     ],
-     "guided": "gen:aologlaw:-2,0,0",
-     "check": "gen:aologlaw:5,2,2:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Use integer exponent laws. If a step is slow, practise that skill first.",
-        "Then the method is: Write the number as a product of powers of 2, 3 and 5 (a decimal is a whole number over a power of 10), take logs term by term, and replace log 5 by 1 − a."
-       ]
-      }
-     ],
-     "guided": "gen:aologlaw:-2,0,1",
-     "check": "gen:aologlaw:-1,3,0"
-    }
-   ],
-   "practice": [
-    "gen:aologlaw:-2,0,2",
-    "gen:aologlaw:2,4,-1:mc",
-    "gen:aologlaw:3,0,1",
-    "gen:aolog:2,3,1",
-    "gen:aologeq:0,6,32,1",
-    "gen:aoexpeq:0,0,3,1,1,2",
-    "gen:aochb:0,1,5,1,4"
-   ],
-   "transfer": [
-    "gen:aologlaw:2,4,-2:mc",
-    "gen:aoexpeq:0,0,2,1,0,-3:w"
-   ],
-   "retention": [
-    "gen:aologlaw:1,1,2",
-    "gen:aolog:2,3,4:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "aologlaw",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "aologlaw",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aolog",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aologeq",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aoexpeq",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aochb",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "aologlaw",
-    "seed": [
-     1,
-     1,
-     0
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:aologlaw:1,1,0",
-     "gen:aologlaw:4,4,-2",
-     "gen:aologlaw:4,4,-1"
     ]
    }
   },
@@ -59172,283 +59639,6 @@
    }
   },
   {
-   "competency": "MATH.calculus.applications",
-   "title": "Intervals where a cubic is increasing or decreasing",
-   "chapter": [
-    {
-     "title": "Intervals where a cubic is increasing or decreasing",
-     "text": [
-      "f is strictly increasing where f′(x) > 0 and strictly decreasing where f′(x) < 0; the sign of f′ can only change at its roots."
-     ],
-     "math": [
-      "Find the interval(s) on which f(x) = 2x³ − 15x² + 24x − 3 is strictly increasing. Write open intervals, joined by ∪ if there are two (for example (−∞, p) ∪ (q, ∞)).",
-      "f′(x) = 6(x − 1)(x − 4)",
-      "f′(x) = 0 at x = 1, 4",
-      "Test the sign of f′ on each side of the roots: f′ > 0 on (−∞, 1) ∪ (4, ∞)"
-     ],
-     "widget": {
-      "type": "numberline",
-      "from": -2,
-      "to": 7,
-      "marks": [
-       1,
-       4
-      ]
-     },
-     "tip": "The two kinds of interval were swapped: f′(x) = 6(x − 1)(x − 4) is negative between the roots and positive outside them.",
-     "role": "concept",
-     "instance": "gen:aqmono:1,4,1,0,-3"
-    },
-    {
-     "title": "The local maximum or minimum value of a cubic",
-     "text": [
-      "At a local maximum f′ changes from + to − (f″ < 0 there); at a local minimum from − to + (f″ > 0).",
-      "Solve f′(x) = 0, decide which root is the maximum and which the minimum (first or second derivative test), then substitute that x into f."
-     ],
-     "math": [
-      "Find the local minimum value of f(x) = 2x³ + 9x² + 12x − 3.",
-      "f′(x) = 0 at x = −2, −1",
-      "By the sign of f′ (or f″), the local minimum is at x = −1",
-      "f(−1) = −8"
-     ]
-    },
-    {
-     "title": "Absolute maximum and minimum on a closed interval",
-     "text": [
-      "A continuous function on a closed interval has an absolute maximum and minimum, and they occur either at a turning point inside or at an end point.",
-      "Find the critical points inside [p, q]; evaluate f there and at p and q; the largest value is the absolute maximum, the smallest the absolute minimum."
-     ],
-     "math": [
-      "Find the absolute minimum value of f(x) = 2x³ − 3x² − 12x on the interval [−3, 1].",
-      "Turning points inside the interval: x = −1",
-      "f at the end points and turning points: −45, −13, 7",
-      "The least of these is −45"
-     ]
-    },
-    {
-     "title": "Rates of change of related quantities",
-     "text": [
-      "If a quantity Q depends on x and x changes with time, then dQ/dt = (dQ/dx) × (dx/dt): the rates are linked by the chain rule.",
-      "Write the formula linking the quantities, differentiate both sides with respect to t, then substitute the values at the moment asked about."
-     ],
-     "math": [
-      "The total revenue, in rupees, from selling x items is R(x) = 4x² + 8x. Find the marginal revenue, in rupees per item, when x = 12.",
-      "Differentiate with respect to time (chain rule): MR = dR/dx",
-      "Substitute the values: 104"
-     ]
-    },
-    {
-     "title": "Classifying a critical point by the second-derivative test",
-     "text": [
-      "At a critical point c (f′(c) = 0): if f″(c) < 0 the graph bends downward there, so c is a local maximum; if f″(c) > 0 it bends upward, a local minimum; if f″(c) = 0 the test gives no conclusion.",
-      "Differentiate twice, substitute the critical point into f″, and read the sign. If f″(c) = 0, say the test fails and use the first-derivative test instead."
-     ],
-     "math": [
-      "For f(x) = x + 16/x, x = −4 is a critical point (f′(−4) = 0). What does the second-derivative test say about x = −4?",
-      "f″(x) = 32/x³",
-      "At x = −4, f″ = −0.5",
-      "So: f″ < 0, so f has a local maximum at this point"
-     ]
-    },
-    {
-     "title": "Tangents and normals to a curve, and the angle between two curves",
-     "text": [
-      "The tangent at a point has slope dy/dx there; the normal is perpendicular to it, with slope −1/(dy/dx). The angle between two curves where they meet is the angle between their tangents there.",
-      "Find the point (x₁, y₁) and the slope m = f′(x₁). Tangent: y − y₁ = m(x − x₁); normal: y − y₁ = −(1/m)(x − x₁). For two curves, find both slopes m₁, m₂ at the meeting point and use tan θ = |(m₁ − m₂)/(1 + m₁m₂)|."
-     ],
-     "math": [
-      "Find the equation of the tangent to the curve y = −2x² − 3x − 4 at the point where x = 1. Write it as y = mx + k and type the right-hand side.",
-      "At x = 1, y = −9",
-      "dy/dx at x = 1 is −7",
-      "y − y₁ = m(x − x₁) with slope −7: y = −7x − 2"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:aqmono:-4,-3,1,0,2",
-    "gen:aqmono:-4,1,-1,1,1",
-    "gen:aqmono:-2,3,1,0,3"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Differentiate and factorise f′. Mark the roots on a number line, test one value of x in each part, and collect the parts with the sign you need."
-       ],
-       "math": [
-        "Find the interval(s) on which f(x) = −2x³ − 6x² + 18x − 1 is strictly decreasing. Write open intervals, joined by ∪ if there are two (for example (−∞, p) ∪ (q, ∞)).",
-        "f′(x) = −6(x + 3)(x − 1)",
-        "f′(x) = 0 at x = −3, 1",
-        "Test the sign of f′ on each side of the roots: f′ < 0 on (−∞, −3) ∪ (1, ∞)"
-       ],
-       "widget": {
-        "type": "numberline",
-        "from": -6,
-        "to": 4,
-        "marks": [
-         -3,
-         1
-        ]
-       },
-       "role": "worked-example",
-       "instance": "gen:aqmono:-3,1,-1,1,-1"
-      }
-     ],
-     "guided": "gen:aqmono:-2,0,-1,1,0",
-     "check": "gen:aqmono:-3,1,-1,1,-3"
-    },
-    {
-     "id": "sign_chart",
-     "title": "A sign chart",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "A sign chart",
-       "text": [
-        "Make a table with columns (−∞, α), (α, β), (β, ∞).",
-        "Write the sign of each factor of f′ in each column and multiply the signs."
-       ],
-       "math": [
-        "Find the interval(s) on which f(x) = −2x³ − 9x² + 3 is strictly increasing. Write open intervals, joined by ∪ if there are two (for example (−∞, p) ∪ (q, ∞)).",
-        "f′(x) = −6x(x + 3)",
-        "f′(x) = 0 at x = −3, 0",
-        "Test the sign of f′ on each side of the roots: f′ > 0 on (−3, 0)"
-       ],
-       "widget": {
-        "type": "numberline",
-        "from": -6,
-        "to": 3,
-        "marks": [
-         -3,
-         0
-        ]
-       },
-       "role": "strategy",
-       "instance": "gen:aqmono:-3,0,-1,0,3"
-      }
-     ],
-     "guided": "gen:aqmono:-2,0,-1,1,1",
-     "check": "gen:aqmono:-3,1,-1,1,-2:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:aqmono:-4,0,-1,1,-1",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Find the interval(s) on which f(x) = −2x³ − 12x² − 1 is strictly decreasing. Write open intervals, joined by ∪ if there are two (for example (−∞, p) ∪ (q, ∞)).” A common wrong answer is (−4, 0).",
-        "The negative leading coefficient was ignored: f′ opens downwards, so it is positive between the roots and negative outside them."
-       ],
-       "math": [
-        "Not (−4, 0), but (−∞, −4) ∪ (0, ∞)"
-       ]
-      }
-     ],
-     "guided": "gen:aqmono:1,2,-1,0,-1",
-     "check": "gen:aqmono:-2,-1,1,1,1:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Apply differentiation rules; Factor algebraic expressions. If a step is slow, practise that skill first.",
-        "Then the method is: Differentiate and factorise f′. Mark the roots on a number line, test one value of x in each part, and collect the parts with the sign you need."
-       ]
-      }
-     ],
-     "guided": "gen:aqmono:1,4,1,0,-2",
-     "check": "gen:aqmono:-3,4,-1,0,0"
-    }
-   ],
-   "practice": [
-    "gen:aqmono:1,2,-1,0,-2",
-    "gen:aqmono:1,2,-1,0,-3:mc",
-    "gen:aqmono:-4,-3,1,0,1",
-    "gen:aqext:1,4,-1,0,9",
-    "gen:aqabs:-3,-1,-4,1,1",
-    "gen:aqrr:2,4,2,1",
-    "gen:aqd2test:0,2,5,1,0",
-    "gen:aqtann:1,1,0,3,1,0"
-   ],
-   "transfer": [
-    "gen:aqmono:-2,4,-1,0,-3:w"
-   ],
-   "retention": [
-    "gen:aqmono:-3,0,-1,0,2",
-    "gen:aqext:-2,0,-1,0,-2:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "aqmono",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "aqmono",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aqext",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aqabs",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aqrr",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aqd2test",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aqtann",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "aqmono",
-    "seed": [
-     1,
-     4,
-     1,
-     0,
-     -3
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:aqmono:1,4,1,0,-3",
-     "gen:aqmono:-4,0,-1,1,-1",
-     "gen:aqmono:-3,1,-1,1,-1"
-    ]
-   }
-  },
-  {
    "competency": "MATH.calculus.continuity",
    "title": "Choosing k to make a function continuous",
    "chapter": [
@@ -60136,236 +60326,6 @@
      "gen:aqdiffab:1,-3,4",
      "gen:aqdiffab:1,-3,5",
      "gen:aqdiffab:-1,-5,-2"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.calculus.differential-equations",
-   "title": "Separating the variables in an initial value problem",
-   "chapter": [
-    {
-     "title": "Separating the variables in an initial value problem",
-     "text": [
-      "When dy/dx is a function of x times a function of y, the variables can be separated: dy/g(y) = f(x) dx, and each side integrated."
-     ],
-     "math": [
-      "Solve the differential equation dy/dx = −4xy, given that y = 1 when x = 0. Write y in terms of x.",
-      "Separate the variables: dy/y = −4x dx",
-      "Integrate both sides: log y = −2x² + C",
-      "Use y = 1 at the starting point to find the constant: y = e^(−2x²)"
-     ],
-     "tip": "The y on the right was ignored and only (px + q) was integrated; divide by y first: dy/y = (px + q) dx.",
-     "role": "concept",
-     "instance": "gen:aqsep:0,-4,0,1"
-    },
-    {
-     "title": "The order and degree of a differential equation",
-     "text": [
-      "The order is that of the highest derivative in the equation; the degree (defined when the equation is a polynomial in the derivatives) is the power of that highest derivative.",
-      "Find the derivative with the most dashes (the largest k in dᵏy/dxᵏ): that k is the order. Its power is the degree; powers of lower derivatives do not matter."
-     ],
-     "math": [
-      "Find the order and the degree of the differential equation (dy/dx)² − y⁶ = eˣ. Write the answer as (order, degree).",
-      "The highest derivative is dy/dx: order 1",
-      "It appears to the power 2: degree 2"
-     ]
-    },
-    {
-     "title": "A linear differential equation with an integrating factor",
-     "text": [
-      "For dy/dx + Py = Q, multiplying by the integrating factor e^(∫P dx) turns the left side into the derivative of y × IF.",
-      "Find IF = e^(∫P dx) (here xᵏ), write y × IF = ∫ Q × IF dx + C, divide by IF, and use the initial condition for C."
-     ],
-     "math": [
-      "Solve dy/dx + 2y/x = 5x², x > 0, given that y = 2 when x = 1. Write y in terms of x.",
-      "Integrating factor: e^(∫2/x dx) = x²",
-      "Multiply through and integrate: y·x² = x⁵ + C",
-      "Use y(1) = 2: y = x³ + 1/x²"
-     ]
-    },
-    {
-     "title": "Ordinary or partial, linear or non-linear: classifying a differential equation",
-     "text": [
-      "An ordinary differential equation has one independent variable (derivatives d/dx); a partial one has several (∂/∂x, ∂/∂y). It is linear when the unknown and its derivatives appear only to the first power, are not multiplied together and are not inside functions such as sin or e^( ).",
-      "First look at the derivative signs: d means ordinary, ∂ means partial. Then check every term containing the unknown: a square, a product of the unknown with a derivative, or a function of the unknown makes it non-linear; coefficients that depend only on x do not."
-     ],
-     "math": [
-      "Is the differential equation x ∂u/∂x + y ∂u/∂y = 4u (u is the unknown function) ordinary or partial?",
-      "partial derivatives ∂: partial",
-      "So the answer is option B"
-     ]
-    },
-    {
-     "title": "dy/dx = f(ax + y + c) by a substitution that separates the variables",
-     "text": [
-      "When dy/dx is a function of one combination v = ax + y + c, that combination is the natural new unknown: dv/dx = a + dy/dx depends on v alone, so the variables separate.",
-      "Put v = mx + y + c, so dy/dx = dv/dx − m. Rewrite the equation as dv/dx = g(v), separate and integrate (here ∫ dv/(v² + k²) = (1/k) tan⁻¹(v/k)), use the starting value, and finally write y = v − mx − c."
-     ],
-     "math": [
-      "Solve dy/dx = (−3x + y − 2)² + 7, given that y = 2 when x = 0, by a substitution that makes the variables separable. Write y in terms of x.",
-      "Put v = −3x + y − 2: dv/dx = −3 + dy/dx = v² + 4",
-      "Separate: dv/(v² + 4) = dx, so (1/2) tan⁻¹(v/2) = x + C",
-      "Use the starting value and go back to y: y = 2tan(2x) + 3x + 2"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:aqsep:0,-4,0,4",
-    "gen:aqsep:1,2,0,2",
-    "gen:aqsep:0,4,1,4"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Divide by y, integrate both sides (log y on the left, the natural logarithm), add one constant, exponentiate, and use the initial condition to find the constant."
-       ],
-       "math": [
-        "Solve the differential equation dy/dx = (−3x − 1)y, given that y = 1 when x = 0. Write y in terms of x.",
-        "Separate the variables: dy/y = (−3x − 1) dx",
-        "Integrate both sides: log y = −3x²/2 − x + C",
-        "Use y = 1 at the starting point to find the constant: y = e^(−3x²/2 − x)"
-       ],
-       "role": "worked-example",
-       "instance": "gen:aqsep:0,-3,-1,1"
-      }
-     ],
-     "guided": "gen:aqsep:0,-2,1,2",
-     "check": "gen:aqsep:1,2,0,4"
-    },
-    {
-     "id": "check",
-     "title": "Check by differentiating",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Check by differentiating",
-       "text": [
-        "Differentiate your y and see whether you get the right side of the equation.",
-        "Then put in the starting x and check you get the starting y."
-       ],
-       "math": [
-        "Solve the differential equation dy/dx = (−2x + 1)y, given that y = 1 when x = 0. Write y in terms of x.",
-        "Separate the variables: dy/y = (−2x + 1) dx",
-        "Integrate both sides: log y = −x² + x + C",
-        "Use y = 1 at the starting point to find the constant: y = e^(−x² + x)"
-       ],
-       "role": "strategy",
-       "instance": "gen:aqsep:0,-2,1,1"
-      }
-     ],
-     "guided": "gen:aqsep:0,-4,0,2",
-     "check": "gen:aqsep:0,-3,-1,5:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:aqsep:0,-3,-1,2",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Solve the differential equation dy/dx = (−3x − 1)y, given that y = 2 when x = 0. Write y in terms of x.” A common wrong answer is −3x²/2 − x + 2.",
-        "The y on the right was ignored and only (px + q) was integrated; divide by y first: dy/y = (px + q) dx."
-       ],
-       "math": [
-        "Not −3x²/2 − x + 2, but 2e^(−3x²/2 − x)"
-       ]
-      }
-     ],
-     "guided": "gen:aqsep:1,2,0,1",
-     "check": "gen:aqsep:1,2,0,5:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Find antiderivatives. If a step is slow, practise that skill first.",
-        "Then the method is: Divide by y, integrate both sides (log y on the left, the natural logarithm), add one constant, exponentiate, and use the initial condition to find the constant."
-       ]
-      }
-     ],
-     "guided": "gen:aqsep:0,-4,0,3",
-     "check": "gen:aqsep:0,-3,-1,4"
-    }
-   ],
-   "practice": [
-    "gen:aqsep:0,4,1,1",
-    "gen:aqsep:0,0,-1,1:mc",
-    "gen:aqsep:0,0,-1,3",
-    "gen:aqorddeg:4,3,4,1",
-    "gen:aqlinde:2,5,2,3",
-    "gen:aqdecl:15,3",
-    "gen:aqsubsep:-2,-3,1,-1"
-   ],
-   "transfer": [
-    "gen:aqsep:0,0,-1,2:w"
-   ],
-   "retention": [
-    "gen:aqsep:0,-3,-1,3",
-    "gen:aqorddeg:3,4,2,2:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "aqsep",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "aqsep",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aqorddeg",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aqlinde",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aqdecl",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aqsubsep",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "aqsep",
-    "seed": [
-     0,
-     -4,
-     0,
-     1
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:aqsep:0,-4,0,1",
-     "gen:aqsep:0,-3,-1,2",
-     "gen:aqsep:0,-3,-1,1"
     ]
    }
   },
@@ -68295,231 +68255,6 @@
      "gen:atmdmean:8,8,6,31,36,23",
      "gen:atmdmean:25,34,30,38,16,10",
      "gen:atmdmean:12,13,33,12,30,30"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.trigonometry.compound-angle-identities",
-   "title": "Exact values by compound-angle formulas",
-   "chapter": [
-    {
-     "title": "Exact values by compound-angle formulas",
-     "text": [
-      "sin(A ± B) = sin A cos B ± cos A sin B, cos(A ± B) = cos A cos B ∓ sin A sin B, tan(A ± B) = (tan A ± tan B)/(1 ∓ tan A tan B): angles like 75° or 165° come from standard ones."
-     ],
-     "math": [
-      "Use a compound-angle formula to find the exact value of sin(60° − 45°). Simplify fully, with no square root in the denominator.",
-      "sin 60°, cos 60° and sin 45°, cos 45°: √3/2, 1/2; √2/2, √2/2",
-      "Put them into the sin(A − B) formula and simplify: (√6 − √2)/4"
-     ],
-     "tip": "sin(A − B) was split as sin A − sin B; sin does not distribute over a sum, so use the compound-angle formula.",
-     "role": "concept",
-     "instance": "gen:atcomp:1,1,1,0"
-    },
-    {
-     "title": "Double-angle values from one ratio",
-     "text": [
-      "sin 2A = 2 sin A cos A, cos 2A = cos²A − sin²A, tan 2A = 2 tan A/(1 − tan²A); the quadrant fixes the sign of the ratio you work out.",
-      "Use sin²A + cos²A = 1 to find the other ratio, give it the sign of its quadrant, then substitute into the double-angle formula."
-     ],
-     "math": [
-      "Given sin A = 8/17 and π/2 < A < π, find sin 2A.",
-      "From sin²A + cos²A = 1 with the quadrant's sign: cos A = −15/17",
-      "sin 2A = 2 sin A cos A = −240/289"
-     ]
-    },
-    {
-     "title": "Products of sines and cosines as sums",
-     "text": [
-      "Adding sin(A + B) and sin(A − B) cancels the cos A sin B parts and leaves 2 sin A cos B; the other three product formulas come the same way.",
-      "Pick the formula for the product, put A = ax and B = bx, and write the angles A + B and A − B."
-     ],
-     "math": [
-      "Which of these is equal to 2 sin 9x cos x, written as a sum or difference of sines or cosines?",
-      "The angles are A + B = 10x and A − B = 8x: 2 sin 9x cos x = sin 10x + sin 8x",
-      "So the equal option is B"
-     ]
-    },
-    {
-     "title": "Simplifying with the compound-angle formulas",
-     "text": [
-      "Read the formulas backwards: sin A cos B ± cos A sin B = sin(A ± B); cos A cos B ∓ sin A sin B = cos(A ± B) (the sign flips); (tan A ± tan B)/(1 ∓ tan A tan B) = tan(A ± B).",
-      "Match the pattern: which functions appear, in which order, and with which sign between the products. Then write the single function of kx ± mx."
-     ],
-     "math": [
-      "Which of these is equal to cos 7x cos 3x − sin 7x sin 3x?",
-      "cos 7x cos 3x − sin 7x sin 3x = cos 10x",
-      "So the answer is C"
-     ]
-    },
-    {
-     "title": "Half-angle values from one ratio",
-     "text": [
-      "From cos A = 1 − 2 sin²(A/2) = 2 cos²(A/2) − 1: sin(A/2) = ±√((1 − cos A)/2), cos(A/2) = ±√((1 + cos A)/2), and tan(A/2) = sin A/(1 + cos A). The sign comes from the quadrant of A/2.",
-      "Find cos A (and sin A) with its quadrant's sign, substitute into the half-angle formula, choose the sign from where A/2 lies (0 < A/2 < π), and rationalise."
-     ],
-     "math": [
-      "Given sin A = 5/13 and π/2 < A < π, find sin(A/2). Give the exact value with no square root in the denominator.",
-      "From sin²A + cos²A = 1 with the quadrant's sign: cos A = −12/13",
-      "sin(A/2) = ±√((1 − cos A)/2) with the sign for A/2: 5√26/26"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:atcomp:4,4,0,1",
-    "gen:atcomp:14,0,0,0",
-    "gen:atcomp:6,4,1,2"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Write down sin and cos (or tan) of each angle, substitute into the formula, multiply out the surds and simplify; rationalise a tan answer."
-       ],
-       "math": [
-        "Use a compound-angle formula to find the exact value of cos(240° − 135°). Simplify fully, with no square root in the denominator.",
-        "sin 240°, cos 240° and sin 135°, cos 135°: −√3/2, −1/2; √2/2, −√2/2",
-        "Put them into the cos(A − B) formula and simplify: (√2 − √6)/4"
-       ],
-       "role": "worked-example",
-       "instance": "gen:atcomp:7,4,1,1"
-      }
-     ],
-     "guided": "gen:atcomp:7,4,1,0",
-     "check": "gen:atcomp:7,4,1,2"
-    },
-    {
-     "id": "unit_circle",
-     "title": "Check with the unit circle",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Check with the unit circle",
-       "text": [
-        "Locate A ± B on the unit circle: the quadrant tells you the sign of the answer.",
-        "For example cos(120° − 45°) = cos 75° must be positive and small (about 0.26)."
-       ],
-       "math": [
-        "Use a compound-angle formula to find the exact value of cos(240° + 135°). Simplify fully, with no square root in the denominator.",
-        "sin 240°, cos 240° and sin 135°, cos 135°: −√3/2, −1/2; √2/2, −√2/2",
-        "Put them into the cos(A + B) formula and simplify: (√6 + √2)/4"
-       ],
-       "role": "strategy",
-       "instance": "gen:atcomp:7,4,0,1"
-      }
-     ],
-     "guided": "gen:atcomp:7,4,0,2",
-     "check": "gen:atcomp:13,5,1,1:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:atcomp:1,1,1,1",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Use a compound-angle formula to find the exact value of cos(60° − 45°). Simplify fully, with no square root in the denominator.” A common wrong answer is (1 − √2)/2.",
-        "cos(A − B) was split as cos A − cos B; cos does not distribute over a sum, so use the compound-angle formula."
-       ],
-       "math": [
-        "Not (1 − √2)/2, but (√6 + √2)/4"
-       ]
-      }
-     ],
-     "guided": "gen:atcomp:14,0,1,2",
-     "check": "gen:atcomp:13,5,1,0:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Use trigonometric ratios. If a step is slow, practise that skill first.",
-        "Then the method is: Write down sin and cos (or tan) of each angle, substitute into the formula, multiply out the surds and simplify; rationalise a tan answer."
-       ]
-      }
-     ],
-     "guided": "gen:atcomp:14,0,1,1",
-     "check": "gen:atcomp:14,2,0,2"
-    }
-   ],
-   "practice": [
-    "gen:atcomp:1,4,1,2",
-    "gen:atcomp:14,0,1,0:mc",
-    "gen:atcomp:1,4,1,1",
-    "gen:atdbl:3,0,3,0",
-    "gen:atp2s:1,4,1",
-    "gen:atcsimp:4,5,1",
-    "gen:athalf:0,0,4,2"
-   ],
-   "transfer": [
-    "gen:atcomp:9,4,1,2:w"
-   ],
-   "retention": [
-    "gen:atcomp:7,4,0,0",
-    "gen:atdbl:2,0,3,2:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "atcomp",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "atcomp",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atdbl",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atp2s",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atcsimp",
-     "version": "1.0.0"
-    },
-    {
-     "family": "athalf",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "atcomp",
-    "seed": [
-     1,
-     1,
-     1,
-     0
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:atcomp:1,1,1,0",
-     "gen:atcomp:1,1,1,1",
-     "gen:atcomp:7,4,1,1"
     ]
    }
   },

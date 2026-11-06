@@ -1123,6 +1123,399 @@
    ]
   },
   {
+   "competency": "MATH.algebra.linear-rational",
+   "title": "Solving a linear equation with negative numbers",
+   "family": "lneg",
+   "seed": [-9, -20, 1],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Negative coefficients and constants",
+     "text": [
+      "When the coefficient of x or the constants are negative, the same method works: undo in reverse order. Pay extra attention to subtracting a negative (which adds) and dividing by a negative (which flips the sign of the answer)."
+     ],
+     "math": [
+      "−9x − 20 = −29",
+      "Add 20: −9x = −9",
+      "Divide by −9: x = 1"
+     ],
+     "tip": "−9 ÷ (−9) = 1: dividing two negatives gives a positive.",
+     "worked": true
+    }
+   ],
+   "strategies": [
+    {
+     "id": "same_both_sides",
+     "title": "Do the same to both sides",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Add or subtract, then divide",
+       "text": [
+        "Add or subtract the constant from both sides to isolate the x term. Then divide both sides by the coefficient. A negative divided by a negative is positive."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "negative_rules",
+     "title": "Signs when dividing",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Same signs → positive, different signs → negative",
+       "text": [
+        "When dividing (or multiplying): positive ÷ positive = positive, negative ÷ negative = positive, positive ÷ negative = negative. This decides the sign of x."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "integer_sub",
+     "title": "Subtracting negatives",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Subtracting a negative adds",
+       "text": [
+        "−20 − (−20) = −20 + 20 = 0. Two negatives in a row make a positive. If this is slow, practise integer arithmetic first."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.functions",
+   "title": "The domain of a real function",
+   "family": "aodom",
+   "seed": [0, -6, 0],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Where the formula works",
+     "text": [
+      "The domain is every real x for which the formula gives a real output. A square root needs a non-negative radicand; a denominator cannot be zero; a logarithm needs a positive argument."
+     ],
+     "math": [
+      "f(x) = √(−6x): need −6x ≥ 0, so x ≤ 0",
+      "Domain: (−∞, 0]"
+     ],
+     "tip": "Dividing by a negative reverses the inequality: −6x ≥ 0 becomes x ≤ 0."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "restriction_rules",
+     "title": "Three restrictions to check",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Square root, denominator, logarithm",
+       "text": [
+        "√(expression): set expression ≥ 0. 1/(expression): set expression ≠ 0. log(expression): set expression > 0. Solve the resulting inequality and write the domain in interval notation."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "interval_notation",
+     "title": "Writing interval notation",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Round bracket excludes, square bracket includes",
+       "text": [
+        "(a, b) means a < x < b. [a, b] means a ≤ x ≤ b. Use ∞ with a round bracket always: (−∞, 0] means x ≤ 0."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "inequality_solving",
+     "title": "Solving the inequality",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Flip when dividing by negative",
+       "text": [
+        "−6x ≥ 0: divide by −6, flip the sign: x ≤ 0. The sign reversal is the most common error in domain questions."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.logarithms",
+   "title": "Expressing log N in terms of log 2 and log 3",
+   "family": "aologlaw",
+   "seed": [-2, 0, -1],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Three laws of logarithms",
+     "text": [
+      "log(xy) = log x + log y (product), log(x/y) = log x − log y (quotient), log xⁿ = n log x (power). With log 2 = a and log 3 = b, express any number built from 2s, 3s and powers of 10."
+     ],
+     "math": [
+      "log 0.05 = log(1/20) = −log 20 = −log(4 × 5)",
+      "= −(log 4 + log 5) = −(2a + log(10/2))",
+      "= −(2a + 1 − a) = −a − 1"
+     ],
+     "tip": "Write the number as a product of 2s and 3s (and 10s): 0.05 = 1/20 = 1/(4 × 5) = 1/(2² × 10/2)."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "factorise_number",
+     "title": "Break the number into 2s and 3s",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Prime factorise, then apply the laws",
+       "text": [
+        "Write N as a product of powers of 2, 3 and 10. Then apply the product rule (log of a product = sum of logs) and the power rule (log of a power = power × log). Replace log 10 with 1."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "log_ten",
+     "title": "log 10 = 1",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "The base is 10",
+       "text": [
+        "log₁₀ 10 = 1 and log₁₀ 1 = 0. Use these to turn 5 into 10/2 (so log 5 = 1 − a) and 0.1 into 10⁻¹ (so log 0.1 = −1)."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "sign_of_log",
+     "title": "Log of a fraction is negative",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "log(1/N) = −log N",
+       "text": [
+        "Numbers between 0 and 1 have negative logarithms (base 10). log(0.05) is negative because 0.05 < 1. Use log(1/N) = −log N to handle decimals."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.trigonometry.compound-angle-identities",
+   "title": "Exact values by compound-angle formulas",
+   "family": "atcomp",
+   "seed": [0, 1, 0, 0],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "sin(A ± B) and cos(A ± B)",
+     "text": [
+      "sin(A + B) = sin A cos B + cos A sin B. cos(A + B) = cos A cos B − sin A sin B. Use these to find exact values of angles like 75° (= 30° + 45°) or 15° (= 45° − 30°)."
+     ],
+     "math": [
+      "sin(30° + 45°) = sin 30° cos 45° + cos 30° sin 45°",
+      "= (1/2)(√2/2) + (√3/2)(√2/2)",
+      "= √2/4 + √6/4 = (√6 + √2)/4"
+     ],
+     "tip": "Keep the formula's signs exactly: sin(A+B) has +, cos(A+B) has −."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "choose_split",
+     "title": "Choose how to split the angle",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Write as a sum or difference of standard angles",
+       "text": [
+        "75° = 30° + 45°, 15° = 45° − 30°, 105° = 60° + 45°. Choose the split that uses 30°, 45° or 60° so you can substitute exact values."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "sign_in_formula",
+     "title": "The signs in each formula",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "sin has same sign, cos has opposite sign",
+       "text": [
+        "sin(A + B) uses +, sin(A − B) uses −. cos(A + B) uses −, cos(A − B) uses +. The sign in cos is opposite to the sign between A and B."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "surd_multiply",
+     "title": "Multiplying surds",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "√a × √b = √(ab)",
+       "text": [
+        "(1/2)(√2/2) = √2/4. Multiply tops and bottoms. √2 × √3 = √6. Common denominators let you add: √2/4 + √6/4 = (√2 + √6)/4."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.calculus.applications",
+   "title": "Where a function is increasing or decreasing",
+   "family": "aqmono",
+   "seed": [-4, -3, -1, 0, 1],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "f′(x) > 0 means increasing",
+     "text": [
+      "A function is strictly increasing where its derivative is positive and strictly decreasing where its derivative is negative. Find f′(x), set it to zero to find critical points, then test the sign of f′ in each interval."
+     ],
+     "math": [
+      "f(x) = −2x³ − 21x² − 72x + 1",
+      "f′(x) = −6x² − 42x − 72 = −6(x² + 7x + 12) = −6(x + 3)(x + 4)",
+      "f′(x) > 0 when (x + 3)(x + 4) < 0, i.e. −4 < x < −3",
+      "Increasing on (−4, −3)"
+     ],
+     "tip": "The sign of f′ changes at each root. Test one point in each interval."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "sign_chart",
+     "title": "Make a sign chart",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Roots of f′, then test intervals",
+       "text": [
+        "Find the roots of f′(x) = 0. They divide the number line into intervals. Test one x in each interval: if f′(x) > 0 there, f is increasing; if f′(x) < 0, f is decreasing."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "derivative_sign",
+     "title": "Why the sign of f′ matters",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Positive slope vs negative slope",
+       "text": [
+        "f′(x) is the slope of the tangent. Positive slope: the graph goes up (increasing). Negative slope: the graph goes down (decreasing). Zero slope: a local maximum or minimum."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "factorise_derivative",
+     "title": "Factorising the derivative",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Factor out the leading coefficient",
+       "text": [
+        "−6x² − 42x − 72: factor out −6 to get −6(x² + 7x + 12), then factorise the quadratic: −6(x + 3)(x + 4). The roots are x = −3 and x = −4."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.calculus.differential-equations",
+   "title": "Separating the variables",
+   "family": "aqsep",
+   "seed": [0, -4, -3, 1],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Put y on one side, x on the other",
+     "text": [
+      "When dy/dx = g(x) × h(y), separate the variables: move all y terms (including dy) to one side and all x terms (including dx) to the other. Then integrate both sides."
+     ],
+     "math": [
+      "dy/dx = (−4x − 3)y",
+      "dy/y = (−4x − 3) dx",
+      "∫ dy/y = ∫ (−4x − 3) dx",
+      "ln|y| = −2x² − 3x + C",
+      "y(0) = 1 → C = 0 → y = e^(−2x² − 3x)"
+     ],
+     "tip": "After separating and integrating, use the initial condition to find C."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "separate_integrate",
+     "title": "Separate, integrate, solve for C",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Three steps",
+       "text": [
+        "Step 1: rewrite as (1/h(y)) dy = g(x) dx. Step 2: integrate both sides. Step 3: use the initial condition y(x₀) = y₀ to find the constant C. Step 4: solve for y if possible."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "why_separate",
+     "title": "Why separation works",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Each side depends on one variable only",
+       "text": [
+        "After separation, the left side depends only on y and the right only on x. Each side integrates independently. The two constants of integration combine into one C."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "log_integral",
+     "title": "∫ dy/y = ln|y|",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "The integral of 1/y",
+       "text": [
+        "∫ 1/y dy = ln|y| + C. This is the reverse of d/dx[ln x] = 1/x. To go from ln|y| = f(x) + C to y, exponentiate: y = ±e^(f(x)+C) = Ae^(f(x))."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
    "competency": "MATH.algebra.quadratics",
    "title": "Solving a quadratic by factorising",
    "family": "quad",
