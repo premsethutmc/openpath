@@ -325,6 +325,8 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
     if (confirm === "two-fresh") return run.length >= 2;
     // tuning seeds 1-5 (phase 3): exempting episodes with a lesson let lucky typed answers through (6/10 typed-guesser runs), so
     // only an unhelped slip by a learner whose skill was shown before the episode is confirmed by one typed answer
+    // phase 6: a first try under a first-try policy is never its own confirmation: at least one fresh answer besides it
+    if (firstCounts && run.length < 2) return false;
     if (confirm === "selective") return run.length >= 2 || (run.length === 1 && !isChoice(run[0].questionId) && !helped && ownShownBefore);
     return true; // current: reading(own) already required a typed right or two
   };
