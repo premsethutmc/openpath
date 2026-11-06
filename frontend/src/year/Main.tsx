@@ -42,8 +42,10 @@ declare const OPENPATH_REVIEW_FIXTURE: boolean;
 if (typeof OPENPATH_REVIEW_FIXTURE !== "undefined" && OPENPATH_REVIEW_FIXTURE) useReviewFixture({ items: questions.map((q) => q.id), releasedAt: "2020-01-01T00:00:00Z", all: true }); // generated questions too (the dashboard's test build reads the same)
 
 const api = new Api();
-/** deep-recovery@0 (research): false in every shipped build (deep-recovery-flag.ts) */
-const DEEP = deepRecoveryOn();
+/** deep-recovery@0 (research): false in every shipped build (deep-recovery-flag.ts). The build constant is read here directly so
+ *  that a shipped (minified) bundle folds DEEP to false and drops the research view and its code. */
+declare const OPENPATH_DEEP_RECOVERY: boolean;
+const DEEP = typeof OPENPATH_DEEP_RECOVERY !== "undefined" && OPENPATH_DEEP_RECOVERY === true && deepRecoveryOn();
 const uid = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 /** Problems a learner may bring when stuck (a class or coaching problem): opened by the learner, never pushed. */
 const STUCK = questions.filter((q) => q.role === "original");
