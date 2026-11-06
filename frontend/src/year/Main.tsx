@@ -33,6 +33,7 @@ import { Icon } from "./icons";
 import { Module, Recovery, Single, STATUS_WORD, type Ctx } from "./Learn";
 import { DeepRecovery } from "./DeepRecovery";
 import { deepRecoveryOn } from "./deep-recovery-flag";
+import { RecoveryAnswersPermission } from "./RecoveryAnswersPermission";
 import { openDeepRecoveries } from "../learning/deep-recovery-app";
 import "../mathematics/chapter/chapter.css";
 import "./year.css";
@@ -540,6 +541,8 @@ function App() {
         )}
       </section>
       <WrittenWork records={st.records} learner={learner} />
+      {/* recovery-handoff@0 hook (worker D, research build only; hidden when the server switch is off) */}
+      {DEEP && <RecoveryAnswersPermission learner={learner} />}
       <div className="section-title"><h2>Your years</h2></div>
       <div className="actions">
         <button className="secondary" onClick={() => setView({ name: "years" })}>Earlier years</button>

@@ -60,8 +60,8 @@ export function DeepRecovery({ original, ctx, onExit, exitLabel = "Back to the y
       <div className={`feedback ${good ? "good" : s.phase === "pause" ? "" : "bad"}`} role="status">
         <strong>{s.title}</strong>
         <p>{s.reason}</p>
-        {/* recovery-handoff@0 hook (worker D): the same note until the server confirms a hand-off */}
-        {s.handover && <DeepRecoveryHandoff original={original} screen={s} learner={learner} />}
+        {/* recovery-handoff@0 hook (worker D): the same note until the server confirms a hand-off; a routine pause says nothing was sent */}
+        {(s.handover || s.phase === "pause") && <DeepRecoveryHandoff original={original} screen={s} learner={learner} records={ctx.records} />}
       </div>
       <button className="secondary wide" onClick={onExit}>{exitLabel}</button>
     </div>

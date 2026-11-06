@@ -6,7 +6,8 @@
  *   HANDOFF_MANAGE="python3 backend/manage.py" node --import tsx e2e/deep-recovery-handoff.test.mts
  * Cases: a blocked stop before any share (the learner is told no educator can see it), the parent shares and the same stop is reported
  * again (one item), a no-fresh-question stop, the shared educator's list in Content review → Marking, another educator's empty list, the
- * learner's account refused the list, resolution with a note, and the learner's stop screen showing it. Synthetic accounts only.
+ * learner's account refused the list, the educator seeing skill/reason/step only until the parent's SEPARATE recovery-answers permission
+ * (granted, then revoked), resolution with a note, and the learner's stop screen showing it. Synthetic accounts only.
  */
 import { createRequire } from "node:module";
 import http from "node:http";
@@ -166,7 +167,35 @@ try {
   assert.match(body, /OpenPath has no fresh question on the same skill/);
   assert.match(body, /Nobody is emailed or messaged/);
   assert.doesNotMatch(body, /Synthetic handoff|handoff-parent/i, "no display name, no parent email");
+  // without the parent's separate permission: the skill, the reason and the step only; no answers, no learner text
+  assert.equal(await teacher.locator("[data-answers=not-shared]").count(), 2);
+  assert.doesNotMatch(body, /What the learner was told|The learner's answers in this recovery|The problem:/);
   if (shots) await teacher.screenshot({ path: `${shots}/handoff-educator-list.png`, fullPage: true });
+
+  // ---- 4b. the parent gives the separate, explicit permission for the blocked learner's recovery answers, then stops it
+  await page.goto(`${URL0}/year/?learner=${blockedPupil}&deep=1`);
+  const perm = page.locator("section[aria-label='Recovery answers']");
+  await perm.waitFor();
+  const permText = await perm.innerText();
+  assert.match(permText, /separate from sharing written work/);
+  assert.match(permText, /OpenPath does not email or message anyone/);
+  assert.match(permText, /sees the skill, the reason and the step only/);
+  if (shots) await page.screenshot({ path: `${shots}/handoff-parent-permission.png`, fullPage: true });
+  await perm.getByRole("button", { name: `Allow ${teacherEmail} to see recovery answers` }).click();
+  await perm.getByText(`${teacherEmail} can now see recovery answers on their help list.`).waitFor();
+  await teacher.reload();
+  await teacher.getByRole("heading", { name: /Learners who need help \(2 open\)/ }).waitFor();
+  assert.equal(await teacher.locator("[data-answers=not-shared]").count(), 1, "only the learner whose parent allowed it");
+  const allowedCard = teacher.locator("article[data-handoff]").filter({ hasText: "OpenPath has no teaching it can use" });
+  assert.match(await allowedCard.innerText(), /What the learner was told: The answers point to/);
+  assert.match(await allowedCard.innerText(), /The learner's answers in this recovery \(\d+\)/);
+  if (shots) await teacher.screenshot({ path: `${shots}/handoff-educator-answers.png`, fullPage: true });
+  await perm.getByRole("button", { name: `Stop showing recovery answers to ${teacherEmail}` }).click();
+  await perm.getByText(`${teacherEmail} can no longer see recovery answers.`).waitFor();
+  await teacher.reload();
+  await teacher.getByRole("heading", { name: /Learners who need help \(2 open\)/ }).waitFor();
+  assert.equal(await teacher.locator("[data-answers=not-shared]").count(), 2, "revoked: hidden again");
+  results.permission = { granted: true, revoked: true };
 
   // ---- 5. resolution: the educator deals with the blocked one; the learner's stop screen shows it and it is not reopened
   const blockedCard = cards.filter({ hasText: "OpenPath has no teaching it can use" });
