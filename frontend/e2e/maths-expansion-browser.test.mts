@@ -121,8 +121,10 @@ try {
     let taught: string | null = null;
     for (let i = 0; i < 12; i++) {
       if ((await screen()) === "lesson") {
-        const st = (await stateAt(Date.now())).module(c.competency);
-        const l = await lesson(); learnt = true; taught = st.strategy?.id ?? null;
+        const l = await lesson(); learnt = true;
+        // the explanation shown, from the app's own saved record of it (recovery teaching is not in the plain module state)
+        const shown = [...(await saved()).events].reverse().find((e: { record?: string }) => e.record === "teach") as { strategy?: string } | undefined;
+        taught = shown?.strategy ?? null;
         trail.push({ kind: "lesson", strategy: taught ?? undefined, review: l.review });
         if (process.env.DEBUG) console.log("step", JSON.stringify(trail.at(-1)));
         assert.equal(l.review, "pending_review", `${c.name}: the explanation is shown as pending educator review`);
