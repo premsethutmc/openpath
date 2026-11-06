@@ -1938,7 +1938,7 @@ const OBJD: [number, number][] = [[180, 300], [55, 80], [500, 700], [20, 30], [9
 const APPROX = [
   { who: "Aryabhata (about 499 CE)", n: 62832, d: 20000 },
   { who: "an ancient Egyptian scribe", n: 256, d: 81 },
-  { who: "the fraction 22/7 used in schools", n: 22, d: 7 },
+  { who: "Many school textbooks", n: 22, d: 7 },
   { who: "the Chinese mathematician Zu Chongzhi", n: 355, d: 113 },
   { who: "Bhaskara II (in one of his rules)", n: 3927, d: 1250 },
 ];
@@ -2441,7 +2441,7 @@ B09.push(
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "ratio" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${vs(s.value)}` : s.id === "circ" ? `C = π × d = ${s.inputs[0]} × ${s.inputs[1]} = ${String(s.value)} mm (to two decimal places)` : "The same ratio comes out for every circle, whatever its size: this constant is π"),
+    explain: (s) => (s.id === "ratio" ? `${s.inputs[0]} ÷ ${s.inputs[1]} ≈ ${String(s.value)} (rounded)` : s.id === "circ" ? `C = π × d = ${s.inputs[0]} × ${s.inputs[1]} = ${String(s.value)} mm (to two decimal places)` : "The same ratio comes out for every circle, whatever its size: this constant is π"),
     domain: [[0, 2], [0, 7], [0, 1500]],
     keep: piOk,
     cap: 300,

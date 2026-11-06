@@ -21396,7 +21396,7 @@
     "sign-kept (conceptual): Both sides were divided by −1, a negative number, without reversing the sign."
    ],
    "teach": {
-    "idea": "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the right side of the boundary.",
+    "idea": "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the allowed side of the boundary: below it for < or ≤, above it for > or ≥ (include the boundary itself only for ≤ or ≥).",
     "method": "Solve it like an equation to find the boundary (reverse the sign if you divide by a negative number). Then list the allowed numbers on the correct side; include the boundary only for ≤ or ≥. Show them as dots on a number line.",
     "alternatives": [
      {
@@ -21410,7 +21410,7 @@
      }
     ]
    },
-   "fingerprint": "81c2d350",
+   "fingerprint": "a868a871",
    "validation": {
     "family": "aeineqz",
     "deterministic": {
@@ -21494,7 +21494,7 @@
      }
     ]
    },
-   "fingerprint": "3f8ececc",
+   "fingerprint": "6a0a795e",
    "validation": {
     "family": "aeineqs",
     "deterministic": {
@@ -21577,7 +21577,7 @@
      }
     ]
    },
-   "fingerprint": "f27edd1d",
+   "fingerprint": "e3ef3775",
    "validation": {
     "family": "aeineqw",
     "deterministic": {
@@ -21654,7 +21654,7 @@
      }
     ]
    },
-   "fingerprint": "a6d005b5",
+   "fingerprint": "aed354b3",
    "validation": {
     "family": "aenbhd",
     "deterministic": {
@@ -34336,7 +34336,7 @@
      }
     ]
    },
-   "fingerprint": "7534b5be",
+   "fingerprint": "93495cae",
    "validation": {
     "family": "aipi",
     "deterministic": {
@@ -86683,6 +86683,537 @@
     },
     "boundary": {
      "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "ajmilr",
+   "version": "1.0.0",
+   "title": "Millions and billions in lakhs and crores",
+   "competency": "MATH.number.indian-international-numeration",
+   "skill": "MATH.number.indian-international-numeration",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     1,
+     99
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "poolSize": 218,
+   "excluded": [],
+   "difficulty": {
+    "1": 19,
+    "2": 179,
+    "3": 20
+   },
+   "examples": [
+    "gen:ajmilr:7,0",
+    "gen:ajmilr:13,0:mc",
+    "gen:ajmilr:40,0",
+    "gen:ajmilr:70,0:mc",
+    "gen:ajmilr:7,1",
+    "gen:ajmilr:14,1:mc"
+   ],
+   "explanations": [
+    "million-is-lakh (conceptual): 1 million was taken as 1 lakh. 1 million is 10,00,000 = 10 lakh.",
+    "million-hundred-lakh (recall): 1 million was taken as 100 lakh (1 crore). 1 crore is 10 million, so 1 million is only 10 lakh.",
+    "billion-ten-crore (recall): 1 billion was taken as 10 crore. 1 billion is 1,000 million and 1 crore is 10 million, so 1 billion is 100 crore.",
+    "billion-is-crore (conceptual): 1 billion was taken as 1 crore. 1 crore is only 10 million; 1 billion is 100 crore.",
+    "billion-thousand-crore (recall): 1 billion was taken as 1,000 crore. 1 billion is 1,00,00,00,000 = 100 crore.",
+    "million-is-crore (conceptual): Each million was counted as a crore. 1 crore is 10 million, so divide the millions by 10.",
+    "lakh-for-crore (procedural): The millions were changed into lakh, not crore. 10 million is 1 crore (100 lakh)."
+   ],
+   "teach": {
+    "idea": "The two systems name the same number differently: 1 million = 10 lakh, 10 million = 1 crore, and 1 billion = 100 crore.",
+    "method": "Write the number out in full, then regroup its digits with Indian commas (3, then 2, 2 …) and read off the lakhs or crores.",
+    "alternatives": [
+     {
+      "id": "commas",
+      "title": "Move the commas",
+      "kind": "procedural",
+      "text": [
+       "Write 20,000,000 with Indian commas: 2,00,00,000.",
+       "That reads 2 crore, so 20 million is 2 crore."
+      ]
+     },
+     {
+      "id": "ladder",
+      "title": "A ladder of names",
+      "kind": "conceptual",
+      "text": [
+       "1 lakh = 100 thousand. 10 lakh = 1 million. 1 crore = 10 million. 100 crore = 1 billion.",
+       "Climb the ladder one step at a time."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "3cdfb6a4",
+   "validation": {
+    "family": "ajmilr",
+    "deterministic": {
+     "checked": 218,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "ajsize",
+   "version": "1.0.0",
+   "title": "How big is a large quantity? (time)",
+   "competency": "MATH.number.multiply-divide-powers-of-ten",
+   "skill": "MATH.number.rounding",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     1,
+     9
+    ],
+    [
+     5,
+     7
+    ],
+    [
+     0,
+     4
+    ]
+   ],
+   "poolSize": 129,
+   "excluded": [],
+   "difficulty": {
+    "1": 54,
+    "2": 54,
+    "3": 21
+   },
+   "examples": [
+    "gen:ajsize:4,5,0",
+    "gen:ajsize:7,5,0:mc",
+    "gen:ajsize:4,5,1",
+    "gen:ajsize:7,5,1:mc",
+    "gen:ajsize:3,7,3",
+    "gen:ajsize:6,7,3:mc"
+   ],
+   "explanations": [
+    "one-step-short (procedural): Only part of the change of units was done: hours were changed into days but not on into years.",
+    "hundred-for-sixty (conceptual): Time was treated like decimals, with 100 seconds in a minute or 100 minutes in an hour. There are 60.",
+    "lakh-as-ten-thousand (recall): 1 lakh was read as 10,000. 1 lakh is 1,00,000 (one hundred thousand).",
+    "rounded-down (procedural): The answer was cut off at the whole number instead of rounded: look at what is left over and round up when it is more than half.",
+    "crore-as-ten-lakh (recall): 1 crore was read as 10 lakh. 1 crore is 100 lakh = 1,00,00,000."
+   ],
+   "teach": {
+    "idea": "A large number of a small unit is easier to picture in a bigger unit: change the units step by step (60 seconds in a minute, 60 minutes in an hour, 24 hours in a day).",
+    "method": "Multiply the steps to find how many small units make one big unit, divide the quantity by it, then round to the nearest whole number.",
+    "alternatives": [
+     {
+      "id": "step-by-step",
+      "title": "One change at a time",
+      "kind": "procedural",
+      "text": [
+       "Divide by 60 to get minutes, by 60 again to get hours, then by 24 to get days.",
+       "Round only at the end."
+      ]
+     },
+     {
+      "id": "benchmark",
+      "title": "Use a benchmark",
+      "kind": "conceptual",
+      "text": [
+       "There are 86,400 seconds in a day, about 1 lakh.",
+       "So 1 lakh seconds is a little more than 1 day, and 1 crore seconds is about 100 days."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "85983030",
+   "validation": {
+    "family": "ajsize",
+    "deterministic": {
+     "checked": 129,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "agchange",
+   "version": "1.0.0",
+   "title": "Money word problems: the bill and the change",
+   "competency": "MATH.number.decimal-operations",
+   "skill": "MATH.number.decimal-operations",
+   "type": "fraction",
+   "multipleChoice": true,
+   "domain": [
+    [
+     5,
+     240
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     5,
+     240
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "poolSize": 500,
+   "excluded": [],
+   "difficulty": {
+    "1": 18,
+    "2": 167,
+    "3": 315
+   },
+   "examples": [
+    "gen:agchange:22,6,32,0,0",
+    "gen:agchange:40,5,45,0,0:mc",
+    "gen:agchange:51,7,55,2,1",
+    "gen:agchange:95,2,83,4,1:mc",
+    "gen:agchange:126,6,123,5,2",
+    "gen:agchange:187,0,209,5,2:mc"
+   ],
+   "explanations": [
+    "bill-not-change (conceptual): The bill was found, but the question asks for the change: take the bill away from the note.",
+    "one-item-only (procedural): Only one item was taken away from the note. Add both prices first to get the bill.",
+    "paise-not-exchanged (procedural): The note has no paise, so ₹1 must be changed into 100 paise before the bill's paise are taken away; here the bill's paise were written down as the change's paise instead.",
+    "paise-not-carried (procedural): When the paise were added, the ₹1 they made was not carried, so the bill came out ₹1 too small."
+   ],
+   "teach": {
+    "idea": "The change is what is left of the note after the whole bill is paid: first add the prices, then take the bill away from the note.",
+    "method": "Line up the decimal points to add the prices (carry ₹1 when the paise make 100 or more), then subtract the bill from the note, changing ₹1 into 100 paise when needed.",
+    "alternatives": [
+     {
+      "id": "count-up",
+      "title": "Count up like a shopkeeper",
+      "kind": "procedural",
+      "text": [
+       "Start at the bill and count up to the next whole rupee, then to the next ten, then to the note.",
+       "Add up the jumps: that is the change."
+      ]
+     },
+     {
+      "id": "paise",
+      "title": "Work in paise",
+      "kind": "conceptual",
+      "text": [
+       "₹23.50 is 2350 paise. Change every amount into paise, add and subtract as whole numbers.",
+       "Put the point back two places from the right at the end."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "9286124b",
+   "validation": {
+    "family": "agchange",
+    "deterministic": {
+     "checked": 500,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 20,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "ahfibp",
+   "version": "1.0.0",
+   "title": "Patterns in the Virahanka-Fibonacci numbers",
+   "competency": "MATH.sequences.explicit-recursive-rules",
+   "skill": "MLY.seq.virahanka",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     3,
+     40
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "poolSize": 99,
+   "excluded": [],
+   "difficulty": {
+    "1": 4,
+    "2": 10,
+    "3": 85
+   },
+   "examples": [
+    "gen:ahfibp:4,0",
+    "gen:ahfibp:5,0:mc",
+    "gen:ahfibp:8,0",
+    "gen:ahfibp:9,1:mc",
+    "gen:ahfibp:18,3",
+    "gen:ahfibp:28,1:mc"
+   ],
+   "explanations": [
+    "last-term (conceptual): The 12th number was given, not the sum of the first 12. Add all of them.",
+    "one-too-many (procedural): One number too many was added. Number the terms as you add them and stop at term 12.",
+    "one-too-few (procedural): One number was left out. Number the terms as you add them and include term 12.",
+    "like-counting-numbers-2 (conceptual): It was assumed that, as in 1, 2, 3, 4, …, one number in every 2 is even. The Virahanka numbers follow their own pattern: the even numbers are terms 2, 5, 8, … (one in every three).",
+    "counted-the-others (procedural): The numbers that are not multiples of 5 were counted instead.",
+    "pattern-from-wrong-place (procedural): The repeating pattern was started from the wrong term. the multiples of 3 are terms 3, 7, 11, … (one in every four); list the first few and check before counting.",
+    "like-counting-numbers-3 (conceptual): It was assumed that, as in 1, 2, 3, 4, …, one number in every 3 is multiples of 3. The Virahanka numbers follow their own pattern: the multiples of 3 are terms 3, 7, 11, … (one in every four).",
+    "like-counting-numbers-5 (conceptual): It was assumed that, as in 1, 2, 3, 4, …, one number in every 5 is multiples of 5. The Virahanka numbers follow their own pattern: the multiples of 5 are terms 4, 9, 14, … (one in every five)."
+   ],
+   "teach": {
+    "idea": "Each Virahanka number is the sum of the two before it, so patterns in the list come from that rule: odd + odd makes even, so the even numbers come back every third place; multiples of 3 come every fourth place and multiples of 5 every fifth.",
+    "method": "Write the numbers in a numbered row and mark what you are looking for (each running sum, or each even number or multiple); find where the pattern repeats before counting a long list.",
+    "alternatives": [
+     {
+      "id": "parity",
+      "title": "Only odd and even",
+      "kind": "conceptual",
+      "text": [
+       "Write O for odd and E for even: O, E, O, O, E, O, O, E, …",
+       "After the first number the block E, O, O repeats, so one number in every three is even: terms 2, 5, 8, …"
+      ]
+     },
+     {
+      "id": "sum-shortcut",
+      "title": "A shortcut for the sum",
+      "kind": "procedural",
+      "text": [
+       "Add the first few and compare with the list: 1 + 2 + 3 = 6, and the 5th number is 8; 8 − 2 = 6.",
+       "The sum of the first n numbers is always the (n + 2)th number minus 2."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "9da6cb0b",
+   "validation": {
+    "family": "ahfibp",
+    "deterministic": {
+     "checked": 99,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aerot",
+   "version": "1.0.0",
+   "title": "Rotating a point about the origin",
+   "competency": "MATH.geometry.transformations",
+   "skill": "MATH.geometry.transformations",
+   "type": "tuple",
+   "multipleChoice": true,
+   "domain": [
+    [
+     -6,
+     6
+    ],
+    [
+     -6,
+     6
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "poolSize": 456,
+   "excluded": [],
+   "difficulty": {
+    "1": 168,
+    "2": 72,
+    "3": 216
+   },
+   "examples": [
+    "gen:aerot:-2,-2,2",
+    "gen:aerot:2,3,2:mc",
+    "gen:aerot:3,1,0",
+    "gen:aerot:5,1,0:mc",
+    "gen:aerot:-3,-6,0",
+    "gen:aerot:1,-6,0:mc"
+   ],
+   "explanations": [
+    "wrong-direction (conceptual): The point was turned the wrong way. Clockwise is with the direction a clock's hands move.",
+    "swap-only (procedural): The coordinates were swapped but no sign was changed: that is a reflection in the line y = x, not a turn. For a quarter turn, one of the swapped coordinates also changes sign.",
+    "one-sign (conceptual): Only one coordinate changed sign: that is a reflection in an axis. A half turn about O changes the sign of both coordinates."
+   ],
+   "teach": {
+    "idea": "A rotation about O keeps every point the same distance from O. A half turn sends P straight through O to the other side; a quarter turn makes OP and its image meet at a right angle.",
+    "method": "Half turn: change the sign of both coordinates. Quarter turn: swap the coordinates, then change the sign of the new x (anticlockwise) or the new y (clockwise). Check with tracing paper on the grid.",
+    "alternatives": [
+     {
+      "id": "tracing",
+      "title": "Turn the tracing paper",
+      "kind": "conceptual",
+      "text": [
+       "Trace the axes and P on thin paper. Put a pencil point on O and turn the paper a quarter turn.",
+       "The traced P now sits on the image; read its coordinates."
+      ]
+     },
+     {
+      "id": "box",
+      "title": "Turn the box",
+      "kind": "procedural",
+      "text": [
+       "Draw the box from O across x and up y to P. Turn the box a quarter turn: its width and height swap.",
+       "Then decide from the picture which coordinates are negative."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "a7c12d59",
+   "validation": {
+    "family": "aerot",
+    "deterministic": {
+     "checked": 456,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aetfig",
+   "version": "1.0.0",
+   "title": "A figure and its image: the transformation, and the symmetry it makes",
+   "competency": "MATH.geometry.transformations",
+   "skill": "MATH.geometry.transformations",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     0,
+     9
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "poolSize": 160,
+   "excluded": [],
+   "difficulty": {
+    "1": 40,
+    "2": 60,
+    "3": 60
+   },
+   "examples": [
+    "gen:aetfig:3,2,0,1",
+    "gen:aetfig:6,2,0,2",
+    "gen:aetfig:3,1,0,0",
+    "gen:aetfig:6,3,0,0",
+    "gen:aetfig:3,2,1,2",
+    "gen:aetfig:6,4,0,0"
+   ],
+   "explanations": [
+    "half-turn-or-mirror (conceptual): A half turn was taken for a reflection. Follow the letters: after a reflection A, B, C go round the other way; after a half turn they go round the same way, upside down.",
+    "mirror-gives-turn (conceptual): A reflection makes a pattern with line symmetry (it folds onto itself along the mirror line), not rotational symmetry.",
+    "which-axis (procedural): The wrong mirror line was chosen. A reflection in the y-axis flips left and right; a reflection in the x-axis flips up and down.",
+    "slide-or-flip (conceptual): A slide was taken for a reflection. In a translation every point moves the same distance in the same direction, and the triangle is not flipped.",
+    "slide-gives-mirror (conceptual): Copies made by sliding give translational symmetry (the strip fits onto itself after a slide), not a mirror line.",
+    "turn-gives-mirror (conceptual): A half turn makes rotational symmetry of order 2 (the pattern fits onto itself after half a turn about O); it cannot be folded onto itself.",
+    "quarter-or-half (conceptual): The size of the turn was misjudged. Draw a line from O to A and from O to A′: they make a right angle for a quarter turn and a straight line for a half turn.",
+    "count-positions (procedural): The four copies a quarter turn apart were taken as mirror images. Turn the pattern: it fits onto itself after every quarter turn, so it has rotational symmetry of order 4."
+   ],
+   "teach": {
+    "idea": "Reflections, translations and rotations move a figure without changing its size or shape. A reflection flips it (the order of the corners reverses); a translation slides it; a rotation turns it about a point. A figure together with its images has the symmetry that made it.",
+    "method": "Follow the letters A, B, C: if they go round the other way, it is a reflection (find the mirror line halfway between each point and its image). If every point moved the same way, it is a translation. Otherwise join O to A and to A′: a straight line through O is a half turn, a right angle is a quarter turn.",
+    "alternatives": [
+     {
+      "id": "trace",
+      "title": "Trace and test",
+      "kind": "conceptual",
+      "text": [
+       "Trace triangle ABC on thin paper.",
+       "Try to slide it, turn it about O or flip it over a line until it lands on A′B′C′: the move that works is the transformation."
+      ]
+     },
+     {
+      "id": "symmetry-from-move",
+      "title": "The move gives the symmetry",
+      "kind": "procedural",
+      "text": [
+       "A shape and its mirror image fold onto each other: line symmetry.",
+       "A shape and its half turn: rotational symmetry of order 2; four quarter turns: order 4. Copies slid again and again: translational symmetry."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "ee217370",
+   "validation": {
+    "family": "aetfig",
+    "deterministic": {
+     "checked": 160,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
      "failures": []
     },
     "excluded": 0,

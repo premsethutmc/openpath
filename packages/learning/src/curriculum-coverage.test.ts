@@ -91,10 +91,11 @@ const stats = classifyAll();
 // ════════════════════════════════════════════════════════════════════════════════
 
 describe("curriculum-wide coverage: honest numbers", () => {
-  // 1,082 since Workstream A3 added lboth and lbrk (linear equations: x on both sides; a bracket)
-  it("total families count is 1,082", () => {
-    assert.equal(stats.total, 1082,
-      `Expected 1,082 families, got ${stats.total}`);
+  // 1,082 since Workstream A3 added lboth and lbrk (linear equations: x on both sides; a bracket); 1,088 since
+  // grade7-coverage@1 added b24 (ajmilr, ajsize, agchange, ahfibp, aerot, aetfig)
+  it("total families count is 1,088", () => {
+    assert.equal(stats.total, 1088,
+      `Expected 1,088 families, got ${stats.total}`);
   });
 
   it("kernel-backed families (all steps verified) is at least 100", () => {

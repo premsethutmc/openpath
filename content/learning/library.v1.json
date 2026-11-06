@@ -11335,7 +11335,7 @@
     {
      "title": "Solving an inequation over whole numbers, natural numbers or integers",
      "text": [
-      "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the right side of the boundary.",
+      "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the allowed side of the boundary: below it for < or ≤, above it for > or ≥ (include the boundary itself only for ≤ or ≥).",
       "Solve it like an equation to find the boundary (reverse the sign if you divide by a negative number). Then list the allowed numbers on the correct side; include the boundary only for ≤ or ≥. Show them as dots on a number line."
      ],
      "math": [
@@ -25973,6 +25973,175 @@
       ],
       "range": 10
      }
+    },
+    {
+     "title": "Rotating a point about the origin",
+     "text": [
+      "A rotation about O keeps every point the same distance from O. A half turn sends P straight through O to the other side; a quarter turn makes OP and its image meet at a right angle.",
+      "Half turn: change the sign of both coordinates. Quarter turn: swap the coordinates, then change the sign of the new x (anticlockwise) or the new y (clockwise). Check with tracing paper on the grid."
+     ],
+     "math": [
+      "In the picture, the point P is at (−2, 3). Rotate P through 180° about the origin O(0, 0). What are the coordinates of its image? Write them as (x, y).",
+      "A half turn about O sends (−2, 3) to the opposite side of O: (2, −3)"
+     ],
+     "widget": {
+      "type": "plane",
+      "points": [
+       [
+        -2,
+        3,
+        "P"
+       ],
+       [
+        2,
+        -3,
+        "P′"
+       ],
+       [
+        0,
+        0,
+        "O"
+       ]
+      ],
+      "segments": [
+       [
+        [
+         0,
+         0
+        ],
+        [
+         -2,
+         3
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         2,
+         -3
+        ]
+       ]
+      ],
+      "range": 7
+     }
+    },
+    {
+     "title": "A figure and its image: the transformation, and the symmetry it makes",
+     "text": [
+      "Reflections, translations and rotations move a figure without changing its size or shape. A reflection flips it (the order of the corners reverses); a translation slides it; a rotation turns it about a point. A figure together with its images has the symmetry that made it.",
+      "Follow the letters A, B, C: if they go round the other way, it is a reflection (find the mirror line halfway between each point and its image). If every point moved the same way, it is a translation. Otherwise join O to A and to A′: a straight line through O is a half turn, a right angle is a quarter turn."
+     ],
+     "math": [
+      "In the picture, triangle A′B′C′ is the image of triangle ABC after one transformation. Which transformation is it?",
+      "A, B, C go round in opposite directions: the triangle has been flipped, so it is a reflection",
+      "So the transformation is a reflection in the x-axis"
+     ],
+     "widget": {
+      "type": "plane",
+      "points": [
+       [
+        1,
+        1,
+        "A"
+       ],
+       [
+        5,
+        2,
+        "B"
+       ],
+       [
+        2,
+        4,
+        "C"
+       ],
+       [
+        1,
+        -1,
+        "A′"
+       ],
+       [
+        5,
+        -2,
+        "B′"
+       ],
+       [
+        2,
+        -4,
+        "C′"
+       ],
+       [
+        0,
+        0,
+        "O"
+       ]
+      ],
+      "segments": [
+       [
+        [
+         1,
+         1
+        ],
+        [
+         5,
+         2
+        ]
+       ],
+       [
+        [
+         5,
+         2
+        ],
+        [
+         2,
+         4
+        ]
+       ],
+       [
+        [
+         2,
+         4
+        ],
+        [
+         1,
+         1
+        ]
+       ],
+       [
+        [
+         1,
+         -1
+        ],
+        [
+         5,
+         -2
+        ]
+       ],
+       [
+        [
+         5,
+         -2
+        ],
+        [
+         2,
+         -4
+        ]
+       ],
+       [
+        [
+         2,
+         -4
+        ],
+        [
+         1,
+         -1
+        ]
+       ]
+      ],
+      "range": 7
+     }
     }
    ],
    "diagnostics": [
@@ -26083,11 +26252,14 @@
     "gen:aerefl:1,6,8,5",
     "gen:aerefl:0,8,10,10:mc",
     "gen:aerefl:1,5,6,4",
-    "gen:aetrans:6,7,-2,-3"
+    "gen:aetrans:6,7,-2,-3",
+    "gen:aerot:-2,3,1",
+    "gen:aetfig:1,3,1,0"
    ],
    "transfer": [
     "gen:aerefl:1,6,8,4:w",
-    "gen:aetrans:10,8,-3,-4:w"
+    "gen:aetrans:10,8,-3,-4:w",
+    "gen:aerot:-5,6,0:w"
    ],
    "retention": [
     "gen:aerefl:1,4,8,1",
@@ -26105,6 +26277,14 @@
     },
     {
      "family": "aetrans",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aerot",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aetfig",
      "version": "1.0.0"
     }
    ],
@@ -27767,6 +27947,19 @@
       "rows": 6,
       "cols": 4
      }
+    },
+    {
+     "title": "How big is a large quantity? (time)",
+     "text": [
+      "A large number of a small unit is easier to picture in a bigger unit: change the units step by step (60 seconds in a minute, 60 minutes in an hour, 24 hours in a day).",
+      "Multiply the steps to find how many small units make one big unit, divide the quantity by it, then round to the nearest whole number."
+     ],
+     "math": [
+      "About how many days are 30 lakh (30,00,000) minutes? Give the answer to the nearest whole number of days.",
+      "60 × 24 = 1440",
+      "30,00,000 ÷ 1,440 = 2083.33",
+      "2083.33 is nearest to 2083"
+     ]
     }
    ],
    "diagnostics": [
@@ -27880,7 +28073,8 @@
     "gen:aep10:1,1,906:mc",
     "gen:aep10:0,3,282",
     "gen:aemult:41,7,2",
-    "gen:aediv0:6,4,3"
+    "gen:aediv0:6,4,3",
+    "gen:ajsize:3,6,3"
    ],
    "transfer": [
     "gen:aep10:0,1,871:w",
@@ -27907,6 +28101,10 @@
     },
     {
      "family": "aediv0",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ajsize",
      "version": "1.0.0"
     }
    ],
@@ -31039,6 +31237,18 @@
       "450 g = 450 ÷ 1000 = 0.45 kg",
       "5.7 + 0.45 = 6.15, with the decimal points lined up"
      ]
+    },
+    {
+     "title": "Money word problems: the bill and the change",
+     "text": [
+      "The change is what is left of the note after the whole bill is paid: first add the prices, then take the bill away from the note.",
+      "Line up the decimal points to add the prices (carry ₹1 when the paise make 100 or more), then subtract the bill from the note, changing ₹1 into 100 paise when needed."
+     ],
+     "math": [
+      "Priya buys a storybook for ₹63.40 and a cup of tea for ₹5.75, and pays with a ₹100 note. How much change should Priya get, in rupees?",
+      "Bill: ₹63.40 + ₹5.75 = ₹69.15",
+      "Change: ₹100 − ₹69.15 = ₹30.85"
+     ]
     }
    ],
    "diagnostics": [
@@ -31166,11 +31376,13 @@
     "gen:agdec:47,795,0:mc",
     "gen:agdec:96,263,1",
     "gen:agrupee:54,5,33,7,0",
-    "gen:agmeas:2,83,8,1"
+    "gen:agmeas:2,83,8,1",
+    "gen:agchange:120,1,153,5,2"
    ],
    "transfer": [
     "gen:agdec:108,449,1:w",
-    "gen:agrupee:56,8,57,4,0:w"
+    "gen:agrupee:56,8,57,4,0:w",
+    "gen:agchange:69,2,175,1,2:w"
    ],
    "retention": [
     "gen:agdec:54,909,0",
@@ -31192,6 +31404,10 @@
     },
     {
      "family": "agmeas",
+     "version": "1.0.0"
+    },
+    {
+     "family": "agchange",
      "version": "1.0.0"
     }
    ],
@@ -33275,6 +33491,18 @@
       "t2 = 20",
       "t3 = 29"
      ]
+    },
+    {
+     "title": "Patterns in the Virahanka-Fibonacci numbers",
+     "text": [
+      "Each Virahanka number is the sum of the two before it, so patterns in the list come from that rule: odd + odd makes even, so the even numbers come back every third place; multiples of 3 come every fourth place and multiples of 5 every fifth.",
+      "Write the numbers in a numbered row and mark what you are looking for (each running sum, or each even number or multiple); find where the pattern repeats before counting a long list."
+     ],
+     "math": [
+      "The Virahanka numbers are 1, 2, 3, 5, 8, 13, … (each number after the first two is the sum of the two before it). How many of the first 12 Virahanka numbers are even?",
+      "The first 12 numbers: 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233",
+      "Multiples of 2 among them: 4"
+     ]
     }
    ],
    "diagnostics": [
@@ -33390,7 +33618,8 @@
     "gen:ahnth:-9,1",
     "gen:ahfib:2,7,10",
     "gen:ahrhy:0,1,14",
-    "gen:ahexp:2,2,4"
+    "gen:ahexp:2,2,4",
+    "gen:ahfibp:27,3"
    ],
    "transfer": [
     "gen:ahrec:1,2,9:w",
@@ -33425,6 +33654,10 @@
     },
     {
      "family": "ahexp",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahfibp",
      "version": "1.0.0"
     }
    ],
@@ -35897,7 +36130,7 @@
      ],
      "math": [
       "Anu measures a bicycle wheel with a tape: its circumference is 1916 mm and its diameter is 610 mm. Work out circumference ÷ diameter, correct to two decimal places.",
-      "1916 ÷ 610 = 157/50",
+      "1916 ÷ 610 ≈ 3.14 (rounded)",
       "The same ratio comes out for every circle, whatever its size: this constant is π"
      ]
     },
@@ -38984,6 +39217,18 @@
       "Which of these numbers is the greatest? 9,43,54,850;  69,36,47,609;  68,98,61,059;  69,31,82,351",
       "The greatest is 69,36,47,609: it has the most crores and lakhs."
      ]
+    },
+    {
+     "title": "Millions and billions in lakhs and crores",
+     "text": [
+      "The two systems name the same number differently: 1 million = 10 lakh, 10 million = 1 crore, and 1 billion = 100 crore.",
+      "Write the number out in full, then regroup its digits with Indian commas (3, then 2, 2 …) and read off the lakhs or crores."
+     ],
+     "math": [
+      "74 million is 74,000,000 in the international system. How many lakh is it?",
+      "1 million = 10,00,000 = 10 lakh",
+      "74 × 10 = 740"
+     ]
     }
    ],
    "diagnostics": [
@@ -39100,7 +39345,8 @@
     "gen:ajmill:21,2:mc",
     "gen:ajmill:97,3",
     "gen:ajcrore:0,73,76,3",
-    "gen:ajcrcmp:401"
+    "gen:ajcrcmp:401",
+    "gen:ajmilr:85,0"
    ],
    "transfer": [
     "gen:ajmill:97,0:w",
@@ -39127,6 +39373,10 @@
     },
     {
      "family": "ajcrcmp",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ajmilr",
      "version": "1.0.0"
     }
    ],

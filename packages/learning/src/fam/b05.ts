@@ -5092,10 +5092,12 @@ const CORE_MORE: Def[] = [
     explain: (s) => (s.id === "bound" ? `Undo the + or − and divide by ${n_(Number(s.inputs[1]))}${Number(s.inputs[1]) < 0 ? " (reversing the sign)" : ""}: the boundary is ${fmtQ(Number(s.value))}` : `The ${s.inputs[0]}s that fit: ${setStr(s.value as number[])}`),
     domain: [[0, 2], [-4, 5], [-9, 9], [-15, 30], [0, 1]],
     cap: 450,
+    // level@1: inequations over whole numbers, natural numbers or integers are TN Grade 7 work
+    grade: () => 7,
     difficulty: ([dom, a]) => (dom === 2 ? (a < 0 ? 3 : 2) : 1),
     word: ([dom, a, b, c, op]) => `${name(a + c)} thinks of a ${dom === 2 ? "whole number or negative number between −5 and 5" : dom === 0 ? "whole number (0 is allowed)" : "counting number (1, 2, 3, …)"}, multiplies it by ${n_(a)} and then ${b < 0 ? `takes away ${-b}` : `adds ${b}`}. The result is ${op ? "at most" : "less than"} ${n_(c)}. Which numbers could ${name(a + c)} be thinking of? List them all.`,
     teach: {
-      idea: "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the right side of the boundary.",
+      idea: "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the allowed side of the boundary: below it for < or ≤, above it for > or ≥ (include the boundary itself only for ≤ or ≥).",
       method: "Solve it like an equation to find the boundary (reverse the sign if you divide by a negative number). Then list the allowed numbers on the correct side; include the boundary only for ≤ or ≥. Show them as dots on a number line.",
       visual: ([dom, a, b, c, op]) => ({ type: "numberline", from: dom === 2 ? -5 : 0, to: dom === 2 ? 5 : Math.max(10, Math.ceil((c - b) / Math.abs(a)) + 2), marks: ineqSol([dom, a, b, c, op]) }),
       alternatives: [
@@ -5151,6 +5153,8 @@ const CORE_MORE: Def[] = [
     explain: (s) => (s.id === "both" ? `Both must hold: ${s.value}` : `Inequality ${s.inputs[0]} gives ${s.value}`),
     domain: [[-8, 6], [1, 10], [1, 5], [1, 5], [0, 3]],
     cap: 450,
+    // level@1: systems of linear inequalities are Grade 11 work (never asked of a younger learner)
+    grade: () => 11,
     difficulty: ([, , a1, a2, s]) => (s === 0 && a1 * a2 < 6 ? 1 : a2 > 2 ? 3 : 2),
     word: (p) => {
       const d = sysData(p);
@@ -5240,6 +5244,8 @@ const CORE_MORE: Def[] = [
     explain: (s) => (s.id === "model" ? `Write the condition as an inequality: ${s.inputs[0]}` : `Solve it: ${s.value}`),
     domain: [[0, 2], [5, 95], [5, 95], [0, 10]],
     cap: 450,
+    // level@1: modelling with linear inequalities is Grade 11 work (never asked of a younger learner)
+    grade: () => 11,
     difficulty: ([kind]) => (kind === 1 ? 1 : kind === 0 ? 2 : 3),
     word: ([kind, a, b, c]) =>
       [
@@ -5303,6 +5309,8 @@ const CORE_MORE: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "ends" ? `The points at distance ${s.inputs[1]} from ${n_(Number(s.inputs[0]))} are ${s.value}` : `So the set is ${s.value}`),
     domain: [[0, 2], [-10, 10], [1, 9]],
+    // level@1: neighbourhoods in interval notation are Grade 11 work (never asked of a younger learner)
+    grade: () => 11,
     difficulty: ([kind, a]) => (kind === 2 ? 3 : a < 0 ? 2 : 1),
     word: ([kind, a, d]) => (kind === 2 ? `A cold store sounds an alarm when its temperature x (in °C) is more than ${d} ${d === 1 ? "degree" : "degrees"} away from ${n_(a)} °C. Write the set of temperatures that sound the alarm in interval notation.` : `A cold store keeps its temperature x (in °C) ${kind === 0 ? `less than ${d} ${d === 1 ? "degree" : "degrees"} away from` : `at most ${d} ${d === 1 ? "degree" : "degrees"} away from`} ${n_(a)} °C. Write the set of allowed temperatures in interval notation.`),
     teach: {

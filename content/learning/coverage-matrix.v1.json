@@ -27,8 +27,8 @@
   "requirements": 1197,
   "classes": {
    "validated": 0,
-   "awaiting": 1102,
-   "partial": 95,
+   "awaiting": 1107,
+   "partial": 90,
    "unsupported": 0,
    "not-implemented": 0
   },
@@ -43,26 +43,26 @@
    "disputed": 8
   },
   "families": {
-   "count": 1082,
-   "problems": 342283,
+   "count": 1088,
+   "problems": 343845,
    "answerTypes": {
-    "integer": 413,
-    "fraction": 151,
+    "integer": 416,
+    "fraction": 152,
     "set": 27,
-    "choice": 169,
+    "choice": 170,
     "exact": 128,
     "interval": 16,
     "expression": 31,
-    "tuple": 110,
+    "tuple": 111,
     "mixed": 7,
     "ratio": 3,
     "antiderivative": 10,
     "matrix": 12,
     "roots": 5
    },
-   "withPictures": 304,
-   "withEverydayForm": 759,
-   "withAlternatives": 1044
+   "withPictures": 306,
+   "withEverydayForm": 765,
+   "withAlternatives": 1050
   },
   "modules": 336,
   "writtenTasks": 376,
@@ -280,8 +280,8 @@
    "requirements": 56,
    "classes": {
     "validated": 0,
-    "awaiting": 52,
-    "partial": 4,
+    "awaiting": 56,
+    "partial": 0,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -295,8 +295,8 @@
    "requirements": 54,
    "classes": {
     "validated": 0,
-    "awaiting": 52,
-    "partial": 2,
+    "awaiting": 53,
+    "partial": 1,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -5057,7 +5057,9 @@
    ],
    "families": [
     "aerefl",
-    "aetrans"
+    "aetrans",
+    "aerot",
+    "aetfig"
    ],
    "writtenTasks": 2,
    "complete": false
@@ -7016,7 +7018,8 @@
    "families": [
     "agdec",
     "agrupee",
-    "agmeas"
+    "agmeas",
+    "agchange"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -7686,7 +7689,8 @@
    "families": [
     "ajmill",
     "ajcrore",
-    "ajcrcmp"
+    "ajcrcmp",
+    "ajmilr"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -8114,7 +8118,8 @@
    "families": [
     "aep10",
     "aemult",
-    "aediv0"
+    "aediv0",
+    "ajsize"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -10296,7 +10301,8 @@
     "ahnth",
     "ahfib",
     "ahrhy",
-    "ahexp"
+    "ahexp",
+    "ahfibp"
    ],
    "writtenTasks": 1,
    "complete": true
@@ -19160,8 +19166,8 @@
     "MATH.number.indian-international-numeration",
     "MATH.number.large-numbers"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: Converting from the international system back to the Indian system (millions to lakhs/crores) and billions are not assessed: ajmill only turns crores into millions, and ajcrore's pool has no million/billion items despite its stated limits."
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "cbse-ncert-mathematics-grade-7@1.1.0",
@@ -19193,8 +19199,8 @@
     "MATH.number.multiply-divide-powers-of-ten",
     "MATH.number.rounding"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: Judging the size of large quantities (e.g. how many days 1 lakh seconds is, or whether 1 crore of something is plausible) is not asked; only products with powers of ten and estimates of products are."
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "cbse-ncert-mathematics-grade-7@1.1.0",
@@ -19286,8 +19292,8 @@
    "competencies": [
     "MATH.number.decimal-operations"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: Money word problems are not assessed: agrupee gives only bare rupee sums and differences (measurement problems are covered by agmeas).",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
@@ -19979,8 +19985,8 @@
    "competencies": [
     "MATH.sequences.explicit-recursive-rules"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: Exploring patterns in the Virahanka-Fibonacci numbers (e.g. sums of terms, which terms are even) is not asked: ahfib has a single form asking for a later term, and ahrhy covers only the counting link."
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
    "release": "cbse-ncert-mathematics-grade-7@1.1.0",
@@ -20261,8 +20267,8 @@
    "competencies": [
     "MATH.number.decimal-operations"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: Money word problems are not assessed: agrupee gives only bare rupee sums and differences (measurement problems are covered by agmeas).",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {

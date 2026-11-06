@@ -99,7 +99,7 @@ Every competency that has some content:
 | Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeang draft, aeturn draft, aertang draft, aeangk draft, aearms draft). |
 | Identify centres radii and diameters (`MATH.geometry.circles`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aecirc draft, aecpart draft). |
 | Find lines of symmetry (`MATH.geometry.symmetry-lines`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aesym draft, aedsym draft, aedigsym draft, aemirror draft). |
-| Perform and describe reflections, translations and rotations of figures (`MATH.geometry.transformations`) | 4–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aerefl draft, aetrans draft). |
+| Perform and describe reflections, translations and rotations of figures (`MATH.geometry.transformations`) | 4–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aerefl draft, aetrans draft, aerot missing, aetfig missing). |
 | Convert between 12-hour and 24-hour time (`MATH.measurement.24-hour-clock`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aet24 draft, aet12 draft, aeel24 draft, aeampm draft). |
 | Measure area in square units (`MATH.measurement.area-squares`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aearea draft, aeperar draft, aeirr draft). |
 | Calculate with measured quantities in mixed units (`MATH.measurement.compute-with-measures`) | 4–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aemix draft, aemulm draft, aedivm draft). |
@@ -112,7 +112,7 @@ Every competency that has some content:
 | Read and compare large numbers (`MATH.number.large-numbers`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeind draft, aecmp draft, aenumf draft). |
 | Divide multi-digit numbers (`MATH.number.long-division`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ldiv submitted, avdiv draft, avmdiv draft). |
 | Multiply multi-digit numbers (`MATH.number.multi-multiplication`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families mmul submitted, avstrat draft, avpp draft, avlat draft, mul submitted). |
-| Multiply and divide by 10, 100 and 1000 (`MATH.number.multiply-divide-powers-of-ten`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aep10 draft, aemult draft, aediv0 draft). |
+| Multiply and divide by 10, 100 and 1000 (`MATH.number.multiply-divide-powers-of-ten`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aep10 draft, aemult draft, aediv0 draft, ajsize missing). |
 | Round numbers to the nearest ten, hundred or thousand (`MATH.number.rounding`) | 4–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeround draft, aeest draft, aernd draft, aeestp draft, aechk draft, aerdec draft, avpest draft). |
 | Explain a multi-step solution (`MATH.reasoning.multi-step`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeshop draft, aedrip draft, aetab draft, aetrip draft, aebig draft, aematch draft). |
 | Reason systematically to solve puzzles and strategy games (`MATH.reasoning.puzzle-strategy`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afmissd draft, afnim draft, afriver draft). |
@@ -133,7 +133,7 @@ Every competency that has some content:
 | Calculate rectangle area (`MATH.measurement.rectangle-area`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families rect submitted). |
 | Compare distance per unit time (`MATH.measurement.time-speed-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agspd draft, agspdc draft, ldiv submitted). |
 | Measure volume with unit cubes (`MATH.measurement.volume-cubes`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families vol submitted, abdisp draft, avvcmp draft). |
-| Add and subtract decimals (`MATH.number.decimal-operations`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agdec draft, agrupee draft, agmeas draft). |
+| Add and subtract decimals (`MATH.number.decimal-operations`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agdec draft, agrupee draft, agmeas draft, agchange missing). |
 | Find factors and multiples (`MATH.number.factors-multiples`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agfac draft, agcomf draft, agjump draft). |
 | Add unlike fractions (`MATH.number.fraction-add`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families faddu submitted, avfas draft). |
 | Multiply fractions by whole numbers (`MATH.number.fraction-multiply`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families fmulw draft, avfwq draft, mul submitted). |
@@ -181,7 +181,7 @@ Every competency that has some content:
 | Calculate area and perimeter of parallelograms and rhombuses (base-height and diagonal formulas) (`MATH.measurement.parallelogram-rhombus-area`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aipara draft, airhomb draft). |
 | Calculate cuboid surface area (`MATH.measurement.surface-area-intro`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aitsa draft, ailsa draft). |
 | Use integer exponent laws (`MATH.number.exponents`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families pow submitted, ajlaw draft, ajudig draft, ajneg draft, avexpn draft, avppf draft, avzero draft). |
-| Read, write and convert numbers in the Indian and international systems (`MATH.number.indian-international-numeration`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajmill draft, ajcrore draft, ajcrcmp draft). |
+| Read, write and convert numbers in the Indian and international systems (`MATH.number.indian-international-numeration`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajmill draft, ajcrore draft, ajcrcmp draft, ajmilr missing). |
 | Multiply integers using sign rules (`MATH.number.integer-multiply`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiintx draft, ajimul draft, ajidiv draft). |
 | Calculate percentages (`MATH.number.percentage`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families pct submitted, agpfrac draft, agfdec draft, avpctof draft). |
 | Calculate profit loss and simple interest (`MATH.number.profit-loss`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ajpl draft, ajsi draft, ajdisc draft, ajplamt draft, avmarked draft). |
@@ -192,7 +192,7 @@ Every competency that has some content:
 | Solve cryptarithm (digits-in-disguise) puzzles (`MATH.reasoning.digit-puzzles`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akcrypt draft, akcrypt2 draft). |
 | Reason with parity of sums and products (`MATH.reasoning.parity`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akpar draft). |
 | Distinguish additive and proportional reasoning (`MATH.reasoning.proportional-check`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akresize draft, akdirinv draft). |
-| Describe sequences with explicit and recursive rules (`MATH.sequences.explicit-recursive-rules`) | 7–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahrec draft, ahnth draft, ahfib draft, ahrhy draft, ahexp draft). |
+| Describe sequences with explicit and recursive rules (`MATH.sequences.explicit-recursive-rules`) | 7–11 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahrec draft, ahnth draft, ahfib draft, ahrhy draft, ahexp draft, ahfibp missing). |
 | Calculate median and mode (`MATH.statistics.median-mode`) | 7–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akmed draft, akmode draft, akfmean draft, avfmed draft). |
 | Pose statistical questions and draw conclusions from data (`MATH.statistics.statistical-questions`) | 7–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families avstatq draft). |
 | Factor algebraic expressions (`MATH.algebra.factorisation`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families factor submitted, ajfsq draft, ajfcub draft, ajfgrp draft, ajfspl draft, alsplit draft). |
@@ -666,10 +666,10 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aeaddn: Adding two-digit numbers without regrouping, and totals up to 200 | `MATH.number.addition-regroup` | 450 | 0 | 225/119/106 | `d8f505a6` |
 | aeadd3: Adding three-digit numbers without regrouping | `MATH.number.multi-digit-add-subtract` | 400 | 0 | 68/264/68 | `dbf5ebc4` |
 | aecol4: Adding and subtracting four- and five-digit numbers with regrouping | `MATH.number.multi-digit-add-subtract` | 450 | 0 | 50/177/223 | `3fa25327` |
-| aeineqz: Solving an inequation over whole numbers, natural numbers or integers | `MATH.algebra.inequalities` | 450 | 0 | 300/86/64 | `81c2d350` |
-| aeineqs: Solving a system of two linear inequalities | `MATH.algebra.inequalities` | 450 | 0 | 43/131/276 | `3f8ececc` |
-| aeineqw: Modelling a word problem with a linear inequality | `MATH.algebra.inequalities` | 450 | 0 | 202/203/45 | `f27edd1d` |
-| aenbhd: Neighbourhoods of a point in interval notation | `MATH.algebra.inequalities` | 567 | 0 | 198/180/189 | `a6d005b5` |
+| aeineqz: Solving an inequation over whole numbers, natural numbers or integers | `MATH.algebra.inequalities` | 450 | 0 | 300/86/64 | `a868a871` |
+| aeineqs: Solving a system of two linear inequalities | `MATH.algebra.inequalities` | 450 | 0 | 43/131/276 | `6a0a795e` |
+| aeineqw: Modelling a word problem with a linear inequality | `MATH.algebra.inequalities` | 450 | 0 | 202/203/45 | `e3ef3775` |
+| aenbhd: Neighbourhoods of a point in interval notation | `MATH.algebra.inequalities` | 567 | 0 | 198/180/189 | `aed354b3` |
 | aelinw: Word problems that lead to a linear equation | `MATH.algebra.linear-rational` | 450 | 0 | 92/174/184 | `1bc73d19` |
 | aesurop: Adding, subtracting, multiplying and dividing surds | `MATH.number.radicals` | 450 | 0 | 0/225/225 | `bab7b916` |
 | aesurc: Recognising surds and comparing their sizes | `MATH.number.radicals` | 168 | 0 | 104/64/0 | `badc009b` |
@@ -825,7 +825,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aimulti: Several integer changes in a row: temperatures, lifts and divers | `MATH.number.integer-add` | 400 | 0 | 4/37/359 | `99308192` |
 | aiest: Estimating decimal products and quotients | `MATH.number.decimal-product` | 300 | 0 | 37/113/150 | `4dd5432a` |
 | aisplit: Areas of fields and polygons split into triangles, rectangles and trapeziums | `MATH.measurement.trapezium-area` | 400 | 0 | 8/123/269 | `a2bab0f7` |
-| aipi: Circumference ÷ diameter, and values of π through history | `MATH.measurement.circle-area` | 300 | 0 | 148/5/147 | `7534b5be` |
+| aipi: Circumference ÷ diameter, and values of π through history | `MATH.measurement.circle-area` | 300 | 0 | 148/5/147 | `93495cae` |
 | aiconvex: Convex, non-convex, or not a quadrilateral? | `MATH.geometry.quadrilaterals` | 229 | 0 | 80/70/79 | `f0d1f33c` |
 | aiwiper: Areas of wipers, tile designs and lighthouse beams | `MATH.measurement.sectors` | 177 | 0 | 20/6/151 | `f97bb81a` |
 | aihollow: Surface area and volume of a hollow cylinder (a pipe) | `MATH.measurement.cylinder` | 400 | 0 | 134/133/133 | `c53f65fc` |
@@ -1462,13 +1462,19 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | awctr: The centres of a triangle and the lines that meet there | `MATH.geometry.triangle-concurrency` | 160 | 0 | 48/88/24 | `ea7986fa` |
 | awcen: The centroid divides each median in the ratio 2 : 1 | `MATH.geometry.triangle-concurrency` | 172 | 0 | 47/87/38 | `9171c959` |
 | awinc: The angle between two angle bisectors at the incentre | `MATH.geometry.triangle-concurrency` | 233 | 0 | 8/154/71 | `62ea3ddd` |
+| ajmilr: Millions and billions in lakhs and crores | `MATH.number.indian-international-numeration` | 218 | 0 | 19/179/20 | `3cdfb6a4` |
+| ajsize: How big is a large quantity? (time) | `MATH.number.multiply-divide-powers-of-ten` | 129 | 0 | 54/54/21 | `85983030` |
+| agchange: Money word problems: the bill and the change | `MATH.number.decimal-operations` | 500 | 0 | 18/167/315 | `9286124b` |
+| ahfibp: Patterns in the Virahanka-Fibonacci numbers | `MATH.sequences.explicit-recursive-rules` | 99 | 0 | 4/10/85 | `9da6cb0b` |
+| aerot: Rotating a point about the origin | `MATH.geometry.transformations` | 456 | 0 | 168/72/216 | `a7c12d59` |
+| aetfig: A figure and its image: the transformation, and the symmetry it makes | `MATH.geometry.transformations` | 160 | 0 | 40/60/60 | `ee217370` |
 
 ## Whole competency graph
 
 - Competencies (not counting micro-skills): **338**
 - With a complete learning module (validate@1): **336/338 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 336 (hand-written 24, synthesised from blueprints 312)
-- Problem families (generated questions with independent checks): 1082
+- Problem families (generated questions with independent checks): 1088
 - Review registry (repository copy): draft 1394, submitted 24, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
@@ -1563,7 +1569,7 @@ By grade (a competency spanning grades counts in each):
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families eqfrac submitted, avfold draft, avlow draft, avlike draft). |
 | Add unlike fractions (`MATH.number.fraction-add`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families faddu submitted, avfas draft). |
 | Multiply fractions by whole numbers (`MATH.number.fraction-multiply`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fmulw draft, avfwq draft, mul submitted). |
-| Add and subtract decimals (`MATH.number.decimal-operations`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agdec draft, agrupee draft, agmeas draft). |
+| Add and subtract decimals (`MATH.number.decimal-operations`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agdec draft, agrupee draft, agmeas draft, agchange missing). |
 | Represent percentages as hundredths (`MATH.number.percent-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agpct draft, agpctd draft). |
 | Calculate rectangle area (`MATH.measurement.rectangle-area`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families rect submitted). |
 | Measure volume with unit cubes (`MATH.measurement.volume-cubes`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families vol submitted, abdisp draft, avvcmp draft). |
