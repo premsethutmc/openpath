@@ -5,8 +5,10 @@
  *   cd frontend && node scripts/build-mathematics-journey.mjs && node scripts/build-year.mjs --test --deep-recovery
  *   (Django on DEEP_API, default http://127.0.0.1:8014, with OPENPATH_TEST_CLOCK_FILE)
  *   node --import tsx e2e/deep-recovery-app.test.mts
- * Cases: single gap (reload mid-question, reload mid-lesson, sign-out and back in, resume from the year page), multi gap, a failed
- * save, unavailable content, no fresh question, and the switch off. Synthetic success is not evidence of learning.
+ * Cases (DEEP_CASES): "main" (default build): single gap (reload mid-question, reload mid-lesson, sign-out and back in, resume from the
+ * year page), multi gap, a failed save, unavailable content, no fresh question, the switch off; "pause" (--deep-sitting=12 build):
+ * the sitting limit, reload while paused, resume after 3 hours by the server's and the browser's clocks; "shipped" (no flags):
+ * ?deep=1 and ?stuck= do nothing. All three: bash e2e/run-deep-recovery.sh. Synthetic success is not evidence of learning.
  */
 import { createRequire } from "node:module";
 import http from "node:http";
@@ -56,6 +58,10 @@ const LEARNERS: Record<string, () => Answerer> = {
 const base = (q: string) => q.replace(/:(mc|w)$/, "");
 const email = `deep-${Date.now()}@example.org`, password = "synthetic-deep-recovery-browser-passphrase";
 const results: Record<string, unknown> = {};
+/** DEEP_CASES (comma list) picks cases: the default build runs "main"; a --deep-sitting build "pause"; a shipped build "shipped" */
+const CASES = new Set((process.env.DEEP_CASES ?? "main").split(","));
+const want = (group: string) => CASES.has(group);
+const clockFile = process.env.OPENPATH_TEST_CLOCK_FILE;
 const shots = process.env.SHOTS;
 
 let id = "";
@@ -124,7 +130,7 @@ try {
   assert.equal((await call("/account/register/", { email, password, consent: true })).status, 201);
 
   // ---- 1. single gap, with every interruption
-  {
+  if (want("main")) {
     await newPupil("single", ORIG);
     const L = LEARNERS.single(), steps: Step[] = [];
     await open();
@@ -163,7 +169,7 @@ try {
   }
 
   // ---- 2. multi gap
-  {
+  if (want("main")) {
     await newPupil("multi", ORIG);
     const steps: Step[] = [];
     await open();
@@ -176,7 +182,7 @@ try {
   }
 
   // ---- 3. failed save: the API is unreachable for one answer
-  {
+  if (want("main")) {
     await newPupil("failsave", ORIG);
     await open();
     const qid = (await page.locator("[data-qid]").getAttribute("data-qid"))!, n0 = (await saved()).count;
@@ -197,7 +203,7 @@ try {
   }
 
   // ---- 4. unavailable content
-  {
+  if (want("main")) {
     await newPupil("nocontent", ORIG);
     const steps: Step[] = [];
     await open();
@@ -213,7 +219,7 @@ try {
   }
 
   // ---- 5. no fresh question on the original skill
-  {
+  if (want("main")) {
     await newPupil("nofresh", "di-d2");
     await open("di-d2");
     const end = await drive(LEARNERS.none(), []);
@@ -224,7 +230,7 @@ try {
   }
 
   // ---- 6. the switch off: the shipped recovery, unchanged
-  {
+  if (want("main")) {
     await newPupil("flagoff", ORIG);
     await open(ORIG, "0");
     await page.locator("h1").first().waitFor();
@@ -235,6 +241,68 @@ try {
     await page.waitForFunction(() => !document.body.innerText.includes("Opening OpenPath") && !document.body.innerText.includes("Loading the record"));
     assert.equal(await page.locator("[data-deep-recovery]").count(), 0, "off is remembered; ?stuck alone does nothing");
     results.flagoff = { shipped: true };
+  }
+  // ---- 7. the per-sitting limit (a --deep-sitting build): pause, reload stays paused, a later sitting resumes the same path
+  if (want("pause")) {
+    assert.ok(clockFile, "OPENPATH_TEST_CLOCK_FILE (the server's test clock) is needed to reach a later sitting");
+    await newPupil("pause", ORIG);
+    const L = LEARNERS.multi(), steps: Step[] = [];
+    let offsetHours = 0;
+    const later = async (hours: number) => {
+      offsetHours += hours;
+      writeFileSync(clockFile!, JSON.stringify({ [id]: offsetHours / 24 }));
+      await page.clock.setSystemTime(new Date(Date.now() + offsetHours * 3_600_000));
+    };
+    await open();
+    let end = await drive(L, steps);
+    assert.equal(end, "pause", `the sitting limit was reached: ${JSON.stringify(steps)}`);
+    const paused = await endText();
+    assert.equal(paused.title, "Paused: your place is saved");
+    assert.match(paused.reason, /Nothing is finished yet and nothing is counted as solved/);
+    assert.match(paused.reason, /Your place is saved: next time starts with/);
+    const pathAtPause = await page.locator("[data-deep-path]").getAttribute("data-deep-path");
+    const lessonsAtPause = (await saved()).events.filter((e) => e.record === "teach").length;
+    if (shots) await page.screenshot({ path: `${shots}/deep-pause.png`, fullPage: true });
+    // a reload 30 minutes later is the same sitting: still paused, nothing new asked
+    await later(0.5);
+    await page.reload();
+    assert.equal(await phase(), "pause", "a reload inside the sitting stays paused");
+    const n0 = (await saved()).count;
+    // the year page offers it, marked paused
+    await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}`);
+    const card = page.locator(`[data-deep-continue="${ORIG}"]`);
+    assert.match(await card.innerText(), /Paused: your place is saved/);
+    // three hours later (a new sitting by the server's and the browser's clocks): the same diagnosis path, then on to the goal
+    let sittings = 1;
+    for (; end === "pause" && sittings < 8; sittings++) {
+      await later(3);
+      await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}`);
+      await page.locator(`[data-deep-continue="${ORIG}"]`).click();
+      if (sittings === 1) {
+        assert.notEqual(await screen(), "end", "resumed, not paused");
+        const resumedPath = await page.locator("[data-deep-path]").getAttribute("data-deep-path").catch(() => null);
+        assert.equal(resumedPath, pathAtPause, "the saved diagnosis path is restored");
+        assert.equal((await saved()).count, n0, "nothing was recorded while paused");
+      }
+      end = await drive(L, steps);
+    }
+    assert.equal(end, "solved_after_help", JSON.stringify(steps));
+    goalChecks(steps);
+    const lessons = await lessonsHaveIds();
+    const ev = (await saved()).events.filter((e) => e.record === "attempt" && e.context?.startsWith("deep:"));
+    assert.ok(ev.every((e) => e.context!.length <= 600));
+    results.pause = { sittings, steps: steps.length, lessonsAtPause, lessons, paused, longestContext: Math.max(...ev.map((e) => e.context!.length)), end: await endText() };
+  }
+
+  // ---- 8. a SHIPPED build (no research flags): ?deep=1 and ?stuck= do nothing; the year page as usual
+  if (want("shipped")) {
+    await newPupil("shipped", ORIG);
+    await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}&deep=1&stuck=${encodeURIComponent(ORIG)}`);
+    await page.waitForFunction(() => !document.body.innerText.includes("Opening OpenPath") && !document.body.innerText.includes("Loading the record"));
+    await page.getByRole("heading", { name: "Stuck on a problem?" }).waitFor();
+    assert.equal(await page.locator("[data-deep-recovery], [data-deep-continue]").count(), 0, "no research view, no resume card");
+    assert.equal(await page.evaluate(() => localStorage.getItem("openpath.deep-recovery@0")), null, "?deep=1 is not remembered");
+    results.shipped = { researchViewShown: false };
   }
   console.log(JSON.stringify(results, null, 1));
   if (process.env.DEEP_RESULTS) writeFileSync(process.env.DEEP_RESULTS, JSON.stringify(results, null, 1));

@@ -56,3 +56,21 @@ A synthetic success shows what the program does. It is not evidence that anyone 
 - Hand-off: no educator is notified, and no hand-over record or acknowledgement is created. The text points the learner to a teacher or parent only.
 - Grading parity: the node-side synthetic `wrong()` answer "0" to a tuple question is graded wrong locally, while the server holds it as unreadable (undecided). The e2e uses wrong answers of the right shape. Undecided answers are not attempts, so the engine can ask the same question again (seen in the browser before the fix). This is engine behaviour and was not changed.
 - A sitting is defined as "2 hours without activity". This is a product decision that has not been validated.
+
+## Phase 6 (branch research/dr6-app)
+
+- **Pause and resume in the browser:** a research build option sets a lower limit per sitting: `build-year.mjs --test --deep-recovery --deep-sitting=N`, with N from 1 to 39. The script refuses the option otherwise, and every other build keeps 40. Results with N = 12 and the multiple-gap learner:
+  - The recovery paused: "That is enough for one sitting (12 questions and explanations). Nothing is finished yet and nothing is counted as solved. Your place is saved: next time starts with a fresh question on Use algebraic identities, then back up to a fresh problem of the same kind."
+  - A reload 30 minutes later stayed paused, and nothing new was recorded.
+  - The year-page card said "Paused: your place is saved".
+  - After moving the server and browser clocks 3 hours on, the recovery resumed on the same diagnosis path. It paused twice more, then ended on two fresh integrals: "Solved after help", with 5 lessons, 40 screens in total, and a longest saved context of 188 characters.
+- **Shipped build:** `Main.tsx` reads the build constant directly, so a shipped bundle reduces the switch to the constant `false` and never reads `?deep` or the saved preference. A node test checks this on a fresh shipped bundle. In the browser, a shipped build opened with `?deep=1&stuck=…` shows the ordinary year page and does not remember the setting. The research view's code is still present in the shipped bundle but cannot be reached.
+- **Runner:** `frontend/e2e/run-deep-recovery.sh` builds and runs three sets: main (default research build), pause (`--deep-sitting=12`) and shipped. `START_API=1` also starts Django locally. CI calls the same script.
+- **State tests:** 5 more backend tests:
+  - the 600-character limit holds even for a well-formed deep context;
+  - more than 16 skills on the path is refused;
+  - 11 malformed shapes are refused;
+  - other records keep their limits (non-deep contexts at most 80, lesson rule at most 40), a recovery ID is refused anywhere except on a lesson, and no record other than an attempt may carry a context;
+  - a deep context does not change how an answer is decided;
+  - earlier records read back unchanged after deep-recovery records are added.
+- **Prerequisite links for review:** `review/PREREQUISITE-LINKS.md` (pending educator review; nothing applied).

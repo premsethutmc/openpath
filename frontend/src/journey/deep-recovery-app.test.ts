@@ -7,12 +7,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { readFileSync } from "node:fs";
+import { mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { question } from "../../../packages/learning/src/content";
 import { exposureKey } from "../../../packages/learning/src/families";
 import { withDecisions } from "../../../packages/learning/src/records";
-import { DEEP_APP_OPTIONS, SITTING_GAP_MS, deepScreen, openDeepRecoveries, type DeepScreen } from "../learning/deep-recovery-app";
+import { DEEP_APP_OPTIONS, SITTING_GAP_MS, sittingLimit, deepScreen, openDeepRecoveries, type DeepScreen } from "../learning/deep-recovery-app";
 import { DEEP_RECOVERY_BUILD, deepRecoveryOn } from "../year/deep-recovery-flag";
 import { structuredLearner, type Answerer } from "./deep-recovery-journey";
 import { SliceSession } from "./session";
@@ -87,6 +89,32 @@ test("switch: the build script defines it false unless --test --deep-recovery, a
   for (const f of ["../../scripts/build-curriculum.mjs", "../../scripts/build-mathematics-journey.mjs"]) {
     try { assert.doesNotMatch(readFileSync(fileURLToPath(new URL(f, import.meta.url)), "utf8"), /OPENPATH_DEEP_RECOVERY: *(?:"true"|true)/, f); } catch (e) { if ((e as NodeJS.ErrnoException).code !== "ENOENT") throw e; }
   }
+  for (const bad of [["--deep-sitting=12"], ["--test", "--deep-sitting=12"], ["--test", "--deep-recovery", "--deep-sitting=40"], ["--test", "--deep-recovery", "--deep-sitting=x"]]) {
+    const b = spawnSync(process.execPath, [script, ...bad], { encoding: "utf8", env: { ...process.env, DIST: "dist-deep-refused" } });
+    assert.notEqual(b.status, 0, bad.join(" "));
+    assert.match(b.stderr, /needs --test|needs --test --deep-recovery/, bad.join(" "));
+  }
+});
+
+test("switch: a shipped build (no flags) never reads ?deep or the saved preference; the sitting limit stays 40", () => {
+  const script = fileURLToPath(new URL("../../scripts/build-year.mjs", import.meta.url));
+  const root = fileURLToPath(new URL("../..", import.meta.url));
+  const dir = mkdtempSync(join(tmpdir(), "shipped-year-"));
+  try {
+    const r = spawnSync(process.execPath, [script], { encoding: "utf8", env: { ...process.env, DIST: relative(root, dir) } });
+    assert.equal(r.status, 0, r.stderr);
+    assert.doesNotMatch(r.stdout, /deep-recovery/);
+    const js = readFileSync(join(dir, "year/app.js"), "utf8");
+    assert.ok(js.length > 100_000, "the bundle was built");
+    assert.ok(!js.includes('get("deep")'), "the switch is folded to false: ?deep is never read");
+    assert.ok(!/(?:set|remove)Item\("openpath\.deep-recovery@0"/.test(js), "nor is the saved preference");
+    assert.ok(!js.includes("OPENPATH_DEEP"), "no build constant left to set at run time");
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+  assert.equal(sittingLimit(undefined), 40);
+  assert.equal(sittingLimit(0), 40);
+  assert.equal(sittingLimit(12), 12);
+  assert.equal(sittingLimit(400), 40, "never raised above the default");
+  assert.equal(DEEP_APP_OPTIONS.sessionBudget, 40, "node (no build define): the default");
 });
 
 // ---------------------------------------------------------------------------------------------------------------- journeys

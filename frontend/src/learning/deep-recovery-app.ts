@@ -20,8 +20,14 @@ import type { ModuleState } from "../../../packages/learning/src/intervention";
 import type { LearnerRecords, LearningActivity } from "../../../packages/learning/src/records";
 import { activityFor } from "./driver";
 
+/** TEST BUILDS ONLY: `build-year.mjs --test --deep-recovery --deep-sitting=N` lowers the per-sitting limit so a browser journey can
+ *  reach a pause; every other build defines 0 (the default below applies) */
+declare const OPENPATH_DEEP_SITTING: number;
+export const DEFAULT_SITTING = 40;
+export const sittingLimit = (defined: unknown = typeof OPENPATH_DEEP_SITTING === "undefined" ? undefined : OPENPATH_DEEP_SITTING) =>
+  typeof defined === "number" && Number.isInteger(defined) && defined > 0 && defined < DEFAULT_SITTING ? defined : DEFAULT_SITTING;
 /** the phase-4 configuration (research/deep-recovery results): selective confirmation, reuse, 40 per sitting, 120 per episode */
-export const DEEP_APP_OPTIONS: DeepRecoveryOptions = { confirm: "selective", reuse: true, sessionBudget: 40, budget: 120, validDays: RETENTION_DAYS };
+export const DEEP_APP_OPTIONS: DeepRecoveryOptions = { confirm: "selective", reuse: true, sessionBudget: sittingLimit(), budget: 120, validDays: RETENTION_DAYS };
 /** a sitting ends after this long without an answer or a lesson (reloads and sign-outs inside it are the same sitting) */
 export const SITTING_GAP_MS = 2 * 3_600_000;
 export const DEEP_TAG = "deep:";
