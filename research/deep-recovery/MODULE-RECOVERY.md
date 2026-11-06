@@ -223,3 +223,67 @@ reads `why` only. Everything else (the struggle check, starting the episode, the
   Whether a solved deep episode should lift that stop is a policy question, not answered here.
 - Synthetic learners only. The prerequisite links that deep recovery followed (e.g. triangle-properties → angle measure, from the
   question's own solution steps) are not approved by this work.
+
+## 9. Phase 8: #115's angle-pairs stop after a repaired prerequisite (research/dr8-anglepairs, owner's decision)
+
+Owner: "A repaired prerequisite alone should not automatically lift it. If the pause was solely because of that gap, let the learner
+attempt a fresh angle-pairs question independently. If they succeed, allow the module to continue and record the recovery; if they
+don't, retain the pause or offer appropriate support. If the pause has another reason, preserve it."
+
+This supersedes phase 7's "stop kept with a true reason" for angle-pairs. The phase-7 test is updated to match.
+
+This lives in the wrapper only (`deep-module.ts`, `repairedGapOnly` and repaired-gap@0 in `deepModuleState`). #115's hunks and the
+engine are untouched. The switch is off by default.
+
+### Rule: "solely attributable" (`repairedGapOnly`, from saved records only)
+
+All of these must hold:
+1. The stop is #115's own-teaching stop: planner `recommend_human` (policy C) or `after-pass@1`. Any other pause kind (no-dead-end,
+   no unit check, relapse, bounded input, every explanation tried, written work waiting, handover re-entry) is a different reason and
+   is kept unchanged.
+2. The deep episode ended `solved` or `solved_after_help` with diagnosis `prerequisite` and a named cause. That means a lesson on a
+   skill below, that skill re-checked right, and fresh unaided goal answers right after it. A slip, a blocked or escalated episode, or
+   "own-or-unmapped" is not a repaired gap.
+3. No misconception is established, or open and due for teaching, in the competency.
+4. The episode began from this module's own struggle: its original is a wrong answer on the unit after the module's own teaching.
+
+### Routes
+
+- **Solely attributable** → ONE fresh question of the unit on the learner's own (`unitCheck`). Fresh means never presented by
+  problem key, counting answers, unresolved and pending answers, and teaching-screen instances. It is not a teaching screen.
+  - **Right (route 1)**: the module carries on with fresh questions of its own (`questionForRequirement`, never presented), with
+    `why: deep-recovery-module@0: recovered (<cause>; <episode outcome>)`, until #115's own decision takes over (the skill shown) or
+    the questions run out ("progress, not yet mastery; come back another day"). A wrong answer on the way brings #115's stop back.
+    The recovery is recorded: the episode's attempts (`deep:` contexts), its lesson with the recovery id, and its
+    solved-after-help outcome all stay in the records and are rebuilt from them. Nothing is counted as unaided.
+  - **Wrong (route 2)**: #115's stop is **kept**, with its decision and its way back (handover@1); only the reason says what
+    happened. There is no second descent: the gap below was repaired and re-checked, so what is left is this skill itself, and its own
+    explanations were already tried (policy C: a person). "Appropriate support" is that hand-off. Worker D's educator hand-off can
+    attach here.
+- **No fresh question left** → the stop is kept, and the reason says so.
+- **Not solely attributable** → #115's stop as it is (or the slip / blocked reasons from phase 7).
+
+A later wrong answer on the unit never starts a second episode: once an episode began from the unit's struggle, its outcome decides.
+
+### Tests (`frontend/src/journey/deep-recovery-module-anglepairs.test.ts`, 6/6, switch on unless stated)
+
+| Case | Result |
+|---|---|
+| Route 1: angle measure taught by deep recovery → one fresh angle-pairs question, right | Exactly one after-repair question, never presented before; the module carries on with its own questions and is not stopped again; the episode reads back as `solved_after_help`, diagnosis `prerequisite`, cause angle measure, with its lesson carrying the recovery id |
+| Route 2: same, the fresh question wrong | #115's stop kept (same planner decision and handover as #115), no further question, one episode only |
+| Other reasons | A slip (no gap repaired) keeps the phase-7 slip stop; scale drawings (ratio not teachable) keeps the blocked stop; no after-repair question in either |
+| Rule itself | true for the repaired-gap case; false for another stop kind, for no prerequisite repaired, and for an episode not from the unit's struggle |
+| Reload at every step, both routes | The decision before and after each reload is identical (phase, question, why, deep screen), and the whole journey is identical |
+| Switch off | `deepModuleState(false)` deep-equals #115's `moduleState` at every step; no `deep:` records; the module stops after its own teaching |
+
+Regression on this branch (local, no CI): #115's own 13 test files 129 pass, 0 fail, 2 marked TODO in #115 itself; policies, scenarios, foundation-pathway,
+missing-number-support, slice, generalisation 76/76; deep-recovery* (non-module) 78/78; deep-recovery-module* 22/22 after the
+phase-7 angle-pairs test was updated. `npx tsc --noEmit` and `-p tsconfig.english.json` from frontend/: exit 0.
+
+### Not proven (phase 8)
+
+- No browser run.
+- Only angle-pairs reaches this route among the four #115 modules: addition-regroup and triangle-properties continue by themselves
+  after the episode, and scale-drawings is blocked.
+- "Module continues" ends where #115's evidence takes over or the fresh questions run out. The amount of evidence a route-1 learner
+  then needs is #115's (sub-skill coverage), not changed here.

@@ -117,14 +117,13 @@ test("own teaching fails, then deep recovery, then fresh problems in the module 
   }
 });
 
-test("angle pairs: own teaching fails, deep recovery teaches angle measure, fresh angle-pair problems right; #115's stop (policy C) kept with a true reason", () => {
+test("angle pairs: own teaching fails, deep recovery teaches angle measure, fresh angle-pair problems right; then (phase 8, repaired-gap@0) one fresh angle-pairs question alone decides: right here, the module carries on", () => {
   const { steps } = run(PAIRS, learner(PAIRS, [MEASURE]));
   assert.ok(lessons(steps).includes(MEASURE));
   assert.ok(steps.some((x) => x.phase === "return" && x.correct));
-  const last = steps.at(-1)!;
-  assert.equal(last.phase, "pause");
-  assert.equal(last.why, `${DEEP_MODULE_POLICY}: solved; module stop kept (policy C)`);
-  assert.match(last.reason!, /angle measure/);
+  // phase 7 kept #115's stop here; the owner's phase-8 decision replaces that (deep-recovery-module-anglepairs.test.ts covers both routes)
+  assert.ok(steps.some((x) => x.where === "module" && x.phase === "check" && x.correct && x.qid && question(x.qid).competency === PAIRS));
+  assert.notEqual(steps.at(-1)!.phase, "pause");
 });
 
 test("scale drawings: own teaching fails, deep recovery finds ratio with no teachable content here: the module pauses, nothing solved", () => {
