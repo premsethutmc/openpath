@@ -39,7 +39,8 @@ export interface Ctx {
   session: string;
   saving: boolean;
   answer: (qid: string, response: string, activity: LearningActivity, o?: { hints?: number; context?: string; working?: string[]; clarifications?: number }) => Promise<boolean>;
-  teach: (competency: string, strategy: string, rule: string) => Promise<boolean>;
+  /** `episode` (research, deep-recovery@0): the recovery that delivered this lesson; omitted everywhere else */
+  teach: (competency: string, strategy: string, rule: string, o?: { episode?: string }) => Promise<boolean>;
   /** the server's recorded decision for the answer just saved (authoritative); null when the server recorded none */
   recorded?: () => ServerDecision | null;
 }

@@ -28,6 +28,7 @@ on:
         "frontend/e2e/educator-marking.test.mjs",
         "frontend/e2e/educator-access.test.mjs",
         "frontend/e2e/integrated-skills.test.mts",
+        "frontend/e2e/deep-recovery-app.test.mts",
         ".github/workflows/learning-year.yml",
       ]
 permissions:
@@ -110,6 +111,10 @@ jobs:
           # nine days on a wrong delayed check, the skill's general explanation, a fresh same-skill recheck, reload
           mkdir -p /tmp/year-screens
           PATHWAY_API=http://127.0.0.1:8014 OPENPATH_TEST_CLOCK_FILE=$OPENPATH_TEST_CLOCK_FILE CHROMIUM_PATH='' FAIL_BODY=/tmp/year-screens/integrated-fail INTEGRATED_RESULTS=/tmp/year-screens/integrated-skills.json node --import tsx e2e/integrated-skills.test.mts
+          # deep-recovery@0 (RESEARCH, off by default): the switch exists only in a --test --deep-recovery build; single and multiple
+          # gaps to a fresh unaided goal question, reload / sign-out / resume, a failed save, missing content, no fresh question, switch off
+          node scripts/build-year.mjs --test --deep-recovery
+          DEEP_API=http://127.0.0.1:8014 CHROMIUM_PATH='' SHOTS=/tmp/year-screens DEEP_RESULTS=/tmp/year-screens/deep-recovery-app.json node --import tsx e2e/deep-recovery-app.test.mts
           # Keyboard integration uses the actual provisional-content builds, not the educator-review fixture.
           node scripts/build-year.mjs
           node scripts/build-curriculum.mjs
