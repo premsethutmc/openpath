@@ -1,9 +1,0 @@
-{
- "dataset": "eval",
- "label": "run1",
- "traces": 400,
- "steps_checked": 2144,
- "invalid_steps": 0,
- "wrong_claims": 0,
- "problems": []
-}

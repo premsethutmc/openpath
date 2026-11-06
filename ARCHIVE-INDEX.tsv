@@ -1,0 +1,197 @@
+branch	commit	last_commit_date	contained_in	open_pr_at_archive
+feature/apple-shopping-prototype	df50049e267f0aa368bd6deaaaed421bebe6c603	2026-10-11	main,112,115,dr8	-
+feature/visual-quality-poc	93ea1db5e0dfa7a47eb8848f45c8d0fad18c25dc	2026-10-11	-	#2 draft
+docs/architecture-audit	03928b6c9d8a1f21169e658b234d73b0e61c10a3	2026-10-12	main,112,115,dr8	-
+docs/english-e3-scope	3cecfad502b9c0f999d9a8882ecd0e14dddc763b	2026-10-12	main,112,115,dr8	-
+docs/english-plan	0a90631cd7261d2758ba22076288fc6254d583b5	2026-10-12	main,112,115,dr8	-
+docs/english-web-proposal	72e854be19be6ec4a388fb04b60290430c652527	2026-10-12	main,112,115,dr8	-
+feature/english-e1	14b44a5cf229b06914ca4c7af9cbf2b22c5dd3ea	2026-10-12	main,112,115,dr8	-
+feature/english-e2a	6ecdb47c8ada2e2100badebce28284bd80f6375c	2026-10-12	main,112,115,dr8	-
+feature/english-e2b	fea8c17de22c5146fdb6ed5c30c1c3ce46dff497	2026-10-12	main,112,115,dr8	-
+feature/english-e3a	92032360ba5aa924840de1a1f4713e8106f75cd9	2026-10-12	main,112,115,dr8	-
+feature/home-vertical-slice	3f01224fd49e94aa6ddc008430d6f87d10b7a5f3	2026-10-12	-	#3 draft
+english/evidence-provenance	f74de80bf0c2ce1f10020160821d9dd6efddefe8	2026-10-13	main,112,115,dr8	-
+english/pilot-readiness	a48b044e8f1d53ece10f9bba477ce116bd3840b9	2026-10-13	main,112,115,dr8	-
+english/rule-evidence	59e6e51fc6f4484d00308294c599fdf2dd081669	2026-10-13	main,112,115,dr8	-
+english/rule-evidence-review-fixes	3aa3548d0387a1d98bc1611fb6ec5c668bb5484b	2026-10-13	main,112,115,dr8	-
+english/web-app	9f3b136b6ed676c3b4988773edb339df8b4f3bef	2026-10-13	main,112,115,dr8	-
+english/doubling-journey	651409b0608daf11e93ae46dd4001ed41cb9e089	2026-10-14	main,112,115,dr8	-
+english/learner-profile	a9caf83f333977224b8d1003feda53a9cf95d5e4	2026-10-14	main,112,115,dr8	-
+english/mvp-correctness	eac674520b45e427e595f4a632e08a3696c6ef90	2026-10-14	main,112,115,dr8	-
+english/pilot-blockers	aa79134c59fd6775bc1f349b5ee79d997ce6b4ca	2026-10-14	main,112,115,dr8	-
+english/pilot-content	5fb4a4c932c718db21c7c9b8832377b073f4349e	2026-10-14	main,112,115,dr8	-
+english/pilot-evidence-integrity	bce142ec601d3d3b0dae7d4491d3f779d7f9c380	2026-10-14	main,112,115,dr8	-
+english/pilot-prep	6dc1740c9713d01c2738117e5c5d60da825c8dfb	2026-10-14	main,112,115,dr8	-
+english/validity-ux	5c85bc4bd8d65367b3e6faa03db44aa0d78fa6db	2026-10-14	main,112,115,dr8	-
+product/developer-diagnostics	17eecd8c870538f41d1cea7992b06b9974ba6b55	2026-10-14	main,112,115,dr8	-
+product/ux-integration-v1	b623c5ec024dbbc16a7657119f2fbce8ae66d048	2026-10-14	main,112,115,dr8	-
+ci/failure-detection-guard	7e74bf72490eb83e7d80b938c6b9eec4488df703	2026-10-15	main,112,115,dr8	-
+docs/educator-review-and-device-test	e158986044b5e999105f799d107331c9578f756d	2026-10-15	main,112,115,dr8	-
+integration/openpath-release-candidate	c8aa9bf91988818956e13077c16512b5fc6f30a0	2026-10-15	main,112,115,dr8	-
+product/adaptive-spelling-assessment	830264ae4edcc4fb8fe20f7716bca37db23c308a	2026-10-15	main,112,115,dr8	-
+product/pilot-readiness-audit	80827f3326b2dc5ce5ecec0269c1e528b2e0c07d	2026-10-15	main,112,115,dr8	-
+spelling/bee-and-owner-approval	f5b92409da82667a3f22c353578a56491db0964d	2026-10-15	main,112,115,dr8	-
+spelling/my-books	2ad6a712a16c3869b6aeabc726bdbccdce4e967a	2026-10-15	main,112,115,dr8	-
+spelling/my-words	f9cf47d2685fa33db90c3cd4d8c4520ae11a95c7	2026-10-15	main,112,115,dr8	-
+tmp/ci-must-fail-proof	4c278815f15c8f95b9e97291319ba2dfaffd1028	2026-10-15	-	-
+design/adaptive-spelling	8c5f56e42e81aee3a99ae753d9cba583759cab5f	2026-10-16	-	-
+feat/tamil-foundation	f4dc8d5a4ea4b66e76253a0b55ceed5ade9c3c44	2026-10-16	112,115,dr8	-
+research/e003-actual-ledger-comparison	1f9146d07f7a27a1a91c2cbd2b65157dcbcb04fb	2026-10-16	-	#39 draft
+spelling/bee-audio	5319c5f394a4e0ee3f3dd06a3cc4f0d571b515d2	2026-10-16	main,112,115,dr8	-
+docs/autonomous-tutor-architecture	583de9cd99f291c2622d914c84e4b47d237a5e55	2026-10-18	-	#42 draft
+feat/assessment-recovery-v1	d4fbf59a8af08c1dbaf73afab1e199a04aed6f6b	2026-10-18	112,115,dr8	#47 draft
+feat/assessment-retention-v1	604d59134e9d46a837d47d3a3008c228d56a22ca	2026-10-18	112,115,dr8	#46 draft
+feat/educator-validation-v1	b6209c476109a9c08f3c0699fd3fadb458b47d3c	2026-10-18	112,115,dr8	#48 draft
+feat/english-learning-journey-v1	5d303c6f9b6f66d7c036bcd762ceb78b735e0fc7	2026-10-18	-	#41 draft
+feat/essay-diagnostic-workflow	2a8984848b95b7a7096f654a3adabee0bac98b3c	2026-10-18	112,115,dr8	#50 draft
+feat/essay-integration-v1	8c09417e771dade7fe7f2afa577282a2402b5a5b	2026-10-18	112,115,dr8	#44 draft
+feat/essay-intelligence-v2	e3e400ffa006911037a7d7f0226e5756f2896757	2026-10-18	112,115,dr8	#45 draft
+feat/essay-learning-experience-v1	fd938ec8ad18ba0b778be87fa3f2ff07f84cbb72	2026-10-18	112,115,dr8	-
+feat/essay-learning-intelligence-v1	e1c64058403fe841a0d3993932ae4c9200510db6	2026-10-18	112,115,dr8	#43 draft
+feat/jee-quadratics-v1	b43f292ebefd22e61523d8181119522335115200	2026-10-18	112,115,dr8	#56 draft
+feat/mathematics-foundation-v1	22e28c726cfb24aba33f5f8035537b404828586f	2026-10-18	112,115,dr8	-
+feat/mathematics-learner-journey-v2	6a45e52ff7ddbeeae8fb0351017f0daee5b3c436	2026-10-18	112,115,dr8	-
+feat/pilot-validation-v1	9e36a1bee331baedf018aefc6d20ee34a11e8366	2026-10-18	112,115,dr8	#49 draft
+feat/verification-consistency	8865e81a23faa72b64eab4b1cd4d67e9272787a4	2026-10-18	112,115,dr8	#51 draft
+fix/essay-planner-corrections	a702878b83d7b92783dcd2244c426b00dbeaee75	2026-10-18	112,115,dr8	#52 draft
+fix/essay-retention-followups	166c2adbd7ffea794118dd0b6e12729d9f0f6049	2026-10-18	112,115,dr8	#54 draft
+integ/openpath-english-math-v1	174f73136841b9f980fe35c632ed290c2ead1b5a	2026-10-18	112,115,dr8	#55 draft
+integ/verification-planner	a24acc97b5322440e9f9ab11b5cb96b55356f1d2	2026-10-18	112,115,dr8	#53 draft
+backup/stack-2026-10-27/feat/my-learning-year	72cfed1b4eb99c44082e9c8a348ef3ea627e2a34	2026-10-19	112,115,dr8	-
+backup/stack-2026-10-27/feat/my-learning-year-content-system	8aff2739070cbba128ca76e8b232e6cff264b42b	2026-10-19	112,115,dr8	-
+backup/stack-2026-10-27/feat/my-learning-year-corrective	19752e174e2687c37d60c2a68620d4098199f29e	2026-10-19	112,115,dr8	-
+backup/stack-2026-10-27/feat/my-learning-year-platform	9c7ca858f2cec8c39ef22399670dff9d149e2632	2026-10-19	112,115,dr8	-
+backup/stack-2026-10-27/integ/learning-year-base	1a75e2b583c9dfa20ca7820a0b77eabf1061d363	2026-10-19	112,115,dr8	-
+feat/cts-adaptive-remediation	685a24f631af05d0668645d91de2d8faedd71c1c	2026-10-19	112,115,dr8	#59 draft
+feat/cts-reference-unit	84a811cbd8d49ef2e6b1f0c96ead5c199f629286	2026-10-19	112,115,dr8	#57 draft
+feat/grade1-6-mathematics-foundation	d99879cd96550364178831c56b8fe9b8e19116e0	2026-10-19	112,115,dr8	-
+feat/my-learning-year	72cfed1b4eb99c44082e9c8a348ef3ea627e2a34	2026-10-19	112,115,dr8	#61 draft
+feat/my-learning-year-content-system	8aff2739070cbba128ca76e8b232e6cff264b42b	2026-10-19	112,115,dr8	#64 draft
+feat/my-learning-year-corrective	19752e174e2687c37d60c2a68620d4098199f29e	2026-10-19	112,115,dr8	#62 draft
+feat/my-learning-year-platform	9c7ca858f2cec8c39ef22399670dff9d149e2632	2026-10-19	112,115,dr8	#63 draft
+feat/openpath-kids-chintoo	4a599e607c555931d350bb4834ebd801365c6bdd	2026-10-19	-	#58 draft
+feat/spelling-bee-standalone-learning	cb9bc7b914b8bd1e134556a0b20b4f88523a139f	2026-10-19	-	-
+fix/mathematics-prerequisites-reproducibility-v1	86d731b1443ac61bf50c35829cbfa8dc4d5b9295	2026-10-19	112,115,dr8	-
+integ/learning-year-base	1a75e2b583c9dfa20ca7820a0b77eabf1061d363	2026-10-19	112,115,dr8	#60 draft
+design/mathematics-notebook-v1	a8da91ced9982c00da08569739da796d6a319d2e	2026-10-20	-	-
+feat/approved-mathematics-notebook-v1	55d00bd56d42eb208e1c65b791eea85693dd12c7	2026-10-20	-	-
+feat/grade7-learning-journey-v1	4f685e7e3fc4990787f241a8d5f262f887bfc983	2026-10-20	-	-
+feat/mathematical-writing-integration-v2	8341cc91780785fcd5ba25eab03cb155686ae916	2026-10-20	-	-
+feat/mathematical-writing-learning-year-v3	af0aef182d2ec4e6fb0b1de9bc94dab034cbf411	2026-10-20	-	-
+feat/mathematical-writing-workspace-v1	d868060890d4c27614eada155ee9e1979fd0c3ea	2026-10-20	-	-
+feat/mathematics-keyboard-only-v1	c787f1b5554f42e1fb76f39e0d6e5b39a76f3093	2026-10-20	-	-
+feat/mathematics-mistake-recovery-v1	39d0006140e223805f2f802db4d3d3ca2625e0ca	2026-10-20	-	-
+feat/mathematics-one-answer-v1	d12849be876f0b58af6677bfc1825312395c60d1	2026-10-20	-	-
+feat/preview-demo-student-v1	c2412a46851c7d6bedde15c4bb4e31cdde2cc32c	2026-10-20	-	-
+feat/progressive-long-division-v1	961733dad88b7290407a2ffbbecbf9c252235b0a	2026-10-20	-	-
+backup/stack-2026-10-27/feat/mathematics-completion	051f7fb9c9bd526e800aa08d9adb99ca19f485b8	2026-10-21	112,115,dr8	-
+backup/stack-2026-10-27/feat/mathematics-curriculum-tiles	5f1097a11e4414659245009e445680a83c18e74d	2026-10-21	112,115,dr8	-
+feat/grade7-dashboard-entry-v1	85d4844f97267a2b3e542e9ea4e167979421c7b2	2026-10-21	112,115,dr8	-
+feat/grade7-diagnostic-session-v1	fc21ed8d560f8b8f34df9a0cefc2e0d3752b1066	2026-10-21	112,115,dr8	-
+feat/grade7-session-completion-v1	ac0a76434a65947c84112b69da2d00c48da3aa3e	2026-10-21	112,115,dr8	-
+feat/grade7-teaching-practice-v1	dd7937117bc94aa67f799fe2a35496b8d5284cd7	2026-10-21	112,115,dr8	-
+feat/interactive-mathematics-preview-v1	6d580351d4ca00bdb13de956757c608d9ad88ead	2026-10-21	112,115,dr8	-
+feat/mathematics-completion	051f7fb9c9bd526e800aa08d9adb99ca19f485b8	2026-10-21	112,115,dr8	#65 draft
+feat/mathematics-curriculum-tiles	5f1097a11e4414659245009e445680a83c18e74d	2026-10-21	112,115,dr8	#66 draft
+feat/mathematics-keyboard-dashboard-integration	607154614d888b847be724bd6742f23ab3f8abce	2026-10-21	112,115,dr8	-
+feat/teaching-first-mathematics-preview-v1	b336ab12fb51f7c6654571cdb179ad12b1317021	2026-10-21	112,115,dr8	-
+feat/universal-curriculum-journey-v1	9373a7ba7a8c89fee0c0f591f3384b51cee3b2c2	2026-10-21	112,115,dr8	-
+backup/stack-2026-10-27/feat/curriculum-wide-teaching-coverage	ec8683f7b022e9b9fb975c0950b1500e76cf3741	2026-10-22	112,115,dr8	-
+backup/stack-2026-10-27/feat/expand-verified-teaching	8121178c5d67536adfb6e8a38b7d9c4010970c61	2026-10-22	112,115,dr8	-
+backup/stack-2026-10-27/feat/universal-teaching-presentation-v1	1a40112a5a5c71b7ea9af13544c0345e14f6d874	2026-10-22	112,115,dr8	-
+feat/curriculum-wide-teaching-coverage	ec8683f7b022e9b9fb975c0950b1500e76cf3741	2026-10-22	112,115,dr8	#67 draft
+feat/universal-teaching-presentation-v1	1a40112a5a5c71b7ea9af13544c0345e14f6d874	2026-10-22	112,115,dr8	-
+backup/stack-2026-10-27/spike/oss-math-engine	0cc05d3acaaec16eefaf8d08e14062db551c5854	2026-10-23	112,115,dr8	-
+backup/stack-2026-10-27/docs/milestone-tn5-verified-bank	74edb9e66cd69894d30ba0c62410b40115a9df13	2026-10-24	-	-
+docs/milestone-tn5-verified-bank	74edb9e66cd69894d30ba0c62410b40115a9df13	2026-10-24	-	#71 draft
+backup/stack-2026-10-27/audit/math-engine-generality	6999970963847649b54a674aafe1c8aa6f9b3cdb	2026-10-25	112,115,dr8	-
+backup/stack-2026-10-27/docs/milestone-domain-aware-reasoner	922dc0cefe328f965e30ed68c36fccf8ee1a431d	2026-10-25	112,115,dr8	-
+backup/stack-2026-10-27/docs/milestone-math-reasoner	acc4c8a923c626d1dcf43c386aea883dd1bab316	2026-10-25	-	-
+backup/stack-2026-10-27/docs/milestone-multi-format-bank	9b58d5163934015492eb90af4f880aa3988e9aa3	2026-10-25	-	-
+backup/stack-2026-10-27/feat/domain-aware-reasoner	c95f0f93a2a83fd93566303dfe2e74807ed7845a	2026-10-25	112,115,dr8	-
+backup/stack-2026-10-27/feat/math-reasoner	111a1eb6b8cb377883c50f848ab6ff437fb15f4a	2026-10-25	112,115,dr8	-
+backup/stack-2026-10-27/feat/tn5-verified-bank	f619fbf0d45a839f0b2ec73908d202b693c41eb3	2026-10-25	-	-
+backup/stack-2026-10-27/fix/r1-soundness	f3471fbe9cc3d4900d28bf8b9d5cba0fdf843a68	2026-10-25	112,115,dr8	-
+docs/mathematics-engine-roadmap	eeafb0d77882c9d22201f14bdc3a07cebce0ff5e	2026-10-25	-	-
+docs/milestone-math-reasoner	acc4c8a923c626d1dcf43c386aea883dd1bab316	2026-10-25	-	#74 draft
+docs/milestone-multi-format-bank	9b58d5163934015492eb90af4f880aa3988e9aa3	2026-10-25	-	#73 draft
+backup/stack-2026-10-27/docs/claude-project-setup	758f53e06854810ced1cd5d2c1a0531010581334	2026-10-26	-	-
+backup/stack-2026-10-27/docs/r2-unified-architecture	76df011022b6bd186abbff0200868529ad4e777f	2026-10-26	-	-
+docs/claude-project-setup	758f53e06854810ced1cd5d2c1a0531010581334	2026-10-26	-	#70 draft
+audit/math-engine-generality	52c945fc455f9ebb6dbaa80b3e1ac2d348313a78	2026-10-27	112,115,dr8	#78 draft
+backup/stack-2026-10-27/feat/math-core	99715c5839683e79a7f0cbf6f3087234659cee41	2026-10-27	112,115,dr8	-
+docs/milestone-domain-aware-reasoner	d69e5864b318e0b5cd0184b2b26b7ba7ad77a9ef	2026-10-27	112,115,dr8	#76 draft
+docs/r2-unified-architecture	4678c23fd8cc5d1a717d609ab0f2ecaec0e73399	2026-10-27	-	#80 draft
+eval/math-assessment-e1	55361ec99eba1faec3b60b8b660650a44d973cf7	2026-10-27	112,115,dr8	-
+feat/calculus-integration-c2	74d78e69ed90da3df9e233bb7e72da38f9c1ed27	2026-10-27	112,115,dr8	-
+feat/calculus-methods-c3	d09293393d86ba7551cb5222e712b4c7841f34b7	2026-10-27	112,115,dr8	-
+feat/domain-aware-reasoner	9cfc9ce07e8c2db63aefc07b5d5231ca917d3b55	2026-10-27	112,115,dr8	#77 draft
+feat/expand-verified-teaching	169cc0c9c67d4f2c92fc8e09ce32935d0471d9f5	2026-10-27	112,115,dr8	#68 draft
+feat/geometry-core	d1fb0265cd001ae147294d8e334213d2e4e2f966	2026-10-27	112,115,dr8	-
+feat/math-canonical-ir-d8	0711533e824cc2a544c4c942300a8b984b2a2fd2	2026-10-27	112,115,dr8	-
+feat/math-complex-b3	9bcda37cc98fd4561979156a0f4362580800a4d3	2026-10-27	112,115,dr8	-
+feat/math-core	93127dd709358982b923c05797405ec0aa539364	2026-10-27	112,115,dr8	#81 draft
+feat/math-cross-domain-d3	c2108ec3e1bc1cce1a730431b8df7a1b1b02758a	2026-10-27	112,115,dr8	-
+feat/math-domains-m1	31c374bb7ab41124c07768e3333eab80988aeba4	2026-10-27	-	-
+feat/math-domains-m2	687866ea46ddffcecb0ccee1bb53c681084c465b	2026-10-27	112,115,dr8	-
+feat/math-geometry-calculus-e5	d28412ce2779931480932398643642c5ed172594	2026-10-27	112,115,dr8	-
+feat/math-linear-algebra-b2	303f9a64c15eafed304936e51995a59c6c2509d2	2026-10-27	112,115,dr8	-
+feat/math-natural-working-d4	21ca3c556bfb8438b6a7ee7e7ae6d17c2e017c50	2026-10-27	112,115,dr8	-
+feat/math-natural-working-d5	f867b2f43ecefd6c0e1cde3310eead1c9f1ba6f3	2026-10-27	112,115,dr8	-
+feat/math-natural-working-d6	11393b1c15f17ef86f3e271528385fd043609d66	2026-10-27	112,115,dr8	-
+feat/math-notation-hardening-d7	f1395ac0bbe22cb55efec199f21f62fb31f103f5	2026-10-27	112,115,dr8	-
+feat/math-probability-b1	78e8e279fa0fb50def68251349a1dc4b97018cc8	2026-10-27	112,115,dr8	-
+feat/math-proof-kernel-u4	64c839fcf7cb5f44943681773a91fdf36eaa07ce	2026-10-27	112,115,dr8	-
+feat/math-reasoner	42cd8c5362b4b6247b88860304baf8b38fe2ca20	2026-10-27	112,115,dr8	#75 draft
+feat/math-reasoning-depth-d1	8d03ade06b79d107b0d1822cb59f00ae550d5668	2026-10-27	112,115,dr8	-
+feat/math-reasoning-depth-d2	b34a3b823d9778ebc0bf69e6dc2b80b2db910586	2026-10-27	112,115,dr8	-
+feat/math-symbolic-m3	8bb64b35d431ef161ca42d2fccc1e2f0c8099fd1	2026-10-27	112,115,dr8	-
+feat/tn5-verified-bank	b675171b97e475783a2d2f0bb7a926e4faee32d1	2026-10-27	-	#72 draft
+feat/unified-math-engine	015c567583f7d342ed2f16594c38b6717658b32c	2026-10-27	112,115,dr8	-
+feat/unified-math-engine-u2	b1ad05202773707e402fa1dd22a30b4cd14f3220	2026-10-27	112,115,dr8	-
+feat/unified-math-engine-u2-hardening	6090ca4bf3e639dddcdedef7baa943c8f606a44d	2026-10-27	112,115,dr8	-
+fix/r1-soundness	570f9ce5419ab92631ebff8b9eacac9e35570fb2	2026-10-27	112,115,dr8	#79 draft
+integration/geometry-unified	e1bdfcdf3c0dd0428c93da3957f77bceb36a4557	2026-10-27	112,115,dr8	-
+integration/math-m1-u2-hardening	31e595f9bb0442e6ce57d920eba437337fa4b350	2026-10-27	112,115,dr8	-
+integration/unified-math-u3	2ddd0c1ecfdb34a77e31ac281e5e6e40684b67c0	2026-10-27	112,115,dr8	-
+research/geometry-reasoner	2538fb84a3cd387e5b47f5e64a9b40035d265dc8	2026-10-27	112,115,dr8	-
+spike/oss-math-engine	ef41af0244a089c9d1b936ace55fd74def938ebf	2026-10-27	112,115,dr8	#69 draft
+feat/math-generalization-core-e7	837c79cc8d7b1effa06b8553960322af7ec3f88b	2026-10-28	112,115,dr8	-
+feat/math-natural-generalization-e6	9ac079e21a6a82b678f8b9f7f2940dc285b5e317	2026-10-28	112,115,dr8	-
+feat/unified-grading	3e4c62d10cd242f57005ccb1c60a4704126fa66c	2026-10-29	112,115,dr8	#82 draft
+feat/adaptive-evidence-investigation	2db1c44414f6f4818fae79e172654104461828ea	2026-10-30	112,115,dr8	-
+feat/adaptive-journey-slice	e2176d265d75c252ae52659fdd657885ecd3acc4	2026-10-30	112,115,dr8	-
+feat/math-answer-key-certification	49a6be8b731827d8ebc0bb34d2e8bfd11804d1aa	2026-10-30	112,115,dr8	#83 draft
+feat/universal-learning-renderer	12a82f90b0ff341ca427eed9b55a8d911bdf9ac6	2026-10-30	112,115,dr8	#84 draft
+feature/adaptive-loop-repair	52899487ae4ddff3a7c234a041fe25317af1e51d	2026-10-30	112,115,dr8	-
+integration/milestone-1	9f3f65d6a4f3340e1e41ea0cca0061ceb20a5b0c	2026-10-30	112,115,dr8	-
+milestone-2/robust-adaptive	c58c4430cbad4cb049ad241edfe683f6a8623746	2026-10-30	112,115,dr8	-
+feat/grader-teaching-integration	adb27a157292006b4cb1a8fea5379ed25c3e4c9c	2026-10-31	112,115,dr8	#88 draft
+feat/linear-equations-teaching	4f97427b2734b448a15d4f0601fe5596957c42b8	2026-10-31	112,115,dr8	#87 draft
+feat/sub-skill-mastery-evidence	0d1f6221499c67c7f686f6520f06f512e7b22719	2026-10-31	-	-
+feat/teaching-content-safety	0d825e6f8709213a5f550ff047f0941534814d9f	2026-10-31	112,115,dr8	#86 draft
+milestone-2/closure-teaching-audit	4a7244fd512bd43954b82078e616a20aa2915cc0	2026-10-31	112,115,dr8	-
+research/synthetic-learner-simulator	750e20e91c2beeaffb2ae7eaf39cb61bff3d77b1	2026-10-31	-	#90 draft
+feat/recoverable-learning-handover	143ac7f47d9c240282cf43730f6cc811149df4e9	2026-11-01	112,115,dr8	#94 draft
+integration/d1-e1-subskill-evidence	cd40422b1d5f2c7c464b0eb10a0c73c340a3f7ec	2026-11-01	112,115,dr8	#91 draft
+research/synthetic-learner-experiment	3d03aee600a02af9cd8abb5271ba08b6e7c348bb	2026-11-01	-	#92 draft
+walkthrough/pr105-9be50269	556d9d6661bfa10d0a594b842c79bc692e4e2c53	2026-11-03	-	-
+feat/educator-access	2ea7ad57aa2489cf6593751528f7bf0859dbbe07	2026-11-04	112,115,dr8	#111 draft
+integration/dice-general-teaching	407853ab5c7cef7c066dec4d76e31438dedd562b	2026-11-04	112,115,dr8	#113 draft
+integration/fractions-learner-handoff	09be1483d5daa738fe6d8f9b83ae1bf5c4385c7e	2026-11-04	112,115,dr8	#106 draft
+integration/geometry-dice-107-108	eeddd031a091dc2dad6c07f97052f2b63836d99b	2026-11-04	112,115,dr8	#109 draft
+integration/geometry-dice-candidate	e22555311365d8f655cd1e768010ef1914e4ee34	2026-11-04	112,115,dr8	#110 draft
+walkthrough/pr106-8ff31cf7	05d4119874ebcdfb129cf52c4899677540bbdb1c	2026-11-04	-	-
+eval/learner-state-61edf730	baa84878ae5fa50dc77edb44779acc8e85acf0fc	2026-11-05	-	-
+research/deep-recovery-61edf730	cb5054a277084f51e605205a443c3a2e402fdcdb	2026-11-06	dr8	-
+research/deep-recovery-app	93c2202440368f117e21880f1cc5b313b92b27ed	2026-11-06	dr8	-
+research/deep-recovery-confidence	bbd60405b8afc5686016d88084b3ca3181487c54	2026-11-06	dr8	-
+research/dr6-app	c161c96f85f4b485620cc6e746e66e22aaa4c7da	2026-11-06	dr8	-
+research/dr6-handoff	1a2ccfccb11b86451a87184d2dcfe41a2580f2d2	2026-11-06	dr8	-
+research/dr6-module	d2e7fc8775988b629f5be4859b11aa6a18720de4	2026-11-06	dr8	-
+research/dr6-sim	5ad3ef13aeab2a73d321d6a328145d054240eb51	2026-11-06	dr8	-
+research/dr7-final-fixes	2bb010611315e8663d2b57f6bed41d5bb3a664a3	2026-11-06	dr8	-
+research/dr7-goal	b834b988b2a2ea0d0f6d215b61b7c13a1f00e823	2026-11-06	dr8	-
+research/dr7-handoff	cda0f6b08b687a4bacc489825f2be56902e2b024	2026-11-06	dr8	-
+research/dr7-with115	a932cba1dfdbe42270ad2bd60184dfb83bc0182c	2026-11-06	dr8	-
+research/dr8-anglepairs	7031d17709f85868383aaf0d33e54b7af48c7627	2026-11-06	dr8	-
