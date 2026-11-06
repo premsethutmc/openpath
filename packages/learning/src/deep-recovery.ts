@@ -67,6 +67,9 @@ export interface DeepRecoveryOptions {
    *  different-form (confirm): the confirming answers must include both formats (typed and picked from options) when a fresh item of
    *             the other format exists */
   delayed?: "add" | "replace";
+  /** consistency: wrong goal answers since the last lesson are not forgiven by a later streak: right minus wrong must reach the
+   *  rule's count (tuning seeds 5001-5010: claims were made after R W R R-type sequences, i.e. by asking until a streak appeared) */
+  consistent?: boolean;
   firstTry?: "accept" | "provisional";
   /** lesson attribution: "episode" uses a lesson's recovery id when the record has one (adjacency for older records);
    *  "adjacency" ignores ids (phase-2 behaviour, kept for comparison) */
@@ -302,9 +305,12 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
     return confirmedBase(run);
   };
   const spans = (run: Attempt[]) => (!o.delayed && !firstCounts) || new Set(run.map((a) => a.session)).size >= 2;
-  const confirmed = () => { const run = ownRun(); return baseOk(run) && spans(run); };
+  /** all fresh unaided matching goal answers since the last lesson (the first try only when it counts), for `consistent` */
+  const ownAll = () => mine.filter((a) => (a !== first || firstCounts) && valid(a) && independentAttempt(a) && match.accepts(a.questionId) && (!helped || a.at > lastTeach));
+  const consistentOk = (run: Attempt[]) => { if (!o.consistent) return true; const xs = ownAll(); const net = xs.filter(rightAnswer).length - xs.filter((a) => !rightAnswer(a)).length; return net >= Math.min(2, Math.max(1, run.length)); };
+  const confirmed = () => { const run = ownRun(); return baseOk(run) && spans(run) && consistentOk(run); };
   /** right today by the in-sitting rule, but the later-sitting check is still owed */
-  const provisional = () => { if (!o.delayed && !firstCounts) return false; const run = ownRun(); return baseOk(run) && !spans(run) && run.every((a) => a.session === session); };
+  const provisional = () => { if (!o.delayed && !firstCounts) return false; const run = ownRun(); return baseOk(run) && consistentOk(run) && !spans(run) && run.every((a) => a.session === session); };
   const confirmedBase = (run: Attempt[]) => {
     if (confirm === "two-fresh") return run.length >= 2;
     // tuning seeds 1-5 (phase 3): exempting episodes with a lesson let lucky typed answers through (6/10 typed-guesser runs), so

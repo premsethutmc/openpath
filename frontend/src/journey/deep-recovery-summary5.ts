@@ -18,7 +18,7 @@ const boot = (xs: number[]) => {
   return `${(xs.reduce((a, b) => a + b, 0) / xs.length).toFixed(2)} [${ms[49].toFixed(2)}–${ms[1949].toFixed(2)}]`;
 };
 const OUT = ["solved-fresh-unaided", "false-reassurance", "provisional", "pause", "blocked", "handed-over", "error"];
-const RULES = ["selective", "three-fresh", "different-form", "delayed-add", "delayed-replace", "delayed-first"];
+const RULES = ["selective", "three-fresh", "different-form", "delayed-add", "delayed-replace", "delayed-first", "consistent", "consistent-first"];
 const oc = (r: R) => (r.status === "error" ? "error" : r.outcome);
 
 if (process.argv[1]?.endsWith("deep-recovery-summary5.ts")) {

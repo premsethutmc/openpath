@@ -8,6 +8,8 @@
  *   delayed-add      the selective rule now, plus one fresh goal answer in a later sitting   [more questions + more sittings]
  *   delayed-replace  one typed right now, one in a later sitting                             [more sittings, not more questions]
  *   delayed-first    delayed-replace, and a right FIRST try also waits for a later-sitting check
+ *   consistent       selective, but wrong goal answers since the last lesson count against a later streak (right - wrong)
+ *   consistent-first consistent + delayed-first
  * Outcome per run: solved-fresh-unaided | false-reassurance | provisional | pause | blocked | handed-over | error
  *   node --import tsx src/journey/deep-recovery-sim5.ts <seedFrom> <seedTo> <rule,...> [orig:type,...]
  */
@@ -30,6 +32,9 @@ export const RULES: Record<string, DeepRecoveryOptions> = {
   "delayed-add": { ...BASE, delayed: "add" },
   "delayed-replace": { ...BASE, delayed: "replace" },
   "delayed-first": { ...BASE, delayed: "replace", firstTry: "provisional" },
+  // added after the tuning seeds (5001-5010) showed claims after mixed right/wrong sequences
+  consistent: { ...BASE, consistent: true },
+  "consistent-first": { ...BASE, consistent: true, delayed: "replace", firstTry: "provisional" },
 };
 type T5 = Truth & { history?: boolean };
 /** learner types: phase-3 models, renamed, plus a strong learner who gets it right first time */
@@ -47,7 +52,8 @@ const T: Record<string, (ok: "O1" | "O2", r: () => number) => T5 | null> = {
 export const CELLS5 = (["O1", "O2"] as const).flatMap((o) => Object.keys(T).map((t) => `${o}:${t}`));
 const MAX_SITTINGS = 3;
 
-export function simulate5(rule: string, ok: "O1" | "O2", type: string, seed: number) {
+/** `onAnswer` (analysis only; no effect on the run) */
+export function simulate5(rule: string, ok: "O1" | "O2", type: string, seed: number, onAnswer?: (x: { qid: string; answer: string; can: boolean; sitting: number }) => void) {
   const t0 = Date.now();
   const O = ORIGINALS[ok];
   const rec: Record<string, unknown> = { phase: 5, rule, orig: ok, type, seed };
@@ -68,7 +74,7 @@ export function simulate5(rule: string, ok: "O1" | "O2", type: string, seed: num
     for (let k = 0; k < MAX_SITTINGS; k++) {
       if (k) s.wait(1);
       const qs = s.replies.length;
-      final = runDeep(s, original, (q, c) => L.answer(q, { ...c, answered: s.replies.length - q0 }), RULES[rule]).final;
+      final = runDeep(s, original, (q, c) => { const ans = L.answer(q, { ...c, answered: s.replies.length - q0 }); onAnswer?.({ qid: q, answer: ans, can: L.can(q.replace(/:(mc|w)$/, "")), sitting: k + 1 }); return ans; }, RULES[rule]).final;
       sittings.push({ outcome: final!.phase, questions: s.replies.length - qs });
       if (final!.phase === "solved" || final!.phase === "solved_after_help") claimAt = { questions: s.replies.length - q0, sitting: k + 1 };
       if (final!.phase !== "pause" && final!.phase !== "provisional") break;
