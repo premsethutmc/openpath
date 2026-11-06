@@ -70,7 +70,12 @@ export interface DeepRecoveryOptions {
   /** consistency: wrong goal answers since the last lesson are not forgiven by a later streak: right minus wrong must reach the
    *  rule's count (tuning seeds 5001-5010: claims were made after R W R R-type sequences, i.e. by asking until a streak appeared) */
   consistent?: boolean;
-  firstTry?: "accept" | "provisional";
+  firstTry?: "accept" | "provisional" | "confirm" | "proportionate" | "proportionate-space";
+  /* phase 6 first-try policies (same sitting, no later-sitting wait):
+   *  confirm              every right first try (typed, unaided) is confirmed by one fresh question before "solved"
+   *  proportionate        only when the evidence is thin: a small answer space (a typed whole number between -10 and 10) OR no
+   *                       independent success on this skill in the learner's record before this try
+   *  proportionate-space  only for a small answer space */
   /** lesson attribution: "episode" uses a lesson's recovery id when the record has one (adjacency for older records);
    *  "adjacency" ignores ids (phase-2 behaviour, kept for comparison) */
   attribution?: "episode" | "adjacency";
@@ -170,8 +175,13 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   if (!firsts.length) return out({ ...plain, phase: "attempt", path: [own], active: own, question: originalQid, context: `${tag(originalQid)}${own}@${own}`, reason: "Try the problem." });
   const first = firsts[0];
   // a right first try is "solved on your own" only when it was unaided and typed (a pick from options may be a lucky guess)
-  const firstCounts = o.firstTry === "provisional" && rightAnswer(first) && independentAttempt(first) && !isChoice(first.questionId);
-  if (rightAnswer(first) && independentAttempt(first) && !isChoice(first.questionId) && !firstCounts) return out({ ...plain, phase: "solved", path: [own], confidence: "direct", reason: "Solved on your own." });
+  const typedRightFirst = rightAnswer(first) && independentAttempt(first) && !isChoice(first.questionId);
+  const smallSpace = (qid: string) => { const v = Number(String(question(base(qid)).answer).trim().replace(/−/g, "-")); return Number.isInteger(v) && Math.abs(v) <= 10; };
+  const priorShown = () => { try { const pre: LearnerRecords = { ...records, attempts: records.attempts.filter((a) => a.at < first.at), teaching: records.teaching.filter((t) => t.at < first.at) }; return SHOWN.includes(evidenceFor("deep-recovery", pre, Date.parse(first.at)).get(own).status); } catch { return false; } };
+  const firstCounts = typedRightFirst && (o.firstTry === "provisional" || o.firstTry === "confirm" || (o.firstTry === "proportionate" && (smallSpace(first.questionId) || !priorShown())) || (o.firstTry === "proportionate-space" && smallSpace(first.questionId)));
+  /** a later sitting is owed: delayed rules, or a first try under "provisional" */
+  const needSpan = !!o.delayed || (firstCounts && o.firstTry === "provisional");
+  if (typedRightFirst && !firstCounts) return out({ ...plain, phase: "solved", path: [own], confidence: "direct", reason: "Solved on your own." });
   const t0 = first.at;
   episode = `deep:${originalQid}#${t0}`;
 
@@ -304,13 +314,13 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
     if (confirm === "different-form") return run.length >= 2 && (new Set(run.map((a) => isChoice(a.questionId))).size === 2 || !freshOfFormat(!isChoice(run[0].questionId)));
     return confirmedBase(run);
   };
-  const spans = (run: Attempt[]) => (!o.delayed && !firstCounts) || new Set(run.map((a) => a.session)).size >= 2;
+  const spans = (run: Attempt[]) => !needSpan || new Set(run.map((a) => a.session)).size >= 2;
   /** all fresh unaided matching goal answers since the last lesson (the first try only when it counts), for `consistent` */
   const ownAll = () => mine.filter((a) => (a !== first || firstCounts) && valid(a) && independentAttempt(a) && match.accepts(a.questionId) && (!helped || a.at > lastTeach));
   const consistentOk = (run: Attempt[]) => { if (!o.consistent) return true; const xs = ownAll(); const net = xs.filter(rightAnswer).length - xs.filter((a) => !rightAnswer(a)).length; return net >= Math.min(2, Math.max(1, run.length)); };
   const confirmed = () => { const run = ownRun(); return baseOk(run) && spans(run) && consistentOk(run); };
   /** right today by the in-sitting rule, but the later-sitting check is still owed */
-  const provisional = () => { if (!o.delayed && !firstCounts) return false; const run = ownRun(); return baseOk(run) && consistentOk(run) && !spans(run) && run.every((a) => a.session === session); };
+  const provisional = () => { if (!needSpan) return false; const run = ownRun(); return baseOk(run) && consistentOk(run) && !spans(run) && run.every((a) => a.session === session); };
   const confirmedBase = (run: Attempt[]) => {
     if (confirm === "two-fresh") return run.length >= 2;
     // tuning seeds 1-5 (phase 3): exempting episodes with a lesson let lucky typed answers through (6/10 typed-guesser runs), so
@@ -334,7 +344,7 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
       const q = confirm === "different-form" && run0.length === 1 ? freshOriginal(isChoice(run0[0].questionId) ? "typed" : "choice") : freshOriginal();
       if (!q) return noFresh(path);
       const another = run0.length > 0;
-      if (another && (o.delayed || firstCounts) && run0.every((a) => a.session !== session)) return out({ ...plain, phase: "return", path, active: own, question: q, context: ctx(path, own), reason: "The check promised last time: one fresh problem of the same kind, on your own." });
+      if (another && needSpan && run0.every((a) => a.session !== session)) return out({ ...plain, phase: "return", path, active: own, question: q, context: ctx(path, own), reason: "The check promised last time: one fresh problem of the same kind, on your own." });
       return out({ ...plain, phase: helped ? "return" : "slip-check", path, active: own, question: q, context: ctx(path, own), reason: another ? "Right. One more fresh one of the same kind, to be sure." : helped ? "Back to a fresh problem of the same kind." : rightAnswer(first) ? (independentAttempt(first) ? "Right. One more of the same kind, to be sure it was not a lucky pick." : "That was right with help. Now a fresh one of the same kind, unaided.") : "One more of the same kind, to see whether that was a slip." });
     }
     if (!atTop && rn.verdict === "known") { path = path.slice(0, -1); continue; }
