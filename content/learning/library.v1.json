@@ -1648,6 +1648,1259 @@
    }
   },
   {
+   "competency": "MATH.algebra.linear-equations",
+   "title": "Solving ax + b = c",
+   "chapter": [
+    {
+     "title": "An equation is a balance",
+     "text": [
+      "An equation says two sides are equal. To keep them equal, do the same thing to both sides: add or subtract the same number, then multiply or divide by the same number."
+     ],
+     "math": [
+      "2x + 1 = 3",
+      "Subtract 1 from both sides: 2x = 2",
+      "Divide both sides by 2: x = 1",
+      "Solve 2x + 1 = 7. What is x?",
+      "Take 1 from both sides: 6",
+      "Divide by 2: 6 ÷ 2 = 3"
+     ],
+     "tip": "Undo the last thing done to x first: if x was multiplied then had something added, subtract first, then divide.",
+     "role": "concept",
+     "instance": "gen:lin:2,1,3"
+    },
+    {
+     "title": "Solving an equation with x on both sides",
+     "text": [
+      "Taking the same number of x's from both sides keeps an equation balanced, just as taking the same number does.",
+      "Take the smaller x term from both sides so x is on one side only, take the number away from both sides, then divide by the number of x's. Check by putting the answer into both sides of the original equation."
+     ],
+     "math": [
+      "Solve 7x + 7 = 4x + 16. What is x?",
+      "Take 4x from both sides: 3x on the left",
+      "Take 7 from both sides: 16 − 7 = 9 on the right",
+      "Divide by 3: x = 9 ÷ 3 = 3"
+     ]
+    },
+    {
+     "title": "Solving an equation with a bracket",
+     "text": [
+      "A number outside a bracket multiplies every term inside it.",
+      "Multiply out the bracket first, then collect the x's on one side and the numbers on the other, doing the same to both sides. Check by putting the answer into both sides of the original equation."
+     ],
+     "math": [
+      "Solve 4(x + 4) = 2x + 18. What is x?",
+      "Multiply out: 4 × 4 = 16",
+      "Take 2x from both sides: 2x on the left",
+      "Move the number: 18 − 16 = 2",
+      "Divide by 2: x = 2 ÷ 2 = 1"
+     ]
+    },
+    {
+     "title": "Choosing the equation that models a situation",
+     "text": [
+      "An equation is the story written in symbols: the unknown is a letter, and each action in the story becomes an operation on it, in the same order.",
+      "Name the unknown x. Follow the story: what multiplies x, what is added or taken away, and what the result equals. Check by putting a guessed number for x into both the story and the equation."
+     ],
+     "math": [
+      "Anu thinks of a number x. Anu multiplies it by 8 and then adds 16. The result is 120. Which equation describes this situation?",
+      "Let x stand for the unknown number in the story",
+      "Write the story in order: 8 times x, then add 16, equals 120: 8x + 16 = 120"
+     ]
+    },
+    {
+     "title": "Forming and solving a linear equation from a word problem",
+     "text": [
+      "Call the number you are asked for x; the story then tells you how to build the total from x, and that is the equation.",
+      "Write each quantity in terms of x, add them as the story says, set the result equal to the total, then undo: take away the constant, divide by the coefficient. Check in the story."
+     ],
+     "math": [
+      "The length of a rectangle is 7 cm more than its width, and its perimeter is 78 cm. Form an equation and find the width, in cm.",
+      "Let x be the number asked for and write the equation: 2(x + x + 7) = 78, so 4x + 14 = 78",
+      "Take 14 from both sides: 4x = 64",
+      "Divide by 4: x = 16"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:lin:3,3,2",
+    "gen:lin:3,9,8",
+    "gen:lin:3,9,2"
+   ],
+   "strategies": [
+    {
+     "id": "undo_order",
+     "title": "Undo in reverse order",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Last in, first out",
+       "text": [
+        "Read the equation from x outwards: x was multiplied by a, then b was added. Undo in reverse: subtract b first, then divide by a. The number on the other side changes at each step."
+       ],
+       "math": [
+        "Solve 7x + 5 = 75. What is x?",
+        "Take 5 from both sides: 70",
+        "Divide by 7: 70 ÷ 7 = 10"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lin:7,5,10"
+      }
+     ],
+     "guided": "gen:lin:6,17,3",
+     "check": "gen:lin:5,6,5"
+    },
+    {
+     "id": "check_substitute",
+     "title": "Check by putting it back",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Substitute to check",
+       "text": [
+        "Put your answer back into the left side. If it equals the right side, the answer is correct. This catches sign and arithmetic errors."
+       ],
+       "role": "strategy",
+       "instance": "gen:lin:2,1,3"
+      }
+     ],
+     "guided": "gen:lin:2,4,5",
+     "check": "gen:lin:3,3,4:mc"
+    },
+    {
+     "id": "times_tables",
+     "title": "The division step needs a times fact",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Division is the inverse of multiplication",
+       "text": [
+        "The last step divides both sides by a number. This is the same as asking: what times that number gives the other side? If the division is slow, practise the times table first."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:lin:2,17,12",
+     "check": "gen:lin:2,15,1"
+    }
+   ],
+   "practice": [
+    "gen:lin:7,9,12",
+    "gen:lin:2,4,6:mc",
+    "gen:lin:2,17,11",
+    "gen:lboth:7,15,3,5",
+    "gen:lbrk:5,-5,1,10",
+    "gen:auleq:1,2,9,10",
+    "gen:aulwp:1,5,2,7"
+   ],
+   "transfer": [
+    "gen:lin:7,9,11:mc",
+    "gen:aulwp:1,5,2,9:w"
+   ],
+   "retention": [
+    "gen:lin:6,17,2",
+    "gen:lboth:7,13,1,7:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "lin",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "lin",
+     "version": "1.0.0"
+    },
+    {
+     "family": "lboth",
+     "version": "1.0.0"
+    },
+    {
+     "family": "lbrk",
+     "version": "1.0.0"
+    },
+    {
+     "family": "auleq",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aulwp",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "lin",
+    "seed": [
+     2,
+     1,
+     3
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:lin:2,1,3",
+     "gen:lin:7,5,10"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.algebra.inequalities",
+   "title": "Solving a linear inequality",
+   "chapter": [
+    {
+     "title": "Like an equation, with one extra rule",
+     "text": [
+      "Solve a linear inequality as you would an equation: move terms, add, subtract, multiply, divide. But when you multiply or divide by a negative number, the inequality sign reverses: < becomes > and vice versa."
+     ],
+     "math": [
+      "−6x − 15 < −15",
+      "Add 15: −6x < 0",
+      "Divide by −6 (negative, so flip): x > 0"
+     ],
+     "tip": "Dividing by a negative flips the sign. Check your answer with a number that should work.",
+     "role": "concept",
+     "instance": "gen:lineq:-6,-15,-15"
+    },
+    {
+     "title": "Solving an inequation over whole numbers, natural numbers or integers",
+     "text": [
+      "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the right side of the boundary.",
+      "Solve it like an equation to find the boundary (reverse the sign if you divide by a negative number). Then list the allowed numbers on the correct side; include the boundary only for ≤ or ≥. Show them as dots on a number line."
+     ],
+     "math": [
+      "x is a whole number. Solve 4x − 3 ≤ 10 and list every x in the solution set, separated by commas.",
+      "Undo the + or − and divide by 4: the boundary is 13/4",
+      "The whole numbers that fit: 0, 1, 2, 3"
+     ],
+     "widget": {
+      "type": "numberline",
+      "from": 0,
+      "to": 10,
+      "marks": [
+       0,
+       1,
+       2,
+       3
+      ]
+     }
+    },
+    {
+     "title": "Solving a system of two linear inequalities",
+     "text": [
+      "A system of inequalities in one variable asks for the numbers that satisfy every inequality at the same time: the overlap (intersection) of their solution sets.",
+      "Solve each inequality on its own (reverse the sign when dividing by a negative number). Draw both on one number line and take the part covered by both; use [ ] for ≤ or ≥ and ( ) for < or >."
+     ],
+     "math": [
+      "Solve the system of inequalities 2x ≥ 8 and −x ≥ −11, for real x. Write the solution set in interval notation.",
+      "Inequality 1 gives x ≥ 4",
+      "Inequality 2 gives x ≤ 11",
+      "Both must hold: [4, 11]"
+     ],
+     "widget": {
+      "type": "numberline",
+      "from": 1,
+      "to": 14,
+      "marks": [
+       4,
+       11
+      ]
+     }
+    },
+    {
+     "title": "Modelling a word problem with a linear inequality",
+     "text": [
+      "Words like 'at least', 'at most', 'no more than' and 'between' describe inequalities. Turning them into symbols and solving gives the whole range of answers that work.",
+      "Name the unknown, write the condition with ≥, ≤, < or >, solve it like an equation (reversing the sign if you divide by a negative), then check that the answer makes sense in the story (marks up to 100, numbers of people not negative)."
+     ],
+     "math": [
+      "Imran scored 82 and 53 marks (out of 100) in the first two tests. To get a grade, the average of three tests must be at least 50. Let x be the marks in the third test. Write the possible values of x as an inequality (remember x cannot be more than 100).",
+      "Write the condition as an inequality: (82 + 53 + x)/3 ≥ 50",
+      "Solve it: 15 <= x <= 100"
+     ]
+    },
+    {
+     "title": "Neighbourhoods of a point in interval notation",
+     "text": [
+      "|x − a| is the distance from x to a on the number line. The δ-neighbourhood of a is every x less than δ away from a: the open interval (a − δ, a + δ).",
+      "Mark a on the number line and go δ to the left and δ to the right. Less than δ: the open interval between; at most δ: include the ends; more than δ: the two outside pieces."
+     ],
+     "math": [
+      "Write the set {x ∈ ℝ : |x + 8| ≤ 2} in interval notation.",
+      "The points at distance 2 from −8 are −10 and −6",
+      "So the set is [−10, −6]"
+     ],
+     "widget": {
+      "type": "numberline",
+      "from": -12,
+      "to": -4,
+      "marks": [
+       -10,
+       -8,
+       -6
+      ]
+     }
+    }
+   ],
+   "diagnostics": [
+    "gen:lineq:-3,-6,-6",
+    "gen:lineq:-2,-12,12",
+    "gen:lineq:-2,11,-13"
+   ],
+   "strategies": [
+    {
+     "id": "flip_rule",
+     "title": "Why the sign flips",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Multiplying by −1 reverses order",
+       "text": [
+        "3 < 5, but −3 > −5: multiplying by a negative reverses the order of numbers on the number line. So every time you multiply or divide both sides by a negative, reverse the inequality sign."
+       ],
+       "role": "strategy",
+       "instance": "gen:lineq:-6,-15,-15"
+      }
+     ],
+     "guided": "gen:lineq:2,-1,7",
+     "check": "gen:lineq:3,7,19"
+    },
+    {
+     "id": "solve_steps",
+     "title": "Isolate x step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Get x alone, watching signs",
+       "text": [
+        "Move the constant to the other side (add or subtract). Then divide by the coefficient of x. If that coefficient is negative, flip the sign. Write the answer as x > k or x < k."
+       ],
+       "math": [
+        "Solve 5x − 6 < 14. Write the answer as an inequality for x (e.g. x > 2).",
+        "Add 6 to both sides: the right side becomes 20",
+        "Divide both sides by 5: x < 4"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lineq:5,-6,14"
+      }
+     ],
+     "guided": "gen:lineq:-3,9,-12",
+     "check": "gen:lineq:-2,-12,10:mc"
+    },
+    {
+     "id": "test_number",
+     "title": "Test with a number",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Pick a number from your answer set",
+       "text": [
+        "If your answer is x > 0, try x = 1: put it back in the original inequality. If it makes the inequality true, the answer is likely correct. If not, check the sign flip."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:lineq:5,-1,-1",
+     "check": "gen:lineq:-4,13,1"
+    }
+   ],
+   "practice": [
+    "gen:lineq:-6,14,-16",
+    "gen:lineq:-2,-4,20:mc",
+    "gen:lineq:-1,5,-4",
+    "gen:aeineqz:2,4,5,14,1",
+    "gen:aeineqs:-7,4,2,4,2",
+    "gen:aeineqw:0,84,80,9",
+    "gen:aenbhd:2,-9,9"
+   ],
+   "transfer": [
+    "gen:lineq:4,9,-7:mc",
+    "gen:aeineqz:2,5,7,18,0:w",
+    "gen:aeineqs:6,7,3,1,3:w"
+   ],
+   "retention": [
+    "gen:lineq:-6,-12,-6",
+    "gen:aeineqz:2,4,-1,7,1"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "lineq",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "lineq",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aeineqz",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aeineqs",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aeineqw",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aenbhd",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "lineq",
+    "seed": [
+     -6,
+     -15,
+     -15
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:lineq:-6,-15,-15",
+     "gen:lineq:5,-6,14"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.algebra.algebra-simplify",
+   "title": "Collecting like terms",
+   "chapter": [
+    {
+     "title": "Like terms have the same letter part",
+     "text": [
+      "3x and −5x are like terms because both have x. 3x and 2y are not like terms. Add or subtract like terms by combining their numbers; leave unlike terms separate."
+     ],
+     "math": [
+      "x − 9y + x − 7y",
+      "x terms: x + x = 2x",
+      "y terms: −9y − 7y = −16y",
+      "Answer: 2x − 16y"
+     ],
+     "tip": "Keep the sign with the term that follows it. −9y means the sign − belongs to 9y.",
+     "role": "concept",
+     "instance": "gen:ahlike:1,-9,1,-7"
+    },
+    {
+     "title": "Subtracting one expression from another",
+     "text": [
+      "Taking away a bracket takes away every term inside it, so each sign in the bracket changes: −(3x − 4) = −3x + 4.",
+      "Remove the brackets, changing every sign in the second one. Then collect the x terms and the number terms."
+     ],
+     "math": [
+      "Simplify (7x + 8) − (10x + 12).",
+      "−(10x + 12) = −10x − 12: every sign in the bracket changes",
+      "x terms: 7x − 10x = −3x",
+      "Numbers: 8 − 12 = −4"
+     ]
+    },
+    {
+     "title": "Coefficients and the constant term",
+     "text": [
+      "An expression is a sum of terms. Each term is a number (the coefficient, with its sign) times letters; a term with no letter is the constant term.",
+      "Split the expression at each + or −, keeping the sign with the term after it. The coefficient is the signed number in front of the letters; no number means 1."
+     ],
+     "math": [
+      "In the expression 7x² − 8xy − 4y − 4, what is the constant term?",
+      "The constant term is the term with no letter: −4"
+     ]
+    },
+    {
+     "title": "The top of a number pyramid",
+     "text": [
+      "In a four-row pyramid the corner blocks of the bottom row reach the top once and the two middle blocks reach it 3 times each, so the top is 1, 3, 3, 1 times the bottom blocks.",
+      "Write the second row as sums, then the third row, then the top, collecting like terms at each step."
+     ],
+     "math": [
+      "In a number pyramid each block is the sum of the two blocks just below it. The bottom row is x, 4, 9, 10. Write a simplified expression for the block at the top.",
+      "Second row: (x + 4), (4 + 9), (9 + 10)",
+      "Keep adding pairs to the top and collect like terms: x + 49"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:ahlike:2,8,5,-9",
+    "gen:ahlike:8,-4,-1,2",
+    "gen:ahlike:7,-2,1,-9"
+   ],
+   "strategies": [
+    {
+     "id": "colour_groups",
+     "title": "Group by letter",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Rewrite with like terms together",
+       "text": [
+        "Rearrange so all the x terms are together and all the y terms are together. Keep each sign attached to its term. Then add the numbers in front of each group."
+       ],
+       "math": [
+        "Simplify 9x − 9y − 5x − 3y.",
+        "x terms: 9 − 5 = 4, so 4x",
+        "y terms: −9 − 3 = −12, so −12y",
+        "Together: 4x − 12y"
+       ],
+       "role": "worked-example",
+       "instance": "gen:ahlike:9,-9,-5,-3"
+      }
+     ],
+     "guided": "gen:ahlike:6,-4,7,-1",
+     "check": "gen:ahlike:8,-3,8,-4"
+    },
+    {
+     "id": "apples_oranges",
+     "title": "Different letters are different things",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Cannot add apples and oranges",
+       "text": [
+        "3x + 2y cannot be simplified further: x and y are different unknowns. Only terms with exactly the same letter part can combine. x² and x are also unlike terms."
+       ],
+       "role": "strategy",
+       "instance": "gen:ahlike:1,-9,1,-7"
+      }
+     ],
+     "guided": "gen:ahlike:6,2,4,3",
+     "check": "gen:ahlike:2,-1,2,4:mc"
+    },
+    {
+     "id": "integer_add",
+     "title": "Adding signed numbers",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Same sign: add and keep. Different sign: subtract and keep the bigger one's sign.",
+       "text": [
+        "−9 + (−7) = −16 (same sign: add, keep negative). 5 + (−3) = 2 (different sign: 5 − 3, keep positive). If adding signed numbers is slow, practise integer addition first."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:ahlike:7,-4,-1,-5",
+     "check": "gen:ahlike:1,5,6,4"
+    }
+   ],
+   "practice": [
+    "gen:ahlike:9,2,5,-3",
+    "gen:ahlike:1,-8,8,-8:mc",
+    "gen:ahlike:7,-7,-2,-7",
+    "gen:ahsub:12,-5,1,-10",
+    "gen:ahcoef:9,2,-4,-5,1",
+    "gen:ahpyr:0,11,11,13"
+   ],
+   "transfer": [
+    "gen:ahlike:7,6,1,8:mc",
+    "gen:ahsub:8,-2,6,-6:w",
+    "gen:ahpyr:0,11,1,11:w"
+   ],
+   "retention": [
+    "gen:ahlike:9,-9,6,-6",
+    "gen:ahsub:2,-12,11,-4:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "ahlike",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "ahlike",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahsub",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahcoef",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahpyr",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "ahlike",
+    "seed": [
+     1,
+     -9,
+     1,
+     -7
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:ahlike:1,-9,1,-7",
+     "gen:ahlike:9,-9,-5,-3"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.calculus.derivatives",
+   "title": "The derivative from first principles",
+   "chapter": [
+    {
+     "title": "The slope of the tangent",
+     "text": [
+      "f′(x) = lim (h → 0) [f(x + h) − f(x)] / h. This is the slope of the chord from (x, f(x)) to (x + h, f(x + h)) as the second point slides towards the first.",
+      "Expand f(x + h), subtract f(x), cancel h from every term, then let h = 0."
+     ],
+     "math": [
+      "f(x) = x² − 5x − 4",
+      "f(x + h) = (x + h)² − 5(x + h) − 4 = x² + 2xh + h² − 5x − 5h − 4",
+      "f(x + h) − f(x) = 2xh + h² − 5h = h(2x + h − 5)",
+      "Divide by h: 2x + h − 5. Let h → 0: f′(x) = 2x − 5"
+     ],
+     "tip": "Every term of f(x + h) − f(x) must have h as a factor. If it does not, expand again.",
+     "role": "concept",
+     "instance": "gen:aqfp:0,1,-5,-4"
+    },
+    {
+     "title": "Instantaneous velocity from a distance–time formula",
+     "text": [
+      "Velocity is the instantaneous rate of change of distance: the slope of the distance–time graph at that moment, ds/dt.",
+      "Differentiate s term by term (d/dt tⁿ = n tⁿ⁻¹), then substitute the given time."
+     ],
+     "math": [
+      "A particle moves along a straight line so that its distance from a fixed point O after t seconds is s = t³ + 5t² + 3t metres. Find its instantaneous velocity, in m/s, at t = 2.",
+      "v = ds/dt = 3t^2 + 10t + 3",
+      "At t = 2: v = 35 m/s"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:aqfp:0,2,-5,-4",
+    "gen:aqfp:1,6,0,0",
+    "gen:aqfp:3,4,0,0"
+   ],
+   "strategies": [
+    {
+     "id": "expand_cancel",
+     "title": "Expand, subtract, cancel h",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Three stages",
+       "text": [
+        "Stage 1: expand f(x + h) fully. Stage 2: subtract f(x) — every non-h term cancels. Stage 3: factor h out, cancel it, then set h = 0."
+       ],
+       "math": [
+        "Using the definition f′(x) = lim (h → 0) [f(x + h) − f(x)]/h, find f′(x) for f(x) = x² − 4x − 5.",
+        "Write [f(x + h) − f(x)]/h for f(x) = x² − 4x − 5 and simplify until h cancels",
+        "Let h → 0: f′(x) = 2x − 4"
+       ],
+       "role": "worked-example",
+       "instance": "gen:aqfp:0,1,-4,-5"
+      }
+     ],
+     "guided": "gen:aqfp:0,2,4,-1",
+     "check": "gen:aqfp:0,2,4,-4"
+    },
+    {
+     "id": "why_limit",
+     "title": "Why h must approach 0",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A chord is not a tangent",
+       "text": [
+        "With h = 0 directly, the fraction is 0/0: meaningless. The limit lets h shrink towards 0 without reaching it. The algebra (cancel h first) removes the 0/0 and shows the answer that the slope approaches."
+       ],
+       "role": "strategy",
+       "instance": "gen:aqfp:0,1,-5,-4"
+      }
+     ],
+     "guided": "gen:aqfp:2,1,3,0",
+     "check": "gen:aqfp:1,2,-2,0:mc"
+    },
+    {
+     "id": "expansion_check",
+     "title": "Expanding (x + h)² carefully",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Do not forget the cross term",
+       "text": [
+        "(x + h)² = x² + 2xh + h², not x² + h². The 2xh comes from the two products x × h and h × x. Missing it loses the answer."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:aqfp:0,1,-4,-2",
+     "check": "gen:aqfp:0,1,-1,1"
+    }
+   ],
+   "practice": [
+    "gen:aqfp:0,3,2,4",
+    "gen:aqfp:1,4,4,0:mc",
+    "gen:aqfp:0,4,-1,1",
+    "gen:aqvel:1,-2,7,3"
+   ],
+   "transfer": [
+    "gen:aqfp:0,3,3,0:mc",
+    "gen:aqvel:1,0,7,3:w"
+   ],
+   "retention": [
+    "gen:aqfp:1,1,0,0",
+    "gen:aqvel:2,5,7,3:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aqfp",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "aqfp",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aqvel",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "aqfp",
+    "seed": [
+     0,
+     1,
+     -5,
+     -4
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aqfp:0,1,-5,-4",
+     "gen:aqfp:0,1,-4,-5"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.trigonometry.radians",
+   "title": "Degrees to radians",
+   "chapter": [
+    {
+     "title": "π radians = 180°",
+     "text": [
+      "One radian is the angle whose arc equals the radius. A half turn (180°) is exactly π radians. To convert degrees to radians, multiply by π/180 and simplify."
+     ],
+     "math": [
+      "−720° × π/180 = −720π/180 = −4π"
+     ],
+     "tip": "Simplify the fraction before writing the answer: 720/180 = 4.",
+     "role": "concept",
+     "instance": "gen:atrad:-144"
+    },
+    {
+     "title": "Radians to degrees",
+     "text": [
+      "π radians is 180°, so 1 radian = 180°/π (about 57.3°).",
+      "Multiply by 180/π; with π in the angle, simply replace π by 180° and simplify."
+     ],
+     "math": [
+      "Convert −7π/10 radians into degrees.",
+      "Replace π by 180°: −7π/10 = −126°"
+     ]
+    },
+    {
+     "title": "Arc length and sector area",
+     "text": [
+      "With θ in radians, the arc is θ radii long (l = rθ) and the sector is the fraction θ/2π of the circle (A = ½r²θ).",
+      "Change degrees to radians first (× π/180), then use l = rθ or A = ½r²θ; to find θ use θ = l/r."
+     ],
+     "math": [
+      "Find the area (in cm²) of a sector of a circle of radius 6 cm whose angle at the centre is 0.5 radians.",
+      "A = ½r²θ = ½ × 6² × 0.5 = 9"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:atrad:-132",
+    "gen:atrad:92",
+    "gen:atrad:29"
+   ],
+   "strategies": [
+    {
+     "id": "multiply_simplify",
+     "title": "Multiply by π/180",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "One formula",
+       "text": [
+        "radians = degrees × π/180. Simplify the fraction by dividing both numerator and denominator by their GCD."
+       ],
+       "math": [
+        "Convert −690° into radians. Write the answer in terms of π (you may type pi).",
+        "−690° × π/180 = −23π/6"
+       ],
+       "role": "worked-example",
+       "instance": "gen:atrad:-138"
+      }
+     ],
+     "guided": "gen:atrad:-139",
+     "check": "gen:atrad:-129"
+    },
+    {
+     "id": "landmark_angles",
+     "title": "Learn the landmarks",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "30° = π/6, 45° = π/4, 60° = π/3, 90° = π/2, 180° = π, 360° = 2π",
+       "text": [
+        "These landmarks let you convert without the formula. Any multiple of 30° or 45° converts by scaling one of these."
+       ],
+       "role": "strategy",
+       "instance": "gen:atrad:-144"
+      }
+     ],
+     "guided": "gen:atrad:-136",
+     "check": "gen:atrad:-128:mc"
+    },
+    {
+     "id": "simplify_fraction",
+     "title": "Simplifying the fraction",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "GCD with 180",
+       "text": [
+        "180 = 4 × 45 = 6 × 30 = 12 × 15. The GCD of the angle and 180 tells you how much to simplify. 120/180: GCD is 60, so 120/180 = 2/3 and the answer is 2π/3."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:atrad:-137",
+     "check": "gen:atrad:-2"
+    }
+   ],
+   "practice": [
+    "gen:atrad:96",
+    "gen:atrad:97:mc",
+    "gen:atrad:-7",
+    "gen:atdeg:3,1",
+    "gen:atarc:2,6,3"
+   ],
+   "transfer": [
+    "gen:atrad:-4:mc",
+    "gen:atdeg:-15,2:w",
+    "gen:atarc:1,10,11:w"
+   ],
+   "retention": [
+    "gen:atrad:-1",
+    "gen:atdeg:-15,4:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "atrad",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "atrad",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atdeg",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atarc",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "atrad",
+    "seed": [
+     -144
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:atrad:-144",
+     "gen:atrad:-138"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.trigonometry.identities",
+   "title": "Using sec²θ − tan²θ = 1",
+   "chapter": [
+    {
+     "title": "Factorise sec²θ − tan²θ = 1",
+     "text": [
+      "sec²θ − tan²θ = 1 is a difference of two squares: (sec θ + tan θ)(sec θ − tan θ) = 1. So if you know one factor, the other is its reciprocal."
+     ],
+     "math": [
+      "sec θ + tan θ = 2",
+      "Then sec θ − tan θ = 1/2",
+      "Add: 2 sec θ = 5/2, so sec θ = 5/4",
+      "Subtract: 2 tan θ = 3/2, so tan θ = 3/4"
+     ],
+     "tip": "The sum and difference together give sec and tan by adding and halving, or subtracting and halving.",
+     "role": "concept",
+     "instance": "gen:ansecpt:2,1,0,0"
+    },
+    {
+     "title": "Simplifying with the trigonometric identities",
+     "text": [
+      "Three facts do almost everything: sin²θ + cos²θ = 1 (and, dividing by cos²θ or sin²θ, 1 + tan²θ = sec²θ and 1 + cot²θ = cosec²θ), the reciprocals (sec = 1/cos, cosec = 1/sin, cot = 1/tan), and tan = sin/cos.",
+      "Write everything in sin θ and cos θ, use sin²θ + cos²θ = 1 to replace 1 − sin²θ or 1 − cos²θ, cancel, and name the result."
+     ],
+     "math": [
+      "Simplify 3 tan θ ÷ sec θ. Which of these is it equal to?",
+      "Using the identities, tan θ ÷ sec θ = sin θ",
+      "Multiply by 3: 3 sin θ"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:ansecpt:7,5,0,1",
+    "gen:ansecpt:6,1,1,3",
+    "gen:ansecpt:4,3,0,0"
+   ],
+   "strategies": [
+    {
+     "id": "reciprocal_pair",
+     "title": "Sum and difference are reciprocals",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Product = 1",
+       "text": [
+        "(sec + tan)(sec − tan) = sec² − tan² = 1. So if sec + tan = k, then sec − tan = 1/k. The same works for cosec and cot: cosec² − cot² = 1."
+       ],
+       "role": "strategy",
+       "instance": "gen:ansecpt:2,1,0,0"
+      }
+     ],
+     "guided": "gen:ansecpt:7,3,0,3",
+     "check": "gen:ansecpt:6,1,1,1"
+    },
+    {
+     "id": "add_subtract",
+     "title": "Add and subtract the two equations",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Simultaneous equations",
+       "text": [
+        "You have sec + tan = k and sec − tan = 1/k. Add them: 2 sec = k + 1/k, so sec = (k + 1/k)/2. Subtract: 2 tan = k − 1/k. Then sin = tan/sec."
+       ],
+       "math": [
+        "If sec θ + tan θ = 7/3 for an acute angle θ, find tan θ.",
+        "(sec θ + tan θ)(sec θ − tan θ) = 1, so sec θ − tan θ = 1 ÷ 7/3 = 3/7",
+        "Subtract the two equations and halve: (7/3 − 3/7) ÷ 2 = 20/21"
+       ],
+       "role": "worked-example",
+       "instance": "gen:ansecpt:7,3,0,2"
+      }
+     ],
+     "guided": "gen:ansecpt:7,3,0,1",
+     "check": "gen:ansecpt:6,1,1,0:mc"
+    },
+    {
+     "id": "fraction_arithmetic",
+     "title": "Adding fractions",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Common denominator",
+       "text": [
+        "k + 1/k: write k as k/1, then the common denominator is k, so k + 1/k = (k² + 1)/k. Halving gives (k² + 1)/(2k)."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:ansecpt:7,3,0,0",
+     "check": "gen:ansecpt:5,3,1,2"
+    }
+   ],
+   "practice": [
+    "gen:ansecpt:5,3,1,0",
+    "gen:ansecpt:5,3,1,1:mc",
+    "gen:ansecpt:7,5,0,2",
+    "gen:anidsimp:15,6"
+   ],
+   "transfer": [
+    "gen:ansecpt:3,1,1,1:mc",
+    "gen:ansecpt:3,1,1,2:w"
+   ],
+   "retention": [
+    "gen:ansecpt:6,1,1,2",
+    "gen:anidsimp:15,3"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "ansecpt",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "ansecpt",
+     "version": "1.0.0"
+    },
+    {
+     "family": "anidsimp",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "ansecpt",
+    "seed": [
+     2,
+     1,
+     0,
+     0
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:ansecpt:2,1,0,0",
+     "gen:ansecpt:7,3,0,2"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.trigonometry.triangle-laws",
+   "title": "Finding a side with the sine rule",
+   "chapter": [
+    {
+     "title": "a/sin A = b/sin B",
+     "text": [
+      "In any triangle, each side divided by the sine of the angle opposite it is the same constant. To find an unknown side, set up the proportion and solve."
+     ],
+     "math": [
+      "In triangle ABC: A = 30°, B = 45°, a = 2",
+      "a/sin A = b/sin B → 2/sin 30° = b/sin 45°",
+      "2/(1/2) = b/(√2/2) → 4 = b/(√2/2) → b = 2√2"
+     ],
+     "tip": "Use the sine rule when you know an angle and the side opposite it, plus another angle.",
+     "role": "concept",
+     "instance": "gen:atsiner:0,2"
+    },
+    {
+     "title": "The cosine of an angle from three sides",
+     "text": [
+      "The cosine rule a² = b² + c² − 2bc cos A extends Pythagoras: the extra term corrects for A not being 90°.",
+      "Rearrange to cos A = (b² + c² − a²)/(2bc) and substitute; a negative answer means A is obtuse."
+     ],
+     "math": [
+      "In triangle ABC, a = 8 cm, b = 12 cm and c = 12 cm. Find cos A.",
+      "b² + c² − a² = 144 + 144 − 64 = 224",
+      "cos A = 224/288 = 7/9"
+     ]
+    },
+    {
+     "title": "Area of a triangle from two sides and the included angle",
+     "text": [
+      "Taking b as the base, the height is a sin C, so the area is ½ × b × a sin C.",
+      "Multiply the two sides, multiply by sin of the angle between them, and halve."
+     ],
+     "math": [
+      "In triangle ABC, a = 14 cm, b = 15 cm and C = 45°. Find the area of the triangle in cm². Give the exact value.",
+      "Area = ½ab sin C = ½ × 14 × 15 × √2/2 = 105√2/2"
+     ]
+    },
+    {
+     "title": "Half-angle formulae in a triangle",
+     "text": [
+      "With s = (a + b + c)/2, the cosine rule and cos A = 1 − 2 sin²(A/2) = 2 cos²(A/2) − 1 give sin(A/2) = √((s − b)(s − c)/(bc)), cos(A/2) = √(s(s − a)/(bc)) and tan(A/2) = √((s − b)(s − c)/(s(s − a))).",
+      "Find s, the three numbers s − a, s − b, s − c, substitute into the formula, simplify the fraction under the root and rationalise."
+     ],
+     "math": [
+      "In triangle ABC, a = 9 cm, b = 10 cm and c = 13 cm. Using a half-angle formula, find sin(A/2). Give the exact value with no square root in the denominator.",
+      "s = (a + b + c)/2 = 16",
+      "sin(A/2) = √((s − b)(s − c)/(bc)) = √(18/130) = 3√65/65"
+     ]
+    },
+    {
+     "title": "Distances and heights with the sine and cosine rules",
+     "text": [
+      "When the triangle in a problem is not right-angled, use the cosine rule (two sides and the angle between them give the third side) or the sine rule (a side and two angles give another side).",
+      "Draw the triangle, mark what is known, find any missing angle from the angle sum (an exterior angle equals the sum of the two opposite interior angles), and apply the matching rule."
+     ],
+     "math": [
+      "Two ships leave a port at the same time. One sails 5 km in a straight line and the other 9 km in a straight line, on courses that make an angle of 60° with each other. How far apart are the ships then, in km? Give the exact value.",
+      "By the cosine rule, d² = 5² + 9² − 2 × 5 × 9 × cos 60° = 61",
+      "d = √61 = √61 km"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:atsiner:4,16",
+    "gen:atsiner:4,18",
+    "gen:atsiner:11,14"
+   ],
+   "strategies": [
+    {
+     "id": "set_up_proportion",
+     "title": "Set up the proportion",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Match side to its opposite angle",
+       "text": [
+        "Write a/sin A = b/sin B. Substitute the known values: the known side and its opposite angle on one side, the unknown side and its opposite angle on the other. Cross-multiply and simplify."
+       ],
+       "math": [
+        "In triangle ABC, A = 45°, B = 30° and a = 20 cm. Using the sine rule, find b in cm. Give the exact value.",
+        "a/sin A = b/sin B, so b = 20 sin 30°/sin 45°",
+        "sin B = 1/2, sin A = √2/2: b = 10√2"
+       ],
+       "role": "worked-example",
+       "instance": "gen:atsiner:5,20"
+      }
+     ],
+     "guided": "gen:atsiner:4,11",
+     "check": "gen:atsiner:4,14"
+    },
+    {
+     "id": "ambiguous_case",
+     "title": "Two sides, one angle: the ambiguous case",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "sin gives two possible angles",
+       "text": [
+        "If sin B = k, then B could be k° or (180 − k)°. When you are given two sides and the angle opposite one, check whether both values of B give a valid triangle (angles add to 180)."
+       ],
+       "role": "strategy",
+       "instance": "gen:atsiner:0,2"
+      }
+     ],
+     "guided": "gen:atsiner:4,12",
+     "check": "gen:atsiner:4,15:mc"
+    },
+    {
+     "id": "exact_sin_values",
+     "title": "Exact sine values",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "sin 30° = 1/2, sin 45° = √2/2, sin 60° = √3/2",
+       "text": [
+        "These values come from the 30-60-90 and 45-45-90 triangles. When the question asks for an exact answer, use these rather than a decimal."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:atsiner:4,13",
+     "check": "gen:atsiner:11,12"
+    }
+   ],
+   "practice": [
+    "gen:atsiner:8,10",
+    "gen:atsiner:11,10:mc",
+    "gen:atsiner:8,11",
+    "gen:atcosr:8,6,12",
+    "gen:atarea:10,17,3",
+    "gen:athalft:1,6,2,6",
+    "gen:atapp:0,20,27,1"
+   ],
+   "transfer": [
+    "gen:atsiner:11,11:mc",
+    "gen:atcosr:5,6,7:w",
+    "gen:atarea:14,15,6:w"
+   ],
+   "retention": [
+    "gen:atsiner:4,17",
+    "gen:atcosr:11,4,13:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "atsiner",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "atsiner",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atcosr",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atarea",
+     "version": "1.0.0"
+    },
+    {
+     "family": "athalft",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atapp",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "atsiner",
+    "seed": [
+     0,
+     2
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:atsiner:0,2",
+     "gen:atsiner:5,20"
+    ]
+   }
+  },
+  {
    "competency": "MATH.algebra.quadratics",
    "title": "Solving a quadratic by factorising",
    "chapter": [
@@ -11674,271 +12927,6 @@
      "gen:surd:24",
      "gen:surd:99",
      "gen:surd:96"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.algebra.inequalities",
-   "title": "Solving a linear inequality",
-   "chapter": [
-    {
-     "title": "Solving a linear inequality",
-     "text": [
-      "An inequality stays true when you add, subtract, or multiply and divide by a POSITIVE number; dividing by a negative number flips the order, so the sign reverses."
-     ],
-     "math": [
-      "Solve 2x − 1 < 7. Write the answer as an inequality for x (e.g. x > 2).",
-      "Add 1 to both sides: the right side becomes 8",
-      "Divide both sides by 2: x < 4"
-     ],
-     "tip": "1 was moved to the other side without changing its sign.",
-     "role": "concept",
-     "instance": "gen:lineq:2,-1,7"
-    },
-    {
-     "title": "Solving an inequation over whole numbers, natural numbers or integers",
-     "text": [
-      "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the right side of the boundary.",
-      "Solve it like an equation to find the boundary (reverse the sign if you divide by a negative number). Then list the allowed numbers on the correct side; include the boundary only for ≤ or ≥. Show them as dots on a number line."
-     ],
-     "math": [
-      "x is a whole number. Solve 4x − 3 ≤ 10 and list every x in the solution set, separated by commas.",
-      "Undo the + or − and divide by 4: the boundary is 13/4",
-      "The whole numbers that fit: 0, 1, 2, 3"
-     ],
-     "widget": {
-      "type": "numberline",
-      "from": 0,
-      "to": 10,
-      "marks": [
-       0,
-       1,
-       2,
-       3
-      ]
-     }
-    },
-    {
-     "title": "Solving a system of two linear inequalities",
-     "text": [
-      "A system of inequalities in one variable asks for the numbers that satisfy every inequality at the same time: the overlap (intersection) of their solution sets.",
-      "Solve each inequality on its own (reverse the sign when dividing by a negative number). Draw both on one number line and take the part covered by both; use [ ] for ≤ or ≥ and ( ) for < or >."
-     ],
-     "math": [
-      "Solve the system of inequalities 2x ≥ 8 and −x ≥ −11, for real x. Write the solution set in interval notation.",
-      "Inequality 1 gives x ≥ 4",
-      "Inequality 2 gives x ≤ 11",
-      "Both must hold: [4, 11]"
-     ],
-     "widget": {
-      "type": "numberline",
-      "from": 1,
-      "to": 14,
-      "marks": [
-       4,
-       11
-      ]
-     }
-    },
-    {
-     "title": "Modelling a word problem with a linear inequality",
-     "text": [
-      "Words like 'at least', 'at most', 'no more than' and 'between' describe inequalities. Turning them into symbols and solving gives the whole range of answers that work.",
-      "Name the unknown, write the condition with ≥, ≤, < or >, solve it like an equation (reversing the sign if you divide by a negative), then check that the answer makes sense in the story (marks up to 100, numbers of people not negative)."
-     ],
-     "math": [
-      "Imran scored 82 and 53 marks (out of 100) in the first two tests. To get a grade, the average of three tests must be at least 50. Let x be the marks in the third test. Write the possible values of x as an inequality (remember x cannot be more than 100).",
-      "Write the condition as an inequality: (82 + 53 + x)/3 ≥ 50",
-      "Solve it: 15 <= x <= 100"
-     ]
-    },
-    {
-     "title": "Neighbourhoods of a point in interval notation",
-     "text": [
-      "|x − a| is the distance from x to a on the number line. The δ-neighbourhood of a is every x less than δ away from a: the open interval (a − δ, a + δ).",
-      "Mark a on the number line and go δ to the left and δ to the right. Less than δ: the open interval between; at most δ: include the ends; more than δ: the two outside pieces."
-     ],
-     "math": [
-      "Write the set {x ∈ ℝ : |x + 8| ≤ 2} in interval notation.",
-      "The points at distance 2 from −8 are −10 and −6",
-      "So the set is [−10, −6]"
-     ],
-     "widget": {
-      "type": "numberline",
-      "from": -12,
-      "to": -4,
-      "marks": [
-       -10,
-       -8,
-       -6
-      ]
-     }
-    }
-   ],
-   "diagnostics": [
-    "gen:lineq:-3,-6,-6",
-    "gen:lineq:-2,-12,12",
-    "gen:lineq:-2,11,-13"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Get the x term alone as for an equation. When you divide by the coefficient, reverse the sign if it is negative. Check with one number from your answer."
-       ],
-       "math": [
-        "Solve −3x + 9 < −12. Write the answer as an inequality for x (e.g. x > 2).",
-        "Take 9 from both sides: the right side becomes −21",
-        "Divide both sides by −3 and reverse the sign, because dividing by a negative number reverses an inequality: x > 7"
-       ],
-       "role": "worked-example",
-       "instance": "gen:lineq:-3,9,-12"
-      }
-     ],
-     "guided": "gen:lineq:5,-1,-1",
-     "check": "gen:lineq:3,7,19"
-    },
-    {
-     "id": "test_numbers",
-     "title": "Test numbers on a number line",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Test numbers on a number line",
-       "text": [
-        "Find the boundary by solving the equation ax + b = c.",
-        "Try one number on each side in the original inequality: the side where it is true is the answer."
-       ],
-       "math": [
-        "Solve −6x + 14 < −16. Write the answer as an inequality for x (e.g. x > 2).",
-        "Take 14 from both sides: the right side becomes −30",
-        "Divide both sides by −6 and reverse the sign, because dividing by a negative number reverses an inequality: x > 5"
-       ],
-       "widget": {
-        "type": "numberline",
-        "from": 0,
-        "to": 10,
-        "marks": [
-         5
-        ]
-       },
-       "role": "strategy",
-       "instance": "gen:lineq:-6,14,-16"
-      }
-     ],
-     "guided": "gen:lineq:-2,-4,20",
-     "check": "gen:lineq:-2,-12,10:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:lineq:5,-6,14",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Solve 5x − 6 < 14. Write the answer as an inequality for x (e.g. x > 2).” A common wrong answer is x ≤ 4.",
-        "The boundary value was included; with < it is not part of the answer."
-       ],
-       "math": [
-        "Not x ≤ 4, but x < 4"
-       ]
-      }
-     ],
-     "guided": "gen:lineq:-1,5,-4",
-     "check": "gen:lineq:-4,13,1:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Solve linear equations. If a step is slow, practise that skill first.",
-        "Then the method is: Get the x term alone as for an equation. When you divide by the coefficient, reverse the sign if it is negative. Check with one number from your answer."
-       ]
-      }
-     ],
-     "guided": "gen:lineq:4,9,-7",
-     "check": "gen:lineq:-4,11,-5"
-    }
-   ],
-   "practice": [
-    "gen:lineq:4,12,4",
-    "gen:lineq:3,11,-16:mc",
-    "gen:lineq:3,6,15",
-    "gen:aeineqz:2,4,5,14,1",
-    "gen:aeineqs:-7,4,2,4,2",
-    "gen:aeineqw:0,84,80,9",
-    "gen:aenbhd:2,-9,9"
-   ],
-   "transfer": [
-    "gen:lineq:2,15,1:w",
-    "gen:aeineqz:2,5,7,18,0:w",
-    "gen:aeineqs:6,7,3,1,3:w"
-   ],
-   "retention": [
-    "gen:lineq:-6,-12,-6",
-    "gen:aeineqz:2,4,-1,7,1"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "lineq",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "lineq",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aeineqz",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aeineqs",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aeineqw",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aenbhd",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "lineq",
-    "seed": [
-     2,
-     -1,
-     7
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:lineq:2,-1,7",
-     "gen:lineq:5,-6,14",
-     "gen:lineq:-3,9,-12"
     ]
    }
   },
@@ -33110,244 +34098,6 @@
    }
   },
   {
-   "competency": "MATH.algebra.algebra-simplify",
-   "title": "Collecting like terms",
-   "chapter": [
-    {
-     "title": "Collecting like terms",
-     "text": [
-      "Like terms have the same letter part: 3x and −5x are like terms, 3x and 2y are not. Like terms can be added because they count the same thing."
-     ],
-     "math": [
-      "Simplify 6x + 2y + 4x + 3y.",
-      "x terms: 6 + 4 = 10, so 10x",
-      "y terms: 2 + 3 = 5, so 5y",
-      "Together: 10x + 5y"
-     ],
-     "tip": "x terms and y terms were added together into one term. Only like terms (the same letter) can be added: x terms with x terms, y terms with y terms.",
-     "role": "concept",
-     "instance": "gen:ahlike:6,2,4,3"
-    },
-    {
-     "title": "Subtracting one expression from another",
-     "text": [
-      "Taking away a bracket takes away every term inside it, so each sign in the bracket changes: −(3x − 4) = −3x + 4.",
-      "Remove the brackets, changing every sign in the second one. Then collect the x terms and the number terms."
-     ],
-     "math": [
-      "Simplify (7x + 8) − (10x + 12).",
-      "−(10x + 12) = −10x − 12: every sign in the bracket changes",
-      "x terms: 7x − 10x = −3x",
-      "Numbers: 8 − 12 = −4"
-     ]
-    },
-    {
-     "title": "Coefficients and the constant term",
-     "text": [
-      "An expression is a sum of terms. Each term is a number (the coefficient, with its sign) times letters; a term with no letter is the constant term.",
-      "Split the expression at each + or −, keeping the sign with the term after it. The coefficient is the signed number in front of the letters; no number means 1."
-     ],
-     "math": [
-      "In the expression 7x² − 8xy − 4y − 4, what is the constant term?",
-      "The constant term is the term with no letter: −4"
-     ]
-    },
-    {
-     "title": "The top of a number pyramid",
-     "text": [
-      "In a four-row pyramid the corner blocks of the bottom row reach the top once and the two middle blocks reach it 3 times each, so the top is 1, 3, 3, 1 times the bottom blocks.",
-      "Write the second row as sums, then the third row, then the top, collecting like terms at each step."
-     ],
-     "math": [
-      "In a number pyramid each block is the sum of the two blocks just below it. The bottom row is x, 4, 9, 10. Write a simplified expression for the block at the top.",
-      "Second row: (x + 4), (4 + 9), (9 + 10)",
-      "Keep adding pairs to the top and collect like terms: x + 49"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:ahlike:2,8,5,-9",
-    "gen:ahlike:8,-4,-1,2",
-    "gen:ahlike:7,-2,1,-9"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Group the x terms and the y terms, keeping each sign with the term after it. Add the numbers in front of each group and write one term for each letter."
-       ],
-       "math": [
-        "Simplify 6x − 4y + 7x − y.",
-        "x terms: 6 + 7 = 13, so 13x",
-        "y terms: −4 − 1 = −5, so −5y",
-        "Together: 13x − 5y"
-       ],
-       "role": "worked-example",
-       "instance": "gen:ahlike:6,-4,7,-1"
-      }
-     ],
-     "guided": "gen:ahlike:7,-4,-1,-5",
-     "check": "gen:ahlike:8,-3,8,-4"
-    },
-    {
-     "id": "objects",
-     "title": "Count things of the same kind",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Count things of the same kind",
-       "text": [
-        "Read x as 'apples' and y as 'bananas': 3 apples + 2 bananas + 4 apples is 7 apples + 2 bananas.",
-        "You cannot add apples to bananas to get 'applebananas', just as 3x + 2y is not 5xy."
-       ],
-       "math": [
-        "Simplify 9x + 2y + 5x − 3y.",
-        "x terms: 9 + 5 = 14, so 14x",
-        "y terms: 2 − 3 = −1, so −y",
-        "Together: 14x − y"
-       ],
-       "role": "strategy",
-       "instance": "gen:ahlike:9,2,5,-3"
-      }
-     ],
-     "guided": "gen:ahlike:1,-8,8,-8",
-     "check": "gen:ahlike:2,-1,2,4:mc"
-    },
-    {
-     "id": "check_number",
-     "title": "Check with a number",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Check with a number",
-       "text": [
-        "Put x = 2 and y = 1 into the question and into your answer.",
-        "If the two values are different, a term has been combined wrongly."
-       ],
-       "math": [
-        "Simplify 7x − 7y − 2x − 7y.",
-        "x terms: 7 − 2 = 5, so 5x",
-        "y terms: −7 − 7 = −14, so −14y",
-        "Together: 5x − 14y"
-       ],
-       "role": "strategy",
-       "instance": "gen:ahlike:7,-7,-2,-7"
-      }
-     ],
-     "guided": "gen:ahlike:7,6,1,8",
-     "check": "gen:ahlike:1,5,6,4"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:ahlike:9,-9,-5,-3",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Simplify 9x − 9y − 5x − 3y.” A common wrong answer is −8xy.",
-        "x terms and y terms were added together into one term. Only like terms (the same letter) can be added: x terms with x terms, y terms with y terms."
-       ],
-       "math": [
-        "Not −8xy, but 4x − 12y"
-       ]
-      }
-     ],
-     "guided": "gen:ahlike:1,-9,1,1",
-     "check": "gen:ahlike:3,-7,-1,9:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Add and subtract integers. If a step is slow, practise that skill first.",
-        "Then the method is: Group the x terms and the y terms, keeping each sign with the term after it. Add the numbers in front of each group and write one term for each letter."
-       ]
-      }
-     ],
-     "guided": "gen:ahlike:5,9,-4,1",
-     "check": "gen:ahlike:8,-5,1,6"
-    }
-   ],
-   "practice": [
-    "gen:ahlike:7,1,-1,-9",
-    "gen:ahlike:5,1,2,6:mc",
-    "gen:ahlike:2,7,3,-3",
-    "gen:ahsub:12,-5,1,-10",
-    "gen:ahcoef:9,2,-4,-5,1",
-    "gen:ahpyr:0,11,11,13"
-   ],
-   "transfer": [
-    "gen:ahlike:2,-3,-1,-1:w",
-    "gen:ahsub:8,-2,6,-6:w",
-    "gen:ahpyr:0,11,1,11:w"
-   ],
-   "retention": [
-    "gen:ahlike:9,-9,6,-6",
-    "gen:ahsub:2,-12,11,-4:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "ahlike",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "ahlike",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahsub",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahcoef",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahpyr",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "ahlike",
-    "seed": [
-     6,
-     2,
-     4,
-     3
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:ahlike:6,2,4,3",
-     "gen:ahlike:9,-9,-5,-3",
-     "gen:ahlike:6,-4,7,-1"
-    ]
-   }
-  },
-  {
    "competency": "MATH.algebra.generalise-with-expressions",
    "title": "An expression for a growing pattern",
    "chapter": [
@@ -51157,161 +51907,6 @@
    }
   },
   {
-   "competency": "MATH.trigonometry.identities",
-   "title": "Using sec²θ − tan²θ = 1 when sec θ + tan θ is known",
-   "chapter": [
-    {
-     "title": "Using sec²θ − tan²θ = 1 when sec θ + tan θ is known",
-     "text": [
-      "sec²θ − tan²θ = 1 factorises: (sec θ + tan θ)(sec θ − tan θ) = 1. So knowing the sum gives the difference as its reciprocal, and the sum and difference together give each ratio."
-     ],
-     "math": [
-      "If sec θ + tan θ = 7/3 for an acute angle θ, find tan θ.",
-      "(sec θ + tan θ)(sec θ − tan θ) = 1, so sec θ − tan θ = 1 ÷ 7/3 = 3/7",
-      "Subtract the two equations and halve: (7/3 − 3/7) ÷ 2 = 20/21"
-     ],
-     "tip": "The two equations were subtracted but the result was not halved: that gives 2tan θ.",
-     "role": "concept",
-     "instance": "gen:ansecpt:7,3,0,2"
-    },
-    {
-     "title": "Simplifying with the trigonometric identities",
-     "text": [
-      "Three facts do almost everything: sin²θ + cos²θ = 1 (and, dividing by cos²θ or sin²θ, 1 + tan²θ = sec²θ and 1 + cot²θ = cosec²θ), the reciprocals (sec = 1/cos, cosec = 1/sin, cot = 1/tan), and tan = sin/cos.",
-      "Write everything in sin θ and cos θ, use sin²θ + cos²θ = 1 to replace 1 − sin²θ or 1 − cos²θ, cancel, and name the result."
-     ],
-     "math": [
-      "Simplify 3 tan θ ÷ sec θ. Which of these is it equal to?",
-      "Using the identities, tan θ ÷ sec θ = sin θ",
-      "Multiply by 3: 3 sin θ"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:ansecpt:7,5,0,1",
-    "gen:ansecpt:6,1,1,3",
-    "gen:ansecpt:4,3,0,0"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "sec θ − tan θ = 1 ÷ (sec θ + tan θ). Add the two equations and halve for sec θ; subtract and halve for tan θ. Then sin θ = tan θ ÷ sec θ. (The same works for cosec θ and cot θ.)"
-       ],
-       "math": [
-        "If sec θ + tan θ = 7/3 for an acute angle θ, find sec θ.",
-        "(sec θ + tan θ)(sec θ − tan θ) = 1, so sec θ − tan θ = 1 ÷ 7/3 = 3/7",
-        "Add the two equations and halve: (7/3 + 3/7) ÷ 2 = 29/21"
-       ],
-       "role": "worked-example",
-       "instance": "gen:ansecpt:7,3,0,1"
-      }
-     ],
-     "guided": "gen:ansecpt:7,3,0,0",
-     "check": "gen:ansecpt:6,1,1,1"
-    },
-    {
-     "id": "triangle",
-     "title": "Build the triangle",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Build the triangle",
-       "text": [
-        "Once sec θ = hypotenuse ÷ adjacent and tan θ = opposite ÷ adjacent are known, draw the right triangle with those sides.",
-        "Every other ratio can be read off it; check with Pythagoras."
-       ],
-       "math": [
-        "If cosec θ + cot θ = 5/3 for an acute angle θ, find cosec θ − cot θ.",
-        "(cosec θ + cot θ)(cosec θ − cot θ) = 1, so cosec θ − cot θ = 1 ÷ 5/3 = 3/5"
-       ],
-       "role": "strategy",
-       "instance": "gen:ansecpt:5,3,1,0"
-      }
-     ],
-     "guided": "gen:ansecpt:5,3,1,1",
-     "check": "gen:ansecpt:6,1,1,0:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:ansecpt:7,3,0,3",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “If sec θ + tan θ = 7/3 for an acute angle θ, find sin θ.” A common wrong answer is 29/20.",
-        "The ratio was turned upside down: sin θ = tan θ ÷ sec θ."
-       ],
-       "math": [
-        "Not 29/20, but 20/29"
-       ]
-      }
-     ],
-     "guided": "gen:ansecpt:7,5,0,2",
-     "check": "gen:ansecpt:5,3,1,2:mc"
-    }
-   ],
-   "practice": [
-    "gen:ansecpt:3,1,1,1",
-    "gen:ansecpt:3,1,1,2:mc",
-    "gen:ansecpt:3,1,1,3",
-    "gen:anidsimp:15,6"
-   ],
-   "transfer": [
-    "gen:ansecpt:5,2,1,0:w"
-   ],
-   "retention": [
-    "gen:ansecpt:6,1,1,2",
-    "gen:anidsimp:15,3"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "ansecpt",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "ansecpt",
-     "version": "1.0.0"
-    },
-    {
-     "family": "anidsimp",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "ansecpt",
-    "seed": [
-     7,
-     3,
-     0,
-     2
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:ansecpt:7,3,0,2",
-     "gen:ansecpt:7,3,0,3",
-     "gen:ansecpt:7,3,0,1"
-    ]
-   }
-  },
-  {
    "competency": "MATH.trigonometry.ratios",
    "title": "Evaluating expressions with standard angles",
    "chapter": [
@@ -58573,181 +59168,6 @@
      "gen:aqrel:85",
      "gen:aqrel:69",
      "gen:aqrel:86"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.calculus.derivatives",
-   "title": "The derivative from first principles",
-   "chapter": [
-    {
-     "title": "The derivative from first principles",
-     "text": [
-      "f′(x) is the limit of the slope of a chord, [f(x + h) − f(x)]/h, as the second point slides towards the first (h → 0)."
-     ],
-     "math": [
-      "Using the definition f′(x) = lim (h → 0) [f(x + h) − f(x)]/h, find f′(x) for f(x) = x² − 4x − 5.",
-      "Write [f(x + h) − f(x)]/h for f(x) = x² − 4x − 5 and simplify until h cancels",
-      "Let h → 0: f′(x) = 2x − 4"
-     ],
-     "tip": "The constant −5 was kept; in f(x + h) − f(x) it cancels, so it does not appear in f′(x).",
-     "role": "concept",
-     "instance": "gen:aqfp:0,1,-4,-5"
-    },
-    {
-     "title": "Instantaneous velocity from a distance–time formula",
-     "text": [
-      "Velocity is the instantaneous rate of change of distance: the slope of the distance–time graph at that moment, ds/dt.",
-      "Differentiate s term by term (d/dt tⁿ = n tⁿ⁻¹), then substitute the given time."
-     ],
-     "math": [
-      "A particle moves along a straight line so that its distance from a fixed point O after t seconds is s = t³ + 5t² + 3t metres. Find its instantaneous velocity, in m/s, at t = 2.",
-      "v = ds/dt = 3t^2 + 10t + 3",
-      "At t = 2: v = 35 m/s"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:aqfp:0,2,-5,-4",
-    "gen:aqfp:1,6,0,0",
-    "gen:aqfp:3,4,0,0"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Work out f(x + h) − f(x), simplify so that h is a factor of the top (expand, combine fractions, or rationalise a root), cancel h, then let h → 0."
-       ],
-       "math": [
-        "Using the definition f′(x) = lim (h → 0) [f(x + h) − f(x)]/h, find f′(x) for f(x) = √(x + 3).",
-        "Write [f(x + h) − f(x)]/h for f(x) = √(x + 3) and simplify until h cancels",
-        "Let h → 0: f′(x) = 1/(2√(x + 3))"
-       ],
-       "role": "worked-example",
-       "instance": "gen:aqfp:2,1,3,0"
-      }
-     ],
-     "guided": "gen:aqfp:0,1,-4,-2",
-     "check": "gen:aqfp:0,2,4,-4"
-    },
-    {
-     "id": "numbers",
-     "title": "Shrink h with numbers",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Shrink h with numbers",
-       "text": [
-        "Pick x = 1 and work out the chord slope for h = 0.1, 0.01, 0.001.",
-        "The slopes settle on a value: that is f′(1). The algebra does the same for every x at once."
-       ],
-       "math": [
-        "Using the definition f′(x) = lim (h → 0) [f(x + h) − f(x)]/h, find f′(x) for f(x) = 3x² + 2x + 4.",
-        "Write [f(x + h) − f(x)]/h for f(x) = 3x² + 2x + 4 and simplify until h cancels",
-        "Let h → 0: f′(x) = 6x + 2"
-       ],
-       "role": "strategy",
-       "instance": "gen:aqfp:0,3,2,4"
-      }
-     ],
-     "guided": "gen:aqfp:1,4,4,0",
-     "check": "gen:aqfp:1,2,-2,0:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:aqfp:0,2,4,-1",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Using the definition f′(x) = lim (h → 0) [f(x + h) − f(x)]/h, find f′(x) for f(x) = 2x² + 4x − 1.” A common wrong answer is 4x + 3.",
-        "The constant −1 was kept; in f(x + h) − f(x) it cancels, so it does not appear in f′(x)."
-       ],
-       "math": [
-        "Not 4x + 3, but 4x + 4"
-       ]
-      }
-     ],
-     "guided": "gen:aqfp:0,4,-1,1",
-     "check": "gen:aqfp:0,1,-1,1:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Evaluate elementary limits. If a step is slow, practise that skill first.",
-        "Then the method is: Work out f(x + h) − f(x), simplify so that h is a factor of the top (expand, combine fractions, or rationalise a root), cancel h, then let h → 0."
-       ]
-      }
-     ],
-     "guided": "gen:aqfp:0,3,3,0",
-     "check": "gen:aqfp:0,3,2,1"
-    }
-   ],
-   "practice": [
-    "gen:aqfp:1,5,2,0",
-    "gen:aqfp:0,3,3,3:mc",
-    "gen:aqfp:0,2,-5,-1",
-    "gen:aqvel:1,-2,7,3"
-   ],
-   "transfer": [
-    "gen:aqfp:0,3,-3,-3:mc",
-    "gen:aqvel:1,0,7,3:w"
-   ],
-   "retention": [
-    "gen:aqfp:1,1,0,0",
-    "gen:aqvel:2,5,7,3:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "aqfp",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "aqfp",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aqvel",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "aqfp",
-    "seed": [
-     0,
-     1,
-     -4,
-     -5
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:aqfp:0,1,-4,-5",
-     "gen:aqfp:0,2,4,-1",
-     "gen:aqfp:2,1,3,0"
     ]
    }
   },
@@ -68327,397 +68747,6 @@
      "gen:atval:1,8",
      "gen:atval:4,56",
      "gen:atval:4,57"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.trigonometry.radians",
-   "title": "Degrees to radians",
-   "chapter": [
-    {
-     "title": "Degrees to radians",
-     "text": [
-      "One radian is the angle whose arc equals the radius; a half turn, 180°, is π radians."
-     ],
-     "math": [
-      "Convert −35° into radians. Write the answer in terms of π (you may type pi).",
-      "−35° × π/180 = −7π/36"
-     ],
-     "tip": "A full turn was taken as π radians; a full turn is 2π radians, and π is a half turn (180°).",
-     "role": "concept",
-     "instance": "gen:atrad:-7"
-    },
-    {
-     "title": "Radians to degrees",
-     "text": [
-      "π radians is 180°, so 1 radian = 180°/π (about 57.3°).",
-      "Multiply by 180/π; with π in the angle, simply replace π by 180° and simplify."
-     ],
-     "math": [
-      "Convert −7π/10 radians into degrees.",
-      "Replace π by 180°: −7π/10 = −126°"
-     ]
-    },
-    {
-     "title": "Arc length and sector area",
-     "text": [
-      "With θ in radians, the arc is θ radii long (l = rθ) and the sector is the fraction θ/2π of the circle (A = ½r²θ).",
-      "Change degrees to radians first (× π/180), then use l = rθ or A = ½r²θ; to find θ use θ = l/r."
-     ],
-     "math": [
-      "Find the area (in cm²) of a sector of a circle of radius 6 cm whose angle at the centre is 0.5 radians.",
-      "A = ½r²θ = ½ × 6² × 0.5 = 9"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:atrad:-132",
-    "gen:atrad:92",
-    "gen:atrad:29"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Multiply the angle in degrees by π/180 and simplify the fraction."
-       ],
-       "math": [
-        "Convert −695° into radians. Write the answer in terms of π (you may type pi).",
-        "−695° × π/180 = −139π/36"
-       ],
-       "role": "worked-example",
-       "instance": "gen:atrad:-139"
-      }
-     ],
-     "guided": "gen:atrad:-136",
-     "check": "gen:atrad:-129"
-    },
-    {
-     "id": "known_angles",
-     "title": "Build from known angles",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Build from known angles",
-       "text": [
-        "30° = π/6, 45° = π/4, 60° = π/3, 90° = π/2, 180° = π.",
-        "75° = 30° + 45° = π/6 + π/4 = 5π/12."
-       ],
-       "math": [
-        "Convert −685° into radians. Write the answer in terms of π (you may type pi).",
-        "−685° × π/180 = −137π/36"
-       ],
-       "role": "strategy",
-       "instance": "gen:atrad:-137"
-      }
-     ],
-     "guided": "gen:atrad:96",
-     "check": "gen:atrad:-128:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:atrad:-138",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Convert −690° into radians. Write the answer in terms of π (you may type pi).” A common wrong answer is −23π/12.",
-        "A full turn was taken as π radians; a full turn is 2π radians, and π is a half turn (180°)."
-       ],
-       "math": [
-        "Not −23π/12, but −23π/6"
-       ]
-      }
-     ],
-     "guided": "gen:atrad:97",
-     "check": "gen:atrad:-2:mc"
-    }
-   ],
-   "practice": [
-    "gen:atrad:-4",
-    "gen:atrad:-131:mc",
-    "gen:atrad:89",
-    "gen:atdeg:3,1",
-    "gen:atarc:2,6,3"
-   ],
-   "transfer": [
-    "gen:atrad:-5:w",
-    "gen:atdeg:-15,2:w",
-    "gen:atarc:1,10,11:w"
-   ],
-   "retention": [
-    "gen:atrad:-1",
-    "gen:atdeg:-15,4:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "atrad",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "atrad",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atdeg",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atarc",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "atrad",
-    "seed": [
-     -7
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:atrad:-7",
-     "gen:atrad:-138",
-     "gen:atrad:-139"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.trigonometry.triangle-laws",
-   "title": "Finding a side with the sine rule",
-   "chapter": [
-    {
-     "title": "Finding a side with the sine rule",
-     "text": [
-      "In any triangle a/sin A = b/sin B = c/sin C: each side is proportional to the sine of the angle opposite it."
-     ],
-     "math": [
-      "In triangle ABC, A = 45°, B = 30° and a = 20 cm. Using the sine rule, find b in cm. Give the exact value.",
-      "a/sin A = b/sin B, so b = 20 sin 30°/sin 45°",
-      "sin B = 1/2, sin A = √2/2: b = 10√2"
-     ],
-     "tip": "The sides were taken in the same ratio as the angles; sides are in the ratio of the SINES of the opposite angles.",
-     "role": "concept",
-     "instance": "gen:atsiner:5,20"
-    },
-    {
-     "title": "The cosine of an angle from three sides",
-     "text": [
-      "The cosine rule a² = b² + c² − 2bc cos A extends Pythagoras: the extra term corrects for A not being 90°.",
-      "Rearrange to cos A = (b² + c² − a²)/(2bc) and substitute; a negative answer means A is obtuse."
-     ],
-     "math": [
-      "In triangle ABC, a = 8 cm, b = 12 cm and c = 12 cm. Find cos A.",
-      "b² + c² − a² = 144 + 144 − 64 = 224",
-      "cos A = 224/288 = 7/9"
-     ]
-    },
-    {
-     "title": "Area of a triangle from two sides and the included angle",
-     "text": [
-      "Taking b as the base, the height is a sin C, so the area is ½ × b × a sin C.",
-      "Multiply the two sides, multiply by sin of the angle between them, and halve."
-     ],
-     "math": [
-      "In triangle ABC, a = 14 cm, b = 15 cm and C = 45°. Find the area of the triangle in cm². Give the exact value.",
-      "Area = ½ab sin C = ½ × 14 × 15 × √2/2 = 105√2/2"
-     ]
-    },
-    {
-     "title": "Half-angle formulae in a triangle",
-     "text": [
-      "With s = (a + b + c)/2, the cosine rule and cos A = 1 − 2 sin²(A/2) = 2 cos²(A/2) − 1 give sin(A/2) = √((s − b)(s − c)/(bc)), cos(A/2) = √(s(s − a)/(bc)) and tan(A/2) = √((s − b)(s − c)/(s(s − a))).",
-      "Find s, the three numbers s − a, s − b, s − c, substitute into the formula, simplify the fraction under the root and rationalise."
-     ],
-     "math": [
-      "In triangle ABC, a = 9 cm, b = 10 cm and c = 13 cm. Using a half-angle formula, find sin(A/2). Give the exact value with no square root in the denominator.",
-      "s = (a + b + c)/2 = 16",
-      "sin(A/2) = √((s − b)(s − c)/(bc)) = √(18/130) = 3√65/65"
-     ]
-    },
-    {
-     "title": "Distances and heights with the sine and cosine rules",
-     "text": [
-      "When the triangle in a problem is not right-angled, use the cosine rule (two sides and the angle between them give the third side) or the sine rule (a side and two angles give another side).",
-      "Draw the triangle, mark what is known, find any missing angle from the angle sum (an exterior angle equals the sum of the two opposite interior angles), and apply the matching rule."
-     ],
-     "math": [
-      "Two ships leave a port at the same time. One sails 5 km in a straight line and the other 9 km in a straight line, on courses that make an angle of 60° with each other. How far apart are the ships then, in km? Give the exact value.",
-      "By the cosine rule, d² = 5² + 9² − 2 × 5 × 9 × cos 60° = 61",
-      "d = √61 = √61 km"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:atsiner:4,16",
-    "gen:atsiner:4,18",
-    "gen:atsiner:11,14"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Write a/sin A = b/sin B, put in the known values and solve for b; then simplify the surds."
-       ],
-       "math": [
-        "In triangle ABC, A = 30°, B = 135° and a = 12 cm. Using the sine rule, find b in cm. Give the exact value.",
-        "a/sin A = b/sin B, so b = 12 sin 135°/sin 30°",
-        "sin B = √2/2, sin A = 1/2: b = 12√2"
-       ],
-       "role": "worked-example",
-       "instance": "gen:atsiner:4,12"
-      }
-     ],
-     "guided": "gen:atsiner:4,13",
-     "check": "gen:atsiner:4,14"
-    },
-    {
-     "id": "altitude",
-     "title": "Drop a perpendicular",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Drop a perpendicular",
-       "text": [
-        "The height from C to AB equals b sin A and also a sin B.",
-        "So b sin A = a sin B, which is the sine rule."
-       ],
-       "math": [
-        "In triangle ABC, A = 45°, B = 120° and a = 10 cm. Using the sine rule, find b in cm. Give the exact value.",
-        "a/sin A = b/sin B, so b = 10 sin 120°/sin 45°",
-        "sin B = √3/2, sin A = √2/2: b = 5√6"
-       ],
-       "role": "strategy",
-       "instance": "gen:atsiner:8,10"
-      }
-     ],
-     "guided": "gen:atsiner:11,10",
-     "check": "gen:atsiner:4,15:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:atsiner:4,11",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “In triangle ABC, A = 30°, B = 135° and a = 11 cm. Using the sine rule, find b in cm. Give the exact value.” A common wrong answer is 99/2.",
-        "The sides were taken in the same ratio as the angles; sides are in the ratio of the SINES of the opposite angles."
-       ],
-       "math": [
-        "Not 99/2, but 11√2"
-       ]
-      }
-     ],
-     "guided": "gen:atsiner:8,11",
-     "check": "gen:atsiner:11,12:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Use trigonometric ratios. If a step is slow, practise that skill first.",
-        "Then the method is: Write a/sin A = b/sin B, put in the known values and solve for b; then simplify the surds."
-       ]
-      }
-     ],
-     "guided": "gen:atsiner:11,11",
-     "check": "gen:atsiner:11,13"
-    }
-   ],
-   "practice": [
-    "gen:atsiner:8,12",
-    "gen:atsiner:8,13:mc",
-    "gen:atsiner:5,19",
-    "gen:atcosr:8,6,12",
-    "gen:atarea:10,17,3",
-    "gen:athalft:1,6,2,6",
-    "gen:atapp:0,20,27,1"
-   ],
-   "transfer": [
-    "gen:atsiner:11,17:w",
-    "gen:atcosr:5,6,7:w",
-    "gen:atarea:14,15,6:w"
-   ],
-   "retention": [
-    "gen:atsiner:4,17",
-    "gen:atcosr:11,4,13:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "atsiner",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "atsiner",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atcosr",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atarea",
-     "version": "1.0.0"
-    },
-    {
-     "family": "athalft",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atapp",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "atsiner",
-    "seed": [
-     5,
-     20
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:atsiner:5,20",
-     "gen:atsiner:4,11",
-     "gen:atsiner:4,12"
     ]
    }
   },
