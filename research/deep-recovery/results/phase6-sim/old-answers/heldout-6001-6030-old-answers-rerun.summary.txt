@@ -1,0 +1,321 @@
+runs 3360: ok 3360, error 0
+
+O1 heavy-guesser
+  selective       n=30 solved 5 false 5 provis 0 pause 0 blocke 0 handed 20 error 0 | FR 5/30 [7–34%] | q 18.40 [14.83–21.80] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 20
+  three-fresh     n=30 solved 5 false 3 provis 0 pause 0 blocke 0 handed 22 error 0 | FR 3/30 [3–26%] | q 19.43 [15.93–22.93] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 21
+                  paired vs selective n=30: Δquestions 1.03 [0.10–2.80] | Δsittings 0.00 [0.00–0.00] | FR 3 vs 5
+  different-form  n=30 solved 5 false 7 provis 0 pause 0 blocke 0 handed 18 error 0 | FR 7/30 [12–41%] | q 18.37 [14.80–21.77] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 20
+                  paired vs selective n=30: Δquestions -0.03 [-0.10–0.00] | Δsittings 0.00 [0.00–0.00] | FR 7 vs 5
+  delayed-add     n=30 solved 5 false 3 provis 0 pause 0 blocke 0 handed 22 error 0 | FR 3/30 [3–26%] | q 19.43 [15.93–22.93] | sittings 1.23 [1.10–1.40] | wrong-lesson runs 21
+                  paired vs selective n=30: Δquestions 1.03 [0.10–2.80] | Δsittings 0.23 [0.10–0.40] | FR 3 vs 5
+  delayed-replace n=30 solved 5 false 5 provis 0 pause 0 blocke 0 handed 20 error 0 | FR 5/30 [7–34%] | q 18.40 [14.83–21.80] | sittings 1.73 [1.50–1.97] | wrong-lesson runs 20
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.73 [0.50–0.97] | FR 5 vs 5
+  delayed-first   n=30 solved 5 false 3 provis 1 pause 0 blocke 0 handed 21 error 0 | FR 3/30 [3–26%] | q 19.53 [16.50–22.53] | sittings 1.90 [1.67–2.17] | wrong-lesson runs 21
+                  paired vs selective n=30: Δquestions 1.13 [0.00–2.83] | Δsittings 0.90 [0.67–1.17] | FR 3 vs 5
+  consistent      n=30 solved 5 false 4 provis 0 pause 0 blocke 0 handed 21 error 0 | FR 4/30 [5–30%] | q 18.43 [14.83–21.83] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 20
+                  paired vs selective n=30: Δquestions 0.03 [0.00–0.10] | Δsittings 0.00 [0.00–0.00] | FR 4 vs 5
+  consistent-first n=30 solved 5 false 2 provis 1 pause 0 blocke 0 handed 22 error 0 | FR 2/30 [2–21%] | q 19.57 [16.57–22.53] | sittings 1.60 [1.40–1.83] | wrong-lesson runs 21
+                  paired vs selective n=30: Δquestions 1.17 [0.03–2.87] | Δsittings 0.60 [0.40–0.83] | FR 2 vs 5
+
+O1 light-guesser
+  selective       n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 24.27 [22.40–26.33] | sittings 1.03 [1.00–1.10] | wrong-lesson runs 3
+  three-fresh     n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 24.93 [23.07–26.97] | sittings 1.03 [1.00–1.10] | wrong-lesson runs 3
+                  paired vs selective n=30: Δquestions 0.67 [0.50–0.83] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  different-form  n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 24.27 [22.40–26.33] | sittings 1.03 [1.00–1.10] | wrong-lesson runs 3
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 24.93 [23.07–26.97] | sittings 1.70 [1.53–1.87] | wrong-lesson runs 3
+                  paired vs selective n=30: Δquestions 0.67 [0.50–0.83] | Δsittings 0.67 [0.50–0.83] | FR 0 vs 0
+  delayed-replace n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 24.27 [22.40–26.33] | sittings 1.73 [1.57–1.87] | wrong-lesson runs 3
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.70 [0.53–0.83] | FR 0 vs 0
+  delayed-first   n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 24.27 [22.40–26.33] | sittings 1.73 [1.57–1.87] | wrong-lesson runs 3
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.70 [0.53–0.83] | FR 0 vs 0
+  consistent      n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 24.30 [22.43–26.37] | sittings 1.03 [1.00–1.10] | wrong-lesson runs 3
+                  paired vs selective n=30: Δquestions 0.03 [0.00–0.10] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 24.33 [22.47–26.40] | sittings 1.73 [1.57–1.87] | wrong-lesson runs 3
+                  paired vs selective n=30: Δquestions 0.07 [0.00–0.20] | Δsittings 0.70 [0.53–0.83] | FR 0 vs 0
+
+O1 multiple-gaps
+  selective       n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 38.03 [37.33–38.80] | sittings 1.77 [1.60–1.90] | wrong-lesson runs 0
+  three-fresh     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 39.43 [38.57–40.40] | sittings 2.00 [2.00–2.00] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 1.40 [1.00–2.20] | Δsittings 0.23 [0.10–0.40] | FR 0 vs 0
+  different-form  n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 38.03 [37.33–38.80] | sittings 1.77 [1.60–1.90] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 39.17 [38.23–40.20] | sittings 2.53 [2.37–2.70] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 1.13 [0.60–2.03] | Δsittings 0.77 [0.57–0.93] | FR 0 vs 0
+  delayed-replace n=30 solved 29 false 0 provis 1 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 38.00 [37.33–38.77] | sittings 2.50 [2.33–2.67] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions -0.03 [-0.10–0.00] | Δsittings 0.73 [0.57–0.87] | FR 0 vs 0
+  delayed-first   n=30 solved 29 false 0 provis 1 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 38.00 [37.33–38.77] | sittings 2.50 [2.33–2.67] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions -0.03 [-0.10–0.00] | Δsittings 0.73 [0.57–0.87] | FR 0 vs 0
+  consistent      n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 38.10 [37.40–38.87] | sittings 1.77 [1.60–1.90] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.07 [0.00–0.17] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 29 false 0 provis 1 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 38.10 [37.40–38.90] | sittings 2.50 [2.33–2.67] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.07 [-0.07–0.23] | Δsittings 0.73 [0.57–0.87] | FR 0 vs 0
+
+O1 single-gap
+  selective       n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 24.37 [23.83–25.07] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+  three-fresh     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 25.77 [24.97–26.83] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 1.40 [1.00–2.20] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  different-form  n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 24.37 [23.83–25.07] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 25.77 [24.97–26.83] | sittings 2.03 [2.00–2.10] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 1.40 [1.00–2.20] | Δsittings 1.03 [1.00–1.10] | FR 0 vs 0
+  delayed-replace n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 24.37 [23.83–25.07] | sittings 2.03 [2.00–2.10] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.03 [1.00–1.10] | FR 0 vs 0
+  delayed-first   n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 24.37 [23.83–25.07] | sittings 2.03 [2.00–2.10] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.03 [1.00–1.10] | FR 0 vs 0
+  consistent      n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 24.40 [23.87–25.13] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.03 [0.00–0.10] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 24.43 [23.87–25.17] | sittings 2.03 [2.00–2.10] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.07 [0.00–0.20] | Δsittings 1.03 [1.00–1.10] | FR 0 vs 0
+
+O1 strong-history
+  selective       n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 2.00 [2.00–2.00] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 2.00 [2.00–2.00] | sittings to recognition 1.00 [1.00–1.00]
+  three-fresh     n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 6.07 [4.40–8.30] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 2
+                  recognised 29/30 [83–99%] (in sitting 1: 29) | questions to recognition 5.45 [4.00–7.21] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 4.07 [2.40–6.30] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  different-form  n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 3.33 [3.00–4.00] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 1
+                  recognised 29/30 [83–99%] (in sitting 1: 29) | questions to recognition 3.00 [3.00–3.00] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 1.33 [1.00–2.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.43 [3.00–4.30] | sittings 2.03 [2.00–2.10] | wrong-lesson runs 1
+                  recognised 30/30 [89–100%] (in sitting 1: 0) | questions to recognition 3.43 [3.00–4.30] | sittings to recognition 2.03 [2.00–2.10]
+                  paired vs selective n=30: Δquestions 1.43 [1.00–2.30] | Δsittings 1.03 [1.00–1.10] | FR 0 vs 0
+  delayed-replace n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.40 [3.00–4.20] | sittings 2.03 [2.00–2.10] | wrong-lesson runs 1
+                  recognised 30/30 [89–100%] (in sitting 1: 0) | questions to recognition 3.40 [3.00–4.20] | sittings to recognition 2.03 [2.00–2.10]
+                  paired vs selective n=30: Δquestions 1.40 [1.00–2.20] | Δsittings 1.03 [1.00–1.10] | FR 0 vs 0
+  delayed-first   n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.40 [3.00–4.20] | sittings 2.03 [2.00–2.10] | wrong-lesson runs 1
+                  recognised 30/30 [89–100%] (in sitting 1: 0) | questions to recognition 3.40 [3.00–4.20] | sittings to recognition 2.03 [2.00–2.10]
+                  paired vs selective n=30: Δquestions 1.40 [1.00–2.20] | Δsittings 1.03 [1.00–1.10] | FR 0 vs 0
+  consistent      n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 2.00 [2.00–2.00] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 2.00 [2.00–2.00] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.47 [3.00–4.40] | sittings 2.03 [2.00–2.10] | wrong-lesson runs 1
+                  recognised 30/30 [89–100%] (in sitting 1: 0) | questions to recognition 3.47 [3.00–4.40] | sittings to recognition 2.03 [2.00–2.10]
+                  paired vs selective n=30: Δquestions 1.47 [1.00–2.40] | Δsittings 1.03 [1.00–1.10] | FR 0 vs 0
+
+O1 strong-right
+  selective       n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.33 [2.27–4.77] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 3.33 [2.27–4.77] | sittings to recognition 1.00 [1.00–1.00]
+  three-fresh     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 4.07 [2.90–5.57] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 4.07 [2.90–5.57] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 0.73 [0.57–0.87] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  different-form  n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.27 [2.27–4.60] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 3.27 [2.27–4.60] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions -0.07 [-0.17–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 4.07 [2.90–5.57] | sittings 1.73 [1.57–1.87] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 8) | questions to recognition 4.07 [2.90–5.57] | sittings to recognition 1.73 [1.57–1.87]
+                  paired vs selective n=30: Δquestions 0.73 [0.57–0.87] | Δsittings 0.73 [0.57–0.87] | FR 0 vs 0
+  delayed-replace n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.33 [2.27–4.77] | sittings 1.80 [1.60–2.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 8) | questions to recognition 3.33 [2.27–4.77] | sittings to recognition 1.80 [1.60–2.00]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.80 [0.60–1.00] | FR 0 vs 0
+  delayed-first   n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.60 [2.63–4.97] | sittings 2.07 [2.00–2.17] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 0) | questions to recognition 3.60 [2.63–4.97] | sittings to recognition 2.07 [2.00–2.17]
+                  paired vs selective n=30: Δquestions 0.27 [0.13–0.43] | Δsittings 1.07 [1.00–1.17] | FR 0 vs 0
+  consistent      n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.33 [2.27–4.77] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 3.33 [2.27–4.77] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.60 [2.63–4.97] | sittings 2.07 [2.00–2.17] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 0) | questions to recognition 3.60 [2.63–4.97] | sittings to recognition 2.07 [2.00–2.17]
+                  paired vs selective n=30: Δquestions 0.27 [0.13–0.43] | Δsittings 1.07 [1.00–1.17] | FR 0 vs 0
+
+O1 strong-slips
+  selective       n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 5.13 [3.70–6.90] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 6
+                  recognised 29/30 [83–99%] (in sitting 1: 29) | questions to recognition 4.66 [3.41–6.10] | sittings to recognition 1.00 [1.00–1.00]
+  three-fresh     n=30 solved 27 false 0 provis 0 pause 0 blocke 0 handed 3 error 0 | FR 0/30 [0–11%] | q 7.73 [5.67–10.07] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 7
+                  recognised 27/30 [74–97%] (in sitting 1: 27) | questions to recognition 6.93 [5.00–9.30] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 2.60 [0.97–4.70] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  different-form  n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 5.13 [3.70–6.90] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 6
+                  recognised 29/30 [83–99%] (in sitting 1: 29) | questions to recognition 4.66 [3.41–6.10] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 27 false 0 provis 0 pause 0 blocke 0 handed 3 error 0 | FR 0/30 [0–11%] | q 7.73 [5.67–10.07] | sittings 2.07 [1.93–2.20] | wrong-lesson runs 7
+                  recognised 27/30 [74–97%] (in sitting 1: 0) | questions to recognition 6.93 [5.00–9.30] | sittings to recognition 2.11 [2.00–2.26]
+                  paired vs selective n=30: Δquestions 2.60 [0.97–4.70] | Δsittings 1.07 [0.93–1.20] | FR 0 vs 0
+  delayed-replace n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 5.13 [3.70–6.90] | sittings 2.00 [1.90–2.10] | wrong-lesson runs 6
+                  recognised 29/30 [83–99%] (in sitting 1: 0) | questions to recognition 4.66 [3.41–6.10] | sittings to recognition 2.03 [2.00–2.10]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.00 [0.90–1.10] | FR 0 vs 0
+  delayed-first   n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 5.13 [3.70–6.90] | sittings 2.00 [1.90–2.10] | wrong-lesson runs 6
+                  recognised 29/30 [83–99%] (in sitting 1: 0) | questions to recognition 4.66 [3.41–6.10] | sittings to recognition 2.03 [2.00–2.10]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.00 [0.90–1.10] | FR 0 vs 0
+  consistent      n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 5.13 [3.70–6.90] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 6
+                  recognised 29/30 [83–99%] (in sitting 1: 29) | questions to recognition 4.66 [3.41–6.10] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 5.13 [3.70–6.90] | sittings 2.00 [1.90–2.10] | wrong-lesson runs 6
+                  recognised 29/30 [83–99%] (in sitting 1: 0) | questions to recognition 4.66 [3.41–6.10] | sittings to recognition 2.03 [2.00–2.10]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.00 [0.90–1.10] | FR 0 vs 0
+
+O2 heavy-guesser
+  selective       n=30 solved 6 false 6 provis 0 pause 0 blocke 0 handed 18 error 0 | FR 6/30 [10–37%] | q 14.53 [12.67–16.23] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 20
+  three-fresh     n=30 solved 6 false 1 provis 0 pause 0 blocke 0 handed 23 error 0 | FR 1/30 [1–17%] | q 15.90 [14.33–17.33] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 22
+                  paired vs selective n=30: Δquestions 1.37 [0.23–2.97] | Δsittings 0.00 [0.00–0.00] | FR 1 vs 6
+  different-form  n=30 solved 5 false 8 provis 0 pause 0 blocke 0 handed 17 error 0 | FR 8/30 [14–44%] | q 13.83 [11.70–15.83] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 19
+                  paired vs selective n=30: Δquestions -0.70 [-1.80–0.00] | Δsittings 0.00 [0.00–0.00] | FR 8 vs 6
+  delayed-add     n=30 solved 6 false 1 provis 0 pause 0 blocke 0 handed 23 error 0 | FR 1/30 [1–17%] | q 15.90 [14.33–17.33] | sittings 1.37 [1.20–1.53] | wrong-lesson runs 22
+                  paired vs selective n=30: Δquestions 1.37 [0.23–2.97] | Δsittings 0.37 [0.20–0.53] | FR 1 vs 6
+  delayed-replace n=30 solved 6 false 5 provis 1 pause 0 blocke 0 handed 18 error 0 | FR 5/30 [7–34%] | q 14.50 [12.67–16.17] | sittings 1.83 [1.60–2.07] | wrong-lesson runs 20
+                  paired vs selective n=30: Δquestions -0.03 [-0.10–0.00] | Δsittings 0.83 [0.60–1.07] | FR 5 vs 6
+  delayed-first   n=30 solved 7 false 4 provis 1 pause 0 blocke 0 handed 18 error 0 | FR 4/30 [5–30%] | q 14.93 [13.37–16.37] | sittings 1.90 [1.63–2.13] | wrong-lesson runs 20
+                  paired vs selective n=30: Δquestions 0.40 [-0.10–1.30] | Δsittings 0.90 [0.63–1.13] | FR 4 vs 6
+  consistent      n=30 solved 6 false 4 provis 0 pause 0 blocke 0 handed 20 error 0 | FR 4/30 [5–30%] | q 15.63 [14.10–17.07] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 22
+                  paired vs selective n=30: Δquestions 1.10 [0.00–2.73] | Δsittings 0.00 [0.00–0.00] | FR 4 vs 6
+  consistent-first n=30 solved 7 false 2 provis 1 pause 0 blocke 0 handed 20 error 0 | FR 2/30 [2–21%] | q 16.07 [14.87–17.23] | sittings 1.77 [1.50–2.03] | wrong-lesson runs 22
+                  paired vs selective n=30: Δquestions 1.53 [0.03–3.33] | Δsittings 0.77 [0.50–1.03] | FR 2 vs 6
+
+O2 light-guesser
+  selective       n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 15.57 [14.60–16.60] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 5
+  three-fresh     n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 16.23 [15.40–17.10] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 5
+                  paired vs selective n=30: Δquestions 0.67 [0.50–0.83] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  different-form  n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 15.57 [14.60–16.60] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 5
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 16.23 [15.40–17.10] | sittings 1.67 [1.50–1.83] | wrong-lesson runs 5
+                  paired vs selective n=30: Δquestions 0.67 [0.50–0.83] | Δsittings 0.67 [0.50–0.83] | FR 0 vs 0
+  delayed-replace n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 15.57 [14.60–16.60] | sittings 1.73 [1.53–1.93] | wrong-lesson runs 5
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.73 [0.53–0.93] | FR 0 vs 0
+  delayed-first   n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 15.57 [14.60–16.60] | sittings 1.73 [1.53–1.93] | wrong-lesson runs 5
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.73 [0.53–0.93] | FR 0 vs 0
+  consistent      n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 15.63 [14.67–16.67] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 5
+                  paired vs selective n=30: Δquestions 0.07 [0.00–0.17] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 20 false 0 provis 0 pause 0 blocke 0 handed 10 error 0 | FR 0/30 [0–11%] | q 15.70 [14.73–16.73] | sittings 1.73 [1.53–1.93] | wrong-lesson runs 5
+                  paired vs selective n=30: Δquestions 0.13 [0.00–0.33] | Δsittings 0.73 [0.53–0.93] | FR 0 vs 0
+
+O2 multiple-gaps
+  selective       n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 23.77 [23.37–24.17] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+  three-fresh     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 25.53 [24.57–26.73] | sittings 1.03 [1.00–1.10] | wrong-lesson runs 1
+                  paired vs selective n=30: Δquestions 1.77 [1.00–3.00] | Δsittings 0.03 [0.00–0.10] | FR 0 vs 0
+  different-form  n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 23.77 [23.37–24.17] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 25.53 [24.57–26.73] | sittings 2.07 [2.00–2.17] | wrong-lesson runs 1
+                  paired vs selective n=30: Δquestions 1.77 [1.00–3.00] | Δsittings 1.07 [1.00–1.17] | FR 0 vs 0
+  delayed-replace n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 23.77 [23.37–24.17] | sittings 2.13 [2.03–2.27] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.13 [1.03–1.27] | FR 0 vs 0
+  delayed-first   n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 23.77 [23.37–24.17] | sittings 2.13 [2.03–2.27] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.13 [1.03–1.27] | FR 0 vs 0
+  consistent      n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 23.77 [23.37–24.17] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 23.77 [23.37–24.17] | sittings 2.13 [2.03–2.27] | wrong-lesson runs 0
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.13 [1.03–1.27] | FR 0 vs 0
+
+O2 single-gap
+  selective       n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 14.13 [13.67–14.83] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 1
+  three-fresh     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 15.80 [14.80–17.07] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 2
+                  paired vs selective n=30: Δquestions 1.67 [1.00–2.60] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  different-form  n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 14.13 [13.67–14.83] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 1
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 15.80 [14.80–17.07] | sittings 2.07 [2.00–2.17] | wrong-lesson runs 2
+                  paired vs selective n=30: Δquestions 1.67 [1.00–2.60] | Δsittings 1.07 [1.00–1.17] | FR 0 vs 0
+  delayed-replace n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 14.13 [13.67–14.83] | sittings 2.03 [2.00–2.10] | wrong-lesson runs 1
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.03 [1.00–1.10] | FR 0 vs 0
+  delayed-first   n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 14.13 [13.67–14.83] | sittings 2.03 [2.00–2.10] | wrong-lesson runs 1
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.03 [1.00–1.10] | FR 0 vs 0
+  consistent      n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 14.60 [13.77–15.77] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 2
+                  paired vs selective n=30: Δquestions 0.47 [0.00–1.33] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 14.67 [13.80–15.83] | sittings 2.03 [2.00–2.10] | wrong-lesson runs 2
+                  paired vs selective n=30: Δquestions 0.53 [0.00–1.47] | Δsittings 1.03 [1.00–1.10] | FR 0 vs 0
+
+O2 strong-history
+  selective       n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 2.00 [2.00–2.00] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 2.00 [2.00–2.00] | sittings to recognition 1.00 [1.00–1.00]
+  three-fresh     n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 5.33 [4.27–6.67] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 4
+                  recognised 29/30 [83–99%] (in sitting 1: 29) | questions to recognition 5.10 [4.00–6.48] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 3.33 [2.27–4.67] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  different-form  n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.80 [3.00–4.87] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 3
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 3.80 [3.00–4.87] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 1.80 [1.00–2.87] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 3.90 [3.00–5.10] | sittings 2.10 [2.00–2.23] | wrong-lesson runs 3
+                  recognised 29/30 [83–99%] (in sitting 1: 0) | questions to recognition 3.62 [3.00–4.55] | sittings to recognition 2.07 [2.00–2.17]
+                  paired vs selective n=30: Δquestions 1.90 [1.00–3.10] | Δsittings 1.10 [1.00–1.23] | FR 0 vs 0
+  delayed-replace n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.80 [3.00–4.87] | sittings 2.10 [2.00–2.23] | wrong-lesson runs 3
+                  recognised 30/30 [89–100%] (in sitting 1: 0) | questions to recognition 3.80 [3.00–4.87] | sittings to recognition 2.10 [2.00–2.23]
+                  paired vs selective n=30: Δquestions 1.80 [1.00–2.87] | Δsittings 1.10 [1.00–1.23] | FR 0 vs 0
+  delayed-first   n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.80 [3.00–4.87] | sittings 2.10 [2.00–2.23] | wrong-lesson runs 3
+                  recognised 30/30 [89–100%] (in sitting 1: 0) | questions to recognition 3.80 [3.00–4.87] | sittings to recognition 2.10 [2.00–2.23]
+                  paired vs selective n=30: Δquestions 1.80 [1.00–2.87] | Δsittings 1.10 [1.00–1.23] | FR 0 vs 0
+  consistent      n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 2.00 [2.00–2.00] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 2.00 [2.00–2.00] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 3.80 [3.00–4.87] | sittings 2.10 [2.00–2.23] | wrong-lesson runs 3
+                  recognised 30/30 [89–100%] (in sitting 1: 0) | questions to recognition 3.80 [3.00–4.87] | sittings to recognition 2.10 [2.00–2.23]
+                  paired vs selective n=30: Δquestions 1.80 [1.00–2.87] | Δsittings 1.10 [1.00–1.23] | FR 0 vs 0
+
+O2 strong-right
+  selective       n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 1.87 [1.53–2.27] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 1.87 [1.53–2.27] | sittings to recognition 1.00 [1.00–1.00]
+  three-fresh     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 2.30 [1.80–2.90] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 2.30 [1.80–2.90] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 0.43 [0.27–0.63] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  different-form  n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 1.87 [1.53–2.27] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 1.87 [1.53–2.27] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 2.30 [1.80–2.90] | sittings 1.43 [1.27–1.63] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 17) | questions to recognition 2.30 [1.80–2.90] | sittings to recognition 1.43 [1.27–1.63]
+                  paired vs selective n=30: Δquestions 0.43 [0.27–0.63] | Δsittings 0.43 [0.27–0.63] | FR 0 vs 0
+  delayed-replace n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 1.87 [1.53–2.27] | sittings 1.43 [1.27–1.63] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 17) | questions to recognition 1.87 [1.53–2.27] | sittings to recognition 1.43 [1.27–1.63]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.43 [0.27–0.63] | FR 0 vs 0
+  delayed-first   n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 2.43 [2.27–2.63] | sittings 2.00 [2.00–2.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 0) | questions to recognition 2.43 [2.27–2.63] | sittings to recognition 2.00 [2.00–2.00]
+                  paired vs selective n=30: Δquestions 0.57 [0.37–0.73] | Δsittings 1.00 [1.00–1.00] | FR 0 vs 0
+  consistent      n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 1.87 [1.53–2.27] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 30) | questions to recognition 1.87 [1.53–2.27] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 30 false 0 provis 0 pause 0 blocke 0 handed 0 error 0 | FR 0/30 [0–11%] | q 2.43 [2.27–2.63] | sittings 2.00 [2.00–2.00] | wrong-lesson runs 0
+                  recognised 30/30 [89–100%] (in sitting 1: 0) | questions to recognition 2.43 [2.27–2.63] | sittings to recognition 2.00 [2.00–2.00]
+                  paired vs selective n=30: Δquestions 0.57 [0.37–0.73] | Δsittings 1.00 [1.00–1.00] | FR 0 vs 0
+
+O2 strong-slips
+  selective       n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 5.97 [4.47–7.50] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 10
+                  recognised 29/30 [83–99%] (in sitting 1: 29) | questions to recognition 5.79 [4.24–7.34] | sittings to recognition 1.00 [1.00–1.00]
+  three-fresh     n=30 solved 28 false 0 provis 0 pause 0 blocke 0 handed 2 error 0 | FR 0/30 [0–11%] | q 7.87 [6.17–9.67] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 11
+                  recognised 28/30 [79–98%] (in sitting 1: 28) | questions to recognition 7.54 [5.71–9.46] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 1.90 [0.93–3.40] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  different-form  n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 5.97 [4.47–7.50] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 10
+                  recognised 29/30 [83–99%] (in sitting 1: 29) | questions to recognition 5.79 [4.24–7.34] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  delayed-add     n=30 solved 28 false 0 provis 0 pause 0 blocke 0 handed 2 error 0 | FR 0/30 [0–11%] | q 7.87 [6.17–9.67] | sittings 2.03 [1.93–2.13] | wrong-lesson runs 11
+                  recognised 28/30 [79–98%] (in sitting 1: 0) | questions to recognition 7.54 [5.71–9.46] | sittings to recognition 2.07 [2.00–2.18]
+                  paired vs selective n=30: Δquestions 1.90 [0.93–3.40] | Δsittings 1.03 [0.93–1.13] | FR 0 vs 0
+  delayed-replace n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 5.97 [4.47–7.50] | sittings 2.23 [2.10–2.40] | wrong-lesson runs 10
+                  recognised 29/30 [83–99%] (in sitting 1: 0) | questions to recognition 5.79 [4.24–7.34] | sittings to recognition 2.24 [2.10–2.41]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.23 [1.10–1.40] | FR 0 vs 0
+  delayed-first   n=30 solved 29 false 0 provis 0 pause 0 blocke 0 handed 1 error 0 | FR 0/30 [0–11%] | q 5.97 [4.47–7.50] | sittings 2.23 [2.10–2.40] | wrong-lesson runs 10
+                  recognised 29/30 [83–99%] (in sitting 1: 0) | questions to recognition 5.79 [4.24–7.34] | sittings to recognition 2.24 [2.10–2.41]
+                  paired vs selective n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.23 [1.10–1.40] | FR 0 vs 0
+  consistent      n=30 solved 28 false 0 provis 0 pause 0 blocke 0 handed 2 error 0 | FR 0/30 [0–11%] | q 6.00 [4.50–7.57] | sittings 1.00 [1.00–1.00] | wrong-lesson runs 10
+                  recognised 28/30 [79–98%] (in sitting 1: 28) | questions to recognition 5.54 [4.07–7.07] | sittings to recognition 1.00 [1.00–1.00]
+                  paired vs selective n=30: Δquestions 0.03 [0.00–0.10] | Δsittings 0.00 [0.00–0.00] | FR 0 vs 0
+  consistent-first n=30 solved 28 false 0 provis 0 pause 0 blocke 0 handed 2 error 0 | FR 0/30 [0–11%] | q 6.00 [4.50–7.57] | sittings 2.20 [2.03–2.37] | wrong-lesson runs 10
+                  recognised 28/30 [79–98%] (in sitting 1: 0) | questions to recognition 5.54 [4.07–7.07] | sittings to recognition 2.25 [2.11–2.43]
+                  paired vs selective n=30: Δquestions 0.03 [0.00–0.10] | Δsittings 1.20 [1.03–1.37] | FR 0 vs 0
+
+pooled by learner group (both goals):
+  strong        selective       n=180 FR 0/180 [0–2%] | provisional at end 0 | errors 0 | q 3.38 [2.93–3.91] | sittings 1.00 [1.00–1.00] | recognised 178/180 [96–100%], in sitting 1 178/180 [96–100%]
+  strong        three-fresh     n=180 FR 0/180 [0–2%] | provisional at end 0 | errors 0 | q 5.56 [4.86–6.30] | sittings 1.00 [1.00–1.00] | recognised 173/180 [92–98%], in sitting 1 173/180 [92–98%]
+  strong        different-form  n=180 FR 0/180 [0–2%] | provisional at end 0 | errors 0 | q 3.89 [3.43–4.44] | sittings 1.00 [1.00–1.00] | recognised 177/180 [95–99%], in sitting 1 177/180 [95–99%]
+  strong        delayed-add     n=180 FR 0/180 [0–2%] | provisional at end 0 | errors 0 | q 4.88 [4.27–5.52] | sittings 1.90 [1.84–1.96] | recognised 174/180 [93–98%], in sitting 1 25/180 [10–20%]
+  strong        delayed-replace n=180 FR 0/180 [0–2%] | provisional at end 0 | errors 0 | q 3.92 [3.45–4.47] | sittings 1.93 [1.87–2.00] | recognised 178/180 [96–100%], in sitting 1 25/180 [10–20%]
+  strong        delayed-first   n=180 FR 0/180 [0–2%] | provisional at end 0 | errors 0 | q 4.06 [3.61–4.58] | sittings 2.07 [2.03–2.11] | recognised 178/180 [96–100%], in sitting 1 0/180 [0–2%]
+  strong        consistent      n=180 FR 0/180 [0–2%] | provisional at end 0 | errors 0 | q 3.39 [2.94–3.92] | sittings 1.00 [1.00–1.00] | recognised 177/180 [95–99%], in sitting 1 177/180 [95–99%]
+  strong        consistent-first n=180 FR 0/180 [0–2%] | provisional at end 0 | errors 0 | q 4.07 [3.62–4.59] | sittings 2.07 [2.02–2.11] | recognised 177/180 [95–99%], in sitting 1 0/180 [0–2%]
+  gaps          selective       n=120 FR 0/120 [0–3%] | provisional at end 0 | errors 0 | q 25.07 [23.50–26.67] | sittings 1.19 [1.13–1.27] | solved-fresh-unaided 120/120 [97–100%]
+  gaps          three-fresh     n=120 FR 0/120 [0–3%] | provisional at end 0 | errors 0 | q 26.63 [25.04–28.30] | sittings 1.26 [1.18–1.33] | solved-fresh-unaided 120/120 [97–100%]
+  gaps          different-form  n=120 FR 0/120 [0–3%] | provisional at end 0 | errors 0 | q 25.07 [23.50–26.67] | sittings 1.19 [1.13–1.27] | solved-fresh-unaided 120/120 [97–100%]
+  gaps          delayed-add     n=120 FR 0/120 [0–3%] | provisional at end 0 | errors 0 | q 26.57 [24.98–28.22] | sittings 2.17 [2.11–2.24] | solved-fresh-unaided 120/120 [97–100%]
+  gaps          delayed-replace n=120 FR 0/120 [0–3%] | provisional at end 1 | errors 0 | q 25.07 [23.49–26.65] | sittings 2.17 [2.11–2.24] | solved-fresh-unaided 119/120 [95–100%]
+  gaps          delayed-first   n=120 FR 0/120 [0–3%] | provisional at end 1 | errors 0 | q 25.07 [23.49–26.65] | sittings 2.17 [2.11–2.24] | solved-fresh-unaided 119/120 [95–100%]
+  gaps          consistent      n=120 FR 0/120 [0–3%] | provisional at end 0 | errors 0 | q 25.22 [23.62–26.83] | sittings 1.19 [1.13–1.27] | solved-fresh-unaided 120/120 [97–100%]
+  gaps          consistent-first n=120 FR 0/120 [0–3%] | provisional at end 1 | errors 0 | q 25.24 [23.65–26.86] | sittings 2.17 [2.11–2.24] | solved-fresh-unaided 119/120 [95–100%]
+  light-guesser selective       n=60 FR 0/60 [0–6%] | provisional at end 0 | errors 0 | q 19.92 [18.42–21.53] | sittings 1.02 [1.00–1.05] | solved-fresh-unaided 40/60 [54–77%]
+  light-guesser three-fresh     n=60 FR 0/60 [0–6%] | provisional at end 0 | errors 0 | q 20.58 [19.10–22.18] | sittings 1.02 [1.00–1.05] | solved-fresh-unaided 40/60 [54–77%]
+  light-guesser different-form  n=60 FR 0/60 [0–6%] | provisional at end 0 | errors 0 | q 19.92 [18.42–21.53] | sittings 1.02 [1.00–1.05] | solved-fresh-unaided 40/60 [54–77%]
+  light-guesser delayed-add     n=60 FR 0/60 [0–6%] | provisional at end 0 | errors 0 | q 20.58 [19.10–22.18] | sittings 1.68 [1.57–1.80] | solved-fresh-unaided 40/60 [54–77%]
+  light-guesser delayed-replace n=60 FR 0/60 [0–6%] | provisional at end 0 | errors 0 | q 19.92 [18.42–21.53] | sittings 1.73 [1.60–1.85] | solved-fresh-unaided 40/60 [54–77%]
+  light-guesser delayed-first   n=60 FR 0/60 [0–6%] | provisional at end 0 | errors 0 | q 19.92 [18.42–21.53] | sittings 1.73 [1.60–1.85] | solved-fresh-unaided 40/60 [54–77%]
+  light-guesser consistent      n=60 FR 0/60 [0–6%] | provisional at end 0 | errors 0 | q 19.97 [18.48–21.60] | sittings 1.02 [1.00–1.05] | solved-fresh-unaided 40/60 [54–77%]
+  light-guesser consistent-first n=60 FR 0/60 [0–6%] | provisional at end 0 | errors 0 | q 20.02 [18.52–21.65] | sittings 1.73 [1.60–1.85] | solved-fresh-unaided 40/60 [54–77%]
+  heavy-guesser selective       n=60 FR 11/60 [11–30%] | provisional at end 0 | errors 0 | q 16.47 [14.45–18.37] | sittings 1.00 [1.00–1.00] | solved-fresh-unaided 11/60 [11–30%]
+  heavy-guesser three-fresh     n=60 FR 4/60 [3–16%] | provisional at end 0 | errors 0 | q 17.67 [15.80–19.52] | sittings 1.00 [1.00–1.00] | solved-fresh-unaided 11/60 [11–30%]
+  heavy-guesser different-form  n=60 FR 15/60 [16–37%] | provisional at end 0 | errors 0 | q 16.10 [13.97–18.07] | sittings 1.00 [1.00–1.00] | solved-fresh-unaided 10/60 [9–28%]
+  heavy-guesser delayed-add     n=60 FR 4/60 [3–16%] | provisional at end 0 | errors 0 | q 17.67 [15.80–19.52] | sittings 1.30 [1.18–1.42] | solved-fresh-unaided 11/60 [11–30%]
+  heavy-guesser delayed-replace n=60 FR 10/60 [9–28%] | provisional at end 1 | errors 0 | q 16.45 [14.43–18.35] | sittings 1.78 [1.62–1.95] | solved-fresh-unaided 11/60 [11–30%]
+  heavy-guesser delayed-first   n=60 FR 7/60 [6–22%] | provisional at end 2 | errors 0 | q 17.23 [15.45–18.90] | sittings 1.90 [1.73–2.08] | solved-fresh-unaided 12/60 [12–32%]
+  heavy-guesser consistent      n=60 FR 8/60 [7–24%] | provisional at end 0 | errors 0 | q 17.03 [15.10–18.90] | sittings 1.00 [1.00–1.00] | solved-fresh-unaided 11/60 [11–30%]
+  heavy-guesser consistent-first n=60 FR 4/60 [3–16%] | provisional at end 2 | errors 0 | q 17.82 [16.15–19.48] | sittings 1.68 [1.52–1.87] | solved-fresh-unaided 12/60 [12–32%]

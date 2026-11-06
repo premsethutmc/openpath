@@ -5,8 +5,10 @@ When a deep recovery stops without teaching the learner through (blocked: OpenPa
 question, teaching did not work, the effort limit, or no next step), the learner's app records one hand-off here. Nobody is emailed or
 messaged: the hand-off is only VISIBLE, in Content review → Marking, to an educator the parent has shared this pupil with — the same
 authorisation written@1 marking and handover@1 acknowledgements use (an active educator role + an active MarkingShare). The educator sees the
-pupil under the marking pseudonym, the original skill, the step it stopped at, why, and the answers of that recovery; they can mark it
-resolved with a note. Resolving changes nothing in the learner's records: it is not a mark, not evidence and not mastery.
+pupil under the marking pseudonym, the original skill, the step it stopped at and why; they can mark it resolved with a note. The
+recovery's ANSWERS (the questions, what was answered, right or wrong, the text the learner was shown and the skills checked) are shown
+only when the parent has ALSO given the separate, explicit, revocable permission RecoveryAnswersShare for that educator; sharing written
+work never implies it. Resolving changes nothing in the learner's records: it is not a mark, not evidence and not mastery.
 
 Who may do what:
   - the parent's account (the account the learner's app uses) creates and reads its own pupil's hand-offs; never resolves them;
@@ -32,7 +34,9 @@ from rest_framework.response import Response
 from .decisions import verdict_of
 from .developer import audit
 from .learning import DEEP_EPISODE
-from .models import MarkingShare, Pupil, PupilEvent, RecoveryHandoff
+from django.contrib.auth import get_user_model
+
+from .models import MarkingShare, Pupil, PupilEvent, RecoveryAnswersShare, RecoveryHandoff
 from .views import AccountBase
 from .written import _alias, _is_educator, _shared_pupils
 
@@ -96,12 +100,20 @@ def _reported(h):
     return {**_learner_json(h), 'educatorCanSee': educator_can_see(h.pupil)}
 
 
-def _educator_json(h, with_evidence=True):
-    out = {'id': h.pk, 'pupil': str(h.pupil_id), 'learner': _alias(h.pupil_id), 'skill': h.skill, 'original': h.original, 'step': h.step, 'reason': h.reason, 'detail': h.detail,
-           'path': h.path, 'status': _status(h), 'createdAt': _iso(h.created_at), 'reportedAt': _iso(h.reported_at), 'reports': h.reports,
-           'resolvedAt': _iso(h.resolved_at), 'note': h.note}
-    if with_evidence:
-        out['evidence'] = _evidence(h.pupil, h.original)
+def answers_shared(pupil, educator) -> bool:
+    """the parent's separate permission for this educator to see this pupil's recovery answers (on top of the written-work share)"""
+    return RecoveryAnswersShare.objects.filter(pupil=pupil, educator=educator, revoked_at__isnull=True).exists()
+
+
+def _educator_json(h, answers: bool, with_evidence=True):
+    """without the parent's answers permission: the skill, the reason and the step only (no answers, no learner text, no path, no problem)"""
+    out = {'id': h.pk, 'pupil': str(h.pupil_id), 'learner': _alias(h.pupil_id), 'skill': h.skill, 'step': h.step, 'reason': h.reason,
+           'status': _status(h), 'createdAt': _iso(h.created_at), 'reportedAt': _iso(h.reported_at), 'reports': h.reports,
+           'resolvedAt': _iso(h.resolved_at), 'note': h.note, 'answersShared': answers}
+    if answers:
+        out.update({'original': h.original, 'detail': h.detail, 'path': h.path})
+        if with_evidence:
+            out['evidence'] = _evidence(h.pupil, h.original)
     return out
 
 
@@ -176,7 +188,8 @@ class RecoveryHandoffQueueView(_Switched):
         if not _is_educator(request.user):
             raise PermissionDenied('Seeing learners who need help needs the educator role.')
         rows = RecoveryHandoff.objects.filter(pupil__in=_shared_pupils(request.user)).select_related('pupil')
-        out = sorted((_educator_json(h) for h in rows), key=lambda r: (r['status'] != 'open', r['reportedAt'] or ''))
+        allowed = set(RecoveryAnswersShare.objects.filter(educator=request.user, revoked_at__isnull=True).values_list('pupil_id', flat=True))
+        out = sorted((_educator_json(h, h.pupil_id in allowed) for h in rows), key=lambda r: (r['status'] != 'open', r['reportedAt'] or ''))
         return Response({'handoffs': out})
 
 
@@ -195,4 +208,31 @@ class RecoveryHandoffResolveView(_Switched):
             return Response({'detail': 'This hand-off is already resolved.'}, status=status.HTTP_409_CONFLICT)
         h.refresh_from_db()
         audit(request.user, 'recovery-handoff-resolve', pupil=h.pupil_id, detail=f'handoff {h.pk}')
-        return Response(_educator_json(h, with_evidence=False))
+        return Response(_educator_json(h, answers_shared(h.pupil, request.user), with_evidence=False))
+
+
+class RecoveryAnswersShareView(_Switched):
+    """The parent: GET the educators allowed to see recovery answers; POST {email} allow one (only an educator who already marks this pupil's
+    written work); DELETE {email} stop it. Separate from, and never implied by, sharing written work."""
+
+    def get(self, request, pupil_id):
+        pupil = get_object_or_404(Pupil, pk=pupil_id, parent=request.user)
+        rows = RecoveryAnswersShare.objects.filter(pupil=pupil, revoked_at__isnull=True).select_related('educator')
+        return Response({'shares': [{'email': r.educator.email, 'since': _iso(r.granted_at)} for r in rows]})
+
+    def post(self, request, pupil_id):
+        pupil = get_object_or_404(Pupil, pk=pupil_id, parent=request.user)
+        email = str(request.data.get('email', '')).strip().lower()
+        who = get_user_model().objects.filter(email__iexact=email).first() if email else None
+        # the same answer whether the account does not exist, is not an educator, or does not mark this pupil's written work
+        if not who or who == request.user or not _is_educator(who) or not pupil.marking_shares.filter(reviewer=who, revoked_at__isnull=True).exists():
+            raise ValidationError({'email': 'Share written work with this educator first; only an OpenPath educator who marks this learner’s written work can be allowed.'})
+        if not RecoveryAnswersShare.objects.filter(pupil=pupil, educator=who, revoked_at__isnull=True).exists():
+            RecoveryAnswersShare.objects.create(pupil=pupil, educator=who)
+        return Response({'allowed': True}, status=status.HTTP_201_CREATED)
+
+    def delete(self, request, pupil_id):
+        pupil = get_object_or_404(Pupil, pk=pupil_id, parent=request.user)
+        email = str(request.data.get('email', '')).strip().lower()
+        n = RecoveryAnswersShare.objects.filter(pupil=pupil, educator__email__iexact=email, revoked_at__isnull=True).update(revoked_at=timezone.now())
+        return Response({'stopped': n})

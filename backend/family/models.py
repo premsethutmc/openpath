@@ -348,4 +348,4 @@ class HandoverAcknowledgement(models.Model):
 
 
 # recovery-handoff@0 (RESEARCH, deep-recovery@0): defined in handoff_models.py, registered here
-from .handoff_models import RecoveryHandoff  # noqa: E402,F401
+from .handoff_models import RecoveryAnswersShare, RecoveryHandoff  # noqa: E402,F401
