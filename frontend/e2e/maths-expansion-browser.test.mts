@@ -9,8 +9,9 @@
  * The pupil's first answer (one wrong answer, the modelled error) is stored through the API; from then on the UI and the engine
  * decide every screen: investigation, the explanation (shown as pending educator review), guided practice, the fresh recheck,
  * reload. A later visit's independent answers are stored through the API; nine days on, the delayed check is answered WRONG in
- * the UI: the failure is kept and the UI asks a fresh question on the same competency (no second teaching cycle after a lapse
- * at this base: product policy A1), answered right, then reload. The explanations are AI-assisted and await an educator.
+ * the UI: the failure is kept; when the wrong answer repeats the taught error the UI teaches a different explanation of the
+ * module first, otherwise it goes straight on; then a fresh question on the same competency, answered right, then reload.
+ * The explanations are AI-assisted and await an educator.
  *   cd frontend && node scripts/build-mathematics-journey.mjs && node scripts/build-year.mjs --test
  *   (Django on PATHWAY_API, default http://127.0.0.1:8200, with OPENPATH_TEST_CLOCK_FILE=/tmp/integrated-clock.json)
  *   node --import tsx e2e/maths-expansion-browser.test.mts
@@ -182,7 +183,17 @@ try {
     const lapsed = (await stateAt(realNow + 9 * DAY)).evidence(c.competency);
     assert.equal(lapsed.retentionHistory[0]?.result, "failed", `${c.name}: the failed delayed check is kept`);
     assert.notEqual(lapsed.status, "verified");
-    // after the lapse: a fresh question on the same competency (no second teaching cycle at this base), answered right
+    // after the lapse: when the wrong delayed answer repeats the taught error the UI first teaches a DIFFERENT explanation of
+    // this module (pending review); otherwise it goes straight on. Either way a fresh question on the competency follows.
+    const retaught: string[] = [];
+    for (let i = 0; i < 2 && (await screen()) === "lesson"; i++) {
+      const l = await lesson();
+      assert.equal(l.review, "pending_review", `${c.name}: the explanation after the lapse is shown as pending educator review`);
+      const shown = [...(await saved()).events].reverse().find((e: { record?: string }) => e.record === "teach") as { strategy?: string } | undefined;
+      assert.ok(moduleFor(c.competency)!.strategies.some((s) => s.id === shown?.strategy), `${c.name}: ${shown?.strategy} is this module's explanation`);
+      assert.notEqual(shown?.strategy, taught, `${c.name}: a different explanation from the first one`);
+      retaught.push(shown!.strategy!);
+    }
     assert.equal(await screen(), "question", `${c.name}: after the failed delayed check, a fresh question`);
     const freshQ = (await page.locator("[data-qid]").getAttribute("data-qid"))!;
     assert.ok(onSkill(freshQ), `${c.name}: the fresh question ${freshQ} is on the taught competency`);
@@ -190,8 +201,8 @@ try {
     assert.equal((await answerInUi(question(freshQ).answer)).right, true);
     const b2 = await saved(); await page.reload(); await page.locator("body").waitFor(); const a2 = await saved();
     assert.deepEqual(a2.events, b2.events); assert.deepEqual(a2.decisions, b2.decisions);
-    results.push({ case: c.name, competency: c.competency, start: c.start, trail, taught, recheck: check.qid, delayed: delayedQ, afterLapse: freshQ, savedEvents: a2.count, reloaded: true, educatorApproved: false });
-    console.log(`ok ${c.name}: taught ${taught}, recheck ${check.qid}, delayed ${delayedQ} (wrong) → fresh ${freshQ}`);
+    results.push({ case: c.name, competency: c.competency, start: c.start, trail, taught, recheck: check.qid, delayed: delayedQ, retaught, afterLapse: freshQ, savedEvents: a2.count, reloaded: true, educatorApproved: false });
+    console.log(`ok ${c.name}: taught ${taught}, recheck ${check.qid}, delayed ${delayedQ} (wrong) → ${retaught.length ? `retaught ${retaught.join(", ")} → ` : ""}fresh ${freshQ}`);
   }
   writeFileSync(process.env.MATHS_EXPANSION_RESULTS ?? "/tmp/maths-expansion-browser.json", JSON.stringify({ passed: true, results }, null, 2) + "\n");
 } catch (e) { const body = await page.locator("body").innerText(); writeFileSync(process.env.FAIL_BODY ?? "/tmp/maths-expansion-fail.txt", body); await page.screenshot({ path: (process.env.FAIL_BODY ?? "/tmp/maths-expansion-fail") + ".png", fullPage: true }); console.error(body.slice(0, 1500)); throw e; } finally { await browser.close(); server.close(); }

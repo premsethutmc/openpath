@@ -125,10 +125,11 @@ for (const S of SKILLS) test(`${S.domain}: in the module flow the error is taugh
 });
 
 /**
- * After a WRONG delayed answer: the failure is kept, the engine verifies again with fresh questions on the same competency
- * (no second teaching cycle after a lapse: product policy A1 at this base), and a new delayed check is planned. Recovery
- * that teaches the same skill again after a lapse is the engine change in PR #115 (e1d5ed7), not part of this branch: this
- * test pins today's behaviour so the integration shows any difference.
+ * After a WRONG delayed answer, in this session flow (recover, then the recovery steps without teaching events): the failure is
+ * kept, the engine verifies again with fresh questions on the same competency, and a new delayed check is planned. In the
+ * real UI (e2e/maths-expansion-browser.test.mts), when the wrong delayed answer repeats the taught error, the UI first teaches
+ * a different explanation of the module. Post-lapse routing is also changed by PR #115 (e1d5ed7), not part of this branch:
+ * this test pins today's behaviour so the integration shows any difference.
  */
 for (const S of SKILLS) test(`${S.domain}: a wrong delayed answer is kept as failed, re-verified with fresh questions, and a new delayed check is planned`, () => {
   const r = flow(S);
