@@ -12,6 +12,7 @@
 import { normaliseAnswer, responseKey } from "./content.ts";
 import type { RuleDef, Signature, SubjectRules } from "./rule-evidence.ts";
 import type { Item, Response } from "./types.ts";
+import { type ItemEvidenceIndex, evidenceOf } from "./item-evidence.ts";
 
 export const INFLECTIONS = "EN.FND.SPL.inflections";
 
@@ -53,6 +54,8 @@ export const englishInflections: SubjectRules = {
     if (item.options && item.answer !== undefined) return normaliseAnswer(item.options[item.answer]);
     return null;
   },
+  /** The base word from a generated item's record; otherwise the word itself (curated lemmas: withItemEvidence). */
+  lemmaOf: (item) => (item.kind === "code" && item.generated?.base ? item.generated.base.toLowerCase() : englishInflections.wordOf(item)),
   classify: (item: Item, response: Response, correct: boolean): Signature => {
     if (correct) return { kind: "correct" };
     if (item.kind !== "code") return { kind: "unclassified", form: "" };
@@ -72,3 +75,17 @@ export const englishInflections: SubjectRules = {
 export const INFLECTION_STRATEGIES: Record<string, string[]> = {
   double_short: ["worked_examples", "sound_first", "word_building"],
 };
+
+/**
+ * The English module with recorded word-family metadata (content/english/spelling/evidence/item-evidence.json):
+ * lemmas come from the record (stopped and stopping share "stop"), and items marked as contrasts there count as
+ * contrasts. Everything else is the module unchanged. Not used by the app until a switch is approved.
+ */
+export function withItemEvidence(subject: SubjectRules, index: ItemEvidenceIndex): SubjectRules {
+  return {
+    ...subject,
+    id: `${subject.id}+item-evidence@1`,
+    lemmaOf: (item) => evidenceOf(item, index)?.lemma ?? subject.lemmaOf?.(item) ?? subject.wordOf(item),
+    roleOf: (item) => (evidenceOf(item, index)?.polarity === "contrast" ? "contrast" : subject.roleOf(item)),
+  };
+}

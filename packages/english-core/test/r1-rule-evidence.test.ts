@@ -162,7 +162,7 @@ test("R1-8 missing evidence is not weakness: no answers or too few answers give 
   const ctx = profileContext();
   const l = new Ledger(ctx, "few");
   const t = (m: number) => new Date(Date.parse("2026-10-14T09:00:00Z") + m * 60_000).toISOString();
-  const wrong = [["spl.infl.34", "tryed"], ["spl.infl.35", "babys"], ["spl.infl.36", "easyer"]];
+  const wrong = [["spl.infl.fx34", "tryed"], ["spl.infl.fx35", "babys"], ["spl.infl.fx36", "easyer"]];
   for (const [i, [id, text]] of wrong.slice(0, 2).entries()) l.apply({ kind: "evidence", id: `f${i}`, at: t(i), session: "s", item: { id, version: 1 }, response: { kind: "typed", text }, provenance: IND });
   assert.equal(rule(l, "y_to_i").status, "insufficient_evidence");
   assert.equal(rule(l, "plain").status, "insufficient_evidence"); // never asked

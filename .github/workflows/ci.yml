@@ -369,6 +369,12 @@ jobs:
         run: node --import tsx scripts/pilot-allowlist.mts --check
       - name: Pilot approvals (what a pilot build would show; empty until an educator approves)
         run: node tools/english/pilot/review.ts approved | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Item identity (an id@version never changes meaning; conflicts, changes and removals fail)
+        run: node tools/english/evidence/identity.ts --check
+      - name: Spelling evidence audit and educator review sheets are current
+        run: |
+          node tools/english/evidence/audit.ts --check | tee -a "$GITHUB_STEP_SUMMARY"
+          node tools/english/evidence/review-sheet.ts --check
       - name: Typecheck core, tests and tools
         working-directory: packages/english-core
         run: node ../../frontend/node_modules/typescript/bin/tsc -p .

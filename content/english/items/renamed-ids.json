@@ -1,0 +1,118 @@
+{
+ "schema": "openpath.item-renames@1",
+ "note": "Item ids that were renamed, and why. Real content is never renamed (identity.ts refuses it): only test fixtures, whose ids no learner could have answered. The doubling journey kept spl.infl.26-31.",
+ "renames": [
+  {
+   "from": "spl.infl.26@1",
+   "to": "spl.infl.fx26@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "spl.infl.26-31@1 already name different questions in content/english/web/doubling-journey.json (live, offered to learners, referenced by the educator review). These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.27@1",
+   "to": "spl.infl.fx27@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "spl.infl.26-31@1 already name different questions in content/english/web/doubling-journey.json (live, offered to learners, referenced by the educator review). These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.28@1",
+   "to": "spl.infl.fx28@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "spl.infl.26-31@1 already name different questions in content/english/web/doubling-journey.json (live, offered to learners, referenced by the educator review). These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.29@1",
+   "to": "spl.infl.fx29@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "spl.infl.26-31@1 already name different questions in content/english/web/doubling-journey.json (live, offered to learners, referenced by the educator review). These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.30@1",
+   "to": "spl.infl.fx30@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "spl.infl.26-31@1 already name different questions in content/english/web/doubling-journey.json (live, offered to learners, referenced by the educator review). These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.31@1",
+   "to": "spl.infl.fx31@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "spl.infl.26-31@1 already name different questions in content/english/web/doubling-journey.json (live, offered to learners, referenced by the educator review). These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.32@1",
+   "to": "spl.infl.fx32@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "Renamed with its block so the fixture's drafts never collide with future content ids. These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.33@1",
+   "to": "spl.infl.fx33@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "Renamed with its block so the fixture's drafts never collide with future content ids. These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.34@1",
+   "to": "spl.infl.fx34@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "Renamed with its block so the fixture's drafts never collide with future content ids. These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.35@1",
+   "to": "spl.infl.fx35@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "Renamed with its block so the fixture's drafts never collide with future content ids. These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.36@1",
+   "to": "spl.infl.fx36@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "Renamed with its block so the fixture's drafts never collide with future content ids. These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.37@1",
+   "to": "spl.infl.fx37@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "Renamed with its block so the fixture's drafts never collide with future content ids. These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.38@1",
+   "to": "spl.infl.fx38@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "Renamed with its block so the fixture's drafts never collide with future content ids. These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.39@1",
+   "to": "spl.infl.fx39@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "Renamed with its block so the fixture's drafts never collide with future content ids. These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.40@1",
+   "to": "spl.infl.fx40@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "Renamed with its block so the fixture's drafts never collide with future content ids. These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  },
+  {
+   "from": "spl.infl.41@1",
+   "to": "spl.infl.fx41@1",
+   "where": "packages/english-core/test/fixtures/inflection-drafts.json",
+   "date": "2026-10-16",
+   "reason": "Renamed with its block so the fixture's drafts never collide with future content ids. These are test-fixture drafts, never offered to a learner, so no learner evidence refers to them; content unchanged."
+  }
+ ]
+}

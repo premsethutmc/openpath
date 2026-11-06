@@ -1,5 +1,5 @@
 {
- "note": "Draft assessment questions spl.infl.18-41 (candidate, unvalidated; awaiting educator review). Test fixture only: not part of the content bank and not evidence of educational validity. meta gives the root and ending the synthetic learners need.",
+ "note": "Draft assessment questions spl.infl.18-41 (candidate, unvalidated; awaiting educator review). Test fixture only: not part of the content bank and not evidence of educational validity. meta gives the root and ending the synthetic learners need. Ids 26-41 of these drafts were renamed spl.infl.fx26-41 on 16 October 2026 (content unchanged): spl.infl.26-31 already name different, live doubling-journey questions. These drafts are test data only and were never offered to a learner (content/english/items/renamed-ids.json).",
  "items": [
   {
    "kind": "code",
@@ -195,7 +195,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.26",
+   "id": "spl.infl.fx26",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -221,7 +221,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.27",
+   "id": "spl.infl.fx27",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -245,7 +245,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.28",
+   "id": "spl.infl.fx28",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -269,7 +269,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.29",
+   "id": "spl.infl.fx29",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:correction",
@@ -295,7 +295,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.30",
+   "id": "spl.infl.fx30",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -321,7 +321,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.31",
+   "id": "spl.infl.fx31",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -345,7 +345,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.32",
+   "id": "spl.infl.fx32",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -363,7 +363,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.33",
+   "id": "spl.infl.fx33",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:correction",
@@ -381,7 +381,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.34",
+   "id": "spl.infl.fx34",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -405,7 +405,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.35",
+   "id": "spl.infl.fx35",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -430,7 +430,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.36",
+   "id": "spl.infl.fx36",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -454,7 +454,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.37",
+   "id": "spl.infl.fx37",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:correction",
@@ -478,7 +478,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.38",
+   "id": "spl.infl.fx38",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -502,7 +502,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.39",
+   "id": "spl.infl.fx39",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -526,7 +526,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.40",
+   "id": "spl.infl.fx40",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:cloze",
@@ -544,7 +544,7 @@
   },
   {
    "kind": "code",
-   "id": "spl.infl.41",
+   "id": "spl.infl.fx41",
    "version": 1,
    "target": "EN.FND.SPL.inflections",
    "format": "typed:correction",
@@ -602,82 +602,82 @@
    "root": "rain",
    "ending": "ed"
   },
-  "spl.infl.26": {
+  "spl.infl.fx26": {
    "role": "check",
    "root": "slide",
    "ending": "ing"
   },
-  "spl.infl.27": {
+  "spl.infl.fx27": {
    "role": "check",
    "root": "smile",
    "ending": "ed"
   },
-  "spl.infl.28": {
+  "spl.infl.fx28": {
    "role": "check",
    "root": "share",
    "ending": "ing"
   },
-  "spl.infl.29": {
+  "spl.infl.fx29": {
    "role": "proofread",
    "root": "write",
    "ending": "ing"
   },
-  "spl.infl.30": {
+  "spl.infl.fx30": {
    "role": "transfer",
    "root": "glide",
    "ending": "ing"
   },
-  "spl.infl.31": {
+  "spl.infl.fx31": {
    "role": "transfer",
    "root": "tease",
    "ending": "ing"
   },
-  "spl.infl.32": {
+  "spl.infl.fx32": {
    "role": "contrast",
    "root": "agree",
    "ending": "ing"
   },
-  "spl.infl.33": {
+  "spl.infl.fx33": {
    "role": "proofread-contrast",
    "root": "see",
    "ending": "ing"
   },
-  "spl.infl.34": {
+  "spl.infl.fx34": {
    "role": "check",
    "root": "try",
    "ending": "ed"
   },
-  "spl.infl.35": {
+  "spl.infl.fx35": {
    "role": "check",
    "root": "baby",
    "ending": "es"
   },
-  "spl.infl.36": {
+  "spl.infl.fx36": {
    "role": "check",
    "root": "easy",
    "ending": "er"
   },
-  "spl.infl.37": {
+  "spl.infl.fx37": {
    "role": "proofread",
    "root": "study",
    "ending": "ed"
   },
-  "spl.infl.38": {
+  "spl.infl.fx38": {
    "role": "transfer",
    "root": "tidy",
    "ending": "est"
   },
-  "spl.infl.39": {
+  "spl.infl.fx39": {
    "role": "transfer",
    "root": "hurry",
    "ending": "ed"
   },
-  "spl.infl.40": {
+  "spl.infl.fx40": {
    "role": "contrast",
    "root": "fly",
    "ending": "ing"
   },
-  "spl.infl.41": {
+  "spl.infl.fx41": {
    "role": "proofread-contrast",
    "root": "enjoy",
    "ending": "ed"
