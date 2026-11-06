@@ -30,6 +30,7 @@ urlpatterns = [
     path("pupils/<uuid:pupil_id>/handover-acknowledgements/", handover.PupilHandoverAcknowledgementsView.as_view(), name="pupil-handover-acknowledgements"),
     # recovery-handoff@0 (RESEARCH, deep-recovery@0): 404 unless OPENPATH_DEEP_RECOVERY_HANDOFF=1
     path("pupils/<uuid:pupil_id>/recovery-handoffs/", handoff.PupilRecoveryHandoffsView.as_view(), name="pupil-recovery-handoffs"),
+    path("pupils/<uuid:pupil_id>/recovery-answers-share/", handoff.RecoveryAnswersShareView.as_view(), name="recovery-answers-share"),
     path("recovery-handoffs/", handoff.RecoveryHandoffQueueView.as_view(), name="recovery-handoffs"),
     path("recovery-handoffs/<int:handoff_id>/resolve/", handoff.RecoveryHandoffResolveView.as_view(), name="recovery-handoff-resolve"),
     path("educator-access/", educator_access.EducatorAccessView.as_view(), name="educator-access"),

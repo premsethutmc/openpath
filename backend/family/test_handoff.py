@@ -4,7 +4,7 @@ from django.core.management import call_command
 from django.test import override_settings
 from rest_framework.test import APIClient
 
-from .models import DiagnosticAccessLog, HandoverAcknowledgement, PupilEvent, RecoveryHandoff, WrittenMark
+from .models import DiagnosticAccessLog, HandoverAcknowledgement, PupilEvent, RecoveryAnswersShare, RecoveryHandoff, WrittenMark
 from .test_learning import LearningBase
 
 ORIG = 'eq-d1'
@@ -31,6 +31,9 @@ class RecoveryHandoffTests(LearningBase):
 
     def share(self, email='teacher@example.org'):
         self.assertEqual(self.client.post(f'/api/pupils/{self.pupil_id}/marking-share/', {'email': email}, format='json').status_code, 201)
+
+    def allow_answers(self, email='teacher@example.org', client=None):
+        return (client or self.client).post(f'/api/pupils/{self.pupil_id}/recovery-answers-share/', {'email': email}, format='json')
 
     def report(self, client=None, pupil=None, **over):
         body = {'original': ORIG, 'skill': SKILL, 'step': STEP, 'episode': EPISODE, 'reason': 'missing-content', 'path': [SKILL, STEP],
@@ -107,6 +110,12 @@ class RecoveryHandoffTests(LearningBase):
         self.assertEqual((row['skill'], row['step'], row['reason'], row['status']), (SKILL, STEP, 'missing-content', 'open'))
         self.assertNotIn('Synthetic', str(row), 'no display name')
         self.assertNotIn('asha.parent', str(row), 'no parent email')
+        self.assertFalse(row['answersShared'])
+        for k in ('evidence', 'detail', 'path', 'original'):
+            self.assertNotIn(k, row, 'without the separate answers permission: skill, reason and step only')
+        self.assertEqual(self.allow_answers().status_code, 201)
+        row = self.queue(self.teacher).json()['handoffs'][0]
+        self.assertTrue(row['answersShared'])
         self.assertEqual([e['questionId'] for e in row['evidence']], [ORIG, 'eq-d2'], 'the answers of this recovery only')
         self.assertEqual(row['evidence'][1]['step'], STEP)
         # others
@@ -182,6 +191,78 @@ class RecoveryHandoffTests(LearningBase):
         self.assertEqual(self.save(self.attempt('eq-d3', '1')).status_code, 201, 'learning records save as before')
 
 
+@override_settings(OPENPATH_DEEP_RECOVERY_HANDOFF=True)
+class RecoveryAnswersPermissionTests(LearningBase):
+    """the parent's separate, explicit, revocable permission to show recovery answers to the educator who marks written work"""
+
+    def setUp(self):
+        super().setUp()
+        self.teacher = self.parent('teacher@example.org')
+        self.other_teacher = self.parent('other-teacher@example.org')
+        for e in ('teacher@example.org', 'other-teacher@example.org'):
+            call_command('content_reviewer', 'grant', e, role='educator', stdout=open('/dev/null', 'w'))
+        self.assertEqual(self.save(self.enrol()).status_code, 201)
+        self.assertEqual(self.save(self.attempt(ORIG, '2', activity='practice')).status_code, 201)
+        self.assertEqual(self.save(self.attempt('eq-d2', '3', context=CTX)).status_code, 201)
+        self.client.post(f'/api/pupils/{self.pupil_id}/marking-share/', {'email': 'teacher@example.org'}, format='json')
+        body = {'original': ORIG, 'skill': SKILL, 'step': STEP, 'episode': EPISODE, 'reason': 'missing-content', 'path': [SKILL, STEP], 'detail': 'The answers point to X (0 right and 2 wrong).'}
+        self.assertEqual(self.client.post(f'/api/pupils/{self.pupil_id}/recovery-handoffs/', body, format='json').status_code, 201)
+
+    def url(self):
+        return f'/api/pupils/{self.pupil_id}/recovery-answers-share/'
+
+    def row(self, client=None):
+        return (client or self.teacher).get('/api/recovery-handoffs/').json()['handoffs'][0]
+
+    def test_sharing_written_work_does_not_share_recovery_answers(self):
+        r = self.row()
+        self.assertEqual((r['skill'], r['reason'], r['step'], r['answersShared']), (SKILL, 'missing-content', STEP, False))
+        self.assertFalse({'evidence', 'detail', 'path', 'original'} & set(r))
+        self.assertNotIn('0 right and 2 wrong', str(r))
+        self.assertEqual(RecoveryAnswersShare.objects.count(), 0, 'nothing by default')
+
+    def test_grant_needs_the_written_work_share_and_is_per_educator(self):
+        self.assertEqual(self.client.post(self.url(), {'email': 'other-teacher@example.org'}, format='json').status_code, 400, 'not marking this pupil')
+        self.assertEqual(self.client.post(self.url(), {'email': 'nobody@example.org'}, format='json').status_code, 400, 'no account discovery')
+        self.assertEqual(self.client.post(self.url(), {'email': 'teacher@example.org'}, format='json').status_code, 201)
+        self.assertEqual(self.client.post(self.url(), {'email': 'teacher@example.org'}, format='json').status_code, 201, 'idempotent')
+        self.assertEqual(RecoveryAnswersShare.objects.filter(revoked_at__isnull=True).count(), 1)
+        self.assertEqual([s['email'] for s in self.client.get(self.url()).json()['shares']], ['teacher@example.org'])
+        r = self.row()
+        self.assertTrue(r['answersShared'])
+        self.assertEqual(r['detail'], 'The answers point to X (0 right and 2 wrong).')
+        self.assertTrue(r['evidence'])
+        # another educator the pupil is later shared with sees no answers until the parent allows them too
+        self.client.post(f'/api/pupils/{self.pupil_id}/marking-share/', {'email': 'other-teacher@example.org'}, format='json')
+        self.assertFalse(self.row(self.other_teacher)['answersShared'])
+
+    def test_only_the_parent_manages_it(self):
+        other_parent = self.parent('other-parent@example.org')
+        for c in (other_parent, self.teacher):
+            self.assertEqual(c.post(self.url(), {'email': 'teacher@example.org'}, format='json').status_code, 404)
+            self.assertEqual(c.get(self.url()).status_code, 404)
+        self.assertIn(APIClient().get(self.url()).status_code, (401, 403))
+
+    def test_revoking_hides_the_answers_again(self):
+        self.client.post(self.url(), {'email': 'teacher@example.org'}, format='json')
+        self.assertTrue(self.row()['answersShared'])
+        self.assertEqual(self.client.delete(self.url(), {'email': 'teacher@example.org'}, format='json').json()['stopped'], 1)
+        r = self.row()
+        self.assertFalse(r['answersShared'])
+        self.assertNotIn('evidence', r)
+        self.assertEqual(self.client.get(self.url()).json()['shares'], [])
+        # stopping written-work sharing hides the whole item, whatever the answers permission says
+        self.client.post(self.url(), {'email': 'teacher@example.org'}, format='json')
+        self.client.delete(f'/api/pupils/{self.pupil_id}/marking-share/', {'email': 'teacher@example.org'}, format='json')
+        self.assertEqual(self.teacher.get('/api/recovery-handoffs/').json()['handoffs'], [])
+
+    @override_settings(OPENPATH_DEEP_RECOVERY_HANDOFF=False)
+    def test_switched_off(self):
+        self.assertEqual(self.client.get(self.url()).status_code, 404)
+        self.assertEqual(self.client.post(self.url(), {'email': 'teacher@example.org'}, format='json').status_code, 404)
+
+
 class RecoveryHandoffDefaultTests(LearningBase):
     def test_off_by_default(self):
         self.assertEqual(self.client.get(f'/api/pupils/{self.pupil_id}/recovery-handoffs/').status_code, 404)
+        self.assertEqual(self.client.get(f'/api/pupils/{self.pupil_id}/recovery-answers-share/').status_code, 404)

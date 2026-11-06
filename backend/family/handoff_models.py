@@ -38,3 +38,19 @@ class RecoveryHandoff(models.Model):
         app_label = "family"
         ordering = ["created_at", "id"]
         constraints = [models.UniqueConstraint(fields=["pupil", "skill"], condition=models.Q(resolved_at__isnull=True), name="one_open_recovery_handoff_per_skill")]
+
+
+class RecoveryAnswersShare(models.Model):
+    """recovery-handoff@0 (RESEARCH): a parent's SEPARATE, explicit permission for one educator (who already marks this pupil's written work,
+    MarkingShare) to see the pupil's answers from a recovery that was handed to them: the questions, what was answered, and whether each was
+    right, plus the recovery's explanation and the skills it checked. Without it a help item shows the skill, the reason and the step only.
+    Nothing is shared by default; revoking stops it from the next request. Distinct from, and never implied by, "Share written work"."""
+
+    pupil = models.ForeignKey(Pupil, on_delete=models.CASCADE, related_name="recovery_answer_shares")
+    educator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="+")
+    granted_at = models.DateTimeField(auto_now_add=True)
+    revoked_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        app_label = "family"
+        ordering = ["granted_at", "id"]

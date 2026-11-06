@@ -24,6 +24,7 @@ import { decide } from "../../../packages/learning/src/session";
 import { deepRecoveryOn } from "./deep-recovery-flag";
 import { deepModuleState } from "../learning/deep-module";
 import { DeepRecovery } from "./DeepRecovery";
+import { DeepModuleHandoff } from "./DeepRecoveryHandoff";
 // the build constant is read here directly (as in Main.tsx) so a shipped bundle folds this to false and never reads ?deep
 declare const OPENPATH_DEEP_RECOVERY: boolean;
 const DEEP_MODULE = typeof OPENPATH_DEEP_RECOVERY !== "undefined" && OPENPATH_DEEP_RECOVERY === true && deepRecoveryOn();
@@ -384,6 +385,8 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
         <strong>{ms.phase === "pause" ? "Let's pause this one" : ms.phase === "waiting" ? "With an educator" : STATUS_WORD[ev.status]}</strong>
         <p>{ms.reason}</p>
         {(() => { const n = scheduleNote(ms, Intl.DateTimeFormat().resolvedOptions().timeZone); return n ? <p className="small" data-handover={ms.handover?.route ?? "retention"}>{n}</p> : null; })()}
+        {/* recovery-handoff@0 hook (worker D, research): a module paused by deep recovery hands the stopped episode over */}
+        {DEEP_MODULE && ms.phase === "pause" && ms.why?.startsWith("deep-recovery-module@0: ") && <DeepModuleHandoff competency={competency} ctx={ctx} />}
         <p className="small">On your own: {ev.independent.right} right of {ev.independent.total}. With help: {ev.assisted.right} right of {ev.assisted.total}.</p>
       </div>
       {ms.phase === "pause" && reviewOffer}
