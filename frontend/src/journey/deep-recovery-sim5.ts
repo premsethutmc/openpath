@@ -23,6 +23,7 @@ import { mulberry32, SimLearner, type Truth } from "./deep-recovery-sim";
 import { ORIGINALS, TYPES } from "./deep-recovery-sim3";
 import { right } from "./learners";
 import { SliceSession } from "./session";
+import { wrongShaped } from "./wrong-answers";
 
 const BASE: DeepRecoveryOptions = { confirm: "selective", reuse: true, sessionBudget: 40, budget: 120, validDays: RETENTION_DAYS };
 export const RULES: Record<string, DeepRecoveryOptions> = {
@@ -53,7 +54,8 @@ export const CELLS5 = (["O1", "O2"] as const).flatMap((o) => Object.keys(T).map(
 const MAX_SITTINGS = 3;
 
 /** `onAnswer` (analysis only; no effect on the run) */
-export function simulate5(rule: string, ok: "O1" | "O2", type: string, seed: number, onAnswer?: (x: { qid: string; answer: string; can: boolean; sitting: number }) => void) {
+/** `answers` (phase 6): "old" = the shared learners.ts wrong answers (phase 5 as committed); "corrected" = wrong-answers.ts shaped ones */
+export function simulate5(rule: string, ok: "O1" | "O2", type: string, seed: number, onAnswer?: (x: { qid: string; answer: string; can: boolean; sitting: number }) => void, answers: "old" | "corrected" = "old") {
   const t0 = Date.now();
   const O = ORIGINALS[ok];
   const rec: Record<string, unknown> = { phase: 5, rule, orig: ok, type, seed };
@@ -63,7 +65,8 @@ export function simulate5(rule: string, ok: "O1" | "O2", type: string, seed: num
   const pool = phasePool(O.family, "diagnostic");
   const original = pool[Math.floor(rnd() * pool.length)];
   rec.original = original;
-  const L = new SimLearner(truth, rnd);
+  const L = answers === "corrected" ? new SimLearner(truth, rnd, wrongShaped) : new SimLearner(truth, rnd);
+  if (answers === "corrected") rec.answers = "corrected";
   try {
     const s = new SliceSession(`sim5-${rule}-${ok}-${type}-${seed}`, O.own, Date.parse("2026-11-05T09:00:00Z"));
     if (truth.history) { for (const q of phasePool(O.family, "practice").filter((x) => !x.endsWith(":mc")).slice(0, 3)) s.submit(q, right(q), "practice"); s.wait(3); }
@@ -99,5 +102,6 @@ if (process.argv[1]?.endsWith("deep-recovery-sim5.ts")) {
   const from = Number(process.argv[2]), to = Number(process.argv[3]);
   const rules = (process.argv[4] ?? Object.keys(RULES).join(",")).split(",");
   const cells = (process.argv[5] ? process.argv[5].split(",") : CELLS5).map((c) => c.split(":") as ["O1" | "O2", string]);
-  for (const [o, t] of cells) for (let seed = from; seed <= to; seed++) for (const r of rules) console.log(JSON.stringify(simulate5(r, o, t, seed)));
+  const answers = process.env.SIM_ANSWERS === "corrected" ? "corrected" : "old";
+  for (const [o, t] of cells) for (let seed = from; seed <= to; seed++) for (const r of rules) console.log(JSON.stringify(simulate5(r, o, t, seed, undefined, answers)));
 }
