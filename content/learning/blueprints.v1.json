@@ -637,6 +637,351 @@
    ]
   },
   {
+   "competency": "MATH.algebra.factorisation",
+   "title": "Factorising x² + px + q",
+   "family": "factor",
+   "seed": [
+    3,
+    -5
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Two numbers that multiply AND add",
+     "text": [
+      "(x + m)(x + n) expands to x² + (m + n)x + mn. So to go backwards, find two numbers whose product is the constant term and whose sum is the x coefficient."
+     ],
+     "math": [
+      "x² − 2x − 15 = (x + 3)(x − 5)",
+      "3 × (−5) = −15 ✓ and 3 + (−5) = −2 ✓"
+     ],
+     "tip": "Both conditions must hold: the product gives candidates, the sum picks the right pair.",
+     "worked": true
+    }
+   ],
+   "strategies": [
+    {
+     "id": "factor_pairs",
+     "title": "List the factor pairs",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "List, then check",
+       "text": [
+        "Write every pair of whole numbers that multiply to the constant. For each pair, check: do they add to the x coefficient? The one that does is the answer."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "signs_guide",
+     "title": "The signs tell you the shape",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Read the signs",
+       "text": [
+        "When the constant is positive, both numbers have the same sign (both positive if the x coefficient is positive, both negative if it is negative). When the constant is negative, one number is positive and the other negative."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "check_by_expanding",
+     "title": "Check by expanding",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Multiply the brackets back",
+       "text": [
+        "After writing (x + m)(x + n), expand it: the x² is automatic, the x term should be (m + n)x, and the last term should be mn. If either is wrong, try the next pair."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.quadratics",
+   "title": "Solving a quadratic by factorising",
+   "family": "quad",
+   "seed": [
+    -3,
+    -10
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "If a product is zero, a factor is zero",
+     "text": [
+      "x² + px + q = 0 factorises into (x − r)(x − s) = 0. A product is zero only when one of its factors is zero: x − r = 0 gives x = r, and x − s = 0 gives x = s."
+     ],
+     "math": [
+      "x² − 3x − 10 = (x − 5)(x + 2) = 0",
+      "x = 5 or x = −2"
+     ],
+     "tip": "The sign flips: (x − 5) = 0 gives x = 5, not −5.",
+     "worked": true
+    }
+   ],
+   "strategies": [
+    {
+     "id": "factorise_first",
+     "title": "Two steps: factorise, then read off",
+     "kind": "procedural",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "Factorise, then set each bracket to zero",
+       "text": [
+        "Step 1: find two numbers that multiply to the constant and add to the x coefficient. Step 2: write (x + m)(x + n) = 0. Step 3: each bracket equal to 0 gives one solution."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "signs_flip",
+     "title": "The sign flips when you solve",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "Why signs flip",
+       "text": [
+        "The number in the bracket and the solution have opposite signs. (x − 5) = 0 means x = 5, because you add 5 to both sides. (x + 2) = 0 means x = −2, because you subtract 2 from both sides."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "check_substitution",
+     "title": "Check by substituting back",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Put each root back in",
+       "text": [
+        "Substitute each solution into the original equation. If x² + px + q = 0 with that value of x, the solution is correct. This catches sign errors and wrong factor pairs."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.calculus.limits",
+   "title": "A limit that needs factorising",
+   "family": "lim",
+   "seed": [
+    3,
+    2
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "0 ⁄ 0 does not mean the limit is 0",
+     "text": [
+      "When substituting x = a gives 0 ⁄ 0, the expression is indeterminate, not zero. Simplify first: factorise the numerator, cancel the common factor, then substitute."
+     ],
+     "math": [
+      "lim (x → 3) of 2(x² − 9) ⁄ (x − 3)",
+      "x² − 9 = (x − 3)(x + 3); cancel (x − 3)",
+      "= lim (x → 3) of 2(x + 3) = 2 × 6 = 12"
+     ],
+     "tip": "Never leave a limit as 0 ⁄ 0. Factorise and cancel first."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "difference_of_squares",
+     "title": "Spot the difference of two squares",
+     "kind": "conceptual",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "x² − a² = (x − a)(x + a)",
+       "text": [
+        "The numerator x² − a² factorises as (x − a)(x + a). The denominator x − a cancels with one of the factors, leaving x + a. Then put x = a to get 2a."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "substitute_after",
+     "title": "Simplify first, substitute second",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "The order matters",
+       "text": [
+        "Substituting into 0 ⁄ 0 gives nothing useful. Cancel the factor that makes both zero. Only then substitute: the simplified expression has a well-defined value."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "check_factoring",
+     "title": "Check the factorisation",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Expand the brackets back",
+       "text": [
+        "(x − 3)(x + 3) = x² + 3x − 3x − 9 = x² − 9. If this is not what you started with, the factorisation is wrong. A difference of two squares always has this shape."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.trigonometry.ratios",
+   "title": "Evaluating expressions with standard angles",
+   "family": "anstd",
+   "seed": [
+    0,
+    1,
+    1,
+    3,
+    0
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "The two special triangles",
+     "text": [
+      "All the standard angle values come from two triangles. Half an equilateral triangle of side 2 gives a right triangle with sides 1, √3, 2 (the 30-60-90 triangle). Half a square of side 1 gives a right triangle with sides 1, 1, √2 (the 45-45-90 triangle).",
+      "From these: sin 30° = 1/2, cos 30° = √3/2, sin 45° = √2/2, cos 45° = √2/2, sin 60° = √3/2, cos 60° = 1/2. Tangent is sine over cosine."
+     ],
+     "tip": "sin and cos swap between 30° and 60°: what is sin at one angle is cos at the other."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "lookup_table",
+     "title": "Build the table of values",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Write the values out",
+       "text": [
+        "Write a table with rows for sin, cos, tan and columns for 0°, 30°, 45°, 60°, 90°. Fill it in from the two triangles. Then read off the values and combine them."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "sin_cos_swap",
+     "title": "sin and cos swap at complementary angles",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "30° and 60° are complements",
+       "text": [
+        "sin 30° = cos 60° = 1/2, and sin 60° = cos 30° = √3/2. In the right triangle, the side opposite one acute angle is the side adjacent to the other. So sin and cos swap when the angles add to 90°."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "surd_arithmetic",
+     "title": "Combining surds",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Add and multiply surds carefully",
+       "text": [
+        "√2/2 + √3/2 = (√2 + √3)/2: same denominator, so add the numerators. √2/2 × √3/2 = √6/4: multiply tops and multiply bottoms. √2 × √3 = √6, not √5."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.trigonometry.equations",
+   "title": "Solving a trig equation in [0, 2π)",
+   "family": "atprinc",
+   "seed": [
+    0,
+    2,
+    1,
+    0
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "One reference angle, several solutions",
+     "text": [
+      "To solve sin x = k, first find the reference angle α from the standard values. Then place it in every quadrant where sin has the right sign: sin is positive in quadrants I and II, negative in III and IV.",
+      "In 0 ≤ x < 2π, sin x = k usually has two solutions (one exception: when k = 1 or −1, there is one)."
+     ],
+     "math": [
+      "sin x = √2/2: the reference angle is π/4",
+      "sin is positive in I and II: x = π/4 or x = π − π/4 = 3π/4"
+     ],
+     "tip": "The principal value from your calculator is only one solution. Always check all the quadrants."
+    }
+   ],
+   "strategies": [
+    {
+     "id": "quadrant_diagram",
+     "title": "Draw the quadrant diagram",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "ASTC: which ratios are positive",
+       "text": [
+        "In quadrant I, all ratios are positive. In II, only sin. In III, only tan. In IV, only cos. The mnemonic ASTC (All, Sin, Tan, Cos) gives the sign in each quadrant. Place the reference angle in every quadrant that matches."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "reference_then_place",
+     "title": "Find the reference angle, then place it",
+     "kind": "procedural",
+     "buildsOnPrerequisites": true,
+     "screens": [
+      {
+       "title": "Two steps",
+       "text": [
+        "Step 1: find the reference angle from the positive value of k. Step 2: place it in the right quadrants using π − α (Q II), π + α (Q III), 2π − α (Q IV). Only keep the quadrants where the ratio has the right sign."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "radians_check",
+     "title": "Work in radians, not degrees",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Convert if needed",
+       "text": [
+        "The question asks for radians: π is 180°, so π/6 = 30°, π/4 = 45°, π/3 = 60°. If you work in degrees first, convert each answer at the end by dividing by 180 and writing π."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
    "extendsTemplate": true,
    "competency": "MATH.statistics.median-mode",
    "title": "The median: order first, then find the middle",

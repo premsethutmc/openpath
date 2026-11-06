@@ -1648,6 +1648,1008 @@
    }
   },
   {
+   "competency": "MATH.algebra.factorisation",
+   "title": "Factorising x² + px + q",
+   "chapter": [
+    {
+     "title": "Two numbers that multiply AND add",
+     "text": [
+      "(x + m)(x + n) expands to x² + (m + n)x + mn. So to go backwards, find two numbers whose product is the constant term and whose sum is the x coefficient."
+     ],
+     "math": [
+      "x² − 2x − 15 = (x + 3)(x − 5)",
+      "3 × (−5) = −15 ✓ and 3 + (−5) = −2 ✓",
+      "Factorise: x² − 2x − 15 = (x + 3)(x + □). What number goes in the box (it may be negative)?",
+      "The numbers multiply to −15: −15 ÷ 3 = −5",
+      "Check they add to the x coefficient: 3 + (−5) = −2"
+     ],
+     "tip": "Both conditions must hold: the product gives candidates, the sum picks the right pair.",
+     "role": "concept",
+     "instance": "gen:factor:3,-5"
+    },
+    {
+     "title": "Factorising a difference of squares or a perfect square",
+     "text": [
+      "a² − b² = (a + b)(a − b), a² + 2ab + b² = (a + b)² and a² − 2ab + b² = (a − b)². An expression that matches one of these can be factorised at once.",
+      "Take out any common factor first. Then find a and b as the square roots of the first and last terms; for a perfect square, check that the middle term is 2ab."
+     ],
+     "math": [
+      "Factorise 100x² − y² using an identity. Write it as (ax + by)(ax − by) with positive whole numbers and type (a, b).",
+      "Using the identity: (10x + y)(10x − y)"
+     ]
+    },
+    {
+     "title": "Factorising with the cube identities",
+     "text": [
+      "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²), and a³ + b³ + c³ − 3abc = (a + b + c)(a² + b² + c² − ab − bc − ca).",
+      "Write each cube term as (something)³ to find a, b (and c), then fill the second bracket from the identity."
+     ],
+     "math": [
+      "Use an identity to factorise: 8x³ + 729 = (2x + 9)(4x² − □x + 81). What number goes in the box?",
+      "Match the identity: a = 2x, b = 9",
+      "The middle term is 2 × 9 = 18"
+     ]
+    },
+    {
+     "title": "Factorising by a common factor or by grouping",
+     "text": [
+      "Factorising undoes expanding: a common factor of every term can be taken outside a bracket, and after grouping, a common bracket can be taken out too.",
+      "Find the highest common factor of the numbers and the letters. For four terms, take a common factor out of each pair so that the same bracket appears twice, then take that bracket out."
+     ],
+     "math": [
+      "Factorise 25x²y − 30xy² completely by taking out the highest common factor. Write it as g·xy(ax − by) and type (g, a, b).",
+      "The highest common factor of the two terms is 5xy"
+     ]
+    },
+    {
+     "title": "Factorising ax² + bx + c by splitting the middle term",
+     "text": [
+      "If ax² + bx + c = (px + q)(rx + s), then b splits into two parts whose product is a × c: ps and qr.",
+      "Find two numbers that multiply to a × c and add to b. Write bx as their sum, group the four terms in pairs, take out the common factor of each pair, then the common bracket."
+     ],
+     "math": [
+      "Factorise 30x² + 17x + 2 by splitting the middle term. Write it as (5x + □)(6x + □) and type the two numbers in the boxes in order, for example (3, −2).",
+      "a × c = 30 × 2 = 60",
+      "Split the middle term into 5x and 12x (their product is a × c and their sum is 17)",
+      "Group and take out the common bracket: (5x + 2)(6x + 1)"
+     ]
+    },
+    {
+     "title": "Splitting the middle term of ax² + bx + c",
+     "text": [
+      "If ax² + bx + c = (mx + p)(nx + q), then a × c = (mn)(pq) = (mq)(np), and b = mq + np. So bx splits into two parts whose product is ac.",
+      "Find two numbers with sum b and product a × c. Write bx as the sum of those two terms, group the four terms in pairs, take out the common factor of each pair, and then the common bracket."
+     ],
+     "math": [
+      "To factorise 12x² + 17x + 6 by splitting the middle term, 17x is written as rx + sx, where r + s = 17 and rs = 12 × 6 = 72. Find r and s. Enter both, separated by a comma.",
+      "a × c = 12 × 6 = 72",
+      "Two numbers with sum 17 and product a × c: 8 and 9"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:factor:-6,-8",
+    "gen:factor:-7,-3",
+    "gen:factor:-6,-2"
+   ],
+   "strategies": [
+    {
+     "id": "factor_pairs",
+     "title": "List the factor pairs",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "List, then check",
+       "text": [
+        "Write every pair of whole numbers that multiply to the constant. For each pair, check: do they add to the x coefficient? The one that does is the answer."
+       ],
+       "math": [
+        "Factorise: x² + 4x − 45 = (x − 5)(x + □). What number goes in the box (it may be negative)?",
+        "The numbers multiply to −45: −45 ÷ (−5) = 9",
+        "Check they add to the x coefficient: −5 + 9 = 4"
+       ],
+       "role": "worked-example",
+       "instance": "gen:factor:-5,9"
+      }
+     ],
+     "guided": "gen:factor:-4,-3",
+     "check": "gen:factor:-5,2"
+    },
+    {
+     "id": "signs_guide",
+     "title": "The signs tell you the shape",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Read the signs",
+       "text": [
+        "When the constant is positive, both numbers have the same sign (both positive if the x coefficient is positive, both negative if it is negative). When the constant is negative, one number is positive and the other negative."
+       ],
+       "role": "strategy",
+       "instance": "gen:factor:3,-5"
+      }
+     ],
+     "guided": "gen:factor:-4,-1",
+     "check": "gen:factor:-5,3:mc"
+    },
+    {
+     "id": "check_by_expanding",
+     "title": "Check by expanding",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Multiply the brackets back",
+       "text": [
+        "After writing (x + m)(x + n), expand it: the x² is automatic, the x term should be (m + n)x, and the last term should be mn. If either is wrong, try the next pair."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:factor:-4,-6",
+     "check": "gen:factor:-4,-5"
+    }
+   ],
+   "practice": [
+    "gen:factor:-5,7",
+    "gen:factor:-4,-7:mc",
+    "gen:factor:-5,4",
+    "gen:ajfsq:2,3,7,0",
+    "gen:ajfcub:2,3,2,2",
+    "gen:ajfgrp:1,5,1,2,-2",
+    "gen:ajfspl:3,-8,6,7",
+    "gen:alsplit:1,4,-5,3,-2"
+   ],
+   "transfer": [
+    "gen:factor:-7,-6:mc",
+    "gen:ajfsq:0,5,12,0:w",
+    "gen:ajfspl:1,-7,3,4:w"
+   ],
+   "retention": [
+    "gen:factor:-5,8",
+    "gen:ajfsq:1,11,9,0:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "factor",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "factor",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ajfsq",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ajfcub",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ajfgrp",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ajfspl",
+     "version": "1.0.0"
+    },
+    {
+     "family": "alsplit",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "factor",
+    "seed": [
+     3,
+     -5
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:factor:3,-5",
+     "gen:factor:-5,9"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.algebra.quadratics",
+   "title": "Solving a quadratic by factorising",
+   "chapter": [
+    {
+     "title": "If a product is zero, a factor is zero",
+     "text": [
+      "x² + px + q = 0 factorises into (x − r)(x − s) = 0. A product is zero only when one of its factors is zero: x − r = 0 gives x = r, and x − s = 0 gives x = s."
+     ],
+     "math": [
+      "x² − 3x − 10 = (x − 5)(x + 2) = 0",
+      "x = 5 or x = −2",
+      "Solve x² − 3x − 10 = 0. Give both solutions, separated by a comma.",
+      "Two numbers that multiply to −10 and add to 3",
+      "Each bracket can be zero: x = −2 or x = 5"
+     ],
+     "tip": "The sign flips: (x − 5) = 0 gives x = 5, not −5.",
+     "role": "concept",
+     "instance": "gen:quad:-3,-10"
+    },
+    {
+     "title": "Recognising a quadratic equation and writing it in standard form",
+     "text": [
+      "A quadratic equation is one that can be written as ax² + bx + c = 0 with a ≠ 0. Whether it is quadratic shows only after expanding and collecting everything on one side: the x² terms may cancel.",
+      "Expand every bracket, move all terms to the left (changing their signs), collect like terms. If an x² term remains, that is the standard form; if not, the equation is linear."
+     ],
+     "math": [
+      "Write the equation (x + 1)(x − 4) = −6x + 8 in the form ax² + bx + c = 0, or decide that it is not a quadratic equation. Which is correct?",
+      "Expand and bring every term to the left-hand side: x² + 3x − 12 = 0",
+      "The x² term remains (a ≠ 0), so it is a quadratic equation in standard form"
+     ]
+    },
+    {
+     "title": "Solving ax² + bx + c = 0 by splitting the middle term",
+     "text": [
+      "Splitting the middle term reverses the expansion of (ax + b)(cx + d): the two middle products ad and bc multiply to ac × bd and add to the x coefficient.",
+      "Multiply a by c; find two numbers with that product and with sum b; split bx into those two terms; group in pairs and factorise; set each bracket to 0."
+     ],
+     "math": [
+      "Solve 2x² − 5x + 3 = 0 by splitting the middle term. Give both roots (fractions are fine).",
+      "a × c = 2 × 3 = 6: find two numbers with this product and sum −5: −3 and −2",
+      "Group and factorise: (x − 1)(2x − 3) = 0",
+      "Each bracket is 0: x = 1 or x = 3/2"
+     ]
+    },
+    {
+     "title": "Solving a quadratic equation with the quadratic formula (irrational roots)",
+     "text": [
+      "Completing the square on ax² + bx + c = 0 gives (x + b/2a)² = (b² − 4ac)/4a², so x = (−b ± √(b² − 4ac))/2a: the formula works for every quadratic with real roots.",
+      "Read a, b, c. Work out the discriminant b² − 4ac. Put it into x = (−b ± √D)/(2a), simplify the surd (√D = k√m), and cancel any common factor of all three numbers."
+     ],
+     "math": [
+      "Solve x² + 3x + 1 = 0 using the quadratic formula. Give both roots in simplest surd form.",
+      "b² − 4ac = 3² − 4 × 1 × 1 = 5",
+      "x = (−b ± √5)/(2 × 1), simplified: (−3 + √5)/2, (−3 − √5)/2"
+     ]
+    },
+    {
+     "title": "Completing the square: x² + bx + c = (x + h)² + k",
+     "text": [
+      "(x + h)² = x² + 2hx + h². Choosing h = b/2 makes the x terms agree; the h² that comes with it is then corrected by k = c − h².",
+      "Halve the coefficient of x to get h, square it, and subtract the square from c to get k. The equation x² + bx + c = 0 then becomes (x + h)² = −k, which can be solved by square roots."
+     ],
+     "math": [
+      "Write x² + 10x + 14 in the form (x + h)² + k by completing the square. Give (h, k); h and k may be negative or fractions.",
+      "Half the coefficient of x: h = 5",
+      "(x + h)² adds h² = 25, so k = 14 − 25 = −11"
+     ]
+    },
+    {
+     "title": "Quadratic word problems: numbers, ages and speeds",
+     "text": [
+      "A quantity multiplied by a related quantity gives an x² term, so these situations lead to quadratic equations. A quadratic has two roots, and the situation decides which one is the answer.",
+      "Let x be the quantity asked for; write the other quantities in terms of x; form the equation and bring it to standard form; solve (factorise or use the formula); reject a root that cannot happen (negative ages, lengths or speeds)."
+     ],
+     "math": [
+      "Vikram is 8 years older than his brother, and the product of their ages (in years) is 768. Form a quadratic equation and find the brother's age.",
+      "Let x be the quantity asked for: x(x + 8) = 768, so x² + 8x − 768 = 0",
+      "The roots are x = 24 and x = −32",
+      "−32 is negative, which does not fit the situation, so x = 24"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:quad:-7,-18",
+    "gen:quad:6,-27",
+    "gen:quad:10,16"
+   ],
+   "strategies": [
+    {
+     "id": "factorise_first",
+     "title": "Two steps: factorise, then read off",
+     "kind": "procedural",
+     "needs": [
+      "gen:factor:2,-5"
+     ],
+     "screens": [
+      {
+       "title": "Factorise, then set each bracket to zero",
+       "text": [
+        "Step 1: find two numbers that multiply to the constant and add to the x coefficient. Step 2: write (x + m)(x + n) = 0. Step 3: each bracket equal to 0 gives one solution."
+       ],
+       "math": [
+        "Solve x² − 8x + 0 = 0. Give both solutions, separated by a comma.",
+        "Two numbers that multiply to 0 and add to 8",
+        "Each bracket can be zero: x = 0 or x = 8"
+       ],
+       "role": "worked-example",
+       "instance": "gen:quad:-8,0"
+      }
+     ],
+     "guided": "gen:quad:-1,-20",
+     "check": "gen:quad:10,-11"
+    },
+    {
+     "id": "signs_flip",
+     "title": "The sign flips when you solve",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Why signs flip",
+       "text": [
+        "The number in the bracket and the solution have opposite signs. (x − 5) = 0 means x = 5, because you add 5 to both sides. (x + 2) = 0 means x = −2, because you subtract 2 from both sides."
+       ],
+       "role": "strategy",
+       "instance": "gen:quad:-3,-10"
+      }
+     ],
+     "guided": "gen:quad:0,-25",
+     "check": "gen:quad:10,24"
+    },
+    {
+     "id": "check_substitution",
+     "title": "Check by substituting back",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Put each root back in",
+       "text": [
+        "Substitute each solution into the original equation. If x² + px + q = 0 with that value of x, the solution is correct. This catches sign errors and wrong factor pairs."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:quad:8,0",
+     "check": "gen:quad:7,10"
+    }
+   ],
+   "practice": [
+    "gen:quad:10,21",
+    "gen:quad:8,7",
+    "gen:quad:-5,4",
+    "gen:auqstd:2,1,-3,6,9",
+    "gen:auqsplit:3,-1,6,7",
+    "gen:auqf:3,-8,-7",
+    "gen:auqcs:10,15",
+    "gen:auqwp:3,30,8,1"
+   ],
+   "transfer": [
+    "gen:quad:3,-18"
+   ],
+   "retention": [
+    "gen:quad:-9,8",
+    "gen:auqstd:2,-2,-2,7,3"
+   ],
+   "probes": [
+    "gen:factor:2,-5"
+   ],
+   "pool": {
+    "family": "quad",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "quad",
+     "version": "1.0.0"
+    },
+    {
+     "family": "auqstd",
+     "version": "1.0.0"
+    },
+    {
+     "family": "auqsplit",
+     "version": "1.0.0"
+    },
+    {
+     "family": "auqf",
+     "version": "1.0.0"
+    },
+    {
+     "family": "auqcs",
+     "version": "1.0.0"
+    },
+    {
+     "family": "auqwp",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "quad",
+    "seed": [
+     -3,
+     -10
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:quad:-3,-10",
+     "gen:quad:-8,0"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.calculus.limits",
+   "title": "A limit that needs factorising",
+   "chapter": [
+    {
+     "title": "0 ⁄ 0 does not mean the limit is 0",
+     "text": [
+      "When substituting x = a gives 0 ⁄ 0, the expression is indeterminate, not zero. Simplify first: factorise the numerator, cancel the common factor, then substitute."
+     ],
+     "math": [
+      "lim (x → 3) of 2(x² − 9) ⁄ (x − 3)",
+      "x² − 9 = (x − 3)(x + 3); cancel (x − 3)",
+      "= lim (x → 3) of 2(x + 3) = 2 × 6 = 12"
+     ],
+     "tip": "Never leave a limit as 0 ⁄ 0. Factorise and cancel first.",
+     "role": "concept",
+     "instance": "gen:lim:3,2"
+    },
+    {
+     "title": "Estimating a limit from a table, and one-sided limits",
+     "text": [
+      "lim (x → a) f(x) is the value f(x) gets as close as we like to when x is close to a (on both sides), whatever happens at a itself. The left-hand limit uses only x < a, the right-hand limit only x > a; the limit exists when they are equal.",
+      "From a table, look at the values for x nearest to a from each side and see what they settle on. For a piecewise rule, use the piece for that side and substitute x = a in it."
+     ],
+     "math": [
+      "f(x) = 3x for x < 2, and f(x) = 1 for x ≥ 2. Find the left-hand limit lim (x → 2⁻) f(x).",
+      "Left of x = 2 the rule is 3x",
+      "As x approaches 2 from that side, f(x) approaches 6"
+     ]
+    },
+    {
+     "title": "Limits of rational functions: (xⁿ − aⁿ)/(xᵐ − aᵐ) and factorising",
+     "text": [
+      "When substitution gives 0/0, the top and the bottom share the factor x − a. Cancelling it (or using lim (xⁿ − aⁿ)/(x − a) = naⁿ⁻¹ for each part) leaves a function that can be evaluated at a.",
+      "Factorise and cancel x − a, then substitute x = a. For (xⁿ − aⁿ)/(xᵐ − aᵐ), divide top and bottom by x − a: the limit is naⁿ⁻¹/(maᵐ⁻¹) = (n/m)aⁿ⁻ᵐ."
+     ],
+     "math": [
+      "Evaluate lim (x → 3) of (x² − 8x + 15)/(x² − 9).",
+      "Top = (x − 3)(x − 5), bottom = (x − 3)(x + 3); cancel x − 3",
+      "Put x = 3: −2/6 = −1/3"
+     ]
+    },
+    {
+     "title": "lim (t → a) of c(tⁿ − aⁿ)/(t − a): the limit of an average rate",
+     "text": [
+      "(tⁿ − aⁿ)/(t − a) is an average rate of change of tⁿ between a and t; as t → a it approaches the instantaneous rate naⁿ⁻¹.",
+      "Use lim (t → a) (tⁿ − aⁿ)/(t − a) = naⁿ⁻¹ and multiply by the constant in front."
+     ],
+     "math": [
+      "Evaluate lim (t → 1) of 3(t⁴ − 1)/(t − 1).",
+      "lim (tⁿ − aⁿ)/(t − a) = naⁿ⁻¹ = 4 × 1³ = 4",
+      "Multiply by 3: 12"
+     ]
+    },
+    {
+     "title": "Limits from the standard limits of sin x/x, (eˣ − 1)/x and log(1 + x)/x",
+     "text": [
+      "Near 0, sin θ, tan θ, e^θ − 1 and log(1 + θ) all behave like θ itself, so each of them divided by θ tends to 1; 1 − cos θ behaves like θ²/2.",
+      "Make the standard form appear: sin ax/(bx) = (sin ax/(ax)) × (a/b), so the limit is a/b. Do the same for tan, eᵃˣ − 1 and log(1 + ax). For 1 − cos ax, use 2 sin²(ax/2)."
+     ],
+     "math": [
+      "Evaluate lim (x → 0) of (e^(9x) − 1)/(8x).",
+      "Multiply and divide by 9x so that the standard limit appears: × 9/8",
+      "Using (e^θ − 1)/θ → 1, the limit is 9/8"
+     ]
+    },
+    {
+     "title": "Limits by rationalising, and limits at infinity of rational functions",
+     "text": [
+      "A 0/0 with a square root clears when you multiply by the conjugate: (√A − q)(√A + q) = A − q². At infinity, only the highest powers matter: divide top and bottom by the highest power of x in the denominator.",
+      "Rationalise: multiply top and bottom by √(px + q²) + q, cancel x, substitute 0. At infinity: divide every term by x², let the terms with 1/x and 1/x² go to 0."
+     ],
+     "math": [
+      "Evaluate lim (x → ∞) of (2x² + 5x + 4)/(7x² + 5).",
+      "Divide top and bottom by x²: every term with 1/x or 1/x² tends to 0",
+      "What is left is 2/7 = 2/7"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:lim:9,4",
+    "gen:lim:8,1",
+    "gen:lim:4,3"
+   ],
+   "strategies": [
+    {
+     "id": "difference_of_squares",
+     "title": "Spot the difference of two squares",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "x² − a² = (x − a)(x + a)",
+       "text": [
+        "The numerator x² − a² factorises as (x − a)(x + a). The denominator x − a cancels with one of the factors, leaving x + a. Then put x = a to get 2a."
+       ],
+       "math": [
+        "Find lim (x → 6) of 2(x² − 36) ⁄ (x − 6).",
+        "x² − 36 = (x − 6)(x + 6); cancel (x − 6)",
+        "Then put x = 6: 2 × (6 + 6) = 24"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lim:6,2"
+      }
+     ],
+     "guided": "gen:lim:6,1",
+     "check": "gen:lim:6,5"
+    },
+    {
+     "id": "substitute_after",
+     "title": "Simplify first, substitute second",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The order matters",
+       "text": [
+        "Substituting into 0 ⁄ 0 gives nothing useful. Cancel the factor that makes both zero. Only then substitute: the simplified expression has a well-defined value."
+       ],
+       "math": [
+        "Find lim (x → 6) of 6(x² − 36) ⁄ (x − 6).",
+        "x² − 36 = (x − 6)(x + 6); cancel (x − 6)",
+        "Then put x = 6: 6 × (6 + 6) = 72"
+       ],
+       "role": "worked-example",
+       "instance": "gen:lim:6,6"
+      }
+     ],
+     "guided": "gen:lim:8,5",
+     "check": "gen:lim:6,4:mc"
+    },
+    {
+     "id": "check_factoring",
+     "title": "Check the factorisation",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Expand the brackets back",
+       "text": [
+        "(x − 3)(x + 3) = x² + 3x − 3x − 9 = x² − 9. If this is not what you started with, the factorisation is wrong. A difference of two squares always has this shape."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:lim:8,4",
+     "check": "gen:lim:8,6"
+    }
+   ],
+   "practice": [
+    "gen:lim:8,2",
+    "gen:lim:9,1:mc",
+    "gen:lim:9,2",
+    "gen:aultab:2,5,2,1,-3,-6",
+    "gen:aulpow:0,3,2,-2,0",
+    "gen:auspd:4,2,4",
+    "gen:aulstd:4,9,4",
+    "gen:auliinf:1,6,5,4,9,3"
+   ],
+   "transfer": [
+    "gen:lim:9,3:mc",
+    "gen:auspd:4,2,5:w"
+   ],
+   "retention": [
+    "gen:lim:6,3",
+    "gen:aultab:2,2,3,4,-3,3:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "lim",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "lim",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aultab",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aulpow",
+     "version": "1.0.0"
+    },
+    {
+     "family": "auspd",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aulstd",
+     "version": "1.0.0"
+    },
+    {
+     "family": "auliinf",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "lim",
+    "seed": [
+     3,
+     2
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:lim:3,2",
+     "gen:lim:6,2",
+     "gen:lim:6,6"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.trigonometry.ratios",
+   "title": "Evaluating expressions with standard angles",
+   "chapter": [
+    {
+     "title": "The two special triangles",
+     "text": [
+      "All the standard angle values come from two triangles. Half an equilateral triangle of side 2 gives a right triangle with sides 1, √3, 2 (the 30-60-90 triangle). Half a square of side 1 gives a right triangle with sides 1, 1, √2 (the 45-45-90 triangle).",
+      "From these: sin 30° = 1/2, cos 30° = √3/2, sin 45° = √2/2, cos 45° = √2/2, sin 60° = √3/2, cos 60° = 1/2. Tangent is sine over cosine."
+     ],
+     "tip": "sin and cos swap between 30° and 60°: what is sin at one angle is cos at the other.",
+     "role": "concept",
+     "instance": "gen:anstd:0,1,1,3,0"
+    },
+    {
+     "title": "Finding the other trigonometric ratios from one",
+     "text": [
+      "A ratio fixes the shape of the right triangle: sin θ = 3/5 means opposite : hypotenuse = 3 : 5, whatever the size (similar triangles). Pythagoras gives the third side, and then every ratio can be read off.",
+      "Draw a right triangle with the two given sides, find the third by Pythagoras, then write the asked ratio (opposite, adjacent, hypotenuse) and rationalise any surd in the denominator."
+     ],
+     "math": [
+      "If cos θ = 4/9, where θ is an acute angle, find cot θ. Give the exact value.",
+      "cos θ = 4/9: take those two sides of a right triangle",
+      "By Pythagoras the third side is √65",
+      "cot θ = 4√65/65"
+     ]
+    },
+    {
+     "title": "Complementary angles: sin(…) = cos(…)",
+     "text": [
+      "In a right triangle the two acute angles add to 90°, and the side opposite one is adjacent to the other. So sin x = cos(90° − x): the sine of an angle is the cosine of its complement.",
+      "If sin(first angle) = cos(second angle) with both acute, the angles add to 90°. Write that equation in A and solve it."
+     ],
+     "math": [
+      "If sin(2A − 18°) = cos(A + 24°), where both angles are acute, find A in degrees.",
+      "cos y = sin(90° − y), so the angles are complementary: 2A − 18° + A + 24° = 90°",
+      "3A = 84°, so A = 28°"
+     ],
+     "widget": {
+      "type": "triangle",
+      "right": true,
+      "sides": [
+       "",
+       "",
+       ""
+      ],
+      "angles": [
+       "",
+       "x",
+       "90° − x"
+      ]
+     }
+    },
+    {
+     "title": "Simplifying with complementary angles",
+     "text": [
+      "For complementary angles θ and 90° − θ: sin(90° − θ) = cos θ, cos(90° − θ) = sin θ, tan(90° − θ) = cot θ, cot(90° − θ) = tan θ, sec(90° − θ) = cosec θ, cosec(90° − θ) = sec θ.",
+      "Spot the pairs of angles that add up to 90°, rewrite one function of each pair as the co-function of the other angle, and simplify (a ratio of equal values is 1; tan θ × cot θ = 1; sin²θ + cos²θ = 1)."
+     ],
+     "math": [
+      "Without using tables, find the value of 2 sin 50° ÷ cos 40° + tan 65° ÷ cot 25°.",
+      "Use cos(90° − θ) = sin θ and cot(90° − θ) = tan θ",
+      "So the value is 3"
+     ]
+    },
+    {
+     "title": "Reading trigonometric tables (degrees, minutes, mean differences)",
+     "text": [
+      "A table gives each ratio to four decimal places for every 6′; for the minutes in between, the mean-difference columns give the small change to add (for sine and tangent, which increase) or to subtract (for cosine, which decreases).",
+      "Find the row of the degrees and the column of the largest multiple of 6′ not above the minutes; read the value. Then read the mean difference for the extra minutes in the same row and add it (subtract for cosines) in the last decimal place."
+     ],
+     "math": [
+      "Using the table of natural sines in the picture (with its mean differences), find sin 46°32′.",
+      "In the 46° row, under 30′: 0.7254",
+      "Add the mean difference for 2′ (4 in the last place): 0.7258"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:anstd:1,3,0,3,4",
+    "gen:anstd:0,3,0,1,1",
+    "gen:anstd:1,2,1,0,3"
+   ],
+   "strategies": [
+    {
+     "id": "lookup_table",
+     "title": "Build the table of values",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Write the values out",
+       "text": [
+        "Write a table with rows for sin, cos, tan and columns for 0°, 30°, 45°, 60°, 90°. Fill it in from the two triangles. Then read off the values and combine them."
+       ],
+       "math": [
+        "Find the exact value of sin 45° sin 30°.",
+        "sin 45° = √2/2",
+        "sin 30° = 1/2",
+        "Combine the values: √2/4"
+       ],
+       "role": "worked-example",
+       "instance": "gen:anstd:0,2,0,1,2"
+      }
+     ],
+     "guided": "gen:anstd:1,2,2,3,1",
+     "check": "gen:anstd:1,2,2,3,3"
+    },
+    {
+     "id": "sin_cos_swap",
+     "title": "sin and cos swap at complementary angles",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "30° and 60° are complements",
+       "text": [
+        "sin 30° = cos 60° = 1/2, and sin 60° = cos 30° = √3/2. In the right triangle, the side opposite one acute angle is the side adjacent to the other. So sin and cos swap when the angles add to 90°."
+       ],
+       "role": "strategy",
+       "instance": "gen:anstd:0,1,1,3,0"
+      }
+     ],
+     "guided": "gen:anstd:0,2,0,1,3",
+     "check": "gen:anstd:1,2,2,3,2:mc"
+    },
+    {
+     "id": "surd_arithmetic",
+     "title": "Combining surds",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Add and multiply surds carefully",
+       "text": [
+        "√2/2 + √3/2 = (√2 + √3)/2: same denominator, so add the numerators. √2/2 × √3/2 = √6/4: multiply tops and multiply bottoms. √2 × √3 = √6, not √5."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:anstd:1,2,2,3,0",
+     "check": "gen:anstd:0,3,0,2,4"
+    }
+   ],
+   "practice": [
+    "gen:anstd:2,2,0,3,1",
+    "gen:anstd:2,2,0,3,2:mc",
+    "gen:anstd:2,2,0,3,3",
+    "gen:anratio:2,2,7,3",
+    "gen:ancompa:2,4,1,8",
+    "gen:ancomps:1,64,2,5",
+    "gen:antable:0,58,7,5"
+   ],
+   "transfer": [
+    "gen:anstd:0,1,0,3,2:mc",
+    "gen:anstd:0,2,0,4,2:w"
+   ],
+   "retention": [
+    "gen:anstd:2,2,0,3,0",
+    "gen:anratio:2,2,7,4:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "anstd",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "anstd",
+     "version": "1.0.0"
+    },
+    {
+     "family": "anratio",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ancompa",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ancomps",
+     "version": "1.0.0"
+    },
+    {
+     "family": "antable",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "anstd",
+    "seed": [
+     0,
+     1,
+     1,
+     3,
+     0
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:anstd:0,1,1,3,0",
+     "gen:anstd:0,2,0,1,2"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.trigonometry.equations",
+   "title": "Solving a trig equation in [0, 2π)",
+   "chapter": [
+    {
+     "title": "One reference angle, several solutions",
+     "text": [
+      "To solve sin x = k, first find the reference angle α from the standard values. Then place it in every quadrant where sin has the right sign: sin is positive in quadrants I and II, negative in III and IV.",
+      "In 0 ≤ x < 2π, sin x = k usually has two solutions (one exception: when k = 1 or −1, there is one)."
+     ],
+     "math": [
+      "sin x = √2/2: the reference angle is π/4",
+      "sin is positive in I and II: x = π/4 or x = π − π/4 = 3π/4"
+     ],
+     "tip": "The principal value from your calculator is only one solution. Always check all the quadrants.",
+     "role": "concept",
+     "instance": "gen:atprinc:0,2,1,0"
+    },
+    {
+     "title": "General solution of a trigonometric equation",
+     "text": [
+      "sin y = sin α ⇔ y = nπ + (−1)ⁿα; cos y = cos α ⇔ y = 2nπ ± α; tan y = tan α ⇔ y = nπ + α (n any integer), with α the principal value.",
+      "Write the right side as f(α) using the principal value, apply the matching general form to kx, then divide everything by k."
+     ],
+     "math": [
+      "Which is the general solution of tan x = 1?",
+      "The principal value of tan⁻¹(1) is α = π/4",
+      "For tan: kx = nπ + α, then divide by 1"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:atprinc:2,4,2,0",
+    "gen:atprinc:0,3,2,1",
+    "gen:atprinc:1,8,3,0"
+   ],
+   "strategies": [
+    {
+     "id": "quadrant_diagram",
+     "title": "Draw the quadrant diagram",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "ASTC: which ratios are positive",
+       "text": [
+        "In quadrant I, all ratios are positive. In II, only sin. In III, only tan. In IV, only cos. The mnemonic ASTC (All, Sin, Tan, Cos) gives the sign in each quadrant. Place the reference angle in every quadrant that matches."
+       ],
+       "role": "strategy",
+       "instance": "gen:atprinc:0,2,1,0"
+      }
+     ],
+     "guided": "gen:atprinc:0,5,1,0",
+     "check": "gen:atprinc:0,7,2,1"
+    },
+    {
+     "id": "reference_then_place",
+     "title": "Find the reference angle, then place it",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Two steps",
+       "text": [
+        "Step 1: find the reference angle from the positive value of k. Step 2: place it in the right quadrants using π − α (Q II), π + α (Q III), 2π − α (Q IV). Only keep the quadrants where the ratio has the right sign."
+       ],
+       "math": [
+        "Solve 2 sin x − 1 = 0 for 0 ≤ x < 2π (x in radians). Give every solution in radians, in terms of π, separated by commas (type π or pi): for example π/4, 3π/2 (and 0 for x = 0).",
+        "The principal value of sin⁻¹(1/2) is π/6",
+        "All angles with this value, divided by 1 and kept in 0 ≤ x < 2π: x = π/6, 5π/6 "
+       ],
+       "role": "worked-example",
+       "instance": "gen:atprinc:0,5,1,1"
+      }
+     ],
+     "guided": "gen:atprinc:1,6,3,1",
+     "check": "gen:atprinc:0,7,2,0"
+    },
+    {
+     "id": "radians_check",
+     "title": "Work in radians, not degrees",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Convert if needed",
+       "text": [
+        "The question asks for radians: π is 180°, so π/6 = 30°, π/4 = 45°, π/3 = 60°. If you work in degrees first, convert each answer at the end by dividing by 180 and writing π."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:atprinc:1,0,1,1",
+     "check": "gen:atprinc:2,0,3,1"
+    }
+   ],
+   "practice": [
+    "gen:atprinc:2,0,1,1",
+    "gen:atprinc:2,0,1,0",
+    "gen:atprinc:2,4,3,0",
+    "gen:atgen:0,3,2,1"
+   ],
+   "transfer": [
+    "gen:atprinc:1,3,1,1",
+    "gen:atgen:0,3,2,0:w"
+   ],
+   "retention": [
+    "gen:atprinc:1,7,1,0",
+    "gen:atgen:2,4,1,1"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "atprinc",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "atprinc",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atgen",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "atprinc",
+    "seed": [
+     0,
+     2,
+     1,
+     0
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:atprinc:0,2,1,0",
+     "gen:atprinc:0,5,1,1"
+    ]
+   }
+  },
+  {
    "competency": "MATH.statistics.median-mode",
    "title": "Finding the median",
    "chapter": [
@@ -9293,223 +10295,6 @@
    }
   },
   {
-   "competency": "MATH.algebra.factorisation",
-   "title": "Factorising x² + px + q",
-   "chapter": [
-    {
-     "title": "Factorising x² + px + q",
-     "text": [
-      "(x + m)(x + n) = x² + (m + n)x + mn: the two numbers multiply to the constant and add to the x coefficient."
-     ],
-     "math": [
-      "Factorise: x² − 7x + 12 = (x − 4)(x + □). What number goes in the box (it may be negative)?",
-      "The numbers multiply to 12: 12 ÷ (−4) = −3",
-      "Check they add to the x coefficient: −4 + (−3) = −7"
-     ],
-     "tip": "The x coefficient was copied into the bracket; the two numbers in the brackets add up to it.",
-     "role": "concept",
-     "instance": "gen:factor:-4,-3"
-    },
-    {
-     "title": "Factorising a difference of squares or a perfect square",
-     "text": [
-      "a² − b² = (a + b)(a − b), a² + 2ab + b² = (a + b)² and a² − 2ab + b² = (a − b)². An expression that matches one of these can be factorised at once.",
-      "Take out any common factor first. Then find a and b as the square roots of the first and last terms; for a perfect square, check that the middle term is 2ab."
-     ],
-     "math": [
-      "Factorise 100x² − y² using an identity. Write it as (ax + by)(ax − by) with positive whole numbers and type (a, b).",
-      "Using the identity: (10x + y)(10x − y)"
-     ]
-    },
-    {
-     "title": "Factorising with the cube identities",
-     "text": [
-      "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²), and a³ + b³ + c³ − 3abc = (a + b + c)(a² + b² + c² − ab − bc − ca).",
-      "Write each cube term as (something)³ to find a, b (and c), then fill the second bracket from the identity."
-     ],
-     "math": [
-      "Use an identity to factorise: 8x³ + 729 = (2x + 9)(4x² − □x + 81). What number goes in the box?",
-      "Match the identity: a = 2x, b = 9",
-      "The middle term is 2 × 9 = 18"
-     ]
-    },
-    {
-     "title": "Factorising by a common factor or by grouping",
-     "text": [
-      "Factorising undoes expanding: a common factor of every term can be taken outside a bracket, and after grouping, a common bracket can be taken out too.",
-      "Find the highest common factor of the numbers and the letters. For four terms, take a common factor out of each pair so that the same bracket appears twice, then take that bracket out."
-     ],
-     "math": [
-      "Factorise 25x²y − 30xy² completely by taking out the highest common factor. Write it as g·xy(ax − by) and type (g, a, b).",
-      "The highest common factor of the two terms is 5xy"
-     ]
-    },
-    {
-     "title": "Factorising ax² + bx + c by splitting the middle term",
-     "text": [
-      "If ax² + bx + c = (px + q)(rx + s), then b splits into two parts whose product is a × c: ps and qr.",
-      "Find two numbers that multiply to a × c and add to b. Write bx as their sum, group the four terms in pairs, take out the common factor of each pair, then the common bracket."
-     ],
-     "math": [
-      "Factorise 30x² + 17x + 2 by splitting the middle term. Write it as (5x + □)(6x + □) and type the two numbers in the boxes in order, for example (3, −2).",
-      "a × c = 30 × 2 = 60",
-      "Split the middle term into 5x and 12x (their product is a × c and their sum is 17)",
-      "Group and take out the common bracket: (5x + 2)(6x + 1)"
-     ]
-    },
-    {
-     "title": "Splitting the middle term of ax² + bx + c",
-     "text": [
-      "If ax² + bx + c = (mx + p)(nx + q), then a × c = (mn)(pq) = (mq)(np), and b = mq + np. So bx splits into two parts whose product is ac.",
-      "Find two numbers with sum b and product a × c. Write bx as the sum of those two terms, group the four terms in pairs, take out the common factor of each pair, and then the common bracket."
-     ],
-     "math": [
-      "To factorise 12x² + 17x + 6 by splitting the middle term, 17x is written as rx + sx, where r + s = 17 and rs = 12 × 6 = 72. Find r and s. Enter both, separated by a comma.",
-      "a × c = 12 × 6 = 72",
-      "Two numbers with sum 17 and product a × c: 8 and 9"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:factor:-6,-8",
-    "gen:factor:-7,-3",
-    "gen:factor:-6,-2"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "List pairs that multiply to the constant; choose the pair that adds to the x coefficient. Watch the signs."
-       ],
-       "math": [
-        "Factorise: x² − 5x + 4 = (x − 4)(x + □). What number goes in the box (it may be negative)?",
-        "The numbers multiply to 4: 4 ÷ (−4) = −1",
-        "Check they add to the x coefficient: −4 + (−1) = −5"
-       ],
-       "role": "worked-example",
-       "instance": "gen:factor:-4,-1"
-      }
-     ],
-     "guided": "gen:factor:-4,-6",
-     "check": "gen:factor:-5,2"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:factor:-5,9",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Factorise: x² + 4x − 45 = (x − 5)(x + □). What number goes in the box (it may be negative)?” A common wrong answer is 4.",
-        "The x coefficient was copied into the bracket; the two numbers in the brackets add up to it."
-       ],
-       "math": [
-        "Not 4, but 9"
-       ]
-      }
-     ],
-     "guided": "gen:factor:-5,7",
-     "check": "gen:factor:-5,3:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Add and subtract integers. If a step is slow, practise that skill first.",
-        "Then the method is: List pairs that multiply to the constant; choose the pair that adds to the x coefficient. Watch the signs."
-       ]
-      }
-     ],
-     "guided": "gen:factor:-4,-7",
-     "check": "gen:factor:-4,-5"
-    }
-   ],
-   "practice": [
-    "gen:factor:-5,4",
-    "gen:factor:-7,-6:mc",
-    "gen:factor:-6,-4",
-    "gen:ajfsq:2,3,7,0",
-    "gen:ajfcub:2,3,2,2",
-    "gen:ajfgrp:1,5,1,2,-2",
-    "gen:ajfspl:3,-8,6,7",
-    "gen:alsplit:1,4,-5,3,-2"
-   ],
-   "transfer": [
-    "gen:factor:-6,-5:mc",
-    "gen:ajfsq:0,5,12,0:w",
-    "gen:ajfspl:1,-7,3,4:w"
-   ],
-   "retention": [
-    "gen:factor:-5,8",
-    "gen:ajfsq:1,11,9,0:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "factor",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "factor",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ajfsq",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ajfcub",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ajfgrp",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ajfspl",
-     "version": "1.0.0"
-    },
-    {
-     "family": "alsplit",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@1",
-    "family": "factor",
-    "seed": [
-     -4,
-     -3
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:factor:-4,-3",
-     "gen:factor:-5,9",
-     "gen:factor:-4,-1"
-    ]
-   }
-  },
-  {
    "competency": "MATH.algebra.arithmetic-sequences",
    "title": "The nth term of an arithmetic progression",
    "chapter": [
@@ -10337,223 +11122,6 @@
      "gen:det2:-2,4,5,1",
      "gen:det2:3,1,1,-2",
      "gen:det2:-3,3,1,5"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.calculus.limits",
-   "title": "A limit that needs factorising",
-   "chapter": [
-    {
-     "title": "A limit that needs factorising",
-     "text": [
-      "When substituting gives 0 ⁄ 0, the limit still exists: simplify first, then substitute."
-     ],
-     "math": [
-      "Find lim (x → 6) of 2(x² − 36) ⁄ (x − 6).",
-      "x² − 36 = (x − 6)(x + 6); cancel (x − 6)",
-      "Then put x = 6: 2 × (6 + 6) = 24"
-     ],
-     "tip": "0 ⁄ 0 was taken as 0; it means the expression must be simplified first (factorise and cancel).",
-     "role": "concept",
-     "instance": "gen:lim:6,2"
-    },
-    {
-     "title": "Estimating a limit from a table, and one-sided limits",
-     "text": [
-      "lim (x → a) f(x) is the value f(x) gets as close as we like to when x is close to a (on both sides), whatever happens at a itself. The left-hand limit uses only x < a, the right-hand limit only x > a; the limit exists when they are equal.",
-      "From a table, look at the values for x nearest to a from each side and see what they settle on. For a piecewise rule, use the piece for that side and substitute x = a in it."
-     ],
-     "math": [
-      "f(x) = 3x for x < 2, and f(x) = 1 for x ≥ 2. Find the left-hand limit lim (x → 2⁻) f(x).",
-      "Left of x = 2 the rule is 3x",
-      "As x approaches 2 from that side, f(x) approaches 6"
-     ]
-    },
-    {
-     "title": "Limits of rational functions: (xⁿ − aⁿ)/(xᵐ − aᵐ) and factorising",
-     "text": [
-      "When substitution gives 0/0, the top and the bottom share the factor x − a. Cancelling it (or using lim (xⁿ − aⁿ)/(x − a) = naⁿ⁻¹ for each part) leaves a function that can be evaluated at a.",
-      "Factorise and cancel x − a, then substitute x = a. For (xⁿ − aⁿ)/(xᵐ − aᵐ), divide top and bottom by x − a: the limit is naⁿ⁻¹/(maᵐ⁻¹) = (n/m)aⁿ⁻ᵐ."
-     ],
-     "math": [
-      "Evaluate lim (x → 3) of (x² − 8x + 15)/(x² − 9).",
-      "Top = (x − 3)(x − 5), bottom = (x − 3)(x + 3); cancel x − 3",
-      "Put x = 3: −2/6 = −1/3"
-     ]
-    },
-    {
-     "title": "lim (t → a) of c(tⁿ − aⁿ)/(t − a): the limit of an average rate",
-     "text": [
-      "(tⁿ − aⁿ)/(t − a) is an average rate of change of tⁿ between a and t; as t → a it approaches the instantaneous rate naⁿ⁻¹.",
-      "Use lim (t → a) (tⁿ − aⁿ)/(t − a) = naⁿ⁻¹ and multiply by the constant in front."
-     ],
-     "math": [
-      "Evaluate lim (t → 1) of 3(t⁴ − 1)/(t − 1).",
-      "lim (tⁿ − aⁿ)/(t − a) = naⁿ⁻¹ = 4 × 1³ = 4",
-      "Multiply by 3: 12"
-     ]
-    },
-    {
-     "title": "Limits from the standard limits of sin x/x, (eˣ − 1)/x and log(1 + x)/x",
-     "text": [
-      "Near 0, sin θ, tan θ, e^θ − 1 and log(1 + θ) all behave like θ itself, so each of them divided by θ tends to 1; 1 − cos θ behaves like θ²/2.",
-      "Make the standard form appear: sin ax/(bx) = (sin ax/(ax)) × (a/b), so the limit is a/b. Do the same for tan, eᵃˣ − 1 and log(1 + ax). For 1 − cos ax, use 2 sin²(ax/2)."
-     ],
-     "math": [
-      "Evaluate lim (x → 0) of (e^(9x) − 1)/(8x).",
-      "Multiply and divide by 9x so that the standard limit appears: × 9/8",
-      "Using (e^θ − 1)/θ → 1, the limit is 9/8"
-     ]
-    },
-    {
-     "title": "Limits by rationalising, and limits at infinity of rational functions",
-     "text": [
-      "A 0/0 with a square root clears when you multiply by the conjugate: (√A − q)(√A + q) = A − q². At infinity, only the highest powers matter: divide top and bottom by the highest power of x in the denominator.",
-      "Rationalise: multiply top and bottom by √(px + q²) + q, cancel x, substitute 0. At infinity: divide every term by x², let the terms with 1/x and 1/x² go to 0."
-     ],
-     "math": [
-      "Evaluate lim (x → ∞) of (2x² + 5x + 4)/(7x² + 5).",
-      "Divide top and bottom by x²: every term with 1/x or 1/x² tends to 0",
-      "What is left is 2/7 = 2/7"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:lim:9,4",
-    "gen:lim:8,1",
-    "gen:lim:4,3"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Factorise x² − a² = (x − a)(x + a), cancel (x − a), then put x = a."
-       ],
-       "math": [
-        "Find lim (x → 6) of 6(x² − 36) ⁄ (x − 6).",
-        "x² − 36 = (x − 6)(x + 6); cancel (x − 6)",
-        "Then put x = 6: 6 × (6 + 6) = 72"
-       ],
-       "role": "worked-example",
-       "instance": "gen:lim:6,6"
-      }
-     ],
-     "guided": "gen:lim:8,5",
-     "check": "gen:lim:6,5"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:lim:6,1",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Find lim (x → 6) of (x² − 36) ⁄ (x − 6).” A common wrong answer is 0.",
-        "0 ⁄ 0 was taken as 0; it means the expression must be simplified first (factorise and cancel)."
-       ],
-       "math": [
-        "Not 0, but 12"
-       ]
-      }
-     ],
-     "guided": "gen:lim:8,4",
-     "check": "gen:lim:6,4:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Use algebraic identities. If a step is slow, practise that skill first.",
-        "Then the method is: Factorise x² − a² = (x − a)(x + a), cancel (x − a), then put x = a."
-       ]
-      }
-     ],
-     "guided": "gen:lim:8,2",
-     "check": "gen:lim:8,6"
-    }
-   ],
-   "practice": [
-    "gen:lim:9,1",
-    "gen:lim:9,2:mc",
-    "gen:lim:9,3",
-    "gen:aultab:2,5,2,1,-3,-6",
-    "gen:aulpow:0,3,2,-2,0",
-    "gen:auspd:4,2,4",
-    "gen:aulstd:4,9,4",
-    "gen:auliinf:1,6,5,4,9,3"
-   ],
-   "transfer": [
-    "gen:lim:4,4:mc",
-    "gen:auspd:4,2,5:w"
-   ],
-   "retention": [
-    "gen:lim:6,3",
-    "gen:aultab:2,2,3,4,-3,3:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "lim",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "lim",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aultab",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aulpow",
-     "version": "1.0.0"
-    },
-    {
-     "family": "auspd",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aulstd",
-     "version": "1.0.0"
-    },
-    {
-     "family": "auliinf",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@1",
-    "family": "lim",
-    "seed": [
-     6,
-     2
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:lim:6,2",
-     "gen:lim:6,1",
-     "gen:lim:6,6"
     ]
    }
   },
@@ -50949,349 +51517,6 @@
    }
   },
   {
-   "competency": "MATH.trigonometry.ratios",
-   "title": "Evaluating expressions with standard angles",
-   "chapter": [
-    {
-     "title": "Evaluating expressions with standard angles",
-     "text": [
-      "The ratios of 30°, 45° and 60° come from two triangles: half an equilateral triangle of side 2 (sides 1, √3, 2) and half a square of side 1 (sides 1, 1, √2)."
-     ],
-     "math": [
-      "Find the exact value of sin 45° sin 30°.",
-      "sin 45° = √2/2",
-      "sin 30° = 1/2",
-      "Combine the values: √2/4"
-     ],
-     "widget": {
-      "type": "table",
-      "head": [
-       "θ",
-       "0°",
-       "30°",
-       "45°",
-       "60°",
-       "90°"
-      ],
-      "rows": [
-       [
-        "sin θ",
-        "0",
-        "1/2",
-        "√2/2",
-        "√3/2",
-        "1"
-       ],
-       [
-        "cos θ",
-        "1",
-        "√3/2",
-        "√2/2",
-        "1/2",
-        "0"
-       ],
-       [
-        "tan θ",
-        "0",
-        "√3/3",
-        "1",
-        "√3",
-        "not defined"
-       ]
-      ]
-     },
-     "tip": "The values of sin and cos were swapped (and tan taken as cot): for example sin 30° = 1/2 and cos 30° = √3/2.",
-     "role": "concept",
-     "instance": "gen:anstd:0,2,0,1,2"
-    },
-    {
-     "title": "Finding the other trigonometric ratios from one",
-     "text": [
-      "A ratio fixes the shape of the right triangle: sin θ = 3/5 means opposite : hypotenuse = 3 : 5, whatever the size (similar triangles). Pythagoras gives the third side, and then every ratio can be read off.",
-      "Draw a right triangle with the two given sides, find the third by Pythagoras, then write the asked ratio (opposite, adjacent, hypotenuse) and rationalise any surd in the denominator."
-     ],
-     "math": [
-      "If cos θ = 4/9, where θ is an acute angle, find cot θ. Give the exact value.",
-      "cos θ = 4/9: take those two sides of a right triangle",
-      "By Pythagoras the third side is √65",
-      "cot θ = 4√65/65"
-     ]
-    },
-    {
-     "title": "Complementary angles: sin(…) = cos(…)",
-     "text": [
-      "In a right triangle the two acute angles add to 90°, and the side opposite one is adjacent to the other. So sin x = cos(90° − x): the sine of an angle is the cosine of its complement.",
-      "If sin(first angle) = cos(second angle) with both acute, the angles add to 90°. Write that equation in A and solve it."
-     ],
-     "math": [
-      "If sin(2A − 18°) = cos(A + 24°), where both angles are acute, find A in degrees.",
-      "cos y = sin(90° − y), so the angles are complementary: 2A − 18° + A + 24° = 90°",
-      "3A = 84°, so A = 28°"
-     ],
-     "widget": {
-      "type": "triangle",
-      "right": true,
-      "sides": [
-       "",
-       "",
-       ""
-      ],
-      "angles": [
-       "",
-       "x",
-       "90° − x"
-      ]
-     }
-    },
-    {
-     "title": "Simplifying with complementary angles",
-     "text": [
-      "For complementary angles θ and 90° − θ: sin(90° − θ) = cos θ, cos(90° − θ) = sin θ, tan(90° − θ) = cot θ, cot(90° − θ) = tan θ, sec(90° − θ) = cosec θ, cosec(90° − θ) = sec θ.",
-      "Spot the pairs of angles that add up to 90°, rewrite one function of each pair as the co-function of the other angle, and simplify (a ratio of equal values is 1; tan θ × cot θ = 1; sin²θ + cos²θ = 1)."
-     ],
-     "math": [
-      "Without using tables, find the value of 2 sin 50° ÷ cos 40° + tan 65° ÷ cot 25°.",
-      "Use cos(90° − θ) = sin θ and cot(90° − θ) = tan θ",
-      "So the value is 3"
-     ]
-    },
-    {
-     "title": "Reading trigonometric tables (degrees, minutes, mean differences)",
-     "text": [
-      "A table gives each ratio to four decimal places for every 6′; for the minutes in between, the mean-difference columns give the small change to add (for sine and tangent, which increase) or to subtract (for cosine, which decreases).",
-      "Find the row of the degrees and the column of the largest multiple of 6′ not above the minutes; read the value. Then read the mean difference for the extra minutes in the same row and add it (subtract for cosines) in the last decimal place."
-     ],
-     "math": [
-      "Using the table of natural sines in the picture (with its mean differences), find sin 46°32′.",
-      "In the 46° row, under 30′: 0.7254",
-      "Add the mean difference for 2′ (4 in the last place): 0.7258"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:anstd:1,3,0,3,4",
-    "gen:anstd:0,3,0,1,1",
-    "gen:anstd:1,2,1,0,3"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Write down each value (sin 30° = 1/2, sin 45° = √2/2, sin 60° = √3/2, cos the reverse order, tan = sin ÷ cos), then do the arithmetic with surds exactly."
-       ],
-       "math": [
-        "Find the exact value of sin²45° + sin²30°.",
-        "sin 45° = √2/2",
-        "sin 30° = 1/2",
-        "Combine the values: 3/4"
-       ],
-       "widget": {
-        "type": "table",
-        "head": [
-         "θ",
-         "0°",
-         "30°",
-         "45°",
-         "60°",
-         "90°"
-        ],
-        "rows": [
-         [
-          "sin θ",
-          "0",
-          "1/2",
-          "√2/2",
-          "√3/2",
-          "1"
-         ],
-         [
-          "cos θ",
-          "1",
-          "√3/2",
-          "√2/2",
-          "1/2",
-          "0"
-         ],
-         [
-          "tan θ",
-          "0",
-          "√3/3",
-          "1",
-          "√3",
-          "not defined"
-         ]
-        ]
-       },
-       "role": "worked-example",
-       "instance": "gen:anstd:0,2,0,1,3"
-      }
-     ],
-     "guided": "gen:anstd:1,2,2,3,0",
-     "check": "gen:anstd:1,2,2,3,3"
-    },
-    {
-     "id": "hand",
-     "title": "The square-root pattern",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The square-root pattern",
-       "text": [
-        "For 0°, 30°, 45°, 60°, 90°, sin θ = √0/2, √1/2, √2/2, √3/2, √4/2.",
-        "cos θ is the same list backwards, and tan θ = sin θ ÷ cos θ."
-       ],
-       "math": [
-        "Find the exact value of tan 45° − sin 60°.",
-        "tan 45° = 1",
-        "sin 60° = √3/2",
-        "Combine the values: (2 − √3)/2"
-       ],
-       "role": "strategy",
-       "instance": "gen:anstd:2,2,0,3,1"
-      }
-     ],
-     "guided": "gen:anstd:2,2,0,3,2",
-     "check": "gen:anstd:1,2,2,3,2:mc"
-    },
-    {
-     "id": "triangles",
-     "title": "Draw the two triangles",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Draw the two triangles",
-       "text": [
-        "Cut an equilateral triangle of side 2 in half: the half has sides 1, √3 and 2 and angles 30°, 60°, 90°.",
-        "Cut a unit square along its diagonal: sides 1, 1, √2 and angles 45°, 45°, 90°. Read any ratio off these."
-       ],
-       "math": [
-        "Find the exact value of tan²45° + sin²60°.",
-        "tan 45° = 1",
-        "sin 60° = √3/2",
-        "Combine the values: 7/4"
-       ],
-       "role": "strategy",
-       "instance": "gen:anstd:2,2,0,3,3"
-      }
-     ],
-     "guided": "gen:anstd:0,1,0,3,2",
-     "check": "gen:anstd:0,3,0,2,4"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:anstd:1,2,2,3,1",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Find the exact value of cos 45° − tan 60°.” A common wrong answer is (3√2 − 2√3)/6.",
-        "The values of sin and cos were swapped (and tan taken as cot): for example sin 30° = 1/2 and cos 30° = √3/2."
-       ],
-       "math": [
-        "Not (3√2 − 2√3)/6, but (√2 − 2√3)/2"
-       ]
-      }
-     ],
-     "guided": "gen:anstd:0,2,0,4,2",
-     "check": "gen:anstd:0,2,2,3,2:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Simplify radicals. If a step is slow, practise that skill first.",
-        "Then the method is: Write down each value (sin 30° = 1/2, sin 45° = √2/2, sin 60° = √3/2, cos the reverse order, tan = sin ÷ cos), then do the arithmetic with surds exactly."
-       ]
-      }
-     ],
-     "guided": "gen:anstd:1,0,0,2,4",
-     "check": "gen:anstd:0,2,2,3,3"
-    }
-   ],
-   "practice": [
-    "gen:anstd:0,2,0,4,4",
-    "gen:anstd:0,3,0,2,1:mc",
-    "gen:anstd:2,1,2,2,4",
-    "gen:anratio:2,2,7,3",
-    "gen:ancompa:2,4,1,8",
-    "gen:ancomps:1,64,2,5",
-    "gen:antable:0,58,7,5"
-   ],
-   "transfer": [
-    "gen:anstd:0,2,2,3,0:w"
-   ],
-   "retention": [
-    "gen:anstd:2,2,0,3,0",
-    "gen:anratio:2,2,7,4:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "anstd",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "anstd",
-     "version": "1.0.0"
-    },
-    {
-     "family": "anratio",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ancompa",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ancomps",
-     "version": "1.0.0"
-    },
-    {
-     "family": "antable",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "anstd",
-    "seed": [
-     0,
-     2,
-     0,
-     1,
-     2
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:anstd:0,2,0,1,2",
-     "gen:anstd:1,2,2,3,1",
-     "gen:anstd:0,2,0,1,3"
-    ]
-   }
-  },
-  {
    "competency": "MATH.algebra.sets",
    "title": "Union, intersection, difference and complement of finite sets",
    "chapter": [
@@ -67737,181 +67962,6 @@
      "gen:atcomp:1,1,1,0",
      "gen:atcomp:1,1,1,1",
      "gen:atcomp:7,4,1,1"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.trigonometry.equations",
-   "title": "Solutions of a trigonometric equation in 0 ≤ x < 2π",
-   "chapter": [
-    {
-     "title": "Solutions of a trigonometric equation in 0 ≤ x < 2π",
-     "text": [
-      "sin and cos repeat every 2π and take each value twice per turn (tan repeats every π and takes each value once); the quadrant signs (All, Sin, Tan, Cos) tell you where."
-     ],
-     "math": [
-      "Solve sin x = 1/2 for 0 ≤ x < 2π (x in radians). Give every solution in radians, in terms of π, separated by commas (type π or pi): for example π/4, 3π/2 (and 0 for x = 0).",
-      "The principal value of sin⁻¹(1/2) is π/6",
-      "All angles with this value, divided by 1 and kept in 0 ≤ x < 2π: x = π/6, 5π/6 "
-     ],
-     "tip": "Only the principal value was given; sin takes each value twice in every 2π, so look in every quadrant where it has this sign.",
-     "role": "concept",
-     "instance": "gen:atprinc:0,5,1,0"
-    },
-    {
-     "title": "General solution of a trigonometric equation",
-     "text": [
-      "sin y = sin α ⇔ y = nπ + (−1)ⁿα; cos y = cos α ⇔ y = 2nπ ± α; tan y = tan α ⇔ y = nπ + α (n any integer), with α the principal value.",
-      "Write the right side as f(α) using the principal value, apply the matching general form to kx, then divide everything by k."
-     ],
-     "math": [
-      "Which is the general solution of tan x = 1?",
-      "The principal value of tan⁻¹(1) is α = π/4",
-      "For tan: kx = nπ + α, then divide by 1"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:atprinc:2,4,2,0",
-    "gen:atprinc:0,3,2,1",
-    "gen:atprinc:1,8,3,0"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Find the reference angle from the standard values (π/6, π/4, π/3), place it in each quadrant where the function has the right sign, then (for kx) add multiples of 2π until kx reaches 2kπ, and divide by k."
-       ],
-       "math": [
-        "Solve √2 cos 3x − 1 = 0 for 0 ≤ x < 2π (x in radians). Give every solution in radians, in terms of π, separated by commas (type π or pi): for example π/4, 3π/2 (and 0 for x = 0).",
-        "The principal value of cos⁻¹(1/√2) is π/4",
-        "All angles with this value, divided by 3 and kept in 0 ≤ x < 2π: x = π/12, 7π/12, 3π/4, 5π/4, 17π/12, 23π/12 "
-       ],
-       "role": "worked-example",
-       "instance": "gen:atprinc:1,6,3,1"
-      }
-     ],
-     "guided": "gen:atprinc:1,0,1,1",
-     "check": "gen:atprinc:0,7,2,1"
-    },
-    {
-     "id": "graph",
-     "title": "Read it off the graph",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Read it off the graph",
-       "text": [
-        "Sketch y = sin x for 0 to 2π and the line y = value.",
-        "Each crossing is a solution; for sin kx the graph squeezes k waves into 0 to 2π, so there are k times as many crossings."
-       ],
-       "math": [
-        "Solve tan x + √3 = 0 for 0 ≤ x < 2π (x in radians). Give every solution in radians, in terms of π, separated by commas (type π or pi): for example π/4, 3π/2 (and 0 for x = 0).",
-        "The principal value of tan⁻¹(−√3) is −π/3",
-        "All angles with this value, divided by 1 and kept in 0 ≤ x < 2π: x = 2π/3, 5π/3 "
-       ],
-       "role": "strategy",
-       "instance": "gen:atprinc:2,0,1,1"
-      }
-     ],
-     "guided": "gen:atprinc:2,0,1,0",
-     "check": "gen:atprinc:0,7,2,0"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:atprinc:0,5,1,1",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Solve 2 sin x − 1 = 0 for 0 ≤ x < 2π (x in radians). Give every solution in radians, in terms of π, separated by commas (type π or pi): for example π/4, 3π/2 (and 0 for x = 0).” A common wrong answer is π/6.",
-        "Only the principal value was given; sin takes each value twice in every 2π, so look in every quadrant where it has this sign."
-       ],
-       "math": [
-        "Not π/6, but π/6, 5π/6"
-       ]
-      }
-     ],
-     "guided": "gen:atprinc:2,4,3,0",
-     "check": "gen:atprinc:2,0,3,1"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Evaluate inverse trigonometric functions. If a step is slow, practise that skill first.",
-        "Then the method is: Find the reference angle from the standard values (π/6, π/4, π/3), place it in each quadrant where the function has the right sign, then (for kx) add multiples of 2π until kx reaches 2kπ, and divide by k."
-       ]
-      }
-     ],
-     "guided": "gen:atprinc:1,3,1,1",
-     "check": "gen:atprinc:2,0,3,0"
-    }
-   ],
-   "practice": [
-    "gen:atprinc:1,3,1,0",
-    "gen:atprinc:0,4,2,0",
-    "gen:atprinc:0,0,3,0",
-    "gen:atgen:0,3,2,1"
-   ],
-   "transfer": [
-    "gen:atprinc:0,7,3,0:w",
-    "gen:atgen:0,3,2,0:w"
-   ],
-   "retention": [
-    "gen:atprinc:1,7,1,0",
-    "gen:atgen:2,4,1,1"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "atprinc",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "atprinc",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atgen",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "atprinc",
-    "seed": [
-     0,
-     5,
-     1,
-     0
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:atprinc:0,5,1,0",
-     "gen:atprinc:0,5,1,1",
-     "gen:atprinc:1,6,3,1"
     ]
    }
   },
