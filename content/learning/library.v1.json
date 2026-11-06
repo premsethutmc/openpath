@@ -2908,12 +2908,12 @@
       "When the coefficient of x or the numbers are negative, the method is the same: undo in reverse order. Take care when subtracting a negative (which adds) and when dividing by a negative (which changes the sign of the result)."
      ],
      "math": [
-      "−6x − 9 = 3",
-      "Add 9 to both sides: −6x = 12",
-      "Divide both sides by −6: x = −2"
+      "−4x − 10 = −6",
+      "Add 10 to both sides: −4x = 4",
+      "Divide both sides by −4: x = −1"
      ],
      "role": "concept",
-     "instance": "gen:lneg:-6,-9,-2"
+     "instance": "gen:lneg:-4,-10,-1"
     },
     {
      "title": "Word problems that lead to a linear equation",
@@ -2990,8 +2990,7 @@
      "title": "Do the same to both sides",
      "kind": "procedural",
      "needs": [
-      "gen:aiint:3,-9,1",
-      "gen:ajimul:-6,-2"
+      "gen:aiint:-6,-10,1"
      ],
      "screens": [
       {
@@ -3023,7 +3022,7 @@
         "When dividing (or multiplying), two numbers with the same sign give a positive result and two numbers with different signs give a negative result. This decides the sign of x."
        ],
        "role": "strategy",
-       "instance": "gen:lneg:-6,-9,-2"
+       "instance": "gen:lneg:-4,-10,-1"
       }
      ],
      "guided": "gen:lneg:-3,3,-6",
@@ -3038,7 +3037,7 @@
       {
        "title": "Subtracting a negative adds",
        "text": [
-        "3 − (−9) = 3 + 9 = 12: taking away a negative number is the same as adding it. And 12 ÷ (−6) = −2: different signs give a negative result. If either is slow, practise integer arithmetic first."
+        "−6 − (−10) = −6 + 10 = 4: taking away a negative number is the same as adding it. And 4 ÷ (−4) = −1: different signs give a negative result. If either is slow, practise integer arithmetic first."
        ],
        "role": "prerequisite"
       }
@@ -3065,8 +3064,7 @@
     "gen:aelinw:2,5,11:mc"
    ],
    "probes": [
-    "gen:aiint:3,-9,1",
-    "gen:ajimul:-6,-2"
+    "gen:aiint:-6,-10,1"
    ],
    "pool": {
     "family": "lneg",
@@ -3095,16 +3093,16 @@
     "policy": "library@2",
     "family": "lneg",
     "seed": [
-     -6,
-     -9,
-     -2
+     -4,
+     -10,
+     -1
     ],
     "blueprintVersion": "1.0.0",
     "author": "OpenPath (written with AI assistance; not educator-reviewed)",
     "aiAssisted": true,
     "licence": "CC0",
     "examples": [
-     "gen:lneg:-6,-9,-2",
+     "gen:lneg:-4,-10,-1",
      "gen:lneg:5,-5,9"
     ]
    }

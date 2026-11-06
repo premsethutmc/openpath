@@ -1249,9 +1249,9 @@
    "title": "Solving a linear equation with negative numbers",
    "family": "lneg",
    "seed": [
-    -6,
-    -9,
-    -2
+    -4,
+    -10,
+    -1
    ],
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
    "aiAssisted": true,
@@ -1263,9 +1263,9 @@
       "When the coefficient of x or the numbers are negative, the method is the same: undo in reverse order. Take care when subtracting a negative (which adds) and when dividing by a negative (which changes the sign of the result)."
      ],
      "math": [
-      "−6x − 9 = 3",
-      "Add 9 to both sides: −6x = 12",
-      "Divide both sides by −6: x = −2"
+      "−4x − 10 = −6",
+      "Add 10 to both sides: −4x = 4",
+      "Divide both sides by −4: x = −1"
      ]
     }
    ],
@@ -1330,7 +1330,7 @@
       {
        "title": "Subtracting a negative adds",
        "text": [
-        "3 − (−9) = 3 + 9 = 12: taking away a negative number is the same as adding it. And 12 ÷ (−6) = −2: different signs give a negative result. If either is slow, practise integer arithmetic first."
+        "−6 − (−10) = −6 + 10 = 4: taking away a negative number is the same as adding it. And 4 ÷ (−4) = −1: different signs give a negative result. If either is slow, practise integer arithmetic first."
        ]
       }
      ]

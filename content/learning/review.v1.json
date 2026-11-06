@@ -30726,7 +30726,7 @@
    "competency": "MATH.algebra.linear-rational",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "675d90ae",
+   "contentHash": "4a75f286",
    "state": "draft",
    "history": [
     {
@@ -30791,6 +30791,14 @@
      "role": "engineer",
      "at": "2026-11-06T04:24:24.426Z",
      "contentHash": "675d90ae",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-06T05:49:45.111Z",
+     "contentHash": "4a75f286",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
