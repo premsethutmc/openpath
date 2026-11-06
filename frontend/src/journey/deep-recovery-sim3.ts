@@ -89,7 +89,7 @@ export function simulate3(engine: Engine, ok: OK, type: string, seed: number) {
       let evFrom = s.events.length, repFrom = s.replies.length;
       let outcome: string, diagnosis: string | null = null, cause: string | null = null, effort: number | null = null, designated: string[] = [], status = "ok";
       if (engine === "app") {
-        const r = runScenario({ id: `sim3-${seed}`, category: 3, start: orig, entry: "practice", expect: {}, learner: () => ({ name: type, act: (v) => ({ answer: L.answer(v.q, { taughtSkills: v.taughtSkills, answered: v.answered }) }) }) } as never);
+        const r = runScenario({ id: `sim3-${seed}`, category: 3, start: orig, entry: "practice", expect: {}, learner: () => ({ name: type, act: (v: { q: string; taughtSkills: string[]; answered: number }) => ({ answer: L.answer(v.q, { taughtSkills: v.taughtSkills, answered: v.answered }) }) }) } as never);
         // the app's own session (its own learner id and records) is the one measured
         s = r.f.session; evFrom = 0; repFrom = 0;
         outcome = `app:${r.f.ended?.phase ?? (r.terminated ? "ended" : "running")}`;

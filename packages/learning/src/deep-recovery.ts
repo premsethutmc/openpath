@@ -142,7 +142,8 @@ const firstPassing = (lists: (() => string[])[], ok: (id: string) => boolean): s
   for (const list of lists) for (const id of list()) if (ok(id)) { if (!isChoice(id)) return id; choice ??= id; }
   return choice;
 };
-const PHASES: Phase[] = ["diagnostic", "practice", "check", "transfer", "retention"];
+// "transfer" is not a pool Phase (families.ts); its pool is empty at run time. Cast kept so the scan order is byte-for-byte unchanged.
+const PHASES = ["diagnostic", "practice", "check", "transfer", "retention"] as Phase[];
 
 /** How a question is judged to test the same skill as the original, from the existing mappings only. */
 export function originalMatcher(originalQid: string): { scope: string | null; accepts: (qid: string) => boolean } {
