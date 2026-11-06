@@ -9,6 +9,7 @@ import { question } from "../../../packages/learning/src/content";
 import { graph } from "../../../packages/learning/src/graph";
 import { deepScreen } from "../learning/deep-recovery-app";
 import { Ask, Feedback, Lesson, type Ctx, type Fb } from "./Learn";
+import { DeepRecoveryHandoff } from "./DeepRecoveryHandoff";
 
 const nameOf = (id: string) => (graph.byId.has(id) ? graph.get(id).name : id);
 
@@ -59,7 +60,8 @@ export function DeepRecovery({ original, ctx, onExit, exitLabel = "Back to the y
       <div className={`feedback ${good ? "good" : s.phase === "pause" ? "" : "bad"}`} role="status">
         <strong>{s.title}</strong>
         <p>{s.reason}</p>
-        {s.handover && <p className="small" data-deep-handover={s.phase}>Nothing here is counted as solved. Your answers so far are saved in your record, where a teacher or parent can go through them with you. OpenPath has not sent this to anyone.</p>}
+        {/* recovery-handoff@0 hook (worker D): the same note until the server confirms a hand-off */}
+        {s.handover && <DeepRecoveryHandoff original={original} screen={s} learner={learner} />}
       </div>
       <button className="secondary wide" onClick={onExit}>{exitLabel}</button>
     </div>
