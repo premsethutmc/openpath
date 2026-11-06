@@ -34,6 +34,7 @@ import { Module, Recovery, Single, STATUS_WORD, type Ctx } from "./Learn";
 import { DeepRecovery } from "./DeepRecovery";
 import { deepRecoveryOn } from "./deep-recovery-flag";
 import { openDeepRecoveries } from "../learning/deep-recovery-app";
+import { deepGoalModule } from "../learning/deep-goal";
 import "../mathematics/chapter/chapter.css";
 import "./year.css";
 
@@ -235,7 +236,8 @@ function App() {
   const name = pupils.find((p) => p.id === learner)?.display_name ?? "Learner";
   const ctx: Ctx = {
     records: st.records.pathway?.active ? st.selectionRecords : st.records,
-    ...(st.records.pathway?.active ? { module: st.module } : {}),
+    // deep-recovery@0 on one learning goal (research switch; deep-goal.ts): only that goal's "recover" changes
+    ...(st.records.pathway?.active ? { module: DEEP ? deepGoalModule(true, st.module, st.selectionRecords, st.selectionEvidence, now) : st.module } : {}),
     evidence: st.records.pathway?.active ? st.selectionEvidence : st.evidence,
     now,
     session,

@@ -23,6 +23,7 @@ import { make } from "../../packages/learning/src/session";
 import { structuredLearner, type Answerer } from "../src/journey/deep-recovery-journey";
 import { right, wrong } from "../src/journey/learners";
 import { creditOf } from "../../packages/learning/src/grade";
+import { withBugs } from "../src/journey/deep-goal-driver";
 
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_PATH ?? "playwright") as typeof import("playwright");
 const root = fileURLToPath(new URL("../dist-english/", import.meta.url)), port = Number(process.env.PORT ?? 4202);
@@ -242,6 +243,169 @@ try {
     assert.equal(await page.locator("[data-deep-recovery]").count(), 0, "off is remembered; ?stuck alone does nothing");
     results.flagoff = { shipped: true };
   }
+  // ======== the module path and one learning goal (DEEP_CASES "module", "goal"; the default research build) ========
+  // one action on whatever the page shows; returns what it did (the learner-visible screen is recorded)
+  type Seen = { where: "deep" | "module"; kind: string; phase: string | null; eyebrow: string; why: string; qid?: string; right?: boolean; skill?: string };
+  const visible = async (): Promise<Seen> => {
+    await page.waitForFunction(() => !!document.querySelector("[data-qid], .lesson, .feedback[role=status], [data-deep-screen]"), null, { timeout: 30_000 });
+    const deep = (await page.locator("[data-deep-screen]").count()) > 0;
+    const kind = (await page.locator("[data-qid]").count()) ? "question" : (await page.locator(".lesson").count()) ? "lesson" : "status";
+    const txt = async (sel: string) => ((await page.locator(sel).count()) ? (await page.locator(sel).first().innerText()).trim() : "");
+    return { where: deep ? "deep" : "module", kind, phase: deep ? await page.locator("[data-deep-phase]").first().getAttribute("data-deep-phase") : null, eyebrow: await txt(deep ? "[data-deep-screen] .eyebrow" : ".lesson .eyebrow, .eyebrow"), why: await txt(".why"),
+      ...(kind === "question" ? { qid: (await page.locator("[data-qid]").getAttribute("data-qid"))! } : {}) };
+  };
+  async function act(L: Answerer, seen: Seen[]): Promise<Seen> {
+    const v = await visible();
+    if (v.kind === "lesson") { v.skill = (await page.locator("h1, h2").first().innerText()); await lesson(); seen.push(v); return v; }
+    if (v.kind === "question") {
+      v.skill = graph.evidenceTarget(question(base(v.qid!)).competency);
+      await answerInUi(L(v.qid!, { taughtSkills: await taughtSkills(), answered: seen.length, activity: "" }));
+      await page.locator(".feedback[role=status] strong").first().waitFor();
+      v.right = (await page.locator(".feedback[role=status] strong").first().innerText()) === "Right.";
+      seen.push(v);
+      const btn = page.locator(".actions.sticky button.primary").first();
+      const h = await btn.elementHandle();
+      await btn.click();
+      await h?.waitForElementState("hidden", { timeout: 15_000 }).catch(() => undefined);
+      return v;
+    }
+    v.why = await (async () => ((await page.locator(".feedback[role=status]").count()) ? (await page.locator(".feedback[role=status]").first().innerText()).trim() : v.why))();
+    seen.push(v);
+    return v;
+  }
+  const short = (xs: Seen[]) => xs.map((x) => `${x.where[0]}:${x.phase ?? ""}:${x.kind}${x.skill ? "@" + x.skill.replace(/^MATH\.\w+\./, "") : ""}${x.right === undefined ? "" : x.right ? "+" : "-"}`).join(" ");
+  async function bare(name: string, grade: number) {
+    const pupil = await call("/pupils/", { display_name: `Synthetic deep ${name}`, consent: true }); assert.equal(pupil.status, 201);
+    id = pupil.data.id;
+    const d = await saved();
+    assert.equal((await call(`/pupils/${id}/events/`, { subject: "mathematics", seq: d.count, event: make.enrol({ learnerId: id, sessionId: `learn:${id}:seed`, at: new Date().toISOString() }, grade, "2026-27", latestReleases.find((r) => r.grade === grade)!) })).status, 201);
+  }
+  const PV = "MATH.number.place-value-tens", CMP = "MATH.number.compare-numbers";
+  // the shipped Recovery view's own headings (Learn.tsx Recovery)
+  const SHIPPED = /Finding what this problem needs|Working out what happened|Learning the step that went wrong|A problem you are stuck on|Back to the original problem/i;
+  const shippedShown = async () => SHIPPED.test(await page.locator("body").innerText()) && (await page.locator("[data-deep-recovery]").count()) === 0;
+  const pvLearner = () => withBugs(structuredLearner({ [PV]: [CMP] }, [CMP]));
+
+  if (want("module")) {
+    await bare("module", 2);
+    const L = pvLearner(), seen: Seen[] = [];
+    const openModule = (flag = "1") => page.goto(`http://127.0.0.1:${port}/year/?learner=${id}&skill=${PV}&deep=${flag}`);
+    await openModule();
+    // the module's own questions until its recovery opens
+    for (let i = 0; i < 12 && (await visible()).where === "module"; i++) await act(L, seen);
+    const first = await visible();
+    assert.equal(first.where, "deep", `the module opened deep recovery from its own wrong answer: ${short(seen)}`);
+    assert.ok(seen.some((x) => x.where === "module" && x.kind === "question" && x.right === false), "the module's own question was wrong");
+    // on to the first deep lesson; reload mid-lesson (the URL keeps the module)
+    for (let i = 0; i < 20 && (await visible()).kind !== "lesson"; i++) await act(L, seen);
+    const l1 = await visible();
+    assert.equal(l1.where, "deep"); assert.equal(l1.kind, "lesson");
+    await page.reload();
+    const l2 = await visible();
+    assert.deepEqual([l2.where, l2.kind, l2.eyebrow], [l1.where, l1.kind, l1.eyebrow], "reload mid-lesson: same deep lesson");
+    await act(L, seen);
+    // reload mid-question
+    const q1 = await visible();
+    await page.reload();
+    const q2 = await visible();
+    assert.deepEqual([q2.where, q2.phase, q2.qid], [q1.where, q1.phase, q1.qid], "reload mid-question: same deep question");
+    // sign out mid-recovery, sign in again, reopen the module
+    assert.ok((await call("/account/logout/", {})).status < 300);
+    await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}`);
+    await page.getByRole("button", { name: /sign in/i }).first().waitFor();
+    assert.ok([200, 201].includes((await call("/account/login/", { email, password })).status));
+    await openModule();
+    const q3 = await visible();
+    assert.deepEqual([q3.where, q3.phase, q3.qid], [q1.where, q1.phase, q1.qid], "after signing in again: same deep question");
+    // to the end of the module
+    let last: Seen = q3;
+    for (let i = 0; i < 80 && last.kind !== "status"; i++) last = await act(L, seen);
+    const deep = seen.filter((x) => x.where === "deep");
+    const returns = deep.filter((x) => x.phase === "return");
+    assert.ok(deep.some((x) => x.phase === "probe" && x.skill === CMP && x.right === false), short(seen));
+    assert.ok(returns.length >= 1 && returns.every((x) => x.skill === PV && x.right), `fresh place-value problems, right: ${short(seen)}`);
+    const orig = (await saved()).events.find((e) => e.record === "attempt" && e.context?.startsWith("deep:"))!.context!.split("|")[0].slice(5);
+    for (const r of returns) assert.notEqual(exposureKey(r.qid!), exposureKey(orig), "never the same problem");
+    const after = seen.slice(seen.lastIndexOf(returns.at(-1)!) + 1);
+    assert.ok(after.length >= 1 && after.every((x) => x.where === "module"), `the module continues after the recovery: ${short(after)}`);
+    const lessons = (await saved()).events.filter((e) => e.record === "teach");
+    assert.ok(lessons.some((t) => graph.evidenceTarget(t.competency!) === CMP && t.episode?.startsWith(`deep:${orig}#`)), "the compare-numbers lesson carries its recovery id");
+    if (shots) await page.screenshot({ path: `${shots}/deep-module-end.png`, fullPage: true });
+    results.module = { trace: short(seen), end: last.why, screens: seen.map(({ where, kind, phase, eyebrow, why }) => ({ where, kind, phase, eyebrow, why: why.slice(0, 200) })) };
+    // switch off: the same learner and module show the shipped recovery, and nothing is saved with a deep context
+    await bare("module-off", 2);
+    const off: Seen[] = [];
+    await openModule("0");
+    let shippedSeen = false;
+    for (let i = 0; i < 12; i++) { await visible(); if ((shippedSeen = await shippedShown())) break; const v = await act(pvLearner(), off); assert.notEqual(v.where, "deep"); if (v.kind === "status") break; }
+    assert.ok(shippedSeen, `switch off: the shipped recovery: ${short(off)}`);
+    assert.ok(!(await saved()).events.some((e) => e.context?.startsWith("deep:")));
+    results.moduleOff = { trace: short(off), shippedRecovery: shippedSeen };
+  }
+
+  if (want("goal")) {
+    const OWNI = "MATH.calculus.integration-methods", EXP = "MATH.number.exponents";
+    await bare("goal", 12);
+    const L = withBugs(structuredLearner({ "fam:subst": [EXP] }, [EXP])), seen: Seen[] = [];
+    // choose the learning goal in the year page, as a learner does
+    await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}&foundation=1&deep=1`);
+    await page.getByLabel("Target topic").selectOption(OWNI);
+    await page.getByRole("button", { name: "Use this learning goal" }).click();
+    await page.getByText("Current goal: Integrate by substitution and parts").waitFor();
+    const nextCard = async () => ((await page.locator("div.next").count()) ? (await page.locator("div.next").first().innerText()).trim() : "");
+    const cards: string[] = [];
+    const year = async () => { await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}`); await page.locator("div.next").first().waitFor(); const t = await nextCard(); cards.push(t); return t; };
+    let reloaded = false;
+    for (let i = 0; i < 60; i++) {
+      await year();
+      const start = page.locator("div.next button.primary");
+      if (!(await start.count())) break;
+      await start.first().click();
+      let v = await act(L, seen);
+      // inside the recovery the learner stays on the goal step's screen until it hands back to the goal
+      for (let k = 0; k < 60 && (await visible()).where === "deep"; k++) {
+        if (!reloaded && (await visible()).kind === "question" && seen.some((x) => x.where === "deep" && x.kind === "lesson")) {
+          const q1 = await visible();
+          await page.reload();                                  // the view is not in the URL: the year page comes back
+          await page.locator("div.next button.primary").first().click();
+          const q2 = await visible();
+          assert.deepEqual([q2.where, q2.phase, q2.qid], [q1.where, q1.phase, q1.qid], "reload mid-recovery: the goal's next step reopens the same deep question");
+          reloaded = true;
+        }
+        v = await act(L, seen);
+      }
+      void v;
+    }
+    const deep = seen.filter((x) => x.where === "deep");
+    assert.ok(reloaded, `reload checked mid-recovery: ${short(seen)}`);
+    assert.ok(deep.some((x) => x.kind === "lesson"), short(seen));
+    const returns = deep.filter((x) => x.phase === "return");
+    assert.ok(returns.length >= 2 && returns.slice(-2).every((x) => x.right) && returns.every((x) => x.skill === OWNI), `fresh problems on the goal's step: ${short(seen)}`);
+    assert.match(cards.at(-1)!, /requirements on this route are shown/, "the goal carried on to its own end");
+    const lessons = (await saved()).events.filter((e) => e.record === "teach");
+    assert.ok(lessons.some((t) => graph.evidenceTarget(t.competency!) === EXP && t.episode?.startsWith("deep:")));
+    results.goal = { trace: short(seen), nextCards: cards.filter((c, i) => c !== cards[i - 1]), screens: seen.filter((x) => x.where === "deep").map(({ kind, phase, eyebrow, why }) => ({ kind, phase, eyebrow, why: why.slice(0, 160) })) };
+    // an untouched goal (place-value-tens) with the switch on: its own shipped recovery, no deep view, no deep context
+    await bare("goal-untouched", 2);
+    await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}&foundation=1&deep=1`);
+    await page.getByLabel("Target topic").selectOption(PV);
+    await page.getByRole("button", { name: "Use this learning goal" }).click();
+    await page.getByText(/Current goal:/).waitFor();
+    const un: Seen[] = [];
+    let unShipped = false;
+    for (let i = 0; i < 14 && !unShipped; i++) {
+      await year();
+      if (!(await page.locator("div.next button.primary").count())) break;
+      await page.locator("div.next button.primary").first().click();
+      await visible();
+      unShipped = await shippedShown();
+      if (!unShipped) { const v = await act(pvLearner(), un); assert.notEqual(v.where, "deep"); unShipped = await shippedShown(); }
+    }
+    assert.equal(await page.locator("[data-deep-recovery]").count(), 0, "an untouched goal never shows the deep view");
+    assert.ok(!(await saved()).events.some((e) => e.context?.startsWith("deep:")), "nor saves a deep context");
+    results.goalUntouched = { trace: short(un), shippedRecoveryShown: unShipped };
+  }
+
   // ---- 7. the per-sitting limit (a --deep-sitting build): pause, reload stays paused, a later sitting resumes the same path
   if (want("pause")) {
     assert.ok(clockFile, "OPENPATH_TEST_CLOCK_FILE (the server's test clock) is needed to reach a later sitting");

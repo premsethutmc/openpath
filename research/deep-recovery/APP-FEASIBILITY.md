@@ -74,3 +74,49 @@ A synthetic success shows what the program does. It is not evidence that anyone 
   - a deep context does not change how an answer is decided;
   - earlier records read back unchanged after deep-recovery records are added.
 - **Prerequisite links for review:** `review/PREREQUISITE-LINKS.md` (pending educator review; nothing applied).
+
+## Phase 7 (branch research/dr7-goal): the module path in the browser, and one learning goal
+
+### The module path in the browser (case "module": real Django and Chromium)
+- **Setup:** a grade-2 synthetic pupil opens `?skill=MATH.number.place-value-tens&deep=1`. The learner is missing compare-numbers, and every wrong answer is the problem's first modelled bug, written in a shape the server can read.
+- **What happens:** two wrong exploratory answers in the module, then deep recovery opens inside the module:
+  - slip check;
+  - probes on count objects (right), combine quantities (right three times; a choice answer needs confirming) and compare numbers (wrong twice);
+  - the compare-numbers lesson, saved with its recovery ID;
+  - two fresh place-value problems, both right and never the original;
+  - the module continues on its own, all screens now the module's, and ends "Shown on your own, also on new problems".
+- **Interruptions:** a reload mid-lesson shows the same deep lesson. A reload mid-question shows the same question. After signing out and back in, reopening the module shows the same question.
+- **Switch off** (`?deep=0`): the same learner sees the shipped recovery heading ("A problem you are stuck on" or similar), and nothing is saved with a `deep:` context.
+- **What the learner sees, in order:**
+  1. "A short check to find the right starting point."
+  2. "ONE MORE OF THE SAME KIND": "One more of the same kind, to see whether that was a slip."
+  3. "FINDING WHAT THIS PROBLEM NEEDS: COMPARE AND ORDER NUMBERS": "Compose tens and ones builds on Compare and order numbers. A quick question on it first." Then "One more question on Compare and order numbers: one answer is not enough to tell a slip from a gap."
+  4. "LEARNING COMPARE AND ORDER NUMBERS": "Compare and order numbers: 0 right and 2 wrong on it in this recovery, and what it builds on was right. …"
+  5. "BACK TO A FRESH PROBLEM OF THE SAME KIND": "Back to a fresh problem of the same kind." Then "Right. One more fresh one of the same kind, to be sure."
+  6. Back in the module: "Shown on your own. More practice is optional." … and finally "Shown on your own, also on new problems … Your delayed check opens …".
+
+### One learning goal: target `MATH.calculus.integration-methods`
+- **Why this goal:** its route is just two steps, indefinite-integrals then integration-methods. The integration step's own problems (definite substitution, e.g. `gen:subst:2,3,2,3`) rest on exponent laws and multiplication facts, which the route never contains. The shipped two-level recovery cannot reach them; deep recovery can, and then brings the learner back to a fresh problem of that same step.
+- **The adapter** `frontend/src/learning/deep-goal.ts` wraps the goal's own module decision (`learnerState().module`, i.e. foundation-runtime `pathwayModule`). It is used only with the research switch on, only for the one goal in the allow-list, and only on a step of that goal's route. Within that, it changes only what happens where the goal's own decision is "recover":
+  - a deep episode still running or paused keeps the step on it;
+  - an episode that ended solved lets the goal carry on (`pathwayModule` with `withinRecovery`);
+  - a stopped episode pauses the step.
+  Every other decision is the goal's own.
+- **Wiring:** `Main.tsx` wraps `ctx.module` when the switch is on. `Learn.tsx` shows the deep view inside a goal only for this wrapper's "recover"; every other goal keeps the shipped recovery. This is a one-line hunk in worker C's block.
+- **Node tests** (`frontend/src/journey/deep-recovery-goal.test.ts`, 7, using the driver `deep-goal-driver.ts`):
+  - Single gap (exponents) and two gaps (multiplication facts, then exponents): the steps follow the goal's own order, deep lessons are taught bottom-up below the route, two fresh unaided integration problems follow, and the goal ends by its own rule: "The current evidence requirements on this route are shown…".
+  - A reload after every action gives the same trace. A reload mid-recovery shows the same screen.
+  - Switch off: the shipped decision, unchanged.
+  - An untouched goal (target place-value-tens): with the switch on, every decision is identical to switch off.
+  - No goal at all: the decision is unchanged.
+- **Browser** (case "goal"):
+  - The learner chooses the goal on the year page (`?foundation=1`, "Use this learning goal").
+  - The year page's Next card leads to "Find antiderivatives" (two right answers), then to "Integrate by substitution and parts" (two wrong answers).
+  - Deep recovery runs: probe on variables, then exponents wrong twice, multiplication facts right, exponents lesson, exponents right, two fresh integration problems right.
+  - Reload mid-recovery: the view is not kept in the URL, so the year page comes back; its Next card reopens the same deep question.
+  - The Next card ends "The current evidence requirements on this route are shown. … Choose a further supported goal when you are ready."
+  - An untouched goal (place-value-tens) with `?deep=1` shows the shipped recovery and saves no `deep:` context.
+
+### Found along the way and left unchanged
+- **Help versus own evidence:** after a deep episode ends "solved after help", the evidence engine counts the fresh return answers as the learner's own work. They were unaided and on fresh problems, but the lessons came just before them. In both the module and the goal, the step then shows "Shown on your own". This needs an evidence-policy decision (deep recovery's wording says it "counts as help"); I did not change it.
+- **Year page:** the "Continue where you left off" card reads the plain records, not the goal's records. In a goal, the learner resumes through the goal's Next card instead (tested).
