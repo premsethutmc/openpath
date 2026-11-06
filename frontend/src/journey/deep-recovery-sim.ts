@@ -45,7 +45,11 @@ export class SimLearner {
   learned = new Set<string>();
   private seen = 0;
   /** `wrongOf` (phase 6): how a wrong answer is written; default the shared learners.ts helper (phases 2-5, unchanged) */
-  constructor(readonly t: Truth, readonly rnd: () => number, readonly wrongOf: (q: string) => string = wrong) {}
+  readonly t: Truth;
+  readonly rnd: () => number;
+  readonly wrongOf: (q: string) => string;
+  // explicit fields (erasableSyntaxOnly: tsconfig.mathematics-integration.json); same behaviour as the former parameter properties
+  constructor(t: Truth, rnd: () => number, wrongOf: (q: string) => string = wrong) { this.t = t; this.rnd = rnd; this.wrongOf = wrongOf; }
   /** fold in lessons delivered since the last call: a gap skill is learnt when taught after every gap skill it rests on */
   sync(taught: string[]) {
     for (const s of taught.slice(this.seen)) if (this.t.gap.includes(s) && !this.t.noLearn?.includes(s) && (this.t.deps[s] ?? []).every((d) => !this.t.gap.includes(d) || this.learned.has(d))) this.learned.add(s);

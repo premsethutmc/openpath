@@ -1,4 +1,4 @@
-// FROZEN COPY of packages/learning/src/deep-recovery.ts at d98ba668 (phase-2 prototype), imports re-pointed only. For paired comparison in the phase-3 simulation; never edited.
+// FROZEN COPY of packages/learning/src/deep-recovery.ts at d98ba668 (phase-2 prototype), imports re-pointed and (phase 7) one type-only cast on PHASES for the typecheck (same run-time values). For paired comparison in the phase-3 simulation; logic never edited.
 /**
  * deep-recovery@0 (RESEARCH PROTOTYPE, opt-in, not wired into the app): diagnosis-and-return without a fixed depth.
  *
@@ -93,7 +93,8 @@ const familyOf = (qid: string) => (qid.startsWith("gen:") ? problemOf(base(qid))
 /** a question answered by choosing among options (the ":mc" format, or a choice item) */
 const isChoice = (qid: string) => { if (qid.endsWith(":mc")) return true; try { return !!question(qid).options?.length; } catch { return false; } };
 const openFirst = (ids: string[]) => ids.find((id) => !isChoice(id)) ?? ids[0] ?? null;
-const PHASES: Phase[] = ["diagnostic", "practice", "check", "transfer", "retention"];
+// "transfer" is not a pool Phase (families.ts); its pool is empty at run time. Cast kept so the scan order is byte-for-byte unchanged.
+const PHASES = ["diagnostic", "practice", "check", "transfer", "retention"] as Phase[];
 
 /** How a question is judged to test the same skill as the original, from the existing mappings only. */
 export function originalMatcher(originalQid: string): { scope: string | null; accepts: (qid: string) => boolean } {
