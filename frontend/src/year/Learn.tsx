@@ -24,6 +24,7 @@ import { decide } from "../../../packages/learning/src/session";
 import { deepRecoveryOn } from "./deep-recovery-flag";
 import { deepModuleState } from "../learning/deep-module";
 import { DEEP_GOAL_POLICY } from "../learning/deep-goal";
+import { afterHelpOf, qualifyReason, skillLabel } from "../learning/deep-evidence";
 import { DeepRecovery } from "./DeepRecovery";
 import { DeepModuleHandoff } from "./DeepRecoveryHandoff";
 // the build constant is read here directly (as in Main.tsx) so a shipped bundle folds this to false and never reads ?deep
@@ -330,6 +331,11 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
   const ms = ctx.module && !established ? ctx.module(competency, withinRecovery) : DEEP_MODULE ? deepModuleState(true, competency, ctx.records, ev, ctx.now, ctx.session, established, withinRecovery ? undefined : ctx.evidence) : moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established, withinRecovery ? undefined : ctx.evidence);
+  // deep-recovery@0 evidence after help (research switch; learning/deep-evidence.ts): after a deep episode's help the status reads
+  // "Solved independently after help" (never the unqualified "Shown on your own"); switch off: the same words as before
+  const afterHelp = DEEP_MODULE ? afterHelpOf(competency, ctx.records, ctx.evidence, ctx.now) : null;
+  const statusWord = skillLabel(DEEP_MODULE, ev.status, STATUS_WORD[ev.status], afterHelp);
+  const shownReason = qualifyReason(DEEP_MODULE, ms.reason, ev.status, afterHelp);
   const name = graph.get(competency).name;
   const step = flowIndex(ms.phase);
   const stepper = (
@@ -343,7 +349,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
     <>
       {!embedded && <p className="eyebrow">Skill</p>}
       {embedded ? <h2>{name}</h2> : <h1>{name}</h1>}
-      <div className="year-meta"><span className={`chip status-${ms.requirementsMet === false ? "active" : statusClass(ev.status)}`}>{ms.requirementsMet === false ? "More evidence needed" : STATUS_WORD[ev.status]}</span></div>
+      <div className="year-meta"><span className={`chip status-${ms.requirementsMet === false ? "active" : statusClass(ev.status)}`}>{ms.requirementsMet === false ? "More evidence needed" : statusWord}</span>{afterHelp && <span className="small muted" data-after-help={afterHelp.kind}> {afterHelp.note}</span>}</div>
       {stepper}
     </>
   );
@@ -374,7 +380,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
     return (
       <div className="stack">
         {head}
-        <p className="why">{ms.reason}</p>
+        <p className="why">{shownReason}</p>
         <Ask resumeKey={resumeKey && `${resumeKey}:${ms.question}`} key={ms.question} qid={ms.question} activity={ms.activity ?? activityOf(ms.phase, question(ms.question))} ctx={ctx} context={ms.context} hintAllowed={ms.phase === "guided"} onAnswered={setFb} />
       </div>
     );
@@ -383,8 +389,8 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
     <div className="stack">
       {head}
       <div className={`feedback ${ms.phase === "pause" ? "bad" : ms.phase === "waiting" ? "" : "good"}`} role="status">
-        <strong>{ms.phase === "pause" ? "Let's pause this one" : ms.phase === "waiting" ? "With an educator" : STATUS_WORD[ev.status]}</strong>
-        <p>{ms.reason}</p>
+        <strong>{ms.phase === "pause" ? "Let's pause this one" : ms.phase === "waiting" ? "With an educator" : statusWord}</strong>
+        <p>{shownReason}</p>
         {(() => { const n = scheduleNote(ms, Intl.DateTimeFormat().resolvedOptions().timeZone); return n ? <p className="small" data-handover={ms.handover?.route ?? "retention"}>{n}</p> : null; })()}
         {/* recovery-handoff@0 hook (worker D, research): a module paused by deep recovery hands the stopped episode over */}
         {DEEP_MODULE && ms.phase === "pause" && ms.why?.startsWith("deep-recovery-module@0: ") && <DeepModuleHandoff competency={competency} ctx={ctx} />}

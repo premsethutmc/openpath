@@ -120,3 +120,35 @@ A synthetic success shows what the program does. It is not evidence that anyone 
 ### Found along the way and left unchanged
 - **Help versus own evidence:** after a deep episode ends "solved after help", the evidence engine counts the fresh return answers as the learner's own work. They were unaided and on fresh problems, but the lessons came just before them. In both the module and the goal, the step then shows "Shown on your own". This needs an evidence-policy decision (deep recovery's wording says it "counts as help"); I did not change it.
 - **Year page:** the "Continue where you left off" card reads the plain records, not the goal's records. In a goal, the learner resumes through the goal's Next card instead (tested).
+
+## Phase 8 (branch research/dr8-evidence): evidence after help
+
+The owner's decision: keep both facts. A fresh problem answered right without hints, straight after a deep episode's help, was solved on the learner's own, but the skill was shown after help.
+
+- **New wrapper** `frontend/src/learning/deep-evidence.ts`. It reads the engine's evidence and never changes it. `afterHelpOf(skill, records, evidence, now)` works from the saved records only and returns:
+  - the solved-after-help episode;
+  - the help: the lessons carrying the episode's recovery ID, or attributed by adjacency on older records;
+  - the unaided answers: independent right answers on the skill after the last lesson, in that sitting;
+  - later checks: independent answers in a later sitting, on a problem key the episode never used, both right and wrong ones kept.
+
+  It does not apply when the skill was already shown before the episode began.
+- **Labels**, only when the engine status is independent, transfer or verified:
+  - "Solved independently after help", replacing "Shown on your own", its transfer wording and "Verified";
+  - after a later right check: "Solved independently after help; checked again later on your own". It is never "Verified" and never called mastery;
+  - after a later wrong check: the immediate success stays in the record and the note says "A later check on your own … was not right; the earlier success is still recorded".
+  The engine's other statuses are shown unchanged, with the after-help note beside them.
+- **Where, research switch on only:**
+  - module view (Learn.tsx): the status chip, the end-screen title, and a reason that opens with "Shown on your own";
+  - year page (Main.tsx): skill tiles, the tile's status fact, a note under the year totals, and, inside a learning goal, a note naming each route step that was solved after help (the goal step itself uses the module view);
+  - D's educator item shows no skill status (only the stop, reason, step and answers), so it needed no change.
+
+  Switch off: the same words as before (tested for every status).
+- **Engine change needed:** none. The year totals count the skill under "Shown on your own" because the engine's summary does; the note under them says how many of those were solved after help. A different count would need `yearSummary` to take a status mapper, which I have not done.
+- **Tests:** `frontend/src/journey/deep-recovery-evidence.test.ts`, 9 tests:
+  - single gap, multi gap, module (place value), goal step (integration methods), and angle-pairs route 1;
+  - a later check right, and a check in the same sitting not counting as later;
+  - a later check wrong;
+  - old records without recovery IDs;
+  - a reload giving identical facts, with help and unaided answers recoverable separately from the records alone;
+  - switch off unchanged.
+- **Browser:** the single-gap and module journeys now check the module chip ("Solved independently after help"), the note ("…straight after help with …"), the year-page note, and the module's end-screen title.

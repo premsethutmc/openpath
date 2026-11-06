@@ -100,6 +100,20 @@ async function lesson(stopAtScreen?: number) {
   await page.waitForFunction(() => !document.querySelector(".lesson"));
   return null;
 }
+// phase 8 (evidence after help): what the module view and the year page say about a skill shown after a deep episode's help
+async function afterHelpScreens(skill: string) {
+  await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}&skill=${skill}`);
+  await page.locator(".year-meta .chip").first().waitFor();
+  const chip = (await page.locator(".year-meta .chip").first().innerText()).trim();
+  const note = (await page.locator("[data-after-help]").count()) ? (await page.locator("[data-after-help]").first().innerText()).trim() : null;
+  await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}`);
+  await page.locator(".stats").first().waitFor();
+  const yearNote = (await page.locator("[data-after-help-count]").count()) ? (await page.locator("[data-after-help-count]").innerText()).trim() : null;
+  assert.equal(chip, "Solved independently after help", `module status chip for ${skill}`);
+  assert.ok(note && /straight after help/.test(note), `the help and the unaided success both stated: ${note}`);
+  assert.ok(yearNote && /solved independently after help/.test(yearNote), `year page: ${yearNote}`);
+  return { chip, note, yearNote };
+}
 interface Step { phase: string; qid?: string; right?: boolean }
 /** the UI loop: answer as the synthetic learner, read every lesson through, until the recovery ends (or `stop` says so) */
 async function drive(learner: Answerer, steps: Step[], stop?: (p: string, n: number) => boolean) {
@@ -165,8 +179,9 @@ try {
     const lessons = await lessonsHaveIds();
     const text = await endText();
     assert.equal(text.title, "Solved after help");
+    const afterHelp = await afterHelpScreens(OWN);
     if (shots) await page.screenshot({ path: `${shots}/deep-single-end.png`, fullPage: true });
-    results.single = { end, steps: steps.length, lessons, goal, text };
+    results.single = { end, steps: steps.length, lessons, goal, text, afterHelp };
   }
 
   // ---- 2. multi gap
@@ -331,7 +346,11 @@ try {
     const lessons = (await saved()).events.filter((e) => e.record === "teach");
     assert.ok(lessons.some((t) => graph.evidenceTarget(t.competency!) === CMP && t.episode?.startsWith(`deep:${orig}#`)), "the compare-numbers lesson carries its recovery id");
     if (shots) await page.screenshot({ path: `${shots}/deep-module-end.png`, fullPage: true });
-    results.module = { trace: short(seen), end: last.why, screens: seen.map(({ where, kind, phase, eyebrow, why }) => ({ where, kind, phase, eyebrow, why: why.slice(0, 200) })) };
+    const endTitle = (await page.locator(".feedback[role=status] strong").first().innerText()).trim();
+    assert.equal(endTitle, "Solved independently after help", "the module's end screen");
+    assert.doesNotMatch(last.why, /^Shown on your own/, "the end screen's reason is qualified");
+    const moduleAfterHelp = await afterHelpScreens(PV);
+    results.module = { endTitle, afterHelp: moduleAfterHelp, trace: short(seen), end: last.why, screens: seen.map(({ where, kind, phase, eyebrow, why }) => ({ where, kind, phase, eyebrow, why: why.slice(0, 200) })) };
     // switch off: the same learner and module show the shipped recovery, and nothing is saved with a deep context
     await bare("module-off", 2);
     const off: Seen[] = [];

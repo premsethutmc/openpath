@@ -36,6 +36,7 @@ import { deepRecoveryOn } from "./deep-recovery-flag";
 import { RecoveryAnswersPermission } from "./RecoveryAnswersPermission";
 import { openDeepRecoveries } from "../learning/deep-recovery-app";
 import { deepGoalModule } from "../learning/deep-goal";
+import { afterHelpOf, relabelTiles, type AfterHelp } from "../learning/deep-evidence";
 import "../mathematics/chapter/chapter.css";
 import "./year.css";
 
@@ -290,7 +291,11 @@ function App() {
   const grade = st.enrolment.grade;
   const activeGoals = [...st.records.goals.keys()];
   const goalOf = (c: string) => activeGoals.filter((g) => overlay(g, grade, assigned(release).map((a) => a.competency), st.evidence)?.foundations.includes(c));
-  const tiles = tilesFor(release, st.evidence, goalOf);
+  // deep-recovery@0 evidence after help (research switch; learning/deep-evidence.ts): a skill shown only after a deep episode's help
+  // reads "Solved independently after help" on its tile (never the unqualified "Shown on your own"); switch off: unchanged
+  const ahMemo = new Map<string, AfterHelp | null>();
+  const ahOf = (c: string, recs = st.records, ev = st.evidence) => { const k = `${recs === st.records ? "y" : "g"}:${c}`; if (!ahMemo.has(k)) ahMemo.set(k, afterHelpOf(c, recs, ev, now)); return ahMemo.get(k)!; };
+  const tiles = DEEP ? relabelTiles(tilesFor(release, st.evidence, goalOf), (c) => ahOf(c)) : tilesFor(release, st.evidence, goalOf);
   const open = (t: Tile, path: string[]) => {
     if (t.kind === "proposal" || t.kind === "unsupported") return;
     if (t.kind === "skill" && t.children.length === 0 && moduleFor(t.competency!) && t.content?.level === "module") return setView({ name: "module", competency: t.competency!, back: { name: "tile", path: path.slice(0, -1) } });
@@ -437,6 +442,8 @@ function App() {
         {st.records.pathway?.active && <button className="secondary" disabled={saving} onClick={() => save(make.pathway(ctxOf(), st.records.pathway!.target, false))}>Return to my year plan</button>}
       </section>}
       {st.records.pathway?.active && <p className="small muted">Year totals summarize answer evidence. Recommendations and competency claims consider skill coverage and diagnosed gaps. Your chapters remain open for teaching.</p>}
+      {DEEP && (() => { const all: (Tile & { afterHelp?: AfterHelp })[] = []; const walk = (ts: (Tile & { afterHelp?: AfterHelp })[]) => ts.forEach((t) => { all.push(t); walk(t.children); }); walk(tiles); const n = new Set(all.filter((t) => t.afterHelp).map((t) => t.competency)).size;
+        return n ? <p className="small muted" role="note" data-after-help-count={n}>{n === 1 ? "One skill" : `${n} skills`} counted below as shown on your own {n === 1 ? "was" : "were"} solved independently after help; a later check on your own will show whether {n === 1 ? "it has" : "they have"} stuck.</p> : null; })()}
       <div className="stats" role="list" aria-label="This year so far">
         <div className="stat verified" role="listitem"><b>{sum.verified}</b><span>Verified</span></div>
         <div className="stat shown" role="listitem"><b>{sum.shown}</b><span>Shown on your own</span></div>
@@ -467,6 +474,8 @@ function App() {
           <div className="section-title"><h2>Continue where you left off</h2></div>
           <div className="cards">{open.map((o) => <button key={o.original} className="card" data-deep-continue={o.original} onClick={() => setView({ name: "stuck", qid: o.original })}><span className="card-title">{graph.get(question(o.original).competency).name}</span><span className="card-sub">{o.screen.kind === "end" ? "Paused: your place is saved" : "A recovery in progress"}</span></button>)}</div>
         </section>) : null; })()}
+      {DEEP && st.records.pathway?.active && (() => { const route = st.selectionRecords.readinessRoute ?? []; const hits = route.map((c) => [c, ahOf(c, st.selectionRecords, st.selectionEvidence)] as const).filter(([, a]) => a);
+        return hits.length ? <p className="small" role="note" data-after-help-goal>{hits.map(([c, a]) => `${graph.get(c).name}: ${a!.label}.`).join(" ")}</p> : null; })()}
       {next.paused?.length ? <p className="why" role="note"><b>Paused for a teacher or parent:</b> {next.paused.map((id) => graph.get(id).name).join(", ")}. Different explanations have not worked yet, so OpenPath does not ask more on {next.paused.length > 1 ? "these" : "this"} on its own.</p> : null}
       {tiles.map((s) => (
         <section key={s.id} aria-label={s.title}>
@@ -654,7 +663,8 @@ function TileDetail({ t, ev, onStart }: { t: Tile; ev: Ctx["evidence"]; onStart?
         <div className="facts">
           <div className="fact"><b>{e.independent.right} / {e.independent.total}</b>right on your own</div>
           <div className="fact"><b>{e.assisted.right} / {e.assisted.total}</b>right with help</div>
-          <div className="fact"><b>{STATUS_WORD[e.status]}</b>status</div>
+          <div className="fact"><b>{(t as Tile & { afterHelp?: AfterHelp }).afterHelp?.label ?? STATUS_WORD[e.status]}</b>status</div>
+          {(t as Tile & { afterHelp?: AfterHelp }).afterHelp && <p className="small muted" data-after-help={(t as Tile & { afterHelp?: AfterHelp }).afterHelp!.kind}>{(t as Tile & { afterHelp?: AfterHelp }).afterHelp!.note}</p>}
           <div className="fact"><b>{delayedCheckFact(e, Intl.DateTimeFormat().resolvedOptions().timeZone).text}</b>delayed check</div>
         </div>
       )}
