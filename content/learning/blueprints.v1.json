@@ -663,6 +663,30 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "lineq"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:lineq:5,-6,14",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Solve 5x − 6 < 14. Write the answer as an inequality for x (e.g. x > 2).” A common wrong answer is x ≤ 4.",
+        "The boundary value was included; with < it is not part of the answer."
+       ],
+       "math": [
+        "Not x ≤ 4, but x < 4"
+       ]
+      }
+     ],
+     "guided": "gen:lineq:-1,5,-4",
+     "check": "gen:lineq:-4,13,1:mc"
+    },
+    {
      "id": "flip_rule",
      "title": "Why the sign flips",
      "kind": "conceptual",
@@ -737,6 +761,30 @@
     }
    ],
    "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "ahlike"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:ahlike:9,-9,-5,-3",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Simplify 9x − 9y − 5x − 3y.” A common wrong answer is −8xy.",
+        "x terms and y terms were added together into one term. Only like terms (the same letter) can be added: x terms with x terms, y terms with y terms."
+       ],
+       "math": [
+        "Not −8xy, but 4x − 12y"
+       ]
+      }
+     ],
+     "guided": "gen:ahlike:1,-9,1,1",
+     "check": "gen:ahlike:3,-7,-1,9:mc"
+    },
     {
      "id": "colour_groups",
      "title": "Group by letter",
@@ -848,6 +896,30 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "aqfp"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqfp:0,2,4,-1",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Using the definition f′(x) = lim (h → 0) [f(x + h) − f(x)]/h, find f′(x) for f(x) = 2x² + 4x − 1.” A common wrong answer is 4x + 3.",
+        "The constant −1 was kept; in f(x + h) − f(x) it cancels, so it does not appear in f′(x)."
+       ],
+       "math": [
+        "Not 4x + 3, but 4x + 4"
+       ]
+      }
+     ],
+     "guided": "gen:aqfp:0,4,-1,1",
+     "check": "gen:aqfp:0,1,-1,1:mc"
+    },
+    {
      "id": "expand_cancel",
      "title": "Simplify, cancel h, let h → 0",
      "kind": "procedural",
@@ -911,6 +983,30 @@
     }
    ],
    "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "atrad"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:atrad:-138",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Convert −690° into radians. Write the answer in terms of π (you may type pi).” A common wrong answer is −23π/12.",
+        "A full turn was taken as π radians; a full turn is 2π radians, and π is a half turn (180°)."
+       ],
+       "math": [
+        "Not −23π/12, but −23π/6"
+       ]
+      }
+     ],
+     "guided": "gen:atrad:97",
+     "check": "gen:atrad:-2:mc"
+    },
     {
      "id": "multiply_simplify",
      "title": "Multiply by π/180",
@@ -986,6 +1082,30 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "ansecpt"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:ansecpt:7,3,0,3",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “If sec θ + tan θ = 7/3 for an acute angle θ, find sin θ.” A common wrong answer is 29/20.",
+        "The ratio was turned upside down: sin θ = tan θ ÷ sec θ."
+       ],
+       "math": [
+        "Not 29/20, but 20/29"
+       ]
+      }
+     ],
+     "guided": "gen:ansecpt:7,5,0,2",
+     "check": "gen:ansecpt:5,3,1,2:mc"
+    },
+    {
      "id": "reciprocal_pair",
      "title": "Sum and difference are reciprocals",
      "kind": "conceptual",
@@ -1053,6 +1173,30 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "atsiner"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:atsiner:4,11",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “In triangle ABC, A = 30°, B = 135° and a = 11 cm. Using the sine rule, find b in cm. Give the exact value.” A common wrong answer is 99/2.",
+        "The sides were taken in the same ratio as the angles; sides are in the ratio of the SINES of the opposite angles."
+       ],
+       "math": [
+        "Not 99/2, but 11√2"
+       ]
+      }
+     ],
+     "guided": "gen:atsiner:8,11",
+     "check": "gen:atsiner:11,12:mc"
+    },
+    {
      "id": "set_up_proportion",
      "title": "Set up the proportion",
      "kind": "procedural",
@@ -1105,9 +1249,9 @@
    "title": "Solving a linear equation with negative numbers",
    "family": "lneg",
    "seed": [
+    -6,
     -9,
-    -20,
-    1
+    -2
    ],
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
    "aiAssisted": true,
@@ -1119,13 +1263,37 @@
       "When the coefficient of x or the numbers are negative, the method is the same: undo in reverse order. Take care when subtracting a negative (which adds) and when dividing by a negative (which changes the sign of the result)."
      ],
      "math": [
-      "−9x − 20 = −29",
-      "Add 20 to both sides: −9x = −9",
-      "Divide both sides by −9: x = 1"
+      "−6x − 9 = 3",
+      "Add 9 to both sides: −6x = 12",
+      "Divide both sides by −6: x = −2"
      ]
     }
    ],
    "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "lneg"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:lneg:-2,8,5",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Solve −2x + 8 = −2.” A common wrong answer is −3.",
+        "8 was moved to the other side without changing its sign: subtracting 8 from −2 gives −10."
+       ],
+       "math": [
+        "Not −3, but 5"
+       ]
+      }
+     ],
+     "guided": "gen:lneg:-4,2,-4",
+     "check": "gen:lneg:-5,11,-9:mc"
+    },
     {
      "id": "same_both_sides",
      "title": "Do the same to both sides",
@@ -1138,7 +1306,8 @@
        ],
        "worked": true
       }
-     ]
+     ],
+     "buildsOnPrerequisites": true
     },
     {
      "id": "negative_rules",
@@ -1161,7 +1330,7 @@
       {
        "title": "Subtracting a negative adds",
        "text": [
-        "−20 − (−20) = −20 + 20 = 0. Taking away a negative number is the same as adding it. If this is slow, practise integer arithmetic first."
+        "3 − (−9) = 3 + 9 = 12: taking away a negative number is the same as adding it. And 12 ÷ (−6) = −2: different signs give a negative result. If either is slow, practise integer arithmetic first."
        ]
       }
      ]
@@ -1206,6 +1375,30 @@
     }
    ],
    "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "aodom"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aodom:0,3,-2",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Find the domain of the real function f(x) = √(3x − 2). Write it in interval notation.” A common wrong answer is (2/3, ∞).",
+        "x = 2/3 was left out; √0 = 0 is a real number, so the end point belongs to the domain."
+       ],
+       "math": [
+        "Not (2/3, ∞), but [2/3, ∞)"
+       ]
+      }
+     ],
+     "guided": "gen:aodom:0,3,-9",
+     "check": "gen:aodom:4,-6,-4:mc"
+    },
     {
      "id": "restriction_rules",
      "title": "Write the condition, then solve it",
@@ -1273,6 +1466,30 @@
     }
    ],
    "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aologlaw"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aologlaw:4,4,-2",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Given log 2 = a and log 3 = b (logarithms to base 10), express log 51.84 in terms of a and b.” A common wrong answer is 2a + 2b.",
+        "log 5 was taken as log 2 + log 3, because 2 + 3 = 5; logs turn products into sums, and 5 = 10 ÷ 2, so log 5 = 1 − a."
+       ],
+       "math": [
+        "Not 2a + 2b, but 6a + 4b − 2"
+       ]
+      }
+     ],
+     "guided": "gen:aologlaw:-2,0,0",
+     "check": "gen:aologlaw:5,2,2:mc"
+    },
     {
      "id": "factorise_number",
      "title": "Break the number into 2s, 3s and 10s",
@@ -1361,6 +1578,30 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "atcomp"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:atcomp:1,1,1,1",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Use a compound-angle formula to find the exact value of cos(60° − 45°). Simplify fully, with no square root in the denominator.” A common wrong answer is (1 − √2)/2.",
+        "cos(A − B) was split as cos A − cos B; cos does not distribute over a sum, so use the compound-angle formula."
+       ],
+       "math": [
+        "Not (1 − √2)/2, but (√6 + √2)/4"
+       ]
+      }
+     ],
+     "guided": "gen:atcomp:14,0,1,2",
+     "check": "gen:atcomp:13,5,1,0:mc"
+    },
+    {
      "id": "values_first",
      "title": "Values first, then the formula",
      "kind": "procedural",
@@ -1431,6 +1672,30 @@
     }
    ],
    "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aqmono"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqmono:-4,0,-1,1,-1",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Find the interval(s) on which f(x) = −2x³ − 12x² − 1 is strictly decreasing. Write open intervals, joined by ∪ if there are two (for example (−∞, p) ∪ (q, ∞)).” A common wrong answer is (−4, 0).",
+        "The negative leading coefficient was ignored: f′ opens downwards, so it is positive between the roots and negative outside them."
+       ],
+       "math": [
+        "Not (−4, 0), but (−∞, −4) ∪ (0, ∞)"
+       ]
+      }
+     ],
+     "guided": "gen:aqmono:1,2,-1,0,-1",
+     "check": "gen:aqmono:-2,-1,1,1,1:mc"
+    },
     {
      "id": "sign_chart",
      "title": "Make a sign chart",
@@ -1515,6 +1780,30 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aqsep"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqsep:0,-3,-1,2",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Solve the differential equation dy/dx = (−3x − 1)y, given that y = 2 when x = 0. Write y in terms of x.” A common wrong answer is −3x²/2 − x + 2.",
+        "The y on the right was ignored and only (px + q) was integrated; divide by y first: dy/y = (px + q) dx."
+       ],
+       "math": [
+        "Not −3x²/2 − x + 2, but 2e^(−3x²/2 − x)"
+       ]
+      }
+     ],
+     "guided": "gen:aqsep:1,2,0,1",
+     "check": "gen:aqsep:1,2,0,5:mc"
+    },
+    {
      "id": "separate_integrate",
      "title": "Separate, integrate, find the constant",
      "kind": "procedural",
@@ -1581,6 +1870,30 @@
     }
    ],
    "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "lim"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:lim:6,1",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Find lim (x → 6) of (x² − 36) ⁄ (x − 6).” A common wrong answer is 0.",
+        "0 ⁄ 0 was taken as 0; it means the expression must be simplified first (factorise and cancel)."
+       ],
+       "math": [
+        "Not 0, but 12"
+       ]
+      }
+     ],
+     "guided": "gen:lim:8,4",
+     "check": "gen:lim:6,4:mc"
+    },
     {
      "id": "difference_of_squares",
      "title": "Spot the difference of two squares",
@@ -1667,6 +1980,30 @@
     }
    ],
    "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "atprinc"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:atprinc:0,5,1,1",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Solve 2 sin x − 1 = 0 for 0 ≤ x < 2π (x in radians). Give every solution in radians, in terms of π, separated by commas (type π or pi): for example π/4, 3π/2 (and 0 for x = 0).” A common wrong answer is π/6.",
+        "Only the principal value was given; sin takes each value twice in every 2π, so look in every quadrant where it has this sign."
+       ],
+       "math": [
+        "Not π/6, but π/6, 5π/6"
+       ]
+      }
+     ],
+     "guided": "gen:atprinc:2,4,3,0",
+     "check": "gen:atprinc:2,0,3,1"
+    },
     {
      "id": "quadrant_diagram",
      "title": "Use the quadrant signs",
@@ -4871,6 +5208,335 @@
      ],
      "guided": "gen:akdice:5,5,0,9:mc",
      "check": "gen:akdice:6,6,0,3"
+    }
+   ]
+  },
+  {
+   "competency": "MATH.algebra.geometric-sequences",
+   "title": "The nth term of a geometric progression",
+   "family": "aogp",
+   "seed": [
+    3,
+    2,
+    5
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Multiply by the same number each time",
+     "text": [
+      "In a geometric progression each term is the one before multiplied by the common ratio r. Find r by dividing the second term by the first. From the first term to the nth term there is one multiplication fewer than the term number, so the nth term is a times r to that power."
+     ],
+     "math": [
+      "aₙ = a × r^(n − 1)",
+      "3, 6, 12, …: r = 6 ÷ 3 = 2",
+      "5th term = 3 × 2⁴ = 3 × 16 = 48"
+     ]
+    },
+    {
+     "title": "A negative ratio",
+     "text": [
+      "When the ratio is negative the terms alternate in sign. Keep brackets round the negative ratio when you raise it to a power: an even power of a negative number is positive, an odd power is negative."
+     ],
+     "math": [
+      "2, −6, 18, …: r = −6 ÷ 2 = −3",
+      "5th term = 2 × (−3)⁴ = 2 × 81 = 162"
+     ],
+     "instance": "gen:aogp:2,-3,5"
+    }
+   ],
+   "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aogp"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aogp:-3,-3,8",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Find the 8th term of the geometric progression −3, 9, −27, …” A common wrong answer is 81.",
+        "The common difference was used as in an AP; each term here is −3 times the one before."
+       ],
+       "math": [
+        "Not 81, but 6561"
+       ]
+      }
+     ],
+     "guided": "gen:aogp:9,-3,4",
+     "check": "gen:aogp:5,-3,7:mc"
+    },
+    {
+     "id": "ratio_then_power",
+     "title": "Ratio, power, then multiply",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "In order",
+       "text": [
+        "Divide the second term by the first to get r. Raise r to the power one less than the term number. Multiply by the first term. Watch the sign when r is negative."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "count_multiplications",
+     "title": "Count the multiplications",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "One fewer than the term number",
+       "text": [
+        "From the first term to the second is one multiplication by r, to the third is two. So the nth term is one fewer than n multiplications away from the first term. Using n multiplications gives the term after it."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "powers_prereq",
+     "title": "Powers, including negative numbers",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "A power is repeated multiplication",
+       "text": [
+        "2⁴ = 2 × 2 × 2 × 2 = 16, not 2 × 4 = 8. (−3)³ = −27 and (−3)⁴ = 81: brackets keep the minus sign inside the power."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.calculus.continuity",
+   "title": "Choosing k to make a function continuous",
+   "family": "aqcontk",
+   "seed": [
+    0,
+    1,
+    1,
+    2,
+    2
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "The two pieces must meet",
+     "text": [
+      "f is continuous at the joining point when the left piece and the right piece give the same value there. Put the joining value of x into both pieces, set them equal and solve for k."
+     ],
+     "math": [
+      "Left piece at x = 1: k × 1 + 1 = k + 1",
+      "Right piece at x = 1: 2 × 1² + 2 = 4",
+      "k + 1 = 4, so k = 3"
+     ]
+    },
+    {
+     "title": "A gap at the point: k is the limit",
+     "text": [
+      "When the formula gives 0 ⁄ 0 at the point, f is continuous exactly when k equals the limit of the formula there. Use the standard limits, or rationalise a square root."
+     ],
+     "math": [
+      "sin θ ⁄ θ → 1 as θ → 0",
+      "sin(2x)/x = 2 × sin(2x)/(2x) → 2 × 1 = 2, so k = 2",
+      "1 − cos θ = 2 sin²(θ/2), so (1 − cos θ)/θ² → 1/2",
+      "(√(1 + mx) − 1)/x = m ⁄ (√(1 + mx) + 1) → m/2 (multiply top and bottom by √(1 + mx) + 1)"
+     ],
+     "instance": "gen:aqcontk:1,2,1,0,0"
+    },
+    {
+     "title": "A cube over a linear factor",
+     "text": [
+      "Factorise the difference of two cubes, a³ − b³ = (a − b)(a² + ab + b²), cancel the common factor, then substitute."
+     ],
+     "math": [
+      "x³ − 8 = (x − 2)(x² + 2x + 4)",
+      "Cancel (x − 2): x² + 2x + 4",
+      "At x = 2: 4 + 4 + 4 = 12, so k = 12"
+     ],
+     "instance": "gen:aqcontk:4,2,0,0,0"
+    }
+   ],
+   "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "aqcontk"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqcontk:1,1,3,0,0",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “f(x) = sin(x)/(3x) for x ≠ 0, and f(0) = k. Find the value of k for which f is continuous at x = 0.” A common wrong answer is 3.",
+        "The ratio was turned over, giving 3: the number in the sine goes on top, since sin(x)/(3x) = (1/3) × sin(x)/x, which tends to 1/3."
+       ],
+       "math": [
+        "Not 3, but 1/3"
+       ]
+      }
+     ],
+     "guided": "gen:aqcontk:0,1,3,2,-3",
+     "check": "gen:aqcontk:3,3,3,0,0:mc"
+    },
+    {
+     "id": "left_equals_right",
+     "title": "Make the two values equal",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "Set them equal, solve for k",
+       "text": [
+        "Write the value the function approaches at the point (from each piece, or the limit of the formula) and the value at the point. Set them equal and solve for k."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "why_continuous",
+     "title": "What continuous means",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "No jump and no gap",
+       "text": [
+        "Continuous at a point means you can draw the graph through it without lifting your pen: the value approached from the left, the value approached from the right and the value at the point are the same number."
+       ]
+      }
+     ]
+    },
+    {
+     "id": "standard_limits",
+     "title": "The limits you need",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "Three standard results",
+       "text": [
+        "sin θ / θ → 1 as θ → 0. 1 − cos θ = 2 sin²(θ/2), so (1 − cos θ)/θ² → 1/2. (√(1 + θ) − 1)/θ → 1/2, found by multiplying top and bottom by √(1 + θ) + 1. Scale each one for sin(mx), cos(mx) or √(1 + mx)."
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "competency": "MATH.trigonometry.functions",
+   "title": "Trigonometric functions of any angle",
+   "family": "atval",
+   "seed": [
+    1,
+    8
+   ],
+   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+   "aiAssisted": true,
+   "licence": "CC0",
+   "chapter": [
+    {
+     "title": "Reference angle and quadrant sign",
+     "text": [
+      "Bring the angle into one turn by adding or taking away whole turns. Its reference angle is its distance from the nearest part of the x-axis. The value is the reference angle's value with the sign of the function in that quadrant (All, Sin, Tan, Cos)."
+     ],
+     "math": [
+      "120° is in the second quadrant: reference angle 180° − 120° = 60°",
+      "cos is negative in the second quadrant",
+      "cos 120° = −cos 60° = −1/2"
+     ]
+    },
+    {
+     "title": "Negative or large angles, and cosec, sec, cot",
+     "text": [
+      "Add or take away whole turns to bring the angle into one turn. cosec, sec and cot are the reciprocals of sin, cos and tan: find sin, cos or tan first, then take the reciprocal and rationalise."
+     ],
+     "math": [
+      "−690° + 720° = 30°",
+      "sin 30° = 1/2, so cosec(−690°) = cosec 30° = 1 ⁄ (1/2) = 2"
+     ],
+     "instance": "gen:atval:3,-46"
+    }
+   ],
+   "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "atval"
+     },
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:atval:4,56",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Find the exact value of sec 840°. Simplify fully, with no square root in the denominator.” A common wrong answer is 2.",
+        "The sign was wrong: in the quadrant of 840°, sec is negative."
+       ],
+       "math": [
+        "Not 2, but −2"
+       ]
+      }
+     ],
+     "guided": "gen:atval:4,45",
+     "check": "gen:atval:4,34:mc"
+    },
+    {
+     "id": "reduce_then_sign",
+     "title": "One turn, reference angle, sign",
+     "kind": "procedural",
+     "screens": [
+      {
+       "title": "In order",
+       "text": [
+        "Add or take away whole turns. Find the quadrant and the reference angle. Write the value of the reference angle, then give it the sign of the function in that quadrant. For cosec, sec or cot take the reciprocal."
+       ],
+       "worked": true
+      }
+     ]
+    },
+    {
+     "id": "astc",
+     "title": "Which functions are positive where",
+     "kind": "conceptual",
+     "screens": [
+      {
+       "title": "All, Sin, Tan, Cos",
+       "text": [
+        "In the first quadrant all the functions are positive; in the second only sin and cosec; in the third only tan and cot; in the fourth only cos and sec. The reference angle is the angle to the x-axis."
+       ],
+       "math": [
+        "Second quadrant: reference angle = 180° − θ",
+        "Third quadrant: θ − 180°",
+        "Fourth quadrant: 360° − θ"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "special_values",
+     "title": "The special values",
+     "kind": "prerequisite",
+     "screens": [
+      {
+       "title": "sin, cos and tan of 0°, 30°, 45°, 60°, 90°",
+       "text": [
+        "sin: 0, 1/2, √2/2, √3/2, 1. cos: 1, √3/2, √2/2, 1/2, 0. tan: 0, 1/√3, 1, √3, and undefined at 90°. They come from half a square and half an equilateral triangle."
+       ]
+      }
+     ]
     }
    ]
   }

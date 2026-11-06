@@ -4,8 +4,13 @@
  *   calculus      MATH.calculus.limits             lim      "zero-for-undefined"  (0 ⁄ 0 taken as 0)
  *   algebra       MATH.algebra.inequalities        lineq    "keep-sign-negative"  (no flip when dividing by a negative)
  *   trigonometry  MATH.trigonometry.equations      atprinc  "principal-only"      (only the calculator's value)
+ *   batch 2       MATH.algebra.geometric-sequences aogp     "power-n"             (r to the power n, not n − 1)
+ *                 MATH.calculus.continuity         aqcontk  "no-divide"           (k·a = value, not divided by a)
+ *                 MATH.trigonometry.functions      atval    "quadrant-sign"       (the reference value's sign kept)
  * wrong answer → the engine's investigation → this module's explanation (pending educator review) → guided → a fresh unaided
- * check → save and reload; then, days later, the delayed check, and a wrong delayed answer recovered on the same module.
+ * check → save and reload; then, days later, the delayed check, and what the engine does after a wrong delayed answer.
+ * Each module keeps its template's misconception-specific explanation (spot_the_mistake), shown only for an established
+ * misconception, as before.
  * Synthetic learners only. The explanations are AI-assisted and await an educator: nothing here approves them.
  */
 import test from "node:test";
@@ -13,15 +18,19 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { moduleFor, question } from "../../../packages/learning/src/content";
 import { exposureKey, problemOf } from "../../../packages/learning/src/families";
-import { contentEligibility } from "../../../packages/learning/src/explanation-review";
+import { addressedMisconception, contentEligibility, isMisconceptionSpecific } from "../../../packages/learning/src/explanation-review";
 import { misconception, learners } from "./learners";
 import { runScenario, type Run } from "./scenarios";
 import { SliceSession } from "./session";
 
 const SKILLS = [
-  { domain: "calculus", competency: "MATH.calculus.limits", family: "lim", bug: "zero-for-undefined", strategies: ["difference_of_squares", "substitute_after", "check_factoring"] },
-  { domain: "algebra", competency: "MATH.algebra.inequalities", family: "lineq", bug: "keep-sign-negative", strategies: ["flip_rule", "solve_steps", "test_number"] },
-  { domain: "trigonometry", competency: "MATH.trigonometry.equations", family: "atprinc", bug: "principal-only", strategies: ["quadrant_diagram", "reference_then_place", "radians_check"] },
+  { domain: "calculus", competency: "MATH.calculus.limits", family: "lim", bug: "zero-for-undefined", strategies: ["spot_the_mistake", "difference_of_squares", "substitute_after", "check_factoring"] },
+  { domain: "algebra", competency: "MATH.algebra.inequalities", family: "lineq", bug: "keep-sign-negative", strategies: ["spot_the_mistake", "flip_rule", "solve_steps", "test_number"] },
+  { domain: "trigonometry", competency: "MATH.trigonometry.equations", family: "atprinc", bug: "principal-only", strategies: ["spot_the_mistake", "quadrant_diagram", "reference_then_place", "radians_check"] },
+  // batch 2
+  { domain: "algebra (GP)", competency: "MATH.algebra.geometric-sequences", family: "aogp", bug: "power-n", strategies: ["spot_the_mistake", "ratio_then_power", "count_multiplications", "powers_prereq"] },
+  { domain: "calculus (continuity)", competency: "MATH.calculus.continuity", family: "aqcontk", bug: "no-divide", strategies: ["spot_the_mistake", "left_equals_right", "why_continuous", "standard_limits"] },
+  { domain: "trigonometry (any angle)", competency: "MATH.trigonometry.functions", family: "atval", bug: "quadrant-sign", strategies: ["spot_the_mistake", "reduce_then_sign", "astc", "special_values"] },
 ] as const;
 type Skill = (typeof SKILLS)[number];
 const at = Date.parse("2026-11-06T09:00:00Z");
@@ -46,10 +55,17 @@ for (const S of SKILLS) test(`${S.domain}: the runtime module is the blueprint (
     assert.equal(last.status, "pending_review", `${id} awaits an educator`);
     assert.notEqual(last.provenance.source, "educator");
   }
-  // eligibility through the ordinary gate: shown (labelled) in the demonstration app, refused for supervised evaluation
+  // eligibility through the ordinary gate: shown (labelled) in the demonstration app, refused for supervised evaluation; a
+  // misconception-specific explanation (the template's spot_the_mistake, kept) needs the learner's established misconception
   for (const s of m.strategies) {
-    assert.equal(contentEligibility(m, s, { competency: S.competency, mode: "demonstration" }).eligible, true, `${s.id} demonstration`);
-    assert.equal(contentEligibility(m, s, { competency: S.competency, mode: "supervised-evaluation" }).eligible, false, `${s.id} supervised-evaluation`);
+    const specific = isMisconceptionSpecific(s), addresses = addressedMisconception(s);
+    if (specific) {
+      assert.ok(addresses, `${s.id} names the misconception it is about`);
+      assert.equal(contentEligibility(m, s, { competency: S.competency, mode: "demonstration" }).eligible, false, `${s.id} without evidence`);
+    }
+    const req = { competency: S.competency, ...(specific ? { misconceptionEvidence: [addresses!] } : {}) };
+    assert.equal(contentEligibility(m, s, { ...req, mode: "demonstration" }).eligible, true, `${s.id} demonstration`);
+    assert.equal(contentEligibility(m, s, { ...req, mode: "supervised-evaluation" }).eligible, false, `${s.id} supervised-evaluation`);
   }
 });
 
@@ -109,18 +125,12 @@ for (const S of SKILLS) test(`${S.domain}: in the module flow the error is taugh
 });
 
 /**
- * After a WRONG delayed answer the failure is kept and recovery starts. What recovery does next is the shared engine's
- * (intervention.ts) and differs by module at this base: inequalities and trigonometry equations investigate with a fresh
- * question on the same competency; limits checks a mandatory graph prerequisite (MATH.algebra.functions) and then shows this
- * module's prerequisite explanation. Teaching the same skill again after a lapse is the engine change in PR #115 (e1d5ed7),
- * not part of this branch: these tests pin today's behaviour so the integration shows the difference.
+ * After a WRONG delayed answer: the failure is kept, the engine verifies again with fresh questions on the same competency
+ * (no second teaching cycle after a lapse: product policy A1 at this base), and a new delayed check is planned. Recovery
+ * that teaches the same skill again after a lapse is the engine change in PR #115 (e1d5ed7), not part of this branch: this
+ * test pins today's behaviour so the integration shows any difference.
  */
-const AFTER_LAPSE: Record<string, { active: string | null; next: "investigate" | "prerequisite-teaching" }> = {
-  "MATH.calculus.limits": { active: "MATH.algebra.functions", next: "prerequisite-teaching" },
-  "MATH.algebra.inequalities": { active: null, next: "investigate" },
-  "MATH.trigonometry.equations": { active: null, next: "investigate" },
-};
-for (const S of SKILLS) test(`${S.domain}: a wrong delayed answer is kept as failed and starts recovery (behaviour pinned at this base)`, () => {
+for (const S of SKILLS) test(`${S.domain}: a wrong delayed answer is kept as failed, re-verified with fresh questions, and a new delayed check is planned`, () => {
   const r = flow(S);
   const evs = r.f.session.events;
   const i = evs.findIndex((e) => (e as { record?: string; activity?: string }).record === "attempt" && (e as { activity?: string }).activity === "retention");
@@ -135,19 +145,20 @@ for (const S of SKILLS) test(`${S.domain}: a wrong delayed answer is kept as fai
   assert.equal(L.state().evidence(S.competency).retentionHistory[0]?.result, "failed", "the failed delayed check stays failed");
   assert.ok(!["verified"].includes(L.state().evidence(S.competency).status), "not verified after a failed delayed check");
   const seen = new Set(L.state().records.attempts.map((a) => exposureKey(a.questionId)));
-  const rc = L.recover(n.question!);
-  const want = AFTER_LAPSE[S.competency];
-  assert.equal(rc.active ?? null, want.active, rc.reason);
-  if (want.next === "investigate") {
-    // the investigation question comes with the recovery decision, or as its first step
-    const q = rc.phase === "investigate" && rc.question ? rc.question : L.next(S.competency, { inRecovery: true }).question;
-    assert.ok(q, rc.reason);
-    assert.equal(question(q!).competency, S.competency, `investigation question ${q}`);
-    assert.ok(!seen.has(exposureKey(q!)), "a fresh question");
-  } else {
+  L.recover(n.question!);
+  const asked: string[] = [];
+  for (let k = 0; k < 6; k++) {
     const v = L.next(S.competency, { inRecovery: true });
-    assert.equal(v.phase, "chapter", v.reason);
-    assert.equal(v.strategy?.kind, "prerequisite");
-    assert.ok((S.strategies as readonly string[]).includes(v.strategy!.id), "this module's prerequisite explanation");
+    if (v.phase === "done") break;
+    // re-verification, or (continuity) one diagnostic question first: both ask a fresh question on the competency, and no
+    // second teaching cycle starts after the lapse
+    assert.ok(["verify", "explore"].includes(v.phase), `${v.phase}: ${v.reason}`);
+    assert.equal(question(v.question!).competency, S.competency, `verification question ${v.question}`);
+    assert.ok(!seen.has(exposureKey(v.question!)), `a fresh question: ${v.question}`);
+    seen.add(exposureKey(v.question!)); asked.push(v.question!);
+    L.submit(v.question!, question(v.question!).answer, "practice");
   }
+  assert.ok(asked.length > 0, "re-verified on the competency");
+  assert.deepEqual(L.state().evidence(S.competency).retentionHistory.map((c) => c.result), ["failed", "pending"], "failure kept, a new delayed check planned");
+  assert.notEqual(L.state().evidence(S.competency).status, "verified");
 });

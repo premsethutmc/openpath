@@ -1751,6 +1751,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "lineq"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:lineq:5,-6,14",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Solve 5x − 6 < 14. Write the answer as an inequality for x (e.g. x > 2).” A common wrong answer is x ≤ 4.",
+        "The boundary value was included; with < it is not part of the answer."
+       ],
+       "math": [
+        "Not x ≤ 4, but x < 4"
+       ]
+      }
+     ],
+     "guided": "gen:lineq:-1,5,-4",
+     "check": "gen:lineq:-4,13,1:mc"
+    },
+    {
      "id": "flip_rule",
      "title": "Why the sign flips",
      "kind": "conceptual",
@@ -1770,7 +1795,7 @@
       }
      ],
      "guided": "gen:lineq:2,-1,7",
-     "check": "gen:lineq:3,7,19"
+     "check": "gen:lineq:3,7,19:mc"
     },
     {
      "id": "solve_steps",
@@ -1784,16 +1809,16 @@
         "Move the constant to the other side. Then divide by the coefficient of x; if that coefficient is negative, reverse the sign. Write the answer as x > k or x < k."
        ],
        "math": [
-        "Solve 5x − 6 < 14. Write the answer as an inequality for x (e.g. x > 2).",
-        "Add 6 to both sides: the right side becomes 20",
-        "Divide both sides by 5: x < 4"
+        "Solve −3x + 9 < −12. Write the answer as an inequality for x (e.g. x > 2).",
+        "Take 9 from both sides: the right side becomes −21",
+        "Divide both sides by −3 and reverse the sign, because dividing by a negative number reverses an inequality: x > 7"
        ],
        "role": "worked-example",
-       "instance": "gen:lineq:5,-6,14"
+       "instance": "gen:lineq:-3,9,-12"
       }
      ],
-     "guided": "gen:lineq:-3,9,-12",
-     "check": "gen:lineq:-2,-12,10:mc"
+     "guided": "gen:lineq:5,-1,-1",
+     "check": "gen:lineq:-2,-12,10"
     },
     {
      "id": "test_number",
@@ -1809,21 +1834,21 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:lineq:5,-1,-1",
-     "check": "gen:lineq:-4,13,1"
+     "guided": "gen:lineq:-6,14,-16",
+     "check": "gen:lineq:-4,11,-5:mc"
     }
    ],
    "practice": [
-    "gen:lineq:-6,14,-16",
-    "gen:lineq:-2,-4,20:mc",
-    "gen:lineq:-1,5,-4",
+    "gen:lineq:-2,-4,20",
+    "gen:lineq:4,9,-7:mc",
+    "gen:lineq:4,12,4",
     "gen:aeineqz:2,4,5,14,1",
     "gen:aeineqs:-7,4,2,4,2",
     "gen:aeineqw:0,84,80,9",
     "gen:aenbhd:2,-9,9"
    ],
    "transfer": [
-    "gen:lineq:4,9,-7:mc",
+    "gen:lineq:3,11,-16:mc",
     "gen:aeineqz:2,5,7,18,0:w",
     "gen:aeineqs:6,7,3,1,3:w"
    ],
@@ -1873,7 +1898,7 @@
     "licence": "CC0",
     "examples": [
      "gen:lineq:-6,-15,-15",
-     "gen:lineq:5,-6,14"
+     "gen:lineq:-3,9,-12"
     ]
    }
   },
@@ -1940,6 +1965,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "ahlike"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:ahlike:9,-9,-5,-3",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Simplify 9x − 9y − 5x − 3y.” A common wrong answer is −8xy.",
+        "x terms and y terms were added together into one term. Only like terms (the same letter) can be added: x terms with x terms, y terms with y terms."
+       ],
+       "math": [
+        "Not −8xy, but 4x − 12y"
+       ]
+      }
+     ],
+     "guided": "gen:ahlike:1,-9,1,1",
+     "check": "gen:ahlike:3,-7,-1,9:mc"
+    },
+    {
      "id": "colour_groups",
      "title": "Group by letter",
      "kind": "procedural",
@@ -1951,17 +2001,17 @@
         "Rearrange so all the x terms are together and all the y terms are together. Keep each sign attached to its term. Then add the numbers in front of each group."
        ],
        "math": [
-        "Simplify 9x − 9y − 5x − 3y.",
-        "x terms: 9 − 5 = 4, so 4x",
-        "y terms: −9 − 3 = −12, so −12y",
-        "Together: 4x − 12y"
+        "Simplify 6x − 4y + 7x − y.",
+        "x terms: 6 + 7 = 13, so 13x",
+        "y terms: −4 − 1 = −5, so −5y",
+        "Together: 13x − 5y"
        ],
        "role": "worked-example",
-       "instance": "gen:ahlike:9,-9,-5,-3"
+       "instance": "gen:ahlike:6,-4,7,-1"
       }
      ],
-     "guided": "gen:ahlike:6,-4,7,-1",
-     "check": "gen:ahlike:8,-3,8,-4"
+     "guided": "gen:ahlike:6,2,4,3",
+     "check": "gen:ahlike:8,-3,8,-4:mc"
     },
     {
      "id": "apples_oranges",
@@ -1978,8 +2028,8 @@
        "instance": "gen:ahlike:1,-9,1,-7"
       }
      ],
-     "guided": "gen:ahlike:6,2,4,3",
-     "check": "gen:ahlike:2,-1,2,4:mc"
+     "guided": "gen:ahlike:7,-4,-1,-5",
+     "check": "gen:ahlike:2,-1,2,4"
     },
     {
      "id": "integer_add",
@@ -1995,20 +2045,20 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:ahlike:7,-4,-1,-5",
-     "check": "gen:ahlike:1,5,6,4"
+     "guided": "gen:ahlike:9,2,5,-3",
+     "check": "gen:ahlike:1,5,6,4:mc"
     }
    ],
    "practice": [
-    "gen:ahlike:9,2,5,-3",
-    "gen:ahlike:1,-8,8,-8:mc",
-    "gen:ahlike:7,-7,-2,-7",
+    "gen:ahlike:1,-8,8,-8",
+    "gen:ahlike:7,-7,-2,-7:mc",
+    "gen:ahlike:7,6,1,8",
     "gen:ahsub:12,-5,1,-10",
     "gen:ahcoef:9,2,-4,-5,1",
     "gen:ahpyr:0,11,11,13"
    ],
    "transfer": [
-    "gen:ahlike:7,6,1,8:mc",
+    "gen:ahlike:5,9,-4,1:mc",
     "gen:ahsub:8,-2,6,-6:w",
     "gen:ahpyr:0,11,1,11:w"
    ],
@@ -2055,7 +2105,7 @@
     "licence": "CC0",
     "examples": [
      "gen:ahlike:1,-9,1,-7",
-     "gen:ahlike:9,-9,-5,-3"
+     "gen:ahlike:6,-4,7,-1"
     ]
    }
   },
@@ -2140,6 +2190,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "aqfp"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqfp:0,2,4,-1",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Using the definition f′(x) = lim (h → 0) [f(x + h) − f(x)]/h, find f′(x) for f(x) = 2x² + 4x − 1.” A common wrong answer is 4x + 3.",
+        "The constant −1 was kept; in f(x + h) − f(x) it cancels, so it does not appear in f′(x)."
+       ],
+       "math": [
+        "Not 4x + 3, but 4x + 4"
+       ]
+      }
+     ],
+     "guided": "gen:aqfp:0,4,-1,1",
+     "check": "gen:aqfp:0,1,-1,1:mc"
+    },
+    {
      "id": "expand_cancel",
      "title": "Simplify, cancel h, let h → 0",
      "kind": "procedural",
@@ -2159,8 +2234,8 @@
        "instance": "gen:aqfp:0,1,-4,-5"
       }
      ],
-     "guided": "gen:aqfp:0,2,4,-1",
-     "check": "gen:aqfp:0,2,4,-4"
+     "guided": "gen:aqfp:2,1,3,0",
+     "check": "gen:aqfp:0,2,4,-4:mc"
     },
     {
      "id": "why_limit",
@@ -2177,8 +2252,8 @@
        "instance": "gen:aqfp:0,1,-5,-4"
       }
      ],
-     "guided": "gen:aqfp:2,1,3,0",
-     "check": "gen:aqfp:1,2,-2,0:mc"
+     "guided": "gen:aqfp:0,1,-4,-2",
+     "check": "gen:aqfp:1,2,-2,0"
     },
     {
      "id": "expansion_check",
@@ -2194,18 +2269,18 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:aqfp:0,1,-4,-2",
-     "check": "gen:aqfp:0,1,-1,1"
+     "guided": "gen:aqfp:0,3,2,4",
+     "check": "gen:aqfp:0,3,2,1:mc"
     }
    ],
    "practice": [
-    "gen:aqfp:0,3,2,4",
-    "gen:aqfp:1,4,4,0:mc",
-    "gen:aqfp:0,4,-1,1",
+    "gen:aqfp:1,4,4,0",
+    "gen:aqfp:0,3,3,0:mc",
+    "gen:aqfp:1,5,2,0",
     "gen:aqvel:1,-2,7,3"
    ],
    "transfer": [
-    "gen:aqfp:0,3,3,0:mc",
+    "gen:aqfp:0,3,3,3:mc",
     "gen:aqvel:1,0,7,3:w"
    ],
    "retention": [
@@ -2292,6 +2367,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "atrad"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:atrad:-138",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Convert −690° into radians. Write the answer in terms of π (you may type pi).” A common wrong answer is −23π/12.",
+        "A full turn was taken as π radians; a full turn is 2π radians, and π is a half turn (180°)."
+       ],
+       "math": [
+        "Not −23π/12, but −23π/6"
+       ]
+      }
+     ],
+     "guided": "gen:atrad:97",
+     "check": "gen:atrad:-2:mc"
+    },
+    {
      "id": "multiply_simplify",
      "title": "Multiply by π/180",
      "kind": "procedural",
@@ -2303,15 +2403,15 @@
         "Radians = degrees × π/180. Simplify the fraction by dividing the top and bottom by their highest common factor; keep a minus sign for a negative angle."
        ],
        "math": [
-        "Convert −690° into radians. Write the answer in terms of π (you may type pi).",
-        "−690° × π/180 = −23π/6"
+        "Convert −695° into radians. Write the answer in terms of π (you may type pi).",
+        "−695° × π/180 = −139π/36"
        ],
        "role": "worked-example",
-       "instance": "gen:atrad:-138"
+       "instance": "gen:atrad:-139"
       }
      ],
-     "guided": "gen:atrad:-139",
-     "check": "gen:atrad:-129"
+     "guided": "gen:atrad:-136",
+     "check": "gen:atrad:-129:mc"
     },
     {
      "id": "landmark_angles",
@@ -2332,8 +2432,8 @@
        "instance": "gen:atrad:-144"
       }
      ],
-     "guided": "gen:atrad:-136",
-     "check": "gen:atrad:-128:mc"
+     "guided": "gen:atrad:-137",
+     "check": "gen:atrad:-128"
     },
     {
      "id": "simplify_fraction",
@@ -2349,19 +2449,19 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:atrad:-137",
-     "check": "gen:atrad:-2"
+     "guided": "gen:atrad:96",
+     "check": "gen:atrad:-3:mc"
     }
    ],
    "practice": [
-    "gen:atrad:96",
-    "gen:atrad:97:mc",
     "gen:atrad:-7",
+    "gen:atrad:-4:mc",
+    "gen:atrad:-131",
     "gen:atdeg:3,1",
     "gen:atarc:2,6,3"
    ],
    "transfer": [
-    "gen:atrad:-4:mc",
+    "gen:atrad:89:mc",
     "gen:atdeg:-15,2:w",
     "gen:atarc:1,10,11:w"
    ],
@@ -2401,7 +2501,7 @@
     "licence": "CC0",
     "examples": [
      "gen:atrad:-144",
-     "gen:atrad:-138"
+     "gen:atrad:-139"
     ]
    }
   },
@@ -2443,6 +2543,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "ansecpt"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:ansecpt:7,3,0,3",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “If sec θ + tan θ = 7/3 for an acute angle θ, find sin θ.” A common wrong answer is 29/20.",
+        "The ratio was turned upside down: sin θ = tan θ ÷ sec θ."
+       ],
+       "math": [
+        "Not 29/20, but 20/29"
+       ]
+      }
+     ],
+     "guided": "gen:ansecpt:7,5,0,2",
+     "check": "gen:ansecpt:5,3,1,2:mc"
+    },
+    {
      "id": "reciprocal_pair",
      "title": "Sum and difference are reciprocals",
      "kind": "conceptual",
@@ -2457,8 +2582,8 @@
        "instance": "gen:ansecpt:2,1,0,0"
       }
      ],
-     "guided": "gen:ansecpt:7,3,0,3",
-     "check": "gen:ansecpt:6,1,1,1"
+     "guided": "gen:ansecpt:7,3,0,2",
+     "check": "gen:ansecpt:6,1,1,1:mc"
     },
     {
      "id": "add_subtract",
@@ -2472,16 +2597,16 @@
         "Add the sum and the difference and halve: that is sec θ (or cosec θ). Subtract and halve: that is tan θ (or cot θ). Then sin θ = tan θ ÷ sec θ, and cos θ = cot θ ÷ cosec θ."
        ],
        "math": [
-        "If sec θ + tan θ = 7/3 for an acute angle θ, find tan θ.",
+        "If sec θ + tan θ = 7/3 for an acute angle θ, find sec θ.",
         "(sec θ + tan θ)(sec θ − tan θ) = 1, so sec θ − tan θ = 1 ÷ 7/3 = 3/7",
-        "Subtract the two equations and halve: (7/3 − 3/7) ÷ 2 = 20/21"
+        "Add the two equations and halve: (7/3 + 3/7) ÷ 2 = 29/21"
        ],
        "role": "worked-example",
-       "instance": "gen:ansecpt:7,3,0,2"
+       "instance": "gen:ansecpt:7,3,0,1"
       }
      ],
-     "guided": "gen:ansecpt:7,3,0,1",
-     "check": "gen:ansecpt:6,1,1,0:mc"
+     "guided": "gen:ansecpt:7,3,0,0",
+     "check": "gen:ansecpt:6,1,1,0"
     },
     {
      "id": "fraction_arithmetic",
@@ -2497,19 +2622,19 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:ansecpt:7,3,0,0",
-     "check": "gen:ansecpt:5,3,1,2"
+     "guided": "gen:ansecpt:5,3,1,0",
+     "check": "gen:ansecpt:5,3,1,3:mc"
     }
    ],
    "practice": [
-    "gen:ansecpt:5,3,1,0",
-    "gen:ansecpt:5,3,1,1:mc",
-    "gen:ansecpt:7,5,0,2",
+    "gen:ansecpt:5,3,1,1",
+    "gen:ansecpt:3,1,1,1:mc",
+    "gen:ansecpt:3,1,1,2",
     "gen:anidsimp:15,6"
    ],
    "transfer": [
-    "gen:ansecpt:3,1,1,1:mc",
-    "gen:ansecpt:3,1,1,2:w"
+    "gen:ansecpt:3,1,1,3:mc",
+    "gen:ansecpt:5,2,1,0:w"
    ],
    "retention": [
     "gen:ansecpt:6,1,1,2",
@@ -2546,7 +2671,7 @@
     "licence": "CC0",
     "examples": [
      "gen:ansecpt:2,1,0,0",
-     "gen:ansecpt:7,3,0,2"
+     "gen:ansecpt:7,3,0,1"
     ]
    }
   },
@@ -2622,6 +2747,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "atsiner"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:atsiner:4,11",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “In triangle ABC, A = 30°, B = 135° and a = 11 cm. Using the sine rule, find b in cm. Give the exact value.” A common wrong answer is 99/2.",
+        "The sides were taken in the same ratio as the angles; sides are in the ratio of the SINES of the opposite angles."
+       ],
+       "math": [
+        "Not 99/2, but 11√2"
+       ]
+      }
+     ],
+     "guided": "gen:atsiner:8,11",
+     "check": "gen:atsiner:11,12:mc"
+    },
+    {
      "id": "set_up_proportion",
      "title": "Set up the proportion",
      "kind": "procedural",
@@ -2641,8 +2791,8 @@
        "instance": "gen:atsiner:5,20"
       }
      ],
-     "guided": "gen:atsiner:4,11",
-     "check": "gen:atsiner:4,14"
+     "guided": "gen:atsiner:4,12",
+     "check": "gen:atsiner:4,14:mc"
     },
     {
      "id": "obtuse_angle",
@@ -2664,8 +2814,8 @@
        "role": "strategy"
       }
      ],
-     "guided": "gen:atsiner:4,12",
-     "check": "gen:atsiner:4,15:mc"
+     "guided": "gen:atsiner:4,13",
+     "check": "gen:atsiner:4,15"
     },
     {
      "id": "exact_sin_values",
@@ -2681,21 +2831,21 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:atsiner:4,13",
-     "check": "gen:atsiner:11,12"
+     "guided": "gen:atsiner:8,10",
+     "check": "gen:atsiner:11,13:mc"
     }
    ],
    "practice": [
-    "gen:atsiner:8,10",
-    "gen:atsiner:11,10:mc",
-    "gen:atsiner:8,11",
+    "gen:atsiner:11,10",
+    "gen:atsiner:11,11:mc",
+    "gen:atsiner:8,12",
     "gen:atcosr:8,6,12",
     "gen:atarea:10,17,3",
     "gen:athalft:1,6,2,6",
     "gen:atapp:0,20,27,1"
    ],
    "transfer": [
-    "gen:atsiner:11,11:mc",
+    "gen:atsiner:8,13:mc",
     "gen:atcosr:5,6,7:w",
     "gen:atarea:14,15,6:w"
    ],
@@ -2758,12 +2908,12 @@
       "When the coefficient of x or the numbers are negative, the method is the same: undo in reverse order. Take care when subtracting a negative (which adds) and when dividing by a negative (which changes the sign of the result)."
      ],
      "math": [
-      "−9x − 20 = −29",
-      "Add 20 to both sides: −9x = −9",
-      "Divide both sides by −9: x = 1"
+      "−6x − 9 = 3",
+      "Add 9 to both sides: −6x = 12",
+      "Divide both sides by −6: x = −2"
      ],
      "role": "concept",
-     "instance": "gen:lneg:-9,-20,1"
+     "instance": "gen:lneg:-6,-9,-2"
     },
     {
      "title": "Word problems that lead to a linear equation",
@@ -2811,10 +2961,38 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "lneg"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:lneg:-2,8,5",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Solve −2x + 8 = −2.” A common wrong answer is −3.",
+        "8 was moved to the other side without changing its sign: subtracting 8 from −2 gives −10."
+       ],
+       "math": [
+        "Not −3, but 5"
+       ]
+      }
+     ],
+     "guided": "gen:lneg:-4,2,-4",
+     "check": "gen:lneg:-5,11,-9:mc"
+    },
+    {
      "id": "same_both_sides",
      "title": "Do the same to both sides",
      "kind": "procedural",
-     "needs": [],
+     "needs": [
+      "gen:aiint:3,-9,1",
+      "gen:ajimul:-6,-2"
+     ],
      "screens": [
       {
        "title": "Add or subtract, then divide",
@@ -2830,8 +3008,8 @@
        "instance": "gen:lneg:5,-5,9"
       }
      ],
-     "guided": "gen:lneg:-2,8,5",
-     "check": "gen:lneg:3,-11,2"
+     "guided": "gen:lneg:-6,3,-8",
+     "check": "gen:lneg:3,-11,2:mc"
     },
     {
      "id": "negative_rules",
@@ -2845,11 +3023,11 @@
         "When dividing (or multiplying), two numbers with the same sign give a positive result and two numbers with different signs give a negative result. This decides the sign of x."
        ],
        "role": "strategy",
-       "instance": "gen:lneg:-9,-20,1"
+       "instance": "gen:lneg:-6,-9,-2"
       }
      ],
-     "guided": "gen:lneg:-6,3,-8",
-     "check": "gen:lneg:-3,-12,10:mc"
+     "guided": "gen:lneg:-3,3,-6",
+     "check": "gen:lneg:-3,-12,10"
     },
     {
      "id": "integer_sub",
@@ -2860,25 +3038,25 @@
       {
        "title": "Subtracting a negative adds",
        "text": [
-        "−20 − (−20) = −20 + 20 = 0. Taking away a negative number is the same as adding it. If this is slow, practise integer arithmetic first."
+        "3 − (−9) = 3 + 9 = 12: taking away a negative number is the same as adding it. And 12 ÷ (−6) = −2: different signs give a negative result. If either is slow, practise integer arithmetic first."
        ],
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:lneg:-3,3,-6",
-     "check": "gen:lneg:-5,11,-9"
+     "guided": "gen:lneg:-4,-10,-8",
+     "check": "gen:lneg:3,-1,4:mc"
     }
    ],
    "practice": [
-    "gen:lneg:-4,-10,-8",
-    "gen:lneg:-9,15,-1:mc",
-    "gen:lneg:-4,2,-4",
+    "gen:lneg:-9,15,-1",
+    "gen:lneg:-2,-10,-8:mc",
+    "gen:lneg:-7,8,4",
     "gen:aelinw:2,5,10",
     "gen:ahfrac:4,9,2,0",
     "gen:ahboth:3,6,7,4"
    ],
    "transfer": [
-    "gen:lneg:-2,-10,-8:mc",
+    "gen:lneg:-6,4,-6:mc",
     "gen:aelinw:1,6,6:w",
     "gen:ahfrac:5,6,2,0:w"
    ],
@@ -2886,7 +3064,10 @@
     "gen:lneg:-1,-11,-12",
     "gen:aelinw:2,5,11:mc"
    ],
-   "probes": [],
+   "probes": [
+    "gen:aiint:3,-9,1",
+    "gen:ajimul:-6,-2"
+   ],
    "pool": {
     "family": "lneg",
     "version": "1.0.0"
@@ -2914,16 +3095,16 @@
     "policy": "library@2",
     "family": "lneg",
     "seed": [
+     -6,
      -9,
-     -20,
-     1
+     -2
     ],
     "blueprintVersion": "1.0.0",
     "author": "OpenPath (written with AI assistance; not educator-reviewed)",
     "aiAssisted": true,
     "licence": "CC0",
     "examples": [
-     "gen:lneg:-9,-20,1",
+     "gen:lneg:-6,-9,-2",
      "gen:lneg:5,-5,9"
     ]
    }
@@ -3015,6 +3196,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "aodom"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aodom:0,3,-2",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Find the domain of the real function f(x) = √(3x − 2). Write it in interval notation.” A common wrong answer is (2/3, ∞).",
+        "x = 2/3 was left out; √0 = 0 is a real number, so the end point belongs to the domain."
+       ],
+       "math": [
+        "Not (2/3, ∞), but [2/3, ∞)"
+       ]
+      }
+     ],
+     "guided": "gen:aodom:0,3,-9",
+     "check": "gen:aodom:4,-6,-4:mc"
+    },
+    {
      "id": "restriction_rules",
      "title": "Write the condition, then solve it",
      "kind": "procedural",
@@ -3034,8 +3240,8 @@
        "instance": "gen:aodom:0,3,-3"
       }
      ],
-     "guided": "gen:aodom:0,3,-2",
-     "check": "gen:aodom:0,3,-7"
+     "guided": "gen:aodom:0,3,-1",
+     "check": "gen:aodom:0,3,-7:mc"
     },
     {
      "id": "interval_notation",
@@ -3052,8 +3258,8 @@
        "instance": "gen:aodom:0,-6,0"
       }
      ],
-     "guided": "gen:aodom:0,3,-1",
-     "check": "gen:aodom:0,3,-6:mc"
+     "guided": "gen:aodom:1,3,5",
+     "check": "gen:aodom:0,3,-6"
     },
     {
      "id": "inequality_solving",
@@ -3069,21 +3275,21 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:aodom:1,3,5",
-     "check": "gen:aodom:4,-6,-5"
+     "guided": "gen:aodom:4,-6,-2",
+     "check": "gen:aodom:4,-6,-5:mc"
     }
    ],
    "practice": [
-    "gen:aodom:4,-6,-2",
-    "gen:aodom:1,3,4:mc",
-    "gen:aodom:4,-6,-1",
+    "gen:aodom:1,3,4",
+    "gen:aodom:4,-6,-1:mc",
+    "gen:aodom:1,3,6",
     "gen:aorange:-3,-5,-9",
     "gen:aofclass:2,-1,0,0",
     "gen:aoisfn:0,2,15",
     "gen:aofname:0,0,20"
    ],
    "transfer": [
-    "gen:aodom:1,3,6:mc",
+    "gen:aodom:0,3,-8:mc",
     "gen:aoisfn:2,1,3:w",
     "gen:aofname:0,0,21:w"
    ],
@@ -3210,6 +3416,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aologlaw"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aologlaw:4,4,-2",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Given log 2 = a and log 3 = b (logarithms to base 10), express log 51.84 in terms of a and b.” A common wrong answer is 2a + 2b.",
+        "log 5 was taken as log 2 + log 3, because 2 + 3 = 5; logs turn products into sums, and 5 = 10 ÷ 2, so log 5 = 1 − a."
+       ],
+       "math": [
+        "Not 2a + 2b, but 6a + 4b − 2"
+       ]
+      }
+     ],
+     "guided": "gen:aologlaw:-2,0,0",
+     "check": "gen:aologlaw:5,2,2:mc"
+    },
+    {
      "id": "factorise_number",
      "title": "Break the number into 2s, 3s and 10s",
      "kind": "procedural",
@@ -3221,17 +3452,17 @@
         "Write N as a product of powers of 2, 3 and 10. Use the product rule (the log of a product is the sum of the logs) and the power rule (the log of a power is the power times the log). Replace log 10 by 1."
        ],
        "math": [
-        "Given log 2 = a and log 3 = b (logarithms to base 10), express log 51.84 in terms of a and b.",
-        "Write 51.84 with powers of 2, 3 and 5: 2⁴ × 3⁴ × 5⁻²",
+        "Given log 2 = a and log 3 = b (logarithms to base 10), express log 259.2 in terms of a and b.",
+        "Write 259.2 with powers of 2, 3 and 5: 2⁴ × 3⁴ × 5⁻¹",
         "log 5 = log(10/2) = 1 − a",
-        "log(xy) = log x + log y and log xⁿ = n log x give 6a + 4b − 2"
+        "log(xy) = log x + log y and log xⁿ = n log x give 5a + 4b − 1"
        ],
        "role": "worked-example",
-       "instance": "gen:aologlaw:4,4,-2"
+       "instance": "gen:aologlaw:4,4,-1"
       }
      ],
-     "guided": "gen:aologlaw:4,4,-1",
-     "check": "gen:aologlaw:-1,1,-2"
+     "guided": "gen:aologlaw:1,1,0",
+     "check": "gen:aologlaw:-1,1,-2:mc"
     },
     {
      "id": "log_ten",
@@ -3253,8 +3484,8 @@
        "instance": "gen:aologlaw:-2,0,-1"
       }
      ],
-     "guided": "gen:aologlaw:1,1,0",
-     "check": "gen:aologlaw:2,3,-1:mc"
+     "guided": "gen:aologlaw:5,2,0",
+     "check": "gen:aologlaw:2,3,-1"
     },
     {
      "id": "powers_of_ten",
@@ -3270,21 +3501,21 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:aologlaw:5,2,0",
-     "check": "gen:aologlaw:5,2,2"
+     "guided": "gen:aologlaw:5,3,2",
+     "check": "gen:aologlaw:-1,3,0:mc"
     }
    ],
    "practice": [
-    "gen:aologlaw:5,3,2",
-    "gen:aologlaw:5,2,1:mc",
-    "gen:aologlaw:-2,0,0",
+    "gen:aologlaw:5,2,1",
+    "gen:aologlaw:-2,0,1:mc",
+    "gen:aologlaw:-2,0,2",
     "gen:aolog:2,3,1",
     "gen:aologeq:0,6,32,1",
     "gen:aoexpeq:0,0,3,1,1,2",
     "gen:aochb:0,1,5,1,4"
    ],
    "transfer": [
-    "gen:aologlaw:-2,0,1:mc",
+    "gen:aologlaw:2,4,-1:mc",
     "gen:aoexpeq:0,0,2,1,0,-3:w"
    ],
    "retention": [
@@ -3333,7 +3564,7 @@
     "licence": "CC0",
     "examples": [
      "gen:aologlaw:-2,0,-1",
-     "gen:aologlaw:4,4,-2"
+     "gen:aologlaw:4,4,-1"
     ]
    }
   },
@@ -3424,6 +3655,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "atcomp"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:atcomp:1,1,1,1",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Use a compound-angle formula to find the exact value of cos(60° − 45°). Simplify fully, with no square root in the denominator.” A common wrong answer is (1 − √2)/2.",
+        "cos(A − B) was split as cos A − cos B; cos does not distribute over a sum, so use the compound-angle formula."
+       ],
+       "math": [
+        "Not (1 − √2)/2, but (√6 + √2)/4"
+       ]
+      }
+     ],
+     "guided": "gen:atcomp:14,0,1,2",
+     "check": "gen:atcomp:13,5,1,0:mc"
+    },
+    {
      "id": "values_first",
      "title": "Values first, then the formula",
      "kind": "procedural",
@@ -3443,8 +3699,8 @@
        "instance": "gen:atcomp:1,1,1,0"
       }
      ],
-     "guided": "gen:atcomp:1,1,1,1",
-     "check": "gen:atcomp:7,4,1,2"
+     "guided": "gen:atcomp:7,4,1,1",
+     "check": "gen:atcomp:7,4,1,2:mc"
     },
     {
      "id": "sign_in_formula",
@@ -3461,8 +3717,8 @@
        "instance": "gen:atcomp:0,1,0,0"
       }
      ],
-     "guided": "gen:atcomp:7,4,1,1",
-     "check": "gen:atcomp:13,5,1,1:mc"
+     "guided": "gen:atcomp:7,4,1,0",
+     "check": "gen:atcomp:13,5,1,1"
     },
     {
      "id": "surd_multiply",
@@ -3478,22 +3734,22 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:atcomp:7,4,1,0",
-     "check": "gen:atcomp:13,5,1,0"
+     "guided": "gen:atcomp:7,4,0,1",
+     "check": "gen:atcomp:14,2,0,2:mc"
     }
    ],
    "practice": [
-    "gen:atcomp:7,4,0,1",
-    "gen:atcomp:7,4,0,2:mc",
-    "gen:atcomp:14,0,1,2",
+    "gen:atcomp:7,4,0,2",
+    "gen:atcomp:14,0,1,1:mc",
+    "gen:atcomp:1,4,1,2",
     "gen:atdbl:3,0,3,0",
     "gen:atp2s:1,4,1",
     "gen:atcsimp:4,5,1",
     "gen:athalf:0,0,4,2"
    ],
    "transfer": [
-    "gen:atcomp:14,0,1,1:mc",
-    "gen:atcomp:1,4,1,2:w"
+    "gen:atcomp:14,0,1,0:mc",
+    "gen:atcomp:1,4,1,1:w"
    ],
    "retention": [
     "gen:atcomp:7,4,0,0",
@@ -3636,6 +3892,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aqmono"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqmono:-4,0,-1,1,-1",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Find the interval(s) on which f(x) = −2x³ − 12x² − 1 is strictly decreasing. Write open intervals, joined by ∪ if there are two (for example (−∞, p) ∪ (q, ∞)).” A common wrong answer is (−4, 0).",
+        "The negative leading coefficient was ignored: f′ opens downwards, so it is positive between the roots and negative outside them."
+       ],
+       "math": [
+        "Not (−4, 0), but (−∞, −4) ∪ (0, ∞)"
+       ]
+      }
+     ],
+     "guided": "gen:aqmono:1,2,-1,0,-1",
+     "check": "gen:aqmono:-2,-1,1,1,1:mc"
+    },
+    {
      "id": "sign_chart",
      "title": "Make a sign chart",
      "kind": "procedural",
@@ -3647,17 +3928,17 @@
         "The roots of f′(x) = 0 divide the number line into intervals. Test one x in each interval: where f′(x) > 0, f is increasing; where f′(x) < 0, f is decreasing. Write open intervals."
        ],
        "math": [
-        "Find the interval(s) on which f(x) = −2x³ − 12x² − 1 is strictly decreasing. Write open intervals, joined by ∪ if there are two (for example (−∞, p) ∪ (q, ∞)).",
-        "f′(x) = −6x(x + 4)",
-        "f′(x) = 0 at x = −4, 0",
-        "Test the sign of f′ on each side of the roots: f′ < 0 on (−∞, −4) ∪ (0, ∞)"
+        "Find the interval(s) on which f(x) = −2x³ − 6x² + 18x − 1 is strictly decreasing. Write open intervals, joined by ∪ if there are two (for example (−∞, p) ∪ (q, ∞)).",
+        "f′(x) = −6(x + 3)(x − 1)",
+        "f′(x) = 0 at x = −3, 1",
+        "Test the sign of f′ on each side of the roots: f′ < 0 on (−∞, −3) ∪ (1, ∞)"
        ],
        "role": "worked-example",
-       "instance": "gen:aqmono:-4,0,-1,1,-1"
+       "instance": "gen:aqmono:-3,1,-1,1,-1"
       }
      ],
-     "guided": "gen:aqmono:-3,1,-1,1,-1",
-     "check": "gen:aqmono:-3,1,-1,1,-3"
+     "guided": "gen:aqmono:-2,0,-1,1,0",
+     "check": "gen:aqmono:-3,1,-1,1,-3:mc"
     },
     {
      "id": "derivative_sign",
@@ -3674,8 +3955,8 @@
        "instance": "gen:aqmono:-4,-3,-1,0,1"
       }
      ],
-     "guided": "gen:aqmono:-2,0,-1,1,0",
-     "check": "gen:aqmono:-3,1,-1,1,-2:mc"
+     "guided": "gen:aqmono:-3,0,-1,0,3",
+     "check": "gen:aqmono:-3,1,-1,1,-2"
     },
     {
      "id": "factorise_derivative",
@@ -3691,14 +3972,14 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:aqmono:-3,0,-1,0,3",
-     "check": "gen:aqmono:-2,-1,1,1,1"
+     "guided": "gen:aqmono:-2,0,-1,1,1",
+     "check": "gen:aqmono:-3,4,-1,0,0:mc"
     }
    ],
    "practice": [
-    "gen:aqmono:-2,0,-1,1,1",
-    "gen:aqmono:1,4,1,0,-3:mc",
-    "gen:aqmono:1,2,-1,0,-1",
+    "gen:aqmono:1,4,1,0,-3",
+    "gen:aqmono:1,4,1,0,-2:mc",
+    "gen:aqmono:1,2,-1,0,-2",
     "gen:aqext:1,4,-1,0,9",
     "gen:aqabs:-3,-1,-4,1,1",
     "gen:aqrr:2,4,2,1",
@@ -3706,8 +3987,8 @@
     "gen:aqtann:1,1,0,3,1,0"
    ],
    "transfer": [
-    "gen:aqmono:1,4,1,0,-2:mc",
-    "gen:aqmono:1,2,-1,0,-2:w"
+    "gen:aqmono:1,2,-1,0,-3:mc",
+    "gen:aqmono:-4,-3,1,0,1:w"
    ],
    "retention": [
     "gen:aqmono:-3,0,-1,0,2",
@@ -3761,7 +4042,7 @@
     "licence": "CC0",
     "examples": [
      "gen:aqmono:-4,-3,-1,0,1",
-     "gen:aqmono:-4,0,-1,1,-1"
+     "gen:aqmono:-3,1,-1,1,-1"
     ]
    }
   },
@@ -3855,6 +4136,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aqsep"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqsep:0,-3,-1,2",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Solve the differential equation dy/dx = (−3x − 1)y, given that y = 2 when x = 0. Write y in terms of x.” A common wrong answer is −3x²/2 − x + 2.",
+        "The y on the right was ignored and only (px + q) was integrated; divide by y first: dy/y = (px + q) dx."
+       ],
+       "math": [
+        "Not −3x²/2 − x + 2, but 2e^(−3x²/2 − x)"
+       ]
+      }
+     ],
+     "guided": "gen:aqsep:1,2,0,1",
+     "check": "gen:aqsep:1,2,0,5:mc"
+    },
+    {
      "id": "separate_integrate",
      "title": "Separate, integrate, find the constant",
      "kind": "procedural",
@@ -3866,17 +4172,17 @@
         "Rewrite with y and dy on one side and x and dx on the other. Integrate both sides, adding one constant. Use the starting value to find the constant, then write y on its own."
        ],
        "math": [
-        "Solve the differential equation dy/dx = (−3x − 1)y, given that y = 2 when x = 0. Write y in terms of x.",
+        "Solve the differential equation dy/dx = (−3x − 1)y, given that y = 1 when x = 0. Write y in terms of x.",
         "Separate the variables: dy/y = (−3x − 1) dx",
         "Integrate both sides: log y = −3x²/2 − x + C",
-        "Use y = 2 at the starting point to find the constant: y = 2e^(−3x²/2 − x)"
+        "Use y = 1 at the starting point to find the constant: y = e^(−3x²/2 − x)"
        ],
        "role": "worked-example",
-       "instance": "gen:aqsep:0,-3,-1,2"
+       "instance": "gen:aqsep:0,-3,-1,1"
       }
      ],
-     "guided": "gen:aqsep:0,-3,-1,1",
-     "check": "gen:aqsep:1,2,0,4"
+     "guided": "gen:aqsep:0,-2,1,2",
+     "check": "gen:aqsep:1,2,0,4:mc"
     },
     {
      "id": "why_separate",
@@ -3893,8 +4199,8 @@
        "instance": "gen:aqsep:0,-4,-3,1"
       }
      ],
-     "guided": "gen:aqsep:0,-2,1,2",
-     "check": "gen:aqsep:0,-3,-1,5:mc"
+     "guided": "gen:aqsep:0,-2,1,1",
+     "check": "gen:aqsep:0,-3,-1,5"
     },
     {
      "id": "log_integral",
@@ -3910,22 +4216,22 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:aqsep:0,-2,1,1",
-     "check": "gen:aqsep:1,2,0,5"
+     "guided": "gen:aqsep:0,-4,0,1",
+     "check": "gen:aqsep:0,-3,-1,4:mc"
     }
    ],
    "practice": [
-    "gen:aqsep:0,-4,0,1",
-    "gen:aqsep:0,-4,0,2:mc",
-    "gen:aqsep:1,2,0,1",
+    "gen:aqsep:0,-4,0,2",
+    "gen:aqsep:0,-4,0,3:mc",
+    "gen:aqsep:0,4,1,1",
     "gen:aqorddeg:4,3,4,1",
     "gen:aqlinde:2,5,2,3",
     "gen:aqdecl:15,3",
     "gen:aqsubsep:-2,-3,1,-1"
    ],
    "transfer": [
-    "gen:aqsep:0,-4,0,3:mc",
-    "gen:aqsep:0,4,1,1:w"
+    "gen:aqsep:0,0,-1,1:mc",
+    "gen:aqsep:0,0,-1,3:w"
    ],
    "retention": [
     "gen:aqsep:0,-3,-1,3",
@@ -3974,7 +4280,7 @@
     "licence": "CC0",
     "examples": [
      "gen:aqsep:0,-4,-3,1",
-     "gen:aqsep:0,-3,-1,2"
+     "gen:aqsep:0,-3,-1,1"
     ]
    }
   },
@@ -4063,6 +4369,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "lim"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:lim:6,1",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Find lim (x → 6) of (x² − 36) ⁄ (x − 6).” A common wrong answer is 0.",
+        "0 ⁄ 0 was taken as 0; it means the expression must be simplified first (factorise and cancel)."
+       ],
+       "math": [
+        "Not 0, but 12"
+       ]
+      }
+     ],
+     "guided": "gen:lim:8,4",
+     "check": "gen:lim:6,4:mc"
+    },
+    {
      "id": "difference_of_squares",
      "title": "Spot the difference of two squares",
      "kind": "conceptual",
@@ -4083,7 +4414,7 @@
       }
      ],
      "guided": "gen:lim:6,2",
-     "check": "gen:lim:6,5"
+     "check": "gen:lim:6,5:mc"
     },
     {
      "id": "substitute_after",
@@ -4097,16 +4428,16 @@
         "Putting the number in straight away gives nothing useful. Cancel the factor that makes both top and bottom zero; only then put the number in: the simplified expression has a value there."
        ],
        "math": [
-        "Find lim (x → 6) of (x² − 36) ⁄ (x − 6).",
+        "Find lim (x → 6) of 6(x² − 36) ⁄ (x − 6).",
         "x² − 36 = (x − 6)(x + 6); cancel (x − 6)",
-        "Then put x = 6: 1 × (6 + 6) = 12"
+        "Then put x = 6: 6 × (6 + 6) = 72"
        ],
        "role": "worked-example",
-       "instance": "gen:lim:6,1"
+       "instance": "gen:lim:6,6"
       }
      ],
-     "guided": "gen:lim:6,6",
-     "check": "gen:lim:6,4:mc"
+     "guided": "gen:lim:8,5",
+     "check": "gen:lim:8,6"
     },
     {
      "id": "check_factoring",
@@ -4122,14 +4453,14 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:lim:8,5",
-     "check": "gen:lim:8,6"
+     "guided": "gen:lim:8,2",
+     "check": "gen:lim:4,1:mc"
     }
    ],
    "practice": [
-    "gen:lim:8,4",
-    "gen:lim:8,2:mc",
     "gen:lim:9,1",
+    "gen:lim:9,2:mc",
+    "gen:lim:9,3",
     "gen:aultab:2,5,2,1,-3,-6",
     "gen:aulpow:0,3,2,-2,0",
     "gen:auspd:4,2,4",
@@ -4137,7 +4468,7 @@
     "gen:auliinf:1,6,5,4,9,3"
    ],
    "transfer": [
-    "gen:lim:9,2:mc",
+    "gen:lim:4,4:mc",
     "gen:auspd:4,2,5:w"
    ],
    "retention": [
@@ -4189,7 +4520,7 @@
     "licence": "CC0",
     "examples": [
      "gen:lim:3,2",
-     "gen:lim:6,1"
+     "gen:lim:6,6"
     ]
    }
   },
@@ -4243,6 +4574,31 @@
    ],
    "strategies": [
     {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "atprinc"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:atprinc:0,5,1,1",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Solve 2 sin x − 1 = 0 for 0 ≤ x < 2π (x in radians). Give every solution in radians, in terms of π, separated by commas (type π or pi): for example π/4, 3π/2 (and 0 for x = 0).” A common wrong answer is π/6.",
+        "Only the principal value was given; sin takes each value twice in every 2π, so look in every quadrant where it has this sign."
+       ],
+       "math": [
+        "Not π/6, but π/6, 5π/6"
+       ]
+      }
+     ],
+     "guided": "gen:atprinc:2,4,3,0",
+     "check": "gen:atprinc:2,0,3,1"
+    },
+    {
      "id": "quadrant_diagram",
      "title": "Use the quadrant signs",
      "kind": "conceptual",
@@ -4273,15 +4629,15 @@
         "Rearrange so the ratio of the angle stands alone. Find the reference angle and place it in the quadrants with the right sign: these are the values of the angle in the first turn. If the angle is kx, add 2π to each value, again and again, until the angle reaches 2kπ. Divide every value by k."
        ],
        "math": [
-        "Solve 2 sin x − 1 = 0 for 0 ≤ x < 2π (x in radians). Give every solution in radians, in terms of π, separated by commas (type π or pi): for example π/4, 3π/2 (and 0 for x = 0).",
-        "The principal value of sin⁻¹(1/2) is π/6",
-        "All angles with this value, divided by 1 and kept in 0 ≤ x < 2π: x = π/6, 5π/6 "
+        "Solve √2 cos 3x − 1 = 0 for 0 ≤ x < 2π (x in radians). Give every solution in radians, in terms of π, separated by commas (type π or pi): for example π/4, 3π/2 (and 0 for x = 0).",
+        "The principal value of cos⁻¹(1/√2) is π/4",
+        "All angles with this value, divided by 3 and kept in 0 ≤ x < 2π: x = π/12, 7π/12, 3π/4, 5π/4, 17π/12, 23π/12 "
        ],
        "role": "worked-example",
-       "instance": "gen:atprinc:0,5,1,1"
+       "instance": "gen:atprinc:1,6,3,1"
       }
      ],
-     "guided": "gen:atprinc:1,6,3,1",
+     "guided": "gen:atprinc:1,0,1,1",
      "check": "gen:atprinc:0,7,2,0"
     },
     {
@@ -4298,18 +4654,18 @@
        "role": "prerequisite"
       }
      ],
-     "guided": "gen:atprinc:1,0,1,1",
-     "check": "gen:atprinc:2,0,3,1"
+     "guided": "gen:atprinc:2,0,1,1",
+     "check": "gen:atprinc:2,0,3,0"
     }
    ],
    "practice": [
-    "gen:atprinc:2,0,1,1",
     "gen:atprinc:2,0,1,0",
-    "gen:atprinc:2,4,3,0",
+    "gen:atprinc:1,3,1,1",
+    "gen:atprinc:1,3,1,0",
     "gen:atgen:0,3,2,1"
    ],
    "transfer": [
-    "gen:atprinc:1,3,1,1",
+    "gen:atprinc:0,4,2,0",
     "gen:atgen:0,3,2,0:w"
    ],
    "retention": [
@@ -4347,7 +4703,7 @@
     "licence": "CC0",
     "examples": [
      "gen:atprinc:0,6,1,0",
-     "gen:atprinc:0,5,1,1"
+     "gen:atprinc:1,6,3,1"
     ]
    }
   },
@@ -9653,6 +10009,709 @@
      "gen:akss:2,3,2,0",
      "gen:akss:2,3,2,5",
      "gen:akss:1,2,5,4"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.algebra.geometric-sequences",
+   "title": "The nth term of a geometric progression",
+   "chapter": [
+    {
+     "title": "Multiply by the same number each time",
+     "text": [
+      "In a geometric progression each term is the one before multiplied by the common ratio r. Find r by dividing the second term by the first. From the first term to the nth term there is one multiplication fewer than the term number, so the nth term is a times r to that power."
+     ],
+     "math": [
+      "aₙ = a × r^(n − 1)",
+      "3, 6, 12, …: r = 6 ÷ 3 = 2",
+      "5th term = 3 × 2⁴ = 3 × 16 = 48"
+     ],
+     "role": "concept",
+     "instance": "gen:aogp:3,2,5"
+    },
+    {
+     "title": "A negative ratio",
+     "text": [
+      "When the ratio is negative the terms alternate in sign. Keep brackets round the negative ratio when you raise it to a power: an even power of a negative number is positive, an odd power is negative."
+     ],
+     "math": [
+      "2, −6, 18, …: r = −6 ÷ 2 = −3",
+      "5th term = 2 × (−3)⁴ = 2 × 81 = 162"
+     ],
+     "instance": "gen:aogp:2,-3,5",
+     "role": "concept"
+    },
+    {
+     "title": "The sum of the first n terms of a GP",
+     "text": [
+      "Sₙ = a + ar + … + arⁿ⁻¹. Multiplying by r shifts every term along one place, so rSₙ − Sₙ = arⁿ − a and Sₙ = a(rⁿ − 1)/(r − 1).",
+      "Find a and r, then put them in Sₙ = a(rⁿ − 1)/(r − 1), working out rⁿ with its sign first."
+     ],
+     "math": [
+      "Find the sum of the first 9 terms of the geometric progression 8 + 24 + 72 + ⋯",
+      "r = 24 ÷ 8 = 3",
+      "r^9 = 19683",
+      "Sₙ = a(rⁿ − 1)/(r − 1) = 8 × (19683 − 1) ÷ (3 − 1) = 78728"
+     ]
+    },
+    {
+     "title": "The sum to infinity of a geometric series",
+     "text": [
+      "When |r| < 1 the terms shrink towards 0 and the partial sums a(1 − rⁿ)/(1 − r) approach a/(1 − r), because rⁿ → 0.",
+      "Find r = second term ÷ first term, check |r| < 1, and work out a/(1 − r)."
+     ],
+     "math": [
+      "Find the sum to infinity of the geometric series 8 + 8/5 + 8/25 + ⋯",
+      "r = 8/5 ÷ 8 = 1/5; |r| < 1, so the series converges",
+      "S∞ = a/(1 − r) = 8 ÷ 4/5 = 10"
+     ]
+    },
+    {
+     "title": "Identifying a geometric progression",
+     "text": [
+      "A sequence is a geometric progression when each term (after the first) is the previous term multiplied by the same non-zero number r, the common ratio: a, ar, ar², ar³, …",
+      "Divide every term by the term before it. If all the ratios are equal, it is a GP; if any ratio is different, it is not. Checking only the first two terms is never enough."
+     ],
+     "math": [
+      "All four sequences below start with the same two terms. Which one is a geometric progression?",
+      "Second term ÷ first term = 3",
+      "Only 7, 21, 63, 189, 567, … keeps that same ratio between every pair of neighbouring terms"
+     ]
+    },
+    {
+     "title": "Growth, depreciation and compound interest with geometric progressions",
+     "text": [
+      "Growing by r% a year multiplies the amount by 1 + r/100 every year; losing r% multiplies it by 1 − r/100. So the amounts at the start, after 1 year, after 2 years, … form a GP: P, PR, PR², …, and after n years the amount is PRⁿ.",
+      "Write the common ratio R (1.1 for 10% growth, 0.9 for 10% decrease), then work out P × Rⁿ. Note it is the (n + 1)th term, because the first term is the starting amount."
+     ],
+     "math": [
+      "A culture has 1,000 bacteria. The number of bacteria doubles every hour. How many bacteria will there be after 8 hours?",
+      "Each hour the amount is multiplied by the same number, r = 2: a geometric progression",
+      "After 8 steps: 1000 × 2⁸ = 256000"
+     ]
+    },
+    {
+     "title": "Using the sum to infinity: recurring decimals, a bouncing ball, nested shapes",
+     "text": [
+      "Many situations hide an infinite geometric series with |r| < 1: a recurring decimal 0.4545… = 45/100 + 45/10000 + …, the heights of a bouncing ball, the areas of shapes that shrink by the same factor each time. Its sum is a/(1 − r).",
+      "Write the first term a and the ratio r of the repeating part, check |r| < 1, use a/(1 − r), and then add any part that is not repeated (the whole number, or the first drop of the ball)."
+     ],
+     "math": [
+      "Write the recurring decimal 2.626262…",
+      "The recurring part is 31/50 + 31/50 × 1/100 + …: a GP with r = 1/100",
+      "S∞ = a/(1 − r): 31/50 ÷ 99/100 = 62/99",
+      "Add the whole-number part 2: 260/99"
+     ]
+    },
+    {
+     "title": "Does a geometric series converge, and to what?",
+     "text": [
+      "A geometric series a + ar + ar² + … converges (has a sum to infinity) exactly when |r| < 1; then the terms shrink to 0 and S∞ = a/(1 − r). If |r| ≥ 1 the terms do not shrink and the series diverges.",
+      "Find r = (second term) ÷ (first term). If |r| < 1 work out a/(1 − r); otherwise say it diverges — never use the formula without this check."
+     ],
+     "math": [
+      "Consider the geometric series −9 + 6 − 4 + ⋯. Which statement is true?",
+      "r = −2/3: |r| < 1, so the series converges",
+      "So: The series converges, and its sum to infinity is −27/5"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:aogp:2,-3,8",
+    "gen:aogp:-5,3,7",
+    "gen:aogp:5,-3,5"
+   ],
+   "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "aogp"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aogp:-3,-3,8",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Find the 8th term of the geometric progression −3, 9, −27, …” A common wrong answer is 81.",
+        "The common difference was used as in an AP; each term here is −3 times the one before."
+       ],
+       "math": [
+        "Not 81, but 6561"
+       ]
+      }
+     ],
+     "guided": "gen:aogp:9,-3,4",
+     "check": "gen:aogp:5,-3,7:mc"
+    },
+    {
+     "id": "ratio_then_power",
+     "title": "Ratio, power, then multiply",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "In order",
+       "text": [
+        "Divide the second term by the first to get r. Raise r to the power one less than the term number. Multiply by the first term. Watch the sign when r is negative."
+       ],
+       "math": [
+        "Find the 9th term of the geometric progression −3, 9, −27, …",
+        "r = 9 ÷ (−3) = −3",
+        "r^8 = 6561",
+        "aₙ = a r^(n − 1) = −3 × 6561 = −19683"
+       ],
+       "role": "worked-example",
+       "instance": "gen:aogp:-3,-3,9"
+      }
+     ],
+     "guided": "gen:aogp:9,-3,6",
+     "check": "gen:aogp:-5,3,4:mc"
+    },
+    {
+     "id": "count_multiplications",
+     "title": "Count the multiplications",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "One fewer than the term number",
+       "text": [
+        "From the first term to the second is one multiplication by r, to the third is two. So the nth term is one fewer than n multiplications away from the first term. Using n multiplications gives the term after it."
+       ],
+       "role": "strategy",
+       "instance": "gen:aogp:3,2,5"
+      }
+     ],
+     "guided": "gen:aogp:3,2,9",
+     "check": "gen:aogp:3,-3,10"
+    },
+    {
+     "id": "powers_prereq",
+     "title": "Powers, including negative numbers",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "A power is repeated multiplication",
+       "text": [
+        "2⁴ = 2 × 2 × 2 × 2 = 16, not 2 × 4 = 8. (−3)³ = −27 and (−3)⁴ = 81: brackets keep the minus sign inside the power."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:aogp:9,-3,5",
+     "check": "gen:aogp:5,-3,6:mc"
+    }
+   ],
+   "practice": [
+    "gen:aogp:3,2,8",
+    "gen:aogp:5,-3,9:mc",
+    "gen:aogp:5,-3,8",
+    "gen:aogpsum:7,-3,7",
+    "gen:aogpinf:-1,-1,3",
+    "gen:aogpid:2,3,1,1",
+    "gen:aogpgr:3,4,0,3",
+    "gen:aogpuse:1,5,4,0",
+    "gen:aogpcv:4,1,4"
+   ],
+   "transfer": [
+    "gen:aogp:8,-3,5:mc",
+    "gen:aogpgr:0,2,2,3:w",
+    "gen:aogpuse:0,2,35,1:w"
+   ],
+   "retention": [
+    "gen:aogp:2,-3,9",
+    "gen:aogpsum:8,3,8:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aogp",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "aogp",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aogpsum",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aogpinf",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aogpid",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aogpgr",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aogpuse",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aogpcv",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "aogp",
+    "seed": [
+     3,
+     2,
+     5
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aogp:3,2,5",
+     "gen:aogp:-3,-3,9"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.calculus.continuity",
+   "title": "Choosing k to make a function continuous",
+   "chapter": [
+    {
+     "title": "The two pieces must meet",
+     "text": [
+      "f is continuous at the joining point when the left piece and the right piece give the same value there. Put the joining value of x into both pieces, set them equal and solve for k."
+     ],
+     "math": [
+      "Left piece at x = 1: k × 1 + 1 = k + 1",
+      "Right piece at x = 1: 2 × 1² + 2 = 4",
+      "k + 1 = 4, so k = 3"
+     ],
+     "role": "concept",
+     "instance": "gen:aqcontk:0,1,1,2,2"
+    },
+    {
+     "title": "A gap at the point: k is the limit",
+     "text": [
+      "When the formula gives 0 ⁄ 0 at the point, f is continuous exactly when k equals the limit of the formula there. Use the standard limits, or rationalise a square root."
+     ],
+     "math": [
+      "sin θ ⁄ θ → 1 as θ → 0",
+      "sin(2x)/x = 2 × sin(2x)/(2x) → 2 × 1 = 2, so k = 2",
+      "1 − cos θ = 2 sin²(θ/2), so (1 − cos θ)/θ² → 1/2",
+      "(√(1 + mx) − 1)/x = m ⁄ (√(1 + mx) + 1) → m/2 (multiply top and bottom by √(1 + mx) + 1)"
+     ],
+     "instance": "gen:aqcontk:1,2,1,0,0",
+     "role": "concept"
+    },
+    {
+     "title": "A cube over a linear factor",
+     "text": [
+      "Factorise the difference of two cubes, a³ − b³ = (a − b)(a² + ab + b²), cancel the common factor, then substitute."
+     ],
+     "math": [
+      "x³ − 8 = (x − 2)(x² + 2x + 4)",
+      "Cancel (x − 2): x² + 2x + 4",
+      "At x = 2: 4 + 4 + 4 = 12, so k = 12"
+     ],
+     "instance": "gen:aqcontk:4,2,0,0,0",
+     "role": "concept"
+    },
+    {
+     "title": "Is a piecewise function continuous on ℝ or on an interval?",
+     "text": [
+      "A function is continuous on a set when it is continuous at every point of it. Polynomials are continuous everywhere, so a piecewise function can only fail where its formula changes, and there it fails exactly when the two pieces do not meet.",
+      "List the points where the formula changes that lie in the set. At each one, work out the value of the left piece and of the right piece there (and f at the point). Equal values: continuous there; different: a discontinuity."
+     ],
+     "math": [
+      "f(x) = −x + 4 for x < 2; x² − 2x for 2 ≤ x < 3; and −2x + 9 for x ≥ 3. Which statement about the continuity of f on ℝ is true?",
+      "A polynomial is continuous everywhere, so each piece is a polynomial, so f is continuous away from x = a and x = b",
+      "Compare the two pieces at each break point (right-hand value minus left-hand value): jumps 2 at x = 2, 0 at x = 3",
+      "So the true statement is option C"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:aqcontk:1,3,4,0,0",
+    "gen:aqcontk:4,4,0,0,0",
+    "gen:aqcontk:2,3,3,0,0"
+   ],
+   "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "scope": {
+      "family": "aqcontk"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aqcontk:1,1,3,0,0",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “f(x) = sin(x)/(3x) for x ≠ 0, and f(0) = k. Find the value of k for which f is continuous at x = 0.” A common wrong answer is 3.",
+        "The ratio was turned over, giving 3: the number in the sine goes on top, since sin(x)/(3x) = (1/3) × sin(x)/x, which tends to 1/3."
+       ],
+       "math": [
+        "Not 3, but 1/3"
+       ]
+      }
+     ],
+     "guided": "gen:aqcontk:0,1,3,2,-3",
+     "check": "gen:aqcontk:3,3,3,0,0:mc"
+    },
+    {
+     "id": "left_equals_right",
+     "title": "Make the two values equal",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Set them equal, solve for k",
+       "text": [
+        "Write the value the function approaches at the point (from each piece, or the limit of the formula) and the value at the point. Set them equal and solve for k."
+       ],
+       "math": [
+        "f(x) = kx + 3 for x ≤ 1, and f(x) = 2x² + 3 for x > 1. Find the value of k for which f is continuous at x = 1.",
+        "The limit of the other piece at the point is 2",
+        "Continuity needs f(a) = that limit, so k = 2"
+       ],
+       "role": "worked-example",
+       "instance": "gen:aqcontk:0,1,3,2,3"
+      }
+     ],
+     "guided": "gen:aqcontk:0,1,3,2,0",
+     "check": "gen:aqcontk:1,3,2,0,0:mc"
+    },
+    {
+     "id": "why_continuous",
+     "title": "What continuous means",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "No jump and no gap",
+       "text": [
+        "Continuous at a point means you can draw the graph through it without lifting your pen: the value approached from the left, the value approached from the right and the value at the point are the same number."
+       ],
+       "role": "strategy",
+       "instance": "gen:aqcontk:0,1,1,2,2"
+      }
+     ],
+     "guided": "gen:aqcontk:0,1,-1,3,1",
+     "check": "gen:aqcontk:3,6,3,0,0"
+    },
+    {
+     "id": "standard_limits",
+     "title": "The limits you need",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Three standard results",
+       "text": [
+        "sin θ / θ → 1 as θ → 0. 1 − cos θ = 2 sin²(θ/2), so (1 − cos θ)/θ² → 1/2. (√(1 + θ) − 1)/θ → 1/2, found by multiplying top and bottom by √(1 + θ) + 1. Scale each one for sin(mx), cos(mx) or √(1 + mx)."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:aqcontk:1,4,1,0,0",
+     "check": "gen:aqcontk:0,3,3,3,3:mc"
+    }
+   ],
+   "practice": [
+    "gen:aqcontk:1,5,6,0,0",
+    "gen:aqcontk:0,3,-1,3,-2:mc",
+    "gen:aqcontk:4,5,0,0,0",
+    "gen:aqcontd:2,1,-2,-2,1,0,-1,1"
+   ],
+   "transfer": [
+    "gen:aqcontk:0,3,3,3,0:mc",
+    "gen:aqcontd:-3,2,0,2,1,-1,1,1:w"
+   ],
+   "retention": [
+    "gen:aqcontk:2,1,4,0,0",
+    "gen:aqcontd:0,2,1,-2,1,1,-1,0"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aqcontk",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "aqcontk",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aqcontd",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "aqcontk",
+    "seed": [
+     0,
+     1,
+     1,
+     2,
+     2
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aqcontk:0,1,1,2,2",
+     "gen:aqcontk:0,1,3,2,3"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.trigonometry.functions",
+   "title": "Trigonometric functions of any angle",
+   "chapter": [
+    {
+     "title": "Reference angle and quadrant sign",
+     "text": [
+      "Bring the angle into one turn by adding or taking away whole turns. Its reference angle is its distance from the nearest part of the x-axis. The value is the reference angle's value with the sign of the function in that quadrant (All, Sin, Tan, Cos)."
+     ],
+     "math": [
+      "120° is in the second quadrant: reference angle 180° − 120° = 60°",
+      "cos is negative in the second quadrant",
+      "cos 120° = −cos 60° = −1/2"
+     ],
+     "role": "concept",
+     "instance": "gen:atval:1,8"
+    },
+    {
+     "title": "Negative or large angles, and cosec, sec, cot",
+     "text": [
+      "Add or take away whole turns to bring the angle into one turn. cosec, sec and cot are the reciprocals of sin, cos and tan: find sin, cos or tan first, then take the reciprocal and rationalise."
+     ],
+     "math": [
+      "−690° + 720° = 30°",
+      "sin 30° = 1/2, so cosec(−690°) = cosec 30° = 1 ⁄ (1/2) = 2"
+     ],
+     "instance": "gen:atval:3,-46",
+     "role": "concept"
+    },
+    {
+     "title": "The period of a trigonometric function",
+     "text": [
+      "sin, cos, sec and cosec repeat every 2π; tan and cot every π. Replacing x by kx makes the graph repeat k times as fast; the number in front and the shift inside do not change the period.",
+      "Take the basic period (2π or π) and divide it by k."
+     ],
+     "math": [
+      "What is the period of y = 3 sin(5x + 1)?",
+      "sin x repeats every 2π",
+      "Multiplying x by 5 divides the period by 5: 2π/5"
+     ]
+    },
+    {
+     "title": "The point on the unit circle for a real number t",
+     "text": [
+      "On the unit circle, the real number t is an arc length; the point it reaches is (cos t, sin t). This defines sin and cos for every real number, and the quadrant of the point gives their signs.",
+      "Change t to an angle (π = 180°), find the reference angle and its standard values, and give each coordinate the sign of its quadrant."
+     ],
+     "math": [
+      "For a real number t, P(t) is the point reached by going a distance t round the unit circle x² + y² = 1 from (1, 0) (anticlockwise when t > 0), so P(t) = (cos t, sin t). Find P(t) for t = 3π/4. Give exact coordinates (x, y).",
+      "t = 3π/4 is the same turn as 135°",
+      "So P(t) = (cos t, sin t) = (−√2/2, √2/2)"
+     ]
+    },
+    {
+     "title": "The signs of sin t and cos t for a real number t",
+     "text": [
+      "P(t) = (cos t, sin t) lies in the quadrant reached after going t round the unit circle; cos t has the sign of the x-coordinate and sin t of the y-coordinate. One full turn is 2π ≈ 6.28, and the quadrants end at π/2 ≈ 1.57, π ≈ 3.14 and 3π/2 ≈ 4.71.",
+      "Add or take away 2π until 0 ≤ t < 2π, compare t with π/2, π and 3π/2 to find the quadrant, and read the signs (All, Sin, Tan, Cos)."
+     ],
+     "math": [
+      "Take the real number t = 11.8 (in radians). Which is true for the point P(t) = (cos t, sin t) on the unit circle?",
+      "Removing whole turns, t is 1.7560566569687304π more than a multiple of 2π",
+      "That is quadrant 4: sin t < 0 and cos t > 0 (P(t) is in the fourth quadrant)"
+     ]
+    },
+    {
+     "title": "Domain and range of the six trigonometric functions",
+     "text": [
+      "sin and cos are defined for every x and take values from −1 to 1; tan and sec are undefined where cos x = 0 (x = (2n + 1)π/2), cot and cosec where sin x = 0 (x = nπ); tan and cot take every real value; sec and cosec never lie strictly between −1 and 1.",
+      "For a f(kx): the excluded x come from kx = (2n + 1)π/2 or kx = nπ, so divide by k; the range of sin, cos, sec, cosec is scaled by a, while tan and cot still take every real value."
+     ],
+     "math": [
+      "What is the range of the function y = 5 cosec 3x?",
+      "For cosec: (−∞, −5] ∪ [5, ∞)",
+      "So the answer is C"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:atval:2,-40",
+    "gen:atval:0,-4",
+    "gen:atval:5,-38"
+   ],
+   "strategies": [
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "scope": {
+      "family": "atval"
+     },
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:atval:4,56",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Find the exact value of sec 840°. Simplify fully, with no square root in the denominator.” A common wrong answer is 2.",
+        "The sign was wrong: in the quadrant of 840°, sec is negative."
+       ],
+       "math": [
+        "Not 2, but −2"
+       ]
+      }
+     ],
+     "guided": "gen:atval:4,45",
+     "check": "gen:atval:4,34:mc"
+    },
+    {
+     "id": "reduce_then_sign",
+     "title": "One turn, reference angle, sign",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "In order",
+       "text": [
+        "Add or take away whole turns. Find the quadrant and the reference angle. Write the value of the reference angle, then give it the sign of the function in that quadrant. For cosec, sec or cot take the reciprocal."
+       ],
+       "math": [
+        "Find the exact value of sec 855°. Simplify fully, with no square root in the denominator.",
+        "855° is the same position as 135°",
+        "135° has reference angle 45°",
+        "Use the reference angle with the sign of sec in that quadrant: −√2"
+       ],
+       "role": "worked-example",
+       "instance": "gen:atval:4,57"
+      }
+     ],
+     "guided": "gen:atval:4,48",
+     "check": "gen:atval:4,52:mc"
+    },
+    {
+     "id": "astc",
+     "title": "Which functions are positive where",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "All, Sin, Tan, Cos",
+       "text": [
+        "In the first quadrant all the functions are positive; in the second only sin and cosec; in the third only tan and cot; in the fourth only cos and sec. The reference angle is the angle to the x-axis."
+       ],
+       "math": [
+        "Second quadrant: reference angle = 180° − θ",
+        "Third quadrant: θ − 180°",
+        "Fourth quadrant: 360° − θ"
+       ],
+       "role": "strategy",
+       "instance": "gen:atval:1,8"
+      }
+     ],
+     "guided": "gen:atval:4,38",
+     "check": "gen:atval:4,58"
+    },
+    {
+     "id": "special_values",
+     "title": "The special values",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "title": "sin, cos and tan of 0°, 30°, 45°, 60°, 90°",
+       "text": [
+        "sin: 0, 1/2, √2/2, √3/2, 1. cos: 1, √3/2, √2/2, 1/2, 0. tan: 0, 1/√3, 1, √3, and undefined at 90°. They come from half a square and half an equilateral triangle."
+       ],
+       "role": "prerequisite"
+      }
+     ],
+     "guided": "gen:atval:4,39",
+     "check": "gen:atval:4,24:mc"
+    }
+   ],
+   "practice": [
+    "gen:atval:4,44",
+    "gen:atval:4,28:mc",
+    "gen:atval:4,27",
+    "gen:atper:4,5,4,2",
+    "gen:atunit:3,9",
+    "gen:atsign:1,-1,4",
+    "gen:atdom:5,0,3,1"
+   ],
+   "transfer": [
+    "gen:atval:4,46:mc",
+    "gen:atper:4,5,4,3:w"
+   ],
+   "retention": [
+    "gen:atval:4,51",
+    "gen:atper:5,4,4,1"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "atval",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "atval",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atper",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atunit",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atsign",
+     "version": "1.0.0"
+    },
+    {
+     "family": "atdom",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2",
+    "family": "atval",
+    "seed": [
+     1,
+     8
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:atval:1,8",
+     "gen:atval:4,57"
     ]
    }
   },
@@ -54899,271 +55958,6 @@
    }
   },
   {
-   "competency": "MATH.algebra.geometric-sequences",
-   "title": "The nth term of a geometric progression",
-   "chapter": [
-    {
-     "title": "The nth term of a geometric progression",
-     "text": [
-      "In a GP each term is the one before times r, so going from the 1st to the nth term multiplies by r exactly n − 1 times: aₙ = a r^(n − 1)."
-     ],
-     "math": [
-      "Find the 9th term of the geometric progression 3, 6, 12, …",
-      "r = 6 ÷ 3 = 2",
-      "r^8 = 256",
-      "aₙ = a r^(n − 1) = 3 × 256 = 768"
-     ],
-     "tip": "The common difference was used as in an AP; each term here is 2 times the one before.",
-     "role": "concept",
-     "instance": "gen:aogp:3,2,9"
-    },
-    {
-     "title": "The sum of the first n terms of a GP",
-     "text": [
-      "Sₙ = a + ar + … + arⁿ⁻¹. Multiplying by r shifts every term along one place, so rSₙ − Sₙ = arⁿ − a and Sₙ = a(rⁿ − 1)/(r − 1).",
-      "Find a and r, then put them in Sₙ = a(rⁿ − 1)/(r − 1), working out rⁿ with its sign first."
-     ],
-     "math": [
-      "Find the sum of the first 9 terms of the geometric progression 8 + 24 + 72 + ⋯",
-      "r = 24 ÷ 8 = 3",
-      "r^9 = 19683",
-      "Sₙ = a(rⁿ − 1)/(r − 1) = 8 × (19683 − 1) ÷ (3 − 1) = 78728"
-     ]
-    },
-    {
-     "title": "The sum to infinity of a geometric series",
-     "text": [
-      "When |r| < 1 the terms shrink towards 0 and the partial sums a(1 − rⁿ)/(1 − r) approach a/(1 − r), because rⁿ → 0.",
-      "Find r = second term ÷ first term, check |r| < 1, and work out a/(1 − r)."
-     ],
-     "math": [
-      "Find the sum to infinity of the geometric series 8 + 8/5 + 8/25 + ⋯",
-      "r = 8/5 ÷ 8 = 1/5; |r| < 1, so the series converges",
-      "S∞ = a/(1 − r) = 8 ÷ 4/5 = 10"
-     ]
-    },
-    {
-     "title": "Identifying a geometric progression",
-     "text": [
-      "A sequence is a geometric progression when each term (after the first) is the previous term multiplied by the same non-zero number r, the common ratio: a, ar, ar², ar³, …",
-      "Divide every term by the term before it. If all the ratios are equal, it is a GP; if any ratio is different, it is not. Checking only the first two terms is never enough."
-     ],
-     "math": [
-      "All four sequences below start with the same two terms. Which one is a geometric progression?",
-      "Second term ÷ first term = 3",
-      "Only 7, 21, 63, 189, 567, … keeps that same ratio between every pair of neighbouring terms"
-     ]
-    },
-    {
-     "title": "Growth, depreciation and compound interest with geometric progressions",
-     "text": [
-      "Growing by r% a year multiplies the amount by 1 + r/100 every year; losing r% multiplies it by 1 − r/100. So the amounts at the start, after 1 year, after 2 years, … form a GP: P, PR, PR², …, and after n years the amount is PRⁿ.",
-      "Write the common ratio R (1.1 for 10% growth, 0.9 for 10% decrease), then work out P × Rⁿ. Note it is the (n + 1)th term, because the first term is the starting amount."
-     ],
-     "math": [
-      "A culture has 1,000 bacteria. The number of bacteria doubles every hour. How many bacteria will there be after 8 hours?",
-      "Each hour the amount is multiplied by the same number, r = 2: a geometric progression",
-      "After 8 steps: 1000 × 2⁸ = 256000"
-     ]
-    },
-    {
-     "title": "Using the sum to infinity: recurring decimals, a bouncing ball, nested shapes",
-     "text": [
-      "Many situations hide an infinite geometric series with |r| < 1: a recurring decimal 0.4545… = 45/100 + 45/10000 + …, the heights of a bouncing ball, the areas of shapes that shrink by the same factor each time. Its sum is a/(1 − r).",
-      "Write the first term a and the ratio r of the repeating part, check |r| < 1, use a/(1 − r), and then add any part that is not repeated (the whole number, or the first drop of the ball)."
-     ],
-     "math": [
-      "Write the recurring decimal 2.626262…",
-      "The recurring part is 31/50 + 31/50 × 1/100 + …: a GP with r = 1/100",
-      "S∞ = a/(1 − r): 31/50 ÷ 99/100 = 62/99",
-      "Add the whole-number part 2: 260/99"
-     ]
-    },
-    {
-     "title": "Does a geometric series converge, and to what?",
-     "text": [
-      "A geometric series a + ar + ar² + … converges (has a sum to infinity) exactly when |r| < 1; then the terms shrink to 0 and S∞ = a/(1 − r). If |r| ≥ 1 the terms do not shrink and the series diverges.",
-      "Find r = (second term) ÷ (first term). If |r| < 1 work out a/(1 − r); otherwise say it diverges — never use the formula without this check."
-     ],
-     "math": [
-      "Consider the geometric series −9 + 6 − 4 + ⋯. Which statement is true?",
-      "r = −2/3: |r| < 1, so the series converges",
-      "So: The series converges, and its sum to infinity is −27/5"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:aogp:2,-3,8",
-    "gen:aogp:-5,3,7",
-    "gen:aogp:5,-3,5"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Find r by dividing the second term by the first, then work out a r^(n − 1), keeping track of the sign."
-       ],
-       "math": [
-        "Find the 9th term of the geometric progression −3, 9, −27, …",
-        "r = 9 ÷ (−3) = −3",
-        "r^8 = 6561",
-        "aₙ = a r^(n − 1) = −3 × 6561 = −19683"
-       ],
-       "role": "worked-example",
-       "instance": "gen:aogp:-3,-3,9"
-      }
-     ],
-     "guided": "gen:aogp:9,-3,6",
-     "check": "gen:aogp:-5,3,4"
-    },
-    {
-     "id": "list",
-     "title": "Keep multiplying",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Keep multiplying",
-       "text": [
-        "Write the terms out, multiplying by r each time, until you reach the term asked for.",
-        "Count the multiplications: one fewer than the term's position."
-       ],
-       "math": [
-        "Find the 5th term of the geometric progression 9, −27, 81, …",
-        "r = −27 ÷ 9 = −3",
-        "r^4 = 81",
-        "aₙ = a r^(n − 1) = 9 × 81 = 729"
-       ],
-       "role": "strategy",
-       "instance": "gen:aogp:9,-3,5"
-      }
-     ],
-     "guided": "gen:aogp:3,2,8",
-     "check": "gen:aogp:3,-3,10:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:aogp:-3,-3,8",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Find the 8th term of the geometric progression −3, 9, −27, …” A common wrong answer is 81.",
-        "The common difference was used as in an AP; each term here is −3 times the one before."
-       ],
-       "math": [
-        "Not 81, but 6561"
-       ]
-      }
-     ],
-     "guided": "gen:aogp:9,-3,4",
-     "check": "gen:aogp:5,-3,7:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Use integer exponent laws. If a step is slow, practise that skill first.",
-        "Then the method is: Find r by dividing the second term by the first, then work out a r^(n − 1), keeping track of the sign."
-       ]
-      }
-     ],
-     "guided": "gen:aogp:5,-3,9",
-     "check": "gen:aogp:5,-3,6"
-    }
-   ],
-   "practice": [
-    "gen:aogp:5,-3,8",
-    "gen:aogp:8,-3,5:mc",
-    "gen:aogp:8,-3,6",
-    "gen:aogpsum:7,-3,7",
-    "gen:aogpinf:-1,-1,3",
-    "gen:aogpid:2,3,1,1",
-    "gen:aogpgr:3,4,0,3",
-    "gen:aogpuse:1,5,4,0",
-    "gen:aogpcv:4,1,4"
-   ],
-   "transfer": [
-    "gen:aogp:8,-3,7:mc",
-    "gen:aogpgr:0,2,2,3:w",
-    "gen:aogpuse:0,2,35,1:w"
-   ],
-   "retention": [
-    "gen:aogp:2,-3,9",
-    "gen:aogpsum:8,3,8:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "aogp",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "aogp",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aogpsum",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aogpinf",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aogpid",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aogpgr",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aogpuse",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aogpcv",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "aogp",
-    "seed": [
-     3,
-     2,
-     9
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:aogp:3,2,9",
-     "gen:aogp:-3,-3,8",
-     "gen:aogp:-3,-3,9"
-    ]
-   }
-  },
-  {
    "competency": "MATH.sequences.agp-hp",
    "title": "The sum to infinity of an arithmetico-geometric series",
    "chapter": [
@@ -59312,183 +60106,6 @@
      "gen:aqrel:85",
      "gen:aqrel:69",
      "gen:aqrel:86"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.calculus.continuity",
-   "title": "Choosing k to make a function continuous",
-   "chapter": [
-    {
-     "title": "Choosing k to make a function continuous",
-     "text": [
-      "f is continuous at a when lim (x → a) f(x) exists and equals f(a): the left limit, the right limit and the value all agree."
-     ],
-     "math": [
-      "f(x) = kx + 3 for x ≤ 1, and f(x) = 2x² + 3 for x > 1. Find the value of k for which f is continuous at x = 1.",
-      "The limit of the other piece at the point is 2",
-      "Continuity needs f(a) = that limit, so k = 2"
-     ],
-     "tip": "3 was moved across without changing its sign: k + 3 = 5 was written as k = 5 + 3. Moving a number to the other side changes its sign: k = 5 − 3.",
-     "role": "concept",
-     "instance": "gen:aqcontk:0,1,3,2,3"
-    },
-    {
-     "title": "Is a piecewise function continuous on ℝ or on an interval?",
-     "text": [
-      "A function is continuous on a set when it is continuous at every point of it. Polynomials are continuous everywhere, so a piecewise function can only fail where its formula changes, and there it fails exactly when the two pieces do not meet.",
-      "List the points where the formula changes that lie in the set. At each one, work out the value of the left piece and of the right piece there (and f at the point). Equal values: continuous there; different: a discontinuity."
-     ],
-     "math": [
-      "f(x) = −x + 4 for x < 2; x² − 2x for 2 ≤ x < 3; and −2x + 9 for x ≥ 3. Which statement about the continuity of f on ℝ is true?",
-      "A polynomial is continuous everywhere, so each piece is a polynomial, so f is continuous away from x = a and x = b",
-      "Compare the two pieces at each break point (right-hand value minus left-hand value): jumps 2 at x = 2, 0 at x = 3",
-      "So the true statement is option C"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:aqcontk:1,3,4,0,0",
-    "gen:aqcontk:4,4,0,0,0",
-    "gen:aqcontk:2,3,3,0,0"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Find the limit of the formula near a (substitute for a polynomial; use sin θ/θ → 1, 1 − cos θ = 2 sin²(θ/2), rationalising or factorising otherwise), then set f(a) equal to it."
-       ],
-       "math": [
-        "f(x) = kx + 3 for x ≤ 1, and f(x) = 2x² for x > 1. Find the value of k for which f is continuous at x = 1.",
-        "The limit of the other piece at the point is −1",
-        "Continuity needs f(a) = that limit, so k = −1"
-       ],
-       "role": "worked-example",
-       "instance": "gen:aqcontk:0,1,3,2,0"
-      }
-     ],
-     "guided": "gen:aqcontk:0,1,-1,3,1",
-     "check": "gen:aqcontk:1,3,2,0,0"
-    },
-    {
-     "id": "both_sides",
-     "title": "Left value, right value",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Left value, right value",
-       "text": [
-        "For a function in two pieces, work out each piece at x = a.",
-        "Continuity means the two values are equal: that is an equation for k."
-       ],
-       "math": [
-        "f(x) = sin(4x)/x for x ≠ 0, and f(0) = k. Find the value of k for which f is continuous at x = 0.",
-        "The limit of the other piece at the point is 4",
-        "Continuity needs f(a) = that limit, so k = 4"
-       ],
-       "role": "strategy",
-       "instance": "gen:aqcontk:1,4,1,0,0"
-      }
-     ],
-     "guided": "gen:aqcontk:1,5,6,0,0",
-     "check": "gen:aqcontk:3,6,3,0,0:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:aqcontk:1,1,3,0,0",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “f(x) = sin(x)/(3x) for x ≠ 0, and f(0) = k. Find the value of k for which f is continuous at x = 0.” A common wrong answer is 3.",
-        "The ratio was turned over, giving 3: the number in the sine goes on top, since sin(x)/(3x) = (1/3) × sin(x)/x, which tends to 1/3."
-       ],
-       "math": [
-        "Not 3, but 1/3"
-       ]
-      }
-     ],
-     "guided": "gen:aqcontk:0,1,3,2,-3",
-     "check": "gen:aqcontk:3,3,3,0,0:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Evaluate elementary limits. If a step is slow, practise that skill first.",
-        "Then the method is: Find the limit of the formula near a (substitute for a polynomial; use sin θ/θ → 1, 1 − cos θ = 2 sin²(θ/2), rationalising or factorising otherwise), then set f(a) equal to it."
-       ]
-      }
-     ],
-     "guided": "gen:aqcontk:0,3,-1,3,-2",
-     "check": "gen:aqcontk:0,3,3,3,3"
-    }
-   ],
-   "practice": [
-    "gen:aqcontk:4,5,0,0,0",
-    "gen:aqcontk:0,3,3,3,0:mc",
-    "gen:aqcontk:1,1,5,0,0",
-    "gen:aqcontd:2,1,-2,-2,1,0,-1,1"
-   ],
-   "transfer": [
-    "gen:aqcontk:0,3,-1,3,1:w",
-    "gen:aqcontd:-3,2,0,2,1,-1,1,1:w"
-   ],
-   "retention": [
-    "gen:aqcontk:2,1,4,0,0",
-    "gen:aqcontd:0,2,1,-2,1,1,-1,0"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "aqcontk",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "aqcontk",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aqcontd",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "aqcontk",
-    "seed": [
-     0,
-     1,
-     3,
-     2,
-     3
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:aqcontk:0,1,3,2,3",
-     "gen:aqcontk:1,1,3,0,0",
-     "gen:aqcontk:0,1,3,2,0"
     ]
    }
   },
@@ -67932,233 +68549,6 @@
      "gen:atmdmean:8,8,6,31,36,23",
      "gen:atmdmean:25,34,30,38,16,10",
      "gen:atmdmean:12,13,33,12,30,30"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.trigonometry.functions",
-   "title": "Trigonometric functions of any angle",
-   "chapter": [
-    {
-     "title": "Trigonometric functions of any angle",
-     "text": [
-      "Every angle has the same trigonometric values as its position on the unit circle; the value is the reference angle's value with the sign of the quadrant (All, Sin, Tan, Cos)."
-     ],
-     "math": [
-      "Find the exact value of cos 120°. Simplify fully, with no square root in the denominator.",
-      "120° is the same position as 120°",
-      "120° has reference angle 60°",
-      "Use the reference angle with the sign of cos in that quadrant: −1/2"
-     ],
-     "tip": "The sign was wrong: in the quadrant of 120°, cos is negative.",
-     "role": "concept",
-     "instance": "gen:atval:1,8"
-    },
-    {
-     "title": "The period of a trigonometric function",
-     "text": [
-      "sin, cos, sec and cosec repeat every 2π; tan and cot every π. Replacing x by kx makes the graph repeat k times as fast; the number in front and the shift inside do not change the period.",
-      "Take the basic period (2π or π) and divide it by k."
-     ],
-     "math": [
-      "What is the period of y = 3 sin(5x + 1)?",
-      "sin x repeats every 2π",
-      "Multiplying x by 5 divides the period by 5: 2π/5"
-     ]
-    },
-    {
-     "title": "The point on the unit circle for a real number t",
-     "text": [
-      "On the unit circle, the real number t is an arc length; the point it reaches is (cos t, sin t). This defines sin and cos for every real number, and the quadrant of the point gives their signs.",
-      "Change t to an angle (π = 180°), find the reference angle and its standard values, and give each coordinate the sign of its quadrant."
-     ],
-     "math": [
-      "For a real number t, P(t) is the point reached by going a distance t round the unit circle x² + y² = 1 from (1, 0) (anticlockwise when t > 0), so P(t) = (cos t, sin t). Find P(t) for t = 3π/4. Give exact coordinates (x, y).",
-      "t = 3π/4 is the same turn as 135°",
-      "So P(t) = (cos t, sin t) = (−√2/2, √2/2)"
-     ]
-    },
-    {
-     "title": "The signs of sin t and cos t for a real number t",
-     "text": [
-      "P(t) = (cos t, sin t) lies in the quadrant reached after going t round the unit circle; cos t has the sign of the x-coordinate and sin t of the y-coordinate. One full turn is 2π ≈ 6.28, and the quadrants end at π/2 ≈ 1.57, π ≈ 3.14 and 3π/2 ≈ 4.71.",
-      "Add or take away 2π until 0 ≤ t < 2π, compare t with π/2, π and 3π/2 to find the quadrant, and read the signs (All, Sin, Tan, Cos)."
-     ],
-     "math": [
-      "Take the real number t = 11.8 (in radians). Which is true for the point P(t) = (cos t, sin t) on the unit circle?",
-      "Removing whole turns, t is 1.7560566569687304π more than a multiple of 2π",
-      "That is quadrant 4: sin t < 0 and cos t > 0 (P(t) is in the fourth quadrant)"
-     ]
-    },
-    {
-     "title": "Domain and range of the six trigonometric functions",
-     "text": [
-      "sin and cos are defined for every x and take values from −1 to 1; tan and sec are undefined where cos x = 0 (x = (2n + 1)π/2), cot and cosec where sin x = 0 (x = nπ); tan and cot take every real value; sec and cosec never lie strictly between −1 and 1.",
-      "For a f(kx): the excluded x come from kx = (2n + 1)π/2 or kx = nπ, so divide by k; the range of sin, cos, sec, cosec is scaled by a, while tan and cot still take every real value."
-     ],
-     "math": [
-      "What is the range of the function y = 5 cosec 3x?",
-      "For cosec: (−∞, −5] ∪ [5, ∞)",
-      "So the answer is C"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:atval:2,-40",
-    "gen:atval:0,-4",
-    "gen:atval:5,-38"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Add or take away 360° until the angle is between 0° and 360°, find its reference angle (its distance from the x-axis), then attach the sign of the function in that quadrant."
-       ],
-       "math": [
-        "Find the exact value of sec 855°. Simplify fully, with no square root in the denominator.",
-        "855° is the same position as 135°",
-        "135° has reference angle 45°",
-        "Use the reference angle with the sign of sec in that quadrant: −√2"
-       ],
-       "role": "worked-example",
-       "instance": "gen:atval:4,57"
-      }
-     ],
-     "guided": "gen:atval:4,48",
-     "check": "gen:atval:4,52"
-    },
-    {
-     "id": "allied",
-     "title": "Allied-angle rules",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Allied-angle rules",
-       "text": [
-        "Write the angle as 90° × n ± θ.",
-        "If n is even keep the function; if n is odd change to its co-function. Then fix the sign from the quadrant of the original angle."
-       ],
-       "math": [
-        "Find the exact value of sec 570°. Simplify fully, with no square root in the denominator.",
-        "570° is the same position as 210°",
-        "210° has reference angle 30°",
-        "Use the reference angle with the sign of sec in that quadrant: −2√3/3"
-       ],
-       "role": "strategy",
-       "instance": "gen:atval:4,38"
-      }
-     ],
-     "guided": "gen:atval:4,39",
-     "check": "gen:atval:4,58:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:atval:4,56",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Find the exact value of sec 840°. Simplify fully, with no square root in the denominator.” A common wrong answer is 2.",
-        "The sign was wrong: in the quadrant of 840°, sec is negative."
-       ],
-       "math": [
-        "Not 2, but −2"
-       ]
-      }
-     ],
-     "guided": "gen:atval:4,45",
-     "check": "gen:atval:4,34:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Use trigonometric ratios. If a step is slow, practise that skill first.",
-        "Then the method is: Add or take away 360° until the angle is between 0° and 360°, find its reference angle (its distance from the x-axis), then attach the sign of the function in that quadrant."
-       ]
-      }
-     ],
-     "guided": "gen:atval:4,44",
-     "check": "gen:atval:4,24"
-    }
-   ],
-   "practice": [
-    "gen:atval:4,28",
-    "gen:atval:4,27:mc",
-    "gen:atval:4,46",
-    "gen:atper:4,5,4,2",
-    "gen:atunit:3,9",
-    "gen:atsign:1,-1,4",
-    "gen:atdom:5,0,3,1"
-   ],
-   "transfer": [
-    "gen:atval:4,26:mc",
-    "gen:atper:4,5,4,3:w"
-   ],
-   "retention": [
-    "gen:atval:4,51",
-    "gen:atper:5,4,4,1"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "atval",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "atval",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atper",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atunit",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atsign",
-     "version": "1.0.0"
-    },
-    {
-     "family": "atdom",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "atval",
-    "seed": [
-     1,
-     8
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:atval:1,8",
-     "gen:atval:4,56",
-     "gen:atval:4,57"
     ]
    }
   },

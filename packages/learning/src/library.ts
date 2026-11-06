@@ -203,6 +203,8 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
         used.add(exposureKey(id));
       }
       if (st.screens.some(sc => sc.worked || !sc.instance)) throw new Error(`${LIBRARY_POLICY}: ${st.id}: explicit scoped screens require their own instances`);
+      // a shown example is never drawn again as a question to answer (as for template and extendsTemplate modules)
+      for (const sc of st.screens) used.add(exposureKey(sc.instance!));
       return { id: st.id, title: st.title, kind: st.kind, scope: st.scope, ...(st.addresses !== undefined ? { addresses: st.addresses } : {}), needs: st.buildsOnPrerequisites ? probes : [], screens: st.screens, guided: st.guided!, check: st.check! };
     }
     const ex = st.screens.some((s) => s.worked) ? example() : seed;

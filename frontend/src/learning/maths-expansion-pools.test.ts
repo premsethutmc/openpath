@@ -203,7 +203,37 @@ for (const it of pool("aqmono").items as any[]) {
   for (let x = -20.003; x <= 20; x += 0.01) { const d = (f(x + 1e-6) - f(x - 1e-6)) / 2e-6; if (Math.abs(d) < 1e-3) continue; const want = m[2] === "increasing" ? d > 0 : d < 0; if (want !== inServed(x)) { ok = false; why = `x=${x.toFixed(3)} f'=${d}`; break; } }
   rec("aqmono", ok, `${m[1]} ${m[2]} served=${it.answer} ${why}`);
 }
-const SIZES: Record<string, number> = { atprinc: 141, lim: 54, lineq: 500, lneg: 500, aqfp: 300, aqsep: 300, atsiner: 300, atrad: 288, aologlaw: 190, ahlike: 400, ansecpt: 216, atcomp: 192, aodom: 450, aqmono: 400 };
+for (const it of pool("aogp").items as any[]) {
+  // the progression from the prompt: check it is geometric, then multiply term by term (no power formula)
+  const m = N(it.prompt).match(/Find the (\d+)(?:st|nd|rd|th) term of the geometric progression (-?\d+), (-?\d+), (-?\d+), …/)!;
+  const n = +m[1], a = +m[2], b = +m[3], c = +m[4], r = b / a;
+  let t = a; for (let k = 1; k < n; k++) t *= r;
+  rec("aogp", c === b * r && Number(N(String(it.answer))) === t, `${it.prompt} served=${it.answer} product=${t}`);
+}
+for (const it of pool("aqcontk").items as any[]) {
+  const p = N(it.prompt);
+  const pw = p.match(/^f\(x\) = k(?:x|·x)( [+-] \d+)? for x ≤ (\d+), and f\(x\) = (.+?) for x > \d+\./);
+  const gap = p.match(/^f\(x\) = (.+?) for x ≠ (\d+), and f\(\d+\) = k\./);
+  let want: number;
+  if (pw) {
+    // left piece k·x + c, right piece evaluated just to the right of the join: k = (right − c) / x₀
+    const x0 = +pw[2], c = pw[1] ? Number(pw[1].replace(/\s/g, "")) : 0;
+    want = (evalExpr(pw[3], x0 + 1e-9) - c) / x0;
+  } else if (gap) {
+    // the formula on both sides of the point, averaged: the limit k must equal
+    const a = +gap[2], f = (x: number) => evalExpr(gap[1].replace(/(sin|cos)\((\d*)x\)/g, (_, t, n) => `${t}(${n || 1}x)`), x);
+    want = (f(a + 1e-4) + f(a - 1e-4)) / 2;
+  } else { rec("aqcontk", false, `unparsed ${p}`); continue; }
+  rec("aqcontk", Math.abs(evalExpr(String(it.answer)) - want) < 1e-6, `${p.slice(0, 70)} served=${it.answer} numeric=${want}`);
+}
+for (const it of pool("atval").items as any[]) {
+  const m = N(it.prompt).match(/value of (sin|cos|tan|cosec|sec|cot) ?\(?(-?\d+)°\)?/)!;
+  const t = (+m[2] * Math.PI) / 180;
+  const v = { sin: Math.sin(t), cos: Math.cos(t), tan: Math.tan(t), cosec: 1 / Math.sin(t), sec: 1 / Math.cos(t), cot: Math.cos(t) / Math.sin(t) }[m[1]]!;
+  const served = String(it.answer);
+  rec("atval", Math.abs(evalExpr(served) - v) < 1e-9 && !/\/√/.test(served.replace(/\s/g, "")), `${it.prompt} served=${served} numeric=${v}`);
+}
+const SIZES: Record<string, number> = { aogp: 300, aqcontk: 243, atval: 400, atprinc: 141, lim: 54, lineq: 500, lneg: 500, aqfp: 300, aqsep: 300, atsiner: 300, atrad: 288, aologlaw: 190, ahlike: 400, ansecpt: 216, atcomp: 192, aodom: 450, aqmono: 400 };
 for (const [f, size] of Object.entries(SIZES)) test(`${f}: every served answer (${size}) agrees with an independent recomputation`, () => {
   const r = report[f];
   assert.ok(r, `${f} checked`);
