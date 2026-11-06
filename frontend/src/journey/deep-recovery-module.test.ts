@@ -82,10 +82,12 @@ const deepSteps = (steps: Step[]) => steps.filter((x) => x.where === "deep");
 test("in-module: start in the module -> wrong own question -> down to prerequisites -> lesson -> fresh problem on the original skill -> module continues", () => {
   const { s, steps } = run(learner([PV]));
   const firstDeep = steps.findIndex((x) => x.where === "deep");
-  assert.ok(firstDeep > 0 && steps.slice(0, firstDeep).every((x) => x.where === "module" && x.phase === "explore"), "starts in the module's own questions");
+  // phase 7 (with #115): the module's own carrying teaching comes first (scoped-teaching-priority@1), then the struggle@0 check
+  assert.ok(firstDeep > 0 && steps.slice(0, firstDeep).every((x) => x.where === "module"), "starts in the module's own questions");
+  assert.deepEqual([...new Set(steps.slice(0, firstDeep).map((x) => x.phase))], ["explore", "chapter", "guided", "check"], "own teaching first");
   const orig = steps[firstDeep].original!;
   assert.equal(question(orig).competency, C);
-  assert.equal(s.events.find((e) => (e as { questionId?: string }).questionId === orig && (e as { record?: string }).record === "attempt")!["activity" as never], "diagnostic", "the original is the module's own exploratory answer");
+  assert.equal(s.events.find((e) => (e as { questionId?: string }).questionId === orig && (e as { record?: string }).record === "attempt")!["activity" as never], "check", "the original is the module's own check after its teaching (struggle@0)");
   const deep = deepSteps(steps);
   assert.ok(deep.some((x) => x.phase === "probe" && x.qid && question(x.qid).competency === PV && !x.correct), "goes down to the prerequisite and finds it failing");
   assert.ok(deep.some((x) => x.lesson === PV), "teaches the prerequisite");
@@ -130,8 +132,8 @@ test("in-module: without the adapter the shipped module keeps its own recovery w
     const cut = s.events.filter((e) => (e as { at: string }).at <= cutAt);
     const r0 = SliceSession.fromEvents(s.learnerId, C, withDecisions(cut, s.decisions), Date.parse(cutAt) + 1, s.session).state();
     const shipped = moduleState(C, r0.records, r0.evidence(C), Date.parse(cutAt) + 1, s.session, null, r0.evidence);
-    assert.equal(shipped.phase, "recover", "the shipped module asks for its own (two-level) recovery throughout the episode");
-    assert.equal(shipped.original, orig);
+    // phase 7 (with #115): the shipped module stands on its own teaching's stop (a person) throughout the episode
+    assert.ok(shipped.phase === "pause" || (shipped.phase === "recover" && shipped.original === orig), shipped.phase);
     const r = recovery(orig, r0.records, r0.evidence, Date.parse(cutAt) + 1, s.session);
     checked++;
     // the shipped recovery would show the original problem again or a support module, never the deep episode's question

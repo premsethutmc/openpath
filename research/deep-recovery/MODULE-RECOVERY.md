@@ -141,3 +141,85 @@ Exact steps, following `e2e/deep-recovery-app.test.mts`:
   untested on a real case.
 - The precedence question in 5.1 decides whether `addition-regroup`-type modules (with scoped units) ever reach deep recovery on #115.
 - Synthetic learners (structured dependency answerers). Nothing here measures learning.
+
+## 8. Phase 7: combined with #115 (research/dr7-with115, owner's decision 1)
+
+Branch `research/dr7-with115` = research head 26804900 + merge of #115 (e1d5ed74). Merge commit 378fa190 resolves `records.ts:144-146`
+by keeping #115's attempts line and the research `episode` teach line. Nothing was merged into #112 or #115.
+
+Owner: "Teach the current skill first where #115 already has suitable teaching. If the learner still struggles, investigate the
+underlying gap and use deep recovery. Don't force every mistake down a prerequisite chain."
+
+### Rule: struggle@0 (`frontend/src/learning/deep-module.ts`, `struggle()`; switch on only)
+
+1. **Suitable own teaching** is #115's own case: one of the module's exploratory answers (activity `diagnostic`, no context) is wrong,
+   and a scoped unit of the module accepts it (`unitOfQuestion`). #115 then teaches the module (scoped-teaching-priority@1).
+   Nothing changes until that teaching has run: chapter → guided → independent check, exactly as #115 does.
+2. **Still struggles** uses existing evidence only. Both of these must hold:
+   - The module has stopped on that teaching. Either the planner says `recommend_human` (the block's independent check was wrong,
+     policy C), or the after-pass@1 pause applies.
+   - The learner's independent answers on that unit since the teaching end in **two wrong in a row**. Independent means first try,
+     no hint, no shown solution, not guided, not a deep-recovery answer.
+3. **Slip guard**: with only one wrong answer (the block check), the module asks **one** fresh question of the unit, alone (the
+   "struggle check", `unitCheck`).
+   - Right: most likely a slip. No prerequisite question and no lesson. #115's own next step stands (a person, policy C, with
+     handover@1), and its reason says it was a slip.
+   - Wrong: deep recovery starts from that answer. after-pass@1 already asks its own one-more question, so its pause arrives with two
+     wrong answers and goes straight on.
+4. **Deep episode**: everything as in phase 6 (diagnose down, teach the deepest gap, climb, fresh problems in the module).
+   - Solved: the module goes on with #115's decision without the adaptive loop. Where the shared record now shows the skill, the
+     module continues to done (addition-regroup, triangle-properties). Where #115 still stands on its policy-C stop (angle-pairs: the
+     sub-skill evidence is not complete yet), the stop and its way back are kept, and only its reason is made true ("What was missing
+     (angle measure) has been worked on …").
+   - Blocked or escalated: the module pauses with the episode's reason.
+5. **Modules with no suitable own unit**: a module-level `recover` goes to deep recovery as in phase 6.
+6. **Never**: a stuck problem's own investigation answers (`investigate:` / `recovery:` contexts) never start a deep episode in the
+   module. They keep the shipped recovery and its bounds (policy C, scenario 3h).
+
+Cost of the slip guard for a learner who really struggles: the block check, the struggle check, and deep recovery's own slip check.
+That is three same-kind questions before the first prerequisite question. A deep episode started from the struggle check cannot skip
+its own slip check without changing deep-recovery.ts (worker A's file).
+
+### Tests (`frontend/src/journey/deep-recovery-module-115.test.ts`, 6/6)
+
+| Case | Result |
+|---|---|
+| Own teaching is enough, all four modules #115 changed | Switch on decides exactly as #115 at every step (JSON-equal), no deep step, only its own lesson, no prerequisite question |
+| Capable learner, one slip on the post-teaching check (addition-regroup, angle-pairs) | Exactly +1 question compared with switch off; no prerequisite question, no lesson below; same final phase as #115 (pause) with the slip reason |
+| Own teaching fails → deep → fresh problems → module continues: addition-regroup (gap place value), triangle-properties (gap angle measure) | Own chapter and a wrong check come first, then deep probes find the gap and teach it, fresh module problems are right, the module ends done |
+| angle-pairs (gap angle measure) | Deep solves it; #115's policy-C stop is kept with a true reason |
+| scale-drawings (gap ratio) | Ratio has no teachable content here → blocked → module pause, nothing solved ("where content allows") |
+| Policies A1 (oneSlip 3/4/5) and C (3h) with the switch on | Every module decision in those journeys equals #115's own (0 divergent of all checked) |
+
+The phase-6 file `deep-recovery-module.test.ts` (10/10) is adjusted to #115 for addition-regroup in two assertions (marked "phase 7"):
+own teaching first, and the original is the post-teaching check.
+
+### Patch needed on #115 later
+
+None, for this research path: the rule lives in the wrapper and reads `moduleState`'s output (`decision.action`, `why`). #115's hunks
+(intervention.ts:520-530, :933-951) are untouched.
+
+If this becomes product behaviour (owner's call, after #115 is merged), the minimal engine patch on #115's intervention.ts marks the two
+stops so that the app need not re-derive them, and it exports the handover helper:
+
+```diff
+--- a/packages/learning/src/intervention.ts   (e1d5ed74)
++++ b/packages/learning/src/intervention.ts
+@@ -345 +345 @@
+-function withHandover(ms: ModuleState, m: Module, records: LearnerRecords, now: number): ModuleState {
++export function withHandover(ms: ModuleState, m: Module, records: LearnerRecords, now: number): ModuleState {
+@@ -653 +653 @@
+-  if (decision.action === "recommend_human") return { ...base, phase: "pause", diagnosis: d, decision, reason: "Different explanations have not clicked yet. …" };
++  if (decision.action === "recommend_human") return { ...base, phase: "pause", diagnosis: d, decision, why: "own-teaching-stop@1: recommend_human", reason: "Different explanations have not clicked yet. …" };
+```
+
+The after-pass@1 pause (:672) already carries `why: after-pass@1 …`. With these in place, `stoppedOnOwnTeaching()` in the wrapper
+reads `why` only. Everything else (the struggle check, starting the episode, the true reasons) stays out of the engine.
+
+### Not proven (phase 7)
+
+- No browser run on the combined branch.
+- After a solved episode, angle-pairs keeps #115's policy-C stop, because #115's evidence (sub-skill coverage) is not yet complete.
+  Whether a solved deep episode should lift that stop is a policy question, not answered here.
+- Synthetic learners only. The prerequisite links that deep recovery followed (e.g. triangle-properties → angle measure, from the
+  question's own solution steps) are not approved by this work.
