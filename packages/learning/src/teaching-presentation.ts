@@ -201,10 +201,24 @@ function mathematicalExplanation(step: Step, family: Def): string {
   const trimmed = idea.includes(".") ? idea.slice(0, idea.indexOf(".") + 1) : idea;
   const why = concept || trimmed;
   const a = shown(step.inputs[0]), b = step.inputs.length > 1 ? shown(step.inputs[1]) : "";
+  // grade7-teaching@1: an op-based sentence states arithmetic only when it is true of the step's own numbers and they read
+  // cleanly (whole numbers or short decimals); otherwise only the idea is said. A step's inputs are not always the operands
+  // (5% of 360 is computed as 360 ÷ 20 from the inputs 360 and 5), so "360 ÷ 5 = 18" must never be shown.
+  const nums = step.inputs.map((x) => (typeof x === "number" ? x : NaN));
+  const v = typeof step.value === "number" ? step.value : NaN;
+  const clean = (x: number) => Number.isFinite(x) && Math.abs(x * 1000 - Math.round(x * 1000)) < 1e-9;
+  const near = (x: number) => Number.isFinite(x) && Number.isFinite(v) && Math.abs(x - v) < 1e-9 * Math.max(1, Math.abs(v));
+  const truth: Record<string, () => boolean> = {
+    add: () => near(nums.reduce((s, x) => s + x, 0)),
+    subtract: () => nums.length === 2 && near(nums[0] - nums[1]),
+    multiply: () => near(nums.reduce((s, x) => s * x, 1)),
+    divide: () => nums.length === 2 && nums[1] !== 0 && near(nums[0] / nums[1]),
+  };
+  if (truth[step.op] && !(nums.every(clean) && clean(v) && truth[step.op]())) return why ? `${why.replace(/\.$/, "")}.` : "";
 
   switch (step.op) {
     case "add":
-      return why ? `${a} + ${b} = ${result} — ${why}.` : `${a} + ${b} = ${result}.`;
+      return why ? `${step.inputs.map(shown).join(" + ")} = ${result} — ${why}.` : `${step.inputs.map(shown).join(" + ")} = ${result}.`;
     case "subtract":
       return why ? `${a} − ${b} = ${result} — ${why}.` : `${a} − ${b} = ${result}.`;
     case "multiply": {
@@ -230,10 +244,9 @@ function mathematicalExplanation(step: Step, family: Def): string {
       const contribution = digitVal * placeVal;
       return `The digit ${a} in the ${placeName} place is worth ${shown(contribution)}.`;
     }
-    default: {
-      const inputs = step.inputs.map(shown).join(" and ");
-      return why ? `${step.op}: ${inputs} → ${result} — ${why}.` : `${step.op}: ${inputs} → ${result}.`;
-    }
+    default:
+      // never a raw trace of the solver ("equal: 100 → 100"): the result and the idea only
+      return why ? `This gives ${result} — ${why}.` : `This gives ${result}.`;
   }
 }
 

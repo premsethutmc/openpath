@@ -272,6 +272,8 @@ export const B12: Def[] = [
     explain: (s) => (s.id === "first" ? `${s.inputs[0]} × (${s.inputs[1]}) = ${s.value}` : s.id === "second" ? `${s.inputs[0]} × (${s.inputs[1]}) = ${s.value}` : `Add the two rows and collect like terms: the coefficients are ${s.value}`),
     domain: [[1, 4], [-6, 6], [1, 3], [-5, 5], [-6, 6]],
     cap: 400,
+    // level@1 (grade7-teaching@1): a learner below Grade 8 is not asked this family's problems
+    grade: () => 8,
     difficulty: ([a, b, c, d]) => (a === 1 && c === 1 && b > 0 ? 1 : b < 0 && d < 0 ? 3 : 2),
     teach: {
       idea: "Multiplication distributes over addition: each term of the first bracket multiplies every term of the second, and when powers of x are multiplied their indices add.",
@@ -333,6 +335,8 @@ export const B12: Def[] = [
       s.id === "bring" ? `Bring down the first coefficient: ${s.value}` : s.id === "quotient" ? `The quotient is ${s.value}` : s.id === "remainder" ? `${N(Number(s.inputs[0]))} × ${N(Number(s.inputs[1]))} + ${N(Number(s.inputs[2]))} = ${N(Number(s.value))}: this last number is the remainder` : `${N(Number(s.inputs[0]))} × ${N(Number(s.inputs[1]))} + ${N(Number(s.inputs[2]))} = ${N(Number(s.value))}`,
     domain: [[1, 3], [-4, 4], [-6, 6], [-9, 9], [-9, 9]],
     cap: 400,
+    // level@1 (grade7-teaching@1): a learner below Grade 9 is not asked this family's problems
+    grade: () => 9,
     difficulty: ([a, r, , , R]) => (a === 1 && r > 0 && R === 0 ? 1 : a === 1 || r > 0 ? 2 : 3),
     teach: {
       idea: "Dividing by x − r leaves p(x) = (x − r) × quotient + remainder; synthetic division finds the quotient's coefficients one at a time.",
@@ -479,14 +483,14 @@ export const B12: Def[] = [
   {
     id: "alrule",
     arity: 3,
-    title: "The straight-line rule behind a table",
+    title: "The rule behind a table of values",
     competency: L2,
     type: "exact",
     mc: true,
     // [a, b, s]: y = ax + b for x = s … s + 4
     parse: none,
     reject: (p) => (!inR(p, [[-6, 6], [-10, 10], [0, 2]]) || p[0] === 0 ? "A rule y = ax + b with a from −6 to 6 (not 0), b from −10 to 10, and a table starting at x = 0, 1 or 2." : null),
-    prompt: () => `The table in the picture shows pairs (x, y) that follow one straight-line rule. Write the expression in x that gives y (just the expression in x, without "y =").`,
+    prompt: () => `The table in the picture shows pairs (x, y). y is always the same number times x, plus or minus a fixed number. Write the expression in x that gives y (just the expression in x, without "y =").`,
     solve: ([a, b, s]) => ({
       steps: [
         st("step", "subtract", INTADD, [s * a + b + a, s * a + b], a),
@@ -513,6 +517,8 @@ export const B12: Def[] = [
     figure: ([a, b, s]) => ({ type: "table", head: ["x", ...[0, 1, 2, 3, 4].map((i) => N(s + i))], rows: [["y", ...[0, 1, 2, 3, 4].map((i) => N(a * (s + i) + b))]] }),
     domain: [[-6, 6], [-10, 10], [0, 2]],
     cap: 300,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([a, b, s]) => (s === 0 && a > 0 ? 1 : a > 0 || b >= 0 ? 2 : 3),
     word: ([a, b, s]) => `${nm(a + b)} records the temperature y (in °C) of a liquid x minutes after starting an experiment: ${[0, 1, 2, 3, 4].map((i) => `after ${s + i} min it is ${N(a * (s + i) + b)} °C`).join("; ")}. The temperature changes steadily. Write the expression in x that gives y (just the expression, without "y =").`,
     teach: {
@@ -550,6 +556,8 @@ export const B12: Def[] = [
     explain: (s) => (s.id === "substitute" ? `Put x = ${s.inputs[1]}: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "subtract" ? `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}, so the y part is ${s.value}` : `y = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[1, 9], [2, 9], [10, 60], [1, 6]],
     cap: 300,
+    // level@1 (grade7-teaching@1): a learner below Grade 9 is not asked this family's problems
+    grade: () => 9,
     difficulty: ([a, b, , t]) => (a * t <= 12 && b <= 5 ? 1 : a * t <= 30 ? 2 : 3),
     word: ([a, b, c, t]) => `Pens cost ₹${a} each and notebooks cost ₹${b} each. ${nm(a + c)} spends exactly ₹${c} and buys ${t} ${t === 1 ? "pen" : "pens"}. How many notebooks does ${nm(a + c)} buy?`,
     teach: {
@@ -1912,6 +1920,8 @@ export const B12: Def[] = [
     explain: (s) => (s.id === "test" ? `${s.inputs[0]} has ${s.value}` : s.id === "collect" ? `Collect like terms and order by powers: ${s.value}` : s.id === "name" ? `It has ${s.inputs[0]} as its ${Number(s.value) === Number(s.inputs[0]) ? "degree" : "number of terms"}: answer ${"ABCD"[Number(s.value)]}` : `So the answer is ${"ABCD"[Number(s.value)]}`),
     domain: [[0, 3], [0, 59]],
     keep: (p) => firstOnly("alpoly", [[0, 3], [0, 59]], (p) => `${B12.find((d) => d.id === "alpoly")!.prompt(p)}|${B12.find((d) => d.id === "alpoly")!.choices!(p).join("|")}`)(p),
+    // level@1 (grade7-teaching@1): polynomials (and why √x or 1/x is not one) are Grade 9 work; a learner below Grade 9 is not asked these
+    grade: () => 9,
     difficulty: ([k, s]) => (k === 0 ? 2 : k === 1 ? 1 : polyCls(k, s).first !== polyCls(k, s).deg || polyCls(k, s).written !== polyCls(k, s).terms ? 3 : 2),
     teach: {
       idea: "A polynomial in x is a sum of terms a·xⁿ with n a whole number (0, 1, 2, …). Its degree is the highest power of x; by degree it is constant, linear, quadratic or cubic, and by its number of terms a monomial, binomial or trinomial.",
@@ -1935,7 +1945,8 @@ export const B12: Def[] = [
     reject: (p) => (!inR(p, [[0, 3], [0, 59]]) ? "One of four kinds of question with a choice of expressions 0–59." : null),
     prompt: ([k, s]) => {
       const g = degGen(k, s);
-      return k === 0 ? `What is the degree of the polynomial ${g.text}?` : k === 1 ? `What is the coefficient of ${g.ask === 0 ? "the constant term" : g.ask === 1 ? "x" : `x${sup(g.ask)}`} in ${g.text}?${g.ask === 0 ? "" : " (Write 0 if there is no such term.)"}` : k === 2 ? `What is the degree of the monomial ${g.text}?` : `What is the degree of the polynomial ${g.text}?`;
+      // Grade 7 says 'algebraic expression' ('polynomial' is Grade 9 vocabulary)
+      return k === 0 ? `What is the degree of the expression ${g.text}?` : k === 1 ? `What is the coefficient of ${g.ask === 0 ? "the constant term" : g.ask === 1 ? "x" : `x${sup(g.ask)}`} in ${g.text}?${g.ask === 0 ? "" : " (Write 0 if there is no such term.)"}` : k === 2 ? `What is the degree of the monomial ${g.text}?` : `What is the degree of the expression ${g.text}?`;
     },
     solve: ([k, s]) => {
       const g = degGen(k, s);
@@ -1969,6 +1980,8 @@ export const B12: Def[] = [
     explain: (s) => `In ${s.inputs[0]} the answer is ${N(Number(s.value))}`,
     domain: [[0, 3], [0, 59]],
     keep: (p) => firstOnly("alpdeg", [[0, 3], [0, 59]], (p) => B12.find((d) => d.id === "alpdeg")!.prompt(p))(p),
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([k]) => (k === 0 || k === 1 ? 1 : k === 2 ? 2 : 3),
     teach: {
       idea: "The degree of a monomial is the sum of the powers of its variables (3x²y³ has degree 5); the degree of a polynomial is the highest degree of its terms. The coefficient of a power is the number multiplying it, with its sign.",
@@ -2023,6 +2036,8 @@ export const B12: Def[] = [
     explain: (s) => (s.id === "signs" ? `Subtracting (${s.inputs[0]}) adds ${s.value}` : `Add the coefficients of each power: ${s.value}`),
     domain: [[0, 1], [0, 149]],
     cap: 300,
+    // level@1 (grade7-teaching@1): adding polynomials up to x³, answered as a coefficient tuple, is Grade 9 work; a learner below Grade 9 is not asked these
+    grade: () => 9,
     difficulty: ([op, s]) => (op === 0 ? (addGen(op, s).Qp.some((c) => c < 0) ? 2 : 1) : 3),
     teach: {
       idea: "Only like terms (the same power of x) can be added; subtracting a polynomial adds its negative, so every sign inside the bracket changes.",
@@ -2088,6 +2103,8 @@ export const B12: Def[] = [
     explain: (s) => (s.id === "substitute" ? `Put x = ${N(Number(s.inputs[1]))} into ${s.inputs[0]}: ${Q(Number(s.value))}` : `${N(Number(s.inputs[0]))}x + ${N(Number(s.inputs[1]))} = 0 gives x = ${Q(Number(s.value))}`),
     domain: [[0, 1], [0, 119]],
     keep: (p) => firstOnly("aleval", [[0, 1], [0, 119]], (p) => B12.find((d) => d.id === "aleval")!.prompt(p))(p),
+    // level@1 (grade7-teaching@1): a learner below Grade 8 is not asked this family's problems
+    grade: () => 8,
     difficulty: ([k, s]) => (k === 1 ? (evalGen(k, s).P[0] === 1 ? 1 : 2) : evalGen(k, s).t < 0 ? 3 : 2),
     teach: {
       idea: "The value of p(x) at x = t is what you get by putting t in place of x; a zero of p(x) is a value of x that makes p(x) = 0.",
@@ -2125,6 +2142,8 @@ export const B12: Def[] = [
     explain: (s) => (s.id === "each" ? `Divide each term by ${s.inputs[0]}x${Number(s.inputs[1]) === 1 ? "" : sup(Number(s.inputs[1]))}: subtract the powers and divide the coefficients: ${s.value}` : `So (p, q, r) = ${s.value}`),
     domain: [[2, 9], [1, 3], [1, 6], [-6, 6], [-6, 6], [0, 0]],
     cap: 300,
+    // level@1 (grade7-teaching@1): a learner below Grade 8 is not asked this family's problems
+    grade: () => 8,
     difficulty: ([, j, , b, c]) => (j === 1 && b > 0 && c > 0 ? 1 : b < 0 && c < 0 ? 3 : 2),
     teach: {
       idea: "Dividing a sum by a monomial divides each term separately: (A + B + C) ÷ m = A/m + B/m + C/m, and xᵃ ÷ xᵇ = xᵃ⁻ᵇ.",
@@ -2260,6 +2279,8 @@ export const B12: Def[] = [
     explain: (s) => (s.id === "product" ? `a × c = ${s.inputs[0]} × ${par(Number(s.inputs[1]))} = ${s.value}` : s.id === "split" ? `Two numbers with sum ${N(Number(s.inputs[0]))} and product a × c: ${(s.value as number[]).map(N).join(" and ")}` : s.id === "factors" ? `Group in pairs and take out common factors: ${s.inputs[0]} = ${s.value}` : `Each bracket equal to 0: x = ${(s.value as number[]).map(Q).join(" or x = ")}`),
     domain: [[0, 1], [1, 4], [-6, 6], [1, 4], [-6, 6]],
     cap: 400,
+    // level@1 (grade7-teaching@1): a learner below Grade 9 is not asked this family's problems
+    grade: () => 9,
     difficulty: ([k, m, p, n, q]) => (k === 0 && p > 0 && q > 0 ? 1 : k === 0 || m * n <= 3 ? 2 : 3),
     teach: {
       idea: "If ax² + bx + c = (mx + p)(nx + q), then a × c = (mn)(pq) = (mq)(np), and b = mq + np. So bx splits into two parts whose product is ac.",
@@ -2565,7 +2586,7 @@ export const B12: Def[] = [
   {
     id: "alpred",
     arity: 4,
-    title: "Steady increase or decrease: a linear polynomial to predict",
+    title: "Steady increase or decrease: a rule to predict",
     competency: L2,
     type: "integer",
     mc: true,
@@ -2576,7 +2597,7 @@ export const B12: Def[] = [
       const [c, S, r, T] = p;
       return c >= 4 && S - r * T <= 0 ? "The amount must stay above 0." : c === 7 && S > 100 ? "A battery charge is at most 100%." : null;
     },
-    prompt: ([c, S, r, T]) => `${PRED[c].say(S, r, nm(S + r))} Write the linear polynomial that gives the ${PRED[c].what} after t ${PRED[c].unit}, and use it to find the ${PRED[c].what} after ${T} ${PRED[c].unit}${PRED[c].ask}.`,
+    prompt: ([c, S, r, T]) => `${PRED[c].say(S, r, nm(S + r))} Write a rule (an expression in t) for the ${PRED[c].what} after t ${PRED[c].unit}, and use it to find the ${PRED[c].what} after ${T} ${PRED[c].unit}${PRED[c].ask}.`,
     solve: ([c, S, r, T]) => {
       const sg = c >= 4 ? -1 : 1;
       return { steps: [st("model", "write", L2, [S, sg * r], pl([sg * r, S], "t")), st("predict", "evaluate", L2, [T], S + sg * r * T)], answer: S + sg * r * T };
@@ -2590,8 +2611,8 @@ export const B12: Def[] = [
     bugs: ([c, S, r, T]) => {
       const sg = c >= 4 ? -1 : 1;
       return keepBugs([
-        B("wrong-direction", "conceptual", L2, c >= 4 ? "The steady change was added; the amount goes DOWN each step, so the coefficient of t is negative." : "The steady change was taken away; the amount goes UP each step.", S - sg * r * T > 0 ? S - sg * r * T : null),
-        B("start-left-out", "conceptual", L2, "Only the change r × t was worked out; the polynomial also needs the starting amount as its constant term.", sg * r * T),
+        B("wrong-direction", "conceptual", L2, c >= 4 ? "The steady change was added; the amount goes DOWN each step, so the number multiplying t is negative." : "The steady change was taken away; the amount goes UP each step.", S - sg * r * T > 0 ? S - sg * r * T : null),
+        B("start-left-out", "conceptual", L2, "Only the change r × t was worked out; the rule also needs the starting amount added on.", sg * r * T),
         B("one-step-short", "procedural", L2, `The change was counted ${T - 1} times; after ${T} ${PRED[c].unit} it has happened ${T} times.`, S + sg * r * (T - 1)),
       ]);
     },
@@ -2601,9 +2622,11 @@ export const B12: Def[] = [
     cap: 400,
     // money, heights, fares, books, water, candle length, debt and battery charge are never negative
     range: [0, Infinity],
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([c, , , T]) => (c < 4 && T <= 6 ? 1 : c < 4 || T <= 6 ? 2 : 3),
     teach: {
-      idea: "A quantity that changes by the same amount every step is modelled by a linear polynomial p(t) = (start) + (change per step) × t; the change is negative for a steady decrease (linear decay).",
+      idea: "A quantity that changes by the same amount every step follows the rule p(t) = (start) + (change per step) × t; the change is negative for a steady decrease.",
       method: "Read the starting amount (the value when t = 0) and the change per step with its sign, write p(t) = start + change × t, and substitute the number of steps.",
       alternatives: [
         { id: "table", title: "Make a table", kind: "procedural", text: ["Write t = 0, 1, 2, 3 and the amount each time: the amounts go up (or down) by the same step.", "The pattern start + step × t gives every row; use it for the t asked."] },
@@ -2646,6 +2669,8 @@ export const B12: Def[] = [
     explain: (s) => `Substitute each pair into the equation: ${["both make it true", "only the first does", "only the second does", "neither does"][Number(s.value)]}`,
     domain: [[1, 6], [1, 6], [0, 5], [0, 6], [0, 3]],
     cap: 300,
+    // level@1 (grade7-teaching@1): a learner below Grade 9 is not asked this family's problems
+    grade: () => 9,
     difficulty: ([, , , , m]) => (m === 0 ? 2 : m === 3 ? 3 : 1),
     teach: {
       idea: "A linear equation in two variables has infinitely many solutions: each value of x gives one y. All the solutions lie on one straight line.",

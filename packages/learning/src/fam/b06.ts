@@ -882,7 +882,7 @@ export const B06: Def[] = [
       return p[1] === 0
         ? `${who} made this bar chart for a school project. Using the chart, find how many ${ctx.unit} ${ctx.verb} ${ctx.on(L1)}.`
         : p[1] === 1
-          ? `${who} made this bar chart for a school project and says one bar is taller than the other. By how many ${ctx.unit} is ${L1} more than ${L2}?`
+          ? `${who} made this bar chart for a school project. How many more ${ctx.unit} ${ctx.verb} ${ctx.on(L1)} than ${ctx.on(L2)}?`
           : `${who} made this bar chart for a school project. ${who} wants the total for ${L1} and ${L2}. What is it?`;
     },
     teach: {
@@ -974,7 +974,7 @@ export const B06: Def[] = [
     },
     teach: {
       idea: "A letter stands for any number. A rule written with the letter works for every number at once.",
-      method: "Do to the letter exactly what you would do to a number: 'add 5' gives n + 5; 'multiply by 4' gives 4n (4 × n). Test your rule with a small number.",
+      method: "Do to the letter exactly what the machine does to a number. Adding a number to n is written n + that number; taking it away is n − that number; multiplying n by a number is written with the number in front of the letter, with no × sign. Test your rule with a small number.",
       alternatives: [
         { id: "table_first", title: "Try numbers first", kind: "conceptual", text: ["Make a small table: put in 1, 2, 3 and write what comes out.", "Look at what you did to each number every time, and write the same thing with the letter."], visual: ([kind, a, b]) => ({ type: "table", head: ["In", "1", "2", "3"], rows: [["Out", ...[1, 2, 3].map((t) => String(kind === 0 ? t + a : kind === 1 ? t - a : kind === 2 ? a * t : a * t + b))]] }) },
       ],
@@ -1257,7 +1257,14 @@ export const B06: Def[] = [
       method: "Take the given angle away from 90° (complementary) or 180° (supplementary). Check: the two angles should add up to the total.",
       visual: ([kind]) => ({ type: "angle", deg: kind === 0 ? 90 : 180 }),
       alternatives: [
-        { id: "count_on", title: "Count on to the total", kind: "procedural", text: ["Start at the angle you know and count on to 90 (or 180), in tens and then ones.", "For 65° to 90°: 65 → 70 is 5, 70 → 90 is 20, so 25°."], visual: ([kind, a]) => ({ type: "numberline", from: Math.floor(a / 10) * 10, to: kind === 0 ? 90 : 180, step: 10, marks: [a, kind === 0 ? 90 : 180] }) },
+        {
+          id: "count_on", title: "Count on to the total", kind: "procedural", text: ["Start at the angle you know and count on to 90 (or 180), in tens and then ones.", "For 65° to 90°: 65 → 70 is 5, 70 → 90 is 20, so 25°."],
+          textFor: ([kind, a]) => {
+            const total = kind === 0 ? 90 : 180, ten = Math.ceil(a / 10) * 10;
+            const hops = ten === a ? `${a} → ${total} is ${total - a}` : `${a} → ${ten} is ${ten - a}, ${ten} → ${total} is ${total - ten}`;
+            return [`Start at the angle you know, ${a}°, and count on to ${total}°: first to the next ten, then in tens.`, `${hops}, so the other angle is ${total - a}°.`];
+          },
+          visual: ([kind, a]) => ({ type: "numberline", from: Math.floor(a / 10) * 10, to: kind === 0 ? 90 : 180, step: 10, marks: [a, kind === 0 ? 90 : 180] }) },
       ],
     },
     limits: "Whole-degree complements and supplements of one given angle; several unknown angles at once are not included.",
@@ -1757,7 +1764,7 @@ export const B06: Def[] = [
     },
     teach: {
       idea: "A shape has rotational symmetry if it looks the same after a turn of less than a full turn. The order is how many times it fits onto itself in one full turn.",
-      method: "Count the identical parts that go round the centre (sides of a regular shape, blades, petals): that is usually the order. The smallest turn is 360° ÷ order, which is 1/order of a full turn.",
+      method: "Count the identical parts that go round the centre (sides of a regular shape, blades, petals): that is usually the order. The smallest turn is a full turn shared equally by the order: 1/order of a full turn, or the degrees in a full turn divided by the order.",
       visual: ([shape]) => (ROT[shape].poly ? { type: "shape", sides: ROT[shape].poly } : { type: "angle", deg: 360 / ROT[shape].o }),
       alternatives: [
         { id: "trace_turn", title: "Trace and turn", kind: "conceptual", text: ["Trace the shape on thin paper, put a pin through the centre and turn the tracing slowly.", "Count each time the tracing sits exactly on the shape before you get back to the start."], visual: () => ({ type: "angle", deg: 90 }) },

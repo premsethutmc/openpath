@@ -1108,6 +1108,10 @@ export const B04: Def[] = [
     explain: (s) => (s.id === "combine" ? `${s.inputs[0]} ${s.op === "subtract" ? "−" : "+"} ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} is nearest to ${s.value}`),
     figure: ([a, b]) => ({ type: "numberline", from: 0, to: 100, step: 10, marks: [a, b] }),
     domain: [[11, 99], [11, 99], [0, 1]],
+    // a subtraction of two close numbers makes a misleading estimate (55 − 54 ≈ 10): keep differences of 20 or more
+    keep: ([a, b, op]) => op === 0 || a - b >= 20,
+    // level@1: rounding whole numbers to tens to estimate is Grade 3 (not evidence for the Grade 7 decimal-estimation outcomes)
+    grade: () => 3,
     cap: 400,
     difficulty: ([a, b]) => (a % 10 !== 5 && b % 10 !== 5 && (a % 10 < 5) === (b % 10 < 5) ? 1 : a % 10 === 5 || b % 10 === 5 ? 3 : 2),
     word: ([a, b, op]) =>
@@ -1116,13 +1120,13 @@ export const B04: Def[] = [
         : `${nm(a)} buys a notebook for ₹${a} and a box of colours for ₹${b}. About how much does ${nm(a)} spend? Round each price to the nearest ten rupees first.`,
     teach: {
       idea: "A number rounded to the nearest ten is the ten it is closest to on the number line. Rounded numbers are easy to add or subtract in your head, and the estimate shows whether an exact answer is sensible.",
-      method: "Look at the ones digit: 0 to 4 round down, 5 to 9 round up. Round both numbers, then work out the answer with the tens.",
+      method: "Look at the ones digit: if it is less than five, round down; if it is five or more, round up. Round both numbers, then work out the answer with the tens.",
       visual: ([a, b]) => ({ type: "numberline", from: 0, to: 100, step: 10, marks: [a, b] }),
       alternatives: [
         { id: "closest", title: "Which ten is closer?", kind: "conceptual", text: ["Put the number on a number line between two tens.", "Count the steps to each ten: it rounds to the closer one (halfway goes up)."], visual: ([a]) => ({ type: "numberline", from: Math.floor(a / 10) * 10, to: Math.floor(a / 10) * 10 + 10, step: 1, marks: [a] }) },
       ],
     },
-    limits: "Two-digit numbers rounded to the nearest ten; rounding to hundreds and estimating lengths, weights and capacities are other families or done in class.",
+    limits: "Two-digit numbers rounded to the nearest ten (a subtraction only when the numbers are at least 20 apart); rounding to hundreds and estimating lengths, weights and capacities are other families or done in class.",
   },
 
   // ============================================================ bar charts
@@ -1480,6 +1484,8 @@ export const B04: Def[] = [
     variants: () => [],
     explain: (s) => `${s.op === "difference" ? `${s.inputs[0]} and ${s.inputs[1]} differ by` : s.op === "add" ? `${s.inputs[0]} kg and ${s.inputs[1]} g together are` : `${s.inputs[0]} mL holds ${s.inputs[1]} mL this many times:`} ${s.value}`,
     domain: [[0, 3], [0, 39]],
+    // level@1: rounding whole numbers to tens to estimate is Grade 3 (not evidence for the Grade 7 decimal-estimation outcomes)
+    grade: () => 3,
     difficulty: ([mode]) => (mode === 0 ? 1 : mode === 2 ? 2 : 3),
     figure: (p) => wcFigure(p),
     word: (p) => wcText(p, true),
@@ -1761,6 +1767,8 @@ export const B04: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "round" ? `Round: ${s.value}` : s.id === "estimate" ? `Estimate: ${s.inputs[0]} ${s.op === "subtract" ? "−" : "+"} ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} compared with about ${s.inputs[1]}: ${s.value}`),
     domain: [[0, 1], [0, 59], [0, 2]],
+    // level@1: rounding whole numbers to tens to estimate is Grade 3 (not evidence for the Grade 7 decimal-estimation outcomes)
+    grade: () => 3,
     difficulty: ([op, x, k]) => (k === 0 ? 2 : (estNums(op, x)?.b ?? 0) < 100 ? 1 : 3),
     word: (p) => {
       const [op, x] = p;
@@ -2552,6 +2560,8 @@ export const B04: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "total" ? `${s.inputs.join(" + ")} = ₹${s.value}` : `₹${s.inputs[0]} is about ₹${s.value}`),
     domain: [[3, 4], [0, 59]],
+    // level@1: rounding whole numbers to tens to estimate is Grade 3 (not evidence for the Grade 7 decimal-estimation outcomes)
+    grade: () => 3,
     difficulty: ([n]) => (n === 3 ? 2 : 3),
     figure: ([n, x]) => ({ type: "table", head: ["Item", "Price (₹)"], rows: costItems(n, x).map(([it, pr]) => [it, pr]) }),
     word: ([n, x]) => `Before going to the shop, ${nm(x + 1)} wants to know about how much money to take for ${costItems(n, x).map(([it, pr]) => `${it} (₹${pr})`).join(", ")}. Round each price to the nearest ten rupees: about how many rupees are needed?`,

@@ -715,6 +715,8 @@ export const B03: Def[] = [
     // [op, i, j, c]: op 0 put together (10+i) + j; 1 take away (10+i+j) − j; 2 i groups of j; 3 i×j shared among i
     parse: none,
     reject: ([op, i, j, c]) => (op < 0 || op > 3 || i < 2 || i > 9 || j < 2 || j > 9 || c < 0 || c > 2 || (op >= 2 && (i * j > 50 || i > 6)) ? "A one-step story with numbers up to 50." : null),
+    // level@1: one-step stories with small whole numbers are Grade 2 (prerequisite review only)
+    grade: () => 2,
     prompt: ([op, i, j, c]) => story(op, i, j, c),
     solve: ([op, i, j]) => {
       const [a, b, ans, what] = op === 0 ? [10 + i, j, 10 + i + j, "add"] : op === 1 ? [10 + i + j, j, 10 + i, "take away"] : op === 2 ? [i, j, i * j, "multiply"] : [i * j, i, j, "share"];
@@ -764,7 +766,7 @@ export const B03: Def[] = [
       method: "Ask: does the amount get bigger or smaller? Are the groups equal? Then choose the operation and work it out.",
       visual: ([op, i, j]) => (op === 0 ? { type: "numberline", from: 10 + i, to: 10 + i + j, jumps: [[10 + i, 10 + i + j]] } : op === 1 ? { type: "numberline", from: 10 + i, to: 10 + i + j, jumps: [[10 + i + j, 10 + i]] } : { type: "array", rows: i, cols: j }) as Visual,
       alternatives: [
-        { id: "act_out", title: "Act it out with counters", kind: "conceptual", text: ["Use beads or stones for the things in the story.", "Do exactly what the story says with them, then count what you have."], visual: ([op, i, j]) => ({ type: "dots", count: op === 0 ? 10 + i : op === 1 ? 10 + i + j : i * j, rows: 2 }) },
+        { id: "act_out", title: "Act it out with counters", kind: "conceptual", text: ["Use beads or stones for the things in the story.", "Do exactly what the story says with them, then count what you have."], visual: ([op, i, j]) => (op >= 2 ? { type: "array", rows: i, cols: j } : { type: "tenframe", filled: op === 0 ? 10 + i : 10 + i + j, frames: Math.ceil((op === 0 ? 10 + i : 10 + i + j) / 10) }) as Visual },
       ],
     },
     limits: "One-step stories with numbers up to 50; two-step stories are another family.",
@@ -1540,6 +1542,8 @@ export const B03: Def[] = [
     // [op, a, b, c]: op 0, a things and b more come (a + b ≤ 9); op 1, a things and b go away (b < a ≤ 9); c the story
     parse: none,
     reject: ([op, a, b, c]) => (op < 0 || op > 1 || a < 1 || a > 9 || b < 1 || b > 8 || c < 0 || c > 3 || (op === 0 ? a + b > 9 : b >= a) ? "A one-step story with numbers within 9." : null),
+    // level@1: adding and taking away within 9 is Grade 1 (prerequisite review only)
+    grade: () => 1,
     prompt: ([op, a, b, c]) => story9(op, a, b, c),
     solve: ([op, a, b]) => ({
       steps: [st("choose", "choose operation", OPC, [op ? "take away" : "add"], op), st("work", op ? "subtract" : "add", op ? SUB : ADD, [a, b, op ? "−" : "+"], op ? a - b : a + b)],
@@ -2174,7 +2178,7 @@ export const B03: Def[] = [
     domain: [[0, 4], [1, 30], [0, 99]],
     cap: 400,
     difficulty: ([mode]) => (mode === 0 || mode === 4 ? 1 : mode === 2 ? 3 : 2),
-    word: ([mode, a, b]) => [`${a < 20 ? "A pencil" : "A ribbon"} is ${a} cm ${b} mm long. How long is it in millimetres?`, `${a < 6 ? "A beetle" : a < 20 ? "A pencil" : "A ribbon"} is ${10 * a + b} mm long. That is ${a} cm and how many more millimetres?`, `${name(a + b)} walks ${ind(1000 * a + 5 * b)} m to school. That is ${a} km and how many more metres?`, `A cycle race is ${ind(1000 * a)} m long. How many kilometres is that?`, `A paper strip is ${10 * a} mm long. How many centimetres is that?`][mode],
+    word: ([mode, a, b]) => [`${a < 20 ? "A pencil" : "A ribbon"} is ${a} cm ${b} mm long. How long is it in millimetres?`, `${a < 6 ? "A beetle" : a < 20 ? "A pencil" : "A ribbon"} is ${10 * a + b} mm long. That is ${a} cm and how many more millimetres?`, `${name(a + b)} ${a < 3 ? "walks" : "travels by bus"} ${ind(1000 * a + 5 * b)} m to school. That is ${a} km and how many more metres?`, `A cycle race is ${ind(1000 * a)} m long. How many kilometres is that?`, `A paper strip is ${10 * a} mm long. How many centimetres is that?`][mode],
     teach: {
       idea: "10 mm = 1 cm, 100 cm = 1 m and 1000 m = 1 km. Going to a smaller unit gives a bigger number; going to a bigger unit makes groups.",
       method: "To change to the smaller unit, multiply by 10 (cm to mm) or 1000 (km to m) and add the rest. To change to the bigger unit, make groups of 10 or 1000; what is left stays in the smaller unit.",

@@ -50,10 +50,73 @@ From the 15-module sample (the other 60 competencies were not reviewed; at this 
 
 Recommended next step: a level-and-wording pass over all 75 Grade 7 modules (a reviewer per strand, fixes by a different author, then a fresh sample review), before any educator review.
 
-## Tests on this commit
+## Tests (grade7-coverage@1 commit)
 
 - `bun test packages/learning/src` (from the repository root): 1 816 pass, 41 skip, 0 fail. One count test updated (1 082 → 1 088 families).
 - `frontend/src/year/grade7-coverage.test.ts`: both boards pass (numbers in test 4 above).
 - Frontend suite (`tsx --test src/**/*.test.ts`): 877 tests ran before the session's time limit; no failure caused by this branch. Two failures are environmental (no `react` package and no `tsx` package resolution for `node --import tsx` subprocesses: no npm registry here). The content-safety registry test failed until `explanation-review.ts sync` gave the 7 changed lessons new revisions (pending review); after it, `content-safety` and `mathematics-completion`: 24 / 24 pass.
 - Not run here: Django tests and browser (Playwright) journeys (no Python packages or npm registry in this environment). CI runs them.
 - Regenerated with the CI pipeline (specs, library, parity, coverage, expansion, board releases, coverage matrix) and the server grader rebuilt (`BUNDLER=bun`).
+
+# Grade 7 level-and-wording pass (grade7-teaching@1)
+
+Approved next step after grade7-coverage@1. Reviewers and fixers were different agents; nobody reviewed their own work.
+
+## What was done
+
+1. **Teaching contract for all 75 Grade 7 lessons.** Grade 7 is now a stage-2 teaching scope like the Grade 10 showcase
+   (`content/learning/teaching-scope-grade7.v1.json`; `teaching-contract.ts` reads both): a worked example is verified
+   from the family's own solver when its last step is the checked answer, and a lesson says each thing once.
+   Contract violations in Grade 7 lessons: **46 → 1** (factorisation's worked example stays a "Method": its last step is
+   a check, as already documented for Grade 10). 37 sections fixed by three agents: `textFor` alternatives written for
+   each question's own numbers, family-level method text without stray example numbers, final answer steps;
+   6 sections exempted with stated reasons (general unit facts; construction and hand-written modules with no
+   generated question).
+2. **Skills paused without teaching:** in the simulation, a learner who makes two early mistakes is now taught in
+   41 of 46 CBSE and 47 of 50 TN competencies (was 38 and 43). Still paused: the constructions and the two statistics
+   modules (educator-marked by design) and, on TN, inequalities (its main family is now Grade 9; see "Competencies shared
+   by Grade 7 and Grade 11" below).
+3. **Question review of all 260 Grade 7 families** (89 520 questions, 4 strand reviewers, 106 findings) and fixes by
+   3 other agents: ~85 fixed (wording, unrealistic contexts, word forms that did not match the typed question,
+   implausible distractors, GST rates updated to the 2025 slabs), the rest deferred (below).
+4. **Level tags (level@1):** a Grade 7 learner is no longer given Grade 8–11 problems from competencies the boards map
+   to Grade 7 (negative exponents, rational-number properties, polynomial division, systems of inequalities,
+   tₙ notation, Euclid's lemma …); below-grade families carry their real grade.
+5. **Presentation bug fixed platform-wide:** worked-step explanations built from a step's raw inputs could state false
+   arithmetic ("5% of 360: 360 ÷ 5 = 18", "280 × 25 = 70") or raw solver traces ("equal: 100 → 100", long floats). The
+   op-based fallback now states arithmetic only when it is true of the numbers shown, otherwise only the idea.
+6. **Safety checks on every change:** no typed or word answer of any Grade 7 question changed (all 89 520 compared
+   before/after). Two fixes that would have moved stored multiple-choice option letters (agrupee distractors, auvexp
+   option text) were reverted.
+
+## Fresh sample review (after the fixes, by a reviewer who had not seen the work)
+
+15 competencies, 146 questions: **no wrong answer key; 3 of 15 pass every criterion** (integer-multiply,
+linear-equations, data-frequency). The lesson-text problems it found (false arithmetic in worked steps, raw traces)
+are fixed in item 5. What remains is structural, not wording:
+
+- **A lesson teaches only the module's main family.** Modules draw practice from every family of the competency, so
+  learners are asked things no lesson section teaches (circle area and rings; mode and the mean from a frequency
+  table; fraction ↔ percentage conversion; simple interest in profit-loss; HCF × LCM; isosceles triangles).
+- **Competencies shared by Grade 7 and Grade 11.** Inequalities ([11]) and sequences ([7–11]) have a Grade 9/11 main
+  family, so after level tagging the Grade 7 lesson and diagnostics come from questions a Grade 7 learner is not given.
+  The right fix is to split each into a Grade 7 competency (inequations over integers; Virahanka numbers) and keep the
+  senior one.
+- **Mapping:** some Grade 7 outcomes map to Grade 1–4 content (positions, map grids, whole-unit conversions,
+  rational-number properties mapped to TN Grade 7 integers).
+- Missing pictures: parallel lines cut by a transversal (`ahname`), a circle with a chord/arc/segment (`aecpart`),
+  lattice diagonals (`avlat`) need new picture types.
+
+## Deferred (owner decision)
+
+- **MC options never shuffled** in older families (`eqfrac`, `mul`, `pow`, `mmul`, `fmulw`, `prop`, `pct`, `hcf`): the
+  key is usually in the same place. Shuffling changes the stored option letters of past answers, which needs approval of
+  a read-only dry run first.
+- Distractor fixes that move option letters (`agrupee` three-decimal option, `ahmatch`, `alpred`, `ajudig`).
+
+## Tests (grade7-teaching@1 commit)
+
+- `bun test packages/learning/src`: 1 816 pass, 41 skip, 0 fail.
+- `grade7-coverage.test.ts`: both boards pass (43 + 3 awaiting a mark; 48 + 2).
+- `content-safety`, `mathematics-completion`, `grade7-board`: 25 / 25 pass. Django and browser tests: CI only.
+- Content regenerated with the CI pipeline; explanation registry synced (changed lessons pending review); grader rebuilt.

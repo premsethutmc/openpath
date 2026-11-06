@@ -168,8 +168,10 @@ const isSq = (n: number) => Number.isInteger(Math.sqrt(n));
 // regular polygons with whole-number interior angles
 const POLYNAME: Record<number, string> = { 3: "equilateral triangle", 4: "square", 5: "regular pentagon", 6: "regular hexagon", 8: "regular octagon", 9: "regular nonagon", 10: "regular decagon", 12: "regular dodecagon (12 sides)" };
 const interior = (n: number) => (180 * (n - 2)) / n;
+// a Grade 7 learner knows the corners of triangles, squares and hexagons; the others' corner angles (Grade 8 work) are given
 const tileList = ([n1, k1, n2, k2]: number[]) => {
-  const part = (n: number, k: number) => `${k === 1 ? "one" : k} ${POLYNAME[n]}${k === 1 ? "" : n === 12 ? "s" : "s"}`.replace("dodecagon (12 sides)s", "dodecagons (12 sides)");
+  const given = (n: number) => ([3, 4, 6].includes(n) ? "" : ` (${n === 12 ? "12 sides, " : ""}each corner ${interior(n)}°)`);
+  const part = (n: number, k: number) => `${k === 1 ? "one" : k} ${POLYNAME[n].replace(/ \(.*\)$/, "")}${k === 1 ? "" : "s"}${given(n)}`;
   return k2 ? `${part(n1, k1)} and ${part(n2, k2)}` : part(n1, k1);
 };
 
@@ -298,13 +300,19 @@ export const B08: Def[] = [
       // gains and losses of points: a negative coefficient (a wrong answer) and a negative total (points lost) both make sense
       const act = (k: number, subj: string) => (k > 0 ? `gets ${k} ${subj} question${k === 1 ? "" : "s"} right` : `gets ${-k} ${subj} question${k === -1 ? "" : "s"} wrong`);
       const who = name(a + b);
-      return `In a quiz, a science question answered right gains x points and one answered wrong loses x points; a maths question gains or loses y points in the same way. In the first round ${who} ${act(a, "science")} and ${act(b, "maths")}; in the second round ${who} ${act(c, "science")} and ${act(d, "maths")}. Write a simplified expression for the total points ${who} gains (a negative total means points lost).`;
+      return `In a quiz, each right answer in science scores x points and each wrong one loses x; in maths it is y. In round 1 ${who} ${act(a, "science")} and ${act(b, "maths")}. In round 2 ${who} ${act(c, "science")} and ${act(d, "maths")}. Write ${who}'s total score in simplest form.`;
     },
     teach: {
       idea: "Like terms have the same letter part: 3x and −5x are like terms, 3x and 2y are not. Like terms can be added because they count the same thing.",
       method: "Group the x terms and the y terms, keeping each sign with the term after it. Add the numbers in front of each group and write one term for each letter.",
       alternatives: [
-        { id: "objects", title: "Count things of the same kind", kind: "conceptual", text: ["Read x as 'apples' and y as 'bananas': 3 apples + 2 bananas + 4 apples is 7 apples + 2 bananas.", "You cannot add apples to bananas to get 'applebananas', just as 3x + 2y is not 5xy."] },
+        {
+          id: "objects", title: "Count things of the same kind", kind: "conceptual", text: ["Read x as 'apples' and y as 'bananas': 3 apples + 2 bananas + 4 apples is 7 apples + 2 bananas.", "You cannot add apples to bananas to get 'applebananas', just as 3x + 2y is not 5xy."],
+          textFor: ([a, b, c, d]) => [
+            `Read x as 'apples' and y as 'bananas' (a minus sign means some are taken away). Apples: ${n_(a)} ${signed(c)} = ${n_(a + c)}. Bananas: ${n_(b)} ${signed(d)} = ${n_(b + d)}.`,
+            `You cannot add apples to bananas, so the x terms and the y terms stay apart: ${poly([[a + c, "x"], [b + d, "y"]])}.`,
+          ],
+        },
         { id: "check_number", title: "Check with a number", kind: "procedural", text: ["Put x = 2 and y = 1 into the question and into your answer.", "If the two values are different, a term has been combined wrongly."] },
       ],
     },
@@ -369,7 +377,7 @@ export const B08: Def[] = [
     // [p, q, r, s, ask]: px² + qxy + ry + s; ask 0 x², 1 xy, 2 y, 3 constant
     parse: none,
     reject: ([p, q, r, s, ask]) => (p < 1 || p > 9 || [q, r, s].some((k) => k === 0 || Math.abs(k) > 9) || ask < 0 || ask > 3 ? "px² + qxy + ry + s with small non-zero whole numbers." : null),
-    prompt: ([p, q, r, s, ask]) => `In the expression ${pretty(poly([[p, "x^2"], [q, "xy"], [r, "y"], [s, ""]]))}, ${ask === 3 ? "what is the constant term" : `what is the coefficient of ${["x²", "xy", "y"][ask]}`}?`,
+    prompt: ([p, q, r, s, ask]) => `In the expression ${pretty(poly([[p, "x^2"], [q, "xy"], [r, "y"], [s, ""]]))}, ${ask === 3 ? "what is the constant term" : `what is the numerical coefficient of ${["the x² term", "the xy term", "the term with y alone (no x)"][ask]}`}?`,
     solve: ([p, q, r, s, ask]) => {
       const v = [p, q, r, s][ask];
       return { steps: [{ id: "read", op: "identify", competency: SIMP, inputs: [["x²", "xy", "y", "constant"][ask]], value: v }], answer: v };
@@ -481,6 +489,7 @@ export const B08: Def[] = [
       steps: [
         { id: "growth", op: "subtract", competency: AP, inputs: [2 * d + c, d + c], value: d },
         { id: "start", op: "subtract", competency: GEN, inputs: [d + c, d], value: c },
+        { id: "write", op: "combine", competency: GEN, inputs: [d, c], value: poly([[d, "n"], [c, ""]]) },
       ],
       answer: poly([[d, "n"], [c, ""]]),
     }),
@@ -506,11 +515,15 @@ export const B08: Def[] = [
       { id: "constant-forgotten", kind: "procedural", competency: GEN, says: `Only the growing part ${d}n was written. Check with Figure 1: ${d} × 1 = ${d}, but the figure has ${d + c}.`, predict: c !== 0 ? poly([[d, "n"]]) : null },
     ]),
     variants: () => [],
-    explain: (s) => (s.id === "growth" ? `Each figure adds ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}, so the expression has ${s.value}n` : `Figure 1 has ${s.inputs[0]}; ${s.inputs[1]} × 1 = ${s.inputs[1]}, so add ${n_(Number(s.value))}`),
+    explain: (s) => (s.id === "growth" ? `Each figure adds ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}, so the expression has ${s.value}n` : s.id === "write" ? `So Figure n has ${s.value}` : `Figure 1 has ${s.inputs[0]}; ${s.inputs[1]} × 1 = ${s.inputs[1]}, so add ${n_(Number(s.value))}`),
     figure: ([d, c, ctx]) => ({ type: "table", head: ["Figure", "1", "2", "3", "4", "n"], rows: [[ctx ? "Tiles" : "Matchsticks", d + c, 2 * d + c, 3 * d + c, 4 * d + c, "?"]] }),
     domain: [[2, 9], [-1, 9], [0, 1]],
     difficulty: ([d, c]) => (c === 0 || c === 1 ? 1 : c > 0 ? 2 : 3),
-    word: ([d, c]) => `In a school hall, tables are joined in a row. With 1 table, ${d + c} chair${d + c === 1 ? "" : "s"} ${d + c === 1 ? "fits" : "fit"} around it; with 2 tables, ${2 * d + c}; with 3 tables, ${3 * d + c}. The number keeps growing the same way. Write an expression for the number of chairs around n tables.`,
+    // tables joined in a row really seat 2n + 2 (one chair a side) or 4n + 2 (two a side); every other pattern is a rangoli
+    word: ([d, c]) =>
+      c === 2 && (d === 2 || d === 4)
+        ? `In a school hall, tables are joined in a row. With 1 table, ${d + c} chairs fit around it; with 2 tables, ${2 * d + c}; with 3 tables, ${3 * d + c}. The number keeps growing the same way. Write an expression for the number of chairs around n tables.`
+        : `${name(d + c)} draws a row of rangoli designs. Design 1 has ${d + c} dot${d + c === 1 ? "" : "s"}, design 2 has ${2 * d + c} and design 3 has ${3 * d + c}. Each design adds the same number of dots. Write an expression for the number of dots in design n.`,
     teach: {
       idea: "If a pattern grows by the same amount d each time, Figure n is d × n plus a fixed part. The fixed part is what makes Figure 1 come out right.",
       method: "Find how many are added each time: that number multiplies n. Then compare d × 1 with Figure 1 to find what to add or take away. Check with Figure 2.",
@@ -594,7 +607,7 @@ export const B08: Def[] = [
     prompt: ([a, r, d]) => `A sequence has t₁ = ${a} and ${recRule(r, d)}. Write the first five terms as (t₁, t₂, t₃, t₄, t₅).`,
     solve: ([a, r, d]) => {
       const t = recTerms(a, r, d);
-      return { steps: t.slice(1).map((v, i) => ({ id: `t${i + 2}`, op: r === 1 ? "add" : "multiply-add", competency: SEQ, inputs: [t[i], r, d], value: v })), answer: tup(t) };
+      return { steps: [...t.slice(1).map((v, i) => ({ id: `t${i + 2}`, op: r === 1 ? "add" : "multiply-add", competency: SEQ, inputs: [t[i], r, d], value: v })), { id: "list", op: "write", competency: SEQ, inputs: t, value: tup(t) }], answer: tup(t) };
     },
     // independent: the closed form of each term, tₙ = rⁿ⁻¹a + d(rⁿ⁻¹ − 1)/(r − 1) (or a + (n − 1)d when r = 1)
     validate: ([a, r, d], v) => {
@@ -611,10 +624,13 @@ export const B08: Def[] = [
     distractors: ([a, r, d]) => [tup(recTerms(a, r, d + 1)), tup(recTerms(a + 1, r, d))],
     variants: () => [],
     explain: (s) => {
+      if (s.id === "list") return `The first five terms: ${s.value}`;
       const [t, r, d] = s.inputs.map(Number);
       return `Term ${s.id.slice(1)}: ${r === 1 ? t : `${r} × ${t}`} ${d < 0 ? "−" : "+"} ${Math.abs(d)} = ${s.value}`;
     },
     domain: [[1, 9], [1, 3], [-5, 9]],
+    // level@1 (grade7-teaching@1): a learner below Grade 11 is not asked this family's problems
+    grade: () => 11,
     difficulty: ([, r, d]) => (r === 1 && d > 0 ? 1 : r === 1 || r === 2 ? 2 : 3),
     word: ([a, r, d]) => `A savings game: ${name(a + r)} starts with ₹${a} in a box. Each week the money in the box is ${r === 1 ? "kept" : r === 2 ? "doubled by a parent" : "tripled by a parent"}, and then ${d > 0 ? `₹${d} is added` : `₹${-d} is taken out`}. Write the amounts for the first five weeks, starting with ₹${a}, as (week 1, week 2, week 3, week 4, week 5).`,
     teach: {
@@ -671,6 +687,8 @@ export const B08: Def[] = [
     explain: (s) => (s.id === "jumps" ? `From t₁ to tₙ there are n − 1 steps of ${n_(Number(s.inputs[0]))}: ${s.value}` : `Add t₁ = ${n_(Number(s.inputs[0]))}: tₙ = ${s.value}`),
     domain: [[-9, 20], [-6, 9]],
     cap: 300,
+    // level@1 (grade7-teaching@1): a learner below Grade 11 is not asked this family's problems
+    grade: () => 11,
     difficulty: ([a, d]) => (a > 0 && d > 0 ? 1 : d > 0 ? 2 : 3),
     teach: {
       idea: "Adding d each time means tₙ is the first term plus (n − 1) steps of d: tₙ = t₁ + (n − 1)d.",
@@ -717,7 +735,11 @@ export const B08: Def[] = [
     domain: [[1, 9], [1, 9], [5, 10]],
     cap: 300,
     difficulty: ([, , k]) => (k <= 6 ? 1 : k <= 8 ? 2 : 3),
-    word: ([a, b, k]) => `A plant has ${a} ${a === 1 ? "leaf" : "leaves"} in week 1 and ${b} in week 2. After that, the number of leaves each week is the sum of the numbers in the two weeks before. How many leaves does it have in week ${k}?`,
+    // a plant does not lose leaves and then grow: the plant story only when the second number is at least the first
+    word: ([a, b, k]) =>
+      b >= a
+        ? `A plant has ${a} ${a === 1 ? "leaf" : "leaves"} in week 1 and ${b} in week 2. After that, the number of leaves each week is the sum of the numbers in the two weeks before. How many leaves does it have in week ${k}?`
+        : `In a card game, card 1 shows ${a} and card 2 shows ${b}. Every new card shows the sum of the two cards before it. What number does card ${k} show?`,
     teach: {
       idea: "Each new term is made from the two terms before it, so you must keep the last two terms in view as you go.",
       method: "Write the terms in a numbered row: add the last two to get the next, until you reach the term you need.",
@@ -763,6 +785,8 @@ export const B08: Def[] = [
     explain: (s) => (s.id === "product" ? `x × y stays the same: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `y = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[2, 12], [2, 30], [2, 15]],
     cap: 400,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([a, d, b]) => (b === 2 * a || a === 2 * b ? 1 : a * d <= 60 ? 2 : 3),
     word: ([a, d, b]) => `${a} workers can paint a school building in ${d} days. Working at the same rate, how many days would ${b} workers take?`,
     teach: {
@@ -804,6 +828,8 @@ export const B08: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "rates" ? `Part of the job done in one day together: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `Days for the whole job: 1 ÷ ${s.inputs[1]} = ${fmt(Number(s.value))}`),
     domain: [[2, 19], [3, 20]],
+    // level@1 (grade7-teaching@1): a learner below Grade 8 is not asked this family's problems
+    grade: () => 8,
     difficulty: ([p, q]) => (q % p === 0 ? 1 : (p * q) % (p + q) === 0 ? 2 : 3),
     word: ([p, q]) => `One tap fills a water tank in ${p} hours and another tap fills it in ${q} hours. If both taps are opened together, how many hours will it take to fill the tank? (A fraction is fine.)`,
     teach: {
@@ -1613,7 +1639,7 @@ export const B08: Def[] = [
       const m = (360 - k1 * interior(n1) - k2 * interior(n2)) / t;
       return !isInt(m) || m < 30 || m >= 180 ? "Each missing corner must be a whole number of degrees between 30° and 180°." : null;
     },
-    prompt: ([n1, k1, n2, k2, t]) => `At one point of a floor tiling, ${tileList([n1, k1, n2, k2])} meet, together with ${t === 1 ? "one more tile" : "two more tiles whose corners there are equal"}, with no gaps and no overlaps. What angle must ${t === 1 ? "the corner of the last tile" : "each of those two corners"} be, in degrees?`,
+    prompt: ([n1, k1, n2, k2, t]) => `At one point of a floor tiling, ${tileList([n1, k1, n2, k2])} ${k1 === 1 && k2 === 0 ? "meets" : "meet, together with"} ${t === 1 ? "one more tile" : "two more tiles whose corners there are equal"}, with no gaps and no overlaps. What angle must ${t === 1 ? "the corner of the last tile" : "each of those two corners"} be, in degrees?`,
     solve: ([n1, k1, n2, k2, t]) => {
       const used = k1 * interior(n1) + k2 * interior(n2);
       return {
@@ -1651,12 +1677,22 @@ export const B08: Def[] = [
     explain: (s) => (s.op === "interior-angle" ? `Each corner of a regular ${s.inputs[0]}-sided polygon is 180° − 360° ÷ ${s.inputs[0]} = ${s.value}°` : s.id === "used" ? `Corners already there: ${s.inputs[0]} × ${s.inputs[1]}°${Number(s.inputs[2]) ? ` + ${s.inputs[2]} × ${s.inputs[3]}°` : ""} = ${s.value}°` : s.id === "rest" ? `The gap left: 360° − ${s.inputs[1]}° = ${s.value}°` : `Two equal corners share it: ${s.inputs[0]}° ÷ 2 = ${s.value}°`),
     domain: [[3, 12], [1, 5], [3, 12], [0, 4], [1, 2]],
     difficulty: ([n1, , , k2, t]) => (k2 === 0 && t === 1 && (n1 === 3 || n1 === 4 || n1 === 6) ? 1 : k2 === 0 || t === 1 ? 2 : 3),
-    word: ([n1, k1, n2, k2, t]) => `${name(n1 + k1)} is making a rangoli pattern from paper tiles. At one point, ${tileList([n1, k1, n2, k2])} fit together, and ${t === 1 ? "one more tile must close the gap exactly. What angle must that tile's corner be" : "two more tiles with equal corners must close the gap exactly. What angle must each of their corners be"}, in degrees?`,
+    word: ([n1, k1, n2, k2, t]) => `${name(n1 + k1)} is making a rangoli pattern from paper tiles. At one point, ${k1 === 1 && k2 === 0 ? `there is ${tileList([n1, k1, n2, k2])}` : `${tileList([n1, k1, n2, k2])} fit together`}, and ${t === 1 ? "one more tile must close the gap exactly. What angle must that tile's corner be" : "two more tiles with equal corners must close the gap exactly. What angle must each of their corners be"}, in degrees?`,
     teach: {
       idea: "Tiles fit around a point with no gaps or overlaps only when their corner angles add up to exactly 360°.",
       method: "Find each regular polygon's interior angle (180° − 360° ÷ number of sides), add the angles already at the point, and take the total from 360°; share the gap if more than one tile fills it.",
       alternatives: [
-        { id: "angle_table", title: "Know the polygon angles", kind: "recall", text: ["Triangle 60°, square 90°, pentagon 108°, hexagon 120°, octagon 135°, decagon 144°, dodecagon 150°.", "Squares (4 × 90°), triangles (6 × 60°) and hexagons (3 × 120°) tile on their own; pentagons do not, since 360 ÷ 108 is not whole."] },
+        {
+          id: "angle_table", title: "Know the polygon angles", kind: "recall", text: ["Triangle 60°, square 90°, pentagon 108°, hexagon 120°, octagon 135°, decagon 144°, dodecagon 150°.", "Squares (4 × 90°), triangles (6 × 60°) and hexagons (3 × 120°) tile on their own; pentagons do not, since 360 ÷ 108 is not whole."],
+          textFor: ([n1, k1, n2, k2, t]) => {
+            const used = k1 * interior(n1) + k2 * interior(n2), gap = 360 - used;
+            const nm = (n: number) => POLYNAME[n].replace(/ \(.*\)$/, "");
+            return [
+              "Worth knowing by heart: triangle 60°, square 90°, pentagon 108°, hexagon 120°, octagon 135°, decagon 144°, dodecagon 150°.",
+              `Here: each corner of the ${nm(n1)} is ${interior(n1)}°${k2 ? ` and each corner of the ${nm(n2)} is ${interior(n2)}°` : ""}. Together ${k1} × ${interior(n1)}°${k2 ? ` + ${k2} × ${interior(n2)}°` : ""} = ${used}°, so the gap is 360° − ${used}° = ${gap}°${t === 2 ? `, and each of the two corners is ${gap}° ÷ 2 = ${gap / 2}°` : ""}.`,
+            ];
+          },
+        },
         { id: "split_triangles", title: "Split into triangles", kind: "conceptual", text: ["A polygon with n sides splits into n − 2 triangles from one corner, so its angles add up to (n − 2) × 180°.", "In a regular polygon all n corners are equal: divide by n."] },
       ],
     },
@@ -2082,7 +2118,7 @@ B08.push(
     keep: nameOk,
     difficulty: ([mode, , x]) => (mode === 0 && (x === 0 || x === 3) ? 1 : mode === 0 ? 2 : 3),
     figure: ([, scheme]) => nameTable(scheme),
-    word: ([mode, scheme, x, y]) => `A straight railway line t crosses two parallel roads l and m. A surveyor labels the eight corners where they cross, as shown in the table. ${mode === 0 ? `Which corner makes the ${RELN[x]} angle with corner ${lab(scheme, y)}?` : `What kind of pair are corners ${lab(scheme, x)} and ${lab(scheme, y)}?`}`,
+    word: ([mode, scheme, x, y]) => `A straight railway line t crosses two parallel roads l and m. A surveyor labels the eight angles where they cross, as shown in the table. ${mode === 0 ? `Which angle is the ${RELN[x]} angle to angle ${lab(scheme, y)}?` : `What kind of pair are angles ${lab(scheme, x)} and ${lab(scheme, y)}?`}`,
     teach: {
       idea: "Where a transversal crosses two lines it makes the same four angles at each line. Corresponding angles are in matching places; alternate interior angles are between the lines on opposite sides of t; co-interior angles are between the lines on the same side; vertically opposite angles face each other at one crossing.",
       method: "Find the given angle: which line, above or below it, which side of t. Corresponding: same place at the other line. Alternate interior: other line, other side of t, still between the lines. Co-interior: other line, same side of t, between the lines. Vertically opposite: same line, both other side and other position.",
@@ -2243,6 +2279,8 @@ B08.push(
     },
     domain: [[0, 2], [1, 5], [1, 9], [0, 2]],
     keep: idOk,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([form, p, , box]) => (p === 1 && box !== 0 ? 1 : form === 1 || box === 1 ? 2 : 3),
     word: (p) => {
       const [form, pp, q] = p;
@@ -2300,6 +2338,8 @@ B08.push(
     explain: (s) => (s.id === "split" ? `Write it as ${s.value}` : s.inputs[3] === 2 ? `${s.inputs[0]} − ${s.inputs[2]} = ${s.value}` : `${s.inputs[0]} ${s.inputs[3] === 0 ? "+" : "−"} ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
     domain: [[0, 2], [1, 10], [1, 4]],
     keep: numOk,
+    // level@1 (grade7-teaching@1): a learner below Grade 8 is not asked this family's problems
+    grade: () => 8,
     difficulty: ([form, B]) => (form === 2 ? 1 : B <= 5 ? 2 : 3),
     word: ([form, B, b]) => {
       const a = 10 * B;
@@ -2509,6 +2549,8 @@ B08.push(
     explain: (s) => (s.id === "products" ? `x × y in each row: ${s.value}` : s.id === "ratios" ? `y ÷ x in each row: ${s.value}` : `So: ${s.value}`),
     domain: [[0, 3], [0, 29]],
     keep: varyOk,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([kind]) => (kind <= 1 ? 1 : kind === 2 ? 2 : 3),
     figure: ([kind, seed]) => ({ type: "table", head: ["x", ...varyRows(kind, seed).map((r) => String(r[0]))], rows: [["y", ...varyRows(kind, seed).map((r) => String(r[1]))]] }),
     // the same neutral situations for every kind, so the story does not give the answer away
@@ -2556,6 +2598,8 @@ B08.push(
     domain: [[0, 2], [2, 80], [2, 30], [2, 80]],
     keep: manOk,
     cap: 400,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([, w1, , w2]) => (w2 % w1 === 0 || w1 % w2 === 0 ? 1 : 2),
     word: ([ctx, w1, d1, w2]) => MAN[ctx].word(w1, d1, w2),
     teach: {
@@ -2606,6 +2650,8 @@ B08.push(
     explain: (s) => (s.id === "total" ? `The work stays in proportion: ${s.inputs.join(" × ")} = ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} days`),
     domain: [[0, 1], [0, 199]],
     keep: compOk,
+    // level@1 (grade7-teaching@1): a learner below Grade 8 is not asked this family's problems
+    grade: () => 8,
     difficulty: ([ctx]) => (ctx === 0 ? 2 : 3),
     word: ([ctx, seed]) => {
       const d = compData(ctx, seed)!;
@@ -2800,6 +2846,8 @@ B08.push(
     explain: (s) => (s.id.startsWith("t") && s.id !== "t1" ? `t${s.inputs[0]} = ${s.value}` : s.id === "t1" ? `Put n = 1: t₁ = ${s.value}` : s.id === "d" ? `The step: t₂ − t₁ = ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `The ratio: t₂ ÷ t₁ = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[0, 2], [-5, 9], [-9, 9]],
     keep: expOk,
+    // level@1 (grade7-teaching@1): a learner below Grade 11 is not asked this family's problems
+    grade: () => 11,
     difficulty: ([mode, a]) => (mode === 0 ? (a > 0 ? 1 : 2) : mode === 1 ? 2 : 3),
     // a fare only when it is positive and rises with the distance (a > 0, F₁ = a + b > 0); otherwise a temperature, which may
     // fall and go below zero

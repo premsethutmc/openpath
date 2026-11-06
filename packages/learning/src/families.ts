@@ -49,6 +49,8 @@ const F: Def[] = [
     bugs: ([a, b]) => [{ ...factSlip(a, b), kind: "recall" }, addForMul(a, b)],
     variants: (p) => pairs(p, [[2, 9], [2, 9]], ([a, b]) => a >= 2 && b >= 2),
     explain: (s) => `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`,
+    // level@1: a single times-table fact is Grade 3 work (prerequisite fluency and review for older learners)
+    grade: () => 3,
   },
   {
     id: "rect",
@@ -84,6 +86,8 @@ const F: Def[] = [
     id: "eqfrac",
     arity: 3,
     title: "A missing part of an equivalent fraction",
+    // level@1: a missing part of an equivalent fraction is Grade 4 work (review for older learners)
+    grade: () => 4,
     competency: "MATH.number.equivalent-fractions",
     type: "integer",
     // [a, b, d]: a/b = □/d
@@ -216,7 +220,7 @@ const F: Def[] = [
     id: "linev",
     contract: { kind: "value", statement: ([m, c, t]) => `${m}*${t < 0 ? `(${t})` : t}${c < 0 ? "-" : "+"}${Math.abs(c)}`, assumptions: ["value of y at the given x"], numbers: ([m, c, t]) => [m, c, t] },
     arity: 3,
-    title: "A value on a straight line",
+    title: "The value of y = mx + c for a given x",
     competency: "MATH.algebra.variables",
     type: "integer",
     // [m, c, t]: y = m x + c at x = t
@@ -228,7 +232,7 @@ const F: Def[] = [
       return [k, m[2] ? int(m[2]) : 0, int(m[3])];
     },
     reject: ([m, c, t]) => (Math.abs(m) > 12 || Math.abs(c) > 50 || Math.abs(t) > 12 ? "Only small whole-number lines are supported." : null),
-    prompt: ([m, c, t]) => `On the line y = ${m === 1 ? "" : m}x ${c < 0 ? "−" : "+"} ${Math.abs(c)}, what is y when x = ${t}?`,
+    prompt: ([m, c, t]) => `If y = ${m === 1 ? "" : m}x ${c < 0 ? "−" : "+"} ${Math.abs(c)}, what is y when x = ${t}?`,
     solve: ([m, c, t]) => ({ steps: [mul(m, t, MT, "mx"), { id: "y", op: "add", competency: "MATH.algebra.variables", inputs: [m * t, c], value: m * t + c }], answer: m * t + c }),
     validate: ([m, c, t], v) => v === [...Array(Math.abs(t))].reduce((s) => s + Math.sign(t) * m, 0) + c,
     bugs: ([m, c, t]) => [{ id: "concatenate", kind: "conceptual", competency: "MATH.algebra.variables", says: `${m}x with x = ${t} was read as the digits ${m}${t}; ${m}x means ${m} × x.`, predict: m > 0 && t > 0 && m < 10 && t < 10 ? 10 * m + t + c : null }, { id: "add-for-multiply", kind: "conceptual", competency: MT, says: `${m}x was worked out as ${m} + x; it means ${m} × x.`, predict: m + t + c }].filter((x) => x.predict !== null) as Bug[],
@@ -593,6 +597,8 @@ const F: Def[] = [
     contract: { kind: "value", statement: ([a, b]) => `${a}*${b}` },
     arity: 2,
     title: "Multiplying a two-digit number by a one-digit number",
+    // level@1: two-digit × one-digit is Grade 4 work (review for older learners)
+    grade: () => 4,
     competency: "MATH.number.multi-multiplication",
     type: "integer",
     mc: true,
@@ -618,7 +624,7 @@ const F: Def[] = [
     explain: (s) => (s.id === "sum" ? `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}` : `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[12, 99], [2, 9]],
     difficulty: ([a, b]) => ((a % 10) * b < 10 ? 1 : a < 50 ? 2 : 3),
-    teach: { idea: "Split the two-digit number into tens and ones, multiply each part, then add.", method: "47 × 6 = 40 × 6 + 7 × 6 = 240 + 42 = 282. The 4 tens of 42 join the tens." },
+    teach: { idea: "Split the two-digit number into tens and ones, multiply each part, then add.", method: "Multiply the tens by the one-digit number, then multiply the ones by it, then add the two answers. Any tens in the ones answer join the tens." },
   },
   {
     id: "divr",
@@ -701,7 +707,8 @@ const F: Def[] = [
     // [a, b, k]: k × a/b
     reject: ([a, b, k]) => (b < 2 || b > 12 || a < 1 || a >= b || k < 2 || k > 9 ? "Only k × a/b with a proper fraction (denominator up to 12) and k from 2 to 9 is supported." : null),
     prompt: ([a, b, k]) => `${k} × ${a}/${b} = ? (A fraction is fine.)`,
-    solve: ([a, b, k]) => ({ steps: [mul(k, a, MT, "tops"), { id: "keep", op: "evaluate", competency: "MATH.number.fraction-multiply", inputs: [b], value: b }], answer: (k * a) / b }),
+    // the last step states the product, so the worked example ends at the answer
+    solve: ([a, b, k]) => ({ steps: [mul(k, a, MT, "tops"), { id: "keep", op: "evaluate", competency: "MATH.number.fraction-multiply", inputs: [b], value: b }, { id: "result", op: "evaluate", competency: "MATH.number.fraction-multiply", inputs: [k, a, b], value: (k * a) / b }], answer: (k * a) / b }),
     // repeated addition of a/b, k times
     validate: ([a, b, k], v) => typeof v === "number" && near([...Array(k)].reduce((s) => s + a / b, 0), v),
     bugs: ([a, b, k]) => [
@@ -712,11 +719,11 @@ const F: Def[] = [
       ...(a >= 2 && k * a + a <= 144 ? [{ id: "fact-slip-multiply", kind: "prerequisite" as const, competency: MT, says: `${k} × ${a} was taken as ${(k + 1) * a}, one group of ${a} too many: the method was right, the multiplication fact was not.`, predict: ((k + 1) * a) / b, ...(a <= 12 ? { probe: `gen:mul:${k},${a}` } : {}) }] : []),
     ],
     variants: (p) => pairs(p, [[1, 5], [2, 8], [2, 6]], ([a, b]) => a < b).slice(0, 80),
-    explain: (s) => (s.id === "tops" ? `${s.inputs[0]} lots of ${s.inputs[1]} ${s.inputs[1] === 1 ? "piece" : "pieces"}: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)} pieces` : `The pieces are still the same size (each is 1/${s.inputs[0]}): the bottom stays ${s.inputs[0]}`),
+    explain: (s) => (s.id === "result" ? fmulwResult(s.inputs as number[], s.value as number) : s.id === "tops" ? `${s.inputs[0]} lots of ${s.inputs[1]} ${s.inputs[1] === 1 ? "piece" : "pieces"}: ${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)} pieces` : `The pieces are still the same size (each is 1/${s.inputs[0]}): the bottom stays ${s.inputs[0]}`),
     domain: [[1, 11], [2, 12], [2, 9]],
     keep: ([a, b]) => a < b,
     difficulty: ([a, b, k]) => (k * a < b ? 1 : k * a <= 2 * b ? 2 : 3),
-    teach: { idea: "k × a/b means k lots of a/b: the pieces stay the same size, there are just more of them.", method: "Multiply the top by k and keep the bottom: 3 × 2/7 = 6/7." },
+    teach: { idea: "k × a/b means k lots of a/b: the pieces stay the same size, there are just more of them.", method: "Multiply the top (the number of pieces) by the whole number and keep the bottom (the size of each piece) the same." },
   },
   {
     id: "faddu",
@@ -792,7 +799,7 @@ const F: Def[] = [
     domain: [[5, 95], [20, 400]],
     keep: ([p, n]) => p % 5 === 0 && n % 20 === 0,
     difficulty: ([p]) => ([10, 25, 50].includes(p) ? 1 : p % 10 === 0 ? 2 : 3),
-    teach: { idea: "Per cent means out of 100: 30% of an amount is 30 parts of every 100.", method: "Find 1% (divide by 100) or 10% (divide by 10), then build up: 30% of 200 = 3 × 20 = 60." },
+    teach: { idea: "Per cent means out of a hundred: a percentage of an amount is that many parts out of every hundred equal parts of it.", method: "Find ten per cent (divide by ten) or five per cent (divide by twenty), then take as many lots of it as the percentage needs." },
   },
   {
     id: "mean4",
@@ -977,6 +984,8 @@ const F: Def[] = [
     variants: (p) => pairs(p, [[-5, 5], [-6, 6]], ([m, n]) => m !== 0 && n !== 0 && m !== n && m + n !== 0).slice(0, 80),
     explain: (s) => (s.id === "product" ? `The numbers multiply to ${neg(s.inputs[0])}: ${neg(s.inputs[0])} ÷ ${par(s.inputs[1])} = ${neg(show(s.value))}` : `Check they add to the x coefficient: ${neg(s.inputs[0])} + ${par(s.inputs[1])} = ${neg(show(s.value))}`),
     domain: [[-9, 9], [-9, 9]],
+    // level@1 (grade7-teaching@1): a learner below Grade 8 is not asked this family's problems
+    grade: () => 8,
     difficulty: ([m, n]) => (m > 0 && n > 0 ? 1 : m * n > 0 ? 2 : 3),
     teach: { idea: "(x + m)(x + n) = x² + (m + n)x + mn: the two numbers multiply to the constant and add to the x coefficient.", method: "List pairs that multiply to the constant; choose the pair that adds to the x coefficient. Watch the signs." },
   },
@@ -1088,6 +1097,8 @@ const F: Def[] = [
     explain: (s) => `${s.inputs[0]} = ${Math.floor((s.inputs[0] as number) / (s.inputs[1] as number))} × ${s.inputs[1]} + ${show(s.value)}${s.value === 0 ? `: the remainder is 0, so the HCF is ${s.inputs[1]}` : ""}`,
     domain: [[12, 98], [13, 99]],
     keep: ([a, b]) => a < b,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([a, b]) => (gcd(a, b) <= 5 && b < 50 ? 1 : b < 70 ? 2 : 3),
     teach: { idea: "The HCF is the largest number that divides both exactly. Euclid: it also divides their difference and the remainder.", method: "Divide the larger by the smaller and keep the remainder; repeat with the smaller number and the remainder until the remainder is 0." , instance: euclidTeaching },
   },
@@ -1274,6 +1285,13 @@ function mcOptions(def: Def, p: number[], answer: Value, bugs: Bug[]): Value[] {
 }
 /** A value as the learner sees it: a family that works in decimals (money, measures, statistics) shows a terminating
  * value as a decimal ("54.5", not "109/2"); equal values are still equal answers. */
+/** fmulw's last step: k × a/b = ka/b, and its simplest form when that is written differently. */
+function fmulwResult([k, a, b]: number[], v: number): string {
+  const top = `${k * a}/${b}`;
+  return `So ${k} × ${a}/${b} = ${top}${show(v) === top ? "" : ` = ${show(v)}`}`;
+}
+/** Families whose multiple-choice options are shown with superscript squares (x², not x^2), like their prompts. */
+const SUPERSCRIPT_OPTIONS = new Set(["ahlike"]);
 function shown(def: Def, v: Value): string {
   if (!def.decimals || typeof v !== "number") return show(v);
   for (let dp = 0; dp <= 6; dp++) {
@@ -1342,7 +1360,10 @@ function buildRaw(def: Def, p: number[], form: Problem["form"] = "typed"): Probl
       const ix = [...new Set(vals.map((v) => idx(v as Value)))].filter((i) => i >= 0 && i !== right);
       return ix.length ? [{ ...b, predict: ix.length === 1 ? ix[0] : ix }] : [];
     });
-    return { ...base, id: `gen:${def.id}:${p.join(",")}:mc`, form, prompt: mcPrompt(def.prompt(p)), type: "choice", answer: "ABCD"[right], bugs: mcBugs, options: opts.map((o) => shown(def, o)) };
+    // a family whose prompt writes squares as x² shows its options the same way (display only: the order, set by the
+    // options' own text in mcOptions, does not change)
+    const look = (t: string) => (SUPERSCRIPT_OPTIONS.has(def.id) ? t.replace(/\^2/g, "²") : t);
+    return { ...base, id: `gen:${def.id}:${p.join(",")}:mc`, form, prompt: mcPrompt(def.prompt(p)), type: "choice", answer: "ABCD"[right], bugs: mcBugs, options: opts.map((o) => look(shown(def, o))) };
   }
   if (form === "word") {
     if (!def.word) throw new Error(`families@2: ${def.id} has no everyday-situation form`);

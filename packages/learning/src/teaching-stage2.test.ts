@@ -159,8 +159,10 @@ describe("showcase readiness: each thing said once, solutions checked to the ans
     const at = (c: string) => lessonBlocks(mod(c)).find((b) => b.title === "The method")!;
     // option, set, tuple, matrix, exact value: produced by the steps
     for (const c of ["MATH.algebra.quadratic-graphs", "MATH.algebra.sets", "MATH.algebra.linear-systems", "MATH.algebra.matrices", "MATH.trigonometry.ratios", "MATH.algebra.rational-expressions"]) expect(at(c).worked?.verified, c).toBe(true);
-    // the primes of 255 are the divisors used, not results; the factorisation's last step is a check; the square root's last step multiplies back
-    for (const c of ["MATH.number.prime-factorisation", "MATH.algebra.factorisation", "MATH.algebra.polynomial-square-root"]) {
+    // grade7-teaching@1: the prime factorisation now ends with a step that lists the primes (the answer), so it is a checked worked example
+    expect(at("MATH.number.prime-factorisation").worked?.verified).toBe(true);
+    // the factorisation's last step is a check; the square root's last step multiplies back
+    for (const c of ["MATH.algebra.factorisation", "MATH.algebra.polynomial-square-root"]) {
       expect(at(c).label, c).toBe("Method");
       expect(at(c).violations, c).toEqual(["worked-unverified"]);
     }

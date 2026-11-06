@@ -6253,8 +6253,8 @@
       {
        "title": "Count on to the total",
        "text": [
-        "Start at the angle you know and count on to 90 (or 180), in tens and then ones.",
-        "For 65° to 90°: 65 → 70 is 5, 70 → 90 is 20, so 25°."
+        "Start at the angle you know, 135°, and count on to 180°: first to the next ten, then in tens.",
+        "135 → 140 is 5, 140 → 180 is 40, so the other angle is 45°."
        ],
        "math": [
         "Two angles are supplementary. One of them is 135°. What is the other angle, in degrees?",
@@ -6272,7 +6272,8 @@
         ]
        },
        "role": "strategy",
-       "instance": "gen:afpair:1,135"
+       "instance": "gen:afpair:1,135",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:afpair:1,134",
@@ -6954,15 +6955,15 @@
   },
   {
    "competency": "MATH.algebra.variables",
-   "title": "A value on a straight line",
+   "title": "The value of y = mx + c for a given x",
    "chapter": [
     {
-     "title": "A value on a straight line",
+     "title": "The value of y = mx + c for a given x",
      "text": [
       "y = mx + c gives y for any x: m × x, then add c."
      ],
      "math": [
-      "On the line y = 9x + 6, what is y when x = 3?",
+      "If y = 9x + 6, what is y when x = 3?",
       "9 × 3 = 27",
       "27 + 6 = 33"
      ],
@@ -7001,7 +7002,7 @@
         "Multiply m by the value of x first, then add (or subtract) c."
        ],
        "math": [
-        "On the line y = 8x + 10, what is y when x = 1?",
+        "If y = 8x + 10, what is y when x = 1?",
         "8 × 1 = 8",
         "8 + 10 = 18"
        ],
@@ -7023,7 +7024,7 @@
        "instance": "gen:linev:6,-9,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “On the line y = 6x − 9, what is y when x = 1?” A common wrong answer is 52.",
+        "A question: “If y = 6x − 9, what is y when x = 1?” A common wrong answer is 52.",
         "6x with x = 1 was read as the digits 61; 6x means 6 × x."
        ],
        "math": [
@@ -7581,7 +7582,7 @@
       {
        "title": "The method",
        "text": [
-        "47 × 6 = 40 × 6 + 7 × 6 = 240 + 42 = 282. The 4 tens of 42 join the tens."
+        "Multiply the tens by the one-digit number, then multiply the ones by it, then add the two answers. Any tens in the ones answer join the tens."
        ],
        "math": [
         "25 × 5 = ?",
@@ -7629,7 +7630,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: 47 × 6 = 40 × 6 + 7 × 6 = 240 + 42 = 282. The 4 tens of 42 join the tens."
+        "Then the method is: Multiply the tens by the one-digit number, then multiply the ones by it, then add the two answers. Any tens in the ones answer join the tens."
        ]
       }
      ],
@@ -8080,7 +8081,8 @@
      "math": [
       "3 × 4/8 = ?",
       "3 lots of 4 pieces: 3 × 4 = 12 pieces",
-      "The pieces are still the same size (each is 1/8): the bottom stays 8"
+      "The pieces are still the same size (each is 1/8): the bottom stays 8",
+      "So 3 × 4/8 = 12/8 = 3/2"
      ],
      "tip": "Top and bottom were both multiplied by 3: that gives an equal fraction, not 3 lots of it.",
      "role": "concept",
@@ -8116,12 +8118,13 @@
       {
        "title": "The method",
        "text": [
-        "Multiply the top by k and keep the bottom: 3 × 2/7 = 6/7."
+        "Multiply the top (the number of pieces) by the whole number and keep the bottom (the size of each piece) the same."
        ],
        "math": [
         "8 × 1/3 = ?",
         "8 lots of 1 piece: 8 × 1 = 8 pieces",
-        "The pieces are still the same size (each is 1/3): the bottom stays 3"
+        "The pieces are still the same size (each is 1/3): the bottom stays 3",
+        "So 8 × 1/3 = 8/3"
        ],
        "role": "worked-example",
        "instance": "gen:fmulw:1,3,8"
@@ -8163,7 +8166,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Multiply the top by k and keep the bottom: 3 × 2/7 = 6/7."
+        "Then the method is: Multiply the top (the number of pieces) by the whole number and keep the bottom (the size of each piece) the same."
        ]
       }
      ],
@@ -8384,7 +8387,7 @@
     {
      "title": "A percentage of an amount",
      "text": [
-      "Per cent means out of 100: 30% of an amount is 30 parts of every 100."
+      "Per cent means out of a hundred: a percentage of an amount is that many parts out of every hundred equal parts of it."
      ],
      "math": [
       "What is 60% of 100?",
@@ -8447,7 +8450,7 @@
       {
        "title": "The method",
        "text": [
-        "Find 1% (divide by 100) or 10% (divide by 10), then build up: 30% of 200 = 3 × 20 = 60."
+        "Find ten per cent (divide by ten) or five per cent (divide by twenty), then take as many lots of it as the percentage needs."
        ],
        "math": [
         "What is 45% of 180?",
@@ -10010,12 +10013,12 @@
      "title": "HCF and LCM from prime factorisations",
      "text": [
       "By the Fundamental Theorem of Arithmetic every number has exactly one prime factorisation. A common factor can only use primes both numbers have, as often as both allow; a common multiple must contain every prime of each number.",
-      "HCF: multiply the common primes, each to the LOWER of its two powers. LCM: multiply every prime that appears, each to the HIGHER power. Check: HCF × LCM = the product of the two numbers."
+      "HCF: multiply the common primes, each as many times as BOTH numbers have it (the smaller count). LCM: multiply every prime that appears, each as many times as the number that has it MOST. Check: HCF × LCM = the product of the two numbers."
      ],
      "math": [
-      "20 = 2² × 5 and 225 = 3² × 5². Use these prime factorisations to find the LCM of 20 and 225.",
-      "Every prime, higher power: 2² × 3² × 5²",
-      "2² × 3² × 5² = 900"
+      "20 = 2 × 2 × 5 and 225 = 3 × 3 × 5 × 5. Use these prime factorisations to find the LCM of 20 and 225.",
+      "Every prime, as many times as the number that has it most: 2 × 2 × 3 × 3 × 5 × 5",
+      "2 × 2 × 3 × 3 × 5 × 5 = 900"
      ]
     }
    ],
@@ -10080,7 +10083,7 @@
     "gen:hcf:69,92",
     "gen:aeeuc:1,141,122",
     "gen:agediv:1,103,49",
-    "gen:agfta:0,11113"
+    "gen:agfta:0,8998"
    ],
    "transfer": [
     "gen:hcf:15,95:mc",
@@ -11326,7 +11329,8 @@
      "math": [
       "Solve 2x − 1 < 7. Write the answer as an inequality for x (e.g. x > 2).",
       "Add 1 to both sides: the right side becomes 8",
-      "Divide both sides by 2: x < 4"
+      "Divide both sides by 2: x < 4",
+      "Check with x = 3: 2 × 3 − 1 = 5, which is less than 7. So the answer is x < 4"
      ],
      "tip": "1 was moved to the other side without changing its sign.",
      "role": "concept",
@@ -11432,7 +11436,8 @@
        "math": [
         "Solve −3x + 9 < −12. Write the answer as an inequality for x (e.g. x > 2).",
         "Take 9 from both sides: the right side becomes −21",
-        "Divide both sides by −3 and reverse the sign, because dividing by a negative number reverses an inequality: x > 7"
+        "Divide both sides by −3 and reverse the sign, because dividing by a negative number reverses an inequality: x > 7",
+        "Check with x = 8: −3 × 8 + 9 = −15, which is less than −12. So the answer is x > 7"
        ],
        "role": "worked-example",
        "instance": "gen:lineq:-3,9,-12"
@@ -11456,7 +11461,8 @@
        "math": [
         "Solve −6x + 14 < −16. Write the answer as an inequality for x (e.g. x > 2).",
         "Take 14 from both sides: the right side becomes −30",
-        "Divide both sides by −6 and reverse the sign, because dividing by a negative number reverses an inequality: x > 5"
+        "Divide both sides by −6 and reverse the sign, because dividing by a negative number reverses an inequality: x > 5",
+        "Check with x = 6: −6 × 6 + 14 = −22, which is less than −16. So the answer is x > 5"
        ],
        "widget": {
         "type": "numberline",
@@ -12355,8 +12361,8 @@
       {
        "title": "Number the boxes",
        "text": [
-        "Write 1, 2, 3 … under the boxes, starting from the side you are told.",
-        "The number under the animal is its place. The animals before it are one fewer."
+        "Write 1 to 7 under the 7 boxes, starting from the left.",
+        "The number under the duck is 1, so it is in place 1 from the left."
        ],
        "math": [
         "The animals in the picture stand in a row. Counting from the left, in which place is the duck?",
@@ -12369,7 +12375,8 @@
         "to": 7
        },
        "role": "strategy",
-       "instance": "gen:aarow:7,1,0,2"
+       "instance": "gen:aarow:7,1,0,2",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:aarow:7,1,0,1",
@@ -16826,8 +16833,9 @@
       {
        "title": "Look at a 2 by 2 square",
        "text": [
-        "Take any four dates in a square, like 5, 6, 12, 13.",
-        "Down adds 7 (5 to 12), right adds 1 (5 to 6), down-right adds 8 (5 to 13), down-left adds 6 (6 to 12)."
+        "Take four dates in a square on this calendar: 10, 11, 17, 18.",
+        "Down adds 7 (10 to 17), right adds 1 (10 to 11), down-right adds 8 (10 to 18), down-left adds 6 (11 to 17).",
+        "So each move here adds 7: from 10, 3 moves reach 31."
        ],
        "math": [
         "On the calendar for October 2027, start at 10. Move straight down one row, 3 times. Which date do you reach?",
@@ -16835,7 +16843,8 @@
         "10 + 3 moves: 31."
        ],
        "role": "strategy",
-       "instance": "gen:aacalpat:1,9,10,0,3"
+       "instance": "gen:aacalpat:1,9,10,0,3",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:aacalpat:0,5,12,3,1",
@@ -17558,7 +17567,7 @@
       "Count the squares along the path and multiply by the scale. For routes, add the roads along each one, then compare the totals."
      ],
      "math": [
-      "On the map, each side of a square stands for 5 km. Ravi starts at S, walks 3 squares East and then 3 squares North to E. How far does Ravi walk, in kilometres?",
+      "On the map, each side of a square stands for 5 km. Ravi starts at S, travels by bus 3 squares East and then 3 squares North to E. How far does Ravi travel, in kilometres?",
       "3 + 3 = 6 squares.",
       "6 × 5 = 30."
      ],
@@ -21056,9 +21065,9 @@
         "18 − 6 = 12"
        ],
        "widget": {
-        "type": "dots",
-        "count": 18,
-        "rows": 2
+        "type": "tenframe",
+        "filled": 18,
+        "frames": 2
        },
        "role": "strategy",
        "instance": "gen:acstory:1,2,6,1"
@@ -24240,7 +24249,7 @@
       {
        "title": "The method",
        "text": [
-        "Look at the ones digit: 0 to 4 round down, 5 to 9 round up. Round both numbers, then work out the answer with the tens."
+        "Look at the ones digit: if it is less than five, round down; if it is five or more, round up. Round both numbers, then work out the answer with the tens."
        ],
        "math": [
         "Estimate 78 + 32: round each number to the nearest ten first, then add. What is your estimate?",
@@ -24263,7 +24272,7 @@
       }
      ],
      "guided": "gen:adest:43,69,0",
-     "check": "gen:adest:24,12,1"
+     "check": "gen:adest:94,38,1"
     },
     {
      "id": "closest",
@@ -24297,7 +24306,7 @@
       }
      ],
      "guided": "gen:adest:93,56,1",
-     "check": "gen:adest:94,38,1:mc"
+     "check": "gen:adest:74,18,0:mc"
     },
     {
      "id": "spot_the_mistake",
@@ -24319,7 +24328,7 @@
       }
      ],
      "guided": "gen:adest:65,45,1",
-     "check": "gen:adest:74,18,0:mc"
+     "check": "gen:adest:32,65,0:mc"
     },
     {
      "id": "check_what_it_uses",
@@ -24332,12 +24341,12 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Round numbers to the nearest ten, hundred or thousand. If a step is slow, practise that skill first.",
-        "Then the method is: Look at the ones digit: 0 to 4 round down, 5 to 9 round up. Round both numbers, then work out the answer with the tens."
+        "Then the method is: Look at the ones digit: if it is less than five, round down; if it is five or more, round up. Round both numbers, then work out the answer with the tens."
        ]
       }
      ],
      "guided": "gen:adest:71,32,0",
-     "check": "gen:adest:32,65,0"
+     "check": "gen:adest:24,12,0"
     }
    ],
    "practice": [
@@ -25150,8 +25159,8 @@
       {
        "title": "Keep writing the pattern",
        "text": [
-        "Write the numbers in a row and keep adding the same amount.",
-        "Number each one with its place (1st, 2nd, 3rd …) and stop at the place asked for."
+        "Write the numbers in a row, adding 7 each time: 26, 33, 40, 47, 54, 61, 68.",
+        "Number each one with its place: 26 is the 1st, 33 is the 2nd, and so on. The 7th number is 68."
        ],
        "math": [
         "A number pattern starts at 26. The rule is: add 7 each time. The pattern begins 26, 33, 40, 47, … What is the 7th number in the pattern?",
@@ -25160,7 +25169,8 @@
         "Start at 26 and add 42: 68"
        ],
        "role": "strategy",
-       "instance": "gen:aepat:26,7,7"
+       "instance": "gen:aepat:26,7,7",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:aepat:11,6,6",
@@ -27070,7 +27080,7 @@
       {
        "title": "The method",
        "text": [
-        "Multiply the large units by 100 or 1000, then add the small units. Check the small part fills its places: 3 kg 25 g = 3000 g + 25 g = 3025 g."
+        "Multiply the large units by the number of small units in one large unit, then add the small units. Check the small part fills its places: if it has too few digits, put zeros in front of it."
        ],
        "math": [
         "4 L 955 mL = how many mL?",
@@ -27345,7 +27355,8 @@
        "title": "Shade a hundred grid",
        "text": [
         "A grid of 100 squares is 1 whole: one row (10 squares) is a tenth, one square is a hundredth.",
-        "Shade the rows for the tenths and single squares for the hundredths; 3 rows and 4 squares is 34 hundredths, 0.34."
+        "Shade 1 whole grid. On the next grid, shade 4 rows and 9 single squares: that is 49 hundredths, 0.49.",
+        "1 and 0.49 together make 1.49."
        ],
        "math": [
         "In the picture, a big square (flat) is 1 whole, a rod is one tenth and a small cube is one hundredth. The picture shows 1 flat, 4 rods and 9 small cubes. Write the number they show as a decimal.",
@@ -27354,7 +27365,8 @@
         "1 + 0.4 + 0.09 = 1.49"
        ],
        "role": "strategy",
-       "instance": "gen:aedec:1,4,9"
+       "instance": "gen:aedec:1,4,9",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:aedec:2,2,8",
@@ -27713,7 +27725,7 @@
       {
        "title": "The method",
        "text": [
-        "Draw a place-value chart (L, TTh, Th, H, T, O). Write each part in its own places, fill empty places with 0, then put commas: 4,07,052."
+        "Draw a place-value chart (L, TTh, Th, H, T, O). Write each part in its own places, fill empty places with 0, then put commas between the periods."
        ],
        "math": [
         "Write in figures: one lakh ninety-nine thousand four hundred five.",
@@ -27807,7 +27819,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Represent numbers to thousands; Compose tens and ones. If a step is slow, practise that skill first.",
-        "Then the method is: Draw a place-value chart (L, TTh, Th, H, T, O). Write each part in its own places, fill empty places with 0, then put commas: 4,07,052."
+        "Then the method is: Draw a place-value chart (L, TTh, Th, H, T, O). Write each part in its own places, fill empty places with 0, then put commas between the periods."
        ]
       }
      ],
@@ -27977,7 +27989,7 @@
       {
        "title": "The method",
        "text": [
-        "× 10, × 100, × 1000: write 1, 2 or 3 zeros on the end. ÷ 10, ÷ 100, ÷ 1000 (of a number ending in enough zeros): take 1, 2 or 3 zeros off the end."
+        "To multiply by ten, a hundred or a thousand, write as many zeros on the end as that number has. To divide by it (when the number ends in enough zeros), take that many zeros off the end."
        ],
        "math": [
         "679 × 10 = ?",
@@ -28025,8 +28037,8 @@
       {
        "title": "Swap each block for a bigger one",
        "text": [
-        "× 10 changes every one into a ten, every ten into a hundred, every hundred into a thousand.",
-        "So 34 (3 tens, 4 ones) × 10 is 3 hundreds and 4 tens: 340."
+        "× 100 changes every one into a hundred, every ten into a thousand, and so on: each block is swapped for the block 2 places bigger.",
+        "692 is 6 hundreds, 9 tens, 2 ones. After swapping it is 6 ten thousands, 9 thousands, 2 hundreds: 692 × 100 = 69200."
        ],
        "math": [
         "692 × 100 = ?",
@@ -28039,7 +28051,8 @@
         "ones": 2
        },
        "role": "strategy",
-       "instance": "gen:aep10:0,2,692"
+       "instance": "gen:aep10:0,2,692",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:aep10:1,2,959",
@@ -28274,7 +28287,7 @@
       {
        "title": "The method",
        "text": [
-        "Look at the digit just to the right of the place you are rounding to. If it is 0–4, round down (keep the place, zeros after). If it is 5–9, round up (add 1 to the place, zeros after)."
+        "Look at the digit just to the right of the place you are rounding to. If it is less than five, round down (keep the place, zeros after). If it is five or more, round up (add one to the place, zeros after)."
        ],
        "math": [
         "Round 7,274 to the nearest hundred.",
@@ -28552,8 +28565,8 @@
       {
        "title": "Count up like a shopkeeper",
        "text": [
-        "After finding the bill, count up from the bill to the note: ₹265 → ₹270 → ₹300 → ₹500.",
-        "Add the jumps: 5 + 30 + 200 = ₹235 change."
+        "The bill is 2 × ₹150 + 3 × ₹50 = ₹450. Count up from the bill to the note: ₹450 → ₹500.",
+        "That is one jump of ₹50: the change."
        ],
        "math": [
         "In a shop, notebooks cost ₹150 each and pencil boxes cost ₹50 each. Anu buys 2 notebooks and 3 pencil boxes, and pays with a ₹500 note. How much change, in rupees, should Anu get back?",
@@ -28572,7 +28585,8 @@
         ]
        },
        "role": "strategy",
-       "instance": "gen:aeshop:17,2,11,3,2"
+       "instance": "gen:aeshop:17,2,11,3,2",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:aeshop:8,4,1,1,1",
@@ -29115,7 +29129,7 @@
       {
        "title": "The method",
        "text": [
-        "Do to the letter exactly what you would do to a number: 'add 5' gives n + 5; 'multiply by 4' gives 4n (4 × n). Test your rule with a small number."
+        "Do to the letter exactly what the machine does to a number. Adding a number to n is written n + that number; taking it away is n − that number; multiplying n by a number is written with the number in front of the letter, with no × sign. Test your rule with a small number."
        ],
        "math": [
         "A number machine multiplies any number put in by 2, then adds 3. The number put in is m. Write the number that comes out, using m.",
@@ -30462,7 +30476,7 @@
       {
        "title": "The method",
        "text": [
-        "Count the identical parts that go round the centre (sides of a regular shape, blades, petals): that is usually the order. The smallest turn is 360° ÷ order, which is 1/order of a full turn."
+        "Count the identical parts that go round the centre (sides of a regular shape, blades, petals): that is usually the order. The smallest turn is a full turn shared equally by the order: 1/order of a full turn, or the degrees in a full turn divided by the order."
        ],
        "math": [
         "What is the order of rotational symmetry of a regular pentagon",
@@ -31315,8 +31329,8 @@
       {
        "title": "Think of rupees and paise",
        "text": [
-        "Read 4.5 as ₹4.50 and 2.37 as ₹2.37: 50 paise and 37 paise are both paise, so they go together.",
-        "Add the paise, then the rupees, exchanging 100 paise for ₹1 when needed."
+        "Read 16.2 as ₹16.20 and 4.37 as ₹4.37: 20 paise and 37 paise are both paise, so they go together.",
+        "Paise: 20 + 37 = 57. Rupees: 16 + 4 = 20. So the answer is ₹20.57, which is 20.57."
        ],
        "math": [
         "Work out 16.2 + 4.37.",
@@ -31324,7 +31338,8 @@
         "16.20 + 4.37 = 20.57, column by column from the hundredths"
        ],
        "role": "strategy",
-       "instance": "gen:agdec:162,437,0"
+       "instance": "gen:agdec:162,437,0",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:agdec:97,924,0",
@@ -32226,8 +32241,8 @@
       {
        "title": "Draw it as a tree",
        "text": [
-        "Put the last operation at the top of a tree, with its two parts as branches: 6 + 4 × 3 has + at the top, with 6 on one branch and 4 × 3 on the other.",
-        "Work from the bottom of the tree upwards: 4 × 3 = 12, then 6 + 12 = 18."
+        "Put the last operation at the top of a tree, with its two parts as branches: 12 + 6 × 5 has + at the top, with 12 on one branch and 6 × 5 on the other.",
+        "Work from the bottom of the tree upwards: 6 × 5 = 30, then 12 + 30 = 42."
        ],
        "math": [
         "Work out 12 + 6 × 5.",
@@ -32235,7 +32250,8 @@
         "Then 12 + 30 = 42"
        ],
        "role": "strategy",
-       "instance": "gen:agbod:0,12,6,5"
+       "instance": "gen:agbod:0,12,6,5",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:agbod:3,9,4,3",
@@ -32352,7 +32368,7 @@
     {
      "title": "Writing a fraction or decimal as a percentage",
      "text": [
-      "Per cent means 'out of 100'. A percentage is a number of hundredths: 37% = 37/100 = 0.37."
+      "Per cent means 'out of a hundred'. A percentage is a number of hundredths: so many per cent is so many hundredths, whether you write it as a fraction or as a decimal."
      ],
      "math": [
       "Write 0.17 as a percentage.",
@@ -32430,7 +32446,7 @@
        "title": "Shade a hundred square",
        "text": [
         "A 10 × 10 square has 100 small squares; each one is 1%.",
-        "Shade the part the fraction or decimal stands for and count the small squares."
+        "0.34 is 34 hundredths, so shade 34 small squares: 34 squares out of 100 is 34%."
        ],
        "math": [
         "Write 0.34 as a percentage.",
@@ -32443,7 +32459,8 @@
         "shaded": 34
        },
        "role": "strategy",
-       "instance": "gen:agpct:1,34"
+       "instance": "gen:agpct:1,34",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:agpct:1,35",
@@ -33057,8 +33074,8 @@
       {
        "title": "Count things of the same kind",
        "text": [
-        "Read x as 'apples' and y as 'bananas': 3 apples + 2 bananas + 4 apples is 7 apples + 2 bananas.",
-        "You cannot add apples to bananas to get 'applebananas', just as 3x + 2y is not 5xy."
+        "Read x as 'apples' and y as 'bananas' (a minus sign means some are taken away). Apples: 9 + 5 = 14. Bananas: 2 − 3 = −1.",
+        "You cannot add apples to bananas, so the x terms and the y terms stay apart: 14x − y."
        ],
        "math": [
         "Simplify 9x + 2y + 5x − 3y.",
@@ -33067,7 +33084,8 @@
         "Together: 14x − y"
        ],
        "role": "strategy",
-       "instance": "gen:ahlike:9,2,5,-3"
+       "instance": "gen:ahlike:9,2,5,-3",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:ahlike:1,-8,8,-8",
@@ -33212,7 +33230,8 @@
      "math": [
       "A pattern of figures uses 11, 14, 17 and 20 square tiles for Figures 1, 2, 3 and 4. Each figure adds the same number of square tiles. Write an expression for the number of square tiles in Figure n.",
       "Each figure adds 14 − 11 = 3, so the expression has 3n",
-      "Figure 1 has 11; 3 × 1 = 3, so add 8"
+      "Figure 1 has 11; 3 × 1 = 3, so add 8",
+      "So Figure n has 3n + 8"
      ],
      "tip": "The rule 'add 3 each time' was written as n + 3. Figure n has 3 added n times, which is 3n, plus a fixed part.",
      "role": "concept",
@@ -33264,7 +33283,8 @@
        "math": [
         "A pattern of figures uses 12, 17, 22 and 27 matchsticks for Figures 1, 2, 3 and 4. Each figure adds the same number of matchsticks. Write an expression for the number of matchsticks in Figure n.",
         "Each figure adds 17 − 12 = 5, so the expression has 5n",
-        "Figure 1 has 12; 5 × 1 = 5, so add 7"
+        "Figure 1 has 12; 5 × 1 = 5, so add 7",
+        "So Figure n has 5n + 7"
        ],
        "role": "worked-example",
        "instance": "gen:ahmatch:5,7,0"
@@ -33288,7 +33308,8 @@
        "math": [
         "A pattern of figures uses 8, 12, 16 and 20 square tiles for Figures 1, 2, 3 and 4. Each figure adds the same number of square tiles. Write an expression for the number of square tiles in Figure n.",
         "Each figure adds 12 − 8 = 4, so the expression has 4n",
-        "Figure 1 has 8; 4 × 1 = 4, so add 4"
+        "Figure 1 has 8; 4 × 1 = 4, so add 4",
+        "So Figure n has 4n + 4"
        ],
        "role": "strategy",
        "instance": "gen:ahmatch:4,4,1"
@@ -33312,7 +33333,8 @@
        "math": [
         "A pattern of figures uses 13, 21, 29 and 37 matchsticks for Figures 1, 2, 3 and 4. Each figure adds the same number of matchsticks. Write an expression for the number of matchsticks in Figure n.",
         "Each figure adds 21 − 13 = 8, so the expression has 8n",
-        "Figure 1 has 13; 8 × 1 = 8, so add 5"
+        "Figure 1 has 13; 8 × 1 = 8, so add 5",
+        "So Figure n has 8n + 5"
        ],
        "role": "strategy",
        "instance": "gen:ahmatch:8,5,0"
@@ -33431,7 +33453,8 @@
       "Term 2: 2 × 2 + 2 = 6",
       "Term 3: 2 × 6 + 2 = 14",
       "Term 4: 2 × 14 + 2 = 30",
-      "Term 5: 2 × 30 + 2 = 62"
+      "Term 5: 2 × 30 + 2 = 62",
+      "The first five terms: (2, 6, 14, 30, 62)"
      ],
      "tip": "2 was added before multiplying by 2. The rule multiplies the term first, then adds.",
      "role": "concept",
@@ -33527,7 +33550,8 @@
         "Term 2: 2 × 2 + 3 = 7",
         "Term 3: 2 × 7 + 3 = 17",
         "Term 4: 2 × 17 + 3 = 37",
-        "Term 5: 2 × 37 + 3 = 77"
+        "Term 5: 2 × 37 + 3 = 77",
+        "The first five terms: (2, 7, 17, 37, 77)"
        ],
        "role": "worked-example",
        "instance": "gen:ahrec:2,2,3"
@@ -33553,7 +33577,8 @@
         "Term 2: 8 + 1 = 9",
         "Term 3: 9 + 1 = 10",
         "Term 4: 10 + 1 = 11",
-        "Term 5: 11 + 1 = 12"
+        "Term 5: 11 + 1 = 12",
+        "The first five terms: (8, 9, 10, 11, 12)"
        ],
        "role": "strategy",
        "instance": "gen:ahrec:8,1,1"
@@ -33579,7 +33604,8 @@
         "Term 2: 2 × 5 + 3 = 13",
         "Term 3: 2 × 13 + 3 = 29",
         "Term 4: 2 × 29 + 3 = 61",
-        "Term 5: 2 × 61 + 3 = 125"
+        "Term 5: 2 × 61 + 3 = 125",
+        "The first five terms: (5, 13, 29, 61, 125)"
        ],
        "role": "strategy",
        "instance": "gen:ahrec:5,2,3"
@@ -34524,7 +34550,7 @@
       "Tiles fit around a point with no gaps or overlaps only when their corner angles add up to exactly 360°."
      ],
      "math": [
-      "At one point of a floor tiling, one regular pentagon and one regular nonagon meet, together with one more tile, with no gaps and no overlaps. What angle must the corner of the last tile be, in degrees?",
+      "At one point of a floor tiling, one regular pentagon (each corner 108°) and one regular nonagon (each corner 140°) meet, together with one more tile, with no gaps and no overlaps. What angle must the corner of the last tile be, in degrees?",
       "Each corner of a regular 5-sided polygon is 180° − 360° ÷ 5 = 108°",
       "Each corner of a regular 9-sided polygon is 180° − 360° ÷ 9 = 140°",
       "Corners already there: 1 × 108° + 1 × 140° = 248°",
@@ -34553,7 +34579,7 @@
         "Find each regular polygon's interior angle (180° − 360° ÷ number of sides), add the angles already at the point, and take the total from 360°; share the gap if more than one tile fills it."
        ],
        "math": [
-        "At one point of a floor tiling, 3 equilateral triangles and one regular dodecagon (12 sides) meet, together with one more tile, with no gaps and no overlaps. What angle must the corner of the last tile be, in degrees?",
+        "At one point of a floor tiling, 3 equilateral triangles and one regular dodecagon (12 sides, each corner 150°) meet, together with one more tile, with no gaps and no overlaps. What angle must the corner of the last tile be, in degrees?",
         "Each corner of a regular 3-sided polygon is 180° − 360° ÷ 3 = 60°",
         "Each corner of a regular 12-sided polygon is 180° − 360° ÷ 12 = 150°",
         "Corners already there: 3 × 60° + 1 × 150° = 330°",
@@ -34575,18 +34601,19 @@
       {
        "title": "Know the polygon angles",
        "text": [
-        "Triangle 60°, square 90°, pentagon 108°, hexagon 120°, octagon 135°, decagon 144°, dodecagon 150°.",
-        "Squares (4 × 90°), triangles (6 × 60°) and hexagons (3 × 120°) tile on their own; pentagons do not, since 360 ÷ 108 is not whole."
+        "Worth knowing by heart: triangle 60°, square 90°, pentagon 108°, hexagon 120°, octagon 135°, decagon 144°, dodecagon 150°.",
+        "Here: each corner of the equilateral triangle is 60° and each corner of the regular decagon is 144°. Together 3 × 60° + 1 × 144° = 324°, so the gap is 360° − 324° = 36°."
        ],
        "math": [
-        "At one point of a floor tiling, 3 equilateral triangles and one regular decagon meet, together with one more tile, with no gaps and no overlaps. What angle must the corner of the last tile be, in degrees?",
+        "At one point of a floor tiling, 3 equilateral triangles and one regular decagon (each corner 144°) meet, together with one more tile, with no gaps and no overlaps. What angle must the corner of the last tile be, in degrees?",
         "Each corner of a regular 3-sided polygon is 180° − 360° ÷ 3 = 60°",
         "Each corner of a regular 10-sided polygon is 180° − 360° ÷ 10 = 144°",
         "Corners already there: 3 × 60° + 1 × 144° = 324°",
         "The gap left: 360° − 324° = 36°"
        ],
        "role": "strategy",
-       "instance": "gen:ahtile:3,3,10,1,1"
+       "instance": "gen:ahtile:3,3,10,1,1",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:ahtile:3,3,6,1,2",
@@ -34605,7 +34632,7 @@
         "In a regular polygon all n corners are equal: divide by n."
        ],
        "math": [
-        "At one point of a floor tiling, one regular octagon and one regular decagon meet, together with one more tile, with no gaps and no overlaps. What angle must the corner of the last tile be, in degrees?",
+        "At one point of a floor tiling, one regular octagon (each corner 135°) and one regular decagon (each corner 144°) meet, together with one more tile, with no gaps and no overlaps. What angle must the corner of the last tile be, in degrees?",
         "Each corner of a regular 8-sided polygon is 180° − 360° ÷ 8 = 135°",
         "Each corner of a regular 10-sided polygon is 180° − 360° ÷ 10 = 144°",
         "Corners already there: 1 × 135° + 1 × 144° = 279°",
@@ -34629,7 +34656,7 @@
        "instance": "gen:ahtile:4,1,5,2,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “At one point of a floor tiling, one square and 2 regular pentagons meet, together with one more tile, with no gaps and no overlaps. What angle must the corner of the last tile be, in degrees?” A common wrong answer is 126.",
+        "A question: “At one point of a floor tiling, one square and 2 regular pentagons (each corner 108°) meet, together with one more tile, with no gaps and no overlaps. What angle must the corner of the last tile be, in degrees?” A common wrong answer is 126.",
         "The angle of each polygon was taken as 360° ÷ (number of sides), which is its exterior angle. A tile's corner is the interior angle, 180° − 360° ÷ n."
        ],
        "math": [
@@ -37081,7 +37108,7 @@
     {
      "title": "Multiplying decimals",
      "text": [
-      "Tenths times tenths make hundredths (0.1 × 0.1 = 0.01), so the answer has as many decimal places as the two numbers together."
+      "A tenth of a tenth is a hundredth, so tenths times tenths make hundredths: the answer has as many decimal places as the two numbers together."
      ],
      "math": [
       "94 × 0.88 = ?",
@@ -37157,7 +37184,7 @@
       {
        "title": "The method",
        "text": [
-        "Multiply the numbers as if there were no decimal points, count the decimal places in both, and give the answer that many decimal places. Estimate to check (e.g. 1.9 × 3.1 is about 2 × 3 = 6)."
+        "Multiply the numbers as if there were no decimal points, count the decimal places in both, and give the answer that many decimal places. Estimate with rounded numbers to check that the point is in a sensible place."
        ],
        "math": [
         "0.83 × 5.9 = ?",
@@ -37181,8 +37208,8 @@
       {
        "title": "Use fractions",
        "text": [
-        "Write each decimal as a fraction: 0.7 × 1.3 = 7/10 × 13/10.",
-        "Multiply: 91/100 = 0.91."
+        "Write each decimal as a fraction: 49 × 0.27 = 49 × 27/100.",
+        "Multiply the tops and the bottoms: 1323/100 = 13.23."
        ],
        "math": [
         "49 × 0.27 = ?",
@@ -37197,7 +37224,8 @@
         "shaded": 21
        },
        "role": "strategy",
-       "instance": "gen:aidmul:49,0,27,2"
+       "instance": "gen:aidmul:49,0,27,2",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:aidmul:6,1,79,1",
@@ -37236,7 +37264,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Multiply the numbers as if there were no decimal points, count the decimal places in both, and give the answer that many decimal places. Estimate to check (e.g. 1.9 × 3.1 is about 2 × 3 = 6)."
+        "Then the method is: Multiply the numbers as if there were no decimal points, count the decimal places in both, and give the answer that many decimal places. Estimate with rounded numbers to check that the point is in a sensible place."
        ]
       }
      ],
@@ -38482,8 +38510,8 @@
       {
        "title": "Split a rectangle",
        "text": [
-        "Think of k × 98 as the area of a rectangle k by 98.",
-        "It is a k by 100 rectangle with a k by 2 strip cut off: k × 100 − k × 2."
+        "Think of 57 × 99 as the area of a rectangle 57 by 99.",
+        "It is a 57 by 100 rectangle with a 57 by 1 strip cut off: 57 × 100 − 57 × 1 = 5700 − 57 = 5643."
        ],
        "math": [
         "Work out 57 × 99 without long multiplication.",
@@ -38492,7 +38520,8 @@
         "5700 − 57 = 5643"
        ],
        "role": "strategy",
-       "instance": "gen:ajd99:57,-1"
+       "instance": "gen:ajd99:57,-1",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:ajd99:12,-1",
@@ -38615,7 +38644,8 @@
       "16 ÷ 2 = 8",
       "8 ÷ 2 = 4",
       "4 ÷ 2 = 2",
-      "2 ÷ 2 = 1"
+      "2 ÷ 2 = 1",
+      "The divisors are the prime factors: (2, 2, 2, 2, 2, 2, 2, 2)"
      ],
      "tip": "1 was written as a factor. 1 is not a prime number, so it is not part of the list.",
      "role": "concept",
@@ -38666,7 +38696,8 @@
         "Write 255 as a product of prime numbers. List the primes from smallest to largest, repeating a prime as often as it occurs (for example, 12 is written 2, 2, 3).",
         "255 ÷ 3 = 85",
         "85 ÷ 5 = 17",
-        "17 ÷ 17 = 1"
+        "17 ÷ 17 = 1",
+        "The divisors are the prime factors: (3, 5, 17)"
        ],
        "role": "worked-example",
        "instance": "gen:ajpf:255"
@@ -38695,7 +38726,8 @@
         "24 ÷ 2 = 12",
         "12 ÷ 2 = 6",
         "6 ÷ 2 = 3",
-        "3 ÷ 3 = 1"
+        "3 ÷ 3 = 1",
+        "The divisors are the prime factors: (2, 2, 2, 2, 2, 3)"
        ],
        "role": "strategy",
        "instance": "gen:ajpf:96",
@@ -39246,7 +39278,7 @@
       {
        "title": "The method",
        "text": [
-        "Rewrite the number with international commas (groups of three: 34,000,000) and read the millions."
+        "Rewrite the number with international commas (groups of three digits, counting from the right) and read the number of millions in front of the second comma from the right."
        ],
        "math": [
         "21,10,00,000 is 21 crore 10 lakh. How many millions is it?",
@@ -39283,8 +39315,9 @@
       {
        "title": "Count the zeros",
        "text": [
-        "1 lakh has 5 zeros, 1 million has 6, 1 crore has 7.",
-        "So 1 crore = 10 million, and 10 lakh = 1 million."
+        "1 lakh has 5 zeros, 1 million has 6, 1 crore has 7: one more zero means ten times as much.",
+        "So 1 crore = 10 million, and 19 crore = 19 × 10 = 190 million.",
+        "10 lakh = 1 million, so 80 lakh = 8 million, and the total is 190 + 8 = 198 million."
        ],
        "math": [
         "19,80,00,000 is 19 crore 80 lakh. How many millions is it?",
@@ -39293,7 +39326,8 @@
         "190 + 8 = 198 million"
        ],
        "role": "strategy",
-       "instance": "gen:ajmill:19,8"
+       "instance": "gen:ajmill:19,8",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:ajmill:55,8",
@@ -39332,7 +39366,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Rewrite the number with international commas (groups of three: 34,000,000) and read the millions."
+        "Then the method is: Rewrite the number with international commas (groups of three digits, counting from the right) and read the number of millions in front of the second comma from the right."
        ]
       }
      ],
@@ -39406,10 +39440,10 @@
     {
      "title": "Selling price or cost price from a profit or loss per cent",
      "text": [
-      "Profit or loss per cent compares the profit or loss with the cost price: 20% profit means the selling price is 120% of the cost price."
+      "Profit or loss per cent always compares the profit or loss with the cost price: it is the profit or loss on every hundred rupees of cost. So with a profit the selling price is more than the cost price by that per cent of it; with a loss it is less by that per cent."
      ],
      "math": [
-      "A shopkeeper buys a fan for ₹180 and sells it at a 5% profit. What is the selling price, in rupees?",
+      "A shopkeeper buys a table lamp for ₹180 and sells it at a 5% profit. What is the selling price, in rupees?",
       "5% of ₹180 = ₹9",
       "₹180 + ₹9 = ₹189"
      ],
@@ -39485,7 +39519,7 @@
         "To find the selling price, find p% of the cost price and add it (profit) or take it away (loss). To find the cost price, divide the selling price by (100 ± p) and multiply by 100."
        ],
        "math": [
-        "A shopkeeper sells a fan for ₹546 and makes a 30% loss on it. What did the fan cost him (the cost price), in rupees?",
+        "A shopkeeper sells a table lamp for ₹546 and makes a 30% loss on it. What did the table lamp cost him (the cost price), in rupees?",
         "The selling price is 70% of the cost price",
         "Cost price = ₹546 × 100 ÷ 70 = ₹780"
        ],
@@ -39505,16 +39539,17 @@
       {
        "title": "Think of 100 parts",
        "text": [
-        "Split the cost price into 100 equal parts.",
-        "With a 15% profit the selling price is 115 of those parts; with a 15% loss it is 85 parts."
+        "Split the cost price ₹380 into 100 equal parts of ₹3.80 each.",
+        "With a 5% profit the selling price is 100 + 5 = 105 of those parts: 105 × ₹3.80 = ₹399."
        ],
        "math": [
-        "A shopkeeper buys a fan for ₹380 and sells it at a 5% profit. What is the selling price, in rupees?",
+        "A shopkeeper buys a table lamp for ₹380 and sells it at a 5% profit. What is the selling price, in rupees?",
         "5% of ₹380 = ₹19",
         "₹380 + ₹19 = ₹399"
        ],
        "role": "strategy",
-       "instance": "gen:ajpl:19,5,0,0"
+       "instance": "gen:ajpl:19,5,0,0",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:ajpl:14,25,1,1",
@@ -39531,7 +39566,7 @@
        "instance": "gen:ajpl:19,5,0,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “A shopkeeper sells a fan for ₹399 and makes a 5% profit on it. What did the fan cost him (the cost price), in rupees?” A common wrong answer is 379.",
+        "A question: “A shopkeeper sells a table lamp for ₹399 and makes a 5% profit on it. What did the table lamp cost him (the cost price), in rupees?” A common wrong answer is 379.",
         "5% of the selling price was taken away from it. Profit and loss per cent are of the COST price, so the selling price is 105% of the cost price: divide by 105 and multiply by 100."
        ],
        "math": [
@@ -39925,7 +39960,7 @@
        "instance": "gen:ajrq:-1,3,3,5,0"
       }
      ],
-     "guided": "gen:ajrq:4,5,-1,9,3",
+     "guided": "gen:ajrq:1,8,-7,9,2",
      "check": "gen:ajrq:1,5,-7,9,2:mc"
     },
     {
@@ -39947,22 +39982,22 @@
        ]
       }
      ],
-     "guided": "gen:ajrq:1,8,-7,9,2",
+     "guided": "gen:ajrq:-5,8,-1,2,1",
      "check": "gen:ajrq:1,4,-6,7,0:mc"
     }
    ],
    "practice": [
-    "gen:ajrq:-5,8,-1,2,1",
-    "gen:ajrq:-4,7,6,7,3:mc",
-    "gen:ajrq:-3,4,4,7,1",
-    "gen:ajinv:2,-7,6,3,5",
+    "gen:ajrq:-4,7,6,7,3",
+    "gen:ajrq:-3,4,4,7,1:mc",
+    "gen:ajrq:3,4,-1,4,1",
+    "gen:ajinv:2,1,3,1,2",
     "gen:ajrstd:-3,7,6,1",
     "gen:ajrcq:-5,8,-2,9",
     "gen:ajrline:1,-4,7,1,5"
    ],
    "transfer": [
-    "gen:ajrq:3,4,-1,4,1:w",
-    "gen:ajinv:2,-6,5,7,8:w",
+    "gen:ajrq:-3,7,-3,7,1:w",
+    "gen:ajinv:2,1,3,1,3:w",
     "gen:ajrcq:2,7,-1,4:w"
    ],
    "retention": [
@@ -42299,13 +42334,13 @@
       "Keeping the shape (or the amount per person) means keeping the ratio the same, so both numbers are multiplied by the same factor. Adding the same amount to both changes the ratio."
      ],
      "math": [
-      "A recipe for 4 people uses 12 cups of rice. How many cups are needed for 12 people, so that everyone gets the same amount?",
-      "The scale factor is 12 ÷ 4 = 3",
-      "Multiply: 12 × 3 = 36"
+      "A recipe for 12 people uses 11 cups of rice. How many cups are needed for 24 people, so that everyone gets the same amount?",
+      "The scale factor is 24 ÷ 12 = 2",
+      "Multiply: 11 × 2 = 22"
      ],
-     "tip": "The same amount was added (8). Keeping the amount per person means multiplying both numbers by the same factor, 12 ÷ 4.",
+     "tip": "The same amount was added (12). Keeping the amount per person means multiplying both numbers by the same factor, 24 ÷ 12.",
      "role": "concept",
-     "instance": "gen:akresize:1,4,12,12"
+     "instance": "gen:akresize:1,12,11,24"
     },
     {
      "title": "Direct proportion, inverse proportion or neither?",
@@ -42320,9 +42355,9 @@
     }
    ],
    "diagnostics": [
-    "gen:akresize:0,10,20,22",
-    "gen:akresize:1,5,10,11",
-    "gen:akresize:0,8,9,20"
+    "gen:akresize:1,12,10,15",
+    "gen:akresize:0,8,7,20",
+    "gen:akresize:1,12,6,27"
    ],
    "strategies": [
     {
@@ -42337,16 +42372,16 @@
         "Find the scale factor: new ÷ old for the pair you know. Multiply the other number by the same factor (or find the amount for 1 first, then multiply)."
        ],
        "math": [
-        "A photo is 12 cm wide and 14 cm tall. Meena prints a smaller copy that is 6 cm wide, without stretching or squashing the picture. How tall is the copy, in cm?",
-        "The scale factor is 6 ÷ 12 = 6/12",
-        "Multiply: 14 × the factor = 7"
+        "A recipe for 11 people uses 10 cups of rice. How many cups are needed for 22 people, so that everyone gets the same amount?",
+        "The scale factor is 22 ÷ 11 = 2",
+        "Multiply: 10 × 2 = 20"
        ],
        "role": "worked-example",
-       "instance": "gen:akresize:0,12,14,6"
+       "instance": "gen:akresize:1,11,10,22"
       }
      ],
-     "guided": "gen:akresize:0,12,14,9",
-     "check": "gen:akresize:1,5,10,12"
+     "guided": "gen:akresize:1,6,3,9",
+     "check": "gen:akresize:0,11,8,22"
     },
     {
      "id": "why_not_add",
@@ -42357,20 +42392,21 @@
       {
        "title": "Why adding goes wrong",
        "text": [
-        "A photo 2 cm wide and 4 cm tall, made 10 cm wide by adding 8 cm to both sides, would be 10 by 12: it now looks squashed.",
-        "Multiplying both by 5 gives 10 by 20: the height is still twice the width, so the shape is kept."
+        "Making the photo 24 cm wide by adding 12 cm on both sides would give 24 cm by 20 cm: the height is no longer the same part of the width, so the picture is stretched or squashed.",
+        "Multiplying both sides by 24 ÷ 12 gives 24 cm by 16 cm: the height and the width change in the same ratio, so the shape is kept."
        ],
        "math": [
-        "A recipe for 5 people uses 8 cups of rice. How many cups are needed for 15 people, so that everyone gets the same amount?",
-        "The scale factor is 15 ÷ 5 = 3",
-        "Multiply: 8 × 3 = 24"
+        "A photo is 12 cm wide and 8 cm tall. Priya prints a bigger copy that is 24 cm wide, without stretching or squashing the picture. How tall is the copy, in cm?",
+        "The scale factor is 24 ÷ 12 = 2",
+        "Multiply: 8 × 2 = 16"
        ],
        "role": "strategy",
-       "instance": "gen:akresize:1,5,8,15"
+       "instance": "gen:akresize:0,12,8,24",
+       "textFrom": "instance"
       }
      ],
-     "guided": "gen:akresize:1,8,11,16",
-     "check": "gen:akresize:1,4,18,7:mc"
+     "guided": "gen:akresize:1,6,3,8",
+     "check": "gen:akresize:0,12,8,21:mc"
     },
     {
      "id": "unitary",
@@ -42385,16 +42421,16 @@
         "Multiply by the new number of people."
        ],
        "math": [
-        "A recipe for 12 people uses 11 cups of rice. How many cups are needed for 24 people, so that everyone gets the same amount?",
-        "The scale factor is 24 ÷ 12 = 2",
-        "Multiply: 11 × 2 = 22"
+        "A photo is 12 cm wide and 8 cm tall. Priya prints a bigger copy that is 27 cm wide, without stretching or squashing the picture. How tall is the copy, in cm?",
+        "The scale factor is 27 ÷ 12 = 27/12",
+        "Multiply: 8 × the factor = 18"
        ],
        "role": "strategy",
-       "instance": "gen:akresize:1,12,11,24"
+       "instance": "gen:akresize:0,12,8,27"
       }
      ],
-     "guided": "gen:akresize:0,4,8,9",
-     "check": "gen:akresize:1,4,18,6"
+     "guided": "gen:akresize:1,11,8,22",
+     "check": "gen:akresize:0,12,10,21"
     },
     {
      "id": "spot_the_mistake",
@@ -42415,8 +42451,8 @@
        ]
       }
      ],
-     "guided": "gen:akresize:0,8,13,12",
-     "check": "gen:akresize:0,8,9,4:mc"
+     "guided": "gen:akresize:1,9,8,18",
+     "check": "gen:akresize:1,12,6,21:mc"
     },
     {
      "id": "check_what_it_uses",
@@ -42433,18 +42469,18 @@
        ]
       }
      ],
-     "guided": "gen:akresize:0,4,7,10",
-     "check": "gen:akresize:0,10,20,30"
+     "guided": "gen:akresize:0,12,10,24",
+     "check": "gen:akresize:1,12,6,20"
     }
    ],
    "practice": [
-    "gen:akresize:0,10,20,25",
-    "gen:akresize:0,4,8,8:mc",
-    "gen:akresize:1,2,5,3",
+    "gen:akresize:0,12,10,27",
+    "gen:akresize:1,12,6,23:mc",
+    "gen:akresize:1,12,6,22",
     "gen:akdirinv:3,7,0"
    ],
    "transfer": [
-    "gen:akresize:1,4,20,11:w"
+    "gen:akresize:1,12,6,16:w"
    ],
    "retention": [
     "gen:akresize:0,8,3,20",
@@ -42471,18 +42507,18 @@
     "family": "akresize",
     "seed": [
      1,
-     4,
      12,
-     12
+     11,
+     24
     ],
     "blueprintVersion": "1.0.0",
     "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
     "aiAssisted": true,
     "licence": "CC0",
     "examples": [
-     "gen:akresize:1,4,12,12",
+     "gen:akresize:1,12,11,24",
      "gen:akresize:1,12,11,30",
-     "gen:akresize:0,12,14,6"
+     "gen:akresize:1,11,10,22"
     ]
    }
   },
@@ -42888,7 +42924,7 @@
       "For each mark, find the class whose lower limit is at most the mark and whose upper limit is more than it. Tally the class, then count."
      ],
      "math": [
-      "The table shows the marks (out of 50) of 30 students. Group them into the classes 0–10, 10–20, 20–30, 30–40 and 40–50, where each class includes its lower limit but not its upper limit (so 20 goes in 20–30). How many students are in the class 0–10?",
+      "The table shows the marks (out of 50) of 30 students. Group them into the classes 0–10, 10–20, 20–30, 30–40 and 40–50, where each class includes its lower limit but not its upper limit (so 20 goes in 20–30); the last class, 40–50, also includes 50. How many students are in the class 0–10?",
       "Count the marks from 0 up to (but not including) 10: 7"
      ],
      "widget": {
@@ -43785,15 +43821,15 @@
   },
   {
    "competency": "MATH.algebra.linear-two-variables",
-   "title": "The straight-line rule behind a table",
+   "title": "The rule behind a table of values",
    "chapter": [
     {
-     "title": "The straight-line rule behind a table",
+     "title": "The rule behind a table of values",
      "text": [
       "When y changes by the same amount each time x goes up by 1, the rule is y = (step) × x + (value of y at x = 0)."
      ],
      "math": [
-      "The table in the picture shows pairs (x, y) that follow one straight-line rule. Write the expression in x that gives y (just the expression in x, without \"y =\").",
+      "The table in the picture shows pairs (x, y). y is always the same number times x, plus or minus a fixed number. Write the expression in x that gives y (just the expression in x, without \"y =\").",
       "Each time x goes up by 1, y changes by 1",
       "Go back to x = 0: y = 0",
       "So y = x"
@@ -43816,13 +43852,13 @@
      ]
     },
     {
-     "title": "Steady increase or decrease: a linear polynomial to predict",
+     "title": "Steady increase or decrease: a rule to predict",
      "text": [
-      "A quantity that changes by the same amount every step is modelled by a linear polynomial p(t) = (start) + (change per step) × t; the change is negative for a steady decrease (linear decay).",
+      "A quantity that changes by the same amount every step follows the rule p(t) = (start) + (change per step) × t; the change is negative for a steady decrease.",
       "Read the starting amount (the value when t = 0) and the change per step with its sign, write p(t) = start + change × t, and substitute the number of steps."
      ],
      "math": [
-      "An auto-rickshaw fare is ₹123 to start, plus ₹5 for every kilometre travelled. Write the linear polynomial that gives the fare (in rupees) after t kilometres, and use it to find the fare (in rupees) after 8 kilometres.",
+      "An auto-rickshaw fare is ₹123 to start, plus ₹5 for every kilometre travelled. Write a rule (an expression in t) for the fare (in rupees) after t kilometres, and use it to find the fare (in rupees) after 8 kilometres.",
       "The increase is the same each step, so p(t) = 5t + 123",
       "p(8) = 163"
      ]
@@ -43857,7 +43893,7 @@
         "Find the step from two neighbouring values. Work back to x = 0 to find the starting value. Check your rule with one more pair from the table."
        ],
        "math": [
-        "The table in the picture shows pairs (x, y) that follow one straight-line rule. Write the expression in x that gives y (just the expression in x, without \"y =\").",
+        "The table in the picture shows pairs (x, y). y is always the same number times x, plus or minus a fixed number. Write the expression in x that gives y (just the expression in x, without \"y =\").",
         "Each time x goes up by 1, y changes by −1",
         "Go back to x = 0: y = 2",
         "So y = −x + 2"
@@ -43882,7 +43918,7 @@
         "The line rises (or falls) by the step for each 1 across, and crosses the y-axis at the starting value."
        ],
        "math": [
-        "The table in the picture shows pairs (x, y) that follow one straight-line rule. Write the expression in x that gives y (just the expression in x, without \"y =\").",
+        "The table in the picture shows pairs (x, y). y is always the same number times x, plus or minus a fixed number. Write the expression in x that gives y (just the expression in x, without \"y =\").",
         "Each time x goes up by 1, y changes by −4",
         "Go back to x = 0: y = 9",
         "So y = −4x + 9"
@@ -43931,7 +43967,7 @@
        "instance": "gen:alrule:-5,-6,0",
        "title": "A common wrong answer",
        "text": [
-        "A question: “The table in the picture shows pairs (x, y) that follow one straight-line rule. Write the expression in x that gives y (just the expression in x, without \"y =\").” A common wrong answer is −5x.",
+        "A question: “The table in the picture shows pairs (x, y). y is always the same number times x, plus or minus a fixed number. Write the expression in x that gives y (just the expression in x, without \"y =\").” A common wrong answer is −5x.",
         "Only the step was used; the rule also needs the value of y when x = 0."
        ],
        "math": [

@@ -336,6 +336,8 @@ export const B02: Def[] = [
       const t = seq(s, STEPS[k], d, 5);
       return t.some((x) => x < 0 || x > (k === 3 ? 200 : 100)) ? "Numbers up to 100 (up to 200 when counting in tens)." : null;
     },
+    // level@1: skip counting is Grade 2 work (prerequisite review, not evidence for a Grade 7 pattern outcome)
+    grade: () => 2,
     prompt: ([s, k, d]) => `What number comes next? ${seq(s, STEPS[k], d, 4).join(", ")}, ?`,
     solve: ([s, k, d]) => {
       const t = seq(s, STEPS[k], d, 5);
@@ -403,6 +405,8 @@ export const B02: Def[] = [
       const t = seq(s, MSTEPS[k], d, 5);
       return t.some((x) => x < 0 || x > (k === 3 ? 200 : 100)) ? "Numbers up to 100 (up to 200 when counting in tens)." : null;
     },
+    // level@1: a missing number in a counting pattern is Grade 2 work
+    grade: () => 2,
     prompt: ([s, k, d, p]) => `Which number is missing? ${seq(s, MSTEPS[k], d, 5).map((x, i) => (i === p ? "?" : x)).join(", ")}`,
     solve: ([s, k, d, p]) => {
       const t = seq(s, MSTEPS[k], d, 5);
@@ -1748,7 +1752,9 @@ const GAP02: Def[] = [
     prompt: ([kind, seed]) => {
       if (kind === 0) {
         const w = pathOf(seed);
-        return `On the map, each side of a square stands for ${w.S} ${w.unit}. ${name(seed)} starts at S, walks ${w.dx} square${w.dx > 1 ? "s" : ""} ${w.ew ? "West" : "East"} and then ${w.dy} square${w.dy > 1 ? "s" : ""} ${w.ns ? "South" : "North"} to E. How far does ${name(seed)} walk, in ${w.unit === "km" ? "kilometres" : "metres"}?`;
+        // kilometre squares give 20–60 km: too far to walk, so the trip is by bus
+        const km = w.unit === "km";
+        return `On the map, each side of a square stands for ${w.S} ${w.unit}. ${name(seed)} starts at S, ${km ? "travels by bus" : "walks"} ${w.dx} square${w.dx > 1 ? "s" : ""} ${w.ew ? "West" : "East"} and then ${w.dy} square${w.dy > 1 ? "s" : ""} ${w.ns ? "South" : "North"} to E. How far does ${name(seed)} ${km ? "travel" : "walk"}, in ${km ? "kilometres" : "metres"}?`;
       }
       const r = routeOf(seed);
       void r;
@@ -1797,8 +1803,8 @@ const GAP02: Def[] = [
         const w = pathOf(seed);
         return [
           B("squares-not-scale", "conceptual", MAPS, `The squares were counted but the scale was not used. Each square stands for ${w.S} ${w.unit}.`, w.dx + w.dy),
-          B("one-direction", "procedural", MAPS, "Only the first part of the walk was counted. Add both parts of the walk.", w.dx * w.S),
-          B("second-part-only", "procedural", MAPS, "Only the second part of the walk was counted. Add both parts of the walk.", w.dx === w.dy ? null : w.dy * w.S),
+          B("one-direction", "procedural", MAPS, "Only the first part of the trip was counted. Add both parts of the trip.", w.dx * w.S),
+          B("second-part-only", "procedural", MAPS, "Only the second part of the trip was counted. Add both parts of the trip.", w.dx === w.dy ? null : w.dy * w.S),
         ];
       }
       const r = routeOf(seed);
@@ -2948,7 +2954,8 @@ const GAP02: Def[] = [
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
     word: ([kind, seed]) => {
       const [a, b] = nineNums(kind, seed);
-      return kind === 0 ? `A shopkeeper in Erode checks her bills by casting out nines. One bill total is ₹${a}. What is its nines check number?` : `A shopkeeper works out ${a} ${kind === 1 ? "+" : "×"} ${b} for a bill and checks it by casting out nines. Which check number should the correct answer have?`;
+      const rule = "(Add the digits again and again until one digit is left; 9 counts as 0.)";
+      return kind === 0 ? `A shopkeeper in Erode checks her bills by casting out nines. One bill total is ₹${a}. What is its nines check number? ${rule}` : `A shopkeeper works out ${a} ${kind === 1 ? "+" : "×"} ${b} for a bill and checks it by casting out nines. Which check number should the correct answer have? ${rule}`;
     },
     teach: {
       idea: "Adding the digits of a number again and again (with 9 counting as 0) leaves its remainder when divided by 9. A correct sum or product has the check number you get by adding or multiplying the check numbers.",

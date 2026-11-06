@@ -18,6 +18,7 @@
 import { moduleFor, question, type Module, type Screen, type Strategy } from "./content";
 import { explainStep, exposureKey, FAMILIES, parseProblem, problemOf, show, type Problem } from "./families";
 import scopeData from "../../../content/learning/showcase-grade10.v1.json";
+import grade7ScopeData from "../../../content/learning/teaching-scope-grade7.v1.json";
 import exemptionData from "../../../content/learning/teaching-contract-exemptions.v1.json";
 import type { Representation, TeachRole } from "./family-kit";
 import { chapterExplanation, contentEligibility } from "./explanation-review";
@@ -25,7 +26,9 @@ import { familyStepExplanation, teachingPresentationFrom, teachingScopeFor, stra
 
 /** The Grade 10 showcase scope (CBSE and Tamil Nadu lessons) and its curated lessons (stage 2). */
 export const SHOWCASE = scopeData as { competencies: string[]; curated: string[] };
-const SCOPE = new Set(SHOWCASE.competencies);
+/** The Grade 7 teaching scope (grade7-teaching@1): the same stage 2 rules for every Grade 7 lesson of both boards. */
+export const GRADE7_SCOPE = grade7ScopeData as { competencies: string[]; curated: string[] };
+const SCOPE = new Set([...SHOWCASE.competencies, ...GRADE7_SCOPE.competencies]);
 /** Reviewed decisions that a flagged section is not a defect (each with its reason), e.g. a general fact, not an example. */
 export const EXEMPTIONS = exemptionData as { entries: { competency: string; title: string; rule: Violation; reason: string }[] };
 

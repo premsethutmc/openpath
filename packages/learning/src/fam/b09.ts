@@ -1031,9 +1031,13 @@ export const B09: Def[] = [
     explain: (s) => (s.id === "circle" ? `Whole circumference: 2 × 22/7 × ${s.inputs[2]} = ${s.value} cm` : s.id === "arc" ? `Arc: ${s.inputs[0]} of ${s.inputs[1]} = ${s.value} cm` : s.id === "circle-area" ? `Whole circle: 22/7 × ${s.inputs[1]} × ${s.inputs[2]} = ${s.value} cm²` : s.id === "area" ? `Sector: ${s.inputs[0]} of ${s.inputs[1]} = ${s.value} cm²` : `Perimeter: arc + 2 radii = ${s.inputs.join(" + ")} = ${s.value} cm`),
     domain: [[1, 6], [0, ANGLES.length - 1], [0, 2]],
     difficulty: ([k, t]) => ([90, 180].includes(ANGLES[t]) ? 1 : 360 % ANGLES[t] === 0 ? 2 : 3),
+    // level@1: Grade 7 meets semicircles and quarter circles; a sector with any other angle is Grade 8 work
+    grade: ([, t]) => ([90, 180].includes(ANGLES[t]) ? 7 : 8),
+    // a real wiper is 35–56 cm long and swings at most about 120°, and sweeps a band, so it is used only for the tip's arc
     word: ([k, t, a]) =>
-      a === 0 ? `A car's wiper is ${7 * k} cm long and swings through ${ANGLES[t]}°. How far does its tip travel in one swing, in cm? (π = 22/7; a fraction is fine.)`
-      : a === 1 ? `A car's wiper is ${7 * k} cm long and swings through ${ANGLES[t]}°. How much of the glass does it wipe, in cm²? (π = 22/7; a fraction is fine.)`
+      a === 0 && k >= 5 && ANGLES[t] <= 120 ? `A car's wiper is ${7 * k} cm long and swings through ${ANGLES[t]}°. How far does its tip travel in one swing, in cm? (π = 22/7; a fraction is fine.)`
+      : a === 0 ? `A folding paper fan has ribs ${7 * k} cm long and opens out to ${ANGLES[t]}°. How long is its curved edge, in cm? (π = 22/7; a fraction is fine.)`
+      : a === 1 ? `A folding paper fan has ribs ${7 * k} cm long and opens out to ${ANGLES[t]}°. What area of paper does the open fan show, in cm²? (π = 22/7; a fraction is fine.)`
       : `${name(k + t)} cuts a slice of a round pizza with radius ${7 * k} cm and angle ${ANGLES[t]}°. How long is the slice's whole outline (crust edge and two cut edges), in cm? (π = 22/7; a fraction is fine.)`,
     teach: {
       idea: "A sector with angle θ is θ/360 of the whole circle, so its arc is θ/360 of the circumference and its area is θ/360 of the circle's area.",
@@ -1383,6 +1387,8 @@ export const B09: Def[] = [
     domain: [[3, 30], [2, 29], [2, 20]],
     keep: ([a, b]) => b < a,
     cap: 400,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([a, b, h]) => (((a + b) * h) % 2 === 0 && (a + b) * h <= 200 ? 1 : ((a + b) * h) % 2 === 0 ? 2 : 3),
     figure: ([a, b, h]) => ({ type: "shape", kind: "trapezium", name: "trapezium", lengths: [`${b} cm`, "", `${a} cm`, ""], height: `${h} cm` }),
     word: ([a, b, h]) => `${name(a + b)}'s farm field is a trapezium. Its two parallel edges are ${a} m and ${b} m long, and they are ${h} m apart. What is the area of the field, in m²?`,
@@ -1430,6 +1436,8 @@ export const B09: Def[] = [
     domain: [[4, 12], [4, 12], [1, 11], [1, 11], [0, 1]],
     keep: ([W, H, p, c]) => p < W && c < H,
     cap: 400,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([W, H, , , a]) => (a === 0 && W * H <= 60 ? 1 : a === 0 ? 2 : 3),
     figure: ([W, H, p, c]) => ({ type: "shape", kind: "lshape", name: "L-shape", lengths: lsides(W, H, p, c).map((x) => `${x} cm`) }),
     word: ([W, H, p, c, a]) => (a === 0 ? `A room is ${W} m by ${H} m, but ${aN(p)} m by ${c} m store cupboard is built into one corner. How much floor is left to tile, in m²?` : `A garden is ${W} m by ${H} m with ${aN(p)} m by ${c} m corner taken by a shed. ${name(W + H)} puts a fence along the edge of the garden that is left. How many metres of fence are needed?`),
@@ -1476,10 +1484,12 @@ export const B09: Def[] = [
     domain: [[5, 30], [3, 20], [1, 3], [0, 1]],
     keep: ([L, W, x, s]) => L > W && (s === 0 || W - 2 * x >= 1),
     cap: 400,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([L, W, x]) => (x === 1 && L <= 15 ? 1 : x <= 2 ? 2 : 3),
     // only the garden and the path width are labelled (the outer or inner rectangle is the step being tested)
     figure: ([L, W, x, s]) => ({ type: "shape", kind: "rectangle", name: `garden with ${aN(x)} m wide path ${s === 0 ? "all round the outside" : "just inside its edge"}`, lengths: [`${L} m`, `${W} m`, "", ""] }),
-    word: ([L, W, x, s]) => (s === 0 ? `A school lawn is ${L} m by ${W} m. The school lays ${aN(x)} m wide brick border all round the outside of the lawn. How many m² of bricks are laid?` : `${AN(L)} m by ${W} m carpet has ${aN(x)} m wide coloured border along all its edges, inside the carpet. What is the area of the border, in m²?`),
+    word: ([L, W, x, s]) => (s === 0 ? `A school lawn is ${L} m by ${W} m. The school lays ${aN(x)} m wide brick border all round the outside of the lawn. How many m² of bricks are laid?` : `A school ground is ${L} m by ${W} m. ${AN(x)} m wide strip just inside its fence, all the way round, is kept for a running track. What is the area of the strip, in m²?`),
     teach: {
       idea: "A path around (or inside) a rectangle is the space between two rectangles: the bigger one minus the smaller one.",
       method: "Outside path: (L + 2x)(W + 2x) − LW. Inside path: LW − (L − 2x)(W − 2x). The width is added (or taken off) on both sides.",
@@ -1520,9 +1530,15 @@ export const B09: Def[] = [
     difficulty: ([m, a, n, b]) => (b === 0 && n < 10 ? 1 : a + b <= 2 ? 2 : 3),
     word: ([m, a, n, b]) => (a === 0 ? `One bottle holds ${D(n, 10 ** b)} litres of oil. How many litres do ${m} such bottles hold?` : b === 0 ? `One bottle holds ${D(m, 10 ** a)} litres of oil. How many litres do ${n} such bottles hold?` : m >= 10 ** a && n >= 10 ** b ? `A rectangular card is ${D(m, 10 ** a)} cm long and ${D(n, 10 ** b)} cm wide. What is its area, in cm²?` : `A rectangular piece of cloth is ${D(m, 10 ** a)} m long and ${D(n, 10 ** b)} m wide. What is its area, in m²?`),
     teach: {
-      idea: "Tenths times tenths make hundredths (0.1 × 0.1 = 0.01), so the answer has as many decimal places as the two numbers together.",
-      method: "Multiply the numbers as if there were no decimal points, count the decimal places in both, and give the answer that many decimal places. Estimate to check (e.g. 1.9 × 3.1 is about 2 × 3 = 6).",
-      alternatives: [{ id: "fractions", title: "Use fractions", kind: "conceptual", text: ["Write each decimal as a fraction: 0.7 × 1.3 = 7/10 × 13/10.", "Multiply: 91/100 = 0.91."], visual: () => ({ type: "grid", rows: 10, cols: 10, shaded: 21 }) }],
+      idea: "A tenth of a tenth is a hundredth, so tenths times tenths make hundredths: the answer has as many decimal places as the two numbers together.",
+      method: "Multiply the numbers as if there were no decimal points, count the decimal places in both, and give the answer that many decimal places. Estimate with rounded numbers to check that the point is in a sensible place.",
+      alternatives: [{
+        id: "fractions", title: "Use fractions", kind: "conceptual", text: ["Write each decimal as a fraction: 0.7 × 1.3 = 7/10 × 13/10.", "Multiply: 91/100 = 0.91."],
+        textFor: ([m, a, n, b]) => {
+          const fr = (k: number, e: number) => (e === 0 ? `${k}` : `${k}/${10 ** e}`);
+          return [`Write each decimal as a fraction: ${D(m, 10 ** a)} × ${D(n, 10 ** b)} = ${fr(m, a)} × ${fr(n, b)}.`, `Multiply the tops and the bottoms: ${m * n}/${10 ** (a + b)} = ${D(m * n, 10 ** (a + b))}.`];
+        },
+        visual: () => ({ type: "grid", rows: 10, cols: 10, shaded: 21 }) }],
     },
     limits: "Two-digit numbers with up to two decimal places each; long decimals are left out.",
   },
@@ -1560,7 +1576,8 @@ export const B09: Def[] = [
     keep: ([m, a, n, b]) => a + b >= 1 && !(a > 0 && m % 10 === 0) && !(b > 0 && n % 10 === 0),
     cap: 400,
     difficulty: ([, a, n, b]) => (b === 0 && n < 10 ? 1 : b === 0 || a === 0 ? 2 : 3),
-    word: ([m, a, n, b]) => `A rectangle has an area of ${D(m * n, 10 ** (a + b))} cm². One side is ${D(n, 10 ** b)} cm long. How long is the other side, in cm?`,
+    // a tiny area in cm² is hard to picture: below 1, the same numbers are a sheet measured in m² and m
+    word: ([m, a, n, b]) => (m * n < 10 ** (a + b) ? `A rectangular sheet of glass has an area of ${D(m * n, 10 ** (a + b))} m². One side is ${D(n, 10 ** b)} m long. How long is the other side, in m?` : `A rectangle has an area of ${D(m * n, 10 ** (a + b))} cm². One side is ${D(n, 10 ** b)} cm long. How long is the other side, in cm?`),
     teach: {
       idea: "Multiplying both numbers in a division by the same amount does not change the answer (12 ÷ 4 = 120 ÷ 40), so you can make the divisor a whole number first.",
       method: "Move the decimal point in the divisor to make it whole, move the dividend's point the same number of places, then divide as usual, keeping the point in line.",
@@ -1686,7 +1703,7 @@ export const B09: Def[] = [
     keep: ([a, b, c, d]) => a < b && gcd(a, b) === 1 && (d === 1 ? c >= 2 && c <= 9 : c < d && gcd(c, d) === 1),
     cap: 400,
     difficulty: ([, b, c, d]) => (d === 1 ? 1 : b * d <= 40 ? 2 : 3),
-    word: ([a, b, c, d]) => (d === 1 ? `${name(a + b)} shares ${a}/${b} of a cake equally among ${c} friends. What fraction of the whole cake does each friend get?` : `A jug holds ${a}/${b} litre of buttermilk. Each glass holds ${c}/${d} litre. How many glasses can be filled? (A fraction of a glass counts; give a fraction.)`),
+    word: ([a, b, c, d]) => (d === 1 ? `${name(a + b)} shares ${a}/${b} of a cake equally among ${c} friends. What fraction of the whole cake does each friend get?` : c * b < a * d ? `A jug holds ${a}/${b} litre of buttermilk. Each glass holds ${c}/${d} litre. How many glassfuls of buttermilk is that? (Give the answer as a fraction; part of a glass counts.)` : `A jug holds ${a}/${b} litre of buttermilk. A glass holds ${c}/${d} litre, which is more than the jug. What fraction of the glass does the jug fill?`),
     teach: {
       idea: "Dividing asks 'how many lots of the divisor fit?'. Dividing by c/d is the same as multiplying by d/c, its reciprocal, because c/d × d/c = 1.",
       method: "Keep the first fraction, change ÷ to ×, turn the second fraction upside down, then multiply and simplify.",
@@ -1831,7 +1848,7 @@ function wallOf(m: number) {
 }
 /** Something that weighs about w kg each: [one, many]. */
 function itemOf(w: number): [string, string] {
-  return w < 0.0005 ? ["seed", "seeds"] : w < 0.03 ? ["nail", "nails"] : w < 1 ? ["packet of biscuits", "packets of biscuits"] : w <= 30 ? ["bag of rice", "bags of rice"] : ["sack of cement", "sacks of cement"];
+  return w < 0.0005 ? ["seed", "seeds"] : w < 0.001 ? ["bead", "beads"] : w < 0.03 ? ["nail", "nails"] : w < 1 ? ["packet of biscuits", "packets of biscuits"] : w <= 30 ? ["bag of rice", "bags of rice"] : w <= 50 ? ["sack of cement", "sacks of cement"] : ["drum of oil", "drums of oil"];
 }
 /** The six sides of the L, from the top-left corner clockwise (the order the picture labels them). */
 function lsides(W: number, H: number, p: number, c: number) {
@@ -1865,7 +1882,7 @@ const FW = [
   { op: "×", text: (w: number, a: number, b: number) => `A packet holds ${w} kg of rice. ${name(w + b)} uses ${a}/${b} of the packet. How many kg of rice is used? (A fraction or mixed number is fine.)`, whole: true },
   { op: "×", text: (c: number, a: number, b: number, d: number) => `${c}/${d} of a garden is used for vegetables, and ${a}/${b} of the vegetable part grows tomatoes. What fraction of the whole garden grows tomatoes?`, whole: false },
   { op: "÷", text: (c: number, a: number, b: number, d: number) => `A jug holds ${c}/${d} litre of juice. It is poured out in cupfuls of ${a}/${b} litre each. How many cupfuls is that? (A fraction or mixed number is fine: part of a cup counts as part of a cupful.)`, whole: false },
-  { op: "×", text: (c: number, a: number, b: number, d: number) => `A car uses ${a}/${b} litre of petrol for each km. How many litres does it use for ${c}/${d} km? (A fraction is fine.)`, whole: false },
+  { op: "×", text: (c: number, a: number, b: number, d: number) => `One metre of a steel rod weighs ${a}/${b} kg. How much does a piece ${c}/${d} m long weigh, in kg? (A fraction is fine.)`, whole: false },
 ];
 // [ctx, a, b, c, d]: d = 1 for the whole-number contexts
 const fwOk = ([ctx, a, b, c, d]: number[]) => {
@@ -2050,7 +2067,7 @@ const radOk = ([mode, k, n]: number[]) => (mode <= 1 ? mode >= 0 && k >= 1 && k 
 // [ctx, u, v]: answer u ÷ 10^... see the texts; all divisions are exact
 const DW = [
   { text: (a: string, b: string) => `A ribbon ${a} m long is cut into pieces of ${b} m each. How many pieces are there?`, k: [2, 2] },
-  { text: (a: string, b: string) => `₹${a} is shared equally among ${b} friends. How much does each friend get, in rupees?`, k: [2, 0] },
+  { text: (a: string, b: string) => `₹${Number(a).toFixed(2)} is shared equally among ${b} friends. How much does each friend get, in rupees?`, k: [2, 0] },
   { text: (a: string, b: string) => `A car goes ${a} km on ${b} litres of petrol. How many km does it go on 1 litre?`, k: [1, 1] },
   { text: (a: string, b: string) => `${a} kg of sugar is packed into bags of ${b} kg each. How many bags are filled?`, k: [2, 2] },
 ];
@@ -2100,7 +2117,7 @@ B09.push(
     domain: [[2, 12], [1, 9], [2, 10]],
     keep: ([w, c, d]) => c < d && gcd(c, d) === 1,
     difficulty: ([w, c, d]) => (c === 1 ? 1 : (w * d) % c === 0 ? 2 : 3),
-    word: ([w, c, d]) => `${name(w + d)} has ${w} m of ribbon and cuts it into pieces ${c}/${d} m long. How many pieces of that length is that? (The answer may include a part of a piece: give a whole number or a fraction.)`,
+    word: ([w, c, d]) => `${name(w + d)} has ${w} m of ribbon. How many lengths of ${c}/${d} m are there in ${w} m? Give the exact answer as a whole number or a fraction (for example, 16/3 means 5 full pieces and 1/3 of a piece).`,
     teach: {
       idea: `w ÷ (c/d) asks how many c/d's fit into w. Each whole holds d/c of them, so w wholes hold w × d/c: dividing by a fraction is multiplying by its reciprocal.`,
       method: "Turn the divisor upside down (its reciprocal) and multiply the whole number by it; simplify.",
@@ -2215,11 +2232,11 @@ B09.push(
       // the story gives the products and the quotient themselves: a count of cards (or weeks) times a signed value each
       const pts = (v: number) => `${v < 0 ? "−" : "+"}${Math.abs(v)} point${Math.abs(v) === 1 ? "" : "s"}`;
       if (mode === 0) return `In a card game, red cards and blue cards carry plus or minus points. In one round ${name(a + c)} picks up ${Math.abs(a)} red card${Math.abs(a) === 1 ? "" : "s"} worth ${pts(Math.sign(a * b) * Math.abs(b))} each and ${Math.abs(c)} blue card${Math.abs(c) === 1 ? "" : "s"} worth ${pts(Math.sign(c * e) * Math.abs(e))} each. What is the score for the round? (It may be negative.)`;
+      if (mode === 2) return `In a school quiz, a team gets ${b} points for each right answer and loses ${e} for each wrong one. The team answers ${a} questions right and ${c} wrong. What is its score?`;
+      if (mode === 3) return `On a winter night in Ladakh, the temperature falls by ${b} °C every hour. At midnight it is ${a < 0 ? `−${-a}` : a} °C. What is it ${c} hours later, in °C?`;
       const week = a * b > 0 ? `go up by ₹${Math.abs(b)}00` : `go down by ₹${Math.abs(b)}00`;
       const share = c / e > 0 ? `pays an equal share of a ₹${Math.abs(c)}00 bill split among ${Math.abs(e)} friends` : `receives an equal share of a ₹${Math.abs(c)}00 prize split among ${Math.abs(e)} friends`;
       return `${name(a + c)}'s savings ${week} every week for ${Math.abs(a)} weeks. Then ${name(a + c)} ${share}. By how many hundreds of rupees have the savings changed altogether? (A negative answer means they went down.)`;
-      if (mode === 2) return `In a school quiz, a team gets ${b} points for each right answer and loses ${e} for each wrong one. The team answers ${a} questions right and ${c} wrong. What is its score?`;
-      return `In the night, the temperature on a hill in Ooty falls by ${b} °C every hour. At midnight it is ${a < 0 ? `−${-a}` : a} °C. What is it ${c} hours later, in °C?`;
     },
     teach: {
       idea: "Brackets, then × and ÷, then + and −, also for integers. A product or quotient of two numbers with the same sign is positive; with different signs it is negative. Repeated falls or losses are multiplication by a negative number.",
@@ -2315,7 +2332,7 @@ B09.push(
     keep: estOk,
     cap: 300,
     difficulty: ([mode, x]) => (mode === 0 && x < 50 ? 1 : mode === 0 ? 2 : 3),
-    word: ([mode, x, y]) => (mode === 0 ? `${name(x)} buys ${D(x, 10)} kg of tomatoes at ₹${D(y, 10)} a kg. Estimate the cost in rupees by rounding both numbers to the nearest whole number.` : `A car goes ${D(x, 10)} km using ${D(y, 10)} litres of petrol. Estimate how many km it goes on one litre, by rounding both numbers to the nearest whole number.`),
+    word: ([mode, x, y]) => (mode === 0 ? `${name(x)}'s vegetable patch is a rectangle ${D(x, 10)} m long and ${D(y, 10)} m wide. Estimate its area in m² by rounding both numbers to the nearest whole number.` : `A roll of cloth ${D(x, 10)} m long is cut into pieces ${D(y, 10)} m long. Estimate how many pieces it gives, by rounding both numbers to the nearest whole number.`),
     teach: {
       idea: "An estimate tells roughly how big an answer should be, so a misplaced decimal point shows up at once. Rounding the numbers first makes the calculation easy to do in your head.",
       method: "Round each number to the nearest whole number (look at the tenths: 5 or more, round up). Multiply or divide the rounded numbers. Compare with the exact answer: they should be close.",
@@ -2690,7 +2707,7 @@ B09.push(
     domain: [[0, 2], [1, 30], [0, 100]],
     keep: radOk,
     difficulty: ([mode, k]) => (mode === 1 ? 1 : mode === 0 ? (k <= 10 ? 1 : 2) : 3),
-    word: ([mode, k, n]) => (mode <= 1 ? `${name(k)} wraps a measuring tape once round ${k <= 3 ? "a round steel plate" : k <= 10 ? "a round tabletop" : "the rim of a round well"}; it measures ${44 * k} cm. Taking π = 22/7, what is its ${mode === 0 ? "radius" : "diameter"}, in cm?` : `The wheel of ${name(k)}'s bicycle turns ${n} times while the bicycle goes ${D(44 * k * n, 100)} m. Taking π = 22/7, what is the radius of the wheel, in cm?`),
+    word: ([mode, k, n]) => (mode <= 1 ? `${name(k)} wraps a measuring tape once round ${k <= 3 ? "a round steel plate" : k <= 10 ? "a round tabletop" : "the rim of a round well"}; it measures ${44 * k} cm. Taking π = 22/7, what is its ${mode === 0 ? "radius" : "diameter"}, in cm?` : k <= 5 ? `The wheel of ${name(k)}'s bicycle turns ${n} times while the bicycle goes` : `The wheel of ${name(k)}'s bullock cart turns ${n} times while the cart goes ${D(44 * k * n, 100)} m. Taking π = 22/7, what is the radius of the wheel, in cm?`),
     teach: {
       idea: "C = πd = 2πr. Working backwards: d = C ÷ π and r = C ÷ 2π. A wheel rolls its circumference in one turn.",
       method: "Divide the circumference by 22/7 (multiply by 7/22) to get the diameter; halve it for the radius. For a wheel, first divide the distance by the number of turns (in the same unit).",

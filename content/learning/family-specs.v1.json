@@ -43,7 +43,7 @@
     "idea": "a × b counts a groups of b: the same as b groups of a.",
     "method": "Rebuild a fact from one you know: double, add or take away one group, or split a factor."
    },
-   "fingerprint": "3be0e6ee",
+   "fingerprint": "dc107826",
    "validation": {
     "family": "mul",
     "deterministic": {
@@ -169,7 +169,7 @@
     "idea": "Equal fractions cover the same amount: cutting every piece into k smaller pieces multiplies top and bottom by k.",
     "method": "Find what the bottom was multiplied by, and multiply the top by the same number."
    },
-   "fingerprint": "7260c840",
+   "fingerprint": "29ddcacc",
    "validation": {
     "family": "eqfrac",
     "deterministic": {
@@ -387,7 +387,7 @@
   {
    "id": "linev",
    "version": "1.0.0",
-   "title": "A value on a straight line",
+   "title": "The value of y = mx + c for a given x",
    "competency": "MATH.algebra.variables",
    "skill": "MATH.algebra.variables",
    "type": "integer",
@@ -429,7 +429,7 @@
     "idea": "y = mx + c gives y for any x: m × x, then add c.",
     "method": "Multiply m by the value of x first, then add (or subtract) c."
    },
-   "fingerprint": "25711a44",
+   "fingerprint": "6725de50",
    "validation": {
     "family": "linev",
     "deterministic": {
@@ -1166,9 +1166,9 @@
    ],
    "teach": {
     "idea": "Split the two-digit number into tens and ones, multiply each part, then add.",
-    "method": "47 × 6 = 40 × 6 + 7 × 6 = 240 + 42 = 282. The 4 tens of 42 join the tens."
+    "method": "Multiply the tens by the one-digit number, then multiply the ones by it, then add the two answers. Any tens in the ones answer join the tens."
    },
-   "fingerprint": "614faf13",
+   "fingerprint": "8e6face3",
    "validation": {
     "family": "mmul",
     "deterministic": {
@@ -1354,9 +1354,9 @@
    ],
    "teach": {
     "idea": "k × a/b means k lots of a/b: the pieces stay the same size, there are just more of them.",
-    "method": "Multiply the top by k and keep the bottom: 3 × 2/7 = 6/7."
+    "method": "Multiply the top (the number of pieces) by the whole number and keep the bottom (the size of each piece) the same."
    },
-   "fingerprint": "e77d98e6",
+   "fingerprint": "ae871336",
    "validation": {
     "family": "fmulw",
     "deterministic": {
@@ -1482,10 +1482,10 @@
     "subtracted (procedural): 95% of 400 is a part of 400, not 400 minus 95."
    ],
    "teach": {
-    "idea": "Per cent means out of 100: 30% of an amount is 30 parts of every 100.",
-    "method": "Find 1% (divide by 100) or 10% (divide by 10), then build up: 30% of 200 = 3 × 20 = 60."
+    "idea": "Per cent means out of a hundred: a percentage of an amount is that many parts out of every hundred equal parts of it.",
+    "method": "Find ten per cent (divide by ten) or five per cent (divide by twenty), then take as many lots of it as the percentage needs."
    },
-   "fingerprint": "5f9ec2ff",
+   "fingerprint": "ffc1abbb",
    "validation": {
     "family": "pct",
     "deterministic": {
@@ -1866,7 +1866,7 @@
     "idea": "(x + m)(x + n) = x² + (m + n)x + mn: the two numbers multiply to the constant and add to the x coefficient.",
     "method": "List pairs that multiply to the constant; choose the pair that adds to the x coefficient. Watch the signs."
    },
-   "fingerprint": "4d2b22ea",
+   "fingerprint": "b6254eba",
    "validation": {
     "family": "factor",
     "deterministic": {
@@ -2061,7 +2061,7 @@
     "idea": "The HCF is the largest number that divides both exactly. Euclid: it also divides their difference and the remainder.",
     "method": "Divide the larger by the smaller and keep the remainder; repeat with the smaller number and the remainder until the remainder is 0."
    },
-   "fingerprint": "7bb1d3fc",
+   "fingerprint": "81deeef6",
    "validation": {
     "family": "hcf",
     "deterministic": {
@@ -2543,7 +2543,7 @@
      }
     ]
    },
-   "fingerprint": "bb03ddb9",
+   "fingerprint": "443e98ea",
    "validation": {
     "family": "lineq",
     "deterministic": {
@@ -2944,7 +2944,7 @@
      }
     ]
    },
-   "fingerprint": "0ee5845b",
+   "fingerprint": "c4248b2b",
    "validation": {
     "family": "aarow",
     "deterministic": {
@@ -6588,7 +6588,7 @@
      }
     ]
    },
-   "fingerprint": "34c44062",
+   "fingerprint": "145ead77",
    "validation": {
     "family": "aacalpat",
     "deterministic": {
@@ -7374,7 +7374,7 @@
      }
     ]
    },
-   "fingerprint": "200362bf",
+   "fingerprint": "65f75907",
    "validation": {
     "family": "abseq",
     "deterministic": {
@@ -7453,7 +7453,7 @@
      }
     ]
    },
-   "fingerprint": "acff1eea",
+   "fingerprint": "ac5c5756",
    "validation": {
     "family": "abmiss",
     "deterministic": {
@@ -8902,8 +8902,8 @@
    ],
    "explanations": [
     "squares-not-scale (conceptual): The squares were counted but the scale was not used. Each square stands for 2 km.",
-    "one-direction (procedural): Only the first part of the walk was counted. Add both parts of the walk.",
-    "second-part-only (procedural): Only the second part of the walk was counted. Add both parts of the walk.",
+    "one-direction (procedural): Only the first part of the trip was counted. Add both parts of the trip.",
+    "second-part-only (procedural): Only the second part of the trip was counted. Add both parts of the trip.",
     "direct-is-shortest (conceptual): The direct road was taken to be the shortest. A road with no village on the way is not always shorter: add the lengths and compare.",
     "other-route (procedural): The longer of the two routes through a village was chosen. Work out both totals and take the smaller one.",
     "shortest-road (conceptual): The shortest single road was given. A route is made of all the roads along it, added together."
@@ -8923,7 +8923,7 @@
      }
     ]
    },
-   "fingerprint": "f8088029",
+   "fingerprint": "7f9241b9",
    "validation": {
     "family": "abroute",
     "deterministic": {
@@ -10234,7 +10234,7 @@
      }
     ]
    },
-   "fingerprint": "ae972555",
+   "fingerprint": "c646263d",
    "validation": {
     "family": "abnine",
     "deterministic": {
@@ -11151,7 +11151,7 @@
      }
     ]
    },
-   "fingerprint": "0dad6aea",
+   "fingerprint": "e907ceba",
    "validation": {
     "family": "acstory",
     "deterministic": {
@@ -12154,7 +12154,7 @@
      }
     ]
    },
-   "fingerprint": "ef6f4665",
+   "fingerprint": "f88f3509",
    "validation": {
     "family": "acstory9",
     "deterministic": {
@@ -12856,7 +12856,7 @@
      }
     ]
    },
-   "fingerprint": "b6cd6ecb",
+   "fingerprint": "2993636f",
    "validation": {
     "family": "acmmkm",
     "deterministic": {
@@ -14898,17 +14898,17 @@
    "poolSize": 400,
    "excluded": [],
    "difficulty": {
-    "1": 140,
-    "2": 180,
-    "3": 80
+    "1": 150,
+    "2": 174,
+    "3": 76
    },
    "examples": [
-    "gen:adest:53,31,0",
+    "gen:adest:57,86,0",
     "gen:adest:81,72,0:mc",
-    "gen:adest:42,48,0",
-    "gen:adest:71,46,1:mc",
-    "gen:adest:45,27,1",
-    "gen:adest:75,35,0:mc"
+    "gen:adest:43,37,0",
+    "gen:adest:74,18,1:mc",
+    "gen:adest:45,57,0",
+    "gen:adest:75,35,1:mc"
    ],
    "explanations": [
     "always-down (conceptual): Both numbers were rounded down. Round to the NEAREST ten: 5 or more in the ones goes up.",
@@ -14917,7 +14917,7 @@
    ],
    "teach": {
     "idea": "A number rounded to the nearest ten is the ten it is closest to on the number line. Rounded numbers are easy to add or subtract in your head, and the estimate shows whether an exact answer is sensible.",
-    "method": "Look at the ones digit: 0 to 4 round down, 5 to 9 round up. Round both numbers, then work out the answer with the tens.",
+    "method": "Look at the ones digit: if it is less than five, round down; if it is five or more, round up. Round both numbers, then work out the answer with the tens.",
     "alternatives": [
      {
       "id": "closest",
@@ -14930,7 +14930,7 @@
      }
     ]
    },
-   "fingerprint": "744e6d05",
+   "fingerprint": "24cdcce7",
    "validation": {
     "family": "adest",
     "deterministic": {
@@ -15333,7 +15333,7 @@
      }
     ]
    },
-   "fingerprint": "04764def",
+   "fingerprint": "39768334",
    "validation": {
     "family": "adwtcap",
     "deterministic": {
@@ -15635,7 +15635,7 @@
      }
     ]
    },
-   "fingerprint": "e3ffac67",
+   "fingerprint": "03cec0a5",
    "validation": {
     "family": "adestchk",
     "deterministic": {
@@ -16571,7 +16571,7 @@
      }
     ]
    },
-   "fingerprint": "3d285246",
+   "fingerprint": "3d0ebd44",
    "validation": {
     "family": "adestcost",
     "deterministic": {
@@ -16717,7 +16717,7 @@
      }
     ]
    },
-   "fingerprint": "ad197f8e",
+   "fingerprint": "81799ecb",
    "validation": {
     "family": "aepat",
     "deterministic": {
@@ -17171,7 +17171,7 @@
      }
     ]
    },
-   "fingerprint": "9284a969",
+   "fingerprint": "f3ffb755",
    "validation": {
     "family": "aerefl",
     "deterministic": {
@@ -17855,7 +17855,7 @@
    ],
    "teach": {
     "idea": "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL and 1 km = 1000 m. A measure in two units is the large part changed into small units, plus the small part.",
-    "method": "Multiply the large units by 100 or 1000, then add the small units. Check the small part fills its places: 3 kg 25 g = 3000 g + 25 g = 3025 g.",
+    "method": "Multiply the large units by the number of small units in one large unit, then add the small units. Check the small part fills its places: if it has too few digits, put zeros in front of it.",
     "alternatives": [
      {
       "id": "place_chart",
@@ -17868,7 +17868,7 @@
      }
     ]
    },
-   "fingerprint": "150fc080",
+   "fingerprint": "ea5efa43",
    "validation": {
     "family": "aeconv",
     "deterministic": {
@@ -18021,7 +18021,7 @@
      }
     ]
    },
-   "fingerprint": "df4e5366",
+   "fingerprint": "46153207",
    "validation": {
     "family": "aedec",
     "deterministic": {
@@ -18100,7 +18100,7 @@
      }
     ]
    },
-   "fingerprint": "cc507e15",
+   "fingerprint": "e4586569",
    "validation": {
     "family": "aedecc",
     "deterministic": {
@@ -18232,7 +18232,7 @@
    ],
    "teach": {
     "idea": "In the Indian system the places are grouped as ones–tens–hundreds, then thousands–ten thousands, then lakhs–ten lakhs. Every place gets a digit, so empty places get 0.",
-    "method": "Draw a place-value chart (L, TTh, Th, H, T, O). Write each part in its own places, fill empty places with 0, then put commas: 4,07,052.",
+    "method": "Draw a place-value chart (L, TTh, Th, H, T, O). Write each part in its own places, fill empty places with 0, then put commas between the periods.",
     "alternatives": [
      {
       "id": "periods",
@@ -18245,7 +18245,7 @@
      }
     ]
    },
-   "fingerprint": "fcd7510e",
+   "fingerprint": "e6ee52b5",
    "validation": {
     "family": "aeind",
     "deterministic": {
@@ -18370,7 +18370,7 @@
    ],
    "teach": {
     "idea": "Multiplying by 10 makes every digit worth ten times as much, so each digit moves one place to the left and a 0 fills the ones place. Dividing by 10 moves every digit one place to the right.",
-    "method": "× 10, × 100, × 1000: write 1, 2 or 3 zeros on the end. ÷ 10, ÷ 100, ÷ 1000 (of a number ending in enough zeros): take 1, 2 or 3 zeros off the end.",
+    "method": "To multiply by ten, a hundred or a thousand, write as many zeros on the end as that number has. To divide by it (when the number ends in enough zeros), take that many zeros off the end.",
     "alternatives": [
      {
       "id": "blocks",
@@ -18383,7 +18383,7 @@
      }
     ]
    },
-   "fingerprint": "5c013f3a",
+   "fingerprint": "288a4d5a",
    "validation": {
     "family": "aep10",
     "deterministic": {
@@ -18459,7 +18459,7 @@
      }
     ]
    },
-   "fingerprint": "1bac875a",
+   "fingerprint": "7cd8a032",
    "validation": {
     "family": "aemult",
     "deterministic": {
@@ -18518,7 +18518,7 @@
    ],
    "teach": {
     "idea": "Rounding finds the nearest 'round' number: on a number line, which ten (hundred, thousand) is the number closer to? A number exactly halfway is rounded up.",
-    "method": "Look at the digit just to the right of the place you are rounding to. If it is 0–4, round down (keep the place, zeros after). If it is 5–9, round up (add 1 to the place, zeros after).",
+    "method": "Look at the digit just to the right of the place you are rounding to. If it is less than five, round down (keep the place, zeros after). If it is five or more, round up (add one to the place, zeros after).",
     "alternatives": [
      {
       "id": "hill",
@@ -18531,7 +18531,7 @@
      }
     ]
    },
-   "fingerprint": "5a397d64",
+   "fingerprint": "261ff5d1",
    "validation": {
     "family": "aeround",
     "deterministic": {
@@ -18695,7 +18695,7 @@
      }
     ]
    },
-   "fingerprint": "40414d4f",
+   "fingerprint": "867880d5",
    "validation": {
     "family": "aeshop",
     "deterministic": {
@@ -19646,7 +19646,7 @@
      }
     ]
    },
-   "fingerprint": "3f399647",
+   "fingerprint": "44d9cd8a",
    "validation": {
     "family": "aernd",
     "deterministic": {
@@ -19723,7 +19723,7 @@
      }
     ]
    },
-   "fingerprint": "e1c71326",
+   "fingerprint": "b12d390e",
    "validation": {
     "family": "aeestp",
     "deterministic": {
@@ -19797,7 +19797,7 @@
      }
     ]
    },
-   "fingerprint": "70559b18",
+   "fingerprint": "20b9dd70",
    "validation": {
     "family": "aechk",
     "deterministic": {
@@ -20231,7 +20231,7 @@
      }
     ]
    },
-   "fingerprint": "cfd87a27",
+   "fingerprint": "fc06597e",
    "validation": {
     "family": "aeftin",
     "deterministic": {
@@ -20605,7 +20605,7 @@
      }
     ]
    },
-   "fingerprint": "4807b9ad",
+   "fingerprint": "eea4fbd7",
    "validation": {
     "family": "aebig",
     "deterministic": {
@@ -20813,7 +20813,7 @@
      }
     ]
    },
-   "fingerprint": "fbc535c1",
+   "fingerprint": "318f5815",
    "validation": {
     "family": "aedpv",
     "deterministic": {
@@ -20878,7 +20878,7 @@
      }
     ]
    },
-   "fingerprint": "a161c44a",
+   "fingerprint": "fea496e6",
    "validation": {
     "family": "aedord",
     "deterministic": {
@@ -21101,7 +21101,7 @@
      }
     ]
    },
-   "fingerprint": "18cee8f6",
+   "fingerprint": "4c6e6fd0",
    "validation": {
     "family": "aeeuc",
     "deterministic": {
@@ -21410,7 +21410,7 @@
      }
     ]
    },
-   "fingerprint": "a868a871",
+   "fingerprint": "35e31a6d",
    "validation": {
     "family": "aeineqz",
     "deterministic": {
@@ -22545,7 +22545,7 @@
      }
     ]
    },
-   "fingerprint": "b23edff0",
+   "fingerprint": "ca9301ea",
    "validation": {
     "family": "afbar",
     "deterministic": {
@@ -22612,7 +22612,7 @@
    ],
    "teach": {
     "idea": "A letter stands for any number. A rule written with the letter works for every number at once.",
-    "method": "Do to the letter exactly what you would do to a number: 'add 5' gives n + 5; 'multiply by 4' gives 4n (4 × n). Test your rule with a small number.",
+    "method": "Do to the letter exactly what the machine does to a number. Adding a number to n is written n + that number; taking it away is n − that number; multiplying n by a number is written with the number in front of the letter, with no × sign. Test your rule with a small number.",
     "alternatives": [
      {
       "id": "table_first",
@@ -22625,7 +22625,7 @@
      }
     ]
    },
-   "fingerprint": "20d90838",
+   "fingerprint": "cfbb6f7a",
    "validation": {
     "family": "afletter",
     "deterministic": {
@@ -22997,7 +22997,7 @@
      }
     ]
    },
-   "fingerprint": "7e580697",
+   "fingerprint": "a258c1a7",
    "validation": {
     "family": "afpair",
     "deterministic": {
@@ -23701,7 +23701,7 @@
    ],
    "teach": {
     "idea": "A shape has rotational symmetry if it looks the same after a turn of less than a full turn. The order is how many times it fits onto itself in one full turn.",
-    "method": "Count the identical parts that go round the centre (sides of a regular shape, blades, petals): that is usually the order. The smallest turn is 360° ÷ order, which is 1/order of a full turn.",
+    "method": "Count the identical parts that go round the centre (sides of a regular shape, blades, petals): that is usually the order. The smallest turn is a full turn shared equally by the order: 1/order of a full turn, or the degrees in a full turn divided by the order.",
     "alternatives": [
      {
       "id": "trace_turn",
@@ -23714,7 +23714,7 @@
      }
     ]
    },
-   "fingerprint": "310d594e",
+   "fingerprint": "e90b6d72",
    "validation": {
     "family": "afrot",
     "deterministic": {
@@ -24950,7 +24950,7 @@
      }
     ]
    },
-   "fingerprint": "3c99fe7c",
+   "fingerprint": "0952afe7",
    "validation": {
     "family": "agdec",
     "deterministic": {
@@ -25333,7 +25333,7 @@
      }
     ]
    },
-   "fingerprint": "7975071c",
+   "fingerprint": "848d7188",
    "validation": {
     "family": "aglcm",
     "deterministic": {
@@ -25658,7 +25658,7 @@
      }
     ]
    },
-   "fingerprint": "ae588148",
+   "fingerprint": "ce3b4bd3",
    "validation": {
     "family": "agbod",
     "deterministic": {
@@ -25718,7 +25718,7 @@
     "zero-ignored (conceptual): The 0 straight after the point was ignored. 0.09 is 9 hundredths, not 9 tenths."
    ],
    "teach": {
-    "idea": "Per cent means 'out of 100'. A percentage is a number of hundredths: 37% = 37/100 = 0.37.",
+    "idea": "Per cent means 'out of a hundred'. A percentage is a number of hundredths: so many per cent is so many hundredths, whether you write it as a fraction or as a decimal.",
     "method": "Turn the fraction into hundredths by multiplying top and bottom by the same number; for a decimal, read how many hundredths it is. That number of hundredths is the percentage.",
     "alternatives": [
      {
@@ -25732,7 +25732,7 @@
      }
     ]
    },
-   "fingerprint": "318af3fd",
+   "fingerprint": "ef4dbef5",
    "validation": {
     "family": "agpct",
     "deterministic": {
@@ -25800,7 +25800,7 @@
      }
     ]
    },
-   "fingerprint": "2c88b4d4",
+   "fingerprint": "fa70be4c",
    "validation": {
     "family": "agpctd",
     "deterministic": {
@@ -26536,7 +26536,7 @@
      }
     ]
    },
-   "fingerprint": "e2104130",
+   "fingerprint": "ab5a0d6c",
    "validation": {
     "family": "aghlw",
     "deterministic": {
@@ -26628,7 +26628,7 @@
      }
     ]
    },
-   "fingerprint": "1cfe5012",
+   "fingerprint": "d46c3bf9",
    "validation": {
     "family": "aghlp",
     "deterministic": {
@@ -26713,7 +26713,7 @@
      }
     ]
    },
-   "fingerprint": "8734141a",
+   "fingerprint": "71f76c7a",
    "validation": {
     "family": "agpfrac",
     "deterministic": {
@@ -26797,7 +26797,7 @@
      }
     ]
    },
-   "fingerprint": "5c61ad28",
+   "fingerprint": "432a7dfe",
    "validation": {
     "family": "agfdec",
     "deterministic": {
@@ -26965,7 +26965,7 @@
      }
     ]
    },
-   "fingerprint": "7a3b540a",
+   "fingerprint": "9e832e82",
    "validation": {
     "family": "agediv",
     "deterministic": {
@@ -27005,25 +27005,25 @@
    "poolSize": 400,
    "excluded": [],
    "difficulty": {
-    "1": 28,
+    "1": 53,
     "2": 0,
-    "3": 372
+    "3": 347
    },
    "examples": [
-    "gen:agfta:0,12820",
+    "gen:agfta:0,33287",
     "gen:agfta:1,10258:mc",
-    "gen:agfta:0,20003",
-    "gen:agfta:1,9584:mc"
+    "gen:agfta:0,17946",
+    "gen:agfta:1,6723:mc"
    ],
    "explanations": [
-    "highest-for-hcf (conceptual): The higher power of each prime was taken. The HCF uses each COMMON prime with the LOWER power (the most that divides both numbers).",
-    "primes-once (procedural): Each common prime was taken only once. The HCF takes each common prime to the lower of its two powers.",
-    "lowest-for-lcm (conceptual): The lower powers of the common primes were taken: that is the HCF. The LCM takes every prime that appears, with the HIGHER power.",
-    "product (conceptual): The two numbers were multiplied. They share primes, so the LCM is 24 × 2205 ÷ HCF."
+    "highest-for-hcf (conceptual): Each prime was taken as many times as the number that has it MOST. The HCF uses only the COMMON primes, each as many times as BOTH numbers have it (the smaller count).",
+    "primes-once (procedural): Each common prime was taken only once. The HCF takes each common prime as many times as both numbers have it (the smaller count).",
+    "lowest-for-lcm (conceptual): Only the common primes were taken, each the smaller number of times: that is the HCF. The LCM takes every prime that appears, as many times as the number that has it MOST.",
+    "product (conceptual): The two numbers were multiplied. They share primes, so the LCM is 40 × 1225 ÷ HCF."
    ],
    "teach": {
     "idea": "By the Fundamental Theorem of Arithmetic every number has exactly one prime factorisation. A common factor can only use primes both numbers have, as often as both allow; a common multiple must contain every prime of each number.",
-    "method": "HCF: multiply the common primes, each to the LOWER of its two powers. LCM: multiply every prime that appears, each to the HIGHER power. Check: HCF × LCM = the product of the two numbers.",
+    "method": "HCF: multiply the common primes, each as many times as BOTH numbers have it (the smaller count). LCM: multiply every prime that appears, each as many times as the number that has it MOST. Check: HCF × LCM = the product of the two numbers.",
     "alternatives": [
      {
       "id": "venn",
@@ -27036,16 +27036,16 @@
      },
      {
       "id": "table_powers",
-      "title": "A table of powers",
+      "title": "A table of counts",
       "kind": "procedural",
       "text": [
-       "Make a row for each number and a column for each prime, writing its power (0 if missing).",
+       "Make a row for each number and a column for each prime, writing how many times that prime appears (0 if missing).",
        "Take the smaller entry in each column for the HCF and the bigger for the LCM."
       ]
      }
     ]
    },
-   "fingerprint": "f99147e3",
+   "fingerprint": "1e53463b",
    "validation": {
     "family": "agfta",
     "deterministic": {
@@ -27383,7 +27383,7 @@
      }
     ]
    },
-   "fingerprint": "b3ca581a",
+   "fingerprint": "51d4e52b",
    "validation": {
     "family": "ahlike",
     "deterministic": {
@@ -27556,7 +27556,7 @@
      }
     ]
    },
-   "fingerprint": "bb59a4f8",
+   "fingerprint": "0e629c2a",
    "validation": {
     "family": "ahcoef",
     "deterministic": {
@@ -27731,7 +27731,7 @@
      }
     ]
    },
-   "fingerprint": "137835a6",
+   "fingerprint": "90179432",
    "validation": {
     "family": "ahmatch",
     "deterministic": {
@@ -27901,7 +27901,7 @@
      }
     ]
    },
-   "fingerprint": "d0ceb6ff",
+   "fingerprint": "8fec1a88",
    "validation": {
     "family": "ahrec",
     "deterministic": {
@@ -27973,7 +27973,7 @@
      }
     ]
    },
-   "fingerprint": "7592a9c1",
+   "fingerprint": "237e96eb",
    "validation": {
     "family": "ahnth",
     "deterministic": {
@@ -28057,7 +28057,7 @@
      }
     ]
    },
-   "fingerprint": "bca364bf",
+   "fingerprint": "313fc8e7",
    "validation": {
     "family": "ahfib",
     "deterministic": {
@@ -28142,7 +28142,7 @@
      }
     ]
    },
-   "fingerprint": "6e6fbada",
+   "fingerprint": "d623d1d0",
    "validation": {
     "family": "ahinv",
     "deterministic": {
@@ -28214,7 +28214,7 @@
      }
     ]
    },
-   "fingerprint": "38d0fb18",
+   "fingerprint": "ad49ea00",
    "validation": {
     "family": "ahwork",
     "deterministic": {
@@ -29495,7 +29495,7 @@
      }
     ]
    },
-   "fingerprint": "fb17bb8c",
+   "fingerprint": "da6d4820",
    "validation": {
     "family": "ahtile",
     "deterministic": {
@@ -29586,7 +29586,7 @@
      }
     ]
    },
-   "fingerprint": "0ce2d5e6",
+   "fingerprint": "18ca746a",
    "validation": {
     "family": "ahname",
     "deterministic": {
@@ -29849,7 +29849,7 @@
      }
     ]
    },
-   "fingerprint": "e54c66e1",
+   "fingerprint": "1ba683c0",
    "validation": {
     "family": "ahid",
     "deterministic": {
@@ -29937,7 +29937,7 @@
      }
     ]
    },
-   "fingerprint": "4ea57a39",
+   "fingerprint": "88b4ade5",
    "validation": {
     "family": "ahidn",
     "deterministic": {
@@ -30293,7 +30293,7 @@
      }
     ]
    },
-   "fingerprint": "02f348fa",
+   "fingerprint": "a8f22d28",
    "validation": {
     "family": "ahvary",
     "deterministic": {
@@ -30379,7 +30379,7 @@
      }
     ]
    },
-   "fingerprint": "d6e010a3",
+   "fingerprint": "856a8549",
    "validation": {
     "family": "ahman",
     "deterministic": {
@@ -30459,7 +30459,7 @@
      }
     ]
    },
-   "fingerprint": "c688087f",
+   "fingerprint": "4a8ba6c3",
    "validation": {
     "family": "ahcomp",
     "deterministic": {
@@ -30737,7 +30737,7 @@
      }
     ]
    },
-   "fingerprint": "d2db8cf5",
+   "fingerprint": "40a3ea69",
    "validation": {
     "family": "ahexp",
     "deterministic": {
@@ -32369,7 +32369,7 @@
      }
     ]
    },
-   "fingerprint": "0ceb8a26",
+   "fingerprint": "819482be",
    "validation": {
     "family": "aisector",
     "deterministic": {
@@ -32976,7 +32976,7 @@
      }
     ]
    },
-   "fingerprint": "23792c9f",
+   "fingerprint": "003c2b49",
    "validation": {
     "family": "aitrap",
     "deterministic": {
@@ -33063,7 +33063,7 @@
      }
     ]
    },
-   "fingerprint": "102b2459",
+   "fingerprint": "f7da4e8b",
    "validation": {
     "family": "ailshape",
     "deterministic": {
@@ -33145,7 +33145,7 @@
      }
     ]
    },
-   "fingerprint": "5bb557aa",
+   "fingerprint": "bc776194",
    "validation": {
     "family": "aipath",
     "deterministic": {
@@ -33211,8 +33211,8 @@
     "one-place-off (procedural): The point was moved one place too far; the answer has 2 decimal places."
    ],
    "teach": {
-    "idea": "Tenths times tenths make hundredths (0.1 × 0.1 = 0.01), so the answer has as many decimal places as the two numbers together.",
-    "method": "Multiply the numbers as if there were no decimal points, count the decimal places in both, and give the answer that many decimal places. Estimate to check (e.g. 1.9 × 3.1 is about 2 × 3 = 6).",
+    "idea": "A tenth of a tenth is a hundredth, so tenths times tenths make hundredths: the answer has as many decimal places as the two numbers together.",
+    "method": "Multiply the numbers as if there were no decimal points, count the decimal places in both, and give the answer that many decimal places. Estimate with rounded numbers to check that the point is in a sensible place.",
     "alternatives": [
      {
       "id": "fractions",
@@ -33225,7 +33225,7 @@
      }
     ]
    },
-   "fingerprint": "df2c98ec",
+   "fingerprint": "f52ba465",
    "validation": {
     "family": "aidmul",
     "deterministic": {
@@ -33305,7 +33305,7 @@
      }
     ]
    },
-   "fingerprint": "c3ea1b5b",
+   "fingerprint": "49c53981",
    "validation": {
     "family": "aiddiv",
     "deterministic": {
@@ -33384,7 +33384,7 @@
      }
     ]
    },
-   "fingerprint": "206307d4",
+   "fingerprint": "58b0a8d0",
    "validation": {
     "family": "aidp10",
     "deterministic": {
@@ -33548,7 +33548,7 @@
      }
     ]
    },
-   "fingerprint": "621b5339",
+   "fingerprint": "2b8aee7e",
    "validation": {
     "family": "aifdiv",
     "deterministic": {
@@ -33786,7 +33786,7 @@
      }
     ]
    },
-   "fingerprint": "61878987",
+   "fingerprint": "23287ef8",
    "validation": {
     "family": "aiwdiv",
     "deterministic": {
@@ -33879,7 +33879,7 @@
      }
     ]
    },
-   "fingerprint": "ccad07a3",
+   "fingerprint": "5666bbf7",
    "validation": {
     "family": "aifword",
     "deterministic": {
@@ -33975,7 +33975,7 @@
      }
     ]
    },
-   "fingerprint": "6bc258e3",
+   "fingerprint": "efc9e566",
    "validation": {
     "family": "aiintx",
     "deterministic": {
@@ -34152,7 +34152,7 @@
      }
     ]
    },
-   "fingerprint": "4dd5432a",
+   "fingerprint": "27a56a66",
    "validation": {
     "family": "aiest",
     "deterministic": {
@@ -34694,7 +34694,7 @@
      }
     ]
    },
-   "fingerprint": "365418cc",
+   "fingerprint": "a2029733",
    "validation": {
     "family": "airad",
     "deterministic": {
@@ -34779,7 +34779,7 @@
      }
     ]
    },
-   "fingerprint": "a8a8b253",
+   "fingerprint": "172b3fcf",
    "validation": {
     "family": "aidword",
     "deterministic": {
@@ -34931,7 +34931,7 @@
      }
     ]
    },
-   "fingerprint": "78c750a4",
+   "fingerprint": "930d53c6",
    "validation": {
     "family": "ajd99",
     "deterministic": {
@@ -35077,7 +35077,7 @@
      }
     ]
    },
-   "fingerprint": "a3c2e924",
+   "fingerprint": "124b6f04",
    "validation": {
     "family": "ajpf",
     "deterministic": {
@@ -35145,7 +35145,7 @@
      }
     ]
    },
-   "fingerprint": "57be95c1",
+   "fingerprint": "4cc4b25c",
    "validation": {
     "family": "ajsqm",
     "deterministic": {
@@ -35616,7 +35616,7 @@
      }
     ]
    },
-   "fingerprint": "87107bed",
+   "fingerprint": "047f62bf",
    "validation": {
     "family": "ajlaw",
     "deterministic": {
@@ -35763,7 +35763,7 @@
      }
     ]
    },
-   "fingerprint": "42a4303f",
+   "fingerprint": "72d22ebf",
    "validation": {
     "family": "ajneg",
     "deterministic": {
@@ -35822,7 +35822,7 @@
    ],
    "teach": {
     "idea": "Both systems use the same digits; only the grouping differs. 10 lakh = 1 million, and 1 crore = 10 million.",
-    "method": "Rewrite the number with international commas (groups of three: 34,000,000) and read the millions.",
+    "method": "Rewrite the number with international commas (groups of three digits, counting from the right) and read the number of millions in front of the second comma from the right.",
     "alternatives": [
      {
       "id": "count_zeros",
@@ -35835,7 +35835,7 @@
      }
     ]
    },
-   "fingerprint": "52011e5c",
+   "fingerprint": "83ce7528",
    "validation": {
     "family": "ajmill",
     "deterministic": {
@@ -35907,7 +35907,7 @@
      }
     ]
    },
-   "fingerprint": "66aedb35",
+   "fingerprint": "1e2e5d2b",
    "validation": {
     "family": "ajimul",
     "deterministic": {
@@ -35975,7 +35975,7 @@
     "percent-as-rupees (conceptual): 40% was used as ₹40; 40% of ₹1,000 means 40 out of every 100 rupees."
    ],
    "teach": {
-    "idea": "Profit or loss per cent compares the profit or loss with the cost price: 20% profit means the selling price is 120% of the cost price.",
+    "idea": "Profit or loss per cent always compares the profit or loss with the cost price: it is the profit or loss on every hundred rupees of cost. So with a profit the selling price is more than the cost price by that per cent of it; with a loss it is less by that per cent.",
     "method": "To find the selling price, find p% of the cost price and add it (profit) or take it away (loss). To find the cost price, divide the selling price by (100 ± p) and multiply by 100.",
     "alternatives": [
      {
@@ -35989,7 +35989,7 @@
      }
     ]
    },
-   "fingerprint": "cce1c1c6",
+   "fingerprint": "2cface5f",
    "validation": {
     "family": "ajpl",
     "deterministic": {
@@ -36075,7 +36075,7 @@
      }
     ]
    },
-   "fingerprint": "40176254",
+   "fingerprint": "27488cf4",
    "validation": {
     "family": "ajsi",
     "deterministic": {
@@ -36119,17 +36119,17 @@
    "poolSize": 400,
    "excluded": [],
    "difficulty": {
-    "1": 120,
-    "2": 150,
-    "3": 130
+    "1": 151,
+    "2": 181,
+    "3": 68
    },
    "examples": [
-    "gen:ajdisc:24,5,0",
-    "gen:ajdisc:42,2,0:mc",
+    "gen:ajdisc:24,2,0",
+    "gen:ajdisc:43,2,0:mc",
     "gen:ajdisc:20,3,0",
-    "gen:ajdisc:38,9,0:mc",
-    "gen:ajdisc:23,3,1",
-    "gen:ajdisc:41,4,1:mc"
+    "gen:ajdisc:40,1,0:mc",
+    "gen:ajdisc:24,1,1",
+    "gen:ajdisc:41,3,1:mc"
    ],
    "explanations": [
     "discount-only (procedural): Only the discount was found; the selling price is the marked price minus the discount.",
@@ -36152,7 +36152,7 @@
      }
     ]
    },
-   "fingerprint": "956bdcc6",
+   "fingerprint": "955f9f14",
    "validation": {
     "family": "ajdisc",
     "deterministic": {
@@ -36289,17 +36289,17 @@
    "poolSize": 500,
    "excluded": [],
    "difficulty": {
-    "1": 123,
-    "2": 190,
-    "3": 187
+    "1": 134,
+    "2": 158,
+    "3": 208
    },
    "examples": [
-    "gen:ajrq:-3,7,2,5,2",
-    "gen:ajrq:1,4,-6,7,2:mc",
-    "gen:ajrq:-2,3,-5,6,0",
-    "gen:ajrq:-1,9,-2,3,0:mc",
+    "gen:ajrq:-3,7,-4,5,2",
+    "gen:ajrq:1,2,-5,6,2:mc",
+    "gen:ajrq:-3,4,1,4,0",
+    "gen:ajrq:-1,5,1,5,3:mc",
     "gen:ajrq:-3,7,-5,8,0",
-    "gen:ajrq:-1,9,5,7,0:mc"
+    "gen:ajrq:1,2,-5,7,0:mc"
    ],
    "explanations": [
     "add-tops-and-bottoms (conceptual): The tops and the bottoms were added (or subtracted) separately. Write both fractions with the same denominator first.",
@@ -36324,7 +36324,7 @@
      }
     ]
    },
-   "fingerprint": "8c063f51",
+   "fingerprint": "08416097",
    "validation": {
     "family": "ajrq",
     "deterministic": {
@@ -37100,7 +37100,7 @@
      }
     ]
    },
-   "fingerprint": "73a50fac",
+   "fingerprint": "1875715e",
    "validation": {
     "family": "ajcrcmp",
     "deterministic": {
@@ -37269,7 +37269,7 @@
      }
     ]
    },
-   "fingerprint": "ea684eb9",
+   "fingerprint": "37c2ed27",
    "validation": {
     "family": "ajprop",
     "deterministic": {
@@ -37330,15 +37330,15 @@
     "gen:ajinv:1,3,7,1,2:mc",
     "gen:ajinv:0,-3,4,1,2",
     "gen:ajinv:1,-7,9,1,2:mc",
-    "gen:ajinv:2,-3,4,2,8",
-    "gen:ajinv:2,3,4,4,9:mc"
+    "gen:ajinv:2,-3,5,1,2",
+    "gen:ajinv:2,2,5,3,4:mc"
    ],
    "explanations": [
     "reciprocal-instead (conceptual): The reciprocal was given. The additive inverse is the number that ADDS to give 0: just change the sign.",
     "reciprocal-signed (conceptual): The fraction was turned upside down; the additive inverse keeps the numerator and denominator and only changes the sign.",
     "sign-changed (conceptual): The sign was changed as well. The reciprocal keeps the sign, because the product must be +1 (a negative times a negative is positive).",
     "additive-instead (conceptual): The additive inverse was given. The multiplicative inverse is the number that MULTIPLIES to give 1: turn the fraction upside down.",
-    "factor-dropped (procedural): After taking out the common factor, only the bracket was worked out: 3/8 + 5/8 = 1 must still be multiplied by 9/8.",
+    "factor-dropped (procedural): After taking out the common factor, only the bracket was worked out: 3/4 + 1/4 = 1 must still be multiplied by 9/8.",
     "sign-error (conceptual): The sign was lost: the common factor is negative, so the answer is negative too."
    ],
    "teach": {
@@ -37356,7 +37356,7 @@
      }
     ]
    },
-   "fingerprint": "77c94b03",
+   "fingerprint": "ddd9dffc",
    "validation": {
     "family": "ajinv",
     "deterministic": {
@@ -37732,7 +37732,7 @@
      }
     ]
    },
-   "fingerprint": "1487f11f",
+   "fingerprint": "b45f025f",
    "validation": {
     "family": "ajidiv",
     "deterministic": {
@@ -38138,7 +38138,7 @@
      }
     ]
    },
-   "fingerprint": "1d96f578",
+   "fingerprint": "6c7ba1de",
    "validation": {
     "family": "ajfsq",
     "deterministic": {
@@ -38301,7 +38301,7 @@
      }
     ]
    },
-   "fingerprint": "8ca5fded",
+   "fingerprint": "1372ffb1",
    "validation": {
     "family": "ajfgrp",
     "deterministic": {
@@ -39931,22 +39931,22 @@
    "poolSize": 400,
    "excluded": [],
    "difficulty": {
-    "1": 139,
-    "2": 157,
-    "3": 104
+    "1": 121,
+    "2": 138,
+    "3": 141
    },
    "examples": [
-    "gen:akresize:0,8,13,16",
-    "gen:akresize:1,4,15,12:mc",
-    "gen:akresize:0,10,20,9",
-    "gen:akresize:1,4,20,10:mc",
-    "gen:akresize:0,8,20,7",
-    "gen:akresize:1,6,3,5:mc"
+    "gen:akresize:0,10,7,30",
+    "gen:akresize:1,8,4,24:mc",
+    "gen:akresize:0,12,6,14",
+    "gen:akresize:1,9,6,24:mc",
+    "gen:akresize:0,12,5,18",
+    "gen:akresize:1,8,5,20:mc"
    ],
    "explanations": [
-    "added-difference (conceptual): The same amount was added (15). Keeping the amount per person means multiplying both numbers by the same factor, 27 ÷ 12.",
-    "ratio-flipped (procedural): The factor was found the wrong way round. Compare the new number of people with the old one: 27 ÷ 12.",
-    "factor-only (procedural): Only the factor 27 ÷ 12 was found. Multiply the cups of rice by it."
+    "added-difference (conceptual): The same amount was added (18). Keeping the amount per person means multiplying both numbers by the same factor, 30 ÷ 12.",
+    "ratio-flipped (procedural): The factor was found the wrong way round. Compare the new number of people with the old one: 30 ÷ 12.",
+    "factor-only (procedural): Only the factor 30 ÷ 12 was found. Multiply the cups of rice by it."
    ],
    "teach": {
     "idea": "Keeping the shape (or the amount per person) means keeping the ratio the same, so both numbers are multiplied by the same factor. Adding the same amount to both changes the ratio.",
@@ -39972,7 +39972,7 @@
      }
     ]
    },
-   "fingerprint": "2113f0f2",
+   "fingerprint": "978ce315",
    "validation": {
     "family": "akresize",
     "deterministic": {
@@ -40270,7 +40270,7 @@
      }
     ]
    },
-   "fingerprint": "981a4e54",
+   "fingerprint": "a6ca20b4",
    "validation": {
     "family": "akgroup",
     "deterministic": {
@@ -40346,7 +40346,7 @@
      }
     ]
    },
-   "fingerprint": "b4608a11",
+   "fingerprint": "37331a36",
    "validation": {
     "family": "akbarpct",
     "deterministic": {
@@ -40484,7 +40484,7 @@
      }
     ]
    },
-   "fingerprint": "c1ef8203",
+   "fingerprint": "999d8c8b",
    "validation": {
     "family": "akmode",
     "deterministic": {
@@ -41836,7 +41836,7 @@
      }
     ]
    },
-   "fingerprint": "9c4a3619",
+   "fingerprint": "f8797029",
    "validation": {
     "family": "alpmul",
     "deterministic": {
@@ -41920,7 +41920,7 @@
      }
     ]
    },
-   "fingerprint": "207a06b6",
+   "fingerprint": "6d7c6b76",
    "validation": {
     "family": "alpdiv",
     "deterministic": {
@@ -42184,7 +42184,7 @@
   {
    "id": "alrule",
    "version": "1.0.0",
-   "title": "The straight-line rule behind a table",
+   "title": "The rule behind a table of values",
    "competency": "MATH.algebra.linear-two-variables",
    "skill": "MATH.algebra.linear-two-variables",
    "type": "exact",
@@ -42238,7 +42238,7 @@
      }
     ]
    },
-   "fingerprint": "07437ab3",
+   "fingerprint": "4babe891",
    "validation": {
     "family": "alrule",
     "deterministic": {
@@ -42317,7 +42317,7 @@
      }
     ]
    },
-   "fingerprint": "13e60cfe",
+   "fingerprint": "16368620",
    "validation": {
     "family": "alsol2",
     "deterministic": {
@@ -44473,7 +44473,7 @@
      }
     ]
    },
-   "fingerprint": "f179f845",
+   "fingerprint": "22f95f6d",
    "validation": {
     "family": "alpoly",
     "deterministic": {
@@ -44553,7 +44553,7 @@
      }
     ]
    },
-   "fingerprint": "a4dfedda",
+   "fingerprint": "7c122cd8",
    "validation": {
     "family": "alpdeg",
     "deterministic": {
@@ -44624,7 +44624,7 @@
      }
     ]
    },
-   "fingerprint": "353959ef",
+   "fingerprint": "408c1523",
    "validation": {
     "family": "aladd",
     "deterministic": {
@@ -44697,7 +44697,7 @@
      }
     ]
    },
-   "fingerprint": "7dade54f",
+   "fingerprint": "91ff88bf",
    "validation": {
     "family": "aleval",
     "deterministic": {
@@ -44784,7 +44784,7 @@
      }
     ]
    },
-   "fingerprint": "a018d139",
+   "fingerprint": "d6bb0f11",
    "validation": {
     "family": "almono",
     "deterministic": {
@@ -44967,7 +44967,7 @@
      }
     ]
    },
-   "fingerprint": "1c6055f4",
+   "fingerprint": "89a59a2a",
    "validation": {
     "family": "alsplit",
     "deterministic": {
@@ -45404,7 +45404,7 @@
   {
    "id": "alpred",
    "version": "1.0.0",
-   "title": "Steady increase or decrease: a linear polynomial to predict",
+   "title": "Steady increase or decrease: a rule to predict",
    "competency": "MATH.algebra.linear-two-variables",
    "skill": "MATH.algebra.linear-two-variables",
    "type": "integer",
@@ -45443,12 +45443,12 @@
     "gen:alpred:6,142,2,7:mc"
    ],
    "explanations": [
-    "start-left-out (conceptual): Only the change r × t was worked out; the polynomial also needs the starting amount as its constant term.",
+    "start-left-out (conceptual): Only the change r × t was worked out; the rule also needs the starting amount added on.",
     "one-step-short (procedural): The change was counted 2 times; after 3 hours it has happened 3 times.",
-    "wrong-direction (conceptual): The steady change was added; the amount goes DOWN each step, so the coefficient of t is negative."
+    "wrong-direction (conceptual): The steady change was added; the amount goes DOWN each step, so the number multiplying t is negative."
    ],
    "teach": {
-    "idea": "A quantity that changes by the same amount every step is modelled by a linear polynomial p(t) = (start) + (change per step) × t; the change is negative for a steady decrease (linear decay).",
+    "idea": "A quantity that changes by the same amount every step follows the rule p(t) = (start) + (change per step) × t; the change is negative for a steady decrease.",
     "method": "Read the starting amount (the value when t = 0) and the change per step with its sign, write p(t) = start + change × t, and substitute the number of steps.",
     "alternatives": [
      {
@@ -45462,7 +45462,7 @@
      }
     ]
    },
-   "fingerprint": "c67b67b0",
+   "fingerprint": "de1f39c4",
    "validation": {
     "family": "alpred",
     "deterministic": {
@@ -45545,7 +45545,7 @@
      }
     ]
    },
-   "fingerprint": "801b2665",
+   "fingerprint": "3ff98061",
    "validation": {
     "family": "alinf",
     "deterministic": {
@@ -79465,7 +79465,7 @@
      }
     ]
    },
-   "fingerprint": "72956cf9",
+   "fingerprint": "db1a4b0f",
    "validation": {
     "family": "auvexp",
     "deterministic": {
@@ -84009,17 +84009,17 @@
    "poolSize": 320,
    "excluded": [],
    "difficulty": {
-    "1": 114,
-    "2": 133,
-    "3": 73
+    "1": 105,
+    "2": 138,
+    "3": 77
    },
    "examples": [
     "gen:avstrat:1,3,1",
-    "gen:avstrat:6,7,1:mc",
-    "gen:avstrat:2,36,0",
+    "gen:avstrat:6,10,1:mc",
+    "gen:avstrat:2,34,0",
     "gen:avstrat:4,22,0:mc",
-    "gen:avstrat:4,44,0",
-    "gen:avstrat:5,42,0:mc"
+    "gen:avstrat:4,42,0",
+    "gen:avstrat:5,40,0:mc"
    ],
    "explanations": [
     "no-adjust (procedural): 100 × 25 was given without the last step: 101 is one more than 100, so one group of 25 must be added.",
@@ -84043,7 +84043,7 @@
      }
     ]
    },
-   "fingerprint": "6908c902",
+   "fingerprint": "e6d44822",
    "validation": {
     "family": "avstrat",
     "deterministic": {
@@ -84198,7 +84198,7 @@
      }
     ]
    },
-   "fingerprint": "b5a51221",
+   "fingerprint": "87ab5c4d",
    "validation": {
     "family": "avlat",
     "deterministic": {
@@ -84436,7 +84436,7 @@
      }
     ]
    },
-   "fingerprint": "43af970b",
+   "fingerprint": "c46e9b0b",
    "validation": {
     "family": "avfold",
     "deterministic": {
@@ -84512,7 +84512,7 @@
      }
     ]
    },
-   "fingerprint": "2a82fb73",
+   "fingerprint": "58fca38b",
    "validation": {
     "family": "avlow",
     "deterministic": {
@@ -84591,7 +84591,7 @@
      }
     ]
    },
-   "fingerprint": "fefe3d65",
+   "fingerprint": "63f3decd",
    "validation": {
     "family": "avlike",
     "deterministic": {
@@ -84768,7 +84768,7 @@
      }
     ]
    },
-   "fingerprint": "1cb67722",
+   "fingerprint": "66a0a608",
    "validation": {
     "family": "avfwq",
     "deterministic": {

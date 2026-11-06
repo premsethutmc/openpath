@@ -292,7 +292,19 @@ export const B07: Def[] = [
       method: "Write the numbers one under the other with the decimal points in a line. Fill empty places with 0, then add or subtract from the right as with whole numbers, and keep the point in the answer.",
       visual: ([x, y]) => ({ type: "table", head: ["Tens", "Ones", ".", "Tenths", "Hundredths"], rows: [pvRow(10 * x), pvRow(y)] }),
       alternatives: [
-        { id: "money", title: "Think of rupees and paise", kind: "conceptual", text: ["Read 4.5 as ₹4.50 and 2.37 as ₹2.37: 50 paise and 37 paise are both paise, so they go together.", "Add the paise, then the rupees, exchanging 100 paise for ₹1 when needed."] },
+        {
+          id: "money", title: "Think of rupees and paise", kind: "conceptual", text: ["Read 4.5 as ₹4.50 and 2.37 as ₹2.37: 50 paise and 37 paise are both paise, so they go together.", "Add the paise, then the rupees, exchanging 100 paise for ₹1 when needed."],
+          textFor: ([x, y, op]) => {
+            const X = 10 * x, [rx, px, ry, py] = [Math.floor(X / 100), X % 100, Math.floor(y / 100), y % 100], r = op ? X - y : X + y;
+            const first = `Read ${dec(x, 1)} as ₹${dec(X, 2, true)} and ${dec(y, 2)} as ₹${dec(y, 2, true)}: ${px} paise and ${py} paise are both paise, so they go together.`;
+            if (!op) {
+              const p = px + py, carry = p >= 100 ? 1 : 0;
+              return [first, `Paise: ${px} + ${py} = ${p}${carry ? `, which is ₹1 and ${p - 100} paise` : ""}. Rupees: ${rx} + ${ry}${carry ? " + 1" : ""} = ${rx + ry + carry}. So the answer is ₹${dec(r, 2, true)}, which is ${dec(r, 2)}.`];
+            }
+            const borrow = px < py ? 1 : 0;
+            return [first, `${borrow ? `${px} paise is less than ${py} paise, so change ₹1 into 100 paise: ${px} + 100 = ${px + 100}. ` : ""}Paise: ${px + 100 * borrow} − ${py} = ${px + 100 * borrow - py}. Rupees: ${rx}${borrow ? " − 1" : ""} − ${ry} = ${rx - borrow - ry}. So the answer is ₹${dec(r, 2, true)}, which is ${dec(r, 2)}.`];
+          },
+        },
       ],
     },
     limits: "One number with tenths (up to 19.9) and one with hundredths (up to 9.99); positive differences only.",
@@ -612,11 +624,14 @@ export const B07: Def[] = [
     domain: [[2, 23], [3, 24]],
     keep: ([a, b]) => a < b,
     difficulty: ([a, b]) => (b <= 10 ? 1 : gcd(a, b) === 1 ? 2 : 3),
-    // buses only for believable gaps (5 minutes or more); otherwise festival lights blinking every few seconds
+    // buses only for believable gaps (5 minutes or more) and a wait of at most 2 hours; bells for longer waits (in seconds);
+    // festival lights blinking every few seconds otherwise
     word: ([a, b]) =>
-      a >= 5
-        ? `Two buses leave the Madurai bus stand together at 8 o'clock. One bus leaves again every ${a} minutes and the other every ${b} minutes. After how many minutes will they next leave together?`
-        : `Two strings of festival lights blink together. Then one blinks every ${a} seconds and the other every ${b} seconds. After how many seconds will they next blink together?`,
+      a >= 5 && lcm(a, b) <= 120
+        ? `Two buses leave the Madurai bus stand together. One bus leaves again every ${a} minutes and the other every ${b} minutes. After how many minutes will they next leave together?`
+        : a >= 5
+          ? `Two temple bells ring together. Then one rings every ${a} seconds and the other every ${b} seconds. After how many seconds will they next ring together?`
+          : `Two strings of festival lights blink together. Then one blinks every ${a} seconds and the other every ${b} seconds. After how many seconds will they next blink together?`,
     teach: {
       idea: "A common multiple is in both times tables. The lowest one is the first time they meet.",
       method: "Go up the times table of the larger number and stop at the first one the smaller number divides exactly.",
@@ -897,7 +912,23 @@ export const B07: Def[] = [
       idea: "Everyone agrees on one order so an expression has only one value: brackets first, then × and ÷, then + and −; equal ranks go from left to right.",
       method: "Look for brackets and work them out. Next do every × and ÷, left to right. Last do + and −, left to right.",
       alternatives: [
-        { id: "tree", title: "Draw it as a tree", kind: "conceptual", text: ["Put the last operation at the top of a tree, with its two parts as branches: 6 + 4 × 3 has + at the top, with 6 on one branch and 4 × 3 on the other.", "Work from the bottom of the tree upwards: 4 × 3 = 12, then 6 + 12 = 18."] },
+        {
+          id: "tree", title: "Draw it as a tree", kind: "conceptual", text: ["Put the last operation at the top of a tree, with its two parts as branches: 6 + 4 × 3 has + at the top, with 6 on one branch and 4 × 3 on the other.", "Work from the bottom of the tree upwards: 4 × 3 = 12, then 6 + 12 = 18."],
+          textFor: ([f, a, b, c]) => {
+            // [top operation, left branch, right branch, first sum, its value, last sum]
+            const v = bodValue(f, a, b, c);
+            const t: [string, string, string, string, number, (x: number) => string][] = [
+              ["+", `${a}`, `${b} × ${c}`, `${b} × ${c}`, b * c, (x) => `${a} + ${x}`],
+              ["−", `${a}`, `${b} × ${c}`, `${b} × ${c}`, b * c, (x) => `${a} − ${x}`],
+              ["×", `(${a} + ${b})`, `${c}`, `${a} + ${b}`, a + b, (x) => `${x} × ${c}`],
+              ["+", `${a} − ${b}`, `${c}`, `${a} − ${b}`, a - b, (x) => `${x} + ${c}`],
+              ["+", `${a}`, `${b} ÷ ${c}`, `${b} ÷ ${c}`, b / c, (x) => `${a} + ${x}`],
+              ["×", `${a}`, `(${b} − ${c})`, `${b} − ${c}`, b - c, (x) => `${a} × ${x}`],
+            ];
+            const [top, left, right, first, w, last] = t[f];
+            return [`Put the last operation at the top of a tree, with its two parts as branches: ${FORMS[f].show(a, b, c)} has ${top} at the top, with ${left} on one branch and ${right} on the other.`, `Work from the bottom of the tree upwards: ${first} = ${w}, then ${last(w)} = ${v}.`];
+          },
+        },
         { id: "terms", title: "Split into terms", kind: "procedural", text: ["Cut the expression at every + and − that is not inside brackets: each piece is a term.", "Work out each term on its own, then add and take away the terms from left to right."] },
       ],
     },
@@ -964,11 +995,17 @@ export const B07: Def[] = [
       return m ? `In a class test, ${name(x)} got ${dec(x, 2)} of the marks. What percentage of the marks is that? (Give the number of per cent.)` : `${x / g} out of every ${100 / g} children in ${name(x + 3)}'s school walk to school. What percentage of the children walk to school? (Give the number of per cent.)`;
     },
     teach: {
-      idea: "Per cent means 'out of 100'. A percentage is a number of hundredths: 37% = 37/100 = 0.37.",
+      idea: "Per cent means 'out of a hundred'. A percentage is a number of hundredths: so many per cent is so many hundredths, whether you write it as a fraction or as a decimal.",
       method: "Turn the fraction into hundredths by multiplying top and bottom by the same number; for a decimal, read how many hundredths it is. That number of hundredths is the percentage.",
       visual: ([, x]) => ({ type: "grid", rows: 10, cols: 10, shaded: x }),
       alternatives: [
-        { id: "hundred_grid", title: "Shade a hundred square", kind: "conceptual", text: ["A 10 × 10 square has 100 small squares; each one is 1%.", "Shade the part the fraction or decimal stands for and count the small squares."], visual: ([, x]) => ({ type: "grid", rows: 10, cols: 10, shaded: x }) },
+        {
+          id: "hundred_grid", title: "Shade a hundred square", kind: "conceptual", text: ["A 10 × 10 square has 100 small squares; each one is 1%.", "Shade the part the fraction or decimal stands for and count the small squares."],
+          textFor: ([m, x]) => {
+            const g = gcd(x, 100), [num, den] = [x / g, 100 / g];
+            return ["A 10 × 10 square has 100 small squares; each one is 1%.", m ? `${dec(x, 2)} is ${x} hundredths, so shade ${x} small squares: ${x} squares out of 100 is ${x}%.` : den === 100 ? `${num}/${den} is ${x} hundredths, so shade ${x} small squares: ${x} squares out of 100 is ${x}%.` : `${num}/${den} means ${num} out of every ${den}. The 100 squares make ${100 / den} groups of ${den}, so shade ${num} in each group: ${num} × ${100 / den} = ${x} small squares. That is ${x}%.`];
+          },
+          visual: ([, x]) => ({ type: "grid", rows: 10, cols: 10, shaded: x }) },
       ],
     },
     limits: "Whole-number percentages from 1% to 99%; percentages over 100 and with decimals are other families.",
@@ -1004,7 +1041,7 @@ export const B07: Def[] = [
     domain: [[1, 150]],
     keep: ([x]) => x !== 100,
     difficulty: ([x]) => (x % 10 === 0 && x < 100 ? 1 : x < 100 ? 2 : 3),
-    word: ([x]) => `A shop says that ${x}% of the price is the cost of making a toy. ${name(x)} wants to type this into a calculator as a decimal. What decimal should ${name(x)} type?`,
+    word: ([x]) => `${name(x)}'s calculator has no % key. To work out ${x}% of a bill, ${name(x)} types the percentage as a decimal. What should ${name(x)} type?`,
     teach: {
       idea: "Per cent means hundredths, so x% is x/100. Dividing by 100 moves every digit two places to the right of where it was.",
       method: "Write the percentage over 100, then write it as a decimal: the last two digits of the number become the tenths and hundredths.",
@@ -1337,7 +1374,7 @@ const HLW = [
   { hcf: true, text: (a: number, b: number) => `A school has ${a} girls and ${b} boys going on a trip. They must be put into groups of the same size, each group all girls or all boys. What is the largest possible group size?` },
   { hcf: false, text: (a: number, b: number) => `At a railway junction, one train arrives every ${a} minutes and another every ${b} minutes. Both arrive together at 6 a.m. After how many minutes will they next arrive together?` },
   { hcf: false, text: (a: number, b: number, nm: string) => `${nm} wants to buy the same number of pencils and erasers. Pencils come in packets of ${a} and erasers in packets of ${b}. What is the smallest number of each ${nm} can buy, using full packets?` },
-  { hcf: false, text: (a: number, b: number) => `Two runners go round a track. One takes ${a} minutes for a round and the other ${b} minutes. They start together. After how many minutes are they next at the starting point together?` },
+  { hcf: false, text: (a: number, b: number) => `Two friends walk round a park. One takes ${a} minutes for a round and the other ${b} minutes. They start together at the gate. After how many minutes are they next at the gate together?` },
 ];
 const hlwOk = ([ctx, a, b]: number[]) => {
   if (ctx < 0 || ctx > 5 || a >= b) return false;
@@ -1428,8 +1465,8 @@ const ftaExp = (e: number) => {
 const fromExp = (ex: number[]) => ex.reduce((v, k, i) => v * PR3[i] ** k, 1);
 const ftaText = (ex: number[]) =>
   ex
-    .map((k, i) => (k === 0 ? "" : k === 1 ? String(PR3[i]) : `${PR3[i]}${"⁰¹²³"[k]}`))
-    .filter(Boolean)
+    // repeated products (2 × 2 × 5), not index notation: Grade 7 learners may not have met exponents yet
+    .flatMap((k, i) => Array.from({ length: k }, () => String(PR3[i])))
     .join(" × ");
 const ftaOk = ([ask, e]: number[]) => {
   if (ask < 0 || ask > 1 || e < 0 || e >= 65536) return false;
@@ -1439,7 +1476,8 @@ const ftaOk = ([ask, e]: number[]) => {
   const used = a.filter((x) => x).length >= 2 && b.filter((x) => x).length >= 2;
   // two different numbers up to 5000 sharing at least one prime, each with at least two primes, neither dividing the other,
   // and the 7s kept small
-  return used && A !== Bn && A <= 5000 && Bn <= 5000 && gcd(A, Bn) > 1 && A % Bn !== 0 && Bn % A !== 0 && a[3] + b[3] <= 2 && a.some((x, i) => x !== b[i] && x && b[i]);
+  // and an LCM a Grade 7 learner can check by hand (at most 10 000)
+  return used && A !== Bn && A <= 5000 && (A * Bn) / gcd(A, Bn) <= 10000 && Bn <= 5000 && gcd(A, Bn) > 1 && A % Bn !== 0 && Bn % A !== 0 && a[3] + b[3] <= 2 && a.some((x, i) => x !== b[i] && x && b[i]);
 };
 
 // ---------------------------------------------------------------- kinds of fractions (agclass)
@@ -1963,7 +2001,7 @@ B07.push(
     difficulty: ([mode]) => (mode === 0 ? 1 : mode === 2 ? 2 : 3),
     word: ([mode, g, x, y]) => {
       const [A, Bn, L] = [g * x, g * y, g * x * y];
-      return mode === 0 ? `Two temple bells ring every ${A} and every ${Bn} seconds, and have just rung together. ${name(g)} knows that the HCF of ${A} and ${Bn} is ${g}. Using HCF × LCM = product of the two numbers, after how many seconds will the bells next ring together?` : mode === 1 ? `Two ropes have whole-number lengths in metres. The longest piece that measures both exactly is ${g} m, and the shortest length both measure exactly is ${L} m. One rope is ${A} m long. How long is the other rope, in metres?` : `Two ribbons, ${A} cm and ${Bn} cm long, are to be cut into pieces all of the same length, as long as possible, with nothing left over. ${name(g)} knows that ${L} cm is the smallest length that both ${A} and ${Bn} divide exactly. Using HCF × LCM = product of the two lengths, how long is each piece, in cm?`;
+      return mode === 0 ? `Two temple bells ring every ${A} and every ${Bn} seconds, and have just rung together. ${name(g)} knows that the HCF of ${A} and ${Bn} is ${g}. Using HCF × LCM = product of the two numbers, after how many seconds will the bells next ring together?` : mode === 1 ? `Two ropes have whole-number lengths in metres. The HCF of the two lengths is ${g} m and their LCM is ${L} m. One rope is ${A} m long. How long is the other rope, in metres?` : `Two ribbons, ${A} cm and ${Bn} cm long, are to be cut into pieces all of the same length, as long as possible, with nothing left over. ${name(g)} knows that ${L} cm is the smallest length that both ${A} and ${Bn} divide exactly. Using HCF × LCM = product of the two lengths, how long is each piece, in cm?`;
     },
     teach: {
       idea: "For two numbers, HCF × LCM = the product of the numbers: the common prime factors are counted once in the HCF and the rest in the LCM, so together they use every prime factor of both numbers exactly once.",
@@ -2026,6 +2064,8 @@ B07.push(
     word: (p) => {
       const [mode, n, d] = p;
       if (mode === 1) return `A water tank is ${pfShown(p)} full, says its gauge. ${name(n + d)} wants to say how full it is as a fraction in its simplest form. What fraction is it?`;
+      // a sale board shows whole percentages only; 87.5% reads naturally as a test score
+      if (n < d && (100 * n) % d !== 0) return `${name(n + d)} scored ${pfShown(p)} in a test. Write the score as a fraction of the full marks, in its simplest form. What fraction is it?`;
       return n < d ? `A shop's sale board says "${pfShown(p)} off". ${name(n + d)} wants to write the part taken off as a fraction of the price, in its simplest form. What fraction is it?` : `This year a farm grew ${pfShown(p)} of last year's harvest. Write this year's harvest as a fraction of last year's, in its simplest form, as a mixed number.`;
     },
     teach: {
@@ -2078,7 +2118,9 @@ B07.push(
     difficulty: ([mode, n, d]) => (d <= 5 && n < d ? 1 : mode === 0 ? 2 : 3),
     word: ([mode, n, d]) =>
       mode === 0
-        ? n < d
+        ? n < d && (d === 16 || d === 40)
+          ? `A carpenter's plan says ${n}/${d} m. ${name(n + d)}'s measuring tape is marked in decimals of a metre. Which reading on the tape is ${n}/${d} m?`
+          : n < d
           ? `A recipe needs ${n}/${d} kg of sugar. ${name(n + d)}'s kitchen scale shows decimals only. Which reading on the scale is ${n}/${d} kg?`
           : `${name(n + d)} needs a piece of cloth ${n}/${d} m long. The measuring tape in the shop is marked in decimals of a metre. Which reading on the tape is ${n}/${d} m?`
         : n < d
@@ -2202,6 +2244,8 @@ B07.push(
     domain: [[0, 1], [21, 999], [20, 998]],
     keep: edOk,
     cap: 400,
+    // level@1 (grade7-teaching@1): a learner below Grade 10 is not asked this family's problems
+    grade: () => 10,
     difficulty: ([mode, a, b]) => (mode === 1 ? (a < 300 ? 1 : 2) : euclidSteps(a, b).length <= 3 ? 2 : 3),
     word: ([mode, a, b]) => `A carpenter has a rectangular board ${a} cm by ${b} cm. He cuts off as many squares of side ${b} cm as he can, leaving a strip. From the strip he again cuts the biggest squares possible, and so on, until nothing is left over. ${mode === 0 ? "How many rounds of cutting does he make (one round for each size of square)?" : "How wide is the strip left after the second round, in cm?"}`,
     teach: {
@@ -2224,7 +2268,7 @@ B07.push(
     mc: true,
     // [ask, e]: two numbers with the exponents in e (of 2, 3, 5, 7); ask 0 the HCF, 1 the LCM
     parse: none,
-    reject: (p) => (ftaOk(p) ? null : "Two different numbers up to 5000 built from 2, 3, 5 and 7, sharing a prime."),
+    reject: (p) => (ftaOk(p) ? null : "Two different numbers up to 5000 built from 2, 3, 5 and 7, sharing a prime, with LCM at most 10 000."),
     prompt: ([ask, e]) => {
       const { a, b } = ftaExp(e);
       return `${fromExp(a)} = ${ftaText(a)} and ${fromExp(b)} = ${ftaText(b)}. Use these prime factorisations to find the ${ask === 0 ? "HCF" : "LCM"} of ${fromExp(a)} and ${fromExp(b)}.`;
@@ -2254,27 +2298,29 @@ B07.push(
       const hi = fromExp(a.map((x, i) => Math.max(x, b[i])));
       const common = PR3.reduce((v, p, i) => (a[i] && b[i] ? v * p : v), 1);
       return ask === 0
-        ? [Bg("highest-for-hcf", "conceptual", EUC, "The higher power of each prime was taken. The HCF uses each COMMON prime with the LOWER power (the most that divides both numbers).", hi), Bg("primes-once", "procedural", EUC, "Each common prime was taken only once. The HCF takes each common prime to the lower of its two powers.", common === lo ? null : common)]
-        : [Bg("lowest-for-lcm", "conceptual", EUC, "The lower powers of the common primes were taken: that is the HCF. The LCM takes every prime that appears, with the HIGHER power.", lo), Bg("product", "conceptual", EUC, `The two numbers were multiplied. They share primes, so the LCM is ${A} × ${Bn} ÷ HCF.`, A * Bn)];
+        ? [Bg("highest-for-hcf", "conceptual", EUC, "Each prime was taken as many times as the number that has it MOST. The HCF uses only the COMMON primes, each as many times as BOTH numbers have it (the smaller count).", hi), Bg("primes-once", "procedural", EUC, "Each common prime was taken only once. The HCF takes each common prime as many times as both numbers have it (the smaller count).", common === lo ? null : common)]
+        : [Bg("lowest-for-lcm", "conceptual", EUC, "Only the common primes were taken, each the smaller number of times: that is the HCF. The LCM takes every prime that appears, as many times as the number that has it MOST.", lo), Bg("product", "conceptual", EUC, `The two numbers were multiplied. They share primes, so the LCM is ${A} × ${Bn} ÷ HCF.`, A * Bn)];
     },
     variants: () => [],
-    explain: (st) => (st.id === "powers" ? `${st.op === "lowest-powers" ? "Common primes, lower powers" : "Every prime, higher power"}: ${st.value}` : `${st.inputs[0]} = ${st.value}`),
+    explain: (st) => (st.id === "powers" ? `${st.op === "lowest-powers" ? "Common primes, each as many times as both numbers have it" : "Every prime, as many times as the number that has it most"}: ${st.value}` : `${st.inputs[0]} = ${st.value}`),
     domain: [[0, 1], [0, 65535]],
     keep: ftaOk,
     cap: 400,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([, e]) => {
       const { a, b } = ftaExp(e);
       return a.filter(Boolean).length + b.filter(Boolean).length <= 4 ? 1 : a.some((x, i) => x && b[i] && x !== b[i]) ? 3 : 2;
     },
     teach: {
       idea: "By the Fundamental Theorem of Arithmetic every number has exactly one prime factorisation. A common factor can only use primes both numbers have, as often as both allow; a common multiple must contain every prime of each number.",
-      method: "HCF: multiply the common primes, each to the LOWER of its two powers. LCM: multiply every prime that appears, each to the HIGHER power. Check: HCF × LCM = the product of the two numbers.",
+      method: "HCF: multiply the common primes, each as many times as BOTH numbers have it (the smaller count). LCM: multiply every prime that appears, each as many times as the number that has it MOST. Check: HCF × LCM = the product of the two numbers.",
       alternatives: [
         { id: "venn", title: "Sort the primes in a Venn diagram", kind: "conceptual", text: ["Put the shared prime factors in the middle and the rest on each side.", "The middle multiplied is the HCF; everything multiplied is the LCM."] },
-        { id: "table_powers", title: "A table of powers", kind: "procedural", text: ["Make a row for each number and a column for each prime, writing its power (0 if missing).", "Take the smaller entry in each column for the HCF and the bigger for the LCM."] },
+        { id: "table_powers", title: "A table of counts", kind: "procedural", text: ["Make a row for each number and a column for each prime, writing how many times that prime appears (0 if missing).", "Take the smaller entry in each column for the HCF and the bigger for the LCM."] },
       ],
     },
-    limits: "Numbers up to 5000 built from 2, 3, 5 and 7; stating and proving the Fundamental Theorem of Arithmetic is an educator-marked task.",
+    limits: "Numbers up to 5000 built from 2, 3, 5 and 7, with LCM at most 10 000, factorisations written as repeated products (no index notation); stating and proving the Fundamental Theorem of Arithmetic is an educator-marked task.",
   },
   // ================================================================ kinds of fractions
   {
