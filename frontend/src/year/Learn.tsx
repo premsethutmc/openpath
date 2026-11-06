@@ -24,7 +24,9 @@ import { decide } from "../../../packages/learning/src/session";
 import { deepRecoveryOn } from "./deep-recovery-flag";
 import { deepModuleState } from "../learning/deep-module";
 import { DeepRecovery } from "./DeepRecovery";
-const DEEP_MODULE = deepRecoveryOn();
+// the build constant is read here directly (as in Main.tsx) so a shipped bundle folds this to false and never reads ?deep
+declare const OPENPATH_DEEP_RECOVERY: boolean;
+const DEEP_MODULE = typeof OPENPATH_DEEP_RECOVERY !== "undefined" && OPENPATH_DEEP_RECOVERY === true && deepRecoveryOn();
 import type { Assessment } from "../../../packages/learning/src/assessment";
 import { workingFeedback } from "../journey/renderer-adapter";
 import type { GradingDecision } from "../../../packages/learning/src/grading/decision";
