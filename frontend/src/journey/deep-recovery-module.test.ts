@@ -8,7 +8,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { question } from "../../../packages/learning/src/content";
-import { exposureKey, problemKeyOf } from "../../../packages/learning/src/families";
+import { exposureKey, problemKeyOf, problemOf } from "../../../packages/learning/src/families";
 import { investigateContext, moduleState, recovery, type ModuleState } from "../../../packages/learning/src/intervention";
 import { withDecisions } from "../../../packages/learning/src/records";
 import { DEEP_MODULE_POLICY, deepModuleState, moduleOriginals } from "../learning/deep-module";
@@ -31,23 +31,36 @@ function learner(gap: string[], never: string[] = []): Answerer {
     return r === question(q).answer ? r : misconception(q, new Set(["no-regroup"])) ?? r;
   };
 }
+/** a learner missing a chain of skills `gap` (gap[0] directly under `comp`); a wrong answer is the question's first modelled bug */
+function chainLearner(comp: string, gap: string[]): Answerer {
+  const deps: Record<string, string[]> = { [comp]: [gap[0]] };
+  gap.forEach((g, i) => { if (gap[i + 1]) deps[g] = [gap[i + 1]]; });
+  const sl = structuredLearner(deps, gap);
+  return (q, c) => {
+    const r = sl(q, c);
+    if (r === question(q).answer) return r;
+    const b = problemOf(q.replace(/:(mc|w)$/, ""))?.bugs?.[0]?.id;
+    return (b && misconception(q, new Set([b]))) || r;
+  };
+}
 const taughtSkills = (s: SliceSession) => s.events.filter((e) => (e as { record?: string }).record === "teach").map((e) => (e as unknown as { competency: string }).competency);
 const reload = (s: SliceSession, after = 60_000) => SliceSession.fromEvents(s.learnerId, s.competency, withDecisions(s.events, s.decisions), s.now + after, `s${Number(s.session.slice(1)) + 1}`);
 
 interface Step { where: "module" | "deep"; phase: string; qid: string | null; lesson: string | null; context?: string; correct?: boolean; original?: string }
 /** the decision the flagged Module view shows now (pure function of the saved records) */
-function decide(s: SliceSession, on = true): { ms: ModuleState; deep: DeepScreen | null } {
+function decide(s: SliceSession, on = true, comp = C): { ms: ModuleState; deep: DeepScreen | null } {
   const st = s.state();
-  const ms = deepModuleState(on, C, st.records, st.evidence(C), s.now, s.session, null, st.evidence);
+  const ms = deepModuleState(on, comp, st.records, st.evidence(comp), s.now, s.session, null, st.evidence);
   return { ms, deep: on && ms.phase === "recover" && ms.original ? deepScreen(ms.original, st.records, st.evidence, s.now) : null };
 }
 /** the flagged view's loop; `reloadEvery`: rebuild the session from saved records after every action */
-function run(answer: Answerer, o: { max?: number; reloadEvery?: boolean; start?: SliceSession } = {}) {
-  let s = o.start ?? new SliceSession("synthetic-module", C, T0);
+function run(answer: Answerer, o: { max?: number; reloadEvery?: boolean; start?: SliceSession; comp?: string } = {}) {
+  const comp = o.comp ?? C;
+  let s = o.start ?? new SliceSession("synthetic-module", comp, T0);
   const steps: Step[] = [];
   for (let i = 0; i < (o.max ?? 120); i++) {
     if (o.reloadEvery) s = reload(s);
-    const { ms, deep } = decide(s);
+    const { ms, deep } = decide(s, true, comp);
     const say = (qid: string, activity: Parameters<SliceSession["submit"]>[2], context: string | undefined, where: Step["where"], phase: string) => {
       const r = s.submit(qid, answer(qid, { taughtSkills: taughtSkills(s), answered: s.replies.length, activity }), activity, context ? { context } : {});
       steps.push({ where, phase, qid, lesson: null, context, correct: r.credit === true, ...(ms.original ? { original: ms.original } : {}) });
@@ -58,7 +71,7 @@ function run(answer: Answerer, o: { max?: number; reloadEvery?: boolean; start?:
       say(deep.qid, deep.activity, deep.context, "deep", deep.state.phase);
       continue;
     }
-    if (ms.phase === "chapter" && ms.strategy) { s.taught(ms); steps.push({ where: "module", phase: "chapter", qid: null, lesson: C }); continue; }
+    if (ms.phase === "chapter" && ms.strategy) { s.taught(ms); steps.push({ where: "module", phase: "chapter", qid: null, lesson: comp }); continue; }
     if (!ms.question) { steps.push({ where: "module", phase: ms.phase, qid: null, lesson: null }); break; }
     say(ms.question, activityFor(ms), ms.context, "module", ms.phase);
   }
@@ -214,4 +227,31 @@ test("in-module: an episode opened from the stuck view (first try 'original') is
   if (x.kind === "ask") s.submit(x.qid, "1", x.activity, { context: x.context });
   assert.deepEqual(moduleOriginals(C, s.state().records), []);
   assert.notEqual(decide(s).ms.why, DEEP_MODULE_POLICY);
+});
+
+// place value (tens) -> compare numbers: a module whose recovery #115 (scoped-teaching-priority@1) does not change; the same journey
+// was run on a scratch merge of this branch with e1d5ed74 (MODULE-RECOVERY.md)
+const CNT = P + "count-objects";
+test("in-module (second module, place value): down to compare numbers, taught, fresh place-value problems, module continues; and with a reload after every action", () => {
+  for (const reloadEvery of [false, true]) {
+    const { steps } = run(chainLearner(PV, [CMP]), { comp: PV, reloadEvery });
+    const orig = steps.find((x) => x.original)!.original!;
+    assert.equal(question(orig).competency, PV);
+    assert.ok(steps.some((x) => x.where === "deep" && x.phase === "probe" && x.qid && question(x.qid).competency === CMP && !x.correct));
+    assert.deepEqual(steps.filter((x) => x.where === "deep" && x.phase === "lesson").map((x) => x.lesson), [CMP]);
+    const returns = steps.filter((x) => x.phase === "return");
+    assert.ok(returns.length >= 1 && returns.every((x) => question(x.qid!).competency === PV && x.correct && problemKeyOf(x.qid!) !== problemKeyOf(orig)));
+    const after = steps.slice(steps.lastIndexOf(returns.at(-1)!) + 1);
+    assert.ok(after.length >= 1 && after.every((x) => x.where === "module"), `reload=${reloadEvery}`);
+    assert.equal(after.at(-1)!.phase, "done");
+  }
+});
+
+test("in-module: a missing piece OpenPath cannot teach here (count objects) stops the episode and pauses the module, nothing solved", () => {
+  const { steps, s } = run(chainLearner(PV, [CMP, CNT]), { comp: PV });
+  assert.equal(steps.at(-1)!.where, "module");
+  assert.equal(steps.at(-1)!.phase, "pause");
+  const d = decide(s, true, PV);
+  assert.ok(d.ms.why?.startsWith(`${DEEP_MODULE_POLICY}: `), d.ms.why);
+  assert.ok(!steps.some((x) => x.phase === "return"));
 });
