@@ -637,76 +637,6 @@
    ]
   },
   {
-   "competency": "MATH.algebra.linear-equations",
-   "title": "Solving ax + b = c",
-   "family": "lin",
-   "seed": [
-    2,
-    1,
-    3
-   ],
-   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "aiAssisted": true,
-   "licence": "CC0",
-   "chapter": [
-    {
-     "title": "An equation is a balance",
-     "text": [
-      "An equation says two sides are equal. To keep them equal, do the same thing to both sides: add or subtract the same number, then multiply or divide by the same number."
-     ],
-     "math": [
-      "2x + 1 = 3",
-      "Subtract 1 from both sides: 2x = 2",
-      "Divide both sides by 2: x = 1"
-     ],
-     "tip": "Undo the last thing done to x first: if x was multiplied then had something added, subtract first, then divide.",
-     "worked": true
-    }
-   ],
-   "strategies": [
-    {
-     "id": "undo_order",
-     "title": "Undo in reverse order",
-     "kind": "procedural",
-     "screens": [
-      {
-       "title": "Last in, first out",
-       "text": [
-        "Read the equation from x outwards: x was multiplied by a, then b was added. Undo in reverse: subtract b first, then divide by a. The number on the other side changes at each step."
-       ],
-       "worked": true
-      }
-     ]
-    },
-    {
-     "id": "check_substitute",
-     "title": "Check by putting it back",
-     "kind": "conceptual",
-     "screens": [
-      {
-       "title": "Substitute to check",
-       "text": [
-        "Put your answer back into the left side. If it equals the right side, the answer is correct. This catches sign and arithmetic errors."
-       ]
-      }
-     ]
-    },
-    {
-     "id": "times_tables",
-     "title": "The division step needs a times fact",
-     "kind": "prerequisite",
-     "screens": [
-      {
-       "title": "Division is the inverse of multiplication",
-       "text": [
-        "The last step divides both sides by a number. This is the same as asking: what times that number gives the other side? If the division is slow, practise the times table first."
-       ]
-      }
-     ]
-    }
-   ]
-  },
-  {
    "competency": "MATH.algebra.inequalities",
    "title": "Solving a linear inequality",
    "family": "lineq",
@@ -722,14 +652,13 @@
     {
      "title": "Like an equation, with one extra rule",
      "text": [
-      "Solve a linear inequality as you would an equation: move terms, add, subtract, multiply, divide. But when you multiply or divide by a negative number, the inequality sign reverses: < becomes > and vice versa."
+      "Solve a linear inequality as you would an equation. But when you multiply or divide both sides by a negative number, the inequality sign reverses: < becomes > and > becomes <."
      ],
      "math": [
       "−6x − 15 < −15",
       "Add 15: −6x < 0",
-      "Divide by −6 (negative, so flip): x > 0"
-     ],
-     "tip": "Dividing by a negative flips the sign. Check your answer with a number that should work."
+      "Divide by −6 (negative, so the sign flips): x > 0"
+     ]
     }
    ],
    "strategies": [
@@ -739,9 +668,13 @@
      "kind": "conceptual",
      "screens": [
       {
-       "title": "Multiplying by −1 reverses order",
+       "title": "Multiplying by a negative reverses the order",
        "text": [
-        "3 < 5, but −3 > −5: multiplying by a negative reverses the order of numbers on the number line. So every time you multiply or divide both sides by a negative, reverse the inequality sign."
+        "3 < 5, but −3 > −5: multiplying by a negative number reverses the order of numbers on the number line. So whenever you multiply or divide both sides by a negative number, reverse the sign. Dividing by a positive number keeps it."
+       ],
+       "math": [
+        "3 < 5",
+        "Multiply both sides by −1: −3 > −5"
        ]
       }
      ]
@@ -754,7 +687,7 @@
       {
        "title": "Get x alone, watching signs",
        "text": [
-        "Move the constant to the other side (add or subtract). Then divide by the coefficient of x. If that coefficient is negative, flip the sign. Write the answer as x > k or x < k."
+        "Move the constant to the other side. Then divide by the coefficient of x; if that coefficient is negative, reverse the sign. Write the answer as x > k or x < k."
        ],
        "worked": true
       }
@@ -766,9 +699,9 @@
      "kind": "prerequisite",
      "screens": [
       {
-       "title": "Pick a number from your answer set",
+       "title": "Pick a number from your answer",
        "text": [
-        "If your answer is x > 0, try x = 1: put it back in the original inequality. If it makes the inequality true, the answer is likely correct. If not, check the sign flip."
+        "If your answer is x > 0, try x = 1 in the original inequality. If it makes the inequality true, and a number on the other side makes it false, the answer is likely correct. If not, check the sign flip."
        ]
       }
      ]
@@ -863,28 +796,66 @@
     {
      "title": "The slope of the tangent",
      "text": [
-      "f′(x) = lim (h → 0) [f(x + h) − f(x)] / h. This is the slope of the chord from (x, f(x)) to (x + h, f(x + h)) as the second point slides towards the first.",
-      "Expand f(x + h), subtract f(x), cancel h from every term, then let h = 0."
+      "f′(x) = lim (h → 0) [f(x + h) − f(x)] / h: the slope of the chord from x to x + h as the second point slides towards the first.",
+      "Simplify f(x + h) − f(x) until h is a factor of the top, cancel h, then let h → 0."
      ],
      "math": [
       "f(x) = x² − 5x − 4",
-      "f(x + h) = (x + h)² − 5(x + h) − 4 = x² + 2xh + h² − 5x − 5h − 4",
+      "f(x + h) = x² + 2xh + h² − 5x − 5h − 4",
       "f(x + h) − f(x) = 2xh + h² − 5h = h(2x + h − 5)",
-      "Divide by h: 2x + h − 5. Let h → 0: f′(x) = 2x − 5"
+      "Divide by h: 2x + h − 5; let h → 0: f′(x) = 2x − 5"
+     ]
+    },
+    {
+     "title": "A fraction: one common denominator",
+     "text": [
+      "For a fraction, write f(x + h) − f(x) over one common denominator: the top becomes a multiple of h, which cancels."
      ],
-     "tip": "Every term of f(x + h) − f(x) must have h as a factor. If it does not, expand again."
+     "math": [
+      "f(x) = 1/(x + 3)",
+      "1/(x + h + 3) − 1/(x + 3) = −h ⁄ [(x + h + 3)(x + 3)]",
+      "Divide by h: −1 ⁄ [(x + h + 3)(x + 3)]",
+      "Let h → 0: f′(x) = −1/(x + 3)²"
+     ],
+     "instance": "gen:aqfp:1,1,3,0"
+    },
+    {
+     "title": "A square root: multiply by the sum of the roots",
+     "text": [
+      "For a square root, multiply top and bottom by the sum of the two roots. The top becomes (x + h + 2) − (x + 2) = h, which cancels."
+     ],
+     "math": [
+      "f(x) = √(x + 2)",
+      "[√(x + h + 2) − √(x + 2)] × [√(x + h + 2) + √(x + 2)] = h",
+      "So the chord slope is 1 ⁄ [√(x + h + 2) + √(x + 2)]",
+      "Let h → 0: f′(x) = 1 ⁄ (2√(x + 2))"
+     ],
+     "instance": "gen:aqfp:2,1,2,0"
+    },
+    {
+     "title": "Sine and cosine: the two special limits",
+     "text": [
+      "Expand with the compound-angle formula, then use the two limits (sin 2h)/h → 2 and (cos 2h − 1)/h → 0 as h → 0."
+     ],
+     "math": [
+      "sin(2x + 2h) − sin 2x = sin 2x (cos 2h − 1) + cos 2x sin 2h",
+      "Divide by h: sin 2x × (cos 2h − 1)/h + cos 2x × (sin 2h)/h",
+      "As h → 0: (cos 2h − 1)/h → 0 and (sin 2h)/h → 2",
+      "f′(x) = 2cos 2x"
+     ],
+     "instance": "gen:aqfp:4,2,0,0"
     }
    ],
    "strategies": [
     {
      "id": "expand_cancel",
-     "title": "Expand, subtract, cancel h",
+     "title": "Simplify, cancel h, let h → 0",
      "kind": "procedural",
      "screens": [
       {
        "title": "Three stages",
        "text": [
-        "Stage 1: expand f(x + h) fully. Stage 2: subtract f(x) — every non-h term cancels. Stage 3: factor h out, cancel it, then set h = 0."
+        "Stage one: write f(x + h) and simplify f(x + h) − f(x) until every term of the top has a factor h: expand a polynomial, combine fractions, or multiply by the sum of the roots. Stage two: cancel h. Stage three: let h → 0."
        ],
        "worked": true
       }
@@ -892,26 +863,26 @@
     },
     {
      "id": "why_limit",
-     "title": "Why h must approach 0",
+     "title": "Why h must approach zero",
      "kind": "conceptual",
      "screens": [
       {
        "title": "A chord is not a tangent",
        "text": [
-        "With h = 0 directly, the fraction is 0/0: meaningless. The limit lets h shrink towards 0 without reaching it. The algebra (cancel h first) removes the 0/0 and shows the answer that the slope approaches."
+        "With h equal to zero straight away, the fraction is zero over zero: it has no value. The limit lets h shrink towards zero without reaching it. Cancelling h first removes the zero over zero and shows the value the chord slopes approach."
        ]
       }
      ]
     },
     {
      "id": "expansion_check",
-     "title": "Expanding (x + h)² carefully",
+     "title": "The expansions you need",
      "kind": "prerequisite",
      "screens": [
       {
-       "title": "Do not forget the cross term",
+       "title": "Do not lose the cross terms",
        "text": [
-        "(x + h)² = x² + 2xh + h², not x² + h². The 2xh comes from the two products x × h and h × x. Missing it loses the answer."
+        "(x + h)² = x² + 2xh + h², not x² + h². (x + h)³ = x³ + 3x²h + 3xh² + h³. sin(A + B) = sin A cos B + cos A sin B and cos(A + B) = cos A cos B − sin A sin B. A missing middle term loses the answer."
        ]
       }
      ]
@@ -932,12 +903,11 @@
     {
      "title": "π radians = 180°",
      "text": [
-      "One radian is the angle whose arc equals the radius. A half turn (180°) is exactly π radians. To convert degrees to radians, multiply by π/180 and simplify."
+      "One radian is the angle whose arc equals the radius. A half turn is exactly π radians, so multiply an angle in degrees by π/180 and simplify the fraction."
      ],
      "math": [
       "−720° × π/180 = −720π/180 = −4π"
-     ],
-     "tip": "Simplify the fraction before writing the answer: 720/180 = 4."
+     ]
     }
    ],
    "strategies": [
@@ -949,7 +919,7 @@
       {
        "title": "One formula",
        "text": [
-        "radians = degrees × π/180. Simplify the fraction by dividing both numerator and denominator by their GCD."
+        "Radians = degrees × π/180. Simplify the fraction by dividing the top and bottom by their highest common factor; keep a minus sign for a negative angle."
        ],
        "worked": true
       }
@@ -961,9 +931,13 @@
      "kind": "conceptual",
      "screens": [
       {
-       "title": "30° = π/6, 45° = π/4, 60° = π/3, 90° = π/2, 180° = π, 360° = 2π",
+       "title": "Landmark angles",
        "text": [
-        "These landmarks let you convert without the formula. Any multiple of 30° or 45° converts by scaling one of these."
+        "Learn these landmarks. Any angle that is a multiple of one of them converts by scaling it."
+       ],
+       "math": [
+        "30° = π/6, 45° = π/4, 60° = π/3, 90° = π/2",
+        "180° = π, 360° = 2π"
        ]
       }
      ]
@@ -974,9 +948,9 @@
      "kind": "prerequisite",
      "screens": [
       {
-       "title": "GCD with 180",
+       "title": "Highest common factor with 180",
        "text": [
-        "180 = 4 × 45 = 6 × 30 = 12 × 15. The GCD of the angle and 180 tells you how much to simplify. 120/180: GCD is 60, so 120/180 = 2/3 and the answer is 2π/3."
+        "180 = 4 × 45 = 6 × 30 = 12 × 15. The highest common factor of the angle and 180 tells you how far to simplify: 120/180 = 2/3, so 120° = 2π/3."
        ]
       }
      ]
@@ -1000,15 +974,14 @@
     {
      "title": "Factorise sec²θ − tan²θ = 1",
      "text": [
-      "sec²θ − tan²θ = 1 is a difference of two squares: (sec θ + tan θ)(sec θ − tan θ) = 1. So if you know one factor, the other is its reciprocal."
+      "sec²θ − tan²θ = 1 is a difference of two squares: (sec θ + tan θ)(sec θ − tan θ) = 1. So if you know the sum, the difference is its reciprocal."
      ],
      "math": [
       "sec θ + tan θ = 2",
       "Then sec θ − tan θ = 1/2",
       "Add: 2 sec θ = 5/2, so sec θ = 5/4",
       "Subtract: 2 tan θ = 3/2, so tan θ = 3/4"
-     ],
-     "tip": "The sum and difference together give sec and tan by adding and halving, or subtracting and halving."
+     ]
     }
    ],
    "strategies": [
@@ -1018,9 +991,9 @@
      "kind": "conceptual",
      "screens": [
       {
-       "title": "Product = 1",
+       "title": "Their product is 1",
        "text": [
-        "(sec + tan)(sec − tan) = sec² − tan² = 1. So if sec + tan = k, then sec − tan = 1/k. The same works for cosec and cot: cosec² − cot² = 1."
+        "(sec θ + tan θ)(sec θ − tan θ) = sec²θ − tan²θ = 1, so if sec θ + tan θ = k then sec θ − tan θ = 1/k. The same works for cosec and cot, because cosec²θ − cot²θ = 1."
        ]
       }
      ]
@@ -1031,9 +1004,9 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "Simultaneous equations",
+       "title": "Two equations, two unknowns",
        "text": [
-        "You have sec + tan = k and sec − tan = 1/k. Add them: 2 sec = k + 1/k, so sec = (k + 1/k)/2. Subtract: 2 tan = k − 1/k. Then sin = tan/sec."
+        "Add the sum and the difference and halve: that is sec θ (or cosec θ). Subtract and halve: that is tan θ (or cot θ). Then sin θ = tan θ ÷ sec θ, and cos θ = cot θ ÷ cosec θ."
        ],
        "worked": true
       }
@@ -1047,7 +1020,7 @@
       {
        "title": "Common denominator",
        "text": [
-        "k + 1/k: write k as k/1, then the common denominator is k, so k + 1/k = (k² + 1)/k. Halving gives (k² + 1)/(2k)."
+        "k + 1/k: write k as k/1, so the common denominator is k: k + 1/k = (k² + 1)/k. Halving gives (k² + 1)/(2k). For k = 7/3: 7/3 + 3/7 = 58/21, and half of it is 29/21."
        ]
       }
      ]
@@ -1069,14 +1042,13 @@
     {
      "title": "a/sin A = b/sin B",
      "text": [
-      "In any triangle, each side divided by the sine of the angle opposite it is the same constant. To find an unknown side, set up the proportion and solve."
+      "In any triangle, each side divided by the sine of the angle opposite it gives the same number. To find an unknown side, set up the proportion and solve."
      ],
      "math": [
       "In triangle ABC: A = 30°, B = 45°, a = 2",
-      "a/sin A = b/sin B → 2/sin 30° = b/sin 45°",
-      "2/(1/2) = b/(√2/2) → 4 = b/(√2/2) → b = 2√2"
-     ],
-     "tip": "Use the sine rule when you know an angle and the side opposite it, plus another angle."
+      "a/sin A = b/sin B: 2/sin 30° = b/sin 45°",
+      "2 ⁄ (1/2) = 4, so b = 4 × sin 45° = 4 × √2/2 = 2√2"
+     ]
     }
    ],
    "strategies": [
@@ -1086,24 +1058,30 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "Match side to its opposite angle",
+       "title": "Match each side to its opposite angle",
        "text": [
-        "Write a/sin A = b/sin B. Substitute the known values: the known side and its opposite angle on one side, the unknown side and its opposite angle on the other. Cross-multiply and simplify."
+        "Write a/sin A = b/sin B. Put the known side and its opposite angle on one side, the unknown side and its opposite angle on the other. Multiply across and simplify the surds."
        ],
        "worked": true
       }
      ]
     },
     {
-     "id": "ambiguous_case",
-     "title": "Two sides, one angle: the ambiguous case",
+     "id": "obtuse_angle",
+     "title": "The sine of an obtuse angle",
      "kind": "conceptual",
      "screens": [
       {
-       "title": "sin gives two possible angles",
+       "title": "sin(180° − θ) = sin θ",
        "text": [
-        "If sin B = k, then B could be k° or (180 − k)°. When you are given two sides and the angle opposite one, check whether both values of B give a valid triangle (angles add to 180)."
-       ]
+        "An obtuse angle has the same sine as its supplement, so sin 135° = sin 45°. Use that value in the proportion exactly as before."
+       ],
+       "math": [
+        "sin 135° = sin(180° − 45°) = sin 45° = √2/2",
+        "a/sin A = b/sin B: 3 ⁄ (1/2) = b ⁄ (√2/2)",
+        "b = 6 × √2/2 = 3√2"
+       ],
+       "instance": "gen:atsiner:4,3"
       }
      ]
     },
@@ -1113,9 +1091,9 @@
      "kind": "prerequisite",
      "screens": [
       {
-       "title": "sin 30° = 1/2, sin 45° = √2/2, sin 60° = √3/2",
+       "title": "sin 30° = 1/2, sin 45° = √2/2, sin 60° = √3/2, sin 90° = 1",
        "text": [
-        "These values come from the 30-60-90 and 45-45-90 triangles. When the question asks for an exact answer, use these rather than a decimal."
+        "These values come from the 30-60-90 and 45-45-90 triangles. When the question asks for an exact answer, use them rather than a decimal."
        ]
       }
      ]
@@ -1126,7 +1104,11 @@
    "competency": "MATH.algebra.linear-rational",
    "title": "Solving a linear equation with negative numbers",
    "family": "lneg",
-   "seed": [-9, -20, 1],
+   "seed": [
+    -9,
+    -20,
+    1
+   ],
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
    "aiAssisted": true,
    "licence": "CC0",
@@ -1134,15 +1116,13 @@
     {
      "title": "Negative coefficients and constants",
      "text": [
-      "When the coefficient of x or the constants are negative, the same method works: undo in reverse order. Pay extra attention to subtracting a negative (which adds) and dividing by a negative (which flips the sign of the answer)."
+      "When the coefficient of x or the numbers are negative, the method is the same: undo in reverse order. Take care when subtracting a negative (which adds) and when dividing by a negative (which changes the sign of the result)."
      ],
      "math": [
       "−9x − 20 = −29",
-      "Add 20: −9x = −9",
-      "Divide by −9: x = 1"
-     ],
-     "tip": "−9 ÷ (−9) = 1: dividing two negatives gives a positive.",
-     "worked": true
+      "Add 20 to both sides: −9x = −9",
+      "Divide both sides by −9: x = 1"
+     ]
     }
    ],
    "strategies": [
@@ -1154,7 +1134,7 @@
       {
        "title": "Add or subtract, then divide",
        "text": [
-        "Add or subtract the constant from both sides to isolate the x term. Then divide both sides by the coefficient. A negative divided by a negative is positive."
+        "Add or subtract the number on the x side from both sides so the x term is alone. Then divide both sides by the coefficient of x."
        ],
        "worked": true
       }
@@ -1166,9 +1146,9 @@
      "kind": "conceptual",
      "screens": [
       {
-       "title": "Same signs → positive, different signs → negative",
+       "title": "Same signs give positive, different signs give negative",
        "text": [
-        "When dividing (or multiplying): positive ÷ positive = positive, negative ÷ negative = positive, positive ÷ negative = negative. This decides the sign of x."
+        "When dividing (or multiplying), two numbers with the same sign give a positive result and two numbers with different signs give a negative result. This decides the sign of x."
        ]
       }
      ]
@@ -1181,7 +1161,7 @@
       {
        "title": "Subtracting a negative adds",
        "text": [
-        "−20 − (−20) = −20 + 20 = 0. Two negatives in a row make a positive. If this is slow, practise integer arithmetic first."
+        "−20 − (−20) = −20 + 20 = 0. Taking away a negative number is the same as adding it. If this is slow, practise integer arithmetic first."
        ]
       }
      ]
@@ -1192,7 +1172,11 @@
    "competency": "MATH.algebra.functions",
    "title": "The domain of a real function",
    "family": "aodom",
-   "seed": [0, -6, 0],
+   "seed": [
+    0,
+    -6,
+    0
+   ],
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
    "aiAssisted": true,
    "licence": "CC0",
@@ -1200,25 +1184,37 @@
     {
      "title": "Where the formula works",
      "text": [
-      "The domain is every real x for which the formula gives a real output. A square root needs a non-negative radicand; a denominator cannot be zero; a logarithm needs a positive argument."
+      "The domain is every real x for which the formula gives a real number: what is under a square root must not be negative, and a denominator must not be zero."
      ],
      "math": [
-      "f(x) = √(−6x): need −6x ≥ 0, so x ≤ 0",
+      "f(x) = √(−6x): need −6x ≥ 0",
+      "Divide by −6 (negative, so the sign flips): x ≤ 0",
       "Domain: (−∞, 0]"
+     ]
+    },
+    {
+     "title": "A quadratic under the root or below the line",
+     "text": [
+      "Factorise the quadratic and mark its roots. A quadratic with a positive x² term is negative between its roots and positive outside them (with a negative x² term it is the other way round). Under a square root keep where it is ≥ 0, roots included; in a denominator remove the roots; under a square root in a denominator keep where it is > 0, roots excluded."
      ],
-     "tip": "Dividing by a negative reverses the inequality: −6x ≥ 0 becomes x ≤ 0."
+     "math": [
+      "x² − 3x + 2 = (x − 1)(x − 2) ≥ 0",
+      "Roots 1 and 2: the quadratic is negative between them and positive outside",
+      "Domain: (−∞, 1] ∪ [2, ∞)"
+     ],
+     "instance": "gen:aodom:2,1,2"
     }
    ],
    "strategies": [
     {
      "id": "restriction_rules",
-     "title": "Three restrictions to check",
+     "title": "Write the condition, then solve it",
      "kind": "procedural",
      "screens": [
       {
-       "title": "Square root, denominator, logarithm",
+       "title": "Square root and denominator",
        "text": [
-        "√(expression): set expression ≥ 0. 1/(expression): set expression ≠ 0. log(expression): set expression > 0. Solve the resulting inequality and write the domain in interval notation."
+        "Under a square root: set the expression ≥ 0. In a denominator: set it ≠ 0. A square root in a denominator: set it > 0. Solve the condition and write the answer in interval notation."
        ],
        "worked": true
       }
@@ -1230,22 +1226,22 @@
      "kind": "conceptual",
      "screens": [
       {
-       "title": "Round bracket excludes, square bracket includes",
+       "title": "A round bracket excludes, a square bracket includes",
        "text": [
-        "(a, b) means a < x < b. [a, b] means a ≤ x ≤ b. Use ∞ with a round bracket always: (−∞, 0] means x ≤ 0."
+        "(a, b) means a < x < b and [a, b] means a ≤ x ≤ b. Infinity always takes a round bracket. Two separate pieces are joined with ∪."
        ]
       }
      ]
     },
     {
      "id": "inequality_solving",
-     "title": "Solving the inequality",
+     "title": "Solving the condition",
      "kind": "prerequisite",
      "screens": [
       {
-       "title": "Flip when dividing by negative",
+       "title": "Flip when dividing by a negative",
        "text": [
-        "−6x ≥ 0: divide by −6, flip the sign: x ≤ 0. The sign reversal is the most common error in domain questions."
+        "−6x ≥ 0: divide by −6 and reverse the sign, so x ≤ 0. Forgetting the reversal is the most common slip in domain questions. For a quadratic, factorise first and test one number in each region."
        ]
       }
      ]
@@ -1256,7 +1252,11 @@
    "competency": "MATH.algebra.logarithms",
    "title": "Expressing log N in terms of log 2 and log 3",
    "family": "aologlaw",
-   "seed": [-2, 0, -1],
+   "seed": [
+    -2,
+    0,
+    -1
+   ],
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
    "aiAssisted": true,
    "licence": "CC0",
@@ -1264,26 +1264,24 @@
     {
      "title": "Three laws of logarithms",
      "text": [
-      "log(xy) = log x + log y (product), log(x/y) = log x − log y (quotient), log xⁿ = n log x (power). With log 2 = a and log 3 = b, express any number built from 2s, 3s and powers of 10."
+      "log(xy) = log x + log y, log(x/y) = log x − log y and log xⁿ = n log x. With log 2 = a and log 3 = b, any number built from 2s, 3s and powers of 10 can be written in a and b."
      ],
      "math": [
-      "log 0.05 = log(1/20) = −log 20 = −log(4 × 5)",
-      "= −(log 4 + log 5) = −(2a + log(10/2))",
-      "= −(2a + 1 − a) = −a − 1"
-     ],
-     "tip": "Write the number as a product of 2s and 3s (and 10s): 0.05 = 1/20 = 1/(4 × 5) = 1/(2² × 10/2)."
+      "log 0.05 = log(1/20) = −log 20 = −(log 2 + log 10)",
+      "= −(a + 1) = −a − 1"
+     ]
     }
    ],
    "strategies": [
     {
      "id": "factorise_number",
-     "title": "Break the number into 2s and 3s",
+     "title": "Break the number into 2s, 3s and 10s",
      "kind": "procedural",
      "screens": [
       {
-       "title": "Prime factorise, then apply the laws",
+       "title": "Factorise, then apply the laws",
        "text": [
-        "Write N as a product of powers of 2, 3 and 10. Then apply the product rule (log of a product = sum of logs) and the power rule (log of a power = power × log). Replace log 10 with 1."
+        "Write N as a product of powers of 2, 3 and 10. Use the product rule (the log of a product is the sum of the logs) and the power rule (the log of a power is the power times the log). Replace log 10 by 1."
        ],
        "worked": true
       }
@@ -1291,26 +1289,31 @@
     },
     {
      "id": "log_ten",
-     "title": "log 10 = 1",
+     "title": "Base ten",
      "kind": "conceptual",
      "screens": [
       {
-       "title": "The base is 10",
+       "title": "The log of ten is one",
        "text": [
-        "log₁₀ 10 = 1 and log₁₀ 1 = 0. Use these to turn 5 into 10/2 (so log 5 = 1 − a) and 0.1 into 10⁻¹ (so log 0.1 = −1)."
+        "The logarithms are to base ten, so the log of ten is one and the log of one is zero. Write five as ten divided by two, and a decimal as a whole number times a power of ten."
+       ],
+       "math": [
+        "log 10 = 1, log 1 = 0",
+        "log 5 = log(10/2) = 1 − a",
+        "log 0.1 = log 10⁻¹ = −1"
        ]
       }
      ]
     },
     {
-     "id": "sign_of_log",
-     "title": "Log of a fraction is negative",
+     "id": "powers_of_ten",
+     "title": "Decimals are powers of ten",
      "kind": "prerequisite",
      "screens": [
       {
-       "title": "log(1/N) = −log N",
+       "title": "0.05 = 5 × 10⁻²",
        "text": [
-        "Numbers between 0 and 1 have negative logarithms (base 10). log(0.05) is negative because 0.05 < 1. Use log(1/N) = −log N to handle decimals."
+        "A decimal is a whole number times a negative power of ten: 0.06 = 6 × 10⁻², so log 0.06 = log 2 + log 3 − 2. Numbers between 0 and 1 have negative logarithms."
        ]
       }
      ]
@@ -1321,34 +1324,51 @@
    "competency": "MATH.trigonometry.compound-angle-identities",
    "title": "Exact values by compound-angle formulas",
    "family": "atcomp",
-   "seed": [0, 1, 0, 0],
+   "seed": [
+    0,
+    1,
+    0,
+    0
+   ],
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
    "aiAssisted": true,
    "licence": "CC0",
    "chapter": [
     {
-     "title": "sin(A ± B) and cos(A ± B)",
+     "title": "sin, cos and tan of A ± B",
      "text": [
-      "sin(A + B) = sin A cos B + cos A sin B. cos(A + B) = cos A cos B − sin A sin B. Use these to find exact values of angles like 75° (= 30° + 45°) or 15° (= 45° − 30°)."
+      "Use the formula for the sum or difference, put in the exact values of each angle, multiply out the surds and simplify."
      ],
      "math": [
-      "sin(30° + 45°) = sin 30° cos 45° + cos 30° sin 45°",
-      "= (1/2)(√2/2) + (√3/2)(√2/2)",
-      "= √2/4 + √6/4 = (√6 + √2)/4"
+      "sin(A ± B) = sin A cos B ± cos A sin B",
+      "cos(A ± B) = cos A cos B ∓ sin A sin B",
+      "tan(A ± B) = (tan A ± tan B) ⁄ (1 ∓ tan A tan B)",
+      "sin(30° + 45°) = sin 30° cos 45° + cos 30° sin 45° = (1/2)(√2/2) + (√3/2)(√2/2) = (√2 + √6)/4"
+     ]
+    },
+    {
+     "title": "Angles beyond a right angle, and tan",
+     "text": [
+      "For an angle beyond a right angle, find its reference angle and its sign from its quadrant, then use the formula as before. A tan answer with a root in the denominator is rationalised."
      ],
-     "tip": "Keep the formula's signs exactly: sin(A+B) has +, cos(A+B) has −."
+     "math": [
+      "tan 30° = 1/√3; 135° is in the second quadrant, reference angle 45°, so tan 135° = −1",
+      "tan(30° + 135°) = (1/√3 − 1) ⁄ (1 + 1/√3) = (1 − √3) ⁄ (1 + √3)",
+      "Multiply top and bottom by (1 − √3): (4 − 2√3) ⁄ (−2) = √3 − 2"
+     ],
+     "instance": "gen:atcomp:0,4,0,2"
     }
    ],
    "strategies": [
     {
-     "id": "choose_split",
-     "title": "Choose how to split the angle",
+     "id": "values_first",
+     "title": "Values first, then the formula",
      "kind": "procedural",
      "screens": [
       {
-       "title": "Write as a sum or difference of standard angles",
+       "title": "Write each value with its sign",
        "text": [
-        "75° = 30° + 45°, 15° = 45° − 30°, 105° = 60° + 45°. Choose the split that uses 30°, 45° or 60° so you can substitute exact values."
+        "Write sin, cos (or tan) of each of the two angles, with the sign from its quadrant. Substitute into the formula, multiply out the surds and simplify; rationalise a tan answer."
        ],
        "worked": true
       }
@@ -1360,9 +1380,9 @@
      "kind": "conceptual",
      "screens": [
       {
-       "title": "sin has same sign, cos has opposite sign",
+       "title": "sin keeps the sign, cos swaps it",
        "text": [
-        "sin(A + B) uses +, sin(A − B) uses −. cos(A + B) uses −, cos(A − B) uses +. The sign in cos is opposite to the sign between A and B."
+        "sin(A + B) has a plus between its two products and sin(A − B) a minus. cos(A + B) has a minus and cos(A − B) a plus: the sign in the cos formula is the opposite of the sign between A and B. In the tan formula the top keeps the sign and the bottom swaps it."
        ]
       }
      ]
@@ -1375,7 +1395,7 @@
       {
        "title": "√a × √b = √(ab)",
        "text": [
-        "(1/2)(√2/2) = √2/4. Multiply tops and bottoms. √2 × √3 = √6. Common denominators let you add: √2/4 + √6/4 = (√2 + √6)/4."
+        "(1/2)(√2/2) = √2/4: multiply tops and multiply bottoms. √2 × √3 = √6. With a common denominator the terms add: √2/4 + √6/4 = (√2 + √6)/4."
        ]
       }
      ]
@@ -1386,7 +1406,13 @@
    "competency": "MATH.calculus.applications",
    "title": "Where a function is increasing or decreasing",
    "family": "aqmono",
-   "seed": [-4, -3, -1, 0, 1],
+   "seed": [
+    -4,
+    -3,
+    -1,
+    0,
+    1
+   ],
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
    "aiAssisted": true,
    "licence": "CC0",
@@ -1394,15 +1420,14 @@
     {
      "title": "f′(x) > 0 means increasing",
      "text": [
-      "A function is strictly increasing where its derivative is positive and strictly decreasing where its derivative is negative. Find f′(x), set it to zero to find critical points, then test the sign of f′ in each interval."
+      "A function is strictly increasing where its derivative is positive and strictly decreasing where its derivative is negative. Find f′(x), find where it is zero, then decide its sign between those points."
      ],
      "math": [
       "f(x) = −2x³ − 21x² − 72x + 1",
-      "f′(x) = −6x² − 42x − 72 = −6(x² + 7x + 12) = −6(x + 3)(x + 4)",
-      "f′(x) > 0 when (x + 3)(x + 4) < 0, i.e. −4 < x < −3",
+      "f′(x) = −6x² − 42x − 72 = −6(x + 3)(x + 4)",
+      "f′(x) > 0 when (x + 3)(x + 4) < 0, that is −4 < x < −3",
       "Increasing on (−4, −3)"
-     ],
-     "tip": "The sign of f′ changes at each root. Test one point in each interval."
+     ]
     }
    ],
    "strategies": [
@@ -1412,9 +1437,9 @@
      "kind": "procedural",
      "screens": [
       {
-       "title": "Roots of f′, then test intervals",
+       "title": "Roots of f′, then test the intervals",
        "text": [
-        "Find the roots of f′(x) = 0. They divide the number line into intervals. Test one x in each interval: if f′(x) > 0 there, f is increasing; if f′(x) < 0, f is decreasing."
+        "The roots of f′(x) = 0 divide the number line into intervals. Test one x in each interval: where f′(x) > 0, f is increasing; where f′(x) < 0, f is decreasing. Write open intervals."
        ],
        "worked": true
       }
@@ -1426,9 +1451,9 @@
      "kind": "conceptual",
      "screens": [
       {
-       "title": "Positive slope vs negative slope",
+       "title": "Uphill and downhill",
        "text": [
-        "f′(x) is the slope of the tangent. Positive slope: the graph goes up (increasing). Negative slope: the graph goes down (decreasing). Zero slope: a local maximum or minimum."
+        "f′(x) is the slope of the tangent. A positive slope means the graph goes uphill (increasing); a negative slope means downhill (decreasing). Where the slope is zero the graph turns."
        ]
       }
      ]
@@ -1439,9 +1464,9 @@
      "kind": "prerequisite",
      "screens": [
       {
-       "title": "Factor out the leading coefficient",
+       "title": "Take out the common factor first",
        "text": [
-        "−6x² − 42x − 72: factor out −6 to get −6(x² + 7x + 12), then factorise the quadratic: −6(x + 3)(x + 4). The roots are x = −3 and x = −4."
+        "−6x² − 42x − 72: take out −6 to get −6(x² + 7x + 12), then factorise: −6(x + 3)(x + 4). The roots are x = −3 and x = −4. The factor −6 is negative, so it flips the sign of the bracket product."
        ]
       }
      ]
@@ -1452,7 +1477,12 @@
    "competency": "MATH.calculus.differential-equations",
    "title": "Separating the variables",
    "family": "aqsep",
-   "seed": [0, -4, -3, 1],
+   "seed": [
+    0,
+    -4,
+    -3,
+    1
+   ],
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
    "aiAssisted": true,
    "licence": "CC0",
@@ -1460,28 +1490,39 @@
     {
      "title": "Put y on one side, x on the other",
      "text": [
-      "When dy/dx = g(x) × h(y), separate the variables: move all y terms (including dy) to one side and all x terms (including dx) to the other. Then integrate both sides."
+      "When dy/dx is a function of x times a function of y, separate the variables: everything with y (and dy) on one side, everything with x (and dx) on the other. Integrate both sides and use the starting value to find the constant."
      ],
      "math": [
       "dy/dx = (−4x − 3)y",
       "dy/y = (−4x − 3) dx",
-      "∫ dy/y = ∫ (−4x − 3) dx",
       "ln|y| = −2x² − 3x + C",
-      "y(0) = 1 → C = 0 → y = e^(−2x² − 3x)"
+      "y = 1 when x = 0 gives C = 0, so y = e^(−2x² − 3x)"
+     ]
+    },
+    {
+     "title": "When dy/dx is a number times y/x",
+     "text": [
+      "Separating gives ln|y| = k ln x + C, so y is a power of x: y = A xᵏ. The starting value gives A."
      ],
-     "tip": "After separating and integrating, use the initial condition to find C."
+     "math": [
+      "dy/dx = 3y/x, x > 0",
+      "dy/y = 3 dx/x",
+      "ln|y| = 3 ln x + C, so y = A x³",
+      "y = 2 when x = 1 gives A = 2: y = 2x³"
+     ],
+     "instance": "gen:aqsep:1,3,0,2"
     }
    ],
    "strategies": [
     {
      "id": "separate_integrate",
-     "title": "Separate, integrate, solve for C",
+     "title": "Separate, integrate, find the constant",
      "kind": "procedural",
      "screens": [
       {
-       "title": "Three steps",
+       "title": "In order",
        "text": [
-        "Step 1: rewrite as (1/h(y)) dy = g(x) dx. Step 2: integrate both sides. Step 3: use the initial condition y(x₀) = y₀ to find the constant C. Step 4: solve for y if possible."
+        "Rewrite with y and dy on one side and x and dx on the other. Integrate both sides, adding one constant. Use the starting value to find the constant, then write y on its own."
        ],
        "worked": true
       }
@@ -1493,9 +1534,9 @@
      "kind": "conceptual",
      "screens": [
       {
-       "title": "Each side depends on one variable only",
+       "title": "Each side has one variable",
        "text": [
-        "After separation, the left side depends only on y and the right only on x. Each side integrates independently. The two constants of integration combine into one C."
+        "After separating, one side depends only on y and the other only on x, so each can be integrated on its own. The two constants of integration combine into one."
        ]
       }
      ]
@@ -1508,76 +1549,7 @@
       {
        "title": "The integral of 1/y",
        "text": [
-        "∫ 1/y dy = ln|y| + C. This is the reverse of d/dx[ln x] = 1/x. To go from ln|y| = f(x) + C to y, exponentiate: y = ±e^(f(x)+C) = Ae^(f(x))."
-       ]
-      }
-     ]
-    }
-   ]
-  },
-  {
-   "competency": "MATH.algebra.quadratics",
-   "title": "Solving a quadratic by factorising",
-   "family": "quad",
-   "seed": [
-    -3,
-    -10
-   ],
-   "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "aiAssisted": true,
-   "licence": "CC0",
-   "chapter": [
-    {
-     "title": "If a product is zero, a factor is zero",
-     "text": [
-      "x² + px + q = 0 factorises into (x − r)(x − s) = 0. A product is zero only when one of its factors is zero: x − r = 0 gives x = r, and x − s = 0 gives x = s."
-     ],
-     "math": [
-      "x² − 3x − 10 = (x − 5)(x + 2) = 0",
-      "x = 5 or x = −2"
-     ],
-     "tip": "The sign flips: (x − 5) = 0 gives x = 5, not −5.",
-     "worked": true
-    }
-   ],
-   "strategies": [
-    {
-     "id": "factorise_first",
-     "title": "Two steps: factorise, then read off",
-     "kind": "procedural",
-     "buildsOnPrerequisites": true,
-     "screens": [
-      {
-       "title": "Factorise, then set each bracket to zero",
-       "text": [
-        "Step 1: find two numbers that multiply to the constant and add to the x coefficient. Step 2: write (x + m)(x + n) = 0. Step 3: each bracket equal to 0 gives one solution."
-       ],
-       "worked": true
-      }
-     ]
-    },
-    {
-     "id": "signs_flip",
-     "title": "The sign flips when you solve",
-     "kind": "conceptual",
-     "screens": [
-      {
-       "title": "Why signs flip",
-       "text": [
-        "The number in the bracket and the solution have opposite signs. (x − 5) = 0 means x = 5, because you add 5 to both sides. (x + 2) = 0 means x = −2, because you subtract 2 from both sides."
-       ]
-      }
-     ]
-    },
-    {
-     "id": "check_substitution",
-     "title": "Check by substituting back",
-     "kind": "prerequisite",
-     "screens": [
-      {
-       "title": "Put each root back in",
-       "text": [
-        "Substitute each solution into the original equation. If x² + px + q = 0 with that value of x, the solution is correct. This catches sign errors and wrong factor pairs."
+        "∫ 1/y dy = ln|y| + C, the reverse of d/dx (ln x) = 1/x. To go from ln|y| = f(x) + C to y, raise e to each side: y = A e^(f(x)). Likewise k ln x = ln(xᵏ)."
        ]
       }
      ]
@@ -1599,14 +1571,13 @@
     {
      "title": "0 ⁄ 0 does not mean the limit is 0",
      "text": [
-      "When substituting x = a gives 0 ⁄ 0, the expression is indeterminate, not zero. Simplify first: factorise the numerator, cancel the common factor, then substitute."
+      "When putting x = a into the expression gives 0 ⁄ 0, the expression has no value there yet, but the limit can still exist. Simplify first: factorise the top, cancel the factor that makes the bottom zero, then put x = a."
      ],
      "math": [
       "lim (x → 3) of 2(x² − 9) ⁄ (x − 3)",
       "x² − 9 = (x − 3)(x + 3); cancel (x − 3)",
       "= lim (x → 3) of 2(x + 3) = 2 × 6 = 12"
-     ],
-     "tip": "Never leave a limit as 0 ⁄ 0. Factorise and cancel first."
+     ]
     }
    ],
    "strategies": [
@@ -1614,14 +1585,17 @@
      "id": "difference_of_squares",
      "title": "Spot the difference of two squares",
      "kind": "conceptual",
-     "buildsOnPrerequisites": true,
      "screens": [
       {
        "title": "x² − a² = (x − a)(x + a)",
        "text": [
-        "The numerator x² − a² factorises as (x − a)(x + a). The denominator x − a cancels with one of the factors, leaving x + a. Then put x = a to get 2a."
+        "The top is k(x² − a²) = k(x − a)(x + a). The bottom, x − a, cancels with one factor, leaving k(x + a). Putting x = a then gives k(a + a)."
        ],
-       "worked": true
+       "math": [
+        "2(x² − 9) = 2(x − 3)(x + 3)",
+        "Cancel (x − 3): 2(x + 3)",
+        "x = 3: 2 × 6 = 12"
+       ]
       }
      ]
     },
@@ -1633,7 +1607,7 @@
       {
        "title": "The order matters",
        "text": [
-        "Substituting into 0 ⁄ 0 gives nothing useful. Cancel the factor that makes both zero. Only then substitute: the simplified expression has a well-defined value."
+        "Putting the number in straight away gives nothing useful. Cancel the factor that makes both top and bottom zero; only then put the number in: the simplified expression has a value there."
        ],
        "worked": true
       }
@@ -1647,7 +1621,7 @@
       {
        "title": "Expand the brackets back",
        "text": [
-        "(x − 3)(x + 3) = x² + 3x − 3x − 9 = x² − 9. If this is not what you started with, the factorisation is wrong. A difference of two squares always has this shape."
+        "(x − 3)(x + 3) = x² + 3x − 3x − 9 = x² − 9. If expanding does not give what you started with, the factorisation is wrong. A difference of two squares always has this shape."
        ]
       }
      ]
@@ -1656,11 +1630,11 @@
   },
   {
    "competency": "MATH.trigonometry.equations",
-   "title": "Solving a trig equation in [0, 2π)",
+   "title": "Solving a trigonometric equation in [0, 2π)",
    "family": "atprinc",
    "seed": [
     0,
-    2,
+    6,
     1,
     0
    ],
@@ -1671,40 +1645,51 @@
     {
      "title": "One reference angle, several solutions",
      "text": [
-      "To solve sin x = k, first find the reference angle α from the standard values. Then place it in every quadrant where sin has the right sign: sin is positive in quadrants I and II, negative in III and IV.",
-      "In 0 ≤ x < 2π, sin x = k usually has two solutions (one exception: when k = 1 or −1, there is one)."
+      "Get the ratio on its own, then find the reference angle α: the acute angle whose ratio is the value without its sign. Sine is positive in quadrants I and II, so the solutions are α and π − α."
      ],
      "math": [
-      "sin x = √2/2: the reference angle is π/4",
-      "sin is positive in I and II: x = π/4 or x = π − π/4 = 3π/4"
+      "sin x = 1/√2: the reference angle is π/4",
+      "sin is positive in quadrants I and II: x = π/4 or x = π − π/4 = 3π/4"
+     ]
+    },
+    {
+     "title": "Multiple angles: sin kx, cos kx, tan kx",
+     "text": [
+      "When the angle is 2x and 0 ≤ x < 2π, the angle 2x goes round twice: 0 ≤ 2x < 4π. Solve for the angle 2x in the first turn, add 2π to each solution for the second turn, then divide every value by 2. For 3x there are three turns, so add 2π twice."
      ],
-     "tip": "The principal value from your calculator is only one solution. Always check all the quadrants."
+     "math": [
+      "sin 2x = 1/2: the reference angle is π/6; sin is positive in I and II",
+      "First turn: 2x = π/6 or 2x = 5π/6",
+      "Second turn (add 2π): 2x = 13π/6 or 2x = 17π/6",
+      "Divide by 2: x = π/12, 5π/12, 13π/12, 17π/12"
+     ],
+     "instance": "gen:atprinc:0,5,2,0"
     }
    ],
    "strategies": [
     {
      "id": "quadrant_diagram",
-     "title": "Draw the quadrant diagram",
+     "title": "Use the quadrant signs",
      "kind": "conceptual",
      "screens": [
       {
-       "title": "ASTC: which ratios are positive",
+       "title": "All, Sin, Tan, Cos",
        "text": [
-        "In quadrant I, all ratios are positive. In II, only sin. In III, only tan. In IV, only cos. The mnemonic ASTC (All, Sin, Tan, Cos) gives the sign in each quadrant. Place the reference angle in every quadrant that matches."
+        "In the first quadrant all three ratios are positive; in the second only sine; in the third only tangent; in the fourth only cosine. The angles with reference angle α are α, π − α, π + α and 2π − α: keep the ones in quadrants where the ratio has the sign you need.",
+        "For a negative value, take the reference angle of the value without its sign and keep the quadrants where the ratio is negative. When the value is zero, one or minus one, the angle lies on an axis: read it from the unit circle."
        ]
       }
      ]
     },
     {
      "id": "reference_then_place",
-     "title": "Find the reference angle, then place it",
+     "title": "Reference angle, place it, then every turn",
      "kind": "procedural",
-     "buildsOnPrerequisites": true,
      "screens": [
       {
-       "title": "Two steps",
+       "title": "The whole method",
        "text": [
-        "Step 1: find the reference angle from the positive value of k. Step 2: place it in the right quadrants using π − α (Q II), π + α (Q III), 2π − α (Q IV). Only keep the quadrants where the ratio has the right sign."
+        "Rearrange so the ratio of the angle stands alone. Find the reference angle and place it in the quadrants with the right sign: these are the values of the angle in the first turn. If the angle is kx, add 2π to each value, again and again, until the angle reaches 2kπ. Divide every value by k."
        ],
        "worked": true
       }
