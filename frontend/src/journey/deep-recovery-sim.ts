@@ -44,7 +44,8 @@ const skillOf = (q: string) => graph.evidenceTarget(question(q.replace(/:(mc|w)$
 export class SimLearner {
   learned = new Set<string>();
   private seen = 0;
-  constructor(readonly t: Truth, readonly rnd: () => number) {}
+  /** `wrongOf` (phase 6): how a wrong answer is written; default the shared learners.ts helper (phases 2-5, unchanged) */
+  constructor(readonly t: Truth, readonly rnd: () => number, readonly wrongOf: (q: string) => string = wrong) {}
   /** fold in lessons delivered since the last call: a gap skill is learnt when taught after every gap skill it rests on */
   sync(taught: string[]) {
     for (const s of taught.slice(this.seen)) if (this.t.gap.includes(s) && !this.t.noLearn?.includes(s) && (this.t.deps[s] ?? []).every((d) => !this.t.gap.includes(d) || this.learned.has(d))) this.learned.add(s);
@@ -54,10 +55,10 @@ export class SimLearner {
   can(q: string) { const f = q.startsWith("gen:") ? `fam:${q.split(":")[1]}` : null; return (f && this.t.deps[f] ? this.t.deps[f].every(this.ok) : true) && this.ok(skillOf(q)); }
   answer = (q: string, c: { taughtSkills: string[]; answered: number }) => {
     this.sync(c.taughtSkills);
-    if (this.t.firstSlip && c.answered === 0) return wrong(q);
+    if (this.t.firstSlip && c.answered === 0) return this.wrongOf(q);
     const can = this.can(q), r = this.rnd();
     const g = q.endsWith(":mc") || question(q.replace(/:(mc|w)$/, "")).options?.length ? this.t.guessChoice ?? this.t.guess : this.t.guess;
-    return can ? (r < this.t.slip ? wrong(q) : right(q)) : r < g ? right(q) : wrong(q);
+    return can ? (r < this.t.slip ? this.wrongOf(q) : right(q)) : r < g ? right(q) : this.wrongOf(q);
   };
 }
 

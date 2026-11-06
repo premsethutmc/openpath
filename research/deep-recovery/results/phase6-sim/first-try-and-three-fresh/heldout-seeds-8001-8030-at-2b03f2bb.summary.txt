@@ -1,0 +1,202 @@
+runs 2340: ok 2340, error 0
+
+=== experiment A (reference: selective)
+O1 guesser-10
+  selective            n=30 solved-fresh-unaided:7 handed-over:17 false-reassurance:6 | false-solved 6/30 [10–37%] (via right first try 4) | q 23.33 [19.03–27.23] | sittings 1.10 [1.00–1.20] | claims whose confirming answers repeat a problem or a teaching screen: 0/13
+  three-fresh          n=30 solved-fresh-unaided:7 handed-over:19 false-reassurance:4 | false-solved 4/30 [5–30%] (via right first try 4) | q 24.67 [20.33–28.60] | sittings 1.13 [1.03–1.27] | claims whose confirming answers repeat a problem or a teaching screen: 0/11
+                       paired vs selective n=30: Δquestions 1.33 [0.20–3.00] | Δsittings 0.03 [0.00–0.10] | false-solved 4 vs 6
+O1 guesser-2
+  selective            n=30 solved-fresh-unaided:25 handed-over:5 | false-solved 0/30 [0–11%] (via right first try 0) | q 24.87 [23.83–26.17] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/25
+  three-fresh          n=30 solved-fresh-unaided:25 handed-over:5 | false-solved 0/30 [0–11%] (via right first try 0) | q 26.20 [24.97–27.63] | sittings 1.03 [1.00–1.10] | claims whose confirming answers repeat a problem or a teaching screen: 0/25
+                       paired vs selective n=30: Δquestions 1.33 [0.73–2.40] | Δsittings 0.03 [0.00–0.10] | false-solved 0 vs 0
+O1 guesser-20
+  selective            n=30 handed-over:18 false-reassurance:9 solved-fresh-unaided:3 | false-solved 9/30 [17–48%] (via right first try 7) | q 18.93 [14.13–23.53] | sittings 1.07 [1.00–1.17] | claims whose confirming answers repeat a problem or a teaching screen: 0/12
+  three-fresh          n=30 handed-over:20 solved-fresh-unaided:3 false-reassurance:7 | false-solved 7/30 [12–41%] (via right first try 7) | q 20.70 [15.83–25.37] | sittings 1.10 [1.00–1.23] | claims whose confirming answers repeat a problem or a teaching screen: 0/10
+                       paired vs selective n=30: Δquestions 1.77 [0.07–4.57] | Δsittings 0.03 [0.00–0.10] | false-solved 7 vs 9
+O1 multiple-gaps
+  selective            n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 37.07 [36.70–37.47] | sittings 1.63 [1.47–1.80] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+  three-fresh          n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 38.07 [37.70–38.47] | sittings 2.00 [2.00–2.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+                       paired vs selective n=30: Δquestions 1.00 [1.00–1.00] | Δsittings 0.37 [0.20–0.53] | false-solved 0 vs 0
+O1 single-gap
+  selective            n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 24.33 [23.97–24.73] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+  three-fresh          n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 26.53 [25.13–28.20] | sittings 1.10 [1.00–1.23] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+                       paired vs selective n=30: Δquestions 2.20 [1.00–3.80] | Δsittings 0.10 [0.00–0.23] | false-solved 0 vs 0
+O1 strong-history
+  selective            n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.33 [2.00–3.00] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+  three-fresh          n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 6.57 [4.83–8.57] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+                       paired vs selective n=30: Δquestions 4.23 [2.47–6.23] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+O1 strong-slips
+  selective            n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 6.80 [4.77–9.10] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+  three-fresh          n=30 solved-fresh-unaided:29 handed-over:1 | false-solved 0/30 [0–11%] (via right first try 0) | q 9.50 [7.13–12.20] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 29/30 [83–99%] | claims whose confirming answers repeat a problem or a teaching screen: 0/29
+                       paired vs selective n=30: Δquestions 2.70 [1.00–4.87] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+O2 guesser-10
+  selective            n=30 solved-fresh-unaided:23 handed-over:7 | false-solved 0/30 [0–11%] (via right first try 0) | q 15.03 [14.10–16.07] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/23
+  three-fresh          n=30 solved-fresh-unaided:22 handed-over:8 | false-solved 0/30 [0–11%] (via right first try 0) | q 16.30 [15.23–17.57] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/22
+                       paired vs selective n=30: Δquestions 1.27 [0.63–2.33] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+O2 guesser-2
+  selective            n=30 handed-over:4 solved-fresh-unaided:25 false-reassurance:1 | false-solved 1/30 [1–17%] (via right first try 1) | q 13.70 [12.43–14.80] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/26
+  three-fresh          n=30 handed-over:4 solved-fresh-unaided:25 false-reassurance:1 | false-solved 1/30 [1–17%] (via right first try 1) | q 15.57 [13.87–17.33] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/26
+                       paired vs selective n=30: Δquestions 1.87 [0.83–3.17] | Δsittings 0.00 [0.00–0.00] | false-solved 1 vs 1
+O2 guesser-20
+  selective            n=30 solved-fresh-unaided:11 handed-over:12 false-reassurance:7 | false-solved 7/30 [12–41%] (via right first try 5) | q 12.60 [10.27–14.90] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/18
+  three-fresh          n=30 solved-fresh-unaided:13 handed-over:12 false-reassurance:5 | false-solved 5/30 [7–34%] (via right first try 5) | q 13.83 [11.60–15.97] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/18
+                       paired vs selective n=30: Δquestions 1.23 [0.30–2.57] | Δsittings 0.00 [0.00–0.00] | false-solved 5 vs 7
+O2 multiple-gaps
+  selective            n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 23.33 [23.17–23.53] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+  three-fresh          n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 24.33 [24.17–24.53] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+                       paired vs selective n=30: Δquestions 1.00 [1.00–1.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+O2 single-gap
+  selective            n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 13.97 [13.70–14.23] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+  three-fresh          n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 15.50 [14.83–16.33] | sittings 1.00 [1.00–1.00] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+                       paired vs selective n=30: Δquestions 1.53 [1.00–2.33] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+O2 strong-history
+  selective            n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.30 [2.00–2.90] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+  three-fresh          n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 5.43 [4.27–6.90] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%] | claims whose confirming answers repeat a problem or a teaching screen: 0/30
+                       paired vs selective n=30: Δquestions 3.13 [2.00–4.60] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+O2 strong-slips
+  selective            n=30 solved-fresh-unaided:29 handed-over:1 | false-solved 0/30 [0–11%] (via right first try 0) | q 5.43 [4.13–6.87] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 29/30 [83–99%] | claims whose confirming answers repeat a problem or a teaching screen: 0/29
+  three-fresh          n=30 solved-fresh-unaided:26 handed-over:4 | false-solved 0/30 [0–11%] (via right first try 0) | q 7.93 [6.13–10.00] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 26/30 [70–95%] | claims whose confirming answers repeat a problem or a teaching screen: 0/26
+                       paired vs selective n=30: Δquestions 2.50 [0.97–4.53] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+pooled (both goals):
+  strong-slips    selective            n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 59/60 [91–100%] | errors 0 | extra questions vs selective 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 59/60 [91–100%] | paid nothing extra 60/60 [94–100%]
+  strong-slips    three-fresh          n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 55/60 [82–96%] | errors 0 | extra questions vs selective 2.60 [1.52–3.95] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 55/60 [82–96%] | paid nothing extra 1/60 [0–9%]
+  strong-history  selective            n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs selective 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 60/60 [94–100%] | paid nothing extra 60/60 [94–100%]
+  strong-history  three-fresh          n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs selective 3.68 [2.63–4.85] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 60/60 [94–100%] | paid nothing extra 0/60 [0–6%]
+  single-gap      selective            n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs selective 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00]
+  single-gap      three-fresh          n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs selective 1.87 [1.20–2.67] | extra sittings 0.05 [0.00–0.10]
+  multiple-gaps   selective            n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs selective 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00]
+  multiple-gaps   three-fresh          n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs selective 1.00 [1.00–1.00] | extra sittings 0.18 [0.08–0.28]
+  guesser-2       selective            n=60 false-solved 1/60 [0–9%] | solved-fresh-unaided 50/60 [72–91%] | errors 0 | extra questions vs selective 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00]
+  guesser-2       three-fresh          n=60 false-solved 1/60 [0–9%] | solved-fresh-unaided 50/60 [72–91%] | errors 0 | extra questions vs selective 1.60 [0.95–2.38] | extra sittings 0.02 [0.00–0.05]
+  guesser-10      selective            n=60 false-solved 6/60 [5–20%] | solved-fresh-unaided 30/60 [38–62%] | errors 0 | extra questions vs selective 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00]
+  guesser-10      three-fresh          n=60 false-solved 4/60 [3–16%] | solved-fresh-unaided 29/60 [36–61%] | errors 0 | extra questions vs selective 1.30 [0.52–2.23] | extra sittings 0.02 [0.00–0.05]
+  guesser-20      selective            n=60 false-solved 16/60 [17–39%] | solved-fresh-unaided 14/60 [14–35%] | errors 0 | extra questions vs selective 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00]
+  guesser-20      three-fresh          n=60 false-solved 12/60 [12–32%] | solved-fresh-unaided 16/60 [17–39%] | errors 0 | extra questions vs selective 1.50 [0.43–2.93] | extra sittings 0.02 [0.00–0.05]
+
+=== experiment B (reference: accept)
+O1 capable-new
+  accept               n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 1.00 [1.00–1.00] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+  confirm              n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.37 [2.00–3.10] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 1.37 [1.00–2.10] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate        n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.37 [2.00–3.10] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 1.37 [1.00–2.10] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate-space  n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 1.00 [1.00–1.00] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  delayed-first        n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.37 [2.00–3.10] | sittings 2.03 [2.00–2.10] | recognised in sitting 1 0/30 [0–11%]
+                       paired vs accept n=30: Δquestions 1.37 [1.00–2.10] | Δsittings 1.03 [1.00–1.10] | false-solved 0 vs 0
+O1 capable-record
+  accept               n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 1.03 [1.00–1.10] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+  confirm              n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.07 [2.00–2.20] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 1.03 [0.90–1.20] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate        n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 1.03 [1.00–1.10] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate-space  n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 1.03 [1.00–1.10] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  delayed-first        n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.10 [2.00–2.27] | sittings 2.03 [2.00–2.10] | recognised in sitting 1 0/30 [0–11%]
+                       paired vs accept n=30: Δquestions 1.07 [1.00–1.20] | Δsittings 1.03 [1.00–1.10] | false-solved 0 vs 0
+O1 guesser-10
+  accept               n=30 solved-fresh-unaided:7 handed-over:17 false-reassurance:6 | false-solved 6/30 [10–37%] (via right first try 4) | q 23.33 [19.03–27.23] | sittings 1.10 [1.00–1.20]
+  confirm              n=30 solved-fresh-unaided:8 handed-over:18 false-reassurance:4 | false-solved 4/30 [5–30%] (via right first try 2) | q 24.63 [21.13–27.97] | sittings 1.10 [1.00–1.20]
+                       paired vs accept n=30: Δquestions 1.30 [0.03–3.30] | Δsittings 0.00 [0.00–0.00] | false-solved 4 vs 6
+  proportionate        n=30 solved-fresh-unaided:8 handed-over:18 false-reassurance:4 | false-solved 4/30 [5–30%] (via right first try 2) | q 24.63 [21.13–27.97] | sittings 1.10 [1.00–1.20]
+                       paired vs accept n=30: Δquestions 1.30 [0.03–3.30] | Δsittings 0.00 [0.00–0.00] | false-solved 4 vs 6
+  proportionate-space  n=30 solved-fresh-unaided:7 handed-over:17 false-reassurance:6 | false-solved 6/30 [10–37%] (via right first try 4) | q 23.33 [19.03–27.23] | sittings 1.10 [1.00–1.20]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 6 vs 6
+  delayed-first        n=30 solved-fresh-unaided:8 handed-over:18 false-reassurance:4 | false-solved 4/30 [5–30%] (via right first try 2) | q 24.63 [21.13–27.97] | sittings 1.77 [1.53–2.00]
+                       paired vs accept n=30: Δquestions 1.30 [0.03–3.30] | Δsittings 0.67 [0.43–0.93] | false-solved 4 vs 6
+O1 guesser-2
+  accept               n=30 solved-fresh-unaided:25 handed-over:5 | false-solved 0/30 [0–11%] (via right first try 0) | q 24.87 [23.83–26.17] | sittings 1.00 [1.00–1.00]
+  confirm              n=30 solved-fresh-unaided:25 handed-over:5 | false-solved 0/30 [0–11%] (via right first try 0) | q 24.87 [23.83–26.17] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate        n=30 solved-fresh-unaided:25 handed-over:5 | false-solved 0/30 [0–11%] (via right first try 0) | q 24.87 [23.83–26.17] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate-space  n=30 solved-fresh-unaided:25 handed-over:5 | false-solved 0/30 [0–11%] (via right first try 0) | q 24.87 [23.83–26.17] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  delayed-first        n=30 solved-fresh-unaided:25 handed-over:5 | false-solved 0/30 [0–11%] (via right first try 0) | q 24.87 [23.83–26.17] | sittings 1.90 [1.73–2.07]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.90 [0.73–1.07] | false-solved 0 vs 0
+O1 guesser-20
+  accept               n=30 handed-over:18 false-reassurance:9 solved-fresh-unaided:3 | false-solved 9/30 [17–48%] (via right first try 7) | q 18.93 [14.13–23.53] | sittings 1.07 [1.00–1.17]
+  confirm              n=30 handed-over:22 false-reassurance:5 solved-fresh-unaided:3 | false-solved 5/30 [7–34%] (via right first try 3) | q 21.33 [17.43–25.13] | sittings 1.07 [1.00–1.17]
+                       paired vs accept n=30: Δquestions 2.40 [0.50–5.03] | Δsittings 0.00 [0.00–0.00] | false-solved 5 vs 9
+  proportionate        n=30 handed-over:22 false-reassurance:5 solved-fresh-unaided:3 | false-solved 5/30 [7–34%] (via right first try 3) | q 21.33 [17.43–25.13] | sittings 1.07 [1.00–1.17]
+                       paired vs accept n=30: Δquestions 2.40 [0.50–5.03] | Δsittings 0.00 [0.00–0.00] | false-solved 5 vs 9
+  proportionate-space  n=30 handed-over:18 false-reassurance:9 solved-fresh-unaided:3 | false-solved 9/30 [17–48%] (via right first try 7) | q 18.93 [14.13–23.53] | sittings 1.07 [1.00–1.17]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 9 vs 9
+  delayed-first        n=30 handed-over:22 false-reassurance:5 solved-fresh-unaided:3 | false-solved 5/30 [7–34%] (via right first try 3) | q 21.33 [17.43–25.13] | sittings 1.93 [1.70–2.17]
+                       paired vs accept n=30: Δquestions 2.40 [0.50–5.03] | Δsittings 0.87 [0.63–1.10] | false-solved 5 vs 9
+O2 capable-new
+  accept               n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 1.00 [1.00–1.00] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+  confirm              n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.40 [2.00–3.13] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 1.40 [1.00–2.13] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate        n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.40 [2.00–3.13] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 1.40 [1.00–2.13] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate-space  n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 1.00 [1.00–1.00] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  delayed-first        n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.40 [2.00–3.13] | sittings 2.07 [2.00–2.17] | recognised in sitting 1 0/30 [0–11%]
+                       paired vs accept n=30: Δquestions 1.40 [1.00–2.13] | Δsittings 1.07 [1.00–1.17] | false-solved 0 vs 0
+O2 capable-record
+  accept               n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 1.03 [1.00–1.10] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+  confirm              n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.00 [2.00–2.00] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 0.97 [0.90–1.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate        n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 1.03 [1.00–1.10] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate-space  n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 1.03 [1.00–1.10] | sittings 1.00 [1.00–1.00] | recognised in sitting 1 30/30 [89–100%]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  delayed-first        n=30 solved-fresh-unaided:30 | false-solved 0/30 [0–11%] (via right first try 0) | q 2.03 [2.00–2.10] | sittings 2.00 [2.00–2.00] | recognised in sitting 1 0/30 [0–11%]
+                       paired vs accept n=30: Δquestions 1.00 [1.00–1.00] | Δsittings 1.00 [1.00–1.00] | false-solved 0 vs 0
+O2 guesser-10
+  accept               n=30 solved-fresh-unaided:23 handed-over:7 | false-solved 0/30 [0–11%] (via right first try 0) | q 15.03 [14.10–16.07] | sittings 1.00 [1.00–1.00]
+  confirm              n=30 solved-fresh-unaided:23 handed-over:7 | false-solved 0/30 [0–11%] (via right first try 0) | q 15.03 [14.10–16.07] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate        n=30 solved-fresh-unaided:23 handed-over:7 | false-solved 0/30 [0–11%] (via right first try 0) | q 15.03 [14.10–16.07] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  proportionate-space  n=30 solved-fresh-unaided:23 handed-over:7 | false-solved 0/30 [0–11%] (via right first try 0) | q 15.03 [14.10–16.07] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 0
+  delayed-first        n=30 solved-fresh-unaided:23 handed-over:7 | false-solved 0/30 [0–11%] (via right first try 0) | q 15.03 [14.10–16.07] | sittings 2.17 [1.93–2.40]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 1.17 [0.93–1.40] | false-solved 0 vs 0
+O2 guesser-2
+  accept               n=30 handed-over:4 solved-fresh-unaided:25 false-reassurance:1 | false-solved 1/30 [1–17%] (via right first try 1) | q 13.70 [12.43–14.80] | sittings 1.00 [1.00–1.00]
+  confirm              n=30 handed-over:5 solved-fresh-unaided:25 | false-solved 0/30 [0–11%] (via right first try 0) | q 14.23 [13.50–15.17] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 0.53 [0.00–1.60] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 1
+  proportionate        n=30 handed-over:5 solved-fresh-unaided:25 | false-solved 0/30 [0–11%] (via right first try 0) | q 14.23 [13.50–15.17] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 0.53 [0.00–1.60] | Δsittings 0.00 [0.00–0.00] | false-solved 0 vs 1
+  proportionate-space  n=30 handed-over:4 solved-fresh-unaided:25 false-reassurance:1 | false-solved 1/30 [1–17%] (via right first try 1) | q 13.70 [12.43–14.80] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 1 vs 1
+  delayed-first        n=30 handed-over:5 solved-fresh-unaided:25 | false-solved 0/30 [0–11%] (via right first try 0) | q 14.23 [13.50–15.17] | sittings 1.97 [1.80–2.13]
+                       paired vs accept n=30: Δquestions 0.53 [0.00–1.60] | Δsittings 0.97 [0.80–1.13] | false-solved 0 vs 1
+O2 guesser-20
+  accept               n=30 solved-fresh-unaided:11 handed-over:12 false-reassurance:7 | false-solved 7/30 [12–41%] (via right first try 5) | q 12.60 [10.27–14.90] | sittings 1.00 [1.00–1.00]
+  confirm              n=30 solved-fresh-unaided:13 handed-over:15 false-reassurance:2 | false-solved 2/30 [2–21%] (via right first try 0) | q 15.37 [13.63–16.90] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 2.77 [0.53–5.20] | Δsittings 0.00 [0.00–0.00] | false-solved 2 vs 7
+  proportionate        n=30 solved-fresh-unaided:13 handed-over:15 false-reassurance:2 | false-solved 2/30 [2–21%] (via right first try 0) | q 15.37 [13.63–16.90] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 2.77 [0.53–5.20] | Δsittings 0.00 [0.00–0.00] | false-solved 2 vs 7
+  proportionate-space  n=30 solved-fresh-unaided:11 handed-over:12 false-reassurance:7 | false-solved 7/30 [12–41%] (via right first try 5) | q 12.60 [10.27–14.90] | sittings 1.00 [1.00–1.00]
+                       paired vs accept n=30: Δquestions 0.00 [0.00–0.00] | Δsittings 0.00 [0.00–0.00] | false-solved 7 vs 7
+  delayed-first        n=30 solved-fresh-unaided:12 handed-over:12 provisional:4 false-reassurance:2 | false-solved 2/30 [2–21%] (via right first try 0) | q 15.13 [13.47–16.63] | sittings 2.50 [2.30–2.70]
+                       paired vs accept n=30: Δquestions 2.53 [0.37–4.87] | Δsittings 1.50 [1.30–1.70] | false-solved 2 vs 7
+pooled (both goals):
+  capable-new     accept               n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs accept 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 60/60 [94–100%] | paid nothing extra 60/60 [94–100%]
+  capable-new     confirm              n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs accept 1.38 [1.00–1.92] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 60/60 [94–100%] | paid nothing extra 0/60 [0–6%]
+  capable-new     proportionate        n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs accept 1.38 [1.00–1.92] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 60/60 [94–100%] | paid nothing extra 0/60 [0–6%]
+  capable-new     proportionate-space  n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs accept 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 60/60 [94–100%] | paid nothing extra 60/60 [94–100%]
+  capable-new     delayed-first        n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs accept 1.38 [1.00–1.92] | extra sittings 1.05 [1.00–1.12] | recognised in sitting 1 0/60 [0–6%] | paid nothing extra 0/60 [0–6%]
+  capable-record  accept               n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs accept 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 60/60 [94–100%] | paid nothing extra 60/60 [94–100%]
+  capable-record  confirm              n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs accept 1.00 [0.93–1.08] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 60/60 [94–100%] | paid nothing extra 2/60 [1–11%]
+  capable-record  proportionate        n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs accept 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 60/60 [94–100%] | paid nothing extra 60/60 [94–100%]
+  capable-record  proportionate-space  n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs accept 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00] | recognised in sitting 1 60/60 [94–100%] | paid nothing extra 60/60 [94–100%]
+  capable-record  delayed-first        n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 60/60 [94–100%] | errors 0 | extra questions vs accept 1.03 [1.00–1.10] | extra sittings 1.02 [1.00–1.05] | recognised in sitting 1 0/60 [0–6%] | paid nothing extra 0/60 [0–6%]
+  guesser-2       accept               n=60 false-solved 1/60 [0–9%] | solved-fresh-unaided 50/60 [72–91%] | errors 0 | extra questions vs accept 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00]
+  guesser-2       confirm              n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 50/60 [72–91%] | errors 0 | extra questions vs accept 0.27 [0.00–0.80] | extra sittings 0.00 [0.00–0.00]
+  guesser-2       proportionate        n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 50/60 [72–91%] | errors 0 | extra questions vs accept 0.27 [0.00–0.80] | extra sittings 0.00 [0.00–0.00]
+  guesser-2       proportionate-space  n=60 false-solved 1/60 [0–9%] | solved-fresh-unaided 50/60 [72–91%] | errors 0 | extra questions vs accept 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00]
+  guesser-2       delayed-first        n=60 false-solved 0/60 [0–6%] | solved-fresh-unaided 50/60 [72–91%] | errors 0 | extra questions vs accept 0.27 [0.00–0.80] | extra sittings 0.93 [0.82–1.05]
+  guesser-10      accept               n=60 false-solved 6/60 [5–20%] | solved-fresh-unaided 30/60 [38–62%] | errors 0 | extra questions vs accept 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00]
+  guesser-10      confirm              n=60 false-solved 4/60 [3–16%] | solved-fresh-unaided 31/60 [39–64%] | errors 0 | extra questions vs accept 0.65 [0.02–1.65] | extra sittings 0.00 [0.00–0.00]
+  guesser-10      proportionate        n=60 false-solved 4/60 [3–16%] | solved-fresh-unaided 31/60 [39–64%] | errors 0 | extra questions vs accept 0.65 [0.02–1.65] | extra sittings 0.00 [0.00–0.00]
+  guesser-10      proportionate-space  n=60 false-solved 6/60 [5–20%] | solved-fresh-unaided 30/60 [38–62%] | errors 0 | extra questions vs accept 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00]
+  guesser-10      delayed-first        n=60 false-solved 4/60 [3–16%] | solved-fresh-unaided 31/60 [39–64%] | errors 0 | extra questions vs accept 0.65 [0.02–1.65] | extra sittings 0.92 [0.75–1.10]
+  guesser-20      accept               n=60 false-solved 16/60 [17–39%] | solved-fresh-unaided 14/60 [14–35%] | errors 0 | extra questions vs accept 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00]
+  guesser-20      confirm              n=60 false-solved 7/60 [6–22%] | solved-fresh-unaided 16/60 [17–39%] | errors 0 | extra questions vs accept 2.58 [1.13–4.25] | extra sittings 0.00 [0.00–0.00]
+  guesser-20      proportionate        n=60 false-solved 7/60 [6–22%] | solved-fresh-unaided 16/60 [17–39%] | errors 0 | extra questions vs accept 2.58 [1.13–4.25] | extra sittings 0.00 [0.00–0.00]
+  guesser-20      proportionate-space  n=60 false-solved 16/60 [17–39%] | solved-fresh-unaided 14/60 [14–35%] | errors 0 | extra questions vs accept 0.00 [0.00–0.00] | extra sittings 0.00 [0.00–0.00]
+  guesser-20      delayed-first        n=60 false-solved 7/60 [6–22%] | solved-fresh-unaided 15/60 [16–37%] | errors 0 | extra questions vs accept 2.47 [1.05–4.10] | extra sittings 1.18 [1.02–1.37]
