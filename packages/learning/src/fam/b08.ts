@@ -334,6 +334,7 @@ export const B08: Def[] = [
         { id: "open", op: "distribute", competency: SIMP, inputs: [poly([[c, "x"], [d, ""]])], value: poly([[-c, "x"], [-d, ""]]) },
         { id: "x-terms", op: "subtract", competency: INTADD, inputs: [a, c], value: a - c },
         { id: "numbers", op: "subtract", competency: INTADD, inputs: [b, d], value: b - d },
+        { id: "result", op: "collect", competency: SIMP, inputs: [poly([[a - c, "x"]]), n_(b - d)], value: poly([[a - c, "x"], [b - d, ""]]) },
       ],
       answer: poly([[a - c, "x"], [b - d, ""]]),
     }),
@@ -346,7 +347,7 @@ export const B08: Def[] = [
     ],
     distractors: ([a, b, c, d]) => [poly([[a - c, "x"], [d - b, ""]]), poly([[a - c, "x"], [b, ""]])],
     variants: () => [],
-    explain: (s) => (s.id === "open" ? `−(${s.inputs[0]}) = ${s.value}: every sign in the bracket changes` : s.id === "x-terms" ? `x terms: ${s.inputs[0]}x − ${s.inputs[1]}x = ${poly([[Number(s.value), "x"]])}` : `Numbers: ${n_(Number(s.inputs[0]))} ${signed(-Number(s.inputs[1]))} = ${n_(Number(s.value))}`),
+    explain: (s) => (s.id === "result" ? `Put the x terms and the numbers together: ${s.value}` : s.id === "open" ? `−(${s.inputs[0]}) = ${s.value}: every sign in the bracket changes` : s.id === "x-terms" ? `x terms: ${s.inputs[0]}x − ${s.inputs[1]}x = ${poly([[Number(s.value), "x"]])}` : `Numbers: ${n_(Number(s.inputs[0]))} ${signed(-Number(s.inputs[1]))} = ${n_(Number(s.value))}`),
     domain: [[2, 12], [-12, 12], [1, 12], [-12, 12]],
     cap: 400,
     difficulty: ([, b, , d]) => (b > 0 && d > 0 && b > d ? 1 : d > 0 ? 2 : 3),
@@ -1259,7 +1260,7 @@ export const B08: Def[] = [
     difficulty: ([a, b, f]) => (f === 0 && a % 10 === 0 && b % 10 === 0 ? 1 : f === 0 ? 2 : 3),
     word: ([a, b, f]) => (f === 0 ? `A triangular plot has corners A, B and C. The fence along BC is continued past C. The angles at A and B are ${a}° and ${b}°. What angle does the continued fence make with side AC, in degrees?` : `A triangular plot has corners A, B and C. The fence along BC is continued past C, making an angle of ${a + b}° with side AC. The angle at A is ${a}°. What is the angle at B, in degrees?`),
     teach: {
-      idea: "An exterior angle and the interior angle next to it make a straight line (180°), and the three interior angles also make 180°, so the exterior angle equals the two far interior angles together.",
+      idea: "An exterior angle and the interior angle next to it make a straight line, and the three interior angles of a triangle also add up to a straight angle, so the exterior angle equals the two far interior angles together.",
       method: "To find the exterior angle, add the two interior opposite angles. To find one of those, subtract the other from the exterior angle.",
       // visuals@2: the exterior angle at C (side AC extended to D); its two opposite interior angles at A and B, as in the idea text
       // ("the two far interior angles"); the figure is not to scale and the asked angle is marked ?
@@ -1535,7 +1536,7 @@ export const B08: Def[] = [
       return `A ladder-like design has two parallel bars crossed by a slanting rod. Two angles between the bars, ${rel ? "on the same side of the rod" : "on opposite sides of the rod"}, are marked (${poly([[p, "x"], [q, ""]])})° and (${poly([[r, "x"], [s, ""]])})°. What is x?`;
     },
     teach: {
-      idea: "The angle facts become equations: alternate angles give 'angle = angle', co-interior angles give 'angle + angle = 180'.",
+      idea: "The angle facts become equations: alternate angles give 'angle = angle', co-interior angles give 'angle + angle = a straight angle' (one hundred and eighty degrees).",
       method: "Write the equation from the angle fact, collect the x terms and the numbers, and divide. Then check both angles with your x.",
       alternatives: [
         { id: "check_angles", title: "Check the angles", kind: "procedural", text: ["Put your x into both expressions to get the two angles.", "Alternate angles must come out equal; co-interior angles must add to 180°."] },
@@ -2085,7 +2086,7 @@ B08.push(
     solve: (p) => {
       const { opts, right } = nameOpts(p);
       const [mode, scheme, x, y] = p;
-      return { steps: [{ id: "locate", op: "read", competency: PAR, inputs: mode === 0 ? [lab(scheme, y)] : [lab(scheme, x), lab(scheme, y)], value: right }], answer: opts.indexOf(right) };
+      return { steps: [{ id: "locate", op: "read", competency: PAR, inputs: mode === 0 ? [lab(scheme, y)] : [lab(scheme, x), lab(scheme, y)], value: right }, { id: "pick", op: "choose the option", competency: PAR, inputs: [right], value: opts.indexOf(right) }], answer: opts.indexOf(right) };
     },
     // independent: put the angles on an actual drawing (t at 65°) and classify the pair from the directions of their bisectors
     validate: (p, v) => {
@@ -2113,7 +2114,7 @@ B08.push(
       return out;
     },
     variants: () => [],
-    explain: (s) => (s.inputs.length === 1 ? `Find angle ${s.inputs[0]} in the table and move to the matching place: ${s.value}` : `Angles ${s.inputs[0]} and ${s.inputs[1]} are ${s.value}`),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : s.inputs.length === 1 ? `Find angle ${s.inputs[0]} in the table and move to the matching place: ${s.value}` : `Angles ${s.inputs[0]} and ${s.inputs[1]} are ${s.value}`),
     domain: [[0, 1], [0, 2], [0, 7], [0, 7]],
     keep: nameOk,
     difficulty: ([mode, , x]) => (mode === 0 && (x === 0 || x === 3) ? 1 : mode === 0 ? 2 : 3),
@@ -2191,7 +2192,7 @@ B08.push(
     prompt: (p) => cfig(p[0], p[1]).prompt,
     solve: ([kind, seed]) => {
       const f = cfig(kind, seed);
-      return { steps: [{ id: "compare", op: "compare", competency: CONG, inputs: [f.base.join(", ")], value: f.right }], answer: f.opts.indexOf(f.right) };
+      return { steps: [{ id: "compare", op: "compare", competency: CONG, inputs: [f.base.join(", ")], value: f.right }, { id: "pick", op: "choose the option", competency: CONG, inputs: [f.right], value: f.opts.indexOf(f.right) }], answer: f.opts.indexOf(f.right) };
     },
     // independent: compare the measurements in any order (sorted); exactly one option must match the given figure
     validate: ([kind, seed], v) => {
@@ -2207,7 +2208,7 @@ B08.push(
       ];
     },
     variants: () => [],
-    explain: (s) => `Match the measurements in any order (${s.inputs[0]}): ${s.value} fits exactly`,
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}, the same shape and the same size` : `Match the measurements in any order (${s.inputs[0]}): ${s.value} fits exactly`),
     domain: [[0, 2], [0, 59]],
     keep: cfigOk,
     difficulty: ([kind]) => (kind === 1 ? 1 : kind === 2 ? 2 : 3),
@@ -2244,6 +2245,7 @@ B08.push(
         { id: "a2", op: "square", competency: IDN, inputs: [ww(pp)], value: c[0] === 1 ? "x²" : `${c[0]}x²` },
         ...(form === 2 ? [] : [{ id: "2ab", op: "multiply", competency: IDN, inputs: [form === 1 ? -2 : 2, ww(pp), q], value: `${c[1]}x` }]),
         { id: "b2", op: form === 2 ? "negate-square" : "square", competency: IDN, inputs: [q], value: c[2] },
+        { id: "box", op: "read", competency: IDN, inputs: [["x²", "x", "the number on its own"][box]], value: c[box] },
       ];
       return { steps, answer: c[box] };
     },
@@ -2271,6 +2273,7 @@ B08.push(
     explain: (s) => {
       const value = String(s.value).replace(/^-/, "−");
       if (s.id === "a2") return `a² = (${s.inputs[0]})² = ${value}`;
+      if (s.id === "box") return `The box is ${s.inputs[0] === "the number on its own" ? "the number on its own" : `the number in front of ${s.inputs[0]}`}, so it holds ${value}`;
       if (s.id === "2ab") {
         const factor = Number(s.inputs[0]) < 0 ? "−2" : "2";
         return `${factor}ab = ${factor} × ${s.inputs[1]} × ${s.inputs[2]} = ${value}`;
@@ -2346,8 +2349,8 @@ B08.push(
       return form === 2 ? `A hall has ${a + b} rows of ${a - b} chairs. Using (a + b)(a − b) = a² − b², how many chairs are there?` : `A square garden has sides of ${form === 0 ? a + b : a - b} m. Using ${form === 0 ? "(a + b)²" : "(a − b)²"}, what is its area, in square metres?`;
     },
     teach: {
-      idea: "A number near a round number is easy to square with an identity: 103 = 100 + 3, so 103² = 100² + 2 × 100 × 3 + 3². Products like 103 × 97 are (100 + 3)(100 − 3) = 100² − 3².",
-      method: "Write the number as a ± b with a a multiple of 10. Work out a², 2ab and b² (all easy) and combine them with the right signs.",
+      idea: "A number near a round number is easy to square with an identity: write it as the round number plus or minus a small number and use (a + b)² = a² + 2ab + b² or (a − b)² = a² − 2ab + b². A product of two numbers the same distance above and below a round number is (a + b)(a − b) = a² − b².",
+      method: "Write the number as a ± b with a a multiple of ten. Work out a², 2ab and b² (all easy) and combine them with the right signs.",
       alternatives: [
         { id: "area", title: "See it as an area", kind: "conceptual", text: ["103² is a 100 by 100 square, two 100 by 3 strips and a 3 by 3 corner.", "Add the parts: 10000 + 600 + 9."] },
         { id: "check_last_digit", title: "Check the last digit", kind: "procedural", text: ["The last digit of 103² must be the last digit of 3² = 9.", "If your answer ends in another digit, look for a slip."] },
@@ -2526,7 +2529,7 @@ B08.push(
     solve: ([kind, seed]) => {
       const rows = varyRows(kind, seed);
       const ans = VARY[kind === 0 ? 0 : kind === 1 ? 1 : 2];
-      return { steps: [{ id: "products", op: "multiply", competency: INV, inputs: rows.map((r) => r[0] * r[1]), value: rows.map((r) => r[0] * r[1]).join(", ") }, { id: "ratios", op: "divide", competency: PROP, inputs: rows.map((r) => r[1] / r[0]), value: rows.map((r) => fmt(r[1] / r[0])).join(", ") }, { id: "decide", op: "classify", competency: INV, inputs: [], value: ans }], answer: shuffled(`ahvary:${[kind, seed]}`, VARY).indexOf(ans) };
+      return { steps: [{ id: "products", op: "multiply", competency: INV, inputs: rows.map((r) => r[0] * r[1]), value: rows.map((r) => r[0] * r[1]).join(", ") }, { id: "ratios", op: "divide", competency: PROP, inputs: rows.map((r) => r[1] / r[0]), value: rows.map((r) => fmt(r[1] / r[0])).join(", ") }, { id: "decide", op: "classify", competency: INV, inputs: [], value: ans }, { id: "pick", op: "choose the option", competency: INV, inputs: [ans, kind === 0 ? "x × y is the same in every row" : kind === 1 ? "y ÷ x is the same in every row" : "neither x × y nor y ÷ x stays the same"], value: shuffled(`ahvary:${[kind, seed]}`, VARY).indexOf(ans) }], answer: shuffled(`ahvary:${[kind, seed]}`, VARY).indexOf(ans) };
     },
     // independent: test the definitions on the table itself: all products equal (inverse), all ratios equal (direct)
     validate: ([kind, seed], v) => {
@@ -2546,7 +2549,7 @@ B08.push(
       ][kind];
     },
     variants: () => [],
-    explain: (s) => (s.id === "products" ? `x × y in each row: ${s.value}` : s.id === "ratios" ? `y ÷ x in each row: ${s.value}` : `So: ${s.value}`),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}, because ${s.inputs[1]}` : s.id === "products" ? `x × y in each row: ${s.value}` : s.id === "ratios" ? `y ÷ x in each row: ${s.value}` : `So: ${s.value}`),
     domain: [[0, 3], [0, 29]],
     keep: varyOk,
     // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
@@ -2732,8 +2735,8 @@ B08.push(
       return dir === 0 ? `${name(n)} draws a box round a ${shape === 0 ? "2 × 2" : "3 × 3"} block of numbers on ${where}. The smallest number in the box is ${n}. Using an expression in n instead of adding them one by one, what do the numbers in the box add up to?` : `${name(n)} draws a box round a ${shape === 0 ? "2 × 2" : "3 × 3"} block of numbers on ${where} and tells you the numbers add up to ${calSum(p)}. What is the smallest number in the box?`;
     },
     teach: {
-      idea: `In a grid with w numbers in each row, the number to the right of n is n + 1 and the number below it is n + w. So every square of numbers can be written in terms of n, and its sum is an expression in n.`,
-      method: "Write the numbers of the square in terms of n (as in the picture) and add them: a 2 × 2 square gives 4n + 2w + 2, a 3 × 3 square gives 9n + 9(w + 1). Substitute n, or solve the equation for n.",
+      idea: `In a grid with w numbers in each row, the number just to the right of n is one more than n and the number just below it is n + w. So every square of numbers can be written in terms of n, and its sum is an expression in n.`,
+      method: "Write each number of the square in terms of n and w (as in the picture) and add them, collecting the n terms, the w terms and the plain numbers. Then substitute the value of n, or solve the equation for n.",
       alternatives: [
         { id: "middle", title: "Use the middle", kind: "conceptual", text: ["In a 3 × 3 square the numbers balance round the middle one: the sum is 9 × the middle number.", "In a 2 × 2 square, the sum is 4 × the average of the smallest and largest."] },
         { id: "try_one", title: "Try one on a real calendar", kind: "procedural", text: ["Pick a square on a calendar, add its numbers, and compare with the expression.", "If they agree, the expression works for every square."] },

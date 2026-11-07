@@ -278,8 +278,8 @@ export const B24: Def[] = [
       return `A news report gives a company's yearly sales as ${q.from} rupees (₹${intl(q.n)}). ${nm(p[0])} wants to say it in the Indian system. How many ${q.to} rupees is that?`;
     },
     teach: {
-      idea: "The two systems name the same number differently: 1 million = 10 lakh, 10 million = 1 crore, and 1 billion = 100 crore.",
-      method: "Write the number out in full, then regroup its digits with Indian commas (3, then 2, 2 …) and read off the lakhs or crores.",
+      idea: "The two systems name the same number differently: one million is ten lakh, ten million is one crore, and one billion is a hundred crore.",
+      method: "Write the number out in full, then regroup its digits with Indian commas (a comma before the last three digits, then after every two digits going left) and read off the lakhs or crores.",
       alternatives: [
         { id: "commas", title: "Move the commas", kind: "procedural", text: ["Write 20,000,000 with Indian commas: 2,00,00,000.", "That reads 2 crore, so 20 million is 2 crore."] },
         { id: "ladder", title: "A ladder of names", kind: "conceptual", text: ["1 lakh = 100 thousand. 10 lakh = 1 million. 1 crore = 10 million. 100 crore = 1 billion.", "Climb the ladder one step at a time."] },
@@ -628,10 +628,12 @@ export const B24: Def[] = [
             ? [
                 { id: "turned", op: "compare", competency: TRANS, inputs: [area(shape), area(img)], value: Math.sign(area(shape)) === Math.sign(area(img)) ? "kept" : "reversed" },
                 { id: "name", op: "identify", competency: TRANS, inputs: [t], value: TF_NAME[t] },
+                { id: "pick", op: "choose the option", competency: TRANS, inputs: [TF_NAME[t]], value: tfChoices(p).indexOf(t) },
               ]
             : [
                 { id: "copies", op: "transform", competency: TRANS, inputs: [t], value: MAKE[t] },
                 { id: "symmetry", op: "identify", competency: TRANS, inputs: [t], value: SYM_NAME[t] },
+                { id: "pick", op: "choose the option", competency: TRANS, inputs: [SYM_NAME[t]], value: tfChoices(p).indexOf(t) },
               ],
         answer: tfChoices(p).indexOf(t),
       };
@@ -660,7 +662,9 @@ export const B24: Def[] = [
     },
     variants: () => [],
     explain: (s) =>
-      s.id === "turned"
+      s.id === "pick"
+        ? `That is option ${"ABCD"[Number(s.value)]}, so the answer is ${"ABCD"[Number(s.value)]}`
+        : s.id === "turned"
         ? s.value === "kept"
           ? "A, B, C go round in the same direction in both triangles: a slide or a turn, not a reflection"
           : "A, B, C go round in opposite directions: the triangle has been flipped, so it is a reflection"

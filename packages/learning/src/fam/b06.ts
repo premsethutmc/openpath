@@ -1014,7 +1014,7 @@ export const B06: Def[] = [
     word: ([a, b]) => `${name(a + b)} is laying a garden path. Path 1 uses ${a + b} tiles, path 2 uses ${2 * a + b}, path 3 uses ${3 * a + b}, and each new path uses ${a} more tiles than the one before. Write a rule for the number of tiles in path n.`,
     teach: {
       idea: "If a pattern grows by the same amount each time, that amount is the number multiplied by n; a fixed extra makes the first shape right.",
-      method: "Find how much the pattern grows each time (say 3): the rule starts 3n. Compare 3 × 1 with shape 1 to find what to add. Check with shape 4.",
+      method: "Find how much the pattern grows each time: that number times n starts the rule. Work out that number times 1, compare it with shape 1 to find what to add, then check the rule with a later shape.",
       alternatives: [
         { id: "groups", title: "See the groups in the shape", kind: "conceptual", text: ["Look for the part that is added each time (for example a ⊓ of 3 matchsticks) and the part that is there from the start (one extra stick).", "Shape n has n of the repeating parts plus the starting part."], visual: ([a, b]) => ({ type: "table", head: ["Shape", "Repeating parts", "Extra", "Total"], rows: [1, 2, 3].map((t) => [String(t), `${t} × ${a}`, String(b), String(a * t + b)]) }) },
       ],

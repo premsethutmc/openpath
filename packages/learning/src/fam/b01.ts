@@ -2474,7 +2474,8 @@ const GAP01: Def[] = [
     choices: whereChoices,
     solve: (p) => {
       const w = whereOf(p[0], p[1], p[2]);
-      return { steps: [st("look", "find the position", POS, [["inside/outside", "near/far", "in front/behind"][p[0]]], w.right)], answer: whereChoices(p).indexOf(w.right) };
+      const a = whereChoices(p).indexOf(w.right);
+      return { steps: [st("look", "find the position", POS, [["inside/outside", "near/far", "in front/behind"][p[0]]], w.right), st("pick", "choose the option", POS, [w.right], a)], answer: a };
     },
     // independent: kind 0 counts how many fence sides a line from the animal to the right crosses (odd = inside);
     // kind 1 measures straight-line distances; kind 2 counts the children between each child and the counter
@@ -2508,7 +2509,7 @@ const GAP01: Def[] = [
       return [bug("front-behind", "conceptual", POS, `The child just ${ask ? "in front of" : "behind"} ${w.x} was chosen. In front of means nearer the counter; behind means further back in the queue.`, ix(cs, w.other))];
     },
     variants: () => [],
-    explain: (s) => `Look at the picture: the answer is ${s.value}.`,
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : `Look at the picture: the answer is ${s.value}.`),
     domain: [[0, 2], [0, 39], [0, 1]],
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
     figure: whereFig,

@@ -1984,7 +1984,7 @@ export const B12: Def[] = [
     grade: () => 7,
     difficulty: ([k]) => (k === 0 || k === 1 ? 1 : k === 2 ? 2 : 3),
     teach: {
-      idea: "The degree of a monomial is the sum of the powers of its variables (3x²y³ has degree 5); the degree of a polynomial is the highest degree of its terms. The coefficient of a power is the number multiplying it, with its sign.",
+      idea: "The degree of a monomial is the sum of the powers of its variables (in x²y³ the powers add up to five, so its degree is five); the degree of a polynomial is the highest degree of its terms. The coefficient of a power is the number multiplying it, with its sign.",
       method: "Collect like terms. For each term add the powers of its letters; the largest such sum is the degree. For a coefficient, find the term with that power and read the number (and sign) in front; 0 if it is missing.",
       alternatives: [
         { id: "table", title: "Make a table of terms", kind: "procedural", text: ["Write each term on its own line with its coefficient and the powers of each letter.", "Add the powers on each line; the biggest total is the degree."] },
@@ -2182,7 +2182,7 @@ export const B12: Def[] = [
       const P = divDividend(pp);
       return k === 0
         ? { steps: [st("first", "divide", POLY, [P[0], A], p), st("second", "divide", POLY, [P[1] - Bv * p, A], q), st("third", "divide", POLY, [P[2] - Bv * q, A], s), st("remainder", "subtract", INTADD, [P[3], Bv * s], R)], answer: tup(p, q, s, R) }
-        : { steps: [st("first", "divide", POLY, [P[0], 1], p), st("second", "divide", POLY, [P[1] - A * p, 1], q), st("remainder", "subtract", INTADD, [P[2] - Bv * p - A * q, P[3] - Bv * q], `${pl([s, R])}`)], answer: tup(p, q, s, R) };
+        : { steps: [st("first", "divide", POLY, [P[0], 1], p), st("second", "divide", POLY, [P[1] - A * p, 1], q), st("remainder", "subtract", INTADD, [P[2] - Bv * p - A * q, P[3] - Bv * q], `${pl([s, R])}`), st("answer", "write", POLY, [pl([p, q]), pl([s, R])], tup(p, q, s, R))], answer: tup(p, q, s, R) };
     },
     // independent: d(x) q(x) + r(x) must equal p(x) at five points (the forms make deg r < deg d)
     validate: (pp, v) => {
@@ -2211,7 +2211,7 @@ export const B12: Def[] = [
     },
     distractors: ([, , , p, q, s, R]) => [tup(p, q, s, -R), tup(p, -q, s, R), tup(p, q, s + 1, R)],
     variants: () => [],
-    explain: (s) => (s.id === "remainder" ? `What is left is the remainder: ${typeof s.value === "number" ? N(s.value) : s.value}` : `Next quotient coefficient: ${N(Number(s.inputs[0]))} ÷ ${N(Number(s.inputs[1]))} = ${Q(Number(s.value))}`),
+    explain: (s) => (s.id === "answer" ? `The quotient is ${s.inputs[0]} and the remainder is ${s.inputs[1]}, so (a, b, c, d) = ${s.value}` : s.id === "remainder" ? `What is left is the remainder: ${typeof s.value === "number" ? N(s.value) : s.value}` : `Next quotient coefficient: ${N(Number(s.inputs[0]))} ÷ ${N(Number(s.inputs[1]))} = ${Q(Number(s.value))}`),
     domain: [[0, 1], [-5, 5], [-5, 5], [1, 3], [-5, 5], [-5, 5], [-9, 9]],
     cap: 400,
     // level@1: dividing by a quadratic is Grade 10 (NCERT Class 10, Ch. 2); by Ax + B stays in Grade 9

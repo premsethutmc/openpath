@@ -214,19 +214,20 @@ function mathematicalExplanation(step: Step, family: Def): string {
     multiply: () => near(nums.reduce((s, x) => s * x, 1)),
     divide: () => nums.length === 2 && nums[1] !== 0 && near(nums[0] / nums[1]),
   };
-  if (truth[step.op] && !(nums.every(clean) && clean(v) && truth[step.op]())) return why ? `${why.replace(/\.$/, "")}.` : "";
+  if (truth[step.op] && !(nums.every(clean) && clean(v) && truth[step.op]())) return "";
+  // the arithmetic is said plainly: the competency's name ("— Calculate percentages.") or the family's idea sentence is not
+  // tagged onto every step (it read as noise, repeated the idea, and could name the wrong skill)
+  void why;
 
   switch (step.op) {
     case "add":
-      return why ? `${step.inputs.map(shown).join(" + ")} = ${result} — ${why}.` : `${step.inputs.map(shown).join(" + ")} = ${result}.`;
+      return `${step.inputs.map(shown).join(" + ")} = ${result}.`;
     case "subtract":
-      return why ? `${a} − ${b} = ${result} — ${why}.` : `${a} − ${b} = ${result}.`;
-    case "multiply": {
-      const product = step.inputs.map(shown).join(" × ");
-      return why ? `${product} = ${result} — ${why}.` : `${product} = ${result}.`;
-    }
+      return `${a} − ${b} = ${result}.`;
+    case "multiply":
+      return `${step.inputs.map(shown).join(" × ")} = ${result}.`;
     case "divide":
-      return why ? `${a} ÷ ${b} = ${result} — ${why}.` : `${a} ÷ ${b} = ${result}.`;
+      return `${a} ÷ ${b} = ${result}.`;
     case "negate-square":
       return `−(${a}²) = ${result}: square ${a}, then take its negative.`;
     case "compare":
@@ -245,8 +246,8 @@ function mathematicalExplanation(step: Step, family: Def): string {
       return `The digit ${a} in the ${placeName} place is worth ${shown(contribution)}.`;
     }
     default:
-      // never a raw trace of the solver ("equal: 100 → 100"): the result and the idea only
-      return why ? `This gives ${result} — ${why}.` : `This gives ${result}.`;
+      // never a raw trace of the solver ("equal: 100 → 100"), and no tag: the step's own written form says what it does
+      return "";
   }
 }
 
@@ -622,9 +623,15 @@ export function teachingPresentationFrom(args: {
         const kSteps = kernelWorkedSteps(adapted);
         if (kSteps.length > 0) {
           // Kernel is authoritative: populate workedExample directly from kernel transformations
-          steps = kSteps.map((k) => ({
-            expression: k.expression,
-            explanation: k.explanation,
+          // grade7-lessons@1: the kernel's raw action ("multiply: 22/7, 56 → 176") and float evidence ("3.142857142857143 × 56")
+          // are not shown to a learner: the family's own written step is, and an evidence line with long floats is left out
+          const fam = familyWorkedSteps(problem);
+          const aligned = fam.length === kSteps.length;
+          const raw = (x: string) => /^[a-z][\w-]*: .*→/.test(x);
+          const floaty = (x: string) => /\d\.\d{6,}/.test(x);
+          steps = kSteps.map((k, i) => ({
+            expression: raw(k.expression) && aligned && fam[i].expression ? fam[i].expression : k.expression,
+            explanation: floaty(k.explanation) || raw(k.explanation) ? (aligned ? fam[i].explanation : "") : k.explanation,
             principle: k.principle,
             before: k.before,
             after: k.after,

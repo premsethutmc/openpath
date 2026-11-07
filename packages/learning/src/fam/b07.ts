@@ -328,17 +328,20 @@ export const B07: Def[] = [
       const p1 = PAISE[pa];
       const p2 = PAISE[pb];
       const r = op ? ra * 100 + p1 - (rb * 100 + p2) : ra * 100 + p1 + rb * 100 + p2;
+      const total = { id: "total", op: "write", competency: DEC, inputs: [Math.floor(r / 100), r % 100], value: dec(r, 2, true) };
       return {
         steps: op
           ? [
               { id: "exchange", op: "regroup", competency: DEC, inputs: [ra, p1], value: p1 + 100 },
               { id: "paise", op: "subtract", competency: DEC, inputs: [p1 + 100, p2], value: p1 + 100 - p2 },
               { id: "rupees", op: "subtract", competency: DEC, inputs: [ra - 1, rb], value: ra - 1 - rb },
+              total,
             ]
           : [
               { id: "paise", op: "add", competency: DEC, inputs: [p1, p2], value: p1 + p2 },
               { id: "exchange", op: "regroup", competency: DEC, inputs: [p1 + p2], value: p1 + p2 - 100 },
               { id: "rupees", op: "add", competency: DEC, inputs: [ra, rb, 1], value: ra + rb + 1 },
+              total,
             ],
         answer: dec(r, 2, true),
       };
@@ -378,7 +381,9 @@ export const B07: Def[] = [
           ? st.inputs.length === 2
             ? `${st.inputs[1]} paise is too few, so change ₹1 into 100 paise: now there are ${st.value} paise`
             : `${st.inputs[0]} paise = ₹1 and ${st.value} paise: carry ₹1`
-          : st.op === "add"
+          : st.id === "total"
+            ? `Put the ₹${st.inputs[0]} and the ${st.inputs[1]} paise together, writing the paise after the point: ₹${st.value}`
+            : st.op === "add"
             ? `Rupees: ${st.inputs[0]} + ${st.inputs[1]} + 1 carried = ₹${st.value}`
             : `Rupees: ${st.inputs[0]} − ${st.inputs[1]} = ₹${st.value}`,
     domain: [[10, 80], [0, 9], [5, 60], [0, 9], [0, 1]],
@@ -386,8 +391,8 @@ export const B07: Def[] = [
     difficulty: ([ra, , rb, , op]) => (op === 0 && ra + rb < 60 ? 1 : op === 0 || ra - rb > 20 ? 2 : 3),
     word: ([ra, pa, rb, pb, op]) => (op ? `${name(ra)} has ₹${dec(ra * 100 + PAISE[pa], 2, true)} and buys a notebook for ₹${dec(rb * 100 + PAISE[pb], 2, true)}. How much money is left, in rupees?` : `${name(rb)} buys a pencil box for ₹${dec(ra * 100 + PAISE[pa], 2, true)} and a storybook for ₹${dec(rb * 100 + PAISE[pb], 2, true)}. How much is the bill, in rupees?`),
     teach: {
-      idea: "100 paise make ₹1. Paise go with paise and rupees with rupees, and 100 paise can be swapped for ₹1 (or ₹1 for 100 paise).",
-      method: "Line up the decimal points. Work on the paise first, exchanging ₹1 and 100 paise when needed, then the rupees.",
+      idea: "A hundred paise make ₹1. Paise go with paise and rupees with rupees, and a hundred paise can be swapped for ₹1 (or ₹1 for a hundred paise).",
+      method: "Line up the decimal points. Work on the paise first, exchanging ₹1 and a hundred paise when needed, then the rupees.",
       visual: ([ra, pa, rb, pb]) => ({ type: "table", head: ["", "Rupees", "Paise"], rows: [["", String(ra), String(PAISE[pa]).padStart(2, "0")], ["", String(rb), String(PAISE[pb]).padStart(2, "0")]] }),
       alternatives: [
         { id: "all_paise", title: "Change everything into paise", kind: "procedural", text: ["₹45.50 is 4550 paise and ₹28.75 is 2875 paise.", "Add or subtract the paise as whole numbers, then put the point back two places from the right: 7425 paise = ₹74.25."] },
@@ -1653,7 +1658,8 @@ B07.push(
     prompt: () => "Two numbers are co-prime when their only common factor is 1. Which pair of numbers is co-prime?",
     solve: ([s]) => {
       const { pairs, right } = copSet(s);
-      return { steps: pairs.map(([a, b], i) => ({ id: `pair${i}`, op: "hcf", competency: HL, inputs: [a, b], value: gcd(a, b) })), answer: right };
+      const [ra, rb] = pairs[right];
+      return { steps: [...pairs.map(([a, b], i) => ({ id: `pair${i}`, op: "hcf", competency: HL, inputs: [a, b], value: gcd(a, b) })), { id: "pick", op: "choose the option", competency: HL, inputs: [ra, rb], value: right }], answer: right };
     },
     // independent: list the common factors of each pair by trying every number from 2 up; exactly the chosen pair has none
     validate: ([s], v) => {
@@ -1674,13 +1680,13 @@ B07.push(
       ];
     },
     variants: () => [],
-    explain: (st) => `HCF of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}${st.value === 1 ? ": co-prime" : ""}`,
+    explain: (st) => (st.id === "pick" ? `Only ${st.inputs[0]} and ${st.inputs[1]} have no common factor except 1, so the answer is option ${"ABCD"[Number(st.value)]}` : `HCF of ${st.inputs[0]} and ${st.inputs[1]} is ${st.value}${st.value === 1 ? ": co-prime" : ""}`),
     domain: [[0, 159]],
     keep: ([s]) => firstSeeds("agcop", 160, (k) => copSet(k).pairs.map((p) => p.join(",")).join(";")).has(s),
     difficulty: ([s]) => (copSet(s).pairs[copSet(s).right][0] % 2 === 0 ? 2 : 3),
     teach: {
-      idea: "Co-prime numbers have no common factor except 1, so their HCF is 1. Neither number needs to be prime: 8 and 15 are co-prime, but 9 and 15 are not.",
-      method: "For each pair, test the small primes 2, 3, 5, 7, … : if one of them divides both numbers, the pair is not co-prime. If none does, it is.",
+      idea: "Co-prime numbers have no common factor except 1, so their HCF is 1. Neither number needs to be prime: two numbers can each have many factors and still be co-prime, as long as no factor other than 1 divides both.",
+      method: "For each pair, test the small primes two, three, five, seven, … : if one of them divides both numbers, the pair is not co-prime. If none does, it is.",
       alternatives: [
         { id: "factor_lists", title: "Compare factor lists", kind: "procedural", text: ["List the factors of both numbers.", "If 1 is the only number in both lists, they are co-prime."] },
         { id: "prime_factors", title: "Look at prime factors", kind: "conceptual", text: ["Write each number as a product of primes: 8 = 2 × 2 × 2, 15 = 3 × 5.", "No prime appears in both, so they are co-prime."] },
@@ -1703,7 +1709,7 @@ B07.push(
     solve: ([f, a, b, c]) => {
       const opts = ordered(`agwrite:${f},${a},${b},${c}`, WRITE[f](a, b, c));
       const right = WRITE[f](a, b, c)[0];
-      return { steps: [{ id: "write", op: "model", competency: OOO, inputs: [f], value: right }, { id: "value", op: "evaluate", competency: OOO, inputs: [right], value: evalText(right) }], answer: opts.indexOf(right) };
+      return { steps: [{ id: "write", op: "model", competency: OOO, inputs: [f], value: right }, { id: "value", op: "evaluate", competency: OOO, inputs: [right], value: evalText(right) }, { id: "pick", op: "choose the option", competency: OOO, inputs: [right], value: opts.indexOf(right) }], answer: opts.indexOf(right) };
     },
     // independent: act the story out step by step, then evaluate every option; only the chosen one may give that number
     validate: ([f, a, b, c], v) => {
@@ -1717,7 +1723,7 @@ B07.push(
       return [Bg("brackets", "conceptual", OOO, WRITE_SAYS[f][0], opts.indexOf(all[1])), Bg("order-of-story", "procedural", OOO, WRITE_SAYS[f][1], opts.indexOf(all[2]))];
     },
     variants: () => [],
-    explain: (st) => (st.id === "write" ? `The story is ${st.value}` : `${st.inputs[0]} = ${st.value}`),
+    explain: (st) => (st.id === "write" ? `The story is ${st.value}` : st.id === "pick" ? `The expression that tells the story is ${st.inputs[0]}, so the answer is option ${"ABCD"[Number(st.value)]}` : `${st.inputs[0]} = ${st.value}`),
     domain: [[0, 5], [2, 40], [2, 12], [2, 12]],
     keep: writeOk,
     cap: 360,
@@ -1784,7 +1790,7 @@ B07.push(
     keep: (p) => termOk(p) && firstSeeds("agterm", 150, (k) => termExpr(k).text).has(p[0]),
     difficulty: ([seed, ask]) => (ask === 0 ? (termExpr(seed).terms.some((t) => t.nums === 3) ? 2 : 1) : 3),
     teach: {
-      idea: "The terms of an expression are the parts joined by + and − (outside brackets). Each term carries the sign in front of it: 20 − 3 × 4 + 6 is 20 + (−12) + 6, with terms 20, −3 × 4 and 6.",
+      idea: "The terms of an expression are the parts joined by + and − (outside brackets). Each term carries the sign in front of it: in a − b × c + d the terms are a, −b × c and d, because a product is worked out as one piece.",
       method: "Read along the expression and cut it at every + and − that is not inside brackets. Each piece, with the sign before it, is a term; work out each term on its own.",
       alternatives: [
         { id: "underline", title: "Underline each term", kind: "procedural", text: ["Underline each piece between the + and − signs; a whole bracket and whatever multiplies it stays in one piece.", "Count the underlined pieces, and write the sign in front of each."] },
@@ -1851,8 +1857,8 @@ B07.push(
     cap: 400,
     difficulty: ([ctx, , , op]) => (ctx === 0 && op === 0 ? 1 : op === 0 ? 2 : 3),
     teach: {
-      idea: "Only amounts in the same unit can be added or taken away. 1 m = 100 cm, and 1 kg = 1000 g, 1 km = 1000 m, 1 L = 1000 mL, so the smaller unit becomes a decimal of the larger one.",
-      method: "Change the amount in the smaller unit into the larger unit (divide by 100 or 1000), line up the decimal points, then add or subtract.",
+      idea: "Only amounts in the same unit can be added or taken away. A metre is a hundred centimetres, and a kilogram is a thousand grams, a kilometre a thousand metres, a litre a thousand millilitres, so the smaller unit becomes a decimal of the larger one.",
+      method: "Change the amount in the smaller unit into the larger unit (divide by a hundred or a thousand), line up the decimal points, then add or subtract.",
       alternatives: [
         { id: "all_small", title: "Work in the smaller unit", kind: "procedural", text: ["Change both amounts into the smaller unit: 2.5 kg = 2500 g.", "Add or subtract the whole numbers, then change back: 2500 g + 750 g = 3250 g = 3.25 kg."] },
         { id: "place_value", title: "Use a place-value table", kind: "conceptual", text: ["Write the amounts in a table with columns ones, tenths, hundredths, thousandths of the larger unit.", "750 g is 0.750 kg: the 7 goes in the tenths column."] },
@@ -2004,7 +2010,7 @@ B07.push(
       return mode === 0 ? `Two temple bells ring every ${A} and every ${Bn} seconds, and have just rung together. ${name(g)} knows that the HCF of ${A} and ${Bn} is ${g}. Using HCF × LCM = product of the two numbers, after how many seconds will the bells next ring together?` : mode === 1 ? `Two ropes have whole-number lengths in metres. The HCF of the two lengths is ${g} m and their LCM is ${L} m. One rope is ${A} m long. How long is the other rope, in metres?` : `Two ribbons, ${A} cm and ${Bn} cm long, are to be cut into pieces all of the same length, as long as possible, with nothing left over. ${name(g)} knows that ${L} cm is the smallest length that both ${A} and ${Bn} divide exactly. Using HCF × LCM = product of the two lengths, how long is each piece, in cm?`;
     },
     teach: {
-      idea: "For two numbers, HCF × LCM = the product of the numbers: the common prime factors are counted once in the HCF and the rest in the LCM, so together they use every prime factor of both numbers exactly once.",
+      idea: "For two numbers, HCF × LCM = the product of the numbers: for each prime factor, the HCF uses it the smaller number of times it appears in the two numbers and the LCM the larger number of times, so together they use it exactly as often as the two numbers do altogether.",
       method: "Write HCF × LCM = first number × second number, put in the three values you know, and divide to find the fourth.",
       alternatives: [
         { id: "check_example", title: "Check with a small example", kind: "conceptual", text: ["Take 4 and 6: HCF 2, LCM 12. 2 × 12 = 24 = 4 × 6.", "Use the same pattern with the numbers in the question."] },
@@ -2070,7 +2076,7 @@ B07.push(
     },
     teach: {
       idea: "A percentage is a number of hundredths, and a decimal is a number of tenths, hundredths or thousandths. Either can be written as a fraction and then simplified.",
-      method: "Percentage: write it over 100 (multiply top and bottom by 10 to clear a decimal point, as 12.5/100 = 125/1000). Decimal: write the digits over 10, 100 or 1000 (one zero for each decimal place). Then divide the top and bottom by their HCF.",
+      method: "Percentage: write it over a hundred (if it has a decimal point, multiply top and bottom by ten until it is gone). Decimal: write the digits over ten, a hundred or a thousand (one zero for each decimal place). Then divide the top and bottom by their HCF.",
       alternatives: [
         { id: "known_facts", title: "Build from facts you know", kind: "conceptual", text: ["50% = 1/2, 25% = 1/4, 12.5% = 1/8, 20% = 1/5.", "37.5% = 3 × 12.5% = 3/8; 0.75 = 3 × 0.25 = 3/4."] },
         { id: "hcf_first", title: "Find the HCF in one go", kind: "procedural", text: ["Find the HCF of the top and bottom (for 375 and 1000 it is 125).", "Divide both by it once: 375/1000 = 3/8."] },
@@ -2092,7 +2098,7 @@ B07.push(
     solve: (p) => {
       const { opts, right } = fdOpts(p);
       const [mode, n, d] = p;
-      return { steps: [{ id: "divide", op: "divide", competency: "MATH.number.long-division", inputs: [mode === 0 ? n : 100 * n, d], value: mode === 0 ? longDiv(n, d) : longDiv(100 * n, d) }, { id: "write", op: "write", competency: PERC, inputs: [mode], value: right }], answer: opts.indexOf(right) };
+      return { steps: [{ id: "divide", op: "divide", competency: "MATH.number.long-division", inputs: [mode === 0 ? n : 100 * n, d], value: mode === 0 ? longDiv(n, d) : longDiv(100 * n, d) }, { id: "write", op: "write", competency: PERC, inputs: [mode], value: right }, { id: "pick", op: "choose the option", competency: PERC, inputs: [right], value: opts.indexOf(right) }], answer: opts.indexOf(right) };
     },
     // independent: multiply the chosen decimal back by the denominator (and by 100 for a percentage): it must give the numerator
     validate: ([mode, n, d], v) => {
@@ -2111,7 +2117,7 @@ B07.push(
       ];
     },
     variants: () => [],
-    explain: (st) => (st.id === "divide" ? `${st.inputs[0]} ÷ ${st.inputs[1]} = ${st.value}` : `So the ${st.inputs[0] === 0 ? "decimal" : "percentage"} is ${st.value}`),
+    explain: (st) => (st.id === "divide" ? `${st.inputs[0]} ÷ ${st.inputs[1]} = ${st.value}` : st.id === "pick" ? `${st.inputs[0]} is option ${"ABCD"[Number(st.value)]}, so the answer is ${"ABCD"[Number(st.value)]}` : `So the ${st.inputs[0] === 0 ? "decimal" : "percentage"} is ${st.value}`),
     domain: [[0, 1], [1, 99], [4, 50]],
     keep: fdOk,
     cap: 300,
@@ -2127,8 +2133,8 @@ B07.push(
           ? `${n} out of every ${d} children in a school come by bus. ${name(n + d)} wants to write this as a percentage for the school magazine. Which percentage is it?`
           : `This year a village had ${n}/${d} times last year's rainfall. ${name(n + d)} wants to write this year's rainfall as a percentage of last year's. Which percentage is it?`,
     teach: {
-      idea: "A fraction n/d means n ÷ d. Dividing gives the decimal; a percentage is that decimal × 100 (the number of hundredths).",
-      method: "Divide the numerator by the denominator (long division, adding zeros after the point), or scale the fraction to a denominator of 10, 100 or 1000. For a percentage, multiply the decimal by 100.",
+      idea: "A fraction n/d means n ÷ d. Dividing gives the decimal; a percentage is that decimal times a hundred (the number of hundredths).",
+      method: "Divide the numerator by the denominator (long division, adding zeros after the point), or scale the fraction to a denominator of ten, a hundred or a thousand. For a percentage, multiply the decimal by a hundred.",
       alternatives: [
         { id: "scale", title: "Scale to 100 or 1000", kind: "procedural", text: ["3/8: 8 × 125 = 1000, so 3/8 = 375/1000 = 0.375.", "7/20: 20 × 5 = 100, so 7/20 = 35/100 = 0.35 = 35%."] },
         { id: "eighths", title: "Use known eighths and quarters", kind: "conceptual", text: ["1/8 = 0.125 = 12.5%, so 3/8 = 0.375 = 37.5% and 5/8 = 0.625 = 62.5%.", "1/4 = 0.25 = 25%, so 5/4 = 1.25 = 125%."] },
@@ -2214,7 +2220,9 @@ B07.push(
     solve: ([mode, a, b]) => {
       const S = euclidSteps(a, b);
       const steps = S.map((s, i) => ({ id: `div${i + 1}`, op: "divide", competency: EUC, inputs: [s.a, s.b, s.q], value: s.r }));
-      return { steps: mode === 0 ? steps : steps.slice(0, 2), answer: mode === 0 ? S.length : S[1].r };
+      const answer = mode === 0 ? S.length : S[1].r;
+      const last = mode === 0 ? { id: "count", op: "count", competency: EUC, inputs: [S.length], value: answer } : { id: "second", op: "read", competency: EUC, inputs: [S[1].a, S[1].b], value: answer };
+      return { steps: [...(mode === 0 ? steps : steps.slice(0, 2)), last], answer };
     },
     // independent: subtract the smaller number again and again (Euclid's subtraction form); each run of the same subtraction is one division
     validate: ([mode, a, b], v) => {
@@ -2240,7 +2248,7 @@ B07.push(
       return [ans + 1, ans + 2, ans - 1, mode === 1 ? S[2].r : ans + 3].filter((x) => x >= 0 && x !== ans);
     },
     variants: () => [],
-    explain: (st) => `${st.inputs[0]} = ${st.inputs[1]} × ${st.inputs[2]} + ${st.value}`,
+    explain: (st) => (st.id === "count" ? `${st.value} divisions altogether, counting the last one with remainder 0` : st.id === "second" ? `In the second division, ${st.inputs[0]} ÷ ${st.inputs[1]}, the remainder is ${st.value}` : `${st.inputs[0]} = ${st.inputs[1]} × ${st.inputs[2]} + ${st.value}`),
     domain: [[0, 1], [21, 999], [20, 998]],
     keep: edOk,
     cap: 400,

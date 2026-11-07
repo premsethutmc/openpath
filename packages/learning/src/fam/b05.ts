@@ -1242,8 +1242,8 @@ export const B05: Def[] = [
     difficulty: ([q, n]) => (n === 1 || PARTS[q] === 500 ? 1 : PARTS[q] === 125 ? 3 : 2),
     word: ([q, n, kind]) => (kind ? `${name(q + n)} fills small bottles of ${PARTS[q]} mL from a ${n} L can of buttermilk for a class party. How many bottles can be filled?` : `A shopkeeper packs ${n} kg of groundnuts into packets of ${PARTS[q]} g each. How many packets does she make?`),
     teach: {
-      idea: "1 kg = 1000 g and 1 L = 1000 mL. Two 500 g packets make 1 kg, four 250 g packets make 1 kg, and so on.",
-      method: "Find how many parts make 1 kg (or 1 L): 1000 ÷ the part. Then multiply by the number of kilograms (or litres).",
+      idea: "A kilogram is a thousand grams and a litre is a thousand millilitres. Equal packets that together weigh a thousand grams make 1 kg.",
+      method: "Find how many parts make 1 kg (or 1 L): divide a thousand by the size of one part. Then multiply by the number of kilograms (or litres).",
       visual: ([q]) => ({ type: "bars", title: "Parts in 1 kg", labels: Array.from({ length: 1000 / PARTS[q] }, (_, i) => `${i + 1}`), values: Array.from({ length: 1000 / PARTS[q] }, () => PARTS[q]) }),
       alternatives: [
         { id: "skip_count", title: "Skip-count to 1000", kind: "procedural", text: ["Count up in parts: 250, 500, 750, 1000 — that is 4 parts in 1 kg.", "Each extra kilogram needs the same number of parts again."] },
@@ -1350,7 +1350,7 @@ export const B05: Def[] = [
     word: ([w, t, u, v]) => (w === 0 ? `${name(t + u)}'s ribbon is 0.${t} m long and ${name(t + u + 1)}'s is 0.${u}${v} m long. Which ribbon is longer? Write its length in metres.` : `${name(t + u)} jumped ${w}.${t} m and ${name(t + u + 1)} jumped ${w}.${u}${v} m in the long jump. Which is the longer jump? Write the length in metres.`),
     teach: {
       idea: "Decimals are compared place by place from the left, like whole numbers: first the wholes, then the tenths, then the hundredths. More digits does not mean bigger.",
-      method: "Write both with the same number of places (0.7 = 0.70) and compare them as hundredths: 70 hundredths is more than 65 hundredths.",
+      method: "Write both with the same number of places by putting a zero after the tenths digit, then compare them as hundredths: the one with more hundredths is bigger.",
       visual: ([, t]) => ({ type: "grid", rows: 10, cols: 10, shaded: 10 * t }),
       alternatives: [
         { id: "money", title: "Think of rupees", kind: "conceptual", text: ["₹0.70 is 70 paise and ₹0.65 is 65 paise.", "70 paise is more, so 0.7 is greater than 0.65."] },
@@ -1427,7 +1427,9 @@ export const B05: Def[] = [
     solve: ([L, T, H, r]) => ({
       steps: [
         { id: "lakhs", op: "place", competency: LARGE, inputs: [L, 100000], value: L * 100000, justification: { rule: "positional-value" as const, digit: L, placeValue: 100000, placeName: "lakhs" } },
-        { id: "thousands", op: "place", competency: THOU, inputs: [T, 1000], value: T * 1000, justification: { rule: "positional-value" as const, digit: T, placeValue: 1000, placeName: "thousands" } },
+        // a two-digit thousands period fills two places: its leading digit is in the ten-thousands place (the step's expression
+        // names both digits), so the justification never calls a two-digit number a digit
+        { id: "thousands", op: "place", competency: THOU, inputs: [T, 1000], value: T * 1000, justification: T >= 10 ? { rule: "positional-value" as const, digit: Math.floor(T / 10), placeValue: 10000, placeName: "ten thousands" } : { rule: "positional-value" as const, digit: T, placeValue: 1000, placeName: "thousands" } },
         { id: "rest", op: "place", competency: PV, inputs: [H, REST[r]], value: H * 100 + REST[r], justification: { rule: "positional-value" as const, digit: H, placeValue: 100, placeName: "hundreds" } },
       ],
       answer: L * 100000 + T * 1000 + H * 100 + REST[r],
@@ -1452,7 +1454,14 @@ export const B05: Def[] = [
     },
     distractors: ([L, T, H, r]) => [L * 1000000 + T * 1000 + H * 100 + REST[r], L * 100000 + T * 10000 + H * 100 + REST[r], L * 100000 + T * 1000 + H * 10 + REST[r]],
     variants: () => [],
-    explain: (s) => (s.id === "lakhs" ? `${s.inputs[0]} lakh = ${ind(Number(s.value))}` : s.id === "thousands" ? `${s.inputs[0]} thousand = ${ind(Number(s.value))}` : `${s.inputs[0]} hundred and ${s.inputs[1]} = ${s.value}; put the periods together`),
+    explain: (s) =>
+      s.id === "lakhs"
+        ? `${s.inputs[0]} lakh = ${ind(Number(s.value))}`
+        : s.id === "thousands"
+          ? Number(s.inputs[0]) >= 10
+            ? `${s.inputs[0]} thousand = ${ind(Number(s.value))}: the thousands period holds ${Math.floor(Number(s.inputs[0]) / 10)} ten thousand and ${Number(s.inputs[0]) % 10} thousand`
+            : `${s.inputs[0]} thousand = ${ind(Number(s.value))}`
+          : `${s.inputs[0]} hundred and ${s.inputs[1]} = ${s.value}; put the periods together`,
     domain: [[0, 9], [0, 99], [0, 9], [0, 19]],
     cap: 400,
     difficulty: ([L, T, H, r]) => [L === 0, T < 10, H === 0, REST[r] < 10].filter(Boolean).length >= 2 ? 3 : L === 0 ? 1 : 2,
@@ -1509,7 +1518,7 @@ export const B05: Def[] = [
     word: ([seed]) => `${name(seed)} notes the kilometres travelled by four buses of a depot in Salem: ${cmpList(seed).map(ind).join("; ")}. List them from the shortest distance to the longest, in brackets, without commas inside the numbers.`,
     teach: {
       idea: "A number with more digits is bigger. When two numbers have the same number of digits, the first place where their digits differ decides.",
-      method: "First sort by how many digits each number has. Then, for numbers with the same number of digits, compare ten thousands, then thousands, then hundreds … until the digits differ.",
+      method: "First sort by how many digits each number has. Then, for numbers with the same number of digits, compare their digits from the left, starting at the largest place they have (lakhs first when they have six digits, ten lakhs first when they have seven), then the next place down, until the digits differ.",
       visual: ([seed]) => ({ type: "table", head: ["TTh", "Th", "H", "T", "O"], rows: cmpList(seed).map((x) => String(x).padStart(5, " ").split("")) }),
       alternatives: [
         { id: "chart", title: "Line them up in a place-value chart", kind: "procedural", text: ["Write each number in a place-value chart so the ones are in one column.", "Read down the chart from the left: the first column where the digits differ shows which number is bigger."] },
@@ -1636,7 +1645,7 @@ export const B05: Def[] = [
     difficulty: ([a, d, k]) => (a * d < 100 && k === 1 ? 1 : k === 1 ? 2 : 3),
     word: ([a, d, k]) => (k === 2 ? `A school buys ${a} chairs at ₹${d * 100} each. How many rupees is that?` : `A bus ticket to the Transport Museum costs ₹${d * 10}. How many rupees do ${a} tickets cost?`),
     teach: {
-      idea: `Multiplying by 40 is multiplying by 4 and then by 10, because 40 = 4 × 10.`,
+      idea: "Multiplying by a multiple of ten or a hundred is multiplying by its non-zero digit and then by ten or a hundred, because the multiplier is that digit times ten or a hundred.",
       method: "Multiply by the non-zero digit first, then put the zeros of the multiplier on the end of the answer.",
       visual: ([a, d]) => ({ type: "array", rows: d, cols: Math.min(a, 20) }),
       alternatives: [
@@ -3092,7 +3101,7 @@ const NUM_MORE: Def[] = [
     difficulty: ([kind, a, k]) => (kind === 1 ? 3 : k <= 4 && a <= 20 ? 1 : 2),
     word: ([kind, a, k]) => (kind === 0 ? `${name(a)} saves ₹${a} on the first day, ₹${a + 1} on the second, ₹${a + 2} on the third, and so on, one rupee more each day, for ${k} days. How many rupees is that altogether?` : `The house numbers of ${k === 3 ? "three" : "five"} houses in a row on a street go up by 1 (they are consecutive) and add up to ${k * a + (k * (k - 1)) / 2}. What is the smallest house number?`),
     teach: {
-      idea: "In a run of consecutive numbers, the middle number is the average: 3 consecutive numbers add up to 3 × the middle one. The first and last together make the same total as the second and second-last.",
+      idea: "In a run of consecutive numbers, the middle number is the average: an odd number of consecutive numbers add up to how many there are × the middle one. The first and last together make the same total as the second and second-last.",
       method: "To add them: number of terms × (first + last) ÷ 2. To find them from the sum (an odd number of them): sum ÷ how many = the middle; count back to the smallest.",
       alternatives: [
         { id: "staircase", title: "Make a staircase", kind: "conceptual", text: ["Draw the numbers as towers of blocks: each tower is one block taller than the last.", "Move blocks from the tall end to the short end: all towers become as tall as the middle one."] },
@@ -3227,8 +3236,8 @@ const NUM_MORE: Def[] = [
     difficulty: ([k]) => (k <= 3 ? 1 : k <= 5 ? 2 : 3),
     word: ([k, s]) => `${RND_CTX(k, s % 4, rndNum(k, s))} A newspaper reports this number rounded to the nearest ${RND_PLACE[k]}. What number does it print? (Write the number without commas.)`,
     teach: {
-      idea: "Large numbers in news and plans are usually rounded: 4,37,862 people is 'about 4,40,000' to the nearest ten thousand. Rounding finds the nearer of the two round numbers on either side.",
-      method: "Find the place you round to, look at the digit just to its right: 0–4 keep the place and write zeros after it; 5–9 add 1 to the place and write zeros after it.",
+      idea: "Large numbers in news and plans are usually rounded, for example to the nearest thousand or ten thousand, so they are easy to say and remember. Rounding finds the nearer of the two round numbers on either side.",
+      method: "Find the place you round to, look at the digit just to its right: if it is less than five, keep the place and write zeros after it; if it is five or more, add 1 to the place and write zeros after it.",
       visual: ([k, s]) => {
         const n = rndNum(k, s);
         const u = 10 ** k;
@@ -3297,7 +3306,7 @@ const NUM_MORE: Def[] = [
     difficulty: ([mode, a, b]) => (mode === 1 ? 3 : a % 10 >= 5 || b % 10 >= 5 ? 2 : 1),
     word: ([mode, a, b]) => (mode === 0 ? `A school orders ${a} cartons of notebooks with ${b} notebooks in each carton. About how many notebooks is that? Estimate by rounding each number to the nearest ten.` : `A cinema hall sells ${a} tickets a day for ${b} days. About how many tickets is that? Estimate by rounding ${a} to the nearest hundred and ${b} to the nearest ten.`),
     teach: {
-      idea: "Rounding both numbers turns a hard product into an easy one (48 × 32 ≈ 50 × 30). The estimate shows roughly how big the exact answer must be.",
+      idea: "Rounding both numbers turns a hard product into an easy one: numbers close to round tens are multiplied as those round tens. The estimate shows roughly how big the exact answer must be.",
       method: "Round each number as asked, multiply the non-zero digits, then put back all the zeros of both rounded numbers.",
       alternatives: [
         { id: "area", title: "Think of a rectangle", kind: "conceptual", text: ["A product is the area of a rectangle. Rounding the sides a little changes the area only a little.", "50 by 30 is easy to picture: 15 hundreds."] },
@@ -3459,7 +3468,7 @@ const NUM_MORE: Def[] = [
     word: ([place, s]) => [`A parcel weighs ${d3(decThou(s))} kg. The courier's bill shows the weight to the nearest whole kilogram. What weight is on the bill, in kg?`, `${name(s)} ${rdecEvent(decThou(s))} in a time the stopwatch showed as ${d3(decThou(s))} seconds. The record book writes times to the nearest tenth of a second. What time is written, in seconds?`, `A jeweller weighs a gold chain at ${d3(decThou(s))} g and writes the weight to the nearest hundredth of a gram. What weight is written, in grams?`][place],
     teach: {
       idea: "Rounding a decimal works like rounding whole numbers: find which of the two numbers on either side, at the place asked for, it is nearer to.",
-      method: "Find the place you round to. Look at the digit just to its right: 0–4 keep the place and drop the digits after it; 5–9 add 1 to the place and drop the digits after it.",
+      method: "Find the place you round to. Look at the digit just to its right: if it is less than five, keep the place and drop the digits after it; if it is five or more, add 1 to the place and drop the digits after it.",
       visual: ([place, s]) => {
         const th = decThou(s);
         const u = [1000, 100, 10][place];
@@ -3754,8 +3763,8 @@ const MEAS_MORE: Def[] = [
       ][k];
     },
     teach: {
-      idea: "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL, 1 km = 1000 m. To change into the larger unit, see how many whole large units fit, and what is left.",
-      method: "Divide by 100, 10 or 1000: the whole number of times is the large unit; the remainder is the small unit (3450 g = 3 kg 450 g).",
+      idea: "1 m is a hundred cm and 1 cm is ten mm; 1 kg, 1 g, 1 L and 1 km are each a thousand of the smaller unit (g, mg, mL and m). To change into the larger unit, see how many whole large units fit, and what is left.",
+      method: "Divide by how many small units make one large unit (a hundred, ten or a thousand): the whole number of times is the large unit; the remainder is the small unit.",
       alternatives: [
         { id: "split_digits", title: "Split the digits", kind: "procedural", text: ["For × 1000 units, the last three digits are the small unit: 3|450 g = 3 kg 450 g; 3|045 g = 3 kg 45 g.", "For cm to m, the last two digits; for mm to cm, the last digit."] },
       ],
@@ -3808,8 +3817,8 @@ const MEAS_MORE: Def[] = [
       return [`A tailor measures ${a} cm of cloth. The bill shows it in metres. What number of metres is on the bill?`, `A parcel weighs ${a} g. The post office writes the weight in kilograms. What does it write?`, `A bottle of oil holds ${a} mL. How many litres is that?`, `A walk is ${a} m long. How many kilometres is that?`, `A screw is ${a} mm long. How many centimetres is that?`, `A medicine has ${a} mg of a vitamin. How many grams is that?`][k];
     },
     teach: {
-      idea: "A small unit is a fraction of the large unit: 1 g is one thousandth of a kg, so 3450 g = 3450 thousandths of a kg = 3.450 kg = 3.45 kg.",
-      method: "Divide by 1000 (or 100, or 10): move the decimal point 3 (or 2, or 1) places to the left, filling empty places with zeros (3045 g = 3.045 kg).",
+      idea: "A small unit is a fraction of the large unit: 1 g is one thousandth of a kg, so a number of grams is that many thousandths of a kilogram.",
+      method: "Divide by a thousand (or a hundred, or ten): move the decimal point three (or two, or one) places to the left, filling empty places with zeros.",
       alternatives: [
         { id: "chart", title: "A place-value chart", kind: "procedural", text: ["Write the amount in a chart with kg in the ones column and g in the tenths, hundredths and thousandths columns.", "3045 g: 3 in the ones, then 0, 4, 5: 3.045 kg."] },
       ],
@@ -3872,8 +3881,8 @@ const MEAS_MORE: Def[] = [
       return kind === 0 ? `${name(s)}'s bag of potatoes weighs ${w.a} kg ${w.b} g and ${name(s + 1)}'s weighs ${w.c} g. Which sign is true: ${name(s)}'s bag ☐ ${name(s + 1)}'s bag? Choose <, = or >.` : `One medicine packet holds ${w.a} g ${w.b} mg of powder and another holds ${w.c} mg. Which sign is true: first packet ☐ second packet? Choose <, = or >.`;
     },
     teach: {
-      idea: "Weights can be compared only in the same unit: 1 kg = 1000 g and 1 g = 1000 mg.",
-      method: "Change the weight in two units into the small unit (2 kg 50 g = 2050 g), then compare the numbers.",
+      idea: "Weights can be compared only in the same unit: 1 kg is a thousand grams and 1 g is a thousand milligrams.",
+      method: "Change the weight written in two units into the small unit (kilograms into grams, grams into milligrams), then compare the numbers.",
       alternatives: [
         { id: "large_first", title: "Compare the large units first", kind: "procedural", text: ["Change the single amount into large and small units (2500 g = 2 kg 500 g).", "Compare kilograms first; only if they are equal, compare the grams."] },
       ],
@@ -3931,8 +3940,8 @@ const MEAS_MORE: Def[] = [
     difficulty: ([kind, , b]) => (kind === 0 ? 1 : kind === 2 ? 2 : b % 2 ? 3 : 2),
     word: ([kind, a, b]) => (kind === 2 ? `${name(a + b)} wants to estimate a length without a tape. ${REFS[b][0]} is about ${REFS[b][1]} m ${REFS[b][2]}. ${REFS[b][3](a)} Estimate the length in metres.` : `${ftHeight(kind, a, b) ? `${name(a + b)}'s height is written as` : `A tailor's old notebook gives the length of a piece of cloth as`} ${a} ${a === 1 ? "foot" : "feet"}${kind === 1 ? ` ${b} ${b === 1 ? "inch" : "inches"}` : ""}${ftHeight(kind, a, b) ? " on an old card" : ""}. Using 1 foot ≈ 30 cm${kind === 1 ? " and 1 inch ≈ 2.5 cm" : ""}, about how many centimetres is that?`),
     teach: {
-      idea: "Feet and inches are older units still used for heights: 12 inches make 1 foot, 1 inch is about 2.5 cm and 1 foot about 30 cm. A known length (a door, a step, a bus) can be used as a ruler to estimate bigger lengths.",
-      method: "Change feet to cm (× 30) and inches to cm (× 2.5) and add. To estimate with a known length, count how many of it fit and multiply.",
+      idea: "Feet and inches are older units still used for heights: twelve inches make 1 foot, 1 inch is about two and a half cm and 1 foot about thirty cm. A known length (a door, a step, a bus) can be used as a ruler to estimate bigger lengths.",
+      method: "Change feet to cm (multiply by about thirty) and inches to cm (multiply by about two and a half) and add. To estimate with a known length, count how many of it fit and multiply.",
       alternatives: [
         { id: "body", title: "Use your body", kind: "conceptual", text: ["Your foot is close to a foot long for an adult; a thumb-width is close to an inch.", "Your step is about half a metre: 10 steps make about 5 m."] },
       ],
@@ -4005,7 +4014,7 @@ const MEAS_MORE: Def[] = [
         `${name(x)}'s uncle sends ${10 * x} US dollars home when 1 dollar is worth ₹${82 + r}. How many rupees is that?`,
       ][kind],
     teach: {
-      idea: "A conversion factor says how many of one unit make one of the other: 1 inch = 2.54 cm, 1 km/h = 5/18 m/s. Converting is multiplying by the factor, because the amount is proportional.",
+      idea: "A conversion factor says how many of one unit make one of the other, for example how many centimetres make 1 inch. Converting is multiplying by the factor, because the amount is proportional.",
       method: "Write the factor as 'new units per old unit' and multiply. Check the direction: going to a smaller unit gives a bigger number.",
       alternatives: [
         { id: "chain", title: "Change one unit at a time", kind: "procedural", text: ["For speeds, change km into m (× 1000), then per hour into per second (÷ 3600).", "72 km/h = 72 000 m per 3600 s = 20 m/s."] },
@@ -4371,7 +4380,7 @@ const MIX_MORE: Def[] = [
     },
     teach: {
       idea: "In a matching puzzle every person goes with exactly one thing and every thing with exactly one person. Each clue rules out (or fixes) some pairs; when only one choice is left in a row or column, it must be the answer.",
-      method: "Draw a 4 × 4 grid (people down, things across). Mark ✗ for each 'does not' clue and ✓ for each 'does' clue (with ✗ for the rest of that row and column). Keep filling until every row has one ✓.",
+      method: "Draw a grid with the people down the side and the things across the top. Mark ✗ for each 'does not' clue and ✓ for each 'does' clue (with ✗ for the rest of that row and column). Keep filling until every row has one ✓.",
       alternatives: [
         { id: "try_all", title: "Try the possibilities", kind: "procedural", text: ["Start with the person who has the most ✗: try each thing still possible for them.", "If a choice breaks a clue later, go back and try the next one."] },
       ],
@@ -4542,7 +4551,7 @@ const DEC_MORE: Def[] = [
       return `A lab reading, in millilitres, has ${dpvDigits(q.ds)}. Which number is the reading?`;
     },
     teach: {
-      idea: "Each place is ten times the place to its right: tens, ones, then after the point tenths (1/10), hundredths (1/100), thousandths (1/1000). A digit's place value is the digit times its place.",
+      idea: "Each place is ten times the place to its right: tens, ones, then after the point tenths, hundredths and thousandths. A digit's place value is the digit times its place.",
       method: "Write the number in a place-value chart (T, O . t, h, th). Read each digit with its place; for the expanded form, add the place values of the non-zero digits.",
       alternatives: [
         { id: "money_mass", title: "Think of kilograms and grams", kind: "conceptual", text: ["1 g is one thousandth of a kilogram, so 2.305 kg is 2 kg, 3 tenths, 0 hundredths and 5 thousandths.", "That is 2 kg 305 g: 2 + 0.3 + 0.005."] },
@@ -4597,8 +4606,8 @@ const DEC_MORE: Def[] = [
       return w === 0 ? `In a science class, four seedlings were measured as ${m} tall. List the heights from shortest to tallest, as numbers in brackets.` : w < 2 || w > 5 ? `Four bamboo poles for a festival pandal were measured as ${m} long. List the lengths from shortest to longest, as numbers in brackets.` : `In a long-jump event, four jumps were measured as ${m}. List the jumps from shortest to longest, as numbers in brackets.`;
     },
     teach: {
-      idea: "Decimals are compared place by place from the left: wholes, then tenths, then hundredths, then thousandths. Writing them all with the same number of places (0.5 = 0.500) makes this easy.",
-      method: "Fill each number with zeros to three decimal places, then compare them like whole numbers of thousandths: 0.500, 0.450, 0.505, 0.550.",
+      idea: "Decimals are compared place by place from the left: wholes, then tenths, then hundredths, then thousandths. Writing them all with the same number of decimal places, by adding zeros at the end, makes this easy.",
+      method: "Fill each number with zeros at the end so that all have the same number of decimal places, then compare them like whole numbers.",
       alternatives: [
         { id: "number_line", title: "Place them on a number line", kind: "conceptual", text: ["Draw a line from the whole number to the next one, marked in tenths.", "Put each decimal in its tenth, then decide the order inside the tenth by the hundredths and thousandths."] },
       ],
@@ -4658,8 +4667,8 @@ const DEC_MORE: Def[] = [
       return p[0] === 0 ? `A shop label says a packet holds ${q.dec} kg of tea. ${name(p[1])} wants to write this as a fraction of a kilogram. Which fraction is it?` : p[0] === 1 ? (q.val > 1 ? `A ribbon is ${q.dec} m long. ${name(p[1])} writes its length in metres as a fraction in simplest form. Which fraction is it?` : `${name(p[1])} drank ${q.dec} of a bottle of water. What fraction of the bottle is that, in simplest form?`) : q.val > 1 ? `${name(p[1])} buys ${FRACS[p[1]][0]}/${FRACS[p[1]][1]} kg of rice. The shop's weighing scale shows kilograms as a decimal. What does the scale show?` : `${FRACS[p[1]][0]}/${FRACS[p[1]][1]} of a school's students come by bus. ${name(p[1])} must enter this in a spreadsheet as a decimal. What should be entered?`;
     },
     teach: {
-      idea: "A decimal is a fraction with a bottom number of 10, 100 or 1000: 0.07 = 7/100, 0.75 = 75/100 = 3/4. A fraction is a division, so 3/8 = 3 ÷ 8 = 0.375.",
-      method: "Decimal to fraction: write the digits over 10, 100 or 1000 (by the last place) and simplify. Fraction to decimal: make the bottom 10, 100 or 1000 by multiplying, or divide the top by the bottom.",
+      idea: "A decimal is a fraction whose bottom number is ten, a hundred or a thousand: the digits after the point are tenths, hundredths or thousandths. A fraction is a division, so dividing its top by its bottom gives its decimal.",
+      method: "Decimal to fraction: write the digits over ten, a hundred or a thousand (by the last place) and simplify. Fraction to decimal: make the bottom ten, a hundred or a thousand by multiplying, or divide the top by the bottom.",
       alternatives: [
         { id: "money", title: "Use rupees and paise", kind: "conceptual", text: ["₹0.25 is 25 paise, a quarter of a rupee: 0.25 = 1/4.", "Half a rupee is 50 paise: 1/2 = 0.50 = 0.5."] },
       ],

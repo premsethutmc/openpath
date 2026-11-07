@@ -377,7 +377,7 @@ const P1: Def[] = [
     },
     teach: {
       idea: "Doubling one factor and halving the other leaves the product unchanged; a factor next to a multiple of ten is that multiple minus (or plus) one group.",
-      method: "25 × 36 = 50 × 18 = 100 × 9 = 900. 19 × 24 = 20 × 24 − 24 = 480 − 24 = 456.",
+      method: "Keep doubling one factor and halving the other until one of them is a ten, a hundred or another easy number. Or round a factor to the nearest multiple of ten, multiply, then take away (or add) the extra group.",
       alternatives: [
         { id: "rectangle", title: "Reshape a rectangle", kind: "conceptual", text: ["Think of x × y as a rectangle of squares.", "Cut it in half along one side and put the halves end to end: twice as long, half as wide, the same squares."], visual: () => ({ type: "array", rows: 4, cols: 6 }) },
       ],
@@ -436,7 +436,7 @@ const P1: Def[] = [
       return k === 0 ? `A school orders ${b} boxes of chalk with ${a} sticks in each box. How many sticks of chalk is that?` : `A school orders ${b} boxes of chalk with ${a} sticks in each box. The first ${T} boxes go to the primary classes. How many sticks are in those ${T} boxes?`;
     },
     teach: {
-      idea: "Splitting a factor by place value turns one hard product into easier ones: 47 × 36 = 47 × 30 + 47 × 6.",
+      idea: "Splitting a factor by place value turns one hard product into easier ones: multiply by the tens part and by the ones part separately.",
       method: "Multiply by the tens (the answer ends in 0), multiply by the ones, then add the partial products.",
       visual: ([a, b]) => ({ type: "table", head: ["×", ...parts(a).map(String)], rows: parts(b).map((y) => [String(y), ...parts(a).map((x) => String(x * y))]) }),
       alternatives: [
@@ -1685,7 +1685,7 @@ const P3: Def[] = [
     word: ([a, b]) => `A printing press prints ${ind(a)} copies of a school magazine, each with ${b} pages. About how many pages does it print? Estimate by rounding each number to its greatest place.`,
     teach: {
       idea: "Rounding each factor to its greatest place gives an easy product that is close to the real one: a quick check of size.",
-      method: "Round each number, multiply the first digits, then write all the zeros of both rounded numbers: 5,000 × 40 = 20 × 10,000 = 2,00,000.",
+      method: "Round each number to its greatest place, multiply their first digits, then write after that product all the zeros of both rounded numbers.",
       alternatives: [
         { id: "powers", title: "Use powers of ten", kind: "procedural", text: ["Write 5,000 × 40 as 5 × 1,000 × 4 × 10.", "Multiply 5 × 4 = 20 and 1,000 × 10 = 10,000: 20 × 10,000 = 2,00,000."] },
       ],
@@ -1765,8 +1765,8 @@ const P3: Def[] = [
               : `A water tank held ${n} litres, and ${p}% of the water was used. How many litres are left?`;
     },
     teach: {
-      idea: "A percentage compares a part with a whole out of 100; a percentage change compares the change with the ORIGINAL amount.",
-      method: "Percentage = part ÷ whole × 100. Percentage change = change ÷ original × 100. To increase by p%, add p% of the amount (or multiply by (100 + p)/100).",
+      idea: "A percentage compares a part with a whole as a number out of a hundred; a percentage change compares the change with the ORIGINAL amount.",
+      method: "Percentage = part ÷ whole, then times a hundred. Percentage change = change ÷ original, then times a hundred. To increase an amount by p%, find p% of the amount and add it on.",
       alternatives: [
         { id: "per100", title: "Scale to 100", kind: "conceptual", text: ["Ask: if the whole were 100, how big would the part be?", "18 out of 60: 60 × 5/3 = 100, so 18 × 5/3 = 30 out of 100, or 30%."] },
       ],
@@ -1915,7 +1915,7 @@ const P3: Def[] = [
     },
     solve: (p) => {
       const [a, b, c, d] = prpTerms(p);
-      return { steps: [st("extremes", "multiply", MT, [a, d], a * d), st("means", "multiply", MT, [b, c], b * c), st("compare", "compare", PROP, [a * d, b * c], a * d === b * c ? PROP_CHOICES[0] : PROP_CHOICES[1])], answer: prpPerm(p).indexOf(a * d === b * c ? 0 : 1) };
+      return { steps: [st("extremes", "multiply", MT, [a, d], a * d), st("means", "multiply", MT, [b, c], b * c), st("compare", "compare", PROP, [a * d, b * c], a * d === b * c ? PROP_CHOICES[0] : PROP_CHOICES[1]), st("pick", "choose the option", PROP, [a * d === b * c ? PROP_CHOICES[0] : PROP_CHOICES[1]], prpPerm(p).indexOf(a * d === b * c ? 0 : 1))], answer: prpPerm(p).indexOf(a * d === b * c ? 0 : 1) };
     },
     // independent: compare the two ratios by repeated addition (a × d against b × c)
     validate: (p, v) => {
@@ -1931,7 +1931,7 @@ const P3: Def[] = [
           : [{ id: "differences-differ", kind: "conceptual", competency: "MATH.reasoning.proportional-check", says: "The differences were compared and found unequal; in a proportion the ratios are equal, so the differences usually are not.", predict: pr.indexOf(1) }];
     },
     variants: () => [],
-    explain: (s) => (s.id === "extremes" ? `Product of the extremes: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "means" ? `Product of the means: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} ${s.inputs[0] === s.inputs[1] ? "=" : "≠"} ${s.inputs[1]}: ${String(s.value).toLowerCase()}`),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : s.id === "extremes" ? `Product of the extremes: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "means" ? `Product of the means: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} ${s.inputs[0] === s.inputs[1] ? "=" : "≠"} ${s.inputs[1]}: ${String(s.value).toLowerCase()}`),
     domain: D_PRP,
     keep: K_PRP,
     cap: 360,
@@ -2031,7 +2031,7 @@ const P3: Def[] = [
       const ys = dirvYs(p);
       const xs = dirvXs(p);
       const direct = p[3] === 0;
-      return { steps: [st("ratios", "divide", PROP, ys.map((y, i) => `${y}/${xs[i]}`), direct ? p[2] : "not equal"), st("decide", "compare", PROP, [], DIRV_CHOICES[direct ? 0 : 1])], answer: dirvPerm(p).indexOf(direct ? 0 : 1) };
+      return { steps: [st("ratios", "divide", PROP, ys.map((y, i) => `${y}/${xs[i]}`), direct ? p[2] : "not equal"), st("decide", "compare", PROP, [], DIRV_CHOICES[direct ? 0 : 1]), st("pick", "choose the option", PROP, [DIRV_CHOICES[direct ? 0 : 1], direct ? "y ÷ x is the same for every pair" : "y ÷ x is not the same for every pair"], dirvPerm(p).indexOf(direct ? 0 : 1))], answer: dirvPerm(p).indexOf(direct ? 0 : 1) };
     },
     // independent: cross-multiply every pair of columns (y₁ × x₂ = y₂ × x₁ for all pairs)
     validate: (p, v) => {
@@ -2048,7 +2048,7 @@ const P3: Def[] = [
         : [{ id: "both-increase", kind: "conceptual", competency: "MATH.reasoning.proportional-check", says: "Both quantities increase together, but that is not enough: in direct variation y ÷ x is the same for every pair (and y = 0 when x = 0).", predict: pr.indexOf(0) }];
     },
     variants: () => [],
-    explain: (s) => (s.id === "ratios" ? `y ÷ x for each pair: ${s.inputs.join(", ")} — ${typeof s.value === "number" ? `all equal to ${s.value}` : "not all equal"}` : String(s.value)),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}, because ${s.inputs[1]}` : s.id === "ratios" ? `y ÷ x for each pair: ${s.inputs.join(", ")} — ${typeof s.value === "number" ? `all equal to ${s.value}` : "not all equal"}` : String(s.value)),
     domain: D_DIRV,
     cap: 300,
     difficulty: ([, , , m]) => (m === 1 ? 1 : m === 0 ? 2 : 3),

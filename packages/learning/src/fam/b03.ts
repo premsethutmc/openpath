@@ -1766,7 +1766,8 @@ export const B03: Def[] = [
     solve: ([a, b, t, k]) => {
       const N = 100 * a + (mcE(b, t, k) ?? 0);
       const A = 100 * a + b;
-      return { steps: [st("convert", "convert", LEN, [a, b], A), st("compare", "compare", LEN, [A, N], A > N ? 0 : A < N ? 1 : 2)], answer: posOf([a, b, t, k], 3, A > N ? 0 : A < N ? 1 : 2) };
+      const ans = posOf([a, b, t, k], 3, A > N ? 0 : A < N ? 1 : 2);
+      return { steps: [st("convert", "convert", LEN, [a, b], A), st("compare", "compare", LEN, [A, N], A > N ? 0 : A < N ? 1 : 2), st("pick", "choose the option", LEN, [mcChoices([a, b, t, k])[ans]], ans)], answer: ans };
     },
     // independent: compare the metres first, then the centimetres (no conversion)
     validate: (p, v) => {
@@ -1790,13 +1791,13 @@ export const B03: Def[] = [
       return out;
     },
     variants: () => [],
-    explain: (s) => (s.id === "convert" ? `${s.inputs[0]} m ${s.inputs[1]} cm = ${s.value} cm` : `Compare ${s.inputs[0]} cm with ${s.inputs[1]} cm`),
+    explain: (s) => (s.id === "convert" ? `${s.inputs[0]} m ${s.inputs[1]} cm = ${s.value} cm` : s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Compare ${s.inputs[0]} cm with ${s.inputs[1]} cm`),
     domain: [[1, 9], [1, 99], [0, 2], [0, 10]],
     cap: 400,
     difficulty: ([, b, t]) => (t === 0 ? 2 : b < 10 ? 3 : 2),
     word: ([a, b, t, k]) => `${girl(a + b)}'s skipping rope is ${a} m ${b} cm long. ${boy(a + k)}'s rope is ${100 * a + (mcE(b, t, k) ?? 0)} cm long. Whose rope is longer?`,
     teach: {
-      idea: "1 m = 100 cm, so a m b cm is a hundreds of centimetres and b more: 3 m 5 cm = 305 cm.",
+      idea: "A metre is a hundred centimetres, so a length in metres and centimetres is that many hundreds of centimetres, plus the centimetres written after the metres.",
       method: "Change the length in metres and centimetres into centimetres, then compare the two numbers of centimetres.",
       visual: ([a, b]) => ({ type: "numberline", from: 100 * a, to: 100 * a + 100, step: 10, marks: [100 * a + b] }),
       alternatives: [
@@ -2393,8 +2394,8 @@ export const B03: Def[] = [
     difficulty: ([mode, n]) => (mode === 0 && n >= 100 ? 1 : mode === 2 && (n < 1000 || n % 100 !== 0) ? 3 : 2),
     word: ([mode, n]) => [`${n < 300 ? "A plant" : "A young coconut tree"} has grown ${n} cm tall. How tall is it in metres? Write a decimal.`, `${n < 100 ? "A screw" : "A strip of ribbon"} is ${n} mm long. How long is it in centimetres? Write a decimal.`, `${name(n)} jogs ${ind(n)} m in the morning. How many kilometres is that? Write a decimal.`, `A saree border is ${dec2(n)} m long. How many centimetres is that?`][mode],
     teach: {
-      idea: "1 m = 100 cm, so 1 cm is one hundredth of a metre; 1 cm = 10 mm, so 1 mm is a tenth of a centimetre; 1 km = 1000 m, so 1 m is a thousandth of a kilometre.",
-      method: "To write a length in the bigger unit, divide by 100, 10 or 1000: move the digits that many places to the right of the decimal point. To go back, multiply.",
+      idea: "A metre is a hundred centimetres, so a centimetre is one hundredth of a metre; a centimetre is ten millimetres, so a millimetre is a tenth of a centimetre; a kilometre is a thousand metres, so a metre is a thousandth of a kilometre.",
+      method: "To write a length in the bigger unit, divide by the number of small units in one big unit: the digits move one place to the right of the decimal point for each zero (two places for a hundred, one for ten, three for a thousand). To go back, multiply.",
       visual: ([mode, n]) => (mode === 0 ? { type: "table", head: ["m", ".", "tenths", "hundredths"], rows: [[Math.floor(n / 100), ".", Math.floor(n / 10) % 10, n % 10]] } : { type: "numberline", from: 0, to: mode === 1 ? 100 : 10000, step: mode === 1 ? 10 : 1000, marks: [mode === 3 ? n : n] }),
       alternatives: [
         { id: "split", title: "Split into whole units and the rest", kind: "procedural", text: ["245 cm is 2 m and 45 cm.", "45 cm is 45 hundredths of a metre, so 245 cm = 2.45 m."] },
@@ -2413,7 +2414,7 @@ export const B03: Def[] = [
     reject: ([rel, dx, dy, s]) => (rel < 0 || rel > 2 || dx < 1 || dx > 4 || dy < -3 || dy > 3 || s < 0 || s > 5 ? "Two segments on a grid." : null),
     choices: (p) => shuf(p, "parl", PARL),
     prompt: () => "Look at the line segments AB and CD in the picture. Are they parallel, perpendicular, or neither?",
-    solve: (p) => ({ steps: [st("slopes", "compare", LINES, [`${p[1]} across, ${p[2]} up`], PARL[p[0]])], answer: posOf(p, 3, p[0], "parl") }),
+    solve: (p) => ({ steps: [st("slopes", "compare", LINES, [`${p[1]} across, ${p[2]} up`], PARL[p[0]]), st("pick", "choose the option", LINES, [PARL[p[0]]], posOf(p, 3, p[0], "parl"))], answer: posOf(p, 3, p[0], "parl") }),
     // independent: from the points drawn, two segments are parallel when the cross product of their directions is 0 and perpendicular when the dot product is 0
     validate: (p, v) => {
       const [A, Bp, C, D] = parlPts(p);
@@ -2430,7 +2431,7 @@ export const B03: Def[] = [
       return [];
     },
     variants: () => [],
-    explain: (s) => `Count the squares each segment goes across and up: they are ${String(s.value).toLowerCase()}`,
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Count the squares each segment goes across and up: they are ${String(s.value).toLowerCase()}`),
     domain: [[0, 2], [1, 4], [-3, 3], [0, 5]],
     cap: 300,
     difficulty: ([rel, , dy]) => (dy === 0 ? 1 : rel === 2 ? 3 : 2),
@@ -2711,7 +2712,8 @@ export const B03: Def[] = [
     solve: (p) => {
       const lab = collLabels(p);
       const on = [0, 1, 2].map((i) => lab[i]).sort().join("");
-      return { steps: [st("steps", "compare", LINES, [`${p[0]} across, ${p[1]} up`], on)], answer: TRIPLES.findIndex((t) => t.join("") === on) };
+      const ans = TRIPLES.findIndex((t) => t.join("") === on);
+      return { steps: [st("steps", "compare", LINES, [`${p[0]} across, ${p[1]} up`], on), st("pick", "choose the option", LINES, [TRIPLES[ans].join(", ").replace(/, (?=[^,]*$)/, " and ")], ans)], answer: ans };
     },
     // independent: test the chosen three points with the cross product of the steps between them
     validate: (p, v) => {
@@ -2727,7 +2729,7 @@ export const B03: Def[] = [
       return [B("by-eye", "procedural", LINES, `Point ${lab[3]} looks almost in line, but count the squares: each step along the line is ${p[0]} across and ${Math.abs(p[1])} ${p[1] < 0 ? "down" : "up"}, and ${lab[3]} is one square off.`, k)];
     },
     variants: () => [],
-    explain: (s) => `Each step along the line goes ${s.inputs[0]}; the points that follow this pattern are ${String(s.value).split("").join(", ")}`,
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Each step along the line goes ${s.inputs[0]}; the points that follow this pattern are ${String(s.value).split("").join(", ")}`),
     domain: [[1, 3], [-2, 2], [0, 11]],
     difficulty: ([dx, dy]) => (dy === 0 ? 1 : dx === 1 ? 2 : 3),
     figure: (p) => {

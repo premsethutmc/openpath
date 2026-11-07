@@ -928,7 +928,7 @@ export const B11: Def[] = [
     word: ([a, d, N]) => `${nm(a + d)} saves money in a box. On the first day ${nm(a + d)} puts in ₹${a}. Each day after that, ${nm(a + d)} puts in ₹${d} more than the day before, but stops before any day on which the amount would be more than ₹${N}. How many rupees are in the box at the end?`,
     teach: {
       idea: "An algorithm is a list of exact steps. Tracing it means doing every step in order and writing down each value as it changes, checking the stopping rule each time.",
-      method: "Make a table with columns K and S. Do Step 2 and Step 3, write the new values, then test Step 4 before going round again.",
+      method: "Make a table with columns K and S. Do the steps that change K and S, write the new values, then test the stopping rule before going round again.",
       visual: ([a, d, N]) => {
         const rows: (string | number)[][] = [];
         let S = 0;
@@ -2510,7 +2510,11 @@ export const B11: Def[] = [
       const [xs, ys] = dirinvData(p);
       return { type: "table", head: ["x", ...xs.map(String)], rows: [["y", ...ys.map(String)]] };
     },
-    solve: (p) => ({ steps: [{ id: "test", op: "compare", competency: PROP, inputs: [dirinvWhy(p)], value: "" }], answer: order3(p, "dirinv").indexOf(p[0] === 0 ? 0 : p[0] === 1 ? 1 : 2) }),
+    solve: (p) => {
+      const k = p[0] === 0 ? 0 : p[0] === 1 ? 1 : 2;
+      const ans = order3(p, "dirinv").indexOf(k);
+      return { steps: [{ id: "test", op: "compare", competency: PROP, inputs: [dirinvWhy(p)], value: "" }, { id: "pick", op: "choose the option", competency: PROP, inputs: [DIRINV[k]], value: ans }], answer: ans };
+    },
     // independent: test y ÷ x and x × y for every column
     validate: (p, v) => {
       if (typeof v !== "number" || !Number.isInteger(v)) return false;
@@ -2530,7 +2534,7 @@ export const B11: Def[] = [
             : [bug("products-only", "procedural", PROP, "Only x × y was checked; it changes from column to column, so 'neither' was chosen. Check y ÷ x as well: here it is the same in every column, so y is in direct proportion to x.", o.indexOf(2))];
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 3], [2, 9], [0, 5]],
     difficulty: ([t]) => (t === 0 ? 1 : t === 1 ? 2 : 3),
     teach: {
@@ -2638,7 +2642,8 @@ export const B11: Def[] = [
     reject: ([a, s]) => ((a === 0 || a === 1) && s >= 0 && s <= 199 && !primDup([a, s]) ? null : "Two questions and seeds 0 to 199 (each set of four situations once)."),
     choices: (p) => primSet(p).opts,
     prompt: ([a]) => `Which of these is ${a ? "secondary" : "primary"} data?`,
-    solve: (p) => ({ steps: [{ id: "who", op: "classify", competency: FREQ, inputs: [p[0] ? "Secondary data was collected by someone else for their own purpose" : "Primary data is collected first-hand by the person who will use it"], value: "" }], answer: primSet(p).right }),
+    // grade7-lessons@1: a last step picks the option, so the worked example ends at the answer
+    solve: (p) => ({ steps: [{ id: "who", op: "classify", competency: FREQ, inputs: [p[0] ? "Secondary data was collected by someone else for their own purpose" : "Primary data is collected first-hand by the person who will use it"], value: "" }, { id: "pick", op: "pick", competency: FREQ, inputs: [primSet(p).opts[primSet(p).right]], value: primSet(p).right }], answer: primSet(p).right }),
     // independent: look the chosen situation up in the list of first-hand collections
     validate: (p, v) => {
       if (typeof v !== "number" || !Number.isInteger(v)) return false;
@@ -2650,7 +2655,7 @@ export const B11: Def[] = [
       return d.trap >= 0 ? [bug(p[0] ? "asking-is-secondary" : "copied-is-primary", "conceptual", FREQ, p[0] ? "Asking other people questions was taken as secondary data. A survey you carry out yourself is primary data, even though other people give the answers." : "Copying figures out yourself was taken as collecting primary data. The figures were collected by someone else, so they are secondary data, whoever copies them.", d.trap)] : [];
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : String(s.inputs[0])),
     domain: [[0, 1], [0, 199]],
     keep: (p) => !primDup(p),
     difficulty: ([a]) => (a ? 2 : 1),

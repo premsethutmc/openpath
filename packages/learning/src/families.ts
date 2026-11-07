@@ -973,7 +973,7 @@ const F: Def[] = [
     // [m, n]: x² + (m+n)x + mn = (x + m)(x + □)
     reject: ([m, n]) => (m === 0 || n === 0 || Math.abs(m) > 9 || Math.abs(n) > 9 || m === n || m + n === 0 ? "Only (x + m)(x + n) with different non-zero m and n up to 9 (and m + n not 0) is supported." : null),
     prompt: ([m, n]) => `Factorise: x² ${signed(m + n)}x ${signed(m * n)} = (x ${signed(m)})(x + □). What number goes in the box (it may be negative)?`.replace(/ ([+−]) 1x/, " $1 x"),
-    solve: ([m, n]) => ({ steps: [{ id: "product", op: "divide", competency: "MATH.algebra.factorisation", inputs: [m * n, m], value: n }, { id: "check-sum", op: "add", competency: "MATH.number.integer-add", inputs: [m, n], value: m + n }], answer: n }),
+    solve: ([m, n]) => ({ steps: [{ id: "product", op: "divide", competency: "MATH.algebra.factorisation", inputs: [m * n, m], value: n }, { id: "check-sum", op: "add", competency: "MATH.number.integer-add", inputs: [m, n], value: m + n }, { id: "box", op: "subtract", competency: "MATH.algebra.factorisation", inputs: [m + n, m], value: n }], answer: n }),
     // expand the brackets back at three points
     validate: ([m, n], v) => typeof v === "number" && [-2, 1, 3].every((x) => (x + m) * (x + v) === x * x + (m + n) * x + m * n),
     bugs: ([m, n]) => [
@@ -982,7 +982,7 @@ const F: Def[] = [
       { id: "constant-minus", kind: "procedural", competency: "MATH.algebra.factorisation", says: "The given number was taken away from the constant; the two numbers multiply to the constant.", predict: m * n - m },
     ],
     variants: (p) => pairs(p, [[-5, 5], [-6, 6]], ([m, n]) => m !== 0 && n !== 0 && m !== n && m + n !== 0).slice(0, 80),
-    explain: (s) => (s.id === "product" ? `The numbers multiply to ${neg(s.inputs[0])}: ${neg(s.inputs[0])} ÷ ${par(s.inputs[1])} = ${neg(show(s.value))}` : `Check they add to the x coefficient: ${neg(s.inputs[0])} + ${par(s.inputs[1])} = ${neg(show(s.value))}`),
+    explain: (s) => (s.id === "box" ? `So the number in the box is ${neg(show(s.value))}: the x coefficient minus the given number, ${neg(s.inputs[0])} − ${par(s.inputs[1])} = ${neg(show(s.value))}` : s.id === "product" ? `The numbers multiply to ${neg(s.inputs[0])}: ${neg(s.inputs[0])} ÷ ${par(s.inputs[1])} = ${neg(show(s.value))}` : `Check they add to the x coefficient: ${neg(s.inputs[0])} + ${par(s.inputs[1])} = ${neg(show(s.value))}`),
     domain: [[-9, 9], [-9, 9]],
     // level@1 (grade7-teaching@1): a learner below Grade 8 is not asked this family's problems
     grade: () => 8,

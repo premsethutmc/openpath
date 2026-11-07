@@ -21,6 +21,11 @@ import { graph } from "./graph";
 import { selectable } from "./question-status";
 import { FAMILY_VERSION } from "./spec";
 import { strategyScopeProblems } from "./teaching-presentation";
+import grade7Scope from "../../../content/learning/teaching-scope-grade7.v1.json";
+
+/** grade7-lessons@1: in the Grade 7 teaching scope a lesson teaches every family the module draws on (each sub-skill
+ * section is tied to its own question and checked like any other section). */
+const WHOLE_LESSON = new Set((grade7Scope as { competencies: string[] }).competencies);
 
 export const LIBRARY_POLICY = "library@2";
 
@@ -125,7 +130,7 @@ function subSkills(competency: string, family: string, used: Set<string>) {
     used.add(id);
     const e = typedOf(id);
     const w = d.teach!.visual?.(e.params);
-    chapter.push({ title: d.title, text: [d.teach!.idea, d.teach!.method], math: worked(e), ...(w ? { widget: w as Screen["widget"] } : {}) });
+    chapter.push({ title: d.title, text: [d.teach!.idea, d.teach!.method], math: worked(e), ...(w ? { widget: w as Screen["widget"] } : {}), ...(WHOLE_LESSON.has(competency) ? { role: "worked-example" as const, instance: id } : {}) });
   }
   const practice = others.flatMap((f) => [tryTake(f, "practice", "typed")].filter((x): x is string => !!x));
   const transfer = others.filter((f) => FAMILIES.get(f)!.word).slice(0, 2).flatMap((f) => [tryTake(f, "practice", "word")].filter((x): x is string => !!x));
@@ -282,7 +287,7 @@ export function fromTemplate(family: string, competency: string, version: string
     strategies.push({ id: "spot_the_mistake", title: "Spot the mistake", kind: b.kind === "conceptual" ? "conceptual" : "procedural", needs: [], screens: [{ role: "misconception", instance: mistakeEx.id, title: "A common wrong answer", text: [`A question: “${mistakeEx.prompt.replace(/ \((?:[^()]|\([^()]*\))*[.!?]\)$/, "")}” A common wrong answer is ${minus(show(b.predict as number))}.`, b.says], math: [`Not ${minus(show(b.predict as number))}, but ${minus(mistakeEx.answer)}`] }], guided: take("practice", "typed"), check: take("check", "mc") });
   }
   if (uses.length)
-    strategies.push({ id: "check_what_it_uses", title: "Check what it builds on", kind: "prerequisite", needs: [], screens: [{ role: "prerequisite", title: "What it uses", text: [`Each step builds on another skill: ${uses.join("; ")}. If a step is slow, practise that skill first.`, `Then the method is: ${def.teach.method}`] }], guided: take("practice", "typed"), check: take("check", "typed") });
+    strategies.push({ id: "check_what_it_uses", title: "Check what it builds on", kind: "prerequisite", needs: [], screens: [{ role: "prerequisite", title: "What it uses", text: [`Each step builds on another skill: ${uses.join("; ")}. If a step is slow, practise that skill first.`, ...(WHOLE_LESSON.has(competency) ? [] : [`Then the method is: ${def.teach.method}`])] }], guided: take("practice", "typed"), check: take("check", "typed") });
   const sub = subSkills(competency, family, used);
   const own = [take("practice", "typed"), take("practice", "mc"), take("practice", "typed")];
   return {

@@ -780,7 +780,7 @@ export const B10: Def[] = [
     difficulty: ([, m]) => (m === 0 ? 1 : 2),
     word: ([a, m, k]) => `A scientist writes a measurement as ${m === 0 ? `${a}${sup(-k)}` : `${a}${sup(m)} × ${a}${sup(-k)}`} grams. What is that as a number of grams? (A fraction is fine.)`,
     teach: {
-      idea: "Each step down in the power divides by the base once: 2³ = 8, 2² = 4, 2¹ = 2, 2⁰ = 1, 2⁻¹ = 1/2, 2⁻² = 1/4.",
+      idea: "Each step down in the power divides by the base once: from a³ to a² to a¹, then a⁰ = 1, a⁻¹ = 1/a and a⁻² = 1/a².",
       method: "Combine the powers first (add them, keeping the signs), then a⁻ⁿ = 1/aⁿ.",
       alternatives: [
         { id: "halving", title: "Keep dividing", kind: "conceptual", text: ["Write the powers of the base in a row and divide by the base each time you go left.", "The pattern shows a⁰ = 1 and a⁻ⁿ = 1/aⁿ, never a negative number."] },
@@ -1086,8 +1086,8 @@ export const B10: Def[] = [
       ][m];
     },
     teach: {
-      idea: "Simple interest is the same every year: R% of the principal, so T years give T times as much. SI = P × R × T ÷ 100.",
-      method: "Write SI = P × R × T ÷ 100, put in the three numbers you know, and work out the fourth.",
+      idea: "Simple interest is the same every year: R% of the principal, so T years give T times as much. R% means R out of a hundred, so SI is P × R × T divided by a hundred.",
+      method: "Write SI = P × R × T divided by a hundred, put in the three numbers you know, and work out the fourth. The amount is the principal plus the interest.",
       alternatives: [
         { id: "year_by_year", title: "Year by year", kind: "conceptual", text: ["Find one year's interest first: R% of P.", "Add it once for every year. To find the time, count how many years of interest make the total."] },
       ],
@@ -1669,7 +1669,8 @@ export const B10: Def[] = [
     prompt: (p) => `A = ${pfText(p.slice(0, 4))} and B = ${pfText(p.slice(4))}. Using only these prime factorisations (no long division), decide which statement is true.`,
     solve: (p) => {
       const t = pfdTruth(p);
-      return { steps: [{ id: "compare", op: "compare", competency: PF, inputs: [PFD_WHY[t]], value: "" }], answer: order(p, 4, "pfdc").indexOf(t) };
+      const answer = order(p, 4, "pfdc").indexOf(t);
+      return { steps: [{ id: "compare", op: "compare", competency: PF, inputs: [PFD_WHY[t]], value: "" }, { id: "pick", op: "choose", competency: PF, inputs: [PFD_TEXT[t]], value: answer }], answer };
     },
     // independent: multiply the factorisations out, test divisibility by the remainder and co-primeness by Euclid's algorithm
     validate: (p, v) => {
@@ -1694,7 +1695,7 @@ export const B10: Def[] = [
       return out;
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `So the true statement is: ${s.inputs[0]}.` : String(s.inputs[0])),
     domain: [[0, 4], [0, 3], [0, 2], [0, 1], [0, 4], [0, 3], [0, 2], [0, 1]],
     keep: pfdOk,
     cap: 400,
@@ -1882,7 +1883,7 @@ export const B10: Def[] = [
     prompt: ([s]) => `Which of these numbers is the greatest? ${cmpSet(s).opts.map(inr).join(";  ")}`,
     solve: ([s]) => {
       const c = cmpSet(s);
-      return { steps: [{ id: "compare", op: "compare", competency: IIN, inputs: [inr(c.opts[c.right])], value: "" }], answer: c.right };
+      return { steps: [{ id: "compare", op: "compare", competency: IIN, inputs: [inr(c.opts[c.right])], value: "" }, { id: "pick", op: "choose", competency: IIN, inputs: [inr(c.opts[c.right])], value: c.right }], answer: c.right };
     },
     // independent: remove the commas from the shown numbers and compare their values directly
     validate: ([s], v) => {
@@ -1898,7 +1899,7 @@ export const B10: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => `The greatest is ${s.inputs[0]}: it has the most crores and lakhs.`,
+    explain: (s) => (s.id === "pick" ? `No other option is bigger, so choose ${s.inputs[0]}.` : `The greatest is ${s.inputs[0]}: it has the most crores and lakhs.`),
     domain: [[0, 699]],
     cap: 400,
     difficulty: ([s]) => (s % 3 === 0 ? 1 : 2),
@@ -1928,7 +1929,10 @@ export const B10: Def[] = [
       const [L, R] = cmpxText(t, a, b, c);
       return `Without working out either side, decide which sign goes in the box: ${L} □ ${R}`;
     },
-    solve: (p) => ({ steps: [{ id: "compare", op: "rewrite", competency: OPP, inputs: [CMPX_WHY[p[0]]], value: "" }], answer: order(p, 3, "cmpx").indexOf(CMPX_TRUE[p[0]]) }),
+    solve: (p) => {
+      const answer = order(p, 3, "cmpx").indexOf(CMPX_TRUE[p[0]]);
+      return { steps: [{ id: "compare", op: "rewrite", competency: OPP, inputs: [CMPX_WHY[p[0]]], value: "" }, { id: "pick", op: "choose", competency: OPP, inputs: [CMPX_SIGN[CMPX_TRUE[p[0]]]], value: answer }], answer };
+    },
     // independent: work out both sides and compare the values
     validate: (p, v) => {
       if (typeof v !== "number" || !Number.isInteger(v) || v < 0 || v > 2) return false;
@@ -1947,7 +1951,7 @@ export const B10: Def[] = [
       return [{ id: [4, 5, 6, 9].includes(t) ? "distribute-one" : t === 3 ? "plus-bracket" : "inner-sign", kind: "conceptual", competency: OPP, says, predict: o.indexOf(CMPX_SLIP[t]) }];
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `${s.inputs[0] === "<" ? "The first expression is the smaller one" : s.inputs[0] === "=" ? "The two expressions are equal" : "The first expression is the bigger one"}, so the sign between them is ${s.inputs[0]}.` : String(s.inputs[0])),
     domain: [[0, 9], [2, 99], [2, 49], [2, 9]],
     keep: cmpxOk,
     cap: 500,
@@ -1976,7 +1980,7 @@ export const B10: Def[] = [
     // level@1: properties of rational numbers are Class 8 work; whole-number statements stay at the competency's grade
     grade: ([, set]) => (set ? 8 : 6),
     prompt: (p) => `Which property does this statement show? ${propStatement(p).text}`,
-    solve: (p) => ({ steps: [{ id: "name", op: "classify", competency: OPP, inputs: [PROP_NAME[p[0]]], value: "" }], answer: propOpts(p).indexOf(p[0]) }),
+    solve: (p) => ({ steps: [{ id: "name", op: "classify", competency: OPP, inputs: [PROP_NAME[p[0]]], value: "" }, { id: "pick", op: "choose", competency: OPP, inputs: [PROP_NAME[p[0]]], value: propOpts(p).indexOf(p[0]) }], answer: propOpts(p).indexOf(p[0]) }),
     // independent: classify the statement from its shape (which terms swap, regroup, spread, vanish or give 0 or 1) and
     // check that both sides really are equal
     validate: (p, v) => {
@@ -1999,7 +2003,7 @@ export const B10: Def[] = [
       return [{ id: `confuse-${k}`, kind: "conceptual", competency: OPP, says, predict: propOpts(p).indexOf(PROP_CONF[k]) }];
     },
     variants: () => [],
-    explain: (s) => `The statement shows the ${String(s.inputs[0]).replace(/ \(.*\)$/, "").toLowerCase()}.`,
+    explain: (s) => (s.id === "pick" ? `That is the option to choose: ${s.inputs[0]}.` : `The statement shows the ${String(s.inputs[0]).replace(/ \(.*\)$/, "").toLowerCase()}.`),
     domain: [[0, 7], [0, 1], [0, 1], [0, 99], [0, 99], [0, 99]],
     keep: propOk,
     cap: 500,
@@ -2447,7 +2451,9 @@ export const B10: Def[] = [
     prompt: ([a, b, c, d]) => `Compare ${fr(a, b)} and ${fr(c, d)}. Which statement is true?`,
     solve: ([a, b, c, d]) => {
       const t = a * d > b * c ? 0 : a * d < b * c ? 1 : 2;
-      return { steps: [{ id: "common", op: "compare", competency: RQ, inputs: [`${n_(a * d)}/${b * d}`, `${n_(c * b)}/${b * d}`], value: "" }], answer: order([a, b, c, d], 3, "rcq").indexOf(t) };
+      const answer = order([a, b, c, d], 3, "rcq").indexOf(t);
+      const why = t === 2 ? "The numerators are equal, so the numbers are equal" : `${n_(t === 0 ? a * d : c * b)} is greater than ${n_(t === 0 ? c * b : a * d)}, so the greater numerator gives the greater number`;
+      return { steps: [{ id: "common", op: "compare", competency: RQ, inputs: [`${n_(a * d)}/${b * d}`, `${n_(c * b)}/${b * d}`], value: "" }, { id: "pick", op: "choose", competency: RQ, inputs: [rcqChoices([a, b, c, d])[answer], why], value: answer }], answer };
     },
     // independent: compare the decimal values
     validate: ([a, b, c, d], v) => {
@@ -2467,7 +2473,7 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => `With a common denominator: ${String(s.inputs[0])} and ${String(s.inputs[1])}; compare the numerators.`,
+    explain: (s) => (s.id === "pick" ? `${s.inputs[1]}: ${s.inputs[0]}.` : `With a common denominator: ${String(s.inputs[0])} and ${String(s.inputs[1])}; compare the numerators.`),
     domain: [[-9, 9], [2, 9], [-18, 18], [2, 18]],
     keep: rcqOk,
     cap: 450,
@@ -2479,7 +2485,7 @@ export const B10: Def[] = [
         : `In a number-line game on the school playground, ${nm(b + d)} stands at ${fr(a, b)} and ${nm(b + d + 1)} stands at ${fr(c, d)}. Comparing the two numbers, which statement is true?`,
     teach: {
       idea: "On the number line, the number to the right is greater. Every positive number is greater than every negative number; between two negatives, the one closer to 0 is greater.",
-      method: "Write both with the same positive denominator and compare the numerators (−8/12 < −3/12 because −8 < −3).",
+      method: "Write both with the same positive denominator and compare the numerators: the greater numerator gives the greater number, and for negative numerators the one closer to zero is greater.",
       alternatives: [
         { id: "cross", title: "Cross-multiply", kind: "procedural", text: ["With positive denominators, a/b > c/d exactly when a × d > c × b.", "For −2/3 and −3/5: −2 × 5 = −10 and −3 × 3 = −9; −10 < −9, so −2/3 < −3/5."] },
       ],
@@ -2689,6 +2695,7 @@ export const B10: Def[] = [
       steps: [
         ...(m === 3 ? [{ id: "common", op: "factorise", competency: FACT, inputs: [p], value: `${p}(x² − ${q * q})` } as Step] : []),
         { id: "identity", op: "factorise", competency: "MATH.algebra.identities", inputs: [m, p, q, k], value: fsqForm(m, p, q, k) },
+        { id: "read", op: "read", competency: FACT, inputs: [m, p, q, k], value: `(${p}, ${q})` },
       ],
       answer: `(${p}, ${q})`,
     }),
@@ -2712,7 +2719,14 @@ export const B10: Def[] = [
       ]),
     distractors: ([, p, q]) => [`(${q}, ${p})`, `(${p}, ${2 * q})`, `(${p + 1}, ${q})`],
     variants: () => [],
-    explain: (s) => (s.id === "common" ? `Take out the common factor: ${s.value}` : `Using the identity: ${s.value}`),
+    explain: (s) => {
+      if (s.id === "common") return `Take out the common factor: ${s.value}`;
+      if (s.id !== "read") return `Using the identity: ${s.value}`;
+      const [m, p, q, k] = s.inputs as number[];
+      if (m === 3) return `The number outside the brackets is c = ${p} and the number with x in each bracket is b = ${q}, so type ${s.value}.`;
+      const ones = [p === 1 && "x on its own means 1x", k && q === 1 && "y on its own means 1y"].filter(Boolean).join(", and ");
+      return `The number with x is a = ${p} and the ${k ? "number with y" : "number on its own"} is b = ${q}${ones ? ` (${ones})` : ""}, so type ${s.value}.`;
+    },
     domain: [[0, 3], [1, 12], [1, 12], [0, 1]],
     keep: fsqOk,
     cap: 450,
@@ -2780,7 +2794,7 @@ export const B10: Def[] = [
     grade: () => 9,
     difficulty: ([m, a]) => (m === 2 ? 3 : a === 1 ? 1 : 2),
     teach: {
-      idea: "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²), and a³ + b³ + c³ − 3abc = (a + b + c)(a² + b² + c² − ab − bc − ca).",
+      idea: "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²), and a³ + b³ + c³ minus three times abc = (a + b + c)(a² + b² + c² − ab − bc − ca).",
       method: "Write each cube term as (something)³ to find a, b (and c), then fill the second bracket from the identity.",
       alternatives: [
         { id: "check", title: "Check by multiplying", kind: "procedural", text: ["Multiply the two brackets out: the x² and x terms must cancel, leaving only the cubes.", "If a middle term is left over, the number in the box is wrong."] },
@@ -2804,11 +2818,12 @@ export const B10: Def[] = [
         : `Factorise ${grpPoly(p, q, r, s)} by grouping the first two terms and the last two terms. One factor is (${lin(p, s)}). Write the other as (ax + b) and type (a, b).`,
     solve: ([m, p, q, r, s]) =>
       m === 0
-        ? { steps: [{ id: "hcf", op: "hcf", competency: FACT, inputs: [p * q, p * r], value: `${p}xy` }], answer: `(${p}, ${q}, ${r})` }
+        ? { steps: [{ id: "hcf", op: "hcf", competency: FACT, inputs: [p * q, p * r], value: `${p}xy` }, { id: "read", op: "read", competency: FACT, inputs: [p, q, r, s], value: `(${p}, ${q}, ${r})` }], answer: `(${p}, ${q}, ${r})` }
         : {
             steps: [
               { id: "group", op: "factorise", competency: FACT, inputs: [q, r, p, s], value: `${q === 1 ? "" : q}x(${lin(p, s)}) ${r < 0 ? "−" : "+"} ${Math.abs(r)}(${lin(p, s)})` },
               { id: "common", op: "factorise", competency: FACT, inputs: [q, r, p, s], value: `(${lin(q, r)})(${lin(p, s)})` },
+              { id: "other", op: "read", competency: FACT, inputs: [q, r], value: tup([q, r]) },
             ],
             answer: tup([q, r]),
           },
@@ -2830,7 +2845,14 @@ export const B10: Def[] = [
         ? [{ id: "only-letters", kind: "procedural", competency: FACT, says: `Only xy was taken out. The numbers ${p * q} and ${p * r} also have the common factor ${p}; the highest common factor includes it.`, predict: `(1, ${p * q}, ${p * r})` }]
         : keepBugs([r < 0 && { id: "second-group-sign", kind: "procedural", competency: FACT, says: `When −${-r} is taken out of the last two terms, the signs inside the bracket change: ${r * p}x ${r * s < 0 ? "−" : "+"} ${Math.abs(r * s)} = −${-r}(${lin(p, s)}).`, predict: tup([q, -r]) }]),
     variants: () => [],
-    explain: (s) => (s.id === "hcf" ? `The highest common factor of the two terms is ${s.value}` : s.id === "group" ? `Group in pairs: ${s.value}` : `Take out the common bracket: ${s.value}`),
+    explain: (s) => {
+      if (s.id === "hcf") return `The highest common factor of the two terms is ${s.value}`;
+      if (s.id === "group") return `Group in pairs: ${s.value}`;
+      if (s.id === "common") return `Take out the common bracket: ${s.value}`;
+      const [a, b, c, d] = s.inputs as number[];
+      if (s.id === "other") return `The other factor is (${lin(a, b)}): a = ${n_(a)} and b = ${n_(b)}, so type ${s.value}.`;
+      return `Dividing each term by ${a}xy leaves ${b === 1 ? "" : b}x and ${c === 1 ? "" : c}y, so it is ${a}xy(${b === 1 ? "" : b}x ${d ? "−" : "+"} ${c === 1 ? "" : c}y) and you type ${s.value}.`;
+    },
     domain: [[0, 1], [1, 9], [1, 9], [-9, 9], [-9, 9]],
     keep: fgrpOk,
     cap: 400,

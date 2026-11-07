@@ -161,8 +161,10 @@ describe("showcase readiness: each thing said once, solutions checked to the ans
     for (const c of ["MATH.algebra.quadratic-graphs", "MATH.algebra.sets", "MATH.algebra.linear-systems", "MATH.algebra.matrices", "MATH.trigonometry.ratios", "MATH.algebra.rational-expressions"]) expect(at(c).worked?.verified, c).toBe(true);
     // grade7-teaching@1: the prime factorisation now ends with a step that lists the primes (the answer), so it is a checked worked example
     expect(at("MATH.number.prime-factorisation").worked?.verified).toBe(true);
-    // the factorisation's last step is a check; the square root's last step multiplies back
-    for (const c of ["MATH.algebra.factorisation", "MATH.algebra.polynomial-square-root"]) {
+    // grade7-lessons@1: the factorisation now ends with a step that states the answer, so it is a checked worked example
+    expect(at("MATH.algebra.factorisation").worked?.verified).toBe(true);
+    // the square root's last step multiplies back
+    for (const c of ["MATH.algebra.polynomial-square-root"]) {
       expect(at(c).label, c).toBe("Method");
       expect(at(c).violations, c).toEqual(["worked-unverified"]);
     }

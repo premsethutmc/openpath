@@ -1579,7 +1579,7 @@ export const B09: Def[] = [
     // a tiny area in cm² is hard to picture: below 1, the same numbers are a sheet measured in m² and m
     word: ([m, a, n, b]) => (m * n < 10 ** (a + b) ? `A rectangular sheet of glass has an area of ${D(m * n, 10 ** (a + b))} m². One side is ${D(n, 10 ** b)} m long. How long is the other side, in m?` : `A rectangle has an area of ${D(m * n, 10 ** (a + b))} cm². One side is ${D(n, 10 ** b)} cm long. How long is the other side, in cm?`),
     teach: {
-      idea: "Multiplying both numbers in a division by the same amount does not change the answer (12 ÷ 4 = 120 ÷ 40), so you can make the divisor a whole number first.",
+      idea: "Multiplying both numbers in a division by the same amount does not change the answer (sharing ten times as many sweets among ten times as many children gives each child the same), so you can make the divisor a whole number first.",
       method: "Move the decimal point in the divisor to make it whole, move the dividend's point the same number of places, then divide as usual, keeping the point in line.",
       alternatives: [{ id: "check_multiply", title: "Check by multiplying", kind: "procedural", text: ["Estimate first: 7.2 ÷ 0.8 is like 72 ÷ 8.", "Check: the answer × the divisor must give the dividend."] }],
     },
@@ -1623,8 +1623,8 @@ export const B09: Def[] = [
       return o ? `${10 ** k} identical ${it[1]} weigh ${D(m, 10 ** a)} kg together. How much does one ${it[0]} weigh, in kg?` : `One ${it[0]} weighs ${D(m, 10 ** a)} kg. How much do ${10 ** k} such ${it[1]} weigh, in kg?`;
     },
     teach: {
-      idea: "Multiplying by 10 makes each digit worth ten times as much, so every digit moves one place to the left; dividing by 10 moves every digit one place to the right.",
-      method: "Count the zeros in 10, 100 or 1000 and move the decimal point that many places: right for ×, left for ÷. Fill empty places with zeros.",
+      idea: "Multiplying by ten makes each digit worth ten times as much, so every digit moves one place to the left; dividing by ten moves every digit one place to the right.",
+      method: "Count the zeros in the ten, hundred or thousand and move the decimal point that many places: right for ×, left for ÷. Fill empty places with zeros.",
       alternatives: [{ id: "place_table", title: "A place-value table", kind: "conceptual", text: ["Write the number in a place-value table (hundreds, tens, ones, tenths, hundredths, thousandths).", "Slide every digit across one column for each zero; the point stays where it is."] }],
     },
     limits: "Numbers with up to three digits and three decimal places; powers of 10 up to 1000.",
@@ -2335,7 +2335,7 @@ B09.push(
     word: ([mode, x, y]) => (mode === 0 ? `${name(x)}'s vegetable patch is a rectangle ${D(x, 10)} m long and ${D(y, 10)} m wide. Estimate its area in m² by rounding both numbers to the nearest whole number.` : `A roll of cloth ${D(x, 10)} m long is cut into pieces ${D(y, 10)} m long. Estimate how many pieces it gives, by rounding both numbers to the nearest whole number.`),
     teach: {
       idea: "An estimate tells roughly how big an answer should be, so a misplaced decimal point shows up at once. Rounding the numbers first makes the calculation easy to do in your head.",
-      method: "Round each number to the nearest whole number (look at the tenths: 5 or more, round up). Multiply or divide the rounded numbers. Compare with the exact answer: they should be close.",
+      method: "Round each number to the nearest whole number (look at the tenths digit: five or more, round up). Multiply or divide the rounded numbers. Compare with the exact answer: they should be close.",
       alternatives: [
         { id: "point_check", title: "Use it to check the point", kind: "procedural", text: ["4.8 × 6.1 ≈ 5 × 6 = 30, so the exact answer 29.28 is sensible; 292.8 or 2.928 is not.", "Always estimate before placing the decimal point."] },
         { id: "number_line", title: "Round on a number line", kind: "conceptual", text: ["Mark the decimal between the two whole numbers it lies between.", "It rounds to the nearer one."], visual: ([, x]) => ({ type: "numberline", from: Math.floor(x / 10), to: Math.floor(x / 10) + 1, step: 1, marks: [x / 10] }) },
@@ -2428,7 +2428,7 @@ B09.push(
           : `${APPROX[o].who} used ${APPROX[o].n}/${APPROX[o].d} for π. With this value, what is the circumference of a circle of diameter ${d} mm, in mm, correct to two decimal places?`,
     solve: ([mode, o, d]) =>
       mode === 0
-        ? { steps: [step("ratio", "divide", CIRC, [measuredC(d), d], r2(measuredC(d) / d)), step("same", "note", CIRC, ["every circle"], "about 3.14 = π")], answer: r2(measuredC(d) / d) }
+        ? { steps: [step("ratio", "divide", CIRC, [measuredC(d), d], r2(measuredC(d) / d)), step("same", "note", CIRC, ["every circle"], "about 3.14 = π"), step("answer", "state", CIRC, [measuredC(d), d], r2(measuredC(d) / d))], answer: r2(measuredC(d) / d) }
         : mode === 1
           ? { steps: [step("ratio", "divide", CIRC, [APPROX[o].n, APPROX[o].d], r4(APPROX[o].n / APPROX[o].d))], answer: r4(APPROX[o].n / APPROX[o].d) }
           : { steps: [step("circ", "multiply", CIRC, [`${APPROX[o].n}/${APPROX[o].d}`, d], r2((APPROX[o].n * d) / APPROX[o].d))], answer: r2((APPROX[o].n * d) / APPROX[o].d) },
@@ -2458,13 +2458,13 @@ B09.push(
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "ratio" ? `${s.inputs[0]} ÷ ${s.inputs[1]} ≈ ${String(s.value)} (rounded)` : s.id === "circ" ? `C = π × d = ${s.inputs[0]} × ${s.inputs[1]} = ${String(s.value)} mm (to two decimal places)` : "The same ratio comes out for every circle, whatever its size: this constant is π"),
+    explain: (s) => (s.id === "ratio" ? `${s.inputs[0]} ÷ ${s.inputs[1]} ≈ ${String(s.value)} (rounded)` : s.id === "circ" ? `C = π × d = ${s.inputs[0]} × ${s.inputs[1]} = ${String(s.value)} mm (to two decimal places)` : s.id === "answer" ? `So for this wheel, circumference ÷ diameter = ${String(s.value)}, correct to two decimal places` : "The same ratio comes out for every circle, whatever its size: this constant is π"),
     domain: [[0, 2], [0, 7], [0, 1500]],
     keep: piOk,
     cap: 300,
     difficulty: ([mode]) => (mode === 0 ? 1 : mode === 1 ? 2 : 3),
     teach: {
-      idea: "For every circle, big or small, the circumference is a little more than 3 times the diameter: C ÷ d is always the same number, π ≈ 3.1416. Mathematicians in India and elsewhere found better and better fractions for it (Aryabhata: 62832/20000).",
+      idea: "For every circle, big or small, the circumference is a little more than three times the diameter: C ÷ d is always the same number, called π. Mathematicians in India and elsewhere found better and better fractions for it; Aryabhata's was correct to four decimal places.",
       method: "Divide the circumference by the diameter (both in the same unit) and round to the places asked. For a fraction, divide the top by the bottom.",
       alternatives: [
         { id: "string", title: "Measure with a string", kind: "conceptual", text: ["Wrap a string round a bangle, a plate and a wheel; measure the string and each diameter.", "Divide each time: the answers all come out close to 3.14."] },

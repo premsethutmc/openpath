@@ -1676,7 +1676,8 @@ const GAP02: Def[] = [
     choices: dirChoices,
     solve: (p) => {
       const r = dirAnswer(p);
-      return { steps: [st("direction", "use the directions", MAPS, [p[0], p[1], p[2]], r)], answer: dirChoices(p).indexOf(r) };
+      const a = dirChoices(p).indexOf(r);
+      return { steps: [st("direction", "use the directions", MAPS, [p[0], p[1], p[2]], r), st("pick", "choose the option", MAPS, [r], a)], answer: a };
     },
     // independent: directions as angles clockwise from North (turn right +90°, left −90°, about 180°); the map by the signs of the moves across and up
     validate: (p, v) => {
@@ -1714,7 +1715,7 @@ const GAP02: Def[] = [
         : [B("from-other-end", "conceptual", MAPS, `The direction from the ${m.around[d]} to the ${m.centre} was given. Start at the ${m.centre} and look towards the ${m.around[d]}.`, cs.indexOf(DIRS[(d + 2) % 4]))];
     },
     variants: () => [],
-    explain: (s) => `The answer is ${s.value}.`,
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : `The answer is ${s.value}.`),
     domain: [[0, 2], [0, 39], [0, 2]],
     difficulty: ([kind, , b]) => (kind === 1 ? 1 : b === 2 ? 2 : 3),
     figure: ([kind, a]) => (kind === 1 ? { type: "plane", points: dirMap(a).pts, range: 6, quadrant: 1 } : tbl(["", "North", ""], [["West", "you", "East"], ["", "South", ""]])),
@@ -3046,8 +3047,8 @@ const GAP02: Def[] = [
       return `${name(a + b)} notices that a diagonal of Pascal's triangle goes ${[...Array(a)].map((_, i) => choose(i + b - 1, b - 1)).join(", ")}, … What number comes next on it?`;
     },
     teach: {
-      idea: "Pascal's triangle starts with 1; each row starts and ends with 1 and each other number is the sum of the two above it. Its rows add up to 1, 2, 4, 8, … and its diagonals are 1s, the counting numbers, the triangular numbers 1, 3, 6, 10 …",
-      method: "To build a new row, write 1, then add each pair of neighbours in the row above, then write 1. Use the patterns to check.",
+      idea: "Pascal's triangle starts with a single one; each row starts and ends with one and each other number is the sum of the two above it. Each row adds up to twice the row before it, and its diagonals are all ones, then the counting numbers, then the triangular numbers.",
+      method: "To build a new row, write a one, then add each pair of neighbours in the row above, then end with a one. Use the patterns to check.",
       visual: () => pascalFig(5),
       alternatives: [
         { id: "paths", title: "Count the paths", kind: "conceptual", text: ["Each number tells how many ways there are to walk down from the top 1 to it, moving down-left or down-right.", "Two paths arrive from the two numbers above, so their counts add."] },

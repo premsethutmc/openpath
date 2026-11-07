@@ -30,7 +30,9 @@
      "math": [
       "Write 9¹⁰ × 9³ as a single power of 9, that is 9 to the power □. What number goes in the box?",
       "10 + 3 = 13"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajlaw:9,10,3,0"
     },
     {
      "title": "The units digit of a large power",
@@ -43,19 +45,23 @@
       "Units digits of the powers of 9 repeat: 9, 1, …",
       "58 ÷ 2 leaves the place 2 in the cycle",
       "The digit in place 2 is 1"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajudig:19,58"
     },
     {
      "title": "Zero and negative powers",
      "text": [
-      "Each step down in the power divides by the base once: 2³ = 8, 2² = 4, 2¹ = 2, 2⁰ = 1, 2⁻¹ = 1/2, 2⁻² = 1/4.",
+      "Each step down in the power divides by the base once: from a³ to a² to a¹, then a⁰ = 1, a⁻¹ = 1/a and a⁻² = 1/a².",
       "Combine the powers first (add them, keeping the signs), then a⁻ⁿ = 1/aⁿ."
      ],
      "math": [
       "Find the value of 6⁵ × 6⁻³.",
       "Add the powers: 5 − 3 = 2",
       "6 to the power 2 = 36"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajneg:6,5,3"
     },
     {
      "title": "Writing a repeated product in exponential form",
@@ -66,7 +72,9 @@
      "math": [
       "Write 2 × 2 × 3 in exponential form, as 2^□ × 3^□. Give the two powers as (power of 2, power of 3).",
       "2 appears 2 times and 3 appears once: 2² × 3¹"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:avexpn:0,1,2,1,0"
     },
     {
      "title": "Writing a number as a product of prime powers",
@@ -81,7 +89,9 @@
       "35 ÷ 5 = 7",
       "7 ÷ 7 = 1",
       "Count each prime: 2⁰ × 3⁰ × 5³ × 7¹"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:avppf:0,0,3,1"
     },
     {
      "title": "The zero exponent",
@@ -93,7 +103,9 @@
       "Find the value of 2⁰ + 4⁰.",
       "2⁰ = 1",
       "So 2⁰ + 4⁰ = 2"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:avzero:2,2,4,2"
     }
    ],
    "diagnostics": [
@@ -283,7 +295,9 @@
         "6"
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aubin:2,4,1,6,2"
     }
    ],
    "diagnostics": [
@@ -436,20 +450,25 @@
       "Use the identity",
       "a² = (5x)² = 25x²",
       "2ab = 2 × 5x × 2 = 20x",
-      "b² = 2² = 4"
-     ]
+      "b² = 2² = 4",
+      "The box is the number in front of x, so it holds 20"
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahid:0,5,2,1"
     },
     {
      "title": "Quick calculation with identities",
      "text": [
-      "A number near a round number is easy to square with an identity: 103 = 100 + 3, so 103² = 100² + 2 × 100 × 3 + 3². Products like 103 × 97 are (100 + 3)(100 − 3) = 100² − 3².",
-      "Write the number as a ± b with a a multiple of 10. Work out a², 2ab and b² (all easy) and combine them with the right signs."
+      "A number near a round number is easy to square with an identity: write it as the round number plus or minus a small number and use (a + b)² = a² + 2ab + b² or (a − b)² = a² − 2ab + b². A product of two numbers the same distance above and below a round number is (a + b)(a − b) = a² − b².",
+      "Write the number as a ± b with a a multiple of ten. Work out a², 2ab and b² (all easy) and combine them with the right signs."
      ],
      "math": [
       "Use (a + b)(a − b) = a² − b² to work out 13 × 7.",
       "Write it as (10 + 3)(10 − 3)",
       "100 − 9 = 91"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahidn:2,1,3"
     },
     {
      "title": "Expanding (x ± a)³, (x + a)(x + b)(x + c) and (x + ay + b)²",
@@ -460,7 +479,9 @@
      "math": [
       "Expand",
       "(x − 1)(x + 3)(x + 4) = x³ + 6x² + 5x − 12"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahcube:2,-1,3,4,1"
     }
    ],
    "diagnostics": [
@@ -1693,7 +1714,9 @@
        2
       ],
       "scale": 1
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:akmode:3"
     },
     {
      "title": "The mean of data in a frequency table",
@@ -1707,7 +1730,9 @@
       "Total of all values: 69",
       "Number of values: 6 + 1 + 9 + 6 + 8 = 30",
       "Mean = 69 ÷ 30 = 2.3"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:akfmean:1257"
     },
     {
      "title": "The median of data in a frequency table",
@@ -1720,7 +1745,9 @@
       "There are 2 + 6 + 7 + 2 + 1 = 18 values in all",
       "Running totals: 2, 8, 15, 17, 18",
       "The middle (value number 9) falls in the row of 9"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:avfmed:7,2,6,7,2,1"
     }
    ],
    "diagnostics": [
@@ -4011,13 +4038,14 @@
     {
      "title": "Comparing lengths written in metres and centimetres",
      "text": [
-      "1 m = 100 cm, so a m b cm is a hundreds of centimetres and b more: 3 m 5 cm = 305 cm.",
+      "A metre is a hundred centimetres, so a length in metres and centimetres is that many hundreds of centimetres, plus the centimetres written after the metres.",
       "Change the length in metres and centimetres into centimetres, then compare the two numbers of centimetres."
      ],
      "math": [
       "Which is longer: 5 m 71 cm or 571 cm?",
       "5 m 71 cm = 571 cm",
-      "Compare 571 cm with 571 cm"
+      "Compare 571 cm with 571 cm",
+      "So the answer is option A: They are the same length"
      ],
      "widget": {
       "type": "numberline",
@@ -4027,7 +4055,9 @@
       "marks": [
        571
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:acmcmp:5,71,0,0"
     },
     {
      "title": "Millimetres, centimetres, metres and kilometres",
@@ -4047,13 +4077,15 @@
       "marks": [
        5000
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:acmmkm:3,5,0"
     },
     {
      "title": "Writing a length in a larger unit as a decimal",
      "text": [
-      "1 m = 100 cm, so 1 cm is one hundredth of a metre; 1 cm = 10 mm, so 1 mm is a tenth of a centimetre; 1 km = 1000 m, so 1 m is a thousandth of a kilometre.",
-      "To write a length in the bigger unit, divide by 100, 10 or 1000: move the digits that many places to the right of the decimal point. To go back, multiply."
+      "A metre is a hundred centimetres, so a centimetre is one hundredth of a metre; a centimetre is ten millimetres, so a millimetre is a tenth of a centimetre; a kilometre is a thousand metres, so a metre is a thousandth of a kilometre.",
+      "To write a length in the bigger unit, divide by the number of small units in one big unit: the digits move one place to the right of the decimal point for each zero (two places for a hundred, one for ten, three for a thousand). To go back, multiply."
      ],
      "math": [
       "Write 988 cm in metres, as a decimal.",
@@ -4076,7 +4108,9 @@
         8
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:acdecu:0,988"
     }
    ],
    "diagnostics": [
@@ -5806,7 +5840,7 @@
     {
      "title": "The exterior angle of a triangle",
      "text": [
-      "An exterior angle and the interior angle next to it make a straight line (180°), and the three interior angles also make 180°, so the exterior angle equals the two far interior angles together.",
+      "An exterior angle and the interior angle next to it make a straight line, and the three interior angles of a triangle also add up to a straight angle, so the exterior angle equals the two far interior angles together.",
       "To find the exterior angle, add the two interior opposite angles. To find one of those, subtract the other from the exterior angle."
      ],
      "math": [
@@ -5831,7 +5865,9 @@
        "B"
       ],
       "extendedTo": "D"
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:ahext:31,118,0"
     },
     {
      "title": "Angles of an isosceles triangle",
@@ -5843,7 +5879,9 @@
       "In an isosceles triangle each of the two equal angles (opposite the equal sides) is 62°. What is the third angle, in degrees?",
       "The two equal angles: 2 × 62° = 124°",
       "180° − 124° = 56°"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahiso:62,1"
     },
     {
      "title": "How long can the third side be?",
@@ -5855,7 +5893,9 @@
       "Two sides of a triangle are 4 cm and 14 cm. The third side is a whole number of centimetres. What is the longest it can be, in cm?",
       "The third side must be less than 4 + 14 = 18 cm",
       "The longest whole number below 18 is 17"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahineq:4,14,0"
     }
    ],
    "diagnostics": [
@@ -5975,8 +6015,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Measure and draw angles. If a step is slow, practise that skill first.",
-        "Then the method is: Add the two angles you know, then take the sum from 180°."
+        "Each step builds on another skill: Measure and draw angles. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -6208,7 +6247,9 @@
      "widget": {
       "type": "angle",
       "deg": 149
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:afcross:149,1"
     }
    ],
    "diagnostics": [
@@ -6981,7 +7022,9 @@
       "Write an expression, using x, for: “9 times the sum of x and 2”.",
       "First part: the sum x + 2 goes in a bracket",
       "Then the rest of the statement: 9(x + 2)"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:auvexp:2,0,2,9"
     }
    ],
    "diagnostics": [
@@ -7045,8 +7088,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Multiply m by the value of x first, then add (or subtract) c."
+        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -7487,18 +7529,20 @@
      "title": "Products by doubling and halving or a nearest multiple",
      "text": [
       "Doubling one factor and halving the other leaves the product unchanged; a factor next to a multiple of ten is that multiple minus (or plus) one group.",
-      "25 × 36 = 50 × 18 = 100 × 9 = 900. 19 × 24 = 20 × 24 − 24 = 480 − 24 = 456."
+      "Keep doubling one factor and halving the other until one of them is a ten, a hundred or another easy number. Or round a factor to the nearest multiple of ten, multiply, then take away (or add) the extra group."
      ],
      "math": [
       "Work out 99 × 4 using the nearest multiple of ten: 99 × 4 = 100 × 4 − 4. What is 99 × 4?",
       "100 × 4 = 400",
       "400 − 4 = 396"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:avstrat:5,4,1"
     },
     {
      "title": "Multiplying with partial products",
      "text": [
-      "Splitting a factor by place value turns one hard product into easier ones: 47 × 36 = 47 × 30 + 47 × 6.",
+      "Splitting a factor by place value turns one hard product into easier ones: multiply by the tens part and by the ones part separately.",
       "Multiply by the tens (the answer ends in 0), multiply by the ones, then add the partial products."
      ],
      "math": [
@@ -7524,7 +7568,9 @@
         "35"
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:avpp:35,67,1"
     },
     {
      "title": "Multiplying with the lattice method",
@@ -7562,7 +7608,9 @@
         "1"
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:avlat:27,21,0"
     }
    ],
    "diagnostics": [
@@ -7629,8 +7677,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Multiply the tens by the one-digit number, then multiply the ones by it, then add the two answers. Any tens in the ones answer join the tens."
+        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -8098,7 +8145,9 @@
       "Each glass holds 1/3 litre of buttermilk. How many litres do 4 such glasses hold?",
       "4 lots of 1 pieces: 4 pieces",
       "4 pieces of size 1/3: 4/3"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:avfwq:1,3,4,0"
     }
    ],
    "diagnostics": [
@@ -8165,8 +8214,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Multiply the top (the number of pieces) by the whole number and keep the bottom (the size of each piece) the same."
+        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -8402,37 +8450,44 @@
      "title": "Writing a percentage or a decimal as a fraction in its simplest form",
      "text": [
       "A percentage is a number of hundredths, and a decimal is a number of tenths, hundredths or thousandths. Either can be written as a fraction and then simplified.",
-      "Percentage: write it over 100 (multiply top and bottom by 10 to clear a decimal point, as 12.5/100 = 125/1000). Decimal: write the digits over 10, 100 or 1000 (one zero for each decimal place). Then divide the top and bottom by their HCF."
+      "Percentage: write it over a hundred (if it has a decimal point, multiply top and bottom by ten until it is gone). Decimal: write the digits over ten, a hundred or a thousand (one zero for each decimal place). Then divide the top and bottom by their HCF."
      ],
      "math": [
       "Write 8% as a fraction in its simplest form.",
       "8% = 8/100",
       "Divide the top and bottom by 4: 2/25"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:agpfrac:0,2,25"
     },
     {
      "title": "Writing a fraction as a decimal or a percentage",
      "text": [
-      "A fraction n/d means n ÷ d. Dividing gives the decimal; a percentage is that decimal × 100 (the number of hundredths).",
-      "Divide the numerator by the denominator (long division, adding zeros after the point), or scale the fraction to a denominator of 10, 100 or 1000. For a percentage, multiply the decimal by 100."
+      "A fraction n/d means n ÷ d. Dividing gives the decimal; a percentage is that decimal times a hundred (the number of hundredths).",
+      "Divide the numerator by the denominator (long division, adding zeros after the point), or scale the fraction to a denominator of ten, a hundred or a thousand. For a percentage, multiply the decimal by a hundred."
      ],
      "math": [
       "Which decimal is equal to 19/40?",
       "19 ÷ 40 = 0.475",
-      "So the decimal is 0.475"
-     ]
+      "So the decimal is 0.475",
+      "0.475 is option B, so the answer is B"
+     ],
+     "role": "worked-example",
+     "instance": "gen:agfdec:0,19,40"
     },
     {
      "title": "Percentage of one quantity in another, and percentage change",
      "text": [
-      "A percentage compares a part with a whole out of 100; a percentage change compares the change with the ORIGINAL amount.",
-      "Percentage = part ÷ whole × 100. Percentage change = change ÷ original × 100. To increase by p%, add p% of the amount (or multiply by (100 + p)/100)."
+      "A percentage compares a part with a whole as a number out of a hundred; a percentage change compares the change with the ORIGINAL amount.",
+      "Percentage = part ÷ whole, then times a hundred. Percentage change = change ÷ original, then times a hundred. To increase an amount by p%, find p% of the amount and add it on."
      ],
      "math": [
       "Increase ₹300 by 45%. What is the new amount, in rupees?",
       "45% of 300 = 135",
       "300 + 135 = 435"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:avpctof:45,300,3"
     }
    ],
    "diagnostics": [
@@ -8583,7 +8638,9 @@
       "marks": [
        23
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:avmiss:23,-7,-6,5,7,0"
     }
    ],
    "diagnostics": [
@@ -8647,8 +8704,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Add all the numbers, then divide by how many numbers there are."
+        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -9137,8 +9193,11 @@
       "Are 7, 11, 14 and 22 in proportion, in this order?",
       "Product of the extremes: 7 × 22 = 154",
       "Product of the means: 11 × 14 = 154",
-      "154 = 154: yes, they are in proportion"
-     ]
+      "154 = 154: yes, they are in proportion",
+      "So the answer is option A: Yes, they are in proportion"
+     ],
+     "role": "worked-example",
+     "instance": "gen:avprop:7,11,2,0"
     },
     {
      "title": "The missing term of a proportion",
@@ -9150,7 +9209,9 @@
       "Find the missing term: 6 : 13 :: □ : 78",
       "Extremes × means: the known pair multiplies to 468",
       "468 ÷ 13 = 36"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:avpmiss:6,13,6,2"
     },
     {
      "title": "Do two quantities vary directly?",
@@ -9161,8 +9222,11 @@
      "math": [
       "The table in the picture shows four pairs of values of two quantities x and y. Do x and y vary directly?",
       "y ÷ x for each pair: 15/6, 18/9, 21/12, 24/15 — not all equal",
-      "No, x and y do not vary directly"
-     ]
+      "No, x and y do not vary directly",
+      "So the answer is option A: No, x and y do not vary directly, because y ÷ x is not the same for every pair"
+     ],
+     "role": "worked-example",
+     "instance": "gen:avdirv:6,3,9,1"
     }
    ],
    "diagnostics": [
@@ -9226,8 +9290,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Find the cost of one (divide), then multiply by how many you want."
+        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -9307,7 +9370,8 @@
      "math": [
       "Factorise: x² − 7x + 12 = (x − 4)(x + □). What number goes in the box (it may be negative)?",
       "The numbers multiply to 12: 12 ÷ (−4) = −3",
-      "Check they add to the x coefficient: −4 + (−3) = −7"
+      "Check they add to the x coefficient: −4 + (−3) = −7",
+      "So the number in the box is −3: the x coefficient minus the given number, −7 − (−4) = −3"
      ],
      "tip": "The x coefficient was copied into the bracket; the two numbers in the brackets add up to it.",
      "role": "concept",
@@ -9321,20 +9385,25 @@
      ],
      "math": [
       "Factorise 100x² − y² using an identity. Write it as (ax + by)(ax − by) with positive whole numbers and type (a, b).",
-      "Using the identity: (10x + y)(10x − y)"
-     ]
+      "Using the identity: (10x + y)(10x − y)",
+      "The number with x is a = 10 and the number with y is b = 1 (y on its own means 1y), so type (10, 1)."
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajfsq:0,10,1,1"
     },
     {
      "title": "Factorising with the cube identities",
      "text": [
-      "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²), and a³ + b³ + c³ − 3abc = (a + b + c)(a² + b² + c² − ab − bc − ca).",
+      "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²), and a³ + b³ + c³ minus three times abc = (a + b + c)(a² + b² + c² − ab − bc − ca).",
       "Write each cube term as (something)³ to find a, b (and c), then fill the second bracket from the identity."
      ],
      "math": [
       "Use an identity to factorise: 8x³ + 729 = (2x + 9)(4x² − □x + 81). What number goes in the box?",
       "Match the identity: a = 2x, b = 9",
       "The middle term is 2 × 9 = 18"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajfcub:0,2,9,0"
     },
     {
      "title": "Factorising by a common factor or by grouping",
@@ -9344,8 +9413,11 @@
      ],
      "math": [
       "Factorise 25x²y − 30xy² completely by taking out the highest common factor. Write it as g·xy(ax − by) and type (g, a, b).",
-      "The highest common factor of the two terms is 5xy"
-     ]
+      "The highest common factor of the two terms is 5xy",
+      "Dividing each term by 5xy leaves 5x and 6y, so it is 5xy(5x − 6y) and you type (5, 5, 6)."
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajfgrp:0,5,5,6,1"
     },
     {
      "title": "Factorising ax² + bx + c by splitting the middle term",
@@ -9358,7 +9430,9 @@
       "a × c = 30 × 2 = 60",
       "Split the middle term into 5x and 12x (their product is a × c and their sum is 17)",
       "Group and take out the common bracket: (5x + 2)(6x + 1)"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajfspl:5,2,6,1"
     },
     {
      "title": "Splitting the middle term of ax² + bx + c",
@@ -9370,7 +9444,9 @@
       "To factorise 12x² + 17x + 6 by splitting the middle term, 17x is written as rx + sx, where r + s = 17 and rs = 12 × 6 = 72. Find r and s. Enter both, separated by a comma.",
       "a × c = 12 × 6 = 72",
       "Two numbers with sum 17 and product a × c: 8 and 9"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:alsplit:0,4,3,3,2"
     }
    ],
    "diagnostics": [
@@ -9393,7 +9469,8 @@
        "math": [
         "Factorise: x² − 5x + 4 = (x − 4)(x + □). What number goes in the box (it may be negative)?",
         "The numbers multiply to 4: 4 ÷ (−4) = −1",
-        "Check they add to the x coefficient: −4 + (−1) = −5"
+        "Check they add to the x coefficient: −4 + (−1) = −5",
+        "So the number in the box is −1: the x coefficient minus the given number, −5 − (−4) = −1"
        ],
        "role": "worked-example",
        "instance": "gen:factor:-4,-1"
@@ -9434,8 +9511,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Add and subtract integers. If a step is slow, practise that skill first.",
-        "Then the method is: List pairs that multiply to the constant; choose the pair that adds to the x coefficient. Watch the signs."
+        "Each step builds on another skill: Add and subtract integers. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -9994,7 +10070,9 @@
       "Find the HCF of 28 and 19 by repeated division: divide 28 by 19, then divide 19 by the remainder, and keep dividing the last divisor by the last remainder until the remainder is 0. What is the remainder in the second division?",
       "28 ÷ 19 leaves remainder 9",
       "Repeated division of 28 and 19 takes 3 divisions"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aeeuc:1,28,19"
     },
     {
      "title": "The steps of Euclid's division algorithm",
@@ -10006,8 +10084,11 @@
       "Euclid's division algorithm finds the HCF of 928 and 92: divide 928 by 92, then divide 92 by the remainder, and keep dividing the last divisor by the last remainder until a remainder is 0. How many divisions are made altogether (counting the one with remainder 0)?",
       "928 = 92 × 10 + 8",
       "92 = 8 × 11 + 4",
-      "8 = 4 × 2 + 0"
-     ]
+      "8 = 4 × 2 + 0",
+      "3 divisions altogether, counting the last one with remainder 0"
+     ],
+     "role": "worked-example",
+     "instance": "gen:agediv:0,928,92"
     },
     {
      "title": "HCF and LCM from prime factorisations",
@@ -10019,7 +10100,9 @@
       "20 = 2 × 2 × 5 and 225 = 3 × 3 × 5 × 5. Use these prime factorisations to find the LCM of 20 and 225.",
       "Every prime, as many times as the number that has it most: 2 × 2 × 3 × 3 × 5 × 5",
       "2 × 2 × 3 × 3 × 5 × 5 = 900"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:agfta:1,10258"
     }
    ],
    "diagnostics": [
@@ -11357,7 +11440,9 @@
        2,
        3
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aeineqz:0,4,-3,10,1"
     },
     {
      "title": "Solving a system of two linear inequalities",
@@ -11379,7 +11464,9 @@
        4,
        11
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aeineqs:4,7,2,1,3"
     },
     {
      "title": "Modelling a word problem with a linear inequality",
@@ -11391,7 +11478,9 @@
       "Imran scored 82 and 53 marks (out of 100) in the first two tests. To get a grade, the average of three tests must be at least 50. Let x be the marks in the third test. Write the possible values of x as an inequality (remember x cannot be more than 100).",
       "Write the condition as an inequality: (82 + 53 + x)/3 ≥ 50",
       "Solve it: 15 <= x <= 100"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aeineqw:0,82,53,2"
     },
     {
      "title": "Neighbourhoods of a point in interval notation",
@@ -11413,7 +11502,9 @@
        -8,
        -6
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aenbhd:1,-8,2"
     }
    ],
    "diagnostics": [
@@ -11511,8 +11602,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Solve linear equations. If a step is slow, practise that skill first.",
-        "Then the method is: Get the x term alone as for an equation. When you divide by the coefficient, reverse the sign if it is negative. Check with one number from your answer."
+        "Each step builds on another skill: Solve linear equations. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -12221,7 +12311,9 @@
         "2 toy cars"
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aashelf:3,1,0,2"
     },
     {
      "title": "Inside or outside, near or far, in front of or behind",
@@ -12231,7 +12323,8 @@
      ],
      "math": [
       "The square in the picture is a fence, and the dots are animals. Which animal is outside the fence?",
-      "Look at the picture: the answer is cow."
+      "Look at the picture: the answer is cow.",
+      "So the answer is option C: cow."
      ],
      "widget": {
       "type": "plane",
@@ -12301,7 +12394,9 @@
       ],
       "range": 6,
       "quadrant": 1
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aawhere:0,29,1"
     }
    ],
    "diagnostics": [
@@ -12414,8 +12509,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Count objects to 20. If a step is slow, practise that skill first.",
-        "Then the method is: Put your finger on the side you are told (left or right). Count each animal once, moving along the row, until you reach the one asked about."
+        "Each step builds on another skill: Count objects to 20. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -16278,7 +16372,7 @@
      "title": "Tracing a step-by-step algorithm with a loop",
      "text": [
       "An algorithm is a list of exact steps. Tracing it means doing every step in order and writing down each value as it changes, checking the stopping rule each time.",
-      "Make a table with columns K and S. Do Step 2 and Step 3, write the new values, then test Step 4 before going round again."
+      "Make a table with columns K and S. Do the steps that change K and S, write the new values, then test the stopping rule before going round again."
      ],
      "math": [
       "Follow the steps in the table exactly. What is the value of S when you stop?",
@@ -16322,7 +16416,9 @@
         81
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:akloop:6,3,21"
     },
     {
      "title": "Where the repeated-subtraction game ends",
@@ -16341,7 +16437,9 @@
       "5 − 3 = 2: the cards now show 2 and 3",
       "3 − 2 = 1: the cards now show 1 and 2",
       "2 − 1 = 1: the cards now show 1 and 1"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:akeuclid:52,11"
     },
     {
      "title": "Tracing a flowchart with decision boxes",
@@ -16352,7 +16450,9 @@
      "math": [
       "The table in the picture describes a flowchart box by box (ovals start and stop, parallelograms are input or output, rectangles are steps, diamonds are decisions). Trace it with the input 102. What number is output?",
       "102 ≤ 100? No: Bill = 300 + 5 × 2 = 310"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:akflow:3,102"
     }
    ],
    "diagnostics": [
@@ -16643,7 +16743,9 @@
         80
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:abseq:68,1,0"
     },
     {
      "title": "The missing number in a counting pattern",
@@ -16655,7 +16757,9 @@
       "Which number is missing? 5, ?, 15, 20, 25",
       "Each jump is 5 (going up).",
       "One jump from 5 gives 10."
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:abmiss:5,2,0,1"
     },
     {
      "title": "Casting out nines: the nines check number",
@@ -16687,13 +16791,15 @@
         0
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:abnine:0,43"
     },
     {
      "title": "Pascal's triangle: building rows, row sums and diagonals",
      "text": [
-      "Pascal's triangle starts with 1; each row starts and ends with 1 and each other number is the sum of the two above it. Its rows add up to 1, 2, 4, 8, … and its diagonals are 1s, the counting numbers, the triangular numbers 1, 3, 6, 10 …",
-      "To build a new row, write 1, then add each pair of neighbours in the row above, then write 1. Use the patterns to check."
+      "Pascal's triangle starts with a single one; each row starts and ends with one and each other number is the sum of the two above it. Each row adds up to twice the row before it, and its diagonals are all ones, then the counting numbers, then the triangular numbers.",
+      "To build a new row, write a one, then add each pair of neighbours in the row above, then end with a one. Use the patterns to check."
      ],
      "math": [
       "The table shows the first rows of Pascal's triangle: each row starts and ends with 1, and every other number is the sum of the two numbers just above it. Two rows below the last row shown, what is the 2nd number from the left?",
@@ -16724,7 +16830,9 @@
         "1   5   10   10   5   1"
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:abpascal:0,17,1"
     }
    ],
    "diagnostics": [
@@ -16882,8 +16990,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Work out how much one move adds or takes away, then add it once for each move."
+        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -17527,7 +17634,9 @@
       "Anu starts at the point A, which is at (3, 1) on the grid. She moves 1 square to the left, then 2 squares up. Where does she end? Write it as (across, up), for example (2, 3).",
       "Across: 3 − 1 = 2.",
       "Up: 1 + 2 = 3."
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:abmove:3,1,-1,2"
     },
     {
      "title": "The four directions: North, South, East and West",
@@ -17537,7 +17646,8 @@
      ],
      "math": [
       "Divya stands facing South. Which direction is behind Divya?",
-      "The answer is North."
+      "The answer is North.",
+      "So the answer is option B: North."
      ],
      "widget": {
       "type": "table",
@@ -17558,7 +17668,9 @@
         ""
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:abdir:2,2,2"
     },
     {
      "title": "Distances on a map: using a scale and choosing the shortest route",
@@ -17583,7 +17695,9 @@
         "5 km"
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:abroute:0,71"
     },
     {
      "title": "Seats in rows and columns",
@@ -17640,7 +17754,9 @@
         "Vijay"
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:abseat:0,16,4"
     }
    ],
    "diagnostics": [
@@ -17730,8 +17846,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Count how many squares across S is from E, then how many up or down. Add the two numbers."
+        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -20985,7 +21100,9 @@
         7
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:acstory9:0,2,5,2"
     },
     {
      "title": "One-step word problems with four-digit numbers",
@@ -21010,7 +21127,9 @@
        1866,
        5261
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:acstory4:0,30,2"
     }
    ],
    "diagnostics": [
@@ -21108,8 +21227,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Ask: does the amount get bigger or smaller? Are the groups equal? Then choose the operation and work it out."
+        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -21731,7 +21849,8 @@
      ],
      "math": [
       "Look at the line segments AB and CD in the picture. Are they parallel, perpendicular, or neither?",
-      "Count the squares each segment goes across and up: they are parallel"
+      "Count the squares each segment goes across and up: they are parallel",
+      "So the answer is option B: Parallel"
      ],
      "widget": {
       "type": "plane",
@@ -21780,7 +21899,9 @@
         ]
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:acparl:0,2,3,0"
     },
     {
      "title": "Which three points are collinear?",
@@ -21790,7 +21911,8 @@
      ],
      "math": [
       "Which three of the points A, B, C and D in the picture lie on one straight line?",
-      "Each step along the line goes 2 across, 0 up; the points that follow this pattern are A, C, D"
+      "Each step along the line goes 2 across, 0 up; the points that follow this pattern are A, C, D",
+      "So the answer is option C: A, C and D"
      ],
      "widget": {
       "type": "plane",
@@ -21829,7 +21951,9 @@
         ]
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:accoll:2,0,4"
     }
    ],
    "diagnostics": [
@@ -22341,8 +22465,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Represent multiplication as equal groups. If a step is slow, practise that skill first.",
-        "Then the method is: Find how many tiles fit across one row of tiles and how many rows of tiles there are, then multiply (or add the rows)."
+        "Each step builds on another skill: Represent multiplication as equal groups. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -24169,19 +24292,22 @@
       "type": "balance",
       "left": "school bag",
       "right": "1 kg + 1 kg + 1 kg"
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:adwtcap:2,11"
     },
     {
      "title": "Checking an answer by estimating",
      "text": [
       "An estimate made with rounded numbers is close to the exact answer, so an answer far from the estimate must be wrong.",
-      "Round each number to the nearest ten and work out the estimate in your head. If the answer is close (within about 15 here), it is sensible; if it is much smaller or bigger, check the working again."
+      "Round each number to the nearest ten and work out the estimate in your head. If the answer is close to the estimate, it is sensible; if it is much smaller or bigger, check the working again."
      ],
      "math": [
       "Selvi worked out 551 − 97 and got 546. Round each number to the nearest ten to estimate the answer. Is the answer sensible?",
       "Round: 550 and 100",
       "Estimate: 550 − 100 = 450",
-      "546 compared with about 450: The answer is too big to be right"
+      "546 compared with about 450: The answer is too big to be right",
+      "So the answer is option A: The answer is too big to be right"
      ],
      "widget": {
       "type": "numberline",
@@ -24192,13 +24318,15 @@
        450,
        546
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:adestchk:1,25,1"
     },
     {
      "title": "Estimating the total cost of several items",
      "text": [
       "Rounding each price to the nearest ten gives friendly numbers that are easy to add in your head; the estimate tells you roughly how much money you need.",
-      "Look at the ones digit of each price: 0 to 4 round down, 5 to 9 round up. Add the rounded prices."
+      "Look at the ones digit of each price: zero to four rounds down, five to nine rounds up. Add the rounded prices."
      ],
      "math": [
       "Meena buys the things in the picture: an umbrella for ₹95, a steel tumbler for ₹41, a pair of slippers for ₹45. Round each price to the nearest ten rupees and estimate the total cost. What is the estimate, in rupees?",
@@ -24231,7 +24359,9 @@
         50
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:adestcost:3,42"
     }
    ],
    "diagnostics": [
@@ -24340,8 +24470,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Round numbers to the nearest ten, hundred or thousand. If a step is slow, practise that skill first.",
-        "Then the method is: Look at the ones digit: if it is less than five, round down; if it is five or more, round up. Round both numbers, then work out the answer with the tens."
+        "Each step builds on another skill: Round numbers to the nearest ten, hundred or thousand. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -25043,7 +25172,9 @@
         58
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aehund:28,3,0"
     },
     {
      "title": "Patterns in reverse-and-add sums and in the addition chart",
@@ -25054,18 +25185,22 @@
      "math": [
       "In an addition chart, row 19 lists the sums 19 + 0, 19 + 1, 19 + 2, … up to 19 + 10. How many of these 11 sums are even?",
       "The sums go even, odd, even … in turn: 5 of the 11 are even"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aerev:2,19"
     },
     {
      "title": "Sums of consecutive numbers",
      "text": [
-      "In a run of consecutive numbers, the middle number is the average: 3 consecutive numbers add up to 3 × the middle one. The first and last together make the same total as the second and second-last.",
+      "In a run of consecutive numbers, the middle number is the average: an odd number of consecutive numbers add up to how many there are × the middle one. The first and last together make the same total as the second and second-last.",
       "To add them: number of terms × (first + last) ÷ 2. To find them from the sum (an odd number of them): sum ÷ how many = the middle; count back to the smallest."
      ],
      "math": [
       "What is the sum of the 4 consecutive numbers starting at 19 (that is, 19, 20, 21, …)?",
       "Pair the first and last, the second and second-last …: the sum is 4 × (first + last) ÷ 2 = 82"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aecons:0,19,4"
     }
    ],
    "diagnostics": [
@@ -25208,8 +25343,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Count the jumps from the 1st number to the one asked for (one less than its place), multiply by the amount added each time, and add that to the start."
+        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -25557,7 +25691,9 @@
       "type": "circle",
       "radius": "r",
       "sector": 60
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aecpart:4,22"
     }
    ],
    "diagnostics": [
@@ -25982,7 +26118,9 @@
        ]
       ],
       "range": 10
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aetrans:4,1,3,4"
     },
     {
      "title": "Rotating a point about the origin",
@@ -26036,7 +26174,9 @@
        ]
       ],
       "range": 7
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aerot:-2,3,2"
     },
     {
      "title": "A figure and its image: the transformation, and the symmetry it makes",
@@ -26047,7 +26187,8 @@
      "math": [
       "In the picture, triangle A′B′C′ is the image of triangle ABC after one transformation. Which transformation is it?",
       "A, B, C go round in opposite directions: the triangle has been flipped, so it is a reflection",
-      "So the transformation is a reflection in the x-axis"
+      "So the transformation is a reflection in the x-axis",
+      "That is option A, so the answer is A"
      ],
      "widget": {
       "type": "plane",
@@ -26151,7 +26292,9 @@
        ]
       ],
       "range": 7
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aetfig:1,1,0,0"
     }
    ],
    "diagnostics": [
@@ -26986,8 +27129,8 @@
     {
      "title": "How many parts make a kilogram or a litre",
      "text": [
-      "1 kg = 1000 g and 1 L = 1000 mL. Two 500 g packets make 1 kg, four 250 g packets make 1 kg, and so on.",
-      "Find how many parts make 1 kg (or 1 L): 1000 ÷ the part. Then multiply by the number of kilograms (or litres)."
+      "A kilogram is a thousand grams and a litre is a thousand millilitres. Equal packets that together weigh a thousand grams make 1 kg.",
+      "Find how many parts make 1 kg (or 1 L): divide a thousand by the size of one part. Then multiply by the number of kilograms (or litres)."
      ],
      "math": [
       "How many bottles of 500 mL together make 5 L?",
@@ -27005,64 +27148,76 @@
        500,
        500
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aeparts:4,5,1"
     },
     {
      "title": "Changing a measure into the larger unit and what is left",
      "text": [
-      "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL, 1 km = 1000 m. To change into the larger unit, see how many whole large units fit, and what is left.",
-      "Divide by 100, 10 or 1000: the whole number of times is the large unit; the remainder is the small unit (3450 g = 3 kg 450 g)."
+      "1 m is a hundred cm and 1 cm is ten mm; 1 kg, 1 g, 1 L and 1 km are each a thousand of the smaller unit (g, mg, mL and m). To change into the larger unit, see how many whole large units fit, and what is left.",
+      "Divide by how many small units make one large unit (a hundred, ten or a thousand): the whole number of times is the large unit; the remainder is the small unit."
      ],
      "math": [
       "7560 mg = how many g and mg? Write the answer as (g, mg); for example, 3 g 5 mg is (3, 5).",
       "7560 ÷ 1000: 7 whole large units",
       "7560 − 7000 = 560 small units left"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aeconvu:5,168"
     },
     {
      "title": "Writing a measure as a decimal of the larger unit",
      "text": [
-      "A small unit is a fraction of the large unit: 1 g is one thousandth of a kg, so 3450 g = 3450 thousandths of a kg = 3.450 kg = 3.45 kg.",
-      "Divide by 1000 (or 100, or 10): move the decimal point 3 (or 2, or 1) places to the left, filling empty places with zeros (3045 g = 3.045 kg)."
+      "A small unit is a fraction of the large unit: 1 g is one thousandth of a kg, so a number of grams is that many thousandths of a kilogram.",
+      "Divide by a thousand (or a hundred, or ten): move the decimal point three (or two, or one) places to the left, filling empty places with zeros."
      ],
      "math": [
       "Write 1710 g in kilograms (as a decimal).",
       "1710 ÷ 1000 = 1.71"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aeconvd:1,135"
     },
     {
      "title": "Comparing weights in different units with <, = or >",
      "text": [
-      "Weights can be compared only in the same unit: 1 kg = 1000 g and 1 g = 1000 mg.",
-      "Change the weight in two units into the small unit (2 kg 50 g = 2050 g), then compare the numbers."
+      "Weights can be compared only in the same unit: 1 kg is a thousand grams and 1 g is a thousand milligrams.",
+      "Change the weight written in two units into the small unit (kilograms into grams, grams into milligrams), then compare the numbers."
      ],
      "math": [
       "Which sign goes in the box: 8 g 250 mg ☐ 8340 mg? Choose <, = or >.",
       "8 large units 250 small units = 8250 small units",
       "Compare 8250 and 8340"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aewcmp:1,143"
     },
     {
      "title": "Feet, inches and centimetres, and estimating with a known length",
      "text": [
-      "Feet and inches are older units still used for heights: 12 inches make 1 foot, 1 inch is about 2.5 cm and 1 foot about 30 cm. A known length (a door, a step, a bus) can be used as a ruler to estimate bigger lengths.",
-      "Change feet to cm (× 30) and inches to cm (× 2.5) and add. To estimate with a known length, count how many of it fit and multiply."
+      "Feet and inches are older units still used for heights: twelve inches make 1 foot, 1 inch is about two and a half cm and 1 foot about thirty cm. A known length (a door, a step, a bus) can be used as a ruler to estimate bigger lengths.",
+      "Change feet to cm (multiply by about thirty) and inches to cm (multiply by about two and a half) and add. To estimate with a known length, count how many of it fit and multiply."
      ],
      "math": [
       "A railway coach is about 25 m long. A train has 7 coaches. About how many metres is that?",
       "7 × 25 m = 175 m"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aeftin:2,7,4"
     },
     {
      "title": "Converting units with a conversion factor",
      "text": [
-      "A conversion factor says how many of one unit make one of the other: 1 inch = 2.54 cm, 1 km/h = 5/18 m/s. Converting is multiplying by the factor, because the amount is proportional.",
+      "A conversion factor says how many of one unit make one of the other, for example how many centimetres make 1 inch. Converting is multiplying by the factor, because the amount is proportional.",
       "Write the factor as 'new units per old unit' and multiply. Check the direction: going to a smaller unit gives a bigger number."
      ],
      "math": [
       "1 inch = 2.54 cm. A tablet screen is 11 inches across. How many centimetres is that?",
       "11 × 2.54 = 27.94"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aecf:2,11,0"
     }
    ],
    "diagnostics": [
@@ -27262,7 +27417,7 @@
      "title": "Comparing a tenths decimal with a hundredths decimal",
      "text": [
       "Decimals are compared place by place from the left, like whole numbers: first the wholes, then the tenths, then the hundredths. More digits does not mean bigger.",
-      "Write both with the same number of places (0.7 = 0.70) and compare them as hundredths: 70 hundredths is more than 65 hundredths."
+      "Write both with the same number of places by putting a zero after the tenths digit, then compare them as hundredths: the one with more hundredths is bigger."
      ],
      "math": [
       "Which number is greater: 3.1 or 3.42? Write the greater number.",
@@ -27273,40 +27428,48 @@
       "rows": 10,
       "cols": 10,
       "shaded": 10
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aedecc:3,1,4,2"
     },
     {
      "title": "Place value, expanded form and place-value form of decimals with thousandths",
      "text": [
-      "Each place is ten times the place to its right: tens, ones, then after the point tenths (1/10), hundredths (1/100), thousandths (1/1000). A digit's place value is the digit times its place.",
+      "Each place is ten times the place to its right: tens, ones, then after the point tenths, hundredths and thousandths. A digit's place value is the digit times its place.",
       "Write the number in a place-value chart (T, O . t, h, th). Read each digit with its place; for the expanded form, add the place values of the non-zero digits."
      ],
      "math": [
       "What is the place value of the digit 7 in 19.753?",
       "In 19.753, that digit is in the tenths place"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aedpv:0,85"
     },
     {
      "title": "Ordering decimals",
      "text": [
-      "Decimals are compared place by place from the left: wholes, then tenths, then hundredths, then thousandths. Writing them all with the same number of places (0.5 = 0.500) makes this easy.",
-      "Fill each number with zeros to three decimal places, then compare them like whole numbers of thousandths: 0.500, 0.450, 0.505, 0.550."
+      "Decimals are compared place by place from the left: wholes, then tenths, then hundredths, then thousandths. Writing them all with the same number of decimal places, by adding zeros at the end, makes this easy.",
+      "Fill each number with zeros at the end so that all have the same number of decimal places, then compare them like whole numbers."
      ],
      "math": [
       "Write these decimals in ascending order (smallest first): 0.5; 0.41; 0.501; 0.51. Write them in brackets, separated by commas, for example (0.1, 0.25, 0.3, 0.4).",
       "Give every number three decimal places (0.500, 0.410, 0.501, 0.510) and compare: (0.41, 0.5, 0.501, 0.51)"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aedord:40"
     },
     {
      "title": "Decimals as fractions and fractions as decimals",
      "text": [
-      "A decimal is a fraction with a bottom number of 10, 100 or 1000: 0.07 = 7/100, 0.75 = 75/100 = 3/4. A fraction is a division, so 3/8 = 3 ÷ 8 = 0.375.",
-      "Decimal to fraction: write the digits over 10, 100 or 1000 (by the last place) and simplify. Fraction to decimal: make the bottom 10, 100 or 1000 by multiplying, or divide the top by the bottom."
+      "A decimal is a fraction whose bottom number is ten, a hundred or a thousand: the digits after the point are tenths, hundredths or thousandths. A fraction is a division, so dividing its top by its bottom gives its decimal.",
+      "Decimal to fraction: write the digits over ten, a hundred or a thousand (by the last place) and simplify. Fraction to decimal: make the bottom ten, a hundred or a thousand by multiplying, or divide the top by the bottom."
      ],
      "math": [
       "Write 1.2 as a fraction in its simplest form.",
       "Write 1.2 over 10, 100 or 1000 and cancel common factors"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aedfr:1,28"
     }
    ],
    "diagnostics": [
@@ -27619,7 +27782,7 @@
      "math": [
       "Write in figures: seven lakh fifty-nine thousand four hundred three.",
       "7 lakh = 7,00,000",
-      "59 thousand = 59,000",
+      "59 thousand = 59,000: the thousands period holds 5 ten thousand and 9 thousand",
       "4 hundred and 3 = 403; put the periods together"
      ],
      "widget": {
@@ -27651,7 +27814,7 @@
      "title": "Putting large numbers in ascending order",
      "text": [
       "A number with more digits is bigger. When two numbers have the same number of digits, the first place where their digits differ decides.",
-      "First sort by how many digits each number has. Then, for numbers with the same number of digits, compare ten thousands, then thousands, then hundreds … until the digits differ."
+      "First sort by how many digits each number has. Then, for numbers with the same number of digits, compare their digits from the left, starting at the largest place they have (lakhs first when they have six digits, ten lakhs first when they have seven), then the next place down, until the digits differ."
      ],
      "math": [
       "Write these numbers in ascending order (smallest first): 10,726; 17,206; 3,276; 17,026. Write the list in brackets without commas inside the numbers, for example (1234, 5678, …).",
@@ -27696,7 +27859,9 @@
         "6"
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aecmp:261"
     },
     {
      "title": "Number names, commas and expanded forms of large numbers",
@@ -27707,7 +27872,9 @@
      "math": [
       "Which shows 50207990 with commas placed correctly in the Indian system?",
       "Group the digits from the right: 5,02,07,990"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aenumf:1,30"
     }
    ],
    "diagnostics": [
@@ -27730,7 +27897,7 @@
        "math": [
         "Write in figures: one lakh ninety-nine thousand four hundred five.",
         "1 lakh = 1,00,000",
-        "99 thousand = 99,000",
+        "99 thousand = 99,000: the thousands period holds 9 ten thousand and 9 thousand",
         "4 hundred and 5 = 405; put the periods together"
        ],
        "widget": {
@@ -27776,7 +27943,7 @@
        "math": [
         "Write in figures: seven lakh eighty-six thousand three hundred three.",
         "7 lakh = 7,00,000",
-        "86 thousand = 86,000",
+        "86 thousand = 86,000: the thousands period holds 8 ten thousand and 6 thousand",
         "3 hundred and 3 = 303; put the periods together"
        ],
        "role": "strategy",
@@ -27818,8 +27985,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Represent numbers to thousands; Compose tens and ones. If a step is slow, practise that skill first.",
-        "Then the method is: Draw a place-value chart (L, TTh, Th, H, T, O). Write each part in its own places, fill empty places with 0, then put commas between the periods."
+        "Each step builds on another skill: Represent numbers to thousands; Compose tens and ones. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -27929,7 +28095,7 @@
     {
      "title": "Multiplying by a multiple of 10 or 100",
      "text": [
-      "Multiplying by 40 is multiplying by 4 and then by 10, because 40 = 4 × 10.",
+      "Multiplying by a multiple of ten or a hundred is multiplying by its non-zero digit and then by ten or a hundred, because the multiplier is that digit times ten or a hundred.",
       "Multiply by the non-zero digit first, then put the zeros of the multiplier on the end of the answer."
      ],
      "math": [
@@ -27941,7 +28107,9 @@
       "type": "array",
       "rows": 9,
       "cols": 20
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aemult:64,9,1"
     },
     {
      "title": "Dividing a multiple of 10, 100 or 1000 by a one-digit number",
@@ -27958,7 +28126,9 @@
       "type": "array",
       "rows": 6,
       "cols": 4
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aediv0:6,4,2"
     },
     {
      "title": "How big is a large quantity? (time)",
@@ -27971,7 +28141,9 @@
       "60 × 24 = 1440",
       "30,00,000 ÷ 1,440 = 2083.33",
       "2083.33 is nearest to 2083"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajsize:3,6,2"
     }
    ],
    "diagnostics": [
@@ -28189,13 +28361,15 @@
       "marks": [
        475
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aeest:2,47,85,0"
     },
     {
      "title": "Rounding large numbers in real situations",
      "text": [
-      "Large numbers in news and plans are usually rounded: 4,37,862 people is 'about 4,40,000' to the nearest ten thousand. Rounding finds the nearer of the two round numbers on either side.",
-      "Find the place you round to, look at the digit just to its right: 0–4 keep the place and write zeros after it; 5–9 add 1 to the place and write zeros after it."
+      "Large numbers in news and plans are usually rounded, for example to the nearest thousand or ten thousand, so they are easy to say and remember. Rounding finds the nearer of the two round numbers on either side.",
+      "Find the place you round to, look at the digit just to its right: if it is less than five, keep the place and write zeros after it; if it is five or more, add 1 to the place and write zeros after it."
      ],
      "math": [
       "The number of votes cast in a district election is 86,05,763. Round this number to the nearest lakh.",
@@ -28210,12 +28384,14 @@
       "marks": [
        86.05763
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aernd:5,0"
     },
     {
      "title": "Estimating a product by rounding",
      "text": [
-      "Rounding both numbers turns a hard product into an easy one (48 × 32 ≈ 50 × 30). The estimate shows roughly how big the exact answer must be.",
+      "Rounding both numbers turns a hard product into an easy one: numbers close to round tens are multiplied as those round tens. The estimate shows roughly how big the exact answer must be.",
       "Round each number as asked, multiply the non-zero digits, then put back all the zeros of both rounded numbers."
      ],
      "math": [
@@ -28223,7 +28399,9 @@
       "78 rounds to 80",
       "53 rounds to 50",
       "80 × 50 = 4000"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aeestp:0,78,53"
     },
     {
      "title": "Judging answers with an estimate",
@@ -28234,13 +28412,15 @@
      "math": [
       "Which of these needs an EXACT answer (an estimate is not good enough)?",
       "Ask whether only the rough size matters, or every unit counts"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aechk:1,80"
     },
     {
      "title": "Rounding a decimal to a whole number, tenths or hundredths",
      "text": [
       "Rounding a decimal works like rounding whole numbers: find which of the two numbers on either side, at the place asked for, it is nearer to.",
-      "Find the place you round to. Look at the digit just to its right: 0–4 keep the place and drop the digits after it; 5–9 add 1 to the place and drop the digits after it."
+      "Find the place you round to. Look at the digit just to its right: if it is less than five, keep the place and drop the digits after it; if it is five or more, add 1 to the place and drop the digits after it."
      ],
      "math": [
       "Round 40.922 to the nearest whole number.",
@@ -28255,13 +28435,15 @@
       "marks": [
        40.922
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aerdec:0,76"
     },
     {
      "title": "Estimating a large product by rounding",
      "text": [
       "Rounding each factor to its greatest place gives an easy product that is close to the real one: a quick check of size.",
-      "Round each number, multiply the first digits, then write all the zeros of both rounded numbers: 5,000 × 40 = 20 × 10,000 = 2,00,000."
+      "Round each number to its greatest place, multiply their first digits, then write after that product all the zeros of both rounded numbers."
      ],
      "math": [
       "Estimate 6,205 × 71 by rounding each number to its greatest place (for example 4,870 to 5,000 and 36 to 40) and then multiplying.",
@@ -28269,7 +28451,9 @@
       "71 rounds to 70",
       "6 × 7 = 42",
       "Put back the zeros: 6,000 × 70 = 4,20,000"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:avpest:6205,71"
     }
    ],
    "diagnostics": [
@@ -28476,7 +28660,9 @@
        3000,
        4500
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aedrip:5,3"
     },
     {
      "title": "A table of quantities and costs with missing values",
@@ -28487,7 +28673,9 @@
      "math": [
       "The table in the picture shows a school's order from a stationery shop; some values are missing (?). What is the price of one notebook, in rupees?",
       "₹330 ÷ 11 = 30"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aetab:1,151"
     },
     {
      "title": "Problems that combine time, distance and money",
@@ -28499,7 +28687,9 @@
       "A taxi travels at 60 km per hour for 2 hours. The fare is ₹13 for every kilometre. What is the fare, in rupees?",
       "Distance = 60 km/h × 2 h = 120 km",
       "Fare = 120 km × ₹13 = ₹1560"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aetrip:0,4,2,3"
     },
     {
      "title": "Multi-step problems with large numbers",
@@ -28511,18 +28701,22 @@
       "A town had 3,77,458 people. In one year 5,938 babies were born and 8,231 people moved away. How many people lived in the town at the end of the year?",
       "3,77,458 + 5,938 = 3,83,396",
       "3,83,396 − 8,231 = 3,75,165"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aebig:0,9"
     },
     {
      "title": "An attribute-matching puzzle",
      "text": [
       "In a matching puzzle every person goes with exactly one thing and every thing with exactly one person. Each clue rules out (or fixes) some pairs; when only one choice is left in a row or column, it must be the answer.",
-      "Draw a 4 × 4 grid (people down, things across). Mark ✗ for each 'does not' clue and ✓ for each 'does' clue (with ✗ for the rest of that row and column). Keep filling until every row has one ✓."
+      "Draw a grid with the people down the side and the things across the top. Mark ✗ for each 'does not' clue and ✓ for each 'does' clue (with ✗ for the rest of that row and column). Keep filling until every row has one ✓."
      ],
      "math": [
       "Arjun, Divya, Priya and Meena each play a different sport: kabaddi, cricket, chess, football. Clues: Arjun plays kabaddi. Divya does not play chess. Divya does not play football. Priya does not play chess. Who plays cricket?",
       "Make a grid of people and things, put ✗ for every clue that rules a pair out and ✓ for every clue that fixes one; a row or column with three ✗ has its ✓ in the last place"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aematch:13"
     }
    ],
    "diagnostics": [
@@ -28624,8 +28818,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Multiply multi-digit numbers; Add and subtract multi-digit numbers with regrouping; Find simple change. If a step is slow, practise that skill first.",
-        "Then the method is: Multiply to find the cost of each kind of item, add the costs to get the bill, then subtract the bill from the money paid."
+        "Each step builds on another skill: Multiply multi-digit numbers; Add and subtract multi-digit numbers with regrouping; Find simple change. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -29104,14 +29297,16 @@
      "title": "Writing the rule of a growing pattern with a letter",
      "text": [
       "If a pattern grows by the same amount each time, that amount is the number multiplied by n; a fixed extra makes the first shape right.",
-      "Find how much the pattern grows each time (say 3): the rule starts 3n. Compare 3 × 1 with shape 1 to find what to add. Check with shape 4."
+      "Find how much the pattern grows each time: that number times n starts the rule. Work out that number times 1, compare it with shape 1 to find what to add, then check the rule with a later shape."
      ],
      "math": [
       "The table shows the number of matchsticks in the first four shapes of a growing pattern. Write a rule for the number of matchsticks in shape n.",
       "Each shape has 2 more than the one before (9 − 7)",
       "2 × 1 = 2, and shape 1 has 7, so add 5",
       "Rule: 2n + 5"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:afmatch:2,5,0"
     }
    ],
    "diagnostics": [
@@ -30626,7 +30821,9 @@
        "5 cm",
        "3 cm"
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aftris:0,54"
     }
    ],
    "diagnostics": [
@@ -31210,14 +31407,15 @@
     {
      "title": "Adding and subtracting money in rupees and paise",
      "text": [
-      "100 paise make ₹1. Paise go with paise and rupees with rupees, and 100 paise can be swapped for ₹1 (or ₹1 for 100 paise).",
-      "Line up the decimal points. Work on the paise first, exchanging ₹1 and 100 paise when needed, then the rupees."
+      "A hundred paise make ₹1. Paise go with paise and rupees with rupees, and a hundred paise can be swapped for ₹1 (or ₹1 for a hundred paise).",
+      "Line up the decimal points. Work on the paise first, exchanging ₹1 and a hundred paise when needed, then the rupees."
      ],
      "math": [
       "₹61.95 + ₹22.55 = ? Give the answer in rupees (for example, write 12.50 for ₹12.50).",
       "Paise: 95 + 55 = 150 paise",
       "150 paise = ₹1 and 50 paise: carry ₹1",
-      "Rupees: 61 + 22 + 1 carried = ₹84"
+      "Rupees: 61 + 22 + 1 carried = ₹84",
+      "Put the ₹84 and the 50 paise together, writing the paise after the point: ₹84.50"
      ],
      "widget": {
       "type": "table",
@@ -31238,19 +31436,23 @@
         "55"
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:agrupee:61,9,22,5,0"
     },
     {
      "title": "Measurement problems with two units (m and cm, kg and g, km and m, L and mL)",
      "text": [
-      "Only amounts in the same unit can be added or taken away. 1 m = 100 cm, and 1 kg = 1000 g, 1 km = 1000 m, 1 L = 1000 mL, so the smaller unit becomes a decimal of the larger one.",
-      "Change the amount in the smaller unit into the larger unit (divide by 100 or 1000), line up the decimal points, then add or subtract."
+      "Only amounts in the same unit can be added or taken away. A metre is a hundred centimetres, and a kilogram is a thousand grams, a kilometre a thousand metres, a litre a thousand millilitres, so the smaller unit becomes a decimal of the larger one.",
+      "Change the amount in the smaller unit into the larger unit (divide by a hundred or a thousand), line up the decimal points, then add or subtract."
      ],
      "math": [
       "Divya buys 5.7 kg of tomatoes and 450 g of beans. What is the total mass, in kg?",
       "450 g = 450 ÷ 1000 = 0.45 kg",
       "5.7 + 0.45 = 6.15, with the decimal points lined up"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:agmeas:1,57,9,0"
     },
     {
      "title": "Money word problems: the bill and the change",
@@ -31262,7 +31464,9 @@
       "Priya buys a storybook for ₹63.40 and a cup of tea for ₹5.75, and pays with a ₹100 note. How much change should Priya get, in rupees?",
       "Bill: ₹63.40 + ₹5.75 = ₹69.15",
       "Change: ₹100 − ₹69.15 = ₹30.85"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:agchange:63,3,5,7,0"
     }
    ],
    "diagnostics": [
@@ -31377,8 +31581,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Represent tenths and hundredths. If a step is slow, practise that skill first.",
-        "Then the method is: Write the numbers one under the other with the decimal points in a line. Fill empty places with 0, then add or subtract from the right as with whole numbers, and keep the point in the answer."
+        "Each step builds on another skill: Represent tenths and hundredths. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -31568,21 +31771,26 @@
       "What is the highest common factor (HCF) of 28, 64 and 68?",
       "HCF of 28 and 64 is 4",
       "Now with 68: the HCF of 4 and 68 is 4"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aghcf3:28,64,68"
     },
     {
      "title": "Which pair of numbers is co-prime?",
      "text": [
-      "Co-prime numbers have no common factor except 1, so their HCF is 1. Neither number needs to be prime: 8 and 15 are co-prime, but 9 and 15 are not.",
-      "For each pair, test the small primes 2, 3, 5, 7, … : if one of them divides both numbers, the pair is not co-prime. If none does, it is."
+      "Co-prime numbers have no common factor except 1, so their HCF is 1. Neither number needs to be prime: two numbers can each have many factors and still be co-prime, as long as no factor other than 1 divides both.",
+      "For each pair, test the small primes two, three, five, seven, … : if one of them divides both numbers, the pair is not co-prime. If none does, it is."
      ],
      "math": [
       "Two numbers are co-prime when their only common factor is 1. Which pair of numbers is co-prime?",
       "HCF of 13 and 39 is 13",
       "HCF of 20 and 34 is 2",
       "HCF of 39 and 65 is 13",
-      "HCF of 26 and 35 is 1: co-prime"
-     ]
+      "HCF of 26 and 35 is 1: co-prime",
+      "Only 26 and 35 have no common factor except 1, so the answer is option D"
+     ],
+     "role": "worked-example",
+     "instance": "gen:agcop:8"
     },
     {
      "title": "The lowest common multiple of three numbers",
@@ -31594,7 +31802,9 @@
       "What is the lowest common multiple (LCM) of 4, 6 and 14?",
       "LCM of 4 and 6 is 12",
       "LCM of 12 and 14 is 84"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aglcm3:4,6,14"
     },
     {
      "title": "Sharing, grouping and timing problems: HCF or LCM?",
@@ -31606,19 +31816,23 @@
       "A school has 32 girls and 80 boys going on a trip. They must be put into groups of the same size, each group all girls or all boys. What is the largest possible group size?",
       "The parts must divide both amounts exactly and be as large as possible: use the HCF",
       "HCF of 32 and 80 = 16"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aghlw:2,32,80"
     },
     {
      "title": "Using HCF × LCM = product of the two numbers",
      "text": [
-      "For two numbers, HCF × LCM = the product of the numbers: the common prime factors are counted once in the HCF and the rest in the LCM, so together they use every prime factor of both numbers exactly once.",
+      "For two numbers, HCF × LCM = the product of the numbers: for each prime factor, the HCF uses it the smaller number of times it appears in the two numbers and the LCM the larger number of times, so together they use it exactly as often as the two numbers do altogether.",
       "Write HCF × LCM = first number × second number, put in the three values you know, and divide to find the fourth."
      ],
      "math": [
       "The HCF of 22 and 99 is 11. Use HCF × LCM = product of the numbers to find their LCM.",
       "22 × 99 = 2178",
       "2178 ÷ 11 = 198"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aghlp:0,11,2,9"
     }
    ],
    "diagnostics": [
@@ -31829,8 +32043,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Go up the times table of the larger number and stop at the first one the smaller number divides exactly."
+        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -32185,20 +32398,25 @@
      "math": [
       "Farhan has ₹33 and buys 4 pens costing ₹4 each. How many rupees are left? Which expression gives the answer?",
       "The story is 33 − 4 × 4",
-      "33 − 4 × 4 = 17"
-     ]
+      "33 − 4 × 4 = 17",
+      "The expression that tells the story is 33 − 4 × 4, so the answer is option B"
+     ],
+     "role": "worked-example",
+     "instance": "gen:agwrite:1,33,4,4"
     },
     {
      "title": "The terms of an expression",
      "text": [
-      "The terms of an expression are the parts joined by + and − (outside brackets). Each term carries the sign in front of it: 20 − 3 × 4 + 6 is 20 + (−12) + 6, with terms 20, −3 × 4 and 6.",
+      "The terms of an expression are the parts joined by + and − (outside brackets). Each term carries the sign in front of it: in a − b × c + d the terms are a, −b × c and d, because a product is worked out as one piece.",
       "Read along the expression and cut it at every + and − that is not inside brackets. Each piece, with the sign before it, is a term; work out each term on its own."
      ],
      "math": [
       "How many terms does the expression 8 × 9 + (7 + 1) × 7 + 31 + 63 ÷ 9 have?",
       "Cut at each + and − outside brackets: 8 × 9 | +(7 + 1) × 7 | +31 | +63 ÷ 9",
       "4 terms"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:agterm:130,0"
     }
    ],
    "diagnostics": [
@@ -32399,7 +32617,9 @@
       "rows": 10,
       "cols": 10,
       "shaded": 43
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:agpctd:43"
     }
    ],
    "diagnostics": [
@@ -33008,8 +33228,11 @@
       "Simplify (7x + 8) − (10x + 12).",
       "−(10x + 12) = −10x − 12: every sign in the bracket changes",
       "x terms: 7x − 10x = −3x",
-      "Numbers: 8 − 12 = −4"
-     ]
+      "Numbers: 8 − 12 = −4",
+      "Put the x terms and the numbers together: −3x − 4"
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahsub:7,8,10,12"
     },
     {
      "title": "Coefficients and the constant term",
@@ -33020,7 +33243,9 @@
      "math": [
       "In the expression 7x² − 8xy − 4y − 4, what is the constant term?",
       "The constant term is the term with no letter: −4"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahcoef:7,-8,-4,-4,3"
     },
     {
      "title": "The top of a number pyramid",
@@ -33032,7 +33257,9 @@
       "In a number pyramid each block is the sum of the two blocks just below it. The bottom row is x, 4, 9, 10. Write a simplified expression for the block at the top.",
       "Second row: (x + 4), (4 + 9), (9 + 10)",
       "Keep adding pairs to the top and collect like terms: x + 49"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahpyr:0,4,9,10"
     }
    ],
    "diagnostics": [
@@ -33148,8 +33375,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Add and subtract integers. If a step is slow, practise that skill first.",
-        "Then the method is: Group the x terms and the y terms, keeping each sign with the term after it. Add the numbers in front of each group and write one term for each letter."
+        "Each step builds on another skill: Add and subtract integers. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -33248,19 +33474,23 @@
       "Following the steps: 5(3n + 3) − 15",
       "Open the bracket: 15n + 15 − 15",
       "The numbers cancel, leaving 15n: the result is always 15 times the starting number"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahthink:3,3,5"
     },
     {
      "title": "Patterns in calendar and number-grid squares",
      "text": [
-      "In a grid with w numbers in each row, the number to the right of n is n + 1 and the number below it is n + w. So every square of numbers can be written in terms of n, and its sum is an expression in n.",
-      "Write the numbers of the square in terms of n (as in the picture) and add them: a 2 × 2 square gives 4n + 2w + 2, a 3 × 3 square gives 9n + 9(w + 1). Substitute n, or solve the equation for n."
+      "In a grid with w numbers in each row, the number just to the right of n is one more than n and the number just below it is n + w. So every square of numbers can be written in terms of n, and its sum is an expression in n.",
+      "Write each number of the square in terms of n and w (as in the picture) and add them, collecting the n terms, the w terms and the plain numbers. Then substitute the value of n, or solve the equation for n."
      ],
      "math": [
       "A 2 × 2 square of four numbers is marked on a 1 to 100 number grid (10 numbers in each row). Its smallest number is 86. Without adding them one by one, use an expression in n to find the sum of the numbers in the square.",
       "With n the smallest, the square's numbers add up to 4n + 22",
       "Put n = 86: 366"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahcal:1,0,0,86"
     }
    ],
    "diagnostics": [
@@ -33375,8 +33605,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use arithmetic progressions. If a step is slow, practise that skill first.",
-        "Then the method is: Find how many are added each time: that number multiplies n. Then compare d × 1 with Figure 1 to find what to add or take away. Check with Figure 2."
+        "Each step builds on another skill: Use arithmetic progressions. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -33470,7 +33699,9 @@
       "A sequence has t₁ = −9 and tₙ₊₁ = tₙ + 3. Write a formula for tₙ in terms of n.",
       "From t₁ to tₙ there are n − 1 steps of 3: 3n − 3",
       "Add t₁ = −9: tₙ = 3n − 12"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahnth:-9,3"
     },
     {
      "title": "A Virahanka-Fibonacci style sequence",
@@ -33483,7 +33714,9 @@
       "Term 3: 8 + 9 = 17",
       "Term 4: 9 + 17 = 26",
       "Term 5: 17 + 26 = 43"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahfib:8,9,5"
     },
     {
      "title": "Counting rhythms, climbs and tilings: Virahanka numbers",
@@ -33500,7 +33733,9 @@
       "Length 6: 8 (ending with a short part) + 5 (ending with a long part) = 13",
       "Length 7: 13 (ending with a short part) + 8 (ending with a long part) = 21",
       "Length 8: 21 (ending with a short part) + 13 (ending with a long part) = 34"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahrhy:3,0,8"
     },
     {
      "title": "From an explicit rule to its terms and its recursive rule",
@@ -33513,7 +33748,9 @@
       "Put n = 1: t₁ = 11",
       "t2 = 20",
       "t3 = 29"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahexp:0,9,2"
     },
     {
      "title": "Patterns in the Virahanka-Fibonacci numbers",
@@ -33525,7 +33762,9 @@
       "The Virahanka numbers are 1, 2, 3, 5, 8, 13, … (each number after the first two is the sum of the two before it). How many of the first 12 Virahanka numbers are even?",
       "The first 12 numbers: 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233",
       "Multiples of 2 among them: 4"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahfibp:12,1"
     }
    ],
    "diagnostics": [
@@ -33735,7 +33974,9 @@
       "Arjun can finish a job alone in 3 days, and Meena can finish it alone in 9 days. Working together at the same rates, how many days will they take?",
       "Part of the job done in one day together: 1/3 + 1/9 = 4/9",
       "Days for the whole job: 1 ÷ 4/9 = 9/4"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahwork:3,9"
     },
     {
      "title": "Direct proportion, inverse proportion or neither?",
@@ -33747,8 +33988,11 @@
       "The table shows pairs of values of two quantities x and y. Are x and y in direct proportion, in inverse proportion, or neither?",
       "x × y in each row: 32, 72, 128, 200",
       "y ÷ x in each row: 2, 2, 2, 2",
-      "So: direct proportion"
-     ]
+      "So: direct proportion",
+      "So the answer is option B: direct proportion, because y ÷ x is the same in every row"
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahvary:1,27"
     },
     {
      "title": "Inverse proportion: workers and time, speed and time",
@@ -33760,7 +34004,9 @@
       "4 workers can build a wall in 27 days. How many days would 18 workers take, working at the same rate?",
       "The whole job is 4 × 27 = 108 (it stays the same)",
       "108 ÷ 18 = 6"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahman:0,4,27,18"
     },
     {
      "title": "Compound variation: workers, hours and days",
@@ -33772,7 +34018,9 @@
       "16 workers, working 5 hours a day, finish a job in 14 days. How many days will 7 workers take for the same job, working 10 hours a day?",
       "The work stays in proportion: 16 × 5 × 14 = 1120",
       "1120 ÷ 70 = 16 days"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahcomp:0,187"
     }
    ],
    "diagnostics": [
@@ -33965,8 +34213,11 @@
      ],
      "math": [
       "A rectangle is 15 cm long and 8 cm wide. Which of these rectangles is congruent to it?",
-      "Match the measurements in any order (8, 15): a rectangle 15 cm wide and 8 cm long fits exactly"
-     ]
+      "Match the measurements in any order (8, 15): a rectangle 15 cm wide and 8 cm long fits exactly",
+      "So the answer is option C: a rectangle 15 cm wide and 8 cm long, the same shape and the same size"
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahcfig:1,54"
     }
    ],
    "diagnostics": [
@@ -34138,14 +34389,16 @@
     {
      "title": "Finding x from angles at parallel lines",
      "text": [
-      "The angle facts become equations: alternate angles give 'angle = angle', co-interior angles give 'angle + angle = 180'.",
+      "The angle facts become equations: alternate angles give 'angle = angle', co-interior angles give 'angle + angle = a straight angle' (one hundred and eighty degrees).",
       "Write the equation from the angle fact, collect the x terms and the numbers, and divide. Then check both angles with your x."
      ],
      "math": [
       "Two parallel lines are cut by a transversal. A pair of alternate interior angles measure (4x + 20)° and (2x + 32)°. What is x?",
       "Alternate angles are equal: 4x + 20 = 2x + 32, so 2x = 12",
       "x = 12 ÷ 2 = 6"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahparx:0,4,2,6,6"
     },
     {
      "title": "Naming corresponding, alternate, co-interior and vertically opposite angles",
@@ -34155,8 +34408,11 @@
      ],
      "math": [
       "Line t crosses two parallel lines l and m, making eight angles. The table shows where each angle lies (above or below each line, and on which side of t). Which angle is the vertically opposite angle to angle e?",
-      "Find angle e in the table and move to the matching place: h"
-     ]
+      "Find angle e in the table and move to the matching place: h",
+      "So the answer is option B: h"
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahname:0,1,3,4"
     }
    ],
    "diagnostics": [
@@ -34677,8 +34933,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Calculate polygon angle sums. If a step is slow, practise that skill first.",
-        "Then the method is: Find each regular polygon's interior angle (180° − 360° ÷ number of sides), add the angles already at the point, and take the total from 360°; share the gap if more than one tile fills it."
+        "Each step builds on another skill: Calculate polygon angle sums. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -36109,7 +36364,9 @@
       "A circle has a radius of 2 cm. Taking π = 3.14, find its area, in cm².",
       "r² = 2 × 2 = 4",
       "A = π × r² = 3.14 × 4 = 12.56 cm²"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aicarea:2,0,1"
     },
     {
      "title": "Distance travelled by a wheel",
@@ -36122,7 +36379,9 @@
       "One turn rolls the circumference: 22/7 × 84 = 264 cm",
       "58 turns: 264 × 58 = 15312 cm",
       "15312 cm ÷ 100 = 153.12 m"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aiwheel:6,58,0"
     },
     {
      "title": "Arc length, area and perimeter of a sector",
@@ -36134,7 +36393,9 @@
       "A sector of a circle has a radius of 21 cm and an angle of 60°. Taking π = 22/7, find its area, in cm².",
       "Whole circle: 22/7 × 21 × 21 = 1386 cm²",
       "Sector: 60/360 of 1386 = 231 cm²"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aisector:3,2,1"
     },
     {
      "title": "Area of a circular path (a ring)",
@@ -36147,19 +36408,24 @@
       "Outer radius: 7 + 3 = 10",
       "R² − r²: 100 − 49 = 51",
       "Path area: 3.14 × 51 = 160.14"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:airing:7,3"
     },
     {
      "title": "Circumference ÷ diameter, and values of π through history",
      "text": [
-      "For every circle, big or small, the circumference is a little more than 3 times the diameter: C ÷ d is always the same number, π ≈ 3.1416. Mathematicians in India and elsewhere found better and better fractions for it (Aryabhata: 62832/20000).",
+      "For every circle, big or small, the circumference is a little more than three times the diameter: C ÷ d is always the same number, called π. Mathematicians in India and elsewhere found better and better fractions for it; Aryabhata's was correct to four decimal places.",
       "Divide the circumference by the diameter (both in the same unit) and round to the places asked. For a fraction, divide the top by the bottom."
      ],
      "math": [
       "Anu measures a bicycle wheel with a tape: its circumference is 1916 mm and its diameter is 610 mm. Work out circumference ÷ diameter, correct to two decimal places.",
       "1916 ÷ 610 ≈ 3.14 (rounded)",
-      "The same ratio comes out for every circle, whatever its size: this constant is π"
-     ]
+      "The same ratio comes out for every circle, whatever its size: this constant is π",
+      "So for this wheel, circumference ÷ diameter = 3.14, correct to two decimal places"
+     ],
+     "role": "worked-example",
+     "instance": "gen:aipi:0,2,610"
     },
     {
      "title": "Finding the radius or diameter from the circumference",
@@ -36170,7 +36436,9 @@
      "math": [
       "The circumference of a circle is 308 cm. Taking π = 22/7, find its diameter, in cm.",
       "d = C ÷ π = 308 × 7/22 = 98 cm"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:airad:1,7,0"
     }
    ],
    "diagnostics": [
@@ -36351,7 +36619,9 @@
       "The diagonals of a rhombus are 19 cm and 18 cm long. Find its area, in cm².",
       "d₁ × d₂ = 19 × 18 = 342",
       "Area = half of 342 = 171 cm²"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:airhomb:19,18,0"
     }
    ],
    "diagnostics": [
@@ -36916,7 +37186,9 @@
       "Whole rectangle: 7 × 4 = 28",
       "Cut-out corner: 3 × 1 = 3",
       "Area: 28 − 3 = 25"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ailshape:7,4,3,1,0"
     },
     {
      "title": "Area of a rectangular path",
@@ -36929,7 +37201,9 @@
       "Garden with path: 13 × 12 = 156",
       "Garden: 9 × 8 = 72",
       "Path: 156 − 72 = 84"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aipath:9,8,2,0"
     },
     {
      "title": "Areas of fields and polygons split into triangles, rectangles and trapeziums",
@@ -36942,20 +37216,24 @@
       "Triangle ABC: half of 279 = 139.5",
       "Triangle ACD: half of 310 = 155",
       "Total area: 139.5 + 155 = 294.5"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aisplit:0,31,9,10,0"
     },
     {
      "title": "Area and perimeter of composite shapes with semicircles, quadrants, triangles and trapeziums",
      "text": [
-      "A composite shape is cut into pieces whose areas are known (rectangle, triangle, trapezium, semicircle πr²/2, quadrant πr²/4); the area is the sum of the pieces, or a whole minus the piece cut away. A perimeter goes round the outside only.",
-      "Split the shape along straight lines, find each piece's area and add (or subtract a cut-out). For a perimeter, add only the outer edges: a semicircle's curved edge is πd/2 and it replaces the side it stands on."
+      "A composite shape is cut into pieces whose areas are known (rectangle, triangle, trapezium, a semicircle is half a circle, a quadrant a quarter); the area is the sum of the pieces, or a whole minus the piece cut away. A perimeter goes round the outside only.",
+      "Split the shape along straight lines, find each piece's area and add (or subtract a cut-out). For a perimeter, add only the outer edges: a semicircle's curved edge is half the circle's circumference and it replaces the side it stands on."
      ],
      "math": [
       "A garden is a rectangle 6 m long and 28 m wide, with a semicircle on one of its 28 m sides. Find its area, in m². Take π = 22/7.",
       "Rectangle: 168",
       "Semicircle πr²/2: 308",
       "Total: 168 + 308 = 476"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:amcshape:0,6,0,4"
     }
    ],
    "diagnostics": [
@@ -37123,38 +37401,44 @@
     {
      "title": "Dividing decimals",
      "text": [
-      "Multiplying both numbers in a division by the same amount does not change the answer (12 ÷ 4 = 120 ÷ 40), so you can make the divisor a whole number first.",
+      "Multiplying both numbers in a division by the same amount does not change the answer (sharing ten times as many sweets among ten times as many children gives each child the same), so you can make the divisor a whole number first.",
       "Move the decimal point in the divisor to make it whole, move the dividend's point the same number of places, then divide as usual, keeping the point in line."
      ],
      "math": [
       "16.8 ÷ 28 = ?",
       "Multiply both numbers by 1 so the divisor is whole: the dividend becomes 16.8",
       "16.8 ÷ 28 = 0.6"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aiddiv:6,1,28,0"
     },
     {
      "title": "Multiplying and dividing decimals by 10, 100 and 1000",
      "text": [
-      "Multiplying by 10 makes each digit worth ten times as much, so every digit moves one place to the left; dividing by 10 moves every digit one place to the right.",
-      "Count the zeros in 10, 100 or 1000 and move the decimal point that many places: right for ×, left for ÷. Fill empty places with zeros."
+      "Multiplying by ten makes each digit worth ten times as much, so every digit moves one place to the left; dividing by ten moves every digit one place to the right.",
+      "Count the zeros in the ten, hundred or thousand and move the decimal point that many places: right for ×, left for ÷. Fill empty places with zeros."
      ],
      "math": [
       "45.5 × 100 = ?",
       "Multiplying by 100 moves every digit 2 places to the left (the number gets bigger): 45.5 → 4550"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aidp10:455,1,2,0"
     },
     {
      "title": "Estimating decimal products and quotients",
      "text": [
       "An estimate tells roughly how big an answer should be, so a misplaced decimal point shows up at once. Rounding the numbers first makes the calculation easy to do in your head.",
-      "Round each number to the nearest whole number (look at the tenths: 5 or more, round up). Multiply or divide the rounded numbers. Compare with the exact answer: they should be close."
+      "Round each number to the nearest whole number (look at the tenths digit: five or more, round up). Multiply or divide the rounded numbers. Compare with the exact answer: they should be close."
      ],
      "math": [
       "Estimate 5.6 × 8.2 by first rounding each number to the nearest whole number.",
       "Round the first number: 5.6 → 6",
       "Round the second number: 8.2 → 8",
       "The estimate: 6 × 8 = 48"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aiest:0,56,82"
     },
     {
      "title": "Word problems with dividing decimals",
@@ -37166,7 +37450,9 @@
       "₹103.18 is shared equally among 7 friends. How much does each friend get, in rupees?",
       "Make the divisor a whole number: 103.18 ÷ 7",
       "103.18 ÷ 7 = 14.74"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aidword:1,1474,7"
     }
    ],
    "diagnostics": [
@@ -37263,8 +37549,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Multiply the numbers as if there were no decimal points, count the decimal places in both, and give the answer that many decimal places. Estimate with rounded numbers to check that the point is in a sensible place."
+        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -37367,7 +37652,9 @@
       "2/3 ÷ 1/10 = ?",
       "Dividing by 1/10 is the same as multiplying by its reciprocal 10/1",
       "2/3 × 10/1 = 20/3"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aifdiv:2,3,1,10"
     },
     {
      "title": "Dividing a whole number by a fraction",
@@ -37379,7 +37666,9 @@
       "4 ÷ 4/9 = ?",
       "The reciprocal of the divisor: 4/9 → 9/4",
       "Multiply by it: 4 × 9/4 = 9"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aiwdiv:4,4,9"
     },
     {
      "title": "Word problems with multiplying or dividing fractions",
@@ -37391,7 +37680,9 @@
       "A tailor has 12 m of cloth. Each school bag needs 2/7 m. How many bags can be made from the cloth?",
       "Decide the operation: how many fit: divide",
       "12 ÷ 2/7 = 42"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aifword:1,2,7,12,1"
     },
     {
      "title": "A fraction product in an area model",
@@ -37408,7 +37699,9 @@
       "rows": 4,
       "cols": 5,
       "shaded": 15
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:avarea:1,5,3,4,0"
     }
    ],
    "diagnostics": [
@@ -37499,8 +37792,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use multiplication facts; Generate equivalent fractions. If a step is slow, practise that skill first.",
-        "Then the method is: Change mixed numbers to improper fractions, multiply the tops, multiply the bottoms, and simplify."
+        "Each step builds on another skill: Use multiplication facts; Generate equivalent fractions. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -37625,7 +37917,9 @@
         13
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aitemp:-2,13,1"
     },
     {
      "title": "Several integer changes in a row: temperatures, lifts and divers",
@@ -37638,7 +37932,9 @@
       "First change: 2 + 2 = 4",
       "Second change: 4 − 8 = −4",
       "Third change: (−4) + 6 = 2"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aimulti:0,2,2,8,6"
     }
    ],
    "diagnostics": [
@@ -37811,7 +38107,9 @@
       "3 × (−3) = ?",
       "3 × 3 = 9",
       "Different signs give a negative product: −9"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajimul:3,-3"
     },
     {
      "title": "Dividing integers",
@@ -37823,7 +38121,9 @@
       "45 ÷ (−3) = ?",
       "45 ÷ 3 = 15",
       "Different signs give a negative quotient: −15"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajidiv:-15,-3"
     }
    ],
    "diagnostics": [
@@ -37944,8 +38244,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Add and subtract integers. If a step is slow, practise that skill first.",
-        "Then the method is: Work out each product or quotient with the sign rule, then add or subtract the results from left to right."
+        "Each step builds on another skill: Add and subtract integers. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -38446,7 +38745,9 @@
       "Without brackets: 96 − 56 + 26 (the minus sign changes every sign inside)",
       "96 − 56 = 40",
       "40 + 26 = 66"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajbrk:96,56,26,0"
     },
     {
      "title": "Comparing two expressions without working them out",
@@ -38456,8 +38757,11 @@
      ],
      "math": [
       "Without working out either side, decide which sign goes in the box: 7 × (48 − 3) □ 7 × 48 − 3",
-      "a × (b − c) = a × b − a × c, which is less than a × b − c"
-     ]
+      "a × (b − c) = a × b − a × c, which is less than a × b − c",
+      "The first expression is the smaller one, so the sign between them is <."
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajcmpx:6,7,48,3"
     },
     {
      "title": "Naming the property: closure, commutative, associative, distributive, identity and inverse",
@@ -38467,8 +38771,11 @@
      ],
      "math": [
       "Which property does this statement show? 82 ×",
-      "The statement shows the distributive property."
-     ]
+      "The statement shows the distributive property.",
+      "That is the option to choose: Distributive property."
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajprop:2,0,0,80,41,92"
     }
    ],
    "diagnostics": [
@@ -38559,8 +38866,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Write the number near 100 as 100 plus or minus a little, multiply k by each part, then add or take away."
+        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -38661,7 +38967,9 @@
       "What is the smallest whole number that 396 must be multiplied by so that the product is a perfect square?",
       "396 = 2 × 2 × 3 × 3 × 11",
       "Primes without a partner: 11 = 11"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajsqm:396"
     },
     {
      "title": "Divisibility and co-primeness from prime factorisations",
@@ -38671,8 +38979,11 @@
      ],
      "math": [
       "A = 3 × 5 and B = 2² × 3² × 5 × 7. Using only these prime factorisations (no long division), decide which statement is true.",
-      "Every prime power in A also appears in B (at least as high), so B is divisible by A"
-     ]
+      "Every prime power in A also appears in B (at least as high), so B is divisible by A",
+      "So the true statement is: B is divisible by A."
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajpfdc:0,1,1,0,2,2,1,1"
     }
    ],
    "diagnostics": [
@@ -39237,7 +39548,9 @@
      "math": [
       "89 billion is how many crore?",
       "89 billion = 89 × 100 crore = 8900 crore"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajcrore:2,89,0,0"
     },
     {
      "title": "The greatest of four numbers in lakhs and crores",
@@ -39247,20 +39560,25 @@
      ],
      "math": [
       "Which of these numbers is the greatest? 9,43,54,850;  69,36,47,609;  68,98,61,059;  69,31,82,351",
-      "The greatest is 69,36,47,609: it has the most crores and lakhs."
-     ]
+      "The greatest is 69,36,47,609: it has the most crores and lakhs.",
+      "No other option is bigger, so choose 69,36,47,609."
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajcrcmp:243"
     },
     {
      "title": "Millions and billions in lakhs and crores",
      "text": [
-      "The two systems name the same number differently: 1 million = 10 lakh, 10 million = 1 crore, and 1 billion = 100 crore.",
-      "Write the number out in full, then regroup its digits with Indian commas (3, then 2, 2 …) and read off the lakhs or crores."
+      "The two systems name the same number differently: one million is ten lakh, ten million is one crore, and one billion is a hundred crore.",
+      "Write the number out in full, then regroup its digits with Indian commas (a comma before the last three digits, then after every two digits going left) and read off the lakhs or crores."
      ],
      "math": [
       "74 million is 74,000,000 in the international system. How many lakh is it?",
       "1 million = 10,00,000 = 10 lakh",
       "74 × 10 = 740"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajmilr:74,0"
     }
    ],
    "diagnostics": [
@@ -39365,8 +39683,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Rewrite the number with international commas (groups of three digits, counting from the right) and read the number of millions in front of the second comma from the right."
+        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -39454,15 +39771,17 @@
     {
      "title": "Simple interest, amount, rate or time",
      "text": [
-      "Simple interest is the same every year: R% of the principal, so T years give T times as much. SI = P × R × T ÷ 100.",
-      "Write SI = P × R × T ÷ 100, put in the three numbers you know, and work out the fourth."
+      "Simple interest is the same every year: R% of the principal, so T years give T times as much. R% means R out of a hundred, so SI is P × R × T divided by a hundred.",
+      "Write SI = P × R × T divided by a hundred, put in the three numbers you know, and work out the fourth. The amount is the principal plus the interest."
      ],
      "math": [
       "₹500 is lent for 1 year at 7% simple interest per year. What is the amount (principal + interest) at the end, in rupees?",
       "One year's interest: 7% of ₹500 = ₹35",
       "For 1 years: ₹35 × 1 = ₹35",
       "Amount = ₹500 + ₹35 = ₹535"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajsi:1,7,1,1"
     },
     {
      "title": "Discount and GST",
@@ -39474,7 +39793,9 @@
       "A shirt is marked ₹1,550. The shop gives a 30% discount. What is the selling price, in rupees?",
       "30% of ₹1550 = ₹465",
       "₹1550 − ₹465 = ₹1085"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajdisc:31,6,0"
     },
     {
      "title": "Profit or loss in rupees, and a missing price",
@@ -39485,7 +39806,9 @@
      "math": [
       "A shopkeeper bought a wall clock for ₹980 and made a loss of ₹140. What was the selling price, in rupees?",
       "₹980 − ₹140 = ₹840"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajplamt:98,-28,1"
     },
     {
      "title": "Overhead expenses and the marked price",
@@ -39498,7 +39821,9 @@
       "Cost price = price paid + overheads: 280 + 120 = ₹400",
       "540 − 400 = ₹140",
       "140 ÷ 400 × 100 = 35%"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:avmarked:14,12,35,0"
     }
    ],
    "diagnostics": [
@@ -39587,8 +39912,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Calculate percentages. If a step is slow, practise that skill first.",
-        "Then the method is: To find the selling price, find p% of the cost price and add it (profit) or take it away (loss). To find the cost price, divide the selling price by (100 ± p) and multiply by 100."
+        "Each step builds on another skill: Calculate percentages. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -39864,7 +40188,9 @@
      "math": [
       "What is the multiplicative inverse (reciprocal) of −2/5?",
       "−2/5 × −5/2 = 1"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajinv:1,-2,5,1,2"
     },
     {
      "title": "A rational number in standard form",
@@ -39875,18 +40201,23 @@
      "math": [
       "Write 4/48 in standard form (a positive denominator, and no common factor of the numerator and denominator other than 1).",
       "Divide both by the highest common factor 4: 1/12"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajrstd:1,12,4,0"
     },
     {
      "title": "Comparing two rational numbers",
      "text": [
       "On the number line, the number to the right is greater. Every positive number is greater than every negative number; between two negatives, the one closer to 0 is greater.",
-      "Write both with the same positive denominator and compare the numerators (−8/12 < −3/12 because −8 < −3)."
+      "Write both with the same positive denominator and compare the numerators: the greater numerator gives the greater number, and for negative numerators the one closer to zero is greater."
      ],
      "math": [
       "Compare −4/9 and 7/5. Which statement is true?",
-      "With a common denominator: −20/45 and 63/45; compare the numerators."
-     ]
+      "With a common denominator: −20/45 and 63/45; compare the numerators.",
+      "63 is greater than −20, so the greater numerator gives the greater number: 7/5 is greater than −4/9."
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajrcq:-4,9,7,5"
     },
     {
      "title": "Rational numbers on the number line, and one halfway between two",
@@ -39898,7 +40229,9 @@
       "Find the rational number exactly halfway between −8/9 and −2/9.",
       "−8/9 + (−2/9) = −10/9",
       "−10/9 ÷ 2 = −5/9"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajrline:1,-8,9,-2,9"
     }
    ],
    "diagnostics": [
@@ -41977,8 +42310,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Find a row, column or diagonal with no hidden number and add it. Then find the line through ? whose other two numbers are visible, and subtract them from the total."
+        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -42050,7 +42382,9 @@
      "math": [
       "In this puzzle each letter stands for a digit: different letters stand for different digits, the same letter always for the same digit, and no number starts with 0. AB + AC = BBD. What digit is C?",
       "The puzzle is 51 + 59 = 110, so the letter is 9"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:akcrypt2:0,28,2"
     }
    ],
    "diagnostics": [
@@ -42350,8 +42684,11 @@
      ],
      "math": [
       "Look at the table of x and y in the picture. Is y in direct proportion to x, in inverse proportion, or neither?",
-      "y ÷ x: 6/1, 6/1, 6/1, 6/1; x × y: 24, 96, 216, 384. y ÷ x is the same each time: direct proportion."
-     ]
+      "y ÷ x: 6/1, 6/1, 6/1, 6/1; x × y: 24, 96, 216, 384. y ÷ x is the same each time: direct proportion.",
+      "So the answer is option B: Direct proportion"
+     ],
+     "role": "worked-example",
+     "instance": "gen:akdirinv:0,6,1"
     }
    ],
    "diagnostics": [
@@ -42464,8 +42801,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Solve direct proportions. If a step is slow, practise that skill first.",
-        "Then the method is: Find the scale factor: new ÷ old for the pair you know. Multiply the other number by the same factor (or find the amount for 1 first, then multiply)."
+        "Each step builds on another skill: Solve direct proportions. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -42955,7 +43291,9 @@
         10
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:akgroup:83,0"
     },
     {
      "title": "Primary or secondary data?",
@@ -42965,8 +43303,11 @@
      ],
      "math": [
       "Which of these is primary data?",
-      "Primary data is collected first-hand by the person who will use it"
-     ]
+      "Primary data is collected first-hand by the person who will use it",
+      "So the answer is option D: A class measures the heights of its own students for a project.."
+     ],
+     "role": "worked-example",
+     "instance": "gen:akprim:0,149"
     }
    ],
    "diagnostics": [
@@ -43347,7 +43688,9 @@
       "2 × −5 + 3 = −7",
       "2 × −7 + 22 = 8: this last number is the remainder",
       "The quotient is 3x² − 5x − 7"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:alpdiv:3,2,-5,-7,8"
     },
     {
      "title": "Recognising and classifying polynomials",
@@ -43359,18 +43702,22 @@
       "By its number of terms (after collecting like terms), what kind of polynomial is 3x² − 7x?",
       "Collect like terms and order by powers: 3x² − 7x",
       "It has 2 as its number of terms: answer B"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:alpoly:3,9"
     },
     {
      "title": "Degree and coefficients of a polynomial",
      "text": [
-      "The degree of a monomial is the sum of the powers of its variables (3x²y³ has degree 5); the degree of a polynomial is the highest degree of its terms. The coefficient of a power is the number multiplying it, with its sign.",
+      "The degree of a monomial is the sum of the powers of its variables (in x²y³ the powers add up to five, so its degree is five); the degree of a polynomial is the highest degree of its terms. The coefficient of a power is the number multiplying it, with its sign.",
       "Collect like terms. For each term add the powers of its letters; the largest such sum is the degree. For a coefficient, find the term with that power and read the number (and sign) in front; 0 if it is missing."
      ],
      "math": [
       "What is the degree of the monomial −5y²z²?",
       "In −5y²z² the answer is 4"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:alpdeg:2,53"
     },
     {
      "title": "Adding and subtracting polynomials",
@@ -43381,7 +43728,9 @@
      "math": [
       "Simplify (−7x³ + 4x² + 8x) + (6x³ − 8x² − 5). Write the result as ax³ + bx² + cx + d and give (a, b, c, d).",
       "Add the coefficients of each power: (−1, −4, 8, −5)"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aladd:0,114"
     },
     {
      "title": "The value of a polynomial and the zero of a linear polynomial",
@@ -43392,7 +43741,9 @@
      "math": [
       "Find the value of p(x) = 4x² + 5x − 3 at x = 2, that is, p(2).",
       "Put x = 2 into 4x² + 5x − 3: 23"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aleval:0,36"
     },
     {
      "title": "Dividing a polynomial by a monomial",
@@ -43404,7 +43755,9 @@
       "Divide 42x⁵ − 42x⁴ + 21x³ by 7x³. Write the quotient as px² + qx + r and give (p, q, r).",
       "Divide each term by 7x³: subtract the powers and divide the coefficients: 6x² − 6x + 3",
       "So (p, q, r) = (6, −6, 3)"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:almono:7,3,6,-6,3,0"
     },
     {
      "title": "The division algorithm with a non-monic or quadratic divisor",
@@ -43416,8 +43769,11 @@
       "Divide p(x) = x³ − 9x² + 25x − 6 by x² − 4x + 2. Write p(x) = (x² − 4x + 2) × q(x) + r(x), where q(x) = ax + b and r(x) = cx + d. Give (a, b, c, d).",
       "Next quotient coefficient: 1 ÷ 1 = 1",
       "Next quotient coefficient: −5 ÷ 1 = −5",
-      "What is left is the remainder: 3x + 4"
-     ]
+      "What is left is the remainder: 3x + 4",
+      "The quotient is x − 5 and the remainder is 3x + 4, so (a, b, c, d) = (1, −5, 3, 4)"
+     ],
+     "role": "worked-example",
+     "instance": "gen:alldiv:1,-4,2,1,-5,3,4"
     }
    ],
    "diagnostics": [
@@ -43530,8 +43886,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Simplify linear expressions. If a step is slow, practise that skill first.",
-        "Then the method is: Multiply the second bracket by ax, then by b. Write the two rows under each other, power below power, and add like terms."
+        "Each step builds on another skill: Simplify linear expressions. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -43849,7 +44204,9 @@
       "Put x = 5: 1 × 5 = 5",
       "41 − 5 = 36, so the y part is 36",
       "y = 36 ÷ 6 = 6"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:alsol2:1,6,41,5"
     },
     {
      "title": "Steady increase or decrease: a rule to predict",
@@ -43861,7 +44218,9 @@
       "An auto-rickshaw fare is ₹123 to start, plus ₹5 for every kilometre travelled. Write a rule (an expression in t) for the fare (in rupees) after t kilometres, and use it to find the fare (in rupees) after 8 kilometres.",
       "The increase is the same each step, so p(t) = 5t + 123",
       "p(8) = 163"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:alpred:2,123,5,8"
     },
     {
      "title": "Solutions of a linear equation in two variables",
@@ -43872,7 +44231,9 @@
      "math": [
       "For the equation 5x + y = 11, Divya says (1, 7) is a solution and Priya says (2, 1) is a solution. Who is right?",
       "Substitute each pair into the equation: only the second does"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:alinf:5,1,1,6,2"
     }
    ],
    "diagnostics": [
@@ -43988,8 +44349,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Add and subtract integers. If a step is slow, practise that skill first.",
-        "Then the method is: Find the step from two neighbouring values. Work back to x = 0 to find the starting value. Check your rule with one more pair from the table."
+        "Each step builds on another skill: Add and subtract integers. If a step is slow, practise that skill first."
        ]
       }
      ],

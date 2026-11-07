@@ -138,6 +138,78 @@
    "title": "Same size, different pieces",
    "rule": "no-instance",
    "reason": "Hand-written module (modules.v1.json): the chapter section is tied to the first practice question, which is hand-written (eq-p1), not generated. Tying it needs a generated question (e.g. gen:eqfrac:1,2,4, which matches the 1/2 = 2/4 strip picture) placed first in practice, a change to the learner's practice list left for review."
+  },
+  {
+   "competency": "MATH.geometry.basic-constructions",
+   "title": "Worked: a perpendicular at a point P on a line l",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.basic-constructions",
+   "title": "Worked: a square of side 5 cm",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.construction-triangles",
+   "title": "When there is no triangle",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.construction-triangles",
+   "title": "Worked: triangle PQR with PQ = 6 cm, QR = 5 cm, PR = 4 cm",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.constructions-bisectors",
+   "title": "Worked: bisecting an angle at O",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.constructions-bisectors",
+   "title": "Worked: the perpendicular bisector of AB = 6 cm",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.number.equivalent-fractions",
+   "title": "What changes and what stays",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section (grade7-lessons@1): it explains the idea with its own worked case; no generated question of this module is about it."
+  },
+  {
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "title": "A checklist for a clear, honest display",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section (grade7-lessons@1): it explains the idea with its own worked case; no generated question of this module is about it."
+  },
+  {
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "title": "Worked: a misleading bar graph",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section (grade7-lessons@1): it explains the idea with its own worked case; no generated question of this module is about it."
+  },
+  {
+   "competency": "MATH.statistics.statistical-questions",
+   "title": "Worked: an investigation from question to conclusion",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section (grade7-lessons@1): it explains the idea with its own worked case; no generated question of this module is about it."
+  },
+  {
+   "competency": "MATH.number.large-numbers",
+   "title": "The method",
+   "rule": "worked-unverified",
+   "reason": "aeind's steps must each carry a positional-value justification (mathematical-explanation tests), so no separate answer step is added; the section is shown as a Method."
+  },
+  {
+   "competency": "MATH.statistics.statistical-questions",
+   "title": "Conclusions the data can support",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section (grade7-lessons@1): it explains the idea with its own worked case; no generated question of this module is about it."
   }
  ]
 }

@@ -1866,7 +1866,7 @@
     "idea": "(x + m)(x + n) = x² + (m + n)x + mn: the two numbers multiply to the constant and add to the x coefficient.",
     "method": "List pairs that multiply to the constant; choose the pair that adds to the x coefficient. Watch the signs."
    },
-   "fingerprint": "b6254eba",
+   "fingerprint": "7a772ff8",
    "validation": {
     "family": "factor",
     "deterministic": {
@@ -5299,7 +5299,7 @@
      }
     ]
    },
-   "fingerprint": "53dff788",
+   "fingerprint": "50c4a86e",
    "validation": {
     "family": "aawhere",
     "deterministic": {
@@ -8848,7 +8848,7 @@
      }
     ]
    },
-   "fingerprint": "d0400de4",
+   "fingerprint": "a0580380",
    "validation": {
     "family": "abdir",
     "deterministic": {
@@ -10299,8 +10299,8 @@
     "same-difference (conceptual): The last difference was added again. On this diagonal the differences grow: they are the numbers on the diagonal before."
    ],
    "teach": {
-    "idea": "Pascal's triangle starts with 1; each row starts and ends with 1 and each other number is the sum of the two above it. Its rows add up to 1, 2, 4, 8, … and its diagonals are 1s, the counting numbers, the triangular numbers 1, 3, 6, 10 …",
-    "method": "To build a new row, write 1, then add each pair of neighbours in the row above, then write 1. Use the patterns to check.",
+    "idea": "Pascal's triangle starts with a single one; each row starts and ends with one and each other number is the sum of the two above it. Each row adds up to twice the row before it, and its diagonals are all ones, then the counting numbers, then the triangular numbers.",
+    "method": "To build a new row, write a one, then add each pair of neighbours in the row above, then end with a one. Use the patterns to check.",
     "alternatives": [
      {
       "id": "paths",
@@ -10313,7 +10313,7 @@
      }
     ]
    },
-   "fingerprint": "8f8c6321",
+   "fingerprint": "78e9b2d6",
    "validation": {
     "family": "abpascal",
     "deterministic": {
@@ -12446,7 +12446,7 @@
     "joined (conceptual): 9 m 8 cm was read as 98 cm, the two numbers side by side. 9 m is 900 cm, so 9 m 8 cm is 908 cm."
    ],
    "teach": {
-    "idea": "1 m = 100 cm, so a m b cm is a hundreds of centimetres and b more: 3 m 5 cm = 305 cm.",
+    "idea": "A metre is a hundred centimetres, so a length in metres and centimetres is that many hundreds of centimetres, plus the centimetres written after the metres.",
     "method": "Change the length in metres and centimetres into centimetres, then compare the two numbers of centimetres.",
     "alternatives": [
      {
@@ -12460,7 +12460,7 @@
      }
     ]
    },
-   "fingerprint": "b6f09e97",
+   "fingerprint": "38bf04f2",
    "validation": {
     "family": "acmcmp",
     "deterministic": {
@@ -13074,8 +13074,8 @@
     "km-as-10 (recall): The metres were divided by 10; 1 km = 1000 m."
    ],
    "teach": {
-    "idea": "1 m = 100 cm, so 1 cm is one hundredth of a metre; 1 cm = 10 mm, so 1 mm is a tenth of a centimetre; 1 km = 1000 m, so 1 m is a thousandth of a kilometre.",
-    "method": "To write a length in the bigger unit, divide by 100, 10 or 1000: move the digits that many places to the right of the decimal point. To go back, multiply.",
+    "idea": "A metre is a hundred centimetres, so a centimetre is one hundredth of a metre; a centimetre is ten millimetres, so a millimetre is a tenth of a centimetre; a kilometre is a thousand metres, so a metre is a thousandth of a kilometre.",
+    "method": "To write a length in the bigger unit, divide by the number of small units in one big unit: the digits move one place to the right of the decimal point for each zero (two places for a hundred, one for ten, three for a thousand). To go back, multiply.",
     "alternatives": [
      {
       "id": "split",
@@ -13088,7 +13088,7 @@
      }
     ]
    },
-   "fingerprint": "e5dc6a33",
+   "fingerprint": "a683d111",
    "validation": {
     "family": "acdecu",
     "deterministic": {
@@ -13168,7 +13168,7 @@
      }
     ]
    },
-   "fingerprint": "ffa5343b",
+   "fingerprint": "3d78c3ab",
    "validation": {
     "family": "acparl",
     "deterministic": {
@@ -13548,7 +13548,7 @@
      }
     ]
    },
-   "fingerprint": "298d198a",
+   "fingerprint": "246f1ec2",
    "validation": {
     "family": "accoll",
     "deterministic": {
@@ -15622,7 +15622,7 @@
    ],
    "teach": {
     "idea": "An estimate made with rounded numbers is close to the exact answer, so an answer far from the estimate must be wrong.",
-    "method": "Round each number to the nearest ten and work out the estimate in your head. If the answer is close (within about 15 here), it is sensible; if it is much smaller or bigger, check the working again.",
+    "method": "Round each number to the nearest ten and work out the estimate in your head. If the answer is close to the estimate, it is sensible; if it is much smaller or bigger, check the working again.",
     "alternatives": [
      {
       "id": "front_end",
@@ -15635,7 +15635,7 @@
      }
     ]
    },
-   "fingerprint": "03cec0a5",
+   "fingerprint": "232c2fb6",
    "validation": {
     "family": "adestchk",
     "deterministic": {
@@ -16558,7 +16558,7 @@
    ],
    "teach": {
     "idea": "Rounding each price to the nearest ten gives friendly numbers that are easy to add in your head; the estimate tells you roughly how much money you need.",
-    "method": "Look at the ones digit of each price: 0 to 4 round down, 5 to 9 round up. Add the rounded prices.",
+    "method": "Look at the ones digit of each price: zero to four rounds down, five to nine rounds up. Add the rounded prices.",
     "alternatives": [
      {
       "id": "number_line",
@@ -16571,7 +16571,7 @@
      }
     ]
    },
-   "fingerprint": "3d0ebd44",
+   "fingerprint": "9536f626",
    "validation": {
     "family": "adestcost",
     "deterministic": {
@@ -17930,8 +17930,8 @@
     "times-n (conceptual): 9 and the number of parts in 1 L were added instead of multiplied."
    ],
    "teach": {
-    "idea": "1 kg = 1000 g and 1 L = 1000 mL. Two 500 g packets make 1 kg, four 250 g packets make 1 kg, and so on.",
-    "method": "Find how many parts make 1 kg (or 1 L): 1000 ÷ the part. Then multiply by the number of kilograms (or litres).",
+    "idea": "A kilogram is a thousand grams and a litre is a thousand millilitres. Equal packets that together weigh a thousand grams make 1 kg.",
+    "method": "Find how many parts make 1 kg (or 1 L): divide a thousand by the size of one part. Then multiply by the number of kilograms (or litres).",
     "alternatives": [
      {
       "id": "skip_count",
@@ -17944,7 +17944,7 @@
      }
     ]
    },
-   "fingerprint": "9cccd73f",
+   "fingerprint": "bee43bce",
    "validation": {
     "family": "aeparts",
     "deterministic": {
@@ -18087,7 +18087,7 @@
    ],
    "teach": {
     "idea": "Decimals are compared place by place from the left, like whole numbers: first the wholes, then the tenths, then the hundredths. More digits does not mean bigger.",
-    "method": "Write both with the same number of places (0.7 = 0.70) and compare them as hundredths: 70 hundredths is more than 65 hundredths.",
+    "method": "Write both with the same number of places by putting a zero after the tenths digit, then compare them as hundredths: the one with more hundredths is bigger.",
     "alternatives": [
      {
       "id": "money",
@@ -18100,7 +18100,7 @@
      }
     ]
    },
-   "fingerprint": "e4586569",
+   "fingerprint": "38f5eb8b",
    "validation": {
     "family": "aedecc",
     "deterministic": {
@@ -18245,7 +18245,7 @@
      }
     ]
    },
-   "fingerprint": "e6ee52b5",
+   "fingerprint": "3397d867",
    "validation": {
     "family": "aeind",
     "deterministic": {
@@ -18295,7 +18295,7 @@
    ],
    "teach": {
     "idea": "A number with more digits is bigger. When two numbers have the same number of digits, the first place where their digits differ decides.",
-    "method": "First sort by how many digits each number has. Then, for numbers with the same number of digits, compare ten thousands, then thousands, then hundreds … until the digits differ.",
+    "method": "First sort by how many digits each number has. Then, for numbers with the same number of digits, compare their digits from the left, starting at the largest place they have (lakhs first when they have six digits, ten lakhs first when they have seven), then the next place down, until the digits differ.",
     "alternatives": [
      {
       "id": "chart",
@@ -18308,7 +18308,7 @@
      }
     ]
    },
-   "fingerprint": "72533e26",
+   "fingerprint": "d21fa68e",
    "validation": {
     "family": "aecmp",
     "deterministic": {
@@ -18445,7 +18445,7 @@
     "tens-only (procedural): Only the tens digit of 99 was multiplied; the ones digit must be multiplied too."
    ],
    "teach": {
-    "idea": "Multiplying by 40 is multiplying by 4 and then by 10, because 40 = 4 × 10.",
+    "idea": "Multiplying by a multiple of ten or a hundred is multiplying by its non-zero digit and then by ten or a hundred, because the multiplier is that digit times ten or a hundred.",
     "method": "Multiply by the non-zero digit first, then put the zeros of the multiplier on the end of the answer.",
     "alternatives": [
      {
@@ -18459,7 +18459,7 @@
      }
     ]
    },
-   "fingerprint": "7cd8a032",
+   "fingerprint": "a5e1d46e",
    "validation": {
     "family": "aemult",
     "deterministic": {
@@ -19486,7 +19486,7 @@
     "largest-given (procedural): The largest of the numbers was given; the question asks for the smallest."
    ],
    "teach": {
-    "idea": "In a run of consecutive numbers, the middle number is the average: 3 consecutive numbers add up to 3 × the middle one. The first and last together make the same total as the second and second-last.",
+    "idea": "In a run of consecutive numbers, the middle number is the average: an odd number of consecutive numbers add up to how many there are × the middle one. The first and last together make the same total as the second and second-last.",
     "method": "To add them: number of terms × (first + last) ÷ 2. To find them from the sum (an odd number of them): sum ÷ how many = the middle; count back to the smallest.",
     "alternatives": [
      {
@@ -19500,7 +19500,7 @@
      }
     ]
    },
-   "fingerprint": "6a2a2115",
+   "fingerprint": "6290c7de",
    "validation": {
     "family": "aecons",
     "deterministic": {
@@ -19632,8 +19632,8 @@
     "always-down (conceptual): The digits after the crores place were just changed to zeros; when the next digit is 5 or more, round up."
    ],
    "teach": {
-    "idea": "Large numbers in news and plans are usually rounded: 4,37,862 people is 'about 4,40,000' to the nearest ten thousand. Rounding finds the nearer of the two round numbers on either side.",
-    "method": "Find the place you round to, look at the digit just to its right: 0–4 keep the place and write zeros after it; 5–9 add 1 to the place and write zeros after it.",
+    "idea": "Large numbers in news and plans are usually rounded, for example to the nearest thousand or ten thousand, so they are easy to say and remember. Rounding finds the nearer of the two round numbers on either side.",
+    "method": "Find the place you round to, look at the digit just to its right: if it is less than five, keep the place and write zeros after it; if it is five or more, add 1 to the place and write zeros after it.",
     "alternatives": [
      {
       "id": "between",
@@ -19646,7 +19646,7 @@
      }
     ]
    },
-   "fingerprint": "44d9cd8a",
+   "fingerprint": "3be05518",
    "validation": {
     "family": "aernd",
     "deterministic": {
@@ -19709,7 +19709,7 @@
     "zeros (procedural): 10 × 3 was found, but the zeros of 1000 and 30 were not all put back."
    ],
    "teach": {
-    "idea": "Rounding both numbers turns a hard product into an easy one (48 × 32 ≈ 50 × 30). The estimate shows roughly how big the exact answer must be.",
+    "idea": "Rounding both numbers turns a hard product into an easy one: numbers close to round tens are multiplied as those round tens. The estimate shows roughly how big the exact answer must be.",
     "method": "Round each number as asked, multiply the non-zero digits, then put back all the zeros of both rounded numbers.",
     "alternatives": [
      {
@@ -19723,7 +19723,7 @@
      }
     ]
    },
-   "fingerprint": "b12d390e",
+   "fingerprint": "5243cd15",
    "validation": {
     "family": "aeestp",
     "deterministic": {
@@ -19855,7 +19855,7 @@
    ],
    "teach": {
     "idea": "Rounding a decimal works like rounding whole numbers: find which of the two numbers on either side, at the place asked for, it is nearer to.",
-    "method": "Find the place you round to. Look at the digit just to its right: 0–4 keep the place and drop the digits after it; 5–9 add 1 to the place and drop the digits after it.",
+    "method": "Find the place you round to. Look at the digit just to its right: if it is less than five, keep the place and drop the digits after it; if it is five or more, add 1 to the place and drop the digits after it.",
     "alternatives": [
      {
       "id": "money",
@@ -19868,7 +19868,7 @@
      }
     ]
    },
-   "fingerprint": "7c294763",
+   "fingerprint": "50bb0eb7",
    "validation": {
     "family": "aerdec",
     "deterministic": {
@@ -20000,8 +20000,8 @@
     "left-dropped (procedural): The mg left over were dropped; 18 mg remain after taking out the whole g."
    ],
    "teach": {
-    "idea": "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL, 1 km = 1000 m. To change into the larger unit, see how many whole large units fit, and what is left.",
-    "method": "Divide by 100, 10 or 1000: the whole number of times is the large unit; the remainder is the small unit (3450 g = 3 kg 450 g).",
+    "idea": "1 m is a hundred cm and 1 cm is ten mm; 1 kg, 1 g, 1 L and 1 km are each a thousand of the smaller unit (g, mg, mL and m). To change into the larger unit, see how many whole large units fit, and what is left.",
+    "method": "Divide by how many small units make one large unit (a hundred, ten or a thousand): the whole number of times is the large unit; the remainder is the small unit.",
     "alternatives": [
      {
       "id": "split_digits",
@@ -20014,7 +20014,7 @@
      }
     ]
    },
-   "fingerprint": "45580f87",
+   "fingerprint": "31827ad1",
    "validation": {
     "family": "aeconvu",
     "deterministic": {
@@ -20069,8 +20069,8 @@
     "zero-lost (conceptual): The 18 mg were written straight after the point, but they are thousandths of a g, so they need 3 decimal places: put zeros in the empty places."
    ],
    "teach": {
-    "idea": "A small unit is a fraction of the large unit: 1 g is one thousandth of a kg, so 3450 g = 3450 thousandths of a kg = 3.450 kg = 3.45 kg.",
-    "method": "Divide by 1000 (or 100, or 10): move the decimal point 3 (or 2, or 1) places to the left, filling empty places with zeros (3045 g = 3.045 kg).",
+    "idea": "A small unit is a fraction of the large unit: 1 g is one thousandth of a kg, so a number of grams is that many thousandths of a kilogram.",
+    "method": "Divide by a thousand (or a hundred, or ten): move the decimal point three (or two, or one) places to the left, filling empty places with zeros.",
     "alternatives": [
      {
       "id": "chart",
@@ -20083,7 +20083,7 @@
      }
     ]
    },
-   "fingerprint": "e9c85e06",
+   "fingerprint": "ad167eb2",
    "validation": {
     "family": "aeconvd",
     "deterministic": {
@@ -20140,8 +20140,8 @@
     "bigger-number (conceptual): The numbers were compared without the units (6560 looks bigger than 6 and 600); change both weights into the same unit first."
    ],
    "teach": {
-    "idea": "Weights can be compared only in the same unit: 1 kg = 1000 g and 1 g = 1000 mg.",
-    "method": "Change the weight in two units into the small unit (2 kg 50 g = 2050 g), then compare the numbers.",
+    "idea": "Weights can be compared only in the same unit: 1 kg is a thousand grams and 1 g is a thousand milligrams.",
+    "method": "Change the weight written in two units into the small unit (kilograms into grams, grams into milligrams), then compare the numbers.",
     "alternatives": [
      {
       "id": "large_first",
@@ -20154,7 +20154,7 @@
      }
     ]
    },
-   "fingerprint": "7ad5ec51",
+   "fingerprint": "ad3fc665",
    "validation": {
     "family": "aewcmp",
     "deterministic": {
@@ -20217,8 +20217,8 @@
     "added (conceptual): The known length and the number of times were added; 12 of them end to end is 12 × 25 m."
    ],
    "teach": {
-    "idea": "Feet and inches are older units still used for heights: 12 inches make 1 foot, 1 inch is about 2.5 cm and 1 foot about 30 cm. A known length (a door, a step, a bus) can be used as a ruler to estimate bigger lengths.",
-    "method": "Change feet to cm (× 30) and inches to cm (× 2.5) and add. To estimate with a known length, count how many of it fit and multiply.",
+    "idea": "Feet and inches are older units still used for heights: twelve inches make 1 foot, 1 inch is about two and a half cm and 1 foot about thirty cm. A known length (a door, a step, a bus) can be used as a ruler to estimate bigger lengths.",
+    "method": "Change feet to cm (multiply by about thirty) and inches to cm (multiply by about two and a half) and add. To estimate with a known length, count how many of it fit and multiply.",
     "alternatives": [
      {
       "id": "body",
@@ -20231,7 +20231,7 @@
      }
     ]
    },
-   "fingerprint": "fc06597e",
+   "fingerprint": "bb836e76",
    "validation": {
     "family": "aeftin",
     "deterministic": {
@@ -20290,7 +20290,7 @@
     "metres-only (procedural): Only the kilometres and metres were changed; the hours and seconds must be changed too (1 hour = 3600 s)."
    ],
    "teach": {
-    "idea": "A conversion factor says how many of one unit make one of the other: 1 inch = 2.54 cm, 1 km/h = 5/18 m/s. Converting is multiplying by the factor, because the amount is proportional.",
+    "idea": "A conversion factor says how many of one unit make one of the other, for example how many centimetres make 1 inch. Converting is multiplying by the factor, because the amount is proportional.",
     "method": "Write the factor as 'new units per old unit' and multiply. Check the direction: going to a smaller unit gives a bigger number.",
     "alternatives": [
      {
@@ -20304,7 +20304,7 @@
      }
     ]
    },
-   "fingerprint": "4b9a2e02",
+   "fingerprint": "e27a1cfa",
    "validation": {
     "family": "aecf",
     "deterministic": {
@@ -20656,7 +20656,7 @@
    ],
    "teach": {
     "idea": "In a matching puzzle every person goes with exactly one thing and every thing with exactly one person. Each clue rules out (or fixes) some pairs; when only one choice is left in a row or column, it must be the answer.",
-    "method": "Draw a 4 × 4 grid (people down, things across). Mark ✗ for each 'does not' clue and ✓ for each 'does' clue (with ✗ for the rest of that row and column). Keep filling until every row has one ✓.",
+    "method": "Draw a grid with the people down the side and the things across the top. Mark ✗ for each 'does not' clue and ✓ for each 'does' clue (with ✗ for the rest of that row and column). Keep filling until every row has one ✓.",
     "alternatives": [
      {
       "id": "try_all",
@@ -20669,7 +20669,7 @@
      }
     ]
    },
-   "fingerprint": "f9082e08",
+   "fingerprint": "24fe92f1",
    "validation": {
     "family": "aematch",
     "deterministic": {
@@ -20799,7 +20799,7 @@
     "tens-ones (recall): The tens and ones digits were swapped; the digit just before the point is the ones."
    ],
    "teach": {
-    "idea": "Each place is ten times the place to its right: tens, ones, then after the point tenths (1/10), hundredths (1/100), thousandths (1/1000). A digit's place value is the digit times its place.",
+    "idea": "Each place is ten times the place to its right: tens, ones, then after the point tenths, hundredths and thousandths. A digit's place value is the digit times its place.",
     "method": "Write the number in a place-value chart (T, O . t, h, th). Read each digit with its place; for the expanded form, add the place values of the non-zero digits.",
     "alternatives": [
      {
@@ -20813,7 +20813,7 @@
      }
     ]
    },
-   "fingerprint": "318f5815",
+   "fingerprint": "c0388856",
    "validation": {
     "family": "aedpv",
     "deterministic": {
@@ -20864,8 +20864,8 @@
     "descending (procedural): The decimals were written from greatest to smallest; ascending means smallest first."
    ],
    "teach": {
-    "idea": "Decimals are compared place by place from the left: wholes, then tenths, then hundredths, then thousandths. Writing them all with the same number of places (0.5 = 0.500) makes this easy.",
-    "method": "Fill each number with zeros to three decimal places, then compare them like whole numbers of thousandths: 0.500, 0.450, 0.505, 0.550.",
+    "idea": "Decimals are compared place by place from the left: wholes, then tenths, then hundredths, then thousandths. Writing them all with the same number of decimal places, by adding zeros at the end, makes this easy.",
+    "method": "Fill each number with zeros at the end so that all have the same number of decimal places, then compare them like whole numbers.",
     "alternatives": [
      {
       "id": "number_line",
@@ -20878,7 +20878,7 @@
      }
     ]
    },
-   "fingerprint": "fea496e6",
+   "fingerprint": "05a0deca",
    "validation": {
     "family": "aedord",
     "deterministic": {
@@ -20937,8 +20937,8 @@
     "digits-as-decimal (conceptual): 13/20 was written as 13.20 by putting a point between the top and bottom numbers; a fraction is a division: 13 ÷ 20."
    ],
    "teach": {
-    "idea": "A decimal is a fraction with a bottom number of 10, 100 or 1000: 0.07 = 7/100, 0.75 = 75/100 = 3/4. A fraction is a division, so 3/8 = 3 ÷ 8 = 0.375.",
-    "method": "Decimal to fraction: write the digits over 10, 100 or 1000 (by the last place) and simplify. Fraction to decimal: make the bottom 10, 100 or 1000 by multiplying, or divide the top by the bottom.",
+    "idea": "A decimal is a fraction whose bottom number is ten, a hundred or a thousand: the digits after the point are tenths, hundredths or thousandths. A fraction is a division, so dividing its top by its bottom gives its decimal.",
+    "method": "Decimal to fraction: write the digits over ten, a hundred or a thousand (by the last place) and simplify. Fraction to decimal: make the bottom ten, a hundred or a thousand by multiplying, or divide the top by the bottom.",
     "alternatives": [
      {
       "id": "money",
@@ -20951,7 +20951,7 @@
      }
     ]
    },
-   "fingerprint": "79ce37bc",
+   "fingerprint": "830ab233",
    "validation": {
     "family": "aedfr",
     "deterministic": {
@@ -22689,7 +22689,7 @@
    ],
    "teach": {
     "idea": "If a pattern grows by the same amount each time, that amount is the number multiplied by n; a fixed extra makes the first shape right.",
-    "method": "Find how much the pattern grows each time (say 3): the rule starts 3n. Compare 3 × 1 with shape 1 to find what to add. Check with shape 4.",
+    "method": "Find how much the pattern grows each time: that number times n starts the rule. Work out that number times 1, compare it with shape 1 to find what to add, then check the rule with a later shape.",
     "alternatives": [
      {
       "id": "groups",
@@ -22702,7 +22702,7 @@
      }
     ]
    },
-   "fingerprint": "92a557b4",
+   "fingerprint": "d9ff5775",
    "validation": {
     "family": "afmatch",
     "deterministic": {
@@ -25021,8 +25021,8 @@
     "rupee-not-reduced (procedural): ₹1 was changed into paise, but the rupees were not made one less (₹80 becomes ₹79)."
    ],
    "teach": {
-    "idea": "100 paise make ₹1. Paise go with paise and rupees with rupees, and 100 paise can be swapped for ₹1 (or ₹1 for 100 paise).",
-    "method": "Line up the decimal points. Work on the paise first, exchanging ₹1 and 100 paise when needed, then the rupees.",
+    "idea": "A hundred paise make ₹1. Paise go with paise and rupees with rupees, and a hundred paise can be swapped for ₹1 (or ₹1 for a hundred paise).",
+    "method": "Line up the decimal points. Work on the paise first, exchanging ₹1 and a hundred paise when needed, then the rupees.",
     "alternatives": [
      {
       "id": "all_paise",
@@ -25035,7 +25035,7 @@
      }
     ]
    },
-   "fingerprint": "ace08de8",
+   "fingerprint": "20a32ec0",
    "validation": {
     "family": "agrupee",
     "deterministic": {
@@ -26083,8 +26083,8 @@
     "prime-means-coprime (conceptual): A pair with a prime number in it was taken to be co-prime. A prime has no factors except 1 and itself, but it can still divide the other number: 51 = 17 × 3."
    ],
    "teach": {
-    "idea": "Co-prime numbers have no common factor except 1, so their HCF is 1. Neither number needs to be prime: 8 and 15 are co-prime, but 9 and 15 are not.",
-    "method": "For each pair, test the small primes 2, 3, 5, 7, … : if one of them divides both numbers, the pair is not co-prime. If none does, it is.",
+    "idea": "Co-prime numbers have no common factor except 1, so their HCF is 1. Neither number needs to be prime: two numbers can each have many factors and still be co-prime, as long as no factor other than 1 divides both.",
+    "method": "For each pair, test the small primes two, three, five, seven, … : if one of them divides both numbers, the pair is not co-prime. If none does, it is.",
     "alternatives": [
      {
       "id": "factor_lists",
@@ -26106,7 +26106,7 @@
      }
     ]
    },
-   "fingerprint": "7b75b338",
+   "fingerprint": "e35e094a",
    "validation": {
     "family": "agcop",
     "deterministic": {
@@ -26194,7 +26194,7 @@
      }
     ]
    },
-   "fingerprint": "a9db6400",
+   "fingerprint": "b8e8fcec",
    "validation": {
     "family": "agwrite",
     "deterministic": {
@@ -26253,7 +26253,7 @@
     "first-number (procedural): Only the first number of the term was taken. The term is everything up to the next + or − outside brackets: 5 × 9."
    ],
    "teach": {
-    "idea": "The terms of an expression are the parts joined by + and − (outside brackets). Each term carries the sign in front of it: 20 − 3 × 4 + 6 is 20 + (−12) + 6, with terms 20, −3 × 4 and 6.",
+    "idea": "The terms of an expression are the parts joined by + and − (outside brackets). Each term carries the sign in front of it: in a − b × c + d the terms are a, −b × c and d, because a product is worked out as one piece.",
     "method": "Read along the expression and cut it at every + and − that is not inside brackets. Each piece, with the sign before it, is a term; work out each term on its own.",
     "alternatives": [
      {
@@ -26276,7 +26276,7 @@
      }
     ]
    },
-   "fingerprint": "ab912b29",
+   "fingerprint": "ef6d0d8d",
    "validation": {
     "family": "agterm",
     "deterministic": {
@@ -26341,8 +26341,8 @@
     "wrong-factor (recall): The mL were changed into L by dividing by 100. 1 L = 1000 mL, so divide by 1000."
    ],
    "teach": {
-    "idea": "Only amounts in the same unit can be added or taken away. 1 m = 100 cm, and 1 kg = 1000 g, 1 km = 1000 m, 1 L = 1000 mL, so the smaller unit becomes a decimal of the larger one.",
-    "method": "Change the amount in the smaller unit into the larger unit (divide by 100 or 1000), line up the decimal points, then add or subtract.",
+    "idea": "Only amounts in the same unit can be added or taken away. A metre is a hundred centimetres, and a kilogram is a thousand grams, a kilometre a thousand metres, a litre a thousand millilitres, so the smaller unit becomes a decimal of the larger one.",
+    "method": "Change the amount in the smaller unit into the larger unit (divide by a hundred or a thousand), line up the decimal points, then add or subtract.",
     "alternatives": [
      {
       "id": "all_small",
@@ -26364,7 +26364,7 @@
      }
     ]
    },
-   "fingerprint": "333e6006",
+   "fingerprint": "509f45e4",
    "validation": {
     "family": "agmeas",
     "deterministic": {
@@ -26605,7 +26605,7 @@
     "product-is-hcf (conceptual): The product of the numbers was not divided by the LCM. HCF × LCM = product, so the HCF = product ÷ LCM."
    ],
    "teach": {
-    "idea": "For two numbers, HCF × LCM = the product of the numbers: the common prime factors are counted once in the HCF and the rest in the LCM, so together they use every prime factor of both numbers exactly once.",
+    "idea": "For two numbers, HCF × LCM = the product of the numbers: for each prime factor, the HCF uses it the smaller number of times it appears in the two numbers and the LCM the larger number of times, so together they use it exactly as often as the two numbers do altogether.",
     "method": "Write HCF × LCM = first number × second number, put in the three values you know, and divide to find the fourth.",
     "alternatives": [
      {
@@ -26628,7 +26628,7 @@
      }
     ]
    },
-   "fingerprint": "d46c3bf9",
+   "fingerprint": "cc64e37d",
    "validation": {
     "family": "aghlp",
     "deterministic": {
@@ -26691,7 +26691,7 @@
    ],
    "teach": {
     "idea": "A percentage is a number of hundredths, and a decimal is a number of tenths, hundredths or thousandths. Either can be written as a fraction and then simplified.",
-    "method": "Percentage: write it over 100 (multiply top and bottom by 10 to clear a decimal point, as 12.5/100 = 125/1000). Decimal: write the digits over 10, 100 or 1000 (one zero for each decimal place). Then divide the top and bottom by their HCF.",
+    "method": "Percentage: write it over a hundred (if it has a decimal point, multiply top and bottom by ten until it is gone). Decimal: write the digits over ten, a hundred or a thousand (one zero for each decimal place). Then divide the top and bottom by their HCF.",
     "alternatives": [
      {
       "id": "known_facts",
@@ -26713,7 +26713,7 @@
      }
     ]
    },
-   "fingerprint": "71f76c7a",
+   "fingerprint": "413950eb",
    "validation": {
     "family": "agpfrac",
     "deterministic": {
@@ -26774,8 +26774,8 @@
     "divided-wrong-way (procedural): 50 was divided by 99. The fraction 99/50 is 99 ÷ 50: the top divided by the bottom."
    ],
    "teach": {
-    "idea": "A fraction n/d means n ÷ d. Dividing gives the decimal; a percentage is that decimal × 100 (the number of hundredths).",
-    "method": "Divide the numerator by the denominator (long division, adding zeros after the point), or scale the fraction to a denominator of 10, 100 or 1000. For a percentage, multiply the decimal by 100.",
+    "idea": "A fraction n/d means n ÷ d. Dividing gives the decimal; a percentage is that decimal times a hundred (the number of hundredths).",
+    "method": "Divide the numerator by the denominator (long division, adding zeros after the point), or scale the fraction to a denominator of ten, a hundred or a thousand. For a percentage, multiply the decimal by a hundred.",
     "alternatives": [
      {
       "id": "scale",
@@ -26797,7 +26797,7 @@
      }
     ]
    },
-   "fingerprint": "432a7dfe",
+   "fingerprint": "4afb29b5",
    "validation": {
     "family": "agfdec",
     "deterministic": {
@@ -26965,7 +26965,7 @@
      }
     ]
    },
-   "fingerprint": "9e832e82",
+   "fingerprint": "13743ef2",
    "validation": {
     "family": "agediv",
     "deterministic": {
@@ -27472,7 +27472,7 @@
      }
     ]
    },
-   "fingerprint": "0833d795",
+   "fingerprint": "abe40a21",
    "validation": {
     "family": "ahsub",
     "deterministic": {
@@ -28895,7 +28895,7 @@
     "adjacent-interior (conceptual): The interior angle next to the exterior angle was found (180° − exterior). The question asks for the other opposite angle."
    ],
    "teach": {
-    "idea": "An exterior angle and the interior angle next to it make a straight line (180°), and the three interior angles also make 180°, so the exterior angle equals the two far interior angles together.",
+    "idea": "An exterior angle and the interior angle next to it make a straight line, and the three interior angles of a triangle also add up to a straight angle, so the exterior angle equals the two far interior angles together.",
     "method": "To find the exterior angle, add the two interior opposite angles. To find one of those, subtract the other from the exterior angle.",
     "alternatives": [
      {
@@ -28909,7 +28909,7 @@
      }
     ]
    },
-   "fingerprint": "6a05ef9c",
+   "fingerprint": "fb3c2720",
    "validation": {
     "family": "ahext",
     "deterministic": {
@@ -29303,7 +29303,7 @@
     "equal-for-supplementary (conceptual): The two angles were set equal. Co-interior angles at parallel lines add up to 180°."
    ],
    "teach": {
-    "idea": "The angle facts become equations: alternate angles give 'angle = angle', co-interior angles give 'angle + angle = 180'.",
+    "idea": "The angle facts become equations: alternate angles give 'angle = angle', co-interior angles give 'angle + angle = a straight angle' (one hundred and eighty degrees).",
     "method": "Write the equation from the angle fact, collect the x terms and the numbers, and divide. Then check both angles with your x.",
     "alternatives": [
      {
@@ -29317,7 +29317,7 @@
      }
     ]
    },
-   "fingerprint": "64eb4ee5",
+   "fingerprint": "323d8ca5",
    "validation": {
     "family": "ahparx",
     "deterministic": {
@@ -29586,7 +29586,7 @@
      }
     ]
    },
-   "fingerprint": "18ca746a",
+   "fingerprint": "443975f0",
    "validation": {
     "family": "ahname",
     "deterministic": {
@@ -29755,7 +29755,7 @@
      }
     ]
    },
-   "fingerprint": "57f66acc",
+   "fingerprint": "997a2248",
    "validation": {
     "family": "ahcfig",
     "deterministic": {
@@ -29849,7 +29849,7 @@
      }
     ]
    },
-   "fingerprint": "1ba683c0",
+   "fingerprint": "79c813dd",
    "validation": {
     "family": "ahid",
     "deterministic": {
@@ -29914,8 +29914,8 @@
     "b-not-squared (procedural): 4 was taken away instead of 4² = 16."
    ],
    "teach": {
-    "idea": "A number near a round number is easy to square with an identity: 103 = 100 + 3, so 103² = 100² + 2 × 100 × 3 + 3². Products like 103 × 97 are (100 + 3)(100 − 3) = 100² − 3².",
-    "method": "Write the number as a ± b with a a multiple of 10. Work out a², 2ab and b² (all easy) and combine them with the right signs.",
+    "idea": "A number near a round number is easy to square with an identity: write it as the round number plus or minus a small number and use (a + b)² = a² + 2ab + b² or (a − b)² = a² − 2ab + b². A product of two numbers the same distance above and below a round number is (a + b)(a − b) = a² − b².",
+    "method": "Write the number as a ± b with a a multiple of ten. Work out a², 2ab and b² (all easy) and combine them with the right signs.",
     "alternatives": [
      {
       "id": "area",
@@ -29937,7 +29937,7 @@
      }
     ]
    },
-   "fingerprint": "88b4ade5",
+   "fingerprint": "ca5163a0",
    "validation": {
     "family": "ahidn",
     "deterministic": {
@@ -30293,7 +30293,7 @@
      }
     ]
    },
-   "fingerprint": "a8f22d28",
+   "fingerprint": "32e3e486",
    "validation": {
     "family": "ahvary",
     "deterministic": {
@@ -30530,8 +30530,8 @@
     "one-row-back (procedural): Only one row back was taken from the middle number; the smallest is one row up AND one column left."
    ],
    "teach": {
-    "idea": "In a grid with w numbers in each row, the number to the right of n is n + 1 and the number below it is n + w. So every square of numbers can be written in terms of n, and its sum is an expression in n.",
-    "method": "Write the numbers of the square in terms of n (as in the picture) and add them: a 2 × 2 square gives 4n + 2w + 2, a 3 × 3 square gives 9n + 9(w + 1). Substitute n, or solve the equation for n.",
+    "idea": "In a grid with w numbers in each row, the number just to the right of n is one more than n and the number just below it is n + w. So every square of numbers can be written in terms of n, and its sum is an expression in n.",
+    "method": "Write each number of the square in terms of n and w (as in the picture) and add them, collecting the n terms, the w terms and the plain numbers. Then substitute the value of n, or solve the equation for n.",
     "alternatives": [
      {
       "id": "middle",
@@ -30553,7 +30553,7 @@
      }
     ]
    },
-   "fingerprint": "9edc8c90",
+   "fingerprint": "3bf6c96e",
    "validation": {
     "family": "ahcal",
     "deterministic": {
@@ -33291,7 +33291,7 @@
     "one-place-off (procedural): The decimal point in the answer is one place out; line up the point in the quotient with the dividend's point."
    ],
    "teach": {
-    "idea": "Multiplying both numbers in a division by the same amount does not change the answer (12 ÷ 4 = 120 ÷ 40), so you can make the divisor a whole number first.",
+    "idea": "Multiplying both numbers in a division by the same amount does not change the answer (sharing ten times as many sweets among ten times as many children gives each child the same), so you can make the divisor a whole number first.",
     "method": "Move the decimal point in the divisor to make it whole, move the dividend's point the same number of places, then divide as usual, keeping the point in line.",
     "alternatives": [
      {
@@ -33305,7 +33305,7 @@
      }
     ]
    },
-   "fingerprint": "49c53981",
+   "fingerprint": "d963051c",
    "validation": {
     "family": "aiddiv",
     "deterministic": {
@@ -33370,8 +33370,8 @@
     "places-off (procedural): The point was moved the wrong number of places; 100 has 2 zeros, so move it 2 places."
    ],
    "teach": {
-    "idea": "Multiplying by 10 makes each digit worth ten times as much, so every digit moves one place to the left; dividing by 10 moves every digit one place to the right.",
-    "method": "Count the zeros in 10, 100 or 1000 and move the decimal point that many places: right for ×, left for ÷. Fill empty places with zeros.",
+    "idea": "Multiplying by ten makes each digit worth ten times as much, so every digit moves one place to the left; dividing by ten moves every digit one place to the right.",
+    "method": "Count the zeros in the ten, hundred or thousand and move the decimal point that many places: right for ×, left for ÷. Fill empty places with zeros.",
     "alternatives": [
      {
       "id": "place_table",
@@ -33384,7 +33384,7 @@
      }
     ]
    },
-   "fingerprint": "58b0a8d0",
+   "fingerprint": "f6f0bb35",
    "validation": {
     "family": "aidp10",
     "deterministic": {
@@ -34130,7 +34130,7 @@
    ],
    "teach": {
     "idea": "An estimate tells roughly how big an answer should be, so a misplaced decimal point shows up at once. Rounding the numbers first makes the calculation easy to do in your head.",
-    "method": "Round each number to the nearest whole number (look at the tenths: 5 or more, round up). Multiply or divide the rounded numbers. Compare with the exact answer: they should be close.",
+    "method": "Round each number to the nearest whole number (look at the tenths digit: five or more, round up). Multiply or divide the rounded numbers. Compare with the exact answer: they should be close.",
     "alternatives": [
      {
       "id": "point_check",
@@ -34152,7 +34152,7 @@
      }
     ]
    },
-   "fingerprint": "27a56a66",
+   "fingerprint": "61cf6910",
    "validation": {
     "family": "aiest",
     "deterministic": {
@@ -34313,7 +34313,7 @@
     "radius-times-pi (procedural): Half the diameter (192.5 mm) was multiplied by π. C = π × d, or 2 × π × r with r = 192.5 mm."
    ],
    "teach": {
-    "idea": "For every circle, big or small, the circumference is a little more than 3 times the diameter: C ÷ d is always the same number, π ≈ 3.1416. Mathematicians in India and elsewhere found better and better fractions for it (Aryabhata: 62832/20000).",
+    "idea": "For every circle, big or small, the circumference is a little more than three times the diameter: C ÷ d is always the same number, called π. Mathematicians in India and elsewhere found better and better fractions for it; Aryabhata's was correct to four decimal places.",
     "method": "Divide the circumference by the diameter (both in the same unit) and round to the places asked. For a fraction, divide the top by the bottom.",
     "alternatives": [
      {
@@ -34336,7 +34336,7 @@
      }
     ]
    },
-   "fingerprint": "93495cae",
+   "fingerprint": "b756a7f4",
    "validation": {
     "family": "aipi",
     "deterministic": {
@@ -35749,7 +35749,7 @@
     "sign-ignored (procedural): The powers were added as 5 + 2; the second power is −2, so it is 5 − 2."
    ],
    "teach": {
-    "idea": "Each step down in the power divides by the base once: 2³ = 8, 2² = 4, 2¹ = 2, 2⁰ = 1, 2⁻¹ = 1/2, 2⁻² = 1/4.",
+    "idea": "Each step down in the power divides by the base once: from a³ to a² to a¹, then a⁰ = 1, a⁻¹ = 1/a and a⁻² = 1/a².",
     "method": "Combine the powers first (add them, keeping the signs), then a⁻ⁿ = 1/aⁿ.",
     "alternatives": [
      {
@@ -35763,7 +35763,7 @@
      }
     ]
    },
-   "fingerprint": "72d22ebf",
+   "fingerprint": "fd663706",
    "validation": {
     "family": "ajneg",
     "deterministic": {
@@ -36061,8 +36061,8 @@
     "multiplied-back (conceptual): The interest formula was used forwards on the interest itself. Here the interest is known and the principal is the unknown: P = SI × 100 ÷ (R × T)."
    ],
    "teach": {
-    "idea": "Simple interest is the same every year: R% of the principal, so T years give T times as much. SI = P × R × T ÷ 100.",
-    "method": "Write SI = P × R × T ÷ 100, put in the three numbers you know, and work out the fourth.",
+    "idea": "Simple interest is the same every year: R% of the principal, so T years give T times as much. R% means R out of a hundred, so SI is P × R × T divided by a hundred.",
+    "method": "Write SI = P × R × T divided by a hundred, put in the three numbers you know, and work out the fourth. The amount is the principal plus the interest.",
     "alternatives": [
      {
       "id": "year_by_year",
@@ -36075,7 +36075,7 @@
      }
     ]
    },
-   "fingerprint": "27488cf4",
+   "fingerprint": "2fd3cf8b",
    "validation": {
     "family": "ajsi",
     "deterministic": {
@@ -36870,7 +36870,7 @@
      }
     ]
    },
-   "fingerprint": "8dee7063",
+   "fingerprint": "15e828e6",
    "validation": {
     "family": "ajpfdc",
     "deterministic": {
@@ -37100,7 +37100,7 @@
      }
     ]
    },
-   "fingerprint": "1875715e",
+   "fingerprint": "711ad420",
    "validation": {
     "family": "ajcrcmp",
     "deterministic": {
@@ -37180,7 +37180,7 @@
      }
     ]
    },
-   "fingerprint": "6eea9cd4",
+   "fingerprint": "6d3f5fe6",
    "validation": {
     "family": "ajcmpx",
     "deterministic": {
@@ -37269,7 +37269,7 @@
      }
     ]
    },
-   "fingerprint": "37c2ed27",
+   "fingerprint": "6a82af79",
    "validation": {
     "family": "ajprop",
     "deterministic": {
@@ -37878,7 +37878,7 @@
    ],
    "teach": {
     "idea": "On the number line, the number to the right is greater. Every positive number is greater than every negative number; between two negatives, the one closer to 0 is greater.",
-    "method": "Write both with the same positive denominator and compare the numerators (−8/12 < −3/12 because −8 < −3).",
+    "method": "Write both with the same positive denominator and compare the numerators: the greater numerator gives the greater number, and for negative numerators the one closer to zero is greater.",
     "alternatives": [
      {
       "id": "cross",
@@ -37891,7 +37891,7 @@
      }
     ]
    },
-   "fingerprint": "7c960df1",
+   "fingerprint": "02e8e4e5",
    "validation": {
     "family": "ajrcq",
     "deterministic": {
@@ -38138,7 +38138,7 @@
      }
     ]
    },
-   "fingerprint": "6c7ba1de",
+   "fingerprint": "bd8ebfe5",
    "validation": {
     "family": "ajfsq",
     "deterministic": {
@@ -38204,7 +38204,7 @@
     "three-abc (procedural): The coefficient 3abc = 192 was copied into the bracket; each cross term in the second bracket is just the product of two of the terms."
    ],
    "teach": {
-    "idea": "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²), and a³ + b³ + c³ − 3abc = (a + b + c)(a² + b² + c² − ab − bc − ca).",
+    "idea": "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²), and a³ + b³ + c³ minus three times abc = (a + b + c)(a² + b² + c² − ab − bc − ca).",
     "method": "Write each cube term as (something)³ to find a, b (and c), then fill the second bracket from the identity.",
     "alternatives": [
      {
@@ -38218,7 +38218,7 @@
      }
     ]
    },
-   "fingerprint": "19db5bd1",
+   "fingerprint": "3524340a",
    "validation": {
     "family": "ajfcub",
     "deterministic": {
@@ -38301,7 +38301,7 @@
      }
     ]
    },
-   "fingerprint": "1372ffb1",
+   "fingerprint": "8fa36df7",
    "validation": {
     "family": "ajfgrp",
     "deterministic": {
@@ -39283,7 +39283,7 @@
    ],
    "teach": {
     "idea": "An algorithm is a list of exact steps. Tracing it means doing every step in order and writing down each value as it changes, checking the stopping rule each time.",
-    "method": "Make a table with columns K and S. Do Step 2 and Step 3, write the new values, then test Step 4 before going round again.",
+    "method": "Make a table with columns K and S. Do the steps that change K and S, write the new values, then test the stopping rule before going round again.",
     "alternatives": [
      {
       "id": "pattern",
@@ -39296,7 +39296,7 @@
      }
     ]
    },
-   "fingerprint": "087a7c74",
+   "fingerprint": "94424ec9",
    "validation": {
     "family": "akloop",
     "deterministic": {
@@ -41458,7 +41458,7 @@
      }
     ]
    },
-   "fingerprint": "7b375304",
+   "fingerprint": "8ef75cc8",
    "validation": {
     "family": "akdirinv",
     "deterministic": {
@@ -41676,7 +41676,7 @@
      }
     ]
    },
-   "fingerprint": "06908528",
+   "fingerprint": "63ae7fdd",
    "validation": {
     "family": "akprim",
     "deterministic": {
@@ -44539,7 +44539,7 @@
     "first-term (procedural): The degree of the first term was given; another term has a higher degree."
    ],
    "teach": {
-    "idea": "The degree of a monomial is the sum of the powers of its variables (3x²y³ has degree 5); the degree of a polynomial is the highest degree of its terms. The coefficient of a power is the number multiplying it, with its sign.",
+    "idea": "The degree of a monomial is the sum of the powers of its variables (in x²y³ the powers add up to five, so its degree is five); the degree of a polynomial is the highest degree of its terms. The coefficient of a power is the number multiplying it, with its sign.",
     "method": "Collect like terms. For each term add the powers of its letters; the largest such sum is the degree. For a coefficient, find the term with that power and read the number (and sign) in front; 0 if it is missing.",
     "alternatives": [
      {
@@ -44553,7 +44553,7 @@
      }
     ]
    },
-   "fingerprint": "7c122cd8",
+   "fingerprint": "da2d0eb9",
    "validation": {
     "family": "alpdeg",
     "deterministic": {
@@ -44883,7 +44883,7 @@
      }
     ]
    },
-   "fingerprint": "7bea91c2",
+   "fingerprint": "e91557b2",
    "validation": {
     "family": "alldiv",
     "deterministic": {
@@ -49669,8 +49669,8 @@
     "trapezium-no-half (recall): The trapezium was taken as (a + b) × h; its area is ½(a + b)h."
    ],
    "teach": {
-    "idea": "A composite shape is cut into pieces whose areas are known (rectangle, triangle, trapezium, semicircle πr²/2, quadrant πr²/4); the area is the sum of the pieces, or a whole minus the piece cut away. A perimeter goes round the outside only.",
-    "method": "Split the shape along straight lines, find each piece's area and add (or subtract a cut-out). For a perimeter, add only the outer edges: a semicircle's curved edge is πd/2 and it replaces the side it stands on.",
+    "idea": "A composite shape is cut into pieces whose areas are known (rectangle, triangle, trapezium, a semicircle is half a circle, a quadrant a quarter); the area is the sum of the pieces, or a whole minus the piece cut away. A perimeter goes round the outside only.",
+    "method": "Split the shape along straight lines, find each piece's area and add (or subtract a cut-out). For a perimeter, add only the outer edges: a semicircle's curved edge is half the circle's circumference and it replaces the side it stands on.",
     "alternatives": [
      {
       "id": "sketch",
@@ -49683,7 +49683,7 @@
      }
     ]
    },
-   "fingerprint": "df7554b0",
+   "fingerprint": "bb72b59f",
    "validation": {
     "family": "amcshape",
     "deterministic": {
@@ -84030,7 +84030,7 @@
    ],
    "teach": {
     "idea": "Doubling one factor and halving the other leaves the product unchanged; a factor next to a multiple of ten is that multiple minus (or plus) one group.",
-    "method": "25 × 36 = 50 × 18 = 100 × 9 = 900. 19 × 24 = 20 × 24 − 24 = 480 − 24 = 456.",
+    "method": "Keep doubling one factor and halving the other until one of them is a ten, a hundred or another easy number. Or round a factor to the nearest multiple of ten, multiply, then take away (or add) the extra group.",
     "alternatives": [
      {
       "id": "rectangle",
@@ -84043,7 +84043,7 @@
      }
     ]
    },
-   "fingerprint": "e6d44822",
+   "fingerprint": "68ff7bc1",
    "validation": {
     "family": "avstrat",
     "deterministic": {
@@ -84107,7 +84107,7 @@
     "used-ones (procedural): 999 × 6 was given; that is the other partial product."
    ],
    "teach": {
-    "idea": "Splitting a factor by place value turns one hard product into easier ones: 47 × 36 = 47 × 30 + 47 × 6.",
+    "idea": "Splitting a factor by place value turns one hard product into easier ones: multiply by the tens part and by the ones part separately.",
     "method": "Multiply by the tens (the answer ends in 0), multiply by the ones, then add the partial products.",
     "alternatives": [
      {
@@ -84121,7 +84121,7 @@
      }
     ]
    },
-   "fingerprint": "fd08549d",
+   "fingerprint": "fbb074f9",
    "validation": {
     "family": "avpp",
     "deterministic": {
@@ -85402,7 +85402,7 @@
    ],
    "teach": {
     "idea": "Rounding each factor to its greatest place gives an easy product that is close to the real one: a quick check of size.",
-    "method": "Round each number, multiply the first digits, then write all the zeros of both rounded numbers: 5,000 × 40 = 20 × 10,000 = 2,00,000.",
+    "method": "Round each number to its greatest place, multiply their first digits, then write after that product all the zeros of both rounded numbers.",
     "alternatives": [
      {
       "id": "powers",
@@ -85415,7 +85415,7 @@
      }
     ]
    },
-   "fingerprint": "ca47eabe",
+   "fingerprint": "9b2124fa",
    "validation": {
     "family": "avpest",
     "deterministic": {
@@ -85480,8 +85480,8 @@
     "new-as-base (conceptual): The change was compared with the new price; percentage change is always worked out on the original amount (₹180)."
    ],
    "teach": {
-    "idea": "A percentage compares a part with a whole out of 100; a percentage change compares the change with the ORIGINAL amount.",
-    "method": "Percentage = part ÷ whole × 100. Percentage change = change ÷ original × 100. To increase by p%, add p% of the amount (or multiply by (100 + p)/100).",
+    "idea": "A percentage compares a part with a whole as a number out of a hundred; a percentage change compares the change with the ORIGINAL amount.",
+    "method": "Percentage = part ÷ whole, then times a hundred. Percentage change = change ÷ original, then times a hundred. To increase an amount by p%, find p% of the amount and add it on.",
     "alternatives": [
      {
       "id": "per100",
@@ -85494,7 +85494,7 @@
      }
     ]
    },
-   "fingerprint": "6e82ca7a",
+   "fingerprint": "61e246df",
    "validation": {
     "family": "avpctof",
     "deterministic": {
@@ -85741,7 +85741,7 @@
      }
     ]
    },
-   "fingerprint": "888c26ad",
+   "fingerprint": "7afdf267",
    "validation": {
     "family": "avprop",
     "deterministic": {
@@ -85899,7 +85899,7 @@
      }
     ]
    },
-   "fingerprint": "62c8a38d",
+   "fingerprint": "82a7d825",
    "validation": {
     "family": "avdirv",
     "deterministic": {
@@ -86732,8 +86732,8 @@
     "lakh-for-crore (procedural): The millions were changed into lakh, not crore. 10 million is 1 crore (100 lakh)."
    ],
    "teach": {
-    "idea": "The two systems name the same number differently: 1 million = 10 lakh, 10 million = 1 crore, and 1 billion = 100 crore.",
-    "method": "Write the number out in full, then regroup its digits with Indian commas (3, then 2, 2 …) and read off the lakhs or crores.",
+    "idea": "The two systems name the same number differently: one million is ten lakh, ten million is one crore, and one billion is a hundred crore.",
+    "method": "Write the number out in full, then regroup its digits with Indian commas (a comma before the last three digits, then after every two digits going left) and read off the lakhs or crores.",
     "alternatives": [
      {
       "id": "commas",
@@ -86755,7 +86755,7 @@
      }
     ]
    },
-   "fingerprint": "3cdfb6a4",
+   "fingerprint": "4736d869",
    "validation": {
     "family": "ajmilr",
     "deterministic": {
@@ -87201,7 +87201,7 @@
      }
     ]
    },
-   "fingerprint": "ee217370",
+   "fingerprint": "d94e0ef0",
    "validation": {
     "family": "aetfig",
     "deterministic": {

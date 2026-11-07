@@ -120,3 +120,40 @@ are fixed in item 5. What remains is structural, not wording:
 - `grade7-coverage.test.ts`: both boards pass (43 + 3 awaiting a mark; 48 + 2).
 - `content-safety`, `mathematics-completion`, `grade7-board`: 25 / 25 pass. Django and browser tests: CI only.
 - Content regenerated with the CI pipeline; explanation registry synced (changed lessons pending review); grader rebuilt.
+
+# Whole-skill lessons (grade7-lessons@1)
+
+Owner decision: a Grade 7 lesson must teach every question type its module practises.
+
+- **Library:** in the Grade 7 scope each extra family of a module gets a lesson section tied to one of its own questions
+  (role worked-example), and the teaching contract now checks every chapter section of a Grade 7 lesson, not only the
+  first. Before, the lesson checked and showed one family while practice drew on up to seven (circle area: 1 of 7).
+- **Result:** 569 Grade 7 lesson sections, 261 worked examples, **260 checked to the answer**; 0 contract violations
+  (35 exemptions, each with a reason: construction topics, hand-written sections, aeind's per-step place-value rule).
+- **Fixes along the way** (six agents, by file; none reviewed its own work): family idea/method text rewritten without
+  stray example numbers; final steps that reach the answer for choice, list and expression families (the option is
+  picked and named); HCF × LCM explanation corrected (it said the LCM takes "the rest"); ordering large numbers starts
+  at the largest place; "the thousands digit 13" wording.
+- **Presentation (all grades):** step explanations no longer carry tags such as "— Calculate percentages." (they
+  repeated the idea and could name the wrong skill); kernel steps show the family's written step instead of raw solver
+  actions ("multiply: 22/7, 56 → 176") and drop evidence lines with long floats.
+- A bug in my first version gave every new section the opening section's question; a fresh reviewer caught it and it is
+  fixed (`lessonBlocks`: only the opening section borrows the lesson's example).
+- **Safety:** no typed, word or multiple-choice answer or key changed for any of the 89 520 Grade 7 questions
+  (`ahlike` options now show x² instead of x^2, same keys).
+
+Fresh review after the fix (10 competencies): every family has its own section with its own worked solution
+(10 / 10). Still open:
+- the frequency-table median and mean sections and one decimal question refer to a table or options the lesson view
+  does not carry (the practice question shows them);
+- "solved correctly" misconception sections in blueprints have placeholder text ("Each step, then the answer."); the
+  worked lines are there in the app;
+- unit-conversion sections still say "large units / small units", and two of their solutions stop before the final
+  form; "1 lots of", "For 1 years";
+- outcome gaps the lesson cannot close by itself: HCF by an efficient procedure, deciding if three angles form a
+  triangle, rectangular pathways and semicircles (served by other competencies' modules), Indian ↔ international in the
+  large-numbers lesson (taught in the numeration module);
+- lessons are long (up to 12 sections) and the exterior angle is explained several times in triangle properties.
+
+Tests: `bun test packages/learning/src` 1 816 pass, 0 fail; `grade7-coverage.test.ts` both boards pass; content-safety,
+mathematics-completion, grade7-board: 25 / 25. Content pipeline regenerated; 96 changed explanations pending review.

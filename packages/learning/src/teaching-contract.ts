@@ -127,7 +127,9 @@ export function lessonScreens(module: Module): { screen: Screen; strategy: Strat
     return !!p && teachingScopeFor(module, s).accepts(p);
   });
   const seen = new Set<string>();
-  return [{ screen: module.chapter[0], strategy: null as Strategy | null }, ...scoped.flatMap((s) => s.screens.map((screen) => ({ screen, strategy: s })))].filter(({ screen }) => {
+  // grade7-lessons@1: a Grade 7 lesson also checks (and shows) the sections for the module's other families
+  const chapter = GRADE7_SCOPE.competencies.includes(module.competency) ? module.chapter : module.chapter.slice(0, 1);
+  return [...chapter.map((screen) => ({ screen, strategy: null as Strategy | null })), ...scoped.flatMap((s) => s.screens.map((screen) => ({ screen, strategy: s })))].filter(({ screen }) => {
     if (!screen) return false;
     const key = JSON.stringify([screen.title, screen.text, screen.math, screen.widget]);
     if (seen.has(key)) return false;
@@ -194,7 +196,9 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
     // the first section of a lesson not yet taught instance by instance keeps the teaching-first page's example (the scope's
     // own strategy example), as before; a teaching-contract@1 lesson uses each section's own question
     const contractLesson = !!(scope.family && FAMILIES.get(scope.family)?.teach?.instance);
-    const instanceId = isChapter && !contractLesson && primaryId ? primaryId.replace(/:mc$/, "") : screen.instance ?? (isChapter && primaryId ? primaryId.replace(/:mc$/, "") : null);
+    // grade7-lessons@1: only the lesson's opening section borrows that example; a sub-skill section is about its own question
+    const opening = isChapter && screen === module.chapter[0];
+    const instanceId = opening && !contractLesson && primaryId ? primaryId.replace(/:mc$/, "") : screen.instance ?? (isChapter && primaryId ? primaryId.replace(/:mc$/, "") : null);
     const p = instanceId ? problemOf(instanceId) : null;
     const family = p ? FAMILIES.get(p.family) : undefined;
     const own = p && family?.teach?.instance ? family.teach.instance(p.params) : null;
