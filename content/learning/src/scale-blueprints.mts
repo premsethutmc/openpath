@@ -106,7 +106,7 @@ const retainedTotal = {
     {
       "title": "Read the scale; do not assume 10: solved correctly",
       "text": [
-        "Each step, then the answer."
+        "Read the numbers on the scale to find what one line stands for; do not assume each line is ten."
       ],
       "math": [
         "Thu: 2; Fri: 14 (scale 2 per line)",
@@ -141,6 +141,18 @@ const MONEY = "MATH.measurement.money-decimals", LEN = "MATH.measurement.length-
 /** a worked example that shows the change, not a trivial one (a zero part, a whole unit, or one map centimetre) */
 const notTrivial = (p: Problem) => Number(p.answer) !== 0 && Number(p.answer) !== 1 && !/\b0 (paise|cm|mm|m)\b/.test(p.prompt);
 /** a native-choice task: the generator's lines, then the chosen option itself (the answer is a letter) */
+/** grade7-lessons@1: what to watch in each corrected solution (was the placeholder "Each step, then the answer."). */
+const WATCH: Record<string, string> = {
+  "fix_assume_tens_read": "Read the numbers on the scale to find what one line stands for before reading the bar.",
+  "fix_assume_tens": "Read the numbers on the scale to find what one line stands for; do not assume each line is ten.",
+  "fix_added_both": "Ask what number added to the given one makes the total: take it away from the total to find the box; do not add the two numbers.",
+  "fix_added_both_taken": "Ask what number taken from the first one leaves the second: take the second away from the first to find the box; do not add the two numbers.",
+  "fix_took_away_again": "The box had a number taken away from it, so add that number back on to find it; do not take it away again.",
+  "fix_same_operation_add": "Undo adding by taking away the same number from both sides, not by adding it again.",
+  "fix_same_operation_take": "Undo taking away by adding the number back to both sides, not by taking it away again.",
+  "fix_subtract_coefficient": "The number next to x multiplies it, so divide both sides by that number; do not take it away.",
+  "fix_add_for_multiply": "x was divided by the number, so multiply both sides by it; do not add it."
+};
 const concluded = (p: Problem) => [...worked(p), `So: ${(p as Problem & { options: string[] }).options["ABCDEFGH".indexOf(String(p.answer))]}`];
 const UNIT = "A bigger unit is made of a fixed number of smaller units.";
 MODULES.push(
@@ -308,7 +320,7 @@ for (const M of MODULES) {
     const screens = s.misconception
       ? (() => { const b = inst.bugs.find((x) => x.id === s.addresses)!; return [
           { title: `${s.title}: a common mix-up`, text: s.misconception(inst), math: [`Not ${b.predict}, but ${inst.answer}`], role: "misconception", instance: inst.id, ...fig(inst) },
-          { title: `${s.title}: solved correctly`, text: ["Each step, then the answer."], math: s.math ? s.math(inst) : worked(inst), role: "strategy", instance: inst.id },
+          { title: `${s.title}: solved correctly`, text: [WATCH[s.id] ?? "Each step, then the answer."], math: s.math ? s.math(inst) : worked(inst), role: "strategy", instance: inst.id },
         ]; })()
               : [{ title: s.title, text: s.text, math: s.math ? s.math(inst) : s.regroup ? regrouped(inst) : s.conclude ? concluded(inst) : worked(inst), role: "strategy", instance: inst.id, ...fig(inst) }];
     return { id: s.id, title: s.title, kind: s.kind, screens, guided, check, scope: { family: s.family, subSkill: s.subSkill }, ...(s.addresses ? { addresses: s.addresses } : {}) };

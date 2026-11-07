@@ -224,6 +224,15 @@
    "board": "CBSE (NCERT textbooks)"
   },
   {
+   "id": "cbse-ncert-mathematics-grade-7",
+   "version": "1.2.0",
+   "grade": 7,
+   "title": "Ganita Prakash: Textbook of Mathematics for Grade 7, Part I and Part II — Grade 7 Mathematics (CBSE / NCERT)",
+   "hash": "44dafdae",
+   "file": "cbse-ncert-mathematics-grade-7.v1.2.0.json",
+   "board": "CBSE (NCERT textbooks)"
+  },
+  {
    "id": "openpath-sample-mathematics-grade-7",
    "version": "1.0.0",
    "grade": 7,
@@ -256,6 +265,15 @@
    "title": "Mathematics - Standard Seven (Term I, Term II, Term III), English Medium — Grade 7 Mathematics (Tamil Nadu State Board)",
    "hash": "9705d234",
    "file": "tn-samacheer-mathematics-grade-7.v1.1.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-7",
+   "version": "1.2.0",
+   "grade": 7,
+   "title": "Mathematics - Standard Seven (Term I, Term II, Term III), English Medium — Grade 7 Mathematics (Tamil Nadu State Board)",
+   "hash": "e7f03605",
+   "file": "tn-samacheer-mathematics-grade-7.v1.2.0.json",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)"
   },
   {
@@ -309,6 +327,15 @@
    "title": "Mathematics - Standard Eight (single annual volume), English Medium — Grade 8 Mathematics (Tamil Nadu State Board)",
    "hash": "51f1bece",
    "file": "tn-samacheer-mathematics-grade-8.v1.1.0.json",
+   "board": "Tamil Nadu State Board (Samacheer Kalvi)"
+  },
+  {
+   "id": "tn-samacheer-mathematics-grade-8",
+   "version": "1.2.0",
+   "grade": 8,
+   "title": "Mathematics - Standard Eight (single annual volume), English Medium — Grade 8 Mathematics (Tamil Nadu State Board)",
+   "hash": "e480e26a",
+   "file": "tn-samacheer-mathematics-grade-8.v1.2.0.json",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)"
   },
   {

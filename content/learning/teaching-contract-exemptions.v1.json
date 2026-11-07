@@ -102,6 +102,114 @@
    "title": "Not the value: how fast it changes",
    "rule": "text-not-instance",
    "reason": "Its numbers are this question's own function (f(x) = x², f′(3)) evaluated just either side of x = 3: 2.9² = 8.41, 3.1² = 9.61, (9.61 − 8.41) ÷ 0.2 = 6 = f′(3). Checked by hand; derived values the mechanical check cannot see."
+  },
+  {
+   "competency": "MATH.measurement.unit-conversions",
+   "title": "Changing a measure into the smaller unit",
+   "rule": "text-not-instance",
+   "reason": "General rule, not an example: the concept lists the standard unit facts (1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL, 1 km = 1000 m) that every question in the family uses; removing the numbers would remove the facts being taught."
+  },
+  {
+   "competency": "MATH.geometry.basic-constructions",
+   "title": "What the compasses keep the same",
+   "rule": "no-instance",
+   "reason": "Construction topic: no automatically marked question. Drawn work is marked by an educator; the module's questions are hand-written and there is no generated question to attach."
+  },
+  {
+   "competency": "MATH.geometry.constructions-bisectors",
+   "title": "Two sets of equal distances",
+   "rule": "no-instance",
+   "reason": "Construction topic: no automatically marked question. Drawn work is marked by an educator; the module's questions are hand-written and there is no generated question to attach."
+  },
+  {
+   "competency": "MATH.statistics.statistical-questions",
+   "title": "What makes a question statistical",
+   "rule": "no-instance",
+   "reason": "Educator-marked module (written-modules.v1.json): its practice questions are hand-written, so the chapter section has no generated question to attach. Tying it needs a generated question (family avstatq) added to the module's practice list, a product decision left for review."
+  },
+  {
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "title": "Match the display to the data",
+   "rule": "no-instance",
+   "reason": "Educator-marked module (written-modules.v1.json): its practice questions are hand-written, so the chapter section has no generated question to attach. Tying it needs a generated question (family akbarpct) added to the module's practice list, a product decision left for review."
+  },
+  {
+   "competency": "MATH.number.equivalent-fractions",
+   "title": "Same size, different pieces",
+   "rule": "no-instance",
+   "reason": "Hand-written module (modules.v1.json): the chapter section is tied to the first practice question, which is hand-written (eq-p1), not generated. Tying it needs a generated question (e.g. gen:eqfrac:1,2,4, which matches the 1/2 = 2/4 strip picture) placed first in practice, a change to the learner's practice list left for review."
+  },
+  {
+   "competency": "MATH.geometry.basic-constructions",
+   "title": "Worked: a perpendicular at a point P on a line l",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.basic-constructions",
+   "title": "Worked: a square of side 5 cm",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.construction-triangles",
+   "title": "When there is no triangle",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.construction-triangles",
+   "title": "Worked: triangle PQR with PQ = 6 cm, QR = 5 cm, PR = 4 cm",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.constructions-bisectors",
+   "title": "Worked: bisecting an angle at O",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.constructions-bisectors",
+   "title": "Worked: the perpendicular bisector of AB = 6 cm",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.number.equivalent-fractions",
+   "title": "What changes and what stays",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section (grade7-lessons@1): it explains the idea with its own worked case; no generated question of this module is about it."
+  },
+  {
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "title": "A checklist for a clear, honest display",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section (grade7-lessons@1): it explains the idea with its own worked case; no generated question of this module is about it."
+  },
+  {
+   "competency": "MATH.statistics.evaluate-data-displays",
+   "title": "Worked: a misleading bar graph",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section (grade7-lessons@1): it explains the idea with its own worked case; no generated question of this module is about it."
+  },
+  {
+   "competency": "MATH.statistics.statistical-questions",
+   "title": "Worked: an investigation from question to conclusion",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section (grade7-lessons@1): it explains the idea with its own worked case; no generated question of this module is about it."
+  },
+  {
+   "competency": "MATH.number.large-numbers",
+   "title": "The method",
+   "rule": "worked-unverified",
+   "reason": "aeind's steps must each carry a positional-value justification (mathematical-explanation tests), so no separate answer step is added; the section is shown as a Method."
+  },
+  {
+   "competency": "MATH.statistics.statistical-questions",
+   "title": "Conclusions the data can support",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section (grade7-lessons@1): it explains the idea with its own worked case; no generated question of this module is about it."
   }
  ]
 }

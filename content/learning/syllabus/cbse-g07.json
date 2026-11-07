@@ -982,22 +982,23 @@
      "competencies": [],
      "proposed": [
       {
-       "id": "MATH.sequences.explicit-recursive-rules",
-       "name": "Generate and reason about recursively defined sequences",
+       "id": "MATH.sequences.virahanka-numbers",
+       "name": "Generate Virahanka-Fibonacci numbers and explore their patterns",
        "strand": "sequences",
        "gradeRange": [
         7,
         8
        ],
-       "prerequisites": [],
-       "supports": [
+       "prerequisites": [
+        "MATH.number.addition",
         "MATH.algebra.number-patterns"
        ],
-       "why": "Virahanka-Fibonacci numbers (each term the sum of the previous two) are a recursive sequence; existing pattern/progression competencies are additive or arithmetic/geometric."
+       "supports": [],
+       "why": "grade7-split@1: generating Virahanka-Fibonacci numbers, counting beat rhythms and exploring their patterns is Grade 7–8 work; MATH.sequences.explicit-recursive-rules is taught with tₙ notation up to Grade 11."
       }
      ],
      "mapped": [
-      "MATH.sequences.explicit-recursive-rules"
+      "MATH.sequences.virahanka-numbers"
      ]
     },
     {

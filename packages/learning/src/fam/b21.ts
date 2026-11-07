@@ -429,13 +429,13 @@ const auvexp = F({
     const L = LET[l];
     const who = nm(a * 3 + b + k);
     return k === 0
-      ? `${who} has ${b} boxes with ${L} pencils in each, and ${a} loose pencils. Write the total number of pencils, using ${L}.`
+      ? `${who} has ${b} boxes with ${L} pencils in each, and ${a} loose pencil${a === 1 ? "" : "s"}. Write the total number of pencils, using ${L}.`
       : k === 1
-        ? `A fruit seller had ${b} crates with ${L} mangoes in each. ${a} mangoes were spoilt and thrown away. Write the number of good mangoes, using ${L}.`
+        ? `A fruit seller had ${b} crates with ${L} mangoes in each. ${a === 1 ? "1 mango was" : `${a} mangoes were`} spoilt and thrown away. Write the number of good mangoes, using ${L}.`
         : k === 2
           ? `${b} friends each pay ₹${L} for a cinema ticket and ₹${a} for snacks. Write the total amount they pay, in rupees, using ${L}.`
           : k === 3
-            ? `Each of ${b} bags held ${L} laddus, and ${a} laddus were taken out of every bag. Write how many laddus are left in all, using ${L}.`
+            ? `Each of ${b} bags held ${L} laddus, and ${a === 1 ? "1 laddu was" : `${a} laddus were`} taken out of every bag. Write how many laddus are left in all, using ${L}.`
             : `₹${L} is shared equally among ${b} children, and then each child gets ₹${a} more from their grandmother. Write how much one child has, in rupees, using ${L}.`;
   },
   teach: {

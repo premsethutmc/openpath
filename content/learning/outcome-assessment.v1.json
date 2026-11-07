@@ -1,12 +1,12 @@
 {
  "schema": "outcome-assessment@1",
- "version": "2.0.0",
+ "version": "2.1.0",
  "status": "provisional",
- "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps).",
- "judgedAgainst": "oam@1: commit 2276be0; oam@2 (re-judged outcomes): commit 4af7e63",
+ "note": "oam@1: for each of the 1 197 CBSE (NCERT) and Tamil Nadu State Board outcomes (content/learning/syllabus), which question families, written tasks and authored questions really assess it, and whether every part of the statement is assessed at its level (full), only part (partial, with what is missing) or nothing (none). Judged from the content itself — sampled problems of every family of the mapped competencies — by AI assessors working to a written brief, after an independent audit found that mapping alone overclaimed. Provisional: not educator-reviewed. The coverage compiler calls an outcome engineering-complete only where this map says full and fit. oam@2: the outcomes first judged partial or none were judged again, afresh, by new assessors after the gap@1 content was added (new families, everyday forms, written tasks and remaps). oam@3 (grade7-coverage@1): six Grade 7 outcomes judged again, afresh, by a new assessor after the families ajmilr, ajsize, agchange, ahfibp, aerot and aetfig were added; the assessor sampled the content and did not write it.",
+ "judgedAgainst": "oam@1: commit 2276be0; oam@2 (re-judged outcomes): commit 4af7e63; oam@3 (six Grade 7 outcomes): branch feat/grade7-full-coverage",
  "counts": {
-  "full": 1128,
-  "partial": 69
+  "full": 1133,
+  "partial": 64
  },
  "outcomes": [
   {
@@ -3794,18 +3794,19 @@
   },
   {
    "outcome": "cbse-g07-t1-c01-o01",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "ajcrore",
     "ajcrcmp",
     "ajmill",
-    "aenumf"
+    "aenumf",
+    "ajmilr"
    ],
    "written": [],
    "authored": false,
-   "missing": "Converting from the international system back to the Indian system (millions to lakhs/crores) and billions are not assessed: ajmill only turns crores into millions, and ajcrore's pool has no million/billion items despite its stated limits.",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@2"
+   "judged": "oam@3"
   },
   {
    "outcome": "cbse-g07-t1-c01-o02",
@@ -3833,18 +3834,19 @@
   },
   {
    "outcome": "cbse-g07-t1-c01-o04",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "aep10",
     "aemult",
     "avpest",
-    "aechk"
+    "aechk",
+    "ajsize"
    ],
    "written": [],
    "authored": false,
-   "missing": "Judging the size of large quantities (e.g. how many days 1 lakh seconds is, or whether 1 crore of something is plausible) is not asked; only products with powers of ten and estimates of products are.",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@2"
+   "judged": "oam@3"
   },
   {
    "outcome": "cbse-g07-t1-c02-o01",
@@ -3930,17 +3932,18 @@
   },
   {
    "outcome": "cbse-g07-t1-c03-o04",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "agdec",
     "agmeas",
-    "agrupee"
+    "agrupee",
+    "agchange"
    ],
    "written": [],
    "authored": false,
-   "missing": "Money word problems are not assessed: agrupee gives only bare rupee sums and differences (measurement problems are covered by agmeas).",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@2"
+   "judged": "oam@3"
   },
   {
    "outcome": "cbse-g07-t1-c04-o01",
@@ -4084,16 +4087,17 @@
   },
   {
    "outcome": "cbse-g07-t1-c06-o03",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "ahfib",
-    "ahrhy"
+    "ahrhy",
+    "ahfibp"
    ],
    "written": [],
    "authored": false,
-   "missing": "Exploring patterns in the Virahanka-Fibonacci numbers (e.g. sums of terms, which terms are even) is not asked: ahfib has a single form asking for a later term, and ahrhy covers only the counting link.",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@2"
+   "judged": "oam@3"
   },
   {
    "outcome": "cbse-g07-t1-c06-o04",
@@ -11851,17 +11855,18 @@
   },
   {
    "outcome": "tn-g07-t3-c01-o02",
-   "verdict": "partial",
+   "verdict": "full",
    "families": [
     "agdec",
     "agmeas",
-    "agrupee"
+    "agrupee",
+    "agchange"
    ],
    "written": [],
    "authored": false,
-   "missing": "Money word problems are not assessed: agrupee gives only bare rupee sums and differences (measurement problems are covered by agmeas).",
+   "missing": "",
    "grade": "fit",
-   "judged": "oam@2"
+   "judged": "oam@3"
   },
   {
    "outcome": "tn-g07-t3-c01-o03",
@@ -11990,16 +11995,20 @@
    "verdict": "full",
    "families": [
     "aerefl",
-    "aetrans"
+    "aetrans",
+    "aerot",
+    "aetfig",
+    "afrot"
    ],
    "written": [
     "wr:sym:motif-designs",
-    "wr:tr-reflection",
-    "wr:tr-turns"
+    "wr:tr-turns",
+    "wr:tr-reflection"
    ],
    "authored": false,
    "missing": "",
-   "grade": "fit"
+   "grade": "fit",
+   "judged": "oam@3"
   },
   {
    "outcome": "tn-g07-t3-c04-o02",

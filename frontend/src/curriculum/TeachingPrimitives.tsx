@@ -14,6 +14,8 @@ export interface WorkedStep {
 }
 export interface WorkedExample {
   question: string;
+  /** grade7-lessons@1: the question's options, when it is a choice question */
+  options?: string[];
   steps: WorkedStep[];
 }
 
@@ -155,6 +157,7 @@ export function ProgressiveWorkedExample({ example, storageKey }: { example: Wor
   useEffect(() => { if (storageKey) try { localStorage.setItem(storageKey, String(shown)); } catch { /* resume is optional; the ledger stays authoritative */ } }, [shown, storageKey]);
   return <section className="progressive-worked" aria-label="Progressive worked example">
     <p className="worked-question">{example.question}</p>
+    {example.options?.length ? <ol className="worked-options" type="A">{example.options.map((option, i) => <li key={i}>{option}</li>)}</ol> : null}
     <div className="worked-steps" aria-live="polite">
       {example.steps.slice(0, shown).map((step, index) => <div className="worked-step" key={`${step.expression}-${index}`}>
         <span className="step-number">{index + 1}</span>

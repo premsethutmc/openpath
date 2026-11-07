@@ -106,7 +106,10 @@ test("the four corrections: earlier revision blocked, new revision pending revie
     const cur = live ? e.revisions.find((r) => r.contentHash === contentHash(c, live))! : e.revisions.at(-1)!;
     assert.ok(cur, `${c}#${id}: current revision registered`);
     assert.ok(["pending_review", "revision_required"].includes(cur.status), `${c}#${id}: ${cur.status} (not approved)`);
-    const prev = e.revisions.find((r) => r.contentHash === cur.supersedes)!;
+    // the blocked revision is the nearest earlier one marked blocked (a corrected revision may itself have been revised
+    // again since, e.g. grade7-lessons@1, without being approved)
+    let prev = e.revisions.find((r) => r.contentHash === cur.supersedes)!;
+    while (prev && prev.status !== "blocked" && prev.supersedes) prev = e.revisions.find((r) => r.contentHash === prev.supersedes)!;
     assert.equal(prev.status, "blocked", `${c}#${id}: earlier revision blocked`);
     assert.ok(explanationBlocklist().entries.some((b) => b.id === e.id && b.contentHash === prev.contentHash), `${c}#${id}: earlier revision on the blocklist`);
     assert.ok(prev.knownIssues.length);

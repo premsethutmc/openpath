@@ -254,7 +254,7 @@ const median = (xs: number[]) => {
 const MODEC = [
   { desc: "the shoe sizes of some students", lo: 3, hi: 9 },
   { desc: "the goals scored by a school team in its matches", lo: 0, hi: 5 },
-  { desc: "the number of brothers and sisters of some students", lo: 0, hi: 4 },
+  { desc: "the numbers of brothers and sisters that some students have", lo: 0, hi: 4 },
   { desc: "the marks (out of 10) in a spelling test", lo: 4, hi: 10 },
 ];
 const modeData = (s: number) => {
@@ -312,7 +312,7 @@ const histData = (s: number, q: number) => {
 };
 const BPC = [
   { desc: "favourite sports of the students of a school", labels: ["Cricket", "Kabaddi", "Football", "Badminton"], ask: ["chose cricket", "chose kabaddi", "chose football", "chose badminton"], whole: "the students" },
-  { desc: "ways the students of a school travel to school", labels: ["Walk", "Bus", "Cycle", "Car"], ask: ["walk to school", "come by bus", "come by cycle", "come by car"], whole: "the students" },
+  { desc: "ways the students of a school travel to school", labels: ["Walk", "Bus", "Cycle", "Auto/van"], ask: ["walk to school", "come by bus", "come by cycle", "come by auto or van"], whole: "the students" },
   { desc: "fruit sold by a shop in a week, in kg", labels: ["Mango", "Banana", "Guava", "Apple"], ask: ["was mango", "was banana", "was guava", "was apple"], whole: "the fruit sold (by weight)" },
 ];
 const TOTALS = [200, 400, 500, 800];
@@ -928,7 +928,7 @@ export const B11: Def[] = [
     word: ([a, d, N]) => `${nm(a + d)} saves money in a box. On the first day ${nm(a + d)} puts in ₹${a}. Each day after that, ${nm(a + d)} puts in ₹${d} more than the day before, but stops before any day on which the amount would be more than ₹${N}. How many rupees are in the box at the end?`,
     teach: {
       idea: "An algorithm is a list of exact steps. Tracing it means doing every step in order and writing down each value as it changes, checking the stopping rule each time.",
-      method: "Make a table with columns K and S. Do Step 2 and Step 3, write the new values, then test Step 4 before going round again.",
+      method: "Make a table with columns K and S. Do the steps that change K and S, write the new values, then test the stopping rule before going round again.",
       visual: ([a, d, N]) => {
         const rows: (string | number)[][] = [];
         let S = 0;
@@ -1447,7 +1447,8 @@ export const B11: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "factor" ? `The scale factor is ${s.inputs[0]} ÷ ${s.inputs[1]} = ${Number.isInteger(Number(s.value)) ? s.value : `${s.inputs[0]}/${s.inputs[1]}`}` : `Multiply: ${s.inputs[0]} × ${Number.isInteger(Number(s.inputs[1])) ? s.inputs[1] : "the factor"} = ${s.value}`),
     domain: [[0, 1], [2, 12], [2, 20], [3, 30]],
-    keep: ([, a, b, W]) => W !== a && b !== a && (2 * b * W) % a === 0 && W <= 3 * a && b + (W - a) > 0,
+    // each choice is shown as a photo AND as rice (prompt and word swap them): 1/3 to 1 cup of rice per person, photos 5 cm wide or more
+    keep: ([, a, b, W]) => W !== a && b !== a && (2 * b * W) % a === 0 && W <= 3 * a && b + (W - a) > 0 && a >= 5 && W >= 5 && b <= a && 3 * b >= a,
     cap: 400,
     difficulty: ([, a, b, W]) => (W % a === 0 ? 1 : (b * W) % a === 0 ? 2 : 3),
     word: ([c, a, b, W]) => (c === 1 ? `A photo is ${a} cm wide and ${b} cm tall. A copy is made ${W} cm wide, keeping the same shape. How tall is the copy, in cm?` : `For ${a} people, ${nm(b)} cooks ${b} cups of rice. How many cups should be cooked for ${W} people, so each person gets the same amount?`),
@@ -1455,11 +1456,18 @@ export const B11: Def[] = [
       idea: "Keeping the shape (or the amount per person) means keeping the ratio the same, so both numbers are multiplied by the same factor. Adding the same amount to both changes the ratio.",
       method: "Find the scale factor: new ÷ old for the pair you know. Multiply the other number by the same factor (or find the amount for 1 first, then multiply).",
       alternatives: [
-        { id: "why_not_add", title: "Why adding goes wrong", kind: "conceptual", text: ["A photo 2 cm wide and 4 cm tall, made 10 cm wide by adding 8 cm to both sides, would be 10 by 12: it now looks squashed.", "Multiplying both by 5 gives 10 by 20: the height is still twice the width, so the shape is kept."] },
+        { id: "why_not_add", title: "Why adding goes wrong", kind: "conceptual", text: ["A photo 2 cm wide and 4 cm tall, made 10 cm wide by adding 8 cm to both sides, would be 10 by 12: it now looks squashed.", "Multiplying both by 5 gives 10 by 20: the height is still twice the width, so the shape is kept."],
+          // stage 2: adding and multiplying compared with the question's own numbers (c = 0 is the photo, as in the prompt)
+          textFor: ([c, a, b, W]) => {
+            const d = Math.abs(W - a), more = W > a, added = b + (W - a), right = (b * W) / a;
+            return c === 0
+              ? [`Making the photo ${W} cm wide by ${more ? "adding" : "taking away"} ${d} cm on both sides would give ${W} cm by ${added} cm: the height is no longer the same part of the width, so the picture is stretched or squashed.`, `Multiplying both sides by ${W} ÷ ${a} gives ${W} cm by ${right} cm: the height and the width change in the same ratio, so the shape is kept.`]
+              : [`${more ? "Adding" : "Taking away"} ${d} cups because there are ${d} ${more ? "more" : "fewer"} people would give ${added} cups for ${W} people: each person would not get the same amount as before.`, `Multiplying both by ${W} ÷ ${a} gives ${right} cups for ${W} people: the cups and the people change in the same ratio, so each person gets the same amount.`];
+          } },
         { id: "unitary", title: "Unitary method", kind: "procedural", text: ["Find the amount for one unit first: cups for 1 person = cups ÷ people.", "Multiply by the new number of people."] },
       ],
     },
-    limits: "Photos and recipes scaled by whole-number sizes with answers in halves; explaining why a change is or is not proportional is marked by an educator.",
+    limits: "Photos 5 to 30 cm wide and rice at 1/3 to 1 cup per person, scaled by whole-number sizes with answers in halves; explaining why a change is or is not proportional is marked by an educator.",
   },
   // ============================================================ shift ciphers
   {
@@ -1629,7 +1637,7 @@ export const B11: Def[] = [
     mc: true,
     parse: none,
     reject: ([s, j]) => (s < 0 || s > 99 || j < 0 || j > 4 ? "One of 100 data sets and one of five classes." : null),
-    prompt: ([, j]) => `The table shows the marks (out of 50) of 30 students. Group them into the classes 0–10, 10–20, 20–30, 30–40 and 40–50, where each class includes its lower limit but not its upper limit (so 20 goes in 20–30). How many students are in the class ${10 * j}–${10 * j + 10}?`,
+    prompt: ([, j]) => `The table shows the marks (out of 50) of 30 students. Group them into the classes 0–10, 10–20, 20–30, 30–40 and 40–50, where each class includes its lower limit but not its upper limit (so 20 goes in 20–30); the last class, 40–50, also includes 50. How many students are in the class ${10 * j}–${10 * j + 10}?`,
     solve: ([s, j]) => {
       const xs = groupData(s);
       const n = xs.filter((x) => x >= 10 * j && x < 10 * j + 10).length;
@@ -1654,7 +1662,7 @@ export const B11: Def[] = [
     domain: [[0, 99], [0, 4]],
     cap: 400,
     difficulty: ([, j]) => (j === 0 || j === 4 ? 1 : 2),
-    word: ([s, j]) => `A teacher has the test marks (out of 50) of 30 students: ${groupData(s).join(", ")}. She makes groups 0–10, 10–20, 20–30, 30–40, 40–50, each including its lower limit but not its upper one. How many students go in the group ${10 * j}–${10 * j + 10}?`,
+    word: ([s, j]) => `A teacher has the test marks (out of 50) of 30 students: ${groupData(s).join(", ")}. She makes groups 0–10, 10–20, 20–30, 30–40, 40–50, each including its lower limit but not its upper one (a full mark of 50 goes in 40–50). How many students go in the group ${10 * j}–${10 * j + 10}?`,
     teach: {
       idea: "Grouping puts the data in class intervals of equal width. Each value must go in exactly one class, so a value on a boundary goes in the class that starts with it.",
       method: "For each mark, find the class whose lower limit is at most the mark and whose upper limit is more than it. Tally the class, then count.",
@@ -2502,7 +2510,11 @@ export const B11: Def[] = [
       const [xs, ys] = dirinvData(p);
       return { type: "table", head: ["x", ...xs.map(String)], rows: [["y", ...ys.map(String)]] };
     },
-    solve: (p) => ({ steps: [{ id: "test", op: "compare", competency: PROP, inputs: [dirinvWhy(p)], value: "" }], answer: order3(p, "dirinv").indexOf(p[0] === 0 ? 0 : p[0] === 1 ? 1 : 2) }),
+    solve: (p) => {
+      const k = p[0] === 0 ? 0 : p[0] === 1 ? 1 : 2;
+      const ans = order3(p, "dirinv").indexOf(k);
+      return { steps: [{ id: "test", op: "compare", competency: PROP, inputs: [dirinvWhy(p)], value: "" }, { id: "pick", op: "choose the option", competency: PROP, inputs: [DIRINV[k]], value: ans }], answer: ans };
+    },
     // independent: test y ÷ x and x × y for every column
     validate: (p, v) => {
       if (typeof v !== "number" || !Number.isInteger(v)) return false;
@@ -2522,7 +2534,7 @@ export const B11: Def[] = [
             : [bug("products-only", "procedural", PROP, "Only x × y was checked; it changes from column to column, so 'neither' was chosen. Check y ÷ x as well: here it is the same in every column, so y is in direct proportion to x.", o.indexOf(2))];
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 3], [2, 9], [0, 5]],
     difficulty: ([t]) => (t === 0 ? 1 : t === 1 ? 2 : 3),
     teach: {
@@ -2630,7 +2642,8 @@ export const B11: Def[] = [
     reject: ([a, s]) => ((a === 0 || a === 1) && s >= 0 && s <= 199 && !primDup([a, s]) ? null : "Two questions and seeds 0 to 199 (each set of four situations once)."),
     choices: (p) => primSet(p).opts,
     prompt: ([a]) => `Which of these is ${a ? "secondary" : "primary"} data?`,
-    solve: (p) => ({ steps: [{ id: "who", op: "classify", competency: FREQ, inputs: [p[0] ? "Secondary data was collected by someone else for their own purpose" : "Primary data is collected first-hand by the person who will use it"], value: "" }], answer: primSet(p).right }),
+    // grade7-lessons@1: a last step picks the option, so the worked example ends at the answer
+    solve: (p) => ({ steps: [{ id: "who", op: "classify", competency: FREQ, inputs: [p[0] ? "Secondary data was collected by someone else for their own purpose" : "Primary data is collected first-hand by the person who will use it"], value: "" }, { id: "pick", op: "pick", competency: FREQ, inputs: [primSet(p).opts[primSet(p).right]], value: primSet(p).right }], answer: primSet(p).right }),
     // independent: look the chosen situation up in the list of first-hand collections
     validate: (p, v) => {
       if (typeof v !== "number" || !Number.isInteger(v)) return false;
@@ -2642,7 +2655,7 @@ export const B11: Def[] = [
       return d.trap >= 0 ? [bug(p[0] ? "asking-is-secondary" : "copied-is-primary", "conceptual", FREQ, p[0] ? "Asking other people questions was taken as secondary data. A survey you carry out yourself is primary data, even though other people give the answers." : "Copying figures out yourself was taken as collecting primary data. The figures were collected by someone else, so they are secondary data, whoever copies them.", d.trap)] : [];
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : String(s.inputs[0])),
     domain: [[0, 1], [0, 199]],
     keep: (p) => !primDup(p),
     difficulty: ([a]) => (a ? 2 : 1),

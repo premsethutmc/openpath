@@ -23,7 +23,7 @@ function TeachingBlock({ block, index, resumeKey, repeatsHeading = false, compet
     <div className="teaching-step"><p className="teaching-label">{block.label}</p></div>
     {repeatsHeading ? null : <h3>{block.title}</h3>}
     {block.text.map((line, i) => <p key={i}>{displayed(line)}</p>)}
-    {block.representation ? <RepresentationRenderer representation={block.representation} /> : block.visual ? <TeachingVisualRenderer visual={block.visual} /> : block.widget ? <Figure v={stripsFor(block.widget as { type: string; [k: string]: unknown }, competency)} /> : null}
+    {block.representation ? <RepresentationRenderer representation={block.representation} /> : block.visual ? <TeachingVisualRenderer visual={block.visual} /> : block.widget ? <Figure v={stripsFor(block.widget as { type: string; [k: string]: unknown }, competency)} /> : block.figure ? <Figure v={stripsFor(block.figure, competency)} /> : null}
     {worked ? <>
       {block.role !== "worked-example" ? <p className="teaching-label worked-label">{worked.verified ? "Worked example" : "The steps"}</p> : null}
       <ProgressiveWorkedExample example={worked} storageKey={resumeKey && `${resumeKey}:example:${index}`} />

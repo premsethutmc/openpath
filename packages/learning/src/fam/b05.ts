@@ -250,7 +250,13 @@ export const B05: Def[] = [
       method: "Count the jumps from the 1st number to the one asked for (one less than its place), multiply by the amount added each time, and add that to the start.",
       visual: ([a, d, n]) => ({ type: "numberline", from: a, to: a + (n - 1) * d, step: d, jumps: Array.from({ length: n - 1 }, (_, i) => [a + i * d, a + (i + 1) * d]) }),
       alternatives: [
-        { id: "write_on", title: "Keep writing the pattern", kind: "procedural", text: ["Write the numbers in a row and keep adding the same amount.", "Number each one with its place (1st, 2nd, 3rd …) and stop at the place asked for."] },
+        {
+          id: "write_on", title: "Keep writing the pattern", kind: "procedural", text: ["Write the numbers in a row and keep adding the same amount.", "Number each one with its place (1st, 2nd, 3rd …) and stop at the place asked for."],
+          textFor: ([a, d, n]) => [
+            `Write the numbers in a row, adding ${d} each time: ${Array.from({ length: n }, (_, i) => a + i * d).join(", ")}.`,
+            `Number each one with its place: ${a} is the 1st, ${a + d} is the 2nd, and so on. The ${ord(n)} number is ${a + (n - 1) * d}.`,
+          ],
+        },
       ],
     },
     limits: "Patterns that add the same whole number each time; patterns that multiply, or shape patterns to draw, are not here.",
@@ -572,7 +578,7 @@ export const B05: Def[] = [
       return Math.abs(c - m) <= 2 ? 1 : axis === 0 ? 2 : 3;
     },
     figure: ([axis, m, x, y]) => ({ type: "plane", points: [[x, y, "P"]], segments: [axis ? [[0, m], [10, m]] : [[m, 0], [m, 10]]], range: 10 }),
-    word: ([axis, m, x, y]) => `On a squared map, a straight canal runs along the line ${axis ? "y" : "x"} = ${n_(m)}. A temple stands at ${tup(x, y)}. Its reflection in the still water appears exactly opposite, the same distance from the canal on the other side. At which point is the reflection? Write it as (x, y).`,
+    word: ([axis, m, x, y]) => `On a squared map, a straight canal runs along the line ${axis ? "y" : "x"} = ${n_(m)}. A temple is marked at ${tup(x, y)}. The map is folded exactly along the canal. On which point does the temple land? Write it as (x, y).`,
     teach: {
       idea: "A mirror image is as far behind the mirror line as the object is in front of it, straight across, at right angles to the line.",
       method: "Count how far P is from the mirror line, then count the same distance on the other side. Only the coordinate that crosses the line changes.",
@@ -938,24 +944,25 @@ export const B05: Def[] = [
     },
     solve: ([kind, op, A, B]) => {
       const f = UNITS[kind].f;
+      const { big: U, small: u } = UNITS[kind];
       const [b1, s1] = mixed(kind, A);
       const [b2, s2] = mixed(kind, B);
       if (op === 0) {
         const s = s1 + s2;
         return {
           steps: [
-            { id: "small", op: "add", competency: ADDSUB, inputs: [s1, s2], value: s },
-            { id: "regroup", op: "regroup", competency: CONV, inputs: [s, f], value: s - f },
-            { id: "big", op: "add", competency: MIX, inputs: [b1, b2, 1], value: b1 + b2 + 1 },
+            { id: "small", op: "add", competency: ADDSUB, inputs: [s1, s2, U, u], value: s },
+            { id: "regroup", op: "regroup", competency: CONV, inputs: [s, f, U, u], value: s - f },
+            { id: "big", op: "add", competency: MIX, inputs: [b1, b2, 1, U, u], value: b1 + b2 + 1 },
           ],
           answer: tup(b1 + b2 + 1, s - f),
         };
       }
       return {
         steps: [
-          { id: "borrow", op: "regroup", competency: CONV, inputs: [s1, f], value: s1 + f },
-          { id: "small", op: "subtract", competency: ADDSUB, inputs: [s1 + f, s2], value: s1 + f - s2 },
-          { id: "big", op: "subtract", competency: MIX, inputs: [b1 - 1, b2], value: b1 - 1 - b2 },
+          { id: "borrow", op: "regroup", competency: CONV, inputs: [s1, f, U, u], value: s1 + f },
+          { id: "small", op: "subtract", competency: ADDSUB, inputs: [s1 + f, s2, U, u], value: s1 + f - s2 },
+          { id: "big", op: "subtract", competency: MIX, inputs: [b1 - 1, b2, U, u], value: b1 - 1 - b2 },
         ],
         answer: tup(b1 - 1 - b2, s1 + f - s2),
       };
@@ -997,16 +1004,18 @@ export const B05: Def[] = [
       return [tup(Math.floor(tot / f) + 1, tot % f), tup(Math.max(0, Math.floor(tot / f) - 1), tot % f), tup(Math.floor(tot / f), near)];
     },
     variants: () => [],
-    explain: (s) =>
-      s.id === "regroup"
-        ? `${s.inputs[0]} = ${s.inputs[1]} + ${s.value}: change ${s.inputs[1]} of the small units into 1 large unit`
+    explain: (s) => {
+      const [U, u] = s.inputs.slice(-2);
+      return s.id === "regroup"
+        ? `${s.inputs[0]} ${u} = ${s.inputs[1]} ${u} + ${s.value} ${u}: change ${s.inputs[1]} ${u} into 1 ${U}`
         : s.id === "borrow"
-          ? `Change 1 large unit into ${s.inputs[1]} small units: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`
+          ? `Change 1 ${U} into ${s.inputs[1]} ${u}: ${s.inputs[0]} ${u} + ${s.inputs[1]} ${u} = ${s.value} ${u}`
           : s.id === "small"
-            ? `Small units: ${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${s.value}`
+            ? `${u}: ${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${s.value} ${u}`
             : s.op === "add"
-              ? `Large units: ${s.inputs[0]} + ${s.inputs[1]} + 1 carried = ${s.value}`
-              : `Large units: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`,
+              ? `${U}: ${s.inputs[0]} + ${s.inputs[1]} + 1 carried = ${s.value} ${U}`
+              : `${U}: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value} ${U}`;
+    },
     domain: [[0, 2], [0, 1], [20, 179], [20, 179]],
     cap: 450,
     difficulty: ([kind, op]) => (kind === 0 && op === 0 ? 1 : op === 0 || kind === 0 ? 2 : 3),
@@ -1022,7 +1031,7 @@ export const B05: Def[] = [
     },
     teach: {
       idea: "Measures in two units work like tens and ones, but the change-over is 100 cm = 1 m, 1000 g = 1 kg and 1000 mL = 1 L.",
-      method: "Add or subtract the small units first. If the small units reach the change-over number, change them into 1 large unit; if there are too few to subtract, change 1 large unit into small units. Then do the large units.",
+      method: "Add or subtract the amounts in the smaller unit first. If they reach the change-over number, change them into 1 of the bigger unit; if there are too few to subtract, change 1 of the bigger unit into the smaller unit. Then do the bigger unit.",
       alternatives: [
         { id: "all_small", title: "Change everything into the small unit", kind: "procedural", text: ["Write both measures in the small unit only (for example 2 m 45 cm = 245 cm).", "Add or subtract these numbers, then change the answer back (310 cm = 3 m 10 cm)."] },
       ],
@@ -1052,14 +1061,15 @@ export const B05: Def[] = [
     },
     solve: ([kind, A, n]) => {
       const f = UNITS[kind].f;
+      const { big: U, small: u } = UNITS[kind];
       const [b, s] = mixed(kind, A);
       const sm = s * n;
       const carry = Math.floor(sm / f);
       return {
         steps: [
-          { id: "small", op: "multiply", competency: MM, inputs: [s, n], value: sm },
-          { id: "regroup", op: "regroup", competency: CONV, inputs: [sm, f], value: carry },
-          { id: "big", op: "multiply", competency: MIX, inputs: [b, n, carry], value: b * n + carry },
+          { id: "small", op: "multiply", competency: MM, inputs: [s, n, U, u], value: sm },
+          { id: "regroup", op: "regroup", competency: CONV, inputs: [sm, f, U, u], value: carry },
+          { id: "big", op: "multiply", competency: MIX, inputs: [b, n, carry, U, u], value: b * n + carry },
         ],
         answer: tup(b * n + carry, sm % f),
       };
@@ -1091,7 +1101,10 @@ export const B05: Def[] = [
       return [tup(Math.floor(tot / f) + 1, tot % f)];
     },
     variants: () => [],
-    explain: (s) => (s.id === "small" ? `Small units: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "regroup" ? `${s.inputs[0]} small units make ${s.value} large ${s.value === 1 ? "unit" : "units"} and some left over` : `Large units: ${s.inputs[0]} × ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
+    explain: (s) => {
+      const [U, u] = s.inputs.slice(-2);
+      return s.id === "small" ? `${u}: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} ${u}` : s.id === "regroup" ? `${s.inputs[0]} ${u} make ${s.value} ${U}${Number(s.inputs[0]) % Number(s.inputs[1]) ? ` and ${Number(s.inputs[0]) % Number(s.inputs[1])} ${u} left over` : ""}` : `${U}: ${s.inputs[0]} × ${s.inputs[1]} + ${s.inputs[2]} = ${s.value} ${U}`;
+    },
     domain: [[0, 2], [20, 99], [2, 9]],
     cap: 400,
     difficulty: ([kind, , n]) => (kind === 0 && n <= 4 ? 1 : n <= 5 ? 2 : 3),
@@ -1105,8 +1118,8 @@ export const B05: Def[] = [
       ][kind];
     },
     teach: {
-      idea: "Multiplying a measure is repeated adding: multiply the small units and the large units, then change extra small units into large ones.",
-      method: "Multiply the small units; take out every full 100 cm (or 1000 g, 1000 mL) as a large unit. Multiply the large units and add the ones you took out.",
+      idea: "Multiplying a measure is repeated adding: multiply the amounts in both units, then change the extra amount in the smaller unit into the bigger unit.",
+      method: "Multiply the amount in the smaller unit; take out every full 100 cm (or 1000 g, 1000 mL) as 1 m (or 1 kg, 1 L). Multiply the amount in the bigger unit and add the ones you took out.",
       alternatives: [
         { id: "all_small", title: "Work in the small unit", kind: "procedural", text: ["Change the measure into the small unit only (1 kg 250 g = 1250 g).", "Multiply, then change back: 3 × 1250 g = 3750 g = 3 kg 750 g."] },
       ],
@@ -1129,8 +1142,8 @@ export const B05: Def[] = [
       const f = CONVK[k].f;
       return {
         steps: [
-          { id: "big", op: "multiply", competency: CONV, inputs: [b, f], value: b * f },
-          { id: "add", op: "add", competency: CONV, inputs: [b * f, convSmall(k, s)], value: b * f + convSmall(k, s) },
+          { id: "big", op: "multiply", competency: CONV, inputs: [b, f, CONVK[k].big, CONVK[k].small], value: b * f },
+          { id: "add", op: "add", competency: CONV, inputs: [b * f, convSmall(k, s), CONVK[k].big, CONVK[k].small], value: b * f + convSmall(k, s) },
         ],
         answer: b * f + convSmall(k, s),
       };
@@ -1164,7 +1177,7 @@ export const B05: Def[] = [
       return [(b + 1) * f + sm, (b - 1) * f + sm, b * f + sm + d, b * f + sm - d].filter((x) => x > 0 && x !== b * f + sm);
     },
     variants: () => [],
-    explain: (s) => (s.id === "big" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
+    explain: (s) => (s.id === "big" ? `${s.inputs[0]} ${s.inputs[2]} = ${s.inputs[0]} × ${s.inputs[1]} ${s.inputs[3]} = ${s.value} ${s.inputs[3]}` : `${s.inputs[0]} ${s.inputs[3]} + ${s.inputs[1]} ${s.inputs[3]} = ${s.value} ${s.inputs[3]}`),
     domain: [[0, 5], [1, 9], [1, 199]],
     cap: 450,
     difficulty: ([k, , s]) => {
@@ -1184,8 +1197,8 @@ export const B05: Def[] = [
       ][k];
     },
     teach: {
-      idea: "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL and 1 km = 1000 m. A measure in two units is the large part changed into small units, plus the small part.",
-      method: "Multiply the large units by 100 or 1000, then add the small units. Check the small part fills its places: 3 kg 25 g = 3000 g + 25 g = 3025 g.",
+      idea: "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL and 1 km = 1000 m. A measure in two units is the part in the bigger unit changed into the smaller unit, plus the part already in the smaller unit.",
+      method: "Multiply the amount in the bigger unit by how many of the smaller unit make one of the bigger unit, then add the amount in the smaller unit. Check the small part fills its places: if it has too few digits, put zeros in front of it.",
       visual: ([k, b, s]) => ({ type: "table", head: ["Thousands", "Hundreds", "Tens", "Ones"], rows: [String(b * CONVK[k].f + convSmall(k, s)).padStart(4, " ").split("")] }),
       alternatives: [
         { id: "place_chart", title: "Use a place-value chart", kind: "procedural", text: ["Write the large units in the thousands place (for g, mL, m) or hundreds place (for cm).", "Write the small units ending in the ones place, and fill any empty places with 0."] },
@@ -1204,9 +1217,9 @@ export const B05: Def[] = [
     parse: none,
     reject: (p) => (!inRange(p, [[0, 4], [1, 9], [0, 1]]) ? "Parts of 100, 125, 200, 250 or 500 making 1 to 9 kg or L." : null),
     prompt: ([q, n, kind]) => `How many ${kind ? "bottles" : "packets"} of ${PARTS[q]} ${kind ? "mL" : "g"} together make ${n} ${kind ? "L" : "kg"}?`,
-    solve: ([q, n]) => ({
+    solve: ([q, n, kind]) => ({
       steps: [
-        { id: "small", op: "convert", competency: CONV, inputs: [n, 1000], value: n * 1000 },
+        { id: "small", op: "convert", competency: CONV, inputs: [n, 1000, kind ? "L" : "kg", kind ? "mL" : "g"], value: n * 1000 },
         { id: "share", op: "divide", competency: "MATH.number.long-division", inputs: [n * 1000, PARTS[q]], value: (n * 1000) / PARTS[q] },
       ],
       answer: (n * 1000) / PARTS[q],
@@ -1231,13 +1244,13 @@ export const B05: Def[] = [
       return [2 * a, a % 2 === 0 ? a / 2 : 3 * a, a + n];
     },
     variants: () => [],
-    explain: (s) => (s.id === "small" ? `${s.inputs[0]} ${s.inputs[0] === 1 ? "unit is" : "units are"} ${s.value} small units` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} parts`),
+    explain: (s) => (s.id === "small" ? `${s.inputs[0]} ${s.inputs[2]} = ${s.inputs[0]} × ${s.inputs[1]} ${s.inputs[3]} = ${s.value} ${s.inputs[3]}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} parts`),
     domain: [[0, 4], [1, 9], [0, 1]],
     difficulty: ([q, n]) => (n === 1 || PARTS[q] === 500 ? 1 : PARTS[q] === 125 ? 3 : 2),
     word: ([q, n, kind]) => (kind ? `${name(q + n)} fills small bottles of ${PARTS[q]} mL from a ${n} L can of buttermilk for a class party. How many bottles can be filled?` : `A shopkeeper packs ${n} kg of groundnuts into packets of ${PARTS[q]} g each. How many packets does she make?`),
     teach: {
-      idea: "1 kg = 1000 g and 1 L = 1000 mL. Two 500 g packets make 1 kg, four 250 g packets make 1 kg, and so on.",
-      method: "Find how many parts make 1 kg (or 1 L): 1000 ÷ the part. Then multiply by the number of kilograms (or litres).",
+      idea: "A kilogram is a thousand grams and a litre is a thousand millilitres. Equal packets that together weigh a thousand grams make 1 kg.",
+      method: "Find how many parts make 1 kg (or 1 L): divide a thousand by the size of one part. Then multiply by the number of kilograms (or litres).",
       visual: ([q]) => ({ type: "bars", title: "Parts in 1 kg", labels: Array.from({ length: 1000 / PARTS[q] }, (_, i) => `${i + 1}`), values: Array.from({ length: 1000 / PARTS[q] }, () => PARTS[q]) }),
       alternatives: [
         { id: "skip_count", title: "Skip-count to 1000", kind: "procedural", text: ["Count up in parts: 250, 500, 750, 1000 — that is 4 parts in 1 kg.", "Each extra kilogram needs the same number of parts again."] },
@@ -1292,7 +1305,14 @@ export const B05: Def[] = [
       method: "Write the wholes, then the point, then the number of tenths, then the number of hundredths. Use 0 for an empty place.",
       visual: ([, t, h]) => ({ type: "grid", rows: 10, cols: 10, shaded: 10 * t + h }),
       alternatives: [
-        { id: "hundred_grid", title: "Shade a hundred grid", kind: "conceptual", text: ["A grid of 100 squares is 1 whole: one row (10 squares) is a tenth, one square is a hundredth.", "Shade the rows for the tenths and single squares for the hundredths; 3 rows and 4 squares is 34 hundredths, 0.34."] },
+        {
+          id: "hundred_grid", title: "Shade a hundred grid", kind: "conceptual", text: ["A grid of 100 squares is 1 whole: one row (10 squares) is a tenth, one square is a hundredth.", "Shade the rows for the tenths and single squares for the hundredths; 3 rows and 4 squares is 34 hundredths, 0.34."],
+          textFor: ([w, t, h]) => [
+            "A grid of 100 squares is 1 whole: one row (10 squares) is a tenth, one square is a hundredth.",
+            `${w ? `Shade ${w} whole grid${w > 1 ? "s" : ""}. On the next grid, shade` : "Shade"} ${[t ? `${t} row${t === 1 ? "" : "s"}` : "", h ? `${h} single square${h === 1 ? "" : "s"}` : ""].filter(Boolean).join(" and ")}: that is ${10 * t + h} hundredth${10 * t + h === 1 ? "" : "s"}, ${ds(10 * t + h)}.`,
+            ...(w ? [`${w} and ${ds(10 * t + h)} together make ${ds(100 * w + 10 * t + h)}.`] : []),
+          ],
+        },
       ],
     },
     limits: "Up to 5 wholes with tenths and hundredths; thousandths, the number line and changing fractions in simplest form are not here.",
@@ -1333,10 +1353,11 @@ export const B05: Def[] = [
     domain: [[0, 3], [1, 9], [0, 9], [1, 9]],
     cap: 300,
     difficulty: ([, t, u, v]) => (t < u ? 1 : u * 10 + v > t ? 3 : 2),
-    word: ([w, t, u, v]) => `${name(t + u)} jumped ${w}.${t} m and ${name(t + u + 1)} jumped ${w}.${u}${v} m in the long jump. Which is the longer jump? Write the length in metres.`,
+    // no long jump under 1 m: ribbons when the whole part is 0
+    word: ([w, t, u, v]) => (w === 0 ? `${name(t + u)}'s ribbon is 0.${t} m long and ${name(t + u + 1)}'s is 0.${u}${v} m long. Which ribbon is longer? Write its length in metres.` : `${name(t + u)} jumped ${w}.${t} m and ${name(t + u + 1)} jumped ${w}.${u}${v} m in the long jump. Which is the longer jump? Write the length in metres.`),
     teach: {
       idea: "Decimals are compared place by place from the left, like whole numbers: first the wholes, then the tenths, then the hundredths. More digits does not mean bigger.",
-      method: "Write both with the same number of places (0.7 = 0.70) and compare them as hundredths: 70 hundredths is more than 65 hundredths.",
+      method: "Write both with the same number of places by putting a zero after the tenths digit, then compare them as hundredths: the one with more hundredths is bigger.",
       visual: ([, t]) => ({ type: "grid", rows: 10, cols: 10, shaded: 10 * t }),
       alternatives: [
         { id: "money", title: "Think of rupees", kind: "conceptual", text: ["₹0.70 is 70 paise and ₹0.65 is 65 paise.", "70 paise is more, so 0.7 is greater than 0.65."] },
@@ -1413,7 +1434,9 @@ export const B05: Def[] = [
     solve: ([L, T, H, r]) => ({
       steps: [
         { id: "lakhs", op: "place", competency: LARGE, inputs: [L, 100000], value: L * 100000, justification: { rule: "positional-value" as const, digit: L, placeValue: 100000, placeName: "lakhs" } },
-        { id: "thousands", op: "place", competency: THOU, inputs: [T, 1000], value: T * 1000, justification: { rule: "positional-value" as const, digit: T, placeValue: 1000, placeName: "thousands" } },
+        // a two-digit thousands period fills two places: its leading digit is in the ten-thousands place (the step's expression
+        // names both digits), so the justification never calls a two-digit number a digit
+        { id: "thousands", op: "place", competency: THOU, inputs: [T, 1000], value: T * 1000, justification: T >= 10 ? { rule: "positional-value" as const, digit: Math.floor(T / 10), placeValue: 10000, placeName: "ten thousands" } : { rule: "positional-value" as const, digit: T, placeValue: 1000, placeName: "thousands" } },
         { id: "rest", op: "place", competency: PV, inputs: [H, REST[r]], value: H * 100 + REST[r], justification: { rule: "positional-value" as const, digit: H, placeValue: 100, placeName: "hundreds" } },
       ],
       answer: L * 100000 + T * 1000 + H * 100 + REST[r],
@@ -1438,14 +1461,21 @@ export const B05: Def[] = [
     },
     distractors: ([L, T, H, r]) => [L * 1000000 + T * 1000 + H * 100 + REST[r], L * 100000 + T * 10000 + H * 100 + REST[r], L * 100000 + T * 1000 + H * 10 + REST[r]],
     variants: () => [],
-    explain: (s) => (s.id === "lakhs" ? `${s.inputs[0]} lakh = ${ind(Number(s.value))}` : s.id === "thousands" ? `${s.inputs[0]} thousand = ${ind(Number(s.value))}` : `${s.inputs[0]} hundred and ${s.inputs[1]} = ${s.value}; put the periods together`),
+    explain: (s) =>
+      s.id === "lakhs"
+        ? `${s.inputs[0]} lakh = ${ind(Number(s.value))}`
+        : s.id === "thousands"
+          ? Number(s.inputs[0]) >= 10
+            ? `${s.inputs[0]} thousand = ${ind(Number(s.value))}: the thousands period holds ${Math.floor(Number(s.inputs[0]) / 10)} ten thousand and ${Number(s.inputs[0]) % 10} thousand`
+            : `${s.inputs[0]} thousand = ${ind(Number(s.value))}`
+          : `${s.inputs[0]} hundred and ${s.inputs[1]} = ${s.value}; put the periods together`,
     domain: [[0, 9], [0, 99], [0, 9], [0, 19]],
     cap: 400,
     difficulty: ([L, T, H, r]) => [L === 0, T < 10, H === 0, REST[r] < 10].filter(Boolean).length >= 2 ? 3 : L === 0 ? 1 : 2,
     word: (p) => `The number of people who visited a book fair in Chennai was announced as "${indWords(p)}". ${name(p[1] + p[2])} writes it down in figures. What does ${name(p[1] + p[2])} write? (Write the number without commas.)`,
     teach: {
       idea: "In the Indian system the places are grouped as ones–tens–hundreds, then thousands–ten thousands, then lakhs–ten lakhs. Every place gets a digit, so empty places get 0.",
-      method: "Draw a place-value chart (L, TTh, Th, H, T, O). Write each part in its own places, fill empty places with 0, then put commas: 4,07,052.",
+      method: "Draw a place-value chart (L, TTh, Th, H, T, O). Write each part in its own places, fill empty places with 0, then put commas between the periods.",
       visual: ([L, T, H, r]) => ({ type: "table", head: ["L", "TTh", "Th", "H", "T", "O"], rows: [String(L * 100000 + T * 1000 + H * 100 + REST[r]).padStart(6, "0").split("")] }),
       alternatives: [
         { id: "periods", title: "Fill the periods", kind: "procedural", text: ["Write three boxes for hundreds-tens-ones, two boxes for thousands, and one or two for lakhs.", "Fill each period from its right, and put 0 in any empty box."] },
@@ -1495,7 +1525,7 @@ export const B05: Def[] = [
     word: ([seed]) => `${name(seed)} notes the kilometres travelled by four buses of a depot in Salem: ${cmpList(seed).map(ind).join("; ")}. List them from the shortest distance to the longest, in brackets, without commas inside the numbers.`,
     teach: {
       idea: "A number with more digits is bigger. When two numbers have the same number of digits, the first place where their digits differ decides.",
-      method: "First sort by how many digits each number has. Then, for numbers with the same number of digits, compare ten thousands, then thousands, then hundreds … until the digits differ.",
+      method: "First sort by how many digits each number has. Then, for numbers with the same number of digits, compare their digits from the left, starting at the largest place they have (lakhs first when they have six digits, ten lakhs first when they have seven), then the next place down, until the digits differ.",
       visual: ([seed]) => ({ type: "table", head: ["TTh", "Th", "H", "T", "O"], rows: cmpList(seed).map((x) => String(x).padStart(5, " ").split("")) }),
       alternatives: [
         { id: "chart", title: "Line them up in a place-value chart", kind: "procedural", text: ["Write each number in a place-value chart so the ones are in one column.", "Read down the chart from the left: the first column where the digits differ shows which number is bigger."] },
@@ -1561,13 +1591,23 @@ export const B05: Def[] = [
     domain: [[0, 1], [1, 3], [2, 999]],
     cap: 400,
     difficulty: ([op, k, m]) => (k === 1 && m < 100 ? 1 : m % 10 === 0 || op === 1 ? 3 : 2),
-    word: ([op, k, m]) => (op === 0 ? `A shop gets ${m} boxes of chalk. Each box has ${10 ** k} sticks. How many sticks of chalk is that?` : `${m * 10 ** k} pencils are packed in bundles of ${10 ** k}. How many bundles are made?`),
+    word: ([op, k, m]) => (op === 0 ? (k === 3 ? `A factory packs ${m} cartons. Each carton has 1000 sticks of chalk. How many sticks is that?` : `A shop gets ${m} boxes of chalk. Each box has ${10 ** k} sticks. How many sticks of chalk is that?`) : `${m * 10 ** k} pencils are packed in bundles of ${10 ** k}. How many bundles are made?`),
     teach: {
       idea: "Multiplying by 10 makes every digit worth ten times as much, so each digit moves one place to the left and a 0 fills the ones place. Dividing by 10 moves every digit one place to the right.",
-      method: "× 10, × 100, × 1000: write 1, 2 or 3 zeros on the end. ÷ 10, ÷ 100, ÷ 1000 (of a number ending in enough zeros): take 1, 2 or 3 zeros off the end.",
+      method: "To multiply by ten, a hundred or a thousand, write as many zeros on the end as that number has. To divide by it (when the number ends in enough zeros), take that many zeros off the end.",
       visual: ([op, k, m]) => ({ type: "table", head: ["", "Th", "H", "T", "O"], rows: [["before", ...String(op ? m * 10 ** k : m).padStart(4, " ").slice(-4).split("")], ["after", ...String(op ? m : m * 10 ** k).padStart(4, " ").slice(-4).split("")]] }),
       alternatives: [
-        { id: "blocks", title: "Swap each block for a bigger one", kind: "conceptual", text: ["× 10 changes every one into a ten, every ten into a hundred, every hundred into a thousand.", "So 34 (3 tens, 4 ones) × 10 is 3 hundreds and 4 tens: 340."], visual: ([, , m]) => ({ type: "blocks", hundreds: Math.floor((m % 1000) / 100), tens: Math.floor((m % 100) / 10), ones: m % 10 }) },
+        {
+          id: "blocks", title: "Swap each block for a bigger one", kind: "conceptual", text: ["× 10 changes every one into a ten, every ten into a hundred, every hundred into a thousand.", "So 34 (3 tens, 4 ones) × 10 is 3 hundreds and 4 tens: 340."],
+          textFor: ([op, k, m]) => {
+            const NAMES = ["one", "ten", "hundred", "thousand", "ten thousand", "lakh"], f = 10 ** k, big = op ? m * f : m, small = op ? m : m * f;
+            const parts = (x: number) => String(x).split("").reverse().map((dg, i) => (dg === "0" ? null : `${dg} ${NAMES[i]}${dg === "1" ? "" : "s"}`)).filter(Boolean).reverse().join(", ");
+            const swap = k === 1 ? "every one into a ten, every ten into a hundred" : k === 2 ? "every one into a hundred, every ten into a thousand" : "every one into a thousand, every ten into ten thousand";
+            return op
+              ? [`÷ ${f} undoes × ${f}: each block is swapped back for the block ${k === 1 ? "one place" : `${k} places`} smaller.`, `${big} is ${parts(big)}. Swapping each block back gives ${parts(small)}: ${big} ÷ ${f} = ${small}.`]
+              : [`× ${f} changes ${swap}, and so on: each block is swapped for the block ${k === 1 ? "one place" : `${k} places`} bigger.`, `${m} is ${parts(m)}. After swapping it is ${parts(small)}: ${m} × ${f} = ${small}.`];
+          },
+          visual: ([, , m]) => ({ type: "blocks", hundreds: Math.floor((m % 1000) / 100), tens: Math.floor((m % 100) / 10), ones: m % 10 }) },
       ],
     },
     limits: "Whole numbers up to 999 multiplied by 10, 100 or 1000, and exact divisions back; remainders and decimals are not here.",
@@ -1610,9 +1650,9 @@ export const B05: Def[] = [
     domain: [[11, 99], [2, 9], [1, 2]],
     cap: 400,
     difficulty: ([a, d, k]) => (a * d < 100 && k === 1 ? 1 : k === 1 ? 2 : 3),
-    word: ([a, d, k]) => `A bus ticket to the Transport Museum costs ₹${d * 10 ** k}. How many rupees do ${a} tickets cost?`,
+    word: ([a, d, k]) => (k === 2 ? `A school buys ${a} chairs at ₹${d * 100} each. How many rupees is that?` : `A bus ticket to the Transport Museum costs ₹${d * 10}. How many rupees do ${a} tickets cost?`),
     teach: {
-      idea: `Multiplying by 40 is multiplying by 4 and then by 10, because 40 = 4 × 10.`,
+      idea: "Multiplying by a multiple of ten or a hundred is multiplying by its non-zero digit and then by ten or a hundred, because the multiplier is that digit times ten or a hundred.",
       method: "Multiply by the non-zero digit first, then put the zeros of the multiplier on the end of the answer.",
       visual: ([a, d]) => ({ type: "array", rows: d, cols: Math.min(a, 20) }),
       alternatives: [
@@ -1692,7 +1732,7 @@ export const B05: Def[] = [
     word: ([k, n]) => `${ind(n)} people came to watch a kabaddi match in ${["", "a village", "a town", "Tiruppur"][k]}. A newspaper rounds the number to the nearest ${["", "ten", "hundred", "thousand"][k]}. What number does it print?`,
     teach: {
       idea: "Rounding finds the nearest 'round' number: on a number line, which ten (hundred, thousand) is the number closer to? A number exactly halfway is rounded up.",
-      method: "Look at the digit just to the right of the place you are rounding to. If it is 0–4, round down (keep the place, zeros after). If it is 5–9, round up (add 1 to the place, zeros after).",
+      method: "Look at the digit just to the right of the place you are rounding to. If it is less than five, round down (keep the place, zeros after). If it is five or more, round up (add one to the place, zeros after).",
       visual: ([k, n]) => {
         const u = 10 ** k;
         const lo = Math.floor(n / u) * u;
@@ -1865,7 +1905,18 @@ export const B05: Def[] = [
       idea: "A multi-step problem is a chain of small questions: what does each kind of item cost, what is the whole bill, and what is left from the note.",
       method: "Multiply to find the cost of each kind of item, add the costs to get the bill, then subtract the bill from the money paid.",
       alternatives: [
-        { id: "count_up", title: "Count up like a shopkeeper", kind: "procedural", text: ["After finding the bill, count up from the bill to the note: ₹265 → ₹270 → ₹300 → ₹500.", "Add the jumps: 5 + 30 + 200 = ₹235 change."], visual: ([i, q1, j, q2, k]) => ({ type: "numberline", from: 0, to: NOTES[k], step: NOTES[k] / 10, marks: [q1 * PRICES[i] + q2 * PRICES[j]] }) },
+        { id: "count_up", title: "Count up like a shopkeeper", kind: "procedural", text: ["After finding the bill, count up from the bill to the note: ₹265 → ₹270 → ₹300 → ₹500.", "Add the jumps: 5 + 30 + 200 = ₹235 change."],
+          // count up to the next ten, then the next hundred, then the note (skipping a jump already there)
+          textFor: ([i, q1, j, q2, k]) => {
+            const bill = q1 * PRICES[i] + q2 * PRICES[j], note = NOTES[k];
+            const stops = [Math.ceil(bill / 10) * 10, Math.ceil(bill / 100) * 100, note].reduce((s, x) => (x <= note && x > s[s.length - 1] ? [...s, x] : s), [bill]);
+            const jumps = stops.slice(1).map((x, n) => x - stops[n]);
+            return [
+              `The bill is ${q1} × ₹${PRICES[i]} + ${q2} × ₹${PRICES[j]} = ₹${bill}. Count up from the bill to the note: ${stops.map((x) => `₹${x}`).join(" → ")}.`,
+              jumps.length > 1 ? `Add the jumps: ${jumps.join(" + ")} = ₹${note - bill} change.` : `That is one jump of ₹${note - bill}: the change.`,
+            ];
+          },
+          visual: ([i, q1, j, q2, k]) => ({ type: "numberline", from: 0, to: NOTES[k], step: NOTES[k] / 10, marks: [q1 * PRICES[i] + q2 * PRICES[j]] }) },
       ],
     },
     limits: "Two kinds of item, whole rupees, one note (the smallest that covers the bill) up to ₹1000; paise and combinations of notes are not here.",
@@ -2719,6 +2770,13 @@ const dpvQ = ([kind, s]: number[]) => {
   const base = [val(ds), val(noZero), val(swapWO), val([...ds.slice(0, 2), ds[4], ds[3], ds[2]])];
   return { ...shuffled(`aedpv:${kind},${s}`, base), ds, th, pos: zeroAt, base };
 };
+/** aeftin: a person's height only from 4 ft to 6 ft 3 in; other lengths are cloth. */
+const ftHeight = (kind: number, a: number, b: number) => a >= 4 && (a < 6 || (a === 6 && (kind === 0 || b <= 3)));
+/** "1 ten, 9 ones, 0 tenths, 1 hundredth and 5 thousandths": a digit 1 takes the singular. */
+const dpvDigits = (ds: number[]) => {
+  const parts = ["ten", "one", "tenth", "hundredth", "thousandth"].map((w, i) => `${ds[i]} ${w}${ds[i] === 1 ? "" : "s"}`);
+  return `${parts.slice(0, 4).join(", ")} and ${parts[4]}`;
+};
 const dordNums = (s: number) => {
   const w = s % 10;
   const t = 1 + (Math.floor(s / 10) % 8);
@@ -3050,7 +3108,7 @@ const NUM_MORE: Def[] = [
     difficulty: ([kind, a, k]) => (kind === 1 ? 3 : k <= 4 && a <= 20 ? 1 : 2),
     word: ([kind, a, k]) => (kind === 0 ? `${name(a)} saves ₹${a} on the first day, ₹${a + 1} on the second, ₹${a + 2} on the third, and so on, one rupee more each day, for ${k} days. How many rupees is that altogether?` : `The house numbers of ${k === 3 ? "three" : "five"} houses in a row on a street go up by 1 (they are consecutive) and add up to ${k * a + (k * (k - 1)) / 2}. What is the smallest house number?`),
     teach: {
-      idea: "In a run of consecutive numbers, the middle number is the average: 3 consecutive numbers add up to 3 × the middle one. The first and last together make the same total as the second and second-last.",
+      idea: "In a run of consecutive numbers, the middle number is the average: an odd number of consecutive numbers add up to how many there are × the middle one. The first and last together make the same total as the second and second-last.",
       method: "To add them: number of terms × (first + last) ÷ 2. To find them from the sum (an odd number of them): sum ÷ how many = the middle; count back to the smallest.",
       alternatives: [
         { id: "staircase", title: "Make a staircase", kind: "conceptual", text: ["Draw the numbers as towers of blocks: each tower is one block taller than the last.", "Move blocks from the tall end to the short end: all towers become as tall as the middle one."] },
@@ -3183,10 +3241,10 @@ const NUM_MORE: Def[] = [
     explain: (s) => (s.id === "look" ? `Look at the digit just after the place you round to: it is ${s.value}` : `${ind(Number(s.inputs[0]))} is nearer to ${ind(Number(s.value))}`),
     domain: [[3, 7], [0, 59]],
     difficulty: ([k]) => (k <= 3 ? 1 : k <= 5 ? 2 : 3),
-    word: ([k, s]) => `A newspaper headline gives a rounded figure. The exact number is ${ind(rndNum(k, s))}, and the paper rounds it to the nearest ${RND_PLACE[k]}. What number does the headline show?`,
+    word: ([k, s]) => `${RND_CTX(k, s % 4, rndNum(k, s))} A newspaper reports this number rounded to the nearest ${RND_PLACE[k]}. What number does it print? (Write the number without commas.)`,
     teach: {
-      idea: "Large numbers in news and plans are usually rounded: 4,37,862 people is 'about 4,40,000' to the nearest ten thousand. Rounding finds the nearer of the two round numbers on either side.",
-      method: "Find the place you round to, look at the digit just to its right: 0–4 keep the place and write zeros after it; 5–9 add 1 to the place and write zeros after it.",
+      idea: "Large numbers in news and plans are usually rounded, for example to the nearest thousand or ten thousand, so they are easy to say and remember. Rounding finds the nearer of the two round numbers on either side.",
+      method: "Find the place you round to, look at the digit just to its right: if it is less than five, keep the place and write zeros after it; if it is five or more, add 1 to the place and write zeros after it.",
       visual: ([k, s]) => {
         const n = rndNum(k, s);
         const u = 10 ** k;
@@ -3253,9 +3311,9 @@ const NUM_MORE: Def[] = [
     domain: [[0, 1], [11, 999], [11, 99]],
     cap: 450,
     difficulty: ([mode, a, b]) => (mode === 1 ? 3 : a % 10 >= 5 || b % 10 >= 5 ? 2 : 1),
-    word: ([mode, a, b]) => (mode === 0 ? `A school orders ${a} cartons of notebooks with ${b} notebooks in each carton. About how many notebooks is that? Estimate by rounding each number to the nearest ten.` : `A cinema hall sells ${a} tickets a day for ${b} days of a film festival. About how many tickets is that? Estimate by rounding ${a} to the nearest hundred and ${b} to the nearest ten.`),
+    word: ([mode, a, b]) => (mode === 0 ? `A school orders ${a} cartons of notebooks with ${b} notebooks in each carton. About how many notebooks is that? Estimate by rounding each number to the nearest ten.` : `A cinema hall sells ${a} tickets a day for ${b} days. About how many tickets is that? Estimate by rounding ${a} to the nearest hundred and ${b} to the nearest ten.`),
     teach: {
-      idea: "Rounding both numbers turns a hard product into an easy one (48 × 32 ≈ 50 × 30). The estimate shows roughly how big the exact answer must be.",
+      idea: "Rounding both numbers turns a hard product into an easy one: numbers close to round tens are multiplied as those round tens. The estimate shows roughly how big the exact answer must be.",
       method: "Round each number as asked, multiply the non-zero digits, then put back all the zeros of both rounded numbers.",
       alternatives: [
         { id: "area", title: "Think of a rectangle", kind: "conceptual", text: ["A product is the area of a rectangle. Rounding the sides a little changes the area only a little.", "50 by 30 is easy to picture: 15 hundreds."] },
@@ -3349,7 +3407,7 @@ const NUM_MORE: Def[] = [
     word: ([kind, s]) => {
       if (kind === 0) {
         const q = chkData(s);
-        return `At a shop, ${name(s)}'s bill needs ${q.a} ${["+", "−", "×"][q.op]} ${q.b}, and the cashier's screen shows ${q.claim}. Use an estimate (round the numbers first) to judge the cashier's answer.`;
+        return `At a shop, the cashier works out ${q.a} ${["+", "−", "×"][q.op]} ${q.b} for ${name(s)}'s bill, and the screen shows ${q.claim}. Round the numbers to estimate. What can you say about the cashier's answer?`;
       }
       if (kind === 1) return s % 2 === 0 ? `${name(s)} is helping at home and in the market. In which of these must the answer be EXACT?` : `${name(s)} is reading the newspaper and planning a trip. For which of these is an ESTIMATE good enough?`;
       const z = sizeData(s);
@@ -3417,7 +3475,7 @@ const NUM_MORE: Def[] = [
     word: ([place, s]) => [`A parcel weighs ${d3(decThou(s))} kg. The courier's bill shows the weight to the nearest whole kilogram. What weight is on the bill, in kg?`, `${name(s)} ${rdecEvent(decThou(s))} in a time the stopwatch showed as ${d3(decThou(s))} seconds. The record book writes times to the nearest tenth of a second. What time is written, in seconds?`, `A jeweller weighs a gold chain at ${d3(decThou(s))} g and writes the weight to the nearest hundredth of a gram. What weight is written, in grams?`][place],
     teach: {
       idea: "Rounding a decimal works like rounding whole numbers: find which of the two numbers on either side, at the place asked for, it is nearer to.",
-      method: "Find the place you round to. Look at the digit just to its right: 0–4 keep the place and drop the digits after it; 5–9 add 1 to the place and drop the digits after it.",
+      method: "Find the place you round to. Look at the digit just to its right: if it is less than five, keep the place and drop the digits after it; if it is five or more, add 1 to the place and drop the digits after it.",
       visual: ([place, s]) => {
         const th = decThou(s);
         const u = [1000, 100, 10][place];
@@ -3597,11 +3655,12 @@ const MEAS_MORE: Def[] = [
       const f = UNITS[kind].f;
       const D = n * (b * f + s);
       const [B, S] = [Math.floor(D / f), D % f];
+      const { big: U, small: u } = UNITS[kind];
       return {
         steps: [
-          { id: "big", op: "divide", competency: MIX, inputs: [B, n], value: Math.floor(B / n) },
-          { id: "regroup", op: "regroup", competency: CONV, inputs: [B % n, f, S], value: (B % n) * f + S },
-          { id: "small", op: "divide", competency: "MATH.number.long-division", inputs: [(B % n) * f + S, n], value: ((B % n) * f + S) / n },
+          { id: "big", op: "divide", competency: MIX, inputs: [B, n, U, u], value: Math.floor(B / n) },
+          { id: "regroup", op: "regroup", competency: CONV, inputs: [B % n, f, S, U, u], value: (B % n) * f + S },
+          { id: "small", op: "divide", competency: "MATH.number.long-division", inputs: [(B % n) * f + S, n, U, u], value: ((B % n) * f + S) / n },
         ],
         answer: tup(b, s),
       };
@@ -3632,7 +3691,10 @@ const MEAS_MORE: Def[] = [
       return [tup(b + 1, s), tup(b, (s + UNITS[kind].step) % UNITS[kind].f)];
     },
     variants: () => [],
-    explain: (s) => (s.id === "big" ? `Large units: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}, with ${Number(s.inputs[0]) % Number(s.inputs[1])} left over` : s.id === "regroup" ? `Change the ${s.inputs[0]} left over into small units and add the ${s.inputs[2]}: ${s.value}` : `Small units: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
+    explain: (s) => {
+      const [U, u] = s.inputs.slice(-2);
+      return s.id === "big" ? `${U}: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}, with ${Number(s.inputs[0]) % Number(s.inputs[1])} ${U} left over` : s.id === "regroup" ? `Change the ${s.inputs[0]} ${U} left over into ${u} and add the ${s.inputs[2]} ${u}: ${s.value} ${u}` : `${u}: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} ${u}`;
+    },
     domain: [[0, 2], [20, 99], [2, 9]],
     cap: 400,
     difficulty: ([kind, , n]) => (kind === 0 && n <= 4 ? 1 : n <= 5 ? 2 : 3),
@@ -3648,8 +3710,8 @@ const MEAS_MORE: Def[] = [
       ][kind];
     },
     teach: {
-      idea: "Dividing a measure shares the large units first; whatever large units are left over are changed into small units and shared with the small units.",
-      method: "Divide the large units. Change the ones left over into small units (× 100 or × 1000), add the small units, and divide those. Check: multiply the answer back.",
+      idea: "Dividing a measure shares the bigger unit first; whatever is left over is changed into the smaller unit and shared with the amount already in the smaller unit.",
+      method: "Divide the amount in the bigger unit. Change what is left over into the smaller unit (× 100 or × 1000), add the amount in the smaller unit, and divide that. Check: multiply the answer back.",
       alternatives: [
         { id: "all_small", title: "Work in the small unit", kind: "procedural", text: ["Change the whole measure into the small unit (7 m 20 cm = 720 cm).", "Divide (720 ÷ 4 = 180 cm) and change back (1 m 80 cm)."] },
       ],
@@ -3670,7 +3732,15 @@ const MEAS_MORE: Def[] = [
     solve: ([k, v]) => {
       const a = cuAmount(k, v)!;
       const f = CU[k].f;
-      return { steps: [{ id: "big", op: "divide", competency: CONV, inputs: [a, f], value: Math.floor(a / f) }, { id: "left", op: "subtract", competency: CONV, inputs: [a, Math.floor(a / f) * f], value: a % f }], answer: tup(Math.floor(a / f), a % f) };
+      const { big: U, small: u } = CU[k];
+      return {
+        steps: [
+          { id: "big", op: "divide", competency: CONV, inputs: [a, f, U, u], value: Math.floor(a / f) },
+          { id: "left", op: "subtract", competency: CONV, inputs: [a, Math.floor(a / f) * f, U, u], value: a % f },
+          { id: "answer", op: "write", competency: CONV, inputs: [Math.floor(a / f), a % f, U, u], value: tup(Math.floor(a / f), a % f) },
+        ],
+        answer: tup(Math.floor(a / f), a % f),
+      };
     },
     // independent: build the amount back from the answer (large × factor + small) and check the small part is less than one large unit
     validate: ([k, v], ans) => {
@@ -3693,7 +3763,14 @@ const MEAS_MORE: Def[] = [
       return [tup(Math.floor(a / f) + 1, a % f), tup(Math.floor(a / f), (a % f) * 10 < f ? (a % f) * 10 : Math.floor((a % f) / 10))];
     },
     variants: () => [],
-    explain: (s) => (s.id === "big" ? `${s.inputs[0]} ÷ ${s.inputs[1]}: ${s.value} whole large ${s.value === 1 ? "unit" : "units"}` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value} small units left`),
+    explain: (s) => {
+      const [U, u] = s.inputs.slice(-2);
+      return s.id === "big"
+        ? `${s.inputs[0]} ${u} ÷ ${s.inputs[1]}: ${s.value} whole ${U}`
+        : s.id === "left"
+          ? `${s.inputs[0]} ${u} − ${s.inputs[1]} ${u} = ${s.value} ${u} left`
+          : `${s.inputs[0]} ${U} ${s.inputs[1]} ${u}, written (${U}, ${u}): ${s.value}`;
+    },
     domain: [[0, 5], [0, 179]],
     cap: 450,
     difficulty: ([k, v]) => {
@@ -3712,8 +3789,8 @@ const MEAS_MORE: Def[] = [
       ][k];
     },
     teach: {
-      idea: "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL, 1 km = 1000 m. To change into the larger unit, see how many whole large units fit, and what is left.",
-      method: "Divide by 100, 10 or 1000: the whole number of times is the large unit; the remainder is the small unit (3450 g = 3 kg 450 g).",
+      idea: "1 m is a hundred cm and 1 cm is ten mm; 1 kg, 1 g, 1 L and 1 km are each a thousand of the smaller unit (g, mg, mL and m). To change into the larger unit, see how many whole ones of the larger unit fit, and what is left.",
+      method: "Divide by how many of the smaller unit make one of the larger unit (a hundred, ten or a thousand): the whole number of times is the amount in the larger unit; the remainder stays in the smaller unit.",
       alternatives: [
         { id: "split_digits", title: "Split the digits", kind: "procedural", text: ["For × 1000 units, the last three digits are the small unit: 3|450 g = 3 kg 450 g; 3|045 g = 3 kg 45 g.", "For cm to m, the last two digits; for mm to cm, the last digit."] },
       ],
@@ -3766,8 +3843,8 @@ const MEAS_MORE: Def[] = [
       return [`A tailor measures ${a} cm of cloth. The bill shows it in metres. What number of metres is on the bill?`, `A parcel weighs ${a} g. The post office writes the weight in kilograms. What does it write?`, `A bottle of oil holds ${a} mL. How many litres is that?`, `A walk is ${a} m long. How many kilometres is that?`, `A screw is ${a} mm long. How many centimetres is that?`, `A medicine has ${a} mg of a vitamin. How many grams is that?`][k];
     },
     teach: {
-      idea: "A small unit is a fraction of the large unit: 1 g is one thousandth of a kg, so 3450 g = 3450 thousandths of a kg = 3.450 kg = 3.45 kg.",
-      method: "Divide by 1000 (or 100, or 10): move the decimal point 3 (or 2, or 1) places to the left, filling empty places with zeros (3045 g = 3.045 kg).",
+      idea: "A small unit is a fraction of the large unit: 1 g is one thousandth of a kg, so a number of grams is that many thousandths of a kilogram.",
+      method: "Divide by a thousand (or a hundred, or ten): move the decimal point three (or two, or one) places to the left, filling empty places with zeros.",
       alternatives: [
         { id: "chart", title: "A place-value chart", kind: "procedural", text: ["Write the amount in a chart with kg in the ones column and g in the tenths, hundredths and thousandths columns.", "3045 g: 3 in the ones, then 0, 4, 5: 3.045 kg."] },
       ],
@@ -3799,7 +3876,14 @@ const MEAS_MORE: Def[] = [
       const L = 1000 * w.a + w.b;
       const q = shuffled(`aewcmp:${[kind, s]}`, ["<", "=", ">"]);
       const i = L < w.c ? 0 : L === w.c ? 1 : 2;
-      return { steps: [{ id: "convert", op: "convert", competency: CONV, inputs: [w.a, w.b], value: L }, { id: "compare", op: "compare", competency: CONV, inputs: [L, w.c], value: q.at(i) }], answer: q.at(i) };
+      const [B, S] = kind ? ["g", "mg"] : ["kg", "g"];
+      return {
+        steps: [
+          { id: "convert", op: "convert", competency: CONV, inputs: [w.a, w.b, B, S], value: L },
+          { id: "compare", op: "compare", competency: CONV, inputs: [L, w.c, B, S, ["<", "=", ">"][i]], value: q.at(i) },
+        ],
+        answer: q.at(i),
+      };
     },
     // independent: change the right-hand weight into the large and small units, then compare large units first
     validate: ([kind, s], v) => {
@@ -3822,7 +3906,7 @@ const MEAS_MORE: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "convert" ? `${s.inputs[0]} large units ${s.inputs[1]} small units = ${s.value} small units` : `Compare ${s.inputs[0]} and ${s.inputs[1]}`),
+    explain: (s) => (s.id === "convert" ? `${s.inputs[0]} ${s.inputs[2]} ${s.inputs[1]} ${s.inputs[3]} = ${s.inputs[0]} × 1000 + ${s.inputs[1]} = ${s.value} ${s.inputs[3]}` : `${s.inputs[0]} ${s.inputs[3]} ${s.inputs[4]} ${s.inputs[1]} ${s.inputs[3]}, so the sign is ${s.inputs[4]}`),
     domain: [[0, 1], [0, 149]],
     difficulty: ([kind, s]) => (s % 3 === 1 ? 3 : kind ? 2 : 1),
     word: ([kind, s]) => {
@@ -3830,8 +3914,8 @@ const MEAS_MORE: Def[] = [
       return kind === 0 ? `${name(s)}'s bag of potatoes weighs ${w.a} kg ${w.b} g and ${name(s + 1)}'s weighs ${w.c} g. Which sign is true: ${name(s)}'s bag ☐ ${name(s + 1)}'s bag? Choose <, = or >.` : `One medicine packet holds ${w.a} g ${w.b} mg of powder and another holds ${w.c} mg. Which sign is true: first packet ☐ second packet? Choose <, = or >.`;
     },
     teach: {
-      idea: "Weights can be compared only in the same unit: 1 kg = 1000 g and 1 g = 1000 mg.",
-      method: "Change the weight in two units into the small unit (2 kg 50 g = 2050 g), then compare the numbers.",
+      idea: "Weights can be compared only in the same unit: 1 kg is a thousand grams and 1 g is a thousand milligrams.",
+      method: "Change the weight written in two units into the smaller unit (kilograms into grams, grams into milligrams), then compare the numbers.",
       alternatives: [
         { id: "large_first", title: "Compare the large units first", kind: "procedural", text: ["Change the single amount into large and small units (2500 g = 2 kg 500 g).", "Compare kilograms first; only if they are equal, compare the grams."] },
       ],
@@ -3887,10 +3971,10 @@ const MEAS_MORE: Def[] = [
     explain: (s) => (s.id === "times" ? `${s.inputs[0]} × ${s.inputs[1]} m = ${s.value} m` : s.id === "feet" ? `${s.inputs[0]} feet ≈ ${s.inputs[0]} × 30 = ${s.value} cm` : `${s.inputs[0]} inches ≈ ${s.inputs[0]} × 2.5 = ${s.value} cm; add the two parts`),
     domain: [[0, 2], [1, 12], [0, 11]],
     difficulty: ([kind, , b]) => (kind === 0 ? 1 : kind === 2 ? 2 : b % 2 ? 3 : 2),
-    word: ([kind, a, b]) => (kind === 2 ? `${name(a + b)} wants to estimate a length without a tape. ${REFS[b][0]} is about ${REFS[b][1]} m ${REFS[b][2]}. ${REFS[b][3](a)} Estimate the length in metres.` : `${name(a + b)}'s height is written as ${a} ${a === 1 ? "foot" : "feet"}${kind === 1 ? ` ${b} ${b === 1 ? "inch" : "inches"}` : ""} on an old card. Using 1 foot ≈ 30 cm${kind === 1 ? " and 1 inch ≈ 2.5 cm" : ""}, about how many centimetres is that?`),
+    word: ([kind, a, b]) => (kind === 2 ? `${name(a + b)} wants to estimate a length without a tape. ${REFS[b][0]} is about ${REFS[b][1]} m ${REFS[b][2]}. ${REFS[b][3](a)} Estimate the length in metres.` : `${ftHeight(kind, a, b) ? `${name(a + b)}'s height is written as` : `A tailor's old notebook gives the length of a piece of cloth as`} ${a} ${a === 1 ? "foot" : "feet"}${kind === 1 ? ` ${b} ${b === 1 ? "inch" : "inches"}` : ""}${ftHeight(kind, a, b) ? " on an old card" : ""}. Using 1 foot ≈ 30 cm${kind === 1 ? " and 1 inch ≈ 2.5 cm" : ""}, about how many centimetres is that?`),
     teach: {
-      idea: "Feet and inches are older units still used for heights: 12 inches make 1 foot, 1 inch is about 2.5 cm and 1 foot about 30 cm. A known length (a door, a step, a bus) can be used as a ruler to estimate bigger lengths.",
-      method: "Change feet to cm (× 30) and inches to cm (× 2.5) and add. To estimate with a known length, count how many of it fit and multiply.",
+      idea: "Feet and inches are older units still used for heights: twelve inches make 1 foot, 1 inch is about two and a half cm and 1 foot about thirty cm. A known length (a door, a step, a bus) can be used as a ruler to estimate bigger lengths.",
+      method: "Change feet to cm (multiply by about thirty) and inches to cm (multiply by about two and a half) and add. To estimate with a known length, count how many of it fit and multiply.",
       alternatives: [
         { id: "body", title: "Use your body", kind: "conceptual", text: ["Your foot is close to a foot long for an adult; a thumb-width is close to an inch.", "Your step is about half a metre: 10 steps make about 5 m."] },
       ],
@@ -3963,7 +4047,7 @@ const MEAS_MORE: Def[] = [
         `${name(x)}'s uncle sends ${10 * x} US dollars home when 1 dollar is worth ₹${82 + r}. How many rupees is that?`,
       ][kind],
     teach: {
-      idea: "A conversion factor says how many of one unit make one of the other: 1 inch = 2.54 cm, 1 km/h = 5/18 m/s. Converting is multiplying by the factor, because the amount is proportional.",
+      idea: "A conversion factor says how many of one unit make one of the other, for example how many centimetres make 1 inch. Converting is multiplying by the factor, because the amount is proportional.",
       method: "Write the factor as 'new units per old unit' and multiply. Check the direction: going to a smaller unit gives a bigger number.",
       alternatives: [
         { id: "chain", title: "Change one unit at a time", kind: "procedural", text: ["For speeds, change km into m (× 1000), then per hour into per second (÷ 3600).", "72 km/h = 72 000 m per 3600 s = 20 m/s."] },
@@ -4260,7 +4344,10 @@ const MIX_MORE: Def[] = [
       return [
         `The census office of a district town counts ${ind(a)} residents. Over the next year ${ind(b)} children are born and ${ind(c)} people leave for jobs in other cities. What is the new number of residents?`,
         `A village panchayat receives ₹${ind(a)} for its school and spends it on ${b} smart boards at ₹${ind(c)} each. How much money is left?`,
-        `A lorry carries vegetables ${b} times a week from Ooty to a market ${a} km away (each trip one way). How far does it travel in ${c} weeks?`,
+        // a lorry only for nearby markets (up to 300 km); a goods train for the long distances
+        a <= 300
+          ? `A lorry carries vegetables ${b} times a week from Ooty to a market ${a} km away (each trip one way). How far does it travel in ${c} weeks?`
+          : `A goods train carries vegetables ${b} times a week from Ooty to a city ${a} km away (each trip one way). How far does it travel in ${c} weeks?`,
       ][kind];
     },
     teach: {
@@ -4326,7 +4413,7 @@ const MIX_MORE: Def[] = [
     },
     teach: {
       idea: "In a matching puzzle every person goes with exactly one thing and every thing with exactly one person. Each clue rules out (or fixes) some pairs; when only one choice is left in a row or column, it must be the answer.",
-      method: "Draw a 4 × 4 grid (people down, things across). Mark ✗ for each 'does not' clue and ✓ for each 'does' clue (with ✗ for the rest of that row and column). Keep filling until every row has one ✓.",
+      method: "Draw a grid with the people down the side and the things across the top. Mark ✗ for each 'does not' clue and ✓ for each 'does' clue (with ✗ for the rest of that row and column). Keep filling until every row has one ✓.",
       alternatives: [
         { id: "try_all", title: "Try the possibilities", kind: "procedural", text: ["Start with the person who has the most ✗: try each thing still possible for them.", "If a choice breaks a clue later, go back and try the next one."] },
       ],
@@ -4455,7 +4542,7 @@ const DEC_MORE: Def[] = [
       const q = dpvQ(p);
       if (p[0] === 0) return `What is the place value of the digit ${q.ds[q.pos]} in ${d3(q.th)}?`;
       if (p[0] === 1) return `Which is the expanded form of ${d3(q.th)}?`;
-      return `Which number has ${q.ds[0]} tens, ${q.ds[1]} ones, ${q.ds[2]} tenths, ${q.ds[3]} hundredths and ${q.ds[4]} thousandths?`;
+      return `Which number has ${dpvDigits(q.ds)}?`;
     },
     choices: (p) => dpvQ(p).choices,
     solve: (p) => {
@@ -4492,12 +4579,12 @@ const DEC_MORE: Def[] = [
     difficulty: ([kind]) => (kind === 0 ? 2 : kind === 1 ? 2 : 3),
     word: (p) => {
       const q = dpvQ(p);
-      if (p[0] === 0) return `A jeweller's scale shows ${d3(q.th)} g for a small gold coin. What is the value of the digit ${q.ds[q.pos]} in this reading?`;
-      if (p[0] === 1) return `${name(p[1])} writes the long-jump distance ${d3(q.th)} m as a sum of place values. Which sum is right?`;
-      return `A science lab measures a liquid as ${q.ds[0]} tens, ${q.ds[1]} ones, ${q.ds[2]} tenths, ${q.ds[3]} hundredths and ${q.ds[4]} thousandths of a millilitre. Which number is the reading?`;
+      if (p[0] === 0) return `A jeweller's scale shows ${d3(q.th)} g for a gold chain. What is the value of the digit ${q.ds[q.pos]} in this reading?`;
+      if (p[0] === 1) return `${name(p[1])} measures the length of the school corridor as ${d3(q.th)} m and writes it as a sum of place values. Which sum is right?`;
+      return `A lab reading, in millilitres, has ${dpvDigits(q.ds)}. Which number is the reading?`;
     },
     teach: {
-      idea: "Each place is ten times the place to its right: tens, ones, then after the point tenths (1/10), hundredths (1/100), thousandths (1/1000). A digit's place value is the digit times its place.",
+      idea: "Each place is ten times the place to its right: tens, ones, then after the point tenths, hundredths and thousandths. A digit's place value is the digit times its place.",
       method: "Write the number in a place-value chart (T, O . t, h, th). Read each digit with its place; for the expanded form, add the place values of the non-zero digits.",
       alternatives: [
         { id: "money_mass", title: "Think of kilograms and grams", kind: "conceptual", text: ["1 g is one thousandth of a kilogram, so 2.305 kg is 2 kg, 3 tenths, 0 hundredths and 5 thousandths.", "That is 2 kg 305 g: 2 + 0.3 + 0.005."] },
@@ -4548,11 +4635,12 @@ const DEC_MORE: Def[] = [
     word: ([s]) => {
       const m = dordNums(s).map((x) => `${d3(x)} m`).join(", ");
       const w = s % 10;
-      return w === 0 ? `In a science class, four seedlings were measured as ${m} tall. List the heights from shortest to tallest, as numbers in brackets.` : w === 9 ? `Four bamboo poles for a festival pandal were measured as ${m} long. List the lengths from shortest to longest, as numbers in brackets.` : `In a long-jump event, four jumps were measured as ${m}. List the jumps from shortest to longest, as numbers in brackets.`;
+      // long jumps only for 2 to 5 m; seedlings under 1 m; bamboo poles otherwise
+      return w === 0 ? `In a science class, four seedlings were measured as ${m} tall. List the heights from shortest to tallest, as numbers in brackets.` : w < 2 || w > 5 ? `Four bamboo poles for a festival pandal were measured as ${m} long. List the lengths from shortest to longest, as numbers in brackets.` : `In a long-jump event, four jumps were measured as ${m}. List the jumps from shortest to longest, as numbers in brackets.`;
     },
     teach: {
-      idea: "Decimals are compared place by place from the left: wholes, then tenths, then hundredths, then thousandths. Writing them all with the same number of places (0.5 = 0.500) makes this easy.",
-      method: "Fill each number with zeros to three decimal places, then compare them like whole numbers of thousandths: 0.500, 0.450, 0.505, 0.550.",
+      idea: "Decimals are compared place by place from the left: wholes, then tenths, then hundredths, then thousandths. Writing them all with the same number of decimal places, by adding zeros at the end, makes this easy.",
+      method: "Fill each number with zeros at the end so that all have the same number of decimal places, then compare them like whole numbers.",
       alternatives: [
         { id: "number_line", title: "Place them on a number line", kind: "conceptual", text: ["Draw a line from the whole number to the next one, marked in tenths.", "Put each decimal in its tenth, then decide the order inside the tenth by the hundredths and thousandths."] },
       ],
@@ -4612,8 +4700,8 @@ const DEC_MORE: Def[] = [
       return p[0] === 0 ? `A shop label says a packet holds ${q.dec} kg of tea. ${name(p[1])} wants to write this as a fraction of a kilogram. Which fraction is it?` : p[0] === 1 ? (q.val > 1 ? `A ribbon is ${q.dec} m long. ${name(p[1])} writes its length in metres as a fraction in simplest form. Which fraction is it?` : `${name(p[1])} drank ${q.dec} of a bottle of water. What fraction of the bottle is that, in simplest form?`) : q.val > 1 ? `${name(p[1])} buys ${FRACS[p[1]][0]}/${FRACS[p[1]][1]} kg of rice. The shop's weighing scale shows kilograms as a decimal. What does the scale show?` : `${FRACS[p[1]][0]}/${FRACS[p[1]][1]} of a school's students come by bus. ${name(p[1])} must enter this in a spreadsheet as a decimal. What should be entered?`;
     },
     teach: {
-      idea: "A decimal is a fraction with a bottom number of 10, 100 or 1000: 0.07 = 7/100, 0.75 = 75/100 = 3/4. A fraction is a division, so 3/8 = 3 ÷ 8 = 0.375.",
-      method: "Decimal to fraction: write the digits over 10, 100 or 1000 (by the last place) and simplify. Fraction to decimal: make the bottom 10, 100 or 1000 by multiplying, or divide the top by the bottom.",
+      idea: "A decimal is a fraction whose bottom number is ten, a hundred or a thousand: the digits after the point are tenths, hundredths or thousandths. A fraction is a division, so dividing its top by its bottom gives its decimal.",
+      method: "Decimal to fraction: write the digits over ten, a hundred or a thousand (by the last place) and simplify. Fraction to decimal: make the bottom ten, a hundred or a thousand by multiplying, or divide the top by the bottom.",
       alternatives: [
         { id: "money", title: "Use rupees and paise", kind: "conceptual", text: ["₹0.25 is 25 paise, a quarter of a rupee: 0.25 = 1/4.", "Half a rupee is 50 paise: 1/2 = 0.50 = 0.5."] },
       ],
@@ -4721,6 +4809,8 @@ const DEC_MORE: Def[] = [
     explain: (s) => (s.id === "first" ? `${s.inputs[0]} ÷ ${s.inputs[1]} leaves remainder ${s.value}` : `Repeated division of ${s.inputs[0]} and ${s.inputs[1]} takes ${s.value} divisions`),
     domain: [[0, 1], [20, 240], [8, 239]],
     cap: 300,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([kind, a, b]) => (euclid(a, b).length >= 6 ? 3 : kind === 1 ? 2 : 1),
     word: ([kind, a, b]) => `A tailor has two ribbons, ${a} cm and ${b} cm long, and wants the longest pieces that cut both exactly. ${name(a)} finds this length by repeated division (${a} ÷ ${b}, then ${b} ÷ the remainder, and so on, until the remainder is 0). ${kind === 0 ? "How many divisions does it take?" : "What is the remainder in the second division?"}`,
     teach: {
@@ -5049,7 +5139,8 @@ const CORE_MORE: Def[] = [
     id: "aeineqz",
     arity: 5,
     title: "Solving an inequation over whole numbers, natural numbers or integers",
-    competency: INEQ,
+    // grade7-split@1: the Grade 7 competency (was INEQ)
+    competency: "MATH.algebra.inequations-intro",
     type: "set",
     // [dom, a, b, c, op]: a x + b < c (op 0) or ≤ c (op 1), x a whole number (dom 0), natural number (1) or integer from −5 to 5 (2)
     parse: none,
@@ -5092,10 +5183,12 @@ const CORE_MORE: Def[] = [
     explain: (s) => (s.id === "bound" ? `Undo the + or − and divide by ${n_(Number(s.inputs[1]))}${Number(s.inputs[1]) < 0 ? " (reversing the sign)" : ""}: the boundary is ${fmtQ(Number(s.value))}` : `The ${s.inputs[0]}s that fit: ${setStr(s.value as number[])}`),
     domain: [[0, 2], [-4, 5], [-9, 9], [-15, 30], [0, 1]],
     cap: 450,
+    // level@1: inequations over whole numbers, natural numbers or integers are TN Grade 7 work
+    grade: () => 7,
     difficulty: ([dom, a]) => (dom === 2 ? (a < 0 ? 3 : 2) : 1),
-    word: ([dom, a, b, c, op]) => `${name(a + c)} thinks of a ${dom === 2 ? "whole number or negative number between −5 and 5" : dom === 0 ? "whole number (0 is allowed)" : "counting number (1, 2, 3, …)"}, multiplies it by ${n_(a)} and then ${b < 0 ? `takes away ${-b}` : `adds ${b}`}. The result is ${op ? "at most" : "less than"} ${n_(c)}. Which numbers could ${name(a + c)} be thinking of? List them all.`,
+    word: ([dom, a, b, c, op]) => `${name(a + c)} thinks of ${dom === 2 ? "an integer (a whole number or a negative whole number) from −5 to 5, both included" : dom === 0 ? "a whole number (0 is allowed)" : "a counting number (1, 2, 3, …)"}${a === 1 ? " and" : `, multiplies it by ${n_(a)} and then`} ${b < 0 ? `takes away ${-b}` : `adds ${b}`}. The result is ${op ? "at most" : "less than"} ${n_(c)}. Which numbers could ${name(a + c)} be thinking of? List them all.`,
     teach: {
-      idea: "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the right side of the boundary.",
+      idea: "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the allowed side of the boundary: below it for < or ≤, above it for > or ≥ (include the boundary itself only for ≤ or ≥).",
       method: "Solve it like an equation to find the boundary (reverse the sign if you divide by a negative number). Then list the allowed numbers on the correct side; include the boundary only for ≤ or ≥. Show them as dots on a number line.",
       visual: ([dom, a, b, c, op]) => ({ type: "numberline", from: dom === 2 ? -5 : 0, to: dom === 2 ? 5 : Math.max(10, Math.ceil((c - b) / Math.abs(a)) + 2), marks: ineqSol([dom, a, b, c, op]) }),
       alternatives: [
@@ -5151,6 +5244,8 @@ const CORE_MORE: Def[] = [
     explain: (s) => (s.id === "both" ? `Both must hold: ${s.value}` : `Inequality ${s.inputs[0]} gives ${s.value}`),
     domain: [[-8, 6], [1, 10], [1, 5], [1, 5], [0, 3]],
     cap: 450,
+    // level@1: systems of linear inequalities are Grade 11 work (never asked of a younger learner)
+    grade: () => 11,
     difficulty: ([, , a1, a2, s]) => (s === 0 && a1 * a2 < 6 ? 1 : a2 > 2 ? 3 : 2),
     word: (p) => {
       const d = sysData(p);
@@ -5240,6 +5335,8 @@ const CORE_MORE: Def[] = [
     explain: (s) => (s.id === "model" ? `Write the condition as an inequality: ${s.inputs[0]}` : `Solve it: ${s.value}`),
     domain: [[0, 2], [5, 95], [5, 95], [0, 10]],
     cap: 450,
+    // level@1: modelling with linear inequalities is Grade 11 work (never asked of a younger learner)
+    grade: () => 11,
     difficulty: ([kind]) => (kind === 1 ? 1 : kind === 0 ? 2 : 3),
     word: ([kind, a, b, c]) =>
       [
@@ -5303,6 +5400,8 @@ const CORE_MORE: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "ends" ? `The points at distance ${s.inputs[1]} from ${n_(Number(s.inputs[0]))} are ${s.value}` : `So the set is ${s.value}`),
     domain: [[0, 2], [-10, 10], [1, 9]],
+    // level@1: neighbourhoods in interval notation are Grade 11 work (never asked of a younger learner)
+    grade: () => 11,
     difficulty: ([kind, a]) => (kind === 2 ? 3 : a < 0 ? 2 : 1),
     word: ([kind, a, d]) => (kind === 2 ? `A cold store sounds an alarm when its temperature x (in °C) is more than ${d} ${d === 1 ? "degree" : "degrees"} away from ${n_(a)} °C. Write the set of temperatures that sound the alarm in interval notation.` : `A cold store keeps its temperature x (in °C) ${kind === 0 ? `less than ${d} ${d === 1 ? "degree" : "degrees"} away from` : `at most ${d} ${d === 1 ? "degree" : "degrees"} away from`} ${n_(a)} °C. Write the set of allowed temperatures in interval notation.`),
     teach: {

@@ -715,6 +715,8 @@ export const B03: Def[] = [
     // [op, i, j, c]: op 0 put together (10+i) + j; 1 take away (10+i+j) − j; 2 i groups of j; 3 i×j shared among i
     parse: none,
     reject: ([op, i, j, c]) => (op < 0 || op > 3 || i < 2 || i > 9 || j < 2 || j > 9 || c < 0 || c > 2 || (op >= 2 && (i * j > 50 || i > 6)) ? "A one-step story with numbers up to 50." : null),
+    // level@1: one-step stories with small whole numbers are Grade 2 (prerequisite review only)
+    grade: () => 2,
     prompt: ([op, i, j, c]) => story(op, i, j, c),
     solve: ([op, i, j]) => {
       const [a, b, ans, what] = op === 0 ? [10 + i, j, 10 + i + j, "add"] : op === 1 ? [10 + i + j, j, 10 + i, "take away"] : op === 2 ? [i, j, i * j, "multiply"] : [i * j, i, j, "share"];
@@ -764,7 +766,7 @@ export const B03: Def[] = [
       method: "Ask: does the amount get bigger or smaller? Are the groups equal? Then choose the operation and work it out.",
       visual: ([op, i, j]) => (op === 0 ? { type: "numberline", from: 10 + i, to: 10 + i + j, jumps: [[10 + i, 10 + i + j]] } : op === 1 ? { type: "numberline", from: 10 + i, to: 10 + i + j, jumps: [[10 + i + j, 10 + i]] } : { type: "array", rows: i, cols: j }) as Visual,
       alternatives: [
-        { id: "act_out", title: "Act it out with counters", kind: "conceptual", text: ["Use beads or stones for the things in the story.", "Do exactly what the story says with them, then count what you have."], visual: ([op, i, j]) => ({ type: "dots", count: op === 0 ? 10 + i : op === 1 ? 10 + i + j : i * j, rows: 2 }) },
+        { id: "act_out", title: "Act it out with counters", kind: "conceptual", text: ["Use beads or stones for the things in the story.", "Do exactly what the story says with them, then count what you have."], visual: ([op, i, j]) => (op >= 2 ? { type: "array", rows: i, cols: j } : { type: "tenframe", filled: op === 0 ? 10 + i : 10 + i + j, frames: Math.ceil((op === 0 ? 10 + i : 10 + i + j) / 10) }) as Visual },
       ],
     },
     limits: "One-step stories with numbers up to 50; two-step stories are another family.",
@@ -1540,6 +1542,8 @@ export const B03: Def[] = [
     // [op, a, b, c]: op 0, a things and b more come (a + b ≤ 9); op 1, a things and b go away (b < a ≤ 9); c the story
     parse: none,
     reject: ([op, a, b, c]) => (op < 0 || op > 1 || a < 1 || a > 9 || b < 1 || b > 8 || c < 0 || c > 3 || (op === 0 ? a + b > 9 : b >= a) ? "A one-step story with numbers within 9." : null),
+    // level@1: adding and taking away within 9 is Grade 1 (prerequisite review only)
+    grade: () => 1,
     prompt: ([op, a, b, c]) => story9(op, a, b, c),
     solve: ([op, a, b]) => ({
       steps: [st("choose", "choose operation", OPC, [op ? "take away" : "add"], op), st("work", op ? "subtract" : "add", op ? SUB : ADD, [a, b, op ? "−" : "+"], op ? a - b : a + b)],
@@ -1762,7 +1766,8 @@ export const B03: Def[] = [
     solve: ([a, b, t, k]) => {
       const N = 100 * a + (mcE(b, t, k) ?? 0);
       const A = 100 * a + b;
-      return { steps: [st("convert", "convert", LEN, [a, b], A), st("compare", "compare", LEN, [A, N], A > N ? 0 : A < N ? 1 : 2)], answer: posOf([a, b, t, k], 3, A > N ? 0 : A < N ? 1 : 2) };
+      const ans = posOf([a, b, t, k], 3, A > N ? 0 : A < N ? 1 : 2);
+      return { steps: [st("convert", "convert", LEN, [a, b], A), st("compare", "compare", LEN, [A, N], A > N ? 0 : A < N ? 1 : 2), st("pick", "choose the option", LEN, [mcChoices([a, b, t, k])[ans]], ans)], answer: ans };
     },
     // independent: compare the metres first, then the centimetres (no conversion)
     validate: (p, v) => {
@@ -1786,13 +1791,13 @@ export const B03: Def[] = [
       return out;
     },
     variants: () => [],
-    explain: (s) => (s.id === "convert" ? `${s.inputs[0]} m ${s.inputs[1]} cm = ${s.value} cm` : `Compare ${s.inputs[0]} cm with ${s.inputs[1]} cm`),
+    explain: (s) => (s.id === "convert" ? `${s.inputs[0]} m ${s.inputs[1]} cm = ${s.value} cm` : s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Compare ${s.inputs[0]} cm with ${s.inputs[1]} cm`),
     domain: [[1, 9], [1, 99], [0, 2], [0, 10]],
     cap: 400,
     difficulty: ([, b, t]) => (t === 0 ? 2 : b < 10 ? 3 : 2),
     word: ([a, b, t, k]) => `${girl(a + b)}'s skipping rope is ${a} m ${b} cm long. ${boy(a + k)}'s rope is ${100 * a + (mcE(b, t, k) ?? 0)} cm long. Whose rope is longer?`,
     teach: {
-      idea: "1 m = 100 cm, so a m b cm is a hundreds of centimetres and b more: 3 m 5 cm = 305 cm.",
+      idea: "A metre is a hundred centimetres, so a length in metres and centimetres is that many hundreds of centimetres, plus the centimetres written after the metres.",
       method: "Change the length in metres and centimetres into centimetres, then compare the two numbers of centimetres.",
       visual: ([a, b]) => ({ type: "numberline", from: 100 * a, to: 100 * a + 100, step: 10, marks: [100 * a + b] }),
       alternatives: [
@@ -2174,7 +2179,7 @@ export const B03: Def[] = [
     domain: [[0, 4], [1, 30], [0, 99]],
     cap: 400,
     difficulty: ([mode]) => (mode === 0 || mode === 4 ? 1 : mode === 2 ? 3 : 2),
-    word: ([mode, a, b]) => [`${a < 20 ? "A pencil" : "A ribbon"} is ${a} cm ${b} mm long. How long is it in millimetres?`, `${a < 6 ? "A beetle" : a < 20 ? "A pencil" : "A ribbon"} is ${10 * a + b} mm long. That is ${a} cm and how many more millimetres?`, `${name(a + b)} walks ${ind(1000 * a + 5 * b)} m to school. That is ${a} km and how many more metres?`, `A cycle race is ${ind(1000 * a)} m long. How many kilometres is that?`, `A paper strip is ${10 * a} mm long. How many centimetres is that?`][mode],
+    word: ([mode, a, b]) => [`${a < 20 ? "A pencil" : "A ribbon"} is ${a} cm ${b} mm long. How long is it in millimetres?`, `${a < 6 ? "A beetle" : a < 20 ? "A pencil" : "A ribbon"} is ${10 * a + b} mm long. That is ${a} cm and how many more millimetres?`, `${name(a + b)} ${a < 3 ? "walks" : "travels by bus"} ${ind(1000 * a + 5 * b)} m to school. That is ${a} km and how many more metres?`, `A cycle race is ${ind(1000 * a)} m long. How many kilometres is that?`, `A paper strip is ${10 * a} mm long. How many centimetres is that?`][mode],
     teach: {
       idea: "10 mm = 1 cm, 100 cm = 1 m and 1000 m = 1 km. Going to a smaller unit gives a bigger number; going to a bigger unit makes groups.",
       method: "To change to the smaller unit, multiply by 10 (cm to mm) or 1000 (km to m) and add the rest. To change to the bigger unit, make groups of 10 or 1000; what is left stays in the smaller unit.",
@@ -2389,8 +2394,8 @@ export const B03: Def[] = [
     difficulty: ([mode, n]) => (mode === 0 && n >= 100 ? 1 : mode === 2 && (n < 1000 || n % 100 !== 0) ? 3 : 2),
     word: ([mode, n]) => [`${n < 300 ? "A plant" : "A young coconut tree"} has grown ${n} cm tall. How tall is it in metres? Write a decimal.`, `${n < 100 ? "A screw" : "A strip of ribbon"} is ${n} mm long. How long is it in centimetres? Write a decimal.`, `${name(n)} jogs ${ind(n)} m in the morning. How many kilometres is that? Write a decimal.`, `A saree border is ${dec2(n)} m long. How many centimetres is that?`][mode],
     teach: {
-      idea: "1 m = 100 cm, so 1 cm is one hundredth of a metre; 1 cm = 10 mm, so 1 mm is a tenth of a centimetre; 1 km = 1000 m, so 1 m is a thousandth of a kilometre.",
-      method: "To write a length in the bigger unit, divide by 100, 10 or 1000: move the digits that many places to the right of the decimal point. To go back, multiply.",
+      idea: "A metre is a hundred centimetres, so a centimetre is one hundredth of a metre; a centimetre is ten millimetres, so a millimetre is a tenth of a centimetre; a kilometre is a thousand metres, so a metre is a thousandth of a kilometre.",
+      method: "To write a length in the bigger unit, divide by the number of small units in one big unit: the digits move one place to the right of the decimal point for each zero (two places for a hundred, one for ten, three for a thousand). To go back, multiply.",
       visual: ([mode, n]) => (mode === 0 ? { type: "table", head: ["m", ".", "tenths", "hundredths"], rows: [[Math.floor(n / 100), ".", Math.floor(n / 10) % 10, n % 10]] } : { type: "numberline", from: 0, to: mode === 1 ? 100 : 10000, step: mode === 1 ? 10 : 1000, marks: [mode === 3 ? n : n] }),
       alternatives: [
         { id: "split", title: "Split into whole units and the rest", kind: "procedural", text: ["245 cm is 2 m and 45 cm.", "45 cm is 45 hundredths of a metre, so 245 cm = 2.45 m."] },
@@ -2409,7 +2414,7 @@ export const B03: Def[] = [
     reject: ([rel, dx, dy, s]) => (rel < 0 || rel > 2 || dx < 1 || dx > 4 || dy < -3 || dy > 3 || s < 0 || s > 5 ? "Two segments on a grid." : null),
     choices: (p) => shuf(p, "parl", PARL),
     prompt: () => "Look at the line segments AB and CD in the picture. Are they parallel, perpendicular, or neither?",
-    solve: (p) => ({ steps: [st("slopes", "compare", LINES, [`${p[1]} across, ${p[2]} up`], PARL[p[0]])], answer: posOf(p, 3, p[0], "parl") }),
+    solve: (p) => ({ steps: [st("slopes", "compare", LINES, [`${p[1]} across, ${p[2]} up`], PARL[p[0]]), st("pick", "choose the option", LINES, [PARL[p[0]]], posOf(p, 3, p[0], "parl"))], answer: posOf(p, 3, p[0], "parl") }),
     // independent: from the points drawn, two segments are parallel when the cross product of their directions is 0 and perpendicular when the dot product is 0
     validate: (p, v) => {
       const [A, Bp, C, D] = parlPts(p);
@@ -2426,7 +2431,7 @@ export const B03: Def[] = [
       return [];
     },
     variants: () => [],
-    explain: (s) => `Count the squares each segment goes across and up: they are ${String(s.value).toLowerCase()}`,
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Count the squares each segment goes across and up: they are ${String(s.value).toLowerCase()}`),
     domain: [[0, 2], [1, 4], [-3, 3], [0, 5]],
     cap: 300,
     difficulty: ([rel, , dy]) => (dy === 0 ? 1 : rel === 2 ? 3 : 2),
@@ -2707,7 +2712,8 @@ export const B03: Def[] = [
     solve: (p) => {
       const lab = collLabels(p);
       const on = [0, 1, 2].map((i) => lab[i]).sort().join("");
-      return { steps: [st("steps", "compare", LINES, [`${p[0]} across, ${p[1]} up`], on)], answer: TRIPLES.findIndex((t) => t.join("") === on) };
+      const ans = TRIPLES.findIndex((t) => t.join("") === on);
+      return { steps: [st("steps", "compare", LINES, [`${p[0]} across, ${p[1]} up`], on), st("pick", "choose the option", LINES, [TRIPLES[ans].join(", ").replace(/, (?=[^,]*$)/, " and ")], ans)], answer: ans };
     },
     // independent: test the chosen three points with the cross product of the steps between them
     validate: (p, v) => {
@@ -2723,7 +2729,7 @@ export const B03: Def[] = [
       return [B("by-eye", "procedural", LINES, `Point ${lab[3]} looks almost in line, but count the squares: each step along the line is ${p[0]} across and ${Math.abs(p[1])} ${p[1] < 0 ? "down" : "up"}, and ${lab[3]} is one square off.`, k)];
     },
     variants: () => [],
-    explain: (s) => `Each step along the line goes ${s.inputs[0]}; the points that follow this pattern are ${String(s.value).split("").join(", ")}`,
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Each step along the line goes ${s.inputs[0]}; the points that follow this pattern are ${String(s.value).split("").join(", ")}`),
     domain: [[1, 3], [-2, 2], [0, 11]],
     difficulty: ([dx, dy]) => (dy === 0 ? 1 : dx === 1 ? 2 : 3),
     figure: (p) => {

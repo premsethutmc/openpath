@@ -201,18 +201,35 @@ function mathematicalExplanation(step: Step, family: Def): string {
   const trimmed = idea.includes(".") ? idea.slice(0, idea.indexOf(".") + 1) : idea;
   const why = concept || trimmed;
   const a = shown(step.inputs[0]), b = step.inputs.length > 1 ? shown(step.inputs[1]) : "";
+  // grade7-teaching@1: an op-based sentence states arithmetic only when it is true of the step's own numbers and they read
+  // cleanly (whole numbers or short decimals); otherwise only the idea is said. A step's inputs are not always the operands
+  // (5% of 360 is computed as 360 ÷ 20 from the inputs 360 and 5), so "360 ÷ 5 = 18" must never be shown.
+  const nums = step.inputs.map((x) => (typeof x === "number" ? x : NaN));
+  const v = typeof step.value === "number" ? step.value : NaN;
+  const clean = (x: number) => Number.isFinite(x) && Math.abs(x * 1000 - Math.round(x * 1000)) < 1e-9;
+  const near = (x: number) => Number.isFinite(x) && Number.isFinite(v) && Math.abs(x - v) < 1e-9 * Math.max(1, Math.abs(v));
+  const truth: Record<string, () => boolean> = {
+    add: () => near(nums.reduce((s, x) => s + x, 0)),
+    subtract: () => nums.length === 2 && near(nums[0] - nums[1]),
+    multiply: () => near(nums.reduce((s, x) => s * x, 1)),
+    divide: () => nums.length === 2 && nums[1] !== 0 && near(nums[0] / nums[1]),
+  };
+  // only numbers can be checked: a symbolic step ("2 × 3x × 8 = 48x") is stated as written
+  const numeric = nums.every(Number.isFinite) && Number.isFinite(v);
+  if (truth[step.op] && numeric && !(nums.every(clean) && clean(v) && truth[step.op]())) return "";
+  // the arithmetic is said plainly: the competency's name ("— Calculate percentages.") or the family's idea sentence is not
+  // tagged onto every step (it read as noise, repeated the idea, and could name the wrong skill)
+  void why;
 
   switch (step.op) {
     case "add":
-      return why ? `${a} + ${b} = ${result} — ${why}.` : `${a} + ${b} = ${result}.`;
+      return `${step.inputs.map(shown).join(" + ")} = ${result}.`;
     case "subtract":
-      return why ? `${a} − ${b} = ${result} — ${why}.` : `${a} − ${b} = ${result}.`;
-    case "multiply": {
-      const product = step.inputs.map(shown).join(" × ");
-      return why ? `${product} = ${result} — ${why}.` : `${product} = ${result}.`;
-    }
+      return `${a} − ${b} = ${result}.`;
+    case "multiply":
+      return `${step.inputs.map(shown).join(" × ")} = ${result}.`;
     case "divide":
-      return why ? `${a} ÷ ${b} = ${result} — ${why}.` : `${a} ÷ ${b} = ${result}.`;
+      return `${a} ÷ ${b} = ${result}.`;
     case "negate-square":
       return `−(${a}²) = ${result}: square ${a}, then take its negative.`;
     case "compare":
@@ -230,10 +247,9 @@ function mathematicalExplanation(step: Step, family: Def): string {
       const contribution = digitVal * placeVal;
       return `The digit ${a} in the ${placeName} place is worth ${shown(contribution)}.`;
     }
-    default: {
-      const inputs = step.inputs.map(shown).join(" and ");
-      return why ? `${step.op}: ${inputs} → ${result} — ${why}.` : `${step.op}: ${inputs} → ${result}.`;
-    }
+    default:
+      // never a raw trace of the solver ("equal: 100 → 100"), and no tag: the step's own written form says what it does
+      return "";
   }
 }
 
@@ -609,9 +625,15 @@ export function teachingPresentationFrom(args: {
         const kSteps = kernelWorkedSteps(adapted);
         if (kSteps.length > 0) {
           // Kernel is authoritative: populate workedExample directly from kernel transformations
-          steps = kSteps.map((k) => ({
-            expression: k.expression,
-            explanation: k.explanation,
+          // grade7-lessons@1: the kernel's raw action ("multiply: 22/7, 56 → 176") and float evidence ("3.142857142857143 × 56")
+          // are not shown to a learner: the family's own written step is, and an evidence line with long floats is left out
+          const fam = familyWorkedSteps(problem);
+          const aligned = fam.length === kSteps.length;
+          const raw = (x: string) => /^[a-z][\w-]*: .*→/.test(x);
+          const floaty = (x: string) => /\d\.\d{6,}/.test(x);
+          steps = kSteps.map((k, i) => ({
+            expression: raw(k.expression) && aligned && fam[i].expression ? fam[i].expression : k.expression,
+            explanation: floaty(k.explanation) || raw(k.explanation) ? (aligned ? fam[i].explanation : "") : k.explanation,
             principle: k.principle,
             before: k.before,
             after: k.after,
