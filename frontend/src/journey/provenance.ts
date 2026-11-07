@@ -27,7 +27,13 @@ export function checkProvenance(f: SliceFlow): string[] {
     if (t.component === "intervention.moduleState" && o.strategy) {
       const comp = (t.input as { competency: string }).competency;
       const st = moduleFor(comp)?.strategies.find((s) => s.id === o.strategy);
-      if (st) strategies.set(st.id, { title: st.title, texts: new Set(st.screens.flatMap((s) => [...s.text.map((x, j) => (j === 0 ? `${s.title} — ${x}` : x)), ...(s.math ?? [])])) });
+      if (st) {
+        // the same strategy id can be selected in two modules in one session (a prerequisite's "worked_steps", then the
+        // problem's own): a step is owned when it is in any engine-selected strategy of that id (grade7-split@1)
+        const texts = new Set(st.screens.flatMap((s) => [...s.text.map((x, j) => (j === 0 ? `${s.title} — ${x}` : x)), ...(s.math ?? [])]));
+        const prev = strategies.get(st.id);
+        strategies.set(st.id, { title: st.title, texts: prev ? new Set([...prev.texts, ...texts]) : texts });
+      }
     }
   }
   // explanation-review@1: the label is the content gate's own sentence, appended to the engine's reason for the explanation

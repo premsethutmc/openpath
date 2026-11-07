@@ -178,3 +178,17 @@ mathematics-completion, grade7-board: 25 / 25. Content pipeline regenerated; 96 
 Tests: `bun test packages/learning/src` 1 816 pass, 0 fail; content-safety, mathematics-completion, grade7-board 25 / 25;
 grade7-coverage: CBSE pass; TN pass except the known stall. Lesson contract: 562 sections, 253 / 254 worked examples
 checked, 0 violations.
+
+## Inequations stall fixed (contexts@1)
+
+Cause: the shared record demonstrates a skill only from answers in at least two kinds of question (typed and a
+situation), and answers in the session that taught it do not count. A one-family module (inequations-intro) offered only
+typed checks after teaching, so a learner taught it could answer right indefinitely and never demonstrate it. Now, in a
+one-family module, when the learner was taught the skill and has answered no situation question on it in a later
+session, a fresh check is offered in its situation (word) form (`intervention.ts` `situationFirst`). Multi-family
+modules are unchanged. The known-stall entry is removed: both boards pass `grade7-coverage.test.ts`.
+
+Also fixed while running the wider suites: blueprint "solved correctly" texts are now in their generator
+(`scale-blueprints.mts`), length-conversion choice solutions end with the picked option, symbolic steps keep their stated
+arithmetic, a content-corrections test follows the revision chain to the blocked revision, the scenario provenance oracle
+accepts a strategy id selected in two modules in one session, and the mapping-exemplar index is regenerated.

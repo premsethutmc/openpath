@@ -2265,6 +2265,1181 @@
    }
   },
   {
+   "competency": "MATH.geometry.triangle-properties",
+   "title": "The third angle of a triangle",
+   "chapter": [
+    {
+     "title": "The third angle of a triangle",
+     "text": [
+      "The three angles of any triangle add up to 180°: tear off the corners and they fit together on a straight line."
+     ],
+     "math": [
+      "Two angles of a triangle are 35° and 90°, as in the picture (not to scale). What is the third angle, in degrees?",
+      "The two angles together: 35° + 90° = 125°",
+      "Third angle: 180° − 125° = 55°"
+     ],
+     "tip": "The angles were taken from 360°. The three angles of a triangle add up to 180°; 360° is the sum around a point or in a quadrilateral.",
+     "role": "concept",
+     "instance": "gen:ahtri:35,90"
+    },
+    {
+     "title": "The exterior angle of a triangle",
+     "text": [
+      "An exterior angle and the interior angle next to it make a straight line, and the three interior angles of a triangle also add up to a straight angle, so the exterior angle equals the two far interior angles together.",
+      "To find the exterior angle, add the two interior opposite angles. To find one of those, subtract the other from the exterior angle."
+     ],
+     "math": [
+      "One side of a triangle is extended. The two interior angles opposite the exterior angle are 31° and 118°. What is the exterior angle, in degrees?",
+      "Exterior angle = sum of the interior opposite angles: 31° + 118° = 149°"
+     ],
+     "widget": {
+      "type": "triangle",
+      "angles": [
+       "31°",
+       "",
+       "118°"
+      ],
+      "exterior": {
+       "at": 1,
+       "label": "?"
+      },
+      "notToScale": true,
+      "vertices": [
+       "A",
+       "C",
+       "B"
+      ],
+      "extendedTo": "D"
+     },
+     "role": "worked-example",
+     "instance": "gen:ahext:31,118,0"
+    },
+    {
+     "title": "Angles of an isosceles triangle",
+     "text": [
+      "In an isosceles triangle the angles opposite the two equal sides are equal; with the angle sum of 180°, one angle tells you the other two.",
+      "Vertex angle known: take it from 180° and halve. Base angle known: double it and take that from 180°."
+     ],
+     "math": [
+      "In an isosceles triangle each of the two equal angles (opposite the equal sides) is 62°. What is the third angle, in degrees?",
+      "The two equal angles: 2 × 62° = 124°",
+      "180° − 124° = 56°"
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahiso:62,1"
+    },
+    {
+     "title": "How long can the third side be?",
+     "text": [
+      "In a triangle, any two sides together are longer than the third. So the third side is less than the sum of the other two and more than their difference.",
+      "Longest: one less than the sum of the two sides. Shortest: one more than their difference (for whole numbers)."
+     ],
+     "math": [
+      "Two sides of a triangle are 4 cm and 14 cm. The third side is a whole number of centimetres. What is the longest it can be, in cm?",
+      "The third side must be less than 4 + 14 = 18 cm",
+      "The longest whole number below 18 is 17"
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahineq:4,14,0"
+    }
+   ],
+   "diagnostics": [
+    "gen:ahtri:36,26",
+    "gen:ahtri:85,71",
+    "gen:ahtri:24,36"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Add the two angles you know, then take the sum from 180°."
+       ],
+       "math": [
+        "Two angles of a triangle are 56° and 85°, as in the picture (not to scale). What is the third angle, in degrees?",
+        "The two angles together: 56° + 85° = 141°",
+        "Third angle: 180° − 141° = 39°"
+       ],
+       "role": "worked-example",
+       "instance": "gen:ahtri:56,85"
+      }
+     ],
+     "guided": "gen:ahtri:56,29",
+     "check": "gen:ahtri:25,65"
+    },
+    {
+     "id": "tear_corners",
+     "title": "Tear off the corners",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Tear off the corners",
+       "text": [
+        "Cut out a paper triangle, tear off its three corners and place them side by side.",
+        "They make a straight line, which is 180°."
+       ],
+       "math": [
+        "Two angles of a triangle are 36° and 127°, as in the picture (not to scale). What is the third angle, in degrees?",
+        "The two angles together: 36° + 127° = 163°",
+        "Third angle: 180° − 163° = 17°"
+       ],
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "36°",
+         "127°",
+         "17°"
+        ]
+       },
+       "role": "strategy",
+       "instance": "gen:ahtri:36,127"
+      }
+     ],
+     "guided": "gen:ahtri:36,74",
+     "check": "gen:ahtri:35,88:mc"
+    },
+    {
+     "id": "count_on",
+     "title": "Count on to 180",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Count on to 180",
+       "text": [
+        "Start from the sum of the two angles and count up to 180 in easy jumps (to the next ten, then tens).",
+        "The total of the jumps is the third angle."
+       ],
+       "math": [
+        "Two angles of a triangle are 85° and 49°, as in the picture (not to scale). What is the third angle, in degrees?",
+        "The two angles together: 85° + 49° = 134°",
+        "Third angle: 180° − 134° = 46°"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahtri:85,49"
+      }
+     ],
+     "guided": "gen:ahtri:25,79",
+     "check": "gen:ahtri:24,56"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:ahtri:66,43",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Two angles of a triangle are 66° and 43°, as in the picture (not to scale). What is the third angle, in degrees?” A common wrong answer is 251.",
+        "The angles were taken from 360°. The three angles of a triangle add up to 180°; 360° is the sum around a point or in a quadrilateral."
+       ],
+       "math": [
+        "Not 251, but 71"
+       ]
+      }
+     ],
+     "guided": "gen:ahtri:35,92",
+     "check": "gen:ahtri:24,76:mc"
+    },
+    {
+     "id": "check_what_it_uses",
+     "title": "Check what it builds on",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "role": "prerequisite",
+       "title": "What it uses",
+       "text": [
+        "Each step builds on another skill: Measure and draw angles. If a step is slow, practise that skill first."
+       ]
+      }
+     ],
+     "guided": "gen:ahtri:24,40",
+     "check": "gen:ahtri:73,23"
+    },
+    {
+     "id": "exterior_angle",
+     "title": "The exterior angle of a triangle",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "ahext",
+      "subSkill": "triangle-properties.exterior-angle@1"
+     },
+     "screens": [
+      {
+       "title": "The exterior angle of a triangle",
+       "text": [
+        "At C the exterior angle and the interior angle next to it lie on a straight line, so together they make 180°.",
+        "The three interior angles also make 180°. Both pairs make 180° and share the angle at C, so the exterior angle equals the other two interior angles together."
+       ],
+       "math": [
+        "One side of a triangle is extended. The two interior angles opposite the exterior angle are 39° and 112°. What is the exterior angle, in degrees?",
+        "Third interior angle C = 180° − 39° − 112° = 29° (angle sum)",
+        "Exterior angle = 180° − 29° = 151° (straight line)",
+        "Check: 39° + 112° = 151° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:39,112,0",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "39°",
+         "",
+         "112°"
+        ],
+        "exterior": {
+         "at": 1,
+         "label": "?"
+        },
+        "notToScale": true,
+        "vertices": [
+         "A",
+         "C",
+         "B"
+        ],
+        "extendedTo": "D"
+       }
+      },
+      {
+       "title": "When the exterior angle is given",
+       "text": [
+        "The exterior angle equals the two far interior angles together.",
+        "So one far angle is the exterior angle minus the other far angle. Go through the angle next to the exterior angle to check."
+       ],
+       "math": [
+        "One side of a triangle is extended. The exterior angle is 135° and one of the two interior opposite angles is 108°. What is the other interior opposite angle, in degrees?",
+        "Interior angle next to the exterior angle C = 180° − 135° = 45° (straight line)",
+        "Other opposite angle = 180° − 108° − 45° = 27° (angle sum)",
+        "Check: 108° + 27° = 135° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:108,27,1",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "108°",
+         "",
+         "?"
+        ],
+        "exterior": {
+         "at": 1,
+         "label": "135°"
+        },
+        "notToScale": true,
+        "vertices": [
+         "A",
+         "C",
+         "B"
+        ],
+        "extendedTo": "D"
+       }
+      }
+     ],
+     "guided": "gen:ahext:62,79,0:mc",
+     "check": "gen:ahext:86,70,0:mc"
+    },
+    {
+     "id": "exterior_via_third",
+     "title": "Go through the third angle",
+     "kind": "procedural",
+     "needs": [],
+     "scope": {
+      "family": "ahext",
+      "subSkill": "triangle-properties.exterior-angle@1"
+     },
+     "screens": [
+      {
+       "title": "Go through the third angle",
+       "text": [
+        "Find the third interior angle with the angle sum.",
+        "The exterior angle and that angle lie on a straight line, so the exterior angle is a straight angle minus the third angle."
+       ],
+       "math": [
+        "One side of a triangle is extended. The two interior angles opposite the exterior angle are 34° and 27°. What is the exterior angle, in degrees?",
+        "Third interior angle C = 180° − 34° − 27° = 119° (angle sum)",
+        "Exterior angle = 180° − 119° = 61° (straight line)",
+        "Check: 34° + 27° = 61° (exterior-angle theorem)"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahext:34,27,0",
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "34°",
+         "",
+         "27°"
+        ],
+        "exterior": {
+         "at": 1,
+         "label": "?"
+        },
+        "notToScale": true,
+        "vertices": [
+         "A",
+         "C",
+         "B"
+        ],
+        "extendedTo": "D"
+       }
+      }
+     ],
+     "guided": "gen:ahext:34,63,0:mc",
+     "check": "gen:ahext:44,76,1"
+    }
+   ],
+   "practice": [
+    "gen:ahtri:112,33",
+    "gen:ahtri:24,24:mc",
+    "gen:ahtri:110,52",
+    "gen:ahext:34,53,0",
+    "gen:ahiso:62,0",
+    "gen:ahineq:4,14,1"
+   ],
+   "transfer": [
+    "gen:ahtri:53,47:w",
+    "gen:ahext:93,36,1:w",
+    "gen:ahiso:96,0:w"
+   ],
+   "retention": [
+    "gen:ahtri:56,75",
+    "gen:ahext:77,74,1:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "ahtri",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "ahtri",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahext",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahiso",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahineq",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "ahtri",
+    "seed": [
+     35,
+     90
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:ahtri:35,90",
+     "gen:ahtri:66,43",
+     "gen:ahtri:56,85"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.geometry.angle-pairs",
+   "title": "Missing angle in a complementary or supplementary pair",
+   "chapter": [
+    {
+     "title": "Missing angle in a complementary or supplementary pair",
+     "text": [
+      "Complementary angles together make a right angle (90°); supplementary angles together make a straight angle (180°)."
+     ],
+     "math": [
+      "Two angles are supplementary. One of them is 130°. What is the other angle, in degrees?",
+      "Supplementary angles add up to 180°",
+      "180° − 130° = 50°"
+     ],
+     "widget": {
+      "type": "angle",
+      "deg": 180
+     },
+     "tip": "360° is a full turn. Supplementary angles add up to 180°.",
+     "role": "concept",
+     "instance": "gen:afpair:1,130"
+    },
+    {
+     "title": "Angles where two straight lines cross",
+     "text": [
+      "Where two straight lines cross, angles next to each other make a straight line (180°), so opposite angles are equal; all four make a full turn (360°).",
+      "Opposite angle: the same. Angle next to it: 180° minus it. All the others together: 360° minus it."
+     ],
+     "math": [
+      "Two straight lines cross each other, making four angles. One of the angles is 149°. What is an angle next to it (they form a straight line together), in degrees?",
+      "Angles on a straight line add to 180°: 180° − 149° = 31°"
+     ],
+     "widget": {
+      "type": "angle",
+      "deg": 149
+     },
+     "role": "worked-example",
+     "instance": "gen:afcross:149,1"
+    }
+   ],
+   "diagnostics": [
+    "gen:afpair:1,29",
+    "gen:afpair:0,64",
+    "gen:afpair:1,34"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Take the given angle away from 90° (complementary) or 180° (supplementary). Check: the two angles should add up to the total."
+       ],
+       "math": [
+        "Two angles are supplementary. One of them is 133°. What is the other angle, in degrees?",
+        "Supplementary angles add up to 180°",
+        "180° − 133° = 47°"
+       ],
+       "widget": {
+        "type": "angle",
+        "deg": 180
+       },
+       "role": "worked-example",
+       "instance": "gen:afpair:1,133"
+      }
+     ],
+     "guided": "gen:afpair:1,132",
+     "check": "gen:afpair:1,137"
+    },
+    {
+     "id": "count_on",
+     "title": "Count on to the total",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Count on to the total",
+       "text": [
+        "Start at the angle you know, 135°, and count on to 180°: first to the next ten, then in tens.",
+        "135 → 140 is 5, 140 → 180 is 40, so the other angle is 45°."
+       ],
+       "math": [
+        "Two angles are supplementary. One of them is 135°. What is the other angle, in degrees?",
+        "Supplementary angles add up to 180°",
+        "180° − 135° = 45°"
+       ],
+       "widget": {
+        "type": "numberline",
+        "from": 130,
+        "to": 180,
+        "step": 10,
+        "marks": [
+         135,
+         180
+        ]
+       },
+       "role": "strategy",
+       "instance": "gen:afpair:1,135",
+       "textFrom": "instance"
+      }
+     ],
+     "guided": "gen:afpair:1,134",
+     "check": "gen:afpair:1,157:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:afpair:0,36",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “Two angles are complementary. One of them is 36°. What is the other angle, in degrees?” A common wrong answer is 144.",
+        "Complementary angles make a right angle, 90°. 180° is for supplementary angles."
+       ],
+       "math": [
+        "Not 144, but 54"
+       ]
+      }
+     ],
+     "guided": "gen:afpair:1,147",
+     "check": "gen:afpair:1,136:mc"
+    },
+    {
+     "id": "vertically_opposite",
+     "title": "Vertically opposite angles are equal",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "afcross",
+      "subSkill": "angle-pairs.opposite@2"
+     },
+     "screens": [
+      {
+       "title": "Vertically opposite angles are equal",
+       "text": [
+        "Where two straight lines cross, angles next to each other lie on a straight line, so they add to 180°.",
+        "Go round: x, then 180° − x, then 180° − (180° − x) = x again. So opposite angles are equal, and all four add to 360°."
+       ],
+       "math": [
+        "Two straight lines cross each other, making four angles. One of the angles is 128°. What is the angle opposite it (vertically opposite), in degrees?",
+        "next angle round = 180° − 128° = 52° (straight line)",
+        "the one after = 180° − 52° = 128° (straight line): the opposite angle is 128°"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:128,0",
+       "widget": {
+        "type": "angle",
+        "deg": 128,
+        "cross": true,
+        "labels": [
+         "128°",
+         "",
+         "?",
+         ""
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afcross:29,0:mc",
+     "check": "gen:afcross:158,0:mc"
+    },
+    {
+     "id": "crossed_pencils",
+     "title": "Two crossed pencils",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "afcross",
+      "subSkill": "angle-pairs.opposite@2"
+     },
+     "screens": [
+      {
+       "title": "Two crossed pencils",
+       "text": [
+        "Hold two straight pencils crossed like an X.",
+        "Open them wider: the top and bottom angles grow together while the two side angles shrink together. Opposite angles stay equal."
+       ],
+       "math": [
+        "Two straight lines cross each other, making four angles. One of the angles is 104°. What is the angle opposite it (vertically opposite), in degrees?",
+        "next angle round = 180° − 104° = 76° (straight line)",
+        "the one after = 180° − 76° = 104° (straight line): the opposite angle is 104°"
+       ],
+       "role": "strategy",
+       "instance": "gen:afcross:104,0",
+       "widget": {
+        "type": "angle",
+        "deg": 104,
+        "cross": true,
+        "labels": [
+         "104°",
+         "",
+         "?",
+         ""
+        ]
+       }
+      }
+     ],
+     "guided": "gen:afcross:152,0:mc",
+     "check": "gen:afcross:70,0"
+    }
+   ],
+   "practice": [
+    "gen:afpair:1,140",
+    "gen:afpair:1,141:mc",
+    "gen:afpair:1,142",
+    "gen:afcross:109,0"
+   ],
+   "transfer": [
+    "gen:afpair:1,143:w",
+    "gen:afcross:109,1:w"
+   ],
+   "retention": [
+    "gen:afpair:0,34",
+    "gen:afcross:89,1:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "afpair",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "afpair",
+     "version": "1.0.0"
+    },
+    {
+     "family": "afcross",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "afpair",
+    "seed": [
+     1,
+     130
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:afpair:1,130",
+     "gen:afpair:0,36",
+     "gen:afpair:1,133"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.probability.sample-space",
+   "title": "Counting the outcomes of choices made in stages",
+   "chapter": [
+    {
+     "title": "Counting the outcomes of choices made in stages",
+     "text": [
+      "If the first stage can happen in a ways and, for each of them, the next stage in b ways, there are a × b outcomes altogether (the multiplication principle)."
+     ],
+     "math": [
+      "There are 3 roads from village P to village Q and 2 roads from Q to R. How many different ways are there to travel from P to R, passing through Q?",
+      "3 × 2 = 6"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "",
+       "B1",
+       "B2"
+      ],
+      "rows": [
+       [
+        "A1",
+        "A1B1",
+        "A1B2"
+       ],
+       [
+        "A2",
+        "A2B1",
+        "A2B2"
+       ],
+       [
+        "A3",
+        "A3B1",
+        "A3B2"
+       ]
+      ]
+     },
+     "tip": "The numbers of choices were added. Each choice at the first stage can go with every choice at the next, so multiply.",
+     "role": "concept",
+     "instance": "gen:akss:2,3,2,0"
+    },
+    {
+     "title": "Probability from the sample space of two dice or spinners",
+     "text": [
+      "For two stages, the sample space is every pair (first, second). With equally likely numbers, all m × n pairs are equally likely, so P(event) = pairs that fit ÷ all pairs.",
+      "Draw a table: first numbers down the side, second numbers along the top, the total in each cell. Count the cells that fit the event and divide by the number of cells."
+     ],
+     "math": [
+      "Anu uses a spinner numbered 1 to 4 and a spinner numbered 1 to 5. The first gives a number from 1 to 4 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 3?",
+      "There are 4 × 5 = 20 equally likely pairs",
+      "2 pairs fit: the total of the two numbers is 3",
+      "Probability = 2 ÷ 20 = 1/10"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "+",
+       "1",
+       "2",
+       "3",
+       "4",
+       "5"
+      ],
+      "rows": [
+       [
+        "1",
+        2,
+        3,
+        4,
+        5,
+        6
+       ],
+       [
+        "2",
+        3,
+        4,
+        5,
+        6,
+        7
+       ],
+       [
+        "3",
+        4,
+        5,
+        6,
+        7,
+        8
+       ],
+       [
+        "4",
+        5,
+        6,
+        7,
+        8,
+        9
+       ]
+      ]
+     }
+    },
+    {
+     "title": "Listing a sample space, and an event as a subset of it",
+     "text": [
+      "The sample space is the list of every possible outcome of an experiment. An event is a part (subset) of the sample space: the outcomes that make it happen.",
+      "Build the outcomes systematically (for two coins: first coin H with each of H, T, then first coin T with each). For an event, go through the sample space one outcome at a time and keep those that fit."
+     ],
+     "math": [
+      "A card is picked at random from cards numbered 1 to 15. Which set is the event \"the number is an odd number\"?",
+      "Go through 1 to 15 and keep each number that is an odd number: {1, 3, 5, 7, 9, 11, 13, 15}"
+     ]
+    },
+    {
+     "title": "Counting arrangements that meet a condition",
+     "text": [
+      "Listing in an organised way (fix the first place, then the next …) makes sure no arrangement is missed or counted twice. A condition fixes or removes some places first.",
+      "Deal with the condition first (put the fixed person at the end, glue the pair together, or choose the last digit), then count the ways to fill the remaining places one at a time and multiply."
+     ],
+     "math": [
+      "In how many different ways can Ravi, Meena and Imran stand in a row if Ravi must stand at the left end?",
+      "Fix the first place; the other 2 can be arranged in 2! ways: 2"
+     ]
+    }
+   ],
+   "diagnostics": [
+    "gen:akss:0,4,4,5",
+    "gen:akss:1,5,5,2",
+    "gen:akss:0,3,4,4"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Count the choices at each stage and multiply them. A tree diagram or table shows why: every branch splits into the same number of branches."
+       ],
+       "math": [
+        "A school canteen offers 2 kinds of rice, 5 curries and 4 sweets. A meal is one rice, one curry and one sweet. How many different meals are possible?",
+        "2 × 5 = 10",
+        "10 × 4 = 40"
+       ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "",
+         "B1",
+         "B2",
+         "B3",
+         "B4",
+         "B5"
+        ],
+        "rows": [
+         [
+          "A1",
+          "A1B1",
+          "A1B2",
+          "A1B3",
+          "A1B4",
+          "A1B5"
+         ],
+         [
+          "A2",
+          "A2B1",
+          "A2B2",
+          "A2B3",
+          "A2B4",
+          "A2B5"
+         ]
+        ]
+       },
+       "role": "worked-example",
+       "instance": "gen:akss:1,2,5,4"
+      }
+     ],
+     "guided": "gen:akss:2,3,3,2",
+     "check": "gen:akss:2,3,2,2"
+    },
+    {
+     "id": "tree",
+     "title": "Draw a tree diagram",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Draw a tree diagram",
+       "text": [
+        "Draw one branch for each first choice. From the end of each branch, draw one branch for each second choice.",
+        "Count the ends of the last branches: that is every possible outcome."
+       ],
+       "math": [
+        "A school canteen offers 4 kinds of rice and 3 curries. A meal is one rice and one curry. How many different meals are possible?",
+        "4 × 3 = 12"
+       ],
+       "widget": {
+        "type": "array",
+        "rows": 4,
+        "cols": 3
+       },
+       "role": "strategy",
+       "instance": "gen:akss:1,4,3,0"
+      }
+     ],
+     "guided": "gen:akss:1,4,3,3",
+     "check": "gen:akss:2,3,2,3:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:akss:2,3,2,5",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “There are 3 roads from village P to village Q and 2 roads from Q to R, and 5 roads from R to S. How many different ways are there to travel from P to S, passing through Q and R?” A common wrong answer is 10.",
+        "The numbers of choices were added. Each choice at the first stage can go with every choice at the next, so multiply."
+       ],
+       "math": [
+        "Not 10, but 30"
+       ]
+      }
+     ],
+     "guided": "gen:akss:1,5,4,5",
+     "check": "gen:akss:1,4,3,5:mc"
+    },
+    {
+     "id": "akdice_pairs",
+     "title": "Two dice: count the pairs",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "akdice",
+      "parameters": [
+       {
+        "index": 2,
+        "values": [
+         0
+        ]
+       }
+      ]
+     },
+     "screens": [
+      {
+       "title": "36 ordered pairs, all equally likely",
+       "role": "concept",
+       "instance": "gen:akdice:6,6,0,7",
+       "widget": {
+        "type": "table",
+        "head": [
+         "+",
+         "1",
+         "2",
+         "3",
+         "4",
+         "5",
+         "6"
+        ],
+        "rows": [
+         [
+          "1",
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+         ],
+         [
+          "2",
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+         ],
+         [
+          "3",
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+         ],
+         [
+          "4",
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+         ],
+         [
+          "5",
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+         ],
+         [
+          "6",
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+         ]
+        ]
+       },
+       "text": [
+        "With two ordinary dice there are 6 × 6 = 36 ordered pairs (first number, second number). Every cell of the table is one pair, and all 36 pairs are equally likely.",
+        "There are 11 possible totals, 2 to 12, but they are not equally likely: a total is as likely as the number of pairs that make it."
+       ],
+       "math": [
+        "Total 2: (1, 1), 1 pair, so P = 1/36",
+        "Total 7: (1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1), 6 pairs, so P = 1/6",
+        "6 pairs against 1: a total of 7 is 6 times as likely as a total of 2."
+       ]
+      },
+      {
+       "title": "Count the pairs: solved step by step",
+       "role": "strategy",
+       "instance": "gen:akdice:6,6,0,7",
+       "text": [
+        "List the pairs that give the total, count them, and divide by the number of all pairs."
+       ],
+       "math": [
+        "There are 6 × 6 = 36 equally likely pairs",
+        "6 pairs fit: the total of the two numbers is 7",
+        "Probability = 6 ÷ 36 = 1/6",
+        "So the answer is 1/6"
+       ]
+      }
+     ],
+     "guided": "gen:akdice:5,5,0,7:mc",
+     "check": "gen:akdice:4,5,0,5"
+    },
+    {
+     "id": "akdice_order",
+     "title": "Red die, blue die: every order counts",
+     "kind": "conceptual",
+     "needs": [],
+     "scope": {
+      "family": "akdice",
+      "parameters": [
+       {
+        "index": 2,
+        "values": [
+         0
+        ]
+       }
+      ]
+     },
+     "screens": [
+      {
+       "title": "Every order is its own outcome",
+       "role": "concept",
+       "instance": "gen:akdice:6,6,0,9",
+       "widget": {
+        "type": "table",
+        "head": [
+         "+",
+         "1",
+         "2",
+         "3",
+         "4",
+         "5",
+         "6"
+        ],
+        "rows": [
+         [
+          "1",
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+         ],
+         [
+          "2",
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+         ],
+         [
+          "3",
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+         ],
+         [
+          "4",
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+         ],
+         [
+          "5",
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+         ],
+         [
+          "6",
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+         ]
+        ]
+       },
+       "text": [
+        "Colour the first die red and the second blue: red 3 with blue 6 is a different roll from red 6 with blue 3. Both are in the table, as different cells.",
+        "So list the pairs in order: each one is an equally likely outcome out of 36."
+       ],
+       "math": [
+        "The pairs with total 9, in order: (3, 6), (4, 5), (5, 4), (6, 3), 4 pairs",
+        "P(total 9) = 4/36 = 1/9"
+       ]
+      },
+      {
+       "title": "Every order counts: solved step by step",
+       "role": "strategy",
+       "instance": "gen:akdice:6,6,0,9",
+       "text": [
+        "Each step, then the answer."
+       ],
+       "math": [
+        "There are 6 × 6 = 36 equally likely pairs",
+        "4 pairs fit: the total of the two numbers is 9",
+        "Probability = 4 ÷ 36 = 1/9",
+        "So the answer is 1/9"
+       ]
+      }
+     ],
+     "guided": "gen:akdice:5,5,0,9:mc",
+     "check": "gen:akdice:6,6,0,3"
+    }
+   ],
+   "practice": [
+    "gen:akss:1,4,3,2",
+    "gen:akss:1,5,4,4:mc",
+    "gen:akss:1,5,4,3",
+    "gen:akdice:3,4,2,0",
+    "gen:akssl:1,1,1",
+    "gen:aksarr:0,3,0"
+   ],
+   "transfer": [
+    "gen:akss:1,4,2,3:w",
+    "gen:akdice:4,5,0,2:w"
+   ],
+   "retention": [
+    "gen:akss:1,2,5,2",
+    "gen:akdice:3,6,1,4:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "akss",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "akss",
+     "version": "1.0.0"
+    },
+    {
+     "family": "akdice",
+     "version": "1.0.0"
+    },
+    {
+     "family": "akssl",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aksarr",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "akss",
+    "seed": [
+     2,
+     3,
+     2,
+     0
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:akss:2,3,2,0",
+     "gen:akss:2,3,2,5",
+     "gen:akss:1,2,5,4"
+    ]
+   }
+  },
+  {
    "competency": "MATH.statistics.pictographs",
    "title": "Reading a pictograph with a key",
    "chapter": [
@@ -3086,7 +4261,7 @@
       {
        "title": "Read the scale; do not assume 10: solved correctly",
        "text": [
-        "Read the numbers on the scale to find what one line stands for; do not assume each line is 10."
+        "Read the numbers on the scale to find what one line stands for; do not assume each line is ten."
        ],
        "math": [
         "Thu: 2; Fri: 14 (scale 2 per line)",
@@ -4418,6 +5593,7 @@
         "Which is longer: 7 m 76 cm or 772 cm?",
         "7 m 76 cm = 776 cm",
         "Compare 776 cm with 772 cm",
+        "So the answer is option A: 7 m 76 cm is longer",
         "So: 7 m 76 cm is longer"
        ],
        "role": "strategy",
@@ -5072,7 +6248,7 @@
       {
        "title": "Not both numbers added: solved correctly",
        "text": [
-        "Ask what added to 2 makes 10: take 2 away from 10 to find the box; do not add the two numbers."
+        "Ask what number added to the given one makes the total: take it away from the total to find the box; do not add the two numbers."
        ],
        "math": [
         "□ + 2 = 10",
@@ -5118,7 +6294,7 @@
       {
        "title": "Not both numbers added: solved correctly",
        "text": [
-        "Ask what taken from 18 leaves 3: the box is 18 take away 3; do not add the two numbers."
+        "Ask what number taken from the first one leaves the second: take the second away from the first to find the box; do not add the two numbers."
        ],
        "math": [
         "18 − □ = 3",
@@ -5164,7 +6340,7 @@
       {
        "title": "Add it back, do not take it away again: solved correctly",
        "text": [
-        "The box had 7 taken away to leave 11, so add the 7 back on to find it."
+        "The box had a number taken away from it, so add that number back on to find it; do not take it away again."
        ],
        "math": [
         "□ − 7 = 11",
@@ -5816,1181 +6992,6 @@
     "licence": "CC0",
     "examples": [
      "gen:afmissd:25,2,0,0"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.geometry.triangle-properties",
-   "title": "The third angle of a triangle",
-   "chapter": [
-    {
-     "title": "The third angle of a triangle",
-     "text": [
-      "The three angles of any triangle add up to 180°: tear off the corners and they fit together on a straight line."
-     ],
-     "math": [
-      "Two angles of a triangle are 35° and 90°, as in the picture (not to scale). What is the third angle, in degrees?",
-      "The two angles together: 35° + 90° = 125°",
-      "Third angle: 180° − 125° = 55°"
-     ],
-     "tip": "The angles were taken from 360°. The three angles of a triangle add up to 180°; 360° is the sum around a point or in a quadrilateral.",
-     "role": "concept",
-     "instance": "gen:ahtri:35,90"
-    },
-    {
-     "title": "The exterior angle of a triangle",
-     "text": [
-      "An exterior angle and the interior angle next to it make a straight line, and the three interior angles of a triangle also add up to a straight angle, so the exterior angle equals the two far interior angles together.",
-      "To find the exterior angle, add the two interior opposite angles. To find one of those, subtract the other from the exterior angle."
-     ],
-     "math": [
-      "One side of a triangle is extended. The two interior angles opposite the exterior angle are 31° and 118°. What is the exterior angle, in degrees?",
-      "Exterior angle = sum of the interior opposite angles: 31° + 118° = 149°"
-     ],
-     "widget": {
-      "type": "triangle",
-      "angles": [
-       "31°",
-       "",
-       "118°"
-      ],
-      "exterior": {
-       "at": 1,
-       "label": "?"
-      },
-      "notToScale": true,
-      "vertices": [
-       "A",
-       "C",
-       "B"
-      ],
-      "extendedTo": "D"
-     },
-     "role": "worked-example",
-     "instance": "gen:ahext:31,118,0"
-    },
-    {
-     "title": "Angles of an isosceles triangle",
-     "text": [
-      "In an isosceles triangle the angles opposite the two equal sides are equal; with the angle sum of 180°, one angle tells you the other two.",
-      "Vertex angle known: take it from 180° and halve. Base angle known: double it and take that from 180°."
-     ],
-     "math": [
-      "In an isosceles triangle each of the two equal angles (opposite the equal sides) is 62°. What is the third angle, in degrees?",
-      "The two equal angles: 2 × 62° = 124°",
-      "180° − 124° = 56°"
-     ],
-     "role": "worked-example",
-     "instance": "gen:ahiso:62,1"
-    },
-    {
-     "title": "How long can the third side be?",
-     "text": [
-      "In a triangle, any two sides together are longer than the third. So the third side is less than the sum of the other two and more than their difference.",
-      "Longest: one less than the sum of the two sides. Shortest: one more than their difference (for whole numbers)."
-     ],
-     "math": [
-      "Two sides of a triangle are 4 cm and 14 cm. The third side is a whole number of centimetres. What is the longest it can be, in cm?",
-      "The third side must be less than 4 + 14 = 18 cm",
-      "The longest whole number below 18 is 17"
-     ],
-     "role": "worked-example",
-     "instance": "gen:ahineq:4,14,0"
-    }
-   ],
-   "diagnostics": [
-    "gen:ahtri:36,26",
-    "gen:ahtri:85,71",
-    "gen:ahtri:24,36"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Add the two angles you know, then take the sum from 180°."
-       ],
-       "math": [
-        "Two angles of a triangle are 56° and 85°, as in the picture (not to scale). What is the third angle, in degrees?",
-        "The two angles together: 56° + 85° = 141°",
-        "Third angle: 180° − 141° = 39°"
-       ],
-       "role": "worked-example",
-       "instance": "gen:ahtri:56,85"
-      }
-     ],
-     "guided": "gen:ahtri:56,29",
-     "check": "gen:ahtri:25,65"
-    },
-    {
-     "id": "tear_corners",
-     "title": "Tear off the corners",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Tear off the corners",
-       "text": [
-        "Cut out a paper triangle, tear off its three corners and place them side by side.",
-        "They make a straight line, which is 180°."
-       ],
-       "math": [
-        "Two angles of a triangle are 36° and 127°, as in the picture (not to scale). What is the third angle, in degrees?",
-        "The two angles together: 36° + 127° = 163°",
-        "Third angle: 180° − 163° = 17°"
-       ],
-       "widget": {
-        "type": "triangle",
-        "angles": [
-         "36°",
-         "127°",
-         "17°"
-        ]
-       },
-       "role": "strategy",
-       "instance": "gen:ahtri:36,127"
-      }
-     ],
-     "guided": "gen:ahtri:36,74",
-     "check": "gen:ahtri:35,88:mc"
-    },
-    {
-     "id": "count_on",
-     "title": "Count on to 180",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Count on to 180",
-       "text": [
-        "Start from the sum of the two angles and count up to 180 in easy jumps (to the next ten, then tens).",
-        "The total of the jumps is the third angle."
-       ],
-       "math": [
-        "Two angles of a triangle are 85° and 49°, as in the picture (not to scale). What is the third angle, in degrees?",
-        "The two angles together: 85° + 49° = 134°",
-        "Third angle: 180° − 134° = 46°"
-       ],
-       "role": "strategy",
-       "instance": "gen:ahtri:85,49"
-      }
-     ],
-     "guided": "gen:ahtri:25,79",
-     "check": "gen:ahtri:24,56"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:ahtri:66,43",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Two angles of a triangle are 66° and 43°, as in the picture (not to scale). What is the third angle, in degrees?” A common wrong answer is 251.",
-        "The angles were taken from 360°. The three angles of a triangle add up to 180°; 360° is the sum around a point or in a quadrilateral."
-       ],
-       "math": [
-        "Not 251, but 71"
-       ]
-      }
-     ],
-     "guided": "gen:ahtri:35,92",
-     "check": "gen:ahtri:24,76:mc"
-    },
-    {
-     "id": "check_what_it_uses",
-     "title": "Check what it builds on",
-     "kind": "prerequisite",
-     "needs": [],
-     "screens": [
-      {
-       "role": "prerequisite",
-       "title": "What it uses",
-       "text": [
-        "Each step builds on another skill: Measure and draw angles. If a step is slow, practise that skill first."
-       ]
-      }
-     ],
-     "guided": "gen:ahtri:24,40",
-     "check": "gen:ahtri:73,23"
-    },
-    {
-     "id": "exterior_angle",
-     "title": "The exterior angle of a triangle",
-     "kind": "conceptual",
-     "needs": [],
-     "scope": {
-      "family": "ahext",
-      "subSkill": "triangle-properties.exterior-angle@1"
-     },
-     "screens": [
-      {
-       "title": "The exterior angle of a triangle",
-       "text": [
-        "At C the exterior angle and the interior angle next to it lie on a straight line, so together they make 180°.",
-        "The three interior angles also make 180°. Both pairs make 180° and share the angle at C, so the exterior angle equals the other two interior angles together."
-       ],
-       "math": [
-        "One side of a triangle is extended. The two interior angles opposite the exterior angle are 39° and 112°. What is the exterior angle, in degrees?",
-        "Third interior angle C = 180° − 39° − 112° = 29° (angle sum)",
-        "Exterior angle = 180° − 29° = 151° (straight line)",
-        "Check: 39° + 112° = 151° (exterior-angle theorem)"
-       ],
-       "role": "strategy",
-       "instance": "gen:ahext:39,112,0",
-       "widget": {
-        "type": "triangle",
-        "angles": [
-         "39°",
-         "",
-         "112°"
-        ],
-        "exterior": {
-         "at": 1,
-         "label": "?"
-        },
-        "notToScale": true,
-        "vertices": [
-         "A",
-         "C",
-         "B"
-        ],
-        "extendedTo": "D"
-       }
-      },
-      {
-       "title": "When the exterior angle is given",
-       "text": [
-        "The exterior angle equals the two far interior angles together.",
-        "So one far angle is the exterior angle minus the other far angle. Go through the angle next to the exterior angle to check."
-       ],
-       "math": [
-        "One side of a triangle is extended. The exterior angle is 135° and one of the two interior opposite angles is 108°. What is the other interior opposite angle, in degrees?",
-        "Interior angle next to the exterior angle C = 180° − 135° = 45° (straight line)",
-        "Other opposite angle = 180° − 108° − 45° = 27° (angle sum)",
-        "Check: 108° + 27° = 135° (exterior-angle theorem)"
-       ],
-       "role": "strategy",
-       "instance": "gen:ahext:108,27,1",
-       "widget": {
-        "type": "triangle",
-        "angles": [
-         "108°",
-         "",
-         "?"
-        ],
-        "exterior": {
-         "at": 1,
-         "label": "135°"
-        },
-        "notToScale": true,
-        "vertices": [
-         "A",
-         "C",
-         "B"
-        ],
-        "extendedTo": "D"
-       }
-      }
-     ],
-     "guided": "gen:ahext:62,79,0:mc",
-     "check": "gen:ahext:86,70,0:mc"
-    },
-    {
-     "id": "exterior_via_third",
-     "title": "Go through the third angle",
-     "kind": "procedural",
-     "needs": [],
-     "scope": {
-      "family": "ahext",
-      "subSkill": "triangle-properties.exterior-angle@1"
-     },
-     "screens": [
-      {
-       "title": "Go through the third angle",
-       "text": [
-        "Find the third interior angle with the angle sum.",
-        "The exterior angle and that angle lie on a straight line, so the exterior angle is a straight angle minus the third angle."
-       ],
-       "math": [
-        "One side of a triangle is extended. The two interior angles opposite the exterior angle are 34° and 27°. What is the exterior angle, in degrees?",
-        "Third interior angle C = 180° − 34° − 27° = 119° (angle sum)",
-        "Exterior angle = 180° − 119° = 61° (straight line)",
-        "Check: 34° + 27° = 61° (exterior-angle theorem)"
-       ],
-       "role": "strategy",
-       "instance": "gen:ahext:34,27,0",
-       "widget": {
-        "type": "triangle",
-        "angles": [
-         "34°",
-         "",
-         "27°"
-        ],
-        "exterior": {
-         "at": 1,
-         "label": "?"
-        },
-        "notToScale": true,
-        "vertices": [
-         "A",
-         "C",
-         "B"
-        ],
-        "extendedTo": "D"
-       }
-      }
-     ],
-     "guided": "gen:ahext:34,63,0:mc",
-     "check": "gen:ahext:44,76,1"
-    }
-   ],
-   "practice": [
-    "gen:ahtri:112,33",
-    "gen:ahtri:24,24:mc",
-    "gen:ahtri:110,52",
-    "gen:ahext:34,53,0",
-    "gen:ahiso:62,0",
-    "gen:ahineq:4,14,1"
-   ],
-   "transfer": [
-    "gen:ahtri:53,47:w",
-    "gen:ahext:93,36,1:w",
-    "gen:ahiso:96,0:w"
-   ],
-   "retention": [
-    "gen:ahtri:56,75",
-    "gen:ahext:77,74,1:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "ahtri",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "ahtri",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahext",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahiso",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahineq",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "ahtri",
-    "seed": [
-     35,
-     90
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:ahtri:35,90",
-     "gen:ahtri:66,43",
-     "gen:ahtri:56,85"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.geometry.angle-pairs",
-   "title": "Missing angle in a complementary or supplementary pair",
-   "chapter": [
-    {
-     "title": "Missing angle in a complementary or supplementary pair",
-     "text": [
-      "Complementary angles together make a right angle (90°); supplementary angles together make a straight angle (180°)."
-     ],
-     "math": [
-      "Two angles are supplementary. One of them is 130°. What is the other angle, in degrees?",
-      "Supplementary angles add up to 180°",
-      "180° − 130° = 50°"
-     ],
-     "widget": {
-      "type": "angle",
-      "deg": 180
-     },
-     "tip": "360° is a full turn. Supplementary angles add up to 180°.",
-     "role": "concept",
-     "instance": "gen:afpair:1,130"
-    },
-    {
-     "title": "Angles where two straight lines cross",
-     "text": [
-      "Where two straight lines cross, angles next to each other make a straight line (180°), so opposite angles are equal; all four make a full turn (360°).",
-      "Opposite angle: the same. Angle next to it: 180° minus it. All the others together: 360° minus it."
-     ],
-     "math": [
-      "Two straight lines cross each other, making four angles. One of the angles is 149°. What is an angle next to it (they form a straight line together), in degrees?",
-      "Angles on a straight line add to 180°: 180° − 149° = 31°"
-     ],
-     "widget": {
-      "type": "angle",
-      "deg": 149
-     },
-     "role": "worked-example",
-     "instance": "gen:afcross:149,1"
-    }
-   ],
-   "diagnostics": [
-    "gen:afpair:1,29",
-    "gen:afpair:0,64",
-    "gen:afpair:1,34"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Take the given angle away from 90° (complementary) or 180° (supplementary). Check: the two angles should add up to the total."
-       ],
-       "math": [
-        "Two angles are supplementary. One of them is 133°. What is the other angle, in degrees?",
-        "Supplementary angles add up to 180°",
-        "180° − 133° = 47°"
-       ],
-       "widget": {
-        "type": "angle",
-        "deg": 180
-       },
-       "role": "worked-example",
-       "instance": "gen:afpair:1,133"
-      }
-     ],
-     "guided": "gen:afpair:1,132",
-     "check": "gen:afpair:1,137"
-    },
-    {
-     "id": "count_on",
-     "title": "Count on to the total",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Count on to the total",
-       "text": [
-        "Start at the angle you know, 135°, and count on to 180°: first to the next ten, then in tens.",
-        "135 → 140 is 5, 140 → 180 is 40, so the other angle is 45°."
-       ],
-       "math": [
-        "Two angles are supplementary. One of them is 135°. What is the other angle, in degrees?",
-        "Supplementary angles add up to 180°",
-        "180° − 135° = 45°"
-       ],
-       "widget": {
-        "type": "numberline",
-        "from": 130,
-        "to": 180,
-        "step": 10,
-        "marks": [
-         135,
-         180
-        ]
-       },
-       "role": "strategy",
-       "instance": "gen:afpair:1,135",
-       "textFrom": "instance"
-      }
-     ],
-     "guided": "gen:afpair:1,134",
-     "check": "gen:afpair:1,157:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:afpair:0,36",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “Two angles are complementary. One of them is 36°. What is the other angle, in degrees?” A common wrong answer is 144.",
-        "Complementary angles make a right angle, 90°. 180° is for supplementary angles."
-       ],
-       "math": [
-        "Not 144, but 54"
-       ]
-      }
-     ],
-     "guided": "gen:afpair:1,147",
-     "check": "gen:afpair:1,136:mc"
-    },
-    {
-     "id": "vertically_opposite",
-     "title": "Vertically opposite angles are equal",
-     "kind": "conceptual",
-     "needs": [],
-     "scope": {
-      "family": "afcross",
-      "subSkill": "angle-pairs.opposite@2"
-     },
-     "screens": [
-      {
-       "title": "Vertically opposite angles are equal",
-       "text": [
-        "Where two straight lines cross, angles next to each other lie on a straight line, so they add to 180°.",
-        "Go round: x, then 180° − x, then 180° − (180° − x) = x again. So opposite angles are equal, and all four add to 360°."
-       ],
-       "math": [
-        "Two straight lines cross each other, making four angles. One of the angles is 128°. What is the angle opposite it (vertically opposite), in degrees?",
-        "next angle round = 180° − 128° = 52° (straight line)",
-        "the one after = 180° − 52° = 128° (straight line): the opposite angle is 128°"
-       ],
-       "role": "strategy",
-       "instance": "gen:afcross:128,0",
-       "widget": {
-        "type": "angle",
-        "deg": 128,
-        "cross": true,
-        "labels": [
-         "128°",
-         "",
-         "?",
-         ""
-        ]
-       }
-      }
-     ],
-     "guided": "gen:afcross:29,0:mc",
-     "check": "gen:afcross:158,0:mc"
-    },
-    {
-     "id": "crossed_pencils",
-     "title": "Two crossed pencils",
-     "kind": "conceptual",
-     "needs": [],
-     "scope": {
-      "family": "afcross",
-      "subSkill": "angle-pairs.opposite@2"
-     },
-     "screens": [
-      {
-       "title": "Two crossed pencils",
-       "text": [
-        "Hold two straight pencils crossed like an X.",
-        "Open them wider: the top and bottom angles grow together while the two side angles shrink together. Opposite angles stay equal."
-       ],
-       "math": [
-        "Two straight lines cross each other, making four angles. One of the angles is 104°. What is the angle opposite it (vertically opposite), in degrees?",
-        "next angle round = 180° − 104° = 76° (straight line)",
-        "the one after = 180° − 76° = 104° (straight line): the opposite angle is 104°"
-       ],
-       "role": "strategy",
-       "instance": "gen:afcross:104,0",
-       "widget": {
-        "type": "angle",
-        "deg": 104,
-        "cross": true,
-        "labels": [
-         "104°",
-         "",
-         "?",
-         ""
-        ]
-       }
-      }
-     ],
-     "guided": "gen:afcross:152,0:mc",
-     "check": "gen:afcross:70,0"
-    }
-   ],
-   "practice": [
-    "gen:afpair:1,140",
-    "gen:afpair:1,141:mc",
-    "gen:afpair:1,142",
-    "gen:afcross:109,0"
-   ],
-   "transfer": [
-    "gen:afpair:1,143:w",
-    "gen:afcross:109,1:w"
-   ],
-   "retention": [
-    "gen:afpair:0,34",
-    "gen:afcross:89,1:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "afpair",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "afpair",
-     "version": "1.0.0"
-    },
-    {
-     "family": "afcross",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "afpair",
-    "seed": [
-     1,
-     130
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:afpair:1,130",
-     "gen:afpair:0,36",
-     "gen:afpair:1,133"
-    ]
-   }
-  },
-  {
-   "competency": "MATH.probability.sample-space",
-   "title": "Counting the outcomes of choices made in stages",
-   "chapter": [
-    {
-     "title": "Counting the outcomes of choices made in stages",
-     "text": [
-      "If the first stage can happen in a ways and, for each of them, the next stage in b ways, there are a × b outcomes altogether (the multiplication principle)."
-     ],
-     "math": [
-      "There are 3 roads from village P to village Q and 2 roads from Q to R. How many different ways are there to travel from P to R, passing through Q?",
-      "3 × 2 = 6"
-     ],
-     "widget": {
-      "type": "table",
-      "head": [
-       "",
-       "B1",
-       "B2"
-      ],
-      "rows": [
-       [
-        "A1",
-        "A1B1",
-        "A1B2"
-       ],
-       [
-        "A2",
-        "A2B1",
-        "A2B2"
-       ],
-       [
-        "A3",
-        "A3B1",
-        "A3B2"
-       ]
-      ]
-     },
-     "tip": "The numbers of choices were added. Each choice at the first stage can go with every choice at the next, so multiply.",
-     "role": "concept",
-     "instance": "gen:akss:2,3,2,0"
-    },
-    {
-     "title": "Probability from the sample space of two dice or spinners",
-     "text": [
-      "For two stages, the sample space is every pair (first, second). With equally likely numbers, all m × n pairs are equally likely, so P(event) = pairs that fit ÷ all pairs.",
-      "Draw a table: first numbers down the side, second numbers along the top, the total in each cell. Count the cells that fit the event and divide by the number of cells."
-     ],
-     "math": [
-      "Anu uses a spinner numbered 1 to 4 and a spinner numbered 1 to 5. The first gives a number from 1 to 4 and the second a number from 1 to 5, every number equally likely. What is the probability that the total of the two numbers is 3?",
-      "There are 4 × 5 = 20 equally likely pairs",
-      "2 pairs fit: the total of the two numbers is 3",
-      "Probability = 2 ÷ 20 = 1/10"
-     ],
-     "widget": {
-      "type": "table",
-      "head": [
-       "+",
-       "1",
-       "2",
-       "3",
-       "4",
-       "5"
-      ],
-      "rows": [
-       [
-        "1",
-        2,
-        3,
-        4,
-        5,
-        6
-       ],
-       [
-        "2",
-        3,
-        4,
-        5,
-        6,
-        7
-       ],
-       [
-        "3",
-        4,
-        5,
-        6,
-        7,
-        8
-       ],
-       [
-        "4",
-        5,
-        6,
-        7,
-        8,
-        9
-       ]
-      ]
-     }
-    },
-    {
-     "title": "Listing a sample space, and an event as a subset of it",
-     "text": [
-      "The sample space is the list of every possible outcome of an experiment. An event is a part (subset) of the sample space: the outcomes that make it happen.",
-      "Build the outcomes systematically (for two coins: first coin H with each of H, T, then first coin T with each). For an event, go through the sample space one outcome at a time and keep those that fit."
-     ],
-     "math": [
-      "A card is picked at random from cards numbered 1 to 15. Which set is the event \"the number is an odd number\"?",
-      "Go through 1 to 15 and keep each number that is an odd number: {1, 3, 5, 7, 9, 11, 13, 15}"
-     ]
-    },
-    {
-     "title": "Counting arrangements that meet a condition",
-     "text": [
-      "Listing in an organised way (fix the first place, then the next …) makes sure no arrangement is missed or counted twice. A condition fixes or removes some places first.",
-      "Deal with the condition first (put the fixed person at the end, glue the pair together, or choose the last digit), then count the ways to fill the remaining places one at a time and multiply."
-     ],
-     "math": [
-      "In how many different ways can Ravi, Meena and Imran stand in a row if Ravi must stand at the left end?",
-      "Fix the first place; the other 2 can be arranged in 2! ways: 2"
-     ]
-    }
-   ],
-   "diagnostics": [
-    "gen:akss:0,4,4,5",
-    "gen:akss:1,5,5,2",
-    "gen:akss:0,3,4,4"
-   ],
-   "strategies": [
-    {
-     "id": "worked_steps",
-     "title": "Step by step",
-     "kind": "procedural",
-     "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Count the choices at each stage and multiply them. A tree diagram or table shows why: every branch splits into the same number of branches."
-       ],
-       "math": [
-        "A school canteen offers 2 kinds of rice, 5 curries and 4 sweets. A meal is one rice, one curry and one sweet. How many different meals are possible?",
-        "2 × 5 = 10",
-        "10 × 4 = 40"
-       ],
-       "widget": {
-        "type": "table",
-        "head": [
-         "",
-         "B1",
-         "B2",
-         "B3",
-         "B4",
-         "B5"
-        ],
-        "rows": [
-         [
-          "A1",
-          "A1B1",
-          "A1B2",
-          "A1B3",
-          "A1B4",
-          "A1B5"
-         ],
-         [
-          "A2",
-          "A2B1",
-          "A2B2",
-          "A2B3",
-          "A2B4",
-          "A2B5"
-         ]
-        ]
-       },
-       "role": "worked-example",
-       "instance": "gen:akss:1,2,5,4"
-      }
-     ],
-     "guided": "gen:akss:2,3,3,2",
-     "check": "gen:akss:2,3,2,2"
-    },
-    {
-     "id": "tree",
-     "title": "Draw a tree diagram",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "title": "Draw a tree diagram",
-       "text": [
-        "Draw one branch for each first choice. From the end of each branch, draw one branch for each second choice.",
-        "Count the ends of the last branches: that is every possible outcome."
-       ],
-       "math": [
-        "A school canteen offers 4 kinds of rice and 3 curries. A meal is one rice and one curry. How many different meals are possible?",
-        "4 × 3 = 12"
-       ],
-       "widget": {
-        "type": "array",
-        "rows": 4,
-        "cols": 3
-       },
-       "role": "strategy",
-       "instance": "gen:akss:1,4,3,0"
-      }
-     ],
-     "guided": "gen:akss:1,4,3,3",
-     "check": "gen:akss:2,3,2,3:mc"
-    },
-    {
-     "id": "spot_the_mistake",
-     "title": "Spot the mistake",
-     "kind": "conceptual",
-     "needs": [],
-     "screens": [
-      {
-       "role": "misconception",
-       "instance": "gen:akss:2,3,2,5",
-       "title": "A common wrong answer",
-       "text": [
-        "A question: “There are 3 roads from village P to village Q and 2 roads from Q to R, and 5 roads from R to S. How many different ways are there to travel from P to S, passing through Q and R?” A common wrong answer is 10.",
-        "The numbers of choices were added. Each choice at the first stage can go with every choice at the next, so multiply."
-       ],
-       "math": [
-        "Not 10, but 30"
-       ]
-      }
-     ],
-     "guided": "gen:akss:1,5,4,5",
-     "check": "gen:akss:1,4,3,5:mc"
-    },
-    {
-     "id": "akdice_pairs",
-     "title": "Two dice: count the pairs",
-     "kind": "conceptual",
-     "needs": [],
-     "scope": {
-      "family": "akdice",
-      "parameters": [
-       {
-        "index": 2,
-        "values": [
-         0
-        ]
-       }
-      ]
-     },
-     "screens": [
-      {
-       "title": "36 ordered pairs, all equally likely",
-       "role": "concept",
-       "instance": "gen:akdice:6,6,0,7",
-       "widget": {
-        "type": "table",
-        "head": [
-         "+",
-         "1",
-         "2",
-         "3",
-         "4",
-         "5",
-         "6"
-        ],
-        "rows": [
-         [
-          "1",
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-         ],
-         [
-          "2",
-          3,
-          4,
-          5,
-          6,
-          7,
-          8
-         ],
-         [
-          "3",
-          4,
-          5,
-          6,
-          7,
-          8,
-          9
-         ],
-         [
-          "4",
-          5,
-          6,
-          7,
-          8,
-          9,
-          10
-         ],
-         [
-          "5",
-          6,
-          7,
-          8,
-          9,
-          10,
-          11
-         ],
-         [
-          "6",
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-         ]
-        ]
-       },
-       "text": [
-        "With two ordinary dice there are 6 × 6 = 36 ordered pairs (first number, second number). Every cell of the table is one pair, and all 36 pairs are equally likely.",
-        "There are 11 possible totals, 2 to 12, but they are not equally likely: a total is as likely as the number of pairs that make it."
-       ],
-       "math": [
-        "Total 2: (1, 1), 1 pair, so P = 1/36",
-        "Total 7: (1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1), 6 pairs, so P = 1/6",
-        "6 pairs against 1: a total of 7 is 6 times as likely as a total of 2."
-       ]
-      },
-      {
-       "title": "Count the pairs: solved step by step",
-       "role": "strategy",
-       "instance": "gen:akdice:6,6,0,7",
-       "text": [
-        "List the pairs that give the total, count them, and divide by the number of all pairs."
-       ],
-       "math": [
-        "There are 6 × 6 = 36 equally likely pairs",
-        "6 pairs fit: the total of the two numbers is 7",
-        "Probability = 6 ÷ 36 = 1/6",
-        "So the answer is 1/6"
-       ]
-      }
-     ],
-     "guided": "gen:akdice:5,5,0,7:mc",
-     "check": "gen:akdice:4,5,0,5"
-    },
-    {
-     "id": "akdice_order",
-     "title": "Red die, blue die: every order counts",
-     "kind": "conceptual",
-     "needs": [],
-     "scope": {
-      "family": "akdice",
-      "parameters": [
-       {
-        "index": 2,
-        "values": [
-         0
-        ]
-       }
-      ]
-     },
-     "screens": [
-      {
-       "title": "Every order is its own outcome",
-       "role": "concept",
-       "instance": "gen:akdice:6,6,0,9",
-       "widget": {
-        "type": "table",
-        "head": [
-         "+",
-         "1",
-         "2",
-         "3",
-         "4",
-         "5",
-         "6"
-        ],
-        "rows": [
-         [
-          "1",
-          2,
-          3,
-          4,
-          5,
-          6,
-          7
-         ],
-         [
-          "2",
-          3,
-          4,
-          5,
-          6,
-          7,
-          8
-         ],
-         [
-          "3",
-          4,
-          5,
-          6,
-          7,
-          8,
-          9
-         ],
-         [
-          "4",
-          5,
-          6,
-          7,
-          8,
-          9,
-          10
-         ],
-         [
-          "5",
-          6,
-          7,
-          8,
-          9,
-          10,
-          11
-         ],
-         [
-          "6",
-          7,
-          8,
-          9,
-          10,
-          11,
-          12
-         ]
-        ]
-       },
-       "text": [
-        "Colour the first die red and the second blue: red 3 with blue 6 is a different roll from red 6 with blue 3. Both are in the table, as different cells.",
-        "So list the pairs in order: each one is an equally likely outcome out of 36."
-       ],
-       "math": [
-        "The pairs with total 9, in order: (3, 6), (4, 5), (5, 4), (6, 3), 4 pairs",
-        "P(total 9) = 4/36 = 1/9"
-       ]
-      },
-      {
-       "title": "Every order counts: solved step by step",
-       "role": "strategy",
-       "instance": "gen:akdice:6,6,0,9",
-       "text": [
-        "Each step, then the answer."
-       ],
-       "math": [
-        "There are 6 × 6 = 36 equally likely pairs",
-        "4 pairs fit: the total of the two numbers is 9",
-        "Probability = 4 ÷ 36 = 1/9",
-        "So the answer is 1/9"
-       ]
-      }
-     ],
-     "guided": "gen:akdice:5,5,0,9:mc",
-     "check": "gen:akdice:6,6,0,3"
-    }
-   ],
-   "practice": [
-    "gen:akss:1,4,3,2",
-    "gen:akss:1,5,4,4:mc",
-    "gen:akss:1,5,4,3",
-    "gen:akdice:3,4,2,0",
-    "gen:akssl:1,1,1",
-    "gen:aksarr:0,3,0"
-   ],
-   "transfer": [
-    "gen:akss:1,4,2,3:w",
-    "gen:akdice:4,5,0,2:w"
-   ],
-   "retention": [
-    "gen:akss:1,2,5,2",
-    "gen:akdice:3,6,1,4:mc"
-   ],
-   "probes": [],
-   "pool": {
-    "family": "akss",
-    "version": "1.0.0"
-   },
-   "pools": [
-    {
-     "family": "akss",
-     "version": "1.0.0"
-    },
-    {
-     "family": "akdice",
-     "version": "1.0.0"
-    },
-    {
-     "family": "akssl",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aksarr",
-     "version": "1.0.0"
-    }
-   ],
-   "provenance": {
-    "origin": "synthesised",
-    "policy": "library@2+template@2",
-    "family": "akss",
-    "seed": [
-     2,
-     3,
-     2,
-     0
-    ],
-    "blueprintVersion": "1.0.0",
-    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-    "aiAssisted": true,
-    "licence": "CC0",
-    "examples": [
-     "gen:akss:2,3,2,0",
-     "gen:akss:2,3,2,5",
-     "gen:akss:1,2,5,4"
     ]
    }
   },

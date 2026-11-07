@@ -214,7 +214,9 @@ function mathematicalExplanation(step: Step, family: Def): string {
     multiply: () => near(nums.reduce((s, x) => s * x, 1)),
     divide: () => nums.length === 2 && nums[1] !== 0 && near(nums[0] / nums[1]),
   };
-  if (truth[step.op] && !(nums.every(clean) && clean(v) && truth[step.op]())) return "";
+  // only numbers can be checked: a symbolic step ("2 × 3x × 8 = 48x") is stated as written
+  const numeric = nums.every(Number.isFinite) && Number.isFinite(v);
+  if (truth[step.op] && numeric && !(nums.every(clean) && clean(v) && truth[step.op]())) return "";
   // the arithmetic is said plainly: the competency's name ("— Calculate percentages.") or the family's idea sentence is not
   // tagged onto every step (it read as noise, repeated the idea, and could name the wrong skill)
   void why;

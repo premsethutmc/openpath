@@ -16,13 +16,6 @@ import { question, questions } from "../../../packages/learning/src/content";
 import { useReviewFixture } from "../../../packages/learning/src/evidence";
 import { checkCompetency } from "../../../packages/learning/src/compiler";
 
-/**
- * grade7-split@1, open defect (reported, not hidden): after two early wrong answers, the shared engine keeps the new
- * one-family Grade 7 inequations skill at "learning" however many fresh right answers follow (99 of 101 right, delayed
- * check passed), so the learner never reaches "verified". A learner who answers right from the start is verified. Listed
- * here so the rest of the release stays guarded; remove the entry when the cause is fixed.
- */
-const KNOWN_STALLS = new Set(["MATH.algebra.inequations-intro"]);
 const competenciesOf = (board: "cbse" | "tn") => {
   const r = boardFor(board, 7)!;
   const ids = allOutcomesOf(r).flatMap(({ outcome }) => outcome.mapping.competencies.filter((m) => m.status === "accepted").map((m) => (graph.byId.has(m.id) ? graph.evidenceTarget(m.id) : m.id)));
@@ -74,7 +67,6 @@ for (const board of ["cbse", "tn"] as const) {
           else awaitingMark.push(skill);
           continue;
         }
-        if (status !== "verified" && KNOWN_STALLS.has(skill)) { console.log(`known stall: ${skill} ended ${status}`); continue; }
         if (status !== "verified") failures.push(`${skill}: ended ${status} (last phase ${d.trace.slice(-3).join(" | ")})`);
       }
       assert.deepEqual(failures, [], `${release.id}: ${failures.length} of ${ids.length} competencies did not complete`);
