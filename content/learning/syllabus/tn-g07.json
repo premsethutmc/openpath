@@ -1757,15 +1757,29 @@
      ],
      "difficulty": "intro",
      "assessment": "auto",
-     "competencies": [
+     "competencies": [],
+     "proposed": [
       {
-       "id": "MATH.algebra.inequalities",
-       "fit": "partial"
+       "id": "MATH.algebra.inequations-intro",
+       "name": "Solve simple inequations over whole numbers or integers",
+       "strand": "algebra",
+       "gradeRange": [
+        7,
+        7
+       ],
+       "prerequisites": [
+        "MATH.algebra.linear-intro",
+        "MATH.number.integers",
+        "MATH.algebra.equality-inequality"
+       ],
+       "supports": [
+        "MATH.number.number-line"
+       ],
+       "why": "grade7-split@1: the Tamil Nadu Grade 7 inequations (whole numbers or integers, solution set on a number line) are introductory work; MATH.algebra.inequalities is the Grade 11 topic (real numbers, intervals, systems), so a Grade 7 learner was taught from Grade 9–11 questions."
       }
      ],
-     "proposed": [],
      "mapped": [
-      "MATH.algebra.inequalities"
+      "MATH.algebra.inequations-intro"
      ]
     }
    ]

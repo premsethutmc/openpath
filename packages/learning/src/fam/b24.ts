@@ -442,7 +442,8 @@ export const B24: Def[] = [
     id: "ahfibp",
     arity: 2,
     title: "Patterns in the Virahanka-Fibonacci numbers",
-    competency: SEQ,
+    // grade7-split@1: the Grade 7 competency (was SEQ)
+    competency: "MATH.sequences.virahanka-numbers",
     skill: "MLY.seq.virahanka",
     type: "integer",
     mc: true,

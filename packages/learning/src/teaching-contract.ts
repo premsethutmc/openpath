@@ -58,7 +58,10 @@ export interface LessonBlock {
   title: string;
   text: string[];
   instance: string | null;
-  worked: { question: string; steps: { expression: string; explanation: string }[]; verified: boolean; source: "contract" | "kernel" | "compatibility" | "family-steps" } | null;
+  worked: { question: string; options?: string[]; steps: { expression: string; explanation: string }[]; verified: boolean; source: "contract" | "kernel" | "compatibility" | "family-steps" } | null;
+  /** grade7-lessons@1: the section question's own picture (a table, chart or figure the question refers to), when the
+   * section has no other picture: a worked solution of "the table in the picture" must show the table. */
+  figure?: { type: string; [k: string]: unknown } | null;
   /** A picture of the question's own mathematical object (teaching-contract@1 families). */
   representation: Representation | null;
   /** A typed picture from the teaching presentation (kernel and adapter families). */
@@ -275,7 +278,11 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
     }
     const label = role === "worked-example" ? (worked?.verified ? ROLE_LABEL["worked-example"] : "Method") : ROLE_LABEL[role];
     const exempt = EXEMPTIONS.entries.filter((e) => e.competency === module.competency && e.title === screen.title && violations.includes(e.rule)).map(({ rule, reason }) => ({ rule, reason }));
-    return { role, label, title: screen.title, text: screen.text, instance: p?.id ?? null, worked, representation, visual, widget, claims: { verified, review }, violations: violations.filter((v) => !exempt.some((e) => e.rule === v)), exempt };
+    // grade7-lessons@1: a worked question shows its own options, and its own figure when the section draws nothing else
+    const q = p ? question(p.id) : null;
+    if (worked && q?.options?.length) worked = { ...worked, options: q.options };
+    const figure = q?.figure && !representation && !visual && !widget ? q.figure : null;
+    return { role, label, title: screen.title, text: screen.text, instance: p?.id ?? null, worked, representation, visual, widget, figure, claims: { verified, review }, violations: violations.filter((v) => !exempt.some((e) => e.rule === v)), exempt };
   });
   return SCOPE.has(module.competency) ? withoutRepetition(blocks) : blocks;
 }
@@ -321,7 +328,8 @@ export function withoutRepetition(blocks: LessonBlock[]): LessonBlock[] {
     }
     // a quoted question that refers to a picture the section does not draw
     const hasPicture = picture && !!k;
-    return { ...b, label, text: hasPicture ? text : text.map((line) => line.replace(/, as in the picture(?=[.?])/g, "")), worked, ...(picture ? {} : { representation: null, visual: null, widget: null }) };
+    const ownFigure = !!b.figure && !!worked;
+    return { ...b, label, text: hasPicture || ownFigure ? text : text.map((line) => line.replace(/, as in the picture(?=[.?])/g, "")), worked, ...(picture ? {} : { representation: null, visual: null, widget: null }), figure: ownFigure ? b.figure : null };
   });
   // the journey is concept, then worked example: a checked worked example comes straight after the concept sections
   const w = out.findIndex((b) => b.role === "worked-example" && b.worked?.verified);

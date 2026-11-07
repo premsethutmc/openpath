@@ -1485,7 +1485,7 @@
     "idea": "Per cent means out of a hundred: a percentage of an amount is that many parts out of every hundred equal parts of it.",
     "method": "Find ten per cent (divide by ten) or five per cent (divide by twenty), then take as many lots of it as the percentage needs."
    },
-   "fingerprint": "ffc1abbb",
+   "fingerprint": "05d45983",
    "validation": {
     "family": "pct",
     "deterministic": {
@@ -17703,7 +17703,7 @@
    ],
    "teach": {
     "idea": "Measures in two units work like tens and ones, but the change-over is 100 cm = 1 m, 1000 g = 1 kg and 1000 mL = 1 L.",
-    "method": "Add or subtract the small units first. If the small units reach the change-over number, change them into 1 large unit; if there are too few to subtract, change 1 large unit into small units. Then do the large units.",
+    "method": "Add or subtract the amounts in the smaller unit first. If they reach the change-over number, change them into 1 of the bigger unit; if there are too few to subtract, change 1 of the bigger unit into the smaller unit. Then do the bigger unit.",
     "alternatives": [
      {
       "id": "all_small",
@@ -17716,7 +17716,7 @@
      }
     ]
    },
-   "fingerprint": "41c5fe67",
+   "fingerprint": "f5154080",
    "validation": {
     "family": "aemix",
     "deterministic": {
@@ -17778,8 +17778,8 @@
     "carry-lost (procedural): The extra mL were changed into L but those L were not added on."
    ],
    "teach": {
-    "idea": "Multiplying a measure is repeated adding: multiply the small units and the large units, then change extra small units into large ones.",
-    "method": "Multiply the small units; take out every full 100 cm (or 1000 g, 1000 mL) as a large unit. Multiply the large units and add the ones you took out.",
+    "idea": "Multiplying a measure is repeated adding: multiply the amounts in both units, then change the extra amount in the smaller unit into the bigger unit.",
+    "method": "Multiply the amount in the smaller unit; take out every full 100 cm (or 1000 g, 1000 mL) as 1 m (or 1 kg, 1 L). Multiply the amount in the bigger unit and add the ones you took out.",
     "alternatives": [
      {
       "id": "all_small",
@@ -17792,7 +17792,7 @@
      }
     ]
    },
-   "fingerprint": "f888c444",
+   "fingerprint": "09a7312b",
    "validation": {
     "family": "aemulm",
     "deterministic": {
@@ -17854,8 +17854,8 @@
     "write-side-by-side (conceptual): The two numbers were written side by side; 75 m needs 3 places, so empty places are filled with zeros."
    ],
    "teach": {
-    "idea": "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL and 1 km = 1000 m. A measure in two units is the large part changed into small units, plus the small part.",
-    "method": "Multiply the large units by the number of small units in one large unit, then add the small units. Check the small part fills its places: if it has too few digits, put zeros in front of it.",
+    "idea": "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL and 1 km = 1000 m. A measure in two units is the part in the bigger unit changed into the smaller unit, plus the part already in the smaller unit.",
+    "method": "Multiply the amount in the bigger unit by how many of the smaller unit make one of the bigger unit, then add the amount in the smaller unit. Check the small part fills its places: if it has too few digits, put zeros in front of it.",
     "alternatives": [
      {
       "id": "place_chart",
@@ -17868,7 +17868,7 @@
      }
     ]
    },
-   "fingerprint": "ea5efa43",
+   "fingerprint": "b0fa1093",
    "validation": {
     "family": "aeconv",
     "deterministic": {
@@ -17944,7 +17944,7 @@
      }
     ]
    },
-   "fingerprint": "bee43bce",
+   "fingerprint": "a2f547ca",
    "validation": {
     "family": "aeparts",
     "deterministic": {
@@ -19929,8 +19929,8 @@
     "change-100 (recall): The L left over were changed into 100 mL each; 1 L = 1000 mL."
    ],
    "teach": {
-    "idea": "Dividing a measure shares the large units first; whatever large units are left over are changed into small units and shared with the small units.",
-    "method": "Divide the large units. Change the ones left over into small units (× 100 or × 1000), add the small units, and divide those. Check: multiply the answer back.",
+    "idea": "Dividing a measure shares the bigger unit first; whatever is left over is changed into the smaller unit and shared with the amount already in the smaller unit.",
+    "method": "Divide the amount in the bigger unit. Change what is left over into the smaller unit (× 100 or × 1000), add the amount in the smaller unit, and divide that. Check: multiply the answer back.",
     "alternatives": [
      {
       "id": "all_small",
@@ -19943,7 +19943,7 @@
      }
     ]
    },
-   "fingerprint": "3472fed5",
+   "fingerprint": "f7c59669",
    "validation": {
     "family": "aedivm",
     "deterministic": {
@@ -20000,8 +20000,8 @@
     "left-dropped (procedural): The mg left over were dropped; 18 mg remain after taking out the whole g."
    ],
    "teach": {
-    "idea": "1 m is a hundred cm and 1 cm is ten mm; 1 kg, 1 g, 1 L and 1 km are each a thousand of the smaller unit (g, mg, mL and m). To change into the larger unit, see how many whole large units fit, and what is left.",
-    "method": "Divide by how many small units make one large unit (a hundred, ten or a thousand): the whole number of times is the large unit; the remainder is the small unit.",
+    "idea": "1 m is a hundred cm and 1 cm is ten mm; 1 kg, 1 g, 1 L and 1 km are each a thousand of the smaller unit (g, mg, mL and m). To change into the larger unit, see how many whole ones of the larger unit fit, and what is left.",
+    "method": "Divide by how many of the smaller unit make one of the larger unit (a hundred, ten or a thousand): the whole number of times is the amount in the larger unit; the remainder stays in the smaller unit.",
     "alternatives": [
      {
       "id": "split_digits",
@@ -20014,7 +20014,7 @@
      }
     ]
    },
-   "fingerprint": "31827ad1",
+   "fingerprint": "ebee2c73",
    "validation": {
     "family": "aeconvu",
     "deterministic": {
@@ -20141,7 +20141,7 @@
    ],
    "teach": {
     "idea": "Weights can be compared only in the same unit: 1 kg is a thousand grams and 1 g is a thousand milligrams.",
-    "method": "Change the weight written in two units into the small unit (kilograms into grams, grams into milligrams), then compare the numbers.",
+    "method": "Change the weight written in two units into the smaller unit (kilograms into grams, grams into milligrams), then compare the numbers.",
     "alternatives": [
      {
       "id": "large_first",
@@ -20154,7 +20154,7 @@
      }
     ]
    },
-   "fingerprint": "ad3fc665",
+   "fingerprint": "ac1e461c",
    "validation": {
     "family": "aewcmp",
     "deterministic": {
@@ -21347,8 +21347,8 @@
    "id": "aeineqz",
    "version": "1.0.0",
    "title": "Solving an inequation over whole numbers, natural numbers or integers",
-   "competency": "MATH.algebra.inequalities",
-   "skill": "MATH.algebra.inequalities",
+   "competency": "MATH.algebra.inequations-intro",
+   "skill": "MATH.algebra.inequations-intro",
    "type": "set",
    "multipleChoice": false,
    "domain": [
@@ -21410,7 +21410,7 @@
      }
     ]
    },
-   "fingerprint": "35e31a6d",
+   "fingerprint": "b216acc9",
    "validation": {
     "family": "aeineqz",
     "deterministic": {
@@ -26364,7 +26364,7 @@
      }
     ]
    },
-   "fingerprint": "509f45e4",
+   "fingerprint": "0b9adefe",
    "validation": {
     "family": "agmeas",
     "deterministic": {
@@ -27996,7 +27996,7 @@
    "id": "ahfib",
    "version": "1.0.0",
    "title": "A Virahanka-Fibonacci style sequence",
-   "competency": "MATH.sequences.explicit-recursive-rules",
+   "competency": "MATH.sequences.virahanka-numbers",
    "skill": "MLY.seq.virahanka",
    "type": "integer",
    "multipleChoice": true,
@@ -28042,8 +28042,8 @@
       "title": "Virahanka's rhythms",
       "kind": "conceptual",
       "text": [
-       "Virahanka counted rhythms made of short (1 beat) and long (2 beat) syllables: 1, 2, 3, 5, 8 … rhythms for 1, 2, 3, 4, 5 beats.",
-       "A rhythm of n beats ends in a short syllable (after n − 1 beats) or a long one (after n − 2 beats), so the counts add."
+       "Virahanka counted rhythms made of short syllables (one beat) and long syllables (two beats).",
+       "A rhythm ends in a short syllable (after a rhythm one beat shorter) or a long one (after a rhythm two beats shorter), so each count is the sum of the two counts before it."
       ]
      },
      {
@@ -28057,7 +28057,7 @@
      }
     ]
    },
-   "fingerprint": "313fc8e7",
+   "fingerprint": "5316c24e",
    "validation": {
     "family": "ahfib",
     "deterministic": {
@@ -29609,8 +29609,8 @@
    "id": "ahrhy",
    "version": "1.0.0",
    "title": "Counting rhythms, climbs and tilings: Virahanka numbers",
-   "competency": "MATH.sequences.explicit-recursive-rules",
-   "skill": "MATH.sequences.explicit-recursive-rules",
+   "competency": "MATH.sequences.virahanka-numbers",
+   "skill": "MATH.sequences.virahanka-numbers",
    "type": "integer",
    "multipleChoice": true,
    "domain": [
@@ -29649,8 +29649,8 @@
     "wrong-rest (procedural): The rest was taken to have length 16. After a short (1) part, 17 remains."
    ],
    "teach": {
-    "idea": "Every arrangement of length n ends with a short part (after an arrangement of length n − 1) or a long part (after one of length n − 2). So the counts follow Virahanka's rule: each is the sum of the two before (1, 2, 3, 5, 8, 13, …).",
-    "method": "Start with length 1: 1 way, length 2: 2 ways. Add the last two counts to get the next, up to the length asked. For arrangements that must start with a given part, count the arrangements of what is left.",
+    "idea": "Every arrangement ends with a short part (after an arrangement one beat shorter) or a long part (after an arrangement two beats shorter). So the counts follow Virahanka's rule: each count is the sum of the two counts before it.",
+    "method": "Start with the shortest lengths: a length of one beat has one way, a length of two beats has two ways. Add the last two counts to get the next, up to the length asked. For arrangements that must start with a given part, count the arrangements of what is left.",
     "alternatives": [
      {
       "id": "list_small",
@@ -29672,7 +29672,7 @@
      }
     ]
    },
-   "fingerprint": "7429a068",
+   "fingerprint": "1294f731",
    "validation": {
     "family": "ahrhy",
     "deterministic": {
@@ -36075,7 +36075,7 @@
      }
     ]
    },
-   "fingerprint": "2fd3cf8b",
+   "fingerprint": "6bdad981",
    "validation": {
     "family": "ajsi",
     "deterministic": {
@@ -86959,7 +86959,7 @@
    "id": "ahfibp",
    "version": "1.0.0",
    "title": "Patterns in the Virahanka-Fibonacci numbers",
-   "competency": "MATH.sequences.explicit-recursive-rules",
+   "competency": "MATH.sequences.virahanka-numbers",
    "skill": "MLY.seq.virahanka",
    "type": "integer",
    "multipleChoice": true,
@@ -87022,7 +87022,7 @@
      }
     ]
    },
-   "fingerprint": "9da6cb0b",
+   "fingerprint": "7bc0d4d2",
    "validation": {
     "family": "ahfibp",
     "deterministic": {

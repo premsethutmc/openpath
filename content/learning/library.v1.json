@@ -653,7 +653,7 @@
       {
        "title": "The middle term is 2ab: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Watch the middle term: it is a×b and b×a together, so it is twice the product, 2ab."
        ],
        "math": [
         "(5x + 7)² = 25x² + 70x + 49 (every term times every term)",
@@ -693,7 +693,7 @@
       {
        "title": "The sign of the middle term: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Watch the sign of the middle term: with a plus inside the bracket, all three terms are added."
        ],
        "math": [
         "(5x + 4)² = 25x² + 40x + 16 (every term times every term)",
@@ -1861,7 +1861,7 @@
       {
        "title": "The median is not the mean: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Put the values in order first; the median is the middle one, not the total shared equally."
        ],
        "math": [
         "In order: 21, 25, 41, 47, 62, 64, 74, 80, 81 (9 values)",
@@ -1910,7 +1910,7 @@
       {
        "title": "Two middle values: take halfway: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Put the values in order; with an even number of values, the median is halfway between the two middle ones."
        ],
        "math": [
         "In order: 14, 58, 66, 75, 81, 95 (6 values)",
@@ -2183,7 +2183,7 @@
       {
        "title": "Count balls, not colours: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Count every ball, not the colours: each ball is equally likely, so a colour's chance is its share of all the balls."
        ],
        "math": [
         "All the balls: 2 red + 6 blue + 2 green = 10, each equally likely",
@@ -3038,7 +3038,7 @@
       {
        "title": "Read the scale; do not assume ten: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Read the numbers on the scale to find what one line stands for before reading the bar."
        ],
        "math": [
         "The bar chart shows saplings planted by each class. Read the scale carefully. How many saplings were planted by Class 3?",
@@ -3086,7 +3086,7 @@
       {
        "title": "Read the scale; do not assume 10: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Read the numbers on the scale to find what one line stands for; do not assume each line is 10."
        ],
        "math": [
         "Thu: 2; Fri: 14 (scale 2 per line)",
@@ -5072,7 +5072,7 @@
       {
        "title": "Not both numbers added: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Ask what added to 2 makes 10: take 2 away from 10 to find the box; do not add the two numbers."
        ],
        "math": [
         "□ + 2 = 10",
@@ -5118,7 +5118,7 @@
       {
        "title": "Not both numbers added: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Ask what taken from 18 leaves 3: the box is 18 take away 3; do not add the two numbers."
        ],
        "math": [
         "18 − □ = 3",
@@ -5164,7 +5164,7 @@
       {
        "title": "Add it back, do not take it away again: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "The box had 7 taken away to leave 11, so add the 7 back on to find it."
        ],
        "math": [
         "□ − 7 = 11",
@@ -5394,7 +5394,7 @@
       {
        "title": "Do the opposite, not the same again: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Undo adding by taking away the same number from both sides, not by adding it again."
        ],
        "math": [
         "Find x: x + 11 = 25.",
@@ -5434,7 +5434,7 @@
       {
        "title": "Do the opposite, not the same again: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Undo taking away by adding the number back to both sides, not by taking it away again."
        ],
        "math": [
         "Find x: x − 3 = 6.",
@@ -5474,7 +5474,7 @@
       {
        "title": "Divide by the number next to x: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "The number next to x multiplies it, so divide both sides by that number; do not take it away."
        ],
        "math": [
         "Find x: 2x = 36.",
@@ -5514,7 +5514,7 @@
       {
        "title": "Multiply, do not add: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "x was divided by the number, so multiply both sides by it; do not add it."
        ],
        "math": [
         "Find x: x ÷ 7 = 17.",
@@ -11420,31 +11420,6 @@
      "instance": "gen:lineq:2,-1,7"
     },
     {
-     "title": "Solving an inequation over whole numbers, natural numbers or integers",
-     "text": [
-      "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the allowed side of the boundary: below it for < or ≤, above it for > or ≥ (include the boundary itself only for ≤ or ≥).",
-      "Solve it like an equation to find the boundary (reverse the sign if you divide by a negative number). Then list the allowed numbers on the correct side; include the boundary only for ≤ or ≥. Show them as dots on a number line."
-     ],
-     "math": [
-      "x is a whole number. Solve 4x − 3 ≤ 10 and list every x in the solution set, separated by commas.",
-      "Undo the + or − and divide by 4: the boundary is 13/4",
-      "The whole numbers that fit: 0, 1, 2, 3"
-     ],
-     "widget": {
-      "type": "numberline",
-      "from": 0,
-      "to": 10,
-      "marks": [
-       0,
-       1,
-       2,
-       3
-      ]
-     },
-     "role": "worked-example",
-     "instance": "gen:aeineqz:0,4,-3,10,1"
-    },
-    {
      "title": "Solving a system of two linear inequalities",
      "text": [
       "A system of inequalities in one variable asks for the numbers that satisfy every inequality at the same time: the overlap (intersection) of their solution sets.",
@@ -11464,9 +11439,7 @@
        4,
        11
       ]
-     },
-     "role": "worked-example",
-     "instance": "gen:aeineqs:4,7,2,1,3"
+     }
     },
     {
      "title": "Modelling a word problem with a linear inequality",
@@ -11478,9 +11451,7 @@
       "Imran scored 82 and 53 marks (out of 100) in the first two tests. To get a grade, the average of three tests must be at least 50. Let x be the marks in the third test. Write the possible values of x as an inequality (remember x cannot be more than 100).",
       "Write the condition as an inequality: (82 + 53 + x)/3 ≥ 50",
       "Solve it: 15 <= x <= 100"
-     ],
-     "role": "worked-example",
-     "instance": "gen:aeineqw:0,82,53,2"
+     ]
     },
     {
      "title": "Neighbourhoods of a point in interval notation",
@@ -11502,9 +11473,7 @@
        -8,
        -6
       ]
-     },
-     "role": "worked-example",
-     "instance": "gen:aenbhd:1,-8,2"
+     }
     }
    ],
    "diagnostics": [
@@ -11602,7 +11571,8 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Solve linear equations. If a step is slow, practise that skill first."
+        "Each step builds on another skill: Solve linear equations. If a step is slow, practise that skill first.",
+        "Then the method is: Get the x term alone as for an equation. When you divide by the coefficient, reverse the sign if it is negative. Check with one number from your answer."
        ]
       }
      ],
@@ -11614,19 +11584,18 @@
     "gen:lineq:4,12,4",
     "gen:lineq:3,11,-16:mc",
     "gen:lineq:3,6,15",
-    "gen:aeineqz:2,4,5,14,1",
     "gen:aeineqs:-7,4,2,4,2",
     "gen:aeineqw:0,84,80,9",
     "gen:aenbhd:2,-9,9"
    ],
    "transfer": [
     "gen:lineq:2,15,1:w",
-    "gen:aeineqz:2,5,7,18,0:w",
-    "gen:aeineqs:6,7,3,1,3:w"
+    "gen:aeineqs:6,7,3,1,3:w",
+    "gen:aeineqw:0,75,31,0:w"
    ],
    "retention": [
     "gen:lineq:-6,-12,-6",
-    "gen:aeineqz:2,4,-1,7,1"
+    "gen:aeineqs:6,10,5,4,2:mc"
    ],
    "probes": [],
    "pool": {
@@ -11636,10 +11605,6 @@
    "pools": [
     {
      "family": "lineq",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aeineqz",
      "version": "1.0.0"
     },
     {
@@ -22479,7 +22444,8 @@
     "gen:actile:6,7,1"
    ],
    "transfer": [
-    "gen:actile:6,6,4:w"
+    "gen:actile:6,6,4:w",
+    "gen:actile:6,8,2:w"
    ],
    "retention": [
     "gen:actile:4,4,0",
@@ -26904,9 +26870,9 @@
      ],
      "math": [
       "Add: 2 kg 800 g + 1 kg 400 g. Write the answer as (kg, g); for example, 3 kg 45 g is (3, 45).",
-      "Small units: 800 + 400 = 1200",
-      "1200 = 1000 + 200: change 1000 of the small units into 1 large unit",
-      "Large units: 2 + 1 + 1 carried = 4"
+      "g: 800 + 400 = 1200 g",
+      "1200 g = 1000 g + 200 g: change 1000 g into 1 kg",
+      "kg: 2 + 1 + 1 carried = 4 kg"
      ],
      "tip": "1200 g was left as it is; 1000 g make 1 kg, so change 1000 of them into 1 kg.",
      "role": "concept",
@@ -26915,27 +26881,27 @@
     {
      "title": "Multiplying a measure in two units",
      "text": [
-      "Multiplying a measure is repeated adding: multiply the small units and the large units, then change extra small units into large ones.",
-      "Multiply the small units; take out every full 100 cm (or 1000 g, 1000 mL) as a large unit. Multiply the large units and add the ones you took out."
+      "Multiplying a measure is repeated adding: multiply the amounts in both units, then change the extra amount in the smaller unit into the bigger unit.",
+      "Multiply the amount in the smaller unit; take out every full 100 cm (or 1000 g, 1000 mL) as 1 m (or 1 kg, 1 L). Multiply the amount in the bigger unit and add the ones you took out."
      ],
      "math": [
       "Work out 4 × 1 m 60 cm. Write the answer as (m, cm); for example, 3 m 45 cm is (3, 45).",
-      "Small units: 60 × 4 = 240",
-      "240 small units make 2 large units and some left over",
-      "Large units: 1 × 4 + 2 = 6"
+      "cm: 60 × 4 = 240 cm",
+      "240 cm make 2 m and 40 cm left over",
+      "m: 1 × 4 + 2 = 6 m"
      ]
     },
     {
      "title": "Dividing a measure in two units",
      "text": [
-      "Dividing a measure shares the large units first; whatever large units are left over are changed into small units and shared with the small units.",
-      "Divide the large units. Change the ones left over into small units (× 100 or × 1000), add the small units, and divide those. Check: multiply the answer back."
+      "Dividing a measure shares the bigger unit first; whatever is left over is changed into the smaller unit and shared with the amount already in the smaller unit.",
+      "Divide the amount in the bigger unit. Change what is left over into the smaller unit (× 100 or × 1000), add the amount in the smaller unit, and divide that. Check: multiply the answer back."
      ],
      "math": [
       "Divide 24 L 250 mL into 5 equal parts. How much is each part? Write the answer as (L, mL); for example, 3 L 45 mL is (3, 45).",
-      "Large units: 24 ÷ 5 = 4, with 4 left over",
-      "Change the 4 left over into small units and add the 250: 4250",
-      "Small units: 4250 ÷ 5 = 850"
+      "L: 24 ÷ 5 = 4, with 4 L left over",
+      "Change the 4 L left over into mL and add the 250 mL: 4250 mL",
+      "mL: 4250 ÷ 5 = 850 mL"
      ]
     }
    ],
@@ -26954,13 +26920,13 @@
       {
        "title": "The method",
        "text": [
-        "Add or subtract the small units first. If the small units reach the change-over number, change them into 1 large unit; if there are too few to subtract, change 1 large unit into small units. Then do the large units."
+        "Add or subtract the amounts in the smaller unit first. If they reach the change-over number, change them into 1 of the bigger unit; if there are too few to subtract, change 1 of the bigger unit into the smaller unit. Then do the bigger unit."
        ],
        "math": [
         "Add: 2 m 80 cm + 6 m 30 cm. Write the answer as (m, cm); for example, 3 m 45 cm is (3, 45).",
-        "Small units: 80 + 30 = 110",
-        "110 = 100 + 10: change 100 of the small units into 1 large unit",
-        "Large units: 2 + 6 + 1 carried = 9"
+        "cm: 80 + 30 = 110 cm",
+        "110 cm = 100 cm + 10 cm: change 100 cm into 1 m",
+        "m: 2 + 6 + 1 carried = 9 m"
        ],
        "role": "worked-example",
        "instance": "gen:aemix:0,0,56,126"
@@ -26983,9 +26949,9 @@
        ],
        "math": [
         "Add: 2 L 850 mL + 5 L 250 mL. Write the answer as (L, mL); for example, 3 L 45 mL is (3, 45).",
-        "Small units: 850 + 250 = 1100",
-        "1100 = 1000 + 100: change 1000 of the small units into 1 large unit",
-        "Large units: 2 + 5 + 1 carried = 8"
+        "mL: 850 + 250 = 1100 mL",
+        "1100 mL = 1000 mL + 100 mL: change 1000 mL into 1 L",
+        "L: 2 + 5 + 1 carried = 8 L"
        ],
        "role": "strategy",
        "instance": "gen:aemix:2,0,57,105"
@@ -27027,7 +26993,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Add and subtract multi-digit numbers with regrouping; Convert common metric units. If a step is slow, practise that skill first.",
-        "Then the method is: Add or subtract the small units first. If the small units reach the change-over number, change them into 1 large unit; if there are too few to subtract, change 1 large unit into small units. Then do the large units."
+        "Then the method is: Add or subtract the amounts in the smaller unit first. If they reach the change-over number, change them into 1 of the bigger unit; if there are too few to subtract, change 1 of the bigger unit into the smaller unit. Then do the bigger unit."
        ]
       }
      ],
@@ -27098,12 +27064,12 @@
     {
      "title": "Changing a measure into the smaller unit",
      "text": [
-      "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL and 1 km = 1000 m. A measure in two units is the large part changed into small units, plus the small part."
+      "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL and 1 km = 1000 m. A measure in two units is the part in the bigger unit changed into the smaller unit, plus the part already in the smaller unit."
      ],
      "math": [
       "4 L 605 mL = how many mL?",
-      "4 × 1000 = 4000",
-      "4000 + 605 = 4605"
+      "4 L = 4 × 1000 mL = 4000 mL",
+      "4000 mL + 605 mL = 4605 mL"
      ],
      "widget": {
       "type": "table",
@@ -27134,7 +27100,7 @@
      ],
      "math": [
       "How many bottles of 500 mL together make 5 L?",
-      "5 units are 5000 small units",
+      "5 L = 5 × 1000 mL = 5000 mL",
       "5000 ÷ 500 = 10 parts"
      ],
      "widget": {
@@ -27155,13 +27121,14 @@
     {
      "title": "Changing a measure into the larger unit and what is left",
      "text": [
-      "1 m is a hundred cm and 1 cm is ten mm; 1 kg, 1 g, 1 L and 1 km are each a thousand of the smaller unit (g, mg, mL and m). To change into the larger unit, see how many whole large units fit, and what is left.",
-      "Divide by how many small units make one large unit (a hundred, ten or a thousand): the whole number of times is the large unit; the remainder is the small unit."
+      "1 m is a hundred cm and 1 cm is ten mm; 1 kg, 1 g, 1 L and 1 km are each a thousand of the smaller unit (g, mg, mL and m). To change into the larger unit, see how many whole ones of the larger unit fit, and what is left.",
+      "Divide by how many of the smaller unit make one of the larger unit (a hundred, ten or a thousand): the whole number of times is the amount in the larger unit; the remainder stays in the smaller unit."
      ],
      "math": [
       "7560 mg = how many g and mg? Write the answer as (g, mg); for example, 3 g 5 mg is (3, 5).",
-      "7560 ÷ 1000: 7 whole large units",
-      "7560 − 7000 = 560 small units left"
+      "7560 mg ÷ 1000: 7 whole g",
+      "7560 mg − 7000 mg = 560 mg left",
+      "7 g 560 mg, written (g, mg): (7, 560)"
      ],
      "role": "worked-example",
      "instance": "gen:aeconvu:5,168"
@@ -27183,12 +27150,12 @@
      "title": "Comparing weights in different units with <, = or >",
      "text": [
       "Weights can be compared only in the same unit: 1 kg is a thousand grams and 1 g is a thousand milligrams.",
-      "Change the weight written in two units into the small unit (kilograms into grams, grams into milligrams), then compare the numbers."
+      "Change the weight written in two units into the smaller unit (kilograms into grams, grams into milligrams), then compare the numbers."
      ],
      "math": [
       "Which sign goes in the box: 8 g 250 mg ☐ 8340 mg? Choose <, = or >.",
-      "8 large units 250 small units = 8250 small units",
-      "Compare 8250 and 8340"
+      "8 g 250 mg = 8 × 1000 + 250 = 8250 mg",
+      "8250 mg < 8340 mg, so the sign is <"
      ],
      "role": "worked-example",
      "instance": "gen:aewcmp:1,143"
@@ -27235,12 +27202,12 @@
       {
        "title": "The method",
        "text": [
-        "Multiply the large units by the number of small units in one large unit, then add the small units. Check the small part fills its places: if it has too few digits, put zeros in front of it."
+        "Multiply the amount in the bigger unit by how many of the smaller unit make one of the bigger unit, then add the amount in the smaller unit. Check the small part fills its places: if it has too few digits, put zeros in front of it."
        ],
        "math": [
         "4 L 955 mL = how many mL?",
-        "4 × 1000 = 4000",
-        "4000 + 955 = 4955"
+        "4 L = 4 × 1000 mL = 4000 mL",
+        "4000 mL + 955 mL = 4955 mL"
        ],
        "widget": {
         "type": "table",
@@ -27280,8 +27247,8 @@
        ],
        "math": [
         "6 L 745 mL = how many mL?",
-        "6 × 1000 = 6000",
-        "6000 + 745 = 6745"
+        "6 L = 6 × 1000 mL = 6000 mL",
+        "6000 mL + 745 mL = 6745 mL"
        ],
        "role": "strategy",
        "instance": "gen:aeconv:2,6,149"
@@ -28895,6 +28862,160 @@
      "gen:aeshop:4,5,14,3,2",
      "gen:aeshop:10,5,17,1,2",
      "gen:aeshop:8,5,0,2,2"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.algebra.inequations-intro",
+   "title": "Solving an inequation over whole numbers, natural numbers or integers",
+   "chapter": [
+    {
+     "title": "Solving an inequation over whole numbers, natural numbers or integers",
+     "text": [
+      "An inequation has many solutions. When x must be a whole number, natural number or integer, the solution set is the list of those numbers on the allowed side of the boundary: below it for < or ≤, above it for > or ≥ (include the boundary itself only for ≤ or ≥)."
+     ],
+     "math": [
+      "x is a whole number. Solve 4x − 3 ≤ 10 and list every x in the solution set, separated by commas.",
+      "Undo the + or − and divide by 4: the boundary is 13/4",
+      "The whole numbers that fit: 0, 1, 2, 3"
+     ],
+     "widget": {
+      "type": "numberline",
+      "from": 0,
+      "to": 10,
+      "marks": [
+       0,
+       1,
+       2,
+       3
+      ]
+     },
+     "role": "concept",
+     "instance": "gen:aeineqz:0,4,-3,10,1"
+    }
+   ],
+   "diagnostics": [
+    "gen:aeineqz:0,4,-8,8,1",
+    "gen:aeineqz:1,1,1,5,0",
+    "gen:aeineqz:2,-3,-9,-6,1"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Solve it like an equation to find the boundary (reverse the sign if you divide by a negative number). Then list the allowed numbers on the correct side; include the boundary only for ≤ or ≥. Show them as dots on a number line."
+       ],
+       "math": [
+        "x is an integer from −5 to 5. Solve 4x + 5 ≤ 14 and list every x in the solution set, separated by commas.",
+        "Undo the + or − and divide by 4: the boundary is 9/4",
+        "The integer from −5 to 5s that fit: −5, −4, −3, −2, −1, 0, 1, 2"
+       ],
+       "widget": {
+        "type": "numberline",
+        "from": -5,
+        "to": 5,
+        "marks": [
+         -5,
+         -4,
+         -3,
+         -2,
+         -1,
+         0,
+         1,
+         2
+        ]
+       },
+       "role": "worked-example",
+       "instance": "gen:aeineqz:2,4,5,14,1"
+      }
+     ],
+     "guided": "gen:aeineqz:2,5,7,18,0",
+     "check": "gen:aeineqz:1,5,2,21,0"
+    },
+    {
+     "id": "try_each",
+     "title": "Try each number",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Try each number",
+       "text": [
+        "Put x = 0, 1, 2, … (or −5 to 5) into the inequation one by one.",
+        "Keep each number that makes it true; stop when they stop working."
+       ],
+       "math": [
+        "x is an integer from −5 to 5. Solve −4x + 2 ≤ −1 and list every x in the solution set, separated by commas.",
+        "Undo the + or − and divide by −4 (reversing the sign): the boundary is 3/4",
+        "The integer from −5 to 5s that fit: 1, 2, 3, 4, 5"
+       ],
+       "role": "strategy",
+       "instance": "gen:aeineqz:2,-4,2,-1,1"
+      }
+     ],
+     "guided": "gen:aeineqz:2,-2,6,10,0",
+     "check": "gen:aeineqz:2,4,-6,-11,1"
+    },
+    {
+     "id": "check_what_it_uses",
+     "title": "Check what it builds on",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "role": "prerequisite",
+       "title": "What it uses",
+       "text": [
+        "Each step builds on another skill: Solve linear inequalities. If a step is slow, practise that skill first."
+       ]
+      }
+     ],
+     "guided": "gen:aeineqz:1,4,3,16,0",
+     "check": "gen:aeineqz:2,5,1,-14,1"
+    }
+   ],
+   "practice": [
+    "gen:aeineqz:2,1,7,7,0",
+    "gen:aeineqz:2,3,9,-5,0",
+    "gen:aeineqz:2,-4,-3,5,1"
+   ],
+   "transfer": [
+    "gen:aeineqz:2,-3,7,12,0:w",
+    "gen:aeineqz:0,1,5,7,0:w"
+   ],
+   "retention": [
+    "gen:aeineqz:2,4,-1,7,1",
+    "gen:aeineqz:2,3,3,7,0"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aeineqz",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "aeineqz",
+    "seed": [
+     0,
+     4,
+     -3,
+     10,
+     1
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aeineqz:0,4,-3,10,1",
+     "gen:aeineqz:2,4,5,14,1"
     ]
    }
   },
@@ -30745,7 +30866,8 @@
     "gen:afrot:4,1,1"
    ],
    "transfer": [
-    "gen:afrot:12,2,1:w"
+    "gen:afrot:12,2,1:w",
+    "gen:afrot:9,2,1:w"
    ],
    "retention": [
     "gen:afrot:6,3,11",
@@ -31449,7 +31571,7 @@
      "math": [
       "Divya buys 5.7 kg of tomatoes and 450 g of beans. What is the total mass, in kg?",
       "450 g = 450 ÷ 1000 = 0.45 kg",
-      "5.7 + 0.45 = 6.15, with the decimal points lined up"
+      "5.7 kg + 0.45 kg = 6.15 kg, with the decimal points lined up"
      ],
      "role": "worked-example",
      "instance": "gen:agmeas:1,57,9,0"
@@ -33011,7 +33133,8 @@
     "gen:agcex:3,40"
    ],
    "transfer": [
-    "gen:agcex:3,41:w"
+    "gen:agcex:3,41:w",
+    "gen:agcex:3,8:w"
    ],
    "retention": [
     "gen:agcex:2,6",
@@ -33699,43 +33822,7 @@
       "A sequence has t₁ = −9 and tₙ₊₁ = tₙ + 3. Write a formula for tₙ in terms of n.",
       "From t₁ to tₙ there are n − 1 steps of 3: 3n − 3",
       "Add t₁ = −9: tₙ = 3n − 12"
-     ],
-     "role": "worked-example",
-     "instance": "gen:ahnth:-9,3"
-    },
-    {
-     "title": "A Virahanka-Fibonacci style sequence",
-     "text": [
-      "Each new term is made from the two terms before it, so you must keep the last two terms in view as you go.",
-      "Write the terms in a numbered row: add the last two to get the next, until you reach the term you need."
-     ],
-     "math": [
-      "A sequence begins 8, 9, and every term after that is the sum of the two terms just before it. What is term number 5?",
-      "Term 3: 8 + 9 = 17",
-      "Term 4: 9 + 17 = 26",
-      "Term 5: 17 + 26 = 43"
-     ],
-     "role": "worked-example",
-     "instance": "gen:ahfib:8,9,5"
-    },
-    {
-     "title": "Counting rhythms, climbs and tilings: Virahanka numbers",
-     "text": [
-      "Every arrangement of length n ends with a short part (after an arrangement of length n − 1) or a long part (after one of length n − 2). So the counts follow Virahanka's rule: each is the sum of the two before (1, 2, 3, 5, 8, 13, …).",
-      "Start with length 1: 1 way, length 2: 2 ways. Add the last two counts to get the next, up to the length asked. For arrangements that must start with a given part, count the arrangements of what is left."
-     ],
-     "math": [
-      "Meena lays ₹1 and ₹2 coins in a row so that they add up to ₹8. How many different rows can she make (the order of the coins matters)?",
-      "Length 2: 1 (ending with a short part) + 1 (ending with a long part) = 2",
-      "Length 3: 2 (ending with a short part) + 1 (ending with a long part) = 3",
-      "Length 4: 3 (ending with a short part) + 2 (ending with a long part) = 5",
-      "Length 5: 5 (ending with a short part) + 3 (ending with a long part) = 8",
-      "Length 6: 8 (ending with a short part) + 5 (ending with a long part) = 13",
-      "Length 7: 13 (ending with a short part) + 8 (ending with a long part) = 21",
-      "Length 8: 21 (ending with a short part) + 13 (ending with a long part) = 34"
-     ],
-     "role": "worked-example",
-     "instance": "gen:ahrhy:3,0,8"
+     ]
     },
     {
      "title": "From an explicit rule to its terms and its recursive rule",
@@ -33748,23 +33835,7 @@
       "Put n = 1: t₁ = 11",
       "t2 = 20",
       "t3 = 29"
-     ],
-     "role": "worked-example",
-     "instance": "gen:ahexp:0,9,2"
-    },
-    {
-     "title": "Patterns in the Virahanka-Fibonacci numbers",
-     "text": [
-      "Each Virahanka number is the sum of the two before it, so patterns in the list come from that rule: odd + odd makes even, so the even numbers come back every third place; multiples of 3 come every fourth place and multiples of 5 every fifth.",
-      "Write the numbers in a numbered row and mark what you are looking for (each running sum, or each even number or multiple); find where the pattern repeats before counting a long list."
-     ],
-     "math": [
-      "The Virahanka numbers are 1, 2, 3, 5, 8, 13, … (each number after the first two is the sum of the two before it). How many of the first 12 Virahanka numbers are even?",
-      "The first 12 numbers: 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233",
-      "Multiples of 2 among them: 4"
-     ],
-     "role": "worked-example",
-     "instance": "gen:ahfibp:12,1"
+     ]
     }
    ],
    "diagnostics": [
@@ -33881,15 +33952,11 @@
     "gen:ahrec:8,1,2:mc",
     "gen:ahrec:5,2,1",
     "gen:ahnth:-9,1",
-    "gen:ahfib:2,7,10",
-    "gen:ahrhy:0,1,14",
-    "gen:ahexp:2,2,4",
-    "gen:ahfibp:27,3"
+    "gen:ahexp:2,2,4"
    ],
    "transfer": [
     "gen:ahrec:1,2,9:w",
-    "gen:ahfib:8,9,6:w",
-    "gen:ahrhy:0,1,13:w"
+    "gen:ahexp:0,-3,-4:w"
    ],
    "retention": [
     "gen:ahrec:2,3,-3",
@@ -33910,19 +33977,7 @@
      "version": "1.0.0"
     },
     {
-     "family": "ahfib",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahrhy",
-     "version": "1.0.0"
-    },
-    {
      "family": "ahexp",
-     "version": "1.0.0"
-    },
-    {
-     "family": "ahfibp",
      "version": "1.0.0"
     }
    ],
@@ -33943,6 +33998,237 @@
      "gen:ahrec:2,2,2",
      "gen:ahrec:9,2,-3",
      "gen:ahrec:2,2,3"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.sequences.virahanka-numbers",
+   "title": "A Virahanka-Fibonacci style sequence",
+   "chapter": [
+    {
+     "title": "A Virahanka-Fibonacci style sequence",
+     "text": [
+      "Each new term is made from the two terms before it, so you must keep the last two terms in view as you go."
+     ],
+     "math": [
+      "A sequence begins 8, 9, and every term after that is the sum of the two terms just before it. What is term number 5?",
+      "Term 3: 8 + 9 = 17",
+      "Term 4: 9 + 17 = 26",
+      "Term 5: 17 + 26 = 43"
+     ],
+     "tip": "The sequence was treated as adding 1 each time. Here each term is the sum of the two before it, so the jumps grow.",
+     "role": "concept",
+     "instance": "gen:ahfib:8,9,5"
+    },
+    {
+     "title": "Counting rhythms, climbs and tilings: Virahanka numbers",
+     "text": [
+      "Every arrangement ends with a short part (after an arrangement one beat shorter) or a long part (after an arrangement two beats shorter). So the counts follow Virahanka's rule: each count is the sum of the two counts before it.",
+      "Start with the shortest lengths: a length of one beat has one way, a length of two beats has two ways. Add the last two counts to get the next, up to the length asked. For arrangements that must start with a given part, count the arrangements of what is left."
+     ],
+     "math": [
+      "Meena lays ₹1 and ₹2 coins in a row so that they add up to ₹8. How many different rows can she make (the order of the coins matters)?",
+      "Length 2: 1 (ending with a short part) + 1 (ending with a long part) = 2",
+      "Length 3: 2 (ending with a short part) + 1 (ending with a long part) = 3",
+      "Length 4: 3 (ending with a short part) + 2 (ending with a long part) = 5",
+      "Length 5: 5 (ending with a short part) + 3 (ending with a long part) = 8",
+      "Length 6: 8 (ending with a short part) + 5 (ending with a long part) = 13",
+      "Length 7: 13 (ending with a short part) + 8 (ending with a long part) = 21",
+      "Length 8: 21 (ending with a short part) + 13 (ending with a long part) = 34"
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahrhy:3,0,8"
+    },
+    {
+     "title": "Patterns in the Virahanka-Fibonacci numbers",
+     "text": [
+      "Each Virahanka number is the sum of the two before it, so patterns in the list come from that rule: odd + odd makes even, so the even numbers come back every third place; multiples of 3 come every fourth place and multiples of 5 every fifth.",
+      "Write the numbers in a numbered row and mark what you are looking for (each running sum, or each even number or multiple); find where the pattern repeats before counting a long list."
+     ],
+     "math": [
+      "The Virahanka numbers are 1, 2, 3, 5, 8, 13, … (each number after the first two is the sum of the two before it). How many of the first 12 Virahanka numbers are even?",
+      "The first 12 numbers: 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233",
+      "Multiples of 2 among them: 4"
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahfibp:12,1"
+    }
+   ],
+   "diagnostics": [
+    "gen:ahfib:3,5,7",
+    "gen:ahfib:4,9,6",
+    "gen:ahfib:1,3,9"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Write the terms in a numbered row: add the last two to get the next, until you reach the term you need."
+       ],
+       "math": [
+        "A sequence begins 8, 9, and every term after that is the sum of the two terms just before it. What is term number 6?",
+        "Term 3: 8 + 9 = 17",
+        "Term 4: 9 + 17 = 26",
+        "Term 5: 17 + 26 = 43",
+        "Term 6: 26 + 43 = 69"
+       ],
+       "role": "worked-example",
+       "instance": "gen:ahfib:8,9,6"
+      }
+     ],
+     "guided": "gen:ahfib:8,9,7",
+     "check": "gen:ahfib:6,3,5"
+    },
+    {
+     "id": "rhythms",
+     "title": "Virahanka's rhythms",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Virahanka's rhythms",
+       "text": [
+        "Virahanka counted rhythms made of short syllables (one beat) and long syllables (two beats).",
+        "A rhythm ends in a short syllable (after a rhythm one beat shorter) or a long one (after a rhythm two beats shorter), so each count is the sum of the two counts before it."
+       ],
+       "math": [
+        "A sequence begins 1, 5, and every term after that is the sum of the two terms just before it. What is term number 7?",
+        "Term 3: 1 + 5 = 6",
+        "Term 4: 5 + 6 = 11",
+        "Term 5: 6 + 11 = 17",
+        "Term 6: 11 + 17 = 28",
+        "Term 7: 17 + 28 = 45"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahfib:1,5,7"
+      }
+     ],
+     "guided": "gen:ahfib:1,5,6",
+     "check": "gen:ahfib:4,1,5:mc"
+    },
+    {
+     "id": "numbered",
+     "title": "Number every term",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Number every term",
+       "text": [
+        "Write 1, 2, 3 … above the terms as you go, so you stop at the right term.",
+        "Check each sum before moving on."
+       ],
+       "math": [
+        "A sequence begins 9, 4, and every term after that is the sum of the two terms just before it. What is term number 5?",
+        "Term 3: 9 + 4 = 13",
+        "Term 4: 4 + 13 = 17",
+        "Term 5: 13 + 17 = 30"
+       ],
+       "role": "strategy",
+       "instance": "gen:ahfib:9,4,5"
+      }
+     ],
+     "guided": "gen:ahfib:9,4,6",
+     "check": "gen:ahfib:9,3,5"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:ahfib:2,7,10",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “A sequence begins 2, 7, and every term after that is the sum of the two terms just before it. What is term number 10?” A common wrong answer is 47.",
+        "The sequence was treated as adding 5 each time. Here each term is the sum of the two before it, so the jumps grow."
+       ],
+       "math": [
+        "Not 47, but 280"
+       ]
+      }
+     ],
+     "guided": "gen:ahfib:9,4,7",
+     "check": "gen:ahfib:4,9,5:mc"
+    },
+    {
+     "id": "check_what_it_uses",
+     "title": "Check what it builds on",
+     "kind": "prerequisite",
+     "needs": [],
+     "screens": [
+      {
+       "role": "prerequisite",
+       "title": "What it uses",
+       "text": [
+        "Each step builds on another skill: Describe sequences with explicit and recursive rules. If a step is slow, practise that skill first."
+       ]
+      }
+     ],
+     "guided": "gen:ahfib:7,6,8",
+     "check": "gen:ahfib:3,8,5"
+    }
+   ],
+   "practice": [
+    "gen:ahfib:9,3,7",
+    "gen:ahfib:7,6,9:mc",
+    "gen:ahfib:9,3,6",
+    "gen:ahrhy:0,1,14",
+    "gen:ahfibp:27,3"
+   ],
+   "transfer": [
+    "gen:ahfib:3,8,8:w",
+    "gen:ahrhy:0,1,13:w",
+    "gen:ahfibp:12,0:w"
+   ],
+   "retention": [
+    "gen:ahfib:1,5,5",
+    "gen:ahrhy:0,1,16:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "ahfib",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "ahfib",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahrhy",
+     "version": "1.0.0"
+    },
+    {
+     "family": "ahfibp",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "ahfib",
+    "seed": [
+     8,
+     9,
+     5
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:ahfib:8,9,5",
+     "gen:ahfib:2,7,10",
+     "gen:ahfib:8,9,6"
     ]
    }
   },
@@ -34947,7 +35233,8 @@
     "gen:ahtile:9,2,3,0,2"
    ],
    "transfer": [
-    "gen:ahtile:9,2,3,0,1:w"
+    "gen:ahtile:9,2,3,0,1:w",
+    "gen:ahtile:4,2,12,1,1:w"
    ],
    "retention": [
     "gen:ahtile:3,2,12,1,2",
@@ -39777,7 +40064,7 @@
      "math": [
       "₹500 is lent for 1 year at 7% simple interest per year. What is the amount (principal + interest) at the end, in rupees?",
       "One year's interest: 7% of ₹500 = ₹35",
-      "For 1 years: ₹35 × 1 = ₹35",
+      "For 1 year: ₹35 × 1 = ₹35",
       "Amount = ₹500 + ₹35 = ₹535"
      ],
      "role": "worked-example",
@@ -42324,7 +42611,8 @@
     "gen:akmagic:14,6,5,5"
    ],
    "transfer": [
-    "gen:akmagic:11,3,-2,1:w"
+    "gen:akmagic:11,3,-2,1:w",
+    "gen:akmagic:13,-4,-1,0:w"
    ],
    "retention": [
     "gen:akmagic:14,6,5,4",
@@ -42470,7 +42758,8 @@
     "gen:akcrypt2:0,28,1"
    ],
    "transfer": [
-    "gen:akcrypt:51,39,0:w"
+    "gen:akcrypt:51,39,0:w",
+    "gen:akcrypt:68,73,0:w"
    ],
    "retention": [
     "gen:akcrypt:76,58,0",
@@ -42629,7 +42918,8 @@
     "gen:akpar:129"
    ],
    "transfer": [
-    "gen:akpar:128:w"
+    "gen:akpar:128:w",
+    "gen:akpar:143:w"
    ],
    "retention": [
     "gen:akpar:238",
@@ -42816,7 +43106,8 @@
     "gen:akdirinv:3,7,0"
    ],
    "transfer": [
-    "gen:akresize:1,12,6,16:w"
+    "gen:akresize:1,12,6,16:w",
+    "gen:akresize:1,12,6,17:w"
    ],
    "retention": [
     "gen:akresize:0,8,3,20",
@@ -43907,7 +44198,8 @@
     "gen:alldiv:1,3,-1,2,4,5,2"
    ],
    "transfer": [
-    "gen:alpmul:4,2,2,3,3:w"
+    "gen:alpmul:4,2,2,3,3:w",
+    "gen:alpmul:3,5,2,4,6:w"
    ],
    "retention": [
     "gen:alpmul:4,-6,2,-2,1",

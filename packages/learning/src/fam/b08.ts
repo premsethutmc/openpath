@@ -704,7 +704,8 @@ export const B08: Def[] = [
     id: "ahfib",
     arity: 3,
     title: "A Virahanka-Fibonacci style sequence",
-    competency: SEQ,
+    // grade7-split@1: the Grade 7 competency (was SEQ)
+    competency: "MATH.sequences.virahanka-numbers",
     skill: "MLY.seq.virahanka",
     type: "integer",
     mc: true,
@@ -745,7 +746,7 @@ export const B08: Def[] = [
       idea: "Each new term is made from the two terms before it, so you must keep the last two terms in view as you go.",
       method: "Write the terms in a numbered row: add the last two to get the next, until you reach the term you need.",
       alternatives: [
-        { id: "rhythms", title: "Virahanka's rhythms", kind: "conceptual", text: ["Virahanka counted rhythms made of short (1 beat) and long (2 beat) syllables: 1, 2, 3, 5, 8 … rhythms for 1, 2, 3, 4, 5 beats.", "A rhythm of n beats ends in a short syllable (after n − 1 beats) or a long one (after n − 2 beats), so the counts add."] },
+        { id: "rhythms", title: "Virahanka's rhythms", kind: "conceptual", text: ["Virahanka counted rhythms made of short syllables (one beat) and long syllables (two beats).", "A rhythm ends in a short syllable (after a rhythm one beat shorter) or a long one (after a rhythm two beats shorter), so each count is the sum of the two counts before it."] },
         { id: "numbered", title: "Number every term", kind: "procedural", text: ["Write 1, 2, 3 … above the terms as you go, so you stop at the right term.", "Check each sum before moving on."] },
       ],
     },
@@ -2135,7 +2136,8 @@ B08.push(
     id: "ahrhy",
     arity: 3,
     title: "Counting rhythms, climbs and tilings: Virahanka numbers",
-    competency: SEQ,
+    // grade7-split@1: the Grade 7 competency (was SEQ)
+    competency: "MATH.sequences.virahanka-numbers",
     type: "integer",
     mc: true,
     // [ctx, mode, n]: mode 0 all arrangements of length n; 1 those starting with a long (2) part; 2 those starting with a short (1) part
@@ -2169,8 +2171,8 @@ B08.push(
     difficulty: ([, mode, n]) => (n <= 6 && mode === 0 ? 1 : mode === 0 ? 2 : 3),
     word: ([, mode, n]) => (mode === 0 ? `A drummer plays a pattern of ${n} beats using only short strokes (1 beat) and long strokes (2 beats). How many different patterns can he play?` : `A drummer plays a pattern of ${n} beats using only short strokes (1 beat) and long strokes (2 beats). How many different patterns begin with a ${mode === 1 ? "long" : "short"} stroke?`),
     teach: {
-      idea: "Every arrangement of length n ends with a short part (after an arrangement of length n − 1) or a long part (after one of length n − 2). So the counts follow Virahanka's rule: each is the sum of the two before (1, 2, 3, 5, 8, 13, …).",
-      method: "Start with length 1: 1 way, length 2: 2 ways. Add the last two counts to get the next, up to the length asked. For arrangements that must start with a given part, count the arrangements of what is left.",
+      idea: "Every arrangement ends with a short part (after an arrangement one beat shorter) or a long part (after an arrangement two beats shorter). So the counts follow Virahanka's rule: each count is the sum of the two counts before it.",
+      method: "Start with the shortest lengths: a length of one beat has one way, a length of two beats has two ways. Add the last two counts to get the next, up to the length asked. For arrangements that must start with a given part, count the arrangements of what is left.",
       alternatives: [
         { id: "list_small", title: "List the small cases", kind: "procedural", text: ["Length 3: S S S, S L, L S (3 ways). Length 4: S S S S, S S L, S L S, L S S, L L (5 ways).", "Notice 3 + 5 = 8 for length 5, and continue."], visual: () => ({ type: "table", head: ["Length", "1", "2", "3", "4", "5"], rows: [["Ways", "1", "2", "3", "5", "8"]] }) },
         { id: "choose_longs", title: "Count by the number of long parts", kind: "conceptual", text: ["With k long parts there are n − 2k short ones: n − k parts in all.", "Choose which k of the n − k places are long, and add up over every possible k."] },

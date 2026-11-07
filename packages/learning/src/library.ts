@@ -297,7 +297,9 @@ export function fromTemplate(family: string, competency: string, version: string
     diagnostics,
     strategies,
     practice: [...own, ...sub.practice],
-    transfer: [def.word ? take("practice", "word") : take("practice", "mc"), ...sub.transfer],
+    // grade7-split@1: a one-family Grade 7 module also needs a second, fresh transfer question for the delayed check
+    // (as a blueprint module already has), or the learner stops at "transfer" for ever
+    transfer: [def.word ? take("practice", "word") : take("practice", "mc"), ...sub.transfer, ...(WHOLE_LESSON.has(competency) && sub.transfer.length === 0 && def.word ? [take("practice", "word")] : [])],
     retention: [take("retention", "typed"), sub.retention ?? take("retention", "mc")],
     probes,
     pool: { family, version: FAMILY_VERSION[family] },

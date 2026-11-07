@@ -1356,7 +1356,7 @@ const MEAS = [
   { big: "km", small: "m", f: 1000, thing: (A: string, y: number, op: number, nm: string) => (op ? `The way from ${nm}'s house to the school is ${A} km. ${nm} has already walked ${y} m. How far is there still to go, in km?` : `${nm} cycles ${A} km to the market and then ${y} m more to the library. How far does ${nm} cycle altogether, in km?`) },
   { big: "L", small: "mL", f: 1000, thing: (A: string, y: number, op: number, nm: string) => (op ? `A can holds ${A} L of milk. ${nm} pours out ${y} mL for tea. How much milk is left, in litres?` : `${nm} pours ${A} L of water into a bucket and then adds ${y} mL more. How much water is in the bucket, in litres?`) },
 ];
-// [ctx, A, y, op]: A tenths of the big unit (1.1 to 9.9), y × 25 of the small unit (cm) or y × 50 (g, m, mL)
+// [ctx, A, y, op]: A tenths of the big unit (1.1 to 9.9), y × 5 of the small unit (cm) or y × 50 (g, m, mL)
 const measY = (ctx: number, y: number) => y * (ctx === 0 ? 5 : 50);
 const measOk = ([ctx, A, y, op]: number[]) => {
   if (ctx < 0 || ctx > 3 || A < 11 || A > 99 || A % 10 === 0 || y < 1 || y > 19 || (op !== 0 && op !== 1)) return false;
@@ -1819,7 +1819,7 @@ B07.push(
       return {
         steps: [
           { id: "convert", op: "convert", competency: "MATH.measurement.unit-conversions", inputs: [sm, MEAS[ctx].small, f, MEAS[ctx].big], value: dec(sm, k) },
-          { id: "combine", op: op ? "subtract" : "add", competency: DEC, inputs: [dec(A, 1), dec(sm, k), op ? "−" : "+"], value: dec(u, k) },
+          { id: "combine", op: op ? "subtract" : "add", competency: DEC, inputs: [dec(A, 1), dec(sm, k), op ? "−" : "+", MEAS[ctx].big], value: dec(u, k) },
         ],
         answer: dec(u, k),
       };
@@ -1851,7 +1851,7 @@ B07.push(
       return [u + f / 10, u - f / 10, u + f].filter((x) => x > 0).map((x) => String(Math.round((x / f) * 1e6) / 1e6));
     },
     variants: () => [],
-    explain: (st) => (st.id === "convert" ? `${st.inputs[0]} ${st.inputs[1]} = ${st.inputs[0]} ÷ ${st.inputs[2]} = ${st.value} ${st.inputs[3]}` : `${st.inputs[0]} ${st.inputs[2]} ${st.inputs[1]} = ${st.value}, with the decimal points lined up`),
+    explain: (st) => (st.id === "convert" ? `${st.inputs[0]} ${st.inputs[1]} = ${st.inputs[0]} ÷ ${st.inputs[2]} = ${st.value} ${st.inputs[3]}` : `${st.inputs[0]} ${st.inputs[3]} ${st.inputs[2]} ${st.inputs[1]} ${st.inputs[3]} = ${st.value} ${st.inputs[3]}, with the decimal points lined up`),
     domain: [[0, 3], [11, 99], [1, 19], [0, 1]],
     keep: measOk,
     cap: 400,

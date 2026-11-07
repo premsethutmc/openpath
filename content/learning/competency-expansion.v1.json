@@ -215,6 +215,23 @@
    "status": "provisional"
   },
   {
+   "id": "MATH.algebra.inequations-intro",
+   "name": "Solve simple inequations over whole numbers or integers",
+   "strand": "algebra",
+   "domain": "algebra",
+   "gradeRange": [
+    7,
+    7
+   ],
+   "objectives": [
+    "Solve simple inequations over whole numbers or integers"
+   ],
+   "evidence": [
+    "tn-g07:tn-g07-t3-c03-o04"
+   ],
+   "status": "provisional"
+  },
+  {
    "id": "MATH.algebra.linear-systems-three-variables",
    "name": "Solve linear systems in three variables",
    "strand": "algebra",
@@ -2284,15 +2301,13 @@
    "strand": "algebra",
    "domain": "sequences",
    "gradeRange": [
-    7,
+    9,
     11
    ],
    "objectives": [
-    "Describe sequences with explicit and recursive rules",
-    "Generate and reason about recursively defined sequences"
+    "Describe sequences with explicit and recursive rules"
    ],
    "evidence": [
-    "cbse-g07:cbse-g07-t1-c06-o03",
     "cbse-g09:cbse-g09-c08-o02",
     "cbse-g09:cbse-g09-c08-o06"
    ],
@@ -2365,6 +2380,24 @@
    ],
    "evidence": [
     "tn-g11:tn-g11-c05-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.sequences.virahanka-numbers",
+   "name": "Generate Virahanka-Fibonacci numbers and explore their patterns",
+   "strand": "algebra",
+   "domain": "sequences",
+   "gradeRange": [
+    7,
+    8
+   ],
+   "objectives": [
+    "Generate Virahanka-Fibonacci numbers and explore their patterns"
+   ],
+   "evidence": [
+    "cbse-g07:cbse-g07-t1-c06-o03",
+    "tn-g08:tn-g08-c07-o03"
    ],
    "status": "provisional"
   },
@@ -2737,6 +2770,30 @@
   {
    "target": "MATH.algebra.inequalities-two-variables",
    "from": "MATH.algebra.linear-programming",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.algebra.inequations-intro",
+   "from": "MATH.algebra.equality-inequality",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.inequations-intro",
+   "from": "MATH.algebra.linear-intro",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.inequations-intro",
+   "from": "MATH.number.integers",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.algebra.inequations-intro",
+   "from": "MATH.number.number-line",
    "type": "support",
    "reason": "helpful background named by the curriculum inventory; never a gate"
   },
@@ -4523,12 +4580,6 @@
    "reason": "helpful background named by the curriculum inventory; never a gate"
   },
   {
-   "target": "MATH.sequences.explicit-recursive-rules",
-   "from": "MATH.algebra.number-patterns",
-   "type": "support",
-   "reason": "helpful background named by the curriculum inventory; never a gate"
-  },
-  {
    "target": "MATH.sequences.infinite-series-expansions",
    "from": "MATH.algebra.binomial",
    "type": "plausible",
@@ -4575,6 +4626,18 @@
    "from": "MATH.reasoning.mathematical-induction",
    "type": "support",
    "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.sequences.virahanka-numbers",
+   "from": "MATH.algebra.number-patterns",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.sequences.virahanka-numbers",
+   "from": "MATH.number.addition",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
   },
   {
    "target": "MATH.sets-relations.binary-operations",

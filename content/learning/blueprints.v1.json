@@ -294,7 +294,7 @@
       {
        "title": "The middle term is 2ab: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Watch the middle term: it is a×b and b×a together, so it is twice the product, 2ab."
        ],
        "math": [
         "(5x + 7)² = 25x² + 70x + 49 (every term times every term)",
@@ -333,7 +333,7 @@
       {
        "title": "The sign of the middle term: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Watch the sign of the middle term: with a plus inside the bracket, all three terms are added."
        ],
        "math": [
         "(5x + 4)² = 25x² + 40x + 16 (every term times every term)",
@@ -672,7 +672,7 @@
       {
        "title": "The median is not the mean: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Put the values in order first; the median is the middle one, not the total shared equally."
        ],
        "math": [
         "In order: 21, 25, 41, 47, 62, 64, 74, 80, 81 (9 values)",
@@ -721,7 +721,7 @@
       {
        "title": "Two middle values: take halfway: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Put the values in order; with an even number of values, the median is halfway between the two middle ones."
        ],
        "math": [
         "In order: 14, 58, 66, 75, 81, 95 (6 values)",
@@ -788,7 +788,7 @@
       {
        "title": "Count balls, not colours: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Count every ball, not the colours: each ball is equally likely, so a colour's chance is its share of all the balls."
        ],
        "math": [
         "All the balls: 2 red + 6 blue + 2 green = 10, each equally likely",
@@ -1421,7 +1421,7 @@
       {
        "title": "Read the scale; do not assume ten: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Read the numbers on the scale to find what one line stands for before reading the bar."
        ],
        "math": [
         "The bar chart shows saplings planted by each class. Read the scale carefully. How many saplings were planted by Class 3?",
@@ -1461,7 +1461,7 @@
       {
        "title": "Read the scale; do not assume 10: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Read the numbers on the scale to find what one line stands for; do not assume each line is 10."
        ],
        "math": [
         "Thu: 2; Fri: 14 (scale 2 per line)",
@@ -2741,7 +2741,7 @@
       {
        "title": "Not both numbers added: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Ask what added to 2 makes 10: take 2 away from 10 to find the box; do not add the two numbers."
        ],
        "math": [
         "□ + 2 = 10",
@@ -2786,7 +2786,7 @@
       {
        "title": "Not both numbers added: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Ask what taken from 18 leaves 3: the box is 18 take away 3; do not add the two numbers."
        ],
        "math": [
         "18 − □ = 3",
@@ -2831,7 +2831,7 @@
       {
        "title": "Add it back, do not take it away again: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "The box had 7 taken away to leave 11, so add the 7 back on to find it."
        ],
        "math": [
         "□ − 7 = 11",
@@ -3003,7 +3003,7 @@
       {
        "title": "Do the opposite, not the same again: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Undo adding by taking away the same number from both sides, not by adding it again."
        ],
        "math": [
         "Find x: x + 11 = 25.",
@@ -3042,7 +3042,7 @@
       {
        "title": "Do the opposite, not the same again: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "Undo taking away by adding the number back to both sides, not by taking it away again."
        ],
        "math": [
         "Find x: x − 3 = 6.",
@@ -3081,7 +3081,7 @@
       {
        "title": "Divide by the number next to x: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "The number next to x multiplies it, so divide both sides by that number; do not take it away."
        ],
        "math": [
         "Find x: 2x = 36.",
@@ -3120,7 +3120,7 @@
       {
        "title": "Multiply, do not add: solved correctly",
        "text": [
-        "Each step, then the answer."
+        "x was divided by the number, so multiply both sides by it; do not add it."
        ],
        "math": [
         "Find x: x ÷ 7 = 17.",

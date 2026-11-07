@@ -944,24 +944,25 @@ export const B05: Def[] = [
     },
     solve: ([kind, op, A, B]) => {
       const f = UNITS[kind].f;
+      const { big: U, small: u } = UNITS[kind];
       const [b1, s1] = mixed(kind, A);
       const [b2, s2] = mixed(kind, B);
       if (op === 0) {
         const s = s1 + s2;
         return {
           steps: [
-            { id: "small", op: "add", competency: ADDSUB, inputs: [s1, s2], value: s },
-            { id: "regroup", op: "regroup", competency: CONV, inputs: [s, f], value: s - f },
-            { id: "big", op: "add", competency: MIX, inputs: [b1, b2, 1], value: b1 + b2 + 1 },
+            { id: "small", op: "add", competency: ADDSUB, inputs: [s1, s2, U, u], value: s },
+            { id: "regroup", op: "regroup", competency: CONV, inputs: [s, f, U, u], value: s - f },
+            { id: "big", op: "add", competency: MIX, inputs: [b1, b2, 1, U, u], value: b1 + b2 + 1 },
           ],
           answer: tup(b1 + b2 + 1, s - f),
         };
       }
       return {
         steps: [
-          { id: "borrow", op: "regroup", competency: CONV, inputs: [s1, f], value: s1 + f },
-          { id: "small", op: "subtract", competency: ADDSUB, inputs: [s1 + f, s2], value: s1 + f - s2 },
-          { id: "big", op: "subtract", competency: MIX, inputs: [b1 - 1, b2], value: b1 - 1 - b2 },
+          { id: "borrow", op: "regroup", competency: CONV, inputs: [s1, f, U, u], value: s1 + f },
+          { id: "small", op: "subtract", competency: ADDSUB, inputs: [s1 + f, s2, U, u], value: s1 + f - s2 },
+          { id: "big", op: "subtract", competency: MIX, inputs: [b1 - 1, b2, U, u], value: b1 - 1 - b2 },
         ],
         answer: tup(b1 - 1 - b2, s1 + f - s2),
       };
@@ -1003,16 +1004,18 @@ export const B05: Def[] = [
       return [tup(Math.floor(tot / f) + 1, tot % f), tup(Math.max(0, Math.floor(tot / f) - 1), tot % f), tup(Math.floor(tot / f), near)];
     },
     variants: () => [],
-    explain: (s) =>
-      s.id === "regroup"
-        ? `${s.inputs[0]} = ${s.inputs[1]} + ${s.value}: change ${s.inputs[1]} of the small units into 1 large unit`
+    explain: (s) => {
+      const [U, u] = s.inputs.slice(-2);
+      return s.id === "regroup"
+        ? `${s.inputs[0]} ${u} = ${s.inputs[1]} ${u} + ${s.value} ${u}: change ${s.inputs[1]} ${u} into 1 ${U}`
         : s.id === "borrow"
-          ? `Change 1 large unit into ${s.inputs[1]} small units: ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`
+          ? `Change 1 ${U} into ${s.inputs[1]} ${u}: ${s.inputs[0]} ${u} + ${s.inputs[1]} ${u} = ${s.value} ${u}`
           : s.id === "small"
-            ? `Small units: ${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${s.value}`
+            ? `${u}: ${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ${s.inputs[1]} = ${s.value} ${u}`
             : s.op === "add"
-              ? `Large units: ${s.inputs[0]} + ${s.inputs[1]} + 1 carried = ${s.value}`
-              : `Large units: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value}`,
+              ? `${U}: ${s.inputs[0]} + ${s.inputs[1]} + 1 carried = ${s.value} ${U}`
+              : `${U}: ${s.inputs[0]} − ${s.inputs[1]} = ${s.value} ${U}`;
+    },
     domain: [[0, 2], [0, 1], [20, 179], [20, 179]],
     cap: 450,
     difficulty: ([kind, op]) => (kind === 0 && op === 0 ? 1 : op === 0 || kind === 0 ? 2 : 3),
@@ -1028,7 +1031,7 @@ export const B05: Def[] = [
     },
     teach: {
       idea: "Measures in two units work like tens and ones, but the change-over is 100 cm = 1 m, 1000 g = 1 kg and 1000 mL = 1 L.",
-      method: "Add or subtract the small units first. If the small units reach the change-over number, change them into 1 large unit; if there are too few to subtract, change 1 large unit into small units. Then do the large units.",
+      method: "Add or subtract the amounts in the smaller unit first. If they reach the change-over number, change them into 1 of the bigger unit; if there are too few to subtract, change 1 of the bigger unit into the smaller unit. Then do the bigger unit.",
       alternatives: [
         { id: "all_small", title: "Change everything into the small unit", kind: "procedural", text: ["Write both measures in the small unit only (for example 2 m 45 cm = 245 cm).", "Add or subtract these numbers, then change the answer back (310 cm = 3 m 10 cm)."] },
       ],
@@ -1058,14 +1061,15 @@ export const B05: Def[] = [
     },
     solve: ([kind, A, n]) => {
       const f = UNITS[kind].f;
+      const { big: U, small: u } = UNITS[kind];
       const [b, s] = mixed(kind, A);
       const sm = s * n;
       const carry = Math.floor(sm / f);
       return {
         steps: [
-          { id: "small", op: "multiply", competency: MM, inputs: [s, n], value: sm },
-          { id: "regroup", op: "regroup", competency: CONV, inputs: [sm, f], value: carry },
-          { id: "big", op: "multiply", competency: MIX, inputs: [b, n, carry], value: b * n + carry },
+          { id: "small", op: "multiply", competency: MM, inputs: [s, n, U, u], value: sm },
+          { id: "regroup", op: "regroup", competency: CONV, inputs: [sm, f, U, u], value: carry },
+          { id: "big", op: "multiply", competency: MIX, inputs: [b, n, carry, U, u], value: b * n + carry },
         ],
         answer: tup(b * n + carry, sm % f),
       };
@@ -1097,7 +1101,10 @@ export const B05: Def[] = [
       return [tup(Math.floor(tot / f) + 1, tot % f)];
     },
     variants: () => [],
-    explain: (s) => (s.id === "small" ? `Small units: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "regroup" ? `${s.inputs[0]} small units make ${s.value} large ${s.value === 1 ? "unit" : "units"} and some left over` : `Large units: ${s.inputs[0]} × ${s.inputs[1]} + ${s.inputs[2]} = ${s.value}`),
+    explain: (s) => {
+      const [U, u] = s.inputs.slice(-2);
+      return s.id === "small" ? `${u}: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value} ${u}` : s.id === "regroup" ? `${s.inputs[0]} ${u} make ${s.value} ${U}${Number(s.inputs[0]) % Number(s.inputs[1]) ? ` and ${Number(s.inputs[0]) % Number(s.inputs[1])} ${u} left over` : ""}` : `${U}: ${s.inputs[0]} × ${s.inputs[1]} + ${s.inputs[2]} = ${s.value} ${U}`;
+    },
     domain: [[0, 2], [20, 99], [2, 9]],
     cap: 400,
     difficulty: ([kind, , n]) => (kind === 0 && n <= 4 ? 1 : n <= 5 ? 2 : 3),
@@ -1111,8 +1118,8 @@ export const B05: Def[] = [
       ][kind];
     },
     teach: {
-      idea: "Multiplying a measure is repeated adding: multiply the small units and the large units, then change extra small units into large ones.",
-      method: "Multiply the small units; take out every full 100 cm (or 1000 g, 1000 mL) as a large unit. Multiply the large units and add the ones you took out.",
+      idea: "Multiplying a measure is repeated adding: multiply the amounts in both units, then change the extra amount in the smaller unit into the bigger unit.",
+      method: "Multiply the amount in the smaller unit; take out every full 100 cm (or 1000 g, 1000 mL) as 1 m (or 1 kg, 1 L). Multiply the amount in the bigger unit and add the ones you took out.",
       alternatives: [
         { id: "all_small", title: "Work in the small unit", kind: "procedural", text: ["Change the measure into the small unit only (1 kg 250 g = 1250 g).", "Multiply, then change back: 3 × 1250 g = 3750 g = 3 kg 750 g."] },
       ],
@@ -1135,8 +1142,8 @@ export const B05: Def[] = [
       const f = CONVK[k].f;
       return {
         steps: [
-          { id: "big", op: "multiply", competency: CONV, inputs: [b, f], value: b * f },
-          { id: "add", op: "add", competency: CONV, inputs: [b * f, convSmall(k, s)], value: b * f + convSmall(k, s) },
+          { id: "big", op: "multiply", competency: CONV, inputs: [b, f, CONVK[k].big, CONVK[k].small], value: b * f },
+          { id: "add", op: "add", competency: CONV, inputs: [b * f, convSmall(k, s), CONVK[k].big, CONVK[k].small], value: b * f + convSmall(k, s) },
         ],
         answer: b * f + convSmall(k, s),
       };
@@ -1170,7 +1177,7 @@ export const B05: Def[] = [
       return [(b + 1) * f + sm, (b - 1) * f + sm, b * f + sm + d, b * f + sm - d].filter((x) => x > 0 && x !== b * f + sm);
     },
     variants: () => [],
-    explain: (s) => (s.id === "big" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}`),
+    explain: (s) => (s.id === "big" ? `${s.inputs[0]} ${s.inputs[2]} = ${s.inputs[0]} × ${s.inputs[1]} ${s.inputs[3]} = ${s.value} ${s.inputs[3]}` : `${s.inputs[0]} ${s.inputs[3]} + ${s.inputs[1]} ${s.inputs[3]} = ${s.value} ${s.inputs[3]}`),
     domain: [[0, 5], [1, 9], [1, 199]],
     cap: 450,
     difficulty: ([k, , s]) => {
@@ -1190,8 +1197,8 @@ export const B05: Def[] = [
       ][k];
     },
     teach: {
-      idea: "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL and 1 km = 1000 m. A measure in two units is the large part changed into small units, plus the small part.",
-      method: "Multiply the large units by the number of small units in one large unit, then add the small units. Check the small part fills its places: if it has too few digits, put zeros in front of it.",
+      idea: "1 m = 100 cm, 1 cm = 10 mm, 1 kg = 1000 g, 1 g = 1000 mg, 1 L = 1000 mL and 1 km = 1000 m. A measure in two units is the part in the bigger unit changed into the smaller unit, plus the part already in the smaller unit.",
+      method: "Multiply the amount in the bigger unit by how many of the smaller unit make one of the bigger unit, then add the amount in the smaller unit. Check the small part fills its places: if it has too few digits, put zeros in front of it.",
       visual: ([k, b, s]) => ({ type: "table", head: ["Thousands", "Hundreds", "Tens", "Ones"], rows: [String(b * CONVK[k].f + convSmall(k, s)).padStart(4, " ").split("")] }),
       alternatives: [
         { id: "place_chart", title: "Use a place-value chart", kind: "procedural", text: ["Write the large units in the thousands place (for g, mL, m) or hundreds place (for cm).", "Write the small units ending in the ones place, and fill any empty places with 0."] },
@@ -1210,9 +1217,9 @@ export const B05: Def[] = [
     parse: none,
     reject: (p) => (!inRange(p, [[0, 4], [1, 9], [0, 1]]) ? "Parts of 100, 125, 200, 250 or 500 making 1 to 9 kg or L." : null),
     prompt: ([q, n, kind]) => `How many ${kind ? "bottles" : "packets"} of ${PARTS[q]} ${kind ? "mL" : "g"} together make ${n} ${kind ? "L" : "kg"}?`,
-    solve: ([q, n]) => ({
+    solve: ([q, n, kind]) => ({
       steps: [
-        { id: "small", op: "convert", competency: CONV, inputs: [n, 1000], value: n * 1000 },
+        { id: "small", op: "convert", competency: CONV, inputs: [n, 1000, kind ? "L" : "kg", kind ? "mL" : "g"], value: n * 1000 },
         { id: "share", op: "divide", competency: "MATH.number.long-division", inputs: [n * 1000, PARTS[q]], value: (n * 1000) / PARTS[q] },
       ],
       answer: (n * 1000) / PARTS[q],
@@ -1237,7 +1244,7 @@ export const B05: Def[] = [
       return [2 * a, a % 2 === 0 ? a / 2 : 3 * a, a + n];
     },
     variants: () => [],
-    explain: (s) => (s.id === "small" ? `${s.inputs[0]} ${s.inputs[0] === 1 ? "unit is" : "units are"} ${s.value} small units` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} parts`),
+    explain: (s) => (s.id === "small" ? `${s.inputs[0]} ${s.inputs[2]} = ${s.inputs[0]} × ${s.inputs[1]} ${s.inputs[3]} = ${s.value} ${s.inputs[3]}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} parts`),
     domain: [[0, 4], [1, 9], [0, 1]],
     difficulty: ([q, n]) => (n === 1 || PARTS[q] === 500 ? 1 : PARTS[q] === 125 ? 3 : 2),
     word: ([q, n, kind]) => (kind ? `${name(q + n)} fills small bottles of ${PARTS[q]} mL from a ${n} L can of buttermilk for a class party. How many bottles can be filled?` : `A shopkeeper packs ${n} kg of groundnuts into packets of ${PARTS[q]} g each. How many packets does she make?`),
@@ -3648,11 +3655,12 @@ const MEAS_MORE: Def[] = [
       const f = UNITS[kind].f;
       const D = n * (b * f + s);
       const [B, S] = [Math.floor(D / f), D % f];
+      const { big: U, small: u } = UNITS[kind];
       return {
         steps: [
-          { id: "big", op: "divide", competency: MIX, inputs: [B, n], value: Math.floor(B / n) },
-          { id: "regroup", op: "regroup", competency: CONV, inputs: [B % n, f, S], value: (B % n) * f + S },
-          { id: "small", op: "divide", competency: "MATH.number.long-division", inputs: [(B % n) * f + S, n], value: ((B % n) * f + S) / n },
+          { id: "big", op: "divide", competency: MIX, inputs: [B, n, U, u], value: Math.floor(B / n) },
+          { id: "regroup", op: "regroup", competency: CONV, inputs: [B % n, f, S, U, u], value: (B % n) * f + S },
+          { id: "small", op: "divide", competency: "MATH.number.long-division", inputs: [(B % n) * f + S, n, U, u], value: ((B % n) * f + S) / n },
         ],
         answer: tup(b, s),
       };
@@ -3683,7 +3691,10 @@ const MEAS_MORE: Def[] = [
       return [tup(b + 1, s), tup(b, (s + UNITS[kind].step) % UNITS[kind].f)];
     },
     variants: () => [],
-    explain: (s) => (s.id === "big" ? `Large units: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}, with ${Number(s.inputs[0]) % Number(s.inputs[1])} left over` : s.id === "regroup" ? `Change the ${s.inputs[0]} left over into small units and add the ${s.inputs[2]}: ${s.value}` : `Small units: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
+    explain: (s) => {
+      const [U, u] = s.inputs.slice(-2);
+      return s.id === "big" ? `${U}: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}, with ${Number(s.inputs[0]) % Number(s.inputs[1])} ${U} left over` : s.id === "regroup" ? `Change the ${s.inputs[0]} ${U} left over into ${u} and add the ${s.inputs[2]} ${u}: ${s.value} ${u}` : `${u}: ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} ${u}`;
+    },
     domain: [[0, 2], [20, 99], [2, 9]],
     cap: 400,
     difficulty: ([kind, , n]) => (kind === 0 && n <= 4 ? 1 : n <= 5 ? 2 : 3),
@@ -3699,8 +3710,8 @@ const MEAS_MORE: Def[] = [
       ][kind];
     },
     teach: {
-      idea: "Dividing a measure shares the large units first; whatever large units are left over are changed into small units and shared with the small units.",
-      method: "Divide the large units. Change the ones left over into small units (× 100 or × 1000), add the small units, and divide those. Check: multiply the answer back.",
+      idea: "Dividing a measure shares the bigger unit first; whatever is left over is changed into the smaller unit and shared with the amount already in the smaller unit.",
+      method: "Divide the amount in the bigger unit. Change what is left over into the smaller unit (× 100 or × 1000), add the amount in the smaller unit, and divide that. Check: multiply the answer back.",
       alternatives: [
         { id: "all_small", title: "Work in the small unit", kind: "procedural", text: ["Change the whole measure into the small unit (7 m 20 cm = 720 cm).", "Divide (720 ÷ 4 = 180 cm) and change back (1 m 80 cm)."] },
       ],
@@ -3721,7 +3732,15 @@ const MEAS_MORE: Def[] = [
     solve: ([k, v]) => {
       const a = cuAmount(k, v)!;
       const f = CU[k].f;
-      return { steps: [{ id: "big", op: "divide", competency: CONV, inputs: [a, f], value: Math.floor(a / f) }, { id: "left", op: "subtract", competency: CONV, inputs: [a, Math.floor(a / f) * f], value: a % f }], answer: tup(Math.floor(a / f), a % f) };
+      const { big: U, small: u } = CU[k];
+      return {
+        steps: [
+          { id: "big", op: "divide", competency: CONV, inputs: [a, f, U, u], value: Math.floor(a / f) },
+          { id: "left", op: "subtract", competency: CONV, inputs: [a, Math.floor(a / f) * f, U, u], value: a % f },
+          { id: "answer", op: "write", competency: CONV, inputs: [Math.floor(a / f), a % f, U, u], value: tup(Math.floor(a / f), a % f) },
+        ],
+        answer: tup(Math.floor(a / f), a % f),
+      };
     },
     // independent: build the amount back from the answer (large × factor + small) and check the small part is less than one large unit
     validate: ([k, v], ans) => {
@@ -3744,7 +3763,14 @@ const MEAS_MORE: Def[] = [
       return [tup(Math.floor(a / f) + 1, a % f), tup(Math.floor(a / f), (a % f) * 10 < f ? (a % f) * 10 : Math.floor((a % f) / 10))];
     },
     variants: () => [],
-    explain: (s) => (s.id === "big" ? `${s.inputs[0]} ÷ ${s.inputs[1]}: ${s.value} whole large ${s.value === 1 ? "unit" : "units"}` : `${s.inputs[0]} − ${s.inputs[1]} = ${s.value} small units left`),
+    explain: (s) => {
+      const [U, u] = s.inputs.slice(-2);
+      return s.id === "big"
+        ? `${s.inputs[0]} ${u} ÷ ${s.inputs[1]}: ${s.value} whole ${U}`
+        : s.id === "left"
+          ? `${s.inputs[0]} ${u} − ${s.inputs[1]} ${u} = ${s.value} ${u} left`
+          : `${s.inputs[0]} ${U} ${s.inputs[1]} ${u}, written (${U}, ${u}): ${s.value}`;
+    },
     domain: [[0, 5], [0, 179]],
     cap: 450,
     difficulty: ([k, v]) => {
@@ -3763,8 +3789,8 @@ const MEAS_MORE: Def[] = [
       ][k];
     },
     teach: {
-      idea: "1 m is a hundred cm and 1 cm is ten mm; 1 kg, 1 g, 1 L and 1 km are each a thousand of the smaller unit (g, mg, mL and m). To change into the larger unit, see how many whole large units fit, and what is left.",
-      method: "Divide by how many small units make one large unit (a hundred, ten or a thousand): the whole number of times is the large unit; the remainder is the small unit.",
+      idea: "1 m is a hundred cm and 1 cm is ten mm; 1 kg, 1 g, 1 L and 1 km are each a thousand of the smaller unit (g, mg, mL and m). To change into the larger unit, see how many whole ones of the larger unit fit, and what is left.",
+      method: "Divide by how many of the smaller unit make one of the larger unit (a hundred, ten or a thousand): the whole number of times is the amount in the larger unit; the remainder stays in the smaller unit.",
       alternatives: [
         { id: "split_digits", title: "Split the digits", kind: "procedural", text: ["For × 1000 units, the last three digits are the small unit: 3|450 g = 3 kg 450 g; 3|045 g = 3 kg 45 g.", "For cm to m, the last two digits; for mm to cm, the last digit."] },
       ],
@@ -3850,7 +3876,14 @@ const MEAS_MORE: Def[] = [
       const L = 1000 * w.a + w.b;
       const q = shuffled(`aewcmp:${[kind, s]}`, ["<", "=", ">"]);
       const i = L < w.c ? 0 : L === w.c ? 1 : 2;
-      return { steps: [{ id: "convert", op: "convert", competency: CONV, inputs: [w.a, w.b], value: L }, { id: "compare", op: "compare", competency: CONV, inputs: [L, w.c], value: q.at(i) }], answer: q.at(i) };
+      const [B, S] = kind ? ["g", "mg"] : ["kg", "g"];
+      return {
+        steps: [
+          { id: "convert", op: "convert", competency: CONV, inputs: [w.a, w.b, B, S], value: L },
+          { id: "compare", op: "compare", competency: CONV, inputs: [L, w.c, B, S, ["<", "=", ">"][i]], value: q.at(i) },
+        ],
+        answer: q.at(i),
+      };
     },
     // independent: change the right-hand weight into the large and small units, then compare large units first
     validate: ([kind, s], v) => {
@@ -3873,7 +3906,7 @@ const MEAS_MORE: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "convert" ? `${s.inputs[0]} large units ${s.inputs[1]} small units = ${s.value} small units` : `Compare ${s.inputs[0]} and ${s.inputs[1]}`),
+    explain: (s) => (s.id === "convert" ? `${s.inputs[0]} ${s.inputs[2]} ${s.inputs[1]} ${s.inputs[3]} = ${s.inputs[0]} × 1000 + ${s.inputs[1]} = ${s.value} ${s.inputs[3]}` : `${s.inputs[0]} ${s.inputs[3]} ${s.inputs[4]} ${s.inputs[1]} ${s.inputs[3]}, so the sign is ${s.inputs[4]}`),
     domain: [[0, 1], [0, 149]],
     difficulty: ([kind, s]) => (s % 3 === 1 ? 3 : kind ? 2 : 1),
     word: ([kind, s]) => {
@@ -3882,7 +3915,7 @@ const MEAS_MORE: Def[] = [
     },
     teach: {
       idea: "Weights can be compared only in the same unit: 1 kg is a thousand grams and 1 g is a thousand milligrams.",
-      method: "Change the weight written in two units into the small unit (kilograms into grams, grams into milligrams), then compare the numbers.",
+      method: "Change the weight written in two units into the smaller unit (kilograms into grams, grams into milligrams), then compare the numbers.",
       alternatives: [
         { id: "large_first", title: "Compare the large units first", kind: "procedural", text: ["Change the single amount into large and small units (2500 g = 2 kg 500 g).", "Compare kilograms first; only if they are equal, compare the grams."] },
       ],
@@ -5106,7 +5139,8 @@ const CORE_MORE: Def[] = [
     id: "aeineqz",
     arity: 5,
     title: "Solving an inequation over whole numbers, natural numbers or integers",
-    competency: INEQ,
+    // grade7-split@1: the Grade 7 competency (was INEQ)
+    competency: "MATH.algebra.inequations-intro",
     type: "set",
     // [dom, a, b, c, op]: a x + b < c (op 0) or ≤ c (op 1), x a whole number (dom 0), natural number (1) or integer from −5 to 5 (2)
     parse: none,

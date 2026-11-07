@@ -795,7 +795,7 @@ const F: Def[] = [
       { id: "subtracted", kind: "procedural", competency: "MATH.number.percentage", says: `${p}% of ${n} is a part of ${n}, not ${n} minus ${p}.`, predict: n - p > 0 ? n - p : null },
     ].filter((b) => b.predict !== null) as Bug[],
     variants: (p) => pairs(p, [[2, 19], [1, 20]], () => true).map(([a, b]) => [5 * a, 20 * b]).filter(([a, b]) => (a * b) % 100 === 0).slice(0, 80),
-    explain: (s) => (s.id === "one" ? `${s.inputs[1]}% of ${s.inputs[0]} is ${s.inputs[0]} ÷ ${100 / (s.inputs[1] as number)} = ${show(s.value)}` : `${s.inputs[2]}% is ${s.inputs[0]} lots of that: ${s.inputs[0]} × ${show(s.inputs[1] as number)} = ${show(s.value)}`),
+    explain: (s) => (s.id === "one" ? `${s.inputs[1]}% of ${s.inputs[0]} is ${s.inputs[0]} ÷ ${100 / (s.inputs[1] as number)} = ${show(s.value)}` : `${s.inputs[2]}% is ${s.inputs[0]} ${s.inputs[0] === 1 ? "lot" : "lots"} of that: ${s.inputs[0]} × ${show(s.inputs[1] as number)} = ${show(s.value)}`),
     domain: [[5, 95], [20, 400]],
     keep: ([p, n]) => p % 5 === 0 && n % 20 === 0,
     difficulty: ([p]) => ([10, 25, 50].includes(p) ? 1 : p % 10 === 0 ? 2 : 3),

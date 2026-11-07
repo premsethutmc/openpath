@@ -1059,7 +1059,7 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => (s.id === "year" ? `One year's interest: ${s.inputs[1]}% of ₹${s.inputs[0]} = ₹${s.value}` : s.id === "years" ? `For ${s.inputs[1]} years: ₹${s.inputs[0]} × ${s.inputs[1]} = ₹${s.value}` : s.id === "amount" ? `Amount = ₹${s.inputs[0]} + ₹${s.inputs[1]} = ₹${s.value}` : s.id === "rate" ? `R = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}%` : s.id === "principal" ? `P = ${s.inputs[0]} ÷ ${s.inputs[1]} = ₹${s.value}` : `T = ₹${s.inputs[0]} ÷ ₹${s.inputs[1]} = ${s.value} years`),
+    explain: (s) => (s.id === "year" ? `One year's interest: ${s.inputs[1]}% of ₹${s.inputs[0]} = ₹${s.value}` : s.id === "years" ? `For ${s.inputs[1]} ${s.inputs[1] === 1 ? "year" : "years"}: ₹${s.inputs[0]} × ${s.inputs[1]} = ₹${s.value}` : s.id === "amount" ? `Amount = ₹${s.inputs[0]} + ₹${s.inputs[1]} = ₹${s.value}` : s.id === "rate" ? `R = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}%` : s.id === "principal" ? `P = ${s.inputs[0]} ÷ ${s.inputs[1]} = ₹${s.value}` : `T = ₹${s.inputs[0]} ÷ ₹${s.inputs[1]} = ${s.value} ${s.value === 1 ? "year" : "years"}`),
     domain: [[1, 40], [2, 15], [1, 6], [0, 4]],
     cap: 500,
     difficulty: ([, , , m]) => (m === 0 ? 1 : m === 1 ? 2 : 3),
