@@ -143,6 +143,8 @@ type Stmt = {
   text: (L: string[], n: number) => string;
   word: (L: string[], n: number, who: string) => string;
   slips: { to: number; id: string; kind: Bug["kind"]; comp: string; says: (L: string[]) => string }[];
+  /** Why the answer fits: the defining property the statement describes (a worked solution's reasoning step). */
+  why: (L: string[], n: number) => string;
   /** Does base option `o` fit the statement, checked on a triangle in coordinates? */
   test: (o: number) => boolean;
   level: 1 | 2 | 3;
@@ -155,6 +157,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 0, level: 1,
     text: ([X, Y, Z]) => `In ${tri([X, Y, Z])}, D, E and F are the midpoints of ${Y}${Z}, ${Z}${X} and ${X}${Y}. The segments ${X}D, ${Y}E and ${Z}F are drawn, and they meet at one point P. What is P called?`,
     word: ([X, Y, Z], _n, who) => `${who} marks the middle of each edge of a triangular wooden plank ${X}${Y}${Z}, and draws a straight line from each corner to the middle of the opposite edge. The three lines cross at one point P. What is P called?`,
+    why: ([X, Y, Z]) => `${X}D, ${Y}E and ${Z}F each join a corner to the midpoint of the opposite side: they are medians, and the medians meet at the centroid`,
     slips: [{ to: 2, id: "midpoint-means-circumcentre", kind: "conceptual", comp: CONC, says: () => "The midpoints were noticed and the point was taken to be the circumcentre. Lines from the corners to the midpoints of the opposite sides are medians, and medians meet at the centroid; the circumcentre comes from lines through the midpoints at right angles to the sides." }],
     test: (o) => allThrough(0, SCALENE, at(o)),
   },
@@ -162,6 +165,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 1, level: 1,
     text: ([X, Y, Z]) => `In ${tri([X, Y, Z])}, D, E and F are points on ${Y}${Z}, ${Z}${X} and ${X}${Y} with ${X}D ⟂ ${Y}${Z}, ${Y}E ⟂ ${Z}${X} and ${Z}F ⟂ ${X}${Y}. The lines ${X}D, ${Y}E and ${Z}F meet at one point P. What is P called?`,
     word: ([X, Y, Z], _n, who) => `On a triangular plot ${X}${Y}${Z}, ${who} lays a straight path from each corner to the opposite boundary, meeting that boundary at right angles. The three paths meet at one point P. What is P called?`,
+    why: ([X, Y, Z]) => `${X}D, ${Y}E and ${Z}F each go from a corner to the opposite side at right angles: they are altitudes, and the altitudes meet at the orthocentre`,
     slips: [{ to: 2, id: "right-angle-means-circumcentre", kind: "conceptual", comp: CONC, says: () => "The right angles were noticed and the point was taken to be the circumcentre. Lines from the corners at right angles to the opposite sides are altitudes; they meet at the orthocentre. The lines for the circumcentre go through the midpoints of the sides, not through the corners." }],
     test: (o) => allThrough(1, SCALENE, at(o)),
   },
@@ -169,6 +173,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 2, level: 1,
     text: ([X, Y, Z]) => `In ${tri([X, Y, Z])}, a line is drawn through the midpoint of each side, at right angles to that side. The three lines meet at one point P. What is P called?`,
     word: ([X, Y, Z], _n, who) => `Three villages ${X}, ${Y} and ${Z} are planning roads. For each pair of villages, ${who} draws on the map a road through the point halfway between them, at right angles to the line joining them. The three roads meet at one point P. What is P called for ${tri([X, Y, Z])}?`,
+    why: () => "Lines through the midpoints of the sides, at right angles to the sides, are the perpendicular bisectors; they meet at the circumcentre",
     slips: [
       { to: 1, id: "right-angle-means-orthocentre", kind: "conceptual", comp: CONS, says: () => "The lines at right angles to the sides were taken to be altitudes. An altitude starts at a corner; these lines start at the midpoints of the sides, so they are perpendicular bisectors, and they meet at the circumcentre." },
       { to: 0, id: "midpoint-means-centroid", kind: "conceptual", comp: CONC, says: () => "The midpoints were noticed and the point was taken to be the centroid. The centroid comes from lines joining each corner to a midpoint (medians); lines through the midpoints at right angles to the sides meet at the circumcentre." },
@@ -179,6 +184,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 3, level: 1,
     text: ([X, Y, Z]) => `In ${tri([X, Y, Z])}, the angle at each of ${X}, ${Y} and ${Z} is cut into two equal parts by a line from that corner. The three lines meet at one point P. What is P called?`,
     word: ([X, Y, Z], _n, who) => `${who} folds a paper triangle ${X}${Y}${Z} so that each crease starts at a corner and cuts the angle there into two equal parts. The three creases meet at one point P. What is P called?`,
+    why: () => "Lines that cut the angles into two equal parts are the angle bisectors; they meet at the incentre",
     slips: [{ to: 0, id: "bisector-as-median", kind: "conceptual", comp: CONS, says: () => "A line halving the angle at a corner was taken to halve the opposite side too, as a median does. It usually does not: lines halving the angles are angle bisectors, and they meet at the incentre." }],
     test: (o) => allThrough(3, SCALENE, at(o)),
   },
@@ -186,6 +192,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 2, level: 2,
     text: ([X, Y, Z], n) => `A point P is such that P${X} = P${Y} = P${Z} = ${n} cm, where ${X}, ${Y} and ${Z} are the corners of ${tri([X, Y, Z])}. Which centre of the triangle is P?`,
     word: ([X, Y, Z], n, who) => `${who} wants to place a water tank at a point P that is exactly ${n} km from each of three villages ${X}, ${Y} and ${Z}. Which centre of ${tri([X, Y, Z])} is P?`,
+    why: () => "P is equally far from the three corners, so it lies on the perpendicular bisector of every side: it is the circumcentre",
     slips: [{ to: 3, id: "corners-for-sides", kind: "conceptual", comp: CONC, says: () => "Being equally far from the three corners was mixed up with being equally far from the three sides. The point equally far from the corners is the circumcentre; equally far from the sides is the incentre." }],
     test: (o) => {
       const P = at(o);
@@ -196,6 +203,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 3, level: 2,
     text: ([X, Y, Z], n) => `A point P inside ${tri([X, Y, Z])} is ${n} cm from each of the three sides ${X}${Y}, ${Y}${Z} and ${Z}${X} (each distance measured at right angles to the side). Which centre of the triangle is P?`,
     word: ([X, Y, Z], n, who) => `In a triangular park ${X}${Y}${Z}, ${who} puts up a lamp post P that is exactly ${n} m from each of the three straight fences. Which centre of ${tri([X, Y, Z])} is P?`,
+    why: () => "P is equally far from the three sides, so it lies on the bisector of every angle: it is the incentre",
     slips: [{ to: 2, id: "sides-for-corners", kind: "conceptual", comp: CONC, says: () => "Being equally far from the three sides was mixed up with being equally far from the three corners. Equally far from the sides is the incentre; equally far from the corners is the circumcentre." }],
     test: (o) => {
       const P = at(o);
@@ -207,6 +215,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 0, level: 2,
     text: ([X, Y, Z], n) => `In ${tri([X, Y, Z])}, D is the midpoint of ${Y}${Z} and ${X}D = ${3 * n} cm. One of the four centres of the triangle is the point P on ${X}D with ${X}P = ${2 * n} cm and PD = ${n} cm. Which centre is P?`,
     word: ([X, Y, Z], n, who) => `${who} draws a line ${3 * n} cm long on a triangular card ${X}${Y}${Z}, from corner ${X} to the middle D of the edge ${Y}${Z}, and marks the point P that is ${2 * n} cm from ${X} and ${n} cm from D. P is one of the four centres of the triangle. Which one?`,
+    why: ([X], n) => `${X}D is a median (D is the midpoint of the opposite side), and ${X}P : PD = ${2 * n} : ${n} = 2 : 1. The centroid divides each median in the ratio 2 : 1`,
     slips: [{ to: 3, id: "inside-means-incentre", kind: "conceptual", comp: CONC, says: () => "A point well inside the triangle was taken to be the incentre. The incentre lies on the angle bisectors; a point on the line from a corner to a midpoint, two thirds of the way along, is the centroid." }],
     test: (o) => {
       const [X, Y, Z] = SCALENE;
@@ -219,6 +228,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 2, level: 2,
     text: ([X, Y, Z], n) => `A circle of radius ${n} cm with centre P passes through all three corners ${X}, ${Y} and ${Z} of ${tri([X, Y, Z])}. Which centre of the triangle is P?`,
     word: ([X, Y, Z], n, who) => `${who} wants a round fence of radius ${n} m that passes through three trees ${X}, ${Y} and ${Z}. The fence's centre is P. Which centre of ${tri([X, Y, Z])} is P?`,
+    why: () => "The circle through the three corners has its centre equally far from the corners: that centre is the circumcentre",
     slips: [{ to: 3, id: "circumcircle-for-incircle", kind: "conceptual", comp: CONC, says: () => "The circle through the corners was mixed up with the circle inside that touches the sides. The circle through the three corners has its centre at the circumcentre; the circle touching the three sides has its centre at the incentre." }],
     test: (o) => {
       const P = at(o);
@@ -230,6 +240,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 3, level: 2,
     text: ([X, Y, Z], n) => `A circle of radius ${n} cm with centre P lies inside ${tri([X, Y, Z])} and touches all three sides. Which centre of the triangle is P?`,
     word: ([X, Y, Z], n, who) => `${who} cuts the largest round cake that fits in a triangular box ${X}${Y}${Z}: its radius is ${n} cm and it touches all three sides of the box. Its centre is P. Which centre of ${tri([X, Y, Z])} is P?`,
+    why: () => "The circle inside touching the three sides has its centre equally far from the sides: that centre is the incentre",
     slips: [{ to: 2, id: "incircle-for-circumcircle", kind: "conceptual", comp: CONC, says: () => "The circle inside touching the sides was mixed up with the circle through the corners. The circle that touches the three sides has its centre at the incentre." }],
     test: (o) => {
       const P = at(o);
@@ -241,6 +252,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 1, level: 3,
     text: ([X, Y, Z]) => `${tri([X, Y, Z])} has a right angle at ${Y}. One of its four centres lies exactly at the corner ${Y}. Which one?`,
     word: ([X, Y, Z], _n, who) => `${who}'s set square is a triangle ${X}${Y}${Z} with its right angle at corner ${Y}. One of the four centres of this triangle lies exactly at the corner ${Y}. Which one?`,
+    why: ([X, Y, Z]) => `${Y}${X} and ${Y}${Z} meet at right angles, so each is an altitude; the altitudes meet at ${Y}, so ${Y} is the orthocentre`,
     slips: [{ to: 2, id: "right-corner-circumcentre", kind: "conceptual", comp: CONC, says: ([X, , Z]) => `The circumcentre was placed at the right-angled corner. In a right triangle the circumcentre is the midpoint of the longest side ${X}${Z}. The two shorter sides are themselves altitudes, so the altitudes meet at the right-angled corner: the orthocentre.` }],
     test: (o) => dist(at(o, RIGHT), RIGHT[1]) < EPS,
   },
@@ -248,6 +260,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 2, level: 3,
     text: ([X, Y, Z]) => `${tri([X, Y, Z])} has a right angle at ${Y}. One of its four centres lies exactly at the midpoint of the longest side ${X}${Z}. Which one?`,
     word: ([X, Y, Z], _n, who) => `${who}'s set square is a triangle ${X}${Y}${Z} with its right angle at corner ${Y}. One of the four centres of this triangle lies exactly at the middle of the longest edge ${X}${Z}. Which one?`,
+    why: () => "In a right triangle the midpoint of the longest side is equally far from all three corners, so it is the circumcentre",
     slips: [{ to: 0, id: "midpoint-is-centroid", kind: "conceptual", comp: CONC, says: () => "The midpoint of a side was taken to be the centroid. The centroid is two thirds of the way along each median, always inside the triangle. The midpoint of the longest side of a right triangle is equally far from all three corners, so it is the circumcentre." }],
     test: (o) => dist(at(o, RIGHT), mid(RIGHT[0], RIGHT[2])) < EPS,
   },
@@ -255,6 +268,7 @@ const STMTS: Stmt[] = [
     kind: "c", ans: 0, level: 3,
     text: ([X, Y, Z]) => `A triangle ${X}${Y}${Z} cut from card of even thickness balances flat on a pencil tip placed at one point P. Which centre of ${tri([X, Y, Z])} is P?`,
     word: ([X, Y, Z], _n, who) => `${who} hangs a flat triangular sign board ${X}${Y}${Z} from a single hook behind it, at the one point P where the board balances level. Which centre of ${tri([X, Y, Z])} is P?`,
+    why: () => "A triangle of even thickness balances where its medians meet: the centroid",
     slips: [{ to: 3, id: "balance-at-incentre", kind: "conceptual", comp: CONC, says: () => "The balance point was taken to be the centre of the circle inside the triangle. A triangle balances where its medians meet, at the centroid." }],
     test: (o) => dist(at(o), balance(SCALENE)) < 0.01,
   },
@@ -263,6 +277,7 @@ const STMTS: Stmt[] = [
     kind: "l", ans: c, level: 2,
     text: (L) => `P is ${CENTRES[c]} of ${tri(L)}. Which three lines of the triangle all pass through P?`,
     word: (L, _n, who) => `${who} wants to mark ${CENTRES[c]} P of a triangular tile ${L.join("")}. Which three lines must be drawn on the tile so that they all pass through P?`,
+    why: () => `${CENTRES[c][0].toUpperCase()}${CENTRES[c].slice(1)} is the point where ${LINES[c]} meet`,
     slips: ([
       [{ to: 2, id: "centroid-perp-bisectors", kind: "conceptual", comp: CONC, says: () => "Both medians and perpendicular bisectors use the midpoints of the sides, and they were mixed up. Medians join each corner to the midpoint of the opposite side, and they meet at the centroid." }],
       [{ to: 2, id: "orthocentre-perp-bisectors", kind: "conceptual", comp: CONS, says: () => "Both altitudes and perpendicular bisectors meet a side at right angles, and they were mixed up. Altitudes start at the corners; they meet at the orthocentre." }],
@@ -280,6 +295,7 @@ const STMTS: Stmt[] = [
     kind: "s", ans: 1, level: 1,
     text: ([X, Y, Z]) => `In ${tri([X, Y, Z])}, D is the point on ${Y}${Z} with ${X}D ⟂ ${Y}${Z}, so ∠${X}D${Y} = 90°. What is ${X}D?`,
     word: ([X, Y, Z], _n, who) => `${who} measures the height of a triangular sail ${X}${Y}${Z} along the line from the top corner ${X} that meets the bottom edge ${Y}${Z} at D at a right angle. What is ${X}D for ${tri([X, Y, Z])}?`,
+    why: ([X, Y, Z]) => `${X}D goes from the corner ${X} to the opposite side ${Y}${Z} at right angles: it is an altitude`,
     slips: [{ to: 2, id: "altitude-as-perp-bisector", kind: "conceptual", comp: CONS, says: ([X, Y, Z]) => `${X}D meets ${Y}${Z} at a right angle, so it was called the perpendicular bisector. A perpendicular bisector must also pass through the midpoint of ${Y}${Z}; a line from a corner at right angles to the opposite side is an altitude.` }],
     test: (o) => segTest(o, 1),
   },
@@ -287,6 +303,7 @@ const STMTS: Stmt[] = [
     kind: "s", ans: 0, level: 1,
     text: ([X, Y, Z], n) => `In ${tri([X, Y, Z])}, D is the point on ${Y}${Z} with ${Y}D = D${Z} = ${n} cm. What is ${X}D?`,
     word: ([X, Y, Z], n, who) => `${who} splits a triangular field ${X}${Y}${Z} with a straight fence from corner ${X} to the point D on the side ${Y}${Z} that is ${n} m from both ${Y} and ${Z}. What is the fence ${X}D for ${tri([X, Y, Z])}?`,
+    why: ([X, Y, Z]) => `D is the midpoint of ${Y}${Z}, so ${X}D joins a corner to the midpoint of the opposite side: it is a median`,
     slips: [{ to: 3, id: "median-as-bisector", kind: "conceptual", comp: CONS, says: ([X]) => `The line was taken to halve the angle at ${X} because it halves the opposite side. It usually does not halve the angle; a line from a corner to the midpoint of the opposite side is a median.` }],
     test: (o) => segTest(o, 0),
   },
@@ -294,6 +311,7 @@ const STMTS: Stmt[] = [
     kind: "s", ans: 3, level: 2,
     text: ([X, Y, Z], n) => `In ${tri([X, Y, Z])}, D is the point on ${Y}${Z} with ∠${Y}${X}D = ∠D${X}${Z} = ${15 + 5 * n}°. What is ${X}D?`,
     word: ([X, Y, Z], n, who) => `From village ${X}, two straight roads go to ${Y} and to ${Z}. ${who} builds a third road from ${X} to the road ${Y}${Z}, making an angle of ${15 + 5 * n}° with each of the first two roads; it reaches ${Y}${Z} at D. What is ${X}D for ${tri([X, Y, Z])}?`,
+    why: ([X]) => `${X}D cuts the angle at ${X} into two equal parts: it is an angle bisector`,
     slips: [{ to: 0, id: "bisector-as-median", kind: "conceptual", comp: CONS, says: ([, Y, Z]) => `The line was taken to end at the midpoint of ${Y}${Z} because it halves the angle. Halving the angle makes it an angle bisector; it reaches the midpoint only when the two sides at the corner are equal.` }],
     test: (o) => segTest(o, 3),
   },
@@ -301,6 +319,7 @@ const STMTS: Stmt[] = [
     kind: "s", ans: 2, level: 2,
     text: ([X, Y, Z]) => `In ${tri([X, Y, Z])}, D is the midpoint of ${Y}${Z}, and a line ℓ is drawn through D at right angles to ${Y}${Z}. What is ℓ?`,
     word: ([X, Y, Z], _n, who) => `${who} fixes a straight wire through the middle D of a rod ${Y}${Z}, at right angles to the rod. The rod is one side of a triangular frame ${X}${Y}${Z}. What is the wire's line ℓ for ${tri([X, Y, Z])}?`,
+    why: ([, Y, Z]) => `ℓ goes through the midpoint of ${Y}${Z} at right angles to it: it is the perpendicular bisector of ${Y}${Z}`,
     slips: [{ to: 1, id: "perp-bisector-as-altitude", kind: "conceptual", comp: CONS, says: ([X]) => `The line was taken to be an altitude because of the right angle. An altitude starts at a corner; this line goes through the midpoint and need not pass through ${X}, so it is the perpendicular bisector.` }],
     test: (o) => segTest(o, 2),
   },
@@ -380,7 +399,7 @@ export const B23: Def[] = [
     solve: (p) => {
       const S = STMTS[p[0]];
       const right = ctrOrder(p).indexOf(S.ans);
-      return { steps: [st("identify", S.kind === "c" ? "name the centre" : S.kind === "l" ? "name the lines" : "name the segment", CONC, [S.kind, ctrBase(p)[S.ans]], ctrBase(p)[S.ans])], answer: right };
+      return { steps: [st("identify", S.kind === "c" ? "name the centre" : S.kind === "l" ? "name the lines" : "name the segment", CONC, [S.why(ctrL(p), ctrN(p))], ctrBase(p)[S.ans]), st("pick", "choose the option", CONC, [ctrBase(p)[S.ans]], right)], answer: right };
     },
     // independent: test the chosen option on an actual triangle in coordinates (distances, lines through a point)
     validate: (p, v) => {
@@ -395,7 +414,7 @@ export const B23: Def[] = [
       return S.slips.map((x) => Bg(x.id, x.kind, x.comp, x.says(L), ctrOrder(p).indexOf(x.to)));
     },
     variants: () => [],
-    explain: (s) => `This describes ${s.value}.`,
+    explain: (s) => (s.id === "pick" ? `So the answer is: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: D_CTR,
     difficulty: ([k]) => STMTS[k].level,
     word: (p) => STMTS[p[0]].word(ctrL(p), ctrN(p), nameOf(p[0] + p[1])),
@@ -452,7 +471,7 @@ export const B23: Def[] = [
     domain: D_CEN,
     keep: K_CEN,
     difficulty: ([f, x]) => (f <= 1 || f === 3 ? (x <= 30 ? 1 : 2) : (Number.isInteger(cenAns([f, x])) ? 2 : 3)),
-    word: ([f, x]) => `A flat triangular sign board ABC hangs level from a hook at its balance point G, which lies on the straight line from corner A to the middle D of the edge BC. ${CEN_WORDS[CEN_GIVEN[f]][0].toUpperCase()}${CEN_WORDS[CEN_GIVEN[f]].slice(1)} is ${x} cm. How long is ${CEN_WORDS[CEN_FIND[f]]}, in cm? (G is the centroid of △ABC.)`,
+    word: ([f, x]) => `A flat triangular cardboard cut-out ABC hangs level from a hook at its balance point G, which lies on the straight line from corner A to the middle D of the edge BC. ${CEN_WORDS[CEN_GIVEN[f]][0].toUpperCase()}${CEN_WORDS[CEN_GIVEN[f]].slice(1)} is ${x} cm. How long is ${CEN_WORDS[CEN_FIND[f]]}, in cm? (G is the centroid of △ABC.)`,
     teach: {
       idea: "The three medians of a triangle meet at the centroid G, and G cuts each median into two parts in the ratio 2 : 1, the longer part next to the corner. So AG is 2/3 of AD and GD is 1/3 of AD.",
       method: "Split the median into 3 equal parts. AG is 2 parts, GD is 1 part, AD is all 3. Find one part from the length you know, then multiply.",

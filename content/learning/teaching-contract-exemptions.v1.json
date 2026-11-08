@@ -252,6 +252,36 @@
    "title": "Which number is divisible: tests for 2, 4, 5, 8 and 10",
    "rule": "text-not-instance",
    "reason": "General rule, not an example: the last-digit tests for 2, 4, 5, 8 and 10 and why they hold (10, 100 and 1000 are multiples of the divisors)."
+  },
+  {
+   "competency": "MATH.coordinate.cartesian",
+   "title": "Across, then up",
+   "rule": "no-instance",
+   "reason": "Hand-authored lesson whose practice uses authored questions (ca-…), not generated ones: alignment is not mechanically checkable; educator review."
+  },
+  {
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "title": "Why five measurements",
+   "rule": "no-instance",
+   "reason": "Construction topic: drawn work marked by an educator (written-modules.v1.json); its practice questions are hand-written, so there is no generated question to attach."
+  },
+  {
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "title": "Worked: ABCD with AB = 4 cm, BC = 5 cm, CD = 6 cm, DA = 4.5 cm and AC = 7 cm",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.construction-quadrilaterals",
+   "title": "Worked: a trapezium",
+   "rule": "no-instance",
+   "reason": "Construction topic: the learner's drawing is marked by an educator, so no automatically marked question can be tied to this section."
+  },
+  {
+   "competency": "MATH.geometry.polyhedra-euler",
+   "title": "Check it on a cube first",
+   "rule": "text-not-instance",
+   "reason": "Standard example, not this question: a cube's faces, vertices and edges (6 + 8 − 12 = 2) check Euler's rule before it is used on the question's own numbers."
   }
  ]
 }

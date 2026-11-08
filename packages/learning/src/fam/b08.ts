@@ -1600,6 +1600,8 @@ export const B08: Def[] = [
     difficulty: ([a, b, f]) => (Math.sqrt(a * a + b * b) <= 25 ? 1 : f === 0 ? 2 : 3),
     word: ([a, b, f]) => {
       const c = Math.sqrt(a * a + b * b);
+      // a small rectangle is a room, a large one a playground (a 3 m by 4 m playground is not realistic)
+      if (c <= 15) return f === 0 ? `A rectangular room is ${a} m wide and ${b} m long. How far is it in a straight line across the floor from one corner to the opposite corner, in metres?` : `The straight line across the floor of a rectangular room from one corner to the opposite corner is ${c} m long. One wall of the room is ${f === 1 ? b : a} m long. How long is the other wall, in metres?`;
       return f === 0 ? `A rectangular playground is ${a} m wide and ${b} m long. A straight path runs across it from one corner to the opposite corner. How long is the path, in metres?` : `A straight path runs across a rectangular playground from one corner to the opposite corner and is ${c} m long. One side of the playground is ${f === 1 ? b : a} m. How long is the other side, in metres?`;
     },
     teach: {
@@ -2429,7 +2431,7 @@ B08.push(
     solve: (p) => {
       const s = [...convSides(p)].sort((a, b) => a - b);
       const right = s[0] ** 2 + s[1] ** 2 === s[2] ** 2;
-      return { steps: [{ id: "longest", op: "compare", competency: PYTH, inputs: convSides(p), value: s[2] }, { id: "squares", op: "add", competency: PYTH, inputs: [s[0] ** 2, s[1] ** 2], value: s[0] ** 2 + s[1] ** 2 }, { id: "test", op: "compare", competency: PYTH, inputs: [s[0] ** 2 + s[1] ** 2, s[2] ** 2], value: right ? "equal" : "not equal" }], answer: convOpts(p).indexOf(CONV_CH[right ? 0 : 1]) };
+      return { steps: [{ id: "longest", op: "compare", competency: PYTH, inputs: convSides(p), value: s[2] }, { id: "squares", op: "add", competency: PYTH, inputs: [s[0] ** 2, s[1] ** 2], value: s[0] ** 2 + s[1] ** 2 }, { id: "test", op: "compare", competency: PYTH, inputs: [s[0] ** 2 + s[1] ** 2, s[2] ** 2], value: right ? "equal" : "not equal" }, { id: "pick", op: "choose the option", competency: PYTH, inputs: [CONV_CH[right ? 0 : 1]], value: convOpts(p).indexOf(CONV_CH[right ? 0 : 1]) }], answer: convOpts(p).indexOf(CONV_CH[right ? 0 : 1]) };
     },
     // independent: work out the largest angle with the cosine rule and see whether it is 90°
     validate: (p, v) => {
@@ -2447,14 +2449,14 @@ B08.push(
       return out;
     },
     variants: () => [],
-    explain: (s) => (s.id === "longest" ? `The longest side is ${s.value}` : s.id === "squares" ? `The squares of the other two add to ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} and ${s.inputs[1]} are ${s.value}, so ${s.value === "equal" ? "the angle opposite the longest side is 90°" : "the triangle is not right-angled"}`),
+    explain: (s) => (s.id === "pick" ? `So the answer is: ${s.inputs[0]}` : s.id === "longest" ? `The longest side is ${s.value}` : s.id === "squares" ? `The squares of the other two add to ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} and ${s.inputs[1]} are ${s.value}, so ${s.value === "equal" ? "the angle opposite the longest side is 90°" : "the triangle is not right-angled"}`),
     domain: [[0, TRIPLES.length - 1], [0, 2], [0, 2], [0, 1]],
     keep: convOk,
     cap: 360,
     difficulty: ([, kind, order]) => (kind === 0 && order === 0 ? 1 : kind === 0 ? 3 : 2),
     word: (p) => {
       const s = convSides(p);
-      return `${name(s[0])} makes a triangular frame for a kite from three sticks ${s[0]} cm, ${s[1]} cm and ${s[2]} cm long. Will one corner of the frame be a right angle?`;
+      return `${name(s[0])} bends a piece of wire into a triangle with sides ${s[0]} cm, ${s[1]} cm and ${s[2]} cm long. Will one corner of the triangle be a right angle?`;
     },
     teach: {
       idea: "The converse of Baudhayana–Pythagoras: if the square of the longest side equals the sum of the squares of the other two, the angle opposite the longest side is a right angle. If not, there is no right angle.",
@@ -2507,7 +2509,7 @@ B08.push(
     difficulty: ([mode, m]) => (mode >= 2 ? 1 : m <= 10 ? 2 : 3),
     word: ([mode, m, n]) => (mode <= 1 ? `${name(m)} wants a right-angled garden bed with whole-number sides, one of them ${2 * m} m. Using the rule 2m, m² − 1, m² + 1, what is the ${mode === 0 ? "longest side" : "third side (not the longest)"} in metres?` : `A carpenter builds right-angled frames using the rule: sides m² − n², 2mn and m² + n². For m = ${m} and n = ${n}, how long is the side ${["m² − n²", "2mn", "m² + n²"][mode - 2]}, in cm?`),
     teach: {
-      idea: "(m² + 1)² − (m² − 1)² = 4m² = (2m)², so 2m, m² − 1 and m² + 1 always form a Pythagorean triple. In the same way (m² + n²)² = (m² − n²)² + (2mn)².",
+      idea: "(m² + 1)² − (m² − 1)² = (2m)², so 2m, m² − 1 and m² + 1 always form a Pythagorean triple. In the same way (m² + n²)² = (m² − n²)² + (2mn)².",
       method: "From the even member 2m, halve it to get m, then work out m² − 1 and m² + 1. With m and n given, substitute into the three expressions.",
       alternatives: [
         { id: "check", title: "Check the triple", kind: "procedural", text: ["Square the two smaller numbers and add them; square the largest.", "If they are equal, the triple is right."] },
@@ -2796,7 +2798,7 @@ B08.push(
     cap: 400,
     difficulty: ([mode, x, y]) => (mode === 0 && x >= 0 && y >= 0 ? 1 : mode === 0 ? 2 : 3),
     figure: ([mode, x, y, w, h]) => ({ type: "plane", points: [[x, y, "A"], [x + w, y, "B"], [x + w, y + h, "C"], ...(mode === 0 ? [] : [[x, y + h, "D"]]), [0, 0, "gate"]], segments: mode === 0 ? [[[x, y], [x + w, y]], [[x + w, y], [x + w, y + h]]] : [[[x, y], [x + w, y]], [[x + w, y], [x + w, y + h]], [[x + w, y + h], [x, y + h]], [[x, y + h], [x, y]]], range: 9 }),
-    word: ([mode, x, y, w, h]) => `A village map is drawn on a grid with the bus stop at the origin and 1 unit = 100 m. A rectangular playground has corners A${tup([x, y])}, B${tup([x + w, y])}, C${tup([x + w, y + h])}${mode === 0 ? "" : ` and D${tup([x, y + h])}`}. ${mode === 0 ? "What are the coordinates of its fourth corner D?" : mode === 1 ? "A gate is exactly half-way along the side AB. What are the gate's coordinates?" : "A flagpole stands at the exact centre of the playground. What are its coordinates?"}`,
+    word: ([mode, x, y, w, h]) => `A village map is drawn on a grid with the bus stop at the origin and 1 unit = 10 m. A rectangular playground has corners A${tup([x, y])}, B${tup([x + w, y])}, C${tup([x + w, y + h])}${mode === 0 ? "" : ` and D${tup([x, y + h])}`}. ${mode === 0 ? "What are the coordinates of its fourth corner D?" : mode === 1 ? "A gate is exactly half-way along the side AB. What are the gate's coordinates?" : "A flagpole stands at the exact centre of the playground. What are its coordinates?"}`,
     teach: {
       idea: "A grid turns a plan into numbers: each place is (across, up) from the origin. Walls of a rectangular room run along grid lines, so corners share x- or y-coordinates.",
       method: "Fourth corner: it lines up with one corner across and with another up and down, so copy those coordinates. Half-way: average the two x-coordinates and the two y-coordinates.",
