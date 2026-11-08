@@ -2948,7 +2948,7 @@ B06.push(
     solve: (p) => {
       const t = ruleTerms(p);
       const { rules, right } = ruleOpts(p);
-      return { steps: [st("gaps", "subtract", FIG, t, t.slice(1).map((x, i) => x - t[i]).join(", ")), st("rule", "match", FIG, [rules[right].text], rules[right].text)], answer: right };
+      return { steps: [st("gaps", "subtract", FIG, t, t.slice(1).map((x, i) => x - t[i]).join(", ")), st("rule", "match", FIG, [rules[right].text], right)], answer: right };
     },
     // independent: test every offered rule against all five terms; exactly one may fit, and it must be the chosen one
     validate: (p, v) => {
@@ -2977,7 +2977,7 @@ B06.push(
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "gaps" ? `The steps from one number to the next are ${s.value}` : `The rule that fits every number: ${s.value}`),
+    explain: (s) => (s.id === "gaps" ? `The steps from one number to the next are ${s.value}` : `The rule that fits every number is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}`),
     domain: [[0, 5], [0, 30], [0, 12]],
     keep: ruleOk,
     cap: 300,

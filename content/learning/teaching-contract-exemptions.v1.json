@@ -210,6 +210,48 @@
    "title": "Conclusions the data can support",
    "rule": "no-instance",
    "reason": "Hand-written lesson section (grade7-lessons@1): it explains the idea with its own worked case; no generated question of this module is about it."
+  },
+  {
+   "competency": "MATH.reasoning.proof-intro",
+   "title": "Examples are not a proof",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section of an educator-marked proof module (written-modules.v1.json): it explains the idea with its own worked case; the module's questions are hand-written, so there is no generated question to attach."
+  },
+  {
+   "competency": "MATH.reasoning.proof-intro",
+   "title": "Worked proof: odd + odd is even",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section of an educator-marked proof module (written-modules.v1.json): it explains the idea with its own worked case; the module's questions are hand-written, so there is no generated question to attach."
+  },
+  {
+   "competency": "MATH.reasoning.proof-intro",
+   "title": "Worked: why a number trick works",
+   "rule": "no-instance",
+   "reason": "Hand-written lesson section of an educator-marked proof module (written-modules.v1.json): it explains the idea with its own worked case; the module's questions are hand-written, so there is no generated question to attach."
+  },
+  {
+   "competency": "MATH.reasoning.conjecture-testing",
+   "title": "One step of Kaprekar's routine",
+   "rule": "text-not-instance",
+   "reason": "General fact, not an example: the conjecture itself names Kaprekar's constant 6174 (the section's question works one step of the routine)."
+  },
+  {
+   "competency": "MATH.reasoning.conjecture-testing",
+   "title": "Testing digit conjectures: Kaprekar's 6174, repeated digit sums, reverse-and-add palindromes",
+   "rule": "text-not-instance",
+   "reason": "General facts, not examples: the three conjectures as stated (6174 within 7 steps; a repeated digit sum is the remainder on dividing by 9, or 9)."
+  },
+  {
+   "competency": "MATH.reasoning.divisibility",
+   "title": "The smallest missing digit that makes a number divisible",
+   "rule": "text-not-instance",
+   "reason": "General rule, not an example: the divisibility tests for 3, 9, 11 and 6 and why they hold (10 = 9 + 1, 100 = 99 + 1, 10 = 11 − 1)."
+  },
+  {
+   "competency": "MATH.reasoning.divisibility",
+   "title": "Which number is divisible: tests for 2, 4, 5, 8 and 10",
+   "rule": "text-not-instance",
+   "reason": "General rule, not an example: the last-digit tests for 2, 4, 5, 8 and 10 and why they hold (10, 100 and 1000 are multiples of the divisors)."
   }
  ]
 }
