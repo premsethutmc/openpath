@@ -406,7 +406,9 @@ export function alignedPractice(module: Module, ids: string[]): string[] {
   // any question the lesson itself uses (solved, or quoted with its common wrong answer) is not fresh practice
   const shown = new Set(blocks.flatMap((b) => (b.instance ? [exposureKey(b.instance)] : [])));
   const isShown = (id: string) => shown.has(exposureKey(id));
-  const taught = blocks.find((b) => b.worked?.verified && b.instance) ?? blocks.find((b) => b.instance);
+  // the lesson's own worked example (its scope's family) first: a Grade 7/8 lesson also has checked sections for its other families
+  const own = (b: (typeof blocks)[number]) => !!b.instance && problemOf(b.instance)?.family === scope.family;
+  const taught = blocks.find((b) => b.worked?.verified && own(b)) ?? blocks.find((b) => b.worked?.verified && b.instance) ?? blocks.find((b) => b.instance);
   const tp = caseOf && taught?.instance ? problemOf(taught.instance) : null;
   const kind = tp && tp.family === scope.family ? caseOf!(tp.params) : null;
   const same = (id: string) => { if (kind === null) return false; const q = problemOf(id.replace(/:mc$/, "")); return !!q && q.family === tp!.family && caseOf!(q.params) === kind; };

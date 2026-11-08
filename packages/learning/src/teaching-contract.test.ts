@@ -100,7 +100,9 @@ describe("affig (number patterns): every question of all six kinds is taught as 
 
 describe("lesson assembly (affig reference lesson)", () => {
   const m = modules.find((x) => x.competency === affig.competency)!;
-  const blocks = lessonBlocks(m);
+  // figurate-numbers is in the Grade 8 whole-lesson scope: the lesson also has a section for each other family the module
+  // practises; this reference test is about the affig sections
+  const blocks = lessonBlocks(m).filter((b) => b.instance?.startsWith("gen:affig:"));
   test("every section has a role and its own question; no violations", () => {
     expect(blocks.map((b) => b.role)).toEqual(["concept", "worked-example", "strategy", "misconception"]);
     for (const b of blocks) {

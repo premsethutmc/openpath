@@ -3024,7 +3024,8 @@
      ],
      "math": [
       "A card is picked at random from cards numbered 1 to 15. Which set is the event \"the number is an odd number\"?",
-      "Go through 1 to 15 and keep each number that is an odd number: {1, 3, 5, 7, 9, 11, 13, 15}"
+      "Go through 1 to 15 and keep each number that is an odd number: {1, 3, 5, 7, 9, 11, 13, 15}",
+      "So the answer is option D: {1, 3, 5, 7, 9, 11, 13, 15}."
      ],
      "role": "worked-example",
      "instance": "gen:akssl:1,1,4"
@@ -7819,7 +7820,8 @@
      "math": [
       "Which multiplication fact shows that 24 ÷ 4 = 6?",
       "4 groups of 6 make 24",
-      "So 24 shared into groups of 4 gives 6: 4 × 6 = 24"
+      "So 24 shared into groups of 4 gives 6: 4 × 6 = 24",
+      "So the answer is option A: 4 × 6 = 24"
      ],
      "widget": {
       "type": "array",
@@ -8796,12 +8798,13 @@
     {
      "title": "Is it a perfect square? Last digits of squares",
      "text": [
-      "The last digit of a square depends only on the last digit of the number: 0, 1, 4, 5, 6 or 9. So a number ending in 2, 3, 7 or 8 is never a perfect square; a number ending in another digit may or may not be one.",
-      "Rule out the numbers ending in 2, 3, 7 or 8. For the others, find the two squares the number lies between (e.g. 30² = 900 and 31² = 961); a perfect square must be one of them exactly."
+      "The last digit of a square depends only on the last digit of the number, and a square can only end in zero, one, four, five, six or nine. So a number ending in two, three, seven or eight is never a perfect square; a number ending in another digit may or may not be one.",
+      "Rule out the numbers ending in two, three, seven or eight. For the others, find the two neighbouring squares the number lies between; a perfect square must be one of them exactly."
      ],
      "math": [
       "Without working out the whole square, which digit does 12² end in?",
-      "The last digit of 2 × 2 = 4"
+      "The last digit of 2 × 2 = 4",
+      "So the answer is option A: 4"
      ],
      "role": "worked-example",
      "instance": "gen:ahpsq:1,12"
@@ -8840,12 +8843,13 @@
      "title": "Between which two whole numbers a square root lies",
      "text": [
       "If a² < N < (a + 1)², then a < √N < a + 1, because bigger numbers have bigger square roots.",
-      "List the squares 1, 4, 9, 16, 25 … until you pass the number. The two square roots on either side of it are the answer."
+      "Square the whole numbers one after another until a square passes the number. The two whole numbers whose squares lie just below and just above it are the answer."
      ],
      "math": [
       "√183 lies between two consecutive whole numbers. Which two? Give the answer as (smaller, larger), for example (40, 41).",
       "13² = 169, which is less than the number",
-      "14² = 196, which is more than the number"
+      "14² = 196, which is more than the number",
+      "So the square root lies between 13 and 14: (13, 14)"
      ],
      "widget": {
       "type": "numberline",
@@ -8862,7 +8866,7 @@
      "title": "How many numbers lie between two consecutive squares",
      "text": [
       "(n + 1)² − n² = 2n + 1, so the jump from one square to the next is 2n + 1, and the numbers strictly between them are 2n.",
-      "Use the pattern: between n² and (n + 1)² there are 2n whole numbers. Check with a small case such as 3² and 4² (10 to 15: six numbers)."
+      "Use the pattern: between n² and (n + 1)² there are 2n whole numbers. Check it on a small case: list the numbers between two small neighbouring squares and count them."
      ],
      "math": [
       "How many whole numbers lie between 24² and 25², not counting these two squares?",
@@ -11775,8 +11779,8 @@
       {
        "title": "Check signs on a number line",
        "text": [
-        "Before moving a term, say what it does: “+ (−7)” moves 7 to the left.",
-        "Undoing it moves 7 to the right: add 7 to both sides."
+        "Before moving a term, say what it does: “− 10” moves 10 to the left.",
+        "Undoing it moves 10 to the right: add 10 to both sides."
        ],
        "math": [
         "Solve −4x − 10 = 22.",
@@ -11796,7 +11800,8 @@
         ]
        },
        "role": "strategy",
-       "instance": "gen:lneg:-4,-10,-8"
+       "instance": "gen:lneg:-4,-10,-8",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:lneg:-9,15,-1",
@@ -29650,7 +29655,7 @@
      "math": [
       "Look at the sequence 32, 64, 128, 256, 512, … Which rule makes it?",
       "The steps from one number to the next are 32, 64, 128, 256",
-      "The rule that fits every number: Each number is double the one before (powers of 2)"
+      "The rule that fits every number is option C: Each number is double the one before (powers of 2)"
      ],
      "role": "worked-example",
      "instance": "gen:affrule:3,5,0"
@@ -30364,8 +30369,9 @@
       "Pick a square as the bottom and fold up the squares round it one at a time, saying which face each becomes (front, back, left, right, top). Opposite pairs are bottom–top, front–back, left–right; in a straight row of squares, the squares one apart are opposite."
      ],
      "math": [
-      "The picture shows a net of a cube with its six squares lettered. When it is folded into a cube, which face is opposite face F?",
-      "Folding square by square, face B ends up opposite face F"
+      "The picture shows a net of a cube with its six squares lettered. When it is folded into a cube, which face is opposite face U?",
+      "Folding square by square, face Q ends up opposite face U",
+      "So the answer is face Q"
      ],
      "role": "worked-example",
      "instance": "gen:afcube:0,25,4"
@@ -30378,7 +30384,8 @@
      ],
      "math": [
       "A cone stands on a table on its base. What do you see when you look at it from the front, at eye level?",
-      "The front view of a cone: a triangle"
+      "The front view of a cone: a triangle",
+      "So the answer is a triangle"
      ],
      "role": "worked-example",
      "instance": "gen:afnet:3,4"
@@ -30413,7 +30420,7 @@
       {
        "title": "The method",
        "text": [
-        "Prism on an n-sided base: faces n + 2, edges 3n, vertices 2n. Pyramid: faces n + 1, edges 2n, vertices n + 1. Check with Euler's rule: faces + vertices − edges = 2."
+        "Prism on an n-sided base: faces n + 2, edges three lots of n (n round each end and n joining them), vertices 2n. Pyramid: faces n + 1, edges 2n, vertices n + 1. Check with Euler's rule: faces + vertices − edges = 2."
        ],
        "math": [
         "How many vertices (corners) does a heptagonal prism have?",
@@ -30645,7 +30652,7 @@
       {
        "title": "The method",
        "text": [
-        "For each shape, check the property the name needs. Rectangle: all angles 90°. Rhombus: all sides equal. Parallelogram: opposite sides equal and opposite angles equal. Count every shape that has it."
+        "For each shape, check the property the name needs. Rectangle: all angles right angles. Rhombus: all sides equal. Parallelogram: opposite sides equal and opposite angles equal. Count every shape that has it."
        ],
        "math": [
         "The table describes five quadrilaterals, A to E. The sides and the angles are listed in order going round each shape. How many of the five are parallelograms?",
@@ -34934,7 +34941,8 @@
       "A mason checks the corner of a wall. He marks a point 6 cm from the corner along one wall and a point 8 cm from the corner along the other, and the two marks are 11 cm apart. Is the corner a right angle?",
       "The longest side is 11",
       "The squares of the other two add to 36 + 64 = 100",
-      "100 and 121 are not equal, so the triangle is not right-angled"
+      "100 and 121 are not equal, so the triangle is not right-angled",
+      "So the answer is: No, it is not right-angled"
      ],
      "role": "worked-example",
      "instance": "gen:ahconv:1,1,0,1"
@@ -34942,7 +34950,7 @@
     {
      "title": "Generating Pythagorean triples by a rule",
      "text": [
-      "(m² + 1)² − (m² − 1)² = 4m² = (2m)², so 2m, m² − 1 and m² + 1 always form a Pythagorean triple. In the same way (m² + n²)² = (m² − n²)² + (2mn)².",
+      "(m² + 1)² − (m² − 1)² = (2m)², so 2m, m² − 1 and m² + 1 always form a Pythagorean triple. In the same way (m² + n²)² = (m² − n²)² + (2mn)².",
       "From the even member 2m, halve it to get m, then work out m² − 1 and m² + 1. With m and n given, substitute into the three expressions."
      ],
      "math": [
@@ -35959,7 +35967,7 @@
       {
        "title": "The method",
        "text": [
-        "For a prism on an n-sided end: n + 2 faces, 3n edges (n round each end and n joining them), 2n vertices. For a pyramid on an n-sided base: n + 1 faces, 2n edges, n + 1 vertices."
+        "For a prism on an n-sided end: n + 2 faces, three lots of n edges (n round each end and n joining them), 2n vertices. For a pyramid on an n-sided base: n + 1 faces, 2n edges, n + 1 vertices."
        ],
        "math": [
         "A net is made of 1 heptagon and 7 triangles. When it is folded up into a solid, how many vertices does the solid have?",
@@ -36068,7 +36076,7 @@
     {
      "title": "The fourth angle of a quadrilateral",
      "text": [
-      "A diagonal cuts a quadrilateral into two triangles, so its four angles add to 2 × 180° = 360°."
+      "A diagonal cuts a quadrilateral into two triangles, so its four angles add up to the angles of two triangles: 360°."
      ],
      "math": [
       "In quadrilateral PQRS, ∠P = 115°, ∠Q = 100° and ∠R = 75°. Find ∠S, in degrees.",
@@ -36114,12 +36122,14 @@
     {
      "title": "Convex, non-convex, or not a quadrilateral?",
      "text": [
-      "A quadrilateral (4-gon) is a closed figure of four line segments meeting only at their ends, with no three corners in a line. It is convex when every inside angle is less than 180° (no dents); if one angle is more than 180°, it is non-convex.",
+      "A quadrilateral is a closed figure of four line segments meeting only at their ends, with no three corners in a line. It is convex when every inside angle is less than 180° (no dents); if one angle is more than 180°, it is non-convex.",
       "Check for a straight angle (180°) or three corners in a line: then it is not a quadrilateral. Otherwise look for an angle bigger than 180° (a corner pointing inwards): non-convex. If none, convex."
      ],
      "math": [
       "A closed path goes through four points A, B, C and D in order and back to A. The angles inside the path at the four points are ∠A = 60°, ∠B = 105°, ∠C = 90°, ∠D = 105°. What shape does the path make?",
-      "Look at the angles: it is a convex quadrilateral"
+      "No angle is 180°, so no three corners lie in a line",
+      "Every angle is less than 180°, so no corner points inwards",
+      "So the answer is: a convex quadrilateral"
      ],
      "role": "worked-example",
      "instance": "gen:aiconvex:0,0,33"
@@ -38683,7 +38693,7 @@
      "title": "Area of a segment of a circle",
      "text": [
       "A chord cuts a circle into two segments. The minor segment is the sector OAB with the triangle OAB taken away; the major segment is the rest of the circle.",
-      "Sector = θ/360 × πr². Triangle OAB = ½r² for 90°, or (√3/4)r² for 60° and 120°. Minor segment = sector − triangle; major = πr² − minor."
+      "Sector = θ/360 × πr². Triangle OAB = ½r² when ∠AOB is a right angle, or (√3/4)r² when ∠AOB is 60° or twice 60°. Minor segment = sector − triangle; major = πr² − minor."
      ],
      "math": [
       "In a circle of radius 36 cm, the chord AB makes an angle of 60° at the centre O. Taking π = 3.14 and √3 = 1.73, find the area of the minor segment cut off by AB, in cm².",
@@ -38697,7 +38707,7 @@
     {
      "title": "Area swept and distance travelled by a clock hand",
      "text": [
-      "A clock hand sweeps out a sector. The minute hand turns 360° in 60 minutes (6° a minute); the hour hand turns 360° in 12 hours (30° an hour).",
+      "A clock hand sweeps out a sector. The minute hand turns 360° in 60 minutes (6° a minute); the hour hand turns 30° an hour (a full turn in half a day).",
       "Find the angle turned, then take that fraction of 360° of the whole circle: area θ/360 × πr², or distance θ/360 × 2πr."
      ],
      "math": [
@@ -39533,7 +39543,8 @@
      ],
      "math": [
       "Compare the ratios 1 : 9 and 4 : 36. Which statement is true?",
-      "Cross-multiply: 36 and 36. They are equal, so the ratios are equivalent."
+      "Cross-multiply: 36 and 36. They are equal, so the ratios are equivalent.",
+      "So the answer is option C: 1 : 9 and 4 : 36 are equivalent"
      ],
      "role": "worked-example",
      "instance": "gen:ajrcmp:1,9,4,36"
@@ -39588,8 +39599,8 @@
       {
        "title": "Equal groups",
        "text": [
-        "18 : 24 means 18 of one thing for every 24 of another.",
-        "Make groups of 6: 3 groups and 4 groups. So for every 3 of the first there are 4 of the second: 3 : 4."
+        "16 : 6 means 16 of one thing for every 6 of another.",
+        "Make groups of 2: 8 groups and 3 groups. So for every 8 of the first there are 3 of the second: 8 : 3."
        ],
        "math": [
         "Write the ratio 16 : 6 in its simplest form.",
@@ -39597,7 +39608,8 @@
         "16 ÷ 2 : 6 ÷ 2 = 8:3"
        ],
        "role": "strategy",
-       "instance": "gen:ajrat:8,3,2,0"
+       "instance": "gen:ajrat:8,3,2,0",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:ajrat:5,3,8,0",
@@ -39717,7 +39729,7 @@
     {
      "title": "Time taken working together",
      "text": [
-      "Rates add: if Arun does 1/6 of the job each day and Bala 1/12, together they do 1/6 + 1/12 = 1/4 each day.",
+      "Rates add: if Arun alone takes a days and Bala alone takes b days, Arun does 1/a of the job each day and Bala 1/b, so together they do 1/a + 1/b of the job each day.",
       "Add the work done per day, then divide 1 whole job by that rate."
      ],
      "math": [
@@ -39732,7 +39744,7 @@
      "title": "Total cost from a fixed rate per kilometre or metre",
      "text": [
       "At a fixed rate, every kilometre (or metre) costs the same, so the total is the rate times the number of units.",
-      "Multiply the rate by the distance. Check by estimating: about ₹10 a km for about 10 km is about ₹100."
+      "Multiply the rate by the distance. Check by estimating: round the rate and the distance to easy numbers and multiply them; the answer should be close."
      ],
      "math": [
       "A shop sells ribbon at ₹6 per metre. How much do 24 metres of ribbon cost, in rupees?",
@@ -40777,7 +40789,7 @@
     {
      "title": "Compound interest half-yearly or quarterly, and compared with simple interest",
      "text": [
-      "Compounding more often means more periods at a smaller rate: half-yearly uses R/2 per half-year, quarterly R/4 per quarter. Compound interest is more than simple interest because interest earns interest.",
+      "Compounding more often means more periods at a smaller rate: half-yearly uses half the yearly rate for each half-year, quarterly a quarter of it for each quarter. Compound interest is more than simple interest because interest earns interest.",
       "Amount = P × (1 + r/100)ⁿ with r the rate per period and n the number of periods; CI = amount − P. For the difference, also find SI = P × R × T ÷ 100 and subtract."
      ],
      "math": [
@@ -40975,12 +40987,12 @@
     {
      "title": "Numbers that are sums of two cubes in two ways",
      "text": [
-      "Some numbers are the sum of two cubes in two different ways, like 1729 = 1³ + 12³ = 9³ + 10³ (Ramanujan's taxicab number).",
+      "Some numbers are the sum of two cubes in two different ways. The smallest is the famous taxicab number of the Indian mathematician Srinivasa Ramanujan.",
       "Subtract the known cube from the number, then find the cube root of what is left (by prime factorisation, or by trying numbers whose cube ends in the right digit)."
      ],
      "math": [
       "Find the number that equals both 20³ + 54³ and 38³ + 48³.",
-      "8000 + 157464 = 165464"
+      "20³ + 54³ = 8000 + 157464 = 165464"
      ],
      "role": "worked-example",
      "instance": "gen:ajtaxi:14,4"
@@ -41031,15 +41043,16 @@
       {
        "title": "Group prime factors in threes",
        "text": [
-        "Write the number as a product of primes, e.g. 1728 = 2 × 2 × 2 × 2 × 2 × 2 × 3 × 3 × 3.",
-        "Take one prime from each group of three equal primes: 2 × 2 × 3 = 12."
+        "5³ = 5 × 5 × 5, so in prime factors every prime of 5 appears three times: 125 = 5 × 5 × 5.",
+        "That is why the prime factors of a cube always come in groups of three equal primes; taking one prime from each group gives back 5."
        ],
        "math": [
         "5³ = ?",
         "5 × 5 × 5 = 125"
        ],
        "role": "strategy",
-       "instance": "gen:ajcube:0,5"
+       "instance": "gen:ajcube:0,5",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:ajcube:0,4",
@@ -41259,8 +41272,8 @@
       {
        "title": "Folding paper",
        "text": [
-        "Fold a sheet in half again and again: 2, 4, 8, 16, 32 … layers.",
-        "Adding one sheet each time gives only 2, 3, 4, 5 …: doubling soon leaves adding far behind."
+        "Fold a sheet in half again and again: the number of layers doubles with every fold.",
+        "Adding one sheet at a time grows by just one sheet each step: doubling soon leaves adding far behind."
        ],
        "math": [
         "Plan A: ₹41 on day 0, then ₹41 more each day. Plan B: ₹3 on day 0, then doubled each day. On which day is Plan B first worth more than Plan A?",
@@ -41348,7 +41361,8 @@
       "The numeral 406 is written in base 8. What is its value in base ten?",
       "4 × 8² = 256",
       "0 × 8¹ = 0",
-      "6 × 8⁰ = 6"
+      "6 × 8⁰ = 6",
+      "Add the place values: 256 + 0 + 6 = 262"
      ],
      "tip": "The digits were read as a base-ten number. In base 8 the places are worth 1, 8, 64, …, not 1, 10, 100.",
      "role": "concept",
@@ -41361,10 +41375,11 @@
       "Divide by b again and again, writing each remainder. Stop at 0, then read the remainders from the last to the first."
      ],
      "math": [
-      "Write the base-ten number 106 in base 5. Type the digits of the base-5 numeral.",
+      "Write the base-ten number 106 in base 5. What is the base-5 numeral?",
       "106 ÷ 5 = 21 remainder 1",
       "21 ÷ 5 = 4 remainder 1",
-      "4 ÷ 5 = 0 remainder 4"
+      "4 ÷ 5 = 0 remainder 4",
+      "Read the remainders from the last to the first: 4, 1, 1, so the numeral is 411"
      ],
      "role": "worked-example",
      "instance": "gen:ajbase:5,106"
@@ -41392,7 +41407,8 @@
         "2 × 3³ = 54",
         "1 × 3² = 9",
         "2 × 3¹ = 6",
-        "1 × 3⁰ = 1"
+        "1 × 3⁰ = 1",
+        "Add the place values: 54 + 9 + 6 + 1 = 70"
        ],
        "role": "worked-example",
        "instance": "gen:ajb10:3,70"
@@ -41411,7 +41427,7 @@
        "title": "Multiply and add from the left",
        "text": [
         "Start with the first digit. Multiply by the base and add the next digit; repeat to the end.",
-        "Base 5, 243: 2 × 5 + 4 = 14, 14 × 5 + 3 = 73."
+        "Base 3, 20121: 2 × 3 + 0 = 6, 6 × 3 + 1 = 19, 19 × 3 + 2 = 59, 59 × 3 + 1 = 178."
        ],
        "math": [
         "The numeral 20121 is written in base 3. What is its value in base ten?",
@@ -41419,10 +41435,12 @@
         "0 × 3³ = 0",
         "1 × 3² = 9",
         "2 × 3¹ = 6",
-        "1 × 3⁰ = 1"
+        "1 × 3⁰ = 1",
+        "Add the place values: 162 + 0 + 9 + 6 + 1 = 178"
        ],
        "role": "strategy",
-       "instance": "gen:ajb10:3,178"
+       "instance": "gen:ajb10:3,178",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:ajb10:7,389",
@@ -41506,7 +41524,7 @@
     {
      "title": "Writing a number in scientific notation",
      "text": [
-      "Each place the decimal point moves left divides by 10, so to keep the value the same we multiply by 10 that many times: 45,200 = 4.52 × 10⁴. Moving the point right multiplies by 10, so it is balanced by a negative power: 0.0045 = 4.5 × 10⁻³."
+      "Each place the decimal point moves to the left divides the number by 10, so to keep the value the same we multiply by 10 once for each place: the power of 10 counts the places moved. Moving the point to the right multiplies by 10, so it is balanced by a negative power of 10."
      ],
      "math": [
       "Write 0.777 in scientific notation, a × 10ⁿ with 1 ≤ a < 10. Give your answer as (a, n): for example, 3.5 × 10⁴ is written (3.5, 4).",
@@ -41525,7 +41543,7 @@
      ],
      "math": [
       "Write 5.84 × 10⁵ as an ordinary number.",
-      "Multiply 5.84 by 10 5 times: move the point 5 places to the right to get 584000"
+      "Multiply 5.84 by 10, 5 times: move the point 5 places to the right to get 584000"
      ],
      "role": "worked-example",
      "instance": "gen:akscid:584,5"
@@ -41533,12 +41551,13 @@
     {
      "title": "The largest of four numbers in scientific notation",
      "text": [
-      "In scientific notation the power of 10 tells the size: a number with a higher power is bigger, whatever number stands in front (that number is always between 1 and 10).",
-      "Compare the powers of 10 first (for negative powers, −3 is higher than −7). Only when the powers are equal compare the numbers in front."
+      "In scientific notation the power of 10 tells the size: a number with a higher power is bigger, whatever number stands in front (that number is always at least 1 and less than 10).",
+      "Compare the powers of 10 first (for negative powers, the one closer to zero is higher). Only when the powers are equal compare the numbers in front."
      ],
      "math": [
       "Which of these is the largest? 3.6 × 10¹²;  8.6 × 10¹¹;  6.9 × 10¹⁰;  3.2 × 10¹¹",
-      "Compare the powers of 10 first, then the numbers in front"
+      "The highest power of 10 is 10¹², and only one number has it",
+      "So the answer is option A: 3.6 × 10¹²"
      ],
      "role": "worked-example",
      "instance": "gen:akscmp:46"
@@ -41613,8 +41632,8 @@
       {
        "title": "Use the place value of the first digit",
        "text": [
-        "Find the place of the first non-zero digit. In 4,52,000 the 4 is in the lakhs place, and 1,00,000 = 10⁵, so n = 5.",
-        "In 0.00045 the 4 is in the ten-thousandths place, and 1/10000 = 10⁻⁴, so n = −4."
+        "Find the place of the first non-zero digit. In 0.00885 it is in the thousandths place, worth 1/1,000, which is 10⁻³, so n = −3.",
+        "Put the point just after that digit to get a = 8.85: the number is 8.85 × 10⁻³."
        ],
        "math": [
         "Write 0.00885 in scientific notation, a × 10ⁿ with 1 ≤ a < 10. Give your answer as (a, n): for example, 3.5 × 10⁴ is written (3.5, 4).",
@@ -41643,7 +41662,8 @@
         ]
        },
        "role": "strategy",
-       "instance": "gen:aksci:885,-3"
+       "instance": "gen:aksci:885,-3",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:aksci:122,-5",
@@ -42305,7 +42325,7 @@
        "title": "Test the conjecture",
        "text": [
         "Use your answer as the new number and do the routine again (write it with four digits, adding a 0 in front if needed).",
-        "Within at most seven steps you should reach 6174, which gives 7641 − 1467 = 6174 again."
+        "From 1021: 1021 → 1998 → 8082 → 8532 → 6174. 4 steps reach 6174, and then 7641 − 1467 = 6174 again."
        ],
        "math": [
         "Kaprekar's routine: arrange the four digits of 1021 to make the largest possible number and the smallest possible number (the smallest may start with 0, like 0379 = 379), then subtract the smaller from the larger. What do you get?",
@@ -42314,7 +42334,8 @@
         "2110 − 112 = 1998"
        ],
        "role": "strategy",
-       "instance": "gen:akkap:1021"
+       "instance": "gen:akkap:1021",
+       "textFrom": "instance"
       }
      ],
      "guided": "gen:akkap:7512",
@@ -42449,7 +42470,8 @@
      ],
      "math": [
       "Which of these numbers is divisible by 10? 20794;  83084;  75880;  92455",
-      "By 10: the ones digit is 0"
+      "By 10: the ones digit is 0",
+      "So the answer is option C: 75880."
      ],
      "role": "worked-example",
      "instance": "gen:akdsort:2,50"
@@ -42484,7 +42506,7 @@
       {
        "title": "The method",
        "text": [
-        "Use the test with the digits you know, work out what the missing digit must be to pass, and choose the smallest digit from 0 to 9 that does."
+        "Use the test with the digits you know, work out what the missing digit must be to pass, and choose the smallest digit that does (try 0 first, then 1, and so on)."
        ],
        "math": [
         "What is the smallest digit that can go in the box so that 82□16 is divisible by 6?",
@@ -43348,7 +43370,8 @@
      ],
      "math": [
       "In a shift code every letter moves forward 12 places along the alphabet (after Z it goes back to A). How is ORANGE written in this code?",
-      "Move each letter of ORANGE forward 12 places"
+      "Move each letter of ORANGE forward 12 places",
+      "So the answer is option A: ADMZSQ."
      ],
      "widget": {
       "type": "table",
@@ -48613,7 +48636,9 @@
      ],
      "math": [
       "In ΔABC and ΔPQR (A matches P, B matches Q, C matches R): AB = 8 cm, PQ = 20 cm; AC = 12 cm, PR = 30 cm; ∠A = ∠P = 65°. Which statement is true?",
-      "Two pairs of sides in the same ratio and the angles between them equal: SAS"
+      "PQ/AB = 20/8 = 5/2; PR/AC = 30/12 = 5/2",
+      "Two pairs of sides in the same ratio and the angles between them equal: SAS",
+      "So the answer is: Similar by SAS"
      ],
      "role": "worked-example",
      "instance": "gen:amsimc:2,2,3"
@@ -48654,7 +48679,8 @@
      ],
      "math": [
       "In ΔABC, D is on AB and E is on AC, with AD = 8 cm, DB = 7 cm, AE = 20 cm and EC = 17.5 cm. Which statement is true?",
-      "8/7 = 8/7 and 20/17.5 = 8/7: equal"
+      "8/7 = 8/7 and 20/17.5 = 8/7: equal",
+      "So the answer is: DE ∥ BC (by the converse of the basic proportionality theorem)"
      ],
      "role": "worked-example",
      "instance": "gen:ambptc:0,8,7,2,0"
@@ -54176,7 +54202,7 @@
     {
      "title": "Evaluating and simplifying expressions with factorials",
      "text": [
-      "n! = n × (n − 1) × … × 2 × 1, and n! = n × (n − 1)!. So a bigger factorial contains every smaller one: 8! = 8 × 7 × 6!.",
+      "n! = n × (n − 1) × … × 2 × 1, and n! = n × (n − 1)!. So a bigger factorial contains every smaller one: n! = n × (n − 1) × (n − 2)!.",
       "To simplify a quotient, write the bigger factorial down to the smaller one and cancel. To add fractions with factorials, rewrite each over the biggest factorial."
      ],
      "math": [
@@ -70445,7 +70471,8 @@
      ],
      "math": [
       "In △ABC, D is the midpoint of BC and AD = 24 cm. One of the four centres of the triangle is the point P on AD with AP = 16 cm and PD = 8 cm. Which centre is P?",
-      "This describes the centroid."
+      "AD is a median (D is the midpoint of the opposite side), and AP : PD = 16 : 8 = 2 : 1. The centroid divides each median in the ratio 2 : 1",
+      "So the answer is: the centroid"
      ],
      "tip": "A point well inside the triangle was taken to be the incentre. The incentre lies on the angle bisectors; a point on the line from a corner to a midpoint, two thirds of the way along, is the centroid.",
      "role": "concept",
@@ -70517,7 +70544,8 @@
        ],
        "math": [
         "In △LMN, D is the midpoint of MN and LD = 27 cm. One of the four centres of the triangle is the point P on LD with LP = 18 cm and PD = 9 cm. Which centre is P?",
-        "This describes the centroid."
+        "LD is a median (D is the midpoint of the opposite side), and LP : PD = 18 : 9 = 2 : 1. The centroid divides each median in the ratio 2 : 1",
+        "So the answer is: the centroid"
        ],
        "role": "worked-example",
        "instance": "gen:awctr:6,7"
@@ -70540,7 +70568,8 @@
        ],
        "math": [
         "P is the orthocentre of △UVW. Which three lines of the triangle all pass through P?",
-        "This describes the three altitudes."
+        "The orthocentre is the point where the three altitudes meet",
+        "So the answer is: the three altitudes"
        ],
        "role": "strategy",
        "instance": "gen:awctr:13,4"
@@ -70563,7 +70592,8 @@
        ],
        "math": [
         "P is the orthocentre of △XYZ. Which three lines of the triangle all pass through P?",
-        "This describes the three altitudes."
+        "The orthocentre is the point where the three altitudes meet",
+        "So the answer is: the three altitudes"
        ],
        "widget": {
         "type": "circle",

@@ -1229,7 +1229,7 @@
     "idea": "Dividing makes equal groups; the remainder is what is left when no more full groups fit.",
     "method": "Find the biggest multiple of the divisor that fits, then subtract it from the number."
    },
-   "fingerprint": "3eca44a6",
+   "fingerprint": "1a4a6468",
    "validation": {
     "family": "divr",
     "deterministic": {
@@ -2619,7 +2619,7 @@
      }
     ]
    },
-   "fingerprint": "36d02165",
+   "fingerprint": "7a32e481",
    "validation": {
     "family": "lneg",
     "deterministic": {
@@ -21736,7 +21736,7 @@
      }
     ]
    },
-   "fingerprint": "1bc73d19",
+   "fingerprint": "c9978ccd",
    "validation": {
     "family": "aelinw",
     "deterministic": {
@@ -23374,7 +23374,7 @@
    ],
    "teach": {
     "idea": "A prism has two equal ends joined by rectangles; a pyramid has one base joined to a top point by triangles. Counting part by part makes the counts easy.",
-    "method": "Prism on an n-sided base: faces n + 2, edges 3n, vertices 2n. Pyramid: faces n + 1, edges 2n, vertices n + 1. Check with Euler's rule: faces + vertices − edges = 2.",
+    "method": "Prism on an n-sided base: faces n + 2, edges three lots of n (n round each end and n joining them), vertices 2n. Pyramid: faces n + 1, edges 2n, vertices n + 1. Check with Euler's rule: faces + vertices − edges = 2.",
     "alternatives": [
      {
       "id": "part_by_part",
@@ -23396,7 +23396,7 @@
      }
     ]
    },
-   "fingerprint": "bd835f7b",
+   "fingerprint": "3259ae85",
    "validation": {
     "family": "afsolid",
     "deterministic": {
@@ -23540,7 +23540,7 @@
    ],
    "teach": {
     "idea": "Shape names describe properties, so one shape can have several names: a square is a rectangle (four right angles), a rhombus (four equal sides) and a parallelogram (opposite sides equal and parallel).",
-    "method": "For each shape, check the property the name needs. Rectangle: all angles 90°. Rhombus: all sides equal. Parallelogram: opposite sides equal and opposite angles equal. Count every shape that has it.",
+    "method": "For each shape, check the property the name needs. Rectangle: all angles right angles. Rhombus: all sides equal. Parallelogram: opposite sides equal and opposite angles equal. Count every shape that has it.",
     "alternatives": [
      {
       "id": "family_tree",
@@ -23553,7 +23553,7 @@
      }
     ]
    },
-   "fingerprint": "a74e1306",
+   "fingerprint": "1a30b5d7",
    "validation": {
     "family": "afquad",
     "deterministic": {
@@ -24292,7 +24292,7 @@
      }
     ]
    },
-   "fingerprint": "0e39bfa7",
+   "fingerprint": "914a740a",
    "validation": {
     "family": "afpside",
     "deterministic": {
@@ -24437,8 +24437,8 @@
     "gen:afcube:0,42,1"
    ],
    "explanations": [
-    "round-corner (procedural): D does not touch B in the net, but after folding it is next to it. Fold the net in your mind one square at a time to see where each square ends up.",
-    "next-door (conceptual): A shares an edge with B in the net, so after folding it is next to B, not opposite. A face is never opposite a square it touches in the net.",
+    "round-corner (procedural): S does not touch Q in the net, but after folding it is next to it. Fold the net in your mind one square at a time to see where each square ends up.",
+    "next-door (conceptual): P shares an edge with Q in the net, so after folding it is next to Q, not opposite. A face is never opposite a square it touches in the net.",
     "six-is-enough (conceptual): Six squares were taken to be enough. When this shape is folded, two squares land on the same face of the cube and one face is left open.",
     "looks-odd (conceptual): The shape looks unusual, but folding it square by square gives six different faces, so it is a cube net. Many different shapes fold into a cube (there are 11 nets)."
    ],
@@ -24466,7 +24466,7 @@
      }
     ]
    },
-   "fingerprint": "0ddfba28",
+   "fingerprint": "bf4fbcb8",
    "validation": {
     "family": "afcube",
     "deterministic": {
@@ -24547,7 +24547,7 @@
      }
     ]
    },
-   "fingerprint": "3128aa52",
+   "fingerprint": "9507076c",
    "validation": {
     "family": "afnet",
     "deterministic": {
@@ -24716,7 +24716,7 @@
      }
     ]
    },
-   "fingerprint": "534378a3",
+   "fingerprint": "05a5fe55",
    "validation": {
     "family": "affrule",
     "deterministic": {
@@ -25103,7 +25103,7 @@
      }
     ]
    },
-   "fingerprint": "fa14db41",
+   "fingerprint": "d25808ff",
    "validation": {
     "family": "agfac",
     "deterministic": {
@@ -25175,7 +25175,7 @@
      }
     ]
    },
-   "fingerprint": "8726e73d",
+   "fingerprint": "16912a97",
    "validation": {
     "family": "agcomf",
     "deterministic": {
@@ -25251,7 +25251,7 @@
      }
     ]
    },
-   "fingerprint": "a5837550",
+   "fingerprint": "fa359cc0",
    "validation": {
     "family": "agjump",
     "deterministic": {
@@ -29402,7 +29402,7 @@
      }
     ]
    },
-   "fingerprint": "ddf55f1a",
+   "fingerprint": "26eaec92",
    "validation": {
     "family": "ahpyth",
     "deterministic": {
@@ -30125,7 +30125,7 @@
      }
     ]
    },
-   "fingerprint": "22128e19",
+   "fingerprint": "d5de8eb9",
    "validation": {
     "family": "ahconv",
     "deterministic": {
@@ -30188,7 +30188,7 @@
     "other-member (procedural): Another member of the triple was given; the question asks for m² + n²."
    ],
    "teach": {
-    "idea": "(m² + 1)² − (m² − 1)² = 4m² = (2m)², so 2m, m² − 1 and m² + 1 always form a Pythagorean triple. In the same way (m² + n²)² = (m² − n²)² + (2mn)².",
+    "idea": "(m² + 1)² − (m² − 1)² = (2m)², so 2m, m² − 1 and m² + 1 always form a Pythagorean triple. In the same way (m² + n²)² = (m² − n²)² + (2mn)².",
     "method": "From the even member 2m, halve it to get m, then work out m² − 1 and m² + 1. With m and n given, substitute into the three expressions.",
     "alternatives": [
      {
@@ -30211,7 +30211,7 @@
      }
     ]
    },
-   "fingerprint": "d40d672a",
+   "fingerprint": "dcb63ac6",
    "validation": {
     "family": "ahgen",
     "deterministic": {
@@ -30649,7 +30649,7 @@
      }
     ]
    },
-   "fingerprint": "a5aaedf9",
+   "fingerprint": "df11c823",
    "validation": {
     "family": "ahmap",
     "deterministic": {
@@ -30886,8 +30886,8 @@
     "same-digit (conceptual): The square was taken to end in the same digit as 99. Only the last digit of 9 × 9 matters: 81."
    ],
    "teach": {
-    "idea": "The last digit of a square depends only on the last digit of the number: 0, 1, 4, 5, 6 or 9. So a number ending in 2, 3, 7 or 8 is never a perfect square; a number ending in another digit may or may not be one.",
-    "method": "Rule out the numbers ending in 2, 3, 7 or 8. For the others, find the two squares the number lies between (e.g. 30² = 900 and 31² = 961); a perfect square must be one of them exactly.",
+    "idea": "The last digit of a square depends only on the last digit of the number, and a square can only end in zero, one, four, five, six or nine. So a number ending in two, three, seven or eight is never a perfect square; a number ending in another digit may or may not be one.",
+    "method": "Rule out the numbers ending in two, three, seven or eight. For the others, find the two neighbouring squares the number lies between; a perfect square must be one of them exactly.",
     "alternatives": [
      {
       "id": "table",
@@ -30909,7 +30909,7 @@
      }
     ]
    },
-   "fingerprint": "cac97edc",
+   "fingerprint": "c1b2e3a1",
    "validation": {
     "family": "ahpsq",
     "deterministic": {
@@ -30986,7 +30986,7 @@
      }
     ]
    },
-   "fingerprint": "05e87e32",
+   "fingerprint": "da3e4a42",
    "validation": {
     "family": "ahsqd",
     "deterministic": {
@@ -31282,7 +31282,7 @@
    ],
    "teach": {
     "idea": "A prism has two equal ends joined by rectangles; a pyramid has one base and triangles meeting at a top point. The shape of the end or base tells you all the counts.",
-    "method": "For a prism on an n-sided end: n + 2 faces, 3n edges (n round each end and n joining them), 2n vertices. For a pyramid on an n-sided base: n + 1 faces, 2n edges, n + 1 vertices.",
+    "method": "For a prism on an n-sided end: n + 2 faces, three lots of n edges (n round each end and n joining them), 2n vertices. For a pyramid on an n-sided base: n + 1 faces, 2n edges, n + 1 vertices.",
     "alternatives": [
      {
       "id": "fold_net",
@@ -31295,7 +31295,7 @@
      }
     ]
    },
-   "fingerprint": "63f33d44",
+   "fingerprint": "4f32fc58",
    "validation": {
     "family": "aisolid",
     "deterministic": {
@@ -31356,7 +31356,7 @@
     "total-given (procedural): The three angles were added, but the total was not taken from 360°."
    ],
    "teach": {
-    "idea": "A diagonal cuts a quadrilateral into two triangles, so its four angles add to 2 × 180° = 360°.",
+    "idea": "A diagonal cuts a quadrilateral into two triangles, so its four angles add up to the angles of two triangles: 360°.",
     "method": "Add the three angles you know and take the total from 360°.",
     "alternatives": [
      {
@@ -31370,7 +31370,7 @@
      }
     ]
    },
-   "fingerprint": "8a6ed064",
+   "fingerprint": "d748f70f",
    "validation": {
     "family": "aiquad",
     "deterministic": {
@@ -31525,7 +31525,7 @@
      }
     ]
    },
-   "fingerprint": "a3c15ef0",
+   "fingerprint": "34db18a6",
    "validation": {
     "family": "aidiag",
     "deterministic": {
@@ -34398,7 +34398,7 @@
     "four-points-enough (conceptual): Four points were taken to make a quadrilateral. A, B and C lie on one straight line, so the figure is a triangle, not a 4-gon."
    ],
    "teach": {
-    "idea": "A quadrilateral (4-gon) is a closed figure of four line segments meeting only at their ends, with no three corners in a line. It is convex when every inside angle is less than 180° (no dents); if one angle is more than 180°, it is non-convex.",
+    "idea": "A quadrilateral is a closed figure of four line segments meeting only at their ends, with no three corners in a line. It is convex when every inside angle is less than 180° (no dents); if one angle is more than 180°, it is non-convex.",
     "method": "Check for a straight angle (180°) or three corners in a line: then it is not a quadrilateral. Otherwise look for an angle bigger than 180° (a corner pointing inwards): non-convex. If none, convex.",
     "alternatives": [
      {
@@ -34421,7 +34421,7 @@
      }
     ]
    },
-   "fingerprint": "f0d1f33c",
+   "fingerprint": "8bf112db",
    "validation": {
     "family": "aiconvex",
     "deterministic": {
@@ -35225,7 +35225,7 @@
      }
     ]
    },
-   "fingerprint": "91b50ff3",
+   "fingerprint": "a06166e8",
    "validation": {
     "family": "ajrat",
     "deterministic": {
@@ -35305,7 +35305,7 @@
      }
     ]
    },
-   "fingerprint": "53c0c2e0",
+   "fingerprint": "a5127128",
    "validation": {
     "family": "ajeqr",
     "deterministic": {
@@ -35381,7 +35381,7 @@
      }
     ]
    },
-   "fingerprint": "c00c69da",
+   "fingerprint": "0e971fbc",
    "validation": {
     "family": "ajrate",
     "deterministic": {
@@ -35461,7 +35461,7 @@
      }
     ]
    },
-   "fingerprint": "e7f6d9a9",
+   "fingerprint": "00c0d8c1",
    "validation": {
     "family": "ajbest",
     "deterministic": {
@@ -35519,7 +35519,7 @@
     "rate-not-inverted (procedural): The work done in one day (1/23 + 1/24) was given; the number of days is 1 divided by that."
    ],
    "teach": {
-    "idea": "Rates add: if Arun does 1/6 of the job each day and Bala 1/12, together they do 1/6 + 1/12 = 1/4 each day.",
+    "idea": "Rates add: if Arun alone takes a days and Bala alone takes b days, Arun does 1/a of the job each day and Bala 1/b, so together they do 1/a + 1/b of the job each day.",
     "method": "Add the work done per day, then divide 1 whole job by that rate.",
     "alternatives": [
      {
@@ -35533,7 +35533,7 @@
      }
     ]
    },
-   "fingerprint": "3496a0ef",
+   "fingerprint": "1d274499",
    "validation": {
     "family": "ajwork",
     "deterministic": {
@@ -36408,7 +36408,7 @@
      }
     ]
    },
-   "fingerprint": "f973b07a",
+   "fingerprint": "128fca3b",
    "validation": {
     "family": "ajci",
     "deterministic": {
@@ -36483,7 +36483,7 @@
      }
     ]
    },
-   "fingerprint": "8295cb9e",
+   "fingerprint": "c71d78be",
    "validation": {
     "family": "ajcube",
     "deterministic": {
@@ -36552,7 +36552,7 @@
      }
     ]
    },
-   "fingerprint": "7b8a4e9e",
+   "fingerprint": "e11ebfa0",
    "validation": {
     "family": "ajcmul",
     "deterministic": {
@@ -36623,13 +36623,13 @@
       "title": "Folding paper",
       "kind": "conceptual",
       "text": [
-       "Fold a sheet in half again and again: 2, 4, 8, 16, 32 … layers.",
-       "Adding one sheet each time gives only 2, 3, 4, 5 …: doubling soon leaves adding far behind."
+       "Fold a sheet in half again and again: the number of layers doubles with every fold.",
+       "Adding one sheet at a time grows by just one sheet each step: doubling soon leaves adding far behind."
       ]
      }
     ]
    },
-   "fingerprint": "f16cf00e",
+   "fingerprint": "302f0094",
    "validation": {
     "family": "ajgrow",
     "deterministic": {
@@ -36701,7 +36701,7 @@
      }
     ]
    },
-   "fingerprint": "9b1cd4ad",
+   "fingerprint": "f84ae2e9",
    "validation": {
     "family": "ajb10",
     "deterministic": {
@@ -36773,7 +36773,7 @@
      }
     ]
    },
-   "fingerprint": "fe73ea93",
+   "fingerprint": "a6607a25",
    "validation": {
     "family": "ajbase",
     "deterministic": {
@@ -37415,7 +37415,7 @@
     "cube-of-sum (conceptual): The two numbers were added first and then cubed; (a + b)³ is not a³ + b³."
    ],
    "teach": {
-    "idea": "Some numbers are the sum of two cubes in two different ways, like 1729 = 1³ + 12³ = 9³ + 10³ (Ramanujan's taxicab number).",
+    "idea": "Some numbers are the sum of two cubes in two different ways. The smallest is the famous taxicab number of the Indian mathematician Srinivasa Ramanujan.",
     "method": "Subtract the known cube from the number, then find the cube root of what is left (by prime factorisation, or by trying numbers whose cube ends in the right digit).",
     "alternatives": [
      {
@@ -37429,7 +37429,7 @@
      }
     ]
    },
-   "fingerprint": "3a9198a8",
+   "fingerprint": "84758761",
    "validation": {
     "family": "ajtaxi",
     "deterministic": {
@@ -37508,7 +37508,7 @@
      }
     ]
    },
-   "fingerprint": "d0821f3e",
+   "fingerprint": "eaf073c6",
    "validation": {
     "family": "ajrcmp",
     "deterministic": {
@@ -37571,7 +37571,7 @@
    ],
    "teach": {
     "idea": "At a fixed rate, every kilometre (or metre) costs the same, so the total is the rate times the number of units.",
-    "method": "Multiply the rate by the distance. Check by estimating: about ₹10 a km for about 10 km is about ₹100.",
+    "method": "Multiply the rate by the distance. Check by estimating: round the rate and the distance to easy numbers and multiply them; the answer should be close.",
     "alternatives": [
      {
       "id": "table",
@@ -37584,7 +37584,7 @@
      }
     ]
    },
-   "fingerprint": "0e963669",
+   "fingerprint": "dbe46f7d",
    "validation": {
     "family": "ajfare",
     "deterministic": {
@@ -38044,7 +38044,7 @@
     "amount-minus-si (procedural): The simple interest was taken away from the amount; take it away from the compound interest (amount − principal)."
    ],
    "teach": {
-    "idea": "Compounding more often means more periods at a smaller rate: half-yearly uses R/2 per half-year, quarterly R/4 per quarter. Compound interest is more than simple interest because interest earns interest.",
+    "idea": "Compounding more often means more periods at a smaller rate: half-yearly uses half the yearly rate for each half-year, quarterly a quarter of it for each quarter. Compound interest is more than simple interest because interest earns interest.",
     "method": "Amount = P × (1 + r/100)ⁿ with r the rate per period and n the number of periods; CI = amount − P. For the difference, also find SI = P × R × T ÷ 100 and subtract.",
     "alternatives": [
      {
@@ -38058,7 +38058,7 @@
      }
     ]
    },
-   "fingerprint": "1e3c35a5",
+   "fingerprint": "6366c58e",
    "validation": {
     "family": "ajcip",
     "deterministic": {
@@ -38600,7 +38600,7 @@
     "counted-zeros (procedural): Only the zeros at the end were counted. The point also moves past the other digits after the first one."
    ],
    "teach": {
-    "idea": "Each place the decimal point moves left divides by 10, so to keep the value the same we multiply by 10 that many times: 45,200 = 4.52 × 10⁴. Moving the point right multiplies by 10, so it is balanced by a negative power: 0.0045 = 4.5 × 10⁻³.",
+    "idea": "Each place the decimal point moves to the left divides the number by 10, so to keep the value the same we multiply by 10 once for each place: the power of 10 counts the places moved. Moving the point to the right multiplies by 10, so it is balanced by a negative power of 10.",
     "method": "Put the point just after the first non-zero digit to get a. Count how many places the point moved: to the left gives a positive n, to the right gives a negative n.",
     "alternatives": [
      {
@@ -38614,7 +38614,7 @@
      }
     ]
    },
-   "fingerprint": "f82b9ae8",
+   "fingerprint": "56fd95f5",
    "validation": {
     "family": "aksci",
     "deterministic": {
@@ -38687,7 +38687,7 @@
      }
     ]
    },
-   "fingerprint": "875d2a27",
+   "fingerprint": "dd572373",
    "validation": {
     "family": "akscid",
     "deterministic": {
@@ -38761,7 +38761,7 @@
      }
     ]
    },
-   "fingerprint": "0cf9a232",
+   "fingerprint": "ee26cc26",
    "validation": {
     "family": "aksqf",
     "deterministic": {
@@ -38816,7 +38816,7 @@
    ],
    "teach": {
     "idea": "If a² < N < (a + 1)², then a < √N < a + 1, because bigger numbers have bigger square roots.",
-    "method": "List the squares 1, 4, 9, 16, 25 … until you pass the number. The two square roots on either side of it are the answer.",
+    "method": "Square the whole numbers one after another until a square passes the number. The two whole numbers whose squares lie just below and just above it are the answer.",
     "alternatives": [
      {
       "id": "square_table",
@@ -38829,7 +38829,7 @@
      }
     ]
    },
-   "fingerprint": "a14ad477",
+   "fingerprint": "10fc7e35",
    "validation": {
     "family": "aksqe",
     "deterministic": {
@@ -38884,7 +38884,7 @@
    ],
    "teach": {
     "idea": "(n + 1)² − n² = 2n + 1, so the jump from one square to the next is 2n + 1, and the numbers strictly between them are 2n.",
-    "method": "Use the pattern: between n² and (n + 1)² there are 2n whole numbers. Check with a small case such as 3² and 4² (10 to 15: six numbers).",
+    "method": "Use the pattern: between n² and (n + 1)² there are 2n whole numbers. Check it on a small case: list the numbers between two small neighbouring squares and count them.",
     "alternatives": [
      {
       "id": "square_grow",
@@ -38897,7 +38897,7 @@
      }
     ]
    },
-   "fingerprint": "db4c4d57",
+   "fingerprint": "e9277130",
    "validation": {
     "family": "aksqb",
     "deterministic": {
@@ -39220,7 +39220,7 @@
      }
     ]
    },
-   "fingerprint": "e909d018",
+   "fingerprint": "a14f2120",
    "validation": {
     "family": "akdice",
     "deterministic": {
@@ -39437,7 +39437,7 @@
      }
     ]
    },
-   "fingerprint": "408ce4d2",
+   "fingerprint": "661305ce",
    "validation": {
     "family": "akkap",
     "deterministic": {
@@ -39645,7 +39645,7 @@
    ],
    "teach": {
     "idea": "A number is divisible by 3 (or 9) exactly when its digit sum is; by 11 when the sums of alternate digits differ by a multiple of 11 (0, 11, 22 …); by 6 when it passes the tests for both 2 and 3. These come from place value: 10 = 9 + 1, 100 = 99 + 1, 10 = 11 − 1.",
-    "method": "Use the test with the digits you know, work out what the missing digit must be to pass, and choose the smallest digit from 0 to 9 that does.",
+    "method": "Use the test with the digits you know, work out what the missing digit must be to pass, and choose the smallest digit that does (try 0 first, then 1, and so on).",
     "alternatives": [
      {
       "id": "try_digits",
@@ -39658,7 +39658,7 @@
      }
     ]
    },
-   "fingerprint": "ca9e8bf7",
+   "fingerprint": "d6c2b78b",
    "validation": {
     "family": "akdivd",
     "deterministic": {
@@ -40701,7 +40701,7 @@
      }
     ]
    },
-   "fingerprint": "5064596f",
+   "fingerprint": "9b4f3dd9",
    "validation": {
     "family": "akdsort",
     "deterministic": {
@@ -40897,8 +40897,8 @@
     "negative-power (conceptual): A larger negative power was taken as larger. 10⁻⁷ is much smaller than 10⁻³: the more negative the power, the smaller the number."
    ],
    "teach": {
-    "idea": "In scientific notation the power of 10 tells the size: a number with a higher power is bigger, whatever number stands in front (that number is always between 1 and 10).",
-    "method": "Compare the powers of 10 first (for negative powers, −3 is higher than −7). Only when the powers are equal compare the numbers in front.",
+    "idea": "In scientific notation the power of 10 tells the size: a number with a higher power is bigger, whatever number stands in front (that number is always at least 1 and less than 10).",
+    "method": "Compare the powers of 10 first (for negative powers, the one closer to zero is higher). Only when the powers are equal compare the numbers in front.",
     "alternatives": [
      {
       "id": "write-out",
@@ -40911,7 +40911,7 @@
      }
     ]
    },
-   "fingerprint": "875c616d",
+   "fingerprint": "44cae2ec",
    "validation": {
     "family": "akscmp",
     "deterministic": {
@@ -40990,7 +40990,7 @@
      }
     ]
    },
-   "fingerprint": "3fc41fd0",
+   "fingerprint": "2ca43f00",
    "validation": {
     "family": "aksmag",
     "deterministic": {
@@ -41074,7 +41074,7 @@
      }
     ]
    },
-   "fingerprint": "38e3a577",
+   "fingerprint": "0aa8c847",
    "validation": {
     "family": "akscalc",
     "deterministic": {
@@ -41305,7 +41305,7 @@
      }
     ]
    },
-   "fingerprint": "7bfc5641",
+   "fingerprint": "024a5c01",
    "validation": {
     "family": "akssl",
     "deterministic": {
@@ -41607,7 +41607,7 @@
      }
     ]
    },
-   "fingerprint": "0382b82a",
+   "fingerprint": "95fb445a",
    "validation": {
     "family": "akcode",
     "deterministic": {
@@ -47511,7 +47511,7 @@
    ],
    "teach": {
     "idea": "A chord cuts a circle into two segments. The minor segment is the sector OAB with the triangle OAB taken away; the major segment is the rest of the circle.",
-    "method": "Sector = θ/360 × πr². Triangle OAB = ½r² for 90°, or (√3/4)r² for 60° and 120°. Minor segment = sector − triangle; major = πr² − minor.",
+    "method": "Sector = θ/360 × πr². Triangle OAB = ½r² when ∠AOB is a right angle, or (√3/4)r² when ∠AOB is 60° or twice 60°. Minor segment = sector − triangle; major = πr² − minor.",
     "alternatives": [
      {
       "id": "cut_out",
@@ -47524,7 +47524,7 @@
      }
     ]
    },
-   "fingerprint": "7879f231",
+   "fingerprint": "a871b69f",
    "validation": {
     "family": "amseg",
     "deterministic": {
@@ -47592,7 +47592,7 @@
     "six-per-hour (conceptual): The hour hand was turned 6° per hour, like the minute hand per minute. The hour hand turns 30° each hour (360° in 12 hours)."
    ],
    "teach": {
-    "idea": "A clock hand sweeps out a sector. The minute hand turns 360° in 60 minutes (6° a minute); the hour hand turns 360° in 12 hours (30° an hour).",
+    "idea": "A clock hand sweeps out a sector. The minute hand turns 360° in 60 minutes (6° a minute); the hour hand turns 30° an hour (a full turn in half a day).",
     "method": "Find the angle turned, then take that fraction of 360° of the whole circle: area θ/360 × πr², or distance θ/360 × 2πr.",
     "alternatives": [
      {
@@ -47606,7 +47606,7 @@
      }
     ]
    },
-   "fingerprint": "f2eca425",
+   "fingerprint": "0b395227",
    "validation": {
     "family": "amclock",
     "deterministic": {
@@ -48165,7 +48165,7 @@
      }
     ]
    },
-   "fingerprint": "ebc5e880",
+   "fingerprint": "d03874e6",
    "validation": {
     "family": "ambpt",
     "deterministic": {
@@ -48246,7 +48246,7 @@
      }
     ]
    },
-   "fingerprint": "8a3eea6c",
+   "fingerprint": "76f15972",
    "validation": {
     "family": "amsarea",
     "deterministic": {
@@ -49918,7 +49918,7 @@
      }
     ]
    },
-   "fingerprint": "3edc9623",
+   "fingerprint": "7e0aea00",
    "validation": {
     "family": "amsimc",
     "deterministic": {
@@ -50072,7 +50072,7 @@
      }
     ]
    },
-   "fingerprint": "88a5057b",
+   "fingerprint": "fe353d53",
    "validation": {
     "family": "amalt",
     "deterministic": {
@@ -50154,7 +50154,7 @@
      }
     ]
    },
-   "fingerprint": "b66a0d0f",
+   "fingerprint": "b407a4b5",
    "validation": {
     "family": "ambptc",
     "deterministic": {
@@ -51269,7 +51269,7 @@
      }
     ]
    },
-   "fingerprint": "58701709",
+   "fingerprint": "289a1805",
    "validation": {
     "family": "anpts",
     "deterministic": {
@@ -51416,7 +51416,7 @@
      }
     ]
    },
-   "fingerprint": "9f8f40db",
+   "fingerprint": "135a9522",
    "validation": {
     "family": "anpow0",
     "deterministic": {
@@ -51711,7 +51711,7 @@
      }
     ]
    },
-   "fingerprint": "0c1bf49e",
+   "fingerprint": "1f27ea68",
    "validation": {
     "family": "anumean",
     "deterministic": {
@@ -53546,7 +53546,7 @@
      }
     ]
    },
-   "fingerprint": "4f4638d5",
+   "fingerprint": "c24f6b26",
    "validation": {
     "family": "anncr",
     "deterministic": {
@@ -55019,7 +55019,7 @@
      }
     ]
    },
-   "fingerprint": "08b0bd48",
+   "fingerprint": "9fd6ed4c",
    "validation": {
     "family": "aonpr",
     "deterministic": {
@@ -55091,7 +55091,7 @@
      }
     ]
    },
-   "fingerprint": "1f9d2b8c",
+   "fingerprint": "ab92ef28",
    "validation": {
     "family": "aoncr",
     "deterministic": {
@@ -55171,7 +55171,7 @@
      }
     ]
    },
-   "fingerprint": "3f012152",
+   "fingerprint": "3a15d156",
    "validation": {
     "family": "aocomm",
     "deterministic": {
@@ -55247,7 +55247,7 @@
      }
     ]
    },
-   "fingerprint": "99b115a5",
+   "fingerprint": "ac7655ab",
    "validation": {
     "family": "aomulti",
     "deterministic": {
@@ -57154,7 +57154,7 @@
     "smaller-factor (procedural): 210 = 15 × 14, and n!/(n − 2)! = n(n − 1), so n is the LARGER factor."
    ],
    "teach": {
-    "idea": "n! = n × (n − 1) × … × 2 × 1, and n! = n × (n − 1)!. So a bigger factorial contains every smaller one: 8! = 8 × 7 × 6!.",
+    "idea": "n! = n × (n − 1) × … × 2 × 1, and n! = n × (n − 1)!. So a bigger factorial contains every smaller one: n! = n × (n − 1) × (n − 2)!.",
     "method": "To simplify a quotient, write the bigger factorial down to the smaller one and cancel. To add fractions with factorials, rewrite each over the biggest factorial.",
     "alternatives": [
      {
@@ -57177,7 +57177,7 @@
      }
     ]
    },
-   "fingerprint": "ab7255f8",
+   "fingerprint": "0bc4d494",
    "validation": {
     "family": "aofact",
     "deterministic": {
@@ -57266,7 +57266,7 @@
      }
     ]
    },
-   "fingerprint": "49b414ca",
+   "fingerprint": "9c98bb26",
    "validation": {
     "family": "aoncrp",
     "deterministic": {
@@ -57354,7 +57354,7 @@
      }
     ]
    },
-   "fingerprint": "25b6c14a",
+   "fingerprint": "8b63488a",
    "validation": {
     "family": "aogeoc",
     "deterministic": {
@@ -57444,7 +57444,7 @@
      }
     ]
    },
-   "fingerprint": "47496518",
+   "fingerprint": "c5268c72",
    "validation": {
     "family": "aomix",
     "deterministic": {
@@ -57534,7 +57534,7 @@
      }
     ]
    },
-   "fingerprint": "ab38322b",
+   "fingerprint": "2e546fef",
    "validation": {
     "family": "aoarr",
     "deterministic": {
@@ -75864,7 +75864,7 @@
      }
     ]
    },
-   "fingerprint": "3c39066c",
+   "fingerprint": "ca59069c",
    "validation": {
     "family": "atgen",
     "deterministic": {
@@ -83814,7 +83814,7 @@
      }
     ]
    },
-   "fingerprint": "9f54dbb1",
+   "fingerprint": "4ac2dd35",
    "validation": {
     "family": "avrsub",
     "deterministic": {
@@ -83885,7 +83885,7 @@
      }
     ]
    },
-   "fingerprint": "40e08904",
+   "fingerprint": "57db9f78",
    "validation": {
     "family": "avdfact",
     "deterministic": {
@@ -85258,7 +85258,7 @@
      }
     ]
    },
-   "fingerprint": "6a633830",
+   "fingerprint": "c766b5f4",
    "validation": {
     "family": "avfexp",
     "deterministic": {
@@ -86497,7 +86497,7 @@
      }
     ]
    },
-   "fingerprint": "ea7986fa",
+   "fingerprint": "e84efeae",
    "validation": {
     "family": "awctr",
     "deterministic": {
@@ -86581,7 +86581,7 @@
      }
     ]
    },
-   "fingerprint": "9171c959",
+   "fingerprint": "8799fad5",
    "validation": {
     "family": "awcen",
     "deterministic": {
