@@ -161,6 +161,8 @@ const P1: Def[] = [
     arity: 4,
     title: "Dividing by repeated subtraction",
     competency: DR,
+    // level@1: division as repeated subtraction is Grade 3 work
+    grade: () => 3,
     type: "integer",
     mc: true,
     // [d, q, r, ask]: n = d·q + r; ask 0: how many times d can be taken away; ask 1: what is left at the end
@@ -226,6 +228,8 @@ const P1: Def[] = [
     arity: 2,
     title: "The multiplication fact behind a division",
     competency: DR,
+    // level@1: the multiplication fact behind a division is Grade 3 work
+    grade: () => 3,
     type: "choice",
     // [d, q]: n = d·q; which multiplication fact shows n ÷ d = q?
     parse: none,
@@ -234,7 +238,8 @@ const P1: Def[] = [
     prompt: ([d, q]) => `Which multiplication fact shows that ${d * q} ÷ ${d} = ${q}?`,
     solve: (p) => {
       const [d, q] = p;
-      return { steps: [st("groups", "multiply", MT, [d, q], d * q), st("undo", "divide", DR, [d * q, d], q)], answer: dfactPerm(p).indexOf(0) };
+      const ans = dfactPerm(p).indexOf(0);
+      return { steps: [st("groups", "multiply", MT, [d, q], d * q), st("undo", "divide", DR, [d * q, d], q), st("pick", "choose the option", DR, [dfactBase(p)[0]], ans)], answer: ans };
     },
     // independent: read the chosen fact back and check it by repeated addition: d groups of q make n
     validate: (p, v) => {
@@ -255,7 +260,7 @@ const P1: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "groups" ? `${s.inputs[0]} groups of ${s.inputs[1]} make ${s.value}` : `So ${s.inputs[0]} shared into groups of ${s.inputs[1]} gives ${s.value}: ${s.inputs[1]} × ${s.value} = ${s.inputs[0]}`),
+    explain: (s) => (s.id === "groups" ? `${s.inputs[0]} groups of ${s.inputs[1]} make ${s.value}` : s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `So ${s.inputs[0]} shared into groups of ${s.inputs[1]} gives ${s.value}: ${s.inputs[1]} × ${s.value} = ${s.inputs[0]}`),
     domain: D_DFACT,
     keep: ([d, q]) => d !== q,
     difficulty: ([d, q]) => (d <= 5 && q <= 5 ? 1 : d * q <= 60 ? 2 : 3),

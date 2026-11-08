@@ -631,6 +631,8 @@ const F: Def[] = [
     arity: 2,
     title: "The remainder of a division",
     competency: "MATH.number.division-remainders",
+    // level@1: division with a remainder is Grade 3–4 work (review for older learners)
+    grade: () => 3,
     type: "integer",
     mc: true,
     parse: () => null,

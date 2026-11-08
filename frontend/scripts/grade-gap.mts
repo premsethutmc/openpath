@@ -29,6 +29,9 @@ const wrong = (q: string) => {
   if (p.type === "choice") return "ABCDEF".slice(0, Math.max(2, (p.options ?? []).length)).split("").find((l) => l !== p.answer)!;
   if (p.type === "fraction") return p.answer === "1/3" ? "2/7" : "1/3";
   const opt = (p.options ?? []).find((o: string) => o !== p.answer);
+  // a wrong answer must be readable to count as a mistake: "0" is not a ratio (it is unreadable, and two unreadable answers
+  // pause the module for a person before any teaching), so a ratio question gets a wrong ratio instead
+  if (p.type === "ratio") return p.answer === "1:1" ? "1:2" : "1:1";
   return opt ?? (p.answer === "0" ? "1" : "0");
 };
 const wrongFirst = (): Answerer => {

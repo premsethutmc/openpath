@@ -2941,6 +2941,8 @@ B08.push(
     arity: 2,
     title: "Is it a perfect square? Last digits of squares",
     competency: SQRT,
+    // level@1: properties of square numbers are Grade 8 (CBSE 8, TN 8)
+    grade: () => 8,
     type: "choice",
     // [mode, m]: mode 0: which of four numbers is a perfect square (m² is); mode 1: the last digit of m²
     parse: none,
@@ -2950,7 +2952,7 @@ B08.push(
     solve: (p) => {
       const [mode, m] = p;
       const { opts, right } = psqOpts(p);
-      return { steps: mode === 0 ? [{ id: "last-digits", op: "rule-out", competency: SQRT, inputs: opts, value: "a square never ends in 2, 3, 7 or 8" }, { id: "root", op: "square-root", competency: SQRT, inputs: [m * m], value: m }] : [{ id: "units", op: "square", competency: SQRT, inputs: [m % 10], value: (m % 10) ** 2 }], answer: opts.indexOf(right) };
+      return { steps: (mode === 0 ? [{ id: "last-digits", op: "rule-out", competency: SQRT, inputs: opts, value: "a square never ends in 2, 3, 7 or 8" }, { id: "root", op: "square-root", competency: SQRT, inputs: [m * m], value: m }] : [{ id: "units", op: "square", competency: SQRT, inputs: [m % 10], value: (m % 10) ** 2 }]).concat([{ id: "pick", op: "choose the option", competency: SQRT, inputs: [opts[opts.indexOf(right)]], value: opts.indexOf(right) }]), answer: opts.indexOf(right) };
     },
     // independent: test each option by searching for a whole number whose square it is (or square the number in full)
     validate: ([mode, m], v) => {
@@ -2970,13 +2972,13 @@ B08.push(
       return [...(good !== right ? [Bq("doubled", "procedural", SQRT, `The last digit was doubled instead of squared: ${m % 10} × ${m % 10} = ${(m % 10) ** 2}, which ends in ${right}.`, opts.indexOf(good))] : []), ...(same !== right ? [Bq("same-digit", "conceptual", SQRT, `The square was taken to end in the same digit as ${m}. Only the last digit of ${m % 10} × ${m % 10} matters: ${(m % 10) ** 2}.`, opts.indexOf(same))] : [])];
     },
     variants: () => [],
-    explain: (s) => (s.id === "last-digits" ? `Rule out by last digits: ${s.value}` : s.id === "root" ? `${s.inputs[0]} = ${s.value} × ${s.value}` : `The last digit of ${s.inputs[0]} × ${s.inputs[0]} = ${s.value}`),
+    explain: (s) => (s.id === "last-digits" ? `Rule out by last digits: ${s.value}` : s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : s.id === "root" ? `${s.inputs[0]} = ${s.value} × ${s.value}` : `The last digit of ${s.inputs[0]} × ${s.inputs[0]} = ${s.value}`),
     domain: [[0, 1], [11, 99]],
     keep: psqOk,
     difficulty: ([mode, m]) => (mode === 1 ? 1 : m <= 31 ? 2 : 3),
     teach: {
-      idea: "The last digit of a square depends only on the last digit of the number: 0, 1, 4, 5, 6 or 9. So a number ending in 2, 3, 7 or 8 is never a perfect square; a number ending in another digit may or may not be one.",
-      method: "Rule out the numbers ending in 2, 3, 7 or 8. For the others, find the two squares the number lies between (e.g. 30² = 900 and 31² = 961); a perfect square must be one of them exactly.",
+      idea: "The last digit of a square depends only on the last digit of the number, and a square can only end in zero, one, four, five, six or nine. So a number ending in two, three, seven or eight is never a perfect square; a number ending in another digit may or may not be one.",
+      method: "Rule out the numbers ending in two, three, seven or eight. For the others, find the two neighbouring squares the number lies between; a perfect square must be one of them exactly.",
       alternatives: [
         { id: "table", title: "Make a last-digit table", kind: "procedural", text: ["Square 0 to 9: 0, 1, 4, 9, 16, 25, 36, 49, 64, 81.", "The last digits 0, 1, 4, 5, 6, 9 are the only ones a square can have."], visual: () => ({ type: "table", head: ["Last digit of n", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], rows: [["Last digit of n²", "0", "1", "4", "9", "6", "5", "6", "9", "4", "1"]] }) },
         { id: "between", title: "Squeeze between squares", kind: "conceptual", text: ["Every number lies between two neighbouring squares.", "If it is not equal to one of them, it is not a perfect square."] },
@@ -2990,6 +2992,8 @@ B08.push(
     arity: 1,
     title: "The square root of a non-square, to one decimal place",
     competency: SQRT,
+    // level@1: square roots to one decimal place are Grade 8 (CBSE 8, TN 8)
+    grade: () => 8,
     type: "fraction",
     mc: true,
     decimals: true,
