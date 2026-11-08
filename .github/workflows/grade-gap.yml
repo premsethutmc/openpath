@@ -1,0 +1,67 @@
+name: Grade gap report
+# grade-gap@1: every grade (1–12) × board (CBSE, TN) in parallel; a synthetic learner works each competency of the
+# release (behaviour only, never teaching quality). Report-only: a grade with gaps does not fail the job.
+# No language model is called; synthetic learners only; nothing is deployed.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: [".github/workflows/grade-gap.yml", "frontend/scripts/grade-gap.mts"]
+permissions:
+  contents: read
+jobs:
+  grade:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        board: [cbse, tn]
+        grade: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - name: Gap report ${{ matrix.board }} grade ${{ matrix.grade }}
+        working-directory: frontend
+        run: mkdir -p /tmp/gap && GRADE=${{ matrix.grade }} BOARD=${{ matrix.board }} OUT=/tmp/gap/gap-${{ matrix.board }}-${{ matrix.grade }}.json node --import tsx scripts/grade-gap.mts || echo '{"grade":${{ matrix.grade }},"board":"${{ matrix.board }}","error":"script failed"}' > /tmp/gap/gap-${{ matrix.board }}-${{ matrix.grade }}.json
+      - uses: actions/upload-artifact@v7
+        with:
+          name: gap-${{ matrix.board }}-${{ matrix.grade }}
+          path: /tmp/gap/
+  report:
+    needs: grade
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: gap-*
+          merge-multiple: true
+          path: gap
+      - name: All grades, one table
+        run: |
+          python3 - <<'PY'
+          import json, glob, os
+          rows = sorted((json.load(open(f)) for f in glob.glob("gap/*.json")), key=lambda r: (r.get("board", ""), r.get("grade", 0)))
+          json.dump(rows, open("gap/gap-report.json", "w"), indent=1)
+          md = ["### Grade gap report (synthetic learner; behaviour only)", "",
+                "| Board | Grade | Outcomes | Unmapped | Competencies | Verified | Awaiting mark | Failed | Untaught after mistakes |",
+                "|---|---|---|---|---|---|---|---|---|"]
+          for r in rows:
+              if r.get("error"):
+                  md.append(f"| {r['board']} | {r['grade']} | {r['error']} ||||||| ")
+                  continue
+              md.append(f"| {r['board']} | {r['grade']} | {r['outcomes']} | {r['outcomes_unmapped']} | {r['competencies']} | {r['verified']} | {r['awaiting_mark']} | {r['failed']} | {r['untaught_after_mistakes']} |")
+          open("gap/gap-report.md", "w").write("\n".join(md) + "\n")
+          open(os.environ["GITHUB_STEP_SUMMARY"], "a").write("\n".join(md) + "\n")
+          print("\n".join(md))
+          PY
+      - uses: actions/upload-artifact@v7
+        with:
+          name: gap-report
+          path: gap/gap-report.*
