@@ -5531,7 +5531,7 @@ const SURD_MORE: Def[] = [
         `At a family function, ${name(p[1])}'s grandmother says: "Your mother is ${d.k} times as old as you, and in ${d.n} years your two ages will add up to ${d.S}." How old is ${name(p[1])} now?`,
         `${name(p[1])} buys three boxes of sweets; the numbers of sweets in them are three consecutive multiples of ${d.k}, ${d.S} sweets in all. How many sweets are in the smallest box?`,
         `A farmer fences a rectangular plot whose length is ${d.k} m more than its width, using ${d.S} m of fencing for the whole boundary. How wide is the plot, in m?`,
-        `A shopkeeper adds ${d.n}/${d.k} of a number of coconuts to his stock of that many coconuts and now has ${d.S}. How many did he have at first?`,
+        `A shopkeeper has some coconuts. He buys ${d.n}/${d.k} as many again and now has ${d.S} coconuts. How many did he have at first?`,
         `${name(p[1])} has ₹${(d as { A: number }).A} in a piggy bank and adds ₹${d.k} each week; ${name(p[1] + 1)} has ₹${d.S} and adds ₹${d.n} each week. After how many weeks will both piggy banks hold the same?`,
       ][p[0]];
     },

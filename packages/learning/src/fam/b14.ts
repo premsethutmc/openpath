@@ -1064,6 +1064,8 @@ export const B14: Def[] = [
     arity: 5,
     title: "Deciding the shape of three points from their distances",
     competency: ARG,
+    // level@1 (grade8): deciding collinear / right-angled / isosceles with the distance formula is Grade 9 (CBSE 9) and Grade 10
+    grade: () => 9,
     skill: "coordinate argument",
     type: "choice",
     parse: none,
@@ -1159,6 +1161,8 @@ export const B14: Def[] = [
     arity: 1,
     title: "Can aⁿ end in 0? Reasoning with prime factors",
     competency: ARG,
+    // level@1 (grade8): the uniqueness of prime factorisation argument (6ⁿ never ends in 0) is Grade 10 (CBSE 10)
+    grade: () => 10,
     skill: "uniqueness of prime factorisation",
     type: "choice",
     parse: none,
@@ -1369,6 +1373,8 @@ export const B14: Def[] = [
     arity: 3,
     title: "Mean of an ungrouped frequency distribution",
     competency: GD,
+    // level@1 (grade8): the mean of a frequency distribution is Grade 9 (TN 9); Grade 8 organises data into frequency tables
+    grade: () => 9,
     type: "fraction",
     mc: true,
     parse: none,

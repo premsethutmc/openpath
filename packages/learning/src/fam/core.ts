@@ -313,7 +313,7 @@ export const CORE: Def[] = [
       method: "Undo the constant term (subtract it from both sides, with its sign), then divide both sides by the coefficient (watch the sign rules). Check by substituting.",
       visual: ([a, b, x]) => ({ type: "balance", left: `${lead(a)} ${sgn(b)}`, right: n_(a * x + b) }),
       alternatives: [
-        { id: "number_line_check", title: "Check signs on a number line", kind: "prerequisite", text: ["Before moving a term, say what it does: “+ (−7)” moves 7 to the left.", "Undoing it moves 7 to the right: add 7 to both sides."], visual: ([a, b, x]) => ({ type: "numberline", from: Math.min(0, a * x + b, a * x) - 2, to: Math.max(0, a * x + b, a * x) + 2, step: Math.max(1, Math.ceil(Math.abs(b) / 10)), jumps: [[a * x + b, a * x]] }) },
+        { id: "number_line_check", title: "Check signs on a number line", kind: "prerequisite", text: ["Before moving a term, say what it does: “+ (−7)” moves 7 to the left.", "Undoing it moves 7 to the right: add 7 to both sides."], textFor: ([, b]) => (b < 0 ? [`Before moving a term, say what it does: “− ${-b}” moves ${-b} to the left.`, `Undoing it moves ${-b} to the right: add ${-b} to both sides.`] : [`Before moving a term, say what it does: “+ ${b}” moves ${b} to the right.`, `Undoing it moves ${b} to the left: subtract ${b} from both sides.`]), visual: ([a, b, x]) => ({ type: "numberline", from: Math.min(0, a * x + b, a * x) - 2, to: Math.max(0, a * x + b, a * x) + 2, step: Math.max(1, Math.ceil(Math.abs(b) / 10)), jumps: [[a * x + b, a * x]] }) },
       ],
     },
     limits: "ax + b = c with whole-number a, b, c and a whole-number answer from −12 to 12; fractions as coefficients are other families.",

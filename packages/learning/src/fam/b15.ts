@@ -1353,6 +1353,8 @@ export const B15: Def[] = [
     arity: 2,
     title: "Permutations of r out of n distinct objects",
     competency: PERM,
+    // level@1 (grade8): nPr/nCr notation, factorials and arrangements with conditions are Grade 11 (CBSE/TN Class 11); a Grade 8 learner counts with the addition and multiplication principles only
+    grade: () => 11,
     type: "integer",
     mc: true,
     parse: none,
@@ -1394,6 +1396,8 @@ export const B15: Def[] = [
     arity: 2,
     title: "Combinations: choosing r out of n",
     competency: PERM,
+    // level@1 (grade8): nPr/nCr notation, factorials and arrangements with conditions are Grade 11 (CBSE/TN Class 11); a Grade 8 learner counts with the addition and multiplication principles only
+    grade: () => 11,
     type: "integer",
     mc: true,
     parse: none,
@@ -1439,6 +1443,8 @@ export const B15: Def[] = [
     arity: 4,
     title: "Selections with a condition: exactly k from one group",
     competency: PERM,
+    // level@1 (grade8): nPr/nCr notation, factorials and arrangements with conditions are Grade 11 (CBSE/TN Class 11); a Grade 8 learner counts with the addition and multiplication principles only
+    grade: () => 11,
     type: "integer",
     mc: true,
     parse: none,
@@ -1491,6 +1497,8 @@ export const B15: Def[] = [
     arity: 3,
     title: "Arrangements when some objects are identical",
     competency: PERM,
+    // level@1 (grade8): nPr/nCr notation, factorials and arrangements with conditions are Grade 11 (CBSE/TN Class 11); a Grade 8 learner counts with the addition and multiplication principles only
+    grade: () => 11,
     type: "integer",
     mc: true,
     parse: none,
@@ -3828,6 +3836,8 @@ const NEW15: Def[] = [
     arity: 3,
     title: "Evaluating and simplifying expressions with factorials",
     competency: PERM,
+    // level@1 (grade8): nPr/nCr notation, factorials and arrangements with conditions are Grade 11 (CBSE/TN Class 11); a Grade 8 learner counts with the addition and multiplication principles only
+    grade: () => 11,
     type: "integer",
     mc: true,
     parse: none,
@@ -3881,7 +3891,7 @@ const NEW15: Def[] = [
     keep: factOk,
     difficulty: ([q]) => (q === 0 ? 1 : q === 2 ? 2 : 3),
     teach: {
-      idea: "n! = n × (n − 1) × … × 2 × 1, and n! = n × (n − 1)!. So a bigger factorial contains every smaller one: 8! = 8 × 7 × 6!.",
+      idea: "n! = n × (n − 1) × … × 2 × 1, and n! = n × (n − 1)!. So a bigger factorial contains every smaller one: n! = n × (n − 1) × (n − 2)!.",
       method: "To simplify a quotient, write the bigger factorial down to the smaller one and cancel. To add fractions with factorials, rewrite each over the biggest factorial.",
       alternatives: [
         { id: "expand", title: "Write the factors out", kind: "procedural", text: ["Write each factorial as a product of its factors.", "Cross out the factors that appear on top and bottom; multiply what is left."] },
@@ -3896,6 +3906,8 @@ const NEW15: Def[] = [
     arity: 3,
     title: "Using ⁿCᵣ = ⁿCₙ₋ᵣ, ⁿPᵣ = r!·ⁿCᵣ and Pascal's rule",
     competency: PERM,
+    // level@1 (grade8): nPr/nCr notation, factorials and arrangements with conditions are Grade 11 (CBSE/TN Class 11); a Grade 8 learner counts with the addition and multiplication principles only
+    grade: () => 11,
     type: "integer",
     mc: true,
     parse: none,
@@ -3978,6 +3990,8 @@ const NEW15: Def[] = [
     arity: 3,
     title: "Counting diagonals, triangles and lines with combinations",
     competency: PERM,
+    // level@1 (grade8): nPr/nCr notation, factorials and arrangements with conditions are Grade 11 (CBSE/TN Class 11); a Grade 8 learner counts with the addition and multiplication principles only
+    grade: () => 11,
     type: "integer",
     mc: true,
     parse: none,
@@ -4066,6 +4080,8 @@ const NEW15: Def[] = [
     arity: 4,
     title: "Deciding whether order matters, and combining selection with arrangement",
     competency: PERM,
+    // level@1 (grade8): nPr/nCr notation, factorials and arrangements with conditions are Grade 11 (CBSE/TN Class 11); a Grade 8 learner counts with the addition and multiplication principles only
+    grade: () => 11,
     type: "integer",
     mc: true,
     parse: none,
@@ -4148,6 +4164,8 @@ const NEW15: Def[] = [
     arity: 3,
     title: "Arrangements with repetition, restrictions, around a circle, and the rank of a word",
     competency: PERM,
+    // level@1 (grade8): codes with repetition (multiplication principle) are Grade 8; rows with conditions, circles, necklaces and word ranks are Grade 11
+    grade: ([q]) => (q === 0 ? 8 : 11),
     type: "integer",
     mc: true,
     parse: none,

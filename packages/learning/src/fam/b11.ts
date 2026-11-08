@@ -806,6 +806,8 @@ export const B11: Def[] = [
     problemKey: ([m, n, q, s]) => (q === 0 ? `${Math.min(m, n)},${Math.max(m, n)},${Math.min(s, m + n + 2 - s)}` : `${m},${n},q${q},${s}`),
     title: "Probability from the sample space of two dice or spinners",
     competency: SS,
+    // level@1 (grade8): probabilities from two dice or a spinner and a die (two-stage experiments) are Grade 9 (CBSE 9, TN 9); Grade 8 counts the outcomes only
+    grade: () => 9,
     type: "fraction",
     mc: true,
     parse: none,
@@ -864,7 +866,7 @@ export const B11: Def[] = [
     domain: [[3, 6], [3, 6], [0, 2], [0, 12]],
     keep: ([m, n, q, s]) => m <= n && (q === 0 ? s >= 2 && s <= m + n : q === 1 ? s >= 3 && s <= m + n : s === 0),
     difficulty: ([m, n, q]) => (q === 0 && m * n <= 16 ? 1 : q === 0 || m * n <= 16 ? 2 : 3),
-    word: ([m, n, q, s]) => `In a board game, a player moves after using ${pairName(m, n)} (the first gives 1 to ${m}, the second 1 to ${n}, each equally likely). What is the probability that ${diceEvent(q, s)}?`,
+    word: ([m, n, q, s]) => `In a board game, each move is decided by ${pairName(m, n)} (the first gives 1 to ${m}, the second 1 to ${n}, each equally likely). What is the probability that ${diceEvent(q, s)}?`,
     teach: {
       idea: "For two stages, the sample space is every pair (first, second). With equally likely numbers, all m × n pairs are equally likely, so P(event) = pairs that fit ÷ all pairs.",
       method: "Draw a table: first numbers down the side, second numbers along the top, the total in each cell. Count the cells that fit the event and divide by the number of cells.",
@@ -1058,7 +1060,15 @@ export const B11: Def[] = [
       idea: "Kaprekar noticed that repeating this routine on four-digit numbers always seems to reach 6174 — a conjecture you can test with your own numbers. Each step must be done exactly.",
       method: "Sort the four digits from largest to smallest for the big number and from smallest to largest for the small one (keep any 0 at the front), then subtract.",
       alternatives: [
-        { id: "keep_going", title: "Test the conjecture", kind: "conceptual", text: ["Use your answer as the new number and do the routine again (write it with four digits, adding a 0 in front if needed).", "Within at most seven steps you should reach 6174, which gives 7641 − 1467 = 6174 again."] },
+        { id: "keep_going", title: "Test the conjecture", kind: "conceptual", text: ["Use your answer as the new number and do the routine again (write it with four digits, adding a 0 in front if needed).", "Within at most seven steps you should reach 6174, which gives 7641 − 1467 = 6174 again."],
+          // the routine continued from the question's own number, to 6174
+          textFor: ([n]) => {
+            const next = (x: number) => { const ds = String(x).padStart(4, "0").split(""); return Number([...ds].sort().reverse().join("")) - Number([...ds].sort().join("")); };
+            const chain = [n];
+            while (chain.at(-1) !== 6174 && chain.length < 9) chain.push(next(chain.at(-1)!));
+            const steps = chain.length - 1;
+            return ["Use your answer as the new number and do the routine again (write it with four digits, adding a 0 in front if needed).", `From ${n}: ${chain.map((x) => String(x).padStart(4, "0")).join(" → ")}. ${steps === 1 ? "One step reaches" : `${steps} steps reach`} 6174, and then 7641 − 1467 = 6174 again.`];
+          } },
       ],
     },
     limits: "One step of the routine on four-digit numbers; forming and justifying the conjecture is discussed in class.",
@@ -1218,7 +1228,7 @@ export const B11: Def[] = [
     word: ([di, s]) => `A shop bill shows ₹${divShown(di, s)}, but one digit is smudged. ${nm(di + s)} knows the amount can be shared equally among ${DIVS[di]} friends in whole rupees. What is the smallest digit the smudged one could be?`,
     teach: {
       idea: "A number is divisible by 3 (or 9) exactly when its digit sum is; by 11 when the sums of alternate digits differ by a multiple of 11 (0, 11, 22 …); by 6 when it passes the tests for both 2 and 3. These come from place value: 10 = 9 + 1, 100 = 99 + 1, 10 = 11 − 1.",
-      method: "Use the test with the digits you know, work out what the missing digit must be to pass, and choose the smallest digit from 0 to 9 that does.",
+      method: "Use the test with the digits you know, work out what the missing digit must be to pass, and choose the smallest digit that does (try 0 first, then 1, and so on).",
       alternatives: [
         { id: "try_digits", title: "Try the digits in order", kind: "procedural", text: ["Put 0 in the box and apply the test, then 1, then 2, and so on.", "The first digit that passes is the smallest one."] },
       ],
@@ -2005,7 +2015,7 @@ export const B11: Def[] = [
     prompt: (p) => `Which of these numbers is ${DSORT_ASK[p[0]]}? ${dsortSet(p).opts.join(";  ")}`,
     solve: (p) => {
       const d = dsortSet(p);
-      return { steps: [{ id: "test", op: "test", competency: DIV, inputs: [DSORT_RULE[p[0]]], value: "" }], answer: d.right };
+      return { steps: [{ id: "test", op: "test", competency: DIV, inputs: [DSORT_RULE[p[0]]], value: "" }, { id: "pick", op: "pick", competency: DIV, inputs: [String(d.opts[d.right])], value: d.right }], answer: d.right };
     },
     // independent: divide each option by the divisor and look at the remainder
     validate: (p, v) => {
@@ -2019,10 +2029,10 @@ export const B11: Def[] = [
       return [bug(`trap-${p[0]}`, "conceptual", DIV, DSORT_SLIP[p[0]], d.trap)];
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : String(s.inputs[0])),
     domain: [[0, 5], [0, 99]],
     difficulty: ([k]) => (k <= 2 ? 1 : k === 3 ? 2 : 3),
-    word: (p) => `A sweet shop packs its sweets ${DSORT_PACK[p[0]]}. Which of these numbers of sweets can be packed that way with none left over${p[0] === 3 ? ", but could not be packed in packets of 10 with none left over" : ""}? ${dsortSet(p).opts.join(";  ")}`,
+    word: (p) => `A sweet factory packs its sweets ${DSORT_PACK[p[0]]}. Which of these numbers of sweets can be packed that way with none left over${p[0] === 3 ? ", but could not be packed in packets of 10 with none left over" : ""}? ${dsortSet(p).opts.join(";  ")}`,
     teach: {
       idea: "Because 10 is divisible by 2 and 5, only the ones digit decides divisibility by 2, 5 and 10. Because 100 is divisible by 4 and 1000 by 8, only the last two (for 4) or last three (for 8) digits matter.",
       method: "By 2: ones digit 0, 2, 4, 6 or 8. By 5: ones digit 0 or 5. By 10: ones digit 0. By 4: the number made by the last two digits is divisible by 4. By 8: the last three digits are divisible by 8.",
@@ -2420,6 +2430,8 @@ export const B11: Def[] = [
     arity: 3,
     title: "Listing a sample space, and an event as a subset of it",
     competency: SS,
+    // level@1 (grade8): listing a sample space and events as subsets is Grade 9 (CBSE 9, TN 9)
+    grade: () => 9,
     type: "choice",
     // [m, e, k]: m 0 the sample space of experiment e (coins, a die, children, suits, a coin and a die); m 1 the event e
     // (with its number k) among the numbers 1 to N, N = [6, 8, 10, 12, 15, 20][k % 6]
@@ -2427,7 +2439,8 @@ export const B11: Def[] = [
     reject: (p) => (sslOk(p) ? null : "Eight experiments, or one of nine kinds of event on numbered cards."),
     choices: (p) => sslSet(p).opts,
     prompt: (p) => sslSet(p).q,
-    solve: (p) => ({ steps: [{ id: "list", op: "list", competency: SS, inputs: [sslSet(p).why], value: "" }], answer: sslSet(p).right }),
+    // grade8: a last step picks the option, so the worked example ends at the answer
+    solve: (p) => { const s = sslSet(p); return { steps: [{ id: "list", op: "list", competency: SS, inputs: [s.why], value: "" }, { id: "pick", op: "pick", competency: SS, inputs: [s.opts[s.right]], value: s.right }], answer: s.right }; },
     // independent: build the outcomes again (by combining the parts, or by testing every number 1 to N) and compare
     // with the chosen list as a set
     validate: (p, v) => {
@@ -2444,7 +2457,7 @@ export const B11: Def[] = [
       return d.bug ? [bug(d.bug.id, "conceptual", SS, d.bug.says, d.bug.at)] : [];
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : String(s.inputs[0])),
     domain: [[0, 1], [0, 8], [0, 11]],
     keep: sslOk,
     difficulty: ([m, e]) => (m === 0 ? (e === 1 || e === 3 ? 1 : 2) : e <= 1 ? 1 : 3),
@@ -2598,7 +2611,10 @@ export const B11: Def[] = [
           ? `In a shift code every letter moves forward ${k} places along the alphabet (after Z it goes back to A). A message in this code reads ${shiftWord(WORDS[w], k)}. What was the original word?`
           : `The table in the picture is the key of a substitution code: each letter in the Plain row is written as the letter below it in the Code row. A message in this code reads ${subWord(WORDS[w], k)}. What was the original word?`,
     figure: ([m, , k]) => (m === 2 ? { type: "table", head: ["Plain", ...ABC.slice(0, 13).split("")], rows: [["Code", ...subKey(k).slice(0, 13).split("")], ["Plain", ...ABC.slice(13).split("")], ["Code", ...subKey(k).slice(13).split("")]] } : null),
-    solve: ([m, w, k]) => ({ steps: [{ id: "code", op: m === 0 ? "encode" : "decode", competency: CIPH, inputs: [m === 0 ? `Move each letter of ${WORDS[w]} forward ${k} places` : m === 1 ? `Move each letter back ${k} places` : "Find each code letter in the Code row and read the Plain letter above it"], value: "" }], answer: codeOpts([m, w, k]).indexOf(m === 0 ? shiftWord(WORDS[w], k) : WORDS[w]) }),
+    solve: ([m, w, k]) => {
+      const opts = codeOpts([m, w, k]), right = opts.indexOf(m === 0 ? shiftWord(WORDS[w], k) : WORDS[w]);
+      return { steps: [{ id: "code", op: m === 0 ? "encode" : "decode", competency: CIPH, inputs: [m === 0 ? `Move each letter of ${WORDS[w]} forward ${k} places` : m === 1 ? `Move each letter back ${k} places` : "Find each code letter in the Code row and read the Plain letter above it"], value: "" }, { id: "pick", op: "pick", competency: CIPH, inputs: [opts[right]], value: right }], answer: right };
+    },
     // independent: apply the code to the chosen option (or undo it) and compare with what is given
     validate: ([m, w, k], v) => {
       if (typeof v !== "number" || !Number.isInteger(v)) return false;
@@ -2617,7 +2633,7 @@ export const B11: Def[] = [
       return [bug("key-backwards", "procedural", CIPH, "The key was read the wrong way: the code letters were looked up in the Plain row. To decode, find each letter in the Code row and read the Plain letter above it.", o.indexOf(subWord(subWord(WORDS[w], k), k)))];
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : String(s.inputs[0])),
     domain: [[0, 2], [0, 19], [2, 25]],
     cap: 450,
     difficulty: ([m]) => (m === 0 ? 1 : m === 1 ? 2 : 3),

@@ -3360,7 +3360,7 @@
    "skill": "MATH.statistics.statistical-questions",
    "role": "diagnostic",
    "type": "fraction",
-   "prompt": "In a survey of 25 students, 10 walk to school, 8 come by bus and 7 cycle. What fraction of the students walk? Give it in its simplest form.",
+   "prompt": "In a survey of 25 students, 10 walk to school, 8 come by bus and 7 cycle. What fraction of the students walk?",
    "answer": "2/5",
    "solution": "10 out of 25 walk: 10/25 = 2/5.",
    "difficulty": 1,
