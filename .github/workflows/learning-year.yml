@@ -29,7 +29,10 @@ on:
         "frontend/e2e/educator-access.test.mjs",
         "frontend/e2e/integrated-skills.test.mts",
         ".github/workflows/learning-year.yml",
+        ".github/scripts/year-summary.py",
       ]
+  # manual run (Actions tab or API); takes effect once this file is on the default branch
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
@@ -90,40 +93,45 @@ jobs:
             sleep 1
           done
           cd frontend
-          if ! YEAR_MANAGE="python backend/manage.py" YEAR_API=django OPENPATH_TEST_CLOCK_FILE=$OPENPATH_TEST_CLOCK_FILE CHROMIUM_PATH='' SHOTS=/tmp/year-screens/ node --import tsx --test e2e/learning-year.test.mjs > /tmp/year-e2e.log 2>&1; then
-            cat /tmp/year-e2e.log
-            # the failures as annotations, readable without the full log
-            grep -E "^not ok|error:|Error|expected|actual|at .*learning-year" /tmp/year-e2e.log | head -40 | while IFS= read -r line; do echo "::error::$line"; done
-            tail -20 /tmp/year-api.log | while IFS= read -r line; do echo "::warning::api: $line"; done
-            exit 1
-          fi
-          cat /tmp/year-e2e.log
-          # the Mathematics curriculum dashboard (/curriculum/): journeys A–N against the same Django API
-          if ! YEAR_API=django OPENPATH_TEST_CLOCK_FILE=$OPENPATH_TEST_CLOCK_FILE CHROMIUM_PATH='' SHOTS=/tmp/year-screens/curriculum/ node --import tsx --test e2e/curriculum.test.mjs > /tmp/curriculum-e2e.log 2>&1; then
-            cat /tmp/curriculum-e2e.log
-            grep -E "^not ok|error:|Error|expected|actual|at .*curriculum.test" /tmp/curriculum-e2e.log | head -40 | while IFS= read -r line; do echo "::error::$line"; done
-            exit 1
-          fi
-          cat /tmp/curriculum-e2e.log
+          # Every suite runs even if an earlier one fails; each writes its own log, and results go to summary.json
+          # (one small file to read instead of the whole job log) and to the job summary.
+          LOGS=/tmp/year-screens/logs; mkdir -p "$LOGS"; : > /tmp/year-results.tsv
+          suite() {
+            local name=$1; shift
+            local t0=$SECONDS status=pass
+            if ! "$@" > "$LOGS/$name.log" 2>&1; then
+              status=fail
+              grep -E "^not ok|✖|error:|Error|expected|actual" "$LOGS/$name.log" | head -40 | while IFS= read -r line; do echo "::error title=$name::$line"; done
+            fi
+            printf '%s\t%s\t%s\n' "$name" "$status" "$((SECONDS - t0))" >> /tmp/year-results.tsv
+            echo "$name: $status ($((SECONDS - t0))s)"
+          }
+          export OPENPATH_TEST_CLOCK_FILE CHROMIUM_PATH=''
+          suite learning-year env YEAR_MANAGE="python backend/manage.py" YEAR_API=django SHOTS=/tmp/year-screens/ node --import tsx --test e2e/learning-year.test.mjs
+          suite curriculum env YEAR_API=django SHOTS=/tmp/year-screens/curriculum/ node --import tsx --test e2e/curriculum.test.mjs
           # geometry/dice integration: two dice misconceptions and two geometry skills, each through the Year UI and this API: one
           # wrong answer, the engine's investigation, the explanation (pending review), guided, a fresh same-skill recheck, reload;
           # nine days on a wrong delayed check, the skill's general explanation, a fresh same-skill recheck, reload
-          mkdir -p /tmp/year-screens
-          PATHWAY_API=http://127.0.0.1:8014 OPENPATH_TEST_CLOCK_FILE=$OPENPATH_TEST_CLOCK_FILE CHROMIUM_PATH='' FAIL_BODY=/tmp/year-screens/integrated-fail INTEGRATED_RESULTS=/tmp/year-screens/integrated-skills.json node --import tsx e2e/integrated-skills.test.mts
+          suite integrated-skills env PATHWAY_API=http://127.0.0.1:8014 FAIL_BODY=/tmp/year-screens/integrated-fail INTEGRATED_RESULTS=/tmp/year-screens/integrated-skills.json node --import tsx e2e/integrated-skills.test.mts
           # Keyboard integration uses the actual provisional-content builds, not the educator-review fixture.
           node scripts/build-year.mjs
           node scripts/build-curriculum.mjs
-          CHROMIUM_PATH='' node --test e2e/writing-components.test.mjs e2e/keyboard-policy-components.test.mjs
-          YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/keyboard node --import tsx --test e2e/keyboard-dashboard.test.mjs
-          YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7 node --test e2e/grade7-entry.test.mjs
-          YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7-session node --import tsx --test e2e/grade7-session.test.mjs
-          YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7-practice node --import tsx --test e2e/grade7-practice.test.mjs
-          YEAR_URL=http://127.0.0.1:4190 CHROMIUM_PATH='' SHOTS=/tmp/year-screens/grade7-completion node --import tsx --test e2e/grade7-completion.test.mjs
+          suite writing-keyboard-components node --test e2e/writing-components.test.mjs e2e/keyboard-policy-components.test.mjs
+          suite keyboard-dashboard env YEAR_URL=http://127.0.0.1:4190 SHOTS=/tmp/year-screens/keyboard node --import tsx --test e2e/keyboard-dashboard.test.mjs
+          suite grade7-entry env YEAR_URL=http://127.0.0.1:4190 SHOTS=/tmp/year-screens/grade7 node --test e2e/grade7-entry.test.mjs
+          suite grade7-session env YEAR_URL=http://127.0.0.1:4190 SHOTS=/tmp/year-screens/grade7-session node --import tsx --test e2e/grade7-session.test.mjs
+          suite grade7-practice env YEAR_URL=http://127.0.0.1:4190 SHOTS=/tmp/year-screens/grade7-practice node --import tsx --test e2e/grade7-practice.test.mjs
+          suite grade7-completion env YEAR_URL=http://127.0.0.1:4190 SHOTS=/tmp/year-screens/grade7-completion node --import tsx --test e2e/grade7-completion.test.mjs
           # Educator hand-off on the same shipped build and Django API: marking written work, and an administrator granting
           # and removing the educator role. Synthetic accounts only; the administrator is a synthetic superuser the test
           # sets through manage.py in this throwaway database (no secret, no real account).
-          YEAR_URL=http://127.0.0.1:4190 YEAR_MANAGE="python backend/manage.py" CHROMIUM_PATH='' SHOTS=/tmp/year-screens/educator-marking/ node --import tsx --test e2e/educator-marking.test.mjs
-          YEAR_URL=http://127.0.0.1:4190 YEAR_MANAGE="python backend/manage.py" CHROMIUM_PATH='' SHOTS=/tmp/year-screens/educator-access/ node --import tsx --test e2e/educator-access.test.mjs
+          suite educator-marking env YEAR_URL=http://127.0.0.1:4190 YEAR_MANAGE="python backend/manage.py" SHOTS=/tmp/year-screens/educator-marking/ node --import tsx --test e2e/educator-marking.test.mjs
+          suite educator-access env YEAR_URL=http://127.0.0.1:4190 YEAR_MANAGE="python backend/manage.py" SHOTS=/tmp/year-screens/educator-access/ node --import tsx --test e2e/educator-access.test.mjs
+          python3 ../.github/scripts/year-summary.py /tmp/year-results.tsv "$LOGS" /tmp/year-screens/summary.json
+          if grep -q $'\tfail\t' /tmp/year-results.tsv; then
+            tail -20 /tmp/year-api.log | while IFS= read -r line; do echo "::warning::api: $line"; done
+            exit 1
+          fi
       - uses: actions/upload-artifact@v7
         if: always()
         with:
