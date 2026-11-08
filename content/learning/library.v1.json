@@ -3012,7 +3012,9 @@
         9
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:akdice:4,5,0,3"
     },
     {
      "title": "Listing a sample space, and an event as a subset of it",
@@ -3023,7 +3025,9 @@
      "math": [
       "A card is picked at random from cards numbered 1 to 15. Which set is the event \"the number is an odd number\"?",
       "Go through 1 to 15 and keep each number that is an odd number: {1, 3, 5, 7, 9, 11, 13, 15}"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:akssl:1,1,4"
     },
     {
      "title": "Counting arrangements that meet a condition",
@@ -3034,7 +3038,9 @@
      "math": [
       "In how many different ways can Ravi, Meena and Imran stand in a row if Ravi must stand at the left end?",
       "Fix the first place; the other 2 can be arranged in 2! ways: 2"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aksarr:0,3,3"
     }
    ],
    "diagnostics": [
@@ -5715,7 +5721,9 @@
       "A plan is drawn to the scale 1 : 100. A wall is 12 cm long on the plan. How long is the real wall, in metres?",
       "Every 1 cm stands for 100 cm: 12 × 100 = 1200 cm",
       "1200 cm ÷ 100 = 12 m"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:airatio:0,12"
     }
    ],
    "diagnostics": [
@@ -7798,7 +7806,9 @@
         1
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:avrsub:6,4,1,0"
     },
     {
      "title": "The multiplication fact behind a division",
@@ -7815,7 +7825,9 @@
       "type": "array",
       "rows": 4,
       "cols": 6
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:avdfact:4,6"
     }
    ],
    "diagnostics": [
@@ -7881,8 +7893,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Find the biggest multiple of the divisor that fits, then subtract it from the number."
+        "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -8791,7 +8802,9 @@
      "math": [
       "Without working out the whole square, which digit does 12² end in?",
       "The last digit of 2 × 2 = 4"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahpsq:1,12"
     },
     {
      "title": "The square root of a non-square, to one decimal place",
@@ -8803,7 +8816,9 @@
       "Find √63 correct to one decimal place (use the long-division method, or squaring to check).",
       "Long division gives √63 = 7.93…",
       "Rounded to one decimal place: 7.9"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahsqd:63"
     },
     {
      "title": "Square root of a larger perfect square or decimal",
@@ -8817,7 +8832,9 @@
       "324 = 2 × 2 × 3 × 3 × 3 × 3",
       "Take one prime from each pair: 2 × 3 × 3 = 18",
       "√100 = 10, so divide by 10: 1.8"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aksqf:1,18"
     },
     {
      "title": "Between which two whole numbers a square root lies",
@@ -8837,7 +8854,9 @@
       "marks": [
        183
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aksqe:183"
     },
     {
      "title": "How many numbers lie between two consecutive squares",
@@ -8849,7 +8868,9 @@
       "How many whole numbers lie between 24² and 25², not counting these two squares?",
       "625 − 576 = 49",
       "Leave out the square at the end: 49 − 1 = 48"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aksqb:24"
     }
    ],
    "diagnostics": [
@@ -11674,7 +11695,9 @@
       "The sum of three consecutive multiples of 7 is 147. What is the smallest of them?",
       "Let x be the unknown; the story gives x + (x + 7) + (x + 14) = 147",
       "Solve the equation: x = 42 (the smallest multiple)"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aelinw:1,6,5"
     },
     {
      "title": "An equation with fractions of x",
@@ -11687,7 +11710,9 @@
       "Multiply every term by 20: the right side becomes 1080",
       "The left side becomes 5x + 4x = 9x",
       "x = 1080 ÷ 9 = 120"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahfrac:4,5,6,0"
     },
     {
      "title": "An equation with x on both sides",
@@ -11700,7 +11725,9 @@
       "Take −x from both sides: 10x on the left",
       "Take 15 from both sides: −15 − 15 = −30 on the right",
       "x = −30 ÷ 10 = −3"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahboth:9,15,-1,-15"
     }
    ],
    "diagnostics": [
@@ -11807,8 +11834,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Add and subtract integers; Multiply integers using sign rules. If a step is slow, practise that skill first.",
-        "Then the method is: Undo the constant term (subtract it from both sides, with its sign), then divide both sides by the coefficient (watch the sign rules). Check by substituting."
+        "Each step builds on another skill: Add and subtract integers; Multiply integers using sign rules. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -29047,7 +29073,9 @@
       "How many different 2-digit numbers can you make from the digits 3, 5, 7, 0, if a digit may be used more than once?",
       "Choices for each place, from the left: 3 × 4",
       "Multiply the choices: 3 × 4 = 12"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:afdigits:4,2,1,1,0"
     },
     {
      "title": "Counting the rectangles, squares or triangles hidden in a figure",
@@ -29065,7 +29093,9 @@
       "type": "grid",
       "rows": 3,
       "cols": 6
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:afhidden:0,3,6"
     }
    ],
    "diagnostics": [
@@ -29255,7 +29285,9 @@
       "In a class of 20 students, 11 chose cricket as their favourite game. In a pie chart of the whole class, what angle (in degrees) does the cricket sector make at the centre?",
       "Fraction of the whole: 11 out of 20 = 11/20",
       "11/20 of 360° = 198°"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:afpieang:2,11,0"
     }
    ],
    "diagnostics": [
@@ -29605,7 +29637,9 @@
       "type": "array",
       "rows": 8,
       "cols": 8
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:affigrel:1,8"
     },
     {
      "title": "Which rule makes the sequence?",
@@ -29617,7 +29651,9 @@
       "Look at the sequence 32, 64, 128, 256, 512, … Which rule makes it?",
       "The steps from one number to the next are 32, 64, 128, 256",
       "The rule that fits every number: Each number is double the one before (powers of 2)"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:affrule:3,5,0"
     }
    ],
    "diagnostics": [
@@ -30257,7 +30293,8 @@
     "gen:affrac:2,4,4,1"
    ],
    "transfer": [
-    "gen:affrac:1,2,3,0:w"
+    "gen:affrac:1,2,3,0:w",
+    "gen:affrac:3,2,6,1:w"
    ],
    "retention": [
     "gen:affrac:3,3,5,1",
@@ -30316,7 +30353,9 @@
       "A 2 × 3 × 4 block is built from small cubes, as in the picture. The whole outside of the block is painted. How many small cubes have paint on exactly two faces?",
       "Leave out the outside layer on both sides: the inside lengths are 0, 1, 2",
       "Each of the 12 edges has its middle cubes: 4 × (0 + 1 + 2) = 12"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:afpaint:2,3,4,1"
     },
     {
      "title": "Cube nets: opposite faces, and which shapes fold into a cube",
@@ -30327,7 +30366,9 @@
      "math": [
       "The picture shows a net of a cube with its six squares lettered. When it is folded into a cube, which face is opposite face F?",
       "Folding square by square, face B ends up opposite face F"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:afcube:0,25,4"
     },
     {
      "title": "Matching solids with their nets and views",
@@ -30338,7 +30379,9 @@
      "math": [
       "A cone stands on a table on its base. What do you see when you look at it from the front, at eye level?",
       "The front view of a cone: a triangle"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:afnet:3,4"
     },
     {
      "title": "Top, front and side views of a building of cubes",
@@ -30350,7 +30393,9 @@
       "The table is a plan of a building made of cubes standing on a mat: each number tells how many cubes are stacked on that square. The front of the building is the bottom row of the table. When you look at the building from the front, how many squares do you see?",
       "The tallest stack in each column: 3, 2, 3",
       "Add them: 8 squares"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:afview:6,1"
     }
    ],
    "diagnostics": [
@@ -30551,7 +30596,9 @@
      "widget": {
       "type": "angle",
       "deg": 130
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:afpara:0,130,0"
     },
     {
      "title": "Naming a quadrilateral from its properties (kites and trapeziums included)",
@@ -30564,7 +30611,9 @@
       "The sides in order are 7, 6, 7, 6 (cm)",
       "Parallel sides: AB ∥ DC and AD ∥ BC",
       "So the most special name is parallelogram"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:afkind:3,4"
     },
     {
      "title": "Unknown sides of a parallelogram or rhombus",
@@ -30576,7 +30625,9 @@
       "In parallelogram ABCD, AB = (2x + 4) cm and CD = (4x − 2) cm. What is the length of AB, in cm?",
       "The two sides are equal: 2x + 4 = 4x − 2, so x = 3",
       "The side is 2 × 3 + 4 = 10 cm"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:afpside:2,3,22"
     }
    ],
    "diagnostics": [
@@ -34884,7 +34935,9 @@
       "The longest side is 11",
       "The squares of the other two add to 36 + 64 = 100",
       "100 and 121 are not equal, so the triangle is not right-angled"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahconv:1,1,0,1"
     },
     {
      "title": "Generating Pythagorean triples by a rule",
@@ -34896,7 +34949,9 @@
       "For any whole number m greater than 1, the numbers 2m, m² − 1 and m² + 1 form a Pythagorean triple. Find the triple that contains 18 as its even member 2m. What is its largest number?",
       "2m = 18, so m = 9",
       "m² + 1 with 9: 82"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ahgen:0,9,0"
     }
    ],
    "diagnostics": [
@@ -35019,8 +35074,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Find squares and square roots. If a step is slow, practise that skill first.",
-        "Then the method is: Hypotenuse: add the squares of the two shorter sides and take the square root. Shorter side: subtract the square of the known shorter side from the square of the hypotenuse, then take the square root."
+        "Each step builds on another skill: Find squares and square roots. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -35836,7 +35890,8 @@
     "gen:aieuler:2,10,2"
    ],
    "transfer": [
-    "gen:aieuler:1,11,0:w"
+    "gen:aieuler:1,11,0:w",
+    "gen:aieuler:1,6,0:w"
    ],
    "retention": [
     "gen:aieuler:2,4,1",
@@ -35973,7 +36028,8 @@
     "gen:aisolid:1,10,1,0"
    ],
    "transfer": [
-    "gen:aisolid:1,5,1,1:w"
+    "gen:aisolid:1,5,1,1:w",
+    "gen:aisolid:1,5,1,0:w"
    ],
    "retention": [
     "gen:aisolid:0,4,0,0",
@@ -36037,7 +36093,9 @@
       "type": "shape",
       "kind": "rhombus",
       "name": "rhombus"
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:aipgram:34,2,1"
     },
     {
      "title": "Diagonals of rectangles and parallelograms",
@@ -36049,7 +36107,9 @@
       "In rectangle ABCD, the diagonals AC and BD cross at O. AC = 32 cm and AB = 26 cm. How long is OB, in cm?",
       "The diagonals of a rectangle are equal: BD = AC = 32 cm",
       "They cut each other in half: OB = 32 ÷ 2 = 16 cm"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aidiag:0,16,26"
     },
     {
      "title": "Convex, non-convex, or not a quadrilateral?",
@@ -36060,7 +36120,9 @@
      "math": [
       "A closed path goes through four points A, B, C and D in order and back to A. The angles inside the path at the four points are ∠A = 60°, ∠B = 105°, ∠C = 90°, ∠D = 105°. What shape does the path make?",
       "Look at the angles: it is a convex quadrilateral"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aiconvex:0,0,33"
     }
    ],
    "diagnostics": [
@@ -36148,8 +36210,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first.",
-        "Then the method is: Add the three angles you know and take the total from 360°."
+        "Each step builds on another skill: Combine quantities within 20. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -36254,7 +36315,9 @@
       "A tank is 80 cm long, 20 cm wide and 100 cm deep. How many litres of water can it hold?",
       "Volume: 80 × 20 × 100 = 160000 cm³",
       "160000 cm³ ÷ 1000 = 160 litres"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aicap:8,2,10,0"
     },
     {
      "title": "Packing cubes into a box",
@@ -36268,7 +36331,9 @@
       "7 cm ÷ 4 cm: 1 whole cubes fit",
       "15 cm ÷ 4 cm: 3 whole cubes fit",
       "5 × 1 × 3 = 15 cubes"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aipack:4,20,7,15"
     }
    ],
    "diagnostics": [
@@ -36367,8 +36432,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Calculate rectangle area. If a step is slow, practise that skill first.",
-        "Then the method is: Volume = length × width × height. For a cube with edge a, volume = a × a × a = a³."
+        "Each step builds on another skill: Calculate rectangle area. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -36470,7 +36534,9 @@
       "A triangle has an area of 171 cm² and a base of 19 cm. What is its height, in cm?",
       "Twice the area: 2 × 171 = 342 cm² (the matching rectangle)",
       "342 ÷ 19 = 18 cm"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aitrih:19,18,0"
     }
    ],
    "diagnostics": [
@@ -36567,8 +36633,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Calculate rectangle area. If a step is slow, practise that skill first.",
-        "Then the method is: Area = ½ × base × height. Multiply the base by the height and halve the result."
+        "Each step builds on another skill: Calculate rectangle area. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -38625,7 +38690,9 @@
       "Sector OAB: 60/360 × 3.14 × 36² = 678.24",
       "Triangle OAB: 1.73/4 × 36² = 560.52",
       "Minor segment: 678.24 − 560.52 = 117.72"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:amseg:36,0,0"
     },
     {
      "title": "Area swept and distance travelled by a clock hand",
@@ -38638,7 +38705,9 @@
       "Angle turned: 30 × 6° = 180°",
       "Whole circle: 3.14 × 9² = 254.34",
       "The part turned: 180/360 × 254.34 = 127.17"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:amclock:9,6,0,0"
     },
     {
      "title": "Finding the angle or radius of a sector",
@@ -38650,7 +38719,9 @@
       "A sector of a circle of radius 42 cm has an area of 462 cm². Taking π = 22/7, find the angle of the sector, in degrees.",
       "Whole circle's area: 22/7 × 42² = 5544",
       "Angle = fraction of the circle × 360°: 462 ÷ 5544 × 360 = 30"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:amsecinv:6,0,1"
     }
    ],
    "diagnostics": [
@@ -39450,7 +39521,9 @@
       "Fill in the box: 12 : 11 = □ : 33. What number goes in the box?",
       "33 ÷ 11 = 3: the terms were multiplied by 3",
       "12 × 3 = 36"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajeqr:12,11,3,1"
     },
     {
      "title": "Comparing two ratios, or deciding whether they are equivalent",
@@ -39461,7 +39534,9 @@
      "math": [
       "Compare the ratios 1 : 9 and 4 : 36. Which statement is true?",
       "Cross-multiply: 36 and 36. They are equal, so the ratios are equivalent."
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajrcmp:1,9,4,36"
     }
    ],
    "diagnostics": [
@@ -39635,7 +39710,9 @@
       "Pack A: ₹343 ÷ 7 = ₹49 per soap",
       "Pack B: ₹288 ÷ 8 = ₹36 per soap",
       "₹36 is the lower price per soap"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajbest:7,49,8,36"
     },
     {
      "title": "Time taken working together",
@@ -39647,7 +39724,9 @@
       "Arun can finish a job in 8 days. Bala can finish the same job in 24 days. Working together at these rates, how many days do they take?",
       "In one day together they do 1/8 + 1/24 = 1/6 of the job",
       "Days = 1 ÷ (work per day) = 192/32 = 6"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajwork:8,24"
     },
     {
      "title": "Total cost from a fixed rate per kilometre or metre",
@@ -39658,7 +39737,9 @@
      "math": [
       "A shop sells ribbon at ₹6 per metre. How much do 24 metres of ribbon cost, in rupees?",
       "24 × ₹6 = ₹144"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajfare:6,24,3"
     }
    ],
    "diagnostics": [
@@ -40393,8 +40474,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Combine quantities within 20; Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Add the terms to find the number of parts, divide the total by it to find one part, then multiply by the person's number of parts."
+        "Each step builds on another skill: Combine quantities within 20; Use multiplication facts. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -40408,7 +40488,8 @@
     "gen:ajrdiv:1,1,3,27,2"
    ],
    "transfer": [
-    "gen:ajrdiv:2,3,4,16,2:w"
+    "gen:ajrdiv:2,3,4,16,2:w",
+    "gen:ajrdiv:1,8,1,30,0:w"
    ],
    "retention": [
     "gen:ajrdiv:9,3,1,8,0",
@@ -40705,7 +40786,9 @@
       "Interest = ₹23,328 − ₹20000 = ₹3,328",
       "Simple interest = ₹20000 × 8 × 2 ÷ 100 = ₹3,200",
       "Difference = ₹3,328 − ₹3,200 = ₹128"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajcip:20,8,2,2"
     }
    ],
    "diagnostics": [
@@ -40793,8 +40876,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Use integer exponent laws. If a step is slow, practise that skill first.",
-        "Then the method is: Amount = P × (1 + R/100)ⁿ (depreciation: 1 − R/100). Half-yearly: use R/2 for each half-year and 2n half-years. Interest = amount − principal."
+        "Each step builds on another skill: Use integer exponent laws. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -40886,7 +40968,9 @@
       "What is the smallest whole number that 100 must be multiplied by so that the product is a perfect cube?",
       "100 = 2 × 2 × 5 × 5",
       "Complete each group of three equal primes: multiply by 10"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajcmul:100"
     },
     {
      "title": "Numbers that are sums of two cubes in two ways",
@@ -40897,7 +40981,9 @@
      "math": [
       "Find the number that equals both 20³ + 54³ and 38³ + 48³.",
       "8000 + 157464 = 165464"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajtaxi:14,4"
     }
    ],
    "diagnostics": [
@@ -41217,7 +41303,8 @@
     "gen:ajgrow:49,18,2"
    ],
    "transfer": [
-    "gen:ajgrow:49,34,3:w"
+    "gen:ajgrow:49,34,3:w",
+    "gen:ajgrow:56,15,10:w"
    ],
    "retention": [
     "gen:ajgrow:26,21,5",
@@ -41278,7 +41365,9 @@
       "106 ÷ 5 = 21 remainder 1",
       "21 ÷ 5 = 4 remainder 1",
       "4 ÷ 5 = 0 remainder 4"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ajbase:5,106"
     }
    ],
    "diagnostics": [
@@ -41437,7 +41526,9 @@
      "math": [
       "Write 5.84 × 10⁵ as an ordinary number.",
       "Multiply 5.84 by 10 5 times: move the point 5 places to the right to get 584000"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:akscid:584,5"
     },
     {
      "title": "The largest of four numbers in scientific notation",
@@ -41448,7 +41539,9 @@
      "math": [
       "Which of these is the largest? 3.6 × 10¹²;  8.6 × 10¹¹;  6.9 × 10¹⁰;  3.2 × 10¹¹",
       "Compare the powers of 10 first, then the numbers in front"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:akscmp:46"
     },
     {
      "title": "Orders of magnitude of real quantities, and judging a claim",
@@ -41460,7 +41553,9 @@
       "A town of 33 thousand people uses about 135 litres of water per person each day. About how many litres does the town use in a year of 365 days? Write the answer as a × 10ⁿ with 1 ≤ a < 10. What is n (the order of magnitude)?",
       "135 × 33 × 1000 × 365 = 1,62,60,75,000",
       "1,62,60,75,000 has 10 digits, so it is about 10⁹"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aksmag:4,33,0,0"
     },
     {
      "title": "Multiplying and dividing numbers in scientific notation",
@@ -41473,7 +41568,9 @@
       "First divide the numbers in front: 6.6",
       "Then subtract the powers: 20",
       "In scientific notation: 6.6 × 10²⁰"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:akscalc:1,66,15,12,-8"
     }
    ],
    "diagnostics": [
@@ -42071,7 +42168,9 @@
         35
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:akcollatz:23,3"
     },
     {
      "title": "Using the odd-number pattern for squares",
@@ -42089,7 +42188,9 @@
       "rows": 8,
       "cols": 8,
       "shaded": 64
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:akodd:28,0"
     },
     {
      "title": "Testing digit conjectures: Kaprekar's 6174, repeated digit sums, reverse-and-add palindromes",
@@ -42101,7 +42202,9 @@
       "Add the digits of 8030. If the result has more than one digit, add its digits, and keep going until a single digit is left. What digit is left?",
       "Digit sum of 8030: 11",
       "Digit sum of 11: 2"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:akdig:1,8030"
     },
     {
      "title": "How a Collatz sequence behaves: steps to reach 1, and its highest number",
@@ -42157,7 +42260,9 @@
         1
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:akcolst:0,40"
     }
    ],
    "diagnostics": [
@@ -42247,8 +42352,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Add and subtract multi-digit numbers with regrouping. If a step is slow, practise that skill first.",
-        "Then the method is: Sort the four digits from largest to smallest for the big number and from smallest to largest for the small one (keep any 0 at the front), then subtract."
+        "Each step builds on another skill: Add and subtract multi-digit numbers with regrouping. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -42346,7 +42450,9 @@
      "math": [
       "Which of these numbers is divisible by 10? 20794;  83084;  75880;  92455",
       "By 10: the ones digit is 0"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:akdsort:2,50"
     },
     {
      "title": "Reasoning about remainders",
@@ -42358,7 +42464,9 @@
       "How many numbers from 1 to 140 leave remainder 4 when divided by 5?",
       "The first such number is 4; then every 5th number",
       "136 ÷ 5, rounded down, plus 1: 28"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:avrem:5,4,14,3"
     }
    ],
    "diagnostics": [
@@ -43306,7 +43414,9 @@
         26
        ]
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:akcode:0,14,12"
     }
    ],
    "diagnostics": [
@@ -43455,7 +43565,8 @@
     "gen:akcode:2,0,21"
    ],
    "transfer": [
-    "gen:akshift:8,17:w"
+    "gen:akshift:8,17:w",
+    "gen:akshift:8,14:w"
    ],
    "retention": [
     "gen:akshift:0,13",
@@ -43918,7 +44029,8 @@
     "gen:akhist:103,1"
    ],
    "transfer": [
-    "gen:akhist:145,2:w"
+    "gen:akhist:145,2:w",
+    "gen:akhist:144,1:w"
    ],
    "retention": [
     "gen:akhist:145,0",
@@ -48475,7 +48587,9 @@
       "In ΔABC, D is on AB and E is on AC with DE ∥ BC. AD = 1 cm, DB = 9 cm and AE = 4 cm. Find EC, in cm.",
       "Equal ratios: AD/DB = AE/EC, so 1/9 = 4/EC",
       "EC: 4 × 9 ÷ 1 = 36"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ambpt:0,1,9,4"
     },
     {
      "title": "Areas of similar triangles",
@@ -48487,7 +48601,9 @@
       "Two triangles are similar, and their corresponding sides are in the ratio 3 : 5. The area of the smaller triangle is 63 cm². Find the area of the larger triangle, in cm².",
       "Ratio: areas are in the ratio 3² : 5² = 9 : 25",
       "Area of the larger triangle: 63 × 25/9 = 175"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:amsarea:0,3,5,7"
     },
     {
      "title": "Which similarity criterion applies: AA, SSS, SAS, or not similar?",
@@ -48498,7 +48614,9 @@
      "math": [
       "In ΔABC and ΔPQR (A matches P, B matches Q, C matches R): AB = 8 cm, PQ = 20 cm; AC = 12 cm, PR = 30 cm; ∠A = ∠P = 65°. Which statement is true?",
       "Two pairs of sides in the same ratio and the angles between them equal: SAS"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:amsimc:2,2,3"
     },
     {
      "title": "Unknown angles from AA similarity",
@@ -48510,7 +48628,9 @@
       "In ΔABC and ΔPQR, ∠A = ∠P = 45° and ∠B = ∠Q = 80°. The triangles are similar by AA. What is ∠R, in degrees?",
       "Two pairs of equal angles: similar by AA, so ∠R = ∠C",
       "Angle sum: 180 − 45 − 80 = 55"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:amsimang:0,45,80"
     },
     {
      "title": "Altitudes and perimeters of similar triangles",
@@ -48522,7 +48642,9 @@
       "Two similar triangles have corresponding sides in the ratio 8 : 7. The altitude of the first triangle is 51 cm. What is the corresponding altitude of the second, in cm?",
       "Altitudes are in the same ratio as the sides: 8 : 7",
       "Corresponding length: 51 × 7/8 = 44.625"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:amalt:0,8,7,51"
     },
     {
      "title": "Using the converses of the BPT and the angle bisector theorem",
@@ -48533,7 +48655,9 @@
      "math": [
       "In ΔABC, D is on AB and E is on AC, with AD = 8 cm, DB = 7 cm, AE = 20 cm and EC = 17.5 cm. Which statement is true?",
       "8/7 = 8/7 and 20/17.5 = 8/7: equal"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:ambptc:0,8,7,2,0"
     }
    ],
    "diagnostics": [
@@ -50213,7 +50337,9 @@
       "The two largest digits, 9 and 4, go in the tens places (each counts ten times)",
       "The larger units digit goes with the smaller tens digit: 91 and 42",
       "91 × 42 = 3822"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:angarr:9,4,2,1"
     },
     {
      "title": "Can aⁿ end in 0? Reasoning with prime factors",
@@ -50225,7 +50351,9 @@
       "Can 119ⁿ end with the digit 0 for some natural number n? Choose the statement that is true.",
       "119: 2 does not divide it; 5 does not divide it",
       "Ending in 0 means divisible by 10 = 2 × 5, and the primes in aⁿ are exactly the primes in a: neither"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:anpow0:119"
     }
    ],
    "diagnostics": [
@@ -50334,8 +50462,7 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Apply the Baudhayana-Pythagoras theorem and its converse. If a step is slow, practise that skill first.",
-        "Then the method is: Find PQ², QR² and PR² with (x₂ − x₁)² + (y₂ − y₁)². Test the line first, then the right angle, then equal sides — and state which test decided it."
+        "Each step builds on another skill: Apply the Baudhayana-Pythagoras theorem and its converse. If a step is slow, practise that skill first."
        ]
       }
      ],
@@ -50636,7 +50763,9 @@
       "Multiply each value by its frequency and add: Σfx = 1214",
       "Number of observations: Σf = 50",
       "Mean = 1214 ÷ 50 = 24.28"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:anumean:17,4,1"
     }
    ],
    "diagnostics": [
@@ -53998,7 +54127,9 @@
       "⁹C₆ = ⁹C₃ (choosing 6 to take is choosing 3 to leave)",
       "In order: ⁹P₃ = 504",
       "Each choice was counted 6 times (its arrangements): 504 ÷ 6 = 84"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aoncr:9,6"
     },
     {
      "title": "Selections with a condition: exactly k from one group",
@@ -54011,7 +54142,9 @@
       "Women: ⁴C₃ = 4",
       "Men: ⁷C₃ = 35",
       "Each choice of women goes with each choice of men: 4 × 35 = 140"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aocomm:7,4,6,3"
     },
     {
      "title": "Arrangements when some objects are identical",
@@ -54023,7 +54156,9 @@
       "Find the number of distinct arrangements in a row of the 9 letters A, A, A, A, A, B, B, B, B, where equal letters are identical.",
       "If all letters were different: 9! = 362880",
       "Divide by the shuffles of equal letters: 362880 ÷ (120 × 24 × 1) = 126"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aomulti:5,4,0"
     },
     {
      "title": "The multiplication and addition principles of counting",
@@ -54034,7 +54169,9 @@
      "math": [
       "A canteen menu has 2 South Indian dishes, 4 North Indian dishes and 2 Chinese dishes. In how many ways can a student choose exactly one dish?",
       "Separate cases (one or the other), so add: 2 + 4 + 2 = 8"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aofund:3,2,4,2"
     },
     {
      "title": "Evaluating and simplifying expressions with factorials",
@@ -54045,7 +54182,9 @@
      "math": [
       "Evaluate 6!/5!.",
       "Cancel the common factorial: 6 → 6"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aofact:0,6,5"
     },
     {
      "title": "Using ⁿCᵣ = ⁿCₙ₋ᵣ, ⁿPᵣ = r!·ⁿCᵣ and Pascal's rule",
@@ -54057,7 +54196,9 @@
       "Find ¹⁰C₄ + ¹⁰C₃.",
       "By Pascal's rule the sum is ¹¹C₄",
       "¹¹C₄ = 330"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aoncrp:3,10,4"
     },
     {
      "title": "Counting diagonals, triangles and lines with combinations",
@@ -54069,7 +54210,9 @@
       "How many diagonals does a polygon with 7 sides have?",
       "Pairs of points: ⁷C₂ = 21",
       "Remove the 7 sides: 14"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aogeoc:0,7,0"
     },
     {
      "title": "Deciding whether order matters, and combining selection with arrangement",
@@ -54081,7 +54224,9 @@
       "A teacher must send 3 of her 7 students to represent the class at a science exhibition. In how many ways can she pick them?",
       "The wording means no order: use a combination",
       "⁷C₃ = 35"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aomix:0,7,3,1"
     },
     {
      "title": "Arrangements with repetition, restrictions, around a circle, and the rank of a word",
@@ -54092,7 +54237,9 @@
      "math": [
       "How many 2-letter codes can be made from 6 different letters if a letter may be used more than once?",
       "2 places with 6 choices each: 6² = 36"
-     ]
+     ],
+     "role": "worked-example",
+     "instance": "gen:aoarr:0,6,2"
     }
    ],
    "diagnostics": [
@@ -70323,7 +70470,9 @@
       "marks": [
        2
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:awcen:0,15"
     },
     {
      "title": "The angle between two angle bisectors at the incentre",
@@ -70344,7 +70493,9 @@
        "50°",
        "60°"
       ]
-     }
+     },
+     "role": "worked-example",
+     "instance": "gen:awinc:0,84,0"
     }
    ],
    "diagnostics": [

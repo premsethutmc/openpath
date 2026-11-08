@@ -22,10 +22,11 @@ import { selectable } from "./question-status";
 import { FAMILY_VERSION } from "./spec";
 import { strategyScopeProblems } from "./teaching-presentation";
 import grade7Scope from "../../../content/learning/teaching-scope-grade7.v1.json";
+import grade8Scope from "../../../content/learning/teaching-scope-grade8.v1.json";
 
 /** grade7-lessons@1: in the Grade 7 teaching scope a lesson teaches every family the module draws on (each sub-skill
  * section is tied to its own question and checked like any other section). */
-const WHOLE_LESSON = new Set((grade7Scope as { competencies: string[] }).competencies);
+const WHOLE_LESSON = new Set([...(grade7Scope as { competencies: string[] }).competencies, ...(grade8Scope as { competencies: string[] }).competencies]);
 
 export const LIBRARY_POLICY = "library@2";
 

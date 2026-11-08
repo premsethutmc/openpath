@@ -19,6 +19,7 @@ import { moduleFor, question, type Module, type Screen, type Strategy } from "./
 import { explainStep, exposureKey, FAMILIES, parseProblem, problemOf, show, type Problem } from "./families";
 import scopeData from "../../../content/learning/showcase-grade10.v1.json";
 import grade7ScopeData from "../../../content/learning/teaching-scope-grade7.v1.json";
+import grade8ScopeData from "../../../content/learning/teaching-scope-grade8.v1.json";
 import exemptionData from "../../../content/learning/teaching-contract-exemptions.v1.json";
 import type { Representation, TeachRole } from "./family-kit";
 import { chapterExplanation, contentEligibility } from "./explanation-review";
@@ -28,7 +29,10 @@ import { familyStepExplanation, teachingPresentationFrom, teachingScopeFor, stra
 export const SHOWCASE = scopeData as { competencies: string[]; curated: string[] };
 /** The Grade 7 teaching scope (grade7-teaching@1): the same stage 2 rules for every Grade 7 lesson of both boards. */
 export const GRADE7_SCOPE = grade7ScopeData as { competencies: string[]; curated: string[] };
-const SCOPE = new Set([...SHOWCASE.competencies, ...GRADE7_SCOPE.competencies]);
+/** Grade 8 stage-2 scope (grade8-pilot@1): same rules as Grade 7. */
+export const GRADE8_SCOPE = grade8ScopeData as { competencies: string[]; curated: string[] };
+const WHOLE_CHAPTER = new Set([...GRADE7_SCOPE.competencies, ...GRADE8_SCOPE.competencies]);
+const SCOPE = new Set([...SHOWCASE.competencies, ...GRADE7_SCOPE.competencies, ...GRADE8_SCOPE.competencies]);
 /** Reviewed decisions that a flagged section is not a defect (each with its reason), e.g. a general fact, not an example. */
 export const EXEMPTIONS = exemptionData as { entries: { competency: string; title: string; rule: Violation; reason: string }[] };
 
@@ -131,7 +135,7 @@ export function lessonScreens(module: Module): { screen: Screen; strategy: Strat
   });
   const seen = new Set<string>();
   // grade7-lessons@1: a Grade 7 lesson also checks (and shows) the sections for the module's other families
-  const chapter = GRADE7_SCOPE.competencies.includes(module.competency) ? module.chapter : module.chapter.slice(0, 1);
+  const chapter = WHOLE_CHAPTER.has(module.competency) ? module.chapter : module.chapter.slice(0, 1);
   return [...chapter.map((screen) => ({ screen, strategy: null as Strategy | null })), ...scoped.flatMap((s) => s.screens.map((screen) => ({ screen, strategy: s })))].filter(({ screen }) => {
     if (!screen) return false;
     const key = JSON.stringify([screen.title, screen.text, screen.math, screen.widget]);
