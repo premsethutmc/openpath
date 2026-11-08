@@ -21,9 +21,13 @@ const competenciesOf = (board: "cbse" | "tn") => {
   const ids = allOutcomesOf(r).flatMap(({ outcome }) => outcome.mapping.competencies.filter((m) => m.status === "accepted").map((m) => (graph.byId.has(m.id) ? graph.evidenceTarget(m.id) : m.id)));
   return { release: r, ids: [...new Set(ids)].sort() };
 };
-/** A plausible wrong answer: a stated mistake's prediction where there is one, otherwise a distinct non-answer. */
+/** A plausible wrong answer the grader can read: another option letter for a choice question, a different fraction
+ * for a fraction question, otherwise another option's text or a distinct non-answer. (Option text for a choice
+ * question is unreadable to the grader and paused the module before any teaching: a tool bug, not a content gap.) */
 const wrong = (q: string) => {
   const p = question(q);
+  if (p.type === "choice") return "ABCDEF".slice(0, Math.max(2, (p.options ?? []).length)).split("").find((l) => l !== p.answer)!;
+  if (p.type === "fraction") return p.answer === "1/3" ? "2/7" : "1/3";
   const opt = (p.options ?? []).find((o: string) => o !== p.answer);
   return opt ?? (p.answer === "0" ? "1" : "0");
 };
