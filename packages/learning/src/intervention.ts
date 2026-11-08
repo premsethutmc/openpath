@@ -331,8 +331,9 @@ export function handoverState(competency: string, records: LearnerRecords, now: 
   const mine = [...records.attempts.filter(own(competency)), ...records.unresolved.filter((u) => inComp(u.questionId)), ...records.teaching.filter(own(competency))];
   const sinceMs = mine.length ? Math.max(...mine.map(t)) : null;
   // an acknowledgement counts only if the competency WAS paused when the server recorded it (replayed from the records before it: an
-  // acknowledgement from before a pause, or for a pause long resolved, opens nothing), and for ACK_VALID_DAYS after it
-  const acks = (records.acknowledgements ?? []).filter((a) => a.competency === competency && a.by === "educator" && t(a) <= now && pausedAt(competency, records, t(a)));
+  // acknowledgement from before a pause, or for a pause long resolved, opens nothing), and for ACK_VALID_DAYS after it.
+  // A server-linked recovery resolution already certifies the research stop, which ordinary module replay cannot see.
+  const acks = (records.acknowledgements ?? []).filter((a) => a.competency === competency && a.by === "educator" && t(a) <= now && (!!a.recoveryEpisode || pausedAt(competency, records, t(a))));
   // re-entry uses: every answer to a re-entry question, readable (an attempt) or not (an unresolved submission): both use the re-entry
   const uses = [...records.attempts.filter((x) => x.context === ctx), ...records.unresolved.filter((u) => u.context === ctx)].sort((x, y) => t(x) - t(y) || (x.id < y.id ? -1 : 1));
   // each use was opened by an acknowledgement only if one was in effect then: recorded after the previous use (or ever, for the first),
@@ -380,8 +381,10 @@ function withHandover(ms: ModuleState, m: Module, records: LearnerRecords, now: 
     const skill = config && lastWrong ? connectedSkill(config, lastWrong.questionId) : null;
     const met = presentedProblems(records, moduleFor);
     const ofSkill = fam && skill ? phasePool(fam, "check").find((id) => !tried(id) && !met.has(problemKeyOf(id)) && withinGrade(records, id) && keyboardOffered(id) && connectedSkill(config!, id) === skill && moduleHasFamily(m, fam)) ?? null : null;
-    const ofKind = ofSkill ?? (fam ? phasePool(fam, "check").find((id) => !tried(id) && withinGrade(records, id) && moduleHasFamily(m, fam)) ?? null : null);
-    const q = ofKind ?? m.diagnostics.find((id) => !tried(id) && withinGrade(records, id)) ?? freshFromPool(m, records, tried);
+    const strictFresh = !!records.acknowledgements?.some(a => a.id === h.acknowledgement?.id && a.recoveryEpisode);
+    const ofKind = ofSkill ?? (fam ? phasePool(fam, "check").find((id) => !tried(id) && (!strictFresh || !met.has(problemKeyOf(id))) && withinGrade(records, id) && moduleHasFamily(m, fam)) ?? null : null);
+    const candidate = ofKind ?? m.diagnostics.find((id) => !tried(id) && (!strictFresh || !met.has(problemKeyOf(id))) && withinGrade(records, id)) ?? freshFromPool(m, records, tried);
+    const q = strictFresh && candidate && met.has(problemKeyOf(candidate)) ? questionForRequirement(m, "check", records, id => !met.has(problemKeyOf(id)) && keyboardOffered(id) && withinGrade(records, id)) : candidate;
     if (q) return { ...ms, phase: "reentry", question: q, activity: "diagnostic", context: reentryContext(ms.competency), handover: h,
       reason: h.route === "reentry-acknowledged"
         ? "Your teacher has looked at this with you. One question on your own now, to see where you are. Your earlier answers stay in your record."
@@ -415,7 +418,7 @@ export function moduleState(competency: string, records: LearnerRecords, ev: Ski
   const ms0 = withSchedule(moduleStep(competency, records, ev, now, session, established, evidence), ev);
   const m = moduleFor(competency);
   // handover@1: every pause gets its bounded way back
-  const ms = m && ms0.phase === "pause" ? withHandover(ms0, m, records, now) : ms0;
+  const ms = m && (ms0.phase === "pause" || ((records.acknowledgements ?? []).some(a => a.competency === competency && a.recoveryEpisode) && handoverState(competency, records, now).route === "reentry-acknowledged")) ? withHandover(ms0, m, records, now) : ms0;
   if (!m || !ms.question || ms.phase === "reentry") return ms;
   const q = ms.question;
   const unread = unreadableCount(records, q);

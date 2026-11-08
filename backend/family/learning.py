@@ -397,8 +397,8 @@ def checked_learning(event, pupil):
             from .models import HandoverAcknowledgement
             if event['context'] != f"reentry:{q['competency']}" or event['activity'] != 'diagnostic' or event['hints'] or event['solution']:
                 _reject('Re-entry must be the offered fresh question on your own.')
-            acknowledgements = [{'id': f'ack-{a.pk}', 'at': a.at.isoformat(), 'competency': a.competency, 'by': 'educator'}
-                                for a in HandoverAcknowledgement.objects.filter(pupil=pupil)]
+            from .handover import _json as acknowledgement_json
+            acknowledgements = [acknowledgement_json(a) for a in HandoverAcknowledgement.objects.filter(pupil=pupil)]
             reply = run([{'operation': 'reentry', 'learner': str(pupil.pk), 'competency': q['competency'],
                           'questionId': event['questionId'], 'now': now.timestamp() * 1000,
                           'events': prior, 'acknowledgements': acknowledgements, 'sessionId': event['sessionId']}])

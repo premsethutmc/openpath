@@ -104,12 +104,12 @@ export interface LearnerRecords {
   acknowledgements?: HandoverAcknowledgement[];
 }
 /** handover@1: one educator acknowledgement of a paused competency (server data; the reviewer is shown by role only) */
-export interface HandoverAcknowledgement { id: string; at: string; competency: string; by: "educator" }
+export interface HandoverAcknowledgement { id: string; at: string; competency: string; by: "educator"; recoveryEpisode?: string }
 
 export function readRecords(learnerId: string, events: readonly { kind: string }[], marks: readonly WrittenMark[] = [], acknowledgements: readonly HandoverAcknowledgement[] = []): LearnerRecords {
   // handover@1: only well-formed server acknowledgements, oldest first (deterministic)
   const acks = acknowledgements.filter((x) => !!x && typeof x.id === "string" && typeof x.competency === "string" && x.by === "educator" && !Number.isNaN(Date.parse(x.at)))
-    .map((x) => ({ id: x.id, at: x.at, competency: x.competency, by: "educator" as const })).sort((x, y) => Date.parse(x.at) - Date.parse(y.at) || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
+    .map((x) => ({ id: x.id, at: x.at, competency: x.competency, by: "educator" as const, ...(typeof x.recoveryEpisode === "string" ? { recoveryEpisode: x.recoveryEpisode } : {}) })).sort((x, y) => Date.parse(x.at) - Date.parse(y.at) || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
   const out: LearnerRecords = { enrolments: [], goals: new Map(), curricula: new Map(), attempts: [], teaching: [], skips: [], sessions: {}, pending: [], unresolved: [], acknowledgements: acks };
   const markOf = new Map(marks.map((m) => [m.attemptId, m]));
   const seen = new Set<string>();

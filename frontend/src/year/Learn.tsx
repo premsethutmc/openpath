@@ -1,3 +1,5 @@
+import { contentEligibility } from "../../../packages/learning/src/explanation-review";
+import { releaseOf } from "../../../packages/learning/src/review";
 import { geometryTask } from '../../../packages/learning/src/geometry-task';
 /**
  * The learning views of My Learning Year: one skill module (Explore → Strategy → Chapter → Practise → Verify), the
@@ -21,7 +23,7 @@ import { problemOf } from "../../../packages/learning/src/families";
 import { retriesLeft, reviewStrategy as reviewStrategyFor, familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
 import { decide } from "../../../packages/learning/src/session";
 // deep-recovery@0 in a module (RESEARCH, research builds only, default off: deep-recovery-flag.ts; MODULE-RECOVERY.md)
-import { deepRecoveryOn } from "./deep-recovery-flag";
+import { deepRecoveryOn, deepPathwayAllowed, DEEP_EVALUATION } from "./deep-recovery-flag";
 import { deepModuleState } from "../learning/deep-module";
 import { DEEP_GOAL_POLICY } from "../learning/deep-goal";
 import { afterHelpOf, qualifyReason, skillLabel } from "../learning/deep-evidence";
@@ -209,6 +211,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const [clarify, setClarify] = useState<string | null>(null);
   const submitting = useRef(false);
   const workable = q.type !== "written";
+  if (DEEP_EVALUATION && !releaseOf(qid)) return <p role="note" data-evaluation-stop="review-required">This question needs educator review before evaluation. Nothing is counted as solved.</p>;
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
       {heading && <p className="eyebrow">{heading}</p>}
@@ -297,6 +300,9 @@ function Picture({ w, competency }: { w: NonNullable<Screen["widget"]>; competen
 export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", competency }: { s: Strategy | { title: string; screens: Screen[] }; onDone: () => void; saving: boolean; resumeKey?: string; doneLabel?: string; competency?: string }) {
   const [stored, setI] = useResume(resumeKey, 0);
   const i = Number.isInteger(stored) && stored >= 0 && stored < s.screens.length ? stored : 0;
+  const m = competency ? moduleFor(competency) : null;
+  if (DEEP_EVALUATION && (!m || !("id" in s) || !contentEligibility(m, s, { competency: competency!, mode: "supervised-evaluation", usage: "lesson" }).educatorApproved))
+    return <p role="note" data-evaluation-stop="review-required">This explanation needs educator review before evaluation. Your place is saved.</p>;
   const sc = s.screens[i];
   const last = i === s.screens.length - 1;
   return (
@@ -330,12 +336,12 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   const fb = onFeedback ? null : own;
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
-  const ms = ctx.module && !established ? ctx.module(competency, withinRecovery) : DEEP_MODULE ? deepModuleState(true, competency, ctx.records, ev, ctx.now, ctx.session, established, withinRecovery ? undefined : ctx.evidence) : moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established, withinRecovery ? undefined : ctx.evidence);
+  const ms = ctx.module && !established ? ctx.module(competency, withinRecovery) : DEEP_MODULE && deepPathwayAllowed(ctx.records) ? deepModuleState(true, competency, ctx.records, ev, ctx.now, ctx.session, established, withinRecovery ? undefined : ctx.evidence) : moduleState(competency, ctx.records, ev, ctx.now, ctx.session, established, withinRecovery ? undefined : ctx.evidence);
   // deep-recovery@0 evidence after help (research switch; learning/deep-evidence.ts): after a deep episode's help the status reads
   // "Solved independently after help" (never the unqualified "Shown on your own"); switch off: the same words as before
-  const afterHelp = DEEP_MODULE ? afterHelpOf(competency, ctx.records, ctx.evidence, ctx.now) : null;
-  const statusWord = skillLabel(DEEP_MODULE, ev.status, STATUS_WORD[ev.status], afterHelp);
-  const shownReason = qualifyReason(DEEP_MODULE, ms.reason, ev.status, afterHelp);
+  const afterHelp = afterHelpOf(competency, ctx.records, ctx.evidence, ctx.now);
+  const statusWord = skillLabel(true, ev.status, STATUS_WORD[ev.status], afterHelp);
+  const shownReason = qualifyReason(true, ms.reason, ev.status, afterHelp);
   const name = graph.get(competency).name;
   const step = flowIndex(ms.phase);
   const stepper = (
@@ -366,7 +372,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
     return <div className="stack">{head}<AnswerInput q={question(ms.question)} value="" setValue={()=>{}} disabled/><button className="secondary" onClick={onExit}>Next planned competency</button></div>;
   if (ms.phase === "unavailable") return <div className="stack">{head}<p className="why">{ms.reason}</p>{reviewOffer}<button className="secondary wide" onClick={onExit}>Back</button></div>;
   // the same investigation as from Practice: the wrong answer is looked into, and the skill it points to is worked on first
-  if (ms.phase === "recover" && ms.original) return <div className="stack">{head}{DEEP_MODULE && (!ctx.module || ms.why === DEEP_GOAL_POLICY) /* a learning goal: only the one connected goal (deep-goal.ts) */ ? <DeepRecovery key={ms.original} original={ms.original} ctx={ctx} onExit={onExit} exitLabel="Back" onFeedback={setFb} /> : <Recovery original={ms.original} ctx={ctx} onExit={onExit} embedded onFeedback={setFb} />}</div>;
+  if (ms.phase === "recover" && ms.original) return <div className="stack">{head}{DEEP_MODULE && deepPathwayAllowed(ctx.records) && (!ctx.module || ms.why === DEEP_GOAL_POLICY) /* a learning goal: only the one connected goal (deep-goal.ts) */ ? <DeepRecovery key={ms.original} original={ms.original} ctx={ctx} onExit={onExit} exitLabel="Back" onFeedback={setFb} /> : <Recovery original={ms.original} ctx={ctx} onExit={onExit} embedded onFeedback={setFb} />}</div>;
   if (ms.phase === "chapter" && ms.strategy)
     return (
       <div className="stack">

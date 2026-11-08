@@ -362,6 +362,38 @@ try {
     results.moduleOff = { trace: short(off), shippedRecovery: shippedSeen };
   }
 
+  if (want("handoff-consent")) {
+    await newPupil("handoff-consent", ORIG);
+    let reports = 0;
+    page.on("request", r => { if (r.method() === "POST" && r.url().endsWith("/recovery-handoffs/")) reports++; });
+    await open();
+    assert.equal(await drive(LEARNERS.nocontent(), []), "blocked");
+    await page.getByRole("button", { name: /Request help: share the skill/ }).waitFor();
+    assert.equal(reports, 0, "no help report without explicit choice");
+    assert.equal((await call(`/pupils/${id}/recovery-handoffs/`)).data.handoffs.length, 0);
+    await page.getByRole("button", { name: /Request help: share the skill/ }).click();
+    await page.locator('[data-handoff="open:not-shared"]').waitFor();
+    assert.equal(reports, 1);
+    assert.equal((await call(`/pupils/${id}/recovery-handoffs/`)).data.educatorCanSee, false);
+    results.handoffConsent = { noShareReports: 0, explicitlyRequestedReports: 1, educatorCanSee: false };
+  }
+
+  if (want("evaluation")) {
+    await bare("evaluation", 12);
+    await page.goto(`http://127.0.0.1:${port}/year/?learner=${id}&foundation=1&deep=1`);
+    await page.getByLabel("Target topic").selectOption("MATH.calculus.integration-methods");
+    await page.getByRole("button", { name: "Use this learning goal" }).click();
+    await page.getByText(/Current goal:/).waitFor();
+    assert.match(await page.locator(".test-banner").innerText(), /Controlled evaluation/);
+    assert.doesNotMatch(await page.locator(".test-banner").innerText(), /treated as educator-reviewed/);
+    await page.locator("div.next button.primary").first().click();
+    await page.locator('[data-evaluation-stop="review-required"]').waitFor();
+    assert.equal(await page.locator('[data-qid]').count(), 0);
+    assert.equal((await saved()).events.filter(e => e.record === "attempt" || e.record === "teach").length, 0);
+    if (shots) await page.screenshot({ path: `${shots}/evaluation-review-stop.png`, fullPage: true });
+    results.evaluation = { realReviewGate: true, answersOrLessonsRecorded: 0, fixture: false };
+  }
+
   if (want("goal")) {
     const OWNI = "MATH.calculus.integration-methods", EXP = "MATH.number.exponents";
     await bare("goal", 12);
@@ -400,7 +432,8 @@ try {
     assert.ok(deep.some((x) => x.kind === "lesson"), short(seen));
     const returns = deep.filter((x) => x.phase === "return");
     assert.ok(returns.length >= 2 && returns.slice(-2).every((x) => x.right) && returns.every((x) => x.skill === OWNI), `fresh problems on the goal's step: ${short(seen)}`);
-    assert.match(cards.at(-1)!, /requirements on this route are shown/, "the goal carried on to its own end");
+    assert.match(cards.at(-1)!, /solved independently after help/, "the completed route keeps its help qualification");
+    assert.doesNotMatch(cards.at(-1)!, /requirements on this route are shown/, "no unqualified readiness claim");
     const lessons = (await saved()).events.filter((e) => e.record === "teach");
     assert.ok(lessons.some((t) => graph.evidenceTarget(t.competency!) === EXP && t.episode?.startsWith("deep:")));
     results.goal = { trace: short(seen), nextCards: cards.filter((c, i) => c !== cards[i - 1]), screens: seen.filter((x) => x.where === "deep").map(({ kind, phase, eyebrow, why }) => ({ kind, phase, eyebrow, why: why.slice(0, 160) })) };

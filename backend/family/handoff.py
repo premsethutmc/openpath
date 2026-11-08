@@ -36,7 +36,7 @@ from .developer import audit
 from .learning import DEEP_EPISODE
 from django.contrib.auth import get_user_model
 
-from .models import MarkingShare, Pupil, PupilEvent, RecoveryAnswersShare, RecoveryHandoff
+from .models import HandoverAcknowledgement, MarkingShare, Pupil, PupilEvent, RecoveryAnswersShare, RecoveryHandoff
 from .views import AccountBase
 from .written import _alias, _is_educator, _shared_pupils
 
@@ -196,6 +196,7 @@ class RecoveryHandoffQueueView(_Switched):
 class RecoveryHandoffResolveView(_Switched):
     """An educator marks one hand-off resolved (once), with an optional note the learner's app shows."""
 
+    @transaction.atomic
     def post(self, request, handoff_id):
         if not _is_educator(request.user):
             raise PermissionDenied('Resolving a hand-off needs the educator role.')
@@ -207,6 +208,9 @@ class RecoveryHandoffResolveView(_Switched):
         if not n:
             return Response({'detail': 'This hand-off is already resolved.'}, status=status.HTTP_409_CONFLICT)
         h.refresh_from_db()
+        # Resolution authorises one existing handover@1 fresh check, never a mark.
+        ack = HandoverAcknowledgement.objects.create(pupil=h.pupil, competency=h.skill, educator=request.user, recovery_handoff=h, note=f'Recovery handoff {h.pk}: {note}'[:1000])
+        audit(request.user, 'recovery-handoff-reentry', pupil=h.pupil_id, detail=f'handoff {h.pk}; acknowledgement {ack.pk}')
         audit(request.user, 'recovery-handoff-resolve', pupil=h.pupil_id, detail=f'handoff {h.pk}')
         return Response(_educator_json(h, answers_shared(h.pupil, request.user), with_evidence=False))
 

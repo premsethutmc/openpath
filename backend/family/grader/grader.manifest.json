@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "a0319b617e92f7676dd2d279c9678155f9889fca823a9a2faa576872daa58a5e",
+ "sha256": "ad2b4eae13601594ba0c4cef6586101f5430fbe27bd68c981f9bb6a4407b1d6f",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -189,7 +189,7 @@
   "packages/learning/src/graph.ts": "aff0e620e2114b5154f5ee1d55018b2169bb4d9ec8306ee4ff9e1618bb3de302",
   "packages/learning/src/hypotheses.ts": "0e63819ca74bd4d7f1734ba0fd58d64ea0f39bbb28ab4ec665a36aa149e18e21",
   "packages/learning/src/independent-checker.ts": "493b7e4c8670357021d4ccb929bf7b3b1ae9f20941651ca3d809cdfdb73266d3",
-  "packages/learning/src/intervention.ts": "6c00791280fa6b93c6fb835d64427f0e11b48b4cb0bbedbce8b63eae00f79582",
+  "packages/learning/src/intervention.ts": "673418e778612934ed0b7108877f016775229feb787c5ee211336cff85e4f501",
   "packages/learning/src/kernel-adapter.ts": "bfaf8e026ac0ed6038ebe4f53d7ebe827a80e8b474a57f2938d71bf0f8392b57",
   "packages/learning/src/library.ts": "44c090737ffba4fbc790591fbb643ca2c4202c48603aa42741593da001a347c9",
   "packages/learning/src/linear-algebra-kernel.ts": "e7badeee835bc6c62965f4377b176da727b4936e4831e4efd0e42ff334f63d32",
@@ -205,7 +205,7 @@
   "packages/learning/src/reasoner/outcomes.ts": "c5339dc54468a344d5274d1f6cc2a12c63e22c0a3ac73c14908b4119284b107c",
   "packages/learning/src/reasoner/verifier/verifier.ts": "cea2e801381edd4a1246d72f17dcf2366dc32c8061b628a9f52ce6a8fc64c275",
   "packages/learning/src/reasoning.ts": "97c56684631f3127836e74d1cda90c4d3adecf34067756b4e1460a1687433e2e",
-  "packages/learning/src/records.ts": "a355c1ef9489fb641ac83775e2090d7a71d45259d54ce2bd86d889da1f0235e7",
+  "packages/learning/src/records.ts": "0889a6ca28fe23cd92c0188a529922d2dedfd01c1f2c9eadef2a0ca647d410cd",
   "packages/learning/src/reentry-eligibility.ts": "2e0ad062c192ae637567112881376c13f84f2c5b098f50270e205f1b7acded5f",
   "packages/learning/src/review.ts": "3a86049eae136e9622dd3d9a2e201601bbe17919c43e6108e073b451591af9f2",
   "packages/learning/src/rewrite-registry.ts": "88e26604a679e7956c5c43e33d4d997bee6c0d041a58708f1fec7c24c1c9b5eb",

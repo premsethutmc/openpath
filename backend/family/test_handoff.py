@@ -157,6 +157,10 @@ class RecoveryHandoffTests(LearningBase):
         r = self.resolve(self.teacher, hid)
         self.assertEqual((r.status_code, r.json()['status']), (200, 'resolved'))
         self.assertEqual(self.resolve(self.teacher, hid).status_code, 409, 'once')
+        ack = HandoverAcknowledgement.objects.get(recovery_handoff_id=hid)
+        payload = self.client.get(f'/api/pupils/{self.pupil_id}/handover-acknowledgements/').json()['acknowledgements']
+        self.assertEqual(payload[0]['recoveryEpisode'], ack.recovery_handoff.episode)
+        self.assertTrue(DiagnosticAccessLog.objects.filter(action='recovery-handoff-reentry', detail=f'handoff {hid}; acknowledgement {ack.pk}').exists())
         mine = self.mine().json()['handoffs'][0]
         self.assertEqual((mine['status'], mine['resolvedBy'], mine['note']), ('resolved', 'educator', 'We went through equivalent fractions together.'))
         self.assertNotIn('teacher@example.org', str(mine), 'the educator is shown by role only')
@@ -168,7 +172,7 @@ class RecoveryHandoffTests(LearningBase):
         before = list(PupilEvent.objects.filter(pupil_id=self.pupil_id).values_list('seq', 'body'))
         self.resolve(self.teacher, self.report().json()['id'])
         self.assertEqual(list(PupilEvent.objects.filter(pupil_id=self.pupil_id).values_list('seq', 'body')), before)
-        self.assertEqual((WrittenMark.objects.count(), HandoverAcknowledgement.objects.count()), (0, 0), 'not a mark, not an acknowledgement')
+        self.assertEqual((WrittenMark.objects.count(), HandoverAcknowledgement.objects.count()), (0, 1), 'one fresh-check acknowledgement, never a mark')
 
     # ---------------------------------------------------------------- switch and old records
 

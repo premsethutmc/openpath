@@ -332,6 +332,8 @@ class HandoverAcknowledgement(models.Model):
     educator = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, related_name="+")
     at = models.DateTimeField(auto_now_add=True)
 
+    recovery_handoff = models.OneToOneField("RecoveryHandoff", null=True, blank=True, on_delete=models.SET_NULL, related_name="reentry_acknowledgement")
+
     objects = HandoverAcknowledgementQuerySet.as_manager()
 
     class Meta:

@@ -95,9 +95,14 @@ export function repairedGapOnly(competency: string, records: LearnerRecords, sto
 
 export function deepModuleState(on: boolean, competency: string, records: LearnerRecords, ev: SkillEvidence, now: number, session: string, established?: Established | null, evidence?: (id: string) => SkillEvidence): ModuleState {
   const ms = moduleState(competency, records, ev, now, session, established, evidence);
-  if (!on || !evidence || established) return ms;
+  if (!on || !evidence || established || ms.phase === "reentry") return ms;
+  const reentry = records.attempts.filter(a => a.context === `reentry:${competency}`).at(-1);
+  if (reentry) {
+    const old = (q: string) => (records.attempts.find(a => a.questionId === q)?.at ?? "") < reentry.at;
+    if (ms.original && old(ms.original)) return moduleState(competency, records, ev, now, session, established);
+  }
   const recover = (original: string, s: DeepScreen): ModuleState => ({ ...ms, phase: "recover", question: null, strategy: null, original, reason: s.reason, why: DEEP_MODULE_POLICY });
-  const originals = moduleOriginals(competency, records);
+  const originals = moduleOriginals(competency, records).filter(q => !reentry || (records.attempts.find(a => a.questionId === q)?.at ?? "") > reentry.at);
   for (const q of originals) { const s = deepScreen(q, records, evidence, now, DEEP_APP_OPTIONS); if (open(s)) return recover(q, s); }
   // the original the shipped module would recover from, or one whose ended episode the shipped recovery still escalates
   const firstOf = (x: string) => records.attempts.find((a) => a.questionId === x);

@@ -34,7 +34,7 @@ export function Handoffs() {
   return (
     <section aria-label="Learners who need help" data-handoffs={open}>
       <h2>Learners who need help ({open} open)</h2>
-      <p className="small muted">Research prototype. OpenPath lists a learner here when its recovery stopped and could not teach them through. Only learners whose parents chose to share their written work with you appear, under the same pseudonym as their written answers. You see the skill, why OpenPath stopped and the step; a learner's recovery answers are shown only if their parent has separately allowed it. Nobody is emailed or messaged: this list is the only place it shows. Marking one as dealt with is not a mark and changes nothing in the learner's record; the learner's app shows that you dealt with it, and your note.</p>
+      <p className="small muted">Research prototype. OpenPath lists a learner here when its recovery stopped and could not teach them through. Only learners whose parents chose to share their written work with you appear, under the same pseudonym as their written answers. You see the skill, why OpenPath stopped and the step; a learner's recovery answers are shown only if their parent has separately allowed it. Nobody is emailed or messaged: this list is the only place it shows. Marking one as dealt with is not a mark or mastery. It records an auditable allowance for one fresh check on the learner’s own; earlier answers remain. The learner’s app shows your note and the way back.</p>
       {!rows.length && <p className="muted">No learner needs help.</p>}
       {rows.map((r) => <HandoffOne key={r.id} r={r} onDone={load} />)}
     </section>

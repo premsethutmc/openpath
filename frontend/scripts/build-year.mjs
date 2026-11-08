@@ -10,13 +10,15 @@ import { fileURLToPath } from "node:url";
 import * as esbuild from "esbuild";
 const root = fileURLToPath(new URL("..", import.meta.url));
 const test = process.argv.includes("--test");
-// deep-recovery@0 (research): only ever inside a TEST BUILD; a shipped build defines the switch false (year/deep-recovery-flag.ts)
-const deep = process.argv.includes("--deep-recovery");
-if (deep && !test) throw new Error("--deep-recovery is a research switch and needs --test (never in a shipped build).");
+// Recovery availability and the approval fixture are separate. Evaluation is one explicit build-time scope, with strict real review gates.
+const evaluation = process.argv.find((a) => a.startsWith("--deep-evaluation="))?.split("=")[1] ?? "";
+if (evaluation && (evaluation !== "integration-methods" || test || process.argv.includes("--deep-recovery"))) throw new Error("Use --deep-evaluation=integration-methods without --test or --deep-recovery.");
+const deep = process.argv.includes("--deep-recovery") || !!evaluation;
+if (deep && !test && !evaluation) throw new Error("--deep-recovery is a research switch and needs --test (never in a shipped build).");
 // a lower per-sitting limit, so a browser journey can reach a pause (research test builds only)
 const sittingArg = process.argv.find((a) => a.startsWith("--deep-sitting="))?.split("=")[1];
 const sitting = sittingArg === undefined ? 0 : Number(sittingArg);
-if (sittingArg !== undefined && (!deep || !Number.isInteger(sitting) || sitting < 1 || sitting >= 40)) throw new Error("--deep-sitting=N (1-39) needs --test --deep-recovery.");
+if (sittingArg !== undefined && (!test || !deep || !Number.isInteger(sitting) || sitting < 1 || sitting >= 40)) throw new Error("--deep-sitting=N (1-39) needs --test --deep-recovery.");
 const out = `${root}/${process.env.DIST ?? "dist-english"}/year`;
 await mkdir(out, { recursive: true });
 await esbuild.build({
@@ -29,7 +31,7 @@ await esbuild.build({
   sourcemap: test ? "inline" : false,
   outdir: out,
   entryNames: "app",
-  define: { "process.env.NODE_ENV": '"production"', OPENPATH_REVIEW_FIXTURE: test ? "true" : "false", OPENPATH_DEEP_RECOVERY: deep ? "true" : "false", OPENPATH_DEEP_SITTING: String(sitting) },
+  define: { "process.env.NODE_ENV": '"production"', OPENPATH_REVIEW_FIXTURE: test ? "true" : "false", OPENPATH_DEEP_RECOVERY: deep ? "true" : "false", OPENPATH_DEEP_SITTING: String(sitting), OPENPATH_DEEP_EVALUATION: JSON.stringify(evaluation), __OPENPATH_TEACHING_MODE__: JSON.stringify(evaluation ? "supervised-evaluation" : "demonstration") },
 });
 await writeFile(
   `${out}/index.html`,

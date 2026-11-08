@@ -39,7 +39,7 @@ function checkReturn(steps: GoalStep[], taughtExpected: string[]) {
 test("goal (integration-methods): the route never contains the algebra/number skills its problems rest on", () => {
   const s = goalSession("route", OWN, T0);
   assert.deepEqual(goalState(s).selectionRecords.readinessRoute, [IND, OWN]);
-  assert.ok(DEEP_GOAL_TARGETS.has(OWN) && DEEP_GOAL_TARGETS.size === 1, "one representative goal only");
+  assert.ok(DEEP_GOAL_TARGETS.has(OWN) && DEEP_GOAL_TARGETS.size === 2, "two explicitly configured goals only");
 });
 
 test("goal, single gap: the goal's step goes down to exponents, teaches it, returns to fresh problems of the goal's step; the goal carries on", () => {

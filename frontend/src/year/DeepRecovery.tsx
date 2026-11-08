@@ -4,6 +4,8 @@
  * answers and lessons through the app's own ctx (the same API calls as everywhere else). A failed save changes nothing: the
  * screen stays, the answer stays in the box, and the app's error line says it was not saved.
  */
+import { DEEP_EVALUATION, deepPathwayAllowed } from "./deep-recovery-flag";
+import { releaseOf } from "../../../packages/learning/src/review";
 import { useState } from "react";
 import { question } from "../../../packages/learning/src/content";
 import { graph } from "../../../packages/learning/src/graph";
@@ -27,12 +29,14 @@ export function DeepRecovery({ original, ctx, onExit, exitLabel = "Back to the y
   const path = s.state.path.length > 1 ? <p className="small muted" data-deep-path={s.state.path.join(">")}>Checking: {s.state.path.map(nameOf).join(" › ")}</p> : null;
   const head = (
     <>
-      <p className="small muted" role="note" data-deep-recovery="on">Research prototype (test build): deep recovery. Synthetic testing only.</p>
+      <p className="small muted" role="note" data-deep-recovery="on">{DEEP_EVALUATION ? "Controlled evaluation: real review gates apply." : "Research prototype (test build): deep recovery. Synthetic testing only."}</p>
       <p className="eyebrow">{s.kind === "end" ? "The problem you were stuck on" : s.heading}</p>
       <h1>{graph.get(q.competency).name}</h1>
       {path}
     </>
   );
+  if (DEEP_EVALUATION && (!deepPathwayAllowed(ctx.records) || !ctx.records.readinessRoute?.includes(q.competency) || (s.kind === "ask" && !releaseOf(s.qid)) || (s.kind === "lesson" && !s.module.contentReview?.educatorApproved)))
+    return <div className="stack" data-evaluation-stop="review-required">{head}<p>This pathway needs educator-reviewed content before this step can be used. Nothing is counted as solved. Your place is saved.</p><button onClick={onExit}>Back</button></div>;
   if (fb) return <div className="stack">{head}<p className="eyebrow">{fb.qid === original ? "The problem" : nameOf(question(fb.qid).competency)}</p><Feedback fb={fb} onNext={() => setFb(null)} /></div>;
   if (s.kind === "ask")
     return (
@@ -61,7 +65,7 @@ export function DeepRecovery({ original, ctx, onExit, exitLabel = "Back to the y
         <strong>{s.title}</strong>
         <p>{s.reason}</p>
         {/* recovery-handoff@0 hook (worker D): the same note until the server confirms a hand-off; a routine pause says nothing was sent */}
-        {(s.handover || s.phase === "pause") && <DeepRecoveryHandoff original={original} screen={s} learner={learner} records={ctx.records} />}
+        {(s.handover || s.phase === "pause") && <DeepRecoveryHandoff original={original} screen={s} learner={learner} records={ctx.records} ctx={ctx} />}
       </div>
       <button className="secondary wide" onClick={onExit}>{exitLabel}</button>
     </div>
