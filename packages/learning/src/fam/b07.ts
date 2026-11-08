@@ -407,6 +407,8 @@ export const B07: Def[] = [
     arity: 1,
     title: "Listing all the factors of a number",
     competency: FM,
+    // level@1: listing factors is Grade 5 work (CBSE 5, TN 5)
+    grade: () => 5,
     type: "set",
     parse: (t) => {
       const m = t.trim().match(/^(?:list|find)?\s*(?:all\s+)?(?:the\s+)?factors\s+of\s+(\d{1,3})\??$/i);
@@ -471,6 +473,8 @@ export const B07: Def[] = [
     arity: 2,
     title: "Common factors of two numbers",
     competency: FM,
+    // level@1: common factors are Grade 5 work (CBSE 5, TN 5)
+    grade: () => 5,
     type: "set",
     parse: none,
     reject: ([a, b]) => (a < 6 || b > 60 || a >= b || gcd(a, b) < 4 || isPrime(gcd(a, b)) ? "Two numbers from 6 to 60, the first smaller, whose highest common factor is 4 or more and not prime (so there are several common factors)." : null),
@@ -530,6 +534,8 @@ export const B07: Def[] = [
     arity: 3,
     title: "Common multiples from jumps on a number line",
     competency: FM,
+    // level@1: common multiples on a number line are Grade 5 work (CBSE 5, TN 5)
+    grade: () => 5,
     type: "set",
     parse: none,
     // [a, b, N]: one animal jumps a at a time, another b at a time, from 0, up to N

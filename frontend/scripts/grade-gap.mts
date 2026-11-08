@@ -24,6 +24,9 @@ const limit = Number(process.env.LIMIT ?? 0);
 const wrong = (q: string) => {
   const p = question(q);
   const opt = (p.options ?? []).find((o: string) => o !== p.answer);
+  // a wrong answer must be readable to count as a mistake: "0" is not a ratio (it is unreadable, and two unreadable answers
+  // pause the module for a person before any teaching), so a ratio question gets a wrong ratio instead
+  if (p.type === "ratio") return p.answer === "1:1" ? "1:2" : "1:1";
   return opt ?? (p.answer === "0" ? "1" : "0");
 };
 const wrongFirst = (): Answerer => {

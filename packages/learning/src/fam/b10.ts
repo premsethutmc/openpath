@@ -405,6 +405,8 @@ export const B10: Def[] = [
     arity: 4,
     title: "A ratio in its simplest form",
     competency: RAT,
+    // level@1: a ratio in simplest form is Grade 6 work (TN 6)
+    grade: () => 6,
     type: "ratio",
     mc: true,
     parse: none,
@@ -441,13 +443,17 @@ export const B10: Def[] = [
     keep: ([x, y, g, u]) => x !== y && gcd(x, y) === 1 && (u === 0 ? g <= 15 : (y * g) % 100 === 0),
     cap: 450,
     difficulty: ([, , g, u]) => (u ? 3 : isPrime(g) ? 1 : 2),
-    word: ([x, y, g, u]) => (u ? `A ribbon is ${x * g} cm long and a rope is ${(y * g) / 100} m long. What is the ratio of the length of the ribbon to the length of the rope, in its simplest form?` : `In a school there are ${x * g} girls and ${y * g} boys. What is the ratio of girls to boys, in its simplest form?`),
+    word: ([x, y, g, u]) => (u ? `A ribbon is ${x * g} cm long and a rope is ${(y * g) / 100} m long. What is the ratio of the length of the ribbon to the length of the rope, in its simplest form?` : `In ${x * g + y * g <= 60 ? "a class" : "a school"} there are ${x * g} girls and ${y * g} boys. What is the ratio of girls to boys, in its simplest form?`),
     teach: {
       idea: "A ratio compares two quantities of the same kind. Dividing both by the same number gives an equal ratio, like an equivalent fraction.",
       method: "Make the units the same, then divide both numbers by their highest common factor.",
       visual: ([x, y]) => ({ type: "bars", labels: ["first", "second"], values: [x, y] }),
       alternatives: [
-        { id: "groups", title: "Equal groups", kind: "conceptual", text: ["18 : 24 means 18 of one thing for every 24 of another.", "Make groups of 6: 3 groups and 4 groups. So for every 3 of the first there are 4 of the second: 3 : 4."] },
+        { id: "groups", title: "Equal groups", kind: "conceptual", text: ["18 : 24 means 18 of one thing for every 24 of another.", "Make groups of 6: 3 groups and 4 groups. So for every 3 of the first there are 4 of the second: 3 : 4."],
+          textFor: ([x, y, g, u]) => [
+            u ? `First write both lengths in centimetres: ${x * g} cm and ${y * g} cm. Then the ratio means ${x * g} cm of the first for every ${y * g} cm of the second.` : `${x * g} : ${y * g} means ${x * g} of one thing for every ${y * g} of another.`,
+            `Make groups of ${g}: ${x} ${x === 1 ? "group" : "groups"} and ${y} ${y === 1 ? "group" : "groups"}. So for every ${x} of the first there ${x === 1 ? "is" : "are"} ${y} of the second: ${x} : ${y}.`,
+          ] },
       ],
     },
     limits: "Ratios of two whole numbers (or cm and whole metres) that simplify to x : y with x, y up to 12; three-term ratios are in ajrdiv.",
@@ -457,6 +463,8 @@ export const B10: Def[] = [
     arity: 4,
     title: "The missing term of an equivalent ratio",
     competency: RAT,
+    // level@1: equivalent ratios are Grade 6 work (TN 6)
+    grade: () => 6,
     type: "integer",
     mc: true,
     parse: none,
@@ -484,7 +492,7 @@ export const B10: Def[] = [
     difficulty: ([x, y, k]) => (k <= 5 && x <= 5 && y <= 5 ? 1 : k <= 9 ? 2 : 3),
     word: ([x, y, k, s]) => {
       const bags = (n: number) => `${n} bag${n === 1 ? "" : "s"}`;
-      return s ? `A school canteen mixes ${bags(x)} of sand with ${bags(y)} of cement for a floor. For a bigger floor it uses ${bags(y * k)} of cement. How many bags of sand keep the same ratio?` : `A school canteen mixes ${bags(x)} of sand with ${bags(y)} of cement for a floor. For a bigger floor it uses ${bags(x * k)} of sand. How many bags of cement keep the same ratio?`;
+      return s ? `A mason mixes ${bags(x)} of sand with ${bags(y)} of cement for a floor. For a bigger floor it uses ${bags(y * k)} of cement. How many bags of sand keep the same ratio?` : `A mason mixes ${bags(x)} of sand with ${bags(y)} of cement for a floor. For a bigger floor it uses ${bags(x * k)} of sand. How many bags of cement keep the same ratio?`;
     },
     teach: {
       idea: "Equivalent ratios are made by multiplying (or dividing) both terms by the same number, just like equivalent fractions.",
@@ -502,6 +510,8 @@ export const B10: Def[] = [
     arity: 3,
     title: "Finding a unit rate",
     competency: UR,
+    // level@1: a unit rate by one division is Grade 5 work (CBSE 5, TN 5)
+    grade: () => 5,
     type: "integer",
     mc: true,
     parse: none,
@@ -540,6 +550,8 @@ export const B10: Def[] = [
     arity: 4,
     title: "The better buy by unit price",
     competency: UR,
+    // level@1: comparing unit prices is Grade 6 work (TN 6)
+    grade: () => 6,
     type: "integer",
     mc: true,
     parse: none,
@@ -589,6 +601,8 @@ export const B10: Def[] = [
     arity: 2,
     title: "Time taken working together",
     competency: UR,
+    // level@1: time and work is Grade 8 (TN 8, Class 8 proportion)
+    grade: () => 8,
     type: "fraction",
     mc: true,
     parse: none,
@@ -615,7 +629,7 @@ export const B10: Def[] = [
     difficulty: ([a, b]) => ((a * b) % (a + b) === 0 ? 1 : b <= 12 ? 2 : 3),
     word: ([a, b]) => `One tap fills a tank in ${a} hours and a second tap fills it in ${b} hours. If both taps are opened together, how many hours does it take to fill the tank? (A fraction is fine.)`,
     teach: {
-      idea: "Rates add: if Arun does 1/6 of the job each day and Bala 1/12, together they do 1/6 + 1/12 = 1/4 each day.",
+      idea: "Rates add: if Arun alone takes a days and Bala alone takes b days, Arun does 1/a of the job each day and Bala 1/b, so together they do 1/a + 1/b of the job each day.",
       method: "Add the work done per day, then divide 1 whole job by that rate.",
       alternatives: [
         { id: "common_job", title: "Count pieces of a bigger job", kind: "procedural", text: ["Pretend the job has 12 pieces (a number both times divide).", "In one day Arun does 12 ÷ 6 = 2 pieces and Bala 12 ÷ 12 = 1: together 3 pieces a day, so 12 ÷ 3 = 4 days."] },
@@ -1295,6 +1309,8 @@ export const B10: Def[] = [
     arity: 4,
     title: "Compound interest and depreciation",
     competency: CI,
+    // level@1: compound interest and depreciation are Grade 8 (TN 8)
+    grade: () => 8,
     type: "integer",
     mc: true,
     parse: none,
@@ -1346,7 +1362,7 @@ export const B10: Def[] = [
     domain: [[1, 50], [2, 20], [2, 3], [0, 2]],
     cap: 400,
     difficulty: ([, , n, m]) => (m === 0 && n === 2 ? 1 : m === 1 ? 3 : 2),
-    word: ([k, r, n, m]) => [`${nm(k)} deposits ${rs(1000 * k)} in a bank that pays ${r}% per year, compounded annually. How much interest has the money earned after ${n} years, in rupees?`, `${nm(k)} deposits ${rs(1000 * k)} in a bank that pays ${r}% per year, compounded every six months. How much interest has the money earned after ${n} years, in rupees?`, `A scooter bought for ${rs(1000 * k)} loses ${r}% of its value every year (each time on its value at the start of the year). What is it worth after ${n} years, in rupees?`][m],
+    word: ([k, r, n, m]) => [`${nm(k)} deposits ${rs(1000 * k)} in a bank that pays ${r}% per year, compounded annually. How much interest has the money earned after ${n} years, in rupees?`, `${nm(k)} deposits ${rs(1000 * k)} in a bank that pays ${r}% per year, compounded every six months. How much interest has the money earned after ${n} years, in rupees?`, `${k <= 5 ? "A table fan" : k <= 40 ? "A mobile phone" : "A scooter"} bought for ${rs(1000 * k)} loses ${r}% of its value every year (each time on its value at the start of the year). What is it worth after ${n} years, in rupees?`][m],
     teach: {
       idea: "With compound interest, each period's interest joins the principal, so the next period's interest is bigger. Depreciation works the same way, downwards.",
       method: "Amount = P × (1 + R/100)ⁿ (depreciation: 1 − R/100). Half-yearly: use R/2 for each half-year and 2n half-years. Interest = amount − principal.",
@@ -1363,6 +1379,8 @@ export const B10: Def[] = [
     arity: 2,
     title: "Cubes and cube roots",
     competency: CUBE,
+    // level@1: cubes and cube roots are Grade 8 (CBSE 8, TN 8)
+    grade: () => 8,
     type: "integer",
     mc: true,
     parse: none,
@@ -1410,7 +1428,14 @@ export const B10: Def[] = [
       method: "For a cube root, use the units digit to guess the last digit of the root and the size to guess the tens, then check by cubing. Or use prime factors in groups of three.",
       visual: ([, n]) => ({ type: "solid", name: "cube", dims: [`${Math.min(n, 9)}`] }),
       alternatives: [
-        { id: "triples", title: "Group prime factors in threes", kind: "procedural", text: ["Write the number as a product of primes, e.g. 1728 = 2 × 2 × 2 × 2 × 2 × 2 × 3 × 3 × 3.", "Take one prime from each group of three equal primes: 2 × 2 × 3 = 12."] },
+        { id: "triples", title: "Group prime factors in threes", kind: "procedural", text: ["Write the number as a product of primes, e.g. 1728 = 2 × 2 × 2 × 2 × 2 × 2 × 3 × 3 × 3.", "Take one prime from each group of three equal primes: 2 × 2 × 3 = 12."],
+          textFor: ([m, n]) => {
+            const ps = primeList(n);
+            const all = ps.flatMap((q) => [q, q, q]).sort((x, y) => x - y);
+            const one = ps.length > 1 ? `${ps.join(" × ")} = ${n}` : `${n}`;
+            if (m === 0) return [`${n}³ = ${n} × ${n} × ${n}, so in prime factors every prime of ${n} appears three times: ${n ** 3} = ${all.join(" × ")}.`, `That is why the prime factors of a cube always come in groups of three equal primes; taking one prime from each group gives back ${one}.`];
+            return [`Write ${n ** 3} as a product of primes: ${n ** 3} = ${all.join(" × ")}.`, `Take one prime from each group of three equal primes: ${one}.${m === 2 ? ` The number under the cube root is negative, so its cube root is negative: −${n}.` : ""}`];
+          } },
       ],
     },
     limits: "Cubes of 2 to 25, cube roots of perfect cubes up to 50³ and of negative cubes; estimating non-perfect cube roots is not included.",
@@ -1420,6 +1445,8 @@ export const B10: Def[] = [
     arity: 1,
     title: "The smallest multiplier that makes a perfect cube",
     competency: CUBE,
+    // level@1: the smallest multiplier for a perfect cube is Grade 8 (CBSE 8, TN 8)
+    grade: () => 8,
     type: "integer",
     mc: true,
     parse: none,
@@ -1460,7 +1487,7 @@ export const B10: Def[] = [
     explain: (s) => (s.id === "factor" ? `${s.inputs[0]} = ${s.value}` : `Complete each group of three equal primes: multiply by ${s.value}`),
     domain: [[16, 2000]],
     difficulty: ([n]) => ([...expo(n)].filter(([, e]) => e % 3).length === 1 ? 1 : n <= 300 ? 2 : 3),
-    word: ([n]) => `A shop has ${n} small cube-shaped sweets. The owner wants to put together some identical boxes of ${n} sweets each so that all the sweets can be stacked into one large solid cube. What is the smallest number of boxes needed?`,
+    word: ([n]) => `A sweet shop packs small cube-shaped sweets in boxes of ${n}. The owner wants to take some full boxes and stack all their sweets, with none left over, into one large solid cube. What is the smallest number of boxes needed?`,
     teach: {
       idea: "In a perfect cube every prime factor comes in groups of three, because the number is something times itself three times.",
       method: "Write the number as a product of primes and group equal primes in threes. Multiply by whatever primes are needed to complete every group.",
@@ -1477,6 +1504,8 @@ export const B10: Def[] = [
     arity: 3,
     title: "When doubling overtakes adding",
     competency: GROW,
+    // level@1: doubling against adding is Grade 8 (CBSE 8)
+    grade: () => 8,
     type: "integer",
     mc: true,
     parse: none,
@@ -1541,7 +1570,7 @@ export const B10: Def[] = [
         return { type: "table", head: ["Day", "Plan A", "Plan B"], rows: days.map((k) => [String(k), String(a + d * k), String(b * 2 ** k)]) };
       },
       alternatives: [
-        { id: "paper_fold", title: "Folding paper", kind: "conceptual", text: ["Fold a sheet in half again and again: 2, 4, 8, 16, 32 … layers.", "Adding one sheet each time gives only 2, 3, 4, 5 …: doubling soon leaves adding far behind."] },
+        { id: "paper_fold", title: "Folding paper", kind: "conceptual", text: ["Fold a sheet in half again and again: the number of layers doubles with every fold.", "Adding one sheet at a time grows by just one sheet each step: doubling soon leaves adding far behind."] },
       ],
     },
     limits: "One adding plan against one doubling plan, crossing between day 3 and day 10; growth by other factors uses the same table.",
@@ -1553,6 +1582,8 @@ export const B10: Def[] = [
     arity: 2,
     title: "A numeral in another base, in base ten",
     competency: BASE,
+    // level@1: number bases are Grade 8 (CBSE 8)
+    grade: () => 8,
     type: "integer",
     mc: true,
     parse: none,
@@ -1561,7 +1592,10 @@ export const B10: Def[] = [
     solve: ([b, n]) => {
       const ds = n.toString(b).split("").map(Number);
       return {
-        steps: ds.map((d, i) => ({ id: `place${i}`, op: "multiply", competency: BASE, inputs: [d, b, ds.length - 1 - i], value: d * b ** (ds.length - 1 - i) })),
+        steps: [
+          ...ds.map((d, i): Step => ({ id: `place${i}`, op: "multiply", competency: BASE, inputs: [d, b, ds.length - 1 - i], value: d * b ** (ds.length - 1 - i) })),
+          { id: "sum", op: "sum", competency: BASE, inputs: ds.map((d, i) => d * b ** (ds.length - 1 - i)), value: n },
+        ],
         answer: n,
       };
     },
@@ -1585,16 +1619,26 @@ export const B10: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => `${s.inputs[0]} × ${s.inputs[1]}${sup(Number(s.inputs[2]))} = ${s.value}`,
+    explain: (s) => (s.id === "sum" ? `Add the place values: ${s.inputs.join(" + ")} = ${s.value}` : `${s.inputs[0]} × ${s.inputs[1]}${sup(Number(s.inputs[2]))} = ${s.value}`),
     domain: [[2, 9], [4, 400]],
     cap: 400,
     difficulty: ([b, n]) => (b === 2 && n < 32 ? 1 : n.toString(b).length <= 3 ? 2 : 3),
-    word: ([b, n]) => `On a planet, people count using only the digits 0 to ${b - 1}, so their places are worth 1, ${b}, ${b * b}, … from the right. A sign there shows ${n.toString(b)} mangoes. How many mangoes is that in our base-ten numbers?`,
+    word: ([b, n]) => `On a planet, people count using only the digits ${b === 2 ? "0 and 1" : `0 to ${b - 1}`}, so their places are worth 1, ${b}, ${b * b}, … from the right. A sign there shows ${n.toString(b)} mangoes. How many mangoes is that in our base-ten numbers?`,
     teach: {
       idea: `In base b, each place is worth b times the place to its right: 1, b, b², b³, … just as base ten has 1, 10, 100.`,
       method: "Multiply each digit by the value of its place and add the results.",
       alternatives: [
-        { id: "horner", title: "Multiply and add from the left", kind: "procedural", text: ["Start with the first digit. Multiply by the base and add the next digit; repeat to the end.", "Base 5, 243: 2 × 5 + 4 = 14, 14 × 5 + 3 = 73."] },
+        { id: "horner", title: "Multiply and add from the left", kind: "procedural", text: ["Start with the first digit. Multiply by the base and add the next digit; repeat to the end.", "Base 5, 243: 2 × 5 + 4 = 14, 14 × 5 + 3 = 73."],
+          textFor: ([b, n]) => {
+            const ds = n.toString(b).split("").map(Number);
+            const parts: string[] = [];
+            let v = ds[0];
+            for (const d of ds.slice(1)) {
+              parts.push(`${v} × ${b} + ${d} = ${v * b + d}`);
+              v = v * b + d;
+            }
+            return ["Start with the first digit. Multiply by the base and add the next digit; repeat to the end.", `Base ${b}, ${n.toString(b)}: ${parts.join(", ")}.`];
+          } },
       ],
     },
     limits: "Bases 2 to 9 with 3- to 6-digit numerals and values up to 400; bases above ten need extra digit symbols.",
@@ -1604,11 +1648,13 @@ export const B10: Def[] = [
     arity: 2,
     title: "A base-ten number in another base",
     competency: BASE,
+    // level@1: number bases are Grade 8 (CBSE 8)
+    grade: () => 8,
     type: "integer",
     mc: true,
     parse: none,
     reject: ([b, n]) => (b < 2 || b > 9 || n < 4 || n > 400 || n.toString(b).length < 3 || n.toString(b).length > 6 ? "Bases 2 to 9, numerals with 3 to 6 digits, values up to 400." : null),
-    prompt: ([b, n]) => `Write the base-ten number ${n} in base ${b}. Type the digits of the base-${b} numeral.`,
+    prompt: ([b, n]) => `Write the base-ten number ${n} in base ${b}. What is the base-${b} numeral?`,
     solve: ([b, n]) => {
       const steps: Step[] = [];
       let x = n;
@@ -1616,6 +1662,7 @@ export const B10: Def[] = [
         steps.push({ id: `div${steps.length}`, op: "divide", competency: BASE, inputs: [x, b, x % b], value: Math.floor(x / b) });
         x = Math.floor(x / b);
       }
+      steps.push({ id: "read", op: "read", competency: BASE, inputs: steps.map((st) => Number(st.inputs[2])).reverse(), value: Number(n.toString(b)) });
       return { steps, answer: Number(n.toString(b)) };
     },
     // independent: read the typed digits back in base b (multiply-and-add from the left) and compare with n
@@ -1639,11 +1686,11 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} remainder ${s.inputs[2]}`,
+    explain: (s) => (s.id === "read" ? `Read the remainders from the last to the first: ${s.inputs.join(", ")}, so the numeral is ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value} remainder ${s.inputs[2]}`),
     domain: [[2, 9], [4, 400]],
     cap: 400,
     difficulty: ([b, n]) => (b === 2 && n < 32 ? 1 : n.toString(b).length <= 3 ? 2 : 3),
-    word: ([b, n]) => `A machine stores numbers in base ${b}, using only the digits 0 to ${b - 1}. How does it store the number ${n}? Type the digits.`,
+    word: ([b, n]) => `A machine stores numbers in base ${b}, using only the digits ${b === 2 ? "0 and 1" : `0 to ${b - 1}`}. How does it store the number ${n}? Type the digits.`,
     teach: {
       idea: "Writing a number in base b means making groups of 1, b, b², … : the remainders after dividing by b are the digits, ones first.",
       method: "Divide by b again and again, writing each remainder. Stop at 0, then read the remainders from the last to the first.",
@@ -2094,6 +2141,8 @@ export const B10: Def[] = [
     arity: 2,
     title: "Numbers that are sums of two cubes in two ways",
     competency: CUBE,
+    // level@1: sums of two cubes in two ways are Grade 8 (CBSE 8)
+    grade: () => 8,
     type: "integer",
     mc: true,
     // [i, w]: the i-th such number N = a³ + b³ = c³ + d³ (a < b, c < d); w 0–3 hides a, b, c or d, w 4 asks for N
@@ -2142,15 +2191,15 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => (s.id === "cubes" ? `${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "subtract" ? `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `The cube root of ${s.inputs[0]} is ${s.value}`),
+    explain: (s) => (s.id === "cubes" ? `${Math.round(Math.cbrt(Number(s.inputs[0])))}³ + ${Math.round(Math.cbrt(Number(s.inputs[1])))}³ = ${s.inputs[0]} + ${s.inputs[1]} = ${s.value}` : s.id === "subtract" ? `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}` : `The cube root of ${s.inputs[0]} is ${s.value}`),
     domain: [[0, 26], [0, 4]],
     difficulty: ([i, w]) => (w === 4 ? 1 : i < 6 ? 2 : 3),
     word: ([i, w]) => {
       const [N, ...xs] = TAXI[i];
-      return w === 4 ? `${nm(i)} builds two pairs of solid cubes from unit blocks: one pair with edges ${xs[0]} and ${xs[1]}, the other with edges ${xs[2]} and ${xs[3]}. Both pairs use the same number of blocks. How many blocks is that?` : `${nm(i)} has ${N} unit blocks and builds two solid cubes from them, using every block. One cube has edge ${xs[w ^ 1]}. What is the edge of the other cube?`;
+      return w === 4 ? `${nm(i)} builds two pairs of solid cubes from unit blocks: one pair with edges ${xs[0]} and ${xs[1]}, the other with edges ${xs[2]} and ${xs[3]}. Both pairs use the same number of blocks. How many blocks is that?` : `${nm(i)} has ${inr(N)} unit blocks and builds two solid cubes from them, using every block. One cube has edge ${xs[w ^ 1]}. What is the edge of the other cube?`;
     },
     teach: {
-      idea: "Some numbers are the sum of two cubes in two different ways, like 1729 = 1³ + 12³ = 9³ + 10³ (Ramanujan's taxicab number).",
+      idea: "Some numbers are the sum of two cubes in two different ways. The smallest is the famous taxicab number of the Indian mathematician Srinivasa Ramanujan.",
       method: "Subtract the known cube from the number, then find the cube root of what is left (by prime factorisation, or by trying numbers whose cube ends in the right digit).",
       alternatives: [
         { id: "last-digit", title: "Use the last digit", kind: "procedural", text: ["The last digit of a cube decides the last digit of its cube root: cubes ending in 8 come from numbers ending in 2, ending in 7 from 3, and so on.", "Then estimate the size: 10³ = 1000, 20³ = 8000, 30³ = 27,000."] },
@@ -2165,6 +2214,8 @@ export const B10: Def[] = [
     arity: 4,
     title: "Comparing two ratios, or deciding whether they are equivalent",
     competency: RAT,
+    // level@1: comparing two ratios is Grade 6 work (TN 6)
+    grade: () => 6,
     type: "choice",
     // [a, b, c, d]: compare a : b with c : d
     parse: none,
@@ -2173,7 +2224,9 @@ export const B10: Def[] = [
     prompt: ([a, b, c, d]) => `Compare the ratios ${a} : ${b} and ${c} : ${d}. Which statement is true?`,
     solve: ([a, b, c, d]) => {
       const t = a * d > b * c ? 0 : a * d < b * c ? 1 : 2;
-      return { steps: [{ id: "cross", op: "multiply", competency: RAT, inputs: [a * d, b * c], value: "" }], answer: order([a, b, c, d], 3, "rcmp").indexOf(t) };
+      const ans = order([a, b, c, d], 3, "rcmp").indexOf(t);
+      const said = [`${a} : ${b} is greater than ${c} : ${d}`, `${c} : ${d} is greater than ${a} : ${b}`, `${a} : ${b} and ${c} : ${d} are equivalent`][t];
+      return { steps: [{ id: "cross", op: "multiply", competency: RAT, inputs: [a * d, b * c], value: "" }, { id: "pick", op: "choose the option", competency: RAT, inputs: [said], value: ans }], answer: ans };
     },
     // independent: compare the decimal values of a ÷ b and c ÷ d
     validate: ([a, b, c, d], v) => {
@@ -2194,7 +2247,7 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => `Cross-multiply: ${s.inputs[0]} and ${s.inputs[1]}. ${Number(s.inputs[0]) === Number(s.inputs[1]) ? "They are equal, so the ratios are equivalent." : Number(s.inputs[0]) > Number(s.inputs[1]) ? "The first is bigger, so the first ratio is greater." : "The second is bigger, so the second ratio is greater."}`,
+    explain: (s) => s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Cross-multiply: ${s.inputs[0]} and ${s.inputs[1]}. ${Number(s.inputs[0]) === Number(s.inputs[1]) ? "They are equal, so the ratios are equivalent." : Number(s.inputs[0]) > Number(s.inputs[1]) ? "The first is bigger, so the first ratio is greater." : "The second is bigger, so the second ratio is greater."}`,
     domain: [[1, 12], [1, 12], [1, 36], [1, 36]],
     keep: rcmpOk,
     cap: 450,
@@ -2216,6 +2269,8 @@ export const B10: Def[] = [
     arity: 3,
     title: "Total cost from a fixed rate per kilometre or metre",
     competency: UR,
+    // level@1: rate × number of units is Grade 5 work (CBSE 5, TN 5)
+    grade: () => 5,
     type: "integer",
     mc: true,
     // [r, k, t]: ₹r per unit for k units, context t (auto, taxi, courier, cloth)
@@ -2242,7 +2297,7 @@ export const B10: Def[] = [
     word: ([r, k, t]) => fareText(r, k, (t + 1) % 4),
     teach: {
       idea: "At a fixed rate, every kilometre (or metre) costs the same, so the total is the rate times the number of units.",
-      method: "Multiply the rate by the distance. Check by estimating: about ₹10 a km for about 10 km is about ₹100.",
+      method: "Multiply the rate by the distance. Check by estimating: round the rate and the distance to easy numbers and multiply them; the answer should be close.",
       alternatives: [
         { id: "table", title: "A rate table", kind: "procedural", text: ["1 km costs ₹12, 2 km cost ₹24, 3 km cost ₹36 …", "Keep adding ₹12 for each kilometre, or jump: 10 km cost ₹120."] },
       ],
@@ -2578,6 +2633,8 @@ export const B10: Def[] = [
     arity: 4,
     title: "Compound interest half-yearly or quarterly, and compared with simple interest",
     competency: CI,
+    // level@1: half-yearly and quarterly compounding are Grade 8 (TN 8)
+    grade: () => 8,
     type: "fraction",
     mc: true,
     decimals: true,
@@ -2665,7 +2722,7 @@ export const B10: Def[] = [
           : `${who} can lend ${P} for ${n} years at ${i}% per year, either at simple interest or at compound interest added yearly. How many more rupees does compound interest give?`;
     },
     teach: {
-      idea: "Compounding more often means more periods at a smaller rate: half-yearly uses R/2 per half-year, quarterly R/4 per quarter. Compound interest is more than simple interest because interest earns interest.",
+      idea: "Compounding more often means more periods at a smaller rate: half-yearly uses half the yearly rate for each half-year, quarterly a quarter of it for each quarter. Compound interest is more than simple interest because interest earns interest.",
       method: "Amount = P × (1 + r/100)ⁿ with r the rate per period and n the number of periods; CI = amount − P. For the difference, also find SI = P × R × T ÷ 100 and subtract.",
       alternatives: [
         { id: "table", title: "Period by period", kind: "procedural", text: ["Write the balance at the start of each period, add that period's interest, and carry it on.", "For simple interest, add the same interest (on the original principal) each year."] },
@@ -3051,10 +3108,10 @@ function fmtQ(x: number) {
 function rateText(r: number, k: number, t: number) {
   const T = r * k;
   return [
-    `${k} kg of rice cost ₹${T}. What is the cost of 1 kg, in rupees?`,
+    `${k} kg of rice cost ${rs(T)}. What is the cost of 1 kg, in rupees?`,
     `A bus travels ${T} km in ${k} hours at a steady speed. How many km does it travel in 1 hour?`,
-    `An auto charges ₹${T} for a ride of ${k} km, at a fixed rate per km. What is the fare per km, in rupees?`,
-    `A worker earns ₹${T} for ${k} days of work, the same each day. How much does the worker earn per day, in rupees?`,
+    `An auto charges ${rs(T)} for a ride of ${k} km, at a fixed rate per km. What is the fare per km, in rupees?`,
+    `A worker earns ${rs(T)} for ${k} days of work, the same each day. How much does the worker earn per day, in rupees?`,
   ][t];
 }
 /** P·(1 ± r/100)ⁿ (half-yearly: r/2 for 2n periods) as a whole number, or null when it is not whole. */

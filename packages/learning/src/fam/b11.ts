@@ -342,6 +342,8 @@ export const B11: Def[] = [
     arity: 2,
     title: "Writing a number in scientific notation",
     competency: SCI,
+    // level@1: large numbers in standard form are Grade 7; negative powers are Grade 8
+    grade: ([, e]) => (e < 0 ? 8 : 7),
     type: "tuple",
     mc: true,
     parse: none,
@@ -400,10 +402,18 @@ export const B11: Def[] = [
         ? `In a science book, ${nm(m)} reads that a distance is ${sciPlain(m, e)} km. Write this distance in scientific notation, a × 10ⁿ with 1 ≤ a < 10, as (a, n).`
         : `In a science lab, ${nm(m)} measures the thickness of a very thin sheet as ${sciPlain(m, e)} m. Write this length in scientific notation, a × 10ⁿ with 1 ≤ a < 10, as (a, n).`,
     teach: {
-      idea: "Each place the decimal point moves left divides by 10, so to keep the value the same we multiply by 10 that many times: 45,200 = 4.52 × 10⁴. Moving the point right multiplies by 10, so it is balanced by a negative power: 0.0045 = 4.5 × 10⁻³.",
+      idea: "Each place the decimal point moves to the left divides the number by 10, so to keep the value the same we multiply by 10 once for each place: the power of 10 counts the places moved. Moving the point to the right multiplies by 10, so it is balanced by a negative power of 10.",
       method: "Put the point just after the first non-zero digit to get a. Count how many places the point moved: to the left gives a positive n, to the right gives a negative n.",
       alternatives: [
-        { id: "place_value", title: "Use the place value of the first digit", kind: "conceptual", text: ["Find the place of the first non-zero digit. In 4,52,000 the 4 is in the lakhs place, and 1,00,000 = 10⁵, so n = 5.", "In 0.00045 the 4 is in the ten-thousandths place, and 1/10000 = 10⁻⁴, so n = −4."], visual: ([m, e]) => (e > 0 ? { type: "table", head: ["Place", "Power of 10"], rows: [["Thousands", "10³"], ["Lakhs", "10⁵"], ["Crores", "10⁷"]] } : { type: "table", head: ["Place", "Power of 10"], rows: [["Tenths", "10⁻¹"], ["Hundredths", "10⁻²"], ["Thousandths", "10⁻³"]] }) },
+        { id: "place_value", title: "Use the place value of the first digit", kind: "conceptual", text: ["Find the place of the first non-zero digit. In 4,52,000 the 4 is in the lakhs place, and 1,00,000 = 10⁵, so n = 5.", "In 0.00045 the 4 is in the ten-thousandths place, and 1/10000 = 10⁻⁴, so n = −4."],
+          textFor: ([m, e]) => {
+            const names: Record<number, string> = { 4: "ten-thousands", 5: "lakhs", 6: "ten-lakhs", 7: "crores", 8: "ten-crores", [-1]: "tenths", [-2]: "hundredths", [-3]: "thousandths", [-4]: "ten-thousandths", [-5]: "hundred-thousandths", [-6]: "millionths", [-7]: "ten-millionths" };
+            const place = `${names[e] ? `the ${names[e]} place, ` : ""}worth ${e > 0 ? inr(pow10(e)) : `1/${inr(pow10(-e))}`}`;
+            return [
+              `Find the place of the first non-zero digit. In ${sciPlain(m, e)} it is in ${place}, which is 10${sup(e)}, so n = ${e < 0 ? "−" : ""}${Math.abs(e)}.`,
+              `Put the point just after that digit to get a = ${sciA(m)}: the number is ${sciA(m)} × 10${sup(e)}.`,
+            ];
+          }, visual: ([m, e]) => (e > 0 ? { type: "table", head: ["Place", "Power of 10"], rows: [["Thousands", "10³"], ["Lakhs", "10⁵"], ["Crores", "10⁷"]] } : { type: "table", head: ["Place", "Power of 10"], rows: [["Tenths", "10⁻¹"], ["Hundredths", "10⁻²"], ["Thousandths", "10⁻³"]] }) },
       ],
     },
     limits: "Numbers with three significant digits, from 10⁴ to 10¹⁰ and from 10⁻¹ to 10⁻⁷; comparing and estimating orders of magnitude are separate skills.",
@@ -414,6 +424,8 @@ export const B11: Def[] = [
     arity: 2,
     title: "Writing a number in scientific notation as an ordinary number",
     competency: SCI,
+    // level@1: large numbers in standard form are Grade 7; negative powers are Grade 8
+    grade: ([, e]) => (e < 0 ? 8 : 7),
     type: "fraction",
     decimals: true,
     mc: true,
@@ -453,7 +465,7 @@ export const B11: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => (Number(s.inputs[1]) > 0 ? `Multiply ${s.inputs[0]} by 10 ${s.inputs[1]} times: move the point ${s.inputs[1]} places to the right to get ${s.value}` : `Divide ${s.inputs[0]} by 10 ${-Number(s.inputs[1])} ${Number(s.inputs[1]) === -1 ? "time" : "times"}: move the point ${-Number(s.inputs[1])} places to the left to get ${s.value}`),
+    explain: (s) => (Number(s.inputs[1]) > 0 ? `Multiply ${s.inputs[0]} by 10, ${s.inputs[1]} times: move the point ${s.inputs[1]} places to the right to get ${s.value}` : `Divide ${s.inputs[0]} by 10, ${-Number(s.inputs[1])} ${Number(s.inputs[1]) === -1 ? "time" : "times"}: move the point ${-Number(s.inputs[1])} places to the left to get ${s.value}`),
     // powers down to 10⁻³ only, so the answer and every option are written in ordinary place-value notation
     domain: [[101, 999], [-3, 8]],
     keep: ([m, e]) => m % 10 !== 0 && (e < 0 || e >= 2),
@@ -476,6 +488,8 @@ export const B11: Def[] = [
     arity: 2,
     title: "Square root of a larger perfect square or decimal",
     competency: SQ,
+    // level@1: square roots by prime factorisation and of decimals are Grade 8 (CBSE 8, TN 8)
+    grade: () => 8,
     type: "fraction",
     decimals: true,
     mc: true,
@@ -531,6 +545,8 @@ export const B11: Def[] = [
     arity: 1,
     title: "Between which two whole numbers a square root lies",
     competency: SQ,
+    // level@1: estimating square roots is Grade 8 (CBSE 8, TN 8)
+    grade: () => 8,
     type: "tuple",
     mc: true,
     parse: none,
@@ -543,6 +559,7 @@ export const B11: Def[] = [
         steps: [
           { id: "below", op: "square", competency: SQ, inputs: [a], value: a * a },
           { id: "above", op: "square", competency: SQ, inputs: [a + 1], value: (a + 1) * (a + 1) },
+          { id: "between", op: "conclude", competency: SQ, inputs: [a, a + 1], value: T2(a, a + 1) },
         ],
         answer: T2(a, a + 1),
       };
@@ -567,14 +584,14 @@ export const B11: Def[] = [
       return [T2(a + 1, a + 2), T2(a - 1, a), T2(a, a + 2)];
     },
     variants: () => [],
-    explain: (s) => (s.id === "below" ? `${s.inputs[0]}² = ${s.value}, which is less than the number` : `${s.inputs[0]}² = ${s.value}, which is more than the number`),
+    explain: (s) => (s.id === "below" ? `${s.inputs[0]}² = ${s.value}, which is less than the number` : s.id === "between" ? `So the square root lies between ${s.inputs[0]} and ${s.inputs[1]}: ${s.value}` : `${s.inputs[0]}² = ${s.value}, which is more than the number`),
     domain: [[2, 999]],
     cap: 300,
     difficulty: ([N]) => (N < 100 ? 1 : N < 400 ? 2 : 3),
     word: ([N]) => `A square garden has an area of ${N} m². The length of its side, in metres, lies between which two consecutive whole numbers? Give the answer as (smaller, larger).`,
     teach: {
       idea: "If a² < N < (a + 1)², then a < √N < a + 1, because bigger numbers have bigger square roots.",
-      method: "List the squares 1, 4, 9, 16, 25 … until you pass the number. The two square roots on either side of it are the answer.",
+      method: "Square the whole numbers one after another until a square passes the number. The two whole numbers whose squares lie just below and just above it are the answer.",
       visual: ([N]) => {
         const a = Math.floor(Math.sqrt(N));
         return { type: "numberline", from: a * a, to: (a + 1) * (a + 1), marks: [N] };
@@ -591,6 +608,8 @@ export const B11: Def[] = [
     arity: 1,
     title: "How many numbers lie between two consecutive squares",
     competency: SQ,
+    // level@1: numbers between consecutive squares are Grade 8 (CBSE 8, TN 8)
+    grade: () => 8,
     type: "integer",
     mc: true,
     parse: none,
@@ -621,7 +640,7 @@ export const B11: Def[] = [
     word: ([n]) => `${nm(n)} lists every page number in a book that comes after page ${n * n} and before page ${(n + 1) * (n + 1)}. How many page numbers are on the list?`,
     teach: {
       idea: "(n + 1)² − n² = 2n + 1, so the jump from one square to the next is 2n + 1, and the numbers strictly between them are 2n.",
-      method: "Use the pattern: between n² and (n + 1)² there are 2n whole numbers. Check with a small case such as 3² and 4² (10 to 15: six numbers).",
+      method: "Use the pattern: between n² and (n + 1)² there are 2n whole numbers. Check it on a small case: list the numbers between two small neighbouring squares and count them.",
       visual: ([n]) => (n <= 6 ? { type: "numberline", from: n * n, to: (n + 1) * (n + 1), step: 1, marks: [n * n, (n + 1) * (n + 1)] } : null),
       alternatives: [
         { id: "square_grow", title: "Grow a square", kind: "conceptual", text: ["A square of n × n dots grows to (n + 1) × (n + 1) by adding a row and a column: n + n + 1 dots.", "So the next square is 2n + 1 more; the numbers in between are 2n."] },
@@ -2168,13 +2187,22 @@ export const B11: Def[] = [
     arity: 1,
     title: "The largest of four numbers in scientific notation",
     competency: SCI,
+    // level@1: comparing large numbers in standard form is Grade 7; negative powers are Grade 8
+    grade: ([s]) => (s % 2 ? 8 : 7),
     type: "choice",
     // [s]: s even: positive powers; s odd: negative powers (small quantities)
     parse: none,
     reject: ([s]) => (s >= 0 && s <= 399 ? null : "Seeds 0 to 399."),
     choices: ([s]) => scmpSet(s).opts.map(([a, e]) => `${a} × 10${sup(e)}`),
     prompt: ([s]) => `Which of these is the largest? ${scmpSet(s).opts.map(([a, e]) => `${a} × 10${sup(e)}`).join(";  ")}`,
-    solve: ([s]) => ({ steps: [{ id: "powers", op: "compare", competency: SCI, inputs: ["Compare the powers of 10 first, then the numbers in front"], value: "" }], answer: scmpSet(s).right }),
+    solve: ([s]) => {
+      const { opts, right } = scmpSet(s);
+      const top = Math.max(...opts.map(([, e]) => e));
+      const tied = opts.filter(([, e]) => e === top);
+      const say = tied.length === 1 ? `The highest power of 10 is 10${sup(top)}, and only one number has it` : `The highest power of 10 is 10${sup(top)}; ${tied.length} numbers have it, so compare the numbers in front: ${tied.map(([a]) => a).join(" and ")}`;
+      const [a, e] = opts[right];
+      return { steps: [{ id: "powers", op: "compare", competency: SCI, inputs: [say], value: "" }, { id: "pick", op: "choose the option", competency: SCI, inputs: [`${a} × 10${sup(e)}`], value: right }], answer: right };
+    },
     // independent: write each number as an ordinary decimal value and compare
     validate: ([s], v) => {
       if (typeof v !== "number" || !Number.isInteger(v)) return false;
@@ -2189,14 +2217,14 @@ export const B11: Def[] = [
       ].filter((b) => b.predict !== d.right);
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 399]],
     cap: 400,
     difficulty: ([s]) => (s % 2 ? 3 : 2),
     word: ([s]) => `${s % 2 ? "The sizes of four tiny particles, in metres, are" : "A science book gives four distances, in kilometres"}: ${scmpSet(s).opts.map(([a, e]) => `${a} × 10${sup(e)}`).join(";  ")}. Which is the largest?`,
     teach: {
-      idea: "In scientific notation the power of 10 tells the size: a number with a higher power is bigger, whatever number stands in front (that number is always between 1 and 10).",
-      method: "Compare the powers of 10 first (for negative powers, −3 is higher than −7). Only when the powers are equal compare the numbers in front.",
+      idea: "In scientific notation the power of 10 tells the size: a number with a higher power is bigger, whatever number stands in front (that number is always at least 1 and less than 10).",
+      method: "Compare the powers of 10 first (for negative powers, the one closer to zero is higher). Only when the powers are equal compare the numbers in front.",
       alternatives: [{ id: "write-out", title: "Write them out", kind: "procedural", text: ["6.1 × 10⁴ = 61,000 and 9.8 × 10³ = 9,800.", "Written out, the number of digits shows which is bigger."] }],
     },
     limits: "Four numbers with one decimal place in front and powers from 10⁻¹⁰ to 10¹²; ordering longer lists uses the same idea.",
@@ -2206,6 +2234,8 @@ export const B11: Def[] = [
     arity: 4,
     title: "Orders of magnitude of real quantities, and judging a claim",
     competency: SCI,
+    // level@1: orders of magnitude are Grade 8 (CBSE 8)
+    grade: () => 8,
     type: "integer",
     mc: true,
     // [c, x, m, d]: quantity c with size x; m 0 the power of 10 (order of magnitude); m 1 a claim of 10^(n + d): how
@@ -2253,6 +2283,8 @@ export const B11: Def[] = [
     arity: 5,
     title: "Multiplying and dividing numbers in scientific notation",
     competency: SCI,
+    // level@1: multiplying and dividing in scientific notation is Grade 8 (CBSE 8, TN 8)
+    grade: () => 8,
     type: "tuple",
     mc: true,
     // [m, a, b, e, f]: m 0 (a/10 × 10^e) × (b/10 × 10^f); m 1 a quotient whose answer is a/10 × 10^(e − f), divisor b/10 × 10^f
