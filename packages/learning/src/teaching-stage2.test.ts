@@ -86,7 +86,9 @@ describe("practice tests what was taught", () => {
     const scope = teachingScopeFor(m);
     const ids = [...new Set([...modulePhasePool(m, "practice"), ...m.practice, ...m.transfer])].filter((id) => !needsMarking(question(id)) && !!problemOf(id) && scope.accepts(problemOf(id)!));
     const { blocks, practice: ordered } = teachingLesson(m, ids);
-    const taught = blocks.find((b) => b.worked?.verified && b.instance) ?? blocks.find((b) => b.instance)!;
+    // the lesson's own worked example (its scope's family): a Grade 7/8 lesson also checks the sections of its other families
+    const own = (b: (typeof blocks)[number]) => !!b.instance && problemOf(b.instance)?.family === scope.family;
+    const taught = blocks.find((b) => b.worked?.verified && own(b)) ?? blocks.find((b) => b.worked?.verified && b.instance) ?? blocks.find((b) => b.instance)!;
     const caseOf = FAMILIES.get(problemOf(taught.instance!)!.family)!.teach!.caseOf!;
     const first = problemOf(ordered[0].replace(/:mc$/, ""))!;
     expect(caseOf(first.params), `${c}: first practice ${ordered[0]}`).toBe(caseOf(problemOf(taught.instance!)!.params));

@@ -1529,7 +1529,7 @@ export const B06: Def[] = [
     },
     teach: {
       idea: "A prism has two equal ends joined by rectangles; a pyramid has one base joined to a top point by triangles. Counting part by part makes the counts easy.",
-      method: "Prism on an n-sided base: faces n + 2, edges 3n, vertices 2n. Pyramid: faces n + 1, edges 2n, vertices n + 1. Check with Euler's rule: faces + vertices − edges = 2.",
+      method: "Prism on an n-sided base: faces n + 2, edges three lots of n (n round each end and n joining them), vertices 2n. Pyramid: faces n + 1, edges 2n, vertices n + 1. Check with Euler's rule: faces + vertices − edges = 2.",
       alternatives: [
         { id: "part_by_part", title: "Count part by part", kind: "procedural", text: ["Count the base, then the top (or the top point), then what joins them.", "For edges: round the bottom, round the top, then the ones going up."], visual: ([solid]) => ({ type: "solid", name: solid ? "pyramid" : "cuboid" }) },
         { id: "net", title: "Unfold it into a net", kind: "conceptual", text: ["Imagine cutting the solid open and laying it flat: each face becomes one shape of the net.", "Count the shapes in the net to get the faces."] },
@@ -1633,7 +1633,7 @@ export const B06: Def[] = [
     word: ([ask, seed]) => `${name(seed)} is sorting five floor tiles, A to E, described in the table. How many of the tiles are ${QASK[ask]}?`,
     teach: {
       idea: "Shape names describe properties, so one shape can have several names: a square is a rectangle (four right angles), a rhombus (four equal sides) and a parallelogram (opposite sides equal and parallel).",
-      method: "For each shape, check the property the name needs. Rectangle: all angles 90°. Rhombus: all sides equal. Parallelogram: opposite sides equal and opposite angles equal. Count every shape that has it.",
+      method: "For each shape, check the property the name needs. Rectangle: all angles right angles. Rhombus: all sides equal. Parallelogram: opposite sides equal and opposite angles equal. Count every shape that has it.",
       alternatives: [
         { id: "family_tree", title: "A family tree of shapes", kind: "conceptual", text: ["Parallelograms are a big family. Rectangles and rhombuses are inside it, and squares are inside both rectangles and rhombuses.", "When you count a family, count everyone inside it too."], visual: () => ({ type: "table", head: ["Shape", "Parallelogram?", "Rectangle?", "Rhombus?"], rows: [["Square", "yes", "yes", "yes"], ["Rectangle", "yes", "yes", "no"], ["Rhombus", "yes", "no", "yes"], ["Parallelogram", "yes", "no", "no"], ["Trapezium", "no", "no", "no"]] }) },
       ],
@@ -2221,7 +2221,12 @@ const CUBE_NET_KEYS = new Set(CUBE_NETS.flatMap((s) => turnsOf(fromPicture(s))))
 const NET_LIST = HEXOMINOES.filter(foldsToCube);
 const FACE_LETTERS = "ABCDEF";
 /** The letters on the squares of net i: a hash-chosen order, so different nets and queries read differently. */
-const netLabels = (i: number) => mixOrder(`afcube:labels:${i}`, [...FACE_LETTERS]);
+// the faces are shown as P to U, never A to F: a face called B among options labelled A to D was read as option B. The
+// order (which square carries which face, and the order of the options) is still worked out on A to F, so no option moves.
+const FACE_SHOWN = "PQRSTU";
+const faceName = (x: string) => FACE_SHOWN[FACE_LETTERS.indexOf(x)];
+const faceKey = (x: string) => FACE_LETTERS[FACE_SHOWN.indexOf(x)];
+const netLabels = (i: number) => mixOrder(`afcube:labels:${i}`, [...FACE_LETTERS]).map(faceName);
 const netPicture = (cs: Cell[], labels: string[] | null): Visual => {
   const R = Math.max(...cs.map((c) => c[0])) + 1;
   const C = Math.max(...cs.map((c) => c[1])) + 1;
@@ -2247,7 +2252,7 @@ function cubeOpp(i: number, q: number) {
 function cubeOpts([i, q]: number[]) {
   const { lab, opp, adj, corner } = cubeOpp(i, q);
   const set = [opp, ...corner, ...adj].filter((k, j, a) => a.indexOf(k) === j).slice(0, 4);
-  return { letters: mixOrder(`afcube:${i},${q}`, set.map((k) => lab[k])), lab, opp, adj, corner };
+  return { letters: mixOrder(`afcube:${i},${q}`, set.map((k) => faceKey(lab[k]))).map(faceName), lab, opp, adj, corner };
 }
 /** Opposite faces by a different method: roll a die whose six faces carry labels and read the face at the bottom on
  * each square (top, bottom, north, south, east, west swap as the die tips over an edge), starting from the LAST square. */
@@ -2518,7 +2523,7 @@ B06.push(
     prompt: () => "The table describes quadrilateral ABCD (the sides are listed in order round the shape). Which name describes it best, the most special name that fits?",
     solve: ([kind, seed]) => {
       const q = qdesc(kind, seed);
-      return { steps: [st("sides", "compare", QC, q.sides, q.sides.join(", ")), st("parallel", "read", QC, [q.par], parText(q)), st("name", "classify", QC, [kind], QNAMES[kind])], answer: kindOpts([kind, seed]).indexOf(kind) };
+      return { steps: [st("sides", "compare", QC, q.sides, q.sides.join(", ")), st("parallel", "read", QC, [q.par], parText(q)), st("name", "classify", QC, [kind, QNAMES[kind]], kindOpts([kind, seed]).indexOf(kind))], answer: kindOpts([kind, seed]).indexOf(kind) };
     },
     // independent: name the shape from the listed properties alone, then compare with the chosen option
     validate: ([kind, seed], v) => typeof v === "number" && kindOpts([kind, seed])[v] === nameFrom(qdesc(kind, seed)),
@@ -2535,7 +2540,7 @@ B06.push(
       return say[kind].map(([id, k, s]) => B(id, "conceptual", QC, s, o.indexOf(k)));
     },
     variants: () => [],
-    explain: (s) => (s.id === "sides" ? `The sides in order are ${s.value} (cm)` : s.id === "parallel" ? `Parallel sides: ${s.value}` : `So the most special name is ${s.value}`),
+    explain: (s) => (s.id === "sides" ? `The sides in order are ${s.value} (cm)` : s.id === "parallel" ? `Parallel sides: ${s.value}` : `So the most special name is ${s.inputs[1]}`),
     domain: [[0, 5], [0, 19]],
     difficulty: ([kind]) => (kind <= 1 ? 1 : kind <= 3 ? 2 : 3),
     figure: ([kind, seed]) => {
@@ -2621,10 +2626,10 @@ B06.push(
     cap: 400,
     difficulty: ([mode]) => (mode <= 1 ? 1 : mode === 2 ? 2 : 3),
     word: ([mode, a, b]) => {
-      if (mode === 0) return `${name(a + b)} puts a lace border round a parallelogram-shaped table mat. The border is ${2 * (a + b)} cm long and one side of the mat is ${a} cm. How long is the side next to it, in cm?`;
-      if (mode === 1) return `A rhombus-shaped rangoli frame is made from ${4 * a} cm of bamboo strip, all used for the four sides. How long is each side, in cm?`;
+      if (mode === 0) return `${name(a + b)} draws a parallelogram on chart paper and goes round its edge with coloured tape. The tape just fits and is ${2 * (a + b)} cm long, and one side of the parallelogram is ${a} cm. How long is the side next to it, in cm?`;
+      if (mode === 1) return `A piece of wire ${4 * a} cm long is bent into a rhombus, all of it used for the four sides. How long is each side, in cm?`;
       const { p, q, r, s } = psideCode(a, b);
-      return mode === 2 ? `A garden gate is a parallelogram. Its top bar measures (${expr(p, q, "+")}) cm and its bottom bar (${expr(r, s, "−")}) cm. How long is the top bar, in cm?` : `The four sides of a rhombus-shaped kolam frame are equal; two neighbouring sides measure (${expr(p, q, "+")}) cm and (${expr(r, s, "−")}) cm. How much strip goes round the whole frame, in cm?`;
+      return mode === 2 ? `A photo frame is a parallelogram. Its top edge measures (${expr(p, q, "+")}) cm and its bottom edge (${expr(r, s, "−")}) cm. How long is the top edge, in cm?` : `The four sides of a rhombus-shaped kolam frame are equal; two neighbouring sides measure (${expr(p, q, "+")}) cm and (${expr(r, s, "−")}) cm. How much strip goes round the whole frame, in cm?`;
     },
     teach: {
       idea: "In a parallelogram opposite sides are equal, so the perimeter is twice (one side + the next side). In a rhombus all four sides are equal.",
@@ -2739,11 +2744,12 @@ B06.push(
     solve: ([mode, i, q]) => {
       if (mode === 0) {
         const { letters, lab, opp } = cubeOpts([i, q]);
-        return { steps: [st("fold", "fold", NETS, [lab[q]], lab[opp])], answer: letters.indexOf(lab[opp]) };
+        return { steps: [st("fold", "fold", NETS, [lab[q]], lab[opp]), st("pick", "choose the option", NETS, [`face ${lab[opp]}`], letters.indexOf(lab[opp]))], answer: letters.indexOf(lab[opp]) };
       }
       const ok = foldsToCube(HEXOMINOES[i]);
       const ch = mixOrder(`afcube:yn:${i}`, ["Yes, it folds into a cube", "No, it does not fold into a cube"]);
-      return { steps: [st("fold", "fold", NETS, ["six squares"], ok ? "six different faces" : "two squares land on the same face")], answer: ch.findIndex((c) => c.startsWith(ok ? "Yes" : "No")) };
+      const yn = ch.findIndex((c) => c.startsWith(ok ? "Yes" : "No"));
+      return { steps: [st("fold", "fold", NETS, ["six squares"], ok ? "six different faces" : "two squares land on the same face"), st("pick", "choose the option", NETS, [ch[yn]], yn)], answer: yn };
     },
     // independent: mode 0, roll a labelled die over the squares from the other end and see which labels land opposite;
     // mode 1, compare the shape (every turn and flip) with the eleven known cube nets
@@ -2773,7 +2779,7 @@ B06.push(
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "fold" && s.inputs[0] === "six squares" ? `Fold it square by square: ${s.value}` : `Folding square by square, face ${s.value} ends up opposite face ${s.inputs[0]}`),
+    explain: (s) => (s.id === "pick" ? `So the answer is ${s.inputs[0]}` : s.id === "fold" && s.inputs[0] === "six squares" ? `Fold it square by square: ${s.value}` : `Folding square by square, face ${s.value} ends up opposite face ${s.inputs[0]}`),
     domain: [[0, 1], [0, 215], [0, 5]],
     keep: ([mode, i, q]) => (mode === 0 ? i < NET_LIST.length : i < HEXOMINOES.length && q === 0 && (foldsToCube(HEXOMINOES[i]) || hh(`afcube:keep:${i}`) % 3 === 0)),
     cap: 400,
@@ -2785,7 +2791,7 @@ B06.push(
       method: "Pick a square as the bottom and fold up the squares round it one at a time, saying which face each becomes (front, back, left, right, top). Opposite pairs are bottom–top, front–back, left–right; in a straight row of squares, the squares one apart are opposite.",
       alternatives: [
         { id: "straight_row", title: "Squares one apart in a row", kind: "procedural", text: ["In a straight line of three squares, the first and the third fold onto opposite faces.", "Use this rule along every straight row and column of the net; the face left over pairs with the last one."] },
-        { id: "make_it", title: "Make it from paper", kind: "conceptual", text: ["Copy the net on squared paper, cut it out and fold it.", "Write the letters on both sides so you can check which faces end up opposite each other."], visual: () => netPicture(fromPicture(CUBE_NETS[0]), ["A", "B", "C", "D", "E", "F"]) },
+        { id: "make_it", title: "Make it from paper", kind: "conceptual", text: ["Copy the net on squared paper, cut it out and fold it.", "Write the letters on both sides so you can check which faces end up opposite each other."], visual: () => netPicture(fromPicture(CUBE_NETS[0]), [...FACE_SHOWN]) },
       ],
     },
     limits: "Nets made of six squares joined edge to edge (all turns and flips); nets of other solids are the afnet family. Making and folding a real net is hands-on.",
@@ -2805,7 +2811,8 @@ B06.push(
     solve: ([i, f]) => {
       const s = SOLIDS[i];
       const want = f === 1 ? s.net! : f === 3 ? s.top : f === 4 ? s.front : f === 5 ? s.end! : s.name;
-      return { steps: [st("match", "match", NETS, [s.name, ["net", "net", "views", "top view", "front view", "end view"][f]], want)], answer: netOpts([i, f]).indexOf(want) };
+      const k = netOpts([i, f]).indexOf(want);
+      return { steps: [st("match", "match", NETS, [s.name, ["net", "net", "views", "top view", "front view", "end view"][f]], want), st("pick", "choose the option", NETS, [want], k)], answer: k };
     },
     // independent: work out from the solid's structure (its base, and its faces counted by building it) what its net and
     // views must contain, and check the chosen option against that
@@ -2848,7 +2855,7 @@ B06.push(
       return out;
     },
     variants: () => [],
-    explain: (s) => `The ${s.inputs[1]} of ${an(String(s.inputs[0]))}: ${s.value}`,
+    explain: (s) => (s.id === "pick" ? `So the answer is ${s.inputs[0]}` : `The ${s.inputs[1]} of ${an(String(s.inputs[0]))}: ${s.value}`),
     domain: [[0, 16], [0, 5]],
     keep: netOk,
     difficulty: ([i, f]) => (i <= 4 && f !== 5 ? 1 : f <= 1 ? 2 : 3),

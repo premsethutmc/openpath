@@ -402,7 +402,7 @@ export const B09: Def[] = [
     word: ([k, n, w, t]) => (t ? `${name(n + w)} has a craft sheet cut into ${netText(k, n)}. Folded up, it makes a closed box shape. How many ${WHAT[w]} does the box shape have?` : `${name(n + w)} has a paperweight shaped like ${an(solidName(k, n))}. How many ${WHAT[w]} does the paperweight have?`),
     teach: {
       idea: `A prism has two equal ends joined by rectangles; a pyramid has one base and triangles meeting at a top point. The shape of the end or base tells you all the counts.`,
-      method: "For a prism on an n-sided end: n + 2 faces, 3n edges (n round each end and n joining them), 2n vertices. For a pyramid on an n-sided base: n + 1 faces, 2n edges, n + 1 vertices.",
+      method: "For a prism on an n-sided end: n + 2 faces, three lots of n edges (n round each end and n joining them), 2n vertices. For a pyramid on an n-sided base: n + 1 faces, 2n edges, n + 1 vertices.",
       visual: ([k]) => ({ type: "solid", name: k === 0 ? "cuboid" : "pyramid" }),
       alternatives: [
         { id: "fold_net", title: "Fold the net in your mind", kind: "conceptual", text: ["Each piece of the net becomes one face.", "When the net folds, sides of two pieces meet to make one edge, so the solid has half as many edges as the pieces have sides."] },
@@ -447,7 +447,7 @@ export const B09: Def[] = [
     // no picture: a drawn quadrilateral would not have these angles
     word: ([a, b, c]) => `A four-sided plot of land has corner angles of ${5 * a}°, ${5 * b}° and ${5 * c}°. ${name(a + b)} wants to know the fourth corner angle. What is it, in degrees?`,
     teach: {
-      idea: "A diagonal cuts a quadrilateral into two triangles, so its four angles add to 2 × 180° = 360°.",
+      idea: "A diagonal cuts a quadrilateral into two triangles, so its four angles add up to the angles of two triangles: 360°.",
       method: "Add the three angles you know and take the total from 360°.",
       alternatives: [{ id: "tear_corners", title: "Tear off the corners", kind: "conceptual", text: ["Cut out a four-sided shape and tear off its four corners.", "Put the corners together point to point: they make a full turn, 360°."] }],
     },
@@ -534,7 +534,7 @@ export const B09: Def[] = [
     cap: 300,
     difficulty: ([s, m]) => (s === 0 && m <= 10 ? 1 : s === 0 ? 2 : 3),
     figure: ([s, , b]) => (s ? { type: "shape", kind: "parallelogram", diagonals: true, name: "parallelogram ABCD with its diagonals" } : { type: "shape", kind: "rectangle", diagonals: true, name: "rectangle ABCD with its diagonals", lengths: [`${b} cm`, "", "", ""] }),
-    word: ([s, m, b]) => (s === 0 ? `A rectangular gate ABCD has two straight bars along its diagonals, crossing at O. Bar AC is ${2 * m} cm long and the gate is ${b} cm wide along AB. How long is OB, in cm?` : `A garden gate frame is a parallelogram ABCD with two straight bars along its diagonals, crossing at O. OA is ${m} cm and OB is ${b} cm. How long is the whole bar AC, in cm?`),
+    word: ([s, m, b]) => (s === 0 ? `The two diagonals of a rectangular card ABCD are drawn; they cross at O. Diagonal AC is ${2 * m} cm long and the card is ${b} cm wide along AB. How long is OB, in cm?` : `The two diagonals of a parallelogram-shaped piece of card ABCD are drawn; they cross at O. OA is ${m} cm and OB is ${b} cm. How long is the whole diagonal AC, in cm?`),
     teach: {
       idea: "The diagonals of every parallelogram cut each other in half. In a rectangle they are also equal in length.",
       method: "Mark O as the midpoint of each diagonal. For a rectangle, BD = AC, so OB = AC ÷ 2. For a parallelogram, AC = 2 × OA.",
@@ -2492,7 +2492,16 @@ B09.push(
       const P = cvxPoints(kind, s);
       return `The points ${P.map(([x, y], i) => `${"ABCD"[i]}(${x < 0 ? `−${-x}` : x}, ${y < 0 ? `−${-y}` : y})`).join(", ")} are joined in order A → B → C → D → A, as in the picture. What shape do they make?`;
     },
-    solve: (p) => ({ steps: [step("check", "classify", QUAD, [p[0] === 0 ? "angles" : "corners"], CVX[p[1]])], answer: cvxOpts(p).indexOf(CVX[p[1]]) }),
+    solve: (p) => {
+      const [mode, kind, s] = p;
+      const pick = step("pick", "choose the option", QUAD, [CVX[kind]], cvxOpts(p).indexOf(CVX[kind]));
+      if (mode === 1) return { steps: [step("check", "classify", QUAD, ["corners"], kind === 2 ? "three of the corners lie on one straight line" : kind === 1 ? "going round A → B → C → D, the path turns the other way at one corner: that corner points inwards" : "going round A → B → C → D, the path turns the same way at every corner: no corner points inwards"), pick], answer: cvxOpts(p).indexOf(CVX[kind]) };
+      const A = cvxAngles(kind, s);
+      const at = (pred: (x: number) => boolean) => { const i = A.findIndex(pred); return i < 0 ? "none" : `∠${"ABCD"[i]} = ${A[i]}°`; };
+      const straight = step("straight", "check", QUAD, A, at((x) => x === 180));
+      const steps = kind === 2 ? [straight] : [straight, step("reflex", "check", QUAD, A, at((x) => x > 180))];
+      return { steps: [...steps, pick], answer: cvxOpts(p).indexOf(CVX[kind]) };
+    },
     // independent: mode 0, look for a straight angle (180°) or a reflex angle (more than 180°); mode 1, the turning direction
     // at each corner (cross products): a zero means three points in a line, mixed signs mean a dent
     validate: (p, v) => {
@@ -2519,13 +2528,13 @@ B09.push(
       return mode === 0 && cvxAngles(kind, s).some((x) => x > 90) ? [B("obtuse-is-dent", "conceptual", QUAD, "An obtuse angle (more than 90°) was taken as a dent. A figure is non-convex only when an angle is more than 180°.", o.indexOf(CVX[1]))] : [];
     },
     variants: () => [],
-    explain: (s) => `Look at the ${s.inputs[0]}: it is ${s.value}`,
+    explain: (s) => (s.id === "pick" ? `So the answer is: ${s.inputs[0]}` : s.id === "straight" ? (s.value === "none" ? "No angle is 180°, so no three corners lie in a line" : `${s.value}: three corners lie in a straight line, so the figure is really a triangle`) : s.id === "reflex" ? (s.value === "none" ? "Every angle is less than 180°, so no corner points inwards" : `${s.value} is more than 180°: that corner points inwards`) : `Look at the ${s.inputs[0]}: ${s.value}`),
     domain: [[0, 1], [0, 2], [0, 39]],
     keep: cvxOk,
     difficulty: ([mode, kind]) => (kind === 0 ? 1 : mode === 0 ? 2 : 3),
     figure: ([mode, kind, s]) => (mode === 1 ? { type: "plane", points: cvxPoints(kind, s).map(([x, y], i) => [x, y, "ABCD"[i]]), segments: cvxPoints(kind, s).map((pt, i, P) => [pt, P[(i + 1) % 4]]), range: 12 } : null),
     teach: {
-      idea: "A quadrilateral (4-gon) is a closed figure of four line segments meeting only at their ends, with no three corners in a line. It is convex when every inside angle is less than 180° (no dents); if one angle is more than 180°, it is non-convex.",
+      idea: "A quadrilateral is a closed figure of four line segments meeting only at their ends, with no three corners in a line. It is convex when every inside angle is less than 180° (no dents); if one angle is more than 180°, it is non-convex.",
       method: "Check for a straight angle (180°) or three corners in a line: then it is not a quadrilateral. Otherwise look for an angle bigger than 180° (a corner pointing inwards): non-convex. If none, convex.",
       alternatives: [
         { id: "diagonals", title: "Look at the diagonals", kind: "conceptual", text: ["In a convex quadrilateral both diagonals lie inside it.", "In a non-convex one, one diagonal lies outside."] },

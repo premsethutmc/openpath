@@ -1471,12 +1471,15 @@ export const B13: Def[] = [
     },
     variants: () => [],
     explain: say({ sector: "Sector OAB", triangle: "Triangle OAB", minor: "Minor segment", circle: "Whole circle", major: "Major segment" }),
+    // level@1: a segment cut off by a right angle at the centre (sector minus a right triangle) is Grade 8 combined-shape work;
+    // the 60° and 120° segments need (√3/4)r², which is Grade 10
+    grade: ([, ai]) => (SEG_ANG[ai] === 90 ? 8 : 10),
     domain: SEG_DOM,
     difficulty: ([, ai, ask]) => (ai === 1 && !ask ? 1 : !ask ? 2 : 3),
-    word: ([r, ai, ask]) => `A round table top of radius ${r} cm has a straight line painted across it, from A to B on the edge, making an angle of ${SEG_ANG[ai]}° at the centre. The ${ask ? "larger" : "smaller"} part cut off by the line is painted blue. What area is blue, in cm²? (π = 3.14${ai === 1 ? "" : ", √3 = 1.73"})`,
+    word: ([r, ai, ask]) => `A circle of radius ${r} cm is cut from chart paper, and a straight line is drawn across it from A to B on the edge, making an angle of ${SEG_ANG[ai]}° at the centre. The ${ask ? "larger" : "smaller"} part cut off by the line is painted blue. What area is blue, in cm²? (π = 3.14${ai === 1 ? "" : ", √3 = 1.73"})`,
     teach: {
       idea: "A chord cuts a circle into two segments. The minor segment is the sector OAB with the triangle OAB taken away; the major segment is the rest of the circle.",
-      method: "Sector = θ/360 × πr². Triangle OAB = ½r² for 90°, or (√3/4)r² for 60° and 120°. Minor segment = sector − triangle; major = πr² − minor.",
+      method: "Sector = θ/360 × πr². Triangle OAB = ½r² when ∠AOB is a right angle, or (√3/4)r² when ∠AOB is 60° or twice 60°. Minor segment = sector − triangle; major = πr² − minor.",
       alternatives: [{ id: "cut_out", title: "Cut the slice", kind: "conceptual", text: ["Cut a slice (sector) out of a paper circle, then cut straight along the chord.", "The triangle falls away; the curved strip left is the segment."] }],
     },
     limits: "Central angles of 60°, 90° and 120° with π = 3.14 and √3 = 1.73.",
@@ -1530,7 +1533,7 @@ export const B13: Def[] = [
     difficulty: ([, t, hand]) => (!hand && [3, 6, 9].includes(t) ? 1 : !hand ? 2 : 3),
     word: ([L, t, hand, ask]) => `${name(L + t)} watches the classroom clock, whose ${hand ? "hour" : "minute"} hand is ${L} cm long. During ${hand ? `${t} hour${t === 1 ? "" : "s"}` : `a ${5 * t}-minute lesson`}, how ${ask ? "far does the tip of the hand travel, in cm" : "much of the clock face does the hand sweep over, in cm²"}? (π = ${piName(piFor(L))}; give the exact value, a fraction or mixed number is fine.)`,
     teach: {
-      idea: "A clock hand sweeps out a sector. The minute hand turns 360° in 60 minutes (6° a minute); the hour hand turns 360° in 12 hours (30° an hour).",
+      idea: "A clock hand sweeps out a sector. The minute hand turns 360° in 60 minutes (6° a minute); the hour hand turns 30° an hour (a full turn in half a day).",
       method: "Find the angle turned, then take that fraction of 360° of the whole circle: area θ/360 × πr², or distance θ/360 × 2πr.",
       alternatives: [{ id: "fraction", title: "Think of the fraction of a turn", kind: "conceptual", text: ["15 minutes is a quarter of an hour, so the minute hand sweeps a quarter of the circle.", "In general, the minute hand turns minutes/60 of a full turn and the hour hand hours/12."] }],
     },
@@ -1913,6 +1916,8 @@ export const B13: Def[] = [
     distractors: ([mode, p, qq, r]) => [dec(qa(bptAns([mode, p, qq, r]), Q(1))), dec(q(r * qq, p + qq + 1))],
     variants: () => [],
     explain: say({ ratio: "Equal ratios", ec: "EC", x: "Unknown length" }),
+    // level@1: the basic proportionality theorem is Grade 10 (CBSE and TN); a Grade 8 learner is not asked it
+    grade: () => 10,
     domain: BPT_DOM,
     cap: 300,
     difficulty: ([mode]) => (mode === 0 ? 1 : mode === 2 ? 2 : 3),
@@ -1957,6 +1962,8 @@ export const B13: Def[] = [
     distractors: ([mode, m, n, x]) => (mode === 0 ? [String(x * n * n * 2), String(x * (n * n - m * m))] : [String(n * ((x % 4) + 1) + 1), String(2 * n * ((x % 4) + 1))]),
     variants: () => [],
     explain: say({ ratio: "Ratio", area: "Area of the larger triangle", side: "Side of the larger triangle" }),
+    // level@1: areas of similar triangles are Grade 10
+    grade: () => 10,
     domain: SA_DOM,
     cap: 300,
     difficulty: ([mode, m]) => (mode === 0 && m === 1 ? 1 : mode === 0 ? 2 : 3),
@@ -3181,7 +3188,14 @@ export const B13: Def[] = [
     reject: ([c, t, s]) => (c >= 0 && c <= 4 && t >= 0 && t < SIM_TRIS.length && s >= 0 && s <= 5 && !simcDup([c, t, s]) ? null : "Five cases, twelve triangles, six scales (each set of facts once)."),
     choices: (p) => order4(p).map((i) => SIMC[i]),
     prompt: (p) => `In ΔABC and ΔPQR (A matches P, B matches Q, C matches R): ${simcFacts(p).join("; ")}. Which statement is true?`,
-    solve: (p) => ({ steps: [step("rule", "note", SIM, [SIMC_WHY[p[0]]], "")], answer: order4(p).indexOf(p[0] >= 3 ? 3 : p[0]) }),
+    solve: (p) => {
+      const k = order4(p).indexOf(p[0] >= 3 ? 3 : p[0]);
+      const names = [[], [["PQ", "AB"], ["QR", "BC"], ["RP", "CA"]], [["PQ", "AB"], ["PR", "AC"]], [["PQ", "AB"], ["QR", "BC"], ["RP", "CA"]], [["PQ", "AB"], ["QR", "BC"]]][p[0]];
+      const sides = simcData(p).sides;
+      const ratio = ([x, y]: [number, number]) => { const g = gcd(x, y); return g === x ? `${y}/${x} = ${y / x}` : `${y}/${x} = ${y / g}/${x / g}`; };
+      const ratios = sides.length ? [step("ratios", "note", SIM, [sides.map((sd, i) => `${names[i][0]}/${names[i][1]} = ${ratio(sd)}`).join("; ")], "")] : [];
+      return { steps: [...ratios, step("rule", "note", SIM, [SIMC_WHY[p[0]]], ""), step("pick", "choose the option", SIM, [SIMC[order4(p)[k]]], k)], answer: k };
+    },
     // independent: read the facts back: count equal angles, and compare the side ratios as decimals
     validate: (p, v) => {
       if (typeof v !== "number" || !Number.isInteger(v)) return false;
@@ -3205,7 +3219,7 @@ export const B13: Def[] = [
       return [B(`crit-${c}`, "conceptual", SIM, says[c], o.indexOf([3, 3, 1, 1, 2][c]))];
     },
     variants: () => [],
-    explain: say(),
+    explain: (s) => (s.id === "pick" ? `So the answer is: ${s.inputs[0]}` : say()(s)),
     domain: [[0, 4], [0, 11], [0, 5]],
     keep: (p) => !simcDup(p),
     difficulty: ([c]) => ([1, 2, 2, 2, 3] as const)[c],
@@ -3300,6 +3314,8 @@ export const B13: Def[] = [
     distractors: ([, m, n, x]) => [dec(Q(x)), dec(q(2 * x * n, m))],
     variants: () => [],
     explain: say({ root: "Ratio of sides = √(ratio of areas)", answer: "Corresponding length" }),
+    // level@1: altitudes, perimeters (and areas) of similar triangles in a given ratio are Grade 10
+    grade: () => 10,
     domain: [[0, 2], [1, 9], [1, 9], [2, 60]],
     keep: ([, m, n]) => m !== n && gcd(m, n) === 1,
     cap: 400,
@@ -3331,7 +3347,8 @@ export const B13: Def[] = [
     solve: (p) => {
       const [a, b, c, d] = bptcLens(p);
       const eq = qe(qd(a, b), qd(c, d));
-      return { steps: [step("ratios", "note", SIM, [`${dec(a)}/${dec(b)} = ${dec(qd(a, b))} and ${dec(c)}/${dec(d)} = ${dec(qd(c, d))}`], eq ? "equal" : "not equal")], answer: order3b(p).indexOf(eq ? 0 : 1) };
+      const k = order3b(p).indexOf(eq ? 0 : 1);
+      return { steps: [step("ratios", "note", SIM, [`${dec(a)}/${dec(b)} = ${dec(qd(a, b))} and ${dec(c)}/${dec(d)} = ${dec(qd(c, d))}`], eq ? "equal" : "not equal"), step("pick", "choose the option", SIM, [(p[0] === 0 ? BPTC0 : BPTC1)[eq ? 0 : 1]], k)], answer: k };
     },
     // independent: draw the triangle on coordinates and test the conclusion directly (DE parallel to BC by a cross
     // product; AD bisecting ∠A by comparing the two angles)
@@ -3372,7 +3389,9 @@ export const B13: Def[] = [
       return out;
     },
     variants: () => [],
-    explain: say(),
+    explain: (s) => (s.id === "pick" ? `So the answer is: ${s.inputs[0]}` : say()(s)),
+    // level@1: the converses of the BPT and of the angle bisector theorem are Grade 10
+    grade: () => 10,
     domain: [[0, 1], [1, 9], [1, 9], [0, 3], [0, 2]],
     keep: bptcOk,
     difficulty: ([, , , , e]) => (e === 0 ? 2 : 3),

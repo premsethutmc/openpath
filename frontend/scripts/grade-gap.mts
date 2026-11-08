@@ -21,10 +21,12 @@ const board = process.env.BOARD as "cbse" | "tn";
 const out = process.env.OUT ?? `gap-${board}-${grade}.json`;
 const limit = Number(process.env.LIMIT ?? 0);
 
+// a wrong option is answered as a learner taps it, by its letter (the option's text is not a readable answer: it would be
+// left unmarked and the skill paused as unreadable, never taught)
 const wrong = (q: string) => {
   const p = question(q);
-  const opt = (p.options ?? []).find((o: string) => o !== p.answer);
-  return opt ?? (p.answer === "0" ? "1" : "0");
+  const k = (p.options ?? []).findIndex((o: string, i: number) => "ABCD"[i] !== p.answer && o !== p.answer);
+  return k >= 0 ? "ABCD"[k] : p.answer === "0" ? "1" : "0";
 };
 const wrongFirst = (): Answerer => {
   let n = 0;
