@@ -336,6 +336,8 @@ export const B02: Def[] = [
       const t = seq(s, STEPS[k], d, 5);
       return t.some((x) => x < 0 || x > (k === 3 ? 200 : 100)) ? "Numbers up to 100 (up to 200 when counting in tens)." : null;
     },
+    // level@1: skip counting is Grade 2 work (prerequisite review, not evidence for a Grade 7 pattern outcome)
+    grade: () => 2,
     prompt: ([s, k, d]) => `What number comes next? ${seq(s, STEPS[k], d, 4).join(", ")}, ?`,
     solve: ([s, k, d]) => {
       const t = seq(s, STEPS[k], d, 5);
@@ -403,6 +405,8 @@ export const B02: Def[] = [
       const t = seq(s, MSTEPS[k], d, 5);
       return t.some((x) => x < 0 || x > (k === 3 ? 200 : 100)) ? "Numbers up to 100 (up to 200 when counting in tens)." : null;
     },
+    // level@1: a missing number in a counting pattern is Grade 2 work
+    grade: () => 2,
     prompt: ([s, k, d, p]) => `Which number is missing? ${seq(s, MSTEPS[k], d, 5).map((x, i) => (i === p ? "?" : x)).join(", ")}`,
     solve: ([s, k, d, p]) => {
       const t = seq(s, MSTEPS[k], d, 5);
@@ -1672,7 +1676,8 @@ const GAP02: Def[] = [
     choices: dirChoices,
     solve: (p) => {
       const r = dirAnswer(p);
-      return { steps: [st("direction", "use the directions", MAPS, [p[0], p[1], p[2]], r)], answer: dirChoices(p).indexOf(r) };
+      const a = dirChoices(p).indexOf(r);
+      return { steps: [st("direction", "use the directions", MAPS, [p[0], p[1], p[2]], r), st("pick", "choose the option", MAPS, [r], a)], answer: a };
     },
     // independent: directions as angles clockwise from North (turn right +90°, left −90°, about 180°); the map by the signs of the moves across and up
     validate: (p, v) => {
@@ -1710,7 +1715,7 @@ const GAP02: Def[] = [
         : [B("from-other-end", "conceptual", MAPS, `The direction from the ${m.around[d]} to the ${m.centre} was given. Start at the ${m.centre} and look towards the ${m.around[d]}.`, cs.indexOf(DIRS[(d + 2) % 4]))];
     },
     variants: () => [],
-    explain: (s) => `The answer is ${s.value}.`,
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : `The answer is ${s.value}.`),
     domain: [[0, 2], [0, 39], [0, 2]],
     difficulty: ([kind, , b]) => (kind === 1 ? 1 : b === 2 ? 2 : 3),
     figure: ([kind, a]) => (kind === 1 ? { type: "plane", points: dirMap(a).pts, range: 6, quadrant: 1 } : tbl(["", "North", ""], [["West", "you", "East"], ["", "South", ""]])),
@@ -1748,7 +1753,9 @@ const GAP02: Def[] = [
     prompt: ([kind, seed]) => {
       if (kind === 0) {
         const w = pathOf(seed);
-        return `On the map, each side of a square stands for ${w.S} ${w.unit}. ${name(seed)} starts at S, walks ${w.dx} square${w.dx > 1 ? "s" : ""} ${w.ew ? "West" : "East"} and then ${w.dy} square${w.dy > 1 ? "s" : ""} ${w.ns ? "South" : "North"} to E. How far does ${name(seed)} walk, in ${w.unit === "km" ? "kilometres" : "metres"}?`;
+        // kilometre squares give 20–60 km: too far to walk, so the trip is by bus
+        const km = w.unit === "km";
+        return `On the map, each side of a square stands for ${w.S} ${w.unit}. ${name(seed)} starts at S, ${km ? "travels by bus" : "walks"} ${w.dx} square${w.dx > 1 ? "s" : ""} ${w.ew ? "West" : "East"} and then ${w.dy} square${w.dy > 1 ? "s" : ""} ${w.ns ? "South" : "North"} to E. How far does ${name(seed)} ${km ? "travel" : "walk"}, in ${km ? "kilometres" : "metres"}?`;
       }
       const r = routeOf(seed);
       void r;
@@ -1797,8 +1804,8 @@ const GAP02: Def[] = [
         const w = pathOf(seed);
         return [
           B("squares-not-scale", "conceptual", MAPS, `The squares were counted but the scale was not used. Each square stands for ${w.S} ${w.unit}.`, w.dx + w.dy),
-          B("one-direction", "procedural", MAPS, "Only the first part of the walk was counted. Add both parts of the walk.", w.dx * w.S),
-          B("second-part-only", "procedural", MAPS, "Only the second part of the walk was counted. Add both parts of the walk.", w.dx === w.dy ? null : w.dy * w.S),
+          B("one-direction", "procedural", MAPS, "Only the first part of the trip was counted. Add both parts of the trip.", w.dx * w.S),
+          B("second-part-only", "procedural", MAPS, "Only the second part of the trip was counted. Add both parts of the trip.", w.dx === w.dy ? null : w.dy * w.S),
         ];
       }
       const r = routeOf(seed);
@@ -2948,7 +2955,8 @@ const GAP02: Def[] = [
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
     word: ([kind, seed]) => {
       const [a, b] = nineNums(kind, seed);
-      return kind === 0 ? `A shopkeeper in Erode checks her bills by casting out nines. One bill total is ₹${a}. What is its nines check number?` : `A shopkeeper works out ${a} ${kind === 1 ? "+" : "×"} ${b} for a bill and checks it by casting out nines. Which check number should the correct answer have?`;
+      const rule = "(Add the digits again and again until one digit is left; 9 counts as 0.)";
+      return kind === 0 ? `A shopkeeper in Erode checks her bills by casting out nines. One bill total is ₹${a}. What is its nines check number? ${rule}` : `A shopkeeper works out ${a} ${kind === 1 ? "+" : "×"} ${b} for a bill and checks it by casting out nines. Which check number should the correct answer have? ${rule}`;
     },
     teach: {
       idea: "Adding the digits of a number again and again (with 9 counting as 0) leaves its remainder when divided by 9. A correct sum or product has the check number you get by adding or multiplying the check numbers.",
@@ -3039,8 +3047,8 @@ const GAP02: Def[] = [
       return `${name(a + b)} notices that a diagonal of Pascal's triangle goes ${[...Array(a)].map((_, i) => choose(i + b - 1, b - 1)).join(", ")}, … What number comes next on it?`;
     },
     teach: {
-      idea: "Pascal's triangle starts with 1; each row starts and ends with 1 and each other number is the sum of the two above it. Its rows add up to 1, 2, 4, 8, … and its diagonals are 1s, the counting numbers, the triangular numbers 1, 3, 6, 10 …",
-      method: "To build a new row, write 1, then add each pair of neighbours in the row above, then write 1. Use the patterns to check.",
+      idea: "Pascal's triangle starts with a single one; each row starts and ends with one and each other number is the sum of the two above it. Each row adds up to twice the row before it, and its diagonals are all ones, then the counting numbers, then the triangular numbers.",
+      method: "To build a new row, write a one, then add each pair of neighbours in the row above, then end with a one. Use the patterns to check.",
       visual: () => pascalFig(5),
       alternatives: [
         { id: "paths", title: "Count the paths", kind: "conceptual", text: ["Each number tells how many ways there are to walk down from the top 1 to it, moving down-left or down-right.", "Two paths arrive from the two numbers above, so their counts add."] },

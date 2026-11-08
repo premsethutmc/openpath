@@ -83,7 +83,7 @@ test("own teaching is enough (all four modules #115 changed): no detour, the jou
 });
 
 test("a capable learner who slips once on the check after the module's own teaching: one extra question, no prerequisite question, no lesson below; #115's next step stands", () => {
-  for (const c of [ADDR, PAIRS]) {
+  for (const c of [ADDR]) {
     const on = run(c, learner(c, ["own"], true));
     const off = run(c, learner(c, ["own"], true), false);
     assert.equal(asked(on.steps) - asked(off.steps), 1, `${c}: at most one extra question (${asked(on.steps)} vs ${asked(off.steps)})`);
@@ -155,4 +155,17 @@ test("policies A1 and C with the switch on: every module decision in those journ
   } finally { proto.next = orig; }
   assert.ok(calls > 10, `${calls} module decisions checked`);
   assert.deepEqual(diverged, []);
+});
+
+// Grade 7's worked examples change the fresh pool: this slip now reaches another own-skill
+// explanation in the ordinary module. Research must preserve that whole path, not force a stop.
+test("angle pairs after Grade 7 integration: a slip keeps the ordinary module's own teaching and fresh recheck", () => {
+  const on = run(PAIRS, learner(PAIRS, ["own"], true));
+  const off = run(PAIRS, learner(PAIRS, ["own"], true), false);
+  assert.deepEqual(on.steps, off.steps);
+  assert.equal(on.steps.at(-1)!.phase, "done");
+  assert.equal(on.steps.filter((x) => x.phase === "check" && x.correct === false).length, 1);
+  assert.ok(on.steps.some((x) => x.phase === "check" && x.correct));
+  assert.deepEqual([...new Set(lessons(on.steps))], [PAIRS]);
+  assert.ok(on.steps.every((x) => x.where === "module" && (!x.qid || question(x.qid).competency === PAIRS)));
 });

@@ -105,7 +105,8 @@ const K_TAB = ([a, , s]: number[]) => (s === 0 ? true : s === 1 ? a % 2 === 0 : 
 const DH = [5, 15, 25, 35, 45, 50, 125];
 const NM = [9, 19, 29, 39, 49, 99, 11, 21, 31, 101];
 const D_STRAT: [number, number][] = [[0, 9], [3, 48], [0, 1]];
-const K_STRAT = ([i, y, s]: number[]) => (s === 0 ? i < DH.length && y % 2 === 0 && y >= 12 && (DH[i] === 125 ? y % 8 === 0 : true) : y <= 25);
+// 9 × n and 11 × n with n < 10 are left out of new pools, but historical IDs remain readable.
+const K_STRAT = ([i, y, s]: number[], historical = false) => (s === 0 ? i < DH.length && y % 2 === 0 && y >= 12 && (DH[i] === 125 ? y % 8 === 0 : true) : y <= 25 && (historical || !(NM[i] <= 11 && y < 10)));
 const stratX = ([i, , s]: number[]) => (s === 0 ? DH[i] : NM[i]);
 
 // ---------------------------------------------------------------- partial products
@@ -332,7 +333,7 @@ const P1: Def[] = [
     mc: true,
     // [i, y, s]: s 0: x = DH[i] doubled while y is halved; s 1: x = NM[i] next to a multiple of ten
     parse: none,
-    reject: gate(D_STRAT, K_STRAT, "Doubling and halving with 5, 15, 25, 35, 45, 50 or 125, or a factor next to a multiple of 10."),
+    reject: gate(D_STRAT, (p) => K_STRAT(p, true), "Doubling and halving with 5, 15, 25, 35, 45, 50 or 125, or a factor next to a multiple of 10."),
     prompt: (p) => {
       const [, y, s] = p;
       const x = stratX(p);
@@ -376,7 +377,7 @@ const P1: Def[] = [
     },
     teach: {
       idea: "Doubling one factor and halving the other leaves the product unchanged; a factor next to a multiple of ten is that multiple minus (or plus) one group.",
-      method: "25 × 36 = 50 × 18 = 100 × 9 = 900. 19 × 24 = 20 × 24 − 24 = 480 − 24 = 456.",
+      method: "Keep doubling one factor and halving the other until one of them is a ten, a hundred or another easy number. Or round a factor to the nearest multiple of ten, multiply, then take away (or add) the extra group.",
       alternatives: [
         { id: "rectangle", title: "Reshape a rectangle", kind: "conceptual", text: ["Think of x × y as a rectangle of squares.", "Cut it in half along one side and put the halves end to end: twice as long, half as wide, the same squares."], visual: () => ({ type: "array", rows: 4, cols: 6 }) },
       ],
@@ -435,7 +436,7 @@ const P1: Def[] = [
       return k === 0 ? `A school orders ${b} boxes of chalk with ${a} sticks in each box. How many sticks of chalk is that?` : `A school orders ${b} boxes of chalk with ${a} sticks in each box. The first ${T} boxes go to the primary classes. How many sticks are in those ${T} boxes?`;
     },
     teach: {
-      idea: "Splitting a factor by place value turns one hard product into easier ones: 47 × 36 = 47 × 30 + 47 × 6.",
+      idea: "Splitting a factor by place value turns one hard product into easier ones: multiply by the tens part and by the ones part separately.",
       method: "Multiply by the tens (the answer ends in 0), multiply by the ones, then add the partial products.",
       visual: ([a, b]) => ({ type: "table", head: ["×", ...parts(a).map(String)], rows: parts(b).map((y) => [String(y), ...parts(a).map((x) => String(x * y))]) }),
       alternatives: [
@@ -502,6 +503,8 @@ const P1: Def[] = [
     },
     variants: () => [],
     explain: (s) => (s.id === "carry" ? `Diagonal totals ${[...(s.inputs as number[])].reverse().join(", ")} (from the left), carried into place: ${s.value}` : `Diagonal ${Number(s.inputs[0]) + 1} from the right adds up to ${s.value}`),
+    // level@1: lattice multiplication is a Grade 4 method (not taught in CBSE or TN Grade 7): review only
+    grade: () => 4,
     domain: D_LAT,
     keep: K_LAT,
     cap: 320,
@@ -820,6 +823,9 @@ const remAns = ([d, x, y, f]: number[]) => {
   return Math.floor((N - x) / d) + 1;
 };
 
+/** Denominators a real litre or cup measure is marked in; for other denominators a length is used instead. */
+const NICE_DEN = [2, 3, 4, 5, 8, 10];
+
 const P2: Def[] = [
   {
     id: "avfold",
@@ -865,6 +871,8 @@ const P2: Def[] = [
     explain: (s) => (s.id === "parts" ? `${s.inputs[0]} strips × ${s.inputs[1]} parts = ${s.value} small parts in all` : s.id === "coloured" ? `${s.inputs[0]} coloured strips × ${s.inputs[1]} = ${s.value} coloured small parts` : `${s.inputs[0]}/${s.inputs[1]} = ${s.value}: the same amount is coloured`),
     domain: D_FOLD,
     keep: K_FOLD,
+    // level@1: equal fractions by folding are Grade 4 work (review for older learners)
+    grade: () => 4,
     difficulty: ([, b, k]) => (b * k <= 12 ? 1 : b * k <= 24 ? 2 : 3),
     word: ([a, b, k]) => `${nameOf(a + b + k)} cuts a cake into ${b} equal slices and keeps ${a} of them for the family. Then every slice is cut into ${k} equal pieces, as in the picture. Which fraction of the cake is kept?`,
     teach: {
@@ -911,7 +919,13 @@ const P2: Def[] = [
     difficulty: ([, b, k]) => (k <= 3 && b <= 6 ? 1 : [4, 6, 8, 9].includes(k) ? 3 : 2),
     // level@1: denominators beyond 50 (63/108) belong to Grade 5
     grade: ([, b, k]) => (b * k > 50 ? 5 : 4),
-    word: ([a, b, k]) => `In a class of ${b * k} students, ${a * k} come to school by bus. What fraction of the class comes by bus? Give it in its lowest terms.`,
+    // a class has 20 to 60 students: a smaller total is a group of children, a larger one a whole year group
+    word: ([a, b, k]) =>
+      b * k < 20
+        ? `In a group of ${b * k} children, ${a * k} come to school by bus. What fraction of the group comes by bus? Give it in its lowest terms.`
+        : b * k <= 60
+          ? `In a class of ${b * k} students, ${a * k} come to school by bus. What fraction of the class comes by bus? Give it in its lowest terms.`
+          : `A school has ${b * k} students in Grade 7, and ${a * k} of them come to school by bus. What fraction of these students come by bus? Give it in its lowest terms.`,
     teach: {
       idea: "Dividing the top and the bottom by the same number gives an equal fraction; in lowest terms they have no common factor except 1.",
       method: "Find the highest common factor of the top and the bottom and divide both by it (or keep dividing by common factors until none is left).",
@@ -949,6 +963,8 @@ const P2: Def[] = [
     domain: D_LIKE,
     keep: K_LIKE,
     cap: 300,
+    // level@1: like and unlike fractions are Grade 4 work (review for older learners)
+    grade: () => 4,
     difficulty: ([, , b, d]) => (d <= 6 ? 1 : b <= 6 ? 2 : 3),
     word: ([a, b]) => `In a cookery class, ${nameOf(a + b)} measures ingredients in parts of a cup. Which pair of amounts are like fractions, so that they can be added just by adding the numerators?`,
     teach: {
@@ -1054,7 +1070,9 @@ const P2: Def[] = [
     reject: gate(D_FWQ, K_FWQ, "A proper fraction in lowest terms (denominator up to 12) times 2 to 9, or a fraction of a multiple of its denominator."),
     prompt: ([a, b, k, s]) =>
       s === 0
-        ? `Each glass holds ${a}/${b} litre of buttermilk. How many litres do ${k} such glasses hold? (A fraction or mixed number is fine.)`
+        ? NICE_DEN.includes(b)
+          ? `Each glass holds ${a}/${b} litre of buttermilk. How many litres do ${k} such glasses hold? (A fraction or mixed number is fine.)`
+          : `Each piece of ribbon is ${a}/${b} m long. How many metres do ${k} such pieces make together? (A fraction or mixed number is fine.)`
         : `There are ${b * k} students in a class and ${a}/${b} of them come to school by bus. How many students come by bus?`,
     solve: ([a, b, k, s]) =>
       s === 0
@@ -1086,7 +1104,9 @@ const P2: Def[] = [
     difficulty: ([a, b, k]) => (k * a < b ? 1 : k * a <= 2 * b ? 2 : 3),
     word: ([a, b, k, s]) =>
       s === 0
-        ? `A recipe needs ${a}/${b} cup of rice for each person. How many cups of rice are needed for ${k} people? (A fraction or mixed number is fine.)`
+        ? NICE_DEN.includes(b)
+          ? `A recipe needs ${a}/${b} cup of rice for each person. How many cups of rice are needed for ${k} people? (A fraction or mixed number is fine.)`
+          : `Each step of a toy robot is ${a}/${b} m long. How far does it go in ${k} steps, in m? (A fraction or mixed number is fine.)`
         : `${nameOf(a + b + k)} has ₹${b * k} and spends ${a}/${b} of it on books. How many rupees does ${nameOf(a + b + k)} spend on books?`,
     teach: {
       idea: "k lots of a/b is k × a pieces of size 1/b; a/b of a number is a of its b equal parts.",
@@ -1665,7 +1685,7 @@ const P3: Def[] = [
     word: ([a, b]) => `A printing press prints ${ind(a)} copies of a school magazine, each with ${b} pages. About how many pages does it print? Estimate by rounding each number to its greatest place.`,
     teach: {
       idea: "Rounding each factor to its greatest place gives an easy product that is close to the real one: a quick check of size.",
-      method: "Round each number, multiply the first digits, then write all the zeros of both rounded numbers: 5,000 × 40 = 20 × 10,000 = 2,00,000.",
+      method: "Round each number to its greatest place, multiply their first digits, then write after that product all the zeros of both rounded numbers.",
       alternatives: [
         { id: "powers", title: "Use powers of ten", kind: "procedural", text: ["Write 5,000 × 40 as 5 × 1,000 × 4 × 10.", "Multiply 5 × 4 = 20 and 1,000 × 10 = 10,000: 20 × 10,000 = 2,00,000."] },
       ],
@@ -1745,8 +1765,8 @@ const P3: Def[] = [
               : `A water tank held ${n} litres, and ${p}% of the water was used. How many litres are left?`;
     },
     teach: {
-      idea: "A percentage compares a part with a whole out of 100; a percentage change compares the change with the ORIGINAL amount.",
-      method: "Percentage = part ÷ whole × 100. Percentage change = change ÷ original × 100. To increase by p%, add p% of the amount (or multiply by (100 + p)/100).",
+      idea: "A percentage compares a part with a whole as a number out of a hundred; a percentage change compares the change with the ORIGINAL amount.",
+      method: "Percentage = part ÷ whole, then times a hundred. Percentage change = change ÷ original, then times a hundred. To increase an amount by p%, find p% of the amount and add it on.",
       alternatives: [
         { id: "per100", title: "Scale to 100", kind: "conceptual", text: ["Ask: if the whole were 100, how big would the part be?", "18 out of 60: 60 × 5/3 = 100, so 18 × 5/3 = 30 out of 100, or 30%."] },
       ],
@@ -1895,7 +1915,7 @@ const P3: Def[] = [
     },
     solve: (p) => {
       const [a, b, c, d] = prpTerms(p);
-      return { steps: [st("extremes", "multiply", MT, [a, d], a * d), st("means", "multiply", MT, [b, c], b * c), st("compare", "compare", PROP, [a * d, b * c], a * d === b * c ? PROP_CHOICES[0] : PROP_CHOICES[1])], answer: prpPerm(p).indexOf(a * d === b * c ? 0 : 1) };
+      return { steps: [st("extremes", "multiply", MT, [a, d], a * d), st("means", "multiply", MT, [b, c], b * c), st("compare", "compare", PROP, [a * d, b * c], a * d === b * c ? PROP_CHOICES[0] : PROP_CHOICES[1]), st("pick", "choose the option", PROP, [a * d === b * c ? PROP_CHOICES[0] : PROP_CHOICES[1]], prpPerm(p).indexOf(a * d === b * c ? 0 : 1))], answer: prpPerm(p).indexOf(a * d === b * c ? 0 : 1) };
     },
     // independent: compare the two ratios by repeated addition (a × d against b × c)
     validate: (p, v) => {
@@ -1911,7 +1931,7 @@ const P3: Def[] = [
           : [{ id: "differences-differ", kind: "conceptual", competency: "MATH.reasoning.proportional-check", says: "The differences were compared and found unequal; in a proportion the ratios are equal, so the differences usually are not.", predict: pr.indexOf(1) }];
     },
     variants: () => [],
-    explain: (s) => (s.id === "extremes" ? `Product of the extremes: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "means" ? `Product of the means: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} ${s.inputs[0] === s.inputs[1] ? "=" : "≠"} ${s.inputs[1]}: ${String(s.value).toLowerCase()}`),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : s.id === "extremes" ? `Product of the extremes: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : s.id === "means" ? `Product of the means: ${s.inputs[0]} × ${s.inputs[1]} = ${s.value}` : `${s.inputs[0]} ${s.inputs[0] === s.inputs[1] ? "=" : "≠"} ${s.inputs[1]}: ${String(s.value).toLowerCase()}`),
     domain: D_PRP,
     keep: K_PRP,
     cap: 360,
@@ -2011,7 +2031,7 @@ const P3: Def[] = [
       const ys = dirvYs(p);
       const xs = dirvXs(p);
       const direct = p[3] === 0;
-      return { steps: [st("ratios", "divide", PROP, ys.map((y, i) => `${y}/${xs[i]}`), direct ? p[2] : "not equal"), st("decide", "compare", PROP, [], DIRV_CHOICES[direct ? 0 : 1])], answer: dirvPerm(p).indexOf(direct ? 0 : 1) };
+      return { steps: [st("ratios", "divide", PROP, ys.map((y, i) => `${y}/${xs[i]}`), direct ? p[2] : "not equal"), st("decide", "compare", PROP, [], DIRV_CHOICES[direct ? 0 : 1]), st("pick", "choose the option", PROP, [DIRV_CHOICES[direct ? 0 : 1], direct ? "y ÷ x is the same for every pair" : "y ÷ x is not the same for every pair"], dirvPerm(p).indexOf(direct ? 0 : 1))], answer: dirvPerm(p).indexOf(direct ? 0 : 1) };
     },
     // independent: cross-multiply every pair of columns (y₁ × x₂ = y₂ × x₁ for all pairs)
     validate: (p, v) => {
@@ -2028,7 +2048,7 @@ const P3: Def[] = [
         : [{ id: "both-increase", kind: "conceptual", competency: "MATH.reasoning.proportional-check", says: "Both quantities increase together, but that is not enough: in direct variation y ÷ x is the same for every pair (and y = 0 when x = 0).", predict: pr.indexOf(0) }];
     },
     variants: () => [],
-    explain: (s) => (s.id === "ratios" ? `y ÷ x for each pair: ${s.inputs.join(", ")} — ${typeof s.value === "number" ? `all equal to ${s.value}` : "not all equal"}` : String(s.value)),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}, because ${s.inputs[1]}` : s.id === "ratios" ? `y ÷ x for each pair: ${s.inputs.join(", ")} — ${typeof s.value === "number" ? `all equal to ${s.value}` : "not all equal"}` : String(s.value)),
     domain: D_DIRV,
     cap: 300,
     difficulty: ([, , , m]) => (m === 1 ? 1 : m === 0 ? 2 : 3),

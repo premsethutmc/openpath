@@ -27,44 +27,44 @@
   "requirements": 1197,
   "classes": {
    "validated": 0,
-   "awaiting": 1102,
-   "partial": 95,
+   "awaiting": 1105,
+   "partial": 92,
    "unsupported": 0,
    "not-implemented": 0
   },
-  "competenciesRequired": 336,
-  "competenciesComplete": 329,
+  "competenciesRequired": 338,
+  "competenciesComplete": 331,
   "competenciesApproved": 0,
   "graph": {
-   "competencies": 338,
+   "competencies": 340,
    "inventory": 200,
-   "expansion": 138,
-   "relations": 365,
+   "expansion": 140,
+   "relations": 370,
    "disputed": 8
   },
   "families": {
-   "count": 1082,
-   "problems": 342283,
+   "count": 1088,
+   "problems": 343845,
    "answerTypes": {
-    "integer": 413,
-    "fraction": 151,
+    "integer": 416,
+    "fraction": 152,
     "set": 27,
-    "choice": 169,
+    "choice": 170,
     "exact": 128,
     "interval": 16,
     "expression": 31,
-    "tuple": 110,
+    "tuple": 111,
     "mixed": 7,
     "ratio": 3,
     "antiderivative": 10,
     "matrix": 12,
     "roots": 5
    },
-   "withPictures": 304,
-   "withEverydayForm": 759,
-   "withAlternatives": 1044
+   "withPictures": 306,
+   "withEverydayForm": 765,
+   "withAlternatives": 1050
   },
-  "modules": 336,
+  "modules": 338,
   "writtenTasks": 376,
   "writtenByKind": {
    "proof": 83,
@@ -80,8 +80,8 @@
    "ambiguous": 0
   },
   "poolSufficiency": {
-   "modulesWithPools": 327,
-   "sufficient": 327,
+   "modulesWithPools": 329,
+   "sufficient": 329,
    "insufficient": 0
   },
   "educatorPart": {
@@ -280,8 +280,8 @@
    "requirements": 56,
    "classes": {
     "validated": 0,
-    "awaiting": 52,
-    "partial": 4,
+    "awaiting": 56,
+    "partial": 0,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -340,8 +340,8 @@
    "requirements": 82,
    "classes": {
     "validated": 0,
-    "awaiting": 76,
-    "partial": 6,
+    "awaiting": 75,
+    "partial": 7,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -1120,7 +1120,6 @@
    ],
    "families": [
     "lineq",
-    "aeineqz",
     "aeineqs",
     "aeineqw",
     "aenbhd"
@@ -1157,6 +1156,37 @@
     "aocorner"
    ],
    "writtenTasks": 1,
+   "complete": true
+  },
+  {
+   "id": "MATH.algebra.inequations-intro",
+   "name": "Solve simple inequations over whole numbers or integers",
+   "grades": [
+    7,
+    7
+   ],
+   "mode": "automatic",
+   "met": {
+    "graph": true,
+    "relations": true,
+    "diagnostic": true,
+    "misconception": true,
+    "strategy": true,
+    "worked": true,
+    "guided": true,
+    "independent": true,
+    "retention": true,
+    "variants": true,
+    "validation": true,
+    "review": false
+   },
+   "missing": [
+    "review"
+   ],
+   "families": [
+    "aeineqz"
+   ],
+   "writtenTasks": 0,
    "complete": true
   },
   {
@@ -5057,7 +5087,9 @@
    ],
    "families": [
     "aerefl",
-    "aetrans"
+    "aetrans",
+    "aerot",
+    "aetfig"
    ],
    "writtenTasks": 2,
    "complete": false
@@ -7016,7 +7048,8 @@
    "families": [
     "agdec",
     "agrupee",
-    "agmeas"
+    "agmeas",
+    "agchange"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -7686,7 +7719,8 @@
    "families": [
     "ajmill",
     "ajcrore",
-    "ajcrcmp"
+    "ajcrcmp",
+    "ajmilr"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -8114,7 +8148,8 @@
    "families": [
     "aep10",
     "aemult",
-    "aediv0"
+    "aediv0",
+    "ajsize"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -10270,7 +10305,7 @@
    "id": "MATH.sequences.explicit-recursive-rules",
    "name": "Describe sequences with explicit and recursive rules",
    "grades": [
-    7,
+    9,
     11
    ],
    "mode": "automatic",
@@ -10294,8 +10329,6 @@
    "families": [
     "ahrec",
     "ahnth",
-    "ahfib",
-    "ahrhy",
     "ahexp"
    ],
    "writtenTasks": 1,
@@ -10428,6 +10461,39 @@
    "families": [
     "aptel",
     "apsumk"
+   ],
+   "writtenTasks": 0,
+   "complete": true
+  },
+  {
+   "id": "MATH.sequences.virahanka-numbers",
+   "name": "Generate Virahanka-Fibonacci numbers and explore their patterns",
+   "grades": [
+    7,
+    8
+   ],
+   "mode": "automatic",
+   "met": {
+    "graph": true,
+    "relations": true,
+    "diagnostic": true,
+    "misconception": true,
+    "strategy": true,
+    "worked": true,
+    "guided": true,
+    "independent": true,
+    "retention": true,
+    "variants": true,
+    "validation": true,
+    "review": false
+   },
+   "missing": [
+    "review"
+   ],
+   "families": [
+    "ahfib",
+    "ahrhy",
+    "ahfibp"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -19132,7 +19198,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19148,7 +19214,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19160,11 +19226,11 @@
     "MATH.number.indian-international-numeration",
     "MATH.number.large-numbers"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: Converting from the international system back to the Indian system (millions to lakhs/crores) and billions are not assessed: ajmill only turns crores into millions, and ajcrore's pool has no million/billion items despite its stated limits."
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19180,7 +19246,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19193,11 +19259,11 @@
     "MATH.number.multiply-divide-powers-of-ten",
     "MATH.number.rounding"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: Judging the size of large quantities (e.g. how many days 1 lakh seconds is, or whether 1 crore of something is plausible) is not asked; only products with powers of ten and estimates of products are."
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19212,7 +19278,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19227,7 +19293,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19243,7 +19309,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19259,7 +19325,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19275,7 +19341,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19286,12 +19352,12 @@
    "competencies": [
     "MATH.number.decimal-operations"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: Money word problems are not assessed: agrupee gives only bare rupee sums and differences (measurement problems are covered by agmeas).",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19308,7 +19374,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19324,7 +19390,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19339,7 +19405,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19355,7 +19421,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19370,7 +19436,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19385,7 +19451,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19402,7 +19468,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19417,7 +19483,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19432,7 +19498,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19447,7 +19513,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19463,7 +19529,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19478,7 +19544,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19493,7 +19559,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -19509,7 +19575,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Algebra",
@@ -19525,7 +19591,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Algebra",
@@ -19540,7 +19606,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Algebra",
@@ -19555,7 +19621,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Algebra",
@@ -19570,7 +19636,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Algebra",
@@ -19585,7 +19651,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Algebra",
@@ -19600,7 +19666,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Algebra",
@@ -19615,7 +19681,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Algebra",
@@ -19630,7 +19696,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19645,7 +19711,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19661,7 +19727,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19676,7 +19742,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19691,7 +19757,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19706,7 +19772,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19722,7 +19788,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19737,7 +19803,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19752,7 +19818,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19767,7 +19833,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19783,7 +19849,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19798,7 +19864,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19813,7 +19879,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19829,7 +19895,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19845,7 +19911,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19861,7 +19927,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Geometry",
@@ -19876,7 +19942,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Data handling and statistics",
@@ -19891,7 +19957,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Data handling and statistics",
@@ -19906,7 +19972,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Data handling and statistics",
@@ -19922,7 +19988,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Data handling and statistics",
@@ -19938,7 +20004,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Mathematical reasoning",
@@ -19953,7 +20019,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Mathematical reasoning",
@@ -19968,7 +20034,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Mathematical reasoning",
@@ -19977,13 +20043,13 @@
    "outcome": "cbse-g07-t1-c06-o03",
    "text": "Generate Virahanka-Fibonacci numbers, link them to counting problems (e.g. rhythms of short and long beats), and explore their patterns.",
    "competencies": [
-    "MATH.sequences.explicit-recursive-rules"
+    "MATH.sequences.virahanka-numbers"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: Exploring patterns in the Virahanka-Fibonacci numbers (e.g. sums of terms, which terms are even) is not asked: ahfib has a single form asking for a later term, and ahrhy covers only the counting link."
+   "class": "awaiting",
+   "why": "Awaiting educator review."
   },
   {
-   "release": "cbse-ncert-mathematics-grade-7@1.1.0",
+   "release": "cbse-ncert-mathematics-grade-7@1.2.0",
    "board": "CBSE (NCERT textbooks)",
    "grade": 7,
    "domain": "Mathematical reasoning",
@@ -19998,7 +20064,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20013,7 +20079,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20029,7 +20095,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20045,7 +20111,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20061,7 +20127,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20076,7 +20142,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20091,7 +20157,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20106,7 +20172,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20122,7 +20188,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20138,7 +20204,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20155,7 +20221,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20171,7 +20237,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20186,7 +20252,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20202,7 +20268,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20218,7 +20284,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20234,7 +20300,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20250,7 +20316,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20261,12 +20327,12 @@
    "competencies": [
     "MATH.number.decimal-operations"
    ],
-   "class": "partial",
-   "why": "not every part is assessed: Money word problems are not assessed: agrupee gives only bare rupee sums and differences (measurement problems are covered by agmeas).",
+   "class": "awaiting",
+   "why": "Awaiting educator review.",
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20281,7 +20347,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20296,7 +20362,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20312,7 +20378,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20327,7 +20393,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Numbers and operations",
@@ -20342,7 +20408,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Algebra",
@@ -20357,7 +20423,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Algebra",
@@ -20372,7 +20438,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Algebra",
@@ -20387,7 +20453,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Algebra",
@@ -20402,7 +20468,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Algebra",
@@ -20419,7 +20485,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Algebra",
@@ -20436,7 +20502,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Algebra",
@@ -20451,7 +20517,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Algebra",
@@ -20467,7 +20533,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Algebra",
@@ -20482,7 +20548,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Algebra",
@@ -20491,14 +20557,13 @@
    "outcome": "tn-g07-t3-c03-o04",
    "text": "Solve simple one-variable inequations over whole numbers or integers and show the solution set on a number line.",
    "competencies": [
-    "MATH.algebra.inequalities"
+    "MATH.algebra.inequations-intro"
    ],
-   "class": "awaiting",
-   "why": "Awaiting educator review.",
-   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+   "class": "partial",
+   "why": "the map credits content no module of a mapped competency serves (wr:ineq:integer-line)"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Geometry",
@@ -20513,7 +20578,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Geometry",
@@ -20528,7 +20593,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Geometry",
@@ -20544,7 +20609,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Geometry",
@@ -20560,7 +20625,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Geometry",
@@ -20576,7 +20641,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Geometry",
@@ -20594,7 +20659,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Geometry",
@@ -20609,7 +20674,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Geometry",
@@ -20624,7 +20689,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Geometry",
@@ -20640,7 +20705,7 @@
    "why": "Perform and describe reflections, translations and rotations of figures: missing relations"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Geometry",
@@ -20656,7 +20721,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Measurement",
@@ -20671,7 +20736,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Measurement",
@@ -20686,7 +20751,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Measurement",
@@ -20701,7 +20766,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Measurement",
@@ -20717,7 +20782,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Measurement",
@@ -20732,7 +20797,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Measurement",
@@ -20747,7 +20812,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Measurement",
@@ -20763,7 +20828,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Data handling and statistics",
@@ -20778,7 +20843,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Data handling and statistics",
@@ -20793,7 +20858,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Data handling and statistics",
@@ -20809,7 +20874,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Mathematical reasoning",
@@ -20824,7 +20889,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-7@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-7@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 7,
    "domain": "Mathematical reasoning",
@@ -21729,7 +21794,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -21745,7 +21810,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -21760,7 +21825,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -21775,7 +21840,7 @@
    "why": "not every part is assessed: Word problems with rational numbers are not asked: every ajrq and ajinv item is a bare operation (checked all items)."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -21791,7 +21856,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -21806,7 +21871,7 @@
    "why": "not every part is assessed: The long-division method for square roots is not assessed: ahsqd and aksqf check only the final root, which can be found by trial squaring."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -21821,7 +21886,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -21836,7 +21901,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -21852,7 +21917,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -21867,7 +21932,7 @@
    "why": "not every part is assessed: Applying the compound-interest formula to growth (population, bacteria and the like) is not asked; ajci has only interest and depreciation (checked all items)."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -21883,7 +21948,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Numbers and operations",
@@ -21899,7 +21964,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Algebra",
@@ -21915,7 +21980,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Algebra",
@@ -21930,7 +21995,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Algebra",
@@ -21945,7 +22010,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Algebra",
@@ -21960,7 +22025,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Algebra",
@@ -21976,7 +22041,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Algebra",
@@ -21991,7 +22056,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Geometry",
@@ -22006,7 +22071,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Geometry",
@@ -22022,7 +22087,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Geometry",
@@ -22037,7 +22102,7 @@
    "why": "Apply the Baudhayana-Pythagoras theorem and its converse: missing relations"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Geometry",
@@ -22052,7 +22117,7 @@
    "why": "Locate and construct triangle centres: missing relations"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Geometry",
@@ -22067,7 +22132,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Measurement",
@@ -22083,7 +22148,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Measurement",
@@ -22100,7 +22165,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Measurement",
@@ -22116,7 +22181,7 @@
    "why": "not every part is assessed: Perimeters of combined shapes are asked only for rectangle-plus-semicircle gardens (6 of 450 amcshape items) and rectangular L-shapes; perimeters of combined shapes with triangles, trapeziums or sectors are not asked (their areas are)."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Data handling and statistics",
@@ -22132,7 +22197,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Data handling and statistics",
@@ -22148,7 +22213,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Data handling and statistics",
@@ -22163,7 +22228,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Mathematical reasoning",
@@ -22178,7 +22243,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Mathematical reasoning",
@@ -22195,7 +22260,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Mathematical reasoning",
@@ -22211,7 +22276,7 @@
    "why": "Awaiting educator review."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Mathematical reasoning",
@@ -22223,13 +22288,13 @@
     "MATH.algebra.pattern-rules",
     "MATH.number.euclid-algorithm",
     "MATH.reasoning.algorithms-flowcharts",
-    "MATH.sequences.explicit-recursive-rules"
+    "MATH.sequences.virahanka-numbers"
    ],
    "class": "partial",
    "why": "not every part is assessed: The link between repeated-division HCF and Fibonacci numbers is not asked: aeeuc uses neighbouring Fibonacci pairs but never points out or asks about the link."
   },
   {
-   "release": "tn-samacheer-mathematics-grade-8@1.1.0",
+   "release": "tn-samacheer-mathematics-grade-8@1.2.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 8,
    "domain": "Mathematical reasoning",
@@ -22601,8 +22666,8 @@
     "MATH.algebra.pattern-rules",
     "MATH.sequences.explicit-recursive-rules"
    ],
-   "class": "awaiting",
-   "why": "Awaiting educator review."
+   "class": "partial",
+   "why": "the map credits content no module of a mapped competency serves (ahfib)"
   },
   {
    "release": "cbse-ncert-mathematics-grade-9@1.1.0",

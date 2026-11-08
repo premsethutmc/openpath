@@ -3020,8 +3020,8 @@ export const B13: Def[] = [
     difficulty: ([m]) => ([2, 3, 2, 1, 3] as const)[m],
     word: (p) => cshapeWord(p),
     teach: {
-      idea: "A composite shape is cut into pieces whose areas are known (rectangle, triangle, trapezium, semicircle πr²/2, quadrant πr²/4); the area is the sum of the pieces, or a whole minus the piece cut away. A perimeter goes round the outside only.",
-      method: "Split the shape along straight lines, find each piece's area and add (or subtract a cut-out). For a perimeter, add only the outer edges: a semicircle's curved edge is πd/2 and it replaces the side it stands on.",
+      idea: "A composite shape is cut into pieces whose areas are known (rectangle, triangle, trapezium, a semicircle is half a circle, a quadrant a quarter); the area is the sum of the pieces, or a whole minus the piece cut away. A perimeter goes round the outside only.",
+      method: "Split the shape along straight lines, find each piece's area and add (or subtract a cut-out). For a perimeter, add only the outer edges: a semicircle's curved edge is half the circle's circumference and it replaces the side it stands on.",
       alternatives: [{ id: "sketch", title: "Sketch and label", kind: "procedural", text: ["Draw the shape and shade each piece in a different colour.", "Write the formula and the numbers inside each piece before adding."] }],
     },
     limits: "Five kinds of composite figure with π = 22/7; shapes with several curved pieces are worked in class.",

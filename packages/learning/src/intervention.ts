@@ -17,7 +17,7 @@ import { taughtExposureKeys } from "./teaching-exposure";
  */
 import { PLANNER_POLICY_DRAFT, planRule, type PlannerDecision, type PlannerPolicy } from "../../english-core/src/planner";
 import { rateOf, type InterventionSummary, type MisconceptionRecord, type RuleState } from "../../english-core/src/rule-evidence";
-import { moduleFor, question, type Module, type Strategy } from "./content";
+import { poolFamilies, moduleFor, question, type Module, type Strategy } from "./content";
 import { diagnose, type Diagnosis } from "./diagnostic";
 import { DAY, evidenceFor, independentAttempt, rightAnswer, type SkillEvidence } from "./evidence";
 import { exposureKey, gradeOfQuestion, parseProblem, phaseOf as phaseOfQ, phasePool, problemKeyOf, problemOf, type Phase } from "./families";
@@ -58,7 +58,30 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
   if (!m.pool) return null;
   const seen = new Set(records.attempts.map((a) => exposureKey(a.questionId)));
   // pools@1: from every family of the competency in turn
-  return modulePhasePool(m, phase).find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id)) ?? null;
+  const id = modulePhasePool(m, phase).find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id)) ?? null;
+  return id && phase === "check" ? situationFirst(m, id, records) : id;
+}
+
+/**
+ * contexts@1 (grade7-split@1): the shared record demonstrates a skill only from answers in at least two kinds of question
+ * (a typed question and a situation, say), and answers given in the session that taught it do not count. A module whose
+ * pool is a single family offers mostly one kind, so a learner taught it could answer fresh checks right for ever and never
+ * demonstrate it. Here, when this learner was taught the skill and has not answered a situation question on it since, a
+ * fresh check is offered in its situation (word) form. Modules drawing on several families are unchanged.
+ */
+function situationFirst(m: Module, id: string, records: LearnerRecords): string {
+  if (poolFamilies(m).length !== 1) return id;
+  const last = records.teaching.filter((t) => t.competency === m.competency).sort((a, b) => a.at.localeCompare(b.at)).at(-1);
+  if (!last) return id;
+  // answers in the teaching session itself do not count towards demonstrating: look at later sessions only
+  const since = records.attempts.filter((a) => of(m)(a) && a.at > last.at && a.session !== last.session);
+  if (since.some((a) => a.questionId.endsWith(":w"))) return id;
+  const w = `${id.replace(/:mc$/, "")}:w`;
+  try {
+    return question(w) && !quarantined(w) ? w : id;
+  } catch {
+    return id;
+  }
 }
 
 /** A constrained request for a fresh evidence opportunity. The existing selector owns

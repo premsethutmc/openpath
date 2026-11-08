@@ -36,7 +36,7 @@ import { deepRecoveryOn } from "./deep-recovery-flag";
 import { RecoveryAnswersPermission } from "./RecoveryAnswersPermission";
 import { openDeepRecoveries } from "../learning/deep-recovery-app";
 import { deepGoalModule } from "../learning/deep-goal";
-import { afterHelpOf, relabelTiles, type AfterHelp } from "../learning/deep-evidence";
+import { afterHelpOf, afterHelpTiles, afterHelpSummary, type AfterHelp } from "../learning/deep-evidence";
 import "../mathematics/chapter/chapter.css";
 import "./year.css";
 
@@ -295,7 +295,7 @@ function App() {
   // reads "Solved independently after help" on its tile (never the unqualified "Shown on your own"); switch off: unchanged
   const ahMemo = new Map<string, AfterHelp | null>();
   const ahOf = (c: string, recs = st.records, ev = st.evidence) => { const k = `${recs === st.records ? "y" : "g"}:${c}`; if (!ahMemo.has(k)) ahMemo.set(k, afterHelpOf(c, recs, ev, now)); return ahMemo.get(k)!; };
-  const tiles = DEEP ? relabelTiles(tilesFor(release, st.evidence, goalOf), (c) => ahOf(c)) : tilesFor(release, st.evidence, goalOf);
+  const tiles = DEEP ? afterHelpTiles(tilesFor(release, st.evidence, goalOf), (c) => ahOf(c)) : tilesFor(release, st.evidence, goalOf);
   const open = (t: Tile, path: string[]) => {
     if (t.kind === "proposal" || t.kind === "unsupported") return;
     if (t.kind === "skill" && t.children.length === 0 && moduleFor(t.competency!) && t.content?.level === "module") return setView({ name: "module", competency: t.competency!, back: { name: "tile", path: path.slice(0, -1) } });
@@ -398,7 +398,8 @@ function App() {
   }
 
   // ---------------------------------------------------------------- the year dashboard
-  const sum = st.summary;
+  const qualifiedSummary = DEEP ? afterHelpSummary(tiles) : null;
+  const sum = qualifiedSummary ?? st.summary;
   const next = st.next!;
   const ids = assigned(release).map((a) => a.competency);
   const overlays = activeGoals.map((g) => overlay(g, grade, ids, st.evidence)).filter((o) => o !== null);
@@ -442,11 +443,10 @@ function App() {
         {st.records.pathway?.active && <button className="secondary" disabled={saving} onClick={() => save(make.pathway(ctxOf(), st.records.pathway!.target, false))}>Return to my year plan</button>}
       </section>}
       {st.records.pathway?.active && <p className="small muted">Year totals summarize answer evidence. Recommendations and competency claims consider skill coverage and diagnosed gaps. Your chapters remain open for teaching.</p>}
-      {DEEP && (() => { const all: (Tile & { afterHelp?: AfterHelp })[] = []; const walk = (ts: (Tile & { afterHelp?: AfterHelp })[]) => ts.forEach((t) => { all.push(t); walk(t.children); }); walk(tiles); const n = new Set(all.filter((t) => t.afterHelp).map((t) => t.competency)).size;
-        return n ? <p className="small muted" role="note" data-after-help-count={n}>{n === 1 ? "One skill" : `${n} skills`} counted below as shown on your own {n === 1 ? "was" : "were"} solved independently after help; a later check on your own will show whether {n === 1 ? "it has" : "they have"} stuck.</p> : null; })()}
       <div className="stats" role="list" aria-label="This year so far">
         <div className="stat verified" role="listitem"><b>{sum.verified}</b><span>Verified</span></div>
         <div className="stat shown" role="listitem"><b>{sum.shown}</b><span>Shown on your own</span></div>
+        {qualifiedSummary && qualifiedSummary.afterHelp > 0 && <div className="stat active" role="listitem" data-after-help-count={qualifiedSummary.afterHelp}><b>{qualifiedSummary.afterHelp}</b><span>Solved independently after help</span></div>}
         <div className="stat active" role="listitem"><b>{sum.developing}</b><span>Learning</span></div>
         <div className="stat not_started" role="listitem"><b>{sum.notStarted}</b><span>Not started</span></div>
       </div>

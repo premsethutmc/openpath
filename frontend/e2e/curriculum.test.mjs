@@ -164,7 +164,8 @@ test("C + D + K: Grade 10 → Real Numbers and Grade 12 → Integrals: nested ti
   const d10 = data("cbse", 10);
   const rn = d10.nodes.find((n) => n.title === "Real Numbers");
   assert.deepEqual(await tileTitles(page), rn.children.map((n) => n.title), "the release's own structure, in book order");
-  assert.ok(await page.locator(".summary").getByText("Assessment coverage").count());
+  // the educator view appears once the account's role has loaded (an API call that can finish after the tiles)
+  await page.locator(".summary").getByText("Assessment coverage").waitFor();
   assert.match(await summaryText(page), /Choose a learner/, "no learner: no progress is invented");
   await noOverflow(page, "Real Numbers");
   await shot(page, "grade10-real-numbers-phone");

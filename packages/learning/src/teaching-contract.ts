@@ -18,6 +18,7 @@
 import { moduleFor, question, type Module, type Screen, type Strategy } from "./content";
 import { explainStep, exposureKey, FAMILIES, parseProblem, problemOf, show, type Problem } from "./families";
 import scopeData from "../../../content/learning/showcase-grade10.v1.json";
+import grade7ScopeData from "../../../content/learning/teaching-scope-grade7.v1.json";
 import exemptionData from "../../../content/learning/teaching-contract-exemptions.v1.json";
 import type { Representation, TeachRole } from "./family-kit";
 import { chapterExplanation, contentEligibility } from "./explanation-review";
@@ -25,7 +26,9 @@ import { familyStepExplanation, teachingPresentationFrom, teachingScopeFor, stra
 
 /** The Grade 10 showcase scope (CBSE and Tamil Nadu lessons) and its curated lessons (stage 2). */
 export const SHOWCASE = scopeData as { competencies: string[]; curated: string[] };
-const SCOPE = new Set(SHOWCASE.competencies);
+/** The Grade 7 teaching scope (grade7-teaching@1): the same stage 2 rules for every Grade 7 lesson of both boards. */
+export const GRADE7_SCOPE = grade7ScopeData as { competencies: string[]; curated: string[] };
+const SCOPE = new Set([...SHOWCASE.competencies, ...GRADE7_SCOPE.competencies]);
 /** Reviewed decisions that a flagged section is not a defect (each with its reason), e.g. a general fact, not an example. */
 export const EXEMPTIONS = exemptionData as { entries: { competency: string; title: string; rule: Violation; reason: string }[] };
 
@@ -55,7 +58,10 @@ export interface LessonBlock {
   title: string;
   text: string[];
   instance: string | null;
-  worked: { question: string; steps: { expression: string; explanation: string }[]; verified: boolean; source: "contract" | "kernel" | "compatibility" | "family-steps" } | null;
+  worked: { question: string; options?: string[]; steps: { expression: string; explanation: string }[]; verified: boolean; source: "contract" | "kernel" | "compatibility" | "family-steps" } | null;
+  /** grade7-lessons@1: the section question's own picture (a table, chart or figure the question refers to), when the
+   * section has no other picture: a worked solution of "the table in the picture" must show the table. */
+  figure?: { type: string; [k: string]: unknown } | null;
   /** A picture of the question's own mathematical object (teaching-contract@1 families). */
   representation: Representation | null;
   /** A typed picture from the teaching presentation (kernel and adapter families). */
@@ -124,7 +130,9 @@ export function lessonScreens(module: Module): { screen: Screen; strategy: Strat
     return !!p && teachingScopeFor(module, s).accepts(p);
   });
   const seen = new Set<string>();
-  return [{ screen: module.chapter[0], strategy: null as Strategy | null }, ...scoped.flatMap((s) => s.screens.map((screen) => ({ screen, strategy: s })))].filter(({ screen }) => {
+  // grade7-lessons@1: a Grade 7 lesson also checks (and shows) the sections for the module's other families
+  const chapter = GRADE7_SCOPE.competencies.includes(module.competency) ? module.chapter : module.chapter.slice(0, 1);
+  return [...chapter.map((screen) => ({ screen, strategy: null as Strategy | null })), ...scoped.flatMap((s) => s.screens.map((screen) => ({ screen, strategy: s })))].filter(({ screen }) => {
     if (!screen) return false;
     const key = JSON.stringify([screen.title, screen.text, screen.math, screen.widget]);
     if (seen.has(key)) return false;
@@ -191,7 +199,9 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
     // the first section of a lesson not yet taught instance by instance keeps the teaching-first page's example (the scope's
     // own strategy example), as before; a teaching-contract@1 lesson uses each section's own question
     const contractLesson = !!(scope.family && FAMILIES.get(scope.family)?.teach?.instance);
-    const instanceId = isChapter && !contractLesson && primaryId ? primaryId.replace(/:mc$/, "") : screen.instance ?? (isChapter && primaryId ? primaryId.replace(/:mc$/, "") : null);
+    // grade7-lessons@1: only the lesson's opening section borrows that example; a sub-skill section is about its own question
+    const opening = isChapter && screen === module.chapter[0];
+    const instanceId = opening && !contractLesson && primaryId ? primaryId.replace(/:mc$/, "") : screen.instance ?? (isChapter && primaryId ? primaryId.replace(/:mc$/, "") : null);
     const p = instanceId ? problemOf(instanceId) : null;
     const family = p ? FAMILIES.get(p.family) : undefined;
     const own = p && family?.teach?.instance ? family.teach.instance(p.params) : null;
@@ -268,7 +278,11 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
     }
     const label = role === "worked-example" ? (worked?.verified ? ROLE_LABEL["worked-example"] : "Method") : ROLE_LABEL[role];
     const exempt = EXEMPTIONS.entries.filter((e) => e.competency === module.competency && e.title === screen.title && violations.includes(e.rule)).map(({ rule, reason }) => ({ rule, reason }));
-    return { role, label, title: screen.title, text: screen.text, instance: p?.id ?? null, worked, representation, visual, widget, claims: { verified, review }, violations: violations.filter((v) => !exempt.some((e) => e.rule === v)), exempt };
+    // grade7-lessons@1: a worked question shows its own options, and its own figure when the section draws nothing else
+    const q = p ? question(p.id) : null;
+    if (worked && q?.options?.length) worked = { ...worked, options: q.options };
+    const figure = q?.figure && !representation && !visual && !widget ? q.figure : null;
+    return { role, label, title: screen.title, text: screen.text, instance: p?.id ?? null, worked, representation, visual, widget, figure, claims: { verified, review }, violations: violations.filter((v) => !exempt.some((e) => e.rule === v)), exempt };
   });
   return SCOPE.has(module.competency) ? withoutRepetition(blocks) : blocks;
 }
@@ -314,7 +328,8 @@ export function withoutRepetition(blocks: LessonBlock[]): LessonBlock[] {
     }
     // a quoted question that refers to a picture the section does not draw
     const hasPicture = picture && !!k;
-    return { ...b, label, text: hasPicture ? text : text.map((line) => line.replace(/, as in the picture(?=[.?])/g, "")), worked, ...(picture ? {} : { representation: null, visual: null, widget: null }) };
+    const ownFigure = !!b.figure && !!worked;
+    return { ...b, label, text: hasPicture || ownFigure ? text : text.map((line) => line.replace(/, as in the picture(?=[.?])/g, "")), worked, ...(picture ? {} : { representation: null, visual: null, widget: null }), figure: ownFigure ? b.figure : null };
   });
   // the journey is concept, then worked example: a checked worked example comes straight after the concept sections
   const w = out.findIndex((b) => b.role === "worked-example" && b.worked?.verified);

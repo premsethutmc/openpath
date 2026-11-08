@@ -13,6 +13,7 @@
  *   later     independent answers on the skill in a later sitting, on a problem key the episode never used
  * Synthetic results are not evidence that anyone learned.
  */
+import { aggregate, flatten, type Tile } from "../../../packages/learning/src/tiles";
 import { question } from "../../../packages/learning/src/content";
 import { evidenceFor, independentAttempt, rightAnswer, type SkillEvidence } from "../../../packages/learning/src/evidence";
 import { problemKeyOf } from "../../../packages/learning/src/families";
@@ -103,4 +104,25 @@ export function relabelTiles<T extends { competency?: string; status: string; la
     const ah = t.competency && (t.status === "shown" || t.status === "verified") ? ahOf(t.competency) : null;
     return ah ? { ...t, children, label: ah.label, afterHelp: ah } : { ...t, children };
   });
+}
+
+/** Research display only: qualified successes cannot contribute to unqualified parent/Year claims. */
+export function afterHelpTiles(tiles: Tile[], ahOf: (c: string) => AfterHelp | null): (Tile & { afterHelp?: AfterHelp })[] {
+  return tiles.map((t) => {
+    const children = afterHelpTiles(t.children, ahOf);
+    const afterHelp = t.competency && (t.status === "shown" || t.status === "verified") ? ahOf(t.competency) : null;
+    if (afterHelp) return { ...t, children, afterHelp, label: afterHelp.label, status: "active", icon: "◐", progress: { ...t.progress, done: Math.min(t.progress.done, 2), verified: 0 } };
+    if (!t.competency && children.length) {
+      const a = aggregate(t.id, t.kind, t.title, children);
+      return { ...t, children, status: a.status, label: a.label, icon: a.icon, progress: a.progress };
+    }
+    return { ...t, children };
+  });
+}
+
+export function afterHelpSummary(tiles: (Tile & { afterHelp?: AfterHelp })[]) {
+  const skills = [...new Map(flatten(tiles).filter((t) => t.kind === "skill" && t.assessable).map((t) => [t.competency, t as Tile & { afterHelp?: AfterHelp }])).values()];
+  const count = (status: Tile["status"]) => skills.filter((t) => !t.afterHelp && t.status === status).length;
+  const verified = count("verified"), shown = count("shown");
+  return { total: skills.length, verified, shown, developing: count("active"), notStarted: count("not_started"), afterHelp: skills.filter((t) => t.afterHelp).length, progress: skills.length ? (verified + shown) / skills.length : 0 };
 }

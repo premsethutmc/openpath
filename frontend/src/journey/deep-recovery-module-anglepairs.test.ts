@@ -126,11 +126,12 @@ test("route 2: repaired gap -> the fresh angle-pairs question is wrong -> #115's
   assert.deepEqual(ours.handover, shipped.handover);
 });
 
-test("a stop with another reason is kept unchanged: a slip (no gap repaired), and a gap that could not be taught (blocked)", () => {
+test("no repaired-gap override for an ordinary slip path or an unteachable gap", () => {
   const slip = run(PAIRS, learner(PAIRS, ["own"], { slipOnce: true }));
   assert.equal(afterRepair(slip.steps).length, 0);
-  assert.equal(slip.steps.at(-1)!.phase, "pause");
-  assert.equal(slip.steps.at(-1)!.why, `${P}slip; module stop kept (policy C)`);
+  const slipOff = run(PAIRS, learner(PAIRS, ["own"], { slipOnce: true }), { on: false });
+  assert.deepEqual(slip.steps, slipOff.steps, "Grade 7 fresh-pool changes keep the ordinary own-skill path, with no research override");
+  assert.equal(slip.steps.at(-1)!.phase, "done");
   const blocked = run(SCALE, learner(SCALE, [RATIO]));
   assert.equal(afterRepair(blocked.steps).length, 0);
   assert.equal(blocked.steps.at(-1)!.phase, "pause");

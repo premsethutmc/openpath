@@ -46,8 +46,9 @@ for(const [competency,family,ids] of cases){
  if(family==='afbar')test('afbar: full teaching blueprint preserves the previously integrated total intervention',()=>{
   const m=moduleFor(competency)!,total=m.strategies.find(s=>s.id==='fix_assume_tens')!;
   assert.equal(source.blueprints.find((b:Blueprint)=>b.competency===competency).extendsTemplate,undefined);
-  // reworded 2026-11-04 (neutral: "A common mix-up is to take each line as 10", title "…: a common mix-up"); the teaching is otherwise unchanged
-  assert.equal(contentHash(competency,total),'sha256:9591acc7830025c793ed235c1623dd3c11d69ffbd1921dbe17e39adf3f1579e1');
+  // reworded 2026-11-04 (neutral: "A common mix-up is to take each line as 10", title "…: a common mix-up"); 2026-11-07
+  // (grade7-lessons@1): the "solved correctly" placeholder now says what to watch; the teaching is otherwise unchanged
+  assert.equal(contentHash(competency,total),'sha256:4046252ebdaacf0b64ce0d53a9036aeee8f5d2894252616fc9cd4c8efa846ac9');
   assert.equal(total.scope?.subSkill,'scaled-bars.total@1');
   assert.equal(m.strategies.find(s=>s.id==='fix_assume_tens_read')?.scope?.subSkill,'scaled-bars.read@1');
   assert.ok(!m.strategies.some(s=>s.kind==='prerequisite'),'the new module has target teaching, not a generic prerequisite pointer');

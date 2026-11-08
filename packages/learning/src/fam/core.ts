@@ -217,6 +217,8 @@ export const CORE: Def[] = [
         steps: [
           { id: "move", op: "subtract", competency: LIN, inputs: [c, b], value: c - b },
           { id: "divide", op: "divide", competency: INEQ, inputs: [c - b, a], value: r },
+          // check with one number from the answer, as the method says
+          { id: "check", op: "check", competency: INEQ, inputs: [a, b, c, a > 0 ? r - 1 : r + 1], value: a > 0 ? `x < ${n_(r)}` : `x > ${n_(r)}` },
         ],
         answer: a > 0 ? `x < ${n_(r)}` : `x > ${n_(r)}`,
       };
@@ -244,10 +246,12 @@ export const CORE: Def[] = [
       return [a > 0 ? `x > ${n_(r)}` : `x < ${n_(r)}`, a > 0 ? `x < ${n_(-r)}` : `x > ${n_(-r)}`];
     },
     variants: () => [],
-    explain: (s) => (s.id === "move" ? (Number(s.inputs[1]) < 0 ? `Add ${-Number(s.inputs[1])} to both sides: the right side becomes ${n_(Number(s.value))}` : `Take ${s.inputs[1]} from both sides: the right side becomes ${n_(Number(s.value))}`) : Number(s.inputs[1]) < 0 ? `Divide both sides by ${n_(Number(s.inputs[1]))} and reverse the sign, because dividing by a negative number reverses an inequality: x > ${n_(Number(s.value))}` : `Divide both sides by ${s.inputs[1]}: x < ${n_(Number(s.value))}`),
+    explain: (s) => (s.id === "check" ? (([a, b, c, x]) => `Check with x = ${n_(x)}: ${n_(a)} × ${x < 0 ? `(${n_(x)})` : x} ${b < 0 ? "−" : "+"} ${Math.abs(b)} = ${n_(a * x + b)}, which is less than ${n_(c)}. So the answer is ${s.value}`)(s.inputs.map(Number)) : s.id === "move" ? (Number(s.inputs[1]) < 0 ? `Add ${-Number(s.inputs[1])} to both sides: the right side becomes ${n_(Number(s.value))}` : `Take ${s.inputs[1]} from both sides: the right side becomes ${n_(Number(s.value))}`) : Number(s.inputs[1]) < 0 ? `Divide both sides by ${n_(Number(s.inputs[1]))} and reverse the sign, because dividing by a negative number reverses an inequality: x > ${n_(Number(s.value))}` : `Divide both sides by ${s.inputs[1]}: x < ${n_(Number(s.value))}`),
     domain: [[-6, 6], [-15, 15], [-20, 20]],
     keep: ([a, b, c]) => a !== 0 && a !== 1 && b !== 0 && (c - b) % a === 0 && Math.abs((c - b) / a) <= 12,
     cap: 500,
+    // level@1 (grade7-teaching@1): a learner below Grade 9 is not asked this family's problems
+    grade: () => 9,
     difficulty: ([a, b]) => (a > 0 && b > 0 ? 1 : a > 0 ? 2 : 3),
     word: ([a, b, c]) => `A number x is multiplied by ${n_(a)}, then ${b < 0 ? `${-b} is taken away` : `${b} is added`}. ${name(b)} finds that the result is less than ${n_(c)}. Which numbers x are possible? Write an inequality for x.`,
     teach: {

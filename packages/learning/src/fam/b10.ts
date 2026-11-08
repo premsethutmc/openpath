@@ -199,12 +199,19 @@ export const B10: Def[] = [
     domain: [[12, 99], [-2, 2]],
     keep: ([, d]) => d !== 0,
     difficulty: ([k, d]) => (Math.abs(d) === 1 && k < 50 ? 1 : Math.abs(d) === 1 ? 2 : 3),
-    word: ([k, d]) => `A school buys ${k} chairs at ₹${100 + d} each. What is the total cost, in rupees?`,
+    word: ([k, d]) => `A school buys ${k} geometry boxes at ₹${100 + d} each. What is the total cost, in rupees?`,
     teach: {
       idea: `Multiplication spreads over addition and subtraction: k × (100 − 2) = k × 100 − k × 2.`,
       method: "Write the number near 100 as 100 plus or minus a little, multiply k by each part, then add or take away.",
       alternatives: [
-        { id: "area_split", title: "Split a rectangle", kind: "conceptual", text: ["Think of k × 98 as the area of a rectangle k by 98.", "It is a k by 100 rectangle with a k by 2 strip cut off: k × 100 − k × 2."] },
+        { id: "area_split", title: "Split a rectangle", kind: "conceptual", text: ["Think of k × 98 as the area of a rectangle k by 98.", "It is a k by 100 rectangle with a k by 2 strip cut off: k × 100 − k × 2."],
+          // stage 2: the rectangle of the question's own numbers
+          textFor: ([k, d]) => [
+            `Think of ${k} × ${100 + d} as the area of a rectangle ${k} by ${100 + d}.`,
+            d < 0
+              ? `It is a ${k} by 100 rectangle with a ${k} by ${-d} strip cut off: ${k} × 100 − ${k} × ${-d} = ${k * 100} − ${k * -d} = ${k * (100 + d)}.`
+              : `It is a ${k} by 100 rectangle with a ${k} by ${d} strip added on: ${k} × 100 + ${k} × ${d} = ${k * 100} + ${k * d} = ${k * (100 + d)}.`,
+          ] },
       ],
     },
     limits: "A two-digit number times 98, 99, 101 or 102; other near-round numbers (49², 998 × 1002) use the same idea.",
@@ -274,6 +281,8 @@ export const B10: Def[] = [
         steps.push({ id: `div${steps.length}`, op: "divide", competency: PF, inputs: [m, p], value: m / p });
         m /= p;
       }
+      // the divisors, in order, are the answer
+      steps.push({ id: "list", op: "list", competency: PF, inputs: ps, value: tup(ps) });
       return { steps, answer: tup(ps) };
     },
     // independent: every listed number is prime (trial division), they are in order, and they multiply back to n
@@ -303,7 +312,7 @@ export const B10: Def[] = [
       return [tup([ps[0] * ps[1], ...ps.slice(2)].sort((a, b) => a - b)), tup([...ps, ps[ps.length - 1]])];
     },
     variants: () => [],
-    explain: (s) => `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`,
+    explain: (s) => (s.id === "list" ? `The divisors are the prime factors: ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[16, 400]],
     cap: 400,
     difficulty: ([n]) => (n <= 100 ? 1 : primeList(n).some((p) => p >= 7) ? 3 : 2),
@@ -339,6 +348,8 @@ export const B10: Def[] = [
       for (const [p, e] of expo(n)) if (e % 2) m *= p;
       return m === n ? "The number must have a square factor." : null;
     },
+    // level@1: the smallest square multiplier is Class 8 work; small numbers stay as a Grade 7 extension
+    grade: ([n]) => (n > 200 ? 8 : 7),
     prompt: ([n]) => `What is the smallest whole number that ${n} must be multiplied by so that the product is a perfect square?`,
     solve: ([n]) => {
       let m = 1;
@@ -377,7 +388,7 @@ export const B10: Def[] = [
       const odd = [...expo(n)].filter(([, e]) => e % 2).length;
       return n <= 100 ? 1 : odd === 1 ? 2 : 3;
     },
-    word: ([n]) => `A gardener has ${n} square tiles. She wants to join some identical sets of ${n} tiles to make one large square with no tiles left over. What is the smallest number of sets she needs?`,
+    word: ([n]) => `Square tiles are sold in boxes of ${n}. A gardener wants to use only full boxes to make one large square of tiles with none left over. What is the smallest number of boxes she must buy?`,
     teach: {
       idea: "In a perfect square every prime factor comes in pairs, because the number is something times itself.",
       method: "Write the number as a product of primes and pair equal primes. Multiply together the primes that have no partner: that is the smallest multiplier.",
@@ -623,7 +634,9 @@ export const B10: Def[] = [
     mc: true,
     parse: none,
     reject: ([a, m, n, o]) => (a < 2 || a > 9 || m < 1 || n < 1 || m > 12 || n > 12 || o < 0 || o > 2 || (o === 0 && (m < 2 || n < 2)) || (o === 1 && m === n) || (o === 2 && (m < 2 || n < 2 || m > 6 || n > 6)) ? "aᵐ × aⁿ, aᵐ ÷ aⁿ or (aᵐ)ⁿ with a from 2 to 9." : null),
-    prompt: ([a, m, n, o]) => `Write ${o === 0 ? `${a}${sup(m)} × ${a}${sup(n)}` : o === 1 ? `${a}${sup(m)} ÷ ${a}${sup(n)}` : `(${a}${sup(m)})${sup(n)}`} as a single power of ${a}, that is ${a} to the power □. What number goes in the box${o === 1 ? " (it may be negative)" : ""}?`,
+    prompt: ([a, m, n, o]) => `Write ${o === 0 ? `${a}${sup(m)} × ${a}${sup(n)}` : o === 1 ? `${a}${sup(m)} ÷ ${a}${sup(n)}` : `(${a}${sup(m)})${sup(n)}`} as a single power of ${a}, that is ${a} to the power □. What number goes in the box?`,
+    // level@1: a quotient with a smaller top power gives a negative power, which is Grade 8 (Class 8 Exponents)
+    grade: ([, m, n, o]) => (o === 1 && m < n ? 8 : 7),
     solve: ([, m, n, o]) => {
       const e = o === 0 ? m + n : o === 1 ? m - n : m * n;
       return { steps: [{ id: o === 0 ? "add" : o === 1 ? "subtract" : "multiply", op: o === 0 ? "add" : o === 1 ? "subtract" : "multiply", competency: EXP, inputs: [m, n], value: e }], answer: e };
@@ -734,6 +747,8 @@ export const B10: Def[] = [
     mc: true,
     parse: none,
     reject: ([a, m, k]) => (a < 2 || a > 10 || m < 0 || m > 5 || m === 1 || k < 1 || k > 8 || m === k || a ** Math.max(m, k) > 100000 ? "aᵐ × a⁻ᵏ with a from 2 to 10, m 0 or 2 to 5, k from 1 to 8." : null),
+    // level@1: every item shows a negative power, which both boards introduce in Class 8
+    grade: () => 8,
     prompt: ([a, m, k]) => `Find the value of ${m === 0 ? `${a}${sup(-k)}` : `${a}${sup(m)} × ${a}${sup(-k)}`}. (A fraction is fine.)`,
     solve: ([a, m, k]) => {
       const e = m - k;
@@ -765,7 +780,7 @@ export const B10: Def[] = [
     difficulty: ([, m]) => (m === 0 ? 1 : 2),
     word: ([a, m, k]) => `A scientist writes a measurement as ${m === 0 ? `${a}${sup(-k)}` : `${a}${sup(m)} × ${a}${sup(-k)}`} grams. What is that as a number of grams? (A fraction is fine.)`,
     teach: {
-      idea: "Each step down in the power divides by the base once: 2³ = 8, 2² = 4, 2¹ = 2, 2⁰ = 1, 2⁻¹ = 1/2, 2⁻² = 1/4.",
+      idea: "Each step down in the power divides by the base once: from a³ to a² to a¹, then a⁰ = 1, a⁻¹ = 1/a and a⁻² = 1/a².",
       method: "Combine the powers first (add them, keeping the signs), then a⁻ⁿ = 1/aⁿ.",
       alternatives: [
         { id: "halving", title: "Keep dividing", kind: "conceptual", text: ["Write the powers of the base in a row and divide by the base each time you go left.", "The pattern shows a⁰ = 1 and a⁻ⁿ = 1/aⁿ, never a negative number."] },
@@ -813,13 +828,20 @@ export const B10: Def[] = [
     domain: [[1, 99], [0, 9]],
     cap: 350,
     difficulty: ([c, k]) => (k === 0 ? 1 : c < 10 ? 2 : 3),
-    word: ([c, k]) => `The population of a state is ${inr(c * 1e7 + k * 1e6)}. A newspaper written in the international system gives it in millions. How many millions does it print?`,
+    // no Indian state has more than about 24 crore people; larger numbers are a company's sales
+    word: ([c, k]) => (c <= 23 ? `The population of a state is ${inr(c * 1e7 + k * 1e6)}. A newspaper written in the international system gives it in millions. How many millions does it print?` : `A company's yearly sales are ${rs(c * 1e7 + k * 1e6)}. A newspaper written in the international system gives the sales in millions of rupees. How many millions does it print?`),
     teach: {
       idea: "Both systems use the same digits; only the grouping differs. 10 lakh = 1 million, and 1 crore = 10 million.",
-      method: "Rewrite the number with international commas (groups of three: 34,000,000) and read the millions.",
+      method: "Rewrite the number with international commas (groups of three digits, counting from the right) and read the number of millions in front of the second comma from the right.",
       visual: ([c, k]) => ({ type: "table", head: ["Indian", "International"], rows: [[inr(c * 1e7 + k * 1e6), (c * 1e7 + k * 1e6).toLocaleString("en-US")]] }),
       alternatives: [
-        { id: "count_zeros", title: "Count the zeros", kind: "procedural", text: ["1 lakh has 5 zeros, 1 million has 6, 1 crore has 7.", "So 1 crore = 10 million, and 10 lakh = 1 million."] },
+        { id: "count_zeros", title: "Count the zeros", kind: "procedural", text: ["1 lakh has 5 zeros, 1 million has 6, 1 crore has 7.", "So 1 crore = 10 million, and 10 lakh = 1 million."],
+          // stage 2: the zeros counted for the question's own crore and lakh
+          textFor: ([c, k]) => [
+            "1 lakh has 5 zeros, 1 million has 6, 1 crore has 7: one more zero means ten times as much.",
+            `So 1 crore = 10 million, and ${c} crore = ${c} × 10 = ${10 * c} million.`,
+            ...(k ? [`10 lakh = 1 million, so ${10 * k} lakh = ${k} million, and the total is ${10 * c} + ${k} = ${10 * c + k} million.`] : []),
+          ] },
       ],
     },
     limits: "Whole numbers of crore and multiples of 10 lakh, converted to millions; billions and the reverse direction are other families.",
@@ -864,7 +886,7 @@ export const B10: Def[] = [
     difficulty: ([a, b]) => (Math.abs(a) > 10 || Math.abs(b) > 10 ? 3 : a < 0 && b < 0 ? 2 : 1),
     word: ([a, b]) => {
       // money taken out of savings: any size of change makes sense (a temperature falling 15 °C an hour does not)
-      if (a < 0 && b < 0) return `Every day ${nm(-a - b)} takes ₹${-a} out of a savings box, a change of −₹${-a} a day. Compared with now, how much more money was in the box ${-b} days ago? (Give the change from now to then as an integer: more money is positive.)`;
+      if (a < 0 && b < 0) return `Every day ${nm(-a - b)} takes ₹${-a} out of a savings box (a change of −₹${-a} a day). How much more money was in the box ${-b} days ago than there is now, in rupees?`;
       const [rate, days] = a < 0 ? [a, b] : [b, a];
       return `Every day ${nm(days - rate)} takes ₹${-rate} out of a savings box, a change of −₹${-rate} a day. What is the total change in the money in the box after ${days} days, in rupees? (Money taken out is negative.)`;
     },
@@ -891,7 +913,9 @@ export const B10: Def[] = [
     prompt: ([c, p, s, m]) => {
       const cp = 20 * c;
       const sp = cp + (s ? -1 : 1) * ((cp * p) / 100);
-      return m ? `A shopkeeper sells a fan for ${rs(sp)} and makes ${aN(p)}% ${s ? "loss" : "profit"} on it. What did the fan cost him (the cost price), in rupees?` : `A shopkeeper buys a fan for ${rs(cp)} and sells it at ${aN(p)}% ${s ? "loss" : "profit"}. What is the selling price, in rupees?`;
+      // a fan costs at least ₹800; cheaper prices are a table lamp
+      const it = cp >= 800 ? "fan" : "table lamp";
+      return m ? `A shopkeeper sells a ${it} for ${rs(sp)} and makes ${aN(p)}% ${s ? "loss" : "profit"} on it. What did the ${it} cost him (the cost price), in rupees?` : `A shopkeeper buys a ${it} for ${rs(cp)} and sells it at ${aN(p)}% ${s ? "loss" : "profit"}. What is the selling price, in rupees?`;
     },
     solve: ([c, p, s, m]) => {
       const cp = 20 * c;
@@ -938,10 +962,18 @@ export const B10: Def[] = [
       return m ? `${nm(c)} sold a ${it} for ${rs(sp)} and found that this was ${aN(p)}% ${s ? "loss" : "profit"} on what it had cost. How much had the ${it} cost, in rupees?` : `${nm(c)} bought a ${it} for ${rs(cp)} and later sold it at ${aN(p)}% ${s ? "loss" : "profit"}. For how many rupees did ${nm(c)} sell it?`;
     },
     teach: {
-      idea: "Profit or loss per cent compares the profit or loss with the cost price: 20% profit means the selling price is 120% of the cost price.",
+      idea: "Profit or loss per cent always compares the profit or loss with the cost price: it is the profit or loss on every hundred rupees of cost. So with a profit the selling price is more than the cost price by that per cent of it; with a loss it is less by that per cent.",
       method: "To find the selling price, find p% of the cost price and add it (profit) or take it away (loss). To find the cost price, divide the selling price by (100 ± p) and multiply by 100.",
       alternatives: [
-        { id: "hundred_parts", title: "Think of 100 parts", kind: "conceptual", text: ["Split the cost price into 100 equal parts.", "With a 15% profit the selling price is 115 of those parts; with a 15% loss it is 85 parts."] },
+        { id: "hundred_parts", title: "Think of 100 parts", kind: "conceptual", text: ["Split the cost price into 100 equal parts.", "With a 15% profit the selling price is 115 of those parts; with a 15% loss it is 85 parts."],
+          // stage 2: the hundred parts of the question's own cost price
+          textFor: ([c, p, s, m]) => {
+            const cp = 20 * c, part = cp / 100, parts = s ? 100 - p : 100 + p, sp = (cp * parts) / 100;
+            const kind = `${p}% ${s ? "loss" : "profit"}`, money = (v: number) => (Number.isInteger(v) ? rs(v) : `₹${v.toFixed(2)}`);
+            return m
+              ? [`Think of the cost price as 100 equal parts. With a ${kind} the selling price is 100 ${s ? "−" : "+"} ${p} = ${parts} of those parts.`, `So one part is ${money(sp)} ÷ ${parts} = ${money(part)}, and the cost price, 100 parts, is 100 × ${money(part)} = ${money(cp)}.`]
+              : [`Split the cost price ${money(cp)} into 100 equal parts of ${money(part)} each.`, `With a ${kind} the selling price is 100 ${s ? "−" : "+"} ${p} = ${parts} of those parts: ${parts} × ${money(part)} = ${money(sp)}.`];
+          } },
       ],
     },
     limits: "Cost prices ₹100 to ₹1000 with profit or loss in steps of 5% up to 40%; overhead expenses are not included.",
@@ -1027,7 +1059,7 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => (s.id === "year" ? `One year's interest: ${s.inputs[1]}% of ₹${s.inputs[0]} = ₹${s.value}` : s.id === "years" ? `For ${s.inputs[1]} years: ₹${s.inputs[0]} × ${s.inputs[1]} = ₹${s.value}` : s.id === "amount" ? `Amount = ₹${s.inputs[0]} + ₹${s.inputs[1]} = ₹${s.value}` : s.id === "rate" ? `R = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}%` : s.id === "principal" ? `P = ${s.inputs[0]} ÷ ${s.inputs[1]} = ₹${s.value}` : `T = ₹${s.inputs[0]} ÷ ₹${s.inputs[1]} = ${s.value} years`),
+    explain: (s) => (s.id === "year" ? `One year's interest: ${s.inputs[1]}% of ₹${s.inputs[0]} = ₹${s.value}` : s.id === "years" ? `For ${s.inputs[1]} ${s.inputs[1] === 1 ? "year" : "years"}: ₹${s.inputs[0]} × ${s.inputs[1]} = ₹${s.value}` : s.id === "amount" ? `Amount = ₹${s.inputs[0]} + ₹${s.inputs[1]} = ₹${s.value}` : s.id === "rate" ? `R = ${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}%` : s.id === "principal" ? `P = ${s.inputs[0]} ÷ ${s.inputs[1]} = ₹${s.value}` : `T = ₹${s.inputs[0]} ÷ ₹${s.inputs[1]} = ${s.value} ${s.value === 1 ? "year" : "years"}`),
     domain: [[1, 40], [2, 15], [1, 6], [0, 4]],
     cap: 500,
     difficulty: ([, , , m]) => (m === 0 ? 1 : m === 1 ? 2 : 3),
@@ -1035,6 +1067,16 @@ export const B10: Def[] = [
       const P = 500 * k;
       const I = (P * r * t) / 100;
       const who = nm(k + r);
+      const ys = `${t} year${t > 1 ? "s" : ""}`;
+      // banks pay about 3–8% on deposits; a higher rate is a loan from a moneylender
+      if (r > 9)
+        return [
+          `${who} borrows ${rs(P)} from a moneylender at ${r}% simple interest per year. How much interest does ${who} pay in ${ys}, in rupees?`,
+          `${who} borrows ${rs(P)} from a moneylender at ${r}% simple interest per year and repays everything after ${ys}. How much does ${who} repay in all, in rupees?`,
+          `${who} borrowed ${rs(P)} from a moneylender and paid ${rs(I)} simple interest in ${ys}. What rate per cent per year did the moneylender charge?`,
+          `${who} borrowed ${rs(P)} from a moneylender at ${r}% simple interest per year and paid ${rs(I)} in interest. For how many years was the money borrowed?`,
+          `${who} paid ${rs(I)} simple interest in ${ys} on a loan from a moneylender at ${r}% per year. How much money had ${who} borrowed, in rupees?`,
+        ][m];
       return [
         `${who} puts ${rs(P)} in a bank that pays ${r}% simple interest per year. How much interest does ${who} earn in ${t} year${t > 1 ? "s" : ""}, in rupees?`,
         `${who} borrows ${rs(P)} at ${r}% simple interest per year and repays everything after ${t} year${t > 1 ? "s" : ""}. How much does ${who} repay in all, in rupees?`,
@@ -1044,8 +1086,8 @@ export const B10: Def[] = [
       ][m];
     },
     teach: {
-      idea: "Simple interest is the same every year: R% of the principal, so T years give T times as much. SI = P × R × T ÷ 100.",
-      method: "Write SI = P × R × T ÷ 100, put in the three numbers you know, and work out the fourth.",
+      idea: "Simple interest is the same every year: R% of the principal, so T years give T times as much. R% means R out of a hundred, so SI is P × R × T divided by a hundred.",
+      method: "Write SI = P × R × T divided by a hundred, put in the three numbers you know, and work out the fourth. The amount is the principal plus the interest.",
       alternatives: [
         { id: "year_by_year", title: "Year by year", kind: "conceptual", text: ["Find one year's interest first: R% of P.", "Add it once for every year. To find the time, count how many years of interest make the total."] },
       ],
@@ -1061,7 +1103,7 @@ export const B10: Def[] = [
     mc: true,
     parse: none,
     reject: ([k, d, m]) => (k < 2 || k > 60 || (m !== 0 && m !== 1) || d < 1 || d > (m ? 4 : 10) || (k * (m ? GST[d - 1] : 5 * d)) % 2 !== 0 ? "A price ₹100 to ₹3000 with a discount (5% steps) or GST (5, 12, 18, 28%), giving whole rupees." : null),
-    prompt: ([k, d, m]) => (m ? `A mixer costs ${rs(50 * k)} before GST. GST is ${GST[d - 1]}%. What is the price including GST, in rupees?` : `A shirt is marked ${rs(50 * k)}. The shop gives ${aN(5 * d)}% discount. What is the selling price, in rupees?`),
+    prompt: ([k, d, m]) => (m ? `${GST[d - 1] === 5 ? "A school bag" : "A mixer"} costs ${rs(50 * k)} before GST. GST is ${GST[d - 1]}%. What is the price including GST, in rupees?` : `A shirt is marked ${rs(50 * k)}. The shop gives ${aN(5 * d)}% discount. What is the selling price, in rupees?`),
     solve: ([k, d, m]) => {
       const P = 50 * k;
       const pc = m ? GST[d - 1] : 5 * d;
@@ -1090,9 +1132,11 @@ export const B10: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "amount" ? `${s.inputs[1]}% of ₹${s.inputs[0]} = ₹${s.value}` : `₹${s.inputs[0]} ${s.op === "add" ? "+" : "−"} ₹${s.inputs[1]} = ₹${s.value}`),
     domain: [[2, 60], [1, 10], [0, 1]],
+    // GST slabs since September 2025: 5% and 18% (the 12% and 28% slabs are gone)
+    keep: ([, d, m]) => !m || GST[d - 1] === 5 || GST[d - 1] === 18,
     cap: 400,
     difficulty: ([, d, m]) => (m ? 3 : [2, 4, 5, 10].includes(d) ? 1 : 2),
-    word: ([k, d, m]) => (m ? `${nm(k)} buys a cricket bat priced ${rs(50 * k)} before tax. ${GST[d - 1]}% GST is added at the counter. How much does ${nm(k)} pay, in rupees?` : `In a festival sale, a saree marked ${rs(50 * k)} has ${5 * d}% off. How much does ${nm(k)} pay for it, in rupees?`),
+    word: ([k, d, m]) => (m ? `${nm(k)} buys ${GST[d - 1] === 5 ? "a cricket bat" : "an electric iron"} priced ${rs(50 * k)} before tax. ${GST[d - 1]}% GST is added at the counter. How much does ${nm(k)} pay, in rupees?` : `In a festival sale, a saree marked ${rs(50 * k)} has ${5 * d}% off. How much does ${nm(k)} pay for it, in rupees?`),
     teach: {
       idea: "A discount is a per cent of the marked price taken off; GST is a per cent of the price added on.",
       method: "Find the per cent of the price, then subtract it (discount) or add it (GST).",
@@ -1100,7 +1144,7 @@ export const B10: Def[] = [
         { id: "one_step", title: "One multiplication", kind: "procedural", text: ["A 20% discount leaves 80% of the price: multiply by 80 and divide by 100.", "18% GST makes 118% of the price: multiply by 118 and divide by 100."] },
       ],
     },
-    limits: "One discount or one GST rate on a price in steps of ₹50; successive discounts and finding the marked price are other families.",
+    limits: "One discount or one GST rate (5% or 18%, the slabs since 2025) on a price in steps of ₹50; successive discounts and finding the marked price are other families.",
   },
 
   // ------------------------------------------------------------------ dividing in a ratio
@@ -1229,6 +1273,8 @@ export const B10: Def[] = [
     variants: () => [],
     explain: (s) => (s.id === "common" ? `Common denominator: ${s.value}` : s.id === "flip" ? `Dividing by ${s.inputs[0]} is multiplying by its reciprocal` : `${String(s.inputs[0]).replace(/^-/, "−")} ${s.op === "add" ? "+" : s.op === "subtract" ? "−" : "×"} ${String(s.inputs[1]).startsWith("-") ? `(${String(s.inputs[1]).replace(/^-/, "−")})` : s.inputs[1]} = ${fmtQ(Number(s.value))}`),
     domain: [[-8, 8], [2, 9], [-8, 8], [2, 9], [0, 3]],
+    // dividing a positive number by a negative one has no sensible everyday form (a negative time)
+    keep: ([a, , c, , o]) => !(o === 3 && c < 0 && a > 0),
     cap: 500,
     difficulty: ([, b, , d, o]) => (o === 2 ? 1 : o === 3 ? 2 : b === d || b % d === 0 || d % b === 0 ? 2 : 3),
     word: ([a, b, c, d, o]) => rqWord(a, b, c, d, o),
@@ -1623,7 +1669,8 @@ export const B10: Def[] = [
     prompt: (p) => `A = ${pfText(p.slice(0, 4))} and B = ${pfText(p.slice(4))}. Using only these prime factorisations (no long division), decide which statement is true.`,
     solve: (p) => {
       const t = pfdTruth(p);
-      return { steps: [{ id: "compare", op: "compare", competency: PF, inputs: [PFD_WHY[t]], value: "" }], answer: order(p, 4, "pfdc").indexOf(t) };
+      const answer = order(p, 4, "pfdc").indexOf(t);
+      return { steps: [{ id: "compare", op: "compare", competency: PF, inputs: [PFD_WHY[t]], value: "" }, { id: "pick", op: "choose", competency: PF, inputs: [PFD_TEXT[t]], value: answer }], answer };
     },
     // independent: multiply the factorisations out, test divisibility by the remainder and co-primeness by Euclid's algorithm
     validate: (p, v) => {
@@ -1648,7 +1695,7 @@ export const B10: Def[] = [
       return out;
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `So the true statement is: ${s.inputs[0]}.` : String(s.inputs[0])),
     domain: [[0, 4], [0, 3], [0, 2], [0, 1], [0, 4], [0, 3], [0, 2], [0, 1]],
     keep: pfdOk,
     cap: 400,
@@ -1836,7 +1883,7 @@ export const B10: Def[] = [
     prompt: ([s]) => `Which of these numbers is the greatest? ${cmpSet(s).opts.map(inr).join(";  ")}`,
     solve: ([s]) => {
       const c = cmpSet(s);
-      return { steps: [{ id: "compare", op: "compare", competency: IIN, inputs: [inr(c.opts[c.right])], value: "" }], answer: c.right };
+      return { steps: [{ id: "compare", op: "compare", competency: IIN, inputs: [inr(c.opts[c.right])], value: "" }, { id: "pick", op: "choose", competency: IIN, inputs: [inr(c.opts[c.right])], value: c.right }], answer: c.right };
     },
     // independent: remove the commas from the shown numbers and compare their values directly
     validate: ([s], v) => {
@@ -1852,11 +1899,11 @@ export const B10: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => `The greatest is ${s.inputs[0]}: it has the most crores and lakhs.`,
+    explain: (s) => (s.id === "pick" ? `No other option is bigger, so choose ${s.inputs[0]}.` : `The greatest is ${s.inputs[0]}: it has the most crores and lakhs.`),
     domain: [[0, 699]],
     cap: 400,
     difficulty: ([s]) => (s % 3 === 0 ? 1 : 2),
-    word: ([s]) => `Four countries reported their populations: ${cmpSet(s).opts.map(inr).join(";  ")}. Which population is the largest?`,
+    word: ([s]) => `Four companies reported their yearly sales in rupees: ${cmpSet(s).opts.map(inr).join(";  ")}. Which is the largest amount of sales?`,
     teach: {
       idea: "A number with more digits is greater. With the same number of digits, compare place by place from the left: crores, then lakhs, then thousands.",
       method: "Count the digits of each number. Among those with the most digits, compare the crores, then the lakhs, and so on.",
@@ -1882,7 +1929,10 @@ export const B10: Def[] = [
       const [L, R] = cmpxText(t, a, b, c);
       return `Without working out either side, decide which sign goes in the box: ${L} □ ${R}`;
     },
-    solve: (p) => ({ steps: [{ id: "compare", op: "rewrite", competency: OPP, inputs: [CMPX_WHY[p[0]]], value: "" }], answer: order(p, 3, "cmpx").indexOf(CMPX_TRUE[p[0]]) }),
+    solve: (p) => {
+      const answer = order(p, 3, "cmpx").indexOf(CMPX_TRUE[p[0]]);
+      return { steps: [{ id: "compare", op: "rewrite", competency: OPP, inputs: [CMPX_WHY[p[0]]], value: "" }, { id: "pick", op: "choose", competency: OPP, inputs: [CMPX_SIGN[CMPX_TRUE[p[0]]]], value: answer }], answer };
+    },
     // independent: work out both sides and compare the values
     validate: (p, v) => {
       if (typeof v !== "number" || !Number.isInteger(v) || v < 0 || v > 2) return false;
@@ -1901,7 +1951,7 @@ export const B10: Def[] = [
       return [{ id: [4, 5, 6, 9].includes(t) ? "distribute-one" : t === 3 ? "plus-bracket" : "inner-sign", kind: "conceptual", competency: OPP, says, predict: o.indexOf(CMPX_SLIP[t]) }];
     },
     variants: () => [],
-    explain: (s) => String(s.inputs[0]),
+    explain: (s) => (s.id === "pick" ? `${s.inputs[0] === "<" ? "The first expression is the smaller one" : s.inputs[0] === "=" ? "The two expressions are equal" : "The first expression is the bigger one"}, so the sign between them is ${s.inputs[0]}.` : String(s.inputs[0])),
     domain: [[0, 9], [2, 99], [2, 49], [2, 9]],
     keep: cmpxOk,
     cap: 500,
@@ -1927,8 +1977,10 @@ export const B10: Def[] = [
     parse: none,
     reject: (p) => (propOk(p) ? null : "Whole numbers from 2 to 101 (up to 50 for products), or rational numbers with denominators 2 to 9; inverses only for rational numbers."),
     choices: (p) => propOpts(p).map((k) => PROP_NAME[k]),
+    // level@1: properties of rational numbers are Class 8 work; whole-number statements stay at the competency's grade
+    grade: ([, set]) => (set ? 8 : 6),
     prompt: (p) => `Which property does this statement show? ${propStatement(p).text}`,
-    solve: (p) => ({ steps: [{ id: "name", op: "classify", competency: OPP, inputs: [PROP_NAME[p[0]]], value: "" }], answer: propOpts(p).indexOf(p[0]) }),
+    solve: (p) => ({ steps: [{ id: "name", op: "classify", competency: OPP, inputs: [PROP_NAME[p[0]]], value: "" }, { id: "pick", op: "choose", competency: OPP, inputs: [PROP_NAME[p[0]]], value: propOpts(p).indexOf(p[0]) }], answer: propOpts(p).indexOf(p[0]) }),
     // independent: classify the statement from its shape (which terms swap, regroup, spread, vanish or give 0 or 1) and
     // check that both sides really are equal
     validate: (p, v) => {
@@ -1951,7 +2003,7 @@ export const B10: Def[] = [
       return [{ id: `confuse-${k}`, kind: "conceptual", competency: OPP, says, predict: propOpts(p).indexOf(PROP_CONF[k]) }];
     },
     variants: () => [],
-    explain: (s) => `The statement shows the ${String(s.inputs[0]).replace(/ \(.*\)$/, "").toLowerCase()}.`,
+    explain: (s) => (s.id === "pick" ? `That is the option to choose: ${s.inputs[0]}.` : `The statement shows the ${String(s.inputs[0]).replace(/ \(.*\)$/, "").toLowerCase()}.`),
     domain: [[0, 7], [0, 1], [0, 1], [0, 99], [0, 99], [0, 99]],
     keep: propOk,
     cap: 500,
@@ -1974,7 +2026,9 @@ export const B10: Def[] = [
     mc: true,
     // [m, a, b, c, d]: x = a/b; m 0 the additive inverse of x; 1 the multiplicative inverse; 2 x × c/d + x × (d − c)/d
     parse: none,
-    reject: (p) => (invOk(p) ? null : "a/b in lowest terms with denominators 2 to 9, and for the distributive form c/d with 0 < c < d."),
+    reject: (p) => (invOk(p, true) ? null : "a/b in lowest terms with denominators 2 to 9, and for the distributive form c/d with 0 < c < d."),
+    // level@1: inverses of rational numbers and the distributive property over them are Class 8 (Rational Numbers)
+    grade: () => 8,
     prompt: ([m, a, b, c, d]) => (m === 0 ? `What is the additive inverse of ${fr(a, b)}?` : m === 1 ? `What is the multiplicative inverse (reciprocal) of ${fr(a, b)}?` : `Use the distributive property to work out ${fr(a, b)} × ${c}/${d} + ${fr(a, b, true)} × ${d - c}/${d}. (A fraction is fine.)`),
     solve: ([m, a, b, c, d]) => {
       if (m === 0) return { steps: [{ id: "additive", op: "opposite", competency: RQ, inputs: [`${a}/${b}`], value: -a / b }], answer: -a / b };
@@ -2023,7 +2077,7 @@ export const B10: Def[] = [
           ? a > 0
             ? `A recipe is scaled by multiplying every amount by ${fr(a, b)}. By what number must the scaled amounts be multiplied to get back the original amounts exactly? (A fraction is fine.)`
             : `A number machine multiplies every number put into it by ${fr(a, b)}. By what number must its output be multiplied to get back the number that was put in? (A fraction is fine.)`
-          : `A tank's water level changes by ${fr(a, b)} m every hour (a fall is negative). The pump runs for ${c}/${d} of an hour in the morning and ${d - c}/${d} of an hour in the evening. What is the total change in the level, in m?`,
+          : `While the pump runs, the water level in a tank changes by ${fr(a, b)} cm every hour (a fall is negative). The pump runs for ${c}/${d} of an hour in the morning and ${d - c}/${d} of an hour in the evening. What is the total change in the level, in cm?`,
     teach: {
       idea: "The additive inverse of x is −x, because x + (−x) = 0. The multiplicative inverse of a/b is b/a, because a/b × b/a = 1. The distributive property x × y + x × z = x × (y + z) can make a calculation easy.",
       method: "Additive inverse: change the sign. Multiplicative inverse: turn the fraction upside down and keep the sign. For x × y + x × z, add y and z first and multiply once.",
@@ -2031,7 +2085,7 @@ export const B10: Def[] = [
         { id: "check", title: "Check by combining", kind: "procedural", text: ["Add your additive inverse to the number: you must get 0.", "Multiply your multiplicative inverse by the number: you must get 1."] },
       ],
     },
-    limits: "Proper and improper fractions with denominators up to 9; inverses of mixed numbers and longer expressions are other families.",
+    limits: "Proper and improper fractions with denominators up to 9 (the distributive form splits 1 into halves, thirds or quarters); inverses of mixed numbers and longer expressions are other families.",
   },
 
   // ------------------------------------------------------------------ sums of two cubes in two ways
@@ -2308,10 +2362,14 @@ export const B10: Def[] = [
     keep: ([q, d]) => Math.abs(q) >= 2 && Math.abs(d) >= 2 && (q < 0 || d < 0),
     cap: 400,
     difficulty: ([q, d]) => (Math.abs(q * d) > 100 ? 3 : q < 0 && d < 0 ? 1 : 2),
-    word: ([q, d]) =>
-      d > 0
-        ? `Over ${d} days the money in ${nm(d - q)}'s savings box changed by ${q * d < 0 ? "−" : ""}₹${Math.abs(q * d)}, by the same amount each day. What was the change each day, in rupees? (Money added is positive, money taken out negative.)`
-        : `${-d} days ago there was ₹${Math.abs(q * d)} ${q * d > 0 ? "more" : "less"} in ${nm(q - d)}'s savings box than there is now, and the money changed by the same amount each day. What was the change each day, in rupees? (Money added is positive, money taken out negative.)`,
+    // forward in time over |d| days: the total change is q × |d| (a negative divisor is the same question looked at backwards)
+    word: ([q, d]) => {
+      const who = nm(d > 0 ? d - q : q - d);
+      const days = Math.abs(d);
+      return q < 0
+        ? `${who} takes the same amount out of a savings box every day. In ${days} days the money in the box goes down by ₹${-q * days}. What is the change in the money each day, in rupees? (Money taken out is negative.)`
+        : `${who} puts the same amount into a savings box every day. In ${days} days the money in the box goes up by ₹${q * days}. What is the change in the money each day, in rupees?`;
+    },
     teach: {
       idea: "Division undoes multiplication, so the sign rules are the same: same signs give a positive quotient, different signs a negative one.",
       method: "Divide the sizes, then decide the sign. Check by multiplying the answer by the divisor.",
@@ -2393,7 +2451,9 @@ export const B10: Def[] = [
     prompt: ([a, b, c, d]) => `Compare ${fr(a, b)} and ${fr(c, d)}. Which statement is true?`,
     solve: ([a, b, c, d]) => {
       const t = a * d > b * c ? 0 : a * d < b * c ? 1 : 2;
-      return { steps: [{ id: "common", op: "compare", competency: RQ, inputs: [`${n_(a * d)}/${b * d}`, `${n_(c * b)}/${b * d}`], value: "" }], answer: order([a, b, c, d], 3, "rcq").indexOf(t) };
+      const answer = order([a, b, c, d], 3, "rcq").indexOf(t);
+      const why = t === 2 ? "The numerators are equal, so the numbers are equal" : `${n_(t === 0 ? a * d : c * b)} is greater than ${n_(t === 0 ? c * b : a * d)}, so the greater numerator gives the greater number`;
+      return { steps: [{ id: "common", op: "compare", competency: RQ, inputs: [`${n_(a * d)}/${b * d}`, `${n_(c * b)}/${b * d}`], value: "" }, { id: "pick", op: "choose", competency: RQ, inputs: [rcqChoices([a, b, c, d])[answer], why], value: answer }], answer };
     },
     // independent: compare the decimal values
     validate: ([a, b, c, d], v) => {
@@ -2413,7 +2473,7 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => `With a common denominator: ${String(s.inputs[0])} and ${String(s.inputs[1])}; compare the numerators.`,
+    explain: (s) => (s.id === "pick" ? `${s.inputs[1]}: ${s.inputs[0]}.` : `With a common denominator: ${String(s.inputs[0])} and ${String(s.inputs[1])}; compare the numerators.`),
     domain: [[-9, 9], [2, 9], [-18, 18], [2, 18]],
     keep: rcqOk,
     cap: 450,
@@ -2425,7 +2485,7 @@ export const B10: Def[] = [
         : `In a number-line game on the school playground, ${nm(b + d)} stands at ${fr(a, b)} and ${nm(b + d + 1)} stands at ${fr(c, d)}. Comparing the two numbers, which statement is true?`,
     teach: {
       idea: "On the number line, the number to the right is greater. Every positive number is greater than every negative number; between two negatives, the one closer to 0 is greater.",
-      method: "Write both with the same positive denominator and compare the numerators (−8/12 < −3/12 because −8 < −3).",
+      method: "Write both with the same positive denominator and compare the numerators: the greater numerator gives the greater number, and for negative numerators the one closer to zero is greater.",
       alternatives: [
         { id: "cross", title: "Cross-multiply", kind: "procedural", text: ["With positive denominators, a/b > c/d exactly when a × d > c × b.", "For −2/3 and −3/5: −2 × 5 = −10 and −3 × 3 = −9; −10 < −9, so −2/3 < −3/5."] },
       ],
@@ -2635,6 +2695,7 @@ export const B10: Def[] = [
       steps: [
         ...(m === 3 ? [{ id: "common", op: "factorise", competency: FACT, inputs: [p], value: `${p}(x² − ${q * q})` } as Step] : []),
         { id: "identity", op: "factorise", competency: "MATH.algebra.identities", inputs: [m, p, q, k], value: fsqForm(m, p, q, k) },
+        { id: "read", op: "read", competency: FACT, inputs: [m, p, q, k], value: `(${p}, ${q})` },
       ],
       answer: `(${p}, ${q})`,
     }),
@@ -2658,10 +2719,19 @@ export const B10: Def[] = [
       ]),
     distractors: ([, p, q]) => [`(${q}, ${p})`, `(${p}, ${2 * q})`, `(${p + 1}, ${q})`],
     variants: () => [],
-    explain: (s) => (s.id === "common" ? `Take out the common factor: ${s.value}` : `Using the identity: ${s.value}`),
+    explain: (s) => {
+      if (s.id === "common") return `Take out the common factor: ${s.value}`;
+      if (s.id !== "read") return `Using the identity: ${s.value}`;
+      const [m, p, q, k] = s.inputs as number[];
+      if (m === 3) return `The number outside the brackets is c = ${p} and the number with x in each bracket is b = ${q}, so type ${s.value}.`;
+      const ones = [p === 1 && "x on its own means 1x", k && q === 1 && "y on its own means 1y"].filter(Boolean).join(", and ");
+      return `The number with x is a = ${p} and the ${k ? "number with y" : "number on its own"} is b = ${q}${ones ? ` (${ones})` : ""}, so type ${s.value}.`;
+    },
     domain: [[0, 3], [1, 12], [1, 12], [0, 1]],
     keep: fsqOk,
     cap: 450,
+    // level@1 (grade7-teaching@1): a learner below Grade 7 is not asked this family's problems
+    grade: () => 7,
     difficulty: ([m, p]) => (m === 0 && p <= 5 ? 1 : m === 3 ? 3 : 2),
     word: ([m, p, q, k]) => {
       const y = k ? "y" : "";
@@ -2724,7 +2794,7 @@ export const B10: Def[] = [
     grade: () => 9,
     difficulty: ([m, a]) => (m === 2 ? 3 : a === 1 ? 1 : 2),
     teach: {
-      idea: "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²), and a³ + b³ + c³ − 3abc = (a + b + c)(a² + b² + c² − ab − bc − ca).",
+      idea: "a³ + b³ = (a + b)(a² − ab + b²), a³ − b³ = (a − b)(a² + ab + b²), and a³ + b³ + c³ minus three times abc = (a + b + c)(a² + b² + c² − ab − bc − ca).",
       method: "Write each cube term as (something)³ to find a, b (and c), then fill the second bracket from the identity.",
       alternatives: [
         { id: "check", title: "Check by multiplying", kind: "procedural", text: ["Multiply the two brackets out: the x² and x terms must cancel, leaving only the cubes.", "If a middle term is left over, the number in the box is wrong."] },
@@ -2748,11 +2818,12 @@ export const B10: Def[] = [
         : `Factorise ${grpPoly(p, q, r, s)} by grouping the first two terms and the last two terms. One factor is (${lin(p, s)}). Write the other as (ax + b) and type (a, b).`,
     solve: ([m, p, q, r, s]) =>
       m === 0
-        ? { steps: [{ id: "hcf", op: "hcf", competency: FACT, inputs: [p * q, p * r], value: `${p}xy` }], answer: `(${p}, ${q}, ${r})` }
+        ? { steps: [{ id: "hcf", op: "hcf", competency: FACT, inputs: [p * q, p * r], value: `${p}xy` }, { id: "read", op: "read", competency: FACT, inputs: [p, q, r, s], value: `(${p}, ${q}, ${r})` }], answer: `(${p}, ${q}, ${r})` }
         : {
             steps: [
               { id: "group", op: "factorise", competency: FACT, inputs: [q, r, p, s], value: `${q === 1 ? "" : q}x(${lin(p, s)}) ${r < 0 ? "−" : "+"} ${Math.abs(r)}(${lin(p, s)})` },
               { id: "common", op: "factorise", competency: FACT, inputs: [q, r, p, s], value: `(${lin(q, r)})(${lin(p, s)})` },
+              { id: "other", op: "read", competency: FACT, inputs: [q, r], value: tup([q, r]) },
             ],
             answer: tup([q, r]),
           },
@@ -2774,10 +2845,19 @@ export const B10: Def[] = [
         ? [{ id: "only-letters", kind: "procedural", competency: FACT, says: `Only xy was taken out. The numbers ${p * q} and ${p * r} also have the common factor ${p}; the highest common factor includes it.`, predict: `(1, ${p * q}, ${p * r})` }]
         : keepBugs([r < 0 && { id: "second-group-sign", kind: "procedural", competency: FACT, says: `When −${-r} is taken out of the last two terms, the signs inside the bracket change: ${r * p}x ${r * s < 0 ? "−" : "+"} ${Math.abs(r * s)} = −${-r}(${lin(p, s)}).`, predict: tup([q, -r]) }]),
     variants: () => [],
-    explain: (s) => (s.id === "hcf" ? `The highest common factor of the two terms is ${s.value}` : s.id === "group" ? `Group in pairs: ${s.value}` : `Take out the common bracket: ${s.value}`),
+    explain: (s) => {
+      if (s.id === "hcf") return `The highest common factor of the two terms is ${s.value}`;
+      if (s.id === "group") return `Group in pairs: ${s.value}`;
+      if (s.id === "common") return `Take out the common bracket: ${s.value}`;
+      const [a, b, c, d] = s.inputs as number[];
+      if (s.id === "other") return `The other factor is (${lin(a, b)}): a = ${n_(a)} and b = ${n_(b)}, so type ${s.value}.`;
+      return `Dividing each term by ${a}xy leaves ${b === 1 ? "" : b}x and ${c === 1 ? "" : c}y, so it is ${a}xy(${b === 1 ? "" : b}x ${d ? "−" : "+"} ${c === 1 ? "" : c}y) and you type ${s.value}.`;
+    },
     domain: [[0, 1], [1, 9], [1, 9], [-9, 9], [-9, 9]],
     keep: fgrpOk,
     cap: 400,
+    // level@1 (grade7-teaching@1): a learner below Grade 8 is not asked this family's problems
+    grade: () => 8,
     difficulty: ([m, , , r, s]) => (m === 0 ? 1 : r < 0 || s < 0 ? 3 : 2),
     teach: {
       idea: "Factorising undoes expanding: a common factor of every term can be taken outside a bracket, and after grouping, a common bracket can be taken out too.",
@@ -3257,10 +3337,11 @@ function propOpts(p: number[]) {
   return order(p, 4, "prop").map((i) => four[i]);
 }
 
-// ajinv
-function invOk([m, a, b, c, d]: number[]) {
+// ajinv: keep new pools age-appropriate without rejecting questions served before the narrowing.
+function invOk([m, a, b, c, d]: number[], historical = false) {
   if (a === 0 || Math.abs(a) > 9 || b < 2 || b > 9 || gcd(Math.abs(a), b) !== 1) return false;
-  return m < 2 ? m >= 0 && c === 1 && d === 2 : m === 2 && c >= 1 && c < d && d <= 9;
+  // the distributive form splits an hour into parts a child meets: 1/2, 1/3 + 2/3, 1/4 + 3/4 (both parts in lowest terms)
+  return m < 2 ? m >= 0 && c === 1 && d === 2 : m === 2 && c >= 1 && c < d && (historical ? d <= 9 : d <= 4 && gcd(c, d) === 1);
 }
 
 // ajtaxi: N = a³ + b³ = c³ + d³
@@ -3390,13 +3471,16 @@ const ZCHK_TEXT = ["Both checks hold, so these can be the zeros", "Only the sum 
 function rqWord(a: number, b: number, c: number, d: number, o: number) {
   const x = fr(a, b);
   const y = fr(c, d);
-  if (o === 0) return `At 6 a.m. the temperature on a hill in Ooty was ${x} °C. By 9 a.m. it had changed by ${y} °C (a fall is negative). What was the temperature at 9 a.m., in °C?`;
-  if (o === 1) return `A thermometer read ${x} °C at noon and ${y} °C at midnight. How many degrees warmer was it at noon than at midnight? (If it was colder at noon, the answer is negative.)`;
+  // temperatures are read in halves, quarters or fifths of a degree; other fractions use a number-line game
+  const temp = [2, 4, 5].includes(b) && [2, 4, 5].includes(d);
+  if (o === 0) return temp ? `At 6 a.m. the temperature on a hill in Ooty was ${x} °C. By 9 a.m. it had changed by ${y} °C (a fall is negative). What was the temperature at 9 a.m., in °C?` : `In a number-line game, ${nm(b + d)} stands at ${x} and then moves by ${y} (a move to the left is negative). At what number does ${nm(b + d)} end up?`;
+  if (o === 1) return temp ? `A thermometer read ${x} °C at noon and ${y} °C at midnight. How many degrees warmer was it at noon than at midnight? (If it was colder at noon, the answer is negative.)` : `In a number-line game, ${nm(b + d)} stands at ${x} and ${nm(b + d + 1)} stands at ${y}. How far to the right of ${nm(b + d + 1)} is ${nm(b + d)}? (If ${nm(b + d)} is to the left, the answer is negative.)`;
   if (o === 2) {
     if (a / b < 0 && c / d < 0) return `A tank's water level changes steadily by ${x} m every hour (a fall is negative). Compared with now, how much higher was the level ${-c}/${d} of an hour ago, in m? (Lower is negative.)`;
     const [rate, time] = a / b < 0 ? [x, `${c}/${d}`] : [y, `${a}/${b}`];
     return `A tank's water level changes steadily by ${rate} m every hour (a fall is negative). What is the change in the level after ${time} of an hour, in m?`;
   }
   if (c / d > 0) return `A tank's water level changed by ${x} m in ${y} of an hour, at a steady rate (a fall is negative). What was the change per hour, in m?`;
-  return `A tank's water level changes steadily by ${y} m every hour (a fall is negative). How many hours from now will the level be ${x} m from its present height? (A time in the past is negative, and a level below the present height is negative.)`;
+  // a negative divisor with a negative dividend (the keep drops a positive dividend): a steady fall, how long it takes
+  return `A tank's water level falls steadily by ${fr(-c, d)} m every hour. How many hours does it take to fall by ${fr(-a, b)} m? (A fraction is fine.)`;
 }

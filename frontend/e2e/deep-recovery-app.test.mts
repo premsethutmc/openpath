@@ -111,7 +111,7 @@ async function afterHelpScreens(skill: string) {
   const yearNote = (await page.locator("[data-after-help-count]").count()) ? (await page.locator("[data-after-help-count]").innerText()).trim() : null;
   assert.equal(chip, "Solved independently after help", `module status chip for ${skill}`);
   assert.ok(note && /straight after help/.test(note), `the help and the unaided success both stated: ${note}`);
-  assert.ok(yearNote && /solved independently after help/.test(yearNote), `year page: ${yearNote}`);
+  assert.ok(yearNote && /solved independently after help/i.test(yearNote), `year page: ${yearNote}`);
   return { chip, note, yearNote };
 }
 interface Step { phase: string; qid?: string; right?: boolean }
