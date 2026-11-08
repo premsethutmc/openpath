@@ -3,7 +3,7 @@
 Read this file first; open other files only as the task needs them. Keep it under ~50 lines and update it at
 each milestone.
 
-Updated: 2026-11-08
+Updated: 2026-11-08 (b20ec49)
 
 ## Rules (product owner)
 - No merge or deploy without the owner's explicit approval. PRs are drafts unless the owner says otherwise.
@@ -23,19 +23,29 @@ Updated: 2026-11-08
 - Details: `docs/milestones/GRADE7_COVERAGE.md`.
 
 ## Open defects
-- Grade 7 browser journeys (`frontend/e2e/grade7-*.test.mjs`) not yet green in CI. First run (e926097) stopped
-  at a curriculum-dashboard timing race (`curriculum.test.mjs` coverage meter); fixed by waiting for the meter.
+- (resolved) Grade 7 browser journeys green in CI at b20ec49: entry, session, practice, completion; all 11 browser
+  suites pass (curriculum timing race fixed by waiting for the meter).
 - Nine Grade 7 competencies graded 8–11 in the graph; some outcomes map to Grade 1–4 content.
 - Some mistake explanations carry no predicted answer (never diagnosable).
 - MC options not shuffled in older families (deferred by owner).
 - All content provisional: no educator review yet. No real learners yet. Real-device audio unverified.
 
+## All-grades gap report (grade-gap@1, run 42439650121, b20ec49)
+Synthetic learner, behaviour only. Unmapped outcomes: 0 everywhere. Format: failed / untaught-after-mistakes.
+- Failed: CBSE 1, 2 `reasoning.estimate-check` (ends guided); CBSE 3 `equivalent-fractions` (ends transfer);
+  CBSE 9 (1, name not captured); TN 6 `euclid-algorithm` (ends guided).
+- Untaught (no checked general explanation): CBSE 12: 11, 9: 10, 8: 9, 4: 7, 6: 7, 11: 6, 3: 5, 7: 5, 5: 4, 10: 4,
+  2: 3, 1: 2; TN 11: 11, 10: 10, 12: 9, 4: 6, 6: 6, 8: 6, 9: 6, 5: 2, 7: 2.
+- TN 1–3 releases hold only 3 outcomes each: textbook not yet ingested (the largest real gap; the report can't see it).
+- Not measured: lesson level and wording (the Grade 7 review passes found most defects there).
+
 ## How to test
-- Fast, local: `bun test packages/learning/src`; `frontend/src/year/grade7-coverage.test.ts`.
+- Fast, local: `bun test packages/learning/src`; `frontend/src/year/grade7-coverage.test.ts`;
+  one grade: `GRADE=8 BOARD=tn bun frontend/scripts/grade-gap.mts`. All grades: workflow "Grade gap report".
 - Full: workflow "My Learning Year" (PR to the base branch, or manual run once `workflow_dispatch` is on main).
   Every browser suite runs even if one fails; read the `summary.json` in the `my-learning-year-screens`
   artifact (also shown in the job summary) instead of the full log.
 
 ## Next
-1. Grade 7 browser journeys green; then the owner decides on review/merge of #117's branch.
+1. Owner decides on review/merge of #117's branch (Grade 7 green).
 2. Fix open Grade 7 defects above, then the next grade/board per the owner.
