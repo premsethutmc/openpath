@@ -1,0 +1,151 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "visibleLessons": [
+        {
+          "title": "SIMPLIFY, CANCEL H, LET H → 0 · 1 OF 4",
+          "screens": [
+            "SIMPLIFY, CANCEL H, LET H → 0 · 1 OF 4\n\nWhy the square gives 2x\n\nFirst look at the x² part of our function. At x + h, the square means (x + h)(x + h). Multiply each term in the first bracket by each term in the second. The two cross terms are xh and hx; together they give 2xh.\n\nSubtract the original x², then divide the change by h. For h ≠ 0 this is 2x + h. As h approaches zero, the slope approaches 2x. That is why the derivative of x² is 2x.\n\n(x + h)² = x² + xh + hx + h² = x² + 2xh + h²\n[(x + h)² − x²]/h = (2xh + h²)/h = 2x + h (h ≠ 0)\nlim (h → 0) (2x + h) = 2x",
+            "SIMPLIFY, CANCEL H, LET H → 0 · 2 OF 4\n\nReplace every x, then expand\n\nNow use the whole function f(x) = x² − 5x − 4. Replace every x by x + h, including the x in the linear term. The constant stays the same in f(x + h).\n\nf(x + h) = (x + h)² − 5(x + h) − 4\nf(x + h) = x² + 2xh + h² − 5x − 5h − 4",
+            "SIMPLIFY, CANCEL H, LET H → 0 · 3 OF 4\n\nSubtract the whole original function\n\nThe brackets matter: subtracting f(x) reverses the sign of every term in it. The x² terms, the original linear terms and the constants cancel. Only terms containing h remain.\n\nf(x + h) − f(x) = (x² + 2xh + h² − 5x − 5h − 4) − (x² − 5x − 4)\n= 2xh + h² − 5h\n= h(2x + h − 5)",
+            "SIMPLIFY, CANCEL H, LET H → 0 · 4 OF 4\n\nCancel first, then take the limit\n\nThe chord slope is change in f divided by change in x, which is h. While h is non-zero, cancel the common factor h. Putting h = 0 into the original quotient would give 0/0, which is undefined.\n\nNow take the limit of the simplified expression. The terms containing h tend to zero. This gives the tangent slope at x, not the height f(x). The constant cancelled; it contributes nothing to the derivative.\n\n[f(x + h) − f(x)]/h = h(2x + h − 5)/h = 2x + h − 5 (h ≠ 0)\nf′(x) = lim (h → 0) (2x + h − 5) = 2x − 5"
+          ]
+        }
+      ],
+      "case": "calculus teaching: derivative",
+      "competency": "MATH.calculus.derivatives",
+      "start": "gen:aqfp:0,2,-5,-4",
+      "trail": [
+        {
+          "kind": "diagnostic",
+          "qid": "gen:aqfp:1,6,0,0",
+          "right": false
+        },
+        {
+          "kind": "lesson",
+          "strategy": "expand_cancel",
+          "review": "pending_review"
+        },
+        {
+          "kind": "guided",
+          "qid": "gen:aqfp:2,1,3,0",
+          "right": true
+        },
+        {
+          "kind": "check",
+          "qid": "gen:aqfp:0,2,4,-4:mc",
+          "right": true
+        }
+      ],
+      "taught": "expand_cancel",
+      "recheck": "gen:aqfp:0,2,4,-4:mc",
+      "delayed": "gen:aqfp:1,1,0,0",
+      "retaught": [],
+      "afterLapse": "gen:aqvel:0,1,2,2",
+      "savedEvents": 18,
+      "reloaded": true,
+      "educatorApproved": false
+    },
+    {
+      "visibleLessons": [
+        {
+          "title": "WHY 2X DX BECOMES DU · 1 OF 5",
+          "screens": [
+            "WHY 2X DX BECOMES DU · 1 OF 5\n\nChoose the inside expression\n\nWe want ∫ from x = 0 to x = 1 of 2x(x² + 1)² dx. The bracket is repeated, so name it u = x² + 1. This makes (x² + 1)² become u². We must also account for 2x dx and the limits.\n\nu = x² + 1\n(x² + 1)² = u²",
+            "WHY 2X DX BECOMES DU · 2 OF 5\n\nWhat du means\n\nThe derivative of x² + 1 is 2x: expanding (x + h)² gives x² + 2xh + h²; subtracting x² and dividing by h gives 2x + h, whose limit is 2x. The constant 1 cancels.\n\nWe write du/dx = 2x, or du = 2x dx. This differential notation records the rate of change used in substitution. It does not say that a finite change in u is exactly 2x times a finite change in x; that finite change also has an h² term.\n\n[(x + h)² + 1 − (x² + 1)]/h = 2x + h (h ≠ 0)\ndu/dx = 2x; du = 2x dx",
+            "WHY 2X DX BECOMES DU · 3 OF 5\n\nReplace the whole matching factor\n\nGroup the integrand as (x² + 1)² × (2x dx). The first part becomes u²; the whole second part becomes du. No extra factor 2 remains to divide by.\n\nThe simpler integral has antiderivative u³/3, because its derivative is u². For an indefinite integral, write (x² + 1)³/3 + C. Here we have a definite integral, so we will evaluate between the new limits.\n\n(x² + 1)² (2x dx) → u² du\n∫ u² du = u³/3 + C",
+            "WHY 2X DX BECOMES DU · 4 OF 5\n\nChange both endpoints\n\nThe limits 0 and 1 describe x. Our new integral uses u, so substitute each endpoint into u = x² + 1. The lower u limit is 1 and the upper u limit is 2.\n\nKeep one variable throughout the evaluation: use u limits with u³/3. Alternatively, substitute back to x before using x limits; never mix the two.\n\nx = 0 → u = 0² + 1 = 1\nx = 1 → u = 1² + 1 = 2\n∫ (x = 0 to 1) 2x(x² + 1)² dx = ∫ (u = 1 to 2) u² du",
+            "WHY 2X DX BECOMES DU · 5 OF 5\n\nUpper value minus lower value\n\nEvaluate u³/3 at the upper limit, then subtract its value at the lower limit. A cube means repeated multiplication: 2³ = 2 × 2 × 2 = 8. The integration constant cancels in this difference.\n\nCheck the result: the original integrand is non-negative between 0 and 1, so a positive answer is sensible. This is a useful sign check, not a proof of the answer.\n\n[u³/3] from 1 to 2 = 2³/3 − 1³/3\n= (8 − 1)/3 = 7/3"
+          ]
+        }
+      ],
+      "case": "calculus teaching: substitution du",
+      "competency": "MATH.calculus.integration-methods",
+      "start": "gen:subst:2,3,2,3",
+      "trail": [
+        {
+          "kind": "diagnostic",
+          "qid": "gen:subst:0,1,1,1",
+          "right": false
+        },
+        {
+          "kind": "lesson",
+          "strategy": "why_du",
+          "review": "pending_review"
+        },
+        {
+          "kind": "guided",
+          "qid": "gen:subst:0,1,2,2",
+          "right": true
+        },
+        {
+          "kind": "check",
+          "qid": "gen:subst:0,1,3,1",
+          "right": true
+        }
+      ],
+      "taught": "why_du",
+      "recheck": "gen:subst:0,1,3,1",
+      "delayed": "gen:subst:0,1,2,3",
+      "retaught": [],
+      "afterLapse": "gen:subst:1,2,3,2",
+      "savedEvents": 24,
+      "reloaded": true,
+      "educatorApproved": false
+    },
+    {
+      "visibleLessons": [
+        {
+          "title": "MAKE A LITTLE TABLE OF LIMITS · 1 OF 6",
+          "screens": [
+            "MAKE A LITTLE TABLE OF LIMITS · 1 OF 6\n\nChoose the inside expression\n\nWe want ∫ from x = 0 to x = 1 of 2x(x² + 1)² dx. The bracket is repeated, so name it u = x² + 1. This makes (x² + 1)² become u². We must also account for 2x dx and the limits.\n\nu = x² + 1\n(x² + 1)² = u²",
+            "MAKE A LITTLE TABLE OF LIMITS · 2 OF 6\n\nWhat du means\n\nThe derivative of x² + 1 is 2x: expanding (x + h)² gives x² + 2xh + h²; subtracting x² and dividing by h gives 2x + h, whose limit is 2x. The constant 1 cancels.\n\nWe write du/dx = 2x, or du = 2x dx. This differential notation records the rate of change used in substitution. It does not say that a finite change in u is exactly 2x times a finite change in x; that finite change also has an h² term.\n\n[(x + h)² + 1 − (x² + 1)]/h = 2x + h (h ≠ 0)\ndu/dx = 2x; du = 2x dx",
+            "MAKE A LITTLE TABLE OF LIMITS · 3 OF 6\n\nReplace the whole matching factor\n\nGroup the integrand as (x² + 1)² × (2x dx). The first part becomes u²; the whole second part becomes du. No extra factor 2 remains to divide by.\n\nThe simpler integral has antiderivative u³/3, because its derivative is u². For an indefinite integral, write (x² + 1)³/3 + C. Here we have a definite integral, so we will evaluate between the new limits.\n\n(x² + 1)² (2x dx) → u² du\n∫ u² du = u³/3 + C",
+            "MAKE A LITTLE TABLE OF LIMITS · 4 OF 6\n\nChange both endpoints\n\nThe limits 0 and 1 describe x. Our new integral uses u, so substitute each endpoint into u = x² + 1. The lower u limit is 1 and the upper u limit is 2.\n\nKeep one variable throughout the evaluation: use u limits with u³/3. Alternatively, substitute back to x before using x limits; never mix the two.\n\nx = 0 → u = 0² + 1 = 1\nx = 1 → u = 1² + 1 = 2\n∫ (x = 0 to 1) 2x(x² + 1)² dx = ∫ (u = 1 to 2) u² du",
+            "MAKE A LITTLE TABLE OF LIMITS · 5 OF 6\n\nUpper value minus lower value\n\nEvaluate u³/3 at the upper limit, then subtract its value at the lower limit. A cube means repeated multiplication: 2³ = 2 × 2 × 2 = 8. The integration constant cancels in this difference.\n\nCheck the result: the original integrand is non-negative between 0 and 1, so a positive answer is sensible. This is a useful sign check, not a proof of the answer.\n\n[u³/3] from 1 to 2 = 2³/3 − 1³/3\n= (8 − 1)/3 = 7/3",
+            "MAKE A LITTLE TABLE OF LIMITS · 6 OF 6\n\nx row, u row\n\nWrite two rows, x and u. Under x put the two limits; under u put x² + c for each. Then integrate in u between the u values.\n\n∫ from 0 to 1 of 2x(x² + 2) dx = ?\nLet u = x² + 2: x = 0 gives u = 2, x = 1 gives u = 3\n2x dx = du, so the integral is ∫ u¹ du = u² ⁄ 2\n3² = 9\n2² = 4\nBetween u = 2 and u = 3: 5/2"
+          ]
+        }
+      ],
+      "case": "calculus teaching: substitution limits",
+      "competency": "MATH.calculus.integration-methods",
+      "start": "gen:subst:2,3,2,3",
+      "trail": [
+        {
+          "kind": "diagnostic",
+          "qid": "gen:subst:0,1,1,1",
+          "right": false
+        },
+        {
+          "kind": "probe",
+          "qid": "gen:pow:2,3",
+          "right": true
+        },
+        {
+          "kind": "lesson",
+          "strategy": "limits_table",
+          "review": "pending_review"
+        },
+        {
+          "kind": "guided",
+          "qid": "gen:subst:0,2,4,2",
+          "right": true
+        },
+        {
+          "kind": "check",
+          "qid": "gen:subst:0,3,1,2:mc",
+          "right": true
+        }
+      ],
+      "taught": "limits_table",
+      "recheck": "gen:subst:0,3,1,2:mc",
+      "delayed": "gen:subst:0,1,2,3",
+      "retaught": [],
+      "afterLapse": "gen:subst:1,2,3,2",
+      "savedEvents": 25,
+      "reloaded": true,
+      "educatorApproved": false
+    }
+  ]
+}

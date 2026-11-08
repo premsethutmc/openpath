@@ -1219,33 +1219,69 @@
    "title": "Integrate by substitution",
    "chapter": [
     {
-     "title": "Spot u and du",
+     "title": "Choose the inside expression",
      "text": [
-      "In ∫ 2x(x² + 1)² dx, call the inside of the bracket u = x² + 1. Its derivative, 2x, is already there: du = 2x dx. So the integral is ∫ u² du."
+      "We want ∫ from x = 0 to x = 1 of 2x(x² + 1)² dx. The bracket is repeated, so name it u = x² + 1. This makes (x² + 1)² become u². We must also account for 2x dx and the limits."
      ],
      "math": [
-      "u = x² + 1, du = 2x dx",
-      "∫ 2x(x² + 1)² dx = ∫ u² du = u³ ⁄ 3 + C"
+      "u = x² + 1",
+      "(x² + 1)² = u²"
      ],
-     "role": "concept",
-     "instance": "gen:subst:0,1,1,2"
+     "instance": "gen:subst:0,1,1,2",
+     "role": "concept"
     },
     {
-     "title": "Change the limits",
+     "title": "What du means",
      "text": [
-      "With limits, change them too: put each x limit into u = x² + 1, and integrate between those u values. You never go back to x."
+      "The derivative of x² + 1 is 2x: expanding (x + h)² gives x² + 2xh + h²; subtracting x² and dividing by h gives 2x + h, whose limit is 2x. The constant 1 cancels.",
+      "We write du/dx = 2x, or du = 2x dx. This differential notation records the rate of change used in substitution. It does not say that a finite change in u is exactly 2x times a finite change in x; that finite change also has an h² term."
      ],
-     "tip": "Using the x limits for u is the most common slip.",
      "math": [
-      "∫ from 0 to 1 of 2x(x² + 1)² dx = ?",
-      "Let u = x² + 1: x = 0 gives u = 1, x = 1 gives u = 2",
-      "2x dx = du, so the integral is ∫ u² du = u³ ⁄ 3",
-      "2³ = 8",
-      "1³ = 1",
-      "Between u = 1 and u = 2: 7/3"
+      "[(x + h)² + 1 − (x² + 1)]/h = 2x + h (h ≠ 0)",
+      "du/dx = 2x; du = 2x dx"
      ],
-     "role": "concept",
-     "instance": "gen:subst:0,1,1,2"
+     "instance": "gen:subst:0,1,1,2",
+     "role": "concept"
+    },
+    {
+     "title": "Replace the whole matching factor",
+     "text": [
+      "Group the integrand as (x² + 1)² × (2x dx). The first part becomes u²; the whole second part becomes du. No extra factor 2 remains to divide by.",
+      "The simpler integral has antiderivative u³/3, because its derivative is u². For an indefinite integral, write (x² + 1)³/3 + C. Here we have a definite integral, so we will evaluate between the new limits."
+     ],
+     "math": [
+      "(x² + 1)² (2x dx) → u² du",
+      "∫ u² du = u³/3 + C"
+     ],
+     "instance": "gen:subst:0,1,1,2",
+     "role": "concept"
+    },
+    {
+     "title": "Change both endpoints",
+     "text": [
+      "The limits 0 and 1 describe x. Our new integral uses u, so substitute each endpoint into u = x² + 1. The lower u limit is 1 and the upper u limit is 2.",
+      "Keep one variable throughout the evaluation: use u limits with u³/3. Alternatively, substitute back to x before using x limits; never mix the two."
+     ],
+     "math": [
+      "x = 0 → u = 0² + 1 = 1",
+      "x = 1 → u = 1² + 1 = 2",
+      "∫ (x = 0 to 1) 2x(x² + 1)² dx = ∫ (u = 1 to 2) u² du"
+     ],
+     "instance": "gen:subst:0,1,1,2",
+     "role": "concept"
+    },
+    {
+     "title": "Upper value minus lower value",
+     "text": [
+      "Evaluate u³/3 at the upper limit, then subtract its value at the lower limit. A cube means repeated multiplication: 2³ = 2 × 2 × 2 = 8. The integration constant cancels in this difference.",
+      "Check the result: the original integrand is non-negative between 0 and 1, so a positive answer is sensible. This is a useful sign check, not a proof of the answer."
+     ],
+     "math": [
+      "[u³/3] from 1 to 2 = 2³/3 − 1³/3",
+      "= (8 − 1)/3 = 7/3"
+     ],
+     "instance": "gen:subst:0,1,1,2",
+     "role": "concept"
     },
     {
      "title": "Integration using trigonometric identities and substitution",
@@ -1361,12 +1397,69 @@
      "needs": [],
      "screens": [
       {
-       "title": "Nothing left to divide by",
+       "title": "Choose the inside expression",
        "text": [
-        "du ⁄ dx = 2x, so a small change dx in x changes u by 2x dx. The 2x in the integral is exactly what turns dx into du: there is no extra 2 to divide by."
+        "We want ∫ from x = 0 to x = 1 of 2x(x² + 1)² dx. The bracket is repeated, so name it u = x² + 1. This makes (x² + 1)² become u². We must also account for 2x dx and the limits."
        ],
-       "role": "strategy",
-       "instance": "gen:subst:0,1,1,2"
+       "math": [
+        "u = x² + 1",
+        "(x² + 1)² = u²"
+       ],
+       "instance": "gen:subst:0,1,1,2",
+       "role": "strategy"
+      },
+      {
+       "title": "What du means",
+       "text": [
+        "The derivative of x² + 1 is 2x: expanding (x + h)² gives x² + 2xh + h²; subtracting x² and dividing by h gives 2x + h, whose limit is 2x. The constant 1 cancels.",
+        "We write du/dx = 2x, or du = 2x dx. This differential notation records the rate of change used in substitution. It does not say that a finite change in u is exactly 2x times a finite change in x; that finite change also has an h² term."
+       ],
+       "math": [
+        "[(x + h)² + 1 − (x² + 1)]/h = 2x + h (h ≠ 0)",
+        "du/dx = 2x; du = 2x dx"
+       ],
+       "instance": "gen:subst:0,1,1,2",
+       "role": "strategy"
+      },
+      {
+       "title": "Replace the whole matching factor",
+       "text": [
+        "Group the integrand as (x² + 1)² × (2x dx). The first part becomes u²; the whole second part becomes du. No extra factor 2 remains to divide by.",
+        "The simpler integral has antiderivative u³/3, because its derivative is u². For an indefinite integral, write (x² + 1)³/3 + C. Here we have a definite integral, so we will evaluate between the new limits."
+       ],
+       "math": [
+        "(x² + 1)² (2x dx) → u² du",
+        "∫ u² du = u³/3 + C"
+       ],
+       "instance": "gen:subst:0,1,1,2",
+       "role": "strategy"
+      },
+      {
+       "title": "Change both endpoints",
+       "text": [
+        "The limits 0 and 1 describe x. Our new integral uses u, so substitute each endpoint into u = x² + 1. The lower u limit is 1 and the upper u limit is 2.",
+        "Keep one variable throughout the evaluation: use u limits with u³/3. Alternatively, substitute back to x before using x limits; never mix the two."
+       ],
+       "math": [
+        "x = 0 → u = 0² + 1 = 1",
+        "x = 1 → u = 1² + 1 = 2",
+        "∫ (x = 0 to 1) 2x(x² + 1)² dx = ∫ (u = 1 to 2) u² du"
+       ],
+       "instance": "gen:subst:0,1,1,2",
+       "role": "strategy"
+      },
+      {
+       "title": "Upper value minus lower value",
+       "text": [
+        "Evaluate u³/3 at the upper limit, then subtract its value at the lower limit. A cube means repeated multiplication: 2³ = 2 × 2 × 2 = 8. The integration constant cancels in this difference.",
+        "Check the result: the original integrand is non-negative between 0 and 1, so a positive answer is sensible. This is a useful sign check, not a proof of the answer."
+       ],
+       "math": [
+        "[u³/3] from 1 to 2 = 2³/3 − 1³/3",
+        "= (8 − 1)/3 = 7/3"
+       ],
+       "instance": "gen:subst:0,1,1,2",
+       "role": "strategy"
       }
      ],
      "guided": "gen:subst:0,1,2,2",
@@ -1380,6 +1473,71 @@
       "gen:pow:2,3"
      ],
      "screens": [
+      {
+       "title": "Choose the inside expression",
+       "text": [
+        "We want ∫ from x = 0 to x = 1 of 2x(x² + 1)² dx. The bracket is repeated, so name it u = x² + 1. This makes (x² + 1)² become u². We must also account for 2x dx and the limits."
+       ],
+       "math": [
+        "u = x² + 1",
+        "(x² + 1)² = u²"
+       ],
+       "instance": "gen:subst:0,1,1,2",
+       "role": "strategy"
+      },
+      {
+       "title": "What du means",
+       "text": [
+        "The derivative of x² + 1 is 2x: expanding (x + h)² gives x² + 2xh + h²; subtracting x² and dividing by h gives 2x + h, whose limit is 2x. The constant 1 cancels.",
+        "We write du/dx = 2x, or du = 2x dx. This differential notation records the rate of change used in substitution. It does not say that a finite change in u is exactly 2x times a finite change in x; that finite change also has an h² term."
+       ],
+       "math": [
+        "[(x + h)² + 1 − (x² + 1)]/h = 2x + h (h ≠ 0)",
+        "du/dx = 2x; du = 2x dx"
+       ],
+       "instance": "gen:subst:0,1,1,2",
+       "role": "strategy"
+      },
+      {
+       "title": "Replace the whole matching factor",
+       "text": [
+        "Group the integrand as (x² + 1)² × (2x dx). The first part becomes u²; the whole second part becomes du. No extra factor 2 remains to divide by.",
+        "The simpler integral has antiderivative u³/3, because its derivative is u². For an indefinite integral, write (x² + 1)³/3 + C. Here we have a definite integral, so we will evaluate between the new limits."
+       ],
+       "math": [
+        "(x² + 1)² (2x dx) → u² du",
+        "∫ u² du = u³/3 + C"
+       ],
+       "instance": "gen:subst:0,1,1,2",
+       "role": "strategy"
+      },
+      {
+       "title": "Change both endpoints",
+       "text": [
+        "The limits 0 and 1 describe x. Our new integral uses u, so substitute each endpoint into u = x² + 1. The lower u limit is 1 and the upper u limit is 2.",
+        "Keep one variable throughout the evaluation: use u limits with u³/3. Alternatively, substitute back to x before using x limits; never mix the two."
+       ],
+       "math": [
+        "x = 0 → u = 0² + 1 = 1",
+        "x = 1 → u = 1² + 1 = 2",
+        "∫ (x = 0 to 1) 2x(x² + 1)² dx = ∫ (u = 1 to 2) u² du"
+       ],
+       "instance": "gen:subst:0,1,1,2",
+       "role": "strategy"
+      },
+      {
+       "title": "Upper value minus lower value",
+       "text": [
+        "Evaluate u³/3 at the upper limit, then subtract its value at the lower limit. A cube means repeated multiplication: 2³ = 2 × 2 × 2 = 8. The integration constant cancels in this difference.",
+        "Check the result: the original integrand is non-negative between 0 and 1, so a positive answer is sensible. This is a useful sign check, not a proof of the answer."
+       ],
+       "math": [
+        "[u³/3] from 1 to 2 = 2³/3 − 1³/3",
+        "= (8 − 1)/3 = 7/3"
+       ],
+       "instance": "gen:subst:0,1,1,2",
+       "role": "strategy"
+      },
       {
        "title": "x row, u row",
        "text": [
@@ -2115,19 +2273,56 @@
    "title": "The derivative from first principles",
    "chapter": [
     {
-     "title": "The slope of the tangent",
+     "title": "Why the square gives 2x",
      "text": [
-      "f′(x) = lim (h → 0) [f(x + h) − f(x)] / h: the slope of the chord from x to x + h as the second point slides towards the first.",
-      "Simplify f(x + h) − f(x) until h is a factor of the top, cancel h, then let h → 0."
+      "First look at the x² part of our function. At x + h, the square means (x + h)(x + h). Multiply each term in the first bracket by each term in the second. The two cross terms are xh and hx; together they give 2xh.",
+      "Subtract the original x², then divide the change by h. For h ≠ 0 this is 2x + h. As h approaches zero, the slope approaches 2x. That is why the derivative of x² is 2x."
      ],
      "math": [
-      "f(x) = x² − 5x − 4",
-      "f(x + h) = x² + 2xh + h² − 5x − 5h − 4",
-      "f(x + h) − f(x) = 2xh + h² − 5h = h(2x + h − 5)",
-      "Divide by h: 2x + h − 5; let h → 0: f′(x) = 2x − 5"
+      "(x + h)² = x² + xh + hx + h² = x² + 2xh + h²",
+      "[(x + h)² − x²]/h = (2xh + h²)/h = 2x + h (h ≠ 0)",
+      "lim (h → 0) (2x + h) = 2x"
      ],
-     "role": "concept",
-     "instance": "gen:aqfp:0,1,-5,-4"
+     "instance": "gen:aqfp:0,1,-5,-4",
+     "role": "concept"
+    },
+    {
+     "title": "Replace every x, then expand",
+     "text": [
+      "Now use the whole function f(x) = x² − 5x − 4. Replace every x by x + h, including the x in the linear term. The constant stays the same in f(x + h)."
+     ],
+     "math": [
+      "f(x + h) = (x + h)² − 5(x + h) − 4",
+      "f(x + h) = x² + 2xh + h² − 5x − 5h − 4"
+     ],
+     "instance": "gen:aqfp:0,1,-5,-4",
+     "role": "concept"
+    },
+    {
+     "title": "Subtract the whole original function",
+     "text": [
+      "The brackets matter: subtracting f(x) reverses the sign of every term in it. The x² terms, the original linear terms and the constants cancel. Only terms containing h remain."
+     ],
+     "math": [
+      "f(x + h) − f(x) = (x² + 2xh + h² − 5x − 5h − 4) − (x² − 5x − 4)",
+      "= 2xh + h² − 5h",
+      "= h(2x + h − 5)"
+     ],
+     "instance": "gen:aqfp:0,1,-5,-4",
+     "role": "concept"
+    },
+    {
+     "title": "Cancel first, then take the limit",
+     "text": [
+      "The chord slope is change in f divided by change in x, which is h. While h is non-zero, cancel the common factor h. Putting h = 0 into the original quotient would give 0/0, which is undefined.",
+      "Now take the limit of the simplified expression. The terms containing h tend to zero. This gives the tangent slope at x, not the height f(x). The constant cancelled; it contributes nothing to the derivative."
+     ],
+     "math": [
+      "[f(x + h) − f(x)]/h = h(2x + h − 5)/h = 2x + h − 5 (h ≠ 0)",
+      "f′(x) = lim (h → 0) (2x + h − 5) = 2x − 5"
+     ],
+     "instance": "gen:aqfp:0,1,-5,-4",
+     "role": "concept"
     },
     {
      "title": "A fraction: one common denominator",
@@ -2160,7 +2355,7 @@
     {
      "title": "Sine and cosine: the two special limits",
      "text": [
-      "Expand with the compound-angle formula, then use the two limits (sin 2h)/h → 2 and (cos 2h − 1)/h → 0 as h → 0."
+      "Expand with the compound-angle formula, then use the two limits (sin 2h)/h → 2 and (cos 2h − 1)/h → 0 as h → 0. Angles must be measured in radians for these limits."
      ],
      "math": [
       "sin(2x + 2h) − sin 2x = sin 2x (cos 2h − 1) + cos 2x sin 2h",
@@ -2210,6 +2405,54 @@
        "math": [
         "Not 4x + 3, but 4x + 4"
        ]
+      },
+      {
+       "title": "Why the square gives 2x",
+       "text": [
+        "First look at the x² part of our function. At x + h, the square means (x + h)(x + h). Multiply each term in the first bracket by each term in the second. The two cross terms are xh and hx; together they give 2xh.",
+        "Subtract the original x², then divide the change by h. For h ≠ 0 this is 2x + h. As h approaches zero, the slope approaches 2x. That is why the derivative of x² is 2x."
+       ],
+       "math": [
+        "(x + h)² = x² + xh + hx + h² = x² + 2xh + h²",
+        "[(x + h)² − x²]/h = (2xh + h²)/h = 2x + h (h ≠ 0)",
+        "lim (h → 0) (2x + h) = 2x"
+       ],
+       "instance": "gen:aqfp:0,2,4,-1"
+      },
+      {
+       "title": "Replace every x, then expand",
+       "text": [
+        "Now use the whole function f(x) = 2x² + 4x − 1. Replace every x by x + h, including the x in the linear term. The constant stays the same in f(x + h)."
+       ],
+       "math": [
+        "f(x + h) = 2(x + h)² + 4(x + h) − 1",
+        "f(x + h) = 2x² + 4xh + 2h² + 4x + 4h − 1"
+       ],
+       "instance": "gen:aqfp:0,2,4,-1"
+      },
+      {
+       "title": "Subtract the whole original function",
+       "text": [
+        "The brackets matter: subtracting f(x) reverses the sign of every term in it. The x² terms, the original linear terms and the constants cancel. Only terms containing h remain."
+       ],
+       "math": [
+        "f(x + h) − f(x) = (2x² + 4xh + 2h² + 4x + 4h − 1) − (2x² + 4x − 1)",
+        "= 4xh + 2h² + 4h",
+        "= h(4x + 2h + 4)"
+       ],
+       "instance": "gen:aqfp:0,2,4,-1"
+      },
+      {
+       "title": "Cancel first, then take the limit",
+       "text": [
+        "The chord slope is change in f divided by change in x, which is h. While h is non-zero, cancel the common factor h. Putting h = 0 into the original quotient would give 0/0, which is undefined.",
+        "Now take the limit of the simplified expression. The terms containing h tend to zero. This gives the tangent slope at x, not the height f(x). The constant cancelled; it contributes nothing to the derivative."
+       ],
+       "math": [
+        "[f(x + h) − f(x)]/h = h(4x + 2h + 4)/h = 4x + 2h + 4 (h ≠ 0)",
+        "f′(x) = lim (h → 0) (4x + 2h + 4) = 4x + 4"
+       ],
+       "instance": "gen:aqfp:0,2,4,-1"
       }
      ],
      "guided": "gen:aqfp:0,4,-1,1",
@@ -2222,17 +2465,56 @@
      "needs": [],
      "screens": [
       {
-       "title": "Three stages",
+       "title": "Why the square gives 2x",
        "text": [
-        "Stage one: write f(x + h) and simplify f(x + h) − f(x) until every term of the top has a factor h: expand a polynomial, combine fractions, or multiply by the sum of the roots. Stage two: cancel h. Stage three: let h → 0."
+        "First look at the x² part of our function. At x + h, the square means (x + h)(x + h). Multiply each term in the first bracket by each term in the second. The two cross terms are xh and hx; together they give 2xh.",
+        "Subtract the original x², then divide the change by h. For h ≠ 0 this is 2x + h. As h approaches zero, the slope approaches 2x. That is why the derivative of x² is 2x."
        ],
        "math": [
-        "Using the definition f′(x) = lim (h → 0) [f(x + h) − f(x)]/h, find f′(x) for f(x) = x² − 4x − 5.",
-        "Write [f(x + h) − f(x)]/h for f(x) = x² − 4x − 5 and simplify until h cancels",
-        "Let h → 0: f′(x) = 2x − 4"
+        "(x + h)² = x² + xh + hx + h² = x² + 2xh + h²",
+        "[(x + h)² − x²]/h = (2xh + h²)/h = 2x + h (h ≠ 0)",
+        "lim (h → 0) (2x + h) = 2x"
        ],
-       "role": "worked-example",
-       "instance": "gen:aqfp:0,1,-4,-5"
+       "instance": "gen:aqfp:0,1,-5,-4",
+       "role": "strategy"
+      },
+      {
+       "title": "Replace every x, then expand",
+       "text": [
+        "Now use the whole function f(x) = x² − 5x − 4. Replace every x by x + h, including the x in the linear term. The constant stays the same in f(x + h)."
+       ],
+       "math": [
+        "f(x + h) = (x + h)² − 5(x + h) − 4",
+        "f(x + h) = x² + 2xh + h² − 5x − 5h − 4"
+       ],
+       "instance": "gen:aqfp:0,1,-5,-4",
+       "role": "strategy"
+      },
+      {
+       "title": "Subtract the whole original function",
+       "text": [
+        "The brackets matter: subtracting f(x) reverses the sign of every term in it. The x² terms, the original linear terms and the constants cancel. Only terms containing h remain."
+       ],
+       "math": [
+        "f(x + h) − f(x) = (x² + 2xh + h² − 5x − 5h − 4) − (x² − 5x − 4)",
+        "= 2xh + h² − 5h",
+        "= h(2x + h − 5)"
+       ],
+       "instance": "gen:aqfp:0,1,-5,-4",
+       "role": "strategy"
+      },
+      {
+       "title": "Cancel first, then take the limit",
+       "text": [
+        "The chord slope is change in f divided by change in x, which is h. While h is non-zero, cancel the common factor h. Putting h = 0 into the original quotient would give 0/0, which is undefined.",
+        "Now take the limit of the simplified expression. The terms containing h tend to zero. This gives the tangent slope at x, not the height f(x). The constant cancelled; it contributes nothing to the derivative."
+       ],
+       "math": [
+        "[f(x + h) − f(x)]/h = h(2x + h − 5)/h = 2x + h − 5 (h ≠ 0)",
+        "f′(x) = lim (h → 0) (2x + h − 5) = 2x − 5"
+       ],
+       "instance": "gen:aqfp:0,1,-5,-4",
+       "role": "strategy"
       }
      ],
      "guided": "gen:aqfp:2,1,3,0",
@@ -2251,6 +2533,58 @@
        ],
        "role": "strategy",
        "instance": "gen:aqfp:0,1,-5,-4"
+      },
+      {
+       "title": "Why the square gives 2x",
+       "text": [
+        "First look at the x² part of our function. At x + h, the square means (x + h)(x + h). Multiply each term in the first bracket by each term in the second. The two cross terms are xh and hx; together they give 2xh.",
+        "Subtract the original x², then divide the change by h. For h ≠ 0 this is 2x + h. As h approaches zero, the slope approaches 2x. That is why the derivative of x² is 2x."
+       ],
+       "math": [
+        "(x + h)² = x² + xh + hx + h² = x² + 2xh + h²",
+        "[(x + h)² − x²]/h = (2xh + h²)/h = 2x + h (h ≠ 0)",
+        "lim (h → 0) (2x + h) = 2x"
+       ],
+       "instance": "gen:aqfp:0,1,-5,-4",
+       "role": "strategy"
+      },
+      {
+       "title": "Replace every x, then expand",
+       "text": [
+        "Now use the whole function f(x) = x² − 5x − 4. Replace every x by x + h, including the x in the linear term. The constant stays the same in f(x + h)."
+       ],
+       "math": [
+        "f(x + h) = (x + h)² − 5(x + h) − 4",
+        "f(x + h) = x² + 2xh + h² − 5x − 5h − 4"
+       ],
+       "instance": "gen:aqfp:0,1,-5,-4",
+       "role": "strategy"
+      },
+      {
+       "title": "Subtract the whole original function",
+       "text": [
+        "The brackets matter: subtracting f(x) reverses the sign of every term in it. The x² terms, the original linear terms and the constants cancel. Only terms containing h remain."
+       ],
+       "math": [
+        "f(x + h) − f(x) = (x² + 2xh + h² − 5x − 5h − 4) − (x² − 5x − 4)",
+        "= 2xh + h² − 5h",
+        "= h(2x + h − 5)"
+       ],
+       "instance": "gen:aqfp:0,1,-5,-4",
+       "role": "strategy"
+      },
+      {
+       "title": "Cancel first, then take the limit",
+       "text": [
+        "The chord slope is change in f divided by change in x, which is h. While h is non-zero, cancel the common factor h. Putting h = 0 into the original quotient would give 0/0, which is undefined.",
+        "Now take the limit of the simplified expression. The terms containing h tend to zero. This gives the tangent slope at x, not the height f(x). The constant cancelled; it contributes nothing to the derivative."
+       ],
+       "math": [
+        "[f(x + h) − f(x)]/h = h(2x + h − 5)/h = 2x + h − 5 (h ≠ 0)",
+        "f′(x) = lim (h → 0) (2x + h − 5) = 2x − 5"
+       ],
+       "instance": "gen:aqfp:0,1,-5,-4",
+       "role": "strategy"
       }
      ],
      "guided": "gen:aqfp:0,1,-4,-2",
@@ -2262,6 +2596,20 @@
      "kind": "prerequisite",
      "needs": [],
      "screens": [
+      {
+       "title": "Why the square gives 2x",
+       "text": [
+        "First look at the x² part of our function. At x + h, the square means (x + h)(x + h). Multiply each term in the first bracket by each term in the second. The two cross terms are xh and hx; together they give 2xh.",
+        "Subtract the original x², then divide the change by h. For h ≠ 0 this is 2x + h. As h approaches zero, the slope approaches 2x. That is why the derivative of x² is 2x."
+       ],
+       "math": [
+        "(x + h)² = x² + xh + hx + h² = x² + 2xh + h²",
+        "[(x + h)² − x²]/h = (2xh + h²)/h = 2x + h (h ≠ 0)",
+        "lim (h → 0) (2x + h) = 2x"
+       ],
+       "instance": "gen:aqfp:0,1,-5,-4",
+       "role": "prerequisite"
+      },
       {
        "title": "Do not lose the cross terms",
        "text": [

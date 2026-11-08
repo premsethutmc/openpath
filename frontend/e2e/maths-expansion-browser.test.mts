@@ -18,12 +18,12 @@
  */
 import { createRequire } from "node:module";
 import http from "node:http";
-import { readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import assert from "node:assert/strict";
 import { fileURLToPath } from "node:url";
 import { latestReleases } from "../../packages/learning/src/curricula";
 import { moduleFor, question } from "../../packages/learning/src/content";
-import { problemKeyOf, problemOf } from "../../packages/learning/src/families";
+import { phasePool, problemKeyOf, problemOf } from "../../packages/learning/src/families";
 import { probeReading } from "../../packages/learning/src/reasoning";
 import { learnerState, make } from "../../packages/learning/src/session";
 import { withDecisions } from "../../packages/learning/src/records";
@@ -54,6 +54,9 @@ function wrongFor(q: string): string {
 
 interface Case { name: string; competency: string; family: string; bug: string; start: string }
 const CASES: Case[] = [
+  { name: "calculus teaching: derivative", competency: "MATH.calculus.derivatives", family: "aqfp", bug: "constant-kept", start: "" },
+  { name: "calculus teaching: substitution du", competency: "MATH.calculus.integration-methods", family: "subst", bug: "extra-half", start: "" },
+  { name: "calculus teaching: substitution limits", competency: "MATH.calculus.integration-methods", family: "subst", bug: "limits-not-changed", start: "" },
   { name: "calculus: limits", competency: "MATH.calculus.limits", family: "lim", bug: "zero-for-undefined", start: "" },
   { name: "algebra: inequalities", competency: "MATH.algebra.inequalities", family: "lineq", bug: "keep-sign-negative", start: "" },
   { name: "trigonometry: equations", competency: "MATH.trigonometry.equations", family: "atprinc", bug: "principal-only", start: "" },
@@ -63,7 +66,7 @@ const CASES: Case[] = [
 ].filter((c) => !process.env.CASE || c.name.includes(process.env.CASE));
 for (const c of CASES) {
   const m = moduleFor(c.competency)!;
-  c.start = [...m.diagnostics, ...m.practice].map(base).find((q) => problemOf(q)?.family === c.family && probeReading(q, c.bug).discriminates)!;
+  c.start = [...m.diagnostics, ...m.practice, ...phasePool(c.family, "diagnostic")].map(base).find((q) => problemOf(q)?.family === c.family && (probeReading(q, c.bug).discriminates || (c.family === "aqfp" && problemOf(q)?.bugs.some(b => b.id === c.bug))))!;
   assert.ok(c.start, `${c.name}: a start question on which ${c.bug} predicts a wrong answer`);
 }
 const results: unknown[] = [];
@@ -74,7 +77,7 @@ try {
   for (const c of CASES) {
     writeFileSync(clockFile, "{}");
     await page.clock.setSystemTime(new Date());
-    const pupil = await call("/pupils/", { display_name: `Synthetic ${c.name}`, consent: true }); assert.equal(pupil.status, 201);
+    const pupil = await call("/pupils/", { display_name: `Synthetic ${c.name}`.slice(0, 40), consent: true }); assert.equal(pupil.status, 201);
     const id = pupil.data.id, onSkill = (q: string) => question(q).competency === c.competency;
     let clock = Date.now() - 60_000;
     const ctx = () => ({ learnerId: id, sessionId: `learn:${id}:seed`, at: new Date(++clock).toISOString() });
@@ -85,7 +88,18 @@ try {
     let learnt = false;
     const reply = (q: string) => {
       const r = probeReading(base(q), c.bug), x = question(q);
-      if (learnt || !r.discriminates) return x.answer;
+      if (learnt) return x.answer;
+      // Symbolic first-principles answers are deliberately not evidence for misconception attribution.
+      // Submit the modelled wrong expression, then let the real engine choose its teaching.
+      if (c.family === "aqfp") {
+        const bug = problemOf(base(q))?.bugs.find(b => b.id === c.bug);
+        if (bug && typeof bug.predict === "string") {
+          if (!q.endsWith(":mc")) return bug.predict;
+          const index = x.options!.indexOf(bug.predict); return index >= 0 ? "ABCD"[index] : x.answer;
+        }
+        if (problemOf(base(q))?.family === "aqfp") return wrongFor(q);
+      }
+      if (!r.discriminates) return x.answer;
       if (!q.endsWith(":mc") && x.type !== "choice") return r.predicted[0];
       const i = x.options!.indexOf(r.predicted[0]); return i >= 0 ? "ABCD"[i] : x.answer;
     };
@@ -101,10 +115,28 @@ try {
       await page.locator(".feedback[role=status] strong").first().waitFor();
       return { qid, right: (await page.locator(".feedback[role=status] strong").first().innerText()) === "Right." };
     };
+    const visibleLessons: { title: string; screens: string[] }[] = [];
     const lesson = async () => {
       const title = await page.locator(".lesson .eyebrow").innerText();
       const review = await page.locator("[data-content-review]").getAttribute("data-content-review");
+      const screens: string[] = [];
       for (let i = 0; i < 12; i++) {
+        await page.locator(".lesson").waitFor({ state: "visible" });
+        screens.push(await page.locator(".lesson").innerText());
+        if (c.name.startsWith("calculus teaching")) {
+          // Read the lesson in the viewport, including the last mathematical line above the sticky controls.
+          await page.locator(".lesson").evaluate(el => el.scrollIntoView({ block: "center", behavior: "instant" }));
+          const math = page.locator(".lesson .formula span").last();
+          if (await math.count()) assert.ok(await math.evaluate(el => {
+            const r = el.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2;
+            const hit = document.elementFromPoint(x, y);
+            return y > 0 && y < innerHeight && !!hit && (el.contains(hit) || hit.contains(el));
+          }), `${c.name}: final mathematics is visible, not behind the sticky controls`);
+        }
+        if (process.env.CALCULUS_SHOTS && c.name.startsWith("calculus teaching")) {
+          mkdirSync(process.env.CALCULUS_SHOTS, { recursive: true });
+          await page.screenshot({ path: `${process.env.CALCULUS_SHOTS}/${c.bug}-${visibleLessons.length}-${i}.png`, fullPage: true, animations: "disabled" });
+        }
         const eyebrow = await page.locator(".lesson .eyebrow").innerText();
         const btn = page.locator(".actions.sticky button.primary").last(), label = await btn.innerText();
         await btn.click();
@@ -112,6 +144,7 @@ try {
         await page.waitForFunction((e) => document.querySelector(".lesson .eyebrow")?.textContent !== e, eyebrow);
       }
       await page.waitForFunction(() => !document.querySelector(".lesson") || !!document.querySelector("[data-qid]"));
+      visibleLessons.push({ title, screens });
       return { title: title.split(" · ")[0], review };
     };
     const screen = async () => { await page.waitForFunction(() => !!document.querySelector("[data-qid]") || !!document.querySelector(".lesson"), null, { timeout: 20_000 }); return (await page.locator("[data-qid]").count()) ? "question" : "lesson"; };
@@ -146,6 +179,14 @@ try {
     assert.equal(problemOf(base(check.qid!))!.family, c.family, `${c.name}: the recheck is on the taught family`);
     assert.ok(check.right);
     const strategy = moduleFor(c.competency)!.strategies.find((s) => s.id === taught)!;
+    if (c.name.startsWith("calculus teaching")) {
+      const visible = visibleLessons[0].screens.join("\n");
+      const required = c.family === "aqfp"
+        ? ["Why the square gives 2x", "x² + xh + hx + h²", "Subtract the whole original function", "h ≠ 0"]
+        : ["What du means", "du = 2x dx", "Replace the whole matching factor", "Change both endpoints", "u = 1", "u = 2", "7/3"];
+      for (const phrase of required) assert.ok(visible.includes(phrase), `student screen must teach ${phrase}: ${taught}`);
+      assert.equal(visibleLessons[0].screens.length, strategy.screens.length, "every selected strategy screen was displayed");
+    }
     const shownBefore = [...met.slice(0, met.indexOf(check.qid!)), strategy.guided, ...strategy.screens.map((s) => s.instance!).filter(Boolean)];
     assert.ok(!shownBefore.some((q) => problemKeyOf(q) === problemKeyOf(check.qid!)), `${c.name}: ${check.qid} repeats or relabels a met problem`);
     assert.deepEqual(trail.filter((s) => s.kind === "transfer"), [], `${c.name}: no transfer before the recheck`);
@@ -201,7 +242,7 @@ try {
     assert.equal((await answerInUi(question(freshQ).answer)).right, true);
     const b2 = await saved(); await page.reload(); await page.locator("body").waitFor(); const a2 = await saved();
     assert.deepEqual(a2.events, b2.events); assert.deepEqual(a2.decisions, b2.decisions);
-    results.push({ case: c.name, competency: c.competency, start: c.start, trail, taught, recheck: check.qid, delayed: delayedQ, retaught, afterLapse: freshQ, savedEvents: a2.count, reloaded: true, educatorApproved: false });
+    results.push({ visibleLessons, case: c.name, competency: c.competency, start: c.start, trail, taught, recheck: check.qid, delayed: delayedQ, retaught, afterLapse: freshQ, savedEvents: a2.count, reloaded: true, educatorApproved: false });
     console.log(`ok ${c.name}: taught ${taught}, recheck ${check.qid}, delayed ${delayedQ} (wrong) → ${retaught.length ? `retaught ${retaught.join(", ")} → ` : ""}fresh ${freshQ}`);
   }
   writeFileSync(process.env.MATHS_EXPANSION_RESULTS ?? "/tmp/maths-expansion-browser.json", JSON.stringify({ passed: true, results }, null, 2) + "\n");

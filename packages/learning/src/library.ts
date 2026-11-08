@@ -45,6 +45,9 @@ export interface BlueprintStrategy {
   kind: Strategy["kind"];
   /** This way of explaining builds on the prerequisite facts the family's explanations name (their probe questions). */
   buildsOnPrerequisites?: boolean;
+  /** Retain the existing example draw when replacing auto-generated worked steps with authored teaching.
+   * This preserves subsequent guided/check IDs and keeps the old example out of fresh questions. */
+  reserveExample?: boolean;
   screens: BlueprintScreen[];
 }
 export interface Blueprint {
@@ -213,7 +216,7 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
       for (const sc of st.screens) used.add(exposureKey(sc.instance!));
       return { id: st.id, title: st.title, kind: st.kind, scope: st.scope, ...(st.addresses !== undefined ? { addresses: st.addresses } : {}), needs: st.buildsOnPrerequisites ? probes : [], screens: st.screens, guided: st.guided!, check: st.check! };
     }
-    const ex = st.screens.some((s) => s.worked) ? example() : seed;
+    const ex = st.reserveExample || st.screens.some((s) => s.worked) ? example() : seed;
     return { id: st.id, title: st.title, kind: st.kind, needs: st.buildsOnPrerequisites ? probes : [], screens: st.screens.map((s) => screen(s, ex, st.kind === "prerequisite" ? "prerequisite" : "strategy")), guided: take("practice", "typed"), check: take("check", k % 2 ? "mc" : "typed") };
   });
   return {

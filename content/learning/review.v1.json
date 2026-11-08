@@ -34482,7 +34482,7 @@
    "competency": "MATH.calculus.derivatives",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "61428208",
+   "contentHash": "89195575",
    "state": "draft",
    "history": [
     {
@@ -34523,6 +34523,22 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "61428208",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-08T15:30:58.641Z",
+     "contentHash": "d721eb30",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-08T15:43:00.964Z",
+     "contentHash": "89195575",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -34896,7 +34912,7 @@
    "competency": "MATH.calculus.integration-methods",
    "origin": "synthesised",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "3c5ebf35",
+   "contentHash": "b8539dfa",
    "state": "draft",
    "history": [
     {
@@ -34953,6 +34969,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "3c5ebf35",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-08T15:30:58.641Z",
+     "contentHash": "b8539dfa",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
