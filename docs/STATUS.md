@@ -1,7 +1,7 @@
 # OpenPath status (handoff for a new session)
 
 Read this file first; keep it factual and 50–60 lines at each milestone.
-Updated: 2026-11-09 (tally foundation app integration; browser CI pending).
+Updated: 2026-11-09 (tally foundation app integration; account browser journeys verified).
 
 ## Rules and product scope
 - No merge, deploy or settings change without owner approval; PRs are drafts.
@@ -47,7 +47,7 @@ Updated: 2026-11-09 (tally foundation app integration; browser CI pending).
 - `audit_tn_mappings.py`: pass; rejects stale statements/catalogues and invented targets.
 - Python regression tests: 18 pass; Node parser/tally tests: 13 pass (31 total).
 - Deterministic extraction/OCR/validation: zero model API calls; judgment used session tokens.
-- Local Chromium still fails socket EPERM; focused account/browser CI prepared, result pending.
+- Local Chromium socket EPERM resolved via CI: run 42661012410 passes all 7 browser journeys.
 
 - Draft tally now added to foundation app stages with account-backed mark recording and practice.
 - Model: 21 counts / 441 pairs; foundation frontend/backend 7+7 pass; typecheck/build pass.
@@ -56,4 +56,4 @@ Updated: 2026-11-09 (tally foundation app integration; browser CI pending).
 - Term III, exhaustive outcome decomposition, handbook/QR coverage and Tamil equivalence unknown.
 - All 48 gaps triaged in `tn-primary-gap-plan.json`; two have partial draft tally prototypes.
 - Board release builder auto-accepts mappings and lacks detailed PDF provenance; not used here.
-- Report: `docs/milestones/TN_PRIMARY_TALLY_APP.md`; browser CI/educator review pending.
+- Report: `docs/milestones/TN_PRIMARY_TALLY_APP.md`; browser verified; educator review pending.
