@@ -1,7 +1,7 @@
 # OpenPath status (handoff for a new session)
 
 Read this file first; keep it factual and 50–60 lines at each milestone.
-Updated: 2026-11-09 (tally shared practice evidence; new browser CI pending).
+Updated: 2026-11-09 (all seven CI workflows passed on app head 8e72d33).
 
 ## Rules and product scope
 - No merge, deploy or settings change without owner approval; PRs are drafts.
@@ -11,11 +11,11 @@ Updated: 2026-11-09 (tally shared practice evidence; new browser CI pending).
 
 ## This branch
 - `data/tn-primary-ingestion-2026-11-09`, originally from `feat/dev-efficiency` at `82f18fd`.
-- Follow-up remote parent: `cf285de`; STATUS and remote heads read before work.
+- Verified app head: `8e72d33`; STATUS and remote heads read before work.
 - No AGENTS.md or .agents/skills in this checkout.
 - Grade 8 `7a429a94` and answer-key certification `49a6be8b` inspected; untouched.
 - Teaching-method PR #121 at `5d83947d` is separate; no integration here.
-- Main/candidate branches, deployments, settings and real data unchanged.
+- Claude candidate `5e4c1fd8`, main, deployments, settings and real data unchanged.
 
 ## TN Grades 1–3 inventory
 - `content/learning/ingestion/tn-primary-2026-term1.json`: 22 / 28 / 30 outcomes (80).
@@ -47,8 +47,8 @@ Updated: 2026-11-09 (tally shared practice evidence; new browser CI pending).
 - `audit_tn_mappings.py`: pass; rejects stale statements/catalogues and invented targets.
 - Python regression tests: 18 pass; Node parser/tally tests: 13 pass (31 total).
 - Deterministic extraction/OCR/validation: zero model API calls; judgment used session tokens.
-- Prior head cf285de: tally CI 42661961260 green; broader PR workflows still running.
-
+- Head 8e72d33: tally CI 42664467628 green: 7 Chromium journeys, 10 frontend + 8 backend tests.
+- All 7 workflows green on 8e72d33; main CI recovered from a GitHub scheduling error.
 - New tally receipts use shared assisted/practice events; server stamps tally-practice@1.
 - 49 local tests pass (31 intake/model + 10 foundation/evidence + 8 backend); typecheck/build pass.
 
@@ -56,4 +56,5 @@ Updated: 2026-11-09 (tally shared practice evidence; new browser CI pending).
 - Term III, exhaustive outcome decomposition, handbook/QR coverage and Tamil equivalence unknown.
 - All 48 gaps triaged in `tn-primary-gap-plan.json`; two have partial draft tally prototypes.
 - Board release builder auto-accepts mappings and lacks detailed PDF provenance; not used here.
-- Report: `docs/milestones/TN_PRIMARY_TALLY_EVIDENCE.md`; new browser run/educator review pending.
+- Browser replay: 4 assisted / 2 unassisted / 0 independent; six screenshots inspected.
+- Mobile label wrapping, full accessibility audit and educator review pending; see tally evidence report.

@@ -1,0 +1,128 @@
+{
+  "schema": "browser-milestone-evidence@1",
+  "appCommit": "8e72d33f61cdb0098bca1e0b4b89222337b9233d",
+  "runId": 42664467628,
+  "jobId": 129324295320,
+  "conclusion": "success",
+  "browserTests": 7,
+  "tallyWidths": [
+    360,
+    900
+  ],
+  "legacyBrowserRegressions": 5,
+  "ciFoundationEvidenceTests": 10,
+  "ciBackendTests": 8,
+  "localFocusedTests": 49,
+  "artifactId": 13697927463,
+  "artifactSha256": "6146142e0dc14de34c6302c9869ae9b2b1bba8da190a279f16a8a74345c103ee",
+  "artifactExpires": "2026-11-16T17:55:22Z",
+  "screenshots": [
+    {
+      "file": "tally-360.png",
+      "sha256": "7323340673a0ca24f2df8762aff0632b8a60b8664d7e1e74178eedbfd31b7808",
+      "visuallyInspected": true
+    },
+    {
+      "file": "tally-900.png",
+      "sha256": "86055d524cb010144330c97ac992cd40148f906e9668a8b5e520c40b0305a9df",
+      "visuallyInspected": true
+    },
+    {
+      "file": "tally-recording-360.png",
+      "sha256": "e0eb986cebc6f369c8f2ed4805242782887197021c2da06a0d681700fb0531ef",
+      "visuallyInspected": true
+    },
+    {
+      "file": "tally-recording-900.png",
+      "sha256": "fb9fc3f551a0a7389fac7fb552f50129cf70905a2f11421dc873c2529a020760",
+      "visuallyInspected": true
+    },
+    {
+      "file": "tally-teaching-360.png",
+      "sha256": "e72882481e9d35d5e9908f795455dbf173a066c63e438e504c8295a7a3d75917",
+      "visuallyInspected": true
+    },
+    {
+      "file": "tally-teaching-900.png",
+      "sha256": "3fecc15076f157939e5134aa4b72406bd2320905b7df176989da8eb0b0a83c7c",
+      "visuallyInspected": true
+    }
+  ],
+  "observedReplay": {
+    "assisted": 4,
+    "unassisted": 2,
+    "legacyUnknown": 0,
+    "independentEvidence": 0
+  },
+  "educatorReviewed": false,
+  "releaseComplete": false,
+  "limitations": [
+    "No real-child or educator testing",
+    "Browser verifies delayed-review lock, not elapsed next-day return",
+    "No qualifying shared ability estimate or independent evidence",
+    "Keyboard activation, SVG accessible names and overflow checks only; no full WCAG or live screen-reader audit",
+    "Mobile table labels wrap inside words at 360px; controls remain usable and no horizontal overflow was observed",
+    "Term III current-edition coverage unresolved"
+  ],
+  "broaderCI": {
+    "observedAt": "2026-11-09T19:00:33Z",
+    "appCommit": "8e72d33f61cdb0098bca1e0b4b89222337b9233d",
+    "workflowRuns": [
+      {
+        "id": 42664467628,
+        "name": "TN tally account journey",
+        "conclusion": "success"
+      },
+      {
+        "id": 42664467617,
+        "name": "My Learning Year",
+        "conclusion": "success"
+      },
+      {
+        "id": 42664467680,
+        "name": "Mathematics learner journey",
+        "conclusion": "success"
+      },
+      {
+        "id": 42664467697,
+        "name": "Mathematics foundation",
+        "conclusion": "success"
+      },
+      {
+        "id": 42664467620,
+        "name": "Grade 1\u20136 mathematics private review",
+        "conclusion": "success"
+      },
+      {
+        "id": 42664467685,
+        "name": "CI",
+        "conclusion": "success"
+      },
+      {
+        "id": 42664467657,
+        "name": "Mathematics prerequisite safety and runtime compatibility",
+        "conclusion": "success"
+      }
+    ],
+    "fullFrontendSuite": {
+      "tests": 1111,
+      "pass": 1108,
+      "fail": 0,
+      "skipped": 1,
+      "todo": 2
+    },
+    "productionBrowser": {
+      "jobId": 129356491934,
+      "suites": 13,
+      "tests": 47,
+      "fail": 0
+    },
+    "prerequisiteBrowserTestsPerNodeVersion": 12,
+    "mainCIRetry": {
+      "attempt1": "GitHub internal server error prevented production-browser job creation; all 14 created jobs passed",
+      "correlationId": "c19db644-fc21-417d-824b-bcbe878c3141",
+      "failedOnlyRetry": "HTTP 403: This workflow run cannot be retried; not executed",
+      "recovery": "Targeted rerun of frontend prerequisite job 129332693583 created missing dependent browser job; attempt 2 succeeded"
+    }
+  }
+}
