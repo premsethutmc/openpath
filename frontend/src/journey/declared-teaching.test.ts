@@ -180,9 +180,9 @@ test('declared square lesson keeps assisted practice separate from same-skill de
   assert.equal(next.phase, 'check');assert.ok(next.question);
   assert.equal(connectedSkill(IDENTITIES_CONFIG, next.question), skill);
   s.submit(next.question, question(next.question).answer, 'check');
-  assert.equal(s.state().records.attempts.at(-1)?.solution, true);
+  assert.equal(s.state().records.attempts.at(-1)?.solution, false, "solution-scope@1: check answer is independent");
   const saved = () => withDecisions(s.events, s.decisions);
-  assert.equal(projectFromEventsWith(IDENTITIES_CONFIG, s.learnerId, saved(), s.now).subSkills.find(x => x.id === skill)?.attempts.independentRight, 0);
+  assert.equal(projectFromEventsWith(IDENTITIES_CONFIG, s.learnerId, saved(), s.now).subSkills.find(x => x.id === skill)?.attempts.independentRight, 1, "solution-scope@1: correct independent check counts");
   s.wait(1);
   let plan = foundationPlan(policy, s.learnerId, saved(), s.now);
   for (let i = 0; i < 6 && plan.status !== 'shown'; i++) {

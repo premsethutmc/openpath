@@ -1,3 +1,4 @@
+import { alignmentActive, followupCompatible, qualifiedFollowup } from "./method-alignment";
 import { taughtExposureKeys } from "./teaching-exposure";
 /**
  * The unified learning module (Explore → Strategy → Chapter → Practise → Verify) and prerequisite recovery.
@@ -26,14 +27,14 @@ import { quarantined } from "./question-status";
 import { modulePhasePool } from "./library";
 import { discriminatingProbe, familyOf, hypothesesFor, investigateContext, investigation, investigationTrigger, openHypothesis, teachingMatchesMisconception } from "./hypotheses";
 import { claimWording, nextFromReasoning, probeReading, reason, withTail, type Reasoning } from "./reasoning";
-import { teachingEligibility, type TeachingEligibility } from "./teaching-contract";
+import { alignedPractice, teachingEligibility, type TeachingEligibility } from "./teaching-contract";
 import { contentEligibility, isMisconceptionSpecific, teachingMode, type ContentEligibility } from "./explanation-review";
 import { evidenceBasis, type EvidenceBasis } from "./misconception-evidence";
 import type { Attempt, LearnerRecords } from "./records";
 import { connectedSkill, connectionConfig } from "./skill-connections";
 import { classifyQuestionWith } from "./subskill-projection";
 import { keyboardOffered, writtenTask } from "./written";
-import { blocksTransfer, heldByTeaching, presentedProblems, unitOfStrategy, unitStates, type SkillUnit, type UnitState } from "./skill-units";
+import { blocksTransfer, heldByTeaching, presentedProblems, unitOfQuestion, unitOfStrategy, unitStates, type SkillUnit, type UnitState } from "./skill-units";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
 export const MODULE_POLICY: PlannerPolicy = { ...PLANNER_POLICY_DRAFT, guidedItems: 1, reassessItems: 1, reassessPassMin: 1, reassessContrastItems: 0, version: `${PLANNER_POLICY_DRAFT.version}+learning-module@1` };
@@ -228,7 +229,7 @@ function ruleStateFor(m: Module, d: Diagnosis, records: LearnerRecords): RuleSta
     // teaching-history@1: the block's check alone is its own check question, or (when that question had already been
     // seen elsewhere) the fresh question asked in its place: the first answer alone labelled "check" in the block
     const c = within(st.check) ?? mine.find((a) => a.at >= t.at && a.at < until && a.activity === "check" && a.n === 1 && a.questionId !== st.guided && !a.context) ?? null;
-    const clean = c && independentAttempt(c) ? c : null;
+    const clean = c && independentAttempt(c) && qualifiedFollowup(c, records) ? c : null;
     return {
       id: `${m.competency}:${t.strategy}:${t.at}`,
       at: t.at,
@@ -351,8 +352,9 @@ export function handoverState(competency: string, records: LearnerRecords, now: 
   const mine = [...records.attempts.filter(own(competency)), ...records.unresolved.filter((u) => inComp(u.questionId)), ...records.teaching.filter(own(competency))];
   const sinceMs = mine.length ? Math.max(...mine.map(t)) : null;
   // an acknowledgement counts only if the competency WAS paused when the server recorded it (replayed from the records before it: an
-  // acknowledgement from before a pause, or for a pause long resolved, opens nothing), and for ACK_VALID_DAYS after it
-  const acks = (records.acknowledgements ?? []).filter((a) => a.competency === competency && a.by === "educator" && t(a) <= now && pausedAt(competency, records, t(a)));
+  // acknowledgement from before a pause, or for a pause long resolved, opens nothing), and for ACK_VALID_DAYS after it.
+  // A server-linked recovery resolution already certifies the research stop, which ordinary module replay cannot see.
+  const acks = (records.acknowledgements ?? []).filter((a) => a.competency === competency && a.by === "educator" && t(a) <= now && (!!a.recoveryEpisode || pausedAt(competency, records, t(a))));
   // re-entry uses: every answer to a re-entry question, readable (an attempt) or not (an unresolved submission): both use the re-entry
   const uses = [...records.attempts.filter((x) => x.context === ctx), ...records.unresolved.filter((u) => u.context === ctx)].sort((x, y) => t(x) - t(y) || (x.id < y.id ? -1 : 1));
   // each use was opened by an acknowledgement only if one was in effect then: recorded after the previous use (or ever, for the first),
@@ -400,8 +402,10 @@ function withHandover(ms: ModuleState, m: Module, records: LearnerRecords, now: 
     const skill = config && lastWrong ? connectedSkill(config, lastWrong.questionId) : null;
     const met = presentedProblems(records, moduleFor);
     const ofSkill = fam && skill ? phasePool(fam, "check").find((id) => !tried(id) && !met.has(problemKeyOf(id)) && withinGrade(records, id) && keyboardOffered(id) && connectedSkill(config!, id) === skill && moduleHasFamily(m, fam)) ?? null : null;
-    const ofKind = ofSkill ?? (fam ? phasePool(fam, "check").find((id) => !tried(id) && withinGrade(records, id) && moduleHasFamily(m, fam)) ?? null : null);
-    const q = ofKind ?? m.diagnostics.find((id) => !tried(id) && withinGrade(records, id)) ?? freshFromPool(m, records, tried);
+    const strictFresh = !!records.acknowledgements?.some(a => a.id === h.acknowledgement?.id && a.recoveryEpisode);
+    const ofKind = ofSkill ?? (fam ? phasePool(fam, "check").find((id) => !tried(id) && (!strictFresh || !met.has(problemKeyOf(id))) && withinGrade(records, id) && moduleHasFamily(m, fam)) ?? null : null);
+    const candidate = ofKind ?? m.diagnostics.find((id) => !tried(id) && (!strictFresh || !met.has(problemKeyOf(id))) && withinGrade(records, id)) ?? freshFromPool(m, records, tried);
+    const q = strictFresh && candidate && met.has(problemKeyOf(candidate)) ? questionForRequirement(m, "check", records, id => !met.has(problemKeyOf(id)) && keyboardOffered(id) && withinGrade(records, id)) : candidate;
     if (q) return { ...ms, phase: "reentry", question: q, activity: "diagnostic", context: reentryContext(ms.competency), handover: h,
       reason: h.route === "reentry-acknowledged"
         ? "Your teacher has looked at this with you. One question on your own now, to see where you are. Your earlier answers stay in your record."
@@ -435,7 +439,7 @@ export function moduleState(competency: string, records: LearnerRecords, ev: Ski
   const ms0 = withSchedule(moduleStep(competency, records, ev, now, session, established, evidence), ev);
   const m = moduleFor(competency);
   // handover@1: every pause gets its bounded way back
-  const ms = m && ms0.phase === "pause" ? withHandover(ms0, m, records, now) : ms0;
+  const ms = m && (ms0.phase === "pause" || ((records.acknowledgements ?? []).some(a => a.competency === competency && a.recoveryEpisode) && handoverState(competency, records, now).route === "reentry-acknowledged")) ? withHandover(ms0, m, records, now) : ms0;
   if (!m || !ms.question || ms.phase === "reentry") return ms;
   const q = ms.question;
   const unread = unreadableCount(records, q);
@@ -444,6 +448,13 @@ export function moduleState(competency: string, records: LearnerRecords, ev: Ski
       reason: "Your answers to this question could not be read, so they were not marked: nothing was counted for or against you. This needs a person: go through it with a teacher or parent." }, m, records, now);
   const fromCheckPool = !!m.pool && q.startsWith("gen:") && ![...m.practice, ...m.transfer].includes(q) && phaseOfQ(q) === "check";
   const activity = ms.phase === "explore" ? "diagnostic" : ms.phase === "strategy" ? "probe" : ms.phase === "guided" ? "guided" : ms.phase === "check" ? "check" : ms.phase === "retention" ? "retention" : m.transfer.includes(q) ? "transfer" : m.strategies.some((s) => s.check === q) || fromCheckPool ? "check" : "practice";
+  const latest = records.teaching.filter(t=>t.competency===competency).at(-1);
+  const taught = latest && m.strategies.find(s=>s.id===latest.strategy);
+  if (taught && alignmentActive(m,taught,records) && !["diagnostic","probe"].includes(activity) && !followupCompatible(m,taught,q,records)) {
+    const replacement=blockCheck(m,taught,records);
+    if(replacement)return {...ms,phase:"check",activity:"check",question:replacement,strategy:taught,reason:"One fresh question using the method explained. Other methods still need their own teaching or established evidence."};
+    return withHandover({...ms,phase:"pause",question:null,reason:"No fresh question is supported by this explanation and your established methods. This teaching gap is not mastery; ask a teacher for the missing method."},m,records,now);
+  }
   return { ...ms, activity };
 }
 /** retention-display@1: a scheduled delayed check carries its exact opening instant (the same instant the evidence uses to open it) */
@@ -569,7 +580,12 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     if (wrong) {
       const r = recovery(wrong, records, evidence, now, session);
       const again = records.attempts.filter((a) => a.questionId === wrong).length;
-      if (r.phase === "investigate" || r.phase === "support" || r.phase === "teach" || (r.phase === "return" && again < 2))
+      // scoped-teaching-priority@1: when recovery would send the learner to a prerequisite module, but this module
+      // has a scoped skill unit that covers the wrong answer (its own teaching for that question kind), prefer the
+      // module's own teaching path. The prerequisite bugs are correct (a carrying error rests on place value), but the
+      // module's carrying-specific explanations should be tried before routing away. §16.5
+      const ownUnit = (r.phase === "support" || (r.phase === "teach" && r.active !== competency)) ? unitOfQuestion(m, wrong) : null;
+      if (r.phase === "investigate" || ((r.phase === "support" || r.phase === "teach" || (r.phase === "return" && again < 2)) && !ownUnit))
         return { ...base, phase: "recover", original: wrong, diagnosis: d, reason: r.reason };
       if (r.phase === "escalate") return { ...base, phase: "pause", diagnosis: d, reason: r.reason };
       if (r.phase === "solved_after_help" || r.phase === "solved_on_retry") {
@@ -687,6 +703,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     const before = records.teaching.some((t) => t.competency === competency);
     return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: before && ev.retention === "failed" ? "The delayed check did not come out, so here is the topic again, explained another way, then one on your own." : before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? withTail(established.says, "Here is a way to rebuild it.") : open && claimTaughtBy(s) ? withTail(claimWording(own!.scope.question, own!.claim!.explanation, own!.claim!.says), "Here is a way to rebuild it.") : diagnosisReason(d, s) };
   }
+  if (st && alignmentActive(m, st, records) && ["guided_practice", "reassess"].includes(decision.action) && !(decision.action === "guided_practice" ? guided : blockCheck(m, st, records))) return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no fresh question supported by this explanation and your established methods. This is a teaching gap, not mastery. Ask a teacher to help with the missing method." };
   if (decision.action === "guided_practice" && st && guided) return { ...base, phase: "guided", question: guided, strategy: st, diagnosis: d, decision, reason: "Practise it once, with a hint if you want one. This counts as practice with help." };
   if (decision.action === "reassess" && st) {
     const q = blockCheck(m, st, records);
@@ -806,7 +823,7 @@ export function subSkillGap(m: Module, records: LearnerRecords): { family: strin
  */
 export function guidedItem(m: Module, st: Strategy, records: LearnerRecords): string | null {
   const met = new Set([...records.attempts, ...records.unresolved, ...(records.pending ?? [])].map((a) => problemKeyOf(a.questionId)));
-  if (keyboardOffered(st.guided) && !answered(records, st.guided) && !met.has(problemKeyOf(st.guided))) return st.guided;
+  if (followupCompatible(m, st, st.guided, records) && keyboardOffered(st.guided) && !answered(records, st.guided) && !met.has(problemKeyOf(st.guided))) return st.guided;
   const p = problemOf(st.guided.replace(/:(mc|w)$/, ""));
   if (!p) return null;
   const unit = unitOfStrategy(m, st);
@@ -814,12 +831,15 @@ export function guidedItem(m: Module, st: Strategy, records: LearnerRecords): st
   const skill = config ? connectedSkill(config, st.guided) : null;
   const avoid = new Set([st.check, ...st.screens.map((x) => x.instance ?? ""), ...m.chapter.map((x) => x.instance ?? "")].filter(Boolean).map(problemKeyOf));
   const inScope = (id: string) => (unit ? unit.accepts(id) : !skill || connectedSkill(config!, id) === skill);
-  return phasePool(p.family, "practice").find((id) => !met.has(problemKeyOf(id)) && !avoid.has(problemKeyOf(id)) && !answered(records, id) && keyboardOffered(id)
-    && withinGrade(records, id) && !quarantined(id) && question(id).competency === m.competency && inScope(id)) ?? null;
+  const candidates = phasePool(p.family, "practice");
+  const ordered = alignmentActive(m, st, records) ? alignedPractice({ ...m, strategies: [st] }, candidates) : candidates;
+  return ordered.find((id) => !met.has(problemKeyOf(id)) && !avoid.has(problemKeyOf(id)) && !answered(records, id) && keyboardOffered(id)
+    && withinGrade(records, id) && !quarantined(id) && question(id).competency === m.competency && inScope(id) && followupCompatible(m, st, id, records)) ?? null;
 }
 /** The question for a block's check alone: the strategy's own check if the learner has never seen it, else a fresh one. */
 export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): string | null => {
   const unit = unitOfStrategy(m, st);
+  if (alignmentActive(m, st, records) && !unit) return questionForRequirement(m, "check", records, id => followupCompatible(m, st, id, records));
   if (unit) return unitCheck(m, unit, records, st);
   return keyboardOffered(st.check) && !answered(records, st.check) && withinGrade(records, st.check) ? st.check : fromPool(m, "check", records);
 };
@@ -830,7 +850,7 @@ export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): st
  */
 export function unitCheck(m: Module, unit: SkillUnit, records: LearnerRecords, st?: Strategy | null): string | null {
   const presented = presentedProblems(records, moduleFor);
-  const fresh = (id: string) => unit.accepts(id) && keyboardOffered(id) && !presented.has(problemKeyOf(id));
+  const fresh = (id: string) => (!st || followupCompatible(m, st, id, records)) && unit.accepts(id) && keyboardOffered(id) && !presented.has(problemKeyOf(id));
   // the recheck is where the error behind the teaching would still show (a discriminating question), when there is one: the
   // misconception a fix addresses, else the open (suspected) one in this competency; a question it cannot show on proves nothing
   // (#110 recheck@2) for general teaching with no established claim: an error the learner's latest wrong answer alone on this skill
@@ -979,10 +999,22 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
   if (tries.length >= 1 + RETRY_LIMIT) return { ...base, phase: "escalate", active: null, reason: "This problem has been tried several times after the extra work, and it is still not coming out. That is not a failure: go through it with a teacher or parent." };
   // skill-units@1: a wrong delayed-check answer on a skill taught here goes back to that skill, not to what it builds on: its module
   // asks a fresh question on it alone (moduleStep, failed delayed check) until one is right
+  // recovery-scope@1: when the initial teaching used an unscoped (prerequisite) strategy, the unit's own taughtAt is null even though
+  // the module was taught. If a unit accepts the failed question and the module has any teaching record, the unit was implicitly
+  // covered — route to same-skill recovery, not prerequisite support.
   if (tries[0].activity === "retention") {
     const m = moduleFor(q.competency);
     const u = m ? unitsOf(m, records).find((x) => x.taughtAt && x.unit.accepts(originalQid)) : undefined;
-    if (u && !records.attempts.some((a) => a.at > tries[0].at && a.activity !== "retention" && independentAttempt(a) && rightAnswer(a) && u.unit.accepts(a.questionId)))
+    // recovery-scope@1: fall back to a unit that accepts the question when the module was taught (any strategy) but the unit's own
+    // taughtAt is null because the teaching used an unscoped prerequisite strategy (e.g. check_what_it_uses)
+    const uFallback = !u && m ? (() => {
+      const accepting = unitOfQuestion(m, originalQid);
+      if (!accepting) return undefined;
+      const moduleTaught = records.teaching.some((t) => t.competency === q.competency);
+      return moduleTaught ? { unit: accepting, taughtAt: records.teaching.filter((t) => t.competency === q.competency).at(-1)!.at } : undefined;
+    })() : undefined;
+    const matched = u ?? uFallback;
+    if (matched && !records.attempts.some((a) => a.at > tries[0].at && a.activity !== "retention" && independentAttempt(a) && rightAnswer(a) && matched.unit.accepts(a.questionId)))
       return { ...base, phase: "teach", active: q.competency, reason: "The delayed check on this skill did not come out. Back to this skill first: a fresh question on it on your own." };
   }
   // own-skill teaching (Milestone 2 closure, decision C): when the skills this problem builds on show no gap and the problem is still wrong after a

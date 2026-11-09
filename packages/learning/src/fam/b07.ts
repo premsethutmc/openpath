@@ -1479,7 +1479,8 @@ const ftaText = (ex: number[]) =>
     // repeated products (2 × 2 × 5), not index notation: Grade 7 learners may not have met exponents yet
     .flatMap((k, i) => Array.from({ length: k }, () => String(PR3[i])))
     .join(" × ");
-const ftaOk = ([ask, e]: number[]) => {
+// The release pool is narrower than the supported historical IDs: old records must still replay.
+const ftaOk = ([ask, e]: number[], historical = false) => {
   if (ask < 0 || ask > 1 || e < 0 || e >= 65536) return false;
   const { a, b } = ftaExp(e);
   const A = fromExp(a);
@@ -1488,7 +1489,7 @@ const ftaOk = ([ask, e]: number[]) => {
   // two different numbers up to 5000 sharing at least one prime, each with at least two primes, neither dividing the other,
   // and the 7s kept small
   // and an LCM a Grade 7 learner can check by hand (at most 10 000)
-  return used && A !== Bn && A <= 5000 && (A * Bn) / gcd(A, Bn) <= 10000 && Bn <= 5000 && gcd(A, Bn) > 1 && A % Bn !== 0 && Bn % A !== 0 && a[3] + b[3] <= 2 && a.some((x, i) => x !== b[i] && x && b[i]);
+  return used && A !== Bn && A <= 5000 && (historical || (A * Bn) / gcd(A, Bn) <= 10000) && Bn <= 5000 && gcd(A, Bn) > 1 && A % Bn !== 0 && Bn % A !== 0 && a[3] + b[3] <= 2 && a.some((x, i) => x !== b[i] && x && b[i]);
 };
 
 // ---------------------------------------------------------------- kinds of fractions (agclass)
@@ -2282,7 +2283,7 @@ B07.push(
     mc: true,
     // [ask, e]: two numbers with the exponents in e (of 2, 3, 5, 7); ask 0 the HCF, 1 the LCM
     parse: none,
-    reject: (p) => (ftaOk(p) ? null : "Two different numbers up to 5000 built from 2, 3, 5 and 7, sharing a prime, with LCM at most 10 000."),
+    reject: (p) => (ftaOk(p, true) ? null : "Two different numbers up to 5000 built from 2, 3, 5 and 7, sharing a prime, with LCM at most 10 000."),
     prompt: ([ask, e]) => {
       const { a, b } = ftaExp(e);
       return `${fromExp(a)} = ${ftaText(a)} and ${fromExp(b)} = ${ftaText(b)}. Use these prime factorisations to find the ${ask === 0 ? "HCF" : "LCM"} of ${fromExp(a)} and ${fromExp(b)}.`;

@@ -4,6 +4,7 @@
  * same thing in words, so a learner using a screen reader gets the same question.
  */
 import type { JSX } from "react";
+import { TriangleAngleLab } from "../geometry/TriangleAngleLab";
 type V = { type: string; [k: string]: unknown };
 const num = (v: unknown, d = 0) => (typeof v === "number" && Number.isFinite(v) ? v : d);
 const arr = <T,>(v: unknown): T[] => (Array.isArray(v) ? (v as T[]) : []);
@@ -244,6 +245,7 @@ const ACC = "var(--accent, #2f6fde)";
 const SOFT = "var(--soft, #dbe6f7)";
 
 export function Figure({ v }: { v: V }) {
+  if (v.type === "triangle-angle-lab") return <TriangleAngleLab proof={v.proof !== false} />;
   const label = describe(v);
   const box = (w: number, h: number, body: JSX.Element | JSX.Element[]) => (
     <figure className="figure" aria-label={label} role="img">

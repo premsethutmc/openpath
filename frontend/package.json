@@ -48,6 +48,7 @@
     "math:build:standalone": "node scripts/build-math.mjs --standalone"
   },
   "dependencies": {
+    "jsxgraph": "1.14.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },

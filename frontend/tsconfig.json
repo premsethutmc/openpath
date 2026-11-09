@@ -37,6 +37,7 @@
     "src/curriculum",
     "src/writing",
     "src/journey",
-    "src/math/react-shim.d.ts"
+    "src/math/react-shim.d.ts",
+    "src/geometry"
   ]
 }

@@ -1,0 +1,104 @@
+{
+ "status": "unreviewed research flags; not content; nothing applied",
+ "graph": "1.0.0+prerequisites@1.1.0+audit@1.1.2+additions@1.1.1+expansion@1.0.2",
+ "flags": [
+  {
+   "kind": "missing-link?",
+   "target": "MATH.calculus.integration-methods",
+   "from": "MATH.algebra.logarithms",
+   "existing": null,
+   "evidence": {
+    "items": 2082,
+    "mentioningLog": 1197,
+    "families": [
+     "autrig",
+     "auform",
+     "aupfr",
+     "auinvf",
+     "auprq",
+     "auparts"
+    ],
+    "solutionStepsNameLogarithms": false
+   },
+   "note": "Answers use ln|…|. Recovery cannot reach logarithms from here. Caution: ∫1/x dx = ln|x| is arguably part of the integration skill itself, not logarithm laws; a link is only warranted if combining or simplifying logarithms is required. Proposed relation type if accepted: support (never a gate)."
+  },
+  {
+   "kind": "missing-link?",
+   "target": "MATH.calculus.partial-fractions-integration",
+   "from": "MATH.algebra.logarithms",
+   "existing": null,
+   "evidence": {
+    "items": 326,
+    "mentioningLog": 182,
+    "families": [
+     "arpfint"
+    ],
+    "solutionStepsNameLogarithms": false
+   },
+   "note": "Answers use ln|…|. Recovery cannot reach logarithms from here. Caution: ∫1/x dx = ln|x| is arguably part of the integration skill itself, not logarithm laws; a link is only warranted if combining or simplifying logarithms is required. Proposed relation type if accepted: support (never a gate)."
+  },
+  {
+   "kind": "missing-link?",
+   "target": "MATH.calculus.indefinite-integrals",
+   "from": "MATH.algebra.logarithms",
+   "existing": null,
+   "evidence": {
+    "items": 1432,
+    "mentioningLog": 57,
+    "families": [
+     "aulax",
+     "austd"
+    ],
+    "solutionStepsNameLogarithms": false
+   },
+   "note": "Answers use ln|…|. Recovery cannot reach logarithms from here. Caution: ∫1/x dx = ln|x| is arguably part of the integration skill itself, not logarithm laws; a link is only warranted if combining or simplifying logarithms is required. Proposed relation type if accepted: support (never a gate)."
+  },
+  {
+   "kind": "questionable-mandatory",
+   "target": "MATH.calculus.continuity",
+   "from": "MATH.calculus.derivatives",
+   "existing": {
+    "from": "MATH.calculus.derivatives",
+    "type": "mandatory",
+    "source": "prerequisites@1.1.0"
+   },
+   "note": "Continuity is normally taught before derivatives; a mandatory edge from derivatives looks reversed."
+  },
+  {
+   "kind": "questionable-mandatory",
+   "target": "MATH.algebra.polynomials",
+   "from": "MATH.algebra.inverse-proportion",
+   "existing": {
+    "from": "MATH.algebra.inverse-proportion",
+    "type": "mandatory",
+    "source": "prerequisites@1.1.0"
+   },
+   "note": "Operating on polynomials does not obviously rest on inverse proportion."
+  },
+  {
+   "kind": "questionable-mandatory",
+   "target": "MATH.calculus.differential-equations",
+   "from": "MATH.calculus.area-integrals",
+   "existing": {
+    "from": "MATH.calculus.area-integrals",
+    "type": "mandatory",
+    "source": "prerequisites@1.1.0"
+   },
+   "note": "Solving differential equations needs integration, not areas by integration specifically."
+  },
+  {
+   "kind": "missing-link?",
+   "target": "MATH.calculus.derivative-rules",
+   "from": "MATH.calculus.derivatives",
+   "existing": null,
+   "note": "Derivative rules reach the derivative concept only via differentiability -> continuity -> derivatives."
+  },
+  {
+   "kind": "missing-link?",
+   "target": "MATH.calculus.partial-fractions-integration",
+   "from": "MATH.algebra.partial-fractions",
+   "existing": null,
+   "note": "Integrating by partial fractions has no relation to the algebra skill of partial fractions (question steps do name it)."
+  }
+ ]
+}

@@ -21,6 +21,7 @@ import { graph } from "./graph";
 import { selectable } from "./question-status";
 import { FAMILY_VERSION } from "./spec";
 import { strategyScopeProblems } from "./teaching-presentation";
+import { CONNECTION_CONFIGS } from "./skill-connections";
 import grade7Scope from "../../../content/learning/teaching-scope-grade7.v1.json";
 import grade8Scope from "../../../content/learning/teaching-scope-grade8.v1.json";
 
@@ -35,6 +36,8 @@ export interface BlueprintScreen extends Screen {
   worked?: boolean;
 }
 export interface BlueprintStrategy {
+  /** Replace one existing template strategy in place, keeping its record ID and question family. */
+  replaceTemplateStrategy?: boolean;
   /** Explicit scoped strategies preserve candidate instances instead of redrawing them. */
   scope?: Strategy["scope"];
   addresses?: string;
@@ -45,6 +48,9 @@ export interface BlueprintStrategy {
   kind: Strategy["kind"];
   /** This way of explaining builds on the prerequisite facts the family's explanations name (their probe questions). */
   buildsOnPrerequisites?: boolean;
+  /** Retain the existing example draw when replacing auto-generated worked steps with authored teaching.
+   * This preserves subsequent guided/check IDs and keeps the old example out of fresh questions. */
+  reserveExample?: boolean;
   screens: BlueprintScreen[];
 }
 export interface Blueprint {
@@ -149,8 +155,15 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
       .flatMap(sc => sc.instance ? [exposureKey(sc.instance)] : []));
     const reserved = new Set([...shown, ...[...base.diagnostics, ...base.practice, ...base.transfer, ...base.retention,
       ...base.strategies.flatMap(s => [s.guided, s.check])].map(exposureKey)]);
+    const candidateIds = new Set<string>();
     const additions: Strategy[] = bp.strategies.map(st => {
-      if (ids.has(st.id)) throw new Error(`${LIBRARY_POLICY}: duplicate strategy ${st.id}`);
+      if (candidateIds.has(st.id)) throw new Error(`${LIBRARY_POLICY}: duplicate strategy ${st.id}`);
+      candidateIds.add(st.id);
+      const previous = base.strategies.find(s => s.id === st.id);
+      if (st.replaceTemplateStrategy) {
+        if (!previous || problemOf(previous.check)?.family !== st.scope?.family) throw new Error(`${LIBRARY_POLICY}: ${st.id}: replacement must keep an existing template ID and question family`);
+        if (previous.scope && (previous.scope.subSkill !== st.scope?.subSkill || JSON.stringify(previous.scope.parameters ?? null) !== JSON.stringify(st.scope?.parameters ?? null))) throw new Error(`${LIBRARY_POLICY}: ${st.id}: replacement must preserve the existing scope`);
+      } else if (ids.has(st.id)) throw new Error(`${LIBRARY_POLICY}: duplicate strategy ${st.id}`);
       ids.add(st.id);
       // the scope may name any family the template module itself draws from (its pools: the competency's other sub-skills),
       // never a family outside the module
@@ -158,7 +171,7 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
       if (!st.scope || !family || !poolFamilies(base).includes(family) || FAMILIES.get(family)?.competency !== bp.competency || st.buildsOnPrerequisites || st.screens.some(sc => sc.worked || !sc.instance))
         throw new Error(`${LIBRARY_POLICY}: ${st.id}: template additions require explicit scoped instances`);
       for (const key of new Set(st.screens.map(sc => exposureKey(sc.instance!)))) {
-        if (reserved.has(key)) throw new Error(`${LIBRARY_POLICY}: ${st.id}: shown example repeats a reserved exposure`);
+        if (reserved.has(key) && !(st.replaceTemplateStrategy && previous?.screens.some(sc => sc.instance && exposureKey(sc.instance) === key))) throw new Error(`${LIBRARY_POLICY}: ${st.id}: shown example repeats a reserved exposure`);
         reserved.add(key);
       }
       for (const [id, phase] of [[st.guided, 'practice'], [st.check, 'check']] as const) {
@@ -175,7 +188,10 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
       if (problems.length) throw new Error(`${LIBRARY_POLICY}: ${st.id}: ${problems.join('; ')}`);
       return candidate;
     });
-    return { ...base, strategies: [...base.strategies, ...additions] };
+    return { ...base, strategies: [
+      ...base.strategies.map(s => additions.find(a => a.id === s.id) ?? s),
+      ...additions.filter(a => !base.strategies.some(s => s.id === a.id)),
+    ] };
   }
   const seed = problemOf(`gen:${bp.family}:${bp.seed.join(",")}`);
   if (!seed) throw new Error(`${LIBRARY_POLICY}: ${bp.competency}: the seed is not a supported ${bp.family} problem`);
@@ -209,9 +225,11 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
         used.add(exposureKey(id));
       }
       if (st.screens.some(sc => sc.worked || !sc.instance)) throw new Error(`${LIBRARY_POLICY}: ${st.id}: explicit scoped screens require their own instances`);
+      // a shown example is never drawn again as a question to answer (as for template and extendsTemplate modules)
+      for (const sc of st.screens) used.add(exposureKey(sc.instance!));
       return { id: st.id, title: st.title, kind: st.kind, scope: st.scope, ...(st.addresses !== undefined ? { addresses: st.addresses } : {}), needs: st.buildsOnPrerequisites ? probes : [], screens: st.screens, guided: st.guided!, check: st.check! };
     }
-    const ex = st.screens.some((s) => s.worked) ? example() : seed;
+    const ex = st.reserveExample || st.screens.some((s) => s.worked) ? example() : seed;
     return { id: st.id, title: st.title, kind: st.kind, needs: st.buildsOnPrerequisites ? probes : [], screens: st.screens.map((s) => screen(s, ex, st.kind === "prerequisite" ? "prerequisite" : "strategy")), guided: take("practice", "typed"), check: take("check", k % 2 ? "mc" : "typed") };
   });
   return {
@@ -289,6 +307,20 @@ export function fromTemplate(family: string, competency: string, version: string
   }
   if (uses.length)
     strategies.push({ id: "check_what_it_uses", title: "Check what it builds on", kind: "prerequisite", needs: [], screens: [{ role: "prerequisite", title: "What it uses", text: [`Each step builds on another skill: ${uses.join("; ")}. If a step is slow, practise that skill first.`, ...(WHOLE_LESSON.has(competency) ? [] : [`Then the method is: ${def.teach.method}`])] }], guided: take("practice", "typed"), check: take("check", "typed") });
+  // scope-from-config@1: when a connectionConfig maps the main family to a subSkill,
+  // every non-prerequisite strategy gets that scope so skillUnits() and unitOfQuestion()
+  // can identify the skill unit; without this, template modules with subskill configs
+  // route wrong answers to prerequisites instead of their own teaching (§16.5).
+  const cfg = CONNECTION_CONFIGS.find((c) => c.competency === competency);
+  // Only add scope when the subSkill covers the ENTIRE family (no parameter constraints),
+  // so template-generated questions always match; parameter-constrained skills (e.g.
+  // angle-pairs.complement covers only afpair params[0]=0) need blueprint-authored scope.
+  const mainSkill = cfg?.subSkills.find((s) => s.families.includes(family) && !("parameters" in s));
+  if (mainSkill) {
+    for (const st of strategies) {
+      if (st.kind !== "prerequisite") st.scope = { family, subSkill: mainSkill.id };
+    }
+  }
   const sub = subSkills(competency, family, used);
   const own = [take("practice", "typed"), take("practice", "mc"), take("practice", "typed")];
   return {

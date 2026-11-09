@@ -24,7 +24,7 @@ from .written import _is_educator, _shared_pupils
 
 
 def _json(a):
-    return {'id': f'ack-{a.pk}', 'at': a.at.isoformat().replace('+00:00', 'Z'), 'competency': a.competency, 'by': 'educator'}
+    return {'id': f'ack-{a.pk}', 'at': a.at.isoformat().replace('+00:00', 'Z'), 'competency': a.competency, 'by': 'educator', **({'recoveryEpisode': a.recovery_handoff.episode} if a.recovery_handoff_id else {})}
 
 
 def _competencies():

@@ -1,0 +1,15 @@
+{
+  "note": "SIMULATED learners only (seeded models); not evidence about real children or real learning gains. Branch research/deep-recovery-confidence (from 311f9d31).",
+  "fr_analysis": { "file": "fr-analysis-phase4-heldout.jsonl", "what": "the 68 phase-4 held-out false-reassurance runs re-run (68/68 reproduce): 36 lucky typed first try, 24 two lucky typed after help, 8 two lucky typed at the slip check; no claim rested on a choice item", "command": "cd frontend && node --import tsx src/journey/deep-recovery-fr5.ts ../research/deep-recovery/results/phase4/heldout2-seeds-4001-4030-at-588bd839.jsonl ../research/deep-recovery/results/phase4/heldout1-seeds-3001-3030-at-abf545c1.jsonl" },
+  "rules": "selective (phase-4 P4 options, current) | three-fresh | different-form | delayed-add | delayed-replace | delayed-first | consistent | consistent-first; all with sessionBudget 40, budget 120, max 3 sittings, reuse on, validDays 7 (frontend/src/journey/deep-recovery-sim5.ts RULES)",
+  "learners": "per goal O1 (gen:aupfr) and O2 (gen:aulax): strong-right, strong-slips, strong-history, single-gap, multiple-gaps, light-guesser (lucky: typed 5%, choice 25%), heavy-guesser (typed 20%, choice 30%; a stress assumption)",
+  "seeds": {
+    "tuning": "5001-5010: six rules at 3f6da082 (tuning-seeds-5001-5010-six-rules-at-3f6da082.jsonl, 840 runs) + consistent/consistent-first added after it (tuning-seeds-5001-5010-consistent-rules.jsonl, 280 runs)",
+    "heldout": "6001-6030 at 9dfa0b03 (heldout-seeds-6001-6030-at-9dfa0b03.jsonl, 3360 runs = 14 cells x 8 rules x 30, 0 errors); never used for any change",
+    "not_reused": "all earlier ranges (1-10, 101-110, 1001-1030, 2001-2030, 3001-3030, 4001-4030)"
+  },
+  "produce": "cd frontend && node --import tsx src/journey/deep-recovery-sim5.ts 6001 6030 selective,three-fresh,different-form,delayed-add,delayed-replace,delayed-first,consistent,consistent-first <cells>",
+  "summarise": "cd frontend && node --import tsx src/journey/deep-recovery-summary5.ts ../research/deep-recovery/results/phase5-confidence/<file>.jsonl > <file>.summary.txt",
+  "outcomes": "solved-fresh-unaided (claims solved and the learner model can do the goal) | false-reassurance | provisional (still owed a later-sitting check after 3 sittings) | pause | blocked | handed-over | error",
+  "known_caveat": "simulated wrong answers on tuple items (partial fractions, linear systems) are '0' (shared learners.ts wrong()); the node grader marks them wrong, the real server would treat them as unreadable and re-ask. Decisions and rule comparisons are unaffected (rules differ only on goal answers); absolute O1 effort is not server-realistic."
+}

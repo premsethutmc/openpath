@@ -865,8 +865,8 @@ async function releaseAll({ educator, manager }, items) {
 }
 /** pools@1: a module draws on every question family of its competency, and is released only after all of them. */
 const moduleWithFamilies = (competency) => [...familiesOf(moduleFor(competency)).map((f) => `family:${f}`), `module:${competency}`];
-/** Learn a skill with a persistent diagnostic difficulty, then return the next day and after seven full days. */
-async function learnToVerified(page, learner, path, shotPrefix, target) {
+/** Learn released content; review release does not override a missing-method stop. */
+async function learnReleasedTopic(page, learner, path, shotPrefix, target, expected = "verified") {
   const go = async () => {
     await home(page);
     for (const t of path) await tile(page, t);
@@ -896,7 +896,39 @@ async function learnToVerified(page, learner, path, shotPrefix, target) {
   await page.getByRole("heading", { name: /^Grade \d+ · / }).waitFor();
   await go();
   const second = await work(page, () => null, 40);
-  assert.ok(answered(second).length >= 1, `fresh questions on the next day: ${second.join(" ")}`);
+  if (expected === "method-gap") {
+    assert.equal(answered(second).length, 0, "an exhausted compatible supply must not invent a fresh question");
+    await page.getByText("Let's pause this one", { exact: true }).waitFor();
+    assert.match(await page.locator("body").innerText(), /No fresh question is supported by this explanation.*teaching gap is not mastery/s);
+    const before = await records(page, learner);
+    assert.ok(before.some(r => r.record === "teach" && r.competency === target && r.methodAlignment?.startsWith("method-alignment@1:")));
+    await shot(page, `${shotPrefix}-2-method-gap`);
+    await page.reload();
+    assert.deepEqual(await records(page, learner), before, "reload preserves all prior evidence");
+    await timeTravel(page, learner, 7.05);
+    await page.reload();
+    await page.getByRole("heading", { name: /^Grade \d+ · / }).waitFor();
+    await go();
+    await page.locator(".qcard .counted", { hasText: "a short check to find the starting point" }).waitFor();
+    const qid = await page.locator(".qcard").getAttribute("data-qid");
+    assert.equal(Q.get(qid).competency, target);
+    assert.ok(!before.some(r => r.record === "attempt" && r.questionId.replace(/:mc$/, "") === qid.replace(/:mc$/, "")));
+    const q = Q.get(qid), candidates = q.type === "choice" || qid.endsWith(":mc") ? (q.options ?? []).map((_, i) => "ABCD"[i]) : [...(q.misconceptions ?? []).map(m => m.when), "0", "1"];
+    const wrong = candidates.find(value => decide(qid, value).credit === false);
+    assert.notEqual(wrong, undefined, "a readable wrong response is required");
+    await answer(page, () => wrong);
+    const after = await records(page, learner), attempt = after.filter(r => r.record === "attempt").at(-1);
+    assert.equal(attempt.questionId, qid); assert.equal(attempt.decision.verdict, "incorrect");
+    assert.notEqual(attempt.activity, "retention", "re-entry is not a delayed mastery check");
+    await page.reload();
+    assert.deepEqual(await records(page, learner), after);
+    await home(page);
+    for (const t of path.slice(0, -1)) await tile(page, t);
+    assert.notEqual(await tileStatus(page, path.at(-1)), "verified", "releasing content cannot verify untaught methods");
+    await shot(page, `${shotPrefix}-3-reentry-unverified`);
+    return [...first, ...second, `diagnostic-reentry:${qid}`];
+  }
+  assert.ok(answered(second).length >= 1, `${target}: fresh questions on the next day: ${second.join(" ")}; screen: ${await page.locator("body").innerText()}`);
   await timeTravel(page, learner, 7.05);
   await page.reload();
   await page.getByRole("heading", { name: /^Grade \d+ · / }).waitFor();
@@ -986,11 +1018,11 @@ test("content system: an educator reviews a question family and its module in th
   // a learner: two early mistakes, the next day, a week later: verified on released content (no test fixture)
   const { page: lp, context, learner } = await learnerPage("Synthetic G4 released learner");
   await setupYear(lp, 4);
-  await learnToVerified(lp, learner, ["Multiplication and division", "Multiply multi-digit numbers"], "v4", "MATH.number.multi-multiplication");
+  await learnReleasedTopic(lp, learner, ["Multiplication and division", "Multiply multi-digit numbers"], "v4", "MATH.number.multi-multiplication");
   for (const c of [ed.context, rm.context, context]) await c.close();
 });
 
-test("content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, recovery, a week away, verified on released content", async () => {
+test("content system: Grade 10 and an unfamiliar textbook verify; Grade 12 release cannot bypass missing-method teaching", async () => {
   if (mode !== "django") return;
   await releaseAll(await sharedReviewers(), [...new Set(["MATH.algebra.factorisation", "MATH.calculus.integration-methods", "MATH.algebra.identities-intro"].flatMap(moduleWithFamilies))]);
   // the reviewers are done (their review pages would otherwise go on counting the library's coverage meanwhile)
@@ -1005,7 +1037,7 @@ test("content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, r
     await page.getByRole("button", { name: /Board B Sample Mathematics/ }).click();
     await page.getByRole("button", { name: "Start Grade 10" }).click();
     await page.getByRole("heading", { name: /^Grade 10 · / }).waitFor();
-    await learnToVerified(page, learner, ["Algebra", "Polynomials", "Factorisation", "Factor algebraic expressions"], "v10", "MATH.algebra.factorisation");
+    await learnReleasedTopic(page, learner, ["Algebra", "Polynomials", "Factorisation", "Factor algebraic expressions"], "v10", "MATH.algebra.factorisation");
     await context.close();
   }
   // Grade 12: a substitution integral done with powers as multiplication → recovery to powers; then the skill itself
@@ -1014,7 +1046,7 @@ test("content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, r
     await setupYear(page, 12);
     await recoverTyped(page, "integral from 0 to 2 of 2x(x^2+1) dx", "multiply-for-power");
     await page.getByText("Solved after help", { exact: true }).waitFor();
-    await learnToVerified(page, learner, ["Calculus", "Integrals", "Techniques of integration", "Integrate by substitution and parts"], "v12", "MATH.calculus.integration-methods");
+    await learnReleasedTopic(page, learner, ["Calculus", "Integrals", "Techniques of integration", "Integrate by substitution and parts"], "v12", "MATH.calculus.integration-methods", "method-gap");
     await context.close();
   }
   // an unfamiliar plain-text textbook (Board C, Grade 9)
@@ -1023,7 +1055,7 @@ test("content system: Grade 10, Grade 12 and an unfamiliar textbook: mistakes, r
     await setupYear(page, 9, { textbook: UNSEEN });
     await page.getByRole("button", { name: "Use this curriculum for Grade 9" }).click();
     await page.getByRole("heading", { name: /^Grade 9 · / }).waitFor();
-    await learnToVerified(page, learner, ["Algebra", "Brackets and powers", "Expanding brackets", "Expand simple products"], "v9", "MATH.algebra.identities-intro");
+    await learnReleasedTopic(page, learner, ["Algebra", "Brackets and powers", "Expanding brackets", "Expand simple products"], "v9", "MATH.algebra.identities-intro");
     await context.close();
   }
 });

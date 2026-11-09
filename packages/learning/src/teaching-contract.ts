@@ -1,3 +1,4 @@
+import { methodCompatibility } from "./method-alignment";
 /**
  * teaching-contract@1: how a lesson is assembled from its sections, and what is checked about each section.
  *
@@ -472,7 +473,8 @@ const withinGradeOf = (grade: number | null) => (id: string) => { const g = grad
 /** Practice after a lesson starts with questions of the same kind as the one it worked through (a family that mixes kinds
  *  gives `teach.caseOf`); the other kinds follow, so practice tests what was just taught. Written answers come before multiple choice
  *  within each group, and questions already solved on the page come last. */
-export function alignedPractice(module: Module, ids: string[], grade: number | null = null): string[] {
+export function alignedPractice(module: Module, ids: string[], grade: number | null = null, strategy?: Strategy): string[] {
+  if (strategy) ids = ids.filter(id=>methodCompatibility(module,strategy,id).status === "covered");
   const scope = teachingScopeFor(module);
   const family = scope.family ? FAMILIES.get(scope.family) : undefined;
   const caseOf = family?.teach?.caseOf;

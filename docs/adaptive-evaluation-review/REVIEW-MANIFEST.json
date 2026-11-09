@@ -1,0 +1,2392 @@
+[
+  {
+    "id": "MATH.calculus.integration-methods#why_du",
+    "hash": "sha256:c02e08343df2e55ff5803d120f993c5a5deebea022a2e097580861ad03e19ab5",
+    "status": "pending_review",
+    "scope": [
+      "demonstration"
+    ],
+    "requiredDecision": "Educator: approve exact revision for supervised evaluation, request revision, demonstration only, or block; do not infer approval from machine checks.",
+    "eligibility": {
+      "contract": "explanation-review@1",
+      "id": "MATH.calculus.integration-methods#why_du",
+      "mode": "supervised-evaluation",
+      "usage": "lesson",
+      "eligible": false,
+      "status": "pending_review",
+      "educatorApproved": false,
+      "contentHash": "sha256:c02e08343df2e55ff5803d120f993c5a5deebea022a2e097580861ad03e19ab5",
+      "checks": [
+        {
+          "check": "exists",
+          "ok": true,
+          "detail": "content present"
+        },
+        {
+          "check": "record",
+          "ok": true,
+          "detail": "review record found"
+        },
+        {
+          "check": "revision",
+          "ok": true,
+          "detail": "the review applies to this exact revision"
+        },
+        {
+          "check": "not-blocked",
+          "ok": true,
+          "detail": "not blocked"
+        },
+        {
+          "check": "integrity",
+          "ok": true,
+          "detail": "review metadata consistent"
+        },
+        {
+          "check": "approved-for-usage",
+          "ok": false,
+          "detail": "pending_review may not be shown in supervised-evaluation"
+        },
+        {
+          "check": "competency",
+          "ok": true,
+          "detail": "explanation is for the skill being taught"
+        },
+        {
+          "check": "intervention",
+          "ok": true,
+          "detail": "conceptual is permitted in supervised-evaluation"
+        },
+        {
+          "check": "misconception-evidence",
+          "ok": true,
+          "detail": "no misconception claimed"
+        }
+      ],
+      "failed": [
+        "approved-for-usage"
+      ],
+      "label": "Not shown: this explanation is not cleared for use here."
+    },
+    "questions": [
+      {
+        "id": "gen:subst:2,3,2,3",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 2 to 3 of 2x(x² + 2)³ dx = ? (A fraction is fine.)",
+        "answer": "13345/4",
+        "solution": "Let u = x² + 2: x = 2 gives u = 6, x = 3 gives u = 11. 2x dx = du, so the integral is ∫ u³ du = u⁴ ⁄ 4. 11⁴ = 14641. 6⁴ = 1296. Between u = 6 and u = 11: 13345/4.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "65/4",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 2 to 3, u = x² + 2 goes from 6 to 11."
+          },
+          {
+            "when": "13345",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "13345/8",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "5",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (11⁴ as 11 × 4); a power multiplies 11 by itself 4 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:1,2,1,2",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 2 of 2x(x² + 1)² dx = ? (A fraction is fine.)",
+        "answer": "39",
+        "solution": "Let u = x² + 1: x = 1 gives u = 2, x = 2 gives u = 5. 2x dx = du, so the integral is ∫ u² du = u³ ⁄ 3. 5³ = 125. 2³ = 8. Between u = 2 and u = 5: 39.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "7/3",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 1 to 2, u = x² + 1 goes from 2 to 5."
+          },
+          {
+            "when": "117",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "39/2",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "3",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (5³ as 5 × 3); a power multiplies 5 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:1,2,3,2",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 2 of 2x(x² + 3)² dx = ? (A fraction is fine.)",
+        "answer": "93",
+        "solution": "Let u = x² + 3: x = 1 gives u = 4, x = 2 gives u = 7. 2x dx = du, so the integral is ∫ u² du = u³ ⁄ 3. 7³ = 343. 4³ = 64. Between u = 4 and u = 7: 93.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "7/3",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 1 to 2, u = x² + 3 goes from 4 to 7."
+          },
+          {
+            "when": "279",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "93/2",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "3",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (7³ as 7 × 3); a power multiplies 7 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:0,1,1,2",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 1 of 2x(x² + 1)² dx = ? (A fraction is fine.)",
+        "answer": "7/3",
+        "solution": "Let u = x² + 1: x = 0 gives u = 1, x = 1 gives u = 2. 2x dx = du, so the integral is ∫ u² du = u³ ⁄ 3. 2³ = 8. 1³ = 1. Between u = 1 and u = 2: 7/3.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "1/3",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 0 to 1, u = x² + 1 goes from 1 to 2."
+          },
+          {
+            "when": "7",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "7/6",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "1",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (2³ as 2 × 3); a power multiplies 2 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:0,1,2,2",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 1 of 2x(x² + 2)² dx = ? (A fraction is fine.)",
+        "answer": "19/3",
+        "solution": "Let u = x² + 2: x = 0 gives u = 2, x = 1 gives u = 3. 2x dx = du, so the integral is ∫ u² du = u³ ⁄ 3. 3³ = 27. 2³ = 8. Between u = 2 and u = 3: 19/3.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "1/3",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 0 to 1, u = x² + 2 goes from 2 to 3."
+          },
+          {
+            "when": "19",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "19/6",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "1",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (3³ as 3 × 3); a power multiplies 3 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:0,1,3,1",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 1 of 2x(x² + 3) dx = ? (A fraction is fine.)",
+        "answer": "7/2",
+        "solution": "Let u = x² + 3: x = 0 gives u = 3, x = 1 gives u = 4. 2x dx = du, so the integral is ∫ u¹ du = u² ⁄ 2. 4² = 16. 3² = 9. Between u = 3 and u = 4: 7/2.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "1/2",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 0 to 1, u = x² + 3 goes from 3 to 4."
+          },
+          {
+            "when": "7",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "7/4",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "1",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (4² as 4 × 2); a power multiplies 4 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      }
+    ],
+    "decision": null,
+    "reviewer": null,
+    "reviewedAt": null,
+    "note": null
+  },
+  {
+    "id": "MATH.calculus.integration-methods#limits_table",
+    "hash": "sha256:ceab6b6f2fd66aac907167cbb3590f21a8dc222301c1c92dc7b4bb7f2501840b",
+    "status": "pending_review",
+    "scope": [
+      "demonstration"
+    ],
+    "requiredDecision": "Educator: approve exact revision for supervised evaluation, request revision, demonstration only, or block; do not infer approval from machine checks.",
+    "eligibility": {
+      "contract": "explanation-review@1",
+      "id": "MATH.calculus.integration-methods#limits_table",
+      "mode": "supervised-evaluation",
+      "usage": "lesson",
+      "eligible": false,
+      "status": "pending_review",
+      "educatorApproved": false,
+      "contentHash": "sha256:ceab6b6f2fd66aac907167cbb3590f21a8dc222301c1c92dc7b4bb7f2501840b",
+      "checks": [
+        {
+          "check": "exists",
+          "ok": true,
+          "detail": "content present"
+        },
+        {
+          "check": "record",
+          "ok": true,
+          "detail": "review record found"
+        },
+        {
+          "check": "revision",
+          "ok": true,
+          "detail": "the review applies to this exact revision"
+        },
+        {
+          "check": "not-blocked",
+          "ok": true,
+          "detail": "not blocked"
+        },
+        {
+          "check": "integrity",
+          "ok": true,
+          "detail": "review metadata consistent"
+        },
+        {
+          "check": "approved-for-usage",
+          "ok": false,
+          "detail": "pending_review may not be shown in supervised-evaluation"
+        },
+        {
+          "check": "competency",
+          "ok": true,
+          "detail": "explanation is for the skill being taught"
+        },
+        {
+          "check": "intervention",
+          "ok": true,
+          "detail": "procedural is permitted in supervised-evaluation"
+        },
+        {
+          "check": "misconception-evidence",
+          "ok": true,
+          "detail": "no misconception claimed"
+        }
+      ],
+      "failed": [
+        "approved-for-usage"
+      ],
+      "label": "Not shown: this explanation is not cleared for use here."
+    },
+    "questions": [
+      {
+        "id": "gen:subst:2,3,2,3",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 2 to 3 of 2x(x² + 2)³ dx = ? (A fraction is fine.)",
+        "answer": "13345/4",
+        "solution": "Let u = x² + 2: x = 2 gives u = 6, x = 3 gives u = 11. 2x dx = du, so the integral is ∫ u³ du = u⁴ ⁄ 4. 11⁴ = 14641. 6⁴ = 1296. Between u = 6 and u = 11: 13345/4.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "65/4",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 2 to 3, u = x² + 2 goes from 6 to 11."
+          },
+          {
+            "when": "13345",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "13345/8",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "5",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (11⁴ as 11 × 4); a power multiplies 11 by itself 4 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:1,2,1,2",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 2 of 2x(x² + 1)² dx = ? (A fraction is fine.)",
+        "answer": "39",
+        "solution": "Let u = x² + 1: x = 1 gives u = 2, x = 2 gives u = 5. 2x dx = du, so the integral is ∫ u² du = u³ ⁄ 3. 5³ = 125. 2³ = 8. Between u = 2 and u = 5: 39.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "7/3",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 1 to 2, u = x² + 1 goes from 2 to 5."
+          },
+          {
+            "when": "117",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "39/2",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "3",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (5³ as 5 × 3); a power multiplies 5 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:1,2,3,2",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 2 of 2x(x² + 3)² dx = ? (A fraction is fine.)",
+        "answer": "93",
+        "solution": "Let u = x² + 3: x = 1 gives u = 4, x = 2 gives u = 7. 2x dx = du, so the integral is ∫ u² du = u³ ⁄ 3. 7³ = 343. 4³ = 64. Between u = 4 and u = 7: 93.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "7/3",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 1 to 2, u = x² + 3 goes from 4 to 7."
+          },
+          {
+            "when": "279",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "93/2",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "3",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (7³ as 7 × 3); a power multiplies 7 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:0,1,2,1",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 1 of 2x(x² + 2) dx = ? (A fraction is fine.)",
+        "answer": "5/2",
+        "solution": "Let u = x² + 2: x = 0 gives u = 2, x = 1 gives u = 3. 2x dx = du, so the integral is ∫ u¹ du = u² ⁄ 2. 3² = 9. 2² = 4. Between u = 2 and u = 3: 5/2.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "1/2",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 0 to 1, u = x² + 2 goes from 2 to 3."
+          },
+          {
+            "when": "5",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "5/4",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "1",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (3² as 3 × 2); a power multiplies 3 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:0,2,4,2",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 2 of 2x(x² + 4)² dx = ? (A fraction is fine.)",
+        "answer": "448/3",
+        "solution": "Let u = x² + 4: x = 0 gives u = 4, x = 2 gives u = 8. 2x dx = du, so the integral is ∫ u² du = u³ ⁄ 3. 8³ = 512. 4³ = 64. Between u = 4 and u = 8: 448/3.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "8/3",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 0 to 2, u = x² + 4 goes from 4 to 8."
+          },
+          {
+            "when": "448",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "224/3",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "4",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (8³ as 8 × 3); a power multiplies 8 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:0,3,1,2:mc",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "choice",
+        "prompt": "∫ from 0 to 3 of 2x(x² + 1)² dx = ? Choose one.",
+        "answer": "C",
+        "solution": "Let u = x² + 1: x = 0 gives u = 1, x = 3 gives u = 10. 2x dx = du, so the integral is ∫ u² du = u³ ⁄ 3. 10³ = 1000. 1³ = 1. Between u = 1 and u = 10: 333.",
+        "options": [
+          "9",
+          "333/2",
+          "333",
+          "999"
+        ],
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "A",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 0 to 3, u = x² + 1 goes from 1 to 10."
+          },
+          {
+            "when": "D",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "B",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "A",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (10³ as 10 × 3); a power multiplies 10 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      }
+    ],
+    "decision": null,
+    "reviewer": null,
+    "reviewedAt": null,
+    "note": null
+  },
+  {
+    "id": "MATH.calculus.integration-methods#powers_check",
+    "hash": "sha256:f68ced57e9f1a9880d4c895c6458af4950a9a6af21058639afe286bbb659b237",
+    "status": "pending_review",
+    "scope": [
+      "demonstration"
+    ],
+    "requiredDecision": "Educator: approve exact revision for supervised evaluation, request revision, demonstration only, or block; do not infer approval from machine checks.",
+    "eligibility": {
+      "contract": "explanation-review@1",
+      "id": "MATH.calculus.integration-methods#powers_check",
+      "mode": "supervised-evaluation",
+      "usage": "lesson",
+      "eligible": false,
+      "status": "pending_review",
+      "educatorApproved": false,
+      "contentHash": "sha256:f68ced57e9f1a9880d4c895c6458af4950a9a6af21058639afe286bbb659b237",
+      "checks": [
+        {
+          "check": "exists",
+          "ok": true,
+          "detail": "content present"
+        },
+        {
+          "check": "record",
+          "ok": true,
+          "detail": "review record found"
+        },
+        {
+          "check": "revision",
+          "ok": true,
+          "detail": "the review applies to this exact revision"
+        },
+        {
+          "check": "not-blocked",
+          "ok": true,
+          "detail": "not blocked"
+        },
+        {
+          "check": "integrity",
+          "ok": true,
+          "detail": "review metadata consistent"
+        },
+        {
+          "check": "approved-for-usage",
+          "ok": false,
+          "detail": "pending_review may not be shown in supervised-evaluation"
+        },
+        {
+          "check": "competency",
+          "ok": true,
+          "detail": "explanation is for the skill being taught"
+        },
+        {
+          "check": "intervention",
+          "ok": true,
+          "detail": "prerequisite is permitted in supervised-evaluation"
+        },
+        {
+          "check": "misconception-evidence",
+          "ok": true,
+          "detail": "no misconception claimed"
+        }
+      ],
+      "failed": [
+        "approved-for-usage"
+      ],
+      "label": "Not shown: this explanation is not cleared for use here."
+    },
+    "questions": [
+      {
+        "id": "gen:subst:2,3,2,3",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 2 to 3 of 2x(x² + 2)³ dx = ? (A fraction is fine.)",
+        "answer": "13345/4",
+        "solution": "Let u = x² + 2: x = 2 gives u = 6, x = 3 gives u = 11. 2x dx = du, so the integral is ∫ u³ du = u⁴ ⁄ 4. 11⁴ = 14641. 6⁴ = 1296. Between u = 6 and u = 11: 13345/4.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "65/4",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 2 to 3, u = x² + 2 goes from 6 to 11."
+          },
+          {
+            "when": "13345",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "13345/8",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "5",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (11⁴ as 11 × 4); a power multiplies 11 by itself 4 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:1,2,1,2",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 2 of 2x(x² + 1)² dx = ? (A fraction is fine.)",
+        "answer": "39",
+        "solution": "Let u = x² + 1: x = 1 gives u = 2, x = 2 gives u = 5. 2x dx = du, so the integral is ∫ u² du = u³ ⁄ 3. 5³ = 125. 2³ = 8. Between u = 2 and u = 5: 39.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "7/3",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 1 to 2, u = x² + 1 goes from 2 to 5."
+          },
+          {
+            "when": "117",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "39/2",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "3",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (5³ as 5 × 3); a power multiplies 5 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:1,2,3,2",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 2 of 2x(x² + 3)² dx = ? (A fraction is fine.)",
+        "answer": "93",
+        "solution": "Let u = x² + 3: x = 1 gives u = 4, x = 2 gives u = 7. 2x dx = du, so the integral is ∫ u² du = u³ ⁄ 3. 7³ = 343. 4³ = 64. Between u = 4 and u = 7: 93.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "7/3",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 1 to 2, u = x² + 3 goes from 4 to 7."
+          },
+          {
+            "when": "279",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "93/2",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "3",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (7³ as 7 × 3); a power multiplies 7 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:0,2,4,3",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 2 of 2x(x² + 4)³ dx = ? (A fraction is fine.)",
+        "answer": "960",
+        "solution": "Let u = x² + 4: x = 0 gives u = 4, x = 2 gives u = 8. 2x dx = du, so the integral is ∫ u³ du = u⁴ ⁄ 4. 8⁴ = 4096. 4⁴ = 256. Between u = 4 and u = 8: 960.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "4",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 0 to 2, u = x² + 4 goes from 4 to 8."
+          },
+          {
+            "when": "3840",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "480",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "4",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (8⁴ as 8 × 4); a power multiplies 8 by itself 4 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:subst:0,3,1,3",
+        "competency": "MATH.calculus.integration-methods",
+        "skill": "MLY.calc.substitution",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 3 of 2x(x² + 1)³ dx = ? (A fraction is fine.)",
+        "answer": "9999/4",
+        "solution": "Let u = x² + 1: x = 0 gives u = 1, x = 3 gives u = 10. 2x dx = du, so the integral is ∫ u³ du = u⁴ ⁄ 4. 10⁴ = 10000. 1⁴ = 1. Between u = 1 and u = 10: 9999/4.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "81/4",
+            "hypothesis": "procedural",
+            "says": "The old limits were used for u: when x goes from 0 to 3, u = x² + 1 goes from 1 to 10."
+          },
+          {
+            "when": "9999",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ uⁿ du = uⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "9999/8",
+            "hypothesis": "conceptual",
+            "says": "It was divided by 2 for du = 2x dx, but the 2x is already in the integral: 2x dx is exactly du."
+          },
+          {
+            "when": "9",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (10⁴ as 10 × 4); a power multiplies 10 by itself 4 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      }
+    ],
+    "decision": null,
+    "reviewer": null,
+    "reviewedAt": null,
+    "note": null
+  },
+  {
+    "id": "MATH.calculus.indefinite-integrals#differentiate_back",
+    "hash": "sha256:609dc7af0b54cb51f632cd2ee6d8a271c288b0a91a15fe34c01190cd15cb081d",
+    "status": "pending_review",
+    "scope": [
+      "demonstration"
+    ],
+    "requiredDecision": "Educator: approve exact revision for supervised evaluation, request revision, demonstration only, or block; do not infer approval from machine checks.",
+    "eligibility": {
+      "contract": "explanation-review@1",
+      "id": "MATH.calculus.indefinite-integrals#differentiate_back",
+      "mode": "supervised-evaluation",
+      "usage": "lesson",
+      "eligible": false,
+      "status": "pending_review",
+      "educatorApproved": false,
+      "contentHash": "sha256:609dc7af0b54cb51f632cd2ee6d8a271c288b0a91a15fe34c01190cd15cb081d",
+      "checks": [
+        {
+          "check": "exists",
+          "ok": true,
+          "detail": "content present"
+        },
+        {
+          "check": "record",
+          "ok": true,
+          "detail": "review record found"
+        },
+        {
+          "check": "revision",
+          "ok": true,
+          "detail": "the review applies to this exact revision"
+        },
+        {
+          "check": "not-blocked",
+          "ok": true,
+          "detail": "not blocked"
+        },
+        {
+          "check": "integrity",
+          "ok": true,
+          "detail": "review metadata consistent"
+        },
+        {
+          "check": "approved-for-usage",
+          "ok": false,
+          "detail": "pending_review may not be shown in supervised-evaluation"
+        },
+        {
+          "check": "competency",
+          "ok": true,
+          "detail": "explanation is for the skill being taught"
+        },
+        {
+          "check": "intervention",
+          "ok": true,
+          "detail": "conceptual is permitted in supervised-evaluation"
+        },
+        {
+          "check": "misconception-evidence",
+          "ok": true,
+          "detail": "no misconception claimed"
+        }
+      ],
+      "failed": [
+        "approved-for-usage"
+      ],
+      "label": "Not shown: this explanation is not cleared for use here."
+    },
+    "questions": [
+      {
+        "id": "gen:pint:2,4,7,1",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 2 to 4 of 7x dx = ? (A fraction is fine.)",
+        "answer": "42",
+        "solution": "Raise the power and divide: F(x) = 7x² ⁄ 2. 4² = 16. 2² = 4. F(4) − F(2) = 42.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "84",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "0",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "14",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "56",
+            "hypothesis": "conceptual",
+            "says": "Only the upper limit was used; the answer is F(upper) − F(lower)."
+          },
+          {
+            "when": "14",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (4² as 4 × 2); a power multiplies 4 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:1,4,11,1",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 4 of 11x dx = ? (A fraction is fine.)",
+        "answer": "165/2",
+        "solution": "Raise the power and divide: F(x) = 11x² ⁄ 2. 4² = 16. 1² = 1. F(4) − F(1) = 165/2.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "165",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "0",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "33",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "88",
+            "hypothesis": "conceptual",
+            "says": "Only the upper limit was used; the answer is F(upper) − F(lower)."
+          },
+          {
+            "when": "33",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (4² as 4 × 2); a power multiplies 4 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:1,4,4,1",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 4 of 4x dx = ? (A fraction is fine.)",
+        "answer": "30",
+        "solution": "Raise the power and divide: F(x) = 4x² ⁄ 2. 4² = 16. 1² = 1. F(4) − F(1) = 30.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "60",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "0",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "12",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "32",
+            "hypothesis": "conceptual",
+            "says": "Only the upper limit was used; the answer is F(upper) − F(lower)."
+          },
+          {
+            "when": "12",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (4² as 4 × 2); a power multiplies 4 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:0,2,3,2",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 2 of 3x² dx = ? (A fraction is fine.)",
+        "answer": "8",
+        "solution": "Raise the power and divide: F(x) = 3x³ ⁄ 3. 2³ = 8. 0³ = 0. F(2) − F(0) = 8.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "24",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "12",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "6",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "6",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (2³ as 2 × 3); a power multiplies 2 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:1,3,5,2",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 3 of 5x² dx = ? (A fraction is fine.)",
+        "answer": "130/3",
+        "solution": "Raise the power and divide: F(x) = 5x³ ⁄ 3. 3³ = 27. 1³ = 1. F(3) − F(1) = 130/3.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "130",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "20",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "20",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "45",
+            "hypothesis": "conceptual",
+            "says": "Only the upper limit was used; the answer is F(upper) − F(lower)."
+          },
+          {
+            "when": "10",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (3³ as 3 × 3); a power multiplies 3 by itself 3 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:0,1,12,2",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 1 of 12x² dx = ? (A fraction is fine.)",
+        "answer": "4",
+        "solution": "Raise the power and divide: F(x) = 12x³ ⁄ 3. 1³ = 1. 0³ = 0. F(1) − F(0) = 4.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "12",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "24",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "6",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      }
+    ],
+    "decision": null,
+    "reviewer": null,
+    "reviewedAt": null,
+    "note": null
+  },
+  {
+    "id": "MATH.calculus.indefinite-integrals#raise_then_divide",
+    "hash": "sha256:c7861c59acf8fe1b3ef0a04d98f7852062fc279d8ac993f3e459745ccbc5ba03",
+    "status": "pending_review",
+    "scope": [
+      "demonstration"
+    ],
+    "requiredDecision": "Educator: approve exact revision for supervised evaluation, request revision, demonstration only, or block; do not infer approval from machine checks.",
+    "eligibility": {
+      "contract": "explanation-review@1",
+      "id": "MATH.calculus.indefinite-integrals#raise_then_divide",
+      "mode": "supervised-evaluation",
+      "usage": "lesson",
+      "eligible": false,
+      "status": "pending_review",
+      "educatorApproved": false,
+      "contentHash": "sha256:c7861c59acf8fe1b3ef0a04d98f7852062fc279d8ac993f3e459745ccbc5ba03",
+      "checks": [
+        {
+          "check": "exists",
+          "ok": true,
+          "detail": "content present"
+        },
+        {
+          "check": "record",
+          "ok": true,
+          "detail": "review record found"
+        },
+        {
+          "check": "revision",
+          "ok": true,
+          "detail": "the review applies to this exact revision"
+        },
+        {
+          "check": "not-blocked",
+          "ok": true,
+          "detail": "not blocked"
+        },
+        {
+          "check": "integrity",
+          "ok": true,
+          "detail": "review metadata consistent"
+        },
+        {
+          "check": "approved-for-usage",
+          "ok": false,
+          "detail": "pending_review may not be shown in supervised-evaluation"
+        },
+        {
+          "check": "competency",
+          "ok": true,
+          "detail": "explanation is for the skill being taught"
+        },
+        {
+          "check": "intervention",
+          "ok": true,
+          "detail": "procedural is permitted in supervised-evaluation"
+        },
+        {
+          "check": "misconception-evidence",
+          "ok": true,
+          "detail": "no misconception claimed"
+        }
+      ],
+      "failed": [
+        "approved-for-usage"
+      ],
+      "label": "Not shown: this explanation is not cleared for use here."
+    },
+    "questions": [
+      {
+        "id": "gen:pint:2,4,7,1",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 2 to 4 of 7x dx = ? (A fraction is fine.)",
+        "answer": "42",
+        "solution": "Raise the power and divide: F(x) = 7x² ⁄ 2. 4² = 16. 2² = 4. F(4) − F(2) = 42.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "84",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "0",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "14",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "56",
+            "hypothesis": "conceptual",
+            "says": "Only the upper limit was used; the answer is F(upper) − F(lower)."
+          },
+          {
+            "when": "14",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (4² as 4 × 2); a power multiplies 4 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:1,4,11,1",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 4 of 11x dx = ? (A fraction is fine.)",
+        "answer": "165/2",
+        "solution": "Raise the power and divide: F(x) = 11x² ⁄ 2. 4² = 16. 1² = 1. F(4) − F(1) = 165/2.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "165",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "0",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "33",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "88",
+            "hypothesis": "conceptual",
+            "says": "Only the upper limit was used; the answer is F(upper) − F(lower)."
+          },
+          {
+            "when": "33",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (4² as 4 × 2); a power multiplies 4 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:1,4,4,1",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 4 of 4x dx = ? (A fraction is fine.)",
+        "answer": "30",
+        "solution": "Raise the power and divide: F(x) = 4x² ⁄ 2. 4² = 16. 1² = 1. F(4) − F(1) = 30.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "60",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "0",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "12",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "32",
+            "hypothesis": "conceptual",
+            "says": "Only the upper limit was used; the answer is F(upper) − F(lower)."
+          },
+          {
+            "when": "12",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (4² as 4 × 2); a power multiplies 4 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:0,1,12,1",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 1 of 12x dx = ? (A fraction is fine.)",
+        "answer": "6",
+        "solution": "Raise the power and divide: F(x) = 12x² ⁄ 2. 1² = 1. 0² = 0. F(1) − F(0) = 6.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "12",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "0",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "12",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:0,1,6,3",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 1 of 6x³ dx = ? (A fraction is fine.)",
+        "answer": "3/2",
+        "solution": "Raise the power and divide: F(x) = 6x⁴ ⁄ 4. 1⁴ = 1. 0⁴ = 0. F(1) − F(0) = 3/2.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "6",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "18",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "2",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:0,1,12,3:mc",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "choice",
+        "prompt": "∫ from 0 to 1 of 12x³ dx = ? Choose one.",
+        "answer": "A",
+        "solution": "Raise the power and divide: F(x) = 12x⁴ ⁄ 4. 1⁴ = 1. 0⁴ = 0. F(1) − F(0) = 3.",
+        "options": [
+          "3",
+          "4",
+          "12",
+          "36"
+        ],
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "C",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "D",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "B",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      }
+    ],
+    "decision": null,
+    "reviewer": null,
+    "reviewedAt": null,
+    "note": null
+  },
+  {
+    "id": "MATH.calculus.indefinite-integrals#powers_and_fractions",
+    "hash": "sha256:11bc72b1d56e1a415abb7c04981d347a4ffd6de2f88385dcfeeaefe3d8e28ecf",
+    "status": "pending_review",
+    "scope": [
+      "demonstration"
+    ],
+    "requiredDecision": "Educator: approve exact revision for supervised evaluation, request revision, demonstration only, or block; do not infer approval from machine checks.",
+    "eligibility": {
+      "contract": "explanation-review@1",
+      "id": "MATH.calculus.indefinite-integrals#powers_and_fractions",
+      "mode": "supervised-evaluation",
+      "usage": "lesson",
+      "eligible": false,
+      "status": "pending_review",
+      "educatorApproved": false,
+      "contentHash": "sha256:11bc72b1d56e1a415abb7c04981d347a4ffd6de2f88385dcfeeaefe3d8e28ecf",
+      "checks": [
+        {
+          "check": "exists",
+          "ok": true,
+          "detail": "content present"
+        },
+        {
+          "check": "record",
+          "ok": true,
+          "detail": "review record found"
+        },
+        {
+          "check": "revision",
+          "ok": true,
+          "detail": "the review applies to this exact revision"
+        },
+        {
+          "check": "not-blocked",
+          "ok": true,
+          "detail": "not blocked"
+        },
+        {
+          "check": "integrity",
+          "ok": true,
+          "detail": "review metadata consistent"
+        },
+        {
+          "check": "approved-for-usage",
+          "ok": false,
+          "detail": "pending_review may not be shown in supervised-evaluation"
+        },
+        {
+          "check": "competency",
+          "ok": true,
+          "detail": "explanation is for the skill being taught"
+        },
+        {
+          "check": "intervention",
+          "ok": true,
+          "detail": "prerequisite is permitted in supervised-evaluation"
+        },
+        {
+          "check": "misconception-evidence",
+          "ok": true,
+          "detail": "no misconception claimed"
+        }
+      ],
+      "failed": [
+        "approved-for-usage"
+      ],
+      "label": "Not shown: this explanation is not cleared for use here."
+    },
+    "questions": [
+      {
+        "id": "gen:pint:2,4,7,1",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 2 to 4 of 7x dx = ? (A fraction is fine.)",
+        "answer": "42",
+        "solution": "Raise the power and divide: F(x) = 7x² ⁄ 2. 4² = 16. 2² = 4. F(4) − F(2) = 42.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "84",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "0",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "14",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "56",
+            "hypothesis": "conceptual",
+            "says": "Only the upper limit was used; the answer is F(upper) − F(lower)."
+          },
+          {
+            "when": "14",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (4² as 4 × 2); a power multiplies 4 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:1,4,11,1",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 4 of 11x dx = ? (A fraction is fine.)",
+        "answer": "165/2",
+        "solution": "Raise the power and divide: F(x) = 11x² ⁄ 2. 4² = 16. 1² = 1. F(4) − F(1) = 165/2.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "165",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "0",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "33",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "88",
+            "hypothesis": "conceptual",
+            "says": "Only the upper limit was used; the answer is F(upper) − F(lower)."
+          },
+          {
+            "when": "33",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (4² as 4 × 2); a power multiplies 4 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:1,4,4,1",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 4 of 4x dx = ? (A fraction is fine.)",
+        "answer": "30",
+        "solution": "Raise the power and divide: F(x) = 4x² ⁄ 2. 4² = 16. 1² = 1. F(4) − F(1) = 30.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "60",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "0",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "12",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "32",
+            "hypothesis": "conceptual",
+            "says": "Only the upper limit was used; the answer is F(upper) − F(lower)."
+          },
+          {
+            "when": "12",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (4² as 4 × 2); a power multiplies 4 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:0,1,6,2",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 0 to 1 of 6x² dx = ? (A fraction is fine.)",
+        "answer": "2",
+        "solution": "Raise the power and divide: F(x) = 6x³ ⁄ 3. 1³ = 1. 0³ = 0. F(1) − F(0) = 2.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "6",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "12",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "3",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pint:1,3,3,1",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "skill": "MLY.calc.power-antiderivative",
+        "role": "generated",
+        "type": "fraction",
+        "prompt": "∫ from 1 to 3 of 3x dx = ? (A fraction is fine.)",
+        "answer": "12",
+        "solution": "Raise the power and divide: F(x) = 3x² ⁄ 2. 3² = 9. 1² = 1. F(3) − F(1) = 12.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "24",
+            "hypothesis": "procedural",
+            "says": "The power was raised but not divided by: ∫ xⁿ dx = xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "0",
+            "hypothesis": "conceptual",
+            "says": "The function was differentiated instead of integrated: integrating raises the power."
+          },
+          {
+            "when": "6",
+            "hypothesis": "procedural",
+            "says": "It was divided by the power without raising it: xⁿ becomes xⁿ⁺¹ ⁄ (n + 1)."
+          },
+          {
+            "when": "27/2",
+            "hypothesis": "conceptual",
+            "says": "Only the upper limit was used; the answer is F(upper) − F(lower)."
+          },
+          {
+            "when": "6",
+            "hypothesis": "prerequisite",
+            "says": "A power was worked out as a multiplication (3² as 3 × 2); a power multiplies 3 by itself 2 times."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      }
+    ],
+    "decision": null,
+    "reviewer": null,
+    "reviewedAt": null,
+    "note": null
+  },
+  {
+    "id": "MATH.number.exponents#count_factors",
+    "hash": "sha256:9b76f3028608d63a1066402d9dabba5346e96bfe6351728c5ca4a988cdedd68e",
+    "status": "pending_review",
+    "scope": [
+      "demonstration"
+    ],
+    "requiredDecision": "Educator: approve exact revision for supervised evaluation, request revision, demonstration only, or block; do not infer approval from machine checks.",
+    "eligibility": {
+      "contract": "explanation-review@1",
+      "id": "MATH.number.exponents#count_factors",
+      "mode": "supervised-evaluation",
+      "usage": "lesson",
+      "eligible": false,
+      "status": "pending_review",
+      "educatorApproved": false,
+      "contentHash": "sha256:9b76f3028608d63a1066402d9dabba5346e96bfe6351728c5ca4a988cdedd68e",
+      "checks": [
+        {
+          "check": "exists",
+          "ok": true,
+          "detail": "content present"
+        },
+        {
+          "check": "record",
+          "ok": true,
+          "detail": "review record found"
+        },
+        {
+          "check": "revision",
+          "ok": true,
+          "detail": "the review applies to this exact revision"
+        },
+        {
+          "check": "not-blocked",
+          "ok": true,
+          "detail": "not blocked"
+        },
+        {
+          "check": "integrity",
+          "ok": true,
+          "detail": "review metadata consistent"
+        },
+        {
+          "check": "approved-for-usage",
+          "ok": false,
+          "detail": "pending_review may not be shown in supervised-evaluation"
+        },
+        {
+          "check": "competency",
+          "ok": true,
+          "detail": "explanation is for the skill being taught"
+        },
+        {
+          "check": "intervention",
+          "ok": true,
+          "detail": "conceptual is permitted in supervised-evaluation"
+        },
+        {
+          "check": "misconception-evidence",
+          "ok": true,
+          "detail": "no misconception claimed"
+        }
+      ],
+      "failed": [
+        "approved-for-usage"
+      ],
+      "label": "Not shown: this explanation is not cleared for use here."
+    },
+    "questions": [
+      {
+        "id": "gen:pow:7,2",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "7² = ?",
+        "answer": "49",
+        "solution": "7 × 7 = 49.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "14",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (7² as 7 × 2); a power multiplies 7 by itself 2 times."
+          },
+          {
+            "when": "7",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 7 must appear 2 times."
+          },
+          {
+            "when": "9",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pow:10,2",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "10² = ?",
+        "answer": "100",
+        "solution": "10 × 10 = 100.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "20",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (10² as 10 × 2); a power multiplies 10 by itself 2 times."
+          },
+          {
+            "when": "10",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 10 must appear 2 times."
+          },
+          {
+            "when": "12",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pow:11,3",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "11³ = ?",
+        "answer": "1331",
+        "solution": "11 × 11 × 11 = 1331.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "33",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (11³ as 11 × 3); a power multiplies 11 by itself 3 times."
+          },
+          {
+            "when": "121",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 11 must appear 3 times."
+          },
+          {
+            "when": "14",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pow:11,2",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "11² = ?",
+        "answer": "121",
+        "solution": "11 × 11 = 121.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "22",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (11² as 11 × 2); a power multiplies 11 by itself 2 times."
+          },
+          {
+            "when": "11",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 11 must appear 2 times."
+          },
+          {
+            "when": "13",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pow:5,4",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "5⁴ = ?",
+        "answer": "625",
+        "solution": "5 × 5 × 5 × 5 = 625.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "20",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (5⁴ as 5 × 4); a power multiplies 5 by itself 4 times."
+          },
+          {
+            "when": "125",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 5 must appear 4 times."
+          },
+          {
+            "when": "9",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      }
+    ],
+    "decision": null,
+    "reviewer": null,
+    "reviewedAt": null,
+    "note": null
+  },
+  {
+    "id": "MATH.number.exponents#build_up",
+    "hash": "sha256:47eccf5f65e77bd616728f3d00cd3e284d22bb014e9d72fcca98baf444f4fb56",
+    "status": "pending_review",
+    "scope": [
+      "demonstration"
+    ],
+    "requiredDecision": "Educator: approve exact revision for supervised evaluation, request revision, demonstration only, or block; do not infer approval from machine checks.",
+    "eligibility": {
+      "contract": "explanation-review@1",
+      "id": "MATH.number.exponents#build_up",
+      "mode": "supervised-evaluation",
+      "usage": "lesson",
+      "eligible": false,
+      "status": "pending_review",
+      "educatorApproved": false,
+      "contentHash": "sha256:47eccf5f65e77bd616728f3d00cd3e284d22bb014e9d72fcca98baf444f4fb56",
+      "checks": [
+        {
+          "check": "exists",
+          "ok": true,
+          "detail": "content present"
+        },
+        {
+          "check": "record",
+          "ok": true,
+          "detail": "review record found"
+        },
+        {
+          "check": "revision",
+          "ok": true,
+          "detail": "the review applies to this exact revision"
+        },
+        {
+          "check": "not-blocked",
+          "ok": true,
+          "detail": "not blocked"
+        },
+        {
+          "check": "integrity",
+          "ok": true,
+          "detail": "review metadata consistent"
+        },
+        {
+          "check": "approved-for-usage",
+          "ok": false,
+          "detail": "pending_review may not be shown in supervised-evaluation"
+        },
+        {
+          "check": "competency",
+          "ok": true,
+          "detail": "explanation is for the skill being taught"
+        },
+        {
+          "check": "intervention",
+          "ok": true,
+          "detail": "procedural is permitted in supervised-evaluation"
+        },
+        {
+          "check": "misconception-evidence",
+          "ok": true,
+          "detail": "no misconception claimed"
+        }
+      ],
+      "failed": [
+        "approved-for-usage"
+      ],
+      "label": "Not shown: this explanation is not cleared for use here."
+    },
+    "questions": [
+      {
+        "id": "gen:pow:7,2",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "7² = ?",
+        "answer": "49",
+        "solution": "7 × 7 = 49.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "14",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (7² as 7 × 2); a power multiplies 7 by itself 2 times."
+          },
+          {
+            "when": "7",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 7 must appear 2 times."
+          },
+          {
+            "when": "9",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pow:10,2",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "10² = ?",
+        "answer": "100",
+        "solution": "10 × 10 = 100.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "20",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (10² as 10 × 2); a power multiplies 10 by itself 2 times."
+          },
+          {
+            "when": "10",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 10 must appear 2 times."
+          },
+          {
+            "when": "12",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pow:11,4",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "11⁴ = ?",
+        "answer": "14641",
+        "solution": "11 × 11 × 11 × 11 = 14641.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "44",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (11⁴ as 11 × 4); a power multiplies 11 by itself 4 times."
+          },
+          {
+            "when": "1331",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 11 must appear 4 times."
+          },
+          {
+            "when": "15",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pow:4,4",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "4⁴ = ?",
+        "answer": "256",
+        "solution": "4 × 4 × 4 × 4 = 256.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "16",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (4⁴ as 4 × 4); a power multiplies 4 by itself 4 times."
+          },
+          {
+            "when": "64",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 4 must appear 4 times."
+          },
+          {
+            "when": "8",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pow:5,5:mc",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "choice",
+        "prompt": "5⁵ = ? Choose one.",
+        "answer": "D",
+        "solution": "5 × 5 × 5 × 5 × 5 = 3125.",
+        "options": [
+          "10",
+          "25",
+          "625",
+          "3125"
+        ],
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "B",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (5⁵ as 5 × 5); a power multiplies 5 by itself 5 times."
+          },
+          {
+            "when": "C",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 5 must appear 5 times."
+          },
+          {
+            "when": "A",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      }
+    ],
+    "decision": null,
+    "reviewer": null,
+    "reviewedAt": null,
+    "note": null
+  },
+  {
+    "id": "MATH.number.exponents#facts_first",
+    "hash": "sha256:0211a2ce0d732420c2413bd61ffa819ca1432b7f6e33077e0307c35f857bfc87",
+    "status": "pending_review",
+    "scope": [
+      "demonstration"
+    ],
+    "requiredDecision": "Educator: approve exact revision for supervised evaluation, request revision, demonstration only, or block; do not infer approval from machine checks.",
+    "eligibility": {
+      "contract": "explanation-review@1",
+      "id": "MATH.number.exponents#facts_first",
+      "mode": "supervised-evaluation",
+      "usage": "lesson",
+      "eligible": false,
+      "status": "pending_review",
+      "educatorApproved": false,
+      "contentHash": "sha256:0211a2ce0d732420c2413bd61ffa819ca1432b7f6e33077e0307c35f857bfc87",
+      "checks": [
+        {
+          "check": "exists",
+          "ok": true,
+          "detail": "content present"
+        },
+        {
+          "check": "record",
+          "ok": true,
+          "detail": "review record found"
+        },
+        {
+          "check": "revision",
+          "ok": true,
+          "detail": "the review applies to this exact revision"
+        },
+        {
+          "check": "not-blocked",
+          "ok": true,
+          "detail": "not blocked"
+        },
+        {
+          "check": "integrity",
+          "ok": true,
+          "detail": "review metadata consistent"
+        },
+        {
+          "check": "approved-for-usage",
+          "ok": false,
+          "detail": "pending_review may not be shown in supervised-evaluation"
+        },
+        {
+          "check": "competency",
+          "ok": true,
+          "detail": "explanation is for the skill being taught"
+        },
+        {
+          "check": "intervention",
+          "ok": true,
+          "detail": "prerequisite is permitted in supervised-evaluation"
+        },
+        {
+          "check": "misconception-evidence",
+          "ok": true,
+          "detail": "no misconception claimed"
+        }
+      ],
+      "failed": [
+        "approved-for-usage"
+      ],
+      "label": "Not shown: this explanation is not cleared for use here."
+    },
+    "questions": [
+      {
+        "id": "gen:pow:7,2",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "7² = ?",
+        "answer": "49",
+        "solution": "7 × 7 = 49.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "14",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (7² as 7 × 2); a power multiplies 7 by itself 2 times."
+          },
+          {
+            "when": "7",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 7 must appear 2 times."
+          },
+          {
+            "when": "9",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pow:10,2",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "10² = ?",
+        "answer": "100",
+        "solution": "10 × 10 = 100.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "20",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (10² as 10 × 2); a power multiplies 10 by itself 2 times."
+          },
+          {
+            "when": "10",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 10 must appear 2 times."
+          },
+          {
+            "when": "12",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pow:5,2",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "5² = ?",
+        "answer": "25",
+        "solution": "5 × 5 = 25.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "10",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (5² as 5 × 2); a power multiplies 5 by itself 2 times."
+          },
+          {
+            "when": "5",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 5 must appear 2 times."
+          },
+          {
+            "when": "7",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      },
+      {
+        "id": "gen:pow:4,3",
+        "competency": "MATH.number.exponents",
+        "skill": "MLY.pow.whole",
+        "role": "generated",
+        "type": "integer",
+        "prompt": "4³ = ?",
+        "answer": "64",
+        "solution": "4 × 4 × 4 = 64.",
+        "difficulty": 1,
+        "misconceptions": [
+          {
+            "when": "12",
+            "hypothesis": "conceptual",
+            "says": "A power was worked out as a multiplication (4³ as 4 × 3); a power multiplies 4 by itself 3 times."
+          },
+          {
+            "when": "16",
+            "hypothesis": "procedural",
+            "says": "One factor too few was multiplied: 4 must appear 3 times."
+          },
+          {
+            "when": "7",
+            "hypothesis": "conceptual",
+            "says": "The two numbers were added; a power is repeated multiplication."
+          }
+        ],
+        "source": "Generated from a supported problem family (families@1)",
+        "licence": "CC0",
+        "review": "provisional"
+      }
+    ],
+    "decision": null,
+    "reviewer": null,
+    "reviewedAt": null,
+    "note": null
+  }
+]

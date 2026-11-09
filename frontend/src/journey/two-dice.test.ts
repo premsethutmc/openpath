@@ -77,7 +77,11 @@ test("connected: the loaded module has the two general dice explanations, scoped
     assert.equal(r.eligible, true); assert.equal(r.status, "pending_review"); assert.equal(r.educatorApproved, false);
     assert.equal(contentEligibility(m, s, { competency: C, usage: "intervention", misconceptionEvidence: [], mode: "supervised-evaluation" }).eligible, false, "never in supervised evaluation until approved");
   }
-  assert.equal(skillUnits(m).length, 1, "one dice skill unit");
+  // scope-from-config@1: the module now also has a stages skill unit from connectionConfig
+  const allUnits = skillUnits(m);
+  assert.equal(allUnits.length, 2, "two skill units: stages and dice");
+  const diceUnit = allUnits.find((u) => u.key.startsWith("akdice"));
+  assert.ok(diceUnit, "one dice skill unit scoped to exact-total");
 });
 
 const T = "totals-equally-likely";
@@ -134,7 +138,7 @@ test("real path: wrong exact-total answers â†’ general dice teaching (neutral) â
 });
 
 test("no fresh exact-total question left: no recheck is invented and the skill is not counted as shown", () => {
-  const m = moduleFor(C)!, unit = skillUnits(m)[0], st = m.strategies.find((x) => x.id === "akdice_pairs")!;
+  const m = moduleFor(C)!, unit = skillUnits(m).find((u) => u.key.startsWith("akdice"))!, st = m.strategies.find((x) => x.id === "akdice_pairs")!;
   const s = new SliceSession("two-dice-none", C, Date.parse("2026-01-01T00:00:00Z"));
   const all = [...new Set(["diagnostic", "practice", "check", "retention"].flatMap((ph) => phasePool("akdice", ph as never)))].filter(exact);
   for (const q of all) s.submit(q, wrongReply(q), "practice");

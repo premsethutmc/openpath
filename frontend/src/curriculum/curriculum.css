@@ -1,4 +1,5 @@
 @import "./TeachingExperience.css";
+@import "../geometry/triangle.css";
 /* Mathematics curriculum dashboard: mobile first (two-column tiles from 320 px), the My Learning Year palette.
    Green is verified mastery only; orange is learning or waiting for the delayed check; grey is not assessed. Every
    tile also carries a text status and an icon, so colour is never the only signal. */

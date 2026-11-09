@@ -1,0 +1,11 @@
+phase-2 records 300 (errors 0)
+knowledgeable n=30: no gap (n/a)
+repeated-slips n=30: no gap (n/a)
+outside-map n=30 roots 30: identified 0/30 0% [0–11] | taught 0/30 0% [0–11] | repaired (lower bound) 0/30 0% [0–11] | blocked-with-root-named 0/30 0% [0–11] runs | wrong lesson 30/30 100% [89–100] runs
+missing-content n=30 roots 30: identified 30/30 100% [89–100] | taught 0/30 0% [0–11] | repaired (lower bound) 0/30 0% [0–11] | blocked-with-root-named 30/30 100% [89–100] runs | wrong lesson 0/30 0% [0–11] runs
+guessing-harsh n=30 roots 30: identified 1/30 3% [1–17] | taught 1/30 3% [1–17] | repaired (lower bound) 0/30 0% [0–11] | blocked-with-root-named 0/30 0% [0–11] runs | wrong lesson 15/30 50% [33–67] runs
+single-deep-gap n=30 roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired (lower bound) 30/30 100% [89–100] | blocked-with-root-named 0/30 0% [0–11] runs | wrong lesson 0/30 0% [0–11] runs
+multiple-gaps n=30 roots 60: identified 60/60 100% [94–100] | taught 60/60 100% [94–100] | repaired (lower bound) 60/60 100% [94–100] | blocked-with-root-named 0/30 0% [0–11] runs | wrong lesson 0/30 0% [0–11] runs
+guessing n=30 roots 30: identified 26/30 87% [70–95] | taught 26/30 87% [70–95] | repaired (lower bound) 25/30 83% [66–93] | blocked-with-root-named 0/30 0% [0–11] runs | wrong lesson 3/30 10% [3–26] runs
+fails-to-learn n=30 roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired (lower bound) 0/30 0% [0–11] | blocked-with-root-named 0/30 0% [0–11] runs | wrong lesson 0/30 0% [0–11] runs
+forgetting n=30 roots 30: identified 30/30 100% [89–100] | taught 30/30 100% [89–100] | repaired (lower bound) 30/30 100% [89–100] | blocked-with-root-named 0/30 0% [0–11] runs | wrong lesson 1/30 3% [1–17] runs

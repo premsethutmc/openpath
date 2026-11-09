@@ -1,3 +1,4 @@
+import { qualifiedFollowup } from "./method-alignment";
 /**
  * Learner evidence through the shared engine. Every attempt becomes an event of the shared english-core ledger (the
  * same one mathematics already uses), with the same semantics:
@@ -105,6 +106,7 @@ export function ledgerFor(learnerId: string, records: LearnerRecords, graphVersi
       continue;
     }
     const a = (e as { a: Attempt }).a;
+    if (!qualifiedFollowup(a, records) && rightAnswer(a)) continue; // retain raw correctness, withhold unsupported follow-up evidence
     const q = question(a.questionId);
     const text = canonical(q, a.response);
     if (text === null) continue;
@@ -167,7 +169,7 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   // a probe asks about what a skill builds on (7 × 5 when 7 × 8 is the question): it is evidence for its own
   // micro-skill, never for showing the whole skill on your own
   const micro = !!graph.byId.get(id)?.partOf;
-  const ind = mine.filter((a) => independentAttempt(a) && (micro || a.activity !== "probe"));
+  const ind = mine.filter((a) => (!rightAnswer(a) || qualifiedFollowup(a, records)) && independentAttempt(a) && (micro || a.activity !== "probe"));
   const right = rightAnswer;
   const distinctRight = new Set<string>();
   let independentAt: string | null = null;

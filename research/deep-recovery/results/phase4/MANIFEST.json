@@ -1,0 +1,25 @@
+{
+  "note": "SIMULATED learners only (seeded models); not evidence about real children. No real learner data here.",
+  "traces": {
+    "dir": "traces/",
+    "what": "phase-3 held-out O1 multiple-gap runs re-run step by step at engine abddcec2 with phase-3 settings (selective, budget 40): seeds 2001, 2002, 2003, 2008, 2011; accounting-2001.json breaks the 40-step budget down",
+    "command": "cd frontend && node --import tsx src/journey/deep-recovery-trace4.ts p3-selective O1 multiple-gaps <seed>",
+    "check": "each trace's totals match the committed phase-3 record (results/phase3/heldout-B-broad.jsonl): e.g. seed 2001 questions 37, lessons 4, effort 40"
+  },
+  "engines": {
+    "p3": "deepRecovery({confirm:'selective'}) - phase-3 settings: effort limit 40 for the episode, hand-over at the limit",
+    "p4": "deepRecovery({confirm:'selective', reuse:true, sessionBudget:40, budget:120, validDays:RETENTION_DAYS=7}); a paused learner returns next day, at most 3 sittings"
+  },
+  "seeds": {
+    "tuning": "101-110 (file tuning-seeds-101-110.jsonl, engine abf545c1); no parameter changed after it",
+    "heldout1": "3001-3030 (engine abf545c1). Revealed one defect (seed 3014); results kept as-is",
+    "heldout2": "4001-4030 (engine 588bd839, after the fix) - the final reported evaluation; never used for any change",
+    "earlier_phases_not_reused": "1-10, 1001-1030 (phase 2), 1-5, 2001-2030 (phase 3)"
+  },
+  "cells": "O1 (gen:aupfr, integration-methods) and O2 (gen:aulax, indefinite-integrals) x single-gap, multiple-gaps, strong-slips, typed-guesser, fails-to-learn; missing-content O1 only (no unteachable prerequisite within reach of O2). n=30 per cell per engine on held-out sets.",
+  "produce": "cd frontend && node --import tsx src/journey/deep-recovery-sim4.ts <from> <to> p3,p4 O1:single-gap,O2:single-gap,O1:multiple-gaps,O2:multiple-gaps,O1:strong-slips,O2:strong-slips  (and) O1:typed-guesser,O2:typed-guesser,O1:missing-content,O1:fails-to-learn,O2:fails-to-learn",
+  "summarise": "cd frontend && node --import tsx src/journey/deep-recovery-summary4.ts ../research/deep-recovery/results/phase4/<file>.jsonl > <file>.summary.txt",
+  "runs": { "tuning": "220 ok, 0 error", "heldout1": "660 ok, 0 error", "heldout2": "660 ok, 0 error" },
+  "outcomes": "solved-fresh-unaided = engine claims solved AND the learner model can do the goal (the claim always rests on fresh, unaided, matching goal answers); false-reassurance = claims solved, model cannot; pause = still paused after the last sitting; blocked; handed-over = escalate; error",
+  "wrong_lessons": "a lesson on a skill outside the learner model's gap (lessons on the goal skill itself included)"
+}

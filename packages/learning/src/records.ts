@@ -36,7 +36,8 @@ export type LearningRecord =
   | (Base & { record: "goal"; pathway: string; targetYear?: number; active: boolean })
   | (Base & { record: "curriculum"; release: CurriculumRelease })
   | (Base & { record: "attempt"; questionId: string; response: string; activity: LearningActivity; hints: number; solution: boolean; competency: string; context?: string; working?: string[]; assessment?: AttemptAssessment; decision?: ServerDecision })
-  | (Base & { record: "teach"; rule: string; strategy: string; competency: string })
+  // episode (research, deep-recovery@0): the recovery episode that delivered this lesson; absent on every older record
+  | (Base & { record: "teach"; rule: string; strategy: string; competency: string; methodAlignment?: string; episode?: string })
   | (Base & { record: "topic_session"; academicYear: string; stage: "diagnostic" | "plan"; target: string; minutes?: 15 | 30 | 60; curriculum: { id: string; version: string; hash: string } })
   | (Base & { record: "study_session"; planId:string; revision:number; phase:"start"|"active"|"ended"; time:StudyTime; advice?:StudyAdvice; summary?:StudySummary })
   | (Base & { record: "skip"; target: string });
@@ -92,7 +93,7 @@ export interface LearnerRecords {
   goals: Map<string, { pathway: string; targetYear?: number; since: string }>;
   curricula: Map<string, CurriculumRelease>;
   attempts: Attempt[];
-  teaching: { at: string; rule: string; strategy: string; competency: string; session: string }[];
+  teaching: { at: string; rule: string; strategy: string; competency: string; session: string; methodAlignment?: string; episode?: string }[];
   skips: { at: string; target: string }[];
   sessions: Record<string, string>;
   /** written@1: written answers not yet marked. */
@@ -103,12 +104,12 @@ export interface LearnerRecords {
   acknowledgements?: HandoverAcknowledgement[];
 }
 /** handover@1: one educator acknowledgement of a paused competency (server data; the reviewer is shown by role only) */
-export interface HandoverAcknowledgement { id: string; at: string; competency: string; by: "educator" }
+export interface HandoverAcknowledgement { id: string; at: string; competency: string; by: "educator"; recoveryEpisode?: string }
 
 export function readRecords(learnerId: string, events: readonly { kind: string }[], marks: readonly WrittenMark[] = [], acknowledgements: readonly HandoverAcknowledgement[] = []): LearnerRecords {
   // handover@1: only well-formed server acknowledgements, oldest first (deterministic)
   const acks = acknowledgements.filter((x) => !!x && typeof x.id === "string" && typeof x.competency === "string" && x.by === "educator" && !Number.isNaN(Date.parse(x.at)))
-    .map((x) => ({ id: x.id, at: x.at, competency: x.competency, by: "educator" as const })).sort((x, y) => Date.parse(x.at) - Date.parse(y.at) || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
+    .map((x) => ({ id: x.id, at: x.at, competency: x.competency, by: "educator" as const, ...(typeof x.recoveryEpisode === "string" ? { recoveryEpisode: x.recoveryEpisode } : {}) })).sort((x, y) => Date.parse(x.at) - Date.parse(y.at) || (x.id < y.id ? -1 : x.id > y.id ? 1 : 0));
   const out: LearnerRecords = { enrolments: [], goals: new Map(), curricula: new Map(), attempts: [], teaching: [], skips: [], sessions: {}, pending: [], unresolved: [], acknowledgements: acks };
   const markOf = new Map(marks.map((m) => [m.attemptId, m]));
   const seen = new Set<string>();
@@ -141,8 +142,8 @@ export function readRecords(learnerId: string, events: readonly { kind: string }
       const mark = isWritten(r.questionId) ? markOf.get(r.id) : undefined;
       // a marked written answer enters the engine as the educator's mark, never as the learner's own text
       const response = mark ? (mark.verdict === "correct" ? MARKED_RIGHT : MARKED_NOT) : r.response;
-      out.attempts.push({ id: r.id, at: r.at, session: r.sessionId, questionId: r.questionId, response, activity: r.activity, hints: r.hints, solution: r.solution || out.teaching.some((t) => t.rule === "foundation-lesson-review@1" && t.session === r.sessionId && t.competency === r.competency && Date.parse(t.at) <= Date.parse(r.at)), competency: r.competency, n, context: r.context, ...(r.working ? { working: r.working } : {}), ...(mark ? { written: { text: r.response, mark } } : {}), ...(mark ? { credit: mark.verdict === "correct" } : serverVerdict(r) === "correct" || serverVerdict(r) === "incorrect" ? { credit: serverVerdict(r) === "correct" } : {}) , ...(r.assessment ? { assessment: r.assessment } : {}) });
-    } else if (r.record === "teach") out.teaching.push({ at: r.at, rule: r.rule, strategy: r.strategy, competency: r.competency, session: r.sessionId });
+      out.attempts.push({ id: r.id, at: r.at, session: r.sessionId, questionId: r.questionId, response, activity: r.activity, hints: r.hints, solution: r.solution || (r.activity === "guided" && out.teaching.some((t) => t.rule === "foundation-lesson-review@1" && t.session === r.sessionId && t.competency === r.competency && Date.parse(t.at) <= Date.parse(r.at))), competency: r.competency, n, context: r.context, ...(r.working ? { working: r.working } : {}), ...(mark ? { written: { text: r.response, mark } } : {}), ...(mark ? { credit: mark.verdict === "correct" } : serverVerdict(r) === "correct" || serverVerdict(r) === "incorrect" ? { credit: serverVerdict(r) === "correct" } : {}) , ...(r.assessment ? { assessment: r.assessment } : {}) });
+    } else if (r.record === "teach") out.teaching.push({ at: r.at, rule: r.rule, strategy: r.strategy, competency: r.competency, session: r.sessionId, ...(r.methodAlignment ? { methodAlignment: r.methodAlignment } : {}), ...(r.episode !== undefined ? { episode: r.episode } : {}) });
     else if (r.record === "skip") out.skips.push({ at: r.at, target: r.target });
   }
   return out;

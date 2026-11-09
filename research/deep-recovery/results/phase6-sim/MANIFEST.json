@@ -1,0 +1,27 @@
+{
+  "note": "Worker A, phase 6. SIMULATED learners only; research evidence, not real learning outcomes. Branch research/dr6-sim (from 09163eb5).",
+  "answers": {
+    "defect": "learners.ts wrong() wrote '0' for tuple and other structured answers; the server in its deployed default mode (OPENPATH_GRADING=shadow, family.legacy_grading._answer_ok) records those as UNRESOLVED (not an attempt; asked again). The node grader called them incorrect.",
+    "fix": "frontend/src/journey/wrong-answers.ts (shape-preserving; learners.ts unchanged)",
+    "verification": "frontend/src/journey/deep-recovery-phase6-answers.test.ts + server_verdicts.py: 314 samples, one per question family and format reachable by the simulations: every corrected wrong answer 'incorrect' in the server's own _decide in shadow AND unified modes; old helper unresolved (shadow) for 17 families"
+  },
+  "old-answers/": "phase-5 held-out (seeds 6001-6030, 8 rules x 14 cells = 3360) re-run with the old answers at deb0b1f7: 3360/3360 records identical to results/phase5-confidence/heldout-seeds-6001-6030-at-9dfa0b03.jsonl (ignoring run time); summary identical",
+  "corrected/": "the same 3360 runs with corrected answers (SIM_ANSWERS=corrected) at d74c8b81, same limits (40/sitting, 120 total, 3 sittings): every record identical to the old-answer run (outcomes, questions, lessons, sittings, claim point) -> rule ranking unchanged in the node engine",
+  "server-effect/": "the 420 held-out runs under the current 'selective' rule re-run with old answers and every answer graded by the server's _decide: 398/5801 answers unresolved in shadow mode (0 in unified), 115 runs affected: all 30 O1 single-gap, multiple-gaps, light-guesser runs, 21/30 O1 heavy-guesser, 1/30 O1 strong-slips, 3/30 O2 multiple-gaps; families alpmul, aopf, aopfq, alsysx, aqdiffab. The phase-5 O1 gap/guesser numbers therefore did not represent the deployed server (it would have re-asked those questions); the corrected run does, and it gives the same results.",
+  "first-try-and-three-fresh/": {
+    "engine": "2b03f2bb (sim6, corrected answers; original drawn from TYPED goal items so that a right first try can occur)",
+    "tuning": "seeds 7001-7010 (780 runs, 0 errors); nothing changed after it",
+    "heldout": "seeds 8001-8030 (2340 runs, 0 errors): experiment A 14 cells x 2 policies x 30; experiment B 10 cells x 5 policies x 30",
+    "guessers": "typed-answer luck 2%, 10%, 20% (choice luck 25%, 25%, 30%) on a learner with a 3-skill (O1) or 2-skill (O2) gap",
+    "never_used_before": "7001-7010 and 8001-8030; earlier ranges: 1-10, 101-110, 1001-1030, 2001-2030, 3001-3030, 4001-4030, 5001-5010, 6001-6030"
+  },
+  "produce": [
+    "cd frontend && node --import tsx src/journey/deep-recovery-sim5.ts 6001 6030 selective,three-fresh,different-form,delayed-add,delayed-replace,delayed-first,consistent,consistent-first <cells>   (SIM_ANSWERS=corrected for corrected/)",
+    "node --import tsx src/journey/deep-recovery-unresolved6.ts 6001 6030 selective",
+    "node --import tsx src/journey/deep-recovery-sim6.ts A 8001 8030 ; node --import tsx src/journey/deep-recovery-sim6.ts B 8001 8030"
+  ],
+  "summarise": [
+    "node --import tsx src/journey/deep-recovery-summary5.ts <old-answers or corrected jsonl>",
+    "node --import tsx src/journey/deep-recovery-summary6.ts <first-try-and-three-fresh jsonl>"
+  ]
+}

@@ -1,0 +1,297 @@
+[
+  {
+    "id": "subst",
+    "title": "An integral by substitution",
+    "competency": "MATH.calculus.integration-methods",
+    "domain": [
+      [
+        0,
+        2
+      ],
+      [
+        1,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        1,
+        3
+      ]
+    ],
+    "review": {
+      "entry": {
+        "item": "family:subst",
+        "kind": "family",
+        "competency": "MATH.calculus.integration-methods",
+        "family": "subst",
+        "version": "1.0.0",
+        "origin": "family",
+        "author": "OpenPath engineering (generator code, written with AI assistance)",
+        "contentHash": "ff41c625",
+        "state": "submitted",
+        "history": [
+          {
+            "state": "draft",
+            "by": "content pipeline",
+            "role": "engineer",
+            "at": "2026-10-19T16:00:00.000Z",
+            "contentHash": "fbc8a807",
+            "note": "added"
+          },
+          {
+            "state": "submitted",
+            "by": "OpenPath engineering (Claude)",
+            "role": "engineer",
+            "at": "2026-10-19T16:00:00.000Z",
+            "contentHash": "fbc8a807",
+            "note": "submitted for educator review"
+          },
+          {
+            "state": "draft",
+            "by": "content pipeline",
+            "role": "engineer",
+            "at": "2026-10-19T18:00:00.000Z",
+            "contentHash": "ff41c625",
+            "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+          },
+          {
+            "state": "submitted",
+            "by": "OpenPath engineering (Claude)",
+            "role": "engineer",
+            "at": "2026-10-19T18:00:00.000Z",
+            "contentHash": "ff41c625",
+            "note": "submitted for educator review"
+          }
+        ]
+      },
+      "state": "submitted",
+      "stale": false
+    },
+    "validation": {
+      "family": "subst",
+      "deterministic": {
+        "checked": 72,
+        "failures": []
+      },
+      "property": {
+        "cases": 400,
+        "failures": []
+      },
+      "boundary": {
+        "cases": 16,
+        "failures": []
+      },
+      "excluded": 0,
+      "ok": true
+    },
+    "independent": {
+      "method": "BigInt closed-form arithmetic independent of the family solver; direct and choice-answer agreement",
+      "servedItems": 72,
+      "choiceItems": 36,
+      "failures": 0
+    },
+    "phases": {
+      "diagnostic": 8,
+      "practice": 38,
+      "check": 8,
+      "retention": 18
+    }
+  },
+  {
+    "id": "pint",
+    "title": "The definite integral of k xⁿ",
+    "competency": "MATH.calculus.indefinite-integrals",
+    "domain": [
+      [
+        0,
+        3
+      ],
+      [
+        1,
+        4
+      ],
+      [
+        1,
+        12
+      ],
+      [
+        1,
+        3
+      ]
+    ],
+    "review": {
+      "entry": {
+        "item": "family:pint",
+        "kind": "family",
+        "competency": "MATH.calculus.indefinite-integrals",
+        "family": "pint",
+        "version": "1.0.0",
+        "origin": "family",
+        "author": "OpenPath engineering (generator code, written with AI assistance)",
+        "contentHash": "552b485b",
+        "state": "submitted",
+        "history": [
+          {
+            "state": "draft",
+            "by": "content pipeline",
+            "role": "engineer",
+            "at": "2026-10-19T16:00:00.000Z",
+            "contentHash": "f89244d7",
+            "note": "added"
+          },
+          {
+            "state": "submitted",
+            "by": "OpenPath engineering (Claude)",
+            "role": "engineer",
+            "at": "2026-10-19T16:00:00.000Z",
+            "contentHash": "f89244d7",
+            "note": "submitted for educator review"
+          },
+          {
+            "state": "draft",
+            "by": "content pipeline",
+            "role": "engineer",
+            "at": "2026-10-19T18:00:00.000Z",
+            "contentHash": "552b485b",
+            "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+          },
+          {
+            "state": "submitted",
+            "by": "OpenPath engineering (Claude)",
+            "role": "engineer",
+            "at": "2026-10-19T18:00:00.000Z",
+            "contentHash": "552b485b",
+            "note": "submitted for educator review"
+          }
+        ]
+      },
+      "state": "submitted",
+      "stale": false
+    },
+    "validation": {
+      "family": "pint",
+      "deterministic": {
+        "checked": 360,
+        "failures": []
+      },
+      "property": {
+        "cases": 400,
+        "failures": []
+      },
+      "boundary": {
+        "cases": 16,
+        "failures": []
+      },
+      "excluded": 0,
+      "ok": true
+    },
+    "independent": {
+      "method": "BigInt closed-form arithmetic independent of the family solver; direct and choice-answer agreement",
+      "servedItems": 360,
+      "choiceItems": 179,
+      "failures": 0
+    },
+    "phases": {
+      "diagnostic": 36,
+      "practice": 187,
+      "check": 69,
+      "retention": 68
+    }
+  },
+  {
+    "id": "pow",
+    "title": "A power of a whole number",
+    "competency": "MATH.number.exponents",
+    "domain": [
+      [
+        2,
+        12
+      ],
+      [
+        2,
+        5
+      ]
+    ],
+    "review": {
+      "entry": {
+        "item": "family:pow",
+        "kind": "family",
+        "competency": "MATH.number.exponents",
+        "family": "pow",
+        "version": "1.0.0",
+        "origin": "family",
+        "author": "OpenPath engineering (generator code, written with AI assistance)",
+        "contentHash": "9ef3b50f",
+        "state": "submitted",
+        "history": [
+          {
+            "state": "draft",
+            "by": "content pipeline",
+            "role": "engineer",
+            "at": "2026-10-19T16:00:00.000Z",
+            "contentHash": "11bee98b",
+            "note": "added"
+          },
+          {
+            "state": "submitted",
+            "by": "OpenPath engineering (Claude)",
+            "role": "engineer",
+            "at": "2026-10-19T16:00:00.000Z",
+            "contentHash": "11bee98b",
+            "note": "submitted for educator review"
+          },
+          {
+            "state": "draft",
+            "by": "content pipeline",
+            "role": "engineer",
+            "at": "2026-10-19T18:00:00.000Z",
+            "contentHash": "9ef3b50f",
+            "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+          },
+          {
+            "state": "submitted",
+            "by": "OpenPath engineering (Claude)",
+            "role": "engineer",
+            "at": "2026-10-19T18:00:00.000Z",
+            "contentHash": "9ef3b50f",
+            "note": "submitted for educator review"
+          }
+        ]
+      },
+      "state": "submitted",
+      "stale": false
+    },
+    "validation": {
+      "family": "pow",
+      "deterministic": {
+        "checked": 42,
+        "failures": []
+      },
+      "property": {
+        "cases": 400,
+        "failures": []
+      },
+      "boundary": {
+        "cases": 8,
+        "failures": []
+      },
+      "excluded": 0,
+      "ok": true
+    },
+    "independent": {
+      "method": "BigInt closed-form arithmetic independent of the family solver; direct and choice-answer agreement",
+      "servedItems": 42,
+      "choiceItems": 20,
+      "failures": 0
+    },
+    "phases": {
+      "diagnostic": 2,
+      "practice": 19,
+      "check": 14,
+      "retention": 7
+    }
+  }
+]

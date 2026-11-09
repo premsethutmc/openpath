@@ -1,0 +1,41 @@
+
+knowledgeable  n=30  outcomes solved:27 solved_after_help:3
+  false reassurance 0/30 (0%, 0-11) | blocked 0/30 (0%, 0-11) | effort mean 2.0, median 1, max 12
+  any prerequisite question 3/30 (10%, 3-26) (mean 0.5, median 0, max 5) | any lesson 3/30 (10%, 3-26) | solved 30/30 (100%, 89-100)
+
+repeated-slips  n=30  outcomes solved_after_help:9 solved:21
+  false reassurance 0/30 (0%, 0-11) | blocked 0/30 (0%, 0-11) | effort mean 4.6, median 1, max 16
+  any prerequisite question 9/30 (30%, 17-48) (mean 2.1, median 0, max 11) | any lesson 9/30 (30%, 17-48) | solved 30/30 (100%, 89-100)
+
+outside-map  n=30  outcomes escalate:30
+  false reassurance 0/30 (0%, 0-11) | blocked 0/30 (0%, 0-11) | effort mean 37.1, median 40, max 40
+  all roots found 0/30 (0%, 0-11) | missed a root 30/30 (100%, 89-100) | taught a non-gap skill 30/30 (100%, 89-100)
+
+missing-content  n=30  outcomes blocked:30
+  false reassurance 0/30 (0%, 0-11) | blocked 30/30 (100%, 89-100) | effort mean 10.2, median 10, max 14
+  all roots found 30/30 (100%, 89-100) | missed a root 0/30 (0%, 0-11) | taught a non-gap skill 0/30 (0%, 0-11)
+
+guessing-harsh  n=30  outcomes solved:7 solved_after_help:14 escalate:9
+  false reassurance 21/30 (70%, 52-83) | blocked 0/30 (0%, 0-11) | effort mean 18.8, median 15, max 40
+  all roots found 1/30 (3%, 1-17) | missed a root 29/30 (97%, 83-99) | taught a non-gap skill 15/30 (50%, 33-67)
+
+single-deep-gap  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 (0%, 0-11) | blocked 0/30 (0%, 0-11) | effort mean 24.0, median 24, max 27
+  all roots found 30/30 (100%, 89-100) | missed a root 0/30 (0%, 0-11) | taught a non-gap skill 0/30 (0%, 0-11)
+
+multiple-gaps  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 (0%, 0-11) | blocked 0/30 (0%, 0-11) | effort mean 37.6, median 37, max 40
+  all roots found 30/30 (100%, 89-100) | missed a root 0/30 (0%, 0-11) | taught a non-gap skill 0/30 (0%, 0-11)
+
+guessing  n=30  outcomes solved_after_help:25 escalate:5
+  false reassurance 0/30 (0%, 0-11) | blocked 0/30 (0%, 0-11) | effort mean 25.9, median 24, max 40
+  all roots found 26/30 (87%, 70-95) | missed a root 4/30 (13%, 5-30) | taught a non-gap skill 3/30 (10%, 3-26)
+
+fails-to-learn  n=30  outcomes escalate:30
+  false reassurance 0/30 (0%, 0-11) | blocked 0/30 (0%, 0-11) | effort mean 23.4, median 23, max 26
+  all roots found 30/30 (100%, 89-100) | missed a root 0/30 (0%, 0-11) | taught a non-gap skill 0/30 (0%, 0-11)
+
+forgetting  n=30  outcomes solved_after_help:30
+  false reassurance 0/30 (0%, 0-11) | blocked 0/30 (0%, 0-11) | effort mean 24.7, median 24, max 33
+  all roots found 30/30 (100%, 89-100) | missed a root 0/30 (0%, 0-11) | taught a non-gap skill 1/30 (3%, 1-17)
+  after forgetting (2nd episode) n=30: root found 30/30 (100%, 89-100) | false reassurance 0/30 (0%, 0-11) | outcomes solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help,solved_after_help | effort mean 30.5, median 30, max 37

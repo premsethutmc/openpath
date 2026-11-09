@@ -28,7 +28,7 @@ await esbuild.build({
   outdir: out,
   entryNames: "app",
   chunkNames: "chunks/[name]-[hash]",
-  define: { "process.env.NODE_ENV": '"production"', OPENPATH_REVIEW_FIXTURE: test ? "true" : "false" },
+  define: { "process.env.NODE_ENV": '"production"', OPENPATH_GEOMETRY_LAB: process.argv.includes("--geometry-lab") ? "true" : "false", OPENPATH_REVIEW_FIXTURE: test ? "true" : "false" },
 });
 await writeFile(
   `${out}/index.html`,

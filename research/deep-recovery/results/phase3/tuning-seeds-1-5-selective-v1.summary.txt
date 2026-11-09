@@ -1,0 +1,189 @@
+runs 180: ok 180, error 0, incomplete 0, timeout 0, n/a 0
+
+O1 lucky p3-current  n=5  outcomes escalate:3 solved_after_help:1 solved:1
+  false reassurance 1/5 20% [4–62] | questions 21.0 [10.8–30.4] | lessons 2.0 [0.8–3.0] | prerequisite questions 16.0 [7.8–22.6]
+  roots 5: identified 3/5 60% [23–88] | taught 3/5 60% [23–88] | repaired 3/5 60% [23–88] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 3/5 60% [23–88] | wrong skill designated 0/5 0% [0–43] | own skill taught 2/5 40% [12–77] | diagnosis unexplained:2 prerequisite:2 slip:1
+
+O1 lucky p3-selective  n=5  outcomes escalate:3 solved_after_help:2
+  false reassurance 0/5 0% [0–43] | questions 25.6 [20.2–30.8] | lessons 2.6 [1.8–3.0] | prerequisite questions 20.2 [16.4–22.8]
+  roots 5: identified 4/5 80% [38–96] | taught 4/5 80% [38–96] | repaired 4/5 80% [38–96] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 4/5 80% [38–96] | wrong skill designated 0/5 0% [0–43] | own skill taught 2/5 40% [12–77] | diagnosis unexplained:2 prerequisite:3
+
+O1 lucky p3-two-fresh  n=5  outcomes escalate:3 solved_after_help:2
+  false reassurance 0/5 0% [0–43] | questions 26.0 [20.4–31.0] | lessons 2.6 [1.8–3.0] | prerequisite questions 20.2 [16.4–22.8]
+  roots 5: identified 4/5 80% [38–96] | taught 4/5 80% [38–96] | repaired 4/5 80% [38–96] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 4/5 80% [38–96] | wrong skill designated 0/5 0% [0–43] | own skill taught 2/5 40% [12–77] | diagnosis unexplained:2 prerequisite:3
+
+O1 single-gap p3-current  n=5  outcomes solved_after_help:5
+  false reassurance 0/5 0% [0–43] | questions 25.4 [25.0–25.8] | lessons 3.0 [3.0–3.0] | prerequisite questions 22.2 [22.0–22.6]
+  roots 5: identified 5/5 100% [57–100] | taught 5/5 100% [57–100] | repaired 5/5 100% [57–100] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 5/5 100% [57–100] | wrong skill designated 0/5 0% [0–43] | own skill taught 0/5 0% [0–43] | diagnosis prerequisite:5
+
+O1 single-gap p3-selective  n=5  outcomes solved_after_help:5
+  false reassurance 0/5 0% [0–43] | questions 25.4 [25.0–25.8] | lessons 3.0 [3.0–3.0] | prerequisite questions 22.2 [22.0–22.6]
+  roots 5: identified 5/5 100% [57–100] | taught 5/5 100% [57–100] | repaired 5/5 100% [57–100] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 5/5 100% [57–100] | wrong skill designated 0/5 0% [0–43] | own skill taught 0/5 0% [0–43] | diagnosis prerequisite:5
+
+O1 single-gap p3-two-fresh  n=5  outcomes solved_after_help:5
+  false reassurance 0/5 0% [0–43] | questions 26.8 [26.2–27.4] | lessons 3.0 [3.0–3.0] | prerequisite questions 22.2 [22.0–22.6]
+  roots 5: identified 5/5 100% [57–100] | taught 5/5 100% [57–100] | repaired 5/5 100% [57–100] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 5/5 100% [57–100] | wrong skill designated 0/5 0% [0–43] | own skill taught 0/5 0% [0–43] | diagnosis prerequisite:5
+
+O1 strong-history p3-current  n=5  outcomes solved_after_help:1 solved:4
+  false reassurance 0/5 0% [0–43] | questions 4.0 [2.0–8.0] | lessons 0.2 [0.0–0.6] | prerequisite questions 1.2 [0.0–3.6]
+  strong recognised (solved, no lesson) 4/5 80% [38–96] | unnecessary questions 2.0 [0.0–6.0] | any lesson 1/5 20% [4–62] | any prerequisite question 1/5 20% [4–62]
+
+O1 strong-history p3-selective  n=5  outcomes solved_after_help:1 solved:4
+  false reassurance 0/5 0% [0–43] | questions 4.0 [2.0–8.0] | lessons 0.2 [0.0–0.6] | prerequisite questions 1.2 [0.0–3.6]
+  strong recognised (solved, no lesson) 4/5 80% [38–96] | unnecessary questions 2.0 [0.0–6.0] | any lesson 1/5 20% [4–62] | any prerequisite question 1/5 20% [4–62]
+
+O1 strong-history p3-two-fresh  n=5  outcomes solved_after_help:1 solved:4
+  false reassurance 0/5 0% [0–43] | questions 5.0 [3.0–9.0] | lessons 0.2 [0.0–0.6] | prerequisite questions 1.2 [0.0–3.6]
+  strong recognised (solved, no lesson) 4/5 80% [38–96] | unnecessary questions 3.0 [1.0–7.0] | any lesson 1/5 20% [4–62] | any prerequisite question 1/5 20% [4–62]
+
+O1 strong-new p3-current  n=5  outcomes solved:5
+  false reassurance 0/5 0% [0–43] | questions 2.0 [2.0–2.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 5/5 100% [57–100] | unnecessary questions 0.0 [0.0–0.0] | any lesson 0/5 0% [0–43] | any prerequisite question 0/5 0% [0–43]
+
+O1 strong-new p3-selective  n=5  outcomes solved:5
+  false reassurance 0/5 0% [0–43] | questions 3.0 [3.0–3.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 5/5 100% [57–100] | unnecessary questions 1.0 [1.0–1.0] | any lesson 0/5 0% [0–43] | any prerequisite question 0/5 0% [0–43]
+
+O1 strong-new p3-two-fresh  n=5  outcomes solved:5
+  false reassurance 0/5 0% [0–43] | questions 3.0 [3.0–3.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 5/5 100% [57–100] | unnecessary questions 1.0 [1.0–1.0] | any lesson 0/5 0% [0–43] | any prerequisite question 0/5 0% [0–43]
+
+O1 strong-slips p3-current  n=5  outcomes solved:4 solved_after_help:1
+  false reassurance 0/5 0% [0–43] | questions 4.0 [2.0–8.0] | lessons 0.2 [0.0–0.6] | prerequisite questions 1.2 [0.0–3.6]
+  strong recognised (solved, no lesson) 4/5 80% [38–96] | unnecessary questions 2.0 [0.0–6.0] | any lesson 1/5 20% [4–62] | any prerequisite question 1/5 20% [4–62]
+
+O1 strong-slips p3-selective  n=5  outcomes solved:3 solved_after_help:2
+  false reassurance 0/5 0% [0–43] | questions 6.8 [3.0–10.8] | lessons 0.4 [0.0–0.8] | prerequisite questions 2.4 [0.0–4.8]
+  strong recognised (solved, no lesson) 3/5 60% [23–88] | unnecessary questions 4.8 [1.0–8.8] | any lesson 2/5 40% [12–77] | any prerequisite question 2/5 40% [12–77]
+
+O1 strong-slips p3-two-fresh  n=5  outcomes solved:3 solved_after_help:2
+  false reassurance 0/5 0% [0–43] | questions 7.2 [3.0–11.6] | lessons 0.4 [0.0–0.8] | prerequisite questions 2.4 [0.0–4.8]
+  strong recognised (solved, no lesson) 3/5 60% [23–88] | unnecessary questions 5.2 [1.0–9.6] | any lesson 2/5 40% [12–77] | any prerequisite question 2/5 40% [12–77]
+
+O1 typed-guesser p3-current  n=5  outcomes escalate:2 solved_after_help:3
+  false reassurance 3/5 60% [23–88] | questions 19.2 [14.0–24.4] | lessons 1.8 [1.2–2.4] | prerequisite questions 12.4 [6.6–19.8]
+  roots 5: identified 0/5 0% [0–43] | taught 0/5 0% [0–43] | repaired 0/5 0% [0–43] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 0/5 0% [0–43] | wrong skill designated 0/5 0% [0–43] | own skill taught 4/5 80% [38–96] | diagnosis unexplained:1 prerequisite:2 own-or-unmapped:2
+
+O1 typed-guesser p3-selective  n=5  outcomes escalate:2 solved_after_help:3
+  false reassurance 3/5 60% [23–88] | questions 19.2 [14.0–24.4] | lessons 1.8 [1.2–2.4] | prerequisite questions 12.4 [6.6–19.8]
+  roots 5: identified 0/5 0% [0–43] | taught 0/5 0% [0–43] | repaired 0/5 0% [0–43] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 0/5 0% [0–43] | wrong skill designated 0/5 0% [0–43] | own skill taught 4/5 80% [38–96] | diagnosis unexplained:1 prerequisite:2 own-or-unmapped:2
+
+O1 typed-guesser p3-two-fresh  n=5  outcomes escalate:5
+  false reassurance 0/5 0% [0–43] | questions 19.8 [15.0–24.6] | lessons 1.8 [1.2–2.4] | prerequisite questions 12.4 [6.6–19.8]
+  roots 5: identified 0/5 0% [0–43] | taught 0/5 0% [0–43] | repaired 0/5 0% [0–43] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 0/5 0% [0–43] | wrong skill designated 0/5 0% [0–43] | own skill taught 4/5 80% [38–96] | diagnosis unexplained:4 prerequisite:1
+
+O2 lucky p3-current  n=5  outcomes escalate:1 solved_after_help:4
+  false reassurance 0/5 0% [0–43] | questions 14.6 [13.2–16.4] | lessons 2.0 [2.0–2.0] | prerequisite questions 10.2 [9.4–11.2]
+  roots 5: identified 5/5 100% [57–100] | taught 5/5 100% [57–100] | repaired 5/5 100% [57–100] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 5/5 100% [57–100] | wrong skill designated 0/5 0% [0–43] | own skill taught 1/5 20% [4–62] | diagnosis unexplained:1 prerequisite:4
+
+O2 lucky p3-selective  n=5  outcomes escalate:1 solved_after_help:4
+  false reassurance 0/5 0% [0–43] | questions 14.6 [13.2–16.4] | lessons 2.0 [2.0–2.0] | prerequisite questions 10.2 [9.4–11.2]
+  roots 5: identified 5/5 100% [57–100] | taught 5/5 100% [57–100] | repaired 5/5 100% [57–100] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 5/5 100% [57–100] | wrong skill designated 0/5 0% [0–43] | own skill taught 1/5 20% [4–62] | diagnosis unexplained:1 prerequisite:4
+
+O2 lucky p3-two-fresh  n=5  outcomes escalate:1 solved_after_help:4
+  false reassurance 0/5 0% [0–43] | questions 15.4 [14.2–16.8] | lessons 2.0 [2.0–2.0] | prerequisite questions 10.2 [9.4–11.2]
+  roots 5: identified 5/5 100% [57–100] | taught 5/5 100% [57–100] | repaired 5/5 100% [57–100] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 5/5 100% [57–100] | wrong skill designated 0/5 0% [0–43] | own skill taught 1/5 20% [4–62] | diagnosis unexplained:1 prerequisite:4
+
+O2 single-gap p3-current  n=5  outcomes solved_after_help:5
+  false reassurance 0/5 0% [0–43] | questions 13.4 [13.0–13.8] | lessons 2.0 [2.0–2.0] | prerequisite questions 10.4 [10.0–10.8]
+  roots 5: identified 5/5 100% [57–100] | taught 5/5 100% [57–100] | repaired 5/5 100% [57–100] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 5/5 100% [57–100] | wrong skill designated 0/5 0% [0–43] | own skill taught 0/5 0% [0–43] | diagnosis prerequisite:5
+
+O2 single-gap p3-selective  n=5  outcomes solved_after_help:5
+  false reassurance 0/5 0% [0–43] | questions 13.4 [13.0–13.8] | lessons 2.0 [2.0–2.0] | prerequisite questions 10.4 [10.0–10.8]
+  roots 5: identified 5/5 100% [57–100] | taught 5/5 100% [57–100] | repaired 5/5 100% [57–100] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 5/5 100% [57–100] | wrong skill designated 0/5 0% [0–43] | own skill taught 0/5 0% [0–43] | diagnosis prerequisite:5
+
+O2 single-gap p3-two-fresh  n=5  outcomes solved_after_help:5
+  false reassurance 0/5 0% [0–43] | questions 14.4 [14.0–14.8] | lessons 2.0 [2.0–2.0] | prerequisite questions 10.4 [10.0–10.8]
+  roots 5: identified 5/5 100% [57–100] | taught 5/5 100% [57–100] | repaired 5/5 100% [57–100] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 5/5 100% [57–100] | wrong skill designated 0/5 0% [0–43] | own skill taught 0/5 0% [0–43] | diagnosis prerequisite:5
+
+O2 strong-history p3-current  n=5  outcomes solved:5
+  false reassurance 0/5 0% [0–43] | questions 2.0 [2.0–2.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 5/5 100% [57–100] | unnecessary questions 0.0 [0.0–0.0] | any lesson 0/5 0% [0–43] | any prerequisite question 0/5 0% [0–43]
+
+O2 strong-history p3-selective  n=5  outcomes solved:5
+  false reassurance 0/5 0% [0–43] | questions 2.0 [2.0–2.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 5/5 100% [57–100] | unnecessary questions 0.0 [0.0–0.0] | any lesson 0/5 0% [0–43] | any prerequisite question 0/5 0% [0–43]
+
+O2 strong-history p3-two-fresh  n=5  outcomes solved:5
+  false reassurance 0/5 0% [0–43] | questions 3.0 [3.0–3.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 5/5 100% [57–100] | unnecessary questions 1.0 [1.0–1.0] | any lesson 0/5 0% [0–43] | any prerequisite question 0/5 0% [0–43]
+
+O2 strong-new p3-current  n=5  outcomes solved:5
+  false reassurance 0/5 0% [0–43] | questions 2.0 [2.0–2.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 5/5 100% [57–100] | unnecessary questions 0.0 [0.0–0.0] | any lesson 0/5 0% [0–43] | any prerequisite question 0/5 0% [0–43]
+
+O2 strong-new p3-selective  n=5  outcomes solved_after_help:1 solved:4
+  false reassurance 0/5 0% [0–43] | questions 4.4 [3.0–7.2] | lessons 0.2 [0.0–0.6] | prerequisite questions 0.6 [0.0–1.8]
+  strong recognised (solved, no lesson) 4/5 80% [38–96] | unnecessary questions 2.4 [1.0–5.2] | any lesson 1/5 20% [4–62] | any prerequisite question 1/5 20% [4–62]
+
+O2 strong-new p3-two-fresh  n=5  outcomes solved_after_help:1 solved:4
+  false reassurance 0/5 0% [0–43] | questions 4.6 [3.0–7.8] | lessons 0.2 [0.0–0.6] | prerequisite questions 0.6 [0.0–1.8]
+  strong recognised (solved, no lesson) 4/5 80% [38–96] | unnecessary questions 2.6 [1.0–5.8] | any lesson 1/5 20% [4–62] | any prerequisite question 1/5 20% [4–62]
+
+O2 strong-slips p3-current  n=5  outcomes solved:5
+  false reassurance 0/5 0% [0–43] | questions 2.0 [2.0–2.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 5/5 100% [57–100] | unnecessary questions 0.0 [0.0–0.0] | any lesson 0/5 0% [0–43] | any prerequisite question 0/5 0% [0–43]
+
+O2 strong-slips p3-selective  n=5  outcomes solved:5
+  false reassurance 0/5 0% [0–43] | questions 3.0 [3.0–3.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 5/5 100% [57–100] | unnecessary questions 1.0 [1.0–1.0] | any lesson 0/5 0% [0–43] | any prerequisite question 0/5 0% [0–43]
+
+O2 strong-slips p3-two-fresh  n=5  outcomes solved:5
+  false reassurance 0/5 0% [0–43] | questions 3.0 [3.0–3.0] | lessons 0.0 [0.0–0.0] | prerequisite questions 0.0 [0.0–0.0]
+  strong recognised (solved, no lesson) 5/5 100% [57–100] | unnecessary questions 1.0 [1.0–1.0] | any lesson 0/5 0% [0–43] | any prerequisite question 0/5 0% [0–43]
+
+O2 typed-guesser p3-current  n=5  outcomes solved:1 solved_after_help:3 escalate:1
+  false reassurance 3/5 60% [23–88] | questions 11.2 [6.0–15.0] | lessons 1.0 [0.4–1.6] | prerequisite questions 7.8 [3.6–11.4]
+  roots 5: identified 2/5 40% [12–77] | taught 2/5 40% [12–77] | repaired 2/5 40% [12–77] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 2/5 40% [12–77] | wrong skill designated 1/5 20% [4–62] | own skill taught 1/5 20% [4–62] | diagnosis null:1 prerequisite:3 unexplained:1
+
+O2 typed-guesser p3-selective  n=5  outcomes solved:1 solved_after_help:3 escalate:1
+  false reassurance 3/5 60% [23–88] | questions 11.2 [6.0–15.0] | lessons 1.0 [0.4–1.6] | prerequisite questions 7.8 [3.6–11.4]
+  roots 5: identified 2/5 40% [12–77] | taught 2/5 40% [12–77] | repaired 2/5 40% [12–77] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 2/5 40% [12–77] | wrong skill designated 1/5 20% [4–62] | own skill taught 1/5 20% [4–62] | diagnosis null:1 prerequisite:3 unexplained:1
+
+O2 typed-guesser p3-two-fresh  n=5  outcomes solved:1 escalate:3 solved_after_help:1
+  false reassurance 1/5 20% [4–62] | questions 15.0 [7.4–21.2] | lessons 1.4 [0.6–2.0] | prerequisite questions 8.4 [3.8–12.8]
+  roots 5: identified 2/5 40% [12–77] | taught 2/5 40% [12–77] | repaired 2/5 40% [12–77] | blocked-with-root-named 0/5 0% [0–43] runs
+  runs with every root repaired 2/5 40% [12–77] | wrong skill designated 1/5 20% [4–62] | own skill taught 3/5 60% [23–88] | diagnosis null:1 unexplained:3 prerequisite:1
+
+paired vs p3-selective (same learner seed): mean difference in questions [bootstrap 95%], false-reassurance runs (other / selective)
+  O1 lucky p3-current n=5: Δquestions -4.6 [-13.8–0.0] | FR 1/0
+  O1 lucky p3-two-fresh n=5: Δquestions 0.4 [0.0–0.8] | FR 0/0
+  O1 single-gap p3-current n=5: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O1 single-gap p3-two-fresh n=5: Δquestions 1.4 [1.0–2.2] | FR 0/0
+  O1 strong-history p3-current n=5: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O1 strong-history p3-two-fresh n=5: Δquestions 1.0 [1.0–1.0] | FR 0/0
+  O1 strong-new p3-current n=5: Δquestions -1.0 [-1.0–-1.0] | FR 0/0
+  O1 strong-new p3-two-fresh n=5: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O1 strong-slips p3-current n=5: Δquestions -2.8 [-7.0–-0.4] | FR 0/0
+  O1 strong-slips p3-two-fresh n=5: Δquestions 0.4 [0.0–0.8] | FR 0/0
+  O1 typed-guesser p3-current n=5: Δquestions 0.0 [0.0–0.0] | FR 3/3
+  O1 typed-guesser p3-two-fresh n=5: Δquestions 0.6 [0.2–1.0] | FR 0/3
+  O2 lucky p3-current n=5: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O2 lucky p3-two-fresh n=5: Δquestions 0.8 [0.4–1.0] | FR 0/0
+  O2 single-gap p3-current n=5: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O2 single-gap p3-two-fresh n=5: Δquestions 1.0 [1.0–1.0] | FR 0/0
+  O2 strong-history p3-current n=5: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O2 strong-history p3-two-fresh n=5: Δquestions 1.0 [1.0–1.0] | FR 0/0
+  O2 strong-new p3-current n=5: Δquestions -2.4 [-5.2–-1.0] | FR 0/0
+  O2 strong-new p3-two-fresh n=5: Δquestions 0.2 [0.0–0.6] | FR 0/0
+  O2 strong-slips p3-current n=5: Δquestions -1.0 [-1.0–-1.0] | FR 0/0
+  O2 strong-slips p3-two-fresh n=5: Δquestions 0.0 [0.0–0.0] | FR 0/0
+  O2 typed-guesser p3-current n=5: Δquestions 0.0 [0.0–0.0] | FR 3/3
+  O2 typed-guesser p3-two-fresh n=5: Δquestions 3.8 [0.2–7.4] | FR 1/3

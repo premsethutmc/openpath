@@ -5,7 +5,8 @@
 import type { HandoverAcknowledgement } from "./records";
 import { decide } from "./grade";
 export { decide, creditOf } from "./grade";
-import { question } from "./content";
+import { alignmentRecord } from "./method-alignment";
+import { moduleFor, question } from "./content";
 import { releaseFor } from "./curricula";
 import type { CurriculumRelease } from "./curriculum";
 import { evidenceFor } from "./evidence";
@@ -35,7 +36,7 @@ export const make = {
     const a = decide(questionId, response, o.working ?? [], o.clarifications ?? 0);
     return { ...base(c), record: "attempt", questionId, response: a.recordAs ?? response, activity, hints: o.hints ?? 0, solution: o.solution ?? false, competency: question(questionId).competency, ...(o.context ? { context: o.context } : {}), ...(o.working?.length ? { working: o.working.slice(0, 8).map((l) => l.slice(0, 80)) } : {}), ...(a.evidence.source === "educator" ? {} : { assessment: a.evidence as AttemptAssessment }) };
   },
-  teach: (c: Ctx, competency: string, strategy: string, rule: string): LearningRecord => ({ ...base(c), record: "teach", competency, strategy, rule }),
+  teach: (c: Ctx, competency: string, strategy: string, rule: string, o: { episode?: string } = {}): LearningRecord => ({ ...base(c), record: "teach", competency, strategy, rule, ...(() => { const m=moduleFor(competency), s=m?.strategies.find(s=>s.id===strategy); const methodAlignment=m&&s?alignmentRecord(m,s):undefined; return methodAlignment?{methodAlignment}:{}; })(), ...(o.episode !== undefined ? { episode: o.episode } : {}) }),
 };
 
 export function learnerState(learnerId: string, events: readonly { kind: string }[], now: number, o: { currentSession?: string; marks?: readonly WrittenMark[]; acknowledgements?: readonly HandoverAcknowledgement[] } = {}) {

@@ -2073,7 +2073,7 @@ export const B10: Def[] = [
     mc: true,
     // [m, a, b, c, d]: x = a/b; m 0 the additive inverse of x; 1 the multiplicative inverse; 2 x × c/d + x × (d − c)/d
     parse: none,
-    reject: (p) => (invOk(p) ? null : "a/b in lowest terms with denominators 2 to 9, and for the distributive form c/d with 0 < c < d."),
+    reject: (p) => (invOk(p, true) ? null : "a/b in lowest terms with denominators 2 to 9, and for the distributive form c/d with 0 < c < d."),
     // level@1: inverses of rational numbers and the distributive property over them are Class 8 (Rational Numbers)
     grade: () => 8,
     prompt: ([m, a, b, c, d]) => (m === 0 ? `What is the additive inverse of ${fr(a, b)}?` : m === 1 ? `What is the multiplicative inverse (reciprocal) of ${fr(a, b)}?` : `Use the distributive property to work out ${fr(a, b)} × ${c}/${d} + ${fr(a, b, true)} × ${d - c}/${d}. (A fraction is fine.)`),
@@ -3394,11 +3394,11 @@ function propOpts(p: number[]) {
   return order(p, 4, "prop").map((i) => four[i]);
 }
 
-// ajinv
-function invOk([m, a, b, c, d]: number[]) {
+// ajinv: keep new pools age-appropriate without rejecting questions served before the narrowing.
+function invOk([m, a, b, c, d]: number[], historical = false) {
   if (a === 0 || Math.abs(a) > 9 || b < 2 || b > 9 || gcd(Math.abs(a), b) !== 1) return false;
   // the distributive form splits an hour into parts a child meets: 1/2, 1/3 + 2/3, 1/4 + 3/4 (both parts in lowest terms)
-  return m < 2 ? m >= 0 && c === 1 && d === 2 : m === 2 && c >= 1 && c < d && d <= 4 && gcd(c, d) === 1;
+  return m < 2 ? m >= 0 && c === 1 && d === 2 : m === 2 && c >= 1 && c < d && (historical ? d <= 9 : d <= 4 && gcd(c, d) === 1);
 }
 
 // ajtaxi: N = a³ + b³ = c³ + d³

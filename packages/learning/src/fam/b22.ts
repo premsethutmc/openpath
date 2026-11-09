@@ -105,8 +105,8 @@ const K_TAB = ([a, , s]: number[]) => (s === 0 ? true : s === 1 ? a % 2 === 0 : 
 const DH = [5, 15, 25, 35, 45, 50, 125];
 const NM = [9, 19, 29, 39, 49, 99, 11, 21, 31, 101];
 const D_STRAT: [number, number][] = [[0, 9], [3, 48], [0, 1]];
-// 9 × n and 11 × n with n < 10 are times-table facts, below the level of this strategy: left out
-const K_STRAT = ([i, y, s]: number[]) => (s === 0 ? i < DH.length && y % 2 === 0 && y >= 12 && (DH[i] === 125 ? y % 8 === 0 : true) : y <= 25 && !(NM[i] <= 11 && y < 10));
+// 9 × n and 11 × n with n < 10 are left out of new pools, but historical IDs remain readable.
+const K_STRAT = ([i, y, s]: number[], historical = false) => (s === 0 ? i < DH.length && y % 2 === 0 && y >= 12 && (DH[i] === 125 ? y % 8 === 0 : true) : y <= 25 && (historical || !(NM[i] <= 11 && y < 10)));
 const stratX = ([i, , s]: number[]) => (s === 0 ? DH[i] : NM[i]);
 
 // ---------------------------------------------------------------- partial products
@@ -338,7 +338,7 @@ const P1: Def[] = [
     mc: true,
     // [i, y, s]: s 0: x = DH[i] doubled while y is halved; s 1: x = NM[i] next to a multiple of ten
     parse: none,
-    reject: gate(D_STRAT, K_STRAT, "Doubling and halving with 5, 15, 25, 35, 45, 50 or 125, or a factor next to a multiple of 10."),
+    reject: gate(D_STRAT, (p) => K_STRAT(p, true), "Doubling and halving with 5, 15, 25, 35, 45, 50 or 125, or a factor next to a multiple of 10."),
     prompt: (p) => {
       const [, y, s] = p;
       const x = stratX(p);

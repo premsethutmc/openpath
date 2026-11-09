@@ -7,6 +7,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Figure } from "../year/Figure";
+import { Handoffs } from "./Handoffs";
 import { Api } from "../english/logic/account";
 import { creditOf } from "../../../packages/learning/src/grade";
 import { misconceptionOf, modules, moduleOrigin, question } from "../../../packages/learning/src/content";
@@ -185,6 +186,8 @@ function Marking({ roles }: { roles: string[] }) {
       <p className="small muted">Only learners whose parents chose to share their written work with you appear here, under a pseudonym. Each answer is marked once; marks are kept and cannot be changed. Only full marks count as correct.</p>
       {!rows.length && <p className="muted">Nothing to mark.</p>}
       {rows.map((r) => <MarkOne key={`${r.pupil}:${r.attemptId}`} r={r} onDone={load} />)}
+      {/* recovery-handoff@0 (research): shows nothing unless the server's switch is on */}
+      <Handoffs />
     </section>
   );
 }

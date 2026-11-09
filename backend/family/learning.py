@@ -31,7 +31,7 @@ RECORDS = {
     'foundation_pathway': {'policy', 'target', 'active'},
     'curriculum': {'release'},
     'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context', 'working', 'assessment'},
-    'teach': {'rule', 'strategy', 'competency'},
+    'teach': {'rule', 'strategy', 'competency', 'episode', 'methodAlignment'},
     'skip': {'target'},
     'study_session': {'planId', 'revision', 'phase', 'time', 'advice'},
     'topic_session': {'academicYear', 'stage', 'target', 'minutes', 'curriculum'},
@@ -42,6 +42,12 @@ WRITTEN_LIMIT = 16000  # a written answer, or a drawing with its note (draw@1; f
 # the delayed check (status@1 RETENTION_DAYS), less the half-day tolerance the shared engine also allows
 # a delayed check: seven full days after independent success (status@1 RETENTION_DAYS; no tolerance on this surface)
 RETENTION_DELAY = timedelta(days=7)
+# deep-recovery@0 (research, frontend/src/learning/deep-recovery-app.ts): an attempt's context `deep:<original>|<path>@<skill>` names
+# the diagnosis path, which is longer than other contexts; only this shape gets the longer limit (every other context: 80).
+# A lesson may carry its recovery id `deep:<original>#<time of the original's first saved answer>`. Neither is evidence here.
+DEEP_CONTEXT = re.compile(r'deep:[^|#@>\s]{1,120}\|[A-Za-z0-9._\-]{1,80}(?:>[A-Za-z0-9._\-]{1,80}){0,15}@[A-Za-z0-9._\-]{1,80}')
+DEEP_CONTEXT_LIMIT = 600
+DEEP_EPISODE = re.compile(r'deep:([^|#@>\s]{1,120})#(\d{4}-\d\d-\d\dT[0-9:.]+(?:Z|[+-]\d\d:\d\d))')
 INDEPENDENT_MIN = 2
 INDEPENDENT = ACTIVITIES - {'guided', 'probe'}
 
@@ -391,14 +397,15 @@ def checked_learning(event, pupil):
             from .models import HandoverAcknowledgement
             if event['context'] != f"reentry:{q['competency']}" or event['activity'] != 'diagnostic' or event['hints'] or event['solution']:
                 _reject('Re-entry must be the offered fresh question on your own.')
-            acknowledgements = [{'id': f'ack-{a.pk}', 'at': a.at.isoformat(), 'competency': a.competency, 'by': 'educator'}
-                                for a in HandoverAcknowledgement.objects.filter(pupil=pupil)]
+            from .handover import _json as acknowledgement_json
+            acknowledgements = [acknowledgement_json(a) for a in HandoverAcknowledgement.objects.filter(pupil=pupil)]
             reply = run([{'operation': 'reentry', 'learner': str(pupil.pk), 'competency': q['competency'],
                           'questionId': event['questionId'], 'now': now.timestamp() * 1000,
                           'events': prior, 'acknowledgements': acknowledgements, 'sessionId': event['sessionId']}])
             if not reply or reply[0] != {'allowed': True}:
                 _reject('This re-entry is not available. Reload for the current next step; no allowance was used.')
-        if 'context' in event and not _text(event['context'], 80):
+        deep = isinstance(event.get('context'), str) and event['context'].startswith('deep:')
+        if 'context' in event and not (_text(event['context'], DEEP_CONTEXT_LIMIT) and DEEP_CONTEXT.fullmatch(event['context']) if deep else _text(event['context'], 80)):
             _reject('Invalid context.')
         if 'assessment' in event and not _assessment_ok(event['assessment'], q):
             _reject('The assessment result is malformed.')
@@ -418,9 +425,16 @@ def checked_learning(event, pupil):
             if since is None or now - since < RETENTION_DELAY:
                 _reject('The delayed check is not due yet.')
     elif record == 'teach':
+        if 'methodAlignment' in event and (not isinstance(event['methodAlignment'], str) or not re.fullmatch(r'method-alignment@1:[0-9a-f]{64}', event['methodAlignment'])):
+            _reject('Invalid method alignment policy.')
         m = c['modules'].get(event.get('competency'))
         if not m or event.get('strategy') not in {s['id'] for s in m['strategies']} or not _text(event.get('rule'), 40):
             _reject('Unknown teaching for this skill.')
+        if 'episode' in event:
+            m = DEEP_EPISODE.fullmatch(event['episode']) if _text(event['episode'], 200) else None
+            # the recovery must exist: the original's first saved answer, at exactly that (server) time
+            if not m or not any(e.get('record') == 'attempt' and e.get('questionId') == m[1] and e.get('at') == m[2] for e in prior):
+                _reject('Unknown recovery for this lesson.')
     elif record == 'skip':
         if not _text(event.get('target'), 120):
             _reject('Invalid skip.')

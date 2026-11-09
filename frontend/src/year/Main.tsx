@@ -31,6 +31,12 @@ import { contentOf, flatten, tilesFor, type Tile } from "../../../packages/learn
 import { setActiveRegistry, type Registry } from "../../../packages/learning/src/review";
 import { Icon } from "./icons";
 import { Module, Recovery, Single, STATUS_WORD, type Ctx } from "./Learn";
+import { DeepRecovery } from "./DeepRecovery";
+import { deepRecoveryOn, deepPathwayAllowed, DEEP_EVALUATION } from "./deep-recovery-flag";
+import { RecoveryAnswersPermission } from "./RecoveryAnswersPermission";
+import { openDeepRecoveries } from "../learning/deep-recovery-app";
+import { deepGoalModule } from "../learning/deep-goal";
+import { afterHelpOf, afterHelpTiles, afterHelpSummary, qualifiedEvidence, type AfterHelp } from "../learning/deep-evidence";
 import "../mathematics/chapter/chapter.css";
 import "./year.css";
 
@@ -39,6 +45,10 @@ declare const OPENPATH_REVIEW_FIXTURE: boolean;
 if (typeof OPENPATH_REVIEW_FIXTURE !== "undefined" && OPENPATH_REVIEW_FIXTURE) useReviewFixture({ items: questions.map((q) => q.id), releasedAt: "2020-01-01T00:00:00Z", all: true }); // generated questions too (the dashboard's test build reads the same)
 
 const api = new Api();
+/** deep-recovery@0 (research): false in every shipped build (deep-recovery-flag.ts). The build constant is read here directly so
+ *  that a shipped (minified) bundle folds DEEP to false and drops the research view and its code. */
+declare const OPENPATH_DEEP_RECOVERY: boolean;
+const DEEP = typeof OPENPATH_DEEP_RECOVERY !== "undefined" && OPENPATH_DEEP_RECOVERY === true && deepRecoveryOn();
 const uid = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(36).slice(2)}`;
 /** Problems a learner may bring when stuck (a class or coaching problem): opened by the learner, never pushed. */
 const STUCK = questions.filter((q) => q.role === "original");
@@ -107,7 +117,9 @@ function App() {
   const [events, setEvents] = useState<{ kind: string }[] | null>(null);
   const showPathway = new URLSearchParams(location.search).get("foundation") === "1" || !!events?.some((e) => (e as LearningRecord).record === "foundation_pathway");
   const pathwayChoices = useMemo(() => showPathway ? graph.competencies.filter((c) => !c.partOf && moduleFor(c.id)) : [], [showPathway]);
-  const [view, setView] = useState<View>(new URLSearchParams(location.search).get("curriculum") === "change" ? { name: "setup", sameYear: true } : { name: "year" });
+  // deep-recovery@0 (research builds only): ?stuck=<question> opens the recovery from that problem
+  const stuckQ = DEEP ? new URLSearchParams(location.search).get("stuck") : null;
+  const [view, setView] = useState<View>(new URLSearchParams(location.search).get("curriculum") === "change" ? { name: "setup", sameYear: true } : stuckQ && (() => { try { return !!question(stuckQ); } catch { return false; } })() ? { name: "stuck", qid: stuckQ } : { name: "year" });
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
   const [now, setNow] = useState(Date.now());
@@ -200,7 +212,7 @@ function App() {
     catch { return null; } // The study timer owns retry/error state and clears it after a successful save.
   }
 
-  const banner = reviewFixtureActive() ? <div className="test-banner" role="note">TEST BUILD · questions are treated as educator-reviewed so that “verified” can be shown. Never use with real learners.</div> : null;
+  const banner = DEEP_EVALUATION ? <div className="test-banner" role="note">Controlled evaluation · integration methods only. Real educator review gates apply; unapproved content is unavailable.</div> : reviewFixtureActive() ? <div className="test-banner" role="note">TEST BUILD · questions are treated as educator-reviewed so that “verified” can be shown. Never use with real learners.</div> : null;
   if (!ready) return <Shell banner={banner}><p className="muted center">Opening OpenPath…</p></Shell>;
   if (!signedIn) return <Shell banner={banner} error={error}><SignIn onDone={() => refreshAccount().catch((e) => setError(String(e.message ?? e)))} onError={setError} /></Shell>;
   if (!learner)
@@ -226,14 +238,15 @@ function App() {
   const name = pupils.find((p) => p.id === learner)?.display_name ?? "Learner";
   const ctx: Ctx = {
     records: st.records.pathway?.active ? st.selectionRecords : st.records,
-    ...(st.records.pathway?.active ? { module: st.module } : {}),
+    // deep-recovery@0 on one learning goal (research switch; deep-goal.ts): only that goal's "recover" changes
+    ...(st.records.pathway?.active ? { module: DEEP && deepPathwayAllowed(st.records) ? deepGoalModule(true, st.module, st.selectionRecords, st.selectionEvidence, now) : st.module } : {}),
     evidence: st.records.pathway?.active ? st.selectionEvidence : st.evidence,
     now,
     session,
     saving,
     answer: (qid: string, response: string, activity: LearningActivity, o = {}) => save(make.attempt(ctxOf(), qid, response, activity, o)),
     recorded: () => lastDecision.current,
-    teach: (competency: string, strategy: string, rule: string) => save(make.teach(ctxOf(), competency, strategy, rule.slice(0, 40))),
+    teach: (competency: string, strategy: string, rule: string, o?: { episode?: string }) => save(make.teach(ctxOf(), competency, strategy, rule.slice(0, 40), o?.episode ? { episode: o.episode } : {})),
   };
   const top = (left: React.ReactNode, title: string) => <TopBar left={left} title={title} />;
   const home = <button className="link" onClick={() => setView({ name: "year" })}>← My year</button>;
@@ -278,7 +291,12 @@ function App() {
   const grade = st.enrolment.grade;
   const activeGoals = [...st.records.goals.keys()];
   const goalOf = (c: string) => activeGoals.filter((g) => overlay(g, grade, assigned(release).map((a) => a.competency), st.evidence)?.foundations.includes(c));
-  const tiles = tilesFor(release, st.evidence, goalOf);
+  // deep-recovery@0 evidence after help (research switch; learning/deep-evidence.ts): a skill shown only after a deep episode's help
+  // reads "Solved independently after help" on its tile (never the unqualified "Shown on your own"); switch off: unchanged
+  const ahMemo = new Map<string, AfterHelp | null>();
+  const ahOf = (c: string, recs = st.records, ev = st.evidence) => { const k = `${recs === st.records ? "y" : "g"}:${c}`; if (!ahMemo.has(k)) ahMemo.set(k, afterHelpOf(c, recs, ev, now)); return ahMemo.get(k)!; };
+  const claimEvidence = qualifiedEvidence(st.evidence, (c) => ahOf(c));
+  const tiles = afterHelpTiles(tilesFor(release, st.evidence, goalOf), (c) => ahOf(c));
   const open = (t: Tile, path: string[]) => {
     if (t.kind === "proposal" || t.kind === "unsupported") return;
     if (t.kind === "skill" && t.children.length === 0 && moduleFor(t.competency!) && t.content?.level === "module") return setView({ name: "module", competency: t.competency!, back: { name: "tile", path: path.slice(0, -1) } });
@@ -318,7 +336,8 @@ function App() {
   if (view.name === "stuck")
     return (
       <Shell banner={banner} error={error} top={top(home, name)}>
-        <Recovery original={view.qid} ctx={ctx} onExit={() => setView(view.back ?? { name: "year" })} exitLabel={view.back ? "Back to the lesson" : undefined} />
+        {DEEP && deepPathwayAllowed(ctx.records) ? <DeepRecovery original={view.qid} ctx={ctx} onExit={() => setView(view.back ?? { name: "year" })} exitLabel={view.back ? "Back to the lesson" : undefined} />
+          : <Recovery original={view.qid} ctx={ctx} onExit={() => setView(view.back ?? { name: "year" })} exitLabel={view.back ? "Back to the lesson" : undefined} />}
       </Shell>
     );
   if (view.name === "single")
@@ -380,13 +399,18 @@ function App() {
   }
 
   // ---------------------------------------------------------------- the year dashboard
-  const sum = st.summary;
+  const qualifiedSummary = afterHelpSummary(tiles);
+  const sum = qualifiedSummary ?? st.summary;
   const next = st.next!;
+  const routeHelp = st.records.pathway?.active ? (st.selectionRecords.readinessRoute ?? []).map(c => ahOf(c, st.selectionRecords, st.selectionEvidence)).filter(Boolean) : [];
+  const nextReason = next.kind === "none" && routeHelp.length && /shown/.test(next.reason)
+    ? "This route includes problems solved independently after help. That success stays recorded, but it is not unqualified mastery; later checks and any difficulties remain in your record."
+    : next.reason;
   const ids = assigned(release).map((a) => a.competency);
-  const overlays = activeGoals.map((g) => overlay(g, grade, ids, st.evidence)).filter((o) => o !== null);
+  const overlays = activeGoals.map((g) => overlay(g, grade, ids, claimEvidence)).filter((o) => o !== null);
   // advanced problems: the steps of the general decomposition that suit this grade; the full problem once its
   // grade and readiness rules are met (decomposition@2 for the steps, the stored readiness rule for the full problem)
-  const offers = offersFor(grade, st.evidence).map((o) => {
+  const offers = offersFor(grade, claimEvidence).map((o) => {
     const fam = familyOf(o.problem.full.id);
     const d = fam ? decompose(problemOf(fam)!, grade) : null;
     return { o, steps: o.full ? [] : (d?.forGrade ?? []).map((x) => x.question!) };
@@ -427,6 +451,7 @@ function App() {
       <div className="stats" role="list" aria-label="This year so far">
         <div className="stat verified" role="listitem"><b>{sum.verified}</b><span>Verified</span></div>
         <div className="stat shown" role="listitem"><b>{sum.shown}</b><span>Shown on your own</span></div>
+        {qualifiedSummary && qualifiedSummary.afterHelp > 0 && <div className="stat active" role="listitem" data-after-help-count={qualifiedSummary.afterHelp}><b>{qualifiedSummary.afterHelp}</b><span>Solved independently after help</span></div>}
         <div className="stat active" role="listitem"><b>{sum.developing}</b><span>Learning</span></div>
         <div className="stat not_started" role="listitem"><b>{sum.notStarted}</b><span>Not started</span></div>
       </div>
@@ -442,13 +467,20 @@ function App() {
         <div className="next">
           <p className="eyebrow">Next</p>
           <h2>{next.question ? question(next.question).prompt.split(":")[0] : graph.get(next.competency!).name}</h2>
-          <p className="muted">{next.reason}</p>
+          <p className="muted">{nextReason}</p>
           {st.change && <p className="why" role="status"><b>Why this changed:</b> {st.change}</p>}
           <button className="primary" onClick={goNext}>{next.kind === "retention" ? "Start the delayed check" : next.kind === "review" ? "Review it" : next.kind === "continue" ? "Continue" : "Start"}</button>
         </div>
       ) : (
-        <div className="next"><p className="eyebrow">Next</p><p>{next.reason}</p>{next.reviewCompetency && <button className="secondary" onClick={() => setView({ name: "module", competency: next.reviewCompetency!, reviewOnly: true, back: { name: "year" } })}>Review a supported lesson</button>}</div>
+        <div className="next"><p className="eyebrow">Next</p><p>{nextReason}</p>{next.reviewCompetency && <button className="secondary" onClick={() => setView({ name: "module", competency: next.reviewCompetency!, reviewOnly: true, back: { name: "year" } })}>Review a supported lesson</button>}</div>
       )}
+      {DEEP && (() => { const open = openDeepRecoveries(st.records, st.evidence, now); return open.length ? (
+        <section aria-label="Continue a recovery">
+          <div className="section-title"><h2>Continue where you left off</h2></div>
+          <div className="cards">{open.map((o) => <button key={o.original} className="card" data-deep-continue={o.original} onClick={() => setView({ name: "stuck", qid: o.original })}><span className="card-title">{graph.get(question(o.original).competency).name}</span><span className="card-sub">{o.screen.kind === "end" ? "Paused: your place is saved" : "A recovery in progress"}</span></button>)}</div>
+        </section>) : null; })()}
+      {st.records.pathway?.active && (() => { const route = st.selectionRecords.readinessRoute ?? []; const hits = route.map((c) => [c, ahOf(c, st.selectionRecords, st.selectionEvidence)] as const).filter(([, a]) => a);
+        return hits.length ? <p className="small" role="note" data-after-help-goal>{hits.map(([c, a]) => `${graph.get(c).name}: ${a!.label}.`).join(" ")}</p> : null; })()}
       {next.paused?.length ? <p className="why" role="note"><b>Paused for a teacher or parent:</b> {next.paused.map((id) => graph.get(id).name).join(", ")}. Different explanations have not worked yet, so OpenPath does not ask more on {next.paused.length > 1 ? "these" : "this"} on its own.</p> : null}
       {tiles.map((s) => (
         <section key={s.id} aria-label={s.title}>
@@ -478,10 +510,10 @@ function App() {
             </div>
           )}
           {(() => {
-            const r = readiness(o!.goal.id, grade, st.evidence)!;
+            const r = readiness(o!.goal.id, grade, claimEvidence)!;
             return <p className="small">Foundations so far (up to Grade {grade}): {r.shown} of {r.foundationsSoFar} shown on your own{r.verified ? `, ${r.verified} verified` : ""}. This is read from your own record; a goal adds nothing to it.</p>;
           })()}
-          {examPlanApplies(o!.goal.id, grade) && <ExamPlanCard goalId={o!.goal.id} ev={st.evidence} />}
+          {examPlanApplies(o!.goal.id, grade) && <ExamPlanCard goalId={o!.goal.id} ev={claimEvidence} />}
         </section>
       ))}
       {offers.length > 0 && (
@@ -525,6 +557,8 @@ function App() {
         )}
       </section>
       <WrittenWork records={st.records} learner={learner} />
+      {/* recovery-handoff@0 hook (worker D, research build only; hidden when the server switch is off) */}
+      {DEEP && <RecoveryAnswersPermission learner={learner} />}
       <div className="section-title"><h2>Your years</h2></div>
       <div className="actions">
         <button className="secondary" onClick={() => setView({ name: "years" })}>Earlier years</button>
@@ -634,7 +668,8 @@ function TileDetail({ t, ev, onStart }: { t: Tile; ev: Ctx["evidence"]; onStart?
         <div className="facts">
           <div className="fact"><b>{e.independent.right} / {e.independent.total}</b>right on your own</div>
           <div className="fact"><b>{e.assisted.right} / {e.assisted.total}</b>right with help</div>
-          <div className="fact"><b>{STATUS_WORD[e.status]}</b>status</div>
+          <div className="fact"><b>{(t as Tile & { afterHelp?: AfterHelp }).afterHelp?.label ?? STATUS_WORD[e.status]}</b>status</div>
+          {(t as Tile & { afterHelp?: AfterHelp }).afterHelp && <p className="small muted" data-after-help={(t as Tile & { afterHelp?: AfterHelp }).afterHelp!.kind}>{(t as Tile & { afterHelp?: AfterHelp }).afterHelp!.note}</p>}
           <div className="fact"><b>{delayedCheckFact(e, Intl.DateTimeFormat().resolvedOptions().timeZone).text}</b>delayed check</div>
         </div>
       )}
