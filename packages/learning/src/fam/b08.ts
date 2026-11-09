@@ -5,7 +5,7 @@
  * triangle inequality, congruent triangles, parallel lines, Baudhayana-Pythagoras, angles at a point in a tiling).
  * Written by OpenPath; CC0.
  */
-import type { Bug, Def, InstanceTeaching, Value, Visual } from "../family-kit";
+import type { Bug, Def, InstanceTeaching, Step, Value, Visual } from "../family-kit";
 import { evaluate, parse } from "../answer-types";
 import { fmt, gcd, near, signed } from "../family-kit";
 import { bothSidesTeaching, bracket, bracketTeaching, lin as linTerm } from "./linear-teaching";
@@ -2952,7 +2952,7 @@ B08.push(
     solve: (p) => {
       const [mode, m] = p;
       const { opts, right } = psqOpts(p);
-      return { steps: (mode === 0 ? [{ id: "last-digits", op: "rule-out", competency: SQRT, inputs: opts, value: "a square never ends in 2, 3, 7 or 8" }, { id: "root", op: "square-root", competency: SQRT, inputs: [m * m], value: m }] : [{ id: "units", op: "square", competency: SQRT, inputs: [m % 10], value: (m % 10) ** 2 }]).concat([{ id: "pick", op: "choose the option", competency: SQRT, inputs: [opts[opts.indexOf(right)]], value: opts.indexOf(right) }]), answer: opts.indexOf(right) };
+      return { steps: [...(mode === 0 ? [{ id: "last-digits", op: "rule-out", competency: SQRT, inputs: opts, value: "a square never ends in 2, 3, 7 or 8" }, { id: "root", op: "square-root", competency: SQRT, inputs: [m * m], value: m }] : [{ id: "units", op: "square", competency: SQRT, inputs: [m % 10], value: (m % 10) ** 2 }]), { id: "pick", op: "choose the option", competency: SQRT, inputs: [opts[opts.indexOf(right)]], value: opts.indexOf(right) }] as Step[], answer: opts.indexOf(right) };
     },
     // independent: test each option by searching for a whole number whose square it is (or square the number in full)
     validate: ([mode, m], v) => {
