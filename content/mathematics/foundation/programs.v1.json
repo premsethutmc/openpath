@@ -384,6 +384,154 @@
           "misconception": "Double both numbers to preserve the fraction."
         }
       ]
+    },
+    {
+      "id": "tally-g3-draft",
+      "version": "1.0.0",
+      "grade": 3,
+      "competencyId": "MATH.statistics.tables",
+      "title": "Keep a count with tally marks (draft)",
+      "model": "tally",
+      "status": "provisional",
+      "provenance": "Original AI-assisted draft; no educator review. TN Grade 3 Term I, First Edition 2026: printed pp47–49 / PDF pp54–56; source outcomes tn-g03-2026-t1-em-l05-o01 and o02; full provenance in content/learning/ingestion/tn-primary-2026-term1.json.",
+      "retentionDelayDays": 1,
+      "stages": [
+        {
+          "id": "concept",
+          "title": "Meet the idea",
+          "text": "Make one upright mark for each observation. After four upright marks, draw the fifth across them. A crossed bundle means five, not six. An empty row means zero.",
+          "questions": []
+        },
+        {
+          "id": "explore",
+          "title": "Try it with your hands",
+          "text": "Record five observations using Add one mark. Notice how the fifth mark crosses four. Undo it, then add it again. Your marks are saved to this learner’s account.",
+          "questions": []
+        },
+        {
+          "id": "worked",
+          "title": "Watch an example",
+          "text": "Two crossed bundles and three single marks make 5 + 5 + 3 = 13. The crossing mark is not an extra sixth mark. Keep a separate row for each category. Read each row, then subtract the smaller count from the larger to find how many more.",
+          "questions": []
+        },
+        {
+          "id": "guided",
+          "title": "Try together",
+          "text": "Read the marks in groups of five, then count any single marks.",
+          "questions": [
+            "guided"
+          ]
+        },
+        {
+          "id": "independent",
+          "title": "Try on your own",
+          "text": "Read each row before calculating. A frequency is the number of observations in that row.",
+          "questions": [
+            "independent-a",
+            "independent-b"
+          ]
+        },
+        {
+          "id": "application",
+          "title": "Use it in a story",
+          "text": "Compare the category counts. How many are left after pairing the rows?",
+          "questions": [
+            "application"
+          ]
+        },
+        {
+          "id": "transfer",
+          "title": "Try a new situation",
+          "text": "The categories changed, but the tally rule stays the same. Equal rows mean a tie.",
+          "questions": [
+            "transfer"
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "Remember tomorrow",
+          "text": "Return after a day to read a fresh row without a hint. Finished work stays saved.",
+          "questions": [
+            "retention"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "guided",
+          "prompt": "How many observations does this row record?",
+          "answer": "6",
+          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
+          "solution": "1 groups of five and 1 singles make 6.",
+          "commonError": "7",
+          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "tallyCounts": [
+            6
+          ]
+        },
+        {
+          "id": "independent-a",
+          "prompt": "Books: enter the frequency shown in the row.",
+          "answer": "14",
+          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
+          "solution": "2 groups of five and 4 singles make 14.",
+          "commonError": "16",
+          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "tallyCounts": [
+            14
+          ]
+        },
+        {
+          "id": "independent-b",
+          "prompt": "Games: enter the frequency shown in this empty row.",
+          "answer": "0",
+          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
+          "solution": "0 groups of five and 0 singles make 0.",
+          "commonError": "1",
+          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "tallyCounts": [
+            0
+          ]
+        },
+        {
+          "id": "application",
+          "prompt": "Books and Games: how many more observations are in the larger row?",
+          "answer": "5",
+          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
+          "solution": "13 − 8 = 5. Pair the rows and count the unpaired marks.",
+          "commonError": "21",
+          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "tallyCounts": [
+            13,
+            8
+          ]
+        },
+        {
+          "id": "transfer",
+          "prompt": "Dogs and Cats: how many more are in the larger row? Write 0 for a tie.",
+          "answer": "0",
+          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
+          "solution": "10 − 10 = 0. Pair the rows and count the unpaired marks.",
+          "commonError": "20",
+          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "tallyCounts": [
+            10,
+            10
+          ]
+        },
+        {
+          "id": "retention",
+          "prompt": "How many observations does this new row record?",
+          "answer": "19",
+          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
+          "solution": "3 groups of five and 4 singles make 19.",
+          "commonError": "22",
+          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "tallyCounts": [
+            19
+          ]
+        }
+      ]
     }
   ]
 }

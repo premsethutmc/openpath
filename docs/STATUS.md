@@ -1,7 +1,7 @@
 # OpenPath status (handoff for a new session)
 
 Read this file first; keep it factual and 50–60 lines at each milestone.
-Updated: 2026-11-09 (48-gap triage + isolated tally teaching prototype).
+Updated: 2026-11-09 (tally foundation app integration; browser CI pending).
 
 ## Rules and product scope
 - No merge, deploy or settings change without owner approval; PRs are drafts.
@@ -11,7 +11,7 @@ Updated: 2026-11-09 (48-gap triage + isolated tally teaching prototype).
 
 ## This branch
 - `data/tn-primary-ingestion-2026-11-09`, originally from `feat/dev-efficiency` at `82f18fd`.
-- Follow-up remote parent: `3601798`; STATUS and remote heads read before work.
+- Follow-up remote parent: `e9a975a`; STATUS and remote heads read before work.
 - No AGENTS.md or .agents/skills in this checkout.
 - Grade 8 `7a429a94` and answer-key certification `49a6be8b` inspected; untouched.
 - Teaching-method PR #121 at `5d83947d` is separate; no integration here.
@@ -29,7 +29,7 @@ Updated: 2026-11-09 (48-gap triage + isolated tally teaching prototype).
 - Rights: © SCERT 2026, NOT FOR SALE; no open redistribution licence observed.
 - No PDFs, textbook/OCR bodies, illustrations, exercise banks or answer keys committed.
 - Term III unresolved for all grades; exact attempts in `tn-primary-source-register.json`.
-- Public 2026–27 listings still point to 2024 Term III books; not ingested as current.
+- 2026–27 listings include old books; new Grade 1 Term III candidate verified as 2018, rejected.
 
 ## Provisional capability review
 - `tn-primary-mapping-review.json`: all 144 statements reviewed with immutable text hashes.
@@ -47,13 +47,13 @@ Updated: 2026-11-09 (48-gap triage + isolated tally teaching prototype).
 - `audit_tn_mappings.py`: pass; rejects stale statements/catalogues and invented targets.
 - Python regression tests: 18 pass; Node parser/tally tests: 13 pass (31 total).
 - Deterministic extraction/OCR/validation: zero model API calls; judgment used session tokens.
-- Chromium blocked by socket EPERM before rendering; no browser pass or release changes.
+- Local Chromium still fails socket EPERM; focused account/browser CI prepared, result pending.
 
-- Draft tally model, SVG, recording controller, two Def adapters and offline teaching/practice preview.
-- Exhaustive checks: 21 tally counts and 441 comparison pairs; learner registry untouched.
+- Draft tally now added to foundation app stages with account-backed mark recording and practice.
+- Model: 21 counts / 441 pairs; foundation frontend/backend 7+7 pass; typecheck/build pass.
 
 ## Remaining work / readiness
 - Term III, exhaustive outcome decomposition, handbook/QR coverage and Tamil equivalence unknown.
 - All 48 gaps triaged in `tn-primary-gap-plan.json`; two have partial draft tally prototypes.
 - Board release builder auto-accepts mappings and lacks detailed PDF provenance; not used here.
-- Report: `docs/milestones/TN_PRIMARY_TALLY_DRAFT.md`; learner integration/review still pending.
+- Report: `docs/milestones/TN_PRIMARY_TALLY_APP.md`; browser CI/educator review pending.

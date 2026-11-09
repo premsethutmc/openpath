@@ -98,6 +98,14 @@
         {
           "url": "https://www.textbookcorp.in/",
           "result": "Follow-up: official home page still advertises 2026\u201327 Terms I/II and calls 2025\u201326 primary Term I books obsolete. No current Term III publication obtained; nonexistence is not established."
+        },
+        {
+          "url": "https://www.schools360.in/tamilnadu-1st-std-text-books/",
+          "pdfUrl": "https://drive.google.com/file/d/1hA_dGhDVQjoz3aYS_xopFXB0bJ3f71BM/view",
+          "sha256": "d0b3c23d7af28b611df725aa2fd859b87ccbd47300142fecefc7a1f9c2994417",
+          "pdfPages": 67,
+          "editionPage": 2,
+          "result": "Downloaded candidate and visually checked printed pII/PDF p2: First Edition 2018, \u00a9 SCERT 2018, NOT FOR SALE. Rejected as revised 2026 evidence despite listing title. No outcomes ingested."
         }
       ],
       "followupChecked": "2026-11-09"
@@ -154,6 +162,10 @@
         {
           "url": "https://www.textbookcorp.in/",
           "result": "Follow-up: official home page still advertises 2026\u201327 Terms I/II and calls 2025\u201326 primary Term I books obsolete. No current Term III publication obtained; nonexistence is not established."
+        },
+        {
+          "url": "https://www.tntextbooks.in/p/3rd-books.html",
+          "result": "Search found current-year-labelled listing; opening returned HTTP 429. No PDF/edition authenticated."
         }
       ],
       "followupChecked": "2026-11-09"
