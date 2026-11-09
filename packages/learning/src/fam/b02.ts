@@ -1715,7 +1715,7 @@ const GAP02: Def[] = [
         : [B("from-other-end", "conceptual", MAPS, `The direction from the ${m.around[d]} to the ${m.centre} was given. Start at the ${m.centre} and look towards the ${m.around[d]}.`, cs.indexOf(DIRS[(d + 2) % 4]))];
     },
     variants: () => [],
-    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : `The answer is ${s.value}.`),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `The answer is ${s.value}.`),
     domain: [[0, 2], [0, 39], [0, 2]],
     difficulty: ([kind, , b]) => (kind === 1 ? 1 : b === 2 ? 2 : 3),
     figure: ([kind, a]) => (kind === 1 ? { type: "plane", points: dirMap(a).pts, range: 6, quadrant: 1 } : tbl(["", "North", ""], [["West", "you", "East"], ["", "South", ""]])),

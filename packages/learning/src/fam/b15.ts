@@ -2733,7 +2733,7 @@ function fundText([q, a, b, c]: number[], w = false) {
   if (q === 0) return w ? `For a school function ${nm(a + b)} can wear one of ${a} kurtas, one of ${b} pyjamas${c > 1 ? ` and one of ${c} pairs of sandals` : " and the one pair of sandals she has"}. How many different outfits are possible?` : `${nm(a + b)} has ${a} shirts, ${b} pairs of trousers${c > 1 ? ` and ${c} pairs of shoes` : " and 1 pair of shoes"}. An outfit is one shirt, one pair of trousers and one pair of shoes. How many different outfits are possible?`;
   if (q === 1) return w ? `A bicycle lock has ${c} dials, and each dial can be set to any of the ${a} digits 1 to ${a}${b === 1 ? ", but the lock's maker uses only codes in which no digit is repeated" : " (digits may repeat)"}. How many codes are possible?` : `How many ${c}-digit codes can be made from the digits 1 to ${a} if ${b === 1 ? "no digit may be repeated" : "digits may be repeated"}?`;
   if (q === 2) return w ? `From Madurai to Dindigul there are ${a} bus routes, and from Dindigul to Karur there are ${b}. There are also ${pl(c, "direct route", "direct routes")} from Madurai to Karur. In how many ways can a traveller go from Madurai to Karur (either through Dindigul or directly)?` : `There are ${a} roads from town X to town Y, ${b} roads from Y to town Z, and ${pl(c, "road", "roads")} going directly from X to Z. In how many ways can one travel from X to Z, either through Y or directly?`;
-  return w ? `A library lets a student borrow one book: a Tamil novel (${a} on the shelf), an English novel (${b} on the shelf)${c ? ` or a comic (${c} on the shelf)` : ""}. In how many ways can one book be chosen?` : `A canteen menu has ${a} South Indian dishes, ${b} North Indian dishes${c ? ` and ${c} Chinese dishes` : ""}. In how many ways can a student choose exactly one dish?`;
+  return w ? `A library lets a student borrow one book: a Tamil novel (${a} on the shelf), an English novel (${b} on the shelf)${c ? ` or a comic (${c} on the shelf)` : ""}. In how many ways can one book be chosen?` : `A canteen menu has ${pl(a, "South Indian dish", "South Indian dishes")}, ${pl(b, "North Indian dish", "North Indian dishes")}${c ? ` and ${pl(c, "Chinese dish", "Chinese dishes")}` : ""}. In how many ways can a student choose exactly one dish?`;
 }
 
 const D_FACT: [number, number][] = [[0, 3], [2, 15], [1, 13]];
@@ -5063,3 +5063,8 @@ const NEW15: Def[] = [
   },
 ];
 B15.push(...NEW15);
+// level@1 (grade8-fix): a module is built around the first family listed for its competency (library.ts mainFamily), and its
+// lesson, diagnostics, guided practice and strategies are drawn from that family. The counting principle (aofund, Grade 8)
+// is listed before ⁿPᵣ (aonpr, Grade 11), so the permutations module starts from counting by multiplying choices, which every
+// grade that has the module can be taught; ⁿPᵣ, ⁿCᵣ and the other Grade 11 families follow as its further sections.
+B15.splice(B15.findIndex((f) => f.id === "aonpr"), 0, ...B15.splice(B15.findIndex((f) => f.id === "aofund"), 1));

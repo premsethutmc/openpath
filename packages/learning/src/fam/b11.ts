@@ -2048,7 +2048,7 @@ export const B11: Def[] = [
       return [bug(`trap-${p[0]}`, "conceptual", DIV, DSORT_SLIP[p[0]], d.trap)];
     },
     variants: () => [],
-    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : String(s.inputs[0])),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 5], [0, 99]],
     difficulty: ([k]) => (k <= 2 ? 1 : k === 3 ? 2 : 3),
     word: (p) => `A sweet factory packs its sweets ${DSORT_PACK[p[0]]}. Which of these numbers of sweets can be packed that way with none left over${p[0] === 3 ? ", but could not be packed in packets of 10 with none left over" : ""}? ${dsortSet(p).opts.join(";  ")}`,
@@ -2489,7 +2489,7 @@ export const B11: Def[] = [
       return d.bug ? [bug(d.bug.id, "conceptual", SS, d.bug.says, d.bug.at)] : [];
     },
     variants: () => [],
-    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : String(s.inputs[0])),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 1], [0, 8], [0, 11]],
     keep: sslOk,
     difficulty: ([m, e]) => (m === 0 ? (e === 1 || e === 3 ? 1 : 2) : e <= 1 ? 1 : 3),
@@ -2665,7 +2665,7 @@ export const B11: Def[] = [
       return [bug("key-backwards", "procedural", CIPH, "The key was read the wrong way: the code letters were looked up in the Plain row. To decode, find each letter in the Code row and read the Plain letter above it.", o.indexOf(subWord(subWord(WORDS[w], k), k)))];
     },
     variants: () => [],
-    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : String(s.inputs[0])),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 2], [0, 19], [2, 25]],
     cap: 450,
     difficulty: ([m]) => (m === 0 ? 1 : m === 1 ? 2 : 3),
@@ -2703,7 +2703,7 @@ export const B11: Def[] = [
       return d.trap >= 0 ? [bug(p[0] ? "asking-is-secondary" : "copied-is-primary", "conceptual", FREQ, p[0] ? "Asking other people questions was taken as secondary data. A survey you carry out yourself is primary data, even though other people give the answers." : "Copying figures out yourself was taken as collecting primary data. The figures were collected by someone else, so they are secondary data, whoever copies them.", d.trap)] : [];
     },
     variants: () => [],
-    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : String(s.inputs[0])),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : String(s.inputs[0])),
     domain: [[0, 1], [0, 199]],
     keep: (p) => !primDup(p),
     difficulty: ([a]) => (a ? 2 : 1),

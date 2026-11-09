@@ -4850,7 +4850,7 @@
     {
      "title": "What makes a question statistical",
      "text": [
-      "A statistical question is answered by collecting data that VARIES. 'How tall am I?' has one answer. 'How tall are the students in Class 7?' needs many measurements that differ."
+      "A statistical question is answered by collecting data that VARIES. 'How tall am I?' has one answer. 'How tall are the students in Class 8?' needs many measurements that differ."
      ],
      "math": [
       "Not statistical: What time does school start?",
@@ -4860,7 +4860,7 @@
     {
      "title": "Worked: an investigation from question to conclusion",
      "text": [
-      "Question: Do students in Class 7 sleep more on weekend nights than on school nights?"
+      "Question: Do students in Class 8 sleep more on weekend nights than on school nights?"
      ],
      "math": [
       "1. Plan: ask all 20 students in the class the hours they slept last Sunday night and last Tuesday night. — The same nights for everyone",
@@ -4869,6 +4869,17 @@
       "4. Display: a double bar graph of grouped hours. — Compares two sets",
       "5. Conclude: these students slept about 1.2 hours more on the weekend night. — From the evidence",
       "6. Limit: one class, one week, hours remembered by the students. — What the data cannot show"
+     ]
+    },
+    {
+     "title": "Summarising data with the mean",
+     "text": [
+      "The mean is one number that summarises data that varies: add all the values, then divide the total by how many values there are."
+     ],
+     "math": [
+      "Hours slept by 4 students: 6, 8, 10 and 8",
+      "Total = 6 + 8 + 10 + 8 = 32 hours",
+      "Mean = 32 ÷ 4 = 8 hours (the total ÷ the number of values, not the total itself)"
      ]
     },
     {

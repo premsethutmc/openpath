@@ -2509,7 +2509,7 @@ const GAP01: Def[] = [
       return [bug("front-behind", "conceptual", POS, `The child just ${ask ? "in front of" : "behind"} ${w.x} was chosen. In front of means nearer the counter; behind means further back in the queue.`, ix(cs, w.other))];
     },
     variants: () => [],
-    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}.` : `Look at the picture: the answer is ${s.value}.`),
+    explain: (s) => (s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Look at the picture: the answer is ${s.value}.`),
     domain: [[0, 2], [0, 39], [0, 1]],
     difficulty: ([kind]) => (kind === 0 ? 1 : kind === 1 ? 2 : 3),
     figure: whereFig,

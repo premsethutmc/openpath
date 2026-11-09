@@ -1358,7 +1358,7 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => (s.id === "factor" ? `Each ${s.inputs[2] === 1 ? "half-year" : "year"} multiplies the value by ${s.value}` : s.id === "value" ? `₹${s.inputs[0]} becomes ₹${s.value}` : `Interest = ₹${s.inputs[0]} − ₹${s.inputs[1]} = ₹${s.value}`),
+    explain: (s) => (s.id === "factor" ? `Each ${s.inputs[2] === 1 ? "half-year" : "year"} multiplies the value by ${String(s.value).replace(/\^\d+$/, "")}; over ${s.inputs[1]} ${s.inputs[2] === 1 ? "half-years" : "years"} that is ${s.value}` : s.id === "value" ? `₹${s.inputs[0]} becomes ₹${s.value}` : `Interest = ₹${s.inputs[0]} − ₹${s.inputs[1]} = ₹${s.value}`),
     domain: [[1, 50], [2, 20], [2, 3], [0, 2]],
     cap: 400,
     difficulty: ([, , n, m]) => (m === 0 && n === 2 ? 1 : m === 1 ? 3 : 2),
@@ -1426,7 +1426,7 @@ export const B10: Def[] = [
     teach: {
       idea: "A cube is a number times itself three times; a cube root undoes it. Three negative factors make a negative, so negative numbers have negative cube roots.",
       method: "For a cube root, use the units digit to guess the last digit of the root and the size to guess the tens, then check by cubing. Or use prime factors in groups of three.",
-      visual: ([, n]) => ({ type: "solid", name: "cube", dims: [`${Math.min(n, 9)}`] }),
+      visual: ([, n]) => ({ type: "solid", name: "cube", dims: [`${n}`] }),
       alternatives: [
         { id: "triples", title: "Group prime factors in threes", kind: "procedural", text: ["Write the number as a product of primes, e.g. 1728 = 2 × 2 × 2 × 2 × 2 × 2 × 3 × 3 × 3.", "Take one prime from each group of three equal primes: 2 × 2 × 3 = 12."],
           textFor: ([m, n]) => {
@@ -2247,7 +2247,7 @@ export const B10: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Cross-multiply: ${s.inputs[0]} and ${s.inputs[1]}. ${Number(s.inputs[0]) === Number(s.inputs[1]) ? "They are equal, so the ratios are equivalent." : Number(s.inputs[0]) > Number(s.inputs[1]) ? "The first is bigger, so the first ratio is greater." : "The second is bigger, so the second ratio is greater."}`,
+    explain: (s) => s.id === "pick" ? `So the answer is option ${"ABCD"[Number(s.value)]}: ${s.inputs[0]}` : `Cross-multiply: ${s.inputs[0]} and ${s.inputs[1]}. ${Number(s.inputs[0]) === Number(s.inputs[1]) ? "They are equal, so the ratios are equivalent" : Number(s.inputs[0]) > Number(s.inputs[1]) ? "The first is bigger, so the first ratio is greater" : "The second is bigger, so the second ratio is greater"}`,
     domain: [[1, 12], [1, 12], [1, 36], [1, 36]],
     keep: rcmpOk,
     cap: 450,

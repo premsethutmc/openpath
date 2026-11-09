@@ -1059,6 +1059,50 @@ export const B14: Def[] = [
     limits: "Four numbers (fraction, decimal, 0 or 1, and one negative or greater-than-one value); percentages are not used.",
   },
   // ============================================================== MATH.reasoning.mathematical-argument
+  // level@1 (grade8-fix): angarr (Grade 8) is listed before anpts (Grade 9) so that the mathematical-argument module, built
+  // around the first family of its competency, teaches and diagnoses an in-grade argument
+  {
+    id: "angarr",
+    arity: 4,
+    title: "The largest product from four digits",
+    competency: ARG,
+    skill: "justify an arrangement",
+    type: "integer",
+    mc: true,
+    parse: none,
+    reject: ([p, q, r, s]) => (!(p <= 9 && p > q && q > r && r > s && s >= 1) ? "Four different digits from 1 to 9, given largest first." : null),
+    prompt: ([p, q, r, s]) => `Use each of the digits ${q}, ${s}, ${p} and ${r} exactly once to make two two-digit numbers whose product is as large as possible. What is that largest product?`,
+    solve: ([p, q, r, s]) => ({ steps: [step("tens", "compare", "MATH.number.place-value-tens", [p, q], `${p}_ and ${q}_`), step("units", "compare", ARG, [s, r], `${10 * p + s} and ${10 * q + r}`), step("product", "multiply", "MATH.number.multiplication-tables", [10 * p + s, 10 * q + r], (10 * p + s) * (10 * q + r))], answer: (10 * p + s) * (10 * q + r) }),
+    // independent: try all 24 orders of the digits
+    validate: ([p, q, r, s], v) => {
+      const d = [p, q, r, s];
+      let best = 0;
+      for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) for (let k = 0; k < 4; k++) for (let l = 0; l < 4; l++) {
+        if (new Set([i, j, k, l]).size < 4) continue;
+        best = Math.max(best, (10 * d[i] + d[j]) * (10 * d[k] + d[l]));
+      }
+      return v === best;
+    },
+    bugs: ([p, q, r, s]) => [
+      { id: "largest-number-first", kind: "conceptual", competency: ARG, says: `The biggest possible first number (${10 * p + q}) was made, leaving the small digits for the second. Both numbers matter: the two largest digits should both be tens digits.`, predict: (10 * p + q) * (10 * r + s) },
+      { id: "big-with-big", kind: "conceptual", competency: ARG, says: `The larger units digit was put with the larger tens digit. With the tens fixed, the product is larger when the two numbers are closer together, so the larger units digit goes with the smaller tens digit.`, predict: (10 * p + r) * (10 * q + s) },
+    ],
+    distractors: ([p, q, r, s]) => [(10 * p + s) * (10 * q + r) + 100, (10 * p + s) * (10 * q + r) + 10],
+    variants: () => [],
+    explain: (s) => (s.id === "tens" ? `The two largest digits, ${s.inputs[0]} and ${s.inputs[1]}, go in the tens places (each counts ten times)` : s.id === "units" ? `The larger units digit goes with the smaller tens digit: ${s.value}` : `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
+    domain: [[1, 9], [1, 9], [1, 9], [1, 9]],
+    keep: ([p, q, r, s]) => p > q && q > r && r > s,
+    difficulty: ([p, q, r, s]) => (p - q > 3 ? 1 : r - s > 2 ? 2 : 3),
+    word: ([p, q, r, s]) => `${nm(p + q + r + s)} has four number cards: ${q}, ${s}, ${p} and ${r}. ${nm(p + q + r + s)} lays them out as two two-digit numbers and multiplies them. What is the largest product that can be made?`,
+    teach: {
+      idea: "A tens digit counts ten times as much as a units digit, so the two largest digits belong in the tens places. Then, for a fixed total, two numbers have the largest product when they are as close together as possible.",
+      method: "Put the two largest digits in the tens places. Give the larger units digit to the number with the smaller tens digit. Multiply, and check one swap to see it is smaller.",
+      alternatives: [
+        { id: "compare-swap", title: "Compare the two pairings", kind: "procedural", text: ["With tens digits a > b and units c > d, compare (10a + d)(10b + c) and (10a + c)(10b + d).", "Their difference is 10(a − b)(c − d), which is positive: so the first pairing wins."] },
+      ],
+    },
+    limits: "Two two-digit numbers from four different non-zero digits; the written justification is marked by an educator, the product here.",
+  },
   {
     id: "anpts",
     arity: 5,
@@ -1113,48 +1157,6 @@ export const B14: Def[] = [
       ],
     },
     limits: "Lattice points built to be on a line, right-angled (not isosceles), isosceles (not right-angled) or neither: an argument that must first rule out a straight line (altri classifies true triangles, including right-and-isosceles, for the distance formula itself); the written justification is marked by an educator, the conclusion here.",
-  },
-  {
-    id: "angarr",
-    arity: 4,
-    title: "The largest product from four digits",
-    competency: ARG,
-    skill: "justify an arrangement",
-    type: "integer",
-    mc: true,
-    parse: none,
-    reject: ([p, q, r, s]) => (!(p <= 9 && p > q && q > r && r > s && s >= 1) ? "Four different digits from 1 to 9, given largest first." : null),
-    prompt: ([p, q, r, s]) => `Use each of the digits ${q}, ${s}, ${p} and ${r} exactly once to make two two-digit numbers whose product is as large as possible. What is that largest product?`,
-    solve: ([p, q, r, s]) => ({ steps: [step("tens", "compare", "MATH.number.place-value-tens", [p, q], `${p}_ and ${q}_`), step("units", "compare", ARG, [s, r], `${10 * p + s} and ${10 * q + r}`), step("product", "multiply", "MATH.number.multiplication-tables", [10 * p + s, 10 * q + r], (10 * p + s) * (10 * q + r))], answer: (10 * p + s) * (10 * q + r) }),
-    // independent: try all 24 orders of the digits
-    validate: ([p, q, r, s], v) => {
-      const d = [p, q, r, s];
-      let best = 0;
-      for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) for (let k = 0; k < 4; k++) for (let l = 0; l < 4; l++) {
-        if (new Set([i, j, k, l]).size < 4) continue;
-        best = Math.max(best, (10 * d[i] + d[j]) * (10 * d[k] + d[l]));
-      }
-      return v === best;
-    },
-    bugs: ([p, q, r, s]) => [
-      { id: "largest-number-first", kind: "conceptual", competency: ARG, says: `The biggest possible first number (${10 * p + q}) was made, leaving the small digits for the second. Both numbers matter: the two largest digits should both be tens digits.`, predict: (10 * p + q) * (10 * r + s) },
-      { id: "big-with-big", kind: "conceptual", competency: ARG, says: `The larger units digit was put with the larger tens digit. With the tens fixed, the product is larger when the two numbers are closer together, so the larger units digit goes with the smaller tens digit.`, predict: (10 * p + r) * (10 * q + s) },
-    ],
-    distractors: ([p, q, r, s]) => [(10 * p + s) * (10 * q + r) + 100, (10 * p + s) * (10 * q + r) + 10],
-    variants: () => [],
-    explain: (s) => (s.id === "tens" ? `The two largest digits, ${s.inputs[0]} and ${s.inputs[1]}, go in the tens places (each counts ten times)` : s.id === "units" ? `The larger units digit goes with the smaller tens digit: ${s.value}` : `${s.inputs[0]} × ${s.inputs[1]} = ${s.value}`),
-    domain: [[1, 9], [1, 9], [1, 9], [1, 9]],
-    keep: ([p, q, r, s]) => p > q && q > r && r > s,
-    difficulty: ([p, q, r, s]) => (p - q > 3 ? 1 : r - s > 2 ? 2 : 3),
-    word: ([p, q, r, s]) => `${nm(p + q + r + s)} has four number cards: ${q}, ${s}, ${p} and ${r}. ${nm(p + q + r + s)} lays them out as two two-digit numbers and multiplies them. What is the largest product that can be made?`,
-    teach: {
-      idea: "A tens digit counts ten times as much as a units digit, so the two largest digits belong in the tens places. Then, for a fixed total, two numbers have the largest product when they are as close together as possible.",
-      method: "Put the two largest digits in the tens places. Give the larger units digit to the number with the smaller tens digit. Multiply, and check one swap to see it is smaller.",
-      alternatives: [
-        { id: "compare-swap", title: "Compare the two pairings", kind: "procedural", text: ["With tens digits a > b and units c > d, compare (10a + d)(10b + c) and (10a + c)(10b + d).", "Their difference is 10(a − b)(c − d), which is positive: so the first pairing wins."] },
-      ],
-    },
-    limits: "Two two-digit numbers from four different non-zero digits; the written justification is marked by an educator, the product here.",
   },
   {
     id: "anpow0",

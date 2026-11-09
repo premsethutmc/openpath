@@ -1027,6 +1027,9 @@ export const B06: Def[] = [
     arity: 2,
     title: "Continuing square, triangular and other number patterns",
     competency: FIG,
+    // level@1 (grade8-fix): continuing the odd, square, triangular, rectangular, cube and doubling numbers from their first four
+    // terms is Grade 5 (number patterns; CBSE 6 Patterns in Mathematics): below-grade review for a Grade 8 learner
+    grade: () => 5,
     type: "integer",
     mc: true,
     // [kind, n]: FIGK[kind], the n-th term

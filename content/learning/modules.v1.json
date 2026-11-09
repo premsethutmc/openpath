@@ -862,6 +862,42 @@
       "y = 2: then move 2 up",
       "The point is in the second quadrant"
      ]
+    },
+    {
+     "title": "The four quadrants and the signs",
+     "text": [
+      "The x-axis and the y-axis cut the grid into four quadrants, numbered I, II, III, IV anticlockwise from the top right. The signs of x and y tell you the quadrant without drawing: I (+, +), II (−, +), III (−, −), IV (+, −). A point with x = 0 or y = 0 is on an axis, not in a quadrant."
+     ],
+     "math": [
+      "In which quadrant is (−6, 1)?",
+      "x = −6 is negative: left of the y-axis",
+      "y = 1 is positive: above the x-axis",
+      "Left and up: quadrant II"
+     ]
+    },
+    {
+     "title": "Moving a point",
+     "text": [
+      "Moving right adds to x and moving left takes away from x; moving up adds to y and moving down takes away from y. The other coordinate does not change."
+     ],
+     "math": [
+      "Start at (5, −1); move 2 right, then 2 down",
+      "x: 5 + 2 = 7",
+      "y: −1 − 2 = −3",
+      "You reach (7, −3)"
+     ]
+    },
+    {
+     "title": "Corners of a rectangle on a grid",
+     "text": [
+      "The sides of a rectangle drawn along the grid lines are horizontal or vertical. Points straight above or below each other share their x-coordinate; points level with each other share their y-coordinate. That gives a missing corner without measuring."
+     ],
+     "math": [
+      "Rectangle ABCD with A(−6, −4), B(−3, −4) and C(−3, −2): find D",
+      "D is straight above A, so its x-coordinate is A's: −6",
+      "D is level with C, so its y-coordinate is C's: −2",
+      "D is (−6, −2)"
+     ]
     }
    ],
    "diagnostics": [
@@ -888,7 +924,10 @@
    ],
    "practice": [
     "ca-p1",
-    "ca-p2"
+    "ca-p2",
+    "gen:ahquad:6,9:mc",
+    "gen:ahmove:2,-2,1,-6:mc",
+    "gen:ahmap:0,0,-5,4,3"
    ],
    "transfer": [
     "ca-t1"
