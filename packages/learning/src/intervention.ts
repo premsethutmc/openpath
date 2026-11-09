@@ -460,7 +460,13 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   const resProbe = here && own!.probeDue ? discriminatingProbe(own!, records) : null;
   const hold = !!own && (own.teachingDue || !!resProbe);
   const shown = (ev.status === "independent" || ev.status === "transfer" || ev.status === "verified") && !hold;
-  const unanswered = (ids: string[]) => ids.find((id) => keyboardOffered(id) && !answered(records, id) && withinGrade(records, id)) ?? null;
+  // grade8-fix-platform: a question the learner was taught (solved on a lesson they were shown) is served only as a last resort,
+  // when no fresh question of the list is left
+  const taught = taughtExposureKeys(records);
+  const unanswered = (ids: string[]) => {
+    const open = ids.filter((id) => keyboardOffered(id) && !answered(records, id) && withinGrade(records, id));
+    return open.find((id) => !taught.has(exposureKey(id))) ?? open[0] ?? null;
+  };
   // skill-units@1: skills taught here with a scoped explanation (exterior angle, vertically opposite angles, two dice, ...)
   const units = unitsOf(m, records);
   // no transfer question while a taught skill is not rechecked, or a skill's latest answer alone is wrong

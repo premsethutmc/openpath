@@ -72,6 +72,11 @@ export interface LessonBlock {
   visual: TeachingVisual | null;
   /** The legacy picture, only when it is not decorative. */
   widget: Screen["widget"] | null;
+  /** grade8-fix-platform: the section's own written working (the lines the year-plan screen shows) when the section has no
+   *  worked solution of its own: never a line whose stated arithmetic is false. Not a checked solution. */
+  lines?: string[];
+  /** The section's tip, as the year-plan screen shows it. */
+  tip?: string | null;
   /** Which parts are mechanically verified, and which are explanations that still need educator review. */
   claims: { verified: string[]; review: string[] };
   violations: Violation[];
@@ -113,6 +118,34 @@ export function evalArithmetic(expr: string): number {
   const v = sum();
   if (i !== src.length) throw new Error(`not arithmetic: ${expr}`);
   return v;
+}
+/** grade8-fix-platform: whether a line states arithmetic that is false ("5.84 × 5 = 584000", "x × 3 = 3", "54 ÷ 2 = −1").
+ *  Every chain of plain arithmetic joined by "=" is evaluated; a label ("Term 16 = …"), a quotient with its remainder
+ *  ("25 ÷ 6 = 4 remainder 1"), a ratio ("16 ÷ 2 : 6 ÷ 2"), a list ("0 × 6, 1 × 1 = 0, 1") and a 2-decimal rounding are not claims. */
+const CLAIM_NUM = String.raw`(?:\d{1,3}(?:,\d{2,3})+|\d+(?:\.\d+)?)`;
+const CLAIM_ATOM = String.raw`\(?[−-]?${CLAIM_NUM}\)?`;
+const CLAIM_EXPR = String.raw`${CLAIM_ATOM}(?:\s*[×÷+−]\s*${CLAIM_ATOM})*`;
+const CLAIM_CHAIN = new RegExp(String.raw`(?<![\w.²³⁴⁵⁶⁷⁸⁹⁰¹/^√½⅓¼¾)₹□:]|[×÷+−\-/:]\s*)(${CLAIM_EXPR}(?:\s*=\s*${CLAIM_EXPR})+)(?![\w²³⁴⁵⁶⁷⁸⁹⁰¹/%]|\.\d|\s*[×÷+−]|,\d|\s*\(|\s*:)`, "g");
+const SYMBOL_DROPPED = /^\(?[−-]?(?:[a-z]|\d+)\)?\s*×\s*\(?[−-]?(?:[a-z]|\d+)\)?\s*=\s*[−-]?\d+(?:\.\d+)?\.?$/;
+export function falseArithmetic(line: string): boolean {
+  if (SYMBOL_DROPPED.test(line.trim()) && /[a-z]/.test(line)) return true;
+  const ev = (x: string) => evalArithmetic(x.replace(/(\d),(?=\d)/g, "$1"));
+  for (const m of line.matchAll(CLAIM_CHAIN)) {
+    const parts = m[1].split(/\s*=\s*/);
+    const before = line.slice(0, m.index! + m[0].indexOf(m[1])), after = line.slice(m.index! + m[0].length);
+    if (/,\s*$/.test(before)) continue;
+    for (let i = 0; i + 1 < parts.length; i++) {
+      if (!/[×÷+−]/.test(parts[i]) && !/[×÷+−]/.test(parts[i + 1])) continue;
+      if (i === 0 && !/[×÷+−]/.test(parts[0]) && /[A-Za-z]\s$/.test(before)) continue;
+      let a: number, b: number;
+      try { a = ev(parts[i]); b = ev(parts[i + 1]); } catch { continue; }
+      if (Math.abs(a - b) <= 1e-6 * Math.max(1, Math.abs(b))) continue;
+      if (/^\s*(remainder|whole|with|r\b|R\b)|^,\s*with/.test(after) && Math.floor(a) === b) continue;
+      if (/\.\d{1,2}$/.test(parts[i + 1]) && Math.abs(a - b) < 0.01) continue;
+      return true;
+    }
+  }
+  return false;
 }
 const holds = (expr: string, value: number) => {
   try { return Math.abs(evalArithmetic(expr) - value) < 1e-9; } catch { return false; }
@@ -285,11 +318,39 @@ export function lessonBlocks(module: Module, practiceIds: string[] = []): Lesson
     // grade7-lessons@1: a worked question shows its own options, and its own figure when the section draws nothing else
     const q = p ? question(p.id) : null;
     if (worked && q?.options?.length) worked = { ...worked, options: q.options };
-    const figure = q?.figure && !representation && !visual && !widget ? q.figure : null;
-    return { role, label, title: screen.title, text: screen.text, instance: p?.id ?? null, worked, representation, visual, widget, figure, claims: { verified, review }, violations: violations.filter((v) => !exempt.some((e) => e.rule === v)), exempt };
+    // grade8-fix-platform: words that say "the histogram / pie chart / table shows" are about the question's own picture: when
+    // the section would draw a picture of another kind (a table under "The histogram shows"), the question's figure is drawn
+    const said = namedPictures([...screen.text, ...(screen.math ?? []), worked?.question ?? ""]);
+    const ownNamed = !!q?.figure && said.has(pictureFamily(q.figure.type));
+    const drawn = pictureFamily(representation?.kind ?? (visual as { kind?: string } | null)?.kind ?? (widget as { type?: string } | null)?.type ?? "");
+    if (ownNamed && drawn && !said.has(drawn)) { visual = null; if (!representation || !said.has(pictureFamily(representation.kind))) representation = null; }
+    const shownWidget = ownNamed && drawn && !said.has(drawn) ? null : widget;
+    // (kept when the words name it, so a section whose other picture is left out as a repeat still draws what it talks about)
+    const figure = q?.figure && ((!representation && !visual && !shownWidget) || ownNamed) ? q.figure : null;
+    // grade8-fix-platform: a section with no solution of its own keeps its written working, as the year-plan screen shows it
+    // (otherwise it is a shell: "Each step, then the answer." and nothing after); a line with false arithmetic is never shown
+    const lines = worked ? [] : (screen.math ?? []).filter((l) => !falseArithmetic(l));
+    review.push(...lines);
+    return { role, label, title: screen.title, text: screen.text, instance: p?.id ?? null, worked, representation, visual, widget: shownWidget, figure, ...(lines.length ? { lines } : {}), tip: screen.tip ?? null, claims: { verified, review }, violations: violations.filter((v) => !exempt.some((e) => e.rule === v)), exempt };
   });
   return SCOPE.has(module.competency) ? withoutRepetition(blocks) : blocks;
 }
+
+/** grade8-fix-platform: the kinds of picture a section's words name ("The histogram shows", "the pie chart", "the table"). */
+const PICTURE_WORDS: [RegExp, string][] = [[/\bhistogram|\bbar (?:chart|graph)/i, "bars"], [/\bpie chart/i, "pie"], [/\btable\b/i, "table"], [/\bdot picture|\bdots\b/i, "dots"], [/\bnumber line/i, "number-line"]];
+function pictureFamily(kind: string): string {
+  if (/bar|hist/.test(kind)) return "bars";
+  if (/pie/.test(kind)) return "pie";
+  if (/table|place-value/.test(kind)) return "table";
+  if (/dot|array/.test(kind)) return "dots";
+  if (/number-?line/.test(kind)) return "number-line";
+  return kind;
+}
+function namedPictures(lines: string[]): Set<string> {
+  const text = lines.join(" ");
+  return new Set(PICTURE_WORDS.filter(([re]) => re.test(text)).map(([, k]) => k));
+}
+const blockNames = (b: LessonBlock) => namedPictures([...b.text, ...(b.lines ?? []), b.worked?.question ?? ""]);
 
 /** Stage 2 showcase scope: a lesson says each thing once. Applied after the checks, so it never hides a violation.
  *  - a sentence already said in an earlier section (the same wording with other numbers or names) is not said again;
@@ -320,6 +381,7 @@ export function withoutRepetition(blocks: LessonBlock[]): LessonBlock[] {
   const solved = new Map<string, number>();
   const out = blocks.map((b, i) => {
     const text = b.text.filter((line) => { const t = template(line); if (said.has(t)) return false; said.add(t); return true; });
+    const tip = b.tip && !said.has(template(b.tip)) ? (said.add(template(b.tip)), b.tip) : null;
     const k = pictureKind(b);
     const picture = !k || keepPicture.get(k) === i;
     // unchecked steps are shown only as a lesson's labelled Method, never beside a checked worked example
@@ -332,8 +394,8 @@ export function withoutRepetition(blocks: LessonBlock[]): LessonBlock[] {
     }
     // a quoted question that refers to a picture the section does not draw
     const hasPicture = picture && !!k;
-    const ownFigure = !!b.figure && !!worked;
-    return { ...b, label, text: hasPicture || ownFigure ? text : text.map((line) => line.replace(/, as in the picture(?=[.?])/g, "")), worked, ...(picture ? {} : { representation: null, visual: null, widget: null }), figure: ownFigure ? b.figure : null };
+    const ownFigure = !!b.figure && (!!worked || blockNames(b).has(pictureFamily(b.figure.type)));
+    return { ...b, label, tip, text: hasPicture || ownFigure ? text : text.map((line) => line.replace(/, as in the picture(?=[.?])/g, "")), worked, ...(picture ? {} : { representation: null, visual: null, widget: null }), figure: ownFigure ? b.figure : null };
   });
   // the journey is concept, then worked example: a checked worked example comes straight after the concept sections
   const w = out.findIndex((b) => b.role === "worked-example" && b.worked?.verified);
@@ -414,7 +476,12 @@ export function alignedPractice(module: Module, ids: string[]): string[] {
   const same = (id: string) => { if (kind === null) return false; const q = problemOf(id.replace(/:mc$/, "")); return !!q && q.family === tp!.family && caseOf!(q.params) === kind; };
   // within each group a written answer comes before a multiple-choice one: the first attempt after a worked example is the learner's own
   const rank = (id: string) => (isShown(id) ? 4 : same(id) ? 0 : 2) + (question(id).type === "choice" ? 1 : 0);
-  return ids.map((id, i) => [rank(id), i, id] as const).sort((a, b) => a[0] - b[0] || a[1] - b[1]).map((x) => x[2]);
+  // grade8-fix-platform: a question the lesson shows (solved, or quoted with its answer) is not served as practice at all while
+  // a fresh question of its family is among the candidates; only a family with nothing fresh keeps it, as a last resort
+  const famOf = (id: string) => problemOf(id.replace(/:(mc|w)$/, ""))?.family ?? id;
+  const freshFamilies = new Set(ids.filter((id) => !isShown(id)).map(famOf));
+  const served = ids.filter((id) => !isShown(id) || !freshFamilies.has(famOf(id)));
+  return served.map((id, i) => [rank(id), i, id] as const).sort((a, b) => a[0] - b[0] || a[1] - b[1]).map((x) => x[2]);
 }
 
 /** The teaching page's lesson and its practice queue, from one candidate list (already filtered by the caller's selector):

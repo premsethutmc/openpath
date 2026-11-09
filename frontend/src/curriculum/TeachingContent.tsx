@@ -28,6 +28,8 @@ function TeachingBlock({ block, index, resumeKey, repeatsHeading = false, compet
       {block.role !== "worked-example" ? <p className="teaching-label worked-label">{worked.verified ? "Worked example" : "The steps"}</p> : null}
       <ProgressiveWorkedExample example={worked} storageKey={resumeKey && `${resumeKey}:example:${index}`} />
     </> : null}
+    {!worked && block.lines?.length ? <div className="teaching-lines">{block.lines.map((line, i) => <p key={i} className="math">{displayed(line)}</p>)}</div> : null}
+    {block.tip ? <p className="hint teaching-tip">{displayed(block.tip)}</p> : null}
   </section>;
 }
 
