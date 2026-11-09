@@ -658,7 +658,7 @@
     "idea": "aⁿ multiplies a by itself n times.",
     "method": "Multiply step by step: 3, 9, 27, 81 for 3⁴."
    },
-   "fingerprint": "9ef3b50f",
+   "fingerprint": "c9172b8d",
    "validation": {
     "family": "pow",
     "deterministic": {
@@ -5299,7 +5299,7 @@
      }
     ]
    },
-   "fingerprint": "50c4a86e",
+   "fingerprint": "781705a2",
    "validation": {
     "family": "aawhere",
     "deterministic": {
@@ -8848,7 +8848,7 @@
      }
     ]
    },
-   "fingerprint": "a0580380",
+   "fingerprint": "4fb78280",
    "validation": {
     "family": "abdir",
     "deterministic": {
@@ -22777,7 +22777,7 @@
      }
     ]
    },
-   "fingerprint": "bf69e498",
+   "fingerprint": "ab6d33ee",
    "validation": {
     "family": "affig",
     "deterministic": {
@@ -28370,7 +28370,7 @@
    ],
    "teach": {
     "idea": "An equation stays balanced when the same thing is added to or taken from both sides, including a number of x's.",
-    "method": "Take the smaller x term from both sides so x is on one side only, move the numbers to the other side, then divide by the coefficient of x. Check by substituting.",
+    "method": "Collect the x terms on the left: take the right-hand x term from both sides (if it is negative, add it instead), so x is on one side only. Move the numbers to the right, then divide by the coefficient of x. Check by substituting.",
     "alternatives": [
      {
       "id": "balance",
@@ -28383,7 +28383,7 @@
      }
     ]
    },
-   "fingerprint": "70e59585",
+   "fingerprint": "536ccb79",
    "validation": {
     "family": "ahboth",
     "deterministic": {
@@ -29402,7 +29402,7 @@
      }
     ]
    },
-   "fingerprint": "26eaec92",
+   "fingerprint": "84ab976e",
    "validation": {
     "family": "ahpyth",
     "deterministic": {
@@ -30125,7 +30125,7 @@
      }
     ]
    },
-   "fingerprint": "d5de8eb9",
+   "fingerprint": "b551e03d",
    "validation": {
     "family": "ahconv",
     "deterministic": {
@@ -30986,7 +30986,7 @@
      }
     ]
    },
-   "fingerprint": "da3e4a42",
+   "fingerprint": "492170f5",
    "validation": {
     "family": "ahsqd",
     "deterministic": {
@@ -36408,7 +36408,7 @@
      }
     ]
    },
-   "fingerprint": "128fca3b",
+   "fingerprint": "81ace804",
    "validation": {
     "family": "ajci",
     "deterministic": {
@@ -37508,7 +37508,7 @@
      }
     ]
    },
-   "fingerprint": "eaf073c6",
+   "fingerprint": "5d092338",
    "validation": {
     "family": "ajrcmp",
     "deterministic": {
@@ -40701,7 +40701,7 @@
      }
     ]
    },
-   "fingerprint": "9b4f3dd9",
+   "fingerprint": "afe185a1",
    "validation": {
     "family": "akdsort",
     "deterministic": {
@@ -41305,7 +41305,7 @@
      }
     ]
    },
-   "fingerprint": "024a5c01",
+   "fingerprint": "d6bf980d",
    "validation": {
     "family": "akssl",
     "deterministic": {
@@ -41607,7 +41607,7 @@
      }
     ]
    },
-   "fingerprint": "95fb445a",
+   "fingerprint": "cb17db62",
    "validation": {
     "family": "akcode",
     "deterministic": {
@@ -41676,7 +41676,7 @@
      }
     ]
    },
-   "fingerprint": "63ae7fdd",
+   "fingerprint": "c1f74403",
    "validation": {
     "family": "akprim",
     "deterministic": {
@@ -48082,7 +48082,7 @@
      }
     ]
    },
-   "fingerprint": "2bd7383b",
+   "fingerprint": "35dc0dd3",
    "validation": {
     "family": "amsim",
     "deterministic": {
@@ -49683,7 +49683,7 @@
      }
     ]
    },
-   "fingerprint": "bb72b59f",
+   "fingerprint": "8728ec4f",
    "validation": {
     "family": "amcshape",
     "deterministic": {
@@ -51207,6 +51207,85 @@
    }
   },
   {
+   "id": "angarr",
+   "version": "1.0.0",
+   "title": "The largest product from four digits",
+   "competency": "MATH.reasoning.mathematical-argument",
+   "skill": "justify an arrangement",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     1,
+     9
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     1,
+     9
+    ]
+   ],
+   "poolSize": 126,
+   "excluded": [],
+   "difficulty": {
+    "1": 15,
+    "2": 34,
+    "3": 77
+   },
+   "examples": [
+    "gen:angarr:9,3,2,1",
+    "gen:angarr:9,5,3,1:mc",
+    "gen:angarr:8,7,5,2",
+    "gen:angarr:9,7,6,2:mc",
+    "gen:angarr:7,6,4,2",
+    "gen:angarr:9,6,3,1:mc"
+   ],
+   "explanations": [
+    "largest-number-first (conceptual): The biggest possible first number (98) was made, leaving the small digits for the second. Both numbers matter: the two largest digits should both be tens digits.",
+    "big-with-big (conceptual): The larger units digit was put with the larger tens digit. With the tens fixed, the product is larger when the two numbers are closer together, so the larger units digit goes with the smaller tens digit."
+   ],
+   "teach": {
+    "idea": "A tens digit counts ten times as much as a units digit, so the two largest digits belong in the tens places. Then, for a fixed total, two numbers have the largest product when they are as close together as possible.",
+    "method": "Put the two largest digits in the tens places. Give the larger units digit to the number with the smaller tens digit. Multiply, and check one swap to see it is smaller.",
+    "alternatives": [
+     {
+      "id": "compare-swap",
+      "title": "Compare the two pairings",
+      "kind": "procedural",
+      "text": [
+       "With tens digits a > b and units c > d, compare (10a + d)(10b + c) and (10a + c)(10b + d).",
+       "Their difference is 10(a − b)(c − d), which is positive: so the first pairing wins."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "b7794859",
+   "validation": {
+    "family": "angarr",
+    "deterministic": {
+     "checked": 126,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
    "id": "anpts",
    "version": "1.0.0",
    "title": "Deciding the shape of three points from their distances",
@@ -51282,85 +51361,6 @@
     },
     "boundary": {
      "cases": 20,
-     "failures": []
-    },
-    "excluded": 0,
-    "ok": true
-   }
-  },
-  {
-   "id": "angarr",
-   "version": "1.0.0",
-   "title": "The largest product from four digits",
-   "competency": "MATH.reasoning.mathematical-argument",
-   "skill": "justify an arrangement",
-   "type": "integer",
-   "multipleChoice": true,
-   "domain": [
-    [
-     1,
-     9
-    ],
-    [
-     1,
-     9
-    ],
-    [
-     1,
-     9
-    ],
-    [
-     1,
-     9
-    ]
-   ],
-   "poolSize": 126,
-   "excluded": [],
-   "difficulty": {
-    "1": 15,
-    "2": 34,
-    "3": 77
-   },
-   "examples": [
-    "gen:angarr:9,3,2,1",
-    "gen:angarr:9,5,3,1:mc",
-    "gen:angarr:8,7,5,2",
-    "gen:angarr:9,7,6,2:mc",
-    "gen:angarr:7,6,4,2",
-    "gen:angarr:9,6,3,1:mc"
-   ],
-   "explanations": [
-    "largest-number-first (conceptual): The biggest possible first number (98) was made, leaving the small digits for the second. Both numbers matter: the two largest digits should both be tens digits.",
-    "big-with-big (conceptual): The larger units digit was put with the larger tens digit. With the tens fixed, the product is larger when the two numbers are closer together, so the larger units digit goes with the smaller tens digit."
-   ],
-   "teach": {
-    "idea": "A tens digit counts ten times as much as a units digit, so the two largest digits belong in the tens places. Then, for a fixed total, two numbers have the largest product when they are as close together as possible.",
-    "method": "Put the two largest digits in the tens places. Give the larger units digit to the number with the smaller tens digit. Multiply, and check one swap to see it is smaller.",
-    "alternatives": [
-     {
-      "id": "compare-swap",
-      "title": "Compare the two pairings",
-      "kind": "procedural",
-      "text": [
-       "With tens digits a > b and units c > d, compare (10a + d)(10b + c) and (10a + c)(10b + d).",
-       "Their difference is 10(a − b)(c − d), which is positive: so the first pairing wins."
-      ]
-     }
-    ]
-   },
-   "fingerprint": "b7794859",
-   "validation": {
-    "family": "angarr",
-    "deterministic": {
-     "checked": 126,
-     "failures": []
-    },
-    "property": {
-     "cases": 400,
-     "failures": []
-    },
-    "boundary": {
-     "cases": 16,
      "failures": []
     },
     "excluded": 0,
@@ -54966,6 +54966,100 @@
    }
   },
   {
+   "id": "aofund",
+   "version": "1.0.0",
+   "title": "The multiplication and addition principles of counting",
+   "competency": "MATH.algebra.permutations",
+   "skill": "MATH.algebra.permutations",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     0,
+     9
+    ],
+    [
+     0,
+     5
+    ]
+   ],
+   "poolSize": 604,
+   "excluded": [],
+   "difficulty": {
+    "1": 464,
+    "2": 40,
+    "3": 100
+   },
+   "examples": [
+    "gen:aofund:3,3,6,2",
+    "gen:aofund:3,6,8,1:mc",
+    "gen:aofund:1,5,1,2",
+    "gen:aofund:1,7,1,3:mc",
+    "gen:aofund:2,3,5,2",
+    "gen:aofund:2,5,3,3:mc"
+   ],
+   "explanations": [
+    "added (conceptual): The numbers of choices were added; each shirt goes with each pair of trousers and each pair of shoes, so the choices multiply.",
+    "repetition-mixed (conceptual): Every place was given all 9 choices; with no repetition the choices go down by one each time.",
+    "power-swapped (procedural): 4⁹ was worked out; with 9 choices for each of 4 places the count is 9⁴.",
+    "added-places (conceptual): The choices for the places were added; the places are filled one after another, so the choices multiply.",
+    "direct-forgotten (procedural): The 4 direct roads were left out; going directly is another way, so it is added.",
+    "all-multiplied (conceptual): The direct roads were multiplied in too; 'through Y' OR 'directly' are separate cases, so they are added.",
+    "all-added (conceptual): All the numbers were added; going through Y needs a road for the first part AND one for the second part, so those two multiply.",
+    "multiplied (conceptual): The numbers were multiplied; only ONE dish is chosen, from one group OR another, so by the addition principle they are added."
+   ],
+   "teach": {
+    "idea": "Multiplication principle: if one thing can be done in m ways and then another in n ways, both can be done in m × n ways. Addition principle: if a choice is either one of m things or one of n other things (not both), there are m + n ways.",
+    "method": "Ask: is it 'this AND then that' (multiply) or 'this OR that' (add)? For codes, count the choices for each place in turn; with no repetition, each place has one fewer choice.",
+    "alternatives": [
+     {
+      "id": "tree",
+      "title": "A tree diagram",
+      "kind": "conceptual",
+      "text": [
+       "Draw a branch for each first choice, and from each of them a branch for each second choice.",
+       "Count the ends of the branches: that is the product."
+      ]
+     },
+     {
+      "id": "and-or",
+      "title": "AND multiplies, OR adds",
+      "kind": "procedural",
+      "text": [
+       "Underline the words 'and then' (stages) and 'or' (cases) in the question.",
+       "Multiply across stages; add across cases."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "bb868fc3",
+   "validation": {
+    "family": "aofund",
+    "deterministic": {
+     "checked": 604,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
    "id": "aonpr",
    "version": "1.0.0",
    "title": "Permutations of r out of n distinct objects",
@@ -57006,100 +57100,6 @@
     },
     "boundary": {
      "cases": 12,
-     "failures": []
-    },
-    "excluded": 0,
-    "ok": true
-   }
-  },
-  {
-   "id": "aofund",
-   "version": "1.0.0",
-   "title": "The multiplication and addition principles of counting",
-   "competency": "MATH.algebra.permutations",
-   "skill": "MATH.algebra.permutations",
-   "type": "integer",
-   "multipleChoice": true,
-   "domain": [
-    [
-     0,
-     3
-    ],
-    [
-     1,
-     9
-    ],
-    [
-     0,
-     9
-    ],
-    [
-     0,
-     5
-    ]
-   ],
-   "poolSize": 604,
-   "excluded": [],
-   "difficulty": {
-    "1": 464,
-    "2": 40,
-    "3": 100
-   },
-   "examples": [
-    "gen:aofund:3,3,6,2",
-    "gen:aofund:3,6,8,1:mc",
-    "gen:aofund:1,5,1,2",
-    "gen:aofund:1,7,1,3:mc",
-    "gen:aofund:2,3,5,2",
-    "gen:aofund:2,5,3,3:mc"
-   ],
-   "explanations": [
-    "added (conceptual): The numbers of choices were added; each shirt goes with each pair of trousers and each pair of shoes, so the choices multiply.",
-    "repetition-mixed (conceptual): Every place was given all 9 choices; with no repetition the choices go down by one each time.",
-    "power-swapped (procedural): 4⁹ was worked out; with 9 choices for each of 4 places the count is 9⁴.",
-    "added-places (conceptual): The choices for the places were added; the places are filled one after another, so the choices multiply.",
-    "direct-forgotten (procedural): The 4 direct roads were left out; going directly is another way, so it is added.",
-    "all-multiplied (conceptual): The direct roads were multiplied in too; 'through Y' OR 'directly' are separate cases, so they are added.",
-    "all-added (conceptual): All the numbers were added; going through Y needs a road for the first part AND one for the second part, so those two multiply.",
-    "multiplied (conceptual): The numbers were multiplied; only ONE dish is chosen, from one group OR another, so by the addition principle they are added."
-   ],
-   "teach": {
-    "idea": "Multiplication principle: if one thing can be done in m ways and then another in n ways, both can be done in m × n ways. Addition principle: if a choice is either one of m things or one of n other things (not both), there are m + n ways.",
-    "method": "Ask: is it 'this AND then that' (multiply) or 'this OR that' (add)? For codes, count the choices for each place in turn; with no repetition, each place has one fewer choice.",
-    "alternatives": [
-     {
-      "id": "tree",
-      "title": "A tree diagram",
-      "kind": "conceptual",
-      "text": [
-       "Draw a branch for each first choice, and from each of them a branch for each second choice.",
-       "Count the ends of the branches: that is the product."
-      ]
-     },
-     {
-      "id": "and-or",
-      "title": "AND multiplies, OR adds",
-      "kind": "procedural",
-      "text": [
-       "Underline the words 'and then' (stages) and 'or' (cases) in the question.",
-       "Multiply across stages; add across cases."
-      ]
-     }
-    ]
-   },
-   "fingerprint": "560bb97b",
-   "validation": {
-    "family": "aofund",
-    "deterministic": {
-     "checked": 604,
-     "failures": []
-    },
-    "property": {
-     "cases": 400,
-     "failures": []
-    },
-    "boundary": {
-     "cases": 16,
      "failures": []
     },
     "excluded": 0,
@@ -60859,7 +60859,7 @@
      }
     ]
    },
-   "fingerprint": "2635f97a",
+   "fingerprint": "c5f938f0",
    "validation": {
     "family": "approg",
     "deterministic": {
@@ -84930,7 +84930,7 @@
      }
     ]
    },
-   "fingerprint": "9ebe8aea",
+   "fingerprint": "d49135dc",
    "validation": {
     "family": "avstatq",
     "deterministic": {
@@ -85014,7 +85014,7 @@
      }
     ]
    },
-   "fingerprint": "b4050ecb",
+   "fingerprint": "c6dcd3b5",
    "validation": {
     "family": "avexpn",
     "deterministic": {
@@ -85093,7 +85093,7 @@
      }
     ]
    },
-   "fingerprint": "95da9df9",
+   "fingerprint": "5bc0da9b",
    "validation": {
     "family": "avppf",
     "deterministic": {
@@ -85172,7 +85172,7 @@
      }
     ]
    },
-   "fingerprint": "4d2f2858",
+   "fingerprint": "e4a8a954",
    "validation": {
     "family": "avzero",
     "deterministic": {
@@ -86064,7 +86064,7 @@
    ],
    "teach": {
     "idea": "In a frequency table each value appears as many times as its frequency; the median is the middle value of that full ordered list.",
-    "method": "Add the frequencies to get n. Find the middle position ((n + 1)/2 for odd n). Keep a running total of the frequencies until it reaches that position: that row's value is the median.",
+    "method": "Add the frequencies to get n. Find the middle position: (n + 1)/2 for odd n; for even n the median is halfway between values number n/2 and n/2 + 1. Keep a running total of the frequencies until it reaches that position: that row's value is the median (for even n, when both middle values are in the same row, that value).",
     "alternatives": [
      {
       "id": "write_out",
@@ -86077,7 +86077,7 @@
      }
     ]
    },
-   "fingerprint": "95a5157c",
+   "fingerprint": "3e84e185",
    "validation": {
     "family": "avfmed",
     "deterministic": {
@@ -87214,6 +87214,157 @@
     },
     "boundary": {
      "cases": 16,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aipolyc",
+   "version": "1.0.0",
+   "title": "Faces, vertices and edges of prisms and pyramids",
+   "competency": "MATH.geometry.polyhedra-euler",
+   "skill": "count faces, vertices and edges",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     1
+    ],
+    [
+     3,
+     10
+    ],
+    [
+     0,
+     5
+    ]
+   ],
+   "poolSize": 96,
+   "excluded": [],
+   "difficulty": {
+    "1": 8,
+    "2": 8,
+    "3": 80
+   },
+   "examples": [
+    "gen:aipolyc:0,4,0",
+    "gen:aipolyc:1,3,1:mc",
+    "gen:aipolyc:0,6,0",
+    "gen:aipolyc:1,5,1:mc",
+    "gen:aipolyc:0,8,4",
+    "gen:aipolyc:1,6,3:mc"
+   ],
+   "explanations": [
+    "ends-forgotten (conceptual): Only the 10 side faces were counted; a prism also has its two ends (the top and the bottom decagonal faces).",
+    "one-end (procedural): Only one end was counted. A prism has a decagon at the top and another at the bottom.",
+    "uprights-forgotten (procedural): Only the edges round the two ends were counted (10 + 10); the 10 upright edges joining them were left out.",
+    "count-as-sides (conceptual): The edges were taken as the sides of the base; a pyramid has 2 edges for each side of its base.",
+    "other-solid (conceptual): The rule for a prism was used. For a pyramid: V = n + 1.",
+    "base-forgotten (conceptual): Only the 10 sloping triangles were counted; the base is a face too.",
+    "like-prism (conceptual): The pyramid was counted like a prism. A pyramid has one base and an apex, not two ends.",
+    "apex-forgotten (procedural): Only the 10 corners of the base were counted; the apex at the top is a vertex too.",
+    "slant-forgotten (procedural): Only the 10 edges round the base were counted; 10 more edges run from the base up to the apex."
+   ],
+   "teach": {
+    "idea": "A prism has two matching ends joined by rectangles, one rectangle for each side of an end. A pyramid has one base, and a triangle on each side of the base meeting at the apex.",
+    "method": "Name the polygon of the base and count its sides. Prism: the side faces plus the two ends; corners at both ends; edges round both ends plus the upright edges. Pyramid: the triangles plus the base; the base's corners plus the apex; the base's edges plus one edge up to the apex from each corner. Check with F + V − E = 2.",
+    "alternatives": [
+     {
+      "id": "build",
+      "title": "Build it from straws",
+      "kind": "conceptual",
+      "text": [
+       "Picture the model: one clay ball at each corner and one straw along each edge.",
+       "Count the balls and straws of the base first, then what the rest of the solid adds."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "d84312a2",
+   "validation": {
+    "family": "aipolyc",
+    "deterministic": {
+     "checked": 96,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "akhtab",
+   "version": "1.0.0",
+   "title": "Grouping data into class intervals",
+   "competency": "MATH.statistics.histograms",
+   "skill": "make a grouped frequency table",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     79
+    ],
+    [
+     0,
+     4
+    ]
+   ],
+   "poolSize": 322,
+   "excluded": [],
+   "difficulty": {
+    "1": 0,
+    "2": 193,
+    "3": 129
+   },
+   "examples": [
+    "gen:akhtab:23,1",
+    "gen:akhtab:51,1:mc",
+    "gen:akhtab:30,3",
+    "gen:akhtab:52,2:mc"
+   ],
+   "explanations": [
+    "upper-included (conceptual): A value equal to the upper limit 145 was counted in this class. It belongs to the next class, which starts at 145.",
+    "lower-excluded (conceptual): A value equal to the lower limit 145 was left out. The class includes its lower limit, so 145 is counted here."
+   ],
+   "teach": {
+    "idea": "A grouped frequency table puts each value in a class interval. Neighbouring classes share a boundary, and a value on a boundary belongs to the class that starts there: each class includes its lower limit but not its upper limit.",
+    "method": "Go through the values in order and tick each one in its class; a value equal to a boundary goes to the class above. Count the ticks for the class asked about, and check that all the class counts add up to the number of values.",
+    "alternatives": [
+     {
+      "id": "tally",
+      "title": "Tally marks",
+      "kind": "procedural",
+      "text": [
+       "Make a tally mark for each value in the row of its class, crossing every fifth.",
+       "Cross out each value in the list as you tally it, so none is missed or counted twice."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "46cb79b4",
+   "validation": {
+    "family": "akhtab",
+    "deterministic": {
+     "checked": 322,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 8,
      "failures": []
     },
     "excluded": 0,

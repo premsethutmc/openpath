@@ -1738,13 +1738,13 @@
      "title": "The median of data in a frequency table",
      "text": [
       "In a frequency table each value appears as many times as its frequency; the median is the middle value of that full ordered list.",
-      "Add the frequencies to get n. Find the middle position ((n + 1)/2 for odd n). Keep a running total of the frequencies until it reaches that position: that row's value is the median."
+      "Add the frequencies to get n. Find the middle position: (n + 1)/2 for odd n; for even n the median is halfway between values number n/2 and n/2 + 1. Keep a running total of the frequencies until it reaches that position: that row's value is the median (for even n, when both middle values are in the same row, that value)."
      ],
      "math": [
       "The table in the picture shows the number of books each student in a class read during the summer holidays. What is the median?",
       "There are 2 + 6 + 7 + 2 + 1 = 18 values in all",
       "Running totals: 2, 8, 15, 17, 18",
-      "The middle (value number 9) falls in the row of 9"
+      "The number of values is even, so the median is halfway between value number 9 and value number 10; both fall in the row of 9, so the median is 9"
      ],
      "role": "worked-example",
      "instance": "gen:avfmed:7,2,6,7,2,1"
@@ -1897,7 +1897,7 @@
       {
        "title": "Two middle values: take halfway: a common mix-up",
        "text": [
-        "With 6 numbers there are two middle numbers (66 and 75); the median is halfway between them.",
+        "Find the median of 66, 58, 75, 81, 14, 95. In order they are 14, 58, 66, 75, 81, 95: with 6 numbers there are two middle numbers (66 and 75), and the median is halfway between them.",
         "With an even number of values there are two middle values: take halfway between them."
        ],
        "math": [
@@ -3025,7 +3025,7 @@
      "math": [
       "A card is picked at random from cards numbered 1 to 15. Which set is the event \"the number is an odd number\"?",
       "Go through 1 to 15 and keep each number that is an odd number: {1, 3, 5, 7, 9, 11, 13, 15}",
-      "So the answer is option D: {1, 3, 5, 7, 9, 11, 13, 15}."
+      "So the answer is option D: {1, 3, 5, 7, 9, 11, 13, 15}"
      ],
      "role": "worked-example",
      "instance": "gen:akssl:1,1,4"
@@ -8817,7 +8817,7 @@
      ],
      "math": [
       "Find √63 correct to one decimal place (use the long-division method, or squaring to check).",
-      "Long division gives √63 = 7.93…",
+      "Pair the digits from the decimal point: 63 . 00 00; 7 × 7 = 49 is the largest square up to 63: digit 7, remainder 14; bring down 00 to make 1400; double 7 is 14, and 149 × 9 = 1341 is the largest that fits: digit 9, remainder 59; bring down 00 to make 5900; double 79 is 158, and 1583 × 3 = 4749 is the largest that fits: digit 3, remainder 1151. So √63 = 7.93 to two decimal places",
       "Rounded to one decimal place: 7.9"
      ],
      "role": "worked-example",
@@ -11722,11 +11722,11 @@
      "title": "An equation with x on both sides",
      "text": [
       "An equation stays balanced when the same thing is added to or taken from both sides, including a number of x's.",
-      "Take the smaller x term from both sides so x is on one side only, move the numbers to the other side, then divide by the coefficient of x. Check by substituting."
+      "Collect the x terms on the left: take the right-hand x term from both sides (if it is negative, add it instead), so x is on one side only. Move the numbers to the right, then divide by the coefficient of x. Check by substituting."
      ],
      "math": [
       "Solve 9x + 15 = −x − 15.",
-      "Take −x from both sides: 10x on the left",
+      "Add x to both sides: 10x on the left",
       "Take 15 from both sides: −15 − 15 = −30 on the right",
       "x = −30 ÷ 10 = −3"
      ],
@@ -12321,7 +12321,7 @@
      "math": [
       "The square in the picture is a fence, and the dots are animals. Which animal is outside the fence?",
       "Look at the picture: the answer is cow.",
-      "So the answer is option C: cow."
+      "So the answer is option C: cow"
      ],
      "widget": {
       "type": "plane",
@@ -17644,7 +17644,7 @@
      "math": [
       "Divya stands facing South. Which direction is behind Divya?",
       "The answer is North.",
-      "So the answer is option B: North."
+      "So the answer is option B: North"
      ],
      "widget": {
       "type": "table",
@@ -34918,7 +34918,7 @@
     {
      "title": "Finding the hypotenuse",
      "text": [
-      "The hypotenuse is the side opposite the right angle, and the longest side. Here the two shorter sides are 24 cm and 70 cm.",
+      "The hypotenuse is the side opposite the right angle, and the longest side. Take a right-angled triangle whose two shorter sides are 24 cm and 70 cm (as in the picture): we want its hypotenuse.",
       "The square on the hypotenuse is the sum of the squares on the other two sides: c² = a² + b²."
      ],
      "math": [
@@ -34938,7 +34938,7 @@
       "Find the longest side. Square it, and add the squares of the other two. Equal: right-angled. Not equal, even by a little: not right-angled."
      ],
      "math": [
-      "A mason checks the corner of a wall. He marks a point 6 cm from the corner along one wall and a point 8 cm from the corner along the other, and the two marks are 11 cm apart. Is the corner a right angle?",
+      "A carpenter checks the corner of a wooden picture frame he is making. He marks a point 6 cm from the corner along one side and a point 8 cm from the corner along the other, and the two marks are 11 cm apart. Is the corner a right angle?",
       "The longest side is 11",
       "The squares of the other two add to 36 + 64 = 100",
       "100 and 121 are not equal, so the triangle is not right-angled",
@@ -35806,6 +35806,20 @@
      "tip": "The 2 in F + V − E = 2 was forgotten: V = E − F + 2.",
      "role": "concept",
      "instance": "gen:aieuler:1,8,2"
+    },
+    {
+     "title": "Faces, vertices and edges of prisms and pyramids",
+     "text": [
+      "A prism has two matching ends joined by rectangles, one rectangle for each side of an end. A pyramid has one base, and a triangle on each side of the base meeting at the apex.",
+      "Name the polygon of the base and count its sides. Prism: the side faces plus the two ends; corners at both ends; edges round both ends plus the upright edges. Pyramid: the triangles plus the base; the base's corners plus the apex; the base's edges plus one edge up to the apex from each corner. Check with F + V − E = 2."
+     ],
+     "math": [
+      "How many faces does a hexagonal prism have?",
+      "There are 6 side faces, one on each side of the base",
+      "Add the two ends: 6 + 2 = 8"
+     ],
+     "role": "worked-example",
+     "instance": "gen:aipolyc:0,6,0"
     }
    ],
    "diagnostics": [
@@ -35895,21 +35909,32 @@
    "practice": [
     "gen:aieuler:2,7,1",
     "gen:aieuler:2,7,0:mc",
-    "gen:aieuler:2,10,2"
+    "gen:aieuler:2,10,2",
+    "gen:aipolyc:0,6,5"
    ],
    "transfer": [
     "gen:aieuler:1,11,0:w",
-    "gen:aieuler:1,6,0:w"
+    "gen:aipolyc:0,6,2:w"
    ],
    "retention": [
     "gen:aieuler:2,4,1",
-    "gen:aieuler:2,4,2:mc"
+    "gen:aipolyc:0,6,4:mc"
    ],
    "probes": [],
    "pool": {
     "family": "aieuler",
     "version": "1.0.0"
    },
+   "pools": [
+    {
+     "family": "aieuler",
+     "version": "1.0.0"
+    },
+    {
+     "family": "aipolyc",
+     "version": "1.0.0"
+    }
+   ],
    "provenance": {
     "origin": "synthesised",
     "policy": "library@2+template@2",
@@ -37590,7 +37615,7 @@
       "Split the shape along straight lines, find each piece's area and add (or subtract a cut-out). For a perimeter, add only the outer edges: a semicircle's curved edge is half the circle's circumference and it replaces the side it stands on."
      ],
      "math": [
-      "A garden is a rectangle 6 m long and 28 m wide, with a semicircle on one of its 28 m sides. Find its area, in m². Take π = 22/7.",
+      "A garden is a rectangle 28 m long and 6 m wide, with a semicircle on one of its 28 m sides. Find its area, in m². Take π = 22/7.",
       "Rectangle: 168",
       "Semicircle πr²/2: 308",
       "Total: 168 + 308 = 476"
@@ -39543,7 +39568,7 @@
      ],
      "math": [
       "Compare the ratios 1 : 9 and 4 : 36. Which statement is true?",
-      "Cross-multiply: 36 and 36. They are equal, so the ratios are equivalent.",
+      "Cross-multiply: 36 and 36. They are equal, so the ratios are equivalent",
       "So the answer is option C: 1 : 9 and 4 : 36 are equivalent"
      ],
      "role": "worked-example",
@@ -40778,7 +40803,7 @@
      ],
      "math": [
       "Find the compound interest on ₹20,000 for 2 years at 13% per year, compounded annually, in rupees.",
-      "Each year multiplies the value by (1 + 13/100)^2",
+      "Each year multiplies the value by (1 + 13/100); over 2 years that is (1 + 13/100)^2",
       "₹20000 becomes ₹25538",
       "Interest = ₹25538 − ₹20000 = ₹5538"
      ],
@@ -40822,7 +40847,7 @@
        ],
        "math": [
         "A machine worth ₹40,000 loses 14% of its value each year (on its value at the start of that year). What is it worth after 2 years, in rupees?",
-        "Each year multiplies the value by (1 − 14/100)^2",
+        "Each year multiplies the value by (1 − 14/100); over 2 years that is (1 − 14/100)^2",
         "₹40000 becomes ₹29584"
        ],
        "role": "worked-example",
@@ -40846,7 +40871,7 @@
        ],
        "math": [
         "A machine worth ₹20,000 loses 13% of its value each year (on its value at the start of that year). What is it worth after 2 years, in rupees?",
-        "Each year multiplies the value by (1 − 13/100)^2",
+        "Each year multiplies the value by (1 − 13/100); over 2 years that is (1 − 13/100)^2",
         "₹20000 becomes ₹15138"
        ],
        "role": "strategy",
@@ -41024,7 +41049,7 @@
         "type": "solid",
         "name": "cube",
         "dims": [
-         "9"
+         "19"
         ]
        },
        "role": "worked-example",
@@ -42471,7 +42496,7 @@
      "math": [
       "Which of these numbers is divisible by 10? 20794;  83084;  75880;  92455",
       "By 10: the ones digit is 0",
-      "So the answer is option C: 75880."
+      "So the answer is option C: 75880"
      ],
      "role": "worked-example",
      "instance": "gen:akdsort:2,50"
@@ -43371,7 +43396,7 @@
      "math": [
       "In a shift code every letter moves forward 12 places along the alphabet (after Z it goes back to A). How is ORANGE written in this code?",
       "Move each letter of ORANGE forward 12 places",
-      "So the answer is option A: ADMZSQ."
+      "So the answer is option A: ADMZSQ"
      ],
      "widget": {
       "type": "table",
@@ -43730,7 +43755,7 @@
      "math": [
       "Which of these is primary data?",
       "Primary data is collected first-hand by the person who will use it",
-      "So the answer is option D: A class measures the heights of its own students for a project.."
+      "So the answer is option D: A class measures the heights of its own students for a project."
      ],
      "role": "worked-example",
      "instance": "gen:akprim:0,149"
@@ -43939,6 +43964,20 @@
      },
      "role": "concept",
      "instance": "gen:akhist:49,0"
+    },
+    {
+     "title": "Grouping data into class intervals",
+     "text": [
+      "A grouped frequency table puts each value in a class interval. Neighbouring classes share a boundary, and a value on a boundary belongs to the class that starts there: each class includes its lower limit but not its upper limit.",
+      "Go through the values in order and tick each one in its class; a value equal to a boundary goes to the class above. Count the ticks for the class asked about, and check that all the class counts add up to the number of values."
+     ],
+     "math": [
+      "The runs scored by 16 players in a match are: 40, 21, 43, 9, 13, 23, 25, 13, 18, 20, 10, 31, 31, 12, 22, 13. They are grouped in classes 0–10, 10–20, … where each class includes its lower limit but not its upper limit. What is the frequency of the class 0–10?",
+      "A value is in the class when 0 ≤ value < 10",
+      "The values in the class: 9; there are 1"
+     ],
+     "role": "worked-example",
+     "instance": "gen:akhtab:21,0"
     }
    ],
    "diagnostics": [
@@ -44049,21 +44088,32 @@
    "practice": [
     "gen:akhist:103,2",
     "gen:akhist:144,0:mc",
-    "gen:akhist:103,1"
+    "gen:akhist:103,1",
+    "gen:akhtab:2,2"
    ],
    "transfer": [
     "gen:akhist:145,2:w",
-    "gen:akhist:144,1:w"
+    "gen:akhtab:2,3:w"
    ],
    "retention": [
     "gen:akhist:145,0",
-    "gen:akhist:145,3:mc"
+    "gen:akhtab:40,4:mc"
    ],
    "probes": [],
    "pool": {
     "family": "akhist",
     "version": "1.0.0"
    },
+   "pools": [
+    {
+     "family": "akhist",
+     "version": "1.0.0"
+    },
+    {
+     "family": "akhtab",
+     "version": "1.0.0"
+    }
+   ],
    "provenance": {
     "origin": "synthesised",
     "policy": "library@2+template@2",
@@ -48706,7 +48756,8 @@
        "math": [
         "ΔABC ~ ΔPQR (A matches P, B matches Q and C matches R). AB = 3 cm, BC = 5 cm, CA = 7 cm and PQ = 10.5 cm. Find the perimeter of ΔPQR, in cm.",
         "Scale factor PQ ÷ AB: 10.5 ÷ 3 = 3.5",
-        "Multiply the matching side: 15 × 3.5 = 52.5"
+        "Perimeter of ΔABC: 3 + 5 + 7 = 15",
+        "Perimeters scale by the same factor: perimeter of ΔPQR: 15 × 3.5 = 52.5"
        ],
        "role": "worked-example",
        "instance": "gen:amsim:4,7,1,2"
@@ -50315,12 +50366,28 @@
   },
   {
    "competency": "MATH.reasoning.mathematical-argument",
-   "title": "Deciding the shape of three points from their distances",
+   "title": "The largest product from four digits",
    "chapter": [
+    {
+     "title": "The largest product from four digits",
+     "text": [
+      "A tens digit counts ten times as much as a units digit, so the two largest digits belong in the tens places. Then, for a fixed total, two numbers have the largest product when they are as close together as possible."
+     ],
+     "math": [
+      "Use each of the digits 4, 1, 9 and 2 exactly once to make two two-digit numbers whose product is as large as possible. What is that largest product?",
+      "The two largest digits, 9 and 4, go in the tens places (each counts ten times)",
+      "The larger units digit goes with the smaller tens digit: 91 and 42",
+      "91 × 42 = 3822"
+     ],
+     "tip": "The biggest possible first number (94) was made, leaving the small digits for the second. Both numbers matter: the two largest digits should both be tens digits.",
+     "role": "concept",
+     "instance": "gen:angarr:9,4,2,1"
+    },
     {
      "title": "Deciding the shape of three points from their distances",
      "text": [
-      "Distances decide the shape: if the two shorter distances add up to the longest, the points are on one line; if their squares add up to the square of the longest, there is a right angle (Pythagoras' converse); two equal distances make an isosceles triangle."
+      "Distances decide the shape: if the two shorter distances add up to the longest, the points are on one line; if their squares add up to the square of the longest, there is a right angle (Pythagoras' converse); two equal distances make an isosceles triangle.",
+      "Find PQ², QR² and PR² with (x₂ − x₁)² + (y₂ − y₁)². Test the line first, then the right angle, then equal sides — and state which test decided it."
      ],
      "math": [
       "The points P(7, −2), Q(2, 3) and R(4, −3) are given. Work out PQ, QR and PR with the distance formula and decide which statement is true.",
@@ -50348,24 +50415,8 @@
       ],
       "range": 16
      },
-     "tip": "Only equal sides were looked for. Also test Pythagoras: do the squares of the two shorter sides add up to the square of the longest?",
-     "role": "concept",
-     "instance": "gen:anpts:1,4,-3,3,1"
-    },
-    {
-     "title": "The largest product from four digits",
-     "text": [
-      "A tens digit counts ten times as much as a units digit, so the two largest digits belong in the tens places. Then, for a fixed total, two numbers have the largest product when they are as close together as possible.",
-      "Put the two largest digits in the tens places. Give the larger units digit to the number with the smaller tens digit. Multiply, and check one swap to see it is smaller."
-     ],
-     "math": [
-      "Use each of the digits 4, 1, 9 and 2 exactly once to make two two-digit numbers whose product is as large as possible. What is that largest product?",
-      "The two largest digits, 9 and 4, go in the tens places (each counts ten times)",
-      "The larger units digit goes with the smaller tens digit: 91 and 42",
-      "91 × 42 = 3822"
-     ],
      "role": "worked-example",
-     "instance": "gen:angarr:9,4,2,1"
+     "instance": "gen:anpts:1,4,-3,3,1"
     },
     {
      "title": "Can aⁿ end in 0? Reasoning with prime factors",
@@ -50383,9 +50434,9 @@
     }
    ],
    "diagnostics": [
-    "gen:anpts:0,-3,-1,1,-1",
-    "gen:anpts:1,-2,2,1,-3",
-    "gen:anpts:2,0,3,2,-1"
+    "gen:angarr:8,7,5,4",
+    "gen:angarr:8,3,2,1",
+    "gen:angarr:9,8,7,6"
    ],
    "strategies": [
     {
@@ -50397,64 +50448,45 @@
       {
        "title": "The method",
        "text": [
-        "Find PQ², QR² and PR² with (x₂ − x₁)² + (y₂ − y₁)². Test the line first, then the right angle, then equal sides — and state which test decided it."
+        "Put the two largest digits in the tens places. Give the larger units digit to the number with the smaller tens digit. Multiply, and check one swap to see it is smaller."
        ],
        "math": [
-        "The points P(1, 4), Q(3, 8) and R(0, 2) are given. Work out PQ, QR and PR with the distance formula and decide which statement is true.",
-        "PQ² = 20, QR² = 45, PR² = 5",
-        "So: the three points lie on one straight line"
+        "Use each of the digits 6, 3, 9 and 4 exactly once to make two two-digit numbers whose product is as large as possible. What is that largest product?",
+        "The two largest digits, 9 and 6, go in the tens places (each counts ten times)",
+        "The larger units digit goes with the smaller tens digit: 93 and 64",
+        "93 × 64 = 5952"
        ],
-       "widget": {
-        "type": "plane",
-        "points": [
-         [
-          1,
-          4,
-          "P"
-         ],
-         [
-          3,
-          8,
-          "Q"
-         ],
-         [
-          0,
-          2,
-          "R"
-         ]
-        ],
-        "range": 16
-       },
        "role": "worked-example",
-       "instance": "gen:anpts:0,0,2,1,2"
+       "instance": "gen:angarr:9,6,4,3"
       }
      ],
-     "guided": "gen:anpts:1,-4,-1,3,2",
-     "check": "gen:anpts:1,-3,4,4,-2"
+     "guided": "gen:angarr:9,8,4,2",
+     "check": "gen:angarr:9,6,4,1"
     },
     {
-     "id": "slopes",
-     "title": "Compare slopes",
-     "kind": "conceptual",
+     "id": "compare-swap",
+     "title": "Compare the two pairings",
+     "kind": "procedural",
      "needs": [],
      "screens": [
       {
-       "title": "Compare slopes",
+       "title": "Compare the two pairings",
        "text": [
-        "Points are on one line when the slope from P to Q equals the slope from Q to R.",
-        "Two sides are perpendicular when the product of their slopes is −1 (or one is horizontal and the other vertical)."
+        "With tens digits a > b and units c > d, compare (10a + d)(10b + c) and (10a + c)(10b + d).",
+        "Their difference is 10(a − b)(c − d), which is positive: so the first pairing wins."
        ],
        "math": [
-        "The points P(3, 6), Q(−2, 10) and R(−1, 4) are given. Work out PQ, QR and PR with the distance formula and decide which statement is true.",
-        "PQ² = 41, QR² = 37, PR² = 20",
-        "So: they form a triangle that is neither right-angled nor isosceles"
+        "Use each of the digits 6, 2, 9 and 4 exactly once to make two two-digit numbers whose product is as large as possible. What is that largest product?",
+        "The two largest digits, 9 and 6, go in the tens places (each counts ten times)",
+        "The larger units digit goes with the smaller tens digit: 92 and 64",
+        "92 × 64 = 5888"
        ],
        "role": "strategy",
-       "instance": "gen:anpts:3,-1,4,4,2"
+       "instance": "gen:angarr:9,6,4,2"
       }
      ],
-     "guided": "gen:anpts:2,3,0,4,-1",
-     "check": "gen:anpts:2,-1,3,4,2"
+     "guided": "gen:angarr:8,6,3,1",
+     "check": "gen:angarr:8,6,3,2:mc"
     },
     {
      "id": "spot_the_mistake",
@@ -50464,19 +50496,19 @@
      "screens": [
       {
        "role": "misconception",
-       "instance": "gen:anpts:0,3,4,2,1",
+       "instance": "gen:angarr:9,8,4,3",
        "title": "A common wrong answer",
        "text": [
-        "A question: “The points P(5, 5), Q(9, 7) and R(3, 4) are given. Work out PQ, QR and PR with the distance formula and decide which statement is true.” A common wrong answer is 3.",
-        "The squares of the distances were added, as for a right angle. For points on one line the distances themselves add up: the two shorter ones make the longest."
+        "A question: “Use each of the digits 8, 3, 9 and 4 exactly once to make two two-digit numbers whose product is as large as possible. What is that largest product?” A common wrong answer is 4214.",
+        "The biggest possible first number (98) was made, leaving the small digits for the second. Both numbers matter: the two largest digits should both be tens digits."
        ],
        "math": [
-        "Not 3, but A"
+        "Not 4214, but 7812"
        ]
       }
      ],
-     "guided": "gen:anpts:3,-1,2,1,-1",
-     "check": "gen:anpts:3,-1,-2,4,-3"
+     "guided": "gen:angarr:8,5,2,1",
+     "check": "gen:angarr:9,4,3,1:mc"
     },
     {
      "id": "check_what_it_uses",
@@ -50488,41 +50520,41 @@
        "role": "prerequisite",
        "title": "What it uses",
        "text": [
-        "Each step builds on another skill: Apply the Baudhayana-Pythagoras theorem and its converse. If a step is slow, practise that skill first."
+        "Each step builds on another skill: Compose tens and ones; Use multiplication facts. If a step is slow, practise that skill first."
        ]
       }
      ],
-     "guided": "gen:anpts:0,3,1,3,-3",
-     "check": "gen:anpts:3,-3,3,3,2"
+     "guided": "gen:angarr:8,7,5,3",
+     "check": "gen:angarr:5,4,3,2"
     }
    ],
    "practice": [
-    "gen:anpts:0,3,0,3,1",
-    "gen:anpts:0,1,2,4,1",
-    "gen:anpts:3,2,3,4,3",
-    "gen:angarr:9,8,4,3",
+    "gen:angarr:8,7,5,1",
+    "gen:angarr:9,4,3,2:mc",
+    "gen:angarr:7,6,2,1",
+    "gen:anpts:0,3,4,2,1",
     "gen:anpow0:114"
    ],
    "transfer": [
-    "gen:anpts:2,-1,4,4,-2:w",
-    "gen:angarr:9,6,4,3:w"
+    "gen:angarr:7,5,4,2:w",
+    "gen:anpts:0,0,2,1,2:w"
    ],
    "retention": [
-    "gen:anpts:0,-4,1,3,-3",
-    "gen:angarr:8,7,5,2:mc"
+    "gen:angarr:8,7,5,2",
+    "gen:anpts:0,-4,1,3,-3"
    ],
    "probes": [],
    "pool": {
-    "family": "anpts",
+    "family": "angarr",
     "version": "1.0.0"
    },
    "pools": [
     {
-     "family": "anpts",
+     "family": "angarr",
      "version": "1.0.0"
     },
     {
-     "family": "angarr",
+     "family": "anpts",
      "version": "1.0.0"
     },
     {
@@ -50533,12 +50565,11 @@
    "provenance": {
     "origin": "synthesised",
     "policy": "library@2+template@2",
-    "family": "anpts",
+    "family": "angarr",
     "seed": [
-     1,
+     9,
      4,
-     -3,
-     3,
+     2,
      1
     ],
     "blueprintVersion": "1.0.0",
@@ -50546,9 +50577,9 @@
     "aiAssisted": true,
     "licence": "CC0",
     "examples": [
-     "gen:anpts:1,4,-3,3,1",
-     "gen:anpts:0,3,4,2,1",
-     "gen:anpts:0,0,2,1,2"
+     "gen:angarr:9,4,2,1",
+     "gen:angarr:9,8,4,3",
+     "gen:angarr:9,6,4,3"
     ]
    }
   },
@@ -54127,19 +54158,32 @@
   },
   {
    "competency": "MATH.algebra.permutations",
-   "title": "Permutations of r out of n distinct objects",
+   "title": "The multiplication and addition principles of counting",
    "chapter": [
+    {
+     "title": "The multiplication and addition principles of counting",
+     "text": [
+      "Multiplication principle: if one thing can be done in m ways and then another in n ways, both can be done in m × n ways. Addition principle: if a choice is either one of m things or one of n other things (not both), there are m + n ways."
+     ],
+     "math": [
+      "A canteen menu has 2 South Indian dishes, 4 North Indian dishes and 2 Chinese dishes. In how many ways can a student choose exactly one dish?",
+      "Separate cases (one or the other), so add: 2 + 4 + 2 = 8"
+     ],
+     "tip": "The numbers were multiplied; only ONE dish is chosen, from one group OR another, so by the addition principle they are added.",
+     "role": "concept",
+     "instance": "gen:aofund:3,2,4,2"
+    },
     {
      "title": "Permutations of r out of n distinct objects",
      "text": [
-      "Filling r places in order from n distinct objects: n choices for the first place, n − 1 for the second, and so on, so ⁿPᵣ = n(n − 1)…(n − r + 1) = n!/(n − r)!."
+      "Filling r places in order from n distinct objects: n choices for the first place, n − 1 for the second, and so on, so ⁿPᵣ = n(n − 1)…(n − r + 1) = n!/(n − r)!.",
+      "Multiply r numbers, starting at n and going down by one each time."
      ],
      "math": [
       "Find ¹⁶P₂, the number of ways of arranging 2 of 16 distinct objects in a row.",
       "2 places, filled one after another: 16 × 15 = 240"
      ],
-     "tip": "The objects were chosen without order (¹⁶C₂); in an arrangement the order matters.",
-     "role": "concept",
+     "role": "worked-example",
      "instance": "gen:aonpr:16,2"
     },
     {
@@ -54185,19 +54229,6 @@
      ],
      "role": "worked-example",
      "instance": "gen:aomulti:5,4,0"
-    },
-    {
-     "title": "The multiplication and addition principles of counting",
-     "text": [
-      "Multiplication principle: if one thing can be done in m ways and then another in n ways, both can be done in m × n ways. Addition principle: if a choice is either one of m things or one of n other things (not both), there are m + n ways.",
-      "Ask: is it 'this AND then that' (multiply) or 'this OR that' (add)? For codes, count the choices for each place in turn; with no repetition, each place has one fewer choice."
-     ],
-     "math": [
-      "A canteen menu has 2 South Indian dishes, 4 North Indian dishes and 2 Chinese dishes. In how many ways can a student choose exactly one dish?",
-      "Separate cases (one or the other), so add: 2 + 4 + 2 = 8"
-     ],
-     "role": "worked-example",
-     "instance": "gen:aofund:3,2,4,2"
     },
     {
      "title": "Evaluating and simplifying expressions with factorials",
@@ -54269,9 +54300,9 @@
     }
    ],
    "diagnostics": [
-    "gen:aonpr:8,3",
-    "gen:aonpr:10,6",
-    "gen:aonpr:9,2"
+    "gen:aofund:2,3,4,3",
+    "gen:aofund:1,5,0,2",
+    "gen:aofund:3,2,5,2"
    ],
    "strategies": [
     {
@@ -54283,41 +54314,64 @@
       {
        "title": "The method",
        "text": [
-        "Multiply r numbers, starting at n and going down by one each time."
+        "Ask: is it 'this AND then that' (multiply) or 'this OR that' (add)? For codes, count the choices for each place in turn; with no repetition, each place has one fewer choice."
        ],
        "math": [
-        "Find ¹⁶P₄, the number of ways of arranging 4 of 16 distinct objects in a row.",
-        "4 places, filled one after another: 16 × 15 × 14 × 13 = 43680"
+        "A canteen menu has 2 South Indian dishes, 4 North Indian dishes and 5 Chinese dishes. In how many ways can a student choose exactly one dish?",
+        "Separate cases (one or the other), so add: 2 + 4 + 5 = 11"
        ],
        "role": "worked-example",
-       "instance": "gen:aonpr:16,4"
+       "instance": "gen:aofund:3,2,4,5"
       }
      ],
-     "guided": "gen:aonpr:16,5",
-     "check": "gen:aonpr:27,4"
+     "guided": "gen:aofund:3,8,2,0",
+     "check": "gen:aofund:3,2,5,1"
     },
     {
-     "id": "boxes",
-     "title": "Draw the places as boxes",
+     "id": "tree",
+     "title": "A tree diagram",
      "kind": "conceptual",
      "needs": [],
      "screens": [
       {
-       "title": "Draw the places as boxes",
+       "title": "A tree diagram",
        "text": [
-        "Draw r boxes in a row and write in each how many objects are still free to go there.",
-        "By the multiplication principle, multiply the numbers in the boxes."
+        "Draw a branch for each first choice, and from each of them a branch for each second choice.",
+        "Count the ends of the branches: that is the product."
        ],
        "math": [
-        "Find ²⁷P₂, the number of ways of arranging 2 of 27 distinct objects in a row.",
-        "2 places, filled one after another: 27 × 26 = 702"
+        "A canteen menu has 2 South Indian dishes, 4 North Indian dishes and 4 Chinese dishes. In how many ways can a student choose exactly one dish?",
+        "Separate cases (one or the other), so add: 2 + 4 + 4 = 10"
        ],
        "role": "strategy",
-       "instance": "gen:aonpr:27,2"
+       "instance": "gen:aofund:3,2,4,4"
       }
      ],
-     "guided": "gen:aonpr:27,3",
-     "check": "gen:aonpr:11,6:mc"
+     "guided": "gen:aofund:2,3,6,4",
+     "check": "gen:aofund:3,8,8,5:mc"
+    },
+    {
+     "id": "and-or",
+     "title": "AND multiplies, OR adds",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "AND multiplies, OR adds",
+       "text": [
+        "Underline the words 'and then' (stages) and 'or' (cases) in the question.",
+        "Multiply across stages; add across cases."
+       ],
+       "math": [
+        "A canteen menu has 8 South Indian dishes, 2 North Indian dishes and 3 Chinese dishes. In how many ways can a student choose exactly one dish?",
+        "Separate cases (one or the other), so add: 8 + 2 + 3 = 13"
+       ],
+       "role": "strategy",
+       "instance": "gen:aofund:3,8,2,3"
+      }
+     ],
+     "guided": "gen:aofund:3,2,5,5",
+     "check": "gen:aofund:3,8,8,4"
     },
     {
      "id": "spot_the_mistake",
@@ -54327,29 +54381,29 @@
      "screens": [
       {
        "role": "misconception",
-       "instance": "gen:aonpr:16,3",
+       "instance": "gen:aofund:3,8,2,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “Find ¹⁶P₃, the number of ways of arranging 3 of 16 distinct objects in a row.” A common wrong answer is 560.",
-        "The objects were chosen without order (¹⁶C₃); in an arrangement the order matters."
+        "A question: “A canteen menu has 8 South Indian dishes, 2 North Indian dishes and 1 Chinese dish. In how many ways can a student choose exactly one dish?” A common wrong answer is 16.",
+        "The numbers were multiplied; only ONE dish is chosen, from one group OR another, so by the addition principle they are added."
        ],
        "math": [
-        "Not 560, but 3360"
+        "Not 16, but 11"
        ]
       }
      ],
-     "guided": "gen:aonpr:11,2",
-     "check": "gen:aonpr:5,2:mc"
+     "guided": "gen:aofund:3,8,2,2",
+     "check": "gen:aofund:3,8,4,3:mc"
     }
    ],
    "practice": [
-    "gen:aonpr:5,4",
-    "gen:aonpr:5,5:mc",
-    "gen:aonpr:21,2",
+    "gen:aofund:3,8,8,0",
+    "gen:aofund:0,6,3,3:mc",
+    "gen:aofund:0,6,3,2",
+    "gen:aonpr:16,3",
     "gen:aoncr:9,5",
     "gen:aocomm:3,3,4,1",
     "gen:aomulti:2,5,3",
-    "gen:aofund:3,8,2,1",
     "gen:aofact:0,6,4",
     "gen:aoncrp:3,7,2",
     "gen:aogeoc:1,8,0",
@@ -54357,20 +54411,24 @@
     "gen:aoarr:0,6,3"
    ],
    "transfer": [
-    "gen:aonpr:21,3:w",
-    "gen:aoncr:9,4:w",
-    "gen:aocomm:3,3,4,3:w"
+    "gen:aofund:0,6,3,4:w",
+    "gen:aonpr:16,4:w",
+    "gen:aoncr:9,4:w"
    ],
    "retention": [
-    "gen:aonpr:11,4",
-    "gen:aoncr:9,7:mc"
+    "gen:aofund:3,2,5,3",
+    "gen:aonpr:11,4:mc"
    ],
    "probes": [],
    "pool": {
-    "family": "aonpr",
+    "family": "aofund",
     "version": "1.0.0"
    },
    "pools": [
+    {
+     "family": "aofund",
+     "version": "1.0.0"
+    },
     {
      "family": "aonpr",
      "version": "1.0.0"
@@ -54385,10 +54443,6 @@
     },
     {
      "family": "aomulti",
-     "version": "1.0.0"
-    },
-    {
-     "family": "aofund",
      "version": "1.0.0"
     },
     {
@@ -54415,9 +54469,11 @@
    "provenance": {
     "origin": "synthesised",
     "policy": "library@2+template@2",
-    "family": "aonpr",
+    "family": "aofund",
     "seed": [
-     16,
+     3,
+     2,
+     4,
      2
     ],
     "blueprintVersion": "1.0.0",
@@ -54425,9 +54481,9 @@
     "aiAssisted": true,
     "licence": "CC0",
     "examples": [
-     "gen:aonpr:16,2",
-     "gen:aonpr:16,3",
-     "gen:aonpr:16,4"
+     "gen:aofund:3,2,4,2",
+     "gen:aofund:3,8,2,1",
+     "gen:aofund:3,2,4,5"
     ]
    }
   },
@@ -57558,7 +57614,7 @@
      ],
      "math": [
       "The roots of 2x³ − 12x² + 22x − 12 = 0 are in arithmetic progression. Solve the equation. Write the roots separated by commas.",
-      "The middle root is 12 ÷ 6 = 2",
+      "The sum of the roots is three times the middle root, so the middle root is 12 ÷ 6 = 2",
       "Dividing by (x − 2) leaves 2x² − 8x + 6",
       "The roots are 1, 2, 3"
      ],
@@ -57649,7 +57705,7 @@
        ],
        "math": [
         "The roots of 2x³ − 2x = 0 are in arithmetic progression. Solve the equation. Write the roots separated by commas.",
-        "The middle root is 0 ÷ 6 = 0",
+        "The sum of the roots is three times the middle root, so the middle root is 0 ÷ 6 = 0",
         "Dividing by (x − 0) leaves 2x² − 2",
         "The roots are −1, 0, 1"
        ],
@@ -57674,7 +57730,7 @@
        ],
        "math": [
         "The roots of 2x³ + 14x² − 42x − 54 = 0 are in geometric progression. Solve the equation. Write the roots separated by commas.",
-        "The middle root is 54 ÷ 2 = −1",
+        "The product of the roots is 54 ÷ 2 = 27, the cube of the middle root, so the middle root is ∛(27) = −1",
         "Dividing by (x + 1) leaves 2x² + 12x − 54",
         "The roots are −9, −1, 3"
        ],

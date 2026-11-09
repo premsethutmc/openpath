@@ -3,7 +3,7 @@
 Read this file first; open other files only as the task needs them. Keep it under ~50 lines and update it at
 each milestone.
 
-Updated: 2026-11-08 (b20ec49)
+Updated: 2026-11-09 (Grade 8 pilot integration)
 
 ## Rules (product owner)
 - No merge or deploy without the owner's explicit approval. PRs are drafts unless the owner says otherwise.
@@ -13,11 +13,21 @@ Updated: 2026-11-08 (b20ec49)
 
 ## Branches
 - Base for maths work: `consolidation/openpath-candidate` (PR #112 → main, open).
-- Current: `feat/grade7-full-coverage` (draft PR #117, test run only).
+- Current: `feat/grade8-pilot` (draft PR #119, base `feat/grade7-full-coverage` = draft PR #117, Grade 7 green).
 - Others open: #115 `integration/v3-from-112`, #116 `maths-expansion` (blueprints, draft).
 - Research: separate repo `premsethutmc/openpath-research` (research-only, off by default).
 
-## Current milestone: Grade 7 complete, both boards (CBSE, TN)
+## Current milestone: Grade 8 pilot, both boards (runbook `docs/runbooks/GRADE_BUILD.md`)
+- Built by 3 strand builders in parallel, integrated, independently reviewed (22 modules: answer keys all right,
+  ~70% of modules had a major issue), then a platform fix pass and a content/level fix pass.
+- Result: Grade 8 contract violations 57 -> 0; untaught after early mistakes 0 both boards; gap CBSE 48/48,
+  TN 42/43 (+1 awaiting a mark); false step notes platform-wide 11 -> 1 (not Grade 8); lessons' solved examples
+  no longer served as practice while a fresh question exists; no answer, key or option letter changed.
+- Open (engine): (1) order on-grade questions before below-grade ones for a learner (exponents opens with 5^3);
+  (2) hide lesson sections of above-grade families (BPT, segments, (x±a)^3, nPr) for a Grade 8 learner.
+- Deferred: ±1 distractors (would move option letters).
+
+## Previous milestone: Grade 7 complete, both boards (CBSE, TN)
 - Done: 75 modules; 569 lesson sections; every Grade 7 question type taught; simulated learner verifies
   CBSE 43/46, TN 48/50 (rest await an educator mark); inequations stall fixed (contexts@1).
 - Details: `docs/milestones/GRADE7_COVERAGE.md`.
@@ -47,5 +57,7 @@ Synthetic learner, behaviour only. Unmapped outcomes: 0 everywhere. Format: fail
   artifact (also shown in the job summary) instead of the full log.
 
 ## Next
-1. Owner decides on review/merge of #117's branch (Grade 7 green).
-2. Fix open Grade 7 defects above, then the next grade/board per the owner.
+1. Grade 8: CI green, then the two engine items above, then a second independent sample review.
+2. Owner decides on review/merge of #117 / #119.
+3. Next grades per the gap report: TN 1–3 textbook ingestion and the 5 stalls; Grades 9–12; Grades 1–6.
+   Usage: the Grade 8 pilot used ~1.3M tokens and hit the weekly limit; plan parallel builds accordingly.

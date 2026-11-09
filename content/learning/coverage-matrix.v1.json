@@ -43,10 +43,10 @@
    "disputed": 8
   },
   "families": {
-   "count": 1088,
-   "problems": 343845,
+   "count": 1090,
+   "problems": 344263,
    "answerTypes": {
-    "integer": 416,
+    "integer": 418,
     "fraction": 152,
     "set": 27,
     "choice": 170,
@@ -61,8 +61,8 @@
     "roots": 5
    },
    "withPictures": 306,
-   "withEverydayForm": 765,
-   "withAlternatives": 1050
+   "withEverydayForm": 767,
+   "withAlternatives": 1052
   },
   "modules": 338,
   "writtenTasks": 376,
@@ -1794,11 +1794,11 @@
     "review"
    ],
    "families": [
+    "aofund",
     "aonpr",
     "aoncr",
     "aocomm",
     "aomulti",
-    "aofund",
     "aofact",
     "aoncrp",
     "aogeoc",
@@ -4564,7 +4564,8 @@
     "review"
    ],
    "families": [
-    "aieuler"
+    "aieuler",
+    "aipolyc"
    ],
    "writtenTasks": 0,
    "complete": true
@@ -9815,8 +9816,8 @@
     "review"
    ],
    "families": [
-    "anpts",
     "angarr",
+    "anpts",
     "anpow0"
    ],
    "writtenTasks": 2,
@@ -10917,7 +10918,8 @@
     "review"
    ],
    "families": [
-    "akhist"
+    "akhist",
+    "akhtab"
    ],
    "writtenTasks": 1,
    "complete": true
