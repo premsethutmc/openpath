@@ -38,6 +38,7 @@ Updated: 2026-11-09. Milestone: method-alignment expansion and hosted verificati
 - Geometry/foundation regressions: 19 pass; G-02's mixed delayed check correctly stays pending/unverified.
 - Three longer calculus browser journeys pass: method-gap pause → fresh diagnostic re-entry → wrong → reload.
 - All nine existing maths-expansion browser cases pass, including six unchanged delayed-failure/recovery paths.
+- Released-content browser case passes: Grade 10/9 verify; Grade 12 cannot bypass a method gap, re-entry stays unverified.
 
 ## Readiness and remaining limits
 - Local implementation ready for code review; release/merge/deployment are not authorised.

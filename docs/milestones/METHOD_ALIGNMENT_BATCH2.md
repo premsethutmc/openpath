@@ -48,6 +48,8 @@ The existing long calculus browser journeys also assumed every return was retent
 
 The complete maths-expansion browser harness passes all nine cases locally: those three calculus paths plus limits, inequalities, trigonometric equations, geometric sequences, continuity and any-angle trigonometry. The latter six still exercise an actual failed delayed check and fresh recovery, including alternate teaching where the engine selects it.
 
+Hosted Year browser verification exposed one further obsolete assumption in its released-content fixture: a Grade 12 learner was expected to receive arbitrary fresh questions and become verified after substitution teaching. The actual UI correctly paused for missing methods. The focused three-learner case now passes against an isolated real Django database: Grade 10 factorisation and the unfamiliar Grade 9 textbook still reach delayed verification; Grade 12 explicitly pauses despite synthetic content release, preserves all records across reload, returns to a fresh diagnostic question with a genuinely incorrect backend verdict, and remains unverified. Synthetic reviewer roles/releases exist only in test databases; real educator approval stays pending. `year-focused.log` and `year-screens/` contain the evidence.
+
 Not established: educator approval, real-student learning efficacy, physical-device/accessibility audit, all-family method coverage, or a general alternate-solution proof policy. Other explanations remain explicitly unmigrated. New non-calculus routes receive focused selector tests and the existing integrated/Grade 7 CI journeys; no claim is made that every added explanation has a dedicated browser scenario.
 
 Commands from frontend:
