@@ -9780,7 +9780,7 @@
      }
     ]
    },
-   "fingerprint": "3c1d9e4b",
+   "fingerprint": "1ec0545b",
    "validation": {
     "family": "abunit",
     "deterministic": {
@@ -29388,7 +29388,12 @@
       "kind": "conceptual",
       "text": [
        "Draw a square on each side of the triangle. The two smaller squares together have the same area as the big one.",
-       "So the area of the big square is a² + b², and its side is the square root."
+       "So the area of the big square is a² + b², and its side is the square root.",
+       "To find a shorter side, go the other way round, step by step.",
+       "First, square the hypotenuse. That is the area of the big square.",
+       "Then square the shorter side you know and take it away. What is left is the area of the other small square.",
+       "Last, take the square root of what is left. That is the missing side.",
+       "Check: the two smaller squares add up to the big square again."
       ]
      },
      {
@@ -29402,7 +29407,7 @@
      }
     ]
    },
-   "fingerprint": "84ab976e",
+   "fingerprint": "9efe5c3c",
    "validation": {
     "family": "ahpyth",
     "deterministic": {
@@ -75864,7 +75869,7 @@
      }
     ]
    },
-   "fingerprint": "3c39066c",
+   "fingerprint": "7189c514",
    "validation": {
     "family": "atgen",
     "deterministic": {

@@ -108,6 +108,32 @@
    ]
   },
   {
+   "id": "MATH.algebra.algebra-simplify#apples_oranges",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.algebra-simplify",
+   "strategy": "apples_oranges",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:a53a531b081022b8f1daea653dd93c94438732ef78c4049b7501ba0f18450b2e",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.801Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.algebra.algebra-simplify#chapter",
    "subject": "mathematics",
    "competency": "MATH.algebra.algebra-simplify",
@@ -201,6 +227,58 @@
      "knownIssues": [
       "Link a prerequisite item (e.g. −9 − 3 = ?) and show where it appears in a simplification. Otherwise treat it as a routing placeholder, not teaching content."
      ],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.algebra-simplify#colour_groups",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.algebra-simplify",
+   "strategy": "colour_groups",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:ef9cec8bdf6e291b03ee530a804ed28c7ac009dc555dc170cca7df1ad8513166",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.800Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.algebra-simplify#integer_add",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.algebra-simplify",
+   "strategy": "integer_add",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:3097ce4286f95fc6f25c76e486b0d5cd4bb59ca930b9e8fbf8566fbfac803097",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.803Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
      "scope": [
       "demonstration"
      ]
@@ -1726,6 +1804,84 @@
    ]
   },
   {
+   "id": "MATH.algebra.functions#inequality_solving",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.functions",
+   "strategy": "inequality_solving",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:ee576e084279e966f7b064634fc561abff3e43a19e3c1de4b59de4616b280468",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.836Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.functions#interval_notation",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.functions",
+   "strategy": "interval_notation",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:62ce18c8b86e57ea183ec0289d5ca826053a6ff98520c7de3502948df8669b59",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.830Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.functions#restriction_rules",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.functions",
+   "strategy": "restriction_rules",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:46da4d6ed3bde858105fc5bf40d9eff7988d06844bf64458ba92275dda9cee76",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.827Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.algebra.functions#sign-chart",
    "subject": "mathematics",
    "competency": "MATH.algebra.functions",
@@ -2150,6 +2306,32 @@
    ]
   },
   {
+   "id": "MATH.algebra.geometric-sequences#count_multiplications",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.geometric-sequences",
+   "strategy": "count_multiplications",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:24b2dc851501955fbcc45cae8eb161baf6ade5c4f64c88af6b6f3ae8e287830b",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.955Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.algebra.geometric-sequences#list",
    "subject": "mathematics",
    "competency": "MATH.algebra.geometric-sequences",
@@ -2165,6 +2347,58 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.819Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.geometric-sequences#powers_prereq",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.geometric-sequences",
+   "strategy": "powers_prereq",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:941ae59f5c011902378cbb4cbc1172721bd5da350927f31c904d011e0647d5f0",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.955Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.geometric-sequences#ratio_then_power",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.geometric-sequences",
+   "strategy": "ratio_then_power",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:bb7e81ce5933d751312d7e1f6c6dd52fa2d785d2071d837ca851c1ba1c4cc1e4",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.955Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -2928,6 +3162,58 @@
    ]
   },
   {
+   "id": "MATH.algebra.inequalities#flip_rule",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.inequalities",
+   "strategy": "flip_rule",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:6854c79c12a4033c4ff8527cd8b91dd98dda2ee7d973017b2cd94b9b03cdc10d",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.792Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.inequalities#solve_steps",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.inequalities",
+   "strategy": "solve_steps",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:64e906d4e67547b05682e67cba4bf72afa3e568ca5921962ca5580b976d781be",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.792Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.algebra.inequalities#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.algebra.inequalities",
@@ -2966,6 +3252,32 @@
       "demonstration"
      ],
      "supersedes": "sha256:66040cd7822b2fb9dc7d8cb2733cf44e3b0db978802f785367162702522b67a5"
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.inequalities#test_number",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.inequalities",
+   "strategy": "test_number",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:a5b49b35d781337140ace2e6170ffd5e011d9cd79343d173d159e98ebe08c231",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.793Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
     }
    ]
   },
@@ -4522,6 +4834,22 @@
       "demonstration"
      ],
      "supersedes": "sha256:878cb7f94c66853cf1d0ba8038e9bebcfe42fb9767d9805a6b23ee2779f20fb6"
+    },
+    {
+     "contentHash": "sha256:16dabbde72eae77d60d05a9be8c99aad12c396455f02d8539271c6f171da9746",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-09T14:59:36.092Z",
+      "note": "content changed: the decision on sha256:30b6f10ca867 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:30b6f10ca8675b1d9d1230c31d3221b4f17d9ce97b57360ae0c675b15a083d14"
     }
    ]
   },
@@ -4571,6 +4899,58 @@
    ]
   },
   {
+   "id": "MATH.algebra.linear-rational#integer_sub",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-rational",
+   "strategy": "integer_sub",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:e7d0311cc91a2bc2379b63f924640bebe62e70b9fa94d4dc38124c8de07d937e",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.819Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-rational#negative_rules",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-rational",
+   "strategy": "negative_rules",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:79366c735781cc6a1079acd078c48dfb2945c199f7f7f33ddf8eab48f65a1a10",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.819Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.algebra.linear-rational#number_line_check",
    "subject": "mathematics",
    "competency": "MATH.algebra.linear-rational",
@@ -4612,6 +4992,32 @@
       "demonstration"
      ],
      "supersedes": "sha256:cf29f3938bbc7542e14cf52f4bdc4ce4f0ce70ef72b765c5f1afb869e2346ca1"
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.linear-rational#same_both_sides",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.linear-rational",
+   "strategy": "same_both_sides",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:333a258ed87642e98915e37de91585994214820e738d13116451eb1997f1ac0c",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.819Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
     }
    ]
   },
@@ -5241,6 +5647,84 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.826Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.logarithms#factorise_number",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.logarithms",
+   "strategy": "factorise_number",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:cc52f3b8163f56fef273ef2f09ad61e6a56f81ea6f5170d15ae8d2b4e457197f",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.855Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.logarithms#log_ten",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.logarithms",
+   "strategy": "log_ten",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:941f153eca15e6efc092ca91c0c71f1dae7a27b95c4f9d543c4620a91f0eefef",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.857Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.algebra.logarithms#powers_of_ten",
+   "subject": "mathematics",
+   "competency": "MATH.algebra.logarithms",
+   "strategy": "powers_of_ten",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:f00556a7ba44217ad092d75006cd47dec2c03631d223dfba1e178c25005886c7",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.863Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -9244,6 +9728,58 @@
    ]
   },
   {
+   "id": "MATH.calculus.applications#derivative_sign",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.applications",
+   "strategy": "derivative_sign",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:b6719db3bed8dd61c74ee426399c286affc3b0363ba27e0f45d916f6fd9b467b",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.891Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.calculus.applications#factorise_derivative",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.applications",
+   "strategy": "factorise_derivative",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:12252bf6387054cc58b4cc8bb1b4216f84b7f6a699eeb4a64e8ced9e85b39e54",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.894Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.calculus.applications#sign_chart",
    "subject": "mathematics",
    "competency": "MATH.calculus.applications",
@@ -9578,6 +10114,32 @@
    ]
   },
   {
+   "id": "MATH.calculus.continuity#left_equals_right",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.continuity",
+   "strategy": "left_equals_right",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:7e68bf46d34a3b86786f2c5c369f119b852c6bcf710df5492176c0bb05540234",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.957Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.calculus.continuity#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.calculus.continuity",
@@ -9616,6 +10178,58 @@
       "demonstration"
      ],
      "supersedes": "sha256:168d544706eab05b92a6f53be3f0579c2aa7314d6252cf529ad456525b9aec2b"
+    }
+   ]
+  },
+  {
+   "id": "MATH.calculus.continuity#standard_limits",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.continuity",
+   "strategy": "standard_limits",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:30c23c5e599b44ec3b52200857c2295ae8204d1430c19c97194db8d662f67bf2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.958Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.calculus.continuity#why_continuous",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.continuity",
+   "strategy": "why_continuous",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:a499c47edf86bc780fdbdb30df73f57d25d0953d18ce8c0e1eefb7013ca9bede",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.957Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
     }
    ]
   },
@@ -10146,6 +10760,106 @@
    ]
   },
   {
+   "id": "MATH.calculus.derivatives#expand_cancel",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.derivatives",
+   "strategy": "expand_cancel",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:7bb30e113c14df6e8d5278cd0bb0a3265df16420ddb96c0b4731575806271c94",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.806Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    },
+    {
+     "contentHash": "sha256:ed1163d1411be44023768d152ee36fbad926a69d6dad297643093637ffcb8bf4",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T15:37:56.873Z",
+      "note": "content changed: the decision on sha256:7bb30e113c14 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:7bb30e113c14df6e8d5278cd0bb0a3265df16420ddb96c0b4731575806271c94"
+    },
+    {
+     "contentHash": "sha256:84207021e20331b9dc44ec069502921b703d31dfa804975b7820d4bfdc6acfab",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T15:49:52.791Z",
+      "note": "content changed: the decision on sha256:ed1163d1411b (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:ed1163d1411be44023768d152ee36fbad926a69d6dad297643093637ffcb8bf4"
+    }
+   ]
+  },
+  {
+   "id": "MATH.calculus.derivatives#expansion_check",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.derivatives",
+   "strategy": "expansion_check",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:1c789a65d08b407a4e548bfe80667f68e24e3fe083df0bb12532ca85191cfaf6",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.807Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    },
+    {
+     "contentHash": "sha256:35cb46509416a423c97bb155c01e2d6586d592cd6651f3aeb1bdb86c9e63af7b",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T15:37:56.875Z",
+      "note": "content changed: the decision on sha256:1c789a65d08b (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:1c789a65d08b407a4e548bfe80667f68e24e3fe083df0bb12532ca85191cfaf6"
+    }
+   ]
+  },
+  {
    "id": "MATH.calculus.derivatives#numbers",
    "subject": "mathematics",
    "competency": "MATH.calculus.derivatives",
@@ -10226,6 +10940,48 @@
       "demonstration"
      ],
      "supersedes": "sha256:da8d7887f6bcf253296c7bcd831230f928608c0807fa70a6a3bc9963ecb4f798"
+    }
+   ]
+  },
+  {
+   "id": "MATH.calculus.derivatives#why_limit",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.derivatives",
+   "strategy": "why_limit",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:90b9ef742e59f4522ade9485ab2064b2519e485b0969a91eef2fbb9b53fc3f2e",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.806Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    },
+    {
+     "contentHash": "sha256:2031fbc855013f685b678f268046d8168ee2ea1398f249aa8d655f0c17474b34",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T15:37:56.874Z",
+      "note": "content changed: the decision on sha256:90b9ef742e59 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:90b9ef742e59f4522ade9485ab2064b2519e485b0969a91eef2fbb9b53fc3f2e"
     }
    ]
   },
@@ -10480,6 +11236,58 @@
    ]
   },
   {
+   "id": "MATH.calculus.differential-equations#log_integral",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.differential-equations",
+   "strategy": "log_integral",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:5b8da5e699b763aac790ae9efd08795ce849a815d16eee5628b6c283dd8731a7",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.913Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.calculus.differential-equations#separate_integrate",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.differential-equations",
+   "strategy": "separate_integrate",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:b597ab60a0a196b4ab07beb5037fbb38fb45f7400cf93d4b0097ac9fba831240",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.909Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.calculus.differential-equations#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.calculus.differential-equations",
@@ -10518,6 +11326,32 @@
       "demonstration"
      ],
      "supersedes": "sha256:2169966a0d23273beb0a4970c31aa422265e6f50ce9ed9b33387666b7d8e8f66"
+    }
+   ]
+  },
+  {
+   "id": "MATH.calculus.differential-equations#why_separate",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.differential-equations",
+   "strategy": "why_separate",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:12e528dba5601d0a18d55179296c7e4475fb017b9ebbbaeb5fb00c57cf51ca77",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.910Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
     }
    ]
   },
@@ -11496,6 +12330,32 @@
    ]
   },
   {
+   "id": "MATH.calculus.limits#check_factoring",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.limits",
+   "strategy": "check_factoring",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:4e991fb3fb957b5b649f6097bd831280cd91dd5f7e8c29c11e0b0b37932e2416",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.914Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.calculus.limits#check_what_it_uses",
    "subject": "mathematics",
    "competency": "MATH.calculus.limits",
@@ -11511,6 +12371,32 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.194Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.calculus.limits#difference_of_squares",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.limits",
+   "strategy": "difference_of_squares",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:600e3aa89fd20d06ff0fa46314ccbdf80c6905c071e79bc3984fac41662a62d7",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.914Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -11560,6 +12446,32 @@
       "demonstration"
      ],
      "supersedes": "sha256:9cf43e838d74bc8663d355d9be0d375170892085f10c644c6e849e9662d86178"
+    }
+   ]
+  },
+  {
+   "id": "MATH.calculus.limits#substitute_after",
+   "subject": "mathematics",
+   "competency": "MATH.calculus.limits",
+   "strategy": "substitute_after",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:08d6dc9e47408b21256ca7ccecb8c7d1d8c38b585afbe111d82e435c2537ca7a",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.914Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
     }
    ]
   },
@@ -14648,6 +15560,32 @@
    ]
   },
   {
+   "id": "MATH.geometry.angle-pairs#adjacent_linear_pair",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.angle-pairs",
+   "strategy": "adjacent_linear_pair",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:e48431ebbdf8b35112c3c552ec3d9227b2178af3eceb97cb02db7ab2196485d2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.981Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.geometry.angle-pairs#chapter",
    "subject": "mathematics",
    "competency": "MATH.geometry.angle-pairs",
@@ -14686,6 +15624,32 @@
       "demonstration"
      ],
      "supersedes": "sha256:019fafcc333765c92ec2a441ce0b30a853d18b52604f82b0474c37abd8547629"
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.angle-pairs#complementary_angles",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.angle-pairs",
+   "strategy": "complementary_angles",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:f4a40ccef489e1d46754645299140091ed2102cc0b88eff594c5c021c17f5dc4",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.980Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
     }
    ]
   },
@@ -14758,6 +15722,32 @@
    ]
   },
   {
+   "id": "MATH.geometry.angle-pairs#other_three_angles",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.angle-pairs",
+   "strategy": "other_three_angles",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:3ba9659ebc06293f29c63b4d4fb86a85a58136adcd68c93cc9e3f6bec3367da1",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.981Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.geometry.angle-pairs#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.geometry.angle-pairs",
@@ -14773,6 +15763,32 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.349Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.angle-pairs#supplementary_angles",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.angle-pairs",
+   "strategy": "supplementary_angles",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:10480a99cf3b55a25414730035837fa10497343819b3581277715e642d2d3616",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.980Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -17798,6 +18814,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:249d0b22680c68914959c893526e3d99d5f1ccace0b3e7201e3f6a7b8fc97726",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-09T16:16:35.459Z",
+      "note": "content changed: the decision on sha256:7aebb39ff3bf (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:9dcf0fa47594dcabdbd70b56619818fba5280eb7c69127efed5cf884038d0888"
     }
    ]
   },
@@ -20313,6 +21345,58 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-11-04T02:10:01.653Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.triangle-properties#isosceles_base",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.triangle-properties",
+   "strategy": "isosceles_base",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:4058e8af29da82573ef4598098dc7366c2fa56ef3f6e5f185fffb199b94748e2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.978Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.triangle-properties#isosceles_vertex",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.triangle-properties",
+   "strategy": "isosceles_vertex",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:e42c164ca326ef9f1b20b86650f9c171e8ea20e43c8bd282b1cb380612ded632",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-05T03:43:25.978Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -46384,6 +47468,32 @@
    ]
   },
   {
+   "id": "MATH.trigonometry.compound-angle-identities#sign_in_formula",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.compound-angle-identities",
+   "strategy": "sign_in_formula",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:d919dc3e9be495a2046685439ba573ba927150e63533052a78fbd0d83f554ef5",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.879Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.trigonometry.compound-angle-identities#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.trigonometry.compound-angle-identities",
@@ -46426,6 +47536,32 @@
    ]
   },
   {
+   "id": "MATH.trigonometry.compound-angle-identities#surd_multiply",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.compound-angle-identities",
+   "strategy": "surd_multiply",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:16159730830c15d669184b49e6bd1437aed0c0ca6fc274449d86a577ae8589c8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.881Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.trigonometry.compound-angle-identities#unit_circle",
    "subject": "mathematics",
    "competency": "MATH.trigonometry.compound-angle-identities",
@@ -46441,6 +47577,32 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:18.221Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.compound-angle-identities#values_first",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.compound-angle-identities",
+   "strategy": "values_first",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:f31d68b6ad6adb6636761210ccf1aaa571772b650fe0b76544902636ae7837e7",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.879Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -46572,6 +47734,84 @@
    ]
   },
   {
+   "id": "MATH.trigonometry.equations#quadrant_diagram",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.equations",
+   "strategy": "quadrant_diagram",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:a107f8a423b853bbf9d39ae56fb7890e0366bda3c692f52638e3697bea6613ed",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.917Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.equations#radians_check",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.equations",
+   "strategy": "radians_check",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:09b1a9c18889c1dde53a5e7778aa297619feb4e9fbae4c8a81083a278c6b239c",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.919Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.equations#reference_then_place",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.equations",
+   "strategy": "reference_then_place",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:f476b673b4dbcc7c3c3e8ca29292c696be2639768357255755b419dd55209e44",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.918Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.trigonometry.equations#spot_the_mistake",
    "subject": "mathematics",
    "competency": "MATH.trigonometry.equations",
@@ -46666,6 +47906,32 @@
    ]
   },
   {
+   "id": "MATH.trigonometry.functions#astc",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.functions",
+   "strategy": "astc",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:6b26beaa15545f8ca0487cb3c0ba0d14672a21e89954972c9d2c2fd4fd5262d8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.965Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.trigonometry.functions#chapter",
    "subject": "mathematics",
    "competency": "MATH.trigonometry.functions",
@@ -46723,6 +47989,58 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:18.235Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.functions#reduce_then_sign",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.functions",
+   "strategy": "reduce_then_sign",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:b4d7e9c83423be7ef743624fda00b67d225030ec7dca81144ba5dd59a3aa0fd8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.964Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.functions#special_values",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.functions",
+   "strategy": "special_values",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:e1453dccfc2d99e380d0db433870dfbe9effb1f5fc293c4208c682ff411ba242",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.967Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -46932,6 +48250,32 @@
    ]
   },
   {
+   "id": "MATH.trigonometry.identities#add_subtract",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.identities",
+   "strategy": "add_subtract",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:fb1131a3b80e377f18b2466bb944fc2347f60d9cc6f3b66361f04c4fb1e91922",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.813Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.trigonometry.identities#chapter",
    "subject": "mathematics",
    "competency": "MATH.trigonometry.identities",
@@ -46970,6 +48314,58 @@
       "demonstration"
      ],
      "supersedes": "sha256:7d7736d0fbc80c741ca1c8fb86334a2203b6a680e6be4bcdeeca28046857582c"
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.identities#fraction_arithmetic",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.identities",
+   "strategy": "fraction_arithmetic",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:95672ceb13dfbc5a1fe6e7ae7a39f4ac5efef57940a4e90e420a004130b0ebbe",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.813Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.identities#reciprocal_pair",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.identities",
+   "strategy": "reciprocal_pair",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:196bc6be277112343c5775a5ee5a86839c9015c6a3b562a13b2615355a1e0d47",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.813Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
     }
    ]
   },
@@ -47229,6 +48625,84 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:18.237Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.radians#landmark_angles",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.radians",
+   "strategy": "landmark_angles",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:79c6cb43043c2c44e8ebe883e58cc3d2c6cd0da4a1b992cd6fe4556c70c0cf4d",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.810Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.radians#multiply_simplify",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.radians",
+   "strategy": "multiply_simplify",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:c9fb2012293f6f38a2a73a884b9e1ef2c33da699ffb4c1ea87c86e2ef43b5e5f",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.810Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.radians#simplify_fraction",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.radians",
+   "strategy": "simplify_fraction",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:a4684d4d3cf541155c6ae9c8d497839a4658798ad368320a8c67a3de4867ddce",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.811Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -47547,6 +49021,84 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:18.241Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.triangle-laws#exact_sin_values",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.triangle-laws",
+   "strategy": "exact_sin_values",
+   "intervention": "prerequisite",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:d71a4fabfd04cd767184a504cba2e0336a915806f189f330d5e9eb6f31c3a06e",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.818Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.triangle-laws#obtuse_angle",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.triangle-laws",
+   "strategy": "obtuse_angle",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:357713ed2243c8fbfe379a52caa485deb8d2342c736ea385af435a92a08f1c7a",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.817Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.trigonometry.triangle-laws#set_up_proportion",
+   "subject": "mathematics",
+   "competency": "MATH.trigonometry.triangle-laws",
+   "strategy": "set_up_proportion",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:99b14464f109402fa7316d7a84e6e657788bc4043b230e4999f1b77d88241ae8",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-08T05:27:09.817Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",
@@ -48109,1526 +49661,6 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:18.258Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.algebra-simplify#apples_oranges",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.algebra-simplify",
-   "strategy": "apples_oranges",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:a53a531b081022b8f1daea653dd93c94438732ef78c4049b7501ba0f18450b2e",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.801Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.algebra-simplify#colour_groups",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.algebra-simplify",
-   "strategy": "colour_groups",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:ef9cec8bdf6e291b03ee530a804ed28c7ac009dc555dc170cca7df1ad8513166",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.800Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.algebra-simplify#integer_add",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.algebra-simplify",
-   "strategy": "integer_add",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:3097ce4286f95fc6f25c76e486b0d5cd4bb59ca930b9e8fbf8566fbfac803097",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.803Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.functions#inequality_solving",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.functions",
-   "strategy": "inequality_solving",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:ee576e084279e966f7b064634fc561abff3e43a19e3c1de4b59de4616b280468",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.836Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.functions#interval_notation",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.functions",
-   "strategy": "interval_notation",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:62ce18c8b86e57ea183ec0289d5ca826053a6ff98520c7de3502948df8669b59",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.830Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.functions#restriction_rules",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.functions",
-   "strategy": "restriction_rules",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:46da4d6ed3bde858105fc5bf40d9eff7988d06844bf64458ba92275dda9cee76",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.827Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.geometric-sequences#count_multiplications",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.geometric-sequences",
-   "strategy": "count_multiplications",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:24b2dc851501955fbcc45cae8eb161baf6ade5c4f64c88af6b6f3ae8e287830b",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.955Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.geometric-sequences#powers_prereq",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.geometric-sequences",
-   "strategy": "powers_prereq",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:941ae59f5c011902378cbb4cbc1172721bd5da350927f31c904d011e0647d5f0",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.955Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.geometric-sequences#ratio_then_power",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.geometric-sequences",
-   "strategy": "ratio_then_power",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:bb7e81ce5933d751312d7e1f6c6dd52fa2d785d2071d837ca851c1ba1c4cc1e4",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.955Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.inequalities#flip_rule",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.inequalities",
-   "strategy": "flip_rule",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:6854c79c12a4033c4ff8527cd8b91dd98dda2ee7d973017b2cd94b9b03cdc10d",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.792Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.inequalities#solve_steps",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.inequalities",
-   "strategy": "solve_steps",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:64e906d4e67547b05682e67cba4bf72afa3e568ca5921962ca5580b976d781be",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.792Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.inequalities#test_number",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.inequalities",
-   "strategy": "test_number",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:a5b49b35d781337140ace2e6170ffd5e011d9cd79343d173d159e98ebe08c231",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.793Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.linear-rational#integer_sub",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.linear-rational",
-   "strategy": "integer_sub",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:e7d0311cc91a2bc2379b63f924640bebe62e70b9fa94d4dc38124c8de07d937e",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.819Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.linear-rational#negative_rules",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.linear-rational",
-   "strategy": "negative_rules",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:79366c735781cc6a1079acd078c48dfb2945c199f7f7f33ddf8eab48f65a1a10",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.819Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.linear-rational#same_both_sides",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.linear-rational",
-   "strategy": "same_both_sides",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:333a258ed87642e98915e37de91585994214820e738d13116451eb1997f1ac0c",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.819Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.logarithms#factorise_number",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.logarithms",
-   "strategy": "factorise_number",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:cc52f3b8163f56fef273ef2f09ad61e6a56f81ea6f5170d15ae8d2b4e457197f",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.855Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.logarithms#log_ten",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.logarithms",
-   "strategy": "log_ten",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:941f153eca15e6efc092ca91c0c71f1dae7a27b95c4f9d543c4620a91f0eefef",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.857Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.algebra.logarithms#powers_of_ten",
-   "subject": "mathematics",
-   "competency": "MATH.algebra.logarithms",
-   "strategy": "powers_of_ten",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:f00556a7ba44217ad092d75006cd47dec2c03631d223dfba1e178c25005886c7",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.863Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.applications#derivative_sign",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.applications",
-   "strategy": "derivative_sign",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:b6719db3bed8dd61c74ee426399c286affc3b0363ba27e0f45d916f6fd9b467b",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.891Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.applications#factorise_derivative",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.applications",
-   "strategy": "factorise_derivative",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:12252bf6387054cc58b4cc8bb1b4216f84b7f6a699eeb4a64e8ced9e85b39e54",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.894Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.continuity#left_equals_right",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.continuity",
-   "strategy": "left_equals_right",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:7e68bf46d34a3b86786f2c5c369f119b852c6bcf710df5492176c0bb05540234",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.957Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.continuity#standard_limits",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.continuity",
-   "strategy": "standard_limits",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:30c23c5e599b44ec3b52200857c2295ae8204d1430c19c97194db8d662f67bf2",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.958Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.continuity#why_continuous",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.continuity",
-   "strategy": "why_continuous",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:a499c47edf86bc780fdbdb30df73f57d25d0953d18ce8c0e1eefb7013ca9bede",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.957Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.derivatives#expand_cancel",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.derivatives",
-   "strategy": "expand_cancel",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:7bb30e113c14df6e8d5278cd0bb0a3265df16420ddb96c0b4731575806271c94",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.806Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    },
-    {
-     "contentHash": "sha256:ed1163d1411be44023768d152ee36fbad926a69d6dad297643093637ffcb8bf4",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T15:37:56.873Z",
-      "note": "content changed: the decision on sha256:7bb30e113c14 (pending_review) no longer applies; review again"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ],
-     "supersedes": "sha256:7bb30e113c14df6e8d5278cd0bb0a3265df16420ddb96c0b4731575806271c94"
-    },
-    {
-     "contentHash": "sha256:84207021e20331b9dc44ec069502921b703d31dfa804975b7820d4bfdc6acfab",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T15:49:52.791Z",
-      "note": "content changed: the decision on sha256:ed1163d1411b (pending_review) no longer applies; review again"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ],
-     "supersedes": "sha256:ed1163d1411be44023768d152ee36fbad926a69d6dad297643093637ffcb8bf4"
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.derivatives#expansion_check",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.derivatives",
-   "strategy": "expansion_check",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:1c789a65d08b407a4e548bfe80667f68e24e3fe083df0bb12532ca85191cfaf6",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.807Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    },
-    {
-     "contentHash": "sha256:35cb46509416a423c97bb155c01e2d6586d592cd6651f3aeb1bdb86c9e63af7b",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T15:37:56.875Z",
-      "note": "content changed: the decision on sha256:1c789a65d08b (pending_review) no longer applies; review again"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ],
-     "supersedes": "sha256:1c789a65d08b407a4e548bfe80667f68e24e3fe083df0bb12532ca85191cfaf6"
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.derivatives#why_limit",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.derivatives",
-   "strategy": "why_limit",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:90b9ef742e59f4522ade9485ab2064b2519e485b0969a91eef2fbb9b53fc3f2e",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.806Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    },
-    {
-     "contentHash": "sha256:2031fbc855013f685b678f268046d8168ee2ea1398f249aa8d655f0c17474b34",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T15:37:56.874Z",
-      "note": "content changed: the decision on sha256:90b9ef742e59 (pending_review) no longer applies; review again"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ],
-     "supersedes": "sha256:90b9ef742e59f4522ade9485ab2064b2519e485b0969a91eef2fbb9b53fc3f2e"
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.differential-equations#log_integral",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.differential-equations",
-   "strategy": "log_integral",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:5b8da5e699b763aac790ae9efd08795ce849a815d16eee5628b6c283dd8731a7",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.913Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.differential-equations#separate_integrate",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.differential-equations",
-   "strategy": "separate_integrate",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:b597ab60a0a196b4ab07beb5037fbb38fb45f7400cf93d4b0097ac9fba831240",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.909Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.differential-equations#why_separate",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.differential-equations",
-   "strategy": "why_separate",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:12e528dba5601d0a18d55179296c7e4475fb017b9ebbbaeb5fb00c57cf51ca77",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.910Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.limits#check_factoring",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.limits",
-   "strategy": "check_factoring",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:4e991fb3fb957b5b649f6097bd831280cd91dd5f7e8c29c11e0b0b37932e2416",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.914Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.limits#difference_of_squares",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.limits",
-   "strategy": "difference_of_squares",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:600e3aa89fd20d06ff0fa46314ccbdf80c6905c071e79bc3984fac41662a62d7",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.914Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.calculus.limits#substitute_after",
-   "subject": "mathematics",
-   "competency": "MATH.calculus.limits",
-   "strategy": "substitute_after",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:08d6dc9e47408b21256ca7ccecb8c7d1d8c38b585afbe111d82e435c2537ca7a",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.914Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.geometry.angle-pairs#adjacent_linear_pair",
-   "subject": "mathematics",
-   "competency": "MATH.geometry.angle-pairs",
-   "strategy": "adjacent_linear_pair",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:e48431ebbdf8b35112c3c552ec3d9227b2178af3eceb97cb02db7ab2196485d2",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-05T03:43:25.981Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.geometry.angle-pairs#complementary_angles",
-   "subject": "mathematics",
-   "competency": "MATH.geometry.angle-pairs",
-   "strategy": "complementary_angles",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:f4a40ccef489e1d46754645299140091ed2102cc0b88eff594c5c021c17f5dc4",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-05T03:43:25.980Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.geometry.angle-pairs#other_three_angles",
-   "subject": "mathematics",
-   "competency": "MATH.geometry.angle-pairs",
-   "strategy": "other_three_angles",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:3ba9659ebc06293f29c63b4d4fb86a85a58136adcd68c93cc9e3f6bec3367da1",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-05T03:43:25.981Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.geometry.angle-pairs#supplementary_angles",
-   "subject": "mathematics",
-   "competency": "MATH.geometry.angle-pairs",
-   "strategy": "supplementary_angles",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:10480a99cf3b55a25414730035837fa10497343819b3581277715e642d2d3616",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-05T03:43:25.980Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.geometry.triangle-properties#isosceles_base",
-   "subject": "mathematics",
-   "competency": "MATH.geometry.triangle-properties",
-   "strategy": "isosceles_base",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:4058e8af29da82573ef4598098dc7366c2fa56ef3f6e5f185fffb199b94748e2",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-05T03:43:25.978Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.geometry.triangle-properties#isosceles_vertex",
-   "subject": "mathematics",
-   "competency": "MATH.geometry.triangle-properties",
-   "strategy": "isosceles_vertex",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:e42c164ca326ef9f1b20b86650f9c171e8ea20e43c8bd282b1cb380612ded632",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-05T03:43:25.978Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.compound-angle-identities#sign_in_formula",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.compound-angle-identities",
-   "strategy": "sign_in_formula",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:d919dc3e9be495a2046685439ba573ba927150e63533052a78fbd0d83f554ef5",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.879Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.compound-angle-identities#surd_multiply",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.compound-angle-identities",
-   "strategy": "surd_multiply",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:16159730830c15d669184b49e6bd1437aed0c0ca6fc274449d86a577ae8589c8",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.881Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.compound-angle-identities#values_first",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.compound-angle-identities",
-   "strategy": "values_first",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:f31d68b6ad6adb6636761210ccf1aaa571772b650fe0b76544902636ae7837e7",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.879Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.equations#quadrant_diagram",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.equations",
-   "strategy": "quadrant_diagram",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:a107f8a423b853bbf9d39ae56fb7890e0366bda3c692f52638e3697bea6613ed",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.917Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.equations#radians_check",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.equations",
-   "strategy": "radians_check",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:09b1a9c18889c1dde53a5e7778aa297619feb4e9fbae4c8a81083a278c6b239c",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.919Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.equations#reference_then_place",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.equations",
-   "strategy": "reference_then_place",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:f476b673b4dbcc7c3c3e8ca29292c696be2639768357255755b419dd55209e44",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.918Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.functions#astc",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.functions",
-   "strategy": "astc",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:6b26beaa15545f8ca0487cb3c0ba0d14672a21e89954972c9d2c2fd4fd5262d8",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.965Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.functions#reduce_then_sign",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.functions",
-   "strategy": "reduce_then_sign",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:b4d7e9c83423be7ef743624fda00b67d225030ec7dca81144ba5dd59a3aa0fd8",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.964Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.functions#special_values",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.functions",
-   "strategy": "special_values",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:e1453dccfc2d99e380d0db433870dfbe9effb1f5fc293c4208c682ff411ba242",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.967Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.identities#add_subtract",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.identities",
-   "strategy": "add_subtract",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:fb1131a3b80e377f18b2466bb944fc2347f60d9cc6f3b66361f04c4fb1e91922",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.813Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.identities#fraction_arithmetic",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.identities",
-   "strategy": "fraction_arithmetic",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:95672ceb13dfbc5a1fe6e7ae7a39f4ac5efef57940a4e90e420a004130b0ebbe",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.813Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.identities#reciprocal_pair",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.identities",
-   "strategy": "reciprocal_pair",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:196bc6be277112343c5775a5ee5a86839c9015c6a3b562a13b2615355a1e0d47",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.813Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.radians#landmark_angles",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.radians",
-   "strategy": "landmark_angles",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:79c6cb43043c2c44e8ebe883e58cc3d2c6cd0da4a1b992cd6fe4556c70c0cf4d",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.810Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.radians#multiply_simplify",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.radians",
-   "strategy": "multiply_simplify",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:c9fb2012293f6f38a2a73a884b9e1ef2c33da699ffb4c1ea87c86e2ef43b5e5f",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.810Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.radians#simplify_fraction",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.radians",
-   "strategy": "simplify_fraction",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:a4684d4d3cf541155c6ae9c8d497839a4658798ad368320a8c67a3de4867ddce",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.811Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.triangle-laws#exact_sin_values",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.triangle-laws",
-   "strategy": "exact_sin_values",
-   "intervention": "prerequisite",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:d71a4fabfd04cd767184a504cba2e0336a915806f189f330d5e9eb6f31c3a06e",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.818Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.triangle-laws#obtuse_angle",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.triangle-laws",
-   "strategy": "obtuse_angle",
-   "intervention": "conceptual",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:357713ed2243c8fbfe379a52caa485deb8d2342c736ea385af435a92a08f1c7a",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.817Z",
-      "note": "registered: not yet screened or reviewed"
-     },
-     "reviewerRole": "none",
-     "knownIssues": [],
-     "scope": [
-      "demonstration"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "MATH.trigonometry.triangle-laws#set_up_proportion",
-   "subject": "mathematics",
-   "competency": "MATH.trigonometry.triangle-laws",
-   "strategy": "set_up_proportion",
-   "intervention": "procedural",
-   "misconceptionSpecific": false,
-   "addresses": null,
-   "revisions": [
-    {
-     "contentHash": "sha256:99b14464f109402fa7316d7a84e6e657788bc4043b230e4999f1b77d88241ae8",
-     "status": "pending_review",
-     "provenance": {
-      "source": "registry",
-      "by": "explanation-review sync",
-      "at": "2026-11-08T05:27:09.817Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",

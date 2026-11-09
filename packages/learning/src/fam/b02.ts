@@ -1551,7 +1551,8 @@ const LEN_UNITS: [string, string][] = [
   ["the road from Chennai to Madurai", "km"], ["a long train journey", "km"], ["a marathon", "km"], ["the distance to the next town", "km"], ["the river Kaveri", "km"], ["a flight from Delhi to Mumbai", "km"], ["the beach road along the coast of Chennai", "km"], ["a bus route across the city", "km"], ["a cycle trip to the next village", "km"], ["the road from Ooty to Coimbatore", "km"],
 ];
 const lenThing = (i: number) => (LEN_UNITS[i][0].startsWith("the ") ? LEN_UNITS[i][0] : `the length of ${LEN_UNITS[i][0]}`);
-const LEN_SIZE: Record<string, [number, number]> = { mm: [0, 10], cm: [1, 100], m: [100, 100000], km: [100000, 1e12] };
+// choice@1: the ranges meet without overlapping (mm and cm overlapped from 1 to 10 cm, so the check accepted mm for a stick of chalk)
+const LEN_SIZE: Record<string, [number, number]> = { mm: [0, 1], cm: [1, 100], m: [100, 100000], km: [100000, 1e12] };
 /** Typical lengths in cm, for the check: the unit whose range holds it. */
 const LEN_CM = [0.2, 0.4, 0.05, 0.6, 0.1, 0.5, 0.05, 0.2, 0.15, 0.08, 17, 25, 18, 22, 20, 15, 18, 8, 15, 25, 900, 550, 2000, 1500, 2500, 3000, 1200, 250, 400, 10000, 46000000, 30000000, 4200000, 2000000, 80000000, 110000000, 1300000, 1500000, 500000, 8500000];
 const TOOLS = ["a 30 cm ruler", "a measuring tape (metre tape)", "the odometer (distance meter) of the vehicle"];

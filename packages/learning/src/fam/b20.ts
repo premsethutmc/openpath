@@ -533,17 +533,6 @@ const genForm = (kind: number, betaN: number, betaD: number, k: number) => {
   const sg = betaN < 0 ? "−" : "+";
   return [`x = ${nTerm(1, k)} + (−1)ⁿ(${b}), n ∈ ℤ`, `x = ${nTerm(2, k)} ± ${ab}, n ∈ ℤ`, `x = ${nTerm(1, k)} ${sg} ${ab}, n ∈ ℤ`, `x = ${nTerm(2, k)} ${sg} ${ab}, n ∈ ℤ`][kind];
 };
-/** The solutions a general-solution form gives, for n from −m to m (radians). */
-const genSet = (kind: number, beta: number, k: number, m = 12) => {
-  const out: number[] = [];
-  for (let n = -m; n <= m; n++) {
-    if (kind === 0) out.push((n * Math.PI) / k + (n % 2 ? -beta : beta));
-    else if (kind === 1) out.push((2 * n * Math.PI) / k + beta, (2 * n * Math.PI) / k - beta);
-    else if (kind === 2) out.push((n * Math.PI) / k + beta);
-    else out.push((2 * n * Math.PI) / k + beta);
-  }
-  return out;
-};
 
 const D_VAL: [number, number][] = [[0, 5], [-48, 72]];
 const K_VAL = ([f, m]: number[]) => {
@@ -1749,30 +1738,26 @@ export const B20: Def[] = [
       return { steps: [st("principal", "evaluate", INV, [FN[f], e.t], piStr(e.a, 180)), st("general", "solve", EQN, [FN[f], k], ans)], answer: ans };
     },
     // independent: list the solutions each option gives and compare with roots found numerically in [−π, π]
+    // choice@1 (independent): the solutions of f(y) = value in one turn (y = kx, whole degrees: every standard value's solutions
+    // are whole degrees, two in a turn), found by trying each degree; an option is right when the angles it gives in a turn are
+    // exactly those. Exact and engine-independent: the earlier sign-change scan on a 24,000-point grid missed roots that fall on a
+    // grid point (−3π/8, π/3, …), so it accepted options missing half the solutions (8 of 108 questions; never the key, which is
+    // what marking uses), and Node and Bun disagreed on two more.
     validate: (p, v) => {
-      const [f, vi, k] = p;
-      if (typeof v !== "number" || v < 0 || v > 3) return false;
-      const kind = genOrder(p)[v];
+      const [f, vi] = p;
+      if (typeof v !== "number" || !Number.isInteger(v) || v < 0 || v > 3) return false;
       const e = GENV[f][vi];
-      const beta = deg(e.a) / k;
-      const sols = genSet(kind, beta, k);
-      const g = (x: number) => fNum(f, k * x) - e.v;
-      if (!sols.every((x) => Math.abs(g(x)) < 1e-7)) return false;
-      const N = 24000;
-      for (let i = 0; i < N; i++) {
-        let lo = -Math.PI + (2 * Math.PI * i) / N;
-        let hi = lo + (2 * Math.PI) / N;
-        if (Math.sign(g(lo)) === Math.sign(g(hi))) continue;
-        for (let it = 0; it < 60; it++) {
-          const mid = (lo + hi) / 2;
-          if (Math.sign(g(mid)) === Math.sign(g(lo))) lo = mid;
-          else hi = mid;
-        }
-        const r = (lo + hi) / 2;
-        if (Math.abs(g(r)) > 1e-6) continue;
-        if (!sols.some((x) => Math.abs(x - r) < 1e-6)) return false;
+      const turn = (y: number) => ((y % 360) + 360) % 360;
+      const truth = new Set<number>();
+      for (let y = 0; y < 360; y++) {
+        const r = (y * Math.PI) / 180;
+        if (f === 2 && Math.abs(Math.cos(r)) < 1e-12) continue;
+        if (Math.abs(fNum(f, r) - e.v) < 1e-9) truth.add(y);
       }
-      return true;
+      // what the option says about y = kx (its form divided by k is what is shown): nπ + (−1)ⁿα, 2nπ ± α, nπ + α, 2nπ + α
+      const a = e.a;
+      const said = new Set([[a, 180 - a], [a, -a], [a, a + 180], [a]][genOrder(p)[v]].map(turn));
+      return truth.size > 0 && truth.size === said.size && [...truth].every((y) => said.has(y));
     },
     bugs: (p) => {
       const [f] = p;

@@ -174,6 +174,18 @@ export function validateFamily(fam: string, seed = 20261019): ValidationReport {
       const vals = b.predict === null ? [] : p.type !== "set" && Array.isArray(b.predict) ? b.predict : [b.predict];
       for (const v of vals) if (p.type !== "choice" && def.validate(p.params, v as never)) det.push(`${p.id}: the independent check accepts ${show(v as never)}, which explanation ${b.id} predicts as wrong`);
     }
+    // choice@1: in a choice question the independent check accepts the keyed option and refuses every other one. Two options that
+    // both check out are two right answers, or a check that cannot tell them apart (atgen, abunit before choice@1). Marking uses the
+    // key; this is what makes the key trustworthy.
+    if (p.type === "choice") {
+      const key = "ABCDEF".indexOf(p.answer);
+      for (let v = 0; v < (p.options?.length ?? 0); v++) {
+        let ok = false;
+        try { ok = def.validate(p.params, v as never); } catch { ok = false; }
+        if (v === key && !ok) det.push(`${p.id}: the independent check refuses the keyed option ${p.answer}`);
+        if (v !== key && ok) det.push(`${p.id}: the independent check also accepts option ${"ABCDEF"[v]} (the key is ${p.answer})`);
+      }
+    }
     // range@1: the answer lies in the declared range, and so does every option
     const rg = rangeOf(def, p.params);
     const inR = (s: string) => { const v = numeric(s) ?? numericValue(s); return v === null || !rg || (v >= rg[0] - 1e-12 && v <= rg[1] + 1e-12); };

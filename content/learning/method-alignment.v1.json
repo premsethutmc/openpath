@@ -95,12 +95,13 @@
     {
       "competency": "MATH.geometry.pythagoras",
       "strategy": "squares_on_sides",
-      "contentHash": "e1c61180ed5ac678f029a0ad04c43072599125e4204d7eb952aa27db447def77",
+      "contentHash": "946d0448e7219a924bb4872a925defc8ad55fdedee4b3da8bf9dc466089e923f",
       "methods": [
-        "ahpyth:hypotenuse"
+        "ahpyth:hypotenuse",
+        "ahpyth:shorter side"
       ],
       "status": "engineering-mapping-pending-educator-review",
-      "rationale": "The two smaller squares add to the large square; its side is the square root. No shorter-side subtraction is worked."
+      "rationale": "The two smaller squares add to the large square; its side is the square root. Extended (foundations fix, 2026-11-09): a shorter side step by step, square the hypotenuse, take away the known side's square, take the square root, check. Previous revision e1c61180 covered the hypotenuse only."
     },
     {
       "competency": "MATH.number.fraction-multiply",

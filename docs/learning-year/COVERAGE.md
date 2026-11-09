@@ -515,7 +515,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | abenough: Is the money enough for two things? | `MATH.measurement.money-change` | 300 | 0 | 133/135/32 | `9be6aeff` |
 | abrep: Writing equal groups as repeated addition and as multiplication | `MATH.number.equal-groups` | 108 | 0 | 27/27/54 | `458d3847` |
 | abmeas: Reading a metre tape (whole, half and quarter metres) and a ruler in millimetres | `MATH.measurement.standard-length` | 267 | 0 | 45/114/108 | `823fdfaf` |
-| abunit: Choosing a unit and a tool, and estimating lengths and distances | `MATH.measurement.standard-length` | 82 | 0 | 16/40/26 | `3c1d9e4b` |
+| abunit: Choosing a unit and a tool, and estimating lengths and distances | `MATH.measurement.standard-length` | 82 | 0 | 16/40/26 | `1ec0545b` |
 | abwunit: Choosing mg, g or kg, judging recorded weights, and estimating weights | `MATH.measurement.standard-mass` | 92 | 0 | 24/20/48 | `17faff1a` |
 | abkgg: Grams written as kilograms and grams | `MATH.measurement.standard-mass` | 300 | 0 | 9/268/23 | `c80b6f5b` |
 | abseat: Seats in rows and columns | `MATH.geometry.maps-directions` | 300 | 0 | 40/110/150 | `d7621f0b` |
@@ -767,7 +767,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ahcong: Corresponding parts of congruent triangles | `MATH.geometry.congruence` | 400 | 0 | 160/197/43 | `cf8258a0` |
 | ahpar: Angles made by a transversal with parallel lines | `MATH.geometry.parallel-angles` | 400 | 0 | 160/80/160 | `7af72054` |
 | ahparx: Finding x from angles at parallel lines | `MATH.geometry.parallel-angles` | 400 | 0 | 115/85/200 | `323d8ca5` |
-| ahpyth: A missing side of a right triangle | `MATH.geometry.pythagoras` | 156 | 0 | 24/44/88 | `84ab976e` |
+| ahpyth: A missing side of a right triangle | `MATH.geometry.pythagoras` | 156 | 0 | 24/44/88 | `9efe5c3c` |
 | ahtile: The missing angle at a point of a tiling | `MATH.geometry.tessellations` | 119 | 0 | 4/79/36 | `da6d4820` |
 | ahname: Naming corresponding, alternate, co-interior and vertically opposite angles | `MATH.geometry.parallel-angles` | 108 | 0 | 48/24/36 | `443975f0` |
 | ahrhy: Counting rhythms, climbs and tilings: Virahanka numbers | `MATH.sequences.virahanka-numbers` | 192 | 0 | 16/48/128 | `1294f731` |
@@ -1338,7 +1338,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | atdbl: Double-angle values from one ratio | `MATH.trigonometry.compound-angle-identities` | 120 | 0 | 6/36/78 | `4daa92bf` |
 | atp2s: Products of sines and cosines as sums | `MATH.trigonometry.compound-angle-identities` | 144 | 0 | 0/72/72 | `d1b9d13b` |
 | atprinc: Solutions of a trigonometric equation in 0 ≤ x < 2π | `MATH.trigonometry.equations` | 141 | 0 | 25/22/94 | `135cd622` |
-| atgen: General solution of a trigonometric equation | `MATH.trigonometry.equations` | 108 | 0 | 18/18/72 | `3c39066c` |
+| atgen: General solution of a trigonometric equation | `MATH.trigonometry.equations` | 108 | 0 | 18/18/72 | `7189c514` |
 | atval: Trigonometric functions of any angle | `MATH.trigonometry.functions` | 400 | 0 | 24/177/199 | `50947471` |
 | atper: The period of a trigonometric function | `MATH.trigonometry.functions` | 300 | 0 | 7/143/150 | `4efd7a79` |
 | atrad: Degrees to radians | `MATH.trigonometry.radians` | 288 | 0 | 72/72/144 | `32bbb8ad` |
