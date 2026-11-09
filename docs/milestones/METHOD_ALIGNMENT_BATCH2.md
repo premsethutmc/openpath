@@ -44,6 +44,10 @@ Hosted results must be read for the exact final head in PR #121; initial-head re
 
 Initial hosted verification exposed inherited integration failures: Node rendering tests imported geometry CSS, a backend parity test assumed a local `.venv`, and geometry fixtures expected unrelated post-lesson credit or a completed mixed-method delayed check. Styles now enter through both app stylesheets (Year/review and curriculum); CI provisions Python dependencies and the parity test supports the configured interpreter. The foundation fixture establishes unrelated knowledge before teaching. G-02 explicitly preserves fresh angle-sum success and replay while requiring the mixed delayed check to remain pending and unverified. These are not removed assertions or content approvals. The 19 targeted geometry/foundation regressions pass.
 
+The existing long calculus browser journeys also assumed every return was retention. All three now test the real method-gap pause and subsequent fresh diagnostic re-entry: visible starting-point wording, genuinely incorrect backend verdict, no retention relabelling or automatic verification, and unchanged saved events/decisions after reload. They pass locally in addition to the three initial-UI method-limited journeys. Unmigrated lessons retain the existing delayed-check/failure/recovery assertions.
+
+The complete maths-expansion browser harness passes all nine cases locally: those three calculus paths plus limits, inequalities, trigonometric equations, geometric sequences, continuity and any-angle trigonometry. The latter six still exercise an actual failed delayed check and fresh recovery, including alternate teaching where the engine selects it.
+
 Not established: educator approval, real-student learning efficacy, physical-device/accessibility audit, all-family method coverage, or a general alternate-solution proof policy. Other explanations remain explicitly unmigrated. New non-calculus routes receive focused selector tests and the existing integrated/Grade 7 CI journeys; no claim is made that every added explanation has a dedicated browser scenario.
 
 Commands from frontend:

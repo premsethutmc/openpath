@@ -1,4 +1,4 @@
-import { methodCompatibility } from "../../packages/learning/src/method-alignment";
+import { alignmentEntry, methodCompatibility } from "../../packages/learning/src/method-alignment";
 /**
  * The maths-expansion blueprints in the real Year UI against the real Django API (synthetic pupils only; nothing deployed):
  *   calculus      MATH.calculus.limits               zero-for-undefined
@@ -239,11 +239,32 @@ try {
       if (ms.phase === "chapter") { await append(make.teach(ctx(), c.competency, ms.strategy!.id, "diagnosis")); continue; }
       await append(make.attempt(ctx(), ms.question, question(ms.question).answer, (ms.activity ?? "practice") as never, ms.context ? { context: ms.context } : {}));
     }
+    const beforeLater = (await stateAt(clock)).module(c.competency);
     // ---- nine days on: the delayed check in the UI, answered wrong
     writeFileSync(clockFile, JSON.stringify({ [id]: 9 })); await page.clock.setSystemTime(new Date(realNow + 9 * DAY));
     await open(); assert.equal(await screen(), "question", `${c.name}: the delayed check is a question`);
     const delayedQ = (await page.locator("[data-qid]").getAttribute("data-qid"))!;
     assert.ok(onSkill(delayedQ), `${c.name}: the delayed check ${delayedQ} is on the taught competency`);
+    if (alignmentEntry(moduleFor(c.competency)!, strategy) && beforeLater.phase === "pause") {
+      // A method-gap pause is not a completed delayed check. On return, the existing
+      // bounded handover asks a diagnostic re-entry question, which may test an untaught method.
+      assert.match(beforeLater.reason, /No fresh question is supported by this explanation/);
+      const returning = await stateAt(realNow + 9 * DAY);
+      assert.equal(returning.module(c.competency).phase, "reentry");
+      assert.notEqual(returning.evidence(c.competency).status, "verified");
+      assert.ok(!returning.records.attempts.some(a => problemKeyOf(a.questionId) === problemKeyOf(delayedQ)));
+      assert.match(await page.locator("body").innerText(), /One question on your own first/);
+      assert.equal((await answerInUi(wrongFor(delayedQ))).right, false);
+      const answered = await stateAt(realNow + 9 * DAY), last = answered.records.attempts.at(-1)!;
+      assert.equal(last.questionId, delayedQ); assert.equal(last.credit, false);
+      assert.notEqual(last.activity, "retention", "re-entry must not be relabelled as a delayed mastery check");
+      assert.notEqual(answered.evidence(c.competency).status, "verified");
+      const before = await saved(); await page.reload(); const after = await saved();
+      assert.deepEqual(after.events, before.events); assert.deepEqual(after.decisions, before.decisions);
+      results.push({ case: c.name, trail, visibleLessons, outcome: "method-gap-stop-and-reentry", reason: beforeLater.reason, reentry: delayedQ, reentryCorrect: false, reloaded: true, educatorApproved: false });
+      console.log(`ok ${c.name}: taught ${taught}, fresh recheck, explicit method-gap stop, fresh diagnostic re-entry (wrong), reload`);
+      continue;
+    }
     assert.equal((await stateAt(realNow + 9 * DAY)).module(c.competency).phase, "retention");
     assert.ok(!met.some((q) => problemKeyOf(q) === problemKeyOf(delayedQ)), `${c.name}: delayed ${delayedQ} repeats or relabels`);
     const dAns = await answerInUi(wrongFor(delayedQ)); assert.equal(dAns.right, false);

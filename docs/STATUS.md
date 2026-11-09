@@ -36,6 +36,8 @@ Updated: 2026-11-09. Milestone: method-alignment expansion and hosted verificati
 - Earlier component or initial-head CI does not certify a successor commit.
 - Initial CI failures addressed: Node CSS import, local-only Python path, obsolete mixed-method fixtures.
 - Geometry/foundation regressions: 19 pass; G-02's mixed delayed check correctly stays pending/unverified.
+- Three longer calculus browser journeys pass: method-gap pause → fresh diagnostic re-entry → wrong → reload.
+- All nine existing maths-expansion browser cases pass, including six unchanged delayed-failure/recovery paths.
 
 ## Readiness and remaining limits
 - Local implementation ready for code review; release/merge/deployment are not authorised.
