@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "a2b324d6f4242ffcc9046d7abed24da8d9c924d9d56341f2a22d2f029ec35a7f",
+ "sha256": "59cb45f35145a13a3e89bb483cc4b1123a5deb3f1763ab5cf433daf6ca6d4d04",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -88,7 +88,7 @@
   "content/learning/graph-audit.v1.json": "ffd060491b7bf9895351c27e254ebd88b2eba04ab695eae8a21ab0ec31d69c30",
   "content/learning/library.v1.json": "cb92542beb59354e2d7f75dc7c2d9d79f34d7af7d1f74e7e46d954f3e14fab87",
   "content/learning/mapping-exemplars.v1.json": "2e321587d70fccd32e395f21cf24d4ac4bbfbe52abc7d631b6acecc07dab8f61",
-  "content/learning/method-alignment.v1.json": "b459bc2a77064c6dd8d78133b4e33bfd121b5daf5e0459f04fd1abb33694b099",
+  "content/learning/method-alignment.v1.json": "543220ec826dec442b93a3ce4790bd1ffc717b447fe3d78ddde256b50976cbee",
   "content/learning/modules.v1.json": "b209810e33c9b7f6d6daff157327cd382805479a35b032fb8a19c73650db4ddd",
   "content/learning/problems.v1.json": "2d0cca6da92e398d4077e07be65162787e59652cda5319b8928ab0ab52c4e727",
   "content/learning/question-status.v1.json": "4a368546d264f94ed741ac32a4aebe75d610bbdd55e8f39aae17809a82144a61",
@@ -196,7 +196,7 @@
   "packages/learning/src/linear-algebra-kernel.ts": "e7badeee835bc6c62965f4377b176da727b4936e4831e4efd0e42ff334f63d32",
   "packages/learning/src/math-kernel.ts": "3142b8f20ba62afd53f3aee168e5953cba6457900a371622230876938a0c8e4d",
   "packages/learning/src/meaning.ts": "e08d794e310b4d993be9ea353cfa48e382ea294cdefadb93efeca671b666fd92",
-  "packages/learning/src/method-alignment.ts": "19c3bf232dfc67185589d450278e943e2ff98df7d820edbabcdc88f55ffc3cb1",
+  "packages/learning/src/method-alignment.ts": "b9c3fe2f33deee79016be65dd9f1c067486dc6337203ec1149c5be497aec0db5",
   "packages/learning/src/misconception-evidence.ts": "3cb1844e0f7d4a528288df8ab3232b1d68f6886b120e3849b87ac9629db3a2e1",
   "packages/learning/src/natural-working.ts": "cde866dc65f1fb38466db1e80d6dc0591443981bde6f32fa4b7213cf5e58cbe5",
   "packages/learning/src/parse-fidelity.ts": "82ac5523a135e48b5a3e3c4834eece8d6c860e7b3e081862824d46f702f92b03",

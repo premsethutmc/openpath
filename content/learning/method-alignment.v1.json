@@ -48,6 +48,93 @@
         "common-denominator-add"
       ],
       "status": "engineering-mapping-pending-educator-review"
+    },
+    {
+      "competency": "MATH.geometry.triangle-properties",
+      "strategy": "isosceles_base",
+      "contentHash": "6338220e75166eb6826993d09b9ad625610d322b0078e3fca9f5884d520585aa",
+      "methods": [
+        "triangle-angle-sum",
+        "isosceles-base"
+      ],
+      "status": "engineering-mapping-pending-educator-review",
+      "rationale": "Screens take the vertex angle from 180 then halve; they do not teach doubling a base angle."
+    },
+    {
+      "competency": "MATH.geometry.triangle-properties",
+      "strategy": "isosceles_vertex",
+      "contentHash": "d949ca9f0854f6e938b8087c5e659837d926669cf6a0b7d957bff96c397101ee",
+      "methods": [
+        "triangle-angle-sum",
+        "isosceles-vertex"
+      ],
+      "status": "engineering-mapping-pending-educator-review",
+      "rationale": "Screens double the given base angle and subtract from 180; they do not teach halving the remainder."
+    },
+    {
+      "competency": "MATH.geometry.triangle-properties",
+      "strategy": "exterior_via_third",
+      "contentHash": "5fa808acb92b1c6f5d124fdb691f3e1247dabc2066ba45e90a8217f3609461cb",
+      "methods": [
+        "triangle-angle-sum",
+        "exterior-from-interiors"
+      ],
+      "status": "engineering-mapping-pending-educator-review",
+      "rationale": "The shown construction starts with two interior angles; reversing the exterior relation is not worked."
+    },
+    {
+      "competency": "MATH.geometry.pythagoras",
+      "strategy": "worked_steps",
+      "contentHash": "0d50b6d2459794f159778cbe7e6750d91dd232dd40ca8747cb428831ed076074",
+      "methods": [
+        "ahpyth:shorter side"
+      ],
+      "status": "engineering-mapping-pending-educator-review",
+      "rationale": "The instance-specific text and worked steps subtract squared lengths and take a square root."
+    },
+    {
+      "competency": "MATH.geometry.pythagoras",
+      "strategy": "squares_on_sides",
+      "contentHash": "e1c61180ed5ac678f029a0ad04c43072599125e4204d7eb952aa27db447def77",
+      "methods": [
+        "ahpyth:hypotenuse"
+      ],
+      "status": "engineering-mapping-pending-educator-review",
+      "rationale": "The two smaller squares add to the large square; its side is the square root. No shorter-side subtraction is worked."
+    },
+    {
+      "competency": "MATH.number.fraction-multiply",
+      "strategy": "worked_steps",
+      "contentHash": "8360efb990cf3381475928c2453b881b06d98678ba0aa28140bb3c0512d44ebc",
+      "methods": [
+        "fraction-times-whole"
+      ],
+      "status": "engineering-mapping-pending-educator-review",
+      "rationale": "Multiply the numerator by the whole number and keep the piece size; divide-then-multiply for a fraction of a quantity is not taught."
+    },
+    {
+      "competency": "MATH.calculus.integration-methods",
+      "strategy": "why_du",
+      "contentHash": "006907cb5dd9e778780669c34a66d342450bfd19a73aaef894410876d3cf3d2f",
+      "methods": [
+        "quadratic-substitution",
+        "change-integral-limits",
+        "integrate-u-power-2"
+      ],
+      "status": "engineering-mapping-pending-educator-review",
+      "rationale": "The worked antiderivative is u³/3 for u². Other powers require independently established antiderivative working."
+    },
+    {
+      "competency": "MATH.calculus.integration-methods",
+      "strategy": "limits_table",
+      "contentHash": "6c74ff14e9c9fb880ad5e2d3d0231714eb9099a7f5e771b7ffce6102afdb8627",
+      "methods": [
+        "quadratic-substitution",
+        "change-integral-limits",
+        "integrate-u-power-2"
+      ],
+      "status": "engineering-mapping-pending-educator-review",
+      "rationale": "The extra table changes limits for x²+c; it does not work another antiderivative."
     }
   ]
 }

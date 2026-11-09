@@ -1,3 +1,4 @@
+import { methodCompatibility } from "../../packages/learning/src/method-alignment";
 /**
  * The maths-expansion blueprints in the real Year UI against the real Django API (synthetic pupils only; nothing deployed):
  *   calculus      MATH.calculus.limits               zero-for-undefined
@@ -90,7 +91,7 @@ try {
     let learnt = false;
     const reply = (q: string) => {
       const r = probeReading(base(q), c.bug), x = question(q);
-      if (learnt) return process.env.ALIGNMENT_CASE && c.family === "aqfp" && problemOf(base(q))?.params[0] !== 0 ? wrongFor(q) : x.answer;
+      if (learnt) { const m=moduleFor(c.competency)!,s=m.strategies.find(s=>s.id===taught); return process.env.ALIGNMENT_CASE && (!s || methodCompatibility(m,s,q).status!=="covered") ? wrongFor(q) : x.answer; }
       // Symbolic first-principles answers are deliberately not evidence for misconception attribution.
       // Submit the modelled wrong expression, then let the real engine choose its teaching.
       if (c.family === "aqfp") {
@@ -211,7 +212,7 @@ try {
     if (process.env.ALIGNMENT_CASE) {
       assert.equal(trail[0].kind, "diagnostic", "the first response was submitted through the real UI");
       assert.equal(trail[0].right, false);
-      for (const row of trail.filter(x=>["guided","check"].includes(x.kind))) assert.equal(problemOf(base(row.qid!))!.params[0],0,"quadratic-only model is not given an untaught follow-up");
+      for (const row of trail.filter(x=>["guided","check"].includes(x.kind))) assert.equal(methodCompatibility(moduleFor(c.competency)!,strategy,row.qid!).status,"covered","student only answers methods covered by the actual lesson");
       const before=await saved();await page.reload();const after=await saved();assert.deepEqual(after.events,before.events);assert.deepEqual(after.decisions,before.decisions);
       assert.ok(after.events.some((e:any)=>e.record==='teach'&&e.methodAlignment?.startsWith('method-alignment@1:')));
       assert.notEqual((await stateAt(Date.now())).evidence(c.competency).status,'verified');

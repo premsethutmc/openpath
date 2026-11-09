@@ -12,6 +12,10 @@ export const alignmentEntry = (m: Module, s: Strategy) => manifest.lessons.find(
 export function methodRequirements(id: string): string[] | null {
   const p=problemOf(id.replace(/:(mc|w)$/,'')); if(!p)return null;
   if(p.family==='aqfp') {const name=['quadratic-expansion','rational-difference','conjugate','cubic-expansion',p.params[3]===0?'sine-limit':'cosine-limit'][p.params[0]];return name?['difference-quotient',name]:null;}
+  if(p.family==='ahext')return [p.params[2]===0?'exterior-from-interiors':'far-interior-from-exterior'];
+  if(p.family==='fmulw')return ['fraction-times-whole'];
+  if(p.family==='avfwq')return [p.params[3]===0?'fraction-times-whole':'fraction-of-quantity'];
+  if(p.family==='subst')return ['quadratic-substitution','change-integral-limits',`integrate-u-power-${p.params[3]}`];
   if(p.family==='ahtri')return ['triangle-angle-sum'];
   if(p.family==='ahiso')return ['triangle-angle-sum',p.params[1]===0?'isosceles-base':'isosceles-vertex'];
   if(p.family==='faddu')return ['common-denominator-add'];
@@ -26,9 +30,10 @@ export type AlignmentStatus='covered'|'incompatible'|'unknown'|'diagnostic';
 export function establishedMethods(records: LearnerRecords, before: string): Set<string> {
   const groups=new Map<string, typeof records.attempts>();
   for(const a of records.attempts)if(a.at<before && independentAttempt(a) && !a.context && !['guided','check'].includes(a.activity) && nativeItem(question(a.questionId)).evidence_status==='validated'){
-    const firstPrinciples=problemOf(a.questionId.replace(/:(mc|w)$/, ''))?.family==='aqfp';
+    const firstPrinciples=problemOf(a.questionId.replace(/:(mc|w)$/, ''))?.family;
+    const workingRequired=firstPrinciples==='aqfp'||firstPrinciples==='subst';
     // A correct derivative could have used a memorised rule: it does not establish first-principles working.
-    if(firstPrinciples && rightAnswer(a) && !(a.assessment?.methodExamined && a.assessment.derivationVerified))continue;
+    if(workingRequired && rightAnswer(a) && !(a.assessment?.methodExamined && a.assessment.derivationVerified))continue;
     for(const method of methodRequirements(a.questionId)??[])groups.set(method,[...(groups.get(method)??[]),a]);
   }
   const out=new Set<string>();for(const [method,as]of groups){as.sort((a,b)=>a.at.localeCompare(b.at));const latest=as.at(-1)!;

@@ -118,6 +118,7 @@ jobs:
           # maths expansion: one wrong answer → explanation (pending review) → guided → fresh recheck → reload, then a wrong
           # delayed check nine days on → a fresh question on the same competency → reload, for six blueprint modules
           suite maths-expansion env PATHWAY_API=http://127.0.0.1:8014 FAIL_BODY=/tmp/year-screens/maths-expansion-fail MATHS_EXPANSION_RESULTS=/tmp/year-screens/maths-expansion-browser.json node --import tsx e2e/maths-expansion-browser.test.mts
+          suite method-alignment env PATHWAY_API=http://127.0.0.1:8014 ALIGNMENT_CASE=1 CASE="calculus teaching" CALCULUS_SHOTS=/tmp/year-screens/method-alignment MATHS_EXPANSION_RESULTS=/tmp/year-screens/method-alignment.json node --import tsx e2e/maths-expansion-browser.test.mts
           # deep-recovery@0 (RESEARCH, off by default): the switch exists only in a --test --deep-recovery build; single and multiple
           # gaps to a fresh unaided goal question, reload / sign-out / resume, a failed save, missing content, no fresh question, switch off
           # three builds: the research switch (main cases), a lower sitting limit (pause and resume), the shipped build (switch absent)
