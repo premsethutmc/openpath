@@ -1,0 +1,53 @@
+{
+  "policy": "method-alignment@1",
+  "lessons": [
+    {
+      "competency": "MATH.calculus.derivatives",
+      "strategy": "spot_the_mistake",
+      "contentHash": "9aa2fdf464f41368cc5b3b6038b96113bcbfd042dcc7d306a0c50f96f406995d",
+      "methods": [
+        "difference-quotient",
+        "quadratic-expansion"
+      ],
+      "status": "engineering-mapping-pending-educator-review"
+    },
+    {
+      "competency": "MATH.calculus.derivatives",
+      "strategy": "expand_cancel",
+      "contentHash": "b1d8605524f2cc39c484af98c685bbf10a5be80148c613a0f99b04f507b2b775",
+      "methods": [
+        "difference-quotient",
+        "quadratic-expansion"
+      ],
+      "status": "engineering-mapping-pending-educator-review"
+    },
+    {
+      "competency": "MATH.calculus.derivatives",
+      "strategy": "why_limit",
+      "contentHash": "cdbb8fc716f7a063957c603d95ad135cab81ec3c64343b73537c6c1fa570077c",
+      "methods": [
+        "difference-quotient",
+        "quadratic-expansion"
+      ],
+      "status": "engineering-mapping-pending-educator-review"
+    },
+    {
+      "competency": "MATH.geometry.triangle-properties",
+      "strategy": "worked_steps",
+      "contentHash": "2685804a7fd251b1fb11e961311a046b73881b5586e28325be3fbf09a6a5bfd1",
+      "methods": [
+        "triangle-angle-sum"
+      ],
+      "status": "engineering-mapping-pending-educator-review"
+    },
+    {
+      "competency": "MATH.number.fraction-add",
+      "strategy": "worked_steps",
+      "contentHash": "d48caef530fa6795f56d0233b41e5f4457fe140969e0ab83f9eb279b4c596d5c",
+      "methods": [
+        "common-denominator-add"
+      ],
+      "status": "engineering-mapping-pending-educator-review"
+    }
+  ]
+}

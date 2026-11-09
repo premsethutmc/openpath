@@ -1,3 +1,4 @@
+import { alignmentActive, followupCompatible, qualifiedFollowup } from "./method-alignment";
 import { taughtExposureKeys } from "./teaching-exposure";
 /**
  * The unified learning module (Explore → Strategy → Chapter → Practise → Verify) and prerequisite recovery.
@@ -26,7 +27,7 @@ import { quarantined } from "./question-status";
 import { modulePhasePool } from "./library";
 import { discriminatingProbe, familyOf, hypothesesFor, investigateContext, investigation, investigationTrigger, openHypothesis, teachingMatchesMisconception } from "./hypotheses";
 import { claimWording, nextFromReasoning, probeReading, reason, withTail, type Reasoning } from "./reasoning";
-import { teachingEligibility, type TeachingEligibility } from "./teaching-contract";
+import { alignedPractice, teachingEligibility, type TeachingEligibility } from "./teaching-contract";
 import { contentEligibility, isMisconceptionSpecific, teachingMode, type ContentEligibility } from "./explanation-review";
 import { evidenceBasis, type EvidenceBasis } from "./misconception-evidence";
 import type { Attempt, LearnerRecords } from "./records";
@@ -208,7 +209,7 @@ function ruleStateFor(m: Module, d: Diagnosis, records: LearnerRecords): RuleSta
     // teaching-history@1: the block's check alone is its own check question, or (when that question had already been
     // seen elsewhere) the fresh question asked in its place: the first answer alone labelled "check" in the block
     const c = within(st.check) ?? mine.find((a) => a.at >= t.at && a.at < until && a.activity === "check" && a.n === 1 && a.questionId !== st.guided && !a.context) ?? null;
-    const clean = c && independentAttempt(c) ? c : null;
+    const clean = c && independentAttempt(c) && qualifiedFollowup(c, records) ? c : null;
     return {
       id: `${m.competency}:${t.strategy}:${t.at}`,
       at: t.at,
@@ -427,6 +428,13 @@ export function moduleState(competency: string, records: LearnerRecords, ev: Ski
       reason: "Your answers to this question could not be read, so they were not marked: nothing was counted for or against you. This needs a person: go through it with a teacher or parent." }, m, records, now);
   const fromCheckPool = !!m.pool && q.startsWith("gen:") && ![...m.practice, ...m.transfer].includes(q) && phaseOfQ(q) === "check";
   const activity = ms.phase === "explore" ? "diagnostic" : ms.phase === "strategy" ? "probe" : ms.phase === "guided" ? "guided" : ms.phase === "check" ? "check" : ms.phase === "retention" ? "retention" : m.transfer.includes(q) ? "transfer" : m.strategies.some((s) => s.check === q) || fromCheckPool ? "check" : "practice";
+  const latest = records.teaching.filter(t=>t.competency===competency).at(-1);
+  const taught = latest && m.strategies.find(s=>s.id===latest.strategy);
+  if (taught && alignmentActive(m,taught,records) && !["diagnostic","probe"].includes(activity) && !followupCompatible(m,taught,q,records)) {
+    const replacement=blockCheck(m,taught,records);
+    if(replacement)return {...ms,phase:"check",activity:"check",question:replacement,strategy:taught,reason:"One fresh question using the method explained. Other methods still need their own teaching or established evidence."};
+    return withHandover({...ms,phase:"pause",question:null,reason:"No fresh question is supported by this explanation and your established methods. This teaching gap is not mastery; ask a teacher for the missing method."},m,records,now);
+  }
   return { ...ms, activity };
 }
 /** retention-display@1: a scheduled delayed check carries its exact opening instant (the same instant the evidence uses to open it) */
@@ -666,6 +674,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     const before = records.teaching.some((t) => t.competency === competency);
     return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: before && ev.retention === "failed" ? "The delayed check did not come out, so here is the topic again, explained another way, then one on your own." : before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? withTail(established.says, "Here is a way to rebuild it.") : open && claimTaughtBy(s) ? withTail(claimWording(own!.scope.question, own!.claim!.explanation, own!.claim!.says), "Here is a way to rebuild it.") : diagnosisReason(d, s) };
   }
+  if (st && alignmentActive(m, st, records) && ["guided_practice", "reassess"].includes(decision.action) && !(decision.action === "guided_practice" ? guided : blockCheck(m, st, records))) return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no fresh question supported by this explanation and your established methods. This is a teaching gap, not mastery. Ask a teacher to help with the missing method." };
   if (decision.action === "guided_practice" && st && guided) return { ...base, phase: "guided", question: guided, strategy: st, diagnosis: d, decision, reason: "Practise it once, with a hint if you want one. This counts as practice with help." };
   if (decision.action === "reassess" && st) {
     const q = blockCheck(m, st, records);
@@ -785,7 +794,7 @@ export function subSkillGap(m: Module, records: LearnerRecords): { family: strin
  */
 export function guidedItem(m: Module, st: Strategy, records: LearnerRecords): string | null {
   const met = new Set([...records.attempts, ...records.unresolved, ...(records.pending ?? [])].map((a) => problemKeyOf(a.questionId)));
-  if (keyboardOffered(st.guided) && !answered(records, st.guided) && !met.has(problemKeyOf(st.guided))) return st.guided;
+  if (followupCompatible(m, st, st.guided, records) && keyboardOffered(st.guided) && !answered(records, st.guided) && !met.has(problemKeyOf(st.guided))) return st.guided;
   const p = problemOf(st.guided.replace(/:(mc|w)$/, ""));
   if (!p) return null;
   const unit = unitOfStrategy(m, st);
@@ -793,12 +802,15 @@ export function guidedItem(m: Module, st: Strategy, records: LearnerRecords): st
   const skill = config ? connectedSkill(config, st.guided) : null;
   const avoid = new Set([st.check, ...st.screens.map((x) => x.instance ?? ""), ...m.chapter.map((x) => x.instance ?? "")].filter(Boolean).map(problemKeyOf));
   const inScope = (id: string) => (unit ? unit.accepts(id) : !skill || connectedSkill(config!, id) === skill);
-  return phasePool(p.family, "practice").find((id) => !met.has(problemKeyOf(id)) && !avoid.has(problemKeyOf(id)) && !answered(records, id) && keyboardOffered(id)
-    && withinGrade(records, id) && !quarantined(id) && question(id).competency === m.competency && inScope(id)) ?? null;
+  const candidates = phasePool(p.family, "practice");
+  const ordered = alignmentActive(m, st, records) ? alignedPractice({ ...m, strategies: [st] }, candidates) : candidates;
+  return ordered.find((id) => !met.has(problemKeyOf(id)) && !avoid.has(problemKeyOf(id)) && !answered(records, id) && keyboardOffered(id)
+    && withinGrade(records, id) && !quarantined(id) && question(id).competency === m.competency && inScope(id) && followupCompatible(m, st, id, records)) ?? null;
 }
 /** The question for a block's check alone: the strategy's own check if the learner has never seen it, else a fresh one. */
 export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): string | null => {
   const unit = unitOfStrategy(m, st);
+  if (alignmentActive(m, st, records) && !unit) return questionForRequirement(m, "check", records, id => followupCompatible(m, st, id, records));
   if (unit) return unitCheck(m, unit, records, st);
   return keyboardOffered(st.check) && !answered(records, st.check) && withinGrade(records, st.check) ? st.check : fromPool(m, "check", records);
 };
@@ -809,7 +821,7 @@ export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): st
  */
 export function unitCheck(m: Module, unit: SkillUnit, records: LearnerRecords, st?: Strategy | null): string | null {
   const presented = presentedProblems(records, moduleFor);
-  const fresh = (id: string) => unit.accepts(id) && keyboardOffered(id) && !presented.has(problemKeyOf(id));
+  const fresh = (id: string) => (!st || followupCompatible(m, st, id, records)) && unit.accepts(id) && keyboardOffered(id) && !presented.has(problemKeyOf(id));
   // the recheck is where the error behind the teaching would still show (a discriminating question), when there is one: the
   // misconception a fix addresses, else the open (suspected) one in this competency; a question it cannot show on proves nothing
   // (#110 recheck@2) for general teaching with no established claim: an error the learner's latest wrong answer alone on this skill

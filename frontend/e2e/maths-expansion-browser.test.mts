@@ -90,7 +90,7 @@ try {
     let learnt = false;
     const reply = (q: string) => {
       const r = probeReading(base(q), c.bug), x = question(q);
-      if (learnt) return x.answer;
+      if (learnt) return process.env.ALIGNMENT_CASE && c.family === "aqfp" && problemOf(base(q))?.params[0] !== 0 ? wrongFor(q) : x.answer;
       // Symbolic first-principles answers are deliberately not evidence for misconception attribution.
       // Submit the modelled wrong expression, then let the real engine choose its teaching.
       if (c.family === "aqfp") {
@@ -106,9 +106,9 @@ try {
       const i = x.options!.indexOf(r.predicted[0]); return i >= 0 ? "ABCD"[i] : x.answer;
     };
     // one wrong answer (the modelled error), alone
-    await append(make.attempt(ctx(), c.start, reply(c.start), "check"));
+    if (!process.env.ALIGNMENT_CASE) await append(make.attempt(ctx(), c.start, reply(c.start), "check"));
     const open = () => page.goto(`http://127.0.0.1:${port}/year/?learner=${id}&skill=${c.competency}`);
-    const met: string[] = [c.start];
+    const met: string[] = process.env.ALIGNMENT_CASE ? [] : [c.start];
     const answerInUi = async (value: string) => {
       const qid = (await page.locator("[data-qid]").getAttribute("data-qid"))!, q = question(qid);
       if(c.family === "ahtri" && process.env.GEOMETRY_SHOTS && await page.locator('[data-qid] svg').count()) {
@@ -179,6 +179,7 @@ try {
       const qid = (await page.locator("[data-qid]").getAttribute("data-qid"))!;
       const a = await answerInUi(reply(qid)); met.push(qid);
       const last = (await stateAt(Date.now())).records.attempts.at(-1)!;
+      if (process.env.ALIGNMENT_CASE) { assert.equal(last.questionId,qid); assert.equal(last.credit,a.right,"the backend recorded a definite verdict, not unreadable input"); }
       trail.push({ kind: last.activity, qid, right: a.right });
       if (process.env.DEBUG) console.log("step", JSON.stringify(trail.at(-1)));
       if (taught && last.activity === "check") break;
@@ -207,6 +208,15 @@ try {
     const shownBefore = [...met.slice(0, met.indexOf(check.qid!)), strategy.guided, ...strategy.screens.map((s) => s.instance!).filter(Boolean)];
     assert.ok(!shownBefore.some((q) => problemKeyOf(q) === problemKeyOf(check.qid!)), `${c.name}: ${check.qid} repeats or relabels a met problem`);
     assert.deepEqual(trail.filter((s) => s.kind === "transfer"), [], `${c.name}: no transfer before the recheck`);
+    if (process.env.ALIGNMENT_CASE) {
+      assert.equal(trail[0].kind, "diagnostic", "the first response was submitted through the real UI");
+      assert.equal(trail[0].right, false);
+      for (const row of trail.filter(x=>["guided","check"].includes(x.kind))) assert.equal(problemOf(base(row.qid!))!.params[0],0,"quadratic-only model is not given an untaught follow-up");
+      const before=await saved();await page.reload();const after=await saved();assert.deepEqual(after.events,before.events);assert.deepEqual(after.decisions,before.decisions);
+      assert.ok(after.events.some((e:any)=>e.record==='teach'&&e.methodAlignment?.startsWith('method-alignment@1:')));
+      assert.notEqual((await stateAt(Date.now())).evidence(c.competency).status,'verified');
+      results.push({case:c.name,initialResponseInUi:true,trail,visibleLessons,reloaded:true,educatorApproved:false});continue;
+    }
     // the engine may keep recovery open for one more question on the learner's own (inequalities): answer it in the UI
     for (let i = 0; i < 6 && (await stateAt(Date.now())).module(c.competency).phase === "recover"; i++) {
       await continueOn();

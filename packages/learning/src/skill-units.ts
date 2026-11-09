@@ -1,3 +1,4 @@
+import { qualifiedFollowup } from "./method-alignment";
 /**
  * skill-units@1: the skills a module teaches with explicitly scoped explanations (Strategy.scope), as units of evidence inside the
  * competency. A unit is the declared scope of its explanations: a mapped sub-skill (the competency's versioned skill mapping) or a
@@ -54,7 +55,7 @@ export function unitStates(m: Module, records: LearnerRecords, judge: Judge): Un
     const ids = new Set(unit.strategies.map((s) => s.id));
     const taughtAt = records.teaching.filter((t) => t.competency === m.competency && ids.has(t.strategy)).at(-1)?.at ?? null;
     const mine = records.attempts.filter((a) => judge.independent(a) && unit.accepts(a.questionId));
-    const rechecked = !!taughtAt && mine.some((a) => a.at > taughtAt && a.activity !== "guided" && judge.right(a));
+    const rechecked = !!taughtAt && mine.some((a) => a.at > taughtAt && a.activity !== "guided" && judge.right(a) && qualifiedFollowup(a,records));
     const last = mine.at(-1);
     const latestWrong = !!last && !judge.right(last);
     const rights = new Set(mine.filter(judge.right).map((a) => a.questionId)).size;
