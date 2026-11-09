@@ -1,6 +1,5 @@
 import { useEffect, useId, useRef, useState } from 'react';
 import { A, B, INITIAL_C, clampC, triangleAngles, type Point } from './triangle';
-import './triangle.css';
 declare const OPENPATH_GEOMETRY_LAB: boolean;
 const INTERACTIVE = typeof OPENPATH_GEOMETRY_LAB !== 'undefined' && OPENPATH_GEOMETRY_LAB === true;
 const COLORS = ['#215bbb', '#a84d08', '#713cc6'];

@@ -42,8 +42,8 @@ export interface GeometryJourney { id: string; title: string; kind: "success" | 
 export const GEOMETRY_JOURNEYS: GeometryJourney[] = [
   { id: "G-01", title: "Strong learner: diagnostic → shown alone → delayed check passed", kind: "success",
     scenario: { id: "G-01", category: 1, start: START_SUM, learner: () => learners.strong(), later: [8], expect: { teaching: "none", mastery: "required", retention: "passed", ended: ["done"] } } },
-  { id: "G-02", title: "Angle-sum misconception (adds the two angles): investigation → eligible teaching → fresh recheck → shown alone → delayed check", kind: "success",
-    scenario: { id: "G-02", category: 2, start: START_SUM, learner: () => learners.misconception(["added"], 1), later: [8], expect: { investigation: "before-teaching", teaching: "some", mastery: "required", ended: ["done"] } } },
+  { id: "G-02", title: "Angle-sum misconception: eligible teaching and fresh recheck; mixed-method delayed check waits for missing teaching", kind: "remediation",
+    scenario: { id: "G-02", category: 2, start: START_SUM, learner: () => learners.misconception(["added"], 1), later: [8], expect: { investigation: "before-teaching", teaching: "some", mastery: "required", ended: ["pause"] } } },
   { id: "G-03", title: "Exterior-angle misconception (gives the third interior angle) that never resolves: the failed journey needing remediation", kind: "remediation",
     scenario: { id: "G-03", category: 2, start: START_EXT, learner: () => learners.misconception(["third-interior"], Infinity, "right"), expect: { mastery: "any" } } },
   { id: "G-04", title: "Right only with hints: no independent mastery", kind: "safeguard",

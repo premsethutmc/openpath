@@ -82,10 +82,11 @@ test('relevant teaching is followed by a discriminating probe before other cover
  const c={journey:'angle-sum',config:TRIANGLE_PROPERTIES_CONFIG,bug:'added',family:'ahtri'};
  const {s,m}=established(c),strategy=m.strategies.find(st=>problemOf(st.check)?.family===c.family)!;
  const ctx=()=>({learnerId:s.learnerId,sessionId:s.session,at:new Date(++s.now).toISOString()});
- s.events.push(make.teach(ctx(),c.config.competency,strategy.id,'conceptual'));
- // Success on other kinds can raise broad status without resolving this hypothesis.
+ // Prior independent success on other kinds can raise broad status without resolving this
+ // hypothesis. It must predate the lesson: unrelated post-lesson answers are now unqualified.
  for(const q of modulePhasePool(m,'check').filter(q=>!q.endsWith(':mc')&&!probeReading(q,c.bug).discriminates).slice(0,12))s.submit(q,question(q).answer,'check');
  assert.ok(['independent','transfer'].includes(s.state().evidence(c.config.competency).status));
+ s.events.push(make.teach(ctx(),c.config.competency,strategy.id,'conceptual'));
  s.events.push(make.pathway(ctx(),c.config.competency));
  const es=events(s),records=pathwayRecords(s.learnerId,es),h=hypotheses(records)[0];
  assert.equal(h.status,'established');assert.equal(h.probeDue,true);

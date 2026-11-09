@@ -1,51 +1,53 @@
-# OpenPath status (handoff for a new session)
+# OpenPath — working-branch status
 
-Read this file first; open other files only as the task needs them. Keep it under ~50 lines and update it at
-each milestone.
+## Owner rules
+- Read this file first; verify refs because status is branch-local. Open other files only as needed.
+- No merge or deploy without explicit owner approval. No educator approval by an agent.
+- One bounded milestone at a time; finish, report exact commit/tests/defects/readiness, stop.
+- Keep this file under 60 lines; update at milestones with verified facts.
+- Publishing updates to this branch for PR #121 CI is authorised; no force push or branch cleanup.
 
-Updated: 2026-11-08 (b20ec49)
+Updated: 2026-11-09. Milestone: method-alignment expansion and hosted verification.
 
-## Rules (product owner)
-- No merge or deploy without the owner's explicit approval. PRs are drafts unless the owner says otherwise.
-- One milestone at a time: state scope and acceptance tests, finish, report, stop.
-- Report: commit, tests pass/fail, unresolved defects, readiness. No progress chatter.
-- Long jobs run in GitHub Actions; schedule a check-in instead of waiting.
+## Branches and ownership
+- Current: `milestone/method-alignment-2026-11-09`; draft PR #121, do not merge.
+- PR base: `milestone/teaching-geometry-handoff-2026-11-09` at `b4392a84`.
+- Original alignment implementation: `5412f8e8`; its five mappings and legacy replay retained.
+- Adaptive PR #120 (`08a6d5aa`) and combined maths PR #118 (`c62320ef`) remain separate drafts.
+- Claude owns Grade 8 PR #119, `feat/grade8-pilot` (observed `33368b8e`); untouched here.
+- Grade 7 PR #117 (`c1db278d`) remains Grade 8's base. No Grade 8 work integrated.
 
-## Branches
-- Base for maths work: `consolidation/openpath-candidate` (PR #112 → main, open).
-- Current: `feat/grade7-full-coverage` (draft PR #117, test run only).
-- Others open: #115 `integration/v3-from-112`, #116 `maths-expansion` (blueprints, draft).
-- Research: separate repo `premsethutmc/openpath-research` (research-only, off by default).
+## Completed local scope
+- Eight additional content-pinned explanations; total 13 across six competencies.
+- New distinctions: isosceles base/vertex, exterior reversal, Pythagoras add/subtract,
+  fraction-times-whole versus fraction-of-quantity, and substitution antiderivative powers.
+- New follow-ups require actual taught methods or qualified prior evidence; diagnostics stay separate.
+- Unknown mappings and exhausted compatible questions stop honestly; no automatic mastery.
+- Numeric substitution answers alone cannot establish examined antiderivative working.
+- Old IDs, grading, histories, legacy selection, review gates and default-off features preserved.
+- Triples and other unmigrated explanations remain unknown, not silently labelled compatible.
 
-## Current milestone: Grade 7 complete, both boards (CBSE, TN)
-- Done: 75 modules; 569 lesson sections; every Grade 7 question type taught; simulated learner verifies
-  CBSE 43/46, TN 48/50 (rest await an educator mark); inequations stall fixed (contexts@1).
-- Details: `docs/milestones/GRADE7_COVERAGE.md`.
+## Verification and exact coverage
+- Local: 49 focused regressions pass (22 alignment tests); type checks and isolated Year build pass.
+- Three real Django/browser journeys pass: actual UI responses, pending lesson, fresh guided/check, reload.
+- New method-limited browser suite is wired into My Learning Year alongside the existing suites.
+- Report: 11,188 pairs = 3,035 covered + 2,141 incompatible + 6,012 unknown; exhaustion stops 13/13.
+- Hosted full-suite status must be matched to the exact final head: PR #121 Checks and milestone handover.
+- Earlier component or initial-head CI does not certify a successor commit.
+- Initial CI failures addressed: Node CSS import, local-only Python path, obsolete mixed-method fixtures.
+- Geometry/foundation regressions: 19 pass; G-02's mixed delayed check correctly stays pending/unverified.
+- Three longer calculus browser journeys pass: method-gap pause → fresh diagnostic re-entry → wrong → reload.
+- All nine existing maths-expansion browser cases pass, including six unchanged delayed-failure/recovery paths.
+- Released-content browser case passes: Grade 10/9 verify; Grade 12 cannot bypass a method gap, re-entry stays unverified.
 
-## Open defects
-- (resolved) Grade 7 browser journeys green in CI at b20ec49: entry, session, practice, completion; all 11 browser
-  suites pass (curriculum timing race fixed by waiting for the meter).
-- Nine Grade 7 competencies graded 8–11 in the graph; some outcomes map to Grade 1–4 content.
-- Some mistake explanations carry no predicted answer (never diagnosable).
-- MC options not shuffled in older families (deferred by owner).
-- All content provisional: no educator review yet. No real learners yet. Real-device audio unverified.
+## Readiness and remaining limits
+- Local implementation ready for code review; release/merge/deployment are not authorised.
+- Educator review remains pending. Method compatibility is not educational quality or product-wide coverage.
+- Not established: real-student efficacy, physical-device/accessibility audit, general alternate-method proof.
+- No dedicated browser scenario for every added geometry/fraction explanation; focused selectors are tested.
+- Final exact commit, hosted pass/fail/skips and any unresolved defects are recorded in PR #121 and handover.
+- Current details/commands: `docs/milestones/METHOD_ALIGNMENT_BATCH2.md`.
+- Earlier milestone: `docs/milestones/METHOD_ALIGNMENT.md`; geometry: `docs/teaching-geometry-handoff/README.md`.
 
-## All-grades gap report (grade-gap@1, run 42439650121, b20ec49)
-Synthetic learner, behaviour only. Unmapped outcomes: 0 everywhere. Format: failed / untaught-after-mistakes.
-- Failed: CBSE 1, 2 `reasoning.estimate-check` (ends guided); CBSE 3 `equivalent-fractions` (ends transfer);
-  CBSE 9 (1, name not captured); TN 6 `euclid-algorithm` (ends guided).
-- Untaught (no checked general explanation): CBSE 12: 11, 9: 10, 8: 9, 4: 7, 6: 7, 11: 6, 3: 5, 7: 5, 5: 4, 10: 4,
-  2: 3, 1: 2; TN 11: 11, 10: 10, 12: 9, 4: 6, 6: 6, 8: 6, 9: 6, 5: 2, 7: 2.
-- TN 1–3 releases hold only 3 outcomes each: textbook not yet ingested (the largest real gap; the report can't see it).
-- Not measured: lesson level and wording (the Grade 7 review passes found most defects there).
-
-## How to test
-- Fast, local: `bun test packages/learning/src`; `frontend/src/year/grade7-coverage.test.ts`;
-  one grade: `GRADE=8 BOARD=tn bun frontend/scripts/grade-gap.mts`. All grades: workflow "Grade gap report".
-- Full: workflow "My Learning Year" (PR to the base branch, or manual run once `workflow_dispatch` is on main).
-  Every browser suite runs even if one fails; read the `summary.json` in the `my-learning-year-screens`
-  artifact (also shown in the job summary) instead of the full log.
-
-## Next
-1. Owner decides on review/merge of #117's branch (Grade 7 green).
-2. Fix open Grade 7 defects above, then the next grade/board per the owner.
+## Stop point
+- Finish final-head CI and report. No further milestone, cleanup, merge or deployment as part of this work.

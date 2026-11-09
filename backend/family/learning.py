@@ -31,7 +31,7 @@ RECORDS = {
     'foundation_pathway': {'policy', 'target', 'active'},
     'curriculum': {'release'},
     'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context', 'working', 'assessment'},
-    'teach': {'rule', 'strategy', 'competency', 'episode'},
+    'teach': {'rule', 'strategy', 'competency', 'episode', 'methodAlignment'},
     'skip': {'target'},
     'study_session': {'planId', 'revision', 'phase', 'time', 'advice'},
     'topic_session': {'academicYear', 'stage', 'target', 'minutes', 'curriculum'},
@@ -425,6 +425,8 @@ def checked_learning(event, pupil):
             if since is None or now - since < RETENTION_DELAY:
                 _reject('The delayed check is not due yet.')
     elif record == 'teach':
+        if 'methodAlignment' in event and (not isinstance(event['methodAlignment'], str) or not re.fullmatch(r'method-alignment@1:[0-9a-f]{64}', event['methodAlignment'])):
+            _reject('Invalid method alignment policy.')
         m = c['modules'].get(event.get('competency'))
         if not m or event.get('strategy') not in {s['id'] for s in m['strategies']} or not _text(event.get('rule'), 40):
             _reject('Unknown teaching for this skill.')
