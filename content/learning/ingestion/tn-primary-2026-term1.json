@@ -1,0 +1,2025 @@
+{
+  "schema": "textbook-intake@1",
+  "status": "draft",
+  "board": "tn",
+  "academicYear": "2026-27",
+  "subject": "Mathematics",
+  "scope": "Bounded Term I English-medium intake for Grades 1–3. Not an annual curriculum release.",
+  "books": [
+    {
+      "id": "tn-g01-2026-t1-em",
+      "grade": 1,
+      "term": 1,
+      "medium": "English",
+      "edition": "First Edition 2026; new syllabus; trimester pattern",
+      "title": "Mathematics, Standard 1, Term I (part of a combined subject volume)",
+      "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+      "contentCreator": "SCERT Tamil Nadu",
+      "source": {
+        "url": "https://drive.google.com/file/d/1UkU2WncQpk6V-73odnkq3xQijKCd4rNa/view",
+        "listingUrl": "https://www.tnkalvi.net/2026/05/new-syllabus-textbooks-from-2026-27.html",
+        "accessed": "2026-11-09",
+        "delivery": "third-party watermarked mirror of government publication; not an official-host checksum",
+        "sha256": "4aba674be5aacf5094ce2af8cd9626523c4d5bb34519199041113005d2925352",
+        "bytes": 170295663,
+        "pdfPages": 144,
+        "editionPdfPage": 2,
+        "contentsPdfPage": 7,
+        "printedToPdfOffset": 7,
+        "rights": "Copyright SCERT 2026; NOT FOR SALE printed on page II. No open redistribution licence observed. PDFs, extracted bodies, exercises and illustrations are not committed."
+      },
+      "coverage": {
+        "status": "partial",
+        "contentsLessonsEnumerated": 8,
+        "outcomeCoverage": "selected explicit learning summaries and tasks; not an exhaustive transcription or educator review",
+        "unknown": [
+          "Completeness of outcome decomposition within Term I",
+          "Teacher handbook and linked digital resources",
+          "Terms II and III of the 2026 edition",
+          "Tamil-medium equivalence"
+        ],
+        "learnerReleaseUpdated": false
+      },
+      "lessons": [
+        {
+          "id": "tn-g01-2026-t1-em-l01",
+          "number": 1,
+          "unit": 1,
+          "title": "Where is the Ball?",
+          "printedPages": [
+            1,
+            7
+          ],
+          "pdfPages": [
+            8,
+            14
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g01-2026-t1-em-l01-o01",
+              "statement": "Describe object positions using inside/outside, above/below, on/under, before/after and top/bottom.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  2,
+                  7
+                ],
+                "pdfPages": [
+                  9,
+                  14
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g01-2026-t1-em-l02",
+          "number": 2,
+          "unit": 1,
+          "title": "Things I Like",
+          "printedPages": [
+            8,
+            15
+          ],
+          "pdfPages": [
+            15,
+            22
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g01-2026-t1-em-l02-o01",
+              "statement": "Group objects by their colour.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  15,
+                  15
+                ],
+                "pdfPages": [
+                  22,
+                  22
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l02-o02",
+              "statement": "Continue a repeating colour sequence.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  15,
+                  15
+                ],
+                "pdfPages": [
+                  22,
+                  22
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l02-o03",
+              "statement": "Distinguish flat and round objects and identify objects that roll, slide or do both.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  15,
+                  15
+                ],
+                "pdfPages": [
+                  22,
+                  22
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g01-2026-t1-em-l03",
+          "number": 3,
+          "unit": 1,
+          "title": "How Many Toys?",
+          "printedPages": [
+            16,
+            35
+          ],
+          "pdfPages": [
+            23,
+            42
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g01-2026-t1-em-l03-o01",
+              "statement": "Match objects one to one to compare quantities.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  35,
+                  35
+                ],
+                "pdfPages": [
+                  42,
+                  42
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l03-o02",
+              "statement": "Count a collection of up to nine objects.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  35,
+                  35
+                ],
+                "pdfPages": [
+                  42,
+                  42
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l03-o03",
+              "statement": "Read and write the numerals 1 to 9 and represent them with objects.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  35,
+                  35
+                ],
+                "pdfPages": [
+                  42,
+                  42
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g01-2026-t1-em-l04",
+          "number": 4,
+          "unit": 1,
+          "title": "What are Missing?",
+          "printedPages": [
+            36,
+            44
+          ],
+          "pdfPages": [
+            43,
+            51
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g01-2026-t1-em-l04-o01",
+              "statement": "Count forwards and backwards within the number range shown in the lesson.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  42,
+                  42
+                ],
+                "pdfPages": [
+                  49,
+                  49
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l04-o02",
+              "statement": "Find the number immediately before or after a given number.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  42,
+                  42
+                ],
+                "pdfPages": [
+                  49,
+                  49
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l04-o03",
+              "statement": "Compare quantities and identify the larger or smaller numeral.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  42,
+                  42
+                ],
+                "pdfPages": [
+                  49,
+                  49
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l04-o04",
+              "statement": "Continue forward counting in steps of two.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  42,
+                  42
+                ],
+                "pdfPages": [
+                  49,
+                  49
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g01-2026-t1-em-l05",
+          "number": 5,
+          "unit": 2,
+          "title": "Who has More?",
+          "printedPages": [
+            45,
+            46
+          ],
+          "pdfPages": [
+            52,
+            53
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g01-2026-t1-em-l05-o01",
+              "statement": "Sort pictured objects into groups and record their counts.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  45,
+                  46
+                ],
+                "pdfPages": [
+                  52,
+                  53
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l05-o02",
+              "statement": "Compare group counts as more, fewer or equal.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  46,
+                  46
+                ],
+                "pdfPages": [
+                  53,
+                  53
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g01-2026-t1-em-l06",
+          "number": 6,
+          "unit": 2,
+          "title": "Total Balloons",
+          "printedPages": [
+            47,
+            57
+          ],
+          "pdfPages": [
+            54,
+            64
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g01-2026-t1-em-l06-o01",
+              "statement": "Represent combining groups with addition symbols and calculate single-digit sums shown in the lesson.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  48,
+                  53
+                ],
+                "pdfPages": [
+                  55,
+                  60
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l06-o02",
+              "statement": "Complete missing entries in addition facts.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  54,
+                  55
+                ],
+                "pdfPages": [
+                  61,
+                  62
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l06-o03",
+              "statement": "Compare an addition with the same two addends in the opposite order.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  55,
+                  55
+                ],
+                "pdfPages": [
+                  62,
+                  62
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l06-o04",
+              "statement": "Use addition to solve simple illustrated combining stories.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  56,
+                  57
+                ],
+                "pdfPages": [
+                  63,
+                  64
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g01-2026-t1-em-l07",
+          "number": 7,
+          "unit": 2,
+          "title": "Things Around Me",
+          "printedPages": [
+            58,
+            64
+          ],
+          "pdfPages": [
+            65,
+            71
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g01-2026-t1-em-l07-o01",
+              "statement": "Compare objects by length and height, including longest and shortest.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  64,
+                  64
+                ],
+                "pdfPages": [
+                  71,
+                  71
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l07-o02",
+              "statement": "Compare positions by distance using nearer/farther and nearest/farthest.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  63,
+                  64
+                ],
+                "pdfPages": [
+                  70,
+                  71
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g01-2026-t1-em-l08",
+          "number": 8,
+          "unit": 2,
+          "title": "Remaining Balloons",
+          "printedPages": [
+            65,
+            73
+          ],
+          "pdfPages": [
+            72,
+            80
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g01-2026-t1-em-l08-o01",
+              "statement": "Represent taking objects away with subtraction and find the remainder.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  65,
+                  69
+                ],
+                "pdfPages": [
+                  72,
+                  76
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l08-o02",
+              "statement": "Complete missing entries in subtraction facts.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  73,
+                  73
+                ],
+                "pdfPages": [
+                  80,
+                  80
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g01-2026-t1-em-l08-o03",
+              "statement": "Solve and create simple illustrated take-away stories.",
+              "provenance": {
+                "sourceId": "tn-g01-2026-t1-em",
+                "printedPages": [
+                  73,
+                  73
+                ],
+                "pdfPages": [
+                  80,
+                  80
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tn-g02-2026-t1-em",
+      "grade": 2,
+      "term": 1,
+      "medium": "English",
+      "edition": "First Edition 2026; new syllabus; trimester pattern",
+      "title": "Mathematics, Standard 2, Term I (part of a combined subject volume)",
+      "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+      "contentCreator": "SCERT Tamil Nadu",
+      "source": {
+        "url": "https://drive.google.com/file/d/1ajTMWaeBemVKxw-foqDiX8nHc1_5qcld/view",
+        "listingUrl": "https://www.tnkalvi.net/2026/05/new-syllabus-textbooks-from-2026-27.html",
+        "accessed": "2026-11-09",
+        "delivery": "third-party watermarked mirror of government publication; not an official-host checksum",
+        "sha256": "0b3541d0259af92f41521e53348e7b7fa2ae5ae63c398887802c3fc362dbd56b",
+        "bytes": 160866675,
+        "pdfPages": 144,
+        "editionPdfPage": 2,
+        "contentsPdfPage": 7,
+        "printedToPdfOffset": 7,
+        "rights": "Copyright SCERT 2026; NOT FOR SALE printed on page II. No open redistribution licence observed. PDFs, extracted bodies, exercises and illustrations are not committed."
+      },
+      "coverage": {
+        "status": "partial",
+        "contentsLessonsEnumerated": 8,
+        "outcomeCoverage": "selected explicit learning summaries and tasks; not an exhaustive transcription or educator review",
+        "unknown": [
+          "Completeness of outcome decomposition within Term I",
+          "Teacher handbook and linked digital resources",
+          "Terms II and III of the 2026 edition",
+          "Tamil-medium equivalence"
+        ],
+        "learnerReleaseUpdated": false
+      },
+      "lessons": [
+        {
+          "id": "tn-g02-2026-t1-em-l01",
+          "number": 1,
+          "unit": 1,
+          "title": "My Favourite Bird",
+          "printedPages": [
+            1,
+            8
+          ],
+          "pdfPages": [
+            8,
+            15
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g02-2026-t1-em-l01-o01",
+              "statement": "Read two-digit numbers and represent a number using tens and ones in preparatory activities.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  1,
+                  2
+                ],
+                "pdfPages": [
+                  8,
+                  9
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l01-o02",
+              "statement": "Practise before/after numbers, comparisons and counting in twos.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  2,
+                  2
+                ],
+                "pdfPages": [
+                  9,
+                  9
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l01-o03",
+              "statement": "Compare object surfaces, motion, length, weight and container capacity in preparatory activities.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  3,
+                  4
+                ],
+                "pdfPages": [
+                  10,
+                  11
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l01-o04",
+              "statement": "Combine pictured groups and record an addition.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  5,
+                  5
+                ],
+                "pdfPages": [
+                  12,
+                  12
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g02-2026-t1-em-l02",
+          "number": 2,
+          "unit": 1,
+          "title": "My Favourite Shapes",
+          "printedPages": [
+            9,
+            17
+          ],
+          "pdfPages": [
+            16,
+            24
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g02-2026-t1-em-l02-o01",
+              "statement": "Identify faces, edges and corners of objects.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  17,
+                  17
+                ],
+                "pdfPages": [
+                  24,
+                  24
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l02-o02",
+              "statement": "Classify objects by flat or curved faces and straight or curved edges.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  17,
+                  17
+                ],
+                "pdfPages": [
+                  24,
+                  24
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l02-o03",
+              "statement": "Name the cube, sphere, cylinder and cone.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  17,
+                  17
+                ],
+                "pdfPages": [
+                  24,
+                  24
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l02-o04",
+              "statement": "Continue a sequence of shapes.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  17,
+                  17
+                ],
+                "pdfPages": [
+                  24,
+                  24
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g02-2026-t1-em-l03",
+          "number": 3,
+          "unit": 1,
+          "title": "Which is My Place?",
+          "printedPages": [
+            18,
+            34
+          ],
+          "pdfPages": [
+            25,
+            41
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g02-2026-t1-em-l03-o01",
+              "statement": "Use ordinal positions from first to tenth.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  34,
+                  34
+                ],
+                "pdfPages": [
+                  41,
+                  41
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l03-o02",
+              "statement": "Read and write number names from one to twenty.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  34,
+                  34
+                ],
+                "pdfPages": [
+                  41,
+                  41
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l03-o03",
+              "statement": "Count grouped objects using tens and ones.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  34,
+                  34
+                ],
+                "pdfPages": [
+                  41,
+                  41
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l03-o04",
+              "statement": "Use place value and number cards to represent two-digit numbers.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  34,
+                  34
+                ],
+                "pdfPages": [
+                  41,
+                  41
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g02-2026-t1-em-l04",
+          "number": 4,
+          "unit": 1,
+          "title": "What Next?",
+          "printedPages": [
+            35,
+            45
+          ],
+          "pdfPages": [
+            42,
+            52
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g02-2026-t1-em-l04-o01",
+              "statement": "Count forwards and backwards with two-digit numbers.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  43,
+                  43
+                ],
+                "pdfPages": [
+                  50,
+                  50
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l04-o02",
+              "statement": "Find numbers immediately before, after or between given numbers.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  43,
+                  43
+                ],
+                "pdfPages": [
+                  50,
+                  50
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l04-o03",
+              "statement": "Continue skip-counting sequences, including forward threes and backward fives.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  43,
+                  44
+                ],
+                "pdfPages": [
+                  50,
+                  51
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l04-o04",
+              "statement": "Compare two-digit numbers.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  43,
+                  43
+                ],
+                "pdfPages": [
+                  50,
+                  50
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g02-2026-t1-em-l05",
+          "number": 5,
+          "unit": 2,
+          "title": "Favourite Games",
+          "printedPages": [
+            46,
+            47
+          ],
+          "pdfPages": [
+            53,
+            54
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g02-2026-t1-em-l05-o01",
+              "statement": "Count pictured categories and enter their frequencies in a table.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  46,
+                  47
+                ],
+                "pdfPages": [
+                  53,
+                  54
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l05-o02",
+              "statement": "Use a table to identify most, least and equal category counts.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  47,
+                  47
+                ],
+                "pdfPages": [
+                  54,
+                  54
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g02-2026-t1-em-l06",
+          "number": 6,
+          "unit": 2,
+          "title": "Total Bundles",
+          "printedPages": [
+            48,
+            57
+          ],
+          "pdfPages": [
+            55,
+            64
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g02-2026-t1-em-l06-o01",
+              "statement": "Add two-digit numbers in the non-regrouping cases shown.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  57,
+                  57
+                ],
+                "pdfPages": [
+                  64,
+                  64
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l06-o02",
+              "statement": "Use addition to find totals in money and object stories.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  57,
+                  57
+                ],
+                "pdfPages": [
+                  64,
+                  64
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g02-2026-t1-em-l07",
+          "number": 7,
+          "unit": 2,
+          "title": "How to Measure?",
+          "printedPages": [
+            58,
+            64
+          ],
+          "pdfPages": [
+            65,
+            71
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g02-2026-t1-em-l07-o01",
+              "statement": "Measure length with handspans, cubits, footspans and paces.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  58,
+                  59
+                ],
+                "pdfPages": [
+                  65,
+                  66
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l07-o02",
+              "statement": "Explain why measurements made with different people’s body units can disagree.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  60,
+                  60
+                ],
+                "pdfPages": [
+                  67,
+                  67
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l07-o03",
+              "statement": "Measure with repeated equal-sized non-standard units and select a suitable unit.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  61,
+                  64
+                ],
+                "pdfPages": [
+                  68,
+                  71
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l07-o04",
+              "statement": "Estimate a length, measure it and record both results.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  60,
+                  62
+                ],
+                "pdfPages": [
+                  67,
+                  69
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g02-2026-t1-em-l08",
+          "number": 8,
+          "unit": 2,
+          "title": "Remaining Bundles",
+          "printedPages": [
+            65,
+            73
+          ],
+          "pdfPages": [
+            72,
+            80
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g02-2026-t1-em-l08-o01",
+              "statement": "Subtract two-digit numbers in the non-regrouping cases shown.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  66,
+                  69
+                ],
+                "pdfPages": [
+                  73,
+                  76
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l08-o02",
+              "statement": "Estimate a difference and compare it with the calculated result.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  69,
+                  69
+                ],
+                "pdfPages": [
+                  76,
+                  76
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l08-o03",
+              "statement": "Solve subtraction stories involving remaining objects or money.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  71,
+                  73
+                ],
+                "pdfPages": [
+                  78,
+                  80
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g02-2026-t1-em-l08-o04",
+              "statement": "Complete related addition and subtraction facts.",
+              "provenance": {
+                "sourceId": "tn-g02-2026-t1-em",
+                "printedPages": [
+                  72,
+                  73
+                ],
+                "pdfPages": [
+                  79,
+                  80
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tn-g03-2026-t1-em",
+      "grade": 3,
+      "term": 1,
+      "medium": "English",
+      "edition": "First Edition 2026; new syllabus; trimester pattern",
+      "title": "Mathematics, Standard 3, Term I (part of a combined subject volume)",
+      "publisher": "Tamil Nadu Textbook and Educational Services Corporation",
+      "contentCreator": "SCERT Tamil Nadu",
+      "source": {
+        "url": "https://drive.google.com/file/d/14IcyB166l0Ld-cwCh_aMnp3fUMo9K2Uj/view",
+        "listingUrl": "https://www.tnkalvi.net/2026/05/new-syllabus-textbooks-from-2026-27.html",
+        "accessed": "2026-11-09",
+        "delivery": "third-party watermarked mirror of government publication; not an official-host checksum",
+        "sha256": "b37ad1875d0e04d1aa1480f3f372e227dbdc8b2fa03ffdb61a637d6a142b5044",
+        "bytes": 168842936,
+        "pdfPages": 184,
+        "editionPdfPage": 2,
+        "contentsPdfPage": 7,
+        "printedToPdfOffset": 7,
+        "rights": "Copyright SCERT 2026; NOT FOR SALE printed on page II. No open redistribution licence observed. PDFs, extracted bodies, exercises and illustrations are not committed."
+      },
+      "coverage": {
+        "status": "partial",
+        "contentsLessonsEnumerated": 8,
+        "outcomeCoverage": "selected explicit learning summaries and tasks; not an exhaustive transcription or educator review",
+        "unknown": [
+          "Completeness of outcome decomposition within Term I",
+          "Teacher handbook and linked digital resources",
+          "Terms II and III of the 2026 edition",
+          "Tamil-medium equivalence"
+        ],
+        "learnerReleaseUpdated": false
+      },
+      "lessons": [
+        {
+          "id": "tn-g03-2026-t1-em-l01",
+          "number": 1,
+          "unit": 1,
+          "title": "Colourful Flowers",
+          "printedPages": [
+            1,
+            6
+          ],
+          "pdfPages": [
+            8,
+            13
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g03-2026-t1-em-l01-o01",
+              "statement": "Use tens and ones to describe two-digit numbers in preparatory activities.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  1,
+                  2
+                ],
+                "pdfPages": [
+                  8,
+                  9
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l01-o02",
+              "statement": "Count forwards and backwards and compare pictured quantities.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  2,
+                  2
+                ],
+                "pdfPages": [
+                  9,
+                  9
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l01-o03",
+              "statement": "Recognise flat and curved surfaces and plane shapes in preparatory activities.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  3,
+                  3
+                ],
+                "pdfPages": [
+                  10,
+                  10
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l01-o04",
+              "statement": "Select a suitable informal unit for measuring a length.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  4,
+                  4
+                ],
+                "pdfPages": [
+                  11,
+                  11
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l01-o05",
+              "statement": "Add prices in the preparatory plant-buying activity.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  5,
+                  5
+                ],
+                "pdfPages": [
+                  12,
+                  12
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g03-2026-t1-em-l02",
+          "number": 2,
+          "unit": 1,
+          "title": "Objects and Shapes",
+          "printedPages": [
+            7,
+            14
+          ],
+          "pdfPages": [
+            14,
+            21
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g03-2026-t1-em-l02-o01",
+              "statement": "Recognise the same shape in different orientations.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  14,
+                  14
+                ],
+                "pdfPages": [
+                  21,
+                  21
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l02-o02",
+              "statement": "Distinguish solids by their faces and edges.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  14,
+                  14
+                ],
+                "pdfPages": [
+                  21,
+                  21
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l02-o03",
+              "statement": "Build models from solid shapes and identify their component shapes.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  14,
+                  14
+                ],
+                "pdfPages": [
+                  21,
+                  21
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l02-o04",
+              "statement": "Continue patterns made from shapes.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  14,
+                  14
+                ],
+                "pdfPages": [
+                  21,
+                  21
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g03-2026-t1-em-l03",
+          "number": 3,
+          "unit": 1,
+          "title": "How Many Beads?",
+          "printedPages": [
+            15,
+            34
+          ],
+          "pdfPages": [
+            22,
+            41
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g03-2026-t1-em-l03-o01",
+              "statement": "Find the missing amount needed to make one hundred.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  34,
+                  34
+                ],
+                "pdfPages": [
+                  41,
+                  41
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l03-o02",
+              "statement": "Read, write and name numbers from 101 to 999.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  34,
+                  34
+                ],
+                "pdfPages": [
+                  41,
+                  41
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l03-o03",
+              "statement": "Identify the hundreds, tens and ones in a three-digit number.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  34,
+                  34
+                ],
+                "pdfPages": [
+                  41,
+                  41
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l03-o04",
+              "statement": "Convert between expanded and compact three-digit representations.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  34,
+                  34
+                ],
+                "pdfPages": [
+                  41,
+                  41
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g03-2026-t1-em-l04",
+          "number": 4,
+          "unit": 1,
+          "title": "Which? Where?",
+          "printedPages": [
+            35,
+            46
+          ],
+          "pdfPages": [
+            42,
+            53
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g03-2026-t1-em-l04-o01",
+              "statement": "Count forwards and backwards with three-digit numbers.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  44,
+                  44
+                ],
+                "pdfPages": [
+                  51,
+                  51
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l04-o02",
+              "statement": "Find the number immediately before or after a three-digit number.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  44,
+                  44
+                ],
+                "pdfPages": [
+                  51,
+                  51
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l04-o03",
+              "statement": "Continue forward and backward skip-counting sequences.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  44,
+                  44
+                ],
+                "pdfPages": [
+                  51,
+                  51
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l04-o04",
+              "statement": "Compare numbers and identify a number between two bounds.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  44,
+                  45
+                ],
+                "pdfPages": [
+                  51,
+                  52
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g03-2026-t1-em-l05",
+          "number": 5,
+          "unit": 2,
+          "title": "My Hobbies",
+          "printedPages": [
+            47,
+            49
+          ],
+          "pdfPages": [
+            54,
+            56
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g03-2026-t1-em-l05-o01",
+              "statement": "Read and record counts using tally marks.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  47,
+                  47
+                ],
+                "pdfPages": [
+                  54,
+                  54
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l05-o02",
+              "statement": "Complete frequency tables and compare category totals and their differences.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  48,
+                  49
+                ],
+                "pdfPages": [
+                  55,
+                  56
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g03-2026-t1-em-l06",
+          "number": 6,
+          "unit": 2,
+          "title": "How Many, in Total?",
+          "printedPages": [
+            50,
+            58
+          ],
+          "pdfPages": [
+            57,
+            65
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g03-2026-t1-em-l06-o01",
+              "statement": "Add three-digit numbers without regrouping.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  58,
+                  58
+                ],
+                "pdfPages": [
+                  65,
+                  65
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l06-o02",
+              "statement": "Add three-digit numbers with regrouping.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  58,
+                  58
+                ],
+                "pdfPages": [
+                  65,
+                  65
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l06-o03",
+              "statement": "Estimate whether a sum is above or below a given benchmark.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  58,
+                  58
+                ],
+                "pdfPages": [
+                  65,
+                  65
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l06-o04",
+              "statement": "Solve addition stories involving three-digit amounts.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  58,
+                  58
+                ],
+                "pdfPages": [
+                  65,
+                  65
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g03-2026-t1-em-l07",
+          "number": 7,
+          "unit": 2,
+          "title": "The Actual Length...",
+          "printedPages": [
+            59,
+            65
+          ],
+          "pdfPages": [
+            66,
+            72
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g03-2026-t1-em-l07-o01",
+              "statement": "Explain why a common standard unit is needed for length measurement.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  65,
+                  65
+                ],
+                "pdfPages": [
+                  72,
+                  72
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l07-o02",
+              "statement": "Compare lengths with one metre and half a metre.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  65,
+                  65
+                ],
+                "pdfPages": [
+                  72,
+                  72
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l07-o03",
+              "statement": "Recognise that repositioning an object does not change its length.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  65,
+                  65
+                ],
+                "pdfPages": [
+                  72,
+                  72
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        },
+        {
+          "id": "tn-g03-2026-t1-em-l08",
+          "number": 8,
+          "unit": 2,
+          "title": "How Many, Left?",
+          "printedPages": [
+            66,
+            74
+          ],
+          "pdfPages": [
+            73,
+            81
+          ],
+          "outcomes": [
+            {
+              "id": "tn-g03-2026-t1-em-l08-o01",
+              "statement": "Subtract three-digit numbers without regrouping.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  74,
+                  74
+                ],
+                "pdfPages": [
+                  81,
+                  81
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l08-o02",
+              "statement": "Subtract three-digit numbers with regrouping.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  74,
+                  74
+                ],
+                "pdfPages": [
+                  81,
+                  81
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l08-o03",
+              "statement": "Estimate whether a difference is above or below a given benchmark.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  74,
+                  74
+                ],
+                "pdfPages": [
+                  81,
+                  81
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            },
+            {
+              "id": "tn-g03-2026-t1-em-l08-o04",
+              "statement": "Solve subtraction stories involving three-digit quantities.",
+              "provenance": {
+                "sourceId": "tn-g03-2026-t1-em",
+                "printedPages": [
+                  74,
+                  74
+                ],
+                "pdfPages": [
+                  81,
+                  81
+                ],
+                "basis": "OpenPath summary of observed source; not a verbatim official outcome"
+              },
+              "mappingStatus": "not-reviewed",
+              "mapped": [],
+              "educatorReviewed": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
