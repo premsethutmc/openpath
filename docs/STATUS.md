@@ -34,6 +34,8 @@ Updated: 2026-11-09. Milestone: method-alignment expansion and hosted verificati
 - Report: 11,188 pairs = 3,035 covered + 2,141 incompatible + 6,012 unknown; exhaustion stops 13/13.
 - Hosted full-suite status must be matched to the exact final head: PR #121 Checks and milestone handover.
 - Earlier component or initial-head CI does not certify a successor commit.
+- Initial CI failures addressed: Node CSS import, local-only Python path, obsolete mixed-method fixtures.
+- Geometry/foundation regressions: 19 pass; G-02's mixed delayed check correctly stays pending/unverified.
 
 ## Readiness and remaining limits
 - Local implementation ready for code review; release/merge/deployment are not authorised.

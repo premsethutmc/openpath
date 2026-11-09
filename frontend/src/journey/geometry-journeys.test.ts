@@ -27,7 +27,7 @@ test("only trusted grader decisions: every attempt carries the server's grading-
   for (const t of Object.values(T)) for (const s of t.submissions) assert.ok(s.verdict !== null, `${t.id} ${s.q}`);
 });
 
-test("complete journey (G-02): diagnostic → wrong → investigation → eligible teaching → fresh recheck → shown alone → delayed check passed → replay identical", () => {
+test("G-02: fresh angle-sum success survives reload, but untaught methods cannot pass the mixed delayed check", () => {
   const t = T["G-02"];
   assert.equal(t.submissions[0].activity, "diagnostic");
   assert.equal(t.submissions[0].verdict, "incorrect");
@@ -35,7 +35,9 @@ test("complete journey (G-02): diagnostic → wrong → investigation → eligib
   assert.ok(t.teaching.length >= 1 && t.teaching.every((x) => x.eligibility.eligible));
   assert.ok(t.submissions.some((s) => s.activity === "check" && s.verdict === "correct" && s.hints === 0));
   assert.ok(["independent", "transfer"].includes(t.authoritative[TRI].status));
-  assert.deepEqual(t.authoritative[TRI].retentionHistory, ["passed"]);
+  assert.deepEqual(t.authoritative[TRI].retentionHistory, ["pending"]);
+  assert.equal(t.authoritative[TRI].verified, false);
+  assert.equal(t.ended, "pause");
   assert.deepEqual(t.replay, { identicalState: true, identicalProjection: true, identicalNextModuleDecision: true, reversedOrderProjectionIdentical: true });
 });
 

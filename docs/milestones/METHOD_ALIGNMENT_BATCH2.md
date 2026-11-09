@@ -42,6 +42,8 @@ The real Django browser harness now uses the compatibility contract for its miss
 
 Hosted results must be read for the exact final head in PR #121; initial-head results are not substituted for the expanded branch. Final workflow links, results, local logs, screenshots and full reports are saved in `/workspace/shared/method-alignment-batch2-2026-11-09/` and the PR description.
 
+Initial hosted verification exposed inherited integration failures: Node rendering tests imported geometry CSS, a backend parity test assumed a local `.venv`, and geometry fixtures expected unrelated post-lesson credit or a completed mixed-method delayed check. Styles now enter through both app stylesheets (Year/review and curriculum); CI provisions Python dependencies and the parity test supports the configured interpreter. The foundation fixture establishes unrelated knowledge before teaching. G-02 explicitly preserves fresh angle-sum success and replay while requiring the mixed delayed check to remain pending and unverified. These are not removed assertions or content approvals. The 19 targeted geometry/foundation regressions pass.
+
 Not established: educator approval, real-student learning efficacy, physical-device/accessibility audit, all-family method coverage, or a general alternate-solution proof policy. Other explanations remain explicitly unmigrated. New non-calculus routes receive focused selector tests and the existing integrated/Grade 7 CI journeys; no claim is made that every added explanation has a dedicated browser scenario.
 
 Commands from frontend:

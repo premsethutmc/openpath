@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+import { existsSync } from 'node:fs';
 import { question } from '../../../packages/learning/src/content';
 import { phasePool } from '../../../packages/learning/src/families';
 import { gradeRequest } from '../../../packages/learning/src/server-grader';
@@ -21,8 +22,9 @@ test('simulated choice responses preserve letters, and every intended wrong is i
     }
   }
   assert.equal(ids.length,33);
-  const r=spawnSync(process.env.PYTHON ?? `${root}.venv/bin/python`,[`${root}research/deep-recovery/results/phase6-sim/server_verdicts.py`],{cwd:`${root}backend`,input:JSON.stringify(requests),encoding:'utf8',timeout:100000,maxBuffer:1<<22});
-  assert.equal(r.status,0,r.stderr);
+  const python=process.env.PYTHON ?? (existsSync(`${root}.venv/bin/python`) ? `${root}.venv/bin/python` : 'python3');
+  const r=spawnSync(python,[`${root}research/deep-recovery/results/phase6-sim/server_verdicts.py`],{cwd:`${root}backend`,input:JSON.stringify(requests),encoding:'utf8',timeout:100000,maxBuffer:1<<22});
+  assert.equal(r.status,0,`${python}: ${r.error?.message ?? r.stderr}`);
   const verdicts=JSON.parse(r.stdout);
   assert.equal(verdicts.length,requests.length);
   assert.deepEqual(verdicts.filter((v:any)=>v.shadow!=='incorrect'||v.unified!=='incorrect'),[]);

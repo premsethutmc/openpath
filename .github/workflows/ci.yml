@@ -100,6 +100,11 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - name: Install dependencies
         run: npm ci
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Backend dependencies for simulated-answer parity
+        run: pip install -r ../backend/requirements.txt
       - name: Typecheck
         run: npm run typecheck
       - name: Engine parity tests
