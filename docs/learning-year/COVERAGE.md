@@ -1705,4 +1705,3 @@ By grade (a competency spanning grades counts in each):
 ## What "complete module" means
 
 validate@1 (`packages/learning/src/validate.ts`): one to three diagnostic questions; at least one teaching strategy with its own guided and check questions; at least two practice questions; a transfer question; a two-question delayed check; at least two answer formats among the questions answered alone; no question used twice; every question about the module's competency (probes may ask about what it builds on). It is a structural check plus each generated question's independent mathematical check. It is not an educator review.
-<!-- ci-failure-probe: a hand edit to a generated file; the regen check must fail -->
