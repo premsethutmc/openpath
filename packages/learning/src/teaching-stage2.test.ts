@@ -6,7 +6,7 @@
 import { describe, expect, test } from "bun:test";
 import { modules, needsMarking, question, type Module } from "./content";
 import { exposureKey, FAMILIES, pool, problemOf } from "./families";
-import { checkRepresentation, teachingLesson, EXEMPTIONS, evalArithmetic, lessonBlocks, ROLE_LABEL, SHOWCASE } from "./teaching-contract";
+import { checkRepresentation, teachingLesson, EXEMPTIONS, evalArithmetic, falseArithmetic, GRADE8_SCOPE, lessonBlocks, ROLE_LABEL, SHOWCASE } from "./teaching-contract";
 
 import { teachingScopeFor } from "./teaching-presentation";
 import { modulePhasePool } from "./library";
@@ -94,7 +94,9 @@ describe("practice tests what was taught", () => {
     expect(caseOf(first.params), `${c}: first practice ${ordered[0]}`).toBe(caseOf(problemOf(taught.instance!)!.params));
     const shown = new Set(blocks.flatMap((b) => (b.instance ? [exposureKey(b.instance)] : [])));
     expect(shown.has(exposureKey(ordered[0])), `${c}: practice starts with a question the lesson already used`).toBe(false);
-    expect([...ordered].sort()).toEqual([...ids].sort());
+    // grade8-fix-platform: practice is the candidates minus the questions the lesson shows (each family here has fresh ones)
+    expect(ordered.some((id) => shown.has(exposureKey(id))), `${c}: practice serves a question the lesson shows`).toBe(false);
+    expect([...ordered].sort()).toEqual(ids.filter((id) => !shown.has(exposureKey(id))).sort());
   }, LONG);
 });
 
@@ -181,5 +183,33 @@ describe("showcase readiness: each thing said once, solutions checked to the ans
     expect(b.violations).toEqual([]);
     expect(b.exempt).toEqual([]);
     expect(b.text.join(" ")).toContain(`${[60, 72, 90, 105, 115, 120, 135, 150][p.params[3]]}°`);
+  }, LONG);
+});
+
+describe("grade8-fix-platform: lesson sections", () => {
+  test("the claim check knows true from false arithmetic", () => {
+    for (const l of ["x × 3 = 3.", "5.84 × 5 = 584000.", "4 × 3 = 4, 3.", "The middle root is 54 ÷ 2 = −1"]) expect(falseArithmetic(l), l).toBe(true);
+    for (const l of ["x × 3 = 3x", "2 × 5x × 2 = 20x.", "Term 16 = 12 + 15 × 5 = 12 + 75 = 87", "So 25 ÷ 6 = 4 remainder 1", "6,000 × 70 = 4,20,000", "16 ÷ 2 : 6 ÷ 2 = 8:3"]) expect(falseArithmetic(l), l).toBe(false);
+  });
+  test("no step note, working line or text of a lesson states false arithmetic (every module)", () => {
+    const bad: string[] = [];
+    for (const m of modules) for (const b of lessonBlocks(m)) {
+      const lines = [...b.text, ...(b.lines ?? []), ...(b.worked?.steps.flatMap((s) => [s.expression, s.explanation]) ?? [])];
+      for (const l of lines) if (l && falseArithmetic(l)) bad.push(`${m.competency}: ${l}`);
+    }
+    // the one left is a family's own step sentence (fam/b16.ts, middle root), for the content fix
+    expect(bad.filter((x) => !x.startsWith("MATH.algebra.polynomial-equation-solving:"))).toEqual([]);
+  }, LONG);
+  test("a Grade 8 section without a solution of its own keeps its written working", () => {
+    for (const c of GRADE8_SCOPE.competencies) {
+      const m = modules.find((x) => x.competency === c);
+      if (!m) continue;
+      const screens = [...m.chapter, ...m.strategies.flatMap((s) => s.screens)];
+      for (const b of lessonBlocks(m)) {
+        const sc = screens.find((s) => s.title === b.title);
+        // (a concept or worked-example section whose solution repeats an earlier one of the same kind is left out on purpose)
+        if (!b.worked && sc?.math?.length && (b.role === "strategy" || b.role === "misconception")) expect(b.lines?.length ?? 0, `${c}: ${b.title}`).toBeGreaterThan(0);
+      }
+    }
   }, LONG);
 });

@@ -204,19 +204,32 @@ function mathematicalExplanation(step: Step, family: Def): string {
   // grade7-teaching@1: an op-based sentence states arithmetic only when it is true of the step's own numbers and they read
   // cleanly (whole numbers or short decimals); otherwise only the idea is said. A step's inputs are not always the operands
   // (5% of 360 is computed as 360 ÷ 20 from the inputs 360 and 5), so "360 ÷ 5 = 18" must never be shown.
-  const nums = step.inputs.map((x) => (typeof x === "number" ? x : NaN));
-  const v = typeof step.value === "number" ? step.value : NaN;
+  // grade8-fix-platform: every arithmetic sentence is checked. A number written as text ("5.84") is a number; a term ("5x") is a
+  // coefficient and a letter part. The sentence is said only when the coefficients' arithmetic is true and the letter part of
+  // the result is what the operation makes: "x × 3 = 3", "5.84 × 5 = 584000" (an exponent is not a factor) and a list result
+  // ("4 × 3 = 4, 3") are never shown; "2 × 5x × 2 = 20x" is.
+  const term = (x: unknown): { c: number; s: string } | null => {
+    if (typeof x === "number") return Number.isFinite(x) ? { c: x, s: "" } : null;
+    if (typeof x !== "string") return null;
+    const m = /^([−-]?)(\d+(?:\.\d+)?)?([a-z](?:[²³])?)?$/.exec(x.trim().replace(/^\((.*)\)$/, "$1"));
+    if (!m || (!m[2] && !m[3])) return null;
+    return { c: (m[1] ? -1 : 1) * (m[2] ? Number(m[2]) : 1), s: m[3] ?? "" };
+  };
+  const ts = step.inputs.map(term), tv = term(step.value);
+  const nums = ts.map((t) => t?.c ?? NaN);
+  const v = tv?.c ?? NaN;
   const clean = (x: number) => Number.isFinite(x) && Math.abs(x * 1000 - Math.round(x * 1000)) < 1e-9;
   const near = (x: number) => Number.isFinite(x) && Number.isFinite(v) && Math.abs(x - v) < 1e-9 * Math.max(1, Math.abs(v));
+  const letters = ts.map((t) => t?.s ?? "");
+  const sameLetters = () => letters.every((s) => s === tv!.s);
+  const productLetters = () => letters.filter(Boolean).length <= 1 && letters.join("") === tv!.s;
   const truth: Record<string, () => boolean> = {
-    add: () => near(nums.reduce((s, x) => s + x, 0)),
-    subtract: () => nums.length === 2 && near(nums[0] - nums[1]),
-    multiply: () => near(nums.reduce((s, x) => s * x, 1)),
-    divide: () => nums.length === 2 && nums[1] !== 0 && near(nums[0] / nums[1]),
+    add: () => sameLetters() && near(nums.reduce((s, x) => s + x, 0)),
+    subtract: () => sameLetters() && nums.length === 2 && near(nums[0] - nums[1]),
+    multiply: () => productLetters() && near(nums.reduce((s, x) => s * x, 1)),
+    divide: () => letters.every((s) => !s) && !tv!.s && nums.length === 2 && nums[1] !== 0 && near(nums[0] / nums[1]),
   };
-  // only numbers can be checked: a symbolic step ("2 × 3x × 8 = 48x") is stated as written
-  const numeric = nums.every(Number.isFinite) && Number.isFinite(v);
-  if (truth[step.op] && numeric && !(nums.every(clean) && clean(v) && truth[step.op]())) return "";
+  if (truth[step.op] && !(ts.every(Boolean) && tv && nums.every(clean) && clean(v) && truth[step.op]())) return "";
   // the arithmetic is said plainly: the competency's name ("— Calculate percentages.") or the family's idea sentence is not
   // tagged onto every step (it read as noise, repeated the idea, and could name the wrong skill)
   void why;
@@ -235,9 +248,10 @@ function mathematicalExplanation(step: Step, family: Def): string {
     case "compare":
       return `Comparing ${a} and ${b}: ${result}.`;
     case "count":
-      return `Counting gives ${result}.`;
     case "evaluate":
-      return `Evaluating gives ${result}.`;
+      // grade8-fix-platform: "Evaluating gives 11" beside "11 × 11 × 11 = 1331" reads as a false claim and says nothing the
+      // step's own line does not: the step's line stands alone
+      return "";
     case "place": {
       const placeNames: Record<string, string> = { "1": "ones", "10": "tens", "100": "hundreds", "1000": "thousands", "10000": "ten-thousands", "100000": "lakhs" };
       const placeName = placeNames[String(step.inputs[1])] ?? `${b}-place`;
