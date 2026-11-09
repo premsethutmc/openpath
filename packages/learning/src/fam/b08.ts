@@ -37,7 +37,7 @@ function pythTeaching([a, b, f]: number[]): InstanceTeaching {
   const c = Math.sqrt(a * a + b * b);
   if (f === 0)
     return {
-      concept: { title: "Finding the hypotenuse", text: [`The hypotenuse is the side opposite the right angle, and the longest side. Here the two shorter sides are ${a} cm and ${b} cm.`, "The square on the hypotenuse is the sum of the squares on the other two sides: c² = a² + b²."] },
+      concept: { title: "Finding the hypotenuse", text: [`The hypotenuse is the side opposite the right angle, and the longest side. Take a right-angled triangle whose two shorter sides are ${a} cm and ${b} cm (as in the picture): we want its hypotenuse.`, "The square on the hypotenuse is the sum of the squares on the other two sides: c² = a² + b²."] },
       representation: { kind: "right-triangle", a, b, c: null, caption: `Shorter sides ${a} cm and ${b} cm; the hypotenuse is asked for` },
       worked: {
         result: c,
@@ -937,12 +937,12 @@ export const B08: Def[] = [
     // independent: substitute the answer into both sides and compare
     validate: ([a, b, c, d], v) => typeof v === "number" && near(a * v + b, c * v + d, 1e-12),
     bugs: ([a, b, c, d]) => keepPred([
-      { id: "x-sign-kept", kind: "procedural", competency: LRAT, says: `${poly([[c, "x"]])} was moved to the left side without changing its sign. Taking ${poly([[c, "x"]])} from both sides leaves ${poly([[a - c, "x"]])} on the left.`, predict: a + c !== 0 ? (d - b) / (a + c) : null },
+      { id: "x-sign-kept", kind: "procedural", competency: LRAT, says: `${poly([[c, "x"]])} was moved to the left side without changing its sign. ${c < 0 ? `Adding ${poly([[-c, "x"]])} to` : `Taking ${poly([[c, "x"]])} from`} both sides leaves ${poly([[a - c, "x"]])} on the left.`, predict: a + c !== 0 ? (d - b) / (a + c) : null },
       { id: "number-sign-kept", kind: "procedural", competency: LRAT, says: `${n_(b)} was moved to the right side without changing its sign. To remove ${b < 0 ? `− ${-b}` : `+ ${b}`} from the left, ${b < 0 ? "add" : "take away"} ${Math.abs(b)} on both sides.`, predict: (d + b) / (a - c) },
       { id: "wrong-way-round", kind: "procedural", competency: INTADD, says: "The numbers were subtracted the wrong way round, giving the right size with the wrong sign. Check by putting the answer back into both sides.", predict: (b - d) / (a - c) },
     ]),
     variants: () => [],
-    explain: (s) => (s.id === "x-left" ? `Take ${poly([[Number(s.inputs[1]), "x"]])} from both sides: ${poly([[Number(s.value), "x"]])} on the left` : s.id === "numbers-right" ? (Number(s.inputs[1]) < 0 ? `Add ${-Number(s.inputs[1])} to both sides: ${n_(Number(s.inputs[0]))} + ${-Number(s.inputs[1])} = ${n_(Number(s.value))} on the right` : `Take ${s.inputs[1]} from both sides: ${n_(Number(s.inputs[0]))} − ${s.inputs[1]} = ${n_(Number(s.value))} on the right`) : `x = ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${fmt(Number(s.value)).replace(/^-/, "−")}`),
+    explain: (s) => (s.id === "x-left" ? `${Number(s.inputs[1]) < 0 ? `Add ${poly([[-Number(s.inputs[1]), "x"]])} to` : `Take ${poly([[Number(s.inputs[1]), "x"]])} from`} both sides: ${poly([[Number(s.value), "x"]])} on the left` : s.id === "numbers-right" ? (Number(s.inputs[1]) < 0 ? `Add ${-Number(s.inputs[1])} to both sides: ${n_(Number(s.inputs[0]))} + ${-Number(s.inputs[1])} = ${n_(Number(s.value))} on the right` : `Take ${s.inputs[1]} from both sides: ${n_(Number(s.inputs[0]))} − ${s.inputs[1]} = ${n_(Number(s.value))} on the right`) : `x = ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${fmt(Number(s.value)).replace(/^-/, "−")}`),
     domain: [[2, 9], [-15, 15], [-5, 8], [-15, 15]],
     cap: 400,
     difficulty: ([a, b, c, d]) => ((d - b) % (a - c) === 0 && c > 0 ? 1 : (d - b) % (a - c) === 0 ? 2 : 3),
@@ -952,7 +952,7 @@ export const B08: Def[] = [
     },
     teach: {
       idea: "An equation stays balanced when the same thing is added to or taken from both sides, including a number of x's.",
-      method: "Take the smaller x term from both sides so x is on one side only, move the numbers to the other side, then divide by the coefficient of x. Check by substituting.",
+      method: "Collect the x terms on the left: take the right-hand x term from both sides (if it is negative, add it instead), so x is on one side only. Move the numbers to the right, then divide by the coefficient of x. Check by substituting.",
       alternatives: [
         { id: "balance", title: "Remove x's from both pans", kind: "conceptual", text: ["Picture x-bags and counters on a balance.", "Take the same number of bags off both pans, then the same number of counters, until one bag is balanced by counters."], visual: ([a, b, c, d]) => ({ type: "balance", left: poly([[a, "x"], [b, ""]]), right: poly([[c, "x"], [d, ""]]) }) },
       ],
@@ -2426,7 +2426,7 @@ B08.push(
     choices: convOpts,
     prompt: (p) => {
       const s = convSides(p);
-      return p[3] === 0 ? `A triangle has sides ${s[0]} cm, ${s[1]} cm and ${s[2]} cm. Is it a right-angled triangle?` : `A mason checks the corner of a wall. He marks a point ${s[0]} cm from the corner along one wall and a point ${s[1]} cm from the corner along the other, and the two marks are ${s[2]} cm apart. Is the corner a right angle?`;
+      return p[3] === 0 ? `A triangle has sides ${s[0]} cm, ${s[1]} cm and ${s[2]} cm. Is it a right-angled triangle?` : `A carpenter checks the corner of a wooden picture frame he is making. He marks a point ${s[0]} cm from the corner along one side and a point ${s[1]} cm from the corner along the other, and the two marks are ${s[2]} cm apart. Is the corner a right angle?`;
     },
     solve: (p) => {
       const s = [...convSides(p)].sort((a, b) => a - b);
@@ -3023,7 +3023,7 @@ B08.push(
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "digits" ? `Long division gives √${s.inputs[0]} = ${s.value}` : `Rounded to one decimal place: ${s.value}`),
+    explain: (s) => (s.id === "digits" ? sqrtLongDivision(Number(s.inputs[0])) : `Rounded to one decimal place: ${s.value}`),
     domain: [[2, 200]],
     keep: sqdOk,
     difficulty: ([n]) => (n < 50 ? 1 : n < 120 ? 2 : 3),
@@ -3039,3 +3039,23 @@ B08.push(
     limits: "Whole numbers up to 200, to one decimal place; square roots of decimals are the aksqf family.",
   },
 );
+
+/** The long-division method for √n (n < 10 000) to two decimal places, written out digit by digit (shown in ahsqd's working). */
+function sqrtLongDivision(n: number): string {
+  const whole = n >= 100 ? [Math.floor(n / 100), n % 100] : [n];
+  const pairs = [...whole, 0, 0];
+  const out: string[] = [`Pair the digits from the decimal point: ${whole.map((x, i) => (i ? String(x).padStart(2, "0") : String(x))).join(" ")} . 00 00`];
+  let r = 0, root = 0;
+  pairs.forEach((pr, i) => {
+    const c = r * 100 + pr;
+    const lead = 20 * root;
+    let d = 9;
+    while ((lead + d) * d > c) d--;
+    const prod = (lead + d) * d;
+    out.push(i === 0 ? `${d} × ${d} = ${prod} is the largest square up to ${c}: digit ${d}, remainder ${c - prod}` : `bring down ${String(pr).padStart(2, "0")} to make ${c}; double ${root} is ${2 * root}, and ${lead + d} × ${d} = ${prod} is the largest that fits: digit ${d}, remainder ${c - prod}`);
+    r = c - prod;
+    root = root * 10 + d;
+  });
+  const s = String(root);
+  return `${out.join("; ")}. So √${n} = ${s.slice(0, -2)}.${s.slice(-2)} to two decimal places`;
+}

@@ -708,7 +708,7 @@
       {
        "title": "Two middle values: take halfway: a common mix-up",
        "text": [
-        "With 6 numbers there are two middle numbers (66 and 75); the median is halfway between them.",
+        "Find the median of 66, 58, 75, 81, 14, 95. In order they are 14, 58, 66, 75, 81, 95: with 6 numbers there are two middle numbers (66 and 75), and the median is halfway between them.",
         "With an even number of values there are two middle values: take halfway between them."
        ],
        "math": [

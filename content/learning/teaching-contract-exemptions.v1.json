@@ -1,6 +1,11 @@
 {
  "note": "teaching-contract@1 exemptions: reviewed engineering decisions that a flagged section is not a defect, each with its reason. They are not educator approval: an educator confirms or rejects each in review.",
  "entries": [
+  {"competency": "MATH.reasoning.mathematical-argument", "title": "Compare the two pairings", "rule": "text-not-instance", "reason": "General argument, not an example: 10 is the place value of the tens digit in (10a + d)(10b + c)."},
+  {"competency": "MATH.coordinate.cartesian", "title": "The four quadrants and the signs", "rule": "no-instance", "reason": "Hand-written lesson section (grade8-fix): a worked example written out in full (the point (−6, 1)); the module's ahquad pool practises it."},
+  {"competency": "MATH.coordinate.cartesian", "title": "Moving a point", "rule": "no-instance", "reason": "Hand-written lesson section (grade8-fix): a worked example written out in full; the module's ahmove pool practises it."},
+  {"competency": "MATH.coordinate.cartesian", "title": "Corners of a rectangle on a grid", "rule": "no-instance", "reason": "Hand-written lesson section (grade8-fix): a worked example written out in full; the module's ahmap pool practises it."},
+  {"competency": "MATH.statistics.statistical-questions", "title": "Summarising data with the mean", "rule": "no-instance", "reason": "Hand-written lesson section (grade8-fix): teaches the mean that the practice question wm-stq-p2 asks for; a worked example written out in full."},
   {
    "competency": "MATH.number.primes",
    "title": "The method",

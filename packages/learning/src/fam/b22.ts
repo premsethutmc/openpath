@@ -762,7 +762,7 @@ const areaCount = ([a, b, c, d]: number[]) => {
   return { both, any };
 };
 
-const SQ_GROUPS = ["the students of Class 7", "the children in our apartment block", "the players in the school kabaddi team"];
+const SQ_GROUPS = ["the students of our class", "the children in our apartment block", "the players in the school kabaddi team"];
 const SQ_TOPICS: { g: string; one: string; s: string }[] = [
   { g: "How many hours do {G} sleep on a school night?", one: "How many hours did {N} sleep last night?", s: "{N} slept for 8 hours last night." },
   { g: "How long does each of {G} take to reach school?", one: "How long did it take {N} to reach school today?", s: "{N} took 20 minutes to reach school today." },
@@ -1216,7 +1216,7 @@ const P2: Def[] = [
     explain: (s) => `“${s.inputs[0]}” is ${String(s.value).toLowerCase()}`,
     domain: D_SQ,
     difficulty: ([, kind]) => (kind === 2 ? 1 : kind === 0 ? 2 : 3),
-    word: (p) => `For a Class 7 survey project, ${nameOf(p[0] + p[2] + 5)} wrote this on a card: “${sqText(p)}” What kind of item is it?`,
+    word: (p) => `For a class survey project, ${nameOf(p[0] + p[2] + 5)} wrote this on a card: “${sqText(p)}” What kind of item is it?`,
     teach: {
       idea: "A statistical question expects answers that vary, so it is answered by collecting data from many people or times; a question with one fixed answer is not statistical, and a statement asks nothing.",
       method: "Ask: is it a question? If so, would different people (or days) give different answers? If yes, it is statistical.",
@@ -1231,6 +1231,8 @@ const P2: Def[] = [
     arity: 5,
     title: "Writing a repeated product in exponential form",
     competency: EXP,
+    // level@1 (grade8-fix): writing a repeated product in exponential form is Grade 7 (CBSE 7)
+    grade: () => 7,
     type: "tuple",
     mc: true,
     // [i, j, m, n, o]: m factors of BASES[i] and n of BASES[j]; o 0 grouped, 1 mixed in order
@@ -1275,6 +1277,8 @@ const P2: Def[] = [
     arity: 4,
     title: "Writing a number as a product of prime powers",
     competency: EXP,
+    // level@1 (grade8-fix): a number as a product of prime powers is Grade 7 (CBSE 7)
+    grade: () => 7,
     type: "tuple",
     mc: true,
     // [a, b, c, d]: n = 2ᵃ × 3ᵇ × 5ᶜ × 7ᵈ
@@ -1329,6 +1333,8 @@ const P2: Def[] = [
     arity: 4,
     title: "The zero exponent",
     competency: EXP,
+    // level@1 (grade8-fix): the zero exponent a⁰ = 1 is Grade 7 (CBSE 7)
+    grade: () => 7,
     type: "integer",
     mc: true,
     // [a, m, k, f]: f 0 aᵐ ÷ aᵐ; 1 k × a⁰; 2 a⁰ + k⁰; 3 aᵐ × a⁰; 4 (k × a)⁰
@@ -2164,7 +2170,7 @@ const P3: Def[] = [
       const f = p.slice(1);
       const N = f.reduce((s, x) => s + x, 0);
       const cum = f.map((_, i) => f.slice(0, i + 1).reduce((s, x) => s + x, 0));
-      return { steps: [st("n", "add", ADD, f, N), st("cumulative", "add", MED, cum, cum[cum.length - 1]), st("middle", "evaluate", MED, [N % 2 ? (N + 1) / 2 : N / 2], fmedAns(p))], answer: fmedAns(p) };
+      return { steps: [st("n", "add", ADD, f, N), st("cumulative", "add", MED, cum, cum[cum.length - 1]), st("middle", "evaluate", MED, N % 2 ? [(N + 1) / 2] : [N / 2, N / 2 + 1], fmedAns(p))], answer: fmedAns(p) };
     },
     // independent: write the list out in full and take its middle entry
     validate: (p, v) => {
@@ -2184,7 +2190,7 @@ const P3: Def[] = [
       ]);
     },
     variants: () => [],
-    explain: (s) => (s.id === "n" ? `There are ${s.inputs.join(" + ")} = ${s.value} values in all` : s.id === "cumulative" ? `Running totals: ${s.inputs.join(", ")}` : `The middle (value number ${s.inputs[0]}) falls in the row of ${s.value}`),
+    explain: (s) => (s.id === "n" ? `There are ${s.inputs.join(" + ")} = ${s.value} values in all` : s.id === "cumulative" ? `Running totals: ${s.inputs.join(", ")}` : (s.inputs.length === 2 ? `The number of values is even, so the median is halfway between value number ${s.inputs[0]} and value number ${s.inputs[1]}; both fall in the row of ${s.value}, so the median is ${s.value}` : `The number of values is odd, so the middle is value number ${s.inputs[0]}; it falls in the row of ${s.value}`)),
     domain: D_FMED,
     keep: K_FMED,
     cap: 420,
@@ -2192,7 +2198,7 @@ const P3: Def[] = [
     word: (p) => `For a school project, ${nameOf(p[0] + p[1])} collected data on ${fmedCtx(p).what}; the results are in the table in the picture. Half the data are at or below which value, and half at or above it? (Give the median.)`,
     teach: {
       idea: "In a frequency table each value appears as many times as its frequency; the median is the middle value of that full ordered list.",
-      method: "Add the frequencies to get n. Find the middle position ((n + 1)/2 for odd n). Keep a running total of the frequencies until it reaches that position: that row's value is the median.",
+      method: "Add the frequencies to get n. Find the middle position: (n + 1)/2 for odd n; for even n the median is halfway between values number n/2 and n/2 + 1. Keep a running total of the frequencies until it reaches that position: that row's value is the median (for even n, when both middle values are in the same row, that value).",
       alternatives: [
         { id: "write_out", title: "Write the list out", kind: "conceptual", text: ["Write each value as many times as its frequency, in order.", "Cross off one from each end, again and again: the value left in the middle is the median."] },
       ],

@@ -2309,7 +2309,7 @@ export const B16: Def[] = [
       const mid = rts[1];
       return {
         steps: [
-          p[0] ? st("middle", "divide", VIETA, [-cs[3], cs[0]], mid) : st("middle", "divide", VIETA, [-cs[1], 3 * cs[0]], mid),
+          p[0] ? st("middle", "divide", VIETA, [-cs[3], cs[0], "product"], mid) : st("middle", "divide", VIETA, [-cs[1], 3 * cs[0]], mid),
           st("factor", "divide", FACT, [mid], polyS(fromRoots(p[3], [rts[0], rts[2]]))),
           st("roots", "solve", PES, [rts[0], rts[2]], [...rts].sort((a, b) => a - b)),
         ],
@@ -2330,7 +2330,7 @@ export const B16: Def[] = [
       ];
     },
     variants: () => [],
-    explain: (s) => (s.id === "middle" ? `The middle root is ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${n_(Number(s.value))}` : s.id === "factor" ? `Dividing by (x ${Number(s.inputs[0]) < 0 ? "+" : "−"} ${Math.abs(Number(s.inputs[0]))}) leaves ${s.value}` : `The roots are ${(s.value as number[]).map(n_).join(", ")}`),
+    explain: (s) => (s.id === "middle" ? (s.inputs[2] === "product" ? `The product of the roots is ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${n_(Number(s.inputs[0]) / Number(s.inputs[1]))}, the cube of the middle root, so the middle root is ∛(${n_(Number(s.inputs[0]) / Number(s.inputs[1]))}) = ${n_(Number(s.value))}` : `The sum of the roots is three times the middle root, so the middle root is ${n_(Number(s.inputs[0]))} ÷ ${n_(Number(s.inputs[1]))} = ${n_(Number(s.value))}`) : s.id === "factor" ? `Dividing by (x ${Number(s.inputs[0]) < 0 ? "+" : "−"} ${Math.abs(Number(s.inputs[0]))}) leaves ${s.value}` : `The roots are ${(s.value as number[]).map(n_).join(", ")}`),
     domain: [[0, 1], [-5, 6], [-3, 6], [1, 2]],
     keep: ([g, u, v]) => (g === 0 ? v >= 1 : u !== 0 && Math.abs(u) <= 3 && [-3, -2, 2, 3].includes(v)),
     difficulty: ([g, , , k]) => (g === 0 && k === 1 ? 1 : g === 0 ? 2 : 3),

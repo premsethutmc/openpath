@@ -1821,7 +1821,8 @@ export const B13: Def[] = [
       const PQ = qm(Q(a), k);
       const side = ask === 0 ? b : ask === 1 ? c : a + b + c;
       const ans = qm(Q(side), k);
-      return { steps: [step("scale", "divide", SIM, [dec(PQ), a], dec(k)), step("side", "multiply", SIM, [side, dec(k)], dec(ans))], answer: dec(ans) };
+      // the perimeter is asked: ΔABC's perimeter is worked out first, so the number multiplied is shown where it comes from
+      return { steps: [step("scale", "divide", SIM, [dec(PQ), a], dec(k)), ...(ask === 2 ? [step("perimeter", "add", SIM, [a, b, c], side)] : []), step(ask === 2 ? "perim-scaled" : "side", "multiply", SIM, [side, dec(k)], dec(ans))], answer: dec(ans) };
     },
     // independent: cross-multiplication: the unknown side × AB must equal the matching side × PQ
     validate: ([ti, m, ni, ask], v) => {
@@ -1851,7 +1852,7 @@ export const B13: Def[] = [
       return [dec(qm(Q(side), q(m * m, SIM_N[ni] * SIM_N[ni]))), dec(qm(Q(side + 1), q(m, SIM_N[ni])))];
     },
     variants: () => [],
-    explain: say({ scale: "Scale factor PQ ÷ AB", side: "Multiply the matching side" }),
+    explain: say({ scale: "Scale factor PQ ÷ AB", side: "Multiply the matching side", perimeter: "Perimeter of ΔABC", "perim-scaled": "Perimeters scale by the same factor: perimeter of ΔPQR" }),
     domain: SIM_DOM,
     cap: 300,
     difficulty: ([, , ni, ask]) => (ni === 0 && ask < 2 ? 1 : ask < 2 ? 2 : 3),
@@ -3897,8 +3898,8 @@ function cshapeOk([m, x, y, k]: number[]) {
 function cshapeText([m, x, y, k]: number[]) {
   const d = 7 * k;
   return [
-    `A garden is a rectangle ${x} m long and ${d} m wide, with a semicircle on one of its ${d} m sides. Find its area, in m².`,
-    `A garden is a rectangle ${x} m long and ${d} m wide, with a semicircle on one of its ${d} m sides. Find the length of fencing needed round its edge (its perimeter), in m.`,
+    `A garden is a rectangle ${Math.max(x, d)} m long and ${Math.min(x, d)} m wide, with a semicircle on one of its ${d} m sides. Find its area, in m².`,
+    `A garden is a rectangle ${Math.max(x, d)} m long and ${Math.min(x, d)} m wide, with a semicircle on one of its ${d} m sides. Find the length of fencing needed round its edge (its perimeter), in m.`,
     `A rectangular card ${x} cm by ${y} cm has a quadrant (a quarter of a circle) of radius ${d} cm cut away at one corner. Find the area of card that is left, in cm².`,
     `The front of a hut is a rectangle ${x} m wide and ${y} m high with a triangle on top, of base ${x} m and height ${k} m. Find the area of the front, in m².`,
     `A plot is a trapezium with parallel sides of ${d} m and ${y} m, ${x} m apart, with a semicircular flower bed on the ${d} m side, outside the trapezium. Find the total area, in m².`,

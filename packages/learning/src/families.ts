@@ -343,6 +343,8 @@ const F: Def[] = [
     arity: 2,
     title: "A power of a whole number",
     competency: EXP,
+    // level@1 (grade8-fix): working out a power such as 5³ or 2⁵ is Grade 7 (CBSE 7, TN 7): below-grade review for a Grade 8 learner
+    grade: () => 7,
     skill: "MLY.pow.whole",
     type: "integer",
     mc: true,
