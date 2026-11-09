@@ -1,5 +1,7 @@
 # Tamil Nadu Grades 1–3: bounded textbook intake
 
+Historical first milestone. See [the Term II and mapping follow-up](TN_PRIMARY_TERM2_MAPPING.md) for current source and mapping status.
+
 2026-11-09. Base: `feat/dev-efficiency` at `82f18fdce9129ce7a68d86ce4e376777bd990c43`.
 Branch: `data/tn-primary-ingestion-2026-11-09`.
 

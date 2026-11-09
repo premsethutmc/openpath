@@ -1,0 +1,139 @@
+{
+  "schema": "textbook-source-register@1",
+  "checked": "2026-11-09",
+  "board": "tn",
+  "academicYear": "2026-27",
+  "subject": "Mathematics",
+  "scope": "English-medium Grades 1–3; a failed search is not evidence of nonexistence",
+  "sources": [
+    {
+      "grade": 1,
+      "term": 1,
+      "state": "retrieved-edition-checked",
+      "intake": "content/learning/ingestion/tn-primary-2026-term1.json",
+      "sourceId": "tn-g01-2026-t1-em",
+      "url": "https://drive.google.com/file/d/1UkU2WncQpk6V-73odnkq3xQijKCd4rNa/view",
+      "sha256": "4aba674be5aacf5094ce2af8cd9626523c4d5bb34519199041113005d2925352",
+      "contentCompleteness": "partial",
+      "officialHostAuthenticated": false
+    },
+    {
+      "grade": 2,
+      "term": 1,
+      "state": "retrieved-edition-checked",
+      "intake": "content/learning/ingestion/tn-primary-2026-term1.json",
+      "sourceId": "tn-g02-2026-t1-em",
+      "url": "https://drive.google.com/file/d/1ajTMWaeBemVKxw-foqDiX8nHc1_5qcld/view",
+      "sha256": "0b3541d0259af92f41521e53348e7b7fa2ae5ae63c398887802c3fc362dbd56b",
+      "contentCompleteness": "partial",
+      "officialHostAuthenticated": false
+    },
+    {
+      "grade": 3,
+      "term": 1,
+      "state": "retrieved-edition-checked",
+      "intake": "content/learning/ingestion/tn-primary-2026-term1.json",
+      "sourceId": "tn-g03-2026-t1-em",
+      "url": "https://drive.google.com/file/d/14IcyB166l0Ld-cwCh_aMnp3fUMo9K2Uj/view",
+      "sha256": "b37ad1875d0e04d1aa1480f3f372e227dbdc8b2fa03ffdb61a637d6a142b5044",
+      "contentCompleteness": "partial",
+      "officialHostAuthenticated": false
+    },
+    {
+      "grade": 1,
+      "term": 2,
+      "state": "retrieved-edition-checked",
+      "intake": "content/learning/ingestion/tn-primary-2026-term2.json",
+      "sourceId": "tn-g01-2026-t2-em",
+      "url": "https://drive.google.com/file/d/1UPZQCo0G3qmSL9LGhnp7jAh1-ODLSBVX/view",
+      "sha256": "9d31f67ca40521e4206ff7ea47dcbcdc036955b00582ede58542e2c0f7b57c4a",
+      "contentCompleteness": "partial",
+      "officialHostAuthenticated": false
+    },
+    {
+      "grade": 2,
+      "term": 2,
+      "state": "retrieved-edition-checked",
+      "intake": "content/learning/ingestion/tn-primary-2026-term2.json",
+      "sourceId": "tn-g02-2026-t2-em",
+      "url": "https://drive.google.com/file/d/199S_GeyDAoS-byvwEQ_PvLvpiopsL5nJ/view",
+      "sha256": "d93e7d120a13594ae9095a6c26f97913cc01fee19c368889a861ebe761e1ae0f",
+      "contentCompleteness": "partial",
+      "officialHostAuthenticated": false
+    },
+    {
+      "grade": 3,
+      "term": 2,
+      "state": "retrieved-edition-checked",
+      "intake": "content/learning/ingestion/tn-primary-2026-term2.json",
+      "sourceId": "tn-g03-2026-t2-em",
+      "url": "https://drive.google.com/file/d/1HW-wXOBO2VzvxBygSnEYMy--ML8Nmxdr/view",
+      "sha256": "d8ac8dd0bf9618feabc314ad6c7fe7a07a04739fdd468df378f3ae8fd04c9e05",
+      "contentCompleteness": "partial",
+      "officialHostAuthenticated": false
+    },
+    {
+      "grade": 1,
+      "term": 3,
+      "state": "unresolved-current-edition",
+      "outcomesIngested": 0,
+      "annualCoverage": "unknown",
+      "attempts": [
+        {
+          "url": "https://www.freetnbooks.com/1st-standard-books/",
+          "result": "2026–27 page explicitly labels Term III subject edition as 2024; rejected as evidence for revised 2026 curriculum."
+        },
+        {
+          "url": "https://tnupdates.com/tn-1st-2nd-3rd-new-books-2026-27-pdf-download/",
+          "result": "Term III appears as placeholder text, not a current PDF link."
+        },
+        {
+          "url": "https://www.textbookcorp.in/",
+          "result": "Official notifications confirm 2026 Term I/II sales; no current Term III PDF obtained."
+        }
+      ]
+    },
+    {
+      "grade": 2,
+      "term": 3,
+      "state": "unresolved-current-edition",
+      "outcomesIngested": 0,
+      "annualCoverage": "unknown",
+      "attempts": [
+        {
+          "url": "https://www.freetnbooks.com/2nd-standard-books/",
+          "result": "2026–27 page explicitly labels Term III subject edition as 2024; rejected as evidence for revised 2026 curriculum."
+        },
+        {
+          "url": "https://tnupdates.com/tn-1st-2nd-3rd-new-books-2026-27-pdf-download/",
+          "result": "Term III appears as placeholder text, not a current PDF link."
+        },
+        {
+          "url": "https://www.textbookcorp.in/",
+          "result": "Official notifications confirm 2026 Term I/II sales; no current Term III PDF obtained."
+        }
+      ]
+    },
+    {
+      "grade": 3,
+      "term": 3,
+      "state": "unresolved-current-edition",
+      "outcomesIngested": 0,
+      "annualCoverage": "unknown",
+      "attempts": [
+        {
+          "url": "https://www.freetnbooks.com/3rd-standard-books/",
+          "result": "2026–27 page explicitly labels Term III subject edition as 2024; rejected as evidence for revised 2026 curriculum."
+        },
+        {
+          "url": "https://tnupdates.com/tn-1st-2nd-3rd-new-books-2026-27-pdf-download/",
+          "result": "Term III appears as placeholder text, not a current PDF link."
+        },
+        {
+          "url": "https://www.textbookcorp.in/",
+          "result": "Official notifications confirm 2026 Term I/II sales; no current Term III PDF obtained."
+        }
+      ]
+    }
+  ]
+}

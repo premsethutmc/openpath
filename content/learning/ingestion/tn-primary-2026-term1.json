@@ -35,10 +35,11 @@
         "unknown": [
           "Completeness of outcome decomposition within Term I",
           "Teacher handbook and linked digital resources",
-          "Terms II and III of the 2026 edition",
+          "Term III of the 2026 edition",
           "Tamil-medium equivalence"
         ],
-        "learnerReleaseUpdated": false
+        "learnerReleaseUpdated": false,
+        "relatedIntake": "content/learning/ingestion/tn-primary-2026-term2.json"
       },
       "lessons": [
         {
@@ -618,10 +619,11 @@
         "unknown": [
           "Completeness of outcome decomposition within Term I",
           "Teacher handbook and linked digital resources",
-          "Terms II and III of the 2026 edition",
+          "Term III of the 2026 edition",
           "Tamil-medium equivalence"
         ],
-        "learnerReleaseUpdated": false
+        "learnerReleaseUpdated": false,
+        "relatedIntake": "content/learning/ingestion/tn-primary-2026-term2.json"
       },
       "lessons": [
         {
@@ -1315,10 +1317,11 @@
         "unknown": [
           "Completeness of outcome decomposition within Term I",
           "Teacher handbook and linked digital resources",
-          "Terms II and III of the 2026 edition",
+          "Term III of the 2026 edition",
           "Tamil-medium equivalence"
         ],
-        "learnerReleaseUpdated": false
+        "learnerReleaseUpdated": false,
+        "relatedIntake": "content/learning/ingestion/tn-primary-2026-term2.json"
       },
       "lessons": [
         {
