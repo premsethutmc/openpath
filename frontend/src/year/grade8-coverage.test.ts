@@ -15,6 +15,7 @@ import { graph } from "../../../packages/learning/src/graph";
 import { question, questions } from "../../../packages/learning/src/content";
 import { useReviewFixture } from "../../../packages/learning/src/evidence";
 import { checkCompetency } from "../../../packages/learning/src/compiler";
+import { inPart, partLabel } from "../test-part";
 
 const competenciesOf = (board: "cbse" | "tn") => {
   const r = boardFor(board, 8)!;
@@ -39,7 +40,8 @@ const wrongFirst = (): Answerer => {
 };
 
 for (const board of ["cbse", "tn"] as const) {
-  test(`Grade 8 ${board}: every competency of the release can be worked and verified after a delay`, () => {
+  // test-part@1: CI works the competencies in parts across parallel jobs (all of them when TEST_PART is unset)
+  test(`Grade 8 ${board}: every competency of the release can be worked and verified after a delay${partLabel}`, () => {
     useReviewFixture({ items: questions.map((q) => q.id), releasedAt: "2020-01-01T00:00:00Z", all: true });
     try {
       const { release, ids } = competenciesOf(board);
@@ -48,7 +50,7 @@ for (const board of ["cbse", "tn"] as const) {
       const awaitingMark: string[] = [];
       let taught = 0;
       const untaught: string[] = [];
-      for (const skill of ids) {
+      for (const skill of inPart(ids)) {
         const d = new Driver(`synthetic-g8-${board}-${skill}`, Date.parse("2026-11-06T09:00:00Z"));
         d.enrol(8, "2026-27", release);
         const first = d.work(skill, wrongFirst(), { max: 80 });
@@ -75,12 +77,12 @@ for (const board of ["cbse", "tn"] as const) {
         if (status !== "verified") failures.push(`${skill}: ended ${status} (last phase ${d.trace.slice(-3).join(" | ")})`);
       }
       assert.deepEqual(failures, [], `${release.id}: ${failures.length} of ${ids.length} competencies did not complete`);
-      console.log(`${release.id}: ${ids.length - awaitingMark.length} verified end to end; ${awaitingMark.length} educator-marked, awaiting a mark (${awaitingMark.join(", ")}); teaching shown after early mistakes in ${taught}`);
+      console.log(`${release.id}${partLabel}: ${inPart(ids).length - awaitingMark.length} verified end to end; ${awaitingMark.length} educator-marked, awaiting a mark (${awaitingMark.join(", ")}); teaching shown after early mistakes in ${taught}`);
       // reported, not asserted: where two early mistakes match no known misconception and the skill has no checked
       // general explanation, the engine pauses the skill without teaching (teaching-content safety) — a content gap, listed
       // in docs/milestones/GRADE8.md, not a fault of the engine
       if (untaught.length) console.log(`${release.id}: no teaching after two early mistakes: ${untaught.join("; ")}`);
-      assert.ok(taught > 0);
+      assert.ok(taught > 0 || inPart(ids).length === 0);
     } finally {
       useReviewFixture(null);
     }

@@ -15,14 +15,16 @@ import { familySpec, validateFamily } from "../../../packages/learning/src/spec"
 import { sampleReleases } from "../../../packages/learning/src/curricula";
 import { Driver, right, type Answerer } from "./driver";
 import { releasedRegistry } from "./released";
+import { inPart, partLabel } from "../test-part";
 
 const T0 = Date.parse("2026-11-02T09:00:00Z");
 const fams = [...FAMILIES.values()].filter((f) => f.domain).map((f) => f.id);
 /** pools@1: a module draws on every family of its competency, so releasing it needs all of them (and any listed extra). */
 const familiesFor = (comp: string, extra: string[] = []) => [...new Set([...familiesOf(modules.find((m) => m.competency === comp)!), ...extra])];
 
-test("every family specification validates: deterministic, property-based and boundary checks", () => {
-  for (const f of fams) {
+// test-part@1: CI validates the families in parts across parallel jobs (all of them when TEST_PART is unset)
+test(`every family specification validates: deterministic, property-based and boundary checks${partLabel}`, () => {
+  for (const f of inPart(fams)) {
     const v = validateFamily(f);
     assert.deepEqual([...v.deterministic.failures, ...v.property.failures, ...v.boundary.failures], [], f);
     assert.ok(v.deterministic.checked === pool(f).items.length && v.property.cases >= 400 && v.boundary.cases >= 4, f);

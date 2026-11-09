@@ -108,7 +108,11 @@ describe("selectors never return a quarantined question", () => {
       // hypotheses.ts: added in a reviewed change (Milestone 2). Its only selector, discriminatingProbe, applies selectable(), formCertified() and
       // the grade ceiling, and its result is asked only through moduleState; see "hypotheses.ts resolution probes pass the eligibility gate".
       "packages/learning/src/hypotheses.ts",
-      "packages/learning/src/intervention.ts", "packages/learning/src/library.ts", "packages/learning/src/reasoning.ts", "packages/learning/src/spec.ts"];
+      "packages/learning/src/intervention.ts",
+      // lesson-checks.ts: added in a reviewed change (lesson-checks@1, report only). pageCandidates reads modulePhasePool (phasePool applies
+      // selectable()) to rebuild the lesson page's practice candidates exactly as TeachingContent.tsx does; nothing it returns is served
+      "packages/learning/src/lesson-checks.ts",
+      "packages/learning/src/library.ts", "packages/learning/src/reasoning.ts", "packages/learning/src/spec.ts"];
     const root = new URL("../../../", import.meta.url).pathname, hits: string[] = [];
     const walk = (d: string) => { for (const e of readdirSync(join(root, d), { withFileTypes: true })) { const r = `${d}/${e.name}`; if (e.isDirectory()) { if (e.name !== "node_modules") walk(r); } else if (/\.tsx?$/.test(e.name) && !/\.test\.tsx?$/.test(e.name) && /import \{[^}]*\b(pool|phasePool|variantsOf|modulePhasePool|fromPool)\b[^}]*\} from/.test(readFileSync(join(root, r), "utf8"))) hits.push(r); } };
     for (const d of ["packages/learning/src", "packages/mathematics/src", "frontend/src"]) walk(d);

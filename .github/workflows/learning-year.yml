@@ -30,12 +30,32 @@ on:
         "frontend/e2e/integrated-skills.test.mts",
         ".github/workflows/learning-year.yml",
         ".github/scripts/year-summary.py",
+        "tools/regen.mjs",
+        "tools/mathematics/server-grader/**",
       ]
   # manual run (Actions tab or API); takes effect once this file is on the default branch
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
+  # regen@1: every generated learning file is regenerated with Node, in order (tools/regen.mjs), and must equal the commit.
+  # CI never commits the result: a diff fails here and says to run `node tools/regen.mjs` and commit.
+  generated:
+    name: Generated files are up to date (tools/regen.mjs --check)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: npm ci
+        working-directory: frontend
+      - run: node tools/regen.mjs --check
   year:
     runs-on: ubuntu-24.04
     steps:
@@ -55,20 +75,10 @@ jobs:
         working-directory: frontend
       - run: python manage.py test --noinput
         working-directory: backend
-      - run: npm run typecheck && npm test
+      # the full frontend suite (npm test) runs in CI's parallel "Frontend tests" jobs (test-shards@1); the generated files are
+      # checked by the "generated" job, in parallel with this one
+      - run: npm run typecheck
         working-directory: frontend
-      # the content pipeline's outputs are generated: they must match their sources
-      - name: Library, parity and coverage are up to date
-        working-directory: frontend
-        run: |
-          node --import tsx ../packages/learning/scripts/specs.ts
-          node --import tsx ../packages/learning/scripts/library.ts
-          node --import tsx ../packages/learning/scripts/families-parity.ts
-          node --import tsx ../packages/learning/scripts/coverage.ts
-          python3 ../content/learning/src/expansion.py
-          node --import tsx ../packages/learning/scripts/board-releases.ts
-          node --import tsx ../packages/learning/scripts/compile-coverage.ts
-          git diff --exit-code ../content/learning/family-specs.v1.json ../content/learning/generated.v1.json ../content/learning/library.v1.json ../content/learning/families-parity.v1.json ../docs/learning-year/COVERAGE.md ../content/learning/competency-expansion.v1.json ../content/learning/syllabus ../content/learning/curricula ../packages/learning/src/board-releases.ts ../content/learning/coverage-matrix.v1.json ../docs/mathematics/COVERAGE_MATRIX.md ../content/learning/marking-parity.v1.json
       - run: node scripts/build-mathematics-journey.mjs && node scripts/build-year.mjs --test && node scripts/build-curriculum.mjs --test
         working-directory: frontend
       - run: npx playwright install --with-deps chromium

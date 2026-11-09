@@ -19,6 +19,7 @@ import { moduleState } from "../../../packages/learning/src/intervention";
 import { readRecords } from "../../../packages/learning/src/records";
 import { learnerState, make } from "../../../packages/learning/src/session";
 import { MARKED_NOT, MARKED_RIGHT, writtenTasks, type WrittenMark } from "../../../packages/learning/src/written";
+import { inPart, partLabel } from "../test-part";
 
 test("answers@2: every shared case gives the agreed verdict (the server checks the same table)", () => {
   for (const [t, a, b, want] of cases.cases as [AnswerType, string, string, boolean][]) assert.equal(sameAnswer(t, a, b), want, `${t}: ${a} vs ${b}`);
@@ -105,9 +106,11 @@ test("expansion@1: existing competency ids are kept, new ones are unique, relati
   }
 });
 
-test("compiler@1: twelve criteria from the content itself; nothing is called validated without educator review", () => {
-  const rows = boardReleases.flatMap(compileRelease);
-  assert.ok(rows.length > 1000);
+// test-part@1: CI compiles the board releases in parts across parallel jobs (all 24 when TEST_PART is unset)
+test(`compiler@1: twelve criteria from the content itself; nothing is called validated without educator review${partLabel}`, () => {
+  const mine = inPart(boardReleases);
+  const rows = mine.flatMap(compileRelease);
+  assert.ok(mine.length === boardReleases.length ? rows.length > 1000 : rows.length > 0 || mine.length === 0);
   assert.equal(rows.filter((r) => r.class === "validated").length, 0, "nothing is educator-approved in the repository");
   for (const r of rows.filter((x) => x.class === "awaiting")) for (const c of r.competencies) assert.ok(CRITERIA.slice(0, 11).every((k) => checkCompetency(c).met[k]), `${c} is complete`);
   // a competency with no content is never "awaiting"

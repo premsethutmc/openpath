@@ -3,7 +3,7 @@
 Read this file first; open other files only as the task needs them. Keep it under ~50 lines and update it at
 each milestone.
 
-Updated: 2026-11-09 (Grade 8: grade-order engine items, second review)
+Updated: 2026-11-09 (dev-efficiency milestone: regen, test shards, lesson checks)
 
 ## Rules (product owner)
 - No merge or deploy without the owner's explicit approval. PRs are drafts unless the owner says otherwise.
@@ -32,6 +32,17 @@ Updated: 2026-11-09 (Grade 8: grade-order engine items, second review)
   working (M1, M2); exponent read as a factor in step notes (M4); below-grade-only lessons (figurate-numbers,
   unit-conversions); missing outcomes (straight-line graphs/scale, frequency polygons, map colouring).
 - Deferred: ±1 distractors (would move option letters).
+
+## Dev-efficiency milestone (`feat/dev-efficiency`, from `feat/grade8-pilot`; how-to `docs/runbooks/DEV.md`)
+- `node tools/regen.mjs [--check]`: every generated file, in order, Node only (refuses Bun); CI job "Generated files are
+  up to date" checks, never commits. Node/Bun differ in 3 of 1,090 family fingerprints (float last digits; `atgen` also
+  in which answers its validator accepts): fingerprints not rounded, Node is the reference.
+- Tests: `node tools/test-changed.mjs` (direct dependants only); CI runs `npm test` as 6 parallel shards + "Frontend tests
+  (all shards)"; long tests run in parts (`TEST_PART`). My Learning Year no longer repeats `npm test`.
+- Review: `frontend/scripts/learner-view.mts` (learner's lesson, practice, engine path, keys) and lesson-checks@1
+  (review findings as checks, ratchet `content/learning/lesson-checks-baseline.v1.json`, test in the frontend suite).
+- Not in CI (needs owner approval to add Bun to CI): `bun test packages/learning/src`. No branch protection on main,
+  so no check is "required" until the owner sets it. `atgen`: 8 of 108 MC questions have two options that validate.
 
 ## Previous milestone: Grade 7 complete, both boards (CBSE, TN)
 - Done: 75 modules; 569 lesson sections; every Grade 7 question type taught; simulated learner verifies

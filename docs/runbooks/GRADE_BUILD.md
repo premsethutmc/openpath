@@ -9,8 +9,8 @@ Grade N below means the grade being built. Owner rules in `docs/STATUS.md` apply
 - `content/learning/teaching-scope-gradeN.v1.json`: every competency a CBSE or TN Grade N outcome maps to
   (accepted mappings, evidence targets). Wire it into `WHOLE_LESSON` (`packages/learning/src/library.ts`) and
   `SCOPE`/`WHOLE_CHAPTER` (`packages/learning/src/teaching-contract.ts`).
-- Regenerate the library (`cd frontend && bun ../packages/learning/scripts/library.ts`) and measure:
-  contract violations in scope, and `GRADE=N BOARD=cbse|tn bun frontend/scripts/grade-gap.mts`.
+- Regenerate (`node tools/regen.mjs`, Node only; see `docs/runbooks/DEV.md`) and measure: contract violations in scope,
+  `GRADE=N BOARD=cbse|tn bun frontend/scripts/grade-gap.mts`, and `bun packages/learning/scripts/lesson-checks.ts`.
 - Split the work by **strand** (number; geometry + measurement + coordinate; algebra + reasoning + statistics +
   probability + sequences), not by board: the boards share competencies, so a board split edits the same files twice.
 
@@ -37,17 +37,20 @@ For the strand's in-scope competencies, in this order:
    what changed, counts before/after, deferred findings with reasons.
 
 ## 2. Integration (integrator)
-- Regenerate with **node** (`node --import tsx …`, as CI does), never bun: the engines differ in the last digit of
-  some float results (`1.07 ** 13`), which changes family fingerprints and fails the CI up-to-date check.
-- Merge the strand branches into the grade branch; regenerate everything in the order of the CI step
-  "Library, parity and coverage are up to date" (`.github/workflows/learning-year.yml`), then
-  `explanation-review.ts sync` (changed lessons go back to pending review) and the grader bundle.
+- Merge the strand branches into the grade branch, then `node tools/regen.mjs` once (Node, never Bun: it refuses Bun;
+  every generated file in order, including the review registries and the grader bundle) and commit the result.
+  CI's "Generated files are up to date" job runs `node tools/regen.mjs --check`.
 - Lower the teaching-contract baseline (`bun packages/learning/scripts/teaching-contract.ts`); counts only fall.
-- Add `frontend/src/year/gradeN-coverage.test.ts` (copy of the Grade 7 test for grade N).
+- Add `frontend/src/year/gradeN-coverage.test.ts` (copy of the Grade 8 test, with `inPart` so CI can run it in parts), list
+  it in `SPLIT` in `tools/test-shards.mjs`, and add grade N to `SCOPE` in `packages/learning/scripts/lesson-checks.ts`
+  (then `--write-baseline`).
 
 ## 3. Independent check (a reviewer who did no building)
-- Fresh sample review: ≥15 modules across all strands, both boards; findings by severity. Fixes by an agent other
-  than the reviewer. Nobody reviews their own work.
+- First `bun packages/learning/scripts/lesson-checks.ts --grade N --all`: the review findings the checks can see.
+- Fresh sample review: ≥15 modules across all strands, both boards, read with
+  `cd frontend && node --import tsx scripts/learner-view.mts <competency> --board cbse|tn --grade N`; findings by severity.
+  Fixes by an agent other than the reviewer. Nobody reviews their own work. A new kind of finding that text can show
+  becomes a check in `packages/learning/src/lesson-checks.ts`.
 
 ## 4. Done when (acceptance)
 - Gap report for Grade N, both boards: 0 failed; untaught only for educator-marked competencies.
