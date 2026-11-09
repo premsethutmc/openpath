@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { mkdir } from 'node:fs/promises';
 import { chromium } from 'playwright';
+import { replayFoundation } from '../../packages/mathematics/src/foundation/programs.ts';
 const base = process.env.MATH_JOURNEY_URL ?? 'http://127.0.0.1:4182';
 async function call(page, path, body) {
   return page.evaluate(async ({path,body}) => {
@@ -27,8 +28,14 @@ for (const width of [360, 900]) test(`tally account teaching, practice, saved re
     await page.reload();await page.getByRole('heading',{name:'Meet the idea'}).waitFor();
     await page.getByText('Draft lesson · educator review pending.',{exact:false}).waitFor();
     assert.equal(await page.locator('#current-activity svg line').count(),5);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'teaching fits viewport');
+    await mkdir('/tmp/tally-browser-evidence',{recursive:true});
+    await page.screenshot({path:`/tmp/tally-browser-evidence/tally-teaching-${width}.png`,fullPage:true});
     await finish(page);
-    for(let i=0;i<5;i++){await page.getByRole('button',{name:'Add one mark',exact:true}).click();await saved(page)}
+    for(let i=0;i<5;i++){const add=page.getByRole('button',{name:'Add one mark',exact:true});await add.focus();await page.keyboard.press('Enter');await saved(page)}
+    assert.match(await page.locator('#current-activity svg').getAttribute('aria-label'),/1 crossed bundle/);
+    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'recording fits viewport');
+    await page.screenshot({path:`/tmp/tally-browser-evidence/tally-recording-${width}.png`,fullPage:true});
     assert.equal(await page.locator('#current-activity svg line').count(),5);
     await page.getByRole('button',{name:'Undo one mark',exact:true}).click();await saved(page);
     assert.equal(await page.locator('#current-activity svg line').count(),4);
@@ -44,7 +51,7 @@ for (const width of [360, 900]) test(`tally account teaching, practice, saved re
     await finish(page);
     await answer(page,'guided','7');await page.getByRole('status').filter({hasText:'The diagonal is the fifth mark.'}).waitFor();
     await answer(page,'guided','6');await finish(page);
-    await answer(page,'independent-a','14');await answer(page,'independent-b','0');await finish(page);
+    await answer(page,'independent-a','14');await page.locator('form[data-question="independent-b"]').getByRole('button',{name:'Show a hint',exact:true}).click();await saved(page);await answer(page,'independent-b','0');await finish(page);
     await answer(page,'application','5');await finish(page);
     await answer(page,'transfer','0');await finish(page);
     await page.getByRole('heading',{name:'Remember tomorrow'}).waitFor();
@@ -54,6 +61,13 @@ for (const width of [360, 900]) test(`tally account teaching, practice, saved re
     const own=records.data.events.filter(e=>e.programId==='tally-g3-draft');
     assert.equal(own.filter(e=>e.action==='complete').length,7);assert.equal(own.filter(e=>e.action==='answer').length,6);
     assert.ok(own.some(e=>e.retentionDueAt));assert.ok(own.every(e=>e.savedAt));
+    assert.ok(own.every(e=>e.evidencePolicy==='tally-practice@1'));
+    const evidence=replayFoundation(learner,records.data.events);
+    assert.deepEqual(evidence.tallyPractice,{assisted:4,unassisted:2,legacyUnknown:0,independentEvidence:0});
+    assert.equal(evidence.ledger.events.filter(e=>e.kind==='assisted_response').length,4);
+    assert.deepEqual(evidence.profiles['tally-g3-draft'].evidenceIds,[]);
+    assert.notEqual(evidence.profiles['tally-g3-draft'].status,'verified');
+    await page.getByLabel('Tally practice evidence').filter({hasText:'4 helped or repeated responses; 2 unassisted practice responses'}).waitFor();
     assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'no horizontal overflow');
     await mkdir('/tmp/tally-browser-evidence',{recursive:true});await page.screenshot({path:`/tmp/tally-browser-evidence/tally-${width}.png`,fullPage:true});
     const other=await call(page,'/pupils/',{display_name:'Separate learner',consent:true});assert.equal(other.status,201);

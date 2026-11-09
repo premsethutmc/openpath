@@ -91,6 +91,8 @@ def checked_foundation(event, pupil):
         if stage['id'] == 'explore' and not any(e.get('questionId') == 'exploration' and e.get('response') == 'done' for e in own):
             reject('Try the interactive model first.')
     saved = {**event, 'at': now.isoformat(), 'savedAt': now.isoformat()}
+    if spec['id'] == 'tally-g3-draft':
+        saved['evidencePolicy'] = 'tally-practice@1'
     if action == 'answer' and grading_mode() != 'legacy':
         # stage 9 (D14): the trusted grader decides the program answer; shadow mode keeps it beside the earlier client-only marking
         q = next(x for x in spec['questions'] if x['id'] == event['questionId'])

@@ -103,3 +103,14 @@ class FoundationTests(FamilyTestCase):
         self.assertEqual(self.records()[-1]['response'], '[20,0,2,1,4,2]')
         self.program = programs()[0]
         self.assertEqual(self.save(self.event('draft', 'explore', questionId='model', response='[20,0,2,1,4,2]')).status_code, 400)
+
+    def test_tally_evidence_policy_is_server_stamped_and_cannot_be_injected(self):
+        self.program = next(p for p in programs() if p['id'] == 'tally-g3-draft')
+        self.assertEqual(self.save(self.event('answer', 'guided', questionId='guided', response='6', evidencePolicy='tally-practice@1')).status_code, 400)
+        self.assertEqual(self.save(self.event('answer', 'guided', questionId='guided', response='6')).status_code, 201)
+        self.assertEqual(self.records()[-1]['evidencePolicy'], 'tally-practice@1')
+        before = self.records()[0]
+        self.program = programs()[0]
+        self.assertEqual(self.save(self.event()).status_code, 201)
+        self.assertNotIn('evidencePolicy', self.records()[-1])
+        self.assertEqual(self.records()[0], before)

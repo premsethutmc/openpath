@@ -669,6 +669,7 @@ function App() {
                             {Math.floor(ps.timeMs / 1000) % 60}s recorded time ·{" "}
                             {ps.attempts} attempts
                           </p>
+                          {pr.id === "tally-g3-draft" && <p aria-label="Tally practice evidence">Shared practice record: {replay.tallyPractice.assisted} helped or repeated responses; {replay.tallyPractice.unassisted} unassisted practice responses (independence unverified); {replay.tallyPractice.legacyUnknown} legacy responses with unknown help history. Independent evidence: 0. Unreviewed practice does not establish mastery.</p>}
                           <p>
                             Shared understanding:{" "}
                             {replay.profiles[pr.id].status}. Completion is not
