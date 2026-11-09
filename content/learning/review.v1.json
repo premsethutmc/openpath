@@ -38222,7 +38222,7 @@
    "competency": "MATH.geometry.triangle-properties",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "d6dfae45",
+   "contentHash": "61d4842b",
    "state": "draft",
    "history": [
     {
@@ -38287,6 +38287,38 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "d6dfae45",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-09T02:37:56.607Z",
+     "contentHash": "0b7e2796",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-09T02:51:08.290Z",
+     "contentHash": "d55a34ba",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-09T02:57:37.796Z",
+     "contentHash": "0d964f1a",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-09T03:04:19.799Z",
+     "contentHash": "61d4842b",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

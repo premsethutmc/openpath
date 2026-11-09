@@ -1,0 +1,12 @@
+.triangle-lab { margin:16px 0; padding:16px; border:1px solid #d9dfee; border-radius:18px; background:#fcfbff; max-width:100%; }
+.triangle-lab p { line-height:1.5; }
+.triangle-lab svg { width:100%; max-height:340px; display:block; }
+.triangle-board { position:relative; width:100%; aspect-ratio:1.12; max-height:350px; overflow:hidden; touch-action:none; }
+.triangle-board .JXGtext { font-family:inherit!important; }
+.angle-readout { display:flex; justify-content:space-around; gap:8px; margin:12px 0; }
+.angle-readout div { text-align:center; } .angle-readout dt { font-size:.85rem; } .angle-readout dd { margin:4px 0; font-weight:700; }
+.triangle-controls label { display:block; margin:12px 0; font-weight:600; }.triangle-controls input { display:block; width:100%; min-height:44px; accent-color:#6b46c1; }
+.triangle-buttons { display:flex; flex-wrap:wrap; gap:10px; }.triangle-buttons button { min-height:44px; flex:1; }
+.triangle-controls :focus-visible { outline:3px solid #215bbb; outline-offset:3px; }
+.triangle-proof { padding:12px; border-radius:12px; background:#f0ecfc; }.triangle-print {display:none}
+@media print { .triangle-board,.triangle-controls{display:none}.triangle-print{display:block}.triangle-lab{break-inside:avoid} }

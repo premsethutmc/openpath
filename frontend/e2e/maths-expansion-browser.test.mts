@@ -16,6 +16,7 @@
  *   (Django on PATHWAY_API, default http://127.0.0.1:8200, with OPENPATH_TEST_CLOCK_FILE=/tmp/integrated-clock.json)
  *   node --import tsx e2e/maths-expansion-browser.test.mts
  */
+import { checkTriangleInteraction } from "./geometry-browser-check";
 import { createRequire } from "node:module";
 import http from "node:http";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -29,7 +30,7 @@ import { learnerState, make } from "../../packages/learning/src/session";
 import { withDecisions } from "../../packages/learning/src/records";
 
 const { chromium } = createRequire(import.meta.url)(process.env.PLAYWRIGHT_PATH ?? "playwright") as typeof import("playwright");
-const root = fileURLToPath(new URL("../dist-english/", import.meta.url)), port = Number(process.env.PORT ?? 4202), clockFile = process.env.OPENPATH_TEST_CLOCK_FILE ?? "/tmp/integrated-clock.json";
+const root = fileURLToPath(new URL(`../${process.env.DIST ?? "dist-english"}/`, import.meta.url)), port = Number(process.env.PORT ?? 4202), clockFile = process.env.OPENPATH_TEST_CLOCK_FILE ?? "/tmp/integrated-clock.json";
 const api = process.env.PATHWAY_API ?? "http://127.0.0.1:8200";
 const server = http.createServer((req, res) => {
   if (req.url?.startsWith("/api/")) { const p = http.request(new URL(req.url, api), { method: req.method, headers: req.headers }, (r) => { res.writeHead(r.statusCode!, r.headers); r.pipe(res); }); req.pipe(p); return; }
@@ -37,7 +38,7 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { "content-type": file.endsWith(".js") ? "text/javascript" : file.endsWith(".css") ? "text/css" : file.endsWith(".woff2") ? "font/woff2" : "text/html" }).end(readFileSync(file)); } catch { res.writeHead(404).end(); }
 });
 await new Promise<void>((r) => server.listen(port, "127.0.0.1", r));
-const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH === "" ? undefined : process.env.CHROMIUM_PATH ?? "/usr/bin/chromium", args: ["--no-sandbox"] }), page = await browser.newPage();
+const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH === "" ? undefined : process.env.CHROMIUM_PATH ?? "/usr/bin/chromium", args: ["--no-sandbox"] }), page = await browser.newPage(process.env.GEOMETRY_CASE ? { viewport: { width: 393, height: 852 }, isMobile: true, hasTouch: true } : {});
 async function call(path: string, body?: unknown) { return page.evaluate(async ({ path, body }) => { const token = document.cookie.match(/(?:^|; )csrftoken=([^;]*)/)?.[1] ?? ""; const r = await fetch("/api" + path, { method: body === undefined ? "GET" : "POST", headers: { "content-type": "application/json", "x-csrftoken": token }, credentials: "same-origin", body: body === undefined ? undefined : JSON.stringify(body) }); return { status: r.status, data: await r.json().catch(() => null) }; }, { path, body }); }
 const base = (q: string) => q.replace(/:(mc|w)$/, "");
 const DAY = 86_400_000;
@@ -54,6 +55,7 @@ function wrongFor(q: string): string {
 
 interface Case { name: string; competency: string; family: string; bug: string; start: string }
 const CASES: Case[] = [
+  ...(process.env.GEOMETRY_CASE ? [{ name: "geometry reasoning: triangle sum", competency: "MATH.geometry.triangle-properties", family: "ahtri", bug: "used-360", start: "" }] : []),
   { name: "calculus teaching: derivative", competency: "MATH.calculus.derivatives", family: "aqfp", bug: "constant-kept", start: "" },
   { name: "calculus teaching: substitution du", competency: "MATH.calculus.integration-methods", family: "subst", bug: "extra-half", start: "" },
   { name: "calculus teaching: substitution limits", competency: "MATH.calculus.integration-methods", family: "subst", bug: "limits-not-changed", start: "" },
@@ -109,6 +111,10 @@ try {
     const met: string[] = [c.start];
     const answerInUi = async (value: string) => {
       const qid = (await page.locator("[data-qid]").getAttribute("data-qid"))!, q = question(qid);
+      if(c.family === "ahtri" && process.env.GEOMETRY_SHOTS && await page.locator('[data-qid] svg').count()) {
+        mkdirSync(process.env.GEOMETRY_SHOTS,{recursive:true});
+        writeFileSync(`${process.env.GEOMETRY_SHOTS}/question-${qid.replace(/[^a-z0-9-]/gi,'_')}.svg`,await page.locator('[data-qid] svg').first().evaluate(el=>el.outerHTML));
+      }
       if (q.type === "choice" || qid.endsWith(":mc")) await page.getByRole("radio").nth("ABCD".indexOf(value)).click();
       else await page.getByLabel("Your answer", { exact: true }).fill(value);
       await page.getByRole("button", { name: "Check", exact: true }).click();
@@ -122,7 +128,13 @@ try {
       const screens: string[] = [];
       for (let i = 0; i < 12; i++) {
         await page.locator(".lesson").waitFor({ state: "visible" });
+        if (c.family === "ahtri" && i === 0 && visibleLessons.length === 0) await checkTriangleInteraction(page, process.env.GEOMETRY_SHOTS ?? "/tmp/geometry-quality/screens");
         screens.push(await page.locator(".lesson").innerText());
+        if (c.family === "ahtri" && process.env.GEOMETRY_SHOTS) {
+          mkdirSync(process.env.GEOMETRY_SHOTS, { recursive: true });
+          await page.locator(".lesson").evaluate(el => el.scrollIntoView({block:"center",behavior:"instant"}));
+          await page.screenshot({path:`${process.env.GEOMETRY_SHOTS}/lesson-${visibleLessons.length}-${i}.png`,fullPage:true,animations:"disabled"});
+        }
         if (c.name.startsWith("calculus teaching")) {
           // Read the lesson in the viewport, including the last mathematical line above the sticky controls.
           await page.locator(".lesson").evaluate(el => el.scrollIntoView({ block: "center", behavior: "instant" }));
@@ -186,6 +198,11 @@ try {
         : ["What du means", "du = 2x dx", "Replace the whole matching factor", "Change both endpoints", "u = 1", "u = 2", "7/3"];
       for (const phrase of required) assert.ok(visible.includes(phrase), `student screen must teach ${phrase}: ${taught}`);
       assert.equal(visibleLessons[0].screens.length, strategy.screens.length, "every selected strategy screen was displayed");
+    }
+    if (c.family === "ahtri") {
+      assert.equal(taught, "worked_steps");
+      const text=visibleLessons[0].screens.join("\n");
+      for(const phrase of ["interior angle", "alternate interior", "120°", "60°", "do not form a triangle"]) assert.ok(text.includes(phrase),phrase);
     }
     const shownBefore = [...met.slice(0, met.indexOf(check.qid!)), strategy.guided, ...strategy.screens.map((s) => s.instance!).filter(Boolean)];
     assert.ok(!shownBefore.some((q) => problemKeyOf(q) === problemKeyOf(check.qid!)), `${c.name}: ${check.qid} repeats or relabels a met problem`);

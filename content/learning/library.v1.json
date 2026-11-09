@@ -5737,30 +5737,90 @@
    "strategies": [
     {
      "id": "worked_steps",
-     "title": "Step by step",
+     "title": "Why triangle angles total 180°",
      "kind": "procedural",
      "needs": [],
-     "screens": [
-      {
-       "title": "The method",
-       "text": [
-        "Add the two angles you know, then take the sum from 180°."
-       ],
-       "math": [
-        "Two angles of a triangle are 56° and 85°, as in the picture (not to scale). What is the third angle, in degrees?",
-        "The two angles together: 56° + 85° = 141°",
-        "Third angle: 180° − 141° = 39°"
-       ],
-       "role": "worked-example",
-       "instance": "gen:ahtri:56,85"
-      }
-     ],
-     "guided": "gen:ahtri:56,29",
-     "check": "gen:ahtri:25,65",
      "scope": {
       "family": "ahtri",
       "subSkill": "triangle-properties.angle-sum@1"
-     }
+     },
+     "screens": [
+      {
+       "title": "Meet the three interior angles",
+       "text": [
+        "An interior angle is the turn between two sides inside a triangle. We name each angle by its corner: A, B or C. A straight angle is half a full turn, or 180°.",
+        "Start with the example A = 30° and B = 90°. Before calculating C, move the top corner and compare the three angles. The numbers are measurements rounded to one decimal place; exploring examples helps us notice a pattern, but does not prove it for every triangle."
+       ],
+       "widget": {
+        "type": "triangle-angle-lab",
+        "proof": false
+       },
+       "instance": "gen:ahtri:30,90",
+       "role": "strategy"
+      },
+      {
+       "title": "Why the three angles make a straight angle",
+       "text": [
+        "Draw a line through C parallel to AB. Parallel lines run in the same direction and do not meet. AC crosses both parallel lines. The angle it makes with AB at A equals the alternate interior angle it makes with the new line at C.",
+        "Do the same with BC: its alternate interior angle at C equals angle B. At C, the copied A angle, the original C angle and the copied B angle sit next to each other on a straight line. That is why their sum is 180° for a non-flat triangle in a plane."
+       ],
+       "math": [
+        "A + C + B = 180°"
+       ],
+       "widget": {
+        "type": "triangle-angle-lab",
+        "proof": true
+       },
+       "instance": "gen:ahtri:30,90",
+       "role": "strategy"
+      },
+      {
+       "title": "Find what is left for the third angle",
+       "text": [
+        "Return to the stated question: A = 30° and B = 90°. Use these given values, not a new measurement from a moved picture.",
+        "First combine the two known angles. They use 120° of the total 180°. Subtract that part to find the angle still needed at C."
+       ],
+       "math": [
+        "30° + 90° = 120°",
+        "C = 180° − 120° = 60°",
+        "Check: 30° + 90° + 60° = 180°"
+       ],
+       "widget": {
+        "type": "triangle",
+        "angles": [
+         "30°",
+         "90°",
+         "60°"
+        ],
+        "vertices": [
+         "A",
+         "B",
+         "C"
+        ],
+        "notToScale": true
+       },
+       "instance": "gen:ahtri:30,90",
+       "role": "strategy"
+      },
+      {
+       "title": "Check the reason, not just the number",
+       "text": [
+        "Try the same reasoning with 56° and 85°. Together they use 141° of the straight-angle total, leaving 39° for the third interior angle.",
+        "The third angle must be positive, and all three interior angles must total 180°. Subtract both known angles. Using 360° would use a full turn instead of the straight angle in our explanation.",
+        "If three corners lie on one line, they do not form a triangle. Do not use a flat picture as proof of the triangle rule.",
+        "Now try a different triangle. Work out the third angle from its given values, and check your answer by adding all three angles."
+       ],
+       "math": [
+        "56° + 85° = 141°",
+        "180° − 141° = 39°",
+        "56° + 85° + 39° = 180°"
+       ],
+       "instance": "gen:ahtri:56,85",
+       "role": "strategy"
+      }
+     ],
+     "guided": "gen:ahtri:56,82",
+     "check": "gen:ahtri:24,57"
     },
     {
      "id": "tear_corners",

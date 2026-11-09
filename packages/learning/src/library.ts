@@ -35,6 +35,8 @@ export interface BlueprintScreen extends Screen {
   worked?: boolean;
 }
 export interface BlueprintStrategy {
+  /** Replace one existing template strategy in place, keeping its record ID and question family. */
+  replaceTemplateStrategy?: boolean;
   /** Explicit scoped strategies preserve candidate instances instead of redrawing them. */
   scope?: Strategy["scope"];
   addresses?: string;
@@ -152,8 +154,15 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
       .flatMap(sc => sc.instance ? [exposureKey(sc.instance)] : []));
     const reserved = new Set([...shown, ...[...base.diagnostics, ...base.practice, ...base.transfer, ...base.retention,
       ...base.strategies.flatMap(s => [s.guided, s.check])].map(exposureKey)]);
+    const candidateIds = new Set<string>();
     const additions: Strategy[] = bp.strategies.map(st => {
-      if (ids.has(st.id)) throw new Error(`${LIBRARY_POLICY}: duplicate strategy ${st.id}`);
+      if (candidateIds.has(st.id)) throw new Error(`${LIBRARY_POLICY}: duplicate strategy ${st.id}`);
+      candidateIds.add(st.id);
+      const previous = base.strategies.find(s => s.id === st.id);
+      if (st.replaceTemplateStrategy) {
+        if (!previous || problemOf(previous.check)?.family !== st.scope?.family) throw new Error(`${LIBRARY_POLICY}: ${st.id}: replacement must keep an existing template ID and question family`);
+        if (previous.scope && (previous.scope.subSkill !== st.scope?.subSkill || JSON.stringify(previous.scope.parameters ?? null) !== JSON.stringify(st.scope?.parameters ?? null))) throw new Error(`${LIBRARY_POLICY}: ${st.id}: replacement must preserve the existing scope`);
+      } else if (ids.has(st.id)) throw new Error(`${LIBRARY_POLICY}: duplicate strategy ${st.id}`);
       ids.add(st.id);
       // the scope may name any family the template module itself draws from (its pools: the competency's other sub-skills),
       // never a family outside the module
@@ -161,7 +170,7 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
       if (!st.scope || !family || !poolFamilies(base).includes(family) || FAMILIES.get(family)?.competency !== bp.competency || st.buildsOnPrerequisites || st.screens.some(sc => sc.worked || !sc.instance))
         throw new Error(`${LIBRARY_POLICY}: ${st.id}: template additions require explicit scoped instances`);
       for (const key of new Set(st.screens.map(sc => exposureKey(sc.instance!)))) {
-        if (reserved.has(key)) throw new Error(`${LIBRARY_POLICY}: ${st.id}: shown example repeats a reserved exposure`);
+        if (reserved.has(key) && !(st.replaceTemplateStrategy && previous?.screens.some(sc => sc.instance && exposureKey(sc.instance) === key))) throw new Error(`${LIBRARY_POLICY}: ${st.id}: shown example repeats a reserved exposure`);
         reserved.add(key);
       }
       for (const [id, phase] of [[st.guided, 'practice'], [st.check, 'check']] as const) {
@@ -178,7 +187,10 @@ export function synthesise(bp: Blueprint, blueprintVersion: string): Synthesised
       if (problems.length) throw new Error(`${LIBRARY_POLICY}: ${st.id}: ${problems.join('; ')}`);
       return candidate;
     });
-    return { ...base, strategies: [...base.strategies, ...additions] };
+    return { ...base, strategies: [
+      ...base.strategies.map(s => additions.find(a => a.id === s.id) ?? s),
+      ...additions.filter(a => !base.strategies.some(s => s.id === a.id)),
+    ] };
   }
   const seed = problemOf(`gen:${bp.family}:${bp.seed.join(",")}`);
   if (!seed) throw new Error(`${LIBRARY_POLICY}: ${bp.competency}: the seed is not a supported ${bp.family} problem`);
