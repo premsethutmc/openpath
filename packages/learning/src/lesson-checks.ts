@@ -10,7 +10,7 @@
  * (M7, M8, M11: the gap report lists unmapped outcomes only), unrealistic contexts, the engine repeating one explanation.
  */
 import { needsMarking, question, type Module } from "./content";
-import { FAMILIES, gradeOfQuestion, parseProblem, problemKeyOf, problemOf } from "./families";
+import { FAMILIES, gradeOfQuestion, parseProblem, pool, problemKeyOf, problemOf } from "./families";
 import { modulePhasePool } from "./library";
 import { lessonScreens, teachingLesson, type LessonBlock } from "./teaching-contract";
 import { teachingScopeFor } from "./teaching-presentation";
@@ -24,7 +24,7 @@ export const CHECKS = {
   "misconception-no-reason": "A misconception section gives the wrong answer but no reason for it (m2)",
   "picture-missing": "The words refer to a picture the section does not draw (m5, m6)",
   "option-not-shown": "Working cites an option letter but the section lists no options (m10)",
-  "factorial-early": "Factorial notation (n!) before Grade 11 (m9)",
+  "factorial-early": "Factorial notation (n!) before the grade whose families teach it (Grade 11 today) (m9)",
   "singular-plural": "A count of 1 with a plural noun: \"there are 1\", \"1 parts\" (m14)",
   "single-type-practice": "Six or more of the first eight practice questions from one family when others are available (m12)",
 } as const;
@@ -72,6 +72,16 @@ export const detect = {
   },
 };
 
+/** The grade from which factorial notation is taught: the lowest grade of a family about factorials (from the content, not a
+ *  fixed number: one pipeline for every grade). Infinity when no family teaches it. */
+let factorialGrade: number | null = null;
+const factorialTaughtFrom = () => {
+  if (factorialGrade === null) {
+    const gs = [...FAMILIES.values()].filter((f) => /factorial/i.test(f.title ?? "") && f.grade).flatMap((f) => pool(f.id).items.slice(0, 50).map((p) => gradeOfQuestion(p.id))).filter((x): x is number => x !== null);
+    factorialGrade = gs.length ? Math.min(...gs) : Infinity;
+  }
+  return factorialGrade;
+};
 /** Every finding for one module's lesson as a learner in `grade` sees it. */
 export function lessonChecks(m: Module, grade: number): Finding[] {
   const out: Finding[] = [];
@@ -104,7 +114,7 @@ export function lessonChecks(m: Module, grade: number): Finding[] {
     if (detect.misconceptionNoReason(b)) add("misconception-no-reason", b.title, b.text[0]?.slice(0, 120) ?? "");
     if (detect.pictureMissing(b, [...b.text, ...(b.lines ?? [])])) add("picture-missing", b.title, "words refer to a picture; none is drawn");
     if (detect.optionNotShown(b, working)) add("option-not-shown", b.title, working.find((w) => /\boption [A-F]\b/.test(w)) ?? "");
-    if (grade < 11 && detect.factorial(words)) add("factorial-early", b.title, words.find((w) => detect.factorial([w])) ?? "");
+    if (factorialTaughtFrom() > grade && detect.factorial(words)) add("factorial-early", b.title, words.find((w) => detect.factorial([w])) ?? "");
     if (detect.singularPlural(words)) add("singular-plural", b.title, words.find((w) => detect.singularPlural([w])) ?? "");
   }
   // level: the module has on-grade questions, yet no section of the lesson is on grade (or ungraded)
