@@ -18483,7 +18483,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "c24f6b26",
+   "contentHash": "4f4638d5",
    "state": "draft",
    "history": [
     {
@@ -18524,6 +18524,14 @@
      "role": "engineer",
      "at": "2026-11-09T01:54:16.790Z",
      "contentHash": "c24f6b26",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-09T05:02:12.775Z",
+     "contentHash": "4f4638d5",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -26297,7 +26305,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "ca59069c",
+   "contentHash": "3c39066c",
    "state": "draft",
    "history": [
     {
@@ -26330,6 +26338,14 @@
      "role": "engineer",
      "at": "2026-11-09T01:54:16.790Z",
      "contentHash": "ca59069c",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-09T05:02:12.775Z",
+     "contentHash": "3c39066c",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -29085,7 +29101,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "c766b5f4",
+   "contentHash": "6a633830",
    "state": "draft",
    "history": [
     {
@@ -29126,6 +29142,14 @@
      "role": "engineer",
      "at": "2026-11-09T01:54:16.790Z",
      "contentHash": "c766b5f4",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-09T05:02:12.775Z",
+     "contentHash": "6a633830",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

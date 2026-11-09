@@ -203,7 +203,7 @@ Every competency that has some content:
 | Plot points in four quadrants (`MATH.coordinate.cartesian`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahread draft, ahquad draft, ahmove draft, ahmap draft). |
 | Construct quadrilaterals, trapeziums and special quadrilaterals from sufficient data (`MATH.geometry.construction-quadrilaterals`) | 8–8 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
 | Calculate polygon angle sums (`MATH.geometry.polygon-angles`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aipolymiss draft, aipolyreg draft). |
-| Count faces, vertices and edges of polyhedra and verify Euler's formula (`MATH.geometry.polyhedra-euler`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aieuler draft, aipolyc missing). |
+| Count faces, vertices and edges of polyhedra and verify Euler's formula (`MATH.geometry.polyhedra-euler`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aieuler draft, aipolyc draft). |
 | Use quadrilateral angle properties (`MATH.geometry.quadrilaterals`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiquad draft, aipgram draft, aidiag draft, aiconvex draft). |
 | Use scales on maps and scale drawings (`MATH.geometry.scale-drawings`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aiscale draft, airatio draft). |
 | Interpret views of solids (`MATH.geometry.solid-views`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aisolid draft). |
@@ -218,7 +218,7 @@ Every competency that has some content:
 | Enumerate simple sample spaces (`MATH.probability.sample-space`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akss draft, akdice draft, akssl draft, aksarr draft). |
 | Encode and decode messages using rule-based ciphers (`MATH.reasoning.coding-ciphers`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akshift draft, akcode draft). |
 | Distinguish proof from examples (`MATH.reasoning.proof-intro`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akthink draft). |
-| Interpret grouped histograms (`MATH.statistics.histograms`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akhist draft, akhtab missing). |
+| Interpret grouped histograms (`MATH.statistics.histograms`) | 8–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families akhist draft, akhtab draft). |
 | Apply remainder and factor theorems (`MATH.algebra.factor-theorem`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alrem draft, alfack draft, alcub draft). |
 | Represent linear equations in two variables (`MATH.algebra.linear-two-variables`) | 9–9 | Complete, awaiting review | Complete; awaiting educator review (module draft; families alrule draft, alsol2 draft, alpred draft, alinf draft). |
 | Find GCD and LCM of polynomials (`MATH.algebra.polynomial-gcd-lcm`) | 9–10 | Complete, awaiting review | Complete; awaiting educator review (module draft; families algcd draft, allcm draft, algcd3 draft, alglp draft). |
@@ -1070,7 +1070,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | anaxiom: Which assignment of probabilities is valid | `MATH.probability.classical` | 300 | 0 | 0/111/189 | `d90e9c20` |
 | ancomps: Simplifying with complementary angles | `MATH.trigonometry.ratios` | 300 | 0 | 120/60/120 | `133cdb13` |
 | antable: Reading trigonometric tables (degrees, minutes, mean differences) | `MATH.trigonometry.ratios` | 400 | 0 | 100/200/100 | `80fdb551` |
-| anncr: Probability by counting selections | `MATH.probability.classical` | 400 | 0 | 92/212/96 | `c24f6b26` |
+| anncr: Probability by counting selections | `MATH.probability.classical` | 400 | 0 | 92/212/96 | `4f4638d5` |
 | aosetop: Union, intersection, difference and complement of finite sets | `MATH.algebra.sets` | 400 | 0 | 157/157/86 | `b6edaff6` |
 | aosub: Counting subsets and proper subsets of a finite set | `MATH.algebra.sets` | 110 | 0 | 4/29/77 | `775d3d95` |
 | aoinex: Counting with n(A ∪ B) = n(A) + n(B) − n(A ∩ B) | `MATH.algebra.sets` | 300 | 0 | 93/104/103 | `d2c41089` |
@@ -1338,7 +1338,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | atdbl: Double-angle values from one ratio | `MATH.trigonometry.compound-angle-identities` | 120 | 0 | 6/36/78 | `4daa92bf` |
 | atp2s: Products of sines and cosines as sums | `MATH.trigonometry.compound-angle-identities` | 144 | 0 | 0/72/72 | `d1b9d13b` |
 | atprinc: Solutions of a trigonometric equation in 0 ≤ x < 2π | `MATH.trigonometry.equations` | 141 | 0 | 25/22/94 | `135cd622` |
-| atgen: General solution of a trigonometric equation | `MATH.trigonometry.equations` | 108 | 0 | 18/18/72 | `ca59069c` |
+| atgen: General solution of a trigonometric equation | `MATH.trigonometry.equations` | 108 | 0 | 18/18/72 | `3c39066c` |
 | atval: Trigonometric functions of any angle | `MATH.trigonometry.functions` | 400 | 0 | 24/177/199 | `50947471` |
 | atper: The period of a trigonometric function | `MATH.trigonometry.functions` | 300 | 0 | 7/143/150 | `4efd7a79` |
 | atrad: Degrees to radians | `MATH.trigonometry.radians` | 288 | 0 | 72/72/144 | `32bbb8ad` |
@@ -1446,7 +1446,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | avexpn: Writing a repeated product in exponential form | `MATH.number.exponents` | 320 | 0 | 70/103/147 | `c6dcd3b5` |
 | avppf: Writing a number as a product of prime powers | `MATH.number.exponents` | 225 | 0 | 40/92/93 | `5bc0da9b` |
 | avzero: The zero exponent | `MATH.number.exponents` | 350 | 0 | 176/88/86 | `e4a8a954` |
-| avfexp: Fractional exponents and radicals | `MATH.number.radicals` | 234 | 0 | 26/119/89 | `c766b5f4` |
+| avfexp: Fractional exponents and radicals | `MATH.number.radicals` | 234 | 0 | 26/119/89 | `6a633830` |
 | avrem: Reasoning about remainders | `MATH.reasoning.divisibility` | 400 | 0 | 32/269/99 | `e22086de` |
 | avpest: Estimating a large product by rounding | `MATH.number.rounding` | 400 | 0 | 69/275/56 | `9b2124fa` |
 | avpctof: Percentage of one quantity in another, and percentage change | `MATH.number.percentage` | 450 | 0 | 17/175/258 | `61e246df` |
@@ -1479,7 +1479,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 - With a complete learning module (validate@1): **338/340 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 338 (hand-written 24, synthesised from blueprints 314)
 - Problem families (generated questions with independent checks): 1090
-- Review registry (repository copy): draft 1408, submitted 18, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Review registry (repository copy): draft 1411, submitted 17, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|

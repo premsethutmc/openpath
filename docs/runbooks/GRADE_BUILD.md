@@ -37,6 +37,8 @@ For the strand's in-scope competencies, in this order:
    what changed, counts before/after, deferred findings with reasons.
 
 ## 2. Integration (integrator)
+- Regenerate with **node** (`node --import tsx …`, as CI does), never bun: the engines differ in the last digit of
+  some float results (`1.07 ** 13`), which changes family fingerprints and fails the CI up-to-date check.
 - Merge the strand branches into the grade branch; regenerate everything in the order of the CI step
   "Library, parity and coverage are up to date" (`.github/workflows/learning-year.yml`), then
   `explanation-review.ts sync` (changed lessons go back to pending review) and the grader bundle.
