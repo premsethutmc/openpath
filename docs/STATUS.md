@@ -1,17 +1,17 @@
 # OpenPath status (handoff for a new session)
 
 Read this file first; keep it factual and 50–60 lines at each milestone.
-Updated: 2026-11-09 (TN Term II intake + provisional capability review).
+Updated: 2026-11-09 (48-gap triage + isolated tally teaching prototype).
 
 ## Rules and product scope
 - No merge, deploy or settings change without owner approval; PRs are drafts.
 - One bounded milestone at a time; report commit, tests, defects and readiness.
 - Product vision: adaptive learning across grades/topics, not a single-grade product.
-- Textbook intake is inventory groundwork, not new teaching content or educator approval.
+- Intake is inventory groundwork; this milestone adds draft teaching, without educator approval.
 
 ## This branch
 - `data/tn-primary-ingestion-2026-11-09`, originally from `feat/dev-efficiency` at `82f18fd`.
-- Follow-up remote parent: `339f29b`; STATUS and remote heads read before work.
+- Follow-up remote parent: `3601798`; STATUS and remote heads read before work.
 - No AGENTS.md or .agents/skills in this checkout.
 - Grade 8 `7a429a94` and answer-key certification `49a6be8b` inspected; untouched.
 - Teaching-method PR #121 at `5d83947d` is separate; no integration here.
@@ -45,12 +45,15 @@ Updated: 2026-11-09 (TN Term II intake + provisional capability review).
 - PDF validation for all six books: hash, edition, contents and evidence-page checks pass.
 - Grades 1/3 Term II are scanned; `--ocr` uses local Tesseract + visual source checks.
 - `audit_tn_mappings.py`: pass; rejects stale statements/catalogues and invented targets.
-- Python regression tests: 17 pass; existing-parser integration tests: 6 pass.
+- Python regression tests: 18 pass; Node parser/tally tests: 13 pass (31 total).
 - Deterministic extraction/OCR/validation: zero model API calls; judgment used session tokens.
-- Full app/browser suite not run; no learner/runtime/release changes.
+- Chromium blocked by socket EPERM before rendering; no browser pass or release changes.
+
+- Draft tally model, SVG, recording controller, two Def adapters and offline teaching/practice preview.
+- Exhaustive checks: 21 tally counts and 441 comparison pairs; learner registry untouched.
 
 ## Remaining work / readiness
 - Term III, exhaustive outcome decomposition, handbook/QR coverage and Tamil equivalence unknown.
-- Review numeric/method gaps and preserve provenance before publishing any release mappings.
+- All 48 gaps triaged in `tn-primary-gap-plan.json`; two have partial draft tally prototypes.
 - Board release builder auto-accepts mappings and lacks detailed PDF provenance; not used here.
-- Report: `docs/milestones/TN_PRIMARY_TERM2_MAPPING.md`; ready for draft review, not completeness claims.
+- Report: `docs/milestones/TN_PRIMARY_TALLY_DRAFT.md`; learner integration/review still pending.

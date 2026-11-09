@@ -4,7 +4,7 @@
   "board": "tn",
   "academicYear": "2026-27",
   "subject": "Mathematics",
-  "scope": "English-medium Grades 1–3; a failed search is not evidence of nonexistence",
+  "scope": "English-medium Grades 1\u20133; a failed search is not evidence of nonexistence",
   "sources": [
     {
       "grade": 1,
@@ -81,7 +81,7 @@
       "attempts": [
         {
           "url": "https://www.freetnbooks.com/1st-standard-books/",
-          "result": "2026–27 page explicitly labels Term III subject edition as 2024; rejected as evidence for revised 2026 curriculum."
+          "result": "2026\u201327 page explicitly labels Term III subject edition as 2024; rejected as evidence for revised 2026 curriculum."
         },
         {
           "url": "https://tnupdates.com/tn-1st-2nd-3rd-new-books-2026-27-pdf-download/",
@@ -90,8 +90,17 @@
         {
           "url": "https://www.textbookcorp.in/",
           "result": "Official notifications confirm 2026 Term I/II sales; no current Term III PDF obtained."
+        },
+        {
+          "url": "https://drive.google.com/file/d/14Qj1nkMpBpE9EDDIjOlBYXplhEcmJysW/view",
+          "result": "Followed mathematics Term III link from FreeTNBooks listing. File exists, but listing identifies Term III edition as 2024. PDF edition not independently authenticated in this follow-up; not evidence of revised 2026 coverage."
+        },
+        {
+          "url": "https://www.textbookcorp.in/",
+          "result": "Follow-up: official home page still advertises 2026\u201327 Terms I/II and calls 2025\u201326 primary Term I books obsolete. No current Term III publication obtained; nonexistence is not established."
         }
-      ]
+      ],
+      "followupChecked": "2026-11-09"
     },
     {
       "grade": 2,
@@ -102,7 +111,7 @@
       "attempts": [
         {
           "url": "https://www.freetnbooks.com/2nd-standard-books/",
-          "result": "2026–27 page explicitly labels Term III subject edition as 2024; rejected as evidence for revised 2026 curriculum."
+          "result": "2026\u201327 page explicitly labels Term III subject edition as 2024; rejected as evidence for revised 2026 curriculum."
         },
         {
           "url": "https://tnupdates.com/tn-1st-2nd-3rd-new-books-2026-27-pdf-download/",
@@ -111,8 +120,13 @@
         {
           "url": "https://www.textbookcorp.in/",
           "result": "Official notifications confirm 2026 Term I/II sales; no current Term III PDF obtained."
+        },
+        {
+          "url": "https://www.textbookcorp.in/",
+          "result": "Follow-up: official home page still advertises 2026\u201327 Terms I/II and calls 2025\u201326 primary Term I books obsolete. No current Term III publication obtained; nonexistence is not established."
         }
-      ]
+      ],
+      "followupChecked": "2026-11-09"
     },
     {
       "grade": 3,
@@ -123,7 +137,7 @@
       "attempts": [
         {
           "url": "https://www.freetnbooks.com/3rd-standard-books/",
-          "result": "2026–27 page explicitly labels Term III subject edition as 2024; rejected as evidence for revised 2026 curriculum."
+          "result": "2026\u201327 page explicitly labels Term III subject edition as 2024; rejected as evidence for revised 2026 curriculum."
         },
         {
           "url": "https://tnupdates.com/tn-1st-2nd-3rd-new-books-2026-27-pdf-download/",
@@ -132,8 +146,17 @@
         {
           "url": "https://www.textbookcorp.in/",
           "result": "Official notifications confirm 2026 Term I/II sales; no current Term III PDF obtained."
+        },
+        {
+          "url": "https://drive.google.com/file/d/12JmlyB5X-QLsvMTVD9Qo4rSBMu8vi13w/view",
+          "result": "Followed mathematics Term III link from FreeTNBooks listing. File exists, but listing identifies Term III edition as 2024. PDF edition not independently authenticated in this follow-up; not evidence of revised 2026 coverage."
+        },
+        {
+          "url": "https://www.textbookcorp.in/",
+          "result": "Follow-up: official home page still advertises 2026\u201327 Terms I/II and calls 2025\u201326 primary Term I books obsolete. No current Term III publication obtained; nonexistence is not established."
         }
-      ]
+      ],
+      "followupChecked": "2026-11-09"
     }
   ]
 }
