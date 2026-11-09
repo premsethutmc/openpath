@@ -52,7 +52,9 @@ export interface Diagnosis {
   policy: string;
 }
 
-export function diagnose(m: Module, attempts: readonly Attempt[]): Diagnosis {
+/** grade-order@1: `rank` (lower first) orders the remaining questions before their expected information, so a learner meets
+ *  on-grade questions before below-grade ones; it changes only which question is asked next, never how an answer counts. */
+export function diagnose(m: Module, attempts: readonly Attempt[], rank: (id: string) => number = () => 0): Diagnosis {
   let p = { ...DIAGNOSTIC_POLICY.prior } as Posterior;
   const asked: Diagnosis["asked"] = [];
   for (const a of attempts) {
@@ -64,7 +66,7 @@ export function diagnose(m: Module, attempts: readonly Attempt[]): Diagnosis {
   const best = HYPOTHESES.reduce((b, h) => (p[h] > p[b] ? h : b), "secure" as Hypothesis);
   const done = p[best] >= DIAGNOSTIC_POLICY.stopAt || asked.length >= DIAGNOSTIC_POLICY.maxQuestions || asked.length === m.diagnostics.length;
   const remaining = m.diagnostics.filter((id) => !asked.some((x) => x.questionId === id));
-  const next = done ? null : remaining.sort((a, b) => expectedEntropy(p, a) - expectedEntropy(p, b) || m.diagnostics.indexOf(a) - m.diagnostics.indexOf(b))[0] ?? null;
+  const next = done ? null : remaining.sort((a, b) => rank(a) - rank(b) || expectedEntropy(p, a) - expectedEntropy(p, b) || m.diagnostics.indexOf(a) - m.diagnostics.indexOf(b))[0] ?? null;
   const result = !done ? null : p[best] >= DIAGNOSTIC_POLICY.confident ? best : "insufficient_evidence";
   return { asked, posterior: p, next, result, confidence: Math.round(p[best] * 100) / 100, policy: DIAGNOSTIC_POLICY.version };
 }

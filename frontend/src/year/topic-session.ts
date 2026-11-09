@@ -1,7 +1,6 @@
 /** UI adapter only: all diagnostic, prerequisite and next-activity decisions remain in the shared engine. */
 import {moduleFor} from '../../../packages/learning/src/content';
-import {diagnose} from '../../../packages/learning/src/diagnostic';
-import {familyOf,investigateContext,moduleState,recovery} from '../../../packages/learning/src/intervention';
+import {familyOf,investigateContext,learnerDiagnosis,moduleState,recovery} from '../../../packages/learning/src/intervention';
 import {nextActivity} from '../../../packages/learning/src/plan';
 import {assigned,type CurriculumRelease,type Chapter,type Section} from '../../../packages/learning/src/curriculum';
 import type {Ctx} from './Learn';
@@ -9,7 +8,7 @@ import type {Ctx} from './Learn';
 export function topicCheck(target:string,ctx:Ctx){
  const m=moduleFor(target);if(!m)return {question:null,reason:'No diagnostic is available for this competency.',support:null,diagnosis:null};
  if(ctx.evidence(target).status==='verified')return {question:null,reason:'Your existing verified understanding is preserved.',support:null,diagnosis:null};
- const d=diagnose(m,ctx.records.attempts);
+ const d=learnerDiagnosis(m,ctx.records);
  const fresh=(id:string|null)=>id&&!ctx.records.attempts.some(a=>a.questionId===id)?id:null;
  if(d.next)return {question:fresh(d.next),reason:fresh(d.next)?'A short starting-point check.':'Fresh diagnostic evidence is unavailable; earlier answers are preserved.',support:null,diagnosis:d};
  const wrong=d.asked.find(a=>!a.right);
@@ -17,7 +16,7 @@ export function topicCheck(target:string,ctx:Ctx){
  if(r?.phase==='investigate'&&r.question)return {question:fresh(r.question),context:investigateContext(wrong!.questionId),reason:r.reason,support:null,diagnosis:d,recovery:r};
  const support=r?.plan?.kind==='support'?r.plan.competency:null;
  const supporting=support&&ctx.evidence(support).status!=='verified'?moduleFor(support):null;
- const sd=supporting?diagnose(supporting,ctx.records.attempts):null;
+ const sd=supporting?learnerDiagnosis(supporting,ctx.records):null;
  return {question:sd?.next?fresh(sd.next):null,reason:sd?.next?'Check the supporting skill before assuming a gap.':r?.reason??'Starting-point check recorded.',support,diagnosis:d,supportDiagnosis:sd,recovery:r};
 }
 

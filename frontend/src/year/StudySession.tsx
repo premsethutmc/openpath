@@ -10,8 +10,7 @@ import type {CurriculumRelease} from '../../../packages/learning/src/curriculum'
 import {Lesson,Module,type Ctx,STATUS_WORD} from './Learn';
 import {useResume} from './resume';
 import {moduleFor} from '../../../packages/learning/src/content';
-import {diagnose} from '../../../packages/learning/src/diagnostic';
-import {contentReviewOf,establishedIds,failsChecks,orderStrategies} from '../../../packages/learning/src/intervention';
+import {contentReviewOf,establishedIds,failsChecks,learnerDiagnosis,orderStrategies} from '../../../packages/learning/src/intervention';
 import {chapterExplanation,contentEligibility} from '../../../packages/learning/src/explanation-review';
 import {graph} from '../../../packages/learning/src/graph';
 import {reviewOf} from '../../../packages/learning/src/review';
@@ -21,7 +20,7 @@ type Plan=ReturnType<typeof topicPlan>;
 function StudyBlock({competency,ctx,resumeKey,onNext}:{competency:string;ctx:Ctx;resumeKey:string;onNext:()=>void}){
  const m=moduleFor(competency);
  // The shared engine supplies strategy ordering; no new teaching selection or mathematical scoring policy.
- const [strategyId]=useResume(`${resumeKey}:strategy`,m?orderStrategies(m,diagnose(m,ctx.records.attempts),ctx.records)[0]?.id:null);
+ const [strategyId]=useResume(`${resumeKey}:strategy`,m?orderStrategies(m,learnerDiagnosis(m,ctx.records),ctx.records)[0]?.id:null);
  // explanation-review@1: a saved choice is checked again now (it may have been blocked, or the mode changed, since it was saved)
  const chosen=m?.strategies.find(s=>s.id===strategyId);
  const review=m&&chosen?contentReviewOf(m,chosen,establishedIds(competency,ctx.records)):null;

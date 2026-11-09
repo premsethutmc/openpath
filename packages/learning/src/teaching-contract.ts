@@ -16,7 +16,7 @@
  * section lists which of its parts are mechanically verified and which await review.
  */
 import { moduleFor, question, type Module, type Screen, type Strategy } from "./content";
-import { explainStep, exposureKey, FAMILIES, parseProblem, problemOf, show, type Problem } from "./families";
+import { explainStep, exposureKey, FAMILIES, gradeOfQuestion, parseProblem, problemOf, show, type Problem } from "./families";
 import scopeData from "../../../content/learning/showcase-grade10.v1.json";
 import grade7ScopeData from "../../../content/learning/teaching-scope-grade7.v1.json";
 import grade8ScopeData from "../../../content/learning/teaching-scope-grade8.v1.json";
@@ -455,15 +455,31 @@ const displayStep = (p: Problem, st: Problem["steps"][number]) => {
   try { return explainStep(p, st); } catch { return ""; }
 };
 
+/** grade-order@1: a learner's lesson. For a learner in grade `grade` a section whose own question is from a later grade (a family
+ *  taught later: the BPT, (x ± a)³, ⁿPᵣ for a Grade 8 learner) is not shown, unless that would leave no section with a question;
+ *  null (no learner, a preview) shows every section. */
+export function sectionsForGrade(blocks: LessonBlock[], grade: number | null = null): LessonBlock[] {
+  if (grade === null) return blocks;
+  const above = (b: LessonBlock) => { const g = b.instance ? gradeOfQuestion(b.instance) : null; return g !== null && g > grade; };
+  const kept = blocks.filter((b) => !above(b));
+  return kept.some((b) => b.instance) ? kept : blocks;
+}
+/** grade-order@1: 0 for a question of the learner's grade (or one with no grade), 1 for one from an earlier grade. */
+const gradeRankOf = (grade: number | null) => (id: string) => { const g = grade === null ? null : gradeOfQuestion(id.replace(/:(mc|w)$/, "")); return g !== null && g < grade! ? 1 : 0; };
+/** grade-order@1: practice for a learner in grade `grade` holds no question from a later grade (level@1: it is reached there). */
+const withinGradeOf = (grade: number | null) => (id: string) => { const g = grade === null ? null : gradeOfQuestion(id.replace(/:(mc|w)$/, "")); return g === null || g <= grade!; };
+
 /** Practice after a lesson starts with questions of the same kind as the one it worked through (a family that mixes kinds
  *  gives `teach.caseOf`); the other kinds follow, so practice tests what was just taught. Written answers come before multiple choice
  *  within each group, and questions already solved on the page come last. */
-export function alignedPractice(module: Module, ids: string[]): string[] {
+export function alignedPractice(module: Module, ids: string[], grade: number | null = null): string[] {
   const scope = teachingScopeFor(module);
   const family = scope.family ? FAMILIES.get(scope.family) : undefined;
   const caseOf = family?.teach?.caseOf;
   // the lesson is assembled from the candidate list as given (not from the reordered one), so the order never changes what is taught
-  const blocks = lessonBlocks(module, ids);
+  // grade-order@1: for a learner, from the questions within their grade, and only the sections their lesson shows
+  if (grade !== null) ids = ids.filter(withinGradeOf(grade));
+  const blocks = sectionsForGrade(lessonBlocks(module, ids), grade);
   // a question the lesson has already used (its answer or its common wrong answer is on the page) is not practice: it goes last
   // any question the lesson itself uses (solved, or quoted with its common wrong answer) is not fresh practice
   const shown = new Set(blocks.flatMap((b) => (b.instance ? [exposureKey(b.instance)] : [])));
@@ -475,7 +491,9 @@ export function alignedPractice(module: Module, ids: string[]): string[] {
   const kind = tp && tp.family === scope.family ? caseOf!(tp.params) : null;
   const same = (id: string) => { if (kind === null) return false; const q = problemOf(id.replace(/:mc$/, "")); return !!q && q.family === tp!.family && caseOf!(q.params) === kind; };
   // within each group a written answer comes before a multiple-choice one: the first attempt after a worked example is the learner's own
-  const rank = (id: string) => (isShown(id) ? 4 : same(id) ? 0 : 2) + (question(id).type === "choice" ? 1 : 0);
+  // grade-order@1: for a learner, questions of their own grade come before those of an earlier grade (after the shown ones' rule)
+  const byGrade = gradeRankOf(grade);
+  const rank = (id: string) => (isShown(id) ? 40 : 0) + byGrade(id) * 10 + (same(id) ? 0 : 2) + (question(id).type === "choice" ? 1 : 0);
   // grade8-fix-platform: a question the lesson shows (solved, or quoted with its answer) is not served as practice at all while
   // a fresh question of its family is among the candidates; only a family with nothing fresh keeps it, as a last resort
   const famOf = (id: string) => problemOf(id.replace(/:(mc|w)$/, ""))?.family ?? id;
@@ -487,7 +505,7 @@ export function alignedPractice(module: Module, ids: string[]): string[] {
 /** The teaching page's lesson and its practice queue, from one candidate list (already filtered by the caller's selector):
  *  the sections are built from the candidates in their given order, and practice is the same candidates aligned to what those
  *  sections taught, so reordering practice never changes what is taught. */
-export function teachingLesson(module: Module, candidates: string[]) {
+export function teachingLesson(module: Module, candidates: string[], grade: number | null = null) {
   // explanation-review@1: a lesson page shows only the concept section and explanations cleared for the current teaching mode (a
   // general lesson: no misconception is claimed about the reader); blocked, unregistered or changed-since-review content is left out
   const req = { competency: module.competency, usage: "lesson" as const };
@@ -496,7 +514,9 @@ export function teachingLesson(module: Module, candidates: string[]) {
   const shown = { ...module, chapter: chapter.eligible ? module.chapter : [], strategies: kept.map((x) => x.s) };
   const all = [...(chapter.eligible ? [chapter] : []), ...kept.map((x) => x.e)];
   const contentLabel = all.length && all.every((e) => e.educatorApproved) ? "Approved by an educator for supervised evaluation." : "Demonstration: these explanations have not been approved by an educator.";
-  return { blocks: lessonBlocks(shown, candidates), practice: alignedPractice(shown, candidates), candidates, contentLabel };
+  // grade-order@1: a learner's lesson (grade given) holds no later-grade question, in its sections or its practice
+  const inGrade = grade === null ? candidates : candidates.filter(withinGradeOf(grade));
+  return { blocks: sectionsForGrade(lessonBlocks(shown, inGrade), grade), practice: alignedPractice(shown, inGrade, grade), candidates: inGrade, contentLabel };
 }
 
 /** Platform-wide violation counts (the ratchet baseline): by rule, and by module. */

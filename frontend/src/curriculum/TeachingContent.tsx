@@ -34,9 +34,11 @@ function TeachingBlock({ block, index, resumeKey, repeatsHeading = false, compet
 }
 
 const lessonCache = new Map<string, ReturnType<typeof teachingLesson> | null>();
-function lessonFor(competency: string) {
-  const key = `${competency}|${teachingMode()}`; // explanation-review@1: what may be shown depends on the teaching mode
-  if (!lessonCache.has(key)) { const module = moduleFor(competency); lessonCache.set(key, module ? teachingLesson(module, candidatesFor(module)) : null); }
+// grade-order@1: a learner's lesson depends on their grade (no later-grade sections or practice; their grade's practice first);
+// null (a preview, no learner) shows the whole lesson
+function lessonFor(competency: string, grade: number | null = null) {
+  const key = `${competency}|${teachingMode()}|${grade ?? "-"}`; // explanation-review@1: what may be shown depends on the teaching mode
+  if (!lessonCache.has(key)) { const module = moduleFor(competency); lessonCache.set(key, module ? teachingLesson(module, candidatesFor(module), grade) : null); }
   return lessonCache.get(key)!;
 }
 /** Practice candidates: the lesson's practice pool, minus questions needing marking and questions outside the taught scope. */
@@ -49,8 +51,8 @@ function candidatesFor(module: NonNullable<ReturnType<typeof moduleFor>>) {
   });
 }
 /** Practice queue for a lesson: the kind of question the lesson worked through first, never a question it already solved first. */
-export function teachingPracticeIds(competency: string) {
-  return lessonFor(competency)?.practice ?? [];
+export function teachingPracticeIds(competency: string, grade: number | null = null) {
+  return lessonFor(competency, grade)?.practice ?? [];
 }
 
 /** Attribute exposure only to an explanation included by the existing lesson review filter. */
@@ -60,10 +62,10 @@ export function teachingExposureStrategy(competency: string) {
 }
 
 /** Shared teaching-first content for preview and authenticated learner journeys. */
-export function TeachingContent({ competency, topic, onPractice, practiceDisabled = false, resumeKey }: { competency: string; topic: TopicCopy; onPractice: () => void; practiceDisabled?: boolean; resumeKey?: string }) {
+export function TeachingContent({ competency, topic, onPractice, practiceDisabled = false, resumeKey, grade = null }: { competency: string; topic: TopicCopy; onPractice: () => void; practiceDisabled?: boolean; resumeKey?: string; grade?: number | null }) {
   const module = moduleFor(competency);
   const scope = useMemo(() => module ? teachingScopeFor(module) : null, [module]);
-  const lesson = useMemo(() => lessonFor(competency), [competency]);
+  const lesson = useMemo(() => lessonFor(competency, grade), [competency, grade]);
   const practice = lesson?.practice ?? [];
   const blocks = lesson?.blocks ?? [];
   const exampleId = scope?.strategyId ? module?.strategies.find((strategy) => strategy.id === scope.strategyId)?.guided : undefined;

@@ -26,7 +26,8 @@ function LessonStages({ here, onLearn, onPractice, onAssess }: { here: Screen; o
 }
 
 export function CurriculumPractice({ competency, ctx, resumeKey, back, initialStage, onAssess, onStuck }: { competency: string; ctx: Ctx; resumeKey: string; back: string; initialStage?: Screen; onAssess?: () => void; onStuck?: (qid: string) => void }) {
-  const ids = moduleFor(competency) ? teachingPracticeIds(competency) : [];
+  const grade = ctx.records.enrolments.at(-1)?.grade ?? null; // grade-order@1: the learner's lesson
+  const ids = moduleFor(competency) ? teachingPracticeIds(competency, grade) : [];
   const next = () => ids.find((id) => !ctx.records.attempts.some((attempt) => exposureKey(attempt.questionId) === exposureKey(id))) ?? null;
   const [screen, setScreen] = useResume<Screen>(resumeKey + ':screen', initialStage ?? 'teaching');
   const [cursor, setCursor] = useResume<{ qid: string | null; fb: Fb | null; hint: boolean }>(resumeKey, { qid: next(), fb: null, hint: false });
@@ -62,7 +63,7 @@ export function CurriculumPractice({ competency, ctx, resumeKey, back, initialSt
     <nav className="teaching-nav" aria-label="Lesson navigation"><a href={back}>← Back</a><span>Mathematics</span><span /></nav>
     <LessonStages here="teaching" onLearn={learn} onPractice={canLeaveTeaching ? practise : undefined} onAssess={canLeaveTeaching ? onAssess : undefined} />
     {exposureNotice}
-    <TeachingContent competency={competency} topic={{ name: node.name, description: node.description, breadcrumb: `Mathematics › ${node.strand}` }} onPractice={practise} practiceDisabled={!canLeaveTeaching} resumeKey={resumeKey} />
+    <TeachingContent competency={competency} topic={{ name: node.name, description: node.description, breadcrumb: `Mathematics › ${node.strand}` }} onPractice={practise} practiceDisabled={!canLeaveTeaching} resumeKey={resumeKey} grade={grade} />
   </article>;
 
   return <article className="experience-preview practice-open learner-practice" aria-label="Curriculum practice">

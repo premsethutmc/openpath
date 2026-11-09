@@ -32,7 +32,7 @@ import { evidenceBasis, type EvidenceBasis } from "./misconception-evidence";
 import type { Attempt, LearnerRecords } from "./records";
 import { connectedSkill, connectionConfig } from "./skill-connections";
 import { classifyQuestionWith } from "./subskill-projection";
-import { keyboardOffered } from "./written";
+import { keyboardOffered, writtenTask } from "./written";
 import { blocksTransfer, heldByTeaching, presentedProblems, unitOfStrategy, unitStates, type SkillUnit, type UnitState } from "./skill-units";
 
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
@@ -48,6 +48,22 @@ const withinGrade = (records: LearnerRecords, qid: string) => {
   const q = g === null ? null : gradeOfQuestion(qid);
   return records.readinessRoute?.includes(question(qid).competency) || g === null || q === null || q <= g;
 };
+/** grade-order@1: a learner meets questions of their own grade before those of an earlier grade. 0: on the learner's grade (or a
+ *  question with no grade); 1: below it. Below-grade questions stay available (recovery, review), only later; on a readiness
+ *  route (prerequisites on purpose) nothing is reordered. */
+export const gradeRank = (records: LearnerRecords) => (qid: string): number => {
+  const g = gradeOf(records);
+  if (g === null) return 0;
+  const q = gradeOfQuestion(qid);
+  return q !== null && q < g && !records.readinessRoute?.includes(question(qid).competency) ? 1 : 0;
+};
+/** The ids in grade order for this learner (stable: the given order within each rank). */
+export const gradeFirst = (records: LearnerRecords, ids: readonly string[]): string[] => {
+  const r = gradeRank(records);
+  return ids.map((id, i) => [r(id), i, id] as const).sort((a, b) => a[0] - b[0] || a[1] - b[1]).map((x) => x[2]);
+};
+/** The diagnosis of a module for this learner: on-grade exploratory questions are asked first (grade-order@1). */
+export const learnerDiagnosis = (m: Module, records: LearnerRecords) => diagnose(m, records.attempts, gradeRank(records));
 /** The learner's first attempt at this problem, in either answer format (one exposure). */
 const answered = (records: LearnerRecords, qid: string) => records.attempts.find((a) => exposureKey(a.questionId) === exposureKey(qid)) ?? (records.pending?.some((p) => p.questionId === qid) ? ({ questionId: qid } as unknown as Attempt) : null);
 /**
@@ -58,7 +74,7 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
   if (!m.pool) return null;
   const seen = new Set(records.attempts.map((a) => exposureKey(a.questionId)));
   // pools@1: from every family of the competency in turn
-  const id = modulePhasePool(m, phase).find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id)) ?? null;
+  const id = gradeFirst(records, modulePhasePool(m, phase)).find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id)) ?? null;
   return id && phase === "check" ? situationFirst(m, id, records) : id;
 }
 
@@ -90,7 +106,7 @@ export function questionForRequirement(m: Module, phase: "check" | "retention", 
   const seen = new Set([...records.attempts, ...records.unresolved, ...records.pending].map((a) => exposureKey(a.questionId)));
   for (const key of taughtExposureKeys(records)) seen.add(key);
   const candidates = [...modulePhasePool(m, phase), ...(phase === "retention" ? m.retention : [...m.diagnostics, ...m.practice, ...m.strategies.map((s) => s.check)])];
-  return candidates.find((id) => !quarantined(id) && !seen.has(exposureKey(id)) && (placement === "readiness" || withinGrade(records, id))
+  return (placement === "readiness" ? candidates : gradeFirst(records, candidates)).find((id) => !quarantined(id) && !seen.has(exposureKey(id)) && (placement === "readiness" || withinGrade(records, id))
     && question(id).competency === m.competency && accepts(id)) ?? null;
 }
 
@@ -165,8 +181,12 @@ export function orderStrategies(m: Module, d: Diagnosis, records: LearnerRecords
   // (only among explanations this learner's current skill allows: one scoped to another skill does not hide a general one)
   const skill = currentSkill(m, records);
   const allowed = m.strategies.filter((x) => scopeAllows(m, x, records, skill));
+  // grade-order@1: an explanation whose own check is above the learner's grade (a later grade's kind of question) is not offered
+  // while one within the grade is; with none within the grade, nothing is removed
   const onTopic = (s: Strategy) => !wrongFamily || isMisconceptionSpecific(s) || !relevant(s) || !allowed.some((x) => !isMisconceptionSpecific(x) && !relevant(x));
-  return allowed.filter((s) => teachable(m, s, misconceptionEvidence) && onTopic(s)).sort((a, b) => specific(a) - specific(b) || relevant(a) - relevant(b) || Number(a.kind !== kind) - Number(b.kind !== kind) || needState(a) - needState(b) || m.strategies.indexOf(a) - m.strategies.indexOf(b));
+  const usable = allowed.filter((s) => teachable(m, s, misconceptionEvidence) && onTopic(s));
+  const inGrade = usable.filter((s) => withinGrade(records, s.check));
+  return (inGrade.length ? inGrade : usable).sort((a, b) => specific(a) - specific(b) || relevant(a) - relevant(b) || Number(a.kind !== kind) - Number(b.kind !== kind) || needState(a) - needState(b) || m.strategies.indexOf(a) - m.strategies.indexOf(b));
 }
 /** teaching gate (adaptive-loop repair): an explanation whose sections fail the teaching contract is never chosen as an
  *  intervention. One that was not machine-checked (hand-written modules) may be used, and says so; none is "verified". */
@@ -438,7 +458,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   if (!m?.pool && ev.retention !== "due" && records.pending?.some((p) => graph.evidenceTarget(p.competency) === competency)) return { ...base, phase: "waiting", reason: "Your written answer is with an educator. You will see the mark and their feedback under “Written work”; carry on with other skills meanwhile." };
   // a misunderstanding already established elsewhere (diagnostic@2, on a problem the learner was stuck on) replaces the
   // exploratory questions here: it is not asked again; strategy probes and teaching follow as usual
-  const asked = diagnose(m, records.attempts);
+  const asked = learnerDiagnosis(m, records);
   // findings@1: a misunderstanding diagnostic@2 established on this module's own questions (from the learner's records:
   // the first answer and the investigation answers) is taught here until a fresh answer alone after teaching is right.
   // It needs two matching answers (reason()); one slip, or an uncertain investigation, establishes nothing. It replaces
@@ -464,7 +484,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   // when no fresh question of the list is left
   const taught = taughtExposureKeys(records);
   const unanswered = (ids: string[]) => {
-    const open = ids.filter((id) => keyboardOffered(id) && !answered(records, id) && withinGrade(records, id));
+    const open = gradeFirst(records, ids.filter((id) => keyboardOffered(id) && !answered(records, id) && withinGrade(records, id)));
     return open.find((id) => !taught.has(exposureKey(id))) ?? open[0] ?? null;
   };
   // skill-units@1: skills taught here with a scoped explanation (exterior angle, vertically opposite angles, two dice, ...)
@@ -539,7 +559,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   // explore-once@1: an exploratory question already answered (in either format) is never served again. The diagnosis counts
   // only independent answers, so one answered with help (e.g. after reviewing this lesson in the same session) stays
   // "unasked" there; asking it again would repeat it for ever. The next unanswered one is asked instead, or none.
-  const exploreNext = d.next && !answered(records, d.next) ? d.next : d.next ? m.diagnostics.find((id) => !answered(records, id) && withinGrade(records, id)) ?? null : null;
+  const exploreNext = d.next && !answered(records, d.next) ? d.next : d.next ? gradeFirst(records, m.diagnostics).find((id) => !answered(records, id) && withinGrade(records, id)) ?? null : null;
   if (exploreNext && !shown) return { ...base, phase: "explore", question: exploreNext, diagnosis: d, reason: "A short check to find the right starting point." };
   // adaptive-loop repair: a gap the exploratory questions show is investigated exactly as from Practice (diagnostic@2 on the
   // wrong answer, then the supporting skill it points to), before this module's own explanations. Only with the learner's
@@ -614,7 +634,10 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     // written@2: the part an educator marks comes after the questions marked here, never before the fresh checks the
     // shared record needs (a written answer not yet written must not hold up the evidence for the skill)
     const listed = unanswered([...m.practice, ...tr, ...m.strategies.map((s) => s.check)]);
-    const written = unanswered(m.written ?? []);
+    // grade-order@1: the skill's extra written tasks (a module answered automatically) are offered only up to the learner's grade: a
+    // later grade's proof (the BPT by areas, for a Grade 8 learner) is reached in that grade. A module of written tasks alone is unchanged.
+    const g = gradeOf(records);
+    const written = unanswered((m.written ?? []).filter((id) => g === null || (writtenTask(id)?.grade ?? 0) <= g || records.readinessRoute?.includes(competency)));
     if (!listed && needsEvidence && taughtThisVisit && m.pool)
       return { ...base, phase: "done", question: null, diagnosis: d, reason: "Shown on your own, straight after the lesson. Come back on another day: a few fresh questions then show it is yours (answers right after teaching are progress, not yet evidence)." };
     const more = listed ?? (needsEvidence ? fromPool(m, "check", records) : null) ?? written;
@@ -844,7 +867,7 @@ export interface StrategyHistory {
 }
 export function teachingHistory(m: Module, records: LearnerRecords): StrategyHistory[] {
   const taught = records.teaching.filter((t) => t.competency === m.competency);
-  const blocks = ruleStateFor(m, diagnose(m, records.attempts), records).interventions;
+  const blocks = ruleStateFor(m, learnerDiagnosis(m, records), records).interventions;
   return m.strategies.map((s) => {
     const mine = taught.filter((t) => t.strategy === s.id);
     const g = answered(records, s.guided), c = answered(records, s.check);

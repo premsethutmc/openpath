@@ -163,7 +163,7 @@ export function runLearner(mind: Mind, o: { competency: string; grade: number; d
     // which opens recovery on that question; the learner always takes it
     const m = moduleFor(o.competency)!, scope = teachingScopeFor(m);
     const candidates = [...new Set([...modulePhasePool(m, "practice"), ...m.practice, ...m.transfer])].filter((id) => selectable(id) && !needsMarking(question(id)) && !!problemOf(id) && scope.accepts(problemOf(id)!));
-    for (const qid of teachingLesson(m, candidates).practice.slice(0, 6)) {
+    for (const qid of teachingLesson(m, candidates, d.state().records.enrolments.at(-1)?.grade ?? null).practice.slice(0, 6)) {
       attempt("practice", "practice", "Practice this concept (the lesson page).", qid, "practice");
       if (steps.at(-1)!.grading!.credit === false && familyOf(qid)) { o = { ...o, recoveryFrom: qid }; break; }
     }

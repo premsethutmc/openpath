@@ -3,7 +3,7 @@
 Read this file first; open other files only as the task needs them. Keep it under ~50 lines and update it at
 each milestone.
 
-Updated: 2026-11-09 (Grade 8 pilot integration)
+Updated: 2026-11-09 (Grade 8: grade-order engine items, second review)
 
 ## Rules (product owner)
 - No merge or deploy without the owner's explicit approval. PRs are drafts unless the owner says otherwise.
@@ -23,8 +23,14 @@ Updated: 2026-11-09 (Grade 8 pilot integration)
 - Result: Grade 8 contract violations 57 -> 0; untaught after early mistakes 0 both boards; gap CBSE 48/48,
   TN 42/43 (+1 awaiting a mark); false step notes platform-wide 11 -> 1 (not Grade 8); lessons' solved examples
   no longer served as practice while a fresh question exists; no answer, key or option letter changed.
-- Open (engine): (1) order on-grade questions before below-grade ones for a learner (exponents opens with 5^3);
-  (2) hide lesson sections of above-grade families (BPT, segments, (x±a)^3, nPr) for a Grade 8 learner.
+- Engine items done (grade-order@1): a learner meets on-grade questions before below-grade ones (exploratory, checks,
+  practice, lesson practice; same-phase inversions 110 -> 0); a learner's lesson hides later-grade sections (33 -> 0 for
+  Grade 8) and later-grade written tasks (BPT/chord proofs); preview unchanged. Limit: 14 runs still open below grade where
+  the module's fixed exploratory questions are all below grade (needs on-grade diagnostics in the library).
+- Second independent sample review (21 modules, both boards, `docs/milestones/GRADE8_REVIEW_2.md`): 0 critical,
+  11 major (M9/M10 written tasks fixed here), 14 minor. Open majors: opening section mixes two questions' picture and
+  working (M1, M2); exponent read as a factor in step notes (M4); below-grade-only lessons (figurate-numbers,
+  unit-conversions); missing outcomes (straight-line graphs/scale, frequency polygons, map colouring).
 - Deferred: ±1 distractors (would move option letters).
 
 ## Previous milestone: Grade 7 complete, both boards (CBSE, TN)
@@ -57,7 +63,7 @@ Synthetic learner, behaviour only. Unmapped outcomes: 0 everywhere. Format: fail
   artifact (also shown in the job summary) instead of the full log.
 
 ## Next
-1. Grade 8: CI green, then the two engine items above, then a second independent sample review.
+1. Grade 8: fix pass for the review-2 majors (by an agent other than the reviewer), then CI green.
 2. Owner decides on review/merge of #117 / #119.
 3. Next grades per the gap report: TN 1–3 textbook ingestion and the 5 stalls; Grades 9–12; Grades 1–6.
    Usage: the Grade 8 pilot used ~1.3M tokens and hit the weekly limit; plan parallel builds accordingly.
