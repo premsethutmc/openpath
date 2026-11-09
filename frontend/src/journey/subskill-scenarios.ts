@@ -4,7 +4,8 @@
  * generated variants drawn from the families' own release pools, with a seed, never hand-written.
  */
 import { problemOf, type Phase } from "../../../packages/learning/src/families";
-import { moduleFor } from "../../../packages/learning/src/content";
+import { wrongShaped } from "./wrong-answers";
+import { moduleFor, question } from "../../../packages/learning/src/content";
 import { DAY } from "../../../packages/learning/src/evidence";
 import { readRecords, withDecisions, type LearningRecord } from "../../../packages/learning/src/records";
 import { COMPETENCY, projectFromEvents, type Projection } from "../../../packages/learning/src/subskill-evidence";
@@ -12,8 +13,9 @@ import { SliceSession } from "./session";
 
 export const E1_START = Date.parse("2026-03-02T09:00:00Z");
 const base = (q: string) => q.replace(/:(mc|w)$/, "");
-export const answerOf = (q: string) => problemOf(base(q))!.answer;
-export const wrongOf = (q: string) => { const a = answerOf(q); const n = Number(a); return Number.isFinite(n) ? String(n + 1) : `${a}0`; };
+export const answerOf = (q: string) => question(q).answer;
+// Keep choice letters and structured answer shapes: a simulated mistake must be an incorrect answer, not unreadable input.
+export const wrongOf = wrongShaped;
 /** typed variants of a family's phase pool, rotated by a seed (distinct variants, deterministic). The pool is supplied by the caller (a test or
  *  script reading families.phasePool), so this module is not a question selector of its own. */
 export type Variants = (fam: string, phase: Phase, k: number, seed?: number) => string[];

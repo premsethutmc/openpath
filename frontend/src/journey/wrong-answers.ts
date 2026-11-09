@@ -78,8 +78,8 @@ export function shapedWrong(qid: string): ShapedWrong {
   if (hit) return hit;
   const b = base(qid), q = question(b), type = q.type as AnswerType, ans = String(q.answer);
   const cands: string[] = [];
-  const options = q.options?.length || qid.endsWith(":mc");
-  if (options) cands.push(...["A", "B", "C", "D"]);
+  const options = question(qid).options;
+  if (options?.length) cands.push(...options.map((_, i) => "ABCD"[i]));
   else {
     if (/,/.test(ans)) cands.push(...tupleVariants(ans));
     for (const d of [1, -1, 2]) { const s = shiftNumber(ans, d); if (s !== null) cands.push(s); }
@@ -91,9 +91,10 @@ export function shapedWrong(qid: string): ShapedWrong {
   // never the answer a modelled misconception predicts (that would be evidence of the misconception, not a plain error)
   const modelled = new Set((problemOf(b)?.bugs ?? []).map((x) => misconception(qid, new Set([x.id]))).filter((x): x is string => x !== null));
   const graded = (c: string) => gradeRequest({ id: qid, response: c }).verdict === "incorrect";
-  const ok = (c: string) => !modelled.has(c) && (options || shapeOk(type, c)) && graded(c);
+  const ok = (c: string) => !modelled.has(c) && (options?.length || shapeOk(type, c)) && graded(c);
   // a pick from options is always well-formed: when every wrong option is a modelled misconception, one of them is used
-  const pick = cands.find(ok) ?? (options ? cands.find(graded) : undefined);
+  const pick = cands.find(ok) ?? (options?.length ? cands.find(graded) : undefined);
+  if (options?.length && pick === undefined) throw new Error(`no genuinely incorrect displayed option for ${qid}`);
   const res: ShapedWrong = pick !== undefined ? { answer: pick, source: "shaped" } : { answer: oldWrong(qid), source: "fallback-old" };
   cache.set(qid, res);
   return res;

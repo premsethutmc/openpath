@@ -21,11 +21,12 @@ export const wrong = (q: string) => {
   const cands: string[] = [];
   try { cands.push(slip(q)); } catch { /* no numeric slip */ }
   const o = question(q).options;
-  if (o?.length) cands.push(...["A", "B", "C", "D"].filter((x) => x !== right(q)));
-  cands.push("0", "1", "-1", "2", "x = 0");
+  if (o?.length) cands.push(...o.map((_, i) => "ABCD"[i]).filter((x) => x !== right(q)));
+  if (!o?.length) cands.push("0", "1", "-1", "2", "x = 0");
   // an unexplained slip: never the answer a modelled misconception predicts (that would be evidence of the misconception, not a slip)
   const modelled = new Set((problemOf(q)?.bugs ?? []).map((b) => misconception(q, new Set([b.id]))).filter((x): x is string => x !== null));
   const readable = cands.filter((c) => gradeRequest({ id: q, response: c }).verdict === "incorrect");
+  if (o?.length && !readable.length) throw new Error(`no genuinely incorrect displayed option for ${q}`);
   return readable.find((c) => !modelled.has(c)) ?? readable[0] ?? cands[0];
 };
 /** the answer a modelled misconception predicts for this question, or null when it predicts nothing here */
