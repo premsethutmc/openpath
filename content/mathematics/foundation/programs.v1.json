@@ -399,19 +399,19 @@
         {
           "id": "concept",
           "title": "Meet the idea",
-          "text": "Make one upright mark for each observation. After four upright marks, draw the fifth across them. A crossed bundle means five, not six. An empty row means zero.",
+          "text": "Make one upright mark for each thing you count. After four upright marks, draw the fifth mark across them. This crossed group means five, not six. An empty row means zero.",
           "questions": []
         },
         {
           "id": "explore",
           "title": "Try it with your hands",
-          "text": "Record five observations using Add one mark. Notice how the fifth mark crosses four. Undo it, then add it again. Your marks are saved to this learner’s account.",
+          "text": "Imagine counting five books. Tap Add one mark once for each book. Watch the fifth mark cross the first four. Undo it, then add it again. Your marks are saved.",
           "questions": []
         },
         {
           "id": "worked",
           "title": "Watch an example",
-          "text": "Two crossed bundles and three single marks make 5 + 5 + 3 = 13. The crossing mark is not an extra sixth mark. Keep a separate row for each category. Read each row, then subtract the smaller count from the larger to find how many more.",
+          "text": "The Books row has two crossed groups and three single marks: 5 + 5 + 3 = 13. The Games row has 5 + 3 = 8. The crossing mark is not an extra sixth mark. Each kind of thing has its own row. Match eight marks from each row. Books has five marks left, so there are five more books than games: 13 − 8 = 5.",
           "questions": []
         },
         {
@@ -425,7 +425,7 @@
         {
           "id": "independent",
           "title": "Try on your own",
-          "text": "Read each row before calculating. A frequency is the number of observations in that row.",
+          "text": "Count the marks in each row. The number of things counted in a row is called its frequency.",
           "questions": [
             "independent-a",
             "independent-b"
@@ -434,7 +434,7 @@
         {
           "id": "application",
           "title": "Use it in a story",
-          "text": "Compare the category counts. How many are left after pairing the rows?",
+          "text": "Compare the number of books and games. Pair one book with one game. How many books are left?",
           "questions": [
             "application"
           ]
@@ -442,7 +442,7 @@
         {
           "id": "transfer",
           "title": "Try a new situation",
-          "text": "The categories changed, but the tally rule stays the same. Equal rows mean a tie.",
+          "text": "Now the rows show dogs and cats. The tally rule stays the same. Equal counts mean a tie.",
           "questions": [
             "transfer"
           ]
@@ -459,76 +459,96 @@
       "questions": [
         {
           "id": "guided",
-          "prompt": "How many observations does this row record?",
+          "prompt": "How many books does this row show?",
           "answer": "6",
-          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
-          "solution": "1 groups of five and 1 singles make 6.",
+          "hint": "Count the crossed group as five, then add the single mark.",
+          "solution": "One group of five and one single mark make 5 + 1 = 6 books.",
           "commonError": "7",
-          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "misconception": "The diagonal is the fifth mark, not an extra sixth mark. There are four upright marks and one crossing mark in the group.",
           "tallyCounts": [
             6
+          ],
+          "tallyLabels": [
+            "Books"
           ]
         },
         {
           "id": "independent-a",
-          "prompt": "Books: enter the frequency shown in the row.",
+          "prompt": "Books: how many were counted? Enter the frequency.",
           "answer": "14",
-          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
-          "solution": "2 groups of five and 4 singles make 14.",
+          "hint": "Count the two crossed groups in fives, then add the single marks.",
+          "solution": "Two groups of five and four single marks make 5 + 5 + 4 = 14 books.",
           "commonError": "16",
-          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "misconception": "Each crossed group has five marks, not six. Count the four upright marks and their crossing mark once each.",
           "tallyCounts": [
             14
+          ],
+          "tallyLabels": [
+            "Books"
           ]
         },
         {
           "id": "independent-b",
-          "prompt": "Games: enter the frequency shown in this empty row.",
+          "prompt": "Games: how many were counted? Enter the frequency for this empty row.",
           "answer": "0",
-          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
-          "solution": "0 groups of five and 0 singles make 0.",
+          "hint": "An empty row has no marks. What number means none?",
+          "solution": "There are no marks, so no games were counted. The frequency is 0.",
           "commonError": "1",
-          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "misconception": "The row label names what we count; it is not a tally mark. No marks means zero.",
           "tallyCounts": [
             0
+          ],
+          "tallyLabels": [
+            "Games"
           ]
         },
         {
           "id": "application",
-          "prompt": "Books and Games: how many more observations are in the larger row?",
+          "prompt": "How many more books than games were counted?",
           "answer": "5",
-          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
-          "solution": "13 − 8 = 5. Pair the rows and count the unpaired marks.",
+          "hint": "Read both rows. Pair one book with one game, then count the books left over. You can also subtract the smaller count from the larger.",
+          "solution": "There are 13 books and 8 games. Pairing 8 books with 8 games leaves 5 books: 13 − 8 = 5.",
           "commonError": "21",
-          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "misconception": "Adding 13 and 8 finds how many there are altogether. To find how many more books, subtract the 8 games from the 13 books.",
           "tallyCounts": [
             13,
             8
+          ],
+          "tallyLabels": [
+            "Books",
+            "Games"
           ]
         },
         {
           "id": "transfer",
-          "prompt": "Dogs and Cats: how many more are in the larger row? Write 0 for a tie.",
+          "prompt": "Dogs and Cats: how many more are in one row than the other? Write 0 if the counts are equal.",
           "answer": "0",
-          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
-          "solution": "10 − 10 = 0. Pair the rows and count the unpaired marks.",
+          "hint": "Count each row in fives. If every dog can be paired with a cat and none are left, the difference is zero.",
+          "solution": "There are 10 dogs and 10 cats. Both counts are equal, so neither has more: 10 − 10 = 0.",
           "commonError": "20",
-          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "misconception": "Adding the rows finds how many animals there are altogether. This question asks how many more. Equal counts have a difference of zero.",
           "tallyCounts": [
             10,
             10
+          ],
+          "tallyLabels": [
+            "Dogs",
+            "Cats"
           ]
         },
         {
           "id": "retention",
-          "prompt": "How many observations does this new row record?",
+          "prompt": "How many books does this new row show?",
           "answer": "19",
-          "hint": "Count each crossed bundle as five, then the single marks. Compare row counts if asked how many more.",
-          "solution": "3 groups of five and 4 singles make 19.",
+          "hint": "Count the crossed groups in fives, then add the single marks.",
+          "solution": "Three groups of five and four single marks make 5 + 5 + 5 + 4 = 19 books.",
           "commonError": "22",
-          "misconception": "The diagonal is the fifth mark. How many more asks for a difference, not the combined total.",
+          "misconception": "Each crossed group has five marks, not six. The crossing mark is already included in the five.",
           "tallyCounts": [
             19
+          ],
+          "tallyLabels": [
+            "Books"
           ]
         }
       ]

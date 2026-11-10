@@ -52,3 +52,9 @@ test('lesson example and stage samples agree with model and keep delayed items f
   assert.equal(new Set([...tallyLesson.guided,...tallyLesson.independent,...tallyLesson.delayed]).size,11);
   assert.equal(tallyLesson.educatorReviewed,false);
 });
+
+test('draft family explanations use singular grammar and do not invent a larger row in a tie', () => {
+  assert.equal(read.explain(read.solve([6]).steps[0]), '1 group of five and 1 single mark make 6.');
+  assert.match(diff.explain(diff.solve([10, 10]).steps[0]), /neither row has more/);
+  assert.doesNotMatch(diff.prompt([10, 10]), /larger row/);
+});

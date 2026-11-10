@@ -353,7 +353,7 @@ function Question({
       }}
     >
       <p id={`prompt-${id}`}>{q.prompt}</p>
-      {tallyCounts && <TallyRows counts={tallyCounts} labels={id === "transfer" ? ["Dogs", "Cats"] : ["Books", "Games"]} />}
+      {tallyCounts && <TallyRows counts={tallyCounts} labels={"tallyLabels" in q && Array.isArray(q.tallyLabels) ? q.tallyLabels as string[] : undefined} />}
       <label>
         Your answer
         <input
@@ -669,7 +669,7 @@ function App() {
                             {Math.floor(ps.timeMs / 1000) % 60}s recorded time ·{" "}
                             {ps.attempts} attempts
                           </p>
-                          {pr.id === "tally-g3-draft" && <p aria-label="Tally practice evidence">Shared practice record: {replay.tallyPractice.assisted} helped or repeated responses; {replay.tallyPractice.unassisted} unassisted practice responses (independence unverified); {replay.tallyPractice.legacyUnknown} legacy responses with unknown help history. Independent evidence: 0. Unreviewed practice does not establish mastery.</p>}
+                          {pr.id === "tally-g3-draft" && <p aria-label="Tally practice evidence">Shared practice record: {replay.tallyPractice.assisted} helped or repeated responses; {replay.tallyPractice.unassisted} unassisted practice responses (independence unverified); {replay.tallyPractice.legacyUnknown} legacy responses with unknown help history. Independent evidence: 0. This practice does not establish mastery.</p>}
                           <p>
                             Shared understanding:{" "}
                             {replay.profiles[pr.id].status}. Completion is not
@@ -727,7 +727,7 @@ function App() {
                 <h2>{stage.title}</h2>
                 <p>{stage.text}</p>
                 <Speak text={stage.text} />
-                {p.model === "tally" && <p role="note">Draft lesson · educator review pending. Activity completion is not mastery or TN curriculum coverage.</p>}
+                {p.model === "tally" && <p role="note">Draft practice lesson. Activity completion is not mastery or full TN curriculum coverage.</p>}
                 {p.model === "tally" && ["concept", "worked"].includes(stage.id) && <TallyRows counts={stage.id === "concept" ? [5] : [13, 8]} />}
                 {stage.id === "concept" && p.model !== "tally" && (
                   <div

@@ -27,7 +27,7 @@ jobs:
       - run: pip install -r backend/requirements.txt
       - run: npm ci
         working-directory: frontend
-      - run: node --import tsx --test src/mathematics/foundation/foundation.test.ts src/mathematics/foundation/tally-evidence.test.ts
+      - run: node --import tsx --test src/mathematics/foundation/foundation.test.ts src/mathematics/foundation/tally-evidence.test.ts src/mathematics/foundation/tally-content.test.ts
         working-directory: frontend
       - run: python manage.py test family.test_math_foundation --noinput
         working-directory: backend

@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "508d38fdad688604832a2d34aae4d1e8c66b8c671f2328e63a4b3584ab37545c",
+ "sha256": "741e3d19e516128d6599190a66c564085397abcce07dadb06ef532ef651afe0e",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -100,7 +100,7 @@
   "content/learning/written.v1.json": "062d4de43ceda147dfac6d3e76cc70ac5ffd0ef3b1cc3ab2528e5c84497bcbc8",
   "content/mathematics/curriculum.v1.json": "e4c17772945ff4ad1892b8839d99d3f1a5d149cebdaeb8d138ecfcc112df44d4",
   "content/mathematics/exam-tracks.v1.json": "3e3996cbc58f313676501eb4b4698ccec4bdb1e9f6b855f57bee2f5045678a90",
-  "content/mathematics/foundation/programs.v1.json": "d545c966d1fd6fdca58c24d0575587bc2d50fbb55476af491b64b6014c93bcd5",
+  "content/mathematics/foundation/programs.v1.json": "3a0b4efd908cd706e8702b0512c848da66efb7d9ae6dda54ea774689753a9c68",
   "content/mathematics/graphs/prerequisites.v1.1.json": "e49e1715db4d1f6e39444100e7a654055c0acaf9eab117e364533c8246f9ac1c",
   "content/mathematics/programs/completing-the-square.v1.json": "2081dcdf7182d9e49a713174f72fad4821c6588cba2e0074e84cd003346c1d54",
   "content/mathematics/programs/equivalent-fractions.v2.json": "7a862521d087d68f7850cf79721a794c1a524db0722c825ad868bac6f67573c7",

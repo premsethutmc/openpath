@@ -81,7 +81,7 @@ export const tallyReadFamily: Def = {
   validate: (p, answer) => valid(p, 1) && numeric(answer) && answer === countStrokes(p[0]),
   bugs: ([n]) => n < 5 ? [] : [{ id: 'cross-counted-twice', kind: 'conceptual', competency: C, says: 'The crossed bundle has four upright marks and one crossing mark: five altogether.', predict: n + Math.floor(n / 5) }],
   variants: ([n]) => [0, 4, 5, 6, 9, 10, 14, 19, 20].filter(x => x !== n).map(x => [x]),
-  explain: s => `${s.inputs[0]} groups of five and ${s.inputs[1]} single marks make ${s.value}.`,
+  explain: s => `${s.inputs[0]} ${s.inputs[0] === 1 ? 'group' : 'groups'} of five and ${s.inputs[1]} single ${s.inputs[1] === 1 ? 'mark' : 'marks'} make ${s.value}.`,
   figure: ([n]) => ({ type: 'table', head: ['Tally row (text description)'], rows: [[describeTally(encodeTally(n))]] }),
   domain: [[0, 20]], grade: () => 3, difficulty: ([n]) => n < 5 ? 1 : n < 11 ? 2 : 3,
   teach: { idea: tallyLesson.steps[1], method: tallyLesson.steps[2] }
@@ -89,7 +89,7 @@ export const tallyReadFamily: Def = {
 export const tallyDifferenceFamily: Def = {
   id: 'draft_tally_difference', arity: 2, competency: C, type: 'integer', title: 'Compare two tally rows',
   parse: () => null, reject: p => valid(p, 2) ? null : 'Both counts must be 0–20.',
-  prompt: () => 'How many more marks are in the larger row? Write 0 if the rows are equal.',
+  prompt: () => 'How many more marks are in one row than the other? Write 0 if the counts are equal.',
   solve: ([a, b]) => ({ answer: Math.abs(a - b), steps: [{ id: 'difference', op: 'subtract', competency: C, inputs: [Math.max(a, b), Math.min(a, b)], value: Math.abs(a - b) }] }),
   validate: (p, answer) => {
     if (!valid(p, 2) || !numeric(answer)) return false;
@@ -100,7 +100,7 @@ export const tallyDifferenceFamily: Def = {
   },
   bugs: ([a, b]) => Math.min(a, b) === 0 ? [] : [{ id: 'total-for-difference', kind: 'conceptual', competency: C, says: 'How many more asks for the marks left after pairing the rows, not all marks together.', predict: a + b }],
   variants: ([a, b]) => [[0, 0], [5, 5], [4, 6], [13, 8], [8, 13], [20, 0]].filter(([x, y]) => x !== a || y !== b),
-  explain: s => `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}. That is how many more marks the larger row has.`,
+  explain: s => `${s.inputs[0]} − ${s.inputs[1]} = ${s.value}. ${s.value === 0 ? 'The counts are equal, so neither row has more.' : 'That is how many more marks the larger row has.'}`,
   figure: ([a, b]) => ({ type: 'table', head: ['Category', 'Tallies (text description)'], rows: [['Books', describeTally(encodeTally(a))], ['Games', describeTally(encodeTally(b))]] }),
   domain: [[0, 20], [0, 20]], grade: () => 3, difficulty: () => 2,
   teach: { idea: tallyLesson.steps[4], method: 'Read each tally row first. Pair their marks. Count the marks left in the larger row.' }
