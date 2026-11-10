@@ -2,7 +2,7 @@
  * machine-validation@1 acceptance tests. With no educators, an independently certified, unchanged, grading-certified question
  * counts as validated evidence, so a learner can reach "verified" without the test-only review fixture. The route must fail
  * closed: a changed family, an excluded or quarantined question, the everyday-wording form, a family that was never certified
- * and every hand-written question stay provisional, and nothing is ever labelled educator-reviewed.
+ * and a hand-written question no blind review agreed with stay provisional, and nothing is ever labelled educator-reviewed.
  * Synthetic learners: this shows what the program decides, never that anyone learned.
  */
 import assert from "node:assert/strict";
@@ -15,6 +15,7 @@ import { FAMILIES, pool, problemOf } from "../../../packages/learning/src/famili
 import { machineRegistry, machineReleaseOf, useMachineValidation, type MachineRegistry } from "../../../packages/learning/src/machine-validation";
 import { quarantinedIds } from "../../../packages/learning/src/question-status";
 import { fingerprintOf } from "../../../packages/learning/src/review";
+import { ELIGIBLE_MAX } from "../../../packages/learning/src/intervention";
 import { question } from "../../../packages/learning/src/content";
 
 const reg = machineRegistry;
@@ -42,8 +43,8 @@ test("registry entries carry the current fingerprint (a spread of families; a st
 test("a certified typed question is validated; its everyday-wording form, an excluded question and a held family are not", () => {
   const typedFam = reg.entries.find((e) => e.forms.includes("typed") && e.forms.includes("mc") && FAMILIES.get(e.family)!.word)!.family;
   const id = firstFree(typedFam);
-  assert.equal(machineReleaseOf(id), reg.validatedAt);
-  assert.equal(machineReleaseOf(`${id}:mc`), reg.validatedAt);
+  assert.equal(machineReleaseOf(id), entry(typedFam).since ?? reg.validatedAt);
+  assert.equal(machineReleaseOf(`${id}:mc`), entry(typedFam).since ?? reg.validatedAt);
   assert.ok(problemOf(`${id}:w`), "the family has an everyday-wording form");
   assert.equal(machineReleaseOf(`${id}:w`), undefined, "wording was never certified");
 
@@ -78,20 +79,41 @@ test("a changed family switches its entry off, and the route can be switched off
   } finally {
     useMachineValidation(true);
   }
-  assert.equal(machineReleaseOf(id), reg.validatedAt);
+  assert.equal(machineReleaseOf(id), e.since ?? reg.validatedAt);
 });
 
-test("the item is labelled machine-checked, never educator-reviewed; hand-written questions stay provisional", () => {
+test("the item is labelled machine-checked, never educator-reviewed", () => {
   assert.equal(reviewFixtureActive(), false);
   const e = reg.entries.find((x) => x.forms.includes("typed"))!;
   const it = nativeItem(question(firstFree(e.family))) as { evidence_status: string; released_at?: string; review: string };
   assert.equal(it.evidence_status, "validated");
-  assert.equal(it.released_at, reg.validatedAt);
+  assert.equal(it.released_at, e.since ?? reg.validatedAt);
   assert.match(it.review, /^Machine-checked/);
   assert.match(it.review, /Not educator-reviewed/);
+});
+
+test("a hand-written question is validated only if a blind review agreed with its answer and it is unchanged since", () => {
   const written = questions.filter((q) => !q.id.startsWith("gen:"));
-  assert.ok(written.length > 0);
-  for (const q of written) assert.equal((nativeItem(q) as { evidence_status: string }).evidence_status, "provisional", q.id);
+  const listed = reg.written ?? {};
+  assert.ok(Object.keys(listed).length > 150, `${Object.keys(listed).length} hand-written questions admitted`);
+  for (const q of written) {
+    const status = (nativeItem(q) as { evidence_status: string }).evidence_status;
+    assert.equal(status, q.id in listed ? "validated" : "provisional", q.id);
+    if (q.id in listed) assert.ok(["integer", "choice", "fraction"].includes(q.type), `${q.id}: ${q.type}`);
+    else assert.ok(reg.writtenHeld?.[q.id], `${q.id} is held with a reason`);
+  }
+  // the question the review found to have two correct options is held, with the reason
+  assert.match(reg.writtenHeld!["wm-tri-d1"], /two options are correct/);
+  assert.equal(machineReleaseOf("wm-tri-d1"), undefined);
+  // any change to a reviewed question ends its admission
+  const id = Object.keys(listed)[0];
+  try {
+    useMachineValidation(true, { ...reg, written: { ...listed, [id]: "0000changed" } });
+    assert.equal(machineReleaseOf(id), undefined);
+  } finally {
+    useMachineValidation(true);
+  }
+  assert.equal(machineReleaseOf(id), reg.validatedAt);
 });
 
 test("a learner reaches verified without the review fixture, and only through machine validation", () => {
@@ -115,4 +137,21 @@ test("a learner reaches verified without the review fixture, and only through ma
   } finally {
     useMachineValidation(true);
   }
+});
+
+test("eligible@1: a delayed check that included a question that is not validated is followed by fresh validated ones, and verifies", () => {
+  const release = boardFor("tn", 7)!;
+  const skill = "MATH.number.percentage";
+  const d = new Driver(`mv-tn-7-${skill}`, Date.parse(reg.validatedAt) + 2 * 86_400_000);
+  d.enrol(7, "2026-27", release);
+  d.work(skill, right, { max: 80 });
+  d.newSession(9);
+  d.work(skill, right, { max: 80 });
+  const attempts = d.state().records.attempts;
+  const delayed = attempts.filter((a) => a.activity === "retention");
+  assert.ok(delayed.some((a) => !machineReleaseOf(a.questionId)), "the delayed check included a question that is not validated");
+  const after = attempts.filter((a) => a.at > delayed.at(-1)!.at);
+  assert.ok(after.length >= 1 && after.length <= ELIGIBLE_MAX, `${after.length} further questions`);
+  assert.ok(after.every((a) => machineReleaseOf(a.questionId)), "only validated questions are added");
+  assert.equal(d.state().evidence(skill).status, "verified");
 });

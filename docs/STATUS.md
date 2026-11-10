@@ -13,14 +13,14 @@ Updated: 2026-11-10 (machine validation; `main` now holds the whole maths line)
 - `main` holds the whole maths line. Branch from `main`; short branches, merged back within a day or two.
 - Still open: #121 (dot, method alignment; already inside `main`), #123 (dot, TN Grades 1–3 ingestion; do not touch).
 
-## This milestone (2026-11-10, machine validation)
-- `main` = everything (fast-forward to #125 `08d273c`, owner-approved; #115–#120, #122, #124, #125 closed as included).
-  The owner delegated technical decisions; product, cost, security and deploy decisions still go to him.
-  `openpath-demo` on Render auto-deploys on every push to `main`.
-- machine-validation@1 (`packages/learning/src/machine-validation.ts`, `docs/product/MACHINE_VALIDATION.md`): there are no
-  educators, so a generated question now counts as validated when it is independently certified, unchanged since, and
-  grading-certified. 1,049 of 1,090 families admitted. Verified without the fixture: TN 7 36/50, CBSE 7 35/46, TN 8 31/43,
-  CBSE 8 37/48 (was 0). Never labelled educator review. Next: re-certify 41 held families; certify wording forms.
+## This milestone (2026-11-10, machine validation and re-certification)
+- `main` = everything (#125, then #126 machine-validation@1). The owner delegated technical decisions; deploys still need his
+  explicit approval, and `openpath-demo` on Render auto-deploys on every push to `main`, so a merge to `main` is a deploy.
+- machine-validation@1 (`docs/product/MACHINE_VALIDATION.md`): no educators, so a question counts as validated when it is
+  independently certified, unchanged since and grading-certified. Re-certification (`recertify.py`) + blind review of the 222
+  hand-written questions + eligible@1 (fresh validated questions after a delayed check that could not count):
+  1,078 of 1,090 families, 215 hand-written. Verified without the fixture: TN 7 47/50, CBSE 7 43/46, TN 8 42/43, CBSE 8 48/48.
+- Open: 12 held families (10 need a reference); `wm-tri-d1` has two correct options; `inequations-intro` never demonstrated.
 
 ## Earlier on 2026-11-10 (research pool boundary)
 - `fix/research-pool-boundary-2026-11-10`: moved offline pool readers/tools to `research/deep-recovery/`; kept their logic/results.

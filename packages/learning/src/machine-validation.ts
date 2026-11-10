@@ -11,16 +11,25 @@
  * and the question is in the family's release pool and not quarantined (families.ts inPool).
  * What stands behind an entry: an exhaustive, independent answer-key certification of exactly these questions, and a grading
  * certification for the form. What it does NOT establish: that the teaching is good, or that the question suits the grade.
- * Hand-written questions have no certification and stay provisional.
+ * A hand-written question is machine-validated only when the registry lists it with its current content hash: an independent
+ * reviewer re-derived its stored answer from the prompt and options alone (the key hidden), and it has not changed since.
  */
 import data from "../../../content/learning/machine-validation.v1.json";
+import { question, type Question } from "./content";
+import { hashOf } from "./curriculum";
 import { inPool } from "./families";
+import { selectable } from "./question-status";
 import { fingerprintOf } from "./review";
 
-export interface MachineEntry { family: string; fingerprint: string; forms: string[]; excluded?: string[] }
-export interface MachineRegistry { schema: string; validatedAt: string; entries: MachineEntry[]; partial: Record<string, string>; held: Record<string, string> }
+/** since: when this family was certified, if later than the registry's validatedAt (answers before it never verify) */
+export interface MachineEntry { family: string; fingerprint: string; forms: string[]; since?: string; excluded?: string[] }
+export interface MachineRegistry { schema: string; validatedAt: string; entries: MachineEntry[]; partial: Record<string, string>; held: Record<string, string>; written?: Record<string, string>; writtenHeld?: Record<string, string> }
+/** Hand-written questions are admitted only with these answer types (read by the exact graders; no grading audit covers them). */
+export const WRITTEN_TYPES: string[] = ["integer", "choice", "fraction"];
+/** What a reviewer of a hand-written question saw and what was compared: any change to it ends the admission. */
+export const writtenHash = (q: Question) => hashOf({ id: q.id, type: q.type, prompt: q.prompt, options: (q as { options?: string[] }).options ?? null, answer: q.answer });
 export const machineRegistry = data as unknown as MachineRegistry;
-export const MACHINE_VALIDATION_LABEL = "Machine-checked (machine-validation@1): answer key independently certified and grading certified. Not educator-reviewed.";
+export const MACHINE_VALIDATION_LABEL = "Machine-checked (machine-validation@1): answer independently re-derived and found correct. Not educator-reviewed.";
 
 const G = globalThis as { __openpathMachineValidation?: { on: boolean; reg: MachineRegistry | null; index?: Map<string, MachineEntry & { out: Set<string> }> } };
 const state = () => (G.__openpathMachineValidation ??= { on: true, reg: null });
@@ -39,10 +48,18 @@ function entryOf(fam: string) {
 export function machineReleaseOf(qid: string): string | undefined {
   const s = state();
   if (!s.on) return undefined;
+  if (!qid.startsWith("gen:")) {
+    // a hand-written question: an independent reviewer re-derived its stored answer from the prompt alone, and it is unchanged since
+    const h = (s.reg ?? machineRegistry).written?.[qid];
+    if (!h || !selectable(qid)) return undefined;
+    let q: Question;
+    try { q = question(qid); } catch { return undefined; }
+    return WRITTEN_TYPES.includes(q.type) && writtenHash(q) === h ? (s.reg ?? machineRegistry).validatedAt : undefined;
+  }
   const m = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/.exec(qid);
   if (!m || m[3] === "w") return undefined;
   const e = entryOf(m[1]);
   if (!e || !e.forms.includes(m[3] ?? "typed") || e.out.has(`gen:${m[1]}:${m[2]}`)) return undefined;
   if (e.fingerprint !== fingerprintOf(m[1]) || !inPool(qid)) return undefined;
-  return (s.reg ?? machineRegistry).validatedAt;
+  return e.since ?? (s.reg ?? machineRegistry).validatedAt;
 }

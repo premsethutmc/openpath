@@ -20,7 +20,7 @@ import { PLANNER_POLICY_DRAFT, planRule, type PlannerDecision, type PlannerPolic
 import { rateOf, type InterventionSummary, type MisconceptionRecord, type RuleState } from "../../english-core/src/rule-evidence";
 import { poolFamilies, moduleFor, question, type Module, type Strategy } from "./content";
 import { diagnose, type Diagnosis } from "./diagnostic";
-import { DAY, evidenceFor, independentAttempt, rightAnswer, type SkillEvidence } from "./evidence";
+import { DAY, evidenceFor, independentAttempt, nativeItem, rightAnswer, type SkillEvidence } from "./evidence";
 import { exposureKey, gradeOfQuestion, parseProblem, phaseOf as phaseOfQ, phasePool, problemKeyOf, problemOf, type Phase } from "./families";
 import { graph, walkSupports } from "./graph";
 import { quarantined } from "./question-status";
@@ -77,6 +77,27 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
   // pools@1: from every family of the competency in turn
   const id = gradeFirst(records, modulePhasePool(m, phase)).find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id)) ?? null;
   return id && phase === "check" ? situationFirst(m, id, records) : id;
+}
+
+/** eligible@1: how many fresh validated questions one visit may add after a delayed check that could not count. */
+export const ELIGIBLE_MAX = 4;
+/**
+ * eligible@1 (machine-validation@1): the shared record verifies a skill only from answers to VALIDATED questions (educator-
+ * released or machine-validated). A delayed check passed on this surface can include questions that are not validated (an
+ * everyday-wording form, a family not certified yet), and then the skill would stay "shown on your own" for ever with nothing
+ * more to do. When the delayed check has passed, the shared record has demonstrated the skill but not verified it, one fresh
+ * validated question at a time is offered (at most ELIGIBLE_MAX in a visit), so the same visit can supply the answers that
+ * count. Nothing is offered when no fresh validated question is left, and nothing changes while content is provisional.
+ */
+function eligibleCheck(m: Module, ev: SkillEvidence, records: LearnerRecords, session: string): string | null {
+  if (!m.pool || ev.retention !== "passed" || ev.engine !== "demonstrated") return null;
+  const validated = (id: string) => nativeItem(question(id)).evidence_status === "validated";
+  const mine = records.attempts.filter((a) => question(a.questionId).competency === m.competency);
+  const passedAt = mine.filter((a) => a.activity === "retention").at(-1)?.at ?? "";
+  const asked = mine.filter((a) => a.session === session && a.at > passedAt && a.activity !== "retention" && validated(a.questionId)).length;
+  if (asked >= ELIGIBLE_MAX) return null;
+  const seen = new Set(records.attempts.map((a) => exposureKey(a.questionId)));
+  return gradeFirst(records, [...modulePhasePool(m, "retention"), ...modulePhasePool(m, "check")]).find((id) => !seen.has(exposureKey(id)) && withinGrade(records, id) && keyboardOffered(id) && validated(id)) ?? null;
 }
 
 /**
@@ -656,7 +677,7 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     const written = unanswered((m.written ?? []).filter((id) => g === null || (writtenTask(id)?.grade ?? 0) <= g || records.readinessRoute?.includes(competency)));
     if (!listed && needsEvidence && taughtThisVisit && m.pool)
       return { ...base, phase: "done", question: null, diagnosis: d, reason: "Shown on your own, straight after the lesson. Come back on another day: a few fresh questions then show it is yours (answers right after teaching are progress, not yet evidence)." };
-    const more = listed ?? (needsEvidence ? fromPool(m, "check", records) : null) ?? written;
+    const more = listed ?? (needsEvidence ? fromPool(m, "check", records) : null) ?? eligibleCheck(m, ev, records, session) ?? written;
     // shown here, but the shared record (the engine) has not yet demonstrated it and nothing is left: say so
     const engineShort = !more && needsEvidence;
     return { ...base, phase: more ? "verify" : "done", question: more, diagnosis: d, reason: more && m.written?.includes(more) ? "Shown on your own. Now the part a computer cannot mark: write or draw it, and an educator will mark it (other skills carry on meanwhile)." : ev.status === "verified" ? "Verified: shown on your own, and again in a delayed check." : more ? "Shown on your own. More practice is optional." : engineShort ? "Shown on your own here. Your shared record needs more answers on your own before a delayed check can verify it, and this skill has no more questions yet." : ev.retentionDueAt && ev.retention === "scheduled" ? "Shown on your own. A delayed check is planned (its exact opening time is shown with this skill)." : "Shown on your own." };
