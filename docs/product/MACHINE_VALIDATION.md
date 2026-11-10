@@ -27,6 +27,14 @@ Also:
   off until the family is certified again and the registry rebuilt. A stale entry is inert, never wrong.
 - Answers given before the registry's `validatedAt` (2026-11-10) do not count, as with an educator release.
 
+## Effect on existing records
+
+A machine-validated question is validated content for the shared engine, so the engine now forms its own picture of the skill
+from every answer to it, including answers before `validatedAt` (those can inform, never verify). Two visible effects: the
+engine status is no longer "unavailable", and a delayed check is dated from the engine's own demonstration of the skill
+(verification@3), which can be later than this surface's first "shown on your own". "Verified" still needs both the engine's
+verification and this surface's own delayed check, including a taught skill's own delayed answer (`evidence.ts`).
+
 ## What it does not establish
 
 That the teaching is good, that a question suits its grade, or that it measures the skill it is mapped to. Those were
