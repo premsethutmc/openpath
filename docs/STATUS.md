@@ -43,6 +43,8 @@ Updated: 2026-11-10 (machine validation; `main` now holds the whole maths line)
 - Tests: `deep-select.test.ts`, `pythagoras-methods.test.ts`; regenerated (Node; grader bundle with esbuild 0.28.2).
 
 ## Open defects
+- Legacy path-triggered workflows (Mathematics foundation, prerequisites follow-up, journey, Grade 1–6) run `npm test` without
+  Django, so `simulated-choice-answers.test.ts` fails there whenever `tools/mathematics/**` etc. change. CI and My Learning Year are fine.
 - All learning-package tests still need a complete Bun run; the selector/import-boundary check now also runs in Node CI.
 - Pythagoras m² − n², 2mn, m² + n² rule lacks a worked example despite its map. See `PYTHAGORAS_AI_REVIEW_2026_11_10.md` in milestones.
 - Pythagoras "Spot a triple" / "Spot the mistake" / "What it uses" have no method map (#121 legacy path, follow-ups not gated).

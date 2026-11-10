@@ -45,7 +45,7 @@ if (mode === "snapshot") {
 if (mode !== "build" || !dir) throw new Error("usage: machine-validation.ts snapshot <exportDir> <out.json> | build <exportDir> [validatedAt]");
 
 const { fingerprintOf } = await import("../src/review");
-const certified = JSON.parse(readFileSync(new URL("certified-content.json", CERT), "utf8")) as { commit: string; families: Record<string, Hashes> };
+const certified = JSON.parse(readFileSync(new URL("content/learning/certified-content.v1.json", ROOT), "utf8")) as { commit: string; families: Record<string, Hashes> };
 const cert = new Map((JSON.parse(readFileSync(new URL("certification.json", CERT), "utf8")).families as { family: string; coverage: string; mcBad: number; mcChecked: number }[]).map((f) => [f.family, f]));
 const notVerified = new Map<string, string[]>();
 for (const l of gunzipSync(readFileSync(new URL("per-question.ndjson.gz", CERT))).toString("utf8").split("\n")) {

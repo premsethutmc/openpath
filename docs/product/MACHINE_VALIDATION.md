@@ -14,7 +14,7 @@ A family's presentation form (typed, multiple choice) is admitted only when all 
 
 1. **Independent answer key.** The answer-key certification (`tools/mathematics/answer-key-certification`, references that
    never read the generator) checked every question of the family exhaustively.
-2. **Unchanged.** Today's questions are byte-identical to the certified ones (`data/certified-content.json`, hashes of
+2. **Unchanged.** Today's questions are byte-identical to the certified ones (`content/learning/certified-content.v1.json`, hashes of
    the export at the certified commit `901c907`).
 3. **Grading certified.** `grading-certifications.v1.json` holds the family for that form.
 
