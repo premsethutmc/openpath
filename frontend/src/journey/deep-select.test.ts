@@ -50,10 +50,9 @@ test("within the learner's grade: a Grade 7 inequality and a Grade 5 unit rate g
   }
 });
 
-test("after a lesson with a method map, a question on the taught skill uses a method that lesson taught (fraction of a quantity)", () => {
+test("after a lesson, a question on the taught skill is one that lesson's sections work through (fraction of a quantity)", () => {
   const C = "MATH.number.fraction-multiply", original = "gen:avfwq:5,9,9,1";
   const m = moduleFor(C)!, st = m.strategies.find((s) => s.id === "worked_steps")!;
-  assert.equal(methodCompatibility(m, st, original).status, "incompatible", "the problem itself needs a method the lesson did not show");
   const d = learnerAt(6, "fmul");
   d.events.push(make.teach(d.ctx(), C, st.id, "test"));
   d.answer(original, "0", "original");
@@ -63,10 +62,12 @@ test("after a lesson with a method map, a question on the taught skill uses a me
   assert.equal(methodCompatibility(m, st, r.question!).status, "covered", `${r.question}: ${methodRequirements(r.question!)}`);
 });
 
-test("no suitable question: it stops and says why (exterior angle after a triangle-sum lesson), never substituting another", () => {
-  const C = "MATH.geometry.triangle-properties", original = "gen:ahext:34,53,0";
-  const d = learnerAt(8, "ext");
-  d.events.push(make.teach(d.ctx(), C, "worked_steps", "test"));
+test("no suitable question: it stops and says why (a lesson whose explanation changed since), never substituting another", () => {
+  const C = "MATH.geometry.pythagoras", original = "gen:ahpyth:24,70,1";
+  const d = learnerAt(8, "stale");
+  const lesson = make.teach(d.ctx(), C, "worked_steps", "test");
+  (lesson as { methodAlignment?: string }).methodAlignment = "method-alignment@1:an-earlier-version";
+  d.events.push(lesson);
   d.answer(original, "0", "original");
   const s = d.state();
   const r = deepRecovery(original, s.records, s.evidence, d.now, d.session);
@@ -75,39 +76,35 @@ test("no suitable question: it stops and says why (exterior angle after a triang
   assert.match(r.reason, /need a method the explanation you were given has not taught yet/);
 });
 
-/** Pythagoras, Grade 8: taught "Step by step" (a shorter side, the converse, generating triples; not a hypotenuse), a shorter-side
- *  problem wrong, one diagnostic probe, the episode's lesson, then two fresh unaided answers as returns: `second` is the second one */
-function episode(second: string) {
+/** Pythagoras, Grade 8: taught "Step by step", a shorter-side problem wrong, one diagnostic probe, the episode's lesson, then two
+ *  fresh unaided right answers as returns. `stale`: the episode's lesson was saved for an earlier version of the explanation (its
+ *  content hash differs), so what it taught cannot be confirmed now */
+function episode(stale: boolean) {
   const C = "MATH.geometry.pythagoras", original = "gen:ahpyth:24,70,1";
-  const d = learnerAt(8, `pyth-${second}`);
+  const d = learnerAt(8, `pyth-${stale}`);
   d.events.push(make.teach(d.ctx(), C, "worked_steps", "test"));
   d.answer(original, "0", "original");
   const at0 = d.state().records.attempts.find((a) => a.questionId === original)!.at;
   const tag = `deep:${original}|${C}`;
-  d.answer("gen:root:16", "4", "diagnostic", { context: `${tag}@MATH.number.squares-roots` });
-  d.events.push(make.teach(d.ctx(), C, "worked_steps", "deep", { episode: `deep:${original}#${at0}` }));
-  for (const q of ["gen:ahpyth:16,63,1", second]) d.answer(q, question(q).answer, "original", { context: `${tag}@${C}` });
+  d.answer("gen:root:16", "4", "diagnostic", { context: `${tag}@MATH.number.square-roots` });
+  const lesson = make.teach(d.ctx(), C, "worked_steps", "deep", { episode: `deep:${original}#${at0}` });
+  if (stale) (lesson as { methodAlignment?: string }).methodAlignment = "method-alignment@1:an-earlier-version";
+  d.events.push(lesson);
+  for (const q of ["gen:ahpyth:16,63,1", "gen:ahpyth:11,60,1"]) d.answer(q, question(q).answer, "original", { context: `${tag}@${C}` });
   const s = d.state();
-  return { d, s, original, screen: deepScreen(original, s.records, s.evidence, d.now) };
+  return { s, screen: deepScreen(original, s.records, s.evidence, d.now) };
 }
 
-test("saved answers after a reload: a post-teaching answer whose method was not taught does not count toward solved after help; it stays in the records", () => {
-  const m = moduleFor("MATH.geometry.pythagoras")!, st = m.strategies.find((s) => s.id === "worked_steps")!;
-  const covered = "gen:ahpyth:11,60,1", untaught = "gen:ahpyth:21,28,0";
-  assert.equal(methodCompatibility(m, st, covered).status, "covered");
-  assert.equal(methodCompatibility(m, st, untaught).status, "incompatible", "a hypotenuse is not taught by this explanation");
-  const ok = episode(covered);
-  assert.equal(ok.screen.kind, "end");
-  assert.ok(ok.screen.kind === "end" && ok.screen.phase === "solved_after_help", "two taught-method answers: solved after help");
-  const bad = episode(untaught);
-  assert.ok(!(bad.screen.kind === "end" && bad.screen.phase === "solved_after_help"), "the untaught-method answer is not counted");
-  assert.equal(bad.screen.kind, "ask", "a fresh question on a taught method is asked instead");
-  assert.equal(bad.screen.kind === "ask" && methodCompatibility(m, st, bad.screen.qid).status, "covered");
-  // history: the answer is kept, unchanged, in the saved records
-  assert.ok(bad.s.records.attempts.some((a) => a.questionId === untaught && a.response === question(untaught).answer));
+test("saved answers after a reload: answers after a lesson whose taught methods cannot be confirmed do not count toward solved after help; they stay in the records", () => {
+  const ok = episode(false);
+  assert.ok(ok.screen.kind === "end" && ok.screen.phase === "solved_after_help", "two answers on taught methods: solved after help");
+  const bad = episode(true);
+  assert.ok(!(bad.screen.kind === "end" && bad.screen.phase === "solved_after_help"), "not counted");
+  assert.equal(bad.screen.kind === "end" && bad.screen.phase, "escalate", "and no further question is asked on an unconfirmed method");
+  assert.ok(bad.s.records.attempts.some((a) => a.questionId === "gen:ahpyth:11,60,1" && a.response === question("gen:ahpyth:11,60,1").answer), "history kept");
   const own = (x: typeof ok) => x.screen.state.readings.find((r) => r.skill === "MATH.geometry.pythagoras")!;
   assert.equal(own(ok).right, 2);
-  assert.equal(own(bad).right, 1, "only the taught-method answer is read as evidence");
+  assert.equal(own(bad).right, 0, "neither answer after that lesson is read as evidence");
 });
 
 test("diagnostics are not post-teaching evidence: with no lesson on the skill, any fresh same-skill answer is read (a slip, not help)", () => {

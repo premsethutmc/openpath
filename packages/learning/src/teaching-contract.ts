@@ -170,8 +170,11 @@ export function lessonScreens(module: Module): { screen: Screen; strategy: Strat
   const seen = new Set<string>();
   // grade7-lessons@1: a Grade 7 lesson also checks (and shows) the sections for the module's other families
   const chapter = WHOLE_CHAPTER.has(module.competency) ? module.chapter : module.chapter.slice(0, 1);
+  // method-sections@2: a lesson page (the chapter and every explanation) already shows every family, so the sections added to make
+  // one explanation complete on its own are left out; one explanation checked on its own (teachingEligibility) keeps them
+  const page = module.chapter.length > 0 || module.strategies.length !== 1;
   return [...chapter.map((screen) => ({ screen, strategy: null as Strategy | null })), ...scoped.flatMap((s) => s.screens.map((screen) => ({ screen, strategy: s })))].filter(({ screen }) => {
-    if (!screen) return false;
+    if (!screen || (page && screen.section === "method")) return false;
     const key = JSON.stringify([screen.title, screen.text, screen.math, screen.widget]);
     if (seen.has(key)) return false;
     seen.add(key);
@@ -513,7 +516,9 @@ export function teachingLesson(module: Module, candidates: string[], grade: numb
   const req = { competency: module.competency, usage: "lesson" as const };
   const chapter = contentEligibility(module, chapterExplanation(module), req);
   const kept = module.strategies.map((s) => ({ s, e: contentEligibility(module, s, req) })).filter((x) => x.e.eligible);
-  const shown = { ...module, chapter: chapter.eligible ? module.chapter : [], strategies: kept.map((x) => x.s) };
+  // method-sections@2: the page already shows every family (chapter and every explanation), so the sections added to make one
+  // explanation complete on its own are not repeated here
+  const shown = { ...module, chapter: chapter.eligible ? module.chapter : [], strategies: kept.map((x) => ({ ...x.s, screens: x.s.screens.filter((sc) => sc.section !== "method") })) };
   const all = [...(chapter.eligible ? [chapter] : []), ...kept.map((x) => x.e)];
   const contentLabel = all.length && all.every((e) => e.educatorApproved) ? "Approved by an educator for supervised evaluation." : "Demonstration: these explanations have not been approved by an educator.";
   // grade-order@1: a learner's lesson (grade given) holds no later-grade question, in its sections or its practice
