@@ -1,0 +1,60 @@
+name: TN tally account journey
+on:
+  pull_request:
+    paths:
+      - 'frontend/**'
+      - 'packages/learning/src/primary/**'
+      - 'content/mathematics/foundation/**'
+      - 'backend/family/*foundation*'
+      - 'packages/mathematics/src/foundation/**'
+      - '.github/workflows/tn-tally-review.yml'
+permissions:
+  contents: read
+jobs:
+  tally:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: pip install -r backend/requirements.txt
+      - run: npm ci
+        working-directory: frontend
+      - run: node --import tsx --test src/mathematics/foundation/foundation.test.ts src/mathematics/foundation/tally-evidence.test.ts src/mathematics/foundation/tally-content.test.ts
+        working-directory: frontend
+      - run: python manage.py test family.test_math_foundation --noinput
+        working-directory: backend
+      - run: node scripts/build-mathematics-foundation.mjs
+        working-directory: frontend
+      - run: npx playwright install --with-deps chromium
+        working-directory: frontend
+      - name: Account save and resume in real Chromium
+        run: |
+          python backend/manage.py migrate --noinput
+          python backend/manage.py runserver 127.0.0.1:8012 --noreload --nothreading > /tmp/tally-api.log 2>&1 &
+          api_pid=$!
+          PORT=4182 API_TARGET=http://127.0.0.1:8012 node frontend/scripts/preview-english.mjs > /tmp/tally-preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$api_pid" "$preview_pid"' EXIT
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:4182/api/account/ > /dev/null; then break; fi
+            sleep 1
+          done
+          cd frontend
+          node --import tsx --test e2e/tally.test.mjs e2e/mathematics-foundation.test.mjs
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: tally-browser-evidence
+          path: |
+            /tmp/tally-browser-evidence/
+            /tmp/tally-api.log
+            /tmp/tally-preview.log
+          retention-days: 7

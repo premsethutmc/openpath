@@ -5,7 +5,7 @@ import {
 } from "../fractions-program";
 import { indexContent, scoreCode } from "../../../english-core/src/content";
 import { programDecision } from "../program-grading";
-import type { Item, EvidenceEvent } from "../../../english-core/src/types";
+import type { Item, EvidenceEvent, LedgerEvent } from "../../../english-core/src/types";
 import { parseNumber, show } from "../answers";
 import { sharedProfile } from "../canonical";
 import { mathematicsLedger } from "../registration";
@@ -28,6 +28,8 @@ export interface FoundationActivity {
   response?: string;
   retentionDueAt?: string;
   savedAt?: string;
+  /** Server-stamped on new tally receipts only; absent legacy receipts replay unchanged. */
+  evidencePolicy?: "tally-practice@1";
 }
 export type Receipt = FoundationActivity | MathActivity;
 export interface Progress {
@@ -133,6 +135,9 @@ export function replayFoundation(
     now,
   );
   const ledger = historical.ledger;
+  const tallyPractice = { assisted: 0, unassisted: 0, legacyUnknown: 0, independentEvidence: 0 };
+  const previousAnswers = new Map<string, number>();
+  const previousHints = new Map<string, string[]>();
   ledger.ctx.content = indexContent(
     {
       items: [
@@ -167,7 +172,19 @@ export function replayFoundation(
     if (e.action === "open") s.current = e.stage;
     if (e.action === "draft" && e.questionId)
       s.drafts[e.questionId] = e.response ?? "";
-    if (e.action === "hint" && e.questionId) s.hints.push(e.questionId);
+    if (e.action === "hint" && e.questionId) {
+      s.hints.push(e.questionId);
+      if (p.id === "tally-g3-draft") {
+        const q = p.questions.find(q => q.id === e.questionId);
+        if (q) {
+          const item = itemFor(p, q);
+          const id = `native:${e.id}`;
+          previousHints.set(item.id, [...(previousHints.get(item.id) ?? []), id]);
+          // New policy records actual saved hint use; never fabricate a presented event.
+          if (e.evidencePolicy === "tally-practice@1") ledger.apply({ kind: "hint", id, at: e.at, session: e.sessionId, item: {id:item.id,version:1}, level:1, hintType:"foundation-hint" });
+        }
+      }
+    }
     if (e.action === "answer") {
       const q = p.questions.find((q) => q.id === e.questionId);
       if (
@@ -175,6 +192,10 @@ export function replayFoundation(
         !p.stages.find((x) => x.id === e.stage)!.questions.includes(q.id)
       )
         throw Error("Question outside stage");
+      const tallyItemId = itemFor(p, q).id;
+      const attemptsBefore = previousAnswers.get(tallyItemId) ?? 0;
+      // An unresolved answer still displayed feedback; a later answer is not a fresh encounter.
+      previousAnswers.set(tallyItemId, attemptsBefore + 1);
       const verdict = evaluate(p, q, e.response ?? "", (e as { decision?: unknown }).decision);
       if (verdict.unresolved) continue; // not an answer (P1): nothing recorded, no evidence
       const item = itemFor(p, q),
@@ -189,11 +210,26 @@ export function replayFoundation(
         response: { kind: "typed", text: numeric(verdict.correct ? q.answer : e.response ?? "") },
         use: e.stage === "retention" ? "retention" : "practice",
       };
-      ledger.apply(native);
+      const newTally = p.id === "tally-g3-draft" && e.evidencePolicy === "tally-practice@1";
+      const hints = previousHints.get(item.id) ?? [];
+      // The application reuses the worked example’s 13/8 rows; conservatively keep it assisted too.
+      const assisted = e.stage === "guided" || e.questionId === "application" || hints.length > 0 || attemptsBefore > 0;
+      let recorded: LedgerEvent = native;
+      if (newTally) {
+        if (assisted) {
+          recorded = { kind: "assisted_response", id: native.id, at: native.at, session: native.session, item: native.item, response: native.response, attempt: attemptsBefore + 1, hints: hints.filter(id => ledger.events.some(e => e.id === id)), afterFeedback: attemptsBefore > 0 };
+          tallyPractice.assisted++;
+        } else {
+          // Absence of saved presentation provenance is unknown independence, never an independent-evidence claim.
+          native.use = "practice";
+          tallyPractice.unassisted++;
+        }
+      } else if (p.id === "tally-g3-draft") tallyPractice.legacyUnknown++;
+      ledger.apply(recorded);
       s.answers[q.id] = {
         correct: verdict.correct,
         response: e.response ?? "",
-        assisted: s.hints.includes(q.id) || prior > 0,
+        assisted: newTally ? assisted : s.hints.includes(q.id) || prior > 0,
       };
       s.drafts[q.id] = e.response ?? "";
       s.attempts++;
@@ -214,6 +250,7 @@ export function replayFoundation(
     .forEach((e) => ordered.apply(e));
   return {
     ledger: ordered,
+    tallyPractice,
     progress,
     profiles: Object.fromEntries(
       programs.map((p) => [

@@ -152,3 +152,8 @@
   min-height: 46px;
   cursor: pointer;
 }
+
+.tally-table { width: 100%; table-layout: auto; border-collapse: collapse; }
+.tally-table th:first-child { width: 7ch; overflow-wrap: normal; word-break: normal; }
+.tally-table td, .tally-table th { padding: 6px; text-align: left; }
+.tally-table svg { display: block; width: 100%; max-width: 330px; }

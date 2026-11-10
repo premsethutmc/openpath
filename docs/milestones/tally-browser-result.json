@@ -1,0 +1,39 @@
+{
+  "schema": "browser-milestone-evidence@1",
+  "appCommit": "7d3caf3a45fbed973c5e391634305399726ff76e",
+  "runId": 42661012410,
+  "jobId": 129312261862,
+  "conclusion": "success",
+  "browserTests": 7,
+  "tallyWidths": [
+    360,
+    900
+  ],
+  "legacyBrowserRegressions": 5,
+  "localFocusedTests": 45,
+  "artifactId": 13695610355,
+  "artifactSha256": "acddd6892c89ffd332f14eaaadda4519e0606379540c6999f179f2b9663c7054",
+  "artifactExpires": "2026-11-16",
+  "screenshots": [
+    {
+      "file": "tally-360.png",
+      "sha256": "7ee72cf635f38d2f76d4f7d48e9bfe6e90dd4a0e0e3404a72addccc92d601d40",
+      "screen": "delayed-review after reload",
+      "visuallyInspected": true
+    },
+    {
+      "file": "tally-900.png",
+      "sha256": "0d0a317a686940ccfc193fa53ef27bd545cf903a83fe9660bca08f88c35d3133",
+      "screen": "delayed-review after reload",
+      "visuallyInspected": true
+    }
+  ],
+  "educatorReviewed": false,
+  "releaseComplete": false,
+  "limitations": [
+    "No real-child or educator testing",
+    "Browser verifies delayed-review lock, not elapsed next-day return",
+    "Shared understanding unavailable for draft competency",
+    "No comprehensive accessibility or screenshot-based teaching-visual audit"
+  ]
+}

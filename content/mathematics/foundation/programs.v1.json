@@ -384,6 +384,174 @@
           "misconception": "Double both numbers to preserve the fraction."
         }
       ]
+    },
+    {
+      "id": "tally-g3-draft",
+      "version": "1.0.0",
+      "grade": 3,
+      "competencyId": "MATH.statistics.tables",
+      "title": "Keep a count with tally marks (draft)",
+      "model": "tally",
+      "status": "provisional",
+      "provenance": "Original AI-assisted draft; no educator review. TN Grade 3 Term I, First Edition 2026: printed pp47–49 / PDF pp54–56; source outcomes tn-g03-2026-t1-em-l05-o01 and o02; full provenance in content/learning/ingestion/tn-primary-2026-term1.json.",
+      "retentionDelayDays": 1,
+      "stages": [
+        {
+          "id": "concept",
+          "title": "Meet the idea",
+          "text": "Make one upright mark for each thing you count. After four upright marks, draw the fifth mark across them. This crossed group means five, not six. An empty row means zero.",
+          "questions": []
+        },
+        {
+          "id": "explore",
+          "title": "Try it with your hands",
+          "text": "Imagine counting five books. Tap Add one mark once for each book. Watch the fifth mark cross the first four. Undo it, then add it again. Your marks are saved.",
+          "questions": []
+        },
+        {
+          "id": "worked",
+          "title": "Watch an example",
+          "text": "The Books row has two crossed groups and three single marks: 5 + 5 + 3 = 13. The Games row has 5 + 3 = 8. The crossing mark is not an extra sixth mark. Each kind of thing has its own row. Match eight marks from each row. Books has five marks left, so there are five more books than games: 13 − 8 = 5.",
+          "questions": []
+        },
+        {
+          "id": "guided",
+          "title": "Try together",
+          "text": "Read the marks in groups of five, then count any single marks.",
+          "questions": [
+            "guided"
+          ]
+        },
+        {
+          "id": "independent",
+          "title": "Try on your own",
+          "text": "Count the marks in each row. The number of things counted in a row is called its frequency.",
+          "questions": [
+            "independent-a",
+            "independent-b"
+          ]
+        },
+        {
+          "id": "application",
+          "title": "Use it in a story",
+          "text": "Compare the number of books and games. Pair one book with one game. How many books are left?",
+          "questions": [
+            "application"
+          ]
+        },
+        {
+          "id": "transfer",
+          "title": "Try a new situation",
+          "text": "Now the rows show dogs and cats. The tally rule stays the same. Equal counts mean a tie.",
+          "questions": [
+            "transfer"
+          ]
+        },
+        {
+          "id": "retention",
+          "title": "Remember tomorrow",
+          "text": "Return after a day to read a fresh row without a hint. Finished work stays saved.",
+          "questions": [
+            "retention"
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "id": "guided",
+          "prompt": "How many books does this row show?",
+          "answer": "6",
+          "hint": "Count the crossed group as five, then add the single mark.",
+          "solution": "One group of five and one single mark make 5 + 1 = 6 books.",
+          "commonError": "7",
+          "misconception": "The diagonal is the fifth mark, not an extra sixth mark. There are four upright marks and one crossing mark in the group.",
+          "tallyCounts": [
+            6
+          ],
+          "tallyLabels": [
+            "Books"
+          ]
+        },
+        {
+          "id": "independent-a",
+          "prompt": "Books: how many were counted? Enter the frequency.",
+          "answer": "14",
+          "hint": "Count the two crossed groups in fives, then add the single marks.",
+          "solution": "Two groups of five and four single marks make 5 + 5 + 4 = 14 books.",
+          "commonError": "16",
+          "misconception": "Each crossed group has five marks, not six. Count the four upright marks and their crossing mark once each.",
+          "tallyCounts": [
+            14
+          ],
+          "tallyLabels": [
+            "Books"
+          ]
+        },
+        {
+          "id": "independent-b",
+          "prompt": "Games: how many were counted? Enter the frequency for this empty row.",
+          "answer": "0",
+          "hint": "An empty row has no marks. What number means none?",
+          "solution": "There are no marks, so no games were counted. The frequency is 0.",
+          "commonError": "1",
+          "misconception": "The row label names what we count; it is not a tally mark. No marks means zero.",
+          "tallyCounts": [
+            0
+          ],
+          "tallyLabels": [
+            "Games"
+          ]
+        },
+        {
+          "id": "application",
+          "prompt": "How many more books than games were counted?",
+          "answer": "5",
+          "hint": "Read both rows. Pair one book with one game, then count the books left over. You can also subtract the smaller count from the larger.",
+          "solution": "There are 13 books and 8 games. Pairing 8 books with 8 games leaves 5 books: 13 − 8 = 5.",
+          "commonError": "21",
+          "misconception": "Adding 13 and 8 finds how many there are altogether. To find how many more books, subtract the 8 games from the 13 books.",
+          "tallyCounts": [
+            13,
+            8
+          ],
+          "tallyLabels": [
+            "Books",
+            "Games"
+          ]
+        },
+        {
+          "id": "transfer",
+          "prompt": "Dogs and Cats: how many more are in one row than the other? Write 0 if the counts are equal.",
+          "answer": "0",
+          "hint": "Count each row in fives. If every dog can be paired with a cat and none are left, the difference is zero.",
+          "solution": "There are 10 dogs and 10 cats. Both counts are equal, so neither has more: 10 − 10 = 0.",
+          "commonError": "20",
+          "misconception": "Adding the rows finds how many animals there are altogether. This question asks how many more. Equal counts have a difference of zero.",
+          "tallyCounts": [
+            10,
+            10
+          ],
+          "tallyLabels": [
+            "Dogs",
+            "Cats"
+          ]
+        },
+        {
+          "id": "retention",
+          "prompt": "How many books does this new row show?",
+          "answer": "19",
+          "hint": "Count the crossed groups in fives, then add the single marks.",
+          "solution": "Three groups of five and four single marks make 5 + 5 + 5 + 4 = 19 books.",
+          "commonError": "22",
+          "misconception": "Each crossed group has five marks, not six. The crossing mark is already included in the five.",
+          "tallyCounts": [
+            19
+          ],
+          "tallyLabels": [
+            "Books"
+          ]
+        }
+      ]
     }
   ]
 }

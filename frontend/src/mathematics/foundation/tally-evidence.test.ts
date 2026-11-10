@@ -1,0 +1,41 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { programs, replayFoundation, key, type FoundationActivity } from '../../../../packages/mathematics/src/foundation/programs';
+const p = programs.find(p=>p.id==='tally-g3-draft')!;
+const learner='tally-evidence-test';
+let serial=0;
+const event=(action:FoundationActivity['action'], stage:string, questionId?:string,response?:string, policy=true):FoundationActivity=>({kind:'math_foundation_activity',id:`tally-${serial++}`,learnerId:learner,at:'2026-11-09T10:00:00Z',sessionId:`math:${learner}:visit`,programId:p.id,lessonVersion:'1.0.0',journey:'school',action,stage,elapsedMs:0,questionId,response,...(policy?{evidencePolicy:'tally-practice@1' as const}:{})});
+test('new tally practice uses the shared registered capability but never changes estimates or independent evidence',()=>{
+ const opened=event('open','concept');
+ const before=replayFoundation(learner,[opened]);
+ const rows=[opened,event('answer','guided','guided','6'),event('answer','independent','independent-a','14'),event('hint','independent','independent-b'),event('answer','independent','independent-b','0'),event('answer','application','application','21'),event('answer','application','application','5')];
+ const after=replayFoundation(learner,rows);
+ assert.ok(after.ledger.ctx.index.leaves.has('MATH.statistics.tables'));
+ assert.deepEqual(after.tallyPractice,{assisted:4,unassisted:1,legacyUnknown:0,independentEvidence:0});
+ assert.equal(after.ledger.events.filter(e=>e.kind==='assisted_response').length,4);
+ assert.equal(after.ledger.events.filter(e=>e.kind==='hint').length,1);
+ assert.equal(after.ledger.events.filter(e=>e.kind==='presented').length,0);
+ assert.ok(after.ledger.events.filter(e=>e.kind==='evidence').every(e=>e.use==='practice' && !e.provenance));
+ assert.ok(after.ledger.decisions.every(d=>d.verdict==='held'));
+ assert.deepEqual(after.ledger.composite.nodes['MATH.statistics.tables'],before.ledger.composite.nodes['MATH.statistics.tables']);
+ assert.notEqual(after.profiles[p.id].status,'verified');assert.deepEqual(after.profiles[p.id].evidenceIds,[]);
+ assert.deepEqual(replayFoundation(learner,JSON.parse(JSON.stringify(rows))).tallyPractice,after.tallyPractice);
+ assert.deepEqual(replayFoundation(learner,[...rows,rows.at(-1)!]).tallyPractice,after.tallyPractice);
+});
+test('saved hints and feedback remain assistance across sessions and journeys; unresolved feedback is not fresh evidence',()=>{
+ const rows=[event('hint','independent','independent-a'),{...event('answer','independent','independent-a','14'),sessionId:`math:${learner}:second`,journey:'gre-quant' as const},event('answer','transfer','transfer','1/0'),event('answer','transfer','transfer','0')];
+ const r=replayFoundation(learner,rows);
+ assert.equal(r.tallyPractice.assisted,2);assert.equal(r.tallyPractice.unassisted,0);
+ assert.equal(r.progress[key(p.id,'school')].answers.transfer.assisted,true);
+});
+test('legacy receipts retain their old native event shape and unknown provenance; other capabilities unchanged',()=>{
+ const old=event('answer','guided','guided','6',false);
+ const legacy=replayFoundation(learner,[old]);
+ assert.equal(legacy.ledger.ctx.index.leaves.has('MATH.statistics.tables'),true);
+ assert.equal(legacy.ledger.events[0].kind,'evidence');assert.equal('provenance' in legacy.ledger.events[0],false);
+ assert.equal(legacy.progress[key(p.id,'school')].answers.guided.assisted,false);
+ const current=replayFoundation(learner,[old,event('answer','guided','guided','6')]);
+ assert.deepEqual(current.ledger.events[0],legacy.ledger.events[0]);
+ assert.equal(current.tallyPractice.legacyUnknown,1);assert.equal(current.tallyPractice.assisted,1);
+ for(const [id,node] of Object.entries(legacy.ledger.composite.nodes)) assert.deepEqual(current.ledger.composite.nodes[id],node);
+});

@@ -62,7 +62,9 @@ def checked_foundation(event, pupil):
             model = json.loads(event['response'])
             if not isinstance(model, list) or len(model) != 6 or any(type(x) is not int for x in model):
                 raise ValueError()
-            if not 0 <= model[0] <= 8 or not 0 <= model[1] <= 8:
+            if spec['model'] == 'tally' and not (0 <= model[0] <= 20 and model[1:] == [0, 2, 1, 4, 2]):
+                raise ValueError()
+            if spec['model'] != 'tally' and (not 0 <= model[0] <= 8 or not 0 <= model[1] <= 8):
                 raise ValueError()
             if spec['model'] == 'groups' and not (1 <= model[0] <= 6 and 1 <= model[1] <= 6):
                 raise ValueError()
@@ -89,6 +91,8 @@ def checked_foundation(event, pupil):
         if stage['id'] == 'explore' and not any(e.get('questionId') == 'exploration' and e.get('response') == 'done' for e in own):
             reject('Try the interactive model first.')
     saved = {**event, 'at': now.isoformat(), 'savedAt': now.isoformat()}
+    if spec['id'] == 'tally-g3-draft':
+        saved['evidencePolicy'] = 'tally-practice@1'
     if action == 'answer' and grading_mode() != 'legacy':
         # stage 9 (D14): the trusted grader decides the program answer; shadow mode keeps it beside the earlier client-only marking
         q = next(x for x in spec['questions'] if x['id'] == event['questionId'])

@@ -94,15 +94,15 @@ test("developmental overlay keeps all historical IDs and a cycle-free domain gra
     "e4c17772945ff4ad1892b8839d99d3f1a5d149cebdaeb8d138ecfcc112df44d4",
   );
 });
-test("three substantive programs contain concept, exploration, worked contrasts, application and distinct delayed review", () => {
+test("foundation programs contain concept, exploration, worked contrasts, application and distinct delayed review", () => {
   assert.deepEqual(
     programs.map((p) => p.grade),
-    [1, 3, 5],
+    [1, 3, 5, 3],
   );
   const ids = new Set<string>();
   for (const p of programs) {
     assert.equal(p.stages.length, 8);
-    assert.match(p.stages[0].text, /Addition|equal group|fraction/i);
+    assert.match(p.stages[0].text, /Addition|equal group|fraction|upright/i);
     assert.match(p.stages[2].text, /zero|not|does not/i);
     assert.equal(p.questions.length, 6);
     for (const q of p.questions) {
@@ -124,6 +124,7 @@ test("independent numerical oracle checks every answer, equivalence and semantic
     [3 + 2, 4 + 1, 2 + 0, 3 + 3, 2 + 4, 5 + 2],
     [3 * 2, 4 * 3, 2 * 5, 5 * 4, 4 * 3, 6 * 2],
     [(1 * 4) / 2, (2 * 6) / 3, "3/4", "3/4", 10 / 2, (3 * 10) / 5],
+    [5 + 1, 5 + 5 + 4, 0, 13 - 8, 10 - 10, 5 + 5 + 5 + 4],
   ];
   programs.forEach((p, i) =>
     assert.deepEqual(

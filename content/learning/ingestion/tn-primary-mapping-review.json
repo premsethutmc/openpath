@@ -1,0 +1,2181 @@
+{
+  "schema": "intake-mapping-review@1",
+  "reviewer": "OpenPath assistant; provisional source-to-capability review",
+  "date": "2026-11-09",
+  "baseCommit": "339f29b17649294058cde56947da4d9d5ba996aa",
+  "scope": "Term I and II draft outcomes only. Aligned means conceptual correspondence, not domain/lesson/assessment completeness or educator approval. No active release mappings changed.",
+  "capabilitySource": "content/learning/family-specs.v1.json",
+  "capabilitySourceSha256": "d71143662c2de65e18b330ef571fd5a74f0de102fc9eb244ba98b11a559c9fd0",
+  "outcomes": [
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l01-o01",
+      "statementSha256": "30404d832d7af4fbafd38007394df8587cd7994adeb51e1e4b19a898aa0ecc55",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.positions"
+      ],
+      "familyIds": [
+        "aawhere",
+        "aashelf",
+        "aarow"
+      ],
+      "reason": "Conceptual match to existing family definitions: Inside or outside, near or far, in front of or behind; Above and below on shelves; Places in a row: left and right.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l02-o01",
+      "statementSha256": "9a7eeda340bf9b3cb85feb82b5a7968658b7477a914aa0988f574232e191cad8",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.reasoning.sort-by-attribute"
+      ],
+      "familyIds": [
+        "absort"
+      ],
+      "reason": "Conceptual match to existing family definitions: Sorting buttons by colour and size.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l02-o02",
+      "statementSha256": "657f4502734ef155493ed7e9774fd99ef955396b33847369f0d6e590db2af496",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.repeating-patterns"
+      ],
+      "familyIds": [
+        "aapatn"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next in a repeating pattern.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l02-o03",
+      "statementSha256": "e79e63c43efd7e14c4de90f6f7a81b503554a83d00b912cc9dbb697d0f332cfb",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.shape-properties"
+      ],
+      "familyIds": [
+        "abroll"
+      ],
+      "reason": "Conceptual match to existing family definitions: Things that roll and things that slide.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l03-o01",
+      "statementSha256": "3b3ad1f0b5ee9d6ce93a7d29c270b967c475e01d80957d97b5cc06bead6fed5d",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.count-objects"
+      ],
+      "familyIds": [
+        "cnt"
+      ],
+      "reason": "Counting is supported; one-to-one matching as the comparison method is not established.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l03-o02",
+      "statementSha256": "af64af2b53e917091b39d8ea51126377f6d3c20a77acb456e2b6a1b17c3c0174",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.count-objects"
+      ],
+      "familyIds": [
+        "cnt"
+      ],
+      "reason": "Conceptual match to existing family definitions: Counting objects in a picture.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l03-o03",
+      "statementSha256": "47c62b66705a8744a9cf52489a7d10bc3709e24476d7264b7fa7246500d94af0",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.count-objects"
+      ],
+      "familyIds": [
+        "cnt"
+      ],
+      "reason": "Object counts are supported; numeral handwriting and numeral-to-drawing tasks need review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l04-o01",
+      "statementSha256": "8d4d9155ac1ea8b20c874697d16980aeee912fc4380b3959eb0a223bb66e11ef",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.number-patterns"
+      ],
+      "familyIds": [
+        "abseq"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next when skip counting.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l04-o02",
+      "statementSha256": "01f80cf91d30dd276ff556088ab7cc406a109e916bd821cbee8544c09d64f1c5",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aanext"
+      ],
+      "reason": "Conceptual match to existing family definitions: The number just before, just after or between.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l04-o03",
+      "statementSha256": "61df8abd3ac3a345441a06c90cd5e6b3761db208809c20a4d74f626c0d7d1a04",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aagrp",
+        "aacmp"
+      ],
+      "reason": "Conceptual match to existing family definitions: Which group has more or fewer, or are they the same; Which number is more (or less).",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l04-o04",
+      "statementSha256": "79e7e30870a1ac9c1866ae4997b406c0375a7a6bcf7334fb73bbd1c1da85c033",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.number-patterns"
+      ],
+      "familyIds": [
+        "abseq"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next when skip counting.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l05-o01",
+      "statementSha256": "e8fa1ca31b03d7eb8e18e010fc763d293bb5e652e5320735cec9dcb339873bb5",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.reasoning.sort-by-attribute",
+        "MATH.statistics.picture-data"
+      ],
+      "familyIds": [
+        "absort",
+        "abpic"
+      ],
+      "reason": "Conceptual match to existing family definitions: Sorting buttons by colour and size; Reading a picture record of toys.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l05-o02",
+      "statementSha256": "1d2f2dde930bd3e8a15244ec38e24161a4ecaa5eb21b0e00b728ebc82dcb1bfc",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aagrp"
+      ],
+      "reason": "Conceptual match to existing family definitions: Which group has more or fewer, or are they the same.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l06-o01",
+      "statementSha256": "0fbe7d7c9adb1f6fc4c07f6e78a32f109986efa85ed5e7c77cb4cedec59c7bc2",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.addition"
+      ],
+      "familyIds": [
+        "aaadd",
+        "aasenadd"
+      ],
+      "reason": "Conceptual match to existing family definitions: Adding two numbers with a total up to 20; Choosing the addition sentence for a story.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l06-o02",
+      "statementSha256": "72da0fd09d0f7afe33e4d992abfcc086fbc34c815a963288e12a6aef3fdd02ca",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.addition"
+      ],
+      "familyIds": [
+        "aabond"
+      ],
+      "reason": "Conceptual match to existing family definitions: How many more to make 10 (or another number up to 20).",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l06-o03",
+      "statementSha256": "3051595f6541b7917be641576028c960f7b88b93e90ddb078527c59fb711ff1d",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.addition"
+      ],
+      "familyIds": [
+        "aaadd"
+      ],
+      "reason": "Both orders can be calculated; explicit commutativity explanation is not established.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l06-o04",
+      "statementSha256": "a735f5cc7a3d0ece204ab0fc52364594a48dfea7d362056d107c61969f4e5f57",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.addition"
+      ],
+      "familyIds": [
+        "aastadd"
+      ],
+      "reason": "Conceptual match to existing family definitions: How many altogether: addition story problems.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l07-o01",
+      "statementSha256": "4ebab7bcc0fb36e9498fe9ecd9d4494a06b0f5089808ce432869a585e559ef06",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.measurement.length-comparison"
+      ],
+      "familyIds": [
+        "aaorder"
+      ],
+      "reason": "Conceptual match to existing family definitions: Ordering three or four things by length.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l07-o02",
+      "statementSha256": "9241efd4d34d6b9ad745b68eb6a9e3b211544e671d77ab49cb73aaa365c0d31f",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.positions"
+      ],
+      "familyIds": [
+        "aawhere"
+      ],
+      "reason": "Conceptual match to existing family definitions: Inside or outside, near or far, in front of or behind.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l08-o01",
+      "statementSha256": "57ffbba07462e95903bcacd674d9f5b4979de16ba84f4a678cf185533cf20762",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.subtraction"
+      ],
+      "familyIds": [
+        "aasub",
+        "aasensub"
+      ],
+      "reason": "Conceptual match to existing family definitions: Taking away within 20; Choosing the subtraction sentence for a take-away story.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l08-o02",
+      "statementSha256": "fda050acefd7c876f7670d12d63f48adf2c8d8b8d68f9cd4ef8d6ec3eb71d928",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.missing-number"
+      ],
+      "familyIds": [
+        "acmissing"
+      ],
+      "reason": "Conceptual match to existing family definitions: Finding the missing number in a number sentence.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t1-em-l08-o03",
+      "statementSha256": "97c66033a4d84a77ecf9b96c311c67f42bb596f5c15fc98b1464011c91bca5eb",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.subtraction"
+      ],
+      "familyIds": [
+        "aastsub"
+      ],
+      "reason": "Solving stories is supported; learner-authored story creation is not established.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l01-o01",
+      "statementSha256": "02c3a11f408269c9d0578ca30e9009af5ec4ec2190354b87aa9bcd7b5dd2866e",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.place-value-tens"
+      ],
+      "familyIds": [
+        "aaword",
+        "aatens"
+      ],
+      "reason": "Conceptual match to existing family definitions: Writing a number name as a number; Tens and ones: what number do the blocks show.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l01-o02",
+      "statementSha256": "a6d8d7a73551745f9e3ae3014c3083b40bdd0771aae5da2490235a84514614a0",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.number-patterns",
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aanext",
+        "aacmp",
+        "abseq"
+      ],
+      "reason": "Conceptual match to existing family definitions: The number just before, just after or between; Which number is more (or less); What comes next when skip counting.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l01-o03",
+      "statementSha256": "751882bf2197d7df1d7c9a8d57a9d4c4570708cf1f375f023bcabb0fee55a7fc",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.shape-properties",
+        "MATH.measurement.capacity",
+        "MATH.measurement.length-comparison",
+        "MATH.measurement.mass-comparison"
+      ],
+      "familyIds": [
+        "abroll",
+        "aalong",
+        "aaheavy",
+        "abcup"
+      ],
+      "reason": "Conceptual match to existing family definitions: Things that roll and things that slide; Which is the longest or the shortest; Which is the heaviest or the lightest (a balance with cubes); Comparing how many cups containers hold.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l01-o04",
+      "statementSha256": "dc7e6a81d00294b844ab38d2d405cc2cbcfec9ddb9fe768e0b288782e6c52514",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.addition"
+      ],
+      "familyIds": [
+        "aaadd"
+      ],
+      "reason": "Conceptual match to existing family definitions: Adding two numbers with a total up to 20.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l02-o01",
+      "statementSha256": "3946fcab7a8feb322fa2afd2516e7d2ac56dab8d9639f7018f7ec37bb7e4030e",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.shape-properties"
+      ],
+      "familyIds": [
+        "absolid"
+      ],
+      "reason": "Conceptual match to existing family definitions: Faces, edges and corners of solids.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l02-o02",
+      "statementSha256": "d4d14ad05a229887b214a15a12789fc95cfe84a2f2be87d6783dba8a896ef6e4",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.shape-properties"
+      ],
+      "familyIds": [
+        "abcurved"
+      ],
+      "reason": "Conceptual match to existing family definitions: Faces, curved surfaces, edges and corners of cylinders, cones and spheres.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l02-o03",
+      "statementSha256": "f0116dc71db2ec3525b86ef36b7255db48a08daa63905e06c1b53f87f490d416",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.shapes"
+      ],
+      "familyIds": [
+        "aasolid"
+      ],
+      "reason": "Conceptual match to existing family definitions: Things shaped like a sphere, cylinder, cube or cone.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l02-o04",
+      "statementSha256": "f249ea05e7979770dec8497cae276c874fe211ebf9b2bdf21dc9b3a8dc8d5525",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.repeating-patterns"
+      ],
+      "familyIds": [
+        "aapatn"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next in a repeating pattern.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l03-o01",
+      "statementSha256": "982480bd378abfa9c5a10767af979e140ffa6b8ea20225c65fb880f3511941cf",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.geometry.positions"
+      ],
+      "familyIds": [
+        "aarow"
+      ],
+      "reason": "Ordinal row positions are supported; complete ordinal naming first to tenth needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l03-o02",
+      "statementSha256": "a5a0cacf1a9aec56639347a963af3fe4d21691a21c684c24ea28b40cd3b5d505",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.place-value-tens"
+      ],
+      "familyIds": [
+        "aaname"
+      ],
+      "reason": "Two-digit names are supported; all one-to-twenty spellings and handwriting need review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l03-o03",
+      "statementSha256": "4afb5aa80d21ae4af776b04556b89d4634af31eabad36c4c1b61c99d3ecd17ad",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.place-value-tens"
+      ],
+      "familyIds": [
+        "aabund"
+      ],
+      "reason": "Conceptual match to existing family definitions: Counting a collection by making groups of ten.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l03-o04",
+      "statementSha256": "b192b85e04728d37e4982dba69e4ec71863a63e873547f6311545798239e6132",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.place-value-tens"
+      ],
+      "familyIds": [
+        "aadigit"
+      ],
+      "reason": "Conceptual match to existing family definitions: The value of a digit in a two-digit number.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l04-o01",
+      "statementSha256": "96ea608f98fc4da9ca355cf2980b5b8adf7913703de011425e09c898af93ed66",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.number-patterns"
+      ],
+      "familyIds": [
+        "abseq"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next when skip counting.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l04-o02",
+      "statementSha256": "86f0fc6aaff1454c2250db51a8308335ecc4da67ba4059cc4fb6aff5290c3172",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aanext"
+      ],
+      "reason": "Conceptual match to existing family definitions: The number just before, just after or between.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l04-o03",
+      "statementSha256": "c9ac6d370a7fe19ae8eb627015560bbb6b7291adc32556519b537698e650c2d7",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.number-patterns"
+      ],
+      "familyIds": [
+        "abseq"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next when skip counting.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l04-o04",
+      "statementSha256": "1ec18bdde5b49f7d58f44a58c87cc5f23530a8c9d579565923d54ae10f1ec1f8",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aacmp"
+      ],
+      "reason": "Conceptual match to existing family definitions: Which number is more (or less).",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l05-o01",
+      "statementSha256": "67e6c95b41dc406dce0158173b00174dd6d53030a1ab3ecfe2396567b91f5a55",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.statistics.picture-data"
+      ],
+      "familyIds": [
+        "abpic"
+      ],
+      "reason": "Conceptual match to existing family definitions: Reading a picture record of toys.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l05-o02",
+      "statementSha256": "2a0853c86dc5d6bbc9724e96abdd6d8381e7ce863843fe36b3f90702b9dbf7dd",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.statistics.picture-data"
+      ],
+      "familyIds": [
+        "abpicmore"
+      ],
+      "reason": "Picture-record comparisons exist; equivalence to the textbook frequency-table format needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l06-o01",
+      "statementSha256": "7a7355dc0c716b01cea467784d05c32b10774c19ca74e887d9758de1ff2ded6c",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.addition-regroup"
+      ],
+      "familyIds": [
+        "aeaddn"
+      ],
+      "reason": "Conceptual match to existing family definitions: Adding two-digit numbers without regrouping, and totals up to 200.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l06-o02",
+      "statementSha256": "3d43ed8223c5a31419a6fbc4466f302930ca0ab38515367b24645a983b59b5ba",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.addition-regroup"
+      ],
+      "familyIds": [
+        "aeaddn"
+      ],
+      "reason": "Two-digit totals exist; source-specific money/story representation needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l07-o01",
+      "statementSha256": "f09bea85cafcb34261ef5d21b1cb1aa5aa23f6003b908868511d98d5efff37a5",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.measurement.non-standard-units"
+      ],
+      "familyIds": [
+        "aaspan"
+      ],
+      "reason": "Span measurement is supported; physical cubit/pace/footspan activities are not verified.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l07-o02",
+      "statementSha256": "b8ecc176bbfcd0c28d273c29f1b133dc3012f1718d12827e86bc0a1484311730",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.measurement.non-standard-units"
+      ],
+      "familyIds": [
+        "aaspan"
+      ],
+      "reason": "Conceptual match to existing family definitions: Comparing lengths measured in hand spans, clips or sticks.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l07-o03",
+      "statementSha256": "65696694fb199b74fc28b59e17ca50d588f64002b024b048115a55096c5441ec",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.measurement.non-standard-units"
+      ],
+      "familyIds": [
+        "aaclip"
+      ],
+      "reason": "Conceptual match to existing family definitions: Measuring a length with paper clips or matchsticks.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l07-o04",
+      "statementSha256": "5300077fdab97c9e7931d43ad5d3095aaa1af32d6b1903b8fbd52065ac94649e",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.measurement.non-standard-units"
+      ],
+      "familyIds": [
+        "aaclip"
+      ],
+      "reason": "Measurement is supported; estimating and recording paired estimates needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l08-o01",
+      "statementSha256": "cd9c436f8ba3e948dcd2d2122609f77fa32647d9ac4a21d0ec597b1c0457144b",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "familyIds": [
+        "acsubn"
+      ],
+      "reason": "Conceptual match to existing family definitions: Subtracting two-digit numbers without regrouping.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l08-o02",
+      "statementSha256": "fff743eafe78db4daecf2e6484b364210afa2442f24b948c8db40a0d74fab5c1",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "familyIds": [
+        "acsubn"
+      ],
+      "reason": "Exact differences are supported; estimation before subtraction needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l08-o03",
+      "statementSha256": "0b4b409b59124fad61038d9d8266a4b880231aa55fca90e7095b9767e43f82a7",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "familyIds": [
+        "acsubn"
+      ],
+      "reason": "Two-digit subtraction exists; each story/money representation needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t1-em-l08-o04",
+      "statementSha256": "179a76509b0598872cf336a392a9dc378d01384f5441f96eb6befd0929b8b483",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.missing-number"
+      ],
+      "familyIds": [
+        "acfacts"
+      ],
+      "reason": "Conceptual match to existing family definitions: Related facts: addition and subtraction, multiplication and division.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l01-o01",
+      "statementSha256": "eda82a661ea51918639f33062ebcaa17a32eec0000a90911ec04b2a693433b75",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.place-value-tens"
+      ],
+      "familyIds": [
+        "aadigit"
+      ],
+      "reason": "Conceptual match to existing family definitions: The value of a digit in a two-digit number.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l01-o02",
+      "statementSha256": "ed0efc06912e1d69cd60556db57abd56dc591b93ee9e308744ac2a538be92cdc",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.number-patterns",
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "abseq",
+        "aagrp"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next when skip counting; Which group has more or fewer, or are they the same.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l01-o03",
+      "statementSha256": "fa16a2ec3c06c26570f3bf856b829558748ea7c94b9f558aa549ab03cf373cca",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.shape-properties",
+        "MATH.geometry.shapes"
+      ],
+      "familyIds": [
+        "abroll",
+        "aaflat"
+      ],
+      "reason": "Conceptual match to existing family definitions: Things that roll and things that slide; Finding triangles, squares and circles turned different ways.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l01-o04",
+      "statementSha256": "156039400f96ae55eef811a01f62ae71c353a468c2640cfc3e402dfdb0c59bb4",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.measurement.non-standard-units"
+      ],
+      "familyIds": [
+        "aaspan"
+      ],
+      "reason": "Conceptual match to existing family definitions: Comparing lengths measured in hand spans, clips or sticks.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l01-o05",
+      "statementSha256": "258e4054a84d1c34c2e230ab7116df39b7fe704411036db21407c37eda30aa26",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.addition-regroup"
+      ],
+      "familyIds": [
+        "aeaddn"
+      ],
+      "reason": "Two-digit addition exists; source-specific plant-price interpretation needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l02-o01",
+      "statementSha256": "911f3c82b03de52e64447f3a09902a09d41e37e6f490bda00e053cfce09b8cde",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.shapes"
+      ],
+      "familyIds": [
+        "aaflat"
+      ],
+      "reason": "Conceptual match to existing family definitions: Finding triangles, squares and circles turned different ways.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l02-o02",
+      "statementSha256": "59b70ba56201ed5427c282260d9d1927da7547c87fb62d55a5553d7fe36bbfbd",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.shape-properties"
+      ],
+      "familyIds": [
+        "absolid"
+      ],
+      "reason": "Conceptual match to existing family definitions: Faces, edges and corners of solids.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l02-o03",
+      "statementSha256": "96f4f2b80331c2398069977916fdb538a179ee95485b611e2f561ac882e6e1ae",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.geometry.shapes"
+      ],
+      "familyIds": [
+        "aasolid"
+      ],
+      "reason": "Solid identification exists; learner construction of models is not established.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l02-o04",
+      "statementSha256": "347f5ef346d86bc2b96dcb8aded377edcc07a42825614b4d7d0ce9a48cebbbf1",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.repeating-patterns"
+      ],
+      "familyIds": [
+        "aapatn"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next in a repeating pattern.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l03-o01",
+      "statementSha256": "175b5b1ea55329c7695a84532c4f7f0f5ec416a17520f374016c564437840743",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.multi-digit-add-subtract"
+      ],
+      "familyIds": [
+        "admental"
+      ],
+      "reason": "Making 100 is supported; some generated tasks use larger numbers and need grade filtering.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l03-o02",
+      "statementSha256": "991ee24b58fd0406d8b1ee5be2636634521c10babb15c7ffa34b885fa720974b",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.hundreds"
+      ],
+      "familyIds": [
+        "abhto"
+      ],
+      "reason": "Conceptual match to existing family definitions: Hundreds, tens and ones from blocks.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l03-o03",
+      "statementSha256": "701f95cf009e4299aeb31d24b0de42587ae5826fac9d150192e4e976598a251a",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.hundreds"
+      ],
+      "familyIds": [
+        "abhto"
+      ],
+      "reason": "Conceptual match to existing family definitions: Hundreds, tens and ones from blocks.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l03-o04",
+      "statementSha256": "0db70cf4f9c7dc9d711dc46f74f12494005dbece8aec2e7bf21524c8c44afee2",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.hundreds"
+      ],
+      "familyIds": [
+        "abhto"
+      ],
+      "reason": "Conceptual match to existing family definitions: Hundreds, tens and ones from blocks.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l04-o01",
+      "statementSha256": "2a8ed169a71edda1cdedaf8e4705f8ccedac75a0ef366505bae08047d9bb422b",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.number-patterns"
+      ],
+      "familyIds": [
+        "abseq"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next when skip counting.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l04-o02",
+      "statementSha256": "edfcee6f5e6afbc1d6ec56f213387d053914216787f68905c9194d735decc575",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aanext"
+      ],
+      "reason": "Conceptual match to existing family definitions: The number just before, just after or between.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l04-o03",
+      "statementSha256": "558213a9ba988585f4c43eb96f3360f426808c2cf64975c56d6bf20c21cb87bc",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.number-patterns"
+      ],
+      "familyIds": [
+        "abseq"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next when skip counting.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l04-o04",
+      "statementSha256": "5fc39e7f07f9d74774c1753055e47b973f1faae76566f4f050e4521cef9cb234",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aaordx"
+      ],
+      "reason": "Conceptual match to existing family definitions: Ordering numbers from 9 up to crores, ascending or descending.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l05-o01",
+      "statementSha256": "5bfe4bb6b8385d45b77c365579ca89ad78959bdd3609ebf180bd0c5cce36717b",
+      "status": "proposed",
+      "fit": "unmatched",
+      "competencyIds": [],
+      "familyIds": [],
+      "reason": "No reviewed tally-mark input/output family identified; table counts alone are not tally notation.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l05-o02",
+      "statementSha256": "7be76faeabd5f0ebc2f41cd1b63f7fb7cb16950ce32af20ee1b2b11e57197377",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.statistics.picture-data"
+      ],
+      "familyIds": [
+        "abpicmore"
+      ],
+      "reason": "Category comparison exists; tally/frequency table representation needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l06-o01",
+      "statementSha256": "325de63fd4acd77f7a18aa56d1f2671303a22480f3e60744b0bd0bb199e53329",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.multi-digit-add-subtract"
+      ],
+      "familyIds": [
+        "aeadd3"
+      ],
+      "reason": "Conceptual match to existing family definitions: Adding three-digit numbers without regrouping.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l06-o02",
+      "statementSha256": "376ffda8b3dee4d08943c7a23cc62d580b00070d15f8628596e139d3addb7339",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.multi-digit-add-subtract"
+      ],
+      "familyIds": [
+        "adcolx"
+      ],
+      "reason": "Conceptual match to existing family definitions: Column addition and subtraction from three to five digits, with and without regrouping.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l06-o03",
+      "statementSha256": "4a96bdd5c9e11c84e1ae05edcb28654300b091b5780ef93d401e19ef7a840b6e",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.reasoning.estimate-check"
+      ],
+      "familyIds": [
+        "adestchk"
+      ],
+      "reason": "General estimation exists; source benchmark comparisons and grade range need review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l06-o04",
+      "statementSha256": "9d19f32bf71d9a9aa60de37686e90ab231b1864f82c68ab8b877135e2b1293ce",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.multi-digit-add-subtract"
+      ],
+      "familyIds": [
+        "adcolx"
+      ],
+      "reason": "Three-digit arithmetic exists; story interpretation needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l07-o01",
+      "statementSha256": "a93663d5b42a8c73e76c0e5fb4e7e921ae3d14cca2a74ac83387c26c87f1bc98",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.measurement.standard-length"
+      ],
+      "familyIds": [
+        "abunit"
+      ],
+      "reason": "Standard unit selection exists; explaining why common units are needed is not established.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l07-o02",
+      "statementSha256": "7df93f1e61af217399cf9c08e797f430a91d7f8f805316b4b8fd86098f6a4820",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.measurement.standard-length"
+      ],
+      "familyIds": [
+        "abmeas"
+      ],
+      "reason": "Conceptual match to existing family definitions: Reading a metre tape (whole, half and quarter metres) and a ruler in millimetres.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l07-o03",
+      "statementSha256": "a1eb2b95527601fd8920cdabb5515743bbdbfbb84ad2e617ed4cba2ccb5c885d",
+      "status": "proposed",
+      "fit": "unmatched",
+      "competencyIds": [],
+      "familyIds": [],
+      "reason": "No reviewed family explicitly assesses conservation of length under repositioning.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l08-o01",
+      "statementSha256": "97edd6fe38dccb455e8c3ca90a69fe6e9fb10c21d2e76c0a2c74901863ab5cd2",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.multi-digit-add-subtract"
+      ],
+      "familyIds": [
+        "adcolx"
+      ],
+      "reason": "Conceptual match to existing family definitions: Column addition and subtraction from three to five digits, with and without regrouping.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l08-o02",
+      "statementSha256": "9ea07686de134031307c31765ddec7ba2da23e0b55e854842df1d5716de671ba",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "familyIds": [
+        "acsub3"
+      ],
+      "reason": "Conceptual match to existing family definitions: Subtracting three-digit numbers with regrouping.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l08-o03",
+      "statementSha256": "9e7b42bc4e6db3199ab24e3d8ce5cb438f7ed24bb32aa1331e9bc4236752369e",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.reasoning.estimate-check"
+      ],
+      "familyIds": [
+        "adestchk"
+      ],
+      "reason": "General estimation exists; benchmark differences need review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t1-em-l08-o04",
+      "statementSha256": "5ea4b6703aa7edd188b924c83b9444490f8f5cb2bef07cb859aaf45534cad173",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "familyIds": [
+        "acsub3"
+      ],
+      "reason": "Three-digit calculation exists; story interpretation needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l01-o01",
+      "statementSha256": "54607100ea75a2b002b8b2aa39ef4bb32a1fa74ef98c567fcee050d6496b3d59",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.zero"
+      ],
+      "familyIds": [
+        "aazero"
+      ],
+      "reason": "Zero operations exist; empty-collection representation needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l01-o02",
+      "statementSha256": "d59d165073e941975a8617d55b25ab3ddbd87e45e54349419ba705a5c8a0856b",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.count-objects"
+      ],
+      "familyIds": [
+        "cnt"
+      ],
+      "reason": "Conceptual match to existing family definitions: Counting objects in a picture.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l01-o03",
+      "statementSha256": "669acebda35f98f01b6c38f96b0f8491a4f1fcaef73096bcf7a92f5bba2ed27c",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.number-line"
+      ],
+      "familyIds": [
+        "acnlpos",
+        "acnljump"
+      ],
+      "reason": "Conceptual match to existing family definitions: Finding a number on a number line; Counting on and back in jumps on a number line.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l01-o04",
+      "statementSha256": "9c607da805fae00f8c75f3b9984218647ef51c72d27ee709bac881a553d1cdd4",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aanext"
+      ],
+      "reason": "Conceptual match to existing family definitions: The number just before, just after or between.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l01-o05",
+      "statementSha256": "ea807378b006973af757ad06b4c0256c9c3ebecf8f9ffdbc7485bcd919f937c2",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.number-patterns"
+      ],
+      "familyIds": [
+        "abseq"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next when skip counting.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l01-o06",
+      "statementSha256": "8d423a984e0be31753c026042c35169cfa6e03918bb2d9e59ff9d9d156ecfbcd",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aaordn"
+      ],
+      "reason": "Conceptual match to existing family definitions: Putting numbers up to 99 in order.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l02-o01",
+      "statementSha256": "0005a0604561c1156fc1088f8f9987eed37768b88af382fa94a4eab63913d71f",
+      "status": "proposed",
+      "fit": "unmatched",
+      "competencyIds": [],
+      "familyIds": [],
+      "reason": "No reviewed silhouette-matching family identified; named-shape recognition is not equivalent.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l02-o02",
+      "statementSha256": "966d8071d2c3643b9b6b648fc840a3e74996e1385a584388635b8f4b735b1898",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.algebra.repeating-patterns"
+      ],
+      "familyIds": [
+        "aapatn"
+      ],
+      "reason": "Repeating patterns exist; body-position representations need review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l03-o01",
+      "statementSha256": "ca2edcae84fb0cb80b875716fe0f749ba2d14b845c4b39e8dce04894e7ad295e",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.addition"
+      ],
+      "familyIds": [
+        "aaadd"
+      ],
+      "reason": "Conceptual match to existing family definitions: Adding two numbers with a total up to 20.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l03-o02",
+      "statementSha256": "6053b5c37bb39ee061fcc0377342a690eaa299281d45ca0166849b6babdc9a2a",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.number-line"
+      ],
+      "familyIds": [
+        "acnljump"
+      ],
+      "reason": "Number-line jumps exist; explicit addition representation within 20 needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l03-o03",
+      "statementSha256": "417ed7d8b42bd2fdbd54d9803b16548e4f205a36425a0bec0aed66b5855bba44",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.zero"
+      ],
+      "familyIds": [
+        "aazero"
+      ],
+      "reason": "Conceptual match to existing family definitions: Adding and taking away 0 (and taking away all).",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l03-o04",
+      "statementSha256": "9c0b04012ad06ed6c1732942f490e68ab4f9f205ec8bc083850bb1639e98bbda",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.addition"
+      ],
+      "familyIds": [
+        "aastadd"
+      ],
+      "reason": "Conceptual match to existing family definitions: How many altogether: addition story problems.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l04-o01",
+      "statementSha256": "e6945da0d670ce2c9391f4b3e7dd406cdaed5eebf4dae4151d2de235f1629baa",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.equal-groups"
+      ],
+      "familyIds": [
+        "abgroup"
+      ],
+      "reason": "Conceptual match to existing family definitions: Equal groups: how many in all.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l04-o02",
+      "statementSha256": "b8740ca7c2b754fb3166ad73066d492d1993bc47982a9e26e9f649cbcf0c3bea",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.equal-groups"
+      ],
+      "familyIds": [
+        "abrep"
+      ],
+      "reason": "Conceptual match to existing family definitions: Writing equal groups as repeated addition and as multiplication.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l05-o01",
+      "statementSha256": "3aeced0345ceef708487e93f7c68fe18c84ee96ecadb4d20c0a810b7cae8cf2b",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.measurement.mass-comparison"
+      ],
+      "familyIds": [
+        "aaheavy"
+      ],
+      "reason": "Conceptual match to existing family definitions: Which is the heaviest or the lightest (a balance with cubes).",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l05-o02",
+      "statementSha256": "116cd6b63e2a74f1f17a974e317d76f58ef7606ade7e8dc2bfae823ebf90bf5a",
+      "status": "proposed",
+      "fit": "unmatched",
+      "competencyIds": [],
+      "familyIds": [],
+      "reason": "No reviewed family explicitly compares thickness; length comparison is not assumed equivalent.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l06-o01",
+      "statementSha256": "30bce4bc616bcff7172be57e9263f2467324295e5bca12eb822bb36c812f5bd3",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.subtraction"
+      ],
+      "familyIds": [
+        "aasub"
+      ],
+      "reason": "Conceptual match to existing family definitions: Taking away within 20.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l06-o02",
+      "statementSha256": "557dc884dd245ddd6bc98d7843d46263d8d6e8816674df87d54e1cbd3b04990a",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.zero"
+      ],
+      "familyIds": [
+        "aazero"
+      ],
+      "reason": "Conceptual match to existing family definitions: Adding and taking away 0 (and taking away all).",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l06-o03",
+      "statementSha256": "280ad2a9578fb01250feafe3b27d4ef9910d7569e8958a5e908677f20d4430da",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.number-line"
+      ],
+      "familyIds": [
+        "acnljump"
+      ],
+      "reason": "Backward jumps exist; explicit subtraction representation within 20 needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g01-2026-t2-em-l06-o04",
+      "statementSha256": "ee89385530ae390ac38dabcd19e5b2a32236a7ac1d06ede2f72508349f01c669",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.subtraction"
+      ],
+      "familyIds": [
+        "aastsub"
+      ],
+      "reason": "Conceptual match to existing family definitions: How many are left: subtraction story problems.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l01-o01",
+      "statementSha256": "3076c6c463c4952a17c869944d38934bcd6589a79001bbeb2b84c02bd8bb55a5",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.place-value-tens"
+      ],
+      "familyIds": [
+        "aaword",
+        "aaname"
+      ],
+      "reason": "Conceptual match to existing family definitions: Writing a number name as a number; The number name of a two-digit number.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l01-o02",
+      "statementSha256": "11a6d65f8de0d3f5d4ed152276fe507612f5fc1745abfb00ffea4462fece5fd7",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.mental-arithmetic"
+      ],
+      "familyIds": [
+        "acaddten"
+      ],
+      "reason": "Conceptual match to existing family definitions: Adding and taking away tens or hundreds in your head.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l01-o03",
+      "statementSha256": "c5100c7a5717fbb71f08e3aead05de8864e86cd30ee33d9ca30d28dab50d7189",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.number-line"
+      ],
+      "familyIds": [
+        "acnlpos"
+      ],
+      "reason": "Conceptual match to existing family definitions: Finding a number on a number line.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l01-o04",
+      "statementSha256": "5eaa3670fa3054a849ea960ac6441b606d1b7f294c0427683fa22419ec45f484",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.number-patterns",
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "abseq",
+        "aanext"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next when skip counting; The number just before, just after or between.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l01-o05",
+      "statementSha256": "f452fc70c8d7a6e8fd9de78c8c4aa1668734547cdac83ead5f3dc82d9ec99123",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.number-line"
+      ],
+      "familyIds": [
+        "acnljump"
+      ],
+      "reason": "Conceptual match to existing family definitions: Counting on and back in jumps on a number line.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l01-o06",
+      "statementSha256": "53f16ce060a6cc3136fc27dd803285d8580ce1de2b9556f9c78e39c28f91ff8e",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aaordn"
+      ],
+      "reason": "Conceptual match to existing family definitions: Putting numbers up to 99 in order.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l02-o01",
+      "statementSha256": "6165797b515435328da8105ffbe3c817acc339e473d62e0bd2a8e5e8015d3cd6",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.geometry.shapes"
+      ],
+      "familyIds": [
+        "aaflat"
+      ],
+      "reason": "Plane-shape recognition exists; deriving an outline from a solid impression needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l02-o02",
+      "statementSha256": "c37e449c4507edd96fe57258bb4cb349b72a3d95c9505ee1c8f0e67b862fccc9",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.shape-properties"
+      ],
+      "familyIds": [
+        "abside"
+      ],
+      "reason": "Conceptual match to existing family definitions: Counting sides and corners of flat shapes.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l02-o03",
+      "statementSha256": "bd538c39eaeb1a872826e20accc4c43be4fa94a2bc35cc3ab9e4d9dac5804465",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.repeating-patterns"
+      ],
+      "familyIds": [
+        "aapatn"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next in a repeating pattern.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l03-o01",
+      "statementSha256": "290323a1c4807ed82b7fbc1093c1850c5d45163dfefc69fc13966c60b0cebd17",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.addition-regroup"
+      ],
+      "familyIds": [
+        "addr"
+      ],
+      "reason": "Conceptual match to existing family definitions: Adding two-digit numbers with regrouping.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l03-o02",
+      "statementSha256": "7e9af821969dafb6d21af14d5ee420422507efdbf1df1bf2b71e0e68deaa6789",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.addition-regroup"
+      ],
+      "familyIds": [
+        "addr"
+      ],
+      "reason": "Regrouping arithmetic exists; both bead and number-line representations need review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l03-o03",
+      "statementSha256": "271e446da5f8e536079da6eb0fda665a4ff4f1d88495b18ac2efc73ea6cb9235",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.addition-regroup"
+      ],
+      "familyIds": [
+        "addr"
+      ],
+      "reason": "Two-digit regrouping exists; money/story interpretation needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l04-o01",
+      "statementSha256": "558a49ad0bae1817eb194474ca94d4ad7b3be6082c51506f17dbb1b108ededcd",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.equal-groups"
+      ],
+      "familyIds": [
+        "abrep"
+      ],
+      "reason": "Conceptual match to existing family definitions: Writing equal groups as repeated addition and as multiplication.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l04-o02",
+      "statementSha256": "52b8cd84882b509a0c3630022869444a4936aa4caebd85e8c2d392631c2da789",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.equal-groups"
+      ],
+      "familyIds": [
+        "abrep"
+      ],
+      "reason": "Equal groups exist; repeated-addition number-line representation needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l04-o03",
+      "statementSha256": "33fe5309d3cb16069b9a32ae20e185ff0b52b6d68e831a5d8f77f35c43724e6e",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.equal-groups"
+      ],
+      "familyIds": [
+        "abgroup"
+      ],
+      "reason": "Conceptual match to existing family definitions: Equal groups: how many in all.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l05-o01",
+      "statementSha256": "624858aabef39295e04fa49f6cfe4a81f7365b7b0527eec4c7a77f1e8dd87008",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.measurement.mass-comparison"
+      ],
+      "familyIds": [
+        "aaheavy"
+      ],
+      "reason": "Conceptual match to existing family definitions: Which is the heaviest or the lightest (a balance with cubes).",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l05-o02",
+      "statementSha256": "fd33b2c248a42ef42c8ba3b5200f5769944312dd49fb437700b87562340613ba",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.measurement.mass-comparison"
+      ],
+      "familyIds": [
+        "aaheavy"
+      ],
+      "reason": "Balance comparisons exist; deciding which pan to change and explaining it needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l06-o01",
+      "statementSha256": "8440326f2d8c76075e6f56db69be634bd393106c394ac828f5783410509b539c",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "familyIds": [
+        "acsub2"
+      ],
+      "reason": "Conceptual match to existing family definitions: Subtracting two-digit numbers with regrouping.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l06-o02",
+      "statementSha256": "24445b909c9fe50f72bfe23b941e6d7b57133c771aac7b581b004e52729ce9de",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "familyIds": [
+        "acsub2"
+      ],
+      "reason": "Regrouping subtraction exists; bead and line representations need review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g02-2026-t2-em-l06-o03",
+      "statementSha256": "70f30ed1e881923528219732b45c83bab0dbf5baf0cd10f032980d401b7b912e",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "familyIds": [
+        "acsub2"
+      ],
+      "reason": "Two-digit calculation exists; interpretation of the source stories needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l01-o01",
+      "statementSha256": "6ee44afdd483151ebacbffc417c628b9963f7d86d2d3bdd879af5081cd61ec7a",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.hundreds"
+      ],
+      "familyIds": [
+        "abhto"
+      ],
+      "reason": "Three-digit place value exists; all written number-name production needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l01-o02",
+      "statementSha256": "bec2841dd0acdbf0dfe1295c959cd5341973d7898fefc07f5628d1f27f5371bd",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.number-line"
+      ],
+      "familyIds": [
+        "acnlpos"
+      ],
+      "reason": "Conceptual match to existing family definitions: Finding a number on a number line.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l01-o03",
+      "statementSha256": "3607a19592a93d9a7f23ac21da28e02e89a892cfaa9d4cccf2551849ccf56fb3",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.number-patterns",
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "abseq",
+        "aanext"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next when skip counting; The number just before, just after or between.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l01-o04",
+      "statementSha256": "563b6b59dd713458257a7cac06e8847d3e2d7dce775ed2a0af70d3c65a41a5fa",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.number-line"
+      ],
+      "familyIds": [
+        "acnljump"
+      ],
+      "reason": "Conceptual match to existing family definitions: Counting on and back in jumps on a number line.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l01-o05",
+      "statementSha256": "2e3a449e9350fc54fd1525757985be3de00914f20f3f178b368c548ae2c0fe0e",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.compare-numbers"
+      ],
+      "familyIds": [
+        "aaordx",
+        "aasign"
+      ],
+      "reason": "Conceptual match to existing family definitions: Ordering numbers from 9 up to crores, ascending or descending; Comparing two numbers with <, > or =.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l02-o01",
+      "statementSha256": "82de518b30c1a91a3e35a07ab005db3128dbca23f208a0465d2807d5227e2178",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.shapes"
+      ],
+      "familyIds": [
+        "aaflat"
+      ],
+      "reason": "Conceptual match to existing family definitions: Finding triangles, squares and circles turned different ways.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l02-o02",
+      "statementSha256": "5150c620beed526dfd2422e20d4f0b6a597c01e2776a73f2404127c55937982a",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.shape-properties"
+      ],
+      "familyIds": [
+        "abside"
+      ],
+      "reason": "Conceptual match to existing family definitions: Counting sides and corners of flat shapes.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l02-o03",
+      "statementSha256": "1db48f653c479ef0d4aa603eeca43ae144067ee176aa27d00e7cf39efc2bb68f",
+      "status": "proposed",
+      "fit": "unmatched",
+      "competencyIds": [],
+      "familyIds": [],
+      "reason": "No reviewed dot-grid/tangram construction family identified.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l02-o04",
+      "statementSha256": "347f5ef346d86bc2b96dcb8aded377edcc07a42825614b4d7d0ce9a48cebbbf1",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.repeating-patterns"
+      ],
+      "familyIds": [
+        "aapatn"
+      ],
+      "reason": "Conceptual match to existing family definitions: What comes next in a repeating pattern.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l02-o05",
+      "statementSha256": "9e6a5bbb2af0dcde210f0d605779c7af1e791c4a42cf63cd3ea3c0138d0aeff9",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.geometry.symmetry-fold"
+      ],
+      "familyIds": [
+        "absym"
+      ],
+      "reason": "Conceptual match to existing family definitions: Letters that fold onto themselves.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l03-o01",
+      "statementSha256": "408182ae2d862381b571dbe2aa5d64c9a6bf5c96d0523f6e7d710b4e72cfeedd",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.multi-digit-add-subtract"
+      ],
+      "familyIds": [
+        "adcolx"
+      ],
+      "reason": "Three-digit addition exists; expanded-form method is not established.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l03-o02",
+      "statementSha256": "bcd850b7ec73a3f794604a62a3e186b27af74d44893bbb1498f0440485766dd6",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.multi-digit-add-subtract"
+      ],
+      "familyIds": [
+        "adcolx"
+      ],
+      "reason": "Three-digit addition exists; number-card manipulation is not established.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l03-o03",
+      "statementSha256": "156dfd90903c45a0dcad43483a5234cce2ac6607d1cb3619d3f866cc9af25474",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.number-line"
+      ],
+      "familyIds": [
+        "acnljump"
+      ],
+      "reason": "Number-line jumps exist; three-digit addition method and domain need review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l03-o04",
+      "statementSha256": "15568966e7231ec90291668fe958bed97ec3d7b6b0f7bd4c071be72ddf48931f",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.mental-arithmetic"
+      ],
+      "familyIds": [
+        "acaddten"
+      ],
+      "reason": "Mental place-value increments exist; arbitrary split-addend method needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l03-o05",
+      "statementSha256": "5b9a4046964aecc31a5764ffa82ae0fc4e81c2c75a8ce6bb1c200b6520e8da54",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.multi-digit-add-subtract"
+      ],
+      "familyIds": [
+        "adcolx"
+      ],
+      "reason": "Arithmetic exists; story interpretation and all specified methods need review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l04-o01",
+      "statementSha256": "ec01d67f6999c10f7a8d1207e78477944cdf6701fd66692ec2d6a29efedd0405",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.equal-groups"
+      ],
+      "familyIds": [
+        "abgroup"
+      ],
+      "reason": "Conceptual match to existing family definitions: Equal groups: how many in all.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l04-o02",
+      "statementSha256": "1c9d7931065f3b99076072d7dcb7a74505145005bc3474975fb2dff8d0a3ce7f",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.equal-groups"
+      ],
+      "familyIds": [
+        "abrep"
+      ],
+      "reason": "Conceptual match to existing family definitions: Writing equal groups as repeated addition and as multiplication.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l04-o03",
+      "statementSha256": "462eab01515184a045de400e2f7d2e2b54f744722e961b87cfb33d50eae4fd14",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.algebra.missing-number",
+        "MATH.number.multiplication-tables"
+      ],
+      "familyIds": [
+        "mul",
+        "acmissing"
+      ],
+      "reason": "Conceptual match to existing family definitions: A multiplication fact; Finding the missing number in a number sentence.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l04-o04",
+      "statementSha256": "52b3286e168fa4f9006db99ff81486a5e51084859cf90786496daa8acda9fb85",
+      "status": "proposed",
+      "fit": "aligned",
+      "competencyIds": [
+        "MATH.number.equal-groups"
+      ],
+      "familyIds": [
+        "abgroup"
+      ],
+      "reason": "Conceptual match to existing family definitions: Equal groups: how many in all.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l05-o01",
+      "statementSha256": "943fa11f1827963ad990bbd224f8c8a602d6a609dda17f447b86b55e193676bb",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.measurement.standard-mass"
+      ],
+      "familyIds": [
+        "abwunit"
+      ],
+      "reason": "Standard mass-unit selection exists; explanation of shared-unit necessity needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l05-o02",
+      "statementSha256": "2b3f757480246998e46565e8565c5c41b73b8a503abddd349ffa9ed3bed4b2e8",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.measurement.standard-mass"
+      ],
+      "familyIds": [
+        "abkg"
+      ],
+      "reason": "Mass measurement exists; one/half-kilogram benchmarks need review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l06-o01",
+      "statementSha256": "6549abc2261a70bf8c5c601f8bb8599d1026a0d208a8fa2ec5573053e4f935c8",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.algebra.missing-number"
+      ],
+      "familyIds": [
+        "acmissing"
+      ],
+      "reason": "Inverse number sentences exist; oral adding-on subtraction strategy is not established.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l06-o02",
+      "statementSha256": "258253c7430980bdba64dcd068a45cd0043b0e08db6b47dbcdf4cc2b503e4e24",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.number-line"
+      ],
+      "familyIds": [
+        "acnljump"
+      ],
+      "reason": "Backward jumps exist; three-digit subtraction strategy needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    },
+    {
+      "outcomeId": "tn-g03-2026-t2-em-l06-o03",
+      "statementSha256": "14c99f834f9dca5729f77e530c0f46014ac39536fdaa2c86a1cdd877f4f6e0e7",
+      "status": "proposed",
+      "fit": "partial",
+      "competencyIds": [
+        "MATH.number.subtraction-regroup"
+      ],
+      "familyIds": [
+        "acsub3"
+      ],
+      "reason": "Three-digit calculation exists; source-story interpretation needs review.",
+      "educatorReviewed": false,
+      "learnerReadiness": "not-established"
+    }
+  ]
+}
