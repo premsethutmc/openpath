@@ -23,6 +23,7 @@ import { connectedSkill, connectionConfig, strategyConnects } from "../../../pac
 import { misconception, learners } from "./learners";
 import { runScenario, type Run } from "./scenarios";
 import { SliceSession } from "./session";
+import { useMachineValidation } from "../../../packages/learning/src/machine-validation";
 import { START_CROSS, START_EXT } from "./geometry-journeys";
 
 const TRI = "MATH.geometry.triangle-properties", PAIRS = "MATH.geometry.angle-pairs";
@@ -191,6 +192,14 @@ function beforeRetention(S: (typeof SKILLS)[number]) {
 const wrongFor = (S: (typeof SKILLS)[number], id: string) => misconception(id, new Set(S.bugs)) ?? (id.endsWith(":mc") ? ["A", "B", "C", "D"].find((x) => x !== String(question(id).answer))! : "1");
 
 for (const S of SKILLS) test(`${S.skill}: a delayed pass on the competency's other skills is not retention evidence for the taught skill`, () => {
+  // This checks the delayed-check order on this surface's own seven-day schedule, i.e. with the shared engine holding the content
+  // as provisional. With machine-validation@1 on, the engine demonstrates the skill itself and the next delayed check is dated from
+  // that demonstration (verification@3), so the taught skill's own question comes a week later, not in this visit. "Verified" still
+  // needs the taught skill's own delayed answer in both cases (evidence.ts covers()).
+  useMachineValidation(false);
+  try { otherSkillsAreNotRetention(S); } finally { useMachineValidation(true); }
+});
+function otherSkillsAreNotRetention(S: (typeof SKILLS)[number]) {
   const L = beforeRetention(S);
   const m = moduleFor(S.competency)!;
   assert.equal(L.state().evidence(S.competency).retention, "due");
@@ -208,7 +217,7 @@ for (const S of SKILLS) test(`${S.skill}: a delayed pass on the competency's oth
   assert.equal(own.phase, "retention"); assert.equal(skillOf(S.competency, own.question!), S.skill);
   L.submit(own.question!, question(own.question!).answer, "retention");
   assert.equal(L.state().evidence(S.competency).retention, "passed");
-});
+}
 
 for (const S of SKILLS) test(`${S.skill}: a wrong delayed answer on the taught skill recovers on that skill (a fresh question on it alone)`, () => {
   const L = beforeRetention(S);

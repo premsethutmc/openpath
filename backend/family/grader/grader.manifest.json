@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "90de147590f17100f6e699b50b895c57c4842d038c8f9af8906f5e944ba1b09b",
+ "sha256": "66211c10a0ac1230e49f66e3ce268af44855245c70137b682cf0ef524aa5daa8",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -87,6 +87,7 @@
   "content/learning/grading-certifications.v1.json": "ef820377fd71a6459c3c339657c7403884538db33d4dad70bdbe61daae6ead66",
   "content/learning/graph-audit.v1.json": "ffd060491b7bf9895351c27e254ebd88b2eba04ab695eae8a21ab0ec31d69c30",
   "content/learning/library.v1.json": "e895f2ed95146e3f41750d54fa2d63cb1853b26e85dca4a87539a484edbdb2b8",
+  "content/learning/machine-validation.v1.json": "d418b2050b424505e8af19e8cecec77c3d2ea594bd452b61fa3c98d6e704a312",
   "content/learning/mapping-exemplars.v1.json": "2e321587d70fccd32e395f21cf24d4ac4bbfbe52abc7d631b6acecc07dab8f61",
   "content/learning/method-alignment.v1.json": "e54ca3ac617264d89ab46e656e1e3b5a2f8ad576d2f0b4ef97f314b3d1964d7f",
   "content/learning/modules.v1.json": "664c61dc66700e8e5d40023ac78ed89afaedf4ac9ceaf78bbeecd1c878e9db04",
@@ -138,7 +139,7 @@
   "packages/learning/src/diagnostic.ts": "c0b33ee98a991e044446db27cb56d59cc5b6399510557bcbe7d06f3611b54cc8",
   "packages/learning/src/digest.ts": "7fe843b17d1ba61811de2dd7b936de8def4c9ddf62ba270643a856a5bae9847f",
   "packages/learning/src/domains-m2.ts": "fcde7bde7b75086a547e6873ef252062b95d312d008b7490e21fb5c905190866",
-  "packages/learning/src/evidence.ts": "09af3721d184d04968e3f7ad48c0e920bc7bca15e7479ea39d4637d7df754ebb",
+  "packages/learning/src/evidence.ts": "ab9fb064eb39af1333fb88afb455456fc5bf32762161ad4cec454cac4edd22bf",
   "packages/learning/src/explanation-review.ts": "d2b8cf63744f56ad4b59fe2093bd39d824dd0727cd0ac975add1b62507ac30e4",
   "packages/learning/src/extract.ts": "f138d21ac65ea11a565e363066d406c2dfb9fa56993b56eeb0a9945594847142",
   "packages/learning/src/fam/b01.ts": "be216c0cc01df6be0173573c4bc018377633d2f8e0ff1ec3c43f478845b4bc8d",
@@ -196,6 +197,7 @@
   "packages/learning/src/kernel-adapter.ts": "bfaf8e026ac0ed6038ebe4f53d7ebe827a80e8b474a57f2938d71bf0f8392b57",
   "packages/learning/src/library.ts": "480d79d11a2d55fba79972054fb399bebef6f19dde5caa20445038bfc4039763",
   "packages/learning/src/linear-algebra-kernel.ts": "e7badeee835bc6c62965f4377b176da727b4936e4831e4efd0e42ff334f63d32",
+  "packages/learning/src/machine-validation.ts": "8753f9a03b6bac732c5d5ebd6b1232d2191e1783ba4303e2916ca08ea0ffa53f",
   "packages/learning/src/math-kernel.ts": "3142b8f20ba62afd53f3aee168e5953cba6457900a371622230876938a0c8e4d",
   "packages/learning/src/meaning.ts": "e08d794e310b4d993be9ea353cfa48e382ea294cdefadb93efeca671b666fd92",
   "packages/learning/src/method-alignment.ts": "1bb504a11c489a9c2eac162d422d43b4a8bcd440a2b82d2bfdd9b5d493e579d4",

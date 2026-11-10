@@ -6,8 +6,10 @@ import { qualifiedFollowup } from "./method-alignment";
  *   hints and shown solutions                             hint events; the answer carries them (assisted@1)
  *   first, unaided answers                                evidence with provenance@1 (practice / assessment / retention)
  *   teaching blocks                                       intervention events
- * Content is provisional, so the shared content gate holds it, and verification (verification@2, H-V1 to H-V4) can
- * never be reached on it. "Verified" is taken ONLY from sharedProfile; nothing here computes mastery.
+ * Content counts as validated in the shared content gate when it is educator-released (review.ts) or machine-validated
+ * (machine-validation.ts: independently certified, unchanged, grading-certified); everything else is provisional, and
+ * verification (verification@2, H-V1 to H-V4) can never be reached on it. "Verified" is taken ONLY from sharedProfile;
+ * nothing here computes mastery.
  *
  * The statuses below (status@1) describe what the records show, for the tiles. They are not a mastery model.
  */
@@ -25,6 +27,7 @@ import { problemOf } from "./families";
 import type { Attempt, LearnerRecords } from "./records";
 import { heldByTeaching, unitStates } from "./skill-units";
 import { releaseOf, setActiveRegistry, type Registry } from "./review";
+import { MACHINE_VALIDATION_LABEL, machineReleaseOf } from "./machine-validation";
 
 const EXPANSION_CAPABILITIES = graph.competencies.filter((c) => c.origin === "expansion").map((c) => ({ id: c.id, name: c.name, strand: c.id.split(".")[1] }));
 export const DAY = 86_400_000;
@@ -62,7 +65,11 @@ export function nativeItem(q: Question): Item & { kind: "code" } {
   const fixture = getFixture();
   // validated: a released question (review.ts releaseOf), or, in a test build only, the review fixture
   const released = releaseOf(q.id);
-  const releasedAt = released ?? (fixture?.items.has(q.id) || (fixture?.all && true) ? fixture!.releasedAt : undefined);
+  // machine-validation@1: with no educator release, an independently certified, unchanged question counts as validated too
+  // (a test's review fixture, when one is set, decides first, so fixture tests keep their own release time)
+  const fixed = !released && (fixture?.items.has(q.id) || fixture?.all) ? fixture!.releasedAt : undefined;
+  const machine = released || fixed ? undefined : machineReleaseOf(q.id);
+  const releasedAt = released ?? fixed ?? machine;
   const validated = releasedAt !== undefined;
   return {
     kind: "code",
@@ -79,7 +86,7 @@ export function nativeItem(q: Question): Item & { kind: "code" } {
     b: 4,
     evidence_status: validated ? "validated" : "provisional",
     ...(validated ? { released_at: releasedAt } : {}),
-    review: released ? "Educator-reviewed and released (content/learning/review.v1.json)" : validated ? "TEST FIXTURE: treated as reviewed for an acceptance test only" : "Original OpenPath content, provisional: not educator-reviewed.",
+    review: released ? "Educator-reviewed and released (content/learning/review.v1.json)" : machine ? MACHINE_VALIDATION_LABEL : validated ? "TEST FIXTURE: treated as reviewed for an acceptance test only" : "Original OpenPath content, provisional: not educator-reviewed.",
     explain: q.solution,
   } as Item & { kind: "code" };
 }
