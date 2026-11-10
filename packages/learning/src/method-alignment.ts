@@ -18,6 +18,9 @@ export function methodRequirements(id: string): string[] | null {
   if(p.family==='subst')return ['quadratic-substitution','change-integral-limits',`integrate-u-power-${p.params[3]}`];
   if(p.family==='ahtri')return ['triangle-angle-sum'];
   if(p.family==='ahiso')return ['triangle-angle-sum',p.params[1]===0?'isosceles-base':'isosceles-vertex'];
+  // Pythagoras (2026-11-10): the converse test, and the two rules that generate triples, are methods of their own
+  if(p.family==='ahconv')return ['pythagoras-converse'];
+  if(p.family==='ahgen')return [p.params[0]<=1?'triple-rule-2m':'triple-rule-mn'];
   if(p.family==='faddu')return ['common-denominator-add'];
   if(p.family==='avfas')return [p.params[6]?'common-denominator-subtract':'common-denominator-add',...(p.params[0]||p.params[3]?['mixed-number-conversion']:[])];
   // Families that already declare teaching cases can supply precise requirements, but no lesson is

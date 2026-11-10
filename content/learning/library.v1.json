@@ -38613,6 +38613,36 @@
        "role": "worked-example",
        "instance": "gen:ahpyth:24,70,1",
        "textFrom": "instance"
+      },
+      {
+       "title": "Is the triangle right-angled? The converse of Pythagoras",
+       "text": [
+        "The converse of Baudhayana–Pythagoras: if the square of the longest side equals the sum of the squares of the other two, the angle opposite the longest side is a right angle. If not, there is no right angle.",
+        "Find the longest side. Square it, and add the squares of the other two. Equal: right-angled. Not equal, even by a little: not right-angled."
+       ],
+       "math": [
+        "A carpenter checks the corner of a wooden picture frame he is making. He marks a point 6 cm from the corner along one side and a point 8 cm from the corner along the other, and the two marks are 11 cm apart. Is the corner a right angle?",
+        "The longest side is 11",
+        "The squares of the other two add to 36 + 64 = 100",
+        "100 and 121 are not equal, so the triangle is not right-angled",
+        "So the answer is: No, it is not right-angled"
+       ],
+       "role": "worked-example",
+       "instance": "gen:ahconv:1,1,0,1"
+      },
+      {
+       "title": "Generating Pythagorean triples by a rule",
+       "text": [
+        "(m² + 1)² − (m² − 1)² = (2m)², so 2m, m² − 1 and m² + 1 always form a Pythagorean triple. In the same way (m² + n²)² = (m² − n²)² + (2mn)².",
+        "From the even member 2m, halve it to get m, then work out m² − 1 and m² + 1. With m and n given, substitute into the three expressions."
+       ],
+       "math": [
+        "For any whole number m greater than 1, the numbers 2m, m² − 1 and m² + 1 form a Pythagorean triple. Find the triple that contains 18 as its even member 2m. What is its largest number?",
+        "2m = 18, so m = 9",
+        "m² + 1 with 9: 82"
+       ],
+       "role": "worked-example",
+       "instance": "gen:ahgen:0,9,0"
       }
      ],
      "guided": "gen:ahpyth:27,36,1",
@@ -38651,6 +38681,36 @@
        },
        "role": "strategy",
        "instance": "gen:ahpyth:27,36,0"
+      },
+      {
+       "title": "Is the triangle right-angled? The converse of Pythagoras",
+       "text": [
+        "The converse of Baudhayana–Pythagoras: if the square of the longest side equals the sum of the squares of the other two, the angle opposite the longest side is a right angle. If not, there is no right angle.",
+        "Find the longest side. Square it, and add the squares of the other two. Equal: right-angled. Not equal, even by a little: not right-angled."
+       ],
+       "math": [
+        "A carpenter checks the corner of a wooden picture frame he is making. He marks a point 6 cm from the corner along one side and a point 8 cm from the corner along the other, and the two marks are 11 cm apart. Is the corner a right angle?",
+        "The longest side is 11",
+        "The squares of the other two add to 36 + 64 = 100",
+        "100 and 121 are not equal, so the triangle is not right-angled",
+        "So the answer is: No, it is not right-angled"
+       ],
+       "role": "worked-example",
+       "instance": "gen:ahconv:1,1,0,1"
+      },
+      {
+       "title": "Generating Pythagorean triples by a rule",
+       "text": [
+        "(m² + 1)² − (m² − 1)² = (2m)², so 2m, m² − 1 and m² + 1 always form a Pythagorean triple. In the same way (m² + n²)² = (m² − n²)² + (2mn)².",
+        "From the even member 2m, halve it to get m, then work out m² − 1 and m² + 1. With m and n given, substitute into the three expressions."
+       ],
+       "math": [
+        "For any whole number m greater than 1, the numbers 2m, m² − 1 and m² + 1 form a Pythagorean triple. Find the triple that contains 18 as its even member 2m. What is its largest number?",
+        "2m = 18, so m = 9",
+        "m² + 1 with 9: 82"
+       ],
+       "role": "worked-example",
+       "instance": "gen:ahgen:0,9,0"
       }
      ],
      "guided": "gen:ahpyth:16,30,1",
@@ -38676,6 +38736,36 @@
        "role": "strategy",
        "instance": "gen:ahpyth:16,30,0",
        "textFrom": "instance"
+      },
+      {
+       "title": "Is the triangle right-angled? The converse of Pythagoras",
+       "text": [
+        "The converse of Baudhayana–Pythagoras: if the square of the longest side equals the sum of the squares of the other two, the angle opposite the longest side is a right angle. If not, there is no right angle.",
+        "Find the longest side. Square it, and add the squares of the other two. Equal: right-angled. Not equal, even by a little: not right-angled."
+       ],
+       "math": [
+        "A carpenter checks the corner of a wooden picture frame he is making. He marks a point 6 cm from the corner along one side and a point 8 cm from the corner along the other, and the two marks are 11 cm apart. Is the corner a right angle?",
+        "The longest side is 11",
+        "The squares of the other two add to 36 + 64 = 100",
+        "100 and 121 are not equal, so the triangle is not right-angled",
+        "So the answer is: No, it is not right-angled"
+       ],
+       "role": "worked-example",
+       "instance": "gen:ahconv:1,1,0,1"
+      },
+      {
+       "title": "Generating Pythagorean triples by a rule",
+       "text": [
+        "(m² + 1)² − (m² − 1)² = (2m)², so 2m, m² − 1 and m² + 1 always form a Pythagorean triple. In the same way (m² + n²)² = (m² − n²)² + (2mn)².",
+        "From the even member 2m, halve it to get m, then work out m² − 1 and m² + 1. With m and n given, substitute into the three expressions."
+       ],
+       "math": [
+        "For any whole number m greater than 1, the numbers 2m, m² − 1 and m² + 1 form a Pythagorean triple. Find the triple that contains 18 as its even member 2m. What is its largest number?",
+        "2m = 18, so m = 9",
+        "m² + 1 with 9: 82"
+       ],
+       "role": "worked-example",
+       "instance": "gen:ahgen:0,9,0"
       }
      ],
      "guided": "gen:ahpyth:40,75,2",

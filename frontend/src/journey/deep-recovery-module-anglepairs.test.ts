@@ -22,6 +22,8 @@ import { SliceSession } from "./session";
 const T0 = Date.parse("2026-11-05T09:00:00Z");
 const G = "MATH.geometry.", N = "MATH.number.";
 const PAIRS = G + "angle-pairs", MEASURE = G + "angle-measure", SCALE = G + "scale-drawings", RATIO = N + "ratio";
+// a real missing-content gap: no explanation of integers passes the teaching checks (ratio, the earlier example, is teachable now)
+const INT_ADD = N + "integer-add", INTEGERS = N + "integers";
 const P = `${DEEP_MODULE_POLICY}: `;
 
 /** missing `gap` under `comp` until taught; wrong = the question's first modelled bug. `failAfterRepair`: the after-repair question is
@@ -126,16 +128,28 @@ test("route 2: repaired gap -> the fresh angle-pairs question is wrong -> #115's
   assert.deepEqual(ours.handover, shipped.handover);
 });
 
-test("no repaired-gap override for an ordinary slip path or an unteachable gap", () => {
+test("no repaired-gap override for an ordinary slip path", () => {
   const slip = run(PAIRS, learner(PAIRS, ["own"], { slipOnce: true }));
   assert.equal(afterRepair(slip.steps).length, 0);
   const slipOff = run(PAIRS, learner(PAIRS, ["own"], { slipOnce: true }), { on: false });
   assert.deepEqual(slip.steps, slipOff.steps, "Grade 7 fresh-pool changes keep the ordinary own-skill path, with no research override");
   assert.equal(slip.steps.at(-1)!.phase, "done");
-  const blocked = run(SCALE, learner(SCALE, [RATIO]));
+  assert.ok(!slip.steps.some((x) => x.qid && question(x.qid).competency !== PAIRS), "a slip: no detour below");
+});
+
+test("no repaired-gap override for an unteachable gap: integers has no explanation that passes the checks, so it stops honestly", () => {
+  const blocked = run(INT_ADD, learner(INT_ADD, [INTEGERS]));
+  assert.ok(blocked.steps.some((x) => x.qid && question(x.qid).competency === INTEGERS && !x.correct), "the gap is found");
   assert.equal(afterRepair(blocked.steps).length, 0);
   assert.equal(blocked.steps.at(-1)!.phase, "pause");
   assert.equal(blocked.steps.at(-1)!.why, `${P}blocked`);
+});
+
+test("ratio is teachable now (the improved lesson): scale drawings finds ratio, teaches it and is not stopped", () => {
+  const { steps } = run(SCALE, learner(SCALE, [RATIO]));
+  assert.ok(steps.some((x) => x.qid && question(x.qid).competency === RATIO && !x.correct), "the gap is found");
+  assert.ok(steps.some((x) => x.lesson === RATIO), "and taught");
+  assert.notEqual(steps.at(-1)!.phase, "pause");
 });
 
 test("solely attributable: other or additional reasons are refused by the rule itself", () => {

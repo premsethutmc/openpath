@@ -38501,7 +38501,7 @@
    "competency": "MATH.geometry.pythagoras",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "51873c52",
+   "contentHash": "fb4b642e",
    "state": "draft",
    "history": [
     {
@@ -38566,6 +38566,14 @@
      "role": "engineer",
      "at": "2026-11-09T16:06:58.508Z",
      "contentHash": "51873c52",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-10T03:38:12.995Z",
+     "contentHash": "fb4b642e",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

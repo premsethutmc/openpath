@@ -85,23 +85,29 @@
     {
       "competency": "MATH.geometry.pythagoras",
       "strategy": "worked_steps",
-      "contentHash": "0d50b6d2459794f159778cbe7e6750d91dd232dd40ca8747cb428831ed076074",
+      "contentHash": "03d254785695ac2571805598bde84403d9644354b04cd8a9294fb82c24e5a721",
       "methods": [
-        "ahpyth:shorter side"
+        "ahpyth:shorter side",
+        "pythagoras-converse",
+        "triple-rule-2m",
+        "triple-rule-mn"
       ],
       "status": "engineering-mapping-pending-educator-review",
-      "rationale": "The instance-specific text and worked steps subtract squared lengths and take a square root."
+      "rationale": "The instance-specific text and worked steps subtract squared lengths and take a square root. Extended (method-sections@1, 2026-11-10): two further sections, the converse (find the longest side, compare its square with the sum of the other two squares; equal: right-angled, otherwise not; worked example) and generating triples (2m, m² − 1, m² + 1 from the even member, worked example; m² − n², 2mn, m² + n² by substitution, explained in the text without its own worked example). Previous revision 0d50b6d2."
     },
     {
       "competency": "MATH.geometry.pythagoras",
       "strategy": "squares_on_sides",
-      "contentHash": "946d0448e7219a924bb4872a925defc8ad55fdedee4b3da8bf9dc466089e923f",
+      "contentHash": "d195aa59f3206fd16f92cb511d357ad601ad3f09eb336ac6e29d67bbadd1b7f1",
       "methods": [
         "ahpyth:hypotenuse",
-        "ahpyth:shorter side"
+        "ahpyth:shorter side",
+        "pythagoras-converse",
+        "triple-rule-2m",
+        "triple-rule-mn"
       ],
       "status": "engineering-mapping-pending-educator-review",
-      "rationale": "The two smaller squares add to the large square; its side is the square root. Extended (foundations fix, 2026-11-09): a shorter side step by step, square the hypotenuse, take away the known side's square, take the square root, check. Previous revision e1c61180 covered the hypotenuse only."
+      "rationale": "The two smaller squares add to the large square; its side is the square root. Extended (foundations fix, 2026-11-09): a shorter side step by step, square the hypotenuse, take away the known side's square, take the square root, check. Previous revision e1c61180 covered the hypotenuse only. Extended (method-sections@1, 2026-11-10): two further sections, the converse (find the longest side, compare its square with the sum of the other two squares; equal: right-angled, otherwise not; worked example) and generating triples (2m, m² − 1, m² + 1 from the even member, worked example; m² − n², 2mn, m² + n² by substitution, explained in the text without its own worked example). Previous revision 946d0448."
     },
     {
       "competency": "MATH.number.fraction-multiply",

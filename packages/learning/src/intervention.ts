@@ -44,7 +44,7 @@ const of = (m: Module) => (a: Attempt) => question(a.questionId).competency === 
 /** level@1: the learner's grade (their current enrolment), and whether a question is within it: a problem from a
  * later grade is never asked (it is reached in that grade); one from an earlier grade may be (recovery, review). */
 const gradeOf = (records: LearnerRecords) => records.enrolments.at(-1)?.grade ?? null;
-const withinGrade = (records: LearnerRecords, qid: string) => {
+export const withinGrade = (records: LearnerRecords, qid: string) => {
   const g = gradeOf(records);
   const q = g === null ? null : gradeOfQuestion(qid);
   return records.readinessRoute?.includes(question(qid).competency) || g === null || q === null || q <= g;

@@ -27,6 +27,11 @@ import grade8Scope from "../../../content/learning/teaching-scope-grade8.v1.json
 
 /** grade7-lessons@1: in the Grade 7 teaching scope a lesson teaches every family the module draws on (each sub-skill
  * section is tied to its own question and checked like any other section). */
+/** method-sections@1 (2026-11-10): modules whose module checks methods from its other families (the converse of Pythagoras, the rules
+ *  that generate triples). Each way of explaining the main family (worked steps and the family's alternatives, not a misconception or
+ *  prerequisite section) also carries those families' sections, so whichever explanation the engine gives shows every method that
+ *  its follow-ups and delayed check may ask. Pending educator review like all generated teaching. */
+const METHOD_SECTIONS = new Set(["MATH.geometry.pythagoras"]);
 const WHOLE_LESSON = new Set([...(grade7Scope as { competencies: string[] }).competencies, ...(grade8Scope as { competencies: string[] }).competencies]);
 
 export const LIBRARY_POLICY = "library@2";
@@ -322,6 +327,8 @@ export function fromTemplate(family: string, competency: string, version: string
     }
   }
   const sub = subSkills(competency, family, used);
+  if (METHOD_SECTIONS.has(competency))
+    for (const st of strategies) if (st.kind !== "prerequisite" && st.id !== "spot_the_mistake") st.screens.push(...sub.chapter.map((sc) => ({ ...sc, role: "worked-example" as const })));
   const own = [take("practice", "typed"), take("practice", "mc"), take("practice", "typed")];
   return {
     competency,

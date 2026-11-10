@@ -21,6 +21,8 @@ const T0 = Date.parse("2026-11-05T09:00:00Z");
 const N = "MATH.number.", G = "MATH.geometry.";
 const ADDR = N + "addition-regroup", TRI = G + "triangle-properties", PAIRS = G + "angle-pairs", SCALE = G + "scale-drawings";
 const PV = N + "place-value-tens", MEASURE = G + "angle-measure", RATIO = N + "ratio";
+// a real missing-content gap: no explanation of integers passes the teaching checks (ratio, the earlier example, is teachable now)
+const INT_ADD = N + "integer-add", INTEGERS = N + "integers";
 const FOUR = [ADDR, TRI, PAIRS, SCALE];
 
 /** missing `gap` (gap[0] under `comp`; ["own"]: only the module's own skill, fixed by its own lesson); wrong = first modelled bug;
@@ -126,12 +128,26 @@ test("angle pairs: own teaching fails, deep recovery teaches angle measure, fres
   assert.notEqual(steps.at(-1)!.phase, "pause");
 });
 
-test("scale drawings: own teaching fails, deep recovery finds ratio with no teachable content here: the module pauses, nothing solved", () => {
+test("scale drawings (improved ratio lesson): own teaching fails, deep recovery finds ratio, teaches it, fresh scale-drawing problems right, the module goes on", () => {
   const { steps } = run(SCALE, learner(SCALE, [RATIO]));
-  assert.ok(steps.some((x) => x.where === "deep" && x.qid && question(x.qid).competency === RATIO && !x.correct));
-  assert.ok(!steps.some((x) => x.phase === "return"));
+  const firstDeep = steps.findIndex((x) => x.where === "deep");
+  assert.ok(firstDeep > 0 && steps.slice(0, firstDeep).some((x) => x.phase === "chapter"), "own teaching came first");
+  assert.ok(steps.some((x) => x.where === "deep" && x.qid && question(x.qid).competency === RATIO && !x.correct), "the gap is found");
+  assert.ok(lessons(steps).includes(RATIO), "ratio is taught");
+  const returns = steps.filter((x) => x.phase === "return");
+  assert.ok(returns.length >= 1 && returns.every((x) => question(x.qid!).competency === SCALE && x.correct), "fresh scale-drawing problems, right");
+  assert.equal(steps.at(-1)!.phase, "done");
+});
+
+test("a real missing-content gap stops honestly: integer addition needs integers, which OpenPath cannot teach yet; nothing solved", () => {
+  const { s, steps } = run(INT_ADD, learner(INT_ADD, [INTEGERS]));
+  assert.ok(steps.some((x) => x.where === "deep" && x.qid && question(x.qid).competency === INTEGERS && !x.correct), "the gap is found");
+  assert.ok(!lessons(steps).includes(INTEGERS), "no lesson it cannot give");
+  assert.ok(!steps.some((x) => x.phase === "return"), "no return to the problem");
   assert.equal(steps.at(-1)!.phase, "pause");
   assert.equal(steps.at(-1)!.why, `${DEEP_MODULE_POLICY}: blocked`);
+  assert.match(steps.at(-1)!.reason ?? "", /gap in OpenPath's content, not in you/);
+  assert.ok(!["independent", "verified"].includes(s.state().evidence(INT_ADD).status), "nothing counted as shown");
 });
 
 test("policies A1 and C with the switch on: every module decision in those journeys is #115's own (no divergence)", () => {

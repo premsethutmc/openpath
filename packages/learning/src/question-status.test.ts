@@ -101,7 +101,11 @@ describe("selectors never return a quarantined question", () => {
   }, LONG);
   test("selection code is registered: only these files import the pool selectors (each applies selectable() or reads filtered modules)", () => {
     // a new selector must apply selectable() and be added here in a reviewed change
-    const ALLOWED = ["frontend/src/curriculum/TeachingContent.tsx", "frontend/src/learning/adaptive-loop.ts", "frontend/src/review/Main.tsx", "packages/learning/src/compiler.ts", "packages/learning/src/exact/verify.ts",
+    const ALLOWED = ["frontend/src/curriculum/TeachingContent.tsx", "frontend/src/learning/adaptive-loop.ts", "frontend/src/review/Main.tsx", "packages/learning/src/compiler.ts",
+      // deep-recovery.ts: added in a reviewed change (deep-select@1, research, off by default). Every question it chooses passes selectable(),
+      // keyboardOffered(), the grade ceiling and, after teaching, the taught method; see frontend/src/journey/deep-select.test.ts
+      "packages/learning/src/deep-recovery.ts",
+      "packages/learning/src/exact/verify.ts",
       // gated-mastery.ts: added in a reviewed change (M1, shadow only). proposedRetentionPlan reads phasePool (which applies selectable()) for
       // a due sub-skill's delayed-check items; it is never read by the engine, the plan or the app (the module's own selector is unchanged)
       "packages/learning/src/gated-mastery.ts",

@@ -33,14 +33,25 @@
  * Effort: the budget counts every question of the episode (probes, returns and the module's own) and every lesson.
  * Cycle protection: a candidate already on the path is never followed; skills are read from records once (shared prerequisites).
  * Missing content: a root skill with no module, or no explanation that passes the teaching-eligibility gate, stops as "blocked".
+ * Suitability (deep-select@1, 2026-11-10): every question this recovery chooses is selectable (not quarantined), answerable with
+ * the learner's input (keyboardOffered), within the learner's grade (intervention.withinGrade), fresh, and, when it follows
+ * teaching of its skill (the original skill after any lesson on it; another skill after this episode's lesson on it), covered
+ * by the method that lesson taught (method-alignment@1 followupCompatible). A probe on a skill not yet taught in the episode is a
+ * diagnostic and needs no taught method. When no question qualifies, the recovery stops and says so (escalate); it never
+ * substitutes an unsuitable one. Saved answers are read by the same rule: an answer to a question that would not be chosen now
+ * (or a post-teaching answer whose method was not taught by then) stays in the records but is not evidence for a verdict or for
+ * "solved after help".
  * Nothing here authors, approves or regenerates content.
  */
 import { moduleFor, question, type Module } from "./content";
 import { DAY, evidenceFor, independentAttempt, rightAnswer, type SkillEvidence } from "./evidence";
 import { phasePool, problemKeyOf, problemOf, type Phase } from "./families";
 import { graph } from "./graph";
-import { establishedIds, moduleState, teachable, type ModuleState } from "./intervention";
+import { establishedIds, moduleState, teachable, withinGrade, type ModuleState } from "./intervention";
 import { modulePhasePool } from "./library";
+import { alignmentActive, followupCompatible } from "./method-alignment";
+import { selectable } from "./question-status";
+import { keyboardOffered } from "./written";
 import type { Attempt, LearnerRecords } from "./records";
 import { connectedSkill, connectionConfig, validSkillTask } from "./skill-connections";
 import { presentedProblems, unitOfQuestion } from "./skill-units";
@@ -212,10 +223,36 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   let evB: ((id: string) => SkillEvidence) | null = null;
   const evBefore = (id: string) => (evB ??= evidenceFor("deep-recovery", before, Date.parse(t0)).get)(id);
   const presented = presentedProblems(records, (c) => moduleFor(c) ?? null);
-  const fresh = (q: string) => !presented.has(problemKeyOf(q));
+  /** deep-select@1: the lesson a question on this skill would follow up, with the records as they stood (null: a diagnostic) */
+  const lessonBefore = (q: string, recs: LearnerRecords, at: string | null) => {
+    let c: string;
+    try { c = question(q).competency; } catch { return null; }
+    const t = recs.teaching.filter((x) => x.competency === c && (at === null || x.at < at)).at(-1);
+    if (!t) return null;
+    // the original skill: any lesson on it (its own module's teaching, before or in this episode); another skill: this episode's lesson
+    if (target(c) !== own && !myTeaching.includes(t)) return null;
+    const m = moduleFor(c), st = m?.strategies.find((x) => x.id === t.strategy);
+    return m && st ? { m, st } : null;
+  };
+  /** deep-select@1: the taught method covers the question (true for a diagnostic, or a lesson with no method map: legacy) */
+  const methodOk = (q: string, recs: LearnerRecords, at: string | null) => {
+    const l = lessonBefore(q, recs, at);
+    return !l || !alignmentActive(l.m, l.st, recs) || followupCompatible(l.m, l.st, q, recs);
+  };
+  const suitable = (q: string) => { try { return selectable(base(q)) && selectable(q) && keyboardOffered(q) && withinGrade(records, q); } catch { return false; } };
+  const fresh = (q: string) => !presented.has(problemKeyOf(q)) && suitable(q) && methodOk(q, records, null);
+  /** a saved answer is evidence only if its question would be chosen by the same rule, as the records stood before it */
+  const prior = (at: string): LearnerRecords => ({ ...records, attempts: records.attempts.filter((x) => x.at < at), teaching: records.teaching.filter((x) => x.at < at) });
+  const supportedMemo = new Map<Attempt, boolean>();
+  const supported = (a: Attempt) => {
+    if (a === first) return true; // the problem itself, as the learner met it
+    let ok = supportedMemo.get(a);
+    if (ok === undefined) { ok = suitable(a.questionId) && methodOk(a.questionId, prior(a.at), a.at); supportedMemo.set(a, ok); }
+    return ok;
+  };
 
   // a right answer chosen from options can be a guess: the trailing run of right answers must hold an open (typed) answer, or two
-  const valid = (a: Attempt) => !o.validDays || now - Date.parse(a.at) <= o.validDays * DAY;
+  const valid = (a: Attempt) => (!o.validDays || now - Date.parse(a.at) <= o.validDays * DAY) && supported(a);
   const enough = (xs: Attempt[]) => { const run: Attempt[] = []; for (let i = xs.length - 1; i >= 0 && rightAnswer(xs[i]); i--) run.push(xs[i]); return run.some((a) => !isChoice(a.questionId)) || run.length >= 2; };
   // sub-skills (skill-connections): a competency with a versioned sub-skill mapping is "known" only when its core sub-skills (the
   // ones a broad "shown alone" claim implies) each have a right answer in this episode; one easy sub-skill does not stand for all
@@ -224,7 +261,7 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   const uncovered = (c: string): string[] => {
     const cfg = cfgOf(c);
     if (!cfg) return [];
-    const got = new Set(mine.filter((a) => independentAttempt(a) && rightAnswer(a) && skillOfQ(a.questionId) === c).map((a) => subOf(c, a.questionId)));
+    const got = new Set(mine.filter((a) => independentAttempt(a) && rightAnswer(a) && supported(a) && skillOfQ(a.questionId) === c).map((a) => subOf(c, a.questionId)));
     return cfg.core.filter((id) => !got.has(id));
   };
   const reading = (c: string): SkillReading => {
@@ -256,7 +293,7 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
   const wasFailing = (c: string) => { const xs = mine.filter((a) => valid(a) && independentAttempt(a) && skillOfQ(a.questionId) === c); return xs.filter((a) => !rightAnswer(a)).length >= 2 && !xs.some(rightAnswer); };
   /** a prerequisite not yet settled either way in this episode (no verdict, or one answer only) */
   const untested = (c: string, p: string[]) => !p.includes(c) && graph.byId.has(c) && !!moduleFor(c) && (() => { const r = reading(c); return r.verdict === "unknown" || r.verdict === "unsure"; })();
-  const lastWrongOn = (c: string) => mine.filter((a) => independentAttempt(a) && !rightAnswer(a) && skillOfQ(a.questionId) === c).at(-1)?.questionId ?? null;
+  const lastWrongOn = (c: string) => mine.filter((a) => independentAttempt(a) && !rightAnswer(a) && supported(a) && skillOfQ(a.questionId) === c).at(-1)?.questionId ?? null;
   const poolLists = (m: Module): (() => string[])[] => [() => [...m.diagnostics, ...m.practice, ...m.transfer], ...PHASES.map((ph) => () => (m.pool ? modulePhasePool(m, ph) : []))];
   const freshOn = (c: string): string | null => {
     const m = moduleFor(c);
@@ -298,7 +335,11 @@ export function deepRecovery(originalQid: string, records: LearnerRecords, evide
     const what = next === "goal" ? "a fresh problem of the same kind" : next === "teach" ? `an explanation of ${nameOf(active ?? own)}` : `a fresh question on ${nameOf(active ?? own)}`;
     return out({ ...plain, phase: "pause", path: p, active, confidence: "unsure", next: { phase: next, active }, reason: `That is enough for one sitting (${sessEffort} questions and explanations). Nothing is finished yet and nothing is counted as solved. ${done.length ? `Already worked on and now right on your own: ${done.join(", ")}. ` : ""}Your place is saved: next time starts with ${what}, then back up to a fresh problem of the same kind.` });
   };
-  const noFresh = (p: string[]) => out({ ...plain, phase: "escalate", path: p, active: own, confidence: "unsure", reason: match.scope ? `There is no fresh question left that tests the same skill as the original (${match.scope}), and OpenPath will not substitute a different one. Go through it with a teacher or parent.` : "There is no fresh question that OpenPath can show tests the same skill as this one (it has no skill mapping), and it will not substitute a different one. Go through it with a teacher or parent." });
+  /** deep-select@1: fresh questions of the same skill exist, but none uses a method the learner was taught */
+  const untaughtOnly = () => { if (!match.scope) return false; const fam = familyOf(originalQid), m = moduleFor(own); return firstPassing([...(fam ? PHASES.map((ph) => () => phasePool(fam, ph)) : []), ...(m ? poolLists(m) : [])], (id) => !presented.has(problemKeyOf(id)) && suitable(id) && match.accepts(id)) !== null; };
+  const noFresh = (p: string[]) => untaughtOnly()
+    ? out({ ...plain, phase: "escalate", path: p, active: own, confidence: "unsure", reason: "The fresh questions of the same kind left here need a method the explanation you were given has not taught yet, so OpenPath will not check you on them, and it will not substitute a different kind of question. Go through it with a teacher or parent." })
+    : out({ ...plain, phase: "escalate", path: p, active: own, confidence: "unsure", reason: match.scope ? `There is no fresh question left that tests the same skill as the original (${match.scope}), and OpenPath will not substitute a different one. Go through it with a teacher or parent.` : "There is no fresh question that OpenPath can show tests the same skill as this one (it has no skill mapping), and it will not substitute a different one. Go through it with a teacher or parent." });
 
   let ownShownBefore = false;
   try { ownShownBefore = SHOWN.includes(evBefore(own).status); } catch { /* none */ }

@@ -1,8 +1,7 @@
 /**
  * method-alignment@1 × Grade 8 (foundations fix, 2026-11-09): a Grade 8 learner taught Pythagoras is shown how to find a shorter
  * side before any follow-up asks for one, whichever mapped explanation the engine gives, and the shorter-side delayed check is then
- * asked and answered instead of stopping as a method gap. (Verification of the whole competency still needs the converse and
- * generalisation families mapped to an explanation: an open decision, not asserted here.)
+ * asked and answered instead of stopping as a method gap. The converse and the triple rules: pythagoras-methods.test.ts.
  */
 import assert from "node:assert/strict";
 import { test } from "node:test";

@@ -18830,6 +18830,22 @@
       "demonstration"
      ],
      "supersedes": "sha256:9dcf0fa47594dcabdbd70b56619818fba5280eb7c69127efed5cf884038d0888"
+    },
+    {
+     "contentHash": "sha256:ec4069e1364e8ac83ec26814704fc55155015ea7e9cfa7fd62608415ca8ba5bb",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-10T03:49:27.308Z",
+      "note": "content changed: the decision on sha256:249d0b22680c (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:249d0b22680c68914959c893526e3d99d5f1ccace0b3e7201e3f6a7b8fc97726"
     }
    ]
   },
@@ -18856,6 +18872,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:b166d1dd2a67517ce9b5c80c873b705d2d6649a33f935ba7c3308cada091f198",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-10T03:49:27.309Z",
+      "note": "content changed: the decision on sha256:cf563812cde2 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:cf563812cde2ead77396d741d346fcdb285606d2d695cec4da52fad443a5038a"
     }
    ]
   },
@@ -18882,6 +18914,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:bab2a5f2b406f1c918b4c71dfa380097daad581b059350448d449ecb510c7185",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-10T03:49:27.307Z",
+      "note": "content changed: the decision on sha256:3c87d8a47a27 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:3c87d8a47a271d2165443c988ddacd066b2b1c2267741ccde43acd0cfeb03630"
     }
    ]
   },
