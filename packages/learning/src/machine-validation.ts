@@ -31,7 +31,7 @@ export const writtenHash = (q: Question) => hashOf({ id: q.id, type: q.type, pro
 export const machineRegistry = data as unknown as MachineRegistry;
 export const MACHINE_VALIDATION_LABEL = "Machine-checked (machine-validation@1): answer independently re-derived and found correct. Not educator-reviewed.";
 
-const G = globalThis as { __openpathMachineValidation?: { on: boolean; reg: MachineRegistry | null; index?: Map<string, MachineEntry & { out: Set<string> }> } };
+const G = globalThis as { __openpathMachineValidation?: { on: boolean; reg: MachineRegistry | null; index?: Map<string, MachineEntry & { out: Set<string> }>; memo?: Map<string, string | undefined> } };
 const state = () => (G.__openpathMachineValidation ??= { on: true, reg: null });
 /** Switch the automated route off or on (on by default), or use another registry (tests). */
 export function useMachineValidation(on: boolean, reg: MachineRegistry | null = null) {
@@ -48,6 +48,16 @@ function entryOf(fam: string) {
 export function machineReleaseOf(qid: string): string | undefined {
   const s = state();
   if (!s.on) return undefined;
+  // the registry and the content are fixed while the app runs, and this is asked for every question on every evidence
+  // calculation: each answer is worked out once (useMachineValidation starts afresh)
+  const memo = (s.memo ??= new Map());
+  if (memo.has(qid)) return memo.get(qid);
+  const at = releaseTime(qid);
+  memo.set(qid, at);
+  return at;
+}
+function releaseTime(qid: string): string | undefined {
+  const s = state();
   if (!qid.startsWith("gen:")) {
     // a hand-written question: an independent reviewer re-derived its stored answer from the prompt alone, and it is unchanged since
     const h = (s.reg ?? machineRegistry).written?.[qid];

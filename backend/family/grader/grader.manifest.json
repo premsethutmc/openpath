@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "3b2eb24d86f75853ebe27e0bf205cf04150325f09534abe7301182f4c0978be6",
+ "sha256": "10961aea156c039d639dade986e5367c7035e8cc41d8ad00d4e9581b7d4c2edf",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -197,7 +197,7 @@
   "packages/learning/src/kernel-adapter.ts": "bfaf8e026ac0ed6038ebe4f53d7ebe827a80e8b474a57f2938d71bf0f8392b57",
   "packages/learning/src/library.ts": "bae95f77fa3ea9e38a1e5575f6adfde2d8a505e53060cff9cb96450d1f920c07",
   "packages/learning/src/linear-algebra-kernel.ts": "e7badeee835bc6c62965f4377b176da727b4936e4831e4efd0e42ff334f63d32",
-  "packages/learning/src/machine-validation.ts": "abbb30c992a7526ee64162056f6ccaf4de57375bf6a580c62fd220e5a004df28",
+  "packages/learning/src/machine-validation.ts": "a72d2793f84a3439c97c79e06a10b8081aa90b022f37e368197750f513b677b8",
   "packages/learning/src/math-kernel.ts": "3142b8f20ba62afd53f3aee168e5953cba6457900a371622230876938a0c8e4d",
   "packages/learning/src/meaning.ts": "e08d794e310b4d993be9ea353cfa48e382ea294cdefadb93efeca671b666fd92",
   "packages/learning/src/method-alignment.ts": "4da2eeac0a2e836ec59f72941202a028f2f4781f3c0bb85b5613c0cd2de2889d",
