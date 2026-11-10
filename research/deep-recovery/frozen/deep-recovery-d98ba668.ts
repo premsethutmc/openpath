@@ -36,15 +36,15 @@
  * Missing content: a root skill with no module, or no explanation that passes the teaching-eligibility gate, stops as "blocked".
  * Nothing here authors, approves or regenerates content.
  */
-import { moduleFor, question, type Module } from "../content";
-import { DAY, evidenceFor, independentAttempt, rightAnswer, type SkillEvidence } from "../evidence";
-import { phasePool, problemKeyOf, problemOf, type Phase } from "../families";
-import { graph } from "../graph";
-import { establishedIds, moduleState, teachable, type ModuleState } from "../intervention";
-import { modulePhasePool } from "../library";
-import type { Attempt, LearnerRecords } from "../records";
-import { connectedSkill, connectionConfig, validSkillTask } from "../skill-connections";
-import { presentedProblems, unitOfQuestion } from "../skill-units";
+import { moduleFor, question, type Module } from "../../../packages/learning/src/content";
+import { DAY, evidenceFor, independentAttempt, rightAnswer, type SkillEvidence } from "../../../packages/learning/src/evidence";
+import { phasePool, problemKeyOf, problemOf, type Phase } from "../../../packages/learning/src/families";
+import { graph } from "../../../packages/learning/src/graph";
+import { establishedIds, moduleState, teachable, type ModuleState } from "../../../packages/learning/src/intervention";
+import { modulePhasePool } from "../../../packages/learning/src/library";
+import type { Attempt, LearnerRecords } from "../../../packages/learning/src/records";
+import { connectedSkill, connectionConfig, validSkillTask } from "../../../packages/learning/src/skill-connections";
+import { presentedProblems, unitOfQuestion } from "../../../packages/learning/src/skill-units";
 
 export const DEEP_RECOVERY_POLICY = "deep-recovery@0" as const;
 export interface DeepRecoveryOptions {

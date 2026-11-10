@@ -3,14 +3,14 @@
  * real SliceSession (real grader, records, evidence, module teaching) while `runDeep` drives the prototype. The results describe
  * the prototype's behaviour against these MODELS; they are not evidence about how real children learn.
  *
- *   node --import tsx src/journey/deep-recovery-sim.ts <seedFrom> <seedTo> [type,...]   -> one JSON line per run
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-sim.ts <seedFrom> <seedTo> [type,...]   -> one JSON line per run
  */
 import { question } from "../../../packages/learning/src/content";
 import { phasePool } from "../../../packages/learning/src/families";
 import { graph } from "../../../packages/learning/src/graph";
-import { runDeep } from "./deep-recovery-journey";
-import { right, wrong } from "./learners";
-import { SliceSession } from "./session";
+import { runDeep } from "../../../frontend/src/journey/deep-recovery-journey";
+import { right, wrong } from "../../../frontend/src/journey/learners";
+import { SliceSession } from "../../../frontend/src/journey/session";
 
 const P = "MATH.";
 export const OWN = P + "calculus.integration-methods";

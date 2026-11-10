@@ -1,7 +1,7 @@
 /**
  * Summary of phase-4 simulation JSONL: per (goal, learner, engine) every run counted (errors stay in the denominator as their own
  * outcome); 95% Wilson intervals for rates, seeded bootstrap (2000) for means and for paired p4 - p3 differences.
- *   node --import tsx src/journey/deep-recovery-summary4.ts <files...>
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-summary4.ts <files...>
  */
 import { readFileSync } from "node:fs";
 import { wilson } from "./deep-recovery-sim-summary";

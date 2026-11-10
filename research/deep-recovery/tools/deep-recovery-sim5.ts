@@ -11,19 +11,19 @@
  *   consistent       selective, but wrong goal answers since the last lesson count against a later streak (right - wrong)
  *   consistent-first consistent + delayed-first
  * Outcome per run: solved-fresh-unaided | false-reassurance | provisional | pause | blocked | handed-over | error
- *   node --import tsx src/journey/deep-recovery-sim5.ts <seedFrom> <seedTo> <rule,...> [orig:type,...]
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-sim5.ts <seedFrom> <seedTo> <rule,...> [orig:type,...]
  */
 
 import type { DeepRecoveryOptions } from "../../../packages/learning/src/deep-recovery";
 import { RETENTION_DAYS } from "../../../packages/learning/src/evidence";
 import { phasePool } from "../../../packages/learning/src/families";
 import { graph } from "../../../packages/learning/src/graph";
-import { runDeep } from "./deep-recovery-journey";
+import { runDeep } from "../../../frontend/src/journey/deep-recovery-journey";
 import { mulberry32, SimLearner, type Truth } from "./deep-recovery-sim";
 import { ORIGINALS, TYPES } from "./deep-recovery-sim3";
-import { right } from "./learners";
-import { SliceSession } from "./session";
-import { wrongShaped } from "./wrong-answers";
+import { right } from "../../../frontend/src/journey/learners";
+import { SliceSession } from "../../../frontend/src/journey/session";
+import { wrongShaped } from "../../../frontend/src/journey/wrong-answers";
 
 const BASE: DeepRecoveryOptions = { confirm: "selective", reuse: true, sessionBudget: 40, budget: 120, validDays: RETENTION_DAYS };
 export const RULES: Record<string, DeepRecoveryOptions> = {

@@ -27,6 +27,10 @@ Short reference for the daily loop. Commands run from the repository root unless
 - `bun test packages/learning/src` (about 10 minutes) is **not** run in CI yet (CI has no Bun); run it before pushing
   engine changes.
 
+- **Question selection boundary:** `node tools/question-selection-boundary.mjs` checks the registered selectors and that no app
+  source reaches offline deep-recovery tools. It also runs in the Node frontend suite/CI and the Bun question-status test.
+  Offline simulation commands now live under `research/deep-recovery/tools/`; see its README.
+
 ## Review what a learner sees
 - `cd frontend && node --import tsx scripts/learner-view.mts <competency> --board cbse|tn --grade N [--out file]`:
   the lesson page (sections, their question and grade, the picture drawn, worked steps, working, tips), the practice queue,

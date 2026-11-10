@@ -12,7 +12,7 @@ import { make } from "../../../packages/learning/src/session";
 import { connectedSkill, connectionConfig } from "../../../packages/learning/src/skill-connections";
 import { modulePhasePool } from "../../../packages/learning/src/library";
 import { runDeep, structuredLearner, type Answerer } from "./deep-recovery-journey";
-import { trace } from "./deep-recovery-trace4";
+import { trace } from "../../../research/deep-recovery/tools/deep-recovery-trace4";
 import { right, wrong } from "./learners";
 import { SliceSession } from "./session";
 
@@ -132,7 +132,7 @@ test("KNOWN LIMITATION (kept visible): two right answers do not rule out lucky g
 });
 
 test("regression (held-out seed 3014, phase 4): one wrong answer right after a skill's OWN lesson is not taken as 'still failing'", async () => {
-  const { simulate4 } = await import("./deep-recovery-sim4");
+  const { simulate4 } = await import("../../../research/deep-recovery/tools/deep-recovery-sim4");
   const r = simulate4("p4", "O2", "single-gap", 3014) as Record<string, unknown>;
   assert.equal(r.status, "ok");
   assert.equal(r.outcome, "solved-fresh-unaided", JSON.stringify(r.perSitting));

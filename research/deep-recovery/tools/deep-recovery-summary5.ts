@@ -2,7 +2,7 @@
  * Summary of phase-5 (confidence) JSONL: every run counted (errors stay in each denominator as their own outcome); 95% Wilson
  * intervals for rates, seeded bootstrap (2000) for means and paired differences against the selective rule (same seed).
  * "Fewer questions" (Δquestions) and "more sittings" (Δsittings) are reported separately.
- *   node --import tsx src/journey/deep-recovery-summary5.ts <files...>
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-summary5.ts <files...>
  */
 import { readFileSync } from "node:fs";
 import { wilson } from "./deep-recovery-sim-summary";

@@ -8,7 +8,7 @@
  *                 (only for a small answer space or no prior record) | "proportionate-space" | "delayed-first" (phase 5: a later
  *                 sitting) - all with the current selective rule after recovery.
  * Guesser assumptions: right by luck on a typed answer 2%, 10% or 20% (and 25-30% on a pick from options).
- *   node --import tsx src/journey/deep-recovery-sim6.ts <A|B> <seedFrom> <seedTo> [policy,...] [orig:type,...]
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-sim6.ts <A|B> <seedFrom> <seedTo> [policy,...] [orig:type,...]
  */
 import { moduleFor, question } from "../../../packages/learning/src/content";
 import type { DeepRecoveryOptions } from "../../../packages/learning/src/deep-recovery";
@@ -16,12 +16,12 @@ import { independentAttempt, rightAnswer, RETENTION_DAYS } from "../../../packag
 import { phasePool, problemKeyOf } from "../../../packages/learning/src/families";
 import { graph } from "../../../packages/learning/src/graph";
 import { presentedProblems } from "../../../packages/learning/src/skill-units";
-import { runDeep } from "./deep-recovery-journey";
+import { runDeep } from "../../../frontend/src/journey/deep-recovery-journey";
 import { mulberry32, SimLearner, type Truth } from "./deep-recovery-sim";
 import { ORIGINALS, TYPES } from "./deep-recovery-sim3";
-import { right } from "./learners";
-import { SliceSession } from "./session";
-import { wrongShaped } from "./wrong-answers";
+import { right } from "../../../frontend/src/journey/learners";
+import { SliceSession } from "../../../frontend/src/journey/session";
+import { wrongShaped } from "../../../frontend/src/journey/wrong-answers";
 
 const BASE: DeepRecoveryOptions = { confirm: "selective", reuse: true, sessionBudget: 40, budget: 120, validDays: RETENTION_DAYS };
 export const POLICIES: Record<"A" | "B", Record<string, DeepRecoveryOptions>> = {

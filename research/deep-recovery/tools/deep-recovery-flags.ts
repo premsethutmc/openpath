@@ -1,7 +1,7 @@
 /**
  * deep-recovery@0 research: graph relations flagged for EDUCATOR REVIEW (nothing here changes the graph or any content).
  * Each flag is recomputed from the shipped graph and content so it can be audited:
- *   node --import tsx src/journey/deep-recovery-flags.ts > ../research/deep-recovery/review/flagged-links.json
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-flags.ts > ../research/deep-recovery/review/flagged-links.json
  */
 import { graph } from "../../../packages/learning/src/graph";
 import { moduleFor, question } from "../../../packages/learning/src/content";

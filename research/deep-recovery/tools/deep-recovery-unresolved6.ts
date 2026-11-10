@@ -2,7 +2,7 @@
  * Phase 6 (worker A): how many of the OLD simulated answers the server would NOT have counted (verdict "unresolved" in the deployed
  * default grading mode), per run. Re-runs the phase-5 held-out runs (old answers, deterministic) for one rule, collects every answer,
  * and asks the server's own decision function (server_verdicts.py) once per distinct (question, answer).
- *   node --import tsx src/journey/deep-recovery-unresolved6.ts <seedFrom> <seedTo> <rule>
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-unresolved6.ts <seedFrom> <seedTo> <rule>
  */
 import { spawnSync } from "node:child_process";
 import { readdirSync } from "node:fs";

@@ -4,8 +4,7 @@
  * Definitions and historical records are kept.
  */
 import { describe, expect, test } from "bun:test";
-import { readFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
+import { inspectSelectionBoundary, REGISTERED_SELECTORS } from "../../../tools/question-selection-boundary.mjs";
 import { contractFor } from "./assessment.ts";
 import { contractV2 } from "./grading/contract.ts";
 import { moduleFor, modules, poolFamilies, question, quarantinedFromModules, withoutQuarantined } from "./content.ts";
@@ -99,28 +98,12 @@ describe("selectors never return a quarantined question", () => {
       expect(d.events.filter((e: any) => e.record === "attempt" && quarantined(e.questionId))).toEqual([]);
     }
   }, LONG);
-  test("selection code is registered: only these files import the pool selectors (each applies selectable() or reads filtered modules)", () => {
-    // a new selector must apply selectable() and be added here in a reviewed change
-    const ALLOWED = ["frontend/src/curriculum/TeachingContent.tsx", "frontend/src/learning/adaptive-loop.ts", "frontend/src/review/Main.tsx", "packages/learning/src/compiler.ts",
-      // deep-recovery.ts: added in a reviewed change (deep-select@1, research, off by default). Every question it chooses passes selectable(),
-      // keyboardOffered(), the grade ceiling and, after teaching, the taught method; see frontend/src/journey/deep-select.test.ts
-      "packages/learning/src/deep-recovery.ts",
-      "packages/learning/src/exact/verify.ts",
-      // gated-mastery.ts: added in a reviewed change (M1, shadow only). proposedRetentionPlan reads phasePool (which applies selectable()) for
-      // a due sub-skill's delayed-check items; it is never read by the engine, the plan or the app (the module's own selector is unchanged)
-      "packages/learning/src/gated-mastery.ts",
-      // hypotheses.ts: added in a reviewed change (Milestone 2). Its only selector, discriminatingProbe, applies selectable(), formCertified() and
-      // the grade ceiling, and its result is asked only through moduleState; see "hypotheses.ts resolution probes pass the eligibility gate".
-      "packages/learning/src/hypotheses.ts",
-      "packages/learning/src/intervention.ts",
-      // lesson-checks.ts: added in a reviewed change (lesson-checks@1, report only). pageCandidates reads modulePhasePool (phasePool applies
-      // selectable()) to rebuild the lesson page's practice candidates exactly as TeachingContent.tsx does; nothing it returns is served
-      "packages/learning/src/lesson-checks.ts",
-      "packages/learning/src/library.ts", "packages/learning/src/reasoning.ts", "packages/learning/src/spec.ts"];
-    const root = new URL("../../../", import.meta.url).pathname, hits: string[] = [];
-    const walk = (d: string) => { for (const e of readdirSync(join(root, d), { withFileTypes: true })) { const r = `${d}/${e.name}`; if (e.isDirectory()) { if (e.name !== "node_modules") walk(r); } else if (/\.tsx?$/.test(e.name) && !/\.test\.tsx?$/.test(e.name) && /import \{[^}]*\b(pool|phasePool|variantsOf|modulePhasePool|fromPool)\b[^}]*\} from/.test(readFileSync(join(root, r), "utf8"))) hits.push(r); } };
-    for (const d of ["packages/learning/src", "packages/mathematics/src", "frontend/src"]) walk(d);
-    expect(hits.sort()).toEqual(ALLOWED);
+  test("selection code is registered: every pool reader or re-export is reviewed and offline research stays out of the app", () => {
+    // A new selector must apply selectable() and enter REGISTERED_SELECTORS in a reviewed change.
+    const root = new URL("../../../", import.meta.url).pathname;
+    const result = inspectSelectionBoundary(root);
+    expect(result.readers).toEqual([...REGISTERED_SELECTORS].sort());
+    expect(result.violations).toEqual([]);
   }, LONG);
 });
 

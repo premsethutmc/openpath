@@ -13,7 +13,7 @@ import { problemKeyOf } from "../../../packages/learning/src/families";
 import { runDeep, structuredLearner, type Answerer } from "./deep-recovery-journey";
 import { right, wrong } from "./learners";
 import { SliceSession } from "./session";
-import { simulate4 } from "./deep-recovery-sim4";
+import { simulate4 } from "../../../research/deep-recovery/tools/deep-recovery-sim4";
 
 const P = "MATH.";
 const ORIG = "gen:aupfr:1,-3,3,-2,-4";

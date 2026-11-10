@@ -2,7 +2,7 @@
  * Step-by-step trace of a phase-3 simulation run (research). Rebuilds the run exactly as deep-recovery-sim3.ts does for the same
  * (engine, original, type, seed) and prints one line per step: n, type, decision, question / lesson, skill, sub-skill, right?,
  * path, effort before the step, the engine's reason. The last lines check reachability of the goal independently of the budget.
- *   node --import tsx src/journey/deep-recovery-trace4.ts <engine> <O1|O2> <type> <seed> [budget]
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-trace4.ts <engine> <O1|O2> <type> <seed> [budget]
  */
 import { question } from "../../../packages/learning/src/content";
 import { originalMatcher } from "../../../packages/learning/src/deep-recovery";
@@ -11,11 +11,11 @@ import { graph } from "../../../packages/learning/src/graph";
 import { connectedSkill, connectionConfig } from "../../../packages/learning/src/skill-connections";
 import { presentedProblems } from "../../../packages/learning/src/skill-units";
 import { moduleFor } from "../../../packages/learning/src/content";
-import { runDeep } from "./deep-recovery-journey";
+import { runDeep } from "../../../frontend/src/journey/deep-recovery-journey";
 import { mulberry32, SimLearner } from "./deep-recovery-sim";
 import { ORIGINALS, TYPES } from "./deep-recovery-sim3";
-import { right } from "./learners";
-import { SliceSession } from "./session";
+import { right } from "../../../frontend/src/journey/learners";
+import { SliceSession } from "../../../frontend/src/journey/session";
 
 const sh = (s: string | null | undefined) => (s ?? "-").replace(/^MATH\./, "");
 const base = (q: string) => q.replace(/:(mc|w)$/, "");

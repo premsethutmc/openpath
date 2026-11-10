@@ -2,7 +2,7 @@
  * Summary of phase-6 (sim6) JSONL: every run counted (errors stay in each denominator), 95% Wilson intervals for rates, seeded
  * bootstrap (2000) for means and for paired differences against the current policy on the same seed ("selective" in experiment A,
  * "accept" in experiment B). Extra questions and extra sittings are reported separately.
- *   node --import tsx src/journey/deep-recovery-summary6.ts <files...>
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-summary6.ts <files...>
  */
 import { readFileSync } from "node:fs";
 import { wilson } from "./deep-recovery-sim-summary";

@@ -14,7 +14,7 @@ import type { DeepRecoveryOptions } from "../../../packages/learning/src/deep-re
 import { runDeep, structuredLearner } from "./deep-recovery-journey";
 import { right } from "./learners";
 import { SliceSession } from "./session";
-import { simulate5 } from "./deep-recovery-sim5";
+import { simulate5 } from "../../../research/deep-recovery/tools/deep-recovery-sim5";
 import { wrongShaped } from "./wrong-answers";
 
 const P = "MATH.";

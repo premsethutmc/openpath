@@ -2,25 +2,30 @@
 
 Read this file first; status is branch-local, so verify refs. Keep it under ~60 lines; update it at each milestone.
 
-Updated: 2026-11-10 (Pythagoras methods, deep-recovery selection and saved answers, on the combined candidate)
+Updated: 2026-11-10 (offline research pool boundary, separate follow-up from PR #124 at `04d76477`)
 
 ## Rules (product owner)
-- No merge or deploy without the owner's explicit approval. PRs are drafts. No educator approval by an agent.
+- No merge or deploy without the owner's explicit approval. PRs are drafts. AI review/fixes may proceed; do not label them human educator approval.
 - One bounded milestone at a time: scope, finish, report commit/tests/defects/readiness, stop.
 - Long jobs run in GitHub Actions; schedule a check-in instead of waiting. How-to: `docs/runbooks/DEV.md`.
 
 ## Branches (all drafts, none merged)
-- `fix/foundations-2026-11-09` (this, PR #124): #121 (method alignment, dot, `5d83947`) + #122 (dev efficiency on Grade 8,
-  `82f18fd`) combined, the foundations fix (`5e4c1fd`), then this milestone. Base chain of #122: #119 Grade 8 → #117 Grade 7.
+- `fix/foundations-2026-11-09` (upstream PR #124): #121 (method alignment, dot, `5d83947`) + #122 (dev efficiency on Grade 8,
+  `82f18fd`) combined, the foundations fix (`5e4c1fd`), then its Pythagoras/recovery milestone. Base chain of #122: #119 Grade 8 → #117 Grade 7.
 - Owners: dot = method alignment (#121) and TN Grades 1–3 ingestion (separate; not touched here); Claude = Grade 8, #122.
 - Base for maths work: `consolidation/openpath-candidate` (#112). Others open: #115, #116, #118, #120.
 
 ## This milestone (2026-11-10)
+- `fix/research-pool-boundary-2026-11-10`: moved offline pool readers/tools to `research/deep-recovery/`; kept their logic/results.
+  Node CI and Bun share a selector/import-boundary check; app code cannot reach offline research. 8 guard + 20 recovery tests and typecheck pass.
+  See `docs/milestones/RESEARCH_POOL_BOUNDARY.md`. The combined #124 branch is unchanged; no merge/deploy.
+
+## Combined-candidate milestone (2026-11-10)
 - Pythagoras (method-sections@1, `library.ts`): "Step by step", "Squares on the sides" and "Spot a triple" now also carry a
   converse section and a triple-rule section (worked examples: `ahconv`, `ahgen` 2m rule; the m² − n², 2mn, m² + n² rule is in the
   text, no worked example of its own). Method map: `ahconv` → pythagoras-converse, `ahgen` → triple-rule-2m / triple-rule-mn; both
-  mapped explanations list them (pending educator review). #121's gate unchanged (a hypotenuse after "Step by step" is still
-  refused). Grade 8 Pythagoras now verified on both boards; each method is shown before it is asked (`pythagoras-methods.test.ts`).
+  mapped explanations list them (unapproved). #121's gate unchanged (a hypotenuse after "Step by step" is still
+  refused). Both boards pass the existing synthetic journeys; the independent AI review below found teaching gaps those tests miss.
 - Ratio recovery tests: ratio is teachable now, so scale drawings → ratio is taught and returns (both tests updated). A real
   missing-content gap is tested on integer addition → integers (blocked, nothing solved); the single-slip tests are kept.
 - deep-select@1 (`deep-recovery.ts`, research, off): questions must be selectable, keyboard-answerable, within grade, fresh and,
@@ -31,9 +36,8 @@ Updated: 2026-11-10 (Pythagoras methods, deep-recovery selection and saved answe
 - Tests: `deep-select.test.ts`, `pythagoras-methods.test.ts`; regenerated (Node; grader bundle with esbuild 0.28.2).
 
 ## Open defects
-- #121 line: 8 research files still read the question pools unregistered (frontend journey sims, `research-frozen`), so the
-  question-status test fails under Bun (not in CI). `deep-recovery.ts` is fixed and registered.
-- Pythagoras m² − n², 2mn, m² + n² rule: explained in text only (no worked example); mapped, flagged for the educator review.
+- All learning-package tests still need a complete Bun run; the selector/import-boundary check now also runs in Node CI.
+- Pythagoras m² − n², 2mn, m² + n² rule lacks a worked example despite its map. See `PYTHAGORAS_AI_REVIEW_2026_11_10.md` in milestones.
 - Pythagoras "Spot a triple" / "Spot the mistake" / "What it uses" have no method map (#121 legacy path, follow-ups not gated).
 - Grade 8 review-2 majors still open: mixed example in opening sections (M1, M2), exponent as factor (M4), below-grade
   lessons, missing outcomes (straight-line graphs/scale, frequency polygons, map colouring), M3 wrong reason.

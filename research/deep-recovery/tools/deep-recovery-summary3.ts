@@ -2,8 +2,8 @@
  * Summary of deep-recovery simulation JSONL (phase 3), with 95% Wilson intervals for rates and seeded bootstrap (2000 resamples)
  * for means and paired differences. Every run in the input is counted: errored / incomplete / timed-out runs stay in every
  * denominator (as "not solved", "not found", "no false reassurance") and are listed. n/a cells are listed separately.
- *   node --import tsx src/journey/deep-recovery-summary3.ts <files...>             phase-3 records
- *   node --import tsx src/journey/deep-recovery-summary3.ts --phase2 <files...>    phase-2 records, corrected gap measures
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-summary3.ts <files...>             phase-3 records
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-summary3.ts --phase2 <files...>    phase-2 records, corrected gap measures
  */
 import { readFileSync } from "node:fs";
 import { wilson } from "./deep-recovery-sim-summary";

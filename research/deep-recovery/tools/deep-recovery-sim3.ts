@@ -3,7 +3,7 @@
  * Engines on the same seeded learner (paired): p3-current | p3-two-fresh | p3-selective (this branch, three confirmation rules),
  * p2 (frozen phase-2 prototype, d98ba668), app (the shipped two-level recovery on 61edf730, via runScenario).
  *
- *   node --import tsx src/journey/deep-recovery-sim3.ts <seedFrom> <seedTo> <engine,...> [orig:type,...]  -> JSONL, one run per line
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-sim3.ts <seedFrom> <seedTo> <engine,...> [orig:type,...]  -> JSONL, one run per line
  *
  * Gap measures (per hidden root skill, i.e. the deepest missing skill of the learner model):
  *   identified    the engine designated the root as the missing piece (a lesson decision on it, "blocked" on it, or a hand-over
@@ -17,12 +17,12 @@ import { independentAttempt, rightAnswer } from "../../../packages/learning/src/
 import { phasePool } from "../../../packages/learning/src/families";
 import { graph } from "../../../packages/learning/src/graph";
 import { deepRecovery } from "../../../packages/learning/src/deep-recovery";
-import { deepRecovery as deepRecoveryP2 } from "../../../packages/learning/src/research-frozen/deep-recovery-d98ba668";
-import { runDeep } from "./deep-recovery-journey";
+import { deepRecovery as deepRecoveryP2 } from "../frozen/deep-recovery-d98ba668";
+import { runDeep } from "../../../frontend/src/journey/deep-recovery-journey";
 import { mulberry32, SimLearner, type Truth } from "./deep-recovery-sim";
-import { right } from "./learners";
-import { runScenario } from "./scenarios";
-import { SliceSession } from "./session";
+import { right } from "../../../frontend/src/journey/learners";
+import { runScenario } from "../../../frontend/src/journey/scenarios";
+import { SliceSession } from "../../../frontend/src/journey/session";
 
 const P = "MATH.";
 const S = {

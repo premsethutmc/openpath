@@ -2,7 +2,7 @@
  * Phase 5 (confidence): why each phase-4 false-reassurance run passed. Re-runs the run exactly (simulate4 is deterministic per
  * seed) and lists the answers on the goal skill: item, format (typed / choice), options, right?, could the learner model do it
  * (a right answer it could not do = lucky). One JSON line per run.
- *   node --import tsx src/journey/deep-recovery-fr5.ts <phase-4 jsonl>...
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-fr5.ts <phase-4 jsonl>...
  */
 import { readFileSync } from "node:fs";
 import { question } from "../../../packages/learning/src/content";

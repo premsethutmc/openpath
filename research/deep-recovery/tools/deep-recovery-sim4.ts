@@ -6,17 +6,17 @@
  *       RETENTION_DAYS; a paused learner comes back the next day, at most 3 sittings
  * Outcome (one per run):  solved-fresh-unaided (claims solved, learner model can do the goal) | false-reassurance (claims solved,
  *   cannot) | pause (still paused after the last sitting) | blocked | handed-over (escalate) | error
- *   node --import tsx src/journey/deep-recovery-sim4.ts <seedFrom> <seedTo> <p3,p4> [orig:type,...]
+ *   node --import tsx ../research/deep-recovery/tools/deep-recovery-sim4.ts <seedFrom> <seedTo> <p3,p4> [orig:type,...]
  */
 import { question } from "../../../packages/learning/src/content";
 import type { DeepRecoveryOptions } from "../../../packages/learning/src/deep-recovery";
 import { independentAttempt, rightAnswer, RETENTION_DAYS } from "../../../packages/learning/src/evidence";
 import { phasePool } from "../../../packages/learning/src/families";
 import { graph } from "../../../packages/learning/src/graph";
-import { runDeep } from "./deep-recovery-journey";
+import { runDeep } from "../../../frontend/src/journey/deep-recovery-journey";
 import { mulberry32, SimLearner } from "./deep-recovery-sim";
 import { ORIGINALS, TYPES } from "./deep-recovery-sim3";
-import { SliceSession } from "./session";
+import { SliceSession } from "../../../frontend/src/journey/session";
 
 export const P4_OPTIONS: DeepRecoveryOptions = { confirm: "selective", reuse: true, sessionBudget: 40, budget: 120, validDays: RETENTION_DAYS };
 export const P3_OPTIONS: DeepRecoveryOptions = { confirm: "selective" };
