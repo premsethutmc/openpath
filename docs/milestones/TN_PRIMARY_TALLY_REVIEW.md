@@ -8,7 +8,7 @@ Reviewed the lesson ourselves and implemented verified corrections on draft PR #
 - **Irrelevant feedback:** reading and zero questions reused difference feedback. Each question now has a relevant hint, solution and common-error explanation. Zero explains that the category label is not a mark; reading explains groups of five; comparison distinguishes a difference from a total.
 - **Tie wording:** the question referred to a “larger row” even when both counts were ten. Both the app and draft family now describe equal counts without inventing a larger row.
 - **Explanatory clarity:** corrected singular grammar, explained frequency in familiar language, gave a concrete five-book recording task, and completed the 13-versus-8 worked example with pairing and subtraction.
-- **Mobile labels:** removed forced within-word wrapping and fixed table layout. Natural-width label cells, shorter recording labels and explicit column-header scopes replace the earlier cramped layout.
+- **Mobile visuals:** removed forced within-word wrapping and fixed table layout. Natural-width label cells, shorter recording labels and explicit column-header scopes replace the earlier cramped layout. Screenshot inspection then exposed needless shrinking of short tally rows and the zero label; SVG width now follows its number of groups, with a 120px minimum, rather than always reserving 330px. A browser regression requires the zero label to render at least 14px high.
 - **Review language:** removed the repeated learner-facing “educator review pending” banner. The lesson still says it is draft practice and that completion is not mastery or full curriculum coverage. Provenance still explicitly states no external educator review.
 
 ## Mathematical and evidence checks
@@ -19,9 +19,10 @@ New tests verify every question's labels against its prompt, count its actual SV
 
 ## Verification and limits
 
-- Local focused frontend tests: 12 pass. Intake/model/parser tests: 32 pass. Backend foundation tests: 8 pass using an isolated test database.
+- Local focused frontend tests: 12 pass. Intake/model/parser tests: 33 pass. Backend foundation tests: 8 pass using an isolated test database.
 - Full `npm run typecheck` passes with a 4 GB Node heap; foundation app build and standalone tally preview build pass. The full frontend test run was interrupted after a concurrent typecheck was killed with exit 137; typecheck was then rerun alone successfully. The complete test suite remains for CI, not a local full-pass claim.
-- Local Chromium launch was attempted and stopped before any page ran: `socket() failed: Operation not permitted (1)`. New browser checks and screenshot review must therefore run in CI. No local visual-pass claim is made.
+- Local Chromium launch was attempted and stopped before any page ran: `socket() failed: Operation not permitted (1)`. Browser verification runs in CI, not locally.
+- Initial correction commit `d379968` passed [tally run 42775558505](https://github.com/premsethutmc/openpath/actions/runs/42775558505): 12 frontend tests, 8 backend tests, build and all 8 Chromium journeys, including tally at 320/360/900px. Four teaching/recording/practice screenshots were inspected. Artifact 13744106271 has SHA-256 `5b513276d0997f0d73b1631e00f4c25c88048d8a31b9c45150c70265442398d0` and expires November 17. These screenshots identified the short-row scaling issue corrected in the follow-up. Fresh browser results for that final sizing correction are pending at publication; the earlier pass is not claimed for it.
 - No new model API calls in the deterministic tests/builds; the review itself used session tokens.
 
 This pass is deliberately bounded. It does not add a real survey/category-collection activity, a complete table-building assessment, broad randomized transfer, Tamil content, full screen-reader/WCAG testing, classroom efficacy evidence, or complete TN coverage. Those are concrete future work, not an anonymous educator dependency. Other branches, including Claude's #124, remain untouched. No merge or deployment.

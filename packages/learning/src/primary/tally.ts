@@ -43,6 +43,8 @@ const escape = (s: string) => s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '
 /** Every line is one observation. Four uprights + one crossing stroke make exactly five, never six. */
 export function tallySVG(n: number, label = 'Tally marks'): string {
   const t = encodeTally(n);
+  // Keep short rows and the zero label readable instead of scaling 330 empty pixels.
+  const width = Math.max(120, 74 * Math.ceil(n / 5) + 24);
   const segments: string[] = [];
   const line = (x1: number, y1: number, x2: number, y2: number) => segments.push(`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`);
   for (let g = 0; g < t.bundles; g++) {
@@ -51,7 +53,7 @@ export function tallySVG(n: number, label = 'Tally marks'): string {
     line(x - 5, 56, x + 44, 22);
   }
   for (let j = 0; j < t.singles; j++) line(16 + t.bundles * 74 + j * 13, 18, 16 + t.bundles * 74 + j * 13, 60);
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 80" role="img" aria-label="${escape(label + '. ' + describeTally(t))}"><g stroke="#163a59" stroke-width="3.5" stroke-linecap="round">${segments.join('')}</g>${n === 0 ? '<text x="16" y="47" fill="#163a59" font-size="18">No marks</text>' : ''}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} 80" style="max-width:${width}px" role="img" aria-label="${escape(label + '. ' + describeTally(t))}"><g stroke="#163a59" stroke-width="3.5" stroke-linecap="round">${segments.join('')}</g>${n === 0 ? '<text x="16" y="47" fill="#163a59" font-size="18">No marks</text>' : ''}</svg>`;
 }
 export const tallyLesson = {
   title: 'Keep a count with tally marks',

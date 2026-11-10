@@ -58,3 +58,14 @@ test('draft family explanations use singular grammar and do not invent a larger 
   assert.match(diff.explain(diff.solve([10, 10]).steps[0]), /neither row has more/);
   assert.doesNotMatch(diff.prompt([10, 10]), /larger row/);
 });
+
+test('short tally rows retain readable intrinsic size and every stroke stays in the viewBox', () => {
+  for (let n = 0; n <= 20; n++) {
+    const svg = tallySVG(n);
+    const width = Number(svg.match(/viewBox="0 0 (\d+) 80"/)[1]);
+    assert.ok(width >= 120 && width <= 320);
+    if (n <= 5) assert.equal(width, 120);
+    assert.ok(svg.includes(`style="max-width:${width}px"`));
+    for (const coordinate of svg.matchAll(/x[12]="(\d+)"/g)) assert.ok(Number(coordinate[1]) < width);
+  }
+});

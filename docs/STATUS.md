@@ -49,12 +49,12 @@ Updated: 2026-11-10 (tally teaching review; fresh browser checks pending).
 - Head 8e72d33: tally CI 42664467628 green: 7 Chromium journeys, 10 frontend + 8 backend tests.
 - All 7 workflows green on 8e72d33; main CI recovered from a GitHub scheduling error.
 - New tally receipts use shared assisted/practice events; server stamps tally-practice@1.
-- Review: 52 focused local tests pass; full typecheck and build pass; broad tests left to CI.
+- Review: 53 focused local tests pass; full typecheck and build pass; broad tests left to CI.
 
 ## Remaining work / readiness
 - Term III, exhaustive outcome decomposition, handbook/QR coverage and Tamil equivalence unknown.
 - All 48 gaps triaged in `tn-primary-gap-plan.json`; two have partial draft tally prototypes.
 - Board release builder auto-accepts mappings and lacks detailed PDF provenance; not used here.
-- Browser replay: 4 assisted / 2 unassisted / 0 independent; six screenshots inspected.
+- Review CI on d379968: 8 browser journeys pass; SVG sizing follow-up needs fresh CI.
 - Tally wording/labels corrected after AI review; no external educator approval claimed.
 - Fresh browser checks pending; see TN_PRIMARY_TALLY_REVIEW.md for fixes and concrete limits.

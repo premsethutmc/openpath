@@ -25,6 +25,8 @@ async function checkTallyLayout(page) {
     }).map(word => word[0]);
   }));
   assert.deepEqual(splitWords, [], 'row and column labels never break inside words');
+  const zeroLabels = await page.locator('#current-activity .tally-table svg text').evaluateAll(labels => labels.map(label => label.getBoundingClientRect().height));
+  assert.ok(zeroLabels.every(height => height >= 14), 'No marks remains readable on narrow screens');
 }
 const answer = async(page,id,value) => {const f=page.locator(`form[data-question="${id}"]`);await f.getByRole('textbox').fill(value);await f.getByRole('button',{name:'Check',exact:true}).click();await saved(page)};
 for (const width of [320, 360, 900]) test(`tally account teaching, practice, saved resume and isolation at ${width}px`,async()=>{
