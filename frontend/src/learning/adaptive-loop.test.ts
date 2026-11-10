@@ -5,11 +5,15 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { PERSONAS, runLearner, T0 } from "./adaptive-loop";
+import { useMachineValidation } from "../../../packages/learning/src/machine-validation";
 
+// These personas audit the loop on provisional content (stage A1/A2), so the automated route (machine-validation@1, tested in
+// machine-validation.test.ts) is switched off for this file: the first test checks that the provisional gate itself still holds.
+useMachineValidation(false);
 const runs = Object.fromEntries(PERSONAS().map((p) => { const r = p.run(); return [r.learner, r]; }));
 const taught = (r: (typeof runs)[string]) => r.steps.filter((s) => s.teaching).map((s) => s.teaching!.competency);
 
-test("every persona: draft content never verifies mastery (the shared engine holds provisional evidence)", () => {
+test("every persona: provisional content never verifies mastery (machine validation off; the shared engine holds provisional evidence)", () => {
   for (const r of Object.values(runs)) {
     assert.notEqual(r.final.status, "verified", r.learner);
     assert.ok(r.steps.every((s) => !s.evidence || s.evidence.engine === "unavailable"), r.learner);

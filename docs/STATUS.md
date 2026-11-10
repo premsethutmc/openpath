@@ -2,20 +2,27 @@
 
 Read this file first; status is branch-local, so verify refs. Keep it under ~60 lines; update it at each milestone.
 
-Updated: 2026-11-10 (offline research pool boundary, separate follow-up from PR #124 at `04d76477`)
+Updated: 2026-11-10 (machine validation; `main` now holds the whole maths line)
 
 ## Rules (product owner)
 - No merge or deploy without the owner's explicit approval. PRs are drafts. AI review/fixes may proceed; do not label them human educator approval.
 - One bounded milestone at a time: scope, finish, report commit/tests/defects/readiness, stop.
 - Long jobs run in GitHub Actions; schedule a check-in instead of waiting. How-to: `docs/runbooks/DEV.md`.
 
-## Branches (all drafts, none merged)
-- `fix/foundations-2026-11-09` (upstream PR #124): #121 (method alignment, dot, `5d83947`) + #122 (dev efficiency on Grade 8,
-  `82f18fd`) combined, the foundations fix (`5e4c1fd`), then its Pythagoras/recovery milestone. Base chain of #122: #119 Grade 8 → #117 Grade 7.
-- Owners: dot = method alignment (#121) and TN Grades 1–3 ingestion (separate; not touched here); Claude = Grade 8, #122.
-- Base for maths work: `consolidation/openpath-candidate` (#112). Others open: #115, #116, #118, #120.
+## Branches
+- `main` holds the whole maths line. Branch from `main`; short branches, merged back within a day or two.
+- Still open: #121 (dot, method alignment; already inside `main`), #123 (dot, TN Grades 1–3 ingestion; do not touch).
 
-## This milestone (2026-11-10)
+## This milestone (2026-11-10, machine validation)
+- `main` = everything (fast-forward to #125 `08d273c`, owner-approved; #115–#120, #122, #124, #125 closed as included).
+  The owner delegated technical decisions; product, cost, security and deploy decisions still go to him.
+  `openpath-demo` on Render auto-deploys on every push to `main`.
+- machine-validation@1 (`packages/learning/src/machine-validation.ts`, `docs/product/MACHINE_VALIDATION.md`): there are no
+  educators, so a generated question now counts as validated when it is independently certified, unchanged since, and
+  grading-certified. 1,049 of 1,090 families admitted. Verified without the fixture: TN 7 36/50, CBSE 7 35/46, TN 8 31/43,
+  CBSE 8 37/48 (was 0). Never labelled educator review. Next: re-certify 41 held families; certify wording forms.
+
+## Earlier on 2026-11-10 (research pool boundary)
 - `fix/research-pool-boundary-2026-11-10`: moved offline pool readers/tools to `research/deep-recovery/`; kept their logic/results.
   Node CI and Bun share a selector/import-boundary check; app code cannot reach offline research. 8 guard + 20 recovery tests and typecheck pass.
   See `docs/milestones/RESEARCH_POOL_BOUNDARY.md`. The combined #124 branch is unchanged; no merge/deploy.
