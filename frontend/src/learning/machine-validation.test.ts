@@ -22,13 +22,14 @@ const reg = machineRegistry;
 const entry = (fam: string) => reg.entries.find((e) => e.family === fam)!;
 const firstFree = (fam: string) => pool(fam).items.find((p) => !(entry(fam).excluded ?? []).includes(p.id))!.id;
 
-test("the registry admits only typed and multiple-choice forms of known families, and says it is not educator review", () => {
+test("the registry admits only typed, multiple-choice and verified wording forms of known families, and says it is not educator review", () => {
   assert.equal(reg.schema, "machine-validation@1");
   assert.ok(reg.entries.length > 900, `${reg.entries.length} families admitted`);
   assert.ok(Number.isFinite(Date.parse(reg.validatedAt)));
   for (const e of reg.entries) {
     assert.ok(FAMILIES.has(e.family), e.family);
-    assert.ok(e.forms.length > 0 && e.forms.every((f) => f === "typed" || f === "mc"), `${e.family}: ${e.forms}`);
+    assert.ok(e.forms.length > 0 && e.forms.every((f) => f === "typed" || f === "mc" || f === "w"), `${e.family}: ${e.forms}`);
+    assert.ok(!e.forms.includes("w") || e.forms.includes("typed"), `${e.family}: a wording form without its typed form`);
     assert.ok(!(e.family in reg.held), `${e.family} is both admitted and held`);
   }
   assert.match((reg as unknown as { note: string }).note, /NOT educator review/);
@@ -41,12 +42,15 @@ test("registry entries carry the current fingerprint (a spread of families; a st
 });
 
 test("a certified typed question is validated; its everyday-wording form, an excluded question and a held family are not", () => {
-  const typedFam = reg.entries.find((e) => e.forms.includes("typed") && e.forms.includes("mc") && FAMILIES.get(e.family)!.word)!.family;
+  const typedFam = reg.entries.find((e) => e.forms.includes("typed") && e.forms.includes("mc") && !e.forms.includes("w") && FAMILIES.get(e.family)!.word)!.family;
   const id = firstFree(typedFam);
   assert.equal(machineReleaseOf(id), entry(typedFam).since ?? reg.validatedAt);
   assert.equal(machineReleaseOf(`${id}:mc`), entry(typedFam).since ?? reg.validatedAt);
   assert.ok(problemOf(`${id}:w`), "the family has an everyday-wording form");
-  assert.equal(machineReleaseOf(`${id}:w`), undefined, "wording was never certified");
+  assert.equal(machineReleaseOf(`${id}:w`), undefined, "this family's wording was never verified");
+  // a family whose every wording was verified from the wording alone (wordrefs.py) has its wording form admitted
+  const worded = reg.entries.find((e) => e.forms.includes("w"))!;
+  assert.equal(machineReleaseOf(`${firstFree(worded.family)}:w`), worded.since ?? reg.validatedAt);
 
   const withExcluded = reg.entries.find((e) => e.excluded?.length)!;
   assert.equal(machineReleaseOf(withExcluded.excluded![0]), undefined);
@@ -102,9 +106,9 @@ test("a hand-written question is validated only if a blind review agreed with it
     if (q.id in listed) assert.ok(["integer", "choice", "fraction"].includes(q.type), `${q.id}: ${q.type}`);
     else assert.ok(reg.writtenHeld?.[q.id], `${q.id} is held with a reason`);
   }
-  // the question the review found to have two correct options is held, with the reason
-  assert.match(reg.writtenHeld!["wm-tri-d1"], /two options are correct/);
-  assert.equal(machineReleaseOf("wm-tri-d1"), undefined);
+  // the question the first review found to have two correct options was reworded and reviewed again
+  assert.equal(machineReleaseOf("wm-tri-d1"), reg.validatedAt);
+  assert.ok(Object.values(reg.writtenHeld ?? {}).every((why) => /answer type set/.test(why)), "only set answers are held");
   // any change to a reviewed question ends its admission
   const id = Object.keys(listed)[0];
   try {
@@ -153,5 +157,19 @@ test("eligible@1: a delayed check that included a question that is not validated
   const after = attempts.filter((a) => a.at > delayed.at(-1)!.at);
   assert.ok(after.length >= 1 && after.length <= ELIGIBLE_MAX, `${after.length} further questions`);
   assert.ok(after.every((a) => machineReleaseOf(a.questionId)), "only validated questions are added");
+  assert.equal(d.state().evidence(skill).status, "verified");
+});
+
+test("a typed-only family with verified wordings gives the two kinds of question a skill needs (inequations)", () => {
+  // aeineqz has no multiple-choice form: its everyday wording is the only second kind of question. Before its wordings were
+  // verified (wordrefs.py) the shared record never demonstrated the skill, whatever the learner answered.
+  const skill = "MATH.algebra.inequations-intro";
+  const d = new Driver(`mv-tn-7-${skill}`, Date.parse("2026-11-12T09:00:00Z"));
+  d.enrol(7, "2026-27", boardFor("tn", 7)!);
+  d.work(skill, right, { max: 80 });
+  for (let k = 0; k < 3 && d.state().evidence(skill).status !== "verified"; k++) {
+    d.newSession(9);
+    d.work(skill, right, { max: 80 });
+  }
   assert.equal(d.state().evidence(skill).status, "verified");
 });

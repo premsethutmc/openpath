@@ -21,7 +21,8 @@ A family's presentation form (typed, multiple choice) is admitted only when all 
 Also:
 - Questions the certification did not verify (ambiguous, defective, notation-only, or the reference could not read them) are
   excluded by id (1,246).
-- The everyday-wording form (`:w`) is never admitted: its wording was not checked.
+- The everyday-wording form (`:w`) is admitted only when a wording reference (`wordrefs.py`), reading the wording alone,
+  verified every wording of the family, the wordings are unchanged and the form has a grading certification.
 - Quarantined questions and questions outside the release pool are never admitted (`inPool`).
 - A hand-written question (222 exist) is admitted when an independent reviewer re-derived its stored answer from the prompt
   and options alone, with the key hidden, and it is unchanged since (content hash). Only integer, choice and fraction
@@ -44,51 +45,55 @@ That the teaching is good, that a question suits its grade, or that it measures 
 part of an educator's review and are not machine-checked here. Synthetic learners show what the program decides, never
 that anyone learned.
 
-## Result (2026-11-10, after re-certification)
+## Result (2026-11-10)
 
-Registry: 1,078 of 1,090 families admitted (typed 1,077; multiple choice 842); 215 of 222 hand-written questions.
-Held: 12 families (10 added after the certification, with no independent reference yet: `aerot`, `aetfig`, `agchange`,
-`ahfibp`, `aipolyc`, `ajmilr`, `ajsize`, `akhtab`, `lboth`, `lbrk`; 2 whose reference cannot read the changed questions:
-`ajbase`, `linev`). Hand-written held: 6 set-answer questions, and `wm-tri-d1`, which has two correct options.
+Registry: 1,080 of 1,090 families admitted (typed 1,080; multiple choice 845; everyday wording 1); 216 of 222 hand-written
+questions (the other 6 have set answers, not admitted for hand-written questions).
+Held: 10 families. Nine now have an independent reference and every question verified (`aerot`, `agchange`, `ahfibp`,
+`aipolyc`, `ajmilr`, `ajsize`, `akhtab`, `lboth`, `lbrk`), but no grading certification yet (rule 3): the grading audit
+(`tools/mathematics/grading-audit`) has not been run for them. `aetfig` (picture-based choice) has no reference.
 
-Synthetic learner, every answer right, no review fixture, delayed check after 9 days:
+Synthetic learner, every answer right, no review fixture, delayed check after 9 days (#128; not re-run for every skill since):
 
-| Release | Skills | Verified (first registry) | Verified now | Person-marked | Open |
-|---|---|---|---|---|---|
-| TN Grade 7 | 50 | 36 | 47 | 2 | 1 |
-| CBSE Grade 7 | 46 | 35 | 43 | 3 | 0 |
-| TN Grade 8 | 43 | 31 | 42 | 1 | 0 |
-| CBSE Grade 8 | 48 | 37 | 48 | 0 | 0 |
+| Release | Skills | Verified (first registry) | Verified (#128) | Person-marked |
+|---|---|---|---|---|
+| TN Grade 7 | 50 | 36 | 47 | 2 |
+| CBSE Grade 7 | 46 | 35 | 43 | 3 |
+| TN Grade 8 | 43 | 31 | 42 | 1 |
+| CBSE Grade 8 | 48 | 37 | 48 | 0 |
 
-Before machine validation the Verified column was 0 everywhere. Open: `MATH.algebra.inequations-intro` (TN 7): the shared
-record never demonstrates the skill although every answer is right (one typed-only family); not yet investigated.
+`MATH.algebra.inequations-intro` (TN 7), the one skill left open in #128, is fixed by the wording reference below.
 
 What moved the numbers after the first registry:
-- **Re-certification** (`packages/learning/scripts/recertify.py`, unchanged runner and references, a status for every
-  question): 29 of the 41 held families now have verified questions. Where a reference could not read a changed question,
-  that question is excluded, not the family.
+- **Re-certification** (`packages/learning/scripts/recertify.py`, unchanged runner, a status for every question). Where a
+  reference cannot read a changed question, that question is excluded, not the family.
+- **New references** (`refs/held_2026_11.py`) for nine families added after the certification, and repaired prompt patterns
+  for `ajbase` and `linev`: every question verified on the first run.
 - **Hand-written questions**: a blind review (prompt and options only, key hidden) agreed with 221 of 222 stored answers.
-- **eligible@1** (`intervention.ts`): a delayed check could include a question that is not validated (a wording form, a held
-  family); the check passed on this surface but could never count, and the skill stayed "shown on your own" with nothing
-  more to do. After such a check, up to 4 fresh validated questions are offered in the same visit.
-- Wording forms (`:w`) were not the blocker and are still not admitted.
+  The one disagreement, `wm-tri-d1`, had two correct options (SSA with the longer side opposite the angle also fixes one
+  triangle); option B was reworded so that it gives two triangles, and the question re-reviewed.
+- **eligible@1** (`intervention.ts`): after a delayed check that included a question that is not validated, up to 4 fresh
+  validated questions are offered in the same visit, so the check can count.
+- **Wording references** (`packages/learning/scripts/wordrefs.py`): the certification never read everyday wordings. A wording
+  reference reads the wording alone and derives the answer; a family's `:w` form is admitted only when every wording is
+  verified. First family: `aeineqz` (450 of 450). Its typed form is its only other kind of question, so without the wording
+  form the shared record could never see two kinds and the skill was never demonstrated (23 useless checks in a row).
 
-## Rebuild
+## Keeping it current (recert@1)
 
 ```
-eval "$(backend/vendor-deps.sh --audit)"                                  # SymPy/mpmath from GitHub tags
-bun tools/mathematics/answer-key-certification/export.ts /tmp/exp
-python3 packages/learning/scripts/recertify.py --data /tmp/exp --out /tmp/recert --family f1,f2
-bun packages/learning/scripts/machine-validation.ts ledger-add /tmp/exp /tmp/recert recert:<commit>
-bun packages/learning/scripts/machine-validation.ts build /tmp/exp
-ESBUILD=<esbuild 0.28.2> node tools/mathematics/server-grader/build.mjs      # evidence.ts is in the server bundle
+eval "$(backend/vendor-deps.sh --audit)"     # SymPy/mpmath from GitHub tags
+tools/recertify.sh                            # export, re-certify changed families, ledger, registry, server bundle
 ```
+
+CI runs `tools/recertify.sh --check` (workflow My Learning Year): it fails when a family changed since it was certified, or
+the committed registry is not what the ledger and today's content build. A family that changed is already inert on its own
+(fingerprint lock); the check makes sure it is noticed and re-admitted. Run with Node, as regen@1 does.
 
 Switch: `useMachineValidation(false)` (on by default). Tests: `frontend/src/learning/machine-validation.test.ts`.
 
 ## Next (not done)
 
-1. Write independent references for the 10 new families; repair the references for `ajbase` and `linev` and for the
-   excluded questions of partly admitted families (`aofund` 64, `afcube` 284, `ahcoef` 226, …).
-2. Fix `wm-tri-d1` (option B also fixes exactly one triangle); investigate `inequations-intro`.
-3. Run the re-certification in CI so a changed family is re-admitted without manual steps.
+1. Run the grading audit for the nine answer-verified families so they are admitted; write a reference for `aetfig`.
+2. Repair references for the excluded questions of partly admitted families (`aofund` 64, `afcube` 284, `ahcoef` 226, …).
+3. Wording references for more families (one small parser per family); typed-only families first.

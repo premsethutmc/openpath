@@ -4,7 +4,8 @@
  * OpenPath has no educators, so the educator release in review.ts cannot happen and "verified" was unreachable for every real
  * learner. This is the second route, and it is never described as educator review. A generated question is machine-validated
  * only when its family's registry entry (content/learning/machine-validation.v1.json, built by scripts/machine-validation.ts)
- *   - lists the question's presentation form: "typed" or "mc" (the everyday-wording form ":w" is never listed);
+ *   - lists the question's presentation form: "typed", "mc", or "w" (the everyday-wording form, listed only when a reference
+ *     that reads the wording alone verified every wording of the family);
  *   - carries the family's CURRENT fingerprint, so any change to the generator, its options or its wording switches the entry
  *     off until the family is certified again;
  *   - does not exclude the question by id (questions the certification classed ambiguous, defective or notation-only);
@@ -67,7 +68,7 @@ function releaseTime(qid: string): string | undefined {
     return WRITTEN_TYPES.includes(q.type) && writtenHash(q) === h ? (s.reg ?? machineRegistry).validatedAt : undefined;
   }
   const m = /^gen:([a-z0-9]+):(-?\d+(?:,-?\d+)*)(?::(mc|w))?$/.exec(qid);
-  if (!m || m[3] === "w") return undefined;
+  if (!m) return undefined;
   const e = entryOf(m[1]);
   if (!e || !e.forms.includes(m[3] ?? "typed") || e.out.has(`gen:${m[1]}:${m[2]}`)) return undefined;
   if (e.fingerprint !== fingerprintOf(m[1]) || !inPool(qid)) return undefined;

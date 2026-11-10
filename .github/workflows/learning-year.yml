@@ -58,6 +58,21 @@ jobs:
       - run: npm ci
         working-directory: frontend
       - run: node tools/regen.mjs --check
+  # recert@1: a family that changed since it was certified no longer counts as validated (machine-validation@1). This fails
+  # when a family needs re-certification or the committed registry is not current, and says to run tools/recertify.sh.
+  machine-validation:
+    name: Machine-validation registry is current (tools/recertify.sh --check)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - run: tools/recertify.sh --check
   year:
     runs-on: ubuntu-24.04
     steps:

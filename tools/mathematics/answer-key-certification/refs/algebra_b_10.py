@@ -78,7 +78,7 @@ def lineq(q):
 
 @ref('linev', 'substitute x into the printed line', 'exhaustive')
 def linev(q):
-    m = re.fullmatch(r'On the line y = (.*), what is y when x = (−?\d+)\?', q['prompt'])
+    m = re.fullmatch(r'(?:On the line|If) y = (.*), what is y when x = (−?\d+)\?', q['prompt'])
     return Expect(str(P(m.group(1)).subs(X_, int(m.group(2).replace('−', '-')))))
 
 

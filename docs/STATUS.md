@@ -20,12 +20,13 @@ Updated: 2026-11-10 (machine validation; `main` now holds the whole maths line)
   independently certified, unchanged since and grading-certified. Re-certification (`recertify.py`) + blind review of the 222
   hand-written questions + eligible@1 (fresh validated questions after a delayed check that could not count):
   1,078 of 1,090 families, 215 hand-written. Verified without the fixture: TN 7 47/50, CBSE 7 43/46, TN 8 42/43, CBSE 8 48/48.
-- Open: 12 held families (10 need a reference); `wm-tri-d1` has two correct options; `inequations-intro` never demonstrated.
+- Follow-up (recert@1): references for 9 new families + `ajbase`/`linev` (all questions verified); `wm-tri-d1` reworded;
+  wording references (`wordrefs.py`, `aeineqz` first) fix `inequations-intro`; `tools/recertify.sh` + CI check keep the
+  registry current. Registry: 1,080 of 1,090 families, 216 hand-written.
+- Open: 9 answer-verified families wait for the grading audit; `aetfig` has no reference.
 
 ## Earlier on 2026-11-10 (research pool boundary)
-- `fix/research-pool-boundary-2026-11-10`: moved offline pool readers/tools to `research/deep-recovery/`; kept their logic/results.
-  Node CI and Bun share a selector/import-boundary check; app code cannot reach offline research. 8 guard + 20 recovery tests and typecheck pass.
-  See `docs/milestones/RESEARCH_POOL_BOUNDARY.md`. The combined #124 branch is unchanged; no merge/deploy.
+- #125: offline recovery pool readers isolated; the boundary is enforced in Node CI (`tools/question-selection-boundary.mjs`).
 
 ## Combined-candidate milestone (2026-11-10)
 - Pythagoras (method-sections@1, `library.ts`): "Step by step", "Squares on the sides" and "Spot a triple" now also carry a

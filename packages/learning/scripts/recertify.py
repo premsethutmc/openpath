@@ -21,6 +21,8 @@ CERT = os.path.join(ROOT, 'tools', 'mathematics', 'answer-key-certification')
 sys.path.insert(0, CERT)
 import certify  # noqa: E402
 import kit  # noqa: E402
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from wordrefs import WORDREFS, same_answer  # noqa: E402
 
 ap = argparse.ArgumentParser()
 ap.add_argument('--data', required=True)
@@ -58,5 +60,19 @@ for fam in a.family.split(','):
     res['refErrorIds'] = errors
     res['okIds'] = [i for i in seen if i not in bad]
     assert len(res['okIds']) == res['ok'], (fam, len(res['okIds']), res['ok'])
+    # the everyday-wording form: verified only by a reference that reads the wording alone (wordrefs.py)
+    if fam in WORDREFS:
+        rows = [json.loads(l) for l in open(f'{a.data}/q/{fam}.jsonl') if l.strip()]
+        ok_ids = set(res['okIds'])
+        word_ok, word_bad = [], []
+        for r in rows:
+            w = r.get('word')
+            if not w:
+                continue
+            derived = WORDREFS[fam]['fn'](w['prompt'])
+            good = r['id'] in ok_ids and derived is not None and w.get('type') == r['type'] and same_answer(w['type'], derived, w['answer'])
+            (word_ok if good else word_bad).append(r['id'])
+        res['wordMethod'] = WORDREFS[fam]['method']
+        res['wordOkIds'], res['wordNotOkIds'] = word_ok, word_bad
     json.dump(res, open(f'{a.out}/fam/{fam}.json', 'w'), ensure_ascii=False)
-    print(fam, {k: res[k] for k in ('released', 'checked', 'ok', 'mismatch', 'form', 'ambiguous', 'unsupported', 'refError', 'mcChecked', 'mcBad', 'wordBad', 'timedOut')})
+    print(fam, {k: res[k] for k in ('released', 'checked', 'ok', 'mismatch', 'form', 'ambiguous', 'unsupported', 'refError', 'mcChecked', 'mcBad', 'wordBad', 'timedOut')}, {'wordOk': len(res.get('wordOkIds', [])), 'wordNotOk': len(res.get('wordNotOkIds', []))} if fam in WORDREFS else '')

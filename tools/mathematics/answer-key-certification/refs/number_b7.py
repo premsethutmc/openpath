@@ -446,9 +446,9 @@ def ajb10(q):
 
 @ref('ajbase', 'repeated division by the base collecting remainders, verified by converting back')
 def ajbase(q):
-    m = re.match(r'Write the base-ten number (\d+) in base (\d+)\. Type the digits of the base-(\d+) numeral\.', q['prompt'])
+    m = re.match(r'Write the base-ten number (\d+) in base (\d+)\. (?:Type the digits of the base-(\d+) numeral\.|What is the base-(\d+) numeral\?)', q['prompt'])
     n, b = int(m[1]), int(m[2])
-    assert int(m[3]) == b
+    assert int(m[3] or m[4]) == b
     ds, k = [], n
     while k:
         k, r = divmod(k, b)

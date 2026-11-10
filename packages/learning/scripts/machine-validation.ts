@@ -7,29 +7,35 @@
  *      generator) checked every question of the family (never a sample), and
  *   2. the questions offered today are byte-identical to the ones that were certified (the certification ledger's hashes), and
  *   3. the grading audit certified the family for that form (grading-certifications.v1.json).
- * Single questions the certification did not verify are excluded by id. Word forms (":w") are never admitted: their wording
- * was not checked by the certification. Each entry is locked to the family's current fingerprint, so any later change to the
+ * Single questions the certification did not verify are excluded by id. The everyday-wording form (":w") is admitted only
+ * when a reference that reads the wording alone verified every wording of the family (scripts/wordrefs.py). Each entry is locked to the family's current fingerprint, so any later change to the
  * generator makes the entry inert until the family is certified again.
  *
  * The certification ledger (content/learning/certified-content.v1.json, certified-content@2) holds, per family, what was
  * certified and where: content hashes, whether every question was checked, the multiple-choice result and the ids not verified.
  *
- *   bun machine-validation.ts ledger-add <exportDir> <resultsDir> <source> [at]   record a re-certification (scripts/recertify.py)
- *   bun machine-validation.ts written-add <result.json> <source> [at]         record a blind review of hand-written questions
- *   bun machine-validation.ts build <exportDir> [validatedAt]                compare today's export with the ledger; write the registry
- * <exportDir> comes from `bun tools/mathematics/answer-key-certification/export.ts <exportDir>`.
+ *   node --import tsx machine-validation.ts stale <exportDir>                             list families that need re-certification
+ *   node --import tsx machine-validation.ts ledger-add <exportDir> <resultsDir> <source> [at]   record a re-certification (scripts/recertify.py)
+ *   node --import tsx machine-validation.ts written-add <result.json> <source> [at]         record a blind review of hand-written questions
+ *   node --import tsx machine-validation.ts build <exportDir> [validatedAt]                compare today's export with the ledger; write the registry
+ * <exportDir> comes from `node --import tsx tools/mathematics/answer-key-certification/export.ts <exportDir>`.
+ * Run with Node, as regen@1 does: Bun computes a few float results differently, which changes some fingerprints.
  */
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { question, questions } from "../src/content";
+import { WRITTEN_TYPES, writtenHash } from "../src/machine-validation";
+import { fingerprintOf } from "../src/review";
 
 const ROOT = new URL("../../../", import.meta.url);
 const LEDGER = new URL("content/learning/certified-content.v1.json", ROOT);
 const sha = (s: string) => createHash("sha256").update(s).digest("hex").slice(0, 16);
 
-type Row = { id: string; params: number[]; prompt: string; type: string; answer: string; expanded?: boolean; figure?: unknown; mc?: unknown };
-type Hashes = { n: number; typed: string; mc: string | null; mcN: number };
+type Row = { id: string; params: number[]; prompt: string; type: string; answer: string; expanded?: boolean; figure?: unknown; mc?: unknown; word?: unknown };
+type Hashes = { n: number; typed: string; mc: string | null; mcN: number; word?: string | null };
 /** One family as certified: where, the content hashes, and the outcome. */
-type Certified = Hashes & { source: string; at: string; exhaustive: boolean; mcOk: boolean; notVerified: string[] };
+/** wordOk: every everyday wording of the family was verified by a reference that read the wording alone (scripts/wordrefs.py) */
+type Certified = Hashes & { source: string; at: string; exhaustive: boolean; mcOk: boolean; wordOk?: boolean; notVerified: string[] };
 /** written: hand-written questions whose stored answer an independent reviewer re-derived from the prompt alone (the key hidden). */
 type Ledger = { schema: "certified-content@2"; note: string; families: Record<string, Certified>; written?: Record<string, { hash: string; source: string; at: string }>; writtenNotVerified?: Record<string, string> };
 
@@ -39,7 +45,8 @@ function rowsOf(dir: string, fam: string): Row[] {
 function hashOfRows(rows: Row[]): Hashes {
   const typed = rows.map((r) => JSON.stringify([r.id, r.params, r.prompt, r.type, r.answer, r.expanded ?? null, r.figure ?? null]));
   const mc = rows.filter((r) => r.mc).map((r) => JSON.stringify([r.id, r.mc]));
-  return { n: rows.length, typed: sha(typed.join("\n")), mc: mc.length ? sha(mc.join("\n")) : null, mcN: mc.length };
+  const word = rows.filter((r) => r.word).map((r) => JSON.stringify([r.id, r.word]));
+  return { n: rows.length, typed: sha(typed.join("\n")), mc: mc.length ? sha(mc.join("\n")) : null, mcN: mc.length, word: word.length ? sha(word.join("\n")) : null };
 }
 const familiesIn = (dir: string) => readdirSync(`${dir}/q`).filter((x) => x.endsWith(".jsonl")).map((f) => f.slice(0, -6)).sort();
 const readLedger = () => JSON.parse(readFileSync(LEDGER, "utf8")) as Ledger;
@@ -47,13 +54,25 @@ const writeLedger = (l: Ledger) => writeFileSync(LEDGER, JSON.stringify({ ...l, 
 
 const [mode, dir, arg, arg2] = process.argv.slice(2);
 
+if (mode === "stale") {
+  // families whose questions today are not the ones in the ledger (changed, or never certified): these need scripts/recertify.py
+  const ledger = readLedger();
+  const stale = familiesIn(dir).filter((fam) => {
+    const was = ledger.families[fam];
+    if (!was) return true;
+    const now = hashOfRows(rowsOf(dir, fam));
+    return now.typed !== was.typed || now.mc !== was.mc || (was.word !== undefined && now.word !== was.word);
+  });
+  console.log(stale.join(","));
+  process.exit(0);
+}
 if (mode === "ledger-add") {
   // a re-certification by scripts/recertify.py: every question has a status; only "ok" ones are certified
   const ledger = readLedger();
   const added: string[] = [];
   const skipped: string[] = [];
   for (const f of readdirSync(`${arg}/fam`).filter((x) => x.endsWith(".json")).sort()) {
-    const r = JSON.parse(readFileSync(`${arg}/fam/${f}`, "utf8")) as { family: string; noReference?: boolean; coverage: string; timedOut: boolean; released: number; checked: number; ok: number; okIds: string[]; mcChecked: number; mcBad: number; wordBad: number };
+    const r = JSON.parse(readFileSync(`${arg}/fam/${f}`, "utf8")) as { family: string; noReference?: boolean; coverage: string; timedOut: boolean; released: number; checked: number; ok: number; okIds: string[]; mcChecked: number; mcBad: number; wordBad: number; wordOkIds?: string[]; wordNotOkIds?: string[] };
     if (r.noReference || !r.ok) { skipped.push(`${r.family}: ${r.noReference ? "no reference" : "no question verified"}`); continue; }
     const rows = rowsOf(dir, r.family);
     if (rows.length !== r.released) throw new Error(`${r.family}: the results were made from another export`);
@@ -65,6 +84,7 @@ if (mode === "ledger-add") {
       at: process.argv[6] ?? new Date().toISOString(),
       exhaustive: r.coverage === "exhaustive" && !r.timedOut && r.checked === r.released,
       mcOk: withMc > 0 && r.mcBad === 0 && r.mcChecked === withMc,
+      ...(r.wordOkIds ? { wordOk: r.wordBad === 0 && r.wordNotOkIds!.length === 0 && r.wordOkIds.length > 0 && r.wordOkIds.length === rows.filter((x) => x.word).length } : {}),
       notVerified: rows.map((x) => x.id).filter((id) => !ok.has(id)).sort(),
     };
     added.push(r.family);
@@ -75,21 +95,19 @@ if (mode === "ledger-add") {
 }
 if (mode === "written-add") {
   // <resultJson>: { ok: [ids], notVerified: { id: reason } } from a blind review (the reviewer saw prompts and options, never the key)
-  const { question } = await import("../src/content");
-  const { writtenHash } = await import("../src/machine-validation");
   const res = JSON.parse(readFileSync(dir, "utf8")) as { ok: string[]; notVerified: Record<string, string> };
   const ledger = readLedger();
   ledger.written = { ...(ledger.written ?? {}) };
   for (const id of res.ok) ledger.written[id] = { hash: writtenHash(question(id)), source: arg, at: arg2 ?? new Date().toISOString() };
   ledger.writtenNotVerified = { ...(ledger.writtenNotVerified ?? {}), ...res.notVerified };
+  for (const id of res.ok) if (!(id in res.notVerified)) delete ledger.writtenNotVerified[id];
   for (const id of Object.keys(res.notVerified)) delete ledger.written[id];
   writeLedger(ledger);
   console.log(JSON.stringify({ written: Object.keys(ledger.written).length, notVerified: Object.keys(ledger.writtenNotVerified).length }));
   process.exit(0);
 }
-if (mode !== "build" || !dir) throw new Error("usage: machine-validation.ts ledger-add <exportDir> <resultsDir> <source> | build <exportDir> [validatedAt]");
+if (mode !== "build" || !dir) throw new Error("usage: machine-validation.ts stale <exportDir> | ledger-add <exportDir> <resultsDir> <source> | build <exportDir> [validatedAt]");
 
-const { fingerprintOf } = await import("../src/review");
 const ledger = readLedger();
 const grading = new Set((JSON.parse(readFileSync(new URL("content/learning/grading-certifications.v1.json", ROOT), "utf8")).entries as { family: string; form: string }[]).map((e) => `${e.family}|${e.form}`));
 
@@ -114,13 +132,13 @@ for (const fam of familiesIn(dir)) {
     else if (!grading.has(`${fam}|mc`)) why.push("no grading certification for multiple choice");
     else forms.push("mc");
   }
+  // the everyday-wording form: only with a wording reference, unchanged wordings and a grading certification (never a reason to hold)
+  if (forms.includes("typed") && was.wordOk && was.word && now.word === was.word && grading.has(`${fam}|word`)) forms.push("w");
   if (!forms.length) { held[fam] = why.join("; "); continue; }
   if (why.length) partial[fam] = why.join("; ");
   entries.push({ family: fam, fingerprint: fingerprintOf(fam), forms, ...(was.at > validatedAt ? { since: was.at } : {}), ...(was.notVerified.length ? { excluded: was.notVerified } : {}) });
 }
 // hand-written questions: admitted when the blind review agreed with the stored answer and the question is unchanged since
-const { questions } = await import("../src/content");
-const { writtenHash, WRITTEN_TYPES } = await import("../src/machine-validation");
 const written: Record<string, string> = {};
 const writtenHeld: Record<string, string> = {};
 for (const q of questions.filter((x) => !x.id.startsWith("gen:"))) {
@@ -144,4 +162,4 @@ const registry = {
 };
 writeFileSync(outFile, JSON.stringify(registry) + "\n");
 const count = (f: string) => entries.filter((e) => e.forms.includes(f)).length;
-console.log(JSON.stringify({ families: familiesIn(dir).length, admitted: entries.length, typed: count("typed"), mc: count("mc"), partial: Object.keys(partial).length, held: Object.keys(held).length, excludedQuestions: entries.reduce((n, e) => n + (e.excluded?.length ?? 0), 0), written: Object.keys(written).length, writtenHeld: Object.keys(writtenHeld).length }));
+console.log(JSON.stringify({ families: familiesIn(dir).length, admitted: entries.length, typed: count("typed"), mc: count("mc"), wording: count("w"), partial: Object.keys(partial).length, held: Object.keys(held).length, excludedQuestions: entries.reduce((n, e) => n + (e.excluded?.length ?? 0), 0), written: Object.keys(written).length, writtenHeld: Object.keys(writtenHeld).length }));
