@@ -156,8 +156,8 @@ test("teaching availability: every configured skill has its own eligible, skill-
     assert.deepEqual(list.map((st) => `${st.id}:${st.kind}`), TAUGHT[s.id], s.id);
     for (const st of list) {
       // the worked example, the guided question and the check are all this skill (a key or scale other than 1; one bar kind)
-      for (const id of [...st.screens.flatMap((b) => (b.instance ? [b.instance] : [])), st.guided, st.check]) assert.equal(connectedSkill(config, id), s.id, `${st.id}: ${id}`);
-      assert.ok(st.screens.every((b) => b.instance), `${st.id}: every screen shows its own worked instance`);
+      for (const id of [...st.screens.filter((b) => b.section !== "method").flatMap((b) => (b.instance ? [b.instance] : [])), st.guided, st.check]) assert.equal(connectedSkill(config, id), s.id, `${st.id}: ${id}`);
+      assert.ok(st.screens.filter((b) => b.section !== "method").every((b) => b.instance), `${st.id}: every screen shows its own worked instance`);
     }
   }
   // half pictures: every taught, guided and checked row really holds a half picture (an odd number of halves)

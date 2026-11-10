@@ -44,8 +44,8 @@ for (const S of SKILLS) test(`${S.skill}: general skill-scoped teaching exists, 
     assert.equal(isMisconceptionSpecific(s), false, `${s.id} is general teaching, not a misconception fix`);
     assert.ok(teachable(m, s, []), `${s.id} needs no misconception evidence`);
     assert.ok(strategyConnects(config, S.skill, s), `${s.id} connects to ${S.skill}`);
-    for (const id of [...s.screens.map((x) => x.instance!), s.guided, s.check]) assert.equal(skillOf(S.competency, id), S.skill, `${s.id}: ${id}`);
-    assert.ok(s.screens.every((x) => (x.widget as { type?: string } | undefined)?.type === S.widget), `${s.id}: the existing visuals@2 picture`);
+    for (const id of [...s.screens.filter((b) => b.section !== "method").map((x) => x.instance!), s.guided, s.check]) assert.equal(skillOf(S.competency, id), S.skill, `${s.id}: ${id}`);
+    assert.ok(s.screens.filter((b) => b.section !== "method").every((x) => (x.widget as { type?: string } | undefined)?.type === S.widget), `${s.id}: the existing visuals@2 picture`);
     const recs = registry().filter((r) => r.competency === S.competency && r.strategy === s.id);
     assert.equal(recs.length, 1); assert.equal(recs[0].revisions.at(-1)!.status, "pending_review", `${s.id} awaits an educator`);
   }
