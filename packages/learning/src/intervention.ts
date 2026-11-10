@@ -839,9 +839,12 @@ export function guidedItem(m: Module, st: Strategy, records: LearnerRecords): st
 /** The question for a block's check alone: the strategy's own check if the learner has never seen it, else a fresh one. */
 export const blockCheck = (m: Module, st: Strategy, records: LearnerRecords): string | null => {
   const unit = unitOfStrategy(m, st);
-  if (alignmentActive(m, st, records) && !unit) return questionForRequirement(m, "check", records, id => followupCompatible(m, st, id, records));
   if (unit) return unitCheck(m, unit, records, st);
-  return keyboardOffered(st.check) && !answered(records, st.check) && withinGrade(records, st.check) ? st.check : fromPool(m, "check", records);
+  const usual = keyboardOffered(st.check) && !answered(records, st.check) && withinGrade(records, st.check) ? st.check : fromPool(m, "check", records);
+  // method-alignment: the usual check when the lesson covers its method (method-sections@2: an explanation's own check, of the
+  // kind it works through first, before any question of the other kinds its added sections show), else a covered fresh one
+  if (alignmentActive(m, st, records)) return usual && followupCompatible(m, st, usual, records) ? usual : questionForRequirement(m, "check", records, id => followupCompatible(m, st, id, records));
+  return usual;
 };
 /**
  * same-skill@1 + freshness@2: the check alone after a scoped explanation is a question inside the taught scope that is not the same

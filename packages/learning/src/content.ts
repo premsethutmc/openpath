@@ -58,6 +58,8 @@ export interface Screen {
   instance?: string;
   /** teaching-contract@1: the text was written for this question by the family's own code (not family-level text). */
   textFrom?: "instance";
+  /** method-sections@2: added so the explanation shows a method its follow-ups may ask (library.ts withMethodSections) */
+  section?: "method";
 }
 export interface Strategy {
   /** Explicit intervention scope; absent keeps the existing module/instance-family behavior. */
@@ -142,9 +144,13 @@ const authoredPools = ((libraryData as { authoredPools?: Record<string, Module["
 /** Hand-written modules, each with the release pool of its competency's family (when there is one); then the modules
  * of competencies an educator marks (written-modules.v1.json: teaching, auto-marked component questions and written
  * tasks, written@1). */
+const authoredSections = ((libraryData as { authoredSections?: Record<string, Record<string, Screen[]>> }).authoredSections ?? {});
 export const authoredModules = [...(data.modules as unknown as Module[]), ...(markedData.modules as unknown as Module[])].map((m) => {
   const a = authoredPools[m.competency];
-  return a ? { ...m, pool: { family: a.family, version: a.version }, ...(a.pools ? { pools: a.pools } : {}) } : m;
+  // method-sections@2: the sections the library build found these explanations need (library.ts withMethodSections)
+  const extra = authoredSections[m.competency];
+  const withSections = extra ? { ...m, strategies: m.strategies.map((s) => (extra[s.id] ? { ...s, screens: [...s.screens, ...extra[s.id]] } : s)) } : m;
+  return a ? { ...withSections, pool: { family: a.family, version: a.version }, ...(a.pools ? { pools: a.pools } : {}) } : withSections;
 });
 /** pools@1: the families a module draws from (main first). */
 export const poolFamilies = (m: Module): string[] => (m.pools?.length ? m.pools.map((p) => p.family) : m.pool ? [m.pool.family] : []);

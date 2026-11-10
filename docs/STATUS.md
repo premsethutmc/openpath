@@ -2,47 +2,51 @@
 
 Read this file first; status is branch-local, so verify refs. Keep it under ~60 lines; update it at each milestone.
 
-Updated: 2026-11-10 (offline research pool boundary, separate follow-up from PR #124 at `04d76477`)
+Updated: 2026-11-10 (method sections by construction, computed coverage; on `feat/method-sections` from main `08d273c`)
 
 ## Rules (product owner)
 - No merge or deploy without the owner's explicit approval. PRs are drafts. AI review/fixes may proceed; do not label them human educator approval.
 - One bounded milestone at a time: scope, finish, report commit/tests/defects/readiness, stop.
 - Long jobs run in GitHub Actions; schedule a check-in instead of waiting. How-to: `docs/runbooks/DEV.md`.
 
-## Branches (all drafts, none merged)
-- `fix/foundations-2026-11-09` (upstream PR #124): #121 (method alignment, dot, `5d83947`) + #122 (dev efficiency on Grade 8,
-  `82f18fd`) combined, the foundations fix (`5e4c1fd`), then its Pythagoras/recovery milestone. Base chain of #122: #119 Grade 8 → #117 Grade 7.
+## Branches
+- main `08d273c`: #124's combined candidate (via PR #125, owner-approved), then the research pool boundary.
+- `feat/method-sections` (this, draft PR, from main): method sections by construction. PR #126 `feat/machine-validation`
+  (another session, open): machine validation without an educator; both touch STATUS.md and the grader bundle.
 - Owners: dot = method alignment (#121) and TN Grades 1–3 ingestion (separate; not touched here); Claude = Grade 8, #122.
 - Base for maths work: `consolidation/openpath-candidate` (#112). Others open: #115, #116, #118, #120.
 
-## This milestone (2026-11-10)
-- `fix/research-pool-boundary-2026-11-10`: moved offline pool readers/tools to `research/deep-recovery/`; kept their logic/results.
-  Node CI and Bun share a selector/import-boundary check; app code cannot reach offline research. 8 guard + 20 recovery tests and typecheck pass.
-  See `docs/milestones/RESEARCH_POOL_BOUNDARY.md`. The combined #124 branch is unchanged; no merge/deploy.
-
-## Combined-candidate milestone (2026-11-10)
-- Pythagoras (method-sections@1, `library.ts`): "Step by step", "Squares on the sides" and "Spot a triple" now also carry a
-  converse section and a triple-rule section (worked examples: `ahconv`, `ahgen` 2m rule; the m² − n², 2mn, m² + n² rule is in the
-  text, no worked example of its own). Method map: `ahconv` → pythagoras-converse, `ahgen` → triple-rule-2m / triple-rule-mn; both
-  mapped explanations list them (unapproved). #121's gate unchanged (a hypotenuse after "Step by step" is still
-  refused). Both boards pass the existing synthetic journeys; the independent AI review below found teaching gaps those tests miss.
-- Ratio recovery tests: ratio is teachable now, so scale drawings → ratio is taught and returns (both tests updated). A real
-  missing-content gap is tested on integer addition → integers (blocked, nothing solved); the single-slip tests are kept.
-- deep-select@1 (`deep-recovery.ts`, research, off): questions must be selectable, keyboard-answerable, within grade, fresh and,
-  after teaching of their skill, covered by the taught method; probes on untaught skills stay diagnostics. No suitable question:
-  an honest stop that says why. Saved answers are read by the same rule (history kept): an untaught-method answer no longer
-  counts toward "solved after help". Effect: the partial-fractions integral after a u-substitution lesson now stops instead of
-  "solved after help" (phase-3 tests updated). Registered as a selector (`question-status.test.ts`).
-- Tests: `deep-select.test.ts`, `pythagoras-methods.test.ts`; regenerated (Node; grader bundle with esbuild 0.28.2).
+## This milestone: method sections by construction (2026-11-10)
+- method-sections@2 (`library.ts` withMethodSections, `method-kinds.ts`): every explanation (built and hand-written, all
+  grades) shows every method its follow-ups may ask. For each method kind (a family, or its declared cases) that a question it
+  can be followed by needs and none of its sections works through, it gets a section: a worked example of a fresh question of
+  that kind (typed first, with its picture), from the family's own teaching. 959 of 1,185 built explanations gained 2,756
+  sections (1–13; 76% gained 1–4); 37 hand-written explanations gained 114, stored in `library.v1.json` `authoredSections`
+  (their own text unchanged). The lesson page does not repeat them (it already shows every family).
+- Coverage is computed (`method-alignment.ts`): an explanation covers the kinds of the questions its sections show. The hand
+  map (`method-alignment.v1.json`) is history only. Every lesson records its content hash, so the gate applies to all modules;
+  a scoped explanation's follow-ups are its own unit (another unit is governed by its own teaching); a lesson whose
+  explanation changed since refuses follow-ups. The block check keeps the explanation's own check when it is covered.
+- Teaching checks unchanged: 1,063 explanations pass the teaching contract, as before (none lost). Lesson checks at baseline.
+- Gap check (`method-sections.test.ts`, ~1 min, no simulation): fails CI if any explanation can be followed by a method it
+  does not show. 0 gaps. Pythagoras's second triple rule now has its own worked example.
+- Tests reworked: dot's method-alignment tests show mismatches on the explanation as written (without sections) or after a
+  changed explanation; deep-select and Pythagoras tests likewise; phase-3 own-skill case is "solved after help" again
+  (the u-substitution lesson now shows partial fractions).
+- Earlier today, in main: `04d7647` (Pythagoras converse and triple rules, ratio-recovery tests, deep-select@1) and `08d273c`
+  (offline research pool readers moved to `research/deep-recovery/`, boundary enforced in Node CI).
 
 ## Open defects
-- All learning-package tests still need a complete Bun run; the selector/import-boundary check now also runs in Node CI.
-- Pythagoras m² − n², 2mn, m² + n² rule lacks a worked example despite its map. See `PYTHAGORAS_AI_REVIEW_2026_11_10.md` in milestones.
-- Pythagoras "Spot a triple" / "Spot the mistake" / "What it uses" have no method map (#121 legacy path, follow-ups not gated).
+- All learning-package tests still need a complete Bun run in CI; the selector/import-boundary check runs in Node CI.
+- The independent AI review of Pythagoras (`docs/milestones/PYTHAGORAS_AI_REVIEW_2026_11_10.md`) predates this milestone.
+- Long lessons: an explanation may now carry up to 13 extra sections (e.g. conics, integration methods). Whether that is too
+  much for a learner is untested; the fix would be one explanation per kind (a design change, not per-theorem work).
+- Teaching quality (clear, true, at grade) is checked only by lesson-checks@1, and only on the lesson page: the added sections
+  as the engine delivers them are checked by the teaching contract, not by lesson-checks. No independent review yet.
 - Grade 8 review-2 majors still open: mixed example in opening sections (M1, M2), exponent as factor (M4), below-grade
   lessons, missing outcomes (straight-line graphs/scale, frequency polygons, map colouring), M3 wrong reason.
 - 14 Grade 8 runs open below grade (fixed exploratory questions). `bun test packages/learning/src` not in CI (Bun needs
-  owner approval). No branch protection on main. Content provisional: no educator review, no real learners.
+  owner approval). No branch protection on main. Content provisional: no real learners yet.
 
 ## Previous milestones
 - Foundations fix (`5e4c1fd`): choice@1 (atgen, abunit checks), Pythagoras shorter side, registries merged three-way.
