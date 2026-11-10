@@ -80,7 +80,7 @@ export function strategyConnects(config: SubSkillConfig, skill: string, strategy
   // the target merely because their guided/check examples happen to align.
   if (strategy.kind === 'prerequisite' || strategy.screens.every((s) => s.role === 'prerequisite')) return false;
   return validSkillTask(config, skill, strategy.guided) && validSkillTask(config, skill, strategy.check)
-    && strategy.screens.length > 0 && strategy.screens.every((s) => s.text.length > 0 && (!s.instance || validSkillTask(config, skill, s.instance)));
+    && strategy.screens.length > 0 && strategy.screens.filter((s) => s.section !== 'method').every((s) => s.text.length > 0 && (!s.instance || validSkillTask(config, skill, s.instance)));
 }
 export function connectionStrategies(m: Module, config: SubSkillConfig, skill: string): Strategy[] {
   return m.strategies.filter((s) => strategyConnects(config, skill, s));

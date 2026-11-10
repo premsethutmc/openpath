@@ -27,7 +27,9 @@ test("only trusted grader decisions: every attempt carries the server's grading-
   for (const t of Object.values(T)) for (const s of t.submissions) assert.ok(s.verdict !== null, `${t.id} ${s.q}`);
 });
 
-test("G-02: fresh angle-sum success survives reload, but untaught methods cannot pass the mixed delayed check", () => {
+// method-sections@2 (2026-11-10): the lesson now shows every method the mixed delayed check asks, so it is passed; that a method
+// not shown cannot pass is covered by method-alignment.test.ts (a changed explanation) and method-sections.test.ts (no gaps)
+test("G-02: fresh angle-sum success survives reload, and the mixed delayed check passes after a lesson showing every method", () => {
   const t = T["G-02"];
   assert.equal(t.submissions[0].activity, "diagnostic");
   assert.equal(t.submissions[0].verdict, "incorrect");
@@ -35,9 +37,8 @@ test("G-02: fresh angle-sum success survives reload, but untaught methods cannot
   assert.ok(t.teaching.length >= 1 && t.teaching.every((x) => x.eligibility.eligible));
   assert.ok(t.submissions.some((s) => s.activity === "check" && s.verdict === "correct" && s.hints === 0));
   assert.ok(["independent", "transfer"].includes(t.authoritative[TRI].status));
-  assert.deepEqual(t.authoritative[TRI].retentionHistory, ["pending"]);
-  assert.equal(t.authoritative[TRI].verified, false);
-  assert.equal(t.ended, "pause");
+  assert.deepEqual(t.authoritative[TRI].retentionHistory, ["passed"]);
+  assert.equal(t.ended, "done");
   assert.deepEqual(t.replay, { identicalState: true, identicalProjection: true, identicalNextModuleDecision: true, reversedOrderProjectionIdentical: true });
 });
 

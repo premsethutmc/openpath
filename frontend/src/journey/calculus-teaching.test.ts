@@ -41,8 +41,10 @@ test('authored expansion replaces rejected automatic steps without moving the as
   const s = m.strategies.find(s => s.id === 'expand_cancel')!;
   assert.equal(s.guided, 'gen:aqfp:2,1,3,0');
   assert.equal(s.check, 'gen:aqfp:0,2,4,-4:mc');
-  assert.equal(s.screens.length, 4);
-  assert.ok(s.screens.every(sc => sc.instance === 'gen:aqfp:0,1,-5,-4'));
+  // method-sections@2: its own four sections; the sections added for the module's other methods follow them
+  const own = s.screens.filter(sc => sc.section !== 'method');
+  assert.equal(own.length, 4);
+  assert.ok(own.every(sc => sc.instance === 'gen:aqfp:0,1,-5,-4'));
   assert.equal(teachingEligibility(m,s).eligible, true);
   assert.equal(contentEligibility(m,s,{competency:m.competency,usage:'lesson',mode:'supervised-evaluation'}).educatorApproved, false);
 });

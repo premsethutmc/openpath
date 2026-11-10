@@ -24,7 +24,6 @@ import { strategyScopeProblems } from "./teaching-presentation";
 import { CONNECTION_CONFIGS } from "./skill-connections";
 import { kindsOf, methodKinds, parseId, shownKinds } from "./method-kinds";
 export { shownKinds };
-import { teachingScopeFor } from "./teaching-presentation";
 import grade7Scope from "../../../content/learning/teaching-scope-grade7.v1.json";
 import grade8Scope from "../../../content/learning/teaching-scope-grade8.v1.json";
 
@@ -422,13 +421,13 @@ const familyKinds = (f: string): Map<string, Problem[]> => {
   }
   return out;
 };
-/** The method kinds a strategy's follow-ups may need, each with the questions of that kind: a scoped strategy's own scope,
- *  otherwise every question of the module (its pools and its fixed generated items) */
-export function followableKinds(m: Module, s: Strategy): Map<string, Problem[]> {
-  const sc = s.scope ? teachingScopeFor(m, s) : null;
+/** The method kinds a strategy's follow-ups and delayed checks may need, each with the questions of that kind: every question of
+ *  the module (its pools and its fixed generated items). A scoped explanation included: a mixed delayed check may ask any unit, and
+ *  a method is shown before it is checked. */
+export function followableKinds(m: Module, _s?: Strategy): Map<string, Problem[]> {
   const out = new Map<string, Problem[]>();
   const fams = new Set([...poolFamilies(m), ...[...m.diagnostics, ...m.practice, ...m.transfer, ...m.retention].flatMap((id) => { const p = parseId(id); return p && FAMILIES.get(p.family)?.competency === m.competency ? [p.family] : []; })]);
-  for (const f of fams) for (const [k, ps] of familyKinds(f)) { const ok = sc ? ps.filter((p) => sc.accepts(p)) : ps; if (ok.length) out.set(k, ok); }
+  for (const f of fams) for (const [k, ps] of familyKinds(f)) out.set(k, ps);
   return out;
 }
 /** method kinds the strategy's follow-ups may need that none of its sections shows (method-sections@2 gap check) */
@@ -452,7 +451,9 @@ export function withMethodSections(m: Module): Module {
     if (!def.teach) return null;
     const inst = def.teach.instance?.(p.params);
     // the picture the question or its teaching draws (a question that says "as in the picture" needs its figure)
-    const w = def.teach.visual?.(p.params) ?? def.figure?.(p.params);
+    const pic = def.teach.visual?.(p.params) ?? def.figure?.(p.params);
+    // teaching-contract@1: a "dots" picture is decorative there (it counts nothing the question asks), so it is not drawn
+    const w = pic && (pic as { type?: string }).type !== "dots" ? pic : null;
     const math = worked(p);
     // teaching-contract@1: family-level text may quote only this question's numbers; a sentence quoting others is left out
     const nums = (t: string) => (t.match(/\d+(?:\.\d+)?/g) ?? []).map(Number);

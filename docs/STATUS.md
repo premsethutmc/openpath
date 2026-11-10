@@ -20,13 +20,14 @@ Updated: 2026-11-10 (method sections by construction, computed coverage; on `fea
 - method-sections@2 (`library.ts` withMethodSections, `method-kinds.ts`): every explanation (built and hand-written, all
   grades) shows every method its follow-ups may ask. For each method kind (a family, or its declared cases) that a question it
   can be followed by needs and none of its sections works through, it gets a section: a worked example of a fresh question of
-  that kind (typed first, with its picture), from the family's own teaching. 959 of 1,185 built explanations gained 2,756
-  sections (1–13; 76% gained 1–4); 37 hand-written explanations gained 114, stored in `library.v1.json` `authoredSections`
-  (their own text unchanged). The lesson page does not repeat them (it already shows every family).
+  that kind (typed first, with its picture), from the family's own teaching. Scoped explanations too: a mixed delayed check may
+  ask any unit. 1,051 of 1,185 built explanations gained 3,040 sections (1–13); 47 hand-written explanations gained 149, stored
+  in `library.v1.json` `authoredSections` (their own text unchanged; the server hashes them the same way). The lesson page does
+  not repeat them (it already shows every family); scope and sub-skill checks read an explanation's own sections.
 - Coverage is computed (`method-alignment.ts`): an explanation covers the kinds of the questions its sections show. The hand
-  map (`method-alignment.v1.json`) is history only. Every lesson records its content hash, so the gate applies to all modules;
-  a scoped explanation's follow-ups are its own unit (another unit is governed by its own teaching); a lesson whose
-  explanation changed since refuses follow-ups. The block check keeps the explanation's own check when it is covered.
+  map (`method-alignment.v1.json`) is history only. Every lesson records its content hash, so the gate applies to all modules
+  (the rule that a method not shown cannot be verified is kept); a lesson whose explanation changed since refuses follow-ups.
+  The block check keeps the explanation's own check when it is covered. G-02 (angle sum) now passes its mixed delayed check.
 - Teaching checks unchanged: 1,063 explanations pass the teaching contract, as before (none lost). Lesson checks at baseline.
 - Gap check (`method-sections.test.ts`, ~1 min, no simulation): fails CI if any explanation can be followed by a method it
   does not show. 0 gaps. Pythagoras's second triple rule now has its own worked example.

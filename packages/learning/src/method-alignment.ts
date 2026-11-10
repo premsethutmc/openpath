@@ -9,7 +9,6 @@ import { independentAttempt, rightAnswer, nativeItem } from './evidence';
 import { moduleFor as lookupModule, question, type Module, type Strategy } from './content';
 import type { LearnerRecords } from './records';
 import { methodKinds, methodRequirements, shownKinds } from './method-kinds';
-import { teachingScopeFor } from './teaching-presentation';
 export { methodKinds, methodRequirements };
 export const ALIGNMENT_POLICY = 'method-alignment@1';
 export const alignmentHash = (s: Strategy) => sha256Hex(JSON.stringify(s.screens));
@@ -42,9 +41,6 @@ export function alignmentActive(m: Module,s: Strategy,records:LearnerRecords) {r
 export function followupCompatible(m:Module,s:Strategy,id:string,records:LearnerRecords):boolean {
   const t=records.teaching.filter(t=>t.competency===m.competency&&t.strategy===s.id).at(-1);
   if(!t?.methodAlignment)return true; // explicit legacy replay; not a claim of compatibility
-  // a scoped explanation (skill-units) teaches its unit: a question of another unit is not its follow-up (that unit's own
-  // teaching and evidence govern it), so this lesson neither covers nor refuses it
-  if(s.scope){const p=id.startsWith('gen:')?problemOf(id.replace(/:(mc|w)$/,'')):null;if(!p||!teachingScopeFor(m,s).accepts(p))return true;}
   if(t.methodAlignment!==alignmentRecord(m,s))return false;
   const known=establishedMethods(records,t.at);
   for(const a of records.attempts)if(a.at>=t.at&&independentAttempt(a)&&!rightAnswer(a))for(const method of methodKinds(a.questionId))known.delete(method);
