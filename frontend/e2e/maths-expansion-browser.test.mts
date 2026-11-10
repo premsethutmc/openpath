@@ -127,7 +127,8 @@ try {
       const title = await page.locator(".lesson .eyebrow").innerText();
       const review = await page.locator("[data-content-review]").getAttribute("data-content-review");
       const screens: string[] = [];
-      for (let i = 0; i < 12; i++) {
+      // method-sections@2: an explanation may carry up to 13 added sections, so read until the last screen
+      for (let i = 0; i < 40; i++) {
         await page.locator(".lesson").waitFor({ state: "visible" });
         if (c.family === "ahtri" && i === 0 && visibleLessons.length === 0) await checkTriangleInteraction(page, process.env.GEOMETRY_SHOTS ?? "/tmp/geometry-quality/screens");
         screens.push(await page.locator(".lesson").innerText());

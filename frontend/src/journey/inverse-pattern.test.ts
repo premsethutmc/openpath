@@ -120,8 +120,8 @@ test("teaching: every skill has its own scoped explanation; worked lines undo wi
       const list = m.strategies.filter((st) => teachable(m, st, []) && strategyConnects(config, s.id, st));
       assert.deepEqual(list.map((st) => st.id), [TAUGHT[s.id]], `${s.id}: exactly its general explanation without misconception evidence`);
       const st = list[0];
-      for (const id of [...st.screens.flatMap((b) => (b.instance ? [b.instance] : [])), st.guided, st.check]) assert.equal(connectedSkill(config, id), s.id, `${st.id}: ${id}`);
-      for (const b of st.screens) {
+      for (const id of [...st.screens.filter((b) => b.section !== "method").flatMap((b) => (b.instance ? [b.instance] : [])), st.guided, st.check]) assert.equal(connectedSkill(config, id), s.id, `${st.id}: ${id}`);
+      for (const b of st.screens.filter((b) => b.section !== "method")) {
         assert.ok(b.text.every((t) => !/\d/.test(t)), `${st.id}: the explanation states the method, not instance numbers`);
         const math = b.math ?? [];
         const ex = problemOf(b.instance!)!;

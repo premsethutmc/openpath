@@ -16,22 +16,19 @@
  * same modules; a test checks that the file is exactly what the blueprints synthesise.
  */
 import { poolFamilies, type Module, type Screen, type Strategy } from "./content";
-import { difficultyOf, explainStep, exposureKey, FAMILIES, phasePool, pool, problemOf, show, type Phase, type Problem } from "./families";
+import { difficultyOf, explainStep, exposureKey, FAMILIES, phaseOf, phasePool, pool, problemOf, show, type Phase, type Problem } from "./families";
 import { graph } from "./graph";
 import { selectable } from "./question-status";
 import { FAMILY_VERSION } from "./spec";
 import { strategyScopeProblems } from "./teaching-presentation";
 import { CONNECTION_CONFIGS } from "./skill-connections";
+import { kindsOf, methodKinds, parseId, shownKinds } from "./method-kinds";
+export { shownKinds };
 import grade7Scope from "../../../content/learning/teaching-scope-grade7.v1.json";
 import grade8Scope from "../../../content/learning/teaching-scope-grade8.v1.json";
 
 /** grade7-lessons@1: in the Grade 7 teaching scope a lesson teaches every family the module draws on (each sub-skill
  * section is tied to its own question and checked like any other section). */
-/** method-sections@1 (2026-11-10): modules whose module checks methods from its other families (the converse of Pythagoras, the rules
- *  that generate triples). Each way of explaining the main family (worked steps and the family's alternatives, not a misconception or
- *  prerequisite section) also carries those families' sections, so whichever explanation the engine gives shows every method that
- *  its follow-ups and delayed check may ask. Pending educator review like all generated teaching. */
-const METHOD_SECTIONS = new Set(["MATH.geometry.pythagoras"]);
 const WHOLE_LESSON = new Set([...(grade7Scope as { competencies: string[] }).competencies, ...(grade8Scope as { competencies: string[] }).competencies]);
 
 export const LIBRARY_POLICY = "library@2";
@@ -327,8 +324,6 @@ export function fromTemplate(family: string, competency: string, version: string
     }
   }
   const sub = subSkills(competency, family, used);
-  if (METHOD_SECTIONS.has(competency))
-    for (const st of strategies) if (st.kind !== "prerequisite" && st.id !== "spot_the_mistake") st.screens.push(...sub.chapter.map((sc) => ({ ...sc, role: "worked-example" as const })));
   const own = [take("practice", "typed"), take("practice", "mc"), take("practice", "typed")];
   return {
     competency,
@@ -403,5 +398,81 @@ export function buildLibrary(bps: { version: string; blueprints: Blueprint[] }, 
     const pools = poolsFor(m.competency, f.id);
     return [[m.competency, { family: f.id, version: FAMILY_VERSION[f.id], ...(pools.length > 1 ? { pools } : {}) }]];
   }));
-  return { modules: [...fromBlueprints, ...fromTemplates], fromBlueprints, fromTemplates, authoredPools, notBuilt };
+  // method-sections@2: a hand-written module keeps its own text; the sections its explanations need are stored beside it and
+  // appended when content.ts assembles it (same rule as for the modules built here)
+  const authoredSections: Record<string, Record<string, Screen[]>> = {};
+  for (const m of authored) {
+    const a = authoredPools[m.competency];
+    if (!a) continue;
+    const full = withMethodSections({ ...m, pool: { family: a.family, version: a.version }, ...(a.pools ? { pools: a.pools } : {}) });
+    full.strategies.forEach((st, i) => { const extra = st.screens.slice(m.strategies[i].screens.length); if (extra.length) (authoredSections[m.competency] ??= {})[st.id] = extra; });
+  }
+  return { modules: [...fromBlueprints, ...fromTemplates].map(withMethodSections), fromBlueprints, fromTemplates, authoredPools, authoredSections, notBuilt };
+}
+
+const kindMemo = new Map<string, Map<string, Problem[]>>();
+/** a family's release questions grouped by method kind (memoised: computed once per family) */
+const familyKinds = (f: string): Map<string, Problem[]> => {
+  let out = kindMemo.get(f);
+  if (!out) {
+    out = new Map();
+    for (const p of pool(f).items) if (selectable(p.id)) for (const k of kindsOf(p.family, p.params)) out.set(k, [...(out.get(k) ?? []), p]);
+    kindMemo.set(f, out);
+  }
+  return out;
+};
+/** The method kinds a strategy's follow-ups and delayed checks may need, each with the questions of that kind: every question of
+ *  the module (its pools and its fixed generated items). A scoped explanation included: a mixed delayed check may ask any unit, and
+ *  a method is shown before it is checked. */
+export function followableKinds(m: Module, _s?: Strategy): Map<string, Problem[]> {
+  const out = new Map<string, Problem[]>();
+  const fams = new Set([...poolFamilies(m), ...[...m.diagnostics, ...m.practice, ...m.transfer, ...m.retention].flatMap((id) => { const p = parseId(id); return p && FAMILIES.get(p.family)?.competency === m.competency ? [p.family] : []; })]);
+  for (const f of fams) for (const [k, ps] of familyKinds(f)) out.set(k, ps);
+  return out;
+}
+/** method kinds the strategy's follow-ups may need that none of its sections shows (method-sections@2 gap check) */
+export function missingKinds(m: Module, s: Strategy): Map<string, Problem[]> {
+  const shown = shownKinds(s);
+  return new Map([...followableKinds(m, s)].filter(([k]) => !shown.has(k)));
+}
+export function withMethodSections(m: Module): Module {
+  const reserved = new Set([...m.chapter, ...m.strategies.flatMap((s) => s.screens)].flatMap((sc) => (sc.instance ? [exposureKey(sc.instance)] : []))
+    .concat([...m.diagnostics, ...m.practice, ...m.transfer, ...m.retention, ...m.strategies.flatMap((s) => [s.guided, s.check])].map(exposureKey)));
+  const picked = new Map<string, string>();
+  const exampleFor = (k: string, ps: Problem[]): string | null => {
+    if (picked.has(k)) return picked.get(k)!;
+    // a typed question first (a choice question's working cites option letters), then the easiest
+    const id = ps.filter((p) => phaseOf(p.id) === "practice" && !reserved.has(exposureKey(p.id))).sort((a, b) => Number(a.type === "choice") - Number(b.type === "choice") || difficultyOf(a) - difficultyOf(b) || a.id.localeCompare(b.id))[0]?.id ?? null;
+    if (id) { picked.set(k, id); reserved.add(exposureKey(id)); }
+    return id;
+  };
+  const section = (id: string): Screen | null => {
+    const p = problemOf(id)!, def = FAMILIES.get(p.family)!;
+    if (!def.teach) return null;
+    const inst = def.teach.instance?.(p.params);
+    // the picture the question or its teaching draws (a question that says "as in the picture" needs its figure)
+    const pic = def.teach.visual?.(p.params) ?? def.figure?.(p.params);
+    // teaching-contract@1: a "dots" picture is decorative there (it counts nothing the question asks), so it is not drawn
+    const w = pic && (pic as { type?: string }).type !== "dots" ? pic : null;
+    const math = worked(p);
+    // teaching-contract@1: family-level text may quote only this question's numbers; a sentence quoting others is left out
+    const nums = (t: string) => (t.match(/\d+(?:\.\d+)?/g) ?? []).map(Number);
+    const allowed = new Set([...math, ...p.params.map(String)].flatMap(nums));
+    const own = [def.teach.idea, def.teach.method].flatMap((t) => t.split(/(?<=\.)\s+/)).filter((t) => nums(t).every((v) => allowed.has(v)));
+    return { title: inst ? inst.concept.title : def.title, text: inst ? inst.concept.text : own.length ? own : ["Follow the steps of this example."], math, ...(w ? { widget: w as Screen["widget"] } : {}), role: "strategy", instance: id, ...(inst ? { textFrom: "instance" as const } : {}), section: "method" };
+  };
+  const strategies = m.strategies.map((s) => {
+    const add: Screen[] = [];
+    const shown = shownKinds(s);
+    for (const [k, ps] of missingKinds(m, s)) {
+      if (shown.has(k)) continue;
+      const ex = exampleFor(k, ps);
+      const sc = ex ? section(ex) : null;
+      if (!sc) continue;
+      add.push(sc);
+      for (const x of methodKinds(ex!)) shown.add(x);
+    }
+    return add.length ? { ...s, screens: [...s.screens, ...add] } : s;
+  });
+  return { ...m, strategies };
 }

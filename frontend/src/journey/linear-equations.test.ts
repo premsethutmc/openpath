@@ -72,6 +72,9 @@ test("1 every worked line of every linear-equations explanation keeps exactly th
   for (const s of [chapterExplanation(M()), ...M().strategies])
     for (const sc of s.screens) {
       if (!sc.math?.length || !sc.instance) continue;
+      // method-sections@2: a section added for another kind of the module carries that family's own worked solution, checked by
+      // the teaching contract; this independent check reads the explanations' own sections
+      if (sc.section === "method") continue;
       const p = problemOf(sc.instance)!;
       const eqs = sc.math.filter((l) => !l.startsWith("Not "));
       if (eqs.length) lines += checkWorked(p, eqs[0] === equationOf(p) ? eqs : [equationOf(p), ...eqs]);

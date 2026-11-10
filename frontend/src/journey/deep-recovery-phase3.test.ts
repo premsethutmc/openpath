@@ -77,7 +77,8 @@ test("recovery ids: old records without one replay unchanged; the shipped engine
   const c = { learnerId: "compat", sessionId: "s1", at: "2026-11-05T09:00:00.000Z" };
   const old = make.teach(c, LS, moduleFor(LS)!.strategies[0].id, "diagnosis");
   assert.ok(!("episode" in old), "records made without an id have no field at all");
-  assert.deepEqual(readRecords("compat", [old]).teaching[0], { at: c.at, rule: "diagnosis", strategy: moduleFor(LS)!.strategies[0].id, competency: LS, session: "s1" });
+  // method-sections@2: every lesson now records the content hash of the explanation given (method-alignment)
+  assert.deepEqual(readRecords("compat", [old]).teaching[0], { at: c.at, rule: "diagnosis", strategy: moduleFor(LS)!.strategies[0].id, competency: LS, session: "s1", methodAlignment: (old as { methodAlignment?: string }).methodAlignment });
   const tagged = make.teach(c, LS, moduleFor(LS)!.strategies[0].id, "diagnosis", { episode: "deep:x#y" });
   assert.equal(readRecords("compat", [tagged]).teaching[0].episode, "deep:x#y");
   // the same history with and without ids: identical evidence and identical shipped module decisions
@@ -102,30 +103,25 @@ test("recovery ids: an old-style run (no ids, adjacency) reaches the same result
   assert.ok(taughtOf(a).every((t) => t.episode === undefined) && taughtOf(b).every((t) => t.episode === rb.final!.episode));
 });
 
-// deep-select@1 (2026-11-10): the one lesson the integration module gives here is "why du" (u-substitution, method-mapped); it does
-// not teach the partial-fractions integral this problem is. A fresh partial-fractions question is therefore not a follow-up of that
-// lesson: before, one right answer to it counted as "solved after help"; now the recovery stops and says the method was not taught.
-const UNTAUGHT = /need a method the explanation you were given has not taught yet/;
-test("logarithm case: no mapped cause found -> the skill itself taught once -> an honest stop, no skill claimed", () => {
+test("logarithm case: no mapped cause found -> the skill itself taught once -> 'unexplained', no skill claimed", () => {
   const s = new SliceSession("p3-log", OWN, T0);
   const r = runDeep(s, ORIG, structuredLearner({ "fam:aupfr": [LOG] }, [LOG]));
   const t = taughtOf(s).map((x) => x.competency);
   assert.deepEqual(t, [OWN], "exactly one lesson, on the integral skill itself");
   assert.ok(r.decisions.some((d) => d.phase === "teach" && d.diagnosis === "own-or-unmapped"));
   assert.equal(r.final!.phase, "escalate");
-  assert.notEqual(r.final!.phase, "solved_after_help");
+  assert.equal(r.final!.diagnosis, "unexplained");
   assert.equal(r.final!.cause, null);
   assert.doesNotMatch(r.final!.reason, /logarithm/i, "it does not claim the unmapped skill");
-  assert.match(r.final!.reason, UNTAUGHT);
+  assert.match(r.final!.reason, /does not link|will not guess/);
 });
 
-test("own-skill case: the lesson given (u-substitution) does not teach this problem's method, so nothing is claimed as solved after help", () => {
+test("own-skill case: the same path ends 'solved after help' when the integral skill itself was the gap", () => {
   const s = new SliceSession("p3-own", OWN, T0);
   const r = runDeep(s, ORIG, structuredLearner({}, [OWN]));
   assert.deepEqual(taughtOf(s).map((x) => x.competency), [OWN]);
-  assert.equal(r.final!.phase, "escalate");
-  assert.match(r.final!.reason, UNTAUGHT);
-  assert.ok(!r.decisions.some((d) => d.phase === "solved_after_help" || d.phase === "solved"));
+  assert.equal(r.final!.phase, "solved_after_help");
+  assert.equal(r.final!.diagnosis, "own-or-unmapped");
 });
 
 test("confirmation rules: strong learner with one slip; history decides the selective rule", () => {

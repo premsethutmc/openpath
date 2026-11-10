@@ -79,7 +79,8 @@ export function strategyScopeProblems(module: Module, strategy: Strategy): strin
   const accepts = (p: Problem) => p.family === declared.family && p.competency === module.competency
     && (!declared.subSkill || (!!config && connectedSkill(config, p.id) === declared.subSkill))
     && (!declared.parameters || declared.parameters.every(c => c.index < p.params.length && c.values.includes(p.params[c.index])));
-  for (const [label, id] of [["guided", strategy.guided], ["check", strategy.check], ...strategy.screens.filter(s => s.role !== "prerequisite").map((s,i) => [`screen ${i}`, s.instance ?? ""])] as [string,string][]) {
+  for (const [label, id] of [["guided", strategy.guided], ["check", strategy.check], ...strategy.screens.filter(s => s.role !== "prerequisite" && s.section !== "method").map((s,i) => [`screen ${i}`, s.instance ?? ""])] as [string,string][]) {
+    // method-sections@2: sections added so the explanation shows the module's other methods are outside its scope by design
     const p = problemOf(id.replace(/:(mc|w)$/, ""));
     if (!p || !selectable(id) || !accepts(p)) problems.push(`${label} is outside the declared task scope or has no instance`);
   }

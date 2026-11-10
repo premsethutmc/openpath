@@ -143,7 +143,7 @@ async function next(page) {
 }
 /** Read a lesson (strategy chapter) to its end. */
 async function lesson(page) {
-  for (let i = 0; i < 8; i++) {
+  for (let i = 0; i < 40; i++) { // method-sections@2: up to 13 added sections
     const tryIt = page.getByRole("button", { name: "Try it" });
     if (await tryIt.count()) {
       await tryIt.click();
@@ -1022,7 +1022,7 @@ test("content system: an educator reviews a question family and its module in th
   for (const c of [ed.context, rm.context, context]) await c.close();
 });
 
-test("content system: Grade 10 and an unfamiliar textbook verify; Grade 12 release cannot bypass missing-method teaching", async () => {
+test("content system: Grade 10, Grade 12 and an unfamiliar textbook verify (method-sections@2: the integration lesson shows every method its checks ask)", async () => {
   if (mode !== "django") return;
   await releaseAll(await sharedReviewers(), [...new Set(["MATH.algebra.factorisation", "MATH.calculus.integration-methods", "MATH.algebra.identities-intro"].flatMap(moduleWithFamilies))]);
   // the reviewers are done (their review pages would otherwise go on counting the library's coverage meanwhile)
@@ -1046,7 +1046,7 @@ test("content system: Grade 10 and an unfamiliar textbook verify; Grade 12 relea
     await setupYear(page, 12);
     await recoverTyped(page, "integral from 0 to 2 of 2x(x^2+1) dx", "multiply-for-power");
     await page.getByText("Solved after help", { exact: true }).waitFor();
-    await learnReleasedTopic(page, learner, ["Calculus", "Integrals", "Techniques of integration", "Integrate by substitution and parts"], "v12", "MATH.calculus.integration-methods", "method-gap");
+    await learnReleasedTopic(page, learner, ["Calculus", "Integrals", "Techniques of integration", "Integrate by substitution and parts"], "v12", "MATH.calculus.integration-methods");
     await context.close();
   }
   // an unfamiliar plain-text textbook (Board C, Grade 9)

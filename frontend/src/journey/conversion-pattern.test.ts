@@ -135,15 +135,15 @@ test("teaching availability: each of the 19 skills has exactly its own skill-sco
       const list = m.strategies.filter((st) => teachable(m, st, []) && strategyConnects(config, s.id, st));
       assert.deepEqual(list.map((st) => st.id), [TAUGHT[s.id]], s.id);
       const st = list[0];
-      for (const id of [...st.screens.flatMap((b) => (b.instance ? [b.instance] : [])), st.guided, st.check]) assert.equal(connectedSkill(config, id), s.id, `${st.id}: ${id}`);
-      for (const b of st.screens) {
+      for (const id of [...st.screens.filter((b) => b.section !== "method").flatMap((b) => (b.instance ? [b.instance] : [])), st.guided, st.check]) assert.equal(connectedSkill(config, id), s.id, `${st.id}: ${id}`);
+      for (const b of st.screens.filter((b) => b.section !== "method")) {
         const ex = problemOf(b.instance!.replace(/:mc$/, ""))!;
         const own = [ex.prompt.replace(/ \(.*\)$/, "").replace(/ Choose one\.$/, ""), ...ex.steps.map((x) => explainStep(ex, x))];
         // a native-choice task adds one line naming the chosen option (its answer is a letter)
         const expected = ex.options ? [...own, `So: ${ex.options["ABCDEFGH".indexOf(String(ex.answer))]}`] : own;
         assert.deepEqual(b.math, expected, `${st.id}: the math lines are the generator's own lines for its instance`);
       }
-      assert.ok(st.screens.every((b) => b.text.every((t) => !/\d/.test(t))), `${st.id}: explanation text states the method, not instance numbers`);
+      assert.ok(st.screens.filter((b) => b.section !== "method").every((b) => b.text.every((t) => !/\d/.test(t))), `${st.id}: explanation text states the method, not instance numbers`);
       const ex = problemOf(st.screens[0].instance!)!;
       assert.ok(Number(ex.answer) !== 0 && Number(ex.answer) !== 1 && !/\b0 (paise|cm|mm|m)\b/.test(ex.prompt), `${st.id}: the worked example is not trivial`);
       // ratio scales: the taught items never use a scale where the multiplication and the unit change cancel (1 : 100 to metres, 1 : 100000 to km)

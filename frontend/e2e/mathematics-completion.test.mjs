@@ -165,7 +165,7 @@ async function answer(page, policy = () => null, { hint = false } = {}) {
   return { qid, response };
 }
 async function lesson(page) {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 40; i++) { // method-sections@2: up to 13 added sections
     const tryIt = page.getByRole("button", { name: "Try it" });
     if (await tryIt.count()) {
       const title = await page.locator(".lesson .eyebrow").innerText();

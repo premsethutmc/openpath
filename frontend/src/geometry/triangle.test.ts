@@ -30,7 +30,7 @@ test('triangle reasoning teaches the same task as fresh guided and independent q
   assert.ok(s);assert.deepEqual(s.scope,{family:'ahtri',subSkill:'triangle-properties.angle-sum@1'});
   assert.equal(question(s.guided).answer,'42');assert.equal(question(s.check).answer,'99');
   assert.notEqual(problemKeyOf(s.guided),problemKeyOf(s.check));
-  for(const sc of s.screens) {assert.ok(['gen:ahtri:30,90','gen:ahtri:56,85'].includes(sc.instance!));assert.notEqual(problemKeyOf(sc.instance!),problemKeyOf(s.check));}
+  for(const sc of s.screens.filter(b=>b.section!=='method')) {assert.ok(['gen:ahtri:30,90','gen:ahtri:56,85'].includes(sc.instance!));assert.notEqual(problemKeyOf(sc.instance!),problemKeyOf(s.check));}
 });
 
 test('replacement keeps the old lesson record ID and refuses missing IDs or another family',()=>{
