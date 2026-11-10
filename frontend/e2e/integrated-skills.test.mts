@@ -89,7 +89,7 @@ try {
     const lesson = async () => {
       const title = await page.locator(".lesson .eyebrow").innerText();
       const review = await page.locator("[data-content-review]").getAttribute("data-content-review");
-      for (let i = 0; i < 12; i++) {
+      for (let i = 0; i < 40; i++) { // method-sections@2: up to 13 added sections
         const eyebrow = await page.locator(".lesson .eyebrow").innerText();
         const btn = page.locator(".actions.sticky button.primary").last(), label = await btn.innerText();
         await btn.click();
@@ -170,7 +170,7 @@ try {
     assert.equal(await screen(), "lesson", `${c.name}: still wrong on the skill alone → the skill is explained again`);
     const rs = (await stateAt(realNow + 9 * DAY)).module(c.competency);
     const general = rs.strategy!;
-    assert.ok([general.guided, general.check, ...general.screens.map((x) => x.instance!).filter(Boolean)].every((q) => skillOf(q) === c.skill), `${c.name}: ${general.id} is scoped to the taught skill`); assert.equal(general.addresses, undefined, "the general explanation: one wrong answer is not a misconception");
+    assert.ok([general.guided, general.check, ...general.screens.filter((x) => x.section !== "method").map((x) => x.instance!).filter(Boolean)].every((q) => skillOf(q) === c.skill), `${c.name}: ${general.id} is scoped to the taught skill`); assert.equal(general.addresses, undefined, "the general explanation: one wrong answer is not a misconception");
     const rl = await lesson(); assert.equal(rl.review, "pending_review");
     assert.equal(await screen(), "question");
     // guided practice may come first; then the fresh recheck alone

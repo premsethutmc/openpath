@@ -89,7 +89,7 @@ async function answerInUi(value: string) {
   await page.getByRole("button", { name: "Check", exact: true }).click();
 }
 async function lesson(stopAtScreen?: number) {
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 40; i++) { // method-sections@2: up to 13 added sections
     const eyebrow = await page.locator(".lesson .eyebrow").innerText();
     if (stopAtScreen !== undefined && i === stopAtScreen) return eyebrow;
     const btn = page.locator(".actions.sticky button.primary").last(), label = await btn.innerText();
