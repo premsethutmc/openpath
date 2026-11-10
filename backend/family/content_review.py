@@ -48,9 +48,14 @@ def items():
         out[f"curriculum:{r['id']}@{r['version']}"] = {'hash': r['hash'], 'version': r['version'], 'kind': 'curriculum', 'competency': '', 'families': [], 'title': r['title'], 'author': 'OpenPath sample review (not an educator)', 'valid': True}
     lib = _load('library.v1.json')
     pools = lib.get('authoredPools', {})
+    sections = lib.get('authoredSections', {})
     mods = []
     for m in [*_load('modules.v1.json')['modules'], *_load('written-modules.v1.json')['modules']]:
         a = pools.get(m['competency'])
+        # method-sections@2 (content.ts): the sections the library build stored for a hand-written module's explanations
+        extra = sections.get(m['competency'])
+        if extra:
+            m = {**m, 'strategies': [({**s, 'screens': [*s['screens'], *extra[s['id']]]} if s['id'] in extra else s) for s in m['strategies']]}
         # as the app builds it (content.ts): the main family as pool, every family as pools (pools@1)
         mods.append(({**m, 'pool': {'family': a['family'], 'version': a['version']}, **({'pools': a['pools']} if a.get('pools') else {})} if a else m, 'authored'))
     authored = {m['competency'] for m, _ in mods}
