@@ -79,6 +79,39 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
   return id && phase === "check" ? situationFirst(m, id, records) : id;
 }
 
+/**
+ * prereq-after-own@1 (OFF by default; usePrerequisiteAfterOwn). The shipped order is: teach the skill itself first. When every
+ * explanation of the skill has been tried and it is still wrong, the module paused for a person and the skills it builds on were
+ * never checked, so a learner whose real gap is one step below stayed stuck. With the switch on:
+ *   1. before such a pause, the module opens the existing recovery on the learner's latest wrong question of this skill, and the
+ *      recovery (which no longer stops at "explanations have not clicked" for the problem's OWN skill) walks the skills it builds on
+ *      exactly as it already does for an unsure diagnosis: the first one not shown is checked and, if needed, taught in its module;
+ *   2. once a skill it builds on has been TAUGHT (a lesson, not just a right answer), this skill's explanations may be given once
+ *      more: they were tried while that piece was missing. Only a lesson reopens them, so the loop is finite.
+ * Nothing changes while no unshown, teachable skill is below: the module pauses for a person as before.
+ */
+const PREREQ = globalThis as { __openpathPrereqAfterOwn?: boolean };
+export function usePrerequisiteAfterOwn(on: boolean) { PREREQ.__openpathPrereqAfterOwn = on; }
+export const prerequisiteAfterOwn = () => PREREQ.__openpathPrereqAfterOwn === true;
+/** When a lesson on a skill this one builds on was last given (null: never, or the switch is off). */
+function reopenedAt(competency: string, records: LearnerRecords): string | null {
+  if (!prerequisiteAfterOwn()) return null;
+  const own = graph.evidenceTarget(competency);
+  const below = new Set(walkSupports(competency, RECOVERY_DEPTH).map((x) => graph.evidenceTarget(x.id)).filter((id) => id !== own));
+  return records.teaching.filter((t) => below.has(graph.evidenceTarget(t.competency))).map((t) => t.at).sort().at(-1) ?? null;
+}
+/** The learner's latest wrong, unsolved question of this skill whose recovery would now go to a skill it builds on. */
+function gapBelow(competency: string, records: LearnerRecords, evidence: ((id: string) => SkillEvidence) | undefined, now: number, session: string): { original: string; reason: string } | null {
+  if (!prerequisiteAfterOwn() || !evidence) return null;
+  const own = graph.evidenceTarget(competency);
+  const wrong = [...records.attempts].reverse().filter((a) => !rightAnswer(a) && graph.evidenceTarget(question(a.questionId).competency) === own).map((a) => a.questionId);
+  for (const id of [...new Set(wrong)].slice(0, 3)) {
+    const r = recovery(id, records, evidence, now, session);
+    if (r.phase === "support" || (r.phase === "teach" && r.active && graph.evidenceTarget(r.active) !== own)) return { original: id, reason: r.reason };
+  }
+  return null;
+}
+
 /** eligible@1: how many fresh validated questions one visit may add after a delayed check that could not count. */
 export const ELIGIBLE_MAX = 4;
 /**
@@ -583,9 +616,14 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   // hypothesis's own relevant-teaching record), not after any lesson in the skill: a lesson for another form of the skill
   // (e.g. "The box was multiplied" while the open claim is added-both on n − □) leaves the claim untaught, not exhausted
   if (here && own!.teachingDue && own!.teaching.lastAt) {
-    const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id);
+    const ro = reopenedAt(competency, records);
+    const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id && (!ro || t.at > ro));
     const s = orderStrategies(m, d, records, [own!.claim!.explanation]).find((x) => !delivered(x));
-    if (!s) return { ...base, phase: "pause", diagnosis: d, reason: "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." };
+    if (!s) {
+      const gap = gapBelow(competency, records, evidence, now, session);
+      if (gap) return { ...base, phase: "recover", original: gap.original, diagnosis: d, reason: gap.reason };
+      return { ...base, phase: "pause", diagnosis: d, reason: "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." };
+    }
     return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, [own!.claim!.explanation]), basis: evidenceBasis(competency, records, { evidence: ev, diagnosis: d }), diagnosis: d, reason: `${claimWording(own!.scope.question, own!.claim!.explanation, own!.claim!.says)} It showed again after the last explanation, so here is a different one.` };
   }
   // explore-once@1: an exploratory question already answered (in either format) is never served again. The diagnosis counts
@@ -696,7 +734,9 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
   // a finding passed in by recovery (diagnostic@2) carries its diagnosis id; one without an id licenses any misconception-specific explanation
   const misEv: Evidence = established ? (established.id ? [established.id] : true) : basis.established;
   const order = orderStrategies(m, d, records, misEv);
-  const rs = ruleStateFor(m, d, records);
+  // prereq-after-own@1: lessons given before a skill this one builds on was taught do not count as failed approaches
+  const reopened = reopenedAt(competency, records);
+  const rs = ruleStateFor(m, d, reopened ? { ...records, teaching: records.teaching.filter((t) => t.competency !== competency || t.at > reopened) } : records);
   const sessionStart = records.sessions[session] ?? new Date(now).toISOString();
   const last = records.teaching.filter((t) => t.competency === competency).at(-1);
   const st = last && m.strategies.find((s) => s.id === last.strategy);
@@ -718,8 +758,11 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     let s = byId(decision.strategy);
     // a strategy is taught once: availability is instruction DELIVERED (a teach record), not its questions having been
     // seen as practice; a strategy whose check was already answered is still taught, with a fresh check (blockCheck)
-    const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id);
+    const ro = reopenedAt(competency, records);
+    const delivered = (x: Strategy) => records.teaching.some((t) => t.competency === competency && t.strategy === x.id && (!ro || t.at > ro));
     if (s && delivered(s)) s = order.find((x) => !delivered(x)) ?? null;
+    const gap = s ? null : gapBelow(competency, records, evidence, now, session);
+    if (gap) return { ...base, phase: "recover", original: gap.original, diagnosis: d, decision, reason: gap.reason };
     if (!s) return { ...base, phase: "pause", diagnosis: d, decision, reason: order.length ? "Every explanation here has been tried. Carry on, and go through this with a teacher or parent; it will come back." : NO_EXPLANATION() };
     const before = records.teaching.some((t) => t.competency === competency);
     return { ...base, phase: "chapter", strategy: s, teachingReview: teachingStatus(m, s), contentReview: contentReviewOf(m, s, misEv), basis, diagnosis: d, decision, reason: before && ev.retention === "failed" ? "The delayed check did not come out, so here is the topic again, explained another way, then one on your own." : before ? "That way did not lead to a right answer on your own, so here is a different explanation." : established ? withTail(established.says, "Here is a way to rebuild it.") : open && claimTaughtBy(s) ? withTail(claimWording(own!.scope.question, own!.claim!.explanation, own!.claim!.says), "Here is a way to rebuild it.") : diagnosisReason(d, s) };
@@ -732,6 +775,11 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     if (unitOfStrategy(m, st)) return { ...base, phase: "pause", diagnosis: d, decision, reason: NO_UNIT_CHECK };
     if (!keyboardOffered(st.check)) return { ...base, phase: "pause", diagnosis: d, decision, reason: "The check for this is a drawing, which cannot be handed in with keyboard input yet. Other topics are open; go through the drawing with a teacher or parent." };
     return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no new question left to check this on your own yet. Carry on, and go through it with a teacher or parent." };
+  }
+  // prereq-after-own@1: before stopping for a person, look at what this skill builds on
+  if (decision.action === "recommend_human" || decision.action === "content_gap") {
+    const gap = gapBelow(competency, records, evidence, now, session);
+    if (gap) return { ...base, phase: "recover", original: gap.original, diagnosis: d, decision, reason: gap.reason };
   }
   if ((decision.action === "recommend_human" || decision.action === "content_gap") && !order.length) return { ...base, phase: "pause", diagnosis: d, decision, reason: NO_EXPLANATION() };
   if (decision.action === "content_gap") return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no new question left to check this on your own yet. Carry on, and go through it with a teacher or parent." };
@@ -1055,6 +1103,7 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
   const fam = familyOf(originalQid);
   let reasoning: Reasoning | null = null;
   let plan: RecoveryState["plan"] = null;
+  let ownPaused: RecoveryState | null = null;
   if (fam) {
     reasoning = investigation(originalQid, records).reasoning;
     // a follow-up the learner has already answered (anywhere) is not new evidence: a repeat is a second try (n > 1), which
@@ -1069,12 +1118,15 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
       if (moduleFor(plan.competency)) {
         const r = resolved(plan.competency, est);
         if (!r.done) {
-          if (r.ms.phase === "pause") return { ...base, reasoning, plan, established: est, phase: "escalate", active: plan.competency, ...(r.ms.handover ? { handover: r.ms.handover } : {}), reason: `${graph.get(plan.competency).name}: different explanations have not clicked yet. Ask a teacher or parent.` };
-          return { ...base, reasoning, plan, established: est, phase: plan.kind === "teach" ? "teach" : "support", active: plan.competency, reason: plan.why };
+          const stop: RecoveryState = { ...base, reasoning, plan, established: est, phase: "escalate", active: plan.competency, ...(r.ms.handover ? { handover: r.ms.handover } : {}), reason: `${graph.get(plan.competency).name}: different explanations have not clicked yet. Ask a teacher or parent.` };
+          // prereq-after-own@1: the problem's own skill has had every explanation: look at what it builds on before stopping
+          if (r.ms.phase === "pause" && prerequisiteAfterOwn() && graph.evidenceTarget(plan.competency) === ownTarget) ownPaused = stop;
+          else if (r.ms.phase === "pause") return stop;
+          else return { ...base, reasoning, plan, established: est, phase: plan.kind === "teach" ? "teach" : "support", active: plan.competency, reason: plan.why };
         }
         // Once prerequisite support is resolved, a failed return still owes the original skill's
         // teaching cycle below. A newly readable answer format must not bypass that recovery.
-        if (tries.length < 2 || graph.evidenceTarget(plan.competency) === ownTarget)
+        if (!ownPaused && (tries.length < 2 || graph.evidenceTarget(plan.competency) === ownTarget))
           return { ...base, reasoning, plan, phase: "return", active: null, reason: "Back to the original problem." };
       } else {
         // no module for it: the worked steps are the teaching, then back to the problem
@@ -1090,6 +1142,8 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
     if (r.ms.phase === "pause") return { ...base, reasoning, plan, phase: "escalate", active: s.id, ...(r.ms.handover ? { handover: r.ms.handover } : {}), reason: `${graph.get(s.id).name}: different explanations have not clicked yet. Ask a teacher or parent; you can still try the problem again.` };
     return { ...base, reasoning, plan, phase: "support", active: s.id, reason: `${plan?.kind === "unsure" ? `${plan.why} ` : ""}${s.type === "uses" ? `This problem uses a skill that is not shown yet: ${graph.get(s.id).name}.` : s.type === "mandatory" ? `This problem rests on a skill that is not shown yet: ${graph.get(s.id).name}.` : `A related skill that is not shown yet may help: ${graph.get(s.id).name}.`} We check it first, then come back to the problem.` };
   }
+  // prereq-after-own@1: nothing below it is open either: stop for a person, as before
+  if (ownPaused) return ownPaused;
   // no gap found in the skills this builds on
   if (tries.length >= 2) {
     if (ownTaught) {

@@ -32,6 +32,8 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
   wording references (`wordrefs.py`, `aeineqz` first) fix `inequations-intro`; `tools/recertify.sh` + CI check keep the
   registry current. Registry: 1,080 of 1,090 families, 216 hand-written.
 - Open: 9 answer-verified families wait for the grading audit; `aetfig` has no reference.
+- prereq-after-own@1 (`docs/product/PREREQUISITE_AFTER_OWN.md`, switch, OFF): before pausing for a person, check and teach
+  the skill below, then explain this skill again. TN 5 synthetic: prerequisite found and taught 3 of 43 (off) vs 22 of 43 (on).
 
 ## Earlier on 2026-11-10 (research pool boundary)
 - #125: offline recovery pool readers isolated; the boundary is enforced in Node CI (`tools/question-selection-boundary.mjs`).
