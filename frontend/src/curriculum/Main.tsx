@@ -58,8 +58,8 @@ const TEST_BUILD = typeof OPENPATH_REVIEW_FIXTURE !== "undefined" && OPENPATH_RE
 const api = new Api();
 const Preview = lazy(() => import("./preview").then((m) => ({ default: m.Preview })));
 const PreviewExperience = lazy(() => import("./PreviewExperience").then((m) => ({ default: m.PreviewExperience })));
-const BOARD_WORD = { cbse: "CBSE / NCERT", tn: "Tamil Nadu" } as const;
-type Board = "cbse" | "tn";
+const BOARD_WORD = { cbse: "CBSE / NCERT", tn: "Tamil Nadu", icse: "CISCE / ICSE" } as const;
+type Board = keyof typeof BOARD_WORD;
 
 // ---------------------------------------------------------------- route (the URL hash: back works naturally)
 
@@ -72,7 +72,8 @@ interface Route {
 function readRoute(): Route {
   const p = new URLSearchParams(location.hash.slice(1));
   const g = Number(p.get("g"));
-  return { board: p.get("b") === "tn" ? "tn" : "cbse", grade: g >= 1 && g <= 12 ? g : 10, node: p.get("n"), competency: p.get("c") };
+  const b = p.get("b");
+  return { board: b === "tn" || b === "icse" ? b : "cbse", grade: g >= 1 && g <= 12 ? g : 10, node: p.get("n"), competency: p.get("c") };
 }
 const hashOf = (r: Route) => {
   const p = new URLSearchParams({ b: r.board, g: String(r.grade) });
@@ -771,7 +772,8 @@ function App() {
         {!learnerMode || !learnerId ? (
           <div className="controls">
             <div className="seg" role="group" aria-label="Board">
-              {(["cbse", "tn"] as Board[]).map((b) => (
+              {/* icse@1: CISCE / ICSE has Class 5 only, so its button is shown where it has a release (or is the board in view) */}
+              {(["cbse", "tn", "icse"] as Board[]).filter((b) => b !== "icse" || board === "icse" || index?.releases.some((e) => e.board === "icse" && e.grade === grade)).map((b) => (
                 <button key={b} type="button" aria-pressed={board === b} onClick={() => go({ board: b, grade, node: null, competency: null })}>
                   {BOARD_WORD[b]}
                 </button>
@@ -821,7 +823,7 @@ function App() {
 
       {error ? <p className="error" role="alert">{error}</p> : null}
       {!index || (entry && !r) ? <p className="muted loading">Loading the curriculum…</p> : null}
-      {ownUnavailable ? <p className="note">Your selected curriculum is available in My Learning Year. This topic dashboard currently lists CBSE/NCERT and Tamil Nadu.</p> : index && !entry ? <p className="muted">No {BOARD_WORD[board]} release for Grade {grade} yet.</p> : null}
+      {ownUnavailable ? <p className="note">Your selected curriculum is available in My Learning Year. This topic dashboard currently lists CBSE/NCERT, Tamil Nadu and CISCE/ICSE Class 5.</p> : index && !entry ? <p className="muted">No {BOARD_WORD[board]} release for Grade {grade} yet.</p> : null}
       {learnerLoading ? <p className="muted small">Loading {pupilName ?? "the learner"}'s evidence…</p> : null}
 
       {r && scope && (!learnerMode || !learnerId || learner) ? (

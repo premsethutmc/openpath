@@ -1,0 +1,2142 @@
+{
+ "schema": "syllabus@1",
+ "board": "icse",
+ "boardName": "CISCE (ICSE)",
+ "grade": 5,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "CISCE Curriculum: Mathematics, Class V",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "edition": "Curriculum for Classes I-VIII (Class V mathematics, pages 101-115); edition and year not shown on the copy read",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "curriculum",
+   "title": "ICSE Class 5 Maths Syllabus (a third-party copy of the Class V mathematics pages of the CISCE curriculum; pages 101-115)",
+   "publisher": "hosted by BYJU'S; the pages do not name their publisher",
+   "edition": "n/a",
+   "academicYear": "2026-27",
+   "url": "https://cdn1.byjus.com/wp-content/uploads/2019/03/ICSEClass-5-Maths-Syllabus.pdf",
+   "accessed": "2026-11-11",
+   "used_for": "theme titles, learning outcomes and key concepts of all ten themes (read through a text summary of the PDF; the PDF itself could not be downloaded)"
+  },
+  {
+   "kind": "curriculum",
+   "title": "CISCE website (official)",
+   "publisher": "Council for the Indian School Certificate Examinations",
+   "edition": "n/a",
+   "academicYear": "2026-27",
+   "url": "https://cisce.org/",
+   "accessed": "2026-11-11",
+   "used_for": "ATTEMPTED ONLY: the site could not be reached from the build environment; no content read"
+  },
+  {
+   "kind": "secondary",
+   "title": "ICSE Class 5 Maths Syllabus (web page listing the same ten theme titles)",
+   "publisher": "BYJU'S",
+   "edition": "n/a",
+   "academicYear": "2026-27",
+   "url": "https://byjus.com/icse-class-5-maths-syllabus/",
+   "accessed": "2026-11-11",
+   "used_for": "cross-check of the ten theme titles"
+  }
+ ],
+ "notes": [
+  "UNOFFICIAL SOURCE: the official CISCE document could not be opened (cisce.org was unreachable from the build environment). The themes and outcomes come from a third-party copy of the Class V mathematics pages, read through a text summary, so every theme is verified:false.",
+  "CISCE is understood not to prescribe a textbook for Class V (not checked against an official statement): each school chooses its own books and may order or extend the topics differently. Check this inventory against the school's actual textbook and term plan.",
+  "The document lists 78 learning-outcome lines in ten themes. They are written here as 75 outcomes in OpenPath's own words (lines that repeat a skill are merged, and the line on pie charts and line graphs is split in two), plus 2 items that appear only under key concepts (tables to 20; dividing fractions): 77 in all. 70 are mapped (56 fully, 14 partly: see each outcome's coverage and note). 7 are not in the release and are listed under gaps: 3 have no OpenPath skill, and 4 (number line, and the meaning, comparing and ordering of integers) have questions but a lesson that fails OpenPath's teaching checks.",
+  "A chapter here is a theme of the curriculum, in the document's order; the curriculum has no sections.",
+  "No competency is proposed by this file: every outcome is mapped to competencies that already exist, and reuses the CBSE and Tamil Nadu Grade 5 mappings where the outcome is the same.",
+  "Several mapped competencies were written for Grade 6 or 7 in the other boards (integers, multiplying and dividing fractions and decimals, prime factorisation, divisibility, Indian and international numeration, percentage of an amount). CISCE places them in Class V; their lessons and questions were written with older learners in mind."
+ ],
+ "gaps": [
+  {
+   "theme": 1,
+   "statement": "Write numbers in Roman numerals.",
+   "source": "Theme 1, learning outcome 7",
+   "kind": "no-skill",
+   "reason": "No skill, lesson or question in OpenPath covers Roman numerals."
+  },
+  {
+   "theme": 5,
+   "statement": "Place whole numbers on a number line.",
+   "source": "Theme 5, learning outcome 1",
+   "kind": "lesson-fails-teaching-checks",
+   "reason": "OpenPath has questions for this (MATH.number.number-line), and a simulated learner who answers everything correctly is verified on it, but its lesson does not pass OpenPath's own teaching checks, so a learner who makes mistakes would get no explanation. Left out until the lesson is repaired."
+  },
+  {
+   "theme": 5,
+   "statement": "Understand integers as the counting numbers, zero and the negatives of the counting numbers.",
+   "source": "Theme 5, learning outcome 2",
+   "kind": "lesson-fails-teaching-checks",
+   "reason": "OpenPath has questions for this (MATH.number.integers), and a simulated learner who answers everything correctly is verified on it, but its lesson does not pass OpenPath's own teaching checks, so a learner who makes mistakes would get no explanation. Left out until the lesson is repaired."
+  },
+  {
+   "theme": 5,
+   "statement": "Compare two integers using a number line.",
+   "source": "Theme 5, learning outcome 3",
+   "kind": "lesson-fails-teaching-checks",
+   "reason": "OpenPath has questions for this (MATH.number.integers), and a simulated learner who answers everything correctly is verified on it, but its lesson does not pass OpenPath's own teaching checks, so a learner who makes mistakes would get no explanation. Left out until the lesson is repaired."
+  },
+  {
+   "theme": 5,
+   "statement": "Put integers in ascending or descending order.",
+   "source": "Theme 5, learning outcome 4",
+   "kind": "lesson-fails-teaching-checks",
+   "reason": "OpenPath has questions for this (MATH.number.integers), and a simulated learner who answers everything correctly is verified on it, but its lesson does not pass OpenPath's own teaching checks, so a learner who makes mistakes would get no explanation. Left out until the lesson is repaired."
+  },
+  {
+   "theme": 6,
+   "statement": "Explore symmetry in familiar 3-D shapes.",
+   "source": "Theme 6, learning outcome 8",
+   "kind": "no-skill",
+   "reason": "OpenPath's symmetry skills are about flat shapes, letters and designs only."
+  },
+  {
+   "theme": 9,
+   "statement": "Read a line graph of the kind printed in newspapers and magazines.",
+   "source": "Theme 9, learning outcome 2 (line graphs)",
+   "kind": "no-skill",
+   "reason": "No skill in OpenPath covers reading a line graph of data at this level."
+  }
+ ],
+ "chapters": [
+  {
+   "id": "icse-g05-c01",
+   "number": 1,
+   "term": null,
+   "title": "Theme 1: Numbers",
+   "verified": false,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "icse-g05-c01-o01",
+     "statement": "Read and write numbers up to crores with Indian place value and commas.",
+     "concepts": [
+      "lakhs",
+      "crores",
+      "Indian place value"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.large-numbers",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.indian-international-numeration",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.indian-international-numeration",
+      "MATH.number.large-numbers"
+     ],
+     "coverage": "full",
+     "source": "Theme 1, learning outcome 1 (p. 101 onwards)"
+    },
+    {
+     "id": "icse-g05-c01-o02",
+     "statement": "Read and write large numbers in the international system (millions) and relate it to lakhs and crores.",
+     "concepts": [
+      "millions",
+      "international system"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.indian-international-numeration",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.indian-international-numeration"
+     ],
+     "coverage": "full",
+     "source": "Theme 1, learning outcome 2 (p. 101 onwards)"
+    },
+    {
+     "id": "icse-g05-c01-o03",
+     "statement": "Write a large number in expanded form and turn an expanded form back into the number.",
+     "concepts": [
+      "expanded form",
+      "place value",
+      "face value"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.large-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.large-numbers"
+     ],
+     "coverage": "full",
+     "source": "Theme 1, learning outcome 3 (p. 101 onwards)"
+    },
+    {
+     "id": "icse-g05-c01-o04",
+     "statement": "Compare large numbers by place value and put them in ascending or descending order.",
+     "concepts": [
+      "comparison",
+      "ascending order",
+      "descending order"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.large-numbers",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compare-numbers",
+      "MATH.number.large-numbers"
+     ],
+     "coverage": "full",
+     "source": "Theme 1, learning outcome 4 (p. 101 onwards)"
+    },
+    {
+     "id": "icse-g05-c01-o05",
+     "statement": "Make the greatest and the smallest number from a set of digits.",
+     "concepts": [
+      "greatest number",
+      "smallest number"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compare-numbers"
+     ],
+     "coverage": "full",
+     "source": "Theme 1, learning outcome 5 (p. 101 onwards)"
+    },
+    {
+     "id": "icse-g05-c01-o06",
+     "statement": "Round a number to the nearest 10, 100 or 1000.",
+     "concepts": [
+      "rounding"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.rounding",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.rounding"
+     ],
+     "coverage": "full",
+     "source": "Theme 1, learning outcome 6 (p. 101 onwards)"
+    },
+    {
+     "id": "icse-g05-c01-o07",
+     "statement": "Show what a fraction means as equal parts of a whole.",
+     "concepts": [
+      "fraction",
+      "equal parts"
+     ],
+     "questionTypes": [
+      "fraction",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-models",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-models"
+     ],
+     "coverage": "full",
+     "source": "Theme 1, learning outcome 8 (p. 101 onwards)"
+    },
+    {
+     "id": "icse-g05-c01-o08",
+     "statement": "Find a fraction of a collection of objects.",
+     "concepts": [
+      "fraction of a collection"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-of-collection",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-of-collection"
+     ],
+     "coverage": "full",
+     "source": "Theme 1, learning outcome 9 (p. 101 onwards)"
+    },
+    {
+     "id": "icse-g05-c01-o09",
+     "statement": "Recognise and make equivalent fractions.",
+     "concepts": [
+      "equivalent fractions"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.equivalent-fractions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.equivalent-fractions"
+     ],
+     "coverage": "full",
+     "source": "Theme 1, learning outcome 10 (p. 101 onwards)"
+    },
+    {
+     "id": "icse-g05-c01-o10",
+     "statement": "Write simple fractions such as a half, a quarter and a fifth as decimals and back, with lengths and money.",
+     "concepts": [
+      "fractions as decimals",
+      "money",
+      "length"
+     ],
+     "questionTypes": [
+      "fraction",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.money-decimals",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.money-decimals",
+      "MATH.number.decimal-tenths"
+     ],
+     "coverage": "full",
+     "source": "Theme 1, learning outcome 11 (p. 101 onwards)"
+    },
+    {
+     "id": "icse-g05-c01-o11",
+     "statement": "Build and use the multiplication tables from 2 to 20.",
+     "concepts": [
+      "multiplication tables"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.multiplication-tables",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.multiplication-tables"
+     ],
+     "coverage": "partial",
+     "source": "Theme 1, key concept (no outcome line of its own) (p. 101 onwards)",
+     "note": "Facts to 10 × 10 and the 13 to 19 tables have questions; 11, 12 and 20 have none of their own."
+    }
+   ]
+  },
+  {
+   "id": "icse-g05-c02",
+   "number": 2,
+   "term": null,
+   "title": "Theme 2: Number Operations",
+   "verified": false,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "icse-g05-c02-o01",
+     "statement": "Use place value beyond 1000 when adding, subtracting, multiplying and dividing.",
+     "concepts": [
+      "place value",
+      "four operations"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.multi-digit-add-subtract",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.multi-multiplication",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.multi-digit-add-subtract",
+      "MATH.number.multi-multiplication"
+     ],
+     "coverage": "full",
+     "source": "Theme 2, learning outcome 1 (p. 103 onwards)"
+    },
+    {
+     "id": "icse-g05-c02-o02",
+     "statement": "Divide a number by a two-digit number with the standard written method.",
+     "concepts": [
+      "long division",
+      "two-digit divisor"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.long-division",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.division-remainders",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.division-remainders",
+      "MATH.number.long-division"
+     ],
+     "coverage": "full",
+     "source": "Theme 2, learning outcomes 2 and 5 (the same skill, listed twice) (p. 103 onwards)"
+    },
+    {
+     "id": "icse-g05-c02-o03",
+     "statement": "Estimate a sum, difference, product or quotient, and check an answer against the estimate.",
+     "concepts": [
+      "estimation",
+      "checking"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.rounding",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.rounding",
+      "MATH.reasoning.estimate-check"
+     ],
+     "coverage": "partial",
+     "source": "Theme 2, learning outcome 3 (p. 103 onwards)",
+     "note": "Estimating a quotient of whole numbers has no question of its own."
+    },
+    {
+     "id": "icse-g05-c02-o04",
+     "statement": "Add, subtract and multiply large numbers with the standard written methods.",
+     "concepts": [
+      "column addition",
+      "column subtraction",
+      "long multiplication"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.multi-digit-add-subtract",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.multi-multiplication",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.multi-digit-add-subtract",
+      "MATH.number.multi-multiplication"
+     ],
+     "coverage": "full",
+     "source": "Theme 2, learning outcome 4 (p. 103 onwards)"
+    },
+    {
+     "id": "icse-g05-c02-o05",
+     "statement": "Solve everyday problems that need the four operations.",
+     "concepts": [
+      "word problems",
+      "four operations"
+     ],
+     "questionTypes": [
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.multi-step",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.operation-choice",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.multi-step",
+      "MATH.reasoning.operation-choice"
+     ],
+     "coverage": "full",
+     "source": "Theme 2, learning outcome 6 (p. 103 onwards)"
+    },
+    {
+     "id": "icse-g05-c02-o06",
+     "statement": "Make up a word problem that fits a given number statement.",
+     "concepts": [
+      "framing word problems"
+     ],
+     "questionTypes": [
+      "written-explanation"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.operation-choice",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.operation-choice"
+     ],
+     "coverage": "partial",
+     "source": "Theme 2, learning outcome 7 (p. 103 onwards)",
+     "note": "OpenPath asks which operation fits a story; a problem the learner writes needs a person to read it."
+    },
+    {
+     "id": "icse-g05-c02-o07",
+     "statement": "Explain what factors, multiples, prime numbers and composite numbers are.",
+     "concepts": [
+      "factors",
+      "multiples",
+      "prime",
+      "composite"
+     ],
+     "questionTypes": [
+      "set",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.factors-multiples",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.primes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.factors-multiples",
+      "MATH.number.primes"
+     ],
+     "coverage": "full",
+     "source": "Theme 2, learning outcome 8 (p. 103 onwards)"
+    },
+    {
+     "id": "icse-g05-c02-o08",
+     "statement": "Find factors and multiples in different ways, including a factor tree.",
+     "concepts": [
+      "factor tree",
+      "factors",
+      "multiples"
+     ],
+     "questionTypes": [
+      "set",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.factors-multiples",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.prime-factorisation",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.factors-multiples",
+      "MATH.number.prime-factorisation"
+     ],
+     "coverage": "full",
+     "source": "Theme 2, learning outcome 9 (p. 103 onwards)"
+    },
+    {
+     "id": "icse-g05-c02-o09",
+     "statement": "Pick out the prime and the composite numbers up to 100.",
+     "concepts": [
+      "primes to 100"
+     ],
+     "questionTypes": [
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.primes",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.primes"
+     ],
+     "coverage": "full",
+     "source": "Theme 2, learning outcome 10 (p. 103 onwards)"
+    }
+   ]
+  },
+  {
+   "id": "icse-g05-c03",
+   "number": 3,
+   "term": null,
+   "title": "Theme 3: Fractions and Decimals",
+   "verified": false,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "icse-g05-c03-o01",
+     "statement": "Tell proper fractions, improper fractions and mixed numbers apart.",
+     "concepts": [
+      "proper fraction",
+      "improper fraction",
+      "mixed number"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.mixed-fractions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.mixed-fractions"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 1 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o02",
+     "statement": "Write equivalent fractions by multiplying or dividing the top and bottom numbers by the same number.",
+     "concepts": [
+      "equivalent fractions",
+      "lowest terms"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.equivalent-fractions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.equivalent-fractions"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 2 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o03",
+     "statement": "Compare and order three or more fractions.",
+     "concepts": [
+      "comparing fractions",
+      "ordering fractions"
+     ],
+     "questionTypes": [
+      "fraction",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-comparison",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-comparison"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 3 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o04",
+     "statement": "Add and subtract unlike fractions and mixed numbers.",
+     "concepts": [
+      "unlike fractions",
+      "mixed numbers",
+      "common denominator"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-add",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-add"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 4 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o05",
+     "statement": "Solve word problems that add or subtract fractions.",
+     "concepts": [
+      "fraction word problems"
+     ],
+     "questionTypes": [
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-add",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-add"
+     ],
+     "coverage": "partial",
+     "source": "Theme 3, learning outcome 5 (p. 105 onwards)",
+     "note": "The questions on adding and subtracting fractions are calculations, not stories."
+    },
+    {
+     "id": "icse-g05-c03-o06",
+     "statement": "Read a fraction 'of' a quantity as a multiplication.",
+     "concepts": [
+      "fraction of a quantity",
+      "multiplication as of"
+     ],
+     "questionTypes": [
+      "numeric",
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-of-collection",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.fraction-multiply",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-multiply",
+      "MATH.number.fraction-of-collection"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 6 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o07",
+     "statement": "Multiply a fraction by a whole number and a fraction by a fraction.",
+     "concepts": [
+      "fraction times whole number",
+      "fraction times fraction"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-multiply",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.fraction-product",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-multiply",
+      "MATH.number.fraction-product"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 7 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o08",
+     "statement": "Divide a whole number by a fraction and a fraction by a fraction.",
+     "concepts": [
+      "dividing fractions",
+      "reciprocal"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.fraction-product",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.fraction-product"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, key concept (no outcome line of its own) (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o09",
+     "statement": "Write fractions with denominator 10, 100 or 1000 as decimals and back.",
+     "concepts": [
+      "decimal fractions",
+      "tenths",
+      "hundredths",
+      "thousandths"
+     ],
+     "questionTypes": [
+      "fraction",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 8 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o10",
+     "statement": "Show a decimal in a picture, such as a shaded strip or grid.",
+     "concepts": [
+      "decimal models"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ],
+     "coverage": "partial",
+     "source": "Theme 3, learning outcome 9 (p. 105 onwards)",
+     "note": "Decimals are asked in figures and words; shaded-grid pictures of decimals are not part of the questions."
+    },
+    {
+     "id": "icse-g05-c03-o11",
+     "statement": "Give the place value of each digit of a decimal to thousandths.",
+     "concepts": [
+      "decimal place value"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 10 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o12",
+     "statement": "Write a decimal in expanded form.",
+     "concepts": [
+      "expanded form of a decimal"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 11 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o13",
+     "statement": "Recognise equivalent decimals, like decimals and unlike decimals.",
+     "concepts": [
+      "equivalent decimals",
+      "like decimals",
+      "unlike decimals"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ],
+     "coverage": "partial",
+     "source": "Theme 3, learning outcome 12 (p. 105 onwards)",
+     "note": "Decimals with different numbers of places are compared; the names 'like' and 'unlike' decimals are not used."
+    },
+    {
+     "id": "icse-g05-c03-o14",
+     "statement": "Compare decimals and put them in order.",
+     "concepts": [
+      "comparing decimals",
+      "ordering decimals"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-tenths",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-tenths"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcomes 13 (compare and order) (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o15",
+     "statement": "Add and subtract decimals.",
+     "concepts": [
+      "adding decimals",
+      "subtracting decimals"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-operations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-operations"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 14 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o16",
+     "statement": "Solve word problems that add or subtract decimals.",
+     "concepts": [
+      "decimal word problems",
+      "money",
+      "measures"
+     ],
+     "questionTypes": [
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-operations",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-operations"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 15 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o17",
+     "statement": "Multiply a decimal by 10, 100 or 1000 by moving the digits.",
+     "concepts": [
+      "multiplying by powers of ten"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-product",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.multiply-divide-powers-of-ten",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-product",
+      "MATH.number.multiply-divide-powers-of-ten"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 16 (p. 105 onwards)"
+    },
+    {
+     "id": "icse-g05-c03-o18",
+     "statement": "Multiply a decimal by a whole number and a decimal by a decimal.",
+     "concepts": [
+      "multiplying decimals"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.decimal-product",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.decimal-product"
+     ],
+     "coverage": "full",
+     "source": "Theme 3, learning outcome 17 (p. 105 onwards)"
+    }
+   ]
+  },
+  {
+   "id": "icse-g05-c04",
+   "number": 4,
+   "term": null,
+   "title": "Theme 4: Playing with Numbers (Factors and Multiples)",
+   "verified": false,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "icse-g05-c04-o01",
+     "statement": "List the multiples of a number.",
+     "concepts": [
+      "multiples"
+     ],
+     "questionTypes": [
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.factors-multiples",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.factors-multiples"
+     ],
+     "coverage": "full",
+     "source": "Theme 4, learning outcome 1 (p. 107 onwards)"
+    },
+    {
+     "id": "icse-g05-c04-o02",
+     "statement": "Find all the factors of a number.",
+     "concepts": [
+      "factors"
+     ],
+     "questionTypes": [
+      "set"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.factors-multiples",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.factors-multiples"
+     ],
+     "coverage": "full",
+     "source": "Theme 4, learning outcome 2 (p. 107 onwards)"
+    },
+    {
+     "id": "icse-g05-c04-o03",
+     "statement": "Identify prime, composite, twin-prime and co-prime numbers.",
+     "concepts": [
+      "prime",
+      "composite",
+      "twin primes",
+      "co-primes"
+     ],
+     "questionTypes": [
+      "set",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.primes",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.hcf-lcm",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.hcf-lcm",
+      "MATH.number.primes"
+     ],
+     "coverage": "partial",
+     "source": "Theme 4, learning outcome 3 (p. 107 onwards)",
+     "note": "Prime, composite and co-prime numbers have questions; twin primes have none."
+    },
+    {
+     "id": "icse-g05-c04-o04",
+     "statement": "Test whether a number is divisible by 2, 3, 4, 5, 9, 10 or 11.",
+     "concepts": [
+      "divisibility tests"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.divisibility",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.reasoning.divisibility"
+     ],
+     "coverage": "partial",
+     "source": "Theme 4, learning outcome 4 and its key concept (p. 107 onwards)",
+     "note": "The questions cover the tests for 2, 4, 5, 8 and 10 and a missing-digit question; 3, 9 and 11 are not practised as tests of their own."
+    },
+    {
+     "id": "icse-g05-c04-o05",
+     "statement": "Write a number as a product of its prime factors with a factor tree.",
+     "concepts": [
+      "prime factorisation",
+      "factor tree"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.prime-factorisation",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.prime-factorisation"
+     ],
+     "coverage": "full",
+     "source": "Theme 4, learning outcome 5 (p. 107 onwards)"
+    },
+    {
+     "id": "icse-g05-c04-o06",
+     "statement": "Find the HCF of numbers by listing factors and by common division.",
+     "concepts": [
+      "HCF",
+      "common factors"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.hcf-lcm",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.factors-multiples",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.factors-multiples",
+      "MATH.number.hcf-lcm"
+     ],
+     "coverage": "full",
+     "source": "Theme 4, learning outcome 6 (p. 107 onwards)"
+    },
+    {
+     "id": "icse-g05-c04-o07",
+     "statement": "Find the LCM of numbers by listing multiples and by common division.",
+     "concepts": [
+      "LCM",
+      "common multiples"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.hcf-lcm",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.hcf-lcm"
+     ],
+     "coverage": "full",
+     "source": "Theme 4, learning outcome 7 (p. 107 onwards)"
+    },
+    {
+     "id": "icse-g05-c04-o08",
+     "statement": "Use the link HCF × LCM = product of the two numbers to find one from the other.",
+     "concepts": [
+      "HCF and LCM relation"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "extension",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.hcf-lcm",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.hcf-lcm"
+     ],
+     "coverage": "full",
+     "source": "Theme 4, learning outcome 8 (p. 107 onwards)"
+    }
+   ]
+  },
+  {
+   "id": "icse-g05-c05",
+   "number": 5,
+   "term": null,
+   "title": "Theme 5: Introduction to Negative Numbers",
+   "verified": false,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "icse-g05-c05-o01",
+     "statement": "Add and subtract integers.",
+     "concepts": [
+      "adding integers",
+      "subtracting integers"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integer-add",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integer-add"
+     ],
+     "coverage": "full",
+     "source": "Theme 5, learning outcome 5 (p. 109 onwards)"
+    }
+   ]
+  },
+  {
+   "id": "icse-g05-c06",
+   "number": 6,
+   "term": null,
+   "title": "Theme 6: Geometry",
+   "verified": false,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "icse-g05-c06-o01",
+     "statement": "Find angles in shapes and in the surroundings, by looking and by folding paper.",
+     "concepts": [
+      "angle",
+      "vertex",
+      "arms"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angles-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angles-intro"
+     ],
+     "coverage": "partial",
+     "source": "Theme 6, learning outcomes 1 and 4 (p. 110 onwards)",
+     "note": "Paper folding is a hands-on activity outside OpenPath."
+    },
+    {
+     "id": "icse-g05-c06-o02",
+     "statement": "Spot right angles in objects and pictures.",
+     "concepts": [
+      "right angle"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angles-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angles-intro"
+     ],
+     "coverage": "full",
+     "source": "Theme 6, learning outcome 5 (p. 110 onwards)"
+    },
+    {
+     "id": "icse-g05-c06-o03",
+     "statement": "Classify an angle as right, acute or obtuse.",
+     "concepts": [
+      "acute angle",
+      "obtuse angle",
+      "right angle"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angles-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angles-intro"
+     ],
+     "coverage": "full",
+     "source": "Theme 6, learning outcomes 2 and 6 (the same skill, listed twice) (p. 110 onwards)"
+    },
+    {
+     "id": "icse-g05-c06-o04",
+     "statement": "Draw and trace acute, obtuse and right angles, and read the size of an angle.",
+     "concepts": [
+      "drawing angles",
+      "angle measure"
+     ],
+     "questionTypes": [
+      "diagram-drawing",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.angle-measure",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.angle-measure"
+     ],
+     "coverage": "partial",
+     "source": "Theme 6, learning outcome 7 and the key concept on angle measures (p. 110 onwards)",
+     "note": "Reading an angle from a protractor is practised; a drawn angle needs a person to check it."
+    },
+    {
+     "id": "icse-g05-c06-o05",
+     "statement": "Recognise reflection symmetry and rotational symmetry in familiar 2-D shapes and letters.",
+     "concepts": [
+      "line of symmetry",
+      "rotational symmetry"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.symmetry-lines",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.rotational-symmetry",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.rotational-symmetry",
+      "MATH.geometry.symmetry-lines"
+     ],
+     "coverage": "full",
+     "source": "Theme 6, learning outcomes 3 and 9 (p. 110 onwards)"
+    },
+    {
+     "id": "icse-g05-c06-o06",
+     "statement": "Make cubes, cuboids, cylinders and cones from their nets.",
+     "concepts": [
+      "nets",
+      "cube",
+      "cuboid",
+      "cylinder",
+      "cone"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.nets",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.nets"
+     ],
+     "coverage": "partial",
+     "source": "Theme 6, learning outcome 10 (p. 110 onwards)",
+     "note": "Matching solids with nets is practised; folding a real net is a hands-on activity outside OpenPath."
+    }
+   ]
+  },
+  {
+   "id": "icse-g05-c07",
+   "number": 7,
+   "term": null,
+   "title": "Theme 7: Measurement",
+   "verified": false,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "icse-g05-c07-o01",
+     "statement": "Relate larger and smaller units of length, weight, capacity, time and money, and convert both ways.",
+     "concepts": [
+      "unit conversion",
+      "metric units",
+      "time units",
+      "rupees and paise"
+     ],
+     "questionTypes": [
+      "measurement-with-unit",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.unit-conversions",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.length-conversion",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.time-unit-conversion",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.money-decimals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.length-conversion",
+      "MATH.measurement.money-decimals",
+      "MATH.measurement.time-unit-conversion",
+      "MATH.measurement.unit-conversions"
+     ],
+     "coverage": "full",
+     "source": "Theme 7, learning outcome 1 (p. 112 onwards)"
+    },
+    {
+     "id": "icse-g05-c07-o02",
+     "statement": "Estimate how much a solid or a container holds in a known unit, such as mugs in a bucket.",
+     "concepts": [
+      "volume",
+      "capacity",
+      "estimation"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.capacity",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.volume-cubes",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.capacity",
+      "MATH.measurement.volume-cubes"
+     ],
+     "coverage": "full",
+     "source": "Theme 7, learning outcome 2 (p. 112 onwards)"
+    },
+    {
+     "id": "icse-g05-c07-o03",
+     "statement": "Use the four operations in problems about money, length, mass, capacity and intervals of time.",
+     "concepts": [
+      "measures",
+      "money",
+      "time intervals"
+     ],
+     "questionTypes": [
+      "word-problem",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.compute-with-measures",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.elapsed-time",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.money-decimals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.compute-with-measures",
+      "MATH.measurement.elapsed-time",
+      "MATH.measurement.money-decimals"
+     ],
+     "coverage": "full",
+     "source": "Theme 7, learning outcome 3 (p. 112 onwards)"
+    },
+    {
+     "id": "icse-g05-c07-o04",
+     "statement": "Say what the area and the perimeter of a simple shape are.",
+     "concepts": [
+      "area",
+      "perimeter"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.perimeter-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.area-squares",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.area-squares",
+      "MATH.measurement.perimeter-intro"
+     ],
+     "coverage": "full",
+     "source": "Theme 7, learning outcome 4 (p. 112 onwards)"
+    },
+    {
+     "id": "icse-g05-c07-o05",
+     "statement": "Work out the area and the perimeter of simple shapes such as rectangles and squares.",
+     "concepts": [
+      "area of a rectangle",
+      "perimeter of a rectangle"
+     ],
+     "questionTypes": [
+      "numeric",
+      "measurement-with-unit"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.rectangle-area",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.rectangle-perimeter",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.rectangle-area",
+      "MATH.measurement.rectangle-perimeter"
+     ],
+     "coverage": "full",
+     "source": "Theme 7, learning outcome 5 (p. 112 onwards)"
+    }
+   ]
+  },
+  {
+   "id": "icse-g05-c08",
+   "number": 8,
+   "term": null,
+   "title": "Theme 8: Introduction to Percentage",
+   "verified": false,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "icse-g05-c08-o01",
+     "statement": "Understand a percentage as a fraction with denominator 100.",
+     "concepts": [
+      "percent",
+      "hundredths"
+     ],
+     "questionTypes": [
+      "fraction",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percent-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percent-intro"
+     ],
+     "coverage": "full",
+     "source": "Theme 8, learning outcome 1 (p. 113 onwards)"
+    },
+    {
+     "id": "icse-g05-c08-o02",
+     "statement": "Relate fractions, decimals and percentages to one another.",
+     "concepts": [
+      "fractions, decimals and percentages"
+     ],
+     "questionTypes": [
+      "fraction",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percent-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percent-intro"
+     ],
+     "coverage": "full",
+     "source": "Theme 8, learning outcome 2 (p. 113 onwards)"
+    },
+    {
+     "id": "icse-g05-c08-o03",
+     "statement": "Show a percentage in a picture, such as a shaded hundred grid.",
+     "concepts": [
+      "percentage models"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percent-intro",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percent-intro"
+     ],
+     "coverage": "partial",
+     "source": "Theme 8, learning outcome 3 (p. 113 onwards)",
+     "note": "Percentages are asked in figures; shaded-grid pictures are not part of the questions."
+    },
+    {
+     "id": "icse-g05-c08-o04",
+     "statement": "Change a fraction into a percentage and a percentage into a fraction.",
+     "concepts": [
+      "fraction to percentage",
+      "percentage to fraction"
+     ],
+     "questionTypes": [
+      "fraction",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percent-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.percentage",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percent-intro",
+      "MATH.number.percentage"
+     ],
+     "coverage": "full",
+     "source": "Theme 8, learning outcome 4 (p. 113 onwards)"
+    },
+    {
+     "id": "icse-g05-c08-o05",
+     "statement": "Change a decimal into a percentage and a percentage into a decimal.",
+     "concepts": [
+      "decimal to percentage",
+      "percentage to decimal"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percent-intro",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percent-intro"
+     ],
+     "coverage": "full",
+     "source": "Theme 8, learning outcome 5 (p. 113 onwards)"
+    },
+    {
+     "id": "icse-g05-c08-o06",
+     "statement": "Solve simple word problems about percentages.",
+     "concepts": [
+      "percentage of an amount"
+     ],
+     "questionTypes": [
+      "word-problem"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.percentage",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.percentage"
+     ],
+     "coverage": "full",
+     "source": "Theme 8, learning outcome 6 (p. 113 onwards)"
+    }
+   ]
+  },
+  {
+   "id": "icse-g05-c09",
+   "number": 9,
+   "term": null,
+   "title": "Theme 9: Data Handling",
+   "verified": false,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "icse-g05-c09-o01",
+     "statement": "Collect everyday data, record it in a table, show it in a bar graph and read a given bar graph.",
+     "concepts": [
+      "data table",
+      "bar graph"
+     ],
+     "questionTypes": [
+      "numeric",
+      "diagram-drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.tables",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.bar-charts",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.scaled-bars",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.bar-charts",
+      "MATH.statistics.scaled-bars",
+      "MATH.statistics.tables"
+     ],
+     "coverage": "partial",
+     "source": "Theme 9, learning outcome 1 (p. 114 onwards)",
+     "note": "Collecting data and drawing a graph by hand are outside OpenPath."
+    },
+    {
+     "id": "icse-g05-c09-o02",
+     "statement": "Read a pie chart of the kind printed in newspapers and magazines.",
+     "concepts": [
+      "pie chart"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.pie-charts",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.pie-charts"
+     ],
+     "coverage": "full",
+     "source": "Theme 9, learning outcome 2 (pie charts) (p. 114 onwards)"
+    }
+   ]
+  },
+  {
+   "id": "icse-g05-c10",
+   "number": 10,
+   "term": null,
+   "title": "Theme 10: Patterns",
+   "verified": false,
+   "sections": [],
+   "outcomes": [
+    {
+     "id": "icse-g05-c10-o01",
+     "statement": "Find the repeating unit of a pattern and continue the pattern.",
+     "concepts": [
+      "repeating pattern"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "intro",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.repeating-patterns",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.repeating-patterns"
+     ],
+     "coverage": "full",
+     "source": "Theme 10, learning outcome 1 (p. 115 onwards)"
+    },
+    {
+     "id": "icse-g05-c10-o02",
+     "statement": "Find the rule of a growing pattern and use it to continue the pattern.",
+     "concepts": [
+      "growing pattern",
+      "pattern rule"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.growing-patterns",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.pattern-rules",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.growing-patterns",
+      "MATH.algebra.pattern-rules"
+     ],
+     "coverage": "full",
+     "source": "Theme 10, learning outcome 2 (p. 115 onwards)"
+    },
+    {
+     "id": "icse-g05-c10-o03",
+     "statement": "Make a pattern that changes in more than one way at once, such as shape and colour.",
+     "concepts": [
+      "patterns with two attributes"
+     ],
+     "questionTypes": [
+      "diagram-drawing"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.algebra.repeating-patterns",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.repeating-patterns"
+     ],
+     "coverage": "partial",
+     "source": "Theme 10, learning outcome 3 (p. 115 onwards)",
+     "note": "Continuing a pattern is practised; a pattern the learner invents needs a person to look at it."
+    },
+    {
+     "id": "icse-g05-c10-o04",
+     "statement": "See and describe the patterns in triangular numbers and square numbers.",
+     "concepts": [
+      "triangular numbers",
+      "square numbers"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.figurate-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.figurate-numbers"
+     ],
+     "coverage": "full",
+     "source": "Theme 10, learning outcome 4 (p. 115 onwards)"
+    }
+   ]
+  }
+ ]
+}

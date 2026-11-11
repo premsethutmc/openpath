@@ -16,7 +16,7 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const fe = join(root, "frontend");
 /** Files whose long test walks a collection in parts (frontend/src/test-part.ts): run by every shard. */
-export const SPLIT = ["src/learning/content-system.test.ts", "src/learning/mathematics-completion.test.ts", "src/year/grade7-coverage.test.ts", "src/year/grade8-coverage.test.ts"];
+export const SPLIT = ["src/learning/content-system.test.ts", "src/learning/mathematics-completion.test.ts", "src/year/grade7-coverage.test.ts", "src/year/grade8-coverage.test.ts", "src/year/icse-grade5.test.ts"];
 const WEIGHT = {
   "src/learning/platform.test.ts": 751, "src/learning/evidence-contracts.test.ts": 563, "src/learning/generalisation.test.ts": 339,
   "src/learning/dashboard.test.ts": 135, "src/year/visual-data.test.ts": 121, "src/journey/linear-equations.test.ts": 93,

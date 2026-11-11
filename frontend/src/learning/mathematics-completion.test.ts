@@ -70,7 +70,9 @@ test("written@1: an unmarked written answer is pending and never evidence; only 
 });
 
 test("boards@1: CBSE and Tamil Nadu releases for Grades 1–12, valid, through one builder and the same hierarchy", () => {
-  assert.equal(boardReleases.length, 24);
+  // 24 CBSE and Tamil Nadu releases, and CISCE (ICSE) Class 5 (icse@1; its own checks are in year/icse-grade5.test.ts)
+  assert.equal(boardReleases.length, 25);
+  assert.equal(boardReleases.filter((r) => /^(cbse-ncert|tn-samacheer)-/.test(r.id)).length, 24);
   for (const board of ["cbse", "tn"] as const)
     for (let g = 1; g <= 12; g++) {
       const r = boardFor(board, g);
@@ -106,7 +108,7 @@ test("expansion@1: existing competency ids are kept, new ones are unique, relati
   }
 });
 
-// test-part@1: CI compiles the board releases in parts across parallel jobs (all 24 when TEST_PART is unset)
+// test-part@1: CI compiles the board releases in parts across parallel jobs (all of them when TEST_PART is unset)
 test(`compiler@1: twelve criteria from the content itself; nothing is called validated without educator review${partLabel}`, () => {
   const mine = inPart(boardReleases);
   const rows = mine.flatMap(compileRelease);

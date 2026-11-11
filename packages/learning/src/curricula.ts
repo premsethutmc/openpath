@@ -31,8 +31,11 @@ export const latestReleases = allReleases.filter((r) => !allReleases.some((x) =>
 export const sampleReleases = latestReleases.filter((r) => (r.source as { synthetic?: boolean }).synthetic !== false);
 /** The default sample textbook for a grade (the OpenPath sample series). */
 export const sampleFor = (grade: number) => latestReleases.find((r) => r.grade === grade && r.id.startsWith("openpath-sample-")) ?? null;
-/** The board's release for a grade (boards@1): "cbse" (NCERT textbooks) or "tn" (Tamil Nadu State Board). */
-export const boardFor = (board: "cbse" | "tn", grade: number) => latestReleases.find((r) => r.grade === grade && r.id === `${board === "cbse" ? "cbse-ncert" : "tn-samacheer"}-mathematics-grade-${grade}`) ?? null;
+/** The boards with releases (boards@1) and the stem of their release ids. "icse" (CISCE) has Class 5 only (icse@1). */
+export const BOARD_STEM = { cbse: "cbse-ncert", tn: "tn-samacheer", icse: "icse-cisce" } as const;
+export type BoardId = keyof typeof BOARD_STEM;
+/** The board's release for a grade (boards@1): "cbse" (NCERT textbooks), "tn" (Tamil Nadu State Board) or "icse" (CISCE). */
+export const boardFor = (board: BoardId, grade: number) => latestReleases.find((r) => r.grade === grade && r.id === `${BOARD_STEM[board]}-mathematics-grade-${grade}`) ?? null;
 /** Every latest release for a grade (several boards or textbooks). */
 export const releasesFor = (grade: number) => latestReleases.filter((r) => r.grade === grade);
 /** A release by reference: any built-in version, or one the learner's own records saved (matched by hash). */

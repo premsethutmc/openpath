@@ -84,9 +84,11 @@ export interface DashCompetency {
   complete: boolean;
   missing: string[];
 }
+/** The boards the dashboard lists: CBSE and Tamil Nadu (Grades 1–12) and CISCE / ICSE (Class 5 only, icse@1). */
+export type DashBoard = "cbse" | "tn" | "icse";
 export interface DashRelease {
   schema: "dashboard-index@1";
-  release: { id: string; version: string; hash: string; grade: number; board: "cbse" | "tn"; boardLabel: string; title: string; sourceVerified: boolean };
+  release: { id: string; version: string; hash: string; grade: number; board: DashBoard; boardLabel: string; title: string; sourceVerified: boolean };
   nodes: DashNode[];
   outcomes: Record<string, DashOutcome>;
   competencies: Record<string, DashCompetency>;
@@ -94,7 +96,7 @@ export interface DashRelease {
   names: Record<string, string>;
 }
 export interface DashIndexEntry {
-  board: "cbse" | "tn";
+  board: DashBoard;
   grade: number;
   release: string;
   version: string;

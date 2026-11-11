@@ -5,7 +5,8 @@
  * Behaviour only (is anything unavailable, stalled or untaught?), never whether the teaching works.
  * Synthetic learners and a test-only review fixture; no stored record changes; no language model is called.
  *
- * usage: GRADE=8 BOARD=tn OUT=gap-tn-8.json node --import tsx scripts/grade-gap.mts   (LIMIT=n: first n competencies)
+ * usage: GRADE=8 BOARD=tn OUT=gap-tn-8.json node --import tsx scripts/grade-gap.mts   (LIMIT=n: first n competencies;
+ *        BOARD=icse has GRADE=5 only)
  */
 import { writeFileSync } from "node:fs";
 import { Driver, right, type Answerer } from "../src/learning/driver";
@@ -17,7 +18,7 @@ import { useReviewFixture } from "../../packages/learning/src/evidence";
 import { checkCompetency } from "../../packages/learning/src/compiler";
 
 const grade = Number(process.env.GRADE);
-const board = process.env.BOARD as "cbse" | "tn";
+const board = process.env.BOARD as "cbse" | "tn" | "icse";
 const out = process.env.OUT ?? `gap-${board}-${grade}.json`;
 const limit = Number(process.env.LIMIT ?? 0);
 

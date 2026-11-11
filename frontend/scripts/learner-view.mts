@@ -22,7 +22,7 @@ const argv = process.argv.slice(2);
 const val = (k: string, d?: string) => { const i = argv.indexOf(`--${k}`); return i >= 0 ? argv[i + 1] : d; };
 const competency = argv.find((a) => a.startsWith("MATH.") || (!a.startsWith("--") && !argv[argv.indexOf(a) - 1]?.startsWith("--")));
 if (!competency) { console.error("usage: learner-view.mts <competency> [--board cbse|tn] [--grade N] [--steps N] [--out file]"); process.exit(2); }
-const board = (val("board", "cbse") as "cbse" | "tn"), grade = Number(val("grade", "8")), steps = Number(val("steps", "14"));
+const board = (val("board", "cbse") as "cbse" | "tn" | "icse"), grade = Number(val("grade", "8")), steps = Number(val("steps", "14"));
 const m = moduleFor(competency);
 if (!m) { console.error(`no module for ${competency}`); process.exit(1); }
 const release = boardFor(board, grade);

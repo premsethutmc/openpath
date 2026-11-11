@@ -15,7 +15,7 @@ import oamData from "../../../content/learning/outcome-assessment.v1.json";
 import { boardReleases } from "./board-releases";
 import { moduleFor, moduleOrigin, poolFamilies } from "./content";
 import type { Chapter, CurriculumRelease, Outcome, Section } from "./curriculum";
-import { scopeOfAll, type CoverageClass, type DashCompetency, type DashIndex, type DashNode, type DashOutcome, type DashRelease } from "./dashboard";
+import { scopeOfAll, type CoverageClass, type DashBoard, type DashCompetency, type DashIndex, type DashNode, type DashOutcome, type DashRelease } from "./dashboard";
 import { graph } from "./graph";
 import { contentHashOf, familiesOf } from "./review";
 import { validateModule } from "./validate";
@@ -27,7 +27,7 @@ type Row = { release: string; outcome: string; class: CoverageClass; why: string
 const matrix = matrixData as unknown as { summary: { requirements: number; families: { count: number; problems: number } }; requirements: Row[] };
 const oam = new Map((oamData as unknown as { outcomes: { outcome: string; written: string[] }[] }).outcomes.map((o) => [o.outcome, o]));
 
-export const boardOf = (r: CurriculumRelease): "cbse" | "tn" => (r.id.startsWith("tn-") ? "tn" : "cbse");
+export const boardOf = (r: CurriculumRelease): DashBoard => (r.id.startsWith("tn-") ? "tn" : r.id.startsWith("icse-") ? "icse" : "cbse");
 
 const competencyCache = new Map<string, DashCompetency>();
 function competency(id: string): DashCompetency {
