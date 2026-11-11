@@ -22,6 +22,7 @@ import { allOutcomesOf, assigned, validateRelease } from "../../../packages/lear
 import { graph } from "../../../packages/learning/src/graph";
 import { moduleFor, question } from "../../../packages/learning/src/content";
 import { checkCompetency } from "../../../packages/learning/src/compiler";
+import { lessonBlocks } from "../../../packages/learning/src/teaching-contract";
 import { boardOf } from "../../../packages/learning/src/dashboard-build";
 import { inPart, partLabel } from "../test-part";
 
@@ -70,10 +71,10 @@ test("icse@1: a valid CISCE Class 5 release, one of the board releases, honest a
 
 test("icse@1: every outcome is mapped to competencies that exist, or is listed as a gap; a gap is never mapped", () => {
   const outcomes = inventory.chapters.flatMap((c) => c.outcomes);
-  assert.equal(outcomes.length, 70);
-  assert.equal(inventory.gaps.length, 7);
+  assert.equal(outcomes.length, 74);
+  assert.equal(inventory.gaps.length, 3);
   assert.equal(allOutcomesOf(release).length, outcomes.length, "the release carries exactly the mapped outcomes");
-  assert.deepEqual({ full: outcomes.filter((o) => o.coverage === "full").length, partial: outcomes.filter((o) => o.coverage === "partial").length }, { full: 56, partial: 14 });
+  assert.deepEqual({ full: outcomes.filter((o) => o.coverage === "full").length, partial: outcomes.filter((o) => o.coverage === "partial").length }, { full: 58, partial: 16 });
   for (const o of outcomes) {
     assert.ok(o.mapped.length > 0, `${o.id}: an outcome with no competency belongs under gaps`);
     for (const id of o.mapped) assert.ok(graph.byId.has(id) && moduleFor(graph.evidenceTarget(id)), `${o.id}: ${id} exists and has a module`);
@@ -87,10 +88,13 @@ test("icse@1: every outcome is mapped to competencies that exist, or is listed a
     assert.ok(!statements.has(g.statement), `gap "${g.statement}" is not also mapped`);
     assert.ok(g.reason.length > 20 && /^Theme \d+, /.test(g.source));
   }
-  assert.deepEqual(inventory.gaps.map((g) => g.kind).sort(), [...Array(4).fill("lesson-fails-teaching-checks"), ...Array(3).fill("no-skill")]);
-  // the two skills whose lessons fail the teaching checks are left out, not mapped
-  for (const id of ["MATH.number.integers", "MATH.number.number-line"]) assert.ok(!assigned(release).some((a) => a.competency === id), `${id} is not in the release`);
-  assert.equal(skills.length, 57);
+  assert.deepEqual(inventory.gaps.map((g) => g.kind).sort(), Array(3).fill("no-skill"));
+  // grade5-lessons@1: the number-line and integers lessons were repaired (they pass the teaching contract), so both are in
+  for (const id of ["MATH.number.integers", "MATH.number.number-line"]) {
+    assert.ok(assigned(release).some((a) => a.competency === id), `${id} is in the release`);
+    assert.deepEqual(lessonBlocks(moduleFor(id)!).flatMap((b) => b.violations), [], `${id}: the lesson passes the teaching contract`);
+  }
+  assert.equal(skills.length, 59);
 });
 
 // test-part@1: CI works the skills in parts across parallel jobs (all of them when TEST_PART is unset)

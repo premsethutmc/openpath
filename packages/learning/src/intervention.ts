@@ -81,7 +81,7 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
 }
 
 /**
- * prereq-after-own@1 (OFF by default; usePrerequisiteAfterOwn). The shipped order is: teach the skill itself first. When every
+ * prereq-after-own@1 (ON by default since 2026-11-11; usePrerequisiteAfterOwn(false) restores the earlier order). The shipped order is: teach the skill itself first. When every
  * explanation of the skill has been tried and it is still wrong, the module paused for a person and the skills it builds on were
  * never checked, so a learner whose real gap is one step below stayed stuck. With the switch on:
  *   1. before such a pause, the module opens the existing recovery on the learner's latest wrong question of this skill, and the
@@ -94,7 +94,7 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
  */
 const PREREQ = globalThis as { __openpathPrereqAfterOwn?: boolean };
 export function usePrerequisiteAfterOwn(on: boolean) { PREREQ.__openpathPrereqAfterOwn = on; }
-export const prerequisiteAfterOwn = () => PREREQ.__openpathPrereqAfterOwn === true;
+export const prerequisiteAfterOwn = () => PREREQ.__openpathPrereqAfterOwn ?? true;
 /** The same supports, most doubtful first by the learner vector; equal doubt keeps the graph's order. */
 function byDoubt<T extends { id: string }>(supports: T[], records: LearnerRecords): T[] {
   const vector = learnerVector(records);

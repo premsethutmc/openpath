@@ -1,7 +1,7 @@
 # prereq-after-own@1: look below a skill before stopping for a person
 
-**Status: implemented behind a switch, OFF by default** (`usePrerequisiteAfterOwn`, `packages/learning/src/intervention.ts`).
-Nothing a learner sees changes until it is switched on.
+**Status: ON by default since 2026-11-11** (`usePrerequisiteAfterOwn(false)` restores the earlier order;
+`packages/learning/src/intervention.ts`). With learner-vector@1 the skills below are checked most doubtful first.
 
 ## The gap it closes
 
@@ -28,16 +28,18 @@ while P is missing). 43 skills have a skill below with a lesson (14 have none). 
 |---|---|---|---|
 | Switch off (shipped) | 3 of 43 | 3 | 39 |
 | Switch on | 22 of 43 | 22 | 21 |
+| Switch on, most doubtful first (learner-vector@1) | 21 of 43 | 21 | 22 |
 
-Every case where P was taught ended verified after a delayed check. In the 21 remaining cases the recovery did check the
+The learner in this sweep has no history on other skills, so the vector has little to go on and the order barely changes;
+its measured gain is with history (`LEARNER_VECTOR.md`). Every case where P was taught ended verified after a delayed check. In the 21 remaining cases the recovery did check the
 skills below, but at least in the case traced (`long-division` / `multi-multiplication`) the questions it asked belong to a
 different skill id than P, so the model learner answered them right and nothing was found: partly a limit of this learner
 model, not analysed case by case. Synthetic learners show what the program decides, never that a child learns.
 
-## Before switching it on
+## Known limits
 
-- It changes when modules pause, so existing journeys and browser tests that expect a pause need a pass with it on.
 - The prerequisite links it follows are the graph's `mandatory`, `support` and `plausible` relations; they are not reviewed.
 - Depth stays at 2. A gap three or more steps below is still the deep-recovery research path.
+- Measured on synthetic learners only.
 
 Tests: `frontend/src/learning/prerequisite-after-own.test.ts`.
