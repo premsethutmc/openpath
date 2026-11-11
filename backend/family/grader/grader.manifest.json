@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "f683b6d0d0f2c34fd3705e352f7cc502469308507a106dc5ab7df8c12688100b",
+ "sha256": "0ff42488fb2d95dcec296c436a7e9a31412fa96ea0b0d791ea00dea5e409882f",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -193,7 +193,7 @@
   "packages/learning/src/graph.ts": "aff0e620e2114b5154f5ee1d55018b2169bb4d9ec8306ee4ff9e1618bb3de302",
   "packages/learning/src/hypotheses.ts": "0e63819ca74bd4d7f1734ba0fd58d64ea0f39bbb28ab4ec665a36aa149e18e21",
   "packages/learning/src/independent-checker.ts": "493b7e4c8670357021d4ccb929bf7b3b1ae9f20941651ca3d809cdfdb73266d3",
-  "packages/learning/src/intervention.ts": "5979b3bce4ba0495eece5c283fbc14e98c920eed22d21c9c540e5a12789fda35",
+  "packages/learning/src/intervention.ts": "26904904f89c190e1e300fa8a177ce23094e789a92bb53cf0489810b937cee49",
   "packages/learning/src/kernel-adapter.ts": "bfaf8e026ac0ed6038ebe4f53d7ebe827a80e8b474a57f2938d71bf0f8392b57",
   "packages/learning/src/library.ts": "bae95f77fa3ea9e38a1e5575f6adfde2d8a505e53060cff9cb96450d1f920c07",
   "packages/learning/src/linear-algebra-kernel.ts": "e7badeee835bc6c62965f4377b176da727b4936e4831e4efd0e42ff334f63d32",
