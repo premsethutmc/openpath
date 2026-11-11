@@ -4,7 +4,7 @@
  "status": "reviewed",
  "grade": 5,
  "title": "CISCE Curriculum: Mathematics, Class V — Grade 5 Mathematics (CISCE / ICSE)",
- "hash": "ddcd8f2d",
+ "hash": "a6a436db",
  "source": {
   "kind": "textbook",
   "title": "CISCE Curriculum: Mathematics, Class V",
@@ -945,54 +945,6 @@
         "competencies": [
          {
           "id": "MATH.number.number-line",
-          "score": 1,
-          "method": "inventory@1",
-          "status": "accepted"
-         }
-        ],
-        "verdict": "clear",
-        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
-       }
-      },
-      {
-       "id": "icse-g05-c05-o03",
-       "text": "Understand integers as the counting numbers, zero and the negatives of the counting numbers.",
-       "mapping": {
-        "competencies": [
-         {
-          "id": "MATH.number.integers",
-          "score": 1,
-          "method": "inventory@1",
-          "status": "accepted"
-         }
-        ],
-        "verdict": "clear",
-        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
-       }
-      },
-      {
-       "id": "icse-g05-c05-o04",
-       "text": "Compare two integers using a number line.",
-       "mapping": {
-        "competencies": [
-         {
-          "id": "MATH.number.integers",
-          "score": 1,
-          "method": "inventory@1",
-          "status": "accepted"
-         }
-        ],
-        "verdict": "clear",
-        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
-       }
-      },
-      {
-       "id": "icse-g05-c05-o05",
-       "text": "Put integers in ascending or descending order.",
-       "mapping": {
-        "competencies": [
-         {
-          "id": "MATH.number.integers",
           "score": 1,
           "method": "inventory@1",
           "status": "accepted"

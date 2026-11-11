@@ -1,5 +1,5 @@
 /**
- * prereq-after-own@1 (on by default; the switch restores the earlier order). A learner who cannot learn a skill until a skill it builds on has been taught:
+ * prereq-after-own@1 (switch, off by default). A learner who cannot learn a skill until a skill it builds on has been taught:
  * the shipped order teaches the skill itself first, and when every explanation has been tried it paused for a person without
  * ever checking what the skill builds on. With the switch on, the module then checks the skills below, teaches the missing one,
  * gives this skill's explanation again and carries on to a delayed check.
@@ -25,7 +25,6 @@ const S = "MATH.number.decimal-tenths", P = "MATH.number.fraction-add-like";
 test("switched off (the earlier order): every explanation of the skill is tried, then the module pauses; the skill below is never taught", () => {
   usePrerequisiteAfterOwn(false);
   const r = journey(S, P);
-  usePrerequisiteAfterOwn(true);
   assert.ok(r.taught.includes(S));
   assert.ok(!r.taught.includes(P), "the missing skill below was not looked at");
   assert.match(r.last, /^pause/);
@@ -42,7 +41,7 @@ test("on: the missing skill below is found and taught, this skill is explained a
     assert.ok(r.taught.slice(firstP + 1).includes(S), "this skill's explanation was given again after the skill below was taught");
     assert.equal(r.final, "verified");
   } finally {
-    usePrerequisiteAfterOwn(true);
+    usePrerequisiteAfterOwn(false);
   }
 });
 
@@ -54,10 +53,10 @@ test("on: when nothing below is missing, the module still pauses for a person (n
     assert.notEqual(r.final, "verified");
     assert.ok(r.taught.filter((c) => c === S).length <= 6, "the skill's explanations are not repeated without a lesson below");
   } finally {
-    usePrerequisiteAfterOwn(true);
+    usePrerequisiteAfterOwn(false);
   }
 });
 
-test("it is on by default", () => {
-  assert.equal(prerequisiteAfterOwn(), true);
+test("it is off by default", () => {
+  assert.equal(prerequisiteAfterOwn(), false);
 });

@@ -2,7 +2,6 @@
  "schema": "teaching-scope@1",
  "note": "Grade 5 stage-2 scope (grade5-lessons@1): skills whose worked-example section shows its question's own checked solution (the family's solver steps), as for Grades 7 and 8. Added one skill at a time, each after its lesson passes the teaching contract.",
  "competencies": [
-  "MATH.number.integers",
   "MATH.number.number-line"
  ],
  "curated": []
