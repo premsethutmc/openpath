@@ -2,7 +2,7 @@
 
 Read this file first; status is branch-local, so verify refs. Keep it under ~60 lines; update it at each milestone.
 
-Updated: 2026-11-10 (machine validation; `main` now holds the whole maths line)
+Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` holds the whole maths line)
 
 ## Rules (product owner)
 - No merge or deploy without the owner's explicit approval. PRs are drafts. AI review/fixes may proceed; do not label them human educator approval.
@@ -13,7 +13,15 @@ Updated: 2026-11-10 (machine validation; `main` now holds the whole maths line)
 - `main` holds the whole maths line. Branch from `main`; short branches, merged back within a day or two.
 - Still open: #121 (dot, method alignment; already inside `main`), #123 (dot, TN Grades 1–3 ingestion; do not touch).
 
-## This milestone (2026-11-10, machine validation and re-certification)
+## This milestone (2026-11-11, CISCE / ICSE Class 5, branch `feat/icse-grade5`, draft PR, not merged)
+- icse@1 (`docs/milestones/ICSE_GRADE5.md`): a third board for Grade 5 only, `boardFor("icse", 5)`, from
+  `content/learning/syllabus/icse-g05.json` through the same builder. Existing skills only; nothing written for it.
+- Source is NOT official (third-party copy of the CISCE Class V pages; cisce.org unreachable): all themes `sourceVerified: false`.
+- 77 outcomes: 56 full, 14 partly, 7 gaps (Roman numerals, 3-D symmetry, line graphs; number line and integers
+  order/compare left out because their lessons fail the teaching checks). 57 skills: 57 taught, 57 verified without the fixture.
+- Open: check against the school's textbook; repair the two lessons; outcome-assessment map for the 70 outcomes.
+
+## Earlier (2026-11-10, machine validation and re-certification)
 - `main` = everything (#125, then #126 machine-validation@1). The owner delegated technical decisions; deploys still need his
   explicit approval, and `openpath-demo` on Render auto-deploys on every push to `main`, so a merge to `main` is a deploy.
 - machine-validation@1 (`docs/product/MACHINE_VALIDATION.md`): no educators, so a question counts as validated when it is
