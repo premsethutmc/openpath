@@ -833,7 +833,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aihollow: Surface area and volume of a hollow cylinder (a pipe) | `MATH.measurement.cylinder` | 400 | 0 | 134/133/133 | `c53f65fc` |
 | airad: Finding the radius or diameter from the circumference | `MATH.measurement.circle-area` | 130 | 0 | 40/20/70 | `a2029733` |
 | aidword: Word problems with dividing decimals | `MATH.number.decimal-product` | 400 | 0 | 287/71/42 | `172b3fcf` |
-| ajord: Ordering positive and negative integers | `MATH.number.integers` | 400 | 0 | 167/80/153 | `1c3da191` |
+| ajord: Ordering positive and negative integers | `MATH.number.integers` | 400 | 0 | 167/80/153 | `604172f5` |
 | ajd99: Multiplying by a number near 100 using the distributive property | `MATH.number.operation-properties` | 352 | 0 | 76/100/176 | `930d53c6` |
 | ajbrk: Removing brackets after a minus sign | `MATH.number.operation-properties` | 400 | 0 | 193/207/0 | `f03d9a4e` |
 | ajpf: Writing a number as a product of primes | `MATH.number.prime-factorisation` | 143 | 0 | 37/27/79 | `124b6f04` |
