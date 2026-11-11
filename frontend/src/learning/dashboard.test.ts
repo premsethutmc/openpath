@@ -35,6 +35,8 @@ test("real counts come from the repository, not constants", () => {
   assert.equal(index.releases.length, boardReleases.length);
   assert.ok(index.releases.every((e) => e.grade >= 1 && e.grade <= 12));
   for (const g of [1, 5, 10, 12]) for (const b of ["cbse", "tn"] as const) assert.ok(index.releases.some((e) => e.board === b && e.grade === g), `${b} grade ${g}`);
+  // icse@1: CISCE / ICSE has Class 5 only
+  assert.deepEqual(index.releases.filter((e) => e.board === "icse").map((e) => e.grade), [5]);
 });
 
 test("mapping integrity: exactly the release's accepted mappings, the same stable ids, one scope per board", () => {
@@ -56,7 +58,7 @@ test("mapping integrity: exactly the release's accepted mappings, the same stabl
       if (n.kind === "competency") assert.equal(n.id, `skill:${n.competency}`);
     });
     // board scopes stay separate
-    const prefix = rel.id.startsWith("tn-") ? "tn-" : "cbse-";
+    const prefix = rel.id.startsWith("tn-") ? "tn-" : rel.id.startsWith("icse-") ? "icse-" : "cbse-";
     assert.ok(Object.keys(d.outcomes).every((o) => o.startsWith(prefix)), `${rel.id}: only its own board's outcomes`);
   }
 });
