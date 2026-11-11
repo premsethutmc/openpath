@@ -62,8 +62,11 @@ test("only a first, unaided answer counts", () => {
   assert.deepEqual(more, base);
 });
 
-test("shadow: no product code reads the vector", () => {
-  for (const f of ["intervention.ts", "evidence.ts", "plan.ts", "tiles.ts", "dashboard.ts"])
+test("the vector is read only by recovery's order, and only with prereq-after-own@1 on; mastery and selection never read it", () => {
+  const recovery = readFileSync(new URL("../../../packages/learning/src/intervention.ts", import.meta.url), "utf8");
+  assert.equal(recovery.split("learnerVector(").length - 1, 1, "one use");
+  assert.match(recovery, /prerequisiteAfterOwn\(\) \? byDoubt\(/);
+  for (const f of ["evidence.ts", "plan.ts", "tiles.ts", "dashboard.ts"])
     assert.ok(!readFileSync(new URL(`../../../packages/learning/src/${f}`, import.meta.url), "utf8").includes("learner-vector"), f);
 });
 

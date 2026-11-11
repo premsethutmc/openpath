@@ -23,6 +23,7 @@ import { diagnose, type Diagnosis } from "./diagnostic";
 import { DAY, evidenceFor, independentAttempt, nativeItem, rightAnswer, type SkillEvidence } from "./evidence";
 import { exposureKey, gradeOfQuestion, parseProblem, phaseOf as phaseOfQ, phasePool, problemKeyOf, problemOf, type Phase } from "./families";
 import { graph, walkSupports } from "./graph";
+import { learnerVector } from "./learner-vector";
 import { quarantined } from "./question-status";
 import { modulePhasePool } from "./library";
 import { discriminatingProbe, familyOf, hypothesesFor, investigateContext, investigation, investigationTrigger, openHypothesis, teachingMatchesMisconception } from "./hypotheses";
@@ -86,6 +87,7 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
  *   1. before such a pause, the module opens the existing recovery on the learner's latest wrong question of this skill, and the
  *      recovery (which no longer stops at "explanations have not clicked" for the problem's OWN skill) walks the skills it builds on
  *      exactly as it already does for an unsure diagnosis: the first one not shown is checked and, if needed, taught in its module;
+ *      The skills below are checked most doubtful first (learner-vector@1), not in the graph's order.
  *   2. once a skill it builds on has been TAUGHT (a lesson, not just a right answer), this skill's explanations may be given once
  *      more: they were tried while that piece was missing. Only a lesson reopens them, so the loop is finite.
  * Nothing changes while no unshown, teachable skill is below: the module pauses for a person as before.
@@ -93,6 +95,12 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
 const PREREQ = globalThis as { __openpathPrereqAfterOwn?: boolean };
 export function usePrerequisiteAfterOwn(on: boolean) { PREREQ.__openpathPrereqAfterOwn = on; }
 export const prerequisiteAfterOwn = () => PREREQ.__openpathPrereqAfterOwn === true;
+/** The same supports, most doubtful first by the learner vector; equal doubt keeps the graph's order. */
+function byDoubt<T extends { id: string }>(supports: T[], records: LearnerRecords): T[] {
+  const vector = learnerVector(records);
+  const doubt = (id: string) => vector.get(graph.evidenceTarget(id))?.estimate ?? 0.5;
+  return supports.map((s, i) => ({ s, i, d: doubt(s.id) })).sort((x, y) => x.d - y.d || x.i - y.i).map((x) => x.s);
+}
 /** When a lesson on a skill this one builds on was last given (null: never, or the switch is off). */
 function reopenedAt(competency: string, records: LearnerRecords): string | null {
   if (!prerequisiteAfterOwn()) return null;
@@ -1050,7 +1058,9 @@ export function questionSupports(originalQid: string, records: LearnerRecords): 
 export function recovery(originalQid: string, records: LearnerRecords, evidence: (id: string) => SkillEvidence, now: number, session: string): RecoveryState {
   const q = question(originalQid);
   const tries = records.attempts.filter((a) => a.questionId === originalQid);
-  const supports = questionSupports(originalQid, records);
+  // prereq-after-own@1 with learner-vector@1: with the switch on, the skills this problem builds on are checked most doubtful
+  // first (the learner's own answers and what answers on other skills imply), instead of in the graph's order
+  const supports = prerequisiteAfterOwn() ? byDoubt(questionSupports(originalQid, records), records) : questionSupports(originalQid, records);
   const base = { original: originalQid, competency: q.competency, supports, question: null, reasoning: null, plan: null, established: null };
   if (!tries.length) return { ...base, phase: "attempt", active: null, reason: "Try the problem." };
   if (rightAnswer(tries[0])) return { ...base, phase: "solved", active: null, reason: "Solved on your own." };

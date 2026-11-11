@@ -24192,7 +24192,7 @@
       {
        "title": "Skip count aloud",
        "text": [
-        "Say the first number, then keep adding the step: for steps of 5, say 35, 40, 45 …",
+        "Say the first labelled number, then keep adding the step, one mark at a time.",
         "Touch one mark for each number you say until you reach the ?."
        ],
        "math": [
@@ -41515,7 +41515,7 @@
      ],
      "math": [
       "16.8 ÷ 28 = ?",
-      "Multiply both numbers by 1 so the divisor is whole: the dividend becomes 16.8",
+      "The divisor is already a whole number, so divide as it stands",
       "16.8 ÷ 28 = 0.6"
      ],
      "role": "worked-example",
@@ -41801,7 +41801,7 @@
      ],
      "math": [
       "A rectangle is cut into 5 equal columns and 4 equal rows, making 20 small rectangles, as in the picture. 1 of the columns is shaded blue and 3 of the rows are shaded yellow (the picture shows the yellow rows), so the part shaded in both colours shows 1/5 × 3/4. How many small rectangles are shaded in both colours?",
-      "1 blue columns × 3 yellow rows: 3 rectangles shaded twice"
+      "1 blue column × 3 yellow rows: 3 rectangles shaded twice"
      ],
      "widget": {
       "type": "grid",
@@ -42743,7 +42743,7 @@
       {
        "title": "Think of a thermometer",
        "text": [
-        "−8 °C is colder than −3 °C: it is further below zero.",
+        "On a thermometer, a temperature further below zero is colder, so it is the smaller number.",
         "So start with the coldest (most negative) temperature and go up to the warmest."
        ],
        "math": [

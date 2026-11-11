@@ -3366,7 +3366,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "07240765",
+   "contentHash": "513c7d3d",
    "state": "draft",
    "history": [
     {
@@ -3383,6 +3383,14 @@
      "role": "engineer",
      "at": "2026-10-20T12:07:21.717Z",
      "contentHash": "07240765",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-11T11:05:25.245Z",
+     "contentHash": "513c7d3d",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -10491,7 +10499,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "d963051c",
+   "contentHash": "469293fc",
    "state": "draft",
    "history": [
     {
@@ -10508,6 +10516,14 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "d963051c",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-11T11:05:25.245Z",
+     "contentHash": "469293fc",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -12540,7 +12556,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "604172f5",
+   "contentHash": "1c3da191",
    "state": "draft",
    "history": [
     {
@@ -12550,6 +12566,14 @@
      "at": "2026-10-19T20:28:43.280Z",
      "contentHash": "604172f5",
      "note": "added"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-11T11:05:25.245Z",
+     "contentHash": "1c3da191",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
   },
@@ -28456,7 +28480,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "30e0e3e0",
+   "contentHash": "882661ad",
    "state": "draft",
    "history": [
     {
@@ -28473,6 +28497,14 @@
      "role": "engineer",
      "at": "2026-10-20T12:07:21.717Z",
      "contentHash": "30e0e3e0",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-11T11:05:25.245Z",
+     "contentHash": "882661ad",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -42458,7 +42490,7 @@
    "competency": "MATH.number.decimal-product",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "c34d78fc",
+   "contentHash": "4a6abddf",
    "state": "draft",
    "history": [
     {
@@ -42515,6 +42547,14 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "c34d78fc",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-11T11:05:25.245Z",
+     "contentHash": "4a6abddf",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -43564,7 +43604,7 @@
    "competency": "MATH.number.fraction-product",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "893a0517",
+   "contentHash": "9b0f2bae",
    "state": "draft",
    "history": [
     {
@@ -43621,6 +43661,14 @@
      "role": "engineer",
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "893a0517",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-11T11:05:25.245Z",
+     "contentHash": "9b0f2bae",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -43926,7 +43974,7 @@
    "competency": "MATH.number.integers",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "372684a5",
+   "contentHash": "b9ddc4fa",
    "state": "draft",
    "history": [
     {
@@ -43959,6 +44007,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "372684a5",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-11T11:05:25.245Z",
+     "contentHash": "b9ddc4fa",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -44617,7 +44673,7 @@
    "competency": "MATH.number.number-line",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "e5f50305",
+   "contentHash": "74cc3408",
    "state": "draft",
    "history": [
     {
@@ -44666,6 +44722,14 @@
      "role": "engineer",
      "at": "2026-10-30T02:48:20.189Z",
      "contentHash": "e5f50305",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-11T11:05:25.245Z",
+     "contentHash": "74cc3408",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

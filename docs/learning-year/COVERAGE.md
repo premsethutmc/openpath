@@ -525,7 +525,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | abpascal: Pascal's triangle: building rows, row sums and diagonals | `MATH.algebra.number-patterns` | 95 | 0 | 33/50/12 | `78e9b2d6` |
 | acaddten: Adding and taking away tens or hundreds in your head | `MATH.number.mental-arithmetic` | 400 | 0 | 20/237/143 | `e09284df` |
 | acpart: Multiplying in your head by splitting into tens and ones | `MATH.number.mental-arithmetic` | 300 | 0 | 48/144/108 | `27ca69a4` |
-| acnlpos: Finding a number on a number line | `MATH.number.number-line` | 300 | 0 | 120/60/120 | `07240765` |
+| acnlpos: Finding a number on a number line | `MATH.number.number-line` | 300 | 0 | 120/60/120 | `513c7d3d` |
 | acnljump: Counting on and back in jumps on a number line | `MATH.number.number-line` | 300 | 0 | 95/102/103 | `bcfdcf5d` |
 | acnlbetween: How many whole numbers lie between two numbers | `MATH.number.number-line` | 300 | 0 | 86/119/95 | `104df0b8` |
 | acshare: Sharing equally and making equal groups | `MATH.number.sharing` | 300 | 0 | 89/148/63 | `232ddcfd` |
@@ -815,7 +815,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ailshape: Area and perimeter of an L-shape | `MATH.measurement.trapezium-area` | 400 | 0 | 85/109/206 | `f7da4e8b` |
 | aipath: Area of a rectangular path | `MATH.measurement.trapezium-area` | 400 | 0 | 36/248/116 | `bc776194` |
 | aidmul: Multiplying decimals | `MATH.number.decimal-product` | 400 | 0 | 9/242/149 | `f52ba465` |
-| aiddiv: Dividing decimals | `MATH.number.decimal-product` | 400 | 0 | 31/183/186 | `d963051c` |
+| aiddiv: Dividing decimals | `MATH.number.decimal-product` | 400 | 0 | 31/183/186 | `469293fc` |
 | aidp10: Multiplying and dividing decimals by 10, 100 and 1000 | `MATH.number.decimal-product` | 400 | 0 | 114/136/150 | `f6f0bb35` |
 | aifmul: Multiplying fractions and mixed numbers | `MATH.number.fraction-product` | 400 | 0 | 14/120/266 | `7feade25` |
 | aifdiv: Dividing fractions using reciprocals | `MATH.number.fraction-product` | 400 | 0 | 63/49/288 | `2b8aee7e` |
@@ -833,7 +833,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aihollow: Surface area and volume of a hollow cylinder (a pipe) | `MATH.measurement.cylinder` | 400 | 0 | 134/133/133 | `c53f65fc` |
 | airad: Finding the radius or diameter from the circumference | `MATH.measurement.circle-area` | 130 | 0 | 40/20/70 | `a2029733` |
 | aidword: Word problems with dividing decimals | `MATH.number.decimal-product` | 400 | 0 | 287/71/42 | `172b3fcf` |
-| ajord: Ordering positive and negative integers | `MATH.number.integers` | 400 | 0 | 167/80/153 | `604172f5` |
+| ajord: Ordering positive and negative integers | `MATH.number.integers` | 400 | 0 | 167/80/153 | `1c3da191` |
 | ajd99: Multiplying by a number near 100 using the distributive property | `MATH.number.operation-properties` | 352 | 0 | 76/100/176 | `930d53c6` |
 | ajbrk: Removing brackets after a minus sign | `MATH.number.operation-properties` | 400 | 0 | 193/207/0 | `f03d9a4e` |
 | ajpf: Writing a number as a product of primes | `MATH.number.prime-factorisation` | 143 | 0 | 37/27/79 | `124b6f04` |
@@ -1441,7 +1441,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | avlike: Telling like fractions from unlike fractions | `MATH.number.equivalent-fractions` | 300 | 0 | 25/78/197 | `63f3decd` |
 | avfas: Adding and subtracting unlike and mixed fractions | `MATH.number.fraction-add` | 420 | 0 | 6/58/356 | `884ea8de` |
 | avfwq: Fraction word problems with whole numbers | `MATH.number.fraction-multiply` | 400 | 0 | 52/88/260 | `66a0a608` |
-| avarea: A fraction product in an area model | `MATH.number.fraction-product` | 360 | 0 | 14/131/215 | `30e0e3e0` |
+| avarea: A fraction product in an area model | `MATH.number.fraction-product` | 360 | 0 | 14/131/215 | `882661ad` |
 | avstatq: Statistical questions, other questions and statements | `MATH.statistics.statistical-questions` | 108 | 0 | 36/36/36 | `d49135dc` |
 | avexpn: Writing a repeated product in exponential form | `MATH.number.exponents` | 320 | 0 | 70/103/147 | `c6dcd3b5` |
 | avppf: Writing a number as a product of prime powers | `MATH.number.exponents` | 225 | 0 | 40/92/93 | `5bc0da9b` |

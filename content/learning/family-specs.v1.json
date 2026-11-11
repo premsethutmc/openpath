@@ -10535,13 +10535,13 @@
       "title": "Skip count aloud",
       "kind": "procedural",
       "text": [
-       "Say the first number, then keep adding the step: for steps of 5, say 35, 40, 45 …",
+       "Say the first labelled number, then keep adding the step, one mark at a time.",
        "Touch one mark for each number you say until you reach the ?."
       ]
      }
     ]
    },
-   "fingerprint": "07240765",
+   "fingerprint": "513c7d3d",
    "validation": {
     "family": "acnlpos",
     "deterministic": {
@@ -33310,7 +33310,7 @@
      }
     ]
    },
-   "fingerprint": "d963051c",
+   "fingerprint": "469293fc",
    "validation": {
     "family": "aiddiv",
     "deterministic": {
@@ -34858,13 +34858,13 @@
       "title": "Think of a thermometer",
       "kind": "conceptual",
       "text": [
-       "−8 °C is colder than −3 °C: it is further below zero.",
+       "On a thermometer, a temperature further below zero is colder, so it is the smaller number.",
        "So start with the coldest (most negative) temperature and go up to the warmest."
       ]
      }
     ]
    },
-   "fingerprint": "604172f5",
+   "fingerprint": "1c3da191",
    "validation": {
     "family": "ajord",
     "deterministic": {
@@ -84858,7 +84858,7 @@
      }
     ]
    },
-   "fingerprint": "30e0e3e0",
+   "fingerprint": "882661ad",
    "validation": {
     "family": "avarea",
     "deterministic": {
