@@ -279,7 +279,7 @@ export const B03: Def[] = [
         return { type: "numberline", from: F, to: F + 10 * S, step: S, jumps: Array.from({ length: i }, (_, k) => [F + k * S, F + (k + 1) * S]) };
       },
       alternatives: [
-        { id: "skip_count", title: "Skip count aloud", kind: "procedural", text: ["Say the first number, then keep adding the step: for steps of 5, say 35, 40, 45 …", "Touch one mark for each number you say until you reach the ?."] },
+        { id: "skip_count", title: "Skip count aloud", kind: "procedural", text: ["Say the first labelled number, then keep adding the step, one mark at a time.", "Touch one mark for each number you say until you reach the ?."] },
       ],
     },
     limits: "Number lines with ten equal steps of 2, 5, 10, 50 or 100 up to 10 000; unlabelled lines and estimating between marks are not included.",

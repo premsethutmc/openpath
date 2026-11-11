@@ -1571,7 +1571,7 @@ export const B09: Def[] = [
     ],
     distractors: ([m, a]) => [D(m * 10, 10 ** a), D(m, 10 ** (a + 1)), D(m * 100, 10 ** a)],
     variants: () => [],
-    explain: (s) => (s.id === "shift" ? `Multiply both numbers by ${s.inputs[1]} so the divisor is whole: the dividend becomes ${s.value}` : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
+    explain: (s) => (s.id === "shift" ? (Number(s.inputs[1]) === 1 ? `The divisor is already a whole number, so divide as it stands` : `Multiply both numbers by ${s.inputs[1]} so the divisor is whole: the dividend becomes ${s.value}`) : `${s.inputs[0]} ÷ ${s.inputs[1]} = ${s.value}`),
     domain: [[2, 99], [0, 2], [2, 30], [0, 2]],
     keep: ([m, a, n, b]) => a + b >= 1 && !(a > 0 && m % 10 === 0) && !(b > 0 && n % 10 === 0),
     cap: 400,

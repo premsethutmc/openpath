@@ -1163,7 +1163,7 @@ const P2: Def[] = [
           ]);
     },
     variants: () => [],
-    explain: (s) => (s.id === "both" ? `${s.inputs[0]} blue columns × ${s.inputs[1]} yellow rows: ${s.value} rectangles shaded twice` : s.id === "all" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value} small rectangles in all` : `${s.inputs[0]} out of ${s.inputs[1]}: ${show(s.value)}`),
+    explain: (s) => (s.id === "both" ? `${s.inputs[0]} blue ${Number(s.inputs[0]) === 1 ? "column" : "columns"} × ${s.inputs[1]} yellow ${Number(s.inputs[1]) === 1 ? "row" : "rows"}: ${s.value} ${Number(s.value) === 1 ? "rectangle" : "rectangles"} shaded twice` : s.id === "all" ? `${s.inputs[0]} × ${s.inputs[1]} = ${s.value} small rectangles in all` : `${s.inputs[0]} out of ${s.inputs[1]}: ${show(s.value)}`),
     domain: D_AREA,
     keep: K_AREA,
     cap: 360,

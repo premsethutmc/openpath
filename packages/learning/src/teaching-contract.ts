@@ -20,6 +20,7 @@ import { moduleFor, question, type Module, type Screen, type Strategy } from "./
 import { explainStep, exposureKey, FAMILIES, gradeOfQuestion, parseProblem, problemOf, show, type Problem } from "./families";
 import scopeData from "../../../content/learning/showcase-grade10.v1.json";
 import grade7ScopeData from "../../../content/learning/teaching-scope-grade7.v1.json";
+import grade5ScopeData from "../../../content/learning/teaching-scope-grade5.v1.json";
 import grade8ScopeData from "../../../content/learning/teaching-scope-grade8.v1.json";
 import exemptionData from "../../../content/learning/teaching-contract-exemptions.v1.json";
 import type { Representation, TeachRole } from "./family-kit";
@@ -33,7 +34,9 @@ export const GRADE7_SCOPE = grade7ScopeData as { competencies: string[]; curated
 /** Grade 8 stage-2 scope (grade8-pilot@1): same rules as Grade 7. */
 export const GRADE8_SCOPE = grade8ScopeData as { competencies: string[]; curated: string[] };
 const WHOLE_CHAPTER = new Set([...GRADE7_SCOPE.competencies, ...GRADE8_SCOPE.competencies]);
-const SCOPE = new Set([...SHOWCASE.competencies, ...GRADE7_SCOPE.competencies, ...GRADE8_SCOPE.competencies]);
+/** Grade 5 stage-2 scope (grade5-lessons@1): the worked-example rule only, for skills repaired one at a time. */
+export const GRADE5_SCOPE = grade5ScopeData as { competencies: string[]; curated: string[] };
+const SCOPE = new Set([...SHOWCASE.competencies, ...GRADE7_SCOPE.competencies, ...GRADE8_SCOPE.competencies, ...GRADE5_SCOPE.competencies]);
 /** Reviewed decisions that a flagged section is not a defect (each with its reason), e.g. a general fact, not an example. */
 export const EXEMPTIONS = exemptionData as { entries: { competency: string; title: string; rule: Violation; reason: string }[] };
 

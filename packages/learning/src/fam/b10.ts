@@ -157,7 +157,7 @@ export const B10: Def[] = [
       method: "Mark the numbers on a number line, then read them from left to right.",
       visual: (p) => ({ type: "numberline", from: -10, to: 10, step: 1, marks: p }),
       alternatives: [
-        { id: "thermometer", title: "Think of a thermometer", kind: "conceptual", text: ["−8 °C is colder than −3 °C: it is further below zero.", "So start with the coldest (most negative) temperature and go up to the warmest."] },
+        { id: "thermometer", title: "Think of a thermometer", kind: "conceptual", text: ["On a thermometer, a temperature further below zero is colder, so it is the smaller number.", "So start with the coldest (most negative) temperature and go up to the warmest."] },
       ],
     },
     limits: "Four different integers from −9 to 9, with at least two negatives and one positive; larger integers use the same idea.",
