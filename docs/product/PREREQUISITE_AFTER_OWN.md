@@ -1,7 +1,7 @@
 # prereq-after-own@1: look below a skill before stopping for a person
 
-**Status: ON by default since 2026-11-11** (`usePrerequisiteAfterOwn(false)` restores the earlier order;
-`packages/learning/src/intervention.ts`). With learner-vector@1 the skills below are checked most doubtful first.
+**Status: implemented behind a switch, OFF by default** (`usePrerequisiteAfterOwn`, `packages/learning/src/intervention.ts`).
+With the switch on, the skills below are checked most doubtful first (learner-vector@1).
 
 ## The gap it closes
 
@@ -36,7 +36,12 @@ skills below, but at least in the case traced (`long-division` / `multi-multipli
 different skill id than P, so the model learner answered them right and nothing was found: partly a limit of this learner
 model, not analysed case by case. Synthetic learners show what the program decides, never that a child learns.
 
-## Known limits
+## Before switching it on by default
+
+Tried on 2026-11-11: with it on by default, 7 sampled engine test files pass, but the deep-recovery research tests
+(`frontend/src/journey/deep-recovery*.test.ts`) fail: they assert the earlier stop ("#115's stop") step by step. They need to
+be reworked for the new order first. The same tests use `MATH.number.integers` as their example of a skill with no
+teachable lesson, which is why the integers lesson is not repaired yet either.
 
 - The prerequisite links it follows are the graph's `mandatory`, `support` and `plausible` relations; they are not reviewed.
 - Depth stays at 2. A gap three or more steps below is still the deep-recovery research path.

@@ -24,11 +24,11 @@
   "not-implemented": "Not yet implemented"
  },
  "summary": {
-  "requirements": 1271,
+  "requirements": 1268,
   "classes": {
    "validated": 0,
    "awaiting": 1105,
-   "partial": 166,
+   "partial": 163,
    "unsupported": 0,
    "not-implemented": 0
   },
@@ -232,11 +232,11 @@
    "grade": 5,
    "title": "CISCE Curriculum: Mathematics, Class V — Grade 5 Mathematics (CISCE / ICSE)",
    "chapters": 10,
-   "requirements": 74,
+   "requirements": 71,
    "classes": {
     "validated": 0,
     "awaiting": 0,
-    "partial": 74,
+    "partial": 71,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -17394,51 +17394,6 @@
    "text": "Place whole numbers on a number line.",
    "competencies": [
     "MATH.number.number-line"
-   ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
-  },
-  {
-   "release": "icse-cisce-mathematics-grade-5@1.1.0",
-   "board": "CISCE (ICSE)",
-   "grade": 5,
-   "domain": "Numbers and operations",
-   "chapter": "Theme 5: Introduction to Negative Numbers",
-   "section": null,
-   "outcome": "icse-g05-c05-o03",
-   "text": "Understand integers as the counting numbers, zero and the negatives of the counting numbers.",
-   "competencies": [
-    "MATH.number.integers"
-   ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
-  },
-  {
-   "release": "icse-cisce-mathematics-grade-5@1.1.0",
-   "board": "CISCE (ICSE)",
-   "grade": 5,
-   "domain": "Numbers and operations",
-   "chapter": "Theme 5: Introduction to Negative Numbers",
-   "section": null,
-   "outcome": "icse-g05-c05-o04",
-   "text": "Compare two integers using a number line.",
-   "competencies": [
-    "MATH.number.integers"
-   ],
-   "class": "partial",
-   "why": "not yet judged against the content (outcome-assessment map)"
-  },
-  {
-   "release": "icse-cisce-mathematics-grade-5@1.1.0",
-   "board": "CISCE (ICSE)",
-   "grade": 5,
-   "domain": "Numbers and operations",
-   "chapter": "Theme 5: Introduction to Negative Numbers",
-   "section": null,
-   "outcome": "icse-g05-c05-o05",
-   "text": "Put integers in ascending or descending order.",
-   "competencies": [
-    "MATH.number.integers"
    ],
    "class": "partial",
    "why": "not yet judged against the content (outcome-assessment map)"

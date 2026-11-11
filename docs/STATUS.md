@@ -32,13 +32,14 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
   wording references (`wordrefs.py`, `aeineqz` first) fix `inequations-intro`; `tools/recertify.sh` + CI check keep the
   registry current. Registry: 1,080 of 1,090 families, 216 hand-written.
 - Open: 9 answer-verified families wait for the grading audit; `aetfig` has no reference.
-- prereq-after-own@1 (`docs/product/PREREQUISITE_AFTER_OWN.md`, ON by default, order by learner-vector@1): before pausing for a person, check and teach
+- prereq-after-own@1 (`docs/product/PREREQUISITE_AFTER_OWN.md`, switch, OFF; order by learner-vector@1 when on): before pausing for a person, check and teach
   the skill below, then explain this skill again. TN 5 synthetic: prerequisite found and taught 3 of 43 (off) vs 22 of 43 (on).
 - learner-vector@1 (`docs/product/LEARNER_VECTOR.md`, SHADOW): per-skill estimates using difficulty and the prerequisite graph.
   TN 5 synthetic: the missing skill is the first one checked in 57% of cases (graph order: 24%). Read only by recovery's order.
-- grade5-lessons@1: number-line and integers lessons repaired (teaching scope Grade 5; two tips reworded); ICSE Grade 5
-  release 1.1.0 has 59 skills and 3 gaps (Roman numerals, 3-D symmetry, line graphs). Seven lessons borrowed from Grades 6–7
-  were read: they show sections above Class 5 (percentage change, remainders, co-primeness); per-board section scoping is open.
+- grade5-lessons@1: number-line lesson repaired (Grade 5 teaching scope; tip reworded); ICSE Grade 5 release 1.1.0 has 58
+  skills, 6 gaps. Integers lesson NOT repaired and the rule NOT on by default: the deep-recovery research tests assert the old
+  stop and use integers as their unteachable skill; rework them first. Seven lessons borrowed from Grades 6–7 were read:
+  they show sections above Class 5 (percentage change, remainders, co-primeness); per-board section scoping is open.
 
 ## Earlier on 2026-11-10 (research pool boundary)
 - #125: offline recovery pool readers isolated; the boundary is enforced in Node CI (`tools/question-selection-boundary.mjs`).
