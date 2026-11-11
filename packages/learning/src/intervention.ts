@@ -776,6 +776,11 @@ function moduleStep(competency: string, records: LearnerRecords, ev: SkillEviden
     if (!keyboardOffered(st.check)) return { ...base, phase: "pause", diagnosis: d, decision, reason: "The check for this is a drawing, which cannot be handed in with keyboard input yet. Other topics are open; go through the drawing with a teacher or parent." };
     return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no new question left to check this on your own yet. Carry on, and go through it with a teacher or parent." };
   }
+  // prereq-after-own@1: before stopping for a person, look at what this skill builds on
+  if (decision.action === "recommend_human" || decision.action === "content_gap") {
+    const gap = gapBelow(competency, records, evidence, now, session);
+    if (gap) return { ...base, phase: "recover", original: gap.original, diagnosis: d, decision, reason: gap.reason };
+  }
   if ((decision.action === "recommend_human" || decision.action === "content_gap") && !order.length) return { ...base, phase: "pause", diagnosis: d, decision, reason: NO_EXPLANATION() };
   if (decision.action === "content_gap") return { ...base, phase: "pause", diagnosis: d, decision, reason: "There is no new question left to check this on your own yet. Carry on, and go through it with a teacher or parent." };
   if (decision.action === "recommend_human") return { ...base, phase: "pause", diagnosis: d, decision, reason: "Different explanations have not clicked yet. That is not a failure: carry on, and ask a teacher or parent to go through it with you." };
