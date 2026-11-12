@@ -47,7 +47,7 @@ that anyone learned.
 
 ## Result (2026-11-10)
 
-Registry: 1,080 of 1,090 families admitted (typed 1,080; multiple choice 845; everyday wording 1); 216 of 222 hand-written
+Registry: 1,093 of 1,094 families admitted (typed 1,093; multiple choice 857; everyday wording 1); 216 of 222 hand-written
 questions (the other 6 have set answers, not admitted for hand-written questions).
 Held: 10 families. Nine now have an independent reference and every question verified (`aerot`, `agchange`, `ahfibp`,
 `aipolyc`, `ajmilr`, `ajsize`, `akhtab`, `lboth`, `lbrk`), but no grading certification yet (rule 3): the grading audit
@@ -94,6 +94,6 @@ Switch: `useMachineValidation(false)` (on by default). Tests: `frontend/src/lear
 
 ## Next (not done)
 
-1. Run the grading audit for the nine answer-verified families so they are admitted; write a reference for `aetfig`.
+1. Write a reference for `aetfig` (picture-based choice), the one family still held. Done 2026-11-12: the grading audit was run for the nine answer-verified families and the four ICSE Grade 5 families (`akromr`, `akromw`, `aesym3`, `adline`), 3,872 cases, no blocking finding on either route; their certifications were added with `tools/mathematics/grading-audit/merge-certifications.py`.
 2. Repair references for the excluded questions of partly admitted families (`aofund` 64, `afcube` 284, `ahcoef` 226, …).
 3. Wording references for more families (one small parser per family); typed-only families first.

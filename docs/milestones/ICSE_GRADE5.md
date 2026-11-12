@@ -1,6 +1,6 @@
 # CISCE (ICSE) Class 5 mathematics (icse@1)
 
-2026-11-11. A third board, for Grade 5 only: `boardFor("icse", 5)`, release `icse-cisce-mathematics-grade-5@1.2.0`.
+2026-11-11. A third board, for Grade 5 only: `boardFor("icse", 5)`, release `icse-cisce-mathematics-grade-5@1.3.0`.
 It reuses existing skills, lessons and question families; nothing was written for it. Not an educator review: OpenPath
 has no educators, and questions count through machine validation only (`docs/product/MACHINE_VALIDATION.md`).
 
@@ -200,3 +200,13 @@ a child learns, that the teaching is good, or that a question suits a ten-year-o
 | Find the rule of a growing pattern and use it to continue the pattern. | learning outcome 2 | Full | `algebra.growing-patterns`, `algebra.pattern-rules` |  |
 | Make a pattern that changes in more than one way at once, such as shape and colour. | learning outcome 3 | Partly | `algebra.repeating-patterns` | Continuing a pattern is practised; a pattern the learner invents needs a person to look at it. |
 | See and describe the patterns in triangular numbers and square numbers. | learning outcome 4 | Full | `algebra.figurate-numbers` |  |
+
+## 2026-11-12: the three gaps closed (release 1.3.0)
+
+The three outcomes that had no skill now have one each, with OpenPath's own questions, lessons and pictures (nothing is taken
+from a textbook): `MATH.number.roman-numerals` (families `akromr` read, `akromw` write as one of four options),
+`MATH.geometry.symmetry-3d` (`aesym3`: mirror cuts of a cuboid or cube) and `MATH.statistics.line-graphs` (`adline`: read a
+point, compare two, count the rises; new `linegraph` drawing). 62 skills, 77 outcomes (61 full, 16 partial), no gaps. All
+1,560 released questions agree with independent references (`refs/icse_g5_2026_11.py`); the grading audit found no blocking
+finding. Limits: Roman numerals are chosen, not typed (no free-text answer type); 3-D symmetry covers boxes only (not
+cylinders, cones or spheres); line-graph points lie on scale lines. Earlier sections describe the state at release 1.2.0.

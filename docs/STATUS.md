@@ -31,6 +31,10 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
 - Follow-up (recert@1): references for 9 new families + `ajbase`/`linev` (all questions verified); `wm-tri-d1` reworded;
   wording references (`wordrefs.py`, `aeineqz` first) fix `inequations-intro`; `tools/recertify.sh` + CI check keep the
   registry current. Registry: 1,080 of 1,090 families, 216 hand-written.
+- 2026-11-12 Grade 5 (ICSE): pictures for seven lessons (factor tree, per-row grid, line graph drawings); every Grade 5
+  explanation passes the teaching checks (26 of 212 were refused before); three new skills close the last ICSE gaps (Roman
+  numerals, mirror symmetry of 3-D shapes, line graphs; release 1.3.0, 62 skills, 77 outcomes, no gaps); grading audit run
+  for the 13 newest families. Registry: 1,093 of 1,094 families.
 - Open: 9 answer-verified families wait for the grading audit; `aetfig` has no reference.
 - prereq-after-own@1 (`docs/product/PREREQUISITE_AFTER_OWN.md`, ON by default since 2026-11-12, order by learner-vector@1): before pausing for a person, check and teach
   the skill below, then explain this skill again. TN 5 synthetic: prerequisite found and taught 3 of 43 (off) vs 22 of 43 (on).
