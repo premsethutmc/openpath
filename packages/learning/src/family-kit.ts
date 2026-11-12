@@ -184,7 +184,7 @@ export interface Problem {
 /** A picture for a teaching screen (rendered by the app; ten frames, base-ten blocks, number lines, fraction strips,
  * arrays, a grid of squares, a right triangle, a balance). */
 export interface Visual {
-  type: "strips" | "array" | "dots" | "tenframe" | "blocks" | "numberline" | "clock" | "coins" | "bars" | "pictograph" | "table" | "shape" | "angle" | "circle" | "grid" | "triangle" | "plane" | "pie" | "factortree" | "balance" | "solid";
+  type: "strips" | "array" | "dots" | "tenframe" | "blocks" | "numberline" | "clock" | "coins" | "bars" | "linegraph" | "pictograph" | "table" | "shape" | "angle" | "circle" | "grid" | "triangle" | "plane" | "pie" | "factortree" | "balance" | "solid";
   [k: string]: unknown;
 }
 export interface TeachAlternative {

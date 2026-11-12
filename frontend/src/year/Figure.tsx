@@ -161,6 +161,14 @@ function factorTree(v: V): { splits: [number, number, number][]; primes: number[
   primes.push(m);
   return splits.length && splits.length <= 9 ? { splits, primes } : null;
 }
+/** A line graph is drawn only from data it can show exactly: every value on a scale line, one label per value. */
+function lineGraph(v: V): { labels: string[]; values: number[]; scale: number; top: number } | null {
+  const labels = arr<string>(v.labels), values = arr<number>(v.values), scale = num(v.scale, NaN);
+  if (!intIn(scale, 1, 1000) || labels.length < 2 || labels.length > 12 || labels.length !== values.length) return null;
+  if (!values.every((x) => Number.isInteger(x) && x >= 0 && x % scale === 0)) return null;
+  const top = (Math.max(...values) / scale + 1) * scale;
+  return top / scale <= 20 ? { labels, values, scale, top } : null;
+}
 export function describe(v: V): string {
   switch (v.type) {
     case "dots":
@@ -177,6 +185,11 @@ export function describe(v: V): string {
       return `Money: ${arr<number>(v.items).map((x) => `₹${x}`).join(", ")}`;
     case "bars":
       return `A bar chart${v.title ? ` of ${str(v.title)}` : ""}: ${arr<string>(v.labels).map((l, i) => `${l} ${arr<number>(v.values)[i]}`).join(", ")}`;
+    case "linegraph": {
+      const G = lineGraph(v);
+      if (!G) return NA;
+      return `A line graph${v.title ? ` of ${str(v.title)}` : ""}, with a line on the scale every ${G.scale}: ${G.labels.map((l, i) => `${l} ${G.values[i]}`).join(", ")}`;
+    }
     case "pictograph":
       return `A pictograph where one picture stands for ${num(v.key, 1)}: ${arr<string>(v.labels).map((l, i) => `${l} ${arr<number>(v.counts)[i] / num(v.key, 1)} pictures`).join(", ")}`;
     case "table":
@@ -368,6 +381,19 @@ export function Figure({ v }: { v: V }) {
         }
       });
       return box(Math.max(60, x), 72, out);
+    }
+    case "linegraph": {
+      const G = lineGraph(v);
+      if (!G) return unavailable;
+      const H = 160, W = 340, x0 = 44;
+      const X = (i: number) => x0 + 20 + (i * (W - 40)) / (G.labels.length - 1);
+      const Y = (t: number) => 10 + H - (t / G.top) * H;
+      const out: JSX.Element[] = [<line key="y" x1={x0} y1={10} x2={x0} y2={10 + H} stroke={INK} />, <line key="x" x1={x0} y1={10 + H} x2={x0 + W} y2={10 + H} stroke={INK} />];
+      for (let t = 0; t <= G.top; t += G.scale) out.push(<line key={`g${t}`} x1={x0 - 4} y1={Y(t)} x2={x0 + W} y2={Y(t)} stroke={SOFT} />, <text key={`gt${t}`} x={x0 - 8} y={Y(t) + 4} fontSize={11} textAnchor="end" fill={INK}>{t}</text>);
+      G.labels.forEach((l, i) => out.push(<line key={`v${i}`} x1={X(i)} y1={10} x2={X(i)} y2={10 + H} stroke={SOFT} />, <text key={`l${i}`} x={X(i)} y={28 + H} fontSize={11} textAnchor="middle" fill={INK}>{l}</text>));
+      out.push(<polyline key="line" points={G.values.map((t, i) => `${X(i)},${Y(t)}`).join(" ")} fill="none" stroke={ACC} strokeWidth={2} />);
+      G.values.forEach((t, i) => out.push(<circle key={`p${i}`} cx={X(i)} cy={Y(t)} r={4} fill={ACC} />));
+      return box(x0 + W + 10, H + 40, out);
     }
     case "bars":
     case "pictograph": {

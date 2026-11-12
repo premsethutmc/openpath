@@ -50,29 +50,7 @@
   "No competency is proposed by this file: every outcome is mapped to competencies that already exist, and reuses the CBSE and Tamil Nadu Grade 5 mappings where the outcome is the same.",
   "Several mapped competencies were written for Grade 6 or 7 in the other boards (integers, multiplying and dividing fractions and decimals, prime factorisation, divisibility, Indian and international numeration, percentage of an amount). CISCE places them in Class V; their lessons and questions were written with older learners in mind."
  ],
- "gaps": [
-  {
-   "theme": 1,
-   "statement": "Write numbers in Roman numerals.",
-   "source": "Theme 1, learning outcome 7",
-   "kind": "no-skill",
-   "reason": "No skill, lesson or question in OpenPath covers Roman numerals."
-  },
-  {
-   "theme": 6,
-   "statement": "Explore symmetry in familiar 3-D shapes.",
-   "source": "Theme 6, learning outcome 8",
-   "kind": "no-skill",
-   "reason": "OpenPath's symmetry skills are about flat shapes, letters and designs only."
-  },
-  {
-   "theme": 9,
-   "statement": "Read a line graph of the kind printed in newspapers and magazines.",
-   "source": "Theme 9, learning outcome 2 (line graphs)",
-   "kind": "no-skill",
-   "reason": "No skill in OpenPath covers reading a line graph of data at this level."
-  }
- ],
+ "gaps": [],
  "chapters": [
   {
    "id": "icse-g05-c01",
@@ -378,6 +356,42 @@
      "coverage": "partial",
      "source": "Theme 1, key concept (no outcome line of its own) (p. 101 onwards)",
      "note": "Facts to 10 × 10 and the 13 to 19 tables have questions; 11, 12 and 20 have none of their own."
+    },
+    {
+     "id": "icse-g05-c01-o12",
+     "statement": "Write numbers in Roman numerals.",
+     "concepts": [
+      "Roman numerals"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.number.roman-numerals",
+       "name": "Read and write Roman numerals",
+       "strand": "number",
+       "gradeRange": [
+        4,
+        5
+       ],
+       "prerequisites": [
+        "MATH.number.multi-digit-add-subtract"
+       ],
+       "supports": [
+        "MATH.number.place-value-tens"
+       ],
+       "why": "No existing competency covers Roman numerals; reading one adds and takes away the values of its place parts."
+      }
+     ],
+     "source": "Theme 1, learning outcome 7",
+     "mapped": [
+      "MATH.number.roman-numerals"
+     ]
     }
    ]
   },
@@ -1673,6 +1687,43 @@
      "coverage": "partial",
      "source": "Theme 6, learning outcome 10 (p. 110 onwards)",
      "note": "Matching solids with nets is practised; folding a real net is a hands-on activity outside OpenPath."
+    },
+    {
+     "id": "icse-g05-c06-o07",
+     "statement": "Explore symmetry in familiar 3-D shapes.",
+     "concepts": [
+      "planes of symmetry",
+      "3-D shapes"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.geometry.symmetry-3d",
+       "name": "Find mirror symmetry in familiar 3-D shapes",
+       "strand": "geometry",
+       "gradeRange": [
+        5,
+        6
+       ],
+       "prerequisites": [
+        "MATH.geometry.symmetry-lines"
+       ],
+       "supports": [
+        "MATH.geometry.solid-views"
+       ],
+       "why": "symmetry-lines and symmetry-fold are about flat shapes; a mirror cut of a solid extends a line of symmetry of its face."
+      }
+     ],
+     "source": "Theme 6, learning outcome 8",
+     "mapped": [
+      "MATH.geometry.symmetry-3d"
+     ]
     }
    ]
   },
@@ -2093,6 +2144,43 @@
      ],
      "coverage": "full",
      "source": "Theme 9, learning outcome 2 (pie charts) (p. 114 onwards)"
+    },
+    {
+     "id": "icse-g05-c09-o03",
+     "statement": "Read a line graph of the kind printed in newspapers and magazines.",
+     "concepts": [
+      "line graph",
+      "scale"
+     ],
+     "questionTypes": [
+      "numeric",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [
+      {
+       "id": "MATH.statistics.line-graphs",
+       "name": "Read line graphs of data",
+       "strand": "statistics",
+       "gradeRange": [
+        5,
+        7
+       ],
+       "prerequisites": [
+        "MATH.statistics.bar-charts"
+       ],
+       "supports": [
+        "MATH.statistics.tables"
+       ],
+       "why": "bar-charts reads separate bars against a scale; a line graph adds change over time read from the same kind of scale."
+      }
+     ],
+     "source": "Theme 9, learning outcome 2 (line graphs)",
+     "mapped": [
+      "MATH.statistics.line-graphs"
+     ]
     }
    ]
   },

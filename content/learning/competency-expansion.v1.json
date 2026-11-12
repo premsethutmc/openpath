@@ -1137,6 +1137,23 @@
    "status": "provisional"
   },
   {
+   "id": "MATH.geometry.symmetry-3d",
+   "name": "Find mirror symmetry in familiar 3-D shapes",
+   "strand": "geometry",
+   "domain": "geometry",
+   "gradeRange": [
+    5,
+    6
+   ],
+   "objectives": [
+    "Find mirror symmetry in familiar 3-D shapes"
+   ],
+   "evidence": [
+    "icse-g05:icse-g05-c06-o07"
+   ],
+   "status": "provisional"
+  },
+  {
    "id": "MATH.geometry.tessellations",
    "name": "Decide which polygons tile the plane and create tilings",
    "strand": "geometry",
@@ -1898,6 +1915,23 @@
    "status": "provisional"
   },
   {
+   "id": "MATH.number.roman-numerals",
+   "name": "Read and write Roman numerals",
+   "strand": "number",
+   "domain": "number",
+   "gradeRange": [
+    4,
+    5
+   ],
+   "objectives": [
+    "Read and write Roman numerals"
+   ],
+   "evidence": [
+    "icse-g05:icse-g05-c01-o12"
+   ],
+   "status": "provisional"
+  },
+  {
    "id": "MATH.number.root-length-construction",
    "name": "Construct irrational lengths such as sqrt n on the number line",
    "strand": "number",
@@ -2506,6 +2540,23 @@
     "cbse-g06:cbse-g06-c04-o05",
     "cbse-g07:cbse-g07-t2-c05-o03",
     "cbse-g08:cbse-g08-t2-c05-o04"
+   ],
+   "status": "provisional"
+  },
+  {
+   "id": "MATH.statistics.line-graphs",
+   "name": "Read line graphs of data",
+   "strand": "statistics",
+   "domain": "statistics",
+   "gradeRange": [
+    5,
+    7
+   ],
+   "objectives": [
+    "Read line graphs of data"
+   ],
+   "evidence": [
+    "icse-g05:icse-g05-c09-o03"
    ],
    "status": "provisional"
   },
@@ -3632,6 +3683,18 @@
    "reason": "helpful background named by the curriculum inventory; never a gate"
   },
   {
+   "target": "MATH.geometry.symmetry-3d",
+   "from": "MATH.geometry.symmetry-lines",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.geometry.symmetry-3d",
+   "from": "MATH.geometry.solid-views",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
    "target": "MATH.geometry.tessellations",
    "from": "MATH.geometry.angle-measure",
    "type": "plausible",
@@ -4292,6 +4355,18 @@
    "reason": "helpful background named by the curriculum inventory; never a gate"
   },
   {
+   "target": "MATH.number.roman-numerals",
+   "from": "MATH.number.multi-digit-add-subtract",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.number.roman-numerals",
+   "from": "MATH.number.place-value-tens",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
    "target": "MATH.number.root-length-construction",
    "from": "MATH.geometry.basic-constructions",
    "type": "plausible",
@@ -4714,6 +4789,18 @@
   {
    "target": "MATH.statistics.evaluate-data-displays",
    "from": "MATH.statistics.pictographs",
+   "type": "support",
+   "reason": "helpful background named by the curriculum inventory; never a gate"
+  },
+  {
+   "target": "MATH.statistics.line-graphs",
+   "from": "MATH.statistics.bar-charts",
+   "type": "plausible",
+   "reason": "proposed as mathematically required by the curriculum inventory; pending educator confirmation"
+  },
+  {
+   "target": "MATH.statistics.line-graphs",
+   "from": "MATH.statistics.tables",
    "type": "support",
    "reason": "helpful background named by the curriculum inventory; never a gate"
   },
