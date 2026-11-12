@@ -1287,10 +1287,10 @@
     "dropped-zero (procedural): A zero in the answer was left out: when the divisor does not go into a step, write 0 there."
    ],
    "teach": {
-    "idea": "Dividing undoes multiplying: 84 ÷ 4 asks how many 4s make 84.",
-    "method": "Take away a large, easy chunk first (20 × 4 = 80), then divide what is left (4 ÷ 4 = 1): 20 + 1 = 21."
+    "idea": "Dividing undoes multiplying: it asks how many lots of the divisor make the number.",
+    "method": "Take away a large, easy chunk first (a round number of lots of the divisor), then divide what is left, and add the two parts."
    },
-   "fingerprint": "88e2905c",
+   "fingerprint": "fedc67a3",
    "validation": {
     "family": "ldiv",
     "deterministic": {
@@ -13926,12 +13926,12 @@
       "kind": "conceptual",
       "text": [
        "Each time the minute hand goes all the way round, 60 minutes pass and the hour hand moves to the next number.",
-       "Count 60, 120, 180 … for the hours, then count on the extra minutes."
+       "Count on 60 for each hour, then count on the extra minutes."
       ]
      }
     ]
    },
-   "fingerprint": "8212fa78",
+   "fingerprint": "adb73370",
    "validation": {
     "family": "adhmin",
     "deterministic": {
@@ -15079,7 +15079,7 @@
    ],
    "teach": {
     "idea": "Tally marks record one mark for each thing counted; every fifth mark crosses the four before it, so the marks come in easy bundles of 5.",
-    "method": "Count the bundles in fives (5, 10, 15 …), then count on the single marks.",
+    "method": "Count the bundles in fives, then count on the single marks.",
     "alternatives": [
      {
       "id": "ten_frame",
@@ -15092,7 +15092,7 @@
      }
     ]
    },
-   "fingerprint": "e238bfa5",
+   "fingerprint": "cb86c5ea",
    "validation": {
     "family": "adtally",
     "deterministic": {
@@ -17549,12 +17549,12 @@
       "kind": "conceptual",
       "text": [
        "The squares sit in equal rows, like chairs in a hall.",
-       "Skip-count one row at a time: 6, 12, 18, … until every row is counted."
+       "Skip-count one row at a time until every row is counted."
       ]
      }
     ]
    },
-   "fingerprint": "a5785132",
+   "fingerprint": "82661b3a",
    "validation": {
     "family": "aearea",
     "deterministic": {
@@ -17710,13 +17710,13 @@
       "title": "Change everything into the small unit",
       "kind": "procedural",
       "text": [
-       "Write both measures in the small unit only (for example 2 m 45 cm = 245 cm).",
-       "Add or subtract these numbers, then change the answer back (310 cm = 3 m 10 cm)."
+       "Write both measures in the small unit only.",
+       "Add or subtract these numbers, then change the answer back into the two units."
       ]
      }
     ]
    },
-   "fingerprint": "f5154080",
+   "fingerprint": "9f8a403e",
    "validation": {
     "family": "aemix",
     "deterministic": {
@@ -25495,7 +25495,7 @@
      }
     ]
    },
-   "fingerprint": "28d06cec",
+   "fingerprint": "72d02d29",
    "validation": {
     "family": "agimp",
     "deterministic": {

@@ -110,7 +110,7 @@ Every competency that has some content:
 | Classify numbers as even or odd (`MATH.number.even-odd`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeeven draft, aepair draft). |
 | Add and subtract like fractions (`MATH.number.fraction-add-like`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd submitted). |
 | Read and compare large numbers (`MATH.number.large-numbers`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeind draft, aecmp draft, aenumf draft). |
-| Divide multi-digit numbers (`MATH.number.long-division`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ldiv submitted, avdiv draft, avmdiv draft). |
+| Divide multi-digit numbers (`MATH.number.long-division`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ldiv draft, avdiv draft, avmdiv draft). |
 | Multiply multi-digit numbers (`MATH.number.multi-multiplication`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families mmul draft, avstrat draft, avpp draft, avlat draft, mul draft). |
 | Multiply and divide by 10, 100 and 1000 (`MATH.number.multiply-divide-powers-of-ten`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aep10 draft, aemult draft, aediv0 draft, ajsize draft). |
 | Round numbers to the nearest ten, hundred or thousand (`MATH.number.rounding`) | 4–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeround draft, aeest draft, aernd draft, aeestp draft, aechk draft, aerdec draft, avpest draft). |
@@ -131,7 +131,7 @@ Every competency that has some content:
 | Classify triangles (`MATH.geometry.triangle-types`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aftri draft, aftris draft). |
 | Compare shapes with equal area or equal perimeter (`MATH.measurement.area-perimeter-relation`) | 5–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afapr draft). |
 | Calculate rectangle area (`MATH.measurement.rectangle-area`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families rect submitted). |
-| Compare distance per unit time (`MATH.measurement.time-speed-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agspd draft, agspdc draft, ldiv submitted). |
+| Compare distance per unit time (`MATH.measurement.time-speed-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agspd draft, agspdc draft, ldiv draft). |
 | Measure volume with unit cubes (`MATH.measurement.volume-cubes`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families vol submitted, abdisp draft, avvcmp draft). |
 | Add and subtract decimals (`MATH.number.decimal-operations`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agdec draft, agrupee draft, agmeas draft, agchange draft). |
 | Find factors and multiples (`MATH.number.factors-multiples`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agfac draft, agcomf draft, agjump draft). |
@@ -402,7 +402,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | rperim: The perimeter of a rectangle | `MATH.measurement.rectangle-perimeter` | 190 | 0 | 30/96/64 | `d9863e32` |
 | mmul: Multiplying a two-digit number by a one-digit number | `MATH.number.multi-multiplication` | 640 | 0 | 118/232/290 | `8e6face3` |
 | divr: The remainder of a division | `MATH.number.division-remainders` | 536 | 0 | 109/282/145 | `1a4a6468` |
-| ldiv: Dividing a number exactly | `MATH.number.long-division` | 704 | 0 | 72/312/320 | `88e2905c` |
+| ldiv: Dividing a number exactly | `MATH.number.long-division` | 704 | 0 | 72/312/320 | `fedc67a3` |
 | fmulw: A fraction times a whole number | `MATH.number.fraction-multiply` | 528 | 0 | 87/155/286 | `ae871336` |
 | faddu: Adding fractions with different denominators | `MATH.number.fraction-add` | 870 | 0 | 107/225/538 | `40d2c521` |
 | pct: A percentage of an amount | `MATH.number.percentage` | 380 | 0 | 60/140/180 | `05d45983` |
@@ -569,7 +569,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | acbill: Preparing and checking a bill | `MATH.measurement.money-decimals` | 240 | 0 | 0/180/60 | `bffd8965` |
 | adperim: The perimeter of a shape from its side lengths | `MATH.measurement.perimeter-intro` | 178 | 0 | 12/93/73 | `16e058a3` |
 | admper: A missing side from the perimeter | `MATH.measurement.perimeter-intro` | 178 | 0 | 35/47/96 | `b1421631` |
-| adhmin: Hours and minutes into minutes | `MATH.measurement.time-unit-conversion` | 96 | 0 | 8/40/48 | `8212fa78` |
+| adhmin: Hours and minutes into minutes | `MATH.measurement.time-unit-conversion` | 96 | 0 | 8/40/48 | `adb73370` |
 | adm2h: Minutes into hours and minutes | `MATH.measurement.time-unit-conversion` | 96 | 0 | 12/29/55 | `8b8e1401` |
 | adsec: Minutes and seconds into seconds | `MATH.measurement.time-unit-conversion` | 108 | 0 | 4/44/60 | `d61b2378` |
 | adfcmp: Comparing two fractions with the same bottom or top number | `MATH.number.fraction-comparison` | 500 | 0 | 148/230/122 | `0b4d9738` |
@@ -584,7 +584,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | adbetw: How many whole numbers lie between two numbers | `MATH.number.thousands` | 300 | 0 | 72/99/129 | `f19fd2ae` |
 | adest: Estimating a sum or difference by rounding to tens | `MATH.reasoning.estimate-check` | 400 | 0 | 150/174/76 | `24cdcce7` |
 | adbar: Reading a bar chart | `MATH.statistics.bar-charts` | 448 | 0 | 56/280/112 | `5a999ba5` |
-| adtally: Reading tally marks in a table | `MATH.statistics.tables` | 270 | 0 | 32/58/180 | `e238bfa5` |
+| adtally: Reading tally marks in a table | `MATH.statistics.tables` | 270 | 0 | 32/58/180 | `cb86c5ea` |
 | adtwo: A missing number in a two-way table | `MATH.statistics.tables` | 400 | 0 | 195/41/164 | `286e2942` |
 | adfnl: Unit fractions such as 1/2 and 1/4 on a number line | `MATH.number.fraction-comparison` | 126 | 0 | 6/84/36 | `06ad4b4c` |
 | adwtcap: Estimating and checking weights and capacities | `MATH.reasoning.estimate-check` | 159 | 0 | 40/40/79 | `39768334` |
@@ -616,9 +616,9 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aet24: Writing a 12-hour time in 24-hour form | `MATH.measurement.24-hour-clock` | 288 | 0 | 132/132/24 | `6653252b` |
 | aet12: Reading a 24-hour time on a 12-hour clock | `MATH.measurement.24-hour-clock` | 156 | 0 | 84/48/24 | `6eb44d78` |
 | aeel24: Time between two 24-hour times | `MATH.measurement.24-hour-clock` | 400 | 0 | 103/119/178 | `dbe283c6` |
-| aearea: Area of a rectangle by counting unit squares | `MATH.measurement.area-squares` | 99 | 0 | 27/6/66 | `a5785132` |
+| aearea: Area of a rectangle by counting unit squares | `MATH.measurement.area-squares` | 99 | 0 | 27/6/66 | `82661b3a` |
 | aeperar: Choosing area or perimeter in a problem | `MATH.measurement.area-squares` | 400 | 0 | 91/234/75 | `a90a733b` |
-| aemix: Adding and subtracting measures in two units | `MATH.measurement.compute-with-measures` | 450 | 0 | 50/245/155 | `f5154080` |
+| aemix: Adding and subtracting measures in two units | `MATH.measurement.compute-with-measures` | 450 | 0 | 50/245/155 | `9f8a403e` |
 | aemulm: Multiplying a measure in two units | `MATH.measurement.compute-with-measures` | 400 | 0 | 47/152/201 | `09a7312b` |
 | aeconv: Changing a measure into the smaller unit | `MATH.measurement.unit-conversions` | 450 | 0 | 65/356/29 | `b0fa1093` |
 | aeparts: How many parts make a kilogram or a litre | `MATH.measurement.unit-conversions` | 90 | 0 | 26/48/16 | `a2f547ca` |
@@ -719,7 +719,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | agjump: Common multiples from jumps on a number line | `MATH.number.factors-multiples` | 300 | 0 | 122/70/108 | `fa359cc0` |
 | aglcm: The lowest common multiple of two numbers | `MATH.number.hcf-lcm` | 253 | 0 | 36/134/83 | `848d7188` |
 | aghcf3: The highest common factor of three numbers | `MATH.number.hcf-lcm` | 400 | 0 | 40/193/167 | `71221d81` |
-| agimp: Writing a mixed number as an improper fraction | `MATH.number.mixed-fractions` | 279 | 0 | 27/152/100 | `28d06cec` |
+| agimp: Writing a mixed number as an improper fraction | `MATH.number.mixed-fractions` | 279 | 0 | 27/152/100 | `72d02d29` |
 | agmix: Writing an improper fraction as a mixed number | `MATH.number.mixed-fractions` | 279 | 0 | 18/81/180 | `d00fc6e9` |
 | agbod: Order of operations with brackets | `MATH.number.order-of-operations` | 600 | 0 | 86/429/85 | `ce3b4bd3` |
 | agpct: Writing a fraction or decimal as a percentage | `MATH.number.percent-intro` | 198 | 0 | 5/90/103 | `ef4dbef5` |
@@ -1547,7 +1547,7 @@ By grade (a competency spanning grades counts in each):
 | Read and compare large numbers (`MATH.number.large-numbers`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeind draft, aecmp draft, aenumf draft). |
 | Use multiplication facts (`MATH.number.multiplication-tables`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families mul draft, avtab draft). |
 | Multiply multi-digit numbers (`MATH.number.multi-multiplication`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families mmul draft, avstrat draft, avpp draft, avlat draft, mul draft). |
-| Divide multi-digit numbers (`MATH.number.long-division`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families ldiv submitted, avdiv draft, avmdiv draft). |
+| Divide multi-digit numbers (`MATH.number.long-division`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families ldiv draft, avdiv draft, avmdiv draft). |
 | Represent fractions of a whole (`MATH.number.fraction-models`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname draft, adfbuild draft, adshade draft, adfunit draft). |
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families eqfrac draft, avfold draft, avlow draft, avlike draft). |
 | Compare fractions with like denominators (`MATH.number.fraction-comparison`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcmp draft, adford draft, adfnl draft, adfcmpu draft, adfordu draft). |
