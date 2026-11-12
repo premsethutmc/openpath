@@ -151,6 +151,16 @@ function mono(t: string): Mono | null {
 const mul = (a: Mono, b: Mono): Mono => { const v = { ...a.v }; for (const [k, p] of Object.entries(b.v)) v[k] = (v[k] ?? 0) + p; return { c: a.c * b.c, v }; };
 const sameMono = (a: Mono, b: Mono) => (a.c === 0 && b.c === 0) || a.c === b.c && Object.keys({ ...a.v, ...b.v }).every((k) => (a.v[k] ?? 0) === (b.v[k] ?? 0));
 
+/** A factor tree is derived from the number itself (the smallest prime is split off each time), so it cannot disagree with it. */
+function factorTree(v: V): { splits: [number, number, number][]; primes: number[] } | null {
+  const n = num(v.n, NaN);
+  if (!Number.isInteger(n) || n < 4 || n > 1000) return null;
+  const splits: [number, number, number][] = []; const primes: number[] = [];
+  let m = n;
+  for (let p = 2; p * p <= m; ) { if (m % p === 0) { splits.push([m, p, m / p]); primes.push(p); m /= p; } else p++; }
+  primes.push(m);
+  return splits.length && splits.length <= 9 ? { splits, primes } : null;
+}
 export function describe(v: V): string {
   switch (v.type) {
     case "dots":
@@ -200,7 +210,8 @@ export function describe(v: V): string {
     case "circle":
       return `A circle${v.radius !== undefined ? ` with radius ${str(v.radius)}` : ""}${v.diameter !== undefined ? ` with diameter ${str(v.diameter)}` : ""}${v.sector !== undefined ? (v.estimate ? ", with a shaded angle (estimate it from the picture)" : `, a sector of ${num(v.sector)}°`) : ""}`;
     case "grid": {
-      const base = `A grid of ${num(v.rows)} rows and ${num(v.cols)} columns${num(v.shaded) ? ` with ${num(v.shaded)} squares shaded` : ""}`;
+      if (v.perRow !== undefined && !intIn(v.perRow, 0, num(v.cols, 4))) return NA;
+      const base = `A grid of ${num(v.rows)} rows and ${num(v.cols)} columns${v.perRow !== undefined ? ` with ${num(v.perRow)} square${num(v.perRow) === 1 ? "" : "s"} shaded in each row` : num(v.shaded) ? ` with ${num(v.shaded)} squares shaded` : ""}`;
       if (v.labels === undefined && v.rowLabels === undefined && v.colLabels === undefined) return base;
       const G = gridLabelsOk(v);
       if (G === UNCHECKED) return NA_UNCHECKED;
@@ -228,6 +239,11 @@ export function describe(v: V): string {
       return `A ${str(v.name)}${arr(v.dims).length ? ` (${arr(v.dims).join(", ")})` : ""}`;
     case "balance":
       return `A balance: ${str(v.left)} on the left, ${str(v.right)} on the right`;
+    case "factortree": {
+      const T = factorTree(v);
+      if (!T) return NA;
+      return `A factor tree for ${num(v.n)}: ${T.splits.map(([m, p, r]) => `${m} splits into ${p} and ${r}`).join("; ")}. The prime numbers at the ends of the branches are ${T.primes.join(", ")}`;
+    }
     default:
       return "A picture";
   }
@@ -498,6 +514,9 @@ export function Figure({ v }: { v: V }) {
       const rows = num(v.rows, 3);
       const cols = num(v.cols, 4);
       const shaded = num(v.shaded);
+      // perRow: the same number of squares shaded at the start of every row (k rows of a out of b: k lots of a/b)
+      const perRow = v.perRow === undefined ? null : num(v.perRow, NaN);
+      if (perRow !== null && !intIn(perRow, 0, cols)) return unavailable;
       if (v.labels !== undefined || v.rowLabels !== undefined || v.colLabels !== undefined) {
         // labelled grid (an area model): larger cells so the labels are readable; side labels outside the left and top edges
         const G = gridLabelsOk(v);
@@ -517,7 +536,7 @@ export function Figure({ v }: { v: V }) {
         return box(ox + cols * s + 4, oy + rows * s + 4, out);
       }
       const s = Math.min(30, 360 / Math.max(rows, cols));
-      return box(cols * s + 4, rows * s + 4, Array.from({ length: rows * cols }, (_, i) => <rect key={i} x={2 + (i % cols) * s} y={2 + Math.floor(i / cols) * s} width={s} height={s} fill={i < shaded ? ACC : "#fff"} stroke={INK} />));
+      return box(cols * s + 4, rows * s + 4, Array.from({ length: rows * cols }, (_, i) => <rect key={i} x={2 + (i % cols) * s} y={2 + Math.floor(i / cols) * s} width={s} height={s} fill={(perRow === null ? i < shaded : i % cols < perRow) ? ACC : "#fff"} stroke={INK} />));
     }
     case "triangle": {
       if (v.exterior !== undefined) {
@@ -580,6 +599,26 @@ export function Figure({ v }: { v: V }) {
       arr<[[number, number], [number, number]]>(v.segments).forEach(([a, b], i) => out.push(<line key={`s${i}`} x1={X(a[0])} y1={Y(a[1])} x2={X(b[0])} y2={Y(b[1])} stroke={ACC} strokeWidth={2} />));
       arr<[number, number, string?]>(v.points).forEach(([x, y, l], i) => out.push(<circle key={`p${i}`} cx={X(x)} cy={Y(y)} r={4} fill={ACC} />, <text key={`pl${i}`} x={X(x) + 6} y={Y(y) - 6} fontSize={12} fill={INK}>{l ?? ""}</text>));
       return box(220, 220, out);
+    }
+    case "factortree": {
+      const T = factorTree(v);
+      if (!T) return unavailable;
+      // the trunk runs down to the right; each split hangs its prime (circled) to the left
+      const [dx, dy] = [44, 46];
+      const out: JSX.Element[] = [];
+      T.splits.forEach(([m, p, r], i) => {
+        const [x, y] = [70 + i * dx, 24 + i * dy];
+        out.push(<text key={`n${i}`} x={x} y={y} fontSize={16} textAnchor="middle" fill={INK}>{m}</text>);
+        out.push(<line key={`a${i}`} x1={x - 6} y1={y + 6} x2={x - dx + 12} y2={y + dy - 20} stroke={INK} />);
+        out.push(<line key={`b${i}`} x1={x + 6} y1={y + 6} x2={x + dx - 8} y2={y + dy - 18} stroke={INK} />);
+        out.push(<circle key={`c${i}`} cx={x - dx + 6} cy={y + dy - 6} r={14} fill={SOFT} stroke={ACC} />);
+        out.push(<text key={`p${i}`} x={x - dx + 6} y={y + dy - 1} fontSize={15} textAnchor="middle" fill={INK}>{p}</text>);
+        if (i === T.splits.length - 1) {
+          out.push(<circle key="cl" cx={x + dx} cy={y + dy - 6} r={14} fill={SOFT} stroke={ACC} />);
+          out.push(<text key="pl" x={x + dx} y={y + dy - 1} fontSize={15} textAnchor="middle" fill={INK}>{r}</text>);
+        }
+      });
+      return box(70 + (T.splits.length + 1) * dx, 40 + T.splits.length * dy, out);
     }
     case "pie": {
       const labels = arr<string>(v.labels);

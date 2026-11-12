@@ -12718,6 +12718,12 @@
       "The pieces are still the same size (each is 1/8): the bottom stays 8",
       "So 3 × 4/8 = 12/8 = 3/2"
      ],
+     "widget": {
+      "type": "grid",
+      "rows": 3,
+      "cols": 8,
+      "perRow": 4
+     },
      "tip": "Top and bottom were both multiplied by 3: that gives an equal fraction, not 3 lots of it.",
      "role": "concept",
      "instance": "gen:fmulw:4,8,3"
@@ -12762,6 +12768,12 @@
         "The pieces are still the same size (each is 1/3): the bottom stays 3",
         "So 8 × 1/3 = 8/3"
        ],
+       "widget": {
+        "type": "grid",
+        "rows": 8,
+        "cols": 3,
+        "perRow": 1
+       },
        "role": "worked-example",
        "instance": "gen:fmulw:1,3,8"
       }
@@ -12842,7 +12854,7 @@
    ],
    "provenance": {
     "origin": "synthesised",
-    "policy": "library@2+template@1",
+    "policy": "library@2+template@2",
     "family": "fmulw",
     "seed": [
      4,
@@ -30851,6 +30863,23 @@
       "1200 g = 1000 g + 200 g: change 1000 g into 1 kg",
       "kg: 2 + 1 + 1 carried = 4 kg"
      ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "kg",
+       "g"
+      ],
+      "rows": [
+       [
+        2,
+        800
+       ],
+       [
+        "+ 1",
+        400
+       ]
+      ]
+     },
      "tip": "1200 g was left as it is; 1000 g make 1 kg, so change 1000 of them into 1 kg.",
      "role": "concept",
      "instance": "gen:aemix:1,0,56,28"
@@ -30905,6 +30934,23 @@
         "110 cm = 100 cm + 10 cm: change 100 cm into 1 m",
         "m: 2 + 6 + 1 carried = 9 m"
        ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "m",
+         "cm"
+        ],
+        "rows": [
+         [
+          2,
+          80
+         ],
+         [
+          "+ 6",
+          30
+         ]
+        ]
+       },
        "role": "worked-example",
        "instance": "gen:aemix:0,0,56,126"
       }
@@ -43142,6 +43188,10 @@
       "2 ÷ 2 = 1",
       "The divisors are the prime factors: (2, 2, 2, 2, 2, 2, 2, 2)"
      ],
+     "widget": {
+      "type": "factortree",
+      "n": 256
+     },
      "tip": "1 was written as a factor. 1 is not a prime number, so it is not part of the list.",
      "role": "concept",
      "instance": "gen:ajpf:256"
@@ -43199,6 +43249,10 @@
         "17 ÷ 17 = 1",
         "The divisors are the prime factors: (3, 5, 17)"
        ],
+       "widget": {
+        "type": "factortree",
+        "n": 255
+       },
        "role": "worked-example",
        "instance": "gen:ajpf:255"
       }

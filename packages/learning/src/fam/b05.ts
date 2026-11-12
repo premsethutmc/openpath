@@ -1030,6 +1030,7 @@ export const B05: Def[] = [
       return op ? `A can holds ${say(kind, b1, s1)} of ${thing}. ${who} pours out ${say(kind, b2, s2)}. How much ${thing} is left? Write (L, mL).` : `${who} pours ${say(kind, b1, s1)} of ${thing} and then ${say(kind, b2, s2)} more into a big vessel. How much ${thing} is in it now? Write (L, mL).`;
     },
     teach: {
+      visual: ([kind, op, A, B]) => ({ type: "table", head: [UNITS[kind].big, UNITS[kind].small], rows: [mixed(kind, A), [`${op ? "−" : "+"} ${mixed(kind, B)[0]}`, mixed(kind, B)[1]]] }),
       idea: "Measures in two units work like tens and ones, but the change-over is 100 cm = 1 m, 1000 g = 1 kg and 1000 mL = 1 L.",
       method: "Add or subtract the amounts in the smaller unit first. If they reach the change-over number, change them into 1 of the bigger unit; if there are too few to subtract, change 1 of the bigger unit into the smaller unit. Then do the bigger unit.",
       alternatives: [

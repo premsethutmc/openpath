@@ -317,6 +317,7 @@ export const B10: Def[] = [
     cap: 400,
     difficulty: ([n]) => (n <= 100 ? 1 : primeList(n).some((p) => p >= 7) ? 3 : 2),
     teach: {
+      visual: ([n]) => ({ type: "factortree", n }),
       idea: "Every whole number greater than 1 is either prime or can be split into primes in exactly one way (apart from order).",
       method: "Divide by the smallest prime that goes exactly (2, then 3, then 5 …) again and again until 1 is left. The divisors are the prime factors.",
       alternatives: [

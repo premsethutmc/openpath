@@ -727,7 +727,7 @@ const F: Def[] = [
     domain: [[1, 11], [2, 12], [2, 9]],
     keep: ([a, b]) => a < b,
     difficulty: ([a, b, k]) => (k * a < b ? 1 : k * a <= 2 * b ? 2 : 3),
-    teach: { idea: "k × a/b means k lots of a/b: the pieces stay the same size, there are just more of them.", method: "Multiply the top (the number of pieces) by the whole number and keep the bottom (the size of each piece) the same." },
+    teach: { idea: "k × a/b means k lots of a/b: the pieces stay the same size, there are just more of them.", method: "Multiply the top (the number of pieces) by the whole number and keep the bottom (the size of each piece) the same.", visual: ([a, b, k]) => (k <= 12 && b <= 12 ? { type: "grid", rows: k, cols: b, perRow: a } : null) },
   },
   {
     id: "faddu",

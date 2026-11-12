@@ -251,3 +251,24 @@ test("legacy pictures are unchanged", () => {
   // one whole = k/k is the same amount in any lesson (unit-fractions "equal parts" data)
   assert.match(describeFigure({ type: "strips", top: 1, bottom: 4, shaded: 1 }), /second in 4 equal parts with 4 shaded, the same amount$/);
 });
+
+test("factor tree: drawn from the number itself, primes at the ends; a prime or out-of-range number is not drawn", () => {
+  const h = html({ type: "factortree", n: 96 });
+  assert.ok(!/figure-unavailable/.test(h));
+  assert.deepEqual(texts(h).map((t) => num(t.text)), [96, 2, 48, 2, 24, 2, 12, 2, 6, 2, 3], "each split: the number, then the prime taken off; the last prime closes the tree");
+  assert.equal((h.match(/<circle /g) ?? []).length, 6, "six primes circled: 2 × 2 × 2 × 2 × 2 × 3 = 96");
+  assert.match(describeFigure({ type: "factortree", n: 96 }), /96 splits into 2 and 48.*ends of the branches are 2, 2, 2, 2, 2, 3$/);
+  for (const n of [17, 3, 1001, 2.5]) { assert.match(html({ type: "factortree", n }), /figure-unavailable/, `${n} is not drawn`); assert.match(describeFigure({ type: "factortree", n }), /not available/); }
+});
+
+test("grid perRow: the same number of squares shaded at the start of every row; an impossible count is not drawn", () => {
+  const h = html({ type: "grid", rows: 4, cols: 5, perRow: 2 });
+  const r = rects(h);
+  assert.equal(r.length, 20);
+  const shaded = r.filter((x) => x.fill !== "#fff");
+  assert.equal(shaded.length, 8, "4 rows of 2 shaded: 4 lots of 2/5");
+  assert.equal(new Set(shaded.map((x) => x.x)).size, 2, "the shaded squares are the first two columns");
+  assert.equal(describeFigure({ type: "grid", rows: 4, cols: 5, perRow: 2 }), "A grid of 4 rows and 5 columns with 2 squares shaded in each row");
+  assert.equal(describeFigure({ type: "grid", rows: 8, cols: 3, perRow: 1 }), "A grid of 8 rows and 3 columns with 1 square shaded in each row");
+  assert.match(html({ type: "grid", rows: 4, cols: 5, perRow: 6 }), /figure-unavailable/);
+});
