@@ -697,7 +697,7 @@ const F: Def[] = [
     explain: (s) => (s.id === "tens" ? `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}` : s.id === "whole" ? `So ${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : s.id === "rest" ? `${s.inputs[0]} − ${s.inputs[1]} = ${show(s.value)}` : s.id === "ones" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[12, 99], [2, 9]],
     difficulty: ([q, d]) => (d <= 5 && q < 30 ? 1 : q < 60 ? 2 : 3),
-    teach: { idea: "Dividing undoes multiplying: 84 ÷ 4 asks how many 4s make 84.", method: "Take away a large, easy chunk first (20 × 4 = 80), then divide what is left (4 ÷ 4 = 1): 20 + 1 = 21.", visual: ([q, d]) => { const chunk = Math.floor(q / 10) * 10, rest = q - chunk; const cols = [chunk, rest].filter((x) => x > 0); return { type: "grid", rows: 1, cols: cols.length, rowLabels: [String(d)], colLabels: cols.map(String), labels: cols.map((x) => String(x * d)) }; } },
+    teach: { idea: "Dividing undoes multiplying: it asks how many lots of the divisor make the number.", method: "Take away a large, easy chunk first (a round number of lots of the divisor), then divide what is left, and add the two parts.", visual: ([q, d]) => { const chunk = Math.floor(q / 10) * 10, rest = q - chunk; const cols = [chunk, rest].filter((x) => x > 0); return { type: "grid", rows: 1, cols: cols.length, rowLabels: [String(d)], colLabels: cols.map(String), labels: cols.map((x) => String(x * d)) }; } },
   },
   {
     id: "fmulw",

@@ -738,6 +738,7 @@ export const B07: Def[] = [
       steps: [
         { id: "wholes", op: "multiply", competency: MT, inputs: [w, d], value: w * d },
         { id: "add", op: "add", competency: MIX, inputs: [w * d, n], value: w * d + n },
+        { id: "result", op: "write over", competency: MIX, inputs: [w * d + n, d], value: `${w * d + n}/${d}` },
       ],
       answer: `${w * d + n}/${d}`,
     }),

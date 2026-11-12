@@ -1066,7 +1066,7 @@ export const B03: Def[] = [
     teach: {
       idea: "In a growing pattern the same amount is added each time; find that amount and keep adding it.",
       method: "Find how much the pattern grows from one step to the next. Keep adding that amount, step by step, until you reach the step you want.",
-      visual: ([a, d]) => ({ type: "dots", count: a + 2 * d, rows: 1 }),
+      visual: ([a, d]) => ({ type: "table", head: ["Step", "1", "2", "3"], rows: [["Dots", a, a + d, a + 2 * d]] }),
       alternatives: [
         { id: "table", title: "Extend the table", kind: "procedural", text: ["Write the step numbers 1, 2, 3, … in one row and the counts under them.", "Fill each new box by adding the same amount as before."], visual: ([a, d, k]) => ({ type: "table", head: ["Step", ...Array.from({ length: k }, (_, i) => String(i + 1))], rows: [["Dots", ...Array.from({ length: k }, (_, i) => (i < 3 ? a + i * d : "?"))]] }) },
       ],

@@ -927,7 +927,7 @@ export const B02: Def[] = [
       idea: "When every container is filled with the same cup, the one that takes more cups holds more water.",
       method: "Read the number of cups for each container. To find how many more, take the smaller number from the bigger one.",
       alternatives: [
-        { id: "cups_line", title: "Line up the cups", kind: "conceptual", text: ["Picture the cups for each container standing in a row.", "Match the rows cup by cup; the cups with no partner are how many more."], visual: (p) => ({ type: "dots", count: p[p[3]], rows: 1 }) },
+        { id: "cups_line", title: "Line up the cups", kind: "conceptual", text: ["Picture the cups for each container standing in a row.", "Match the rows cup by cup; the cups with no partner are how many more."], visual: (p) => ({ type: "bars", title: "cups of water to fill each container", labels: CONTAINERS, values: p.slice(0, 3), scale: 1 }) },
       ],
     },
     limits: "Three containers measured with the same cup, 2 to 12 cups each; different-sized cups are not compared here.",

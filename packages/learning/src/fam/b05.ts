@@ -858,7 +858,7 @@ export const B05: Def[] = [
       method: "Count the squares in one row, then count the rows. Equal rows can be counted by multiplying: rows × squares in each row.",
       visual: ([r, c]) => ({ type: "grid", rows: r, cols: c, shaded: c }),
       alternatives: [
-        { id: "array", title: "See the rows as an array", kind: "conceptual", text: ["The squares sit in equal rows, like chairs in a hall.", "Skip-count one row at a time: 6, 12, 18, … until every row is counted."], visual: ([r, c]) => ({ type: "array", rows: r, cols: c }) },
+        { id: "array", title: "See the rows as an array", kind: "conceptual", text: ["The squares sit in equal rows, like chairs in a hall.", "Skip-count one row at a time until every row is counted."], visual: ([r, c]) => ({ type: "array", rows: r, cols: c }) },
       ],
     },
     limits: "Whole rectangles drawn on a grid; half squares, irregular shapes and estimating are not here.",
@@ -1034,7 +1034,7 @@ export const B05: Def[] = [
       idea: "Measures in two units work like tens and ones, but the change-over is 100 cm = 1 m, 1000 g = 1 kg and 1000 mL = 1 L.",
       method: "Add or subtract the amounts in the smaller unit first. If they reach the change-over number, change them into 1 of the bigger unit; if there are too few to subtract, change 1 of the bigger unit into the smaller unit. Then do the bigger unit.",
       alternatives: [
-        { id: "all_small", title: "Change everything into the small unit", kind: "procedural", text: ["Write both measures in the small unit only (for example 2 m 45 cm = 245 cm).", "Add or subtract these numbers, then change the answer back (310 cm = 3 m 10 cm)."] },
+        { id: "all_small", title: "Change everything into the small unit", kind: "procedural", text: ["Write both measures in the small unit only.", "Add or subtract these numbers, then change the answer back into the two units."] },
       ],
     },
     limits: "Two measures with whole small units (cm in fives, g and mL in fifties) that need regrouping; answers under 10 large units.",

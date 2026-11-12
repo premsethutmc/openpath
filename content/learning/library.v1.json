@@ -12509,7 +12509,7 @@
     {
      "title": "Dividing a number exactly",
      "text": [
-      "Dividing undoes multiplying: 84 ÷ 4 asks how many 4s make 84."
+      "Dividing undoes multiplying: it asks how many lots of the divisor make the number."
      ],
      "math": [
       "120 ÷ 3 = ?",
@@ -12576,7 +12576,7 @@
       {
        "title": "The method",
        "text": [
-        "Take away a large, easy chunk first (20 × 4 = 80), then divide what is left (4 ÷ 4 = 1): 20 + 1 = 21."
+        "Take away a large, easy chunk first (a round number of lots of the divisor), then divide what is left, and add the two parts."
        ],
        "math": [
         "711 ÷ 9 = ?",
@@ -12641,7 +12641,7 @@
        "title": "What it uses",
        "text": [
         "Each step builds on another skill: Use multiplication facts. If a step is slow, practise that skill first.",
-        "Then the method is: Take away a large, easy chunk first (20 × 4 = 80), then divide what is left (4 ÷ 4 = 1): 20 + 1 = 21."
+        "Then the method is: Take away a large, easy chunk first (a round number of lots of the divisor), then divide what is left, and add the two parts."
        ]
       }
      ],
@@ -22421,9 +22421,19 @@
         "The Bucket bar reaches 3 cups."
        ],
        "widget": {
-        "type": "dots",
-        "count": 3,
-        "rows": 1
+        "type": "bars",
+        "title": "cups of water to fill each container",
+        "labels": [
+         "Bucket",
+         "Pot",
+         "Jug"
+        ],
+        "values": [
+         3,
+         5,
+         10
+        ],
+        "scale": 1
        },
        "role": "strategy",
        "instance": "gen:abcup:3,5,10,0,0"
@@ -25450,9 +25460,21 @@
       "Keep adding 3: 19"
      ],
      "widget": {
-      "type": "dots",
-      "count": 13,
-      "rows": 1
+      "type": "table",
+      "head": [
+       "Step",
+       "1",
+       "2",
+       "3"
+      ],
+      "rows": [
+       [
+        "Dots",
+        7,
+        10,
+        13
+       ]
+      ]
      },
      "tip": "The step number was multiplied by 3, but the pattern started at 7, not at 3.",
      "role": "concept",
@@ -25514,9 +25536,21 @@
         "Keep adding 6: 46"
        ],
        "widget": {
-        "type": "dots",
-        "count": 16,
-        "rows": 1
+        "type": "table",
+        "head": [
+         "Step",
+         "1",
+         "2",
+         "3"
+        ],
+        "rows": [
+         [
+          "Dots",
+          4,
+          10,
+          16
+         ]
+        ]
        },
        "role": "worked-example",
        "instance": "gen:acgrow:4,6,8"
@@ -27230,7 +27264,7 @@
        "title": "Once round the clock",
        "text": [
         "Each time the minute hand goes all the way round, 60 minutes pass and the hour hand moves to the next number.",
-        "Count 60, 120, 180 … for the hours, then count on the extra minutes."
+        "Count on 60 for each hour, then count on the extra minutes."
        ],
        "math": [
         "How many minutes are there in 5 hours 15 minutes?",
@@ -27456,9 +27490,9 @@
         "Take 1 of the groups: 1 × 5 = 5"
        ],
        "widget": {
-        "type": "dots",
-        "count": 45,
-        "rows": 9
+        "type": "array",
+        "rows": 9,
+        "cols": 5
        },
        "role": "strategy",
        "instance": "gen:adfcol:1,9,5"
@@ -28888,7 +28922,7 @@
       {
        "title": "The method",
        "text": [
-        "Count the bundles in fives (5, 10, 15 …), then count on the single marks."
+        "Count the bundles in fives, then count on the single marks."
        ],
        "math": [
         "Children in a class chose their favourite game. The table shows their choices as tally marks (||||/ stands for 5 marks). How many children chose Kho-kho?",
@@ -30735,7 +30769,7 @@
        "title": "See the rows as an array",
        "text": [
         "The squares sit in equal rows, like chairs in a hall.",
-        "Skip-count one row at a time: 6, 12, 18, … until every row is counted."
+        "Skip-count one row at a time until every row is counted."
        ],
        "math": [
         "Each small square in the picture is 1 square unit. The rectangle has 9 rows with 11 squares in each row. What is its area, in square units?",
@@ -30967,8 +31001,8 @@
       {
        "title": "Change everything into the small unit",
        "text": [
-        "Write both measures in the small unit only (for example 2 m 45 cm = 245 cm).",
-        "Add or subtract these numbers, then change the answer back (310 cm = 3 m 10 cm)."
+        "Write both measures in the small unit only.",
+        "Add or subtract these numbers, then change the answer back into the two units."
        ],
        "math": [
         "Add: 2 L 850 mL + 5 L 250 mL. Write the answer as (L, mL); for example, 3 L 45 mL is (3, 45).",
@@ -36304,7 +36338,8 @@
      "math": [
       "Write the mixed number 4 5/7 as an improper fraction (for example 7/3).",
       "4 wholes = 4 × 7 = 28 pieces",
-      "28 + 5 = 33 pieces in all"
+      "28 + 5 = 33 pieces in all",
+      "33 + 7 = 33/7 pieces in all"
      ],
      "widget": {
       "type": "numberline",
@@ -36392,7 +36427,8 @@
        "math": [
         "Write the mixed number 9 5/7 as an improper fraction (for example 7/3).",
         "9 wholes = 9 × 7 = 63 pieces",
-        "63 + 5 = 68 pieces in all"
+        "63 + 5 = 68 pieces in all",
+        "68 + 7 = 68/7 pieces in all"
        ],
        "widget": {
         "type": "numberline",
@@ -36425,7 +36461,8 @@
        "math": [
         "Write the mixed number 9 5/6 as an improper fraction (for example 7/3).",
         "9 wholes = 9 × 6 = 54 pieces",
-        "54 + 5 = 59 pieces in all"
+        "54 + 5 = 59 pieces in all",
+        "59 + 6 = 59/6 pieces in all"
        ],
        "widget": {
         "type": "grid",

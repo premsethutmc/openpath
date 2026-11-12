@@ -316,7 +316,7 @@ export const B04: Def[] = [
       method: "Change the hours to minutes (60 for each hour), then add the extra minutes.",
       visual: ([h, f]) => ({ type: "numberline", from: 0, to: 60 * h + 5 * f, step: 60, jumps: [...Array.from({ length: h }, (_, i) => [60 * i, 60 * (i + 1)] as [number, number]), ...(f ? [[60 * h, 60 * h + 5 * f] as [number, number]] : [])] }),
       alternatives: [
-        { id: "clock_round", title: "Once round the clock", kind: "conceptual", text: ["Each time the minute hand goes all the way round, 60 minutes pass and the hour hand moves to the next number.", "Count 60, 120, 180 … for the hours, then count on the extra minutes."], visual: ([, f]) => ({ type: "clock", h: 12, m: (5 * f) % 60 }) },
+        { id: "clock_round", title: "Once round the clock", kind: "conceptual", text: ["Each time the minute hand goes all the way round, 60 minutes pass and the hour hand moves to the next number.", "Count on 60 for each hour, then count on the extra minutes."], visual: ([, f]) => ({ type: "clock", h: 12, m: (5 * f) % 60 }) },
       ],
     },
     limits: "Whole hours (1–8) and multiples of 5 minutes; seconds and adding durations are in other families.",
@@ -722,7 +722,7 @@ export const B04: Def[] = [
       method: "Divide by the bottom number to find one group. Multiply by the top number.",
       visual: ([a, b, m]) => ({ type: "array", rows: b, cols: m, split: a }),
       alternatives: [
-        { id: "deal", title: "Deal them out like cards", kind: "conceptual", text: ["Make as many piles as the bottom number. Give one object to each pile in turn until none are left.", "Count the objects in as many piles as the top number."], visual: ([, b, m]) => ({ type: "dots", count: b * m, rows: b }) },
+        { id: "deal", title: "Deal them out like cards", kind: "conceptual", text: ["Make as many piles as the bottom number. Give one object to each pile in turn until none are left.", "Count the objects in as many piles as the top number."], visual: ([, b, m]) => ({ type: "array", rows: b, cols: m }) },
       ],
     },
     limits: "Fractions less than 1 (up to tenths) of collections of up to 60 that share exactly; remainders are not used.",
@@ -1279,7 +1279,7 @@ export const B04: Def[] = [
     },
     teach: {
       idea: "Tally marks record one mark for each thing counted; every fifth mark crosses the four before it, so the marks come in easy bundles of 5.",
-      method: "Count the bundles in fives (5, 10, 15 …), then count on the single marks.",
+      method: "Count the bundles in fives, then count on the single marks.",
       visual: ([c, s]) => ({ type: "table", head: [TALLYCTX[c].head, "Tally marks", "Number"], rows: TALLYCTX[c].items.map((it, i) => [it, tally(tallyCounts(c, s)[i]), tallyCounts(c, s)[i]]) }),
       alternatives: [
         { id: "ten_frame", title: "Bundles as half ten frames", kind: "conceptual", text: ["Each bundle of 5 fills half a ten frame; two bundles fill a whole frame.", "Count the full frames as tens, then add the rest."], visual: ([c, s]) => ({ type: "tenframe", filled: tallyCounts(c, s)[s % 3], frames: tallyCounts(c, s)[s % 3] > 10 ? 2 : 1 }) },
