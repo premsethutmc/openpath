@@ -12516,6 +12516,20 @@
       "40 × 3 = 120",
       "So 120 ÷ 3 = 40"
      ],
+     "widget": {
+      "type": "grid",
+      "rows": 1,
+      "cols": 1,
+      "rowLabels": [
+       "3"
+      ],
+      "colLabels": [
+       "40"
+      ],
+      "labels": [
+       "120"
+      ]
+     },
      "tip": "A zero in the answer was left out: when the divisor does not go into a step, write 0 there.",
      "role": "concept",
      "instance": "gen:ldiv:40,3"
@@ -12571,6 +12585,22 @@
         "81 ÷ 9 = 9",
         "70 + 9 = 79"
        ],
+       "widget": {
+        "type": "grid",
+        "rows": 1,
+        "cols": 2,
+        "rowLabels": [
+         "9"
+        ],
+        "colLabels": [
+         "70",
+         "9"
+        ],
+        "labels": [
+         "630",
+         "81"
+        ]
+       },
        "role": "worked-example",
        "instance": "gen:ldiv:79,9"
       }
@@ -12656,7 +12686,7 @@
    ],
    "provenance": {
     "origin": "synthesised",
-    "policy": "library@2+template@1",
+    "policy": "library@2+template@2",
     "family": "ldiv",
     "seed": [
      40,
@@ -12845,6 +12875,17 @@
       "Rename both: 20 and 21 of those pieces",
       "20 + 21 = 41 pieces of 24: 41/24"
      ],
+     "widget": {
+      "type": "strips",
+      "top": 6,
+      "shaded": 5,
+      "bottom": 8,
+      "bottomShaded": 7,
+      "labels": [
+       "5/6",
+       "7/8"
+      ]
+     },
      "tip": "Tops and bottoms were added separately; fractions with different pieces must first be written with the same pieces.",
      "role": "concept",
      "instance": "gen:faddu:5,6,7,8"
@@ -12887,6 +12928,17 @@
         "Rename both: 21 and 6 of those pieces",
         "21 + 6 = 27 pieces of 42: 9/14"
        ],
+       "widget": {
+        "type": "strips",
+        "top": 6,
+        "shaded": 3,
+        "bottom": 7,
+        "bottomShaded": 1,
+        "labels": [
+         "3/6",
+         "1/7"
+        ]
+       },
        "role": "worked-example",
        "instance": "gen:faddu:3,6,1,7"
       }
@@ -12966,7 +13018,7 @@
    ],
    "provenance": {
     "origin": "synthesised",
-    "policy": "library@2+template@1",
+    "policy": "library@2+template@2",
     "family": "faddu",
     "seed": [
      5,
@@ -12999,6 +13051,12 @@
       "10% of 100 is 100 ÷ 10 = 10",
       "60% is 6 lots of that: 6 × 10 = 60"
      ],
+     "widget": {
+      "type": "grid",
+      "rows": 10,
+      "cols": 10,
+      "shaded": 60
+     },
      "tip": "Per cent means out of 100: the amount must be divided by 100 as well as multiplied.",
      "role": "concept",
      "instance": "gen:pct:60,100"
@@ -13069,6 +13127,12 @@
         "5% of 180 is 180 ÷ 20 = 9",
         "45% is 9 lots of that: 9 × 9 = 81"
        ],
+       "widget": {
+        "type": "grid",
+        "rows": 10,
+        "cols": 10,
+        "shaded": 45
+       },
        "role": "worked-example",
        "instance": "gen:pct:45,180"
       }
@@ -13141,7 +13205,7 @@
    ],
    "provenance": {
     "origin": "synthesised",
-    "policy": "library@2+template@1",
+    "policy": "library@2+template@2",
     "family": "pct",
     "seed": [
      60,
@@ -13554,6 +13618,11 @@
       "One layer: 2 × 2 = 4 cubes",
       "2 layers: 4 × 2 = 8"
      ],
+     "widget": {
+      "type": "grid",
+      "rows": 2,
+      "cols": 2
+     },
      "tip": "Only the bottom layer was counted; there are as many layers as the height.",
      "role": "concept",
      "instance": "gen:vol:2,2,2"
@@ -13631,6 +13700,11 @@
         "One layer: 2 × 2 = 4 cubes",
         "3 layers: 4 × 3 = 12"
        ],
+       "widget": {
+        "type": "grid",
+        "rows": 2,
+        "cols": 2
+       },
        "role": "worked-example",
        "instance": "gen:vol:2,2,3"
       }
@@ -13716,7 +13790,7 @@
    ],
    "provenance": {
     "origin": "synthesised",
-    "policy": "library@2+template@1",
+    "policy": "library@2+template@2",
     "family": "vol",
     "seed": [
      2,

@@ -697,7 +697,7 @@ const F: Def[] = [
     explain: (s) => (s.id === "tens" ? `${s.inputs[0]} × ${s.inputs[1]} = ${show(s.value)}` : s.id === "whole" ? `So ${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : s.id === "rest" ? `${s.inputs[0]} − ${s.inputs[1]} = ${show(s.value)}` : s.id === "ones" ? `${s.inputs[0]} ÷ ${s.inputs[1]} = ${show(s.value)}` : `${s.inputs[0]} + ${s.inputs[1]} = ${show(s.value)}`),
     domain: [[12, 99], [2, 9]],
     difficulty: ([q, d]) => (d <= 5 && q < 30 ? 1 : q < 60 ? 2 : 3),
-    teach: { idea: "Dividing undoes multiplying: 84 ÷ 4 asks how many 4s make 84.", method: "Take away a large, easy chunk first (20 × 4 = 80), then divide what is left (4 ÷ 4 = 1): 20 + 1 = 21." },
+    teach: { idea: "Dividing undoes multiplying: 84 ÷ 4 asks how many 4s make 84.", method: "Take away a large, easy chunk first (20 × 4 = 80), then divide what is left (4 ÷ 4 = 1): 20 + 1 = 21.", visual: ([q, d]) => { const chunk = Math.floor(q / 10) * 10, rest = q - chunk; const cols = [chunk, rest].filter((x) => x > 0); return { type: "grid", rows: 1, cols: cols.length, rowLabels: [String(d)], colLabels: cols.map(String), labels: cols.map((x) => String(x * d)) }; } },
   },
   {
     id: "fmulw",
@@ -765,7 +765,7 @@ const F: Def[] = [
     domain: [[1, 9], [2, 10], [1, 9], [2, 10]],
     keep: ([a, b, c, d]) => a < b && c < d && b < d,
     difficulty: ([, b, , d]) => (d % b === 0 ? 1 : gcd(b, d) > 1 ? 2 : 3),
-    teach: { idea: "Fractions can be added only when they count the same size of piece.", method: "Write both with a common denominator (an equivalent fraction for each), then add the tops." },
+    teach: { idea: "Fractions can be added only when they count the same size of piece.", method: "Write both with a common denominator (an equivalent fraction for each), then add the tops.", visual: ([a, b, c, d]) => ({ type: "strips", top: b, shaded: a, bottom: d, bottomShaded: c, labels: [`${a}/${b}`, `${c}/${d}`] }) },
   },
   {
     id: "pct",
@@ -803,7 +803,7 @@ const F: Def[] = [
     domain: [[5, 95], [20, 400]],
     keep: ([p, n]) => p % 5 === 0 && n % 20 === 0,
     difficulty: ([p]) => ([10, 25, 50].includes(p) ? 1 : p % 10 === 0 ? 2 : 3),
-    teach: { idea: "Per cent means out of a hundred: a percentage of an amount is that many parts out of every hundred equal parts of it.", method: "Find ten per cent (divide by ten) or five per cent (divide by twenty), then take as many lots of it as the percentage needs." },
+    teach: { idea: "Per cent means out of a hundred: a percentage of an amount is that many parts out of every hundred equal parts of it.", method: "Find ten per cent (divide by ten) or five per cent (divide by twenty), then take as many lots of it as the percentage needs.", visual: ([p]) => ({ type: "grid", rows: 10, cols: 10, shaded: p }) },
   },
   {
     id: "mean4",
@@ -898,7 +898,7 @@ const F: Def[] = [
     domain: [[2, 8], [2, 8], [2, 8]],
     keep: ([l, w]) => l >= w,
     difficulty: ([l, w, h]) => (l * w * h <= 40 ? 1 : l * w * h <= 120 ? 2 : 3),
-    teach: { idea: "Volume counts the cubes that fill a shape: layers of cubes stacked up.", method: "Count one layer (length × width), then multiply by the number of layers (the height)." },
+    teach: { idea: "Volume counts the cubes that fill a shape: layers of cubes stacked up.", method: "Count one layer (length × width), then multiply by the number of layers (the height).", visual: ([l, w]) => ({ type: "grid", rows: w, cols: l }) },
   },
   {
     id: "lin",
