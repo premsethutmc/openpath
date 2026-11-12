@@ -207,9 +207,12 @@ test("J7 repeated difficulty with no established misconception: general instruct
     const r = runScenario(SCENARIOS.find((s) => s.id === id)!);
     const t = teaches(r);
     assert.ok(t.length >= 1, `${id}: taught`);
-    assert.ok(t.every((x) => !specificOf(x.strategy)), `${id}: ${t.map((x) => x.strategy)}`);
+    // prereq-after-own@1: before the pause the skills below are checked and taught, and this skill is explained again after each
+    const own = t.filter((x) => x.competency === C), below = new Set(t.filter((x) => x.competency !== C).map((x) => x.competency));
+    assert.ok(own.every((x) => !specificOf(x.strategy)), `${id}: ${own.map((x) => x.strategy)}`);
     assert.ok(reviews(r).every((x) => !x.misconceptionEvidence));
-    assert.ok(t.length <= M().strategies.filter((s) => !isMisconceptionSpecific(s)).length, "bounded by the explanations available");
+    assert.ok(own.length <= M().strategies.filter((s) => !isMisconceptionSpecific(s)).length * (1 + below.size), "bounded by the explanations available, once per skill found below");
+    assert.ok(below.size <= 2, `${id}: at most two skills below (${[...below]})`);
     // 5b and 4a are never right alone: no mastery, a pause; 4c becomes right alone after two explanations, which is evidence
     if (id !== "4c") { assert.ok(!SHOWN.includes(ev(r).status), `${id}: no mastery (${ev(r).status})`); assert.equal(r.f.ended?.phase, "pause"); }
     else assert.ok(records(r).attempts.some((a) => a.at > t.at(-1)!.at && a.credit === true && a.hints === 0 && a.activity !== "guided"), "4c: shown only by answers alone after teaching");

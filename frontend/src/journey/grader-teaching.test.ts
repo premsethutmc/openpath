@@ -8,6 +8,12 @@ import { JOURNEYS, runJourney, traceOf, C, REF, type JourneyTrace } from "./grad
 import { replayJourney } from "./grader-replay";
 import { checkProvenance } from "./provenance";
 import { checkScenario } from "./scenarios";
+import { usePrerequisiteAfterOwn } from "../../../packages/learning/src/intervention";
+// These tests are about the pause itself (the hand-over to a person and the bounded way back), reached by a learner who keeps
+// getting one skill wrong. With prereq-after-own@1 on, the module first checks the skills below, which adds questions that
+// these step counts do not expect; the pause that follows when nothing below is open is the same. So the rule is off here, and
+// its own behaviour (including "nothing below: still pauses") is tested in learning/prerequisite-after-own.test.ts.
+usePrerequisiteAfterOwn(false);
 
 const runs = new Map<string, { t: JourneyTrace; prov: string[]; props: ReturnType<typeof checkScenario> }>();
 const get = (id: string) => {

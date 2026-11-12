@@ -28,7 +28,7 @@ export interface Expect {
 }
 export interface Scenario { id: string; category: Category; start: string; entry?: "diagnostic" | "practice"; retry?: boolean; learner: () => Learner; later?: number[]; expect: Expect; note?: string }
 export const T0 = Date.parse("2026-10-01T09:00:00Z");
-export const MAX_INTERACTIONS = 250;
+export const MAX_INTERACTIONS = 400; // 400 since prereq-after-own@1: the skill below is checked and taught before the pause (4a ends at 281)
 
 const LIN = "gen:lin:2,17,11", LIN2 = "gen:lin:3,9,8", IADD = "gen:lneg:5,-5,9", DISC = "gen:disc:-2,-7", DISCMC = "gen:disc:-1,-6:mc";
 const FD = ["forgot-divide"], ANS = ["added-not-subtracted"];
