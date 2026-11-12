@@ -5,6 +5,7 @@
  *      this module is constant `false` and no URL, role or saved preference can turn it on;
  *   2. the page was opened with ?deep=1 (remembered in this browser until ?deep=0).
  */
+import { usePrerequisiteAfterOwn, useUnteachableFixture } from "../../../packages/learning/src/intervention";
 declare const OPENPATH_DEEP_RECOVERY: boolean;
 export const DEEP_RECOVERY_BUILD: boolean = typeof OPENPATH_DEEP_RECOVERY !== "undefined" && OPENPATH_DEEP_RECOVERY === true;
 const KEY = "openpath.deep-recovery@0";
@@ -25,3 +26,10 @@ export const DEEP_EVALUATION = typeof OPENPATH_DEEP_EVALUATION !== "undefined" &
 export function deepPathwayAllowed(records: { pathway?: { active: boolean; target: string } | null }, evaluation = DEEP_EVALUATION): boolean {
   return !evaluation || !!(records.pathway?.active && records.pathway.target === "MATH.calculus.integration-methods");
 }
+
+/**
+ * The deep-recovery@0 research journeys were written against the shipped recovery before prereq-after-own@1 was on by default and
+ * while the integers lesson was not teachable. With the research switch on (never in a shipped build) that baseline is kept, exactly
+ * as the deep-recovery unit tests pin it. The evaluation build keeps the real gates.
+ */
+if (DEEP_RECOVERY_BUILD && !DEEP_EVALUATION && deepRecoveryOn()) { usePrerequisiteAfterOwn(false); useUnteachableFixture(["MATH.number.integers"]); }
