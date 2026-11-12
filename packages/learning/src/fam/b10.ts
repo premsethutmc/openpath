@@ -1706,6 +1706,8 @@ export const B10: Def[] = [
   // ------------------------------------------------------------------ prime factorisation: divisibility and co-primeness
   {
     id: "ajpfdc",
+    // grade5-level@1: powers notation and co-primeness read from factorisations are Class 6 work
+    grade: () => 6,
     arity: 8,
     title: "Divisibility and co-primeness from prime factorisations",
     competency: PF,
@@ -1851,6 +1853,8 @@ export const B10: Def[] = [
   // ------------------------------------------------------------------ crores, lakhs, millions, billions
   {
     id: "ajcrore",
+    // grade5-level@1: billions are Class 6 work; crores, lakhs and millions are Class 5
+    grade: ([m]) => (m === 2 ? 6 : 5),
     arity: 4,
     title: "Crores and lakhs in figures; millions and billions in lakhs and crores",
     competency: IIN,

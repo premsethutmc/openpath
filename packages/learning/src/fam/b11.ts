@@ -2023,6 +2023,8 @@ export const B11: Def[] = [
   // ------------------------------------------------------------------ sorting numbers by divisibility (2, 4, 5, 8, 10)
   {
     id: "akdsort",
+    // grade5-level@1: the test for 8 (last three digits) is Class 6 work; the others are Class 5
+    grade: ([k]) => (k === 5 ? 6 : 5),
     arity: 2,
     title: "Which number is divisible: tests for 2, 4, 5, 8 and 10",
     competency: DIV,

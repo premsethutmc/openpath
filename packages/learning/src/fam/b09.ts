@@ -1714,6 +1714,8 @@ export const B09: Def[] = [
   // ================================================================ integers
   {
     id: "aiint",
+    // grade5-level@1: Class 5 adds and subtracts small integers; taking away a negative number, and sizes above 20, are Class 6 work
+    grade: ([a, b, o]) => (Math.abs(a) > 20 || Math.abs(b) > 20 || (o === 1 && b < 0) ? 6 : 5),
     contract: { kind: "value", statement: ([a, b, o]) => `${a < 0 ? `(${a})` : a}${o ? "-" : "+"}${b < 0 ? `(${b})` : b}` },
     arity: 3,
     title: "Adding and subtracting integers",
@@ -2250,6 +2252,8 @@ B09.push(
   },
   {
     id: "aimulti",
+    // grade5-level@1: three changes in a row through zero are Class 6 work
+    grade: () => 6,
     arity: 5,
     title: "Several integer changes in a row: temperatures, lifts and divers",
     competency: INTA,
