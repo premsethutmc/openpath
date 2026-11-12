@@ -822,12 +822,12 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aidp10: Multiplying and dividing decimals by 10, 100 and 1000 | `MATH.number.decimal-product` | 400 | 0 | 114/136/150 | `f6f0bb35` |
 | aifmul: Multiplying fractions and mixed numbers | `MATH.number.fraction-product` | 400 | 0 | 14/120/266 | `7feade25` |
 | aifdiv: Dividing fractions using reciprocals | `MATH.number.fraction-product` | 400 | 0 | 63/49/288 | `2b8aee7e` |
-| aiint: Adding and subtracting integers | `MATH.number.integer-add` | 500 | 0 | 12/318/170 | `47137afe` |
+| aiint: Adding and subtracting integers | `MATH.number.integer-add` | 500 | 0 | 12/318/170 | `bc28a52b` |
 | aitemp: Integer differences in temperature and height | `MATH.number.integer-add` | 500 | 0 | 156/140/204 | `1a315863` |
 | aiwdiv: Dividing a whole number by a fraction | `MATH.number.fraction-product` | 341 | 0 | 99/68/174 | `23287ef8` |
 | aifword: Word problems with multiplying or dividing fractions | `MATH.number.fraction-product` | 400 | 0 | 201/67/132 | `5666bbf7` |
 | aiintx: Expressions and stories with several integer operations | `MATH.number.integer-multiply` | 400 | 0 | 11/195/194 | `efc9e566` |
-| aimulti: Several integer changes in a row: temperatures, lifts and divers | `MATH.number.integer-add` | 400 | 0 | 4/37/359 | `99308192` |
+| aimulti: Several integer changes in a row: temperatures, lifts and divers | `MATH.number.integer-add` | 400 | 0 | 4/37/359 | `1fec54de` |
 | aiest: Estimating decimal products and quotients | `MATH.number.decimal-product` | 300 | 0 | 37/113/150 | `61cf6910` |
 | aisplit: Areas of fields and polygons split into triangles, rectangles and trapeziums | `MATH.measurement.trapezium-area` | 400 | 0 | 8/123/269 | `a2bab0f7` |
 | aipi: Circumference ÷ diameter, and values of π through history | `MATH.measurement.circle-area` | 300 | 0 | 148/5/147 | `b756a7f4` |
@@ -862,9 +862,9 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | ajgrow: When doubling overtakes adding | `MATH.number.exponential-growth` | 300 | 0 | 123/124/53 | `302f0094` |
 | ajb10: A numeral in another base, in base ten | `MATH.number.number-bases` | 400 | 0 | 18/185/197 | `f84ae2e9` |
 | ajbase: A base-ten number in another base | `MATH.number.number-bases` | 400 | 0 | 26/168/206 | `a6607a25` |
-| ajpfdc: Divisibility and co-primeness from prime factorisations | `MATH.number.prime-factorisation` | 400 | 0 | 16/87/297 | `15e828e6` |
+| ajpfdc: Divisibility and co-primeness from prime factorisations | `MATH.number.prime-factorisation` | 400 | 0 | 16/87/297 | `afaf7706` |
 | ajintl: Integers on the number line and in real situations | `MATH.number.integers` | 500 | 0 | 250/169/81 | `6b3ddc0c` |
-| ajcrore: Crores and lakhs in figures; millions and billions in lakhs and crores | `MATH.number.indian-international-numeration` | 450 | 0 | 99/99/252 | `a8bc730d` |
+| ajcrore: Crores and lakhs in figures; millions and billions in lakhs and crores | `MATH.number.indian-international-numeration` | 450 | 0 | 99/99/252 | `e502766e` |
 | ajcrcmp: The greatest of four numbers in lakhs and crores | `MATH.number.indian-international-numeration` | 400 | 0 | 136/264/0 | `711ad420` |
 | ajcmpx: Comparing two expressions without working them out | `MATH.number.operation-properties` | 500 | 0 | 146/136/218 | `6d3f5fe6` |
 | ajprop: Naming the property: closure, commutative, associative, distributive, identity and inverse | `MATH.number.operation-properties` | 500 | 0 | 134/265/101 | `6a82af79` |
@@ -912,7 +912,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | akmode: Finding the mode | `MATH.statistics.median-mode` | 200 | 0 | 104/96/0 | `999d8c8b` |
 | akfmean: The mean of data in a frequency table | `MATH.statistics.median-mode` | 203 | 0 | 84/119/0 | `af43d4e5` |
 | akhist: Reading a histogram of grouped data | `MATH.statistics.histograms` | 400 | 0 | 100/99/201 | `6da22a2c` |
-| akdsort: Which number is divisible: tests for 2, 4, 5, 8 and 10 | `MATH.reasoning.divisibility` | 600 | 0 | 300/100/200 | `afe185a1` |
+| akdsort: Which number is divisible: tests for 2, 4, 5, 8 and 10 | `MATH.reasoning.divisibility` | 600 | 0 | 300/100/200 | `18e75e89` |
 | akdig: Testing digit conjectures: Kaprekar's 6174, repeated digit sums, reverse-and-add palindromes | `MATH.reasoning.conjecture-testing` | 450 | 0 | 9/255/186 | `9fb421f7` |
 | akcolst: How a Collatz sequence behaves: steps to reach 1, and its highest number | `MATH.reasoning.conjecture-testing` | 97 | 0 | 24/34/39 | `a5d99c44` |
 | akscmp: The largest of four numbers in scientific notation | `MATH.number.scientific-notation` | 400 | 0 | 0/200/200 | `44cae2ec` |
@@ -1450,9 +1450,9 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | avppf: Writing a number as a product of prime powers | `MATH.number.exponents` | 225 | 0 | 40/92/93 | `5bc0da9b` |
 | avzero: The zero exponent | `MATH.number.exponents` | 350 | 0 | 176/88/86 | `e4a8a954` |
 | avfexp: Fractional exponents and radicals | `MATH.number.radicals` | 234 | 0 | 26/119/89 | `6a633830` |
-| avrem: Reasoning about remainders | `MATH.reasoning.divisibility` | 400 | 0 | 32/269/99 | `e22086de` |
+| avrem: Reasoning about remainders | `MATH.reasoning.divisibility` | 400 | 0 | 32/269/99 | `622e2e30` |
 | avpest: Estimating a large product by rounding | `MATH.number.rounding` | 400 | 0 | 69/275/56 | `9b2124fa` |
-| avpctof: Percentage of one quantity in another, and percentage change | `MATH.number.percentage` | 450 | 0 | 17/175/258 | `61e246df` |
+| avpctof: Percentage of one quantity in another, and percentage change | `MATH.number.percentage` | 450 | 0 | 17/175/258 | `e16db8d4` |
 | avmarked: Overhead expenses and the marked price | `MATH.number.profit-loss` | 420 | 0 | 116/285/19 | `564efacc` |
 | avmix: The price or concentration of a mixture | `MATH.statistics.weighted-mean` | 400 | 0 | 99/176/125 | `f7b933ae` |
 | avprop: Are four numbers in proportion? | `MATH.number.proportion` | 360 | 0 | 90/149/121 | `7afdf267` |

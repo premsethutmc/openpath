@@ -210,3 +210,14 @@ point, compare two, count the rises; new `linegraph` drawing). 62 skills, 77 out
 1,560 released questions agree with independent references (`refs/icse_g5_2026_11.py`); the grading audit found no blocking
 finding. Limits: Roman numerals are chosen, not typed (no free-text answer type); 3-D symmetry covers boxes only (not
 cylinders, cones or spheres); line-graph points lie on scale lines. Earlier sections describe the state at release 1.2.0.
+
+## 2026-11-12: Class 5 level of the lessons shared with later classes (grade5-level@1, example-grade@1)
+
+The seven skills first written for Grade 6 or 7 were read as a Class 5 learner sees them. Question kinds that belong to a
+later class now carry that grade, so they are left out of a Class 5 lesson and practice: powers notation and co-primeness
+from factorisations, three integer changes in a row, taking away a negative number and integers beyond 20, the test for 8,
+remainders of sums and products, percentage increase and decrease, and billions. A lesson section now takes its example
+from the earliest grade its family serves, so Class 5 keeps "crores and lakhs in figures" and "what percentage of" instead
+of losing the section to a later-class example (14 lessons changed their example). Multiplying fractions and adding
+decimals needed no change. Divisibility by 11 stays: the CISCE outcome names it. This is one reader's judgement of level,
+not a teacher's.
