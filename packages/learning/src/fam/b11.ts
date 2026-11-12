@@ -2024,7 +2024,7 @@ export const B11: Def[] = [
   {
     id: "akdsort",
     // grade5-level@1: the test for 8 (last three digits) is Class 6 work; the others are Class 5
-    grade: ([k]) => (k === 5 ? 6 : 5),
+    grade: ([k]) => (k === 5 ? 6 : null),
     arity: 2,
     title: "Which number is divisible: tests for 2, 4, 5, 8 and 10",
     competency: DIV,

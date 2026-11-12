@@ -1854,7 +1854,7 @@ export const B10: Def[] = [
   {
     id: "ajcrore",
     // grade5-level@1: billions are Class 6 work; crores, lakhs and millions are Class 5
-    grade: ([m]) => (m === 2 ? 6 : 5),
+    grade: ([m]) => (m === 2 ? 6 : null),
     arity: 4,
     title: "Crores and lakhs in figures; millions and billions in lakhs and crores",
     competency: IIN,

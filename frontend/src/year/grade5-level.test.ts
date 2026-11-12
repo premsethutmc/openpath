@@ -1,6 +1,6 @@
 /**
- * grade5-level@1 and example-grade@1: a Class 5 learner's lesson and practice hold no question kind from a later class,
- * and a section is not lost just because its example was drawn from a later class.
+ * grade5-level@1: a Class 5 learner's lesson and practice hold no question kind from a later class. A kind that belongs to
+ * no particular class has no grade (null), so learners of every other grade see what they saw before.
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -21,20 +21,13 @@ test("later-class kinds are left out for Class 5: powers and co-primeness, perfe
   assert.ok(!titles("MATH.number.integer-add").some((t) => /Several integer changes/.test(t)));
 });
 
-test("sections whose family also serves Class 5 are kept, with a Class 5 example", () => {
-  const crores = shown("MATH.number.indian-international-numeration").find((b) => /Crores and lakhs in figures/.test(b.title));
-  assert.ok(crores?.instance && !/billion/.test(crores.worked?.question ?? ""), "crores and lakhs in figures, without billions");
-  const pct = shown("MATH.number.percentage").find((b) => /Percentage of one quantity in another/.test(b.title));
-  assert.ok(pct?.instance && /What percentage of/.test(pct.worked?.question ?? ""), "what percentage of, not percentage change");
-});
-
 test("grades given to question kinds: taking away a negative number, sizes above 20, the test for 8, billions", () => {
-  assert.equal(gradeOfQuestion("gen:aiint:-3,1,0"), 5);
+  assert.equal(gradeOfQuestion("gen:aiint:-3,1,0"), null);
   assert.equal(gradeOfQuestion("gen:aiint:26,-25,1"), 6);
   assert.equal(gradeOfQuestion("gen:aiint:-40,-36,0"), 6);
   assert.equal(gradeOfQuestion("gen:akdsort:5,10"), 6);
-  assert.equal(gradeOfQuestion("gen:akdsort:2,50"), 5);
+  assert.equal(gradeOfQuestion("gen:akdsort:2,50"), null);
   assert.equal(gradeOfQuestion("gen:ajcrore:2,89,0,0"), 6);
   assert.equal(gradeOfQuestion("gen:avpctof:45,300,3"), 7);
-  assert.equal(gradeOfQuestion("gen:avpctof:5,60,0"), 4);
+  assert.equal(gradeOfQuestion("gen:avpctof:5,60,0"), null);
 });

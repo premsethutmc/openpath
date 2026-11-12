@@ -165,7 +165,7 @@ export function validateFamily(fam: string, seed = 20261019): ValidationReport {
   // form@1: a family asking for an expanded answer gives its own answers expanded
   if (def.expanded) for (const p of items) if (!expandedForm(p.answer)) det.push(`${p.id}: the answer ${p.answer} is not written expanded`);
   // level@1: a problem's grade is a school grade
-  if (def.grade) for (const p of items) { const g = def.grade(p.params); if (!Number.isInteger(g) || g < 1 || g > 12) det.push(`${p.id}: grade ${g} is not a school grade`); }
+  if (def.grade) for (const p of items) { const g = def.grade(p.params); if (g !== null && (!Number.isInteger(g) || g < 1 || g > 12)) det.push(`${p.id}: grade ${g} is not a school grade`); }
   for (const e of excluded) if (e.reason.startsWith("AMBIGUOUS")) det.push(`gen:${fam}:${e.params.join(",")}: ${e.reason}`);
   for (const p of items) {
     checkItem(p, det);

@@ -9110,21 +9110,29 @@
       "To write a length in the bigger unit, divide by the number of small units in one big unit: the digits move one place to the right of the decimal point for each zero (two places for a hundred, one for ten, three for a thousand). To go back, multiply."
      ],
      "math": [
-      "Write 458 mm in centimetres, as a decimal.",
-      "The bigger unit is 10 of the smaller unit",
-      "458 ÷ 10 = 45.8"
+      "Write 988 cm in metres, as a decimal.",
+      "The bigger unit is 100 of the smaller unit",
+      "988 ÷ 100 = 9.88"
      ],
      "widget": {
-      "type": "numberline",
-      "from": 0,
-      "to": 100,
-      "step": 10,
-      "marks": [
-       458
+      "type": "table",
+      "head": [
+       "m",
+       ".",
+       "tenths",
+       "hundredths"
+      ],
+      "rows": [
+       [
+        9,
+        ".",
+        8,
+        8
+       ]
       ]
      },
      "role": "worked-example",
-     "instance": "gen:acdecu:1,458"
+     "instance": "gen:acdecu:0,988"
     }
    ],
    "diagnostics": [
@@ -9476,7 +9484,7 @@
     "gen:acmcm:2,8,0",
     "gen:acmcmp:5,49,2,6",
     "gen:acmmkm:2,5,15",
-    "gen:acdecu:0,988"
+    "gen:acdecu:0,912"
    ],
    "transfer": [
     "gen:acmcm:1,81,1:mc",
@@ -9784,8 +9792,8 @@
       "Start the subtraction (or division) with the biggest number of the family, the total (or product). To check a subtraction, add the answer to the number taken away; to check a division, multiply the divisor by the quotient."
      ],
      "math": [
-      "7 × 8 = 56. Which division fact comes from this multiplication fact?",
-      "Adding and taking away (or multiplying and dividing) undo each other, so the related fact is 56 ÷ 7 = 8"
+      "Divya worked out 7,399 − 5,118 = 2,281. Which addition can Divya use to check this answer?",
+      "Adding and taking away (or multiplying and dividing) undo each other, so the related fact is 5,118 + 2,281 = 7,399"
      ],
      "widget": {
       "type": "table",
@@ -9796,9 +9804,9 @@
       ],
       "rows": [
        [
-        56,
-        7,
-        8
+        7399,
+        2281,
+        5118
        ]
       ]
      }
@@ -13101,12 +13109,12 @@
       "Percentage = part ÷ whole, then times a hundred. Percentage change = change ÷ original, then times a hundred. To increase an amount by p%, find p% of the amount and add it on."
      ],
      "math": [
-      "What percentage of 220 is 22?",
-      "As a fraction of the original: 22/220",
-      "Times 100: 10%"
+      "Increase ₹300 by 45%. What is the new amount, in rupees?",
+      "45% of 300 = 135",
+      "300 + 135 = 435"
      ],
      "role": "worked-example",
-     "instance": "gen:avpctof:10,220,0"
+     "instance": "gen:avpctof:45,300,3"
     }
    ],
    "diagnostics": [
@@ -19558,9 +19566,9 @@
       "Count the digits of each number. For numbers with the same count, compare the highest place, then the next, until a digit differs. Then write them in the order asked."
      ],
      "math": [
-      "Put these numbers in ascending order (from the smallest to the greatest): 7, 4, 2, 1. Write them in that order, with commas between them.",
+      "Put these numbers in descending order (from the greatest to the smallest): 89, 194, 160, 188. Write them in that order, with commas between them.",
       "Compare the numbers: first count the digits, then compare place by place from the left.",
-      "In order: 1, 2, 4, 7."
+      "In order: 194, 188, 160, 89."
      ],
      "widget": {
       "type": "table",
@@ -19570,20 +19578,20 @@
       ],
       "rows": [
        [
-        "7",
-        1
+        "89",
+        2
        ],
        [
-        "4",
-        1
+        "194",
+        3
        ],
        [
-        "2",
-        1
+        "160",
+        3
        ],
        [
-        "1",
-        1
+        "188",
+        3
        ]
       ]
      }
@@ -19631,8 +19639,8 @@
       "Greatest: write the digits from the biggest to the smallest. Smallest: from the smallest to the biggest, and if the first is 0, swap it with the next digit."
      ],
      "math": [
-      "Use each of the digits 6, 1, 5 exactly once to make the smallest 3-digit number. Write it without commas.",
-      "Arrange the digits: 156."
+      "Use each of the digits 1, 2, 7, 3, 4 exactly once to make the smallest 5-digit number. Write it without commas.",
+      "Arrange the digits: 12347."
      ],
      "widget": {
       "type": "table",
@@ -19643,9 +19651,9 @@
       ],
       "rows": [
        [
-        "6, 1, 5",
-        651,
-        156
+        "1, 2, 7, 3, 4",
+        74321,
+        12347
        ]
       ]
      }
@@ -19749,9 +19757,9 @@
     "gen:aaordn:120,4,0",
     "gen:aagrp:2,4,0,0",
     "gen:aabig:7,10,0",
-    "gen:aaordx:1,21,1",
+    "gen:aaordx:4,16,0",
     "gen:aasign:0,21",
-    "gen:aadigmax:5,13,1,0"
+    "gen:aadigmax:3,2,1,0"
    ],
    "transfer": [
     "gen:aacmp:81,73,0:w",
@@ -20714,9 +20722,8 @@
       "Find each number's check number. Add (or multiply) them and cast out nines again. Then find the check number of the answer: if they differ, the answer is wrong."
      ],
      "math": [
-      "To check 477 + 879 by casting out nines, find the check numbers of 477 and 879, add them, and cast out nines again. What check number should the answer have?",
-      "The check numbers are 0, 6.",
-      "0 and 6 give 6.",
+      "What is the nines check number of 5793?",
+      "The digits of 5793 add up to 24.",
       "Casting out nines leaves 6."
      ],
      "widget": {
@@ -20740,7 +20747,7 @@
       ]
      },
      "role": "worked-example",
-     "instance": "gen:abnine:1,62"
+     "instance": "gen:abnine:0,43"
     },
     {
      "title": "Pascal's triangle: building rows, row sums and diagonals",
@@ -22997,17 +23004,17 @@
       "Read the mark at each end and subtract. For quarter metres, each small step is ¼ m; for millimetres, count the whole centimetres (each 10 mm) and add the small marks."
      ],
      "math": [
-      "A rope is laid along a measuring tape, as in the picture. It starts at the 7 m mark and ends at the 10 m mark. How long is the rope, in metres?",
-      "10 − 7 = 3"
+      "A rope is laid along a measuring tape, as in the picture",
+      "2.5 − 1.5 = 1"
      ],
      "widget": {
       "type": "numberline",
       "from": 0,
-      "to": 10,
+      "to": 5,
       "step": 1,
       "marks": [
-       7,
-       10
+       1.5,
+       2.5
       ]
      }
     },
@@ -23146,12 +23153,12 @@
     "gen:ablen:3,14",
     "gen:ablen:3,11:mc",
     "gen:ablen:3,10",
-    "gen:abmeas:1,6,10",
+    "gen:abmeas:1,6,11",
     "gen:abunit:0,29"
    ],
    "transfer": [
     "gen:ablen:5,8:w",
-    "gen:abmeas:1,6,11:w",
+    "gen:abmeas:1,6,17:w",
     "gen:abunit:0,39:w"
    ],
    "retention": [
@@ -32154,13 +32161,13 @@
       "Multiply the steps to find how many small units make one big unit, divide the quantity by it, then round to the nearest whole number."
      ],
      "math": [
-      "About how many years are 3 lakh (3,00,000) days? Give the answer to the nearest whole number of years (take a year as 365 days).",
-      "365 = 365",
-      "3,00,000 ÷ 365 = 821.92",
-      "821.92 is nearest to 822"
+      "About how many days are 30 lakh (30,00,000) minutes? Give the answer to the nearest whole number of days.",
+      "60 × 24 = 1440",
+      "30,00,000 ÷ 1,440 = 2083.33",
+      "2083.33 is nearest to 2083"
      ],
      "role": "worked-example",
-     "instance": "gen:ajsize:3,5,4"
+     "instance": "gen:ajsize:3,6,2"
     }
    ],
    "diagnostics": [
@@ -32276,7 +32283,7 @@
     "gen:aep10:0,3,282",
     "gen:aemult:41,7,2",
     "gen:aediv0:6,4,3",
-    "gen:ajsize:3,6,2"
+    "gen:ajsize:3,6,3"
    ],
    "transfer": [
     "gen:aep10:0,1,871:w",
@@ -40649,12 +40656,12 @@
       "Arc = θ/360 × 2πr; area = θ/360 × πr²; perimeter = arc + 2r."
      ],
      "math": [
-      "A sector of a circle has a radius of 7 cm and an angle of 90°. Taking π = 22/7, find its arc length, in cm.",
-      "Whole circumference: 2 × 22/7 × 7 = 44 cm",
-      "Arc: 90/360 of 44 = 11 cm"
+      "A sector of a circle has a radius of 21 cm and an angle of 60°. Taking π = 22/7, find its area, in cm².",
+      "Whole circle: 22/7 × 21 × 21 = 1386 cm²",
+      "Sector: 60/360 of 1386 = 231 cm²"
      ],
      "role": "worked-example",
-     "instance": "gen:aisector:1,4,0"
+     "instance": "gen:aisector:3,2,1"
     },
     {
      "title": "Area of a circular path (a ring)",
@@ -42214,26 +42221,26 @@
         "Change any subtraction into adding the opposite. Same signs: add the sizes and keep the sign. Different signs: subtract the sizes and take the sign of the larger size."
        ],
        "math": [
-        "16 + (−1) = ?",
-        "16 + (−1) = 15"
+        "(−17) + (−7) = ?",
+        "(−17) + (−7) = −24"
        ],
        "widget": {
         "type": "numberline",
-        "from": -2,
-        "to": 18,
-        "step": 1,
+        "from": -26,
+        "to": 2,
+        "step": 5,
         "jumps": [
          [
-          16,
-          15
+          -17,
+          -24
          ]
         ]
        },
        "role": "worked-example",
-       "instance": "gen:aiint:16,-1,0"
+       "instance": "gen:aiint:-17,-7,0"
       }
      ],
-     "guided": "gen:aiint:26,-25,1",
+     "guided": "gen:aiint:-28,-31,1",
      "check": "gen:aiint:-38,35,1"
     },
     {
@@ -42249,14 +42256,14 @@
         "To take away tokens you do not have, first add zero pairs (+ and −), then remove what you need."
        ],
        "math": [
-        "(−9) + 7 = ?",
-        "(−9) + 7 = −2"
+        "16 + (−1) = ?",
+        "16 + (−1) = 15"
        ],
        "role": "strategy",
-       "instance": "gen:aiint:-9,7,0"
+       "instance": "gen:aiint:16,-1,0"
       }
      ],
-     "guided": "gen:aiint:-28,-31,1",
+     "guided": "gen:aiint:-9,7,0",
      "check": "gen:aiint:40,-11,1:mc"
     },
     {
@@ -42267,14 +42274,14 @@
      "screens": [
       {
        "role": "misconception",
-       "instance": "gen:aiint:-17,-7,0",
+       "instance": "gen:aiint:26,-25,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “(−17) + (−7) = ?” A common wrong answer is 24.",
-        "Two negatives were taken to make a positive; that rule is for multiplying. Adding two debts makes a bigger debt."
+        "A question: “26 − (−25) = ?” A common wrong answer is 1.",
+        "Taking away (−25) was done as taking away 25; subtracting a negative number is the same as adding its opposite."
        ],
        "math": [
-        "Not 24, but −24"
+        "Not 1, but 51"
        ]
       }
      ],
@@ -42332,8 +42339,8 @@
     "licence": "CC0",
     "examples": [
      "gen:aiint:-14,-17,0",
-     "gen:aiint:-17,-7,0",
-     "gen:aiint:16,-1,0"
+     "gen:aiint:26,-25,1",
+     "gen:aiint:-17,-7,0"
     ]
    }
   },
@@ -42592,13 +42599,13 @@
       "Sector = θ/360 × πr². Triangle OAB = ½r² when ∠AOB is a right angle, or (√3/4)r² when ∠AOB is 60° or twice 60°. Minor segment = sector − triangle; major = πr² − minor."
      ],
      "math": [
-      "In a circle of radius 37 cm, the chord AB makes an angle of 90° at the centre O. Taking π = 3.14, find the area of the minor segment cut off by AB, in cm².",
-      "Sector OAB: 90/360 × 3.14 × 37² = 1074.665",
-      "Triangle OAB: ½ × 37 × 37 = 684.5",
-      "Minor segment: 1074.665 − 684.5 = 390.165"
+      "In a circle of radius 36 cm, the chord AB makes an angle of 60° at the centre O. Taking π = 3.14 and √3 = 1.73, find the area of the minor segment cut off by AB, in cm².",
+      "Sector OAB: 60/360 × 3.14 × 36² = 678.24",
+      "Triangle OAB: 1.73/4 × 36² = 560.52",
+      "Minor segment: 678.24 − 560.52 = 117.72"
      ],
      "role": "worked-example",
-     "instance": "gen:amseg:37,1,0"
+     "instance": "gen:amseg:36,0,0"
     },
     {
      "title": "Area swept and distance travelled by a clock hand",
@@ -42739,7 +42746,7 @@
     "gen:aiwiper:0,7,28,7",
     "gen:aiwiper:0,7,28,6:mc",
     "gen:aiwiper:0,7,28,5",
-    "gen:amseg:36,0,0",
+    "gen:amseg:37,1,0",
     "gen:amclock:9,10,0,1",
     "gen:amsecinv:6,0,0"
    ],
@@ -43233,12 +43240,12 @@
       "Write the number as a product of primes and pair equal primes. Multiply together the primes that have no partner: that is the smallest multiplier."
      ],
      "math": [
-      "What is the smallest whole number that 90 must be multiplied by so that the product is a perfect square?",
-      "90 = 2 × 3 × 3 × 5",
-      "Primes without a partner: 2 × 5 = 10"
+      "What is the smallest whole number that 396 must be multiplied by so that the product is a perfect square?",
+      "396 = 2 × 2 × 3 × 3 × 11",
+      "Primes without a partner: 11 = 11"
      ],
      "role": "worked-example",
-     "instance": "gen:ajsqm:90"
+     "instance": "gen:ajsqm:396"
     },
     {
      "title": "Divisibility and co-primeness from prime factorisations",
@@ -43348,12 +43355,12 @@
     "gen:ajpf:156",
     "gen:ajpf:136:mc",
     "gen:ajpf:126",
-    "gen:ajsqm:396",
+    "gen:ajsqm:336",
     "gen:ajpfdc:0,2,0,1,2,1,1,1"
    ],
    "transfer": [
     "gen:ajpf:120:mc",
-    "gen:ajsqm:336:w"
+    "gen:ajsqm:388:w"
    ],
    "retention": [
     "gen:ajpf:98",
@@ -43831,11 +43838,11 @@
       "Write each period in its own places (crores, then two places for lakhs, two for thousands, three for the rest), filling empty places with 0. To convert, use 1 million = 10 lakh and 1 billion = 100 crore."
      ],
      "math": [
-      "63 million is how many lakh?",
-      "63 million = 63 × 10 lakh = 630 lakh"
+      "89 billion is how many crore?",
+      "89 billion = 89 × 100 crore = 8900 crore"
      ],
      "role": "worked-example",
-     "instance": "gen:ajcrore:1,63,0,0"
+     "instance": "gen:ajcrore:2,89,0,0"
     },
     {
      "title": "The greatest of four numbers in lakhs and crores",
@@ -45431,13 +45438,13 @@
       "Each place the decimal point moves to the left divides the number by 10, so to keep the value the same we multiply by 10 once for each place: the power of 10 counts the places moved. Moving the point to the right multiplies by 10, so it is balanced by a negative power of 10."
      ],
      "math": [
-      "Write 9,43,00,000 in scientific notation, a × 10ⁿ with 1 ≤ a < 10. Give your answer as (a, n): for example, 3.5 × 10⁴ is written (3.5, 4).",
-      "Move the decimal point 7 places to the left to get 9.43, so n = 7",
-      "9.43 × 10⁷, written (9.43, 7)"
+      "Write 0.777 in scientific notation, a × 10ⁿ with 1 ≤ a < 10. Give your answer as (a, n): for example, 3.5 × 10⁴ is written (3.5, 4).",
+      "Move the decimal point 1 places to the right to get 7.77, so n = −1",
+      "7.77 × 10⁻¹, written (7.77, −1)"
      ],
-     "tip": "The digits were kept as a whole number (943). In scientific notation the first number must be at least 1 and less than 10, so the point goes after the first digit.",
+     "tip": "The power was written as positive. A number less than 1 has a negative power of 10: 7.77 is divided by 10 again and again, not multiplied.",
      "role": "concept",
-     "instance": "gen:aksci:943,7"
+     "instance": "gen:aksci:777,-1"
     },
     {
      "title": "Writing a number in scientific notation as an ordinary number",
@@ -45506,7 +45513,9 @@
      "id": "worked_steps",
      "title": "Step by step",
      "kind": "procedural",
-     "needs": [],
+     "needs": [
+      "gen:akscid:777,-1"
+     ],
      "screens": [
       {
        "title": "The method",
@@ -45514,15 +45523,15 @@
         "Put the point just after the first non-zero digit to get a. Count how many places the point moved: to the left gives a positive n, to the right gives a negative n."
        ],
        "math": [
-        "Write 63,20,00,000 in scientific notation, a × 10ⁿ with 1 ≤ a < 10. Give your answer as (a, n): for example, 3.5 × 10⁴ is written (3.5, 4).",
-        "Move the decimal point 8 places to the left to get 6.32, so n = 8",
-        "6.32 × 10⁸, written (6.32, 8)"
+        "Write 0.00000468 in scientific notation, a × 10ⁿ with 1 ≤ a < 10. Give your answer as (a, n): for example, 3.5 × 10⁴ is written (3.5, 4).",
+        "Move the decimal point 6 places to the right to get 4.68, so n = −6",
+        "4.68 × 10⁻⁶, written (4.68, −6)"
        ],
        "role": "worked-example",
-       "instance": "gen:aksci:632,8"
+       "instance": "gen:aksci:468,-6"
       }
      ],
-     "guided": "gen:aksci:777,-1",
+     "guided": "gen:aksci:943,7",
      "check": "gen:aksci:929,5"
     },
     {
@@ -45534,13 +45543,13 @@
       {
        "title": "Use the place value of the first digit",
        "text": [
-        "Find the place of the first non-zero digit. In 56,900 it is in the ten-thousands place, worth 10,000, which is 10⁴, so n = 4.",
-        "Put the point just after that digit to get a = 5.69: the number is 5.69 × 10⁴."
+        "Find the place of the first non-zero digit. In 0.00885 it is in the thousandths place, worth 1/1,000, which is 10⁻³, so n = −3.",
+        "Put the point just after that digit to get a = 8.85: the number is 8.85 × 10⁻³."
        ],
        "math": [
-        "Write 56,900 in scientific notation, a × 10ⁿ with 1 ≤ a < 10. Give your answer as (a, n): for example, 3.5 × 10⁴ is written (3.5, 4).",
-        "Move the decimal point 4 places to the left to get 5.69, so n = 4",
-        "5.69 × 10⁴, written (5.69, 4)"
+        "Write 0.00885 in scientific notation, a × 10ⁿ with 1 ≤ a < 10. Give your answer as (a, n): for example, 3.5 × 10⁴ is written (3.5, 4).",
+        "Move the decimal point 3 places to the right to get 8.85, so n = −3",
+        "8.85 × 10⁻³, written (8.85, −3)"
        ],
        "widget": {
         "type": "table",
@@ -45550,25 +45559,25 @@
         ],
         "rows": [
          [
-          "Thousands",
-          "10³"
+          "Tenths",
+          "10⁻¹"
          ],
          [
-          "Lakhs",
-          "10⁵"
+          "Hundredths",
+          "10⁻²"
          ],
          [
-          "Crores",
-          "10⁷"
+          "Thousandths",
+          "10⁻³"
          ]
         ]
        },
        "role": "strategy",
-       "instance": "gen:aksci:569,4",
+       "instance": "gen:aksci:885,-3",
        "textFrom": "instance"
       }
      ],
-     "guided": "gen:aksci:581,-4",
+     "guided": "gen:aksci:122,-5",
      "check": "gen:aksci:369,9:mc"
     },
     {
@@ -45579,32 +45588,32 @@
      "screens": [
       {
        "role": "misconception",
-       "instance": "gen:aksci:132,7",
+       "instance": "gen:aksci:581,-4",
        "title": "A common wrong answer",
        "text": [
-        "A question: “Write 1,32,00,000 in scientific notation, a × 10ⁿ with 1 ≤ a < 10. Give your answer as (a, n): for example, 3.5 × 10⁴ is written (3.5, 4).” A common wrong answer is (132, 5).",
-        "The digits were kept as a whole number (132). In scientific notation the first number must be at least 1 and less than 10, so the point goes after the first digit."
+        "A question: “Write 0.000581 in scientific notation, a × 10ⁿ with 1 ≤ a < 10. Give your answer as (a, n): for example, 3.5 × 10⁴ is written (3.5, 4).” A common wrong answer is (5.81, 4).",
+        "The power was written as positive. A number less than 1 has a negative power of 10: 5.81 is divided by 10 again and again, not multiplied."
        ],
        "math": [
-        "Not (132, 5), but (1.32, 7)"
+        "Not (5.81, 4), but (5.81, -4)"
        ]
       }
      ],
-     "guided": "gen:aksci:468,-6",
+     "guided": "gen:aksci:516,-3",
      "check": "gen:aksci:315,-5:mc"
     }
    ],
    "practice": [
-    "gen:aksci:885,-3",
-    "gen:aksci:122,-5:mc",
-    "gen:aksci:516,-3",
+    "gen:aksci:132,7",
+    "gen:aksci:804,-3:mc",
+    "gen:aksci:288,-2",
     "gen:akscid:373,2",
     "gen:akscmp:34",
     "gen:aksmag:3,24,1,-2",
     "gen:akscalc:0,62,97,9,3"
    ],
    "transfer": [
-    "gen:aksci:804,-3:w",
+    "gen:aksci:697,-2:w",
     "gen:akscid:113,5:w",
     "gen:akscmp:47:w"
    ],
@@ -45612,7 +45621,9 @@
     "gen:aksci:973,-5",
     "gen:akscid:217,-2:mc"
    ],
-   "probes": [],
+   "probes": [
+    "gen:akscid:777,-1"
+   ],
    "pool": {
     "family": "aksci",
     "version": "1.0.0"
@@ -45644,17 +45655,17 @@
     "policy": "library@2+template@2",
     "family": "aksci",
     "seed": [
-     943,
-     7
+     777,
+     -1
     ],
     "blueprintVersion": "1.0.0",
     "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
     "aiAssisted": true,
     "licence": "CC0",
     "examples": [
-     "gen:aksci:943,7",
-     "gen:aksci:132,7",
-     "gen:aksci:632,8"
+     "gen:aksci:777,-1",
+     "gen:aksci:581,-4",
+     "gen:aksci:468,-6"
     ]
    }
   },
@@ -48118,14 +48129,14 @@
       "Long division: divide the leading term of what is left by the leading term of d(x), multiply d(x) by it, subtract, and repeat until the degree of what is left is less than that of d(x). For Ax + B, synthetic division at x = −B/A gives A times the quotient."
      ],
      "math": [
-      "Divide p(x) = 3x³ − 8x² − 10x + 4 by 3x + 4. Write p(x) = (3x + 4) × q(x) + r, where q(x) = ax² + bx + c and r is a number. Give (a, b, c, r).",
-      "Next quotient coefficient: 3 ÷ 3 = 1",
-      "Next quotient coefficient: −12 ÷ 3 = −4",
-      "Next quotient coefficient: 6 ÷ 3 = 2",
-      "What is left is the remainder: −4"
+      "Divide p(x) = x³ − 9x² + 25x − 6 by x² − 4x + 2. Write p(x) = (x² − 4x + 2) × q(x) + r(x), where q(x) = ax + b and r(x) = cx + d. Give (a, b, c, d).",
+      "Next quotient coefficient: 1 ÷ 1 = 1",
+      "Next quotient coefficient: −5 ÷ 1 = −5",
+      "What is left is the remainder: 3x + 4",
+      "The quotient is x − 5 and the remainder is 3x + 4, so (a, b, c, d) = (1, −5, 3, 4)"
      ],
      "role": "worked-example",
-     "instance": "gen:alldiv:0,3,4,1,-4,2,-4"
+     "instance": "gen:alldiv:1,-4,2,1,-5,3,4"
     }
    ],
    "diagnostics": [
@@ -48256,7 +48267,7 @@
     "gen:aladd:1,76",
     "gen:aleval:0,31",
     "gen:almono:9,3,6,-6,-4,0",
-    "gen:alldiv:1,-4,2,1,-5,3,4"
+    "gen:alldiv:1,3,-1,2,4,5,2"
    ],
    "transfer": [
     "gen:alpmul:4,2,2,3,3:w",

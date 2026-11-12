@@ -16,7 +16,7 @@
  * same modules; a test checks that the file is exactly what the blueprints synthesise.
  */
 import { poolFamilies, type Module, type Screen, type Strategy } from "./content";
-import { difficultyOf, explainStep, exposureKey, FAMILIES, gradeOfQuestion, phasePool, pool, problemOf, show, type Phase, type Problem } from "./families";
+import { difficultyOf, explainStep, exposureKey, FAMILIES, phasePool, pool, problemOf, show, type Phase, type Problem } from "./families";
 import { graph } from "./graph";
 import { selectable } from "./question-status";
 import { FAMILY_VERSION } from "./spec";
@@ -77,16 +77,6 @@ export interface SynthesisedModule extends Module {
 
 /** pools@1: the families a competency's module draws from — the main one first, then every other family of the
  * competency that can serve a module (a competency is broader than one family). */
-/** example-grade@1: a section's example comes from the earliest grade its family serves (a family that spans grades gives
- *  `grade`), so a younger learner's lesson keeps the section instead of losing it to an example from a later grade. A family
- *  without `grade` is unchanged; when no candidate is from the earliest grade, all candidates stay. */
-const earliestGrade = (ids: string[]): string[] => {
-  const gs = ids.map((id) => gradeOfQuestion(id));
-  const known = gs.filter((g): g is number => g !== null);
-  if (!known.length) return ids;
-  const min = Math.min(...known);
-  return ids.filter((_, i) => gs[i] === null || gs[i] === min);
-};
 export function poolsFor(competency: string, main: string) {
   const others = [...FAMILIES.values()].filter((f) => f.id !== main && f.competency === competency && f.domain && f.teach && !NOT_A_MODULE.has(f.id) && pool(f.id).items.length >= 10).map((f) => f.id);
   return [main, ...others].map((f) => ({ family: f, version: FAMILY_VERSION[f] }));
@@ -147,8 +137,7 @@ function subSkills(competency: string, family: string, used: Set<string>) {
   for (const f of others) {
     const d = FAMILIES.get(f)!;
     const list = phasePool(f, "practice").map((x) => x.replace(/:mc$/, "")).filter(selectable).filter((x) => !used.has(x));
-    const low = earliestGrade(list);
-    const id = low.find((x) => difficultyOf(typedOf(x)) <= 2) ?? low[0];
+    const id = list.find((x) => difficultyOf(typedOf(x)) <= 2) ?? list[0];
     if (!id) continue;
     used.add(id);
     const e = typedOf(id);
@@ -285,7 +274,7 @@ export function fromTemplate(family: string, competency: string, version: string
   const inst = def.teach.instance;
   const cases = new Set<string>();
   const ex = (pred: (p: Problem) => boolean = () => true) => {
-    const ids = earliestGrade(phasePool(family, "practice").map((x) => x.replace(/:mc$/, "")).filter(selectable).filter((x) => !used.has(x) && pred(typedOf(x))));
+    const ids = phasePool(family, "practice").map((x) => x.replace(/:mc$/, "")).filter(selectable).filter((x) => !used.has(x) && pred(typedOf(x)));
     // a family that mixes kinds of question teaches each section on a kind not yet shown (then any)
     const caseOf = inst ? def.teach!.caseOf : undefined;
     const id = (caseOf && ids.find((x) => !cases.has(caseOf(typedOf(x).params)))) || ids[0];

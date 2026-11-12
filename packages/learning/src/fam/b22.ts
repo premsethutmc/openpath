@@ -1430,7 +1430,7 @@ const P2: Def[] = [
   {
     id: "avrem",
     // grade5-level@1: the remainder of a sum or product (reasoning with remainders alone) is Class 7 work
-    grade: ([, , , f]) => (f <= 1 ? 7 : 5),
+    grade: ([, , , f]) => (f <= 1 ? 7 : null),
     arity: 4,
     title: "Reasoning about remainders",
     competency: DIVB,
@@ -1708,7 +1708,7 @@ const P3: Def[] = [
   {
     id: "avpctof",
     // grade5-level@1: percentage increase and decrease are Class 7 work; "what percentage of" is left as it was
-    grade: ([, , mode]) => (mode === 0 ? 4 : 7),
+    grade: ([, , mode]) => (mode === 0 ? null : 7),
     arity: 3,
     title: "Percentage of one quantity in another, and percentage change",
     competency: PCT,

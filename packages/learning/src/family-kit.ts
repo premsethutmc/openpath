@@ -282,8 +282,8 @@ export type Def = {
   difficulty?: (p: number[]) => 1 | 2 | 3;
   /** level@1: the grade this problem belongs to, when a family spans grades (comparing numbers within 20 in Grade 1,
    * lakhs in Grade 4). A learner is never asked a problem from a grade after their own. Default: the competency's
-   * first grade. */
-  grade?: (p: number[]) => number;
+   * first grade. null for a problem that belongs to no particular grade (as if the family gave no grade). */
+  grade?: (p: number[]) => number | null;
   /** form@1: the task is to expand or simplify, so the answer must be written without brackets or multiplication signs
    * (x² − 15x + 56, not (x − 8)(x − 7)): an answer equal in value but not expanded is not accepted. */
   expanded?: boolean;
