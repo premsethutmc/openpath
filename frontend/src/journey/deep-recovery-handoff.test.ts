@@ -16,6 +16,12 @@ import { question } from "../../../packages/learning/src/content";
 import { problemOf } from "../../../packages/learning/src/families";
 import { graph } from "../../../packages/learning/src/graph";
 import { SliceSession } from "./session";
+import { usePrerequisiteAfterOwn, useUnteachableFixture } from "../../../packages/learning/src/intervention";
+// The deep-recovery research prototype is defined over the earlier stop ("#115's stop": every explanation tried, then a person),
+// so these tests run with prereq-after-own@1 off, and with integers as the skill that has no teachable lesson (a fixture now
+// that the real integers lesson is repaired).
+usePrerequisiteAfterOwn(false);
+useUnteachableFixture(["MATH.number.integers"]);
 
 /** the engine's English reasons, kept ONLY as an independent oracle for the structured code (never used by the app) */
 function textOracle(phase: string, reason: string): HandoffReason {

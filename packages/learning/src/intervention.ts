@@ -81,7 +81,7 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
 }
 
 /**
- * prereq-after-own@1 (OFF by default; usePrerequisiteAfterOwn). The shipped order is: teach the skill itself first. When every
+ * prereq-after-own@1 (ON by default since 2026-11-12; usePrerequisiteAfterOwn(false) restores the earlier order). The shipped order is: teach the skill itself first. When every
  * explanation of the skill has been tried and it is still wrong, the module paused for a person and the skills it builds on were
  * never checked, so a learner whose real gap is one step below stayed stuck. With the switch on:
  *   1. before such a pause, the module opens the existing recovery on the learner's latest wrong question of this skill, and the
@@ -94,7 +94,7 @@ export function fromPool(m: Module, phase: Phase, records: LearnerRecords): stri
  */
 const PREREQ = globalThis as { __openpathPrereqAfterOwn?: boolean };
 export function usePrerequisiteAfterOwn(on: boolean) { PREREQ.__openpathPrereqAfterOwn = on; }
-export const prerequisiteAfterOwn = () => PREREQ.__openpathPrereqAfterOwn === true;
+export const prerequisiteAfterOwn = () => PREREQ.__openpathPrereqAfterOwn ?? true;
 /** The same supports, most doubtful first by the learner vector; equal doubt keeps the graph's order. */
 function byDoubt<T extends { id: string }>(supports: T[], records: LearnerRecords): T[] {
   const vector = learnerVector(records);
@@ -263,7 +263,14 @@ type Evidence = boolean | readonly string[];
 /** The misconceptions established for this learner in this skill (learner-hypothesis@1), by diagnosis id. */
 export const establishedIds = (competency: string, records: LearnerRecords) => hypothesesFor(competency, records).filter((h) => h.status === "established").map((h) => h.claim?.explanation).filter((x): x is string => !!x);
 export const contentReviewOf = (m: Module, s: Strategy, misconceptionEvidence: Evidence): ContentEligibility => contentEligibility(m, s, { competency: m.competency, misconceptionEvidence, usage: "intervention" });
-export const teachable = (m: Module, s: Strategy, misconceptionEvidence: Evidence) => !failsChecks(m, s) && contentReviewOf(m, s, misconceptionEvidence).eligible;
+/**
+ * TEST FIXTURE ONLY (useUnteachableFixture): skills treated as having no explanation that passes the teaching checks. The
+ * deep-recovery research tests need a skill with no teachable lesson; they used MATH.number.integers while its lesson really
+ * failed the checks. With that lesson repaired, they name the skill here instead. Never set by the app.
+ */
+const UNTEACHABLE = globalThis as { __openpathUnteachable?: Set<string> };
+export function useUnteachableFixture(skills: string[] | null) { UNTEACHABLE.__openpathUnteachable = skills ? new Set(skills) : undefined; }
+export const teachable = (m: Module, s: Strategy, misconceptionEvidence: Evidence) => !UNTEACHABLE.__openpathUnteachable?.has(m.competency) && !failsChecks(m, s) && contentReviewOf(m, s, misconceptionEvidence).eligible;
 const NO_EXPLANATION = () => teachingMode() === "supervised-evaluation"
   ? "OpenPath has no educator-approved explanation for this yet, so it will not teach this one for now. Carry on, and go through it with a teacher or parent."
   : "OpenPath has no checked explanation for this yet, so it will not teach this one for now. Carry on, and go through it with a teacher or parent.";

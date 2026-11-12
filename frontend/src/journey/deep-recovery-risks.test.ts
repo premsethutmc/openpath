@@ -18,6 +18,12 @@ import { make } from "../../../packages/learning/src/session";
 import { runDeep, structuredLearner } from "./deep-recovery-journey";
 import { right, wrong } from "./learners";
 import { SliceSession } from "./session";
+import { usePrerequisiteAfterOwn, useUnteachableFixture } from "../../../packages/learning/src/intervention";
+// The deep-recovery research prototype is defined over the earlier stop ("#115's stop": every explanation tried, then a person),
+// so these tests run with prereq-after-own@1 off, and with integers as the skill that has no teachable lesson (a fixture now
+// that the real integers lesson is repaired).
+usePrerequisiteAfterOwn(false);
+useUnteachableFixture(["MATH.number.integers"]);
 
 const P = "MATH.";
 const ORIG = "gen:aupfr:1,-3,3,-2,-4";

@@ -17,6 +17,12 @@ import { activityFor } from "../learning/driver";
 import { structuredLearner, type Answerer } from "./deep-recovery-journey";
 import { misconception } from "./learners";
 import { SliceSession } from "./session";
+import { usePrerequisiteAfterOwn, useUnteachableFixture } from "../../../packages/learning/src/intervention";
+// The deep-recovery research prototype is defined over the earlier stop ("#115's stop": every explanation tried, then a person),
+// so these tests run with prereq-after-own@1 off, and with integers as the skill that has no teachable lesson (a fixture now
+// that the real integers lesson is repaired).
+usePrerequisiteAfterOwn(false);
+useUnteachableFixture(["MATH.number.integers"]);
 
 const P = "MATH.number.";
 const C = P + "addition-regroup", PV = P + "place-value-tens", CMP = P + "compare-numbers";

@@ -59,27 +59,6 @@
    "reason": "No skill, lesson or question in OpenPath covers Roman numerals."
   },
   {
-   "theme": 5,
-   "statement": "Understand integers as the counting numbers, zero and the negatives of the counting numbers.",
-   "source": "Theme 5, learning outcome 2",
-   "kind": "lesson-fails-teaching-checks",
-   "reason": "OpenPath has questions for this (MATH.number.integers), and a simulated learner who answers everything correctly is verified on it, but its lesson does not pass OpenPath's own teaching checks, so a learner who makes mistakes would get no explanation. Left out until the lesson is repaired."
-  },
-  {
-   "theme": 5,
-   "statement": "Compare two integers using a number line.",
-   "source": "Theme 5, learning outcome 3",
-   "kind": "lesson-fails-teaching-checks",
-   "reason": "OpenPath has questions for this (MATH.number.integers), and a simulated learner who answers everything correctly is verified on it, but its lesson does not pass OpenPath's own teaching checks, so a learner who makes mistakes would get no explanation. Left out until the lesson is repaired."
-  },
-  {
-   "theme": 5,
-   "statement": "Put integers in ascending or descending order.",
-   "source": "Theme 5, learning outcome 4",
-   "kind": "lesson-fails-teaching-checks",
-   "reason": "OpenPath has questions for this (MATH.number.integers), and a simulated learner who answers everything correctly is verified on it, but its lesson does not pass OpenPath's own teaching checks, so a learner who makes mistakes would get no explanation. Left out until the lesson is repaired."
-  },
-  {
    "theme": 6,
    "statement": "Explore symmetry in familiar 3-D shapes.",
    "source": "Theme 6, learning outcome 8",
@@ -1442,6 +1421,82 @@
      ],
      "coverage": "full",
      "source": "Theme 5, learning outcome 1 (p. 109 onwards)"
+    },
+    {
+     "id": "icse-g05-c05-o03",
+     "statement": "Understand integers as the counting numbers, zero and the negatives of the counting numbers.",
+     "concepts": [
+      "integers",
+      "negative numbers"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integers"
+     ],
+     "coverage": "partial",
+     "source": "Theme 5, learning outcome 2 (p. 109 onwards)",
+     "note": "The lesson explains negative numbers on a number line and the questions order integers; no question asks what an integer is."
+    },
+    {
+     "id": "icse-g05-c05-o04",
+     "statement": "Compare two integers using a number line.",
+     "concepts": [
+      "comparing integers",
+      "number line"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integers"
+     ],
+     "coverage": "full",
+     "source": "Theme 5, learning outcome 3 (p. 109 onwards)"
+    },
+    {
+     "id": "icse-g05-c05-o05",
+     "statement": "Put integers in ascending or descending order.",
+     "concepts": [
+      "ordering integers"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.integers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.integers"
+     ],
+     "coverage": "partial",
+     "source": "Theme 5, learning outcome 4 (p. 109 onwards)",
+     "note": "Questions ask for increasing order (smallest first); none asks for descending order."
     }
    ]
   },
