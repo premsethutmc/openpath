@@ -32683,7 +32683,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": "negatives-make-positive",
+   "addresses": "minus-negative-as-minus",
    "revisions": [
     {
      "contentHash": "sha256:920f859fd44788eb8899dad6fecbdb183952803c0e81cf5ff7eedf1cdc036035",
@@ -37871,7 +37871,7 @@
    "strategy": "spot_the_mistake",
    "intervention": "conceptual",
    "misconceptionSpecific": true,
-   "addresses": "not-between-1-and-10",
+   "addresses": "positive-power",
    "revisions": [
     {
      "contentHash": "sha256:9a48ab7dc2c4bab29d4302fec4e100e97e6286333166001aeb34ac10caae156e",
