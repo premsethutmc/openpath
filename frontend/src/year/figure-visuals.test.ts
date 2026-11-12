@@ -272,3 +272,18 @@ test("grid perRow: the same number of squares shaded at the start of every row; 
   assert.equal(describeFigure({ type: "grid", rows: 8, cols: 3, perRow: 1 }), "A grid of 8 rows and 3 columns with 1 square shaded in each row");
   assert.match(html({ type: "grid", rows: 4, cols: 5, perRow: 6 }), /figure-unavailable/);
 });
+
+test("line graph: points on scale lines joined in order; data it cannot show exactly is not drawn", () => {
+  const v = { type: "linegraph", title: "Temperature at noon (°C)", labels: ["Mon", "Tue", "Wed", "Thu"], values: [10, 20, 15, 5], scale: 5 };
+  const h = html(v);
+  assert.ok(!/figure-unavailable/.test(h));
+  const pts = [...h.matchAll(/<circle [^>]*>/g)].map((m) => attrs(m[0]));
+  assert.equal(pts.length, 4, "one point for each value");
+  const ys = pts.map((p) => num(p.cy));
+  assert.ok(ys[1] < ys[2] && ys[2] < ys[0] && ys[0] < ys[3], "a larger value is drawn higher (smaller y)");
+  assert.ok(pts.every((p, i) => i === 0 || num(p.cx) > num(pts[i - 1].cx)), "points run left to right in order");
+  assert.equal(h.match(/<polyline [^>]*points="([^"]*)"/)![1], pts.map((p) => `${p.cx},${p.cy}`).join(" "), "the line joins exactly the points");
+  assert.deepEqual(texts(h).filter((t) => /^\d+$/.test(t.text)).map((t) => num(t.text)), [0, 5, 10, 15, 20, 25], "the scale is numbered on every line, one line above the largest value");
+  assert.equal(describeFigure(v), "A line graph of Temperature at noon (°C), with a line on the scale every 5: Mon 10, Tue 20, Wed 15, Thu 5");
+  for (const bad of [{ ...v, values: [10, 20, 12, 5] }, { ...v, labels: ["Mon", "Tue"] }, { ...v, scale: 0 }, { ...v, values: [10, 20, -5, 5] }]) assert.match(html(bad), /figure-unavailable/);
+});

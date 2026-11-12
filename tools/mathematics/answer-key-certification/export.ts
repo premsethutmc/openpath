@@ -23,6 +23,8 @@ for (const [id, d] of FAMILIES) {
     total++; pres++;
     const r: any = { id: it.id, params: it.params, prompt: it.prompt, type: it.type, answer: it.answer };
     if (it.expanded) r.expanded = true; if (it.figure) r.figure = it.figure;
+    // a choice question's own options, for a reference that must read them (not part of the certified-content hash)
+    if (it.type === "choice" && (it as any).options) r.choices = (it as any).options;
     const m = problemOf(it.id + ":mc"); if (m) { mc++; pres++; r.mc = { options: m.options, key: m.answer, prompt: m.prompt }; }
     const w = problemOf(it.id + ":w"); if (w) { word++; pres++; r.word = { prompt: w.prompt, answer: w.answer, type: w.type }; }
     rows.push(JSON.stringify(r));

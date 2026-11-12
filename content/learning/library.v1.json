@@ -71837,6 +71837,616 @@
      "gen:awctr:6,7"
     ]
    }
+  },
+  {
+   "competency": "MATH.number.roman-numerals",
+   "title": "Reading a Roman numeral",
+   "chapter": [
+    {
+     "title": "Reading a Roman numeral",
+     "text": [
+      "Roman numerals use letters for numbers. Each letter always stands for the same number, and the letters are put together to make other numbers."
+     ],
+     "math": [
+      "What number does the Roman numeral XXI stand for?",
+      "XX = 20",
+      "I = 1",
+      "Add the parts: 20 + 1 = 21"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "I",
+       "V",
+       "X",
+       "L",
+       "C",
+       "D",
+       "M"
+      ],
+      "rows": [
+       [
+        1,
+        5,
+        10,
+        50,
+        100,
+        500,
+        1000
+       ]
+      ]
+     },
+     "role": "concept",
+     "instance": "gen:akromr:21"
+    },
+    {
+     "title": "Writing a number in Roman numerals",
+     "text": [
+      "A number is written in Roman numerals one place at a time: first the hundreds, then the tens, then the ones, each with its own letters.",
+      "Split the number into hundreds, tens and ones. Write each part with its letters, using a take-away pair where a letter would be needed four times. Put the parts side by side, largest first."
+     ],
+     "math": [
+      "Which of these is 373 written in Roman numerals?",
+      "300 is written CCC",
+      "70 is written LXX",
+      "3 is written III",
+      "Write the parts side by side, largest first: CCCLXXIII",
+      "That is option A, so the answer is A"
+     ],
+     "widget": {
+      "type": "table",
+      "head": [
+       "I",
+       "V",
+       "X",
+       "L",
+       "C",
+       "D",
+       "M"
+      ],
+      "rows": [
+       [
+        1,
+        5,
+        10,
+        50,
+        100,
+        500,
+        1000
+       ]
+      ]
+     }
+    }
+   ],
+   "diagnostics": [
+    "gen:akromr:696",
+    "gen:akromr:47",
+    "gen:akromr:946"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Read the numeral from the left, one place part at a time. Letters written from larger to smaller are added. A smaller letter written just before a larger one is taken away from it. Then add the parts."
+       ],
+       "math": [
+        "What number does the Roman numeral DCCCLXXXVII stand for?",
+        "DCCC = 800",
+        "LXXX = 80",
+        "VII = 7",
+        "Add the parts: 800 + 80 + 7 = 887"
+       ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "I",
+         "V",
+         "X",
+         "L",
+         "C",
+         "D",
+         "M"
+        ],
+        "rows": [
+         [
+          1,
+          5,
+          10,
+          50,
+          100,
+          500,
+          1000
+         ]
+        ]
+       },
+       "role": "worked-example",
+       "instance": "gen:akromr:887"
+      }
+     ],
+     "guided": "gen:akromr:119",
+     "check": "gen:akromr:814"
+    },
+    {
+     "id": "letter_by_letter",
+     "title": "Go letter by letter",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Go letter by letter",
+       "text": [
+        "Write the value of each letter under it.",
+        "Where a smaller value stands just before a larger one, take it away; add all the others."
+       ],
+       "math": [
+        "What number does the Roman numeral XX stand for?",
+        "XX = 20"
+       ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "I",
+         "V",
+         "X",
+         "L",
+         "C",
+         "D",
+         "M"
+        ],
+        "rows": [
+         [
+          1,
+          5,
+          10,
+          50,
+          100,
+          500,
+          1000
+         ]
+        ]
+       },
+       "role": "strategy",
+       "instance": "gen:akromr:20"
+      }
+     ],
+     "guided": "gen:akromr:643",
+     "check": "gen:akromr:694:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:akromr:817",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “What number does the Roman numeral DCCCXVII stand for?” A common wrong answer is 813.",
+        "A smaller letter written after a larger one was taken away. Only a smaller letter written before a larger one is taken away; after it, it is added: VI is 5 + 1 = 6."
+       ],
+       "math": [
+        "Not 813, but 817"
+       ]
+      }
+     ],
+     "guided": "gen:akromr:886",
+     "check": "gen:akromr:815:mc"
+    }
+   ],
+   "practice": [
+    "gen:akromr:118",
+    "gen:akromr:23:mc",
+    "gen:akromr:642",
+    "gen:akromw:521"
+   ],
+   "transfer": [
+    "gen:akromr:809:w",
+    "gen:akromw:478:w"
+   ],
+   "retention": [
+    "gen:akromr:54",
+    "gen:akromw:482"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "akromr",
+    "version": "1.0.0"
+   },
+   "pools": [
+    {
+     "family": "akromr",
+     "version": "1.0.0"
+    },
+    {
+     "family": "akromw",
+     "version": "1.0.0"
+    }
+   ],
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "akromr",
+    "seed": [
+     21
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:akromr:21",
+     "gen:akromr:817",
+     "gen:akromr:887"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.geometry.symmetry-3d",
+   "title": "Mirror cuts of a box (planes of symmetry)",
+   "chapter": [
+    {
+     "title": "Mirror cuts of a box (planes of symmetry)",
+     "text": [
+      "A solid has mirror symmetry when a flat cut divides it into two halves that are mirror images. A box has such a cut through the middle of each pair of opposite faces; a square face allows corner-to-corner cuts as well."
+     ],
+     "math": [
+      "A solid block is 7 cm long, 8 cm wide and 4 cm high. One straight flat cut can divide it into two halves that are mirror images of each other. In how many different ways can this be done?",
+      "Cuts through the middle, parallel to a pair of faces: 3 (one for each pair of opposite faces)",
+      "No face is a square, so no corner-to-corner cut gives mirror halves: 0",
+      "Altogether: 3 + 0 = 3"
+     ],
+     "widget": {
+      "type": "solid",
+      "name": "cuboid",
+      "dims": [
+       "7 cm",
+       "8 cm",
+       "4 cm"
+      ]
+     },
+     "tip": "The faces were counted. A mirror cut goes through the middle of the block; it is not a face.",
+     "role": "concept",
+     "instance": "gen:aesym3:7,8,4"
+    }
+   ],
+   "diagnostics": [
+    "gen:aesym3:8,1,8",
+    "gen:aesym3:5,5,1",
+    "gen:aesym3:3,8,8"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Count the cuts through the middle, parallel to each pair of opposite faces. Then look for square faces: each pair of square faces adds a cut along each diagonal. Add the two counts."
+       ],
+       "math": [
+        "A solid block is 9 cm long, 5 cm wide and 2 cm high. One straight flat cut can divide it into two halves that are mirror images of each other. In how many different ways can this be done?",
+        "Cuts through the middle, parallel to a pair of faces: 3 (one for each pair of opposite faces)",
+        "No face is a square, so no corner-to-corner cut gives mirror halves: 0",
+        "Altogether: 3 + 0 = 3"
+       ],
+       "widget": {
+        "type": "solid",
+        "name": "cuboid",
+        "dims": [
+         "9 cm",
+         "5 cm",
+         "2 cm"
+        ]
+       },
+       "role": "worked-example",
+       "instance": "gen:aesym3:9,5,2"
+      }
+     ],
+     "guided": "gen:aesym3:7,8,5",
+     "check": "gen:aesym3:9,5,1"
+    },
+    {
+     "id": "fold_the_face",
+     "title": "Look at one face at a time",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Look at one face at a time",
+       "text": [
+        "Look straight at one face of the block. Every line of symmetry of that face that goes right through the block gives a mirror cut.",
+        "A rectangle has two lines of symmetry; a square has four. Do this for each pair of faces, counting each cut once."
+       ],
+       "math": [
+        "A solid block is 7 cm long, 9 cm wide and 1 cm high. One straight flat cut can divide it into two halves that are mirror images of each other. In how many different ways can this be done?",
+        "Cuts through the middle, parallel to a pair of faces: 3 (one for each pair of opposite faces)",
+        "No face is a square, so no corner-to-corner cut gives mirror halves: 0",
+        "Altogether: 3 + 0 = 3"
+       ],
+       "widget": {
+        "type": "solid",
+        "name": "cuboid",
+        "dims": [
+         "7 cm",
+         "9 cm",
+         "1 cm"
+        ]
+       },
+       "role": "strategy",
+       "instance": "gen:aesym3:7,9,1"
+      }
+     ],
+     "guided": "gen:aesym3:7,8,6",
+     "check": "gen:aesym3:1,6,8:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:aesym3:7,9,6",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “A solid block is 7 cm long, 9 cm wide and 6 cm high. One straight flat cut can divide it into two halves that are mirror images of each other. In how many different ways can this be done?” A common wrong answer is 6.",
+        "The faces were counted. A mirror cut goes through the middle of the block; it is not a face."
+       ],
+       "math": [
+        "Not 6, but 3"
+       ]
+      }
+     ],
+     "guided": "gen:aesym3:7,8,7",
+     "check": "gen:aesym3:7,8,1:mc"
+    }
+   ],
+   "practice": [
+    "gen:aesym3:7,9,3",
+    "gen:aesym3:7,9,2:mc",
+    "gen:aesym3:6,5,3"
+   ],
+   "transfer": [
+    "gen:aesym3:7,5,3:w"
+   ],
+   "retention": [
+    "gen:aesym3:6,5,1",
+    "gen:aesym3:7,5,1:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "aesym3",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "aesym3",
+    "seed": [
+     7,
+     8,
+     4
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:aesym3:7,8,4",
+     "gen:aesym3:7,9,6",
+     "gen:aesym3:9,5,2"
+    ]
+   }
+  },
+  {
+   "competency": "MATH.statistics.line-graphs",
+   "title": "Reading a line graph",
+   "chapter": [
+    {
+     "title": "Reading a line graph",
+     "text": [
+      "A line graph shows how something changes over time. Each point shows the value at one time; the line joining the points shows whether it went up, went down or stayed the same."
+     ],
+     "math": [
+      "The line graph shows books borrowed from the library. Read the scale carefully. How many more books were borrowed in week 2 than in week 1?",
+      "The point is 5 lines up; each line is 20, so it shows 100",
+      "The point is 3 lines up; each line is 20, so it shows 60",
+      "How much more: 100 − 60 = 40"
+     ],
+     "widget": {
+      "type": "linegraph",
+      "title": "Books borrowed from the library",
+      "labels": [
+       "Wk 1",
+       "Wk 2",
+       "Wk 3",
+       "Wk 4",
+       "Wk 5",
+       "Wk 6"
+      ],
+      "values": [
+       60,
+       100,
+       140,
+       20,
+       40,
+       100
+      ],
+      "scale": 20
+     },
+     "tip": "The lines were counted as 1 each. On this graph each line on the scale stands for 20.",
+     "role": "concept",
+     "instance": "gen:adline:2,1,23"
+    }
+   ],
+   "diagnostics": [
+    "gen:adline:3,1,19",
+    "gen:adline:1,2,25",
+    "gen:adline:2,0,0"
+   ],
+   "strategies": [
+    {
+     "id": "worked_steps",
+     "title": "Step by step",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "The method",
+       "text": [
+        "Find the time along the bottom and go straight up to the point. Go across to the scale and read the value, counting in steps of the scale. To compare two times, read both points and subtract. Where the line slopes up, the value rose."
+       ],
+       "math": [
+        "The line graph shows books borrowed from the library. Read the scale carefully. In how many weeks were more books borrowed than in the week before?",
+        "The values in order are 15, 40, 15, 30, 5, 45. The line goes up 3 times"
+       ],
+       "widget": {
+        "type": "linegraph",
+        "title": "Books borrowed from the library",
+        "labels": [
+         "Wk 1",
+         "Wk 2",
+         "Wk 3",
+         "Wk 4",
+         "Wk 5",
+         "Wk 6"
+        ],
+        "values": [
+         15,
+         40,
+         15,
+         30,
+         5,
+         45
+        ],
+        "scale": 5
+       },
+       "role": "worked-example",
+       "instance": "gen:adline:2,2,21"
+      }
+     ],
+     "guided": "gen:adline:2,1,22",
+     "check": "gen:adline:2,0,2"
+    },
+    {
+     "id": "make_a_table",
+     "title": "Turn the graph into a table",
+     "kind": "procedural",
+     "needs": [],
+     "screens": [
+      {
+       "title": "Turn the graph into a table",
+       "text": [
+        "Read every point in turn and write its value in a table, under its time.",
+        "Answer the question from the table: read one value, subtract two, or see where the values go up."
+       ],
+       "math": [
+        "The line graph shows temperature at noon. Read the scale carefully. How many degrees warmer was it at noon on Thursday than on Friday?",
+        "The point is 3 lines up; each line is 2, so it shows 6",
+        "The point is 2 lines up; each line is 2, so it shows 4",
+        "How much more: 6 − 4 = 2"
+       ],
+       "widget": {
+        "type": "table",
+        "head": [
+         "",
+         "Mon",
+         "Tue",
+         "Wed",
+         "Thu",
+         "Fri",
+         "Sat"
+        ],
+        "rows": [
+         [
+          "°C",
+          10,
+          12,
+          18,
+          6,
+          4,
+          8
+         ]
+        ]
+       },
+       "role": "strategy",
+       "instance": "gen:adline:0,1,20"
+      }
+     ],
+     "guided": "gen:adline:2,1,21",
+     "check": "gen:adline:2,0,3:mc"
+    },
+    {
+     "id": "spot_the_mistake",
+     "title": "Spot the mistake",
+     "kind": "conceptual",
+     "needs": [],
+     "screens": [
+      {
+       "role": "misconception",
+       "instance": "gen:adline:2,2,20",
+       "title": "A common wrong answer",
+       "text": [
+        "A question: “The line graph shows books borrowed from the library. Read the scale carefully. In how many weeks were more books borrowed than in the week before?” A common wrong answer is 3.",
+        "The times the line goes down were counted. A higher value than the time before is where the line goes up."
+       ],
+       "math": [
+        "Not 3, but 2"
+       ]
+      }
+     ],
+     "guided": "gen:adline:0,1,23",
+     "check": "gen:adline:2,1,27:mc"
+    }
+   ],
+   "practice": [
+    "gen:adline:2,1,20",
+    "gen:adline:0,1,22:mc",
+    "gen:adline:2,1,17"
+   ],
+   "transfer": [
+    "gen:adline:1,2,23:w"
+   ],
+   "retention": [
+    "gen:adline:0,1,21",
+    "gen:adline:2,1,16:mc"
+   ],
+   "probes": [],
+   "pool": {
+    "family": "adline",
+    "version": "1.0.0"
+   },
+   "provenance": {
+    "origin": "synthesised",
+    "policy": "library@2+template@2",
+    "family": "adline",
+    "seed": [
+     2,
+     1,
+     23
+    ],
+    "blueprintVersion": "1.0.0",
+    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+    "aiAssisted": true,
+    "licence": "CC0",
+    "examples": [
+     "gen:adline:2,1,23",
+     "gen:adline:2,2,20",
+     "gen:adline:2,2,21"
+    ]
+   }
   }
  ],
  "authoredPools": {

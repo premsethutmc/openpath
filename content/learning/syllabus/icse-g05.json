@@ -388,10 +388,11 @@
        "why": "No existing competency covers Roman numerals; reading one adds and takes away the values of its place parts."
       }
      ],
-     "source": "Theme 1, learning outcome 7",
      "mapped": [
       "MATH.number.roman-numerals"
-     ]
+     ],
+     "coverage": "full",
+     "source": "Theme 1, learning outcome 7"
     }
    ]
   },
@@ -1720,10 +1721,11 @@
        "why": "symmetry-lines and symmetry-fold are about flat shapes; a mirror cut of a solid extends a line of symmetry of its face."
       }
      ],
-     "source": "Theme 6, learning outcome 8",
      "mapped": [
       "MATH.geometry.symmetry-3d"
-     ]
+     ],
+     "coverage": "full",
+     "source": "Theme 6, learning outcome 8"
     }
    ]
   },
@@ -2177,10 +2179,11 @@
        "why": "bar-charts reads separate bars against a scale; a line graph adds change over time read from the same kind of scale."
       }
      ],
-     "source": "Theme 9, learning outcome 2 (line graphs)",
      "mapped": [
       "MATH.statistics.line-graphs"
-     ]
+     ],
+     "coverage": "full",
+     "source": "Theme 9, learning outcome 2 (line graphs)"
     }
    ]
   },

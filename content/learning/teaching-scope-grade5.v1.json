@@ -6,6 +6,7 @@
   "MATH.algebra.repeating-patterns",
   "MATH.geometry.angle-measure",
   "MATH.geometry.angles-intro",
+  "MATH.geometry.symmetry-3d",
   "MATH.geometry.symmetry-lines",
   "MATH.measurement.area-squares",
   "MATH.measurement.capacity",
@@ -29,7 +30,9 @@
   "MATH.number.multi-digit-add-subtract",
   "MATH.number.multiplication-tables",
   "MATH.number.number-line",
+  "MATH.number.roman-numerals",
   "MATH.statistics.bar-charts",
+  "MATH.statistics.line-graphs",
   "MATH.statistics.tables"
  ],
  "curated": []
