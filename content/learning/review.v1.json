@@ -4539,6 +4539,27 @@
    ]
   },
   {
+   "item": "family:adline",
+   "kind": "family",
+   "competency": "MATH.statistics.line-graphs",
+   "family": "adline",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "87de704c",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-12T14:06:35.107Z",
+     "contentHash": "87de704c",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "family:adm2h",
    "kind": "family",
    "competency": "MATH.measurement.time-unit-conversion",
@@ -6958,6 +6979,27 @@
      "role": "engineer",
      "at": "2026-10-19T20:28:43.280Z",
      "contentHash": "0b188708",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "family:aesym3",
+   "kind": "family",
+   "competency": "MATH.geometry.symmetry-3d",
+   "family": "aesym3",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "f4d14a59",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-12T14:06:35.107Z",
+     "contentHash": "f4d14a59",
      "note": "added"
     }
    ]
@@ -14141,6 +14183,48 @@
      "at": "2026-11-08T05:20:18.115Z",
      "contentHash": "978ce315",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
+   "item": "family:akromr",
+   "kind": "family",
+   "competency": "MATH.number.roman-numerals",
+   "family": "akromr",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "32852f5d",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-12T14:06:35.107Z",
+     "contentHash": "32852f5d",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "family:akromw",
+   "kind": "family",
+   "competency": "MATH.number.roman-numerals",
+   "family": "akromw",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "c45ea5c6",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-12T14:06:35.107Z",
+     "contentHash": "c45ea5c6",
+     "note": "added"
     }
    ]
   },
@@ -39201,6 +39285,25 @@
    ]
   },
   {
+   "item": "module:MATH.geometry.symmetry-3d",
+   "kind": "module",
+   "competency": "MATH.geometry.symmetry-3d",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "07c2a5e6",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-12T14:06:35.107Z",
+     "contentHash": "07c2a5e6",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "module:MATH.geometry.symmetry-fold",
    "kind": "module",
    "competency": "MATH.geometry.symmetry-fold",
@@ -45793,6 +45896,25 @@
    ]
   },
   {
+   "item": "module:MATH.number.roman-numerals",
+   "kind": "module",
+   "competency": "MATH.number.roman-numerals",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "524bf92a",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-12T14:06:35.107Z",
+     "contentHash": "524bf92a",
+     "note": "added"
+    }
+   ]
+  },
+  {
    "item": "module:MATH.number.root-length-construction",
    "kind": "module",
    "competency": "MATH.number.root-length-construction",
@@ -49321,6 +49443,25 @@
      "at": "2026-11-09T04:03:59.035Z",
      "contentHash": "d6343049",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    }
+   ]
+  },
+  {
+   "item": "module:MATH.statistics.line-graphs",
+   "kind": "module",
+   "competency": "MATH.statistics.line-graphs",
+   "origin": "synthesised",
+   "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
+   "contentHash": "f7e032e8",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-12T14:06:35.107Z",
+     "contentHash": "f7e032e8",
+     "note": "added"
     }
    ]
   },

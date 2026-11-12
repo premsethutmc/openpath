@@ -10,11 +10,11 @@ One status per competency of the 200-competency graph (which is itself only a st
 
 | Status | Competencies |
 |---|---|
-| Complete and educator-approved | 0/340 (0%) |
-| Complete, awaiting review | 329/340 (97%) |
-| Partially supported | 9/340 (3%) |
-| Unsupported question type | 1/340 (0%) |
-| No content | 1/340 (0%) |
+| Complete and educator-approved | 0/343 (0%) |
+| Complete, awaiting review | 332/343 (97%) |
+| Partially supported | 9/343 (3%) |
+| Unsupported question type | 1/343 (0%) |
+| No content | 1/343 (0%) |
 
 By grade:
 
@@ -23,10 +23,10 @@ By grade:
 | 1 | 0 | 18 | 0 | 0 | 1 |
 | 2 | 0 | 24 | 0 | 0 | 0 |
 | 3 | 0 | 27 | 0 | 0 | 0 |
-| 4 | 0 | 33 | 0 | 0 | 0 |
-| 5 | 0 | 42 | 0 | 0 | 0 |
-| 6 | 0 | 35 | 2 | 0 | 0 |
-| 7 | 0 | 46 | 1 | 0 | 0 |
+| 4 | 0 | 34 | 0 | 0 | 0 |
+| 5 | 0 | 45 | 0 | 0 | 0 |
+| 6 | 0 | 37 | 2 | 0 | 0 |
+| 7 | 0 | 47 | 1 | 0 | 0 |
 | 8 | 0 | 43 | 1 | 0 | 0 |
 | 9 | 0 | 27 | 3 | 0 | 0 |
 | 10 | 0 | 38 | 2 | 0 | 0 |
@@ -113,6 +113,7 @@ Every competency that has some content:
 | Divide multi-digit numbers (`MATH.number.long-division`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ldiv draft, avdiv draft, avmdiv draft). |
 | Multiply multi-digit numbers (`MATH.number.multi-multiplication`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families mmul draft, avstrat draft, avpp draft, avlat draft, mul draft). |
 | Multiply and divide by 10, 100 and 1000 (`MATH.number.multiply-divide-powers-of-ten`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aep10 draft, aemult draft, aediv0 draft, ajsize draft). |
+| Read and write Roman numerals (`MATH.number.roman-numerals`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module missing; families akromr missing, akromw missing). |
 | Round numbers to the nearest ten, hundred or thousand (`MATH.number.rounding`) | 4–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeround draft, aeest draft, aernd draft, aeestp draft, aechk draft, aerdec draft, avpest draft). |
 | Explain a multi-step solution (`MATH.reasoning.multi-step`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeshop draft, aedrip draft, aetab draft, aetrip draft, aebig draft, aematch draft). |
 | Reason systematically to solve puzzles and strategy games (`MATH.reasoning.puzzle-strategy`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afmissd draft, afnim draft, afriver draft). |
@@ -128,6 +129,7 @@ Every competency that has some content:
 | Match solids to nets (`MATH.geometry.nets`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afsolid draft, afpaint draft, afcube draft, afnet draft, afview draft). |
 | Classify quadrilaterals by side, angle and diagonal properties (`MATH.geometry.quadrilateral-classification`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afquad draft, afpara draft, afkind draft, afpside draft). |
 | Identify rotational symmetry and its order (and translational symmetry in patterns) (`MATH.geometry.rotational-symmetry`) | 5–8 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afrot draft). |
+| Find mirror symmetry in familiar 3-D shapes (`MATH.geometry.symmetry-3d`) | 5–6 | Complete, awaiting review | Complete; awaiting educator review (module missing; families aesym3 missing). |
 | Classify triangles (`MATH.geometry.triangle-types`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aftri draft, aftris draft). |
 | Compare shapes with equal area or equal perimeter (`MATH.measurement.area-perimeter-relation`) | 5–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afapr draft). |
 | Calculate rectangle area (`MATH.measurement.rectangle-area`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families rect submitted). |
@@ -144,6 +146,7 @@ Every competency that has some content:
 | Distinguish prime and composite numbers (`MATH.number.primes`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agprime draft, agptest draft). |
 | Test a generalisation with examples (`MATH.reasoning.counterexamples-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agcex draft). |
 | Find and interpret a mean (`MATH.statistics.averages-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families mean4 submitted, avmiss draft). |
+| Read line graphs of data (`MATH.statistics.line-graphs`) | 5–7 | Complete, awaiting review | Complete; awaiting educator review (module missing; families adline missing). |
 | Convert between numerical/algebraic expressions and tree diagrams (`MATH.algebra.expression-trees`) | 6–7 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agtree draft). |
 | Solve one-step equations (`MATH.algebra.linear-intro`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahone draft). |
 | Evaluate variable expressions (`MATH.algebra.variables`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families linev draft, auvexp draft). |
@@ -1472,23 +1475,27 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aetfig: A figure and its image: the transformation, and the symmetry it makes | `MATH.geometry.transformations` | 160 | 0 | 40/60/60 | `d94e0ef0` |
 | aipolyc: Faces, vertices and edges of prisms and pyramids | `MATH.geometry.polyhedra-euler` | 96 | 0 | 8/8/80 | `d84312a2` |
 | akhtab: Grouping data into class intervals | `MATH.statistics.histograms` | 322 | 0 | 0/193/129 | `46cb79b4` |
+| akromr: Reading a Roman numeral | `MATH.number.roman-numerals` | 400 | 0 | 10/133/257 | `32852f5d` |
+| akromw: Writing a number in Roman numerals | `MATH.number.roman-numerals` | 400 | 0 | 39/100/261 | `c45ea5c6` |
+| aesym3: Mirror cuts of a box (planes of symmetry) | `MATH.geometry.symmetry-3d` | 400 | 0 | 270/124/6 | `f4d14a59` |
+| adline: Reading a line graph | `MATH.statistics.line-graphs` | 360 | 0 | 60/180/120 | `87de704c` |
 
 ## Whole competency graph
 
-- Competencies (not counting micro-skills): **340**
-- With a complete learning module (validate@1): **338/340 (99%)**; with an incomplete module: 0; with none: 2
-- Modules: 338 (hand-written 24, synthesised from blueprints 314)
-- Problem families (generated questions with independent checks): 1090
-- Review registry (repository copy): draft 1411, submitted 17, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Competencies (not counting micro-skills): **343**
+- With a complete learning module (validate@1): **341/343 (99%)**; with an incomplete module: 0; with none: 2
+- Modules: 341 (hand-written 24, synthesised from blueprints 317)
+- Problem families (generated questions with independent checks): 1094
+- Review registry (repository copy): draft 1412, submitted 16, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|
-| Diagnostic questions | 338/340 (99%) |
-| Teaching strategies | 338/340 (99%) |
-| Practice (≥ 2) | 338/340 (99%) |
-| Independent assessment | 335/340 (99%) |
-| Retention check | 338/340 (99%) |
-| Educator-approved | 0/340 (0%) |
+| Diagnostic questions | 341/343 (99%) |
+| Teaching strategies | 341/343 (99%) |
+| Practice (≥ 2) | 341/343 (99%) |
+| Independent assessment | 338/343 (99%) |
+| Retention check | 341/343 (99%) |
+| Educator-approved | 0/343 (0%) |
 
 By grade (a competency spanning grades counts in each):
 
@@ -1497,10 +1504,10 @@ By grade (a competency spanning grades counts in each):
 | 1 | 19 | 18 | 0 |
 | 2 | 24 | 24 | 0 |
 | 3 | 27 | 27 | 0 |
-| 4 | 33 | 33 | 0 |
-| 5 | 42 | 42 | 0 |
-| 6 | 37 | 37 | 0 |
-| 7 | 47 | 47 | 0 |
+| 4 | 34 | 34 | 0 |
+| 5 | 45 | 45 | 0 |
+| 6 | 39 | 39 | 0 |
+| 7 | 48 | 48 | 0 |
 | 8 | 44 | 44 | 0 |
 | 9 | 30 | 30 | 0 |
 | 10 | 40 | 40 | 0 |

@@ -20,7 +20,7 @@ export const ADAPTER_LABELS = new Set([
 export function checkProvenance(f: SliceFlow): string[] {
   const bad: string[] = [];
   const engine = new Set<string>();
-  const strategies = new Map<string, { title: string; texts: Set<string> }>();
+  const strategies = new Map<string, { titles: Set<string>; texts: Set<string> }>();
   for (const t of f.session.trace) {
     const o = t.output as { reason?: string; strategy?: string | null };
     if (typeof o?.reason === "string" && (t.component === "intervention.moduleState" || t.component === "intervention.recovery")) engine.add(o.reason);
@@ -32,7 +32,8 @@ export function checkProvenance(f: SliceFlow): string[] {
         // problem's own): a step is owned when it is in any engine-selected strategy of that id (grade7-split@1)
         const texts = new Set(st.screens.flatMap((s) => [...s.text.map((x, j) => (j === 0 ? `${s.title} — ${x}` : x)), ...(s.math ?? [])]));
         const prev = strategies.get(st.id);
-        strategies.set(st.id, { title: st.title, texts: prev ? new Set([...prev.texts, ...texts]) : texts });
+        // the title likewise: each module's own title for that id is owned
+        strategies.set(st.id, { titles: new Set([...(prev?.titles ?? []), st.title]), texts: prev ? new Set([...prev.texts, ...texts]) : texts });
       }
     }
   }
@@ -45,7 +46,7 @@ export function checkProvenance(f: SliceFlow): string[] {
     const g = sp.teacherGuide;
     const strat = fr.strategyId ? strategies.get(fr.strategyId) : undefined;
     if (g) {
-      if (!(ADAPTER_LABELS.has(g.message) || engine.has(g.message) || (strat && g.message === strat.title))) bad.push(`${where}: guide "${g.message.slice(0, 60)}" has no owner`);
+      if (!(ADAPTER_LABELS.has(g.message) || engine.has(g.message) || (strat && strat.titles.has(g.message)))) bad.push(`${where}: guide "${g.message.slice(0, 60)}" has no owner`);
       // retention-display@1: the summary may state the engine's own opening instant (delayed check or re-entry), formatted by due-display
       const scheduleOwned = fr.stage === "summary" && /^(Your delayed check opens|You can try this again on your own from|This opens again once a teacher)/.test(g.detail ?? "");
       if (g.detail !== undefined && !(ADAPTER_LABELS.has(g.detail) || engine.has(g.detail) || scheduleOwned)) bad.push(`${where}: guide detail "${g.detail.slice(0, 60)}" has no owner`);

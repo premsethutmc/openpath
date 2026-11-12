@@ -87375,6 +87375,298 @@
     "excluded": 0,
     "ok": true
    }
+  },
+  {
+   "id": "akromr",
+   "version": "1.0.0",
+   "title": "Reading a Roman numeral",
+   "competency": "MATH.number.roman-numerals",
+   "skill": "MATH.number.roman-numerals",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     1,
+     1000
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 10,
+    "2": 133,
+    "3": 257
+   },
+   "examples": [
+    "gen:akromr:23",
+    "gen:akromr:26:mc",
+    "gen:akromr:201",
+    "gen:akromr:295:mc",
+    "gen:akromr:595",
+    "gen:akromr:798:mc"
+   ],
+   "explanations": [
+    "add-every-letter (conceptual): Every letter was added. A smaller letter written just before a larger one is taken away from it: IV is 5 − 1 = 4, not 6.",
+    "take-away-after (conceptual): A smaller letter written after a larger one was taken away. Only a smaller letter written before a larger one is taken away; after it, it is added: VI is 5 + 1 = 6.",
+    "l-and-c-swapped (recall): L and C were mixed up. L stands for 50 and C stands for 100."
+   ],
+   "teach": {
+    "idea": "Roman numerals use letters for numbers. Each letter always stands for the same number, and the letters are put together to make other numbers.",
+    "method": "Read the numeral from the left, one place part at a time. Letters written from larger to smaller are added. A smaller letter written just before a larger one is taken away from it. Then add the parts.",
+    "alternatives": [
+     {
+      "id": "letter_by_letter",
+      "title": "Go letter by letter",
+      "kind": "procedural",
+      "text": [
+       "Write the value of each letter under it.",
+       "Where a smaller value stands just before a larger one, take it away; add all the others."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "32852f5d",
+   "validation": {
+    "family": "akromr",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 4,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "akromw",
+   "version": "1.0.0",
+   "title": "Writing a number in Roman numerals",
+   "competency": "MATH.number.roman-numerals",
+   "skill": "MATH.number.roman-numerals",
+   "type": "choice",
+   "multipleChoice": false,
+   "domain": [
+    [
+     1,
+     1000
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 39,
+    "2": 100,
+    "3": 261
+   },
+   "examples": [
+    "gen:akromw:14",
+    "gen:akromw:27",
+    "gen:akromw:183",
+    "gen:akromw:276",
+    "gen:akromw:593",
+    "gen:akromw:793"
+   ],
+   "explanations": [
+    "four-in-a-row (conceptual): A letter was repeated four times. A letter is written at most three times in a row; for 4 and 9 (and 40, 90, 400, 900) a smaller letter is written before the next larger one.",
+    "wrong-pair (procedural): The letters of a pair are in the wrong order, or the pair is not allowed. Only I before V or X, X before L or C, and C before D or M take away; a smaller letter after a larger one is added."
+   ],
+   "teach": {
+    "idea": "A number is written in Roman numerals one place at a time: first the hundreds, then the tens, then the ones, each with its own letters.",
+    "method": "Split the number into hundreds, tens and ones. Write each part with its letters, using a take-away pair where a letter would be needed four times. Put the parts side by side, largest first.",
+    "alternatives": [
+     {
+      "id": "build_up",
+      "title": "Build it from the largest letter",
+      "kind": "procedural",
+      "text": [
+       "Take the largest letter that fits and write it down. Take its value away from the number.",
+       "Carry on with what is left until nothing remains, using a take-away pair where a letter would be needed four times."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "c45ea5c6",
+   "validation": {
+    "family": "akromw",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 4,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "aesym3",
+   "version": "1.0.0",
+   "title": "Mirror cuts of a box (planes of symmetry)",
+   "competency": "MATH.geometry.symmetry-3d",
+   "skill": "MATH.geometry.symmetry-3d",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     1,
+     9
+    ],
+    [
+     1,
+     9
+    ],
+    [
+     1,
+     9
+    ]
+   ],
+   "poolSize": 400,
+   "excluded": [],
+   "difficulty": {
+    "1": 270,
+    "2": 124,
+    "3": 6
+   },
+   "examples": [
+    "gen:aesym3:3,9,8",
+    "gen:aesym3:7,2,5:mc",
+    "gen:aesym3:3,9,9",
+    "gen:aesym3:6,6,7:mc",
+    "gen:aesym3:4,4,4",
+    "gen:aesym3:6,6,6:mc"
+   ],
+   "explanations": [
+    "middle-cuts-only (conceptual): Only the cuts through the middle, parallel to the faces, were counted. A square face can also be cut from corner to corner.",
+    "counted-faces (conceptual): The faces were counted. A mirror cut goes through the middle of the block; it is not a face.",
+    "diagonal-everywhere (conceptual): Corner-to-corner cuts were counted for every pair of faces. A corner-to-corner cut gives mirror halves only on a square face.",
+    "one-diagonal-per-square (procedural): Only one corner-to-corner cut was counted for each pair of square faces. A square has two diagonals, so there are two such cuts."
+   ],
+   "teach": {
+    "idea": "A solid has mirror symmetry when a flat cut divides it into two halves that are mirror images. A box has such a cut through the middle of each pair of opposite faces; a square face allows corner-to-corner cuts as well.",
+    "method": "Count the cuts through the middle, parallel to each pair of opposite faces. Then look for square faces: each pair of square faces adds a cut along each diagonal. Add the two counts.",
+    "alternatives": [
+     {
+      "id": "fold_the_face",
+      "title": "Look at one face at a time",
+      "kind": "conceptual",
+      "text": [
+       "Look straight at one face of the block. Every line of symmetry of that face that goes right through the block gives a mirror cut.",
+       "A rectangle has two lines of symmetry; a square has four. Do this for each pair of faces, counting each cut once."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "f4d14a59",
+   "validation": {
+    "family": "aesym3",
+    "deterministic": {
+     "checked": 400,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "adline",
+   "version": "1.0.0",
+   "title": "Reading a line graph",
+   "competency": "MATH.statistics.line-graphs",
+   "skill": "MATH.statistics.line-graphs",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     29
+    ]
+   ],
+   "poolSize": 360,
+   "excluded": [],
+   "difficulty": {
+    "1": 60,
+    "2": 180,
+    "3": 120
+   },
+   "examples": [
+    "gen:adline:1,0,10",
+    "gen:adline:2,0,20:mc",
+    "gen:adline:1,1,0",
+    "gen:adline:2,1,15:mc",
+    "gen:adline:1,2,10",
+    "gen:adline:2,2,20:mc"
+   ],
+   "explanations": [
+    "count-lines (conceptual): The lines were counted as 1 each. On this graph each line on the scale stands for 100.",
+    "next-point (procedural): The point beside it was read. Go straight up from the name at the bottom to the point, then across to the scale.",
+    "add-for-more (conceptual): \"How much more\" asks for the difference between the two points, not their total.",
+    "one-point-only (procedural): Only one of the two points was read. Read both, then find the difference.",
+    "counted-falls (conceptual): The times the line goes down were counted. A higher value than the time before is where the line goes up.",
+    "counted-every-change (procedural): Every change was counted, the rises and the falls. Count only the parts where the line goes up.",
+    "counted-points (procedural): The points were counted. Look at the line between one point and the next: does it go up?"
+   ],
+   "teach": {
+    "idea": "A line graph shows how something changes over time. Each point shows the value at one time; the line joining the points shows whether it went up, went down or stayed the same.",
+    "method": "Find the time along the bottom and go straight up to the point. Go across to the scale and read the value, counting in steps of the scale. To compare two times, read both points and subtract. Where the line slopes up, the value rose.",
+    "alternatives": [
+     {
+      "id": "make_a_table",
+      "title": "Turn the graph into a table",
+      "kind": "procedural",
+      "text": [
+       "Read every point in turn and write its value in a table, under its time.",
+       "Answer the question from the table: read one value, subtract two, or see where the values go up."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "87de704c",
+   "validation": {
+    "family": "adline",
+    "deterministic": {
+     "checked": 360,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
   }
  ]
 }

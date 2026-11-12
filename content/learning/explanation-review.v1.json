@@ -20390,6 +20390,110 @@
    ]
   },
   {
+   "id": "MATH.geometry.symmetry-3d#chapter",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.symmetry-3d",
+   "strategy": "chapter",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:f601e563aa091d3a99c2a024f0bec34cd6fc33b024650a944d970a52177aedf2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.886Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.symmetry-3d#fold_the_face",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.symmetry-3d",
+   "strategy": "fold_the_face",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:d3aabf30aa1ec5c9b64e3b4c8bac6fa074d0a219b9c64a3c8e974695d55504ea",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.886Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.symmetry-3d#spot_the_mistake",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.symmetry-3d",
+   "strategy": "spot_the_mistake",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "counted-faces",
+   "revisions": [
+    {
+     "contentHash": "sha256:1b85e87f1cffd18c972d7741bf3446d3a25039ceb5653c95499af0f2b86aa71d",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.886Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.geometry.symmetry-3d#worked_steps",
+   "subject": "mathematics",
+   "competency": "MATH.geometry.symmetry-3d",
+   "strategy": "worked_steps",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:1ba8ee9bd43b5e200b0f5b8ceba4b5654a2ad413325ddb3bd043c6776eab1b80",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.886Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.geometry.symmetry-fold#chapter",
    "subject": "mathematics",
    "competency": "MATH.geometry.symmetry-fold",
@@ -37087,6 +37191,110 @@
    ]
   },
   {
+   "id": "MATH.number.roman-numerals#chapter",
+   "subject": "mathematics",
+   "competency": "MATH.number.roman-numerals",
+   "strategy": "chapter",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:c57f6bd97894b55d2491a73c512dc1a617de46fbcb4cdc7246655b617386f015",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.885Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.roman-numerals#letter_by_letter",
+   "subject": "mathematics",
+   "competency": "MATH.number.roman-numerals",
+   "strategy": "letter_by_letter",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:0e37ca73ec7974dd841aa04db03338a5f5e2efc37b5149a9b0c1929afa145f07",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.885Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.roman-numerals#spot_the_mistake",
+   "subject": "mathematics",
+   "competency": "MATH.number.roman-numerals",
+   "strategy": "spot_the_mistake",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "take-away-after",
+   "revisions": [
+    {
+     "contentHash": "sha256:db3cc46ee0464bd7bc56a3a3a4f87b7a0d5cf10f180db0d0ed63651ecc6b8b85",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.885Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.number.roman-numerals#worked_steps",
+   "subject": "mathematics",
+   "competency": "MATH.number.roman-numerals",
+   "strategy": "worked_steps",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:7cd99af3e6014b3c715556f294ff24f8581e13a7086862205c2f6df6f0b3ab42",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.884Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
    "id": "MATH.number.root-length-construction#chapter",
    "subject": "mathematics",
    "competency": "MATH.number.root-length-construction",
@@ -46122,6 +46330,110 @@
       "source": "registry",
       "by": "explanation-review sync",
       "at": "2026-10-31T05:23:17.621Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.line-graphs#chapter",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.line-graphs",
+   "strategy": "chapter",
+   "intervention": "conceptual",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:d9272a7796c339cbc8a938a30df5b4a0248d3f403b32b0c1b2d70c8b06ca8bb2",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.888Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.line-graphs#make_a_table",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.line-graphs",
+   "strategy": "make_a_table",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:a0c8f013708f9b0e45094de84966f1ae08e359ea89e3439a2235ab307e47a21d",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.887Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.line-graphs#spot_the_mistake",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.line-graphs",
+   "strategy": "spot_the_mistake",
+   "intervention": "conceptual",
+   "misconceptionSpecific": true,
+   "addresses": "counted-falls",
+   "revisions": [
+    {
+     "contentHash": "sha256:32f419770e3bc2be82c0a22ad4e60bb5776b48cdbbe26d2e10cfc64b21d64281",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.888Z",
+      "note": "registered: not yet screened or reviewed"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "MATH.statistics.line-graphs#worked_steps",
+   "subject": "mathematics",
+   "competency": "MATH.statistics.line-graphs",
+   "strategy": "worked_steps",
+   "intervention": "procedural",
+   "misconceptionSpecific": false,
+   "addresses": null,
+   "revisions": [
+    {
+     "contentHash": "sha256:9f26c9387685c1880dc2061e39de0acaa6816f830e1bea3258d8a44ebd85b235",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-12T14:16:00.887Z",
       "note": "registered: not yet screened or reviewed"
      },
      "reviewerRole": "none",

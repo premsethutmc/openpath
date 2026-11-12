@@ -24,32 +24,32 @@
   "not-implemented": "Not yet implemented"
  },
  "summary": {
-  "requirements": 1271,
+  "requirements": 1274,
   "classes": {
    "validated": 0,
    "awaiting": 1105,
-   "partial": 166,
+   "partial": 169,
    "unsupported": 0,
    "not-implemented": 0
   },
-  "competenciesRequired": 338,
-  "competenciesComplete": 331,
+  "competenciesRequired": 341,
+  "competenciesComplete": 334,
   "competenciesApproved": 0,
   "graph": {
-   "competencies": 340,
+   "competencies": 343,
    "inventory": 200,
-   "expansion": 140,
-   "relations": 370,
+   "expansion": 143,
+   "relations": 376,
    "disputed": 8
   },
   "families": {
-   "count": 1090,
-   "problems": 344263,
+   "count": 1094,
+   "problems": 345823,
    "answerTypes": {
-    "integer": 418,
+    "integer": 421,
     "fraction": 152,
     "set": 27,
-    "choice": 170,
+    "choice": 171,
     "exact": 128,
     "interval": 16,
     "expression": 31,
@@ -60,11 +60,11 @@
     "matrix": 12,
     "roots": 5
    },
-   "withPictures": 306,
-   "withEverydayForm": 767,
-   "withAlternatives": 1052
+   "withPictures": 308,
+   "withEverydayForm": 771,
+   "withAlternatives": 1056
   },
-  "modules": 338,
+  "modules": 341,
   "writtenTasks": 376,
   "writtenByKind": {
    "proof": 83,
@@ -80,8 +80,8 @@
    "ambiguous": 0
   },
   "poolSufficiency": {
-   "modulesWithPools": 329,
-   "sufficient": 329,
+   "modulesWithPools": 332,
+   "sufficient": 332,
    "insufficient": 0
   },
   "educatorPart": {
@@ -232,11 +232,11 @@
    "grade": 5,
    "title": "CISCE Curriculum: Mathematics, Class V — Grade 5 Mathematics (CISCE / ICSE)",
    "chapters": 10,
-   "requirements": 74,
+   "requirements": 77,
    "classes": {
     "validated": 0,
     "awaiting": 0,
-    "partial": 74,
+    "partial": 77,
     "unsupported": 0,
     "not-implemented": 0
    }
@@ -4980,6 +4980,37 @@
    "complete": true
   },
   {
+   "id": "MATH.geometry.symmetry-3d",
+   "name": "Find mirror symmetry in familiar 3-D shapes",
+   "grades": [
+    5,
+    6
+   ],
+   "mode": "automatic",
+   "met": {
+    "graph": true,
+    "relations": true,
+    "diagnostic": true,
+    "misconception": true,
+    "strategy": true,
+    "worked": true,
+    "guided": true,
+    "independent": true,
+    "retention": true,
+    "variants": true,
+    "validation": true,
+    "review": false
+   },
+   "missing": [
+    "review"
+   ],
+   "families": [
+    "aesym3"
+   ],
+   "writtenTasks": 0,
+   "complete": true
+  },
+  {
    "id": "MATH.geometry.symmetry-fold",
    "name": "Recognise folding symmetry",
    "grades": [
@@ -8714,6 +8745,38 @@
    "complete": true
   },
   {
+   "id": "MATH.number.roman-numerals",
+   "name": "Read and write Roman numerals",
+   "grades": [
+    4,
+    5
+   ],
+   "mode": "automatic",
+   "met": {
+    "graph": true,
+    "relations": true,
+    "diagnostic": true,
+    "misconception": true,
+    "strategy": true,
+    "worked": true,
+    "guided": true,
+    "independent": true,
+    "retention": true,
+    "variants": true,
+    "validation": true,
+    "review": false
+   },
+   "missing": [
+    "review"
+   ],
+   "families": [
+    "akromr",
+    "akromw"
+   ],
+   "writtenTasks": 0,
+   "complete": true
+  },
+  {
    "id": "MATH.number.root-length-construction",
    "name": "Construct irrational lengths such as sqrt n on the number line",
    "grades": [
@@ -10937,6 +11000,37 @@
     "akhtab"
    ],
    "writtenTasks": 1,
+   "complete": true
+  },
+  {
+   "id": "MATH.statistics.line-graphs",
+   "name": "Read line graphs of data",
+   "grades": [
+    5,
+    7
+   ],
+   "mode": "automatic",
+   "met": {
+    "graph": true,
+    "relations": true,
+    "diagnostic": true,
+    "misconception": true,
+    "strategy": true,
+    "worked": true,
+    "guided": true,
+    "independent": true,
+    "retention": true,
+    "variants": true,
+    "validation": true,
+    "review": false
+   },
+   "missing": [
+    "review"
+   ],
+   "families": [
+    "adline"
+   ],
+   "writtenTasks": 0,
    "complete": true
   },
   {
@@ -16658,7 +16752,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16674,7 +16768,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16690,7 +16784,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16705,7 +16799,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16721,7 +16815,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16737,7 +16831,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16752,7 +16846,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16768,7 +16862,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16783,7 +16877,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16798,7 +16892,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16814,7 +16908,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16830,7 +16924,22 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "board": "CISCE (ICSE)",
+   "grade": 5,
+   "domain": "Numbers and operations",
+   "chapter": "Theme 1: Numbers",
+   "section": null,
+   "outcome": "icse-g05-c01-o12",
+   "text": "Write numbers in Roman numerals.",
+   "competencies": [
+    "MATH.number.roman-numerals"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16846,7 +16955,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16862,7 +16971,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16878,7 +16987,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16894,7 +17003,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16910,7 +17019,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16926,7 +17035,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16942,7 +17051,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16958,7 +17067,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16973,7 +17082,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -16988,7 +17097,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17003,7 +17112,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17019,7 +17128,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17034,7 +17143,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17049,7 +17158,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17065,7 +17174,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17081,7 +17190,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17096,7 +17205,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17111,7 +17220,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17126,7 +17235,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17141,7 +17250,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17156,7 +17265,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17171,7 +17280,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17186,7 +17295,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17201,7 +17310,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17216,7 +17325,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17232,7 +17341,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17247,7 +17356,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17262,7 +17371,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17277,7 +17386,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17293,7 +17402,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17308,7 +17417,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17323,7 +17432,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17339,7 +17448,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17354,7 +17463,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17369,7 +17478,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17384,7 +17493,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17399,7 +17508,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17414,7 +17523,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17429,7 +17538,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17444,7 +17553,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17459,7 +17568,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17474,7 +17583,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17489,7 +17598,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17505,7 +17614,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17520,7 +17629,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Numbers and operations",
@@ -17536,7 +17645,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -17552,7 +17661,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -17568,7 +17677,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -17584,7 +17693,7 @@
    "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Algebra",
@@ -17599,7 +17708,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -17614,7 +17723,7 @@
    "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -17629,7 +17738,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -17644,7 +17753,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -17659,7 +17768,7 @@
    "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -17675,7 +17784,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Geometry",
@@ -17690,7 +17799,22 @@
    "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "board": "CISCE (ICSE)",
+   "grade": 5,
+   "domain": "Geometry",
+   "chapter": "Theme 6: Geometry",
+   "section": null,
+   "outcome": "icse-g05-c06-o07",
+   "text": "Explore symmetry in familiar 3-D shapes.",
+   "competencies": [
+    "MATH.geometry.symmetry-3d"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -17708,7 +17832,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -17724,7 +17848,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -17741,7 +17865,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -17757,7 +17881,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Measurement",
@@ -17773,7 +17897,7 @@
    "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Data handling and statistics",
@@ -17790,7 +17914,7 @@
    "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
   },
   {
-   "release": "icse-cisce-mathematics-grade-5@1.2.0",
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
    "board": "CISCE (ICSE)",
    "grade": 5,
    "domain": "Data handling and statistics",
@@ -17803,6 +17927,21 @@
    ],
    "class": "partial",
    "why": "Read and draw pie charts: missing relations; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-5@1.3.0",
+   "board": "CISCE (ICSE)",
+   "grade": 5,
+   "domain": "Data handling and statistics",
+   "chapter": "Theme 9: Data Handling",
+   "section": null,
+   "outcome": "icse-g05-c09-o03",
+   "text": "Read a line graph of the kind printed in newspapers and magazines.",
+   "competencies": [
+    "MATH.statistics.line-graphs"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
    "release": "tn-samacheer-mathematics-grade-5@1.0.0",
