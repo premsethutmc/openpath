@@ -34858,13 +34858,13 @@
       "title": "Think of a thermometer",
       "kind": "conceptual",
       "text": [
-       "−8 °C is colder than −3 °C: it is further below zero.",
+       "On a thermometer, a temperature further below zero is colder, so it is the smaller number.",
        "So start with the coldest (most negative) temperature and go up to the warmest."
       ]
      }
     ]
    },
-   "fingerprint": "604172f5",
+   "fingerprint": "1c3da191",
    "validation": {
     "family": "ajord",
     "deterministic": {

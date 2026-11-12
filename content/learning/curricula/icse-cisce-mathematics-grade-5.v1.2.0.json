@@ -1,0 +1,1545 @@
+{
+ "id": "icse-cisce-mathematics-grade-5",
+ "version": "1.2.0",
+ "status": "reviewed",
+ "grade": 5,
+ "title": "CISCE Curriculum: Mathematics, Class V — Grade 5 Mathematics (CISCE / ICSE)",
+ "hash": "159080dc",
+ "source": {
+  "kind": "textbook",
+  "title": "CISCE Curriculum: Mathematics, Class V",
+  "edition": "Curriculum for Classes I-VIII (Class V mathematics, pages 101-115); edition and year not shown on the copy read",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "board": "CISCE (ICSE)",
+  "academicYear": "2026-27",
+  "licence": "Chapter and section titles as printed (facts); outcomes written by OpenPath in its own words; no textbook text is reproduced.",
+  "synthetic": false,
+  "extractor": "inventory@1"
+ },
+ "review": {
+  "by": "OpenPath curriculum inventory (research from official and secondary sources; not an educator review)",
+  "at": "2026-10-19T00:00:00.000Z",
+  "note": "Built from content/learning/syllabus/icse-g05.json. 10 of 10 chapter titles could not be checked against an official source (marked sourceVerified: false). Each outcome was mapped to competencies by the inventory; outcomes were placed in sections by shared title words. Sources: https://cdn1.byjus.com/wp-content/uploads/2019/03/ICSEClass-5-Maths-Syllabus.pdf https://cisce.org/ https://byjus.com/icse-class-5-maths-syllabus/. Notes: UNOFFICIAL SOURCE: the official CISCE document could not be opened (cisce.org was unreachable from the build environment). The themes and outcomes come from a third-party copy of the Class V mathematics pages, read through a text summary, so every theme is verified:false. CISCE is understood not to prescribe a textbook for Class V (not checked against an official statement): each school chooses its own books and may order or extend the topics differently. Check this inventory against the school's actual textbook and term plan. The document lists 78 learning-outcome lines in ten themes. They are written here as 75 outcomes in OpenPath's own words (lines that repeat a skill are merged, and the line on pie charts and line graphs is split in two), plus 2 items that appear only under key concepts (tables to 20; dividing fractions): 77 in all. 70 are mapped (56 fully, 14 partly: see each outcome's coverage and note). 7 are not in the release and are listed under gaps: 3 have no OpenPath skill, and 4 (number line, and the meaning, comparing and ordering of integers) have questions but a lesson that fails OpenPath's teaching checks.",
+  "educatorReviewed": false
+ },
+ "subjects": [
+  {
+   "id": "mathematics",
+   "name": "Mathematics",
+   "chapters": [
+    {
+     "id": "icse-g05-c01",
+     "number": 1,
+     "title": "Theme 1: Numbers",
+     "outcomes": [
+      {
+       "id": "icse-g05-c01-o01",
+       "text": "Read and write numbers up to crores with Indian place value and commas.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.indian-international-numeration",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.large-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c01-o02",
+       "text": "Read and write large numbers in the international system (millions) and relate it to lakhs and crores.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.indian-international-numeration",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c01-o03",
+       "text": "Write a large number in expanded form and turn an expanded form back into the number.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.large-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c01-o04",
+       "text": "Compare large numbers by place value and put them in ascending or descending order.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.large-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c01-o05",
+       "text": "Make the greatest and the smallest number from a set of digits.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.compare-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c01-o06",
+       "text": "Round a number to the nearest 10, 100 or 1000.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.rounding",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c01-o07",
+       "text": "Show what a fraction means as equal parts of a whole.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-models",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c01-o08",
+       "text": "Find a fraction of a collection of objects.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-of-collection",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c01-o09",
+       "text": "Recognise and make equivalent fractions.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.equivalent-fractions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+       }
+      },
+      {
+       "id": "icse-g05-c01-o10",
+       "text": "Write simple fractions such as a half, a quarter and a fifth as decimals and back, with lengths and money.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.money-decimals",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.decimal-tenths",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c01-o11",
+       "text": "Build and use the multiplication tables from 2 to 20.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.multiplication-tables",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g05-c02",
+     "number": 2,
+     "title": "Theme 2: Number Operations",
+     "outcomes": [
+      {
+       "id": "icse-g05-c02-o01",
+       "text": "Use place value beyond 1000 when adding, subtracting, multiplying and dividing.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.multi-digit-add-subtract",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.multi-multiplication",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c02-o02",
+       "text": "Divide a number by a two-digit number with the standard written method.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.division-remainders",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.long-division",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c02-o03",
+       "text": "Estimate a sum, difference, product or quotient, and check an answer against the estimate.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.rounding",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.estimate-check",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c02-o04",
+       "text": "Add, subtract and multiply large numbers with the standard written methods.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.multi-digit-add-subtract",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.multi-multiplication",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c02-o05",
+       "text": "Solve everyday problems that need the four operations.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.multi-step",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.reasoning.operation-choice",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; word-problem)."
+       }
+      },
+      {
+       "id": "icse-g05-c02-o06",
+       "text": "Make up a word problem that fits a given number statement.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.operation-choice",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked by an educator; written-explanation)."
+       }
+      },
+      {
+       "id": "icse-g05-c02-o07",
+       "text": "Explain what factors, multiples, prime numbers and composite numbers are.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.factors-multiples",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.primes",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; set, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c02-o08",
+       "text": "Find factors and multiples in different ways, including a factor tree.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.factors-multiples",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.prime-factorisation",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; set, numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c02-o09",
+       "text": "Pick out the prime and the composite numbers up to 100.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.primes",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; set)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g05-c03",
+     "number": 3,
+     "title": "Theme 3: Fractions and Decimals",
+     "outcomes": [
+      {
+       "id": "icse-g05-c03-o01",
+       "text": "Tell proper fractions, improper fractions and mixed numbers apart.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.mixed-fractions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, fraction)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o02",
+       "text": "Write equivalent fractions by multiplying or dividing the top and bottom numbers by the same number.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.equivalent-fractions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o03",
+       "text": "Compare and order three or more fractions.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-comparison",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction, numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o04",
+       "text": "Add and subtract unlike fractions and mixed numbers.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-add",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o05",
+       "text": "Solve word problems that add or subtract fractions.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-add",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; word-problem)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o06",
+       "text": "Read a fraction 'of' a quantity as a multiplication.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-multiply",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.fraction-of-collection",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, fraction)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o07",
+       "text": "Multiply a fraction by a whole number and a fraction by a fraction.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-multiply",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.fraction-product",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o08",
+       "text": "Divide a whole number by a fraction and a fraction by a fraction.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.fraction-product",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o09",
+       "text": "Write fractions with denominator 10, 100 or 1000 as decimals and back.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-tenths",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o10",
+       "text": "Show a decimal in a picture, such as a shaded strip or grid.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-tenths",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o11",
+       "text": "Give the place value of each digit of a decimal to thousandths.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-tenths",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o12",
+       "text": "Write a decimal in expanded form.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-tenths",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o13",
+       "text": "Recognise equivalent decimals, like decimals and unlike decimals.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-tenths",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o14",
+       "text": "Compare decimals and put them in order.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-tenths",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o15",
+       "text": "Add and subtract decimals.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-operations",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o16",
+       "text": "Solve word problems that add or subtract decimals.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-operations",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; word-problem)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o17",
+       "text": "Multiply a decimal by 10, 100 or 1000 by moving the digits.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-product",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.multiply-divide-powers-of-ten",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c03-o18",
+       "text": "Multiply a decimal by a whole number and a decimal by a decimal.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.decimal-product",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g05-c04",
+     "number": 4,
+     "title": "Theme 4: Playing with Numbers (Factors and Multiples)",
+     "outcomes": [
+      {
+       "id": "icse-g05-c04-o01",
+       "text": "List the multiples of a number.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.factors-multiples",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; set)."
+       }
+      },
+      {
+       "id": "icse-g05-c04-o02",
+       "text": "Find all the factors of a number.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.factors-multiples",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; set)."
+       }
+      },
+      {
+       "id": "icse-g05-c04-o03",
+       "text": "Identify prime, composite, twin-prime and co-prime numbers.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.hcf-lcm",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.primes",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; set, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c04-o04",
+       "text": "Test whether a number is divisible by 2, 3, 4, 5, 9, 10 or 11.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.reasoning.divisibility",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c04-o05",
+       "text": "Write a number as a product of its prime factors with a factor tree.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.prime-factorisation",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c04-o06",
+       "text": "Find the HCF of numbers by listing factors and by common division.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.factors-multiples",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.hcf-lcm",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c04-o07",
+       "text": "Find the LCM of numbers by listing multiples and by common division.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.hcf-lcm",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c04-o08",
+       "text": "Use the link HCF × LCM = product of the two numbers to find one from the other.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.hcf-lcm",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g05-c05",
+     "number": 5,
+     "title": "Theme 5: Introduction to Negative Numbers",
+     "outcomes": [
+      {
+       "id": "icse-g05-c05-o01",
+       "text": "Add and subtract integers.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.integer-add",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c05-o02",
+       "text": "Place whole numbers on a number line.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.number-line",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c05-o03",
+       "text": "Understand integers as the counting numbers, zero and the negatives of the counting numbers.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.integers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c05-o04",
+       "text": "Compare two integers using a number line.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.integers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c05-o05",
+       "text": "Put integers in ascending or descending order.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.integers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g05-c08",
+     "number": 8,
+     "title": "Theme 8: Introduction to Percentage",
+     "outcomes": [
+      {
+       "id": "icse-g05-c08-o01",
+       "text": "Understand a percentage as a fraction with denominator 100.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.percent-intro",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction, numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c08-o02",
+       "text": "Relate fractions, decimals and percentages to one another.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.percent-intro",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c08-o03",
+       "text": "Show a percentage in a picture, such as a shaded hundred grid.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.percent-intro",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c08-o04",
+       "text": "Change a fraction into a percentage and a percentage into a fraction.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.percent-intro",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.number.percentage",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; fraction, numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c08-o05",
+       "text": "Change a decimal into a percentage and a percentage into a decimal.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.percent-intro",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c08-o06",
+       "text": "Solve simple word problems about percentages.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.number.percentage",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; word-problem)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-number",
+      "number": 1,
+      "title": "Numbers and operations"
+     }
+    },
+    {
+     "id": "icse-g05-c10",
+     "number": 10,
+     "title": "Theme 10: Patterns",
+     "outcomes": [
+      {
+       "id": "icse-g05-c10-o01",
+       "text": "Find the repeating unit of a pattern and continue the pattern.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.repeating-patterns",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c10-o02",
+       "text": "Find the rule of a growing pattern and use it to continue the pattern.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.growing-patterns",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.algebra.pattern-rules",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c10-o03",
+       "text": "Make a pattern that changes in more than one way at once, such as shape and colour.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.repeating-patterns",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked by an educator; diagram-drawing)."
+       }
+      },
+      {
+       "id": "icse-g05-c10-o04",
+       "text": "See and describe the patterns in triangular numbers and square numbers.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.algebra.figurate-numbers",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-algebra",
+      "number": 2,
+      "title": "Algebra"
+     }
+    },
+    {
+     "id": "icse-g05-c06",
+     "number": 6,
+     "title": "Theme 6: Geometry",
+     "outcomes": [
+      {
+       "id": "icse-g05-c06-o01",
+       "text": "Find angles in shapes and in the surroundings, by looking and by folding paper.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.angles-intro",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c06-o02",
+       "text": "Spot right angles in objects and pictures.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.angles-intro",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c06-o03",
+       "text": "Classify an angle as right, acute or obtuse.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.angles-intro",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; multiple-choice, numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c06-o04",
+       "text": "Draw and trace acute, obtuse and right angles, and read the size of an angle.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.angle-measure",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; diagram-drawing, numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c06-o05",
+       "text": "Recognise reflection symmetry and rotational symmetry in familiar 2-D shapes and letters.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.rotational-symmetry",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.geometry.symmetry-lines",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c06-o06",
+       "text": "Make cubes, cuboids, cylinders and cones from their nets.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.geometry.nets",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; multiple-choice, diagram-drawing)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-geometry",
+      "number": 3,
+      "title": "Geometry"
+     }
+    },
+    {
+     "id": "icse-g05-c07",
+     "number": 7,
+     "title": "Theme 7: Measurement",
+     "outcomes": [
+      {
+       "id": "icse-g05-c07-o01",
+       "text": "Relate larger and smaller units of length, weight, capacity, time and money, and convert both ways.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.length-conversion",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.money-decimals",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.time-unit-conversion",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.unit-conversions",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; measurement-with-unit, numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c07-o02",
+       "text": "Estimate how much a solid or a container holds in a known unit, such as mugs in a bucket.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.capacity",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.volume-cubes",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      },
+      {
+       "id": "icse-g05-c07-o03",
+       "text": "Use the four operations in problems about money, length, mass, capacity and intervals of time.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.compute-with-measures",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.elapsed-time",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.money-decimals",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; word-problem, measurement-with-unit)."
+       }
+      },
+      {
+       "id": "icse-g05-c07-o04",
+       "text": "Say what the area and the perimeter of a simple shape are.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.area-squares",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.perimeter-intro",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, multiple-choice)."
+       }
+      },
+      {
+       "id": "icse-g05-c07-o05",
+       "text": "Work out the area and the perimeter of simple shapes such as rectangles and squares.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.measurement.rectangle-area",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.measurement.rectangle-perimeter",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric, measurement-with-unit)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-measurement",
+      "number": 4,
+      "title": "Measurement"
+     }
+    },
+    {
+     "id": "icse-g05-c09",
+     "number": 9,
+     "title": "Theme 9: Data Handling",
+     "outcomes": [
+      {
+       "id": "icse-g05-c09-o01",
+       "text": "Collect everyday data, record it in a table, show it in a bar graph and read a given bar graph.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.bar-charts",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.statistics.scaled-bars",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         },
+         {
+          "id": "MATH.statistics.tables",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (partly marked by an educator; numeric, diagram-drawing)."
+       }
+      },
+      {
+       "id": "icse-g05-c09-o02",
+       "text": "Read a pie chart of the kind printed in newspapers and magazines.",
+       "mapping": {
+        "competencies": [
+         {
+          "id": "MATH.statistics.pie-charts",
+          "score": 1,
+          "method": "inventory@1",
+          "status": "accepted"
+         }
+        ],
+        "verdict": "clear",
+        "why": "Mapped by the curriculum inventory (marked automatically; numeric)."
+       }
+      }
+     ],
+     "examples": [],
+     "exercises": [],
+     "sections": [],
+     "sourceVerified": false,
+     "unit": {
+      "id": "domain-statistics",
+      "number": 5,
+      "title": "Data handling and statistics"
+     }
+    }
+   ]
+  }
+ ]
+}

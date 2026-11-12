@@ -1,6 +1,6 @@
 # CISCE (ICSE) Class 5 mathematics (icse@1)
 
-2026-11-11. A third board, for Grade 5 only: `boardFor("icse", 5)`, release `icse-cisce-mathematics-grade-5@1.1.0`.
+2026-11-11. A third board, for Grade 5 only: `boardFor("icse", 5)`, release `icse-cisce-mathematics-grade-5@1.2.0`.
 It reuses existing skills, lessons and question families; nothing was written for it. Not an educator review: OpenPath
 has no educators, and questions count through machine validation only (`docs/product/MACHINE_VALIDATION.md`).
 
@@ -24,9 +24,9 @@ graphs is split in two, and 2 items that appear only under key concepts are adde
 
 | | Outcomes |
 |---|---|
-| Fully covered by existing skills | 57 |
-| Partly covered (the note says what is missing) | 14 |
-| Not covered (gaps, not in the release) | 6 |
+| Fully covered by existing skills | 58 |
+| Partly covered (the note says what is missing) | 16 |
+| Not covered (gaps, not in the release) | 3 |
 
 ### Gaps (not in the release)
 
@@ -35,24 +35,11 @@ No skill, lesson or question exists:
 2. Symmetry in familiar 3-D shapes (Theme 6).
 3. Reading line graphs (Theme 9).
 
-Questions exist and a simulated learner is verified on them, but the lesson fails OpenPath's own teaching checks
-("worked example not verified"), so a learner who makes mistakes would be told to ask a teacher or parent. Left out
-until the lesson is repaired (`MATH.number.integers`). The number-line lesson was repaired on 2026-11-11
-(grade5-lessons@1, release 1.1.0: a checked worked example, and a tip that no longer quotes another question's numbers),
-so "whole numbers on a number line" is now in the release. Still out:
-
-4. What integers are (Theme 5).
-5. Comparing integers on a number line (Theme 5).
-6. Ordering integers (Theme 5).
-
-Adding and subtracting integers (Theme 5) is in the release; its own lesson passes the checks.
-
-### Partly covered, in plain words
-
-Tables of 11, 12 and 20; estimating a quotient; writing one's own word problem; fraction addition as stories; pictures
-of decimals and of percentages; the names "like" and "unlike" decimals; twin primes; divisibility tests for 3, 9 and
-11; paper folding, drawing angles, folding real nets, collecting data and drawing graphs by hand, and inventing a
-pattern (hands-on work that needs a person).
+**Repaired (grade5-lessons@1).** Four outcomes of Theme 5 were first left out because the lessons of
+`MATH.number.number-line` and `MATH.number.integers` failed OpenPath's teaching checks. Both lessons now pass with no
+violation (release 1.1.0: number line; release 1.2.0: integers), and the outcomes are in: whole numbers on a number line
+and comparing integers (full); what integers are and ordering integers (partly: no question asks what an integer is, and
+none asks for descending order).
 
 ## Measured (2026-11-11)
 
@@ -61,9 +48,9 @@ apart (`frontend/src/year/icse-grade5.test.ts`, which CI runs in parts):
 
 | | Skills |
 |---|---|
-| In the release | 58 |
-| Taught after two early mistakes (lesson, strategy screen or guided question) | 58 |
-| Verified when every answer is right (one delayed session each) | 58 |
+| In the release | 59 |
+| Taught after two early mistakes (lesson, strategy screen or guided question) | 59 |
+| Verified when every answer is right (one delayed session each) | 59 |
 | Person-marked | 0 |
 | Not verified | 0 |
 
@@ -79,7 +66,7 @@ a child learns, that the teaching is good, or that a question suits a ten-year-o
   and decimals, prime factorisation, divisibility, Indian and international numeration, percentage of an amount). CISCE
   places them in Class V; their lessons and wording were written with older learners in mind and have not been read
   for a Class V child.
-- The coverage matrix classes all 71 outcomes "Partially implemented": the outcome-assessment map (the judgement of
+- The coverage matrix classes all 74 outcomes "Partially implemented": the outcome-assessment map (the judgement of
   whether the content assesses every part of an outcome) has not been made for them.
 - The topic dashboard lists CISCE / ICSE for Grade 5 only.
 - "Full" and "Partly" above are a mapping judgement from question-family titles and examples, not a review of every
@@ -160,9 +147,9 @@ a child learns, that the teaching is good, or that a question suits a ten-year-o
 |---|---|---|---|---|
 | Add and subtract integers. | learning outcome 5 | Full | `number.integer-add` |  |
 | Place whole numbers on a number line. | learning outcome 1 | Full | `number.number-line` | Lesson repaired 2026-11-11. |
-| Understand integers as the counting numbers, zero and the negatives of the counting numbers. | learning outcome 2 | **Not covered** | — | Questions exist; the lesson fails the teaching checks, so the skill is left out. |
-| Compare two integers using a number line. | learning outcome 3 | **Not covered** | — | Questions exist; the lesson fails the teaching checks, so the skill is left out. |
-| Put integers in ascending or descending order. | learning outcome 4 | **Not covered** | — | Questions exist; the lesson fails the teaching checks, so the skill is left out. |
+| Understand integers as the counting numbers, zero and the negatives of the counting numbers. | learning outcome 2 | Partial | `number.integers` | Lesson repaired; no question asks what an integer is. |
+| Compare two integers using a number line. | learning outcome 3 | Full | `number.integers` | Lesson repaired. |
+| Put integers in ascending or descending order. | learning outcome 4 | Partial | `number.integers` | Lesson repaired; increasing order only. |
 
 ### Theme 6: Geometry
 
