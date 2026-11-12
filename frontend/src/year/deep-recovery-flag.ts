@@ -32,4 +32,4 @@ export function deepPathwayAllowed(records: { pathway?: { active: boolean; targe
  * while the integers lesson was not teachable. With the research switch on (never in a shipped build) that baseline is kept, exactly
  * as the deep-recovery unit tests pin it. The evaluation build keeps the real gates.
  */
-if (DEEP_RECOVERY_BUILD && !DEEP_EVALUATION && deepRecoveryOn()) { usePrerequisiteAfterOwn(false); useUnteachableFixture(["MATH.number.integers"]); }
+if (typeof OPENPATH_DEEP_RECOVERY !== "undefined" && OPENPATH_DEEP_RECOVERY === true && !(typeof OPENPATH_DEEP_EVALUATION !== "undefined" && OPENPATH_DEEP_EVALUATION === "integration-methods") && deepRecoveryOn()) { usePrerequisiteAfterOwn(false); useUnteachableFixture(["MATH.number.integers"]); }
