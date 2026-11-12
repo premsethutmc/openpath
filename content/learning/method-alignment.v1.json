@@ -43,7 +43,7 @@
     {
       "competency": "MATH.number.fraction-add",
       "strategy": "worked_steps",
-      "contentHash": "d48caef530fa6795f56d0233b41e5f4457fe140969e0ab83f9eb279b4c596d5c",
+      "contentHash": "c18ef70b4da91f1bbd4066c7928ed92e76e0e4ab5cc16d3a15b174b554a55d59",
       "methods": [
         "common-denominator-add"
       ],
@@ -58,7 +58,7 @@
         "isosceles-base"
       ],
       "status": "engineering-mapping-pending-educator-review",
-      "rationale": "Screens take the vertex angle from 180 then halve; they do not teach doubling a base angle."
+      "rationale": "Screens take the vertex angle from 180 then halve; they do not teach doubling a base angle. Picture added (2026-11-12): two fraction strips; the method taught is unchanged. Previous revision d48caef5."
     },
     {
       "competency": "MATH.geometry.triangle-properties",
@@ -112,12 +112,12 @@
     {
       "competency": "MATH.number.fraction-multiply",
       "strategy": "worked_steps",
-      "contentHash": "8360efb990cf3381475928c2453b881b06d98678ba0aa28140bb3c0512d44ebc",
+      "contentHash": "3643cab4654cd2e85170081155ac3bd06ef37b7c04e8adc7a5266d5944e846bc",
       "methods": [
         "fraction-times-whole"
       ],
       "status": "engineering-mapping-pending-educator-review",
-      "rationale": "Multiply the numerator by the whole number and keep the piece size; divide-then-multiply for a fraction of a quantity is not taught."
+      "rationale": "Multiply the numerator by the whole number and keep the piece size; divide-then-multiply for a fraction of a quantity is not taught. Picture added (2026-11-12): a grid with the same squares shaded in each row; the method taught is unchanged. Previous revision 8360efb9."
     },
     {
       "competency": "MATH.calculus.integration-methods",

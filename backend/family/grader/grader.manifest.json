@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "4a6cc64aa91dfd45da31fa3292a9700400f13b4f5831d8f39466be5850f30102",
+ "sha256": "c0144ea7fddc861121af9c27ac9b0e17c5918d7251c9f018d3e6c552d30479f7",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -92,7 +92,7 @@
   "content/learning/library.v1.json": "6e47a12adf1abcea83080b589348540dcaaa23f04baf2426590adc83dfc20b41",
   "content/learning/machine-validation.v1.json": "21933d9eff18ad1395d0a02fe8ae226bb2344d8d2aa48eeaf28a55a429653053",
   "content/learning/mapping-exemplars.v1.json": "2e321587d70fccd32e395f21cf24d4ac4bbfbe52abc7d631b6acecc07dab8f61",
-  "content/learning/method-alignment.v1.json": "e54ca3ac617264d89ab46e656e1e3b5a2f8ad576d2f0b4ef97f314b3d1964d7f",
+  "content/learning/method-alignment.v1.json": "e3b54d558be674f818bbe4fc9c73049a0f44d4f151711cd56f694a60bc3d4d4b",
   "content/learning/modules.v1.json": "664c61dc66700e8e5d40023ac78ed89afaedf4ac9ceaf78bbeecd1c878e9db04",
   "content/learning/problems.v1.json": "2d0cca6da92e398d4077e07be65162787e59652cda5319b8928ab0ab52c4e727",
   "content/learning/question-status.v1.json": "4a368546d264f94ed741ac32a4aebe75d610bbdd55e8f39aae17809a82144a61",
