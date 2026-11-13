@@ -40,6 +40,7 @@ import type { LearnerRecords, LearningActivity, ServerDecision } from "../../../
 import { authoritativeView } from "../../../packages/learning/src/grading/view";
 import { semanticsOf } from "../../../packages/learning/src/grading/parse";
 import { examplesFor, SYNTAX } from "../../../packages/learning/src/grading/syntax";
+import { KID } from "./kid";
 
 export const LETTERS = ["A", "B", "C", "D"];
 
@@ -73,6 +74,8 @@ const FLOW_WORDS: Record<(typeof FLOW)[number], string> = { Explore: "Find your 
 const flowIndex = (p: ModulePhase) => (p === "explore" || p === "recover" ? 0 : p === "strategy" ? 1 : p === "chapter" ? 2 : p === "guided" || p === "check" ? 3 : 4);
 const activityOf = (phase: ModulePhase, q: Question): LearningActivity =>
   phase === "explore" ? "diagnostic" : phase === "strategy" ? "probe" : phase === "guided" ? "guided" : phase === "check" ? "check" : phase === "retention" ? "retention" : q.role === "transfer" ? "transfer" : "practice";
+/** kid-look@1: what a right answer says (picked by the question, so it does not flicker on a re-render) */
+const CHEERS = [{ word: "Correct! Well done.", emoji: "🎉" }, { word: "Yes, that's right!", emoji: "⭐" }, { word: "Brilliant!", emoji: "🌟" }, { word: "Spot on!", emoji: "✨" }];
 const COUNTS: Record<LearningActivity, string> = {
   diagnostic: "On your own · a short check to find the starting point",
   probe: "On your own · what you already know",
@@ -179,14 +182,15 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigat
   const judged = trusted ? workingFeedback(trusted) : null;
   return (
     <div className="stack enter">
-      <div className={`feedback ${undecided ? "" : fb.right ? "good" : "bad"}`} role="status">
-        <strong>{undecided ? "Saved, not marked." : fb.right ? "Right." : "Not this time."}</strong>
+      <div className={`feedback ${undecided ? "" : fb.right ? "good" : "bad"}${KID && !undecided ? (fb.right ? " kid-cheer" : " kid-soft") : ""}`} role="status">
+        {KID && fb.right && !undecided && <span className="kid-burst" aria-hidden="true">{CHEERS[fb.qid.length % CHEERS.length].emoji}</span>}
+        <strong>{undecided ? "Saved, not marked." : KID ? (fb.right ? CHEERS[fb.qid.length % CHEERS.length].word : "Not quite.") : fb.right ? "Right." : "Not this time."}</strong>
         {undecided && <p>{fb.assessment!.feedback.message}</p>}
         {!undecided && fb.assessment?.evidence.firstError && <p>{fb.assessment.feedback.message}</p>}
         {mixup && <p data-feedback="answer-feedback@1">{mixup.note}{mixup.principle ? ` ${mixup.principle}` : ""}</p>}
         {fb.assessment?.clarification?.kind === "show-step" && !fb.working?.length && <p className="small muted">{fb.assessment.clarification.prompt}</p>}
-        {(!onRetry || fb.right) && <p>{q.solution}</p>}
-        {onRetry && !fb.right && <><p>Your answer and working are saved. A wrong answer alone does not tell us why.</p><button className="secondary" onClick={()=>onRetry(false)}>Try again</button> <button className="link" onClick={()=>onRetry(true)}>Give me a hint</button></>}
+        {(!onRetry || fb.right) && (KID ? <details className="kid-why" open={!fb.right}><summary>{fb.right ? "How it works" : "See why"}</summary><p>{q.solution}</p></details> : <p>{q.solution}</p>)}
+        {onRetry && !fb.right && <><p>{KID ? "Have another go, or ask for a hint." : "Your answer and working are saved. A wrong answer alone does not tell us why."}</p><button className="secondary" onClick={()=>onRetry(false)}>Try again</button> <button className="link" onClick={()=>onRetry(true)}>Give me a hint</button></>}
       </div>
       {!!fb.working?.length && <div className={`feedback ${trusted?.working?.status === "invalid" ? "bad" : ""}`} role="note" aria-label="Your working">
         <strong>Your working</strong>
@@ -217,7 +221,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
       {heading && <p className="eyebrow">{heading}</p>}
-      <span className="counted">{COUNTS[activity]}</span>
+      {!KID && <span className="counted">{COUNTS[activity]}</span>}
       <p className="prompt">{q.prompt}</p>
       {q.figure && <Figure v={q.figure} />}
       <AnswerInput q={q} value={value} setValue={setValue} disabled={ctx.saving} />
@@ -226,7 +230,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
         <details className="working" open={workingOpen}>
           {/* Save activation before a queued native toggle can race editing/reload.
               Summary still supplies native focus and Enter/Space activation. */}
-          <summary onClick={e=>{e.preventDefault();setWorkingOpen(!workingOpen);}}>Show your working (optional)</summary>
+          <summary onClick={e=>{e.preventDefault();setWorkingOpen(!workingOpen);}}>{KID ? "Show my working" : "Show your working (optional)"}</summary>
           <p className="small">{geometryTask(qid)?.labels}</p>
           <textarea aria-label="Your working" rows={3} value={working} onChange={(e) => setWorking(e.target.value)} placeholder={"One step per line, e.g.\n7 × 5 + 7 × 3 = 35 + 21 = 56"} />
           <p className="small muted">Any correct way is fine. Your working is kept with your answer; it does not change how the answer counts.</p>
@@ -360,15 +364,15 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   );
   const head = (
     <>
-      {!embedded && <p className="eyebrow">Skill</p>}
+      {!embedded && !KID && <p className="eyebrow">Skill</p>}
       {embedded ? <h2>{name}</h2> : <h1>{name}</h1>}
-      <div className="year-meta"><span className={`chip status-${ms.requirementsMet === false ? "active" : statusClass(ev.status)}`}>{ms.requirementsMet === false ? "More evidence needed" : statusWord}</span>{afterHelp && <span className="small muted" data-after-help={afterHelp.kind}> {afterHelp.note}</span>}</div>
+      {!KID && (<div className="year-meta"><span className={`chip status-${ms.requirementsMet === false ? "active" : statusClass(ev.status)}`}>{ms.requirementsMet === false ? "More evidence needed" : statusWord}</span>{afterHelp && <span className="small muted" data-after-help={afterHelp.kind}> {afterHelp.note}</span>}</div>)}
       {stepper}
     </>
   );
   const lessonModule = moduleFor(competency);
   const reviewStrategy = lessonModule ? reviewStrategyFor(lessonModule, ctx.records, fb?.qid ?? ms.question) : null;
-  const reviewOffer = reviewStrategy ? <button className="secondary wide" disabled={ctx.saving} onClick={async () => { if (reviewStrategy && await ctx.teach(competency, reviewStrategy.id, "foundation-lesson-review@1")) setReviewOpen(reviewStrategy.id); }}>Review a supported lesson</button> : null;
+  const reviewOffer = reviewStrategy ? <button className="secondary wide" disabled={ctx.saving} onClick={async () => { if (reviewStrategy && await ctx.teach(competency, reviewStrategy.id, "foundation-lesson-review@1")) setReviewOpen(reviewStrategy.id); }}>{KID ? "Learn it again" : "Review a supported lesson"}</button> : null;
   // the lesson being reviewed is the one that was opened (recorded), even if the question on screen changed since
   const reviewing = reviewOpen ? lessonModule?.strategies.find((x) => x.id === reviewOpen && ctx.records.teaching.some((t) => t.competency === competency && t.strategy === x.id && t.rule === "foundation-lesson-review@1")) : undefined;
   if (reviewing) return <div className="stack">{head}<p role="note">Lesson review only. Your earlier answers are saved. This review does not award mastery; further answers in this visit are recorded with help.</p><Lesson competency={competency} s={reviewing} resumeKey={lessonKey && `${lessonKey}:review:${reviewing.id}`} doneLabel="Return to my progress" saving={false} onDone={() => setReviewOpen(null)} /><button className="secondary" onClick={() => setReviewOpen(null)}>Return to my progress</button></div>;
@@ -393,7 +397,7 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
     return (
       <div className="stack">
         {head}
-        <p className="why">{shownReason}</p>
+        {!KID && <p className="why">{shownReason}</p>}
         <Ask resumeKey={resumeKey && `${resumeKey}:${ms.question}`} key={ms.question} qid={ms.question} activity={ms.activity ?? activityOf(ms.phase, question(ms.question))} ctx={ctx} context={ms.context} hintAllowed={ms.phase === "guided"} onAnswered={setFb} />
       </div>
     );

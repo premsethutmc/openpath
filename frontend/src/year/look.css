@@ -1,0 +1,170 @@
+/* look@1: one look for OpenPath. Maths takes the English app's palette, type, chunky buttons and dark mode, so the two
+   subjects feel like one app. Loaded after chapter.css and year.css; only colours, sizes, shapes and spacing change here,
+   never what a screen says or does. (Screens that are simplified for a child also use the kid-* classes below.) */
+
+:root {
+  --brand: #6a55f0;
+  --brand-deep: #4a36c9;
+  --brand-soft: #f1eeff;
+  --brand-text: #5545c4;
+  --ink: #203047;
+  --muted: #5f6b84;
+  --line: #e6e6f2;
+  --bg: #f8f9ff;
+  --card: #ffffff;
+  --good: #0f7a5d;
+  --good-soft: #e9faf4;
+  --good-ink: #126c55;
+  --bad: #b4532a;
+  --bad-soft: #fff0e9;
+  --bad-ink: #8f4524;
+  --warn-soft: #fff1e0;
+  --radius: 22px;
+  --shadow-card: 0 6px 20px -12px rgba(40, 30, 110, 0.35);
+  --bg-a: #f5eaff;
+  --bg-b: #dff8f2;
+  color-scheme: light dark;
+  font-family: ui-rounded, "SF Pro Rounded", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  font-size: 17px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --brand: #8c7bff;
+    --brand-deep: #5a4bc4;
+    --brand-soft: #2a2852;
+    --brand-text: #c2b8ff;
+    --ink: #eceefe;
+    --muted: #b2b8d4;
+    --line: #2d2f55;
+    --bg: #12142a;
+    --card: #1b1d36;
+    --good: #6fd9b3;
+    --good-soft: #163a31;
+    --good-ink: #9be8cc;
+    --bad: #ff9d76;
+    --bad-soft: #3d241c;
+    --bad-ink: #ffc3a8;
+    --warn-soft: #3d2c19;
+    --shadow-card: none;
+    --bg-a: #231b44;
+    --bg-b: #10291f;
+    --verified-soft: #163a31;
+    --shown-soft: #1c2a4a;
+    --active-soft: #3d2c19;
+    --idle-soft: #24264a;
+  }
+}
+
+/* page */
+body { background: radial-gradient(120% 60% at 0% 0%, var(--bg-a) 0%, transparent 60%), radial-gradient(120% 60% at 100% 100%, var(--bg-b) 0%, transparent 60%), var(--bg) fixed; color: var(--ink); }
+body:has(.year-paper) { background: var(--bg); }
+h1 { font-size: 1.75rem; font-weight: 850; letter-spacing: -0.015em; }
+h2 { font-weight: 800; }
+a, .link { color: var(--brand-text); }
+.eyebrow { color: var(--brand-text); font-weight: 800; letter-spacing: 0.08em; }
+.topbar { background: color-mix(in srgb, var(--bg) 88%, transparent); border-bottom-color: transparent; }
+.topbar-row > strong { font-weight: 800; }
+
+/* buttons: the English app's chunky button */
+.primary { background: var(--brand); color: #fff; border-radius: 18px; font-weight: 850; box-shadow: 0 6px 0 var(--brand-deep); margin-bottom: 6px; transition: transform 0.1s, box-shadow 0.1s; }
+.primary:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 2px 0 var(--brand-deep); }
+.primary:disabled { opacity: 0.45; box-shadow: 0 6px 0 var(--brand-deep); }
+.secondary { background: var(--card); color: var(--brand-text); border: 2px solid var(--line); border-radius: 18px; font-weight: 800; }
+.secondary:active { transform: scale(0.98); }
+
+/* cards, panels, tiles */
+.card, .panel, .qcard, .tile, .stat, .next { border-radius: var(--radius); border-color: var(--line); box-shadow: var(--shadow-card); }
+.card, .panel, .qcard, .tile, .stat { background: var(--card); }
+.next { background: var(--card); }
+.chip { background: var(--card); border-color: var(--line); }
+.panel.problem { border-color: color-mix(in srgb, var(--warn-soft) 60%, var(--line)); }
+.panel.accent-soft { border-color: color-mix(in srgb, var(--brand-soft) 60%, var(--line)); }
+.tile.proposal { background: transparent; }
+
+/* the question */
+.qcard { padding: 22px 20px; gap: 16px; }
+.qcard .prompt { font-size: 1.35rem; font-weight: 750; line-height: 1.4; }
+.counted { color: var(--brand-text); }
+.field input, .field textarea, details.working textarea, .simple-setup select { background: var(--card); color: var(--ink); border-color: var(--line); border-radius: 16px; }
+.field input { font-size: 1.4rem; font-weight: 700; padding: 16px; }
+.field input:focus, .simple-setup select:focus { border-color: var(--brand); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 22%, transparent); outline: none; }
+details.working { background: var(--brand-soft); }
+details.working summary, .hint { color: var(--ink); }
+.hint { background: var(--warn-soft); border-radius: 16px; }
+
+/* answers: right and wrong */
+.feedback { border-radius: 20px; padding: 16px 18px; }
+.feedback.good { background: var(--good-soft); color: var(--good-ink); }
+.feedback.bad { background: var(--bad-soft); color: var(--bad-ink); }
+.feedback strong { font-size: 1.15rem; }
+
+/* steps and small parts */
+.flow li { background: var(--line); }
+.flow li.past { background: color-mix(in srgb, var(--brand) 45%, var(--card)); }
+.flow li.here { background: var(--brand); }
+.letter { background: var(--brand-soft); color: var(--brand-text); }
+.tag.soon { background: var(--idle-soft, #eceff6); }
+.strip span { background: var(--brand-soft); border-color: var(--line); }
+.array, .graph svg { background: var(--card); }
+.worked-answer { background: var(--good-soft); border-color: color-mix(in srgb, var(--good) 40%, transparent); color: var(--good-ink); }
+.worked-columns { background: var(--brand-soft); color: var(--ink); }
+.worked-reading, .keep-safe { background: var(--warn-soft); border-color: color-mix(in srgb, var(--warn-soft) 40%, var(--line)); }
+.worked-steps li, .parent-skills li, .findings li, .topic-rows li, .cal, .week-bars { background: var(--card); border-color: var(--line); }
+.week-label, .boot-line { color: var(--muted); }
+.period-tabs { background: var(--line); }
+.period-tabs button.on { background: var(--card); }
+.cal-cell { background: var(--line); color: var(--muted); }
+.simple-setup select:disabled { background: var(--line); }
+.today { background: linear-gradient(135deg, var(--brand-soft), var(--good-soft)); border-color: var(--line); }
+
+/* pictures stay on white so their own colours read in dark mode */
+.figure svg, .figure img, .sketch-sheet { background: #fff; border-radius: 14px; }
+@media (prefers-color-scheme: dark) {
+  .figure { color: var(--ink); }
+  .figure svg { padding: 6px; }
+  .boot { background: linear-gradient(160deg, #231b44, #10291f); color: var(--ink); }
+}
+
+/* the child's screens (kid-home@1 and kid-look@1) in dark mode */
+.kid-sub { color: var(--muted); }
+.kid-chapter, .kid-grown-ups { background: var(--card); border-color: var(--line); }
+.kid-chapter-icon { background: var(--brand-soft); }
+.kid-chapter .ring-track { stroke: var(--line); }
+.kid-stuck { background: color-mix(in srgb, var(--card) 70%, transparent); border-color: var(--line); }
+.kid-row + .kid-row { border-top-color: var(--line); }
+.kid-row span:last-child { color: var(--muted); }
+
+/* kid-look@1: the lists behind a chapter (theme, then skills) and the skill screen, for a child */
+.kid-list-head { display: grid; gap: 4px; margin: 6px 0 4px; }
+.kid-list-head .kid-kicker { margin: 0; font-size: 0.85rem; font-weight: 800; color: var(--brand-text); letter-spacing: 0.04em; }
+.kid-list-head h1 { margin: 0; }
+.kid-list-meta { display: flex; align-items: center; gap: 12px; margin: 6px 0 14px; color: var(--muted); font-weight: 600; }
+.kid-list-meta .ring-track { stroke: var(--line); }
+.kid-list-meta .ring-fill { stroke: var(--good); stroke-linecap: round; }
+.kid-list-meta .ring circle { stroke-width: 5; }
+.kid-num { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 16px; background: var(--brand-soft); color: var(--brand-text); font-size: 1.3rem; font-weight: 850; }
+.kid-state { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; font-size: 1.3rem; font-weight: 850; }
+.kid-state[data-status="verified"] { background: var(--good-soft); color: var(--good); }
+.kid-state[data-status="shown"], .kid-state[data-status="independent"], .kid-state[data-status="transfer"] { background: color-mix(in srgb, var(--good-soft) 60%, var(--card)); color: var(--good); }
+.kid-state[data-status="active"], .kid-state[data-status="developing"], .kid-state[data-status="learning"], .kid-state[data-status="review"] { background: var(--warn-soft); color: #c46a12; }
+.kid-state:not([data-status]), .kid-state[data-status="not_started"] { background: var(--brand-soft); color: var(--brand-text); }
+.kid-chapter-sub { display: block; font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-top: 2px; }
+
+/* right answer: a short celebration */
+.feedback.good.kid-cheer { position: relative; overflow: hidden; animation: kid-pop 0.35s ease-out; }
+.feedback.good.kid-cheer strong { font-size: 1.4rem; }
+.kid-burst { position: absolute; right: 14px; top: 10px; font-size: 1.8rem; animation: kid-float 0.9s ease-out both; pointer-events: none; }
+@keyframes kid-pop { 0% { transform: scale(0.96); opacity: 0.4; } 60% { transform: scale(1.02); opacity: 1; } 100% { transform: scale(1); } }
+@keyframes kid-float { 0% { transform: translateY(10px) scale(0.6); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-6px) scale(1); opacity: 1; } }
+.feedback.bad.kid-soft strong { font-size: 1.25rem; }
+.kid-why { margin-top: 8px; }
+.kid-why summary { cursor: pointer; font-weight: 800; }
+.kid-why p { margin: 8px 0 0; }
+@media (prefers-reduced-motion: reduce) {
+  .feedback.good.kid-cheer, .kid-burst { animation: none; }
+}
+.kid-chev { font-size: 1.6rem; color: var(--muted); padding-right: 4px; }
+/* kid-look@1: the skill screen's title is the board's long wording; smaller, so the question stays on the first screen */
+[data-kid] .stack > h1 { font-size: 1.35rem; line-height: 1.3; margin: 4px 0 6px; }
+[data-kid] .kid h1, [data-kid] .kid-hi { font-size: 2rem; }
+[data-kid] .skill-steps-caption { font-weight: 700; color: var(--brand-text); }

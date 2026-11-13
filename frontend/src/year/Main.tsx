@@ -45,6 +45,8 @@ import { deepGoalModule } from "../learning/deep-goal";
 import { afterHelpOf, afterHelpTiles, afterHelpSummary, qualifiedEvidence, type AfterHelp } from "../learning/deep-evidence";
 import "../mathematics/chapter/chapter.css";
 import "./year.css";
+import "./look.css";
+import { KID } from "./kid";
 
 declare const OPENPATH_REVIEW_FIXTURE: boolean;
 // TEST BUILDS ONLY: treat every question as educator-reviewed, so acceptance tests can show a verified (green) skill.
@@ -309,7 +311,7 @@ function App() {
   const top = (left: React.ReactNode, title: string) => <TopBar left={left} title={title} />;
   const home = <button className="link" onClick={() => setView({ name: "year" })}>← My year</button>;
   // device-mode@1: the learner list is also where a learner is added, so it is always reachable; there is no /maths/ page there
-  const switcher = pupils.length > 1 || DEVICE_BUILD ? <button className="link" onClick={() => setLearner("")}>{DEVICE_BUILD ? "Learners" : "Switch"}</button> : <a className="link" href="/maths/">← Maths</a>;
+  const switcher = pupils.length > 1 || DEVICE_BUILD ? <button className="link" onClick={() => setLearner("")}>{DEVICE_BUILD ? "Learners" : "Switch"}</button> : KID ? <a className="link kid-back" href="/" aria-label="All subjects">←</a> : <a className="link" href="/maths/">← Maths</a>;
 
   if (!st.enrolment || view.name === "setup")
     return (
@@ -385,7 +387,7 @@ function App() {
   if (view.name === "module")
     return (
       <Shell paper={grade === 7} banner={banner} error={error} wide={false} top={keyboardOpen ? undefined : top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
-        <div className="lesson-link"><button className="link" onClick={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })}>Open this lesson</button></div>
+        <div className="lesson-link"><button className="link" onClick={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })}>{KID ? "📖 Lesson" : "Open this lesson"}</button></div>
         <KeyboardPractice key={`${learner}:${view.competency}`} onOpenChange={setKeyboardOpen} api={api} learner={learner} competency={view.competency} onSaved={async () => { if (repo) setEvents(await repo.load()); }}>
           <Module competency={view.competency} reviewOnly={view.reviewOnly} ctx={ctx} onExit={() => setView(view.back)} />
         </KeyboardPractice>
@@ -443,6 +445,14 @@ function App() {
     }
     const here = chain.at(-1);
     if (!here) return setTimeout(() => setView({ name: "year" })) && null;
+    const back = () => setView(view.path.length > 1 ? { name: "tile", path: view.path.slice(0, -1) } : { name: "year" });
+    // kid-look@1: a theme or a list of skills as plain rows; a single skill with nothing under it keeps its detail
+    if (KID && here.children.length > 0)
+      return (
+        <Shell banner={banner} error={error} top={<TopBar left={<button className="link kid-back" onClick={back} aria-label="Back">←</button>} title="" />}>
+          <KidList here={here} onOpen={(t) => open(t, [...view.path, t.id])} />
+        </Shell>
+      );
     return (
       <Shell banner={banner} error={error} wide top={top(<button className="link" onClick={() => setView(view.path.length > 1 ? { name: "tile", path: view.path.slice(0, -1) } : { name: "year" })}>← Back</button>, name)}>
         <nav className="crumbs" aria-label="Where you are">
@@ -880,6 +890,51 @@ const iconFor = (title: string) => CHAPTER_ICON.find(([re]) => re.test(title))?.
 /** A skill's name in fewer words: the board's wording, without brackets and anything after a semicolon or colon. */
 const shortName = (s: string) => s.replace(/\s*\([^)]*\)/g, "").replace(/[;:].*$/, "").trim();
 
+/** kid-look@1: "Theme 4: Playing with Numbers (Factors and Multiples)" → a small "Theme 4" above "Playing with Numbers". */
+function splitTitle(title: string): { kicker: string | null; name: string } {
+  const m = /^((?:Theme|Chapter|Unit|Part|Section)\s+\w+)\s*[:.\-–]\s*(.+)$/i.exec(title);
+  const name = (m ? m[2] : title).replace(/\s*\([^)]*\)\s*$/, "").trim();
+  return { kicker: m ? m[1] : null, name: name || title };
+}
+const STATE_MARK: Record<string, string> = { verified: "✓", shown: "★", independent: "★", transfer: "★", active: "◐", developing: "◐", learning: "◐", review: "↻" };
+/** kid-look@1: one level of the year (a unit's themes, a theme's skills) as rows: a number or a state, the name, progress. */
+function KidList({ here, onOpen }: { here: Tile; onOpen: (t: Tile) => void }) {
+  const head = splitTitle(here.title);
+  const skills = here.children.every((c) => c.kind === "skill" || c.kind === "micro" || c.kind === "proposal" || c.kind === "unsupported");
+  return (
+    <div className="kid">
+      <div className="kid-list-head">
+        {head.kicker && <p className="kid-kicker">{head.kicker}</p>}
+        <h1>{head.name}</h1>
+      </div>
+      {here.progress.total > 0 && (
+        <div className="kid-list-meta">
+          <Ring value={here.progress.done} max={here.progress.total} size={40} />
+          <span>{here.progress.done === 0 ? `${here.progress.total} skills to learn` : `${here.progress.done} of ${here.progress.total} skills done`}</span>
+        </div>
+      )}
+      <ul className="kid-chapters">
+        {here.children.map((c, i) => {
+          const off = c.kind === "proposal" || c.kind === "unsupported";
+          const t = splitTitle(c.title);
+          return (
+            <li key={c.id}>
+              <button className="kid-chapter" disabled={off} onClick={() => onOpen(c)} data-status={c.status}>
+                {skills
+                  ? <span className="kid-state" data-status={c.status === "not_started" ? undefined : c.status} aria-hidden="true">{STATE_MARK[c.status] ?? i + 1}</span>
+                  : <span className="kid-num" aria-hidden="true">{t.kicker ? t.kicker.replace(/^\D+/, "") || i + 1 : i + 1}</span>}
+                <span className="kid-chapter-name">{t.name}{off ? <span className="kid-chapter-sub">Coming later</span> : skills && c.status !== "not_started" ? <span className="kid-chapter-sub">{c.label}</span> : null}</span>
+                {!skills && c.progress.total > 0 ? <Ring value={c.progress.done} max={c.progress.total} size={44}><small>{c.progress.done ? `${Math.round((100 * c.progress.done) / c.progress.total)}%` : ""}</small></Ring> : <span aria-hidden="true" className="kid-chev">›</span>}
+                <span className="sr-only">{c.label}</span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
 /** A ring that fills up (`value` of `max`), with `children` in the middle. */
 function Ring({ value, max, size = 64, children }: { value: number; max: number; size?: number; children?: React.ReactNode }) {
   const r = size / 2 - 5, c = 2 * Math.PI * r, f = max > 0 ? Math.min(1, value / max) : 0;
@@ -1191,7 +1246,7 @@ function Setup({ current, sameYear = false, currentYear, goals: active, saving, 
   };
   return (
     <div className="stack">
-      <h1>{sameYear ? "Choose your curriculum" : current ? "Start the next year" : "Set up My Learning Year"}</h1>
+      <h1>{KID && !current ? (sameYear ? "Change class or board" : "Which class are you in?") : sameYear ? "Choose your curriculum" : current ? "Start the next year" : "Set up My Learning Year"}</h1>
       {current && <p className="muted">Every record from Grade {current} is kept. Skills you have shown stay shown.</p>}
       {/* simple-setup@1: two questions and one button. Everything else keeps its default and stays under "More options". */}
       <div className="stack simple-setup">
@@ -1201,13 +1256,13 @@ function Setup({ current, sameYear = false, currentYear, goals: active, saving, 
             {ALL_BOARDS.map((b) => <option key={b} value={b}>{boardLabel(b)}</option>)}
           </select>
         </label>
-        <label className="field" htmlFor="setup-grade">Grade
+        <label className="field" htmlFor="setup-grade">{KID ? "Class" : "Grade"}
           <select id="setup-grade" value={quickGrade ?? ""} disabled={!quickBoard} onChange={(e) => setQuickGrade(e.target.value ? Number(e.target.value) : null)}>
-            <option value="">{quickBoard ? "Choose a grade" : "Choose a board first"}</option>
-            {gradesOf(quickBoard).map((g) => <option key={g} value={g}>Grade {g}</option>)}
+            <option value="">{quickBoard ? (KID ? "Choose a class" : "Choose a grade") : "Choose a board first"}</option>
+            {gradesOf(quickBoard).map((g) => <option key={g} value={g}>{KID ? `Class ${g}` : `Grade ${g}`}</option>)}
           </select>
         </label>
-        {quickRelease && <p className="muted small">{quickRelease.title}</p>}
+        {quickRelease && !KID && <p className="muted small">{quickRelease.title}</p>}
         <button className="primary" disabled={saving || !quickRelease} onClick={() => quickRelease && onSave(quickGrade!, quickRelease, false, goal, year)}>{saving ? "Saving…" : sameYear ? "Use this board and grade" : "Start learning"}</button>
       </div>
       <details className="more-options" open={MORE_OPTIONS_OPEN}>
@@ -1366,7 +1421,7 @@ function Opening() {
 declare const OPENPATH_NAME_START: boolean;
 const NAME_START = typeof OPENPATH_NAME_START !== "undefined" && OPENPATH_NAME_START === true && !DEVICE_BUILD;
 /** kid-home@1: the shipped family and demo builds show the child's Maths home (defined here, after NAME_START) */
-const KID_HOME = NAME_START || DEVICE_BUILD;
+const KID_HOME = KID;
 const GUEST_KEY = "openpath.guest.v1";
 const guestKey = (): { email: string; password: string } | null => { try { const v = JSON.parse(localStorage.getItem(GUEST_KEY) ?? "null"); return v && typeof v.email === "string" && typeof v.password === "string" ? v : null; } catch { return null; } };
 const randomHex = (bytes: number) => Array.from(crypto.getRandomValues(new Uint8Array(bytes)), (b) => b.toString(16).padStart(2, "0")).join("");
@@ -1444,6 +1499,7 @@ function SignIn({ onDone, onError }: { onDone: () => void; onError: (e: string) 
   );
 }
 
+if (KID) document.documentElement.dataset.kid = "1";
 // (here, at the end: every constant above has its value by now)
 if (SHELL_CACHE && "serviceWorker" in navigator) {
   navigator.serviceWorker.register("/year/sw.js", { scope: "/year/" }).catch(() => { /* the app works without it */ });
