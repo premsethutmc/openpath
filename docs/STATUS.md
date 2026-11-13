@@ -35,6 +35,9 @@ Updated: 2026-11-11 (branch `feat/icse-grade5`: CISCE / ICSE Class 5; `main` hol
   explanation passes the teaching checks (26 of 212 were refused before); three new skills close the last ICSE gaps (Roman
   numerals, mirror symmetry of 3-D shapes, line graphs; release 1.3.0, 62 skills, 77 outcomes, no gaps); grading audit run
   for the 13 newest families. Registry: 1,093 of 1,094 families.
+- 2026-11-13 grade5-level@1: later-class question kinds left out of Class 5 lessons and practice. device-mode@1: My
+  Learning Year can run with no account server, keeping records in the browser (docs/product/DEVICE_MODE.md); built into
+  the demo only when OPENPATH_MATHS_ON_DEVICE=1 is set, which it is not yet.
 - Open: 9 answer-verified families wait for the grading audit; `aetfig` has no reference.
 - prereq-after-own@1 (`docs/product/PREREQUISITE_AFTER_OWN.md`, ON by default since 2026-11-12, order by learner-vector@1): before pausing for a person, check and teach
   the skill below, then explain this skill again. TN 5 synthetic: prerequisite found and taught 3 of 43 (off) vs 22 of 43 (on).

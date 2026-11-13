@@ -68,6 +68,8 @@ const TYPES = {
   ".txt": "text/plain; charset=utf-8",
 };
 // the app's own CSP (english.html) plus what only a header can say
+/** Folders of the build that hold an app of their own (served only if the build made them). */
+const SUBAPPS = new Set(["year"]);
 const APP_CSP = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'";
 const PAGE_CSP = "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'; base-uri 'none'";
 const NO_OP_WORKER = `// OpenPath private demo: no offline cache (the app is only served after logging in). This removes any older worker.
@@ -313,6 +315,15 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
     }
     let file = join(dist, rel);
     const inside = file.startsWith(dist + sep);
+    // a second app built into its own folder (My Learning Year at /year/): the folder's own page, with a trailing slash so
+    // that its relative asset paths resolve
+    if (inside && SUBAPPS.has(rel.replace(/\\/g, "/").replace(/^\/|\/$/g, "")) && existsSync(join(file, "index.html"))) {
+      if (!path.endsWith("/")) {
+        res.writeHead(301, { ...base(), Location: `${path}/` });
+        return res.end();
+      }
+      file = join(file, "index.html");
+    }
     const servable = inside && !HIDDEN.has(rel.replace(/\\/g, "/")) && existsSync(file) && statSync(file).isFile();
     if (!servable) {
       // a missing or hidden file is a 404; any other path is the app itself (deep links, reloads)

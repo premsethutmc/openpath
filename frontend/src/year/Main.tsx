@@ -10,6 +10,7 @@ import { KeyboardPractice } from "../writing/KeyboardPractice";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { Api, type PupilSummary } from "../english/logic/account";
+import { apiOptions, DEVICE_BUILD } from "./device-api";
 import { goal as goalById, goals, moduleFor, question, questions } from "../../../packages/learning/src/content";
 import { latestReleases, releasesFor, sampleFor } from "../../../packages/learning/src/curricula";
 import { allOutcomesOf, assigned, review, subjectSupported, synthesise, type CurriculumRelease, type ReviewDecision } from "../../../packages/learning/src/curriculum";
@@ -44,7 +45,7 @@ declare const OPENPATH_REVIEW_FIXTURE: boolean;
 // TEST BUILDS ONLY: treat every question as educator-reviewed, so acceptance tests can show a verified (green) skill.
 if (typeof OPENPATH_REVIEW_FIXTURE !== "undefined" && OPENPATH_REVIEW_FIXTURE) useReviewFixture({ items: questions.map((q) => q.id), releasedAt: "2020-01-01T00:00:00Z", all: true }); // generated questions too (the dashboard's test build reads the same)
 
-const api = new Api();
+const api = new Api(apiOptions());
 /** deep-recovery@0 (research): false in every shipped build (deep-recovery-flag.ts). The build constant is read here directly so
  *  that a shipped (minified) bundle folds DEEP to false and drops the research view and its code. */
 declare const OPENPATH_DEEP_RECOVERY: boolean;
@@ -106,6 +107,20 @@ const childHeading = (ts: Tile[]) => {
   return only === "unit" ? "Units" : only === "chapter" ? "Chapters" : only === "section" ? "Sections" : only === "skill" ? "Skills" : only === "micro" ? "Smaller steps" : "Inside";
 };
 const KIND_WORD: Record<Tile["kind"], string> = { subject: "Subject", unit: "Unit", chapter: "Chapter", section: "Section", skill: "Skill", micro: "Smaller step", proposal: "Not mapped yet", unsupported: "Not supported yet" };
+
+/** device-mode@1: with no account server the learner is added here, and is kept in this browser only. */
+function AddDeviceLearner({ onDone, onError }: { onDone: () => void; onError: (m: string) => void }) {
+  const [name, setName] = useState("");
+  const [busy, setBusy] = useState(false);
+  return (
+    <form className="stack" onSubmit={(e) => { e.preventDefault(); if (!name.trim()) return; setBusy(true); api.createPupil(name.trim()).then(() => { setName(""); onDone(); }).catch((er) => onError(String(er.message ?? er))).finally(() => setBusy(false)); }}>
+      <label htmlFor="device-learner">Add a learner on this device</label>
+      <input id="device-learner" value={name} maxLength={60} autoComplete="off" onChange={(e) => setName(e.target.value)} placeholder="A first name or nickname" />
+      <p className="muted">A first name or a nickname is enough. It stays in this browser.</p>
+      <button className="primary" disabled={busy || !name.trim()}>Add learner</button>
+    </form>
+  );
+}
 
 function App() {
   const [pathwayTarget, setPathwayTarget] = useState(new URLSearchParams(location.search).get("target") ?? "");
@@ -212,7 +227,7 @@ function App() {
     catch { return null; } // The study timer owns retry/error state and clears it after a successful save.
   }
 
-  const banner = DEEP_EVALUATION ? <div className="test-banner" role="note">Controlled evaluation · integration methods only. Real educator review gates apply; unapproved content is unavailable.</div> : reviewFixtureActive() ? <div className="test-banner" role="note">TEST BUILD · questions are treated as educator-reviewed so that “verified” can be shown. Never use with real learners.</div> : null;
+  const banner = DEVICE_BUILD ? <div className="test-banner" role="note">This device only · progress is kept in this browser, not on a server. It is not backed up and cannot be opened on another device.</div> : DEEP_EVALUATION ? <div className="test-banner" role="note">Controlled evaluation · integration methods only. Real educator review gates apply; unapproved content is unavailable.</div> : reviewFixtureActive() ? <div className="test-banner" role="note">TEST BUILD · questions are treated as educator-reviewed so that “verified” can be shown. Never use with real learners.</div> : null;
   if (!ready) return <Shell banner={banner}><p className="muted center">Opening OpenPath…</p></Shell>;
   if (!signedIn) return <Shell banner={banner} error={error}><SignIn onDone={() => refreshAccount().catch((e) => setError(String(e.message ?? e)))} onError={setError} /></Shell>;
   if (!learner)
@@ -228,9 +243,11 @@ function App() {
               </button>
             ))}
           </div>
-        ) : (
+        ) : DEVICE_BUILD ? null : (
           <p>Add a learner in <a href="/">OpenPath</a> first; the same learner is used here.</p>
         )}
+        {DEVICE_BUILD && <AddDeviceLearner onDone={() => refreshAccount().catch((e) => setError(String(e.message ?? e)))} onError={setError} />}
+        {DEVICE_BUILD && <p className="center"><a className="link" href="/">← OpenPath English</a></p>}
       </Shell>
     );
   if (!st) return <Shell banner={banner} error={error}><p className="muted center">Loading the record…</p></Shell>;
@@ -250,7 +267,8 @@ function App() {
   };
   const top = (left: React.ReactNode, title: string) => <TopBar left={left} title={title} />;
   const home = <button className="link" onClick={() => setView({ name: "year" })}>← My year</button>;
-  const switcher = pupils.length > 1 ? <button className="link" onClick={() => setLearner("")}>Switch</button> : <a className="link" href="/maths/">← Maths</a>;
+  // device-mode@1: the learner list is also where a learner is added, so it is always reachable; there is no /maths/ page there
+  const switcher = pupils.length > 1 || DEVICE_BUILD ? <button className="link" onClick={() => setLearner("")}>{DEVICE_BUILD ? "Learners" : "Switch"}</button> : <a className="link" href="/maths/">← Maths</a>;
 
   if (!st.enrolment || view.name === "setup")
     return (

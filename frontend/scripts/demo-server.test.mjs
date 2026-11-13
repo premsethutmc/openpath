@@ -5,7 +5,7 @@
  *   node --test scripts/demo-server.test.mjs
  */
 import assert from "node:assert/strict";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { after, before, test } from "node:test";
@@ -237,5 +237,33 @@ test("DS-9 the built app holds no demo secret: the English build never reads the
   for (const f of walk(built.pathname)) {
     const t = readFileSync(f, "utf8");
     for (const bad of ["DEMO_PASSWORD_HASH", "DEMO_SESSION_SECRET", "scrypt$", process.env.DEMO_SENTINEL].filter(Boolean)) assert.ok(!t.includes(bad), `${bad} in ${f}`);
+  }
+});
+
+test("DS-11 a second app built into /year/ is served as its own page, only after logging in and only if the build made it", async () => {
+  const { login, req, cookieOf } = await start({ DEMO_ALLOW_HTTP: "1" });
+  const cookie = cookieOf(await login(PASSWORD));
+  // not built: /year/ is the app itself, as any other path
+  assert.match(await (await req("/year/", { headers: { cookie } })).text(), /OpenPath English/);
+  mkdirSync(join(dist, "year"));
+  writeFileSync(join(dist, "year", "index.html"), '<!doctype html><title>My Learning Year</title><script type="module" src="app.js"></script>');
+  writeFileSync(join(dist, "year", "app.js"), "console.log('year')");
+  try {
+    const bare = await req("/year", { headers: { cookie } });
+    assert.deepEqual([bare.status, bare.headers.get("location")], [301, "/year/"], "a trailing slash, so that relative assets resolve");
+    const page = await req("/year/", { headers: { cookie } });
+    assert.equal(page.status, 200);
+    assert.match(await page.text(), /My Learning Year/);
+    assert.match(page.headers.get("content-security-policy"), /frame-ancestors 'none'/);
+    assert.equal(page.headers.get("cache-control"), "no-store");
+    assert.equal(await (await req("/year/app.js", { headers: { cookie } })).text(), "console.log('year')");
+    // without a session: nothing of it
+    const anon = await req("/year/", { headers: { accept: "text/html" } });
+    assert.deepEqual([anon.status, anon.headers.get("location")], [303, "/login"]);
+    assert.equal((await req("/year/app.js")).status, 401);
+    // any other folder is still the app
+    assert.match(await (await req("/review/", { headers: { cookie } })).text(), /OpenPath English/);
+  } finally {
+    rmSync(join(dist, "year"), { recursive: true, force: true });
   }
 });

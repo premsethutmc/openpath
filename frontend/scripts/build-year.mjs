@@ -15,6 +15,9 @@ const test = process.argv.includes("--test");
 const evaluation = process.argv.find((a) => a.startsWith("--deep-evaluation="))?.split("=")[1] ?? "";
 if (evaluation && (evaluation !== "integration-methods" || test || process.argv.includes("--deep-recovery"))) throw new Error("Use --deep-evaluation=integration-methods without --test or --deep-recovery.");
 const deep = process.argv.includes("--deep-recovery") || !!evaluation;
+// device-mode@1: no account server; records are kept in this browser (the hosted demo). Never with a test or research switch.
+const device = process.argv.includes("--device");
+if (device && (test || deep)) throw new Error("--device is a shipped build choice; it cannot be combined with --test or --deep-recovery.");
 if (deep && !test && !evaluation) throw new Error("--deep-recovery is a research switch and needs --test (never in a shipped build).");
 // a lower per-sitting limit, so a browser journey can reach a pause (research test builds only)
 const sittingArg = process.argv.find((a) => a.startsWith("--deep-sitting="))?.split("=")[1];
@@ -32,7 +35,7 @@ await esbuild.build({
   sourcemap: test ? "inline" : false,
   outdir: out,
   entryNames: "app",
-  define: { "process.env.NODE_ENV": '"production"', OPENPATH_GEOMETRY_LAB: process.argv.includes("--geometry-lab") ? "true" : "false", OPENPATH_REVIEW_FIXTURE: test ? "true" : "false", OPENPATH_DEEP_RECOVERY: deep ? "true" : "false", OPENPATH_DEEP_SITTING: String(sitting), OPENPATH_DEEP_EVALUATION: JSON.stringify(evaluation), __OPENPATH_TEACHING_MODE__: JSON.stringify(evaluation ? "supervised-evaluation" : "demonstration") },
+  define: { "process.env.NODE_ENV": '"production"', OPENPATH_GEOMETRY_LAB: process.argv.includes("--geometry-lab") ? "true" : "false", OPENPATH_REVIEW_FIXTURE: test ? "true" : "false", OPENPATH_DEEP_RECOVERY: deep ? "true" : "false", OPENPATH_DEVICE: device ? "true" : "false", OPENPATH_DEEP_SITTING: String(sitting), OPENPATH_DEEP_EVALUATION: JSON.stringify(evaluation), __OPENPATH_TEACHING_MODE__: JSON.stringify(evaluation ? "supervised-evaluation" : "demonstration") },
 });
 await writeFile(
   `${out}/index.html`,
@@ -43,7 +46,7 @@ const rout = `${root}/${process.env.DIST ?? "dist-english"}/review`;
 await mkdir(rout, { recursive: true });
 await esbuild.build({ entryPoints: [`${root}/src/review/Main.tsx`], bundle: true, format: "esm", target: "es2022", minify: !test, sourcemap: test ? "inline" : false, outdir: rout, entryNames: "app", define: { "process.env.NODE_ENV": '"production"', OPENPATH_REVIEW_FIXTURE: "false" } });
 await writeFile(`${rout}/index.html`, `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f4f6fc"><title>Content review · OpenPath</title><link rel="stylesheet" href="app.css"></head><body><div id="root"></div><script type="module" src="app.js"></script></body></html>`);
-console.log(`Built My Learning Year at /year/${test ? " (TEST BUILD: review fixture on)" : ""}${deep ? ` (deep-recovery research switch available with ?deep=1${sitting ? `, ${sitting} per sitting` : ""})` : ""} and content review at /review/.`);
+console.log(`Built My Learning Year at /year/${device ? " (DEVICE BUILD: records stay in this browser)" : ""}${test ? " (TEST BUILD: review fixture on)" : ""}${deep ? ` (deep-recovery research switch available with ?deep=1${sitting ? `, ${sitting} per sitting` : ""})` : ""} and content review at /review/.`);
 
 // Exact scoped denominator and migration gaps accompany every Year build.
 execFileSync(process.execPath,["--import","tsx",`${root}/scripts/method-alignment-report.mts`,`${out}/method-alignment-report.json`],{cwd:root,stdio:["ignore","ignore","inherit"]});

@@ -5,13 +5,14 @@
  */
 import { useEffect, useState } from "react";
 import { Api } from "../english/logic/account";
+import { apiOptions } from "./device-api";
 import type { DeepScreen } from "../learning/deep-recovery-app";
 import { ROUTINE_PAUSE, handoffReport, handoffText, moduleStop, type HandoffStatus } from "../learning/deep-recovery-handoff";
 import type { LearnerRecords } from "../../../packages/learning/src/records";
 import { Ask, Feedback, type Fb, type Ctx } from "./Learn";
 import { deepModuleState } from "../learning/deep-module";
 
-const api = new Api();
+const api = new Api(apiOptions());
 const learnerOf = (session: string) => /^learn:([^:]+):/.exec(session)?.[1];
 
 export function DeepRecoveryHandoff({ original, screen, learner, records, ctx }: { original: string; screen: DeepScreen; learner: string | undefined; records: LearnerRecords; ctx?: Ctx }) {

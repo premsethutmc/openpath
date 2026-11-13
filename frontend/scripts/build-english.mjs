@@ -159,3 +159,11 @@ self.addEventListener("fetch", (e) => {
 `,
 );
 console.log(`wrote ${outName}/ (version ${version}, app.js ${Math.round(js.length / 1024)} kB)`);
+
+// device-mode@1: the hosted demo can also carry My Learning Year (maths) at /year/, built to keep its records in the browser
+// (no account server). Off unless OPENPATH_MATHS_ON_DEVICE=1 is set where the demo is built; the owner decides when it is shown.
+if (process.env.OPENPATH_MATHS_ON_DEVICE === "1") {
+  const { execFileSync } = await import("node:child_process");
+  const { fileURLToPath } = await import("node:url");
+  execFileSync(process.execPath, [fileURLToPath(new URL("./build-year.mjs", import.meta.url)), "--device"], { stdio: "inherit" });
+}

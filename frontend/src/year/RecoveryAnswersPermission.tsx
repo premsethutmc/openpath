@@ -6,8 +6,9 @@
  */
 import { useEffect, useState } from "react";
 import { Api } from "../english/logic/account";
+import { apiOptions } from "./device-api";
 
-const api = new Api();
+const api = new Api(apiOptions());
 
 export function RecoveryAnswersPermission({ learner }: { learner: string }) {
   const [on, setOn] = useState<boolean | null>(null); // null: the server's switch is off (or unknown): nothing is shown
