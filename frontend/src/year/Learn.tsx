@@ -68,6 +68,8 @@ export const STATUS_WORD: Record<SkillEvidence["status"], string> = {
 export const statusClass = (s: SkillEvidence["status"]) => (s === "verified" ? "verified" : s === "independent" || s === "transfer" ? "shown" : s === "not_started" ? "not_started" : "active");
 
 const FLOW = ["Explore", "Strategy", "Chapter", "Practise", "Verify"] as const;
+/** What each step is, in a learner's words. */
+const FLOW_WORDS: Record<(typeof FLOW)[number], string> = { Explore: "Find your starting point", Strategy: "See the idea", Chapter: "Learn the method", Practise: "Practise on your own", Verify: "Check it again later" };
 const flowIndex = (p: ModulePhase) => (p === "explore" || p === "recover" ? 0 : p === "strategy" ? 1 : p === "chapter" ? 2 : p === "guided" || p === "check" ? 3 : 4);
 const activityOf = (phase: ModulePhase, q: Question): LearningActivity =>
   phase === "explore" ? "diagnostic" : phase === "strategy" ? "probe" : phase === "guided" ? "guided" : phase === "check" ? "check" : phase === "retention" ? "retention" : q.role === "transfer" ? "transfer" : "practice";
@@ -344,12 +346,17 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
   const shownReason = qualifyReason(true, ms.reason, ev.status, afterHelp);
   const name = graph.get(competency).name;
   const step = flowIndex(ms.phase);
+  // skill-steps@1: the five steps are progress, not buttons: a slim bar with one plain line saying where the learner is
+  // (the step's own name stays in each item for screen readers and the browser journeys)
   const stepper = (
-    <ol className="flow" aria-label="Steps of this skill">
-      {FLOW.map((f, k) => (
-        <li key={f} className={k === step ? "here" : k < step ? "past" : ""} aria-current={k === step ? "step" : undefined}>{f}</li>
-      ))}
-    </ol>
+    <div className="skill-steps">
+      <ol className="flow" aria-label="Steps of this skill">
+        {FLOW.map((f, k) => (
+          <li key={f} className={k === step ? "here" : k < step ? "past" : ""} aria-current={k === step ? "step" : undefined}><span className="sr-only">{f}</span></li>
+        ))}
+      </ol>
+      <p className="skill-steps-caption">Step {step + 1} of {FLOW.length} · {FLOW_WORDS[FLOW[step]]}</p>
+    </div>
   );
   const head = (
     <>
