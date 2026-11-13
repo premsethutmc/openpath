@@ -35,7 +35,7 @@ await esbuild.build({
   sourcemap: test ? "inline" : false,
   outdir: out,
   entryNames: "app",
-  define: { "process.env.NODE_ENV": '"production"', OPENPATH_GEOMETRY_LAB: process.argv.includes("--geometry-lab") ? "true" : "false", OPENPATH_REVIEW_FIXTURE: test ? "true" : "false", OPENPATH_DEEP_RECOVERY: deep ? "true" : "false", OPENPATH_DEVICE: device ? "true" : "false", OPENPATH_DEEP_SITTING: String(sitting), OPENPATH_DEEP_EVALUATION: JSON.stringify(evaluation), __OPENPATH_TEACHING_MODE__: JSON.stringify(evaluation ? "supervised-evaluation" : "demonstration") },
+  define: { "process.env.NODE_ENV": '"production"', OPENPATH_GEOMETRY_LAB: process.argv.includes("--geometry-lab") ? "true" : "false", OPENPATH_REVIEW_FIXTURE: test ? "true" : "false", OPENPATH_DEEP_RECOVERY: deep ? "true" : "false", OPENPATH_DEVICE: device ? "true" : "false", OPENPATH_NAME_START: process.argv.includes("--name-start") && !test ? "true" : "false", OPENPATH_DEEP_SITTING: String(sitting), OPENPATH_DEEP_EVALUATION: JSON.stringify(evaluation), __OPENPATH_TEACHING_MODE__: JSON.stringify(evaluation ? "supervised-evaluation" : "demonstration") },
 });
 await writeFile(
   `${out}/index.html`,

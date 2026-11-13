@@ -127,6 +127,7 @@ function App() {
   const [keyboardOpen, setKeyboardOpen] = useState(false);
   const [ready, setReady] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
+  const [emailAccount, setEmailAccount] = useState(false);
   const [pupils, setPupils] = useState<PupilSummary[]>([]);
   const [learner, setLearner] = useState<string>(new URLSearchParams(location.search).get("learner") ?? "");
   const [events, setEvents] = useState<{ kind: string }[] | null>(null);
@@ -142,8 +143,10 @@ function App() {
   const visit = useRef(uid());
 
   async function refreshAccount() {
-    const s = await api.status();
+    let s = await api.status();
     if (!s.available) throw new Error("The OpenPath account service is not reachable. Wait a minute (it may be waking up) and reload.");
+    // name-start@1: a sign-in that has run out is renewed with this browser's own key
+    if (NAME_START && !s.account.authenticated && (await guestSignIn())) s = await api.status();
     setSignedIn(s.account.authenticated);
     if (s.account.authenticated) {
       // what is released (educator-reviewed): only released content can count toward verified mastery
@@ -229,7 +232,10 @@ function App() {
 
   const banner = DEVICE_BUILD ? <div className="test-banner" role="note">This device only · progress is kept in this browser, not on a server. It is not backed up and cannot be opened on another device.</div> : DEEP_EVALUATION ? <div className="test-banner" role="note">Controlled evaluation · integration methods only. Real educator review gates apply; unapproved content is unavailable.</div> : reviewFixtureActive() ? <div className="test-banner" role="note">TEST BUILD · questions are treated as educator-reviewed so that “verified” can be shown. Never use with real learners.</div> : null;
   if (!ready) return <Shell banner={banner}><p className="muted center">Opening OpenPath…</p></Shell>;
-  if (!signedIn) return <Shell banner={banner} error={error}><SignIn onDone={() => refreshAccount().catch((e) => setError(String(e.message ?? e)))} onError={setError} /></Shell>;
+  if (!signedIn) {
+    const done = () => refreshAccount().catch((e) => setError(String(e.message ?? e)));
+    return <Shell banner={banner} error={error}>{NAME_START && !emailAccount ? <NameStart onDone={done} onError={setError} onAccount={() => { setError(""); setEmailAccount(true); }} /> : <SignIn onDone={done} onError={setError} />}</Shell>;
+  }
   if (!learner)
     return (
       <Shell banner={banner} error={error}>
@@ -954,6 +960,59 @@ function TopBar({ left, title }: { left: React.ReactNode; title: string }) {
         <span />
       </div>
     </header>
+  );
+}
+
+/** name-start@1: a name is enough to begin. The record is still kept on OpenPath's server, under a key made for this
+ *  browser (an account with a made-up address and a random password, both kept only in this browser). Lose the browser's
+ *  storage and the record cannot be opened again, which the screen says. An email account remains available. */
+declare const OPENPATH_NAME_START: boolean;
+const NAME_START = typeof OPENPATH_NAME_START !== "undefined" && OPENPATH_NAME_START === true && !DEVICE_BUILD;
+const GUEST_KEY = "openpath.guest.v1";
+const guestKey = (): { email: string; password: string } | null => { try { const v = JSON.parse(localStorage.getItem(GUEST_KEY) ?? "null"); return v && typeof v.email === "string" && typeof v.password === "string" ? v : null; } catch { return null; } };
+const randomHex = (bytes: number) => Array.from(crypto.getRandomValues(new Uint8Array(bytes)), (b) => b.toString(16).padStart(2, "0")).join("");
+/** Signs this browser back in with its own key, if it has one (after a sign-in has run out). */
+async function guestSignIn(): Promise<boolean> {
+  const key = guestKey();
+  if (!key) return false;
+  try { await api.login(key.email, key.password); return true; } catch { return false; }
+}
+function NameStart({ onDone, onError, onAccount }: { onDone: () => void; onError: (e: string) => void; onAccount: () => void }) {
+  const [name, setName] = useState("");
+  const [agree, setAgree] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const submit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim()) return;
+    if (!agree) return onError("Tick the box so OpenPath may keep this learner's progress.");
+    setBusy(true);
+    onError("");
+    try {
+      let key = guestKey();
+      if (!key) {
+        key = { email: `guest-${randomHex(12)}@guest.openpath.example`, password: randomHex(24) };
+        // the key is kept before the account exists: an account whose key was not kept could never be opened again
+        localStorage.setItem(GUEST_KEY, JSON.stringify(key));
+        if (!guestKey()) throw new Error("This browser is not letting OpenPath save anything (a private window, perhaps). Create an account with an email instead.");
+        await api.register(key.email, key.password);
+      } else await api.login(key.email, key.password);
+      await api.createPupil(name.trim());
+      onDone();
+    } catch (er) {
+      onError(String((er as Error).message ?? er));
+    } finally {
+      setBusy(false);
+    }
+  };
+  return (
+    <form className="stack" onSubmit={submit}>
+      <h1>Who is learning?</h1>
+      <label className="field">Name<input id="start-name" value={name} maxLength={60} autoComplete="off" onChange={(e) => setName(e.target.value)} placeholder="A first name or nickname" /></label>
+      <label className="consent-line"><input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} /><span>A parent or guardian agrees that OpenPath keeps this name and the learner's answers on its server. They are not sold or given to anyone else.</span></label>
+      <button className="primary" disabled={busy || !name.trim()}>{busy ? "One moment…" : "Start"}</button>
+      <p className="muted small">Progress is saved for this phone and browser. To use another device, or to keep it safe if this browser's data is cleared, use an email account.</p>
+      <p className="muted center"><button type="button" className="link" onClick={onAccount}>Sign in or create an email account</button></p>
+    </form>
   );
 }
 
