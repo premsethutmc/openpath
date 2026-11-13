@@ -201,6 +201,6 @@ details.working summary, .hint { color: var(--ink); }
 .kid-slots { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .kid-slots li { flex: 1 1 0; display: grid; }
 .kid-slot { min-height: 54px; border-radius: 16px; border: 2px dashed var(--line); }
-.kid-fields { display: flex; gap: 12px; }
-.kid-unit { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: 800; color: var(--ink); flex: 1; }
-.kid-unit input { flex: 1; min-width: 0; font-size: 1.3rem; padding: 14px 16px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); color: var(--ink); }
+.kid-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.qcard label.kid-unit { display: flex; flex-direction: row; align-items: center; gap: 8px; margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--ink); min-width: 0; }
+.qcard .kid-unit input { flex: 1 1 auto; width: 100%; min-width: 0; font-size: 1.3rem; padding: 14px 16px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); color: var(--ink); }
