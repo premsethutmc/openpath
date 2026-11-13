@@ -772,7 +772,7 @@ function StuckBox({ onOpen, onWorked, grade }: { onOpen: (qid: string) => void; 
       else setWhy(s.reason);
     }}>
       <label className="field">The problem<input aria-label="The problem" value={text} onChange={(e) => setText(e.target.value)} placeholder={grade && grade <= 5 ? "e.g. 3/4 + 1/8, or 15% of 200" : grade && grade <= 8 ? "e.g. 2x + 1 = 7, or 3/4 + 1/8" : "e.g. x² − 10x − 24 = 0, or ∫ from 2 to 9 of 6 dx"} /></label>
-      <p className="small muted">Type just the calculation or equation, like 23 × 14 or 5/6 − 1/4. Word problems are not read yet.</p>
+      <p className="small muted">Type the calculation or equation, like 23 × 14 or 5/6 − 1/4. Also: HCF of 12 and 18, factors of 36, 3.5 km in m. Word problems are not read yet.</p>
       {why && <p className="feedback bad" role="status"><b>OpenPath can’t work through this one yet.</b> {why}</p>}
       <button className="secondary" disabled={!text.trim()}>Work through it</button>
     </form>
@@ -803,7 +803,7 @@ function Worked({ text, onExit }: { text: string; onExit: () => void }) {
       {verdict === null && <p className="feedback" role="status">OpenPath could not read that answer. Type a number or a fraction, like 7/12.</p>}
       <ol className="worked-steps" aria-label="Working">
         {solved.steps.slice(0, shown).map((st, i) => (
-          <li key={i}><span className="worked-line">{solved.kind === "arithmetic" ? "= " : ""}{st.expression}</span><span className="worked-why">{st.explanation}</span></li>
+          <li key={i}><span className="worked-line">{solved.kind === "arithmetic" ? "= " : ""}{st.expression}</span><span className="worked-why">{st.explanation}</span>{st.layout && <pre className="worked-columns" aria-label="Written in columns">{st.layout.join("\n")}</pre>}</li>
         ))}
       </ol>
       {all ? (
