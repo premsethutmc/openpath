@@ -469,39 +469,8 @@ function App() {
         </div>
       </div>
       {events && (()=>{const done=[...events].reverse().find((e:any)=>e.record==='study_session'&&e.phase==='ended'&&events.some((p:any)=>p.id===e.planId&&p.academicYear===st.enrolment?.academicYear&&p.curriculum?.id===release.id&&p.curriculum?.hash===release.hash)) as StudyRecord|undefined;if(!done?.summary)return null;const plan=events.find((e:any)=>e.id===done.planId) as Extract<LearningRecord,{record:'topic_session'}>|undefined;return plan?<p className="small">Last study session: {done.summary.correctIds.length} correct, {done.summary.incorrectIds.length} incorrect. <a href={`/year/?learner=${encodeURIComponent(learner)}&skill=${encodeURIComponent(plan.target)}&diagnostic=topic`}>View session summary</a> · Performance is separate from verified mastery.</p>:null;})()}
-      <div className="actions year-actions">
-        {events && (() => { const last=[...events].reverse().find((e:any)=>e.record==='topic_session'&&e.academicYear===st.enrolment?.academicYear&&e.curriculum?.id===release.id&&e.curriculum?.hash===release.hash) as Extract<LearningRecord,{record:'topic_session'}>|undefined;return last?<a className="primary" href={`/year/?learner=${encodeURIComponent(learner)}&skill=${encodeURIComponent(last.target)}&diagnostic=topic`}>Resume topic session</a>:null;})()}
-        <a className="primary" href={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner`}>Open Mathematics topics</a>
-        <a className="secondary" href={`/curriculum/?preview=1#b=${release.id.startsWith("tn-") ? "tn" : release.id.startsWith("icse-") ? "icse" : "cbse"}&g=${grade}`}>Preview Mathematics experience</a>
-        <button className="link" onClick={() => setView({ name: "setup", sameYear: true })}>Change board or curriculum</button>
-        {!DEVICE_BUILD && <button className="link" onClick={() => setView({ name: "parent" })}>For parents{isGuest(accountEmail) ? " · keep progress safe" : ""}</button>}
-      </div>
-      {showPathway && <section className="next" aria-label="Learning pathway">
-        <h2>Your learning goal</h2>
-        <p>Choose a topic and open its lesson now. Prerequisite checks recommend supporting practice; they do not lock lessons. Your starting grade is not a ceiling. Earlier marks stay unchanged, and opening a lesson or choosing a goal awards no mastery. Demonstration content remains labelled.</p>
-        <p className="small muted">Using a learning goal opts new answers into the trusted grader and skill-evidence policy. Opening a lesson alone does not change that policy.</p>
-        {st.records.pathway?.active && <p>Current goal: {graph.get(st.records.pathway.target).name}</p>}
-        <label>Target topic<select aria-label="Target topic" value={pathwayTarget} onChange={(e) => setPathwayTarget(e.target.value)}><option value="">Choose a topic</option>{pathwayChoices.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
-        <button className="primary" disabled={saving || !pathwayTarget || !moduleFor(pathwayTarget)} onClick={() => setView({ name: "curriculum-practice", competency: pathwayTarget, stage: "teaching", back: { name: "year" } })}>Open selected lesson</button>
-        <button className="primary" disabled={saving || !pathwayTarget || !moduleFor(pathwayTarget)} onClick={() => save(make.pathway(ctxOf(), pathwayTarget))}>Use this learning goal</button>
-        {st.records.pathway?.active && <button className="secondary" disabled={saving} onClick={() => save(make.pathway(ctxOf(), st.records.pathway!.target, false))}>Return to my year plan</button>}
-      </section>}
-      {st.records.pathway?.active && <p className="small muted">Year totals summarize answer evidence. Recommendations and competency claims consider skill coverage and diagnosed gaps. Your chapters remain open for teaching.</p>}
-      <div className="stats" role="list" aria-label="This year so far">
-        <div className="stat verified" role="listitem"><b>{sum.verified}</b><span>Verified</span></div>
-        <div className="stat shown" role="listitem"><b>{sum.shown}</b><span>Shown on your own</span></div>
-        {qualifiedSummary && qualifiedSummary.afterHelp > 0 && <div className="stat active" role="listitem" data-after-help-count={qualifiedSummary.afterHelp}><b>{qualifiedSummary.afterHelp}</b><span>Solved independently after help</span></div>}
-        <div className="stat active" role="listitem"><b>{sum.developing}</b><span>Learning</span></div>
-        <div className="stat not_started" role="listitem"><b>{sum.notStarted}</b><span>Not started</span></div>
-      </div>
-      <p className="small muted" style={{ margin: 0 }}>Year progress: {Math.round(sum.progress * 100)}% of this year's skills shown on your own or verified</p>
-      <span className="bar" role="progressbar" aria-label="Year progress" aria-valuenow={Math.round(sum.progress * 100)}><span style={{ width: `${Math.round(sum.progress * 100)}%` }} /></span>
-      <ul className="legend" aria-label="What the colours mean">
-        <li><span className="swatch verified" /><Icon glyph="✓" /> Verified (checked again after a week)</li>
-        <li><span className="swatch shown" /><Icon glyph="★" /> Shown on your own</li>
-        <li><span className="swatch active" /><Icon glyph="◐" /> Learning</li>
-        <li><span className="swatch not_started" /><Icon glyph="○" /> Not started</li>
-      </ul>
+      {/* today-plan@1: one clear thing to do, the day's goal and the run of days, before anything else on the page */}
+      <TodayStrip st={st} now={now} />
       {next.kind !== "none" ? (
         <div className="next">
           <p className="eyebrow">Next</p>
@@ -513,6 +482,16 @@ function App() {
       ) : (
         <div className="next"><p className="eyebrow">Next</p><p>{nextReason}</p>{next.reviewCompetency && <button className="secondary" onClick={() => setView({ name: "module", competency: next.reviewCompetency!, reviewOnly: true, back: { name: "year" } })}>Review a supported lesson</button>}</div>
       )}
+      {showPathway && <section className="next" aria-label="Learning pathway">
+        <h2>Your learning goal</h2>
+        <p>Choose a topic and open its lesson now. Prerequisite checks recommend supporting practice; they do not lock lessons. Your starting grade is not a ceiling. Earlier marks stay unchanged, and opening a lesson or choosing a goal awards no mastery. Demonstration content remains labelled.</p>
+        <p className="small muted">Using a learning goal opts new answers into the trusted grader and skill-evidence policy. Opening a lesson alone does not change that policy.</p>
+        {st.records.pathway?.active && <p>Current goal: {graph.get(st.records.pathway.target).name}</p>}
+        <label>Target topic<select aria-label="Target topic" value={pathwayTarget} onChange={(e) => setPathwayTarget(e.target.value)}><option value="">Choose a topic</option>{pathwayChoices.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
+        <button className="primary" disabled={saving || !pathwayTarget || !moduleFor(pathwayTarget)} onClick={() => setView({ name: "curriculum-practice", competency: pathwayTarget, stage: "teaching", back: { name: "year" } })}>Open selected lesson</button>
+        <button className="primary" disabled={saving || !pathwayTarget || !moduleFor(pathwayTarget)} onClick={() => save(make.pathway(ctxOf(), pathwayTarget))}>Use this learning goal</button>
+        {st.records.pathway?.active && <button className="secondary" disabled={saving} onClick={() => save(make.pathway(ctxOf(), st.records.pathway!.target, false))}>Return to my year plan</button>}
+      </section>}
       {DEEP && (() => { const open = openDeepRecoveries(st.records, st.evidence, now); return open.length ? (
         <section aria-label="Continue a recovery">
           <div className="section-title"><h2>Continue where you left off</h2></div>
@@ -594,6 +573,33 @@ function App() {
             ))}
           </div>
         )}
+      </section>
+      {/* the year's totals and the less-used links sit below the work (today-plan@1) */}
+      <section aria-label="Your year so far" className="year-foot">
+        <div className="section-title"><h2>Your year so far</h2></div>
+      {st.records.pathway?.active && <p className="small muted">Year totals summarize answer evidence. Recommendations and competency claims consider skill coverage and diagnosed gaps. Your chapters remain open for teaching.</p>}
+      <div className="stats" role="list" aria-label="This year so far">
+        <div className="stat verified" role="listitem"><b>{sum.verified}</b><span>Verified</span></div>
+        <div className="stat shown" role="listitem"><b>{sum.shown}</b><span>Shown on your own</span></div>
+        {qualifiedSummary && qualifiedSummary.afterHelp > 0 && <div className="stat active" role="listitem" data-after-help-count={qualifiedSummary.afterHelp}><b>{qualifiedSummary.afterHelp}</b><span>Solved independently after help</span></div>}
+        <div className="stat active" role="listitem"><b>{sum.developing}</b><span>Learning</span></div>
+        <div className="stat not_started" role="listitem"><b>{sum.notStarted}</b><span>Not started</span></div>
+      </div>
+      <p className="small muted" style={{ margin: 0 }}>Year progress: {Math.round(sum.progress * 100)}% of this year's skills shown on your own or verified</p>
+      <span className="bar" role="progressbar" aria-label="Year progress" aria-valuenow={Math.round(sum.progress * 100)}><span style={{ width: `${Math.round(sum.progress * 100)}%` }} /></span>
+      <ul className="legend" aria-label="What the colours mean">
+        <li><span className="swatch verified" /><Icon glyph="✓" /> Verified (checked again after a week)</li>
+        <li><span className="swatch shown" /><Icon glyph="★" /> Shown on your own</li>
+        <li><span className="swatch active" /><Icon glyph="◐" /> Learning</li>
+        <li><span className="swatch not_started" /><Icon glyph="○" /> Not started</li>
+      </ul>
+      <div className="actions year-actions">
+        {events && (() => { const last=[...events].reverse().find((e:any)=>e.record==='topic_session'&&e.academicYear===st.enrolment?.academicYear&&e.curriculum?.id===release.id&&e.curriculum?.hash===release.hash) as Extract<LearningRecord,{record:'topic_session'}>|undefined;return last?<a className="primary" href={`/year/?learner=${encodeURIComponent(learner)}&skill=${encodeURIComponent(last.target)}&diagnostic=topic`}>Resume topic session</a>:null;})()}
+        <a className="primary" href={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner`}>Open Mathematics topics</a>
+        <a className="secondary" href={`/curriculum/?preview=1#b=${release.id.startsWith("tn-") ? "tn" : release.id.startsWith("icse-") ? "icse" : "cbse"}&g=${grade}`}>Preview Mathematics experience</a>
+        <button className="link" onClick={() => setView({ name: "setup", sameYear: true })}>Change board or curriculum</button>
+        {!DEVICE_BUILD && <button className="link" onClick={() => setView({ name: "parent" })}>For parents{isGuest(accountEmail) ? " · keep progress safe" : ""}</button>}
+      </div>
       </section>
       <WrittenWork records={st.records} learner={learner} />
       {/* recovery-handoff@0 hook (worker D, research build only; hidden when the server switch is off) */}
@@ -819,6 +825,24 @@ function StuckBox({ onOpen, onWorked, grade }: { onOpen: (qid: string) => void; 
       {why && <p className="feedback bad" role="status"><b>OpenPath can’t work through this one yet.</b> {why}</p>}
       <button className="secondary" disabled={!text.trim() || busy}>{busy ? "Reading your problem…" : "Work through it"}</button>
     </form>
+  );
+}
+
+/** today-plan@1: the day's goal (questions answered today, of DAILY_GOAL) and the run of days. Counts only; the goal is a
+ *  number of questions tried, never a number right, so a hard day still counts. */
+const DAILY_GOAL = 10;
+function TodayStrip({ st, now }: { st: NonNullable<ReturnType<typeof learnerState>>; now: number }) {
+  const r = useMemo(() => parentReport({ attempts: st.records.attempts, teaching: st.records.teaching }, rightAnswer, (c) => c, now), [st, now]);
+  const done = Math.min(r.today.answered, DAILY_GOAL), reached = r.today.answered >= DAILY_GOAL;
+  return (
+    <section className="today" aria-label="Today">
+      <div className="today-row">
+        <h2>Today</h2>
+        <span className="today-streak" data-streak={r.streak}>{r.streak >= 2 ? `🔥 ${r.streak} days in a row` : r.streak === 1 ? (r.today.answered ? "🔥 Day 1 of a new run" : "🔥 1 day so far: keep it going") : "Start a run of days today"}</span>
+      </div>
+      <p className="today-goal">{reached ? <><b>Goal reached:</b> {r.today.answered} questions today. Anything more is a bonus.</> : <><b>{done} of {DAILY_GOAL}</b> questions today</>}</p>
+      <span className="bar today-bar" role="progressbar" aria-label="Today's goal" aria-valuemin={0} aria-valuemax={DAILY_GOAL} aria-valuenow={done}><span style={{ width: `${(done / DAILY_GOAL) * 100}%` }} /></span>
+    </section>
   );
 }
 

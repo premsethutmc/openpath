@@ -13,6 +13,9 @@ export interface ParentReport {
   days: { day: string; label: string; answered: number }[];
   /** skills worked on in the last 14 days, most recent first */
   skills: SkillLine[];
+  /** today-plan@1: days in a row with at least one question answered, counted back from today (or from yesterday when
+   *  nothing has been answered yet today: the run is still alive until the day ends) */
+  streak: number;
 }
 
 const DAY = 86_400_000;
@@ -56,5 +59,8 @@ export function parentReport<A extends ReportAttempt>(input: { attempts: readonl
     return { competency, name: name(competency), answered, rightFirstTry, helped, last: list.reduce((m, a) => (a.at > m ? a.at : m), ""), verdict };
   }).sort((a, b) => (a.last < b.last ? 1 : -1));
   const lastActive = all.reduce<string | null>((m, a) => (!m || a.at > m ? a.at : m), null);
-  return { lastActive, today: todayCount, week, days, skills };
+  const active = new Set(all.map((a) => localDay(when(a))));
+  let streak = 0;
+  for (let i = active.has(today) ? 0 : 1; active.has(localDay(noon.getTime() - i * DAY)); i++) streak++;
+  return { lastActive, today: todayCount, week, days, skills, streak };
 }

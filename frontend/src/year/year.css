@@ -236,3 +236,12 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .parent-skills.needs li { border-left: 4px solid #e0a100; }
 .parent-skills.well li { border-left: 4px solid #2f9e62; }
 .keep-safe { padding: 14px; border-radius: 14px; background: #fff7e0; border: 1px solid #ecd58a; }
+/* today-plan@1 */
+.today { display: grid; gap: 8px; padding: 14px 16px; border-radius: 16px; background: linear-gradient(135deg, #efeaff, #e4f7ee); border: 1px solid rgba(91, 70, 214, 0.18); }
+.today-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.today h2 { margin: 0; font-size: 1.25rem; }
+.today-streak { font-weight: 700; font-size: 0.95rem; }
+.today-goal { margin: 0; }
+.today-bar { height: 10px; }
+.year-foot { margin-top: 18px; padding-top: 6px; border-top: 1px solid rgba(0, 0, 0, 0.08); }
+.year-foot .year-actions { margin-top: 12px; }

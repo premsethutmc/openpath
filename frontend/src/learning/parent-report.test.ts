@@ -11,7 +11,7 @@ const run = (attempts: A[], teaching: { at: string; competency: string }[] = [])
 
 test("P-1 nothing done: zeros, seven days ending today, no skills", () => {
   const r = run([]);
-  assert.deepEqual([r.lastActive, r.today, r.week, r.skills], [null, { answered: 0, rightFirstTry: 0 }, { answered: 0, rightFirstTry: 0, activeDays: 0, lessons: 0 }, []]);
+  assert.deepEqual([r.lastActive, r.today, r.week, r.skills, r.streak], [null, { answered: 0, rightFirstTry: 0 }, { answered: 0, rightFirstTry: 0, activeDays: 0, lessons: 0 }, [], 0]);
   assert.deepEqual(r.days.map((d) => d.label), ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Today"]);
 });
 
@@ -44,4 +44,12 @@ test("P-4 needs help, going well, in progress", () => {
 
 test("P-5 a record dated in the future is not counted", () => {
   assert.equal(run([{ ...a(0, "f", true), at: new Date(NOW + 3_600_000).toISOString() }]).week.answered, 0);
+});
+
+test("P-6 the streak counts days in a row back from today, and stays alive through today until a question is answered", () => {
+  assert.equal(run([a(0, "f", true), a(1, "f", true), a(2, "f", false)]).streak, 3);
+  assert.equal(run([a(1, "f", true), a(2, "f", true)]).streak, 2, "nothing yet today: yesterday's run still stands");
+  assert.equal(run([a(0, "f", true), a(2, "f", true)]).streak, 1, "a missed day ends the run");
+  assert.equal(run([a(2, "f", true), a(3, "f", true)]).streak, 0);
+  assert.equal(run([...Array.from({ length: 30 }, (_, i) => a(i, "f", true))]).streak, 30);
 });
