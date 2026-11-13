@@ -1,0 +1,30 @@
+# family-pilot@1 (docs/product/FAMILY_PILOT.md): the hosted server for a real learner's own record.
+# Created only with the owner's approval. The database is NOT declared here: it is the owner's own (Neon), and its
+# address is entered by the owner in Render (DATABASE_URL), never committed or sent through chat.
+services:
+  - type: web
+    name: openpath-family
+    runtime: docker
+    plan: free
+    region: singapore
+    branch: main
+    autoDeployTrigger: "off"
+    dockerfilePath: ./deploy/pilot/Dockerfile
+    dockerContext: .
+    healthCheckPath: /healthz
+    envVars:
+      # the site password (the whole site is private: nothing is served before it)
+      - key: DEMO_PASSWORD
+        sync: false
+      - key: DEMO_SESSION_SECRET
+        generateValue: true
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DEMO_SESSION_HOURS
+        value: "720"
+      # the pilot's own PostgreSQL database; start.sh refuses to start without it
+      - key: DATABASE_URL
+        sync: false
+      # grading authority: shadow (approved) or legacy (rollback). start.sh refuses anything else.
+      - key: OPENPATH_GRADING
+        value: "shadow"

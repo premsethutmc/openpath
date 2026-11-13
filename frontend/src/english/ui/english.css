@@ -1047,7 +1047,8 @@ h3.sub {
   justify-content: space-around;
   z-index: 10;
 }
-.nav button {
+.nav button,
+.nav a.subject-link {
   border: 0;
   background: none;
   color: var(--muted);
@@ -1059,9 +1060,13 @@ h3.sub {
   padding: 4px 8px;
   min-width: 64px;
 }
-.nav button .ico {
+.nav button .ico,
+.nav a.subject-link .ico {
   font-size: 22px;
   line-height: 1;
+}
+.nav a.subject-link {
+  text-decoration: none;
 }
 .nav button[aria-current="page"] {
   color: var(--violet-text);

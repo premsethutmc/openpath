@@ -18,7 +18,7 @@ import { type ProfileSummary, type Repo, openRepo } from "../logic/store.ts";
 import { Home } from "./Home.tsx";
 import { Journey } from "./Journey.tsx";
 import { ImportBackup, Me } from "./Me.tsx";
-import { AddLearner, type AuthMode, Brand, ParentAuth, PupilPicker, Welcome, avatarFor } from "./Onboarding.tsx";
+import { AddLearner, type AuthMode, Brand, MATHS_BUILT, ParentAuth, PupilPicker, Welcome, avatarFor } from "./Onboarding.tsx";
 import { PathView } from "./PathView.tsx";
 import { ProgressView } from "./ProgressView.tsx";
 import { Session } from "./Session.tsx";
@@ -514,6 +514,15 @@ export function App() {
             {t.label}
           </button>
         ))}
+        {/* subjects-home@1: a learner already in English reaches maths from here (only in a build that carries it) */}
+        {MATHS_BUILT && (
+          <a className="subject-link" href="/year/">
+            <span className="ico" aria-hidden="true">
+              🔢
+            </span>
+            Maths
+          </a>
+        )}
       </nav>
     </div>
   );

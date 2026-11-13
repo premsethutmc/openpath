@@ -108,15 +108,15 @@ const childHeading = (ts: Tile[]) => {
 };
 const KIND_WORD: Record<Tile["kind"], string> = { subject: "Subject", unit: "Unit", chapter: "Chapter", section: "Section", skill: "Skill", micro: "Smaller step", proposal: "Not mapped yet", unsupported: "Not supported yet" };
 
-/** device-mode@1: with no account server the learner is added here, and is kept in this browser only. */
+/** The learner is added here: kept in this browser only in a device build (device-mode@1), with the parent account otherwise. */
 function AddDeviceLearner({ onDone, onError }: { onDone: () => void; onError: (m: string) => void }) {
   const [name, setName] = useState("");
   const [busy, setBusy] = useState(false);
   return (
     <form className="stack" onSubmit={(e) => { e.preventDefault(); if (!name.trim()) return; setBusy(true); api.createPupil(name.trim()).then(() => { setName(""); onDone(); }).catch((er) => onError(String(er.message ?? er))).finally(() => setBusy(false)); }}>
-      <label htmlFor="device-learner">Add a learner on this device</label>
+      <label htmlFor="device-learner">{DEVICE_BUILD ? "Add a learner on this device" : "Add a learner"}</label>
       <input id="device-learner" value={name} maxLength={60} autoComplete="off" onChange={(e) => setName(e.target.value)} placeholder="A first name or nickname" />
-      <p className="muted">A first name or a nickname is enough. It stays in this browser.</p>
+      <p className="muted">A first name or a nickname is enough. {DEVICE_BUILD ? "It stays in this browser." : "It is kept with your parent account."}</p>
       <button className="primary" disabled={busy || !name.trim()}>Add learner</button>
     </form>
   );
@@ -243,11 +243,10 @@ function App() {
               </button>
             ))}
           </div>
-        ) : DEVICE_BUILD ? null : (
-          <p>Add a learner in <a href="/">OpenPath</a> first; the same learner is used here.</p>
-        )}
-        {DEVICE_BUILD && <AddDeviceLearner onDone={() => refreshAccount().catch((e) => setError(String(e.message ?? e)))} onError={setError} />}
-        {DEVICE_BUILD && <p className="center"><a className="link" href="/">← OpenPath English</a></p>}
+        ) : null}
+        {/* a learner is added here too (the same learner is used in the rest of OpenPath when there is an account) */}
+        {<AddDeviceLearner onDone={() => refreshAccount().catch((e) => setError(String(e.message ?? e)))} onError={setError} />}
+        <p className="center"><a className="link" href="/">← OpenPath</a></p>
       </Shell>
     );
   if (!st) return <Shell banner={banner} error={error}><p className="muted center">Loading the record…</p></Shell>;
@@ -969,6 +968,7 @@ function SignIn({ onDone, onError }: { onDone: () => void; onError: (e: string) 
       <label className="field">Email<input type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
       <label className="field">Password<input type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required /></label>
       <button className="primary" disabled={busy}>{busy ? "Signing in…" : "Sign in"}</button>
+      <p className="muted center">No account yet? <a className="link" href="/">Create a parent account in OpenPath</a>, add the learner there, then come back to Maths.</p>
     </form>
   );
 }

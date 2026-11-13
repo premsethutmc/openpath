@@ -91,7 +91,7 @@ await esbuild.build({
   entryNames: "app",
   minify: true,
   sourcemap: true,
-  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode), __OPENPATH_PILOT_APPROVED__: JSON.stringify(pilotApproved), __OPENPATH_MATHS__: process.env.OPENPATH_MATHS_ON_DEVICE === "1" ? "true" : "false" },
+  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode), __OPENPATH_PILOT_APPROVED__: JSON.stringify(pilotApproved), __OPENPATH_MATHS__: process.env.OPENPATH_MATHS_ON_DEVICE === "1" || process.env.OPENPATH_MATHS_TILE === "1" ? "true" : "false" },
   logLevel: "warning",
 });
 const js = await readFile(`${out}/assets/app.js`);
@@ -160,6 +160,8 @@ self.addEventListener("fetch", (e) => {
 );
 console.log(`wrote ${outName}/ (version ${version}, app.js ${Math.round(js.length / 1024)} kB)`);
 
+// OPENPATH_MATHS_TILE=1 alone shows the Maths tile and link for a deployment that builds My Learning Year itself, with its
+// server (deploy/pilot). 
 // device-mode@1: the hosted demo can also carry My Learning Year (maths) at /year/, built to keep its records in the browser
 // (no account server). Off unless OPENPATH_MATHS_ON_DEVICE=1 is set where the demo is built; the owner decides when it is shown.
 if (process.env.OPENPATH_MATHS_ON_DEVICE === "1") {
