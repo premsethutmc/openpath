@@ -34,6 +34,8 @@ const node = (script, ...args) => ({ cmd: process.execPath, args: ["--import", t
 export const STEPS = [
   ["specs", node("../packages/learning/scripts/specs.ts")],
   ["library", node("../packages/learning/scripts/library.ts")],
+  // read-problem@1: the shapes of the problems each family prints, for reading a typed problem
+  ["problem-templates", node("../packages/learning/scripts/problem-templates.ts")],
   ["families-parity", node("../packages/learning/scripts/families-parity.ts")],
   ["coverage", node("../packages/learning/scripts/coverage.ts")],
   ["expansion", { cmd: "python3", args: ["../content/learning/src/expansion.py"], cwd: fe }],
@@ -46,7 +48,7 @@ export const STEPS = [
 ];
 /** Every file the steps write (the check compares these with git, including new untracked files under them). */
 export const GENERATED = [
-  "content/learning/family-specs.v1.json", "content/learning/generated.v1.json", "content/learning/library.v1.json",
+  "content/learning/family-specs.v1.json", "content/learning/generated.v1.json", "content/learning/library.v1.json", "content/learning/problem-templates.v1.json",
   "content/learning/families-parity.v1.json", "docs/learning-year/COVERAGE.md", "content/learning/competency-expansion.v1.json",
   "content/learning/syllabus", "content/learning/curricula", "packages/learning/src/board-releases.ts",
   "content/learning/coverage-matrix.v1.json", "docs/mathematics/COVERAGE_MATRIX.md", "content/learning/marking-parity.v1.json",

@@ -1,0 +1,79 @@
+/** general-solver@1: the typed-calculation solver. Answers are compared with an independent evaluation (JavaScript's own
+ *  arithmetic on the same expression), and an equation's answer by putting it back into both sides. */
+import assert from "node:assert/strict";
+import test from "node:test";
+import { sameAnswer, solve } from "../../../packages/learning/src/solve";
+
+const ok = (text: string) => { const r = solve(text); assert.ok(r.ok, `${text}: ${!r.ok && r.reason}`); return r as Extract<ReturnType<typeof solve>, { ok: true }>; };
+const float = (v: { n: bigint; d: bigint }) => Number(v.n) / Number(v.d);
+// a small seeded generator, so a failure can be repeated
+function rng(seed: number) { return () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32); }
+
+test("S-1 plain calculations a child brings from homework", () => {
+  const cases: [string, string][] = [["36 ÷ 4", "9"], ["23 x 14", "322"], ["1000 − 386", "614"], ["5/6 - 1/4", "7/12"], ["2 1/3 + 1 3/4", "49/12"], ["3 + 4 × (2 + 5)^2", "199"], ["7 ÷ 2", "3.5"], ["15% of 200", "30"], ["3/4 ÷ 2/5", "15/8"], ["24/30", "4/5"], ["-3 + 5 × -2", "−13"], ["1.5 × 0.4", "0.6"], ["what is 12 * 12?", "144"], ["1,000 + 250 =", "1250"], ["3² + 4²", "25"], ["½ + ¼", "3/4"], ["2(3+4)", "14"]];
+  for (const [text, answer] of cases) assert.equal(ok(text).answer, answer, text);
+});
+
+test("S-2 one-letter linear equations, with the check step", () => {
+  const cases: [string, string][] = [["2x + 1 = 7", "x = 3"], ["3(x − 2) = x + 4", "x = 5"], ["x/3 = 5", "x = 15"], ["Solve for y: 5 - 2y = 11", "y = −3"], ["4a = 10", "a = 5/2"], ["7 = 2n − 1", "n = 4"]];
+  for (const [text, answer] of cases) { const r = ok(text); assert.equal(r.answer, answer, text); assert.match(r.steps.at(-1)!.explanation, /^Check:/); }
+  assert.equal(ok("2x = 2x + 1").answer, "No number works");
+  assert.equal(ok("2(x + 1) = 2x + 2").answer, "Every number works for x");
+});
+
+test("S-3 what is not read is refused with a reason, never guessed", () => {
+  for (const text of ["Ravi has 5 apples and eats 2. How many are left?", "x^2 = 4", "x + y = 3", "5 ÷ 0", "1/0", "2 +", "(3 + 4", "3 4", "2x + 1", "", "∫ 6 dx", "1 = 2 = 3", "9".repeat(20)]) {
+    const r = solve(text);
+    assert.equal(r.ok, false, text);
+    assert.ok(!r.ok && r.reason.length > 10);
+  }
+});
+
+test("S-4 random calculations: the answer agrees with an independent evaluation, and every line of working is shown", () => {
+  const rand = rng(20261113);
+  const pick = <T,>(xs: T[]) => xs[Math.floor(rand() * xs.length)];
+  const number = () => { const k = rand(); return k < 0.6 ? String(1 + Math.floor(rand() * 60)) : k < 0.8 ? (Math.floor(rand() * 900) / 10 + 0.1).toFixed(1) : `${1 + Math.floor(rand() * 9)}/${2 + Math.floor(rand() * 11)}`; };
+  const expr = (depth: number): string => { if (depth === 0 || rand() < 0.3) return number(); const inner = `${expr(depth - 1)} ${pick(["+", "-", "*", "÷"])} ${expr(depth - 1)}`; return rand() < 0.4 ? `(${inner})` : inner; };
+  let done = 0;
+  for (let i = 0; i < 3000; i++) {
+    const text = expr(3);
+    // the independent route: fractions and ÷ are plain divisions for JavaScript
+    const js = text.replace(/÷/g, "/").replace(/(\d+)\/(\d+)/g, "($1/$2)");
+    const want = Function(`"use strict"; return (${js});`)() as number;
+    const r = solve(text);
+    if (!Number.isFinite(want)) { assert.equal(r.ok, false, text); continue; }
+    assert.ok(r.ok, `${text}: ${!r.ok && r.reason}`);
+    if (!r.ok) continue;
+    const got = float(r.value!);
+    assert.ok(Math.abs(got - want) <= 1e-9 * Math.max(1, Math.abs(want)), `${text}: ${got} ≠ ${want}`);
+    assert.ok(r.steps.length >= 1 && r.steps.at(-1)!.expression === r.answer, `${text}: the last line is the answer`);
+    assert.equal(sameAnswer(r, r.answer), true, `${text}: its own answer is accepted`);
+    done++;
+  }
+  assert.ok(done > 2500);
+});
+
+test("S-5 random linear equations: the answer satisfies the equation as typed", () => {
+  const rand = rng(77);
+  const int = (lo: number, hi: number) => lo + Math.floor(rand() * (hi - lo + 1));
+  for (let i = 0; i < 1500; i++) {
+    const [a, b, c, d, k] = [int(-9, 9) || 1, int(-20, 20), int(-9, 9), int(-20, 20), int(1, 6)];
+    const text = `${a}x + ${b} = ${k}(${c}x - ${d})`.replace(/\+ -/g, "- ").replace(/- -/g, "+ ");
+    const r = solve(text);
+    assert.ok(r.ok, `${text}: ${!r.ok && r.reason}`);
+    if (!r.ok || !r.value) { assert.equal(a, k * c, text); continue; }
+    const x = float(r.value);
+    assert.ok(Math.abs(a * x + b - k * (c * x - d)) < 1e-7, `${text}: x = ${x}`);
+  }
+});
+
+test("S-6 a typed answer is compared by value", () => {
+  const r = ok("5/6 - 1/4");
+  assert.equal(sameAnswer(r, "7/12"), true);
+  assert.equal(sameAnswer(r, "14/24"), true);
+  assert.equal(sameAnswer(r, "7/11"), false);
+  assert.equal(sameAnswer(ok("2x + 1 = 7"), "x = 3"), true);
+  assert.equal(sameAnswer(ok("2x + 1 = 7"), "3"), true);
+  assert.equal(sameAnswer(ok("7 ÷ 2"), "3 1/2"), true);
+  assert.equal(sameAnswer(r, "seven twelfths"), null);
+});
