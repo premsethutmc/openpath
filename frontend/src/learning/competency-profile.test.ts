@@ -23,19 +23,27 @@ test("C-2 measures per topic; nothing is stated on fewer than five answers", () 
   assert.deepEqual([geo.accuracy, geo.independence, geo.paceSeconds, geo.pace], [null, null, null, null], "four answers: not enough to say");
 });
 
-test("C-3 quick and slow compare the learner with their own pace only", () => {
-  const p = run([...many(10, () => a(1, "algebra.x", true, 8)), ...many(10, () => a(1, "fractions.y", true, 40)), ...many(10, () => a(2, "number.z", true, 20))]);
+test("C-3 right first, then how quick: each right answer against the time its own question should take", () => {
+  // every question here should take 20 s
+  const expected = () => 20;
+  const go = (attempts: A[]) => competencyProfile(attempts, (x) => x.ok, (c) => c.split(".")[0], (c) => `Skill ${c}`, "week", NOW, expected);
+  const p = go([...many(10, () => a(1, "algebra.x", true, 8)), ...many(10, () => a(1, "fractions.y", true, 50)), ...many(10, () => a(2, "number.z", true, 18)), ...many(10, () => a(2, "geometry.w", true, 30))]);
   const pace = Object.fromEntries(p.topics.map((t) => [t.topic, t.pace]));
-  assert.equal(p.paceSeconds, 20);
-  assert.deepEqual(pace, { algebra: "quick", fractions: "slow", number: "steady" });
+  assert.deepEqual(pace, { algebra: "lightning", fractions: "slow", number: "quick", geometry: "steady" });
+  const alg = p.topics.find((t) => t.topic === "algebra")!;
+  assert.deepEqual([alg.ratio, alg.expectedSeconds, alg.timedRight, alg.withinExpected, alg.paceSeconds], [0.4, 20, 10, 10, 8]);
   assert.equal(p.findings.quickest!.topic, "algebra");
-  // a topic practised far more than the others does not set the usual pace by weight of numbers
-  const lop = run([...many(30, () => a(1, "algebra.x", true, 8)), ...many(5, () => a(1, "fractions.y", true, 40))]);
-  assert.deepEqual([lop.paceSeconds, lop.findings.quickest!.topic], [24, "algebra"]);
-  // one topic alone has nothing to be compared with
+  // one topic alone can still be judged: the yardstick is the question, not the learner's other topics
+  assert.equal(go(many(10, () => a(1, "algebra.x", true, 8))).topics[0].pace, "lightning");
+  // a wrong answer, or one that needed a hint, says nothing about speed
+  const none = go([...many(10, () => a(1, "algebra.x", false, 2)), ...many(10, () => a(1, "algebra.x", true, 2, { hints: 1 }))]).topics[0];
+  assert.deepEqual([none.pace, none.timedRight], [null, 0]);
+  // under a second and a half is too quick to have been worked: not judged
+  assert.equal(go(many(10, () => a(1, "algebra.x", true, 1))).topics[0].pace, null);
+  // fewer than five timed right answers: not enough to say
+  assert.equal(go(many(4, () => a(1, "algebra.x", true, 8))).topics[0].pace, null);
+  // with no expected time, no pace is claimed
   assert.equal(run(many(10, () => a(1, "algebra.x", true, 8))).topics[0].pace, null);
-  // an answer that needed a hint, or was wrong, does not set the pace
-  assert.equal(run([...many(10, () => a(1, "algebra.x", false, 2)), ...many(10, () => a(1, "algebra.x", true, 2, { hints: 1 }))]).paceSeconds, null);
 });
 
 test("C-4 findings: most accurate needs two rated topics and at least 70%; stuck uses the parent page's rule", () => {

@@ -24,6 +24,7 @@ import { familyOf, moduleState } from "../../../packages/learning/src/interventi
 import { reviewFixtureActive, rightAnswer, useReviewFixture } from "../../../packages/learning/src/evidence";
 import { parentReport } from "../../../packages/learning/src/parent-report";
 import { competencyProfile, topicName, type Period, type TopicMeasure } from "../../../packages/learning/src/competency-profile";
+import { expectedSeconds } from "../../../packages/learning/src/expected-time";
 import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages/learning/src/goals";
 import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
@@ -894,7 +895,9 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
   const skillName = (c: string) => { try { return graph.get(c).name; } catch { return c; } };
   const topicOf = (c: string) => { try { return topicName(c, graph.get(c).strand); } catch { return "Other"; } };
   const report = useMemo(() => (st ? parentReport({ attempts: st.records.attempts, teaching: st.records.teaching }, rightAnswer, skillName, now) : null), [st, now]);
-  const profile = useMemo(() => (st ? competencyProfile(st.records.attempts, rightAnswer, topicOf, skillName, period, now) : null), [st, now, period]);
+  // expected-time@1: about how long each question should take in this learner's class (worked out once per question)
+  const expected = useMemo(() => { const seen = new Map<string, number | null>(); const grade = st?.enrolment?.grade; return (a: { questionId: string }) => { if (!seen.has(a.questionId)) { let v: number | null = null; try { const q = problemOf(a.questionId) ?? question(a.questionId); v = q ? expectedSeconds(q, grade) : null; } catch { v = null; } seen.set(a.questionId, v); } return seen.get(a.questionId)!; }; }, [st?.enrolment?.grade]);
+  const profile = useMemo(() => (st ? competencyProfile(st.records.attempts, rightAnswer, topicOf, skillName, period, now, expected) : null), [st, now, period, expected]);
   if (!report || !profile || !st) return <p className="muted center">Opening…</p>;
   const sum = st.summary;
   const most = Math.max(1, ...profile.calendar.map((d) => d.answered));
@@ -903,7 +906,9 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
   const secs = (v: number | null) => (v === null ? null : v < 60 ? `${Math.round(v)} s` : `${Math.floor(v / 60)} min ${Math.round(v % 60)} s`);
   const WORD: Record<Period, string> = { week: "this week", month: "in the last 30 days", year: `in ${new Date(now).getFullYear()}` };
   const f = profile.findings;
-  const paceWord = (t: TopicMeasure) => (t.pace === "quick" ? "quicker than their usual" : t.pace === "slow" ? "takes longer than their usual" : t.pace === "steady" ? "about their usual pace" : null);
+  const paceWord = (t: TopicMeasure) => (t.pace === "lightning" ? "lightning quick" : t.pace === "quick" ? "within the expected time" : t.pace === "steady" ? "a little over the expected time" : t.pace === "slow" ? "takes much longer than expected" : null);
+  // right but slow: the answers are right (four in five or more) and take much longer than they should
+  const slowButRight = profile.topics.filter((t) => t.pace === "slow" && (t.accuracy ?? 0) >= 0.8);
   return (
     <div className="stack parent-view">
       <p className="eyebrow">For parents</p>
@@ -927,11 +932,12 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
         <section aria-label="What the answers show">
           <h2>What the answers show {WORD[period]}</h2>
           <ul className="findings">
-            {f.quickest && <li><span aria-hidden="true">⚡</span><span><b>Quickest in {f.quickest.topic}:</b> about {secs(f.quickest.paceSeconds)} a question, against their usual {secs(profile.paceSeconds)}.</span></li>}
+            {f.quickest && <li><span aria-hidden="true">⚡</span><span><b>{f.quickest.pace === "lightning" ? "Lightning quick" : "Quick"} in {f.quickest.topic}:</b> right answers take about {secs(f.quickest.paceSeconds)}, where about {secs(f.quickest.expectedSeconds)} is expected ({f.quickest.withinExpected} of {f.quickest.timedRight} within the expected time).</span></li>}
+            {slowButRight.map((t) => <li key={t.topic}><span aria-hidden="true">🐢</span><span><b>Right but slow in {t.topic}:</b> about {secs(t.paceSeconds)} a question, where about {secs(t.expectedSeconds)} is expected. The method is there; more practice will bring the speed.</span></li>)}
             {f.mostAccurate && <li><span aria-hidden="true">🎯</span><span><b>Most accurate in {f.mostAccurate.topic}:</b> {pct(f.mostAccurate.accuracy)} right at the first try ({f.mostAccurate.rightFirstTry} of {f.mostAccurate.answered}).</span></li>}
             {f.mostPractised && <li><span aria-hidden="true">📚</span><span><b>Most practised: {f.mostPractised.topic}</b> ({f.mostPractised.answered} questions).</span></li>}
             {f.stuck.length > 0 && <li><span aria-hidden="true">🧩</span><span><b>Stuck on:</b> {f.stuck.map((x) => x.skill).join("; ")}. Fewer than half right at the first try, or the full solution opened more than once. Sitting together for the next lesson on these usually helps.</span></li>}
-            {!f.quickest && !f.mostAccurate && !f.mostPractised && !f.stuck.length && <li><span aria-hidden="true">⏳</span><span>Not enough answers yet to say where {name} is strongest. This fills in after about five questions in two or more topics.</span></li>}
+            {!f.quickest && !slowButRight.length && !f.mostAccurate && !f.mostPractised && !f.stuck.length && <li><span aria-hidden="true">⏳</span><span>Not enough answers yet to say where {name} is strongest. This fills in after about five questions in two or more topics.</span></li>}
           </ul>
         </section>
       )}
@@ -944,7 +950,8 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
                 <div className="topic-head"><b>{t.topic}</b><span className="muted small">{t.answered} question{t.answered === 1 ? "" : "s"} · {t.skills} skill{t.skills === 1 ? "" : "s"}</span></div>
                 <div className="measure"><span>Right at the first try</span><span className="bar"><span style={{ width: `${Math.round((t.accuracy ?? 0) * 100)}%` }} /></span><span>{pct(t.accuracy)}</span></div>
                 <div className="measure"><span>Without help</span><span className="bar"><span style={{ width: `${Math.round((t.independence ?? 0) * 100)}%` }} /></span><span>{pct(t.independence)}</span></div>
-                <p className="small muted">{t.paceSeconds === null ? "Pace: not enough timed answers yet." : `Pace: about ${secs(t.paceSeconds)} a question${paceWord(t) ? ` (${paceWord(t)})` : ""}.`}{t.stuck.length ? ` Stuck on: ${t.stuck.join("; ")}.` : ""}</p>
+                <div className="measure"><span>Right and on time</span><span className="bar"><span style={{ width: `${t.pace === null ? 0 : Math.round((t.withinExpected / Math.max(1, t.timedRight)) * 100)}%` }} /></span><span>{t.pace === null ? "not enough yet" : `${t.withinExpected} of ${t.timedRight}`}</span></div>
+                <p className="small muted">{t.pace === null ? "Speed: not enough timed right answers yet." : `Speed: about ${secs(t.paceSeconds)} a question, where about ${secs(t.expectedSeconds)} is expected (${paceWord(t)}).`}{t.stuck.length ? ` Stuck on: ${t.stuck.join("; ")}.` : ""}</p>
               </li>
             ))}
           </ul>
@@ -958,8 +965,10 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
         <summary>How to read this page</summary>
         <ul>
           <li>Everything here is counted from {name}'s own answers in OpenPath. Nothing is estimated or predicted.</li>
-          <li>"Quicker" and "takes longer" compare {name} only with their own pace in other topics, never with other children.</li>
-          <li>Pace is the middle time for questions answered right at the first try. Timing began on 13 November 2026, so earlier answers have none, and it includes reading the question.</li>
+          <li>First whether the answer is right, then how quick. Speed is looked at only for answers that were right at the first try without help.</li>
+          <li>Each question has an expected time, worked out from the question itself: time to read it, time for each step of the working (a long division is given more than a times-table fact), and time to write the answer. For example about 15 seconds for 7 × 8 and about 40 seconds for 873 ÷ 4 in Class 5.</li>
+          <li>"Lightning quick" means half the expected time or less; "within the expected time" means no longer than it. The expected times are OpenPath's own first estimates, not measured from other children, and will be corrected as real timings come in.</li>
+          <li>Timing began on 13 November 2026, so earlier answers have none. An answer in under a second and a half is not judged for speed.</li>
           <li>A measure appears only after five answers; before that it says "not enough yet".</li>
           <li>A skill is called checked only after it is answered correctly again at least a week later. The lessons are machine-checked for correctness and have not been reviewed by a teacher.</li>
         </ul>
