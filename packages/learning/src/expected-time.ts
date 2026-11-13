@@ -44,16 +44,17 @@ export function stepSeconds(op: string, inputs: readonly (number | string)[]): n
 
 /**
  * About how many seconds the question should take: reading (2 words a second, and 3 s to settle), each step (deciding,
- * then doing), writing the answer (2 s and 0.7 s a character). Younger classes are given more time for the same question (up to half as long again).
+ * then doing), writing the answer (2 s and 0.7 s a character). Younger classes are given more time for the same question.
  * Rounded to 5 s; never less than 10 s. With no steps recorded, the question's difficulty (1 to 5) stands in for them.
  */
+const AGE_ALLOWANCE = [1.5, 1.5, 1.25, 1.25];
 export function expectedSeconds(q: TimedQuestion, grade?: number): number {
   const words = q.prompt.trim().split(/\s+/).filter(Boolean).length;
   const read = 3 + words / 2;
   const work = q.steps?.length ? q.steps.reduce((t, s) => t + DECIDE + stepSeconds(s.op, s.inputs), 0) : 10 * Math.max(1, Math.min(5, q.difficulty ?? 2));
   const write = 2 + 0.7 * Math.min(20, q.answer.length);
-  // a smooth allowance by age (one rule for every class): Class 1 half as long again, easing to none from Class 6
-  const age = grade === undefined ? 1 : Math.min(1.5, Math.max(1, 1 + (6 - grade) / 8));
+  // one allowance table for every class (Class 1–2 half as long again, Class 3–4 a quarter more, then none)
+  const age = grade === undefined ? 1 : AGE_ALLOWANCE[grade - 1] ?? 1;
   return Math.max(10, Math.round(((read + work + write) * age) / 5) * 5);
 }
 
