@@ -191,3 +191,7 @@ body:has(.year-paper) { background: #fbfaf6; }
 .simple-setup select:disabled { background: #f4f4f8; color: var(--muted); }
 details.more-options { border-top: 1px solid var(--line); padding-top: 10px; }
 details.more-options > summary { cursor: pointer; font-weight: 700; color: var(--brand); padding: 8px 0; }
+
+/* pick@1: tap-to-answer values, two per row */
+.options.picks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.options.picks .option { min-height: 52px; justify-content: center; font-size: 1.1rem; font-weight: 600; }

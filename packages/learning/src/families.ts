@@ -68,6 +68,7 @@ const F: Def[] = [
     },
     reject: ([l, w]) => (l < 1 || w < 1 || l > 12 || w > 12 ? "Only rectangles with whole-number sides up to 12 are supported." : null),
     prompt: ([l, w]) => `A rectangle is ${l} cm by ${w} cm. What is its area in square centimetres?`,
+    figure: ([l, w]) => ({ type: "shape", kind: l === w ? "square" : "rectangle", lengths: [`${l} cm`, `${w} cm`] }),
     solve: ([l, w]) => ({ steps: [{ ...mul(l, w, MT, "area"), justification: { rule: "unit-coverage" as const, rows: l, columns: w, unit: "square cm" } }], answer: l * w }),
     validate: ([l, w], v) => {
       let n = 0;
@@ -572,6 +573,7 @@ const F: Def[] = [
     parse: () => null,
     reject: ([l, w]) => (l < 1 || w < 1 || l > 20 || w > 20 || l === w ? "Only rectangles (not squares) with whole-number sides up to 20 are supported." : null),
     prompt: ([l, w]) => `A rectangle is ${l} cm long and ${w} cm wide. What is its perimeter in centimetres?`,
+    figure: ([l, w]) => ({ type: "shape", kind: "rectangle", outline: true, lengths: [`${l} cm`, `${w} cm`] }),
     solve: ([l, w]) => ({ steps: [
       { id: "pair", op: "add", competency: "MATH.number.addition", inputs: [l, w], value: l + w, justification: { rule: "additive-combination" as const, what: "one length and one width of the rectangle", parts: [l, w] } },
       { id: "double", op: "multiply", competency: "MATH.measurement.rectangle-perimeter", inputs: [2, l + w], value: 2 * (l + w), justification: { rule: "scaling" as const, factor: 2, what: "half-perimeter (the rectangle has two pairs of equal sides)" } },
@@ -882,6 +884,7 @@ const F: Def[] = [
     parse: () => null,
     reject: ([l, w, h]) => (l < 2 || w < 2 || h < 2 || l > 8 || w > 8 || h > 8 ? "Only cuboids with whole-number sides from 2 to 8 are supported." : null),
     prompt: ([l, w, h]) => `A box is built from 1 cm cubes: ${l} long, ${w} wide and ${h} high. How many cubes is that?`,
+    figure: ([l, w, h]) => ({ type: "solid", name: l === w && w === h ? "cube" : "cuboid", dims: [`${l} long`, `${w} wide`, `${h} high`] }),
     solve: ([l, w, h]) => ({ steps: [mul(l, w, MT, "layer"), mul(l * w, h, "MATH.measurement.volume-cubes", "layers")], answer: l * w * h }),
     validate: ([l, w, h], v) => {
       let n = 0;
@@ -1354,6 +1357,9 @@ function buildRaw(def: Def, p: number[], form: Problem["form"] = "typed"): Probl
   });
   const fig = def.figure?.(p) ?? null;
   const base = { family: def.id, params: p, competency: def.competency, skill: def.skill ?? def.competency, steps, ...(fig ? { figure: fig } : {}) };
+  // pick@1: only the typed form taps (a multiple-choice form has its own options; a word form is read as a story)
+  const picks = form === "typed" ? def.picks?.(p) : undefined;
+  if (picks && (def.type === "choice" || picks.filter((x) => x.value === shown(def, answer)).length !== 1)) throw new Error(`families@1: ${def.id}(${p}) picks do not include the answer`);
   if (form === "mc") {
     if (!def.mc || (typeof answer !== "number" && typeof answer !== "string")) throw new Error(`families@1: ${def.id} has no multiple-choice form`);
     const opts = mcOptions(def, p, answer, raw);
@@ -1383,7 +1389,7 @@ function buildRaw(def: Def, p: number[], form: Problem["form"] = "typed"): Probl
   // a family's own options (families@2), or the first family's fixed pair
   const own = choice && def.choices ? def.choices(p) : null;
   if (own && (own.length < 2 || own.length > 4 || new Set(own).size !== own.length || typeof answer !== "number" || !own[answer])) throw new Error(`families@2: ${def.id}(${p}) needs 2–4 distinct options and the index of the right one`);
-  return { ...base, id: `gen:${def.id}:${p.join(",")}`, form, prompt: def.prompt(p), type: def.type, answer: choice ? "ABCD"[answer as number] : shown(def, answer), bugs, ...(choice ? { options: own ?? ["The line", "The parabola y = x²"] } : {}) };
+  return { ...base, id: `gen:${def.id}:${p.join(",")}`, form, prompt: def.prompt(p), type: def.type, answer: choice ? "ABCD"[answer as number] : shown(def, answer), bugs, ...(choice ? { options: own ?? ["The line", "The parabola y = x²"] } : {}), ...(picks ? { picks } : {}) };
 }
 
 export type Parsed = { supported: true; problem: Problem } | { supported: false; reason: string; family?: string };

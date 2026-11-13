@@ -29410,7 +29410,7 @@
       "A right angle (90°) is a square corner. Smaller than a right angle is acute, between a right angle and a straight line is obtuse, and a straight line is a straight angle (180°)."
      ],
      "math": [
-      "The table gives the sizes of four angles: P = 90°, Q = 135°, R = 180°, S = 55°. Which one is a right angle? Write its size in degrees.",
+      "Look at the four angles in the picture. Which one is a right angle?",
       "A right angle is exactly 90°"
      ],
      "widget": {
@@ -29497,7 +29497,7 @@
         "Compare each angle with 90°: less is acute, equal is right; more than 90° but less than 180° is obtuse; exactly 180° is straight."
        ],
        "math": [
-        "The table gives the sizes of four angles: P = 90°, Q = 105°, R = 180°, S = 60°. Which one is an obtuse angle? Write its size in degrees.",
+        "Look at the four angles in the picture. Which one is an obtuse angle?",
         "An obtuse angle is more than 90° but less than 180°: 105°"
        ],
        "widget": {
@@ -29524,7 +29524,7 @@
         "Hold the corner in the angle: if the angle fits inside the corner it is acute; if the corner fits inside the angle (and the arms are not one straight line) it is obtuse."
        ],
        "math": [
-        "The table gives the sizes of four angles: P = 30°, Q = 90°, R = 145°, S = 180°. Which one is a straight angle? Write its size in degrees.",
+        "Look at the four angles in the picture. Which one is a straight angle?",
         "A straight angle is exactly 180°"
        ],
        "widget": {
@@ -29549,7 +29549,7 @@
        "instance": "gen:aeang:2,10,21,1",
        "title": "A common wrong answer",
        "text": [
-        "A question: “The table gives the sizes of four angles: P = 90°, Q = 105°, R = 180°, S = 50°. Which one is an obtuse angle? Write its size in degrees.” A common wrong answer is 180.",
+        "A question: “Look at the four angles in the picture. Which one is an obtuse angle?” A common wrong answer is 180.",
         "A straight angle (180°) is not obtuse; an obtuse angle is between 90° and 180°."
        ],
        "math": [

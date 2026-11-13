@@ -325,7 +325,7 @@ export const B05: Def[] = [
     reject: (p) => (!inRange(p, [[0, 3], [2, 17], [19, 34], [0, 3]]) ? "One acute (10° to 85°), one right, one obtuse (95° to 170°) and one straight angle." : null),
     prompt: (p) => {
       const xs = angleList(p);
-      return `The table gives the sizes of four angles: P = ${xs[0]}°, Q = ${xs[1]}°, R = ${xs[2]}°, S = ${xs[3]}°. Which one is ${p[0] % 2 === 0 ? "an" : "a"} ${KINDS[p[0]]} angle? Write its size in degrees.`;
+      return `Look at the four angles in the picture. Which one is ${p[0] % 2 === 0 ? "an" : "a"} ${KINDS[p[0]]} angle?`;
     },
     solve: ([t, a, o]) => {
       const ans = [5 * a, 90, 5 * o, 180][t];
@@ -359,7 +359,8 @@ export const B05: Def[] = [
     domain: [[0, 3], [2, 17], [19, 34], [0, 3]],
     cap: 400,
     difficulty: ([t, a, o]) => (t === 1 || t === 3 ? 1 : (t === 0 && a >= 15) || (t === 2 && o <= 21) ? 3 : 2),
-    figure: (p) => ({ type: "table", head: ["Angle", "P", "Q", "R", "S"], rows: [["Size", ...angleList(p).map((x) => `${x}°`)]] }),
+    figure: (p) => ({ type: "angles", items: angleList(p).map((deg, i) => ({ label: "PQRS"[i], deg })) }),
+    picks: (p) => angleList(p).map((deg, i) => ({ label: `${"PQRS"[i]} · ${deg}°`, value: String(deg) })),
     word: (p) => {
       const xs = angleList(p);
       return `${name(p[1] + p[2])} measures four angles drawn in a geometry notebook: ${xs[0]}°, ${xs[1]}°, ${xs[2]}° and ${xs[3]}°. Which of these is ${p[0] % 2 === 0 ? "an" : "a"} ${KINDS[p[0]]} angle? Write its size in degrees.`;
@@ -899,6 +900,7 @@ export const B05: Def[] = [
     distractors: ([, a, b]) => [2 * a + b, a + 2 * b, a * b + 2 * (a + b)],
     variants: () => [],
     explain: (s) => (s.id === "area" ? `Covering needs the area: ${s.inputs[0]} rows of ${s.inputs[1]} squares = ${s.value}` : `Going round needs the perimeter: ${s.inputs[1]} + ${s.inputs[0]} + ${s.inputs[1]} + ${s.inputs[0]} = ${s.value}`),
+    figure: ([need, a, b, ctx]) => ({ type: "shape", kind: "rectangle", lengths: [`${b} ${ctx === 1 ? "cm" : "m"}`, `${a} ${ctx === 1 ? "cm" : "m"}`] }),
     domain: [[0, 1], [2, 15], [3, 16], [0, 2]],
     cap: 400,
     difficulty: ([, a, b]) => (a * b <= 30 ? 1 : a <= 9 ? 2 : 3),

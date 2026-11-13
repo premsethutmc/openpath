@@ -265,10 +265,13 @@ def ahtile(q):
     return Expect(str(rest))
 
 
-@ref('aeang', method='read the four angle sizes from the table in the prompt and pick the one in the requested class')
+@ref('aeang', method='read the four angle sizes from the prompt or, when the prompt points to the picture, from the labelled angles drawn in it, and pick the one in the requested class')
 def aeang(q):
     p = q['prompt']
     vals = {k: int(v) for k, v in re.findall(r'([A-Z]) = (\d+)°', p)}
+    fig = q.get('figure') or {}
+    if not vals and 'in the picture' in p and fig.get('type') == 'angles':
+        vals = {it['label']: int(it['deg']) for it in fig.get('items', [])}
     kinds = {'acute': lambda v: 0 < v < 90, 'right': lambda v: v == 90, 'obtuse': lambda v: 90 < v < 180, 'straight': lambda v: v == 180, 'reflex': lambda v: 180 < v < 360}
     k = re.search(r'Which one is an? (\w+) angle', p).group(1)
     hits = [v for v in vals.values() if kinds[k](v)]

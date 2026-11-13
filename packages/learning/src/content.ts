@@ -36,6 +36,8 @@ export interface Question {
   probe?: "concept" | "procedure" | "recall" | "transfer";
   hint?: string;
   options?: string[];
+  /** pick@1: tap one of these instead of typing (graded as the typed answer). */
+  picks?: { label: string; value: string }[];
   /** A picture the question needs (family-kit Visual). */
   figure?: { type: string; [k: string]: unknown };
   misconceptions?: { when: string; hypothesis: Hypothesis; says: string }[];
@@ -188,7 +190,7 @@ export const question = (id: string): Question => {
   // written@1: an educator marks it; its "answer" is the educator's mark of correct, never a text to match
   if (w) return { id, competency: w.competency, skill: w.competency, role: "practice", type: "written", prompt: w.prompt, answer: MARKED_RIGHT, solution: `An educator marks this against ${w.rubric.length} criteria (${outOf(w)} points): ${w.rubric.map((r) => r.criterion).join("; ")}.`, ...(w.figure ? { figure: w.figure } : {}), difficulty: 3, source: w.source, licence: w.licence, review: "provisional" };
   const g = problemOf(id);
-  if (g) return { id, competency: g.competency, skill: g.skill, role: "generated", type: g.type, prompt: g.prompt, answer: g.answer, ...(g.expanded ? { expanded: true as const } : {}), solution: g.steps.map((st) => explainStep(g, st)).join(". ") + ".", options: g.options, ...(g.figure ? { figure: g.figure } : {}), difficulty: 1, misconceptions: misconceptionsOf(g), source: "Generated from a supported problem family (families@1)", licence: "CC0", review: "provisional" };
+  if (g) return { id, competency: g.competency, skill: g.skill, role: "generated", type: g.type, prompt: g.prompt, answer: g.answer, ...(g.expanded ? { expanded: true as const } : {}), solution: g.steps.map((st) => explainStep(g, st)).join(". ") + ".", options: g.options, ...(g.picks ? { picks: g.picks } : {}), ...(g.figure ? { figure: g.figure } : {}), difficulty: 1, misconceptions: misconceptionsOf(g), source: "Generated from a supported problem family (families@1)", licence: "CC0", review: "provisional" };
   if (f) return { id: f.id, competency: f.competencies.at(-1)!, skill: f.competencies.at(-1)!, role: "challenge", type: f.type, prompt: f.prompt, answer: f.answer, solution: f.solution, options: f.options, difficulty: 3, source: "Original, written for OpenPath", licence: "CC0", review: "provisional" };
   throw new Error(`Unknown question ${id}`);
 };

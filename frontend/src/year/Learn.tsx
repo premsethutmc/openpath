@@ -123,7 +123,18 @@ function SyntaxHelp({ q }: { q: { type: string; answer?: string } }) {
   );
 }
 /** An answer box for any question type. */
-export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question, "type" | "options"> & { id?: string; answer?: string }; value: string; setValue: (v: string) => void; disabled: boolean }) {
+export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question, "type" | "options" | "picks"> & { id?: string; answer?: string }; value: string; setValue: (v: string) => void; disabled: boolean }) {
+  // pick@1: the answer is one of the values the question shows: tap it (submits exactly what typing it would)
+  if (q.picks?.length)
+    return (
+      <div className="options picks" role="radiogroup" aria-label="Tap your answer">
+        {q.picks.map((o, i) => (
+          <button key={i} type="button" role="radio" aria-checked={value === o.value} className={`option ${value === o.value ? "picked" : ""}`} disabled={disabled} onClick={() => setValue(o.value)}>
+            <span>{o.label}</span>
+          </button>
+        ))}
+      </div>
+    );
   if (q.type === "choice")
     return (
       <div className="options" role="radiogroup" aria-label="Choose one answer">
@@ -210,7 +221,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const [asked, setAsked] = useState(0);
   const [clarify, setClarify] = useState<string | null>(null);
   const submitting = useRef(false);
-  const workable = q.type !== "written";
+  // nothing to work out when the answer is tapped from the ones shown
+  const workable = q.type !== "written" && !q.picks?.length;
   if (DEEP_EVALUATION && !releaseOf(qid)) return <p role="note" data-evaluation-stop="review-required">This question needs educator review before evaluation. Nothing is counted as solved.</p>;
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
