@@ -183,3 +183,11 @@ body:has(.year-paper) { background: #fbfaf6; }
 /* Curriculum navigation remains tappable when labels wrap on a phone. */
 .page .actions { flex-wrap: wrap; }
 .page .actions > * { max-width: 100%; min-width: 0; white-space: normal; }
+
+/* simple-setup@1: two questions and one button; the detailed choices are folded away */
+.simple-setup .field { display: flex; flex-direction: column; gap: 6px; font-weight: 700; color: var(--ink); }
+.simple-setup select { width: 100%; min-height: 52px; font: inherit; font-size: 1.05rem; font-weight: 600; padding: 10px 12px; border-radius: 14px; border: 2px solid var(--line); background: #fff; color: var(--ink); }
+.simple-setup select:focus-visible { outline: 3px solid var(--brand); outline-offset: 1px; }
+.simple-setup select:disabled { background: #f4f4f8; color: var(--muted); }
+details.more-options { border-top: 1px solid var(--line); padding-top: 10px; }
+details.more-options > summary { cursor: pointer; font-weight: 700; color: var(--brand); padding: 8px 0; }

@@ -763,6 +763,17 @@ function StuckBox({ onOpen }: { onOpen: (qid: string) => void }) {
   );
 }
 
+/** simple-setup@1: the boards OpenPath has a curriculum for, and the grades each one covers. */
+const boardOf = (r: CurriculumRelease) => r.source.board ?? "Another textbook";
+const boardLabel = (b: string) => b.replace(/\s*\(.*\)\s*$/, "");
+const GRADES = Array.from({ length: 12 }, (_, i) => i + 1);
+/** a real board's own curriculum (mapped from its curriculum inventory); the sample books stay under "More options" */
+const realBoard = (r: CurriculumRelease) => (r.source as { synthetic?: boolean }).synthetic === false && !!r.source.board;
+const ALL_BOARDS = [...new Set(GRADES.flatMap((g) => releasesFor(g).filter(realBoard).map(boardOf)))].sort((a, b) => boardLabel(a).localeCompare(boardLabel(b)));
+const gradesOf = (board: string) => (board ? GRADES.filter((g) => releasesFor(g).some((r) => realBoard(r) && boardOf(r) === board)) : []);
+/** The detailed choices start closed. Test builds keep them open: the browser journeys written before simple-setup@1 use them. */
+const MORE_OPTIONS_OPEN = typeof OPENPATH_REVIEW_FIXTURE !== "undefined" && OPENPATH_REVIEW_FIXTURE === true;
+
 function Setup({ current, sameYear = false, currentYear, goals: active, saving, onSave }: { current: number | null; sameYear?: boolean; currentYear?: string; goals: string[]; saving: boolean; onSave: (grade: number, r: CurriculumRelease, saveRelease: boolean, goal: string | null, year: string) => void }) {
   const [grade, setGrade] = useState<number | null>(current ? sameYear ? current : Math.min(current + 1, 12) : null);
   const [year, setYear] = useState(sameYear && currentYear ? currentYear : academicYear(new Date(), current ? 1 : 0));
@@ -774,6 +785,10 @@ function Setup({ current, sameYear = false, currentYear, goals: active, saving, 
   const [picked, setPicked] = useState<Record<string, Set<string>>>({});
   const [goal, setGoal] = useState<string | null>(active[0] ?? null);
   const [problem, setProblem] = useState("");
+  const [quickBoard, setQuickBoard] = useState("");
+  const [quickGrade, setQuickGrade] = useState<number | null>(current ? (sameYear ? current : Math.min(current + 1, 12)) : null);
+  // the board's own curriculum for the grade
+  const quickRelease = quickBoard && quickGrade ? (releasesFor(quickGrade).find((r) => realBoard(r) && boardOf(r) === quickBoard) ?? null) : null;
   const sample = grade ? sampleFor(grade) : null;
   const outcomes = draft ? allOutcomesOf(draft).map(({ chapter, sections, outcome }) => ({ c: chapter, where: [chapter.title, ...sections.map((x) => x.title)].join(" › "), o: outcome })) : [];
   const finish = (r: CurriculumRelease, own: boolean) => onSave(grade!, r, own, goal, year);
@@ -792,6 +807,26 @@ function Setup({ current, sameYear = false, currentYear, goals: active, saving, 
     <div className="stack">
       <h1>{sameYear ? "Choose your curriculum" : current ? "Start the next year" : "Set up My Learning Year"}</h1>
       {current && <p className="muted">Every record from Grade {current} is kept. Skills you have shown stay shown.</p>}
+      {/* simple-setup@1: two questions and one button. Everything else keeps its default and stays under "More options". */}
+      <div className="stack simple-setup">
+        <label className="field" htmlFor="setup-board">Board
+          <select id="setup-board" value={quickBoard} onChange={(e) => { setQuickBoard(e.target.value); if (quickGrade && !gradesOf(e.target.value).includes(quickGrade)) setQuickGrade(null); }}>
+            <option value="">Choose a board</option>
+            {ALL_BOARDS.map((b) => <option key={b} value={b}>{boardLabel(b)}</option>)}
+          </select>
+        </label>
+        <label className="field" htmlFor="setup-grade">Grade
+          <select id="setup-grade" value={quickGrade ?? ""} disabled={!quickBoard} onChange={(e) => setQuickGrade(e.target.value ? Number(e.target.value) : null)}>
+            <option value="">{quickBoard ? "Choose a grade" : "Choose a board first"}</option>
+            {gradesOf(quickBoard).map((g) => <option key={g} value={g}>Grade {g}</option>)}
+          </select>
+        </label>
+        {quickRelease && <p className="muted small">{quickRelease.title}</p>}
+        <button className="primary" disabled={saving || !quickRelease} onClick={() => quickRelease && onSave(quickGrade!, quickRelease, false, goal, year)}>{saving ? "Saving…" : sameYear ? "Use this board and grade" : "Start learning"}</button>
+      </div>
+      <details className="more-options" open={MORE_OPTIONS_OPEN}>
+      <summary>More options (year, goal, another textbook)</summary>
+      <div className="stack">
       <h2>Which grade?</h2>
       <div className="tiles">
         {Array.from({ length: 12 }, (_, i) => i + 1).map((g) => (
@@ -892,6 +927,8 @@ function Setup({ current, sameYear = false, currentYear, goals: active, saving, 
           }}>{saving ? "Saving…" : `Use this curriculum for Grade ${grade}`}</button>
         </div>
       )}
+      </div>
+      </details>
     </div>
   );
 }

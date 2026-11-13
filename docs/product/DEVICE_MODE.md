@@ -16,6 +16,14 @@ is kept in the browser.
 - A learner is added on the device (a first name or nickname). A banner says on every screen that progress is kept in this
   browser only.
 
+## Setting up (simple-setup@1, every build)
+
+The owner asked for less clutter (2026-11-13): the setup screen asks two things, each a drop-down, Board then Grade, and has
+one button, "Start learning". Only real boards are listed (CBSE, CISCE, Tamil Nadu State Board) and only the grades a board
+has. The academic year, subjects, long-term goal, sample books and "Add my textbook" keep their defaults and sit under "More
+options", closed. Test builds keep "More options" open, because the browser journeys written earlier use those controls; the
+drop-downs themselves were checked by hand in a headless browser, not by an automated browser test yet.
+
 ## What is different from the server
 
 | | With the server | On this device |
