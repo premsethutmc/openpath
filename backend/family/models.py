@@ -351,3 +351,17 @@ class HandoverAcknowledgement(models.Model):
 
 # recovery-handoff@0 (RESEARCH, deep-recovery@0): defined in handoff_models.py, registered here
 from .handoff_models import RecoveryAnswersShare, RecoveryHandoff  # noqa: E402,F401
+
+
+class WordProblemUse(models.Model):
+    """word-reader@1: how many word problems an account has had read by the language model on one day, and the tokens
+    used. No problem text is kept. This is what the daily limit is counted from."""
+
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="word_problem_use")
+    day = models.DateField()
+    requests = models.PositiveIntegerField(default=0)
+    input_tokens = models.PositiveIntegerField(default=0)
+    output_tokens = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        constraints = [models.UniqueConstraint(fields=["user", "day"], name="word_problem_use_user_day")]

@@ -100,6 +100,7 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES": {
         "enrol": "60/hour",
         "account": os.environ.get("OPENPATH_ACCOUNT_RATE", "30/hour"),
+        "word-problem": "60/hour",
         "account-register": os.environ.get("OPENPATH_ACCOUNT_RATE", "20/hour"),
         "account-login": os.environ.get("OPENPATH_ACCOUNT_RATE", "60/hour"),
         "account-reset": os.environ.get("OPENPATH_ACCOUNT_RATE", "10/hour"),
@@ -144,6 +145,16 @@ OPENPATH_LLM_MAX_OUTPUT_TOKENS = int(os.environ.get("OPENPATH_LLM_MAX_OUTPUT_TOK
 OPENPATH_LLM_TIMEOUT_S = float(os.environ.get("OPENPATH_LLM_TIMEOUT_S", "60"))
 OPENPATH_LLM_RETRIES = int(os.environ.get("OPENPATH_LLM_RETRIES", "1"))
 # bounded cost: requests and tokens per day across all developers; over either limit, requests are refused
+# word-reader@1: a typed word problem read into one calculation by a language model (family/word_problem.py).
+# Off unless OPENPATH_WORD_PROBLEMS=on AND a key and model are set. The key is separate from the essay evaluator's.
+OPENPATH_WORD_PROBLEMS = os.environ.get("OPENPATH_WORD_PROBLEMS", "off")
+OPENPATH_WORD_PROBLEM_PROVIDER = os.environ.get("OPENPATH_WORD_PROBLEM_PROVIDER", "anthropic")
+OPENPATH_WORD_PROBLEM_MODEL = os.environ.get("OPENPATH_WORD_PROBLEM_MODEL", "")
+OPENPATH_WORD_PROBLEM_BASE_URL = os.environ.get("OPENPATH_WORD_PROBLEM_BASE_URL", "https://api.anthropic.com")
+OPENPATH_WORD_PROBLEM_API_KEY = os.environ.get("OPENPATH_WORD_PROBLEM_API_KEY", "")
+# per account per day, and across every account per day (the second is the ceiling on a day's bill)
+OPENPATH_WORD_PROBLEM_DAILY = int(os.environ.get("OPENPATH_WORD_PROBLEM_DAILY", "20"))
+OPENPATH_WORD_PROBLEM_SITE_DAILY = int(os.environ.get("OPENPATH_WORD_PROBLEM_SITE_DAILY", "1000"))
 OPENPATH_ESSAY_DAILY_REQUESTS = int(os.environ.get("OPENPATH_ESSAY_DAILY_REQUESTS", "50"))
 OPENPATH_ESSAY_DAILY_TOKENS = int(os.environ.get("OPENPATH_ESSAY_DAILY_TOKENS", "300000"))
 OPENPATH_MAX_EVENTS_PER_SESSION = 5000

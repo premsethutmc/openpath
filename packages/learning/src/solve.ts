@@ -399,7 +399,8 @@ const absText = (a: Q) => fracText(q(a.n < 0n ? -a.n : a.n, a.d));
 // ------------------------------------------------------------------ the whole thing
 export type Solved =
   | { ok: true; kind: "arithmetic" | "equation" | "numbers" | "units"; problem: string; steps: WorkedStep[]; answer: string; also: string[]; value: Q | null; letter?: string; unit?: string }
-  | { ok: false; reason: string };
+  /** `words`: refused because it is written in words (a word problem), which a language reader might still read */
+  | { ok: false; reason: string; words?: true };
 
 function clean(text: string): { text: string; letter: string | null } {
   let s = text.toLowerCase().replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]+/g, (m) => "^" + [...m].map((c) => SUPER[c]).join("")).replace(/(\d)?([½⅓⅔¼¾⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞])/g, (_, w, f) => (w ? `${w} ${VULGAR[f]}` : VULGAR[f]));
@@ -639,7 +640,7 @@ export function solve(text: string): Solved {
     const tree = parse(tokens(s, null));
     return arithmetic(tree, show(tree));
   } catch (e) {
-    if (e instanceof Refuse) return { ok: false, reason: e.message };
+    if (e instanceof Refuse) return { ok: false, reason: e.message, ...(e.message === WORD_REASON ? { words: true as const } : {}) };
     return { ok: false, reason: "OpenPath could not read that as a calculation." };
   }
 }

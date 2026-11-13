@@ -93,7 +93,7 @@ type View =
   | { name: "curriculum-practice"; competency: string; back: View; stage?: "teaching" | "practice" }
   | { name: "module"; competency: string; back: View; reviewOnly?: boolean }
   | { name: "stuck"; qid: string; back?: View }
-  | { name: "worked"; text: string }
+  | { name: "worked"; text: string; read?: WordReading }
   | { name: "single"; qid: string; heading: string; note?: string }
   | { name: "years" };
 
@@ -360,7 +360,7 @@ function App() {
       </Shell>
     );
   if (view.name === "worked")
-    return <Shell banner={banner} error={error} top={top(home, name)}><Worked text={view.text} onExit={() => setView({ name: "year" })} /></Shell>;
+    return <Shell banner={banner} error={error} top={top(home, name)}><Worked text={view.text} read={view.read} onExit={() => setView({ name: "year" })} /></Shell>;
   if (view.name === "stuck")
     return (
       <Shell banner={banner} error={error} top={top(home, name)}>
@@ -572,7 +572,7 @@ function App() {
       <section aria-label="Stuck on a problem">
         <div className="section-title"><h2>Stuck on a problem?</h2></div>
         <p className="muted small">Type a problem from class or coaching. OpenPath works out what went wrong, teaches the skill it needs, and brings you back to it.</p>
-        <StuckBox grade={grade ?? undefined} onOpen={(qid) => setView({ name: "stuck", qid })} onWorked={(text) => setView({ name: "worked", text })} />
+        <StuckBox grade={grade ?? undefined} onOpen={(qid) => setView({ name: "stuck", qid })} onWorked={(text, read) => setView({ name: "worked", text, read })} />
         {stuckFor(grade).length > 0 && (
           <div className="cards" style={{ marginTop: 10 }}>
             {stuckFor(grade).map((q) => (
@@ -754,9 +754,29 @@ function ExamPlanCard({ goalId, ev }: { goalId: string; ev: Ctx["evidence"] }) {
   );
 }
 
-function StuckBox({ onOpen, onWorked, grade }: { onOpen: (qid: string) => void; onWorked: (text: string) => void; grade?: number }) {
+/** word-reader@1: how a typed word problem was read by the language reader on the server (never the answer). */
+interface WordReading { original: string; reading: string; unit: string }
+function StuckBox({ onOpen, onWorked, grade }: { onOpen: (qid: string) => void; onWorked: (text: string, read?: WordReading) => void; grade?: number }) {
   const [text, setText] = useState("");
   const [why, setWhy] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  // whether this site reads word problems, and how many of today's are left (never in a device build: there is no server)
+  const [words, setWords] = useState<{ available: boolean; limit: number; left: number } | null>(null);
+  useEffect(() => { if (!DEVICE_BUILD) api.request<{ available: boolean; limit: number; left: number }>("GET", "/solver/read/").then(setWords).catch(() => setWords(null)); }, []);
+  async function readWords(typed: string, fallback: string) {
+    setBusy(true);
+    try {
+      const r = await api.request<{ calculation?: string; reading?: string; unit?: string; cannot?: string; left: number }>("POST", "/solver/read/", { text: typed });
+      setWords((w) => (w ? { ...w, left: r.left } : w));
+      // the reading is used only if OpenPath's own solver can work the calculation and check it
+      if (r.calculation && r.reading && solve(r.calculation).ok) { setWhy(null); onWorked(r.calculation, { original: typed, reading: r.reading, unit: r.unit ?? "" }); }
+      else setWhy(r.cannot ?? "OpenPath could not read this one. Try typing just the calculation.");
+    } catch (er) {
+      setWhy(/used|resting/.test(String((er as Error).message)) ? String((er as Error).message) : fallback);
+    } finally {
+      setBusy(false);
+    }
+  }
   return (
     <form className="stack" onSubmit={(e) => {
       e.preventDefault();
@@ -769,19 +789,20 @@ function StuckBox({ onOpen, onWorked, grade }: { onOpen: (qid: string) => void; 
       // general-solver@1: no lesson of ours matches, so the calculation itself is worked, one move at a time
       const s = solve(text);
       if (s.ok) { setWhy(null); onWorked(text); }
+      else if (s.words && words?.available && !busy) { setWhy(null); void readWords(text.trim(), s.reason); }
       else setWhy(s.reason);
     }}>
       <label className="field">The problem<input aria-label="The problem" value={text} onChange={(e) => setText(e.target.value)} placeholder={grade && grade <= 5 ? "e.g. 3/4 + 1/8, or 15% of 200" : grade && grade <= 8 ? "e.g. 2x + 1 = 7, or 3/4 + 1/8" : "e.g. x² − 10x − 24 = 0, or ∫ from 2 to 9 of 6 dx"} /></label>
-      <p className="small muted">Type the calculation or equation, like 23 × 14 or 5/6 − 1/4. Also: HCF of 12 and 18, factors of 36, 3.5 km in m. Word problems are not read yet.</p>
+      <p className="small muted">Type the calculation or equation, like 23 × 14 or 5/6 − 1/4. Also: HCF of 12 and 18, factors of 36, 3.5 km in m. {words?.available ? `A word problem is read by an AI helper: only the words you type are sent to it. ${words.left} of ${words.limit} left today.` : "Word problems are not read yet."}</p>
       {why && <p className="feedback bad" role="status"><b>OpenPath can’t work through this one yet.</b> {why}</p>}
-      <button className="secondary" disabled={!text.trim()}>Work through it</button>
+      <button className="secondary" disabled={!text.trim() || busy}>{busy ? "Reading your problem…" : "Work through it"}</button>
     </form>
   );
 }
 
 /** general-solver@1: a typed calculation worked one move at a time. Nothing here is recorded: it is a calculator that shows
  *  its working, not a lesson and not evidence about the learner. The learner may try first; the steps open one by one. */
-function Worked({ text, onExit }: { text: string; onExit: () => void }) {
+function Worked({ text, read, onExit }: { text: string; read?: WordReading; onExit: () => void }) {
   const solved = useMemo(() => solve(text), [text]);
   const [shown, setShown] = useState(0);
   const [mine, setMine] = useState("");
@@ -791,7 +812,17 @@ function Worked({ text, onExit }: { text: string; onExit: () => void }) {
   return (
     <div className="stack worked">
       <p className="eyebrow">Your problem</p>
-      <h1 className="worked-problem">{solved.problem}</h1>
+      {read ? (
+        <>
+          <p className="worked-words">{read.original}</p>
+          <div className="worked-reading" role="note">
+            <span className="eyebrow">How OpenPath read it</span>
+            <p>{read.reading}</p>
+            <h1 className="worked-problem">{solved.problem}</h1>
+            <p className="muted small">Check this matches your problem. If it does not, go back and type the calculation yourself.</p>
+          </div>
+        </>
+      ) : <h1 className="worked-problem">{solved.problem}</h1>}
       {!all && (
         <form className="worked-try" onSubmit={(e) => { e.preventDefault(); setVerdict(sameAnswer(solved, mine)); }}>
           <label className="field">Try it first (optional)<input aria-label="Your answer" value={mine} inputMode="text" autoComplete="off" onChange={(e) => { setMine(e.target.value); setVerdict(undefined); }} placeholder="Your answer" /></label>
@@ -807,11 +838,11 @@ function Worked({ text, onExit }: { text: string; onExit: () => void }) {
         ))}
       </ol>
       {all ? (
-        <div className="worked-answer" role="status"><span className="eyebrow">Answer</span><strong>{solved.answer}</strong>{solved.also.map((a) => <span key={a} className="muted">{/^[≈A-Z]|=/.test(a) ? a : `= ${a}`}</span>)}</div>
+        <div className="worked-answer" role="status"><span className="eyebrow">Answer</span><strong>{solved.answer}{read?.unit && solved.kind !== "units" ? ` ${read.unit}` : ""}</strong>{solved.also.map((a) => <span key={a} className="muted">{/^[≈A-Z]|=/.test(a) ? a : `= ${a}`}</span>)}</div>
       ) : (
         <button className="primary" onClick={() => setShown(shown + 1)}>{shown === 0 ? "Show the first step" : shown === solved.steps.length - 1 ? "Show the last step" : "Show the next step"}</button>
       )}
-      <p className="muted small">Worked by OpenPath's calculator and checked by it line by line. It is not one of OpenPath's lessons, and nothing here is saved or counted.</p>
+      <p className="muted small">{read ? "The words were read by an AI helper, which can misread. The working and the answer are OpenPath's own calculator, checked line by line. " : "Worked by OpenPath's calculator and checked by it line by line. "}It is not one of OpenPath's lessons, and nothing here is saved or counted.</p>
       <button className="secondary" onClick={onExit}>{all ? "Done" : "Back"}</button>
     </div>
   );
