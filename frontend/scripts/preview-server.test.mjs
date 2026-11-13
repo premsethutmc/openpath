@@ -178,3 +178,14 @@ test("the mathematics preview opens on its curriculum home; the English app stay
     for (const s of [server, plain]) { s.closeAllConnections(); await new Promise((r) => s.close(r)); }
   }
 });
+
+test("PS-stay a site password given as DEMO_PASSWORD keeps its sessions across a restart; a new password or secret ends them", async () => {
+  const { configFromEnv } = await import("./preview-server.mjs");
+  const SECRET = "0123456789abcdef0123456789abcdef0123456789abcdef";
+  const hashOf = (env) => { const { config } = configFromEnv({ DEMO_SESSION_SECRET: SECRET, DEMO_DIST: process.cwd(), ...env }); return JSON.stringify(config?.hash ?? null); };
+  const a = hashOf({ DEMO_PASSWORD: "madurai-test-1" });
+  assert.notEqual(a, "null");
+  assert.equal(hashOf({ DEMO_PASSWORD: "madurai-test-1" }), a, "the same on the next start");
+  assert.notEqual(hashOf({ DEMO_PASSWORD: "madurai-test-2" }), a, "a new password");
+  assert.notEqual(hashOf({ DEMO_PASSWORD: "madurai-test-1", DEMO_SESSION_SECRET: SECRET.replace("0", "f") }), a, "a new secret");
+});

@@ -81,3 +81,15 @@ Neither the connection string nor the passwords are committed, logged, or sent t
   help, and pace; and four findings: quickest, most accurate, most practised, stuck on.
 - Measures, not predictions: "quicker" compares the learner with their own usual pace (the middle of their topic paces),
   never with other children; a measure appears only after five answers. Timing exists only from 13 Nov 2026.
+
+## Opening at once (instant-open@1) and staying in (stay-in@1)
+
+- The Maths page carries its own first screen (plain HTML and CSS), so something is on screen before any script runs.
+- The family image builds Maths with `--shell-cache`: a service worker at `/year/sw.js` keeps the app's own files on the
+  phone, answers from that copy at once (also while the server is asleep), and fetches newer files for next time. It
+  never handles `/api/` or anything outside `/year/`. If a newer app arrives while the old one is starting and nothing
+  has been touched, the page reloads itself once.
+- While the server cannot be reached the opening screen stays, says the first open can take up to a minute, and asks
+  again every three seconds for two minutes. If the site password has run out, the visitor is sent to the password page.
+- The site password's sessions now survive a restart (the salt comes from the session secret). Before, every restart,
+  and so every wake from sleep, asked for the site password again.

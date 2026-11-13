@@ -129,6 +129,10 @@ function AddDeviceLearner({ onDone, onError }: { onDone: () => void; onError: (m
   );
 }
 
+/** The private site's own gate answers 401 "FormBased" when its password session has run out (preview-server.mjs). */
+async function siteLocked(): Promise<boolean> {
+  try { const r = await fetch("/api/account/", { credentials: "same-origin", headers: { Accept: "application/json" } }); return r.status === 401 && (r.headers.get("www-authenticate") ?? "").startsWith("FormBased"); } catch { return false; }
+}
 function App() {
   const [pathwayTarget, setPathwayTarget] = useState(new URLSearchParams(location.search).get("target") ?? "");
   const [keyboardOpen, setKeyboardOpen] = useState(false);
@@ -152,6 +156,8 @@ function App() {
 
   async function refreshAccount() {
     let s = await api.status();
+    // instant-open@1: the app opened from the phone's own copy, but the site password has run out: go and ask for it
+    if (SHELL_CACHE && !s.available && (await siteLocked())) { location.assign(`/login?next=${encodeURIComponent(location.pathname + location.search)}`); return new Promise<void>(() => {}); }
     if (!s.available) throw new Error("The OpenPath account service is not reachable. Wait a minute (it may be waking up) and reload.");
     // name-start@1: a sign-in that has run out is renewed with this browser's own key
     if (NAME_START && !s.account.authenticated && (await guestSignIn())) s = await api.status();
@@ -170,7 +176,17 @@ function App() {
     }
   }
   useEffect(() => {
-    refreshAccount().catch((e) => setError(String(e.message ?? e))).finally(() => setReady(true));
+    // instant-open@1: the app can be on screen before the server is awake. While the server cannot be reached the opening
+    // screen stays and the account is asked for again every three seconds, for up to two minutes; then the error is shown.
+    (async () => {
+      for (let attempt = 0; ; attempt++) {
+        try { await refreshAccount(); return; } catch (e) {
+          const message = String((e as Error).message ?? e);
+          if (!SHELL_CACHE || !/not reachable/.test(message) || attempt >= 40) { setError(message); return; }
+          await new Promise((r) => setTimeout(r, 3000));
+        }
+      }
+    })().finally(() => setReady(true));
   }, []);
   const repo = useMemo(() => (learner ? new Repo(learner) : null), [learner]);
   // written@1: an educator's marks on this learner's written answers (read-only; only a mark of correct counts)
@@ -251,7 +267,7 @@ function App() {
   }
 
   const banner = DEVICE_BUILD ? <div className="test-banner" role="note">This device only · progress is kept in this browser, not on a server. It is not backed up and cannot be opened on another device.</div> : DEEP_EVALUATION ? <div className="test-banner" role="note">Controlled evaluation · integration methods only. Real educator review gates apply; unapproved content is unavailable.</div> : reviewFixtureActive() ? <div className="test-banner" role="note">TEST BUILD · questions are treated as educator-reviewed so that “verified” can be shown. Never use with real learners.</div> : null;
-  if (!ready) return <Shell banner={banner}><p className="muted center">Opening OpenPath…</p></Shell>;
+  if (!ready) return <Opening />;
   if (!signedIn) {
     const done = () => refreshAccount().catch((e) => setError(String(e.message ?? e)));
     return <Shell banner={banner} error={error}>{NAME_START && !emailAccount ? <NameStart onDone={done} onError={setError} onAccount={() => { setError(""); setEmailAccount(true); }} /> : <SignIn onDone={done} onError={setError} />}</Shell>;
@@ -1225,6 +1241,22 @@ function TopBar({ left, title }: { left: React.ReactNode; title: string }) {
 /** name-start@1: a name is enough to begin. The record is still kept on OpenPath's server, under a key made for this
  *  browser (an account with a made-up address and a random password, both kept only in this browser). Lose the browser's
  *  storage and the record cannot be opened again, which the screen says. An email account remains available. */
+declare const OPENPATH_SHELL_CACHE: boolean;
+/** instant-open@1: this build keeps its own files on the phone (a service worker), so it opens at once even while the server sleeps */
+const SHELL_CACHE = typeof OPENPATH_SHELL_CACHE !== "undefined" && OPENPATH_SHELL_CACHE === true;
+/** The opening screen: the same as the page's own first paint, and after a few seconds it says why it may be slow. */
+function Opening() {
+  const [slow, setSlow] = useState(false);
+  useEffect(() => { const t = setTimeout(() => setSlow(true), 4000); return () => clearTimeout(t); }, []);
+  return (
+    <div className="boot" role="status" aria-live="polite">
+      <div className="boot-mark" aria-hidden="true">🔢</div>
+      <p className="boot-name">OpenPath Maths</p>
+      <div className="boot-bar" aria-hidden="true"><span /></div>
+      <p className="boot-line">{slow ? "Waking up… the first open after a quiet spell can take up to a minute. Your progress is safe." : "Opening OpenPath…"}</p>
+    </div>
+  );
+}
 declare const OPENPATH_NAME_START: boolean;
 const NAME_START = typeof OPENPATH_NAME_START !== "undefined" && OPENPATH_NAME_START === true && !DEVICE_BUILD;
 const GUEST_KEY = "openpath.guest.v1";
@@ -1302,6 +1334,15 @@ function SignIn({ onDone, onError }: { onDone: () => void; onError: (e: string) 
       <p className="muted center"><button type="button" className="link" onClick={() => { setCreate(!create); onError(""); }}>{create ? "I already have an account" : "New here? Create an account"}</button></p>
     </form>
   );
+}
+
+// (here, at the end: every constant above has its value by now)
+if (SHELL_CACHE && "serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/year/sw.js", { scope: "/year/" }).catch(() => { /* the app works without it */ });
+  // a newer version arrived while this one was starting: take it now if the learner has not begun anything
+  let touched = false;
+  for (const ev of ["pointerdown", "keydown"]) addEventListener(ev, () => { touched = true; }, { once: true, capture: true });
+  navigator.serviceWorker.addEventListener("message", (e) => { if ((e.data as { type?: string } | null)?.type === "openpath-updated" && !touched && performance.now() < 15_000) location.reload(); });
 }
 
 createRoot(document.getElementById("root")!).render(<App />);

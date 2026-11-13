@@ -156,9 +156,16 @@ export function configFromEnv(env = process.env) {
   const plain = env.DEMO_PASSWORD ?? "";
   if (!env.DEMO_PASSWORD_HASH && plain && plain.length < 8)
     problems.push("DEMO_PASSWORD must be at least 8 characters");
+  // stay-in@1: the salt for a password given as DEMO_PASSWORD comes from the session secret, so the same password and
+  // secret give the same hash every time the server starts. With a random salt each start, the signing key changed and
+  // every visitor was asked for the site password again after each restart (on a free host: after every sleep).
+  // A new password, or a new secret, still ends every session.
+  const salt = env.DEMO_SESSION_SECRET
+    ? createHmac("sha256", env.DEMO_SESSION_SECRET).update("openpath-site-password-salt").digest().subarray(0, 16)
+    : undefined;
   const hashText =
     env.DEMO_PASSWORD_HASH ||
-    (plain.length >= 8 ? hashPasswordSync(plain) : "");
+    (plain.length >= 8 ? hashPasswordSync(plain, salt) : "");
   const hash = parseHash(hashText);
   if (!hash)
     problems.push(
