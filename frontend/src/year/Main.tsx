@@ -17,7 +17,8 @@ import { allOutcomesOf, assigned, review, subjectSupported, synthesise, type Cur
 import { UNSUPPORTED } from "../../../packages/learning/src/coverage";
 import { offersFor } from "../../../packages/learning/src/decomposition";
 import { extract } from "../../../packages/learning/src/extract";
-import { decompose, parseProblem, problemOf } from "../../../packages/learning/src/families";
+import { decompose, problemOf } from "../../../packages/learning/src/families";
+import { readProblem } from "../../../packages/learning/src/read-problem";
 import { familyOf, moduleState } from "../../../packages/learning/src/intervention";
 import { reviewFixtureActive, useReviewFixture } from "../../../packages/learning/src/evidence";
 import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages/learning/src/goals";
@@ -561,7 +562,7 @@ function App() {
       <section aria-label="Stuck on a problem">
         <div className="section-title"><h2>Stuck on a problem?</h2></div>
         <p className="muted small">Type a problem from class or coaching. OpenPath works out what went wrong, teaches the skill it needs, and brings you back to it.</p>
-        <StuckBox onOpen={(qid) => setView({ name: "stuck", qid })} />
+        <StuckBox grade={grade ?? undefined} onOpen={(qid) => setView({ name: "stuck", qid })} />
         {stuckFor(grade).length > 0 && (
           <div className="cards" style={{ marginTop: 10 }}>
             {stuckFor(grade).map((q) => (
@@ -743,19 +744,20 @@ function ExamPlanCard({ goalId, ev }: { goalId: string; ev: Ctx["evidence"] }) {
   );
 }
 
-function StuckBox({ onOpen }: { onOpen: (qid: string) => void }) {
+function StuckBox({ onOpen, grade }: { onOpen: (qid: string) => void; grade?: number }) {
   const [text, setText] = useState("");
   const [why, setWhy] = useState<string | null>(null);
   return (
     <form className="stack" onSubmit={(e) => {
       e.preventDefault();
-      const p = parseProblem(text);
+      const p = readProblem(text);
       if (p.supported) {
         setWhy(null);
         onOpen(p.problem.id);
       } else setWhy(p.reason);
     }}>
-      <label className="field">The problem<input aria-label="The problem" value={text} onChange={(e) => setText(e.target.value)} placeholder="e.g. ∫ from 2 to 9 of 6 dx, or 2/5 = □/15" /></label>
+      <label className="field">The problem<input aria-label="The problem" value={text} onChange={(e) => setText(e.target.value)} placeholder={grade && grade <= 5 ? "e.g. 3/4 + 1/8, or 15% of 200" : grade && grade <= 8 ? "e.g. 2x + 1 = 7, or 3/4 + 1/8" : "e.g. x² − 10x − 24 = 0, or ∫ from 2 to 9 of 6 dx"} /></label>
+      <p className="small muted">Type just the calculation or equation. Word problems are not read yet.</p>
       {why && <p className="feedback bad" role="status"><b>OpenPath can’t work through this one yet.</b> {why}</p>}
       <button className="secondary" disabled={!text.trim()}>Work through it</button>
     </form>

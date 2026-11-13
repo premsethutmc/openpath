@@ -413,7 +413,7 @@ test("journeys G and M: an unseen mistake on a typed problem is investigated; an
   await typeProblem(page, "Prove that √2 is irrational");
   await page.getByText("OpenPath can’t work through this one yet.").waitFor();
   await shot(page, "m1-unsupported-declined-phone");
-  await typeProblem(page, "1/3 + 1/4");
+  await typeProblem(page, "1/37 + 1/41");
   await page.getByText(/unlike denominators are not yet/).waitFor();
   assert.equal((await records(page, learner)).length, before, "nothing is recorded for an unsupported problem");
   // G: the width taken as the upper limit (6 × 9 = 54 instead of 6 × 7 = 42): not a scripted mistake
