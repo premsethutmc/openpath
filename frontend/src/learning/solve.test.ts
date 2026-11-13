@@ -77,3 +77,51 @@ test("S-6 a typed answer is compared by value", () => {
   assert.equal(sameAnswer(ok("7 ÷ 2"), "3 1/2"), true);
   assert.equal(sameAnswer(r, "seven twelfths"), null);
 });
+
+test("S-7 long multiplication and long division are also set out in columns, and the columns are right", () => {
+  const rand = rng(5);
+  const int = (lo: number, hi: number) => lo + Math.floor(rand() * (hi - lo + 1));
+  for (let i = 0; i < 2000; i++) {
+    const [a, b] = [int(10, 99999), int(10, 9999)];
+    const m = ok(`${a} × ${b}`);
+    const rows = m.steps[0].layout!;
+    assert.ok(rows, `${a} × ${b} has columns`);
+    assert.equal(rows.at(-1)!.trim(), String(a * b));
+    const partial = rows.slice(3, -2).map((r) => Number(r.trim().split(/\s+/)[0]));
+    assert.equal(partial.reduce((t, v) => t + v, 0), a * b, `${a} × ${b}: the rows add up`);
+    const [x, y] = [int(100, 9999999), int(2, 999)];
+    const d = ok(`${x} ÷ ${y}`);
+    const lines = d.steps[0].layout!;
+    assert.ok(lines, `${x} ÷ ${y} has columns`);
+    assert.equal(lines[0].trim(), String(Math.floor(x / y)), `${x} ÷ ${y}: the quotient on top`);
+    assert.equal(lines.at(-1)!.trim().split(/\s+/)[0], String(x % y), `${x} ÷ ${y}: what is left over`);
+  }
+  assert.equal(ok("7 × 8").steps[0].layout, undefined, "a times-table fact needs no columns");
+});
+
+test("S-8 HCF, LCM, prime factors and factors", () => {
+  assert.equal(ok("hcf of 12 and 18").answer, "6");
+  assert.equal(ok("LCM of 4, 6 and 10").answer, "60");
+  assert.equal(ok("HCF and LCM of 24 and 36").answer, "HCF = 12, LCM = 72");
+  assert.equal(ok("Find the highest common factor of 45 and 60?").answer, "15");
+  assert.equal(ok("prime factors of 84").answer, "2 × 2 × 3 × 7");
+  assert.equal(ok("factors of 36").answer, "1, 2, 3, 4, 6, 9, 12, 18, 36");
+  assert.equal(ok("hcf of 7 and 13").answer, "1");
+  const rand = rng(9);
+  const g = (a: number, b: number): number => (b ? g(b, a % b) : a);
+  for (let i = 0; i < 1500; i++) {
+    const [a, b] = [1 + Math.floor(rand() * 5000), 1 + Math.floor(rand() * 5000)];
+    assert.equal(ok(`hcf of ${a} and ${b}`).answer, String(g(a, b)));
+    assert.equal(ok(`lcm of ${a} and ${b}`).answer, String((a / g(a, b)) * b));
+  }
+  assert.equal(solve("hcf of 0 and 5").ok, false);
+});
+
+test("S-9 units: metric length, mass and capacity, time, rupees", () => {
+  const cases: [string, string][] = [["3.5 km in m", "3500 m"], ["250 cm to m", "2.5 m"], ["2 h 30 min in minutes", "150 minutes"], ["how many grams in 2 1/2 kg", "2500 g"], ["convert 90 minutes to hours", "1.5 hours"], ["1500 ml to l", "1.5 l"], ["3 weeks in days", "21 days"], ["250 paise in rupees", "2.5 rupees"], ["4 km 250 m in m", "4250 m"], ["45 min in hours", "0.75 hours"]];
+  for (const [text, answer] of cases) assert.equal(ok(text).answer, answer, text);
+  assert.equal(solve("5 kg to m").ok, false);
+  assert.equal(sameAnswer(ok("3.5 km in m"), "3500 m"), true);
+  assert.equal(sameAnswer(ok("3.5 km in m"), "3500"), true);
+  assert.equal(sameAnswer(ok("3.5 km in m"), "350"), false);
+});

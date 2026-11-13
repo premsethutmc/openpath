@@ -179,7 +179,8 @@ function show(n: Node, letter = "x", parent = 0, right = false): string {
 const hasVar = (n: Node): boolean => n.t === "var" || (n.t === "neg" && hasVar(n.e)) || (n.t === "pct" && hasVar(n.e)) || (n.t === "bin" && (hasVar(n.l) || hasVar(n.r)));
 
 // ------------------------------------------------------------------ arithmetic, one move at a time
-export interface WorkedStep { expression: string; explanation: string }
+/** `layout`: the same move set out in columns, the way it is written on paper (shown in a fixed-width block). */
+export interface WorkedStep { expression: string; explanation: string; layout?: string[] }
 const num = (v: Q, style: Style): Extract<Node, { t: "num" }> => ({ t: "num", v, style: isInt(v) ? "int" : style === "dec" && decimalOf(v) !== null ? "dec" : "frac" });
 const styleOf = (a: Extract<Node, { t: "num" }>, b: Extract<Node, { t: "num" }>): Style => (a.style === "frac" || b.style === "frac" ? "frac" : a.style === "dec" || b.style === "dec" ? "dec" : "int");
 const lcm = (a: bigint, b: bigint) => (a / gcd(a, b)) * b;
@@ -211,8 +212,50 @@ function wholeWorking(op: string, x: bigint, y: bigint): string | null {
   return null;
 }
 
+/** Long multiplication in columns (two positive whole numbers, the smaller with 2 to 4 digits). */
+function columnMultiply(x: bigint, y: bigint): string[] | null {
+  const [a, b] = x >= y ? [x, y] : [y, x];
+  if (b < 10n || b > 9999n || a > 99999999n) return null;
+  const digits = [...b.toString()].reverse().map(BigInt);
+  const rows = digits.map((d, i) => ({ v: a * d * 10n ** BigInt(i), note: `${a} × ${d * 10n ** BigInt(i)}` })).filter((r) => r.v !== 0n);
+  // self-check: the rows must add up to the product
+  if (rows.reduce((t, r) => t + r.v, 0n) !== a * b) return null;
+  const width = (a * b).toString().length + 2;
+  const pad = (t: string) => t.padStart(width);
+  const rule = pad("-".repeat(width - 2));
+  return [pad(a.toString()), pad(`× ${b}`), rule, ...rows.map((r) => `${pad(r.v.toString())}   ${r.note}`), rule, pad((a * b).toString())];
+}
+/** Long division in columns (positive whole numbers, divisor up to 4 digits): each digit of the answer, what is taken
+ *  away, and what is brought down. Returns the lines, the quotient and the remainder. */
+function columnDivide(x: bigint, y: bigint): { lines: string[]; quotient: bigint; remainder: bigint } | null {
+  if (y <= 0n || x < y || y > 9999n || x > 999999999999n || x < 10n) return null;
+  const digits = x.toString();
+  const left = `${y} ) `;
+  const lines: string[] = [];
+  let rem = 0n, quotient = "", started = false;
+  for (let i = 0; i < digits.length; i++) {
+    const cur = rem * 10n + BigInt(digits[i]);
+    const d = cur / y;
+    quotient += d.toString();
+    const end = left.length + i + 1; // the column this working ends in
+    if (d !== 0n || started) {
+      if (started) lines.push(cur.toString().padStart(end));
+      const take = (d * y).toString();
+      lines.push(`${("−" + take).padStart(end)}   ${y} × ${d}`);
+      lines.push("-".repeat(Math.max(take.length, cur.toString().length)).padStart(end));
+      started = true;
+    }
+    rem = cur - d * y;
+  }
+  lines.push(rem.toString().padStart(left.length + digits.length) + (rem === 0n ? "   nothing left over" : "   left over"));
+  const q0 = BigInt(quotient);
+  // self-check: the digits found must be the quotient, and what is left the remainder
+  if (q0 !== x / y || rem !== x % y) return null;
+  return { lines: [q0.toString().padStart(left.length + digits.length), `${left}${digits}`, ...lines], quotient: q0, remainder: rem };
+}
+
 /** One operation on two numbers: the result and the sentence that says why. */
-function operate(op: string, a: Extract<Node, { t: "num" }>, b: Extract<Node, { t: "num" }>): { value: Extract<Node, { t: "num" }>; why: string } {
+function operate(op: string, a: Extract<Node, { t: "num" }>, b: Extract<Node, { t: "num" }>): { value: Extract<Node, { t: "num" }>; why: string; layout?: string[] } {
   const style = styleOf(a, b);
   const A = wrap(a), B = wrap(b);
   if (op === "+" || op === "-") {
@@ -236,7 +279,8 @@ function operate(op: string, a: Extract<Node, { t: "num" }>, b: Extract<Node, { 
       const raw = `${big(a.v.n * b.v.n)}/${a.v.d * b.v.d}`;
       return { value: out, why: `${improper(a, b)}Multiply the tops and multiply the bottoms: ${big(a.v.n)} × ${b.v.n < 0n ? `(${big(b.v.n)})` : big(b.v.n)} = ${big(a.v.n * b.v.n)} and ${a.v.d} × ${b.v.d} = ${a.v.d * b.v.d}, giving ${raw}.${raw !== plain(out) ? ` In lowest terms that is ${plain(out)}.` : ""}` };
     }
-    return { value: out, why: (style === "int" && wholeWorking("*", a.v.n, b.v.n)) || `${A} × ${B} = ${plain(out)}.` };
+    const layout = (style === "int" && a.v.n > 0n && b.v.n > 0n && columnMultiply(a.v.n, b.v.n)) || undefined;
+    return { value: out, why: (style === "int" && wholeWorking("*", a.v.n, b.v.n)) || `${A} × ${B} = ${plain(out)}.`, layout };
   }
   if (op === "/") {
     if (b.v.n === 0n) throw new Refuse("That divides by zero, which has no answer.");
@@ -251,10 +295,11 @@ function operate(op: string, a: Extract<Node, { t: "num" }>, b: Extract<Node, { 
       const out = num(v, decimalOf(v) !== null && decimalOf(v)!.replace(/^.*\./, "").length <= 3 ? "dec" : "frac");
       const [x, y] = [a.v.n, b.v.n];
       const rem = x >= 0n && y > 0n ? ` ${y} goes into ${x} ${x / y} time${x / y === 1n ? "" : "s"} with ${x % y} left over, so the exact answer is ${mixedText(v) ?? fracText(v)}${decimalOf(v) ? ` = ${decimalOf(v)}` : ""}.` : "";
-      return { value: out, why: `${A} ÷ ${B} does not come out whole.${rem || ` It is ${plain(out)}.`}` };
+      return { value: out, why: `${A} ÷ ${B} does not come out whole.${rem || ` It is ${plain(out)}.`}`, layout: (x > 0n && y > 0n && columnDivide(x, y)?.lines) || undefined };
     }
     const out = num(v, style);
-    return { value: out, why: (style === "int" && wholeWorking("/", a.v.n, b.v.n)) || `${A} ÷ ${B} = ${plain(out)}.` };
+    const long = style === "int" && a.v.n > 0n && b.v.n > 0n && (a.v.n >= 100n || b.v.n >= 10n) ? columnDivide(a.v.n, b.v.n) : null;
+    return { value: out, why: (style === "int" && wholeWorking("/", a.v.n, b.v.n)) || `${A} ÷ ${B} = ${plain(out)}.`, layout: long?.lines };
   }
   // a whole-number power
   if (!isInt(b.v) || b.v.n < 0n || b.v.n > 12n) throw new Refuse("OpenPath works out powers only when the power is a whole number from 0 to 12.");
@@ -267,31 +312,31 @@ function operate(op: string, a: Extract<Node, { t: "num" }>, b: Extract<Node, { 
 }
 
 /** The next single move, by the usual order: inside brackets first, powers, then × and ÷, then + and −, left to right. */
-function reduce(n: Node): { next: Node; why: string } | null {
+function reduce(n: Node): { next: Node; why: string; layout?: string[] } | null {
   switch (n.t) {
     case "num": case "var": return null;
     case "neg": {
       const inner = reduce(n.e);
-      if (inner) return { next: { t: "neg", e: inner.next }, why: inner.why };
+      if (inner) return { ...inner, next: { t: "neg", e: inner.next } };
       if (n.e.t !== "num") return null;
       const v = num(q(-n.e.v.n, n.e.v.d), n.e.style);
       return { next: v, why: `The opposite of ${wrap(n.e)} is ${plain(v)}.` };
     }
     case "pct": {
       const inner = reduce(n.e);
-      if (inner) return { next: { t: "pct", e: inner.next }, why: inner.why };
+      if (inner) return { ...inner, next: { t: "pct", e: inner.next } };
       if (n.e.t !== "num") return null;
       const v = num(div(n.e.v, q(100n)), n.e.style === "frac" ? "frac" : "dec");
       return { next: v, why: `${plain(n.e)}% means ${plain(n.e)} out of 100, which is ${plain(v)}.` };
     }
     case "bin": {
       const l = reduce(n.l);
-      if (l) return { next: { ...n, l: l.next }, why: l.why };
+      if (l) return { ...l, next: { ...n, l: l.next } };
       const r = reduce(n.r);
-      if (r) return { next: { ...n, r: r.next }, why: r.why };
+      if (r) return { ...r, next: { ...n, r: r.next } };
       if (n.l.t !== "num" || n.r.t !== "num") return null;
-      const { value, why } = operate(n.op, n.l, n.r);
-      return { next: value, why };
+      const { value, why, layout } = operate(n.op, n.l, n.r);
+      return { next: value, why, layout };
     }
   }
 }
@@ -353,7 +398,7 @@ const absText = (a: Q) => fracText(q(a.n < 0n ? -a.n : a.n, a.d));
 
 // ------------------------------------------------------------------ the whole thing
 export type Solved =
-  | { ok: true; kind: "arithmetic" | "equation"; problem: string; steps: WorkedStep[]; answer: string; also: string[]; value: Q | null; letter?: string }
+  | { ok: true; kind: "arithmetic" | "equation" | "numbers" | "units"; problem: string; steps: WorkedStep[]; answer: string; also: string[]; value: Q | null; letter?: string; unit?: string }
   | { ok: false; reason: string };
 
 function clean(text: string): { text: string; letter: string | null } {
@@ -384,7 +429,7 @@ function arithmetic(tree: Node, typed: string): Solved {
     at = move.next;
     // self-check: a line of working that does not equal the line typed is never shown
     if (!eq(valueOf(at), target)) return { ok: false, reason: "OpenPath could not check its own working for this one, so it is not shown." };
-    steps.push({ expression: show(at), explanation: move.why });
+    steps.push({ expression: show(at), explanation: move.why, ...(move.layout ? { layout: move.layout } : {}) });
   }
   if (at.t !== "num") return { ok: false, reason: "This calculation is too long to work through here." };
   const answer = plain(at);
@@ -438,11 +483,142 @@ function equation(left: Node, right: Node, x: string): Solved {
   return { ok: true, kind: "equation", problem, steps, answer: `${x} = ${fracText(root)}`, also, value: root, letter: x };
 }
 
+// ------------------------------------------------------------------ HCF, LCM, factors (number-facts@1)
+function primes(n: bigint): bigint[] {
+  const out: bigint[] = [];
+  for (let p = 2n; p * p <= n; p += p === 2n ? 1n : 2n) while (n % p === 0n) { out.push(p); n /= p; }
+  if (n > 1n) out.push(n);
+  return out;
+}
+const product = (ps: bigint[]) => (ps.length ? ps.join(" × ") : "1");
+const count = (ps: bigint[], p: bigint) => ps.filter((v) => v === p).length;
+const NUMBER_LIMIT = 10_000_000n;
+const HCF_WORDS = "hcf|gcd|gcf|highest common factor|greatest common factor|greatest common divisor";
+const LCM_WORDS = "lcm|lowest common multiple|least common multiple";
+const ASK = "(?:find|what is|what are|calculate|work out|the|all|of|\\s)*";
+function numberFacts(text: string): Solved | null {
+  const s = text.toLowerCase().replace(/[?.!]+\s*$/, "").replace(/(\d),(?=\d{3}\b)/g, "$1").replace(/\s+/g, " ").trim();
+  const list = (t: string) => t.split(/\s*(?:,|and|&)\s*/).filter(Boolean).map((v) => BigInt(v));
+  const many = new RegExp(`^${ASK}(${HCF_WORDS}|${LCM_WORDS})(?: and (${HCF_WORDS}|${LCM_WORDS}))? ?(?:of)? ?\\(?\\s*(\\d+(?:\\s*(?:,|and|&)\\s*\\d+)+)\\s*\\)?$`).exec(s);
+  if (many) {
+    const ns = list(many[3]);
+    if (ns.length > 5 || ns.some((n) => n < 1n || n > NUMBER_LIMIT)) throw new Refuse("OpenPath works out the HCF and LCM of up to five whole numbers from 1 to 10,000,000.");
+    const wants = [many[1], many[2]].filter(Boolean).map((w) => (new RegExp(`^(?:${HCF_WORDS})$`).test(w) ? "HCF" : "LCM"));
+    const fs = ns.map(primes);
+    const all = [...new Set(fs.flat())].sort((a, b) => (a < b ? -1 : 1));
+    const steps: WorkedStep[] = ns.map((n, i) => ({ expression: `${n} = ${n === 1n ? "1" : product(fs[i])}`, explanation: n === 1n ? "1 has no prime factors." : fs[i].length === 1 ? `${n} is a prime number.` : `Break ${n} into prime numbers.` }));
+    const results: string[] = [];
+    let value: Q | null = null;
+    for (const want of wants) {
+      const picked = all.flatMap((p) => Array<bigint>((want === "HCF" ? Math.min : Math.max)(...fs.map((f) => count(f, p)))).fill(p));
+      const v = picked.reduce((t, p) => t * p, 1n);
+      // self-check against the definition, by a different route (Euclid's method)
+      const direct = want === "HCF" ? ns.reduce((a, b) => gcd(a, b)) : ns.reduce((a, b) => (a / gcd(a, b)) * b);
+      if (v !== direct) return { ok: false, reason: "OpenPath could not check its own working for this one, so it is not shown." };
+      steps.push({ expression: `${want} = ${picked.length > 1 ? `${product(picked)} = ` : ""}${v}`, explanation: want === "HCF" ? (picked.length ? "Take only the primes that every number has, each as many times as the number that has it least." : "The numbers share no prime, so the only common factor is 1.") : "Take every prime that appears, each as many times as the number that has it most." });
+      results.push(`${want} = ${v}`);
+      value = q(v);
+    }
+    return { ok: true, kind: "numbers", problem: `${wants.join(" and ")} of ${ns.join(wants.length && ns.length === 2 ? " and " : ", ")}`, steps, answer: wants.length === 1 ? value!.n.toString() : results.join(", "), also: [], value: wants.length === 1 ? value : null };
+  }
+  const pf = new RegExp(`^${ASK}(?:prime factori[sz]ation|prime factors|product of primes?) (?:of |for )?(\\d+)$`).exec(s);
+  if (pf) {
+    const n = BigInt(pf[1]);
+    if (n < 2n || n > NUMBER_LIMIT) throw new Refuse("OpenPath finds the prime factors of whole numbers from 2 to 10,000,000.");
+    const ps = primes(n);
+    const steps: WorkedStep[] = [];
+    let at = n;
+    for (const p of ps.slice(0, -1)) { steps.push({ expression: `${at} = ${p} × ${at / p}`, explanation: `${p} is the smallest prime that divides ${at}.` }); at /= p; }
+    steps.push({ expression: `${n} = ${product(ps)}`, explanation: ps.length === 1 ? `${n} is a prime number: nothing but 1 and itself divides it.` : `${at} is prime, so the breaking down stops. Every factor is now prime.` });
+    if (ps.reduce((t, p) => t * p, 1n) !== n) return { ok: false, reason: "OpenPath could not check its own working for this one, so it is not shown." };
+    return { ok: true, kind: "numbers", problem: `Prime factors of ${n}`, steps, answer: product(ps), also: [], value: null };
+  }
+  const fac = new RegExp(`^${ASK}factors (?:of |for )?(\\d+)$`).exec(s);
+  if (fac) {
+    const n = BigInt(fac[1]);
+    if (n < 1n || n > 1_000_000n) throw new Refuse("OpenPath lists the factors of whole numbers from 1 to 1,000,000.");
+    const pairs: [bigint, bigint][] = [];
+    for (let a = 1n; a * a <= n; a++) if (n % a === 0n) pairs.push([a, n / a]);
+    const all = [...new Set(pairs.flat())].sort((a, b) => (a < b ? -1 : 1));
+    const steps: WorkedStep[] = [{ expression: pairs.map(([a, b]) => `${a} × ${b}`).join(",  "), explanation: `Find every pair of whole numbers that multiply to ${n}. Try 1, 2, 3 … and stop when the pairs start to repeat.` }, { expression: all.join(", "), explanation: `Write the numbers from the pairs in order. ${n} has ${all.length} factor${all.length === 1 ? "" : "s"}${all.length === 2 ? ", so it is prime" : ""}.` }];
+    return { ok: true, kind: "numbers", problem: `Factors of ${n}`, steps, answer: all.join(", "), also: [], value: null };
+  }
+  return null;
+}
+
+// ------------------------------------------------------------------ units (unit-convert@1): metric length, mass, capacity; time; rupees
+const UNITS: { names: string[]; show: string; kind: string; size: Q }[] = [
+  { names: ["mm", "millimetre", "millimetres", "millimeter", "millimeters"], show: "mm", kind: "length", size: q(1n, 1000n) },
+  { names: ["cm", "centimetre", "centimetres", "centimeter", "centimeters"], show: "cm", kind: "length", size: q(1n, 100n) },
+  { names: ["m", "metre", "metres", "meter", "meters"], show: "m", kind: "length", size: ONE },
+  { names: ["km", "kilometre", "kilometres", "kilometer", "kilometers"], show: "km", kind: "length", size: q(1000n) },
+  { names: ["mg", "milligram", "milligrams"], show: "mg", kind: "mass", size: q(1n, 1000n) },
+  { names: ["g", "gram", "grams", "gm", "gms"], show: "g", kind: "mass", size: ONE },
+  { names: ["kg", "kilogram", "kilograms", "kgs"], show: "kg", kind: "mass", size: q(1000n) },
+  { names: ["tonne", "tonnes"], show: "tonnes", kind: "mass", size: q(1000000n) },
+  { names: ["ml", "millilitre", "millilitres", "milliliter", "milliliters"], show: "ml", kind: "capacity", size: q(1n, 1000n) },
+  { names: ["l", "litre", "litres", "liter", "liters"], show: "l", kind: "capacity", size: ONE },
+  { names: ["kl", "kilolitre", "kilolitres", "kiloliter", "kiloliters"], show: "kl", kind: "capacity", size: q(1000n) },
+  { names: ["s", "sec", "secs", "second", "seconds"], show: "seconds", kind: "time", size: ONE },
+  { names: ["min", "mins", "minute", "minutes"], show: "minutes", kind: "time", size: q(60n) },
+  { names: ["h", "hr", "hrs", "hour", "hours"], show: "hours", kind: "time", size: q(3600n) },
+  { names: ["day", "days"], show: "days", kind: "time", size: q(86400n) },
+  { names: ["week", "weeks"], show: "weeks", kind: "time", size: q(604800n) },
+  { names: ["paise", "paisa"], show: "paise", kind: "money", size: q(1n, 100n) },
+  { names: ["rupee", "rupees", "rs"], show: "rupees", kind: "money", size: ONE },
+];
+const unitOf = (name: string) => UNITS.find((u) => u.names.includes(name));
+const valueText = (v: Q) => decimalOf(v) ?? mixedText(v) ?? fracText(v);
+const AMOUNT = "(\\d+ \\d+\\/\\d+|\\d+\\/\\d+|\\d+(?:\\.\\d+)?)";
+function unitConvert(text: string): Solved | null {
+  let s = text.toLowerCase().replace(/[?.!]+\s*$/, "").replace(/(\d),(?=\d{3}\b)/g, "$1").replace(/₹/g, " rs ").replace(/\s+/g, " ").trim();
+  const how = /^how many ([a-z]+) (?:are |is )?(?:there )?in (.+)$/.exec(s);
+  if (how) s = `${how[2]} in ${how[1]}`;
+  const m = /^(?:convert |change |express |write |what is )?(.+?) (?:to|in|into|as) ([a-z]+)$/.exec(s) ?? /^(.+?) ?= ?\?? ?([a-z]+)$/.exec(s);
+  if (!m) return null;
+  const target = unitOf(m[2]);
+  const piece = new RegExp(`^${AMOUNT} ?([a-z]+)(?: and |, | |$)`);
+  const parts: { v: Q; raw: string; u: (typeof UNITS)[number] }[] = [];
+  let rest = m[1].trim();
+  while (rest) {
+    const p = piece.exec(rest);
+    const u = p && unitOf(p[2]);
+    if (!p || !u) return null;
+    const mixed = /^(\d+) (\d+)\/(\d+)$/.exec(p[1]), frac = /^(\d+)\/(\d+)$/.exec(p[1]);
+    const v = mixed ? add(q(BigInt(mixed[1])), q(BigInt(mixed[2]), BigInt(mixed[3]))) : frac ? q(BigInt(frac[1]), BigInt(frac[2])) : (() => { const [w, f = ""] = p[1].split("."); return q(BigInt(w + f), 10n ** BigInt(f.length)); })();
+    parts.push({ v, raw: p[1], u });
+    rest = rest.slice(p[0].length).trim();
+  }
+  if (!parts.length || !target) return null;
+  if (parts.some((p) => p.u.kind !== target.kind)) throw new Refuse(`${parts.find((p) => p.u.kind !== target.kind)!.u.show} and ${target.show} measure different things, so one cannot be changed into the other.`);
+  if (parts.some((p) => p.raw.replace(/\D/g, "").length > 12)) throw new Refuse("That number is too long to work with here.");
+  const steps: WorkedStep[] = [];
+  let total = ZERO;
+  for (const p of parts) {
+    const ratio = div(p.u.size, target.size);
+    const out = mul(p.v, ratio);
+    total = add(total, out);
+    const said = `${p.raw} ${p.u.show}`;
+    if (eq(ratio, ONE)) { if (parts.length > 1) steps.push({ expression: `${said}`, explanation: `This part is already in ${target.show}.` }); continue; }
+    const whole = isInt(ratio), back = div(ONE, ratio);
+    steps.push({ expression: `${said} = ${valueText(out)} ${target.show}`, explanation: whole ? `1 ${p.u.show.replace(/s$/, "")} is ${ratio.n} ${target.show}, so multiply by ${ratio.n}: ${valueText(p.v)} × ${ratio.n} = ${valueText(out)}.` : isInt(back) ? `${back.n} ${p.u.show} make 1 ${target.show.replace(/s$/, "")}, so divide by ${back.n}: ${valueText(p.v)} ÷ ${back.n} = ${valueText(out)}.` : `1 ${p.u.show.replace(/s$/, "")} is ${fracText(ratio)} ${target.show}: ${valueText(p.v)} × ${fracText(ratio)} = ${valueText(out)}.` });
+  }
+  if (parts.length > 1) steps.push({ expression: `${valueText(total)} ${target.show}`, explanation: `Add the parts: ${parts.map((p) => valueText(mul(p.v, div(p.u.size, target.size)))).join(" + ")} = ${valueText(total)}.` });
+  if (!steps.length) steps.push({ expression: `${valueText(total)} ${target.show}`, explanation: `It is already in ${target.show}.` });
+  // self-check: changing the answer back into the smallest unit gives the same amount as what was typed
+  if (!eq(mul(total, target.size), parts.reduce((t, p) => add(t, mul(p.v, p.u.size)), ZERO))) return { ok: false, reason: "OpenPath could not check its own working for this one, so it is not shown." };
+  const answer = `${valueText(total)} ${target.show}`;
+  const also = [decimalOf(total), mixedText(total), isInt(total) ? null : fracText(total)].filter((v): v is string => !!v && v !== valueText(total)).map((v) => `${v} ${target.show}`);
+  return { ok: true, kind: "units", problem: `${parts.map((p) => `${p.raw} ${p.u.show}`).join(" ")} in ${target.show}`, steps, answer, also, value: total, unit: target.show };
+}
+
 /** A typed calculation or one-letter linear equation, worked exactly; or the plain reason it is not. */
 export function solve(text: string): Solved {
   try {
     if (!text.trim()) return { ok: false, reason: "Type a calculation or an equation." };
     if (text.length > 120) return { ok: false, reason: "That is too long. Type one calculation or one equation." };
+    const named = numberFacts(text) ?? unitConvert(text);
+    if (named) return named;
     const { text: s, letter } = clean(text);
     if (!s) return { ok: false, reason: "Type a calculation or an equation." };
     const sides = s.split("=");
@@ -472,7 +648,9 @@ export function solve(text: string): Solved {
 export function sameAnswer(solved: Extract<Solved, { ok: true }>, typed: string): boolean | null {
   if (!solved.value) return null;
   try {
-    let s = clean(typed.replace(new RegExp(`^\\s*${solved.letter ?? "x"}\\s*=`, "i"), "")).text;
+    // "3500 m" and "x = 3" are read as 3500 and 3
+    const bare = typed.replace(new RegExp(`^\\s*${solved.letter ?? "x"}\\s*=`, "i"), "").replace(/\s*[a-zA-Z]+\s*$/, (u) => (solved.unit && unitOf(u.trim().toLowerCase())?.show === solved.unit ? "" : u));
+    let s = clean(bare).text;
     if (!s) return null;
     return eq(valueOf(parse(tokens(s, null))), solved.value);
   } catch {
