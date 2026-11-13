@@ -793,7 +793,18 @@ function StuckBox({ onOpen, onWorked, grade }: { onOpen: (qid: string) => void; 
       else setWhy(s.reason);
     }}>
       <label className="field">The problem<input aria-label="The problem" value={text} onChange={(e) => setText(e.target.value)} placeholder={grade && grade <= 5 ? "e.g. 3/4 + 1/8, or 15% of 200" : grade && grade <= 8 ? "e.g. 2x + 1 = 7, or 3/4 + 1/8" : "e.g. x² − 10x − 24 = 0, or ∫ from 2 to 9 of 6 dx"} /></label>
-      <p className="small muted">Type the calculation or equation, like 23 × 14 or 5/6 − 1/4. Also: HCF of 12 and 18, factors of 36, 3.5 km in m. {words?.available ? `A word problem is read by an AI helper: only the words you type are sent to it. ${words.left} of ${words.limit} left today.` : "Word problems are not read yet."}</p>
+      <p className="small muted">Type the calculation or equation, like 23 × 14 or 5/6 − 1/4. {words?.available ? `A word problem is read by an AI helper: only the words you type are sent to it. ${words.left} of ${words.limit} left today.` : "Word problems are not read yet."}</p>
+      <details className="type-examples">
+        <summary>What else can I type?</summary>
+        <ul>
+          <li>HCF and LCM of 24 and 36 · factors of 36 · prime factors of 84</li>
+          <li>3.5 km in m · 2 h 30 min in minutes</li>
+          <li>area of a rectangle 7 cm by 6 cm · perimeter of a square of side 5 m</li>
+          <li>12:18 · divide ₹600 in the ratio 2:3</li>
+          <li>simple interest on ₹5000 at 8% for 3 years</li>
+          <li>2:45 pm + 1 h 30 min · from 9:15 am to 2:40 pm</li>
+        </ul>
+      </details>
       {why && <p className="feedback bad" role="status"><b>OpenPath can’t work through this one yet.</b> {why}</p>}
       <button className="secondary" disabled={!text.trim() || busy}>{busy ? "Reading your problem…" : "Work through it"}</button>
     </form>

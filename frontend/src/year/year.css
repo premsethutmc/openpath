@@ -220,3 +220,7 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .worked-words { font-size: 1.05rem; line-height: 1.5; margin: 0; }
 .worked-reading { display: grid; gap: 6px; padding: 14px; border-radius: 14px; background: #fff7e0; border: 1px solid #ecd58a; }
 .worked-reading p { margin: 0; }
+/* school-topics@1 */
+.type-examples { font-size: 0.9rem; }
+.type-examples summary { cursor: pointer; color: var(--accent, #5b46d6); font-weight: 600; padding: 4px 0; }
+.type-examples ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }

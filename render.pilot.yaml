@@ -23,6 +23,13 @@ services:
       - key: DEMO_SESSION_HOURS
         value: "8760"
       # the pilot's own PostgreSQL database; start.sh refuses to start without it
+      # word-reader@1 (docs/product/WORD_READER.md): off until all three are set; the key is typed into Render by the owner
+      - key: OPENPATH_WORD_PROBLEMS
+        value: "off"
+      - key: OPENPATH_WORD_PROBLEM_MODEL
+        value: claude-haiku-5-5
+      - key: OPENPATH_WORD_PROBLEM_API_KEY
+        sync: false
       - key: DATABASE_URL
         sync: false
       # grading authority: shadow (approved) or legacy (rollback). start.sh refuses anything else.

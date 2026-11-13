@@ -212,6 +212,27 @@ function wholeWorking(op: string, x: bigint, y: bigint): string | null {
   return null;
 }
 
+/** A number with exactly `places` decimal places ("12.50"), or null if it has more. */
+function fixed(v: Q, places: number): string | null {
+  const scale = 10n ** BigInt(places);
+  if ((v.n * scale) % v.d !== 0n || v.n < 0n) return null;
+  const digits = ((v.n * scale) / v.d).toString().padStart(places + 1, "0");
+  return places ? `${digits.slice(0, -places)}.${digits.slice(-places)}` : digits;
+}
+/** Addition or subtraction in columns, the decimal points in line (two numbers that are not negative; a − b with a ≥ b). */
+function columnAddSub(op: "+" | "-", a: Q, b: Q): string[] | null {
+  const [da, db] = [decimalOf(a), decimalOf(b)];
+  if (!da || !db || a.n < 0n || b.n < 0n || (op === "-" && sub(a, b).n < 0n)) return null;
+  const places = Math.max(da.split(".")[1]?.length ?? 0, db.split(".")[1]?.length ?? 0);
+  if (places === 0 && (b.n < 10n || a.n < 10n)) return null;
+  const out = op === "+" ? add(a, b) : sub(a, b);
+  const [x, y, z] = [fixed(a, places), fixed(b, places), fixed(out, places)];
+  if (!x || !y || !z) return null;
+  const width = Math.max(x.length, y.length, z.length) + 2;
+  const pad = (t: string) => t.padStart(width);
+  return [pad(x), `${op === "+" ? "+" : "−"}${y.padStart(width - 1)}`, pad("-".repeat(width - 2)), pad(z)];
+}
+
 /** Long multiplication in columns (two positive whole numbers, the smaller with 2 to 4 digits). */
 function columnMultiply(x: bigint, y: bigint): string[] | null {
   const [a, b] = x >= y ? [x, y] : [y, x];
@@ -271,7 +292,7 @@ function operate(op: string, a: Extract<Node, { t: "num" }>, b: Extract<Node, { 
       const simpler = gcd(raw, l) !== 1n && raw !== 0n ? ` In lowest terms that is ${plain(out)}.` : raw === 0n ? " That is 0." : "";
       return { value: out, why: improper(a, b) + renamed + simpler };
     }
-    return { value: out, why: (style === "int" && wholeWorking(op, a.v.n, b.v.n)) || `${A} ${sign} ${B} = ${plain(out)}.` };
+    return { value: out, why: (style === "int" && wholeWorking(op, a.v.n, b.v.n)) || `${A} ${sign} ${B} = ${plain(out)}.`, layout: columnAddSub(op, a.v, b.v) ?? undefined };
   }
   if (op === "*" || op === "of") {
     const out = num(mul(a.v, b.v), style);
@@ -613,12 +634,180 @@ function unitConvert(text: string): Solved | null {
   return { ok: true, kind: "units", problem: `${parts.map((p) => `${p.raw} ${p.u.show}`).join(" ")} in ${target.show}`, steps, answer, also, value: total, unit: target.show };
 }
 
+// ------------------------------------------------------------------ shapes, ratio, interest, clock time (school-topics@1)
+const N = "(\\d+(?:\\.\\d+)?)";
+const LEN = "(?: ?(mm|cm|m|km))?";
+const toQ = (t: string): Q => { const [w, f = ""] = t.split("."); return q(BigInt(w + f), 10n ** BigInt(f.length)); };
+const tidy = (text: string) => text.toLowerCase().replace(/[?.!]+\s*$/, "").replace(/(\d),(?=\d{3}\b)/g, "$1").replace(/×/g, "x").replace(/\s+/g, " ").trim();
+const CHECK_FAILED: Solved = { ok: false, reason: "OpenPath could not check its own working for this one, so it is not shown." };
+
+function shapes(text: string): Solved | null {
+  const m = new RegExp(`^${ASK}(area and perimeter|perimeter and area|area|perimeter) of (?:a |an |the )?(rectangle|square|triangle|right triangle) (.+)$`).exec(tidy(text));
+  if (!m) return null;
+  const wants = m[1].includes("and") ? ["area", "perimeter"] : [m[1]];
+  const shape = m[2].replace("right ", ""), rest = m[3];
+  let sides: Q[] = [], units: (string | undefined)[] = [], names: string[] = [];
+  const rect = new RegExp(`^(?:with |of |measuring |that is )?(?:length |sides? )?(?:of )?${N}${LEN}(?: long)?(?: by | x | \\* |, | and )(?:breadth |width |length )?(?:of )?${N}${LEN}(?: wide)?$`).exec(rest);
+  const square = new RegExp(`^(?:with |of )?(?:sides? |side length )?(?:of )?${N}${LEN}$`).exec(rest);
+  const triArea = new RegExp(`^(?:with |of )?base (?:of )?${N}${LEN} and height (?:of )?${N}${LEN}$`).exec(rest);
+  const triSides = new RegExp(`^(?:with |of )?sides? (?:of )?${N}${LEN}(?:, | and |, and )${N}${LEN}(?:, | and |, and )${N}${LEN}$`).exec(rest);
+  if (shape === "rectangle" && rect) { sides = [toQ(rect[1]), toQ(rect[3])]; units = [rect[2], rect[4]]; names = ["length", "breadth"]; }
+  else if (shape === "square" && square) { sides = [toQ(square[1])]; units = [square[2]]; names = ["side"]; }
+  else if (shape === "triangle" && triArea && wants.length === 1 && wants[0] === "area") { sides = [toQ(triArea[1]), toQ(triArea[3])]; units = [triArea[2], triArea[4]]; names = ["base", "height"]; }
+  else if (shape === "triangle" && triSides && wants.length === 1 && wants[0] === "perimeter") { sides = [toQ(triSides[1]), toQ(triSides[3]), toQ(triSides[5])]; units = [triSides[2], triSides[4], triSides[6]]; names = ["side", "side", "side"]; }
+  else throw new Refuse(shape === "triangle" ? "For a triangle, type: area of a triangle with base 6 cm and height 4 cm, or perimeter of a triangle with sides 3 cm, 4 cm and 5 cm." : shape === "square" ? "Type it like: area of a square of side 5 cm." : "Type it like: area of a rectangle 7 cm by 6 cm.");
+  const given = [...new Set(units.filter(Boolean))];
+  if (given.length > 1) throw new Refuse(`The sides are in different units (${given.join(" and ")}). Change them to the same unit first, for example type: 2 m in cm.`);
+  if (sides.some((v) => v.n <= 0n)) throw new Refuse("A side must be more than 0.");
+  const u = given[0] ?? "";
+  const t = (v: Q) => valueText(v);
+  const steps: WorkedStep[] = [];
+  const answers: string[] = [];
+  let value: Q | null = null, unit = "";
+  for (const want of wants) {
+    let formula: string, put: string, v: Q, why: string;
+    if (want === "area") {
+      if (shape === "rectangle") { formula = "Area = length × breadth"; put = `${t(sides[0])} × ${t(sides[1])}`; v = mul(sides[0], sides[1]); why = "The area of a rectangle is its length times its breadth: that many unit squares cover it."; }
+      else if (shape === "square") { formula = "Area = side × side"; put = `${t(sides[0])} × ${t(sides[0])}`; v = mul(sides[0], sides[0]); why = "A square is a rectangle whose length and breadth are the same."; }
+      else { formula = "Area = 1/2 × base × height"; put = `1/2 × ${t(sides[0])} × ${t(sides[1])}`; v = div(mul(sides[0], sides[1]), q(2n)); why = "A triangle is half of the rectangle with the same base and height."; }
+      unit = u ? `${u}²` : "square units";
+    } else {
+      if (shape === "rectangle") { formula = "Perimeter = 2 × (length + breadth)"; put = `2 × (${t(sides[0])} + ${t(sides[1])}) = 2 × ${t(add(sides[0], sides[1]))}`; v = mul(q(2n), add(sides[0], sides[1])); why = "The perimeter is the distance all the way round: two lengths and two breadths."; }
+      else if (shape === "square") { formula = "Perimeter = 4 × side"; put = `4 × ${t(sides[0])}`; v = mul(q(4n), sides[0]); why = "All four sides of a square are the same."; }
+      else { formula = "Perimeter = side + side + side"; put = sides.map(t).join(" + "); v = sides.reduce(add); why = "The perimeter is the distance all the way round: add the three sides."; }
+      unit = u || "units";
+    }
+    // self-check by another route: the perimeter as a plain sum of every side; the area from the doubled perimeter identity is not available, so by repeated addition of the exact product
+    const again = want === "perimeter" ? (shape === "rectangle" ? add(add(sides[0], sides[1]), add(sides[0], sides[1])) : shape === "square" ? add(add(sides[0], sides[0]), add(sides[0], sides[0])) : add(add(sides[0], sides[1]), sides[2])) : shape === "triangle" ? mul(mul(sides[0], sides[1]), q(1n, 2n)) : mul(sides[shape === "square" ? 0 : 1], sides[0]);
+    if (!eq(again, v)) return CHECK_FAILED;
+    steps.push({ expression: formula, explanation: why }, { expression: `= ${put}`, explanation: `Put in the numbers${names.length ? ` (${[...new Set(names)].map((n, i) => `${n} ${names.filter((x) => x === n).length > 1 ? sides.map(t).join(", ") : t(sides[i])}`).join(", ")})` : ""}.` }, { expression: `= ${t(v)} ${unit}`, explanation: want === "area" ? `Area is measured in square units${u ? ` (${u}²)` : ""}.` : "Perimeter is a length." });
+    answers.push(wants.length > 1 ? `${want[0].toUpperCase()}${want.slice(1)} = ${t(v)} ${unit}` : `${t(v)} ${unit}`);
+    value = v;
+  }
+  const said = shape === "rectangle" ? `rectangle ${t(sides[0])}${u ? " " + u : ""} by ${t(sides[1])}${u ? " " + u : ""}` : shape === "square" ? `square of side ${t(sides[0])}${u ? " " + u : ""}` : names[0] === "base" ? `triangle with base ${t(sides[0])}${u ? " " + u : ""} and height ${t(sides[1])}${u ? " " + u : ""}` : `triangle with sides ${sides.map(t).join(", ")}${u ? " " + u : ""}`;
+  return { ok: true, kind: "numbers", problem: `${wants.map((w) => w[0].toUpperCase() + w.slice(1)).join(" and ")} of a ${said}`, steps, answer: answers.join(", "), also: [], value: wants.length === 1 ? value : null, unit: wants.length === 1 ? unit : undefined };
+}
+
+function ratios(text: string): Solved | null {
+  const s = tidy(text).replace(/₹ ?/g, "rs ");
+  const simple = /^(?:simplify |reduce |write |express |find |what is )?(?:the )?(?:ratio )?(?:of )?(\d+) ?: ?(\d+)(?: ?: ?(\d+))?(?: in (?:its |the )?(?:simplest|lowest) (?:form|terms))?$/.exec(s);
+  if (simple) {
+    const ns = simple.slice(1, 4).filter(Boolean).map((v) => BigInt(v));
+    if (ns.some((n) => n === 0n || n > NUMBER_LIMIT)) throw new Refuse("OpenPath simplifies ratios of whole numbers from 1 to 10,000,000.");
+    const g = ns.reduce((a, b) => gcd(a, b));
+    const out = ns.map((n) => n / g);
+    // self-check: the simplified ratio scaled back up is the ratio typed, and nothing more divides it
+    if (out.some((n, i) => n * g !== ns[i]) || out.reduce((a, b) => gcd(a, b)) !== 1n) return CHECK_FAILED;
+    const steps: WorkedStep[] = g === 1n ? [{ expression: ns.join(" : "), explanation: `No number except 1 divides ${ns.length === 2 ? "both" : "all three"}, so the ratio is already in its simplest form.` }] : [{ expression: `HCF = ${g}`, explanation: `Find the biggest number that divides ${ns.join(" and ")} exactly. It is ${g}.` }, { expression: out.join(" : "), explanation: `Divide every part by ${g}: ${ns.map((n) => `${n} ÷ ${g} = ${n / g}`).join(", ")}.` }];
+    return { ok: true, kind: "numbers", problem: `Simplify ${ns.join(" : ")}`, steps, answer: out.join(" : "), also: [], value: null };
+  }
+  const share = new RegExp(`^(?:divide|share|split) (rs\\.? ?)?${N}(?: ([a-z]+))? (?:in|into) (?:the )?ratio (?:of )?(\\d+) ?: ?(\\d+)(?: ?: ?(\\d+))?$`).exec(s);
+  if (share) {
+    const total = toQ(share[2]);
+    const parts = share.slice(4, 7).filter(Boolean).map((v) => BigInt(v));
+    if (parts.some((n) => n === 0n) || total.n <= 0n) throw new Refuse("The amount and every part of the ratio must be more than 0.");
+    const unit = share[1] ? "₹" : "", noun = share[3] && !share[1] ? ` ${share[3]}` : "";
+    const sum = parts.reduce((a, b) => a + b);
+    const one = div(total, q(sum));
+    const each = parts.map((n) => mul(one, q(n)));
+    if (!eq(each.reduce(add), total)) return CHECK_FAILED;
+    const money = (v: Q) => `${unit}${valueText(v)}${noun}`;
+    const steps: WorkedStep[] = [{ expression: `${parts.join(" + ")} = ${sum} parts`, explanation: "Add the numbers in the ratio to find how many equal parts there are in all." }, { expression: `1 part = ${valueText(total)} ÷ ${sum} = ${money(one)}`, explanation: "Share the whole amount equally among the parts." }, { expression: each.map((v, i) => `${parts[i]} × ${valueText(one)} = ${money(v)}`).join(",  "), explanation: "Give each share its number of parts." }, { expression: `${each.map((v) => valueText(v)).join(" + ")} = ${valueText(total)}`, explanation: "Check: the shares add back up to the whole amount." }];
+    return { ok: true, kind: "numbers", problem: `Divide ${money(total)} in the ratio ${parts.join(" : ")}`, steps, answer: each.map(money).join(" and "), also: [], value: null };
+  }
+  return null;
+}
+
+function interest(text: string): Solved | null {
+  const s = tidy(text).replace(/₹ ?/g, "rs ");
+  const m = new RegExp(`^${ASK}(simple interest and amount|simple interest|interest|si|amount)(?: to be paid)? (?:on|for) (?:rs\\.? ?)?${N} (?:at|@) (?:the rate of )?${N} ?(?:%|percent)(?: per annum| p\\.?a\\.?| per year| a year)? (?:for|in|after) ${N} (years?|months?)$`).exec(s);
+  if (!m) return null;
+  const [P, R, T0] = [toQ(m[2]), toQ(m[3]), toQ(m[4])];
+  const months = m[5].startsWith("month");
+  const T = months ? div(T0, q(12n)) : T0;
+  const I = div(mul(mul(P, R), T), q(100n));
+  const A = add(P, I);
+  // self-check by another route: one year's interest, times the number of years
+  if (!eq(mul(div(mul(P, R), q(100n)), T), I)) return CHECK_FAILED;
+  const t = valueText;
+  const steps: WorkedStep[] = [];
+  if (months) steps.push({ expression: `Time = ${t(T0)} months = ${t(T0)}/12 years = ${fracText(T)} ${eq(T, ONE) ? "year" : "years"}`, explanation: "The rate is for a year, so write the time in years." });
+  steps.push({ expression: "Simple interest = (P × R × T) ÷ 100", explanation: "P is the money lent or saved, R the rate in percent for a year, T the time in years." }, { expression: `= (${t(P)} × ${t(R)} × ${fracText(T)}) ÷ 100`, explanation: "Put in the numbers." }, { expression: `= ${t(mul(mul(P, R), T))} ÷ 100 = ₹${t(I)}`, explanation: `Multiply the top, then divide by 100. The interest is ₹${t(I)}.` });
+  const wantAmount = m[1].includes("amount"), wantInterest = m[1] !== "amount";
+  if (wantAmount) steps.push({ expression: `Amount = ${t(P)} + ${t(I)} = ₹${t(A)}`, explanation: "The amount is the money at the start plus the interest." });
+  return { ok: true, kind: "numbers", problem: `Simple interest on ₹${t(P)} at ${t(R)}% a year for ${t(T0)} ${m[5]}`, steps, answer: wantAmount && wantInterest ? `Interest = ₹${t(I)}, Amount = ₹${t(A)}` : wantAmount ? `₹${t(A)}` : `₹${t(I)}`, also: wantAmount ? [] : [`Amount to be paid back = ₹${t(A)}`], value: wantAmount && wantInterest ? null : wantAmount ? A : I, unit: "₹" };
+}
+
+const CLOCK = "(\\d{1,2})(?:[:.](\\d{2}))? ?(am|pm|a\\.m\\.|p\\.m\\.)?";
+const SPAN = "(?:(\\d+) ?(?:h|hr|hrs|hours?))? ?(?:and )?(?:(\\d+) ?(?:m|min|mins|minutes?))?";
+function clockOf(h: string, m: string | undefined, ap: string | undefined): { at: number; twelve: boolean } {
+  const [H, M] = [Number(h), Number(m ?? "0")];
+  const half = ap?.replace(/\./g, "");
+  if (M > 59 || (half ? H < 1 || H > 12 : H > 23)) throw new Refuse("That is not a time on the clock. Type it like 2:45 pm or 14:45.");
+  return { at: (half ? (H % 12) + (half === "pm" ? 12 : 0) : H) * 60 + M, twelve: !!half };
+}
+function clockText(at: number, twelve: boolean): string {
+  const day = ((at % 1440) + 1440) % 1440, [H, M] = [Math.floor(day / 60), day % 60];
+  const mm = String(M).padStart(2, "0");
+  return twelve ? `${H % 12 === 0 ? 12 : H % 12}:${mm} ${H < 12 ? "am" : "pm"}` : `${String(H).padStart(2, "0")}:${mm}`;
+}
+const spanText = (mins: number) => { const [h, m] = [Math.floor(mins / 60), mins % 60]; return [h ? `${h} h` : "", m || !h ? `${m} min` : ""].filter(Boolean).join(" "); };
+function clock(text: string): Solved | null {
+  const s = tidy(text).replace(/^(?:what time is (?:it )?|what is |find |the time )/, "");
+  const forward = new RegExp(`^${CLOCK} ?(\\+|-|plus|minus) ?${SPAN}$`).exec(s);
+  const worded = new RegExp(`^${SPAN} ?(after|before|from|later than|earlier than) ${CLOCK}$`).exec(s);
+  const between = new RegExp(`^(?:how long (?:is it )?|how much time (?:is there )?|time |duration )?(?:from|between) ${CLOCK} (?:to|and|until|till) ${CLOCK}$`).exec(s);
+  if (forward || worded) {
+    const [h, m, ap, opWord, sh, sm] = forward ? [forward[1], forward[2], forward[3], forward[4], forward[5], forward[6]] : [worded![4], worded![5], worded![6], worded![3], worded![1], worded![2]];
+    if (!sh && !sm) return null;
+    const start = clockOf(h, m, ap);
+    const span = Number(sh ?? "0") * 60 + Number(sm ?? "0");
+    if (span > 100 * 60) throw new Refuse("OpenPath adds or takes away up to 100 hours on the clock.");
+    const back = /^(-|minus|before|earlier than)$/.test(opWord);
+    const end = start.at + (back ? -span : span);
+    const [sH, sM] = [Math.floor(span / 60), span % 60];
+    const steps: WorkedStep[] = [];
+    // one move for the hours, one for the minutes
+    const mid = start.at + (back ? -sH * 60 : sH * 60);
+    if (sH) steps.push({ expression: clockText(mid, start.twelve), explanation: `${back ? "Go back" : "Go forward"} ${sH} hour${sH === 1 ? "" : "s"} from ${clockText(start.at, start.twelve)}.` });
+    if (sM) {
+      const startMin = ((mid % 60) + 60) % 60;
+      const crosses = back ? startMin - sM < 0 : startMin + sM >= 60;
+      steps.push({ expression: clockText(end, start.twelve), explanation: `${back ? "Go back" : "Go forward"} ${sM} minute${sM === 1 ? "" : "s"}.${crosses ? (back ? ` ${sM} is more than the ${startMin} minutes past the hour, so the time moves into the hour before.` : ` ${startMin} + ${sM} = ${startMin + sM} minutes, which is 1 hour and ${startMin + sM - 60} minutes, so the hour moves on by one.`) : ""}` });
+    }
+    const days = Math.floor(end / 1440);
+    // self-check: going the other way by the same amount returns to the start
+    if ((back ? end + span : end - span) !== start.at) return CHECK_FAILED;
+    const dayNote = days === 0 ? "" : days === 1 ? " the next day" : days === -1 ? " the day before" : days > 0 ? ` ${days} days later` : ` ${-days} days earlier`;
+    return { ok: true, kind: "numbers", problem: `${spanText(span)} ${back ? "before" : "after"} ${clockText(start.at, start.twelve)}`, steps, answer: `${clockText(end, start.twelve)}${dayNote}`, also: [], value: null };
+  }
+  if (between) {
+    const [a, b] = [clockOf(between[1], between[2], between[3]), clockOf(between[4], between[5], between[6])];
+    const over = b.at < a.at;
+    const span = b.at - a.at + (over ? 1440 : 0);
+    const twelve = a.twelve || b.twelve;
+    const steps: WorkedStep[] = [];
+    // count on to the next full hour, then the full hours, then the minutes left
+    const nextHour = Math.ceil(a.at / 60) * 60, endAt = a.at + span, lastHour = Math.floor(endAt / 60) * 60;
+    if (nextHour > a.at && nextHour <= endAt && lastHour >= nextHour) {
+      const parts = [nextHour - a.at, lastHour - nextHour, endAt - lastHour];
+      steps.push({ expression: `${clockText(a.at, twelve)} → ${clockText(nextHour, twelve)}: ${parts[0]} min`, explanation: "Count on to the next full hour." });
+      if (parts[1]) steps.push({ expression: `${clockText(nextHour, twelve)} → ${clockText(lastHour, twelve)}: ${parts[1] / 60} h`, explanation: `Count the full hours${over ? " (this goes past midnight into the next day)" : ""}.` });
+      if (parts[2]) steps.push({ expression: `${clockText(lastHour, twelve)} → ${clockText(endAt, twelve)}: ${parts[2]} min`, explanation: "Count the minutes that are left." });
+      steps.push({ expression: spanText(span), explanation: `Add the pieces: ${[parts[0] ? `${parts[0]} min` : "", parts[1] ? `${parts[1] / 60} h` : "", parts[2] ? `${parts[2]} min` : ""].filter(Boolean).join(" + ")} = ${spanText(span)}.` });
+      if (parts[0] + parts[1] + parts[2] !== span) return CHECK_FAILED;
+    } else steps.push({ expression: spanText(span), explanation: a.at % 60 === 0 ? `Count the hours, then the minutes${over ? " (this goes past midnight into the next day)" : ""}.` : "Both times are in the same hour: take the minutes away." });
+    return { ok: true, kind: "numbers", problem: `From ${clockText(a.at, twelve)} to ${clockText(b.at, twelve)}${over ? " (the next day)" : ""}`, steps, answer: spanText(span), also: span >= 60 && span % 60 ? [`${span} minutes`] : [], value: null };
+  }
+  return null;
+}
+
 /** A typed calculation or one-letter linear equation, worked exactly; or the plain reason it is not. */
 export function solve(text: string): Solved {
   try {
     if (!text.trim()) return { ok: false, reason: "Type a calculation or an equation." };
     if (text.length > 120) return { ok: false, reason: "That is too long. Type one calculation or one equation." };
-    const named = numberFacts(text) ?? unitConvert(text);
+    const named = numberFacts(text) ?? shapes(text) ?? ratios(text) ?? interest(text) ?? clock(text) ?? unitConvert(text);
     if (named) return named;
     const { text: s, letter } = clean(text);
     if (!s) return { ok: false, reason: "Type a calculation or an equation." };
@@ -649,8 +838,10 @@ export function solve(text: string): Solved {
 export function sameAnswer(solved: Extract<Solved, { ok: true }>, typed: string): boolean | null {
   if (!solved.value) return null;
   try {
-    // "3500 m" and "x = 3" are read as 3500 and 3
-    const bare = typed.replace(new RegExp(`^\\s*${solved.letter ?? "x"}\\s*=`, "i"), "").replace(/\s*[a-zA-Z]+\s*$/, (u) => (solved.unit && unitOf(u.trim().toLowerCase())?.show === solved.unit ? "" : u));
+    // "3500 m", "42 cm2", "₹1200" and "x = 3" are read as 3500, 42, 1200 and 3; a different unit is left in and so not accepted
+    const norm = (u: string) => u.trim().toLowerCase().replace(/\s+/g, " ").replace(/^sq\.? ?([a-z]+)$/, "$1²").replace(/([a-z])2$/, "$1²");
+    const want = solved.unit ? norm(solved.unit) : null;
+    const bare = typed.replace(new RegExp(`^\\s*${solved.letter ?? "x"}\\s*=`, "i"), "").replace(/^\s*(?:₹|rs\.?)\s*/i, (m) => (want === "₹" ? "" : m)).replace(/\s*[a-zA-Z][a-zA-Z ]*[²2]?\s*$/, (u) => (want && (norm(u) === want || unitOf(norm(u))?.show === solved.unit) ? "" : u));
     let s = clean(bare).text;
     if (!s) return null;
     return eq(valueOf(parse(tokens(s, null))), solved.value);

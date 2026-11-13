@@ -125,3 +125,68 @@ test("S-9 units: metric length, mass and capacity, time, rupees", () => {
   assert.equal(sameAnswer(ok("3.5 km in m"), "3500"), true);
   assert.equal(sameAnswer(ok("3.5 km in m"), "350"), false);
 });
+
+test("S-10 addition and subtraction set out in columns, decimal points in line", () => {
+  const rand = rng(31);
+  for (let i = 0; i < 2000; i++) {
+    const [a, b] = [Math.floor(rand() * 900000) / 100 + 10, Math.floor(rand() * 90000) / 100 + 10].map((v) => Number(v.toFixed(rand() < 0.5 ? 2 : 0)));
+    const [hi, lo] = a >= b ? [a, b] : [b, a];
+    for (const [text, want] of [[`${hi} + ${lo}`, hi + lo], [`${hi} - ${lo}`, hi - lo]] as [string, number][]) {
+      const rows = ok(text).steps[0].layout!;
+      assert.ok(rows, `${text} has columns`);
+      assert.ok(Math.abs(Number(rows.at(-1)!.trim()) - want) < 1e-6, `${text}: ${rows.at(-1)}`);
+      // the decimal points are in one column
+      const dots = rows.filter((r) => r.includes(".")).map((r) => r.indexOf("."));
+      assert.ok(dots.every((d) => d === dots[0]), `${text}: decimal points in line`);
+    }
+  }
+  assert.equal(ok("3 + 4").steps[0].layout, undefined);
+});
+
+test("S-11 area and perimeter of rectangles, squares and triangles", () => {
+  const cases: [string, string][] = [["area of a rectangle 7 cm by 6 cm", "42 cm²"], ["perimeter of a square of side 5 m", "20 m"], ["area and perimeter of a rectangle with length 12 cm and breadth 5 cm", "Area = 60 cm², Perimeter = 34 cm"], ["area of a triangle with base 6 cm and height 4 cm", "12 cm²"], ["perimeter of a triangle with sides 3 cm, 4 cm and 5 cm", "12 cm"], ["Find the area of a square of side 2.5 m.", "6.25 m²"], ["perimeter of a rectangle 8 by 3", "22 units"]];
+  for (const [text, answer] of cases) assert.equal(ok(text).answer, answer, text);
+  assert.equal(sameAnswer(ok("area of a rectangle 7 cm by 6 cm"), "42 cm2"), true);
+  assert.equal(sameAnswer(ok("area of a rectangle 7 cm by 6 cm"), "42"), true);
+  assert.equal(sameAnswer(ok("area of a rectangle 7 cm by 6 cm"), "42 m2"), null, "a different unit is not accepted");
+  // a question that only mentions a shape is not guessed at
+  for (const text of ["area of a rectangle 2 m by 50 cm", "the area of a rectangle is 42 and its length is 7, find the breadth", "area of a circle of radius 7 cm", "area of a triangle with sides 3, 4 and 5"]) assert.equal(solve(text).ok, false, text);
+});
+
+test("S-12 ratios and simple interest", () => {
+  assert.equal(ok("12:18").answer, "2 : 3");
+  assert.equal(ok("simplify 24:36:60").answer, "2 : 3 : 5");
+  assert.equal(ok("7:5").answer, "7 : 5");
+  assert.equal(ok("divide ₹600 in the ratio 2:3").answer, "₹240 and ₹360");
+  assert.equal(ok("share 84 sweets in the ratio 3:4").answer, "36 sweets and 48 sweets");
+  assert.equal(ok("divide 100 in the ratio 1:2").answer, "33 1/3 and 66 2/3");
+  assert.equal(ok("simple interest on ₹5000 at 8% for 3 years").answer, "₹1200");
+  assert.equal(ok("find the amount on rs 1200 at 5% per annum for 6 months").answer, "₹1230");
+  assert.equal(ok("simple interest and amount on 2000 at 7.5% for 2 years").answer, "Interest = ₹300, Amount = ₹2300");
+  assert.equal(sameAnswer(ok("simple interest on ₹5000 at 8% for 3 years"), "₹1200"), true);
+  const rand = rng(41);
+  const g = (a: number, b: number): number => (b ? g(b, a % b) : a);
+  for (let i = 0; i < 1000; i++) {
+    const [a, b] = [1 + Math.floor(rand() * 400), 1 + Math.floor(rand() * 400)];
+    assert.equal(ok(`${a}:${b}`).answer, `${a / g(a, b)} : ${b / g(a, b)}`);
+    const [P, R, T] = [100 * (1 + Math.floor(rand() * 200)), 1 + Math.floor(rand() * 15), 1 + Math.floor(rand() * 9)];
+    assert.equal(ok(`simple interest on ${P} at ${R}% for ${T} years`).answer, `₹${(P * R * T) / 100}`);
+  }
+});
+
+test("S-13 clock time: adding, taking away and the time between", () => {
+  const cases: [string, string][] = [["2:45 pm + 1 h 30 min", "4:15 pm"], ["what time is 50 minutes before 9:20 am", "8:30 am"], ["from 9:15 am to 2:40 pm", "5 h 25 min"], ["how long is it from 10:30 pm to 6:15 am", "7 h 45 min"], ["11:30 pm + 2 hours", "1:30 am the next day"], ["14:20 - 45 min", "13:35"], ["3 hours after 12:00 pm", "3:00 pm"], ["from 9:10 am to 9:50 am", "40 min"]];
+  for (const [text, answer] of cases) assert.equal(ok(text).answer, answer, text);
+  const rand = rng(51);
+  const show = (at: number) => `${String(Math.floor(at / 60)).padStart(2, "0")}:${String(at % 60).padStart(2, "0")}`;
+  for (let i = 0; i < 2000; i++) {
+    const [a, b] = [Math.floor(rand() * 1440), Math.floor(rand() * 1440)];
+    const span = (b - a + 1440) % 1440;
+    if (span === 0) continue;
+    const [h, m] = [Math.floor(span / 60), span % 60];
+    assert.equal(ok(`from ${show(a)} to ${show(b)}`).answer, [h ? `${h} h` : "", m ? `${m} min` : ""].filter(Boolean).join(" "), `from ${show(a)} to ${show(b)}`);
+    const later = ok(`${show(a)} + ${h ? `${h} h ` : ""}${m ? `${m} min` : ""}`.trim()).answer;
+    assert.equal(later, show(b) + (a + span >= 1440 ? " the next day" : ""), `${show(a)} + ${span} min`);
+  }
+  assert.equal(solve("25:10 + 1 h").ok, false);
+});

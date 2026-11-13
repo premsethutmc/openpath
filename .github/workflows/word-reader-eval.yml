@@ -1,0 +1,38 @@
+name: Word-reader trial (spends a few cents; runs only when asked)
+# word-reader@1: reads ~300 of OpenPath's own worded problems with the language model and counts right / wrong / refused.
+# It runs only on a push to the branch eval/word-reader, or by hand. It needs the repository secret
+# OPENPATH_WORD_PROBLEM_API_KEY (set by the owner in GitHub's settings; never in a file).
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: Model name
+        default: claude-haiku-5-5
+      limit:
+        description: How many problems
+        default: "300"
+  push:
+    branches: [eval/word-reader]
+permissions:
+  contents: read
+jobs:
+  trial:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+        working-directory: frontend
+      - name: Trial
+        working-directory: frontend
+        env:
+          OPENPATH_WORD_PROBLEM_API_KEY: ${{ secrets.OPENPATH_WORD_PROBLEM_API_KEY }}
+          OPENPATH_WORD_PROBLEM_MODEL: ${{ inputs.model || 'claude-haiku-5-5' }}
+        run: |
+          if [ -z "$OPENPATH_WORD_PROBLEM_API_KEY" ]; then echo "::error::The repository secret OPENPATH_WORD_PROBLEM_API_KEY is not set."; exit 1; fi
+          node --import tsx ../tools/mathematics/word-reader-eval/run.ts --limit=${{ inputs.limit || '300' }}
