@@ -21,7 +21,7 @@ services:
       - key: DJANGO_SECRET_KEY
         generateValue: true
       - key: DEMO_SESSION_HOURS
-        value: "720"
+        value: "8760"
       # the pilot's own PostgreSQL database; start.sh refuses to start without it
       - key: DATABASE_URL
         sync: false

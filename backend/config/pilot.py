@@ -26,3 +26,7 @@ OPENPATH_LLM_API_KEY = ''
 OPENPATH_TRUST_CLIENT_CLOCK = False
 # no mail service is configured: a password-reset link is not sent anywhere (and never printed to the log)
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+# one-account@1: a family signs in once on a device and stays signed in (signing out, or a new password, still ends it)
+SESSION_COOKIE_AGE = 180 * 24 * 3600
+SESSION_SAVE_EVERY_REQUEST = False

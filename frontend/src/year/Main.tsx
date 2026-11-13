@@ -957,18 +957,31 @@ function TopBar({ left, title }: { left: React.ReactNode; title: string }) {
   );
 }
 
+/** one-account@1: signing in and creating the parent account are both here, so Maths never sends a parent to another app. */
+const CONSENT_TEXT = "I am a parent or guardian. I agree that OpenPath keeps my email and my children's learning records on its server, to show their learning to me. OpenPath's developers read a child's record only if I turn on sharing for diagnostics for that child in Me (every look is logged), and the app sends performance measurements that never include answers or names. Records are not sold or given to anyone else, and I can export or delete them at any time.";
 function SignIn({ onDone, onError }: { onDone: () => void; onError: (e: string) => void }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
+  const [create, setCreate] = useState(false);
+  const [agree, setAgree] = useState(false);
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (create && !agree) return onError("Tick the box to agree to how records are kept.");
+    setBusy(true);
+    onError("");
+    (create ? api.register(email, password) : api.login(email, password)).then(onDone).catch((er) => onError(String(er.message ?? er))).finally(() => setBusy(false));
+  };
   return (
-    <form className="stack" onSubmit={(e) => { e.preventDefault(); setBusy(true); api.login(email, password).then(onDone).catch((er) => onError(String(er.message ?? er))).finally(() => setBusy(false)); }}>
-      <h1>Sign in to OpenPath</h1>
-      <p className="muted">Use the same account as the rest of OpenPath.</p>
+    <form className="stack" onSubmit={submit}>
+      <h1>{create ? "Create your account" : "Sign in to OpenPath"}</h1>
+      <p className="muted">{create ? "One account for English and Maths. You add your child next." : "One account for English and Maths."}</p>
       <label className="field">Email<input type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
-      <label className="field">Password<input type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required /></label>
-      <button className="primary" disabled={busy}>{busy ? "Signing in…" : "Sign in"}</button>
-      <p className="muted center">No account yet? <a className="link" href="/">Create a parent account in OpenPath</a>, add the learner there, then come back to Maths.</p>
+      <label className="field">Password<input type="password" autoComplete={create ? "new-password" : "current-password"} minLength={create ? 10 : undefined} value={password} onChange={(e) => setPassword(e.target.value)} required /></label>
+      {create && <p className="muted small">At least 10 characters.</p>}
+      {create && <label className="consent-line"><input type="checkbox" checked={agree} onChange={(e) => setAgree(e.target.checked)} /><span>{CONSENT_TEXT}</span></label>}
+      <button className="primary" disabled={busy}>{busy ? "One moment…" : create ? "Create account" : "Sign in"}</button>
+      <p className="muted center"><button type="button" className="link" onClick={() => { setCreate(!create); onError(""); }}>{create ? "I already have an account" : "New here? Create an account"}</button></p>
     </form>
   );
 }

@@ -201,3 +201,7 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 /* the way into the lesson is a quiet link at the top right, not a second big button above the skill's name */
 .lesson-link { display: flex; justify-content: flex-end; margin-bottom: 2px; }
 .lesson-link .link { font-weight: 700; }
+
+/* one-account@1 */
+.consent-line { display: flex; gap: 10px; align-items: flex-start; font-size: 0.85rem; line-height: 1.4; }
+.consent-line input { margin-top: 3px; flex: none; width: 20px; height: 20px; }

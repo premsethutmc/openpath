@@ -58,3 +58,8 @@ Neither the connection string nor the passwords are committed, logged, or sent t
 - The owner holds the parent account and decides what name is shown (a first name or nickname is enough).
 - This is an early version: lessons and questions are machine-checked, not reviewed by a teacher.
 - Free plans change. If Render or Neon change theirs, the record should be exported first.
+
+## Signing in once (one-account@1)
+
+- Maths has its own "Create an account" on its sign-in screen; a parent is never sent to another app to register.
+- A parent's sign-in lasts 180 days on a device; the site password is asked once a year per device.

@@ -170,8 +170,8 @@ export function configFromEnv(env = process.env) {
     );
   const hours =
     env.DEMO_SESSION_HOURS === undefined ? 168 : Number(env.DEMO_SESSION_HOURS);
-  if (!(hours > 0 && hours <= 24 * 30))
-    problems.push("DEMO_SESSION_HOURS must be between 0 and 720");
+  if (!(hours > 0 && hours <= 24 * 365))
+    problems.push("DEMO_SESSION_HOURS must be between 0 and 8760");
   const dist = env.DEMO_DIST
     ? env.DEMO_DIST
     : fileURLToPath(new URL(`../${"dist-english"}`, import.meta.url));
