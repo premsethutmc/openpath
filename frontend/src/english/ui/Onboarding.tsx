@@ -50,7 +50,11 @@ const Arrow = () => (
 
 // ------------------------------------------------------------------ welcome
 
-export function Welcome({ accounts, onBegin, onSignIn, onDevice, privateWindow, extra }: { accounts: boolean; onBegin: () => void; onSignIn: () => void; onDevice: () => void; privateWindow: boolean; extra?: ReactNode }) {
+/** subjects-home@1: the build that also carries My Learning Year (maths, at /year/) says so; every other build has English only. */
+declare const __OPENPATH_MATHS__: boolean | undefined;
+export const MATHS_BUILT = typeof __OPENPATH_MATHS__ !== "undefined" && __OPENPATH_MATHS__ === true;
+
+export function Welcome({ accounts, onBegin, onSignIn, onDevice, privateWindow, extra, maths = MATHS_BUILT }: { accounts: boolean; onBegin: () => void; onSignIn: () => void; onDevice: () => void; privateWindow: boolean; extra?: ReactNode; maths?: boolean }) {
   return (
     <Frame label="Welcome">
       <p className="eyebrow">A better way to learn</p>
@@ -59,7 +63,7 @@ export function Welcome({ accounts, onBegin, onSignIn, onDevice, privateWindow, 
         <br />
         Your pace. <span aria-hidden="true">✨</span>
       </h1>
-      <p className="sub">Learn English through little discoveries, useful practice, and a path that grows with you.</p>
+      <p className="sub">{maths ? "Learn through little discoveries, useful practice, and a path that grows with you. Choose a subject." : "Learn English through little discoveries, useful practice, and a path that grows with you."}</p>
       <div className="art" aria-hidden="true">
         <div className="emoji">🦊</div>
         <div className="bubble">
@@ -70,10 +74,25 @@ export function Welcome({ accounts, onBegin, onSignIn, onDevice, privateWindow, 
       </div>
       {privateWindow && <p className="warning">This browser is not letting OpenPath save anything on this device (a private window, perhaps).</p>}
       <div className="stack">
-        <button type="button" className="primary" onClick={onBegin}>
-          Let's begin
-          <Arrow />
-        </button>
+        {maths ? (
+          <div className="subjects" role="group" aria-label="Subjects">
+            <button type="button" className="subject-tile" onClick={onBegin}>
+              <span className="subject-emoji" aria-hidden="true">📖</span>
+              <span className="subject-name">English</span>
+              <span className="subject-sub">Reading, words and writing</span>
+            </button>
+            <a className="subject-tile mint" href="/year/">
+              <span className="subject-emoji" aria-hidden="true">🔢</span>
+              <span className="subject-name">Maths</span>
+              <span className="subject-sub">Your school year, skill by skill</span>
+            </a>
+          </div>
+        ) : (
+          <button type="button" className="primary" onClick={onBegin}>
+            Let's begin
+            <Arrow />
+          </button>
+        )}
         {accounts && (
           <>
             <button type="button" className="secondary" onClick={onSignIn}>

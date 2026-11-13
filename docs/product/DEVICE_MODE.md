@@ -11,6 +11,8 @@ is kept in the browser.
   unchanged. A build without `--device` never uses the device store (`OPENPATH_DEVICE` is false and the choice folds away).
 - The demo build carries maths only when `OPENPATH_MATHS_ON_DEVICE=1` is set where it is built (`build-english.mjs`). The
   demo server serves it at `/year/`, behind the same password as the rest.
+- subjects-home@1: in that build the welcome screen shows one tile for each subject, English and Maths (the owner's choice,
+  2026-11-13); every other build keeps the single "Let's begin" button.
 - A learner is added on the device (a first name or nickname). A banner says on every screen that progress is kept in this
   browser only.
 
@@ -40,6 +42,8 @@ against the real demo server: log in, open `/year/`, add a learner, choose CISCE
 ## Not done
 
 - No export or backup of a maths record from the device (English has one).
-- No link from the English home screen to `/year/`; it is reached by its address.
+- A learner who has already started English opens straight into English and does not pass the welcome screen; maths is
+  then reached by its address (`/year/`) or after "log out and erase".
+- The English learner and the maths learner on a device are separate (two lists).
 - The setup screen still offers "Add my textbook" and goals that were designed with the server in mind; they were not
   exercised here.

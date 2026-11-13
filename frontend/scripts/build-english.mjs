@@ -91,7 +91,7 @@ await esbuild.build({
   entryNames: "app",
   minify: true,
   sourcemap: true,
-  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode), __OPENPATH_PILOT_APPROVED__: JSON.stringify(pilotApproved) },
+  define: { "process.env.NODE_ENV": '"production"', __OPENPATH_COMMIT__: JSON.stringify(commit), __OPENPATH_CONTENT__: JSON.stringify(mode), __OPENPATH_PILOT_APPROVED__: JSON.stringify(pilotApproved), __OPENPATH_MATHS__: process.env.OPENPATH_MATHS_ON_DEVICE === "1" ? "true" : "false" },
   logLevel: "warning",
 });
 const js = await readFile(`${out}/assets/app.js`);
