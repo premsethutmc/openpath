@@ -64,3 +64,11 @@ test("round trip: the bare expression of every indexed family's problems is read
   // a refusal is safe (the learner is told it is not read); a different question never is, and the assert above forbids it
   assert.ok(right >= 200 && right > 4 * refused, `${right} read, ${refused} refused`);
 });
+
+test("R-6 a family's own parser is still believed when its problem prints more numbers than were typed", () => {
+  const r = readProblem("expand (x+2)(x+6)");
+  assert.ok(r.supported && r.problem.id === "gen:expand:2,6");
+  // but not when a typed number is missing from what it prints
+  const p = readProblem("15% of 200");
+  assert.ok(!p.supported || /200/.test(p.problem.prompt));
+});
