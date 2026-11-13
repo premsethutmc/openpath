@@ -52,7 +52,7 @@ export function parentReport<A extends ReportAttempt>(input: { attempts: readonl
     const answered = list.length, rightFirstTry = list.filter(first).length;
     const helped = list.filter((a) => a.hints > 0 || a.solution || a.activity === "guided").length;
     const solutions = list.filter((a) => a.solution).length;
-    const verdict = answered >= 3 && (rightFirstTry * 2 < answered || solutions >= 2) ? "needs_help" : answered >= 3 && rightFirstTry * 5 >= answered * 4 ? "going_well" : "in_progress";
+    const verdict: SkillLine["verdict"] = answered >= 3 && (rightFirstTry * 2 < answered || solutions >= 2) ? "needs_help" : answered >= 3 && rightFirstTry * 5 >= answered * 4 ? "going_well" : "in_progress";
     return { competency, name: name(competency), answered, rightFirstTry, helped, last: list.reduce((m, a) => (a.at > m ? a.at : m), ""), verdict };
   }).sort((a, b) => (a.last < b.last ? 1 : -1));
   const lastActive = all.reduce<string | null>((m, a) => (!m || a.at > m ? a.at : m), null);

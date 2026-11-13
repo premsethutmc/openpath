@@ -856,6 +856,7 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
   const [savedAs, setSavedAs] = useState("");
   const report = useMemo(() => (st ? parentReport({ attempts: st.records.attempts, teaching: st.records.teaching }, rightAnswer, (c) => { try { return graph.get(c).name; } catch { return c; } }, now) : null), [st, now]);
   if (!report || !st) return <p className="muted center">Opening…</p>;
+  const sum = st.summary;
   const most = Math.max(1, ...report.days.map((d) => d.answered));
   const needs = report.skills.filter((s) => s.verdict === "needs_help"), well = report.skills.filter((s) => s.verdict === "going_well"), rest = report.skills.filter((s) => s.verdict === "in_progress");
   const ago = (iso: string) => { const d = Math.floor((now - Date.parse(iso)) / 86_400_000); return d <= 0 ? "today" : d === 1 ? "yesterday" : `${d} days ago`; };
@@ -879,7 +880,7 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
       {rest.length > 0 && <section aria-label="Also worked on"><h2>Also worked on</h2><ul className="parent-skills">{rest.map(line)}</ul></section>}
       <section aria-label="The year so far">
         <h2>The year so far</h2>
-        <p>{st.summary.verified} skill{st.summary.verified === 1 ? "" : "s"} checked again a week later and still right · {st.summary.shown} shown on their own · {st.summary.developing} being learned · {st.summary.notStarted} not started.</p>
+        {sum ? <p>{sum.verified} skill{sum.verified === 1 ? "" : "s"} checked again a week later and still right · {sum.shown} shown on their own · {sum.developing} being learned · {sum.notStarted} not started.</p> : <p className="muted">No school year has been set up yet.</p>}
         <p className="muted small">These are counts of what {name} did in OpenPath. A skill is only called checked after it is answered correctly again at least a week later. The lessons are machine-checked for correctness and have not been reviewed by a teacher.</p>
       </section>
       {savedAs && <p className="feedback good" role="status"><b>Saved.</b> Sign in with {savedAs} on any phone or computer to see the same progress. Keep the password somewhere safe: this site cannot email a reset link yet.</p>}
