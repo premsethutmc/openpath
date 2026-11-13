@@ -220,6 +220,10 @@ export function describe(v: V): string {
       const said = L.map((t, i) => (t.trim() === "?" ? `${name[i]} is marked ?` : t.trim() ? `${name[i]} is ${t.trim()}` : "")).filter(Boolean);
       return `Two straight lines crossing at a point, making four angles${said.length ? `: ${said.join("; ")}` : ""}`;
     }
+    case "angleset": {
+      const it = arr<{ label: string; deg: number }>(v.items);
+      return `${it.length} angles: ${it.map((x) => `${x.label} is ${x.deg}°`).join(", ")}`;
+    }
     case "circle":
       return `A circle${v.radius !== undefined ? ` with radius ${str(v.radius)}` : ""}${v.diameter !== undefined ? ` with diameter ${str(v.diameter)}` : ""}${v.sector !== undefined ? (v.estimate ? ", with a shaded angle (estimate it from the picture)" : `, a sector of ${num(v.sector)}°`) : ""}`;
     case "grid": {
@@ -485,6 +489,24 @@ export function Figure({ v }: { v: V }) {
           return <text key={`l${i}`} x={(a[0] + b[0]) / 2 + ((a[0] + b[0]) / 2 - 110) * 0.18} y={(a[1] + b[1]) / 2 + ((a[1] + b[1]) / 2 - 100) * 0.18 + 4} fontSize={13} textAnchor="middle" fill={INK}>{String(l)}</text>;
         }),
       ]);
+    }
+    case "angleset": {
+      // kid-say@1: several angles side by side, each under its letter (one arm flat, the other turned)
+      const it = arr<{ label: string; deg: number }>(v.items);
+      const W = 90, H = 96, cy = 80;
+      return box(W * it.length, H, it.flatMap((x, i) => {
+        const L = i * W, r = (x.deg * Math.PI) / 180;
+        const label = <text key={`t${i}`} x={L + W / 2} y={18} textAnchor="middle" fontWeight={800} fontSize={16} fill={ACC}>{x.label}</text>;
+        if (x.deg === 180) return [label, <line key={`a${i}`} x1={L + 12} y1={cy} x2={L + W - 12} y2={cy} stroke={INK} strokeWidth={3} strokeLinecap="round" />, <circle key={`o${i}`} cx={L + W / 2} cy={cy} r={3.5} fill={INK} />];
+        // an obtuse angle opens to the left, so its corner sits to the right of its cell
+        const vx = x.deg > 90 ? L + 52 : L + 14, len = x.deg > 90 ? 44 : 52;
+        return [
+          label,
+          <line key={`a${i}`} x1={vx} y1={cy} x2={x.deg > 90 ? L + W - 10 : L + W - 12} y2={cy} stroke={INK} strokeWidth={3} strokeLinecap="round" />,
+          <line key={`b${i}`} x1={vx} y1={cy} x2={vx + len * Math.cos(r)} y2={cy - len * Math.sin(r)} stroke={INK} strokeWidth={3} strokeLinecap="round" />,
+          ...(x.deg === 90 ? [<path key={`r${i}`} d={`M ${vx + 9} ${cy} v -9 h -9`} fill="none" stroke={INK} strokeWidth={2} />] : []),
+        ];
+      }));
     }
     case "angle": {
       if (v.cross === true) {

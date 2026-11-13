@@ -23,6 +23,7 @@ import { graph } from "../../../packages/learning/src/graph";
 import { problemOf } from "../../../packages/learning/src/families";
 import { retriesLeft, reviewStrategy as reviewStrategyFor, familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
 import { decide } from "../../../packages/learning/src/session";
+import { compose, kidQuestion, type Ask as KidAsk } from "../../../packages/learning/src/kid-say";
 // deep-recovery@0 in a module (RESEARCH, research builds only, default off: deep-recovery-flag.ts; MODULE-RECOVERY.md)
 import { deepRecoveryOn, deepPathwayAllowed, DEEP_EVALUATION } from "./deep-recovery-flag";
 import { deepModuleState } from "../learning/deep-module";
@@ -136,6 +137,57 @@ function SyntaxHelp({ q }: { q: { type: string; answer?: string } }) {
     </details>
   );
 }
+const safeKid = (q: Question) => { try { return kidQuestion(q); } catch { return null; } };
+/** kid-say@1: the answer shaped the way the question suggests (₹ before, a unit after, m and cm boxes, tap to order,
+ * tap one); it hands back the same answer string the typed box would. */
+function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; answer: string; type: string; setValue: (v: string) => void; disabled: boolean }) {
+  const [parts, setParts] = useState<string[]>([]);
+  const put = (next: string[], done: boolean) => { setParts(next); setValue(done ? compose(ask, next, answer, type) : ""); };
+  if (ask.kind === "tap")
+    return (
+      <div className="kid-taps" role="radiogroup" aria-label="Choose one">
+        {ask.items.map((x) => (
+          <button key={x.label} type="button" role="radio" aria-checked={parts[0] === x.value} className={`kid-tap ${parts[0] === x.value ? "picked" : ""}`} disabled={disabled} onClick={() => put([x.value], true)}>{x.label}</button>
+        ))}
+      </div>
+    );
+  if (ask.kind === "order") {
+    const name = (x: string) => (ask.prefix ? `${ask.prefix} ${x}` : x);
+    const left = ask.items.filter((x) => !parts.includes(x));
+    return (
+      <div className="kid-order">
+        <div className="kid-taps" aria-label="Numbers to put in order">
+          {left.map((x) => <button key={x} type="button" className="kid-tap" disabled={disabled} onClick={() => { const n = [...parts, x]; put(n, n.length === ask.items.length); }}>{name(x)}</button>)}
+        </div>
+        <ol className="kid-slots" aria-label={`Your order, ${ask.first} first`}>
+          {ask.items.map((_, i) => (
+            <li key={i}>{parts[i] ? <button type="button" className="kid-tap placed" disabled={disabled} aria-label={`Take back ${name(parts[i])}`} onClick={() => put(parts.filter((_, j) => j !== i), false)}>{name(parts[i])}</button> : <span className="kid-slot" />}</li>
+          ))}
+        </ol>
+        <p className="small muted">Tap them in order, {ask.first} first. Tap one again to take it back.</p>
+      </div>
+    );
+  }
+  if (ask.kind === "fields")
+    return (
+      <div className="kid-fields">
+        {ask.labels.map((l, i) => (
+          <label key={l} className="kid-unit">
+            <input aria-label={`Your answer: ${l}`} inputMode="numeric" autoComplete="off" value={parts[i] ?? ""} disabled={disabled} onChange={(e) => { const n = ask.labels.map((_, j) => (j === i ? e.target.value : parts[j] ?? "")); put(n, n.every((x) => x.trim())); }} />
+            <span>{l}</span>
+          </label>
+        ))}
+      </div>
+    );
+  return (
+    <label className="kid-unit">
+      {ask.before && <span>{ask.before}</span>}
+      <input aria-label="Your answer" inputMode="decimal" autoComplete="off" placeholder="Your answer" value={parts[0] ?? ""} disabled={disabled} onChange={(e) => put([e.target.value], !!e.target.value.trim())} />
+      {ask.after && <span>{ask.after}</span>}
+    </label>
+  );
+}
+
 /** An answer box for any question type. */
 export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question, "type" | "options"> & { id?: string; answer?: string }; value: string; setValue: (v: string) => void; disabled: boolean }) {
   if (q.type === "choice")
@@ -226,14 +278,19 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const [clarify, setClarify] = useState<string | null>(null);
   const submitting = useRef(false);
   const workable = q.type !== "written";
+  // kid-say@1: the child build shows each generated question as one short ask (wording and answer shape only)
+  const kq = KID && qid.startsWith("gen:") ? safeKid(q) : null;
   if (DEEP_EVALUATION && !releaseOf(qid)) return <p role="note" data-evaluation-stop="review-required">This question needs educator review before evaluation. Nothing is counted as solved.</p>;
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
       {heading && <p className="eyebrow">{heading}</p>}
       {!KID && <span className="counted">{COUNTS[activity]}</span>}
-      <p className="prompt">{q.prompt}</p>
-      {q.figure && <Figure v={q.figure} />}
-      <AnswerInput q={q} value={value} setValue={setValue} disabled={ctx.saving} />
+      <p className="prompt">{kq ? kq.say : q.prompt}</p>
+      {(kq?.figure ?? q.figure) && <Figure v={(kq?.figure ?? q.figure)!} />}
+      {kq?.note && <p className="kid-note">{kq.note}</p>}
+      {kq && q.type !== "choice" && (kq.ask.kind !== "box" || kq.ask.before || kq.ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
+        ? <KidAnswer key={qid} ask={kq.ask} answer={q.answer} type={q.type} setValue={setValue} disabled={ctx.saving} />
+        : <AnswerInput q={kq?.options ? { ...q, options: kq.options } : q} value={value} setValue={setValue} disabled={ctx.saving} />}
       {clarify && <p className="small" role="status">{clarify}</p>}
       {workable && (
         <details className="working" open={workingOpen}>

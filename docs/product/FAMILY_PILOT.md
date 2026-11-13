@@ -93,3 +93,14 @@ Neither the connection string nor the passwords are committed, logged, or sent t
   again every three seconds for two minutes. If the site password has run out, the visitor is sent to the password page.
 - The site password's sessions now survive a restart (the salt comes from the session secret). Before, every restart,
   and so every wake from sleep, asked for the site password again.
+
+## Question wording (kid-say@1)
+
+In the child build every generated question is shown as one short ask (`packages/learning/src/kid-say.ts`). Only the
+wording and the answer box change; the question, its answer and the marking do not. Rules: one ask, with typing rules
+moved into the box (₹ before it, a unit after it, separate m and cm boxes, numbers to tap into order, a letter to
+tap); a picture only where the maths is visual, and the sentence never does the picture's work; a calculation stays a
+calculation. About 50 of the wordiest Class 5 families have their own rewrite; the rest follow the general rules.
+`kid-say.test.ts` checks every Class 5 family: no typing instructions left, no number that the question did not give,
+and every tap, order and two-box answer rebuilds an answer the existing marking accepts. Test and review builds keep
+the full wording.

@@ -190,3 +190,17 @@ details.working summary, .hint { color: var(--ink); }
 /* tables in lessons and questions: readable in both themes */
 .stack table th, .qcard table th, .figure table.data th { background: var(--brand-soft); color: var(--ink); }
 .stack table td, .qcard table td, .figure table.data td { color: var(--ink); border-color: var(--line); }
+
+/* kid-say@1: answers shaped like the question (tap one, tap in order, ₹ and unit boxes) */
+.kid-note { margin: -4px 0 4px; color: var(--muted); font-size: 0.95rem; }
+.kid-taps { display: flex; flex-wrap: wrap; gap: 10px; }
+.kid-tap { min-width: 64px; padding: 14px 18px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); color: var(--ink); font-size: 1.25rem; font-weight: 800; cursor: pointer; }
+.kid-tap.picked, .kid-tap.placed { border-color: var(--brand, #6a55f0); background: var(--brand-soft); color: var(--brand-text); }
+.kid-taps .kid-tap { flex: 1 1 0; }
+.kid-order { display: grid; gap: 12px; }
+.kid-slots { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.kid-slots li { flex: 1 1 0; display: grid; }
+.kid-slot { min-height: 54px; border-radius: 16px; border: 2px dashed var(--line); }
+.kid-fields { display: flex; gap: 12px; }
+.kid-unit { display: flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: 800; color: var(--ink); flex: 1; }
+.kid-unit input { flex: 1; min-width: 0; font-size: 1.3rem; padding: 14px 16px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); color: var(--ink); }
