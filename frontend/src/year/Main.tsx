@@ -486,6 +486,19 @@ function App() {
     if (next.kind === "challenge" && next.question) return setView({ name: "single", qid: next.question, heading: "Enrichment challenge" });
     if (next.competency) setView({ name: "module", competency: next.competency, back: { name: "year" } });
   };
+  // kid-home@1: the shipped family and demo builds show the child's screen; test and research builds keep the full one
+  if (KID_HOME)
+    return (
+      <Shell banner={banner} error={error} top={<TopBar left={pupils.length > 1 || DEVICE_BUILD ? switcher : <a className="link kid-back" href="/" aria-label="All subjects">←</a>} title="" />}>
+        <KidHome
+          name={name} st={st} now={now} next={next} nextReason={nextReason} goNext={goNext} sections={tiles}
+          onOpen={(t, path) => open(t, path)} grade={grade}
+          stuck={<StuckBox grade={grade ?? undefined} onOpen={(qid) => setView({ name: "stuck", qid })} onWorked={(text, read) => setView({ name: "worked", text, read })} />}
+          onParents={DEVICE_BUILD ? undefined : () => setView({ name: "parent" })}
+          onSettings={() => setView({ name: "setup", sameYear: true })}
+        />
+      </Shell>
+    );
   return (
     <Shell paper={grade === 7} banner={banner} error={error} wide top={top(switcher, name)}>
       <div className="year-head">
@@ -854,6 +867,100 @@ function StuckBox({ onOpen, onWorked, grade }: { onOpen: (qid: string) => void; 
       {why && <p className="feedback bad" role="status"><b>OpenPath can’t work through this one yet.</b> {why}</p>}
       <button className="secondary" disabled={!text.trim() || busy}>{busy ? "Reading your problem…" : "Work through it"}</button>
     </form>
+  );
+}
+
+const KID_HOME = NAME_START || DEVICE_BUILD;
+/** kid-home@1: a picture for a chapter, from the words in its name (nothing is guessed when no word matches) */
+const CHAPTER_ICON: [RegExp, string][] = [
+  [/fraction|decimal|percent/i, "🍕"], [/algebra|equation|pattern|expression/i, "🔤"], [/geometr|shape|angle|line|triangle|circle|symmetr|polygon|construct/i, "📐"],
+  [/measure|length|mass|weight|capacity|area|perimeter|volume|unit/i, "📏"], [/data|statistic|graph|chart|handling|probabilit/i, "📊"], [/money|rupee|profit|interest/i, "💰"],
+  [/\btime\b|clock|calendar/i, "⏰"], [/\bratio|proportion/i, "⚖️"], [/number|operation|arithmetic|integer|whole|place value|factor|multipl|division/i, "🔢"],
+];
+const iconFor = (title: string) => CHAPTER_ICON.find(([re]) => re.test(title))?.[1] ?? "📘";
+/** A skill's name in fewer words: the board's wording, without brackets and anything after a semicolon or colon. */
+const shortName = (s: string) => s.replace(/\s*\([^)]*\)/g, "").replace(/[;:].*$/, "").trim();
+
+/** A ring that fills up (`value` of `max`), with `children` in the middle. */
+function Ring({ value, max, size = 64, children }: { value: number; max: number; size?: number; children?: React.ReactNode }) {
+  const r = size / 2 - 5, c = 2 * Math.PI * r, f = max > 0 ? Math.min(1, value / max) : 0;
+  return (
+    <span className="ring" style={{ width: size, height: size }}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} aria-hidden="true">
+        <circle cx={size / 2} cy={size / 2} r={r} className="ring-track" />
+        {f > 0 && <circle cx={size / 2} cy={size / 2} r={r} className="ring-fill" strokeDasharray={`${c * f} ${c}`} transform={`rotate(-90 ${size / 2} ${size / 2})`} />}
+      </svg>
+      <span className="ring-mid">{children}</span>
+    </span>
+  );
+}
+
+/** kid-home@1: the Maths home for a child. One "Today" card with the next thing and one button; the chapters as a list;
+ *  then help with a problem, and the grown-up pages. Everything here is the same data as the full screen, said simply. */
+function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, grade, stuck, onParents, onSettings }: {
+  name: string; st: NonNullable<ReturnType<typeof learnerState>>; now: number;
+  next: NonNullable<NonNullable<ReturnType<typeof learnerState>>["next"]>; nextReason: string; goNext: () => void;
+  sections: Tile[]; onOpen: (t: Tile, path: string[]) => void; grade: number | null; stuck: React.ReactNode; onParents?: () => void; onSettings: () => void;
+}) {
+  const r = useMemo(() => parentReport({ attempts: st.records.attempts, teaching: st.records.teaching }, rightAnswer, (c) => c, now), [st, now]);
+  const done = Math.min(r.today.answered, DAILY_GOAL), reached = r.today.answered >= DAILY_GOAL;
+  const title = next.question ? shortName(question(next.question).prompt.split(":")[0]) : next.competency ? shortName(graph.get(next.competency).name) : "";
+  const chapters = sections.flatMap((s) => s.children.map((c) => ({ c, path: [s.id, c.id] })));
+  const started = st.records.attempts.length > 0;
+  return (
+    <div className="kid">
+      <h1 className="kid-hi">Hi, {name}! <span aria-hidden="true">👋</span></h1>
+      <p className="kid-sub">{grade ? `Class ${grade} Maths` : "Maths"}</p>
+      <section className="kid-today" aria-label="Today">
+        <div className="kid-today-top">
+          <Ring value={done} max={DAILY_GOAL}><b>{r.today.answered}</b><small>/{DAILY_GOAL}</small></Ring>
+          <div className="kid-today-words">
+            <p className="kid-label">Today</p>
+            <p className="kid-goal">{reached ? "Goal reached! 🎉" : r.today.answered ? `${DAILY_GOAL - r.today.answered} more questions to go` : `${DAILY_GOAL} questions today`}</p>
+            {r.streak >= 1 && <p className="kid-streak">🔥 {r.streak === 1 ? (r.today.answered ? "Day 1" : "1 day — keep it going") : `${r.streak} days in a row`}</p>}
+          </div>
+        </div>
+        {next.kind !== "none" ? (
+          <>
+            <p className="kid-next-label">{next.kind === "retention" ? "Quick check" : next.kind === "review" ? "Practise again" : started ? "Up next" : "Start with"}</p>
+            <p className="kid-next">{title}</p>
+            <button className="primary kid-go" onClick={goNext}>{next.kind === "retention" ? "Start the check" : next.kind === "review" ? "Practise" : next.kind === "continue" ? "Carry on" : "Start"} →</button>
+          </>
+        ) : (
+          <p className="kid-next-label">{nextReason}</p>
+        )}
+      </section>
+      <section aria-label="Chapters">
+        <h2 className="kid-h2">Chapters</h2>
+        <ul className="kid-chapters">
+          {chapters.map(({ c, path }) => {
+            const off = c.kind === "proposal" || c.kind === "unsupported";
+            return (
+              <li key={c.id}>
+                <button className="kid-chapter" disabled={off} onClick={() => onOpen(c, path)} data-status={c.status}>
+                  <span className="kid-chapter-icon" aria-hidden="true">{iconFor(c.title)}</span>
+                  <span className="kid-chapter-name">{c.title}</span>
+                  {c.progress.total > 0 && (
+                    <Ring value={c.progress.done} max={c.progress.total} size={44}>
+                      <small>{c.progress.done ? `${Math.round((100 * c.progress.done) / c.progress.total)}%` : ""}</small>
+                    </Ring>
+                  )}
+                  <span className="sr-only">{c.progress.done} of {c.progress.total} skills done</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+      <section aria-label="Stuck on a problem" className="kid-stuck">
+        <h2 className="kid-h2">Stuck on homework?</h2>
+        {stuck}
+      </section>
+      <nav className="kid-grown-ups" aria-label="For grown-ups">
+        {onParents && <button className="kid-row" onClick={onParents}><span aria-hidden="true">👪</span> For parents<span aria-hidden="true">›</span></button>}
+        <button className="kid-row" onClick={onSettings}><span aria-hidden="true">⚙️</span> Class and board<span aria-hidden="true">›</span></button>
+      </nav>
+    </div>
   );
 }
 
