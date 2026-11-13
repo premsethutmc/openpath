@@ -131,9 +131,10 @@ export function readProblem(text: string): Parsed {
   if (!text.trim() || text.length > 200) return parseProblem(text);
   const bare = skeleton(text);
   let first = parseProblem(text);
-  // a family's own parser is believed only if the problem it returns prints the numbers that were typed (a parser that
+  // a family's own parser is believed only if the problem it returns prints every number that was typed (a parser that
   // drops a digit would otherwise answer a different problem)
-  const sameNumbers = (prompt: string) => sameSet(canon(prompt).match(NUM) ?? [], canon(text).match(NUM) ?? []);
+  // (every typed number must be printed; the problem may print more, such as the 12 in "(x + 2)(x + 6) = x² + □x + 12")
+  const sameNumbers = (prompt: string) => { const printed = new Set(canon(prompt).match(NUM) ?? []); return (canon(text).match(NUM) ?? []).every((n) => printed.has(n)); };
   if (first.supported && sameNumbers(first.problem.prompt)) return first;
   if (first.supported) first = { supported: false, reason: "" };
   // the typed text too must be its expression and nothing else: "simplify 24/30" is not the division 24 ÷ 30
