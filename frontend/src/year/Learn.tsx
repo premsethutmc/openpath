@@ -74,6 +74,13 @@ const FLOW_WORDS: Record<(typeof FLOW)[number], string> = { Explore: "Find your 
 const flowIndex = (p: ModulePhase) => (p === "explore" || p === "recover" ? 0 : p === "strategy" ? 1 : p === "chapter" ? 2 : p === "guided" || p === "check" ? 3 : 4);
 const activityOf = (phase: ModulePhase, q: Question): LearningActivity =>
   phase === "explore" ? "diagnostic" : phase === "strategy" ? "probe" : phase === "guided" ? "guided" : phase === "check" ? "check" : phase === "retention" ? "retention" : q.role === "transfer" ? "transfer" : "practice";
+/** The example under an answer box: the format's own first example, except that a list of whole numbers that are not
+ *  negative is shown as "4, 9" (a list example with a negative number looked wrong under a question about primes). */
+function exampleFor(q: { type: string; answer?: string }): string {
+  const sem = semanticsOf({ type: q.type as never, answer: q.answer ?? "" });
+  const first = examplesFor(sem)[0] ?? "12";
+  return sem.kind === "solution-set" && !/-/.test(q.answer ?? "") && !/[a-z]/i.test(q.answer ?? "") ? "4, 9" : first;
+}
 /** kid-look@1: what a right answer says (picked by the question, so it does not flicker on a re-render) */
 const CHEERS = [{ word: "Correct! Well done.", emoji: "🎉" }, { word: "Yes, that's right!", emoji: "⭐" }, { word: "Brilliant!", emoji: "🌟" }, { word: "Spot on!", emoji: "✨" }];
 const COUNTS: Record<LearningActivity, string> = {
@@ -156,7 +163,7 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
   return (
     <label className="field">
       {label}
-      <input aria-label="Your answer" inputMode={q.type === "integer" ? "numeric" : "text"} autoComplete="off" value={value} disabled={disabled} onChange={(e) => setValue(e.target.value)} placeholder={`e.g. ${examplesFor(semanticsOf({ type: q.type, answer: q.answer ?? "" }))[0] ?? "12"}`} />
+      <input aria-label="Your answer" inputMode={q.type === "integer" ? "numeric" : "text"} autoComplete="off" value={value} disabled={disabled} onChange={(e) => setValue(e.target.value)} placeholder={`e.g. ${exampleFor(q)}`} />
       <SyntaxHelp q={q} />
     </label>
   );
@@ -333,7 +340,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
  *  "learn:<learner>:<visit>"; anything else gets no persistence). */
 const lessonResumeKey = (session: string, competency: string) => { const m = /^learn:([^:]+):/.exec(session); return m ? `openpath.module-lesson@1:${m[1]}:${competency}` : undefined; };
 /** One skill, end to end, as the engine directs. */
-export function Module({ competency, ctx, onExit, embedded = false, onFeedback, established, resumeKey, sessionMode = false, reviewOnly = false, withinRecovery = false }: { competency: string; ctx: Ctx; onExit: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null; resumeKey?: string; sessionMode?: boolean; reviewOnly?: boolean; withinRecovery?: boolean }) {
+export function Module({ competency, ctx, onExit, onLearn, embedded = false, onFeedback, established, resumeKey, sessionMode = false, reviewOnly = false, withinRecovery = false }: { competency: string; ctx: Ctx; onExit: () => void; onLearn?: () => void; embedded?: boolean; onFeedback?: (fb: Fb) => void; established?: Established | null; resumeKey?: string; sessionMode?: boolean; reviewOnly?: boolean; withinRecovery?: boolean }) {
   const [own, setOwn] = useResume<Fb | null>(resumeKey && `${resumeKey}:feedback`, null);
   const [retry, setRetry] = useResume<boolean | "hint">(resumeKey && `${resumeKey}:retry`, false);
   // lesson-resume@1: the screen reached in a lesson (and an open lesson review) survives a reload, per learner and skill
@@ -399,6 +406,8 @@ export function Module({ competency, ctx, onExit, embedded = false, onFeedback, 
         {head}
         {!KID && <p className="why">{shownReason}</p>}
         <Ask resumeKey={resumeKey && `${resumeKey}:${ms.question}`} key={ms.question} qid={ms.question} activity={ms.activity ?? activityOf(ms.phase, question(ms.question))} ctx={ctx} context={ms.context} hintAllowed={ms.phase === "guided"} onAnswered={setFb} />
+        {/* kid-look@1: a child who does not know yet is never left to guess: the lesson is one tap away, before answering */}
+        {KID && onLearn && (ms.phase === "explore" || ms.phase === "check") && <button className="secondary wide kid-learn" onClick={onLearn}>I don't know this yet — teach me 📖</button>}
       </div>
     );
   // done or pause

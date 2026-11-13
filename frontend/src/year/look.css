@@ -168,3 +168,19 @@ details.working summary, .hint { color: var(--ink); }
 [data-kid] .stack > h1 { font-size: 1.35rem; line-height: 1.3; margin: 4px 0 6px; }
 [data-kid] .kid h1, [data-kid] .kid-hi { font-size: 2rem; }
 [data-kid] .skill-steps-caption { font-weight: 700; color: var(--brand-text); }
+.kid-learn { margin-top: 4px; }
+/* The lesson pages (a "paper" page, CurriculumPractice) have colours of their own that were drawn for a light page: they
+   stay light in dark mode, so nothing on them is ever dark on dark. */
+@media (prefers-color-scheme: dark) {
+  body:has(.year-paper) { background: #fbfaf6; }
+  .year-paper {
+    color-scheme: light;
+    --brand: #6954c8; --brand-deep: #4a36c9; --brand-soft: #f1eeff; --brand-text: #5545c4;
+    --ink: #1d2130; --muted: #5f6b84; --line: #e6e2db; --bg: #fbfaf6; --card: #ffffff;
+    --good: #0f7a5d; --good-soft: #e9faf4; --good-ink: #126c55; --bad: #b4532a; --bad-soft: #fff0e9; --bad-ink: #8f4524;
+    --warn-soft: #fff1e0; --verified-soft: #e3f6ec; --shown-soft: #e6effd; --active-soft: #fff1e0; --idle-soft: #f0f2f7;
+    color: var(--ink);
+  }
+  body:has(.year-paper) .topbar { background: rgba(251, 250, 246, 0.92); color: #1d2130; }
+  body:has(.year-paper) .topbar .link { color: #5545c4; }
+}
