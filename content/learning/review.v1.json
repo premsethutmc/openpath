@@ -5086,7 +5086,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "f7ea809b",
+   "contentHash": "0d9ab0bb",
    "state": "draft",
    "history": [
     {
@@ -5111,6 +5111,14 @@
      "role": "engineer",
      "at": "2026-11-13T11:15:20.831Z",
      "contentHash": "f7ea809b",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-13T15:55:58.363Z",
+     "contentHash": "0d9ab0bb",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

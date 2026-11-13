@@ -2349,7 +2349,7 @@ const GEO_MORE: Def[] = [
     },
     domain: [[0, 1], [1, 71]],
     difficulty: ([mode, v]) => (5 * v > 180 ? 3 : mode === 1 ? 2 : 1),
-    figure: ([mode, v]) => (mode === 1 ? { type: "circle", sector: 5 * v, estimate: true } : { type: "angle", deg: 5 * v }),
+    figure: ([mode, v]) => (mode === 1 ? { type: "circle", sector: 5 * v, estimate: true } : null),
     word: ([mode, v]) => (mode === 0 ? `${name(v)} turns the steering wheel of a toy car through ${5 * v}°. What kind of angle has it turned through?` : `${name(v)} turns a key through the shaded angle in the picture. What kind of angle is that turn?`),
     teach: {
       idea: "Angles are named by comparing them with a right angle (90°) and a straight angle (180°): acute < 90° < obtuse < 180° < reflex < 360°.",
