@@ -28,6 +28,7 @@ COPY content content
 COPY shared shared
 COPY --from=web /app/frontend/dist-english frontend/dist-english
 COPY frontend/scripts/preview-server.mjs frontend/scripts/preview-server.mjs
+COPY frontend/scripts/static-send.mjs frontend/scripts/static-send.mjs
 COPY deploy/pilot/start.sh deploy/pilot/start.sh
 # A cloud checkout can have a restrictive umask. Runtime sources stay root-owned but readable by the app user.
 RUN find /app -type d -exec chmod 755 {} + \

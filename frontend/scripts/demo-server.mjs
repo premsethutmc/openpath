@@ -23,7 +23,8 @@
  * for offline use, so nothing of it stays readable after logging out.
  */
 import { createHmac, randomBytes, scrypt as scryptCb, timingSafeEqual } from "node:crypto";
-import { createReadStream, existsSync, realpathSync, statSync } from "node:fs";
+import { existsSync, realpathSync, statSync } from "node:fs";
+import { sendStatic } from "./static-send.mjs";
 import http from "node:http";
 import { extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -331,15 +332,8 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
       file = join(dist, "index.html");
     }
     const html = file.endsWith(".html");
-    res.writeHead(200, {
-      ...base(),
-      "Content-Type": TYPES[extname(file)] ?? "application/octet-stream",
-      // private: never kept by shared caches; the page itself is always checked (it names the current assets)
-      "Cache-Control": html ? "no-store" : "private, max-age=3600",
-      ...(html ? { "Content-Security-Policy": APP_CSP } : {}),
-    });
-    if (req.method === "HEAD") return res.end();
-    createReadStream(file).pipe(res);
+    // fast-load@1: compressed, and kept by the browser until the file changes (static-send.mjs)
+    return sendStatic(req, res, file, { type: TYPES[extname(file)] ?? "application/octet-stream", html, headers: { ...base(), ...(html ? { "Content-Security-Policy": APP_CSP } : {}) } });
   }
 
   const server = http.createServer((req, res) => {

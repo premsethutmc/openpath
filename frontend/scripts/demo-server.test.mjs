@@ -93,7 +93,9 @@ test("DS-3 the right password opens the app: a Secure, HttpOnly, SameSite=Strict
   assert.equal(page.headers.get("cache-control"), "no-store");
   const js = await req("/assets/app.js", { headers: { cookie } });
   assert.equal(await js.text(), "console.log('the app')");
-  assert.equal(js.headers.get("cache-control"), "private, max-age=3600");
+  // fast-load@1: kept by the browser, checked on each visit, never by a shared cache
+  assert.equal(js.headers.get("cache-control"), "private, no-cache");
+  assert.ok(js.headers.get("etag"));
   // deep links and reloads are the app; a missing asset is a 404; build files stay hidden
   for (const path of ["/developer", "/anything/else", "/index.html"]) assert.match(await (await req(path, { headers: { cookie } })).text(), /OpenPath English/, path);
   assert.equal((await req("/assets/missing.js", { headers: { cookie } })).status, 404);

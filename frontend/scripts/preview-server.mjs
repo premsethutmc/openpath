@@ -39,7 +39,8 @@ import {
   scryptSync,
   timingSafeEqual,
 } from "node:crypto";
-import { createReadStream, existsSync, realpathSync, statSync } from "node:fs";
+import { existsSync, realpathSync, statSync } from "node:fs";
+import { sendStatic } from "./static-send.mjs";
 import http from "node:http";
 import { extname, join, normalize, sep } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -399,16 +400,8 @@ export function createDemoServer(
   function sendFile(res, req, file) {
     if (!existsSync(file)) return text(res, 404, "Not found");
     const html = file.endsWith(".html");
-    res.writeHead(200, {
-      ...base(),
-      "Content-Type": TYPES[extname(file)] ?? "application/octet-stream",
-      "Cache-Control": "no-store",
-      ...(html ? { "Content-Security-Policy": APP_CSP } : {}),
-    });
-    if (req.method === "HEAD") return res.end();
-    createReadStream(file)
-      .on("error", () => res.destroy())
-      .pipe(res);
+    // fast-load@1: compressed, and kept by the browser until the file changes (static-send.mjs)
+    return sendStatic(req, res, file, { type: TYPES[extname(file)] ?? "application/octet-stream", html, headers: { ...base(), ...(html ? { "Content-Security-Policy": APP_CSP } : {}) } });
   }
 
   async function handle(req, res) {
@@ -642,17 +635,8 @@ export function createDemoServer(
       file = join(dist, "index.html");
     }
     const html = file.endsWith(".html");
-    res.writeHead(200, {
-      ...base(),
-      "Content-Type": TYPES[extname(file)] ?? "application/octet-stream",
-      // private: never kept by shared caches; the page itself is always checked (it names the current assets)
-      "Cache-Control": "no-store",
-      ...(html ? { "Content-Security-Policy": APP_CSP } : {}),
-    });
-    if (req.method === "HEAD") return res.end();
-    createReadStream(file)
-      .on("error", () => res.destroy())
-      .pipe(res);
+    // private: never kept by shared caches; the page itself is never kept (it names the current assets)
+    return sendStatic(req, res, file, { type: TYPES[extname(file)] ?? "application/octet-stream", html, headers: { ...base(), ...(html ? { "Content-Security-Policy": APP_CSP } : {}) } });
   }
 
   const server = http.createServer((req, res) => {
