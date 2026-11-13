@@ -427,48 +427,87 @@ button:disabled {
 }
 
 /* ------------------------------------------------------------ subjects-home@1: one tile for each subject on the welcome screen */
+/* subjects-home@2: two large tiles, one per subject. Their colours are their own, the same in light and dark. */
 .subjects {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 13px;
+  gap: 16px;
+}
+@media (min-width: 640px) {
+  .subjects { grid-template-columns: 1fr 1fr; }
 }
 .subject-tile {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
   min-height: 132px;
-  padding: 18px 16px;
+  padding: 22px 20px;
   border: 0;
-  border-radius: 22px;
-  background: var(--lilac);
-  color: inherit;
+  border-radius: 28px;
+  color: #fff;
   font: inherit;
   text-align: left;
   text-decoration: none;
   cursor: pointer;
+  box-shadow: 0 14px 30px -14px rgba(40, 30, 110, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
 }
-.subject-tile.mint {
-  background: var(--mint);
+.subject-tile.english { background: radial-gradient(120% 140% at 100% 0%, #9b8cff 0%, transparent 55%), linear-gradient(135deg, #6a55f0 0%, #4a36c9 100%); }
+.subject-tile.maths { background: radial-gradient(120% 140% at 100% 0%, #5fe0b4 0%, transparent 55%), linear-gradient(135deg, #14a37a 0%, #0b7457 100%); box-shadow: 0 14px 30px -14px rgba(8, 90, 66, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.18); }
+/* two soft circles in the corner */
+.subject-tile::before,
+.subject-tile::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
 }
-.subject-tile:focus-visible {
-  outline: 3px solid var(--ink, #1f2440);
-  outline-offset: 2px;
+.subject-tile::before { width: 170px; height: 170px; right: -50px; bottom: -80px; }
+.subject-tile::after { width: 90px; height: 90px; right: 60px; top: -40px; background: rgba(255, 255, 255, 0.07); }
+.subject-tile:active { transform: scale(0.98); }
+@media (hover: hover) {
+  .subject-tile:hover { transform: translateY(-2px); }
 }
-.subject-emoji {
-  font-size: 34px;
-  line-height: 1;
+.subject-tile:focus-visible { outline: 3px solid var(--ink, #1f2440); outline-offset: 3px; }
+.subject-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
 }
-.subject-name {
-  font-size: 21px;
-  font-weight: 850;
-  margin-top: 6px;
+.subject-emoji { font-size: 40px; line-height: 1; }
+.subject-text { position: relative; display: grid; gap: 4px; }
+.subject-name { font-size: 28px; font-weight: 850; letter-spacing: -0.01em; line-height: 1.1; }
+.subject-sub { font-size: 15px; line-height: 1.35; color: rgba(255, 255, 255, 0.86); }
+.subject-go {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 20px;
+  font-weight: 800;
 }
-.subject-sub {
-  font-size: 13.5px;
-  color: var(--muted);
-  line-height: 1.35;
+.subject-tile.english .subject-go { color: #4a36c9; }
+.subject-tile.maths .subject-go { color: #0b7457; }
+@media (prefers-reduced-motion: reduce) {
+  .subject-tile { transition: none; }
+  .subject-tile:active, .subject-tile:hover { transform: none; }
 }
+.subjects-page { display: grid; align-content: start; gap: 10px; padding-top: 8px; }
+.subjects-page .subjects { margin-top: 18px; }
+.subjects-page .hero { margin-bottom: 0; }
+.back-subjects { display: inline-block; margin: 0 0 6px; padding: 4px 0; font-weight: 700; }
 
 /* ------------------------------------------------------------ tiles, panels and stats */
 .tile {
@@ -2014,7 +2053,3 @@ h3.sub {
 .bee-quiet {
   text-align: center;
 }
-
-/* subjects-home@1: the tiles on a signed-in learner's home */
-.home-subjects { margin: 14px 0 18px; }
-.subject-tile.current { cursor: default; outline: 2px solid rgba(91, 70, 214, 0.35); }

@@ -3,7 +3,6 @@
  * retention schedule and word memory, and two counts read from the record. Nothing on this screen is estimated
  * for display: every number is a count of what happened.
  */
-import { MATHS_BUILT } from "./Onboarding.tsx";
 import { useState } from "react";
 import { Learner } from "../logic/learner.ts";
 import { type PlanStep, patternTitle } from "../logic/plan.ts";
@@ -26,7 +25,7 @@ const Arrow = () => (
   </span>
 );
 
-export function Home({ learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks }: { learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void }) {
+export function Home({ onSubjects, learner, onStart, onResume, onJourney, onWhy, onBee, onMyWords, onMyBooks }: { onSubjects?: () => void; learner: Learner; onStart: (s: PlanStep) => void; onResume: () => void; onJourney: () => void; onWhy: () => void; onBee: () => void; onMyWords: () => void; onMyBooks: () => void }) {
   const [more, setMore] = useState(false);
   const profile = learner.profile();
   // a pilot build has no extra practice (content.ts PilotGate): More practice is never opened there
@@ -41,26 +40,16 @@ export function Home({ learner, onStart, onResume, onJourney, onWhy, onBee, onMy
   const name = learner.state.profile?.name ?? "explorer";
   return (
     <main className="page" aria-labelledby="today-title">
+      {onSubjects && (
+        <button type="button" className="link back-subjects" onClick={onSubjects}>
+          ← All subjects
+        </button>
+      )}
       <p className="eyebrow">Your learning space</p>
       <h1 className="hero">
         Hey, {name}! <span aria-hidden="true">👋</span>
       </h1>
       <p className="sub">A little learning today makes a big difference tomorrow.</p>
-      {/* subjects-home@1: the two subjects as tiles for a learner who is already in (only in a build that carries maths) */}
-      {MATHS_BUILT && (
-        <div className="subjects home-subjects" role="group" aria-label="Subjects">
-          <div className="subject-tile current" aria-current="page">
-            <span className="subject-emoji" aria-hidden="true">📖</span>
-            <span className="subject-name">English</span>
-            <span className="subject-sub">You are here</span>
-          </div>
-          <a className="subject-tile mint" href="/year/">
-            <span className="subject-emoji" aria-hidden="true">🔢</span>
-            <span className="subject-name">Maths</span>
-            <span className="subject-sub">Your school year, skill by skill</span>
-          </a>
-        </div>
-      )}
       <BeeCard learner={learner} onBee={onBee} />
       <MyWordsCard learner={learner} onOpen={onMyWords} />
       <MyBooksCard learner={learner} onOpen={onMyBooks} />

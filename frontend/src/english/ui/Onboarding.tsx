@@ -4,6 +4,7 @@
  * the approved prototype; what they record is real (the account on the server, the learner's preferences as
  * events) and nothing here decides a level.
  */
+import { SubjectTiles } from "./SubjectTiles.tsx";
 import { type FormEvent, type ReactNode, useState } from "react";
 import { ApiError } from "../logic/account.ts";
 import type { LearnerBand, LearnerGoal } from "../logic/events.ts";
@@ -75,18 +76,7 @@ export function Welcome({ accounts, onBegin, onSignIn, onDevice, privateWindow, 
       {privateWindow && <p className="warning">This browser is not letting OpenPath save anything on this device (a private window, perhaps).</p>}
       <div className="stack">
         {maths ? (
-          <div className="subjects" role="group" aria-label="Subjects">
-            <button type="button" className="subject-tile" onClick={onBegin}>
-              <span className="subject-emoji" aria-hidden="true">📖</span>
-              <span className="subject-name">English</span>
-              <span className="subject-sub">Reading, words and writing</span>
-            </button>
-            <a className="subject-tile mint" href="/year/">
-              <span className="subject-emoji" aria-hidden="true">🔢</span>
-              <span className="subject-name">Maths</span>
-              <span className="subject-sub">Your school year, skill by skill</span>
-            </a>
-          </div>
+          <SubjectTiles onEnglish={onBegin} />
         ) : (
           <button type="button" className="primary" onClick={onBegin}>
             Let's begin

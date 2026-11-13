@@ -18,6 +18,7 @@ import { type ProfileSummary, type Repo, openRepo } from "../logic/store.ts";
 import { Home } from "./Home.tsx";
 import { Journey } from "./Journey.tsx";
 import { ImportBackup, Me } from "./Me.tsx";
+import { SubjectTiles } from "./SubjectTiles.tsx";
 import { AddLearner, type AuthMode, Brand, MATHS_BUILT, ParentAuth, PupilPicker, Welcome, avatarFor } from "./Onboarding.tsx";
 import { PathView } from "./PathView.tsx";
 import { ProgressView } from "./ProgressView.tsx";
@@ -92,6 +93,10 @@ export function App() {
   const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
   const [learner, setLearner] = useState<Learner | null>(null);
   const [tab, setTab] = useState<Tab>("home");
+  // subjects-home@2: in a build that carries maths, a learner who is in starts on the two subject tiles. Once English is
+  // chosen it stays chosen for this browser tab (a reload does not send them back), until they go back to the subjects.
+  const [subjects, setSubjects] = useState(() => { try { return MATHS_BUILT && sessionStorage.getItem("openpath.subject") !== "english"; } catch { return MATHS_BUILT; } });
+  const chooseSubject = (english: boolean) => { try { sessionStorage.setItem("openpath.subject", english ? "english" : ""); } catch { /* the choice is kept in memory only */ } setSubjects(!english); scrollTo(0, 0); };
   const [inSession, setInSession] = useState(false);
   // a spelling session's source (the Bee's words or a list) and where to go back to; My Words is its own screen
   const [bee, setBee] = useState<{ source: SpellSource; title: string; back: "home" | "mywords" | "mybooks" } | null>(null);
@@ -250,7 +255,7 @@ export function App() {
       <Welcome
         accounts={accounts}
         privateWindow={deviceRepo?.kind === "memory"}
-        onBegin={() => (accounts ? setScreen({ name: "auth", mode: "register" }) : deviceRepo && chooseRepo(deviceRepo, "device", false))}
+        onBegin={() => (chooseSubject(true), accounts ? setScreen({ name: "auth", mode: "register" }) : deviceRepo && chooseRepo(deviceRepo, "device", false))}
         onSignIn={() => setScreen({ name: "auth", mode: "login" })}
         onDevice={() => deviceRepo && chooseRepo(deviceRepo, "device", false)}
         extra={
@@ -444,6 +449,28 @@ export function App() {
     );
 
   const name = learner.state.profile?.name ?? "Learner";
+  if (subjects)
+    return (
+      <div className="shell subjects-screen" data-tick={tick} data-mode={mode}>
+        <header className="top">
+          <Brand />
+          <p className="who">
+            <span className="sr-only">Learning now: </span>
+            {name}
+            <span className="avatar" aria-hidden="true">
+              {avatarFor(learner.profileId)}
+            </span>
+          </p>
+        </header>
+        <main className="page subjects-page" aria-labelledby="subjects-title">
+          <h1 id="subjects-title" className="hero">
+            Hi, {name}! <span aria-hidden="true">👋</span>
+          </h1>
+          <p className="sub">What shall we learn today?</p>
+          <SubjectTiles onEnglish={() => chooseSubject(true)} englishLine={learner.state.open ? "Carry on where you stopped" : undefined} />
+        </main>
+      </div>
+    );
   return (
     <div className="shell" data-tick={tick} data-mode={mode}>
       <header className="top">
@@ -458,6 +485,7 @@ export function App() {
       </header>
       {tab === "home" && (
         <Home
+          onSubjects={MATHS_BUILT ? () => chooseSubject(false) : undefined}
           learner={learner}
           onStart={start}
           onResume={() => {
