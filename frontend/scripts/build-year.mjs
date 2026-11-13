@@ -6,7 +6,7 @@
  *                                        reviewed (a banner says so on every screen). Never deploy a test build.
  */
 import { execFileSync } from "node:child_process";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import * as esbuild from "esbuild";
 const root = fileURLToPath(new URL("..", import.meta.url));
@@ -25,8 +25,21 @@ const sitting = sittingArg === undefined ? 0 : Number(sittingArg);
 if (sittingArg !== undefined && (!test || !deep || !Number.isInteger(sitting) || sitting < 1 || sitting >= 40)) throw new Error("--deep-sitting=N (1-39) needs --test --deep-recovery.");
 const out = `${root}/${process.env.DIST ?? "dist-english"}/year`;
 await mkdir(out, { recursive: true });
+// fast-load@1: a large JSON file is carried as one string and read with JSON.parse when the app starts. The engine reads
+// a JSON string several times faster than the same data written out as script, and most of this bundle is data.
+const jsonAsText = {
+  name: "json-as-text",
+  setup(build) {
+    build.onLoad({ filter: /\.json$/ }, async (args) => {
+      const text = await readFile(args.path, "utf8");
+      if (text.length < 20_000) return null; // small files stay as they are (and may still be imported by name)
+      return { contents: `export default JSON.parse(${JSON.stringify(JSON.stringify(JSON.parse(text)))});`, loader: "js" };
+    });
+  },
+};
 await esbuild.build({
   entryPoints: [`${root}/src/year/Main.tsx`],
+  plugins: [jsonAsText],
   bundle: true,
   loader: { ".woff2": "file" },
   format: "esm",
