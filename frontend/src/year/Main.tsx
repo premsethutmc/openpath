@@ -870,7 +870,6 @@ function StuckBox({ onOpen, onWorked, grade }: { onOpen: (qid: string) => void; 
   );
 }
 
-const KID_HOME = NAME_START || DEVICE_BUILD;
 /** kid-home@1: a picture for a chapter, from the words in its name (nothing is guessed when no word matches) */
 const CHAPTER_ICON: [RegExp, string][] = [
   [/fraction|decimal|percent/i, "🍕"], [/algebra|equation|pattern|expression/i, "🔤"], [/geometr|shape|angle|line|triangle|circle|symmetr|polygon|construct/i, "📐"],
@@ -1366,6 +1365,8 @@ function Opening() {
 }
 declare const OPENPATH_NAME_START: boolean;
 const NAME_START = typeof OPENPATH_NAME_START !== "undefined" && OPENPATH_NAME_START === true && !DEVICE_BUILD;
+/** kid-home@1: the shipped family and demo builds show the child's Maths home (defined here, after NAME_START) */
+const KID_HOME = NAME_START || DEVICE_BUILD;
 const GUEST_KEY = "openpath.guest.v1";
 const guestKey = (): { email: string; password: string } | null => { try { const v = JSON.parse(localStorage.getItem(GUEST_KEY) ?? "null"); return v && typeof v.email === "string" && typeof v.password === "string" ? v : null; } catch { return null; } };
 const randomHex = (bytes: number) => Array.from(crypto.getRandomValues(new Uint8Array(bytes)), (b) => b.toString(16).padStart(2, "0")).join("");
