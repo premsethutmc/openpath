@@ -73,6 +73,7 @@ async function learnerPhone(grade) {
   assert.equal(pupil.status, 201);
   await page.goto(`${base}/year/?learner=${pupil.data.id}`);
   await page.getByRole("heading", { name: /Set up My Learning Year/ }).waitFor();
+  await page.locator("details.more-options > summary").click();
   await page.getByRole("button", { name: new RegExp(`^Grade ${grade}\\b`) }).click();
   await page.getByRole("button", { name: "No goal for now" }).click();
   await page.getByRole("button", { name: /Sample Mathematics|OpenPath Sample/i }).first().click();
