@@ -72,3 +72,12 @@ Neither the connection string nor the passwords are committed, logged, or sent t
 - A name-only learner's parent can add an email and password there ("Keep this progress safe"). The same records then
   open on any device, and the browser's own key is removed. There is no reset-by-email on this site yet.
 - An email account's parent can download a copy of the learner's record from the same page.
+
+## Timing and the competency profile (timing@1, competency-profile@1)
+
+- Each answer now carries about how long the question was on screen (`ms`; the clock stops while the page is hidden, and
+  more than ten minutes is treated as a pause and not kept). It is never part of how an answer counts.
+- The parents' page has Week / Month / Year. For each topic it shows questions, right at the first try, answered without
+  help, and pace; and four findings: quickest, most accurate, most practised, stuck on.
+- Measures, not predictions: "quicker" compares the learner with their own usual pace (the middle of their topic paces),
+  never with other children; a measure appears only after five answers. Timing exists only from 13 Nov 2026.

@@ -23,6 +23,7 @@ import { readProblem } from "../../../packages/learning/src/read-problem";
 import { familyOf, moduleState } from "../../../packages/learning/src/intervention";
 import { reviewFixtureActive, rightAnswer, useReviewFixture } from "../../../packages/learning/src/evidence";
 import { parentReport } from "../../../packages/learning/src/parent-report";
+import { competencyProfile, topicName, type Period, type TopicMeasure } from "../../../packages/learning/src/competency-profile";
 import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages/learning/src/goals";
 import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
@@ -208,6 +209,17 @@ function App() {
   const session = `learn:${learner}:${visit.current}`;
   const ctxOf = () => ({ learnerId: learner, sessionId: session, at: new Date().toISOString() });
 
+  // timing@1: about how long the current question has been on screen. The clock restarts when the screen changes and after
+  // each answer, and stops while the page is hidden. Longer than ten minutes is treated as a pause and not recorded.
+  const shown = useRef({ at: Date.now(), hidden: 0, hiddenAt: 0 });
+  const restartClock = () => { shown.current = { at: Date.now(), hidden: 0, hiddenAt: document.visibilityState === "hidden" ? Date.now() : 0 }; };
+  useEffect(restartClock, [view]);
+  useEffect(() => {
+    const onVis = () => { const s = shown.current; if (document.visibilityState === "hidden") s.hiddenAt = Date.now(); else if (s.hiddenAt) { s.hidden += Date.now() - s.hiddenAt; s.hiddenAt = 0; } };
+    document.addEventListener("visibilitychange", onVis);
+    return () => document.removeEventListener("visibilitychange", onVis);
+  }, []);
+  const onScreen = (): number | null => { const s = shown.current; const ms = Date.now() - s.at - s.hidden; restartClock(); return ms > 0 && ms <= 600_000 ? ms : null; };
   const lastDecision = useRef<ServerDecision | null>(null);
   async function save(...records: LearningRecord[]) {
     if (!repo) return false;
@@ -273,7 +285,7 @@ function App() {
     now,
     session,
     saving,
-    answer: (qid: string, response: string, activity: LearningActivity, o = {}) => save(make.attempt(ctxOf(), qid, response, activity, o)),
+    answer: (qid: string, response: string, activity: LearningActivity, o = {}) => { const ms = onScreen(); return save(make.attempt(ctxOf(), qid, response, activity, { ...o, ...(ms ? { ms } : {}) })); },
     recorded: () => lastDecision.current,
     teach: (competency: string, strategy: string, rule: string, o?: { episode?: string }) => save(make.teach(ctxOf(), competency, strategy, rule.slice(0, 40), o?.episode ? { episode: o.episode } : {})),
   };
@@ -878,35 +890,80 @@ function KeepSafe({ onDone }: { onDone: (email: string) => void }) {
 function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string; learner: string; st: ReturnType<typeof learnerState> | null; guest: boolean; onClaimed: () => void; now: number }) {
   // kept here, not in the form: once the account has an email the form is gone, and the confirmation must stay
   const [savedAs, setSavedAs] = useState("");
-  const report = useMemo(() => (st ? parentReport({ attempts: st.records.attempts, teaching: st.records.teaching }, rightAnswer, (c) => { try { return graph.get(c).name; } catch { return c; } }, now) : null), [st, now]);
-  if (!report || !st) return <p className="muted center">Opening…</p>;
+  const [period, setPeriod] = useState<Period>("week");
+  const skillName = (c: string) => { try { return graph.get(c).name; } catch { return c; } };
+  const topicOf = (c: string) => { try { return topicName(c, graph.get(c).strand); } catch { return "Other"; } };
+  const report = useMemo(() => (st ? parentReport({ attempts: st.records.attempts, teaching: st.records.teaching }, rightAnswer, skillName, now) : null), [st, now]);
+  const profile = useMemo(() => (st ? competencyProfile(st.records.attempts, rightAnswer, topicOf, skillName, period, now) : null), [st, now, period]);
+  if (!report || !profile || !st) return <p className="muted center">Opening…</p>;
   const sum = st.summary;
-  const most = Math.max(1, ...report.days.map((d) => d.answered));
-  const needs = report.skills.filter((s) => s.verdict === "needs_help"), well = report.skills.filter((s) => s.verdict === "going_well"), rest = report.skills.filter((s) => s.verdict === "in_progress");
+  const most = Math.max(1, ...profile.calendar.map((d) => d.answered));
   const ago = (iso: string) => { const d = Math.floor((now - Date.parse(iso)) / 86_400_000); return d <= 0 ? "today" : d === 1 ? "yesterday" : `${d} days ago`; };
-  const line = (s: (typeof report.skills)[number]) => <li key={s.competency}><b>{s.name}</b><span className="muted small">{s.answered} answered · {s.rightFirstTry} right at the first try{s.helped ? ` · help used on ${s.helped}` : ""} · {ago(s.last)}</span></li>;
+  const pct = (v: number | null) => (v === null ? "not enough yet" : `${Math.round(v * 100)}%`);
+  const secs = (v: number | null) => (v === null ? null : v < 60 ? `${Math.round(v)} s` : `${Math.floor(v / 60)} min ${Math.round(v % 60)} s`);
+  const WORD: Record<Period, string> = { week: "this week", month: "in the last 30 days", year: `in ${new Date(now).getFullYear()}` };
+  const f = profile.findings;
+  const paceWord = (t: TopicMeasure) => (t.pace === "quick" ? "quicker than their usual" : t.pace === "slow" ? "takes longer than their usual" : t.pace === "steady" ? "about their usual pace" : null);
   return (
     <div className="stack parent-view">
       <p className="eyebrow">For parents</p>
       <h1>{name}'s Maths</h1>
-      {report.lastActive ? <p className="muted">Last worked {ago(report.lastActive)}.</p> : <p className="muted">{name} has not answered a question yet. Once they do, this page shows what they did.</p>}
-      <div className="stats" role="list" aria-label="This week">
-        <div className="stat" role="listitem"><b>{report.week.answered}</b><span>Questions this week</span></div>
-        <div className="stat" role="listitem"><b>{report.week.rightFirstTry}</b><span>Right at the first try</span></div>
-        <div className="stat" role="listitem"><b>{report.week.activeDays}</b><span>Days worked (of 7)</span></div>
-        <div className="stat" role="listitem"><b>{report.week.lessons}</b><span>Lessons opened</span></div>
+      {report.lastActive ? <p className="muted">Last worked {ago(report.lastActive)}{report.streak >= 2 ? ` · ${report.streak} days in a row` : ""}.</p> : <p className="muted">{name} has not answered a question yet. Once they do, this page shows what they did.</p>}
+      <div className="period-tabs" role="tablist" aria-label="Period">
+        {(["week", "month", "year"] as Period[]).map((p) => <button key={p} type="button" role="tab" aria-selected={period === p} className={period === p ? "on" : ""} onClick={() => setPeriod(p)}>{p === "week" ? "Week" : p === "month" ? "Month" : "Year"}</button>)}
       </div>
-      <div className="week-bars" role="img" aria-label={`Questions each day: ${report.days.map((d) => `${d.label} ${d.answered}`).join(", ")}`}>
-        {report.days.map((d) => <div key={d.day} className="week-bar"><span className="week-count">{d.answered || ""}</span><span className="week-fill" style={{ height: `${Math.round((d.answered / most) * 56) + (d.answered ? 4 : 2)}px` }} /><span className="week-label">{d.label}</span></div>)}
+      <div className="stats" role="list" aria-label={`Counts ${WORD[period]}`}>
+        <div className="stat" role="listitem"><b>{profile.answered}</b><span>Questions</span></div>
+        <div className="stat" role="listitem"><b>{profile.rightFirstTry}</b><span>Right at the first try</span></div>
+        <div className="stat" role="listitem"><b>{profile.activeDays}</b><span>Days worked</span></div>
+        <div className="stat" role="listitem"><b>{profile.minutes === null ? "–" : profile.minutes}</b><span>Minutes on questions</span></div>
       </div>
-      {needs.length > 0 && <section aria-label="Needs help"><h2>Could use your help</h2><p className="muted small">Fewer than half right at the first try, or the full solution opened more than once. Sitting together for the next lesson on these usually helps.</p><ul className="parent-skills needs">{needs.map(line)}</ul></section>}
-      {well.length > 0 && <section aria-label="Going well"><h2>Going well</h2><ul className="parent-skills well">{well.map(line)}</ul></section>}
-      {rest.length > 0 && <section aria-label="Also worked on"><h2>Also worked on</h2><ul className="parent-skills">{rest.map(line)}</ul></section>}
+      <div className={`cal cal-${period}`} role="img" aria-label={`Questions ${WORD[period]}: ${profile.calendar.filter((d) => d.answered).map((d) => `${d.label} ${d.answered}`).join(", ") || "none"}`}>
+        {profile.calendar.map((d) => period === "month"
+          ? <span key={d.key} className="cal-cell" data-level={d.answered === 0 ? 0 : Math.min(4, 1 + Math.floor((d.answered / most) * 3.999))} title={`${d.key}: ${d.answered}`}>{d.label}</span>
+          : <div key={d.key} className="week-bar"><span className="week-count">{d.answered || ""}</span><span className="week-fill" style={{ height: `${Math.round((d.answered / most) * 56) + (d.answered ? 4 : 2)}px` }} /><span className="week-label">{d.label}</span></div>)}
+      </div>
+      {profile.answered > 0 && (
+        <section aria-label="What the answers show">
+          <h2>What the answers show {WORD[period]}</h2>
+          <ul className="findings">
+            {f.quickest && <li><span aria-hidden="true">⚡</span><span><b>Quickest in {f.quickest.topic}:</b> about {secs(f.quickest.paceSeconds)} a question, against their usual {secs(profile.paceSeconds)}.</span></li>}
+            {f.mostAccurate && <li><span aria-hidden="true">🎯</span><span><b>Most accurate in {f.mostAccurate.topic}:</b> {pct(f.mostAccurate.accuracy)} right at the first try ({f.mostAccurate.rightFirstTry} of {f.mostAccurate.answered}).</span></li>}
+            {f.mostPractised && <li><span aria-hidden="true">📚</span><span><b>Most practised: {f.mostPractised.topic}</b> ({f.mostPractised.answered} questions).</span></li>}
+            {f.stuck.length > 0 && <li><span aria-hidden="true">🧩</span><span><b>Stuck on:</b> {f.stuck.map((x) => x.skill).join("; ")}. Fewer than half right at the first try, or the full solution opened more than once. Sitting together for the next lesson on these usually helps.</span></li>}
+            {!f.quickest && !f.mostAccurate && !f.mostPractised && !f.stuck.length && <li><span aria-hidden="true">⏳</span><span>Not enough answers yet to say where {name} is strongest. This fills in after about five questions in two or more topics.</span></li>}
+          </ul>
+        </section>
+      )}
+      {profile.topics.length > 0 && (
+        <section aria-label="By topic">
+          <h2>By topic</h2>
+          <ul className="topic-rows">
+            {profile.topics.map((t) => (
+              <li key={t.topic}>
+                <div className="topic-head"><b>{t.topic}</b><span className="muted small">{t.answered} question{t.answered === 1 ? "" : "s"} · {t.skills} skill{t.skills === 1 ? "" : "s"}</span></div>
+                <div className="measure"><span>Right at the first try</span><span className="bar"><span style={{ width: `${Math.round((t.accuracy ?? 0) * 100)}%` }} /></span><span>{pct(t.accuracy)}</span></div>
+                <div className="measure"><span>Without help</span><span className="bar"><span style={{ width: `${Math.round((t.independence ?? 0) * 100)}%` }} /></span><span>{pct(t.independence)}</span></div>
+                <p className="small muted">{t.paceSeconds === null ? "Pace: not enough timed answers yet." : `Pace: about ${secs(t.paceSeconds)} a question${paceWord(t) ? ` (${paceWord(t)})` : ""}.`}{t.stuck.length ? ` Stuck on: ${t.stuck.join("; ")}.` : ""}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       <section aria-label="The year so far">
-        <h2>The year so far</h2>
+        <h2>The school year so far</h2>
         {sum ? <p>{sum.verified} skill{sum.verified === 1 ? "" : "s"} checked again a week later and still right · {sum.shown} shown on their own · {sum.developing} being learned · {sum.notStarted} not started.</p> : <p className="muted">No school year has been set up yet.</p>}
-        <p className="muted small">These are counts of what {name} did in OpenPath. A skill is only called checked after it is answered correctly again at least a week later. The lessons are machine-checked for correctness and have not been reviewed by a teacher.</p>
       </section>
+      <details className="type-examples">
+        <summary>How to read this page</summary>
+        <ul>
+          <li>Everything here is counted from {name}'s own answers in OpenPath. Nothing is estimated or predicted.</li>
+          <li>"Quicker" and "takes longer" compare {name} only with their own pace in other topics, never with other children.</li>
+          <li>Pace is the middle time for questions answered right at the first try. Timing began on 13 November 2026, so earlier answers have none, and it includes reading the question.</li>
+          <li>A measure appears only after five answers; before that it says "not enough yet".</li>
+          <li>A skill is called checked only after it is answered correctly again at least a week later. The lessons are machine-checked for correctness and have not been reviewed by a teacher.</li>
+        </ul>
+      </details>
       {savedAs && <p className="feedback good" role="status"><b>Saved.</b> Sign in with {savedAs} on any phone or computer to see the same progress. Keep the password somewhere safe: this site cannot email a reset link yet.</p>}
       {guest ? <KeepSafe onDone={(email) => { setSavedAs(email); onClaimed(); }} /> : <p className="muted small">This progress is saved in your account and opens on any device you sign in on. <a className="link" href={`/api/pupils/${encodeURIComponent(learner)}/export/`} download={`openpath-${name.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.json`}>Download a copy</a></p>}
     </div>

@@ -65,6 +65,15 @@ class LearningRecordTests(LearningBase):
         self.assertEqual(len(saved), 4)
         self.assertTrue(all(e['at'] != '2000-01-01T00:00:00Z' for e in saved), 'never the client clock')
 
+    def test_the_time_on_a_question_is_kept_when_it_is_a_whole_number_up_to_ten_minutes(self):
+        """timing@1"""
+        self.assertEqual(self.save(self.enrol()).status_code, 201)
+        self.assertEqual(self.save(self.attempt('eq-d1', '2', ms=12_345)).status_code, 201)
+        self.assertEqual([e.get('ms') for e in self.records() if e['record'] == 'attempt'], [12_345])
+        for bad in (0, -5, 600_001, 1.5, '1200', True, None):
+            self.assertEqual(self.save(self.attempt('eq-d1', '2', ms=bad)).status_code, 400, bad)
+        self.assertEqual(self.save(self.attempt('eq-d1', '2')).status_code, 201, 'still optional')
+
     def test_ownership_unknown_fields_and_claimed_status_are_refused(self):
         bad = [
             self.enrol() | {'learnerId': 'someone-else'},

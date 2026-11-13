@@ -30,7 +30,8 @@ RECORDS = {
     'goal': {'pathway', 'active', 'targetYear'},
     'foundation_pathway': {'policy', 'target', 'active'},
     'curriculum': {'release'},
-    'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context', 'working', 'assessment'},
+    # ms (timing@1): about how long the question was on screen, in milliseconds; never part of how the answer counts
+    'attempt': {'questionId', 'response', 'activity', 'hints', 'solution', 'competency', 'context', 'working', 'assessment', 'ms'},
     'teach': {'rule', 'strategy', 'competency', 'episode', 'methodAlignment'},
     'skip': {'target'},
     'study_session': {'planId', 'revision', 'phase', 'time', 'advice'},
@@ -377,6 +378,8 @@ def checked_learning(event, pupil):
             _reject('The question belongs to another skill.')
         if event.get('activity') not in ACTIVITIES:
             _reject('Unknown activity.')
+        if 'ms' in event and (type(event['ms']) is not int or not 1 <= event['ms'] <= 600_000):
+            _reject('The time on the question must be a whole number of milliseconds, up to ten minutes.')
         if type(event.get('hints')) is not int or not 0 <= event['hints'] <= 5 or type(event.get('solution')) is not bool:
             _reject('Hints and solutions are recorded as given.')
         w = event.get('working', [])

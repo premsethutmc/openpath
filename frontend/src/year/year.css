@@ -245,3 +245,24 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .today-bar { height: 10px; }
 .year-foot { margin-top: 18px; padding-top: 6px; border-top: 1px solid rgba(0, 0, 0, 0.08); }
 .year-foot .year-actions { margin-top: 12px; }
+/* competency-profile@1 */
+.period-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 4px; border-radius: 12px; background: rgba(0, 0, 0, 0.06); }
+.period-tabs button { border: 0; background: transparent; padding: 8px; border-radius: 9px; font: inherit; font-weight: 600; color: inherit; }
+.period-tabs button.on { background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); }
+.cal { padding: 10px 6px 6px; border-radius: 14px; background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(0, 0, 0, 0.08); }
+.cal-week, .cal-year { display: grid; gap: 6px; align-items: end; }
+.cal-week { grid-template-columns: repeat(7, 1fr); }
+.cal-year { grid-template-columns: repeat(12, 1fr); }
+.cal-year .week-label { font-size: 0.65rem; }
+.cal-month { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; padding: 10px; }
+.cal-cell { aspect-ratio: 1; display: grid; place-items: center; border-radius: 6px; font-size: 0.7rem; background: #eceaf3; color: #5a5f73; }
+.cal-cell[data-level="1"] { background: #d6cffb; } .cal-cell[data-level="2"] { background: #b3a6f5; } .cal-cell[data-level="3"] { background: #8d7bec; color: #fff; } .cal-cell[data-level="4"] { background: #5b46d6; color: #fff; }
+.findings { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.findings li { display: grid; grid-template-columns: 1.6em 1fr; gap: 6px; padding: 10px 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(0, 0, 0, 0.08); line-height: 1.45; }
+.topic-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.topic-rows li { display: grid; gap: 6px; padding: 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(0, 0, 0, 0.08); }
+.topic-head { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.measure { display: grid; grid-template-columns: 9.5em 1fr 6.5em; gap: 8px; align-items: center; font-size: 0.85rem; }
+.measure .bar { height: 8px; }
+.measure span:last-child { text-align: right; }
+.topic-rows p { margin: 0; }
