@@ -2014,3 +2014,7 @@ h3.sub {
 .bee-quiet {
   text-align: center;
 }
+
+/* subjects-home@1: the tiles on a signed-in learner's home */
+.home-subjects { margin: 14px 0 18px; }
+.subject-tile.current { cursor: default; outline: 2px solid rgba(91, 70, 214, 0.35); }
