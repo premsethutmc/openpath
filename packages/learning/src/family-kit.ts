@@ -178,13 +178,16 @@ export interface Problem {
   steps: Step[];
   bugs: Bug[];
   options?: string[];
+  /** pick@1: the typed answer is one of a few values the question shows; the learner taps one instead of typing it.
+   *  Graded exactly as the typed answer (each value is what typing it would submit). */
+  picks?: { label: string; value: string }[];
   /** A picture the question needs (dots to count, a clock to read, a bar chart, an angle …). */
   figure?: Visual;
 }
 /** A picture for a teaching screen (rendered by the app; ten frames, base-ten blocks, number lines, fraction strips,
  * arrays, a grid of squares, a right triangle, a balance). */
 export interface Visual {
-  type: "strips" | "array" | "dots" | "tenframe" | "blocks" | "numberline" | "clock" | "coins" | "bars" | "linegraph" | "pictograph" | "table" | "shape" | "angle" | "circle" | "grid" | "triangle" | "plane" | "pie" | "factortree" | "balance" | "solid";
+  type: "strips" | "array" | "dots" | "tenframe" | "blocks" | "numberline" | "clock" | "coins" | "bars" | "linegraph" | "pictograph" | "table" | "shape" | "angle" | "circle" | "grid" | "triangle" | "plane" | "pie" | "factortree" | "balance" | "solid" | "angles";
   [k: string]: unknown;
 }
 export interface TeachAlternative {
@@ -261,6 +264,8 @@ export type Def = {
   type: Problem["type"];
   /** The family also has a multiple-choice form ("gen:<family>:<params>:mc"): mal-rule answers as the options. */
   mc?: boolean;
+  /** pick@1: the values a typed question lets the learner tap (see Problem.picks). */
+  picks?: (p: number[]) => { label: string; value: string }[];
   /** The checker's statement for this family, from its parameters (optional). */
   contract?: GeneratorContract;
   /** Read the parameters from written text; null if the text is not this family. */

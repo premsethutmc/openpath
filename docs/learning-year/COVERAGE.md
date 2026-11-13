@@ -103,7 +103,7 @@ Every competency that has some content:
 | Convert between 12-hour and 24-hour time (`MATH.measurement.24-hour-clock`) | 4–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aet24 draft, aet12 draft, aeel24 draft, aeampm draft). |
 | Measure area in square units (`MATH.measurement.area-squares`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aearea draft, aeperar draft, aeirr draft). |
 | Calculate with measured quantities in mixed units (`MATH.measurement.compute-with-measures`) | 4–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aemix draft, aemulm draft, aedivm draft). |
-| Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families rperim submitted, avfence draft). |
+| Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families rperim draft, avfence draft). |
 | Convert common metric units (`MATH.measurement.unit-conversions`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeconv draft, aeparts draft, aeconvu draft, aeconvd draft, aewcmp draft, aeftin draft, aecf draft). |
 | Represent tenths and hundredths (`MATH.number.decimal-tenths`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aedec draft, aedecc draft, aedpv draft, aedord draft, aedfr draft). |
 | Generate equivalent fractions (`MATH.number.equivalent-fractions`) | 4–4 | Complete, awaiting review | Complete; awaiting educator review (module draft; families eqfrac draft, avfold draft, avlow draft, avlike draft). |
@@ -132,9 +132,9 @@ Every competency that has some content:
 | Find mirror symmetry in familiar 3-D shapes (`MATH.geometry.symmetry-3d`) | 5–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aesym3 draft). |
 | Classify triangles (`MATH.geometry.triangle-types`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aftri draft, aftris draft). |
 | Compare shapes with equal area or equal perimeter (`MATH.measurement.area-perimeter-relation`) | 5–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families afapr draft). |
-| Calculate rectangle area (`MATH.measurement.rectangle-area`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families rect submitted). |
+| Calculate rectangle area (`MATH.measurement.rectangle-area`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families rect draft). |
 | Compare distance per unit time (`MATH.measurement.time-speed-intro`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agspd draft, agspdc draft, ldiv draft). |
-| Measure volume with unit cubes (`MATH.measurement.volume-cubes`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families vol submitted, abdisp draft, avvcmp draft). |
+| Measure volume with unit cubes (`MATH.measurement.volume-cubes`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families vol draft, abdisp draft, avvcmp draft). |
 | Add and subtract decimals (`MATH.number.decimal-operations`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agdec draft, agrupee draft, agmeas draft, agchange draft). |
 | Find factors and multiples (`MATH.number.factors-multiples`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families agfac draft, agcomf draft, agjump draft). |
 | Add unlike fractions (`MATH.number.fraction-add`) | 5–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families faddu submitted, avfas draft). |
@@ -152,7 +152,7 @@ Every competency that has some content:
 | Evaluate variable expressions (`MATH.algebra.variables`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families linev draft, auvexp draft). |
 | Construct simple figures with ruler and compass (`MATH.geometry.basic-constructions`) | 6–6 | Partially supported | No question family: only the module's own questions, so a learner can run out. |
 | Use elementary triangle properties (`MATH.geometry.triangle-properties`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families ahtri draft, ahext draft, ahiso draft, ahineq draft). |
-| Calculate cube and cuboid volume (`MATH.measurement.cube-volume`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aicvol draft, aicap draft, aipack draft, vol submitted). |
+| Calculate cube and cuboid volume (`MATH.measurement.cube-volume`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aicvol draft, aicap draft, aipack draft, vol draft). |
 | Calculate triangle area (`MATH.measurement.triangle-area`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aitri draft, aitrih draft). |
 | Multiply and divide decimals (`MATH.number.decimal-product`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aidmul draft, aiddiv draft, aidp10 draft, aiest draft, aidword draft). |
 | Multiply and divide fractions (`MATH.number.fraction-product`) | 6–6 | Complete, awaiting review | Complete; awaiting educator review (module draft; families aifmul draft, aifdiv draft, aiwdiv draft, aifword draft, avarea draft). |
@@ -386,7 +386,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | Family | Competency | Pool | Excluded | Difficulty 1/2/3 | Fingerprint |
 |---|---|---|---|---|---|
 | mul: A multiplication fact | `MATH.number.multiplication-tables` | 121 | 0 | 16/48/57 | `dc107826` |
-| rect: Area of a rectangle | `MATH.measurement.rectangle-area` | 121 | 0 | 46/45/30 | `491f99bc` |
+| rect: Area of a rectangle | `MATH.measurement.rectangle-area` | 121 | 0 | 46/45/30 | `685c1810` |
 | eqfrac: A missing part of an equivalent fraction | `MATH.number.equivalent-fractions` | 405 | 0 | 90/135/180 | `29ddcacc` |
 | fadd: Adding or subtracting like fractions | `MATH.number.fraction-add-like` | 825 | 0 | 295/229/301 | `4666c963` |
 | cint: The definite integral of a constant | `MATH.calculus.definite-integrals` | 792 | 0 | 62/643/87 | `12064e16` |
@@ -402,7 +402,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | pint: The definite integral of k xⁿ | `MATH.calculus.indefinite-integrals` | 360 | 0 | 48/192/120 | `552b485b` |
 | subst: An integral by substitution | `MATH.calculus.integration-methods` | 72 | 0 | 24/24/24 | `ff41c625` |
 | disc: How many real solutions a quadratic has | `MATH.algebra.quadratic-discriminant` | 960 | 0 | 240/720/0 | `66a30d48` |
-| rperim: The perimeter of a rectangle | `MATH.measurement.rectangle-perimeter` | 190 | 0 | 30/96/64 | `d9863e32` |
+| rperim: The perimeter of a rectangle | `MATH.measurement.rectangle-perimeter` | 190 | 0 | 30/96/64 | `aa3e134c` |
 | mmul: Multiplying a two-digit number by a one-digit number | `MATH.number.multi-multiplication` | 640 | 0 | 118/232/290 | `8e6face3` |
 | divr: The remainder of a division | `MATH.number.division-remainders` | 536 | 0 | 109/282/145 | `1a4a6468` |
 | ldiv: Dividing a number exactly | `MATH.number.long-division` | 704 | 0 | 72/312/320 | `fedc67a3` |
@@ -411,7 +411,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | pct: A percentage of an amount | `MATH.number.percentage` | 380 | 0 | 60/140/180 | `05d45983` |
 | mean4: The mean of four numbers | `MATH.statistics.averages-intro` | 126 | 0 | 18/36/72 | `77dfc843` |
 | root: The square root of a perfect square | `MATH.number.square-roots` | 99 | 0 | 9/5/85 | `fbbee837` |
-| vol: The volume of a cuboid in unit cubes | `MATH.measurement.volume-cubes` | 196 | 0 | 32/86/78 | `9ffc067e` |
+| vol: The volume of a cuboid in unit cubes | `MATH.measurement.volume-cubes` | 196 | 0 | 32/86/78 | `a4a7d050` |
 | lin: Solving ax + b = c | `MATH.algebra.linear-equations` | 1920 | 0 | 645/914/361 | `53af65fb` |
 | prop: A direct proportion | `MATH.number.proportion` | 980 | 0 | 400/402/178 | `e765795e` |
 | factor: Factorising x² + px + q | `MATH.algebra.factorisation` | 288 | 0 | 72/72/144 | `7a772ff8` |
@@ -610,7 +610,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | adrec: Recording a list in a two-way table | `MATH.statistics.tables` | 216 | 0 | 0/144/72 | `a4a3b673` |
 | aepat: Using a pattern rule to find a later number | `MATH.algebra.pattern-rules` | 400 | 0 | 55/168/177 | `81799ecb` |
 | aehund: Moving on a 1–100 number grid | `MATH.algebra.pattern-rules` | 400 | 0 | 37/177/186 | `c61270ba` |
-| aeang: Picking out an acute, right, obtuse or straight angle | `MATH.geometry.angles-intro` | 400 | 0 | 200/156/44 | `f7795f4f` |
+| aeang: Picking out an acute, right, obtuse or straight angle | `MATH.geometry.angles-intro` | 400 | 0 | 200/156/44 | `9ce7b2fd` |
 | aeturn: Angles as turns on a clock face | `MATH.geometry.angles-intro` | 132 | 0 | 36/48/48 | `99e70959` |
 | aecirc: Radius and diameter of a circle | `MATH.geometry.circles` | 120 | 0 | 15/65/40 | `b590a157` |
 | aesym: Letters with a vertical or horizontal line of symmetry | `MATH.geometry.symmetry-lines` | 551 | 0 | 143/135/273 | `0b188708` |
@@ -620,7 +620,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aet12: Reading a 24-hour time on a 12-hour clock | `MATH.measurement.24-hour-clock` | 156 | 0 | 84/48/24 | `6eb44d78` |
 | aeel24: Time between two 24-hour times | `MATH.measurement.24-hour-clock` | 400 | 0 | 103/119/178 | `dbe283c6` |
 | aearea: Area of a rectangle by counting unit squares | `MATH.measurement.area-squares` | 99 | 0 | 27/6/66 | `82661b3a` |
-| aeperar: Choosing area or perimeter in a problem | `MATH.measurement.area-squares` | 400 | 0 | 91/234/75 | `a90a733b` |
+| aeperar: Choosing area or perimeter in a problem | `MATH.measurement.area-squares` | 400 | 0 | 91/234/75 | `1b4e9f54` |
 | aemix: Adding and subtracting measures in two units | `MATH.measurement.compute-with-measures` | 450 | 0 | 50/245/155 | `9f8a403e` |
 | aemulm: Multiplying a measure in two units | `MATH.measurement.compute-with-measures` | 400 | 0 | 47/152/201 | `09a7312b` |
 | aeconv: Changing a measure into the smaller unit | `MATH.measurement.unit-conversions` | 450 | 0 | 65/356/29 | `b0fa1093` |
@@ -637,7 +637,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 | aeshop: Shopping: total cost and change | `MATH.reasoning.multi-step` | 400 | 0 | 31/328/41 | `867880d5` |
 | aedrip: Water lost from a dripping tap | `MATH.reasoning.multi-step` | 120 | 0 | 8/52/60 | `e00ecde5` |
 | aertang: Spotting right angles in pictures and objects | `MATH.geometry.angles-intro` | 305 | 0 | 18/282/5 | `31f09faa` |
-| aeangk: Classifying angles, including reflex angles | `MATH.geometry.angles-intro` | 142 | 0 | 36/36/70 | `0d9ab0bb` |
+| aeangk: Classifying angles, including reflex angles | `MATH.geometry.angles-intro` | 142 | 0 | 36/36/70 | `f7ea809b` |
 | aearms: The vertex and arms of an angle, and comparing angles by turning | `MATH.geometry.angles-intro` | 145 | 0 | 60/70/15 | `9cf59d6c` |
 | aecpart: Naming the parts of a circle | `MATH.geometry.circles` | 196 | 0 | 68/64/64 | `d20f565c` |
 | aedsym: Counting the lines of symmetry of a design or a shape | `MATH.geometry.symmetry-lines` | 146 | 0 | 28/71/47 | `40624fda` |
@@ -1486,7 +1486,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 - With a complete learning module (validate@1): **341/343 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 341 (hand-written 24, synthesised from blueprints 317)
 - Problem families (generated questions with independent checks): 1094
-- Review registry (repository copy): draft 1419, submitted 16, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Review registry (repository copy): draft 1422, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|
@@ -1536,7 +1536,7 @@ By grade (a competency spanning grades counts in each):
 | Compare fractions with like denominators (`MATH.number.fraction-comparison`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcmp draft, adford draft, adfnl draft, adfcmpu draft, adfordu draft). |
 | Add and subtract like fractions (`MATH.number.fraction-add-like`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd submitted). |
 | Measure area in square units (`MATH.measurement.area-squares`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aearea draft, aeperar draft, aeirr draft). |
-| Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families rperim submitted, avfence draft). |
+| Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families rperim draft, avfence draft). |
 | Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeang draft, aeturn draft, aertang draft, aeangk draft, aearms draft). |
 | Identify centres radii and diameters (`MATH.geometry.circles`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aecirc draft, aecpart draft). |
 
@@ -1560,7 +1560,7 @@ By grade (a competency spanning grades counts in each):
 | Compare fractions with like denominators (`MATH.number.fraction-comparison`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcmp draft, adford draft, adfnl draft, adfcmpu draft, adfordu draft). |
 | Add and subtract like fractions (`MATH.number.fraction-add-like`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fadd submitted). |
 | Measure area in square units (`MATH.measurement.area-squares`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aearea draft, aeperar draft, aeirr draft). |
-| Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families rperim submitted, avfence draft). |
+| Calculate rectangle perimeter (`MATH.measurement.rectangle-perimeter`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families rperim draft, avfence draft). |
 | Compare right acute and obtuse angles (`MATH.geometry.angles-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeang draft, aeturn draft, aertang draft, aeangk draft, aearms draft). |
 | Identify centres radii and diameters (`MATH.geometry.circles`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aecirc draft, aecpart draft). |
 
@@ -1582,8 +1582,8 @@ By grade (a competency spanning grades counts in each):
 | Multiply fractions by whole numbers (`MATH.number.fraction-multiply`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families fmulw draft, avfwq draft, mul draft). |
 | Add and subtract decimals (`MATH.number.decimal-operations`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agdec draft, agrupee draft, agmeas draft, agchange draft). |
 | Represent percentages as hundredths (`MATH.number.percent-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agpct draft, agpctd draft). |
-| Calculate rectangle area (`MATH.measurement.rectangle-area`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families rect submitted). |
-| Measure volume with unit cubes (`MATH.measurement.volume-cubes`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families vol submitted, abdisp draft, avvcmp draft). |
+| Calculate rectangle area (`MATH.measurement.rectangle-area`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families rect draft). |
+| Measure volume with unit cubes (`MATH.measurement.volume-cubes`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families vol draft, abdisp draft, avvcmp draft). |
 | Represent a number rule with a symbol (`MATH.algebra.expressions-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families afletter draft, afmatch draft). |
 | Test a generalisation with examples (`MATH.reasoning.counterexamples-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families agcex draft). |
 | Find and interpret a mean (`MATH.statistics.averages-intro`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families mean4 submitted, avmiss draft). |

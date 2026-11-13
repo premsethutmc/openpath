@@ -104,7 +104,7 @@
     "idea": "Area counts the unit squares that cover a shape.",
     "method": "A rectangle has rows of equal squares: rows × squares in a row."
    },
-   "fingerprint": "491f99bc",
+   "fingerprint": "685c1810",
    "validation": {
     "family": "rect",
     "deterministic": {
@@ -1107,7 +1107,7 @@
     "idea": "The perimeter is the distance all the way around a shape: add the lengths of every side.",
     "method": "A rectangle has two lengths and two widths: add one length and one width, then double."
    },
-   "fingerprint": "d9863e32",
+   "fingerprint": "aa3e134c",
    "validation": {
     "family": "rperim",
     "deterministic": {
@@ -1676,7 +1676,7 @@
     "idea": "Volume counts the cubes that fill a shape: layers of cubes stacked up.",
     "method": "Count one layer (length × width), then multiply by the number of layers (the height)."
    },
-   "fingerprint": "9ffc067e",
+   "fingerprint": "a4a7d050",
    "validation": {
     "family": "vol",
     "deterministic": {
@@ -16876,7 +16876,7 @@
      }
     ]
    },
-   "fingerprint": "f7795f4f",
+   "fingerprint": "9ce7b2fd",
    "validation": {
     "family": "aeang",
     "deterministic": {
@@ -17634,7 +17634,7 @@
      }
     ]
    },
-   "fingerprint": "a90a733b",
+   "fingerprint": "1b4e9f54",
    "validation": {
     "family": "aeperar",
     "deterministic": {
@@ -18914,7 +18914,7 @@
      }
     ]
    },
-   "fingerprint": "0d9ab0bb",
+   "fingerprint": "f7ea809b",
    "validation": {
     "family": "aeangk",
     "deterministic": {

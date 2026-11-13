@@ -19,7 +19,7 @@ const words = (s: string) => s.split(/\s+/).filter((w) => /[A-Za-z]/.test(w));
 const sentences = (s: string) => s.split(/(?<=[.?!])\s+(?=[A-Z])/).filter((x) => x.trim());
 const numbersIn = (s: string) => [...s.matchAll(/\d+(?:\.\d+)?/g)].map((m) => m[0]);
 
-export function fit(q: Pick<Question, "prompt" | "type" | "answer" | "figure" | "options" | "competency">, grade: number): Flag[] {
+export function fit(q: Pick<Question, "prompt" | "type" | "answer" | "figure" | "options" | "competency" | "picks">, grade: number): Flag[] {
   const p = profileFor(grade);
   const out: Flag[] = [];
   const ss = sentences(q.prompt);
@@ -36,7 +36,7 @@ export function fit(q: Pick<Question, "prompt" | "type" | "answer" | "figure" | 
   if (!q.figure && SHAPE.test(q.prompt.replace(NOT_SHAPE, ""))) out.push("shape-without-picture");
   const labelled = [...q.prompt.matchAll(/\b[A-Z] = (\d+(?:\.\d+)?)/g)].map((m) => m[1]);
   // the answer is one of several values the question itself lists: tapping it tests the same thing without typing
-  if (q.type !== "choice" && !q.options?.length && /^\d+(\.\d+)?$/.test(q.answer) && /\b(which|pick|choose)\b/i.test(q.prompt) && labelled.length >= 3 && labelled.includes(q.answer)) out.push("pick-but-typed");
+  if (q.type !== "choice" && !q.options?.length && !q.picks?.length && /^\d+(\.\d+)?$/.test(q.answer) && /\b(which|pick|choose)\b/i.test(q.prompt) && labelled.length >= 3 && labelled.includes(q.answer)) out.push("pick-but-typed");
   if ((q.prompt.match(/[A-Za-z0-9)]\?(?=\s+[A-Z(]|\s*$)/g) ?? []).length > 1) out.push("several-asks");
   return out;
 }
