@@ -1,4 +1,5 @@
 import { contentEligibility } from "../../../packages/learning/src/explanation-review";
+import { teachingEligibility } from "../../../packages/learning/src/teaching-contract";
 import { releaseOf } from "../../../packages/learning/src/review";
 import { geometryTask } from '../../../packages/learning/src/geometry-task';
 /**
@@ -40,7 +41,7 @@ import type { LearnerRecords, LearningActivity, ServerDecision } from "../../../
 import { authoritativeView } from "../../../packages/learning/src/grading/view";
 import { semanticsOf } from "../../../packages/learning/src/grading/parse";
 import { examplesFor, SYNTAX } from "../../../packages/learning/src/grading/syntax";
-import { KID } from "./kid";
+import { KID, kidName } from "./kid";
 
 export const LETTERS = ["A", "B", "C", "D"];
 
@@ -70,6 +71,7 @@ export const statusClass = (s: SkillEvidence["status"]) => (s === "verified" ? "
 
 const FLOW = ["Explore", "Strategy", "Chapter", "Practise", "Verify"] as const;
 /** What each step is, in a learner's words. */
+const KID_FLOW_WORDS: Record<(typeof FLOW)[number], string> = { Explore: "Let's see what you know", Strategy: "The idea", Chapter: "How to do it", Practise: "On your own", Verify: "Check again later" };
 const FLOW_WORDS: Record<(typeof FLOW)[number], string> = { Explore: "Find your starting point", Strategy: "See the idea", Chapter: "Learn the method", Practise: "Practise on your own", Verify: "Check it again later" };
 const flowIndex = (p: ModulePhase) => (p === "explore" || p === "recover" ? 0 : p === "strategy" ? 1 : p === "chapter" ? 2 : p === "guided" || p === "check" ? 3 : 4);
 const activityOf = (phase: ModulePhase, q: Question): LearningActivity =>
@@ -346,6 +348,8 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
   // lesson-resume@1: the screen reached in a lesson (and an open lesson review) survives a reload, per learner and skill
   const lessonKey = resumeKey ?? lessonResumeKey(ctx.session, competency);
   const [reviewOpen, setReviewOpen] = useResume<string | null>(lessonKey && `${lessonKey}:review`, null);
+  // teach-first@1: the learner chose "I know this — test me" on a new skill
+  const [testMe, setTestMe] = useResume<boolean>(lessonKey && `${lessonKey}:test-me`, false);
   const fb = onFeedback ? null : own;
   const setFb = (f: Fb | null) => (onFeedback ? f && onFeedback(f) : setOwn(f));
   const ev = ctx.evidence(competency);
@@ -355,7 +359,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
   const afterHelp = afterHelpOf(competency, ctx.records, ctx.evidence, ctx.now);
   const statusWord = skillLabel(true, ev.status, STATUS_WORD[ev.status], afterHelp);
   const shownReason = qualifyReason(true, ms.reason, ev.status, afterHelp);
-  const name = graph.get(competency).name;
+  const name = kidName(competency, graph.get(competency).name);
   const step = flowIndex(ms.phase);
   // skill-steps@1: the five steps are progress, not buttons: a slim bar with one plain line saying where the learner is
   // (the step's own name stays in each item for screen readers and the browser journeys)
@@ -366,7 +370,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
           <li key={f} className={k === step ? "here" : k < step ? "past" : ""} aria-current={k === step ? "step" : undefined}><span className="sr-only">{f}</span></li>
         ))}
       </ol>
-      <p className="skill-steps-caption">Step {step + 1} of {FLOW.length} · {FLOW_WORDS[FLOW[step]]}</p>
+      <p className="skill-steps-caption">Step {step + 1} of {FLOW.length} · {(KID ? KID_FLOW_WORDS : FLOW_WORDS)[FLOW[step]]}</p>
     </div>
   );
   const head = (
@@ -382,9 +386,9 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
   const reviewOffer = reviewStrategy ? <button className="secondary wide" disabled={ctx.saving} onClick={async () => { if (reviewStrategy && await ctx.teach(competency, reviewStrategy.id, "foundation-lesson-review@1")) setReviewOpen(reviewStrategy.id); }}>{KID ? "Learn it again" : "Review a supported lesson"}</button> : null;
   // the lesson being reviewed is the one that was opened (recorded), even if the question on screen changed since
   const reviewing = reviewOpen ? lessonModule?.strategies.find((x) => x.id === reviewOpen && ctx.records.teaching.some((t) => t.competency === competency && t.strategy === x.id && t.rule === "foundation-lesson-review@1")) : undefined;
-  if (reviewing) return <div className="stack">{head}<p role="note">Lesson review only. Your earlier answers are saved. This review does not award mastery; further answers in this visit are recorded with help.</p><Lesson competency={competency} s={reviewing} resumeKey={lessonKey && `${lessonKey}:review:${reviewing.id}`} doneLabel="Return to my progress" saving={false} onDone={() => setReviewOpen(null)} /><button className="secondary" onClick={() => setReviewOpen(null)}>Return to my progress</button></div>;
+  if (reviewing) return <div className="stack">{head}{!KID && <p role="note">Lesson review only. Your earlier answers are saved. This review does not award mastery; further answers in this visit are recorded with help.</p>}<Lesson competency={competency} s={reviewing} resumeKey={lessonKey && `${lessonKey}:review:${reviewing.id}`} doneLabel={KID ? "Let's try again" : "Return to my progress"} saving={false} onDone={() => setReviewOpen(null)} />{!KID && <button className="secondary" onClick={() => setReviewOpen(null)}>Return to my progress</button>}</div>;
   if (reviewOnly) return <div className="stack">{head}<p>This is lesson review, not a mastery check. Your progress is preserved.</p>{reviewOffer ?? <p>No eligible explanation is available for this topic yet.</p>}<button className="secondary" onClick={onExit}>Choose another goal</button></div>;
-  if (fb) return <div className="stack">{head}{retry ? <Ask key={`${fb.qid}:retry`} qid={fb.qid} activity={fb.activity ?? "guided"} ctx={ctx} previous={fb} resumeKey={resumeKey && `${resumeKey}:${fb.qid}`} showHint={retry === "hint"} hintAllowed onAnswered={f=>{setRetry(false);setFb(f);}}/> : <Feedback fb={fb} onNext={() => setFb(null)} onRetry={sessionMode && retriesLeft(ctx.records, fb.qid) > 0 ? hint=>setRetry(hint ? "hint" : true) : undefined}/>}{!retry && reviewOffer}</div>;
+  if (fb) return <div className="stack">{head}{retry ? <Ask key={`${fb.qid}:retry`} qid={fb.qid} activity={fb.activity ?? "guided"} ctx={ctx} previous={fb} resumeKey={resumeKey && `${resumeKey}:${fb.qid}`} showHint={retry === "hint"} hintAllowed onAnswered={f=>{setRetry(false);setFb(f);}}/> : <Feedback fb={fb} onNext={() => setFb(null)} onRetry={sessionMode && retriesLeft(ctx.records, fb.qid) > 0 ? hint=>setRetry(hint ? "hint" : true) : undefined}/>}{!retry && !(KID && fb.right) && reviewOffer}</div>;
   if (sessionMode && ms.phase === "retention") return <div className="stack">{head}<p>A delayed check is reserved for a later session. Your completed work is preserved.</p><button className="primary" onClick={onExit}>Next planned competency</button></div>;
   if (sessionMode && ms.question && writtenTask(ms.question)?.answer === "drawing" && !HANDWRITING_ENABLED)
     return <div className="stack">{head}<AnswerInput q={question(ms.question)} value="" setValue={()=>{}} disabled/><button className="secondary" onClick={onExit}>Next planned competency</button></div>;
@@ -400,6 +404,29 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
         <Lesson competency={competency} key={ms.strategy.id} resumeKey={lessonKey && `${lessonKey}:lesson:${ms.strategy.id}`} s={ms.strategy} saving={ctx.saving} onDone={() => ctx.teach(competency, ms.strategy!.id, ms.decision?.diagnosis.kind ?? ms.diagnosis?.result ?? "diagnosis")} />
       </div>
     );
+  // teach-first@1 (child build): a skill never met before opens on its lesson, not a check. "I know this — test me" skips
+  // to the check. The lesson is recorded as teaching (as a chapter's lesson is), so the engine knows it was shown.
+  // the idea first: a conceptual lesson for the same part of the skill, when one is eligible; else the usual review lesson
+  // the idea first: a lesson that opens on the concept (else the worked steps) for the same part of the skill; never a
+  // "spot the mistake" lesson, which is for after a slip
+  const fits = (x: (typeof lessonModule & {})["strategies"][number]) => !!lessonModule && !!reviewStrategy && !x.addresses && x.id !== "spot_the_mistake" && x.screens[0]?.role !== "misconception" && (x.scope?.subSkill ?? null) === (reviewStrategy.scope?.subSkill ?? null) && teachingEligibility(lessonModule, x).eligible && contentEligibility(lessonModule, x, { competency, usage: "lesson" }).eligible;
+  const firstLesson = lessonModule && reviewStrategy
+    ? lessonModule.strategies.find((x) => fits(x) && x.screens[0]?.role === "concept") ?? lessonModule.strategies.find((x) => fits(x) && x.kind === "procedural") ?? lessonModule.strategies.find(fits) ?? reviewStrategy
+    : null;
+  const neverMet = KID && !ctx.records.attempts.some((a) => a.competency === competency) && !ctx.records.teaching.some((t) => t.competency === competency);
+  if (neverMet && !testMe && ms.phase === "explore" && firstLesson)
+    return (
+      <div className="stack">
+        {!embedded && <h1>{name}</h1>}
+        <p className="kid-new">✨ New skill — let's learn it first.</p>
+        <Lesson competency={competency} key={`first:${firstLesson.id}`} resumeKey={resumeKey && `${resumeKey}:first:${firstLesson.id}`} s={firstLesson} saving={ctx.saving} doneLabel="Let's try" onDone={() => ctx.teach(competency, firstLesson.id, "teach-first@1")} />
+        <button className="link kid-skip" onClick={() => setTestMe(true)}>I know this — test me</button>
+      </div>
+    );
+  // "teach me" under a check: the lesson opens here, in the same flow (answers after it count as with help)
+  const teachMe = KID && reviewStrategy && (ms.phase === "explore" || ms.phase === "check")
+    ? <button className="secondary wide kid-learn" disabled={ctx.saving} onClick={async () => { if (reviewStrategy && await ctx.teach(competency, reviewStrategy.id, "foundation-lesson-review@1")) setReviewOpen(reviewStrategy.id); }}>I don't know this yet — teach me 📖</button>
+    : null;
   if (ms.question)
     return (
       <div className="stack">
@@ -407,7 +434,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
         {!KID && <p className="why">{shownReason}</p>}
         <Ask resumeKey={resumeKey && `${resumeKey}:${ms.question}`} key={ms.question} qid={ms.question} activity={ms.activity ?? activityOf(ms.phase, question(ms.question))} ctx={ctx} context={ms.context} hintAllowed={ms.phase === "guided"} onAnswered={setFb} />
         {/* kid-look@1: a child who does not know yet is never left to guess: the lesson is one tap away, before answering */}
-        {KID && onLearn && (ms.phase === "explore" || ms.phase === "check") && <button className="secondary wide kid-learn" onClick={onLearn}>I don't know this yet — teach me 📖</button>}
+        {teachMe ?? (KID && onLearn && (ms.phase === "explore" || ms.phase === "check") && <button className="secondary wide kid-learn" onClick={onLearn}>I don't know this yet — teach me 📖</button>)}
       </div>
     );
   // done or pause

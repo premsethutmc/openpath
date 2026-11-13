@@ -184,3 +184,9 @@ details.working summary, .hint { color: var(--ink); }
   body:has(.year-paper) .topbar { background: rgba(251, 250, 246, 0.92); color: #1d2130; }
   body:has(.year-paper) .topbar .link { color: #5545c4; }
 }
+/* teach-first@1 */
+.kid-new { margin: 0; padding: 10px 14px; border-radius: 14px; background: var(--brand-soft); color: var(--brand-text); font-weight: 800; }
+.kid-skip { justify-self: center; margin-top: 4px; font-weight: 700; }
+/* tables in lessons and questions: readable in both themes */
+.stack table th, .qcard table th, .figure table.data th { background: var(--brand-soft); color: var(--ink); }
+.stack table td, .qcard table td, .figure table.data td { color: var(--ink); border-color: var(--line); }

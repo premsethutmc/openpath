@@ -46,7 +46,7 @@ import { afterHelpOf, afterHelpTiles, afterHelpSummary, qualifiedEvidence, type 
 import "../mathematics/chapter/chapter.css";
 import "./year.css";
 import "./look.css";
-import { KID } from "./kid";
+import { KID, kidName } from "./kid";
 
 declare const OPENPATH_REVIEW_FIXTURE: boolean;
 // TEST BUILDS ONLY: treat every question as educator-reviewed, so acceptance tests can show a verified (green) skill.
@@ -387,7 +387,8 @@ function App() {
   if (view.name === "module")
     return (
       <Shell paper={grade === 7} banner={banner} error={error} wide={false} top={keyboardOpen ? undefined : top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
-        <div className="lesson-link"><button className="link" onClick={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })}>{KID ? "📖 Lesson" : "Open this lesson"}</button></div>
+        {/* kid-look@1: the lesson opens inside the skill (teach-first, "teach me", "learn it again"); no separate page */}
+        {!KID && <div className="lesson-link"><button className="link" onClick={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })}>Open this lesson</button></div>}
         <KeyboardPractice key={`${learner}:${view.competency}`} onOpenChange={setKeyboardOpen} api={api} learner={learner} competency={view.competency} onSaved={async () => { if (repo) setEvents(await repo.load()); }}>
           <Module competency={view.competency} reviewOnly={view.reviewOnly} ctx={ctx} onExit={() => setView(view.back)} onLearn={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })} />
         </KeyboardPractice>
@@ -916,7 +917,7 @@ function KidList({ here, onOpen }: { here: Tile; onOpen: (t: Tile) => void }) {
       <ul className="kid-chapters">
         {here.children.map((c, i) => {
           const off = c.kind === "proposal" || c.kind === "unsupported";
-          const t = splitTitle(c.title);
+          const t = skills ? { kicker: null, name: kidName(c.competency, splitTitle(c.title).name) } : splitTitle(c.title);
           return (
             <li key={c.id}>
               <button className="kid-chapter" disabled={off} onClick={() => onOpen(c)} data-status={c.status}>
@@ -958,7 +959,7 @@ function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, gr
 }) {
   const r = useMemo(() => parentReport({ attempts: st.records.attempts, teaching: st.records.teaching }, rightAnswer, (c) => c, now), [st, now]);
   const done = Math.min(r.today.answered, DAILY_GOAL), reached = r.today.answered >= DAILY_GOAL;
-  const title = next.question ? shortName(question(next.question).prompt.split(":")[0]) : next.competency ? shortName(graph.get(next.competency).name) : "";
+  const title = next.question ? shortName(question(next.question).prompt.split(":")[0]) : next.competency ? kidName(next.competency, shortName(graph.get(next.competency).name)) : "";
   const chapters = sections.flatMap((s) => s.children.map((c) => ({ c, path: [s.id, c.id] })));
   const started = st.records.attempts.length > 0;
   return (
