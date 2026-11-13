@@ -63,3 +63,12 @@ Neither the connection string nor the passwords are committed, logged, or sent t
 
 - Maths has its own "Create an account" on its sign-in screen; a parent is never sent to another app to register.
 - A parent's sign-in lasts 180 days on a device; the site password is asked once a year per device.
+
+## For parents (parent-view@1) and keeping progress safe (keep-safe@1)
+
+- "For parents" on the Maths home: questions this week, right at the first try, days worked, lessons opened, a bar for
+  each of the last seven days, and the skills worked on in the last 14 days grouped as could use your help / going
+  well / also worked on. All are counts from the learner's record; nothing is estimated.
+- A name-only learner's parent can add an email and password there ("Keep this progress safe"). The same records then
+  open on any device, and the browser's own key is removed. There is no reset-by-email on this site yet.
+- An email account's parent can download a copy of the learner's record from the same page.

@@ -260,6 +260,46 @@ class ChangePasswordView(SensitiveAccountBase):
         return Response({"detail": "Password changed."})
 
 
+# name-start@1: an account made for one browser, with a made-up address in this domain and a key kept only in that browser
+GUEST_DOMAIN = "@guest.openpath.example"
+
+
+class ClaimAccountView(AccountBase):
+    """keep-safe@1: a name-only (guest) account is given a real email and a password of the parent's choosing, so the
+    same records can be opened on another device and are not lost when this browser's storage is cleared. Only a guest
+    account can be claimed, only by the browser that is signed in to it; an ordinary account's email cannot be changed here."""
+
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = "account-password"
+
+    def post(self, request):
+        user = request.user
+        if not user.username.endswith(GUEST_DOMAIN):
+            raise ValidationError({"detail": "This account already has an email."})
+        email = _email(request.data)
+        if email.endswith(GUEST_DOMAIN):
+            raise ValidationError({"email": "Enter your own email address."})
+        password = _field(request.data, "password")
+        taken = {"email": "This email cannot be used. If you already have an account with it, sign in to that account instead."}
+        if User.objects.filter(username=email).exists():
+            raise ValidationError(taken)
+        candidate = User(username=email, email=email)
+        try:
+            validate_password(password, user=candidate)
+        except DjangoValidationError as e:
+            raise ValidationError({"password": list(e.messages)})
+        try:
+            with transaction.atomic():
+                user.username = email
+                user.email = email
+                user.set_password(password)
+                user.save()
+        except IntegrityError:
+            raise ValidationError(taken)
+        update_session_auth_hash(request._request, user)  # this browser stays signed in
+        return Response(_account(user))
+
+
 # ---------------------------------------------------------------- pupils
 
 

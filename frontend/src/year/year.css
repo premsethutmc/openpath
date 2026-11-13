@@ -224,3 +224,15 @@ details.more-options > summary { cursor: pointer; font-weight: 700; color: var(-
 .type-examples { font-size: 0.9rem; }
 .type-examples summary { cursor: pointer; color: var(--accent, #5b46d6); font-weight: 600; padding: 4px 0; }
 .type-examples ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+/* parent-view@1, keep-safe@1 */
+.parent-view h2 { margin: 6px 0 4px; font-size: 1.1rem; }
+.week-bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; align-items: end; padding: 10px 6px 4px; border-radius: 14px; background: rgba(255, 255, 255, 0.7); border: 1px solid rgba(0, 0, 0, 0.08); }
+.week-bar { display: grid; justify-items: center; gap: 3px; }
+.week-fill { width: 60%; border-radius: 6px 6px 2px 2px; background: #7c6ae6; }
+.week-count { font-size: 0.8rem; font-weight: 700; min-height: 1em; }
+.week-label { font-size: 0.75rem; color: #5a5f73; }
+.parent-skills { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.parent-skills li { display: grid; gap: 2px; padding: 10px 12px; border-radius: 12px; background: rgba(255, 255, 255, 0.75); border: 1px solid rgba(0, 0, 0, 0.08); }
+.parent-skills.needs li { border-left: 4px solid #e0a100; }
+.parent-skills.well li { border-left: 4px solid #2f9e62; }
+.keep-safe { padding: 14px; border-radius: 14px; background: #fff7e0; border: 1px solid #ecd58a; }

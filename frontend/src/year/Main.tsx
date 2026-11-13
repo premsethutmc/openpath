@@ -21,7 +21,8 @@ import { decompose, problemOf } from "../../../packages/learning/src/families";
 import { sameAnswer, solve } from "../../../packages/learning/src/solve";
 import { readProblem } from "../../../packages/learning/src/read-problem";
 import { familyOf, moduleState } from "../../../packages/learning/src/intervention";
-import { reviewFixtureActive, useReviewFixture } from "../../../packages/learning/src/evidence";
+import { reviewFixtureActive, rightAnswer, useReviewFixture } from "../../../packages/learning/src/evidence";
+import { parentReport } from "../../../packages/learning/src/parent-report";
 import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages/learning/src/goals";
 import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
@@ -94,6 +95,7 @@ type View =
   | { name: "module"; competency: string; back: View; reviewOnly?: boolean }
   | { name: "stuck"; qid: string; back?: View }
   | { name: "worked"; text: string; read?: WordReading }
+  | { name: "parent" }
   | { name: "single"; qid: string; heading: string; note?: string }
   | { name: "years" };
 
@@ -131,6 +133,7 @@ function App() {
   const [ready, setReady] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [emailAccount, setEmailAccount] = useState(false);
+  const [accountEmail, setAccountEmail] = useState("");
   const [pupils, setPupils] = useState<PupilSummary[]>([]);
   const [learner, setLearner] = useState<string>(new URLSearchParams(location.search).get("learner") ?? "");
   const [events, setEvents] = useState<{ kind: string }[] | null>(null);
@@ -151,6 +154,7 @@ function App() {
     // name-start@1: a sign-in that has run out is renewed with this browser's own key
     if (NAME_START && !s.account.authenticated && (await guestSignIn())) s = await api.status();
     setSignedIn(s.account.authenticated);
+    setAccountEmail(s.account.authenticated ? (s.account as { email?: string }).email ?? "" : "");
     if (s.account.authenticated) {
       // what is released (educator-reviewed): only released content can count toward verified mastery
       const reviewed = await api.request<{ registry: Registry }>("GET", "/content-review/").catch(() => null);
@@ -359,6 +363,12 @@ function App() {
         <KeyboardNote competency={view.competency} ctx={ctx} />
       </Shell>
     );
+  if (view.name === "parent")
+    return (
+      <Shell banner={banner} error={error} top={top(home, "For parents")}>
+        <ParentView name={name} learner={learner} st={st} guest={isGuest(accountEmail)} onClaimed={() => refreshAccount().catch((e) => setError(String(e.message ?? e)))} now={now} />
+      </Shell>
+    );
   if (view.name === "worked")
     return <Shell banner={banner} error={error} top={top(home, name)}><Worked text={view.text} read={view.read} onExit={() => setView({ name: "year" })} /></Shell>;
   if (view.name === "stuck")
@@ -464,6 +474,7 @@ function App() {
         <a className="primary" href={`/curriculum/?learner=${encodeURIComponent(learner)}&view=learner`}>Open Mathematics topics</a>
         <a className="secondary" href={`/curriculum/?preview=1#b=${release.id.startsWith("tn-") ? "tn" : release.id.startsWith("icse-") ? "icse" : "cbse"}&g=${grade}`}>Preview Mathematics experience</a>
         <button className="link" onClick={() => setView({ name: "setup", sameYear: true })}>Change board or curriculum</button>
+        {!DEVICE_BUILD && <button className="link" onClick={() => setView({ name: "parent" })}>For parents{isGuest(accountEmail) ? " · keep progress safe" : ""}</button>}
       </div>
       {showPathway && <section className="next" aria-label="Learning pathway">
         <h2>Your learning goal</h2>
@@ -808,6 +819,72 @@ function StuckBox({ onOpen, onWorked, grade }: { onOpen: (qid: string) => void; 
       {why && <p className="feedback bad" role="status"><b>OpenPath can’t work through this one yet.</b> {why}</p>}
       <button className="secondary" disabled={!text.trim() || busy}>{busy ? "Reading your problem…" : "Work through it"}</button>
     </form>
+  );
+}
+
+/** an account made by name-start@1 for this browser only (its address is made up, in this domain) */
+const isGuest = (email: string) => email.endsWith("@guest.openpath.example");
+
+/** keep-safe@1: a name-only learner's progress is tied to this browser. Here the parent gives the account a real email and
+ *  a password, so it can be opened anywhere and survives cleared browser data. */
+function KeepSafe({ onDone }: { onDone: (email: string) => void }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [problem, setProblem] = useState("");
+  return (
+    <form className="stack keep-safe" onSubmit={(e) => {
+      e.preventDefault();
+      setBusy(true);
+      setProblem("");
+      api.request("POST", "/account/claim/", { email, password }).then(() => { try { localStorage.removeItem(GUEST_KEY); } catch { /* the key no longer opens anything */ } onDone(email.trim().toLowerCase()); }).catch((er) => setProblem(String(er.message ?? er))).finally(() => setBusy(false));
+    }}>
+      <h2>Keep this progress safe</h2>
+      <p className="muted">Right now the progress is saved for this phone and browser only. If the browser's data is cleared or the phone changes, it cannot be opened again. Add your email and a password to keep it.</p>
+      <label className="field">Your email<input type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
+      <label className="field">Choose a password<input type="password" autoComplete="new-password" minLength={10} value={password} onChange={(e) => setPassword(e.target.value)} required /></label>
+      <p className="muted small">At least 10 characters. Write it down: this site cannot email a reset link yet.</p>
+      {problem && <p className="feedback bad" role="alert">{problem}</p>}
+      <button className="primary" disabled={busy}>{busy ? "Saving…" : "Keep it safe"}</button>
+    </form>
+  );
+}
+
+/** parent-view@1: what the learner did, in counts (packages/learning/src/parent-report.ts). Nothing is estimated. */
+function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string; learner: string; st: ReturnType<typeof learnerState> | null; guest: boolean; onClaimed: () => void; now: number }) {
+  // kept here, not in the form: once the account has an email the form is gone, and the confirmation must stay
+  const [savedAs, setSavedAs] = useState("");
+  const report = useMemo(() => (st ? parentReport({ attempts: st.records.attempts, teaching: st.records.teaching }, rightAnswer, (c) => { try { return graph.get(c).name; } catch { return c; } }, now) : null), [st, now]);
+  if (!report || !st) return <p className="muted center">Opening…</p>;
+  const most = Math.max(1, ...report.days.map((d) => d.answered));
+  const needs = report.skills.filter((s) => s.verdict === "needs_help"), well = report.skills.filter((s) => s.verdict === "going_well"), rest = report.skills.filter((s) => s.verdict === "in_progress");
+  const ago = (iso: string) => { const d = Math.floor((now - Date.parse(iso)) / 86_400_000); return d <= 0 ? "today" : d === 1 ? "yesterday" : `${d} days ago`; };
+  const line = (s: (typeof report.skills)[number]) => <li key={s.competency}><b>{s.name}</b><span className="muted small">{s.answered} answered · {s.rightFirstTry} right at the first try{s.helped ? ` · help used on ${s.helped}` : ""} · {ago(s.last)}</span></li>;
+  return (
+    <div className="stack parent-view">
+      <p className="eyebrow">For parents</p>
+      <h1>{name}'s Maths</h1>
+      {report.lastActive ? <p className="muted">Last worked {ago(report.lastActive)}.</p> : <p className="muted">{name} has not answered a question yet. Once they do, this page shows what they did.</p>}
+      <div className="stats" role="list" aria-label="This week">
+        <div className="stat" role="listitem"><b>{report.week.answered}</b><span>Questions this week</span></div>
+        <div className="stat" role="listitem"><b>{report.week.rightFirstTry}</b><span>Right at the first try</span></div>
+        <div className="stat" role="listitem"><b>{report.week.activeDays}</b><span>Days worked (of 7)</span></div>
+        <div className="stat" role="listitem"><b>{report.week.lessons}</b><span>Lessons opened</span></div>
+      </div>
+      <div className="week-bars" role="img" aria-label={`Questions each day: ${report.days.map((d) => `${d.label} ${d.answered}`).join(", ")}`}>
+        {report.days.map((d) => <div key={d.day} className="week-bar"><span className="week-count">{d.answered || ""}</span><span className="week-fill" style={{ height: `${Math.round((d.answered / most) * 56) + (d.answered ? 4 : 2)}px` }} /><span className="week-label">{d.label}</span></div>)}
+      </div>
+      {needs.length > 0 && <section aria-label="Needs help"><h2>Could use your help</h2><p className="muted small">Fewer than half right at the first try, or the full solution opened more than once. Sitting together for the next lesson on these usually helps.</p><ul className="parent-skills needs">{needs.map(line)}</ul></section>}
+      {well.length > 0 && <section aria-label="Going well"><h2>Going well</h2><ul className="parent-skills well">{well.map(line)}</ul></section>}
+      {rest.length > 0 && <section aria-label="Also worked on"><h2>Also worked on</h2><ul className="parent-skills">{rest.map(line)}</ul></section>}
+      <section aria-label="The year so far">
+        <h2>The year so far</h2>
+        <p>{st.summary.verified} skill{st.summary.verified === 1 ? "" : "s"} checked again a week later and still right · {st.summary.shown} shown on their own · {st.summary.developing} being learned · {st.summary.notStarted} not started.</p>
+        <p className="muted small">These are counts of what {name} did in OpenPath. A skill is only called checked after it is answered correctly again at least a week later. The lessons are machine-checked for correctness and have not been reviewed by a teacher.</p>
+      </section>
+      {savedAs && <p className="feedback good" role="status"><b>Saved.</b> Sign in with {savedAs} on any phone or computer to see the same progress. Keep the password somewhere safe: this site cannot email a reset link yet.</p>}
+      {guest ? <KeepSafe onDone={(email) => { setSavedAs(email); onClaimed(); }} /> : <p className="muted small">This progress is saved in your account and opens on any device you sign in on. <a className="link" href={`/api/pupils/${encodeURIComponent(learner)}/export/`} download={`openpath-${name.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.json`}>Download a copy</a></p>}
+    </div>
   );
 }
 
