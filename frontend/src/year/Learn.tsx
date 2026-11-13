@@ -189,7 +189,18 @@ function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; ans
 }
 
 /** An answer box for any question type. */
-export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question, "type" | "options"> & { id?: string; answer?: string }; value: string; setValue: (v: string) => void; disabled: boolean }) {
+export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question, "type" | "options" | "picks"> & { id?: string; answer?: string }; value: string; setValue: (v: string) => void; disabled: boolean }) {
+  // pick@1: the answer is one of the values the question shows: tap it (submits exactly what typing it would)
+  if (q.picks?.length)
+    return (
+      <div className="options picks" role="radiogroup" aria-label="Tap your answer">
+        {q.picks.map((o, i) => (
+          <button key={i} type="button" role="radio" aria-checked={value === o.value} className={`option ${value === o.value ? "picked" : ""}`} disabled={disabled} onClick={() => setValue(o.value)}>
+            <span>{o.label}</span>
+          </button>
+        ))}
+      </div>
+    );
   if (q.type === "choice")
     return (
       <div className="options" role="radiogroup" aria-label="Choose one answer">
@@ -277,7 +288,8 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   const [asked, setAsked] = useState(0);
   const [clarify, setClarify] = useState<string | null>(null);
   const submitting = useRef(false);
-  const workable = q.type !== "written";
+  // nothing to work out when the answer is tapped from the ones shown
+  const workable = q.type !== "written" && !q.picks?.length;
   // kid-say@1: the child build shows each generated question as one short ask (wording and answer shape only)
   const kq = KID && qid.startsWith("gen:") ? safeKid(q) : null;
   if (DEEP_EVALUATION && !releaseOf(qid)) return <p role="note" data-evaluation-stop="review-required">This question needs educator review before evaluation. Nothing is counted as solved.</p>;
@@ -288,7 +300,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
       <p className="prompt">{kq ? kq.say : q.prompt}</p>
       {(kq?.figure ?? q.figure) && <Figure v={(kq?.figure ?? q.figure)!} />}
       {kq?.note && <p className="kid-note">{kq.note}</p>}
-      {kq && q.type !== "choice" && (kq.ask.kind !== "box" || kq.ask.before || kq.ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
+      {kq && q.type !== "choice" && !q.picks?.length && (kq.ask.kind !== "box" || kq.ask.before || kq.ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
         ? <KidAnswer key={qid} ask={kq.ask} answer={q.answer} type={q.type} setValue={setValue} disabled={ctx.saving} />
         : <AnswerInput q={kq?.options ? { ...q, options: kq.options } : q} value={value} setValue={setValue} disabled={ctx.saving} />}
       {clarify && <p className="small" role="status">{clarify}</p>}

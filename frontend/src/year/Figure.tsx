@@ -169,6 +169,12 @@ function lineGraph(v: V): { labels: string[]; values: number[]; scale: number; t
   const top = (Math.max(...values) / scale + 1) * scale;
   return top / scale <= 20 ? { labels, values, scale, top } : null;
 }
+/** angles@1: a row of 2–4 labelled angles, each 1°–360°, labels distinct. */
+function anglesOf(v: V): { label: string; deg: number }[] | null {
+  const A = arr<{ label: string; deg: number }>(v.items);
+  if (A.length < 2 || A.length > 4 || !A.every((x) => x && typeof x.label === "string" && x.label.trim() && Number.isFinite(x.deg) && x.deg > 0 && x.deg <= 360)) return null;
+  return new Set(A.map((x) => x.label)).size === A.length ? A : null;
+}
 export function describe(v: V): string {
   switch (v.type) {
     case "dots":
@@ -196,7 +202,7 @@ export function describe(v: V): string {
       return `A table: ${arr<string>(v.head).join(", ")}; ${arr<(string | number)[]>(v.rows).map((r) => r.join(", ")).join("; ")}`;
     case "shape":
       if (!shapeOk(v)) return NA;
-      return `A ${str(v.name) || (v.outline && str(v.kind) ? str(v.kind) : `${num(v.sides)}-sided shape`)}${arr(v.lengths).length ? ` with sides ${arr(v.lengths).join(", ")}` : ""}${v.outline ? ", drawn as an outline" : ""}`;
+      return `A ${str(v.name) || str(v.kind) || `${num(v.sides)}-sided shape`}${arr(v.lengths).length ? ` with sides ${arr(v.lengths).join(", ")}` : ""}${v.outline ? ", drawn as an outline" : ""}`;
     case "strips": {
       if (legacyStrips(v)) {
         const k = legacyStripKind(v);
@@ -220,9 +226,9 @@ export function describe(v: V): string {
       const said = L.map((t, i) => (t.trim() === "?" ? `${name[i]} is marked ?` : t.trim() ? `${name[i]} is ${t.trim()}` : "")).filter(Boolean);
       return `Two straight lines crossing at a point, making four angles${said.length ? `: ${said.join("; ")}` : ""}`;
     }
-    case "angleset": {
-      const it = arr<{ label: string; deg: number }>(v.items);
-      return `${it.length} angles: ${it.map((x) => `${x.label} is ${x.deg}°`).join(", ")}`;
+    case "angles": {
+      const A = anglesOf(v);
+      return A ? `${A.length} angles: ${A.map((x) => `${x.label} ${x.deg}°`).join(", ")}` : NA;
     }
     case "circle":
       return `A circle${v.radius !== undefined ? ` with radius ${str(v.radius)}` : ""}${v.diameter !== undefined ? ` with diameter ${str(v.diameter)}` : ""}${v.sector !== undefined ? (v.estimate ? ", with a shaded angle (estimate it from the picture)" : `, a sector of ${num(v.sector)}°`) : ""}`;
@@ -490,24 +496,6 @@ export function Figure({ v }: { v: V }) {
         }),
       ]);
     }
-    case "angleset": {
-      // kid-say@1: several angles side by side, each under its letter (one arm flat, the other turned)
-      const it = arr<{ label: string; deg: number }>(v.items);
-      const W = 90, H = 96, cy = 80;
-      return box(W * it.length, H, it.flatMap((x, i) => {
-        const L = i * W, r = (x.deg * Math.PI) / 180;
-        const label = <text key={`t${i}`} x={L + W / 2} y={18} textAnchor="middle" fontWeight={800} fontSize={16} fill={ACC}>{x.label}</text>;
-        if (x.deg === 180) return [label, <line key={`a${i}`} x1={L + 12} y1={cy} x2={L + W - 12} y2={cy} stroke={INK} strokeWidth={3} strokeLinecap="round" />, <circle key={`o${i}`} cx={L + W / 2} cy={cy} r={3.5} fill={INK} />];
-        // an obtuse angle opens to the left, so its corner sits to the right of its cell
-        const vx = x.deg > 90 ? L + 52 : L + 14, len = x.deg > 90 ? 44 : 52;
-        return [
-          label,
-          <line key={`a${i}`} x1={vx} y1={cy} x2={x.deg > 90 ? L + W - 10 : L + W - 12} y2={cy} stroke={INK} strokeWidth={3} strokeLinecap="round" />,
-          <line key={`b${i}`} x1={vx} y1={cy} x2={vx + len * Math.cos(r)} y2={cy - len * Math.sin(r)} stroke={INK} strokeWidth={3} strokeLinecap="round" />,
-          ...(x.deg === 90 ? [<path key={`r${i}`} d={`M ${vx + 9} ${cy} v -9 h -9`} fill="none" stroke={INK} strokeWidth={2} />] : []),
-        ];
-      }));
-    }
     case "angle": {
       if (v.cross === true) {
         const L = crossOk(v);
@@ -545,6 +533,30 @@ export function Figure({ v }: { v: V }) {
         <line key="b" x1={40} y1={150} x2={x} y2={y} stroke={INK} strokeWidth={3} />,
         <path key="arc" d={`M 70 150 A 30 30 0 ${d > 180 ? 1 : 0} 0 ${ax} ${ay}`} fill="none" stroke={ACC} strokeWidth={2} />,
       ]);
+    }
+    case "angles": {
+      const A = anglesOf(v);
+      if (!A) return unavailable;
+      // each angle in its own cell: arms from the vertex, an arc, its letter and size underneath (2 per row)
+      const out: JSX.Element[] = [];
+      A.forEach((x, i) => {
+        const [ox, oy] = [(i % 2) * 170 + 20, Math.floor(i / 2) * 150 + 100];
+        // an acute or right angle opens from the left of its cell; a wider one from the middle, so its arm stays in the cell
+        const wide = x.deg > 90;
+        const [vx, len] = wide ? [ox + 65, 65] : [ox + 15, 85];
+        const at = (deg: number, r: number) => [vx + r * Math.cos((deg * Math.PI) / 180), oy - r * Math.sin((deg * Math.PI) / 180)];
+        const [bx, by] = at(x.deg, len), [ax, ay] = at(x.deg, 22);
+        out.push(
+          <line key={`a${i}`} x1={vx} y1={oy} x2={vx + (wide ? 65 : 115)} y2={oy} stroke={INK} strokeWidth={3} strokeLinecap="round" />,
+          <line key={`b${i}`} x1={vx} y1={oy} x2={bx} y2={by} stroke={INK} strokeWidth={3} strokeLinecap="round" />,
+          x.deg === 90
+            ? <path key={`m${i}`} d={`M ${vx + 16} ${oy} L ${vx + 16} ${oy - 16} L ${vx} ${oy - 16}`} fill="none" stroke={ACC} strokeWidth={2} />
+            : <path key={`m${i}`} d={`M ${vx + 22} ${oy} A 22 22 0 ${x.deg > 180 ? 1 : 0} 0 ${ax} ${ay}`} fill="none" stroke={ACC} strokeWidth={2} />,
+          <circle key={`o${i}`} cx={vx} cy={oy} r={3} fill={INK} />,
+          <text key={`t${i}`} x={ox + 65} y={oy + 34} fontSize={17} textAnchor="middle" fill={INK} fontWeight={700}>{`${x.label}  ${x.deg}°`}</text>,
+        );
+      });
+      return box(340, Math.ceil(A.length / 2) * 150 + 10, out);
     }
     case "circle": {
       const sector = num(v.sector, 0);

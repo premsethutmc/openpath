@@ -59,14 +59,7 @@ const lead = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
 // ------------------------------------------------------------------ one family at a time (the wordiest ones)
 
 type Own = (q: Q) => Partial<KidQ> & { say: string };
-const KINDS = ["acute", "right", "obtuse", "straight"];
 const OWN: Record<string, Own> = {
-  aeang: (q) => {
-    const m = grab(/P = (\d+)°, Q = (\d+)°, R = (\d+)°, S = (\d+)°\. Which one is an? (\w+) angle\?/, q.prompt);
-    const items = ["P", "Q", "R", "S"].map((label, i) => ({ label, value: m[i + 1] }));
-    if (!KINDS.includes(m[5])) throw new Error(`kid-say@1: aeang kind ${m[5]}`);
-    return { say: `Which one is ${m[5] === "acute" || m[5] === "obtuse" ? "an" : "a"} ${m[5]} angle?`, ask: { kind: "tap", items }, figure: { type: "angleset", items: items.map((x) => ({ label: x.label, deg: Number(x.value) })) } };
-  },
   avfold: (q) => {
     const m = grab(/so (\d+\/\d+) of the sheet is coloured\. .*every strip is cut into (\d+) equal parts/, q.prompt);
     return { say: `${m[1]} is coloured. Each strip is now cut into ${m[2]}. What fraction is coloured now?` };
