@@ -18,6 +18,7 @@ import { UNSUPPORTED } from "../../../packages/learning/src/coverage";
 import { offersFor } from "../../../packages/learning/src/decomposition";
 import { extract } from "../../../packages/learning/src/extract";
 import { decompose, problemOf } from "../../../packages/learning/src/families";
+import { sameAnswer, solve } from "../../../packages/learning/src/solve";
 import { readProblem } from "../../../packages/learning/src/read-problem";
 import { familyOf, moduleState } from "../../../packages/learning/src/intervention";
 import { reviewFixtureActive, useReviewFixture } from "../../../packages/learning/src/evidence";
@@ -92,6 +93,7 @@ type View =
   | { name: "curriculum-practice"; competency: string; back: View; stage?: "teaching" | "practice" }
   | { name: "module"; competency: string; back: View; reviewOnly?: boolean }
   | { name: "stuck"; qid: string; back?: View }
+  | { name: "worked"; text: string }
   | { name: "single"; qid: string; heading: string; note?: string }
   | { name: "years" };
 
@@ -351,6 +353,8 @@ function App() {
         <KeyboardNote competency={view.competency} ctx={ctx} />
       </Shell>
     );
+  if (view.name === "worked")
+    return <Shell banner={banner} error={error} top={top(home, name)}><Worked text={view.text} onExit={() => setView({ name: "year" })} /></Shell>;
   if (view.name === "stuck")
     return (
       <Shell banner={banner} error={error} top={top(home, name)}>
@@ -562,7 +566,7 @@ function App() {
       <section aria-label="Stuck on a problem">
         <div className="section-title"><h2>Stuck on a problem?</h2></div>
         <p className="muted small">Type a problem from class or coaching. OpenPath works out what went wrong, teaches the skill it needs, and brings you back to it.</p>
-        <StuckBox grade={grade ?? undefined} onOpen={(qid) => setView({ name: "stuck", qid })} />
+        <StuckBox grade={grade ?? undefined} onOpen={(qid) => setView({ name: "stuck", qid })} onWorked={(text) => setView({ name: "worked", text })} />
         {stuckFor(grade).length > 0 && (
           <div className="cards" style={{ marginTop: 10 }}>
             {stuckFor(grade).map((q) => (
@@ -744,7 +748,7 @@ function ExamPlanCard({ goalId, ev }: { goalId: string; ev: Ctx["evidence"] }) {
   );
 }
 
-function StuckBox({ onOpen, grade }: { onOpen: (qid: string) => void; grade?: number }) {
+function StuckBox({ onOpen, onWorked, grade }: { onOpen: (qid: string) => void; onWorked: (text: string) => void; grade?: number }) {
   const [text, setText] = useState("");
   const [why, setWhy] = useState<string | null>(null);
   return (
@@ -754,13 +758,56 @@ function StuckBox({ onOpen, grade }: { onOpen: (qid: string) => void; grade?: nu
       if (p.supported) {
         setWhy(null);
         onOpen(p.problem.id);
-      } else setWhy(p.reason);
+        return;
+      }
+      // general-solver@1: no lesson of ours matches, so the calculation itself is worked, one move at a time
+      const s = solve(text);
+      if (s.ok) { setWhy(null); onWorked(text); }
+      else setWhy(s.reason);
     }}>
       <label className="field">The problem<input aria-label="The problem" value={text} onChange={(e) => setText(e.target.value)} placeholder={grade && grade <= 5 ? "e.g. 3/4 + 1/8, or 15% of 200" : grade && grade <= 8 ? "e.g. 2x + 1 = 7, or 3/4 + 1/8" : "e.g. x² − 10x − 24 = 0, or ∫ from 2 to 9 of 6 dx"} /></label>
-      <p className="small muted">Type just the calculation or equation. Word problems are not read yet.</p>
+      <p className="small muted">Type just the calculation or equation, like 23 × 14 or 5/6 − 1/4. Word problems are not read yet.</p>
       {why && <p className="feedback bad" role="status"><b>OpenPath can’t work through this one yet.</b> {why}</p>}
       <button className="secondary" disabled={!text.trim()}>Work through it</button>
     </form>
+  );
+}
+
+/** general-solver@1: a typed calculation worked one move at a time. Nothing here is recorded: it is a calculator that shows
+ *  its working, not a lesson and not evidence about the learner. The learner may try first; the steps open one by one. */
+function Worked({ text, onExit }: { text: string; onExit: () => void }) {
+  const solved = useMemo(() => solve(text), [text]);
+  const [shown, setShown] = useState(0);
+  const [mine, setMine] = useState("");
+  const [verdict, setVerdict] = useState<boolean | null | undefined>(undefined);
+  if (!solved.ok) return <div className="stack"><p className="feedback bad" role="status">{solved.reason}</p><button className="secondary" onClick={onExit}>Back</button></div>;
+  const all = shown >= solved.steps.length;
+  return (
+    <div className="stack worked">
+      <p className="eyebrow">Your problem</p>
+      <h1 className="worked-problem">{solved.problem}</h1>
+      {!all && (
+        <form className="worked-try" onSubmit={(e) => { e.preventDefault(); setVerdict(sameAnswer(solved, mine)); }}>
+          <label className="field">Try it first (optional)<input aria-label="Your answer" value={mine} inputMode="text" autoComplete="off" onChange={(e) => { setMine(e.target.value); setVerdict(undefined); }} placeholder="Your answer" /></label>
+          <button className="secondary" disabled={!mine.trim()}>Check</button>
+        </form>
+      )}
+      {verdict === true && <p className="feedback good" role="status"><b>That is right.</b> You can still open the steps to compare your working.</p>}
+      {verdict === false && <p className="feedback bad" role="status"><b>Not yet.</b> Try again, or open the steps one at a time.</p>}
+      {verdict === null && <p className="feedback" role="status">OpenPath could not read that answer. Type a number or a fraction, like 7/12.</p>}
+      <ol className="worked-steps" aria-label="Working">
+        {solved.steps.slice(0, shown).map((st, i) => (
+          <li key={i}><span className="worked-line">{solved.kind === "arithmetic" ? "= " : ""}{st.expression}</span><span className="worked-why">{st.explanation}</span></li>
+        ))}
+      </ol>
+      {all ? (
+        <div className="worked-answer" role="status"><span className="eyebrow">Answer</span><strong>{solved.answer}</strong>{solved.also.map((a) => <span key={a} className="muted">{/^[≈A-Z]|=/.test(a) ? a : `= ${a}`}</span>)}</div>
+      ) : (
+        <button className="primary" onClick={() => setShown(shown + 1)}>{shown === 0 ? "Show the first step" : shown === solved.steps.length - 1 ? "Show the last step" : "Show the next step"}</button>
+      )}
+      <p className="muted small">Worked by OpenPath's calculator and checked by it line by line. It is not one of OpenPath's lessons, and nothing here is saved or counted.</p>
+      <button className="secondary" onClick={onExit}>{all ? "Done" : "Back"}</button>
+    </div>
   );
 }
 
