@@ -122,7 +122,7 @@ export function competencyProfile<A extends ProfileAttempt>(attempts: readonly A
       expectedSeconds: j.length >= MIN_TIMED ? median(j.map((x) => x.expected)) : null,
       timedRight: j.length, withinExpected: j.filter((x) => x.ratio <= 1).length,
       ratio,
-      pace: ratio === null ? null : ratio <= 0.5 ? "lightning" : ratio <= 1 ? "quick" : ratio <= 1.75 ? "steady" : "slow",
+      pace: (ratio === null ? null : ratio <= 0.5 ? "lightning" : ratio <= 1 ? "quick" : ratio <= 1.75 ? "steady" : "slow") as Speed | null,
       skills: bySkill.size, stuck,
     };
   }).sort((a, b) => b.answered - a.answered);
