@@ -10,6 +10,7 @@ import { calculusTaskOf } from "../calculus-task.ts";
 import { assessMathematicalWorking } from "../unified-math-engine.ts";
 import type { WorkingAssessment } from "./working.ts";
 import { isOdeWorking, odeWorking } from "./ode-working.ts";
+import { functionWorking, isFunctionWorking } from "./function-working.ts";
 
 export const CALCULUS_WORKING = "calculus-working@1" as const;
 const digest = (x: unknown) => createHash("sha256").update(JSON.stringify(x)).digest("hex");
@@ -17,7 +18,7 @@ const digest = (x: unknown) => createHash("sha256").update(JSON.stringify(x)).di
 /** Long working is allowed for calculus: up to this many lines of this many characters. */
 export const CALCULUS_LINES = 100;
 export const CALCULUS_LINE_CHARS = 200;
-export const isCalculusWorking = (qid: string) => !!calculusTaskOf(qid) || isOdeWorking(qid);
+export const isCalculusWorking = (qid: string) => !!calculusTaskOf(qid) || isOdeWorking(qid) || isFunctionWorking(qid);
 
 /** The notation the app itself uses (and so a learner copies) in the checker's notation: "∫ from 0 to 3 of f dx" as
  *  "∫_0^3 f dx", "[F] from 0 to 3" as "[F]_0^3", "lim (x → 4)" as "lim_(x->4)". The learner's own text is what is shown. */
@@ -47,6 +48,7 @@ type Step = { index: number; classification: string; justification?: string };
 export async function calculusWorking(qid: string, lines: readonly string[], base: WorkingAssessment, timeoutMs = 4000): Promise<WorkingAssessment> {
   const task = calculusTaskOf(qid);
   if (!task && isOdeWorking(qid)) return odeWorking(qid, [...lines], base); // ode-working@1: differential equations
+  if (!task && isFunctionWorking(qid)) return functionWorking(qid, [...lines], base); // function-working@1: maxima, minima, monotonicity
   if (!task || !lines.length || base.status !== "unsupported") return base;
   const common = {
     ...base,
