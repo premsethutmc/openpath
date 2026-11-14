@@ -732,6 +732,16 @@ export function Figure({ v }: { v: V }) {
         sphere: [<circle key="s" cx={100} cy={95} r={70} fill={SOFT} stroke={INK} />, <ellipse key="e" cx={100} cy={95} rx={70} ry={18} fill="none" stroke={INK} strokeDasharray="4 3" />],
         pyramid: [<path key="s" d="M 100 20 L 30 150 L 150 160 Z M 100 20 L 150 160 L 190 130 Z" fill={SOFT} stroke={INK} />],
       };
+      // a box's three sizes go on its own edges (length under the front, height beside it, width along the slant), not stacked in a corner
+      if (dims.length === 3 && (name === "cuboid" || name === "cube")) {
+        const g = name === "cube" ? { bx: 80, by: 176, hx: 26, hy: 110, wx: 162, wy: 36 } : { bx: 90, by: 166, hx: 16, hy: 114, wx: 192, wy: 46 };
+        return box(310, 185, [
+          <g key="body" transform="translate(48,0)">{body[name]}</g>,
+          <text key="dl" x={g.bx + 48} y={g.by} fontSize={13} textAnchor="middle" fill={INK}>{dims[0]}</text>,
+          <text key="dh" x={g.hx + 48 - 6} y={g.hy} fontSize={13} textAnchor="end" fill={INK}>{dims[2]}</text>,
+          <text key="dw" x={g.wx + 48 + 10} y={g.wy + 4} fontSize={13} fill={INK}>{dims[1]}</text>,
+        ]);
+      }
       return box(220, 180, [...(body[name] ?? body.cube), ...dims.map((d, i) => <text key={`d${i}`} x={8} y={175 - i * 16} fontSize={12} fill={INK}>{d}</text>)]);
     }
     case "balance":

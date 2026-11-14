@@ -11,6 +11,8 @@ const topics: Record<string, { topic: string; parameters: Record<string, number>
 };
 
 type Props = {
+  /** kid-say@1: the child build keeps the skill screen to the question (no extra-practice offer above it) */
+  hideOffer?: boolean;
   api: Api;
   learner: string;
   competency: string;
@@ -19,7 +21,7 @@ type Props = {
   onOpenChange: (open: boolean) => void;
 };
 
-export function KeyboardPractice({ api, learner, competency, onSaved, children, onOpenChange }: Props) {
+export function KeyboardPractice({ api, learner, competency, onSaved, children, onOpenChange, hideOffer = false }: Props) {
   const [open, setOpen] = useState(false);
   const topic = topics[competency];
   if (!topic) return children;
@@ -40,10 +42,10 @@ export function KeyboardPractice({ api, learner, competency, onSaved, children, 
     );
   return (
     <>
-      <section aria-label="Keyboard practice">
+      {!hideOffer && <section aria-label="Keyboard practice">
         <button className="secondary" onClick={() => { setOpen(true); onOpenChange(true); }}>Open keyboard working</button>
         <p className="muted">Additional formative practice. Completing this working does not complete your current module.</p>
-      </section>
+      </section>}
       {children}
     </>
   );

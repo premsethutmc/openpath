@@ -389,7 +389,7 @@ function App() {
       <Shell paper={grade === 7} banner={banner} error={error} wide={false} top={keyboardOpen ? undefined : top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
         {/* kid-look@1: the lesson opens inside the skill (teach-first, "teach me", "learn it again"); no separate page */}
         {!KID && <div className="lesson-link"><button className="link" onClick={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })}>Open this lesson</button></div>}
-        <KeyboardPractice key={`${learner}:${view.competency}`} onOpenChange={setKeyboardOpen} api={api} learner={learner} competency={view.competency} onSaved={async () => { if (repo) setEvents(await repo.load()); }}>
+        <KeyboardPractice hideOffer={KID} key={`${learner}:${view.competency}`} onOpenChange={setKeyboardOpen} api={api} learner={learner} competency={view.competency} onSaved={async () => { if (repo) setEvents(await repo.load()); }}>
           <Module competency={view.competency} reviewOnly={view.reviewOnly} ctx={ctx} onExit={() => setView(view.back)} onLearn={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })} />
         </KeyboardPractice>
         <KeyboardNote competency={view.competency} ctx={ctx} />
@@ -675,6 +675,8 @@ function KeyboardNote({ competency, ctx }: { competency: string; ctx: Ctx }) {
   const ms = ctx.module ? ctx.module(competency) : moduleState(competency, ctx.records, ev, ctx.now, ctx.session, null, ctx.evidence);
   const ended = ms.phase === "done" && !["independent", "transfer", "verified"].includes(ev.status);
   const n = ids.length;
+  // a child does not need to hear what was left out (the parent page and test builds still say it)
+  if (KID && !ended) return null;
   return (
     <p className={ended ? "why" : "small muted"} role="note" data-keyboard-offer={ended ? "ended" : "withheld"}>
       {ended ? KEYBOARD_UNAVAILABLE : `${n} drawing or construction task${n === 1 ? " is" : "s are"} not available with keyboard input, so ${n === 1 ? "it is" : "they are"} left out of this topic.`}

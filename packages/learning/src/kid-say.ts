@@ -16,7 +16,9 @@ export type Ask =
   | { kind: "box"; before?: string; after?: string }
   | { kind: "fields"; labels: string[] }
   | { kind: "order"; items: string[]; first: string; prefix?: string }
-  | { kind: "tap"; items: { label: string; value: string }[] };
+  | { kind: "tap"; items: { label: string; value: string }[] }
+  /** numbers multiplied together, typed as 3 × 3 × 11 (read back as the list the marking wants) */
+  | { kind: "product" };
 export interface KidQ {
   say: string;
   ask: Ask;
@@ -52,6 +54,8 @@ const grab = (re: RegExp, t: string) => {
   if (!m) throw NOT_THIS;
   return m;
 };
+/** A rewrite may take the picture away (it repeated the sentence). */
+const NONE = { type: "none" } as unknown as Visual;
 /** A family's own rewrite covers one way the family words its questions; for any other, the general rules apply. */
 const NOT_THIS = new Error("kid-say@1: not this wording");
 const lead = (t: string) => t.charAt(0).toUpperCase() + t.slice(1);
@@ -213,7 +217,18 @@ const OWN: Record<string, Own> = {
   },
   actrain: () => ({ say: "How long does the journey take?" }),
   aearea: () => ({ say: "Each small square is 1 square unit. What is the area?", ask: { kind: "box", after: "square units" } }),
-  adperim: () => ({ say: "What is the perimeter of the triangle?", ask: { kind: "box", after: "cm" }, note: "Not drawn to scale." }),
+  adperim: (q) => {
+    const m = grab(/perimeter of the (.+?)(?: in the picture)?[?.]/i, q.prompt);
+    return { say: `What is the perimeter of the ${m[1]}?`, ask: { kind: "box", after: "cm" }, note: "Not drawn to scale." };
+  },
+  ajpf: (q) => {
+    const m = grab(/^Write (\d+) as a product of prime numbers\./, q.prompt);
+    return { say: `Break ${m[1]} into prime numbers multiplied together.`, ask: { kind: "product" }, note: "Type it like 2 × 3 × 3." };
+  },
+  aapatn: (q) => {
+    const m = grab(/repeats: ([\d, ]+, \?)\. Which number comes next\?/, q.prompt);
+    return { say: `${m[1]} Which number comes next?`, figure: NONE };
+  },
   adwtcap: (q) => {
     const m = grab(/about (\d+) kg\. On the weighing scale it showed (\d+) kg/, q.prompt);
     return { say: `The guess was ${m[1]} kg. The scale shows ${m[2]} kg. How far off was the guess?`, ask: { kind: "box", after: "kg" } };
@@ -362,7 +377,33 @@ export function kidQuestion(q: Q): KidQ {
   let ask = o?.ask ?? base.ask;
   // multiple choice keeps its buttons; a tap or order ask is for the typed form only
   if (form(q.id) === "mc" || q.type === "choice") ask = { kind: "box" };
-  return { say: o?.say ?? base.say, ask, options: kidOptions(q, ask), ...(o?.figure ? { figure: o.figure } : q.figure ? { figure: q.figure as Visual } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}) };
+  let say = o?.say ?? base.say;
+  const fig = o?.figure ? (o.figure === NONE ? undefined : o.figure) : q.figure && keepPicture(q, say) ? (q.figure as Visual) : undefined;
+  // with the table left out, the sentence no longer points at it
+  if (q.figure && !fig) say = say.replace(/^The table shows (?:the )?/, "Here are the ").replace(/^The number cards in the picture make /, "These numbers make ");
+  return { say, ask, options: kidOptions(q, ask), ...(fig ? { figure: fig } : {}), ...(o?.note ?? base.note ? { note: o?.note ?? base.note } : {}) };
+}
+
+/** Rule 3: a picture stays only when it adds something: not when it shows the answer, repeats the sentence, or draws a
+ * flat shape for a solid. */
+export function keepPicture(q: Q, say: string): boolean {
+  const f = q.figure as Record<string, unknown> | undefined;
+  if (!f) return false;
+  const ans = (q.answer ?? "").replace(/−/g, "-");
+  // a number line that marks the answer gives it away
+  if (f.type === "numberline" && Array.isArray(f.marks) && f.marks.some((m) => String(m) === ans)) return false;
+  // a bare calculation stays a calculation: blocks of the combined number would do the sum
+  if (f.type === "blocks" && /^[\d\s+−\-×÷().,/]+=\s*\?$/.test(q.prompt.trim())) return false;
+  // a table whose every entry is already in the sentence says it twice
+  if (f.type === "table" && Array.isArray(f.rows)) {
+    const flat = (t: string) => t.replace(/(\d),(?=\d)/g, "$1").replace(/[₹]/g, "");
+    const cells = (f.rows as unknown[][]).flat().map((c) => flat(String(c)).trim()).filter((c) => /\d/.test(c) || /^[A-Z]$/.test(c));
+    const words = new Set(flat(say).split(/[^0-9A-Za-z.]+/).map((w) => w.replace(/\.$/, "")));
+    if (cells.length && cells.every((c) => words.has(c))) return false;
+  }
+  // a flat shape drawn for a solid misleads
+  if (f.type === "shape" && /\b(prism|pyramid|cube|cuboid|cylinder|cone|sphere)\b/i.test(q.prompt)) return false;
+  return true;
 }
 
 /** What the child tapped or typed, as the answer string the marking already reads. */
@@ -370,6 +411,7 @@ export function compose(ask: Ask, parts: string[], answer?: string, type?: strin
   // a whole number may be typed with commas, as a child writes it (5,07,699)
   if (ask.kind === "box") { const v = (parts[0] ?? "").replace(/^\s*₹\s*/, "").trim(); return type === "integer" ? v.replace(/(\d),(?=\d)/g, "$1") : v; }
   if (ask.kind === "tap") return parts[0] ?? "";
+  if (ask.kind === "product") return `(${(parts[0] ?? "").split(/\s*[×x*.,]\s*|\s+/i).filter(Boolean).map(Number).filter((n) => n > 0).sort((a, b) => a - b).join(", ")})`;
   const xs = (ask.kind === "order" ? parts.map((p) => p.replace(/,(?=\d{2,3}\b)/g, "")) : parts.map((p) => p.trim()));
   const list = xs.join(", ");
   return answer && !answer.trim().startsWith("(") ? list : `(${list})`;

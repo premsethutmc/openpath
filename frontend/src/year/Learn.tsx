@@ -227,9 +227,10 @@ export function AnswerInput({ q, value, setValue, disabled }: { q: Pick<Question
   const label = ANSWER_LABEL[q.type] ?? "Your answer";
   return (
     <label className="field">
-      {label}
+      {/* a child gets the example in the box, not a label and a typing guide */}
+      {!KID && label}
       <input aria-label="Your answer" inputMode={q.type === "integer" ? "numeric" : "text"} autoComplete="off" value={value} disabled={disabled} onChange={(e) => setValue(e.target.value)} placeholder={`e.g. ${exampleFor(q)}`} />
-      <SyntaxHelp q={q} />
+      {!KID && <SyntaxHelp q={q} />}
     </label>
   );
 }
@@ -291,14 +292,14 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
   // nothing to work out when the answer is tapped from the ones shown
   const workable = q.type !== "written" && !q.picks?.length;
   // kid-say@1: the child build shows each generated question as one short ask (wording and answer shape only)
-  const kq = KID && qid.startsWith("gen:") ? safeKid(q) : null;
+  const kq = KID && q.type !== "written" ? safeKid(q) : null;
   if (DEEP_EVALUATION && !releaseOf(qid)) return <p role="note" data-evaluation-stop="review-required">This question needs educator review before evaluation. Nothing is counted as solved.</p>;
   return (
     <div className="qcard enter" key={qid} data-qid={qid}>
       {heading && <p className="eyebrow">{heading}</p>}
       {!KID && <span className="counted">{COUNTS[activity]}</span>}
       <p className="prompt">{kq ? kq.say : q.prompt}</p>
-      {(kq?.figure ?? q.figure) && <Figure v={(kq?.figure ?? q.figure)!} />}
+      {(kq ? kq.figure : q.figure) && <Figure v={(kq ? kq.figure : q.figure)!} />}
       {kq?.note && <p className="kid-note">{kq.note}</p>}
       {kq && q.type !== "choice" && !q.picks?.length && (kq.ask.kind !== "box" || kq.ask.before || kq.ask.after || ["integer", "fraction", "exact", "mixed"].includes(q.type))
         ? <KidAnswer key={qid} ask={kq.ask} answer={q.answer} type={q.type} setValue={setValue} disabled={ctx.saving} />
@@ -389,7 +390,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
     return <p role="note" data-evaluation-stop="review-required">This explanation needs educator review before evaluation. Your place is saved.</p>;
   const raw = s.screens[i];
   // kid-say@1: a worked example about a generated question reads (and pictures) the way the question will
-  const kq = KID && raw.instance?.startsWith("gen:") ? safeKid(question(raw.instance)) : null;
+  const kq = KID && raw.instance ? safeKid(question(raw.instance)) : null;
   const swap = (t: string) => (t === question(raw.instance!).prompt ? kq!.say : t);
   const sc = kq ? { ...raw, text: raw.text.map(swap), math: raw.math?.map(swap), widget: (kq.figure as typeof raw.widget) ?? raw.widget } : raw;
   const last = i === s.screens.length - 1;
