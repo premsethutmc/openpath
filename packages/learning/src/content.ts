@@ -40,7 +40,7 @@ export interface Question {
   picks?: { label: string; value: string }[];
   /** A picture the question needs (family-kit Visual). */
   figure?: { type: string; [k: string]: unknown };
-  misconceptions?: { when: string; hypothesis: Hypothesis; says: string }[];
+  misconceptions?: { when: string; hypothesis: Hypothesis; says: string; id?: string }[];
   goals?: string[];
   readiness?: string[];
   source: string;
@@ -200,7 +200,7 @@ function misconceptionsOf(g: FamilyProblem): NonNullable<Question["misconception
   for (const b of g.bugs) {
     if (b.predict === null || (g.type === "set" && !Array.isArray(b.predict))) continue;
     const values = g.type === "set" ? [b.predict] : Array.isArray(b.predict) ? b.predict : [b.predict];
-    for (const v of values) if (showValue(v) !== g.answer || g.type === "choice") out.push({ when: g.type === "choice" ? "ABCD"[v as number] : showValue(v), hypothesis: b.kind, says: b.says });
+    for (const v of values) if (showValue(v) !== g.answer || g.type === "choice") out.push({ when: g.type === "choice" ? "ABCD"[v as number] : showValue(v), hypothesis: b.kind, says: b.says, ...((b as { id?: string }).id ? { id: (b as { id?: string }).id } : {}) });
   }
   return out;
 }

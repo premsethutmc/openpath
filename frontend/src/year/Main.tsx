@@ -25,6 +25,7 @@ import { reviewFixtureActive, rightAnswer, useReviewFixture } from "../../../pac
 import { parentReport } from "../../../packages/learning/src/parent-report";
 import { competencyProfile, topicName, type Period, type TopicMeasure } from "../../../packages/learning/src/competency-profile";
 import { expectedSeconds } from "../../../packages/learning/src/expected-time";
+import { fluencyNeeds, slipPatterns } from "../../../packages/learning/src/practice-focus";
 import { examPlan, examPlanApplies, overlay, readiness } from "../../../packages/learning/src/goals";
 import { graph } from "../../../packages/learning/src/graph";
 import { years } from "../../../packages/learning/src/plan";
@@ -520,6 +521,7 @@ function App() {
           stuck={<StuckBox grade={grade ?? undefined} onOpen={(qid) => setView({ name: "stuck", qid })} onWorked={(text, read) => setView({ name: "worked", text, read })} />}
           onParents={DEVICE_BUILD ? undefined : () => setView({ name: "parent" })}
           onSettings={() => setView({ name: "setup", sameYear: true })}
+          onFocus={(competency) => setView({ name: "curriculum-practice", competency, stage: "practice", back: { name: "year" } })}
         />
       </Shell>
     );
@@ -967,11 +969,26 @@ function Ring({ value, max, size = 64, children }: { value: number; max: number;
 
 /** kid-home@1: the Maths home for a child. One "Today" card with the next thing and one button; the chapters as a list;
  *  then help with a problem, and the grown-up pages. Everything here is the same data as the full screen, said simply. */
-function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, grade, stuck, onParents, onSettings }: {
+/** practice-focus@1: one extra thing worth practising today, from her own answers: the same slip in two or more skills first
+ *  (it is behind several topics at once), then a skill she gets right but slowly. Only a skill this year teaches. */
+function practiceFocus(st: NonNullable<ReturnType<typeof learnerState>>, grade: number | null) {
+  const attempts = st.records.attempts;
+  const slip = slipPatterns(attempts).find((p) => moduleFor(p.practise));
+  if (slip) return { competency: slip.practise, title: `Practise ${slip.name}`, why: `The same slip came up in ${slip.skills.length} different topics. A little practice fixes it everywhere.` };
+  const seen = new Map<string, number | null>();
+  const expected = (a: { questionId: string }) => { if (!seen.has(a.questionId)) { let v: number | null = null; try { const q = problemOf(a.questionId) ?? question(a.questionId); v = q ? expectedSeconds(q, grade ?? undefined) : null; } catch { v = null; } seen.set(a.questionId, v); } return seen.get(a.questionId)!; };
+  const slow = fluencyNeeds(attempts, rightAnswer, expected).find((f) => moduleFor(f.competency));
+  if (slow) return { competency: slow.competency, title: `Get quicker: ${kidName(slow.competency, shortName(graph.get(slow.competency).name))}`, why: "You get these right. A few quick rounds will make them fast." };
+  return null;
+}
+
+function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, grade, stuck, onParents, onSettings, onFocus }: {
   name: string; st: NonNullable<ReturnType<typeof learnerState>>; now: number;
   next: NonNullable<NonNullable<ReturnType<typeof learnerState>>["next"]>; nextReason: string; goNext: () => void;
   sections: Tile[]; onOpen: (t: Tile, path: string[]) => void; grade: number | null; stuck: React.ReactNode; onParents?: () => void; onSettings: () => void;
+  onFocus?: (competency: string) => void;
 }) {
+  const focus = useMemo(() => practiceFocus(st, grade), [st, grade]);
   const r = useMemo(() => parentReport({ attempts: st.records.attempts, teaching: st.records.teaching }, rightAnswer, (c) => c, now), [st, now]);
   const done = Math.min(r.today.answered, DAILY_GOAL), reached = r.today.answered >= DAILY_GOAL;
   const title = next.question ? shortName(question(next.question).prompt.split(":")[0]) : next.competency ? kidName(next.competency, shortName(graph.get(next.competency).name)) : "";
@@ -1005,6 +1022,13 @@ function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, gr
           <p className="kid-next-label">{nextReason}</p>
         )}
       </section>
+      {focus && onFocus && focus.competency !== next.competency && (
+        <section className="kid-focus" aria-label="Also good for today">
+          <p className="kid-focus-title">{focus.title}</p>
+          <p className="kid-focus-why">{focus.why}</p>
+          <button className="secondary" onClick={() => onFocus(focus.competency)}>Practise →</button>
+        </section>
+      )}
       <section aria-label="Chapters">
         <h2 className="kid-h2">Chapters</h2>
         <ul className="kid-chapters">
@@ -1107,6 +1131,7 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
   const paceWord = (t: TopicMeasure) => (t.pace === "lightning" ? "lightning quick" : t.pace === "quick" ? "within the expected time" : t.pace === "steady" ? "a little over the expected time" : t.pace === "slow" ? "takes much longer than expected" : null);
   // right but slow: the answers are right (four in five or more) and take much longer than they should
   const slowButRight = profile.topics.filter((t) => t.pace === "slow" && (t.accuracy ?? 0) >= 0.8);
+  const slips = slipPatterns(st.records.attempts); // practice-focus@1
   return (
     <div className="stack parent-view">
       <p className="eyebrow">For parents</p>
@@ -1134,6 +1159,7 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
           <ul className="findings">
             {f.quickest && <li><span aria-hidden="true">⚡</span><span><b>{f.quickest.pace === "lightning" ? "Lightning quick" : "Quick"} in {f.quickest.topic}:</b> right answers take about {secs(f.quickest.paceSeconds)}, where about {secs(f.quickest.expectedSeconds)} is expected ({f.quickest.withinExpected} of {f.quickest.timedRight} within the expected time).</span></li>}
             {slowButRight.map((t) => <li key={t.topic}><span aria-hidden="true">🐢</span><span><b>Right but slow in {t.topic}:</b> about {secs(t.paceSeconds)} a question, where about {secs(t.expectedSeconds)} is expected. The method is there; more practice will bring the speed.</span></li>)}
+            {slips.map((p) => <li key={p.id}><span aria-hidden="true">🔁</span><span><b>The same slip in {p.skills.length} topics: {p.name}.</b> It came up {p.count} times, in {p.skills.map((c) => skillName(c)).join(", ")}. The app suggests practising {skillName(p.practise)}; fixing it there helps all of them.</span></li>)}
             {f.mostAccurate && <li><span aria-hidden="true">🎯</span><span><b>Most accurate in {f.mostAccurate.topic}:</b> {pct(f.mostAccurate.accuracy)} right at the first try ({f.mostAccurate.rightFirstTry} of {f.mostAccurate.answered}).</span></li>}
             {f.mostPractised && <li><span aria-hidden="true">📚</span><span><b>Most practised: {f.mostPractised.topic}</b> ({f.mostPractised.answered} questions).</span></li>}
             {f.stuck.length > 0 && <li><span aria-hidden="true">🧩</span><span><b>Stuck on:</b> {f.stuck.map((x) => x.skill).join("; ")}. Fewer than half right at the first try, or the full solution opened more than once. Sitting together for the next lesson on these usually helps.</span></li>}

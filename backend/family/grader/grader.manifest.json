@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "84905bc02bc7c95b58070a03a9ff572152b0c900ffa1a1297c459589268affcc",
+ "sha256": "bff5f6fdc32389fcdb17ab50b20f599dae8c60880084ed63b2ae951e223e3233",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -143,7 +143,7 @@
   "packages/learning/src/claim-ledger.ts": "0a91275d38e392ff77932703705ac3d39b7c5f67214ca3c8d5f5cf108331deab",
   "packages/learning/src/complex-kernel.ts": "bdcb123d83b4bb179269752667f68f1193e27784d4aedfffcbe51365d4104fdb",
   "packages/learning/src/complex-polynomial.ts": "31816a7a16e76822a228ce48b8fddd41905556f650b5c05dcff119d23d785231",
-  "packages/learning/src/content.ts": "2905c81e9d4502806e6ca5c250b1030b9d1a5d7a020b35e4ce9c7f063a56b52e",
+  "packages/learning/src/content.ts": "10fb1edc70ad7001593305fe53448b4234427ead618ddfe9fa086589c3a548b7",
   "packages/learning/src/core/ambiguity.ts": "8557f0a9c073a2d6dc4dadb38a9de8ca7677c0a1eb0824a9312fd08e88365fa0",
   "packages/learning/src/core/budget.ts": "8d66480a15d8d1937d531dac0646fcbba4a5363bbb4dd92daf92735e2d226531",
   "packages/learning/src/core/expression-errors.ts": "c5d9264ce39ab0f7a498d5cc4804ec707ec89c224163bf1d54d145e8b436978d",
