@@ -43,10 +43,10 @@
    "disputed": 8
   },
   "families": {
-   "count": 1094,
-   "problems": 345823,
+   "count": 1098,
+   "problems": 346350,
    "answerTypes": {
-    "integer": 421,
+    "integer": 425,
     "fraction": 152,
     "set": 27,
     "choice": 171,
@@ -61,8 +61,8 @@
     "roots": 5
    },
    "withPictures": 312,
-   "withEverydayForm": 771,
-   "withAlternatives": 1056
+   "withEverydayForm": 775,
+   "withAlternatives": 1060
   },
   "modules": 341,
   "writtenTasks": 376,
@@ -8162,7 +8162,11 @@
    ],
    "families": [
     "mul",
-    "avtab"
+    "avtab",
+    "amf2510",
+    "amf34",
+    "amf69",
+    "amderive"
    ],
    "writtenTasks": 0,
    "complete": true

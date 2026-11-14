@@ -39663,7 +39663,7 @@
      }
     ]
    },
-   "fingerprint": "d6c2b78b",
+   "fingerprint": "87a35192",
    "validation": {
     "family": "akdivd",
     "deterministic": {
@@ -87654,6 +87654,317 @@
     "family": "adline",
     "deterministic": {
      "checked": 360,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "amf2510",
+   "version": "1.0.0",
+   "title": "Times tables: 2, 5 and 10",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-2-5-10",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     2
+    ],
+    [
+     1,
+     12
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "poolSize": 135,
+   "excluded": [],
+   "difficulty": {
+    "1": 52,
+    "2": 24,
+    "3": 59
+   },
+   "examples": [
+    "gen:amf2510:0,5,2",
+    "gen:amf2510:1,5,2:mc",
+    "gen:amf2510:1,6,0",
+    "gen:amf2510:2,6,0:mc",
+    "gen:amf2510:0,12,3",
+    "gen:amf2510:1,12,3:mc"
+   ],
+   "explanations": [
+    "fact-slip (recall): A multiplication fact (10 × 12) is not yet reliable.",
+    "add-for-multiply (conceptual): 10 × 12 was added instead of multiplied.",
+    "multiplied-shown (conceptual): The two numbers shown were multiplied. The question asks which number times 10 makes 120: count in 10s up to 120.",
+    "subtracted (conceptual): 10 was taken away from 120. The missing number is how many 10s make 120, not the difference.",
+    "count-slip (recall): Counting in 10s slipped by one step. Check: 10 × 12 = 120."
+   ],
+   "teach": {
+    "idea": "× 2 is doubling; × 5 is half of × 10 (the answer ends in 0 or 5); × 10 puts a 0 on the end. The order does not matter: 3 × 7 and 7 × 3 are the same fact.",
+    "method": "Say the fact if you know it. If not, start from one you do know (× 2, × 5 or × 10) and add or take away a lot. For a missing number, count in steps of the table number until you reach the answer, and count the steps.",
+    "alternatives": [
+     {
+      "id": "rows_of_dots",
+      "title": "Rows of dots",
+      "kind": "conceptual",
+      "text": [
+       "A fact is a picture: 4 × 6 is 4 rows of 6 dots.",
+       "Turn the picture on its side and it shows 6 rows of 4: the same number of dots, so 4 × 6 = 6 × 4."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "cfc94a6d",
+   "validation": {
+    "family": "amf2510",
+    "deterministic": {
+     "checked": 135,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "amf34",
+   "version": "1.0.0",
+   "title": "Times tables: 3 and 4",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-3-4",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     1
+    ],
+    [
+     1,
+     12
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "poolSize": 92,
+   "excluded": [],
+   "difficulty": {
+    "1": 36,
+    "2": 16,
+    "3": 40
+   },
+   "examples": [
+    "gen:amf34:0,4,1",
+    "gen:amf34:1,2,1:mc",
+    "gen:amf34:0,8,1",
+    "gen:amf34:1,7,0:mc",
+    "gen:amf34:0,11,1",
+    "gen:amf34:1,9,2:mc"
+   ],
+   "explanations": [
+    "fact-slip (recall): A multiplication fact (4 × 12) is not yet reliable.",
+    "add-for-multiply (conceptual): 4 × 12 was added instead of multiplied.",
+    "multiplied-shown (conceptual): The two numbers shown were multiplied. The question asks which number times 4 makes 48: count in 4s up to 48.",
+    "subtracted (conceptual): 4 was taken away from 48. The missing number is how many 4s make 48, not the difference.",
+    "count-slip (recall): Counting in 4s slipped by one step. Check: 4 × 12 = 48."
+   ],
+   "teach": {
+    "idea": "× 3 is double, then one more lot; × 4 is double, then double again. The order does not matter: 3 × 7 and 7 × 3 are the same fact.",
+    "method": "Say the fact if you know it. If not, start from one you do know (× 2, × 5 or × 10) and add or take away a lot. For a missing number, count in steps of the table number until you reach the answer, and count the steps.",
+    "alternatives": [
+     {
+      "id": "rows_of_dots",
+      "title": "Rows of dots",
+      "kind": "conceptual",
+      "text": [
+       "A fact is a picture: 4 × 6 is 4 rows of 6 dots.",
+       "Turn the picture on its side and it shows 6 rows of 4: the same number of dots, so 4 × 6 = 6 × 4."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "c446449a",
+   "validation": {
+    "family": "amf34",
+    "deterministic": {
+     "checked": 92,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "amf69",
+   "version": "1.0.0",
+   "title": "Times tables: 6, 7, 8 and 9",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.facts-6-9",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     0,
+     3
+    ],
+    [
+     2,
+     12
+    ],
+    [
+     0,
+     3
+    ]
+   ],
+   "poolSize": 160,
+   "excluded": [],
+   "difficulty": {
+    "1": 64,
+    "2": 16,
+    "3": 80
+   },
+   "examples": [
+    "gen:amf69:1,3,1",
+    "gen:amf69:2,4,2:mc",
+    "gen:amf69:0,9,0",
+    "gen:amf69:1,9,0:mc",
+    "gen:amf69:1,9,2",
+    "gen:amf69:2,11,1:mc"
+   ],
+   "explanations": [
+    "fact-slip (recall): A multiplication fact (9 × 12) is not yet reliable.",
+    "add-for-multiply (conceptual): 9 × 12 was added instead of multiplied.",
+    "multiplied-shown (conceptual): The two numbers shown were multiplied. The question asks which number times 9 makes 108: count in 9s up to 108.",
+    "subtracted (conceptual): 9 was taken away from 108. The missing number is how many 9s make 108, not the difference.",
+    "count-slip (recall): Counting in 9s slipped by one step. Check: 9 × 12 = 108."
+   ],
+   "teach": {
+    "idea": "× 6 is × 5 and one more lot; × 7 is × 5 and two more lots; × 8 is double, double and double again; × 9 is × 10 take away one lot. The order does not matter: 3 × 7 and 7 × 3 are the same fact.",
+    "method": "Say the fact if you know it. If not, start from one you do know (× 2, × 5 or × 10) and add or take away a lot. For a missing number, count in steps of the table number until you reach the answer, and count the steps.",
+    "alternatives": [
+     {
+      "id": "rows_of_dots",
+      "title": "Rows of dots",
+      "kind": "conceptual",
+      "text": [
+       "A fact is a picture: 4 × 6 is 4 rows of 6 dots.",
+       "Turn the picture on its side and it shows 6 rows of 4: the same number of dots, so 4 × 6 = 6 × 4."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "69eadd2f",
+   "validation": {
+    "family": "amf69",
+    "deterministic": {
+     "checked": 160,
+     "failures": []
+    },
+    "property": {
+     "cases": 400,
+     "failures": []
+    },
+    "boundary": {
+     "cases": 12,
+     "failures": []
+    },
+    "excluded": 0,
+    "ok": true
+   }
+  },
+  {
+   "id": "amderive",
+   "version": "1.0.0",
+   "title": "A new fact from one you know",
+   "competency": "MATH.number.multiplication-tables",
+   "skill": "MLY.mult.derive",
+   "type": "integer",
+   "multipleChoice": true,
+   "domain": [
+    [
+     3,
+     9
+    ],
+    [
+     2,
+     9
+    ],
+    [
+     0,
+     2
+    ]
+   ],
+   "poolSize": 140,
+   "excluded": [],
+   "difficulty": {
+    "1": 49,
+    "2": 35,
+    "3": 56
+   },
+   "examples": [
+    "gen:amderive:4,3,0",
+    "gen:amderive:5,5,1:mc",
+    "gen:amderive:5,3,2",
+    "gen:amderive:7,5,2:mc",
+    "gen:amderive:6,8,0",
+    "gen:amderive:8,6,1:mc"
+   ],
+   "explanations": [
+    "one-not-a-lot (conceptual): 1 was taken away. One more lot of 9 means taking away 9, not 1.",
+    "wrong-lot (conceptual): 8 was taken away. The lots are 9s, so it is 9 that is taken away.",
+    "added-two (conceptual): 2 was added to 54. Twice as many lots means doubling: 54 + 54.",
+    "doubled-a (conceptual): 9 was doubled and added on. Doubling 6 doubles the whole answer."
+   ],
+   "teach": {
+    "idea": "A fact you know is a stepping stone: one more lot adds the number once more, one lot less takes it away, and twice as many lots doubles the answer.",
+    "method": "Write the fact you know. If the new fact has one more lot, add the number being multiplied; one less, take it away; twice as many, double the answer.",
+    "alternatives": [
+     {
+      "id": "rows_of_dots",
+      "title": "Add a row",
+      "kind": "conceptual",
+      "text": [
+       "6 × 7 is 7 rows of 6 dots.",
+       "6 × 8 is the same picture with one more row of 6: 42 + 6 = 48."
+      ]
+     }
+    ]
+   },
+   "fingerprint": "2ab9da60",
+   "validation": {
+    "family": "amderive",
+    "deterministic": {
+     "checked": 140,
      "failures": []
     },
     "property": {

@@ -361,6 +361,12 @@ function App() {
   const open = (t: Tile, path: string[]) => {
     if (t.kind === "proposal" || t.kind === "unsupported") return;
     if (t.kind === "skill" && t.children.length === 0 && moduleFor(t.competency!) && t.content?.level === "module") return setView({ name: "module", competency: t.competency!, back: { name: "tile", path: path.slice(0, -1) } });
+    // kid-say@1: a child never lands on a progress page: a skill with smaller steps, or a smaller step, opens the
+    // skill's own lessons and questions
+    if (KID && t.competency && t.content?.level === "module") {
+      const c = moduleFor(t.competency) ? t.competency : graph.evidenceTarget(t.competency);
+      if (moduleFor(c)) return setView({ name: "module", competency: c, back: { name: "tile", path: path.slice(0, -1) } });
+    }
     setView({ name: "tile", path });
   };
 
