@@ -387,7 +387,11 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
   const m = competency ? moduleFor(competency) : null;
   if (DEEP_EVALUATION && (!m || !("id" in s) || !contentEligibility(m, s, { competency: competency!, mode: "supervised-evaluation", usage: "lesson" }).educatorApproved))
     return <p role="note" data-evaluation-stop="review-required">This explanation needs educator review before evaluation. Your place is saved.</p>;
-  const sc = s.screens[i];
+  const raw = s.screens[i];
+  // kid-say@1: a worked example about a generated question reads (and pictures) the way the question will
+  const kq = KID && raw.instance?.startsWith("gen:") ? safeKid(question(raw.instance)) : null;
+  const swap = (t: string) => (t === question(raw.instance!).prompt ? kq!.say : t);
+  const sc = kq ? { ...raw, text: raw.text.map(swap), math: raw.math?.map(swap), widget: (kq.figure as typeof raw.widget) ?? raw.widget } : raw;
   const last = i === s.screens.length - 1;
   return (
     <div className="stack enter" key={`${s.title}-${i}`}>

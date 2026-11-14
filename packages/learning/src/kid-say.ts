@@ -64,6 +64,12 @@ const OWN: Record<string, Own> = {
     const m = grab(/so (\d+\/\d+) of the sheet is coloured\. .*every strip is cut into (\d+) equal parts/, q.prompt);
     return { say: `${m[1]} is coloured. Each strip is now cut into ${m[2]}. What fraction is coloured now?` };
   },
+  afprot: (q) => {
+    // inner-scale reading of each arm (0 and 180 lie along the base line)
+    const arms = [...q.prompt.matchAll(/reads (\d+) on the inner scale|marked 0 on the (inner|outer) scale/g)].map((m) => (m[1] ? Number(m[1]) : m[2] === "inner" ? 0 : 180));
+    if (arms.length !== 2) throw NOT_THIS;
+    return { say: "What is the size of the angle?", ask: { kind: "box", after: "°" }, figure: { type: "protractor", arms } };
+  },
   aedec: (q) => ({ say: "What number do the blocks show?", note: "big square = 1 · rod = 0.1 · small cube = 0.01" }),
   aecmp: (q) => {
     const m = grab(/order \(smallest first\): ([\d,; ]+)\./, q.prompt);

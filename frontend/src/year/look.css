@@ -119,6 +119,8 @@ details.working summary, .hint { color: var(--ink); }
 
 /* pictures stay on white so their own colours read in dark mode */
 .figure svg, .figure img, .sketch-sheet { background: #fff; border-radius: 14px; }
+/* …and keep their light-mode ink: in dark mode the page's --ink is light, which vanished on the white picture */
+.figure svg { --ink: #1f2a37; --accent: #2f6fde; --soft: #dbe6f7; color: #1f2a37; }
 @media (prefers-color-scheme: dark) {
   .figure { color: var(--ink); }
   .figure svg { padding: 6px; }

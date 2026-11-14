@@ -226,6 +226,10 @@ export function describe(v: V): string {
       const said = L.map((t, i) => (t.trim() === "?" ? `${name[i]} is marked ?` : t.trim() ? `${name[i]} is ${t.trim()}` : "")).filter(Boolean);
       return `Two straight lines crossing at a point, making four angles${said.length ? `: ${said.join("; ")}` : ""}`;
     }
+    case "protractor": {
+      const a = arr<number>(v.arms);
+      return `A protractor with two arms. One arm crosses ${a[0]} on the inner scale and ${180 - a[0]} on the outer scale; the other crosses ${a[1]} on the inner scale and ${180 - a[1]} on the outer scale.`;
+    }
     case "angles": {
       const A = anglesOf(v);
       return A ? `${A.length} angles: ${A.map((x) => `${x.label} ${x.deg}°`).join(", ")}` : NA;
@@ -533,6 +537,27 @@ export function Figure({ v }: { v: V }) {
         <line key="b" x1={40} y1={150} x2={x} y2={y} stroke={INK} strokeWidth={3} />,
         <path key="arc" d={`M 70 150 A 30 30 0 ${d > 180 ? 1 : 0} 0 ${ax} ${ay}`} fill="none" stroke={ACC} strokeWidth={2} />,
       ]);
+    }
+    case "protractor": {
+      // kid-say@1: a protractor with both scales (inner from the right, outer from the left), ticks every 5°, numbers every 10°
+      const a = arr<number>(v.arms), cx = 170, cy = 168, R = 140;
+      const at = (deg: number, r: number) => [cx + r * Math.cos((deg * Math.PI) / 180), cy - r * Math.sin((deg * Math.PI) / 180)] as const;
+      const els: JSX.Element[] = [<path key="rim" d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy} Z`} fill="#f4f7fd" stroke={INK} strokeWidth={1.5} />];
+      // the arms first, so the numbers stay readable on top of them
+      for (const d of a) { const [x, y] = at(d, R + 14); els.push(<line key={`arm${d}`} x1={cx} y1={cy} x2={x} y2={y} stroke="#d4380d" strokeWidth={3} strokeLinecap="round" />); }
+      for (let d = 0; d <= 180; d += 5) {
+        const [x1, y1] = at(d, R), [x2, y2] = at(d, d % 10 ? R - 7 : R - 12);
+        els.push(<line key={`k${d}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={INK} strokeWidth={d % 10 ? 0.8 : 1.2} />);
+        if (d % 10 === 0) {
+          const lift = d === 0 || d === 180 ? 7 : 0;
+          const [ix, iy] = at(d, R - 34), [ox, oy] = at(d, R - 21);
+          const halo = { stroke: "#f4f7fd", strokeWidth: 3, paintOrder: "stroke" } as const;
+          els.push(<text key={`i${d}`} x={ix} y={iy + 3 - lift} textAnchor="middle" fontSize={8} fill={ACC} {...halo}>{d}</text>);
+          els.push(<text key={`o${d}`} x={ox} y={oy + 3 - lift} textAnchor="middle" fontSize={8} fill={INK} {...halo}>{180 - d}</text>);
+        }
+      }
+      els.push(<circle key="c" cx={cx} cy={cy} r={3.5} fill={INK} />);
+      return box(340, 180, els);
     }
     case "angles": {
       const A = anglesOf(v);
