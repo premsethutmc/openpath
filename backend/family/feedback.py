@@ -1,7 +1,6 @@
 """feedback@1: testers (family and friends) tick what is wrong with a question or lesson; developers read the list."""
 
 import json
-import logging
 import re
 from datetime import timedelta
 
@@ -16,7 +15,6 @@ from .developer import IsDeveloper
 from .models import Feedback
 from .views import AccountBase
 
-log = logging.getLogger("openpath.feedback")
 KINDS = {"wrong", "lesson", "cluttered", "broken"}
 WHERE = re.compile(r"^[A-Za-z0-9:_.,\-/ ]{1,160}$")
 EMAIL = re.compile(r"[^\s@]+@[^\s@]+")
@@ -43,7 +41,8 @@ class FeedbackView(AccountBase):
         width = data.get("width")
         width = int(width) if isinstance(width, int) and not isinstance(width, bool) and 0 < width < 10000 else None
         f = Feedback.objects.create(user=request.user, where=where, kinds=",".join(sorted(set(kinds))), note=note, app_version=str(data.get("app_version") or "")[:40], width=width)
-        log.info("feedback %s", json.dumps({"where": f.where, "kinds": f.kinds, "note": f.note, "width": f.width}))
+        # also one line in the server log, so it can be read without database access
+        print("feedback " + json.dumps({"where": f.where, "kinds": f.kinds, "note": f.note, "width": f.width}), flush=True)
         return Response({"stored": 1}, status=status.HTTP_201_CREATED)
 
     def get(self, request):
