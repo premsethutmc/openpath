@@ -24,13 +24,13 @@
   "not-implemented": "Not yet implemented"
  },
  "summary": {
-  "requirements": 1274,
+  "requirements": 1331,
   "classes": {
    "validated": 0,
    "awaiting": 1105,
-   "partial": 169,
+   "partial": 220,
    "unsupported": 0,
-   "not-implemented": 0
+   "not-implemented": 6
   },
   "competenciesRequired": 341,
   "competenciesComplete": 334,
@@ -85,7 +85,7 @@
    "insufficient": 0
   },
   "educatorPart": {
-   "requirementsWithoutWrittenTask": 6
+   "requirementsWithoutWrittenTask": 21
   }
  },
  "diversity": [],
@@ -362,6 +362,21 @@
    }
   },
   {
+   "release": "icse-cisce-mathematics-grade-9",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "title": "CISCE Syllabus: Mathematics, Class IX — Grade 9 Mathematics (CISCE / ICSE)",
+   "chapters": 8,
+   "requirements": 30,
+   "classes": {
+    "validated": 0,
+    "awaiting": 0,
+    "partial": 29,
+    "unsupported": 0,
+    "not-implemented": 1
+   }
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-9",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 9,
@@ -389,6 +404,21 @@
     "partial": 7,
     "unsupported": 0,
     "not-implemented": 0
+   }
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "title": "CISCE Syllabus: Mathematics, Class X — Grade 10 Mathematics (CISCE / ICSE)",
+   "chapters": 7,
+   "requirements": 27,
+   "classes": {
+    "validated": 0,
+    "awaiting": 0,
+    "partial": 22,
+    "unsupported": 0,
+    "not-implemented": 5
    }
   },
   {
@@ -24904,6 +24934,471 @@
    "why": "Awaiting educator review."
   },
   {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Numbers and operations",
+   "chapter": "Pure Arithmetic",
+   "section": null,
+   "outcome": "icse-g09-c01-o02",
+   "text": "Simplify surds and rationalise denominators of the form a + b√c.",
+   "competencies": [
+    "MATH.number.radicals"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Numbers and operations",
+   "chapter": "Pure Arithmetic",
+   "section": "Rational and irrational numbers",
+   "outcome": "icse-g09-c01-o01",
+   "text": "Place rational and irrational numbers in the real number system and show them on a number line.",
+   "competencies": [
+    "MATH.number.real-numbers"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Numbers and operations",
+   "chapter": "Pure Arithmetic",
+   "section": "Rational and irrational numbers",
+   "outcome": "icse-g09-c01-o03",
+   "text": "Prove that a number such as √2 or 2 + √3 is irrational.",
+   "competencies": [
+    "MATH.number.irrationality-proofs"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Numbers and operations",
+   "chapter": "Commercial Mathematics",
+   "section": "Compound interest",
+   "outcome": "icse-g09-c02-o01",
+   "text": "Find compound interest for two or three years, year by year and by the formula, including half-yearly compounding.",
+   "competencies": [
+    "MATH.number.compound-interest"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Numbers and operations",
+   "chapter": "Commercial Mathematics",
+   "section": "Compound interest",
+   "outcome": "icse-g09-c02-o02",
+   "text": "Find the difference between compound and simple interest, and the principal, rate or time from the others.",
+   "competencies": [
+    "MATH.number.compound-interest",
+    "MATH.number.profit-loss"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Numbers and operations",
+   "chapter": "Commercial Mathematics",
+   "section": "Compound interest",
+   "outcome": "icse-g09-c02-o03",
+   "text": "Use the compound-interest formula for growth and depreciation.",
+   "competencies": [
+    "MATH.number.compound-interest",
+    "MATH.number.exponential-growth"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": null,
+   "outcome": "icse-g09-c03-o01",
+   "text": "Expand products with the standard identities for (a ± b)², (a ± b)³ and (a + b + c)².",
+   "competencies": [
+    "MATH.algebra.identities"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": null,
+   "outcome": "icse-g09-c03-o02",
+   "text": "Factorise expressions by common factors, grouping, splitting the middle term, difference of squares and sums or differences of cubes.",
+   "competencies": [
+    "MATH.algebra.factorisation"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Simultaneous linear equations",
+   "outcome": "icse-g09-c03-o03",
+   "text": "Solve simultaneous linear equations in two variables by elimination, substitution and cross-multiplication, and use them for word problems.",
+   "competencies": [
+    "MATH.algebra.linear-systems"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Simultaneous linear equations",
+   "outcome": "icse-g09-c03-o04",
+   "text": "Use the laws of indices, including zero, negative and fractional indices, and solve simple exponential equations.",
+   "competencies": [
+    "MATH.number.exponents"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Logarithms",
+   "outcome": "icse-g09-c03-o05",
+   "text": "Use the laws of logarithms to simplify and evaluate expressions and convert between index and log form.",
+   "competencies": [
+    "MATH.algebra.logarithms"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": null,
+   "outcome": "icse-g09-c04-o04",
+   "text": "Prove and use properties of parallelograms, rectangles, rhombuses and squares.",
+   "competencies": [
+    "MATH.geometry.parallelogram-proofs",
+    "MATH.geometry.quadrilaterals"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": null,
+   "outcome": "icse-g09-c04-o05",
+   "text": "Construct quadrilaterals and a regular hexagon from given data.",
+   "competencies": [
+    "MATH.geometry.basic-constructions",
+    "MATH.geometry.construction-quadrilaterals"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Triangles",
+   "outcome": "icse-g09-c04-o01",
+   "text": "Prove and use congruence of triangles (SSS, SAS, AAS, RHS) and the theorems on equal sides and angles.",
+   "competencies": [
+    "MATH.geometry.congruence",
+    "MATH.geometry.triangle-proof"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Triangles",
+   "outcome": "icse-g09-c04-o06",
+   "text": "Prove and use that parallelograms and triangles on the same base and between the same parallels have related areas.",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Mid-point and intercept theorems",
+   "outcome": "icse-g09-c04-o02",
+   "text": "Prove and use the mid-point theorem, its converse and the equal intercept theorem.",
+   "competencies": [
+    "MATH.geometry.midpoint-theorem"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Pythagoras theorem",
+   "outcome": "icse-g09-c04-o03",
+   "text": "Prove and apply Pythagoras' theorem and its converse.",
+   "competencies": [
+    "MATH.geometry.pythagoras"
+   ],
+   "class": "partial",
+   "why": "Apply the Baudhayana-Pythagoras theorem and its converse: missing relations; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Circle",
+   "outcome": "icse-g09-c04-o07",
+   "text": "Prove and use the properties of chords and arcs of a circle.",
+   "competencies": [
+    "MATH.geometry.circle-theorems"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Measurement",
+   "chapter": "Mensuration",
+   "section": null,
+   "outcome": "icse-g09-c06-o01",
+   "text": "Find the area and perimeter of triangles, using Heron's formula where needed, and of quadrilaterals.",
+   "competencies": [
+    "MATH.measurement.heron",
+    "MATH.measurement.parallelogram-rhombus-area"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Measurement",
+   "chapter": "Mensuration",
+   "section": null,
+   "outcome": "icse-g09-c06-o03",
+   "text": "Find the surface area and volume of cubes and cuboids, open or closed.",
+   "competencies": [
+    "MATH.measurement.cube-volume",
+    "MATH.measurement.surface-area-intro"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Measurement",
+   "chapter": "Mensuration",
+   "section": "Plane figures",
+   "outcome": "icse-g09-c06-o02",
+   "text": "Find the circumference and area of a circle and of figures made from circles.",
+   "competencies": [
+    "MATH.measurement.circle-area"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Data handling and statistics",
+   "chapter": "Statistics",
+   "section": "Data and frequency",
+   "outcome": "icse-g09-c05-o01",
+   "text": "Organise raw data into arrayed and grouped frequency tables using tally marks, with continuous and discrete class intervals.",
+   "competencies": [
+    "MATH.statistics.data-frequency",
+    "MATH.statistics.grouped-data"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Data handling and statistics",
+   "chapter": "Statistics",
+   "section": "Data and frequency",
+   "outcome": "icse-g09-c05-o02",
+   "text": "Draw and read histograms and frequency polygons.",
+   "competencies": [
+    "MATH.statistics.histograms"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Data handling and statistics",
+   "chapter": "Statistics",
+   "section": "Mean and median",
+   "outcome": "icse-g09-c05-o03",
+   "text": "Find the mean and median of ungrouped data.",
+   "competencies": [
+    "MATH.statistics.averages-intro",
+    "MATH.statistics.median-mode"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Coordinate geometry",
+   "chapter": "Coordinate Geometry",
+   "section": null,
+   "outcome": "icse-g09-c08-o02",
+   "text": "Draw graphs of linear equations and solve two simultaneous equations graphically.",
+   "competencies": [
+    "MATH.algebra.linear-systems",
+    "MATH.algebra.linear-two-variables"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Coordinate geometry",
+   "chapter": "Coordinate Geometry",
+   "section": "Cartesian system",
+   "outcome": "icse-g09-c08-o01",
+   "text": "Plot points in the Cartesian plane and read their coordinates.",
+   "competencies": [
+    "MATH.coordinate.cartesian"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Coordinate geometry",
+   "chapter": "Coordinate Geometry",
+   "section": "Distance formula",
+   "outcome": "icse-g09-c08-o03",
+   "text": "Use the distance formula to find lengths and test properties of figures.",
+   "competencies": [
+    "MATH.coordinate.distance",
+    "MATH.coordinate.distance-intro"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Trigonometry",
+   "chapter": "Trigonometry",
+   "section": "Trigonometric ratios",
+   "outcome": "icse-g09-c07-o01",
+   "text": "Define the six trigonometric ratios in a right triangle and find them from given sides.",
+   "competencies": [
+    "MATH.trigonometry.ratios"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Trigonometry",
+   "chapter": "Trigonometry",
+   "section": "Trigonometric ratios",
+   "outcome": "icse-g09-c07-o02",
+   "text": "Use the ratios of 0°, 30°, 45°, 60° and 90° to evaluate expressions and solve simple right-triangle problems.",
+   "competencies": [
+    "MATH.trigonometry.ratios"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-9@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 9,
+   "domain": "Trigonometry",
+   "chapter": "Trigonometry",
+   "section": "Complementary angles",
+   "outcome": "icse-g09-c07-o03",
+   "text": "Use complementary-angle relations such as sin(90° − A) = cos A.",
+   "competencies": [
+    "MATH.trigonometry.identities",
+    "MATH.trigonometry.ratios"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
    "release": "tn-samacheer-mathematics-grade-9@1.1.0",
    "board": "Tamil Nadu State Board (Samacheer Kalvi)",
    "grade": 9,
@@ -26550,6 +27045,412 @@
    ],
    "class": "awaiting",
    "why": "Awaiting educator review."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Numbers and operations",
+   "chapter": "Commercial Mathematics",
+   "section": null,
+   "outcome": "icse-g10-c01-o01",
+   "text": "Compute GST on a bill, including CGST and SGST, with list price, discount and profit or loss.",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Numbers and operations",
+   "chapter": "Commercial Mathematics",
+   "section": null,
+   "outcome": "icse-g10-c01-o03",
+   "text": "Find the interest and maturity value of a recurring deposit account.",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Numbers and operations",
+   "chapter": "Commercial Mathematics",
+   "section": "Goods and Services Tax",
+   "outcome": "icse-g10-c01-o02",
+   "text": "Solve inverse GST problems: find the price before tax or the rate from the amount paid.",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Numbers and operations",
+   "chapter": "Commercial Mathematics",
+   "section": "Shares and Dividends",
+   "outcome": "icse-g10-c01-o04",
+   "text": "Use face value, market value, premium, dividend rate, income and return on investment for shares (no brokerage).",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": null,
+   "outcome": "icse-g10-c02-o05",
+   "text": "Factorise polynomials up to degree 3 using the remainder and factor theorems.",
+   "competencies": [
+    "MATH.algebra.factor-theorem"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": null,
+   "outcome": "icse-g10-c02-o08",
+   "text": "Reflect points in the axes, the origin and lines x = a or y = a, and find invariant points.",
+   "competencies": [
+    "MATH.geometry.transformations"
+   ],
+   "class": "partial",
+   "why": "Perform and describe reflections, translations and rotations of figures: missing relations; the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": null,
+   "outcome": "icse-g10-c02-o09",
+   "text": "Use the section and mid-point formulas (internal division) and find the centroid of a triangle.",
+   "competencies": [
+    "MATH.coordinate.distance"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Linear inequations",
+   "outcome": "icse-g10-c02-o01",
+   "text": "Solve linear inequations in one unknown over N, W, Z or R and show the solution set on a number line.",
+   "competencies": [
+    "MATH.algebra.inequalities"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Quadratic equations",
+   "outcome": "icse-g10-c02-o02",
+   "text": "Solve quadratic equations by factorisation and by the formula, and judge the nature of roots from the discriminant.",
+   "competencies": [
+    "MATH.algebra.quadratic-discriminant",
+    "MATH.algebra.quadratics"
+   ],
+   "class": "partial",
+   "why": "Solve quadratic equations: missing relations; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Quadratic equations",
+   "outcome": "icse-g10-c02-o03",
+   "text": "Form and solve quadratic equations from word problems.",
+   "competencies": [
+    "MATH.algebra.quadratics"
+   ],
+   "class": "partial",
+   "why": "Solve quadratic equations: missing relations; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Quadratic equations",
+   "outcome": "icse-g10-c02-o10",
+   "text": "Write the equation of a line in slope-intercept and two-point form, and use slopes of parallel and perpendicular lines.",
+   "competencies": [
+    "MATH.coordinate.straight-lines"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Ratio and proportion",
+   "outcome": "icse-g10-c02-o04",
+   "text": "Use continued and mean proportion and the componendo, dividendo, alternendo and invertendo properties.",
+   "competencies": [
+    "MATH.number.proportion",
+    "MATH.number.ratio"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Matrices",
+   "outcome": "icse-g10-c02-o06",
+   "text": "Add, subtract and multiply 2×2 matrices and decide when a product is defined.",
+   "competencies": [
+    "MATH.algebra.matrices"
+   ],
+   "class": "partial",
+   "why": "the mapped skills are taught at another level; not yet judged against the content (outcome-assessment map)",
+   "graphGradeRange": "a mapped competency's grade range in the graph does not include this grade"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Algebra",
+   "chapter": "Algebra",
+   "section": "Arithmetic and geometric progressions",
+   "outcome": "icse-g10-c02-o07",
+   "text": "Find the nth term and the sum of n terms of arithmetic and geometric progressions and apply them.",
+   "competencies": [
+    "MATH.algebra.arithmetic-sequences",
+    "MATH.algebra.geometric-sequences"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": null,
+   "outcome": "icse-g10-c03-o01",
+   "text": "Use similar triangles (SSS, SAS, AA), the basic proportionality theorem and area ratios, including maps and models.",
+   "competencies": [
+    "MATH.geometry.similarity"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": null,
+   "outcome": "icse-g10-c03-o04",
+   "text": "Use properties of tangents and secants, including the tangent–secant relation.",
+   "competencies": [
+    "MATH.geometry.circle-tangents"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": null,
+   "outcome": "icse-g10-c03-o05",
+   "text": "Construct tangents from an external point and the circumcircle and incircle of a triangle or a regular hexagon.",
+   "competencies": [
+    "MATH.geometry.constructions-bisectors",
+    "MATH.geometry.triangle-concurrency"
+   ],
+   "class": "partial",
+   "why": "Locate and construct triangle centres: missing relations; the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Loci",
+   "outcome": "icse-g10-c03-o02",
+   "text": "Describe and construct loci: fixed distance from a point, equidistant from two points or from two lines.",
+   "competencies": [
+    "MATH.coordinate.locus",
+    "MATH.geometry.constructions-bisectors"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Geometry",
+   "chapter": "Geometry",
+   "section": "Circles",
+   "outcome": "icse-g10-c03-o03",
+   "text": "Prove and use angle properties of circles and of cyclic quadrilaterals.",
+   "competencies": [
+    "MATH.geometry.circle-theorems"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Measurement",
+   "chapter": "Mensuration",
+   "section": null,
+   "outcome": "icse-g10-c04-o02",
+   "text": "Solve problems on cost, inner and outer volumes, melting and recasting, and combined solids (no frustum).",
+   "competencies": [
+    "MATH.measurement.combined-solids"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Measurement",
+   "chapter": "Mensuration",
+   "section": "Cylinder, cone and sphere",
+   "outcome": "icse-g10-c04-o01",
+   "text": "Find surface areas and volumes of cylinders, cones and spheres.",
+   "competencies": [
+    "MATH.measurement.cones-spheres",
+    "MATH.measurement.cylinder"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Data handling and statistics",
+   "chapter": "Statistics",
+   "section": null,
+   "outcome": "icse-g10-c06-o01",
+   "text": "Find mean, median and mode of raw, arrayed and grouped data, using direct, short-cut and step-deviation methods for the mean.",
+   "competencies": [
+    "MATH.statistics.grouped-mean"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Data handling and statistics",
+   "chapter": "Statistics",
+   "section": null,
+   "outcome": "icse-g10-c06-o02",
+   "text": "Draw a histogram and find the mode from it.",
+   "competencies": [
+    "MATH.statistics.grouped-mean",
+    "MATH.statistics.histograms"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Data handling and statistics",
+   "chapter": "Statistics",
+   "section": null,
+   "outcome": "icse-g10-c06-o03",
+   "text": "Draw a less-than ogive and read the median, quartiles and interquartile range from it.",
+   "competencies": [],
+   "class": "not-implemented",
+   "why": "No competency is mapped to this outcome."
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Probability",
+   "chapter": "Probability",
+   "section": "Probability of single events",
+   "outcome": "icse-g10-c07-o01",
+   "text": "Find the probability of a single event from a sample space of equally likely outcomes.",
+   "competencies": [
+    "MATH.probability.classical",
+    "MATH.probability.sample-space"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Trigonometry",
+   "chapter": "Trigonometry",
+   "section": "Identities",
+   "outcome": "icse-g10-c05-o01",
+   "text": "Prove simple trigonometric identities for angles from 0° to 90°.",
+   "competencies": [
+    "MATH.trigonometry.identities"
+   ],
+   "class": "partial",
+   "why": "the part an educator marks (proof, construction, sketch or justification) has no written task for this outcome; not yet judged against the content (outcome-assessment map)"
+  },
+  {
+   "release": "icse-cisce-mathematics-grade-10@1.0.0",
+   "board": "CISCE (ICSE)",
+   "grade": 10,
+   "domain": "Trigonometry",
+   "chapter": "Trigonometry",
+   "section": "Heights and distances",
+   "outcome": "icse-g10-c05-o02",
+   "text": "Solve height and distance problems with angles of elevation and depression (up to two right triangles).",
+   "competencies": [
+    "MATH.trigonometry.heights-distances"
+   ],
+   "class": "partial",
+   "why": "not yet judged against the content (outcome-assessment map)"
   },
   {
    "release": "tn-samacheer-mathematics-grade-10@1.1.0",
@@ -31529,7 +32430,7 @@
     10
    ],
    "depth": 0,
-   "demand": 6,
+   "demand": 8,
    "missing": [
     "relations",
     "review"
@@ -31571,7 +32472,7 @@
     8
    ],
    "depth": 1,
-   "demand": 6,
+   "demand": 7,
    "missing": [
     "relations",
     "review"
@@ -31585,7 +32486,7 @@
     10
    ],
    "depth": 1,
-   "demand": 2,
+   "demand": 3,
    "missing": [
     "relations",
     "review"
@@ -31613,7 +32514,7 @@
     10
    ],
    "depth": 2,
-   "demand": 6,
+   "demand": 7,
    "missing": [
     "relations",
     "review"

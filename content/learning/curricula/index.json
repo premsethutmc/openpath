@@ -393,6 +393,15 @@
    "board": "CBSE (NCERT textbooks)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-9",
+   "version": "1.0.0",
+   "grade": 9,
+   "title": "CISCE Syllabus: Mathematics, Class IX — Grade 9 Mathematics (CISCE / ICSE)",
+   "hash": "4488e3fd",
+   "file": "icse-cisce-mathematics-grade-9.v1.0.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "tn-samacheer-mathematics-grade-9",
    "version": "1.0.0",
    "grade": 9,
@@ -436,6 +445,15 @@
    "hash": "50b2cdb6",
    "file": "cbse-ncert-mathematics-grade-10.v1.1.0.json",
    "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-10",
+   "version": "1.0.0",
+   "grade": 10,
+   "title": "CISCE Syllabus: Mathematics, Class X — Grade 10 Mathematics (CISCE / ICSE)",
+   "hash": "db72897f",
+   "file": "icse-cisce-mathematics-grade-10.v1.0.0.json",
+   "board": "CISCE (ICSE)"
   },
   {
    "id": "openpath-sample-mathematics-grade-10",

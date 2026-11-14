@@ -1,0 +1,1034 @@
+{
+ "schema": "syllabus@1",
+ "board": "icse",
+ "boardName": "CISCE (ICSE)",
+ "grade": 9,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "CISCE Syllabus: Mathematics, Class IX",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "edition": "ICSE examination 2027",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "curriculum",
+   "title": "ICSE Class IX Mathematics syllabus 2027 (CISCE), read through a third-party copy",
+   "publisher": "CISCE; copy hosted by AglaSem Docs",
+   "edition": "Examination year 2027",
+   "academicYear": "2026-27",
+   "url": "https://docs.aglasem.com/view/48567c48-8395-4690-9c30-902c5149db25",
+   "accessed": "2026-11-14",
+   "used_for": "unit and sub-topic list (read through a text summary)"
+  }
+ ],
+ "notes": [
+  "UNOFFICIAL SOURCE: cisce.org could not be read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
+  "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
+  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing."
+ ],
+ "gaps": [
+  {
+   "outcome": "icse-g09-c04-o06",
+   "statement": "Prove and use that parallelograms and triangles on the same base and between the same parallels have related areas."
+  }
+ ],
+ "chapters": [
+  {
+   "id": "icse-g09-c01",
+   "number": 1,
+   "term": null,
+   "title": "Pure Arithmetic",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g09-c01-s01",
+     "title": "Rational and irrational numbers"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g09-c01-o01",
+     "statement": "Place rational and irrational numbers in the real number system and show them on a number line.",
+     "concepts": [
+      "rational",
+      "irrational",
+      "number line"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.real-numbers",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.real-numbers"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Pure Arithmetic"
+    },
+    {
+     "id": "icse-g09-c01-o02",
+     "statement": "Simplify surds and rationalise denominators of the form a + b√c.",
+     "concepts": [
+      "surds",
+      "rationalising"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.radicals",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.radicals"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Pure Arithmetic"
+    },
+    {
+     "id": "icse-g09-c01-o03",
+     "statement": "Prove that a number such as √2 or 2 + √3 is irrational.",
+     "concepts": [
+      "proof by contradiction"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "extension",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.number.irrationality-proofs",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.irrationality-proofs"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Pure Arithmetic"
+    }
+   ]
+  },
+  {
+   "id": "icse-g09-c02",
+   "number": 2,
+   "term": null,
+   "title": "Commercial Mathematics",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g09-c02-s01",
+     "title": "Compound interest"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g09-c02-o01",
+     "statement": "Find compound interest for two or three years, year by year and by the formula, including half-yearly compounding.",
+     "concepts": [
+      "compound interest",
+      "amount",
+      "half-yearly"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.compound-interest",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compound-interest"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Commercial Mathematics"
+    },
+    {
+     "id": "icse-g09-c02-o02",
+     "statement": "Find the difference between compound and simple interest, and the principal, rate or time from the others.",
+     "concepts": [
+      "simple interest",
+      "inverse cases"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.compound-interest",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.profit-loss",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compound-interest",
+      "MATH.number.profit-loss"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Commercial Mathematics"
+    },
+    {
+     "id": "icse-g09-c02-o03",
+     "statement": "Use the compound-interest formula for growth and depreciation.",
+     "concepts": [
+      "growth",
+      "depreciation"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.compound-interest",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.exponential-growth",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compound-interest",
+      "MATH.number.exponential-growth"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Commercial Mathematics"
+    }
+   ]
+  },
+  {
+   "id": "icse-g09-c03",
+   "number": 3,
+   "term": null,
+   "title": "Algebra",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g09-c03-s01",
+     "title": "Expansions"
+    },
+    {
+     "id": "icse-g09-c03-s02",
+     "title": "Factorisation"
+    },
+    {
+     "id": "icse-g09-c03-s03",
+     "title": "Simultaneous linear equations"
+    },
+    {
+     "id": "icse-g09-c03-s04",
+     "title": "Indices"
+    },
+    {
+     "id": "icse-g09-c03-s05",
+     "title": "Logarithms"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g09-c03-o01",
+     "statement": "Expand products with the standard identities for (a ± b)², (a ± b)³ and (a + b + c)².",
+     "concepts": [
+      "identities",
+      "expansion"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.identities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.identities"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g09-c03-o02",
+     "statement": "Factorise expressions by common factors, grouping, splitting the middle term, difference of squares and sums or differences of cubes.",
+     "concepts": [
+      "factorisation",
+      "splitting the middle term"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.factorisation",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.factorisation"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g09-c03-o03",
+     "statement": "Solve simultaneous linear equations in two variables by elimination, substitution and cross-multiplication, and use them for word problems.",
+     "concepts": [
+      "elimination",
+      "substitution",
+      "cross-multiplication"
+     ],
+     "questionTypes": [
+      "tuple"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-systems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-systems"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g09-c03-o04",
+     "statement": "Use the laws of indices, including zero, negative and fractional indices, and solve simple exponential equations.",
+     "concepts": [
+      "indices",
+      "fractional index"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.exponents",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.exponents"
+     ],
+     "coverage": "partial",
+     "source": "Unit 3: Algebra"
+    },
+    {
+     "id": "icse-g09-c03-o05",
+     "statement": "Use the laws of logarithms to simplify and evaluate expressions and convert between index and log form.",
+     "concepts": [
+      "logarithm laws"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.logarithms",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.logarithms"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Algebra"
+    }
+   ]
+  },
+  {
+   "id": "icse-g09-c04",
+   "number": 4,
+   "term": null,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g09-c04-s01",
+     "title": "Triangles"
+    },
+    {
+     "id": "icse-g09-c04-s02",
+     "title": "Mid-point and intercept theorems"
+    },
+    {
+     "id": "icse-g09-c04-s03",
+     "title": "Pythagoras theorem"
+    },
+    {
+     "id": "icse-g09-c04-s04",
+     "title": "Rectilinear figures"
+    },
+    {
+     "id": "icse-g09-c04-s05",
+     "title": "Area theorems"
+    },
+    {
+     "id": "icse-g09-c04-s06",
+     "title": "Circle"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g09-c04-o01",
+     "statement": "Prove and use congruence of triangles (SSS, SAS, AAS, RHS) and the theorems on equal sides and angles.",
+     "concepts": [
+      "congruence",
+      "isosceles triangle"
+     ],
+     "questionTypes": [
+      "proof",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.congruence",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.triangle-proof",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.congruence",
+      "MATH.geometry.triangle-proof"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g09-c04-o02",
+     "statement": "Prove and use the mid-point theorem, its converse and the equal intercept theorem.",
+     "concepts": [
+      "mid-point theorem",
+      "intercepts"
+     ],
+     "questionTypes": [
+      "proof",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.midpoint-theorem",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.midpoint-theorem"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g09-c04-o03",
+     "statement": "Prove and apply Pythagoras' theorem and its converse.",
+     "concepts": [
+      "Pythagoras"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.pythagoras",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.pythagoras"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g09-c04-o04",
+     "statement": "Prove and use properties of parallelograms, rectangles, rhombuses and squares.",
+     "concepts": [
+      "parallelogram",
+      "rhombus"
+     ],
+     "questionTypes": [
+      "proof",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.parallelogram-proofs",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.quadrilaterals",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.parallelogram-proofs",
+      "MATH.geometry.quadrilaterals"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g09-c04-o05",
+     "statement": "Construct quadrilaterals and a regular hexagon from given data.",
+     "concepts": [
+      "construction",
+      "regular hexagon"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.construction-quadrilaterals",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.geometry.basic-constructions",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.basic-constructions",
+      "MATH.geometry.construction-quadrilaterals"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    },
+    {
+     "id": "icse-g09-c04-o06",
+     "statement": "Prove and use that parallelograms and triangles on the same base and between the same parallels have related areas.",
+     "concepts": [
+      "area theorems"
+     ],
+     "questionTypes": [
+      "proof",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [],
+     "mapped": [],
+     "coverage": "none",
+     "source": "Unit 4: Geometry",
+     "note": "No OpenPath skill yet."
+    },
+    {
+     "id": "icse-g09-c04-o07",
+     "statement": "Prove and use the properties of chords and arcs of a circle.",
+     "concepts": [
+      "chord",
+      "arc"
+     ],
+     "questionTypes": [
+      "proof",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-theorems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-theorems"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Geometry"
+    }
+   ]
+  },
+  {
+   "id": "icse-g09-c05",
+   "number": 5,
+   "term": null,
+   "title": "Statistics",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g09-c05-s01",
+     "title": "Data and frequency"
+    },
+    {
+     "id": "icse-g09-c05-s02",
+     "title": "Graphs"
+    },
+    {
+     "id": "icse-g09-c05-s03",
+     "title": "Mean and median"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g09-c05-o01",
+     "statement": "Organise raw data into arrayed and grouped frequency tables using tally marks, with continuous and discrete class intervals.",
+     "concepts": [
+      "frequency table",
+      "class interval"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.data-frequency",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.grouped-data",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.data-frequency",
+      "MATH.statistics.grouped-data"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Statistics"
+    },
+    {
+     "id": "icse-g09-c05-o02",
+     "statement": "Draw and read histograms and frequency polygons.",
+     "concepts": [
+      "histogram",
+      "frequency polygon"
+     ],
+     "questionTypes": [
+      "drawing",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.histograms",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.histograms"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Statistics"
+    },
+    {
+     "id": "icse-g09-c05-o03",
+     "statement": "Find the mean and median of ungrouped data.",
+     "concepts": [
+      "mean",
+      "median"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.averages-intro",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.statistics.median-mode",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.averages-intro",
+      "MATH.statistics.median-mode"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Statistics"
+    }
+   ]
+  },
+  {
+   "id": "icse-g09-c06",
+   "number": 6,
+   "term": null,
+   "title": "Mensuration",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g09-c06-s01",
+     "title": "Plane figures"
+    },
+    {
+     "id": "icse-g09-c06-s02",
+     "title": "Solids"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g09-c06-o01",
+     "statement": "Find the area and perimeter of triangles, using Heron's formula where needed, and of quadrilaterals.",
+     "concepts": [
+      "Heron's formula",
+      "area"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.heron",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.parallelogram-rhombus-area",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.heron",
+      "MATH.measurement.parallelogram-rhombus-area"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Mensuration"
+    },
+    {
+     "id": "icse-g09-c06-o02",
+     "statement": "Find the circumference and area of a circle and of figures made from circles.",
+     "concepts": [
+      "circumference",
+      "area of circle"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.circle-area",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.circle-area"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Mensuration"
+    },
+    {
+     "id": "icse-g09-c06-o03",
+     "statement": "Find the surface area and volume of cubes and cuboids, open or closed.",
+     "concepts": [
+      "surface area",
+      "volume"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.surface-area-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.cube-volume",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.cube-volume",
+      "MATH.measurement.surface-area-intro"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Mensuration"
+    }
+   ]
+  },
+  {
+   "id": "icse-g09-c07",
+   "number": 7,
+   "term": null,
+   "title": "Trigonometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g09-c07-s01",
+     "title": "Trigonometric ratios"
+    },
+    {
+     "id": "icse-g09-c07-s02",
+     "title": "Standard angles"
+    },
+    {
+     "id": "icse-g09-c07-s03",
+     "title": "Complementary angles"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g09-c07-o01",
+     "statement": "Define the six trigonometric ratios in a right triangle and find them from given sides.",
+     "concepts": [
+      "sine",
+      "cosine",
+      "tangent",
+      "reciprocal ratios"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.ratios",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.ratios"
+     ],
+     "coverage": "full",
+     "source": "Unit 7: Trigonometry"
+    },
+    {
+     "id": "icse-g09-c07-o02",
+     "statement": "Use the ratios of 0°, 30°, 45°, 60° and 90° to evaluate expressions and solve simple right-triangle problems.",
+     "concepts": [
+      "standard angles"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.ratios",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.ratios"
+     ],
+     "coverage": "full",
+     "source": "Unit 7: Trigonometry"
+    },
+    {
+     "id": "icse-g09-c07-o03",
+     "statement": "Use complementary-angle relations such as sin(90° − A) = cos A.",
+     "concepts": [
+      "complementary angles"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.ratios",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.trigonometry.identities",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.identities",
+      "MATH.trigonometry.ratios"
+     ],
+     "coverage": "partial",
+     "source": "Unit 7: Trigonometry"
+    }
+   ]
+  },
+  {
+   "id": "icse-g09-c08",
+   "number": 8,
+   "term": null,
+   "title": "Coordinate Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g09-c08-s01",
+     "title": "Cartesian system"
+    },
+    {
+     "id": "icse-g09-c08-s02",
+     "title": "Graphical solution"
+    },
+    {
+     "id": "icse-g09-c08-s03",
+     "title": "Distance formula"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g09-c08-o01",
+     "statement": "Plot points in the Cartesian plane and read their coordinates.",
+     "concepts": [
+      "coordinates",
+      "quadrants"
+     ],
+     "questionTypes": [
+      "tuple"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.cartesian",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.cartesian"
+     ],
+     "coverage": "full",
+     "source": "Unit 8: Coordinate Geometry"
+    },
+    {
+     "id": "icse-g09-c08-o02",
+     "statement": "Draw graphs of linear equations and solve two simultaneous equations graphically.",
+     "concepts": [
+      "graph of a line",
+      "graphical solution"
+     ],
+     "questionTypes": [
+      "drawing",
+      "tuple"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.algebra.linear-two-variables",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.linear-systems",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.linear-systems",
+      "MATH.algebra.linear-two-variables"
+     ],
+     "coverage": "full",
+     "source": "Unit 8: Coordinate Geometry"
+    },
+    {
+     "id": "icse-g09-c08-o03",
+     "statement": "Use the distance formula to find lengths and test properties of figures.",
+     "concepts": [
+      "distance formula"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.distance-intro",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance",
+      "MATH.coordinate.distance-intro"
+     ],
+     "coverage": "full",
+     "source": "Unit 8: Coordinate Geometry"
+    }
+   ]
+  }
+ ]
+}

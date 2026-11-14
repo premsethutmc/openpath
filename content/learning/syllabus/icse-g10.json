@@ -1,0 +1,921 @@
+{
+ "schema": "syllabus@1",
+ "board": "icse",
+ "boardName": "CISCE (ICSE)",
+ "grade": 10,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "CISCE Syllabus: Mathematics, Class X",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "edition": "ICSE examination 2026, units cross-checked for 2027",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "curriculum",
+   "title": "ICSE Class X Mathematics syllabus 2026 (CISCE), read through a third-party copy",
+   "publisher": "CISCE; copy hosted by Oswaal",
+   "edition": "Examination year 2026 (2025-26 session); the 2027 units were cross-checked against secondary pages",
+   "academicYear": "2026-27",
+   "url": "https://www.oswaal360.com/pluginfile.php/10939/mod_folder/content/0/Syllabus/ICSE%20Class%2010/2025-26/Math%202026.pdf",
+   "accessed": "2026-11-14",
+   "used_for": "unit and sub-topic list, exclusions (read through a text summary)"
+  },
+  {
+   "kind": "secondary",
+   "title": "ICSE Class 10 Maths syllabus 2026-27 (chapter list)",
+   "publisher": "Shaalaa",
+   "edition": "n/a",
+   "academicYear": "2026-27",
+   "url": "https://shaalaa.com/hin/subjects/cisce-mathematics-syllabus_3232",
+   "accessed": "2026-11-14",
+   "used_for": "cross-check of the unit and chapter order"
+  }
+ ],
+ "notes": [
+  "UNOFFICIAL SOURCE: cisce.org could not be read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
+  "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
+  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing."
+ ],
+ "gaps": [
+  {
+   "outcome": "icse-g10-c01-o01",
+   "statement": "Compute GST on a bill, including CGST and SGST, with list price, discount and profit or loss."
+  },
+  {
+   "outcome": "icse-g10-c01-o02",
+   "statement": "Solve inverse GST problems: find the price before tax or the rate from the amount paid."
+  },
+  {
+   "outcome": "icse-g10-c01-o03",
+   "statement": "Find the interest and maturity value of a recurring deposit account."
+  },
+  {
+   "outcome": "icse-g10-c01-o04",
+   "statement": "Use face value, market value, premium, dividend rate, income and return on investment for shares (no brokerage)."
+  },
+  {
+   "outcome": "icse-g10-c06-o03",
+   "statement": "Draw a less-than ogive and read the median, quartiles and interquartile range from it."
+  }
+ ],
+ "chapters": [
+  {
+   "id": "icse-g10-c01",
+   "number": 1,
+   "term": null,
+   "title": "Commercial Mathematics",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g10-c01-s01",
+     "title": "Goods and Services Tax"
+    },
+    {
+     "id": "icse-g10-c01-s02",
+     "title": "Banking"
+    },
+    {
+     "id": "icse-g10-c01-s03",
+     "title": "Shares and Dividends"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g10-c01-o01",
+     "statement": "Compute GST on a bill, including CGST and SGST, with list price, discount and profit or loss.",
+     "concepts": [
+      "GST",
+      "CGST",
+      "SGST",
+      "discount"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [],
+     "mapped": [],
+     "coverage": "none",
+     "source": "Unit 1: Commercial Mathematics",
+     "note": "No OpenPath skill yet."
+    },
+    {
+     "id": "icse-g10-c01-o02",
+     "statement": "Solve inverse GST problems: find the price before tax or the rate from the amount paid.",
+     "concepts": [
+      "inverse cases"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [],
+     "mapped": [],
+     "coverage": "none",
+     "source": "Unit 1: Commercial Mathematics",
+     "note": "No OpenPath skill yet."
+    },
+    {
+     "id": "icse-g10-c01-o03",
+     "statement": "Find the interest and maturity value of a recurring deposit account.",
+     "concepts": [
+      "recurring deposit",
+      "maturity value"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [],
+     "mapped": [],
+     "coverage": "none",
+     "source": "Unit 1: Commercial Mathematics",
+     "note": "No OpenPath skill yet."
+    },
+    {
+     "id": "icse-g10-c01-o04",
+     "statement": "Use face value, market value, premium, dividend rate, income and return on investment for shares (no brokerage).",
+     "concepts": [
+      "shares",
+      "dividend",
+      "return"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [],
+     "proposed": [],
+     "mapped": [],
+     "coverage": "none",
+     "source": "Unit 1: Commercial Mathematics",
+     "note": "No OpenPath skill yet."
+    }
+   ]
+  },
+  {
+   "id": "icse-g10-c02",
+   "number": 2,
+   "term": null,
+   "title": "Algebra",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g10-c02-s01",
+     "title": "Linear inequations"
+    },
+    {
+     "id": "icse-g10-c02-s02",
+     "title": "Quadratic equations"
+    },
+    {
+     "id": "icse-g10-c02-s03",
+     "title": "Ratio and proportion"
+    },
+    {
+     "id": "icse-g10-c02-s04",
+     "title": "Factorisation"
+    },
+    {
+     "id": "icse-g10-c02-s05",
+     "title": "Matrices"
+    },
+    {
+     "id": "icse-g10-c02-s06",
+     "title": "Arithmetic and geometric progressions"
+    },
+    {
+     "id": "icse-g10-c02-s07",
+     "title": "Coordinate geometry"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g10-c02-o01",
+     "statement": "Solve linear inequations in one unknown over N, W, Z or R and show the solution set on a number line.",
+     "concepts": [
+      "replacement set",
+      "solution set"
+     ],
+     "questionTypes": [
+      "set",
+      "interval"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.inequalities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.inequalities"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra"
+    },
+    {
+     "id": "icse-g10-c02-o02",
+     "statement": "Solve quadratic equations by factorisation and by the formula, and judge the nature of roots from the discriminant.",
+     "concepts": [
+      "discriminant",
+      "quadratic formula"
+     ],
+     "questionTypes": [
+      "roots"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratics",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.quadratic-discriminant",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.quadratic-discriminant",
+      "MATH.algebra.quadratics"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra"
+    },
+    {
+     "id": "icse-g10-c02-o03",
+     "statement": "Form and solve quadratic equations from word problems.",
+     "concepts": [
+      "word problems"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.quadratics",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.quadratics"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra"
+    },
+    {
+     "id": "icse-g10-c02-o04",
+     "statement": "Use continued and mean proportion and the componendo, dividendo, alternendo and invertendo properties.",
+     "concepts": [
+      "mean proportional",
+      "componendo and dividendo"
+     ],
+     "questionTypes": [
+      "numeric",
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.proportion",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.ratio",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.proportion",
+      "MATH.number.ratio"
+     ],
+     "coverage": "partial",
+     "source": "Unit 2: Algebra",
+     "note": "Componendo and dividendo are not taught by an OpenPath skill yet."
+    },
+    {
+     "id": "icse-g10-c02-o05",
+     "statement": "Factorise polynomials up to degree 3 using the remainder and factor theorems.",
+     "concepts": [
+      "remainder theorem",
+      "factor theorem"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.factor-theorem",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.factor-theorem"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra"
+    },
+    {
+     "id": "icse-g10-c02-o06",
+     "statement": "Add, subtract and multiply 2×2 matrices and decide when a product is defined.",
+     "concepts": [
+      "order",
+      "identity matrix",
+      "compatibility"
+     ],
+     "questionTypes": [
+      "matrix"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.matrices",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.matrices"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra"
+    },
+    {
+     "id": "icse-g10-c02-o07",
+     "statement": "Find the nth term and the sum of n terms of arithmetic and geometric progressions and apply them.",
+     "concepts": [
+      "AP",
+      "GP"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.arithmetic-sequences",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.geometric-sequences",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.arithmetic-sequences",
+      "MATH.algebra.geometric-sequences"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra"
+    },
+    {
+     "id": "icse-g10-c02-o08",
+     "statement": "Reflect points in the axes, the origin and lines x = a or y = a, and find invariant points.",
+     "concepts": [
+      "reflection",
+      "invariant points"
+     ],
+     "questionTypes": [
+      "tuple"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.transformations",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.transformations"
+     ],
+     "coverage": "partial",
+     "source": "Unit 2: Algebra",
+     "note": "Reflection in x = a and invariant points go beyond the current skill."
+    },
+    {
+     "id": "icse-g10-c02-o09",
+     "statement": "Use the section and mid-point formulas (internal division) and find the centroid of a triangle.",
+     "concepts": [
+      "section formula",
+      "centroid"
+     ],
+     "questionTypes": [
+      "tuple"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.distance",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.distance"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra"
+    },
+    {
+     "id": "icse-g10-c02-o10",
+     "statement": "Write the equation of a line in slope-intercept and two-point form, and use slopes of parallel and perpendicular lines.",
+     "concepts": [
+      "slope",
+      "intercept"
+     ],
+     "questionTypes": [
+      "expression"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.coordinate.straight-lines",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.straight-lines"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Algebra"
+    }
+   ]
+  },
+  {
+   "id": "icse-g10-c03",
+   "number": 3,
+   "term": null,
+   "title": "Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g10-c03-s01",
+     "title": "Similarity"
+    },
+    {
+     "id": "icse-g10-c03-s02",
+     "title": "Loci"
+    },
+    {
+     "id": "icse-g10-c03-s03",
+     "title": "Circles"
+    },
+    {
+     "id": "icse-g10-c03-s04",
+     "title": "Constructions"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g10-c03-o01",
+     "statement": "Use similar triangles (SSS, SAS, AA), the basic proportionality theorem and area ratios, including maps and models.",
+     "concepts": [
+      "similarity",
+      "scale factor",
+      "maps and models"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.similarity",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.similarity"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Geometry"
+    },
+    {
+     "id": "icse-g10-c03-o02",
+     "statement": "Describe and construct loci: fixed distance from a point, equidistant from two points or from two lines.",
+     "concepts": [
+      "locus",
+      "perpendicular bisector",
+      "angle bisector"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.constructions-bisectors",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.coordinate.locus",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.coordinate.locus",
+      "MATH.geometry.constructions-bisectors"
+     ],
+     "coverage": "partial",
+     "source": "Unit 3: Geometry",
+     "note": "Geometric loci as a topic of their own have no OpenPath skill yet."
+    },
+    {
+     "id": "icse-g10-c03-o03",
+     "statement": "Prove and use angle properties of circles and of cyclic quadrilaterals.",
+     "concepts": [
+      "angle in a semicircle",
+      "cyclic quadrilateral"
+     ],
+     "questionTypes": [
+      "proof",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-theorems",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-theorems"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Geometry"
+    },
+    {
+     "id": "icse-g10-c03-o04",
+     "statement": "Use properties of tangents and secants, including the tangent–secant relation.",
+     "concepts": [
+      "tangent",
+      "secant"
+     ],
+     "questionTypes": [
+      "numeric",
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.circle-tangents",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.circle-tangents"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Geometry"
+    },
+    {
+     "id": "icse-g10-c03-o05",
+     "statement": "Construct tangents from an external point and the circumcircle and incircle of a triangle or a regular hexagon.",
+     "concepts": [
+      "tangent construction",
+      "incircle",
+      "circumcircle"
+     ],
+     "questionTypes": [
+      "construction"
+     ],
+     "difficulty": "core",
+     "assessment": "human",
+     "competencies": [
+      {
+       "id": "MATH.geometry.triangle-concurrency",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.constructions-bisectors",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.constructions-bisectors",
+      "MATH.geometry.triangle-concurrency"
+     ],
+     "coverage": "partial",
+     "source": "Unit 3: Geometry"
+    }
+   ]
+  },
+  {
+   "id": "icse-g10-c04",
+   "number": 4,
+   "term": null,
+   "title": "Mensuration",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g10-c04-s01",
+     "title": "Cylinder, cone and sphere"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g10-c04-o01",
+     "statement": "Find surface areas and volumes of cylinders, cones and spheres.",
+     "concepts": [
+      "curved surface area",
+      "volume"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.cylinder",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.cones-spheres",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.cones-spheres",
+      "MATH.measurement.cylinder"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Mensuration"
+    },
+    {
+     "id": "icse-g10-c04-o02",
+     "statement": "Solve problems on cost, inner and outer volumes, melting and recasting, and combined solids (no frustum).",
+     "concepts": [
+      "recasting",
+      "combined solids"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.combined-solids",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.combined-solids"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Mensuration"
+    }
+   ]
+  },
+  {
+   "id": "icse-g10-c05",
+   "number": 5,
+   "term": null,
+   "title": "Trigonometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g10-c05-s01",
+     "title": "Identities"
+    },
+    {
+     "id": "icse-g10-c05-s02",
+     "title": "Heights and distances"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g10-c05-o01",
+     "statement": "Prove simple trigonometric identities for angles from 0° to 90°.",
+     "concepts": [
+      "identities"
+     ],
+     "questionTypes": [
+      "proof"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.identities",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.identities"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Trigonometry"
+    },
+    {
+     "id": "icse-g10-c05-o02",
+     "statement": "Solve height and distance problems with angles of elevation and depression (up to two right triangles).",
+     "concepts": [
+      "elevation",
+      "depression"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.trigonometry.heights-distances",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.trigonometry.heights-distances"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Trigonometry"
+    }
+   ]
+  },
+  {
+   "id": "icse-g10-c06",
+   "number": 6,
+   "term": null,
+   "title": "Statistics",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g10-c06-s01",
+     "title": "Measures of central tendency"
+    },
+    {
+     "id": "icse-g10-c06-s02",
+     "title": "Graphs"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g10-c06-o01",
+     "statement": "Find mean, median and mode of raw, arrayed and grouped data, using direct, short-cut and step-deviation methods for the mean.",
+     "concepts": [
+      "step-deviation",
+      "grouped data"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.grouped-mean",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.grouped-mean"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Statistics"
+    },
+    {
+     "id": "icse-g10-c06-o02",
+     "statement": "Draw a histogram and find the mode from it.",
+     "concepts": [
+      "histogram",
+      "mode"
+     ],
+     "questionTypes": [
+      "drawing",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.statistics.histograms",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.grouped-mean",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.grouped-mean",
+      "MATH.statistics.histograms"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Statistics"
+    },
+    {
+     "id": "icse-g10-c06-o03",
+     "statement": "Draw a less-than ogive and read the median, quartiles and interquartile range from it.",
+     "concepts": [
+      "ogive",
+      "quartiles",
+      "interquartile range"
+     ],
+     "questionTypes": [
+      "drawing",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [],
+     "proposed": [],
+     "mapped": [],
+     "coverage": "none",
+     "source": "Unit 6: Statistics",
+     "note": "No OpenPath skill yet."
+    }
+   ]
+  },
+  {
+   "id": "icse-g10-c07",
+   "number": 7,
+   "term": null,
+   "title": "Probability",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g10-c07-s01",
+     "title": "Probability of single events"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g10-c07-o01",
+     "statement": "Find the probability of a single event from a sample space of equally likely outcomes.",
+     "concepts": [
+      "sample space",
+      "event"
+     ],
+     "questionTypes": [
+      "fraction"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.probability.classical",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.probability.sample-space",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.probability.classical",
+      "MATH.probability.sample-space"
+     ],
+     "coverage": "full",
+     "source": "Unit 7: Probability"
+    }
+   ]
+  }
+ ]
+}
