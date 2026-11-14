@@ -90,7 +90,7 @@ Every competency that has some content:
 | Represent fractions of a whole (`MATH.number.fraction-models`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname draft, adfbuild draft, adshade draft, adfunit draft). |
 | Find a fraction of a collection (`MATH.number.fraction-of-collection`) | 3–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfcol draft, adfmeas draft). |
 | Add and subtract multi-digit numbers with regrouping (`MATH.number.multi-digit-add-subtract`) | 3–5 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adcol3 draft, adcolx draft, admental draft, aeadd3 draft, aecol4 draft). |
-| Use multiplication facts (`MATH.number.multiplication-tables`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families mul draft, avtab draft, amf2510 missing, amf34 missing, amf69 missing, amderive missing). |
+| Use multiplication facts (`MATH.number.multiplication-tables`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families mul draft, avtab draft, amf2510 draft, amf34 draft, amf69 draft, amderive draft). |
 | Represent numbers to thousands (`MATH.number.thousands`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adexp draft, ad1000 draft, adbetw draft, adname draft, adseq draft). |
 | Estimate and check an answer (`MATH.reasoning.estimate-check`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adest draft, adwtcap draft, adestchk draft, adestcost draft). |
 | Read simple bar charts (`MATH.statistics.bar-charts`) | 3–3 | Complete, awaiting review | Complete; awaiting educator review (module draft; families adbar draft, adbartf draft). |
@@ -1490,7 +1490,7 @@ Unsupported question type (1): Justify multi-concept problem solutions.
 - With a complete learning module (validate@1): **341/343 (99%)**; with an incomplete module: 0; with none: 2
 - Modules: 341 (hand-written 24, synthesised from blueprints 317)
 - Problem families (generated questions with independent checks): 1098
-- Review registry (repository copy): draft 1422, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
+- Review registry (repository copy): draft 1426, submitted 13, changes_requested 0, rejected 0, approved 0, released 0 (families and modules)
 
 | Category | Competencies |
 |---|---|
@@ -1532,7 +1532,7 @@ By grade (a competency spanning grades counts in each):
 | Competency | Status | Why |
 |---|---|---|
 | Read and compare large numbers (`MATH.number.large-numbers`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeind draft, aecmp draft, aenumf draft). |
-| Use multiplication facts (`MATH.number.multiplication-tables`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families mul draft, avtab draft, amf2510 missing, amf34 missing, amf69 missing, amderive missing). |
+| Use multiplication facts (`MATH.number.multiplication-tables`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families mul draft, avtab draft, amf2510 draft, amf34 draft, amf69 draft, amderive draft). |
 | Multiply multi-digit numbers (`MATH.number.multi-multiplication`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families mmul draft, avstrat draft, avpp draft, avlat draft, mul draft). |
 | Interpret quotients and remainders (`MATH.number.division-remainders`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families divr draft, avrsub draft, avdfact draft, mul draft). |
 | Represent fractions of a whole (`MATH.number.fraction-models`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname draft, adfbuild draft, adshade draft, adfunit draft). |
@@ -1556,7 +1556,7 @@ By grade (a competency spanning grades counts in each):
 | Competency | Status | Why |
 |---|---|---|
 | Read and compare large numbers (`MATH.number.large-numbers`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families aeind draft, aecmp draft, aenumf draft). |
-| Use multiplication facts (`MATH.number.multiplication-tables`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families mul draft, avtab draft, amf2510 missing, amf34 missing, amf69 missing, amderive missing). |
+| Use multiplication facts (`MATH.number.multiplication-tables`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families mul draft, avtab draft, amf2510 draft, amf34 draft, amf69 draft, amderive draft). |
 | Multiply multi-digit numbers (`MATH.number.multi-multiplication`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families mmul draft, avstrat draft, avpp draft, avlat draft, mul draft). |
 | Divide multi-digit numbers (`MATH.number.long-division`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families ldiv draft, avdiv draft, avmdiv draft). |
 | Represent fractions of a whole (`MATH.number.fraction-models`) | Complete, awaiting review | Complete; awaiting educator review (module draft; families adfname draft, adfbuild draft, adshade draft, adfunit draft). |
