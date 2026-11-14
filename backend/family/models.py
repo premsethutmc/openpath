@@ -365,3 +365,17 @@ class WordProblemUse(models.Model):
 
     class Meta:
         constraints = [models.UniqueConstraint(fields=["user", "day"], name="word_problem_use_user_day")]
+
+
+class Feedback(models.Model):
+    """feedback@1: a tester ticked what is wrong with a question or lesson (wrong answer, unhelpful lesson, cluttered,
+    looks broken), with an optional short note. Where it was (a question id or lesson id) and the screen width are kept
+    so the screen can be found again; no learner record is attached."""
+
+    at = models.DateTimeField(auto_now_add=True, db_index=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, blank=True, on_delete=models.SET_NULL, related_name="+")
+    where = models.CharField(max_length=160)
+    kinds = models.CharField(max_length=80)
+    note = models.CharField(max_length=300, blank=True)
+    app_version = models.CharField(max_length=40, blank=True)
+    width = models.PositiveIntegerField(null=True, blank=True)

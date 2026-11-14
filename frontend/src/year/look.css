@@ -206,3 +206,13 @@ details.working summary, .hint { color: var(--ink); }
 .kid-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .qcard label.kid-unit { display: flex; flex-direction: row; align-items: center; gap: 8px; margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--ink); min-width: 0; }
 .qcard .kid-unit input { flex: 1 1 auto; width: 100%; min-width: 0; font-size: 1.3rem; padding: 14px 16px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); color: var(--ink); }
+
+/* feedback@1: a quiet link under each question and lesson; ticks for testers */
+.feedback-open { display: block; margin: 10px auto 0; font-size: 0.85rem; color: var(--muted); text-decoration: underline; background: none; border: 0; }
+.feedback-box { display: grid; gap: 8px; margin: 12px 0 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+.feedback-box legend { font-weight: 700; padding: 0 4px; }
+.feedback-tick { display: flex; gap: 10px; align-items: center; font-size: 0.95rem; }
+.feedback-tick input { width: 20px; height: 20px; flex: none; }
+.feedback-box textarea { width: 100%; font: inherit; border-radius: 10px; border: 1px solid var(--line); padding: 8px; background: var(--bg, #fff); color: var(--ink); }
+.feedback-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.feedback-done { text-align: center; color: var(--muted); }

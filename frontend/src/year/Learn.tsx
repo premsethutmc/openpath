@@ -43,6 +43,7 @@ import { authoritativeView } from "../../../packages/learning/src/grading/view";
 import { semanticsOf } from "../../../packages/learning/src/grading/parse";
 import { examplesFor, SYNTAX } from "../../../packages/learning/src/grading/syntax";
 import { KID, kidName } from "./kid";
+import { FeedbackBox } from "./Feedback";
 
 export const LETTERS = ["A", "B", "C", "D"];
 
@@ -342,6 +343,7 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
           {ctx.saving ? "Saving…" : "Check"}
         </button>
       </div>
+      {KID && <FeedbackBox key={qid} where={qid} />}
     </div>
   );
 }
@@ -404,6 +406,7 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
         {sc.widget && <Picture w={sc.widget} competency={competency} />}
         {sc.math && <div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>}
         {sc.tip && <p className="hint">{sc.tip}</p>}
+        {KID && <FeedbackBox key={`${s.title}-${i}`} where={`lesson:${competency ?? ""}:${"id" in s ? s.id : "lesson"}:${i + 1}${raw.instance ? `:${raw.instance}` : ""}`.replace(/[^A-Za-z0-9:_.,\-/ ]/g, "")} />}
       </div>
       <div className="actions sticky">
         {i > 0 && <button className="secondary" onClick={() => setI(i - 1)}>Back</button>}
