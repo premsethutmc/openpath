@@ -98,7 +98,7 @@ function along(a: A, e: Env): A {
     case "mul": return mul(...a.xs.map(r));
     case "div": return div(r(a.a), r(a.b));
     case "pow": return { t: "pow", a: r(a.a), b: r(a.b) };
-    case "fn": return a.f === "log" ? fn("ln", r(a.a)) : fn(a.f, r(a.a));
+    case "fn": { const u = r(a.a); return a.f === "log" ? fn("ln", u) : principal(a.f, u, e) ?? fn(a.f, u); }
     case "D": {
       if (a.v !== x && !(e.subs.has(a.v))) throw new Unchecked("a derivative in another variable");
       let out = r(a.of);
@@ -108,6 +108,23 @@ function along(a: A, e: Env): A {
     }
     default: throw new Unchecked("this notation");
   }
+}
+
+/** tan⁻¹(tan w) = w and sin⁻¹(sin w) = w hold where −π/2 < w < π/2; the solution is only claimed on the stretch around the
+ *  initial point, so the rule is used when w is strictly inside that range THERE (with room to spare) */
+function principal(f: string, u: A, e: Env): A | null {
+  const inner = f === "atan" ? "tan" : f === "asin" ? "sin" : null; if (!inner) return null;
+  const cands: A[] = [];
+  JSON.parse(JSON.stringify(u, (_k, v) => (typeof v === "bigint" ? `${v}n` : v)), (_k, v) => { if (v && typeof v === "object" && v.t === "fn" && v.f === inner) cands.push(v.a); return v; });
+  for (const w0 of cands) {
+    const w = JSON.parse(JSON.stringify(w0), (_k, v) => (typeof v === "string" && /^-?\d+n$/.test(v) ? BigInt(v.slice(0, -1)) : v)) as A;
+    try {
+      if (compareExpr(u, fn(inner, w), e.t.ind).status !== "equal") continue;
+      const at = evalNum(w, { [e.t.ind]: X0 });
+      if (Math.abs(at) < Math.PI / 2 - 0.1) return w;
+    } catch { /* not this one */ }
+  }
+  return null;
 }
 
 /** d/dx of a along the solution, where an indefinite integral ∫ f(w) dw contributes f(w)·w′ (it is only fixed up to a constant) */

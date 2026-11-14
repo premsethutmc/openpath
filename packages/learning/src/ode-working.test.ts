@@ -28,8 +28,9 @@ const CASES: Case[] = [
   // x as a function of y
   ["gen:arlindx:0,2,-2,3", ["d/dy(e^(2y) x) = -2e^(2y)", "e^(2y) x = -e^(2y) + C", "C = 4", "x = -1 + 4e^(-2y)"], "verified"],
   // substitution v = y − 1: dy/dx = (y − 1)² + 1 → y = tan x + 1
-  // tan⁻¹(tan x) = x holds only near the start, which the kernel does not prove: that line is left unchecked, never wrong
-  ["gen:aqsubsep:0,-1,1,0", ["v = y - 1", "dv/dx = v^2 + 1", "∫ 1/(v^2 + 1) dv = ∫ dx", "tan⁻¹ v = x + C", "C = 0", "y = tan(x) + 1"], "partial"],
+  // tan⁻¹(tan x) = x near the start (x = 0)
+  ["gen:aqsubsep:0,-1,1,0", ["v = y - 1", "dv/dx = v^2 + 1", "∫ 1/(v^2 + 1) dv = ∫ dx", "tan⁻¹ v = x + C", "C = 0", "y = tan(x) + 1"], "verified"],
+  ["gen:aqsubsep:0,-1,1,0", ["v = y - 1", "tan⁻¹ v = x + C", "C = 1"], "invalid", 2],
   ["gen:aqsubsep:0,-1,1,0", ["v = y - 1", "dv/dx = v^2 + 1", "∫ 1/(v^2 + 1) dv = ∫ dx", "y = tan(x) - 1"], "invalid", 3],
   // words only
   ["gen:aqsep:1,-1,0,2", ["separate the variables and integrate"], "unsupported"],

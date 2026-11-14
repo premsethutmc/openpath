@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "86b9b0559174247a5368dbab64946c0b6d66ca47e6f987ed3e91fb710b690eab",
+ "sha256": "46bcda6bec75c92ff096feeec6b06645809b915811598d192849108b8b3aa6c2",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -230,6 +230,7 @@
   "packages/learning/src/geometry-worker.ts": "9788f4141e99cf2c2f5399756af4fd83919ceaa52980f32112401b4059b56dc0",
   "packages/learning/src/goals.ts": "6577e1691c95734848cf00f712ab70fb46b494b9d0680dc9e965e43cb9c5e124",
   "packages/learning/src/grade.ts": "6bf0d2d82a11f46b6f2d6fdd5f125153198ab1e6a005620caefc7f035e498541",
+  "packages/learning/src/grading/antiderivative.ts": "ea2de01a92c39cce3cde4e86528fb715b7b0b6a2c092059350be34649507f1a1",
   "packages/learning/src/grading/calculus-working.ts": "441118bbb5d6d04d8a97631167350040bf8b446848608532b7deb8a5f8f989be",
   "packages/learning/src/grading/certify.ts": "dd94e1eef56dc0b89ef4c277d512e84a1edf8535534bab8b54ff7750956998a3",
   "packages/learning/src/grading/contract.ts": "5080d65c436e4ed4d14f22cfc54c4da9573c3bfa2c31e2d9d1b981dbcbb7b084",
@@ -237,9 +238,9 @@
   "packages/learning/src/grading/forms.ts": "05f756e5a52571eb91580136d9fbcb236259430da4c662f0583de85664fbc43f",
   "packages/learning/src/grading/function-working.ts": "8782fad223c925b68853aa0c70f6753e0c80dd0a8c80c3cdc24234372823263c",
   "packages/learning/src/grading/geometry-working.ts": "0a5c84ff0d13c36fd3bf493420c66f54bc901d80a0bcef714c9f1383b298a8e8",
-  "packages/learning/src/grading/line-working.ts": "1dcc8df08fa81da3208f3fcf49d850613f1d91fbfa5898661ca820a8da42aa13",
+  "packages/learning/src/grading/line-working.ts": "88c4ba0fd2fb7c8464b9e4645326cdfb59c18d4399734a3b46a4da266db68e78",
   "packages/learning/src/grading/mode.ts": "4af8dddcc2278def42c64b7a3af2035950cf775e84ff4e8b938e863056389719",
-  "packages/learning/src/grading/ode-working.ts": "ab2f14a4b3eea5334f7596928508cf018cecaea1480410814cf630922a5f89b7",
+  "packages/learning/src/grading/ode-working.ts": "3cd0a1d59096a4edc964a2451acdf65db8b579d29ce28e011d9d8c2c5fa381a7",
   "packages/learning/src/grading/parse.ts": "f2c0c5d43395a43ceae056a4f5d86c9297ff1c8738f4f2a82af17f2e5565dfd2",
   "packages/learning/src/grading/program.ts": "21e19e8959d64b209a90a30c90aedaf995f23908776ec431b7b0952dc1f71f1a",
   "packages/learning/src/grading/read.ts": "f2c5b03902e567dd681bd3f1e6fb0d750e47f029ae7cbdedb530298ce2652bce",

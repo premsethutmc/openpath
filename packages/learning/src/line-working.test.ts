@@ -15,6 +15,11 @@ const CASES: Case[] = [
   ["gen:alp:1,6", ["∫ from -2 to 3 of (x + 6 - x²) dx = [x²/2 + 6x - x³/3] from -2 to 3", "= 27/2 + 22/3", "= 121/6"], "invalid", 2],
   ["gen:alp:1,6", ["∫ from -2 to 3 of (x + 6 - x²) dx = [x² + 6x - x³/3] from -2 to 3"], "invalid", 0],
   ["gen:alp:1,6", ["∫ from -2 to 3 of (x + 6 - x²) dx = 20"], "invalid", 0],
+  // a definite integral equal to a number, no bracket shown: worked out exactly
+  ["gen:alp:1,6", ["∫ from -2 to 3 of (x + 6 - x²) dx = 125/6"], "verified"],
+  ["gen:arvolrev:1,2,2", ["V = π ∫ from 0 to 2 of 4x² dx = 32π/3"], "verified"],
+  ["gen:aqarea:0,4,7,1", ["A = 2 ∫ from 0 to 7 of 4√x dx = 112√7/3"], "verified"],
+  ["gen:aqarea:0,4,7,1", ["A = 2 ∫ from 0 to 7 of 4√x dx = 56√7/3"], "invalid", 0],
   // true lines that end elsewhere are not complete
   ["gen:alp:1,6", ["∫ from 0 to 3 of (x + 6 - x²) dx = [x²/2 + 6x - x³/3] from 0 to 3", "= 27/2"], "partial"],
   // a line between letters is an equation, never wrong
@@ -28,6 +33,31 @@ const CASES: Case[] = [
   ["gen:archain:-1,0,-2,3,-1,-3,2", ["dw/dt = ∂w/∂x · dx/dt + ∂w/∂y · dy/dt"], "unsupported"],
   ["gen:archain:-1,0,-2,3,-1,-3,2", ["∂w/∂x = -2x", "∂w/∂y = -4y"], "partial"],
   ["gen:areuler:2,1,0,2,1,-1", ["∂f/∂x = 2x", "∂f/∂y = 4y", "x ∂f/∂x + y ∂f/∂y = 2x² + 4y²", "= 2 + 4", "= 6"], "verified"],
+  // piecewise: f(x) = kx − 3 for x ≤ 2, x² + 3 for x > 2; continuous at 2 when k = 5
+  ["gen:aqcontk:0,2,-3,1,3", ["f(2⁻) = 2k - 3", "f(2⁺) = 7", "2k - 3 = 7", "k = 5"], "verified"],
+  ["gen:aqcontk:0,2,-3,1,3", ["LHL = 2k - 3", "RHL = 4 + 3 = 7", "2k = 10"], "partial"],
+  ["gen:aqcontk:0,2,-3,1,3", ["f(2⁺) = 2k - 3"], "invalid", 0],
+  ["gen:aqcontk:0,2,-3,1,3", ["2k - 3 = 7", "k = 4"], "invalid", 1],
+  // differentiable at 2: x² + ax + b for x < 2, −5x − 3 for x ≥ 2 → a = −9, b = 1
+  ["gen:aqdiffab:2,-5,-3", ["f(2⁻) = 4 + 2a + b", "f(2) = -13", "4 + 2a + b = -13", "f′(2⁻) = 4 + a", "f′(2⁺) = -5", "4 + a = -5", "a = -9", "b = 1"], "partial"],
+  ["gen:aqdiffab:2,-5,-3", ["4 + a = -5", "a = -9", "b = 2"], "invalid", 2],
+  // a left-hand limit
+  ["gen:aultab:1,3,1,3,-5,-3", ["lim (x → 3⁻) f(x) = 3 + 3 = 6"], "verified"],
+  ["gen:aultab:1,3,1,3,-5,-3", ["lim (x → 3⁻) f(x) = -15 - 3 = -18"], "invalid", 0],
+  // a limit of a sum, by the sum formulas and as a definite integral
+  ["gen:aurie:3,3,0,2", ["Σ from r = 1 to n of 3r²/n³ = (3/n³) · n(n + 1)(2n + 1)/6", "lim (n → ∞) (n + 1)(2n + 1)/(2n²) = 1"], "verified"],
+  ["gen:aurie:3,3,0,2", ["Σ from r = 1 to n of 3r²/n³ = (3/n³) · n(n + 1)/2"], "invalid", 0],
+  ["gen:aurie:3,3,0,2", ["lim (n → ∞) of Σ from r = 1 to n of 3r²/n³ = ∫ from 0 to 1 of 3x² dx", "= [x³] from 0 to 1 = 1"], "verified"],
+  // a limit in two variables
+  ["gen:armvlim:0,1,-2", ["lim ((x, y) → (−2, −2)) of (x² − y²)/(x − y) = lim ((x, y) → (−2, −2)) of (x + y)", "= −4"], "verified"],
+  ["gen:armvlim:0,1,-2", ["lim ((x, y) → (−2, −2)) of (x² − y²)/(x − y) = lim ((x, y) → (−2, −2)) of (x − y)"], "invalid", 0],
+  ["gen:armvlim:0,1,-2", ["lim ((x, y) → (−2, −2)) of (x + y) = 0"], "invalid", 0],
+  // approximations, judged against the method the question names
+  ["gen:arlinapp:0,4,2", ["f′(x) = 1/(2√x)", "f(16) = 4", "f′(16) = 1/8", "√18 ≈ f(16) + f′(16)(2) = 4 + 1/4 = 17/4"], "verified"],
+  ["gen:arlinapp:0,4,2", ["√18 ≈ 4 + 2/8 = 4.24"], "invalid", 0],
+  ["gen:arerror:0,8,2,0", ["A = x²", "dA = 2x dx", "x = 8", "dx = 0.02", "dA = 2(8)(0.02) = 0.32"], "verified"],
+  ["gen:arerror:0,8,2,0", ["A = x²", "dA = x dx"], "invalid", 1],
+  ["gen:arlinapp2:1,0,-2,1,-3,2,1", ["df = ∂f/∂x dx + ∂f/∂y dy", "= 2x dx - 4y dy", "= 2(1)(0.2) - 4(-3)(-0.1)", "= -0.8"], "verified"],
   ["gen:auinit:0,6,5,0,60", ["∫ (6x + 5) dx = 3x² + 5x + C", "f(x) = 3x² + 5x + C"], "partial"],
   // a parametric curve x = t², y = t
   ["gen:arparam:1,2,1,1", ["dx/dt = 2t", "dy/dt = 1", "dy/dx = (dy/dt)/(dx/dt) = 1/(2t)"], "verified"],
@@ -36,7 +66,7 @@ const CASES: Case[] = [
   ["gen:arimpl:2,-1,5,0", ["d/dx(2x² - xy + 5y²) = 0", "4x - y - x dy/dx + 10y dy/dx = 0", "dy/dx = (y - 4x)/(10y - x)"], "verified"],
   ["gen:arimpl:2,-1,5,0", ["4x - y - x dy/dx + 10y dy/dx = 0", "dy/dx = (4x - y)/(10y - x)"], "invalid", 1],
   ["gen:arimpl:2,-1,5,0", ["4x + y - x dy/dx + 10y dy/dx = 0"], "invalid", 0],
-  ["gen:arwallis:0,6,0", ["∫ from 0 to π/2 of cos⁶x dx = (5/6)(3/4)(1/2)(π/2)", "= 5π/32"], "partial"],
+  ["gen:arwallis:0,6,0", ["∫ from 0 to π/2 of cos⁶x dx = (5/6)(3/4)(1/2)(π/2)", "= 5π/32"], "verified"],
   ["gen:arwallis:0,6,0", ["∫ from 0 to π/2 of cos⁶x dx = (5/6)(3/4)(π/2)"], "invalid", 0],
 ];
 
