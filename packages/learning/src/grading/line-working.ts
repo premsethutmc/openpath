@@ -36,7 +36,7 @@ export interface Piece { f: A; lo: number; hi: number; loIn: boolean; hiIn: bool
 /** a piecewise f: its pieces, the joining point the question asks about, and the values of its parameters (k; a, b) that
  *  the question's condition (continuous / differentiable there) fixes */
 export interface Piecewise { pieces: Piece[]; at: number | null; params: string[]; solution: Record<string, A> | null }
-export interface LineTask { v: string; defs: Map<string, Def>; answer: A | null; point: Record<string, A>; slope?: A; pw?: Piecewise; sums?: Map<string, { r: string; lo: string; hi: string; e: string }>; mv?: Map<string, { vars: string[]; at: string[]; e: string }>; approx?: { target: A; value: A }; given: A[]; limitAt?: [A, A] }
+export interface LineTask { v: string; defs: Map<string, Def>; answer: A | null; point: Record<string, A>; slope?: A; pw?: Piecewise; sums?: Map<string, { r: string; lo: string; hi: string; e: string }>; mv?: Map<string, { vars: string[]; at: string[]; e: string }>; approx?: { target: A; value: A }; given: A[]; limitAt?: [A, A]; integrand?: A }
 const PD = ["PDx", "PDy", "PDz", "PDt"];
 const YP = "Yp"; // y′ on an implicit curve
 
@@ -87,11 +87,15 @@ export function lineTaskOf(qid: string): LineTask | null {
   const lm = p.match(/\(x, y\) → \((-?[\d/]+), (-?[\d/]+)\)/);
   let limitAt: [A, A] | undefined;
   try { if (lm) limitAt = [readIn(lm[1], v, new Set()), readIn(lm[2], v, new Set())]; else if (/\(x, y\) ≠ \(0, 0\)/.test(p)) limitAt = [N(0), N(0)]; } catch { /* */ }
+  // the question's integrand: a line that starts from it ("(5x + 8)/(x + 1)² = 5/(x + 1) + 3/(x + 1)²") claims an identity
+  let integrand: A | undefined;
+  const im = p.match(/∫ (?:from \S+ to \S+ of )?(.+?) d([a-z])\b/);
+  if (im && im[2] === v) try { integrand = readIn(im[1], v, new Set()); } catch { /* */ }
   const pwise = piecewiseOf(p, v);
   const approx = approximationOf(p, v, defs);
   let answer: A | null = null;
   if (q.type !== "choice") try { answer = readIn(String(q.answer), v, new Set()); } catch { answer = null; }
-  return { v, defs, answer, point, slope, pw: pwise ?? undefined, approx: approx ?? undefined, given, limitAt };
+  return { v, defs, answer, point, slope, pw: pwise ?? undefined, approx: approx ?? undefined, given, limitAt, integrand };
 }
 
 /** "the linear approximation of f(x) = √x at x = 16 to estimate √18": the target √18 = f(b) and the method's value
@@ -451,7 +455,9 @@ function pair(L0: A, R0: A, t: LineTask): Verdict {
       return identity(mul(t.slope, a), neg(b)); // a·y′ + b = 0 with y′ = slope
     }
   }
-  return identity(reduce(L0, t), reduce(R0, t), hasOp(L0, t) || hasOp(R0, t), t.point);
+  const Lr = reduce(L0, t), Rr = reduce(R0, t);
+  const fromIntegrand = !!t.integrand && [Lr, Rr].some((x) => { try { return compareExpr(add(x, neg(t.integrand!)), N(0), t.v).status === "equal"; } catch { return false; } });
+  return identity(Lr, Rr, hasOp(L0, t) || hasOp(R0, t) || fromIntegrand, t.point);
 }
 
 export function lineVerdicts(t: LineTask, lines: string[]): { verdicts: Verdict[]; last: A | null } {
@@ -530,7 +536,7 @@ export function lineWorking(qid: string, lines: string[], base: WorkingAssessmen
     methodEvidence: status === "verified" ? "method-verified" : status === "invalid" ? "method-false-step" : "no-method-evidence",
     completeness: status === "verified" ? "complete" : "incomplete",
     lines: lines.map((text, i) => ({ text, status: v[i] === "right" && (first < 0 || i < first) ? "certified-calculus" : i === first ? "invalid" : "unsupported", move: null })),
-    firstInvalid: first < 0 ? null : { index: first, text: lines[first], from: first ? lines[first - 1] : qq.prompt, reason: "The two sides of this line are not equal." },
+    firstInvalid: first < 0 ? null : { index: first, text: lines[first], from: first ? lines[first - 1] : qq.prompt, reason: "The two sides of this line are not equal.", lost: null, gained: null },
     workingAnswer: null,
     agreesWithResponse: null,
     substitution: null,

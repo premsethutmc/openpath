@@ -424,6 +424,13 @@ function nfLn(arg: A, ctx: Ctx, depth: number, absMode = false): RF {
   if (arg.t === "fn" && arg.f === "exp") return nf(arg.a, ctx, depth + 1);
   if (arg.t === "pow" && arg.a.t === "e") return nf(arg.b, ctx, depth + 1);
   if (arg.t === "e") return rfc(ONE);
+  // calculus-notation@1: ln(c·eᵘ) = ln c + u: a product with an exponential factor is split factor by factor — always under |·|
+  // (|ab| = |a||b|), otherwise only when every factor is visibly positive
+  if (arg.t === "mul" && arg.xs.some((x) => (x.t === "fn" && x.f === "exp") || (x.t === "pow" && x.a.t === "e")) && (absMode || arg.xs.every(visiblyPositive))) {
+    let out = rfc(Z);
+    for (const x of arg.xs) out = rfAdd(out, nfLn(absMode ? fn("abs", x) : x, ctx, depth + 1));
+    return out;
+  }
   const r = nf(arg, ctx, depth + 1);
   const parts: { poly: Poly; sign: 1 | -1 }[] = [{ poly: r.n, sign: 1 }, { poly: r.d, sign: -1 }];
   let out = rfc(Z);

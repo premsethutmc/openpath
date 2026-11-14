@@ -182,7 +182,7 @@ export function functionWorking(qid: string, lines: string[], base: WorkingAsses
     methodEvidence: status === "verified" ? "method-verified" : status === "invalid" ? "method-false-step" : "no-method-evidence",
     completeness: status === "verified" ? "complete" : "incomplete",
     lines: lines.map((text, i) => ({ text, status: v[i] === "right" && (first < 0 || i < first) ? "certified-calculus" : i === first ? "invalid" : "unsupported", move: null })),
-    firstInvalid: first < 0 ? null : { index: first, text: lines[first], from: first ? lines[first - 1] : qq.prompt, reason: "This line is not true for the function in the question." },
+    firstInvalid: first < 0 ? null : { index: first, text: lines[first], from: first ? lines[first - 1] : qq.prompt, reason: "This line is not true for the function in the question.", lost: null, gained: null },
     workingAnswer: null,
     agreesWithResponse: null,
     substitution: null,

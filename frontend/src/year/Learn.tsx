@@ -178,7 +178,15 @@ function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v:
 
 /** test-later@1: which activities are a test (answers marked at the end) and which are practice (marked straight away) */
 const isTest = (a: LearningActivity) => a !== "guided" && a !== "practice";
-type Held = { qid: string; response: string; right: boolean; working?: string[] };
+/** test-later@1: an answer held for the end of a test; `marks` are the server's line verdicts on its working (✓ checked,
+ *  ✗ the first line that does not follow, null not checked), `why` the reason for the ✗ */
+type Held = { qid: string; response: string; right: boolean; working?: string[]; marks?: ("ok" | "bad" | null)[]; why?: string };
+function serverMarks(f: { qid: string; decision?: unknown }): Pick<Held, "marks" | "why"> {
+  const d = f.decision as (GradingDecision & { decidedBy?: string; questionId?: string }) | undefined;
+  if (!d || d.decidedBy !== "server" || d.questionId !== f.qid || !d.working || d.working.status === "none" || d.working.status === "unsupported") return {};
+  const j = workingFeedback(d); if (!j) return {};
+  return { marks: j.steps.map((st) => (st.verified ? "ok" : st.badge === "invalid" ? "bad" : null)), ...(d.working.firstInvalid?.reason ? { why: d.working.firstInvalid.reason } : {}) };
+}
 function TestReview({ held, onDone }: { held: Held[]; onDone: () => void }) {
   const right = held.filter((h) => h.right).length;
   return (
@@ -198,7 +206,8 @@ function TestReview({ held, onDone }: { held: Held[]; onDone: () => void }) {
               <p className="review-a">{h.right ? "✓" : "✗"} Your answer: <b>{h.response || "—"}</b>{h.right ? "" : ` · Right answer: ${q.answer}`}</p>
               {!!h.working?.length && (
                 <ol className="review-working" aria-label="Your working">
-                  {h.working.map((l, j) => { const c = checkLine(l); const m = c.why?.match(/^(.*) is (.*), but (.*) is .*$/); return <li key={j}>{l} {c.state === "right" ? <span className="ws-mark ok">✓</span> : c.state === "wrong" ? <span className="ws-mark bad">← {m ? `${m[1]} is ${m[2]}, not ${m[3]}` : "check this step"}</span> : null}</li>; })}
+                  {h.marks ? h.working.map((l, j) => <li key={j}>{l} {h.marks![j] === "ok" ? <span className="ws-mark ok">✓</span> : h.marks![j] === "bad" ? <span className="ws-mark bad">← {h.why ?? "check this step"}</span> : null}</li>)
+                  : h.working.map((l, j) => { const c = checkLine(l); const m = c.why?.match(/^(.*) is (.*), but (.*) is .*$/); return <li key={j}>{l} {c.state === "right" ? <span className="ws-mark ok">✓</span> : c.state === "wrong" ? <span className="ws-mark bad">← {m ? `${m[1]} is ${m[2]}, not ${m[3]}` : "check this step"}</span> : null}</li>; })}
                 </ol>
               )}
               {mix && <p className="kid-slip"><b>That's a common slip.</b>{mix.principle ? ` ${mix.principle}` : ""}</p>}
@@ -633,7 +642,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
         {head}
         {!KID && <p className="why">{shownReason}</p>}
         {KID && held.length > 0 && <p className="kid-saved" role="status">✓ Saved. {held.length} answered — you'll see how you did at the end.</p>}
-        <Ask resumeKey={resumeKey && `${resumeKey}:${ms.question}`} key={ms.question} qid={ms.question} activity={ms.activity ?? activityOf(ms.phase, question(ms.question))} ctx={ctx} context={ms.context} hintAllowed={ms.phase === "guided"} onAnswered={(f) => (KID && curActivity && isTest(curActivity) ? setHeld([...held, { qid: f.qid, response: f.response, right: f.right, ...(f.working?.length ? { working: f.working } : {}) }]) : setFb(f))} />
+        <Ask resumeKey={resumeKey && `${resumeKey}:${ms.question}`} key={ms.question} qid={ms.question} activity={ms.activity ?? activityOf(ms.phase, question(ms.question))} ctx={ctx} context={ms.context} hintAllowed={ms.phase === "guided"} onAnswered={(f) => (KID && curActivity && isTest(curActivity) ? setHeld([...held, { qid: f.qid, response: f.response, right: f.right, ...serverMarks(f), ...(f.working?.length ? { working: f.working } : {}) }]) : setFb(f))} />
         {/* kid-look@1: a child who does not know yet is never left to guess: the lesson is one tap away, before answering */}
         {teachMe ?? (KID && onLearn && (ms.phase === "explore" || ms.phase === "check") && <button className="secondary wide kid-learn" onClick={onLearn}>I don't know this yet — teach me 📖</button>)}
       </div>

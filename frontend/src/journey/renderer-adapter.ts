@@ -59,16 +59,21 @@ export function workingFeedback(d: GradingDecision | null | undefined): { messag
   else parts.push("No final answer was marked.");
   const fi = w.firstInvalid;
   const geometric = w.provenance?.checker === "geometry-reasoner";
+  // calculus checkers judge each line on its own terms (not "follows from the line before" by algebra): their own reasons
+  const calculus = /^(calculus|ode|function|line)-reasoner$/.test(String(w.provenance?.checker ?? ""));
   if (w.status === "none" || w.status === "answer-only") { if (d.verdict === "correct") parts.push("You gave the answer only, so your method was not checked."); }
   else if (w.status === "verified") parts.push(geometric ? (w.agreesWithResponse === false ? "Your geometric reasoning checks out, but its final value differs from your submitted answer." : "Your stated geometric rules and angle calculations check out against the given facts.") : w.agreesWithResponse === false ? "Every line of your working was checked, but the working ends with a different answer from the one you gave." : "Every line of your working was checked: each one follows from the line before.");
+  else if (w.status === "partial" && calculus) parts.push("The lines marked ✓ are checked and right. The others were not checked — that is not the same as wrong.");
   else if (w.status === "partial") parts.push(geometric ? "The stated geometric steps are checked so far. Continue to the angle asked for." : "Your working is right so far: each line follows from the line before. It is not finished: it does not end with the answer yet. Next step: get the unknown on its own.");
+  else if (w.status === "invalid" && fi && calculus) parts.push(`${d.verdict === "correct" ? "But a step in your working is not right. " : ""}Check this line: ${shown(fi.text)}. ${fi.reason}`);
   else if (w.status === "invalid" && fi) {
     const v = w.substitution?.variable ?? "x";
     const why = fi.lost !== null ? `${v} = ${shown(fi.lost)} makes ${shown(fi.from)} true but not ${shown(fi.text)}` : fi.gained !== null ? `${v} = ${shown(fi.gained)} makes ${shown(fi.text)} true but not ${shown(fi.from)}` : "it does not follow from the line before";
     parts.push(geometric ? `Check this line: ${fi.text}. ${fi.reason}` : `${d.verdict === "correct" ? "But a step in your working is not right. " : ""}The first step that does not follow is ${shown(fi.text)}: ${why}, so this step changed the solution.`);
   } else if (w.status === "unsupported") parts.push("Your working is saved and has not been marked right or wrong. Show an intermediate step and explain the rule you used. If this method is still unsupported, use the lesson or a fresh practice question; no method mastery is claimed.");
   const steps: WorkingStep[] = w.status === "none" ? [] : w.lines.map((l, i) => {
-    const ok = l.status.startsWith("certified") && i < w.replayedLines && w.status !== "answer-only";
+    // calculus checkers judge every line on its own, so a checked line after an unchecked one is still checked (never after a ✗)
+    const ok = l.status.startsWith("certified") && (calculus ? !fi || i < fi.index : i < w.replayedLines) && w.status !== "answer-only";
     const bad = fi?.index === i;
     const desc = bad ? "First step that does not follow" : ok ? "Checked: follows from the line before" : l.status === "answer-only" ? "Your answer" : fi && i > fi.index ? "Not checked: comes after a step that does not follow" : "Not checked";
     const words = /[A-Za-z]{2,}/.test(l.text) || /=>|→/.test(l.text);

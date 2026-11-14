@@ -250,7 +250,14 @@ function App() {
       for (const r of records) next = await repo.append(r);
       // the server's recorded (authoritative) decision for the answer just saved: what the learner is shown (check A)
       const savedId = (records.at(-1) as { id?: string } | undefined)?.id;
-      lastDecision.current = ((next as { id?: string; decision?: ServerDecision }[]).find((e) => e.id === savedId)?.decision) ?? null;
+      const saved = (next as { id?: string; decision?: ServerDecision; shadowDecision?: ServerDecision }[]).find((e) => e.id === savedId);
+      lastDecision.current = saved?.decision ?? null;
+      // working-marks@1: under shadow grading the authoritative (earlier) decision marks the ANSWER; the step-by-step check of the
+      // working is only in the server's unified decision kept beside it. Its working verdict is shown as feedback on the working —
+      // never as the answer's mark, never for credit.
+      const sw = (saved?.shadowDecision as { questionId?: string; working?: unknown } | undefined);
+      if (lastDecision.current && !(lastDecision.current as { working?: unknown }).working && sw?.working && sw.questionId === (lastDecision.current as { questionId?: string }).questionId)
+        lastDecision.current = { ...lastDecision.current, working: sw.working } as ServerDecision;
       setEvents(next);
       setNow(Date.now());
       return true;

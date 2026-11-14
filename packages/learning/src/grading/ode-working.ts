@@ -13,7 +13,7 @@
 import { createHash } from "node:crypto";
 import { question } from "../content.ts";
 import { N, S, add, div, fn, mul, neg, normalize, parseExpression, splitEquals, type A } from "../e6-parse.ts";
-import { compareExpr, d6, evalNum, hasVar } from "../e6-cas.ts";
+import { compareExpr, d6, evalNum, hasVar, visiblyPositive } from "../e6-cas.ts";
 import type { WorkingAssessment } from "./working.ts";
 
 export const ODE_WORKING = "ode-working@1" as const;
@@ -98,7 +98,12 @@ function along(a: A, e: Env): A {
     case "mul": return mul(...a.xs.map(r));
     case "div": return div(r(a.a), r(a.b));
     case "pow": return { t: "pow", a: r(a.a), b: r(a.b) };
-    case "fn": { const u = r(a.a); return a.f === "log" ? fn("ln", u) : principal(a.f, u, e) ?? fn(a.f, u); }
+    case "fn": {
+      const u = r(a.a);
+      // |u| = u (or −u) when u keeps one sign: the solution (4e^(−2x²)) is visibly positive, so ln|y| is ln y there
+      if (a.f === "abs") { try { if (visiblyPositive(u)) return u; if (visiblyPositive(neg(u))) return neg(u); } catch { /* */ } }
+      return a.f === "log" ? fn("ln", u) : principal(a.f, u, e) ?? fn(a.f, u);
+    }
     case "D": {
       if (a.v !== x && !(e.subs.has(a.v))) throw new Unchecked("a derivative in another variable");
       let out = r(a.of);
@@ -256,7 +261,7 @@ export function odeWorking(qid: string, lines: string[], base: WorkingAssessment
     methodEvidence: status === "verified" ? "method-verified" : status === "invalid" ? "method-false-step" : "no-method-evidence",
     completeness: status === "verified" ? "complete" : "incomplete",
     lines: lines.map((text, i) => ({ text, status: (v[i] === "right" || v[i] === "definition") && (first < 0 || i < first) ? "certified-calculus" : i === first ? "invalid" : "unsupported", move: null })),
-    firstInvalid: first < 0 ? null : { index: first, text: lines[first], from: first ? lines[first - 1] : q.prompt, reason: "This line is not true for the solution of the equation: putting the solution back in, the two sides differ." },
+    firstInvalid: first < 0 ? null : { index: first, text: lines[first], from: first ? lines[first - 1] : q.prompt, reason: "This line isn't true for the solution of the equation.", lost: null, gained: null },
     workingAnswer: null,
     agreesWithResponse: null,
     substitution: null,

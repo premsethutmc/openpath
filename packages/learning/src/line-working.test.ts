@@ -70,8 +70,11 @@ const CASES: Case[] = [
   // integration techniques: partial fractions, substitution, standard forms, half-angle, eˣ(f + f′)
   ["gen:aupfr:0,-1,0,5,3", ["∫ (5x + 8)/(x + 1)² dx = 5 log|x + 1| - 3/(x + 1) + C"], "verified"],
   ["gen:aupfr:0,-1,0,5,3", ["(5x + 8)/(x + 1)² = 5/(x + 1) + 3/(x + 1)²", "∫ (5x + 8)/(x + 1)² dx = 5 log|x + 1| - 3/(x + 1) + C"], "verified"],
-  // a wrong split is an equation between letters, so it is left unchecked (never called right)
-  ["gen:aupfr:0,-1,0,5,3", ["(5x + 8)/(x + 1)² = 5/(x + 1) + 2/(x + 1)²"], "unsupported"],
+  // a split that starts from the question's integrand claims an identity: a wrong one is caught
+  ["gen:aupfr:0,-1,0,5,3", ["(5x + 8)/(x + 1)² = 5/(x + 1) + 2/(x + 1)²"], "invalid", 0],
+  ["gen:aupfr:0,-1,0,5,3", ["(5x + 8)/(x + 1)² = 5/(x + 1) + 3/(x + 1)²"], "partial"],
+  // an equation between letters that does not start from the integrand is still never called wrong
+  ["gen:aupfr:0,-1,0,5,3", ["5x + 8 = A(x + 1) + B"], "unsupported"],
   ["gen:subst:0,3,1,1", ["let u = x² + 1", "du = 2x dx", "∫ 2x(x² + 1) dx = ∫ u du", "= u²/2 + C", "= (x² + 1)²/2 + C"], "partial"],
   ["gen:subst:0,3,1,1", ["let u = x² + 1", "du = x dx"], "invalid", 1],
   ["gen:subst:0,3,1,1", ["∫ from 0 to 3 of 2x(x² + 1) dx = 99/2"], "verified"],
