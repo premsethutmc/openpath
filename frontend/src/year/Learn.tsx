@@ -138,6 +138,25 @@ function SyntaxHelp({ q }: { q: { type: string; answer?: string } }) {
     </details>
   );
 }
+/** kid-say@1: a lesson's words for a child: the first sentence of each part, the rest one tap away ("Tell me more"). */
+const KID_TITLES: Record<string, string> = { "The method": "How to do it", "The idea": "The big idea", "A common wrong answer": "Watch out for this" };
+const kidTitle = (t: string) => KID_TITLES[t] ?? t;
+const firstSentence = (t: string) => { const m = t.match(/^.+?[.!?](?=\s+[A-Z(])/); return m && m[0].length < t.length ? [m[0], t.slice(m[0].length).trim()] : [t, ""]; };
+function KidText({ text }: { text: string[] }) {
+  const parts = text.map(firstSentence);
+  const more = parts.map(([, rest]) => rest).filter(Boolean);
+  return (
+    <>
+      {parts.map(([head], k) => <p key={k}>{head}</p>)}
+      {more.length > 0 && (
+        <details className="kid-more">
+          <summary>Tell me more</summary>
+          {more.map((t, k) => <p key={k}>{t}</p>)}
+        </details>
+      )}
+    </>
+  );
+}
 const safeKid = (q: Question) => { try { return kidQuestion(q); } catch { return null; } };
 /** kid-say@1: the answer shaped the way the question suggests (₹ before, a unit after, m and cm boxes, tap to order,
  * tap one); it hands back the same answer string the typed box would. */
@@ -401,8 +420,8 @@ export function Lesson({ s, onDone, saving, resumeKey, doneLabel = "Try it", com
     <div className="stack enter" key={`${s.title}-${i}`}>
       <div className="panel lesson">
         <p className="eyebrow">{s.title}{s.screens.length > 1 ? ` · ${i + 1} of ${s.screens.length}` : ""}</p>
-        <h3>{sc.title}</h3>
-        {sc.text.map((t, k) => <p key={k}>{t}</p>)}
+        <h3>{KID ? kidTitle(sc.title) : sc.title}</h3>
+        {KID ? <KidText text={sc.text} /> : sc.text.map((t, k) => <p key={k}>{t}</p>)}
         {sc.widget && <Picture w={sc.widget} competency={competency} />}
         {sc.math && <div className="formula">{sc.math.map((m, k) => <span key={k}>{m}</span>)}</div>}
         {sc.tip && <p className="hint">{sc.tip}</p>}

@@ -216,3 +216,13 @@ details.working summary, .hint { color: var(--ink); }
 .feedback-box textarea { width: 100%; font: inherit; border-radius: 10px; border: 1px solid var(--line); padding: 8px; background: var(--bg, #fff); color: var(--ink); }
 .feedback-actions { display: flex; gap: 10px; justify-content: flex-end; }
 .feedback-done { text-align: center; color: var(--muted); }
+.kid-more summary { cursor: pointer; color: var(--brand-text, #5b46d6); font-weight: 700; padding: 4px 0; }
+.kid-more p { margin: 6px 0 0; }
+
+/* parent-view@2: four plain questions first */
+.four-q { display: grid; gap: 10px; }
+.q-card { padding: 12px 14px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+.q-card h2 { margin: 0 0 4px; font-size: 1.05rem; }
+.q-card p { margin: 0; }
+.q-todo { background: var(--brand-soft); }
+.parent-detail { margin: 14px 0 0; font-size: 1.05rem; color: var(--muted); }
