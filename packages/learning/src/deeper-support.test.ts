@@ -25,7 +25,7 @@ function run(start: string, rightOnSupports: boolean) {
     if (r.active) {
       const ms = moduleState(r.active, s.records, s.evidence(r.active), now, "s1", null, s.evidence);
       if (ms.question) { answer(ms.question, reply(ms.question), ms.phase === "guided" ? "guided" : "practice"); continue; }
-      if (ms.phase === "chapter") { events.push(make.teach(ctx(), r.active, (ms as { strategy?: { id: string } }).strategy?.id ?? "x") as LearningRecord); continue; }
+      if (ms.phase === "chapter") { events.push(make.teach(ctx(), r.active, (ms as { strategy?: { id: string } }).strategy?.id ?? "x", "test") as LearningRecord); continue; }
       break;
     }
     if (r.phase === "return") { answer(start, "1", "original"); continue; }
