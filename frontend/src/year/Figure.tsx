@@ -226,6 +226,10 @@ export function describe(v: V): string {
       const said = L.map((t, i) => (t.trim() === "?" ? `${name[i]} is marked ?` : t.trim() ? `${name[i]} is ${t.trim()}` : "")).filter(Boolean);
       return `Two straight lines crossing at a point, making four angles${said.length ? `: ${said.join("; ")}` : ""}`;
     }
+    case "protractor": {
+      const a = arr<number>(v.arms);
+      return `A protractor with two arms. One arm crosses ${a[0]} on the inner scale and ${180 - a[0]} on the outer scale; the other crosses ${a[1]} on the inner scale and ${180 - a[1]} on the outer scale.`;
+    }
     case "angles": {
       const A = anglesOf(v);
       return A ? `${A.length} angles: ${A.map((x) => `${x.label} ${x.deg}°`).join(", ")}` : NA;
@@ -395,12 +399,13 @@ export function Figure({ v }: { v: V }) {
     case "linegraph": {
       const G = lineGraph(v);
       if (!G) return unavailable;
-      const H = 160, W = 340, x0 = 44;
+      const H = 160, W = Math.max(220, G.labels.length * 42), x0 = 44; // chart-text@1: no wider than its points need
       const X = (i: number) => x0 + 20 + (i * (W - 40)) / (G.labels.length - 1);
       const Y = (t: number) => 10 + H - (t / G.top) * H;
       const out: JSX.Element[] = [<line key="y" x1={x0} y1={10} x2={x0} y2={10 + H} stroke={INK} />, <line key="x" x1={x0} y1={10 + H} x2={x0 + W} y2={10 + H} stroke={INK} />];
-      for (let t = 0; t <= G.top; t += G.scale) out.push(<line key={`g${t}`} x1={x0 - 4} y1={Y(t)} x2={x0 + W} y2={Y(t)} stroke={SOFT} />, <text key={`gt${t}`} x={x0 - 8} y={Y(t) + 4} fontSize={11} textAnchor="end" fill={INK}>{t}</text>);
-      G.labels.forEach((l, i) => out.push(<line key={`v${i}`} x1={X(i)} y1={10} x2={X(i)} y2={10 + H} stroke={SOFT} />, <text key={`l${i}`} x={X(i)} y={28 + H} fontSize={11} textAnchor="middle" fill={INK}>{l}</text>));
+      const every = Math.max(1, Math.ceil(16 / ((G.scale / G.top) * H)));
+      for (let t = 0, k = 0; t <= G.top; t += G.scale, k++) { out.push(<line key={`g${t}`} x1={x0 - 4} y1={Y(t)} x2={x0 + W} y2={Y(t)} stroke={SOFT} />); if (k % every === 0) out.push(<text key={`gt${t}`} x={x0 - 7} y={Y(t) + 5} fontSize={14} textAnchor="end" fill={INK}>{t}</text>); }
+      G.labels.forEach((l, i) => out.push(<line key={`v${i}`} x1={X(i)} y1={10} x2={X(i)} y2={10 + H} stroke={SOFT} />, <text key={`l${i}`} x={X(i)} y={30 + H} fontSize={G.labels.length > 6 ? 12 : 14} textAnchor="middle" fill={INK}>{l}</text>));
       out.push(<polyline key="line" points={G.values.map((t, i) => `${X(i)},${Y(t)}`).join(" ")} fill="none" stroke={ACC} strokeWidth={2} />);
       G.values.forEach((t, i) => out.push(<circle key={`p${i}`} cx={X(i)} cy={Y(t)} r={4} fill={ACC} />));
       return box(x0 + W + 10, H + 40, out);
@@ -426,17 +431,22 @@ export function Figure({ v }: { v: V }) {
       const top = Math.ceil(max / scale) * scale;
       const H = 160;
       const bw = Math.min(50, 300 / Math.max(1, labels.length));
-      const out: JSX.Element[] = [<line key="y" x1={40} y1={10} x2={40} y2={10 + H} stroke={INK} />, <line key="x" x1={40} y1={10 + H} x2={400} y2={10 + H} stroke={INK} />];
-      for (let t = 0; t <= top; t += scale) {
+      // chart-text@1: the picture is only as wide as its bars, so on a phone it is drawn larger; every line of the scale is drawn,
+      // and its number written where there is room (a child reads the scale from the lines, as the question says)
+      const W = Math.max(260, 50 + labels.length * (bw + 12) + 6);
+      const out: JSX.Element[] = [<line key="y" x1={40} y1={10} x2={40} y2={10 + H} stroke={INK} />, <line key="x" x1={40} y1={10 + H} x2={W} y2={10 + H} stroke={INK} />];
+      const every = Math.max(1, Math.ceil(16 / ((scale / top) * H)));
+      for (let t = 0, k = 0; t <= top; t += scale, k++) {
         const y = 10 + H - (t / top) * H;
-        out.push(<line key={`g${t}`} x1={36} y1={y} x2={400} y2={y} stroke={SOFT} />, <text key={`gt${t}`} x={32} y={y + 4} fontSize={11} textAnchor="end" fill={INK}>{t}</text>);
+        out.push(<line key={`g${t}`} x1={36} y1={y} x2={W} y2={y} stroke={SOFT} />);
+        if (k % every === 0) out.push(<text key={`gt${t}`} x={33} y={y + 5} fontSize={14} textAnchor="end" fill={INK}>{t}</text>);
       }
       labels.forEach((l, i) => {
         const h = (values[i] / top) * H;
         const x = 50 + i * (bw + 12);
-        out.push(<rect key={`b${i}`} x={x} y={10 + H - h} width={bw} height={h} fill={ACC} />, <text key={`bl${i}`} x={x + bw / 2} y={28 + H} fontSize={11} textAnchor="middle" fill={INK}>{l}</text>);
+        out.push(<rect key={`b${i}`} x={x} y={10 + H - h} width={bw} height={h} fill={ACC} />, <text key={`bl${i}`} x={x + bw / 2} y={30 + H} fontSize={labels.length > 5 ? 12 : 14} textAnchor="middle" fill={INK}>{l}</text>);
       });
-      return box(410, H + 40, out);
+      return box(W + 4, H + 40, out);
     }
     case "table": {
       const head = arr<string>(v.head);
@@ -487,12 +497,16 @@ export function Figure({ v }: { v: V }) {
       }
       const n = Math.max(3, num(v.sides, 4));
       const lengths = arr<string | number>(v.lengths);
-      const pts = Array.from({ length: n }, (_, i) => [110 + 80 * Math.cos((2 * Math.PI * i) / n - Math.PI / 2), 100 + 80 * Math.sin((2 * Math.PI * i) / n - Math.PI / 2)]);
-      return box(220, 200, [
+      // a flat bottom side (a four-sided shape is drawn square, not as a diamond); each label sits outside the middle of its side,
+      // along the outward normal, anchored away from the edge so no label is drawn across a side
+      const pts = Array.from({ length: n }, (_, i) => { const t = (2 * Math.PI * i) / n + Math.PI / 2 + Math.PI / n; return [130 + 72 * Math.cos(t), 105 + 72 * Math.sin(t)]; });
+      return box(260, 210, [
         <polygon key="p" points={pts.map((p) => p.join(",")).join(" ")} fill={v.outline ? "none" : SOFT} stroke={v.outline ? ACC : INK} strokeWidth={v.outline ? 4 : 2} />,
         ...lengths.map((l, i) => {
           const [a, b] = [pts[i], pts[(i + 1) % n]];
-          return <text key={`l${i}`} x={(a[0] + b[0]) / 2 + ((a[0] + b[0]) / 2 - 110) * 0.18} y={(a[1] + b[1]) / 2 + ((a[1] + b[1]) / 2 - 100) * 0.18 + 4} fontSize={13} textAnchor="middle" fill={INK}>{String(l)}</text>;
+          const [mx, my] = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2], d = Math.hypot(mx - 130, my - 105) || 1, [nx, ny] = [(mx - 130) / d, (my - 105) / d];
+          const anchor = nx > 0.35 ? "start" : nx < -0.35 ? "end" : "middle";
+          return <text key={`l${i}`} x={mx + nx * 8} y={my + ny * 8 + (ny > 0.35 ? 12 : ny < -0.35 ? -3 : 4)} fontSize={13} textAnchor={anchor} fill={INK}>{String(l)}</text>;
         }),
       ]);
     }
@@ -533,6 +547,27 @@ export function Figure({ v }: { v: V }) {
         <line key="b" x1={40} y1={150} x2={x} y2={y} stroke={INK} strokeWidth={3} />,
         <path key="arc" d={`M 70 150 A 30 30 0 ${d > 180 ? 1 : 0} 0 ${ax} ${ay}`} fill="none" stroke={ACC} strokeWidth={2} />,
       ]);
+    }
+    case "protractor": {
+      // kid-say@1: a protractor with both scales (inner from the right, outer from the left), ticks every 5°, numbers every 10°
+      const a = arr<number>(v.arms), cx = 170, cy = 168, R = 140;
+      const at = (deg: number, r: number) => [cx + r * Math.cos((deg * Math.PI) / 180), cy - r * Math.sin((deg * Math.PI) / 180)] as const;
+      const els: JSX.Element[] = [<path key="rim" d={`M ${cx - R} ${cy} A ${R} ${R} 0 0 1 ${cx + R} ${cy} Z`} fill="#f4f7fd" stroke={INK} strokeWidth={1.5} />];
+      // the arms first, so the numbers stay readable on top of them
+      for (const d of a) { const [x, y] = at(d, R + 14); els.push(<line key={`arm${d}`} x1={cx} y1={cy} x2={x} y2={y} stroke="#d4380d" strokeWidth={3} strokeLinecap="round" />); }
+      for (let d = 0; d <= 180; d += 5) {
+        const [x1, y1] = at(d, R), [x2, y2] = at(d, d % 10 ? R - 7 : R - 12);
+        els.push(<line key={`k${d}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={INK} strokeWidth={d % 10 ? 0.8 : 1.2} />);
+        if (d % 10 === 0) {
+          const lift = d === 0 || d === 180 ? 7 : 0;
+          const [ix, iy] = at(d, R - 34), [ox, oy] = at(d, R - 21);
+          const halo = { stroke: "#f4f7fd", strokeWidth: 3, paintOrder: "stroke" } as const;
+          els.push(<text key={`i${d}`} x={ix} y={iy + 3 - lift} textAnchor="middle" fontSize={8} fill={ACC} {...halo}>{d}</text>);
+          els.push(<text key={`o${d}`} x={ox} y={oy + 3 - lift} textAnchor="middle" fontSize={8} fill={INK} {...halo}>{180 - d}</text>);
+        }
+      }
+      els.push(<circle key="c" cx={cx} cy={cy} r={3.5} fill={INK} />);
+      return box(340, 180, els);
     }
     case "angles": {
       const A = anglesOf(v);
@@ -691,10 +726,11 @@ export function Figure({ v }: { v: V }) {
         const a1 = a0 + (val / total) * 2 * Math.PI;
         const [x0, y0, x1, y1] = [100 + 80 * Math.cos(a0), 100 + 80 * Math.sin(a0), 100 + 80 * Math.cos(a1), 100 + 80 * Math.sin(a1)];
         out.push(<path key={`s${i}`} d={`M 100 100 L ${x0} ${y0} A 80 80 0 ${a1 - a0 > Math.PI ? 1 : 0} 1 ${x1} ${y1} Z`} fill={colours[i % colours.length]} stroke="#fff" />);
-        out.push(<text key={`l${i}`} x={210} y={24 + i * 20} fontSize={12} fill={colours[i % colours.length]}>■ {labels[i]}</text>);
+        // the key goes under the pie, in letters a child can read on a phone
+        out.push(<text key={`l${i}`} x={10} y={208 + i * 24} fontSize={16} fill={INK}><tspan fill={colours[i % colours.length]}>■</tspan> {labels[i]}</text>);
         a0 = a1;
       });
-      return box(330, 200, out);
+      return box(220, 200 + values.length * 24, out);
     }
     case "solid": {
       const name = str(v.name, "cube");
@@ -707,6 +743,16 @@ export function Figure({ v }: { v: V }) {
         sphere: [<circle key="s" cx={100} cy={95} r={70} fill={SOFT} stroke={INK} />, <ellipse key="e" cx={100} cy={95} rx={70} ry={18} fill="none" stroke={INK} strokeDasharray="4 3" />],
         pyramid: [<path key="s" d="M 100 20 L 30 150 L 150 160 Z M 100 20 L 150 160 L 190 130 Z" fill={SOFT} stroke={INK} />],
       };
+      // a box's three sizes go on its own edges (length under the front, height beside it, width along the slant), not stacked in a corner
+      if (dims.length === 3 && (name === "cuboid" || name === "cube")) {
+        const g = name === "cube" ? { bx: 80, by: 176, hx: 26, hy: 110, wx: 162, wy: 36 } : { bx: 90, by: 166, hx: 16, hy: 114, wx: 192, wy: 46 };
+        return box(310, 185, [
+          <g key="body" transform="translate(48,0)">{body[name]}</g>,
+          <text key="dl" x={g.bx + 48} y={g.by} fontSize={13} textAnchor="middle" fill={INK}>{dims[0]}</text>,
+          <text key="dh" x={g.hx + 48 - 6} y={g.hy} fontSize={13} textAnchor="end" fill={INK}>{dims[2]}</text>,
+          <text key="dw" x={g.wx + 48 + 10} y={g.wy + 4} fontSize={13} fill={INK}>{dims[1]}</text>,
+        ]);
+      }
       return box(220, 180, [...(body[name] ?? body.cube), ...dims.map((d, i) => <text key={`d${i}`} x={8} y={175 - i * 16} fontSize={12} fill={INK}>{d}</text>)]);
     }
     case "balance":

@@ -37,6 +37,16 @@ describe("kid-say@1 (Class 5 child wording)", () => {
     expect(compose({ kind: "box" }, ["5,07,699"], "507699", "integer")).toBe("507699");
     expect(compose({ kind: "box", before: "₹" }, ["₹ 26.60"], "26.6", "fraction")).toBe("26.60");
   });
+  test("pictures that give the answer away or repeat the sentence are left out; primes typed with ×", () => {
+    expect(compose({ kind: "product" }, ["11 × 3 × 3"])).toBe("(3, 3, 11)");
+    const k = kidQuestion(question("gen:ajpf:99"));
+    expect(k.ask.kind).toBe("product");
+    expect(isCorrect(question("gen:ajpf:99"), compose(k.ask, ["3 x 3 x 11"]))).toBe(true);
+    expect(kidQuestion(question("gen:aepat:21,9,8")).figure).toBeUndefined();
+    expect(kidQuestion(question("gen:aeshop:11,3,17,2,2")).figure).toBeUndefined();
+    expect(kidQuestion(question("gen:acgrow:2,1,7")).figure).toBeDefined();
+    expect(kidQuestion(question("gen:acpaise:3,10,1")).figure).toBeDefined();
+  });
   test("the answer shape gives back an answer the marking accepts", () => {
     const bad: string[] = [];
     for (const id of ids) {
@@ -45,6 +55,11 @@ describe("kid-say@1 (Class 5 child wording)", () => {
       try { k = kidQuestion(q); } catch { continue; }
       const a = k.ask;
       if (a.kind === "box") continue;
+      if (a.kind === "product") {
+        const typed = q.answer.replace(/^\(|\)$/g, "").split(/,\s*/).reverse().join(" × ");
+        if (!isCorrect(q, compose(a, [typed], q.answer))) bad.push(`${id}: product ${typed} not read back as ${q.answer}`);
+        continue;
+      }
       if (a.kind === "tap") {
         const right = a.items.filter((x) => isCorrect(q, compose(a, [x.value], q.answer)));
         if (right.length !== 1) bad.push(`${id}: ${right.length} right taps`);

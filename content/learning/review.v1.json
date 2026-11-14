@@ -13734,7 +13734,7 @@
    "version": "1.0.0",
    "origin": "family",
    "author": "OpenPath engineering (generator code, written with AI assistance)",
-   "contentHash": "d6c2b78b",
+   "contentHash": "87a35192",
    "state": "draft",
    "history": [
     {
@@ -13759,6 +13759,14 @@
      "role": "engineer",
      "at": "2026-11-09T01:54:16.790Z",
      "contentHash": "d6c2b78b",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-14T04:36:01.134Z",
+     "contentHash": "87a35192",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -16994,6 +17002,90 @@
      "role": "engineer",
      "at": "2026-10-20T09:28:27.196Z",
      "contentHash": "c9b5be98",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "family:amderive",
+   "kind": "family",
+   "competency": "MATH.number.multiplication-tables",
+   "family": "amderive",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "2ab9da60",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-14T04:36:01.134Z",
+     "contentHash": "2ab9da60",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "family:amf2510",
+   "kind": "family",
+   "competency": "MATH.number.multiplication-tables",
+   "family": "amf2510",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "cfc94a6d",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-14T04:36:01.134Z",
+     "contentHash": "cfc94a6d",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "family:amf34",
+   "kind": "family",
+   "competency": "MATH.number.multiplication-tables",
+   "family": "amf34",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "c446449a",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-14T04:36:01.134Z",
+     "contentHash": "c446449a",
+     "note": "added"
+    }
+   ]
+  },
+  {
+   "item": "family:amf69",
+   "kind": "family",
+   "competency": "MATH.number.multiplication-tables",
+   "family": "amf69",
+   "version": "1.0.0",
+   "origin": "family",
+   "author": "OpenPath engineering (generator code, written with AI assistance)",
+   "contentHash": "69eadd2f",
+   "state": "draft",
+   "history": [
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-14T04:36:01.134Z",
+     "contentHash": "69eadd2f",
      "note": "added"
     }
    ]
@@ -45111,7 +45203,7 @@
    "competency": "MATH.number.multiplication-tables",
    "origin": "authored",
    "author": "OpenPath (written with AI assistance; not educator-reviewed)",
-   "contentHash": "cc4e4ab7",
+   "contentHash": "3019ff14",
    "state": "draft",
    "history": [
     {
@@ -45168,6 +45260,14 @@
      "role": "engineer",
      "at": "2026-10-31T05:42:41.846Z",
      "contentHash": "cc4e4ab7",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-14T04:36:01.134Z",
+     "contentHash": "3019ff14",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]
@@ -47962,7 +48062,7 @@
    "competency": "MATH.reasoning.divisibility",
    "origin": "synthesised",
    "author": "OpenPath template (generated from the family's teaching hints; not educator-reviewed)",
-   "contentHash": "a65a4a94",
+   "contentHash": "575a44da",
    "state": "draft",
    "history": [
     {
@@ -48011,6 +48111,14 @@
      "role": "engineer",
      "at": "2026-11-09T04:03:59.035Z",
      "contentHash": "a65a4a94",
+     "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
+    },
+    {
+     "state": "draft",
+     "by": "content pipeline",
+     "role": "engineer",
+     "at": "2026-11-14T04:36:01.134Z",
+     "contentHash": "575a44da",
      "note": "content changed: earlier review no longer applies (a family's generator change needs reapproval)"
     }
    ]

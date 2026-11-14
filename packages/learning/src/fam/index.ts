@@ -30,8 +30,9 @@ import { B23 } from "./b23";
 import { B24 } from "./b24";
 import { B25 } from "./b25";
 import { B26 } from "./b26";
+import { B27 } from "./b27";
 
-export const DOMAIN_FAMILIES: Def[] = [...CORE, ...B01, ...B02, ...B03, ...B04, ...B05, ...B06, ...B07, ...B08, ...B09, ...B10, ...B11, ...B12, ...B13, ...B14, ...B15, ...B16, ...B17, ...B18, ...B19, ...B20, ...B21, ...B22, ...B23, ...B24, ...B25, ...B26];
+export const DOMAIN_FAMILIES: Def[] = [...CORE, ...B01, ...B02, ...B03, ...B04, ...B05, ...B06, ...B07, ...B08, ...B09, ...B10, ...B11, ...B12, ...B13, ...B14, ...B15, ...B16, ...B17, ...B18, ...B19, ...B20, ...B21, ...B22, ...B23, ...B24, ...B25, ...B26, ...B27];
 
 /** range@1: these families answer a probability, so an option above 1 or below 0 is never offered (a learner could rule
  * it out without the mathematics); the explanation behind such a prediction still diagnoses a typed answer. The

@@ -294,6 +294,21 @@ export function createDemoServer(config, { now = () => Date.now(), log = (line) 
       }
       return text(res, 401, "Log in first", { "WWW-Authenticate": 'FormBased realm="OpenPath demo"' });
     }
+    // feedback@1: a signed-in tester's ticks about a question or lesson go to the server log (no database here)
+    if (path === "/api/feedback/" && req.method === "POST") {
+      const chunks = [];
+      let size = 0;
+      for await (const c of req) { size += c.length; if (size > 4096) return text(res, 413, "Too long"); chunks.push(c); }
+      let body;
+      try { body = JSON.parse(Buffer.concat(chunks).toString("utf8")); } catch { return text(res, 400, "Bad request"); }
+      const kinds = Array.isArray(body?.kinds) ? body.kinds.filter((k) => ["wrong", "lesson", "cluttered", "broken"].includes(k)) : [];
+      const where = String(body?.where ?? "");
+      if (!kinds.length || !/^[A-Za-z0-9:_.,\-/ ]{1,160}$/.test(where)) return text(res, 400, "Tick at least one box");
+      const note = String(body?.note ?? "").replace(/[^\s@]+@[^\s@]+/g, "[email]").slice(0, 300);
+      log(`feedback ${JSON.stringify({ where, kinds, note, width: Number.isInteger(body?.width) ? body.width : null })}`);
+      res.writeHead(201, { ...base(), "Content-Type": "application/json", "Cache-Control": "no-store" });
+      return res.end('{"stored":1}');
+    }
     if (req.method !== "GET" && req.method !== "HEAD") return text(res, 405, "Method not allowed", { Allow: "GET" });
 
     // no account server in this demo: the app runs on this device only (as the static build does)

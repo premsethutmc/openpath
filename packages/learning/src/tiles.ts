@@ -28,7 +28,8 @@
  * and is never counted or shown as a module. Each skill also carries its module's educator-review state.
  */
 import { assigned, type Chapter, type CurriculumRelease, type Outcome, type Section, type SourceRef } from "./curriculum";
-import { moduleFor, moduleOrigin, question } from "./content";
+import { moduleFor, moduleOrigin, poolFamilies, question } from "./content";
+import { FAMILIES } from "./families";
 import type { SkillEvidence } from "./evidence";
 import { graph } from "./graph";
 import { activeRegistry, reviewOf } from "./review";
@@ -100,7 +101,8 @@ export function contentOf(id: string): TileContent {
     // a micro-skill is practised inside its parent's module when some of its questions are about it
     const parent = moduleFor(graph.evidenceTarget(id))!;
     const ids = [...parent.diagnostics, ...parent.practice, ...parent.transfer, ...parent.retention, ...parent.strategies.flatMap((s) => [s.guided, s.check])];
-    const own = ids.some((q) => question(q).skill === id);
+    // …or when one of the families the module draws from is about it (pools@1)
+    const own = ids.some((q) => question(q).skill === id) || poolFamilies(parent).some((f) => FAMILIES.get(f)?.skill === id);
     c = own ? { level: "module", label: `Practised in ${graph.get(graph.evidenceTarget(id)).name}`, missing: [], origin: moduleOrigin(graph.evidenceTarget(id)), review: REVIEW_LABEL[reviewOf(graph.evidenceTarget(id)).state] } : { level: "none", label: "No learning content yet", missing: ["no questions on this step"], origin: null, review: "" };
   } else c = { level: "none", label: "No learning content yet", missing: ["no module"], origin: null, review: "" };
   contentCache.set(id, c);

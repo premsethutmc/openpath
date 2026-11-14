@@ -41605,6 +41605,22 @@
       "demonstration"
      ],
      "supersedes": "sha256:115ece03f21b2f49e99cfbdc67fc051f3fed629a4b34750d848f2cb7e08ae816"
+    },
+    {
+     "contentHash": "sha256:e1c81452aa44884e33be6719a7b427ac0ff4667981a79118b8c37ee391079fc4",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-14T04:44:24.199Z",
+      "note": "content changed: the decision on sha256:b1573fea4cd6 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:b1573fea4cd6cde738be53e89e38545a6e41830f0ca4cf8d2dced31a4bcfe491"
     }
    ]
   },
@@ -41657,6 +41673,22 @@
      "scope": [
       "demonstration"
      ]
+    },
+    {
+     "contentHash": "sha256:26e4a82a24a1cedd08f1eacc85b56d0dc7d0d90357c1b59f3e8adf07efd1cf6f",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-14T04:44:24.199Z",
+      "note": "content changed: the decision on sha256:4a42feee8664 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:4a42feee8664fe883d5b817ffdd106cce96a0d84c1bd4d4e0f1c85229a5acd7e"
     }
    ]
   },
@@ -41699,6 +41731,22 @@
       "demonstration"
      ],
      "supersedes": "sha256:ddfffdc905e0d94d7108583048e717524bdfe688be7c70e080e90dd26395be6e"
+    },
+    {
+     "contentHash": "sha256:b86ef135275a7407eb319f07d1b63143a77fe1228f53a69acce6740d9929bae3",
+     "status": "pending_review",
+     "provenance": {
+      "source": "registry",
+      "by": "explanation-review sync",
+      "at": "2026-11-14T04:44:24.198Z",
+      "note": "content changed: the decision on sha256:6dbcddeb4d13 (pending_review) no longer applies; review again"
+     },
+     "reviewerRole": "none",
+     "knownIssues": [],
+     "scope": [
+      "demonstration"
+     ],
+     "supersedes": "sha256:6dbcddeb4d133f30938430ff528d733daf6135e3b3fba01e474c572e9bcdf232"
     }
    ]
   },

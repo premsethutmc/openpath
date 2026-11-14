@@ -1205,7 +1205,8 @@ export const B11: Def[] = [
         D === 11
             ? { id: "alternate", op: "subtract", competency: DIV, inputs: [d.filter((_, i) => i !== pos && (d.length - 1 - i) % 2 === 0).reduce((a, b) => a + b, 0), d.filter((_, i) => i !== pos && (d.length - 1 - i) % 2 === 1).reduce((a, b) => a + b, 0)], value: x }
             : { id: "digit-sum", op: "add", competency: DIV, inputs: known, value: sum(known) };
-      return { steps: [step, { id: "digit", op: "choose", competency: DIV, inputs: [D], value: x }], answer: x };
+      // the choice says why: the digit sum (or the alternate sums) it makes, and that no smaller digit does
+      return { steps: [step, { id: "digit", op: "choose", competency: DIV, inputs: D === 11 ? [D] : [D, sum(known)], value: x }], answer: x };
     },
     // independent: try every digit from 0 in the full number and divide
     validate: ([di, s], v) => {
@@ -1239,7 +1240,7 @@ export const B11: Def[] = [
       return [bug("only-test-for-3", "procedural", DIV, "Only the test for 3 was used. A number divisible by 6 must pass the tests for BOTH 2 and 3: its last digit must also be even.", smallest((y) => (S + y) % 3 === 0)), bug("only-test-for-2", "procedural", DIV, "Only the test for 2 was used. A number divisible by 6 must also have a digit sum that is a multiple of 3.", smallest((y) => (pos === d.length - 1 ? y : d[d.length - 1]) % 2 === 0)), bug("not-smallest", "procedural", DIV, "A digit that works was chosen, but not the smallest. Try 0, 1, 2 … in order.", largest((y) => (S + y) % 3 === 0 && (pos === d.length - 1 ? y : d[d.length - 1]) % 2 === 0))];
     },
     variants: () => [],
-    explain: (s) => (s.id === "digit-sum" ? `The known digits add to ${s.inputs.join(" + ")} = ${s.value}` : s.id === "alternate" ? `Alternate digits from the right: one group adds to ${s.inputs[0]}, the other to ${s.inputs[1]} (not counting the box)` : `The smallest digit that works is ${s.value}`),
+    explain: (s) => (s.id === "digit-sum" ? `The known digits add to ${s.inputs.join(" + ")} = ${s.value}` : s.id === "alternate" ? `Alternate digits from the right: one group adds to ${s.inputs[0]}, the other to ${s.inputs[1]} (not counting the box)` : digitWhy(s)),
     domain: [[0, 3], [0, 149]],
     keep: ([di, s]) => divSolve(di, s) !== null,
     cap: 400,
@@ -3343,4 +3344,14 @@ function primDup([a, s]: number[]) {
   const k = primKey([a, s]);
   for (let x = 0; x < s; x++) if (primKey([a, x]) === k) return true;
   return false;
+}
+
+/** Why the chosen digit is the smallest that passes the test (akdivd's last step). */
+function digitWhy(s: Step): string {
+  const [D, S] = s.inputs as number[];
+  const x = Number(s.value);
+  if (D === 11) return `Try 0, 1, 2, … in the box: ${x} is the first digit that makes the two sums differ by 0 or a multiple of 11, so the digit is ${x}`;
+  const t = S + x;
+  if (D === 6) return `Try 0, 1, 2, … in the box: with ${x} the digit sum is ${S} + ${x} = ${t}, a multiple of 3, and the number is even (it ends in an even digit). No smaller digit does both, so the digit is ${x}`;
+  return `Try 0, 1, 2, … in the box: with ${x} the digit sum is ${S} + ${x} = ${t}, a multiple of ${D}. No smaller digit makes one, so the digit is ${x}`;
 }

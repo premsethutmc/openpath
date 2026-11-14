@@ -94,9 +94,9 @@ describe("curriculum-wide coverage: honest numbers", () => {
   // 1,082 since Workstream A3 added lboth and lbrk (linear equations: x on both sides; a bracket); 1,088 since
   // grade7-coverage@1 added b24 (ajmilr, ajsize, agchange, ahfibp, aerot, aetfig); 1,090 since grade8-fix added b25
   // (aipolyc, akhtab); 1,094 since icse-grade5 gaps added b26 (akromr, akromw, aesym3, adline)
-  it("total families count is 1,094", () => {
-    assert.equal(stats.total, 1094,
-      `Expected 1,094 families, got ${stats.total}`);
+  it("total families count is 1,098", () => {
+    assert.equal(stats.total, 1098,
+      `Expected 1,098 families, got ${stats.total}`);
   });
 
   it("kernel-backed families (all steps verified) is at least 100", () => {

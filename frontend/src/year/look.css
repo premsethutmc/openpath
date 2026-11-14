@@ -119,6 +119,8 @@ details.working summary, .hint { color: var(--ink); }
 
 /* pictures stay on white so their own colours read in dark mode */
 .figure svg, .figure img, .sketch-sheet { background: #fff; border-radius: 14px; }
+/* …and keep their light-mode ink: in dark mode the page's --ink is light, which vanished on the white picture */
+.figure svg { --ink: #1f2a37; --accent: #2f6fde; --soft: #dbe6f7; color: #1f2a37; }
 @media (prefers-color-scheme: dark) {
   .figure { color: var(--ink); }
   .figure svg { padding: 6px; }
@@ -204,3 +206,50 @@ details.working summary, .hint { color: var(--ink); }
 .kid-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .qcard label.kid-unit { display: flex; flex-direction: row; align-items: center; gap: 8px; margin: 0; font-size: 1.3rem; font-weight: 800; color: var(--ink); min-width: 0; }
 .qcard .kid-unit input { flex: 1 1 auto; width: 100%; min-width: 0; font-size: 1.3rem; padding: 14px 16px; border-radius: 16px; border: 2px solid var(--line); background: var(--card); color: var(--ink); }
+
+/* feedback@1: a quiet link under each question and lesson; ticks for testers */
+.feedback-open { display: block; margin: 10px auto 0; font-size: 0.85rem; color: var(--muted); text-decoration: underline; background: none; border: 0; }
+.feedback-box { display: grid; gap: 8px; margin: 12px 0 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); }
+.feedback-box legend { font-weight: 700; padding: 0 4px; }
+.feedback-tick { display: flex; gap: 10px; align-items: center; font-size: 0.95rem; }
+.feedback-tick input { width: 20px; height: 20px; flex: none; }
+.feedback-box textarea { width: 100%; font: inherit; border-radius: 10px; border: 1px solid var(--line); padding: 8px; background: var(--bg, #fff); color: var(--ink); }
+.feedback-actions { display: flex; gap: 10px; justify-content: flex-end; }
+.feedback-done { text-align: center; color: var(--muted); }
+.kid-more summary { cursor: pointer; color: var(--brand-text, #5b46d6); font-weight: 700; padding: 4px 0; }
+.kid-more p { margin: 6px 0 0; }
+
+/* parent-view@2: four plain questions first */
+.four-q { display: grid; gap: 10px; }
+.q-card { padding: 12px 14px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); }
+.q-card h2 { margin: 0 0 4px; font-size: 1.05rem; }
+.q-card p { margin: 0; }
+.q-todo { background: var(--brand-soft); }
+.parent-detail { margin: 14px 0 0; font-size: 1.05rem; color: var(--muted); }
+
+/* help-steps@1 */
+.kid-slip { background: var(--brand-soft); border-radius: 12px; padding: 10px 12px; }
+.kid-steps { display: grid; gap: 8px; margin-top: 6px; }
+.kid-steps ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.kid-steps li { font-size: 1.05rem; }
+
+/* working-steps@1 */
+.ws { display: grid; gap: 8px; }
+.ws-line { display: grid; grid-template-columns: 26px 1fr; gap: 6px 8px; align-items: center; }
+.ws-n { width: 26px; height: 26px; border-radius: 50%; background: var(--brand-soft); color: var(--brand-text); display: grid; place-items: center; font-weight: 800; font-size: 0.85rem; }
+.ws-line input { font-size: 1.15rem; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); color: var(--ink); min-width: 0; }
+.ws-mark { grid-column: 2; font-size: 0.95rem; font-weight: 700; }
+.ws-mark.ok { color: #1f8a4c; }
+.ws-mark.bad { color: #b4441b; }
+.ws-keys { display: flex; flex-wrap: wrap; gap: 6px; }
+.ws-key { min-width: 44px; padding: 8px 10px; border-radius: 10px; border: 2px solid var(--line); background: var(--card); color: var(--ink); font-size: 1.15rem; font-weight: 800; }
+.ws-add { font-size: 0.95rem; color: var(--brand-text); }
+
+/* test-later@1 */
+.kid-saved { margin: 0; padding: 8px 12px; border-radius: 12px; background: var(--good-soft, #e6f7ee); font-weight: 600; font-size: 0.95rem; }
+.review-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.review-list > li { padding: 12px 14px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); border-left: 5px solid #2f9e62; }
+.review-list > li.bad { border-left-color: #e0802a; }
+.review-q { margin: 0 0 4px; font-weight: 700; }
+.review-a { margin: 0 0 6px; }
+.review-working { margin: 0 0 6px; padding-left: 22px; display: grid; gap: 4px; }

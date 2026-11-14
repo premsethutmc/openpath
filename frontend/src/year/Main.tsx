@@ -250,7 +250,14 @@ function App() {
       for (const r of records) next = await repo.append(r);
       // the server's recorded (authoritative) decision for the answer just saved: what the learner is shown (check A)
       const savedId = (records.at(-1) as { id?: string } | undefined)?.id;
-      lastDecision.current = ((next as { id?: string; decision?: ServerDecision }[]).find((e) => e.id === savedId)?.decision) ?? null;
+      const saved = (next as { id?: string; decision?: ServerDecision; shadowDecision?: ServerDecision }[]).find((e) => e.id === savedId);
+      lastDecision.current = saved?.decision ?? null;
+      // working-marks@1: under shadow grading the authoritative (earlier) decision marks the ANSWER; the step-by-step check of the
+      // working is only in the server's unified decision kept beside it. Its working verdict is shown as feedback on the working —
+      // never as the answer's mark, never for credit.
+      const sw = (saved?.shadowDecision as { questionId?: string; working?: unknown } | undefined);
+      if (lastDecision.current && !(lastDecision.current as { working?: unknown }).working && sw?.working && sw.questionId === (lastDecision.current as { questionId?: string }).questionId)
+        lastDecision.current = { ...lastDecision.current, working: sw.working } as ServerDecision;
       setEvents(next);
       setNow(Date.now());
       return true;
@@ -361,6 +368,12 @@ function App() {
   const open = (t: Tile, path: string[]) => {
     if (t.kind === "proposal" || t.kind === "unsupported") return;
     if (t.kind === "skill" && t.children.length === 0 && moduleFor(t.competency!) && t.content?.level === "module") return setView({ name: "module", competency: t.competency!, back: { name: "tile", path: path.slice(0, -1) } });
+    // kid-say@1: a child never lands on a progress page: a skill with smaller steps, or a smaller step, opens the
+    // skill's own lessons and questions
+    if (KID && t.competency && t.content?.level === "module") {
+      const c = moduleFor(t.competency) ? t.competency : graph.evidenceTarget(t.competency);
+      if (moduleFor(c)) return setView({ name: "module", competency: c, back: { name: "tile", path: path.slice(0, -1) } });
+    }
     setView({ name: "tile", path });
   };
 
@@ -389,7 +402,7 @@ function App() {
       <Shell paper={grade === 7} banner={banner} error={error} wide={false} top={keyboardOpen ? undefined : top(<button className="link" onClick={() => setView(view.back)}>← Back</button>, name)}>
         {/* kid-look@1: the lesson opens inside the skill (teach-first, "teach me", "learn it again"); no separate page */}
         {!KID && <div className="lesson-link"><button className="link" onClick={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })}>Open this lesson</button></div>}
-        <KeyboardPractice key={`${learner}:${view.competency}`} onOpenChange={setKeyboardOpen} api={api} learner={learner} competency={view.competency} onSaved={async () => { if (repo) setEvents(await repo.load()); }}>
+        <KeyboardPractice hideOffer={KID} key={`${learner}:${view.competency}`} onOpenChange={setKeyboardOpen} api={api} learner={learner} competency={view.competency} onSaved={async () => { if (repo) setEvents(await repo.load()); }}>
           <Module competency={view.competency} reviewOnly={view.reviewOnly} ctx={ctx} onExit={() => setView(view.back)} onLearn={() => setView({ name: "curriculum-practice", competency: view.competency, stage: "teaching", back: view.back })} />
         </KeyboardPractice>
         <KeyboardNote competency={view.competency} ctx={ctx} />
@@ -675,6 +688,8 @@ function KeyboardNote({ competency, ctx }: { competency: string; ctx: Ctx }) {
   const ms = ctx.module ? ctx.module(competency) : moduleState(competency, ctx.records, ev, ctx.now, ctx.session, null, ctx.evidence);
   const ended = ms.phase === "done" && !["independent", "transfer", "verified"].includes(ev.status);
   const n = ids.length;
+  // a child does not need to hear what was left out (the parent page and test builds still say it)
+  if (KID && !ended) return null;
   return (
     <p className={ended ? "why" : "small muted"} role="note" data-keyboard-offer={ended ? "ended" : "withheld"}>
       {ended ? KEYBOARD_UNAVAILABLE : `${n} drawing or construction task${n === 1 ? " is" : "s are"} not available with keyboard input, so ${n === 1 ? "it is" : "they are"} left out of this topic.`}
@@ -962,9 +977,14 @@ function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, gr
   const title = next.question ? shortName(question(next.question).prompt.split(":")[0]) : next.competency ? kidName(next.competency, shortName(graph.get(next.competency).name)) : "";
   const chapters = sections.flatMap((s) => s.children.map((c) => ({ c, path: [s.id, c.id] })));
   const started = st.records.attempts.length > 0;
+  // today-plan@2: back after a few days away: say so, and start with what she was last working on before anything new
+  const last = st.records.attempts.reduce((m, a) => Math.max(m, Date.parse(a.at) || 0), 0);
+  const away = last ? Math.floor((now - last) / 86_400_000) : 0;
+  const warm = away >= 3 && r.today.answered === 0;
   return (
     <div className="kid">
-      <h1 className="kid-hi">Hi, {name}! <span aria-hidden="true">👋</span></h1>
+      <h1 className="kid-hi">{warm ? `Welcome back, ${name}!` : `Hi, ${name}!`} <span aria-hidden="true">👋</span></h1>
+      {warm && <p className="kid-sub">It's been {away} days. A quick warm-up first, then on we go.</p>}
       <p className="kid-sub">{grade ? `Class ${grade} Maths` : "Maths"}</p>
       <section className="kid-today" aria-label="Today">
         <div className="kid-today-top">
@@ -977,7 +997,7 @@ function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, gr
         </div>
         {next.kind !== "none" ? (
           <>
-            <p className="kid-next-label">{next.kind === "retention" ? "Quick check" : next.kind === "review" ? "Practise again" : started ? "Up next" : "Start with"}</p>
+            <p className="kid-next-label">{next.kind === "retention" ? "Quick check" : next.kind === "review" ? "Practise again" : warm && next.kind === "continue" ? "Warm up with" : started ? "Up next" : "Start with"}</p>
             <p className="kid-next">{title}</p>
             <button className="primary kid-go" onClick={goNext}>{next.kind === "retention" ? "Start the check" : next.kind === "review" ? "Practise" : next.kind === "continue" ? "Carry on" : "Start"} →</button>
           </>
@@ -1092,6 +1112,8 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
       <p className="eyebrow">For parents</p>
       <h1>{name}'s Maths</h1>
       {report.lastActive ? <p className="muted">Last worked {ago(report.lastActive)}{report.streak >= 2 ? ` · ${report.streak} days in a row` : ""}.</p> : <p className="muted">{name} has not answered a question yet. Once they do, this page shows what they did.</p>}
+      <FourQuestions name={name} st={st} report={report} findings={f} slowButRight={slowButRight} now={now} />
+      <h2 className="parent-detail">In detail</h2>
       <div className="period-tabs" role="tablist" aria-label="Period">
         {(["week", "month", "year"] as Period[]).map((p) => <button key={p} type="button" role="tab" aria-selected={period === p} className={period === p ? "on" : ""} onClick={() => setPeriod(p)}>{p === "week" ? "Week" : p === "month" ? "Month" : "Year"}</button>)}
       </div>
@@ -1153,6 +1175,44 @@ function ParentView({ name, learner, st, guest, onClaimed, now }: { name: string
       </details>
       {savedAs && <p className="feedback good" role="status"><b>Saved.</b> Sign in with {savedAs} on any phone or computer to see the same progress. Keep the password somewhere safe: this site cannot email a reset link yet.</p>}
       {guest ? <KeepSafe onDone={(email) => { setSavedAs(email); onClaimed(); }} /> : <p className="muted small">This progress is saved in your account and opens on any device you sign in on. <a className="link" href={`/api/pupils/${encodeURIComponent(learner)}/export/`} download={`openpath-${name.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.json`}>Download a copy</a></p>}
+    </div>
+  );
+}
+
+/** parent-view@2: the four things a parent wants to know, first, in plain words; the measures follow under "In detail". */
+function FourQuestions({ name, st, report, findings: f, slowButRight, now }: {
+  name: string; st: NonNullable<ReturnType<typeof learnerState>>; report: ReturnType<typeof parentReport>;
+  findings: ReturnType<typeof competencyProfile>["findings"]; slowButRight: TopicMeasure[]; now: number;
+}) {
+  const week = st.records.attempts.filter((a) => now - Date.parse(a.at) < 7 * 86_400_000);
+  const days = new Set(week.map((a) => a.at.slice(0, 10))).size;
+  const good = [f.quickest && `${f.quickest.pace === "lightning" ? "lightning quick" : "quick"} in ${f.quickest.topic}`, f.mostAccurate && `most accurate in ${f.mostAccurate.topic}`].filter(Boolean) as string[];
+  const next = st.next?.competency ? kidName(st.next.competency, graph.get(st.next.competency).name) : null;
+  const todo = f.stuck.length
+    ? `Sit with ${name} for ten minutes on ${f.stuck[0].skill}. Open it together and tap “I don't know this yet — teach me”: the lesson comes first, then a few questions.`
+    : slowButRight.length
+      ? `${slowButRight[0].topic} is right but slow: a few short sessions there will build speed. No rush on accuracy; that is already there.`
+      : days < 3
+        ? `Aim for about ${DAILY_GOAL} questions on four days this week. Little and often works better than one long sitting.`
+        : next ? `Keep going: next up is ${next}.` : "Keep going: a few questions most days.";
+  return (
+    <div className="four-q">
+      <section className="q-card" aria-label="Is the practice happening?">
+        <h2>Is {name} practising?</h2>
+        <p>{week.length ? `${week.length} question${week.length === 1 ? "" : "s"} on ${days} day${days === 1 ? "" : "s"} this week` : "No questions this week yet"}{report.streak >= 2 ? ` · ${report.streak} days in a row` : ""}.</p>
+      </section>
+      <section className="q-card" aria-label="Where stuck">
+        <h2>Where is {name} stuck?</h2>
+        <p>{f.stuck.length ? f.stuck.map((x) => x.skill).join("; ") : "Nowhere right now."}</p>
+      </section>
+      <section className="q-card" aria-label="Strengths">
+        <h2>What is {name} good at?</h2>
+        <p>{good.length ? good.join("; ") + "." : "Not enough answers yet to say (it fills in after about five questions on a topic)."}</p>
+      </section>
+      <section className="q-card q-todo" aria-label="What to do this week">
+        <h2>What to do this week</h2>
+        <p>{todo}</p>
+      </section>
     </div>
   );
 }

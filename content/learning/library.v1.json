@@ -46367,7 +46367,7 @@
      "math": [
       "What is the smallest digit that can go in the box so that 28683□ is divisible by 3?",
       "The known digits add to 2 + 8 + 6 + 8 + 3 = 27",
-      "The smallest digit that works is 0"
+      "Try 0, 1, 2, … in the box: with 0 the digit sum is 27 + 0 = 27, a multiple of 3. No smaller digit makes one, so the digit is 0"
      ],
      "tip": "A digit that works was chosen, but not the smallest one. Try 0, 1, 2 … in order.",
      "role": "concept",
@@ -46422,7 +46422,7 @@
        "math": [
         "What is the smallest digit that can go in the box so that 82□16 is divisible by 6?",
         "The known digits add to 8 + 2 + 1 + 6 = 17",
-        "The smallest digit that works is 1"
+        "Try 0, 1, 2, … in the box: with 1 the digit sum is 17 + 1 = 18, a multiple of 3, and the number is even (it ends in an even digit). No smaller digit does both, so the digit is 1"
        ],
        "role": "worked-example",
        "instance": "gen:akdivd:3,29"
@@ -46446,7 +46446,7 @@
        "math": [
         "What is the smallest digit that can go in the box so that 12140□ is divisible by 6?",
         "The known digits add to 1 + 2 + 1 + 4 + 0 = 8",
-        "The smallest digit that works is 4"
+        "Try 0, 1, 2, … in the box: with 4 the digit sum is 8 + 4 = 12, a multiple of 3, and the number is even (it ends in an even digit). No smaller digit does both, so the digit is 4"
        ],
        "role": "strategy",
        "instance": "gen:akdivd:3,55"
@@ -72534,6 +72534,22 @@
     },
     {
      "family": "avtab",
+     "version": "1.0.0"
+    },
+    {
+     "family": "amf2510",
+     "version": "1.0.0"
+    },
+    {
+     "family": "amf34",
+     "version": "1.0.0"
+    },
+    {
+     "family": "amf69",
+     "version": "1.0.0"
+    },
+    {
+     "family": "amderive",
      "version": "1.0.0"
     }
    ]

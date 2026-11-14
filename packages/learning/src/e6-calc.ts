@@ -126,7 +126,7 @@ export class Unbound extends Error {}
 interface Fdef { param: string; body: A }
 // ---------------------------------------------------------------------------------------------- typed task restrictions and square-root branches
 /** restrictions supplied by the typed problem (`restrictions`, `domainComponents`), read once per plan; they behave as stated and carried-forward */
-function polyCoeffs(a: A, v: string): Q[] | null {
+export function polyCoeffs(a: A, v: string): Q[] | null {
   const mulP = (x: Q[], y: Q[]): Q[] => { const o: Q[] = new Array(x.length + y.length - 1).fill(Z); x.forEach((xi, i) => y.forEach((yj, j) => { o[i + j] = qadd(o[i + j], qmul(xi, yj)); })); return o; };
   const go = (x: A): Q[] | null => {
     switch (x.t) {

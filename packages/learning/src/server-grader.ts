@@ -14,6 +14,7 @@ import { gradeProgram, isProgramQuestion, programQuestion } from "./grading/prog
 
 import { geometryWorking, stopGeometryWorkers } from './grading/geometry-working';
 import { assessWorkingAsync, type WorkingObservation } from "./grading/working.ts";
+import { calculusWorking, isCalculusWorking, CALCULUS_LINES, CALCULUS_LINE_CHARS } from "./grading/calculus-working.ts";
 
 export const SERVER_GRADER_VERSION = 2 as const;
 export interface GraderRequest { id: string; response: string; working?: string[] }
@@ -32,7 +33,9 @@ export function gradeRequest(r: GraderRequest): GraderReply {
     return { v: SERVER_GRADER_VERSION, id: r.id, known: true, credit: d.verdict === "correct" ? true : d.verdict === "incorrect" ? false : null, verdict: d.verdict, reason: d.reason, source: sourceOf(d), expected: programQuestion(r.id)!.answer, decision: d, ms: ms() };
   }
   if (!isQuestion(r.id)) return unknown("not a known question");
-  const working = Array.isArray(r.working) ? r.working.filter((l) => typeof l === "string").slice(0, 8).map((l) => l.slice(0, 80)) : [];
+  // calculus-working@1: calculus working may be long (a derivation of many lines); other working stays short
+  const [maxLines, maxChars] = isCalculusWorking(r.id) ? [CALCULUS_LINES, CALCULUS_LINE_CHARS] : [8, 80];
+  const working = Array.isArray(r.working) ? r.working.filter((l) => typeof l === "string").slice(0, maxLines).map((l) => l.slice(0, maxChars)) : [];
   let g;
   try { g = grade(r.id, r.response, working); } catch { return unknown("the question's contract could not be built"); }
   return { v: SERVER_GRADER_VERSION, id: r.id, known: true, credit: g.assessment.credit, verdict: g.decision.verdict, reason: g.decision.reason, source: sourceOf(g.decision), expected: question(r.id).answer, decision: g.decision, ms: ms() };
@@ -46,7 +49,8 @@ export async function gradeRequestAsync(r: GraderRequest, observe?: (request: Re
   if (!d?.working) return reply;
   const value = d.interpretation && "value" in d.interpretation ? d.interpretation.value : null;
   const working = await assessWorkingAsync(d.questionId, d.response.working, d.verdict, value, observe);
-  return { ...reply, decision: { ...d, working } };
+  const calc = working ? await calculusWorking(d.questionId, d.response.working, working) : working;
+  return { ...reply, decision: { ...d, working: calc } };
 }
 
 if (typeof process !== "undefined" && process.argv[1] && /grader\.(mjs|ts)$/.test(process.argv[1])) {
@@ -64,6 +68,7 @@ if (typeof process !== "undefined" && process.argv[1] && /grader\.(mjs|ts)$/.tes
         const working=await geometryWorking(d.questionId,d.response.working,d.response.raw,d.working,{root:process.env.OPENPATH_GEOMETRY_ROOT,python:process.env.OPENPATH_GEOMETRY_PYTHON});
         return {...reply,decision:{...d,working}};
       }
+      if (d?.working && isCalculusWorking(d.questionId)) return { ...reply, decision: { ...d, working: await calculusWorking(d.questionId, d.response.working, d.working) } };
       return reply;
     };
     try { const out=Array.isArray(input)?await Promise.all(input.slice(0,500).map(run)):await run(input); process.stdout.write(JSON.stringify(out)); }
