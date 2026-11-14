@@ -440,7 +440,9 @@ export function Ask({ qid, activity, ctx, onAnswered, context, hintAllowed = fal
           onClick={async () => {
             if (submitting.current) return;
             const lines = working.split("\n").map((l) => l.trim()).filter(Boolean);
-            if (lines.length > 8 || lines.some((line) => line.length > 80)) { setClarify("Your work is still here. Use at most 8 lines, with at most 80 characters per line, before checking."); return; }
+            // calculus-working@1: a calculus derivation may run to 100 lines of 200 characters
+            const [maxLines, maxChars] = /calculus|differentia|integra|limit/.test(q.competency) ? [100, 200] : [8, 80];
+            if (lines.length > maxLines || lines.some((line) => line.length > maxChars)) { setClarify(`Your work is still here. Use at most ${maxLines} lines, with at most ${maxChars} characters per line, before checking.`); return; }
             // one decision per submission (assessment@1): the answer box is graded first; an unreadable answer gets ONE short clarification, then it is saved as undecided
             const preview = needsMarking(q) ? null : decide(qid, value, lines, asked);
             submitting.current = true;

@@ -93,7 +93,7 @@ def grader_decision(question_id, response, stored_answer, working=None, geometry
     (not runnable, failed, or its stored answer differs from this server's). credit None = undecided (never wrong)."""
     if not isinstance(question_id, str) or not QUESTION_ID.match(question_id) or not isinstance(response, str):
         return None
-    w = [x for x in (working or []) if isinstance(x, str)][:8]
+    w = [x for x in (working or []) if isinstance(x, str)][:100]  # the grader itself keeps 8 lines, or 100 for calculus
     out = run([{'id': question_id, 'response': response, 'working': w}], geometry=True) if geometry else run([{'id': question_id, 'response': response, 'working': w}])
     if out is None or not _reply_ok(out[0], question_id, stored_answer):
         return None
