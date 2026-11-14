@@ -179,11 +179,12 @@ function KidAnswer({ ask, answer, type, setValue, disabled }: { ask: KidAsk; ans
         ))}
       </div>
     );
+  const unit = ask.kind === "box" ? ask : { before: undefined, after: undefined };
   return (
     <label className="kid-unit">
-      {ask.before && <span>{ask.before}</span>}
-      <input aria-label="Your answer" inputMode="decimal" autoComplete="off" placeholder="Your answer" value={parts[0] ?? ""} disabled={disabled} onChange={(e) => put([e.target.value], !!e.target.value.trim())} />
-      {ask.after && <span>{ask.after}</span>}
+      {unit.before && <span>{unit.before}</span>}
+      <input aria-label="Your answer" inputMode={ask.kind === "product" ? "text" : "decimal"} autoComplete="off" placeholder={ask.kind === "product" ? "e.g. 2 × 3 × 3" : "Your answer"} value={parts[0] ?? ""} disabled={disabled} onChange={(e) => put([e.target.value], !!e.target.value.trim())} />
+      {unit.after && <span>{unit.after}</span>}
     </label>
   );
 }
