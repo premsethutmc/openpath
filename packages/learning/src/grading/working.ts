@@ -81,6 +81,16 @@ function substitute(statement: string, value: string): WorkingAssessment["substi
   return { variable: vars[0], value: v, left: sides[0].trim(), right: sides[1].trim(), leftValue: showR(lv), rightValue: showR(rv), holds: sameR(lv, rv) };
 }
 
+/** a line that starts with "=" written out against the previous line's last member (the first line is left as it is) */
+export function continuedLines(lines: readonly string[]): string[] {
+  let prev = "";
+  return lines.map((t, i) => {
+    const full = /^=/.test(t) && i > 0 && prev ? `${prev} ${t}` : t;
+    if (full.includes("=")) prev = full.split("=").pop()!.trim();
+    return full;
+  });
+}
+
 /**
  * The working assessment for one submission, or undefined when the question has no task statement AND no working was submitted (so a
  * decision for every other kind of question is exactly what it was). `verdict` and `value` are the answer decision's own (read-only).
@@ -88,9 +98,12 @@ function substitute(statement: string, value: string): WorkingAssessment["substi
 function assessWorkingLegacy(qid: string, working: readonly string[], verdict: string, value: string | null): WorkingAssessment | undefined {
   const statement = taskStatement(qid);
   const lines = working.map((l) => String(l ?? "").trim()).filter((l) => l.length > 0);
+  // continued-lines@1: "= 630 + 28" carries on from the line before; the authority is given it written out ("90 × 7 + 4 × 7 = 630 + 28"),
+  // the learner's own text is what is shown and stored
+  const chain = continuedLines(lines);
   if (!statement && !lines.length) return undefined;
   const substitution = statement && verdict === "incorrect" && value !== null ? substitute(statement, value) : null;
-  const auth = statement && lines.length ? authorizeWorking(statement, lines) : null;
+  const auth = statement && lines.length ? authorizeWorking(statement, chain) : null;
   const base = {
     schema: WORKING_ASSESSMENT, statement, substitution,
     versions: auth?.versions ?? authorizeWorking("", []).versions,
@@ -98,7 +111,7 @@ function assessWorkingLegacy(qid: string, working: readonly string[], verdict: s
   const empty = { lines: lines.map((text) => ({ text, status: "unsupported", move: null })), firstInvalid: null, workingAnswer: null, agreesWithResponse: null, certificates: [], replayed: false, replayedLines: 0 };
   if (!lines.length) return { ...base, ...empty, status: "none", methodEvidence: "no-method-evidence", completeness: "no-working", reason: "no working submitted: a bare answer is not method evidence" };
   if (!statement || !auth) return { ...base, ...empty, status: "unsupported", methodEvidence: "no-method-evidence", completeness: "incomplete", reason: "this question has no task statement the authority can read: the working was not judged" };
-  const v = assessChain(statement, lines);
+  const v = assessChain(statement, chain);
   const ev = v.evidence;
   const claimed = ev.finalAnswer.present && ev.finalAnswer.claimed ? ev.finalAnswer.claimed : null;
   const claimedValue = claimed ? valueOf(claimed.split("=").at(-1) ?? "") : null;
@@ -119,7 +132,7 @@ function assessWorkingLegacy(qid: string, working: readonly string[], verdict: s
   if (auth.status === "invalid" && auth.at !== null) {
     const t = ev.transitions[auth.at];
     // the lines before the first invalid one are authorized (and replayed) on their own, through the same interface: "3x = 15" stays a checked step
-    const prefix = auth.at > 0 ? authorizeWorking(statement, lines.slice(0, auth.at)) : null;
+    const prefix = auth.at > 0 ? authorizeWorking(statement, chain.slice(0, auth.at)) : null;
     const pre = prefix?.status === "authorized" && prefix.replayed ? prefix : null;
     return {
       ...base, ...common, status: "invalid", certificates: pre?.certificates ?? [], replayed: !!pre, replayedLines: pre ? auth.at : 0, methodEvidence: evidence, completeness: ev.completeness === "complete" ? "complete" : "incomplete", reason: auth.reason,
