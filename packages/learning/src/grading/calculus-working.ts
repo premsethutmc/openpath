@@ -71,6 +71,9 @@ export async function calculusWorking(qid: string, lines: readonly string[], bas
     let lead = 0;
     while (lead < verdict.length && verdict[lead] === "verified") lead++;
     const status: WorkingAssessment["status"] = first >= 0 ? "invalid" : r.classification === "verified" ? "verified" : lead > 0 ? "partial" : "unsupported";
+    // line-working@1 as a second reader: working the task checker could not follow at all (a log of a radical, a method it
+    // does not bind) is read line by line on its own truth instead; never when the task checker found anything
+    if (status === "unsupported") { const lw = lineWorking(qid, [...lines], base); if (lw.status !== "unsupported") return lw; }
     return {
       ...common,
       status,

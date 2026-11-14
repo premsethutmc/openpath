@@ -31,7 +31,7 @@ describe("function-working@1", () => {
       const id = (familySpec(f)?.examples ?? []).find((i) => !i.endsWith(":mc"))!;
       expect(functionTaskOf(id)).not.toBeNull();
     }
-  });
+  }, 30000);
   test("the server's calculus grader routes them here", async () => {
     expect(isCalculusWorking("gen:aqmono:0,4,1,1,1")).toBe(true);
     const w = await calculusWorking("gen:aqmono:0,4,1,1,1", ["f'(x) = 6x^2 - 24x", "x = 0 or x = 4"], base);

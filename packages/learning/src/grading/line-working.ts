@@ -400,6 +400,16 @@ function approxPair(L0: A, R0: A, t: LineTask): Verdict {
   }
   return "unchecked";
 }
+/** k·ln|g| or k·ln g, with an optional "+ C", or null */
+function logForm(F: A): { k: A; g: A } | null {
+  let x = F;
+  if (x.t === "add") { const rest = x.xs.filter((y) => !(y.t === "s" && y.name === "C0")); if (rest.length !== 1) return null; x = rest[0]; }
+  let k: A = N(1);
+  if (x.t === "mul") { const i = x.xs.findIndex((y) => y.t === "fn" && y.f === "ln"); if (i < 0 || x.xs.some((y, j) => j !== i && symbolsOf(y).size)) return null; k = mul(...x.xs.filter((_, j) => j !== i)); x = x.xs[i]; }
+  if (x.t !== "fn" || x.f !== "ln") return null;
+  const g = x.a.t === "fn" && x.a.f === "abs" ? x.a.a : x.a;
+  return { k, g };
+}
 function pair(L0: A, R0: A, t: LineTask): Verdict {
   // lim ((x, y) → P) of g = lim ((x, y) → P) of h: g and h agree wherever both are defined
   if (L0.t === "call" && R0.t === "call" && t.mv?.has(L0.name) && t.mv.has(R0.name)) {
@@ -418,6 +428,10 @@ function pair(L0: A, R0: A, t: LineTask): Verdict {
     }
     if (!I.lo) { // ∫ f dx = F + C: F′ = f
       const Yr = reduce(Y, t);
+      // log-form@1: F = k·ln|g| (+ C): F′ = k·g′/g = f exactly when k·g′ = f·g — no division, so a radical in g cancels
+      // (ln|x + 3 + √(x² + 6x + 13)| for 1/√(x² + 6x + 13))
+      const lg = logForm(Yr);
+      if (lg && I.v === t.v) { const v = identity(mul(lg.k, d6(lg.g, I.v)), mul(reduce(c, t), f, lg.g)); if (v === "right") return v; }
       const sv = I.v !== t.v ? t.defs.get(I.v) : undefined; // ∫ g(u) du = G(u): checked in x, as g(u(x))·u′(x) = d/dx G(u(x))
       if (sv) return identity(mul(reduce(c, t), f, d6(sv.body, t.v)), d6(Yr, t.v));
       return identity(mul(reduce(c, t), f), d6(Yr, I.v));

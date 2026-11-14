@@ -36,8 +36,9 @@ const CASES: Case[] = [
   ["gen:audel:1,3,5,1", ["dy/dx = 5 · 3^x"], "invalid", 0],
   ["gen:aupi:1,7,1", ["∫ from 0 to 7/2 of 1/√(49 − x²) dx = [sin⁻¹(x/7)] from 0 to 7/2", "= sin⁻¹(1/2) − sin⁻¹(0)", "= π/6"], "verified"],
   ["gen:aupi:1,7,1", ["∫ from 0 to 7/2 of 1/√(49 − x²) dx = [sin⁻¹(x/7)] from 0 to 7/2", "= π/3"], "invalid", 1],
-  // log|x + 3 + √(…)| needs cancelling a radical between numerator and denominator: left unchecked, never called right
-  ["gen:auform:2,2,3,1,0", ["∫ 1/√(x² + 6x + 13) dx = ∫ 1/√((x + 3)² + 4) dx", "= log|x + 3 + √(x² + 6x + 13)| + C"], "unsupported"],
+  // log-form@1: log|x + 3 + √(…)| is checked without dividing (k·g′ = f·g), by the line reader when the task checker cannot follow
+  ["gen:auform:2,2,3,1,0", ["∫ 1/√(x² + 6x + 13) dx = log|x + 3 + √(x² + 6x + 13)| + C"], "verified"],
+  ["gen:auform:2,2,3,1,0", ["∫ 1/√(x² + 6x + 13) dx = log|x + 3 + √(x² + 6x + 13)| + 2x + C"], "invalid", 0],
   ["gen:audinv:0,7,5", ["dy/dx = 5 · 1/√(1 − (x/7)²) · 1/7", "y = 5 sin⁻¹(x/7) so dy/dx = 5/√(49 − x²)"], "unsupported"],
   ["gen:arlhinf:2,1,1", ["lim (x→0) x cot x = lim (x→0) x cos x / sin x", "= 1"], "verified"],
   // limits

@@ -80,10 +80,20 @@ class Repo {
   }
   append(event: LearningRecord) {
     const work = this.queue.then(async () => {
-      let r:{count:number};
-      try { r = await api.request<{ count: number }>("POST", `/pupils/${this.learner}/events/`, { subject: "mathematics", seq: this.count, event }); }
-      catch(error){const known=await this.load();if(known.some((e:any)=>e.id===event.id))return known;throw error;}
-      this.count = r.count;
+      let r:{count:number} | null = null;
+      // weak-network@1: a dropped connection is retried a few times (2, 4 and 8 s apart) with the SAME record, so an answer
+      // that did reach the server is never saved twice (the server refuses a repeated id; the reload then finds it saved).
+      // A refusal from the server (not a lost connection) is not retried.
+      for (let tryNo = 0; ; tryNo++) {
+        try { r = await api.request<{ count: number }>("POST", `/pupils/${this.learner}/events/`, { subject: "mathematics", seq: this.count, event }); break; }
+        catch (error) {
+          try { const known = await this.load(); if (known.some((e: any) => e.id === event.id)) return known; } catch { /* still offline */ }
+          const lost = (error as { status?: number }).status === 0;
+          if (!lost || tryNo >= 3) throw error;
+          await new Promise((ok) => setTimeout(ok, 2000 * 2 ** tryNo));
+        }
+      }
+      this.count = r!.count;
       return this.load();
     });
     this.queue = work.catch(() => undefined);
@@ -263,7 +273,7 @@ function App() {
       setNow(Date.now());
       return true;
     } catch (e) {
-      setError(`Not saved: ${String((e as Error).message ?? e)}. Check your connection and try again.`);
+      setError(KID ? "No internet just now. Your answer is still here: press Check again when you are back online." : `Not saved: ${String((e as Error).message ?? e)}. Check your connection and try again.`);
       return false;
     } finally {
       setSaving(false);
@@ -998,6 +1008,9 @@ function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, gr
   const last = st.records.attempts.reduce((m, a) => Math.max(m, Date.parse(a.at) || 0), 0);
   const away = last ? Math.floor((now - last) / 86_400_000) : 0;
   const warm = away >= 3 && r.today.answered === 0;
+  // today-plan@2: the warm-up is on what she last worked on; when "Up next" is something new, it is offered first, separately
+  const lastSkill = st.records.attempts.reduce<{ at: string; c: string } | null>((m, a) => (!m || a.at > m.at ? { at: a.at, c: a.competency } : m), null)?.c ?? null;
+  const warmSeparate = warm && !!lastSkill && next.kind !== "continue" && next.kind !== "review" && next.kind !== "retention" && !!moduleFor(lastSkill);
   return (
     <div className="kid">
       <h1 className="kid-hi">{warm ? `Welcome back, ${name}!` : `Hi, ${name}!`} <span aria-hidden="true">👋</span></h1>
@@ -1022,7 +1035,14 @@ function KidHome({ name, st, now, next, nextReason, goNext, sections, onOpen, gr
           <p className="kid-next-label">{nextReason}</p>
         )}
       </section>
-      {focus && onFocus && focus.competency !== next.competency && (
+      {warmSeparate && onFocus && (
+        <section className="kid-focus" aria-label="Warm-up">
+          <p className="kid-focus-title">Warm up: {kidName(lastSkill!, shortName(graph.get(lastSkill!).name))}</p>
+          <p className="kid-focus-why">A few quick questions on what you did last time, then on to something new.</p>
+          <button className="secondary" onClick={() => onFocus(lastSkill!)}>Warm up →</button>
+        </section>
+      )}
+      {focus && onFocus && focus.competency !== next.competency && !(warmSeparate && focus.competency === lastSkill) && (
         <section className="kid-focus" aria-label="Also good for today">
           <p className="kid-focus-title">{focus.title}</p>
           <p className="kid-focus-why">{focus.why}</p>

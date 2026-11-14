@@ -35,6 +35,11 @@ export const DAY = 86_400_000;
 export const RETENTION_DAYS = 7;
 /** Independent: at least this many distinct right first answers without help, and the latest one right. */
 export const INDEPENDENT_MIN = 2;
+/** guessing@1: an answer picked from given options (a choice question, or a question's multiple-choice form) */
+export function chosenAnswer(qid: string): boolean {
+  if (/:mc$/.test(qid)) return true;
+  try { return question(qid).type === "choice"; } catch { return false; }
+}
 /** Questions in a delayed check (the shared verification needs at least two distinct fresh answers in that session). */
 export const RETENTION_CHECK = 2;
 
@@ -179,10 +184,13 @@ export function skillEvidence(id: string, records: LearnerRecords, profileStatus
   const ind = mine.filter((a) => (!rightAnswer(a) || qualifiedFollowup(a, records)) && independentAttempt(a) && (micro || a.activity !== "probe"));
   const right = rightAnswer;
   const distinctRight = new Set<string>();
+  let typedRight = 0;
   let independentAt: string | null = null;
   for (const a of ind) {
-    if (right(a)) distinctRight.add(a.questionId);
-    if (!independentAt && distinctRight.size >= INDEPENDENT_MIN && right(a)) independentAt = a.at;
+    if (right(a) && !distinctRight.has(a.questionId)) { distinctRight.add(a.questionId); if (!chosenAnswer(a.questionId)) typedRight++; }
+    // guessing@1: a right answer picked from options can be a lucky guess (one in four): with no typed right answer among
+    // them, one more right answer is needed
+    if (!independentAt && distinctRight.size >= INDEPENDENT_MIN + (typedRight ? 0 : 1) && right(a)) independentAt = a.at;
   }
   // status@2: once shown, one slip does not undo it; two wrong of the last three answers on your own do (the skill
   // then comes back to the plan). Before it is shown, the latest answer on your own must be right.

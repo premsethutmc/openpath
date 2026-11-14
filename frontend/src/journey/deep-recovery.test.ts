@@ -40,13 +40,13 @@ test("shipped recovery: the candidate list for the integral stops at depth 2 (li
   for (const id of [L2V, INTS, IADD, IDS]) assert.ok(!sup.some((s) => s.id === id), `${id} is beyond the shipped depth`);
 });
 
-test("shipped recovery, deep gap: escalates at partial fractions without assessing the depth-3 root", () => {
+test("shipped recovery, deep gap: below partial fractions she keeps getting wrong, it checks what they rest on (deeper-support@1)", () => {
   const r = runScenario({ id: "deep-baseline", category: 3, start: ORIG, entry: "practice", expect: {}, learner: () => ({ name: "deep gap", act: asAnswerer(deepGap()) }) } as never);
   const qs = r.f.session.replies.length;
-  const skills = r.f.session.trace.filter((t) => t.component === "server-grader.gradeRequest").map((t) => question(String((t.input as { qid: string }).qid).replace(/:(mc|w)$/, "")).competency);
-  assert.ok(!skills.includes(L2V) && !skills.includes(LS), "never asks about linear systems or what they rest on");
   const rec = r.f.session.trace.filter((t) => t.component === "intervention.recovery").map((t) => t.output as { phase: string; active: string | null });
-  assert.ok(rec.some((x) => x.phase === "escalate" && x.active === PF), JSON.stringify(rec.at(-1)));
+  // before deeper-support@1 the shipped recovery stopped at partial fractions; now a support she fails twice is not the end
+  assert.ok(rec.some((x) => x.active === LS || x.active === L2V), JSON.stringify(rec.map((x) => `${x.phase}:${x.active}`)));
+  assert.ok(!rec.some((x) => x.phase === "escalate" && x.active === PF), "no longer stops at partial fractions while what they rest on is untested");
   assert.ok(qs > 0);
 });
 
