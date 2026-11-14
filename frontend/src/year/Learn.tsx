@@ -76,6 +76,9 @@ export const statusClass = (s: SkillEvidence["status"]) => (s === "verified" ? "
 const FLOW = ["Explore", "Strategy", "Chapter", "Practise", "Verify"] as const;
 /** What each step is, in a learner's words. */
 const KID_FLOW_WORDS: Record<(typeof FLOW)[number], string> = { Explore: "Let's see what you know", Strategy: "The idea", Chapter: "How to do it", Practise: "On your own", Verify: "Check again later" };
+/** kid-steps@1: the child's words follow what the step actually is: practice with hints is not "on your own", and the
+ *  practice after it is not yet the check that comes back later */
+const kidStepWord = (p: ModulePhase, step: number) => (p === "guided" ? "Practise with help" : p === "check" ? "On your own" : p === "retention" ? "Check again later" : step === 4 ? "More practice" : KID_FLOW_WORDS[FLOW[step]]);
 const FLOW_WORDS: Record<(typeof FLOW)[number], string> = { Explore: "Find your starting point", Strategy: "See the idea", Chapter: "Learn the method", Practise: "Practise on your own", Verify: "Check it again later" };
 const flowIndex = (p: ModulePhase) => (p === "explore" || p === "recover" ? 0 : p === "strategy" ? 1 : p === "chapter" ? 2 : p === "guided" || p === "check" ? 3 : 4);
 const activityOf = (phase: ModulePhase, q: Question): LearningActivity =>
@@ -210,8 +213,9 @@ function TestReview({ held, onDone }: { held: Held[]; onDone: () => void }) {
   return (
     <div className="stack test-review">
       <div className={`feedback ${right === held.length ? "good kid-cheer" : "kid-soft"}`} role="status">
-        <strong>{right === held.length ? "All right! 🎉" : `${right} of ${held.length} right`}</strong>
-        <p>{right === held.length ? "Every answer was right." : "Here's how each one went. Tap for the steps on the ones to look at again."}</p>
+        {/* one question on its own reads as one answer, not as "0 of 1 right" */}
+        <strong>{held.length === 1 ? (right ? "That's right! 🎉" : "Not quite.") : right === held.length ? "All right! 🎉" : `${right} of ${held.length} right`}</strong>
+        <p>{held.length === 1 ? (right ? "Well done." : "Here's how it went. Ask for the steps one at a time.") : right === held.length ? "Every answer was right." : "Here's how each one went. Tap for the steps on the ones to look at again."}</p>
       </div>
       <ol className="review-list">
         {held.map((h, i) => {
@@ -592,7 +596,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
           <li key={f} className={k === step ? "here" : k < step ? "past" : ""} aria-current={k === step ? "step" : undefined}><span className="sr-only">{f}</span></li>
         ))}
       </ol>
-      <p className="skill-steps-caption">Step {step + 1} of {FLOW.length} · {(KID ? KID_FLOW_WORDS : FLOW_WORDS)[FLOW[step]]}</p>
+      <p className="skill-steps-caption">Step {step + 1} of {FLOW.length} · {KID ? kidStepWord(ms.phase, step) : FLOW_WORDS[FLOW[step]]}</p>
     </div>
   );
   const head = (
