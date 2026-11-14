@@ -77,7 +77,7 @@ export async function calculusWorking(qid: string, lines: readonly string[], bas
       methodEvidence: status === "verified" ? "method-verified" : status === "invalid" ? "method-false-step" : "no-method-evidence",
       completeness: status === "verified" ? "complete" : "incomplete",
       lines: lines.map((text, i) => ({ text, status: verdict[i] === "verified" && (first < 0 || i < first) ? "certified-calculus" : i === first ? "invalid" : "unsupported", move: null })),
-      firstInvalid: first < 0 ? null : { index: first, text: lines[first], from: first ? lines[first - 1] : question(qid).prompt, reason: "This line does not follow exactly from the one before.", lost: null, gained: null, detail: steps.find((s) => s.index === first)?.justification ?? null, lost: null, gained: null },
+      firstInvalid: first < 0 ? null : { index: first, text: lines[first], from: first ? lines[first - 1] : question(qid).prompt, reason: "This line does not follow exactly from the one before.", lost: null, gained: null, detail: steps.find((s) => s.index === first)?.justification ?? null },
       workingAnswer: null,
       agreesWithResponse: null,
       substitution: null,

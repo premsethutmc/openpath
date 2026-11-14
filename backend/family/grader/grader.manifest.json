@@ -14,7 +14,7 @@
   "research/geometry-reasoner/geometry_reasoner/worker.py": "88580574b3f3ee656c51918f822cc8c27d2454ce71ef965e5074420607c26b51"
  },
  "entry": "packages/learning/src/server-grader.ts",
- "sha256": "466770645a557dc983273318ae204e95493442a636705a2a0c9ac31d338be401",
+ "sha256": "d8b073dc188c80f984522f2418ee0d0b60fec83d59327a5841c7eb8b6f898080",
  "inputs": {
   "content/english/framework/en-0.2.0.json": "29d5e2f911093de7d2eb78e2e8f2259512f5559f8b1d999f5545c084094f5031",
   "content/learning/competency-additions.v1.json": "8f752dcccfcefe908e6f0b1f880249edd3fe3b55652751f2433bd26dffb97108",
@@ -231,7 +231,7 @@
   "packages/learning/src/goals.ts": "6577e1691c95734848cf00f712ab70fb46b494b9d0680dc9e965e43cb9c5e124",
   "packages/learning/src/grade.ts": "6bf0d2d82a11f46b6f2d6fdd5f125153198ab1e6a005620caefc7f035e498541",
   "packages/learning/src/grading/antiderivative.ts": "aeb00b767725b632e127fcbb16f2fa47813566f02e1a799e8b95c2e65a90fc1e",
-  "packages/learning/src/grading/calculus-working.ts": "8e2b6d212e6bd54152625e31a5eeaacaec42adb21414ee3652488618b36c7f69",
+  "packages/learning/src/grading/calculus-working.ts": "e7256431a51614f9ad35e452b67fccc3225a2e62964d6b29a785afd3fa4acf93",
   "packages/learning/src/grading/certify.ts": "dd94e1eef56dc0b89ef4c277d512e84a1edf8535534bab8b54ff7750956998a3",
   "packages/learning/src/grading/contract.ts": "5080d65c436e4ed4d14f22cfc54c4da9573c3bfa2c31e2d9d1b981dbcbb7b084",
   "packages/learning/src/grading/decision.ts": "51d3aeba0c4955f7532191a6fdb2af6ed4f4d3768bf7788784bc4a00adde8793",
