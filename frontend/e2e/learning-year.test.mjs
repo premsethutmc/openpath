@@ -489,7 +489,10 @@ test("journey I: two learners solve 7 × 8 in different ways; both answers recei
     await page.locator(".qcard").getByLabel("Your answer").fill("56");
     await page.locator(".qcard").getByRole("button", { name: "Check" }).click();
     await page.getByRole("status").filter({ hasText: "Right." }).waitFor();
-    await page.getByRole("note", { name: "Your working" }).getByText(/saved.*not been marked/i).first().waitFor();
+    // working-marks@1: the server's step check of the working is shown beside the answer's mark. A line-by-line calculation it
+    // can follow is shown as checked; one it cannot is saved, not marked. Either way the answer's credit is unchanged and no
+    // method certification is invented (asserted on the record below).
+    await page.getByRole("note", { name: "Your working" }).getByText(/saved.*not been marked|checked/i).first().waitFor();
     await shot(page, name);
     await next(page);
     await page.getByText("Solved on your own", { exact: true }).waitFor();
