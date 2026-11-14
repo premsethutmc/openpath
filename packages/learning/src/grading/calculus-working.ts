@@ -20,11 +20,24 @@ export const isCalculusWorking = (qid: string) => !!calculusTaskOf(qid);
 
 /** The notation the app itself uses (and so a learner copies) in the checker's notation: "∫ from 0 to 3 of f dx" as
  *  "∫_0^3 f dx", "[F] from 0 to 3" as "[F]_0^3", "lim (x → 4)" as "lim_(x->4)". The learner's own text is what is shown. */
+/** a limit of integration the checker reads as one token: 7/2 → (7/2) */
+const bound = (b: string) => (/^-?\d+$/.test(b) || /^\(.*\)$/.test(b) ? b : `(${b})`);
 export function toCheckerNotation(line: string): string {
   return line
-    .replace(/∫\s*from\s+(\S+)\s+to\s+(\S+)\s+of\s+/g, "∫_$1^$2 ")
-    .replace(/\]\s*from\s+(\S+)\s+to\s+(\S+)/g, "]_$1^$2")
+    .replace(/∫\s*from\s+(\S+)\s+to\s+(\S+)\s+of\s+/g, (_, a, b) => `∫_${bound(a)}^${bound(b)} `)
+    .replace(/\]\s*from\s+(\S+)\s+to\s+(\S+)/g, (_, a, b) => `]_${bound(a)}^${bound(b)}`)
     .replace(/lim\s*\(\s*([a-z])\s*(?:→|->)\s*([^)]+?)\s*\)\s*(?:of\s+)?/g, "lim_($1->$2) ")
+    // calculus-notation@1: the way the app writes these functions, in the checker's words
+    // sin⁻¹u and cos⁻¹u in the exact form the question's own sin⁻¹ is read in (every route reads tan⁻¹ and √)
+    .replace(/(?:sin⁻¹|\basin|\barcsin)\s*\(([^()]*(?:\([^()]*\)[^()]*)*)\)/g, "atan(($1)/(sqrt(1-($1)^2)))").replace(/(?:sin⁻¹|\basin|\barcsin)\s*([a-z])\b/g, "atan(($1)/(sqrt(1-($1)^2)))")
+    .replace(/(?:cos⁻¹|\bacos|\barccos)\s*\(([^()]*(?:\([^()]*\)[^()]*)*)\)/g, "(pi/2-atan(($1)/(sqrt(1-($1)^2))))").replace(/(?:cos⁻¹|\bacos|\barccos)\s*([a-z])\b/g, "(pi/2-atan(($1)/(sqrt(1-($1)^2))))")
+    .replace(/tan⁻¹/g, "atan")
+    .replace(/\bcosec\b/g, "csc")
+    // cot, sec, csc as cos/sin (the same function on the same domain), so limits, which only know sin and cos, read them
+    .replace(/\b(cot|sec|csc)²\s*([a-z])\b/g, "$1($2)^2").replace(/\b(cot|sec|csc)\s+([a-z])\b/g, "$1($2)")
+    .replace(/\bcot\(([^()]*)\)/g, "(cos($1)/sin($1))").replace(/\bsec\(([^()]*)\)/g, "(1/cos($1))").replace(/\bcsc\(([^()]*)\)/g, "(1/sin($1))")
+    .replace(/([0-9a-z)])eˣ/g, "$1*exp(x)").replace(/(?<![a-z])eˣ/g, "exp(x)")
+    .replace(/(\d+)ˣ/g, "$1^x")
     .replace(/[−–]/g, "-");
 }
 
@@ -41,7 +54,7 @@ export async function calculusWorking(qid: string, lines: readonly string[], bas
   const fallback = (reason: string): WorkingAssessment => ({ ...common, status: "unsupported", methodEvidence: "no-method-evidence", reason } as WorkingAssessment);
   let timer: ReturnType<typeof setTimeout> | undefined;
   try {
-    const run = assessMathematicalWorking(task, { format: "natural", text: lines.map(toCheckerNotation).join("\n"), conventions: { log: "natural" } }) as Promise<{ classification: string; steps?: Step[]; justification?: string }>;
+    const run = assessMathematicalWorking(task, { format: "natural", text: lines.map(toCheckerNotation).join("\n"), conventions: { log: "natural" } }, { conventions: { log: "natural" } }) as Promise<{ classification: string; steps?: Step[]; justification?: string }>;
     const r = await Promise.race([run, new Promise<never>((_, rej) => { timer = setTimeout(() => rej(new Error("timeout")), timeoutMs); })]);
     const steps = Array.isArray(r.steps) ? r.steps : [];
     // one verdict per submitted line (the checker numbers the lines it read from 0)

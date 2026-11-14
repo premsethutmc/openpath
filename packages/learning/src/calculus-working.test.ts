@@ -26,6 +26,20 @@ const CASES: Case[] = [
   ["gen:subst:0,3,1,1", ["∫ from 0 to 3 of 2x(x^2 + 1) dx = [(x^2 + 1)^2 / 2] from 0 to 3", "= 100/2 - 1/2", "= 99/2"], "verified"],
   ["gen:audfp:0,-1,7,0,3", ["∫ from 0 to 3 of (-x + 7) dx = [-x^2/2 + 7x] from 0 to 3", "= -9/2 + 21", "= 33/2"], "verified"],
   ["gen:audfp:0,-1,7,0,3", ["∫ from 0 to 3 of (-x + 7) dx = [-x^2/2 + 7x] from 0 to 3", "= -9/2 + 21", "= 35/2"], "invalid", 2],
+  // calculus-notation@1: sin⁻¹, cos⁻¹, √, cot, aˣ written the way the questions write them
+  ["gen:audinv:0,7,5", ["dy/dx = 5 · 1/√(1 − (x/7)²) · 1/7", "= 5/√(49 − x²)"], "verified"],
+  ["gen:audinv:0,7,5", ["dy/dx = 5 · 1/√(1 − (x/7)²) · 1/7", "= 5/(7√(49 − x²))"], "invalid", 1],
+  ["gen:audinv:0,7,5", ["dy/dx = 5/√(49 − x²)"], "verified"],
+  ["gen:audinv:1,5,3:mc", ["dy/dx = −3/√(25 − x²)"], "verified"],
+  ["gen:audinv:1,5,3:mc", ["dy/dx = 3/√(25 − x²)"], "invalid", 0],
+  ["gen:audel:1,3,5,1", ["dy/dx = 5 · 3^x log 3"], "verified"],
+  ["gen:audel:1,3,5,1", ["dy/dx = 5 · 3^x"], "invalid", 0],
+  ["gen:aupi:1,7,1", ["∫ from 0 to 7/2 of 1/√(49 − x²) dx = [sin⁻¹(x/7)] from 0 to 7/2", "= sin⁻¹(1/2) − sin⁻¹(0)", "= π/6"], "verified"],
+  ["gen:aupi:1,7,1", ["∫ from 0 to 7/2 of 1/√(49 − x²) dx = [sin⁻¹(x/7)] from 0 to 7/2", "= π/3"], "invalid", 1],
+  // log|x + 3 + √(…)| needs cancelling a radical between numerator and denominator: left unchecked, never called right
+  ["gen:auform:2,2,3,1,0", ["∫ 1/√(x² + 6x + 13) dx = ∫ 1/√((x + 3)² + 4) dx", "= log|x + 3 + √(x² + 6x + 13)| + C"], "unsupported"],
+  ["gen:audinv:0,7,5", ["dy/dx = 5 · 1/√(1 − (x/7)²) · 1/7", "y = 5 sin⁻¹(x/7) so dy/dx = 5/√(49 − x²)"], "unsupported"],
+  ["gen:arlhinf:2,1,1", ["lim (x→0) x cot x = lim (x→0) x cos x / sin x", "= 1"], "verified"],
   // limits
   ["gen:lim:4,1", ["lim (x→4) (x^2 - 16)/(x - 4) = lim (x→4) (x - 4)(x + 4)/(x - 4)", "= lim (x→4) (x + 4)", "= 8"], "verified"],
   ["gen:aulpow:1,1,1,-2,-3", ["lim (x→-2) (x^2 - x - 6)/(x^2 - 4) = lim (x→-2) (x - 3)/(x - 2)", "= 5/4"], "verified"],
@@ -46,7 +60,7 @@ describe("calculus-working@1", () => {
       // a wrong line must be found; words must never be marked right
       if (status === "invalid") { expect(w.status).toBe("invalid"); expect(w.firstInvalid?.index).toBe(firstWrong!); }
       else if (status === "unsupported") expect(["unsupported", "partial"]).toContain(w.status);
-      else expect(w.status).toBe(status);
+      else expect(w.status).toBe(status as WorkingAssessment["status"]);
       expect(w.lines.length).toBe(lines.length);
     }, 30000);
   }

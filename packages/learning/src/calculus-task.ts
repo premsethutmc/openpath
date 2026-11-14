@@ -18,21 +18,25 @@ const plainNumber = (t: string, map: Record<string, string>) => [...t].map((c) =
 export function toReaderNotation(t: string): string {
   return t
     .replace(/[−–]/g, "-")
-    .replace(/×/g, "*")
+    .replace(/[×·]/g, "*")
     .replace(/tan⁻¹/g, "atan")
-    .replace(/sin⁻¹/g, "asin")
-    .replace(/cos⁻¹/g, "acos")
+    // calculus-notation@1: sin⁻¹u is written exactly as tan⁻¹(u/√(1−u²)) on −1 < u < 1 (the kernel uses the same form),
+    // cos⁻¹u as π/2 − sin⁻¹u; divisions are bracketed so the reader never meets "a/b c"
+    .replace(/sin⁻¹\s*\(([^()]*)\)/g, "atan(($1)/(sqrt(1-($1)^2)))").replace(/sin⁻¹\s*([a-z])\b/g, "atan(($1)/(sqrt(1-($1)^2)))")
+    .replace(/cos⁻¹\s*\(([^()]*)\)/g, "(pi/2-atan(($1)/(sqrt(1-($1)^2))))").replace(/cos⁻¹\s*([a-z])\b/g, "(pi/2-atan(($1)/(sqrt(1-($1)^2))))")
     .replace(/([0-9x)])eˣ/g, "$1 exp(x)")
     .replace(/(?<![a-z])eˣ/g, "exp(x)")
     .replace(/\b(sin|cos|tan|sec|cosec|cot)²\s*([a-z])\b/g, "$1($2)^2")
     .replace(/\b(sin|cos|tan|sec|cosec|cot|log|ln) ([a-z])\b/g, "$1($2)")
+    .replace(/\bsec\(([^()]*)\)/g, "(1/(cos($1)))").replace(/\bcosec\(([^()]*)\)/g, "(1/(sin($1)))").replace(/\bcot\(([^()]*)\)/g, "(cos($1)/(sin($1)))")
+    .replace(/(\d+)\^x\b/g, "exp(x*ln($1))").replace(/(\d+)ˣ/g, "exp(x*ln($1))")
     .replace(/\blog\(/g, "ln(")
     .replace(/\|([^|]+)\|/g, "abs($1)")
     .replace(/([a-z)\d])([⁰¹²³⁴⁵⁶⁷⁸⁹]+)/g, (_, b, s) => `${b}^${plainNumber(s, SUP)}`)
     .replace(/(?<![a-z])e\^\(([^()]*)\)/g, "exp($1)")
     .replace(/(?<![a-z])e\^([a-z0-9]+)/g, "exp($1)")
-    .replace(/√\(([^()]*)\)/g, "sqrt($1)")
-    .replace(/√([a-z0-9]+)/g, "sqrt($1)")
+    .replace(/√\(([^()]*)\)/g, "(sqrt($1))")
+    .replace(/√([a-z0-9]+)/g, "(sqrt($1))")
     .trim();
 }
 
@@ -52,8 +56,21 @@ const rational = (t: string): string | null => {
   return /^-?\d+(?:\/\d+)?$/.test(s) ? s : null;
 };
 
+/** calculus-notation@1: the domain a question states — "(for −7 < x < 7)", "(x > 0; …)" — as the checker's restrictions */
+export function statedDomain(prompt: string): string[] {
+  const p = prompt.replace(/[−–]/g, "-");
+  let m = p.match(/\((?:for )?(-?\d+(?:\/\d+)?) < ([a-z]) < (-?\d+(?:\/\d+)?)[);]/);
+  if (m) return [`${m[2]} > ${m[1]}`, `${m[2]} < ${m[3]}`];
+  m = p.match(/\((?:for )?([a-z]) (>|<|≠) (-?\d+(?:\/\d+)?)[);]/);
+  return m ? [`${m[1]} ${m[2] === "≠" ? "!=" : m[2]} ${m[3]}`] : [];
+}
+
 /** The task a prompt states, or null. */
 export function calculusTaskFromPrompt(prompt: string): CalculusProblem | null {
+  const t = calculusTaskBare(prompt), r = statedDomain(prompt);
+  return t && r.length && (t.task === "derivative" || t.task === "indefinite-integral") ? { ...t, restrictions: r } as CalculusProblem : t;
+}
+function calculusTaskBare(prompt: string): CalculusProblem | null {
   const p = prompt.replace(/\s+/g, " ").trim();
   let m: RegExpMatchArray | null;
   if ((m = p.match(/^Differentiate (?:y|f\(x\)) = (.+?) with respect to ([a-z])\b/))) {

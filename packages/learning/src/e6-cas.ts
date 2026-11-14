@@ -214,10 +214,30 @@ function nfPow(a: Extract<A, { t: "pow" }>, ctx: Ctx, depth: number): RF {
     if (pIsConst(b.n) && pIsConst(b.d)) { const c = qdiv(pConst(b.n), pConst(b.d)); const root = exactRoot(c, Number(r.d)); if (root) return rfc(powQ(root, Number(r.n))); }
     throw new Unsupported(`fractional exponent ${qtext(r)} is outside the exact kernel`);
   }
-  // variable exponent: only e-like constant bases a^x are not handled here
+  // calculus-notation@1: a positive constant base, a^u = e^(u·ln a) (a > 0, a ≠ 1), holds for every real u
+  const cb = nf(a.a, ctx, depth + 1);
+  if (pIsConst(cb.n) && pIsConst(cb.d)) { const c = qdiv(pConst(cb.n), pConst(cb.d)); if (qsign(c) > 0 && !qeq(c, ONE)) return nf(fn("exp", mul(a.b, fn("ln", a.a))), ctx, depth + 1); }
   throw new Unsupported("non-constant exponent");
 }
 function powQ(x: Q, n: number): Q { let r = ONE; const k = Math.abs(n); if (k > 200) throw new Budget("power too large"); for (let i = 0; i < k; i++) r = qmul(r, x); return n < 0 ? qdiv(ONE, r) : r; }
+/** √P = out·√p with p = k·(primitive part of P), k a square-free integer; null when nothing changes or the content is
+ *  not positive (or too large to split into a square and a square-free part by trial division). */
+function sqrtContent(P: Poly): { out: Q; p: Poly } | null {
+  const big = (a: bigint) => (a < 0n ? -a : a);
+  const gcd = (a: bigint, b: bigint): bigint => { a = big(a); b = big(b); while (b) [a, b] = [b, a % b]; return a; };
+  let g = 0n, l = 1n;
+  for (const t of P.m.values()) { if (qiszero(t.c)) continue; g = gcd(g, t.c.n); l = (l / gcd(l, t.c.d)) * t.c.d; }
+  if (g === 0n) return null;
+  const c = q(g, l); // P = c·p, p integer-primitive; c > 0
+  // √c = √(g/l) = √(g·l)/l; g·l = s²·k with k square-free
+  let m = g * l, s = 1n, k = 1n;
+  if (m > 10n ** 12n) return null;
+  for (let f = 2n; f * f <= m; f++) { while (m % (f * f) === 0n) { m /= f * f; s *= f; } if (m % f === 0n) { m /= f; k *= f; } }
+  k *= m;
+  if (qeq(c, q(k, 1n))) return null; // already in canonical form
+  const p = pScale(P, qdiv(q(k, 1n), c));
+  return { out: q(s, l), p };
+}
 function exactRoot(c: Q, k: number): Q | null {
   if (qsign(c) < 0 || k < 2 || k > 8) return null;
   const rt = (n: bigint): bigint | null => { let lo = 0n, hi = n < 2n ? n : BigInt(Math.ceil(Math.pow(Number(n), 1 / k))) + 2n; for (; lo <= hi;) { const mid = (lo + hi) / 2n; const v = mid ** BigInt(k); if (v === n) return mid; if (v < n) lo = mid + 1n; else hi = mid - 1n; } return null; };
@@ -233,6 +253,24 @@ function atomIndexAbs(ctx: Ctx, arg: RF): number {
 }
 function rfEqualRaw(a: RF, b: RF, ctx: Ctx): boolean { return pIsZero(reduce(pSub(pMul(a.n, b.d), pMul(b.n, a.d)), ctx)); }
 
+/** calculus-notation@1: the exact values of sin⁻¹ and tan⁻¹ a question's limits reach (sin⁻¹½ = π/6, tan⁻¹√3 = π/3, …);
+ *  an argument is matched only when it is exactly equal to the tabled one */
+function inverseTrigValue(f: "asin" | "atan", arg: A, ctx: Ctx, depth: number): A | null {
+  const pi = (k: number, d: number): A => mul(N(k), div({ t: "pi" } as A, N(d)));
+  const r3 = fn("sqrt", N(3)), r2 = fn("sqrt", N(2));
+  const table: [A, A][] = f === "asin"
+    ? [[N(0), N(0)], [div(N(1), N(2)), pi(1, 6)], [div(r2, N(2)), pi(1, 4)], [div(r3, N(2)), pi(1, 3)], [N(1), pi(1, 2)]]
+    : [[N(0), N(0)], [div(N(1), r3), pi(1, 6)], [N(1), pi(1, 4)], [r3, pi(1, 3)]];
+  let x: RF; try { x = nf(arg, ctx, depth + 1); } catch { return null; }
+  for (const [val, ang] of table) {
+    try {
+      const t = nf(val, ctx, depth + 1);
+      if (rfEqualRaw(x, t, ctx)) return ang;
+      if (rfEqualRaw(x, rfNeg(t), ctx)) return neg(ang);
+    } catch { /* not comparable */ }
+  }
+  return null;
+}
 function nfFn(a: Extract<A, { t: "fn" }>, ctx: Ctx, depth: number): RF {
   const f = a.f;
   if (f === "log") throw new Ambiguity("log without a stated base");
@@ -248,7 +286,12 @@ function nfFn(a: Extract<A, { t: "fn" }>, ctx: Ctx, depth: number): RF {
   if (f === "exp") return nfExp(a.a, ctx, depth);
   if (f === "ln") return nfLn(a.a, ctx, depth);
   if (f === "sin" || f === "cos" || f === "tan" || f === "sec" || f === "csc" || f === "cot") return nfTrig(f, a.a, ctx, depth);
+  if ((f === "atan" || f === "arctan" || f === "asin" || f === "arcsin") && !hasVar(a.a, ctx.v)) { const known = inverseTrigValue(f.endsWith("sin") ? "asin" : "atan", a.a, ctx, depth); if (known) return nf(known, ctx, depth + 1); }
   if (f === "atan" || f === "arctan") { const arg = nf(a.a, ctx, depth + 1); const idx = atomIndex(ctx, "atan", arg); return rfOfPoly(pv(`T${idx}`)); }
+  // calculus-notation@1: sin⁻¹u = tan⁻¹(u/√(1−u²)) exactly on −1 < u < 1 (the √ adds that requirement), so a task
+  // written either way and a learner's sin⁻¹ meet as the same atom; cos⁻¹u = π/2 − sin⁻¹u
+  if (f === "asin" || f === "arcsin") return nf(fn("atan", div(a.a, fn("sqrt", add(N(1), neg(pw(a.a, N(2))))))), ctx, depth + 1);
+  if (f === "acos" || f === "arccos") return nf(add(div({ t: "pi" } as A, N(2)), neg(fn("asin", a.a))), ctx, depth + 1);
   throw new Unsupported(`function ${f} is outside the exact kernel`);
 }
 /** drop zero-exponent entries (x^0) so polynomials built by the factoriser compare equal to ones built by the evaluator */
@@ -278,6 +321,15 @@ function nfSqrt(arg: A, ctx: Ctx, depth: number): RF {
     }
     ctx.logs.push({ arg: r.n, factors: fx.factors.map((f) => ({ p: f.p, e: 1 })) });
     return rfMul(out, rfc(qdiv(ONE, exactRoot(pConst(r.d), 2)!)));
+  }
+  // calculus-notation@1: a positive constant factor leaves the radical (√(c·p) = √c·√p, c > 0, holds everywhere), so
+  // √(1 − x²/49) and √(49 − x²)/7 reach the same atom: the radicand is made integer-primitive and only a square-free
+  // integer stays inside
+  const scaled = sqrtContent(pScale(r.n, qdiv(ONE, pConst(r.d))));
+  if (scaled) {
+    const idx = atomIndex(ctx, "sqrt", { n: scaled.p, d: pc(ONE) }); const name = `Q${idx}`; ctx.atoms[idx].vars = [name];
+    ctx.rel.set(name, scaled.p);
+    return rfMul(rfc(scaled.out), rfOfPoly(pv(name)));
   }
   const idx = atomIndex(ctx, "sqrt", r); const name = `Q${idx}`; ctx.atoms[idx].vars = [name];
   ctx.rel.set(name, pScale(r.n, qdiv(ONE, pConst(r.d))));
@@ -604,6 +656,8 @@ export function evalNum(a: A, env: Env, depth = 0): number {
         case "ln": if (x <= 0) throw new RangeError("ln"); return Math.log(x);
         case "sqrt": if (x < 0) throw new RangeError("sqrt"); return Math.sqrt(x);
         case "abs": return Math.abs(x); case "atan": case "arctan": return Math.atan(x);
+        case "asin": case "arcsin": if (x < -1 || x > 1) throw new RangeError("asin"); return Math.asin(x);
+        case "acos": case "arccos": if (x < -1 || x > 1) throw new RangeError("acos"); return Math.acos(x);
         default: throw new Unsupported(a.f);
       }
     }
@@ -641,6 +695,16 @@ export function hasVar(a: A, v: string): boolean {
   }
 }
 const Z0 = N(0), O1 = N(1);
+/** calculus-notation@1: tan⁻¹(p/√(1 − p²)) is sin⁻¹p (the form a question's sin⁻¹ is read in); its derivative is then taken
+ *  as dp/√(1 − p²) directly, which is the same value on −1 < p < 1 without the chain rule's nested denominators */
+function asinOf(u: A, v: string): A | null {
+  let p: A | null = null, R: A | null = null;
+  const isInvSqrt = (x: A): A | null => (x.t === "pow" && x.a.t === "fn" && x.a.f === "sqrt" && (() => { const k = foldQ(x.b); return !!k && qeq(k, q(-1n)); })() ? x.a.a : null);
+  if (u.t === "div" && u.b.t === "fn" && u.b.f === "sqrt") { p = u.a; R = u.b.a; }
+  else if (u.t === "mul") { const i = u.xs.findIndex((x) => isInvSqrt(x)); if (i >= 0) { R = isInvSqrt(u.xs[i]); const rest = u.xs.filter((_, j) => j !== i); p = rest.length === 1 ? rest[0] : mul(...rest); } }
+  if (!p || !R) return null;
+  try { return compareExpr(R, add(N(1), neg(pw(p, N(2)))), v).status === "equal" ? p : null; } catch { return null; }
+}
 export function d6(a: A, v: string, depth = 0, ov?: Record<string, A>): A {
   if (depth > 60) throw new Budget("expression too deep to differentiate");
   tick(1);
@@ -672,7 +736,9 @@ export function d6(a: A, v: string, depth = 0, ov?: Record<string, A>): A {
         case "ln": return div(du, u);
         case "sqrt": return div(du, mul(N(2), a));
         case "abs": return mul(div(u, a), du);
-        case "atan": case "arctan": return div(du, add(N(1), pw(u, N(2))));
+        case "atan": case "arctan": { const p = asinOf(u, v); if (p) return div(r(p), fn("sqrt", add(N(1), neg(pw(p, N(2)))))); return div(du, add(N(1), pw(u, N(2)))); }
+        case "asin": case "arcsin": return div(du, fn("sqrt", add(N(1), neg(pw(u, N(2))))));
+        case "acos": case "arccos": return neg(div(du, fn("sqrt", add(N(1), neg(pw(u, N(2)))))));
         case "log": throw new Ambiguity("log without a stated base");
         default: throw new Unsupported(`derivative of ${a.f}`);
       }
