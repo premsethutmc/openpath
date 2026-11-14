@@ -253,3 +253,8 @@ details.working summary, .hint { color: var(--ink); }
 .review-q { margin: 0 0 4px; font-weight: 700; }
 .review-a { margin: 0 0 6px; }
 .review-working { margin: 0 0 6px; padding-left: 22px; display: grid; gap: 4px; }
+
+/* session-fatigue@1 */
+.kid-break { margin: 10px 0; padding: 14px 16px; border-radius: 18px; background: #eaf6ff; border: 1px solid #b9dcf5; }
+.kid-break p { margin: 0 0 8px; }
+.kid-break-actions { display: flex; gap: 12px; align-items: center; }

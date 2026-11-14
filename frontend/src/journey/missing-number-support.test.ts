@@ -32,7 +32,10 @@ test("an unrecognised mistake on a missing number: any support taught is an oper
   const r = runScenario({ id: "miss-support-unrecognised", category: 2, start: "gen:acmissing:3,3,10", expect: {}, learner: () => unrecognised });
   const t = taught(r);
   assert.ok(t.length >= 1, "something was taught");
-  for (const x of t) assert.ok([MISS, ...USED].includes(x.competency), `taught ${x.competency} · ${x.strategy}`);
+  // deeper-support@1: a support she keeps getting wrong is itself checked for what it builds on, so a skill below an operation
+  // (place value under addition) may be taught first; never a number pattern
+  const below = USED.flatMap((u) => walkSupports(u, 2).map((s) => s.id));
+  for (const x of t) assert.ok([MISS, ...USED, ...below].includes(x.competency) && !PATTERNS.includes(x.competency), `taught ${x.competency} · ${x.strategy}`);
 });
 
 test("a recognised missing-number mistake is taught on the missing-number skill itself", () => {

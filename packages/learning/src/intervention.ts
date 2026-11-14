@@ -40,6 +40,8 @@ import { blocksTransfer, heldByTeaching, presentedProblems, unitOfQuestion, unit
 /** The shared planner's draft policy with this engine's block size (one guided question, one fresh check, no contrast). */
 export const MODULE_POLICY: PlannerPolicy = { ...PLANNER_POLICY_DRAFT, guidedItems: 1, reassessItems: 1, reassessPassMin: 1, reassessContrastItems: 0, version: `${PLANNER_POLICY_DRAFT.version}+learning-module@1` };
 export const RECOVERY_DEPTH = 2;
+/** deeper-support@1: how many more levels recovery may go below a support she is failing */
+export const DEEPER_LEVELS = 2;
 
 const of = (m: Module) => (a: Attempt) => question(a.questionId).competency === m.competency;
 /** level@1: the learner's grade (their current enrolment), and whether a question is within it: a problem from a
@@ -1152,10 +1154,23 @@ export function recovery(originalQid: string, records: LearnerRecords, evidence:
     }
   }
   // 2. not a supported problem, or the diagnosis is unsure: check supporting skills along the relations
-  for (const s of supports) {
-    if (!s.assessable || shown(s.id)) continue;
-    const r = resolved(s.id);
+  for (const s0 of supports) {
+    if (!s0.assessable || shown(s0.id)) continue;
+    let s = s0, r = resolved(s0.id);
     if (r.done) continue;
+    // deeper-support@1: a support at the bottom of the walk that she is FAILING (two or more wrong answers on her own since this
+    // problem's first try) is not taught yet when what it builds on is not shown either: up to DEEPER_LEVELS more levels down,
+    // the first such skill with its own module is checked and taught first. Only below a failing skill, so a learner whose
+    // supports are fine is never sent further down than before.
+    const visited = new Set([s0.id, q.competency, ownTarget]);
+    for (let level = 0; level < DEEPER_LEVELS + RECOVERY_DEPTH; level++) {
+      const wrong = records.attempts.filter((a) => graph.evidenceTarget(a.competency) === graph.evidenceTarget(s.id) && a.at > tries[0].at && independentAttempt(a) && !rightAnswer(a)).length;
+      if (wrong < 2) break;
+      const child = walkSupports(s.id, 1).find((c) => !visited.has(c.id) && !!moduleFor(c.id) && !shown(c.id) && !resolved(c.id).done);
+      if (!child || s.depth + 1 > RECOVERY_DEPTH + DEEPER_LEVELS) break;
+      visited.add(child.id);
+      s = { ...child, depth: s.depth + 1, via: s.id, assessable: true }; r = resolved(child.id);
+    }
     if (r.ms.phase === "pause") return { ...base, reasoning, plan, phase: "escalate", active: s.id, ...(r.ms.handover ? { handover: r.ms.handover } : {}), reason: `${graph.get(s.id).name}: different explanations have not clicked yet. Ask a teacher or parent; you can still try the problem again.` };
     return { ...base, reasoning, plan, phase: "support", active: s.id, reason: `${plan?.kind === "unsure" ? `${plan.why} ` : ""}${s.type === "uses" ? `This problem uses a skill that is not shown yet: ${graph.get(s.id).name}.` : s.type === "mandatory" ? `This problem rests on a skill that is not shown yet: ${graph.get(s.id).name}.` : `A related skill that is not shown yet may help: ${graph.get(s.id).name}.`} We check it first, then come back to the problem.` };
   }

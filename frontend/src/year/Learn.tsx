@@ -19,6 +19,7 @@ import { creditOf } from "../../../packages/learning/src/grade";
 import { question, type Question, type Screen, type Strategy } from "../../../packages/learning/src/content";
 import { answerFeedback } from "../../../packages/learning/src/answer-feedback";
 import { rightAnswer, type SkillEvidence } from "../../../packages/learning/src/evidence";
+import { sitting, tiring } from "../../../packages/learning/src/session-fatigue";
 import { graph } from "../../../packages/learning/src/graph";
 import { problemOf } from "../../../packages/learning/src/families";
 import { retriesLeft, reviewStrategy as reviewStrategyFor, familyOf, investigateContext, moduleState, recovery, type Established, type ModulePhase } from "../../../packages/learning/src/intervention";
@@ -178,6 +179,23 @@ function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v:
 
 /** test-later@1: which activities are a test (answers marked at the end) and which are practice (marked straight away) */
 const isTest = (a: LearningActivity) => a !== "guided" && a !== "practice";
+/** session-fatigue@1: late in a sitting that is going downhill (against its own start), a gentle offer of a short break.
+ *  Once per sitting; "Keep going" closes it. It marks nothing. */
+const breakOffered = new Set<string>();
+function BreakNote({ records, onBreak }: { records: LearnerRecords; onBreak: () => void }) {
+  const [, redraw] = useState(0);
+  const s = sitting(records.attempts), key = s[0]?.at ?? "";
+  const why = tiring(records.attempts, rightAnswer);
+  if (!why || !key || breakOffered.has(key)) return null;
+  const close = () => { breakOffered.add(key); redraw((x) => x + 1); };
+  return (
+    <div className="kid-break" role="note" aria-label="Time for a break?">
+      <p><b>Time for a short break? 🧃</b> {why === "slow" ? "These are taking longer than they did at the start." : "A few have gone wrong in a row, and that often means a tired brain."} Ten minutes away, a stretch and some water help. Everything is saved.</p>
+      <div className="kid-break-actions"><button className="secondary" onClick={() => { close(); onBreak(); }}>Take a break</button> <button className="link" onClick={close}>Keep going</button></div>
+    </div>
+  );
+}
+
 /** test-later@1: an answer held for the end of a test; `marks` are the server's line verdicts on its working (✓ checked,
  *  ✗ the first line that does not follow, null not checked), `why` the reason for the ✗ */
 type Held = { qid: string; response: string; right: boolean; working?: string[]; marks?: ("ok" | "bad" | null)[]; why?: string };
@@ -583,6 +601,7 @@ export function Module({ competency, ctx, onExit, onLearn, embedded = false, onF
       {embedded ? <h2>{name}</h2> : <h1>{name}</h1>}
       {!KID && (<div className="year-meta"><span className={`chip status-${ms.requirementsMet === false ? "active" : statusClass(ev.status)}`}>{ms.requirementsMet === false ? "More evidence needed" : statusWord}</span>{afterHelp && <span className="small muted" data-after-help={afterHelp.kind}> {afterHelp.note}</span>}</div>)}
       {stepper}
+      {KID && <BreakNote records={ctx.records} onBreak={onExit} />}
     </>
   );
   const lessonModule = moduleFor(competency);
