@@ -232,6 +232,17 @@ export function checkWorking(pr: Problem, raw: string[]): WorkingCheck {
 
 /** working-steps@1: one line of a child's working on its own: is it a true calculation? Every part split at "=" must
  * have the same value. "unreadable" (words, units, letters) is never called wrong: it simply is not checked. */
+/** Every line of a child's working checked in order: a line that starts with "=" carries on from the line before
+ *  ("94 × 7 = 90 × 7 + 4 × 7", "= 630 + 28", "= 648" checks 630 + 28 = 648), so a slip there is caught, never ticked. */
+export function checkLines(lines: readonly string[]): ReturnType<typeof checkLine>[] {
+  let prev = "";
+  return lines.map((raw) => {
+    const t = raw.trim();
+    const full = /^=/.test(t) ? (prev ? `${prev} ${t}` : "") : t;
+    if (full.includes("=")) prev = full.split("=").pop()!.trim();
+    return full ? checkLine(full) : { state: "unreadable" as const };
+  });
+}
 export function checkLine(line: string): { state: "right" | "wrong" | "unreadable"; why?: string } {
   const t = line.trim();
   if (!t || !t.includes("=")) return { state: "unreadable" };

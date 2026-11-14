@@ -44,7 +44,7 @@ import { semanticsOf } from "../../../packages/learning/src/grading/parse";
 import { examplesFor, SYNTAX } from "../../../packages/learning/src/grading/syntax";
 import { KID, kidName } from "./kid";
 import { FeedbackBox } from "./Feedback";
-import { checkLine } from "../../../packages/learning/src/working";
+import { checkLines } from "../../../packages/learning/src/working";
 
 export const LETTERS = ["A", "B", "C", "D"];
 
@@ -150,7 +150,7 @@ function WorkingSteps({ value, setValue, check }: { value: string; setValue: (v:
   const insert = (k: string) => put(lines.map((l, i) => (i === focus ? `${l}${/\s$|^$/.test(l) ? "" : " "}${k} ` : l)));
   const mark = (i: number) => {
     if (!check || !done.has(i)) return null;
-    const r = checkLine(lines[i] ?? "");
+    const r = checkLines(lines)[i] ?? { state: "unreadable" };
     if (r.state === "right") return <span className="ws-mark ok" aria-label="Right">✓</span>;
     if (r.state === "wrong") { const m = r.why?.match(/^(.*) is (.*), but (.*) is .*$/); return <span className="ws-mark bad">{m ? `${m[1]} is ${m[2]}, not ${m[3]}` : "Check this step"}</span>; }
     return null;
@@ -207,7 +207,7 @@ function TestReview({ held, onDone }: { held: Held[]; onDone: () => void }) {
               {!!h.working?.length && (
                 <ol className="review-working" aria-label="Your working">
                   {h.marks ? h.working.map((l, j) => <li key={j}>{l} {h.marks![j] === "ok" ? <span className="ws-mark ok">✓</span> : h.marks![j] === "bad" ? <span className="ws-mark bad">← {h.why ?? "check this step"}</span> : null}</li>)
-                  : h.working.map((l, j) => { const c = checkLine(l); const m = c.why?.match(/^(.*) is (.*), but (.*) is .*$/); return <li key={j}>{l} {c.state === "right" ? <span className="ws-mark ok">✓</span> : c.state === "wrong" ? <span className="ws-mark bad">← {m ? `${m[1]} is ${m[2]}, not ${m[3]}` : "check this step"}</span> : null}</li>; })}
+                  : h.working.map((l, j) => { const c = checkLines(h.working!)[j]; const m = c.why?.match(/^(.*) is (.*), but (.*) is .*$/); return <li key={j}>{l} {c.state === "right" ? <span className="ws-mark ok">✓</span> : c.state === "wrong" ? <span className="ws-mark bad">← {m ? `${m[1]} is ${m[2]}, not ${m[3]}` : "check this step"}</span> : null}</li>; })}
                 </ol>
               )}
               {mix && <p className="kid-slip"><b>That's a common slip.</b>{mix.principle ? ` ${mix.principle}` : ""}</p>}
