@@ -29,8 +29,13 @@ const CASES: Case[] = [
   ["gen:archain:-1,0,-2,3,-1,-3,2", ["∂w/∂x = -2x", "∂w/∂y = -4y"], "partial"],
   ["gen:areuler:2,1,0,2,1,-1", ["∂f/∂x = 2x", "∂f/∂y = 4y", "x ∂f/∂x + y ∂f/∂y = 2x² + 4y²", "= 2 + 4", "= 6"], "verified"],
   ["gen:auinit:0,6,5,0,60", ["∫ (6x + 5) dx = 3x² + 5x + C", "f(x) = 3x² + 5x + C"], "partial"],
-  // a derivative of a letter the question does not define is not read (dx/dt for x = t²)
-  ["gen:arparam:1,2,1,1", ["dx/dt = 2t", "dy/dt = 1", "dy/dx = 1/(2t)"], "unsupported"],
+  // a parametric curve x = t², y = t
+  ["gen:arparam:1,2,1,1", ["dx/dt = 2t", "dy/dt = 1", "dy/dx = (dy/dt)/(dx/dt) = 1/(2t)"], "verified"],
+  ["gen:arparam:1,2,1,1", ["dx/dt = 2t", "dy/dx = 2t"], "invalid", 1],
+  // implicit differentiation of 2x² − xy + 5y² = 17
+  ["gen:arimpl:2,-1,5,0", ["d/dx(2x² - xy + 5y²) = 0", "4x - y - x dy/dx + 10y dy/dx = 0", "dy/dx = (y - 4x)/(10y - x)"], "verified"],
+  ["gen:arimpl:2,-1,5,0", ["4x - y - x dy/dx + 10y dy/dx = 0", "dy/dx = (4x - y)/(10y - x)"], "invalid", 1],
+  ["gen:arimpl:2,-1,5,0", ["4x + y - x dy/dx + 10y dy/dx = 0"], "invalid", 0],
   ["gen:arwallis:0,6,0", ["∫ from 0 to π/2 of cos⁶x dx = (5/6)(3/4)(1/2)(π/2)", "= 5π/32"], "partial"],
   ["gen:arwallis:0,6,0", ["∫ from 0 to π/2 of cos⁶x dx = (5/6)(3/4)(π/2)"], "invalid", 0],
 ];

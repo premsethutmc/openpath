@@ -31,8 +31,9 @@ const unjson = (s: string, f: (v: Record<string, unknown>) => unknown = (v) => v
 const subst = (a: A, map: Record<string, A>): A => unjson(json(a), (v) => (v.t === "s" && typeof v.name === "string" && v.name in map ? map[v.name as string] : v)) as A;
 
 interface Def { params: string[]; body: A }
-export interface LineTask { v: string; defs: Map<string, Def>; answer: A | null; point: Record<string, A> }
+export interface LineTask { v: string; defs: Map<string, Def>; answer: A | null; point: Record<string, A>; slope?: A }
 const PD = ["PDx", "PDy", "PDz", "PDt"];
+const YP = "Yp"; // y′ on an implicit curve
 
 const notation = (t: string) => toCheckerNotation(t)
   .replace(/[×·]/g, "*").replace(/′/g, "'").replace(/″/g, "''")
@@ -50,12 +51,15 @@ export function lineTaskOf(qid: string): LineTask | null {
   let q: { prompt: string; answer: unknown; type?: string };
   try { q = question(qid.replace(/:mc$/, "")) as typeof q; } catch { return null; }
   const p = q.prompt.replace(/\s+/g, " ").replace(/[−–]/g, "-");
-  const v = /\bd[a-z]\/dt\b|\bt seconds\b|\bs = .*\bt\b/.test(p) && !/\bdx\b/.test(p) ? "t" : "x";
+  const v = (/\bd[a-z]\/dt\b|\bt seconds\b|\bs = .*\bt\b/.test(p) && !/\bdx\b/.test(p)) || /given by x = /.test(p) ? "t" : "x";
   const defs = new Map<string, Def>();
   if (!/ for [a-z] [<>≤≥]| for \(/.test(p)) { // never a piecewise function
     for (const m of p.matchAll(/\b([a-zA-Z])\(([a-z](?:, ?[a-z])*)\) = (.+?)(?= for | is |, (?:find|and|where|use)|; |\. |\.$| at | on |\?)/g)) {
       try { defs.set(m[1], { params: m[2].split(/, ?/), body: readIn(m[3], v, new Set()) }); } catch { /* not read */ }
     }
+    // a parametric curve: "x = t², y = t" (both in terms of t)
+    const par = p.match(/given by x = ([^,]+?), y = ([^.,;]+?)(?=[.,;]| \()/);
+    if (par) try { defs.set("x", { params: [], body: readIn(par[1], "t", new Set()) }); defs.set("y", { params: [], body: readIn(par[2], "t", new Set()) }); } catch { /* not read */ }
     for (const m of p.matchAll(/\b([wzu]) = ([^,.;]+?)(?=,| where| and |\.|;)/g)) {
       try { defs.set(m[1], { params: [], body: readIn(m[2], v, new Set()) }); } catch { /* not read */ }
     }
@@ -68,9 +72,13 @@ export function lineTaskOf(qid: string): LineTask | null {
     if (two && at2) { point[two.params[0]] = readIn(at2[1], v, new Set()); point[two.params[1]] = readIn(at2[2], v, new Set()); }
     for (const m of p.matchAll(/(?:when|at) ([a-z]) = (-?[\d/.]+)/g)) point[m[1]] = readIn(m[2], v, new Set());
   } catch { /* none */ }
+  // a curve that defines y implicitly: G(x, y) = c; the true slope is −G_x/G_y (x and y independent letters)
+  let slope: A | undefined;
+  const imp = p.match(/^The equation (.+?) defines y implicitly/);
+  if (imp) try { const [l, r] = splitEquals(normalize(notation(imp[1]))).map((x) => parseExpression(x, { fnNames: new Set(), variable: "x" })); const G = add(l, neg(r)); slope = neg({ t: "div", a: d6(G, "x"), b: d6(G, "y") }); } catch { /* not read */ }
   let answer: A | null = null;
   if (q.type !== "choice") try { answer = readIn(String(q.answer), v, new Set()); } catch { answer = null; }
-  return { v, defs, answer, point };
+  return { v, defs, answer, point, slope };
 }
 
 const symbolsOf = (a: A, out = new Set<string>()): Set<string> => { unjson(json(a), (x) => { if (x.t === "s") out.add(x.name as string); return x; }); return out; };
@@ -96,7 +104,15 @@ function reduce(a: A, t: LineTask): A {
     case "D": {
       // d/dx of a letter the question does not define (dy/dx, d/dx(xy), dx/dt) may depend on x: not read
       const free = [...symbolsOf(a.of)].filter((n) => n !== a.v && !t.defs.has(n) && n !== "C0");
+      if (t.slope && a.v === "x" && a.k === 1 && free.every((n) => n === "y")) { // implicit: d/dx = ∂/∂x + ∂/∂y · y′
+        const g = r(a.of); return add(d6(g, "x"), mul(d6(g, "y"), S(YP)));
+      }
       if (free.length) throw new Unchecked("derivative of an unknown function");
+      const by = t.defs.get(a.v);
+      if (by && a.k === 1) { // dy/dx on a parametric curve: (dy/dt)/(dx/dt)
+        const tv = [...symbolsOf(by.body)][0]; if (!tv) throw new Unchecked("parameter");
+        return { t: "div", a: d6(r(a.of), tv), b: d6(by.body, tv) };
+      }
       let g = r(a.of); for (let i = 0; i < a.k; i++) g = d6(g, a.v); return g; }
     case "EV": {
       const F = r(a.f);
@@ -192,6 +208,14 @@ function pair(L0: A, R0: A, t: LineTask): Verdict {
     } catch { return "unchecked"; }
   }
   if (hasNode(L0, "I") || hasNode(R0, "I")) return "unchecked";
+  if (t.slope) { // a relation with y′ is true exactly when it gives the curve's slope
+    const F = add(reduce(L0, t), neg(reduce(R0, t)));
+    if (symbolsOf(F).has(YP)) {
+      const b = subst(F, { [YP]: N(0) }), a = add(subst(F, { [YP]: N(1) }), neg(b));
+      try { if (compareExpr(F, add(mul(a, S(YP)), b), YP).status !== "equal") return "unchecked"; } catch { return "unchecked"; }
+      return identity(mul(t.slope, a), neg(b)); // a·y′ + b = 0 with y′ = slope
+    }
+  }
   return identity(reduce(L0, t), reduce(R0, t), hasOp(L0) || hasOp(R0), t.point);
 }
 
