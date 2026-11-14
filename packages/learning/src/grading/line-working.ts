@@ -36,7 +36,7 @@ export interface Piece { f: A; lo: number; hi: number; loIn: boolean; hiIn: bool
 /** a piecewise f: its pieces, the joining point the question asks about, and the values of its parameters (k; a, b) that
  *  the question's condition (continuous / differentiable there) fixes */
 export interface Piecewise { pieces: Piece[]; at: number | null; params: string[]; solution: Record<string, A> | null }
-export interface LineTask { v: string; defs: Map<string, Def>; answer: A | null; point: Record<string, A>; slope?: A; pw?: Piecewise; sums?: Map<string, { r: string; lo: string; hi: string; e: string }>; mv?: Map<string, { vars: string[]; at: string[]; e: string }>; approx?: { target: A; value: A } }
+export interface LineTask { v: string; defs: Map<string, Def>; answer: A | null; point: Record<string, A>; slope?: A; pw?: Piecewise; sums?: Map<string, { r: string; lo: string; hi: string; e: string }>; mv?: Map<string, { vars: string[]; at: string[]; e: string }>; approx?: { target: A; value: A }; given: A[]; limitAt?: [A, A] }
 const PD = ["PDx", "PDy", "PDz", "PDt"];
 const YP = "Yp"; // y′ on an implicit curve
 
@@ -58,7 +58,7 @@ export function lineTaskOf(qid: string): LineTask | null {
   const p = q.prompt.replace(/\s+/g, " ").replace(/[−–]/g, "-");
   const v = (/\bd[a-z]\/dt\b|\bt seconds\b|\bs = .*\bt\b/.test(p) && !/\bdx\b/.test(p)) || /given by x = /.test(p) ? "t" : "x";
   const defs = new Map<string, Def>();
-  if (!/ for [a-z] [<>≤≥]| for \(/.test(p)) { // never a piecewise function
+  if (!/ for [a-z] [<>≤≥]/.test(p)) { // never a piecewise function ("for (x, y) ≠ (0, 0)" is not one)
     for (const m of p.matchAll(/\b([a-zA-Z])\(([a-z](?:, ?[a-z])*)\) = (.+?)(?= for | is |, (?:find|and|where|use)|; |\. |\.$| at | on |\?)/g)) {
       try { defs.set(m[1], { params: m[2].split(/, ?/), body: readIn(m[3], v, new Set()) }); } catch { /* not read */ }
     }
@@ -81,11 +81,17 @@ export function lineTaskOf(qid: string): LineTask | null {
   let slope: A | undefined;
   const imp = p.match(/^The equation (.+?) defines y implicitly/);
   if (imp) try { const [l, r] = splitEquals(normalize(notation(imp[1]))).map((x) => parseExpression(x, { fnNames: new Set(), variable: "x" })); const G = add(l, neg(r)); slope = neg({ t: "div", a: d6(G, "x"), b: d6(G, "y") }); } catch { /* not read */ }
+  // every number the question states (a value the working takes must be one of them, or solve an equation before it)
+  const given: A[] = [];
+  for (const m of p.matchAll(/(?<![\w.])-?\d+(?:\.\d+)?(?:\/\d+)?/g)) { try { given.push(readIn(m[0], v, new Set())); } catch { /* */ } }
+  const lm = p.match(/\(x, y\) → \((-?[\d/]+), (-?[\d/]+)\)/);
+  let limitAt: [A, A] | undefined;
+  try { if (lm) limitAt = [readIn(lm[1], v, new Set()), readIn(lm[2], v, new Set())]; else if (/\(x, y\) ≠ \(0, 0\)/.test(p)) limitAt = [N(0), N(0)]; } catch { /* */ }
   const pwise = piecewiseOf(p, v);
   const approx = approximationOf(p, v, defs);
   let answer: A | null = null;
   if (q.type !== "choice") try { answer = readIn(String(q.answer), v, new Set()); } catch { answer = null; }
-  return { v, defs, answer, point, slope, pw: pwise ?? undefined, approx: approx ?? undefined };
+  return { v, defs, answer, point, slope, pw: pwise ?? undefined, approx: approx ?? undefined, given, limitAt };
 }
 
 /** "the linear approximation of f(x) = √x at x = 16 to estimate √18": the target √18 = f(b) and the method's value
@@ -345,6 +351,39 @@ const asBracket = (a: A): { c: A; E: Extract<A, { t: "EV" }> } | null => {
   return null;
 };
 
+// ---------------------------------------------------------------------------------------------- limits along paths
+let paths: { value: A; right: boolean }[] = [];
+/** "along y = mx, the limit is 1/(1 + 3m²)", "along x = 0: lim = 1", and "so the limit does not exist" */
+function pathLine(raw: string, t: LineTask): Verdict | null {
+  const f = t.defs.get("f");
+  const text = raw.replace(/[−–]/g, "-");
+  if (/does not exist|doesn't exist|\bDNE\b|not exist/i.test(text) && !/=/.test(text.replace(/along[^,:]*[,:]/i, ""))) {
+    if (!/along/i.test(text)) { // the conclusion: two checked paths with different limits
+      for (let i = 0; i < paths.length; i++) for (let j = i + 1; j < paths.length; j++) {
+        if (paths[i].right && paths[j].right && identity(paths[i].value, paths[j].value) === "wrong") return "right";
+      }
+      return "unchecked";
+    }
+  }
+  const m = text.match(/along\s+(?:the\s+(?:line|path|curve|axis)\s+)?([xy])\s*=\s*([^,:;]+?)\s*[,:;]\s*(.+)$/i);
+  if (!m || !f || f.params.length !== 2 || !t.limitAt) return null;
+  const [px, py] = f.params, [ax, ay] = t.limitAt;
+  const pieces = m[3].split(/=|\bis\b|→|->/); if (pieces.length < 2) return "unchecked";
+  const valueText = pieces[pieces.length - 1].replace(/[.\s]+$/, "").trim();
+  try {
+    const curve = readIn(m[2], t.v, new Set()), claimed = reduce(readIn(valueText, t.v, new Set()), t);
+    // along y = g(x): one variable left; its limit point is the other coordinate
+    const [free, at, onPath] = m[1] === py ? [px, ax, { [py]: subst(curve, { x: { t: "s", name: px } as A }) }] : [py, ay, { [px]: subst(curve, { y: { t: "s", name: py } as A }) }];
+    const g = subst(f.body, onPath);
+    const pt = constantValue(at); if (!pt) return "unchecked";
+    const L = limitOf(g, free, pt, "both"); if (L.kind !== "finite") return "unchecked";
+    const value = { t: "n", v: L.value } as A;
+    const v = identity(claimed, value);
+    paths.push({ value, right: v === "right" });
+    return v;
+  } catch { return "unchecked"; }
+}
+
 /** L ≈ R: right when the two are equal, or when one is the quantity being estimated and the other is the method's value */
 function approxPair(L0: A, R0: A, t: LineTask): Verdict {
   const L = reduce(L0, t), R = reduce(R0, t);
@@ -368,8 +407,15 @@ function pair(L0: A, R0: A, t: LineTask): Verdict {
     if (!ii) continue;
     const { c, I } = ii;
     const f = reduce(I.f, t);
+    const J = asIntegral(Y);
+    if (!I.lo && J && !J.I.lo) { // ∫ f dx = ∫ g du (u = u(x)): the integrands agree as f(x) = g(u(x))·u′(x)
+      const slopeOf = (k: A, K: Extract<A, { t: "I" }>) => { const g = mul(reduce(k, t), reduce(K.f, t)); if (K.v === t.v) return g; const d = t.defs.get(K.v); if (!d) throw new Unchecked("variable"); return mul(g, d6(d.body, t.v)); };
+      return identity(slopeOf(c, I), slopeOf(J.c, J.I));
+    }
     if (!I.lo) { // ∫ f dx = F + C: F′ = f
       const Yr = reduce(Y, t);
+      const sv = I.v !== t.v ? t.defs.get(I.v) : undefined; // ∫ g(u) du = G(u): checked in x, as g(u(x))·u′(x) = d/dx G(u(x))
+      if (sv) return identity(mul(reduce(c, t), f, d6(sv.body, t.v)), d6(Yr, t.v));
       return identity(mul(reduce(c, t), f), d6(Yr, I.v));
     }
     const b = asBracket(Y);
@@ -409,7 +455,8 @@ function pair(L0: A, R0: A, t: LineTask): Verdict {
 }
 
 export function lineVerdicts(t: LineTask, lines: string[]): { verdicts: Verdict[]; last: A | null } {
-  let last: A | null = null;
+  let last: A | null = null, lastEq: A | null = null;
+  paths = [];
   t.sums = new Map(); t.mv = new Map();
   const fns = new Set([...[...t.defs.entries()].filter(([, d]) => d.params.length).map(([k]) => k), ...PD, ...SUMS, ...MVS, ...(t.pw ? PW : [])]);
   const verdicts = lines.map((raw): Verdict => {
@@ -418,7 +465,22 @@ export function lineVerdicts(t: LineTask, lines: string[]): { verdicts: Verdict[
       if (!t.pw) raw = raw.replace(/\b(d?)([AV])\b/g, (_, d, X) => d + X.toLowerCase()); // A, dA as a, da (the reader splits dA)
       // a value the working takes (x = 8, dx = 0.02): a premise, not a claim; later lines use it
       const given = raw.replace(/[−–]/g, "-").match(/^\s*(d?[a-z])\s*=\s*(-?[\d./]+)\s*(?:[a-z]{1,2})?\s*$/);
-      if (given && !t.pw) { t.point[given[1]] = readIn(given[2], t.v, new Set()); return "label"; }
+      if (given && !t.pw) {
+        // a value the working takes: right when the question states it (for this letter, or as a number) or it solves the
+        // equation just before; otherwise only an assumption, and the working can then be at most partly checked
+        const val = readIn(given[2], t.v, new Set());
+        t.point[given[1]] = val;
+        const same = (a: A) => { try { return compareExpr(add(a, neg(val)), N(0), "x").status === "equal"; } catch { return false; } };
+        const solves = lastEq && [...symbolsOf(lastEq)].every((n) => n === given[1]) && (() => { const c = constantValue(subst(lastEq!, { [given[1]]: val })); return !!c && c.n === 0n; })();
+        return t.given.some(same) || solves ? "right" : "unchecked";
+      }
+      const sub = raw.match(/^\s*(?:let|put|substitute|set|take)\s+([a-z])\s*=\s*(.+)$/i);
+      if (sub && sub[1] !== t.v && !t.defs.has(sub[1])) { // a substitution: u = x² + 1
+        t.defs.set(sub[1], { params: [], body: reduce(readIn(sub[2], t.v, new Set()), t) });
+        return "label";
+      }
+      const path = pathLine(raw, t);
+      if (path) return path;
       const labelled = LABEL.test(raw);
       t.sums ??= new Map(); t.mv ??= new Map();
       const text = sumNotation(normalize(notation(mvNotation(labelled ? raw.replace(LABEL, "") : raw, t.mv))), t.sums);
@@ -435,6 +497,7 @@ export function lineVerdicts(t: LineTask, lines: string[]): { verdicts: Verdict[
       if (cont) { if (!last) return "unchecked"; sides.unshift(last); }
       if (sides.length < 2) return "unchecked";
       last = sides[sides.length - 1];
+      if (sides.length === 2) { try { const F = add(reduce(sides[0], t), neg(reduce(sides[1], t))); lastEq = symbolsOf(F).size === 1 ? F : lastEq; } catch { /* */ } }
       const off = cont ? 1 : 0; // the separators of a continued line start after the one in front
       const vs = sides.slice(1).map((R, i) => { try { return seps[i + off - (cont ? 1 : 0)] === "≈" ? approxPair(sides[i], R, t) : pair(sides[i], R, t); } catch { return "unchecked" as Verdict; } });
       return vs.includes("wrong") ? "wrong" : vs.every((v) => v === "right") ? "right" : "unchecked";

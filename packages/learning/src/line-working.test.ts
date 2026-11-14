@@ -58,6 +58,23 @@ const CASES: Case[] = [
   ["gen:arerror:0,8,2,0", ["A = x²", "dA = 2x dx", "x = 8", "dx = 0.02", "dA = 2(8)(0.02) = 0.32"], "verified"],
   ["gen:arerror:0,8,2,0", ["A = x²", "dA = x dx"], "invalid", 1],
   ["gen:arlinapp2:1,0,-2,1,-3,2,1", ["df = ∂f/∂x dx + ∂f/∂y dy", "= 2x dx - 4y dy", "= 2(1)(0.2) - 4(-3)(-0.1)", "= -0.8"], "verified"],
+  // limits along paths: "does not exist" needs two checked paths with different limits
+  ["gen:armvlimx:0,1,3,3,1", ["along y = 0: f(x, 0) = 1, so the limit is 1", "along x = 0: f(0, y) = (3y² + 3y)/(3y²) → limit is not finite"], "partial"],
+  ["gen:armvcont:1,3,2", ["along y = 0: the limit is 0", "along x = 0: the limit is 0"], "partial"],
+  ["gen:armvcont:1,3,2", ["along y = 0: the limit is 3"], "invalid", 0],
+  ["gen:armvlimx:1,1,3,2,1", ["along y = 0: the limit is 1", "along y = x: the limit is 2", "the limits differ, so the limit does not exist"], "partial"],
+  ["gen:armvlimx:1,1,3,2,1", ["along y = 0: the limit is 1", "along y = 2x: the limit is 15/9", "so the limit does not exist"], "partial"],
+  // a value the working takes must come from the question or solve the equation before it
+  ["gen:arerror:0,8,2,0", ["A = x²", "dA = 2x dx", "x = 9", "dx = 0.02", "dA = 2(9)(0.02) = 0.36"], "partial"],
+  ["gen:alp:1,6", ["x² - x - 6 = 0", "x = 3"], "partial"],
+  // integration techniques: partial fractions, substitution, standard forms, half-angle, eˣ(f + f′)
+  ["gen:aupfr:0,-1,0,5,3", ["∫ (5x + 8)/(x + 1)² dx = 5 log|x + 1| - 3/(x + 1) + C"], "verified"],
+  ["gen:aupfr:0,-1,0,5,3", ["(5x + 8)/(x + 1)² = 5/(x + 1) + 3/(x + 1)²", "∫ (5x + 8)/(x + 1)² dx = 5 log|x + 1| - 3/(x + 1) + C"], "verified"],
+  // a wrong split is an equation between letters, so it is left unchecked (never called right)
+  ["gen:aupfr:0,-1,0,5,3", ["(5x + 8)/(x + 1)² = 5/(x + 1) + 2/(x + 1)²"], "unsupported"],
+  ["gen:subst:0,3,1,1", ["let u = x² + 1", "du = 2x dx", "∫ 2x(x² + 1) dx = ∫ u du", "= u²/2 + C", "= (x² + 1)²/2 + C"], "partial"],
+  ["gen:subst:0,3,1,1", ["let u = x² + 1", "du = x dx"], "invalid", 1],
+  ["gen:subst:0,3,1,1", ["∫ from 0 to 3 of 2x(x² + 1) dx = 99/2"], "verified"],
   ["gen:auinit:0,6,5,0,60", ["∫ (6x + 5) dx = 3x² + 5x + C", "f(x) = 3x² + 5x + C"], "partial"],
   // a parametric curve x = t², y = t
   ["gen:arparam:1,2,1,1", ["dx/dt = 2t", "dy/dt = 1", "dy/dx = (dy/dt)/(dx/dt) = 1/(2t)"], "verified"],
