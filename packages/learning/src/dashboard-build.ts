@@ -78,6 +78,8 @@ export function releaseIndex(r: CurriculumRelease): DashRelease {
     competencies[id] = competency(id);
     return { id: kind === "competency" ? `skill:${id}` : `micro:${id}`, kind, title: graph.get(id).name, competency: id, children: graph.childrenOf(id).map((k) => leaf(k, "micro")) };
   };
+  // an outcome with its own node (unsupported, or not mapped yet) is listed there, not again on its chapter or section
+  const listed = (os: Outcome[]) => os.filter((o) => o.mapping.verdict !== "unsupported" && o.mapping.competencies.some((m) => m.status === "accepted")).map((o) => o.id);
   const inner = (node: Chapter | Section): DashNode[] => {
     const seen = new Set<string>();
     const kids: DashNode[] = [];
@@ -95,12 +97,12 @@ export function releaseIndex(r: CurriculumRelease): DashRelease {
     for (const sec of node.sections ?? []) {
       const k = inner(sec);
       if (!k.length && !sec.outcomes.length) continue;
-      kids.push({ id: `section:${r.id}:${sec.id}`, kind: "section", title: sec.title.startsWith(sec.number) ? sec.title : `${sec.number} ${sec.title}`, subtitle: sec.pages ? `pp. ${sec.pages}` : undefined, outcomes: (sec.outcomes as Outcome[]).map((o) => o.id), children: k });
+      kids.push({ id: `section:${r.id}:${sec.id}`, kind: "section", title: sec.title.startsWith(sec.number) ? sec.title : `${sec.number} ${sec.title}`, subtitle: sec.pages ? `pp. ${sec.pages}` : undefined, outcomes: listed(sec.outcomes as Outcome[]), children: k });
     }
     return kids;
   };
   const maths = r.subjects.find((s) => s.id === "mathematics") ?? r.subjects[0];
-  const nodes: DashNode[] = maths.chapters.map((ch) => ({ id: `chapter:${r.id}:${ch.id}`, kind: "chapter", title: ch.title, subtitle: ch.unit?.title, outcomes: (ch.outcomes as Outcome[]).map((o) => o.id), children: inner(ch) }));
+  const nodes: DashNode[] = maths.chapters.map((ch) => ({ id: `chapter:${r.id}:${ch.id}`, kind: "chapter", title: ch.title, subtitle: ch.unit?.title, outcomes: listed(ch.outcomes as Outcome[]), children: inner(ch) }));
   const names: Record<string, string> = {};
   for (const c of Object.values(competencies)) for (const p of c.prerequisites) if (!competencies[p.id]) names[p.id] = graph.byId.get(p.id)?.name ?? p.id;
   return {
