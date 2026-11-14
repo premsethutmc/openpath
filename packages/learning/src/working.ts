@@ -229,3 +229,13 @@ export function checkWorking(pr: Problem, raw: string[]): WorkingCheck {
     note: !lines.length ? "No working given." : valid ? (id === "other" ? "Every line is right. That is a valid way, even if it is not one of the ways taught here." : "Every line is right.") : (() => { const why = checked.find((l) => !l.valid)!.why!; return /could not be read|is not one number|empty/.test(why) ? `A line could not be checked: ${why}.` : `A line has a slip: ${why}.`; })(),
   };
 }
+
+/** working-steps@1: one line of a child's working on its own: is it a true calculation? Every part split at "=" must
+ * have the same value. "unreadable" (words, units, letters) is never called wrong: it simply is not checked. */
+export function checkLine(line: string): { state: "right" | "wrong" | "unreadable"; why?: string } {
+  const t = line.trim();
+  if (!t || !t.includes("=")) return { state: "unreadable" };
+  const r = checkNumeric(null as unknown as Problem, t);
+  if (r.valid) return { state: "right" };
+  return /could not be read|is not one number|empty/.test(r.why ?? "") ? { state: "unreadable" } : { state: "wrong", why: r.why };
+}
