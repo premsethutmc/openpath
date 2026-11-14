@@ -226,3 +226,9 @@ details.working summary, .hint { color: var(--ink); }
 .q-card p { margin: 0; }
 .q-todo { background: var(--brand-soft); }
 .parent-detail { margin: 14px 0 0; font-size: 1.05rem; color: var(--muted); }
+
+/* help-steps@1 */
+.kid-slip { background: var(--brand-soft); border-radius: 12px; padding: 10px 12px; }
+.kid-steps { display: grid; gap: 8px; margin-top: 6px; }
+.kid-steps ol { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.kid-steps li { font-size: 1.05rem; }

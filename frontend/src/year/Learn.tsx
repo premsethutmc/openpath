@@ -138,6 +138,25 @@ function SyntaxHelp({ q }: { q: { type: string; answer?: string } }) {
     </details>
   );
 }
+/** help-steps@1: after a wrong answer a child sees the working one step at a time, asking for each (she does the
+ *  thinking between them), instead of the whole solution at once. */
+const solutionSteps = (t: string) => t.split(/(?<=[.!?])\s+(?=\S)/).map((x) => x.trim()).filter(Boolean);
+function StepByStep({ solution }: { solution: string }) {
+  const steps = solutionSteps(solution);
+  const [shown, setShown] = useState(0);
+  return (
+    <div className="kid-steps">
+      {shown > 0 && <ol>{steps.slice(0, shown).map((x, i) => <li key={i}>{x}</li>)}</ol>}
+      {shown < steps.length && (
+        <button type="button" className="secondary" onClick={() => setShown(shown + 1)}>
+          {shown === 0 ? (steps.length === 1 ? "Show me how" : "Show me the first step") : shown === steps.length - 1 ? "Show the last step" : "Show the next step"}
+        </button>
+      )}
+      {shown === 0 && <p className="small muted">Try it again in your head first. Then ask for one step at a time.</p>}
+    </div>
+  );
+}
+
 /** kid-say@1: a lesson's words for a child: the first sentence of each part, the rest one tap away ("Tell me more"). */
 const KID_TITLES: Record<string, string> = { "The method": "How to do it", "The idea": "The big idea", "A common wrong answer": "Watch out for this" };
 const kidTitle = (t: string) => KID_TITLES[t] ?? t;
@@ -281,9 +300,11 @@ export function Feedback({ fb, onNext, label = "Continue", onRetry, onInvestigat
         <strong>{undecided ? "Saved, not marked." : KID ? (fb.right ? CHEERS[fb.qid.length % CHEERS.length].word : "Not quite.") : fb.right ? "Right." : "Not this time."}</strong>
         {undecided && <p>{fb.assessment!.feedback.message}</p>}
         {!undecided && fb.assessment?.evidence.firstError && <p>{fb.assessment.feedback.message}</p>}
-        {mixup && <p data-feedback="answer-feedback@1">{mixup.note}{mixup.principle ? ` ${mixup.principle}` : ""}</p>}
+        {mixup && (KID
+          ? <p className="kid-slip" data-feedback="answer-feedback@1"><b>That's a common slip.</b>{mixup.principle ? ` ${mixup.principle}` : " Check each step."}</p>
+          : <p data-feedback="answer-feedback@1">{mixup.note}{mixup.principle ? ` ${mixup.principle}` : ""}</p>)}
         {fb.assessment?.clarification?.kind === "show-step" && !fb.working?.length && <p className="small muted">{fb.assessment.clarification.prompt}</p>}
-        {(!onRetry || fb.right) && (KID ? <details className="kid-why" open={!fb.right}><summary>{fb.right ? "How it works" : "See why"}</summary><p>{q.solution}</p></details> : <p>{q.solution}</p>)}
+        {(!onRetry || fb.right) && (KID ? (fb.right ? <details className="kid-why"><summary>How it works</summary><p>{q.solution}</p></details> : <StepByStep key={fb.qid} solution={q.solution} />) : <p>{q.solution}</p>)}
         {onRetry && !fb.right && <><p>{KID ? "Have another go, or ask for a hint." : "Your answer and working are saved. A wrong answer alone does not tell us why."}</p><button className="secondary" onClick={()=>onRetry(false)}>Try again</button> <button className="link" onClick={()=>onRetry(true)}>Give me a hint</button></>}
       </div>
       {!!fb.working?.length && <div className={`feedback ${trusted?.working?.status === "invalid" ? "bad" : ""}`} role="note" aria-label="Your working">
