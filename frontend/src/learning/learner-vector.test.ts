@@ -57,8 +57,9 @@ test("graph: wrong answers on a skill cast doubt on what it builds on; the learn
 
 test("only a first, unaided answer counts", () => {
   const S = "MATH.number.decimal-tenths", [q1, q2] = questionsOf(S, 2);
-  const base = learnerVector(records([answer(q1, S, true)])).get(S)!;
-  const more = learnerVector(records([answer(q1, S, true), answer(q1, S, false, { n: 2 }), answer(q2, S, false, { hints: 1 }), answer(q2, S, false, { activity: "guided" })])).get(S)!;
+  const first = answer(q1, S, true);
+  const base = learnerVector(records([first])).get(S)!;
+  const more = learnerVector(records([first, answer(q1, S, false, { n: 2 }), answer(q2, S, false, { hints: 1 }), answer(q2, S, false, { activity: "guided" })])).get(S)!;
   assert.deepEqual(more, base);
 });
 
