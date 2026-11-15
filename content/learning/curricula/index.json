@@ -19,6 +19,15 @@
    "board": "CBSE (NCERT textbooks)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-1",
+   "version": "1.0.0",
+   "grade": 1,
+   "title": "CISCE Curriculum: Mathematics, Class I — Grade 1 Mathematics (CISCE / ICSE)",
+   "hash": "0a37af07",
+   "file": "icse-cisce-mathematics-grade-1.v1.0.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "tn-samacheer-mathematics-grade-1",
    "version": "1.0.0",
    "grade": 1,
@@ -46,6 +55,15 @@
    "board": "CBSE (NCERT textbooks)"
   },
   {
+   "id": "icse-cisce-mathematics-grade-2",
+   "version": "1.0.0",
+   "grade": 2,
+   "title": "CISCE Curriculum: Mathematics, Class II — Grade 2 Mathematics (CISCE / ICSE)",
+   "hash": "be5d68de",
+   "file": "icse-cisce-mathematics-grade-2.v1.0.0.json",
+   "board": "CISCE (ICSE)"
+  },
+  {
    "id": "tn-samacheer-mathematics-grade-2",
    "version": "1.0.0",
    "grade": 2,
@@ -62,6 +80,15 @@
    "hash": "283b9e0c",
    "file": "cbse-ncert-mathematics-grade-3.v1.0.0.json",
    "board": "CBSE (NCERT textbooks)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-3",
+   "version": "1.0.0",
+   "grade": 3,
+   "title": "CISCE Curriculum: Mathematics, Class III — Grade 3 Mathematics (CISCE / ICSE)",
+   "hash": "3931b005",
+   "file": "icse-cisce-mathematics-grade-3.v1.0.0.json",
+   "board": "CISCE (ICSE)"
   },
   {
    "id": "tn-samacheer-mathematics-grade-3",
@@ -98,6 +125,15 @@
    "hash": "0eb3a858",
    "file": "discovering-mathematics-learner-s-book-4.v1.1.0.json",
    "board": "Sample Board B (synthetic)"
+  },
+  {
+   "id": "icse-cisce-mathematics-grade-4",
+   "version": "1.0.0",
+   "grade": 4,
+   "title": "CISCE Curriculum: Mathematics, Class IV — Grade 4 Mathematics (CISCE / ICSE)",
+   "hash": "80cfe20c",
+   "file": "icse-cisce-mathematics-grade-4.v1.0.0.json",
+   "board": "CISCE (ICSE)"
   },
   {
    "id": "openpath-sample-mathematics-grade-4",

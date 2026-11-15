@@ -1,0 +1,505 @@
+{
+ "schema": "syllabus@1",
+ "board": "icse",
+ "boardName": "CISCE (ICSE)",
+ "grade": 2,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "CISCE Curriculum: Mathematics, Class II",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "edition": "CISCE curriculum, Classes I–V",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "secondary",
+   "title": "ICSE Class 2 Maths Syllabus (blog copy listing the CISCE Class II themes and topics)",
+   "publisher": "batesountracentle.blogspot.com",
+   "edition": "2020-21 copy",
+   "academicYear": "2020-21",
+   "url": "https://batesountracentle.blogspot.com/2021/11/icse-class-2-mathematics-pdf.html",
+   "accessed": "2026-11-15",
+   "used_for": "themes and topics (read through a text summary)"
+  },
+  {
+   "kind": "secondary",
+   "title": "ICSE Class 2 Maths Syllabus (theme list)",
+   "publisher": "BYJU'S",
+   "edition": "2023-24",
+   "academicYear": "2023-24",
+   "url": "https://byjus.com/icse-class-2-maths-syllabus",
+   "accessed": "2026-11-15",
+   "used_for": "cross-check of the six theme titles"
+  }
+ ],
+ "notes": [
+  "UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
+  "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
+  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "CISCE publishes a curriculum for Classes 1–5 organised by themes; schools choose their own books."
+ ],
+ "gaps": [],
+ "chapters": [
+  {
+   "id": "icse-g02-c01",
+   "number": 1,
+   "term": null,
+   "title": "Theme 1: Numbers",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g02-c01-s01",
+     "title": "Numbers up to 999"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g02-c01-o01",
+     "statement": "Read and write numbers up to 999 and their number names.",
+     "concepts": [
+      "three-digit numbers"
+     ],
+     "questionTypes": [
+      "numeric",
+      "text"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.hundreds",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.hundreds"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Theme 1: Numbers"
+    },
+    {
+     "id": "icse-g02-c01-o02",
+     "statement": "Find place and face value in three-digit numbers and compare and order them.",
+     "concepts": [
+      "place value",
+      "face value",
+      "ascending order"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.hundreds",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compare-numbers",
+      "MATH.number.hundreds"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Theme 1: Numbers"
+    }
+   ]
+  },
+  {
+   "id": "icse-g02-c02",
+   "number": 2,
+   "term": null,
+   "title": "Theme 2: Number Operations",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g02-c02-s01",
+     "title": "Addition and subtraction"
+    },
+    {
+     "id": "icse-g02-c02-s02",
+     "title": "Multiplication"
+    },
+    {
+     "id": "icse-g02-c02-s03",
+     "title": "Division"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g02-c02-o01",
+     "statement": "Add and subtract two-digit numbers with and without regrouping, including word problems.",
+     "concepts": [
+      "regrouping"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.addition-regroup",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.subtraction-regroup",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.addition-regroup",
+      "MATH.number.subtraction-regroup"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    },
+    {
+     "id": "icse-g02-c02-o02",
+     "statement": "Use the commutative property, zero in addition, and add or subtract mentally.",
+     "concepts": [
+      "order of addition",
+      "mental addition"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.mental-arithmetic",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.addition",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.addition",
+      "MATH.number.mental-arithmetic"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    },
+    {
+     "id": "icse-g02-c02-o03",
+     "statement": "Estimate sums and differences.",
+     "concepts": [
+      "estimation"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.mental-arithmetic",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.mental-arithmetic",
+      "MATH.reasoning.estimate-check"
+     ],
+     "coverage": "partial",
+     "source": "Unit 2: Theme 2: Number Operations"
+    },
+    {
+     "id": "icse-g02-c02-o04",
+     "statement": "Know the multiplication tables of 2, 3, 4 and 5 as repeated addition.",
+     "concepts": [
+      "equal groups",
+      "times tables"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.equal-groups",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.multiplication-tables",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.equal-groups",
+      "MATH.number.multiplication-tables"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    },
+    {
+     "id": "icse-g02-c02-o05",
+     "statement": "Share equally and see division as repeated subtraction.",
+     "concepts": [
+      "sharing"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.sharing",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.sharing"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    }
+   ]
+  },
+  {
+   "id": "icse-g02-c03",
+   "number": 3,
+   "term": null,
+   "title": "Theme 3: Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g02-c03-s01",
+     "title": "2D shapes and lines"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g02-c03-o01",
+     "statement": "Describe 2D shapes by sides and corners.",
+     "concepts": [
+      "sides",
+      "corners"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shape-properties",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shape-properties"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Theme 3: Geometry"
+    },
+    {
+     "id": "icse-g02-c03-o02",
+     "statement": "Draw horizontal, vertical, straight and curved lines.",
+     "concepts": [
+      "horizontal",
+      "vertical",
+      "curved"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "drawing"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.line-types",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.line-types"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Theme 3: Geometry"
+    }
+   ]
+  },
+  {
+   "id": "icse-g02-c04",
+   "number": 4,
+   "term": null,
+   "title": "Theme 4: Measurement",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g02-c04-s01",
+     "title": "Length, weight and capacity"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g02-c04-o01",
+     "statement": "Measure lengths with non-standard units and compare weights with a simple balance.",
+     "concepts": [
+      "balance",
+      "non-standard units"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.non-standard-units",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.mass-comparison",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.mass-comparison",
+      "MATH.measurement.non-standard-units"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Theme 4: Measurement"
+    },
+    {
+     "id": "icse-g02-c04-o02",
+     "statement": "Order containers by capacity.",
+     "concepts": [
+      "capacity"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.capacity",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.capacity"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Theme 4: Measurement"
+    }
+   ]
+  },
+  {
+   "id": "icse-g02-c05",
+   "number": 5,
+   "term": null,
+   "title": "Theme 5: Data Handling",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g02-c05-s01",
+     "title": "Everyday charts"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g02-c05-o01",
+     "statement": "Read simple charts from daily life such as timetables and height charts.",
+     "concepts": [
+      "reading charts"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.pictographs",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.statistics.picture-data",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.pictographs",
+      "MATH.statistics.picture-data"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Theme 5: Data Handling"
+    }
+   ]
+  },
+  {
+   "id": "icse-g02-c06",
+   "number": 6,
+   "term": null,
+   "title": "Theme 6: Patterns",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g02-c06-s01",
+     "title": "Repeating patterns"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g02-c06-o01",
+     "statement": "Find the unit of repeat and extend or create patterns.",
+     "concepts": [
+      "unit of repeat"
+     ],
+     "questionTypes": [
+      "multiple-choice",
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.repeating-patterns",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.number-patterns",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.number-patterns",
+      "MATH.algebra.repeating-patterns"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Theme 6: Patterns"
+    }
+   ]
+  }
+ ]
+}

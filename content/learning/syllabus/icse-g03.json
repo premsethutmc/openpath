@@ -1,0 +1,516 @@
+{
+ "schema": "syllabus@1",
+ "board": "icse",
+ "boardName": "CISCE (ICSE)",
+ "grade": 3,
+ "academicYear": "2026-27",
+ "textbook": {
+  "title": "CISCE Curriculum: Mathematics, Class III",
+  "publisher": "Council for the Indian School Certificate Examinations (CISCE)",
+  "edition": "CISCE curriculum, Classes I–V",
+  "terms": null
+ },
+ "sources": [
+  {
+   "kind": "secondary",
+   "title": "ICSE Class 3 Maths Syllabus (a third-party copy of the Class III mathematics pages of the CISCE curriculum)",
+   "publisher": "BYJU'S",
+   "edition": "CISCE curriculum, Classes I–V",
+   "academicYear": "2026-27",
+   "url": "https://cdn1.byjus.com/wp-content/uploads/2019/03/ICSEClass-3-Maths-Syllabus.pdf",
+   "accessed": "2026-11-15",
+   "used_for": "themes and key concepts (read through a text summary)"
+  }
+ ],
+ "notes": [
+  "UNOFFICIAL SOURCE: cisce.org was not read from the build environment; units and sub-topics come from third-party copies of the CISCE syllabus, read through text summaries, so every unit is verified:false.",
+  "A chapter here is a unit of the CISCE syllabus and its sub-topics are sections; CISCE prescribes no textbook. Outcomes are written in OpenPath's own words.",
+  "Outcomes with no OpenPath skill are kept with no mapping, so the release shows them as missing.",
+  "CISCE publishes a curriculum for Classes 1–5 organised by themes; schools choose their own books."
+ ],
+ "gaps": [],
+ "chapters": [
+  {
+   "id": "icse-g03-c01",
+   "number": 1,
+   "term": null,
+   "title": "Theme 1: Numbers",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g03-c01-s01",
+     "title": "Numbers up to 9999"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g03-c01-o01",
+     "statement": "Read, write, compare and order numbers up to 9999 using place value and expanded form.",
+     "concepts": [
+      "four-digit numbers",
+      "expanded form"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.thousands",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.thousands"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Theme 1: Numbers"
+    },
+    {
+     "id": "icse-g03-c01-o02",
+     "statement": "Form the greatest and smallest numbers from given digits.",
+     "concepts": [
+      "greatest and smallest numbers"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.thousands",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.number.compare-numbers",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.compare-numbers",
+      "MATH.number.thousands"
+     ],
+     "coverage": "full",
+     "source": "Unit 1: Theme 1: Numbers"
+    }
+   ]
+  },
+  {
+   "id": "icse-g03-c02",
+   "number": 2,
+   "term": null,
+   "title": "Theme 2: Number Operations",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g03-c02-s01",
+     "title": "Addition and subtraction"
+    },
+    {
+     "id": "icse-g03-c02-s02",
+     "title": "Multiplication"
+    },
+    {
+     "id": "icse-g03-c02-s03",
+     "title": "Division"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g03-c02-o01",
+     "statement": "Add and subtract numbers up to three digits with the standard method.",
+     "concepts": [
+      "column addition"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.multi-digit-add-subtract",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.multi-digit-add-subtract"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    },
+    {
+     "id": "icse-g03-c02-o02",
+     "statement": "Know the tables of 2, 3, 4, 5, 7, 9 and 10 and multiply a two-digit number by a one-digit number, including the lattice method.",
+     "concepts": [
+      "times tables",
+      "lattice multiplication"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.multiplication-tables",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.multiplication-tables"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    },
+    {
+     "id": "icse-g03-c02-o03",
+     "statement": "Divide by equal grouping and sharing and link division facts to multiplication.",
+     "concepts": [
+      "division facts"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.division-remainders",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.number.sharing",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.division-remainders",
+      "MATH.number.sharing"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    },
+    {
+     "id": "icse-g03-c02-o04",
+     "statement": "Compute mentally and estimate sums, differences and products, then check.",
+     "concepts": [
+      "mental computation",
+      "estimation"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.number.mental-arithmetic",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.reasoning.estimate-check",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.number.mental-arithmetic",
+      "MATH.reasoning.estimate-check"
+     ],
+     "coverage": "full",
+     "source": "Unit 2: Theme 2: Number Operations"
+    }
+   ]
+  },
+  {
+   "id": "icse-g03-c03",
+   "number": 3,
+   "term": null,
+   "title": "Theme 3: Geometry",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g03-c03-s01",
+     "title": "Shapes, tiling and maps"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g03-c03-o01",
+     "statement": "Draw straight and curved lines and shapes on dot grids and make shapes with tangram pieces.",
+     "concepts": [
+      "tangram",
+      "dot grid"
+     ],
+     "questionTypes": [
+      "drawing",
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "both",
+     "competencies": [
+      {
+       "id": "MATH.geometry.lines-segments",
+       "fit": "partial"
+      },
+      {
+       "id": "MATH.geometry.shape-properties",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.lines-segments",
+      "MATH.geometry.shape-properties"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Theme 3: Geometry"
+    },
+    {
+     "id": "icse-g03-c03-o02",
+     "statement": "Find which shapes tile a surface.",
+     "concepts": [
+      "tessellation"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.shape-tiling",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.shape-tiling"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Theme 3: Geometry"
+    },
+    {
+     "id": "icse-g03-c03-o03",
+     "statement": "Read simple maps and line drawings of 3D objects.",
+     "concepts": [
+      "map reading"
+     ],
+     "questionTypes": [
+      "multiple-choice"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.geometry.maps-directions",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.geometry.maps-directions"
+     ],
+     "coverage": "full",
+     "source": "Unit 3: Theme 3: Geometry"
+    }
+   ]
+  },
+  {
+   "id": "icse-g03-c04",
+   "number": 4,
+   "term": null,
+   "title": "Theme 4: Measurement",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g03-c04-s01",
+     "title": "Length, weight and capacity"
+    },
+    {
+     "id": "icse-g03-c04-s02",
+     "title": "Time"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g03-c04-o01",
+     "statement": "Measure in centimetres and metres and convert between them; weigh with a balance; compare capacity.",
+     "concepts": [
+      "centimetre",
+      "metre"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.standard-length",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.length-conversion",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.standard-mass",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.capacity",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.capacity",
+      "MATH.measurement.length-conversion",
+      "MATH.measurement.standard-length",
+      "MATH.measurement.standard-mass"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Theme 4: Measurement"
+    },
+    {
+     "id": "icse-g03-c04-o02",
+     "statement": "Use calendars, read clock time with a.m. and p.m., use 12- and 24-hour clocks, and convert days to hours and hours to minutes.",
+     "concepts": [
+      "a.m. and p.m.",
+      "24-hour clock"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.measurement.calendar",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.clock",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.time-unit-conversion",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.measurement.24-hour-clock",
+       "fit": "partial"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.measurement.24-hour-clock",
+      "MATH.measurement.calendar",
+      "MATH.measurement.clock",
+      "MATH.measurement.time-unit-conversion"
+     ],
+     "coverage": "full",
+     "source": "Unit 4: Theme 4: Measurement"
+    }
+   ]
+  },
+  {
+   "id": "icse-g03-c05",
+   "number": 5,
+   "term": null,
+   "title": "Theme 5: Data Handling",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g03-c05-s01",
+     "title": "Tables and pictographs"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g03-c05-o01",
+     "statement": "Record data with tally marks in tables and pictographs and draw conclusions.",
+     "concepts": [
+      "tally marks",
+      "pictograph"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.statistics.tables",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.statistics.pictographs",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.statistics.pictographs",
+      "MATH.statistics.tables"
+     ],
+     "coverage": "full",
+     "source": "Unit 5: Theme 5: Data Handling"
+    }
+   ]
+  },
+  {
+   "id": "icse-g03-c06",
+   "number": 6,
+   "term": null,
+   "title": "Theme 6: Patterns",
+   "verified": false,
+   "sections": [
+    {
+     "id": "icse-g03-c06-s01",
+     "title": "Patterns"
+    }
+   ],
+   "outcomes": [
+    {
+     "id": "icse-g03-c06-o01",
+     "statement": "Extend patterns using a rule and create new patterns.",
+     "concepts": [
+      "pattern rule"
+     ],
+     "questionTypes": [
+      "numeric"
+     ],
+     "difficulty": "core",
+     "assessment": "auto",
+     "competencies": [
+      {
+       "id": "MATH.algebra.growing-patterns",
+       "fit": "exact"
+      },
+      {
+       "id": "MATH.algebra.number-patterns",
+       "fit": "exact"
+      }
+     ],
+     "proposed": [],
+     "mapped": [
+      "MATH.algebra.growing-patterns",
+      "MATH.algebra.number-patterns"
+     ],
+     "coverage": "full",
+     "source": "Unit 6: Theme 6: Patterns"
+    }
+   ]
+  }
+ ]
+}
